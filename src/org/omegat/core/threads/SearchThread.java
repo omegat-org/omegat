@@ -352,6 +352,9 @@ public class SearchThread extends Thread
                     searchText(src);
                     return src;
                 }
+
+                public void addLegacyTMXEntry(String source, String translation) {
+                }
             });
         }
     }

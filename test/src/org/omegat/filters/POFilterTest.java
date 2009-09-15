@@ -25,19 +25,24 @@
 package org.omegat.filters;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.omegat.filters2.po.PoFilter;
 
 public class POFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
-        Map<String, String> data = parse2(new PoFilter(),
-                "test/data/filters/po/file-POFilter-be.po");
+        Map<String, String> data = new TreeMap<String, String>();
+        Map<String, String> tmx = new TreeMap<String, String>();
+
+        parse2(new PoFilter(), "test/data/filters/po/file-POFilter-be.po",
+                data, tmx);
+
         assertEquals(data.get("non-fuzzy"), "non-fuzzy translation");
-        assertEquals(data.get("fuzzy"), "[PO-fuzzy] fuzzy translation");
-        assertEquals(data.get("Delete Account"),
-                "[PO-fuzzy] Supprimer le compte");
-        assertEquals(data.get("Delete Accounts"),
-                "[PO-fuzzy] Supprimer des comptes");
+        assertEquals(tmx.get("[PO-fuzzy] fuzzy"), "fuzzy translation");
+        assertEquals(tmx.get("[PO-fuzzy] Delete Account"),
+                "Supprimer le compte");
+        assertEquals(tmx.get("[PO-fuzzy] Delete Accounts"),
+                "Supprimer des comptes");
     }
 
     public void testTranslate() throws Exception {

@@ -41,19 +41,26 @@ public interface IParseCallback {
      *            source entry text
      * @param translation
      *            exist translation text
-     * @param isFuzzy
-     *            translation fuzzy flag
      * @param comment
      *            comment for entry, if format supports it
      */
-    void addEntry(String id, String source, String translation,
-            boolean isFuzzy, String comment);
+    void addEntry(String id, String source, String translation, String comment);
+
+    /**
+     * Add data to the legacy TMX.
+     * 
+     * @param source
+     *            source entry text
+     * @param translation
+     *            translation
+     */
+    void addLegacyTMXEntry(String source, String translation);
 
     /**
      * Get translation for output to compiled target.
      * 
      * @param id
-     *            ID in source file, or null if ID not suported by format
+     *            ID in source file, or null if ID not supported by format
      * @param source
      *            source entry text
      * @return translation or source if translation not exist

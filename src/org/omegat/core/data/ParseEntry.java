@@ -143,7 +143,7 @@ public abstract class ParseEntry implements IParseCallback {
      * @param comment
      *            entry's comment, if format supports it
      */
-    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment) {
+    public void addEntry(String id, String source, String translation, String comment) {
         // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
         // this is reversed at the end of the method
         // fix for bug 1462566
@@ -179,10 +179,10 @@ public abstract class ParseEntry implements IParseCallback {
                     spaces, brules);
             for (int i = 0; i < segments.size(); i++) {
                 String onesrc = segments.get(i);
-                addSegment(id, i, onesrc, null, isFuzzy, comment);
+                addSegment(id, i, onesrc, null, comment);
             }
         } else
-            addSegment(id, 0, source, translation, isFuzzy, comment);
+            addSegment(id, 0, source, translation, comment);
     }
     
     /**
@@ -263,8 +263,7 @@ public abstract class ParseEntry implements IParseCallback {
     protected abstract String processSingleEntry(String src);
 
     protected void addSegment(String id, int segmentIndex,
-            String segmentSource, String segmentTranslation, boolean isFuzzy,
-            String comment) {
+            String segmentSource, String segmentTranslation, String comment) {
         processSingleEntry(segmentSource);
     }
 

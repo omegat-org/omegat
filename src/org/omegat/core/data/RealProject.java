@@ -754,7 +754,8 @@ public class RealProject implements IProject
          * Keeps track of file specific data to feed to SourceTextEntry objects
          * so they can have a bigger picture of what's where.
          */
-        private ProjectFileData m_curFile;  
+        private ProjectFileData m_curFile;
+        private LegacyTM legacyFileTM;
 
         public LoadFilesCallback() {
             super(m_config);
@@ -762,6 +763,7 @@ public class RealProject implements IProject
         
         protected void setCurrentFile(ProjectFileData file) {
             m_curFile = file;
+            legacyFileTM = null;
         }
         /**
          * Processes a single entry. This method doesn't perform any changes on
@@ -810,8 +812,7 @@ public class RealProject implements IProject
         }
 
         protected void addSegment(String id, int segmentIndex,
-                String segmentSource, String segmentTranslation,
-                boolean isFuzzy, String comment) {
+                String segmentSource, String segmentTranslation, String comment) {
             // if the source string is empty, don't add it to TM
             if (segmentSource.length() == 0
                     || segmentSource.trim().length() == 0)
@@ -840,6 +841,17 @@ public class RealProject implements IProject
                 return s;
             }
         }
+
+        public void addLegacyTMXEntry(String source, String translation) {
+            if (legacyFileTM == null) {
+                legacyFileTM = new LegacyTM(m_curFile.name,
+                        new ArrayList<StringEntry>());
+                getMemory().add(legacyFileTM);
+            }
+            StringEntry en = new StringEntry(source);
+            en.setTranslation(translation);
+            legacyFileTM.getStrings().add(en);
+        }
     };
 
     private class TranslateFilesCallback extends ParseEntry {
@@ -866,6 +878,8 @@ public class RealProject implements IProject
                     s = src;
                 return s;
             }
+        }
+        public void addLegacyTMXEntry(String source, String translation) {
         }
     };        
 }

@@ -145,7 +145,6 @@ public class PoFilter extends AbstractFilter {
              */
             if (COMMENT_FUZZY.matcher(s).matches()) {
                 fuzzy = true;
-                //s = "[po-fuzzy] " + s;
                 flushTranslation(currentMode);
                 continue;
             } else if (COMMENT_FUZZY_OTHER.matcher(s).matches()) {
@@ -190,10 +189,6 @@ public class PoFilter extends AbstractFilter {
                 String text = m.group(2);
                 if (m.group(1) == null) {
                     // non-plural lines
-//                    if (fuzzy) {
-//                        targets[0].append("[PO-fuzzy] ");
-//                        fuzzy = false;
-//                    }
                     currentMode = MODE.MSGSTR;
                     targets[0].append(text);
                 } else {
@@ -247,9 +242,6 @@ public class PoFilter extends AbstractFilter {
     protected void align(int pair) {
         String s = unescape(sources[pair].toString());
         String t = unescape(targets[pair].toString());
-        if (fuzzy) {
-            t = "[PO-fuzzy] " + t;
-        }
         align(s, t);
     }
 
@@ -257,8 +249,16 @@ public class PoFilter extends AbstractFilter {
         if (translation.length() == 0) {
             translation = null;
         }
-        entryProcessingCallback.addEntry(null, source, translation, fuzzy,
-                null);
+        if (!fuzzy) {
+            // add to real translation
+            entryProcessingCallback.addEntry(null, source, translation, null);
+        } else {
+            // add to real list without translation
+            entryProcessingCallback.addEntry(null, source, null, null);
+            // add to legacy TMX instead real translation
+            entryProcessingCallback.addLegacyTMXEntry("[PO-fuzzy] " + source,
+                    translation);
+        }
     }
 
     protected void flushTranslation(MODE currentMode) throws IOException {

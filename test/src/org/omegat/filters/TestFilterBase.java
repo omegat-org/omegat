@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
 
@@ -28,7 +28,6 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,10 +43,11 @@ import org.xml.sax.InputSource;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public abstract class TestFilterBase extends XMLTestCase {
-    protected File outFile = new File(System.getProperty("java.io.tmpdir"), "OmegaT filter test - "
-            + getClass().getSimpleName());
+    protected File outFile = new File(System.getProperty("java.io.tmpdir"),
+            "OmegaT filter test - " + getClass().getSimpleName());
 
-    protected List<String> parse(AbstractFilter filter, String filename) throws Exception {
+    protected List<String> parse(AbstractFilter filter, String filename)
+            throws Exception {
         final List<String> result = new ArrayList<String>();
 
         filter.setParseCallback(new IParseCallback() {
@@ -56,59 +56,77 @@ public abstract class TestFilterBase extends XMLTestCase {
                     result.add(entry);
                 return entry;
             }
+
             public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment) {
+                    String comment) {
             }
+
             public String getTranslation(String id, String source) {
                 return null;
+            }
+
+            public void addLegacyTMXEntry(String source, String translation) {
             }
         });
         filter.processFile(new File(filename), null, null, null);
 
         return result;
     }
-    
-    protected Map<String,String> parse2(AbstractFilter filter, String filename) throws Exception {
-        final Map<String,String> result = new HashMap<String, String>();
+
+    protected void parse2(final AbstractFilter filter, final String filename,
+            final Map<String, String> result,
+            final Map<String, String> legacyTMX) throws Exception {
 
         filter.setParseCallback(new IParseCallback() {
             public String processEntry(String entry) {
                 return null;
             }
+
             public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment) {
+                    String comment) {
                 result.put(source, translation);
             }
+
             public String getTranslation(String id, String source) {
                 return null;
             }
+
+            public void addLegacyTMXEntry(String source, String translation) {
+                legacyTMX.put(source, translation);
+            }
         });
         filter.processFile(new File(filename), null, null, null);
-
-        return result;
     }
 
-    protected void translate(AbstractFilter filter, String filename) throws Exception {
+    protected void translate(AbstractFilter filter, String filename)
+            throws Exception {
         filter.setParseCallback(new IParseCallback() {
             public String processEntry(String entry) {
                 return entry;
             }
+
             public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment) {
+                    String comment) {
             }
+
             public String getTranslation(String id, String source) {
                 return null;
+            }
+
+            public void addLegacyTMXEntry(String source, String translation) {
             }
         });
         filter.processFile(new File(filename), null, outFile, null);
     }
 
-    protected void translateText(AbstractFilter filter, String filename) throws Exception {
+    protected void translateText(AbstractFilter filter, String filename)
+            throws Exception {
         translate(filter, filename);
         compareBinary(new File(filename), outFile);
     }
 
-    protected void translateXML(AbstractFilter filter, String filename) throws Exception {
+    protected void translateXML(AbstractFilter filter, String filename)
+            throws Exception {
         translate(filter, filename);
         compareXML(new File(filename), outFile);
     }
@@ -133,6 +151,7 @@ public abstract class TestFilterBase extends XMLTestCase {
     }
 
     protected void compareXML(URL f1, URL f2) throws Exception {
-        assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2.toExternalForm()));
+        assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2
+                .toExternalForm()));
     }
 }

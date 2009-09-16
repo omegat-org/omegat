@@ -184,6 +184,7 @@ public abstract class ParseEntry implements IParseCallback {
                     String onesrc = segments.get(i);
                     addSegment(id, i, onesrc, null, comment);
                 }
+                addLegacyTMXEntry(source, translation);
             }
         } else
             addSegment(id, 0, source, translation, comment);

@@ -260,6 +260,10 @@ public class PoFilter extends AbstractFilter {
                     translation);
         }
     }
+    
+    protected void alignHeader(String header) {
+        entryProcessingCallback.addEntry(null, header, null, null);
+    }
 
     protected void flushTranslation(MODE currentMode) throws IOException {
         if (sources[0].length() == 0) {
@@ -270,6 +274,8 @@ public class PoFilter extends AbstractFilter {
                 // header
                 if (out != null) {
                     out.write("msgstr " + getTranslation(sources[0]) + "\n");
+                } else {
+                    alignHeader(targets[0].toString());
                 }
             }
             fuzzy = false;

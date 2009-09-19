@@ -262,7 +262,7 @@ public class PoFilter extends AbstractFilter {
     }
     
     protected void alignHeader(String header) {
-        entryProcessingCallback.addEntry(null, header, null, null);
+        entryProcessingCallback.addEntry(null, unescape(header), null, null);
     }
 
     protected void flushTranslation(MODE currentMode) throws IOException {
@@ -273,7 +273,7 @@ public class PoFilter extends AbstractFilter {
             } else {
                 // header
                 if (out != null) {
-                    out.write("msgstr " + getTranslation(sources[0]) + "\n");
+                    out.write("msgstr " + getTranslation(targets[0]) + "\n");
                 } else {
                     alignHeader(targets[0].toString());
                 }

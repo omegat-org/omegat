@@ -1,0 +1,79 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Projekteigenschaften - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
+
+<body>
+  <h2>Projekteigenschaften</h2>
+
+  <ul>
+    <li>
+      <a href="#dialog">Dialog Eigenschaften</a>
+
+      <ul>
+        <li><a href="#language">Sprachmodifizierungen</a></li>
+
+        <li><a href="#segments">Segmentierungsmodifizierungen</a></li>
+
+        <li><a href="#folder">Modifizierungen Ordnerstruktur</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#warning">Das Ändern von Projekteigenschaften während der Sitzung</a></li>
+  </ul>
+  <hr>
+  <a name="dialog" id="dialog"></a>
+
+  <h2>Dialog Eigenschaften</h2>
+
+  <p>Dieser Dialog wird verwendet, um die Projektverzeichnisse und Sprachen zu modifizieren.  Man kann ihn mit <code><a href="menu.html#shortcuts">STRG+E</a></code> aufrufen oder unter <strong>Projekt → Eigenschaften...</strong> im <a href=
+  "menu.html">Hauptmenü</a> aufrufen. Der Dialog enthält:</p>
+
+  <ul>
+    <li>Die Eingabefläche, um Quell- und Zielsprachen des Projekts zu bestimmen</li>
+
+    <li>Segmentierungseinstellungsfahne</li>
+
+    <li>Die Fläche, um die Projektordner zu setzen</li>
+  </ul>
+
+  <p>Alle Felder sind editierbar. Sie können die Sprachen entweder manuell einfügen oder ein Drop-down Menü benutzen. Sie können die Namen für nicht existente Ordner eintippen und OmegaT erzeugt sie für Sie. </p><a name="language" id="language"></a>
+
+  <h3>Sprachmodifizierung</h3>
+
+  <p>Sie müssen bedenken, dass die Änderung der Sprache die zurzeit verwendeten TMs nutzlos machen kann, da ihre Sprache den neuen Sprachen mehr nicht mehr entsprechen könnte. </p><a name="segments" id="segments"></a>
+
+  <h3>Segmentierungsmodifizierungen</h3>
+
+  <p>Die Segmentierungseinstellungen beziehen sich nur auf die Art, wie OmegaT mit den Quelldateien umgeht. Sie ändern die Segmentierung von bereits existierenden TMs nicht.</p>
+
+  <p>Wenn Sie die Segmentierungseinstellungen ändern, können schon übersetzte Segmente aufgespalten oder vereint werden.  Das wird sie praktisch in den "nicht übersetzten" Status zurücksetzen, weil sie den Segmenten in der TM nicht mehr entsprechen, obwohl die alte und nicht mehr übereinstimmende Übersetzung noch da ist. </p>
+
+  <p>OmegaT kann <a href="translationMemories.html#upgrading_TM">alte TMs aufrüsten</a>, in denen Satzsegmentierung nicht benutzt wurde, aber nicht anders herum. Wenn Sie sich mitten in einer Übersetzung um entscheiden, wird die TM des Projekts nicht geändert.</p><a name="folder" id=
+  "folder"></a>
+
+  <h3>Modifizierungen Ordnerstruktur</h3>
+
+  <p>Wenn Sie vorhaben, die Projektordner zu ändern, vergessen Sie nicht, dass OmegaT die in alten Ordnern enthaltenen Dateien nicht von selber in die neuen Ordner verschieben wird.  Sie könnten in die Lage geraten, dass weder Sie noch OmegaT weiß, was die Ordner bedeuten und welche von ihnen benutzt werden.</p>
+  <hr>
+  <a name="warning" id="warning"></a>
+
+  <h2>Das Ändern von Projekteigenschaften während der Sitzung</h2>
+
+  <p>Es ist möglich, die Projekteigenschaften während einer Übersetzungssitzung zu modifizieren.  Jedoch ist der sicherste Weg, sobald Sie mit der Übersetzung angefangen haben, alle Einstellungen als endgültig zu betrachten - es sei denn, Sie haben einen Riesenfehler entdeckt.  Siehe das Kapitel <a href="preventingDataLoss.html">Datenverlust vermeiden</a>  für die Hinweise, wie man seine Arbeit schützen kann.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

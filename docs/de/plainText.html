@@ -1,0 +1,85 @@
+<html>
+<head>
+	<link rel="stylesheet" href=" OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>&gt;Arbeiten mit Reintexten - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
+
+<body>
+	<h2>Arbeiten mit Reintexten</h2>
+
+	<ul>
+		<li><a href="#Plain_Text_in_OmegaT">Standardkodierung</a></li>
+		<li><a href="#Garbled_displays_3F">Verstümmelte Anzeige</a></li>
+		<li><a href="#Character_sets_and_encoding">Zeichensätze und Kodierung</a></li>
+		<li><a href="#The_OmegaT_solution">Die OmegaT Lösung</a></li>
+	</ul>
+
+<hr>
+
+	<a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
+	<h2>Standardkodierung</h2>
+
+	<p>Reintext-Dateien - in den meisten Fällen mit einer <code>.txt</code>.  Erweiterung - enthalten ausschließlich textliche Informationen. Es gibt keinen klar definierten Weg den Computer über die eingesetzte Sprache zu informieren.  (Ganz) einfach ausgedrückt bedeutet dies, dass der Computer grundsätzlich annimmt, dass der Text in der Sprache geschrieben wurde, die er selbst benutzt.</p>
+
+<hr>
+
+	<a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
+	<h2>Verstümmelte Anzeige</h2>
+
+	<p>Ein Computer eines Russen wird wahrscheinlich in Russisch arbeiten: die Menüs sind in Russisch und die Dateien werden in Russisch sein, usw. In den meisten Fällen entscheidet sich der Rechner richtig, was den Inhalt der Dateien allgemein betrifft: sie sind alle Russisch und enthalten nichts, dass russische Zeichen nicht darstellen könnten. </p>
+		<p>Sind Sie nun ein russischer Übersetzer sind, der aus der japanischen Sprache übersetzt, dann werden die als <strong>Reintext</strong> geschickten japanischen Dateien vom Computer als Dateien mit Russisch betrachtet Weil es eben keine Information in der Datei selbst gibt, die dem Rechner die benutzte Sprache vermitteln könnte.  Der Inhalt der japanischen Datei könnte wie folgt sein:</p>
+		<p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p>
+		<br>
+		<p>Weil er annimmt, dass der Inhalt in Russisch ist, könnte der Texteditor dies wie folgt anzeigen:</p>
+	<p>OmegaTВВЌБAГRГУГsГЕБ [Г^ВрЧШЧpВ µ ВљЦ|ЦуГcБ [ГЛВВЈБB</p>
+		<br>
+		<p>Es hat aber nichts mit Russisch zu tun, es sind japanische Buchstaben, die fälschlicherweise als russische Zeichen dargestellt werden. </p>
+	
+	<p>Wie alle anderen Anwendungen hat auch OmegaT ein Problem damit. OmegaT kann nur annehmen, das in der Grundeinstellung die <strong>Reintext</strong> Dateien mit der Grundeinstellung des Computers dargestellt werden können. Das ist kein Problem, wenn z.B. der Computer in Französisch arbeitet und der zu übersetzende Text z.B. in Englisch ist, oder wenn der Computer Deutsch ist und Sie mit italienischen Dateien umgehen. </p>
+
+<hr>
+
+	<a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
+	<h2>Zeichensätze und Kodierung</h2>
+
+	<p>Warum würde das mit Englisch und Französisch nicht aber mit Russisch und Japanisch gehen? Weil Englisch und Französisch einen gemeinsamen <strong>Zeichensatz</strong> benutzen.  Nämlich den <strong>Latein-1</strong>-Zeichensatz, bzw. eine Variante davon.  Bis vor Kurzem hatten die russische und die japanische Sprache keinen gemeinsamen Zeichensatz.  Aktuellste russische Zeichensätze schließen japanische Zeichen nicht - und umgekehrt auch nicht.  Das Ergebnis kann man oben sehen. </p>
+
+	<p>Der japanische Kunde arbeitet mit einem japanischen Computer und erzeugt Textdateien, die Japanisch enthalten.  Der durch den Kundencomputer ausgewählte Zeichensatz wird vom Betriebssystem und anderen Einstellungen abhängen, aber es ist sehr unwahrscheinlich, dass der gewählte (japanische) Zeichensatz vom Russischen Computer richtig interpretiert wird. </p>
+
+	<p>Es hängt von der <strong>Kodierung</strong> ab, wie die Textinformation in dem angegebenen Zeichensatz physisch übersandt wird (d. h. welche numerischen Codes benutzt der Computer, um Text zu interpretieren und darzustellen). Wenn der Computer die Datei liest, "dekodiert" er die Information gemäß der Codes und zeigt sie gemäß des Zeichensatzes.  Grob gesagt, entspricht eine Kodierung einem Zeichensatz...</p>
+
+<hr>
+
+	<a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
+	<h2>Die OmegaT Lösung</h2>
+
+	<p>Es gibt im Wesentlichen drei Arten, das Problem in OmegaT anzugehen. Alle bedienen sich dabei <a href="fileFilters.html">Dateifiltern</a> im Menü <strong>Optionen</strong>.</p>
+	
+	<ol>
+		<li>Legen Sie Ihre Kodierung für <strong>Reintext</strong> Dateien fest - d.h. Dateien mit der <code>.txt</code> Erweiterung- :&nbsp;im Abschnitt <strong>Textdateien</strong> des <a href="fileFilters.html">Dateifilter </a> Dialogs, ändern Sie die <strong>Kodierung der Quelldateien</strong> von <strong>&lt;auto&gt;</strong> zur Kodierung, die Ihrer <code>.txt</code> Datei entspricht.</li><li>Ändern Sie die Erweiterungen Ihrer Reintext-Quelldateien - zum Beispiel von <code>.txt</code> zu <code>.jp</code> für japanischen Reintext: im Abschnitt <strong>Textdateien</strong> des Dialogs <a href="fileFilters.html">Dateifilter</a> fügen Sie den zusätzlichen Eintrag <strong>Quelldateienmuster</strong> -  <code>*.jp</code> zum Beispiel - und setzen die entsprechende Parameter für die Quell- und Zielkodierung fest..</li>
+			<li>Ändern Sie die Kodierung Ihrer Dateien in Unicode:&nbsp;öffnen Sie Ihre Quelldatei in einem Texteditor, der mit der Kodierung umgehen kann, und speichern Sie die Datei  als "UTF-8"-kodiert. Ändern Sie die Dateierweiterung  von <code>.txt</code> zu <code>.utf8</code> und OmegaT wird die Datei automatisch als eine UTF8-Datei interpretieren.</li>
+		</ol>
+	<p>OmegaT hält diese kurze Liste bereit, um Ihnen es leichter zu machen, wenn Sie sich mit einigen Reintext-Dateien befassen müssen:</p>
+
+	<ul>
+		<li>Die <code>.txt</code> Dateien werden von OmegaT automatisch als (<strong>&lt;auto&gt;</strong>) interpretiert, als wären sie in der Grundkodierung des Computers geschrieben.</li>
+		<li><code>.txt1</code> Dateien benutzen den ISO-8859-1 Zeichensatz, der von meisten Sprachen in <strong>West Europa</strong> benutzt wird.</li>
+		<li><code>.txt2</code> Dateien sind Dateien in ISO-8859-2, den die meisten Sprachen in <strong>Mittel- und Osteuropa</strong> benutzen.</li>
+		<li><code>.utf8</code> Dateien werden von OmegaT als mit UTF8 kodiert interpretiert (eine Kodierung, die beinahe <strong>alle</strong> Sprachen der Welt abdeckt).</li>
+	</ul>
+		<p>Sie können das überprüfen, indem Sie <strong>Dateifilter</strong> im Menü <strong>Optionen</strong> auswählen. Zum Beispiel, wenn Sie eine tschechische Textdatei haben (sehr wahrscheinlich in <strong>ISO-8859-2</strong> geschrieben ), müssen Sie nur  die Erweiterung von <code>.txt</code> zu <code>.txt2</code> ändern, und OmegaT wird den Inhalt dieser Datei richtig interpretieren. Und, natürlich, wenn Sie auf Nummer Sicher gehen wollen, denken Sie daran, diese Art Dateien zu Unicode, d.h. in .utf8 Format zu konvertieren. </p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

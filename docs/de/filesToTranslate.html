@@ -1,0 +1,241 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Die Dateien zum Übersetzen - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
+
+<body>
+  <h1>Dateien zum Übersetzen</h1>
+
+  <p><a href="#RTLbidi">Rechts-nach-Links Sprachen</a></p>
+
+  <ul>
+    <li>
+      <p><a href="#RTL_Changing_direction">Änderung der Richtung im Eingabe-/Anzeigetext</a></p>
+    </li>
+
+    <li>
+      <p><a href="#RTL_mixing">Mischen von LTR- und RTL-Zeichenketten in Segmenten</a></p>
+    </li>
+
+    <li>
+      <p><a href="#RTL_tags">OmegaT Tags in RTL Segmenten</a></p>
+    </li>
+
+    <li>
+      <p><a href="#RTL_CreatingTranslatedDocuments">Erstellung der RTL-Zieldokumente</a></p>
+    </li>
+  </ul>
+
+  <p><a href="#formats">Dateiformate</a></p>
+
+  <ul>
+    <li>
+      <p><a href="#plaintext">Reintext-Dateien</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tagged">Formatierte Textdateien</a></p>
+    </li>
+
+    <li>
+      <p><a href="#specifics">Dateiformat-Spezifika</a></p>
+    </li>
+
+    <li>
+      <p><a href="#others">Andere Dateiformate</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#ooo">OpenOffice.org</a></p>
+        </li>
+
+        <li>
+          <p><a href="#okapi">Okapi Framework</a></p>
+        </li>
+
+        <li>
+          <p><a href="#tt">Übersetzung Werkzeugkasten</a></p>
+        </li>
+
+        <li>
+          <p><a href="#po4a">po4a</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
+
+  <h3><a name="RTLbidi"></a>Rechts-nach-Links Sprachen</h3>
+
+  <h4><a name="RTL_Changing_direction"></a>Änderung der Richtung im Eingabe-/Anzeigetext</h4>Bei allen erreichten Aufgaben in OmegaT kann man zwischen dem LTR- und RTL- Eingabe/Anzeige-Modus mit STRG+Umschalt+O wechseln (Achtung: es handelt sich um O-Zeichen und nicht die Null) Der RTL Modus in OmegaT hat überhaupt keinen Einfluss auf den Anzeigemodus des übersetzten Dokument, das mit OmegaT erstellt wurde. Der Anzeigemodus des übersetzten Dokuments muss in der Anwendung geändert werden, die allgemein für Anzeige oder Modifizierung benutzt wird (schauen Sie in den entsprechenden Handbüchern nach Details). Der Einsatz von STRG+Umschalt+O ändert sowohl die Eingabe von Text und Anzeige in OmegaT zu RTL. Das kann gesondert für alle drei Fenster geschehen (Bearbeiten, unscharfe Treffer und Glossar), indem auf das Fenster geklickt und der Anzeigemodus umgeschaltet wird. Es kann auch in allen Eingabefeldern (Suchfenster, Segmentierungsregel usw.) benutzt werden.<p>Mac OSX Benutzer bedenken: dieselbe Tastenkombination (und nicht Cmd+Shift+O) benutzen.</p>
+
+  <h4><a name="RTL_mixing"></a>Mischen von LTR- und RTL-Zeichenketten in Segmenten</h4>Wenn reiner RTL-Text geschrieben wird, kann man die vorgegebene (LTR) Ansicht verwenden. In vielen Fällen jedoch ist es notwendig, einen LTR Text in RTL-Text einzubetten.  Das ist zum Beispiel in OmegaT Tags, bei Produktnamen, die in der LTR-Quellsprache bleiben müssen, Platzhaltern in Lokalisierungsdateien und Zahlen im Text der Fall. In solchen Fällen ist es nötig, in den RTL-Modus zu wechseln, um den RTL (eigentlich bidirektionalen) Text richtig anzuzeigen. Es sollte beachtet werden, dass OmegaT im RTL-Modus sowohl die Quell- als auch die Zieltexte im RTL-Modus anzeigt. Das bedeutet, wenn die Quellsprache LTR und die Zielsprache RTL ist, oder umgekehrt, evtl. zwischen RTL und LTR-Modi gewechselt werden muss, um sowohl die Quelle als auch das Ziel problemlos einzusehen.  <h4><a name="RTL_tags"></a>OmegaT Tags in RTL Segmenten</h4>
+
+  <p>Wie oben beschrieben, OmegaT Tags sind LTR-Zeichenketten. Wird zwischen RTL und LTR Sprachen übersetzt, wird der Übersetzer wahrscheinlich oft zwischen LTR und RTL-Modi wechseln müssen, um die Tags in der Quelle richtig zu lesen und sie in der Zielsprache richtig einzugeben.</p>
+
+  <p>Wenn es das Dokument erlaubt, Information über Stil aus dem Originaldokument zu entfernen, ist es dem Übersetzer dringend zu empfehlen, damit so wenig wie möglich Tags in der OmegaT Benutzeroberfläche erscheinen. Bitte die Hinweise bezüglich die Tags-Verwaltung berücksichtigen. Überprüfen Sie Tags (siehe <a href=
+  "userInterface.html#Tag_Validation">Tag Überprüfung)</a> und erzeugen Sie Zieldokumente regelmäßig (siehe unten <a href="menu.html">Menü</a>), um eventuell entstandene Probleme leichter zu sehen. Es sollte möglich sein, eine einfache Version des Textes zu übersetzen und den nötigen Stil später in der entsprechenden Anwendung einzufügen.</p>
+
+  <h4><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Erstellung der RTL-Zieldokumente</h4>
+
+  <p>Wenn das übersetzte Dokument erzeugt wird, wird die Richtung der Anzeige dem Original-Dokument entsprechen.  Hat das Originaldokument LTR, dann muss die Anzeigerichtung des Zieldokuments im Anzeigeprogramm manuell zu RTL geändert werden. Jedes Endformat hat spezifische Arten der RTL-Anzeige; schauen Sie in die entsprechenden Handbücher der Anwendungen für Details. </p>
+
+  <p>Es ist manchmal möglich, die Anzeigeparameter der Quelldateien so zu ändern, dass sie von Zieldateien übernommen werden, womit  die oben erwähnten Änderungen der Parameter für die Anzeige der Zieldateien vermieden werden können. Solche Anpassungen sind zum Beispiel in OpenOffice.org Dateien möglich.</p>
+  <hr>
+
+  <h3><a name="formats" id="formats"></a>Dateiformate</h3>
+
+  <p>Mit OmegaT können Sie Dateien in mehreren Dateiformaten übersetzen.  Es gibt grundsätzlich zwei Typen von Dateiformaten, die Formate <strong>Reintext</strong> und <strong> formatierter Text</strong>.</p>
+
+  <h3><a name="plaintext" id="plaintext"></a>Reintext-Dateien</h3>
+
+  <p>Reintext-Dateien enthalten nur Text, deswegen ist ihre Übersetzung ebenso einfach wie das Tippen der Übersetzung. </p>
+
+  <p>Es gibt mehrere <a href="plainText.html">Methoden</a>, wie man die Dateikodierung angibt, so dass die Inhalte, wenn sie in OmegaT geöffnet werden, nicht durcheinander geraten. </p>
+
+  <p>Solche Dateien sollten keine Formate außer "Leerstellen" zum Einrücken/Ausrichten enthalten.  Sie werden gewöhnlich mit Texteditoren bearbeitet und es ist allgemein nicht möglich, dass dieses Format Eigenschaften wie z. B. Schriftart/Farbe/Rand usw. beibehält. </p>
+
+  <p>Zur Zeit unterstützt OmegaT die folgenden Reintext-Formate:</p>
+
+  <ul>
+    <li>
+      <p>ASCII Text (.txt, etc. )</p>
+    </li>
+
+    <li>
+      <p>Kodierten Text </p>
+    </li>
+
+    <li>
+      <p>- Java Quellbündel (.properties)</p>
+    </li>
+
+    <li>
+      <p>PO files (.po)</p>
+    </li>
+
+    <li>
+      <p>INI ('Schlüssel = Wert') Dateien (.ini)</p>
+    </li>
+  </ul>
+
+  <p>Andere Reintext-Dateitypen können in OmegaT durch <a href=
+  "fileFilters.html">Assoziierung</a> der Dateierweiterung an einen unterstützten Dateityp gehandhabt werden (z.B. könnten <code>.pod</code> Dateien mit dem ASCII Textfilter assoziiert werden) und durch die Bearbeitung mit spezifischen  <a href=
+  "segmentation.html">Segmentierungsregeln</a> vorbehandelt werden.</p>
+
+  <h3><a name="tagged" id="tagged"></a>Formatierte Textdateien</h3>
+
+  <p>Formatierte Textdateien enthalten Text sowie Angaben zu Schriftart-Typ, Größe, Farbe usw.  Sie werden normalerweise mit Textverarbeitungsprogrammen oder Web-Editoren erstellt.  Solche Dateiformate sind so konzipiert, dass sie Formatierungsinformation beibehalten  Die Formatierungsinformation kann einfach sein wie z.B. <strong>fett</strong> oder komplex wie Tabellendaten mit verschiedenen Schriftart-Größen, Farben, Positionen usw. Bei den meisten Übersetzungen wird es als wichtig betrachtet, das die übersetzte Dokumente ähnlich aussehen wie das Original.  OmegaT erlaubt es Ihnen, Zeichen/Wörter, die eine spezielle Formatierung aufweisen, durch leicht zu manipulierbare <a href="formattedText.html">Tags</a> zu kennzeichnen.  Eine Vereinfachung des ursprünglichen Texts kann entscheidend zur Reduzierung der Tags beitragen. Um die Übersetzung zu vereinfachen und die Anzahl der <a href=
+  "userInterface.html#Tag_Validation">Tag-Fehler</a> zu verringern, sollte an eine Vereinheitlichung der verwendeten Schriftarten, Schriftart-Größen, Farben usw. gedacht werden. </p>
+
+  <p><a name="specifics" id="specifics"></a>Jeder Dateityp wird in OmegaT anders behandelt. Besonderes Verhalten kann in den <a href=
+  "fileFilters.html">Dateifilern</a> eingestellt werden. Zur Zeit unterstützt OmegaT die folgenden formatierten Textformate:</p>
+
+  <ul>
+    <li>
+      <p>OpenOffice.org</p>
+    </li>
+
+    <li>
+      <p>OpenDocument</p>
+    </li>
+
+    <li>
+      <p>Microsoft Open XML</p>
+    </li>
+
+    <li>
+      <p>(X)HTML</p>
+    </li>
+
+    <li>
+      <p>HTML Hilfe Erstellung</p>
+    </li>
+
+    <li>
+      <p>DocBook</p>
+    </li>
+
+    <li>
+      <p>Okapi einsprachige XLIFF</p>
+    </li>
+  </ul>
+
+  <p>Andere formatierte Text-Dateitypen können in OmegaT durch <a href=
+  "fileFilters.html">Assoziierung</a> ihrer Endung mit einem unterstützten Dateityp und durch die Vorbehandlung mit spezifischen  <a href=
+  "segmentation.html">Segmentierungs</a> -Regeln gehandhabt werden.</p>
+
+  <h3><a name="others" id="others"></a>Andere Dateiformate</h3>
+
+  <p>Andere Dateiformate für reine oder formatierte Texte können in OmegaT auch bearbeitet werden.</p>
+
+  <p>Externe Werkzeuge können verwendet werden, um Dateien in unterstützte Formate zu konvertieren.  Bitte denken Sie daran, dass übersetzte Dateien ins ursprüngliche Format konvertiert werden müssen. Auf diese Weise können mehrere Reintext-Formate (einschließlich Latex usw. ) in OmegaT durch die Konvertierung zum PO Format übersetzt werden. In ähnlicher Weise können mehrere formatierte Textformate (einschließlich Dateien von Microsoft Office) in OmegaT durch die Konvertierung zum OpenDocument Format übersetzt werden. </p>
+
+  <p>Die Qualität der übersetzten Datei wird von der Qualität der durchlaufenen Konvertierung abhängen.  Stellen Sie sicher, dass Sie vor solchen Konvertierungen alle Optionen geprüft haben.  Verfügbare freie Werkzeuge der Umwandlung sind unter anderen:</p>
+
+  <p><br></p>
+
+  <table width="100%" border="0" cellpadding="4" cellspacing="0">
+    <col width="50*">
+    <col width="206*">
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="ooo" id="ooo"></a>OpenOffice.org<a href=
+        "http://www.openoffice.org/"><br> OpenOffice.org Offizielle Seite</a></p>
+      </td>
+
+      <td width="81%">
+        <p>OmegaT bietet keine direkte Unterstützung der Microsoft Office-Formate (Word, Excel und PowerPoint).  Jedoch kann man OpenOffice.org (und Variationen) verwenden, um solche Formate zum OmegaT unterstützten OpenDocument Format umzuwandeln. </p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="okapi" id="okapi"></a>Okapi Framework<a href=
+        "http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm"><br> Okapi für Mono Version-Seite</a>, <a href=
+        "http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">tutorial</a></p>
+      </td>
+
+      <td width="81%">
+        <p>Das Textextrahierungsprogramm vom Okapi-Fachwerk hat eine Option, um einen OmegaT Projekt-Baum zu erzeugen.  Es ist auch möglich, eine OmegaT spezifische XLIFF Datei zu erzeugen.  Okapi hat vor Kurzem Werkzeuge veröffentlicht, die unter Mono, einer freien, in den meisten Betriebssystemen laufen. </p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="tt" id="tt"></a>Übersetzung Werkzeugkaste<br> <a href="http://translate.sourceforge.net/wiki/toolkit/index">Übersetzung Werkzeugkasten offizielle Seite</a></p>
+      </td>
+
+      <td width="81%">
+        <p>Der Übersetzung Werkzeugkasten, ein Python-Werkzeugsatz, bietet Benutzern mehrere Konvertierer vom Portable Object, einschließlich Mozilla .properties und dtd Dateien, CSV\ Dateien, Qt. ts Dateien, XLIFF Dateien an.  Es beinhaltet mehrere Werkzeuge, mit denen solche Dateien vor oder nach Übersetzung mit OmegaT bearbeitet werden können. </p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="po4a" id="po4a"></a>Po4a<br> <a href="http://po4a.alioth.debian.org/">po4a offizielle Seite</a></p>
+      </td>
+
+      <td width="81%">
+        <p>po4a ist ein Debian Perl Werkzeug.  Es kann Dateiformate wie LaTeX, TeX, POD etc. zu und von Portable Object konvertieren. </p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

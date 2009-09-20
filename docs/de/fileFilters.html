@@ -1,0 +1,205 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Dateifilter - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
+
+<body>
+  <h1>Dateifilter</h1>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#filter_dialog">Dateifilterdialog</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#filter_options">Filteroptionen</a></p>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Filterdialog bearbeiten</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#source_file_name">Quelldateityp, Dateinamenmuster</a>. </p>
+        </li>
+
+        <li>
+          <p><a href="#encoding">Kodierung der Quell- und Zieldateien</a></p>
+        </li>
+
+        <li>
+          <p><a href="#target_file_name">Zieldateiname</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>OmegaT hat weitgehend anpassbare Filter, die es Ihnen ermöglichen, die meisten Aspekte ihrer Arbeit einzustellen.  Dateifilter sind Codestücke, die es OmegaT ermöglichen:</p>
+
+  <ul>
+    <li>
+      <p>Dokumente in einem spezifischen Dateiformat zu lesen.  Zum Beispiel, Dateien mit Reintext. </p>
+    </li>
+
+    <li>
+      <p>Den übersetzbaren Inhalt aus der Datei zu extrahieren. </p>
+    </li>
+
+    <li>
+      <p>Die Änderungen von Dateinamen für die Zieldokumente durch die Ersetzung übersetzbarer Inhalte zu automatisieren. </p>
+    </li>
+  </ul>
+
+  <p>Für die Mehrheit der Benutzer werden die voreingestellten Optionen genügen.  Wenn nicht, können Sie den Hauptdialog öffnen, indem Sie <strong>Optionen → Dateifilter...</strong> im Hauptmenü auswählen. <strong>Warnung!</strong> Das Ändern der Filteroptionen bei geöffnetem Projekt kann zu Datenverlust führen. Wenn Sie bei einem geöffnetem Projekt Filteroptionen ändern, werden Sie das Projekt erneut laden müssen, um die Änderungen wirksam werden zu lassen. </p>
+
+  <h3><a name="filter_dialog" id="filter_dialog"></a>Dateifilterdialog</h3>
+
+  <p>Der Dialog führt verfügbare Dateifilter auf.  Wenn Sie OmegaT für Dateien von einem gewissen Typ nicht verwenden wollen, können Sie den Haken dafür im Kontrollkästchen entfernen und den Filter dadurch ausschalten.  OmegaT wird dann die passenden Dateien beim Laden des Projektes überspringen, und wird sie stattdessen unverändert in den Ziel-Ordner kopieren.  Später können Sie das Kontrollkästchen noch mal setzen, um den Filter wieder zu verwenden.  Klicken Sie auf <strong>Grundeinstellungen</strong>, um die Dateifilter auf die Standardeinstellungen zurück zu stellen. Wählen Sie den Filter aus der Liste und klicken Sie <strong>Bearbeiten</strong>, um zu bestimmen, welche Dateien in welchen Kodierungen vom Filter bearbeitet werden. </p>
+
+  <h3><a name="filter_options" id="filter_options"></a>Filteroptionen</h3>
+
+  <p>Fünf Filter (Textdateien, XHTML Dateien, HTML und XHTML Dateien, OpenDocument/OpenOffice.org Dateien und Microsoft Open XML Dateien) haben eine oder mehrere Sonderoptionen. Um die Optionen anzupassen, wählen Sie den Filter in der Liste und klicken Sie auf <strong>Optionen</strong>.  Die verfügbaren Optionen sind:</p>
+
+  <h4>Textdateien</h4>
+
+  <ul>
+    <li>
+      <p><i>Absatz-Segmentierung bei neuen Zeilen, leeren Zeilen oder nie:</i> Wenn die Regeln für die Satz-Segmentierung aktiv sind, wird der Text nach den verfügbaren Regeln weiter segmentiert.  </p>
+    </li>
+  </ul>
+
+  <h4>HTML Dateien, HTML und XHTML Dateien</h4>
+
+  <ul>
+    <li>
+      <p><i>Kodierungsdeklaration:</i> OmegaT kann die Kodierungsdefinition für die Datei hinzufügen oder ändern, abhängig von der für die Zieldatei gewählten Kodierung. </p>
+    </li>
+
+    <li>
+      <p><i>Übersetzung der Attribute</i> Die ausgewählten Attribute werden als Segmente im Editor-Fenster erscheinen. </p>
+    </li>
+
+    <li>
+      <p><i>Absatz bei &lt;br&gt;:</i> Der &lt;br&gt; HTML Tag wird einen Absatz für die Zwecke der Segmentierung erzeugen. </p>
+    </li>
+
+    <li>
+      <p><i>Texte, die einem regulären Ausdruck entsprechen, überspringen:</i>Texte, die dem regulären Ausdruck entsprechen, werden ignoriert.</p>
+    </li>
+  </ul>
+
+  <h4>OpenDocument/OpenOffice.org-Dateien</h4>
+
+  <p>Folgende Elemente können übersetzt werden oder nicht. Werden sie übersetzt, treten sie als getrennte Segmente auf.</p>
+
+  <ul>
+    <li><i>Einträge im Index</i></li>
+
+    <li>Lesezeichen</li>
+
+    <li>Lesezeichenreferenzen</li>
+
+    <li>Hinweise</li>
+
+    <li>Kommentare</li>
+  </ul>
+
+  <h4>Microsoft Open XML Dateien</h4>
+
+  <p>Folgende Elemente können übersetzt werden oder nicht. Werden sie übersetzt, treten sie als getrennte Segmente auf.</p>
+
+  <ul>
+    <li><i>versteckter Text (Word)</i></li>
+
+    <li><i>Kommentare (Word, Excel)</i></li>
+
+    <li><i>Fußnoten (Word)</i></li>
+
+    <li><i>Endnoten (Word)</i></li>
+
+    <li><i>Kopfzeile (Word)</i></li>
+
+    <li><i>Fußzeile (Word)</i></li>
+
+    <li><i>Folienkommentare (PowerPoint)</i></li>
+  </ul>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Filterdialog bearbeiten</h3>
+
+  <p>Der Dialog erlaubt Ihnen die Einstellung der Quelldateinamenmuster von Dateien, die mit dem Filter verarbeitet werden, die Dateinamen von übersetzten Dateien anzupassen, und zu entscheiden, welche Kodierungen zu benutzen sind, um die Datei zu laden und die übersetzte Kopie zu speichern.  Um ein Dateifiltermuster anzupassen, können Sie entweder die Felder direkt ändern oder klicken Sie auf <strong>Bearbeiten</strong>.  Um ein neues Muster für die Dateifilter zufügen, klicken Sie auf <strong>Hinzufügen</strong>.  Derselbe Dialog wird verwendet, um ein Muster hinzuzufügen oder zu bearbeiten.  Der Dialog ist nützlich, weil er einen speziellen Zieldateinamenmuster-Editor einschließt und es Ihnen erlaubt, die Namen der Zieldateien anzupassen. </p>
+
+  <h3><a name="source_file_name" id="source_file_name"></a>Quelldateityp, Dateinamenmuster</h3>
+
+  <p>Wenn OmegaT auf eine Datei in seinem Quellverzeichnis stößt, versucht es, den Filter mit Hilfe der Dateierweiterung zu bestimmen.  Genauer gesagt, versucht OmegaT, die Quelldateinamenmuster jedes Filters mit den Dateinamen zu vergleichen.  Zum Beispiel wird das <code>*.xhtml</code> Muster jeder Datei  mit  der <code>.xhtml</code> Erweiterung entsprechen. Ist der passende Filter gefunden, wird die Datei mit dem Filter für die Verarbeitung freigegeben.  Zum Beispiel wird standardmäßig der XHTML Filter verwendet, um Dateien mit <code>.xhtml</code> Erweiterung zu verarbeiten. Sie können Dateinamenmuster von Dateien ändern oder neue, die vom Dateifilter zu behandeln sind, hinzufügen.  Quelldateinamenmuster verwenden, ähnlich wie beim <strong>Suchen</strong>, die  Jokerzeichen.  '<strong>*</strong>' entspricht Null oder mehr Zeichen.  '<strong>?</strong>' Zeichen entspricht genau einem beliebigen Zeichen.  Alle anderen Zeichen stehen für sich selber.  Zum Beispiel, wenn Sie wollen, dass der Textfilter <code> readme</code> Dateien behandelt <code>readme</code>, <code>read.me</code>, und {\cs19\f1\fs20 readme.txt}) sollten Sie das Muster <code> read*</code> verwenden.</p>
+
+  <h3><a name="encoding" id="encoding"></a>Kodierung der Quell- und Zieldateien</h3>
+
+  <p>Nur eine begrenzte Zahl von Dateiformaten verlangt nach einer bestimmten Kodierung.  Dateiformate, die ihre Kodierung nicht angeben, werden die Kodierung verwenden, die von Ihnen für die Dateierweiterung festgelegt wurde.  Zum Beispiel werden standardmäßig die <code> .txt</code> Dateien mit der OS-Default-Kodierung geladen. Sie können die Quellkodierung für jedes verschiedene Quelldateinamenmuster ändern.  Solche Dateien können auch in beliebiger Kodierung gespeichert werden.  Standardmäßig sind die Kodierungen der Quelldateien und der übersetzten Dateien identisch.  Quell- und Zielkodierungsfelder verwenden Combo-Kästen mit allen unterstützten Kodierungen.  <strong>&lt;auto&gt;</strong> überlässt OmegaT die Wahl der Kodierung. Das geschieht folgendermaßen:</p>
+
+  <ul>
+    <li>
+      <p style="margin-bottom: 0cm">OmegaT findet die Quelldateikodierung mit Hilfe der Deklaration, wenn sie existiert (HTML-Dateien, XML basierende Dateien). </p>
+    </li>
+
+    <li>
+      <p style="margin-bottom: 0cm">OmegaT wird veranlasst, eine obligatorische Kodierung für einige Dateiformate (java properties usw.) zu verwenden</p>
+    </li>
+
+    <li>
+      <p>OmegaT nimmt für Textdateien die vom Betriebssystem vorgegebene Kodierung an. </p>
+    </li>
+  </ul>
+
+  <h3><a name="target_file_name" id="target_file_name"></a>Zieldateiname</h3>
+
+  <p>Manchmal möchten Sie die Dateien automatisch umbenennen, zum Beispiel so, dass dem Dateinamen ein Sprachencode hinzugefügt wird.  Zieldateinamenmuster verwendet eine spezielle Syntax; wenn Sie dieses Feld bearbeiten möchten, sollten Sie <strong>Bearbeiten...</strong>klicken, um den Muster-Dialog öffnen. Wenn Sie zum vorgegebenen Filter zurückkehren wollen, klicken Sie auf <strong>Grundeinstellungen</strong>.  Sie können auch den Namen direkt im Zieldateinamenmuster-Feld des Dateifilterdialogs modifizieren.  Der Dialog für das Bearbeiten der Dateifilter enthält folgende Optionen:</p>
+
+  <ul>
+    <li>
+      <p>Grund eingestellt ist <code>${filename}</code>-- der volle Dateiname der Quelldatei mit der Erweiterung, so dass der Name der übersetzten Datei derselbe wie der Name der Quelldatei ist.</p>
+    </li>
+
+    <li>
+      <p><code> ${nameOnly}</code> erlaubt Ihnen, nur den Namen der Quelldatei ohne die Erweiterung einzufügen.</p>
+    </li>
+
+    <li>
+      <p><code>${extension}</code>-- die Erweiterung der Quelldatei.</p>
+    </li>
+
+    <li>
+      <p><code>${targetLocale}</code> - Ziel-lokaler-Code (in der Form "xx_YY").</p>
+    </li>
+
+    <li>
+      <p><code> ${targetLanguage}</code> - die Zielsprache und Ländercode zusammen (in Form von "XX-YY").</p>
+    </li>
+
+    <li>
+      <p><code> ${Zielsprachencode}</code>- nur die Zielsprache ("XX").</p>
+    </li>
+
+    <li>
+      <p><code>${Code des Ziellandes}</code> - nur das Zielland  ("YY")}.</p>
+    </li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Konsolenmodus - Omega 2 Benutzerhandbuch</title>
+</head>
+
+<body>
+  <h1>OmegaT Konsolenmodus</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Vorbedingungen</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">Im Konsolenmodus starten</a></p>
+    </li>
+
+    <li>
+      <p><a href="#extra">Extra Optionen</a></p>
+
+      <p>&nbsp;</p>
+    </li>
+  </ul>
+
+  <p>Die Absicht des Konsolenmodus ist es, OmegaT als ein Übersetzungswerkzeug in einer Scripting-Umgebung zu benutzen. Beim Einsatz vom Konsolenmodus wird GUI nicht geladen (kann also auf jeder Konsole ausgeführt werden) und das geöffnete Projekt wird automatisch übersetzt. </p>
+
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Vorbedingungen</h3>
+
+  <p>Um OmegaT auf diese Art und Weise einzusetzen, muss ein gültiges OmegaT Projekt zur Verfügung stehen.  Dessen Ort ist dabei ohne Bedeutung, da man ihn beim Start in der Befehlszeile angeben muss. <p>Sind geänderte Einstellungen nötig, müssen die Konfigurationsdateien verfügbar sein.  Das kann auf zwei Arten erreicht werden: <ol><li>OmegaT normal ausführen (mit GUI) und die Konfiguration einstellen. Wird OmegaT im Konsolenmodus gestartet, wird dieselbe Konfiguration benutzt. Für den Fall, das sie OmegaT nicht wie üblich benutzen können (da die grafische Umgebung nicht zur Verfügung steht) :</li><li>die Konfigurationsdateien von einer OmegaT Installation auf einem anderen Computer in das konkrete Verzeichnis kopieren.  Der konkrete Ort ist dabei ohne Bedeutung, da man ihn beim Start ihn in der Befehlszeile angeben kann.  Die relevanten Dateien heißen filters.conf und segmentation.conf und sind im Nutzerverzeichnis zu finden (z.B. C:\Dokumente und Einstellungen\<User>\OmegaT unter Windows, <User>/.omegat/ unter Linux)</li></ol></p>
+
+  <h3><a name="start" id="project_location"></a>Im Konsolenmodus starten </h3>
+
+  <p>Um OmegaT im Konsolenmodus zu starten, müssen einige zusätzliche Parameter beim Startup durchgegangen werden. Der allerwichtigste dabei ist  <code>&lt;project-dir&gt;</code>, und optional <code>--config-dir=&lt;config-dir&gt;</code>.<p>Beispiel: <code>$&gt; java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code>
+  </p>
+  <p>Erklärung:<dl><dt><code>&lt;project-dir&gt;</code></dt>
+  <dd>informiert OmegaT über die Stelle, wo sich das zu übersetzende Projekt befindet.  Wenn angegeben, wird OmegaT im Konsolenmodus starten und das angegebene Projekt übersetzen. </dd> 
+  <dt><code>--config-dir=&lt;config-dir&gt;</code></dt>
+  <dd>informiert OmegaT darüber, wo sich die Konfigurationsdateien befinden.  Wenn nichts angegeben ist, wird OmegaT die vorgegebenen Werte benutzen (OmegaT dir im Nutzerverzeichnis, oder wenn nicht verfügbar: im momentan verwendeten Verzeichnis).</dd>
+  <dt><code>--mode=console-translate</code></dt>
+  <dd>OmegaT startet im Konsolenmodus und übersetzt das angegebene Projekt. </dl>
+  
+  <h3><a name="extra" id="extra"></a>Extra Optionen</h3>
+
+  <p>Es gibt noch einen zusätzlichen Parameter für die Befehlszeile im Komsolenmodus: <code>--quiet</code>. Im stillen Modus werden im Log-Fenster weniger Infos erscheinen.  Die Nachrichten, die man normalerweise in der Statuszeile sieht, werden unterdrückt.<br> Verwendung: <code>java -jar OmegaT.jar /path/to/project --quiet</code>
+  </p>
+
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

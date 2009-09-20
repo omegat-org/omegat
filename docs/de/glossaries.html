@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<TITLE>Glossare - OmegaT 18  Benutzerhandbuch</TITLE>
+	<META NAME="GENERATOR" CONTENT="OpenOffice.org 3.0  (Win32)">
+	<META NAME="CREATED" CONTENT="0;0">
+	<META NAME="CHANGED" CONTENT="0;0">
+	<STYLE TYPE="text/css">
+	<!--
+		TD P { margin-left: 0.13cm; margin-right: 0.13cm; margin-top: 0.13cm; margin-bottom: 0.13cm; border: none; padding: 0cm; color: #000000 }
+		P { margin-left: 0.13cm; margin-right: 0.13cm; margin-top: 0.13cm; margin-bottom: 0.13cm; border: none; padding: 0cm; color: #000000 }
+		H2 { color: #003366; font-family: sans-serif }
+		H3 { color: #003366; font-family: sans-serif }
+		DD { margin-left: 0.13cm; margin-right: 0.13cm; margin-top: 0.13cm; margin-bottom: 0.13cm; border: none; padding: 0cm; color: #000000 }
+		DT { margin-left: 0.13cm; margin-right: 0.13cm; margin-top: 0.13cm; margin-bottom: 0.13cm; border: none; padding: 0cm; color: #000000 }
+	-->
+	</STYLE>
+</HEAD>
+<BODY LANG="de-DE" DIR="LTR">
+<H2>Glossare</H2>
+<UL>
+	<LI><P><A HREF="#usage">Gebrauch</A></P>
+	</LI><LI><P><A HREF="#fileformat">Dateiformat</A></P>
+	</LI><LI><P><A HREF="#howtocreate">Wie Glossare angelegt werden</A></P>
+	</LI><LI><P><A HREF="#multiterm">Trados Multiterm Benutzen</A></P>
+	</LI><LI><P><A HREF="#commonglossaryproblems">Allgemeine Probleme mit Glossaren</A></P>
+</LI></UL>
+<P>Glossare sind Dateien, die manuell geschaffen und für den Gebrauch in OmegaT aktualisiert werden. </P>
+<P>Wenn ein OmegaT Projekt ein oder mehr Glossare enthält, werden die Ausdrücke, die sich sowohl in Glossaren als auch im aktiven Segment befinden, im <A HREF="userInterface.html#Glossary">Glossar Fenster</A> angezeigt. </P>
+<HR>
+<H2><A NAME="usage"></A>Gebrauch</H2>
+<P>Um ein vorhandenes Glossar zu verwenden, legen Sie es einfach beim Erzeugen des Projektes in den <I>/glossary</I> Ordner. Wenn ein Projekt geöffnet wird, entdeckt OmegaT automatisch Glossar-Dateien in diesem Ordner.  Die Ausdrücke im aktiven Segment, die OmegaT in der Glossardatei(en) findet, werden im Glossar-Fenster angezeigt. </P>
+<P><A NAME="graphics1"></A><FONT COLOR="#000000"><IMG SRC="images/Glossary_pane.png" NAME="graphics1" ALT="Glossar-Fenster" ALIGN=BOTTOM WIDTH=321 HEIGHT=147 BORDER=1></FONT></P>
+<P STYLE="margin-bottom: 0cm"><BR>Das Wort vor dem Zeichen = ist der Ausdruck im Quelltext und dessen Übersetzung bzw. Übersetzungen befinden sich hinter dem =. Ein Eintrag in das Glossar kann einen Kommentar beinhalten (siehe "transitive Verb" für den zweiten Posten). Die Glossar-Funktion findet in den Glossaren nur genaue Ausdrücke (d.h. findet keine flektierte Formen usw. ) Neue Ausdrücke kann man während der Übersetzung (zum Beispiel in einem Text Editor) manuell in die Datei bzw. Dateien einfügen; die neu eingefügten Wörter werden aber nur nach dem erneuten Laden des Projektes erkannt. </P>
+<HR>
+<H2><A NAME="fileformat"></A>Dateiformat</H2>
+<P>Glossar-Dateien sind einfache Klartext-Dateien mit drei durch Tabulator-Zeichen getrennten Spalten für das Quellwort (erste Spalte) und das Zielwort (zweite Spalte).  Die dritte Spalte kann für Zusatzinformation verwendet werden.  Glossar-Dateien können entweder in der für das System normalen Kodierung sein (durch die <CODE>.tab</CODE> Erweiterung gekennzeichnet) oder in UTF-8 (in dem Fall sollte die Erweiterung <CODE>.utf8</CODE> sein). Die Unicode (d.h. UTF-8) Kodierung ist aus offensichtlichen Gründen zu bevorzugen.</P>
+<HR>
+<H2><A NAME="howtocreate"></A>Wie Glossare angelegt werden</H2>
+<P><BR>Die Methode, wenn sie einigermaßen vorsichtig befolgt wird, ist narrensicher. Man braucht OpenOffice.org Writer dazu, also bitte - wenn noch nicht getan - OpenOffice.org herunterladen und installieren. OpenOffice.org starten und ein neues Textdokument erzeugen bzw. "OpenOffice.org Writer" starten.<BR><BR>Ihre Glossareinträge wie folgt in das leere Dokument eintragen: Quellausdruck, Tabulator, Zielausdruck, Tabulator, ein Kommentar oder eine Erklärung des Ausdruckes, dann Enter. Tabulator ist die Taste auf der linken Seite der Tastatur.  Wenn Sie keinen Kommentar eingeben wollen, kann das zweite Tabulator-Zeichen entfallen. Ein "Ausdruck" kann ein einziges Wort oder eine Redewendung sein.  Der nächste Ausdruck und seine Übersetzung werden in der zweiten Zeile eingegeben.  Dann das dritte Paar der Ausdrücke in der Zeile drei und so weiter. <BR>Wenn Sie mit der Eintragung der Ausdrücke fertig sind, werden Sie zwei "Spalten" der Ausdrücke haben, Quell-Ausdrücke links und die Übersetzungen in der Zielsprache rechts, dazu möglicherweise noch eine dritte Spalte mit Ihren Kommentaren und Erklärungen. Die Tabs  (→ im Beispiel unten)&nbsp;und Eingabe-Zeichen (¶&nbsp;) werden sichtbar, wenn man in der Standardleiste  von Writer die ¶ Ikone anklickt. Hier ein paar Zeilen aus einem Englisch-Deutschen Glossar</P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp; <FONT FACE="Courier New, Courier, monospace">word
+→Wort→das (-/e/s, Wörter/-e)¶</FONT></P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp; <FONT FACE="Courier New, Courier, monospace">small
+house→Häuschen→das, (pl&nbsp;Häuschen)¶</FONT></P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp; <FONT FACE="Courier New, Courier, monospace">dog
+→Hund→m, f Hündin&nbsp;¶</FONT></P>
+<P STYLE="margin-bottom: 0cm">&nbsp;&nbsp;&nbsp; <FONT FACE="Courier New, Courier, monospace">horse→Pferd→n,
+m Hengst f Stute n Fohlen¶</FONT></P>
+<P><BR>Benutzen Sie NICHT die "Spalten"-Funktion in OpenOffice.org: trennen Sie die Ausdrücke in der Quell- und Zielsprache mit einem einzigen Tabulator.<BR><BR>Wenn Sie mit den Einträgen fertig sind, wählen Sie <I>Datei &gt; Speichern unter</I>. In das Feld "Dateinamen" den Namen für die Datei eingeben, mit der Erweiterung "<B>.utf8</B>" (z.B. "<I>MyGlossary.utf8</I>").&nbsp;Im "<I>Dateityp</I>",  "<I>Text kodiert (.txt.)</I>" wählen. Dann die Option "<I>Automatische Dateinamenserweiterung</I>" abwählen und "<I>Filtereinstellungen bearbeiten</I>" wählen:<BR><BR><IMG SRC="images/saveglossary.jpg" NAME="Grafik1" ALT="Datei speichern im Dialog für das Glossar" ALIGN=BOTTOM WIDTH=478 HEIGHT=313 BORDER=0><BR><BR>Mit OK bestätigen. Eine Dialogbox mit zwei Optionen erscheint:&nbsp; "<I>Ja</I>" und&nbsp; "<I>Nein</I>". "<I>Ja</I>" wählen, um in dem Format für kodierte Texte zu speichern. <BR><BR>Im Dialog für die ASCII Filter Optionen (siehe unten),  "<I>Unicode (UTF-8)</I>" als den Zeichensatz wählen:<BR><BR><IMG SRC="./images/AsciiFilteroptions.jpg" NAME="Grafik2" ALT="ASCII Dateioptionen für Glossare" ALIGN=BOTTOM WIDTH=510 HEIGHT=158 BORDER=0><BR><BR>Mit OK bestätigen.<BR><BR>Nachdem ein OmegaT Projekt erzeugt wurde, diese Datei in das Projekt-Verzeichnis <I>\glossary</I> kopieren oder verschieben. Ist das Projekt schon offen, muss es nach dem Kopieren erneut geladen werden. Man kann die Glossar-Datei parallel zum Übersetzen ändern, doch werden die Änderungen im Projekt nur durch ein erneutes Laden sichtbar.<BR><BR>Wird ein neues Segment mit einem Quelltextbegriff zum Übersetzen geöffnet, erscheinen im Glossar-Fenster die Einträge, die im Glossar (oder Glossaren, es können mehrere verfügbar sein) zu finden sind.</P>
+<H3><A NAME="multiterm"></A>Trados Multiterm Benutzen</H3>
+<P>Mit Trados MultiTerm erzeugte Glossare zum Beispiel kann OmegaT ohne weiteres verwenden, vorausgesetzt dass die exportierte Dateien die <CODE>.tab</CODE> Erweiterung haben und dass die Quell und Zielfelder die ersten zwei Spalten in der Text-Datei sind. Wenn man mit der Systemoption "Tab-begrenzter Export" exportiert, muss man die ersten 5 Spalten (Seq. Nr, Date created etc.) vor den zwei Einträgen von Bedeutung löschen.</P>
+<HR>
+<H2><A NAME="commonglossaryproblems"></A>Allgemeine Probleme mit Glossaren</H2>
+<DL>
+	<DT STYLE="margin-left: 0cm; margin-right: 0cm"><B>Problem: </B>: keine Glossar-Einträge werden gezeigt. </DT><DD STYLE="margin-left: 0cm; margin-right: 0cm">Mögliche Ursachen:</DD></DL>
+<UL>
+	<LI><P STYLE="margin-bottom: 0cm">es wurde keine Glossar-Datei im "glossary"-Ordner gefunden</P>
+	</LI><LI><P STYLE="margin-bottom: 0cm">Die Glossar-Datei ist leer</P>
+	</LI><LI><P STYLE="margin-bottom: 0cm">die Einträge sind nicht durch TAB Zeichen getrennt</P>
+	</LI><LI><P STYLE="margin-bottom: 0cm">die Glossar-Datei hat nicht die richtige Erweiterung (.tab oder .utf8) </P>
+	</LI><LI><P STYLE="margin-bottom: 0cm">Es gibt keine EXAKTE Übereinstimmungen zwischen den Einträgen im Glossar und im Quelltext des Dokumentes - z.B. weil der gesuchte Eintrag im Segment im Plural auftritt.</P>
+	</LI><LI><P STYLE="margin-bottom: 0cm">die Glossar-Datei hat nicht die richtige Kodierung </P>
+	</LI><LI><P STYLE="margin-bottom: 0cm">Im aktiven Segment gibt es keine Begriffe, die im Glossar zu finden wären.</P>
+	</LI><LI><P>Man hat ein oder mehrere der oben genannten Probleme gelöst, das Projekt wurde aber nicht erneut geladen. </P>
+</LI></UL>
+<DL>
+	<DT STYLE="margin-left: 0cm; margin-right: 0cm"><B>Problem:</B> Im Glossarfenster werden einige Zeichen nicht korrekt angezeigt (aber die gleichen Zeichen sind im Editier-Fenster korrekt angezeigt).</DT><DD STYLE="margin-left: 0cm; margin-right: 0cm">Mögliche Ursachen:</DD></DL>
+<UL>
+	<LI><P>die Erweiterung und die Datei-Kodierung passen nicht zusammen.</P>
+</LI></UL>
+<HR>
+<TABLE BORDER=0 CELLPADDING=2 CELLSPACING=2>
+	<TR>
+		<TD>
+			<P ALIGN=LEFT><A HREF="legalNotices.html">Rechtliche Hinweise</A> 
+			</P>
+		</TD>
+		<TD>
+			<P ALIGN=CENTER><A HREF="index.html">Home</A> 
+			</P>
+		</TD>
+		<TD>
+			<P ALIGN=RIGHT><A HREF="xindex.html">Index des Inhalts</A> 
+			</P>
+		</TD>
+	</TR>
+</TABLE>
+<P><BR><BR>
+</P>
+</BODY>
+</HTML>

@@ -1,0 +1,98 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Rechtschreibprüfung - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
+
+<body>
+  <h2>Rechtschreibprüfung</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#introduction">Einleitung</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Rechtschreibprüfung - Optionen</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Hints">Hinweise</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a>Einleitung</h3>
+
+  <p><br></p>
+
+  <p>Um die während der Übersetzung gemachten Rechtschreibfehler zu korrigieren, kann die Rechtschreibprüfung installiert werden, um auf Wörter im Zieltext hinzuweisen, die korrigiert werden müssen. Es sollte keine Überraschung sein: OmegaT benutzt die <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a> Rechtschreibprüfung, die u.a. von OpenOffice.org, Firefox und Thunderbird benutzt wird. Falls Sie eine dieser Programme benutzen, haben Sie vielleicht schon das Wesentliche der Rechtschreibprüfung installiert und Sie müssen OmegaT nur noch anschließen. </p>
+
+  <p>Nachdem die Rechtschreibprüfung aktiviert und die Vokabeln der Zielsprache zur Verfügung stehen, wird die Rechtschreibprüfung die im Editier-Fenster befindlichen Zielsegmente überwachen. Fragliche Wörter werden mit einer roten Wellenlinie unterstrichen: :</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "Rechtschreibprüfung des Textes" align="left" width="535" height="302" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Klickt man mit der rechten Maustaste auf ein hervorgehobenes Wort (<i>Artund</i> oben) öffnet sich ein Drop-down Menü mit Vorschlägen für die Korrektur (<i>Art und</i>) . Zusätzlich kann die Rechtschreibprüfung aufgefordert werden, die Vorkommnisse Wortes <b>alle ignorieren</b> oder das Wort <b>ins Wörterbuch einfügen</b>. Bedenke, dass dies eine Online Rechtschreibprüfung ist: wenn Sie eine globale Rechtschreibprüfung von Texten machen müssen, werden Sie durch die Texte browsen und nach welligen Linien schauen müssen. Alternativ kann man die Zieldateien in einem Editor überprüfen, in anderen Worten außerhalb OmegaT, so dass die Änderungen nicht in der TM sein werden.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Rechtschreibprüfung - Optionen</h3>
+
+  <p>Beim Klick auf  <b>Optionen &gt; Rechtschreibprüfung...</b> öffnet sich das Fenster unter:</p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "Rechtschreibprüfung - Setup" align="left" width="498" height="325" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>Der Beispiel oben beinhaltet schon die verfügbaren Vokabeln. Am Anfang wird das Fenster leer sein und man muss angeben, wo OmegaT die Wörterbücher suchen sollte. Ein Klick auf <strong>Wählen...</strong> öffnet das Dialogfenster für die Auswahl des Verzeichnisses mit den nötigen Daten - das <b>Dateiverzeichnis für Wörterbücher</b> - im Fall oben ist es <i>C:\Program Files\OpenOffice.org 2.4\share\dict\ooo</i>. Es geht selbstverständlich um das Verzeichnis mit bestehenden Open Source Vokabeln. OmegaT erkennt gültige Wörterbücher und listet sie auf.  Ist das Wörterbuch, das Sie benutzen wollen, schon da und für OmegaT sichtbar, sind Sie fertig. Ist das nicht der Fall, d.h. wenn die Liste der verfügbaren Sprachen leer ist, kann man auf  <b>Installieren</b>  klicken, um die Suche nach verfügbarem Vokabular zu starten.  Im Pop-up Fenster Wörterbücher auswählen und <b>Installieren</b> klicken. Die ausgewählten Sprachen werden dann installiert und werden im Fenster für die Einstellung der Rechtschreibprüfung erscheinen (das kann ein wenig dauern).</p>
+
+  <p>Bedenken Sie, dass die Installation von der Verfügbarkeit der Wörterbücher im Internet abhängt. Die Liste holt sich OmegaT von <a href=
+  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/"> OpenOffice.org/contrib/dictionaries</a>. Ist diese Liste veraltet, muss man selber nach Wörterbüchern suchen.  Suchen Sie nach Dateien mit Namen, die die gewünschte Sprache andeuten, und Dateierweiterungen wie <i>aff</i> und <i>dic.</i> haben.  Die größte Sammlung an Wörterbüchern ist wohl im OpenOffice.org Wiki zu finden unter <a href=
+  "http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice.org Wiki Dictionaries</a>. Mit OmegaT kompatible Wörterbücher sind "Hunspell" und "Myspell" Wörterbücher.</p>
+
+  <p>Stellen Sie sicher, dass die Ländercodes der Zieldateien mit dem Sprachcode der Wörterbücher übereinstimmen: ein FR-FR Wörterbuch wird bei Zieleinstellung FR nicht funktionieren. Die Einstellung im Projekt muss zu FR-FR geändert werden, sonst erkennt die Rechtschreibprüfung das Wörterbuch für Ihr Ziel nicht. </p>
+
+  <h3><a name="Hints" id="Hints"></a>Hinweise</h3>
+
+  <p>Mögliche Ursachen für Probleme mit der Rechtschreibprüfung: </p>
+
+  <ol>
+    <li>
+      <p>Kontrollkästchen “Automatisch Rechtschreibung prüfen” muss markiert sein. </p>
+    </li>
+
+    <li>
+      <p>Vergleichen Sie den Code für die Zielsprache Ihres Projektes mit den vorhandenen Wörterbüchern im Setup Fenster. Die Rechtschreibprüfung legt die zu nutzende Sprache anhand des Sprachcodes der Zielsprache fest: wenn die Zielsprache brasilianisches Portugiesisch (PT_BR) ist, müssen die Unterverzeichnisse der Wörterbücher die zwei Dateien mit dem Namen pt_br.aff und pt_br.dic enthalten.</p>
+    </li>
+  </ol>
+
+  <p>Wenn es um eine Menge von schon übersetzten Texten geht und es stellt sich heraus, dass die Spracheinstellung im Projekt falsch ist (z.B. man hat EN als Zielsprache genommen, aber es gibt kein Wörterbuch dafür), kann man die richtigen zwei Dateien kopieren und sie umbenennen; dieselbe Methode kann man auch im oberen PT Beispiel anwenden: pt_PT.arr und pt_PT.dic kopieren und zu pt_BR.arr und pt_BR.dic umbenennen. Es ist auch möglich, den Sprachcode im Projekt zu ändern (von pt zu pt_BR), das würde aber bedeuten, dass diese Änderung in allen TMX Dateien vorgenommen werden muss, was nicht der sicherste Weg wäre. </p>
+
+  <p>Bedenken Sie, dass mit Deinstallieren die ausgewählten Wörterbücher physisch gelöscht werden. Sind sie auch ein Teil von OpenOffice wie im obigen Fall, werden sie auch aus dieser Anwendung verschwinden. Muss man aus irgend welchen Grund so was hin und wieder machen, wäre es ratsam, die betroffenen Dateien in einen  für OmegaT reservierten Ordner zu kopieren. </p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

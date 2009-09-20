@@ -1,146 +1,188 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd">
-  
 <html>
-  <head>
-    <title>OmegaT: Suchen: Stichwort und genaue Suche</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050513">
-    <link rel="stylesheet" type="text/css" href="omegat.css">
-  </head>
+<head>
+	<link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Suchen - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
 
-  <body lang="en" dir="LTR">
+<body>
+  <h2>Suchen</h2>
 
-    <div class="navbar-top">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+  <ul>
+    <li>
+      <p><a href="#searchwindow">Suchfenster</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#calling">Aufrufen einer Suche</a></p>
+        </li>
+
+        <li>
+          <p><a href="#location">Suchen - Position</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><a href="#searchmethods">Suchmethoden</a></p>
+
+  <p><a href="#usingwildcards">Verwenden von Jokerzeichen</a></p>
+
+  <p><a href="#usingregularexpressions">Einsatz regulärer Ausdrücke</a></p>
+
+  <p><a href="#display">Anzeige der Suchergebnisse</a></p>
+  <hr>
+
+  <h2><a name="searchwindow" id="searchwindow"></a>Suchfenster</h2><img src=
+  "images/TextSearch.png" name="graphics1" align="left" width="659" height=
+  "446" border="0" id="graphics1" alt="Fenster für die Textsuche"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="calling" id="calling"></a>Aufrufen einer Suche</h3>
+
+  <p>OmegaT verfügt über starke Such-Funktionen. Rufen Sie das <strong>Suchen</strong> Fenster mit <code>STRG+F</code> auf und geben Sie das Wort oder den Ausdruck ein, nach dem Sie im Kasten <strong>Suche nach</strong> suchen möchten. Alternativ dazu können Sie ein Wort oder einen Ausdruck im Bearbeitungsfeld (Zieltextfeld des aktiven Segments) auswählen und <code>STRG+F</code> drücken.  Dabei wird das Wort oder der Ausdruck automatisch im Feld <strong>"Suche nach"</strong> eingetragen. </p>
+
+  <p>Jeder Aufruf von <strong>Suche nach</strong> öffnet ein neues Fenster. Vergessen Sie nicht, sie zu schließen, um Ihren Desktop nicht zu "überfluten".</p>
+
+  <h3><a name="location" id="location"></a>Suchen - Position</h3>
+
+  <p>Suchen geschieht sowohl im Quell- als auch im Zieltext des Projektes.  Sie können suchen:</p>
+
+  <ul>
+    <li>
+      <p>nur im Projekt (Standardeinstellung)</p>
+    </li>
+
+    <li>
+      <p>im Projekt als auch in Referenz-TMs in /tm/ (<i>TMs durchsuchen</i> aktivieren)</p>
+    </li>
+
+    <li>
+      <p>in einer einzelnen Datei oder einem Ordner, die eine Reihe von Dateien enthält (<i>Dateien durchsuchen</i> aktivieren) </p>
+    </li>
+  </ul>
+
+  <p>OmegaT wird nur die Dateien durchsuchen, die es lesen kann (Siehe <a href="filesToTranslate.html">Unterstützte Dateiformate</a>)</p>
+  <hr>
+
+  <h2><a name="searchmethods" id="searchmethods"></a>Suchmethoden</h2>
+
+  <p>Mit Hilfe der Optionsfelder (radio buttons) die Methode auswählen.  Man kann zwischen zwei Suchmethoden wählen:</p>
+
+  <table width="555" border="0" cellpadding="3" cellspacing="0">
+    <col width="115">
+    <col width="428">
+
+    <tr>
+      <td width="115">
+        <p><strong>Genaue Suche</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Suche nach Segmenten, die den angegebenen Text beinhalten. </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="115">
+        <p><strong>Stichwortsuche</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Suche nach Segmenten, die alle Stichwörter enthalten, unabhängig von der Reihenfolge. </p>
+      </td>
+    </tr>
+  </table>
+
+  <p>Eine <strong>genaue Suche</strong> sucht nach einem Ausdruck, d. h. wenn mehrere Wörter eingegeben wurden, werden sie nur dann gefunden, wenn sie in genau derselben Reihenfolge vorkommen. Genaue Suche ähnelt einer "genauer Ausdruck"-Suche in einer Internet Suchmaschine wie Google. </p>
+
+  <p>Wählen Sie <strong>Stichwortsuche</strong>, um nach beliebig vielen einzelnen Wörtern,  durch Leerzeichen getrennt und in beliebiger Ordnung, zu suchen. OmegaT wird eine Liste aller Segmente, in denen alle Wörter vorkommen, anzeigen. Die Stichwort-Suche ist ähnlich wie die Suche "mit allen Wörtern" anhand einer Internet Suchmaschine wie Google (AND Logik).</p>
+
+  <p>Für jede dieser zwei Methoden können Sie unter folgenden drei Optionen auswählen:</p>
+
+  <table width="556" border="0" cellpadding="3" cellspacing="0">
+    <col width="116">
+    <col width="428">
+
+    <tr>
+      <td width="116">
+        <p><strong>Groß-/Kleinschreibung</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Die Suche wird für die exakte Zeichenfolge durchgeführt; ansonsten werden Großbuchstaben ignoriert.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="116">
+        <p><strong>reguläre Ausdrücke</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Der Such-Ausdruck wird als ein regelmäßiger Ausdruck behandelt (im Falle einer Stichwort-Suche wird die Zeichenfolge als mehrfache Ausdrücke behandelt). </p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="116">
+        <p><strong>TMs durchsuchen</strong></p>
+      </td>
+
+      <td width="428">
+        <p>Alle TMs sind in die Suche eingeschlossen. </p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="usingwildcards" id="usingwildcards"></a>Verwenden von Jokerzeichen</h2>
+
+  <p>Sowohl in exakten als auch in Stichwort-Suchen, kann man die Jokerzeichen '<code>*</code>' und '<code>?</code>' benutzen.  Um Jokerzeichen zu verwenden, vergewissern Sie sich, dass  Option <strong>reguläre Ausdrücke</strong> nicht aktiviert ist, , weil sonst die Jokerzeichen als besondere Zeichen von regulären Ausdrücken verstanden werden. </p>
+
+  <ul>
+    <li>
+      <p>'<strong>*</strong>' entspricht null oder mehr Zeichen.  Die Suche nach '<strong>run*</strong>' zum Beispiel würde '<strong>run</strong>', '<strong>runs</strong>', und '<strong>running</strong>' finden.</p>
+    </li>
+
+    <li>
+      <p>Ein Fragezeichen <strong>?</strong>entspricht einem einzelnen Zeichen.  <strong>'Lil?'</strong>z. B. würde <strong>Lilo</strong> und <strong>Lila</strong> finden, aber nicht <strong>Lille</strong> oder <strong>lila</strong>. </p>
+    </li>
+  </ul>
+
+  <p>Wenn Sie nach Segmenten suchen möchten, die entweder  <strong>*</strong> oder <strong>?</strong> enthalten, werden Sie regelmäßige Ausdrücke einschalten und einen umgekehrten Schrägstrich vor den Zeichen platzieren müssen: z.B.  'x\*y', um die 'x*y'yu finden, und 'x\?<code>y</code>' für '<code>x?y</code>'. </p>
+  <hr>
+
+  <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>Einsatz regulärer Ausdrücke</h2>
+
+  <p>Eine Suche nach einem regulären Ausdruck ist ein mächtiger Weg, nach Instanzen einer Zeichenfolge zu suchen.  Es ähnelt der Suche mit Jokerzeichen, erlaubt aber viel mehr Flexibilität.  Die in der Suche verwendeten regulären Ausdrücke sind diejenigen, die durch Java unterstützt werden.  Ein kurze Zusammenfassung ist in der Anlage <a href="regexp.html">Konstruktionen mit regulären Ausdrücken</a> zu finden. Wenden Sie sich an <a href=
+  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>, wenn Sie genauere Informationen benötigen.</p>
+
+  <p>Im Netz stehen einfache Einführungen zur Verfügung (z.B.<a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>).</p>
+  <hr>
+
+  <h2><a name="display" id="display"></a>Anzeige der Suchergebnisse</h2>
+
+  <p>Wenn Sie nach Eingabe einer Zeichenfolge auf die Schaltfläche Suchen drücken, werden alle Segmente im Projekt, die der gesuchten Zeichenfolge entsprechen, aufgelistet.  Da OmegaT alle identischen Segmente als eine Einheit behandelt, wird nur das erste einzigartige Segment angezeigt. </p>
+
+  <p>Die Segmente werden in der Reihenfolge ihrer Erscheinung innerhalb des Projektes angezeigt.  Übersetzte Segmente werden mit dem ursprünglichen Text oben und dem übersetzten Text unten gezeigt, bei den noch nicht übersetzten Segmenten wird nur der ursprüngliche Text gezeigt. </p>
+
+  <p>Klicken Sie auf ein Segment, um es im Editor zur Modifizierung zu öffnen.  Danach können Sie zurück in das Suchfenster schalten, um z.B. das nächste gefundene Segment zu öffnen und zu modifizieren. </p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
       <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="index.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
         </td>
-        <td width="9%" align="left" valign="center">
-          <b>Zurück</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="Matches.html">Matches: Exakt und Fuzzy</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Weiter</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Glossary.html">Glossar</a>
-        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
       </tr>
-    </table>
-    </div>
-    
-    <div class="content">
+    </tbody>
+  </table>
 
-    <h1 align="center">Suchen: Stichwort und genaue Suche</h1>
 
-    <p>
-      OmegaT verfügt über umfangreiche Suchfunktionen.
-    </p>
-    
-    <p>
-      Öffnen Sie das Fenster mit den Suchfunktionen, indem Sie den Menüpunkt <i>Projekt durchsuchen...</i> im Menü <i>Bearbeiten</i> auswählen oder indem Sie <i>&lt;Strg+F&gt;</i> drücken. Geben Sie ein Wort oder einen Ausdruck, nach dem gesucht werden soll, in dem Textfeld <i>Suchen nach</i> ein. 
-    </p>
-    
-    <p>
-      Alternativ dazu können Sie ein Wort oder einen Ausdruck im Bearbeitungsfeld (Zieltextfeld des aktiven Segments) auswählen und <i>&lt;Strg+F&gt;</i> drücken. Dabei wird das Wort oder der Ausdruck automatisch im Feld <i>Suchen nach</i> eingetragen. Die Auswahl erfolgt normalerweise durch einen Doppelklick auf ein Wort oder indem man mit der Maus bei gedrückter Maustaste den Cursor von Anfang bis zum Ende des gewünschten Textes zieht. Auf manchen Plattformen kann es sein, dass dies anderweitig erfolgt.
-    </p>
-    
-    <p>
-      Wählen Sie mit den Optionsfeldern (Stichwort oder genaue Suche) und den Kontrollkästchen (TMs durchsuchen/Dateien durchsuchen) die Art der Suche aus. 
-    </p>
-    
-    <p>
-      Alle Sucharten berücksichtigen die Groß- und Kleinschreibung nicht. Wenn man also z.B. nach "abc" sucht, dann wird auch "abc", "ABC", "Abc" usw. ausgegeben.
-    </p>
-    
-    <h2>Stichwortsuche</h2>
-    
-    <p>
-      Wählen Sie die <i>Stichwortsuche</i> aus und geben Sie eine beliebige Anzahl einzelner Wörter in beliebiger Reihenfolge ein. OmegaT zeigt dann eine Liste aller Segmente an, in denen die Wörter auftreten. Das Prinzip dieser Suche ist das gleiche wie die Suche nach allen Wörtern in Internet-Suchmaschinen, wie etwa Google (d.h. UND-Logik). 
-    </p>
-
-    <p>
-      Nur ganze Wörter werden gefunden, nicht etwa unvollständige oder teilweise eingegebene Wörter.
-    </p>
-
-    <p>
-      Es werden nur die Ausgangsdateien des Projekts durchsucht, nicht aber die Translation Memorys.
-    </p>
-
-    <h2>Genaue Suche</h2>
-
-    <p>
-      Eine genaue Suche sucht nach einem bestimmten Ausdruck. Daher ergibt eine bestimmte Reihe von Wörtern nur dann einen Treffer, wenn diese in genau der gleichen Reihenfolge auftreten. Die genaue Suche entspricht der Suche nach einem genauen Ausdruck in einer Internet-Suchmaschine (wird meist in Anführungszeichen eingegeben). 
-    </p>
-    
-    <p>
-      Mit der genauen Suche kann in folgenden Bereichen gesucht werden:
-    </p>
-    
-    <ul>
-      <li>
-        <p>
-          Ausgangs- und Zielsegmente des aktuellen Projekts;
-        </p>
-      </li>  
-      <li>
-        <p>
-          Translation Memorys (Dateien in <b>/tm</i>);
-        </p>
-      </li>  
-      <li>
-        <p>
-          alle von OmegaT unterstützten Dateiformate (z.B. <b>*.txt</b>, <b>*.html</b>, <b>*.xhtml</b>, <b>*.odt</b>, <b>*.sxw</b>, <b>*.properties</b>), in ausgewählten Verzeichnissen und Unterverzeichnissen (falls benötigt).
-        </p>
-      </li>  
-    </ul>
-
-    <p>
-      Joker-Zeichen, wie z.B. <b>*</b> und </b>?</b>, können bei der genauen Suche verwendet werden:
-    </p>
-
-    <ul>
-      <li>
-        Ein Sternchen (Asterisk) <b>*</b> entspricht einem oder mehreren Zeichen. Z.B. entspricht der Ausdruck "m*n" demnach den Wörtern "moin", "man", "mann" und "mohn";
-      </li>
-      <li>
-        Ein Fragezeichen <b>?</b> entspricht einem einzelnen Zeichen. "fr?u" entspricht demnach "frau" und "freu".
-      </li>
-    </ul>
-    </div>
-    
-    <div class="navbar-bottom">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="index.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Zurück</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="Matches.html">Matches: Exakt und Fuzzy</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Weiter</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Glossary.html">Glossar</a>
-        </td>
-      </tr>
-    </table>
-    </div>
-    
-  </body>
+</body>
 </html>

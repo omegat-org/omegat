@@ -1,0 +1,1080 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>OmegaT Menü und Tastenkombinationen - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
+
+<body lang="en-US" dir="ltr">
+  <h2>Hauptmenü und Tastenkombinationen</h2>
+
+  <h3><a href="#menu">Hauptmenü</a></h3>
+
+  <h3><a href="#shortcuts">Tastenkombinationen ("Shortcuts")</a></h3>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">Projekt - Verwaltung</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">Bearbeiten</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">Herumbewegen</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">Referenzfenster</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">Sonstige</a></p>
+    </li>
+  </ul>
+  <hr>
+
+  <h2><a name="menu" id="menu"></a>Hauptmenü</h2>
+
+  <p>Alle Funktionen von OmegaT stehen in der Menüleiste oberhalb des Editor-Fensters zur Verfügung.  Die meisten Funktionen sind auch über <a href=
+  "#shortcuts">Tastenkombinationen</a> verfügbar.  Eine Tastenkombination wird erzeugt, wenn man gleichzeitig auf die Taste <strong>STRG</strong> und einen Buchstaben tippt. Manche Tastenkombinationen setzen noch andere Tasten ein.  Die Buchstaben werden hier der Lesbarkeit wegen in der Großschrift geschrieben.  <strong>STRG</strong> wird unter Windows, UNIX und UNIX-ähnlichen Systemen benutzt, die Tastaturen mit einer <strong>STRG</strong> / <strong>Steuerungs</strong> Taste arbeiten. Mac Benutzer sollten statt dessen die Kombination &lt;<strong>cmd+Taste</strong> benutzen. Die <strong>cmd</strong> Taste ist auf Apple Tastaturen entweder mit <strong>command</strong> oder zeigt einen <strong>Apfel</strong>.</p>
+
+  <table width="400" border="1" cellpadding="3" cellspacing="0">
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p align="center"><a href="#ProjectMenu">Projekt</a></p>
+      </td>
+
+      <td>
+        <p align="center"><a href="#EditMenu">Bearbeiten</a></p>
+      </td>
+
+      <td>
+        <p align="center"><a href="#GoToMenu">Gehe zu</a></p>
+      </td>
+
+      <td>
+        <p align="center"><a href="#ViewMenu">Ansicht</a></p>
+      </td>
+
+      <td>
+        <p align="center"><a href="#ToolsMenu">Extras</a></p>
+      </td>
+
+      <td>
+        <p align="center"><a href="#OptionsMenu">Optionen</a></p>
+      </td>
+
+      <td>
+        <p align="center"><a href="#HelpMenu">Hilfe</a></p>
+      </td>
+    </tr>
+  </table>
+
+  <table border="0" cellpadding="5" cellspacing="0">
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="ProjectMenu" id="ProjectMenu"></a>Projekt</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Neu</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Erzeugt und öffnet ein neues Projekt.  Es handelt sich um denselben Dialog wie beim <a href="projectProperties.html">Projekt bearbeiten</a>. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Öffnen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+O</code></p>
+      </td>
+
+      <td>
+        <p>Öffnet ein zuvor geschaffenes Projekt. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Quelldateien importieren...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Die ausgewählten Dateien werden in das <code>/source</code> Verzeichnis kopiert, das Projekt wird danach erneut gestartet, um die neuen Dateien zu laden.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Aus MediaWiki importieren...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Einheiten von MediaWiki Seiten werden basierend auf der angegebenen URL importiert. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Erneut laden</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Lädt das Projekt erneut, um Änderungen in den Quelldateien, zusätzlichen TMs und in den Glossaren zu aktivieren. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Schließen</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Speichert die Übersetzung und schließt das Projekt ab.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Speichern</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+S</code></p>
+      </td>
+
+      <td>
+        <p>Speichert die Übersetzung in den TM-Speicher des Projektes. OmegaT speichert automatisch die TM Datei alle 10 Minuten oder wenn das Projekt oder OmegaT geschlossen wird.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Ziel-Dokumente erzeugen</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Erzeugt die Zieldokumente aus den Übersetzungen der Quelltexte.   Die übersetzten Dokumente befinden sich im Verzeichnis <code>/target</code>.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Eigenschaften</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+E</code></p>
+      </td>
+
+      <td>
+        <p>Zeigt den Dialog <a href="projectProperties.html">Projekteigenschaften</a> an, um die Projektsprachen und die Orte der Projektordner festzulegen.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Projektdateien...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+L</code></p>
+      </td>
+
+      <td>
+        <p>Schließt bzw. öffnet das <a href="userInterface.html#Project_Files">Projektdateifenster </a> (je nachdem, ob es geöffnet oder geschlossen ist). </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Beenden</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+Q</code></p>
+      </td>
+
+      <td>
+        <p>Speichert das Projekt und beendet OmegaT. Falls Sie das Projekt nicht manuell gespeichert haben, müssen Sie das Beenden bestätigen.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="EditMenu" id="EditMenu"></a>Bearbeiten</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <p>Hinweis: die Funktionen (ausschneiden/kopieren/einfügen) stehen wie in den meisten Programmen per Tastenkombination zur Verfügung, sie werden nur nicht extra im Menü aufgeführt.  Zum Beispiel:</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Kopieren</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+C</code></p>
+      </td>
+
+      <td>
+        <p>Kopiert den markierten Text in die Zwischenablage</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Ausschneiden</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+X</code></p>
+      </td>
+
+      <td>
+        <p>Kopiert den markierten Text in die Zwischenablage und löscht ihn dabei. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Einfügen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+V</code></p>
+      </td>
+
+      <td>
+        <p>Fügt den Text aus der Zwischenablage an der Kursorposition ein. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <p><strong>Das Bearbeiten Menü selber enthält folgende Posten::</strong></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Letzten Befehl rückgängig machen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+Z</code></p>
+      </td>
+
+      <td>
+        <p>Kehrt zurück zum Status vor der letzten Änderung. Nachdem das geänderte Segment bestätigt wurde, steht die Funktion nicht mehr zur Verfügung.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Letzten Befehl erneut anwenden</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+Y</code></p>
+      </td>
+
+      <td>
+        <p>Kehrt zurück zum Status bevor die letzte Aktion rückgängig gemacht wurde. Nachdem das geänderte Segment bestätigt wurde, steht die Funktion nicht mehr zur Verfügung.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Mit Treffer ersetzen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+R</code></p>
+      </td>
+
+      <td>
+        <p>Überschreibt das ganze Zielsegment mit dem ausgewählten Treffer (voreingestellt ist der erste Treffer).</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Treffer einfügen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+I</code></p>
+      </td>
+
+      <td>
+        <p>Fügt an der Cursor-Position den ausgewählten Treffer in das aktive Segment ein.  Diese Funktion wird Teile des Segmentes überschreiben, wenn sie gewählt wird. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Durch Quelle ersetzen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Shift+STRG+R</code></p>
+      </td>
+
+      <td>
+        <p>Überschreibt das ganze Zielsegment mit dem Quelltext. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Quelle einfügen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Umschalt+STRG+I</code></p>
+      </td>
+
+      <td>
+        <p>Fügt an der Cursor-Position den Quelltext in das aktive Segment ein. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Projekt durchsuchen...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+F</code></p>
+      </td>
+
+      <td>
+        <p>Öffnet ein neues <a href="userInterface.html#Search_Window">Suchfenster</a></p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Groß-/Kleinschreibung ändern...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>Umschalt + F3</code></p>
+
+        <p><code>(siehe Text)</code></p>
+      </td>
+
+      <td>
+        <p>Ändert den gekennzeichneten Text im Zieltext wie gewünscht (zu klein geschrieben, groß geschrieben oder als Titel). Mit Umschalt+F3 kann zwischen den Alternativen wechseln.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>den Treffer #N auswählen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+#N</code></p>
+      </td>
+
+      <td>
+        <p>(#N ist eine Zahl zwischen 1 und 5) - Aktiviert den Nten Treffer im Treffer-Fenster, so dass man ihn im nächsten Schritt einsetzen kann.  Das Kapitel <a href="userInterface.html#Fuzzy_Matches">Unscharfe Treffer</a> erklärt die Farbcodes genauer.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="GoToMenu" id="GoToMenu"></a>Gehe zu</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Nächstes nicht übersetztes Segment</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+U</code></p>
+      </td>
+
+      <td>
+        <p>Bewegt sich zum nächsten Segment ohne eine Entsprechung in der TM.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Nächstes Segment</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>&lt;STRG+N&gt;</code> oder <code>&lt;Enter&gt;</code> oder <code>&lt;Tab&gt;</code></p>
+      </td>
+
+      <td>
+        <p>Geht zum nächsten Segment.  Ist das aktive Segment das letzte Segment in der Datei, geht es zum ersten Segment der nächsten Datei. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Vorheriges Segment</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>&lt;STRG+P&gt;</code> oder <code>&lt;STRG+Enter&gt;</code> oder <code>&lt;STRG+Tab&gt;</code></p>
+      </td>
+
+      <td>
+        <p>Geht zum vorherigen Segment.  Ist das aktive Segment das erste in einer Datei, geht es zum letzten Segment der vorherigen Datei. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Segmentnummer...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+J</code></p>
+      </td>
+
+      <td>
+        <p>Das Segment mit der angegebenen Segment-Nummer wird aktiviert. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Zurück im Verlauf...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+Shift+P</code></p>
+      </td>
+
+      <td>
+        <p>OmegaT merkt sich die bearbeiteten Segmente. Mit diesem Befehl kann man sich ein oder mehrere Segmente zurück im Verlauf bewegen, um später zurück zum momentan aktiven Segment zu kommen. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Vor im Verlauf...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+Shift+N</code></p>
+      </td>
+
+      <td>
+        <p>Mit diesem Befehl kann man sich nach vorne zum Segment, das man mit  "Zurück im Verlauf" verlassen hat, bewegen.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="ViewMenu" id="ViewMenu"></a>Ansicht</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Übersetzte Segmente kennzeichnen</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Wenn aktiviert, werden übersetzte Segmente gelb gekennzeichnet. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Nicht übersetzte Segmente kennzeichnen</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Wenn aktiviert, werden nicht übersetzte Segmente violett gekennzeichnet. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Quellsegmente anzeigen</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Wenn aktiviert, werden Quell-Segmente angezeigt und grün gekennzeichnet.  Wenn deaktiviert, werden Quellsegmente nicht angezeigt. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="ToolsMenu" id="ToolsMenu"></a>Extras</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Tags prüfen</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+T</code></p>
+      </td>
+
+      <td>
+        <p>Überprüft formatierte Dateien nach fehlenden oder falsch eingetragenen Tags. Eine Liste aller Segmente mit Tag-Fehlern wird angezeigt.  Das Kapitel <a href=
+        "userInterface.html#Tag_Validation">Fenster der Tag-Prüfung</a> fasst zusammen, was Sie dort sehen und das Kapitel <a href="formattedText.html">Arbeiten mit formatierten Texten</a> sagt Ihnen warum.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="OptionsMenu" id=
+        "OptionsMenu"></a><code>Optionen</code></h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Tab zum Fortbewegen benutzen</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Das Segment wird mit der Taste <code>&lt;Tab&gt;</code> statt mit der üblichen <code>&lt;Enter&gt;</code> bestätigt. Diese Option ist hilfreich bei manchen chinesischen, koreanischen und japanischen Eingabesystemen. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Beenden immer bestätigen</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Das Programm wird vor dem Beenden immer nachfragen.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Schriftart...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Zeigt den Dialog  <a href="fontSettings.html">Schriftarteinstellungen</a>,  mit dem die Anzeigeschriftart angepasst werden kann.. Benutzer älterer Systeme sollten die Schriftart vor der Öffnung des Projektes ändern, weil es sonst zu spürbarer Verminderung der Leistung kommen kann.  Diese Minderungen sind in der Kombination G4 + Mac OS X + Japanisch am deutlichsten. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Dateifilter</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Zeigt den Dialog <a href="fileFilters.html">Dateifilter</a> an, um die Bearbeitung und das Parsing von Dateien zu konfigurieren.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Segmentierung...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Zeigt den Dialog <a href="segmentation.html">Quelltext-Segmentierung</a>, mit dem die Textsegmentierung konfiguriert wird.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Rechtschreibprüfung...</code></p>
+      </td>
+      <td width="17%"></td>
+
+      <td>
+        <p>Zeigt das <a href="spellchecker.html">Rechtschreibprüfung einstellen</a> Fenster, um die Rechtschreibprüfung zu installieren, konfigurieren und zu aktivieren.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Editierverhalten...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Zeigt den <a href="translationEditing.html">Übersetzung bearbeiten</a> Dialog zum Konfigurieren an.</p>
+
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Hauptfenster wiederherstellen</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Setzt die Komponenten (Editor, Treffer- und Glossar-Fenster) im Hauptfenster von OmegaT in den Ausgangszustand.  Benutzen Sie diese Möglichkeit, wenn eine oder mehrere Komponente abgestellt, bewegt oder verdeckt worden sind und Sie sie nicht mehr darstellen können, wie Sie wollen. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="HelpMenu" id="HelpMenu"></a>Hilfe</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td width="23%">
+        <p><code>Benutzerhandbuch...</code></p>
+      </td>
+
+      <td width="17%">
+        <p><code>F1</code></p>
+      </td>
+
+      <td>
+        <p>Öffnet in einem Extra Fenster den <a href="userInterface.html#Help_Browser">Hilfebrowser </a> mit diesem Handbuch.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td width="23%">
+        <p><code>Info...</code></p>
+      </td>
+
+      <td width="17%"></td>
+
+      <td>
+        <p>Zeigt Copyright, Verdienste und die Lizenzinformation.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="shortcuts" id="shortcuts"></a>Tastenkombinationen ("Shortcuts")</h2>
+
+  <p>Im Hauptfenster sind folgende Tastenkombinationen  verfügbar.  Ist ein anderes Fenster im Vordergrund, können Sie es mit <code><strong>Esc</strong></code> schließen, oder Sie klicken auf das Hauptfenster, um es in den Vordergrund zu bringen.  </p>
+
+  <p>Tastenkombinationen werden getätigt, wenn man gleichzeitig auf die Taste <code><strong>STRG</strong></code> und einen Buchstaben tippt. Manche Tastenkombinationen setzen noch andere Tasten ein.  Die Buchstaben werden hier der Lesbarkeit wegen in der Großschrift geschrieben. </p>
+
+  <p><strong><code>STRG</code></strong> wird unter Windows, UNIX und UNIX-ähnlichen Systemen benutzt, die Tastaturen mit Tasten <strong><code>Control</code></strong> bzw. <code><strong>STRG</strong></code>. Mac Benutzer sollten statt dessen die Kombination <code><strong>cmd+Taste</strong></code> benutzen. Die <code><strong>cmd</strong></code> Taste ist auf Apple Tastaturen entweder mit <code><strong>Befehl</strong></code> beziehungsweise mit  <strong>Apfel</strong> gekennzeichnet.</p>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">Projekt - Verwaltung</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">Bearbeiten</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">Herumbewegen</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">Referenzfenster</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">Sonstige</a></p>
+    </li>
+  </ul>
+
+  <table border="0" cellpadding="3" cellspacing="0">
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Project_management" id="Project_management"></a>Projekt - Verwaltung</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Projekt öffnen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+O</code></p>
+      </td>
+
+      <td>
+        <p>Zeigt den Dialog, um ein bestehendes Projekt zu öffnen</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Speichern</p>
+      </td>
+
+      <td>
+        <p><code>STRG+S</code></p>
+      </td>
+
+      <td>
+        <p>Speichert die erledigte Arbeit in die Datei project_save.tmx, die sich im /omegat Unterordner des Projektes befindet. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Projekteigenschaften</p>
+      </td>
+
+      <td>
+        <p><code>STRG+E</code></p>
+      </td>
+
+      <td>
+        <p>Zeigt die Projekteinstellungen, mit der Möglichkeit, sie zu ändern. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Editing" id="Editing"></a>Bearbeiten</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Letzten Befehl rückgängig machen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+Z</code></p>
+      </td>
+
+      <td>
+        <p>Macht die letzten Änderungen im aktiven Segment rückgängig. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Letzten Befehl erneut anwenden</p>
+      </td>
+
+      <td>
+        <p><code>STRG+Y</code></p>
+      </td>
+
+      <td>
+        <p>Wiederholt die Änderungen im aktiven Segment, die rückgängig gemacht worden sind. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Treffer Nr. #N auswählen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+#N</code></p>
+      </td>
+
+      <td>
+        <p>#N ist eine Ziffer zwischen 1 und 5.  Die Schnelltaste aktiviert den N<sup>ten</sup> Treffer (Treffer #1 wird als Grundeinstellung gewählt) </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Mit Treffer ersetzen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+R</code></p>
+      </td>
+
+      <td>
+        <p>Überschreibt das ganze Zielsegment mit dem ausgewählten Treffer (voreingestellt wird der erste Treffer gewählt).</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Treffer einfügen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+I</code></p>
+      </td>
+
+      <td>
+        <p>Überschreibt das ganze Zielsegment mit dem ausgewählten Treffer (voreingestellt wird der erste Treffer gewählt).</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Durch Quelle ersetzen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+Shift+R</code></p>
+      </td>
+
+      <td>
+        <p>Überschreibt das ganze Zielsegment mit dem Quelltext</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Quelle einfügen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+Shift+I</code></p>
+      </td>
+
+      <td>
+        <p>Fügt an der Cursor-Position den Quelltext in das aktive Segment. ein </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Projekt durchsuchen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+F</code></p>
+      </td>
+
+      <td>
+        <p>Zeigt den Dialog, um das Projekt durchzusuchen</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Moving_around"></a>Herumbewegen</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Nächstes nicht übersetztes Segment</p>
+      </td>
+
+      <td>
+        <p><code>STRG+U</code></p>
+      </td>
+
+      <td>
+        <p>Bewegt sich zum nächsten Segment, das nicht in der TM registriert ist</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Nächstes Segment</p>
+      </td>
+
+      <td>
+        <p><code>STRG+N<br> Enter Return</code></p>
+      </td>
+
+      <td>
+        <p>Bewegt das Editierfeld zum nächsten Segment</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Vorheriges Segment</p>
+      </td>
+
+      <td>
+        <p><code>STRG+P</code></p>
+      </td>
+
+      <td>
+        <p>Bewegt das Editierfeld zum vorherigen Segment</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Segmentnummer...</p>
+      </td>
+
+      <td>
+        <p><code>STRG+J</code></p>
+      </td>
+
+      <td>
+        <p>Geht zur angegebenen Segmentnummer</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Zurück im Verlauf...</p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+Shift+P</code></p>
+      </td>
+
+      <td>
+        <p>Geht ein Segment zurück im Verlauf.</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Vor im Verlauf...</p>
+      </td>
+
+      <td width="17%">
+        <p><code>STRG+Shift+N</code></p>
+      </td>
+
+      <td>
+        <p>Geht ein Segment vor im Verlauf. </p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Reference_windows" id="Reference_windows"></a>Referenzfenster</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Zeigt die Tabelle mit den Projektdateien</p>
+      </td>
+
+      <td>
+        <p><code>STRG+L</code></p>
+      </td>
+
+      <td>
+        <p>Zeigt die Tabelle mit den Projektdateien</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td colspan="3">
+        <hr>
+
+        <h3><a name="Other" id="Other"></a>Sonstige</h3>
+      </td>
+    </tr>
+
+    <tr bgcolor="#DDDDDD">
+      <td>
+        <p>Tags prüfen</p>
+      </td>
+
+      <td>
+        <p><code>STRG+T</code></p>
+      </td>
+
+      <td>
+        <p>Öffnet das <a href="userInterface.html#Tag_Validation">Tag Prüfung</a> Fenster</p>
+      </td>
+    </tr>
+
+    <tr bgcolor="#FFFFFF">
+      <td>
+        <p>Hilfedateien</p>
+      </td>
+
+      <td>
+        <p><code>F1</code></p>
+      </td>
+
+      <td>
+        <p>Öffnet in einem Extra Fenster die Hilfedateien</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

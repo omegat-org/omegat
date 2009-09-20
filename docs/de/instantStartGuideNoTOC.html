@@ -1,83 +1,84 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+	<link rel="stylesheet" href=" OmegaT.css" type="text/css">
 	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Kurzeinführung - OmegaT 1.8 Benutzerhandbuch</title>
+	<title>Schnellstart Einführung - OmegaT 1.8 Benutzerhandbuch</title>
 </head>
 
 <body>
-		<h2>Erlernen Sie den Umgang mit OmegaT in 5 Minuten! Kurzeinführung</h2>
-		<p>Diese Kurzeinführung behandelt nur die absoluten Grundlagen. Im Idealfall sollten Anwender das Benutzerhandbuch lesen, um sich mit allem, was OmegaT zu bieten hat, vertraut zu machen. Die hierin beschriebenen Tastenkombinationen folgen dem Schema "Strg+Taste". Für Mac-Anwender gilt stattdessen "cmd+Taste". Die "cmd" Taste ist mit "Befehl" gekennzeichnet oder zeigt einen Apfel.</p>
+		<h2>Erlernen Sie den Umgang mit OmegaT in 5 Minuten!<br> - Schnellstart Einführung</h2>
+		<p>Die Schnellstart Einführung kann nur die Grundlagen erklären.  Im Idealfall sollten Anwender das Benutzerhandbuch lesen, um sich mit allem, was OmegaT zu bieten hat, vertraut zu machen. Die hierin beschriebenen Tastenkombinationen folgen dem Schema "STRG+Taste". Für Mac-Anwender gilt stattdessen "cmd+Taste". Die "cmd" Taste ist mit "Befehl" gekennzeichnet oder zeigt einen Apfel.</p>
 		<hr>
 		<a name="summary" id="summary"></a>
-		<h2>Kurz und knapp: Wie OmegaT funktioniert</h2>
-		<p>Die OmegaT Oberfläche ist ein in drei Fenster aufgeteiltes Feld. Jedes dieser Fenster kann mithilfe der Maus in der Größe verändert werden. Auf der linken Seite befindet sich der "Editor", in den die Übersetzung eingegeben wird. Auf der rechten Seite oben befindet sich das "Match Viewer"-Fenster, in welchem Treffer aus der Translation Memory (TM) angezeigt werden. Darunter ist das "Glossary Viewer"-Fenster, das Übereinstimmungen mit dem Glossar anzeigt.</p>
-		<p>Das Editor-Fenster enthält den Ausgangstext in satzweiser Segmentierung (oder nach Absätzen). Diese Segmente werden nacheinander übersetzt. Ihre Übersetzungen werden dann Segment für Segment in einer "Translation Memory" (TM) gespeichert. Nachdem alle Segmente übersetzt wurden (oder vorher, wenn gewünscht), wird OmegaT die übersetzten Dokumente mithilfe der TM im Ordner "Target" erstellen.</p>
-		<p>In OmegaT werden Übersetzungen in so genannten Übersetzungsprojekten angelegt. Für jedes Projekt erstellt OmegaT einen Satz an Ordnern. In diesen Ordnern werden die zu übersetzenden Ausgangsdokumente, etwaige von Ihnen verwendete Glossare und TM's, die Sie evtl. einsetzen möchten, abgelegt. OmegaT erstellt auch einen Ordner namens "Target", in dem die fertig übersetzten Dokumente abgelegt werden.</p>
+		<h2>Kurz, wie OmegaT arbeitet</h2>
+		<p>Die OmegaT Benutzeroberfläche besteht aus drei einzelnen Fenstern.  Jedes dieser Fenster kann mithilfe der Maus in der Größe verändert werden. Auf der linken Seite befindet sich der "Editor", in den die Übersetzung eingegeben wird. Auf der rechten Seite oben befindet sich das "Treffer"-Fenster, in welchem Treffer aus der Translation Memory (TM) angezeigt werden. Darunter ist das "Glossar"-Fenster, das Übereinstimmungen mit dem Glossar anzeigt.</p>
+		<p>Im Editor-Fenster werden die Quelltexte, in einzelne Sätze (oder Absätze) 'segmentiert', gezeigt.  Diese Segmente werden nacheinander übersetzt. Wenn Sie vom übersetzten Segment zum nächsten übergehen, wird Ihre Übersetzung in einem Übersetzungsspeicher / translation memory, kurz TM abgespeichert.  Sobald alle Segmente übersetzt worden sind (oder vorher, wenn man so will), wird OmegaT TM verwenden, um das übersetzte Dokument bzw. Dokumente in einem "Ziel"-Ordner zu erzeugen.</p>
+		<p>OmegaT organisiert Ihre Übersetzungsarbeit in so genannten Übersetzungsprojekten.  Für jedes Projekt erzeugt OmegaT eine Reihe von Ordnern.  In diesen Ordnern werden die zu übersetzenden Ausgangsdokumente, etwaige von Ihnen verwendete Glossare und TM's, die Sie evtl. einsetzen möchten, abgelegt. OmegaT erzeugt auch einen "Ziel"-Ordner, der für übersetzten Enddokumente bestimmt ist.</p>
 		<hr>
 		<a name="translate" id="translate"></a>
-		<h2>Übersetzen mit OmegaT</h2>
+		<h2>Wie man mit Hilfe von OmegaT übersetzt</h2>
 		<a name="create" id="create"></a>
-		<h3>Erstellen und Öffnen eines neuen Projektes</h3>
-		<p>Wählen Sie im Menü <strong>Projekt → Neu...</strong> aus.</p>
-		<p>Gehen Sie zum Ordner, in dem Sie die Projektdateien speichern möchten und geben Sie einen Namen für das Übersetzungsprojekt an. Dieser Name wird für den Hauptordner des Projekts benutzt; alle Projektdateien werden in diesem oder seinen Unterordnern gespeichert.</p>
-		<p>OmegaT wird Sie auffordern, die zu erstellenden Projektordner zu bestätigen oder zu verändern, und dabei den unten stehenden Dialog verwenden:</p>
-		<p align="center"><img src="images/NewProject.png" name="graphics1" alt="Fenster der Projekteinstellungen" align="bottom" border="0" id="graphics1"></p>
-		<p>Sie können die Lage der Unterordner einfach übernehmen, vergewissern Sie sich aber zuerst, dass die Codes für Ausgangs- und Zielsprache korrekt sind. Wählen Sie den Sprachcode (2 Buchstaben) oder den Sprach- und Ländercode (2 + 2 Buchstaben) aus der Dropdown-Liste, oder tippen Sie einen manuell ein (halten Sie das 2 Buchstaben Muster ein). Merken Sie sich, wo sich der Unterordner "Target" befindet (in dem sich Ihre übersetzten Dateien befinden werden). Wenn Sie möchten, dass OmegaT satz- anstatt abschnittsweise segmentiert, ist es sinnvoll, die Segmentierungsregeln erneut zu überprüfen.</p>
-		<p>Nachdem Sie auf OK geklickt haben, um die Projekteinstellungen zu akzeptieren, wird OmegaT Sie auffordern, die Ausgangsdokumente auszuwählen, um diese zu importieren. Sie können einzelne Dateien importieren, oder Sie können komplette Verzeichnisbäume (mit allen Dateien in allen Unterverzeichnissen) importieren.  Sollten Sie aus Versehen die falschen oder zu viele Dokumente importiert haben, können Sie diese einfach aus dem Verzeichnis "Source" Ihres OmegaT-Projektes löschen (benutzen Sie dafür z.B. den Dateimanager Ihres Systems).</p>
-		<p>Die Liste der zu übersetzenden Dateien kann im Fenster <strong>Projektdateien</strong> überprüft werden (Menü: <strong>Projekt → Projektdateien...</strong>, falls das Fenster sich nicht automatisch öffnet). Wenn Sie den Inhalt des Ordners "Source" ändern mussten, sollten Sie nicht vergessen, das Projekt zuerst neu zu laden (Menü: <strong>Projekt → Projekt neu laden</strong>). Als Grundeinstellung öffnet OmegaT die erste Datei in der Projektliste. Bedenken Sie: OmegaT kann nur Dateien in den unten aufgelisteten Formaten übersetzen, vorausgesetzt, sie entsprechen den Mustern, die in Dateifiltern definiert sind. Alle anderen Dateien werden ignoriert.</p>
+		<h3>Erzeugen und öffnen Sie ein neues Projekt</h3>
+		<p>Wählen Sie <strong>Projekt - Neu...</strong> im Menü aus.</p>
+		<p>Navigieren Sie in den Ordner, wo Sie die Projektdateien speichern wollen, und tragen Sie den Namen für das Übersetzungsprojekt ein.  Dieser Name wird für den Hauptprojektordner verwendet; alle Projektdateien werden in diesem Ordner bzw. in seinen Unterordnern gespeichert. </p>
+		<p>OmegaT wird Sie auffordern, die zu schaffenden Projektordner zu bestätigen oder mit Hilfe des folgenden Dialoges zu ändern:</p>
+		<p align="center"><img src="images/NewProject.png" name="graphics1" alt="Projekteigenschaftsfenster" align="bottom" border="0" id="graphics1"></p>
+		<p>Sie können die Lage der Unterordner einfach übernehmen, vergewissern Sie sich aber zuerst, dass die Codes für Ausgangs- und Zielsprache korrekt sind. Wählen Sie den Sprachcode (2 Buchstaben) oder Code der Sprache-und-Gebiets-Code (2 + 2 Buchstaben) aus der Auswahlliste, oder tippen Sie sie ein (bleiben Sie beim 2-stelligen Muster).  Merken Sie sich, wo sich der Unterordner "Target" befindet (in dem sich Ihre übersetzten Dateien befinden werden). Wenn Sie wollen, dass OmegaT statt "absatzweise" satzweise teilt, ist es eine gute Idee, die Segmentierungsregeln noch mal zu überprüfen. </p>
+		<p>Wenn Sie OK klicken, um die Projekteinstellung zu akzeptieren, wird OmegaT Sie auffordern, die Quelldokumente für den Import auszuwählen.  Sie können einzelne Dateien importieren, oder Sie können komplette Verzeichnisbäume (mit allen Dateien in allen Unterverzeichnissen) importieren.  Sollten Sie aus Versehen die falschen oder zu viele Dokumente importiert haben, können Sie diese einfach aus dem Verzeichnis "Source" Ihres OmegaT-Projektes löschen (benutzen Sie dafür z.B. den Dateimanager Ihres Systems).</p>
+		<p>Um die Liste der zu übersetzenden Dateien zu überprüfen, können Sie das Fenster <strong>Projektdateien</strong> anschauen (Menü: <strong>Projekt → Projektdateien..</strong>, wenn es sich nicht von sich selber öffnet). Mussten Sie die Inhalte des Quell-Ordners ändern, vergessen Sie nicht, das Projekt erneut zu laden (Menü: <strong>Projekt → Neu laden</strong>).  OmegaT öffnet standardmäßig die erste Datei in der Projektliste.  Bedenken Sie: OmegaT kann nur Dateien in den unten aufgelisteten Formaten übersetzen, vorausgesetzt, sie entsprechen den Mustern, die in Dateifiltern definiert sind. Alle anderen Dateien werden ignoriert. </p>
 		<ul>
 			<li>OpenDocument/OpenOffice.org
-			</li><li>Reiner Text</li><li>Einsprachige .po</li><li>Bundle.properties Java
+			</li><li>Reintext</li><li>Monolingual .po
+			</li><li>Bundle.properties Java
 			</li><li>XHTML, HTML
 			</li><li>HTML Hilfe Erstellung</li><li>INI ('Schlüssel=Wert' Format)</li><li>DocBook
 			</li><li>Microsoft Open XML
 			</li><li>Okapi einsprachige XLIFF</li></ul>
 		<a name="segments" id="segments"></a>
 		<h3>Übersetzen Sie ein Segment nach dem anderen</h3>
-		<p>Nachdem Sie das Projekt und die zu übersetzenden Dateien festgelegt haben, öffnet OmegaT die erste Ausgangsdatei im Editor. Das erste Segment wird grün unterlegt dargestellt; eine Kopie des Ausgangstextes erscheint im "Zielfeld" darunter. (An diesem Punkt wird der ganze Text außerhalb des Zielfeldes geschützt und kann nicht überschrieben werden.) Die Übersetzung wird zwischen den Tags <code>&lt;Segment 0001&gt;</code> und <code>&lt;Segmentende&gt;</code> eingetippt und dabei wird der Ausgangstext überschrieben. "<strong>ENTER</strong>" drücken, um zum nächsten Segment zu gelangen. Hinweis:</p>
+		<p>Sobald Sie das Projekt und die zu übersetzenden Dateien definiert haben, wird OmegaT die erste Quelldatei im Editor öffnen.  Das erste Segment wird in grün hervorgehoben; eine Kopie des Quelltexts wird darunter, im "Zielfeld" angezeigt. (An diesem Punkt wird der ganze Text außerhalb des Zielfeldes geschützt und kann nicht überschrieben werden.) Die Übersetzung wird zwischen den Tags <code>&lt;Segment 0001&gt;</code> und <code>&lt;Segmentende&gt;</code> eingetippt und dabei wird der Quelltext überschrieben. "<strong>ENTER</strong>" drücken, um zum folgenden Segment zu übergehen.  Hinweis:</p>
 		<ul>
-			<li>Um zu einem anderen Teil des Textes, entweder oben oder unten, zu gelangen, klicken Sie doppelt auf den Satz oder Paragrafen, den Sie öffnen möchten. </li><li>Wenn Sie es vorziehen, in ein leeres Zielfeld hinein zu übersetzen, können Sie das in <strong>Optionen → Editierverhalten...</strong> einstellen.</li></ul>
+			<li>Um sich zu einem anderen Teil des Textes, entweder oben oder unten, zu bewegen, auf den Satz oder Paragrafen, den Sie öffnen möchten, doppelklicken. </li><li>Wenn Sie es vorziehen, in ein leeres Zielfeld hinein zu übersetzen, können Sie das in <strong>Optionen → Editierverhalten...</strong> einstellen.</li></ul>
 		<p>Wenn Sie "<strong>ENTER</strong>" drücken, geschehen einige Dinge unsichtbar: OmegaT fügt das Segmentpaar (das Ausgangssegment und seine Übersetzung) zur TM hinzu und übersetzt automatisch irgend welche identischen Segmente, die es in den anderen Projektdateien findet. Außerdem werden TM und Glossare auf Treffer für das nächste, noch nicht übersetzte Segment durchsucht.</p>
 		<a name="tm" id="tm"></a>
 		<h3>Verwendung von Übereinstimmungen aus TM und Glossar</h3>
 		<a name="tm_matches" id="tm_matches"></a>
 		<h3>Übereinstimmungen mit Translation Memory (TM)</h3>
-		<p>Wenn OmegaT sog. Fuzzy Matches (30 %ige oder höhere Gleichheit) für das nächste Segment findet, werden diese im Match Viewer angezeigt. Der erste Treffer im Match Viewer ist standardmäßig bereits ausgewählt. Um Übereinstimmungen aus diesem Fenster in das Übersetzungsfeld einzufügen, können Sie Tastenkombinationen verwenden:</p>
+		<p>Wenn OmegaT irgendwelche unscharfe Treffer (30 % Ähnlichkeit oder mehr) für das folgende Segment in der Translation Memory findet, zeigt es sie im Treffer-Fenster.  Der erste Treffer im Treffer-Fenster ist standardmäßig ausgewählt.  Um den übereinstimmenden Vorschlag aus dem Treffer Fenster in Ihr Zielfeld zu kopieren, benutzen Sie folgende Tastenkombinationen</p>
 		<ul>
-			<li>Drücken Sie <code>Strg+I</code> um den vorausgewählten Treffer an der Cursorposition einzufügen, oder...</li><li>Drücken Sie <code>Strg+R</code> um das gesamte Segment mit dem vorausgewählten Treffer zu überschreiben.</li></ul>
-		<p>Wenn mehrere Treffer vorliegen und Sie einen anderen als den vorausgewählten verwenden möchten:</p>
+			<li>Drücken Sie <code>STRG+I</code>, um den ausgewählten Treffer an der Cursor-Stelle einzufügen, oder...</li><li>Drücken Sie <code>STRG+R</code>, um das komplette Segment mit dem ausgewählten Treffer zu ersetzen.</li></ul>
+		<p>Wenn mehrere Treffer gefunden worden sind und Sie es vorziehen, den vorausgewählten Treffer nicht zu verwenden:</p>
 		<ul>
-			<li>Wählen Sie den Treffer aus dem Match Viewer aus, den Sie einfügen möchten: <code>Strg+2</code> für den zweiten angezeigten Treffer, <code>Strg+3</code> für den dritten Treffer, usw.</li><li>Drücken Sie dann <code>Strg+I</code> oder <code>Strg+R</code> wie oben beschrieben.</li></ul>
-		<p>(Sie können OmegaT auch so einstellen, dass der erste Treffer, der oberhalb einer gewissen Schwelle liegt, automatisch in das Übersetzungsfeld eingefügt wird, sobald Sie dies öffnen. Diese Einstellung finden Sie unter <strong>Optionen → Editierverhalten...</strong>)</p>
+			<li>Wählen Sie die von Ihnen gewünschte Alternative im Treffer-Fenster: z.B. <code>STRG+2</code> für den zweiten, <code>STRG+3 </code> für den dritten Treffer usw.</li><li>Dann verwenden Sie die <code>STRG+I</code> oder <code>STRG+R</code> } Tastenkombination so wie oben.</li></ul>
+		<p>(Sie können OmegaT bei jedem neu geöffneten Segment die erste Wahl über einem von Ihnen angegebenen Prozentsatz automatisch ins Zielfeld einfügen lassen.  Diese Möglichkeit wird in <strong>Optionen → Editierverhalten...</strong>eingestellt). </p>
 		<a name="gloss_matches" id="gloss_matches"></a>
-		<h3>Übereinstimmungen mit dem Glossar</h3>
-		<p>100% Treffer aus dem Glossar werden als Referenz im Glossary Viewer dargestellt. Sie können nicht mittels Tastenkombination übertragen werden.</p>
+		<h3>Treffer im Glossar</h3>
+		<p>Findet OmegaT 100%-Treffer im Glossar, werden sie zur Referenz im Glossar-Fenster gezeigt.  Tastenkombinationen zum Eintragen ins Zielsegment gibt es leider noch keine. </p>
 		<a name="searches" id="searches"></a>
-		<h3>Anwendung von Suche</h3>
-		<p>OmegaT hat ausgefeilte Suchfunktionen. Die Suchfunktion wird mit <code>Strg+F</code> aufgerufen, dann das zu suchende Wort oder den Satz in das Feld "Suche nach" eingeben. Wahlweise kann ein Wort oder ein Satz im Editierfeld markiert (Zieltext des aktiven Segments) und <code>Strg+F</code> gedrückt werden. Das Wort oder der Satz wird in diesem Fall automatisch in das Feld "Suche nach" eingegeben.</p>
+		<h3>Einsatz von Suche</h3>
+		<p>OmegaT verfügt über starke Such-Funktionen. Rufen Sie mit <code>STRG+F</code> das Suchfenster auf und geben Sie im Feld "Suche nach" das Wort oder den Ausdruck ein, nach dem Sie suchen möchten. Alternativ dazu können Sie ein Wort oder einen Ausdruck im Bearbeitungsfeld (Zieltextfeld des aktiven Segments) auswählen und <code>STRG+F</code> drücken.  Dabei wird das Wort oder der Ausdruck automatisch im Feld "Suchen nach" eingetragen. </p>
 		<a name="create_trans" id="create_trans"></a>
-		<h3>Erstellen der übersetzten Dokumente</h3>
-		<p>Nach Übersetzung aller Segmente (oder, auf Wunsch, auch schon früher) aktualisiert OmegaT das/die Zieldokument(e) mithilfe der Übersetzungen, die im TM gespeichert sind. Dazu wählen Sie aus dem Menü <strong>Projekt → Zieldokumente erstellen</strong>. OmegaT erstellt dann Übersetzungen aller Dokumente, die sich im Ordner "Source" befinden und mittels OmegaT übersetzt werden können, ganz gleich ob sie bereits vollständig übersetzt sind oder nicht. Die ganz oder teilweise übersetzten Dokumente werden dann im Ordner "Target" abgelegt. Um die Übersetzung abzuschließen, öffnen Sie die Zieldateien in den jeweiligen Anwendungen (Browser, Textverarbeitungsprogramm...), um den Inhalt und die Formatierungen zu überprüfen. Sie können dann etwaige Änderungen in OmegaT anbringen. Vergessen Sie nicht, die Zieldokumente anschließend wieder neu zu erstellen.</p>
+		<h3>Ziel-Dokumente erzeugen</h3>
+		<p>Hit] Nachdem Sie alle Segmente übersetzt haben (oder auch früher, wenn Sie wünschen), wird OmegaT mit Hilfe der in der Translation Memory gespeicherten Übersetzungen das Zieldokument bzw. die Zieldokumente aktualisieren.  Dazu wählen Sie aus dem Menü <strong>Projekt → Zieldokumente erstellen</strong>. OmegaT erstellt dann Übersetzungen aller Dokumente, die sich im Ordner "Source" befinden und mittels OmegaT übersetzt werden können, ganz gleich ob sie bereits vollständig übersetzt sind oder nicht. Ganz oder teilweise übersetzte Dateien werden dabei in dem Zielordner des Projektes erzeugt.  Um Ihre Übersetzung zu Ende zu führen, öffnen Sie bitte die Zieldateien in den entsprechenden Anwendungen (Browser, Textverarbeitungsprogramm...), um den Inhalt und die Formatierung der Übersetzungen zu überprüfen.  Sie können dann zu OmegaT zurückkehren, um die Übersetzung zu verbessern; vergessen Sie dabei nicht, die Dokumente erneut zu anlegen zu lassen. </p>
 		<hr>
 		<a name="tags" id="tags"></a>
-		<h2>Wie Text mit "tags" gehandhabt wird</h2>
-		<p>OmegaT stellt mit Markierung durch sog. "Tags" sicher, dass die Formatierung der Ausgangsdokumente (Fettschrift, Kursivschrift, usw.) nicht verloren geht. OmegaT "Tags" sind aus einem oder mehreren Buchstaben, gefolgt von einer oder mehreren Zahlen zusammengesetzt, wobei das "/" Zeichen zum Schließen dient (zum Beispiel: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; etc.). Behandeln Sie diese Tags mit Vorsicht und stellen Sie sicher, dass sie auch in den Zielsegmenten korrekt enthalten sind  (Siehe<em>Tag Operationen</em>).</p>
+		<h2>Wie Text mit "Tags" gehandhabt wird</h2>
+		<p>OmegaT stellt mit Spezialtags sicher, dass die Formatierung der Quelltexte (fett, kursiv usw.) erhalten bleibt.  OmegaT Tags werden aus einem oder mehreren Buchstaben zusammengesetzt, mit einer oder mehreren Ziffern; es wird auch das "/" Zeichen benutzt (zum Beispiel: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; usw.). Behandeln Sie diese Tags mit Vorsicht und stellen Sie sicher, dass sie auch in den Zielsegmenten korrekt enthalten sind  (Siehe <em>Tag Operationen</em>).</p>
 		<a name="example" id="example"></a>
 		<h3>Ein Beispiel...</h3>
-		<p>In diesen Beispielen sind Tags hervorgehoben, damit sie leichter erkannt werden; in OmegaT selber gibt es aber keine besondere Hervorhebung für Tags. Die HTML Tags, die in <font color="blue">blau </font>hevorgehoben sind, werden von OmegaT ignoriert, da sie das gesamte Segment einnehmen. Die Tags, die unten in <font color="green">grün</font> hervorgehoben sind, müssen behandelt werden, weil sie in einem Segment liegen. Hier ein Beispiel eines Segments in HTML:</p>
-		<p><font color="blue">&lt;p&gt;</font>Eine andere Schriftart kann im Dialog &lt;f1&gt;&lt;b&gt;&lt;/f1&gt;Schriftart anzeigen&lt;f2&gt;&lt;/b&gt;&lt;/f2&gt; ausgewählt werden. Öffnen Sie es mit  dem Menüelement <font color="green">&lt;i&gt;</font>Optionen&lt;f4&gt;&lt;/i&gt;&lt;/f4&gt; &amp;gt; &lt;f5&gt;&lt;i&gt;&lt;/f5&gt;Schriftart anzeigen...<font color="green">&lt;/i&gt;</font> . Schriftart und -größe kann in diesem Dialog geändert werden.&lt;f7&gt;&lt;/p&gt;&lt;/f7&gt;</p>
-		<p>So wird es in OmegaT angezeigt, wobei die Übersetzung in Afrikaans ist:</p>
+		<p>In diesen Beispielen haben wir Tags hervorgehoben, um sie leichter zu erkennen, in OmegaT werden sie nicht hervorgehoben.  Die <font color="blue">blauen</font> HTML-Tags werden von OmegaT ignoriert, da sie das Segment komplett einschließen. Die Tags, die unten in <font color="green">grün</font> hervorgehoben sind, müssen behandelt werden, weil sie in einem Segment liegen. Hier ist ein Beispiel für ein Segment im HTML:</p>
+		<p><font color="blue"><code>&lt;p&gt;</code></font><code>Eine andere Schriftart kann im Dialog </code> <font color="green"><code>&lt;b&gt;</code></font><code>Anzeige der Schriftart</code><font color="green"><code>&lt;/b&gt;</code></font><code> gewählt werden. Öffnen Sie ihn mit dem Menüelement </code> <font color="green"><code>&lt;i&gt;</code></font><code>Optionen</code><font color="green"><code>&lt;/i&gt;</code></font><code> →</code> <font color="green"><code>&lt;i&gt;</code></font><code>Anzeige der Schriftart...</code><font color="green"><code>&lt;/i&gt;</code></font><code>. Schriftart und -größe kann in diesem Dialog geändert werden.</code><font color="blue"><code>&lt;/p&gt;</code></font></p>
+		<p>Hier ist die Anzeige in Omegat (Englisch), die Übersetzung in Afrikaans:</p>
 		<br>
 		<p><img src="images/tagged_segment.png" alt="" height="150" width="592" border="0"></p>
 		<br>
-		<p>Nachdem OmegaT die Zieldokumente erstellt hat, sieht die HTML-Ausgabe folgendermaßen aus:</p>
+		<p>Wenn OmegaT das übersetzte Dokument erstellt hat, wird das HTML wie folgt aussehen:</p>
 		<p><img src="images/tagged_segment_target.png" alt="" height="122" width="592" border="0"></p>
 		<a name="tag_verif" id="tag_verif"></a>
-		<h3>Verifizierung von Tags</h3>
-		<p>OmegaT erkennt fehlerhafte Tags im übersetzten Dokument nicht automatisch. Vor Abgabe des übersetzten Dokuments sollten Sie prüfen, ob Tag-Fehler vorliegen.</p>
-		<p>Wählen Sie aus dem Menü <strong>Extras → Tags prüfen</strong> aus. Bei vorliegenden Fehlern erscheint eine Tabelle, die Segmente zeigt, bei denen die Tags in Ausgangs- und Zieltext nicht übereinstimmen. Klicken Sie auf die Segmentnummer. Im Editor-Fenster wird dann automatisch das fragwürdige Segment geöffnet, und Sie können die Tags korrigieren.</p>
-		<p>In manchen Fällen können Tag-Fehler das Öffnen der übersetzten Dokumente unmöglich machen. Sie sollten daher vor dem Erstellen der Zieldokumente überprüfen, ob Sie alle Tag-Fehler korrigiert haben. Schließlich sollte auch immer die Formatierung überprüft werden, indem das übersetzte Dokumente in der jeweiligen Anwendung geöffnet wird.</p>
+		<h3>Tags-Überprüfung</h3>
+		<p>Die Tag-Fehler im übersetzten Dokument werden von OmegaT nicht automatisch erkannt.  Vor Abgabe des übersetzten Dokuments sollten Sie prüfen, ob Tag-Fehler vorliegen.</p>
+		<p>Im Menü <strong>Extras→ Tags prüfen</strong> wählen - oder die Abkürzung STRG+T  benutzen. Ein Tabelle mit den Segmenten, die Unterschiede zwischen Tags in der Quelle und dem Ziel aufweisen, wird geöffnet.  Klicken Sie auf die Segment-Zahl.  Sie werden automatisch zum fehlerhaften Segment im Editor geführt, um die Tags zu korrigieren. </p>
+		<p>In einigen Fällen können Tag-Fehler verhindern, dass ein Dokument geöffnet wird.  Sie sollten deshalb sicherstellen, dass Sie alle Tag-Fehler korrigiert haben, bevor Sie die übersetzten Dateien erzeugen.  Letztendlich sollten Sie immer die endgültige Formatierung noch mal kontrollieren, indem Sie das übersetzte Dokument in der entsprechenden Anwendung bzw. Editor öffnen. </p>
 		<hr>
 	</body>
 </html>

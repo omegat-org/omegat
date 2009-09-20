@@ -1,0 +1,39 @@
+<html>
+<head>
+	<link rel="stylesheet" href=" OmegaT.css" type="text/css">
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<title>Datenverlust vermeiden - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
+<body>
+
+	<h2>Vermeiden von Datenverlust </h2>
+		<p>OmegaT ist eine robuste Anwendung.  Dennoch sollten Sie Vorsichtsmaßnahmen gegen Datenverlust beim Arbeiten mit OmegaT ergreifen, genau so wie mit jeder anderen Anwendung. Wenn Sie Ihre Dateien übersetzen, speichert OmegaT Ihren Fortschritt in der Translation Memory  <code>project_save.tmx</code>  im <code>/omegat</code> Unterverzeichnis Ihres Projekts.</p>
+		<p>OmegaT erstellt zugleich Sicherheitskopien von <code>project_save.tmx.YEARMMDDHHNN.bak</code> im gleichen Unterverzeichnis jedes Mal wenn ein Projekt geöffnet oder neu geladen wird. <code>YEAR</code> ist Jahr (4 Ziffer), <code>MM</code> ist der Monat <code>DD</code> der Tag des Monats und <code>HH</code> und <code>NN</code> sind Stunden und Minuten, wann die Kopie der  Translation Memory gespeichert wurde.</p>
+		<p>Wenn Sie meinen, dass Sie Daten der Übersetzung verloren haben, gehen Sie wie folgt vor:<ol>
+			<li>Schließen Sie das Projekt</li>
+			<li>Benennen Sie die <code>project_save.tmx</code> Datei zu etwas um, an das Sie sich leicht erinnern (z.B. <code>project_save.tmx.temporary</code> </li>
+			<li>Wählen Sie die Sicherheitskopie der TM aus, die am wahrscheinlichsten alle Daten enthält, die Sie vermissen </li>
+			<li>Nennen Sie die Datei in <code>project_save.tmx</code> um</li>
+			<li>Öffnen Sie das Projekt</li>
+		</ol>
+		<p>Um wichtige Daten nicht zu verlieren:</p>
+		<ul>
+		<li>Erstellen Sie regelmäßige Sicherungskopien der Datei <code>/omegat/project_save.tmx</code>, z.B. auf einer CD oder DVD.</li>
+		<li>Bis Sie mit OmegaT vertraut sind, exportieren Sie die Zieldokumente in regelmäßigen Abständen und überprüfen Sie, ob die erzeugten Dateien die neueste Version der Übersetzung enthalten. </li>
+		<li>Seien Sie besonders vorsichtig, wenn Sie mitten im Projekt an den Dateien im Verzeichnis <code>/source</code> Änderungen vornehmen. Wenn die Quelldatei, nachdem mit der Übersetzung begonnen wurde, verändert wird, kann es dazu kommen, dass OmegaT ein bereits übersetztes Segment nicht mehr findet. </li>
+		<li>Fangen Sie mit der Unterstützung der Hilfe Texte an.  Wenn Sie auf Probleme stoßen, schicken Sie eine Nachricht an die <a href="http://groups.yahoo.com/group/OmegaT/">OmegaT Benutzergruppe</a>. Sie können ruhig in der Sprache, mit der Sie am vertrautesten sind, schreiben. </li>
+	</ul>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

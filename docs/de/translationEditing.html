@@ -1,0 +1,93 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Übersetzung bearbeiten - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
+
+<body>
+  <h2>Verhalten des Editierfeldes </h2>
+
+  <ul>
+    <li>
+      <p><a href="#auto_insert">Automatische Einfügung der Treffer</a></p>
+    </li>
+
+    <li>
+      <p><a href="#validation">Nicht zu modifizierende Segmente</a></p>
+    </li>
+  </ul>
+
+  <p>Das Editierfeld kann sich auf folgende Art und Weisen verhalten:</p>
+
+  <ul>
+    <li>
+      <p>Automatisch den besten verfügbaren Treffer einfügen</p>
+    </li>
+
+    <li>
+      <p>Die dem Original identische Segmente sind als übersetzt zu betrachten</p>
+    </li>
+  </ul>
+  <hr>
+
+  <h2><a name="auto_insert" id="auto_insert"></a>Automatische Einfügung der Treffer</h2>
+
+  <p>Sie übersetzen Ihre Dateien, indem Sie sich von Segment zu Segment bewegen und dabei das gegenwärtigen Segment bearbeiten.  Wenn Sie sich zwischen Segmenten bewegen, könnten Sie es sich wünschen, dass das Editiefeld mit der vorhandenen Übersetzung oder mit dem Quelltext gefüllt würde.</p>
+
+  <p>In <strong>Optionen → Editierverhalten...</strong> gibt OmegaT Ihnen folgende Möglichkeiten:</p>
+
+  <table cellpadding="2" cellspacing="2">
+    <tr valign="top">
+      <td>
+        <p><strong>Der Quelltext</strong></p>
+      </td>
+
+      <td>
+        <p>Sie können das Editierfeld automatisch mit dem Quelltext ausfüllen lassen.  Das ist recht nützlich z. B. für Texte mit vielen Warenzeichen und anderen Eigennamen, die unverändert bleiben müssen. </p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>Segment leer lassen </strong></p>
+      </td>
+
+      <td>
+        <p>OmegaT lässt das Editierfeld leer.  Diese Auswahl erspart Ihnen beim Öffnen der Segmente das Entfernen der Quelltexte (mit <code>STRG+A</code> und <code>Entf</code> - das sind zwei Anschläge pro Segment weniger).</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>Den besten unscharfen Treffer einfügen</strong></p>
+      </td>
+
+      <td>
+        <p>OmegaT wird die Übersetzung einfügen, die der Zeichenfolge der gegenwärtigen Quelle am ähnlichsten ist, wenn es über der von Ihnen anpassbaren Schwelle liegt.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="validation" id="validation"></a>Nicht zu modifizierende Segmente</h2>
+
+  <p>Dokumente, die Sie übersetzen müssen, könnten Warenzeichen, Namen oder andere Eigennamen enthalten, die in übersetzten Dokumenten gleich bleiben müssen.  Es gibt zwei Strategien für Segmente, die nur solchen unveränderlichen Text enthalten.</p>
+
+  <p>Erstens kann man sich entscheiden, solche Segmente nicht zu übersetzen, aber vergisst man später, das es sich um invariante Segmente handelt, kann es geschehen, dass man sie bei der Übersetzungsdurchsicht übersetzt, weil OmegaT diese Segmente als nicht übersetzt meldet.  Das ist die Voreinstellung.</p>
+
+  <p>Zweitens kann man von OmegaT sagen, die Übersetzung doch zu speichern, selbst wenn sie gleich mit dem Quelltext ist, so dass sich OmegaT später erinnern kann, man hat den Text durchgesehen und sich die Beibehaltung Ziel gleich Quelle entschieden.  Gehen Sie  zu <strong>Optionen → Editierverhalten...</strong> und setzen einen Haken bei <strong>Übersetzung darf gleich der Quelle sein</strong>.</p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

@@ -1,96 +1,502 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" 
-  "http://www.w3.org/TR/html4/strict.dtd">
-
 <html>
-  <head>
-    <title>OmegaT: Benutzerschnittstelle</title>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-    <meta name="generator" content="Kate (Linux)">
-    <meta name="changed" content="20050513">
-    <link rel="stylesheet" type="text/css" href="omegat.css">
-  </head>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Benutzerobrefläche - OmegaT 1.8 Benutzerhandbuch</title>
+</head>
 
-  <body lang="en" dir="LTR">
+<body>
+  <h2>Benutzeroberfläche</h2>
 
-    <div class="navbar-top">
-    
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <tr>
+      <td>
+        <ul>
+          <li>
+            <p><a href="#item">Bestandteile der Benutzeroberfläche</a></p>
+
+            <ul>
+              <li>
+                <p><a href="#most">Die meist benutzten Fenster</a></p>
+              </li>
+
+              <li>
+                <p><a href="#some">Fenster, die manchmal benutzt werden</a></p>
+              </li>
+
+              <li>
+                <p><a href="#dialogs">Dialoge, um Ihre Projekteinstellungen zu ändern</a></p>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <p><a href="#OmegaT_Main_Window">OmegaT Hauptfenster</a></p>
+
+            <ul>
+              <li>
+                <p><a href="#Editor">Editier-Fenster</a></p>
+              </li>
+
+              <li>
+                <p><a href="#Match">Treffer-Fenster</a></p>
+              </li>
+
+              <li>
+                <p><a href="#Glossary">Glossar</a></p>
+              </li>
+
+              <li>
+                <p><a href="#menu">Hauptmenü</a></p>
+              </li>
+
+              <li>
+                <p><a href="#bar">Status-Leiste</a></p>
+              </li>
+            </ul>
+          </li>
+
+          <li>
+            <p><a href="#dialogs">Dialoge, um Ihre Projekteinstellungen zu ändern</a></p>
+          </li>
+        </ul>
+      </td>
+
+      <td>
+        <ul>
+          <li>
+            <p><a href="#Other_windows">Andere Fenster</a></p>
+
+            <ul>
+              <li>
+                <p><a href="#files">Projektdateien</a></p>
+
+                <ul>
+                  <li>
+                    <p><a href="#proj_files">Projektdateifenster - Besonderheiten</a></p>
+                  </li>
+
+                  <li>
+                    <p><a href="#unique">Einzigartige Segmente</a></p>
+                  </li>
+
+                  <li>
+                    <p><a href="#adding_files">Dateien dem Projekt hinzufügen</a></p>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <p><a href="#search">Suchfenster</a></p>
+
+                <ul>
+                  <li>
+                    <p><a href="#search_types">Sucharten</a></p>
+                  </li>
+
+                  <li>
+                    <p><a href="#wildcards_regexp">Jokerzeichen und reguläre Ausdrücke</a></p>
+                  </li>
+
+                  <li>
+                    <p><a href="#search_display">Anzeige der Suchergebnisse</a></p>
+                  </li>
+                </ul>
+              </li>
+
+              <li>
+                <p><a href="#tag_validation">Tag-Prüfung</a></p>
+              </li>
+
+              <li>
+                <p><a href="#manual">Hilfe-Browser</a></p>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="item" id="item"></a>Bestandteile der Benutzeroberfläche</h2>
+
+  <h3><a name="most" id="most"></a>Die meist benutzten Fenster</h3>
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
+
+    <tr>
+      <td width="24%">
+        <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
+
+        <p><strong>OmegaT Hauptfenster</strong></p>
+      </td>
+
+      <td width="83%">
+        <p>besteht aus Hauptmenü, Statuszeile und drei Unterfenster:</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <p>---Editier-Fenster</p>
+      </td>
+
+      <td width="83%">
+        <p>wo Sie die Übersetzung eintippen und bearbeiten</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <p>--- Treffer-Fenster</p>
+      </td>
+
+      <td width="83%">
+        <p>mit den ähnlichsten Segmenten aus TMs</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <p>--- Glossar-Fenster</p>
+      </td>
+
+      <td width="83%">
+        <p>mit Übersetzung der Terminologie</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <p><strong>Projektdateien-Fenster</strong></p>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>mit einer Liste der zu übersetzenden Dateien, aktiviert mit <code>STRG+L</code>, geschlossen mit <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="24%">
+        <dl>
+          <dt><strong>Suchfenster</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>um nach spezifischen Segmenten im Projekt zu suchen, aktiviert mit <code>Ctrl+F</code>, geschlossen mit  <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <h3><a name="some" id="some"></a>Fenster, die manchmal benutzt werden</h3>
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
+
+    <tr>
+      <td width="23%">
+        <dl>
+          <dt><strong>Tag-Prüfungsfenster</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>um nach Tag-Fehlern im Projekt zu suchen, aktiviert mit <code>Ctrl+T</code>, geschlossen mit  <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="23%">
+        <dl>
+          <dt><strong>Hilfe-Browser</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>um das Handbuch zu lesen, geschlossen mit  <code><b>esc</b></code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <h3><a name="dialogs" id="dialogs"></a>Dialoge, um Ihre Projekteinstellungen zu ändern</h3>
+
+  <p>Sie werden die Dialoge unten verwenden, um OmegaT und Projekteinstellungen zu ändern.  Alle werden in eigenen Kapiteln beschrieben, unten wird nur zusammengefasst, wofür man sie verwendet und wie man sie aufruft:</p>
+
+  <p><br></p>
+
+  <table width="100%" border="0" cellpadding="0" cellspacing="0">
+    <col width="43*">
+    <col width="213*">
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Projekteigenschaften</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>um Verzeichnisse und Sprachen des Projektes zu modifizieren, geöffnet mit  <code>Ctrl+E</code> oder mit <strong>Projekt → Eigenschaften...</strong>, geschlossen mit <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Schriftart</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>um die von OmegaT für die Quelltexte, Übersetzungen und das Glossarfenster benutzte Schriftart zu wählen, geöffnet mit  <strong>Optionen → Schriftart...</strong>, geschlossen mit <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Dateifilter</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>um die Behandlung der unterstützen Dateiformate anzupassen, geöffnet mit <strong>Optionen → Dateifilter...</strong>, geschlossen mit <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Segmentierung</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>um die Segmentierung Ihrer Texte anzupassen, geöffnet mit <strong>Optionen → Segmentierungsregeln...</strong>, geschlossen mit <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="17%">
+        <dl>
+          <dt><strong>Editierverhalten</strong></dt>
+        </dl>
+      </td>
+
+      <td width="83%">
+        <dl>
+          <dd>um festzulegen wie sich OmegaT beim Wechseln zwischen Segmenten verhält,  geöffnet mit <strong>Optionen → Editierverhalten...</strong>, geschlossen mit <code>esc</code></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2>OmegaT Hauptfenster</h2><img src="images/OmegaT_panes.png" name="grafika1"
+  alt="OmegaT Fenster" align="left" width="756" height="577" border="0" id=
+  "grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Das Hauptfenster besteht aus drei Fenstern, dem Hauptmenü und einer Statusleiste. Sie können die Position jedes Unterfensters ändern oder es sogar als getrennten Fenster abkoppeln, wenn Sie es anhand des Namens bewegen.  Je nach Status, können in der oberen rechten Ecke verschiedene Zeichen erscheinen:</p>
+
+  <p><img src="images/Minimize.gif" name="graphics1" alt="Minimieren" align=
+  "bottom" width="18" height="18" border="0" id="graphics1">verkleinert das Unterfenster zur Zeile mit seinem Namen unten nahe der Statuszeile. <br> <img src="images/Maximize.gif" name="graphics2" alt="Maximieren" align="bottom"
+  width="18" height="18" border="0" id="graphics2"> vergrößert das Unterfenster auf die vorhandene Fensterfläche<br> <img src="images/Restore.gif" name="graphics3" alt="Wiederherstellen" align="bottom"
+  width="18" height="18" border="0" id="graphics3"> setzt das Unterfenster an die Stelle, wo es vor Minimieren bzw. Maximieren war.<br> <img src="images/Undock.gif" name="graphics4" alt="Abkoppeln" align="bottom"
+  width="18" height="18" border="0" id="graphics4"> löst  das Unterfenster vom Hauptfenster ab und zeigt es getrennt an.<br> <img src="images/Dock.gif" name="graphics5" alt="Andocken" align="bottom" width=
+  "18" height="18" border="0" id="graphics5"> fügt das Unterfenster dem Hauptfenster hinzu.</p>
+
+  <p>Es ist auch möglich, die Unterfenster überlappend zu positionieren.  In diesem Fall werden die Unterfenster einen Reiter oben anzeigen.  Das Klicken auf den Reiter stellt das Fenster in den Vordergrund.  Um die Fenstergrößen anzupassen, kann man die Trennlinien zwischen den Unterfenstern ziehen. </p>
+
+  <h3><a name="Editor" id="Editor"></a>Editier-Fenster</h3>
+
+  <p>Hier werden Sie die Übersetzung eintippen und bearbeiten.  Das Editier-Fenster zeigt den Text des teilweise übersetzten Dokumentes: der bereits übersetzte Text wird als übersetzt angezeigt, und der noch nicht übersetzte Text wird in der ursprünglichen Sprache gezeigt.  Der gezeigte Text wird in Segmente gespalten, und Sie können durch das Dokument scrollen und dabei auf ein beliebiges Segment doppelklicken, um es zu bearbeiten.  In obigen gezeigten Fall sind die schon übersetzte Segmente gelb gekennzeichnet - sie können aber die Einstellung jederzeit unter <a href=
+  "menu.html">Ansicht</a> ändern).</p>
+
+  <p>Eines der Segmente ist das aktive Segment.  Es ist das einzige, das in zwei Teilen dargestellt wird: der obere Teil in der ursprünglichen Sprache in Fettschrift mit einem grünen Hintergrund, der untere Teil ist das Editier-Feld, eingegrenzt von zwei Markierungen: die ganz linke Markierung ist <strong><code>&lt;Segment nnnn&gt;</code></strong> wobei <strong><code>nnnn</code></strong> eine Nummer des Segments im Projekt ist, die ganz rechte Markierung ist <strong><code>&lt;Segmentende&gt;</code></strong>. Der  Teil oben dient als die Referenz und Sie überschreiben oder modifizieren den Inhalt des Editier-Felds mit Ihrer Übersetzung. </p>
+
+  <p>Abhängig vom <a href="translationEditing.html">Editierverhalten</a> kann das Feld für das unübersetzte Segment entweder leer sein, oder den Quelltext beinhalten, oder die Zeichenfolge enthalte, die dem zu übersetzenden Text am ähnlichsten ist. Wenn Sie zu einem anderen Segment gehen, wird die Übersetzung bestätigt und gespeichert. Wenn Sie wollen, dass das Segment unübersetzt bleibt, leeren Sie das Zielfeld von Text (wählen Sie dazu alles mit <code>STRG+A</code> und löschen Sie dann den Inhalt mit <code>Del</code>). OmegaT kann sich an Übersetzung erinnern, die mit der Quelle identisch ist.. Das ist nützlich, wenn es um Dokumente geht, die nicht zu übersetzende Warenzeichen, Namen oder andere Eigennamen bzw. Teile davon in einer dritten Sprache enthalten.</p>
+
+  <p>Siehe <a href="translationEditing.html">Bearbeiten der Übersetzung</a> für weitere Einzelheiten.</p>
+
+  <h3><a name="Match" id="Match"></a>Treffer-Fenster</h3><img src=
+  "images/MatchesPane.png" name="grafika2" alt="OmegaT Treffer-Fenster" align="left"
+  width="417" height="356" border="0" id="grafika2"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Das Treffer-Fenster zeigt die wahrscheinlichsten Segmente in den <a href=
+  "translationMemories.html">TMs</a>, sowohl im Translation Memory des Projektes der Übersetzung, als auch in hinterlegten TMs, die aus früheren Projekten importiert wurden oder die Sie von Kunden oder der Übersetzungsagentur erhalten haben. </p>
+
+  <p>Wenn Sie sich zum folgenden Segment bewegen, wird der erste unscharfe Treffer (derjenige mit dem höchsten Prozentsatz an Übereinstimmung) automatisch ausgewählt.  Man kann einen anderen Treffer <a href=
+  "menu.html#shortcuts">wählen</a> und zwar durch  <code>STRG+2</code>, <code>3</code>, <code>4</code>, oder <code>5.</code>. Selbstverständlich wird das Drücken von <code>Ctrl+5</code> nichts bewirken, wenn es keinen Treffer #5 gibt.</p>
+
+  <p>Um den <strong>ausgewählten</strong> Treffer in Ihre Übersetzung einzufügen, benutzen Sie <code><a href="menu.html#shortcuts">STRG+R</a></code> um das Zielfeld zu ersetzen oder  <code><a href=
+  "menu.html#shortcuts">STRG+I</a></code>, um die Übersetzung an der Stelle des Kursors einzufügen. </p>
+
+  <p>Der für die Treffer angegebene Prozentsatz entspricht ungefähr der Zahl der gleichen Wörtern im Quellsegment und dem entsprechenden TM-Segment, geteilt durch die Zahl von Wörtern im längeren der zwei Segmente.  Der ausgewählte Treffer wird <strong>fett</strong> hervorgehoben, Wörter, die im zu übersetzenden Segment nicht vorkommen, werden <strong><font color=
+  "#0000FF">blau</font></strong> und Wörter, die  sich an fehlende Teile anschließen, werden <font color="#00FF00"><b>grün</b></font> gefärbt. Im Beispiel oben ist das Quellsegment <strong><i>Information about Java &amp; OmegaT.</i></strong> Der beste Treffer ist 75%, da 3 von 4 Wörtern (wobei &amp; ignoriert wird) übereinstimmen. Die Zeile mit dem Treffer-Prozentsatz beinhaltet auch die Quell-TMX, wo der Treffer gefunden wurde.  Wird keine Dateiname angezeigt, handelt es sich um die Standard Projekt-TM.  Verwaiste Segmente (der Treffer #4) bedeuten Segmente in der Projekt-TM, die kein entsprechendes Quell-Segment haben.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="Glossary" id="Glossary"></a>Glossar</h3>
+
+  <p>Glossar-Fenster zeigt die in den <a href=
+  "glossaries.html">Glossardateien</a> gefundenen Übersetzungen der Terminologie. Es zeigt die Übersetzung von Ausdrücken, die im gegenwärtigen Segment gefunden wurden, es zeigt sie aber nur als Referent und bietet nicht die Möglichkeit, den Ausdruck einzufügen oder durch seine Übersetzung zu ersetzen.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="OmegaT Glossar-Fenster" align=
+  "left" width="328" height="150" border="0" id="grafika3"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Der Quell-Segment im Beispiel oben war “<i>In den meisten Übersetzungsjobs wird es als wichtig erachtet, dass das übersetzte Dokument ähnlich wie das Original aussieht.</i>”, und zwei Wörter davon, document und translation, wurden in der Glossardatei gefunden. OmegaT unterstützt auch Begriffe aus mehreren Wörtern, aber nur in einer sehr einfachen Form: wenn beide Wörter eines Begriffs im gegenwärtigen Segment gefunden werden, wird der Begriff angezeigt.</p>
+
+  <h3><a name="menu" id="menu"></a>Hauptmenü</h3>
+
+  <p>Offensichtlich können Sie das Hauptmenü benutzen, um auf alle OmegaT Funktionen zuzugreifen.  Siehe Kapitel <a href="menu.html#menu">Hauptmenü</a> für die vollständige Beschreibung der Menüfunktionen. Die meist genutzten Funktionen sind mit <a href="menu.html#shortcuts">Tastenkombinationen</a> erreichbar, so dass - hat man sie einmal kennen gelernt - beim Übersetzen nicht mehr durch das Hauptmenü geklickt werden muss. </p>
+
+  <h3><a name="bar" id="bar"></a>Status-Leiste</h3>
+
+  <p>Die Status-Leiste an der Unterseite vom Hauptfenster zeigt Meldungen, die sich auf den Arbeitsfluss beziehen. Mit dieser Leiste wird der Benutzer über spezifische Operationen, die im Gange sind, informiert. Sie zeigt auch die Anzahl der unscharfen Treffer und Treffer im Glossar für das gegenwärtige Segment. </p>
+  <hr>
+
+  <h2><a name="other_windows" id="other_windows"></a>Andere Fenster</h2>
+
+  <h3><a name="files" id="files"></a>Projektdateien</h3>
+
+  <p>Im Projektdateifenster werden die Projektdateien und weitere Projektinformationen aufgelistet.  Es wird automatisch angezeigt, wenn OmegaT das Projekt lädt. Mit <code>esc</code> wird das Fenster geschlossen; um es zu öffnen oder in den Vordergrund zu bringen, benutzt man <code>STRG+L</code>. </p>
+
+  <h3><a name="proj_files" id="proj_files"></a>Projektdateifenster - Besonderheiten</h3>
+
+  <p>Die folgende Information wird angezeigt. </p>
+
+  <ul>
+    <li>
+      <p>die Liste aller übersetzbaren Dateien im Projekt. Es sind die in der Source Verzeichnis befindliche Dateien, die <a href=
+      "filesToTranslate.html">OmegaT verarbeiten kann</a>. Wird auf irgendeine der Dateien geklickt, wird der Inhalt zum Übersetzen angezeigt. </p>
+    </li>
+
+    <li>
+      <p>Die aktuell im Editierfenster verfügbare Datei wird blau hervorgehoben.</p>
+    </li>
+
+    <li>
+      <p>die Anzahl von Segmenten in jeder Datei wird neben dem Dateinamen angezeigt. </p>
+    </li>
+
+    <li>
+      <p>die Zahl von einzigartigen Segmenten im ganzen Projekt.</p>
+    </li>
+
+    <li>
+      <p>die Zahl von einzigartigen Segmenten, die bereits übersetzt wurden. Jedes mal, wenn ein neues Segment übersetzt wird, wird sie aktualisiert.</p>
+    </li>
+  </ul>
+
+  <h3><a name="unique" id="unique"></a>Einzigartige Segmente</h3>
+
+  <p>Die Menge der <strong>einzigartigen</strong> Segmenten wird geschätzt anhand der Zahl aller Segmente und der Zahl doppelter Segmente bis auf Buchstabenebene ("Laufen", und "laufen" z.B. werden als unterschiedlich genommen).</p>
+
+  <p>Der Unterschied zwischen der "Zahl von Segmenten" und der "Zahl von einzigartigen Segmenten" gibt Ihnen einen ersten Richtwert von der Zahl von Wiederholungen im Text.  Die Zahlen sagen jedoch nichts darüber aus, wie relevant die Wiederholungen sind: es könnten relativ lange Sätze sein, die mehrfach wiederholt werden (Glück gehabt!) oder es könnte eine Tabelle mit Stichworten sein (weniger Glück...) Die  <code>project_stats.txt</code> Datei im Verzeichnis <code>/omegat</code> Ihres Projekts enthält detailliertere Informationen zu Segmenten pro Datei.</p>
+
+  <p>Es ist möglich, die Zahl von Segmenten/ einzigartigen Segmenten zu ändern, wenn man die Segmentierungsregel ändert.  Das sollte nach Beginn des Übersetzens im Projekt allerdings unbedingt vermieden werden. Siehe <a href=
+  "segmentation.html">Segmentierungsregel</a> für mehr Informationen.</p>
+
+  <h3><a name="adding_files" id="adding_files"></a>Dateien dem Projekt hinzufügen</h3>
+
+  <p>Sie können Quelldateien zum Projekt hinzufügen, indem Sie auf den Schaltfläche "Quelldateien importieren..." klicken. Die ausgewählten Dateien werden in das <code>/source</code> Verzeichnis kopiert und das Projekt wird erneut gestartet, um die neuen Dateien zu laden. Sie können auch Quelldateien von Internetseiten hinzufügen, die in MediaWiki geschrieben sind, wenn Sie auf die Schaltfläche "Aus MediaWiki importieren" klicken und die entsprechende URL-Adresse eingeben.</p>
+
+  <h3><a name="search" id="search"></a>Suchfenster</h3>
+
+  <p>Sie werden Suchfenster verwenden, um spezifische Segmente im Projekt zu finden.  Es können mehrere Suchfenster gleichzeitig offen sein.  Benutzen Sie <code><a href="menu.html#shortcuts">STRG+F</a></code>, im Hauptfenster, um einen neues Suchfenster zu öffnen Das Suchfenster besteht aus einem Textfeld für Begriffe oder Stichwörter, Auswahlboxen und Optionsfelder, um die Suche zu erstellen und aus einem Feld zur Anzeige der Ergebnisse der Suche.</p>
+
+  <h3><a name="search_types" id="search_types"></a>Sucharten</h3>
+
+  <dl>
+    <dt>Es stehen zwei <a href="searches.html#searchmethods">Arten</a> der Suche zur Verfügung:</dt>
+
+    <dt>Die <strong>Exakte Suche - </strong> sucht nach der angegebenen Zeichenfolge innerhalb des gegenwärtigen Projektes oder in jedem Verzeichnis- oder Verzeichnisbaum. </dt>
+
+    <dt><strong>Stichwortwortsuche -</strong> untersucht das gegenwärtige Projekt und listet alle Segmente auf, die in einer beliebigen Reihenfolge alle gesuchten Wörter enthalten. </dt>
+  </dl>
+
+  <p>Es wird sowohl im Quelltext als auch in der Übersetzung gesucht.  Sie können auch in beliebigen Ordnern suchen, vergessen Sie aber dabei nicht, dass OmegaT nur in den <a href="filesToTranslate.html">unterstützten Dateien</a>suchen kann. </p>
+
+  <h3><a name="wildcards_regexp" id="wildcards_regexp"></a>Jokerzeichen und reguläre Ausdrücke</h3>
+
+  <p>Die Suche unterstützt die <a href="searches.html#usingwildcards">Jokerzeichen</a> * and ?  und auch <a href=
+  "searches.html#usingregularexpressions">reguläre Ausdrücke</a>.</p>
+
+  <h3><a name="search_display" id="search_display"></a>Anzeige der Suchergebnisse</h3>
+
+  <p>Wenn Sie nach Eingabe einer Zeichenfolge auf die Schaltfläche Suchen drücken, werden alle Segmente im Projekt, die der gesuchten Zeichenfolge entsprechen, aufgelistet.  Da OmegaT alle identischen Segmente als eine Einheit behandelt, wird nur das erste einzigartige Segment angezeigt.  Die Segmente werden in der Reihenfolge ihrer Erscheinung innerhalb des Projektes angezeigt.  Übersetzte Segmente werden mit dem ursprünglichen Text oben und dem übersetzten Text unten gezeigt, bei den noch nicht übersetzten Segmenten wird nur der ursprüngliche Text gezeigt. </p>
+
+  <p>Sie können auf ein beliebiges Segment klicken, um ihn im Editor zur Modifizierung zu öffnen. Danach kann man in das Suchfenster zurückschalten und zum nächsten gefundenen Segment gehen, um es zu modifizieren.  Solch eine Methode ist zum Aktualisieren der Terminologie nützlich.</p>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Tag-Prüfung</h3>
+
+  <p>Das Fenster der Tags-Prüfung entdeckt Tag-Fehler in der Übersetzung und listet sie auf.  Benutzen Sie <code><a href=
+  "menu.html#shortcuts">STRG+T</a></code>, um das Fenster zu öffnen. Das Fenster beinhaltet eine Tabelle mit 3 Spalten, dem Link zum Originalsegment, seinem Quell- und seinem Ziel-Text.</p>
+
+  <p><img src="images/TagValidator.png" name="grafika4" alt=
+  "OmegaT Tag Prüfer " align="left" width="556" height="318" border="0" id=
+  "grafika4"><br clear="left">
+  <br>
+  <br></p>
+
+  <p>Die Tags werden für den leichten Vergleich zwischen dem Original und dem übersetzten Inhalt in fettem Blau hervorgehoben.  Klicken Sie auf den Link, um zum Segment im Editier-Fenster zu springen.  Korrigieren Sie den Fehler notfalls und drücken Sie<code><a href="menu.html#shortcuts"> STRG+T</a></code>, um zum Fenster der Tag-Prüfung zurückzukehren und weitere Fehler zu korrigieren. Im ersten und im dritten Fall sind die Tags falsch gepaart und in dem zweiten Fall fehlt beim Anfangs-Tag das Zeichen &lt; .</p>
+
+  <p><a href="formattedText.html#intro">Tag</a> Fehler entstehen bei <a href=
+  "formattedText.html#tag_operation">Tag Änderungen</a> in der Übersetzung, wodurch die Reihenfolge und Zahl der Tags nicht mehr dem Original entsprechen. Manche Tag-Änderungen sind notwendig und auch gutartig, einige werden aber bei der Erstellung der Zieldokumente Probleme verursachen.  Tags stehen allgemein für eine Art Formatierung im ursprünglichen Text.  Wenn Sie die <strong>Formatierung der Originaltexte vereinfachen</strong> können, werden Sie die Anzahl der Tags weitgehend reduzieren können. </p>
+
+  <h3>Hilfe-Browser</h3>
+
+  <p>Der Hilfe-Browser (mit dem auch dieses Handbuch gezeigt wird) kann man mit <a href="menu.html#shortcuts">F1</a> oder mit  <strong>Hilfe → Benutzerhandbuch...</strong> im <a href="menu.html">Hauptmenü</a> aufgerufen werden.</p>
+
+  <h3><a name="manual" id="manual"></a>Navigation im Hilfe - Browser</h3>
+
+  <p>Im Fenster werden Sie das Handbuch und zwei Schaltflächen sehen: <strong>Zurück</strong> und <strong>Inhalt</strong>. Das Benutzerhandbuch ist ein HTML-Dokument mit Links zu verschiedenen Kapiteln. Ein Klick auf einen Link, so wie in einem Internet Browser, öffnet die gewünschte Seite. </p>
+
+  <h3>Benutzerhandbuch - Offline Einsicht</h3>
+
+  <p>Die Benutzerhandbücher befinden sich im  <code>doc</code> Unterordner des OmegaT Installationsordners; so können Sie sich zum Beispiel die englische Dokumentation ansehen, indem Sie die Datei <code>doc/de/index.html</code> in Ihrem Browser  öffnen. Auf diese Weise kann man auch die vom eingebauten Browser nicht zu akzeptierten Links zu externen Seiten verfolgen. </p>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
       <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="index.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Zurück</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="GetStarted.html">Einstieg in das Programm</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Weiter</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Segmentation.html">Segmentierung</a>
-        </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a></td>
       </tr>
-    </table>   
-    </div>
-    
-    <div class="content">
-  
-    <h1 align="center">Benutzerschnittstelle</h1>
-
-    <p>
-      Die grafische Benutzerschnittstelle von OmegaT besteht vor allem aus dem <i>Editor</i>-Fenster und einem Fenster zur <i>Match- und Glossaranzeige</i>. 
-    </p>
-
-    <p>
-      Der <i>Editor</i> zeigt den Text an, der derzeit übersetzt wird. Der Zustand jedes Segments wird im Editor klar angezeigt. Nicht übersetzte Segmente werden in der Ausgangssprache angezeigt, übersetzte Segment hingegen in der Zielsprache. Die einzige Ausnahme dabei bildet das aktive Segment, in dem übersetzt und bearbeitet wird. Dieses Segment wird doppelt angezeigt, einmal im Bearbeitungsfeld, eingerahmt von den Tags <b>&lt;Segment <i>Nummer</i>></b> und <b>&lt;Segmentende&gt;</b>. Zum anderen wird der Ausgangstext oberhalb des Bearbeitungsfeldes in fett dargestellten Zeichen angezeigt.
-    </p>
-    
-    <p>
-      Die <i>Match- und Glossaranzeige</i> ist in zwei Felder aufgeteilt. Das Feld <i>Match</i> zeigt Fuzzy Matches an (zuvor übersetzte Segmente, die dem aktiven Segment ähnlich sind). Das Feld <i>Glossar</i> zeigt Informationen der Glossardatei an, sofern eine vorhanden ist. Dieses Fenster wird automatisch angezeigt, wenn OmegaT gestartet wird. Es kann über den Menübefehl <i3Datei > <i>Match-/Glossaranzeige...</i> ein- und ausgeblendet werden.
-    </p>
-
-    <p>
-      Des weiteren gibt es ein Fenster namens <i>Projektdateien</i>, in dem eine Liste aller Dateien des aktuellen Projekts mit der jeweiligen Anzahl an Segmenten aufgeführt wird. Dieses Fenster wird automatisch geöffnet, wenn ein Projekt zum ersten Mal geöffnet wird. Wenn das Fenster geschlossen ist, dann kann es über den Menübefehl <i>Datei</i> > <i>Projektdateien...</i> geöffnet werden. Um eine Datei zur Übersetzung auszuwählen, klicken Sie einfach auf deren Namen in diesem Fenster.
-    </p>
-
-    <p>
-      Alle Funktionen von OmegaT stehen über die Menüleiste des <i>Editor</i>-Fensters zur Verfügung. Die meisten Funktionen sind auch über <a href="Shortcuts.html">Tastenkombinationen</a> verfügbar.
-    </p>
-
-    <p>
-      Unterhalb der Menüleiste befindet sich eine Statusleiste, die angezeigt wird, sobald ein Übersetzungsprojekt zur Bearbeitung geöffnet wurde. Hier erhält der Benutzer Meldungen zu speziellen derzeit ausgeführten Befehlen oder zu Fehlern, die aufgetreten sind.
-    </p>    
-    </div>
-    
-    <div class="navbar-bottom">
-
-    <table border="0" cellpadding="2" width="100%" summary="Navigation Bar">
-      <tr>
-        <td width="7%" align="left" valign="center">
-          <a href="index.html" title="Table of Contents">
-            <img src="OmegaT.png" border="0" alt="OmegaT Logo">
-          </a>
-        </td>
-        <td width="9%" align="left" valign="center">
-          <b>Zurück</b>
-        </td>
-        <td width="39%" align="left" valign="center">        
-          <a href="GetStarted.html">Einstieg in das Programm</a>
-        </td>
-        <td width="6%" align="left" valign="center">
-          <b>Weiter</b>
-        </td>
-        <td width="39%" align="left" valign="center">
-          <a href="Segmentation.html">Segmentierung</a>
-        </td>
-      </tr>
-    </table>   
-    </div>
-        
-  </body>
+    </tbody>
+  </table>
+</body>
 </html>
-

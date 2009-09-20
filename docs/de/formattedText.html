@@ -1,0 +1,235 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>&gt;Arbeiten mit formatiertem Text - OmegaT 1 8 Benutzerhandbuch</title>
+</head>
+
+<body>
+  <h2>Arbeiten mit formatierten Texten</h2>
+
+  <ul>
+    <li>
+      <p><a href="#intro">Formatierung von Tags</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_segmenting">Tags und Satz-Segmentierung</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_operation">Tags-Operationen</a></p>
+    </li>
+
+    <li>
+      <p><a href=
+      "#nesting">Verschachtelung von Tag-Gruppen </a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag-overlapping">Tags-Gruppenüberlappung</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_validation">Überprüfung der Tag-Gruppen</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_hints">Hinweise zur Tags-Verwaltung</a></p>
+    </li>
+  </ul>
+
+  <p>Formatierung der Information in der Quelldatei muss gewöhnlich in der Zieldatei reproduziert werden.  OmegaT zeigt die in-line Formatierungsinformation, die in den unterstützten Formaten (momentan DocBook, HTML, XHTML, Open Document, und OpenOffice.org) ermöglicht wird, als Tags. m Normalfall werden Tags ignoriert, wenn Ähnlichkeiten von verschiedenen Texten mit dem Ziel von Übereinstimmungen betrachtet werden. Tags, die Sie im übersetzten Segment wieder erzeugt haben, werden im übersetzten Dokument da sein. </p>
+  <hr>
+
+  <h3><a name="intro" id="intro"></a>Formatierung von Tags</h3>
+
+  <p><a name="naming" id="naming"></a><b>Tag-Name:</b>Tags bestehen aus einem bis drei Buchstaben und einer Zahl.  Eine eindeutige Zahl erlaubt es, zueinander gehörende Tags zu gruppieren und die Tags zu unterscheiden, die dasselbe Abkürzungszeichen haben können, aber tatsächlich verschieden sind.  Die Zeichen können (oder auch nicht)  die Bedeutung der Tags-Formatierung (z.B fett, kursive, usw.) widerspiegeln.</p>
+
+  <p><a name="numbering" id="numbering"></a><b>Tags Nummerierung</b> Tags werden durch <strong>Tag-Gruppen</strong> inkremental nummeriert.  Was man "Tags-Gruppen" nennt, ist entweder ein einzelner Tag (z. B. <code><font color=
+  "#Fb0000">&lt;br1&gt;</font></code>) alleine oder ein Paar von 2  Tags (z.B. <code><font color="#Fb0000">&lt;i0&gt;</font></code> und <code><font color="#Fb0000">&lt;/i0&gt;</font></code>). Innerhalb eines Segmentes bekommt die erste Gruppe (Paar oder Single) die Zahl  (wie <strong>0</strong>, das zweite die Zahl <strong>1</strong> usw.  Das erste Beispiel unten hat 3 Tags-Gruppen (ein Paar, einen Single und dann ein anderes Paar), das zweite Beispiel hat nur eine Gruppe (ein Paar). </p>
+
+  <p><a name="pairs" id="pairs"></a><b>Paare oder Singles:</b> Tags treten immer entweder als Single oder als Paare auf.  <strong>Einzelne Tags</strong> zeigen Formatierungsinformation an, die den Umgebungstext (Extra Leerzeichen oder Zeilenumbruch zum Beispiel) nicht betrifft.</p>
+  <pre>
+         <strong>&lt;segment 2132&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
+"#Fb0000">&lt;/b0&gt;</font>, <font color=
+"#Fb0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
+"#Fb0000">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#Fb0000">&lt;br1&gt; </font></strong></code> ist ein einzelner Tag und beeinflusst den umgebenden Text nicht.  <strong>Tag-Paare</strong> betreffen normalerweise die Stil-Information, die für den Text zwischen dem öffnenden und dem schließenden Tag eines Paares gilt. Was immer mit einem Paar geschieht, der öffnende Tag sollte immer vor dem abschließenden Tag auftreten:</p>
+  <pre>
+        <strong>&lt;segment 3167&gt;</strong>Log Datei (<font color=
+"#Fb0000">&lt;b0&gt;</font>log.txt<font color=
+"#Fb0000">&lt;/b0&gt;</font>) um Operationen und Fehler zu verfolgen.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p> <code><strong><font color="#Fb0000">&lt;b0&gt;</font></strong></code> <font size="3">und</font> <code><strong><font color=
+  "#Fb0000">&lt;/b0&gt;</font></strong></code>sind gepaart und betreffen den Text <code><strong>log.txt</strong></code>.</p>
+  <hr>
+
+  <h3><a name="tag_segmenting" id="tag_segmenting"></a>Tags und Satz-Segmentierung</h3>
+
+  <p>OmegaT erzeugt Tags, bevor Satz-Segmentierung angewandt wird.  Abhängig von den Regeln für die Segmentierung kann der Eindruck entstehen, dass Tags die oben genannten Regeln für das Beschriften und Gruppieren nicht beachten.  Schauen Sie sich den folgenden Text an: "<em>Vorher: \. Nachher: \s"</em><font color="#Fb0000">.</font> <font color="#000000">Man würde die folgende Segmentierung erwarten (&lt;b0&gt; und &lt;/b0&gt; stehen für den Anfang und Ende von Kursivschrift):</font></p>
+  <pre>
+        <strong>&lt;segment ....&gt;</strong> <font color=
+"#Fb0000">&lt;b0&gt;</font>Vorher: \. Nachher: \s<font color=
+"#Fb0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Doch wenn man jetzt die vorgegebene Segmentierungsregel auf dieses Segment anwendet, kommt man zum  folgenden Ergebnis:</p>
+  <pre>
+         <strong>&lt;Segment 1990&gt;</strong> <font color=
+"#Fb0000">&lt;b0&gt;</font>Vorher: \. <strong>&lt;end segment&gt;</strong>
+<strong>&lt;segment 1991&gt;</strong> Nachher: \s<font color=
+"#Fb0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>   
+</pre>
+
+  <p>Die Anwendung der Regel <i>Segment nach dem Punkt, gefolgt vom Leerzeichen</i> teilt den Originaltext in zwei Segmente, obwohl die zwei Tags <code><font color="#Fb0000">&lt;b0&gt;</font></code> und <code><font color=
+  "#Fb0000">&lt;/b0&gt;</font></code> zusammen in dem selben Segment zu halten wären. In einigen Fällen kann das sogar Probleme in der Übersetzung verursachen, z.B. wenn Tags in der Zielsprache versetzt werden müssen, um die Wortfolge dieser Sprache zu reflektieren - siehe (<a href="#tag_operation">Tags-Operationen</a> unten.</p>
+  <hr>
+
+  <h3><a name="tag_operation" id="tag_operation"></a>Tags-Operationen</h3>
+
+  <p>Beim Umgang mit den Tags muss man Vorsicht walten lassen.  Wenn sie aus Versehen geändert werden, dann kann die Formatierung der Zieldatei beschädigt werden.  Die vernünftige Einstellung dabei sollte sein "nichts verbessern, was nicht kaputt ist".  Trotzdem ist es gut zu wissen, was möglich ist, und wie man es tut. </p>
+
+  <p><a name="duplication" id="duplication"></a><b>Duplizieren der Tags-Gruppen:</b> Um Tags-Gruppen zu kopieren, kopieren Sie sie einfach an die Stelle Ihrer Wahl.  Beachten Sie, dass in einem Gruppenpaar der öffnende Tag vor dem abschließenden Tag kommen muss.  Das Formatieren der Gruppe, die Sie kopierten, wird auf die Sektion angewandt, wo Sie die Gruppe hin kopiert haben. </p>
+
+  <p>Beispiel:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Dieses Formatieren<font color=
+"#Fb0000">&lt;/b0&gt;</font>wird hier dupliziert.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Nach dem Kopieren:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Dieses Formatieren<font color=
+"#Fb0000">&lt;/b0&gt;</font> wurde <font color=
+"#Fb0000">&lt;b0&gt;</font>hier dupliziert<font color=
+"#Fb0000">&lt;/b0&gt;</font>.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><a name="deletion" id="deletion"></a><b>Tag-Gruppe löschen:</b>Wenn Sie Tags-Gruppen löschen wollen, können Sie sie einfach aus dem Segment entfernen.  Beachten Sie, dass für eine Paar-Gruppe sowohl der Start- als auch der Schluss-Tag gelöscht werden muss, um sicherzustellen, dass alle Spuren der Formatierung richtig gelöscht werden, sonst könnte es geschehen, dass die übersetzte Datei beschädigt wird.  Indem Sie eine Tag-Gruppe löschen, entfernen Sie die dazu gehörende Formatierung in der übersetzten Datei. </p>
+
+  <p>Beispiel:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Diese Formatierung<font color=
+"#Fb0000">&lt;/b0&gt;</font> wird gelöscht.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Nach der Löschung:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong>Diese Formatierung wurde gelöscht<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><b>Die Reihenfolge der Tag-Gruppen ändern:</b> Um die Ordnung in einer Tag-Gruppe zu ändern, damit die Sprachstruktur in der Übersetzung reflektiert wird, setzen Sie einfach die Tag-Gruppe dahin, wo sie in der Übersetzung sein sollte.  Die Formatierung wird dem Teil folgen, auf das sie angewandt wurde..</p>
+
+  <p>Beispiel:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Formatiere Null<font color=
+"#Fb0000">&lt;/b0&gt;</font> und <font color=
+"#Fb0000">&lt;b1&gt;</font>Formatiere Eins<font color=
+"#Fb0000">&lt;/b1&gt;</font> in der umgekehrten Reihenfolge.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Nach der Änderung der Reihenfolge:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;Reihenfolge von </strong><font color=
+"#Fb0000">&lt;b1&gt;</font>Formatiere Eins<font color=
+"#Fb0000">&lt;/b1&gt;</font> und <font color=
+"#Fb0000">&lt;b0&gt;</font>Formatiere Null<font color=
+"#Fb0000">&lt;/b0&gt;</font> wurde umgekehrt.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <h3><a name="nesting" id="nesting"></a>Verschachtelung von Tag-Gruppen </h3>
+
+  <p>Das Ändern einer Tag-Gruppenordnung kann zur Verschachtelung einer Tag-Gruppe innerhalb einer anderen Tags-Gruppe führen.  Das ist in Ordnung, so lange die äußere Gruppe die innere Gruppe komplett einschließt.  In anderen Worten, wenn Sie gepaarte Tags verschieben, stellen Sie sicher, dass sowohl der öffnende als der schließende Tag im Ziel verschoben wurden, sonst könnte es geschehen, dass die übersetzte Datei beschädigt wurde und sich nicht öffnet.  Für den verschachtelten Teil werden beide Formate gelten. </p>
+
+  <p>Beispiel:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Die Formatierung<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;b1&gt;</font>von Eins<font color=
+"#Fb0000">&lt;/b1&gt;</font> wird im Format Null eingebettet.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Nach Einbettung:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Die Formatierung <font color=
+"#Fb0000">&lt;b1&gt;</font>von Eins<font color=
+"#Fb0000">&lt;/b1&gt;&lt;/b0&gt;</font>wurde im Format Null eingebettet.<strong>&lt;end segment</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag-overlapping" id="tag-overlapping"></a>Tags-Gruppenüberlappung</h3>
+
+  <p>Überschneidung ist das Ergebnis schlechter Änderungen an Tag-Paaren und wird sicher die Formatierung beschädigen und manchmal so weit führen, dass sich die Zieldatei nicht mehr öffnet.  Beispiel:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Formatierung<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;b1&gt;</font>von Eins<font color=
+"#Fb0000">&lt;/b1&gt;</font>wird durcheinander gebracht.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Nach einer schlechten Änderung:</p>
+  <pre>
+        <strong>&lt;segment 0001&gt;</strong><font color=
+"#Fb0000">&lt;b0&gt;</font>Formatierung <font color=
+"#Fb0000">&lt;b1&gt;</font>von Eins<font color=
+"#Fb0000">&lt;/b0&gt;</font> <font color=
+"#Fb0000">&lt;/b1&gt;</font>wurde wirklich durcheinander gebracht.<strong>&lt;end segment&gt;</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Überprüfung der Tag-Gruppen</h3>
+
+  <p>Die Funktion Tags zu überprüfen entdeckt (absichtlich oder zufällig) geänderte Tags und zeigt die betroffenen Segmente an.  Diese Funktion wird mit STRG+T gestartet, dann öffnet sich ein Fenster, in dem alle Tags in einer Übersetzung angezeigt werden, wo der Verdacht auf beschädigte oder schlechte Tags besteht.  Dies ist oft ein Problem bei OpenDocument  oder OpenOffice.org Dateien, die sich wegen der bei der Übersetzung erzeugten Probleme mit Tags nicht mehr öffnen lassen.  Dieses Problem ist mit der Tag-Überprüfung-Funktion leicht zu beheben, indem man die Tags repariert und die Zieldokumente erneut erzeugt.</p>
+
+  <p>Das Fenster, das sich mit STRG+T öffnet, beinhaltet eine Tabelle mit 3 Spalten:</p>
+
+  <ul>
+    <li>
+      <p>ein Link zum Segment</p>
+    </li>
+
+    <li>
+      <p>Inhalt des ursprünglichen Segments</p>
+    </li>
+
+    <li>
+      <p>Inhalt des übersetzten Segments</p>
+    </li>
+  </ul>
+
+  <p>Die Tags werden für den leichten Vergleich zwischen dem Original und dem übersetzten Inhalt in fettem Blau hervorgehoben.  Klicken Sie auf den Link, um das Segment im Editor zu aktivieren.  Korrigieren Sie den Fehler notfalls und drücken Sie<code><a href="menu.html#shortcuts"> STRG+T</a></code>, um zum Fenster der Tag-Prüfung zurückzukehren und weitere Fehler zu korrigieren. <a href="#intro">Tag</a> Fehler entstehen bei den <a href="#tag_operation">Tag Änderungen</a> in der Übersetzung, wodurch die Reihenfolge und der Zahl der Tags nicht mehr dem Original entspricht. Manche Tag-Änderungen sind notwendig und auch gutartig, einige werden aber bei der Erstellung der Zieldokumente Probleme verursachen. </p>
+  <hr>
+
+  <h3><a name="tag_hints" id="tag_hints"></a>Hinweise zur Tags-Verwaltung</h3>
+
+  <p>Allgemein stehen die Tags für eine Art Formatierung im ursprünglichen Text.  <strong> Vereinfachung des ursprünglichen Textes </strong> kann entscheidend zur Verminderung der Tag-Fehler beitragen. Es sollte daran gedacht werden, Schriftarten, -größen, -farben usw. zu vereinheitlichen, da es die Übersetzung vereinfachen und die Möglichkeit von Tag-Fehlern reduzieren kann.  Im Absatz <a href="#tag_operation">Tag Operationen</a> können Sie sehen, was mit Tags gemacht werden kann. Wenn Ihnen Tags Probleme machen und die Formatierung für die Übersetzung nicht unbedingt wichtig ist, ziehen Sie in Betracht, dass die Entfernung der Tags der einfachste Weg zur Beseitigung von Problemen ist.</p>
+
+  <p>Wenn Sie die Tags in OmegaT sehen müssen, aber den größten Teil der Formatierung im übersetzten Dokument nicht beibehalten müssen, können Sie ruhig Tags bei der Übersetzung auslassen.  In diesem Fall seien Sie besonders <strong>aufmerksam, was die Tag-Paare betrifft</strong>, da die Formatierung Ihres Dokumentes leicht zu verderben ist, wenn nur eine Hälfte im Paar gelöscht wird. Da die Tags im Text selber eingeschlossen sind, kann man mit Hilfe der <a href="segmentation.html">Segmentierungsregln</a> erreichen, dass die Segmente weniger Tags aufweisen. Das ist eine fortgeschrittene Funktionalität und, um sie richtig einzusetzen, braucht man eine gewisse Erfahrung. </p>
+
+  <p><strong>Wichtig:</strong>OmegaT ist noch nicht im Stande, Fehler in der Formatierung völlig automatisch zu entdecken; das Programm wird Sie nicht auf Fehler aufmerksam machen, die Sie machen oder wenn Sie Änderungen in der Formatierung vornehmen, die Ihrer Zielsprache besser entsprechen. Manchmal jedoch kann Ihre übersetzte Datei seltsam aussehen, und im Falle von OpenDocument / OpenOffice.org Dateien kann es vorkommen, dass die Dateien sich überhaupt nicht öffnen lassen. </p>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Rechtliche Hinweise</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Index des Inhalts</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

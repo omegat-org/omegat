@@ -1,7 +1,7 @@
-Diese Übersetzung ist die Arbeit von Vito Smolej, copyright© 2009
+﻿Diese Übersetzung wurde von Vito Smolej angefertigt, Copyright© 2009.
 
 ==============================================================================
-  OmegaT 2.0.0, Lies mich Datei
+  OmegaT 2.0, LiesMich Datei
 
   1.  Information über OmegaT
   2.  Was ist OmegaT?
@@ -14,7 +14,7 @@ Diese Übersetzung ist die Arbeit von Vito Smolej, copyright© 2009
   1.  Information über OmegaT
 
 
-Das aktuellste Info über OmegaT befindet sich hier: 
+Die aktuellste Info über OmegaT befindet sich hier: 
       http://www.omegat.org/
 
 Unterstützung der Benutzer (mehrsprachig), mit Archiven, die auch ohne Abonnement zugänglich sind:
@@ -29,7 +29,7 @@ Fehlerberichte (in Englisch), auf der SourceForge Seite:
 ==============================================================================
   2.  Was ist OmegaT?
 
-OmegaT ist ein Werkzeug für die Computer unterstützte Übersetzung (CAT). Es ist frei, das heißt, für die Benutzung, auch für  professionelle Zwecke, wird kein Entgelt verlangt; darüber hinaus kann  jeder Benutzer, so lange die Benutzerlizenz respektiert wird, OmegaT  ändern und/oder weiter verteilen.
+OmegaT ist ein Werkzeug für die Computer unterstützte Übersetzung (CAT). Es ist frei, das heißt, für die Benutzung, auch für  professionelle Zwecke, wird kein Entgelt verlangt; darüber hinaus kann jeder Benutzer, so lange die Benutzerlizenz respektiert wird, OmegaT  ändern und/oder weiter verteilen.
 
 Hauptmerkmale von OmegaT sind:
   - es läuft in allen Betriebssystemen, die Java unterstützen. 
@@ -39,12 +39,12 @@ Hauptmerkmale von OmegaT sind:
   - es wird in allen Ordnern nach Dateien mit unterstützten Formaten gesucht 
   - unscharfe Treffer
   - clevere Behandlung von Projekten einschließlich komplizierter Hierarchien der Ordner
-  - OmegaT unterstützt Wörterbücher (Kontrolle der Terminologie)
-  - klare und umfassende Dokumentation und Anweisung
+  - OmegaT unterstützt Glossare (Kontrolle der Terminologie)
+  - klare und umfassende Dokumentation und Anleitung
   - Lokalisierung in mehreren Sprachen
 
-Im Urzustand unterstützt OmegaT folgende Dateiformate:
-  - reiner Text
+Im Ausgangszustand unterstützt OmegaT folgende Dateiformate:
+  - Reintext
   - HTML und XHTML
   - HTML Hilfe Erstellung
   - OpenDocument/OpenOffice.org
@@ -53,11 +53,11 @@ Im Urzustand unterstützt OmegaT folgende Dateiformate:
   - PO Dateien
   - DocBook Dokumentation Dateiformat
   - Microsoft OpenXML Dateien
-  - Okapi einsprachige XLIFF Dateien
+  Okapi einsprachige XLIFF Dateien
 
 OmegaT kann angepasst werden, um andere Dateiformate zu unterstützen.
 
-OmegaT wird sogar die hoch komplizierten Quellordner-Hierarchien automatisch analysieren, um auf alle unterstützten Dateien zuzugreifen und sie in einen Ziel-Ordner mit genau derselben Struktur einschließlich Kopien irgendwelcher  nicht unterstützten Dateien zu erzeugen. 
+OmegaT wird sogar die hoch komplizierten Quellordner-Hierarchien automatisch analysieren, um auf alle unterstützten Dateien zuzugreifen und sie in einen Ziel-Ordner mit genau derselben Struktur einschließlich Kopien irgendwelcher nicht unterstützten Dateien zu erzeugen. 
 
 Für eine schnelle Anfangseinführung OmegaT starten und die Schnellstartanleitung lesen.
 
@@ -72,7 +72,7 @@ Um OmegaT benutzen zu können, muss auf dem System Java Runtime Environment (JRE
 Für Windows und Linux Benutzer: wenn Sie sicher sind, dass in Ihrem System eine passende Version von JRE installiert ist, können sie OmegaT ohne JRE installieren (darauf wird im Namen der Version mit "Without_JRE" hingewiesen). 
 Wenn Sie Zweifel haben, empfehlen wir die "Standard" Version, d.h. mit  JRE. Das ist sicher, denn selbst wenn JRE auf Ihrem System schon installiert ist, wird diese Version damit nicht in Konflikt geraten.
 
-Linux Benutzer merken sich: OmegaT kommt nicht mit den freien/open-source Java Anwendungen aus, die mit vielen Linux Auslieferungen (zum Beispiel Ubuntu) als Paket kommen, da sie entweder überholt oder unvollständig sind. Laden Sie Sun's Java Runtime Environment (JRE) anhand des o.a. Links herunter und installieren es oder laden Sie das OmegaT Paket gebündelt mit JRE herunter und installieren es (das .tar.gz Bündel gekennzeichnet als "Linux").
+Linux Benutzer sollten bedenken: OmegaT kommt nicht mit den freien/open-source Java Anwendungen aus, die mit vielen Linux Auslieferungen (zum Beispiel Ubuntu) als Paket kommen, da sie entweder überholt oder unvollständig sind. Laden Sie Sun's Java Runtime Environment (JRE) anhand des o.a. Links herunter und installieren es oder laden Sie das OmegaT Paket gebündelt mit JRE herunter und installieren es (das .tar.gz Bündel gekennzeichnet als "Linux").
 
 Mac Benutzer: JRE wird bereits mit Mac OS X installiert. 
 
@@ -89,13 +89,13 @@ OmegaT kann auf verschiedene Arten gestartet werden.
 
 * Windows Benutzer: mit Doppelklick auf die Datei OmegaT.exe.  Wenn Sie im Dateimanager (Windows Explorer) die Datei OmegaT sehen können, aber nicht OmegaT.exe, dann die Einstellungen so ändern, dass Dateierweiterungen gezeigt werden. 
 
-* mit Doppelklick auf die Datei OmegaT.jar.  Das geht, wenn auf dem System der .jar Dateityp mit Java assoziiert ist. 
+* mit Doppelklick auf die Datei OmegaT.jar.  Das geht nur, wenn auf dem System der .jar Dateityp mit Java assoziiert ist. 
 
 * Aus der Befehlszeile Der Befehl, OmegaT zu starten, lautet:
 
 cd <Ordner mit der Datei OmegaT.jar>
 
-<Name und Pfad für die Java executable Datei>-jar OmegaT.jar
+<Name und Pfad für die ausführbare Java Datei>-jar OmegaT.jar
 
 (Die ausführbare Java Datei ist java unter Linux und java.exe unter Windows.
 Ist Java auf Systemebene installiert, muss der volle Pfad nicht angegeben werden.)
@@ -107,9 +107,9 @@ OmegaT.exe ins Startmenü, auf den Desktop oder in den Schnellstartbereich ziehe
 
 Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New Submenu
 
-Nach der Auswahl eines passenden Menüs, ein Untermenü/Element mit Datei - Neues Submenü und Datei - Neues Element hinzufügen. Geben Sie OmegaT als Name des neuen Elements ein.
+Nach der Auswahl eines passenden Menüs, ein Untermenü/Element mit Datei - Neues Unterverzeichnis und Datei - Neues Element hinzufügen. Geben Sie OmegaT als Name des neuen Elements ein.
 
-Im "Befehl"-Feld die Schaltfläche Navigation, um das OmegaT Startskript zu finden und zu wählen. 
+Im "Befehl"-Feld die Schaltfläche Navigation benutzen, um das OmegaT Startskript zu finden und auszuwählen. 
 
 Klicken Sie auf die Ikone (rechts von den Feldern Name/Beschreibung/Kommentar) - Andere Ikonen - Durchsuchen, und navigieren Sie zum /images Unterordner im OmegaT Programmordner.  OmegaT.png Ikone auswählen.
 
@@ -135,7 +135,7 @@ und auf der Liste der Übersetzer eintragen:
 Für andere Art von Beiträgen sich zuerst bei der Benutzergruppe anmelden:
       http://tech.groups.yahoo.com/group/omegat/
 
-und ein Gefühl dafür bekommen, was in der OmegaT Welt so vor sich geht...
+Bekommen Sie ein Gefühl dafür, was in der OmegaT Welt so vor sich geht...
 
   OmegaT ist die ursprüngliche Arbeit von Keith Godfrey. 
   Marc Prior ist der Koordinator des OmegaT Projektes. 
@@ -150,9 +150,11 @@ Code wurde beigesteuert von
   Alex Buloichik
   Sandra Jean Chua
   Martin Fleurke  
+  Wildrich Fourie
   Thomas Huriaux
   Fabián Mandelbaum
   Maxym Mykhalchuk 
+  Arno Peters
   Henry Pijffers 
   Tiago Saboga
   Andrzej Sawuła
@@ -189,12 +191,12 @@ OmegaT verwendet die folgenden Bibliotheken:
 
   Jmyspell 2. 1. 4 (LGPL Lizenz)
 
-  JAXB 2.1.7 (GPLv2 + classpath exception)
+  JAXB 2.1.7 (GPLv2 + classpath Ausnahme)
 
 ==============================================================================
  5.  Ärger mit OmegaT? Hilfe benötigt?
 
-Bevor ein Fehler gemeldet wird, stellen Sie sicher, dass Sie die Dokumentation gründlich kontrolliert haben. Was Sie sehen, könnte stattdessen eine Eigenschaft von OmegaT sein, die Sie gerade entdeckt haben. Wenn Sie den Log von OmegaT log einsehen und Wörter wie "Error", "Warning", "Exception" oder "died unexpectedly" finden, dann haben Sie wahrscheinlich ein echtes Problem entdeckt (die log.txt Datei ist im Ordner Einstellungen des Benutzers, siehe das Handbuch für den Ort).
+Bevor ein Fehler gemeldet wird, stellen Sie sicher, dass Sie die Dokumentation gründlich eingesehen haben. Was Sie sehen, könnte stattdessen eine Eigenschaft von OmegaT sein, die Sie gerade entdeckt haben. Wenn Sie den Log von OmegaT log einsehen und Wörter wie "Error", "Warning", "Exception" oder "died unexpectedly" finden, dann haben Sie wahrscheinlich ein echtes Problem entdeckt (die log.txt Datei ist im Ordner Einstellungen des Benutzers, siehe das Handbuch für den Ort).
 
 Als Nächstes von anderen Benutzern bestätigen lassen, was gefunden wurde, um sicher zu gehen, dass dies noch nicht berichtet wurde. Sie können den Fehlerbericht auch bei SourceForge verifizieren. Nur, wenn Sie sicher sind, dass Sie der Erste sind, der eine reproduzierbare Folge von Ereignissen gefunden haben, die zu etwas Unerwartetem führte, sollten Sie einen Fehler-Bericht einreichen. 
 

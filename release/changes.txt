@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.0.4 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.0.4 update 1 vs. 2.0.4
@@ -12,7 +12,11 @@
   - Read existing translations from source PO documents
   http://sourceforge.net/support/tracker.php?aid=2862687
 
+  Other enhancements:
+  - German localisation updated to 2.0.3 (Documentation)
+
   Bug Fixes:
+
   - PO: bad handling of already translated strings
   http://sourceforge.net/support/tracker.php?aid=1899440
 

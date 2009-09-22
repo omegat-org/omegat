@@ -762,7 +762,7 @@ public class RealProject implements IProject
         }
         
         protected void setCurrentFile(ProjectFileData file) {
-            m_curFile = file;
+            m_curFile = file;            
             legacyFileTM = null;
         }
         /**
@@ -844,8 +844,9 @@ public class RealProject implements IProject
 
         public void addLegacyTMXEntry(String source, String translation) {
             if (legacyFileTM == null) {
-                legacyFileTM = new LegacyTM(m_curFile.name,
-                        new ArrayList<StringEntry>());
+                String fn = StaticUtils.makeFilenameRelative(m_curFile.name,
+                        m_config.getSourceRoot());
+                legacyFileTM = new LegacyTM(fn, new ArrayList<StringEntry>());
                 getMemory().add(legacyFileTM);
             }
             StringEntry en = new StringEntry(source);

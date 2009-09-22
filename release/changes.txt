@@ -13,8 +13,8 @@
   http://sourceforge.net/support/tracker.php?aid=2862687
 
   Other enhancements:
-  - German localisation updated to 2.0.3 (Documentation)
-  - Japanese localisation updated to 2.0.4 (UI)
+  - German localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
+  - Japanese localisation updated to 2.0.4 (UI, Instant Start)
 
   Bug Fixes:
 

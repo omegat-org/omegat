@@ -44,6 +44,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Save project statistic into text file.
@@ -215,8 +216,44 @@ public class Statistics {
             ofp.close();
         } catch (IOException e) {
         }
+        
+        // dump matches - will be changed
+        //buildMatchesStats(m_srcTextEntryArray);
     }
 
+    /**
+     * Collect info about matched segments count.
+     * 
+     * TODO: should we iterate by unique entries or all entries ?
+     */
+    public static MatchStatisticsInfo buildMatchesStats(
+            final List<SourceTextEntry> m_srcTextEntryArray) {
+        MatchStatisticsInfo result = new MatchStatisticsInfo();
+
+        // We should iterate all segments from all files in project.
+        for (SourceTextEntry ste : m_srcTextEntryArray) {
+            if (StringUtil.isEmpty(ste.getTranslation())) {
+                // segment has translation - should be calculated as
+                // "Exact matched"
+                int r = result.getRowForExactMatch();
+                result.rows[r].segments++;
+                result.rows[r].words += numberOfWords(ste.getSrcText());
+            }else {
+                // not matched - 0% yet
+                int r = result.getRowByPercent(0);
+                result.rows[r].segments++;
+                result.rows[r].words += numberOfWords(ste.getSrcText());
+            }
+        }
+
+        // dump result - will be changed for UI
+        for (int i = 0; i < result.rows.length; i++) {
+            System.out.println(i + "\t" + result.rows[i].segments + "\t"
+                    + result.rows[i].words);
+        }
+        return result;
+    }
+    
     /** Computes the number of characters excluding spaces in a string. */
     private static int numberOfCharactersWithoutSpaces(String str) {
         int chars = 0;

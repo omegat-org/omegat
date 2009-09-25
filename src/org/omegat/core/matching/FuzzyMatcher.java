@@ -65,4 +65,22 @@ public class FuzzyMatcher
         }
         return result;
     }
+
+    /**
+     * Calculate similarity for tokens arrays(percent).
+     * 
+     * @param str
+     *            original string tokens
+     * @param cand
+     *            candidate string tokens
+     * @return similarity in percents
+     */
+    public static int calcSimilarity(
+            final ISimilarityCalculator distanceCalculator, final Token[] str,
+            final Token cand[]) {
+        int ld = distanceCalculator.compute(str, cand);
+        int similarity = (100 * (Math.max(str.length, cand.length) - ld))
+                / Math.max(str.length, cand.length);
+        return similarity;
+    }
 }

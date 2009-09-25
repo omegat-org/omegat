@@ -36,15 +36,21 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.matching.FuzzyMatcher;
+import org.omegat.core.matching.ISimilarityCalculator;
+import org.omegat.core.matching.ITokenizer;
+import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
+import org.omegat.util.Token;
 
 /**
  * Save project statistic into text file.
@@ -223,24 +229,40 @@ public class Statistics {
 
     /**
      * Collect info about matched segments count.
-     * 
-     * TODO: should we iterate by unique entries or all entries ?
      */
     public static MatchStatisticsInfo buildMatchesStats(
             final List<SourceTextEntry> m_srcTextEntryArray) {
+        ISimilarityCalculator distanceCalculator = new LevenshteinDistance();
+
         MatchStatisticsInfo result = new MatchStatisticsInfo();
 
         // We should iterate all segments from all files in project.
         for (SourceTextEntry ste : m_srcTextEntryArray) {
-            if (StringUtil.isEmpty(ste.getTranslation())) {
+            if (!StringUtil.isEmpty(ste.getTranslation())) {
                 // segment has translation - should be calculated as
                 // "Exact matched"
                 int r = result.getRowForExactMatch();
                 result.rows[r].segments++;
                 result.rows[r].words += numberOfWords(ste.getSrcText());
-            }else {
+            } else {
+                int maxSimilarity = 0;
+                Token[] strTokensStem = Core.getTokenizer().tokenizeWords(
+                        ste.getSrcText(), ITokenizer.StemmingMode.MATCHING);
+                for (SourceTextEntry cand : m_srcTextEntryArray) {
+                    if (cand == ste) {
+                        // source entry
+                        continue;
+                    }
+                    Token[] candTokens = Core.getTokenizer()
+                            .tokenizeWords(cand.getSrcText(),
+                                    ITokenizer.StemmingMode.MATCHING);
+                    int newSimilarity = FuzzyMatcher.calcSimilarity(
+                            distanceCalculator, strTokensStem, candTokens);
+                    maxSimilarity = Math.max(maxSimilarity, newSimilarity);
+                }
+
                 // not matched - 0% yet
-                int r = result.getRowByPercent(0);
+                int r = result.getRowByPercent(maxSimilarity);
                 result.rows[r].segments++;
                 result.rows[r].words += numberOfWords(ste.getSrcText());
             }
@@ -248,12 +270,35 @@ public class Statistics {
 
         // dump result - will be changed for UI
         for (int i = 0; i < result.rows.length; i++) {
-            System.out.println(i + "\t" + result.rows[i].segments + "\t"
+            switch (i) {
+            case 0:
+                System.out.print("Exact match: ");
+                break;
+            case 1:
+                System.out.print("100%       : ");
+                break;
+            case 2:
+                System.out.print("95% - 99%  : ");
+                break;
+            case 3:
+                System.out.print("85% - 94%  : ");
+                break;
+            case 4:
+                System.out.print("75% - 84%  : ");
+                break;
+            case 5:
+                System.out.print("50% - 74%  : ");
+                break;
+            case 6:
+                System.out.print("No match   : ");
+                break;
+            }
+            System.out.println(result.rows[i].segments + "\t"
                     + result.rows[i].words);
         }
         return result;
     }
-    
+
     /** Computes the number of characters excluding spaces in a string. */
     private static int numberOfCharactersWithoutSpaces(String str) {
         int chars = 0;

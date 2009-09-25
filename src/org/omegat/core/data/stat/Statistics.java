@@ -36,8 +36,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
@@ -253,6 +251,10 @@ public class Statistics {
                 for (SourceTextEntry cand : m_srcTextEntryArray) {
                     if (cand == ste) {
                         // source entry
+                        continue;
+                    }
+                    if (StringUtil.isEmpty(cand.getTranslation())) {
+                        // target without translation - skip
                         continue;
                     }
                     Token[] candTokens = Core.getTokenizer()

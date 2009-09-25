@@ -36,6 +36,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.swing.text.StyledEditorKit.BoldAction;
+
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
@@ -268,35 +270,100 @@ public class Statistics {
             }
         }
 
+        String[] header = new String[] { "", "Segments", "Words" };
+        boolean[] align = new boolean[] { false, true, true };
+        String[][] table = new String[7][3];
         // dump result - will be changed for UI
         for (int i = 0; i < result.rows.length; i++) {
             switch (i) {
             case 0:
-                System.out.print("Exact match: ");
+                table[i][0] = "Exact match: ";
                 break;
             case 1:
-                System.out.print("100%       : ");
+                table[i][0] = "100%: ";
                 break;
             case 2:
-                System.out.print("95% - 99%  : ");
+                table[i][0] = "95% - 99%: ";
                 break;
             case 3:
-                System.out.print("85% - 94%  : ");
+                table[i][0] = "85% - 94%: ";
                 break;
             case 4:
-                System.out.print("75% - 84%  : ");
+                table[i][0] = "75% - 84%: ";
                 break;
             case 5:
-                System.out.print("50% - 74%  : ");
+                table[i][0] = "50% - 74%: ";
                 break;
             case 6:
-                System.out.print("No match   : ");
+                table[i][0] = "No match: ";
                 break;
             }
-            System.out.println(result.rows[i].segments + "\t"
-                    + result.rows[i].words);
+            table[i][1] = Integer.toString(result.rows[i].segments);
+            table[i][2] = Integer.toString(result.rows[i].words);
         }
+        System.out.println(showTextTable(header, table, align));
         return result;
+    }
+
+    /**
+     * Draw text table with columns align.
+     * 
+     * @param columnHeaders
+     *            column headers
+     * @param table
+     *            table data
+     * @return text
+     */
+    protected static String showTextTable(String[] columnHeaders,
+            String[][] table, boolean[] alignRight) {
+        StringBuilder out = new StringBuilder();
+
+        // calculate max column size
+        int maxColSize[] = new int[columnHeaders.length];
+        for (int c = 0; c < columnHeaders.length; c++) {
+            maxColSize[c] = columnHeaders[c].length();
+        }
+        for (int r = 0; r < table.length; r++) {
+            for (int c = 0; c < table[r].length; c++) {
+                maxColSize[c] = Math.max(maxColSize[c], table[r][c].length());
+            }
+        }
+
+        for (int c = 0; c < columnHeaders.length; c++) {
+            appendField(out, columnHeaders[c], maxColSize[c], alignRight[c]);
+        }
+        out.append('\n');
+        for (int r = 0; r < table.length; r++) {
+            for (int c = 0; c < table[r].length; c++) {
+                appendField(out, table[r][c], maxColSize[c], alignRight[c]);
+            }
+            out.append('\n');
+        }
+        return out.toString();
+    }
+
+    /**
+     * Output field with specified length.
+     * 
+     * @param out
+     *            output stream
+     * @param data
+     *            field data
+     * @param colSize
+     *            field size
+     */
+    private static void appendField(StringBuilder out, String data,
+            int colSize, boolean alignRight) {
+        if (!alignRight) {
+            out.append(data);
+        }
+        for (int i = data.length(); i < colSize; i++) {
+            out.append(' ');
+        }
+        if (alignRight) {
+            out.append(data);
+        }
+        out.append("  ");
     }
 
     /** Computes the number of characters excluding spaces in a string. */

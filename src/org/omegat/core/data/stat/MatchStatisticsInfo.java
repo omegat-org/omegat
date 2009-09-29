@@ -48,15 +48,6 @@ public class MatchStatisticsInfo {
     }
 
     /**
-     * Get row index in table for exact match.
-     * 
-     * @return row index
-     */
-    public int getRowForExactMatch() {
-        return 0;
-    }
-
-    /**
      * Get row index by match percent.
      * 
      * @param percent
@@ -64,7 +55,10 @@ public class MatchStatisticsInfo {
      * @return row index
      */
     public int getRowByPercent(int percent) {
-        if (percent == 100) {
+        if (percent == Integer.MAX_VALUE) {
+            // exact match
+            return 0;
+        } else if (percent == 100) {
             return 1;
         } else if (percent >= 95) {
             return 2;

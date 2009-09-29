@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Zoltan Bartko
-               2009 Didier Briel
+               2009 Didier Briel, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,6 +40,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.ITokenizer;
@@ -60,6 +61,7 @@ import org.omegat.util.Token;
  * @author Maxym Mykhalchuk
  * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  * @author Didier Briel
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class Statistics {
     /**
@@ -232,44 +234,17 @@ public class Statistics {
      */
     public static MatchStatisticsInfo buildMatchesStats(
             final List<SourceTextEntry> m_srcTextEntryArray) {
+        if(Core.getProject().getAllEntries()==null) return null;
         ISimilarityCalculator distanceCalculator = new LevenshteinDistance();
 
         MatchStatisticsInfo result = new MatchStatisticsInfo();
 
         // We should iterate all segments from all files in project.
         for (SourceTextEntry ste : m_srcTextEntryArray) {
-            if (!StringUtil.isEmpty(ste.getTranslation())) {
-                // segment has translation - should be calculated as
-                // "Exact matched"
-                int r = result.getRowForExactMatch();
-                result.rows[r].segments++;
-                result.rows[r].words += numberOfWords(ste.getSrcText());
-            } else {
-                int maxSimilarity = 0;
-                Token[] strTokensStem = Core.getTokenizer().tokenizeWords(
-                        ste.getSrcText(), ITokenizer.StemmingMode.MATCHING);
-                for (SourceTextEntry cand : m_srcTextEntryArray) {
-                    if (cand == ste) {
-                        // source entry
-                        continue;
-                    }
-                    if (StringUtil.isEmpty(cand.getTranslation())) {
-                        // target without translation - skip
-                        continue;
-                    }
-                    Token[] candTokens = Core.getTokenizer()
-                            .tokenizeWords(cand.getSrcText(),
-                                    ITokenizer.StemmingMode.MATCHING);
-                    int newSimilarity = FuzzyMatcher.calcSimilarity(
-                            distanceCalculator, strTokensStem, candTokens);
-                    maxSimilarity = Math.max(maxSimilarity, newSimilarity);
-                }
-
-                // not matched - 0% yet
-                int r = result.getRowByPercent(maxSimilarity);
-                result.rows[r].segments++;
-                result.rows[r].words += numberOfWords(ste.getSrcText());
-            }
+            int p = getMaxSimilarityPercent(ste, distanceCalculator);
+            int r = result.getRowByPercent(p);
+            result.rows[r].segments++;
+            result.rows[r].words += numberOfWords(ste.getSrcText());
         }
 
         String[] header = new String[] { "", "Segments", "Words" };
@@ -305,6 +280,50 @@ public class Statistics {
         }
         System.out.println(showTextTable(header, table, align));
         return result;
+    }
+    
+    private static int getMaxSimilarityPercent(final SourceTextEntry ste,
+            final ISimilarityCalculator distanceCalculator) {
+        if (!StringUtil.isEmpty(ste.getTranslation())) {
+            // segment has translation - should be calculated as
+            // "Exact matched"
+            return Integer.MAX_VALUE;
+        }
+
+        Token[] strTokensStem = Core.getTokenizer().tokenizeWords(
+                ste.getSrcText(), ITokenizer.StemmingMode.MATCHING);
+        int maxSimilarity = 0; // not matched - 0% yet
+
+        /* Travel by project entries. */
+        List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
+        for (int i = 0; i < allEntries.size(); i++) { // 'for' much faster
+            SourceTextEntry cand = allEntries.get(i);
+            if (cand == ste) {
+                // source entry
+                continue;
+            }
+            if (StringUtil.isEmpty(cand.getTranslation())) {
+                // target without translation - skip
+                continue;
+            }
+            Token[] candTokens = Core.getTokenizer().tokenizeWords(
+                    cand.getSrcText(), ITokenizer.StemmingMode.MATCHING);
+            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
+                    strTokensStem, candTokens);
+            maxSimilarity = Math.max(maxSimilarity, newSimilarity);
+        }
+
+        /* Travel by TMs. */
+        List<TransMemory> tmList = Core.getProject().getTransMemory();
+        for (int i = 0; i < tmList.size(); i++) {// 'for' much faster
+            TransMemory tm = tmList.get(i);
+            Token[] candTokens = Core.getTokenizer().tokenizeWords(tm.source,
+                    ITokenizer.StemmingMode.MATCHING);
+            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
+                    strTokensStem, candTokens);
+            maxSimilarity = Math.max(maxSimilarity, newSimilarity);
+        }
+        return maxSimilarity;
     }
 
     /**

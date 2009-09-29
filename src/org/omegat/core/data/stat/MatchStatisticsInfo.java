@@ -44,7 +44,7 @@ public class MatchStatisticsInfo {
     }
 
     public static class Row {
-        int segments, words;
+        public int segments, words;
     }
 
     /**

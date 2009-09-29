@@ -28,10 +28,15 @@
 
 package org.omegat.util.gui;
 
+import java.awt.Dimension;
+import java.awt.Point;
+import java.awt.Window;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
 
+import org.omegat.core.Core;
 import org.omegat.util.OStrings;
 
 import com.vlsolutions.swing.docking.ui.DockingUISettings;
@@ -116,5 +121,26 @@ public class DockingUI {
      */
     private static ImageIcon getIcon(final String iconName) {
         return ResourcesUtil.getIcon("/org/omegat/gui/resources/" + iconName);
+    }
+    
+    /**
+     * Move window to the center of main window.
+     * 
+     * @param window window
+     */
+    public static void displayCentered(final Window window) {
+        Point mLocation = Core.getMainWindow().getApplicationFrame()
+                .getLocation();
+        Dimension mSize = Core.getMainWindow().getApplicationFrame().getSize();
+
+        Point mCenter = new Point();
+        mCenter.x = mLocation.x + mSize.width / 2;
+        mCenter.y = mLocation.y + mSize.height / 2;
+
+        Dimension dSize = window.getSize();
+        Point dLocation = new Point();
+        dLocation.x = mCenter.x - dSize.width / 2;
+        dLocation.y = mCenter.y - dSize.height / 2;
+        window.setLocation(dLocation);
     }
 }

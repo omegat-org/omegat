@@ -86,7 +86,10 @@ public class OConsts
 
     /** The name of the file with project statistics: segments, words, chars count. */
     public static final String STATS_FILENAME   = "project_stats.txt";          // NOI18N
-    
+
+    /** The name of the file with project match statistics. */
+    public static final String STATS_MATCH_FILENAME = "project_stats_match.txt";
+
     /** The name of the file with the ignored words: one ignored word per line */
     public static final String IGNORED_WORD_LIST_FILE_NAME = "ignored_words.txt";   // NOI18N
     

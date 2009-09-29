@@ -44,7 +44,6 @@ import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.ITokenizer;
-import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -224,66 +223,19 @@ public class Statistics {
             ofp.close();
         } catch (IOException e) {
         }
-        
-        // dump matches - will be changed
-        //buildMatchesStats(m_srcTextEntryArray);
     }
 
     /**
-     * Collect info about matched segments count.
+     * Calculate max similarity percent for one entry.
+     * 
+     * @param ste source entry
+     * @param distanceCalculator calculator
+     * @param allEntries all entries in project
+     * @return max similarity percent
      */
-    public static MatchStatisticsInfo buildMatchesStats(
-            final List<SourceTextEntry> m_srcTextEntryArray) {
-        if(Core.getProject().getAllEntries()==null) return null;
-        ISimilarityCalculator distanceCalculator = new LevenshteinDistance();
-
-        MatchStatisticsInfo result = new MatchStatisticsInfo();
-
-        // We should iterate all segments from all files in project.
-        for (SourceTextEntry ste : m_srcTextEntryArray) {
-            int p = getMaxSimilarityPercent(ste, distanceCalculator);
-            int r = result.getRowByPercent(p);
-            result.rows[r].segments++;
-            result.rows[r].words += numberOfWords(ste.getSrcText());
-        }
-
-        String[] header = new String[] { "", "Segments", "Words" };
-        boolean[] align = new boolean[] { false, true, true };
-        String[][] table = new String[7][3];
-        // dump result - will be changed for UI
-        for (int i = 0; i < result.rows.length; i++) {
-            switch (i) {
-            case 0:
-                table[i][0] = "Exact match: ";
-                break;
-            case 1:
-                table[i][0] = "100%: ";
-                break;
-            case 2:
-                table[i][0] = "95% - 99%: ";
-                break;
-            case 3:
-                table[i][0] = "85% - 94%: ";
-                break;
-            case 4:
-                table[i][0] = "75% - 84%: ";
-                break;
-            case 5:
-                table[i][0] = "50% - 74%: ";
-                break;
-            case 6:
-                table[i][0] = "No match: ";
-                break;
-            }
-            table[i][1] = Integer.toString(result.rows[i].segments);
-            table[i][2] = Integer.toString(result.rows[i].words);
-        }
-        System.out.println(showTextTable(header, table, align));
-        return result;
-    }
-    
-    private static int getMaxSimilarityPercent(final SourceTextEntry ste,
-            final ISimilarityCalculator distanceCalculator) {
+    public static int getMaxSimilarityPercent(final SourceTextEntry ste,
+            final ISimilarityCalculator distanceCalculator,
+            final List<SourceTextEntry> allEntries) {
         if (!StringUtil.isEmpty(ste.getTranslation())) {
             // segment has translation - should be calculated as
             // "Exact matched"
@@ -295,7 +247,6 @@ public class Statistics {
         int maxSimilarity = 0; // not matched - 0% yet
 
         /* Travel by project entries. */
-        List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
         for (int i = 0; i < allEntries.size(); i++) { // 'for' much faster
             SourceTextEntry cand = allEntries.get(i);
             if (cand == ste) {
@@ -326,67 +277,6 @@ public class Statistics {
         return maxSimilarity;
     }
 
-    /**
-     * Draw text table with columns align.
-     * 
-     * @param columnHeaders
-     *            column headers
-     * @param table
-     *            table data
-     * @return text
-     */
-    protected static String showTextTable(String[] columnHeaders,
-            String[][] table, boolean[] alignRight) {
-        StringBuilder out = new StringBuilder();
-
-        // calculate max column size
-        int maxColSize[] = new int[columnHeaders.length];
-        for (int c = 0; c < columnHeaders.length; c++) {
-            maxColSize[c] = columnHeaders[c].length();
-        }
-        for (int r = 0; r < table.length; r++) {
-            for (int c = 0; c < table[r].length; c++) {
-                maxColSize[c] = Math.max(maxColSize[c], table[r][c].length());
-            }
-        }
-
-        for (int c = 0; c < columnHeaders.length; c++) {
-            appendField(out, columnHeaders[c], maxColSize[c], alignRight[c]);
-        }
-        out.append('\n');
-        for (int r = 0; r < table.length; r++) {
-            for (int c = 0; c < table[r].length; c++) {
-                appendField(out, table[r][c], maxColSize[c], alignRight[c]);
-            }
-            out.append('\n');
-        }
-        return out.toString();
-    }
-
-    /**
-     * Output field with specified length.
-     * 
-     * @param out
-     *            output stream
-     * @param data
-     *            field data
-     * @param colSize
-     *            field size
-     */
-    private static void appendField(StringBuilder out, String data,
-            int colSize, boolean alignRight) {
-        if (!alignRight) {
-            out.append(data);
-        }
-        for (int i = data.length(); i < colSize; i++) {
-            out.append(' ');
-        }
-        if (alignRight) {
-            out.append(data);
-        }
-        out.append("  ");
-    }
-
     /** Computes the number of characters excluding spaces in a string. */
     private static int numberOfCharactersWithoutSpaces(String str) {
         int chars = 0;
@@ -398,7 +288,7 @@ public class Statistics {
     }
 
     /** Computes the number of words in a string. */
-    private static int numberOfWords(String str) {
+    public static int numberOfWords(String str) {
         int len = str.length();
         if (len == 0)
             return 0;

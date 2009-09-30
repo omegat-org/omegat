@@ -242,12 +242,13 @@ public class Statistics {
             return Integer.MAX_VALUE;
         }
 
-        Token[] strTokensStem = Core.getTokenizer().tokenizeWords(
-                ste.getSrcText(), ITokenizer.StemmingMode.MATCHING);
+        Token[] strTokensStem = Core.getTokenizer().tokenizeAllExactly(
+                ste.getSrcText());
         int maxSimilarity = 0; // not matched - 0% yet
 
         /* Travel by project entries. */
-        for (int i = 0; i < allEntries.size(); i++) { // 'for' much faster
+        // 'for(int i;;)' much faster than 'for(:)'
+        for (int i = 0; i < allEntries.size(); i++) {
             SourceTextEntry cand = allEntries.get(i);
             if (cand == ste) {
                 // source entry
@@ -257,8 +258,8 @@ public class Statistics {
                 // target without translation - skip
                 continue;
             }
-            Token[] candTokens = Core.getTokenizer().tokenizeWords(
-                    cand.getSrcText(), ITokenizer.StemmingMode.MATCHING);
+            Token[] candTokens = Core.getTokenizer().tokenizeAllExactly(
+                    cand.getSrcText());
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
                     strTokensStem, candTokens);
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);
@@ -266,10 +267,11 @@ public class Statistics {
 
         /* Travel by TMs. */
         List<TransMemory> tmList = Core.getProject().getTransMemory();
-        for (int i = 0; i < tmList.size(); i++) {// 'for' much faster
+        // 'for(int i;;)' much faster than 'for(:)'
+        for (int i = 0; i < tmList.size(); i++) {
             TransMemory tm = tmList.get(i);
-            Token[] candTokens = Core.getTokenizer().tokenizeWords(tm.source,
-                    ITokenizer.StemmingMode.MATCHING);
+            Token[] candTokens = Core.getTokenizer().tokenizeAllExactly(
+                    tm.source);
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
                     strTokensStem, candTokens);
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);

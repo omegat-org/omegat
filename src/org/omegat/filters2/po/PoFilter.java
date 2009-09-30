@@ -65,6 +65,11 @@ public class PoFilter extends AbstractFilter {
     protected static Pattern MSG_STR = Pattern
             .compile("msgstr(\\[[0-9]+\\])? \"(.*)\"");
     protected static Pattern MSG_OTHER = Pattern.compile("\"(.*)\"");
+    
+    /** Prefix to source for fuzzy segments. */
+    protected static String FUZZY_SOURCE_PREFIX = "[PO-fuzzy] ";
+    /** Add fuzzy segments to legacy TM instead translations. */
+    protected static boolean FUZZY_TO_LEGACY = true;
 
     enum MODE {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL
@@ -253,11 +258,17 @@ public class PoFilter extends AbstractFilter {
             // add to real translation
             entryProcessingCallback.addEntry(null, source, translation, null);
         } else {
-            // add to real list without translation
-            entryProcessingCallback.addEntry(null, source, null, null);
-            // add to legacy TMX instead real translation
-            entryProcessingCallback.addLegacyTMXEntry("[PO-fuzzy] " + source,
-                    translation);
+            if (FUZZY_TO_LEGACY) {
+                // add to real list without translation
+                entryProcessingCallback.addEntry(null, source, null, null);
+                // add to legacy TM instead real translation
+                entryProcessingCallback.addLegacyTMXEntry(FUZZY_SOURCE_PREFIX
+                        + source, translation);
+            } else {
+                // add to real translation
+                entryProcessingCallback.addEntry(null, FUZZY_SOURCE_PREFIX
+                        + source, translation, null);
+            }
         }
     }
     

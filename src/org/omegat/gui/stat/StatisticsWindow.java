@@ -228,6 +228,6 @@ public class StatisticsWindow extends JDialog implements
         if (alignRight) {
             out.append(data);
         }
-        out.append("  ");
+        out.append("\t");
     }
 }

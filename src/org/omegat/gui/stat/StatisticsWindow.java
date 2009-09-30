@@ -30,6 +30,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
+import java.text.DateFormat;
 import java.util.Date;
 
 import javax.swing.JDialog;
@@ -119,7 +120,7 @@ public class StatisticsWindow extends JDialog implements
             OutputStreamWriter out = new OutputStreamWriter(
                     new FileOutputStream(fn), OConsts.UTF8);
             try {
-                out.write(new Date() + "\n");
+                out.write(DateFormat.getInstance().format(new Date()) + "\n");
                 out.write(data);
                 out.flush();
             } finally {

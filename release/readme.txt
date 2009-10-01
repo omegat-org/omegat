@@ -43,7 +43,10 @@ OmegaT's main features are:
   - searches of files in supported formats in any folder 
   - fuzzy matching
   - smart handling of projects including complex folder hierarchies
-  - support for glossaries (terminology checks)
+  - support for glossaries (terminology checks) 
+  - support for OpenSource on-the-fly spell checkers
+  - support for StarDict dictionaries
+  - support for the Google Translate machine translation services
   - clear and comprehensive documentation and tutorial
   - localization in a number of languages.
 
@@ -58,6 +61,10 @@ OmegaT supports the following file formats out of the box:
   - DocBook documentation file format
   - Microsoft OpenXML files
   - Okapi monolingual XLIFF files
+  - QuarkXPress CopyFlowGold
+  - Subtitle files (SRT)
+  - ResX
+  - Android resource
 
 OmegaT can be customized to support other file formats as well.
 
@@ -76,9 +83,30 @@ the [Help] menu after starting OmegaT.
 
 3.1 General
 In order to run, OmegaT requires the Java Runtime Environment (JRE) version 
-1.4 or higher to be installed on your system. OmegaT is now supplied as 
+1.5 or higher to be installed on your system. OmegaT is now supplied as 
 standard with the Java Runtime Environment to save users the trouble of 
 selecting, obtaining and installing it. 
+
+If you have already Java, the simplest way to install the current version of 
+OmegaT is to use Java Web Start. 
+For this purpose download the following file and then execute it:
+
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+
+It will install the correct environment for your computer and the application 
+itself on the first run. Later calls do not need to be online.
+
+During the installation, depending on your operating system, you may receive 
+several security warnings. The certificate is self-signed by "Didier Briel". 
+The permissions you give to this version (which might be mentioned as an 
+"unrestricted access to the computer") are identical  to permissions you give 
+to the local version, as installed by a procedure, described later: they allow 
+an access to the hard drive of the computer. Subsequent clicks on  OmegaT.jnlp 
+will check for any upgrades, if you are online, install them if there are any, 
+and then start OmegaT. 
+
+The alternative ways and means of dowloading and installing OmegaT are
+shown below. 
 
 Windows and Linux users: if you are confident that your system already has a 
 suitable version of the JRE installed, you can install the version of OmegaT 
@@ -98,7 +126,9 @@ Mac users: the JRE is already installed on Mac OS X.
 
 Linux on PowerPC systems: users will need to download IBM's JRE, as Sun does 
 not provide a JRE for PPC systems. Download in this case from:
+
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
+
 
 3.2 Installation
 * Windows users: Simply launch the installation program. If you want, the 
@@ -201,10 +231,10 @@ Code has been contributed by
 Other contributions by
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary
+  Jean-Christophe Helary (localization manager)
   Vito Smolej (documentation manager)
   Samuel Murray
-  Marc Prior (localization manager)
+  Marc Prior 
   and many, many more very helpful people
 
 (If you think you have significantly contributed to the OmegaT Project 

@@ -65,6 +65,7 @@ OmegaT supports the following file formats out of the box:
   - Subtitle files (SRT)
   - ResX
   - Android resource
+  - LaTeX
 
 OmegaT can be customized to support other file formats as well.
 

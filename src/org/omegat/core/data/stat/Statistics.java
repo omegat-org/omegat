@@ -43,7 +43,6 @@ import org.omegat.core.data.StringEntry;
 import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
-import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -68,7 +67,7 @@ public class Statistics {
      * character count of the project, the total number of unique segments, plus
      * the details for each file.
      */
-    public static void buildProjectStats(final List<StringEntry> m_strEntryList,
+    public static String buildProjectStats(final List<StringEntry> m_strEntryList,
             final List<SourceTextEntry> m_srcTextEntryArray, final ProjectProperties m_config,
             final int numberofTranslatedSegments) {
         int I_WORDS = 0, I_WORDSLEFT = 1, I_CHARSNSP = 2, I_CHARSNSPLEFT = 3, I_CHARS = 4, I_CHARSLEFT = 5;
@@ -137,6 +136,9 @@ public class Statistics {
             counts.put(fileName, numbers);
         }
 
+
+        StringBuilder result=new StringBuilder();
+        
         try {
             // removing old stats
             try {
@@ -145,66 +147,67 @@ public class Statistics {
                     oldstats.delete();
             } catch (Exception e) {
             }
+            
 
             // now dump file based word counts to disk
             String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
             Writer ofp = new OutputStreamWriter(new FileOutputStream(fn), OConsts.UTF8);
-            ofp.write(OStrings.getString("CT_STATS_Project_Statistics") + "\n\n"); // NOI18N
+            result.append(OStrings.getString("CT_STATS_Project_Statistics") + "\n\n"); // NOI18N
 
             // TOTAL
 
-            ofp.write(OStrings.getString("CT_STATS_Total") + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append(OStrings.getString("CT_STATS_Total") + "\n"); // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Segments") + "\t" + m_srcTextEntryArray.size() + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Words") + "\t" + totalWords + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Characters_NOSP") + "\t" + totalCharsNoSpaces + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Characters") + "\t" + totalChars + "\n"); // NOI18N
 
             // REMAINING
 
-            ofp.write(OStrings.getString("CT_STATS_Remaining") + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append(OStrings.getString("CT_STATS_Remaining") + "\n"); // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Segments") + "\t" + remainingSegments + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Words") + "\t" + remainingWords + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Characters_NOSP") + "\t" + remainingCharsNoSpaces + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Characters") + "\t" + remainingChars + "\n"); // NOI18N
 
             // UNIQUE
 
-            ofp.write(OStrings.getString("CT_STATS_Unique") + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append(OStrings.getString("CT_STATS_Unique") + "\n"); // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Segments") + "\t" + m_strEntryList.size() + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Words") + "\t" + uniqueWords + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Characters_NOSP") + "\t" + uniqueCharsNoSpaces + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Characters") + "\t" + uniqueChars + "\n"); // NOI18N
 
             // UNIQUE REMAINING
 
-            ofp.write(OStrings.getString("CT_STATS_Unique_Remaining") + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append(OStrings.getString("CT_STATS_Unique_Remaining") + "\n"); // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Segments") + "\t" + remainingUniqueSegments + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Words") + "\t" + remainingUniqueWords + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Characters_NOSP") + "\t" + remainingUniqueCharsNoSpaces + "\n"); // NOI18N
-            ofp.write("\t" + // NOI18N
+            result.append("\t" + // NOI18N
                     OStrings.getString("CT_STATS_Characters") + "\t" + remainingUniqueChars + "\n");
-            ofp.write("\n"); // NOI18N
+            result.append("\n"); // NOI18N
 
             // STATISTICS BY FILE
 
-            ofp.write(OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n"); // NOI18N
+            result.append(OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n"); // NOI18N
 
-            ofp.write(OStrings.getString("CT_STATS_FILE_Name") + "\t" + // NOI18N
+            result.append(OStrings.getString("CT_STATS_FILE_Name") + "\t" + // NOI18N
                     OStrings.getString("CT_STATS_FILE_Total_Words") + "\t" + // NOI18N
                     OStrings.getString("CT_STATS_FILE_Remaining_Words") + "\t" + // NOI18N
                     OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP") + "\t" + // NOI18N
@@ -214,15 +217,18 @@ public class Statistics {
 
             for (String filename : counts.keySet()) {
                 int[] numbers = counts.get(filename);
-                ofp.write(filename + "\t" + numbers[I_WORDS] + "\t" + numbers[I_WORDSLEFT] + // NOI18N
+                result.append(filename + "\t" + numbers[I_WORDS] + "\t" + numbers[I_WORDSLEFT] + // NOI18N
                         "\t" + numbers[I_CHARSNSP] + "\t" + numbers[I_CHARSNSPLEFT] + // NOI18N
                         "\t" + numbers[I_CHARS] + "\t" + numbers[I_CHARSLEFT] + // NOI18N
                         "\n"); // NOI18N
             }
 
+            ofp.write(result.toString());
             ofp.close();
+           
         } catch (IOException e) {
         }
+        return result.toString();
     }
 
     /**

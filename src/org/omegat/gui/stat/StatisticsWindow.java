@@ -35,12 +35,16 @@ import java.util.Date;
 
 import javax.swing.JDialog;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
+
+import org.omegat.core.data.stat.StandardStatisticsCalculationThread;
 import org.omegat.core.data.stat.MatchStatisticsCalculationThread;
 import org.omegat.core.data.stat.MatchStatisticsInfo;
+import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.gui.DockingUI;
@@ -51,32 +55,50 @@ import org.omegat.util.gui.DockingUI;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class StatisticsWindow extends JDialog implements
-        MatchStatisticsCalculationThread.Callback {
+        MatchStatisticsCalculationThread.Callback,
+        StandardStatisticsCalculationThread.Callback {
+
+    public static enum STAT_TYPE {
+        STANDARD, MATCHES
+    };
+
     String[] header = new String[] { "", "Segments", "Words" };
     boolean[] align = new boolean[] { false, true, true };
     private JProgressBar progressBar;
     private JTextArea output;
-    private MatchStatisticsCalculationThread thread;
+    private LongProcessThread thread;
 
-    public StatisticsWindow() {
+    public StatisticsWindow(STAT_TYPE statType) {
         super(Core.getMainWindow().getApplicationFrame(), true);
 
+        progressBar = new JProgressBar();
+        output = new JTextArea();
+
+        switch (statType) {
+        case STANDARD:
+            setTitle("Standard");
+            thread = new StandardStatisticsCalculationThread(this);
+            break;
+        case MATCHES:
+            setTitle("Matches");
+            thread = new MatchStatisticsCalculationThread(this);
+            break;
+        }
+
+        // Run calculation
+        thread.setPriority(Thread.MIN_PRIORITY);
+        thread.start();
+
+        // Prepare UI
         setLayout(new BorderLayout());
 
-        progressBar = new JProgressBar();
         progressBar.setStringPainted(true);
         add(progressBar, BorderLayout.SOUTH);
 
-        output = new JTextArea();
         output.setEditable(false);
         output.setFont(new Font("Monospaced", Font.PLAIN, Core.getMainWindow()
                 .getApplicationFont().getSize()));
-        add(output, BorderLayout.CENTER);
-
-        setSize(400, 300);
-        DockingUI.displayCentered(this);
-
-        thread = new MatchStatisticsCalculationThread(this);
+        add(new JScrollPane(output), BorderLayout.CENTER);
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
@@ -86,7 +108,17 @@ public class StatisticsWindow extends JDialog implements
             }
         });
 
-        thread.start();
+        switch (statType) {
+        case STANDARD:
+            setTitle("Standard");
+            break;
+        case MATCHES:
+            setTitle("Matches");
+            break;
+        }
+
+        setSize(400, 300);
+        DockingUI.displayCentered(this);
     }
 
     public void showProgress(final int percent) {
@@ -94,6 +126,17 @@ public class StatisticsWindow extends JDialog implements
             public void run() {
                 progressBar.setValue(percent);
                 progressBar.setString(percent + "%");
+            }
+        });
+    }
+
+    public void displayData(final String result) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                progressBar.setValue(100);
+                progressBar.setString("");
+                output.setText(result);
+                output.setCaretPosition(0);
             }
         });
     }

@@ -455,10 +455,15 @@ public class MainWindowMenuHandler {
         Core.getTagValidation().validateTags();
     }
     
-    public void toolsShowStatisticsMenuItemActionPerformed() {
-        new StatisticsWindow().setVisible(true);
+    public void toolsShowStatisticsStandardMenuItemActionPerformed() {
+        new StatisticsWindow(StatisticsWindow.STAT_TYPE.STANDARD)
+                .setVisible(true);
     }
-    
+
+    public void toolsShowStatisticsMatchesMenuItemActionPerformed() {
+        new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES)
+                .setVisible(true);
+    }
 
     public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings().setUseTabForAdvance(

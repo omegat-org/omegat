@@ -234,22 +234,27 @@ public class Statistics {
     /**
      * Calculate max similarity percent for one entry.
      * 
-     * @param ste source entry
-     * @param distanceCalculator calculator
-     * @param allEntries all entries in project
+     * @param ste
+     *            source entry
+     * @param distanceCalculator
+     *            calculator
+     * @param allEntries
+     *            all entries in project
      * @return max similarity percent
      */
     public static int getMaxSimilarityPercent(final SourceTextEntry ste,
             final ISimilarityCalculator distanceCalculator,
-            final List<SourceTextEntry> allEntries) {
+            final List<SourceTextEntry> allEntries,
+            final Map<String, Token[]> tokensCache) {
+
         if (!StringUtil.isEmpty(ste.getTranslation())) {
             // segment has translation - should be calculated as
             // "Exact matched"
             return Integer.MAX_VALUE;
         }
 
-        Token[] strTokensStem = Core.getTokenizer().tokenizeAllExactly(
-                ste.getSrcText());
+        Token[] strTokensStem = tokenizeExactlyWithCache(tokensCache, ste
+                .getSrcText());
         int maxSimilarity = 0; // not matched - 0% yet
 
         /* Travel by project entries. */
@@ -264,8 +269,8 @@ public class Statistics {
                 // target without translation - skip
                 continue;
             }
-            Token[] candTokens = Core.getTokenizer().tokenizeAllExactly(
-                    cand.getSrcText());
+            Token[] candTokens = tokenizeExactlyWithCache(tokensCache, cand
+                    .getSrcText());
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
                     strTokensStem, candTokens);
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);
@@ -276,13 +281,32 @@ public class Statistics {
         // 'for(int i;;)' much faster than 'for(:)'
         for (int i = 0; i < tmList.size(); i++) {
             TransMemory tm = tmList.get(i);
-            Token[] candTokens = Core.getTokenizer().tokenizeAllExactly(
+            Token[] candTokens = tokenizeExactlyWithCache(tokensCache,
                     tm.source);
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
                     strTokensStem, candTokens);
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);
         }
         return maxSimilarity;
+    }
+
+    /**
+     * Get tokens from cache or tokenize and cache it.
+     * 
+     * @param tokensCache
+     *            cache
+     * @param str
+     *            string to tokenize
+     * @return tokens
+     */
+    private static Token[] tokenizeExactlyWithCache(
+            final Map<String, Token[]> tokensCache, final String str) {
+        Token[] result = tokensCache.get(str);
+        if (result == null) {
+            result = Core.getTokenizer().tokenizeAllExactly(str);
+            tokensCache.put(str, result);
+        }
+        return result;
     }
 
     /** Computes the number of characters excluding spaces in a string. */

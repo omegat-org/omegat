@@ -24,13 +24,16 @@
 
 package org.omegat.core.statistics;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.threads.LongProcessThread;
+import org.omegat.util.Token;
 
 /**
  * Thread for calculate match statistics.
@@ -39,6 +42,9 @@ import org.omegat.core.threads.LongProcessThread;
  */
 public class CalcMatchStatistics extends LongProcessThread {
     private Callback callback;
+
+    /** Hash for exact tokens. Only for statistics calculation. */
+    private Map<String, Token[]> tokensCache = new HashMap<String, Token[]>();
 
     public CalcMatchStatistics(Callback callback) {
         this.callback = callback;
@@ -54,7 +60,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         for (int i = 0; i < allEntries.size(); i++) {
             SourceTextEntry ste = allEntries.get(i);
             int p = Statistics.getMaxSimilarityPercent(ste, distanceCalculator,
-                    allEntries);
+                    allEntries, tokensCache);
             int r = result.getRowByPercent(p);
             result.rows[r].segments++;
             result.rows[r].words += Statistics.numberOfWords(ste.getSrcText());

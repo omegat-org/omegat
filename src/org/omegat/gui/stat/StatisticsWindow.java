@@ -26,6 +26,8 @@ package org.omegat.gui.stat;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.FileOutputStream;
@@ -33,20 +35,26 @@ import java.io.OutputStreamWriter;
 import java.text.DateFormat;
 import java.util.Date;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
+import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
-
 import org.omegat.core.statistics.CalcMatchStatistics;
-import org.omegat.core.statistics.MatchStatisticsInfo;
 import org.omegat.core.statistics.CalcStandardStatistics;
+import org.omegat.core.statistics.MatchStatisticsInfo;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 
 /**
@@ -55,14 +63,16 @@ import org.omegat.util.gui.DockingUI;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class StatisticsWindow extends JDialog implements
-        CalcMatchStatistics.Callback,
-        CalcStandardStatistics.Callback {
+        CalcMatchStatistics.Callback, CalcStandardStatistics.Callback {
 
     public static enum STAT_TYPE {
         STANDARD, MATCHES
     };
 
-    String[] header = new String[] { "", "Segments", "Words" };
+    String[] header = new String[] { "",
+            OStrings.getString("CT_STATSMATCH_ColumnSegments"),
+            OStrings.getString("CT_STATSMATCH_ColumnWords") };
+
     boolean[] align = new boolean[] { false, true, true };
     private JProgressBar progressBar;
     private JTextArea output;
@@ -76,11 +86,11 @@ public class StatisticsWindow extends JDialog implements
 
         switch (statType) {
         case STANDARD:
-            setTitle("Standard");
+            setTitle(OStrings.getString("CT_STATSSTANDARD_WindowHeader"));
             thread = new CalcStandardStatistics(this);
             break;
         case MATCHES:
-            setTitle("Matches");
+            setTitle(OStrings.getString("CT_STATSMATCH_WindowHeader"));
             thread = new CalcMatchStatistics(this);
             break;
         }
@@ -91,31 +101,36 @@ public class StatisticsWindow extends JDialog implements
 
         // Prepare UI
         setLayout(new BorderLayout());
+        JPanel p = new JPanel(new BorderLayout());
+        p.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+        add(p);
 
         progressBar.setStringPainted(true);
-        add(progressBar, BorderLayout.SOUTH);
+        p.add(progressBar, BorderLayout.SOUTH);
 
         output.setEditable(false);
         output.setFont(new Font("Monospaced", Font.PLAIN, Core.getMainWindow()
                 .getApplicationFont().getSize()));
-        add(new JScrollPane(output), BorderLayout.CENTER);
+        p.add(new JScrollPane(output), BorderLayout.CENTER);
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+        KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+        Action escapeAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
+                thread.fin();
+                dispose();
+            }
+        };
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
+                escape, "ESCAPE");
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 thread.fin();
             }
         });
-
-        switch (statType) {
-        case STANDARD:
-            setTitle("Standard");
-            break;
-        case MATCHES:
-            setTitle("Matches");
-            break;
-        }
 
         setSize(400, 300);
         DockingUI.displayCentered(this);
@@ -187,25 +202,25 @@ public class StatisticsWindow extends JDialog implements
         for (int i = 0; i < result.rows.length; i++) {
             switch (i) {
             case 0:
-                table[i][0] = "Exact match: ";
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowExactMatch");
                 break;
             case 1:
-                table[i][0] = "100%: ";
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch100");
                 break;
             case 2:
-                table[i][0] = "95% - 99%: ";
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch95");
                 break;
             case 3:
-                table[i][0] = "85% - 94%: ";
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch85");
                 break;
             case 4:
-                table[i][0] = "75% - 84%: ";
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch75");
                 break;
             case 5:
-                table[i][0] = "50% - 74%: ";
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch50");
                 break;
             case 6:
-                table[i][0] = "No match: ";
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowNoMatch");
                 break;
             }
             table[i][1] = Integer.toString(result.rows[i].segments);

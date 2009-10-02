@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core.data.stat;
+package org.omegat.core.statistics;
 
 import java.util.List;
 

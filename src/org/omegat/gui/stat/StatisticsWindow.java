@@ -41,9 +41,9 @@ import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
 
-import org.omegat.core.data.stat.StandardStatisticsCalculationThread;
-import org.omegat.core.data.stat.MatchStatisticsCalculationThread;
-import org.omegat.core.data.stat.MatchStatisticsInfo;
+import org.omegat.core.statistics.MatchStatisticsCalculationThread;
+import org.omegat.core.statistics.MatchStatisticsInfo;
+import org.omegat.core.statistics.StandardStatisticsCalculationThread;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;

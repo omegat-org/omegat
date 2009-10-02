@@ -22,54 +22,35 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core.data.stat;
+package org.omegat.core.statistics;
+
+import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
+import org.omegat.core.threads.LongProcessThread;
 
 /**
- * Bean for store matches statistics info.
- * 
- * It required 7 rows to output:
- * "Exact match","100%","95% - 99%","85% - 94%","75% - 84%",50% - 74%","No
- * Match"
+ * Thread for calculate standard statistics.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MatchStatisticsInfo {
-    public final Row[] rows;
+public class StandardStatisticsCalculationThread extends LongProcessThread {
+    private Callback callback;
 
-    public MatchStatisticsInfo() {
-        rows = new Row[7];
-        for (int i = 0; i < rows.length; i++) {
-            rows[i] = new Row();
-        }
+    public StandardStatisticsCalculationThread(Callback callback) {
+        this.callback = callback;
     }
 
-    public static class Row {
-        public int segments, words;
+    public void run() {
+        IProject p = Core.getProject();
+        String result = Statistics.buildProjectStats(p.getUniqueEntries(), p
+                .getAllEntries(), p.getProjectProperties(),
+                p.getStatistics().numberofTranslatedSegments);
+        callback.displayData(result);
     }
 
-    /**
-     * Get row index by match percent.
-     * 
-     * @param percent
-     *            match percent
-     * @return row index
-     */
-    public int getRowByPercent(int percent) {
-        if (percent == Integer.MAX_VALUE) {
-            // exact match
-            return 0;
-        } else if (percent == 100) {
-            return 1;
-        } else if (percent >= 95) {
-            return 2;
-        } else if (percent >= 85) {
-            return 3;
-        } else if (percent >= 75) {
-            return 4;
-        } else if (percent >= 50) {
-            return 5;
-        } else {
-            return 6;
-        }
+    public interface Callback {
+        void displayData(String result);
+
+        void showProgress(int percent);
     }
 }

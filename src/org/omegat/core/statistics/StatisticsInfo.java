@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2009 Alex Buloichik
+ Copyright (C) 2008 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -20,37 +20,16 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- **************************************************************************/
+**************************************************************************/
 
-package org.omegat.core.data.stat;
-
-import org.omegat.core.Core;
-import org.omegat.core.data.IProject;
-import org.omegat.core.threads.LongProcessThread;
+package org.omegat.core.statistics;
 
 /**
- * Thread for calculate standard statistics.
- * 
+ * Class for store some statistic data.
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class StandardStatisticsCalculationThread extends LongProcessThread {
-    private Callback callback;
-
-    public StandardStatisticsCalculationThread(Callback callback) {
-        this.callback = callback;
-    }
-
-    public void run() {
-        IProject p = Core.getProject();
-        String result = Statistics.buildProjectStats(p.getUniqueEntries(), p
-                .getAllEntries(), p.getProjectProperties(),
-                p.getStatistics().numberofTranslatedSegments);
-        callback.displayData(result);
-    }
-
-    public interface Callback {
-        void displayData(String result);
-
-        void showProgress(int percent);
-    }
+public class StatisticsInfo {
+    public int numberofTranslatedSegments;
+    public int numberOfUniqueSegments;
+    public int numberOfSegmentsTotal;
 }

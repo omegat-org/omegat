@@ -24,32 +24,54 @@
 
 package org.omegat.core.statistics;
 
+import java.util.List;
+
 import org.omegat.core.Core;
-import org.omegat.core.data.IProject;
+import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.matching.ISimilarityCalculator;
+import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.threads.LongProcessThread;
 
 /**
- * Thread for calculate standard statistics.
+ * Thread for calculate match statistics.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class StandardStatisticsCalculationThread extends LongProcessThread {
+public class CalcMatchStatistics extends LongProcessThread {
     private Callback callback;
 
-    public StandardStatisticsCalculationThread(Callback callback) {
+    public CalcMatchStatistics(Callback callback) {
         this.callback = callback;
     }
 
     public void run() {
-        IProject p = Core.getProject();
-        String result = Statistics.buildProjectStats(p.getUniqueEntries(), p
-                .getAllEntries(), p.getProjectProperties(),
-                p.getStatistics().numberofTranslatedSegments);
+        ISimilarityCalculator distanceCalculator = new LevenshteinDistance();
+        MatchStatisticsInfo result = new MatchStatisticsInfo();
+        List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
+
+        // We should iterate all segments from all files in project.
+        int percent = 0;
+        for (int i = 0; i < allEntries.size(); i++) {
+            SourceTextEntry ste = allEntries.get(i);
+            int p = Statistics.getMaxSimilarityPercent(ste, distanceCalculator,
+                    allEntries);
+            int r = result.getRowByPercent(p);
+            result.rows[r].segments++;
+            result.rows[r].words += Statistics.numberOfWords(ste.getSrcText());
+            if (isStopped) {
+                return;
+            }
+            int newPercent = i * 100 / allEntries.size();
+            if (percent != newPercent) {
+                callback.showProgress(newPercent);
+                percent = newPercent;
+            }
+        }
         callback.displayData(result);
     }
 
     public interface Callback {
-        void displayData(String result);
+        void displayData(MatchStatisticsInfo result);
 
         void showProgress(int percent);
     }

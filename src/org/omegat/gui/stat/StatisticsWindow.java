@@ -41,9 +41,9 @@ import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
 
-import org.omegat.core.statistics.MatchStatisticsCalculationThread;
+import org.omegat.core.statistics.CalcMatchStatistics;
 import org.omegat.core.statistics.MatchStatisticsInfo;
-import org.omegat.core.statistics.StandardStatisticsCalculationThread;
+import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -55,8 +55,8 @@ import org.omegat.util.gui.DockingUI;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class StatisticsWindow extends JDialog implements
-        MatchStatisticsCalculationThread.Callback,
-        StandardStatisticsCalculationThread.Callback {
+        CalcMatchStatistics.Callback,
+        CalcStandardStatistics.Callback {
 
     public static enum STAT_TYPE {
         STANDARD, MATCHES
@@ -77,11 +77,11 @@ public class StatisticsWindow extends JDialog implements
         switch (statType) {
         case STANDARD:
             setTitle("Standard");
-            thread = new StandardStatisticsCalculationThread(this);
+            thread = new CalcStandardStatistics(this);
             break;
         case MATCHES:
             setTitle("Matches");
-            thread = new MatchStatisticsCalculationThread(this);
+            thread = new CalcMatchStatistics(this);
             break;
         }
 

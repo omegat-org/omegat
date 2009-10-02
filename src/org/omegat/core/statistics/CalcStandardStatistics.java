@@ -31,6 +31,8 @@ import org.omegat.core.threads.LongProcessThread;
 /**
  * Thread for calculate standard statistics.
  * 
+ * TODO: move this statistics into pane in main window
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CalcStandardStatistics extends LongProcessThread {

@@ -199,26 +199,29 @@ public class StatisticsWindow extends JDialog implements
      * @return text table
      */
     protected String[][] calcTable(final MatchStatisticsInfo result) {
-        String[][] table = new String[6][5];
+        String[][] table = new String[7][5];
         // dump result - will be changed for UI
         for (int i = 0; i < result.rows.length; i++) {
             switch (i) {
             case 0:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowExactMatch");
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowRepetitions");
                 break;
             case 1:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch95");
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowExactMatch");
                 break;
             case 2:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch85");
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch95");
                 break;
             case 3:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch75");
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch85");
                 break;
             case 4:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch50");
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch75");
                 break;
             case 5:
+                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch50");
+                break;
+            case 6:
                 table[i][0] = OStrings.getString("CT_STATSMATCH_RowNoMatch");
                 break;
             }

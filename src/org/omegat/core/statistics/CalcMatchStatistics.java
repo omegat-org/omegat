@@ -25,8 +25,10 @@
 package org.omegat.core.statistics;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -46,6 +48,9 @@ public class CalcMatchStatistics extends LongProcessThread {
 
     /** Hash for exact tokens. Only for statistics calculation. */
     private Map<String, Token[]> tokensCache = new HashMap<String, Token[]>();
+    
+    /** Already processed segments. Used for repetitions detect.*/
+    private Set<String> alreadyProcessed = new HashSet<String>();
 
     public CalcMatchStatistics(Callback callback) {
         this.callback = callback;
@@ -61,7 +66,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         for (int i = 0; i < allEntries.size(); i++) {
             SourceTextEntry ste = allEntries.get(i);
             int p = Statistics.getMaxSimilarityPercent(ste, distanceCalculator,
-                    allEntries, tokensCache);
+                    allEntries, tokensCache, alreadyProcessed);
             int r = result.getRowByPercent(p);
 
             result.rows[r].segments++;

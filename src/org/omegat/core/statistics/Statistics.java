@@ -34,6 +34,7 @@ import java.io.Writer;
 import java.text.BreakIterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.omegat.core.Core;
@@ -231,6 +232,9 @@ public class Statistics {
         return result.toString();
     }
 
+    protected static final int PERCENT_EXACT_MATCH = 101;
+    protected static final int PERCENT_REPETITIONS = 101;
+    
     /**
      * Calculate max similarity percent for one entry.
      * 
@@ -245,12 +249,14 @@ public class Statistics {
     public static int getMaxSimilarityPercent(final SourceTextEntry ste,
             final ISimilarityCalculator distanceCalculator,
             final List<SourceTextEntry> allEntries,
-            final Map<String, Token[]> tokensCache) {
+            final Map<String, Token[]> tokensCache,final Set<String> alreadyProcessed) {
+        
+        boolean isFirst=alreadyProcessed.add(ste.getSrcText());
 
         if (!StringUtil.isEmpty(ste.getTranslation())) {
             // segment has translation - should be calculated as
             // "Exact matched"
-            return Integer.MAX_VALUE;
+            return PERCENT_EXACT_MATCH;
         }
 
         Token[] strTokensStem = tokenizeExactlyWithCache(tokensCache, ste
@@ -287,6 +293,15 @@ public class Statistics {
                     strTokensStem, candTokens);
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);
         }
+
+        if (maxSimilarity < 50) {
+            // No match. Need to add only first segment. Next segments will
+            // be 'repetition'.
+            if (!isFirst) {
+                maxSimilarity = PERCENT_REPETITIONS;
+            }
+        }
+
         return maxSimilarity;
     }
 

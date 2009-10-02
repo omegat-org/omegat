@@ -37,7 +37,7 @@ public class MatchStatisticsInfo {
     public final Row[] rows;
 
     public MatchStatisticsInfo() {
-        rows = new Row[6];
+        rows = new Row[7];
         for (int i = 0; i < rows.length; i++) {
             rows[i] = new Row();
         }
@@ -55,19 +55,22 @@ public class MatchStatisticsInfo {
      * @return row index
      */
     public int getRowByPercent(int percent) {
-        if (percent == Integer.MAX_VALUE) {
-            // exact match
+        if (percent == Statistics.PERCENT_REPETITIONS) {
+            // repetitions
             return 0;
-        } else if (percent >= 95) {
+        } else if (percent == Statistics.PERCENT_EXACT_MATCH) {
+            // exact match
             return 1;
-        } else if (percent >= 85) {
+        } else if (percent >= 95) {
             return 2;
-        } else if (percent >= 75) {
+        } else if (percent >= 85) {
             return 3;
-        } else if (percent >= 50) {
+        } else if (percent >= 75) {
             return 4;
-        } else {
+        } else if (percent >= 50) {
             return 5;
+        } else {
+            return 6;
         }
     }
 }

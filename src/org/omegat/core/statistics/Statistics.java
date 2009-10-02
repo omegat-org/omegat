@@ -310,7 +310,7 @@ public class Statistics {
     }
 
     /** Computes the number of characters excluding spaces in a string. */
-    private static int numberOfCharactersWithoutSpaces(String str) {
+    public static int numberOfCharactersWithoutSpaces(String str) {
         int chars = 0;
         for (int i = 0; i < str.length(); i++) {
             if (!Character.isSpaceChar(str.charAt(i)))

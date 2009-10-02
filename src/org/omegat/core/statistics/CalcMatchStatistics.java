@@ -33,6 +33,7 @@ import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.threads.LongProcessThread;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
 
 /**
@@ -62,8 +63,14 @@ public class CalcMatchStatistics extends LongProcessThread {
             int p = Statistics.getMaxSimilarityPercent(ste, distanceCalculator,
                     allEntries, tokensCache);
             int r = result.getRowByPercent(p);
+
             result.rows[r].segments++;
             result.rows[r].words += Statistics.numberOfWords(ste.getSrcText());
+            String charWithoutTags = StaticUtils.stripTags(ste.getSrcText());
+            result.rows[r].charsWithoutSpaces += Statistics
+                    .numberOfCharactersWithoutSpaces(charWithoutTags);
+            result.rows[r].charsWithSpaces += charWithoutTags.length();
+
             if (isStopped) {
                 return;
             }

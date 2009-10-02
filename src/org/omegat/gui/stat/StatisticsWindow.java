@@ -70,10 +70,12 @@ public class StatisticsWindow extends JDialog implements
     };
 
     String[] header = new String[] { "",
-            OStrings.getString("CT_STATSMATCH_ColumnSegments"),
-            OStrings.getString("CT_STATSMATCH_ColumnWords") };
+            OStrings.getString("CT_STATS_Segments"),
+            OStrings.getString("CT_STATS_Words"),
+            OStrings.getString("CT_STATS_Characters_NOSP"),
+            OStrings.getString("CT_STATS_Characters") };
 
-    boolean[] align = new boolean[] { false, true, true };
+    boolean[] align = new boolean[] { false, true, true, true, true };
     private JProgressBar progressBar;
     private JTextArea output;
     private LongProcessThread thread;
@@ -197,7 +199,7 @@ public class StatisticsWindow extends JDialog implements
      * @return text table
      */
     protected String[][] calcTable(final MatchStatisticsInfo result) {
-        String[][] table = new String[7][3];
+        String[][] table = new String[6][5];
         // dump result - will be changed for UI
         for (int i = 0; i < result.rows.length; i++) {
             switch (i) {
@@ -205,26 +207,25 @@ public class StatisticsWindow extends JDialog implements
                 table[i][0] = OStrings.getString("CT_STATSMATCH_RowExactMatch");
                 break;
             case 1:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch100");
-                break;
-            case 2:
                 table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch95");
                 break;
-            case 3:
+            case 2:
                 table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch85");
                 break;
-            case 4:
+            case 3:
                 table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch75");
                 break;
-            case 5:
+            case 4:
                 table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch50");
                 break;
-            case 6:
+            case 5:
                 table[i][0] = OStrings.getString("CT_STATSMATCH_RowNoMatch");
                 break;
             }
             table[i][1] = Integer.toString(result.rows[i].segments);
             table[i][2] = Integer.toString(result.rows[i].words);
+            table[i][3] = Integer.toString(result.rows[i].charsWithoutSpaces);
+            table[i][4] = Integer.toString(result.rows[i].charsWithSpaces);
         }
         return table;
     }

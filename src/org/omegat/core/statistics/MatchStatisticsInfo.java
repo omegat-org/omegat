@@ -37,14 +37,14 @@ public class MatchStatisticsInfo {
     public final Row[] rows;
 
     public MatchStatisticsInfo() {
-        rows = new Row[7];
+        rows = new Row[6];
         for (int i = 0; i < rows.length; i++) {
             rows[i] = new Row();
         }
     }
 
     public static class Row {
-        public int segments, words;
+        public int segments, words, charsWithoutSpaces, charsWithSpaces;
     }
 
     /**
@@ -58,18 +58,16 @@ public class MatchStatisticsInfo {
         if (percent == Integer.MAX_VALUE) {
             // exact match
             return 0;
-        } else if (percent == 100) {
-            return 1;
         } else if (percent >= 95) {
-            return 2;
+            return 1;
         } else if (percent >= 85) {
-            return 3;
+            return 2;
         } else if (percent >= 75) {
-            return 4;
+            return 3;
         } else if (percent >= 50) {
-            return 5;
+            return 4;
         } else {
-            return 6;
+            return 5;
         }
     }
 }

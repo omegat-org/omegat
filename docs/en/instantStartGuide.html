@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>Instant Start Guide - OmegaT 1.8 User Manual</title>
+
+  <title>Instant Start Guide - OmegaT 2.0 User Manual</title>
 </head>
 
 <body>
@@ -11,49 +12,42 @@
 
   <ul>
     <li>
-      <p><a href="#summary">Briefly, how OmegaT
-      works</a></p>
+      <p><a href="#summary">Briefly, how OmegaT works</a></p>
     </li>
 
     <li>
-      <p><a href="#translate">How to translate using
-      OmegaT</a></p>
+      <p><a href="#translate">How to translate using OmegaT</a></p>
 
       <ul>
         <li>
-          <p><a href="#create">Create and open a new
-          project</a></p>
+          <p><a href="#create">Create and open a new project</a></p>
         </li>
       </ul>
     </li>
 
     <li>
-      <p><a href="#segments">Translate the segments
-      one by one</a></p>
+      <p><a href="#segments">Translate the segments one by one</a></p>
     </li>
 
     <li>
-      <p><a href="#tm">Use translation memory and
-      glossary matches</a></p>
+      <p><a href="#tm">Use matches in the translation memory, glossaries and
+      dictionaries</a></p>
     </li>
 
     <li>
-      <p><a href="#searches">Use searches</a></p>
+      <p><a href="#searches">Use searches and Google translate</a></p>
     </li>
 
     <li>
-      <p><a href="#create_trans">Create the
-      translated documents</a></p>
+      <p><a href="#create_trans">Create the translated documents</a></p>
     </li>
 
     <li>
-      <p><a href="#tags">How to handle tagged
-      text</a></p>
+      <p><a href="#tags">How to handle tagged text</a></p>
 
       <ul>
         <li>
-          <p><a href="#example">An
-          example...</a></p>
+          <p><a href="#example">An example...</a></p>
         </li>
       </ul>
     </li>
@@ -111,8 +105,8 @@
   created, using the dialog below:</p>
 
   <p align="center"><a name="graphics2" id="graphics2"></a><img src=
-  "images/NewProject.png" name="graphics3" alt="Project settings window" align=
-  "bottom" width="398" height="428" border="0" id="graphics3"></p>
+  "images/NewProject.png" name="graphics3" alt="Project settings window" id=
+  "graphics3" align="bottom" border="0" height="428" width="398"></p>
 
   <p>You can simply accept the location of the subfolders, but make sure first
   that the source and translation <a href="languages.html">language codes</a>
@@ -129,6 +123,7 @@
   you've accidentally imported the wrong documents, or too many documents, you
   can simply remove them from the Source folder of your OmegaT project (using
   your system's file manager, for example).</p>
+
   <p>To check your list of files to be translated, consult the <strong>Project
   Files</strong> window (Menu: <strong>Project → Project Files...</strong>, if
   it does not open automatically). If you have had to change the Contents of
@@ -179,6 +174,27 @@
     <li>
       <p>Okapi monolingual XLIFF</p>
     </li>
+     
+     <li>
+      <p>QuarkXPress CopyFlowGold</p>
+    </li>
+
+    <li>
+      <p>Subtitle files (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p>Android resource</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
+
   </ul>
 
   <h3><a name="segments" id="segments"></a>Translate the segments one by
@@ -196,9 +212,8 @@
 
   <ul>
     <li>
-      <p>To move to any other part of the text,
-      whether above or below, double-click on the sentence or paragraph you
-      wish to open.</p>
+      <p>To move to any other part of the text, whether above or below,
+      double-click on the sentence or paragraph you wish to open.</p>
     </li>
 
     <li>
@@ -221,18 +236,18 @@
   translation memory and glossary in search of matches for the next
   untranslated segment.</p>
 
-  <h3><a name="tm" id="tm"></a>Use the translation memory and glossary
-  matches</h3>
+  <h3><a name="tm" id="tm"></a>Use matches in the translation memories,
+  glossaries and dictionaries&nbsp;</h3>
 
   <h3><a name="tm_matches" id="tm_matches"></a>Translation memory matches</h3>
 
   <p>If OmegaT finds any fuzzy matches (30% or over) for the next segment in
-  the translation memory, it displays these in the Match Viewer. The first
-  match is pre-selected in the Match Viewer by default.</p>
+  translation memories available, it displays these in the Match Viewer. The
+  first match is pre-selected in the Match Viewer by default.</p>
 
   <p><br>
   <br></p><img src="images/MatchesPane.png" name="graphics4" alt="matches pane"
-  align="left" width="469" height="289" border="0" id="graphics4"><br clear=
+  id="graphics4" align="left" border="0" height="289" width="469"><br clear=
   "left">
 
   <p><br>
@@ -244,8 +259,8 @@
 
   <ul>
     <li>
-      <p>Press <code>Ctrl+I</code> to insert the
-      pre-selected match at the cursor position, or...</p>
+      <p>Press <code>Ctrl+I</code> to insert the pre-selected match at the
+      cursor position, or...</p>
     </li>
 
     <li>
@@ -259,9 +274,9 @@
 
   <ul>
     <li>
-      <p>Select the match you prefer in the Match
-      Viewer: <code>Ctrl+2</code> for the second match displayed,
-      <code>Ctrl+3</code> for the third match, etc.</p>
+      <p>Select the match you prefer in the Match Viewer: <code>Ctrl+2</code>
+      for the second match displayed, <code>Ctrl+3</code> for the third match,
+      etc.</p>
     </li>
 
     <li>
@@ -275,11 +290,12 @@
   Set this option using <strong>Options → <a href=
   "translationEditing.html">Editing Behaviour...</a></strong>)</p>
 
-  <h3><a name="gloss_matches" id="gloss_matches"></a>Glossary matches</h3>
+  <h3><a name="gloss_matches" id="gloss_matches"></a>Glossary and
+  dictionary&nbsp; matches</h3>
 
-  <p>100% matching terms in the <a href="glossaries.html">glossary</a> will be
-  displayed for reference in the Glossary Viewer. They cannot be transferred
-  using shortcuts.</p>
+  <p>Matching terms in <a href="glossaries.html">glossaries</a> and
+  dictionaries, that you may have included in the project, will be displayed
+  for reference in the glossary and dictionary panes.&nbsp;</p>
 
   <h3><a name="searches" id="searches"></a>Use searches</h3>
 
@@ -289,6 +305,11 @@
   select a word or phrase in the editing field (target text of the active
   segment) and hit <code>Ctrl+F</code>. The word or phrase is entered in the
   "Search for" box automatically in this case.</p>
+
+  <h3>Use Google translate</h3>In the <a href="GoogleTranslate.html">Google
+  translate</a> pane, if activated, you will automatically get a suggestion for
+  the translation of the current segment. You can insert it
+  with <code>Ctrl+M</code> into the target segment.
 
   <h3><a name="create_trans" id="create_trans"></a>Create translated
   documents</h3>
@@ -345,7 +366,7 @@
   <br></p>
 
   <p><img src="images/tagged_segment.png" name="graphics6" alt="tagged segment"
-  align="bottom" width="592" height="150" border="0" id="graphics6"></p>
+  id="graphics6" align="bottom" border="0" height="150" width="592"></p>
 
   <p><br>
   <br></p>
@@ -354,8 +375,8 @@
   this:</p>
 
   <p><img src="images/tagged_segment_target.png" name="graphics5" alt=
-  "tagged segment - target" align="bottom" width="592" height="122" border="0"
-  id="graphics5"></p>
+  "tagged segment - target" id="graphics5" align="bottom" border="0" height=
+  "122" width="592"></p>
 
   <h3><a name="tag_verif" id="tag_verif"></a>Tag verification</h3>
 
@@ -374,18 +395,20 @@
   final formatting by opening the translated document in its associated viewer
   or editor.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Legal
-notices</a> </td>
-        <td style="text-align: center;"><a href="index.html">Home</a>
-        </td>
+        notices</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
         <td style="text-align: right;"><a href="xindex.html">Index of
-contents</a> </td>
+        contents</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

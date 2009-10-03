@@ -2,10 +2,11 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>OmegaT Menu and Keyboard Short-cuts - OmegaT 1.8 User Manual</title>
+
+  <title>OmegaT Menu and Keyboard Short-cuts - OmegaT 2.0 User Manual</title>
 </head>
 
-<body lang="en-US" dir="ltr">
+<body>
   <h2>Main Menu and Keyboard Short-cuts</h2>
 
   <h3><a href="#menu">Main Menu</a></h3>
@@ -48,726 +49,781 @@
   instead. The <strong>cmd</strong> key either has a <strong>command</strong>
   label or an <strong>apple</strong> mark on Apple keyboards.</p>
 
-  <table width="400" border="1" cellpadding="3" cellspacing="0">
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p align="center"><a href="#ProjectMenu">Project</a></p>
-      </td>
+  <table summary="just formatting" border="1" cellpadding="3" cellspacing="0"
+  width="400">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p align="center"><a href="#ProjectMenu">Project</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#EditMenu">Edit</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#EditMenu">Edit</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#GoToMenu">Go to</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#GoToMenu">Go to</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#ViewMenu">View</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#ViewMenu">View</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#ToolsMenu">Tools</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#ToolsMenu">Tools</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#OptionsMenu">Options</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#OptionsMenu">Options</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#HelpMenu">Help</a></p>
-      </td>
-    </tr>
+        <td>
+          <p align="center"><a href="#HelpMenu">Help</a></p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
-  <table border="0" cellpadding="5" cellspacing="0">
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="ProjectMenu" id="ProjectMenu"></a>Project</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>New</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Creates and opens a new project. The dialog to create a project is
-        the same as to <a href="projectProperties.html">edit the
-        project</a>.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Open</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+O</code></p>
-      </td>
-
-      <td>
-        <p>Opens a previously created project.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Import Source Files...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Copies the selected files to the <code>/source</code> folder and
-        reloads the project to load the new files.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Import From MediaWiki...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Imports units from MediaWiki pages, based on the URL entered</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Reload</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Reloads the project to take external changes in source files, legacy
-        translation memories or glossaries into account.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Close</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Saves the translation and closes the project.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Save</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+S</code></p>
-      </td>
-
-      <td>
-        <p>Saves the translation to project's translation memory. OmegaT
-        automatically saves the translation every 10 minutes or when you close
-        the project or quit OmegaT.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Create Translated Documents</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Creates the target documents based on your translation of documents'
-        text. The documents will be located in the <code>/target</code>
-        folder.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Properties</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+E</code></p>
-      </td>
-
-      <td>
-        <p>Displays <a href="projectProperties.html">Project properties</a>
-        dialog to edit project languages and folder locations.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Project Files...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+L</code></p>
-      </td>
-
-      <td>
-        <p>Closes or opens <a href="userInterface.html#Project_Files">Project
-        files window</a> (depending whether it is opened or closed).</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Quit</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Q</code></p>
-      </td>
-
-      <td>
-        <p>Saves the project and quits OmegaT. If you haven't yet saved the
-        project manually confirms whether you would really like to quit.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="EditMenu" id="EditMenu"></a>Edit</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <p>Note: Items that one can find in most applications (copy/cut/paste)
-        are not displayed in this menu but are available with your system
-        short-cuts. For example:</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Copy</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+C</code></p>
-      </td>
-
-      <td>
-        <p>Copies selected text to clipboard.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Cut</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+X</code></p>
-      </td>
-
-      <td>
-        <p>Copies selected text to clipboard and deletes selected text.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Paste</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+V</code></p>
-      </td>
-
-      <td>
-        <p>Pastes the text from clipboard at cursor.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <p><strong>The Edit menu itself contains the following
-        items:</strong></p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Undo Last Action</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Z</code></p>
-      </td>
-
-      <td>
-        <p>Goes back to the status before the last editing action was taken.
-        Does not work once the modified segment has been validated.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Redo Last Action</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Y</code></p>
-      </td>
-
-      <td>
-        <p>Goes back to the status before the last editing action was
-        cancelled. Does not work once the modified segment has been
-        validated.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Replace With Match</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+R</code></p>
-      </td>
-
-      <td>
-        <p>Overwrites the whole target segment with the currently selected
-        fuzzy match (by default the first match is selected).</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Insert Match</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+I</code></p>
-      </td>
-
-      <td>
-        <p>Inserts the currently selected fuzzy match at the cursor position.
-        This function will overwrite a portion of the target segment if it is
-        selected.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Replace With Source</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Shift+Ctrl+R</code></p>
-      </td>
-
-      <td>
-        <p>Overwrites the whole target segment with the source.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Insert Source</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Shift+Ctrl+I</code></p>
-      </td>
-
-      <td>
-        <p>Inserts the source at the cursor position.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Search Project...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+F</code></p>
-      </td>
-
-      <td>
-        <p>Opens a new <a href="userInterface.html#Search_Window">Search
-        window</a>.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Switch case to...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Shift + F3</code></p>
-
-        <p><code>(see text)</code></p>
-      </td>
-
-      <td>
-        <p>Changes the case of the highlighted text in the target segment to
-        the selected option (Lower case, Upper case or Title case). Use
-        Shift+F3 to cycle through the three alternatives.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Select Fuzzy Match #N</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+#N</code></p>
-      </td>
-
-      <td>
-        <p>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match displayed
-        in the match viewer to replace or insert it to the segment. The
-        <a href="userInterface.html#Fuzzy_Matches">Fuzzy matches</a> section
-        describes the colour coding in detail.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="GoToMenu" id="GoToMenu"></a>Go to</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Next Untranslated Segment</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+U</code></p>
-      </td>
-
-      <td>
-        <p>Moves to the next segment that has no equivalent in the translation
-        memory.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Next Segment</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+N</code> or <code>Enter</code> or <code>Tab</code></p>
-      </td>
-
-      <td>
-        <p>Moves to the next segment. If current segment is the last one in a
-        file, moves to the first segment of the next file.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Previous Segment</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+P</code> or <code>Ctrl+Enter</code> or
-        <code>Ctrl+Tab</code></p>
-      </td>
-
-      <td>
-        <p>Moves to the previous segment. Moves to the last segment of the
-        previous file, if current segment is the first one one in a file.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Segment number...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+J</code></p>
-      </td>
-
-      <td>
-        <p>The segment is opened on entering its segment number</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Back in history...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Shift+P</code></p>
-      </td>
-
-      <td>
-        <p>OmegaT remembers the segments executed. With this command you can
-        move back one or several segments in time, to return later to the
-        current segment.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Forward in history...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Shift+N</code></p>
-      </td>
-
-      <td>
-        <p>With this command you can step forward to the segment, you have
-        previously left by the "back in history" command.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="ViewMenu" id="ViewMenu"></a>View</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Mark Translated Segments</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>If checked, the translated segments will be marked in yellow.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Mark Untranslated Segments</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>If checked, the untranslated segments will be marked in violet.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Display Source Segments</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>If checked, source segments will be shown and marked in green. If
-        not checked, source segments will not be shown.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="ToolsMenu" id="ToolsMenu"></a>Tools</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Validate Tags</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+T</code></p>
-      </td>
-
-      <td>
-        <p>Checks for missing or displaced tags in formatted files. Will
-        display a list of segments with tag mistakes. The <a href=
-        "userInterface.html#Tag_Validation">Tag validation window</a> section
-        lists what you see there, and <a href="formattedText.html">Working with
-        formatted texts</a> tells you why.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="OptionsMenu" id=
-        "OptionsMenu"></a><code>Options</code></h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Use Tab To Advance</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Sets segment validation key to <code>Tab</code> instead of the
-        default <code>Enter</code>. This option is useful for some of Chinese,
-        Japanese or Korean character input systems.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Always Confirm Quit</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>The program will always check with you before closing down.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Font...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Shows <a href="fontSettings.html">Font settings</a> dialogue to
-        modify the text display font. Users of old computers should better
-        change font before opening a project or face performance penalty. The
-        penalty is most painful on G4 + Mac OS X + Japanese combination.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>File Filters..</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Displays <a href="fileFilters.html">File filters</a> dialogue to
-        configure file handling and parsing.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Segmentation...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Opens <a href="segmentation.html">Source segmentation</a> dialogue
-        to configure text segmentation.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Spell checking...</code></p>
-      </td>
-      <td width="17%"></td>
-
-      <td>
-        <p>Displays the <a href="spellchecker.html">Spellchecker setup</a>
-        window to install, configure and activate the spell checker.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Editing Behaviour...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Displays <a href="translationEditing.html">Translation editing</a>
-        dialogue to configure</p>
-
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Restore Main Window</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Restores the components (editor, match viewer, and glossary viewer)
-        of the main OmegaT window to their default state. Use this feature in
-        case you have undocked, moved, or hidden one or more components, and
-        you cannot get them back the way you want them.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="HelpMenu" id="HelpMenu"></a>Help</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>User Manual...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>F1</code></p>
-      </td>
-
-      <td>
-        <p>Opens <a href="userInterface.html#Help_Browser">Help browser</a>
-        with this manual in a separate window.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>About...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Displays copyright, credits and license information.</p>
-      </td>
-    </tr>
+  <table summary="just formatting" border="0" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ProjectMenu" id="ProjectMenu"></a>Project</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>New</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Creates and opens a new project. The dialog to create a project is
+          the same as to <a href="projectProperties.html">edit the
+          project</a>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Open</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>Opens a previously created project.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Import Source Files...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Copies the selected files to the <code>/source</code> folder and
+          reloads the project to load the new files.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Import From MediaWiki...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Imports units from MediaWiki pages, based on the URL entered</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Reload</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Reloads the project to take external changes in source files,
+          legacy translation memories or glossaries into account.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Close</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Saves the translation and closes the project.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Save</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Saves the translation to project's translation memory. OmegaT
+          automatically saves the translation every 10 minutes or when you
+          close the project or quit OmegaT.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Create Translated Documents</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Creates the target documents based on your translation of
+          documents' text. The documents will be located in the
+          <code>/target</code> folder.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Properties</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Displays <a href="projectProperties.html">Project properties</a>
+          dialog to edit project languages and folder locations.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Project Files...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Closes or opens <a href="userInterface.html#Project_Files">Project
+          files window</a> (depending whether it is opened or closed).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Quit</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Q</code></p>
+        </td>
+
+        <td>
+          <p>Saves the project and quits OmegaT. If you haven't yet saved the
+          project manually confirms whether you would really like to quit.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="EditMenu" id="EditMenu"></a>Edit</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>Note: Items that one can find in most applications
+          (copy/cut/paste) are not displayed in this menu but are available
+          with your system short-cuts. For example:</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Copy</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Copies selected text to clipboard.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Cut</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+X</code></p>
+        </td>
+
+        <td>
+          <p>Copies selected text to clipboard and deletes selected text.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Paste</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+V</code></p>
+        </td>
+
+        <td>
+          <p>Pastes the text from clipboard at cursor.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p><strong>The Edit menu itself contains the following
+          items:</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Undo Last Action</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Goes back to the status before the last editing action was taken.
+          Does not work once the modified segment has been validated.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Redo Last Action</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Goes back to the status before the last editing action was
+          cancelled. Does not work once the modified segment has been
+          validated.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Replace With Match</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Overwrites the whole target segment with the currently selected
+          fuzzy match (by default the first match is selected).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Insert Match</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Inserts the currently selected fuzzy match at the cursor position.
+          This function will overwrite a portion of the target segment if it is
+          selected.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Replace with Machine Translation</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Replaces the target segment with the Google Translate translation.
+          No action, if &nbsp;Google Translate not activated (see Menu &gt;
+          options below).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Replace With Source</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Overwrites the whole target segment with the source.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Insert Source<br></code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Inserts the source at the cursor position.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Export Selection</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Exports the current segment to a text file for
+          processing.&nbsp;When this menu entry is triggered, the current
+          selection in the editor is written to <span style=
+          "font-style: italic;">&lt;config-dir&gt;/script/selection.txt</span>.
+          If there is no selection, the current segment (target or source,
+          depending whether there is a translation or not) is written to this
+          file. When the user exits OmegaT, this file is not emptied, to be
+          consistent with usual clipboard behaviour.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Search Project...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Opens a new <a href="userInterface.html#Search_Window">Search
+          window</a>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Switch case to...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift + F3</code></p>
+
+          <p><code>(see text)</code></p>
+        </td>
+
+        <td>
+          <p>Changes the case of the highlighted text in the target segment to
+          the selected option (Lower case, Upper case or Title case). Use
+          Shift+F3 to cycle through the three alternatives.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Select Fuzzy Match #N</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
+          displayed in the match viewer to replace or insert it to the segment.
+          The <a href="userInterface.html#Fuzzy_Matches">Fuzzy matches</a>
+          section describes the colour coding in detail.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="GoToMenu" id="GoToMenu"></a>Go to</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Next Untranslated Segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Moves to the next segment that has no equivalent in the
+          translation memory.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Next Segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+N</code> or <code>Enter</code> or <code>Tab</code></p>
+        </td>
+
+        <td>
+          <p>Moves to the next segment. If current segment is the last one in a
+          file, moves to the first segment of the next file.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Previous Segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+P</code> or <code>Ctrl+Enter</code> or
+          <code>Ctrl+Tab</code></p>
+        </td>
+
+        <td>
+          <p>Moves to the previous segment. Moves to the last segment of the
+          previous file, if current segment is the first one one in a file.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Segment number...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>The segment is opened on entering its segment number</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Forward in history...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT remembers the segments executed.&nbsp;With this command you
+          can step forward to the segment, you have previously left by the
+          "back in history" command.&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Back in history...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>With this command you can move backward one or several segments in
+          time, to return later to the current segment.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ViewMenu" id="ViewMenu"></a>View</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Mark Translated Segments</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>If checked, the translated segments will be marked in yellow.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Mark Untranslated Segments</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>If checked, the untranslated segments will be marked in
+          violet.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Display Source Segments</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>If checked, source segments will be shown and marked in green. If
+          not checked, source segments will not be shown.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ToolsMenu" id="ToolsMenu"></a>Tools</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Validate Tags</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Checks for missing or displaced tags in formatted files. Will
+          display a list of segments with tag mistakes. The <a href=
+          "userInterface.html#Tag_Validation">Tag validation window</a> section
+          lists what you see there, and <a href="formattedText.html">Working
+          with formatted texts</a> tells you why.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="OptionsMenu" id="OptionsMenu"></a>Options</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Use TAB To Advance</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Sets segment validation key to <code>Tab</code> instead of the
+          default <code>Enter</code>. This option is useful for some of
+          Chinese, Japanese or Korean character input systems.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Always Confirm Quit</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>The program will always check with you before closing down.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td><code>Google Translate</code></td>
+
+        <td></td>
+
+        <td>
+          <p><a href="GoogleTranslate.html">Google Translate</a> pane
+          active/not active. When active, &nbsp;<code>Ctrl+M</code> will insert
+          the suggestion by Google Translate into the target part of the active
+          segment.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Font...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Shows <a href="fontSettings.html">Font settings</a> dialogue to
+          modify the text display font. Users of old computers should better
+          change font before opening a project or face performance
+          penalty.&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>File Filters..</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Displays <a href="fileFilters.html">File filters</a> dialogue to
+          configure file handling and parsing.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Segmentation...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Opens <a href="segmentation.html">Source segmentation</a> dialogue
+          to configure text segmentation.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Spell checking...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Displays the <a href="spellchecker.html">Spellchecker setup</a>
+          window to install, configure and activate the spell checker.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Editing Behaviour...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Displays <a href="translationEditing.html">Translation editing</a>
+          dialogue to configure</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Restore Main Window</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Restores the components (editor, match viewer, and glossary
+          viewer) of the main OmegaT window to their default state. Use this
+          feature in case you have undocked, moved, or hidden one or more
+          components, and you cannot get them back the way you want them.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="HelpMenu" id="HelpMenu"></a>Help</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>User Manual...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Opens <a href="userInterface.html#Help_Browser">Help browser</a>
+          with this manual in a separate window.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>About...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Displays copyright, credits and license information.</p>
+        </td>
+      </tr>
+    </tbody>
   </table>
   <hr>
 
@@ -812,353 +868,373 @@
     </li>
   </ul>
 
-  <table border="0" cellpadding="3" cellspacing="0">
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Project_management" id="Project_management"></a>Project
-        management</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Open project</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+O</code></p>
-      </td>
-
-      <td>
-        <p>Displays a dialogue to locate an already existing project</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Save</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+S</code></p>
-      </td>
-
-      <td>
-        <p>Saves the current work to the file project_save.tmx located in the
-        project's /omegat/ folder</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Project properties</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+E</code></p>
-      </td>
-
-      <td>
-        <p>Displays the project's settings for eventual modification</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Editing" id="Editing"></a>Editing</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Undo last action</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+Z</code></p>
-      </td>
-
-      <td>
-        <p>Undoes the last editing actions, in the current target segment</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Redo last action</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+Y</code></p>
-      </td>
-
-      <td>
-        <p>Redoes the editing actions that have just been undone, in the
-        current target segment</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Select match #N</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+#N</code></p>
-      </td>
-
-      <td>
-        <p>#N is a digit from 1 to 5. The short-cut selects the N<sup>th</sup>
-        match displayed in the match window (the first match is selected by
-        default)</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Replace with match</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+R</code></p>
-      </td>
-
-      <td>
-        <p>Replaces the current target segment Contents with the selected match
-        (the first match is selected by default)</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Insert match</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+I</code></p>
-      </td>
-
-      <td>
-        <p>Inserts the selected match at the cursor position in the current
-        target segment (the first match is inserted by default)</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Replace with source</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+Shift+R</code></p>
-      </td>
-
-      <td>
-        <p>Replaces the current target segment Contents with the source text
-        Contents</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Insert source</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+Shift+I</code></p>
-      </td>
-
-      <td>
-        <p>Inserts the source text Contents at the cursor position in the
-        current target segment</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Search project</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+F</code></p>
-      </td>
-
-      <td>
-        <p>Displays a dialogue to conduct searches in the project</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Moving_around"></a>Moving around</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Next untranslated segment</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+U</code></p>
-      </td>
-
-      <td>
-        <p>Moves the editing field to the next segment that is not registered
-        in the project's translation memory</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Next segment</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+N<br>
-        Enter Return</code></p>
-      </td>
-
-      <td>
-        <p>Moves the editing field to the next segment</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Previous segment</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+P</code></p>
-      </td>
-
-      <td>
-        <p>Moves the editing field to the previous segment</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Segment number...</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+J</code></p>
-      </td>
-
-      <td>
-        <p>Moves to the segment number provided</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Back in history...</p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Shift+P</code></p>
-      </td>
-
-      <td>
-        <p>Moves one segment back in history.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Forward in history...</p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Shift+N</code></p>
-      </td>
-
-      <td>
-        <p>Moves one segment forward in history.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Reference_windows" id="Reference_windows"></a>Reference
-        windows</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Project files listing</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+L</code></p>
-      </td>
-
-      <td>
-        <p>Displays the Project files listing</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Other" id="Other"></a>Other</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Validate tags</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+T</code></p>
-      </td>
-
-      <td>
-        <p>Opens the <a href="userInterface.html#Tag_Validation">Tag
-        validation</a> window</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Help files</p>
-      </td>
-
-      <td>
-        <p><code>F1</code></p>
-      </td>
-
-      <td>
-        <p>Displays the OmegaT help files in a separate window</p>
-      </td>
-    </tr>
-  </table>
-  <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
     <tbody>
-      <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Legal
-notices</a> </td>
-        <td style="text-align: center;"><a href="index.html">Home</a>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Project_management" id="Project_management"></a>Project
+          management</h3>
         </td>
-        <td style="text-align: right;"><a href="xindex.html">Index of
-contents</a> </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Open project</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>Displays a dialogue to locate an already existing project</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Save</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Saves the current work to the file project_save.tmx located in the
+          project's /omegat/ folder</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Project properties</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Displays the project's settings for eventual modification</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Editing" id="Editing"></a>Editing</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Undo last action</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Undoes the last editing actions, in the current target segment</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Redo last action</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Redoes the editing actions that have just been undone, in the
+          current target segment</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Select match #N</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>#N is a digit from 1 to 5. The short-cut selects the
+          N<sup>th</sup> match displayed in the match window (the first match
+          is selected by default)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Replace with match</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Replaces the current target segment Contents with the selected
+          match (the first match is selected by default)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Insert match</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Inserts the selected match at the cursor position in the current
+          target segment (the first match is inserted by default)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Replace with source</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Replaces the current target segment Contents with the source text
+          Contents</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Insert source</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Inserts the source text Contents at the cursor position in the
+          current target segment</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Search project</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Displays a dialogue to conduct searches in the project</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>Replace with Machine Translation</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Replaces the target segment with the Google Translate translation
+          of the source. No action, if &nbsp;Google Translate not activated
+          (see Menu &gt; options &gt; Google Translate).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Moving_around" id="Moving_around"></a>Moving around</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Next untranslated segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Moves the editing field to the next segment that is not registered
+          in the project's translation memory</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Next segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+N<br>
+          Enter Return</code></p>
+        </td>
+
+        <td>
+          <p>Moves the editing field to the next segment</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Previous segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+P</code></p>
+        </td>
+
+        <td>
+          <p>Moves the editing field to the previous segment</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Segment number...</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Moves to the segment number provided</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Back in history...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Moves one segment back in history.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Forward in history...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>Moves one segment forward in history.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Reference_windows" id="Reference_windows"></a>Reference
+          windows</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Project files listing</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Displays the Project files listing</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Other" id="Other"></a>Other</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Validate tags</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Opens the <a href="userInterface.html#Tag_Validation">Tag
+          validation</a> window</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Help files</p>
+        </td>
+
+        <td>
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Displays the OmegaT help files in a separate window</p>
+        </td>
       </tr>
     </tbody>
   </table>
+  <hr>
 
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legal
+        notices</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Index of
+        contents</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

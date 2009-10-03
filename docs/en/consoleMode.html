@@ -1,97 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
   <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>Console Mode - OmegaT 2 User Manual</title>
+  <title>Console Mode - OmegaT 2.0
+User Manual</title>
 </head>
-
 <body>
-  <h1>OmegaT Console Mode</h1>
+<h1>OmegaT
+Console Mode</h1>
+<ul>
+  <li>
+    <p><a href="#prerequisites">Prerequisites</a></p>
+  </li>
+  <li>
+    <p><a href="#start">Starting in console mode</a></p>
+  </li>
+  <li>
+    <p><a href="#extra">Extra options</a></p>
+    <p>&nbsp;</p>
+  </li>
+</ul>
+<p>The purpose of the console mode
+is to use OmegaT as translation tool in a scripting environment. When
+started in console mode, no GUI is loaded (so it will work on any
+console) and the given project is automatically translated. </p>
+<hr>
+<h3><a name="prerequisites" id="prerequisites"></a>Prerequisites</h3>
+<p>To run OmegaT, a valid
+OmegaT-project must be present. The location does not matter, since you
+have to add it to the command-line at startup anyway. </p>
+<p>If you need altered settings,
+the configuration files must be present. This can be achieved in two
+ways: </p>
+<ol>
+  <li>Run OmegaT normally (with
+the GUI) and set the settings. If you start OmegaT in console mode, it
+will use the same settings. If you can't run OmegaT normally (no
+graphical environment available): </li>
+  <li>copy the settings files from
+some other OmegaT installation on another machine to a specific
+directory. The location does not matter, since you can add it to the
+command-line at startup. The relevant files are filters.conf and
+segmentation.conf and can be found in the user home directory (E.g.
+C:\Documents and Settings\%User%\OmegaT under windows, %user%/.omegat/
+under Linux) </li>
+</ol>
+<br>
+<h3><a name="start" id="start"></a>Starting
+in console mode</h3>
+<p>To start OmegaT in console
+mode, some extra
+parameters have to be passed on startup. The most
+important is <code>&lt;project-dir&gt;</code>,
+and optionally <code>--config-dir=&lt;config-dir&gt;</code>.
+</p>
+<p>Example: <code>$&gt;
+java -jar OmegaT.jar /path/to/project
+--config-dir=/path/to/config-files/ --mode=console-translate</code>
 
-  <ul>
-    <li>
-      <p><a href="#prerequisites">Prerequisites</a></p>
-    </li>
-
-    <li>
-      <p><a href="#start">Starting in console mode</a></p>
-    </li>
-
-    <li>
-      <p><a href="#extra">Extra options</a></p>
-
-      <p>&nbsp;</p>
-    </li>
-  </ul>
-
-  <p>The 
-  purpose of the console mode is to use OmegaT as translation tool in a 
-  scripting environment. When started in console mode, no GUI is loaded (so it 
-  will work on any console) and the given project is automatically translated.
-  </p>
-
-  <hr>
-
-  <h3><a name="prerequisites" id="prerequisites"></a>Prerequisites</h3>
-
-  <p>To run OmegaT, a valid OmegaT-project must be present. The location does 
-  not matter, since you have to add it to the command-line at startup anyway.
-  <p>If you need altered settings, the configuration files must be present.
-  This can be achieved in two ways:
-  <ol><li>Run OmegaT normally (with the GUI) and set the settings. If you start 
-  OmegaT in console mode, it will use the same settings. If you can't run OmegaT
-  normally (no graphical environment available):
-  <li>copy the settings files from some other OmegaT installation on another 
-  machine to a specific directory. The location does 
-  not matter, since you can add it to the command-line at startup. The relevant 
-  files are filters.conf and segmentation.conf and can be found in the user home 
-  directory (E.g. C:\Documents and Settings\<User>\OmegaT under windows, 
-  <User>/.omegat/ under Linux)
-  </ol></p>
-
-  <h3><a name="start" id="project_location"></a>Staring in console mode</h3>
-
-  <p>To start OmegaT in console mode, some extra parameters have to be passed 
-  on startup. The most important is <code>&lt;project-dir&gt;</code>, and optionally 
-  <code>--config-dir=&lt;config-dir&gt;</code>.
-  <p>Example: <code>$&gt; java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code>
-  </p>
-  <p>Explanation:
-  <dl><dt><code>&lt;project-dir&gt;</code></dt>
-  <dd>tells OmegaT where to find the 
-  project to translate. If given, OmegaT starts in console mode and will 
-  translate the given project.</dd> 
-  <dt><code>--config-dir=&lt;config-dir&gt;</code></dt>
-  <dd>allows to tell OmegaT in which 
-  directory the configuration files are stored. If not given, OmegaT reverts to 
-  default values (OmegaT dir under user home, or if not available: the current 
-  working directory).</dd>
-  <dt><code>--mode=console-translate</code></dt>
-  <dd>OmegaT starts in console mode and will 
-  translate the given project.
-  </dl>
-  
-  <h3><a name="extra" id="extra"></a>Extra options</h3>
-
-  <p>There is one extra command line parameter specific for the console mode: 
-  <code>--quiet</code>. In quiet mode, less info is logged to the screen. All 
-  messages that you would usually find in the status bar are not shown.<br>
-  Usage: <code>java -jar OmegaT.jar /path/to/project --quiet</code>
-  </p>
-
-  <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
-    <tbody>
-      <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Legal
+<p><span style="font-weight: bold;">Explanation:</span></p>
+<table style="width: 80%;" cellpadding="2" cellspacing="2" summary="just formatting">
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><code>&lt;project-dir&gt;</code></td>
+      <td style="text-align: left;">
+      <p>tells OmegaT where to
+find the
+project to translate. If given, OmegaT starts in console mode and will
+translate the given project.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><code>--config-dir=&lt;config-dir&gt;</code></td>
+      <td style="text-align: left;">
+      <p>&nbsp;allows to tell
+OmegaT in
+which directory the configuration files are stored. If not given,
+OmegaT reverts to default values (OmegaT dir under user home, or if not
+available: the current working directory).</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><code>--mode=console-translate</code></td>
+      <td style="text-align: left;">
+      <p>&nbsp;OmegaT starts
+in console
+mode and will translate the given project</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3><a name="extra" id="extra"></a>Extra
+options</h3>
+<p>There is one extra command line
+parameter specific for the console mode: <code>--quiet</code>.
+In quiet mode, less info is logged to the screen. All messages that you
+would usually find in the status bar are not shown.<br>
+Usage: <code>java -jar OmegaT.jar
+/path/to/project --quiet</code> </p>
+<hr>
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"  summary="just formatting">
+<tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">Legal
 notices</a> </td>
-        <td style="text-align: center;"><a href="index.html">Home</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Index of
+      <td style="text-align: center;"><a href="index.html">Home</a>
+      </td>
+      <td style="text-align: right;"><a href="xindex.html">Index of
 contents</a> </td>
-      </tr>
-    </tbody>
-  </table>
-
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>

@@ -2,7 +2,7 @@
 <head>
 	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>Searches - OmegaT 1.8 User Manual</title>
+  <title>Searches - OmegaT 2.0 User Manual</title>
 </head>
 
 <body>
@@ -48,11 +48,9 @@
   Alternatively, in the Editor window, select a word or phrase in the editing
   field (target text of the active segment) and hit <code>Ctrl+F</code>. The
   word or phrase is entered in the <strong>Search for</strong> box
-  automatically in this case.</p>
-
-  <p>Every call of the <strong>Search</strong> window creates its own new
-  window. Do not forget to close them, so that they do not clutter your
-  desktop.</p>
+  automatically in this case.Every call of the <strong>Search</strong> window
+  creates its own new window. Do not forget to close them, so that they do not 
+  clutter your desktop.</p>
 
   <h3><a name="location" id="location"></a>Search location</h3>
 
@@ -75,9 +73,8 @@
     </li>
   </ul>
 
-  <p>when searching through files, OmegaT will restrict the search to files it
-  can read (See <a href="filesToTranslate.html">Supported File
-  Formats</a>).</p>
+  <p>when searching through files, OmegaT will restrict the search to files in source file formats (See <a href="filesToTranslate.html">Supported File
+  Formats</a>). For instance, while OmegaT is well able to handle TMX files, it will not include them in the search.</p>
   <hr>
 
   <h2><a name="searchmethods" id="searchmethods"></a>Search methods</h2>
@@ -85,26 +82,26 @@
   <p>Select the method using the radio buttons. You can choose between two
   methods to search:</p>
 
-  <table width="555" border="0" cellpadding="3" cellspacing="0">
-    <col width="115">
-    <col width="428">
+  <table summary= "just formatting" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
 
     <tr>
-      <td width="115">
+      <td width="20%">
         <p><strong>exact search</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Search for segments containing of the string you specified.</p>
       </td>
     </tr>
 
     <tr>
-      <td width="115">
+      <td width="20%">
         <p><strong>keyword search</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Search for segments containing all keywords you specified, in any
         order.</p>
       </td>
@@ -114,49 +111,47 @@
   <p>An <strong>exact search</strong> looks for a phrase, i.e. if several words
   are entered, they are found only if they occur in exactly the same sequence.
   Exact searches are similar to an "exact phrase" search in an Internet search
-  engine such as Google.</p>
-
-  <p>Select <strong>keyword search</strong> to search for any number of
-  individual words, separated by spaces and in any order. OmegaT will display a
-  list of all segments in which all the words occur. Keyword searches are
-  similar to a search "with all of the words" in an Internet search engine such
-  as Google (AND logic).</p>
+  engine such as Google. Select <strong>keyword search</strong> to search for
+  any number of individual words, separated by spaces and in any order. OmegaT
+  will display a list of all segments in which all the words occur. Keyword 
+  searches are similar to a search "with all of the words" in an Internet search 
+  engine such as Google (AND logic).</p>
 
   <p>For either of these two methods you can select the following three
   options:</p>
 
-  <table width="556" border="0" cellpadding="3" cellspacing="0">
-    <col width="116">
-    <col width="428">
+  <table summary= "just formatting" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>case sensitive</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>The search will be performed for the exact string specified;
         otherwise capitals will be ignored.</p>
       </td>
     </tr>
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>regular expressions</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>The search string will be treated as a regular expression (in case
         of a keyword search it will be treated as multiple expressions).</p>
       </td>
     </tr>
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>search TMs</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>All translation memories are included in the search.</p>
       </td>
     </tr>
@@ -213,19 +208,19 @@
 
   <p>Pressing the search button after entering a string in the search field
   will display all the segments in the project that include the searched
-  string. As OmegaT handles all the identical segments as one entity, only the
+  string. As OmegaT handles identical segments as one single entity, only the
   first unique segment is shown.</p>
 
   <p>The segments are displayed in order of appearance in the project.
   Translated segments will be displayed with the original text at the top and
-  the translated text at the bottom, non translated segments will be displayed
-  in original text only.</p>
+  the translated text at the bottom, untranslated segments will be displayed
+  as the source only.</p>
 
-  <p>Click on a segment to open it in the Editor for modifications. You may
+  <p>Clicking on a segment will open it in the Editor for modifications. You may
   then switch back to Search window for the next found segment, for instance to
-  control and if necessary adjust the terminology.</p>
+  control and if necessary correct the terminology.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table summary= "just formatting" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Legal

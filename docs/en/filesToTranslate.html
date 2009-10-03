@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>Files to Translate - OmegaT 1.8 User Manual</title>
+
+  <title>Files to Translate - OmegaT 2.0 User Manual</title>
 </head>
 
 <body>
@@ -69,38 +70,44 @@
   </ul>
   <hr>
 
-  <h3><a name="RTLbidi"></a>Right to left languages</h3>
+  <h2><a name="RTLbidi" id="RTLbidi"></a>Right to left
+  languages</h2>Justification of source and target segments depends on the
+  project languages. It is by default left justified for LTR languages and
+  right justified for RTL languages. You can toggle between different display
+  modes by pressing Ctrl+Shift+O (this is the letter O and not the numeral 0).
+  The Shift+Ctrl+O toggle has three states:
 
-  <h4><a name="RTL_Changing_direction"></a>Changing the direction of the
-  input/display text</h4>For all the tasks accomplished in OmegaT, you can
-  toggle between LTR display/input mode and RTL display/input mode by pressing
-  Ctrl+Shift+O (this is the letter O and not the numeral 0). Using the RTL mode
-  in OmegaT has no influence whatsoever on the display mode of the translated
-  document that are created in OmegaT. The display mode of the translated
-  documents will have to be modified within the application commonly used to
-  display or modify them (check the relevant manuals for details). Using
-  Ctrl+Shift+O causes both text input and display in OmegaT to be changed to
-  RTL. It can be used separately for all three panes (Editor, Fuzzy Matches and
-  Glossary) by clicking on the pane and toggling the display mode. It can also
-  be used in all the input fields found in OmegaT (search window, segmentation
-  rules etc.)
+  <ul>
+    <li>default (i.e. language) justification</li>
 
-  <p>Note: Mac OSX uses the same shortcut (and not Cmd+Shift+O) .</p>
+    <li>left justification</li>
 
-  <h4><a name="RTL_mixing"></a>Mixing RTL and LTR strings in segments</h4>When
-  writing purely RTL text, the default (LTR) view may be used. In many cases,
-  however, it is necessary to embed LTR text in RTL text. For example, in
-  OmegaT tags, product names that have to remain in the LTR source language,
-  place holders in localization files, and numbers in text. In cases like these
-  it becomes necessary to switch to RTL mode, so that the RTL (in fact
-  bidirectional) text is displayed correctly. It should be noted that when
-  OmegaT is in RTL mode, both source and target are displayed in RTL mode. This
-  means that if the source language is LTR and the target language is RTL, or
-  vice versa, it might be necessary to toggle back and forth between RTL and
+    <li>right justification</li>
+  </ul>Using the RTL mode in OmegaT has no influence whatsoever on the display
+  mode of the translated documents created in OmegaT. The display mode of the
+  translated documents will have to be modified within the application commonly
+  used to display or modify them (check the relevant manuals for details).
+  Using Ctrl+Shift+O causes both text input and display in OmegaT to be changed
+  to RTL. It can be used separately for all three panes (Editor, Fuzzy Matches
+  and Glossary) by clicking on the pane and toggling the display mode. It can
+  also be used in all the input fields found in OmegaT (search window,
+  segmentation rules etc.) <b>Note</b>: Mac OSX uses the same shortcut (and not
+  Cmd+Shift+O) .
+
+  <h3><a name="RTL_mixing" id="RTL_mixing"></a>Mixing RTL and LTR strings in
+  segments</h3>When writing purely RTL text, the default (LTR) view may be
+  used. In many cases, however, it is necessary to embed LTR text in RTL text.
+  For example, in OmegaT tags, product names that have to remain in the LTR
+  source language, place holders in localization files, and numbers in text. In
+  cases like these it becomes necessary to switch to RTL mode, so that the RTL
+  (in fact bidirectional) text is displayed correctly. It should be noted that
+  when OmegaT is in RTL mode, both source and target are displayed in RTL mode.
+  This means that if the source language is LTR and the target language is RTL,
+  or vice versa, it might be necessary to toggle back and forth between RTL and
   LTR modes to easily view the source and enter the target in their respective
   modes.
 
-  <h4><a name="RTL_tags"></a>OmegaT tags in RTL segments</h4>
+  <h3><a name="RTL_tags" id="RTL_tags"></a>OmegaT tags in RTL segments</h3>
 
   <p>As written above, OmegaT tags are LTR strings. When translating between
   RTL and LTR langauges, to correctly read the tags from the source and to
@@ -117,8 +124,8 @@
   possible to translate a plain text version of the text and to later add the
   necessary style in the relevant application.</p>
 
-  <h4><a name="RTL_CreatingTranslatedDocuments" id=
-  "RTL_CreatingTranslatedDocuments"></a>Creating translated RTL documents</h4>
+  <h3><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Creating translated RTL documents</h3>
 
   <p>When the translated document is created, its display direction will be the
   same as the original document. If the original document was LTR, the display
@@ -132,7 +139,7 @@
   modifications are possible in OpenOffice.org files for example.</p>
   <hr>
 
-  <h3><a name="formats" id="formats"></a>File formats</h3>
+  <h2><a name="formats" id="formats"></a>File formats</h2>
 
   <p>With OmegaT you can translate files in a number of file formats. There are
   basically two types of file formats, the <strong>plain text</strong> and the
@@ -141,18 +148,13 @@
   <h3><a name="plaintext" id="plaintext"></a>Plain text files</h3>
 
   <p>Plain text files contain text only, so their translation is as simple as
-  typing the translation.</p>
-
-  <p>There are several <a href="plainText.html">methods</a> to specify the
-  file's encoding so that its contents is not garbled when opened in
-  OmegaT.</p>
-
-  <p>Such files are not considered as containing more format than "white space"
-  for indentation/alignment purposes. They are usually modified in text editors
-  and it is generally not possible to have such format retain font/color/margin
-  etc information.</p>
-
-  <p>Currently, OmegaT supports the following plain text formats:</p>
+  typing the translation.There are several <a href="plainText.html">methods</a>
+  to specify the file's encoding so that its contents is not garbled when
+  opened in OmegaT. Such files do not contain any formatting information beyond
+  the "white space" used to align text, indicate paragraphs or insert page
+  breaks.They are not able to contain / retain information regarding the color,
+  font etc of the text. Currently, OmegaT supports the following plain text
+  formats:</p>
 
   <ul>
     <li>
@@ -196,12 +198,10 @@
   text formatting greatly contributes to reducing the number of tags. Unifying
   used fonts, font sizes, colors etc should be considered if possible, to
   simplify the translation and reduce the number of possible <a href=
-  "userInterface.html#tag_validation">tag errors</a>.</p>
-
-  <p><a name="specifics" id="specifics"></a>Each file type is handled
-  differently in OmegaT. Specific behavior can be setup in the <a href=
-  "fileFilters.html">file filters</a>. Currently, OmegaT support the following
-  formatted text formats:</p>
+  "userInterface.html#tag_validation">tag errors</a>.<a name="specifics" id=
+  "specifics"></a>Each file type is handled differently in OmegaT. Specific
+  behavior can be setup in the <a href="fileFilters.html">file filters</a>.
+  Currently, OmegaT support the following formatted text formats:</p>
 
   <ul>
     <li>
@@ -231,6 +231,26 @@
     <li>
       <p>Okapi monolingual XLIFF</p>
     </li>
+
+    <li>
+      <p>QuarkXPress CopyFlowGold</p>
+    </li>
+
+    <li>
+      <p>Subtitle files (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p>Android resource</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
   </ul>
 
   <p>Other formatted text file types can be handled by OmegaT by <a href=
@@ -258,7 +278,8 @@
 
   <p><br></p>
 
-  <table width="100%" border="0" cellpadding="4" cellspacing="0">
+  <table width="100%" border="0" cellpadding="4" cellspacing="0" summary=
+  "just formatting">
     <col width="50*">
     <col width="206*">
 
@@ -323,18 +344,20 @@
     </tr>
   </table>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Legal
-notices</a> </td>
-        <td style="text-align: center;"><a href="index.html">Home</a>
-        </td>
+        notices</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
         <td style="text-align: right;"><a href="xindex.html">Index of
-contents</a> </td>
+        contents</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

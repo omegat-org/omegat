@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
-  <title>Spell checker - OmegaT 1.8 User Manual</title>
+
+  <title>Spell checker - OmegaT 2.0 User Manual</title>
 </head>
 
 <body>
@@ -76,35 +77,36 @@
 
   <p>The above example contains already the available vocabularies. Initially
   it will be unpopulated as you need to specify where OmegaT should look for
-  the vocabularies. Clicking on <strong>Choose...</strong> opens a dialog
-  window, where you can select the correct subfolder - the <b>Dictionary file
-  directory</b> - which is <i>C:\Program Files\OpenOffice.org
-  2.4\share\dict\ooo</i> in the above example. This is of course the directory
-  with existing Open Source vocabularies. OmegaT recognizes valid dictionaries
-  in that location and displays them. If the dictionary you want to use is
-  already there and visible to OmegaT, you're done. If that is not the case,
-  that is the list of available languages is empty, you can click
-  <b>Install</b> and let OmegaT look for available vocabularies. Select the
-  vocabularies in the pop-up window and then click <b>install</b>. The selected
-  languages will then get installed and appear in the spell checker setup
-  window (this may take a while ).</p>
+  the vocabularies. Click on <strong>Choose...</strong> to open a dialog
+  window, where you can select a subfolder with existing OpenOffice.org or
+  Mozilla vocabularies. The simplest way find them is to look for files with an
+  extensions <i>aff</i> or <i>dic</i>. OmegaT will recognize all valid
+  dictionaries available at that location and display them. If the dictionary
+  you want to use is already there and visible to OmegaT, you're done. If
+  there's no dictionaries to be found, you can select an appropriate place for
+  them and then click <b>Install</b> to let OmegaT look for available
+  vocabularies. Select the vocabularies that you need in the pop-up window and
+  then click <b>install</b>. The selected languages will then get installed and
+  will eventually appear in the spell checker setup window (this may take a
+  while ).</p>
 
   <p>Please note that the installer depends on the Internet list of
-  dictionaries. OmegaT gets this list from <a href=
-  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/">
-  OpenOffice.org/contrib/dictionaries</a>. In case it is out of date, you will
-  have to hunt for the vocabularies yourself. Look for files with the name,
-  indicating the language used and having extensions <i>aff</i> and <i>dic.</i>
-  The OpenOffice.org Wiki contains probably the largest vocabulary collection
-  in <a href=
-  "http://wiki.services.openoffice.org/wiki/Dictionaries">OpenOffice.org Wiki
-  Dictionaries</a>. The dictionaries compatible with OmegaT are the "Hunspell"
-  or "Myspell" dictionaries.</p>
+  dictionaries. In case it is out of date or does not include the desired
+  language, you will have to hunt for the vocabularies yourself. The
+  OpenOffice.org contains probably the largest vocabulary collection at
+  <a href="http://extensions.services.openoffice.org/dictionary">OpenOffice.org
+  Dictionary site</a>. After the dictionary extension has been downloaded and
+  installed, the corresponding <i>aff</i> and <i>dic</i> will become available.
+  The same can be achieved by adding a spellchecker extension to the Firefox or
+  Thunderbird; in this case the spellchecker files will be stored in your
+  (Firefox or Thunderbird) profile.</p>
 
-  <p>Make sure the language code of the target files corresponds to the
+  <p>Make sure the language code of target files corresponds to the
   dictionary's language code: an FR-FR dictionary will not work with an FR
   target setting. You need to change the setting to FR-FR to have the spell
-  checker recognize the correct dictionary for your target.</p>
+  checker recognize the correct dictionary for your target. Look for files with
+  the name, indicating the language used and having extensions <i>aff</i> and
+  <i>dic.</i></p>
 
   <h3><a name="Hints" id="Hints"></a>Hints</h3>
 
@@ -112,7 +114,7 @@
 
   <ol>
     <li>
-      <p>The check box “Automatically check the spelling of text” must be
+      <p>The check box "Automatically check the spelling of text" must be
       checked.</p>
     </li>
 
@@ -121,18 +123,18 @@
       available vocabularies in the setup window. The spell checker determines
       the language to use from the target language code: if the target language
       is Brazilian Portuguese (PT_BR), the subfolder with vocabularies must
-      contain the two vocabulary files, called pt_br.aff and pt_br.dic.</p>
+      contain the two vocabulary files, called <i>pt_br.aff</i> and
+      <i>pt_br.dic</i>.</p>
     </li>
   </ol>
 
   <p>In case you have a large body of text already translated, but then realize
   the target language code of the project does not match the spell checker's
-  language code (you specified en as the language, but there's no en
-  vocabularies) you can simply copy the two corresponding files (for instance
-  pt_PT.arr and pt_PT.dic) and rename the copies (to pt._BR.arr and pt_BR.dic).
-  You may also change the language code in the project (from pt to pt_BR) ,
-  however you will have to propagate this change through all the TMX files in
-  the project, which is not the safest way to proceed.</p>
+  language code (you specified pt_BR as the language, but there's no pt_BR
+  vocabularies, for instance) you can simply copy the two corresponding files
+  and rename them (from pt_PT.arr resp. pt_PT.dic to pt._BR.arr and pt_BR.dic).
+  Of course it is much wiser, to take a short break and download the correct
+  versions of the spellchecker.</p>
 
   <p>Note that Uninstall physically deletes the highlighted vocabularies. If
   they are part of OpenOffice as in the above case, they will disappear from
@@ -140,18 +142,20 @@
   again, it may make sense to copy the files involved to a different folder,
   reserved just for OmegaT purposes.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Legal
-notices</a> </td>
-        <td style="text-align: center;"><a href="index.html">Home</a>
-        </td>
+        notices</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
         <td style="text-align: right;"><a href="xindex.html">Index of
-contents</a> </td>
+        contents</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

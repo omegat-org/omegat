@@ -11,8 +11,7 @@
   2.0 release of OmegaT.
   <hr>
 
-  <table summary="just formatting" 
-  border="0" cellpadding="3" cellspacing="3">
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="3">
     <tbody>
       <tr>
         <td width="50%">
@@ -125,7 +124,7 @@
 
           <ul>
             <li>
-              <p><a href="installingAndRunning.html#terminal">Opening a
+              <p><a href="installingAndRunning.html#command_line">Opening a
               command-line window</a></p>
             </li>
 
@@ -366,16 +365,19 @@
 
   <h3><a name="osx_which" id="osx_which"></a>Which package to download?</h3>
 
+  <p>OmegaT 2.0 requires Java 1.5 to run. Mac OSX 10.4 (Tiger) users should
+  make sure that they use the latest version of Java before installing OmegaT.
+  Use "Software Update..." from the Apple menu to update your Java version.</p>
+
   <p>Download <em>OmegaT_2.0.x_Mac.zip</em>.</p>
 
   <h3><a name="osx_install" id="osx_install"></a>OmegaT installation</h3>
 
-  <p>Double click on <em>OmegaT_2.0.x_Mac.zip</em> to unpack it. An OSX disk
-  image (<em>OmegaT.dmg</em>) will mount itself and will display 2 files:
-  <em>documentation.html</em> and <em>OmegaT.app</em>. Copy the two files to a
-  suitable folder (e.g. Applications, in which you can create an OmegaT
-  folder). Once you have done this, you can delete the
-  <em>OmegaT_2.0.x_Mac.zip</em> file.</p>
+  <p>Double click on <em>OmegaT_2.0.x_Mac.zip</em> to unpack it. This will
+  create a folder called <em>OmegaT</em>, with the OmegaT icon on it. The
+  folder contains 2 files: <em>documentation.html</em> and <em>OmegaT.app</em>.
+  Copy the folder to a suitable folder (e.g. Applications). Once you have done
+  this, you can delete the <em>OmegaT_2.0.x_Mac.zip</em> file.</p>
 
   <h3><a name="osx_dock" id="osx_dock"></a>Adding OmegaT to the Dock</h3>
 
@@ -387,10 +389,42 @@
   <p>Double-click on <em>OmegaT.app</em> or click on its location in the
   Dock</p>
 
-  <p>If you want to change the Java launch parameters from the command line,
-  you are advised to use the package available for "Other systems", see below.
-  It is also possible to directly modify the <em>Info.plist</em> file located
-  inside the <em>OmegaT.app</em> package.</p>
+  <p>If you want to change the Java launch parameters you can modify the
+  OmegaT.app default settings by editing the <em>Info.plist</em> file located
+  in <em>OmegaT.app/Contents/.</em>Open the file "Info.plist" by right-clicking
+  on it and selecting your text editor of choice. You can modify the
+  <em>Properties</em> part as well as the <em>VMOptions</em> part. If you want
+  to add values to <em>VMOptions</em>, put a space between them. For example,
+  <code>-Xmx1024M -Duser.language=ja</code> will launch OmegaT with 1024MB of
+  memory and with the user interface in Japanese.</p>
+
+  <p>Launching <em>OmegaT.app</em> directly will not allow you to run multiple
+  instances of <em>OmegaT.app</em>. If you need to run multiple instances of
+  <em>OmegaT.app</em>, use the file <em>JavaApplicationStub</em> located in
+  <em>OmegaT.app/ Contents/MacOS/</em> instead.</p>
+
+  <p>It is not possible to use the Lucene stemmer from the <em>OmegaT.app</em>
+  package. You need to run OmegaT from the command line (see below).</p>
+
+  <p>To change Java launch parameters from the command line, call the
+  <em>OmegaT.jar</em> file that is located in
+  <em>OmegaT.app/Contents/Resources/ Java/</em>. Launching <em>OmegaT.app</em>
+  from the command line is equivalent to using the "generic" package of OmegaT.
+  You'll be able to run multiple instances of OmegaT, as well as to use the
+  Lucene stemmer. Check "Command line launching" below for more
+  informations.</p>
+
+  <p>To access any location within the <em>OmegaT.app</em> package, right-click
+  on <em>OmegaT.app</em> and select "Show Package Contents", or "cd" there
+  directly from the command line.</p>
+
+  <h4>Mac OSX goodies</h4>
+
+  <p><em>OmegaT.app</em> can be accessed from the Services Mac OSX offers. You
+  can thus select a word anywhere in OmegaT and use the Services to check that
+  word in your Services providing dictionary applications, in Spotlight or in
+  Google. You can also use AppleScript or Automator to create Services or
+  scripts that will automate frequent actions.</p>
   <hr>
 
   <h2><a name="Other_systems" id="Other_systems"></a>Other systems</h2>
@@ -486,10 +520,6 @@
   program's behaviour to be controlled by means of modifications. There are two
   ways of launching OmegaT using the command line.</p>
 
-  <p><a name="terminal" id="terminal"></a>Users of the Mac OSX package who want
-  to control OmegaT from the command line are advised to use the package
-  available for "Other systems". See above.</p>
-
   <h3>Method 1: opening a command-line window</h3>
 
   <p>A command-line window is also referred to as a "terminal window". On
@@ -513,7 +543,8 @@
 
     <dt>On Mac OSX</dt>
 
-    <dd><em>cd /Applications/OmegaT</em></dd>
+    <dd><em>cd &lt;OmegaT.app
+    location&gt;/OmegaT.app/Contents/Resources/Java/</em></dd>
 
     <dt>On Linux</dt>
 
@@ -550,7 +581,8 @@
   command involve the addition of "arguments" to it. Arguments are added after
   the initial "<em>java</em>", and before the "<em>-jar OmegaT.jar</em>" part.
   Note that in Windows you can change the <em>OmegaT.l4J.ini</em> file to
-  reflect your preferences.</p>
+  reflect your preferences. On Mac OSX, you can change the <em>Info.plist</em>
+  located in <em>OmegaT.app/Contents/</em> to do the same.</p>
 
   <p>A list of possible arguments is given below. You can have more information
   about the arguments by typing <em>man java</em> in the terminal window -
@@ -677,7 +709,7 @@
     or compatible Java system. You will also need the <em>ant</em> utility to
     build OmegaT.</dd>
 
-    <dt>OmegaT&nbsp;uses SubVersion for the versioning control. The most recent
+    <dt>OmegaT&nbsp;uses Subversion for the versioning control. The most recent
     code is available on the SVN server:</dt>
 
     <dd><em>https://omegat.svn.sourceforge.net/svnroot/omegat/trunk</em></dd>
@@ -717,15 +749,14 @@
     <dd><span style="font-style: italic;">&nbsp;&nbsp;&nbsp;
     http://omegat.sourceforge.net/webstart/OmegaT.jnlp</span><br>
     <br>
-    Download the file <span style=
-    "font-style: italic;">OmegaT.jnlp</span> and then click on
-    it.&nbsp;During the installation, depending on your operating system, you
-    may receive several security warnings. The certificate is self-signed by
-    "Didier Briel". The permissions you give to this version (which might be
-    mentioned as an "unrestricted access to the computer") are identical
-    to permissions you give to the local version, i.e., they allow an access to
-    the hard drive of the computer. Subsequent clicks
-    on <span style="font-style: italic;">OmegaT.jnlp</span> will check for any upgrades,
+    Download the file <span style="font-style: italic;">OmegaT.jnlp</span> and
+    then click on it.&nbsp;During the installation, depending on your operating
+    system, you may receive several security warnings. The certificate is
+    self-signed by "Didier Briel". The permissions you give to this version
+    (which might be mentioned as an "unrestricted access to the computer") are
+    identical to permissions you give to the local version, i.e., they allow an
+    access to the hard drive of the computer. Subsequent clicks on <span style=
+    "font-style: italic;">OmegaT.jnlp</span> will check for any upgrades,
     install them, if there's any, and then start OmegaT. After the initial
     installation you can of course use <span style=
     "font-style: italic;">OmegaT.jnlp</span> also when you are offline.

@@ -24,6 +24,7 @@
 
 package org.omegat.util.gui;
 
+
 /**
  * Some utilities for display text tables with aligning.
  * 

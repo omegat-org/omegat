@@ -43,6 +43,7 @@ import java.util.logging.Logger;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
@@ -177,7 +178,12 @@ public class RealProject implements IProject
             }
 
             // build word count
-            Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
+            String stat = CalcStandardStatistics.buildProjectStats(
+                    m_strEntryList, m_srcTextEntryArray, m_config,
+                    numberofTranslatedSegments);
+            String fn = getProjectProperties().getProjectInternal()
+                    + OConsts.STATS_FILENAME;
+            Statistics.writeStat(fn, stat);
             
             // Project Loaded...
             Core.getMainWindow().showStatusMessageRB(null);
@@ -402,7 +408,12 @@ public class RealProject implements IProject
         }
 
         // update statistics
-        Statistics.buildProjectStats(m_strEntryList, m_srcTextEntryArray, m_config, numberofTranslatedSegments);
+        String stat = CalcStandardStatistics.buildProjectStats(
+                m_strEntryList, m_srcTextEntryArray, m_config,
+                numberofTranslatedSegments);
+        String fn = getProjectProperties().getProjectInternal()
+                + OConsts.STATS_FILENAME;
+        Statistics.writeStat(fn, stat);
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
         

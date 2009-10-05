@@ -24,10 +24,6 @@
 
 package org.omegat.core.statistics;
 
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -40,7 +36,6 @@ import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
-import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -59,6 +54,15 @@ public class CalcMatchStatistics extends LongProcessThread {
             OStrings.getString("CT_STATS_Words"),
             OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
+
+    private String[] rows = new String[] {
+            OStrings.getString("CT_STATSMATCH_RowRepetitions"),
+            OStrings.getString("CT_STATSMATCH_RowExactMatch"),
+            OStrings.getString("CT_STATSMATCH_RowMatch95"),
+            OStrings.getString("CT_STATSMATCH_RowMatch85"),
+            OStrings.getString("CT_STATSMATCH_RowMatch75"),
+            OStrings.getString("CT_STATSMATCH_RowMatch50"),
+            OStrings.getString("CT_STATSMATCH_RowNoMatch") };
     private boolean[] align = new boolean[] { false, true, true, true, true };
 
     private StatisticsWindow callback;
@@ -114,19 +118,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         String fn = Core.getProject().getProjectProperties()
                 .getProjectInternal()
                 + OConsts.STATS_MATCH_FILENAME;
-        try {
-            OutputStreamWriter out = new OutputStreamWriter(
-                    new FileOutputStream(fn), OConsts.UTF8);
-            try {
-                out.write(DateFormat.getInstance().format(new Date()) + "\n");
-                out.write(outText);
-                out.flush();
-            } finally {
-                out.close();
-            }
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
+        Statistics.writeStat(fn, outText);
     }
 
     /**
@@ -165,32 +157,10 @@ public class CalcMatchStatistics extends LongProcessThread {
      */
     public String[][] calcTable(final StatCount[] result) {
         String[][] table = new String[result.length][5];
+
         // dump result - will be changed for UI
         for (int i = 0; i < result.length; i++) {
-            switch (i) {
-            case 0:
-                table[i][0] = OStrings
-                        .getString("CT_STATSMATCH_RowRepetitions");
-                break;
-            case 1:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowExactMatch");
-                break;
-            case 2:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch95");
-                break;
-            case 3:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch85");
-                break;
-            case 4:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch75");
-                break;
-            case 5:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch50");
-                break;
-            case 6:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowNoMatch");
-                break;
-            }
+            table[i][0] = rows[i];
             table[i][1] = Integer.toString(result[i].segments);
             table[i][2] = Integer.toString(result[i].words);
             table[i][3] = Integer.toString(result[i].charsWithoutSpaces);

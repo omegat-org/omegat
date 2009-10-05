@@ -233,7 +233,7 @@ public class Statistics {
     }
 
     protected static final int PERCENT_EXACT_MATCH = 101;
-    protected static final int PERCENT_REPETITIONS = 101;
+    protected static final int PERCENT_REPETITIONS = 102;
     
     /**
      * Calculate max similarity percent for one entry.

@@ -25,52 +25,10 @@
 package org.omegat.core.statistics;
 
 /**
- * Bean for store matches statistics info.
- * 
- * It required 7 rows to output:
- * "Exact match","100%","95% - 99%","85% - 94%","75% - 84%",50% - 74%","No
- * Match"
+ * Bean for store counts in statistics.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MatchStatisticsInfo {
-    public final Row[] rows;
-
-    public MatchStatisticsInfo() {
-        rows = new Row[7];
-        for (int i = 0; i < rows.length; i++) {
-            rows[i] = new Row();
-        }
-    }
-
-    public static class Row {
-        public int segments, words, charsWithoutSpaces, charsWithSpaces;
-    }
-
-    /**
-     * Get row index by match percent.
-     * 
-     * @param percent
-     *            match percent
-     * @return row index
-     */
-    public int getRowByPercent(int percent) {
-        if (percent == Statistics.PERCENT_REPETITIONS) {
-            // repetitions
-            return 0;
-        } else if (percent == Statistics.PERCENT_EXACT_MATCH) {
-            // exact match
-            return 1;
-        } else if (percent >= 95) {
-            return 2;
-        } else if (percent >= 85) {
-            return 3;
-        } else if (percent >= 75) {
-            return 4;
-        } else if (percent >= 50) {
-            return 5;
-        } else {
-            return 6;
-        }
-    }
+public class StatCount {
+    public int segments, words, charsWithoutSpaces, charsWithSpaces;
 }

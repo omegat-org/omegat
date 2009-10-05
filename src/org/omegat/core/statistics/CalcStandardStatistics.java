@@ -27,18 +27,17 @@ package org.omegat.core.statistics;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.threads.LongProcessThread;
+import org.omegat.gui.stat.StatisticsWindow;
 
 /**
  * Thread for calculate standard statistics.
  * 
- * TODO: move this statistics into pane in main window
- * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CalcStandardStatistics extends LongProcessThread {
-    private Callback callback;
+    private StatisticsWindow callback;
 
-    public CalcStandardStatistics(Callback callback) {
+    public CalcStandardStatistics(StatisticsWindow callback) {
         this.callback = callback;
     }
 

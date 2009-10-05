@@ -30,10 +30,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.FileOutputStream;
-import java.io.OutputStreamWriter;
-import java.text.DateFormat;
-import java.util.Date;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -50,10 +46,7 @@ import javax.swing.SwingUtilities;
 import org.omegat.core.Core;
 import org.omegat.core.statistics.CalcMatchStatistics;
 import org.omegat.core.statistics.CalcStandardStatistics;
-import org.omegat.core.statistics.MatchStatisticsInfo;
 import org.omegat.core.threads.LongProcessThread;
-import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.gui.DockingUI;
 
@@ -62,20 +55,12 @@ import org.omegat.util.gui.DockingUI;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class StatisticsWindow extends JDialog implements
-        CalcMatchStatistics.Callback, CalcStandardStatistics.Callback {
+public class StatisticsWindow extends JDialog {
 
     public static enum STAT_TYPE {
         STANDARD, MATCHES
     };
 
-    String[] header = new String[] { "",
-            OStrings.getString("CT_STATS_Segments"),
-            OStrings.getString("CT_STATS_Words"),
-            OStrings.getString("CT_STATS_Characters_NOSP"),
-            OStrings.getString("CT_STATS_Characters") };
-
-    boolean[] align = new boolean[] { false, true, true, true, true };
     private JProgressBar progressBar;
     private JTextArea output;
     private LongProcessThread thread;
@@ -157,142 +142,5 @@ public class StatisticsWindow extends JDialog implements
                 output.setCaretPosition(0);
             }
         });
-    }
-
-    public void displayData(final MatchStatisticsInfo result) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                progressBar.setValue(100);
-                progressBar.setString("");
-                progressBar.setVisible(false);
-            }
-        });
-
-        final String[][] table = calcTable(result);
-        final String data = showTextTable(header, table, align);
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                output.setText(data);
-            }
-        });
-        String fn = Core.getProject().getProjectProperties()
-                .getProjectInternal()
-                + OConsts.STATS_MATCH_FILENAME;
-        try {
-            OutputStreamWriter out = new OutputStreamWriter(
-                    new FileOutputStream(fn), OConsts.UTF8);
-            try {
-                out.write(DateFormat.getInstance().format(new Date()) + "\n");
-                out.write(data);
-                out.flush();
-            } finally {
-                out.close();
-            }
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
-    }
-
-    /**
-     * Extract result to text table.
-     * 
-     * @param result
-     *            result
-     * @return text table
-     */
-    protected String[][] calcTable(final MatchStatisticsInfo result) {
-        String[][] table = new String[7][5];
-        // dump result - will be changed for UI
-        for (int i = 0; i < result.rows.length; i++) {
-            switch (i) {
-            case 0:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowRepetitions");
-                break;
-            case 1:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowExactMatch");
-                break;
-            case 2:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch95");
-                break;
-            case 3:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch85");
-                break;
-            case 4:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch75");
-                break;
-            case 5:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowMatch50");
-                break;
-            case 6:
-                table[i][0] = OStrings.getString("CT_STATSMATCH_RowNoMatch");
-                break;
-            }
-            table[i][1] = Integer.toString(result.rows[i].segments);
-            table[i][2] = Integer.toString(result.rows[i].words);
-            table[i][3] = Integer.toString(result.rows[i].charsWithoutSpaces);
-            table[i][4] = Integer.toString(result.rows[i].charsWithSpaces);
-        }
-        return table;
-    }
-
-    /**
-     * Draw text table with columns align.
-     * 
-     * @param columnHeaders
-     *            column headers
-     * @param table
-     *            table data
-     * @return text
-     */
-    protected static String showTextTable(String[] columnHeaders,
-            String[][] table, boolean[] alignRight) {
-        StringBuilder out = new StringBuilder();
-
-        // calculate max column size
-        int maxColSize[] = new int[columnHeaders.length];
-        for (int c = 0; c < columnHeaders.length; c++) {
-            maxColSize[c] = columnHeaders[c].length();
-        }
-        for (int r = 0; r < table.length; r++) {
-            for (int c = 0; c < table[r].length; c++) {
-                maxColSize[c] = Math.max(maxColSize[c], table[r][c].length());
-            }
-        }
-
-        for (int c = 0; c < columnHeaders.length; c++) {
-            appendField(out, columnHeaders[c], maxColSize[c], alignRight[c]);
-        }
-        out.append('\n');
-        for (int r = 0; r < table.length; r++) {
-            for (int c = 0; c < table[r].length; c++) {
-                appendField(out, table[r][c], maxColSize[c], alignRight[c]);
-            }
-            out.append('\n');
-        }
-        return out.toString();
-    }
-
-    /**
-     * Output field with specified length.
-     * 
-     * @param out
-     *            output stream
-     * @param data
-     *            field data
-     * @param colSize
-     *            field size
-     */
-    private static void appendField(StringBuilder out, String data,
-            int colSize, boolean alignRight) {
-        if (!alignRight) {
-            out.append(data);
-        }
-        for (int i = data.length(); i < colSize; i++) {
-            out.append(' ');
-        }
-        if (alignRight) {
-            out.append(data);
-        }
-        out.append("\t");
     }
 }

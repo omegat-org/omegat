@@ -152,6 +152,7 @@ public class StatisticsWindow extends JDialog implements
             public void run() {
                 progressBar.setValue(100);
                 progressBar.setString("");
+                progressBar.setVisible(false);
                 output.setText(result);
                 output.setCaretPosition(0);
             }
@@ -163,6 +164,7 @@ public class StatisticsWindow extends JDialog implements
             public void run() {
                 progressBar.setValue(100);
                 progressBar.setString("");
+                progressBar.setVisible(false);
             }
         });
 

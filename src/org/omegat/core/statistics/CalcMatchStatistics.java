@@ -45,6 +45,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.Token;
+import org.omegat.util.gui.TextUtil;
 
 /**
  * Thread for calculate match statistics.
@@ -106,7 +107,7 @@ public class CalcMatchStatistics extends LongProcessThread {
         }
 
         final String[][] table = calcTable(result);
-        final String outText = showTextTable(header, table, align);
+        final String outText = TextUtil.showTextTable(header, table, align);
 
         callback.displayData(outText);
 
@@ -162,7 +163,7 @@ public class CalcMatchStatistics extends LongProcessThread {
      *            result
      * @return text table
      */
-    protected String[][] calcTable(final StatCount[] result) {
+    public String[][] calcTable(final StatCount[] result) {
         String[][] table = new String[result.length][5];
         // dump result - will be changed for UI
         for (int i = 0; i < result.length; i++) {
@@ -198,64 +199,4 @@ public class CalcMatchStatistics extends LongProcessThread {
         return table;
     }
 
-    /**
-     * Draw text table with columns align.
-     * 
-     * @param columnHeaders
-     *            column headers
-     * @param table
-     *            table data
-     * @return text
-     */
-    protected static String showTextTable(String[] columnHeaders,
-            String[][] table, boolean[] alignRight) {
-        StringBuilder out = new StringBuilder();
-
-        // calculate max column size
-        int maxColSize[] = new int[columnHeaders.length];
-        for (int c = 0; c < columnHeaders.length; c++) {
-            maxColSize[c] = columnHeaders[c].length();
-        }
-        for (int r = 0; r < table.length; r++) {
-            for (int c = 0; c < table[r].length; c++) {
-                maxColSize[c] = Math.max(maxColSize[c], table[r][c].length());
-            }
-        }
-
-        for (int c = 0; c < columnHeaders.length; c++) {
-            appendField(out, columnHeaders[c], maxColSize[c], alignRight[c]);
-        }
-        out.append('\n');
-        for (int r = 0; r < table.length; r++) {
-            for (int c = 0; c < table[r].length; c++) {
-                appendField(out, table[r][c], maxColSize[c], alignRight[c]);
-            }
-            out.append('\n');
-        }
-        return out.toString();
-    }
-
-    /**
-     * Output field with specified length.
-     * 
-     * @param out
-     *            output stream
-     * @param data
-     *            field data
-     * @param colSize
-     *            field size
-     */
-    private static void appendField(StringBuilder out, String data,
-            int colSize, boolean alignRight) {
-        if (!alignRight) {
-            out.append(data);
-        }
-        for (int i = data.length(); i < colSize; i++) {
-            out.append(' ');
-        }
-        if (alignRight) {
-            out.append(data);
-        }
-        out.append("\t");
-    }
 }

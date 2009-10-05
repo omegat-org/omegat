@@ -28,6 +28,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
+import org.omegat.util.OStrings;
 
 /**
  * Thread for calculate standard statistics.
@@ -35,6 +36,13 @@ import org.omegat.gui.stat.StatisticsWindow;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class CalcStandardStatistics extends LongProcessThread {
+    private String[] header = new String[] { "",
+            OStrings.getString("CT_STATS_Segments"),
+            OStrings.getString("CT_STATS_Words"),
+            OStrings.getString("CT_STATS_Characters_NOSP"),
+            OStrings.getString("CT_STATS_Characters") };
+    private boolean[] align = new boolean[] { false, true, true, true, true };
+
     private StatisticsWindow callback;
 
     public CalcStandardStatistics(StatisticsWindow callback) {
@@ -49,9 +57,12 @@ public class CalcStandardStatistics extends LongProcessThread {
         callback.displayData(result);
     }
 
-    public interface Callback {
-        void displayData(String result);
+    public static class FileData {
+        public StatCount total, remaining;
 
-        void showProgress(int percent);
+        public FileData() {
+            total = new StatCount();
+            remaining = new StatCount();
+        }
     }
 }

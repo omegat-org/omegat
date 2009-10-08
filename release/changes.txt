@@ -1,14 +1,22 @@
 ----------------------------------------------------------------------
+ OmegaT 2.1.0
+----------------------------------------------------------------------
+  1 Enhancement
+  0 Bugfix
+----------------------------------------------------------------------
+2.1.0 vs. 2.0.5
+
+  Other enhancements:
+  - generate pseudo-translated tmx
+  (see documentation->translation memories->pseudo-translated memory)
+
+----------------------------------------------------------------------
  OmegaT 2.0.5
 ----------------------------------------------------------------------
   1 Enhancement
   0 Bugfix
 ----------------------------------------------------------------------
 2.0.5 vs. 2.0.4 update 1
-
-  Implemented requests:
-  - generate pseudo-translated tmx
-  (see documentation->translation memories->pseudo-translated memory)
 
   Other enhancements:
   - Revised manual

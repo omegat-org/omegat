@@ -41,6 +41,8 @@
 
     <li><a href="#using_OmegaT_TM">Using OmegaT translation memories in other
     translation tools</a></li>
+    
+    <li><a href="#pseudo_translate">Pseudo-translated memory</a></li>
 
     <li><a href="#upgrading_TM">Upgrading Translation Memories</a></li>
   </ul>
@@ -90,18 +92,21 @@
         that the file can be used in other OmegaT projects</li>
       </ul>
 
-      <p>The <em>/tm/</em> folder can contain any number of TMX files. Such
+      <li>The <em>/tm/</em> folder can contain any number of TMX files. Such
       files must be correct TMX files and can either contain only textual
       information (level 1 TMX), OmegaT textual and formatting information
       (omegat TMX) or TMX textual and formatting information (level 2 TMX). The
       differences between them are technical (see below for details), and if
       you wish to use a translation memory from a past project, they are
-      largely interchangeable, i.e. they will all work equally well.</p>
+      largely interchangeable, i.e. they will all work equally well.
     </li>
-
-    <li><a name="TMX_backup" id="TMX_backup"></a></li>
   </ul>
+  <p>Optionally, you can let OmegaT make an additional TMX file (OmegaT-style) 
+  anywhere you specify, containing all translateable segments of the project. 
+  See <a href="#pseudo_translate">pseudo-translated memory</a>.</p>
+  
 
+  <a name="TMX_backup" id="TMX_backup"></a>
   <h3>TMX backup</h3>
 
   <p>When you translate your files, OmegaT stores all your progress in
@@ -262,8 +267,32 @@
   information (and not formatting information), use the level 1 file that
   OmegaT has created.</p>
   <hr>
-  <a name="upgrading_TM" id="upgrading_TM"></a>
+  <a name="pseudo_translate" id="pseudo_translate"></a>
+  <h2>Pseudo-translated memory</h2>
+  <p>There might be a case in which you want to do pre-processing or other 
+  processing of the segments than OmegaT allows. For example you want to create 
+  a pseudo-translation for testing purposes.</p>
+  <p>OmegaT allows you to create an extra tmx file that contains all segments of
+  the project. The translation in this tmx can be either 
+  <ul><li>translation equals source (default)</li>
+  <li>translation segment is empty</li></ul>
+  <p>The tmx file can get any name you specify, but the extension '.tmx' is 
+  added if not given.</p>
+  <P>The generation is activated with the following command line parameters:</P>
+  <code>java -jar omegat.jar <em>--pseudotranslatetmx=&lt;filename&gt; [pseudotranslatetype=[equal|empty]]</em></code>
+  <p>Replace &lt;filename&gt; with the name of the file you want to create, 
+  either absolute or relative to the working directory (the direcory you start 
+  OmegaT from).</p>
+  <p>The second argument <em>--pseudotranslatetype</em> is optional. Its value 
+  is either <em>equal</em> (for source=target) or <em>empty</em> (target segment
+  is empty) and defaults to <em>equal</em>.</p>
+  <p>You can process the generated tmx with any tool you want. To reuse it in 
+  OmegaT:<br>
+  rename it to <em>project_save.tmx</em> and put it in the 
+  <em>omegat</em>-folder of your project.</p>
+  <hr>
 
+  <a name="upgrading_TM" id="upgrading_TM"></a>
   <h2>Upgrading translation memories</h2>
 
   <p>Previous versions of OmegaT were capable of segmenting source files into

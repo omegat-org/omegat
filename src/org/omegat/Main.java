@@ -121,6 +121,11 @@ public class Main {
             RuntimePreferences.setQuietMode(true);
         }
 
+        if (params.containsKey("pseudotranslatetmx")) {
+            RuntimePreferences.setPseudoTranslateTMXFile(params.get("pseudotranslatetmx"));
+            RuntimePreferences.setPseudoTranslateType(params.get("pseudotranslatetype"));
+        }
+
         Log.log("\n"
                 + // NOI18N
                 "==================================================================="

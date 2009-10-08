@@ -55,9 +55,11 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.TMXReader;
 import org.omegat.util.TMXWriter;
+import org.omegat.util.RuntimePreferences.PSEUDO_TRANSLATE_TYPE;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -257,27 +259,39 @@ public class RealProject implements IProject
     {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
-                
+
         // build 3 TMX files:
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags
         // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
+        // Optionally: build a TMX with all segments that are used in the project.
         try
         {
-                // build TMX with OmegaT tags
-                String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
+            String pseudoTranslateTMXFilename = RuntimePreferences.getPseudoTranslateTMXFile();
+            PSEUDO_TRANSLATE_TYPE pseudoTranslateType = RuntimePreferences.getPseudoTranslateType();
+            // build TMX with OmegaT tags
+            String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
                         + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, false, false, false, m_config, m_strEntryList, m_orphanedList);
+            TMXWriter.buildTMXFile(fname, false, false, false, m_config, m_strEntryList, m_orphanedList, false, pseudoTranslateType);
 
-                // build TMX level 1 compliant file
-                fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
+            // build TMX level 1 compliant file
+            fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
                         + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, true, false, false, m_config, m_strEntryList, m_orphanedList);
+            TMXWriter.buildTMXFile(fname, true, false, false, m_config, m_strEntryList, m_orphanedList, false, pseudoTranslateType);
 
-                // build three-quarter-assed TMX level 2 file
-                fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
-                        + OConsts.TMX_EXTENSION;
-                TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList);
+            // build three-quarter-assed TMX level 2 file
+            fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
+                    + OConsts.TMX_EXTENSION;
+            TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList, false, pseudoTranslateType);
+
+            if (pseudoTranslateTMXFilename != null && pseudoTranslateTMXFilename.length()>0) {
+                if (!pseudoTranslateTMXFilename.endsWith(OConsts.TMX_EXTENSION)) {
+                    fname = pseudoTranslateTMXFilename+"."+OConsts.TMX_EXTENSION;
+                } else {
+                    fname = pseudoTranslateTMXFilename;
+                }
+                TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList, true, pseudoTranslateType);
+            }
         }
         catch (IOException e)
         {
@@ -374,12 +388,12 @@ public class RealProject implements IProject
             if (orig.exists())
                 orig.renameTo(backup);
         }
-        
+
         try
         {
             saveProjectProperties();
-            
-            TMXWriter.buildTMXFile(s, false, true, false, m_config, m_strEntryList, m_orphanedList);
+
+            TMXWriter.buildTMXFile(s, false, true, false, m_config, m_strEntryList, m_orphanedList, false, PSEUDO_TRANSLATE_TYPE.EQUAL);
             m_modifiedFlag = false;
         }
         catch (IOException e)

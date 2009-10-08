@@ -6,6 +6,10 @@
 ----------------------------------------------------------------------
 2.0.5 vs. 2.0.4 update 1
 
+  Implemented requests:
+  - generate pseudo-translated tmx
+  (see documentation->translation memories->pseudo-translated memory)
+
   Other enhancements:
   - Revised manual
 
@@ -74,7 +78,7 @@
   - Catalan localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
 
   Bug Fixes:
-  
+
   - A double click on the last segment was sending to the first one
   - OmegaT was only getting the first meaning in StarDict format
 
@@ -106,13 +110,13 @@
   http://sourceforge.net/support/tracker.php?aid=2795600
 
   - LaTeX filter support
-  http://sourceforge.net/support/tracker.php?aid=2790332 
+  http://sourceforge.net/support/tracker.php?aid=2790332
 
   Other enhancements:
 
-  - Changes in glossary are detected automatically every second. The 
-modified glossaries are reloaded in memory transparently, without having to 
-reload the project. Glossaries are also read from nested folders, not only from 
+  - Changes in glossary are detected automatically every second. The
+modified glossaries are reloaded in memory transparently, without having to
+reload the project. Glossaries are also read from nested folders, not only from
 the root of /glossary.
 
   - New index of documentations at the root of the /docs folder, identical
@@ -137,18 +141,18 @@ to the one obtained in OmegaT.
 
   Other enhancements:
 
-  - Slovenian localisation updated to 2.0.1 (UI, readme) 
+  - Slovenian localisation updated to 2.0.1 (UI, readme)
   - Japanese localisation updated to 2.0.2 (UI, Instant Start)
 
-  Bug Fixes: 
+  Bug Fixes:
 
   - The change of font wasn't applied immediately in the Editor
-  
+
   - The Enter/Return key was creating a new line when Use TAB to Advance
 was checked
 
 ----------------------------------------------------------------------
- OmegaT 2.0.2 
+ OmegaT 2.0.2
 ----------------------------------------------------------------------
 2.0.2 vs. 2.0.1
 
@@ -160,70 +164,70 @@ was checked
   Implemented requests:
 
   - Support for alpha-3 language codes of ISO 639-2 and 639-3
-  http://sourceforge.net/support/tracker.php?aid=1570557 
+  http://sourceforge.net/support/tracker.php?aid=1570557
 
   - ResX file filter
-  http://sourceforge.net/support/tracker.php?aid=1908250 
+  http://sourceforge.net/support/tracker.php?aid=1908250
 
   - Display all the instances of a segment in searches
-  http://sourceforge.net/support/tracker.php?aid=1904497 
+  http://sourceforge.net/support/tracker.php?aid=1904497
 
   - Polish segmentation rules
-  http://sourceforge.net/support/tracker.php?aid=2783294 
+  http://sourceforge.net/support/tracker.php?aid=2783294
 
   - Dutch segmentation rules
-  http://sourceforge.net/support/tracker.php?aid=2790334 
+  http://sourceforge.net/support/tracker.php?aid=2790334
 
   Other enhancements:
 
-  - Source and target segments are now, by default, left justified for LTR 
+  - Source and target segments are now, by default, left justified for LTR
 languages and right justified for RTL languages depending on the
 languages of the project. It is still possible to switch with Shift+Ctrl+O,
-which has now three states: 
+which has now three states:
 - Justification according to languages (default)
 - Justification on the left
 - Justification on the right
 
-  - Ctrl+Page up and Ctrl+Page down go to the beginning/end of a document 
-(without entering the segment) 
+  - Ctrl+Page up and Ctrl+Page down go to the beginning/end of a document
+(without entering the segment)
 
   - XLIFF filter: the segmentation of pre-segmented documents (tagged by
 <mrk mtype="seg"> is used.
 
   - Update of some user interface texts for clarification purposes
 
-  - Spanish localisation updated to 2.0.1 (UI, readme, instant start) 
+  - Spanish localisation updated to 2.0.1 (UI, readme, instant start)
 
-  Bug Fixes: 
+  Bug Fixes:
 
   - Glossary: unclear display if combined entries contain a ","
-  http://sourceforge.net/support/tracker.php?aid=2628490 
+  http://sourceforge.net/support/tracker.php?aid=2628490
 
   - Bidi wrong justification
-  http://sourceforge.net/support/tracker.php?aid=1383289 
+  http://sourceforge.net/support/tracker.php?aid=1383289
 
   - OmegaT hangs at random
-  http://sourceforge.net/support/tracker.php?aid=1762277  
+  http://sourceforge.net/support/tracker.php?aid=1762277
 
   - Random hangs, exceptions in command line, nothing in log
-  http://sourceforge.net/support/tracker.php?aid=1817830 
+  http://sourceforge.net/support/tracker.php?aid=1817830
 
-  - Confused display when RTL segment starts with LTR characters 
-  http://sourceforge.net/support/tracker.php?aid=1898522  
+  - Confused display when RTL segment starts with LTR characters
+  http://sourceforge.net/support/tracker.php?aid=1898522
 
-  - Spellchecker slow down 
-  http://sourceforge.net/support/tracker.php?aid=1908643 
+  - Spellchecker slow down
+  http://sourceforge.net/support/tracker.php?aid=1908643
 
   - Over matching in segmentation rules
   http://sourceforge.net/support/tracker.php?aid=2783299
-  
+
   - "Mark untranslated" + "Display source"= opening problem
   http://sourceforge.net/support/tracker.php?aid=1812310
 
   - Pattern after in Text files segmentation rule contained "\s+" instead
 of " +"
 
-  - The SkipMeta option in the HTML and XHTML filters was not initialised to 
+  - The SkipMeta option in the HTML and XHTML filters was not initialised to
 the default value
 
 ----------------------------------------------------------------------
@@ -236,38 +240,38 @@ the default value
 
 ----------------------------------------------------------------------
 2.0.1
-  
+
   Implemented requests:
 
   - New English exception
-  http://sourceforge.net/support/tracker.php?aid=2493485 
+  http://sourceforge.net/support/tracker.php?aid=2493485
 
   - Changing the location of user files
-  http://sourceforge.net/support/tracker.php?aid=2317274  
+  http://sourceforge.net/support/tracker.php?aid=2317274
 
   - Combine identical and similar glossary entries
-  http://sourceforge.net/support/tracker.php?aid=2505552 
+  http://sourceforge.net/support/tracker.php?aid=2505552
 
   - Interface for scripting languages
-  http://sourceforge.net/support/tracker.php?aid=1989533  
+  http://sourceforge.net/support/tracker.php?aid=1989533
 
   - Specify project from command line
-  http://sourceforge.net/support/tracker.php?aid=1880170   
-  
+  http://sourceforge.net/support/tracker.php?aid=1880170
+
   Other enhancements:
-  
+
   - Console mode, to be able to run OmegaT without user interface
 (For users of the tokenizers - http://sourceforge.net/projects/omegat-plugins -
 ITokenizer=<tokenizer> has to be replaced by --ITokenizer=<tokenizer>)
 
   - The list of files in the Project files window can be selected
 and copied to the clipboard.
- 
+
   - Ctrl+F uses the selection even outside the current target segment
 
   - Slovenian localisation updated to 2.0 (readme)
-  
-  Bug Fixes: 
+
+  Bug Fixes:
 
   - Fix for detection of printf-variables with index specifier
   (for feature http://sourceforge.net/support/tracker.php?aid=2371713)
@@ -286,28 +290,28 @@ and copied to the clipboard.
   Implemented requests:
   - Extra checks in TagValidator for PO linefeed
   http://sourceforge.net/support/tracker.php?aid=2371683
-  
+
   - Extra check in TagValidator if printf variables in PO-file segments are correct
   http://sourceforge.net/support/tracker.php?aid=2371713
-  
+
   - New English segmentation exceptions
-  http://sourceforge.net/support/tracker.php?aid=1974262 
+  http://sourceforge.net/support/tracker.php?aid=1974262
 
   - Fuzzy Glossary Matching
-  http://sourceforge.net/support/tracker.php?aid=1374596  
+  http://sourceforge.net/support/tracker.php?aid=1374596
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
   - Catalan and Spanish segmentation rules
-  http://sourceforge.net/support/tracker.php?aid=2282491   
+  http://sourceforge.net/support/tracker.php?aid=2282491
 
   Other enhancements:
 
   - The instant start is displayed correctly (right aligned) for RTL languages
 
-  - OmegaT can use tokenizers to get stemming in fuzzy and glossary matches. 
+  - OmegaT can use tokenizers to get stemming in fuzzy and glossary matches.
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
-  - Three percentages are displayed in the match pane, corresponding to the three 
+  - Three percentages are displayed in the match pane, corresponding to the three
 steps of matching:
 1 Using stemming (if a tokenizer is used)
 2 Without stemming
@@ -316,57 +320,57 @@ steps of matching:
   - Japanese localisation updated to 2.0 (UI)
   - Basque localisation updated to 2.0 (UI)
   - Slovenian localisation updated to 2.0 (UI)
-  
+
   Bugs fixes:
-    
+
   - Spellcheck EN-US: incorrect handling of hyphenated compounds
-  http://sourceforge.net/support/tracker.php?aid=1815736 
+  http://sourceforge.net/support/tracker.php?aid=1815736
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
 ----------------------------------------------------------------------
  OmegaT 2.0.0 Changes
 ----------------------------------------------------------------------
-2.0.0 vs. 1.8.1 
+2.0.0 vs. 1.8.1
 
 
   14 Enhancements
   0  Bugfix
 
 ----------------------------------------------------------------------
-2.0.0 
+2.0.0
 
   Implemented requests:
-  
+
   - User-configurable keyboard shortcuts
-  http://sourceforge.net/support/tracker.php?aid=1615400 
+  http://sourceforge.net/support/tracker.php?aid=1615400
 
   - Shortcut for Reload/Close/Create translated documents
-  http://sourceforge.net/support/tracker.php?aid=1618679  
+  http://sourceforge.net/support/tracker.php?aid=1618679
 
   - Additions to the log
-  http://sourceforge.net/support/tracker.php?aid=1632959  
+  http://sourceforge.net/support/tracker.php?aid=1632959
 
-  - Keep position after clicking a file 
-  http://sourceforge.net/support/tracker.php?aid=2150276 
+  - Keep position after clicking a file
+  http://sourceforge.net/support/tracker.php?aid=2150276
 
   - Project List to remain in front
-  http://sourceforge.net/support/tracker.php?aid=1808903 
+  http://sourceforge.net/support/tracker.php?aid=1808903
 
   - Rewrite thread use
-  http://sourceforge.net/support/tracker.php?aid=1581565  
+  http://sourceforge.net/support/tracker.php?aid=1581565
 
   Other enhancements:
 
-  - Zero load time. That is, data required for matching is now computed 
-"on-demand", which means the load time for any project should now be 
+  - Zero load time. That is, data required for matching is now computed
+"on-demand", which means the load time for any project should now be
 under a minute in most cases.
 
-  - New log system, with log rotation, logging of concurrent instances, 
+  - New log system, with log rotation, logging of concurrent instances,
 and configurable content
 
   - New SRT (subtitles) filter
-  
-  - XHTML filter: The options that existed in the HTML filter only have been 
+
+  - XHTML filter: The options that existed in the HTML filter only have been
 ported
 
   - HTML and XHTML filter: It is now possible to select specifically which
@@ -393,7 +397,7 @@ can be applied or not with a new option in Options/Font.
 1.8.1 update 7
 
   Other enhancements:
-  
+
   - Spanish localisation updated to 1.8 (Instant Start)
 
 ----------------------------------------------------------------------
@@ -413,7 +417,7 @@ can be applied or not with a new option in Options/Font.
   http://sourceforge.net/support/tracker.php?aid=2826624
 
   Other enhancements:
-  
+
   - The Linux package (with JRE) is now compressed with bz2 instead of gz
   - German localisation updated to 1.8 (UI, Instant Start, Readme, backported from 2.0.3)
 
@@ -454,14 +458,14 @@ can be applied or not with a new option in Options/Font.
 
   - XML, stylesheet declaration removed from target
   http://sourceforge.net/support/tracker.php?aid=1677412
-  
+
   - XML, Processing Instructions removed from target document
-  http://sourceforge.net/support/tracker.php?aid=1662202  
+  http://sourceforge.net/support/tracker.php?aid=1662202
 
   - Hunspell and OmegaT could crash if a dictionary did not exist for
 a project's language
 
-  - XLIFF filter: the tag <mrk> was declared as not containing 
+  - XLIFF filter: the tag <mrk> was declared as not containing
 translatable content
 
 ----------------------------------------------------------------------
@@ -473,12 +477,12 @@ translatable content
    3 Bugfixes
 ----------------------------------------------------------------------
 1.8.1 update 3
- 
+
   Implemented requests:
 
   - Add keyboard shortcuts in Search dialog
   http://sourceforge.net/support/tracker.php?aid=1811065
-  (Effective in English and in French, other translations must be 
+  (Effective in English and in French, other translations must be
    updated. As for all dialogs, dialog shortcuts are not available on a Mac.)
 
   Other enhancements:
@@ -491,10 +495,10 @@ translatable content
   Bug fixes:
 
   - Tags are counted as characters in statistics
-  http://sourceforge.net/support/tracker.php?aid=1910909 
+  http://sourceforge.net/support/tracker.php?aid=1910909
 
   - French dictionary cannot be downloaded and installed
-  http://sourceforge.net/support/tracker.php?aid=2138846  
+  http://sourceforge.net/support/tracker.php?aid=2138846
 
   - Linux: Exception on reading omegat/learned_words.txt
   http://sourceforge.net/support/tracker.php?aid=2657589
@@ -511,21 +515,21 @@ translatable content
 
   Other enhancements:
 
-  Windows: Various corrections and enhancements to OmegaT.exe (the OmegaT 
+  Windows: Various corrections and enhancements to OmegaT.exe (the OmegaT
 launcher), based on version 3.0.1 of Launch4J.
 
   - Slovenian localisation updated to 1.8 (readme, instant start, documentation)
-  
+
   Bug fixes:
-  
+
   - PL "Create new project" too large on OSX
   http://sourceforge.net/support/tracker.php?aid=1895406
 
   - The content of external TMX level 2 tags is displayed
-  http://sourceforge.net/support/tracker.php?aid=1988491 
+  http://sourceforge.net/support/tracker.php?aid=1988491
 
   - Spellcheck: words added to dictionary lost after restart
-  http://sourceforge.net/support/tracker.php?aid=1819355  
+  http://sourceforge.net/support/tracker.php?aid=1819355
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 1 Changes
@@ -543,9 +547,9 @@ launcher), based on version 3.0.1 of Launch4J.
   http://sourceforge.net/support/tracker.php?aid=2120936
 
   Other enhancements:
- 
-  - Japanese localisation updated to 1.8 (UI) 
-  - Slovenian localisation updated to 1.8 (UI) 
+
+  - Japanese localisation updated to 1.8 (UI)
+  - Slovenian localisation updated to 1.8 (UI)
 
   Bug fixes:
 
@@ -557,7 +561,7 @@ launcher), based on version 3.0.1 of Launch4J.
   http://sourceforge.net/support/tracker.php?aid=2149518
 
   - OpenXML filter: Newline (<w:br>) was not defined as a paragraph tag
-  The change might require to revalidate the translation for some existing 
+  The change might require to revalidate the translation for some existing
 segments
 
 ----------------------------------------------------------------------
@@ -566,34 +570,34 @@ segments
    8 Enhancements
    1 Bugfixe
 ----------------------------------------------------------------------
-1.8.1 
+1.8.1
 
   Implemented requests:
 
-  - OpenDoc: Allow to translate or not Bookmark references  
-  http://sourceforge.net/support/tracker.php?aid=2018244 
+  - OpenDoc: Allow to translate or not Bookmark references
+  http://sourceforge.net/support/tracker.php?aid=2018244
 
-  - Do not take user to first segment on project reload  
-  http://sourceforge.net/support/tracker.php?aid=1906198 
+  - Do not take user to first segment on project reload
+  http://sourceforge.net/support/tracker.php?aid=1906198
 
   Other enhancements:
 
   - Revised manual
 
   - The xml:lang attribute can be translated with the HTML filter
-  
+
   - Slovak localisation updated to 1.8 (UI)
   - Dutch localisation updated to 1.8 (UI, readme)
   - Czech localisation updated to 1.8 (UI, readme)
   - Serbo-Croatian localisation updated to 1.8 (UI, readme)
-  
+
   Bug fixes:
 
   - Extra space in each segment in the German localization
-  http://sourceforge.net/support/tracker.php?aid=2169447  
+  http://sourceforge.net/support/tracker.php?aid=2169447
 
   - Vista: wrong location of configuration files
-  http://sourceforge.net/support/tracker.php?aid=2200872   
+  http://sourceforge.net/support/tracker.php?aid=2200872
 
 
 ----------------------------------------------------------------------
@@ -613,17 +617,17 @@ segments
   - Catalan localisation updated to 1.8 (UI)
 
   Bug fixes:
-  
+
   - Spellchecking dialogs not dismissable with [esc]
   http://sourceforge.net/support/tracker.php?aid=1815506
 
   - Wrong Import file dialog title
-  http://sourceforge.net/support/tracker.php?aid=1940081 
+  http://sourceforge.net/support/tracker.php?aid=1940081
 
   - Hunspell not working on Linux 64-bit
 
   - Non-ascii char badly handled in hunspell lib loading on OS-X
-  http://sourceforge.net/support/tracker.php?aid=1862199  
+  http://sourceforge.net/support/tracker.php?aid=1862199
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 1 Changes
@@ -657,61 +661,61 @@ segments
 1.8.0
 
   Implemented requests:
-  
+
   - Editor window name
   http://sourceforge.net/support/tracker.php?aid=1764103
 
   - Tool: Spellchecker
-  http://sourceforge.net/support/tracker.php?aid=991510 
+  http://sourceforge.net/support/tracker.php?aid=991510
 
-  - Letter case change in editing field 
-  http://sourceforge.net/support/tracker.php?aid=1386063  
+  - Letter case change in editing field
+  http://sourceforge.net/support/tracker.php?aid=1386063
 
-  - Display source segments 
-  http://sourceforge.net/support/tracker.php?aid=1805172   
+  - Display source segments
+  http://sourceforge.net/support/tracker.php?aid=1805172
 
-  - Mark translated segments 
-  http://sourceforge.net/support/tracker.php?aid=1805173 
+  - Mark translated segments
+  http://sourceforge.net/support/tracker.php?aid=1805173
 
-  - Mark untranslated segments   
+  - Mark untranslated segments
   http://sourceforge.net/support/tracker.php?aid=1809004
 
-  - Navigation history  
-  http://sourceforge.net/support/tracker.php?aid=1805175     
+  - Navigation history
+  http://sourceforge.net/support/tracker.php?aid=1805175
 
   - HTML, skip extraction of messages matching regxep
-  http://sourceforge.net/support/tracker.php?aid=1787085     
+  http://sourceforge.net/support/tracker.php?aid=1787085
 
   - (X)HTML filter: do not translate input VALUE attribute
-  http://sourceforge.net/support/tracker.php?aid=1787153     
+  http://sourceforge.net/support/tracker.php?aid=1787153
 
   - Select elements to translate in office documents
-  http://sourceforge.net/support/tracker.php?aid=1812565   
+  http://sourceforge.net/support/tracker.php?aid=1812565
 
   - Clickable match window
   http://sourceforge.net/support/tracker.php?aid=1297188
 
   - Compare source segment and translated segment lengths
-  http://sourceforge.net/support/tracker.php?aid=1562002 
+  http://sourceforge.net/support/tracker.php?aid=1562002
 
   - Indicate translation progress in status bar
-  http://sourceforge.net/support/tracker.php?aid=1520599  
+  http://sourceforge.net/support/tracker.php?aid=1520599
 
   Other enhancements:
-  
+
   - Belarusian UI updated to 1.7.+
   - French UI updated to 1.8
 
   Bug fixes:
-  
+
   - HTML filter loses html-encoded characters if not supported
   http://sourceforge.net/support/tracker.php?aid=1802000
 
   - Check-spelling/styles error
-  http://sourceforge.net/support/tracker.php?aid=1822579 
+  http://sourceforge.net/support/tracker.php?aid=1822579
 
   - Mistake of segmentation after <PRE>
-  http://sourceforge.net/support/tracker.php?aid=1827479  
+  http://sourceforge.net/support/tracker.php?aid=1827479
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 4 Changes
@@ -735,15 +739,15 @@ segments
 
   - PO Filter: some escapes not working
   http://sourceforge.net/support/tracker.php?aid=1964169
-  
-  - Angle bracket no showing in Editor after segment number in the German 
+
+  - Angle bracket no showing in Editor after segment number in the German
 localization
 
   - DocBook: entities resolved only under Java 1.4
-  http://sourceforge.net/support/tracker.php?aid=1825174 
+  http://sourceforge.net/support/tracker.php?aid=1825174
 
   - PO: Bad handling of double quotes after no-wrap
-  http://sourceforge.net/support/tracker.php?aid=2021007 
+  http://sourceforge.net/support/tracker.php?aid=2021007
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 3 Changes
@@ -761,21 +765,21 @@ localization
   Implemented requests:
 
   - DocBook: Allow to translate the language attribute
-  http://sourceforge.net/support/tracker.php?aid=1949471     
+  http://sourceforge.net/support/tracker.php?aid=1949471
 
-  - Escape support for PO 
-  http://sourceforge.net/support/tracker.php?aid=1869069    
-  
+  - Escape support for PO
+  http://sourceforge.net/support/tracker.php?aid=1869069
+
   Bug fixes:
 
-  - Wrong default encoding in XML (should be UTF-8) 
-  http://sourceforge.net/support/tracker.php?aid=1941365   
+  - Wrong default encoding in XML (should be UTF-8)
+  http://sourceforge.net/support/tracker.php?aid=1941365
 
-  - Solaris not detected, and wrong default home directory 
-  http://sourceforge.net/support/tracker.php?aid=1953251   
+  - Solaris not detected, and wrong default home directory
+  http://sourceforge.net/support/tracker.php?aid=1953251
 
   - Error trying to create target document with large OOo file
-  http://sourceforge.net/support/tracker.php?aid=1955635  
+  http://sourceforge.net/support/tracker.php?aid=1955635
 
   - Windows: the OmegaT folder was not completely removed from Program files
 when uninstalling the JRE version
@@ -796,31 +800,31 @@ when uninstalling the JRE version
   Implemented requests:
 
   - Command line parameters for OmegaT.exe
-  http://sourceforge.net/support/tracker.php?aid=1900264  
+  http://sourceforge.net/support/tracker.php?aid=1900264
 
   - Windows installer
-  http://sourceforge.net/support/tracker.php?aid=1596625   
+  http://sourceforge.net/support/tracker.php?aid=1596625
 
-  - DocBook 5.0 filter  
-  http://sourceforge.net/support/tracker.php?aid=1907008   
+  - DocBook 5.0 filter
+  http://sourceforge.net/support/tracker.php?aid=1907008
 
-  - Do not copy SVN/CVS folders from /source to /target  
-  http://sourceforge.net/support/tracker.php?aid=1774502    
-  
+  - Do not copy SVN/CVS folders from /source to /target
+  http://sourceforge.net/support/tracker.php?aid=1774502
+
   Other enhancements:
 
   - New Arabic localisation (UI, readme, instant start)
 
   Bug fixes:
 
-  - PO: Bad handling of plural messages on multiple lines 
-  http://sourceforge.net/support/tracker.php?aid=1896781  
+  - PO: Bad handling of plural messages on multiple lines
+  http://sourceforge.net/support/tracker.php?aid=1896781
 
   - Some strings not translated when using external bundle
-  http://sourceforge.net/support/tracker.php?aid=1922188 
+  http://sourceforge.net/support/tracker.php?aid=1922188
 
   - XHTML: xmlns="http://www.w3.org... in every tag
-  http://sourceforge.net/support/tracker.php?aid=1926940  
+  http://sourceforge.net/support/tracker.php?aid=1926940
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 1 Changes
@@ -838,10 +842,10 @@ when uninstalling the JRE version
   Implemented requests:
 
   - Exceptions for EN.*: Fig., St., middle name.
-  http://sourceforge.net/support/tracker.php?aid=1856354 
-  
+  http://sourceforge.net/support/tracker.php?aid=1856354
+
   Other enhancements:
-  
+
   - Serbo-Croatian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
   - Slovenian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
   - Russian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
@@ -852,26 +856,26 @@ when uninstalling the JRE version
 
   Bug fixes:
 
-  - HTML entities not resolved in the XHTML filter 
-  http://sourceforge.net/support/tracker.php?aid=1844968 
+  - HTML entities not resolved in the XHTML filter
+  http://sourceforge.net/support/tracker.php?aid=1844968
 
-  - Prevent non-XML characters from entering the TMX 
-  http://sourceforge.net/support/tracker.php?aid=1684825 
-  
+  - Prevent non-XML characters from entering the TMX
+  http://sourceforge.net/support/tracker.php?aid=1684825
+
   - Relative paths not working under Windows/Java 1.4
-  http://sourceforge.net/support/tracker.php?aid=1875331 
+  http://sourceforge.net/support/tracker.php?aid=1875331
 
   - Mediawiki import - remove invalid chars in filename
-  http://sourceforge.net/support/tracker.php?aid=1878113  
+  http://sourceforge.net/support/tracker.php?aid=1878113
 
   - Relative paths with "similar names" not working
-  http://sourceforge.net/support/tracker.php?aid=1879571   
+  http://sourceforge.net/support/tracker.php?aid=1879571
 
   - PO-filter fails to handle plural forms
-  http://sourceforge.net/support/tracker.php?aid=1879892    
+  http://sourceforge.net/support/tracker.php?aid=1879892
 
   - Non-translatable strings displayed in OOo documents
-  http://sourceforge.net/support/tracker.php?aid=1888097 
+  http://sourceforge.net/support/tracker.php?aid=1888097
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes
@@ -890,7 +894,7 @@ when uninstalling the JRE version
 Contains a revised manual, two new localisations (Danish, polish) and bug fixes
 
  Other enhancements:
- 
+
  - Revised manual
 
  - Danish 1.6.2 localisation + instant start
@@ -900,14 +904,14 @@ Contains a revised manual, two new localisations (Danish, polish) and bug fixes
  - French localisation updated to 1.7.3
 
  Bug fixes:
-  
-  - Properties: space before "=" shouldn't be part of the key  
+
+  - Properties: space before "=" shouldn't be part of the key
   http://sourceforge.net/support/tracker.php?aid=1812183
 
-  - <context> should be ignored in XLIFF files  
+  - <context> should be ignored in XLIFF files
   http://sourceforge.net/support/tracker.php?aid=1802000
 
-  - Footnotes break segments in OOo 1.x documents  
+  - Footnotes break segments in OOo 1.x documents
   http://sourceforge.net/support/tracker.php?aid=1812385
 
 ----------------------------------------------------------------------
@@ -927,7 +931,7 @@ Contains a revised manual, two new localisations (Danish, polish) and bug fixes
 Contains three new localisations (Simplified Chinese, Traditional Chinese and Czech) and bug fixes
 
  Implemented requests:
-  
+
   - Have a more complete ISO 639 list in the UI
   http://sourceforge.net/support/tracker.php?aid=1755240
 
@@ -935,7 +939,7 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
   http://sourceforge.net/support/tracker.php?aid=1604238
 
   - Current file highlighted in Project Files Window
-  http://sourceforge.net/support/tracker.php?aid=1766670 
+  http://sourceforge.net/support/tracker.php?aid=1766670
 
  Other enhancements:
 
@@ -947,10 +951,10 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
   - Traditional Chinese 1.6.2 localisation
   - Dutch 1.6.2 localisation
   - Czech UI localisation + manual translation
- 
+
  Bug fixes:
-  
-  - Incorrect/unclear data in project_save.txt  
+
+  - Incorrect/unclear data in project_save.txt
   http://sourceforge.net/support/tracker.php?aid=1616247
 
   - regression in the JA UI strings 1.7.1 test
@@ -963,10 +967,10 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
   http://sourceforge.net/support/tracker.php?aid=1631735
 
   - Editor window still shows filename after closing project
-  http://sourceforge.net/support/tracker.php?aid=1730935 
+  http://sourceforge.net/support/tracker.php?aid=1730935
 
   - omegat version nb in project_save.tmx
-  http://sourceforge.net/support/tracker.php?aid=1774398 
+  http://sourceforge.net/support/tracker.php?aid=1774398
 
   - sh language is not expanded in the manual
   http://sourceforge.net/support/tracker.php?aid=1748552
@@ -1043,7 +1047,7 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   - Hungarian UI localisation + manual translation
 
   - Turkish UI localisation + instant start tutorial
-  
+
   - Catalan UI localisation + manual translation
 
   - Ukrainian UI localisation
@@ -1059,7 +1063,7 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   - Enhanced default German segmentation rules
 
  Bug fixes:
-  
+
   - Hardcoded bits of text unlocalisable
   http://sourceforge.net/support/tracker.php?aid=1602798
 
@@ -1068,7 +1072,7 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
 
   - Incorrect XHTML file not parsed at all
   http://sourceforge.net/support/tracker.php?aid=1590169
-  
+
   - DocBook: indexterm not recognised as sub text
   http://sourceforge.net/support/tracker.php?aid=1670754
 
@@ -1076,11 +1080,11 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   http://sourceforge.net/support/tracker.php?aid=1672849
 
   - OmegaT.exe not compatible with Java 1.6
-  http://sourceforge.net/support/tracker.php?aid=1692362 
+  http://sourceforge.net/support/tracker.php?aid=1692362
 
   - (X)HTML: HR not defined as a paragraph tag
-  http://sourceforge.net/support/tracker.php?aid=1709373  
-  
+  http://sourceforge.net/support/tracker.php?aid=1709373
+
   - Ctrl+Z in search window is hard coded
   http://sourceforge.net/support/tracker.php?aid=1618742
 
@@ -1107,7 +1111,7 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
 
   - Search: simple wilcards do not work
   http://sourceforge.net/support/tracker.php?aid=1680081
-  
+
   - Language code in segmentation rule is case sensitive
   http://sourceforge.net/support/tracker.php?aid=1643500
 
@@ -1131,7 +1135,7 @@ of the MRJAdapter library, licensed under the LGPL, which is
 GPL-compatible.
 
  Bug fixes:
- 
+
   - License incompatibility
   (Inconsistent license information)
   http://sourceforge.net/support/tracker.php?aid=1609275
@@ -1516,7 +1520,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - [OO] Don't segment on inline images, bookmarks, references
    http://sourceforge.net/support/tracker.php?aid=1458673
 
- - Windows closing/position problems/String problems 
+ - Windows closing/position problems/String problems
    http://sourceforge.net/support/tracker.php?aid=1386155
 
  - Language codes forced to uppercase
@@ -1565,7 +1569,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - [OO] Tracked changes add unnecessary data
    http://sourceforge.net/support/tracker.php?aid=1461178
 
- - Windows closing/position problems/String problems 
+ - Windows closing/position problems/String problems
    http://sourceforge.net/support/tracker.php?aid=1386155
 
  - Language codes forced to uppercase
@@ -1612,7 +1616,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.6.0 RC7
 
  Enchancements:
- 
+
  - Delete orphan segments from exported TMX file
    http://sourceforge.net/support/tracker.php?aid=1422364
 
@@ -1633,7 +1637,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Dialogs/windows do not close on Escape
    http://sourceforge.net/support/tracker.php?aid=1422959
 
- - Structure of HTML not respected in output 
+ - Structure of HTML not respected in output
    (second iteration over a bugfix first appeared in 1.6.RC4)
    http://sourceforge.net/support/tracker.php?aid=1364265
 
@@ -1661,7 +1665,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.6 RC6
 
  Enchancements:
- 
+
  - TMX: Import TMX 1.4b, export TMX 1.1 Level 1
    http://sourceforge.net/support/tracker.php?aid=1031139
 
@@ -1698,7 +1702,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.6 RC5
 
  Enchancements:
- 
+
  - OOo tag support (text:user-defined and text:sequence)
    http://sourceforge.net/support/tracker.php?aid=1385052
 
@@ -1817,7 +1821,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
 1.6 RC2
 -------------------------------
- 
+
  Enchancements:
 
  - Flexible (Sentence) Segmenting
@@ -1863,7 +1867,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
  Bugfixes:
 
- - Tools/Validate tags shouldn't display a list of errors 
+ - Tools/Validate tags shouldn't display a list of errors
    if no errors were found
    http://sourceforge.net/support/tracker.php?aid=1209839
 
@@ -1896,7 +1900,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
  - 1.4.6beta4 selection in the match window
    (1.4.6 beta 4 regression)
-   http://sourceforge.net/support/tracker.php?aid=1303853 
+   http://sourceforge.net/support/tracker.php?aid=1303853
 
  - Tags are taken into account when computing similarity
    http://sourceforge.net/support/tracker.php?aid=1298542
@@ -1912,9 +1916,9 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
 1.4.5.04
 -------------------------------
- 
+
  Bugfixes:
- 
+
  - Empty files are displayed in a file list window
    http://sourceforge.net/support/tracker.php?aid=1256026
 
@@ -1924,9 +1928,9 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
 1.4.5.03
 -------------------------------
- 
+
  Bugfixes:
- 
+
  - HOME and END key issues:
      * While pressing the HOME key cursor moves to begining of a line
      * While pressing the END key cursor moves to end of a line
@@ -1939,7 +1943,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
 1.4.5.02
 -------------------------------
- 
+
  Bugfixes:
 
  - Regression: 1.4.5.01 Cannot create/open a project
@@ -1948,7 +1952,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
 1.4.5.01
 -------------------------------
- 
+
  Bugfixes:
 
  - Serious threading issue, preventing OmegaT from showing up...
@@ -1961,7 +1965,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
    http://sourceforge.net/support/tracker.php?aid=1211826
 
  Enchancements:
- 
+
  - Open the project when selecting the project folder
    http://sourceforge.net/support/tracker.php?aid=1216533
 
@@ -2007,7 +2011,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
  Enchancements:
 
- - File Filters Redesign 
+ - File Filters Redesign
    http://sf.net/tracker/index.php?func=detail&aid=991526&group_id=68187&atid=520350
 
    Now mostly all the information about filters is exposed,
@@ -2019,9 +2023,9 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
  - Load filters as plugins
    http://sf.net/tracker/index.php?func=detail&aid=1195957&group_id=68187&atid=520350
-   
+
    OmegaT now may load filter plugins dynamically.
-   Filter plugins should be situated in [OmegaT-install-dir]/plugins 
+   Filter plugins should be situated in [OmegaT-install-dir]/plugins
    and should be packed as JAR files with manifest stating:
    * OmegaT-Plugin: true   and then for each filter in a plugin (each plugin may have more than one filter)
    * Name: the.package.name.TheFilterName
@@ -2059,13 +2063,13 @@ Bugfixes:
 
 - Compiled OpenOffice files missing language-specific characters
   http://sf.net/tracker/index.php?func=detail&aid=1188723&group_id=68187&atid=520347
-  
+
 - No warnings on wrong language codes during project creation
   http://sf.net/tracker/index.php?func=detail&aid=1053695&group_id=68187&atid=520347
 
 Also some work on stabilizing the interface...
 
-Not yet in Beta3: 
+Not yet in Beta3:
       Finalize documentation and implement some minor Bugfixes / RFEs.
 
 
@@ -2110,7 +2114,7 @@ Bugfixes:
   http://sf.net/tracker/index.php?func=detail&aid=1107299&group_id=68187&atid=520347
 
 
-1.4.4.01 
+1.4.4.01
 -------------------------------
 (1.4.4 "final" contained a serious bug in TXT file handler,
  http://sf.net/tracker/index.php?func=detail&aid=1106314&group_id=68187&atid=520347
@@ -2118,7 +2122,7 @@ Bugfixes:
 -------------------------------
 Enchancements:
 
-- Easy Help system localization 
+- Easy Help system localization
   (and Belorussian, French, German, Russian and Spanish l10ns)
 
 - Separate source distribution of OmegaT
@@ -2126,12 +2130,12 @@ Enchancements:
 - Ability to jump to next not yet translated segment
   by Henry Pijffers
 
-- Increased number of fuzzy matches 
+- Increased number of fuzzy matches
   (now with as low as 40% similarity)
-  
+
 - Refactoring HTML and XML file handlers
   to improve speed and stability
-  
+
 - Some refactorings of file handlers
   to streamline the development of new file handlers
   (will be useful in the future, I hope)
@@ -2152,7 +2156,7 @@ Bugfixes:
 
 - HTML Encoding wasn't always recognized correctly
 
-- And sometimes encoding meta was not inserted 
+- And sometimes encoding meta was not inserted
   into compiled HTML files
 
 - Help file viewer was shown multiple times
@@ -2174,7 +2178,7 @@ Bugfix release:
   parsing Unicode symbols of a form \uXXXX.
 
 Enchancements:
-- Created an independent tool to import existing translations 
+- Created an independent tool to import existing translations
   of .properties files
 
 - Added "Join mailing list" to Windows menu
@@ -2201,7 +2205,7 @@ A lot of enhancements:
 - New filter: Java ResourceBundles (.properties files)
 
   !!! Now you're able to localize OmegaT using OmegaT itself !!!
-  - create an empty project for your language, 
+  - create an empty project for your language,
   - copy source/org/omegat/Bundle.properties into project's 'source' dir
   - open the project, translate it and compile
   - send us the Bundle_XX.properties from project's 'target' dir
@@ -2213,9 +2217,9 @@ One MAJOR bug fixed:
 -------------------------------
 Match window now displays only fuzzy matches that have a translation.
 Benefits:
-- fuzzy matches of very similiar phrases without translation 
+- fuzzy matches of very similiar phrases without translation
   don't garbage the screen estate
-- in early times of project (when there's not a lot of strings translated), 
+- in early times of project (when there's not a lot of strings translated),
   less similiar phrases may be found
 
 and 6 minor bugs fixed:
@@ -2231,7 +2235,7 @@ and 6 minor bugs fixed:
 -------------------------------
 Repackaging of 1.3.16 plus the latest help files.
 
-        
+
 1.3.16
 -------------------------------
 Fixed a bug in the file copy routine which would append extra data onto
@@ -2284,7 +2288,7 @@ all files from source directory tree now copied to target tree on compile
 gave match/glossary window a keyboard shortcut to hide/show it
 activated recursive file searching (this had been silently inactive)
 hilited "active" fuzzy match in match pane
-fixed offset bug where documents with identical entries would lose a 
+fixed offset bug where documents with identical entries would lose a
   character
 fixed bug where exception would be thrown if font was set before project
   was loaded
@@ -2302,8 +2306,8 @@ fixed some bugs in the fuzzy matching system
 
 1.3.9 alpha
 --------------------------------
-depricated 'prev' and 'next' navigation shortcuts (Ctrl-R/P) in favor of more 
-  more convenient and existing 'Enter' and 'Ctrl-Enter' 
+depricated 'prev' and 'next' navigation shortcuts (Ctrl-R/P) in favor of more
+  more convenient and existing 'Enter' and 'Ctrl-Enter'
 added new feature to go to next untranslated string (Ctrl-N)
 added mnemonics and changed key mappings (undo/redo now Z/Y - wanted to
   use Mac method of undo=Ctrl-Z and redo=Ctrl-shift-Z, but don't know of
@@ -2316,7 +2320,7 @@ find screen display size before drawing windows
 updated font dialog
 fixed bug where exception thrown when changing font w/ no project loaded
 extracted fuzzy match info to new window; made glossary info visible
-fixed offset bugs that caused out-of-bounds exceptions when changing 
+fixed offset bugs that caused out-of-bounds exceptions when changing
   documents
 
 
@@ -2329,16 +2333,16 @@ added undo/redo to current edit field
 fixed copy-paste bug that allowed ctrl-V paste when selection was hilited
   in context area to misalign display
 made searches case insensitive
-fixed XHTML output bug that would add extra & and ; to certain escaped 
+fixed XHTML output bug that would add extra & and ; to certain escaped
   characters
 
 1.3.6 alpha
 --------------------------------
 Changed project open dialog to operate on project files directly (instead
-                of project directories) as some users could not open projects 
+                of project directories) as some users could not open projects
                 at all (esp. mac users)
 Set font in find window to match source language font and size.
-Locked out keyboard input when no project active 
+Locked out keyboard input when no project active
 
 1.3.5 alpha
 --------------------------------
@@ -2389,13 +2393,13 @@ deprecated ignore file list
 
 OmegaT 1.1.2 (beta build)
 ----------------------------------------------------------------------
-- Moved find mechanism to seperate window; added wildcard abilities to keyword 
+- Moved find mechanism to seperate window; added wildcard abilities to keyword
   search.
 - Modified main UI to provide more space to the translation and context areas.
 - OOo parser rewritten to use new core XML file parser
 - XHTML support
 - extension of HTML parser to recognize more extended characters
-- deprecation of .../<project>/omegat/file_extension_mapping file - moved 
+- deprecation of .../<project>/omegat/file_extension_mapping file - moved
   information to global preference system
 
 
@@ -2409,38 +2413,38 @@ OmegaT 1.0.0
 ----------------------------------------------------------------------
 changes
 - UI updates: got rid of tables in context view; added icon to UI
-- File formats: converted all internal files to XML (except 2 which were left 
-  as tab files); project_save and compiled tm now TMX (or at least a close 
+- File formats: converted all internal files to XML (except 2 which were left
+  as tab files); project_save and compiled tm now TMX (or at least a close
   cousin of TMX)
-- Search target text: added mechanism to search translated text.  uses exact 
+- Search target text: added mechanism to search translated text.  uses exact
   string matching (as opposed to keyword search in source text)
 - Preference system to remember previously used directories and locales
-- Project (creating/opening) interface completely changed.  Projects now 
-  handled as folders instead of files.  Cute icon in file open dialog indicates 
+- Project (creating/opening) interface completely changed.  Projects now
+  handled as folders instead of files.  Cute icon in file open dialog indicates
   valid project folder.
-- New option under Tools menu to examine tags and see if any have changed 
+- New option under Tools menu to examine tags and see if any have changed
   position, been deleted or been added.
-- Enabled JVM 1.4 support for find and goto fields to be activated by 'ENTER' 
+- Enabled JVM 1.4 support for find and goto fields to be activated by 'ENTER'
   key
 
 undocumented feature
-- hilite text in translation pane then hit ctrl-f (or 'e') and search will 
+- hilite text in translation pane then hit ctrl-f (or 'e') and search will
   automatically begin using hilited text
-- control enter in the exact match search field will search the source 
+- control enter in the exact match search field will search the source
   langauge segments instead of target lang
 
 bug fixes
-all fixes as of 0.9.9 
+all fixes as of 0.9.9
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
 0.9.9
 ----------------------------------------------------------------------
 bug fixes
-- fixed compile bug in HTML and OOo parsers where parser would get confused 
+- fixed compile bug in HTML and OOo parsers where parser would get confused
   if a close tag didn't have an associated open tag
 
-note: this release was built by hand using files unziped from 0.9.8.  
+note: this release was built by hand using files unziped from 0.9.8.
 The release is not in CVS but the changes were put into the 1.0 tree
 ----------------------------------------------------------------------
 
@@ -2461,8 +2465,8 @@ mac specific behavior problems)
 changes
 converted text file reader to expect latin-1 input, as the default
  utf-8 keeps choking it
-added some meaningful output to the console 
- 
+added some meaningful output to the console
+
 bug fixes
 fixed path bug in TM loader
 removed debugging code that kept informing of swallowd keypresses
@@ -2472,15 +2476,15 @@ removed debugging code that kept informing of swallowd keypresses
 0.9.6
 ----------------------------------------------------------------------
 Changes / new features
-- New project window that lists all files within a project and hyper-links 
+- New project window that lists all files within a project and hyper-links
   to them for better navigation
-- Added 'Browse' buttons to project creation window for more user friendly 
-  selection of non-default project directories (such as to select a directory 
+- Added 'Browse' buttons to project creation window for more user friendly
+  selection of non-default project directories (such as to select a directory
   containing already unpacked source language files)
-- New auto-save mechanism.  Currently set to save project automatically 
+- New auto-save mechanism.  Currently set to save project automatically
   every 5 minutes.
-- Returned ENTER key to it's original use of commiting current entry and 
-  moving on to the next.  SHIFT-ENTER inserts a soft return (ascii 0x8d) 
+- Returned ENTER key to it's original use of commiting current entry and
+  moving on to the next.  SHIFT-ENTER inserts a soft return (ascii 0x8d)
   into the text field, and CONTROL-ENTER moves to the previous entry.
 
 Bug-fixes
@@ -2490,5 +2494,5 @@ Bug-fixes
 Issues
 - Discovered bug in the Java HTML viewer in JRE 1.2 where correctly formed
 HTML will sometimes (somehow) cause a string of exceptions to arise and
-eventually freeze the application.  
+eventually freeze the application.
 ----------------------------------------------------------------------

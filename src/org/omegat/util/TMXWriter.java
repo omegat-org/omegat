@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.data.TransMemory;
+import org.omegat.util.RuntimePreferences.PSEUDO_TRANSLATE_TYPE;
 
 /**
  * Class that store TMX (Translation Memory Exchange) files.
@@ -49,7 +50,8 @@ public class TMXWriter {
      */
     public static void buildTMXFile(final String filename, final boolean forceValidTMX, final boolean addOrphans,
             final boolean levelTwo, final ProjectProperties m_config, final List<StringEntry> m_strEntryList,
-            final List<TransMemory> m_orphanedList) throws IOException {
+            final List<TransMemory> m_orphanedList, 
+            final boolean pseudoTranslate, PSEUDO_TRANSLATE_TYPE pseudo_translate_type) throws IOException {
         // we got this far, so assume lang codes are proper
         String sourceLocale = m_config.getSourceLanguage().toString();
         String targetLocale = m_config.getTargetLanguage().toString();
@@ -96,9 +98,18 @@ public class TMXWriter {
         String target = null;
         for (StringEntry se : m_strEntryList) {
             source = forceValidTMX ? StaticUtils.stripTags(se.getSrcText()) : se.getSrcText();
-            target = forceValidTMX ? StaticUtils.stripTags(se.getTranslation()) : se.getTranslation();
-            if (target.length() == 0)
-                continue;
+            if (!pseudoTranslate) {
+                target = forceValidTMX ? StaticUtils.stripTags(se.getTranslation()) : se.getTranslation();
+                if (target.length() == 0)
+                    continue;
+            } else {
+                if (pseudo_translate_type.equals(PSEUDO_TRANSLATE_TYPE.EQUAL)) {
+                    target = source;
+                } else {
+                    //must be PSEUDO_TRANSLATE_TYPE.EMPTY
+                    target = "";
+                }
+            }
             source = StaticUtils.makeValidXML(source);
             target = StaticUtils.makeValidXML(target);
 
@@ -118,7 +129,7 @@ public class TMXWriter {
             out.println("    </tu>"); // NOI18N
         }
 
-        // Write orphan strings
+        // Write orphan strings. Assume N/A when pseudo-translate.
         if (addOrphans) {
             for (TransMemory transMem : m_orphanedList) {
                 if (transMem.target.length() == 0)
@@ -161,9 +172,6 @@ public class TMXWriter {
     private static String makeLevelTwo(String segment) {
         // Create a storage buffer for the result
         StringBuffer result = new StringBuffer(segment.length() * 2);
-
-        // Create a pattern matcher for numbers
-        Matcher numberMatch = Pattern.compile("\\d+").matcher("");
 
         // Find all single tags
         //Matcher match = Pattern.compile("&lt;[a-zA-Z\-]+\\d+/&gt;").matcher(segment);

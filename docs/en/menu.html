@@ -152,7 +152,7 @@
           <p><code>Reload</code></p>
         </td>
 
-        <td width="17%">F5</td>
+        <td width="17%"><code>F5</code></td>
 
         <td>
           <p>Reloads the project to take external changes in source files,
@@ -165,7 +165,7 @@
           <p><code>Close</code></p>
         </td>
 
-        <td width="17%">Ctrl+Shift+W</td>
+        <td width="17%"><code>Ctrl+Shift+W</code></td>
 
         <td>
           <p>Saves the translation and closes the project.</p>
@@ -193,7 +193,7 @@
           <p><code>Create Translated Documents</code></p>
         </td>
 
-        <td width="17%">Ctrl+D</td>
+        <td width="17%"><code>Ctrl+D</code></td>
 
         <td>
           <p>Creates the target documents based on your translation of
@@ -428,14 +428,15 @@
         </td>
 
         <td>
-          <p>Exports the current segment to a text file for
-          processing.&nbsp;When this menu entry is triggered, the current
-          selection in the editor is written to <span style=
-          "font-style: italic;">&lt;config-dir&gt;/script/selection.txt</span>.
-          If there is no selection, the current segment (target or source,
-          depending whether there is a translation or not) is written to this
-          file. When the user exits OmegaT, this file is not emptied, to be
-          consistent with usual clipboard behaviour.</p>
+          <p>Exports the current selection to a text file for processing. If
+          there is no selection, the current source is written to this file.
+          When the user exits OmegaT, this file is not emptied, to be
+          consistent with usual clipboard behaviour. The exported contents is
+          copied to the file <span style=
+          "font-style: italic;">selection.txt</span> located in the User's
+          preference files folder (see&nbsp;<a href=
+          "filesAndDirectories.html#user" target="_blank">files and
+          directories</a>).&nbsp;</p>
         </td>
       </tr>
 
@@ -787,9 +788,9 @@
           <p>Restores the components (editor, match, glossary and dictionary
           viewer, and Google Translate pane) of the main OmegaT window to their
           default state. Use this feature in case you have undocked, moved, or
-          hidden one or more components, and you cannot get them back the way
-          you want them, or when you have changed of OmegaT version and none of
-          the windows appear anymore.</p>
+          hidden one or more components and you cannot get them back the way
+          you want them. Use it also if you have changed of OmegaT version and
+          you have problems with windows not appearing anymore.</p>
         </td>
       </tr>
 
@@ -909,6 +910,35 @@
         <td>
           <p>Saves the current work to the file project_save.tmx located in the
           project's /omegat/ folder</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Close Project</p>
+        </td>
+
+        <td>
+          <p><code>Shift+Ctrl+W</code></p>
+        </td>
+
+        <td>
+          <p>Closes the current project</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Create Translated Documents</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+D</code></p>
+        </td>
+
+        <td>
+          <p>Creates the translated documents in the project's Target
+          folder</p>
         </td>
       </tr>
 
@@ -1099,7 +1129,7 @@
 
         <td>
           <p><code>Ctrl+N<br>
-          Enter Return</code></p>
+          Enter or Return&nbsp;</code></p>
         </td>
 
         <td>
@@ -1206,6 +1236,35 @@
         <td>
           <p>Opens the <a href="userInterface.html#Tag_Validation">Tag
           validation</a> window</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Export Selection</p>
+        </td>
+
+        <td>
+          <p><code>Shift+</code><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Exports the current selection or the current source, if there's no
+          selection</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Search Project&nbsp;&nbsp; &nbsp;</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F&nbsp;&nbsp; &nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Opens a new Search window</p>
         </td>
       </tr>
 

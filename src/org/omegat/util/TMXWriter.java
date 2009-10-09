@@ -42,11 +42,25 @@ import org.omegat.util.RuntimePreferences.PSEUDO_TRANSLATE_TYPE;
  * Class that store TMX (Translation Memory Exchange) files.
  */
 public class TMXWriter {
-    /**
+    /*
      * Saves a TMX file to disk
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      * @author Maxym Mykhalchuk
+     * @param filename       The name of the file to create
+     * @param forceValidTMX  When true, OmegaT-tags are stripped from the segments.
+     * @param addOrphans  When true, the segments in the m_orphanedList are added
+     *                    to the TMX as well.
+     * @param levelTwo    When true, the tmx is made compatible with level 2 (TMX version 1.4)
+     * @param m_config    Project configuration, to get the languages
+     * @param m_strEntryList  List of translated segments
+     * @param m_orphanedList  List of translated segments that have no match in the current sources
+     * @param pseudoTranslate  When true, a tu-section is created for every segment in the sources, even when there is no translation available.
+     * @param pseudo_translate_type  When pseudo-translate is true:<br>
+     *      If 'equal' then the translation that is written is equal to the source.<br>
+     *      If 'empty', the translation is an empty string.<br>
+     *      When pseudoTranslate is false, this parameter is ignored.
+     * @throws IOException
      */
     public static void buildTMXFile(final String filename, final boolean forceValidTMX, final boolean addOrphans,
             final boolean levelTwo, final ProjectProperties m_config, final List<StringEntry> m_strEntryList,

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008 Alex Buloichik
+ Copyright (C) 2009 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,37 +25,11 @@
 package org.omegat.filters2;
 
 /**
- * Callback for parse files.
+ * Callback for translate files.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
-public interface IParseCallback {
-    String processEntry(String entry);
-
-    /**
-     * Read entry from source file
-     * 
-     * @param id
-     *            ID in source file, or null if ID not suported by format
-     * @param source
-     *            source entry text
-     * @param translation
-     *            exist translation text
-     * @param comment
-     *            comment for entry, if format supports it
-     */
-    void addEntry(String id, String source, String translation, String comment);
-
-    /**
-     * Add data to the legacy TMX.
-     * 
-     * @param source
-     *            source entry text
-     * @param translation
-     *            translation
-     */
-    void addLegacyTMXEntry(String source, String translation);
-
+public interface ITranslateCallback {
     /**
      * Get translation for output to compiled target.
      * 

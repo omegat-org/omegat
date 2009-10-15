@@ -120,6 +120,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         String charWithoutTags;
 
         total.segments = m_srcTextEntryArray.size();
+        unique.segments = m_strEntryList.size();
         for (StringEntry se : m_strEntryList) {
             String src = se.getSrcText();
             int dups = se.getParentList().size();

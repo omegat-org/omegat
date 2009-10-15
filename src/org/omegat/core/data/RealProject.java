@@ -85,10 +85,10 @@ public class RealProject implements IProject
 
     private boolean m_modifiedFlag;
 
-    /** maps text to strEntry obj */
+    /** maps text to strEntry obj. TODO: remove */
     private Map<String, StringEntry> m_strEntryHash;
 
-    /** Unique segments list. Used for save TMX. */
+    /** Unique segments list. Used for save TMX. TODO: remove */
     private List<StringEntry> m_strEntryList;
 
     /** List of all segments in project. */
@@ -97,10 +97,10 @@ public class RealProject implements IProject
     /** the list of legacy TMX files, each object is the list of string entries */
     private List<LegacyTM> m_legacyTMs;
 
-    /** Entries from all /tm/*.tmx files and orphaned from project_save.tmx. */
+    /** Entries from all /tm/*.tmx files and orphaned from project_save.tmx. TODO: remove*/
     private List<TransMemory> m_tmList;
     
-    /** Orphaned entries from project_save.tmx. */
+    /** Orphaned entries from project_save.tmx. TODO: remove*/
     private List<TransMemory> m_orphanedList;
 
     /** Segments count in project files. */
@@ -163,6 +163,8 @@ public class RealProject implements IProject
             
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
                         
+            LoadContext context = new LoadContext();
+            
             loadSourceFiles();
             
             loadTranslations();
@@ -907,5 +909,14 @@ public class RealProject implements IProject
         }
         public void addLegacyTMXEntry(String source, String translation) {
         }
-    };        
+    };
+    
+    /**
+     * Class for store some information which required only on loading.
+     * 
+     * @author Alex Buloichik (alex73mail@gmail.com)
+     */
+    public class LoadContext {
+
+    }
 }

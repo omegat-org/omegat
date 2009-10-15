@@ -85,9 +85,6 @@ public class RealProject implements IProject
 
     private boolean m_modifiedFlag;
 
-    /** maps text to strEntry obj. TODO: remove */
-    private Map<String, StringEntry> m_strEntryHash;
-
     /** Unique segments list. Used for save TMX. TODO: remove */
     private List<StringEntry> m_strEntryList;
 
@@ -115,7 +112,6 @@ public class RealProject implements IProject
      *                true if project need to be created
      */
     public RealProject(final ProjectProperties props, final boolean isNewProject) {
-        m_strEntryHash = new HashMap<String, StringEntry>(4096);
         m_strEntryList = new ArrayList<StringEntry>();
         m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
         m_tmList = new ArrayList<TransMemory>();
@@ -133,7 +129,6 @@ public class RealProject implements IProject
         m_tmList = Collections.unmodifiableList(m_tmList);
         m_orphanedList = Collections.unmodifiableList(m_orphanedList);
         m_strEntryList = Collections.unmodifiableList(m_strEntryList);
-        m_strEntryHash = Collections.unmodifiableMap(m_strEntryHash);
     }
     
     public void saveProjectProperties() throws IOException {
@@ -153,6 +148,7 @@ public class RealProject implements IProject
         UIThreadsUtil.mustNotBeSwingThread();
         
         // load new project
+        LoadContext context = new LoadContext();
         try
         {
             Preferences.setPreference(Preferences.CURRENT_FOLDER, new File(
@@ -162,17 +158,15 @@ public class RealProject implements IProject
             m_config = props;
             
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
-                        
-            LoadContext context = new LoadContext();
             
-            loadSourceFiles();
+            loadSourceFiles(context);
             
-            loadTranslations();
+            loadTranslations(context);
             
             // load in translation database files
             try
             {
-                loadTM();
+                loadTM(context);
             }
             catch (IOException e)
             {
@@ -205,7 +199,7 @@ public class RealProject implements IProject
             // Of course we should've cleaned up after ourselves earlier,
             // but since we didn't, do a bit of cleaning up now, otherwise
             // we can't even inform the user about our slacking off.
-            m_strEntryHash.clear();
+            context = null;
             m_strEntryList.clear();
             m_srcTextEntryArray.clear();
             m_legacyTMs.clear();
@@ -334,7 +328,18 @@ public class RealProject implements IProject
         
         Set<File> processedFiles = new HashSet<File>();
         
-        TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
+        LoadContext context = new LoadContext();
+        // prepare context data. TODO: remove if not need in future
+        for (int i = 0; i < m_srcTextEntryArray.size(); i++) {
+            SourceTextEntry ste = m_srcTextEntryArray.get(i);
+            StringEntry se = ste.getStrEntry();
+            StringEntry hse = context.m_strEntryHash.get(se.getSrcText());
+            if (hse == null) {
+                context.m_strEntryHash.put(se.getSrcText(), se);
+            }
+        }
+        
+        TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback(context);
         
         for(String filename : fileList)
         {
@@ -494,7 +499,7 @@ public class RealProject implements IProject
     // protected functions
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
-    private void loadTranslations()
+    private void loadTranslations(final LoadContext context)
     {
         final File tmxFile = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
         try
@@ -521,7 +526,7 @@ public class RealProject implements IProject
             //  they were loaded, load each string then look for it's
             //  owner
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            loadTMXFile(tmxFile.getAbsolutePath(), "UTF-8", true); // NOI18N
+            loadTMXFile(context, tmxFile.getAbsolutePath(), "UTF-8", true); // NOI18N
         }
         catch (IOException e)
         {
@@ -535,7 +540,7 @@ public class RealProject implements IProject
      * 
      * @param projectRoot project root dir
      */
-    private void loadSourceFiles()
+    private void loadSourceFiles(final LoadContext context)
             throws IOException, InterruptedIOException, TranslationException
     {
         FilterMaster fm = FilterMaster.getInstance();
@@ -562,7 +567,7 @@ public class RealProject implements IProject
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX",
                     filepath);
             
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback();
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(context);
             
             ProjectFileData m_curFile = new ProjectFileData();
             m_curFile.name = filename;
@@ -590,7 +595,7 @@ public class RealProject implements IProject
     }
     
     /** Locates and loads external TMX files with legacy translations. */
-    private void loadTM() throws IOException
+    private void loadTM(final LoadContext context) throws IOException
     {
         File f = new File(m_config.getTMRoot());
         String[] fileList = f.list();
@@ -606,9 +611,9 @@ public class RealProject implements IProject
             fname += file;
             
             if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION))
-                loadTMXFile(fname, "UTF-8", false); // NOI18N
+                loadTMXFile(context, fname, "UTF-8", false); // NOI18N
             else if (ext.equalsIgnoreCase(OConsts.TMW_EXTENSION))
-                loadTMXFile(fname, "ISO-8859-1", false); // NOI18N
+                loadTMXFile(context, fname, "ISO-8859-1", false); // NOI18N
         }
     }
     
@@ -617,7 +622,7 @@ public class RealProject implements IProject
      * Either the one of the project with project's translation,
      * or the legacy ones.
      */
-    private void loadTMXFile(String fname, String encoding, boolean isProject)
+    private void loadTMXFile(final LoadContext context, String fname, String encoding, boolean isProject)
             throws IOException
     {
         TMXReader tmx = new TMXReader(encoding, m_config
@@ -673,7 +678,7 @@ public class RealProject implements IProject
 
             if (isProject)
             {
-                StringEntry se = m_strEntryHash.get(src);
+                StringEntry se = context.m_strEntryHash.get(src);
                 if( se==null )
                 {
                     // loading a project save file and the
@@ -776,7 +781,8 @@ public class RealProject implements IProject
         return projectFilesList;
     }
         
-    private class LoadFilesCallback extends ParseEntry {        
+    private class LoadFilesCallback extends ParseEntry {  
+        private final LoadContext context;
         /**
          * Keeps track of file specific data to feed to SourceTextEntry objects
          * so they can have a bigger picture of what's where.
@@ -784,8 +790,9 @@ public class RealProject implements IProject
         private ProjectFileData m_curFile;
         private LegacyTM legacyFileTM;
 
-        public LoadFilesCallback() {
+        public LoadFilesCallback(final LoadContext context) {
             super(m_config);
+            this.context = context;
         }
         
         protected void setCurrentFile(ProjectFileData file) {
@@ -802,7 +809,7 @@ public class RealProject implements IProject
          *         returns the source string itself.
          */
         protected String processSingleEntry(String src) {
-            StringEntry se = m_strEntryHash.get(src);
+            StringEntry se = context.m_strEntryHash.get(src);
             addEntry(src);
 
             if (se == null) {
@@ -826,13 +833,13 @@ public class RealProject implements IProject
             if( srcText.length()==0 || srcText.trim().length()==0 )
                 return;
             
-            StringEntry strEntry = m_strEntryHash.get(srcText);
+            StringEntry strEntry = context.m_strEntryHash.get(srcText);
             if (strEntry == null)
             {
                 // entry doesn't exist yet - create and store it
                 strEntry = new StringEntry(srcText);
                 m_strEntryList.add(strEntry);
-                m_strEntryHash.put(srcText, strEntry);
+                context.m_strEntryHash.put(srcText, strEntry);
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
             m_srcTextEntryArray.add(srcTextEntry);
@@ -844,20 +851,20 @@ public class RealProject implements IProject
             if (segmentSource.length() == 0
                     || segmentSource.trim().length() == 0)
                 return;
-            StringEntry strEntry = m_strEntryHash.get(segmentSource);
+            StringEntry strEntry = context.m_strEntryHash.get(segmentSource);
             if (strEntry == null) {
                 // entry doesn't exist yet - create and store it
                 strEntry = new StringEntry(segmentSource);
                 strEntry.setTranslation(segmentTranslation);
                 m_strEntryList.add(strEntry);
-                m_strEntryHash.put(segmentSource, strEntry);
+                context.m_strEntryHash.put(segmentSource, strEntry);
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
             m_srcTextEntryArray.add(srcTextEntry);
         }
         @Override
         public String getTranslation(String id, String source) {
-            StringEntry se = m_strEntryHash.get(source);
+            StringEntry se = context.m_strEntryHash.get(source);
             
             if (se == null) {
                 return source;
@@ -883,8 +890,10 @@ public class RealProject implements IProject
     };
 
     private class TranslateFilesCallback extends ParseEntry {
-        public TranslateFilesCallback() {
+        private final LoadContext context;
+        public TranslateFilesCallback(final LoadContext context) {
             super(m_config);
+            this.context = context;
         }
         /**
          * Processes a single entry. This method doesn't perform any changes on
@@ -896,7 +905,7 @@ public class RealProject implements IProject
          *         returns the source string itself.
          */
         protected String processSingleEntry(String src) {
-            StringEntry se = m_strEntryHash.get(src);
+            StringEntry se = context.m_strEntryHash.get(src);
 
             if (se == null) {
                 return src;
@@ -910,13 +919,15 @@ public class RealProject implements IProject
         public void addLegacyTMXEntry(String source, String translation) {
         }
     };
-    
+
     /**
      * Class for store some information which required only on loading.
      * 
      * @author Alex Buloichik (alex73mail@gmail.com)
      */
-    public class LoadContext {
-
+    private class LoadContext {
+        /** maps text to strEntry obj */
+        Map<String, StringEntry> m_strEntryHash = new HashMap<String, StringEntry>(
+                4096);
     }
 }

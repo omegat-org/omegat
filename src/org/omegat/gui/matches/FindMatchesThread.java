@@ -34,6 +34,7 @@ import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.LegacyTM;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
@@ -94,7 +95,7 @@ public class FindMatchesThread extends Thread {
 
     @Override
     public void run() {
-        final List<StringEntry> entries = Core.getProject().getUniqueEntries();
+        final List<SourceTextEntry> entries = Core.getProject().getAllEntries();
         final List<LegacyTM> memory = Core.getProject().getMemory();
         if (entries == null || memory == null) {
             // project is closed
@@ -122,7 +123,7 @@ public class FindMatchesThread extends Thread {
         strTokensAll = Core.getTokenizer().tokenizeAllExactly(processedEntry.getSrcText());// HP: includes non-word tokens
 
         // travel by project entries
-        for (StringEntry candEntry : entries) {
+        for (SourceTextEntry candEntry : entries) {
             if (matcherController.processedEntry != processedEntry) {
                 // Processed entry changed, because user moved to other entry.
                 // I.e. we don't need to find and display data for old entry.
@@ -131,11 +132,11 @@ public class FindMatchesThread extends Thread {
             if (StringUtil.isEmpty(candEntry.getTranslation())) {
                 continue;
             }
-            if (candEntry == processedEntry) {
+            if (candEntry.getStrEntry() == processedEntry) {
                 // skip original==original entry comparison
                 continue;
             }
-            processEntry(candEntry, null);
+            processEntry(candEntry.getStrEntry(), null);
         }
 
         // travel by translation memories
@@ -255,6 +256,10 @@ public class FindMatchesThread extends Thread {
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
+            if (candEntry.getSrcText().equals(st.str.getSrcText())) {
+                // the same source text already in list - don't need to add
+                return;
+            }
             if (st.score < similarity) {
                 break;
             }

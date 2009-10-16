@@ -26,7 +26,10 @@
 package org.omegat;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
@@ -42,10 +45,15 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
+import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.TransMemory;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.TMXWriter;
+import org.omegat.util.RuntimePreferences.PSEUDO_TRANSLATE_TYPE;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -59,7 +67,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 public class Main {
     /** Application execution mode. */
     enum RUN_MODE {
-        GUI, CONSOLE_TRANSLATE;
+        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX;
         public static RUN_MODE parse(String s) {
             try {
                 return valueOf(s.toUpperCase().replace('-', '_'));
@@ -143,7 +151,8 @@ public class Main {
             runGUI();
             break;
         case CONSOLE_TRANSLATE:
-            runConsoleTranslate();
+        case CONSOLE_CREATEPSEUDOTRANSLATETMX:
+            runConsoleTranslate(runMode);
             break;
         }
     }
@@ -204,7 +213,7 @@ public class Main {
     /**
      * Execute in console mode for translate.
      */
-    protected static void runConsoleTranslate() {
+    protected static void runConsoleTranslate(RUN_MODE runMode) {
         Log.log("Console mode");
         Log.log("");
 
@@ -236,8 +245,42 @@ public class Main {
             RealProject p = new RealProject(projectProperties, false);
             Core.setProject(p);
 
-            System.out.println("Translating Project");
-            p.compileProject();
+            switch (runMode) {
+            case CONSOLE_TRANSLATE:
+                System.out.println("Translating Project");
+                p.compileProject();
+                break;
+            case CONSOLE_CREATEPSEUDOTRANSLATETMX:
+                System.out.println("Translating Project");
+
+                ProjectProperties m_config = p.getProjectProperties();
+                List<StringEntry> m_strEntryList = p.getUniqueEntries();
+                ArrayList<TransMemory> m_orphanedList = new ArrayList<TransMemory>();
+                String pseudoTranslateTMXFilename = RuntimePreferences.getPseudoTranslateTMXFile();
+                PSEUDO_TRANSLATE_TYPE pseudoTranslateType = RuntimePreferences.getPseudoTranslateType();
+
+                String fname;
+                if (pseudoTranslateTMXFilename != null && pseudoTranslateTMXFilename.length()>0) {
+                    if (!pseudoTranslateTMXFilename.endsWith(OConsts.TMX_EXTENSION)) {
+                        fname = pseudoTranslateTMXFilename+"."+OConsts.TMX_EXTENSION;
+                    } else {
+                        fname = pseudoTranslateTMXFilename;
+                    }
+                    
+                } else {
+                    fname="";
+                }
+                try {
+                    TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList, true, pseudoTranslateType);
+                } catch (IOException e) {
+                    Log.logErrorRB("CT_ERROR_CREATING_TMX");
+                    Log.log(e);
+                    throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
+                            "\n" +                                                      // NOI18N
+                            e.getMessage());
+                }
+                break;
+            }
 
             System.out.println("Finished");
         } catch (Exception e) {

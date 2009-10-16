@@ -258,7 +258,6 @@ public class RealProject implements IProject
         // - OmegaT-specific, with inline OmegaT formatting tags
         // - TMX Level 1, without formatting tags
         // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
-        // Optionally: build a TMX with all segments that are used in the project.
         try
         {
             // build TMX with OmegaT tags

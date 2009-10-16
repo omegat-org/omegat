@@ -119,7 +119,16 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         String charWithoutTags;
 
-        total.segments = m_srcTextEntryArray.size();
+        for (SourceTextEntry ste : m_srcTextEntryArray) {
+            total.segments++;
+            String src = ste.getStrEntry().getSrcText();
+            total.words += Statistics.numberOfWords(src);
+            String noTags = StaticUtils.stripTags(src);
+            total.charsWithoutSpaces += Statistics
+                    .numberOfCharactersWithoutSpaces(noTags);
+            total.charsWithSpaces += noTags.length();
+        }
+        
         unique.segments = m_strEntryList.size();
         for (StringEntry se : m_strEntryList) {
             String src = se.getSrcText();
@@ -127,17 +136,14 @@ public class CalcStandardStatistics extends LongProcessThread {
 
             int words = Statistics.numberOfWords(src);
             unique.words += words;
-            total.words += words * dups;
 
             charWithoutTags = StaticUtils.stripTags(src);
             int charsNoSpaces = Statistics
                     .numberOfCharactersWithoutSpaces(charWithoutTags);
             unique.charsWithoutSpaces += charsNoSpaces;
-            total.charsWithoutSpaces += charsNoSpaces * dups;
 
             int chars = charWithoutTags.length();
             unique.charsWithSpaces += chars;
-            total.charsWithSpaces += chars * dups;
 
             if (!se.isTranslated()) {
                 remainingUnique.words += words;

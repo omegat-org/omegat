@@ -130,7 +130,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             total.segments++;
             total.words += words;
             total.charsWithoutSpaces += charsNoSpaces;
-            total.charsWithSpaces += noTags.length();
+            total.charsWithSpaces += chars;
             
             // add to remaining
             if (!ste.isTranslated()) {

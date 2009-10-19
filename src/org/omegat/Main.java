@@ -27,8 +27,8 @@ package org.omegat;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -45,15 +45,13 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
-import org.omegat.core.data.StringEntry;
-import org.omegat.core.data.TransMemory;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.TMXWriter;
-import org.omegat.util.RuntimePreferences.PSEUDO_TRANSLATE_TYPE;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
 
@@ -77,6 +75,23 @@ public class Main {
             }
         }
     };
+    
+    /**
+     * Choice of types of translation for all segments in the optional, special 
+     * TMX file that contains all segments of the project.
+     */
+    enum PSEUDO_TRANSLATE_TYPE {
+        EQUAL, EMPTY;
+        public static PSEUDO_TRANSLATE_TYPE parse(String s) {
+            try {
+                return valueOf(s.toUpperCase().replace('-', '_'));
+            } catch (Exception ex) {
+                // default mode
+                return EQUAL;
+            }
+        }
+    };
+
 
     /** Regexp for parse parameters. */
     protected static final Pattern PARAM = Pattern
@@ -129,11 +144,6 @@ public class Main {
             RuntimePreferences.setQuietMode(true);
         }
 
-        if (params.containsKey("pseudotranslatetmx")) {
-            RuntimePreferences.setPseudoTranslateTMXFile(params.get("pseudotranslatetmx"));
-            RuntimePreferences.setPseudoTranslateType(params.get("pseudotranslatetype"));
-        }
-
         Log.log("\n"
                 + // NOI18N
                 "==================================================================="
@@ -151,8 +161,10 @@ public class Main {
             runGUI();
             break;
         case CONSOLE_TRANSLATE:
+            runConsoleTranslate();
+            break;
         case CONSOLE_CREATEPSEUDOTRANSLATETMX:
-            runConsoleTranslate(runMode);
+            runCreatePseudoTranslateTMX();
             break;
         }
     }
@@ -213,7 +225,7 @@ public class Main {
     /**
      * Execute in console mode for translate.
      */
-    protected static void runConsoleTranslate(RUN_MODE runMode) {
+    protected static void runConsoleTranslate() {
         Log.log("Console mode");
         Log.log("");
 
@@ -245,43 +257,91 @@ public class Main {
             RealProject p = new RealProject(projectProperties, false);
             Core.setProject(p);
 
-            switch (runMode) {
-            case CONSOLE_TRANSLATE:
-                System.out.println("Translating Project");
-                p.compileProject();
-                break;
-            case CONSOLE_CREATEPSEUDOTRANSLATETMX:
-                System.out.println("Translating Project");
+            System.out.println("Translating Project");
+            p.compileProject();
 
-                ProjectProperties m_config = p.getProjectProperties();
-                List<StringEntry> m_strEntryList = p.getUniqueEntries();
-                String pseudoTranslateTMXFilename = RuntimePreferences.getPseudoTranslateTMXFile();
-                PSEUDO_TRANSLATE_TYPE pseudoTranslateType = RuntimePreferences.getPseudoTranslateType();
+            System.out.println("Finished");
+        } catch (Exception e) {
+            System.err.println("An error has occured: " + e.toString());
+            System.exit(1);
+        }
+    }
 
-                String fname;
-                if (pseudoTranslateTMXFilename != null && pseudoTranslateTMXFilename.length()>0) {
-                    if (!pseudoTranslateTMXFilename.endsWith(OConsts.TMX_EXTENSION)) {
-                        fname = pseudoTranslateTMXFilename+"."+OConsts.TMX_EXTENSION;
-                    } else {
-                        fname = pseudoTranslateTMXFilename;
-                    }
-                    
+    /**
+     * Execute in console mode for translate.
+     */
+    protected static void runCreatePseudoTranslateTMX() {
+        Log.log("Console mode");
+        Log.log("");
+
+        System.out.println("Initializing");
+        try {
+            Core.initializeConsole(params);
+        } catch (Throwable ex) {
+            showError(ex);
+        }
+        try {
+            System.out.println("Loading Project");
+
+            // check if project okay
+            ProjectProperties projectProperties = null;
+            try {
+                projectProperties = ProjectFileStorage
+                        .loadProjectProperties(projectLocation);
+                if (!projectProperties.verifyProject()) {
+                    System.out.println("The project cannot be verified");
+                    System.exit(1);
+                }
+            } catch (Exception ex) {
+                Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                System.out.println(OStrings.getString
+                        ("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
+                System.exit(1);
+            }
+
+            RealProject p = new RealProject(projectProperties, false);
+            Core.setProject(p);
+
+            System.out.println("Create pseudo-translate TMX");
+
+            ProjectProperties m_config = p.getProjectProperties();
+            List<SourceTextEntry> entries = p.getAllEntries();
+            String pseudoTranslateTMXFilename = params.get("pseudotranslatetmx");
+            PSEUDO_TRANSLATE_TYPE pseudoTranslateType = PSEUDO_TRANSLATE_TYPE.parse(params.get("pseudotranslatetype"));
+
+            String fname;
+            if (pseudoTranslateTMXFilename != null && pseudoTranslateTMXFilename.length()>0) {
+                if (!pseudoTranslateTMXFilename.endsWith(OConsts.TMX_EXTENSION)) {
+                    fname = pseudoTranslateTMXFilename+"."+OConsts.TMX_EXTENSION;
                 } else {
-                    fname="";
+                    fname = pseudoTranslateTMXFilename;
                 }
-                try {
-                    Map<String, String> tmx = TMXWriter.prepareTMXData(
-                            m_strEntryList, null, true,
-                            pseudoTranslateType);
-                    TMXWriter.buildTMXFile(fname, false, true, m_config, tmx);
-                } catch (IOException e) {
-                    Log.logErrorRB("CT_ERROR_CREATING_TMX");
-                    Log.log(e);
-                    throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
-                            "\n" +                                                      // NOI18N
-                            e.getMessage());
+                
+            } else {
+                fname="";
+            }
+            
+            // prepare tmx
+            Map<String, String> tmx = new HashMap<String, String>();
+            for(SourceTextEntry ste: entries) {
+                switch (pseudoTranslateType) {
+                case EQUAL:
+                    tmx.put(ste.getSrcText(), ste.getSrcText());
+                    break;
+                case EMPTY:
+                    tmx.put(ste.getSrcText(), "");
+                    break;
                 }
-                break;
+            }
+            
+            try {
+                TMXWriter.buildTMXFile(fname, false, true, m_config, tmx);
+            } catch (IOException e) {
+                Log.logErrorRB("CT_ERROR_CREATING_TMX");
+                Log.log(e);
+                throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
+                        "\n" +                                                      // NOI18N
+                        e.getMessage());
             }
 
             System.out.println("Finished");

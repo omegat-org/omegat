@@ -39,7 +39,6 @@ import java.util.regex.Pattern;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.data.TransMemory;
-import org.omegat.util.RuntimePreferences.PSEUDO_TRANSLATE_TYPE;
 
 /**
  * Class that store TMX (Translation Memory Exchange) files.
@@ -56,40 +55,18 @@ public class TMXWriter {
      * @param m_orphanedList
      *            List of translated segments that have no match in the current
      *            sources
-     * @param pseudoTranslate
-     *            When true, a tu-section is created for every segment in the
-     *            sources, even when there is no translation available.
-     * @param pseudo_translate_type
-     *            When pseudo-translate is true:<br>
-     *            If 'equal' then the translation that is written is equal to
-     *            the source.<br>
-     *            If 'empty', the translation is an empty string.<br>
-     *            When pseudoTranslate is false, this parameter is ignored.
      * @return map of strings for TMX
      */
     public static Map<String, String> prepareTMXData(
             final List<StringEntry> m_strEntryList,
-            final List<TransMemory> m_orphanedList,
-            final boolean pseudoTranslate,
-            PSEUDO_TRANSLATE_TYPE pseudo_translate_type) {
+            final List<TransMemory> m_orphanedList) {
         Map<String, String> result = new HashMap<String, String>();
         String source = null;
         String target = null;
         for (StringEntry se : m_strEntryList) {
-            source = se.getSrcText();
-            if (!pseudoTranslate) {
-                target = se.getTranslation();
-                if (target.length() == 0)
-                    continue;
-            } else {
-                if (pseudo_translate_type.equals(PSEUDO_TRANSLATE_TYPE.EQUAL)) {
-                    target = source;
-                } else {
-                    // must be PSEUDO_TRANSLATE_TYPE.EMPTY
-                    target = "";
-                }
+            if (se.isTranslated()) {
+                result.put(se.getSrcText(), se.getTranslation());
             }
-            result.put(source, target);
         }
 
         // Write orphan strings. Assume N/A when pseudo-translate.

@@ -688,6 +688,8 @@ public class RealProject implements IProject
                     se = new StringEntry(src);
                     se.setTranslation(trans); // orphane translation don't count
                     strOrphaneList.add(se);
+                } else {
+                    se.setTranslation(trans);
                 }
             }
             else

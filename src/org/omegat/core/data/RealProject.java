@@ -38,6 +38,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
@@ -87,14 +88,30 @@ public class RealProject implements IProject
     private List<SourceTextEntry> m_srcTextEntryArray;
     
     private final StatisticsInfo hotStat = new StatisticsInfo();
+    
+    /**
+     * Storage for all translation memories, which shouldn't be changed and
+     * saved, i.e. for /tm/*.tmx files, aligned data from source files.
+     */
+    private final Map<String, Map<String, String>> transMemories;
 
-    /** the list of legacy TMX files, each object is the list of string entries */
+    /**
+     * Storage for orphaned segments.
+     */
+    private Map<String, String> orphanedMemory;
+
+    /**
+     * Storage for translation for current project.
+     */
+    private Map<String, String> translations;
+
+    /** the list of legacy TMX files, each object is the list of string entries. TODO: move to transMemories and orphanedMemory */
     private List<LegacyTM> m_legacyTMs;
 
-    /** Entries from all /tm/*.tmx files and orphaned from project_save.tmx. TODO: remove*/
+    /** Entries from all /tm/*.tmx files and orphaned from project_save.tmx. TODO: move to transMemories */
     private List<TransMemory> m_tmList;
     
-    /** Orphaned entries from project_save.tmx. TODO: remove*/
+    /** Orphaned entries from project_save.tmx. TODO: move to orphanedMemory */
     private List<TransMemory> m_orphanedList;
 
     /** Segments count in project files. */
@@ -113,6 +130,7 @@ public class RealProject implements IProject
         m_tmList = new ArrayList<TransMemory>();
         m_legacyTMs = new ArrayList<LegacyTM>();
         m_orphanedList = new ArrayList<TransMemory>();
+        transMemories = new TreeMap<String, Map<String,String>>();
         
         if (isNewProject) {
             createProject(props);

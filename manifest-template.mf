@@ -4,3 +4,52 @@ License: GNU Public License version 2
 Specification-Version: 1
 Implementation-Version: @version@
 Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar lib/vldocking_2.1.4.jar lib/jna.jar lib/swing-layout-1.0.jar lib/jmyspell-core-1.0.0-beta-2.jar lib/activation.jar lib/jaxb-api.jar lib/jaxb-impl.jar lib/jsr173_1.0_api.jar
+OmegaT-Plugin: true
+
+Name: org.omegat.filters3.xml.android.AndroidFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.text.TextFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.latex.LatexFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.po.PoFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.text.bundles.ResourceBundleFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters3.xml.xhtml.XHTMLFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.html2.HTMLFilter2
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.hhc.HHCFilter2
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.text.ini.INIFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters3.xml.docbook.DocBookFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters3.xml.opendoc.OpenDocFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters3.xml.openxml.OpenXMLFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters3.xml.xliff.XLIFFFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.subtitles.SrtFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters2.xtagqxp.XtagFilter
+OmegaT-Filter: true
+
+Name: org.omegat.filters3.xml.resx.ResXFilter
+OmegaT-Filter: true

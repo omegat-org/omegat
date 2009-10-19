@@ -259,20 +259,22 @@ public class RealProject implements IProject
         // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
         try
         {
+            Map<String,String> tmx = TMXWriter.prepareTMXData(false, m_strEntryList, m_orphanedList, false, null);
+            
             // build TMX with OmegaT tags
             String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
                         + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, false, false, false, m_config, m_strEntryList, m_orphanedList, false, null);
+            TMXWriter.buildTMXFile(fname, false, false, m_config, tmx);
 
             // build TMX level 1 compliant file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
                         + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, true, false, false, m_config, m_strEntryList, m_orphanedList, false, null);
+            TMXWriter.buildTMXFile(fname, true, false, m_config, tmx);
 
             // build three-quarter-assed TMX level 2 file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
                     + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList, false, null);
+            TMXWriter.buildTMXFile(fname, false, true, m_config, tmx);
         }
         catch (IOException e)
         {
@@ -384,8 +386,9 @@ public class RealProject implements IProject
         try
         {
             saveProjectProperties();
-
-            TMXWriter.buildTMXFile(s, false, true, false, m_config, m_strEntryList, m_orphanedList, false, null);
+            
+            Map<String,String> tmx = TMXWriter.prepareTMXData(true, m_strEntryList, m_orphanedList, false, null);            
+            TMXWriter.buildTMXFile(s, false, false, m_config, tmx);
             m_modifiedFlag = false;
         }
         catch (IOException e)

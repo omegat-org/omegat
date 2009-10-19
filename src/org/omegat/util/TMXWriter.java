@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
  Portions copyright 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2009 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,7 +30,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -42,30 +45,82 @@ import org.omegat.util.RuntimePreferences.PSEUDO_TRANSLATE_TYPE;
  * Class that store TMX (Translation Memory Exchange) files.
  */
 public class TMXWriter {
-    /*
+    /**
+     * Prepare TMX data for export to file.
+     * 
+     * @param addOrphans
+     *            When true, the segments in the m_orphanedList are added to the
+     *            TMX as well.
+     * @param m_strEntryList
+     *            List of translated segments
+     * @param m_orphanedList
+     *            List of translated segments that have no match in the current
+     *            sources
+     * @param pseudoTranslate
+     *            When true, a tu-section is created for every segment in the
+     *            sources, even when there is no translation available.
+     * @param pseudo_translate_type
+     *            When pseudo-translate is true:<br>
+     *            If 'equal' then the translation that is written is equal to
+     *            the source.<br>
+     *            If 'empty', the translation is an empty string.<br>
+     *            When pseudoTranslate is false, this parameter is ignored.
+     * @return map of strings for TMX
+     */
+    public static Map<String, String> prepareTMXData(final boolean addOrphans,
+            final List<StringEntry> m_strEntryList,
+            final List<TransMemory> m_orphanedList,
+            final boolean pseudoTranslate,
+            PSEUDO_TRANSLATE_TYPE pseudo_translate_type) {
+        Map<String, String> result = new HashMap<String, String>();
+        String source = null;
+        String target = null;
+        for (StringEntry se : m_strEntryList) {
+            source = se.getSrcText();
+            if (!pseudoTranslate) {
+                target = se.getTranslation();
+                if (target.length() == 0)
+                    continue;
+            } else {
+                if (pseudo_translate_type.equals(PSEUDO_TRANSLATE_TYPE.EQUAL)) {
+                    target = source;
+                } else {
+                    // must be PSEUDO_TRANSLATE_TYPE.EMPTY
+                    target = "";
+                }
+            }
+            result.put(source, target);
+        }
+
+        // Write orphan strings. Assume N/A when pseudo-translate.
+        if (addOrphans) {
+            for (TransMemory transMem : m_orphanedList) {
+                if (transMem.target.length() == 0)
+                    continue;
+                source = transMem.source;
+                target = transMem.target;
+                if (target.length() == 0)
+                    continue;
+                result.put(source, target);
+            }
+        }
+        return result;
+    }
+
+    /**
      * Saves a TMX file to disk
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      * @author Maxym Mykhalchuk
      * @param filename       The name of the file to create
      * @param forceValidTMX  When true, OmegaT-tags are stripped from the segments.
-     * @param addOrphans  When true, the segments in the m_orphanedList are added
-     *                    to the TMX as well.
      * @param levelTwo    When true, the tmx is made compatible with level 2 (TMX version 1.4)
      * @param m_config    Project configuration, to get the languages
-     * @param m_strEntryList  List of translated segments
-     * @param m_orphanedList  List of translated segments that have no match in the current sources
-     * @param pseudoTranslate  When true, a tu-section is created for every segment in the sources, even when there is no translation available.
-     * @param pseudo_translate_type  When pseudo-translate is true:<br>
-     *      If 'equal' then the translation that is written is equal to the source.<br>
-     *      If 'empty', the translation is an empty string.<br>
-     *      When pseudoTranslate is false, this parameter is ignored.
+     * @param data        Data for save to TMX
      * @throws IOException
      */
-    public static void buildTMXFile(final String filename, final boolean forceValidTMX, final boolean addOrphans,
-            final boolean levelTwo, final ProjectProperties m_config, final List<StringEntry> m_strEntryList,
-            final List<TransMemory> m_orphanedList, 
-            final boolean pseudoTranslate, PSEUDO_TRANSLATE_TYPE pseudo_translate_type) throws IOException {
+    public static void buildTMXFile(final String filename, final boolean forceValidTMX, 
+            final boolean levelTwo, final ProjectProperties m_config, final Map<String,String> data) throws IOException {
         // we got this far, so assume lang codes are proper
         String sourceLocale = m_config.getSourceLanguage().toString();
         String targetLocale = m_config.getTargetLanguage().toString();
@@ -110,63 +165,25 @@ public class TMXWriter {
         // Write TUs
         String source = null;
         String target = null;
-        for (StringEntry se : m_strEntryList) {
-            source = forceValidTMX ? StaticUtils.stripTags(se.getSrcText()) : se.getSrcText();
-            if (!pseudoTranslate) {
-                target = forceValidTMX ? StaticUtils.stripTags(se.getTranslation()) : se.getTranslation();
-                if (target.length() == 0)
-                    continue;
-            } else {
-                if (pseudo_translate_type.equals(PSEUDO_TRANSLATE_TYPE.EQUAL)) {
-                    target = source;
-                } else {
-                    //must be PSEUDO_TRANSLATE_TYPE.EMPTY
-                    target = "";
-                }
-            }
-            source = StaticUtils.makeValidXML(source);
-            target = StaticUtils.makeValidXML(target);
-
-            // TO DO: This *possibly* converts occurrences in the actual text of &lt;fX&gt;
-            //        which it should not.
+        for(Map.Entry<String, String> en:data.entrySet()) {
+            source = forceValidTMX ? StaticUtils.stripTags(en.getKey()) : en
+                    .getKey();
+            target = forceValidTMX ? StaticUtils.stripTags(en.getValue()) : en
+                    .getValue();
             if (levelTwo) {
                 source = makeLevelTwo(source);
                 target = makeLevelTwo(target);
             }
-            out.println("    <tu>"); // NOI18N
-            out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">"); // NOI18N
-            out.println("        <seg>" + source + "</seg>"); // NOI18N
-            out.println("      </tuv>"); // NOI18N
-            out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\">"); // NOI18N
-            out.println("        <seg>" + target + "</seg>"); // NOI18N
-            out.println("      </tuv>"); // NOI18N
-            out.println("    </tu>"); // NOI18N
-        }
-
-        // Write orphan strings. Assume N/A when pseudo-translate.
-        if (addOrphans) {
-            for (TransMemory transMem : m_orphanedList) {
-                if (transMem.target.length() == 0)
-                    continue;
-                source = forceValidTMX ? StaticUtils.stripTags(transMem.source) : transMem.source;
-                target = forceValidTMX ? StaticUtils.stripTags(transMem.target) : transMem.target;
-                if (levelTwo) {
-                    source = makeLevelTwo(source);
-                    target = makeLevelTwo(target);
-                }
-                if (target.length() == 0)
-                    continue;
-                source = StaticUtils.makeValidXML(source);
-                target = StaticUtils.makeValidXML(target);
-                out.println("    <tu>"); // NOI18N
-                out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">"); // NOI18N
-                out.println("        <seg>" + source + "</seg>"); // NOI18N
-                out.println("      </tuv>"); // NOI18N
-                out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\">"); // NOI18N
-                out.println("        <seg>" + target + "</seg>"); // NOI18N
-                out.println("      </tuv>"); // NOI18N
-                out.println("    </tu>"); // NOI18N
-            }
+            source = StaticUtils.makeValidXML(source);
+            target = StaticUtils.makeValidXML(target);
+            out.println("    <tu>");
+            out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">");
+            out.println("        <seg>" + source + "</seg>");
+            out.println("      </tuv>");
+            out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\">");
+            out.println("        <seg>" + target + "</seg>");
+            out.println("      </tuv>");
+            out.println("    </tu>");
         }
 
         // Write TMX footer

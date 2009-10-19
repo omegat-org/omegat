@@ -271,7 +271,10 @@ public class Main {
                     fname="";
                 }
                 try {
-                    TMXWriter.buildTMXFile(fname, false, false, true, m_config, m_strEntryList, m_orphanedList, true, pseudoTranslateType);
+                    Map<String, String> tmx = TMXWriter.prepareTMXData(false,
+                            m_strEntryList, m_orphanedList, true,
+                            pseudoTranslateType);
+                    TMXWriter.buildTMXFile(fname, false, true, m_config, tmx);
                 } catch (IOException e) {
                     Log.logErrorRB("CT_ERROR_CREATING_TMX");
                     Log.log(e);

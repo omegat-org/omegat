@@ -25,15 +25,17 @@
 package org.omegat.core.statistics;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.StringEntry;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.OConsts;
@@ -82,9 +84,8 @@ public class CalcStandardStatistics extends LongProcessThread {
 
     public void run() {
         IProject p = Core.getProject();
-        String result = buildProjectStats(p.getUniqueEntries(), p
-                .getAllEntries(), p.getProjectProperties(),
-                p.getStatistics().numberofTranslatedSegments);
+        String result = buildProjectStats(p.getAllEntries(), p
+                .getProjectProperties());
         callback.displayData(result);
 
         String internalDir = p.getProjectProperties().getProjectInternal();
@@ -107,10 +108,8 @@ public class CalcStandardStatistics extends LongProcessThread {
      * the details for each file.
      */
     public static String buildProjectStats(
-            final List<StringEntry> m_strEntryList,
             final List<SourceTextEntry> m_srcTextEntryArray,
-            final ProjectProperties m_config,
-            final int numberofTranslatedSegments) {
+            final ProjectProperties m_config) {
 
         StatCount total = new StatCount();
         StatCount remaining = new StatCount();
@@ -127,34 +126,45 @@ public class CalcStandardStatistics extends LongProcessThread {
             total.charsWithoutSpaces += Statistics
                     .numberOfCharactersWithoutSpaces(noTags);
             total.charsWithSpaces += noTags.length();
-        }
+            
+            if (!ste.isTranslated()) {
+                remaining.segments++;
+            }
+        }        
         
-        unique.segments = m_strEntryList.size();
-        for (StringEntry se : m_strEntryList) {
-            String src = se.getSrcText();
-            int dups = se.getParentList().size();
-
-            int words = Statistics.numberOfWords(src);
-            unique.words += words;
-
-            charWithoutTags = StaticUtils.stripTags(src);
-            int charsNoSpaces = Statistics
-                    .numberOfCharactersWithoutSpaces(charWithoutTags);
-            unique.charsWithoutSpaces += charsNoSpaces;
-
-            int chars = charWithoutTags.length();
-            unique.charsWithSpaces += chars;
-
-            if (!se.isTranslated()) {
-                remainingUnique.words += words;
-                remainingUnique.charsWithoutSpaces += charsNoSpaces;
-                remainingUnique.charsWithSpaces += chars;
-                remaining.segments += dups;
+        Map<String, Integer> uniqueSegment = new HashMap<String, Integer>(
+                m_srcTextEntryArray.size() / 2);
+        Set<String> translated = new HashSet<String>(
+                m_srcTextEntryArray.size() / 2);
+        for (SourceTextEntry ste : m_srcTextEntryArray) {
+            String src = ste.getStrEntry().getSrcText();
+            Integer count = uniqueSegment.get(src);
+            if (count == null) {
+                uniqueSegment.put(src, 1);
+            } else {
+                uniqueSegment.put(src, count + 1);
+            }
+            if (ste.isTranslated()) {
+                translated.add(src);
             }
         }
+        unique.segments = uniqueSegment.size();
+        remainingUnique.segments = uniqueSegment.size() - translated.size();
+        for (String src : uniqueSegment.keySet()) {
+            int words = Statistics.numberOfWords(src);
+            unique.words += words;
+            String noTags = StaticUtils.stripTags(src);
+            int charsNoSpaces = Statistics
+                    .numberOfCharactersWithoutSpaces(noTags);
+            unique.charsWithoutSpaces += charsNoSpaces;
+            unique.charsWithSpaces += noTags.length();
 
-        remainingUnique.segments = m_strEntryList.size()
-                - numberofTranslatedSegments;
+            if (!translated.contains(src)) {
+                remainingUnique.words += words;
+                remainingUnique.charsWithoutSpaces += charsNoSpaces;
+                remainingUnique.charsWithSpaces += noTags.length();
+            }
+        }
 
         Map<String, FileData> counts = new TreeMap<String, FileData>();
         for (SourceTextEntry ste : m_srcTextEntryArray) {

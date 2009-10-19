@@ -175,8 +175,7 @@ public class RealProject implements IProject
 
             // build word count
             String stat = CalcStandardStatistics.buildProjectStats(
-                    m_strEntryList, m_srcTextEntryArray, m_config,
-                    numberofTranslatedSegments);
+                    m_srcTextEntryArray, m_config);
             String fn = getProjectProperties().getProjectInternal()
                     + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat);
@@ -416,8 +415,7 @@ public class RealProject implements IProject
 
         // update statistics
         String stat = CalcStandardStatistics.buildProjectStats(
-                m_strEntryList, m_srcTextEntryArray, m_config,
-                numberofTranslatedSegments);
+                m_srcTextEntryArray, m_config);
         String fn = getProjectProperties().getProjectInternal()
                 + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, stat);

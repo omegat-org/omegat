@@ -99,13 +99,6 @@ public interface IProject {
     StatisticsInfo getStatistics();
 
     /**
-     * Get all unique segments.
-     * 
-     * @return read-only list of project entries, or null if project not loaded
-     */
-    List<StringEntry> getUniqueEntries();
-
-    /**
      * Get TM files from /tm/*.tmx dir.
      * 
      * @return read-only list of translation memories, or null if project not

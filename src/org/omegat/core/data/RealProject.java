@@ -738,13 +738,6 @@ public class RealProject implements IProject
 
     /** The number of unique translated segments. */
     private int numberofTranslatedSegments;
-
-    /**
-     * {@inheritDoc}
-     */
-    public List<StringEntry> getUniqueEntries() {
-        return Collections.unmodifiableList(new ArrayList<StringEntry>(m_strEntryList));
-    }
     
     /**
      * {@inheritDoc}

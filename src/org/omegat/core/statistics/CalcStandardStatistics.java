@@ -85,7 +85,7 @@ public class CalcStandardStatistics extends LongProcessThread {
     public void run() {
         IProject p = Core.getProject();
         String result = buildProjectStats(p.getAllEntries(), p
-                .getProjectProperties());
+                .getProjectProperties(), null);
         callback.displayData(result);
 
         String internalDir = p.getProjectProperties().getProjectInternal();
@@ -109,7 +109,7 @@ public class CalcStandardStatistics extends LongProcessThread {
      */
     public static String buildProjectStats(
             final List<SourceTextEntry> m_srcTextEntryArray,
-            final ProjectProperties m_config) {
+            final ProjectProperties m_config, final StatisticsInfo hotStat) {
 
         StatCount total = new StatCount();
         StatCount remaining = new StatCount();
@@ -214,6 +214,12 @@ public class CalcStandardStatistics extends LongProcessThread {
         String[][] filesTable = calcFilesTable(counts);
         result.append(TextUtil.showTextTable(ftHeaders, filesTable, ftAlign));
 
+        if (hotStat != null) {
+            hotStat.numberOfSegmentsTotal = total.segments;
+            hotStat.numberofTranslatedSegments = translated.size();
+            hotStat.numberOfUniqueSegments = unique.segments;
+        }
+        
         return result.toString();
     }
 

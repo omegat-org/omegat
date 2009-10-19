@@ -83,11 +83,10 @@ public class RealProject implements IProject
 
     private boolean m_modifiedFlag;
 
-    /** Unique segments list. Used for save TMX. TODO: remove */
-    private List<StringEntry> m_strEntryList;
-
     /** List of all segments in project. */
     private List<SourceTextEntry> m_srcTextEntryArray;
+    
+    private final StatisticsInfo hotStat = new StatisticsInfo();
 
     /** the list of legacy TMX files, each object is the list of string entries */
     private List<LegacyTM> m_legacyTMs;
@@ -110,7 +109,6 @@ public class RealProject implements IProject
      *                true if project need to be created
      */
     public RealProject(final ProjectProperties props, final boolean isNewProject) {
-        m_strEntryList = new ArrayList<StringEntry>();
         m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
         m_tmList = new ArrayList<TransMemory>();
         m_legacyTMs = new ArrayList<LegacyTM>();
@@ -126,7 +124,6 @@ public class RealProject implements IProject
         m_legacyTMs = Collections.unmodifiableList(m_legacyTMs);
         m_tmList = Collections.unmodifiableList(m_tmList);
         m_orphanedList = Collections.unmodifiableList(m_orphanedList);
-        m_strEntryList = Collections.unmodifiableList(m_strEntryList);
     }
     
     public void saveProjectProperties() throws IOException {
@@ -175,7 +172,7 @@ public class RealProject implements IProject
 
             // build word count
             String stat = CalcStandardStatistics.buildProjectStats(
-                    m_srcTextEntryArray, m_config);
+                    m_srcTextEntryArray, m_config, hotStat);
             String fn = getProjectProperties().getProjectInternal()
                     + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat);
@@ -197,7 +194,6 @@ public class RealProject implements IProject
             // but since we didn't, do a bit of cleaning up now, otherwise
             // we can't even inform the user about our slacking off.
             context = null;
-            m_strEntryList.clear();
             m_srcTextEntryArray.clear();
             m_legacyTMs.clear();
             m_tmList.clear();
@@ -230,11 +226,7 @@ public class RealProject implements IProject
      * {@inheritDoc}
      */
     public StatisticsInfo getStatistics() {
-        StatisticsInfo info = new StatisticsInfo();
-        info.numberOfUniqueSegments = m_strEntryList.size();
-        info.numberofTranslatedSegments = numberofTranslatedSegments;
-        info.numberOfSegmentsTotal = m_srcTextEntryArray.size();
-        return info;
+        return hotStat;
     }
     
     /**
@@ -418,7 +410,7 @@ public class RealProject implements IProject
 
         // update statistics
         String stat = CalcStandardStatistics.buildProjectStats(
-                m_srcTextEntryArray, m_config);
+                m_srcTextEntryArray, m_config, hotStat);
         String fn = getProjectProperties().getProjectInternal()
                 + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, stat);
@@ -679,10 +671,6 @@ public class RealProject implements IProject
                     se.setTranslation(trans); // orphane translation don't count
                     strOrphaneList.add(se);
                 }
-                else
-                {
-                    numberofTranslatedSegments += se.setTranslation(trans);
-                }
             }
             else
             {
@@ -735,15 +723,11 @@ public class RealProject implements IProject
         return m_modifiedFlag;
     }
     
-
-    /** The number of unique translated segments. */
-    private int numberofTranslatedSegments;
-    
     /**
      * {@inheritDoc}
      */
     public void setTranslation(final SourceTextEntry entry, final String trans) {
-        numberofTranslatedSegments += entry.setTranslation(trans);
+        hotStat.numberofTranslatedSegments += entry.setTranslation(trans);
         m_modifiedFlag = true;
     }
     
@@ -818,7 +802,6 @@ public class RealProject implements IProject
             {
                 // entry doesn't exist yet - create and store it
                 strEntry = new StringEntry(srcText);
-                m_strEntryList.add(strEntry);
                 context.m_strEntryHash.put(srcText, strEntry);
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
@@ -836,7 +819,6 @@ public class RealProject implements IProject
                 // entry doesn't exist yet - create and store it
                 strEntry = new StringEntry(segmentSource);
                 strEntry.setTranslation(segmentTranslation);
-                m_strEntryList.add(strEntry);
                 context.m_strEntryHash.put(segmentSource, strEntry);
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());

@@ -37,7 +37,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransMemory;
 
 /**
@@ -58,14 +58,14 @@ public class TMXWriter {
      * @return map of strings for TMX
      */
     public static Map<String, String> prepareTMXData(
-            final List<StringEntry> m_strEntryList,
+            final List<SourceTextEntry> m_srcTextEntryArray,
             final List<TransMemory> m_orphanedList) {
         Map<String, String> result = new HashMap<String, String>();
         String source = null;
         String target = null;
-        for (StringEntry se : m_strEntryList) {
-            if (se.isTranslated()) {
-                result.put(se.getSrcText(), se.getTranslation());
+        for (SourceTextEntry ste : m_srcTextEntryArray) {
+            if (ste.isTranslated()) {
+                result.put(ste.getSrcText(), ste.getTranslation());
             }
         }
 

@@ -259,7 +259,7 @@ public class RealProject implements IProject
         // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
         try
         {
-            Map<String,String> tmx = TMXWriter.prepareTMXData(m_strEntryList, null);
+            Map<String,String> tmx = TMXWriter.prepareTMXData(m_srcTextEntryArray, null);
             
             // build TMX with OmegaT tags
             String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
@@ -387,7 +387,7 @@ public class RealProject implements IProject
         {
             saveProjectProperties();
             
-            Map<String,String> tmx = TMXWriter.prepareTMXData(m_strEntryList, m_orphanedList);            
+            Map<String,String> tmx = TMXWriter.prepareTMXData(m_srcTextEntryArray, m_orphanedList);            
             TMXWriter.buildTMXFile(s, false, false, m_config, tmx);
             m_modifiedFlag = false;
         }

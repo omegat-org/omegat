@@ -30,14 +30,17 @@
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.0.5 update 1 vs. 2.0.5
 
   Other enhancements:
   - Turkish localisation updated to 2.0.5 (UI, Readme, Instant Start)
+  
   - Change pseudo-translated TMX parameter and documentation
+
+  - Hunspell for Linux 64-bit updated to 1.2.8
 
   Bug Fixes:
 

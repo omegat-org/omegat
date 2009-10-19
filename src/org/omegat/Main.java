@@ -255,7 +255,6 @@ public class Main {
 
                 ProjectProperties m_config = p.getProjectProperties();
                 List<StringEntry> m_strEntryList = p.getUniqueEntries();
-                ArrayList<TransMemory> m_orphanedList = new ArrayList<TransMemory>();
                 String pseudoTranslateTMXFilename = RuntimePreferences.getPseudoTranslateTMXFile();
                 PSEUDO_TRANSLATE_TYPE pseudoTranslateType = RuntimePreferences.getPseudoTranslateType();
 
@@ -271,8 +270,8 @@ public class Main {
                     fname="";
                 }
                 try {
-                    Map<String, String> tmx = TMXWriter.prepareTMXData(false,
-                            m_strEntryList, m_orphanedList, true,
+                    Map<String, String> tmx = TMXWriter.prepareTMXData(
+                            m_strEntryList, null, true,
                             pseudoTranslateType);
                     TMXWriter.buildTMXFile(fname, false, true, m_config, tmx);
                 } catch (IOException e) {

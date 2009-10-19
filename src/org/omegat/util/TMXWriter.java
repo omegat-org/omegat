@@ -67,7 +67,7 @@ public class TMXWriter {
      *            When pseudoTranslate is false, this parameter is ignored.
      * @return map of strings for TMX
      */
-    public static Map<String, String> prepareTMXData(final boolean addOrphans,
+    public static Map<String, String> prepareTMXData(
             final List<StringEntry> m_strEntryList,
             final List<TransMemory> m_orphanedList,
             final boolean pseudoTranslate,
@@ -93,7 +93,7 @@ public class TMXWriter {
         }
 
         // Write orphan strings. Assume N/A when pseudo-translate.
-        if (addOrphans) {
+        if (m_orphanedList != null) {
             for (TransMemory transMem : m_orphanedList) {
                 if (transMem.target.length() == 0)
                     continue;

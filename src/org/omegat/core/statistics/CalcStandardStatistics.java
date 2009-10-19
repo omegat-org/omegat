@@ -116,22 +116,49 @@ public class CalcStandardStatistics extends LongProcessThread {
         StatCount unique = new StatCount();
         StatCount remainingUnique = new StatCount();
 
-        String charWithoutTags;
-
+        Map<String, FileData> counts = new TreeMap<String, FileData>();        
         for (SourceTextEntry ste : m_srcTextEntryArray) {
-            total.segments++;
             String src = ste.getStrEntry().getSrcText();
-            total.words += Statistics.numberOfWords(src);
+            
+            int words = Statistics.numberOfWords(src);
             String noTags = StaticUtils.stripTags(src);
-            total.charsWithoutSpaces += Statistics
+            int charsNoSpaces = Statistics
                     .numberOfCharactersWithoutSpaces(noTags);
+            int chars = noTags.length();
+            
+            // add to total
+            total.segments++;
+            total.words += words;
+            total.charsWithoutSpaces += charsNoSpaces;
             total.charsWithSpaces += noTags.length();
             
+            // add to remaining
             if (!ste.isTranslated()) {
                 remaining.segments++;
+                remaining.words += words;
+                remaining.charsWithoutSpaces += charsNoSpaces;
+                remaining.charsWithSpaces += chars;
+            }
+            
+            // add to file's info
+            FileData numbers = counts.get(ste.getSrcFile().name);
+            if (numbers == null) {
+                numbers = new FileData();
+                counts.put(ste.getSrcFile().name, numbers);
+            }            
+            numbers.total.segments++;
+            numbers.total.words += words;
+            numbers.total.charsWithoutSpaces += charsNoSpaces;
+            numbers.total.charsWithSpaces += chars;
+            if (!ste.isTranslated()) {
+                numbers.remaining.segments++;
+                numbers.remaining.words += words;
+                numbers.remaining.charsWithoutSpaces += charsNoSpaces;
+                numbers.remaining.charsWithSpaces += chars;
             }
         }        
         
+        // find unique segments
         Map<String, Integer> uniqueSegment = new HashMap<String, Integer>(
                 m_srcTextEntryArray.size() / 2);
         Set<String> translated = new HashSet<String>(
@@ -148,55 +175,24 @@ public class CalcStandardStatistics extends LongProcessThread {
                 translated.add(src);
             }
         }
-        unique.segments = uniqueSegment.size();
-        remainingUnique.segments = uniqueSegment.size() - translated.size();
         for (String src : uniqueSegment.keySet()) {
             int words = Statistics.numberOfWords(src);
-            unique.words += words;
             String noTags = StaticUtils.stripTags(src);
             int charsNoSpaces = Statistics
                     .numberOfCharactersWithoutSpaces(noTags);
+
+            // add to unique
+            unique.segments++;
+            unique.words += words;
             unique.charsWithoutSpaces += charsNoSpaces;
             unique.charsWithSpaces += noTags.length();
-
+            // add to unique remaining
             if (!translated.contains(src)) {
+                remainingUnique.segments++;
                 remainingUnique.words += words;
                 remainingUnique.charsWithoutSpaces += charsNoSpaces;
                 remainingUnique.charsWithSpaces += noTags.length();
             }
-        }
-
-        Map<String, FileData> counts = new TreeMap<String, FileData>();
-        for (SourceTextEntry ste : m_srcTextEntryArray) {
-            String fileName = ste.getSrcFile().name;
-            fileName = StaticUtils.makeFilenameRelative(fileName, m_config
-                    .getSourceRoot());
-
-            FileData numbers = counts.get(fileName);
-            if (numbers == null) {
-                numbers = new FileData();
-                counts.put(fileName, numbers);
-            }
-
-            String src = ste.getSrcText();
-            charWithoutTags = StaticUtils.stripTags(src);
-            int words = Statistics.numberOfWords(src);
-            numbers.total.words += words;
-            int charsNoSpaces = Statistics
-                    .numberOfCharactersWithoutSpaces(charWithoutTags);
-            numbers.total.charsWithoutSpaces += charsNoSpaces;
-            int chars = charWithoutTags.length();
-            numbers.total.charsWithSpaces += chars;
-
-            if (!ste.isTranslated()) {
-                remaining.words += words;
-                numbers.remaining.words += words;
-                remaining.charsWithoutSpaces += charsNoSpaces;
-                numbers.remaining.charsWithoutSpaces += charsNoSpaces;
-                remaining.charsWithSpaces += chars;
-                numbers.remaining.charsWithSpaces += chars;
-            }
-            counts.put(fileName, numbers);
         }
 
         StringBuilder result = new StringBuilder();
@@ -211,7 +207,7 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         // STATISTICS BY FILE
         result.append(OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n");
-        String[][] filesTable = calcFilesTable(counts);
+        String[][] filesTable = calcFilesTable(m_config, counts);
         result.append(TextUtil.showTextTable(ftHeaders, filesTable, ftAlign));
 
         if (hotStat != null) {
@@ -236,14 +232,15 @@ public class CalcStandardStatistics extends LongProcessThread {
         return table;
     }
 
-    protected static String[][] calcFilesTable(
+    protected static String[][] calcFilesTable(final ProjectProperties m_config,
             final Map<String, FileData> counts) {
         String[][] table = new String[counts.size()][7];
 
         int r = 0;
         for (String filename : counts.keySet()) {
             FileData numbers = counts.get(filename);
-            table[r][0] = filename;
+            table[r][0] = StaticUtils.makeFilenameRelative(filename, m_config
+                    .getSourceRoot());
             table[r][1] = Integer.toString(numbers.total.words);
             table[r][2] = Integer.toString(numbers.remaining.words);
             table[r][3] = Integer.toString(numbers.total.charsWithoutSpaces);

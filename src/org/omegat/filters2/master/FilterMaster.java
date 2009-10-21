@@ -67,6 +67,7 @@ import org.omegat.filters3.xml.docbook.DocBookFilter;
 import org.omegat.filters3.xml.opendoc.OpenDocFilter;
 import org.omegat.filters3.xml.openxml.OpenXMLFilter;
 import org.omegat.filters3.xml.resx.ResXFilter;
+import org.omegat.filters3.xml.typo3.Typo3Filter;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
 import org.omegat.filters3.xml.xliff.XLIFFFilter;
 import org.omegat.util.LFileCopy;
@@ -548,6 +549,7 @@ public class FilterMaster
         res.addFilter(new OneFilter(new SrtFilter(), false));
         res.addFilter(new OneFilter(new XtagFilter(), false));   
         res.addFilter(new OneFilter(new ResXFilter(), false));
+        res.addFilter(new OneFilter(new Typo3Filter(), false));
         return res;
     }
     

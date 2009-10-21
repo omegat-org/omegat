@@ -261,7 +261,7 @@ public class DefaultXMLDialect implements XMLDialect
      * translated, depending on the content of one attribute and the presence
      * or absence of other attributes.
      * For instance, in the ResX filter,
-     * tags should not be translated when then contain the attribute "type", or
+     * tags should not be translated when they contain the attribute "type", or
      * when the attribute "name" starts with "&amp;gt";
      * @param tag The tag that could be translated
      * @param atts The list of the tag attributes
@@ -271,6 +271,24 @@ public class DefaultXMLDialect implements XMLDialect
                                            Attributes atts) {
         return false;
     }
+
+     /**
+     * For a given tag, return wether the content of this tag should be
+     * translated, depending on the content of one attribute and the presence
+     * or absence of other attributes.
+     * For instance, in the Typo3 filter,
+     * tags should be translated when the attribute locazible="1".
+     * Contrary to validateIntactTag, this applies only to the current tag,
+     * and the tags contained in it are not affected.
+     * @param tag The tag that could be translated
+     * @param atts The list of the tag attributes
+     * @return <code>true</code> or <code>false</code>
+     */
+    public Boolean validateTranslatableTag(String tag,
+                                    Attributes atts){
+        return true;
+    }
+
 
     /**
      * For a given tag, return wether the content of this tag is a
@@ -359,4 +377,26 @@ public class DefaultXMLDialect implements XMLDialect
     {
         return shortcuts;
     }
+
+    /**
+     * The parameter setting wether closing tags should be used
+     */
+    private boolean closingTagRequired = false;
+
+    /**
+     * Sets closingTag to <code>true</code> or <code>false</code>
+     * @param onOff The parameter setting wether closing tags should be used
+     * or not for empty tags.
+     */
+    public void setClosingTagRequired(boolean onOff){
+        closingTagRequired = onOff;
+    }
+
+    /**
+     * Gives the value of closingTag
+     */
+    public Boolean getClosingTagRequired(){
+        return closingTagRequired;
+    }
+
 }

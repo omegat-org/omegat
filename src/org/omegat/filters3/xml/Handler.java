@@ -116,6 +116,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     Stack<String> paragraphTagName = new Stack<String>();
     /** Names of possible preformat tags. */
     Stack<String> preformatTagName = new Stack<String>();
+    /** Name of the current variable translatable tag */
+    Stack<String> translatableTagName = new Stack<String>();
 
     /** Now we collect out-of-turn entry. */
     private boolean collectingOutOfTurnText()
@@ -127,6 +129,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     private boolean collectingIntactText()
     {
         return intacttagEntry!=null;
+    }
+
+    private boolean isTranslatableTag(){
+        return !translatableTagName.empty();
     }
 
     /**
@@ -414,6 +420,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         Tag xmltag;
         XMLIntactTag intacttag = null;
+        setTranslatableTag(tag, XMLUtils.convertAttributes(attributes));
         if (!collectingIntactText() &&
                 isIntactTag(tag, XMLUtils.convertAttributes(attributes)))
         {
@@ -432,32 +439,31 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 
         if (!collectingIntactText())
         {
-            for (int i=0; i<xmltag.getAttributes().size(); i++)
-            {
-                Attribute attr = xmltag.getAttributes().get(i);
-                if ((dialect.getTranslatableAttributes().contains(attr.getName())
-                     ||
-                     dialect.getTranslatableTagAttributes().containsPair(tag, attr.getName())
-                    )
-                   && dialect.validateTranslatableTagAttribute(tag, attr.getName(), xmltag.getAttributes() )
-                   )
+                for (int i=0; i<xmltag.getAttributes().size(); i++)
                 {
-                    attr.setValue(translator.translate(attr.getValue()));
+                    Attribute attr = xmltag.getAttributes().get(i);
+                    if ((dialect.getTranslatableAttributes().contains(attr.getName())
+                         ||
+                         dialect.getTranslatableTagAttributes().containsPair(tag, attr.getName())
+                        )
+                       && dialect.validateTranslatableTagAttribute(tag, attr.getName(), xmltag.getAttributes() )
+                       )
+                    {
+                        attr.setValue(translator.translate(attr.getValue()));
+                    }
                 }
             }
         }
-    }
     private void queueEndTag(String tag)
     {
         int len = currEntry().size();
         if (len>0 && (currEntry().get(len-1) instanceof XMLTag) &&
-                ((XMLTag)currEntry().get(len-1)).getTag().equals(tag) &&
-                ((XMLTag)currEntry().get(len-1)).getType()==Tag.TYPE_BEGIN)
-        {
+                (((XMLTag)currEntry().get(len-1)).getTag().equals(tag) &&
+                ((XMLTag)currEntry().get(len-1)).getType()==Tag.TYPE_BEGIN) &&
+                !isClosingTagRequired()) {
             ((XMLTag)currEntry().get(len-1)).setType(Tag.TYPE_ALONE);
         }
-        else
-        {
+        else {
             currEntry().add(new XMLTag(tag, getShortcut(tag), Tag.TYPE_END, null));
         }
     }
@@ -514,6 +520,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
                 && !collectingIntactText())
                 translateAndFlush();
         }
+        removeTranslatableTag();
     }
 
     /**
@@ -528,17 +535,17 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 
         String src = currEntry().sourceToShortcut();
         Element lead = currEntry().get(0);
-        String translation;
-        if ((lead instanceof Tag) &&
+        String translation = src;
+        if ( (lead instanceof Tag) &&
              isPreformattingTag(((Tag)lead).getTag(),
-             ((Tag)lead).getAttributes()))
-        {
+             ((Tag)lead).getAttributes()) &&
+             isTranslatableTag()
+           ) {
             translation = translator.translate(src);
-        }
-        else
-        {
+        } else {
             String compressed = StaticUtils.compressSpaces(src);
-            translation = translator.translate(compressed);
+            if (isTranslatableTag())
+                translation = translator.translate(compressed);
             // untranslated is written out uncompressed
             if( compressed.equals(translation) )
                 translation = src;
@@ -666,6 +673,39 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
 
             return dialect.validateIntactTag(tag, atts);
         }
+    }
+
+    /**
+     * If we are not inside a translatable tag, and if the dialect says
+     * the new one is translatable, add the new tag to the stack
+     * @param tag The current opening tag
+     * @param atts The attributes of the current tag
+     */
+    // TODO: The concept works only perfectly if the first tag with 
+    // translatable content inside the translatable tag is a paragraph
+    // tag
+    void setTranslatableTag(String tag,
+            org.omegat.filters3.Attributes atts) {
+        
+        if ( !isTranslatableTag() ) { // If stack is empty
+             if (dialect.validateTranslatableTag(tag, atts) )
+                 translatableTagName.push(tag);
+        } else {
+            translatableTagName.push(tag);
+        }
+    }
+
+    /**
+     * Remove a tag from the stack of translatable tags
+     */
+    void removeTranslatableTag() {
+        if ( isTranslatableTag() ) // If there is something in the stack
+            translatableTagName.pop(); // Remove it
+    }
+
+
+    private boolean isClosingTagRequired(){
+        return dialect.getClosingTagRequired();
     }
 
     /** Returns whether we face out of turn tag we should collect separately. */

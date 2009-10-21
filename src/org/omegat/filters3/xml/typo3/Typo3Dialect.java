@@ -46,6 +46,9 @@ public class Typo3Dialect extends DefaultXMLDialect
             "header",
             "li",
             "td",
+            "abstract",
+            "image_link",
+            "imagecaption",
         });
              
         defineIntactTags(new String[] {

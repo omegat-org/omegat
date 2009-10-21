@@ -53,3 +53,6 @@ OmegaT-Filter: true
 
 Name: org.omegat.filters3.xml.resx.ResXFilter
 OmegaT-Filter: true
+
+Name: org.omegat.filters3.xml.typo3.Typo3Filter
+OmegaT-Filter: true

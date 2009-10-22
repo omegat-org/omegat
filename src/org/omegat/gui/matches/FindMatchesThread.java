@@ -256,10 +256,6 @@ public class FindMatchesThread extends Thread {
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
-            if (candEntry.getSrcText().equals(st.str.getSrcText())) {
-                // the same source text already in list - don't need to add
-                return;
-            }
             if (st.score < similarity) {
                 break;
             }

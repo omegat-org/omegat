@@ -123,6 +123,7 @@ public class FindMatchesThread extends Thread {
         strTokensAll = Core.getTokenizer().tokenizeAllExactly(processedEntry.getSrcText());// HP: includes non-word tokens
 
         // travel by project entries
+        // FIXME: iterate by unique entries, not by all segments
         for (SourceTextEntry candEntry : entries) {
             if (matcherController.processedEntry != processedEntry) {
                 // Processed entry changed, because user moved to other entry.

@@ -26,6 +26,7 @@ package org.omegat.core.data;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
@@ -55,6 +56,10 @@ public class NotLoadedProject implements IProject {
     }
 
     public List<LegacyTM> getMemory() {
+        return null;
+    }
+    
+    public Map<String, String> getTranslations() {
         return null;
     }
 

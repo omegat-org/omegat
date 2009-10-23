@@ -26,6 +26,7 @@ package org.omegat.core.data;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
@@ -112,6 +113,12 @@ public interface IProject {
      * @return list of additional memories
      */
     List<TransMemory> getTransMemory();
+    
+    /**
+     * Get all translations for current project.
+     * @return all translations map
+     */
+    Map<String, String> getTranslations();
 
     /**
      * Get info about each source file in project. It's unmodifiable list, so,

@@ -93,12 +93,12 @@ public class RealProject implements IProject
      * Storage for all translation memories, which shouldn't be changed and
      * saved, i.e. for /tm/*.tmx files, aligned data from source files.
      */
-    private final Map<String, Map<String, String>> transMemories;
+    private final Map<String, List<Pair>> transMemories;
 
     /**
      * Storage for orphaned segments.
      */
-    private Map<String, String> orphanedMemory;
+    private List<Pair> orphanedMemory;
 
     /**
      * Storage for translation for current project.
@@ -130,7 +130,9 @@ public class RealProject implements IProject
         m_tmList = new ArrayList<TransMemory>();
         m_legacyTMs = new ArrayList<LegacyTM>();
         m_orphanedList = new ArrayList<TransMemory>();
-        transMemories = new TreeMap<String, Map<String,String>>();
+        transMemories = new TreeMap<String, List<Pair>>();
+        orphanedMemory = new ArrayList<Pair>();
+        translations = new HashMap<String, String>();
         
         if (isNewProject) {
             createProject(props);
@@ -216,6 +218,9 @@ public class RealProject implements IProject
             m_legacyTMs.clear();
             m_tmList.clear();
             m_orphanedList.clear();
+            transMemories.clear();
+            translations.clear();
+            orphanedMemory.clear();
 
             // Well, that cleared up some, GC to the rescue!
             System.gc();
@@ -397,7 +402,7 @@ public class RealProject implements IProject
         {
             saveProjectProperties();
             
-            Map<String,String> tmx = TMXWriter.prepareTMXData(m_srcTextEntryArray, m_orphanedList);            
+            Map<String,String> tmx = TMXWriter.prepareTMXData(m_srcTextEntryArray, m_orphanedList);//FIXME: change to new orphanedMap            
             TMXWriter.buildTMXFile(s, false, false, m_config, tmx);
             m_modifiedFlag = false;
         }
@@ -653,6 +658,9 @@ public class RealProject implements IProject
             FileUtil.removeOldBackups(tmxFile);
         }
 
+        // TM for store entries, if not a project_save.tmx
+        List<Pair> currentTM;
+        
         // If a legacy TM, creating one
         // and adding to the list of legacy TMs
         if( isProject )
@@ -661,11 +669,19 @@ public class RealProject implements IProject
             LegacyTM tm = new LegacyTM(
                     OStrings.getString("CT_ORPHAN_STRINGS"), strOrphaneList);
             m_legacyTMs.add(tm);
+            currentTM = null;
         }
         else
         {
             LegacyTM tm = new LegacyTM(new File(fname).getName(), strEntryList);
             m_legacyTMs.add(tm);
+            String fn = new File(fname).getName();
+            currentTM = transMemories.get(fn);
+            if (currentTM == null) {
+                // create new TM hash for this file
+                currentTM = new ArrayList<Pair>(num);
+                transMemories.put(fn, currentTM);
+            }
         }
 
         for (int i=0; i<num; i++)
@@ -688,8 +704,18 @@ public class RealProject implements IProject
                     se = new StringEntry(src);
                     se.setTranslation(trans); // orphane translation don't count
                     strOrphaneList.add(se);
+                    
+                    /*
+                     * Entry not found in source files - orphaned.
+                     */
+                    orphanedMemory.add(new Pair(src, trans));
                 } else {
                     se.setTranslation(trans);
+                    
+                    /*
+                     * Entry not found in source files - translation.
+                     */
+                    translations.put(src, trans);
                 }
             }
             else
@@ -700,6 +726,11 @@ public class RealProject implements IProject
                 StringEntry se = new StringEntry(src);
                 se.setTranslation(trans); // external TMXes don't count
                 strEntryList.add(se);
+                
+                /*
+                 * Not project file - just TM from /tm/.
+                 */
+                currentTM.add(new Pair(src, trans));
             }
         }
     }
@@ -714,6 +745,13 @@ public class RealProject implements IProject
      */
     public List<SourceTextEntry> getAllEntries() {
         return m_srcTextEntryArray;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public Map<String, String> getTranslations() {
+        return Collections.unmodifiableMap(translations);
     }
 
     ////////////////////////////////////////////////////////
@@ -749,6 +787,7 @@ public class RealProject implements IProject
     public void setTranslation(final SourceTextEntry entry, final String trans) {
         hotStat.numberofTranslatedSegments += entry.setTranslation(trans);
         m_modifiedFlag = true;
+        translations.put(entry.getSrcText(), trans);
     }
     
     /**
@@ -773,6 +812,7 @@ public class RealProject implements IProject
          */
         private ProjectFileData m_curFile;
         private LegacyTM legacyFileTM;
+        private List<Pair> tmForFile;
 
         public LoadFilesCallback(final LoadContext context) {
             super(m_config);
@@ -782,6 +822,7 @@ public class RealProject implements IProject
         protected void setCurrentFile(ProjectFileData file) {
             m_curFile = file;            
             legacyFileTM = null;
+            tmForFile = null;
         }
         /**
          * Processes a single entry. This method doesn't perform any changes on
@@ -839,6 +880,7 @@ public class RealProject implements IProject
                 // entry doesn't exist yet - create and store it
                 strEntry = new StringEntry(segmentSource);
                 strEntry.setTranslation(segmentTranslation);
+                translations.put(segmentSource, segmentTranslation);
                 context.m_strEntryHash.put(segmentSource, strEntry);
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
@@ -865,9 +907,17 @@ public class RealProject implements IProject
                 legacyFileTM = new LegacyTM(fn, new ArrayList<StringEntry>());
                 getMemory().add(legacyFileTM);
             }
+            if (tmForFile == null) {
+                String fn = StaticUtils.makeFilenameRelative(m_curFile.name,
+                        m_config.getSourceRoot());
+                tmForFile = new ArrayList<Pair>();
+                transMemories.put(fn, tmForFile);
+            }
             StringEntry en = new StringEntry(source);
             en.setTranslation(translation);
             legacyFileTM.getStrings().add(en);
+            
+            tmForFile.add(new Pair(source, translation));
         }
     };
 
@@ -911,5 +961,15 @@ public class RealProject implements IProject
         /** maps text to strEntry obj */
         Map<String, StringEntry> m_strEntryHash = new HashMap<String, StringEntry>(
                 4096);
+    }
+
+    public static class Pair {
+        public final String source;
+        public final String translation;
+
+        public Pair(final String source, final String translation) {
+            this.source = source;
+            this.translation = translation;
+        }
     }
 }

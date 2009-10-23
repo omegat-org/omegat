@@ -25,8 +25,6 @@
 package org.omegat.core.data;
 
 import java.util.Comparator;
-import java.util.SortedSet;
-import java.util.TreeSet;
 
 
 /*
@@ -44,7 +42,6 @@ public class StringEntry
     /** Creates a new string entry for a unique translatable string. */
     public StringEntry(String srcText)
     {
-        m_parentList = new TreeSet<SourceTextEntry>(new STEComparator());
         m_srcText = srcText;
         m_translation = "";                                                     // NOI18N
     }
@@ -53,17 +50,6 @@ public class StringEntry
     public String getSrcText()
     { 
         return m_srcText;	
-    }
-
-    /** List of SourceTextEntry-es this string entry belongs to. */
-    public SortedSet<SourceTextEntry> getParentList()
-    { 
-        return m_parentList;	
-    }
-    /** Add SourceTextEntry this string entry belongs to. */
-    public void addParent(SourceTextEntry srcTextEntry)
-    {
-        m_parentList.add(srcTextEntry);
     }
 
     // these methods aren't sychronized - thought about doing so, but
@@ -117,10 +103,6 @@ public class StringEntry
         return m_translation!=null && m_translation.length()>0;
     }
     
-    // NOTE: references to these lists are returned through the above
-    // access calls
-    /** Sorted set of parent source text entries. */
-    private SortedSet<SourceTextEntry>	m_parentList;
     
     private String m_srcText;
     private String m_translation;

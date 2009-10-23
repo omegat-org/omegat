@@ -49,7 +49,6 @@ public class SourceTextEntry
         m_srcFile = file;
         m_strEntry = str;
         m_entryNum = entryNum;
-        m_strEntry.addParent(this);
     }
     
     /** Returns information about the file this entry belongs to. */

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2009 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -20,27 +21,22 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.matching;
 
-import org.omegat.core.data.StringEntry;
-
 /**
  * Class to hold a single fuzzy match.
- *
+ * 
  * @author Keith Godfrey
  */
-public class NearString
-{
-    public NearString(StringEntry strEntry,
-            int nearScore,
-            int nearScoreNoStem,
-            int adjustedScore,
-            byte[] nearData,
-            String projName)
-    {
-        str = strEntry;
+public class NearString {
+    public NearString(final String source, final String translation,
+            final int nearScore, final int nearScoreNoStem,
+            final int adjustedScore, final byte[] nearData,
+            final String projName) {
+        this.source = source;
+        this.translation = translation;
         score = nearScore;
         scoreNoStem = nearScoreNoStem;
         this.adjustedScore = adjustedScore;
@@ -48,10 +44,19 @@ public class NearString
         if (projName != null)
             proj = projName;
     }
-    
-    public StringEntry str;
-    public int score, scoreNoStem; // similarity score for match without non-word tokens
-    public int adjustedScore; // adjusted similarity score for match including all tokens
-    public byte[] attr;	// matching attributes of near strEntry
-    public String proj = ""; // NOI18N
+
+    public String source;
+    public String translation;
+
+    public int score;
+
+    /** similarity score for match without non-word tokens */
+    public int scoreNoStem;
+
+    /** adjusted similarity score for match including all tokens */
+    public int adjustedScore;
+
+    /** matching attributes of near strEntry */
+    public byte[] attr;
+    public String proj = "";
 }

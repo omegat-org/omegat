@@ -137,7 +137,8 @@ public class FindMatchesThread extends Thread {
                 // skip original==original entry comparison
                 continue;
             }
-            processEntry(candEntry.getStrEntry(), null);
+            processEntry(candEntry.getSrcText(), candEntry.getTranslation(),
+                    null);
         }
 
         // travel by translation memories
@@ -151,14 +152,17 @@ public class FindMatchesThread extends Thread {
                 if (StringUtil.isEmpty(candEntry.getTranslation())) {
                     continue;
                 }
-                processEntry(candEntry, mem.getName());
+                processEntry(candEntry.getSrcText(),
+                        candEntry.getTranslation(), mem.getName());
             }
         }
 
         // fill similarity data only for result
         for (NearString near : result) {
             // fix for bug 1586397
-            byte[] similarityData = FuzzyMatcher.buildSimilarityData(strTokensAll, Core.getTokenizer().tokenizeAllExactly(near.str.getSrcText()));
+            byte[] similarityData = FuzzyMatcher.buildSimilarityData(
+                    strTokensAll, Core.getTokenizer().tokenizeAllExactly(
+                            near.source));
             near.attr = similarityData;
         }
 
@@ -196,10 +200,10 @@ public class FindMatchesThread extends Thread {
      * @param candEntry
      *                entry to compare
      */
-    protected void processEntry(final StringEntry candEntry,
+    protected void processEntry(final String source, final String translation,
             final String tmxName) {
-        Token[] candTokens = Core.getTokenizer().tokenizeWords(
-                candEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
+        Token[] candTokens = Core.getTokenizer().tokenizeWords(source,
+                ITokenizer.StemmingMode.MATCHING);
         if (candTokens.length == 0) {
             return;
         }
@@ -210,16 +214,16 @@ public class FindMatchesThread extends Thread {
             return;
 
         Token[] candTokensNoStem = Core.getTokenizer().tokenizeWords(
-                candEntry.getSrcText(), ITokenizer.StemmingMode.NONE);
+                source, ITokenizer.StemmingMode.NONE);
         int similarityNoStem = FuzzyMatcher.calcSimilarity(distance, strTokensNoStem, candTokensNoStem);
 
         if (haveChanceToAdd(similarityStem, similarityNoStem)) {
             Token[] candTokensAll = Core.getTokenizer().tokenizeAllExactly(
-                    candEntry.getSrcText());
+                    source);
             int simAdjusted = FuzzyMatcher.calcSimilarity(distance, strTokensAll, candTokensAll);
 
-            addNearString(candEntry, similarityStem, similarityNoStem,
-                    simAdjusted, null, tmxName);
+            addNearString(source, translation, similarityStem,
+                    similarityNoStem, simAdjusted, null, tmxName);
         }
     }
 
@@ -249,7 +253,7 @@ public class FindMatchesThread extends Thread {
      * Add near string into result list. 
      * Near strings sorted by "similarity,simAdjusted"
      */
-    protected void addNearString(final StringEntry candEntry,
+    protected void addNearString(final String source, final String translation,
             final int similarity, final int similarityNoStem,
             final int simAdjusted, final byte[] similarityData,
             final String tmxName) {
@@ -257,7 +261,7 @@ public class FindMatchesThread extends Thread {
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
-            if (tmxName==null && st.proj.length()==0 && candEntry.getSrcText().equals(st.str.getSrcText())) {
+            if (tmxName==null && st.proj.length()==0 && source.equals(st.source)) {
                 // the same source text already in list - don't need to add
                 // only if they are from translations 
                 return;
@@ -278,8 +282,8 @@ public class FindMatchesThread extends Thread {
             pos = i + 1;
         }
 
-        result.add(pos, new NearString(candEntry, similarity, similarityNoStem,
-                simAdjusted, similarityData, tmxName));
+        result.add(pos, new NearString(source, translation, similarity,
+                similarityNoStem, simAdjusted, similarityData, tmxName));
         if (result.size() > OConsts.MAX_NEAR_STRINGS) {
             result.remove(result.size() - 1);
         }

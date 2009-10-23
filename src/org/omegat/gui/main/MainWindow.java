@@ -206,7 +206,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         
         NearString near = Core.getMatcher().getActiveMatch();
         if (near != null) {
-            Core.getEditor().insertText(near.str.getTranslation());
+            Core.getEditor().insertText(near.translation);
         }
     }
 
@@ -218,7 +218,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         
         NearString near = Core.getMatcher().getActiveMatch();
         if (near != null) {
-            Core.getEditor().replaceEditText(near.str.getTranslation());
+            Core.getEditor().replaceEditText(near.translation);
         }
     }
     

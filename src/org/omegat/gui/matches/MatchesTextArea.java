@@ -152,10 +152,9 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
         for (int i = 0; i < newMatches.size(); i++) {
             NearString match = newMatches.get(i);
             displayBuffer.append(MessageFormat.format(
-                    "{0}) {1}\n{2}\n<{3}/{4}/{5}% {6} >", i + 1, match.str
-                            .getSrcText(), match.str.getTranslation(),
-                    match.score, match.scoreNoStem, match.adjustedScore,
-                    match.proj));
+                    "{0}) {1}\n{2}\n<{3}/{4}/{5}% {6} >", i + 1, match.source,
+                    match.translation, match.score, match.scoreNoStem,
+                    match.adjustedScore, match.proj));
             
             if (i < (newMatches.size() - 1))
                 displayBuffer.append("\n\n"); // NOI18N
@@ -199,7 +198,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
             if (thebest.score >= percentage) {
                 String translation = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT, OStrings
                         .getString("WF_DEFAULT_PREFIX"))
-                        + thebest.str.getTranslation();
+                        + thebest.translation;
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
                 if (StringUtil.isEmpty(currentEntry.getTranslation())) {
                     Core.getEditor().replaceEditText(translation);
@@ -229,7 +228,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
 
         NearString match = matches.get(activeMatch);
         // List tokens = match.str.getSrcTokenList();
-        Token[] tokens = Core.getTokenizer().tokenizeAllExactly(match.str.getSrcText()); // fix for bug 1586397
+        Token[] tokens = Core.getTokenizer().tokenizeAllExactly(match.source); // fix for bug 1586397
         byte[] attributes = match.attr;
         for (int i = 0; i < tokens.length; i++) {
             Token token = tokens[i];
@@ -335,7 +334,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
                         int entryNum = 0;
                         for (int i = 0; i < entries.size(); i++) {
                             if (entries.get(i).getSrcText().equals(
-                                    ns.str.getSrcText())) {
+                                    ns.source)) {
                                 // found entry with the same source
                                 entryNum = i;
                                 break;

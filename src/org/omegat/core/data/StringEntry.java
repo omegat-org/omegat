@@ -24,9 +24,6 @@
 
 package org.omegat.core.data;
 
-import java.util.Comparator;
-
-
 /*
  * String entry represents a unique translatable string
  * (a single string may occur many times in data files, but only
@@ -106,24 +103,4 @@ public class StringEntry
     
     private String m_srcText;
     private String m_translation;
-}
-
-/**
- * A comparator for SourceTextEntry classes,
- * which sorts them according to their entryNum() descending.
- */
-class STEComparator implements Comparator<SourceTextEntry>
-{
-    public int compare(SourceTextEntry first, SourceTextEntry second)
-    {
-        if (first == second)
-            return 0;
-        if (first.entryNum() == second.entryNum())
-            throw new RuntimeException("Should not happen!");                   // NOI18N
-        
-        if (first.entryNum() < second.entryNum())
-            return 1;
-        else
-            return -1;
-    }
 }

@@ -324,7 +324,24 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
             if (project == null || project.equals("")) {
                 item.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        Core.getEditor().gotoEntry(ns.str.getParentList().first().entryNum() + 1);
+                        /*
+                         * Goto segment with contains matched source. Since it
+                         * enough rarely executed code, it will be better to
+                         * find this segment each time, instead use additional
+                         * memory storage.
+                         */
+                        List<SourceTextEntry> entries = Core.getProject()
+                                .getAllEntries();
+                        int entryNum = 0;
+                        for (int i = 0; i < entries.size(); i++) {
+                            if (entries.get(i).getSrcText().equals(
+                                    ns.str.getSrcText())) {
+                                // found entry with the same source
+                                entryNum = i;
+                                break;
+                            }
+                        }
+                        Core.getEditor().gotoEntry(entryNum + 1);
                     }
                 });
             } else {

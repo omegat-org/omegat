@@ -56,16 +56,6 @@ public class SourceTextEntry
     { 
         return m_srcFile;	
     }
-    /** Returns the number of the first entry in the file this entry belongs to. */
-    public int getFirstInFile()
-    { 
-        return m_srcFile.firstEntry;	
-    }
-    /** Returns the number of the last entry in the file this entry belongs to. */
-    public int getLastInFile()
-    { 
-        return m_srcFile.lastEntry;	
-    }
     
     /** Returns the unique StringEntry that holds source and translation of this entry. */
     public StringEntry getStrEntry()

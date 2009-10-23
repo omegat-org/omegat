@@ -85,9 +85,9 @@ public class SourceTextEntry
      * Sets the translation 
      * (shortcut for <code>getStrEntry().setTranslation(t)</code>). 
      */
-    protected int setTranslation(String t)
+    protected void setTranslation(String t)
     {
-        return m_strEntry.setTranslation(t);
+        m_strEntry.setTranslation(t);
     }
     
     /** 

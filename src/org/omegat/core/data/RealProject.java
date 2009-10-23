@@ -57,6 +57,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader;
 import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -784,10 +785,21 @@ public class RealProject implements IProject
     /**
      * {@inheritDoc}
      */
-    public void setTranslation(final SourceTextEntry entry, final String trans) {
-        hotStat.numberofTranslatedSegments += entry.setTranslation(trans);
+    public void setTranslation(final SourceTextEntry entry, String trans) {
+        if( trans==null ) {
+            trans = "";
+        }
+
+        entry.setTranslation(trans);
         m_modifiedFlag = true;
-        translations.put(entry.getSrcText(), trans);
+        String prevTranslation = translations.put(entry.getSrcText(), trans);
+        
+        /**
+         * Calculate how to statistics should be changed.
+         */
+        int diff = StringUtil.isEmpty(prevTranslation) ? 0 : -1;
+        diff += StringUtil.isEmpty(trans) ? 0 : +1;
+        hotStat.numberofTranslatedSegments += diff;
     }
     
     /**

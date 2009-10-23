@@ -68,28 +68,13 @@ public class StringEntry
      * Sets the translation of the StringEntry.
      * If translation given is null or equal to the source, than
      * the empty string is set as a translation to indicate that there's no translation.
-     * 
-     * @return how translation count changed: +1 - added, -1 - substracted, 0 - not changed
      */
-    public int setTranslation(String trans)
+    public void setTranslation(String trans)
     {
         if( trans==null )
             trans = "";                                                         // NOI18N
-        boolean was = !"".equals(m_translation);                                // NOI18N
         
-        if( !trans.equals(m_translation) )
-        {
-            // tell the boss things have changed to indicate a save is in order
-            // only if translation changed
-            m_translation = trans;
-
-            boolean is = !"".equals(m_translation);                             // NOI18N
-            if( was && !is )
-                return -1;
-            else if( !was && is )
-                return +1;
-        }
-        return 0;
+        m_translation = trans;
     }
 
     /**

@@ -69,4 +69,37 @@ public class OneFilter {
     public void setInstance(Instance[] instance) {
         instances = new ArrayList<Instance>(Arrays.asList(instance));
     }
+    /** Holds whether the filter's source encoding can be varied by user */
+    private boolean sourceEncodingVariable;
+    /** 
+     * Returns whether the filter's source encoding can be varied by user 
+     */
+    public boolean isSourceEncodingVariable()
+    {
+        return sourceEncodingVariable;
+    }
+    /** 
+     * Sets whether the filter's source encoding can be varied by user 
+     */
+    public void setSourceEncodingVariable(boolean value)
+    {
+        sourceEncodingVariable = value;
+    }
+    
+    /** Holds whether the filter's target encoding can be varied by user */
+    private boolean targetEncodingVariable;
+    /** 
+     * Returns whether the filter's target encoding can be varied by user 
+     */
+    public boolean isTargetEncodingVariable()
+    {
+        return targetEncodingVariable;
+    }
+    /** 
+     * Sets whether the filter's target encoding can be varied by user 
+     */
+    public void setTargetEncodingVariable(boolean value)
+    {
+        targetEncodingVariable = value;
+    }
 }

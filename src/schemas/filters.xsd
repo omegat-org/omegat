@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="filters">
+		<xs:annotation>
+			<xs:documentation>Comment describing your root element</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="filter" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="filter">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="files" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="className" type="xs:string" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="files">
+		<xs:complexType>
+			<xs:attribute name="sourceFilenameMask" type="xs:string" use="required"/>
+			<xs:attribute name="targetFilenamePattern" type="xs:string"/>
+			<xs:attribute name="sourceEncoding" type="xs:string"/>
+			<xs:attribute name="targetEncoding" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -310,8 +310,14 @@ public final class PluginUtils
     public static List<Class<?>> getFilterClasses() {
         return filterClasses;
     }
+    
+    public static List<Class<?>> getTokenizerClasses() {
+        return tokenizerClasses;
+    }
 
     protected static List<Class<?>> filterClasses = new ArrayList<Class<?>>();
+
+    protected static List<Class<?>> tokenizerClasses = new ArrayList<Class<?>>();
 
     /**
      * Parse one manifest file.
@@ -334,6 +340,10 @@ public final class PluginUtils
             String isfilter = attrs.getValue("OmegaT-Filter");
             if ("true".equals(isfilter)) {
                 filterClasses.add(classLoader.loadClass(key));
+            }
+            String istokenizer = attrs.getValue("OmegaT-Tokenizer");
+            if ("true".equals(istokenizer)) {
+                tokenizerClasses.add(classLoader.loadClass(key));
             }
         }
     }

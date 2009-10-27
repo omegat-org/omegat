@@ -29,7 +29,6 @@ import java.util.Map;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.matching.ITokenizer;
-import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
@@ -145,11 +144,9 @@ public class Core {
         glossary = new GlossaryTextArea();
         googleTranslatePane = new GoogleTranslateTextArea();
         dictionaries = new DictionariesTextArea();
-        tokenizer = createComponent(ITokenizer.class, new Tokenizer(), params);
+        tokenizer = createTokenizer(params);
         spellChecker = new SpellChecker();
 
-        PluginUtils.loadPlugins2();
-        
         SaveThread th = new SaveThread();
         saveThread = th;
         th.start();
@@ -165,35 +162,33 @@ public class Core {
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
 
-        tokenizer = createComponent(ITokenizer.class, new Tokenizer(), params);
+        tokenizer = createTokenizer(params);
 
         SRX.getSRX();
     }
 
     /**
-     * Try to create component instance by class specified in command line.
+     * Create tokenizer by class specified in command line, or by default class.
      * 
-     * @param <T>
-     *            return type
-     * @param interfaceClass
-     *            component interface class
-     * @param defaultImplementation
-     *            default component implementation instance
-     * @param args
+     * @param params
      *            command line
      * @return component implementation
      */
-    protected static <T> T createComponent(final Class<T> interfaceClass,
-            final T defaultImplementation, final Map<String, String> params) {
+    protected static ITokenizer createTokenizer(final Map<String, String> params) {
         try {
-            String implClassName = params.get(interfaceClass.getSimpleName());
-            if (implClassName != null) {
-                return (T) Class.forName(implClassName).newInstance();
+            String implClassName = params.get("ITokenizer");
+            if (implClassName == null) {
+                implClassName="org.omegat.core.matching.Tokenizer";
+            }
+            for(Class<?> c:PluginUtils.getTokenizerClasses()) {
+                if (c.getName().equals(implClassName)) {
+                    return (ITokenizer)c.newInstance();
+                }
             }
         } catch (Exception ex) {
             Log.log(ex);
         }
-        return defaultImplementation;
+        return null;
     }
 
     /**

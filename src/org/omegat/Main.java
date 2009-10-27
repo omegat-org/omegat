@@ -47,6 +47,7 @@ import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -158,6 +159,7 @@ public class Main {
                 .getProperty("java.version"), System.getProperty("java.home"));
 
         ConvertConfigs.convert();
+        PluginUtils.loadPlugins2();
         
         switch (runMode) {
         case GUI:

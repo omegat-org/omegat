@@ -17,6 +17,7 @@
 				<xs:element ref="files" minOccurs="0" maxOccurs="unbounded"/>
 			</xs:sequence>
 			<xs:attribute name="className" type="xs:string" use="required"/>
+			<xs:attribute name="enabled" type="xs:boolean" use="required"/>
 		</xs:complexType>
 	</xs:element>
 	<xs:element name="files">

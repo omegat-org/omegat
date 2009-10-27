@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 /**
  * Wrapper around a single file filter class Manages entries in XML config file
  * and provides a table model.
@@ -69,37 +68,55 @@ public class OneFilter {
     public void setInstance(Instance[] instance) {
         instances = new ArrayList<Instance>(Arrays.asList(instance));
     }
+
     /** Holds whether the filter's source encoding can be varied by user */
     private boolean sourceEncodingVariable;
-    /** 
-     * Returns whether the filter's source encoding can be varied by user 
+
+    /**
+     * Returns whether the filter's source encoding can be varied by user
      */
-    public boolean isSourceEncodingVariable()
-    {
+    public boolean isSourceEncodingVariable() {
         return sourceEncodingVariable;
     }
-    /** 
-     * Sets whether the filter's source encoding can be varied by user 
+
+    /**
+     * Sets whether the filter's source encoding can be varied by user
      */
-    public void setSourceEncodingVariable(boolean value)
-    {
+    public void setSourceEncodingVariable(boolean value) {
         sourceEncodingVariable = value;
     }
-    
+
     /** Holds whether the filter's target encoding can be varied by user */
     private boolean targetEncodingVariable;
-    /** 
-     * Returns whether the filter's target encoding can be varied by user 
+
+    /**
+     * Returns whether the filter's target encoding can be varied by user
      */
-    public boolean isTargetEncodingVariable()
-    {
+    public boolean isTargetEncodingVariable() {
         return targetEncodingVariable;
     }
-    /** 
-     * Sets whether the filter's target encoding can be varied by user 
+
+    /**
+     * Sets whether the filter's target encoding can be varied by user
      */
-    public void setTargetEncodingVariable(boolean value)
-    {
+    public void setTargetEncodingVariable(boolean value) {
         targetEncodingVariable = value;
+    }
+
+    /** If the filter is used. */
+    private boolean on = true;
+
+    /**
+     * Returns whether the filter is on (used by OmegaT).
+     */
+    public boolean isOn() {
+        return on;
+    }
+
+    /**
+     * Sets whether the filter is on (used by OmegaT).
+     */
+    public void setOn(boolean value) {
+        on = value;
     }
 }

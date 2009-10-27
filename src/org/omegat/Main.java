@@ -40,6 +40,7 @@ import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.UIManager;
 
+import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProjectFactory;
@@ -156,6 +157,8 @@ public class Main {
         Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System
                 .getProperty("java.version"), System.getProperty("java.home"));
 
+        ConvertConfigs.convert();
+        
         switch (runMode) {
         case GUI:
             runGUI();

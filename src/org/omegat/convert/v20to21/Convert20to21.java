@@ -70,6 +70,7 @@ public class Convert20to21 {
             Filter fo = new Filter();
             res.getFilter().add(fo);
             fo.setClassName(f.getClassName());
+            fo.setEnabled(f.isOn());
             for (org.omegat.convert.v20to21.data.Instance i : f.getInstance()) {
                 Files io = new Files();
                 fo.getFiles().add(io);

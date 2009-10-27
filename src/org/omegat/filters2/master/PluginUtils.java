@@ -274,7 +274,6 @@ public final class PluginUtils
                     .getResources("META-INF/MANIFEST.MF"); mlist
                     .hasMoreElements();) {
                 URL mu = mlist.nextElement();
-                System.out.println(mu);
                 InputStream in = mu.openStream();
                 Manifest m;
                 try {
@@ -288,10 +287,9 @@ public final class PluginUtils
                     foundMain = true;
                 }
                 loadByManifest(m, cls);
-                System.out.println();
             }
             if (!foundMain) {
-                // development mode - load main menifest template
+                // development mode - load main manifest template
                 File mf = new File("manifest-template.mf");
                 if (mf.exists()) {
                     InputStream in = new FileInputStream(mf);

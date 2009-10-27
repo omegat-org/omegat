@@ -35,6 +35,7 @@ import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
@@ -147,6 +148,8 @@ public class Core {
         tokenizer = createComponent(ITokenizer.class, new Tokenizer(), params);
         spellChecker = new SpellChecker();
 
+        PluginUtils.loadPlugins2();
+        
         SaveThread th = new SaveThread();
         saveThread = th;
         th.start();

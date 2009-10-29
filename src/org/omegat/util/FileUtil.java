@@ -31,8 +31,10 @@ import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * Files processing utilities.
@@ -112,4 +114,44 @@ public class FileUtil {
         
     }
 
+    /**
+     * Find files in subdirectories.
+     * 
+     * @param dir
+     *                directory to start find
+     * @param filter
+     *                filter for found files
+     * @return list of filtered found files
+     */
+    public static List<File> findFiles(final File dir, final FileFilter filter) {
+        final List<File> result = new ArrayList<File>();
+        findFiles(dir, filter, result);
+        return result;
+    }
+
+    /**
+     * Internal find method, which calls himself recursively.
+     * 
+     * @param dir
+     *                directory to start find
+     * @param filter
+     *                filter for found files
+     * @param result
+     *                list of filtered found files
+     */
+    private static void findFiles(final File dir, final FileFilter filter,
+            final List<File> result) {
+        File[] list = dir.listFiles();
+        if (list != null) {
+            for (File f : list) {
+                if (f.isDirectory()) {
+                    findFiles(f, filter, result);
+                } else {
+                    if (filter.accept(f)) {
+                        result.add(f);
+                    }
+                }
+            }
+        }
+    }
 }

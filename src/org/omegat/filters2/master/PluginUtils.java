@@ -44,6 +44,7 @@ import java.util.jar.Manifest;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 
 /**
@@ -256,16 +257,15 @@ public final class PluginUtils
         File pluginsDir = new File("plugins/");
         try {
             URLClassLoader cls;
-            URL[] urls;
             // list all jars in /plugins/
-            File[] fs = pluginsDir.listFiles(new JARorFolderFileFilter());
-            if (fs != null) {
-                urls = new URL[fs.length];
-                for (int i = 0; i < urls.length; i++) {
-                    urls[i] = fs[i].toURL();
+            List<File> fs = FileUtil.findFiles(pluginsDir, new FileFilter() {
+                public boolean accept(File pathname) {
+                    return pathname.getName().endsWith(".jar");
                 }
-            } else {
-                urls = new URL[0];
+            });
+            URL[] urls = new URL[fs.size()];
+            for (int i = 0; i < urls.length; i++) {
+                urls[i] = fs.get(i).toURL();
             }
             boolean foundMain = false;
             // look on all manifests

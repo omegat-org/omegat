@@ -37,7 +37,7 @@
  OmegaT 2.0.5 update 1
 ----------------------------------------------------------------------
   3 Enhancements
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 1 vs. 2.0.5
 
@@ -51,6 +51,9 @@
   Bug Fixes:
 
   - Various corrections in the manual
+
+  - sh tutorial in English
+  http://sourceforge.net/support/tracker.php?aid=1895401
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5

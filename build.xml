@@ -85,7 +85,11 @@
         </copy>
         <copy todir="${l10n.min.dir}/source">
             <fileset dir="." 
-                    includes="docs/en/instantStartGuideNoTOC.html src/**/Bundle.properties"/>
+                    includes="docs/en/instantStartGuideNoTOC.html 
+                    docs/en/images/NewProject.png
+                    docs/en/images/tagged_segment.png
+                    docs/en/images/tagged_segment_target.png
+                    src/**/Bundle.properties"/>
         </copy>
         <copy file="release/readme.txt"
               tofile="${l10n.min.dir}/source/readme.utf8"

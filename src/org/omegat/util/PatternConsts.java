@@ -145,7 +145,7 @@ public class PatternConsts
     
     /** Pattern for detecting the placeholders in a printf-function string
      *  which can occur in languages like php, C and others. 
-     *  placeholder ::= [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER
+     *  placeholder ::= "%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER
      *  NUMBER ::= { "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" }
      *  ARGUMENTSWAPSPECIFIER = NUMBER "$"
      *  SIGNSPECIFIER ::= "+" | "-"

@@ -2,7 +2,7 @@
  OmegaT 2.1.1
 ----------------------------------------------------------------------
   2 Enhancements
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.1 vs. 2.1.0
 
@@ -16,6 +16,8 @@
 
   - Number of unique segments always 0 in standard statistics
   http://sourceforge.net/support/tracker.php?aid=2879866
+
+  - Wrong spell checker display if word split to several lines
 
 ----------------------------------------------------------------------
  OmegaT 2.1.0

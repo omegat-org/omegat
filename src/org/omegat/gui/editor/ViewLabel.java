@@ -32,8 +32,10 @@ import java.awt.Shape;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Element;
+import javax.swing.text.JTextComponent;
 import javax.swing.text.LabelView;
 import javax.swing.text.Position;
+import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
 import org.omegat.util.Token;
@@ -85,7 +87,16 @@ public class ViewLabel extends LabelView {
         if (spellBegin < spellEnd) {
             // is need spell checking ?
             try {
+                /*
+                 * Find word boundaries. It required if word splitted to several
+                 * lines.
+                 */
+                JTextComponent c = doc.controller.editor;
+                spellBegin = Utilities.getWordStart(c, spellBegin);
+                spellEnd = Utilities.getWordEnd(c, spellEnd);
+
                 String text = doc.getText(spellBegin, spellEnd - spellBegin);
+
                 Token[] words = Core.getTokenizer().tokenizeWordsForSpelling(
                         text);
                 for (Token w : words) {
@@ -93,14 +104,16 @@ public class ViewLabel extends LabelView {
                      * Document can merge several 'insert's into one element,
                      * so, direction chars could be added to word.
                      */
-
                     if (doc.controller.spellCheckerThread.isIncorrect(text
                             .substring(w.getOffset(), w.getOffset()
                                     + w.getLength()))) {
-                        Rectangle b = modelToView(spellBegin + w.getOffset(),
-                                a, Position.Bias.Forward).getBounds();
-                        Rectangle e = modelToView(
-                                spellBegin + w.getOffset() + w.getLength(), a,
+                        int posBegin = Math.max(spellBegin + w.getOffset(),
+                                getStartOffset());
+                        int posEnd = Math.min(spellBegin + w.getOffset()
+                                + w.getLength(), getEndOffset());
+                        Rectangle b = modelToView(posBegin, a,
+                                Position.Bias.Forward).getBounds();
+                        Rectangle e = modelToView(posEnd, a,
                                 Position.Bias.Backward).getBounds();
                         Rectangle line = new Rectangle();
                         line.x = b.x;

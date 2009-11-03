@@ -24,6 +24,7 @@
 
 package org.omegat.convert.v20to21.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -119,4 +120,26 @@ public class OneFilter {
     public void setOn(boolean value) {
         on = value;
     }
+    
+    /** Holds options of the filter. */
+    private Serializable options = null;
+
+    /**
+     * Returns filter's options.
+     * @return Filter options object.
+     */
+    public Serializable getOptions()
+    {
+        return this.options;
+    }
+
+    /**
+     * Setter for property options.
+     * @param options New value of property options.
+     */
+    public void setOptions(Serializable options)
+    {
+        this.options = options;
+    }
+    
 }

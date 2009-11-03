@@ -113,6 +113,8 @@ public class Convert20to21 {
                 "org.omegat.convert.v20to21.data.");
         res = res.replace("org.omegat.filters2.",
                 "org.omegat.convert.v20to21.data.");
+        res = res.replace("org.omegat.filters3.",
+                "org.omegat.convert.v20to21.data.");
         return res;
     }
 }

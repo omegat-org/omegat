@@ -23,7 +23,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **************************************************************************/
 
-package org.omegat.convert.v20to21.data.html2;
+package org.omegat.convert.v20to21.data;
 
 import java.io.Serializable;
 

@@ -27,12 +27,16 @@ import gen.core.filters.Files;
 import gen.core.filters.Filter;
 import gen.core.filters.Filters;
 
+import java.beans.BeanInfo;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.beans.XMLDecoder;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -79,6 +83,20 @@ public class Convert20to21 {
                 io.setSourceEncoding(i.getSourceEncoding());
                 io.setTargetEncoding(i.getTargetEncoding());
             }
+            Serializable opts = f.getOptions();
+            if (opts != null) {
+                BeanInfo bi = Introspector.getBeanInfo(opts.getClass());
+                for (PropertyDescriptor prop : bi.getPropertyDescriptors()) {
+                    if ("class".equals(prop.getName())) {
+                        continue;
+                    }
+                    Object value = prop.getReadMethod().invoke(opts);
+                    Filter.Option op = new Filter.Option();
+                    op.setName(prop.getName());
+                    op.setValue(value.toString());
+                    fo.getOption().add(op);
+                }
+            }
         }
 
         JAXBContext CTX = JAXBContext.newInstance(Filters.class);
@@ -109,12 +127,22 @@ public class Convert20to21 {
             rd.close();
         }
         String res = r.toString();
-        res = res.replace("org.omegat.filters2.master.",
-                "org.omegat.convert.v20to21.data.");
-        res = res.replace("org.omegat.filters2.",
-                "org.omegat.convert.v20to21.data.");
-        res = res.replace("org.omegat.filters3.",
-                "org.omegat.convert.v20to21.data.");
+        res = res.replace("org.omegat.filters2.master.Filters",
+                "org.omegat.convert.v20to21.data.Filters");
+        res = res.replace("org.omegat.filters2.master.OneFilter",
+                "org.omegat.convert.v20to21.data.OneFilter");
+        res = res.replace("org.omegat.filters2.Instance",
+                "org.omegat.convert.v20to21.data.Instance");
+        res = res.replace("org.omegat.filters2.html2.HTMLOptions",
+                "org.omegat.convert.v20to21.data.HTMLOptions");
+        res = res.replace("org.omegat.filters2.text.TextOptions",
+                "org.omegat.convert.v20to21.data.TextOptions");
+        res = res.replace("org.omegat.filters3.xml.opendoc.OpenDocOptions",
+                "org.omegat.convert.v20to21.data.OpenDocOptions");
+        res = res.replace("org.omegat.filters3.xml.openxml.OpenXMLOptions",
+                "org.omegat.convert.v20to21.data.OpenXMLOptions");
+        res = res.replace("org.omegat.filters3.xml.xhtml.XHTMLOptions",
+                "org.omegat.convert.v20to21.data.XHTMLOptions");
         return res;
     }
 }

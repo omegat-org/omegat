@@ -1,7 +1,7 @@
 <html>
 <head>
-  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <link type="text/css" href="./OmegaT.css" rel="stylesheet">
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
 
   <title>The User Interface - OmegaT 2.0 User Manual</title>
 </head>
@@ -115,7 +115,7 @@
                     </li>
 
                     <li>
-                      <p><a href="#wildcards_regexp">Wildcards and regular
+                      <p><a href="#wildcards_regexp">Wild cards and regular
                       expressions</a></p>
                     </li>
 
@@ -154,8 +154,6 @@
     <tbody>
       <tr>
         <td width="24%">
-          <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
-
           <p><strong>OmegaT main window</strong></p>
         </td>
 
@@ -362,10 +360,10 @@
     </tbody>
   </table>
   <hr>
+  <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
 
   <h2>OmegaT main window</h2><img src="images/OmegaT_panes.png" name="grafika1"
-  alt="OmegaT panes" id="grafika1" style=
-  "border: 0px solid ; width: 719px; height: 647px;"><br clear="left">
+  alt="OmegaT panes" id="grafika1" border="0"><br clear="left">
 
   <p><br>
   <br></p>
@@ -383,7 +381,7 @@
   available window space.<br>
   <img src="images/Restore.gif" name="graphics3" alt="Restore" id="graphics3"
   align="bottom" border="0" height="18" width="18"> puts the pane back where it
-  was before before it was minimized or maximized.<br>
+  was before it was minimized or maximized.<br>
   <img src="images/Undock.gif" name="graphics4" alt="Undock" id="graphics4"
   align="bottom" border="0" height="18" width="18"> detaches the pane from the
   main window to a separate window of its own.<br>
@@ -396,6 +394,41 @@
   pane on the foreground. The separators between the panes can be dragged to
   resize panes.</p>
 
+  <p>The counters&nbsp; in the lower right corner keep track of the progress of
+  the translation:</p>
+
+  <p><img alt="main menu counters" title="main menu counters" src=
+  "images/Main_pane_counters.png"></p>
+
+  <table summary="" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td>31/34</td>
+
+        <td>number of segments -&nbsp; translated / total, for the current
+        file</td>
+      </tr>
+
+      <tr>
+        <td>2530/2605</td>
+
+        <td>number of unique segments - translated / total in the project</td>
+      </tr>
+
+      <tr>
+        <td>3196</td>
+
+        <td>total number of segments (including repeats) in the project</td>
+      </tr>
+
+      <tr>
+        <td>39/53</td>
+
+        <td>number of words in the source and in the target segment&nbsp;</td>
+      </tr>
+    </tbody>
+  </table><br>
+
   <h3><a name="Editor" id="Editor"></a>Editor pane</h3>
 
   <p>Here you'll type and edit the translation. Editor pane displays the text
@@ -403,9 +436,9 @@
   displayed translated, and the text not yet translated is displayed in the
   original language. The displayed text is split into segments, and you may
   scroll through the document and double-click on any segment to edit it. In
-  the above case the already translated segments are shown in yellow, but you
-  may change the setup to suit your preferences (see menu <a href=
-  "menu.html">View).</a></p>
+  the above case the already translated segments are not explicitely marked;
+  you may change however the setup to suit your preferences - for instance,
+  mark them in yellow (see menu <a href="menu.html">View).</a></p>
 
   <p>One of the segments is the active segment. It is the only one that is
   displayed in two parts: the upper part is in the original language, in bold
@@ -431,46 +464,46 @@
   <p>See <a href="translationEditing.html">Translation editing</a> for more
   details.</p>
 
-  <h3><a name="Match" id="Match"></a>Match viewer</h3><img src=
-  "images/MatchesPane.png" name="grafika2" alt="OmegaT Match pane" id=
-  "grafika2" align="left" border="0" height="356" width="417"><br clear="left">
+  <h3><a name="Match" id="Match"></a>Match viewer</h3>Match viewer shows the
+  most similar segments from <a href="translationMemories.html">translation
+  memories</a>, both from project translation memory created while you
+  translate your project, and from legacy translation memories you import from
+  your earlier jobs, or you may receive from your client or translation
+  agency.<br>
+  <img src="images/MatchesPane.png" name="grafika2" alt="OmegaT Match pane" id=
+  "grafika2" align="left" border="0"><br clear="left">
 
-  <p><br>
-  <br></p>
-
-  <p>Match viewer shows the most similar segments from <a href=
-  "translationMemories.html">translation memories</a>, both from project
-  translation memory created while you translate your project, and from legacy
-  translation memories you import from your earlier jobs, or you may receive
-  from your client or translation agency.</p>
+  <p><br></p>
 
   <p>When you move to the next segment, the first fuzzy match (the one with the
-  best matching percentage) is automatically selected. You may <a href=
-  "menu.html#shortcuts">select</a> another one by pressing <code>Ctrl+2</code>,
-  <code>3</code>, <code>4</code>, or <code>5.</code>Of course, pressing
-  <code>Ctrl+5</code> will do nothing, if there is no match #5.</p>
-
-  <p>To use the <strong>selected</strong> match in your translation, use
+  best matching percentage) is automatically selected. The selected fuzzy match
+  will be highlighted in <strong>bold</strong>, words that are missing from the
+  segment you translate will be colored in <strong><font color=
+  "#0000FF">blue</font></strong> and word adjacent to missing parts in
+  <font color="#00FF00"><b>green</b></font>. &nbsp;You may <a href=
+  "menu.html#shortcuts">select</a> a different match by pressing
+  <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, or <code>5.</code>Of
+  course, pressing <code>Ctrl+5</code> will do nothing, if there is no match
+  #5. To use the <strong>selected</strong> match in your translation, use
   <code><a href="menu.html#shortcuts">Ctrl+R</a></code> to replace the target
   field with that match or use <code><a href=
-  "menu.html#shortcuts">Ctrl+I</a></code> to insert it at the cursor
-  position.</p>
+  "menu.html#shortcuts">Ctrl+I</a></code> to insert it at the cursor position.
+  &nbsp;</p>
 
   <p>The matching percentage is roughly equivalent to taking the number of
-  common words in the matched and the matching segment and dividing by the
-  number of words in the longest of the two. The selected fuzzy match will be
-  highlighted in <strong>bold</strong>, words that are missing from the segment
-  you translate will be colored in <strong><font color=
-  "#0000FF">blue</font></strong> and word adjacent to missing parts in
-  <font color="#00FF00"><b>green</b></font>. In the above example the source
-  segment is <strong><i>Information about Java &amp; OmegaT.</i></strong> The
-  top match is 75%, because 3 out of 4 words (with &amp; getting ignored)
-  match. The line with the matching percentage also includes to source TMX,
-  where the match has been found. If there's no file name displayed, the source
-  is the default project translation memory. Orphan segments (the match #4)
-  describe segments in the default project translation memory without the
-  corresponding source segment.<br>
-  <br></p>
+  common words in the matched and the matching segment and dividing it by the
+  number of words in the longer of the two. The words can be reduced to their
+  stems with a help of a tokenizer, or they can be taken &nbsp;"as is"&nbsp; -
+  this is the first two percentages below the match. In the above case (46/46)
+  they are equal, as the tokenizer has not been used. The third&nbsp;metric
+  (39% in the above example) takes into account the differences in&nbsp; tags
+  and punctuation marks as well.&nbsp;</p>
+
+  <p>&nbsp;If there's no file name displayed, the source is the default project
+  translation memory. Orphan segments (the match #1) mark segments in the
+  default project translation memory without a corresponding text in the source
+  files. &nbsp;In the above case, the original sentence, translated already
+  with OmegaT, has been edited .<br></p>
 
   <h3><a name="Glossary" id="Glossary"></a>Glossary</h3>
 
@@ -480,8 +513,8 @@
   of terms found in the current segment, but it only shows it for reference
   purposes, and does not allow to insert or replace the term with its
   translation.</p><img src="images/Glossary_pane.png" name="grafika3" alt=
-  "OmegaT Glossary pane" id="grafika3" align="left" border="0" height="150"
-  width="328"><br clear="left">
+  "OmegaT Glossary pane" id="grafika3" align="left" border="0"><br clear=
+  "left">
 
   <p><br></p>
 
@@ -489,8 +522,8 @@
   it is considered important to have the translated document look similar to
   the original.</i>”, and two words in it, document and translation were found
   in the glossary file. OmegaT also supports multi-word terms, but in a very
-  basic manner: if both words of a term are found in current segment, the term
-  will be displayed.</p><br>
+  basic manner: if both words of a term are found in the current segment, the
+  term will be displayed.</p><br>
 
   <h3><a name="Dictionaries" id="Dictionaries"></a>Dictionaries</h3>
 
@@ -619,7 +652,7 @@
   within any folder, but bear in mind that OmegaT can search only in <a href=
   "filesToTranslate.html">files it supports</a>.</p>
 
-  <h3><a name="wildcards_regexp" id="wildcards_regexp"></a>Wildcards and
+  <h3><a name="wildcards_regexp" id="wildcards_regexp"></a>Wild cards and
   regular expressions</h3>
 
   <p>Searches support the <a href="searches.html#usingwildcards">wild card
@@ -652,8 +685,8 @@
   with a link to the segment and its source and target contents:</p>
 
   <p><img src="images/TagValidator.png" name="grafika4" alt=
-  "OmegaT Tag Validator" id="grafika4" align="left" border="0" height="318"
-  width="556"><br clear="left">
+  "OmegaT Tag Validator" id="grafika4" align="left" border="0"><br clear=
+  "left">
   <br>
   <br></p>
 
@@ -667,7 +700,7 @@
 
   <p><a href="formattedText.html#intro">Tag</a> errors are <a href=
   "formattedText.html#tag_operation">tag manipulations</a> in the translation
-  that do not reproduce the same tag order and number as in the original
+  that do not reflect the number of&nbsp; tags and their order in the original
   segment. Some tag manipulations are necessary and are benign, some will cause
   problems when the translated document is created. Tags generally represent
   some kind of formatting in the original text. <strong>Simplifying the

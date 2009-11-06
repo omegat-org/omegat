@@ -99,7 +99,7 @@ public class RealProject implements IProject
     /**
      * Storage for orphaned segments.
      */
-    private List<Pair> orphanedMemory;
+    private Map<String, String> orphanedMemory;
 
     /**
      * Storage for translation for current project.
@@ -132,7 +132,7 @@ public class RealProject implements IProject
         m_legacyTMs = new ArrayList<LegacyTM>();
         m_orphanedList = new ArrayList<TransMemory>();
         transMemories = new TreeMap<String, List<Pair>>();
-        orphanedMemory = new ArrayList<Pair>();
+        orphanedMemory = new HashMap<String, String>();
         translations = new HashMap<String, String>();
         
         if (isNewProject) {
@@ -709,7 +709,7 @@ public class RealProject implements IProject
                     /*
                      * Entry not found in source files - orphaned.
                      */
-                    orphanedMemory.add(new Pair(src, trans));
+                    orphanedMemory.put(src, trans);
                 } else {
                     se.setTranslation(trans);
                     

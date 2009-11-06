@@ -24,33 +24,36 @@
 
 package org.omegat.gui.filters2;
 
+import gen.core.filters.Files;
+import gen.core.filters.Filter;
+
 import java.awt.Dialog;
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;     // HP
-import java.awt.event.KeyEvent;        // HP
 import java.awt.Toolkit;
-import java.lang.reflect.Constructor;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;         // HP
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;          // HP
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
+
 import org.omegat.filters2.AbstractFilter;
-import org.omegat.filters2.Instance;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.OneFilter;
-import org.omegat.filters2.master.Filters;
+import org.omegat.filters2.master.OneFilterTableModel;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Editor for a single filter.
@@ -58,25 +61,17 @@ import org.omegat.util.StaticUtils;
  *
  * @author Maxym Mykhalchuk
  */
-public class FilterEditor extends JDialog implements ListSelectionListener
-{
+public class FilterEditor extends JDialog implements ListSelectionListener {
     
-    /** A return status code - returned if Cancel button has been pressed */
-    public static final int RET_CANCEL = 0;
-    /** A return status code - returned if OK button has been pressed */
-    public static final int RET_OK = 1;
+    private Filter filter;    
     
-    private Filters filters;
-    private int index;
-    private OneFilter filter;    
+    public Filter result;    
     
     /** Creates new form SingleFilterEditor */
-    public FilterEditor(Dialog parent, Filters filters, int index)
+    public FilterEditor(Dialog parent, Filter filter)
     {
         super(parent, true);
-        this.filter = filters.getFilter(index);
-        this.filters = filters;
-        this.index = index;
+        this.filter = FilterMaster.getInstance().cloneFilter(filter);
         
         // HP
         //  Handle escape key to close the window
@@ -95,9 +90,11 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         
         initComponents();
         
-        fileFormatTextField.setText(filter.getHumanName());
-        if( filter.getHint()!=null && filter.getHint().length()!=0 )
-            hintTextArea.setText(filter.getHint());
+        AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+                filter.getClassName());
+        fileFormatTextField.setText(f.getFileFormatName());
+        if (!StringUtil.isEmpty(f.getHint()))
+            hintTextArea.setText(f.getHint());
         else
             hintTextArea.setVisible(false);
         
@@ -122,12 +119,6 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         pack();
         Dimension dialogSize = getSize();
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
-    }
-    
-    /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
-    public int getReturnStatus()
-    {
-        return returnStatus;
     }
     
     private JComboBox encodingComboBox()
@@ -272,7 +263,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
 
         jPanel3.setLayout(new java.awt.GridBagLayout());
 
-        instances.setModel(filter);
+        instances.setModel(new OneFilterTableModel(filter));
         instancesScrollPane.setViewportView(instances);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -369,7 +360,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_removeButtonActionPerformed
     {//GEN-HEADEREND:event_removeButtonActionPerformed
         int row = instances.getSelectedRow();
-        Instance instance = filter.getInstance(row);
+        Files instance = filter.getFiles().get(row);
         if( JOptionPane.YES_OPTION ==
                 JOptionPane.showConfirmDialog(this, 
                 StaticUtils.format( OStrings.getString("FILTEREDITOR_really_delete_filter_instance"), new Object[] { instance.getSourceFilenameMask() }),
@@ -377,7 +368,8 @@ public class FilterEditor extends JDialog implements ListSelectionListener
                     JOptionPane.YES_NO_OPTION,
                     JOptionPane.QUESTION_MESSAGE) )
         {
-            filter.removeInstance(row);
+            filter.getFiles().remove(row);
+            instances.setModel(new OneFilterTableModel(filter));
         }
     }//GEN-LAST:event_removeButtonActionPerformed
 
@@ -385,13 +377,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener
     {//GEN-HEADEREND:event_toDefaultsButtonActionPerformed
         try
         {
-            Class<?> filterClass = Class.forName(filter.getClassName());
-            boolean fromPlugin = filter.isFromPlugin();
-            Constructor<?> filterConstructor = filterClass.getConstructor((Class[])null);
-            AbstractFilter filterObject = (AbstractFilter)filterConstructor.newInstance((Object[])null);
-            filter = new OneFilter(filterObject, fromPlugin);
-            filters.setFilter(index, filter);
-            instances.setModel(filter);
+            filter = FilterMaster.getInstance().getDefaultSettingsFromFilter(
+                    filter.getClassName());
+            instances.setModel(new OneFilterTableModel(filter));
         }
         catch( Exception e )
         {
@@ -401,30 +389,36 @@ public class FilterEditor extends JDialog implements ListSelectionListener
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addButtonActionPerformed
     {//GEN-HEADEREND:event_addButtonActionPerformed
+        AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+                filter.getClassName());
+
         InstanceEditor ie = new InstanceEditor(this, 
-                filter.isSourceEncodingVariable(), 
-                filter.isTargetEncodingVariable(), 
-                filter.getHint());
+                f.isSourceEncodingVariable(), 
+                f.isTargetEncodingVariable(), 
+                f.getHint());
         ie.setVisible(true);
         if( ie.getReturnStatus()==InstanceEditor.RET_OK )
         {
-            filter.addInstance(
-                    new Instance(
-                    ie.getSourceFilenameMask(),
-                    ie.getSourceEncoding(),
-                    ie.getTargetEncoding(),
-                    ie.getTargetFilenamePattern())
-                    );
+            Files ff=new Files();
+            ff.setSourceEncoding(ie.getSourceEncoding());
+            ff.setSourceFilenameMask(ie.getSourceFilenameMask());
+            ff.setTargetEncoding(ie.getTargetEncoding());
+            ff.setTargetFilenamePattern(ie.getTargetFilenamePattern());
+            filter.getFiles().add(ff);
+            instances.setModel(new OneFilterTableModel(filter));
         }
     }//GEN-LAST:event_addButtonActionPerformed
     
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_editButtonActionPerformed
     {//GEN-HEADEREND:event_editButtonActionPerformed
         int row = instances.getSelectedRow();
+
+        AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+                filter.getClassName());
         InstanceEditor ie = new InstanceEditor(this, 
-                filter.isSourceEncodingVariable(), 
-                filter.isTargetEncodingVariable(), 
-                filter.getHint(),
+                f.isSourceEncodingVariable(), 
+                f.isTargetEncodingVariable(), 
+                f.getHint(),
                 instances.getModel().getValueAt(row, 0).toString(),
                 instances.getModel().getValueAt(row, 1).toString(), 
                 instances.getModel().getValueAt(row, 2).toString(),
@@ -432,33 +426,32 @@ public class FilterEditor extends JDialog implements ListSelectionListener
         ie.setVisible(true);
         if( ie.getReturnStatus()==InstanceEditor.RET_OK )
         {
-            filter.setInstance(
-                    row, 
-                    new Instance(
-                    ie.getSourceFilenameMask(),
-                    ie.getSourceEncoding(),
-                    ie.getTargetEncoding(),
-                    ie.getTargetFilenamePattern())
-                    );
+            Files ff=new Files();
+            ff.setSourceEncoding(ie.getSourceEncoding());
+            ff.setSourceFilenameMask(ie.getSourceFilenameMask());
+            ff.setTargetEncoding(ie.getTargetEncoding());
+            ff.setTargetFilenamePattern(ie.getTargetFilenamePattern());
+            filter.getFiles().set(row, ff);
+            instances.setModel(new OneFilterTableModel(filter));
         }
     }//GEN-LAST:event_editButtonActionPerformed
         
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_okButtonActionPerformed
-        doClose(RET_OK);
+        doClose(filter);
     }//GEN-LAST:event_okButtonActionPerformed
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelButtonActionPerformed
-        doClose(RET_CANCEL);
+        doClose(null);
     }//GEN-LAST:event_cancelButtonActionPerformed
     
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_closeDialog
-        doClose(RET_CANCEL);
+        doClose(null);
     }//GEN-LAST:event_closeDialog
     
-    private void doClose(int retStatus)
+    private void doClose(Filter r)
     {
-        returnStatus = retStatus;
+        result = r;
         setVisible(false);
         dispose();
     }
@@ -480,7 +473,4 @@ public class FilterEditor extends JDialog implements ListSelectionListener
     private javax.swing.JButton removeButton;
     private javax.swing.JButton toDefaultsButton;
     // End of variables declaration//GEN-END:variables
-    
-    private int returnStatus = RET_CANCEL;
-    
 }

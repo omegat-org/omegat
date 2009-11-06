@@ -251,6 +251,10 @@ public class HTMLFilter2 extends AbstractFilter
     {
         return true;
     }
+    
+    public Class getOptionsClass() {
+        return HTMLOptions.class;
+    }
 
     /**
      * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.

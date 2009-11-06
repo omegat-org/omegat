@@ -213,5 +213,9 @@ public class TextFilter extends AbstractFilter
     {
         return true;
     }
+    
+    public Class getOptionsClass() {
+        return TextOptions.class;
+    }
 
 }

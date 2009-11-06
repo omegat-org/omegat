@@ -29,8 +29,6 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
@@ -42,8 +40,6 @@ import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
-import org.omegat.filters2.AbstractFilter;
-import org.omegat.filters2.TranslationException;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
 
@@ -154,55 +150,6 @@ public final class PluginUtils
         {
             plugins.add(filterList);
         }
-    }
-    
-    
-    /** 
-     * Utility Method to instantiate a filter.
-     * 
-     * @param filter OneFilter object with information about a filter.
-     * @return       AbstractFilter object ready for processing file(s).
-     * @throws       TranslationException Iff any error happens.
-     */
-    public static AbstractFilter instantiateFilter(OneFilter filter)
-            throws TranslationException
-    {
-        AbstractFilter filterObject = null;
-        try
-        {
-            Class<?> filterClass;
-            if( filter.isFromPlugin() )
-            {
-                ClassLoader plugins_cl = getPluginsClassloader();
-                filterClass = plugins_cl.loadClass(filter.getClassName());
-            }
-            else
-                filterClass = Class.forName(filter.getClassName());
-            Constructor<?> filterConstructor = filterClass.getConstructor((Class[])null);
-            filterObject = (AbstractFilter)filterConstructor.newInstance((Object[])null);
-            filterObject.setOptions(filter.getOptions());
-        }
-        catch( ClassNotFoundException cnfe )
-        {
-            throw new TranslationException(cnfe.toString());
-        }
-        catch( NoSuchMethodException nsme )
-        {
-            throw new TranslationException(nsme.toString());
-        }
-        catch( InstantiationException ie )
-        {
-            throw new TranslationException(ie.toString());
-        }
-        catch ( IllegalAccessException iae )
-        {
-            throw new TranslationException(iae.toString());
-        }
-        catch( InvocationTargetException ite )
-        {
-            throw new TranslationException(ite.getCause().toString());
-        }
-        return filterObject;
     }
     
     /** Returns the classloader of the filter plugins. */

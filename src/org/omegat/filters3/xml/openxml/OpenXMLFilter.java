@@ -362,6 +362,10 @@ public class OpenXMLFilter extends AbstractFilter
         return true;
     }
     
+    public Class getOptionsClass() {
+        return OpenXMLOptions.class;
+    }
+
     /**
      * OpenXML Filter shows a <b>modal</b> dialog to edit its own options.
      * 

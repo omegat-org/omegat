@@ -165,6 +165,10 @@ public class XHTMLFilter extends XMLFilter
         return true;
     }
     
+    public Class getOptionsClass() {
+        return XHTMLOptions.class;
+    }
+    
     /**
      * XHTML Filter shows a <b>modal</b> dialog to edit its own options.
      * 

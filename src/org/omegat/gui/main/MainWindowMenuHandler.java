@@ -500,8 +500,10 @@ public class MainWindowMenuHandler {
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
         FiltersCustomizer dlg = new FiltersCustomizer(mainWindow);
         dlg.setVisible(true);
-        if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
+        if (dlg.result != null) {
             // saving config
+            FilterMaster.getInstance().setConfig(dlg.result);
+            FilterMaster.getInstance().applyOptions();
             FilterMaster.getInstance().saveConfig();
 
             if (Core.getProject().isProjectLoaded()) {
@@ -511,9 +513,6 @@ public class MainWindowMenuHandler {
                 if (res == JOptionPane.YES_OPTION)
                     ProjectUICommands.projectReload();
             }
-        } else {
-            // reloading config from disk
-            FilterMaster.getInstance().loadConfig();
         }
     }
 

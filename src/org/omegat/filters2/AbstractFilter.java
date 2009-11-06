@@ -223,6 +223,10 @@ public abstract class AbstractFilter
         return false;
     }
     
+    public Class getOptionsClass() {
+        return null;
+    }
+    
     /** Holds filter's options. */
     private Serializable options = null;
     

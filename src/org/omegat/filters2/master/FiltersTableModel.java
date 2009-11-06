@@ -24,14 +24,12 @@
 
 package org.omegat.filters2.master;
 
-import java.io.Serializable;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import gen.core.filters.Filter;
+import gen.core.filters.Filters;
 
 import javax.swing.table.AbstractTableModel;
 
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.util.OStrings;
 
 
@@ -42,86 +40,14 @@ import org.omegat.util.OStrings;
  *
  * @author Maxym Mykhalchuk
  */
-public class Filters extends AbstractTableModel implements Serializable
-{
+public class FiltersTableModel extends AbstractTableModel {
 
-    /**
-     * Create new empty Filters storage backend.
-     * Only for JavaBeans compliance here, do not call!
-     * <p>
-     * Call rather <code>FilterMaster.getInstance().getFilters()</code>.
-     */
-    public Filters()
-    {
+    private final Filters config;
+
+    public FiltersTableModel(final Filters config) {
+        this.config = config;
     }
-    
-    /** Holds the list of available filters. */
-    private List<OneFilter> filters = new ArrayList<OneFilter>();
-    
-    /** 
-     * Returns the number of filters. 
-     */
-    public int filtersSize()
-    {
-        return filters.size();
-    }
-    
-    /**
-     * Returns all the filters as an array.
-     */
-    public OneFilter[] getFilter()
-    {
-        return filters.toArray(new OneFilter[0]);
-    }
-    /**
-     * Sets all filters from the array.
-     */
-    public void setFilter(OneFilter[] filter)
-    {
-        filters = new ArrayList<OneFilter>(Arrays.asList(filter));
-    }
-    
-    /**
-     * Returns a filter by index.
-     */
-    public OneFilter getFilter(int index)
-    {
-        return filters.get(index);
-    }
-    /**
-     * Sets a filter by index.
-     */
-    public void setFilter(int index, OneFilter filter)
-    {
-        while( index>=filters.size() )
-            filters.add(null);
-        filters.set(index, filter);
-    }
-    
-    /**
-     * Adds one filter to the list of filters.
-     * <p>
-     * Checks if there's already such a filter installed
-     * (by filter's class name).
-     */
-    public void addFilter(OneFilter filter)
-    {
-        for(OneFilter f : filters)
-            if(f.getClassName().equals(filter.getClassName()))
-                return;
-        filters.add(filter);
-    }
-    /**
-     * Removes one filter from the list of filters.
-     * <p>
-     * It might happen if we loaded the filter from a plugin,
-     * and the plugin is no longer available.
-     */
-    public void removeFilter(int index)
-    {
-        filters.remove(index);
-    }
-    
+
     //////////////////////////////////////////////////////////////////////////
     //  TableModel implementation
     //////////////////////////////////////////////////////////////////////////
@@ -157,29 +83,31 @@ public class Filters extends AbstractTableModel implements Serializable
 
     public int getRowCount()
     {
-        return getFilter().length;
+        return config.getFilter().size();
     }
 
     public Object getValueAt(int rowIndex, int columnIndex)
     {
-        OneFilter filter = getFilter(rowIndex);
+        Filter filter = config.getFilter().get(rowIndex);
         switch( columnIndex )
         {
             case 0:
-                return filter.getHumanName();
+                AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+                        filter.getClassName());
+                return f.getFileFormatName();
             case 1:
-                return new Boolean(filter.isOn());
+                return new Boolean(filter.isEnabled());
         }
         return null;
     }
     
     public void setValueAt(Object aValue, int rowIndex, int columnIndex)
     {
-        OneFilter filter = getFilter(rowIndex);
+        Filter filter = config.getFilter().get(rowIndex);
         switch( columnIndex )
         {
             case 1:
-                filter.setOn(((Boolean)aValue).booleanValue());
+                filter.setEnabled(((Boolean)aValue).booleanValue());
                 break;
             default:
                 throw new IllegalArgumentException(
@@ -197,6 +125,5 @@ public class Filters extends AbstractTableModel implements Serializable
                 return true;
         }
         return false;
-    }
-    
+    }    
 }

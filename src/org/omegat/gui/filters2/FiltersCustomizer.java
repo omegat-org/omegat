@@ -24,23 +24,31 @@
 
 package org.omegat.gui.filters2;
 
+import gen.core.filters.Filter;
+import gen.core.filters.Filters;
+import gen.core.filters.Filter.Option;
+
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;     // HP
-import java.awt.event.KeyEvent;        // HP
 import java.awt.Frame;
 import java.awt.Toolkit;
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+import java.io.Serializable;
+import java.util.List;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
-import javax.swing.JComponent;         // HP
 import javax.swing.JLabel;
-import javax.swing.KeyStroke;          // HP
+import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.filters2.master.OneFilter;
+import org.omegat.filters2.master.FiltersTableModel;
 import org.omegat.util.OStrings;
 
 /**
@@ -53,15 +61,15 @@ import org.omegat.util.OStrings;
  */
 public class FiltersCustomizer extends JDialog implements ListSelectionListener
 {
-    /** A return status code - returned if Cancel button has been pressed */
-    public static final int RET_CANCEL = 0;
-    /** A return status code - returned if OK button has been pressed */
-    public static final int RET_OK = 1;
+    private Filters config;
+    public Filters result;
     
     /** Creates new form FilterCustomizer */
     public FiltersCustomizer(Frame parent)
     {
         super(parent, true);
+        
+        config = FilterMaster.getInstance().cloneConfig();
         
         // HP
         //  Handle escape key to close the window
@@ -81,7 +89,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         initComponents();
         
         getRootPane().setDefaultButton(okButton);
-        filtersTable.setModel(FilterMaster.getInstance().getFilters());
+        filtersTable.setModel(new FiltersTableModel(config));
         filtersTable.getSelectionModel().addListSelectionListener(this);
         
         // hack for "autoresizing" the dialog
@@ -107,16 +115,19 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         else
         {
             editButton.setEnabled(true);
-            optionsButton.setEnabled(FilterMaster.getInstance().getFilters().
-                    getFilter(filtersTable.getSelectedRow()).hasOptions());
+            int fIdx = filtersTable.getSelectedRow();
+            Filter currFilter = config.getFilter().get(fIdx);
+            AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+                    currFilter.getClassName());
+            optionsButton.setEnabled(f.hasOptions());
         }
     }
     
     
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
-    public int getReturnStatus()
+    public Filters getResult()
     {
-        return returnStatus;
+        return result;
     }
     
     /** This method is called from within the constructor to
@@ -272,42 +283,55 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
 
     private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_optionsButtonActionPerformed
     {//GEN-HEADEREND:event_optionsButtonActionPerformed
-        OneFilter filter = FilterMaster.getInstance().getFilters().getFilter(
-                filtersTable.getSelectedRow());
-        filter.changeOptions(this);
+        int fIdx = filtersTable.getSelectedRow();
+        Filter currFilter = config.getFilter().get(fIdx);
+        AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+                currFilter.getClassName());
+
+        Serializable op=FilterMaster.parseOptions(f.getOptionsClass(), currFilter.getOption());
+        Object r = f.changeOptions(this, op);
+        if (r != null) {
+            List<Option> opts = FilterMaster.parseToOptions(r);
+            currFilter.getOption().clear();
+            currFilter.getOption().addAll(opts);
+        }
     }//GEN-LAST:event_optionsButtonActionPerformed
 
     private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toDefaultsButtonActionPerformed
     {//GEN-HEADEREND:event_toDefaultsButtonActionPerformed
-        FilterMaster.getInstance().revertFiltersConfigToDefaults();
-        filtersTable.setModel(FilterMaster.getInstance().getFilters());
+        config = FilterMaster.getInstance().createDefaultFiltersConfig();
+        filtersTable.setModel(new FiltersTableModel(config));
     }//GEN-LAST:event_toDefaultsButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editButtonActionPerformed
         int row = filtersTable.getSelectedRow();
-        FilterEditor editor = new FilterEditor(this, FilterMaster.getInstance().getFilters(), row);
+        FilterEditor editor = new FilterEditor(this, config.getFilter()
+                .get(row));
         editor.setVisible(true);
+        if (editor.result != null) {
+            config.getFilter().set(row, editor.result);
+        }
     }//GEN-LAST:event_editButtonActionPerformed
     
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
-        doClose(RET_OK);
+        doClose(config);
     }//GEN-LAST:event_okButtonActionPerformed
     
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
     {
-        doClose(RET_CANCEL);
+        doClose(null);
     }//GEN-LAST:event_cancelButtonActionPerformed
     
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt)//GEN-FIRST:event_closeDialog
     {
-        doClose(RET_CANCEL);
+        doClose(null);
     }//GEN-LAST:event_closeDialog
     
-    private void doClose(int retStatus)
+    private void doClose(Filters res)
     {
-        returnStatus = retStatus;
+        result = res;
         setVisible(false);
         dispose();
     }
@@ -324,6 +348,4 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
     private javax.swing.JButton optionsButton;
     private javax.swing.JButton toDefaultsButton;
     // End of variables declaration//GEN-END:variables
-    
-    private int returnStatus = RET_CANCEL;
 }

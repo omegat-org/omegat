@@ -37,10 +37,10 @@ import org.omegat.util.StaticUtils;
  */
 public class ConvertConfigs {
     public static void convert() {
-        File oldFilters = new File(StaticUtils.getConfigDir() + "filters.conf");
-        if (oldFilters.exists()) {
-            File newFilters = new File(StaticUtils.getConfigDir()
-                    + "filters.xml");
+        File newFilters = new File(StaticUtils.getConfigDir() + "filters.xml");
+        if (!newFilters.exists()) {
+            File oldFilters = new File(StaticUtils.getConfigDir()
+                    + "filters.conf");
             try {
                 Convert20to21.convertFiltersConfig(oldFilters, newFilters);
             } catch (Exception ex) {

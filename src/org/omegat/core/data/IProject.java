@@ -118,7 +118,7 @@ public interface IProject {
      * Get all translations for current project.
      * @return all translations map
      */
-    Map<String, String> getTranslations();
+    Map<String, TransEntry> getTranslations();
 
     /**
      * Get info about each source file in project. It's unmodifiable list, so,

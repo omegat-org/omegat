@@ -59,7 +59,7 @@ public class NotLoadedProject implements IProject {
         return null;
     }
     
-    public Map<String, String> getTranslations() {
+    public Map<String, TransEntry> getTranslations() {
         return null;
     }
 

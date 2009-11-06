@@ -99,12 +99,12 @@ public class RealProject implements IProject
     /**
      * Storage for orphaned segments.
      */
-    private Map<String, String> orphanedMemory;
+    private Map<String, TransEntry> orphanedMemory;
 
     /**
      * Storage for translation for current project.
      */
-    private Map<String, String> translations;
+    private Map<String, TransEntry> translations;
 
     /** the list of legacy TMX files, each object is the list of string entries. TODO: move to transMemories and orphanedMemory */
     private List<LegacyTM> m_legacyTMs;
@@ -132,8 +132,8 @@ public class RealProject implements IProject
         m_legacyTMs = new ArrayList<LegacyTM>();
         m_orphanedList = new ArrayList<TransMemory>();
         transMemories = new TreeMap<String, List<Pair>>();
-        orphanedMemory = new HashMap<String, String>();
-        translations = new HashMap<String, String>();
+        orphanedMemory = new HashMap<String, TransEntry>();
+        translations = new HashMap<String, TransEntry>();
         
         if (isNewProject) {
             createProject(props);
@@ -709,14 +709,14 @@ public class RealProject implements IProject
                     /*
                      * Entry not found in source files - orphaned.
                      */
-                    orphanedMemory.put(src, trans);
+                    orphanedMemory.put(src, new TransEntry(trans));
                 } else {
                     se.setTranslation(trans);
                     
                     /*
                      * Entry not found in source files - translation.
                      */
-                    translations.put(src, trans);
+                    translations.put(src, new TransEntry(trans));
                 }
             }
             else
@@ -751,7 +751,7 @@ public class RealProject implements IProject
     /**
      * {@inheritDoc}
      */
-    public Map<String, String> getTranslations() {
+    public Map<String, TransEntry> getTranslations() {
         return Collections.unmodifiableMap(translations);
     }
 
@@ -792,7 +792,10 @@ public class RealProject implements IProject
 
         entry.setTranslation(trans);
         m_modifiedFlag = true;
-        String prevTranslation = translations.put(entry.getSrcText(), trans);
+        TransEntry prevTrEntry = translations.put(entry.getSrcText(),
+                new TransEntry(trans));
+        String prevTranslation = prevTrEntry != null ? prevTrEntry.translation
+                : null;
         
         /**
          * Calculate how to statistics should be changed.
@@ -892,7 +895,7 @@ public class RealProject implements IProject
                 // entry doesn't exist yet - create and store it
                 strEntry = new StringEntry(segmentSource);
                 strEntry.setTranslation(segmentTranslation);
-                translations.put(segmentSource, segmentTranslation);
+                translations.put(segmentSource, new TransEntry(segmentTranslation));
                 context.m_strEntryHash.put(segmentSource, strEntry);
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());

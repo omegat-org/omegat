@@ -96,6 +96,7 @@ public class ViewLabel extends LabelView {
                 spellEnd = Utilities.getWordEnd(c, spellEnd);
 
                 String text = doc.getText(spellBegin, spellEnd - spellBegin);
+                text = EditorUtils.removeDirection(text);
 
                 Token[] words = Core.getTokenizer().tokenizeWordsForSpelling(
                         text);

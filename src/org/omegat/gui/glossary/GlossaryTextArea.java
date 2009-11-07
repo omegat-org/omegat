@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
+               2009 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,6 +26,9 @@
 
 package org.omegat.gui.glossary;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import org.omegat.core.Core;
@@ -41,6 +45,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Wildrich Fourie
  */
 public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     /** Glossary manager instance. */
@@ -62,6 +67,8 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
                 .getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
         Core.getMainWindow().addDockable(
                 new DockableScrollPane("GLOSSARY", title, this, true));
+
+        addMouseListener(mouseListener);
     }
 
     @Override
@@ -112,5 +119,35 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     /** Clears up the pane. */
     public void clear() {
         setText("");
+    }
+
+
+    /**
+     * MouseListener for the GlossaryTextArea
+     * If there is text selected in the Glossary it will be inserted in the Editor
+     * upon a right-click.
+     */
+     protected MouseListener mouseListener = new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e)
+        {
+            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3)
+            {
+                insertTerm();
+            }
+        }
+    };
+
+    /**
+     * Inserts the selected text into the EditorTextArea
+     */
+    private void insertTerm()
+    {
+        String selTxt = this.getSelectedText();
+        if(selTxt == null) { /* Just do nothing */}
+        else
+        {
+            Core.getEditor().insertText(selTxt);
+        }
     }
 }

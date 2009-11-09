@@ -89,8 +89,8 @@ public class OpenDocFilter extends AbstractFilter
     {
         if (xmlfilter==null) {
             xmlfilter = new OpenDocXMLFilter();
-            xmlfilter.setParseCallback(entryProcessingCallback);
         }
+        xmlfilter.setParseCallback(entryProcessingCallback);
         // Defining the actual dialect, because at this step 
         // we have the options
         OpenDocDialect dialect = (OpenDocDialect) xmlfilter.getDialect();

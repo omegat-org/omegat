@@ -139,8 +139,8 @@ public class OpenXMLFilter extends AbstractFilter
     {
         if (xmlfilter==null) {
             xmlfilter = new OpenXMLXMLFilter();
-            xmlfilter.setParseCallback(entryProcessingCallback);
         }
+        xmlfilter.setParseCallback(entryProcessingCallback);
         // Defining the actual dialect, because at this step 
         // we have the options
         OpenXMLDialect dialect = (OpenXMLDialect) xmlfilter.getDialect();

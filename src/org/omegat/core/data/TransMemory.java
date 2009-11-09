@@ -37,8 +37,14 @@ public class TransMemory
          target = tar;
          file = f;
      }
+     
+    public TransMemory(String src, String tar) {
+        this.source = src;
+        this.target = tar;
+    }
 
      public String	source;
      public String	target;
+     /** @deprecated */
      public String	file;
 }

@@ -108,17 +108,24 @@ public interface IProject {
     List<LegacyTM> getMemory();
 
     /**
-     * Entries from all /tm/*.tmx files and orphaned from project_save.tmx.
-     * 
-     * @return list of additional memories
-     */
-    List<TransMemory> getTransMemory();
-    
-    /**
      * Get all translations for current project.
      * @return all translations map
      */
     Map<String, TransEntry> getTranslations();
+    
+    /**
+     * Get all translation memories from /tm/ folder.
+     * 
+     * @return translation memories
+     */
+    Map<String, List<TransMemory>> getTransMemories();
+
+    /**
+     * Get orphaned segments.
+     * 
+     * @return orphaned segments
+     */
+    Map<String, TransEntry> getOrphanedSegments();
 
     /**
      * Get info about each source file in project. It's unmodifiable list, so,

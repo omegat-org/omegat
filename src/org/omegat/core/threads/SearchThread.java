@@ -31,6 +31,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -39,6 +40,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
@@ -306,20 +308,42 @@ public class SearchThread extends Thread
 
         // search the TM, if requested
         if (m_tmSearch) {
-            // search all TM entries
-            for (TransMemory tm : Core.getProject().getTransMemory()) {
-                String srcText = tm.source;
-                String locText = tm.target;
+            // search in orphaned
+            String file = OStrings.getString("CT_ORPHAN_STRINGS");
+            for (Map.Entry<String, TransEntry> en : Core.getProject()
+                    .getOrphanedSegments().entrySet()) {
+                String srcText = en.getKey();
+                String locText = en.getValue().translation;
 
                 // if the source or translation contain all
                 // search strings, report the hit
-                if (   searchString(srcText)
-                    || searchString(locText))
-                    foundString(-1, tm.file, srcText, locText);
+                if (searchString(srcText) || searchString(locText)) {
+                    foundString(-1, file, srcText, locText);
+                    // stop searching if the max. nr of hits has been reached
+                    if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                        break;
+                    }
+                }
+            }
+            // search TM entries
+            for (Map.Entry<String, List<TransMemory>> tmEn : Core.getProject()
+                    .getTransMemories().entrySet()) {
+                file = tmEn.getKey();
+                for (TransMemory tm : tmEn.getValue()) {
+                    String srcText = tm.source;
+                    String locText = tm.target;
 
-                // stop searching if the max. nr of hits has been reached
-                if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
-                    break;
+                    // if the source or translation contain all
+                    // search strings, report the hit
+                    if (searchString(srcText) || searchString(locText)) {
+                        foundString(-1, file, srcText, locText);
+                        // stop searching if the max. nr of hits has been
+                        // reached
+                        if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                            break;
+                        }
+                    }
+                }
             }
         }
     }

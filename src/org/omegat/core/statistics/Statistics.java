@@ -110,18 +110,27 @@ public class Statistics {
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);
         }
 
-        /* Travel by TMs. */
-        List<TransMemory> tmList = Core.getProject().getTransMemory();
-        // 'for(int i;;)' much faster than 'for(:)'
-        for (int i = 0; i < tmList.size(); i++) {
-            TransMemory tm = tmList.get(i);
-            Token[] candTokens = tokenizeExactlyWithCache(tokensCache,
-                    tm.source);
+        /* Travel by orphaned. */
+        for (String source : Core.getProject().getOrphanedSegments().keySet()) {
+            Token[] candTokens = tokenizeExactlyWithCache(tokensCache, source);
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
                     strTokensStem, candTokens);
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);
         }
-
+        
+        /* Travel by TMs. */
+        for (List<TransMemory> tmFile : Core.getProject().getTransMemories()
+                .values()) {
+            for (int i = 0; i < tmFile.size(); i++) {
+                TransMemory tm = tmFile.get(i);
+                Token[] candTokens = tokenizeExactlyWithCache(tokensCache,
+                        tm.source);
+                int newSimilarity = FuzzyMatcher.calcSimilarity(
+                        distanceCalculator, strTokensStem, candTokens);
+                maxSimilarity = Math.max(maxSimilarity, newSimilarity);
+            }
+        }
+        
         if (maxSimilarity < 50) {
             // No match. Need to add only first segment. Next segments will
             // be 'repetition'.

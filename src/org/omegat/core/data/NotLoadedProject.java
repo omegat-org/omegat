@@ -75,7 +75,11 @@ public class NotLoadedProject implements IProject {
         return null;
     }
 
-    public List<TransMemory> getTransMemory() {
+    public Map<String, TransEntry> getOrphanedSegments() {
+        return null;
+    }
+    
+    public Map<String, List<TransMemory>> getTransMemories() {
         return null;
     }
 

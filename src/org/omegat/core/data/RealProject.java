@@ -85,7 +85,8 @@ public class RealProject implements IProject
 
     private boolean m_modifiedFlag;
 
-    /** List of all segments in project. */
+    /** List of all segments in project. 
+     * @deprecated */
     private List<SourceTextEntry> m_srcTextEntryArray;
     
     private final StatisticsInfo hotStat = new StatisticsInfo();
@@ -106,13 +107,16 @@ public class RealProject implements IProject
      */
     private Map<String, TransEntry> translations;
 
-    /** the list of legacy TMX files, each object is the list of string entries. TODO: move to transMemories and orphanedMemory */
+    /** the list of legacy TMX files, each object is the list of string entries. TODO: move to transMemories and orphanedMemory 
+     * @deprecated*/
     private List<LegacyTM> m_legacyTMs;
 
-    /** Entries from all /tm/*.tmx files and orphaned from project_save.tmx. TODO: move to transMemories */
+    /** Entries from all /tm/*.tmx files and orphaned from project_save.tmx. TODO: move to transMemories 
+     * @deprecated*/
     private List<TransMemory> m_tmList;
     
-    /** Orphaned entries from project_save.tmx. TODO: move to orphanedMemory */
+    /** Orphaned entries from project_save.tmx. TODO: move to orphanedMemory
+     * @deprecated */
     private List<TransMemory> m_orphanedList;
 
     /** Segments count in project files. */
@@ -760,6 +764,7 @@ public class RealProject implements IProject
     
     /**
      * {@inheritDoc}
+     * @deprecated
      */
     public List<TransMemory>	getTransMemory()
     { return m_tmList;		}

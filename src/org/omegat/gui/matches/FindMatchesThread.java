@@ -27,21 +27,24 @@ package org.omegat.gui.matches;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.LegacyTM;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
@@ -96,8 +99,11 @@ public class FindMatchesThread extends Thread {
     @Override
     public void run() {
         final List<SourceTextEntry> entries = Core.getProject().getAllEntries();
-        final List<LegacyTM> memory = Core.getProject().getMemory();
-        if (entries == null || memory == null) {
+        Map<String, TransEntry> orphaned = Core.getProject()
+                .getOrphanedSegments();
+        Map<String, List<TransMemory>> memories = Core.getProject()
+                .getTransMemories();
+        if (entries == null || memories == null || orphaned == null) {
             // project is closed
             clear();
             return;
@@ -125,9 +131,7 @@ public class FindMatchesThread extends Thread {
         // travel by project entries
         // FIXME: iterate by unique entries, not by all segments
         for (SourceTextEntry candEntry : entries) {
-            if (matcherController.processedEntry != processedEntry) {
-                // Processed entry changed, because user moved to other entry.
-                // I.e. we don't need to find and display data for old entry.
+            if (needStop()) {
                 return;
             }
             if (StringUtil.isEmpty(candEntry.getTranslation())) {
@@ -141,19 +145,22 @@ public class FindMatchesThread extends Thread {
                     null);
         }
 
+        // travel by orphaned
+        String file = OStrings.getString("CT_ORPHAN_STRINGS");
+        for (Map.Entry<String, TransEntry> en : orphaned.entrySet()) {
+            if (needStop()) {
+                return;
+            }
+            processEntry(en.getKey(), en.getValue().translation, file);
+        }
+        
         // travel by translation memories
-        for (LegacyTM mem : memory) {
-            for (StringEntry candEntry : mem.getStrings()) {
-                if (matcherController.processedEntry != processedEntry) {
-                    // Processed entry changed, because user moved to other entry.
-                    // I.e. we don't need to find and display data for old entry.
+        for(Map.Entry<String, List<TransMemory>> en:memories.entrySet()) {
+            for(TransMemory tmen:en.getValue()) {
+                if (needStop()) {
                     return;
                 }
-                if (StringUtil.isEmpty(candEntry.getTranslation())) {
-                    continue;
-                }
-                processEntry(candEntry.getSrcText(),
-                        candEntry.getTranslation(), mem.getName());
+                processEntry(tmen.source, tmen.target, en.getKey());
             }
         }
 
@@ -174,11 +181,21 @@ public class FindMatchesThread extends Thread {
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                if (matcherController.processedEntry == processedEntry) {
+                if (!needStop()) {
                     matcherController.setMatches(result);
                 }
             }
         });
+    }
+    
+    /**
+     * Check if processed entry changed. In this case, we don't need to find and
+     * display data for old entry.
+     * 
+     * @return true if need stop to find
+     */
+    private boolean needStop() {
+        return matcherController.processedEntry != processedEntry;
     }
     
     /**

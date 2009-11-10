@@ -115,10 +115,6 @@ public class RealProject implements IProject
      * @deprecated*/
     private List<TransMemory> m_tmList;
     
-    /** Orphaned entries from project_save.tmx. TODO: move to orphanedMemory
-     * @deprecated */
-    private List<TransMemory> m_orphanedList;
-
     /** Segments count in project files. */
     private List<FileInfo> projectFilesList;
     
@@ -134,7 +130,6 @@ public class RealProject implements IProject
         m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
         m_tmList = new ArrayList<TransMemory>();
         m_legacyTMs = new ArrayList<LegacyTM>();
-        m_orphanedList = new ArrayList<TransMemory>();
         transMemories = new TreeMap<String, List<TransMemory>>();
         orphanedSegments = new HashMap<String, TransEntry>();
         translations = new HashMap<String, TransEntry>();
@@ -148,7 +143,6 @@ public class RealProject implements IProject
         m_srcTextEntryArray = Collections.unmodifiableList(m_srcTextEntryArray);
         m_legacyTMs = Collections.unmodifiableList(m_legacyTMs);
         m_tmList = Collections.unmodifiableList(m_tmList);
-        m_orphanedList = Collections.unmodifiableList(m_orphanedList);
     }
     
     public void saveProjectProperties() throws IOException {
@@ -222,7 +216,6 @@ public class RealProject implements IProject
             m_srcTextEntryArray.clear();
             m_legacyTMs.clear();
             m_tmList.clear();
-            m_orphanedList.clear();
             transMemories.clear();
             translations.clear();
             orphanedSegments.clear();
@@ -704,7 +697,6 @@ public class RealProject implements IProject
                     //	must have changed
                     // remember it anyways
                     TransMemory tm = new TransMemory(src, trans, fname);
-                    m_orphanedList.add(tm);
                     m_tmList.add(tm);
                     se = new StringEntry(src);
                     se.setTranslation(trans); // orphane translation don't count

@@ -38,6 +38,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
 
 /**
@@ -59,7 +60,7 @@ public class TMXWriter {
      */
     public static Map<String, String> prepareTMXData(
             final List<SourceTextEntry> m_srcTextEntryArray,
-            final List<TransMemory> m_orphanedList) {
+            final Map<String, TransEntry> orphanedSegments) {
         Map<String, String> result = new HashMap<String, String>();
         String source = null;
         String target = null;
@@ -70,14 +71,10 @@ public class TMXWriter {
         }
 
         // Write orphan strings. Assume N/A when pseudo-translate.
-        if (m_orphanedList != null) {
-            for (TransMemory transMem : m_orphanedList) {
-                if (transMem.target.length() == 0)
-                    continue;
-                source = transMem.source;
-                target = transMem.target;
-                if (target.length() == 0)
-                    continue;
+        if (orphanedSegments != null) {
+            for (Map.Entry<String, TransEntry> en : orphanedSegments.entrySet()) {
+                source = en.getKey();
+                target = en.getValue().translation;
                 result.put(source, target);
             }
         }

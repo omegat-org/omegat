@@ -407,7 +407,7 @@ public class RealProject implements IProject
         {
             saveProjectProperties();
             
-            Map<String,String> tmx = TMXWriter.prepareTMXData(m_srcTextEntryArray, m_orphanedList);//FIXME: change to new orphanedMap            
+            Map<String,String> tmx = TMXWriter.prepareTMXData(m_srcTextEntryArray, orphanedSegments);//FIXME: change to new orphanedMap            
             TMXWriter.buildTMXFile(s, false, false, m_config, tmx);
             m_modifiedFlag = false;
         }
@@ -713,7 +713,9 @@ public class RealProject implements IProject
                     /*
                      * Entry not found in source files - orphaned.
                      */
-                    orphanedSegments.put(src, new TransEntry(trans));
+                    if (!StringUtil.isEmpty(trans)) {
+                        orphanedSegments.put(src, new TransEntry(trans));
+                    }
                 } else {
                     se.setTranslation(trans);
                     

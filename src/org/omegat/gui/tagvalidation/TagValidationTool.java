@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.ProjectFileData;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IProjectEventListener;
@@ -118,49 +119,53 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             // bugfix for http://sourceforge.net/support/tracker.php?aid=1209839
             if (t == null || t.length() == 0)
                 continue;
-            
-            // PO printf variables should be equal.
-            // we check this by adding the string "index+typespecifier" of every 
-            // found variable to a set.
-            // If the sets of the source and target are not equal, then there is
-            // a problem: either missing or extra variables, or the typespecifier
-            // has changed for the variable at the given index.
-            HashSet<String> printfSourceSet = new HashSet<String>();
-            Matcher printfMatcher = printfPattern.matcher(s);
-            int index=1;
-            while (printfMatcher.find()) {
-                String printfVariable = printfMatcher.group(0);
-                String argumentswapspecifier = printfMatcher.group(1);
-                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
-                    printfSourceSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-1)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
-                } else {
-                    printfSourceSet.add(""+index+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
-                    index++;
+
+            //Extra checks for PO files:
+            ProjectFileData sourceFileData = ste.getSrcFile();
+            if (sourceFileData.name.endsWith(".po") || sourceFileData.name.endsWith(".pot")) { //TODO: check with source-files settings for PO instead of hardcoded?
+                // PO printf variables should be equal.
+                // we check this by adding the string "index+typespecifier" of every 
+                // found variable to a set.
+                // If the sets of the source and target are not equal, then there is
+                // a problem: either missing or extra variables, or the typespecifier
+                // has changed for the variable at the given index.
+                HashSet<String> printfSourceSet = new HashSet<String>();
+                Matcher printfMatcher = printfPattern.matcher(s);
+                int index=1;
+                while (printfMatcher.find()) {
+                    String printfVariable = printfMatcher.group(0);
+                    String argumentswapspecifier = printfMatcher.group(1);
+                    if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
+                        printfSourceSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-1)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                    } else {
+                        printfSourceSet.add(""+index+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                        index++;
+                    }
                 }
-            }
-            HashSet<String> printfTargetSet = new HashSet<String>();
-            printfMatcher = printfPattern.matcher(t);
-            index=1;
-            while (printfMatcher.find()) {
-                String printfVariable = printfMatcher.group(0);
-                String argumentswapspecifier = printfMatcher.group(1);
-                if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
-                    printfTargetSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-1)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
-                } else {
-                    printfTargetSet.add(""+index+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
-                    index++;
+                HashSet<String> printfTargetSet = new HashSet<String>();
+                printfMatcher = printfPattern.matcher(t);
+                index=1;
+                while (printfMatcher.find()) {
+                    String printfVariable = printfMatcher.group(0);
+                    String argumentswapspecifier = printfMatcher.group(1);
+                    if (argumentswapspecifier != null && argumentswapspecifier.endsWith("$")) {
+                        printfTargetSet.add(""+argumentswapspecifier.substring(0, argumentswapspecifier.length()-1)+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                    } else {
+                        printfTargetSet.add(""+index+printfVariable.substring(printfVariable.length()-1, printfVariable.length()));
+                        index++;
+                    }
                 }
-            }
-            if (!printfSourceSet.equals(printfTargetSet)) {
-                suspects.add(ste);
-                continue;
-            }
-            // check PO line ending:
-            Boolean s_ends_lf = s.endsWith("\n");
-            Boolean t_ends_lf = t.endsWith("\n");
-            if (s_ends_lf && !t_ends_lf || !s_ends_lf && t_ends_lf) {
-              suspects.add(ste);
-              continue;
+                if (!printfSourceSet.equals(printfTargetSet)) {
+                    suspects.add(ste);
+                    continue;
+                }
+                // check PO line ending:
+                Boolean s_ends_lf = s.endsWith("\n");
+                Boolean t_ends_lf = t.endsWith("\n");
+                if (s_ends_lf && !t_ends_lf || !s_ends_lf && t_ends_lf) {
+                    suspects.add(ste);
+                    continue;
+                }
             }
             // OmegaT tags check:
             // extract tags from src and loc string

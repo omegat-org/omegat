@@ -551,7 +551,7 @@ public class RealProject implements IProject
         
         Set<File> processedFiles = new HashSet<File>();
         
-        List<FileInfo> pfl = new ArrayList<FileInfo>();
+        projectFilesList = new ArrayList<FileInfo>();
         
         int firstEntry = 0;
         for (String filename : srcFileList)
@@ -573,7 +573,10 @@ public class RealProject implements IProject
             m_curFile.name = filename;
             m_curFile.firstEntry = m_srcTextEntryArray.size();
             
-            loadFilesCallback.setCurrentFile(m_curFile);
+            FileInfo fi = new FileInfo();
+            fi.filePath = filepath;
+            
+            loadFilesCallback.setCurrentFile(m_curFile, fi);
             
             boolean fileLoaded = fm.loadFile(filename, processedFiles, loadFilesCallback);
             
@@ -581,16 +584,13 @@ public class RealProject implements IProject
 
             if( fileLoaded && (m_curFile.lastEntry>=m_curFile.firstEntry) )
             {
-                FileInfo fi=new FileInfo();
-                fi.filePath=filepath;
                 fi.firstEntryIndex=m_srcTextEntryArray.size();
                 fi.firstEntryIndexInGlobalList=firstEntry;
                 fi.size=m_srcTextEntryArray.size()-firstEntry;
-                pfl.add(fi);
+                projectFilesList.add(fi);
                 firstEntry=m_srcTextEntryArray.size();
             }
         }
-        projectFilesList = Collections.unmodifiableList(pfl);
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
     }
     
@@ -814,7 +814,7 @@ public class RealProject implements IProject
      * {@inheritDoc}
      */
     public List<FileInfo> getProjectFiles() {
-        return projectFilesList;
+        return Collections.unmodifiableList(projectFilesList);
     }
         
     private class LoadFilesCallback extends ParseEntry {  
@@ -824,6 +824,7 @@ public class RealProject implements IProject
          * so they can have a bigger picture of what's where.
          */
         private ProjectFileData m_curFile;
+        private FileInfo fileInfo;
         private LegacyTM legacyFileTM;
         private List<TransMemory> tmForFile;
 
@@ -832,8 +833,9 @@ public class RealProject implements IProject
             this.context = context;
         }
         
-        protected void setCurrentFile(ProjectFileData file) {
-            m_curFile = file;            
+        protected void setCurrentFile(ProjectFileData file, FileInfo fi) {
+            m_curFile = file;
+            fileInfo = fi;
             legacyFileTM = null;
             tmForFile = null;
         }
@@ -880,9 +882,11 @@ public class RealProject implements IProject
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
             m_srcTextEntryArray.add(srcTextEntry);
+            SourceEntry se = new SourceEntry(srcText);
+            fileInfo.entries.add(se);
         }
 
-        protected void addSegment(String id, int segmentIndex,
+        protected void addSegment(String id, short segmentIndex,
                 String segmentSource, String segmentTranslation, String comment) {
             // if the source string is empty, don't add it to TM
             if (segmentSource.length() == 0
@@ -901,6 +905,8 @@ public class RealProject implements IProject
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
             m_srcTextEntryArray.add(srcTextEntry);
+            SourceEntry se = new SourceEntry(id, segmentIndex, segmentSource);
+            fileInfo.entries.add(se);
         }
         @Override
         public String getTranslation(String id, String source) {

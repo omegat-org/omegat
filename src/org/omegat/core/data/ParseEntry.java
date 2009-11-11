@@ -178,15 +178,15 @@ public abstract class ParseEntry implements IParseCallback {
             List<String> segments = Segmenter.segment(sourceLang, source,
                     spaces, brules);
             if (segments.size() == 1) {
-                addSegment(id, 0, segments.get(0), translation, comment);
+                addSegment(id, (short)0, segments.get(0), translation, comment);
             } else {
-                for (int i = 0; i < segments.size(); i++) {
+                for (short i = 0; i < segments.size(); i++) {
                     String onesrc = segments.get(i);
                     addSegment(id, i, onesrc, null, comment);
                 }             
             }
         } else
-            addSegment(id, 0, source, translation, comment);
+            addSegment(id, (short)0, source, translation, comment);
         // Add systematically the TU as a legacy TMX
         addLegacyTMXEntry(source, translation);
     }
@@ -268,7 +268,7 @@ public abstract class ParseEntry implements IParseCallback {
 
     protected abstract String processSingleEntry(String src);
 
-    protected void addSegment(String id, int segmentIndex,
+    protected void addSegment(String id, short segmentIndex,
             String segmentSource, String segmentTranslation, String comment) {
         processSingleEntry(segmentSource);
     }

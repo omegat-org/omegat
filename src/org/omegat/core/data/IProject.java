@@ -25,6 +25,7 @@
 package org.omegat.core.data;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -138,5 +139,7 @@ public interface IProject {
         public int firstEntryIndex;
         public int firstEntryIndexInGlobalList;
         public int size;
+        
+        public List<SourceEntry> entries = new ArrayList<SourceEntry>();
     }
 }

@@ -36,6 +36,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.OConsts;
@@ -84,8 +85,7 @@ public class CalcStandardStatistics extends LongProcessThread {
 
     public void run() {
         IProject p = Core.getProject();
-        String result = buildProjectStats(p.getAllEntries(), p
-                .getProjectProperties(), null);
+        String result = buildProjectStats(p, null);
         callback.displayData(result);
 
         String internalDir = p.getProjectProperties().getProjectInternal();
@@ -107,17 +107,18 @@ public class CalcStandardStatistics extends LongProcessThread {
      * character count of the project, the total number of unique segments, plus
      * the details for each file.
      */
-    public static String buildProjectStats(
-            final List<SourceTextEntry> m_srcTextEntryArray,
-            final ProjectProperties m_config, final StatisticsInfo hotStat) {
+    public static String buildProjectStats(final IProject project,
+            final StatisticsInfo hotStat) {
 
         StatCount total = new StatCount();
         StatCount remaining = new StatCount();
         StatCount unique = new StatCount();
         StatCount remainingUnique = new StatCount();
 
+        List<SourceTextEntry> entries = project.getAllEntries();
+        
         Map<String, FileData> counts = new TreeMap<String, FileData>();        
-        for (SourceTextEntry ste : m_srcTextEntryArray) {
+        for (SourceTextEntry ste : entries) {
             String src = ste.getStrEntry().getSrcText();
             
             int words = Statistics.numberOfWords(src);
@@ -133,7 +134,8 @@ public class CalcStandardStatistics extends LongProcessThread {
             total.charsWithSpaces += chars;
             
             // add to remaining
-            if (!ste.isTranslated()) {
+            TransEntry tr = project.getTranslations().get(ste.getSrcText());
+            if (tr == null) {
                 remaining.segments++;
                 remaining.words += words;
                 remaining.charsWithoutSpaces += charsNoSpaces;
@@ -150,7 +152,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             numbers.total.words += words;
             numbers.total.charsWithoutSpaces += charsNoSpaces;
             numbers.total.charsWithSpaces += chars;
-            if (!ste.isTranslated()) {
+            if (tr == null) {
                 numbers.remaining.segments++;
                 numbers.remaining.words += words;
                 numbers.remaining.charsWithoutSpaces += charsNoSpaces;
@@ -160,10 +162,10 @@ public class CalcStandardStatistics extends LongProcessThread {
         
         // find unique segments
         Map<String, Integer> uniqueSegment = new HashMap<String, Integer>(
-                m_srcTextEntryArray.size() / 2);
+                entries.size() / 2);
         Set<String> translated = new HashSet<String>(
-                m_srcTextEntryArray.size() / 2);
-        for (SourceTextEntry ste : m_srcTextEntryArray) {
+                entries.size() / 2);
+        for (SourceTextEntry ste : entries) {
             String src = ste.getStrEntry().getSrcText();
             Integer count = uniqueSegment.get(src);
             if (count == null) {
@@ -171,7 +173,8 @@ public class CalcStandardStatistics extends LongProcessThread {
             } else {
                 uniqueSegment.put(src, count + 1);
             }
-            if (ste.isTranslated()) {
+            TransEntry tr = project.getTranslations().get(ste.getSrcText());
+            if (tr != null) {
                 translated.add(src);
             }
         }
@@ -207,7 +210,8 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         // STATISTICS BY FILE
         result.append(OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n");
-        String[][] filesTable = calcFilesTable(m_config, counts);
+        String[][] filesTable = calcFilesTable(project.getProjectProperties(),
+                counts);
         result.append(TextUtil.showTextTable(ftHeaders, filesTable, ftAlign));
 
         if (hotStat != null) {

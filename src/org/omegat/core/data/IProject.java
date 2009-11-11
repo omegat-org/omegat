@@ -140,6 +140,6 @@ public interface IProject {
         public int firstEntryIndexInGlobalList;
         public int size;
         
-        public List<SourceEntry> entries = new ArrayList<SourceEntry>();
+        public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
     }
 }

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2009      Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,6 +25,8 @@
 
 package org.omegat.core.data;
 
+import org.omegat.core.Core;
+
 
 /*
  * Source text entry represents an individual segment for
@@ -32,9 +35,13 @@ package org.omegat.core.data;
  * language strings
  *
  * @author Keith Godfrey
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SourceTextEntry
 {
+    /** Source entry text. */
+    private String src;
+
     /** 
      * Creates a new source text entry.
      *
@@ -49,6 +56,7 @@ public class SourceTextEntry
         m_srcFile = file;
         m_strEntry = str;
         m_entryNum = entryNum;
+        src = str.getSrcText();
     }
     
     /** Returns information about the file this entry belongs to. */
@@ -69,7 +77,7 @@ public class SourceTextEntry
      */
     public String getSrcText()
     {
-        return m_strEntry.getSrcText();
+        return src;
     }
     
     /** 
@@ -78,16 +86,9 @@ public class SourceTextEntry
      */
     public String getTranslation()
     {
-        return m_strEntry.getTranslation();
-    }
-    
-    /** 
-     * Sets the translation 
-     * (shortcut for <code>getStrEntry().setTranslation(t)</code>). 
-     */
-    protected void setTranslation(String t)
-    {
-        m_strEntry.setTranslation(t);
+        // TODO: move outside
+        TransEntry tr = Core.getProject().getTranslations().get(src);
+        return tr != null ? tr.translation : "";
     }
     
     /** 
@@ -96,7 +97,9 @@ public class SourceTextEntry
      */
     public boolean isTranslated()
     {
-        return m_strEntry.isTranslated();
+        // TODO: move outside
+        TransEntry tr = Core.getProject().getTranslations().get(src);
+        return tr != null;
     }
     
     /** Returns the number of this entry is a project. */
@@ -111,4 +114,5 @@ public class SourceTextEntry
     private StringEntry m_strEntry;
     /** Holds the number of this entry in a project. */
     private int m_entryNum;
+
 }

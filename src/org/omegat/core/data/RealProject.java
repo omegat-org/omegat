@@ -190,8 +190,8 @@ public class RealProject implements IProject
             }
 
             // build word count
-            String stat = CalcStandardStatistics.buildProjectStats(
-                    m_srcTextEntryArray, m_config, hotStat);
+            String stat = CalcStandardStatistics.buildProjectStats(this,
+                    hotStat);
             String fn = getProjectProperties().getProjectInternal()
                     + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat);
@@ -430,8 +430,7 @@ public class RealProject implements IProject
         }
 
         // update statistics
-        String stat = CalcStandardStatistics.buildProjectStats(
-                m_srcTextEntryArray, m_config, hotStat);
+        String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
         String fn = getProjectProperties().getProjectInternal()
                 + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, stat);
@@ -686,6 +685,9 @@ public class RealProject implements IProject
         {
             String src = tmx.getSourceSegment(i);
             String trans = tmx.getTargetSegment(i);
+            if (StringUtil.isEmpty(trans)) {
+                continue;
+            }
 
             if (isProject)
             {
@@ -775,7 +777,6 @@ public class RealProject implements IProject
      * {@inheritDoc}
      */
     public void setTranslation(final SourceTextEntry entry, String trans) {
-        entry.setTranslation(trans);
         m_modifiedFlag = true;
 
         TransEntry prevTrEntry = translations.get(entry.getSrcText());
@@ -882,8 +883,7 @@ public class RealProject implements IProject
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
             m_srcTextEntryArray.add(srcTextEntry);
-            SourceEntry se = new SourceEntry(srcText);
-            fileInfo.entries.add(se);
+            fileInfo.entries.add(srcTextEntry);
         }
 
         protected void addSegment(String id, short segmentIndex,
@@ -905,8 +905,7 @@ public class RealProject implements IProject
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
             m_srcTextEntryArray.add(srcTextEntry);
-            SourceEntry se = new SourceEntry(id, segmentIndex, segmentSource);
-            fileInfo.entries.add(se);
+            fileInfo.entries.add(srcTextEntry);
         }
         @Override
         public String getTranslation(String id, String source) {
@@ -923,6 +922,9 @@ public class RealProject implements IProject
         }
 
         public void addLegacyTMXEntry(String source, String translation) {
+            if (StringUtil.isEmpty(translation)) {
+                return;
+            }
             if (legacyFileTM == null) {
                 String fn = StaticUtils.makeFilenameRelative(m_curFile.name,
                         m_config.getSourceRoot());

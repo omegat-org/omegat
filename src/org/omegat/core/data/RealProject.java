@@ -272,7 +272,7 @@ public class RealProject implements IProject
         // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
         try
         {
-            Map<String,String> tmx = TMXWriter.prepareTMXData(m_srcTextEntryArray, null);
+            Map<String,String> tmx = TMXWriter.prepareTMXData(translations, new TreeMap<String, TransEntry>());
             
             // build TMX with OmegaT tags
             String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
@@ -400,7 +400,7 @@ public class RealProject implements IProject
         {
             saveProjectProperties();
             
-            Map<String,String> tmx = TMXWriter.prepareTMXData(m_srcTextEntryArray, orphanedSegments);//FIXME: change to new orphanedMap            
+            Map<String,String> tmx = TMXWriter.prepareTMXData(translations, orphanedSegments);            
             TMXWriter.buildTMXFile(s, false, false, m_config, tmx);
             m_modifiedFlag = false;
         }
@@ -714,7 +714,9 @@ public class RealProject implements IProject
                     /*
                      * Entry not found in source files - translation.
                      */
-                    translations.put(src, new TransEntry(trans));
+                    if (!StringUtil.isEmpty(trans)) {
+                        translations.put(src, new TransEntry(trans));
+                    }
                 }
             }
             else
@@ -773,10 +775,10 @@ public class RealProject implements IProject
      * {@inheritDoc}
      */
     public void setTranslation(final SourceTextEntry entry, String trans) {
-        if( trans==null ) {
+        if (trans == null) {
             trans = "";
         }
-
+//FIXME: change to remove empty translations
         entry.setTranslation(trans);
         m_modifiedFlag = true;
         TransEntry prevTrEntry = translations.put(entry.getSrcText(),
@@ -890,7 +892,10 @@ public class RealProject implements IProject
                 // entry doesn't exist yet - create and store it
                 strEntry = new StringEntry(segmentSource);
                 strEntry.setTranslation(segmentTranslation);
-                translations.put(segmentSource, new TransEntry(segmentTranslation));
+                if (!StringUtil.isEmpty(segmentTranslation)) {
+                    translations.put(segmentSource, new TransEntry(
+                            segmentTranslation));
+                }
                 context.m_strEntryHash.put(segmentSource, strEntry);
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());

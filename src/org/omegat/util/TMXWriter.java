@@ -31,15 +31,12 @@ import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
-import org.omegat.core.data.TransMemory;
 
 /**
  * Class that store TMX (Translation Memory Exchange) files.
@@ -59,24 +56,18 @@ public class TMXWriter {
      * @return map of strings for TMX
      */
     public static Map<String, String> prepareTMXData(
-            final List<SourceTextEntry> m_srcTextEntryArray,
+            final Map<String, TransEntry> translations,
             final Map<String, TransEntry> orphanedSegments) {
-        Map<String, String> result = new HashMap<String, String>();
-        String source = null;
-        String target = null;
-        for (SourceTextEntry ste : m_srcTextEntryArray) {
-            if (ste.isTranslated()) {
-                result.put(ste.getSrcText(), ste.getTranslation());
-            }
+        int sz = translations.size() + orphanedSegments.size();
+        Map<String, String> result = new HashMap<String, String>(sz);
+
+        for (Map.Entry<String, TransEntry> en : translations.entrySet()) {
+            result.put(en.getKey(), en.getValue().translation);
         }
 
         // Write orphan strings. Assume N/A when pseudo-translate.
-        if (orphanedSegments != null) {
-            for (Map.Entry<String, TransEntry> en : orphanedSegments.entrySet()) {
-                source = en.getKey();
-                target = en.getValue().translation;
-                result.put(source, target);
-            }
+        for (Map.Entry<String, TransEntry> en : orphanedSegments.entrySet()) {
+            result.put(en.getKey(), en.getValue().translation);
         }
         return result;
     }

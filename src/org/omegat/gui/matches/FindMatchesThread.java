@@ -45,7 +45,6 @@ import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
 /**
@@ -99,6 +98,7 @@ public class FindMatchesThread extends Thread {
     @Override
     public void run() {
         final List<SourceTextEntry> entries = Core.getProject().getAllEntries();
+        Map<String, TransEntry> translations = Core.getProject().getTranslations();
         Map<String, TransEntry> orphaned = Core.getProject()
                 .getOrphanedSegments();
         Map<String, List<TransMemory>> memories = Core.getProject()
@@ -129,20 +129,15 @@ public class FindMatchesThread extends Thread {
         strTokensAll = Core.getTokenizer().tokenizeAllExactly(processedEntry.getSrcText());// HP: includes non-word tokens
 
         // travel by project entries
-        // FIXME: iterate by unique entries, not by all segments
-        for (SourceTextEntry candEntry : entries) {
+        for (Map.Entry<String, TransEntry> en : translations.entrySet()) {
             if (needStop()) {
                 return;
             }
-            if (StringUtil.isEmpty(candEntry.getTranslation())) {
-                continue;
-            }
-            if (candEntry.getStrEntry() == processedEntry) {
+            if (en.getKey().equals(processedEntry.getSrcText())) {
                 // skip original==original entry comparison
                 continue;
             }
-            processEntry(candEntry.getSrcText(), candEntry.getTranslation(),
-                    null);
+            processEntry(en.getKey(), en.getValue().translation, null);
         }
 
         // travel by orphaned

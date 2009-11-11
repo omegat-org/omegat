@@ -775,14 +775,15 @@ public class RealProject implements IProject
      * {@inheritDoc}
      */
     public void setTranslation(final SourceTextEntry entry, String trans) {
-        if (trans == null) {
-            trans = "";
-        }
-//FIXME: change to remove empty translations
         entry.setTranslation(trans);
         m_modifiedFlag = true;
-        TransEntry prevTrEntry = translations.put(entry.getSrcText(),
-                new TransEntry(trans));
+
+        TransEntry prevTrEntry = translations.get(entry.getSrcText());
+        if (StringUtil.isEmpty(trans)) {
+            translations.remove(entry.getSrcText());
+        } else {
+            translations.put(entry.getSrcText(), new TransEntry(trans));
+        }
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation
                 : null;
         

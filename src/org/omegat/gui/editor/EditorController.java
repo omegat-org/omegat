@@ -52,6 +52,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -559,7 +560,8 @@ public class EditorController implements IEditor {
      */
     private void exportCurrentSegment(final SourceTextEntry ste) {
         String s1 = ste.getSrcText();
-        String s2 = ste.getTranslation();
+        TransEntry te = Core.getProject().getTranslation(ste);
+        String s2 = te != null ? te.translation : "";
 
         FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT); // NOI18N
         FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT); // NOI18N
@@ -637,19 +639,23 @@ public class EditorController implements IEditor {
         if (newTrans != null) {
             // segment was active
             SourceTextEntry entry = m_docSegList[displayedEntryIndex].ste;
+            
+            TransEntry oldTE = Core.getProject().getTranslation(entry);
+            String old_translation = oldTE != null ? oldTE.translation : "";
 
-            String old_translation = entry.getTranslation();
             // update memory
             if (newTrans.equals(entry.getSrcText())
                     && !Preferences
-                            .isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC))
+                            .isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
                 Core.getProject().setTranslation(entry, "");
-            else
+                newTrans = "";
+            } else {
                 Core.getProject().setTranslation(entry, newTrans);
+            }
 
             m_docSegList[displayedEntryIndex].createSegmentElement(false);
 
-            if (!entry.getTranslation().equals(old_translation)) {
+            if (!newTrans.equals(old_translation)) {
                 // find all identical strings and redraw them
 
                 for (int i = 0; i < m_docSegList.length; i++) {
@@ -759,8 +765,7 @@ public class EditorController implements IEditor {
                     + displayedEntryIndex;
             SourceTextEntry ste = Core.getProject().getAllEntries().get(
                     globalEntryIndex);
-            if (ste.getTranslation() == null
-                    || ste.getTranslation().length() == 0) {
+            if (Core.getProject().getTranslation(ste) == null) {
                 // It's untranslated.
                 break;
             }

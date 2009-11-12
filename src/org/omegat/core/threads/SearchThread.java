@@ -293,7 +293,8 @@ public class SearchThread extends Thread
             // get the source and translation of the next entry
             SourceTextEntry ste = dataEngine.getAllEntries().get(i);
             String srcText = ste.getSrcText();
-            String locText = ste.getTranslation();
+            TransEntry te = Core.getProject().getTranslation(ste);
+            String locText = te != null ? te.translation : "";
 
             // if the source or translation contain all
             // search strings, report the hit

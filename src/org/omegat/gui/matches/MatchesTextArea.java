@@ -43,6 +43,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -199,8 +200,10 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
                 String translation = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT, OStrings
                         .getString("WF_DEFAULT_PREFIX"))
                         + thebest.translation;
-                SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
-                if (StringUtil.isEmpty(currentEntry.getTranslation())) {
+                SourceTextEntry currentEntry = Core.getEditor()
+                        .getCurrentEntry();
+                TransEntry te = Core.getProject().getTranslation(currentEntry);
+                if (te == null) {
                     Core.getEditor().replaceEditText(translation);
                 }
             }

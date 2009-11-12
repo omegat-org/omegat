@@ -80,17 +80,6 @@ public class SourceTextEntry
         return src;
     }
     
-    /** 
-     * Returns the translation 
-     * (shortcut for <code>getStrEntry().getTranslation()</code>). 
-     */
-    public String getTranslation()
-    {
-        // TODO: move outside
-        TransEntry tr = Core.getProject().getTranslation(this);
-        return tr != null ? tr.translation : "";
-    }
-    
     /** Returns the number of this entry is a project. */
     public int entryNum()
     { 

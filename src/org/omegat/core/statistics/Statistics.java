@@ -37,6 +37,7 @@ import java.util.Set;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.matching.ISimilarityCalculator;
@@ -44,7 +45,6 @@ import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 
 /**
@@ -81,7 +81,7 @@ public class Statistics {
 
         boolean isFirst = alreadyProcessed.add(ste.getSrcText());
 
-        if (!StringUtil.isEmpty(ste.getTranslation())) {
+        if (Core.getProject().getTranslation(ste) != null) {
             // segment has translation - should be calculated as
             // "Exact matched"
             return PERCENT_EXACT_MATCH;
@@ -99,7 +99,8 @@ public class Statistics {
                 // source entry
                 continue;
             }
-            if (StringUtil.isEmpty(cand.getTranslation())) {
+            TransEntry te = Core.getProject().getTranslation(cand);
+            if (te == null) {
                 // target without translation - skip
                 continue;
             }

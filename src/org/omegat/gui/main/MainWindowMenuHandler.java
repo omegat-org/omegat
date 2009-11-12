@@ -33,6 +33,7 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
@@ -256,10 +257,12 @@ public class MainWindowMenuHandler {
         String selection = Core.getEditor().getSelectedText();
         if (selection == null) {
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            if (Core.getProject().getTranslation(ste) != null)
-                selection = Core.getEditor().getCurrentEntry().getTranslation();
-            else
-                selection = Core.getEditor().getCurrentEntry().getSrcText();
+            TransEntry te = Core.getProject().getTranslation(ste);
+            if (te != null) {
+                selection = te.translation;
+            } else {
+                selection = ste.getSrcText();
+            }
         }
 
         FileUtil.writeScriptFile(selection, OConsts.SELECTION_EXPORT);

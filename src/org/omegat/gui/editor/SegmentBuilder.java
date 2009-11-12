@@ -32,7 +32,9 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.Position;
 import javax.swing.text.SimpleAttributeSet;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.gui.Styles;
@@ -115,14 +117,13 @@ public class SegmentBuilder {
                     offset = doc.getLength();
                 }
 
-                boolean translationExists = ste.getTranslation() != null
-                        && ste.getTranslation().length() > 0;
+                TransEntry trans = Core.getProject().getTranslation(ste);
 
                 int beginOffset = offset;
                 if (isActive) {
-                    createActiveSegmentElement(translationExists);
+                    createActiveSegmentElement(trans);
                 } else {
-                    createInactiveSegmentElement(translationExists);
+                    createInactiveSegmentElement(trans);
                 }
                 int endOffset = offset;
 
@@ -157,19 +158,18 @@ public class SegmentBuilder {
     /**
      * Create method for active segment.
      */
-    private void createActiveSegmentElement(boolean translationExists)
+    private void createActiveSegmentElement(TransEntry trans)
             throws BadLocationException {
 
         addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
 
         String activeText;
-        if (translationExists) {
+        if (trans != null) {
             // translation exist
-            activeText = ste.getTranslation();
+            activeText = trans.translation;
             if (settings.isAutoSpellChecking()) {
                 // spell it
-                doc.controller.spellCheckerThread.addForCheck(ste
-                        .getTranslation());
+                doc.controller.spellCheckerThread.addForCheck(trans.translation);
             }
         } else if (!Preferences
                 .isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
@@ -203,23 +203,23 @@ public class SegmentBuilder {
     /**
      * Create method for inactive segment.
      */
-    private void createInactiveSegmentElement(boolean translationExists)
+    private void createInactiveSegmentElement(TransEntry trans)
             throws BadLocationException {
         if (settings.isDisplaySegmentSources()) {
             addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
         }
 
         boolean needToCheckSpelling = false;
-        if (translationExists) {
+        if (trans!=null) {
             // translation exist
             if (settings.isAutoSpellChecking()) {
                 // spell it
                 needToCheckSpelling = true;
-                doc.controller.spellCheckerThread.addForCheck(ste
-                        .getTranslation());
+                doc.controller.spellCheckerThread
+                        .addForCheck(trans.translation);
             }
             int prevOffset = offset;
-            addInactiveSegPart(false, ste.getTranslation(), settings
+            addInactiveSegPart(false, trans.translation, settings
                     .getTranslatedAttributeSet());
 
             if (needToCheckSpelling) {

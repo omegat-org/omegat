@@ -119,7 +119,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         
         Map<String, FileData> counts = new TreeMap<String, FileData>();        
         for (SourceTextEntry ste : entries) {
-            String src = ste.getStrEntry().getSrcText();
+            String src = ste.getSrcText();
             
             int words = Statistics.numberOfWords(src);
             String noTags = StaticUtils.stripTags(src);
@@ -134,7 +134,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             total.charsWithSpaces += chars;
             
             // add to remaining
-            TransEntry tr = project.getTranslations().get(ste.getSrcText());
+            TransEntry tr = project.getTranslations().get(src);
             if (tr == null) {
                 remaining.segments++;
                 remaining.words += words;
@@ -166,14 +166,14 @@ public class CalcStandardStatistics extends LongProcessThread {
         Set<String> translated = new HashSet<String>(
                 entries.size() / 2);
         for (SourceTextEntry ste : entries) {
-            String src = ste.getStrEntry().getSrcText();
+            String src = ste.getSrcText();
             Integer count = uniqueSegment.get(src);
             if (count == null) {
                 uniqueSegment.put(src, 1);
             } else {
                 uniqueSegment.put(src, count + 1);
             }
-            TransEntry tr = project.getTranslations().get(ste.getSrcText());
+            TransEntry tr = project.getTranslations().get(src);
             if (tr != null) {
                 translated.add(src);
             }

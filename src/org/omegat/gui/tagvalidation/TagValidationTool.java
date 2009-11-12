@@ -36,7 +36,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.ProjectFileData;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
@@ -100,25 +100,23 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
     private List<SourceTextEntry> listInvalidTags() {
         int j;
         String s;
-        String t;
+        TransEntry te;
         List<String> srcTags = new ArrayList<String>(32);
         List<String> locTags = new ArrayList<String>(32);
         List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
-
-        StringEntry se;
 
         // PO validation: pattern to detect printf variables (%s and %n\$s)
         Pattern printfPattern = PatternConsts.PRINTF_VARS;
 
         for (SourceTextEntry ste : Core.getProject().getAllEntries()) {
-            se = ste.getStrEntry();
-            s = se.getSrcText();
-            t = se.getTranslation();
+            s = ste.getSrcText();
+            te = Core.getProject().getTranslations().get(s);
 
             // if there's no translation, skip the string
             // bugfix for http://sourceforge.net/support/tracker.php?aid=1209839
-            if (t == null || t.length() == 0)
+            if (te == null) {
                 continue;
+            }
 
             //Extra checks for PO files:
             ProjectFileData sourceFileData = ste.getSrcFile();
@@ -143,7 +141,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     }
                 }
                 HashSet<String> printfTargetSet = new HashSet<String>();
-                printfMatcher = printfPattern.matcher(t);
+                printfMatcher = printfPattern.matcher(te.translation);
                 index=1;
                 while (printfMatcher.find()) {
                     String printfVariable = printfMatcher.group(0);
@@ -161,7 +159,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                 }
                 // check PO line ending:
                 Boolean s_ends_lf = s.endsWith("\n");
-                Boolean t_ends_lf = t.endsWith("\n");
+                Boolean t_ends_lf = te.translation.endsWith("\n");
                 if (s_ends_lf && !t_ends_lf || !s_ends_lf && t_ends_lf) {
                     suspects.add(ste);
                     continue;
@@ -170,7 +168,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             // OmegaT tags check:
             // extract tags from src and loc string
             StaticUtils.buildTagList(s, srcTags);
-            StaticUtils.buildTagList(t, locTags);
+            StaticUtils.buildTagList(te.translation, locTags);
 
             // make sure lists match
             // for now, insist on exact match
@@ -180,7 +178,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                 // compare one by one
                 for (j = 0; j < srcTags.size(); j++) {
                     s = srcTags.get(j);
-                    t = locTags.get(j);
+                    String t = locTags.get(j);
                     if (!s.equals(t)) {
                         suspects.add(ste);
                         break;

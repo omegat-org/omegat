@@ -48,6 +48,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.gui.HListener;
 import org.omegat.gui.main.MainWindow;
@@ -233,11 +234,9 @@ public class TagValidationFrame extends JFrame
         output.append("<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>\n");         // NOI18N
         for (SourceTextEntry ste : stringList)
         {
-            StringEntry se = ste.getStrEntry();
-            String src = se.getSrcText();
-            String trans = se.getTranslation();
-            if (src.length()>0 && trans.length()>0)
-            {
+            String src = ste.getSrcText();
+            TransEntry trans = Core.getProject().getTranslations().get(src);
+            if (src.length() > 0 && trans != null) {
                 int entryNum = ste.entryNum() + 1;
                 output.append("<tr>");                                          // NOI18N
                 output.append("<td>");                                          // NOI18N
@@ -253,7 +252,7 @@ public class TagValidationFrame extends JFrame
                 output.append(colorTags(htmlize(src), "blue"));                 // NOI18N     
                 output.append("</td>");                                         // NOI18N
                 output.append("<td>");                                          // NOI18N
-                output.append(colorTags(htmlize(trans), "blue"));               // NOI18N
+                output.append(colorTags(htmlize(trans.translation), "blue"));   // NOI18N
                 output.append("</td>");                                         // NOI18N
                 output.append("</tr>\n");                                       // NOI18N
             }

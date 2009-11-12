@@ -87,7 +87,7 @@ public class SourceTextEntry
     public String getTranslation()
     {
         // TODO: move outside
-        TransEntry tr = Core.getProject().getTranslations().get(src);
+        TransEntry tr = Core.getProject().getTranslation(this);
         return tr != null ? tr.translation : "";
     }
     
@@ -98,7 +98,7 @@ public class SourceTextEntry
     public boolean isTranslated()
     {
         // TODO: move outside
-        TransEntry tr = Core.getProject().getTranslations().get(src);
+        TransEntry tr = Core.getProject().getTranslation(this);
         return tr != null;
     }
     

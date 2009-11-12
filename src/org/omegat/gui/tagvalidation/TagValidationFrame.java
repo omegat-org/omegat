@@ -235,7 +235,7 @@ public class TagValidationFrame extends JFrame
         for (SourceTextEntry ste : stringList)
         {
             String src = ste.getSrcText();
-            TransEntry trans = Core.getProject().getTranslations().get(src);
+            TransEntry trans = Core.getProject().getTranslation(ste);
             if (src.length() > 0 && trans != null) {
                 int entryNum = ste.entryNum() + 1;
                 output.append("<tr>");                                          // NOI18N

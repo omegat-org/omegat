@@ -39,6 +39,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.Map.Entry;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
@@ -753,8 +754,12 @@ public class RealProject implements IProject
     /**
      * {@inheritDoc}
      */
-    public Map<String, TransEntry> getTranslations() {
-        return Collections.unmodifiableMap(translations);
+    public Set<Entry<String, TransEntry>> getTranslationsSet() {
+        return Collections.unmodifiableSet(translations.entrySet());
+    }
+    
+    public TransEntry getTranslation(SourceTextEntry ste) {
+        return translations.get(ste.getSrcText());
     }
 
     /**

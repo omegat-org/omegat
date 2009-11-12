@@ -28,6 +28,7 @@ package org.omegat.gui.matches;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,7 +98,8 @@ public class FindMatchesThread extends Thread {
     @Override
     public void run() {
         final List<SourceTextEntry> entries = Core.getProject().getAllEntries();
-        Map<String, TransEntry> translations = Core.getProject().getTranslations();
+        Set<Map.Entry<String, TransEntry>> translations = Core.getProject()
+                .getTranslationsSet();
         Map<String, TransEntry> orphaned = Core.getProject()
                 .getOrphanedSegments();
         Map<String, List<TransMemory>> memories = Core.getProject()
@@ -128,7 +130,7 @@ public class FindMatchesThread extends Thread {
         strTokensAll = Core.getTokenizer().tokenizeAllExactly(processedEntry.getSrcText());// HP: includes non-word tokens
 
         // travel by project entries
-        for (Map.Entry<String, TransEntry> en : translations.entrySet()) {
+        for (Map.Entry<String, TransEntry> en : translations) {
             if (needStop()) {
                 return;
             }

@@ -134,7 +134,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             total.charsWithSpaces += chars;
             
             // add to remaining
-            TransEntry tr = project.getTranslations().get(src);
+            TransEntry tr = project.getTranslation(ste);
             if (tr == null) {
                 remaining.segments++;
                 remaining.words += words;
@@ -173,7 +173,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             } else {
                 uniqueSegment.put(src, count + 1);
             }
-            TransEntry tr = project.getTranslations().get(src);
+            TransEntry tr = project.getTranslation(ste);
             if (tr != null) {
                 translated.add(src);
             }

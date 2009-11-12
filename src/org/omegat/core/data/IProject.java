@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
@@ -110,9 +111,19 @@ public interface IProject {
 
     /**
      * Get all translations for current project.
+     * 
      * @return all translations map
      */
-    Map<String, TransEntry> getTranslations();
+    Set<Map.Entry<String, TransEntry>> getTranslationsSet();
+
+    /**
+     * Get translation for specified entry.
+     * 
+     * @param ste
+     *            source entry
+     * @return translation, or null if translation not exist
+     */
+    TransEntry getTranslation(SourceTextEntry ste);
     
     /**
      * Get all translation memories from /tm/ folder.

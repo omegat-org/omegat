@@ -27,6 +27,8 @@ package org.omegat.core.data;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.Map.Entry;
 
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
@@ -58,8 +60,12 @@ public class NotLoadedProject implements IProject {
     public List<LegacyTM> getMemory() {
         return null;
     }
+
+    public TransEntry getTranslation(SourceTextEntry ste) {
+        return null;
+    }
     
-    public Map<String, TransEntry> getTranslations() {
+    public Set<Entry<String, TransEntry>> getTranslationsSet() {
         return null;
     }
 

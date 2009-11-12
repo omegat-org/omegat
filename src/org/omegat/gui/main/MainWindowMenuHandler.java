@@ -32,6 +32,7 @@ import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
@@ -254,7 +255,8 @@ public class MainWindowMenuHandler {
 
         String selection = Core.getEditor().getSelectedText();
         if (selection == null) {
-            if ( Core.getEditor().getCurrentEntry().isTranslated() )
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            if (Core.getProject().getTranslation(ste) != null)
                 selection = Core.getEditor().getCurrentEntry().getTranslation();
             else
                 selection = Core.getEditor().getCurrentEntry().getSrcText();

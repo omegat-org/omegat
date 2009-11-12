@@ -91,17 +91,6 @@ public class SourceTextEntry
         return tr != null ? tr.translation : "";
     }
     
-    /** 
-     * Returns whether this entry is translated 
-     * (shortcut for <code>getStrEntry().isTranslated(t)</code>). 
-     */
-    public boolean isTranslated()
-    {
-        // TODO: move outside
-        TransEntry tr = Core.getProject().getTranslation(this);
-        return tr != null;
-    }
-    
     /** Returns the number of this entry is a project. */
     public int entryNum()
     { 

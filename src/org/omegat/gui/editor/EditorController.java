@@ -575,9 +575,11 @@ public class EditorController implements IEditor {
                 .get(displayedFileIndex);
         int translatedInFile = 0;
         for (int i = 0; i < fi.size; i++) {
-            if (project.getAllEntries().get(i + fi.firstEntryIndexInGlobalList)
-                    .isTranslated())
+            SourceTextEntry ste = project.getAllEntries().get(
+                    i + fi.firstEntryIndexInGlobalList);
+            if (project.getTranslation(ste) != null) {
                 translatedInFile++;
+            }
         }
 
         StatisticsInfo stat = project.getStatistics();

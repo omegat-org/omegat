@@ -45,7 +45,6 @@ import javax.swing.text.html.HTMLDocument;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.StringEntry;
 import org.omegat.core.dictionaries.DictionariesManager;
 import org.omegat.core.dictionaries.DictionaryEntry;
 import org.omegat.core.events.IEditorEventListener;
@@ -138,7 +137,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     }
 
     @Override
-    protected void startSearchThread(StringEntry newEntry) {
+    protected void startSearchThread(SourceTextEntry newEntry) {
         new DictionaryEntriesSearchThread(newEntry).start();
     }
 
@@ -148,7 +147,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     public void refresh() {
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
         if (ste != null) {
-            startSearchThread(ste.getStrEntry());
+            startSearchThread(ste);
         }
     }
 
@@ -216,7 +215,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
             EntryInfoSearchThread<List<DictionaryEntry>> {
         protected final String src;
 
-        public DictionaryEntriesSearchThread(final StringEntry newEntry) {
+        public DictionaryEntriesSearchThread(final SourceTextEntry newEntry) {
             super(DictionariesTextArea.this, newEntry);
             src = newEntry.getSrcText();
         }

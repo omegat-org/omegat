@@ -23,7 +23,7 @@
  **************************************************************************/
 package org.omegat.core.events;
 
-import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.SourceTextEntry;
 
 /**
  * Listener interface for entry change events.
@@ -46,5 +46,5 @@ public interface IEntryEventListener {
      *            new entry instance which activated, or null if entry
      *            deactivated
      */
-    void onEntryActivated(StringEntry newEntry);
+    void onEntryActivated(SourceTextEntry newEntry);
 }

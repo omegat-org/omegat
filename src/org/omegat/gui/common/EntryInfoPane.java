@@ -30,7 +30,7 @@ import javax.swing.JTextPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -45,7 +45,7 @@ import org.omegat.core.events.IProjectEventListener;
  */
 public abstract class EntryInfoPane<T> extends JTextPane implements
         IProjectEventListener, IEntryEventListener {
-    StringEntry currentlyProcessedEntry;
+    SourceTextEntry currentlyProcessedEntry;
     
     public EntryInfoPane(final boolean useApplicationFont) {
         if (useApplicationFont) {
@@ -85,7 +85,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements
         currentlyProcessedEntry = null;
     }
 
-    public void onEntryActivated(StringEntry newEntry) {
+    public void onEntryActivated(SourceTextEntry newEntry) {
         currentlyProcessedEntry = newEntry;
         startSearchThread(newEntry);
     }
@@ -96,7 +96,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements
      * @param newEntry
      *            new entry for find
      */
-    protected abstract void startSearchThread(final StringEntry newEntry);
+    protected abstract void startSearchThread(final SourceTextEntry newEntry);
 
     /**
      * Callback from search thread.

@@ -32,7 +32,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.gui.common.EntryInfoSearchThread;
@@ -69,7 +69,7 @@ public class FindGlossaryThread extends
     private final GlossaryManager manager;
 
     public FindGlossaryThread(final GlossaryTextArea pane,
-            final StringEntry newEntry, final GlossaryManager manager) {
+            final SourceTextEntry newEntry, final GlossaryManager manager) {
         super(pane, newEntry);
         src = newEntry.getSrcText();
         this.manager = manager;
@@ -217,8 +217,8 @@ public class FindGlossaryThread extends
                 }
             }
 
-            // ·· Sort items with same locTxt
-            // ···································
+            // ï¿½ï¿½ Sort items with same locTxt
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
             List<GlossaryEntry> sortList = new LinkedList<GlossaryEntry>();
             if (srcList.size() > 1) {
                 for (int k = 0; k < srcList.size(); k++) {
@@ -244,7 +244,7 @@ public class FindGlossaryThread extends
             } else {
                 sortList = srcList;
             }
-            // ··································································
+            // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
             // == Now put the sortedList together
             // ===============================

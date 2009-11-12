@@ -84,7 +84,7 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     }
 
     @Override
-    protected void startSearchThread(StringEntry newEntry) {
+    protected void startSearchThread(SourceTextEntry newEntry) {
         new FindGlossaryThread(GlossaryTextArea.this, newEntry, manager)
                 .start();
     }
@@ -95,7 +95,7 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     public void refresh() {
         SourceTextEntry ste = Core.getEditor().getCurrentEntry();
         if (ste != null) {
-            startSearchThread(ste.getStrEntry());
+            startSearchThread(ste);
         }
     }
 

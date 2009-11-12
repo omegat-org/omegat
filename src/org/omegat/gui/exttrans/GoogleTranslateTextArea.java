@@ -29,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.common.EntryInfoSearchThread;
@@ -61,7 +62,7 @@ public class GoogleTranslateTextArea extends EntryInfoPane<String> {
     }
 
     @Override
-    protected void startSearchThread(final StringEntry newEntry) {
+    protected void startSearchThread(final SourceTextEntry newEntry) {
         UIThreadsUtil.mustBeSwingThread();
         if (Preferences.isPreference(Preferences.ALLOW_GOOGLE_TRANSLATE)) {
             new FindThread(newEntry).start();
@@ -80,7 +81,7 @@ public class GoogleTranslateTextArea extends EntryInfoPane<String> {
     protected class FindThread extends EntryInfoSearchThread<String> {
         private final String src;
 
-        public FindThread(final StringEntry newEntry) {
+        public FindThread(final SourceTextEntry newEntry) {
             super(GoogleTranslateTextArea.this, newEntry);
             src = newEntry.getSrcText();
         }

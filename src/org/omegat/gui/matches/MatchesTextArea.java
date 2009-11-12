@@ -73,7 +73,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
 
     private final MainWindow mw;
 
-    protected StringEntry processedEntry;
+    protected SourceTextEntry processedEntry;
 
     /** Creates new form MatchGlossaryPane */
     public MatchesTextArea(MainWindow mw) {
@@ -98,7 +98,7 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
             public void onNewFile(String activeFileName) {
             }
 
-            public void onEntryActivated(final StringEntry newEntry) {
+            public void onEntryActivated(final SourceTextEntry newEntry) {
                 processedEntry = newEntry;
                 new FindMatchesThread(MatchesTextArea.this, newEntry).start();
             }

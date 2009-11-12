@@ -52,7 +52,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.StringEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -182,7 +181,7 @@ public class EditorController implements IEditor {
                 updateState(SHOW_TYPE.NO_CHANGE);
             }
 
-            public void onEntryActivated(StringEntry newEntry) {
+            public void onEntryActivated(SourceTextEntry newEntry) {
             }
         });
 
@@ -493,7 +492,7 @@ public class EditorController implements IEditor {
         editor.repaint();
 
         // fire event about new segment activated
-        CoreEvents.fireEntryActivated(ste.getStrEntry());
+        CoreEvents.fireEntryActivated(ste);
     }
 
     /**

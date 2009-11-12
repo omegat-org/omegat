@@ -77,7 +77,7 @@ import javax.swing.table.TableColumnModel;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -251,7 +251,7 @@ public class ProjectFrame extends JFrame {
              * Updates the number of translated segments only, does not rebuild
              * the whole display.
              */
-            public void onEntryActivated(StringEntry newEntry) {
+            public void onEntryActivated(SourceTextEntry newEntry) {
                 UIThreadsUtil.mustBeSwingThread();
                 modelTotal.fireTableDataChanged();
             }

@@ -35,7 +35,6 @@ import javax.swing.SwingUtilities;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.StringEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
 import org.omegat.core.matching.FuzzyMatcher;
@@ -77,7 +76,7 @@ public class FindMatchesThread extends Thread {
      * If entry in controller was changed, it means user has moved to another 
      * entry, and there is no sense to continue.
      */
-    private final StringEntry processedEntry;
+    private final SourceTextEntry processedEntry;
 
     /** Result list. */
     private List<NearString> result = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS + 1);
@@ -90,7 +89,7 @@ public class FindMatchesThread extends Thread {
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
 
-    public FindMatchesThread(final MatchesTextArea matcherController, final StringEntry entry) {
+    public FindMatchesThread(final MatchesTextArea matcherController, final SourceTextEntry entry) {
         this.matcherController = matcherController;
         this.processedEntry = entry;
     }

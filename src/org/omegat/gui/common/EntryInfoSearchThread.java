@@ -26,7 +26,7 @@ package org.omegat.gui.common;
 
 import javax.swing.SwingUtilities;
 
-import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.SourceTextEntry;
 
 /**
  * Base class for search info about current entry in the separate thread.
@@ -48,7 +48,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
 	 * If entry in pane was changed, it means user was moved to other entry, and
 	 * there is no sense to continue search.
 	 */
-	private final StringEntry currentlyProcessedEntry;
+	private final SourceTextEntry currentlyProcessedEntry;
 
 	/**
 	 * Constructor.
@@ -59,7 +59,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
 	 *            current entry
 	 */
 	public EntryInfoSearchThread(final EntryInfoPane<T> pane,
-			final StringEntry entry) {
+			final SourceTextEntry entry) {
 		this.pane = pane;
 		this.currentlyProcessedEntry = entry;
 

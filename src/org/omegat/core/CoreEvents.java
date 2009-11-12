@@ -30,7 +30,7 @@ import java.util.List;
 
 import javax.swing.SwingUtilities;
 
-import org.omegat.core.data.StringEntry;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.events.IEntryEventListener;
@@ -192,7 +192,7 @@ public class CoreEvents {
     }
 
     /** Fire event. */
-    public static void fireEntryActivated(final StringEntry newEntry) {
+    public static void fireEntryActivated(final SourceTextEntry newEntry) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 Log.logInfoRB("LOG_INFO_EVENT_ENTRY_ACTIVATED");

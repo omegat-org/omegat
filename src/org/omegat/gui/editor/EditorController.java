@@ -33,6 +33,7 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
+import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -52,6 +53,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -714,7 +716,7 @@ public class EditorController implements IEditor {
                 displayedFileIndex = Core.getProject().getProjectFiles().size() - 1;
             }
             displayedEntryIndex = Core.getProject().getProjectFiles().get(
-                    displayedFileIndex).size - 1;
+                    displayedFileIndex).entries.size() - 1;
             loadDocument();
         }
 
@@ -734,41 +736,40 @@ public class EditorController implements IEditor {
         // save the current entry
         commitAndDeactivate();
 
-        int oldDisplayedEntryIndex = displayedEntryIndex;
-        int oldDisplayedFileIndex = displayedFileIndex;
+        int newDisplayedEntryIndex = displayedEntryIndex;
+        int newDisplayedFileIndex = displayedFileIndex;
 
+        List<FileInfo> files = Core.getProject().getProjectFiles();
         while (true) {
-            displayedEntryIndex++;
-            if (displayedEntryIndex >= Core.getProject().getProjectFiles().get(
-                    displayedFileIndex).size) {
-                displayedFileIndex++;
-                displayedEntryIndex = 0;
-                if (displayedFileIndex >= Core.getProject().getProjectFiles()
-                        .size()) {
-                    displayedFileIndex = 0;
+            newDisplayedEntryIndex++;
+            if (newDisplayedEntryIndex >= files.get(newDisplayedFileIndex).entries
+                    .size()) {
+                // file finished - need new
+                newDisplayedFileIndex++;
+                newDisplayedEntryIndex = 0;
+                if (newDisplayedFileIndex >= files.size()) {
+                    newDisplayedFileIndex = 0;
                 }
             }
-            if (displayedFileIndex == oldDisplayedFileIndex
-                    && displayedEntryIndex == oldDisplayedEntryIndex) {
+            if (newDisplayedFileIndex == displayedFileIndex
+                    && newDisplayedEntryIndex == displayedEntryIndex) {
                 // The same entry which was displayed. So, there is no
                 // untranslated.
                 break;
             }
-
-            int globalEntryIndex = Core.getProject().getProjectFiles().get(
-                    displayedFileIndex).firstEntryIndexInGlobalList
-                    + displayedEntryIndex;
-            SourceTextEntry ste = Core.getProject().getAllEntries().get(
-                    globalEntryIndex);
+            SourceTextEntry ste = files.get(newDisplayedFileIndex).entries
+                    .get(newDisplayedEntryIndex);
             if (Core.getProject().getTranslation(ste) == null) {
                 // It's untranslated.
                 break;
             }
         }
 
-        if (displayedFileIndex != oldDisplayedFileIndex) {
+        if (displayedFileIndex != newDisplayedFileIndex) {
+            displayedFileIndex = newDisplayedFileIndex;
             loadDocument();
         }
+        displayedEntryIndex = newDisplayedEntryIndex;
 
         activateEntry();
     }
@@ -827,11 +828,13 @@ public class EditorController implements IEditor {
             IProject dataEngine = Core.getProject();
             for (int i = 0; i < dataEngine.getProjectFiles().size(); i++) {
                 IProject.FileInfo fi = dataEngine.getProjectFiles().get(i);
-                if (fi.firstEntryIndexInGlobalList <= entryNum - 1
-                        && fi.firstEntryIndexInGlobalList + fi.size > entryNum - 1) {
+                SourceTextEntry firstEntry = fi.entries.get(0);
+                SourceTextEntry lastEntry = fi.entries
+                        .get(fi.entries.size() - 1);
+                if (firstEntry.entryNum() <= entryNum
+                        && lastEntry.entryNum() >= entryNum) {
                     // this file
-                    displayedEntryIndex = entryNum - 1
-                            - fi.firstEntryIndexInGlobalList;
+                    displayedEntryIndex = entryNum - firstEntry.entryNum();
                     if (i != displayedFileIndex) {
                         // it's other file than displayed
                         displayedFileIndex = i;

@@ -552,7 +552,6 @@ public class RealProject implements IProject
         
         projectFilesList = new ArrayList<FileInfo>();
         
-        int firstEntry = 0;
         for (String filename : srcFileList)
         {
             File file = new File(filename);
@@ -568,8 +567,6 @@ public class RealProject implements IProject
             
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(context);
             
-            int ffirstEntry = allProjectEntries.size();
-            
             FileInfo fi = new FileInfo();
             fi.filePath = filepath;
             
@@ -577,14 +574,8 @@ public class RealProject implements IProject
             
             boolean fileLoaded = fm.loadFile(filename, processedFiles, loadFilesCallback);
             
-            int flastEntry = allProjectEntries.size()-1;
-
-            if( fileLoaded && (flastEntry>=ffirstEntry) )
-            {
-                fi.firstEntryIndexInGlobalList=firstEntry;
-                fi.size=allProjectEntries.size()-firstEntry;
+            if (fileLoaded && (fi.entries.size() > 0)) {
                 projectFilesList.add(fi);
-                firstEntry=allProjectEntries.size();
             }
         }
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");

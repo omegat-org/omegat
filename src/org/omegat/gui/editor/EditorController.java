@@ -33,7 +33,6 @@ import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.io.IOException;
-import java.util.List;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -781,6 +780,28 @@ public class EditorController implements IEditor {
         return getCurrentEntry().entryNum();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    public void gotoFile(int fileIndex) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded())
+            return;
+
+        if (m_docSegList == null) {
+            // document didn't loaded yet
+            return;
+        }
+
+        commitAndDeactivate();
+
+        displayedFileIndex = fileIndex;
+        loadDocument();
+        
+        activateEntry();
+    }
+    
     /**
      * {@inheritDoc}
      */

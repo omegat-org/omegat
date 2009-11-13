@@ -570,17 +570,13 @@ public class ProjectFrame extends JFrame {
     }
 
     private void gotoFile(int row) {
-        int entryIndex;
-
-        IProject.FileInfo fi;
         try {
-            fi = files.get(row);
+            files.get(row);
         } catch (IndexOutOfBoundsException ex) {
             // data changed
             return;
         }
-        entryIndex = fi.firstEntryIndex - fi.size + 1;
-        Core.getEditor().gotoEntry(entryIndex);
+        Core.getEditor().gotoFile(row);
         Core.getEditor().requestFocus();
     }
 

@@ -110,12 +110,20 @@ public interface IEditor {
     void nextUntranslatedEntry();
 
     /**
+     * Goto first entry in specified file.
+     * 
+     * @param fileIndex
+     *            file index in project
+     */
+    void gotoFile(int fileIndex);
+    
+    /**
      * Goto entry with specified number.
      * 
      * @param entryNum
-     *                entry number
+     *            entry number, starts from 1
      * 
-     * Must be called only from UI thread.
+     *            Must be called only from UI thread.
      */
     void gotoEntry(int entryNum);
     

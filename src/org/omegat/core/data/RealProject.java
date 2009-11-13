@@ -581,7 +581,6 @@ public class RealProject implements IProject
 
             if( fileLoaded && (flastEntry>=ffirstEntry) )
             {
-                fi.firstEntryIndex=allProjectEntries.size();
                 fi.firstEntryIndexInGlobalList=firstEntry;
                 fi.size=allProjectEntries.size()-firstEntry;
                 projectFilesList.add(fi);

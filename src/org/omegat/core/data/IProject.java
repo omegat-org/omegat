@@ -102,14 +102,6 @@ public interface IProject {
     StatisticsInfo getStatistics();
 
     /**
-     * Get TM files from /tm/*.tmx dir.
-     * 
-     * @return read-only list of translation memories, or null if project not
-     *         loaded
-     */
-    List<LegacyTM> getMemory();
-
-    /**
      * Get all translations for current project.
      * 
      * @return all translations map

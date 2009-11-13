@@ -47,18 +47,9 @@ public class SourceTextEntry {
      * @param entryNum
      *            the number of this entry in a project.
      */
-    public SourceTextEntry(StringEntry str, int entryNum) {
-        m_strEntry = str;
+    public SourceTextEntry(String src, int entryNum) {
         m_entryNum = entryNum;
-        src = str.getSrcText();
-    }
-
-    /**
-     * Returns the unique StringEntry that holds source and translation of this
-     * entry.
-     */
-    public StringEntry getStrEntry() {
-        return m_strEntry;
+        this.src = src;
     }
 
     /**
@@ -74,8 +65,6 @@ public class SourceTextEntry {
         return m_entryNum;
     }
 
-    /** Holds the unique StringEntry of this segment. */
-    private StringEntry m_strEntry;
     /** Holds the number of this entry in a project. */
     private int m_entryNum;
 

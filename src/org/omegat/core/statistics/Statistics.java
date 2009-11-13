@@ -86,7 +86,15 @@ public class Statistics {
             // "Exact matched"
             return PERCENT_EXACT_MATCH;
         }
+        
+        if (!isFirst) {
+            // already processed - repetition
+            return PERCENT_REPETITIONS;
+        }
 
+        /*
+         * Not translated, not already processed. Then find fuzzy matches.
+         */
         Token[] strTokensStem = tokenizeExactlyWithCache(tokensCache, ste
                 .getSrcText());
         int maxSimilarity = 0; // not matched - 0% yet
@@ -129,14 +137,6 @@ public class Statistics {
                 int newSimilarity = FuzzyMatcher.calcSimilarity(
                         distanceCalculator, strTokensStem, candTokens);
                 maxSimilarity = Math.max(maxSimilarity, newSimilarity);
-            }
-        }
-        
-        if (maxSimilarity < 50) {
-            // No match. Need to add only first segment. Next segments will
-            // be 'repetition'.
-            if (!isFirst) {
-                maxSimilarity = PERCENT_REPETITIONS;
             }
         }
 

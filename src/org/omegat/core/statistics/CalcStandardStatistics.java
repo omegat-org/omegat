@@ -25,18 +25,19 @@
 package org.omegat.core.statistics;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-import java.util.TreeMap;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.OConsts;
@@ -115,57 +116,53 @@ public class CalcStandardStatistics extends LongProcessThread {
         StatCount unique = new StatCount();
         StatCount remainingUnique = new StatCount();
 
-        List<SourceTextEntry> entries = project.getAllEntries();
-        
-        Map<String, FileData> counts = new TreeMap<String, FileData>();        
-        for (SourceTextEntry ste : entries) {
-            String src = ste.getSrcText();
-            
-            int words = Statistics.numberOfWords(src);
-            String noTags = StaticUtils.stripTags(src);
-            int charsNoSpaces = Statistics
-                    .numberOfCharactersWithoutSpaces(noTags);
-            int chars = noTags.length();
-            
-            // add to total
-            total.segments++;
-            total.words += words;
-            total.charsWithoutSpaces += charsNoSpaces;
-            total.charsWithSpaces += chars;
-            
-            // add to remaining
-            TransEntry tr = project.getTranslation(ste);
-            if (tr == null) {
-                remaining.segments++;
-                remaining.words += words;
-                remaining.charsWithoutSpaces += charsNoSpaces;
-                remaining.charsWithSpaces += chars;
+        List<FileData> counts = new ArrayList<FileData>();
+        for (FileInfo file : project.getProjectFiles()) {
+            FileData numbers = new FileData();
+            numbers.filename = file.filePath;
+            counts.add(numbers);
+            for (SourceTextEntry ste : file.entries) {
+                String src = ste.getSrcText();
+
+                int words = Statistics.numberOfWords(src);
+                String noTags = StaticUtils.stripTags(src);
+                int charsNoSpaces = Statistics
+                        .numberOfCharactersWithoutSpaces(noTags);
+                int chars = noTags.length();
+
+                // add to total
+                total.segments++;
+                total.words += words;
+                total.charsWithoutSpaces += charsNoSpaces;
+                total.charsWithSpaces += chars;
+
+                // add to remaining
+                TransEntry tr = project.getTranslation(ste);
+                if (tr == null) {
+                    remaining.segments++;
+                    remaining.words += words;
+                    remaining.charsWithoutSpaces += charsNoSpaces;
+                    remaining.charsWithSpaces += chars;
+                }
+
+                // add to file's info
+                numbers.total.segments++;
+                numbers.total.words += words;
+                numbers.total.charsWithoutSpaces += charsNoSpaces;
+                numbers.total.charsWithSpaces += chars;
+                if (tr == null) {
+                    numbers.remaining.segments++;
+                    numbers.remaining.words += words;
+                    numbers.remaining.charsWithoutSpaces += charsNoSpaces;
+                    numbers.remaining.charsWithSpaces += chars;
+                }
             }
-            
-            // add to file's info
-            FileData numbers = counts.get(ste.getSrcFile().name);
-            if (numbers == null) {
-                numbers = new FileData();
-                counts.put(ste.getSrcFile().name, numbers);
-            }            
-            numbers.total.segments++;
-            numbers.total.words += words;
-            numbers.total.charsWithoutSpaces += charsNoSpaces;
-            numbers.total.charsWithSpaces += chars;
-            if (tr == null) {
-                numbers.remaining.segments++;
-                numbers.remaining.words += words;
-                numbers.remaining.charsWithoutSpaces += charsNoSpaces;
-                numbers.remaining.charsWithSpaces += chars;
-            }
-        }        
-        
+        }
+
         // find unique segments
-        Map<String, Integer> uniqueSegment = new HashMap<String, Integer>(
-                entries.size() / 2);
-        Set<String> translated = new HashSet<String>(
-                entries.size() / 2);
-        for (SourceTextEntry ste : entries) {
+        Map<String, Integer> uniqueSegment = new HashMap<String, Integer>();
+        Set<String> translated = new HashSet<String>();
+        for (SourceTextEntry ste : project.getAllEntries()) {
             String src = ste.getSrcText();
             Integer count = uniqueSegment.get(src);
             if (count == null) {
@@ -219,7 +216,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             hotStat.numberofTranslatedSegments = translated.size();
             hotStat.numberOfUniqueSegments = unique.segments;
         }
-        
+
         return result.toString();
     }
 
@@ -236,15 +233,14 @@ public class CalcStandardStatistics extends LongProcessThread {
         return table;
     }
 
-    protected static String[][] calcFilesTable(final ProjectProperties m_config,
-            final Map<String, FileData> counts) {
+    protected static String[][] calcFilesTable(
+            final ProjectProperties m_config, final List<FileData> counts) {
         String[][] table = new String[counts.size()][7];
 
         int r = 0;
-        for (String filename : counts.keySet()) {
-            FileData numbers = counts.get(filename);
-            table[r][0] = StaticUtils.makeFilenameRelative(filename, m_config
-                    .getSourceRoot());
+        for (FileData numbers : counts) {
+            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename,
+                    m_config.getSourceRoot());
             table[r][1] = Integer.toString(numbers.total.words);
             table[r][2] = Integer.toString(numbers.remaining.words);
             table[r][3] = Integer.toString(numbers.total.charsWithoutSpaces);
@@ -258,6 +254,7 @@ public class CalcStandardStatistics extends LongProcessThread {
     }
 
     public static class FileData {
+        public String filename;
         public StatCount total, remaining;
 
         public FileData() {

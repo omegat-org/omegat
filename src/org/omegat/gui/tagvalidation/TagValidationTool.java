@@ -34,9 +34,9 @@ import javax.swing.JOptionPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.ProjectFileData;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
@@ -108,7 +108,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         // PO validation: pattern to detect printf variables (%s and %n\$s)
         Pattern printfPattern = PatternConsts.PRINTF_VARS;
 
-        for (SourceTextEntry ste : Core.getProject().getAllEntries()) {
+        for(FileInfo fi:Core.getProject().getProjectFiles()) {
+          for (SourceTextEntry ste : fi.entries) {
             s = ste.getSrcText();
             te = Core.getProject().getTranslation(ste);
 
@@ -119,8 +120,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             }
 
             //Extra checks for PO files:
-            ProjectFileData sourceFileData = ste.getSrcFile();
-            if (sourceFileData.name.endsWith(".po") || sourceFileData.name.endsWith(".pot")) { //TODO: check with source-files settings for PO instead of hardcoded?
+            if (fi.filePath.endsWith(".po") || fi.filePath.endsWith(".pot")) { //TODO: check with source-files settings for PO instead of hardcoded?
                 // PO printf variables should be equal.
                 // we check this by adding the string "index+typespecifier" of every 
                 // found variable to a set.
@@ -188,6 +188,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
             srcTags.clear();
             locTags.clear();
+          }  
         }
         return suspects;
     }

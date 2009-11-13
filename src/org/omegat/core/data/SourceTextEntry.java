@@ -21,12 +21,9 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.data;
-
-import org.omegat.core.Core;
-
 
 /*
  * Source text entry represents an individual segment for
@@ -37,57 +34,46 @@ import org.omegat.core.Core;
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class SourceTextEntry
-{
+public class SourceTextEntry {
     /** Source entry text. */
     private String src;
 
-    /** 
+    /**
      * Creates a new source text entry.
-     *
-     * @param str       unique StringEntry that holds source and translation of 
-     *                      this entry.
-     * @param file      information about the file this entry belongs to.
-     * @param entryNum  the number of this entry in a project.
+     * 
+     * @param str
+     *            unique StringEntry that holds source and translation of this
+     *            entry.
+     * @param entryNum
+     *            the number of this entry in a project.
      */
-    public SourceTextEntry(StringEntry str, ProjectFileData file, 
-            int entryNum)
-    {
-        m_srcFile = file;
+    public SourceTextEntry(StringEntry str, int entryNum) {
         m_strEntry = str;
         m_entryNum = entryNum;
         src = str.getSrcText();
     }
-    
-    /** Returns information about the file this entry belongs to. */
-    public ProjectFileData getSrcFile()
-    { 
-        return m_srcFile;	
-    }
-    
-    /** Returns the unique StringEntry that holds source and translation of this entry. */
-    public StringEntry getStrEntry()
-    { 
-        return m_strEntry;	
-    }
-    
-    /** 
-     * Returns the source text 
-     * (shortcut for <code>getStrEntry().getSrcText()</code>). 
+
+    /**
+     * Returns the unique StringEntry that holds source and translation of this
+     * entry.
      */
-    public String getSrcText()
-    {
+    public StringEntry getStrEntry() {
+        return m_strEntry;
+    }
+
+    /**
+     * Returns the source text (shortcut for
+     * <code>getStrEntry().getSrcText()</code>).
+     */
+    public String getSrcText() {
         return src;
     }
-    
+
     /** Returns the number of this entry is a project. */
-    public int entryNum()
-    { 
+    public int entryNum() {
         return m_entryNum;
     }
-    
-    /** Holds information about the file this entry belongs to. */
-    private	ProjectFileData m_srcFile;
+
     /** Holds the unique StringEntry of this segment. */
     private StringEntry m_strEntry;
     /** Holds the number of this entry in a project. */

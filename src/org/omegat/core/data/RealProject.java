@@ -86,9 +86,8 @@ public class RealProject implements IProject
 
     private boolean m_modifiedFlag;
 
-    /** List of all segments in project. 
-     * @deprecated */
-    private List<SourceTextEntry> m_srcTextEntryArray;
+    /** List of all segments in project. */
+    private List<SourceTextEntry> allProjectEntries;
     
     private final StatisticsInfo hotStat = new StatisticsInfo();
     
@@ -128,7 +127,7 @@ public class RealProject implements IProject
      *                true if project need to be created
      */
     public RealProject(final ProjectProperties props, final boolean isNewProject) {
-        m_srcTextEntryArray = new ArrayList<SourceTextEntry>(4096);
+        allProjectEntries = new ArrayList<SourceTextEntry>(4096);
         m_tmList = new ArrayList<TransMemory>();
         m_legacyTMs = new ArrayList<LegacyTM>();
         transMemories = new TreeMap<String, List<TransMemory>>();
@@ -141,7 +140,7 @@ public class RealProject implements IProject
         loadProject(props);
         
         // make required collections unmodifiable
-        m_srcTextEntryArray = Collections.unmodifiableList(m_srcTextEntryArray);
+        allProjectEntries = Collections.unmodifiableList(allProjectEntries);
         m_legacyTMs = Collections.unmodifiableList(m_legacyTMs);
         m_tmList = Collections.unmodifiableList(m_tmList);
     }
@@ -214,7 +213,7 @@ public class RealProject implements IProject
             // but since we didn't, do a bit of cleaning up now, otherwise
             // we can't even inform the user about our slacking off.
             context = null;
-            m_srcTextEntryArray.clear();
+            allProjectEntries.clear();
             m_legacyTMs.clear();
             m_tmList.clear();
             transMemories.clear();
@@ -331,8 +330,8 @@ public class RealProject implements IProject
         
         LoadContext context = new LoadContext();
         // prepare context data. TODO: remove if not need in future
-        for (int i = 0; i < m_srcTextEntryArray.size(); i++) {
-            SourceTextEntry ste = m_srcTextEntryArray.get(i);
+        for (int i = 0; i < allProjectEntries.size(); i++) {
+            SourceTextEntry ste = allProjectEntries.get(i);
             StringEntry se = ste.getStrEntry();
             StringEntry hse = context.m_strEntryHash.get(se.getSrcText());
             if (hse == null) {
@@ -569,26 +568,24 @@ public class RealProject implements IProject
             
             LoadFilesCallback loadFilesCallback = new LoadFilesCallback(context);
             
-            ProjectFileData m_curFile = new ProjectFileData();
-            m_curFile.name = filename;
-            m_curFile.firstEntry = m_srcTextEntryArray.size();
+            int ffirstEntry = allProjectEntries.size();
             
             FileInfo fi = new FileInfo();
             fi.filePath = filepath;
             
-            loadFilesCallback.setCurrentFile(m_curFile, fi);
+            loadFilesCallback.setCurrentFile(fi);
             
             boolean fileLoaded = fm.loadFile(filename, processedFiles, loadFilesCallback);
             
-            m_curFile.lastEntry = m_srcTextEntryArray.size()-1;
+            int flastEntry = allProjectEntries.size()-1;
 
-            if( fileLoaded && (m_curFile.lastEntry>=m_curFile.firstEntry) )
+            if( fileLoaded && (flastEntry>=ffirstEntry) )
             {
-                fi.firstEntryIndex=m_srcTextEntryArray.size();
+                fi.firstEntryIndex=allProjectEntries.size();
                 fi.firstEntryIndexInGlobalList=firstEntry;
-                fi.size=m_srcTextEntryArray.size()-firstEntry;
+                fi.size=allProjectEntries.size()-firstEntry;
                 projectFilesList.add(fi);
-                firstEntry=m_srcTextEntryArray.size();
+                firstEntry=allProjectEntries.size();
             }
         }
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
@@ -748,7 +745,7 @@ public class RealProject implements IProject
      * {@inheritDoc}
      */
     public List<SourceTextEntry> getAllEntries() {
-        return m_srcTextEntryArray;
+        return allProjectEntries;
     }
     
     /**
@@ -825,11 +822,6 @@ public class RealProject implements IProject
         
     private class LoadFilesCallback extends ParseEntry {  
         private final LoadContext context;
-        /**
-         * Keeps track of file specific data to feed to SourceTextEntry objects
-         * so they can have a bigger picture of what's where.
-         */
-        private ProjectFileData m_curFile;
         private FileInfo fileInfo;
         private LegacyTM legacyFileTM;
         private List<TransMemory> tmForFile;
@@ -839,8 +831,7 @@ public class RealProject implements IProject
             this.context = context;
         }
         
-        protected void setCurrentFile(ProjectFileData file, FileInfo fi) {
-            m_curFile = file;
+        protected void setCurrentFile(FileInfo fi) {
             fileInfo = fi;
             legacyFileTM = null;
             tmForFile = null;
@@ -886,8 +877,8 @@ public class RealProject implements IProject
                 strEntry = new StringEntry(srcText);
                 context.m_strEntryHash.put(srcText, strEntry);
             }
-            SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
-            m_srcTextEntryArray.add(srcTextEntry);
+            SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, allProjectEntries.size());
+            allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);
         }
 
@@ -908,8 +899,8 @@ public class RealProject implements IProject
                 }
                 context.m_strEntryHash.put(segmentSource, strEntry);
             }
-            SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, m_curFile, m_srcTextEntryArray.size());
-            m_srcTextEntryArray.add(srcTextEntry);
+            SourceTextEntry srcTextEntry = new SourceTextEntry(strEntry, allProjectEntries.size());
+            allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);
         }
         @Override
@@ -931,16 +922,12 @@ public class RealProject implements IProject
                 return;
             }
             if (legacyFileTM == null) {
-                String fn = StaticUtils.makeFilenameRelative(m_curFile.name,
-                        m_config.getSourceRoot());
-                legacyFileTM = new LegacyTM(fn, new ArrayList<StringEntry>());
+                legacyFileTM = new LegacyTM(fileInfo.filePath, new ArrayList<StringEntry>());
                 getMemory().add(legacyFileTM);
             }
             if (tmForFile == null) {
-                String fn = StaticUtils.makeFilenameRelative(m_curFile.name,
-                        m_config.getSourceRoot());
                 tmForFile = new ArrayList<TransMemory>();
-                transMemories.put(fn, tmForFile);
+                transMemories.put(fileInfo.filePath, tmForFile);
             }
             StringEntry en = new StringEntry(source);
             en.setTranslation(translation);

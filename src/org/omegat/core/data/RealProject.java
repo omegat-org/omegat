@@ -786,7 +786,8 @@ public class RealProject implements IProject
             if( srcText.length()==0 || srcText.trim().length()==0 )
                 return;
             
-            SourceTextEntry srcTextEntry = new SourceTextEntry(srcText, allProjectEntries.size());
+            SourceTextEntry srcTextEntry = new SourceTextEntry(srcText,
+                    allProjectEntries.size() + 1);
             allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);
         }
@@ -801,7 +802,8 @@ public class RealProject implements IProject
                 translations.put(segmentSource, new TransEntry(
                         segmentTranslation));
             }
-            SourceTextEntry srcTextEntry = new SourceTextEntry(segmentSource, allProjectEntries.size());
+            SourceTextEntry srcTextEntry = new SourceTextEntry(segmentSource,
+                    allProjectEntries.size() + 1);
             allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);
         }

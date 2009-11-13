@@ -401,13 +401,11 @@ public class EditorController implements IEditor {
 
         Document3 doc = new Document3(this);
 
-        List<SourceTextEntry> entries = Core.getProject().getAllEntries();
-        m_docSegList = new SegmentBuilder[file.size];
+        m_docSegList = new SegmentBuilder[file.entries.size()];
         for (int i = 0; i < m_docSegList.length; i++) {
-            SourceTextEntry ste = entries.get(file.firstEntryIndexInGlobalList
-                    + i);
-            m_docSegList[i] = new SegmentBuilder(this, doc, settings, ste,
-                    getEntryNumber(i));
+            SourceTextEntry ste = file.entries.get(i);
+            m_docSegList[i] = new SegmentBuilder(this, doc, settings, ste, ste
+                    .entryNum());
 
             m_docSegList[i].createSegmentElement(false);
 
@@ -576,9 +574,7 @@ public class EditorController implements IEditor {
         IProject.FileInfo fi = project.getProjectFiles()
                 .get(displayedFileIndex);
         int translatedInFile = 0;
-        for (int i = 0; i < fi.size; i++) {
-            SourceTextEntry ste = project.getAllEntries().get(
-                    i + fi.firstEntryIndexInGlobalList);
+        for (SourceTextEntry ste : fi.entries) {
             if (project.getTranslation(ste) != null) {
                 translatedInFile++;
             }
@@ -587,7 +583,7 @@ public class EditorController implements IEditor {
         StatisticsInfo stat = project.getStatistics();
 
         String pMsg = " " + Integer.toString(translatedInFile) + "/"
-                + Integer.toString(fi.size) + " ("
+                + Integer.toString(fi.entries.size()) + " ("
                 + Integer.toString(stat.numberofTranslatedSegments) + "/"
                 + Integer.toString(stat.numberOfUniqueSegments) + ", "
                 + Integer.toString(stat.numberOfSegmentsTotal) + ") ";
@@ -782,26 +778,7 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public int getCurrentEntryNumber() {
-        return getEntryNumber(displayedEntryIndex);
-    }
-
-    /**
-     * Convert entry index in current file into global entry number.
-     * 
-     * @param entryIndexInCurrentFile
-     *            index
-     * @return global number
-     */
-    protected int getEntryNumber(int entryIndexInCurrentFile) {
-        if (Core.getProject().getProjectFiles().isEmpty()) {
-            // there is no files yet
-            return -1;
-        }
-
-        int globalEntryIndex = Core.getProject().getProjectFiles().get(
-                displayedFileIndex).firstEntryIndexInGlobalList
-                + entryIndexInCurrentFile + 1;
-        return globalEntryIndex;
+        return getCurrentEntry().entryNum();
     }
 
     /**

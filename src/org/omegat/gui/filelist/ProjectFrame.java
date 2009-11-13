@@ -419,7 +419,7 @@ public class ProjectFrame extends JFrame {
                 case 0:
                     return fi.filePath;
                 case 1:
-                    return fi.size;
+                    return fi.entries.size();
                 default:
                     return null;
                 }

@@ -20,6 +20,9 @@
   - Number of unique segments always 0 in standard statistics
   http://sourceforge.net/support/tracker.php?aid=2879866
 
+  - When there were fuzzy matches for a given segment, it wasn't counted
+as a repetition in Match Statistics
+
   - Wrong spell checker display if word split to several lines
 
 ----------------------------------------------------------------------

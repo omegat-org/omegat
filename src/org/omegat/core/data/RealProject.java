@@ -943,17 +943,10 @@ public class RealProject implements IProject
          *         returns the source string itself.
          */
         protected String processSingleEntry(String src) {
-            StringEntry se = context.m_strEntryHash.get(src);
-
-            if (se == null) {
-                return src;
-            } else {
-                String s = se.getTranslation();
-                if (s == null || s.length() == 0)
-                    s = src;
-                return s;
-            }
+            TransEntry tr = translations.get(src);
+            return tr != null ? tr.translation : src;
         }
+
         public void addLegacyTMXEntry(String source, String translation) {
         }
     };

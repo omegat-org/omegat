@@ -30,6 +30,7 @@ package org.omegat.filters2;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public interface ITranslateCallback {
+    String processEntry(String s);
     /**
      * Get translation for output to compiled target.
      * 

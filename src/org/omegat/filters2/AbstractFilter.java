@@ -94,7 +94,8 @@ public abstract class AbstractFilter
         TFP_TARGET_COUNTRY_CODE
     };
     
-    protected IParseCallback entryProcessingCallback;
+    protected IParseCallback entryParseCallback;
+    protected ITranslateCallback entryTranslateCallback;
     
     /**
      * The default output filename pattern.
@@ -396,10 +397,13 @@ public abstract class AbstractFilter
      * @param entry Translatable source string
      * @return Translation of the source string. If there's no translation, returns the source string itself.
      */
-    protected final String processEntry(String entry)
-    {
-        return entryProcessingCallback.processEntry(entry);
-       // return FilterMaster.getInstance().processEntry(entry);
+    protected final String processEntry(String entry) {
+        if (entryParseCallback != null) {
+            entryParseCallback.processEntry(entry);
+            return entry;
+        } else {
+            return entryTranslateCallback.processEntry(entry);
+        }
     }
 
     /**
@@ -409,6 +413,30 @@ public abstract class AbstractFilter
      * @param callback
      */
     public void setParseCallback(IParseCallback callback) {
-        this.entryProcessingCallback = callback;
+        this.entryParseCallback = callback;
+        this.entryTranslateCallback = null;
+    }
+    
+    /**
+     * Set callback for translate.Every who executes translating should setup
+     * this callback.
+     * 
+     * @param callback
+     */
+    public void setTranslateCallback(ITranslateCallback callback) {
+        this.entryTranslateCallback = callback;
+        this.entryParseCallback = null;
+    }
+    
+    /**
+     * Set both callbacks. Used for child XML filters only.
+     * 
+     * @param parseCallback
+     * @param translateCallback
+     */
+    public void setCallbacks(IParseCallback parseCallback,
+            ITranslateCallback translateCallback) {
+        this.entryParseCallback = parseCallback;
+        this.entryTranslateCallback = translateCallback;
     }
 }

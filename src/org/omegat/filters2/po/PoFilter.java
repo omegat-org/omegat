@@ -256,24 +256,24 @@ public class PoFilter extends AbstractFilter {
         }
         if (!fuzzy) {
             // add to real translation
-            entryProcessingCallback.addEntry(null, source, translation, null);
+            entryParseCallback.addEntry(null, source, translation, null);
         } else {
             if (FUZZY_TO_LEGACY) {
                 // add to real list without translation
-                entryProcessingCallback.addEntry(null, source, null, null);
+                entryParseCallback.addEntry(null, source, null, null);
                 // add to legacy TM instead real translation
-                entryProcessingCallback.addLegacyTMXEntry(FUZZY_SOURCE_PREFIX
+                entryParseCallback.addFileTMXEntry(FUZZY_SOURCE_PREFIX
                         + source, translation);
             } else {
                 // add to real translation
-                entryProcessingCallback.addEntry(null, FUZZY_SOURCE_PREFIX
+                entryParseCallback.addEntry(null, FUZZY_SOURCE_PREFIX
                         + source, translation, null);
             }
         }
     }
     
     protected void alignHeader(String header) {
-        entryProcessingCallback.addEntry(null, unescape(header), null, null);
+        entryParseCallback.addEntry(null, unescape(header), null, null);
     }
 
     protected void flushTranslation(MODE currentMode) throws IOException {
@@ -354,7 +354,7 @@ public class PoFilter extends AbstractFilter {
         String entry = unescape(en.toString());
 
         // Do real translation
-        String translation = entryProcessingCallback
+        String translation = entryTranslateCallback
                 .getTranslation(null, entry);
 
         if (translation != null) {

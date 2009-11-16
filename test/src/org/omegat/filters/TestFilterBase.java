@@ -65,7 +65,7 @@ public abstract class TestFilterBase extends XMLTestCase {
                 return null;
             }
 
-            public void addLegacyTMXEntry(String source, String translation) {
+            public void addFileTMXEntry(String source, String translation) {
             }
         });
         filter.processFile(new File(filename), null, null, null);
@@ -91,7 +91,7 @@ public abstract class TestFilterBase extends XMLTestCase {
                 return null;
             }
 
-            public void addLegacyTMXEntry(String source, String translation) {
+            public void addFileTMXEntry(String source, String translation) {
                 legacyTMX.put(source, translation);
             }
         });
@@ -113,7 +113,7 @@ public abstract class TestFilterBase extends XMLTestCase {
                 return null;
             }
 
-            public void addLegacyTMXEntry(String source, String translation) {
+            public void addFileTMXEntry(String source, String translation) {
             }
         });
         filter.processFile(new File(filename), null, outFile, null);

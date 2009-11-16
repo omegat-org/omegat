@@ -48,6 +48,8 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
@@ -748,7 +750,7 @@ public class RealProject implements IProject
         return Collections.unmodifiableList(projectFilesList);
     }
         
-    private class LoadFilesCallback extends ParseEntry {  
+    private class LoadFilesCallback extends ParseEntry implements IParseCallback {  
         private FileInfo fileInfo;
         private List<TransMemory> tmForFile;
 
@@ -812,7 +814,7 @@ public class RealProject implements IProject
             return source;
         }
 
-        public void addLegacyTMXEntry(String source, String translation) {
+        public void addFileTMXEntry(String source, String translation) {
             if (StringUtil.isEmpty(translation)) {
                 return;
             }
@@ -824,7 +826,7 @@ public class RealProject implements IProject
         }
     };
 
-    private class TranslateFilesCallback extends ParseEntry {
+    private class TranslateFilesCallback extends ParseEntry implements ITranslateCallback {
         public TranslateFilesCallback() {
             super(m_config);
         }
@@ -841,8 +843,9 @@ public class RealProject implements IProject
             TransEntry tr = translations.get(src);
             return tr != null ? tr.translation : src;
         }
-
-        public void addLegacyTMXEntry(String source, String translation) {
+        
+        public String getTranslation(String id, String source) {
+            return processEntry(source);
         }
     };
 }

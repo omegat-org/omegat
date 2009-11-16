@@ -43,7 +43,7 @@ import org.omegat.util.StaticUtils;
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
  */
-public abstract class ParseEntry implements IParseCallback {
+public abstract class ParseEntry {
     private final ProjectProperties m_config;
 
     public ParseEntry(final ProjectProperties m_config) {
@@ -188,7 +188,7 @@ public abstract class ParseEntry implements IParseCallback {
         } else
             addSegment(id, (short)0, source, translation, comment);
         // Add systematically the TU as a legacy TMX
-        addLegacyTMXEntry(source, translation);
+        //TODO: review : addLegacyTMXEntry(source, translation);
     }
     
     /**

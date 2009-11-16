@@ -47,14 +47,14 @@ public interface IParseCallback {
     void addEntry(String id, String source, String translation, String comment);
 
     /**
-     * Add data to the legacy TMX.
+     * Add data to the TMX with name like source file name.
      * 
      * @param source
      *            source entry text
      * @param translation
      *            translation
      */
-    void addLegacyTMXEntry(String source, String translation);
+    void addFileTMXEntry(String source, String translation);
 
     /**
      * Get translation for output to compiled target.

@@ -39,9 +39,11 @@ import java.util.regex.Pattern;
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ParseEntry;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
+import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.main.MainWindow;
@@ -371,16 +373,23 @@ public class SearchThread extends Thread
             // don't bother to tell handler what we're looking for -
             //	the search data is already known here (and the
             //	handler is in the same thread, so info is not volatile)
-            fm.loadFile(filename, processedFiles, new ParseEntry(Core
+            fm.loadFile(filename, processedFiles, new SearchCallback(Core
                     .getProject().getProjectProperties()) {                
                 protected String processSingleEntry(String src) {
                     searchText(src);
                     return src;
                 }
 
-                public void addLegacyTMXEntry(String source, String translation) {
+                public void addFileTMXEntry(String source, String translation) {
                 }
             });
+        }
+    }
+
+    protected abstract class SearchCallback extends ParseEntry implements
+            IParseCallback {
+        public SearchCallback(ProjectProperties config) {
+            super(config);
         }
     }
     

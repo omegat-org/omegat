@@ -55,6 +55,7 @@ import javax.xml.bind.Unmarshaller;
 import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.LFileCopy;
@@ -325,7 +326,7 @@ public class FilterMaster {
      * @param targetdir The folder to place the translated inFile to.
      * @param processedFiles Set of all already processed files not to redo them again.
      */
-    public void translateFile(String sourcedir, String filename, String targetdir, Set<File> processedFiles, IParseCallback parseCallback)
+    public void translateFile(String sourcedir, String filename, String targetdir, Set<File> processedFiles, ITranslateCallback translateCallback)
             throws IOException, TranslationException
     {        
         LookupInformation lookup = lookupFilter(sourcedir+File.separator+filename);
@@ -356,7 +357,7 @@ public class FilterMaster {
         
         AbstractFilter filterObject = lookup.filterObject;
         
-        filterObject.setParseCallback(parseCallback);
+        filterObject.setTranslateCallback(translateCallback);
         
         List<File> files = filterObject.processFile(inFile, inEncoding, outFile, outEncoding);
         if (files!=null)

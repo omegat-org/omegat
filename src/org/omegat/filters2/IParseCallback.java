@@ -41,10 +41,13 @@ public interface IParseCallback {
      *            source entry text
      * @param translation
      *            exist translation text
+     * @param isFuzzy
+     *            true if translation is fuzzy
      * @param comment
      *            comment for entry, if format supports it
      */
-    void addEntry(String id, String source, String translation, String comment);
+    void addEntry(String id, String source, String translation,
+            boolean isFuzzy, String comment);
 
     /**
      * Add data to the TMX with name like source file name.

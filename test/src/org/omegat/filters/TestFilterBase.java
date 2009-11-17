@@ -58,7 +58,7 @@ public abstract class TestFilterBase extends XMLTestCase {
             }
 
             public void addEntry(String id, String source, String translation,
-                    String comment) {
+                    boolean isFuzzy, String comment) {
             }
 
             public String getTranslation(String id, String source) {
@@ -83,7 +83,7 @@ public abstract class TestFilterBase extends XMLTestCase {
             }
 
             public void addEntry(String id, String source, String translation,
-                    String comment) {
+                    boolean isFuzzy, String comment) {
                 result.put(source, translation);
             }
 
@@ -106,7 +106,7 @@ public abstract class TestFilterBase extends XMLTestCase {
             }
 
             public void addEntry(String id, String source, String translation,
-                    String comment) {
+                    boolean isFuzzy, String comment) {
             }
 
             public String getTranslation(String id, String source) {

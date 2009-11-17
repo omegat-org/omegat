@@ -33,7 +33,6 @@ import java.util.List;
 
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.IParseCallback;
 import org.omegat.util.Language;
 import org.omegat.util.StaticUtils;
 
@@ -44,6 +43,9 @@ import org.omegat.util.StaticUtils;
  * @author Henry Pijffers
  */
 public abstract class ParseEntry {
+    /** Prefix to source for fuzzy segments. */
+    protected static String FUZZY_SOURCE_PREFIX = "[PO-fuzzy] ";
+
     private final ProjectProperties m_config;
 
     public ParseEntry(final ProjectProperties m_config) {
@@ -143,7 +145,7 @@ public abstract class ParseEntry {
      * @param comment
      *            entry's comment, if format supports it
      */
-    public void addEntry(String id, String source, String translation, String comment) {
+    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment) {
         // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
         // this is reversed at the end of the method
         // fix for bug 1462566
@@ -171,6 +173,8 @@ public abstract class ParseEntry {
 
         source = StaticUtils.fixChars(source.substring(b, e + 1));
 
+        String segTranslation = isFuzzy ? null : translation;
+        
         if (m_config.isSentenceSegmentingEnabled()) {
             List<StringBuffer> spaces = new ArrayList<StringBuffer>();
             List<Rule> brules = new ArrayList<Rule>();
@@ -178,17 +182,25 @@ public abstract class ParseEntry {
             List<String> segments = Segmenter.segment(sourceLang, source,
                     spaces, brules);
             if (segments.size() == 1) {
-                addSegment(id, (short)0, segments.get(0), translation, comment);
+                addSegment(id, (short) 0, segments.get(0), segTranslation,
+                        comment);
             } else {
                 for (short i = 0; i < segments.size(); i++) {
                     String onesrc = segments.get(i);
                     addSegment(id, i, onesrc, null, comment);
-                }             
+                }
             }
-        } else
-            addSegment(id, (short)0, source, translation, comment);
-        // Add systematically the TU as a legacy TMX
-        //TODO: review : addLegacyTMXEntry(source, translation);
+        } else {
+            addSegment(id, (short) 0, source, segTranslation, comment);
+        }
+        if (translation != null) {
+            // Add systematically the TU as a legacy TMX
+            String tmxSource = isFuzzy ? FUZZY_SOURCE_PREFIX + source : source;
+            addFileTMXEntry(tmxSource, translation);
+        }
+    }
+    
+    public void addFileTMXEntry(String source, String translation) {
     }
     
     /**

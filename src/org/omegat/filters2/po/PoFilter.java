@@ -65,11 +65,6 @@ public class PoFilter extends AbstractFilter {
     protected static Pattern MSG_STR = Pattern
             .compile("msgstr(\\[[0-9]+\\])? \"(.*)\"");
     protected static Pattern MSG_OTHER = Pattern.compile("\"(.*)\"");
-    
-    /** Prefix to source for fuzzy segments. */
-    protected static String FUZZY_SOURCE_PREFIX = "[PO-fuzzy] ";
-    /** Add fuzzy segments to legacy TM instead translations. */
-    protected static boolean FUZZY_TO_LEGACY = true;
 
     enum MODE {
         MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL
@@ -254,26 +249,11 @@ public class PoFilter extends AbstractFilter {
         if (translation.length() == 0) {
             translation = null;
         }
-        if (!fuzzy) {
-            // add to real translation
-            entryParseCallback.addEntry(null, source, translation, null);
-        } else {
-            if (FUZZY_TO_LEGACY) {
-                // add to real list without translation
-                entryParseCallback.addEntry(null, source, null, null);
-                // add to legacy TM instead real translation
-                entryParseCallback.addFileTMXEntry(FUZZY_SOURCE_PREFIX
-                        + source, translation);
-            } else {
-                // add to real translation
-                entryParseCallback.addEntry(null, FUZZY_SOURCE_PREFIX
-                        + source, translation, null);
-            }
-        }
+        entryParseCallback.addEntry(null, source, translation, fuzzy, null);
     }
     
     protected void alignHeader(String header) {
-        entryParseCallback.addEntry(null, unescape(header), null, null);
+        entryParseCallback.addEntry(null, unescape(header), null, false, null);
     }
 
     protected void flushTranslation(MODE currentMode) throws IOException {

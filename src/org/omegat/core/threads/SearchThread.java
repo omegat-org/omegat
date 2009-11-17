@@ -379,9 +379,6 @@ public class SearchThread extends Thread
                     searchText(src);
                     return src;
                 }
-
-                public void addFileTMXEntry(String source, String translation) {
-                }
             });
         }
     }

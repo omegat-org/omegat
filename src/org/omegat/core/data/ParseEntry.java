@@ -44,7 +44,7 @@ import org.omegat.util.StaticUtils;
  */
 public abstract class ParseEntry {
     /** Prefix to source for fuzzy segments. */
-    protected static String FUZZY_SOURCE_PREFIX = "[PO-fuzzy] ";
+    public static String FUZZY_SOURCE_PREFIX = "[PO-fuzzy] ";
 
     private final ProjectProperties m_config;
 

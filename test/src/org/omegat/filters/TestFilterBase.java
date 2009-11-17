@@ -32,6 +32,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.custommonkey.xmlunit.XMLTestCase;
+import org.omegat.core.data.ParseEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.util.LFileCopy;
@@ -84,7 +85,14 @@ public abstract class TestFilterBase extends XMLTestCase {
 
             public void addEntry(String id, String source, String translation,
                     boolean isFuzzy, String comment) {
-                result.put(source, translation);
+                String segTranslation = isFuzzy ? null : translation;
+                result.put(source, segTranslation);
+                if (translation != null) {
+                    // Add systematically the TU as a legacy TMX
+                    String tmxSource = isFuzzy ? ParseEntry.FUZZY_SOURCE_PREFIX
+                            + source : source;
+                    addFileTMXEntry(tmxSource, translation);
+                }
             }
 
             public String getTranslation(String id, String source) {

@@ -54,6 +54,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -323,7 +324,8 @@ public class RealProject implements IProject
 	        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX",
                     midName);
 
-            fm.translateFile(srcRoot, midName, locRoot, processedFiles, translateFilesCallback);
+	    Language targetLang = getProjectProperties().getTargetLanguage();
+            fm.translateFile(srcRoot, midName, targetLang, locRoot, processedFiles, translateFilesCallback);
         }
         Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
 

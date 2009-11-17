@@ -52,7 +52,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import org.omegat.core.Core;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
@@ -324,11 +323,13 @@ public class FilterMaster {
      * @param sourcedir The folder of the source inFile.
      * @param filename  The name of the source inFile to process (only the part, relative to source folder).
      * @param targetdir The folder to place the translated inFile to.
+     * @param targetLang The target language for the translated file.
      * @param processedFiles Set of all already processed files not to redo them again.
      */
-    public void translateFile(String sourcedir, String filename, String targetdir, Set<File> processedFiles, ITranslateCallback translateCallback)
-            throws IOException, TranslationException
-    {        
+    public void translateFile(String sourcedir, String filename,
+            Language targetLang, String targetdir, Set<File> processedFiles,
+            ITranslateCallback translateCallback) throws IOException,
+            TranslationException {
         LookupInformation lookup = lookupFilter(sourcedir+File.separator+filename);
         if( lookup==null )
         {
@@ -352,7 +353,8 @@ public class FilterMaster {
                 constructTargetFilename(
                 lookup.outFilesInfo.getSourceFilenameMask(),
                 name,
-                lookup.outFilesInfo.getTargetFilenamePattern()));
+                lookup.outFilesInfo.getTargetFilenamePattern(),
+                targetLang));
         String outEncoding = lookup.outFilesInfo.getTargetEncoding();
         
         AbstractFilter filterObject = lookup.filterObject;
@@ -562,7 +564,7 @@ public class FilterMaster {
      * @param pattern Pattern, according to which we change the filename
      * @return The changed filename
      */
-    private String constructTargetFilename(String sourceMask, String filename, String pattern)
+    private String constructTargetFilename(String sourceMask, String filename, String pattern, Language targetLang)
     {
         int lastStarPos = sourceMask.lastIndexOf('*');
         int dot = 0;
@@ -598,8 +600,6 @@ public class FilterMaster {
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_EXTENSION),
                 extension);
         
-        
-        Language targetLang = Core.getProject().getProjectProperties().getTargetLanguage();
         
         res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE),
                 targetLang.getLocaleCode());

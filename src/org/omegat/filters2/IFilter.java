@@ -98,6 +98,8 @@ public interface IFilter {
      *            source file
      * @param inEncoding
      *            source file encoding, configured by user
+     * @param targetLang
+     *            language for translated file
      * @param outFile
      *            output file
      * @param outEncoding
@@ -106,8 +108,9 @@ public interface IFilter {
      *            callback for get translation
      * @throws Exception
      */
-    void translateFile(File inFile, String inEncoding, File outFile,
-            String outEncoding, ITranslateCallback callback) throws Exception;
+    void translateFile(File inFile, String inEncoding, String targetLang,
+            File outFile, String outEncoding, ITranslateCallback callback)
+            throws Exception;
 
     /**
      * Align source and translated files.

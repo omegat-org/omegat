@@ -92,6 +92,10 @@ public class PoFilter extends AbstractFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
+    
+    public String getFuzzyMark() {
+        return "PO-fuzzy";
+    }
 
     public List<File> processFile(File inFile, String inEncoding, File outFile,
             String outEncoding) throws IOException, TranslationException {
@@ -249,11 +253,11 @@ public class PoFilter extends AbstractFilter {
         if (translation.length() == 0) {
             translation = null;
         }
-        entryParseCallback.addEntry(null, source, translation, fuzzy, null);
+        entryParseCallback.addEntry(null, source, translation, fuzzy, null, this);
     }
     
     protected void alignHeader(String header) {
-        entryParseCallback.addEntry(null, unescape(header), null, false, null);
+        entryParseCallback.addEntry(null, unescape(header), null, false, null, this);
     }
 
     protected void flushTranslation(MODE currentMode) throws IOException {

@@ -199,6 +199,17 @@ public abstract class AbstractFilter
             return false;
         }
     }
+    
+    /**
+     * Define fuzzy mark prefix for source which will be stored in TM. It's
+     * 'fuzzy' by default, but each filter can redefine it.
+     * 
+     * @return fuzzy mark prefix
+     */
+    public String getFuzzyMark() {
+        return "fuzzy";
+    }
+    
 
     /**
      * Returns the hint displayed while the user edits the filter,

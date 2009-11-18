@@ -59,7 +59,7 @@ public abstract class TestFilterBase extends XMLTestCase {
             }
 
             public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment) {
+                    boolean isFuzzy, String comment, AbstractFilter filter) {
             }
 
             public String getTranslation(String id, String source) {
@@ -84,13 +84,13 @@ public abstract class TestFilterBase extends XMLTestCase {
             }
 
             public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment) {
+                    boolean isFuzzy, String comment, AbstractFilter filter) {
                 String segTranslation = isFuzzy ? null : translation;
                 result.put(source, segTranslation);
                 if (translation != null) {
                     // Add systematically the TU as a legacy TMX
-                    String tmxSource = isFuzzy ? ParseEntry.FUZZY_SOURCE_PREFIX
-                            + source : source;
+                    String tmxSource = isFuzzy ? "[" + filter.getFuzzyMark()
+                            + "] " + source : source;
                     addFileTMXEntry(tmxSource, translation);
                 }
             }
@@ -114,7 +114,7 @@ public abstract class TestFilterBase extends XMLTestCase {
             }
 
             public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment) {
+                    boolean isFuzzy, String comment, AbstractFilter filter) {
             }
 
             public String getTranslation(String id, String source) {

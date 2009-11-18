@@ -764,6 +764,7 @@ public class RealProject implements IProject
             fileInfo = fi;
             tmForFile = null;
         }
+        
         /**
          * Processes a single entry. This method doesn't perform any changes on
          * the passed string.

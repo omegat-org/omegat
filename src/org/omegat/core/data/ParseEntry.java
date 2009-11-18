@@ -33,6 +33,7 @@ import java.util.List;
 
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.util.Language;
 import org.omegat.util.StaticUtils;
 
@@ -43,8 +44,6 @@ import org.omegat.util.StaticUtils;
  * @author Henry Pijffers
  */
 public abstract class ParseEntry {
-    /** Prefix to source for fuzzy segments. */
-    public static String FUZZY_SOURCE_PREFIX = "[PO-fuzzy] ";
 
     private final ProjectProperties m_config;
 
@@ -129,7 +128,7 @@ public abstract class ParseEntry {
 
         return result;
     }
-    
+
     /**
      * This method is called by filters to add new entry in OmegaT after read it
      * from source file.
@@ -144,8 +143,11 @@ public abstract class ParseEntry {
      *            flag for fuzzy translation
      * @param comment
      *            entry's comment, if format supports it
+     * @param filter
+     *            filter which produces entry
      */
-    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment) {
+    public void addEntry(String id, String source, String translation,
+            boolean isFuzzy, String comment, AbstractFilter filter) {
         // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
         // this is reversed at the end of the method
         // fix for bug 1462566
@@ -195,7 +197,12 @@ public abstract class ParseEntry {
         }
         if (translation != null) {
             // Add systematically the TU as a legacy TMX
-            String tmxSource = isFuzzy ? FUZZY_SOURCE_PREFIX + source : source;
+            String tmxSource;
+            if (isFuzzy) {
+                tmxSource = "[" + filter.getFuzzyMark() + "] " + source;
+            } else {
+                tmxSource = source;
+            }
             addFileTMXEntry(tmxSource, translation);
         }
     }

@@ -78,6 +78,14 @@ public interface IFilter {
     boolean isTargetEncodingVariable();
 
     /**
+     * Define fuzzy mark prefix for source which will be stored in TM. It's
+     * 'fuzzy' by default, but each filter can redefine it.
+     * 
+     * @return fuzzy mark prefix
+     */
+    String getFuzzyMark();
+    
+    /**
      * Parse single file.
      * 
      * @param inFile

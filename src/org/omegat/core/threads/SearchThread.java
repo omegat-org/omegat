@@ -43,6 +43,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
@@ -378,6 +379,12 @@ public class SearchThread extends Thread
                 protected String processSingleEntry(String src) {
                     searchText(src);
                     return src;
+                }
+
+                public void addEntry(String id, String source,
+                        String translation, boolean isFuzzy, String comment,
+                        AbstractFilter filter) {
+                    searchText(source);
                 }
             });
         }

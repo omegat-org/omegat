@@ -37,6 +37,10 @@
     <li>
       <p><a href="#tag_hints">Hints for tags management</a></p>
     </li>
+
+    <li>
+      <p><A href="#printf">printf-placeholders</A></p>
+    </li>
   </ul>
 
   <p>Formatting information present in the source file usually needs to be
@@ -332,6 +336,40 @@
   error or change formatting to fit your target language better. Sometimes,
   however, your translated file may look strange, and in case of OpenDocument /
   OpenOffice.org files it may even refuse to open.</p>
+
+  <hr>
+
+  <h3><a name="printf"></a>printf-placeholders</h3>
+
+  <p>In some programming languages (e.g. PHP, C) special tags are used as 
+  placeholders in strings that are used in combination with the printf-function.
+  E.g.:
+  </p>
+  <pre>$var =_("cool");
+echo printf(_("OmegaT is very %s"),$var);</pre>
+
+  <p>If the text strings are extracted from this source code (e.g. via the 
+  PO-filter), OmegaT does not replace these variables with tags, because it 
+  cannot know for certain if e.g. <code>%s</code> is actually a placeholder or 
+  just a part of a text. You can however enable validation of these placeholders.
+  Select <strong>Options→ Tag Validation...</strong> from the menu. You can choose 
+  between simple and full validation.</p>
+
+  <p>The official syntax for printf-variables is</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Full validation fully supports this format, except for the 
+  <code>WIDTHSPECIFIER</code>.
+  In simple validation the following syntax is checked:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>You can change the order of the placeholders, but then you have to add the 
+  ARGUMENTSWAPSPECIFIER if it is not there yet. This means adding a sequence 
+  number and a dollar sign after the <code>%</code>. E.g. 
+  <code>"%s is a %s application"</code> equals 
+  <code>"%1$s is a %2$s application"</code> which you can translate with 
+  <code>"a %2$s application is %1$s"</code>.
+  </p>
   <hr>
 
   <table style="width: 100%;" summary="just formatting" border="0" cellpadding=

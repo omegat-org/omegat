@@ -394,6 +394,15 @@
   create the translated files. Finally, you should always double-check the
   final formatting by opening the translated document in its associated viewer
   or editor.</p>
+  
+  <p>In some programming languages (e.g. PHP, C) special tags are used as 
+  placeholders in strings that are used in combination with the printf-function.
+  OmegaT can detect and validate these tags if you enable it. Select 
+  <strong>Options→ <a href="formattedText.html#printf">Tag Validation...</a>
+  </strong> from the menu. You can choose between simple and full validation. 
+  In simple validation only simple variants of the possible placeholder values 
+  are used. This is usefull when the source code does not contain the more 
+  expressive and complex placeholders and you get a lot of false positives.</p>
   <hr>
 
   <table style="width: 100%;" summary="just formatting" border="0" cellpadding=

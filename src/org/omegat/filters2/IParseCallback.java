@@ -31,15 +31,6 @@ package org.omegat.filters2;
  */
 public interface IParseCallback {
     /**
-     * Method for process entry by old-style filters.
-     * 
-     * @param entry
-     * @return
-     * @deprecated
-     */
-    String processEntry(String entry);
-
-    /**
      * Read entry from source file
      * 
      * @param id

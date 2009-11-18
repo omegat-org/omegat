@@ -410,10 +410,10 @@ public abstract class AbstractFilter
      */
     protected final String processEntry(String entry) {
         if (entryParseCallback != null) {
-            entryParseCallback.processEntry(entry);
+            entryParseCallback.addEntry(null, entry, null, false, null, this);
             return entry;
         } else {
-            return entryTranslateCallback.processEntry(entry);
+            return entryTranslateCallback.getTranslation(null, entry);
         }
     }
 

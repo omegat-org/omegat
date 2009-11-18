@@ -375,16 +375,14 @@ public class SearchThread extends Thread
             //	the search data is already known here (and the
             //	handler is in the same thread, so info is not volatile)
             fm.loadFile(filename, processedFiles, new SearchCallback(Core
-                    .getProject().getProjectProperties()) {                
-                protected String processSingleEntry(String src) {
-                    searchText(src);
-                    return src;
+                    .getProject().getProjectProperties()) {
+                protected void addSegment(String id, short segmentIndex,
+                        String segmentSource, String segmentTranslation,
+                        String comment) {
+                    searchText(segmentSource);
                 }
 
-                public void addEntry(String id, String source,
-                        String translation, boolean isFuzzy, String comment,
-                        AbstractFilter filter) {
-                    searchText(source);
+                public void addFileTMXEntry(String source, String translation) {
                 }
             });
         }

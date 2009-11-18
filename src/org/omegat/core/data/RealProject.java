@@ -48,8 +48,6 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.filters2.IParseCallback;
-import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
@@ -752,7 +750,7 @@ public class RealProject implements IProject
         return Collections.unmodifiableList(projectFilesList);
     }
         
-    private class LoadFilesCallback extends ParseEntry implements IParseCallback {  
+    private class LoadFilesCallback extends ParseEntry {  
         private FileInfo fileInfo;
         private List<TransMemory> tmForFile;
 
@@ -763,38 +761,6 @@ public class RealProject implements IProject
         protected void setCurrentFile(FileInfo fi) {
             fileInfo = fi;
             tmForFile = null;
-        }
-        
-        /**
-         * Processes a single entry. This method doesn't perform any changes on
-         * the passed string.
-         * 
-         * @param src
-         *                Translatable source string
-         * @return Translation of the source string. If there's no translation,
-         *         returns the source string itself.
-         */
-        protected String processSingleEntry(String src) {
-            addEntry(src);
-            return src;
-        }
-
-        /**
-         * Creates a new Source Text Entry
-         * (mapping between source file and a TM).
-         * Also if there's no entry for <code>srcText</code> string yet,
-         * then adds a new String Entry to internal in-memory TM.
-         */
-        private void addEntry(String srcText)
-        {
-            // if the source string is empty, don't add it to TM
-            if( srcText.length()==0 || srcText.trim().length()==0 )
-                return;
-            
-            SourceTextEntry srcTextEntry = new SourceTextEntry(srcText,
-                    allProjectEntries.size() + 1);
-            allProjectEntries.add(srcTextEntry);
-            fileInfo.entries.add(srcTextEntry);
         }
 
         protected void addSegment(String id, short segmentIndex,
@@ -812,10 +778,6 @@ public class RealProject implements IProject
             allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);
         }
-        @Override
-        public String getTranslation(String id, String source) {
-            return source;
-        }
 
         public void addFileTMXEntry(String source, String translation) {
             if (StringUtil.isEmpty(translation)) {
@@ -829,26 +791,15 @@ public class RealProject implements IProject
         }
     };
 
-    private class TranslateFilesCallback extends ParseEntry implements ITranslateCallback {
+    private class TranslateFilesCallback extends TranslateEntry {
         public TranslateFilesCallback() {
             super(m_config);
         }
-        /**
-         * Processes a single entry. This method doesn't perform any changes on
-         * the passed string.
-         * 
-         * @param src
-         *                Translatable source string
-         * @return Translation of the source string. If there's no translation,
-         *         returns the source string itself.
-         */
-        protected String processSingleEntry(String src) {
-            TransEntry tr = translations.get(src);
-            return tr != null ? tr.translation : src;
-        }
-        
-        public String getTranslation(String id, String source) {
-            return processEntry(source);
+
+        protected String getSegmentTranslation(String id, int segmentIndex,
+                String segmentSource) {
+            TransEntry tr = translations.get(segmentSource);
+            return tr != null ? tr.translation : segmentSource;
         }
     };
 }

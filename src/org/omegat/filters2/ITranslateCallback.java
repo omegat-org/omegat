@@ -30,7 +30,15 @@ package org.omegat.filters2;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public interface ITranslateCallback {
-    String processEntry(String s);
+    /**
+     * Method for process entry by old-style filters.
+     * 
+     * @param entry
+     * @return
+     * @deprecated
+     */
+    String processEntry(String entry);
+
     /**
      * Get translation for output to compiled target.
      * 

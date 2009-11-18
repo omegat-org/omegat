@@ -34,6 +34,8 @@ import java.util.List;
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.Language;
 import org.omegat.util.StaticUtils;
 
@@ -43,7 +45,7 @@ import org.omegat.util.StaticUtils;
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
  */
-public abstract class ParseEntry {
+public abstract class ParseEntry implements IParseCallback, ITranslateCallback {
 
     private final ProjectProperties m_config;
 

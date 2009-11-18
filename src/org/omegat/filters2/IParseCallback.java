@@ -30,6 +30,13 @@ package org.omegat.filters2;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public interface IParseCallback {
+    /**
+     * Method for process entry by old-style filters.
+     * 
+     * @param entry
+     * @return
+     * @deprecated
+     */
     String processEntry(String entry);
 
     /**
@@ -60,15 +67,4 @@ public interface IParseCallback {
      *            translation
      */
     void addFileTMXEntry(String source, String translation);
-
-    /**
-     * Get translation for output to compiled target.
-     * 
-     * @param id
-     *            ID in source file, or null if ID not supported by format
-     * @param source
-     *            source entry text
-     * @return translation or source if translation not exist
-     */
-    String getTranslation(String id, String source);
 }

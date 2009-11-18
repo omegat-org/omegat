@@ -129,7 +129,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
     }
 
     /** Processes an XML file. */
-    public List<File> processFile(File inFile, String inEncoding, File outFile, String outEncoding) 
+    public void processFile(File inFile, String inEncoding, File outFile, String outEncoding) 
             throws IOException, TranslationException
     {
         try
@@ -144,7 +144,6 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
             parser.setProperty("http://xml.org/sax/properties/declaration-handler", handler); // NOI18N
             parser.parse(source, handler);
             inReader.close();
-            return handler.getProcessedFiles();
         }
         catch(ParserConfigurationException e)
         {

@@ -110,7 +110,7 @@ public class OpenDocFilter extends AbstractFilter
      * which is actually a ZIP file consisting of many XML files, 
      * some of which should be translated.
      */
-    public List<File> processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
+    public void processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
     {
         ZipFile zipfile = new ZipFile(inFile);
         ZipOutputStream zipout = null;
@@ -171,7 +171,6 @@ public class OpenDocFilter extends AbstractFilter
         }
         if (zipout!=null)
             zipout.close();
-        return null;
     }
 
     /** Human-readable OpenDocument filter name. */

@@ -182,7 +182,7 @@ public class OpenXMLFilter extends AbstractFilter
      * which is actually a ZIP file consisting of many XML files, 
      * some of which should be translated.
      */
-    public List<File> processFile(File inFile, String inEncoding, File outFile, 
+    public void processFile(File inFile, String inEncoding, File outFile, 
                             String outEncoding) 
                             throws IOException, TranslationException
     {
@@ -314,7 +314,6 @@ public class OpenXMLFilter extends AbstractFilter
         }
         if (zipout!=null)
             zipout.close();
-        return null;
     }
 
     /** Human-readable Open XML filter name. */

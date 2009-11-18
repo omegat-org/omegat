@@ -381,7 +381,7 @@ public abstract class AbstractFilter implements IFilter {
      *
      * @author Martin Wunderlich
      */
-    protected List<File> processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
+    protected void processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
     {
     	BufferedReader reader = createReader(inFile, inEncoding);
     	BufferedWriter writer;
@@ -395,7 +395,6 @@ public abstract class AbstractFilter implements IFilter {
         
         reader.close();
         writer.close();
-        return null;
     }
     
     public void parseFile(File inFile, String inEncoding,

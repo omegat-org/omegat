@@ -97,7 +97,7 @@ public class PoFilter extends AbstractFilter {
         return "PO-fuzzy";
     }
 
-    public List<File> processFile(File inFile, String inEncoding, File outFile,
+    public void processFile(File inFile, String inEncoding, File outFile,
             String outEncoding) throws IOException, TranslationException {
         BufferedReader reader = createReader(inFile, inEncoding);
         BufferedWriter writer;
@@ -113,7 +113,6 @@ public class PoFilter extends AbstractFilter {
         if (writer != null) {
             writer.close();
         }
-        return null;
     }
 
     public void processFile(BufferedReader in, BufferedWriter out)

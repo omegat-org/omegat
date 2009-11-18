@@ -41,6 +41,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -105,8 +106,13 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         List<String> locTags = new ArrayList<String>(32);
         List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
 
-        // PO validation: pattern to detect printf variables (%s and %n\$s)
-        Pattern printfPattern = PatternConsts.PRINTF_VARS;
+        //programming language  validation: pattern to detect printf variables (%s and %n\$s)
+        Pattern printfPattern=null;
+        if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
+            printfPattern = PatternConsts.PRINTF_VARS;
+        } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
+            printfPattern = PatternConsts.SIMPLE_PRINTF_VARS;
+        }
 
         for(FileInfo fi:Core.getProject().getProjectFiles()) {
           for (SourceTextEntry ste : fi.entries) {
@@ -119,9 +125,8 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                 continue;
             }
 
-            //Extra checks for PO files:
-            if (fi.filePath.endsWith(".po") || fi.filePath.endsWith(".pot")) { //TODO: check with source-files settings for PO instead of hardcoded?
-                // PO printf variables should be equal.
+            if (printfPattern != null) {
+                // printf variables should be equal.
                 // we check this by adding the string "index+typespecifier" of every 
                 // found variable to a set.
                 // If the sets of the source and target are not equal, then there is
@@ -157,6 +162,9 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     suspects.add(ste);
                     continue;
                 }
+            }
+            //Extra checks for PO files:
+            if (fi.filePath.endsWith(".po") || fi.filePath.endsWith(".pot")) { //TODO: check with source-files settings for PO instead of hardcoded?
                 // check PO line ending:
                 Boolean s_ends_lf = s.endsWith("\n");
                 Boolean t_ends_lf = te.translation.endsWith("\n");

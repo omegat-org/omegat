@@ -166,5 +166,12 @@ public class PatternConsts
      *  Example in code: <code>echo printf(gettext("%s is very %s"), "OmegaT", "great");</code>*/
     public static final Pattern PRINTF_VARS = Pattern.compile(
             "%([1-9]+\\$)?([+-])?('.)?(-)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]", Pattern.CASE_INSENSITIVE);
+    /**
+     * Pattern for detecting the placeholders in a printf-function string. 
+     * It detects only simple placeholders, without SIGN-, PADDING-, ALIGNMENT- and WIDTH specifier.
+     * @see PRINTF_VARS
+     */
+    public static final Pattern SIMPLE_PRINTF_VARS = Pattern.compile(
+            "%([1-9]+\\$)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]", Pattern.CASE_INSENSITIVE);
 
 }

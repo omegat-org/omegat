@@ -208,6 +208,7 @@ public class MainWindowMenu implements ActionListener {
         optionsMenu.add(optionsSentsegMenuItem = createMenuItem("MW_OPTIONSMENU_SENTSEG"));
         optionsMenu.add(optionsSpellCheckMenuItem = createMenuItem("MW_OPTIONSMENU_SPELLCHECK"));
         optionsMenu.add(optionsWorkflowMenuItem = createMenuItem("MW_OPTIONSMENU_WORKFLOW"));
+        optionsMenu.add(optionsTagValidationMenuItem = createMenuItem("MW_OPTIONSMENU_TAGVALIDATION"));
         optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
 
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
@@ -416,6 +417,7 @@ public class MainWindowMenu implements ActionListener {
     JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     JCheckBoxMenuItem optionsGoogleTranslateMenuItem;
     JMenuItem optionsWorkflowMenuItem;
+    JMenuItem optionsTagValidationMenuItem;
     JMenuItem projectCloseMenuItem;
     JMenuItem projectCompileMenuItem;
     JMenuItem projectEditMenuItem;

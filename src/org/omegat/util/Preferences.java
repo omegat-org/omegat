@@ -136,7 +136,13 @@ public class Preferences
     /** Workflow Option: Export current segment  */
     public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment"; // NOI18N
 
-    
+    /** Tag Validation Option: Don't check printf-tags */
+    public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";       //NOI18N
+    /** Tag Validation Option: check simple printf-tags */
+    public static final String CHECK_SIMPLE_PRINTF_TAGS = "tagValidation_simpleCheck"; //NOI18N
+    /** Tag Validation Option: check all printf-tags */
+    public static final String CHECK_ALL_PRINTF_TAGS = "tagValidation_elaborateCheck"; //NOI18N
+
     /** 
      * allow automatic spell checking or not
      */

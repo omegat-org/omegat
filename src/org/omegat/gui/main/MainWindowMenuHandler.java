@@ -39,6 +39,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
+import org.omegat.gui.dialogs.TagValidationOptionsDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filters2.FiltersCustomizer;
@@ -573,6 +574,14 @@ public class MainWindowMenuHandler {
      */
     public void optionsWorkflowMenuItemActionPerformed() {
         new WorkflowOptionsDialog(mainWindow).setVisible(true);
+    }
+
+    /**
+     * Displays the tag validation setup dialog to allow customizing the diverse
+     * tag validation options.
+     */
+    public void optionsTagValidationMenuItemActionPerformed() {
+        new TagValidationOptionsDialog(mainWindow).setVisible(true);
     }
 
     /**

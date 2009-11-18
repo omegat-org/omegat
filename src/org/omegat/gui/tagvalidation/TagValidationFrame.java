@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, Henry Pijffers
                2007 Didier Briel
-               2008 Martin Fleurke
+               2008-2009 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,6 +33,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -189,7 +190,7 @@ public class TagValidationFrame extends JFrame
    /** Replace tags with 
      * &lt;font color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt; 
      */
-    private String colorTags(String str, String color)
+    private String colorTags(String str, String color, Pattern printfPattern)
     {
         //show OmegaT tags in bold and color
         Matcher tagMatch = PatternConsts.OMEGAT_HTML_TAG.matcher(str);
@@ -201,9 +202,11 @@ public class TagValidationFrame extends JFrame
         str = lfMatch.replaceAll(
                 "<font color=\"" + color + "\"><sup>L</sup>F<br></font>");      // NOI18N
         //show printf variables in bold and color (e.g. %s and %n\$s)
-        Matcher varMatch = PatternConsts.PRINTF_VARS.matcher(str);
-        str = varMatch.replaceAll(
-                "<font color=\"" + color + "\"><b>$0</b></font>");              // NOI18N
+        if (printfPattern != null) {
+            Matcher varMatch = PatternConsts.PRINTF_VARS.matcher(str);
+            str = varMatch.replaceAll(
+                    "<font color=\"" + color + "\"><b>$0</b></font>");              // NOI18N
+        }
         return str;
     }
    
@@ -215,6 +218,12 @@ public class TagValidationFrame extends JFrame
 
     private void update()
     {
+        Pattern printfPattern=null;
+        if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
+            printfPattern = PatternConsts.PRINTF_VARS;
+        } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
+            printfPattern = PatternConsts.SIMPLE_PRINTF_VARS;
+        }
         StringBuffer output = new StringBuffer();
         
         output.append("<html>\n");                                              // NOI18N
@@ -249,10 +258,10 @@ public class TagValidationFrame extends JFrame
                 output.append("</a>");                                          // NOI18N
                 output.append("</td>");                                         // NOI18N
                 output.append("<td>");                                          // NOI18N
-                output.append(colorTags(htmlize(src), "blue"));                 // NOI18N     
+                output.append(colorTags(htmlize(src), "blue", printfPattern));  // NOI18N
                 output.append("</td>");                                         // NOI18N
                 output.append("<td>");                                          // NOI18N
-                output.append(colorTags(htmlize(trans.translation), "blue"));   // NOI18N
+                output.append(colorTags(htmlize(trans.translation), "blue", printfPattern));// NOI18N
                 output.append("</td>");                                         // NOI18N
                 output.append("</tr>\n");                                       // NOI18N
             }

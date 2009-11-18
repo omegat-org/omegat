@@ -26,6 +26,8 @@ package org.omegat.filters2;
 
 import java.io.File;
 
+import org.omegat.util.Language;
+
 /**
  * Interface for filters declaration.
  * 
@@ -116,7 +118,7 @@ public interface IFilter {
      *            callback for get translation
      * @throws Exception
      */
-    void translateFile(File inFile, String inEncoding, String targetLang,
+    void translateFile(File inFile, String inEncoding, Language targetLang,
             File outFile, String outEncoding, ITranslateCallback callback)
             throws Exception;
 

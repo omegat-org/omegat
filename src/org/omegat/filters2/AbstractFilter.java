@@ -39,6 +39,7 @@ import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.List;
 
+import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 
 /**
@@ -58,8 +59,7 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author  Martin Wunderlich
  */
-public abstract class AbstractFilter
-{
+public abstract class AbstractFilter implements IFilter {
     
     /**
      * This value represents to the user that the encoding is determined by the filter itself.
@@ -381,7 +381,7 @@ public abstract class AbstractFilter
      *
      * @author Martin Wunderlich
      */
-    public List<File> processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
+    protected List<File> processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
     {
     	BufferedReader reader = createReader(inFile, inEncoding);
     	BufferedWriter writer;
@@ -396,6 +396,25 @@ public abstract class AbstractFilter
         reader.close();
         writer.close();
         return null;
+    }
+    
+    public void parseFile(File inFile, String inEncoding,
+            IParseCallback callback) throws Exception {
+        entryParseCallback = callback;
+        entryTranslateCallback = null;
+        processFile(inFile, inEncoding, null, null);
+    }
+    
+    public void alignFile(File inFile, String inEncoding, File outFile,
+            String outEncoding, IAlignCallback callback) throws Exception {
+    }
+    
+    public void translateFile(File inFile, String inEncoding,
+            Language targetLang, File outFile, String outEncoding,
+            ITranslateCallback callback) throws Exception {
+        entryParseCallback = null;
+        entryTranslateCallback = callback;
+        processFile(inFile, inEncoding, outFile, outEncoding);
     }
     
     /**
@@ -415,28 +434,6 @@ public abstract class AbstractFilter
         } else {
             return entryTranslateCallback.getTranslation(null, entry);
         }
-    }
-
-    /**
-     * Set callback for process entry. Every who executes parsing should setup
-     * this callback.
-     * 
-     * @param callback
-     */
-    public void setParseCallback(IParseCallback callback) {
-        this.entryParseCallback = callback;
-        this.entryTranslateCallback = null;
-    }
-    
-    /**
-     * Set callback for translate.Every who executes translating should setup
-     * this callback.
-     * 
-     * @param callback
-     */
-    public void setTranslateCallback(ITranslateCallback callback) {
-        this.entryTranslateCallback = callback;
-        this.entryParseCallback = null;
     }
     
     /**

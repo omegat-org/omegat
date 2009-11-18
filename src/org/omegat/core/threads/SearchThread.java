@@ -43,7 +43,6 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
-import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
@@ -360,21 +359,15 @@ public class SearchThread extends Thread
         StaticUtils.buildFileList(fileList, new File(m_searchDir), m_searchRecursive);
         
         FilterMaster fm = FilterMaster.getInstance();
-        Set<File> processedFiles = new HashSet<File>();
         
-        for (String filename :  fileList)
-        {
-            File file = new File(filename);
-            if (processedFiles.contains(file))
-                continue;
-            
+        for (String filename :  fileList) {
             // determine actual file name w/ no root path info
             m_curFileName = filename.substring(m_searchDir.length());
             
             // don't bother to tell handler what we're looking for -
             //	the search data is already known here (and the
             //	handler is in the same thread, so info is not volatile)
-            fm.loadFile(filename, processedFiles, new SearchCallback(Core
+            fm.loadFile(filename, new SearchCallback(Core
                     .getProject().getProjectProperties()) {
                 protected void addSegment(String id, short segmentIndex,
                         String segmentSource, String segmentTranslation,

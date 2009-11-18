@@ -520,16 +520,9 @@ public class RealProject implements IProject
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
         
-        Set<File> processedFiles = new HashSet<File>();
-        
         projectFilesList = new ArrayList<FileInfo>();
         
-        for (String filename : srcFileList)
-        {
-            File file = new File(filename);
-            if (processedFiles.contains(file))
-                continue;
-            
+        for (String filename : srcFileList) {
             // strip leading path information;
             // feed file name to project window
             String filepath = filename.substring(m_config.getSourceRoot().length());
@@ -544,7 +537,7 @@ public class RealProject implements IProject
             
             loadFilesCallback.setCurrentFile(fi);
             
-            boolean fileLoaded = fm.loadFile(filename, processedFiles, loadFilesCallback);
+            boolean fileLoaded = fm.loadFile(filename, loadFilesCallback);
             
             if (fileLoaded && (fi.entries.size() > 0)) {
                 projectFilesList.add(fi);

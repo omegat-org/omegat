@@ -32,9 +32,9 @@ import java.util.List;
 import java.util.Map;
 
 import org.custommonkey.xmlunit.XMLTestCase;
-import org.omegat.core.data.ParseEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.LFileCopy;
 import org.xml.sax.InputSource;
 
@@ -51,25 +51,16 @@ public abstract class TestFilterBase extends XMLTestCase {
             throws Exception {
         final List<String> result = new ArrayList<String>();
 
-        filter.setParseCallback(new IParseCallback() {
-            public String processEntry(String entry) {
-                if (entry.length() > 0)
-                    result.add(entry);
-                return entry;
-            }
-
+        filter.parseFile(new File(filename), null, new IParseCallback() {
             public void addEntry(String id, String source, String translation,
                     boolean isFuzzy, String comment, AbstractFilter filter) {
-            }
-
-            public String getTranslation(String id, String source) {
-                return null;
+                if (source.length() > 0)
+                    result.add(source);
             }
 
             public void addFileTMXEntry(String source, String translation) {
             }
         });
-        filter.processFile(new File(filename), null, null, null);
 
         return result;
     }
@@ -78,11 +69,7 @@ public abstract class TestFilterBase extends XMLTestCase {
             final Map<String, String> result,
             final Map<String, String> legacyTMX) throws Exception {
 
-        filter.setParseCallback(new IParseCallback() {
-            public String processEntry(String entry) {
-                return null;
-            }
-
+        filter.parseFile(new File(filename), null, new IParseCallback() {
             public void addEntry(String id, String source, String translation,
                     boolean isFuzzy, String comment, AbstractFilter filter) {
                 String segTranslation = isFuzzy ? null : translation;
@@ -95,36 +82,19 @@ public abstract class TestFilterBase extends XMLTestCase {
                 }
             }
 
-            public String getTranslation(String id, String source) {
-                return null;
-            }
-
             public void addFileTMXEntry(String source, String translation) {
                 legacyTMX.put(source, translation);
             }
         });
-        filter.processFile(new File(filename), null, null, null);
     }
 
     protected void translate(AbstractFilter filter, String filename)
             throws Exception {
-        filter.setParseCallback(new IParseCallback() {
-            public String processEntry(String entry) {
-                return entry;
-            }
-
-            public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment, AbstractFilter filter) {
-            }
-
+        filter.translateFile(new File(filename), null, null, outFile, null, new ITranslateCallback() {
             public String getTranslation(String id, String source) {
-                return null;
-            }
-
-            public void addFileTMXEntry(String source, String translation) {
+                return source;
             }
         });
-        filter.processFile(new File(filename), null, outFile, null);
     }
 
     protected void translateText(AbstractFilter filter, String filename)

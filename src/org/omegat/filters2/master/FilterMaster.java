@@ -277,11 +277,10 @@ public class FilterMaster {
      * OmegaT core calls this method to load a source file.
      *
      * @param filename  The name of the source file to load.
-     * @param processedFiles The set of already processed files.
      * @return          Whether the file was handled by one of OmegaT filters.
      * @see #translateFile(String, String, String)
      */
-    public boolean loadFile(String filename, Set<File> processedFiles, IParseCallback parseCallback)
+    public boolean loadFile(String filename, IParseCallback parseCallback)
             throws IOException, TranslationException
     {
         try
@@ -294,13 +293,9 @@ public class FilterMaster {
             String inEncoding = lookup.outFilesInfo.getSourceEncoding();
             AbstractFilter filterObject = lookup.filterObject;
             
-            filterObject.setParseCallback(parseCallback);
-            
-            List<File> files = filterObject.processFile(inFile, inEncoding, null, null);
-            if (files!=null)
-                processedFiles.addAll(files);
+            filterObject.parseFile(inFile, inEncoding, parseCallback);
         }
-        catch( IOException ioe )
+        catch( Exception ioe )
         {
             ioe.printStackTrace();
             throw new IOException(filename + "\n" + ioe);                       // NOI18N
@@ -358,12 +353,12 @@ public class FilterMaster {
         String outEncoding = lookup.outFilesInfo.getTargetEncoding();
         
         AbstractFilter filterObject = lookup.filterObject;
-        
-        filterObject.setTranslateCallback(translateCallback);
-        
-        List<File> files = filterObject.processFile(inFile, inEncoding, outFile, outEncoding);
-        if (files!=null)
-            processedFiles.addAll(files);
+        try {
+            filterObject.translateFile(inFile, inEncoding, targetLang, outFile,
+                    outEncoding, translateCallback);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }    
     }
     
     class LookupInformation

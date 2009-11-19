@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.1
 ----------------------------------------------------------------------
-  3 Enhancements
-  2 Bugfixes
+  4 Enhancements
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.1.1 vs. 2.1.0
 
@@ -15,10 +15,16 @@
 
   - Text selected in the Matches pane can be inserted with a right click
 
+  - New options to enable checking localisation variables
+  (see http://sourceforge.net/support/tracker.php?aid=2890624)
+
   Bug Fixes:
 
   - Number of unique segments always 0 in standard statistics
   http://sourceforge.net/support/tracker.php?aid=2879866
+
+  - Non-tag is marked as tag error 
+  http://sourceforge.net/support/tracker.php?aid=2890624
 
   - When there were fuzzy matches for a given segment, it wasn't counted
 as a repetition in Match Statistics

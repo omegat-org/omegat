@@ -107,7 +107,7 @@ public class TagValidationOptionsDialog extends JDialog
 
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
-        setTitle(OStrings.getString("GUI_TITLE_Workflow_Options"));
+        setTitle(OStrings.getString("GUI_TITLE_TagValidation_Options"));
         addWindowListener(new java.awt.event.WindowAdapter()
         {
             public void windowClosing(java.awt.event.WindowEvent evt)

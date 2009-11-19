@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2009 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,7 +40,8 @@ import org.omegat.util.Preferences;
 
 /**
  *
- * @author  Maxym Mykhalchuk
+ * @author Maxym Mykhalchuk
+ * @author Martin Fleurke
  */
 public class TagValidationOptionsDialog extends JDialog
 {

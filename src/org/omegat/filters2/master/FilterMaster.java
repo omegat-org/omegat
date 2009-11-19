@@ -53,6 +53,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
@@ -102,7 +103,7 @@ public class FilterMaster {
     private Filters config;
 
     /** Instances of all filter classes. */
-    private List<AbstractFilter> filtersInstances;
+    private List<IFilter> filtersInstances;
     
     static {
         try {
@@ -116,10 +117,10 @@ public class FilterMaster {
      * Create a new FilterMaster.
      */
     private FilterMaster() {
-        filtersInstances = new ArrayList<AbstractFilter>();
+        filtersInstances = new ArrayList<IFilter>();
         for (Class c : PluginUtils.getFilterClasses()) {
             try {
-                filtersInstances.add((AbstractFilter) c.newInstance());
+                filtersInstances.add((IFilter) c.newInstance());
             } catch (Exception ex) {
                 // error instantiate filter
                 Log.log(ex);
@@ -139,7 +140,7 @@ public class FilterMaster {
      * Adds new filters(which was not exist in config yet) into config.
      */
     private void addNewFiltersToConfig(final Filters conf) {
-        for (AbstractFilter f : filtersInstances) {
+        for (IFilter f : filtersInstances) {
             boolean found = false;
             for (Filter fc : conf.getFilter()) {
                 if (f.getClass().getName().equals(fc.getClassName())) {
@@ -160,7 +161,7 @@ public class FilterMaster {
      * TODO: change filters to support text options
      */
     public void applyOptions() {
-        for (AbstractFilter f : filtersInstances) {
+        for (IFilter f : filtersInstances) {
             if (!f.hasOptions()) {
                 // filter doesn't support options
                 continue;
@@ -264,8 +265,8 @@ public class FilterMaster {
      *            filter's class name
      * @return filter instance
      */
-    public AbstractFilter getFilterInstance(final String classname) {
-        for (AbstractFilter f : filtersInstances) {
+    public IFilter getFilterInstance(final String classname) {
+        for (IFilter f : filtersInstances) {
             if (f.getClass().getName().equals(classname)) {
                 return f;
             }
@@ -291,7 +292,7 @@ public class FilterMaster {
 
             File inFile = new File(filename);
             String inEncoding = lookup.outFilesInfo.getSourceEncoding();
-            AbstractFilter filterObject = lookup.filterObject;
+            IFilter filterObject = lookup.filterObject;
             
             filterObject.parseFile(inFile, inEncoding, parseCallback);
         }
@@ -352,7 +353,7 @@ public class FilterMaster {
                 targetLang));
         String outEncoding = lookup.outFilesInfo.getTargetEncoding();
         
-        AbstractFilter filterObject = lookup.filterObject;
+        IFilter filterObject = lookup.filterObject;
         try {
             filterObject.translateFile(inFile, inEncoding, targetLang, outFile,
                     outEncoding, translateCallback);
@@ -364,9 +365,9 @@ public class FilterMaster {
     class LookupInformation
     {
         public Files outFilesInfo;
-        public AbstractFilter filterObject;
+        public IFilter filterObject;
         
-        public LookupInformation(AbstractFilter filterObject, Files outFilesInfo)
+        public LookupInformation(IFilter filterObject, Files outFilesInfo)
         {
             this.filterObject = filterObject;
             this.outFilesInfo = outFilesInfo;
@@ -406,7 +407,7 @@ public class FilterMaster {
             }
             for (Files ff : f.getFiles()) {
                 if (matchesMask(name, ff.getSourceFilenameMask())) {
-                    AbstractFilter filterObject;
+                    IFilter filterObject;
                     filterObject = getFilterInstance(f.getClassName());
 
                     if (!filterObject.isFileSupported(inFile, ff
@@ -689,7 +690,7 @@ public class FilterMaster {
      * @return default filter's config
      */
     public Filter getDefaultSettingsFromFilter(final String filterClassname) {
-        AbstractFilter f = getFilterInstance(filterClassname);
+        IFilter f = getFilterInstance(filterClassname);
         Filter fc = new Filter();
         fc.setClassName(f.getClass().getName());
         fc.setEnabled(true);

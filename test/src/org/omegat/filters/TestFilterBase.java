@@ -33,6 +33,7 @@ import java.util.Map;
 
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.LFileCopy;
@@ -53,7 +54,7 @@ public abstract class TestFilterBase extends XMLTestCase {
 
         filter.parseFile(new File(filename), null, new IParseCallback() {
             public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment, AbstractFilter filter) {
+                    boolean isFuzzy, String comment, IFilter filter) {
                 if (source.length() > 0)
                     result.add(source);
             }
@@ -71,7 +72,7 @@ public abstract class TestFilterBase extends XMLTestCase {
 
         filter.parseFile(new File(filename), null, new IParseCallback() {
             public void addEntry(String id, String source, String translation,
-                    boolean isFuzzy, String comment, AbstractFilter filter) {
+                    boolean isFuzzy, String comment, IFilter filter) {
                 String segTranslation = isFuzzy ? null : translation;
                 result.put(source, segTranslation);
                 if (translation != null) {

@@ -46,7 +46,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersTableModel;
 import org.omegat.util.OStrings;
@@ -117,7 +117,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
             editButton.setEnabled(true);
             int fIdx = filtersTable.getSelectedRow();
             Filter currFilter = config.getFilter().get(fIdx);
-            AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+            IFilter f = FilterMaster.getInstance().getFilterInstance(
                     currFilter.getClassName());
             optionsButton.setEnabled(f.hasOptions());
         }
@@ -285,7 +285,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
     {//GEN-HEADEREND:event_optionsButtonActionPerformed
         int fIdx = filtersTable.getSelectedRow();
         Filter currFilter = config.getFilter().get(fIdx);
-        AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+        IFilter f = FilterMaster.getInstance().getFilterInstance(
                 currFilter.getClassName());
 
         Serializable op=FilterMaster.parseOptions(f.getOptionsClass(), currFilter.getOption());

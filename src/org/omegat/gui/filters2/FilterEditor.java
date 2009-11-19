@@ -48,7 +48,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 
-import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.OneFilterTableModel;
 import org.omegat.util.OStrings;
@@ -90,7 +90,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         
         initComponents();
         
-        AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+        IFilter f = FilterMaster.getInstance().getFilterInstance(
                 filter.getClassName());
         fileFormatTextField.setText(f.getFileFormatName());
         if (!StringUtil.isEmpty(f.getHint()))
@@ -389,7 +389,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addButtonActionPerformed
     {//GEN-HEADEREND:event_addButtonActionPerformed
-        AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+        IFilter f = FilterMaster.getInstance().getFilterInstance(
                 filter.getClassName());
 
         InstanceEditor ie = new InstanceEditor(this, 
@@ -413,7 +413,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
     {//GEN-HEADEREND:event_editButtonActionPerformed
         int row = instances.getSelectedRow();
 
-        AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+        IFilter f = FilterMaster.getInstance().getFilterInstance(
                 filter.getClassName());
         InstanceEditor ie = new InstanceEditor(this, 
                 f.isSourceEncodingVariable(), 

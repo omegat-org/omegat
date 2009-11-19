@@ -29,7 +29,7 @@ import gen.core.filters.Filters;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
 
 
@@ -92,7 +92,7 @@ public class FiltersTableModel extends AbstractTableModel {
         switch( columnIndex )
         {
             case 0:
-                AbstractFilter f = FilterMaster.getInstance().getFilterInstance(
+                IFilter f = FilterMaster.getInstance().getFilterInstance(
                         filter.getClassName());
                 return f.getFileFormatName();
             case 1:

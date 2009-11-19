@@ -37,7 +37,6 @@ import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;

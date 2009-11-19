@@ -29,7 +29,7 @@ import gen.core.filters.Filter;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
 
 /**
@@ -45,7 +45,7 @@ public class OneFilterTableModel extends AbstractTableModel {
 
     public OneFilterTableModel(final Filter f) {
         this.filter = f;
-        AbstractFilter fi = FilterMaster.getInstance().getFilterInstance(
+        IFilter fi = FilterMaster.getInstance().getFilterInstance(
                 f.getClassName());
         sourceEncodingVariable = fi.isSourceEncodingVariable();
         targetEncodingVariable = fi.isTargetEncodingVariable();

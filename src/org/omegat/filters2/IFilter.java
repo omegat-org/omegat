@@ -24,12 +24,18 @@
 
 package org.omegat.filters2;
 
+import java.awt.Dialog;
 import java.io.File;
+import java.io.Serializable;
 
 import org.omegat.util.Language;
 
 /**
  * Interface for filters declaration.
+ * 
+ * TODO: each filter should be stateless, i.e. options shouldn't be stored in
+ * filter, but should be sent to filter on each parse, align, or translate
+ * operation.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -40,6 +46,15 @@ public interface IFilter {
      * @return File format name
      */
     String getFileFormatName();
+
+    /**
+     * Returns the hint displayed while the user edits the filter, and when she
+     * adds/edits the instance of this filter. The hint may be any string,
+     * preferably in a non-geek language.
+     * 
+     * @return The hint for editing the filter in a non-geek language.
+     */
+    String getHint();
 
     /**
      * The default list of filter instances that this filter class has. One
@@ -86,7 +101,22 @@ public interface IFilter {
      * @return fuzzy mark prefix
      */
     String getFuzzyMark();
-    
+
+    /**
+     * Returns whether the file is supported by the filter, given the file and
+     * possible file's encoding (<code>null</code> encoding means autodetect).
+     * <p>
+     * For example, DocBook files have .xml extension, as possibly many other
+     * XML files, so the filter should check a DTD of the document.
+     * 
+     * @param inFile
+     *            Source file.
+     * @param inEncoding
+     *            Encoding of the source file.
+     * @return Does the filter support the file.
+     */
+    boolean isFileSupported(File inFile, String inEncoding);
+
     /**
      * Parse single file.
      * 
@@ -139,4 +169,12 @@ public interface IFilter {
      */
     void alignFile(File inFile, String inEncoding, File outFile,
             String outEncoding, IAlignCallback callback) throws Exception;
+
+    boolean hasOptions();
+
+    Class getOptionsClass();
+
+    void setOptions(Serializable options);
+
+    Serializable changeOptions(Dialog parent, Serializable currentOptions);
 }

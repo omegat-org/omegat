@@ -34,7 +34,7 @@ import java.util.List;
 
 import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.util.Language;
 import org.omegat.util.StaticUtils;
@@ -72,7 +72,7 @@ public abstract class ParseEntry implements IParseCallback {
      *            filter which produces entry
      */
     public void addEntry(String id, String source, String translation,
-            boolean isFuzzy, String comment, AbstractFilter filter) {
+            boolean isFuzzy, String comment, IFilter filter) {
         // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
         // this is reversed at the end of the method
         // fix for bug 1462566

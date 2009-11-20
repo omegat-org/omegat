@@ -30,6 +30,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.omegat.filters2.AbstractFilter;
@@ -52,7 +53,7 @@ public abstract class TestFilterBase extends XMLTestCase {
             throws Exception {
         final List<String> result = new ArrayList<String>();
 
-        filter.parseFile(new File(filename), null, new IParseCallback() {
+        filter.parseFile(new File(filename), null, new TreeMap<String,String>(), new IParseCallback() {
             public void addEntry(String id, String source, String translation,
                     boolean isFuzzy, String comment, IFilter filter) {
                 if (source.length() > 0)
@@ -70,7 +71,7 @@ public abstract class TestFilterBase extends XMLTestCase {
             final Map<String, String> result,
             final Map<String, String> legacyTMX) throws Exception {
 
-        filter.parseFile(new File(filename), null, new IParseCallback() {
+        filter.parseFile(new File(filename), null, new TreeMap<String,String>(),new IParseCallback() {
             public void addEntry(String id, String source, String translation,
                     boolean isFuzzy, String comment, IFilter filter) {
                 String segTranslation = isFuzzy ? null : translation;
@@ -91,7 +92,7 @@ public abstract class TestFilterBase extends XMLTestCase {
 
     protected void translate(AbstractFilter filter, String filename)
             throws Exception {
-        filter.translateFile(new File(filename), null, null, outFile, null, new ITranslateCallback() {
+        filter.translateFile(new File(filename), null, null, outFile, null, new TreeMap<String,String>(),new ITranslateCallback() {
             public String getTranslation(String id, String source) {
                 return source;
             }

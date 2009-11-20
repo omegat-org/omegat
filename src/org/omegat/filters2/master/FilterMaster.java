@@ -45,7 +45,9 @@ import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
@@ -294,7 +296,7 @@ public class FilterMaster {
             String inEncoding = lookup.outFilesInfo.getSourceEncoding();
             IFilter filterObject = lookup.filterObject;
             
-            filterObject.parseFile(inFile, inEncoding, parseCallback);
+            filterObject.parseFile(inFile, inEncoding, lookup.config, parseCallback);
         }
         catch( Exception ioe )
         {
@@ -356,21 +358,22 @@ public class FilterMaster {
         IFilter filterObject = lookup.filterObject;
         try {
             filterObject.translateFile(inFile, inEncoding, targetLang, outFile,
-                    outEncoding, translateCallback);
+                    outEncoding, lookup.config, translateCallback);
         } catch (Exception ex) {
             Log.log(ex);
         }    
     }
     
-    class LookupInformation
-    {
-        public Files outFilesInfo;
-        public IFilter filterObject;
-        
-        public LookupInformation(IFilter filterObject, Files outFilesInfo)
-        {
+    class LookupInformation {
+        public final Files outFilesInfo;
+        public final IFilter filterObject;
+        public final Map<String, String> config;
+
+        public LookupInformation(IFilter filterObject, Files outFilesInfo,
+                Map<String, String> config) {
             this.filterObject = filterObject;
             this.outFilesInfo = outFilesInfo;
+            this.config = config;
         }
     }
     
@@ -412,12 +415,13 @@ public class FilterMaster {
 
                     if (filterObject != null) {
                         // only for exist filters
+                        Map<String, String> config = forFilter(f.getOption());
                         if (!filterObject.isFileSupported(inFile, ff
-                                .getSourceEncoding())) {
+                                .getSourceEncoding(), config)) {
                             break;
                         }
 
-                        return new LookupInformation(filterObject, ff);
+                        return new LookupInformation(filterObject, ff, config);
                     }
                 }
             }
@@ -706,5 +710,20 @@ public class FilterMaster {
             fc.getFiles().add(ff);
         }
         return fc;
+    }
+    
+    /**
+     * Convert options from xml for filter usage.
+     * 
+     * @param options
+     *            xml options
+     * @return options for filter usage
+     */
+    public static Map<String, String> forFilter(List<Option> options) {
+        final Map<String, String> result = new TreeMap<String, String>();
+        for (Option opt : options) {
+            result.put(opt.getName(), opt.getValue());
+        }
+        return result;
     }
 }

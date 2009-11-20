@@ -36,6 +36,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
@@ -113,7 +114,7 @@ public class OpenXMLFilter extends AbstractFilter
     }
 
     /** Returns true if it's an Open XML file. */
-    public boolean isFileSupported(File inFile, String inEncoding)
+    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config)
     {
         try
         {

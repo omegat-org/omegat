@@ -27,6 +27,7 @@ package org.omegat.filters2;
 import java.awt.Dialog;
 import java.io.File;
 import java.io.Serializable;
+import java.util.Map;
 
 import org.omegat.util.Language;
 
@@ -113,9 +114,12 @@ public interface IFilter {
      *            Source file.
      * @param inEncoding
      *            Encoding of the source file.
+     * @param config
+     *            filter's configuration options
      * @return Does the filter support the file.
      */
-    boolean isFileSupported(File inFile, String inEncoding);
+    boolean isFileSupported(File inFile, String inEncoding,
+            Map<String, String> config);
 
     /**
      * Parse single file.
@@ -124,12 +128,14 @@ public interface IFilter {
      *            file to parse
      * @param inEncoding
      *            file encoding, configured by user
+     * @param config
+     *            filter's configuration options
      * @param callback
      *            callback for parsed data
      * @throws Exception
      */
-    void parseFile(File inFile, String inEncoding, IParseCallback callback)
-            throws Exception;
+    void parseFile(File inFile, String inEncoding, Map<String, String> config,
+            IParseCallback callback) throws Exception;
 
     /**
      * Create translated file.
@@ -144,13 +150,15 @@ public interface IFilter {
      *            output file
      * @param outEncoding
      *            output file encoding, configured by user
+     * @param config
+     *            filter's configuration options
      * @param callback
      *            callback for get translation
      * @throws Exception
      */
     void translateFile(File inFile, String inEncoding, Language targetLang,
-            File outFile, String outEncoding, ITranslateCallback callback)
-            throws Exception;
+            File outFile, String outEncoding, Map<String, String> config,
+            ITranslateCallback callback) throws Exception;
 
     /**
      * Align source and translated files.
@@ -163,16 +171,19 @@ public interface IFilter {
      *            translated file
      * @param outEncoding
      *            translated file encoding, configured by user
+     * @param config
+     *            filter's configuration options
      * @param callback
      *            callback for store aligned data
      * @throws Exception
      */
     void alignFile(File inFile, String inEncoding, File outFile,
-            String outEncoding, IAlignCallback callback) throws Exception;
+            String outEncoding, Map<String, String> config,
+            IAlignCallback callback) throws Exception;
 
     boolean hasOptions();
 
-    Class getOptionsClass();
+    Class<?> getOptionsClass();
 
     void setOptions(Serializable options);
 

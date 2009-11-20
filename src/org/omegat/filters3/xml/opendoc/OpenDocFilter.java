@@ -35,6 +35,7 @@ import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
@@ -68,7 +69,7 @@ public class OpenDocFilter extends AbstractFilter
     }
 
     /** Returns true if it's OpenDocument file. */
-    public boolean isFileSupported(File inFile, String inEncoding)
+    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config)
     {
         try
         {

@@ -28,6 +28,7 @@ package org.omegat.filters3.xml.xhtml;
 import java.awt.Dialog;
 import java.io.File;
 import java.io.Serializable;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.omegat.filters2.Instance;
@@ -108,9 +109,9 @@ public class XHTMLFilter extends XMLFilter
     private boolean do_not_send_to_core;
     
     /** Checking whether it is a valid XHTML file. */
-    public boolean isFileSupported(File inFile, String inEncoding)
+    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config)
     {
-        boolean result = super.isFileSupported(inFile, inEncoding);
+        boolean result = super.isFileSupported(inFile, inEncoding, config);
         if (result)
         {
             try

@@ -37,6 +37,7 @@ import java.io.OutputStreamWriter;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -187,7 +188,7 @@ public abstract class AbstractFilter implements IFilter {
      * @param inEncoding Encoding of the source file.
      * @return Does the filter support the file.
      */
-    public boolean isFileSupported(File inFile, String inEncoding)
+    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config)
     {
         try
         {
@@ -397,24 +398,27 @@ public abstract class AbstractFilter implements IFilter {
     }
     
     public void parseFile(File inFile, String inEncoding,
-            IParseCallback callback) throws Exception {
+            Map<String, String> config, IParseCallback callback)
+            throws Exception {
         entryParseCallback = callback;
         entryTranslateCallback = null;
         processFile(inFile, inEncoding, null, null);
     }
-    
+
     public void alignFile(File inFile, String inEncoding, File outFile,
-            String outEncoding, IAlignCallback callback) throws Exception {
+            String outEncoding, Map<String, String> config,
+            IAlignCallback callback) throws Exception {
     }
-    
+
     public void translateFile(File inFile, String inEncoding,
             Language targetLang, File outFile, String outEncoding,
-            ITranslateCallback callback) throws Exception {
+            Map<String, String> config, ITranslateCallback callback)
+            throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = callback;
         processFile(inFile, inEncoding, outFile, outEncoding);
     }
-    
+
     /**
      * Call this method to:
      * <ul>

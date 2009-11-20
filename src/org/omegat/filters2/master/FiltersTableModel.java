@@ -24,6 +24,9 @@
 
 package org.omegat.filters2.master;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import gen.core.filters.Filter;
 import gen.core.filters.Filters;
 
@@ -42,10 +45,19 @@ import org.omegat.util.OStrings;
  */
 public class FiltersTableModel extends AbstractTableModel {
 
-    private final Filters config;
+    private final List<Filter> filters;
 
     public FiltersTableModel(final Filters config) {
-        this.config = config;
+        filters = new ArrayList<Filter>();
+        // add only exist filters
+        for (Filter f : config.getFilter()) {
+            IFilter fi = FilterMaster.getInstance().getFilterInstance(
+                    f.getClassName());
+            if (fi != null) {
+                // filter exist
+                filters.add(f);
+            }
+        }
     }
 
     //////////////////////////////////////////////////////////////////////////
@@ -83,12 +95,12 @@ public class FiltersTableModel extends AbstractTableModel {
 
     public int getRowCount()
     {
-        return config.getFilter().size();
+        return filters.size();
     }
 
     public Object getValueAt(int rowIndex, int columnIndex)
     {
-        Filter filter = config.getFilter().get(rowIndex);
+        Filter filter = filters.get(rowIndex);
         switch( columnIndex )
         {
             case 0:
@@ -103,7 +115,7 @@ public class FiltersTableModel extends AbstractTableModel {
     
     public void setValueAt(Object aValue, int rowIndex, int columnIndex)
     {
-        Filter filter = config.getFilter().get(rowIndex);
+        Filter filter = filters.get(rowIndex);
         switch( columnIndex )
         {
             case 1:

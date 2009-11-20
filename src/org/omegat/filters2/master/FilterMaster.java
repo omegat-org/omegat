@@ -410,12 +410,15 @@ public class FilterMaster {
                     IFilter filterObject;
                     filterObject = getFilterInstance(f.getClassName());
 
-                    if (!filterObject.isFileSupported(inFile, ff
-                            .getSourceEncoding())) {
-                        break;
-                    }
+                    if (filterObject != null) {
+                        // only for exist filters
+                        if (!filterObject.isFileSupported(inFile, ff
+                                .getSourceEncoding())) {
+                            break;
+                        }
 
-                    return new LookupInformation(filterObject, ff);
+                        return new LookupInformation(filterObject, ff);
+                    }
                 }
             }
         }

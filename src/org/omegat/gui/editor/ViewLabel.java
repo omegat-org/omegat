@@ -38,6 +38,7 @@ import javax.swing.text.Position;
 import javax.swing.text.Utilities;
 
 import org.omegat.core.Core;
+import org.omegat.util.Log;
 import org.omegat.util.Token;
 
 /**
@@ -108,9 +109,12 @@ public class ViewLabel extends LabelView {
                     if (doc.controller.spellCheckerThread.isIncorrect(text
                             .substring(w.getOffset(), w.getOffset()
                                     + w.getLength()))) {
-                        int posBegin = Math.max(spellBegin + w.getOffset(),
+                        int posBegin=-99;
+                        int posEnd=-99;
+                        try {
+                        posBegin = Math.max(spellBegin + w.getOffset(),
                                 getStartOffset());
-                        int posEnd = Math.min(spellBegin + w.getOffset()
+                        posEnd = Math.min(spellBegin + w.getOffset()
                                 + w.getLength(), getEndOffset());
                         Rectangle b = modelToView(posBegin, a,
                                 Position.Bias.Forward).getBounds();
@@ -122,6 +126,18 @@ public class ViewLabel extends LabelView {
                         line.width = e.x - b.x;
                         line.height = b.height;
                         paintJaggedLine(g, line, Color.red);
+                        } catch (Exception ex ) {
+                            //TODO: remove
+                            Log
+                                    .log("Error in ViewLabel: text='" + text
+                                            + "' posBegin=" + posBegin
+                                            + " posEnd=" + posEnd
+                                            + " spellBegin=" + spellBegin
+                                            + " spellEnd=" + spellEnd
+                                            + " w.off=" + w.getOffset()
+                                            + " w.len=" + w.getLength());
+                            Log.log(ex);
+                        }
                     }
                 }
             } catch (BadLocationException ex) {

@@ -26,6 +26,7 @@
 
 package org.omegat.filters3.xml.typo3;
 
+import java.util.regex.Pattern;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Attribute;
@@ -37,7 +38,15 @@ import org.omegat.filters3.Attribute;
  */
 public class Typo3Dialect extends DefaultXMLDialect
 {
+    public static final Pattern TYPO3_ROOT_TAG =
+            Pattern.compile("t3_tt_content");
+    public static final Pattern TYPO3_ROOT_TAG2 =
+            Pattern.compile("t3_pages_language_overlay");
+
     public Typo3Dialect(){      
+
+        defineConstraint(CONSTRAINT_ROOT, TYPO3_ROOT_TAG);
+
         defineParagraphTags(new String[] {
             "title",
             "subtitle",

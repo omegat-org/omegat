@@ -76,7 +76,7 @@ public class PatternConsts
      * Group #2 should contain the xmlns declaration.
      * E.g., http://www.w3.org/2001/XMLSchema-instance
      */
-    public static final Pattern XML_XMNLS = Pattern.compile(
+    public static final Pattern XML_XMLNS = Pattern.compile(
             "xmlns(:\\w+)?=\"(.*?)\"");
 
     /** compiled pattern to extract the encoding from HTML file, if any */

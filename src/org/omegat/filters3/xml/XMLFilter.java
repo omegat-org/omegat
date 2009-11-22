@@ -236,7 +236,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
                 return false;
             }
 
-            matcher = PatternConsts.XML_XMNLS.matcher(buf);
+            matcher = PatternConsts.XML_XMLNS.matcher(buf);
             if (matcher.find()) {
                 Pattern xmlns = dialect.getConstraints().get(XMLDialect.CONSTRAINT_XMLNS);
                 if (xmlns!=null &&

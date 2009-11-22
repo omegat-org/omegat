@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.1
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.1.1 vs. 2.1.0
@@ -9,6 +9,8 @@
   Other enhancements:
 
   - Typo3 LocManager File Filter
+
+  - Help & Manual File Filter
 
   - Use tokenizers as plugins
   (Requires version x.x-2.1 of the tokenizers)

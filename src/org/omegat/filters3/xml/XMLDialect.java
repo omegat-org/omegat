@@ -174,6 +174,8 @@ public interface XMLDialect
     static final int CONSTRAINT_SYSTEM_DOCTYPE_UNBOXED = 3;
     /** Unboxed (of primitive type </code>int</code>) constraint on root tag name. */
     static final int CONSTRAINT_ROOT_UNBOXED = 4;
+    /** Unboxed (of primitive type </code>int</code>) constraint on xmlns declaration. */
+    static final int CONSTRAINT_XLMNS_UNBOXED = 5;
 
     /** Constraint on Doctype name. */
     static final Integer CONSTRAINT_DOCTYPE = new Integer(CONSTRAINT_DOCTYPE_UNBOXED);
@@ -183,6 +185,8 @@ public interface XMLDialect
     static final Integer CONSTRAINT_SYSTEM_DOCTYPE = new Integer(CONSTRAINT_SYSTEM_DOCTYPE_UNBOXED);
     /** Constraint on root tag name. */
     static final Integer CONSTRAINT_ROOT = new Integer(CONSTRAINT_ROOT_UNBOXED);
+    /** Constraint on xmlns declaration. */
+    static final Integer CONSTRAINT_XMLNS = new Integer(CONSTRAINT_XLMNS_UNBOXED);
 
     /**
      * Returns defined constraints to restrict supported subset of XML files.

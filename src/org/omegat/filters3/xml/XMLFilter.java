@@ -202,14 +202,12 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
         if (dialect.getConstraints()==null || dialect.getConstraints().size()==0)
             return true;
         
-        try
-        {
+        try {
             char[] cbuf = new char[OConsts.READ_AHEAD_LIMIT];
             int cbuf_len = reader.read(cbuf);
             String buf = new String(cbuf, 0, cbuf_len);
             Matcher matcher = PatternConsts.XML_DOCTYPE.matcher(buf);
-            if (matcher.find())
-            {
+            if (matcher.find()) {
                 Pattern doctype = dialect.getConstraints().get(XMLDialect.CONSTRAINT_DOCTYPE);
                 if (doctype!=null && 
                         (matcher.group(1)==null || !doctype.matcher(matcher.group(1)).matches()))
@@ -222,30 +220,35 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
                 if (system!=null && 
                         (matcher.group(5)==null || !system.matcher(matcher.group(5)).matches()))
                     return false;
-            }
-            else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_DOCTYPE) || 
+            } else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_DOCTYPE) ||
                     dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_PUBLIC_DOCTYPE) || 
-                    dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_SYSTEM_DOCTYPE))
-            {
+                    dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_SYSTEM_DOCTYPE))             {
                 return false;
             }
             
             matcher = PatternConsts.XML_ROOTTAG.matcher(buf);
-            if (matcher.find())
-            {
+            if (matcher.find()) {
                 Pattern root = dialect.getConstraints().get(XMLDialect.CONSTRAINT_ROOT);
                 if (root!=null && 
                         (matcher.group(1)==null || !root.matcher(matcher.group(1)).matches()))
                     return false;
-            }
-            else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_ROOT))
-            {
+            } else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_ROOT)) {
                 return false;
             }
+
+            matcher = PatternConsts.XML_XMNLS.matcher(buf);
+            if (matcher.find()) {
+                Pattern xmlns = dialect.getConstraints().get(XMLDialect.CONSTRAINT_XMLNS);
+                if (xmlns!=null &&
+                        (matcher.group(2)==null || !xmlns.matcher(matcher.group(2)).matches()))
+                    return false;
+            } else if (dialect.getConstraints().containsKey(XMLDialect.CONSTRAINT_XMLNS)) {
+                return false;
+            }
+
             return true;
-        }
-        catch(Exception e)
-        {
+            
+        } catch(Exception e) {
             return false;
         }
     }

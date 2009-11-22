@@ -69,7 +69,16 @@ public class PatternConsts
      */
     public static final Pattern XML_ROOTTAG = Pattern.compile(
             "<(\\w+)");                       
-    
+
+     /**
+     * Compiled pattern to extract the xlmns declaration from an XML file,
+     * if any.
+     * Group #2 should contain the xmlns declaration.
+     * E.g., http://www.w3.org/2001/XMLSchema-instance
+     */
+    public static final Pattern XML_XMNLS = Pattern.compile(
+            "xmlns(:\\w+)?=\"(.*?)\"");
+
     /** compiled pattern to extract the encoding from HTML file, if any */
     public static final Pattern HTML_ENCODING = Pattern.compile(
             "<meta.*?content\\s*=\\s*[\"']\\s*text/html\\s*;\\s*charset\\s*=\\s*(\\S+?)[\"'].*?/?\\s*>",  

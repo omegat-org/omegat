@@ -28,8 +28,8 @@ import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.Writer;
+import java.util.Map;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
@@ -46,6 +46,21 @@ import org.omegat.util.OStrings;
 public class TextFilter extends AbstractFilter
 {
 
+    /**
+     * Text filter should segmentOn text into paragraphs on line breaks. 
+     */
+    public static final String SEGMENT_BREAKS = "BREAKS";
+    /**
+     * Defult. Text filter should segmentOn text into paragraphs on empty lines. 
+     */
+    public static final String SEGMENT_EMPTYLINES = "EMPTYLINES";
+    /**
+     * Text filter should not segmentOn text into paragraphs. 
+     */
+    public static final String SEGMENT_NEVER = "NEVER";
+
+    public static final String OPTION_SEGMENT_ON = "segmentOn";
+    
     public String getFileFormatName()
     {
         return OStrings.getString("TEXTFILTER_FILTER_NAME");
@@ -80,21 +95,14 @@ public class TextFilter extends AbstractFilter
         int ch = in.read();
         if (ch!=0xFEFF)
             in.reset();
-        
-        TextOptions options = (TextOptions)getOptions();
-        if (options==null)
-            options = new TextOptions();
-        
-        switch (options.getSegmentOn())
-        {
-            case TextOptions.SEGMENT_BREAKS:
-                processSegLineBreaks(in, out);
-                break;
-            case TextOptions.SEGMENT_EMPTYLINES:
-                processSegEmptyLines(in, out);
-                break;
-            default:
-                processNonSeg(in, out);
+
+        String segmentOn = processOptions.get(TextFilter.OPTION_SEGMENT_ON);
+        if (SEGMENT_BREAKS.equals(segmentOn)) {
+            processSegLineBreaks(in, out);
+        } else if (SEGMENT_NEVER.equals(segmentOn)) {
+            processNonSeg(in, out);
+        } else {
+            processSegEmptyLines(in, out);
         }
     }
     
@@ -179,29 +187,20 @@ public class TextFilter extends AbstractFilter
             out.write(processEntry(trans.toString()));
     }
 
-    /**
-     * Text filter shows a <b>modal</b> dialog to edit its own options.
-     * 
-     * @param currentOptions Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current options otherwise.
-     */
-    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
-    {
-        try
-        {
-            TextOptions options = (TextOptions) currentOptions;
-            TextOptionsDialog dialog = new TextOptionsDialog(parent, options);
+    @Override
+    public Map<String, String> changeOptions(Dialog parent,
+            Map<String, String> config) {
+        try {
+            TextOptionsDialog dialog = new TextOptionsDialog(parent, config);
             dialog.setVisible(true);
-            if( TextOptionsDialog.RET_OK==dialog.getReturnStatus() )
+            if (TextOptionsDialog.RET_OK == dialog.getReturnStatus())
                 return dialog.getOptions();
             else
-                return currentOptions;
-        }
-        catch( Exception e )
-        {
+                return null;
+        } catch (Exception e) {
             Log.log("Text filter threw an exception:");
             Log.log(e);
-            return currentOptions;
+            return null;
         }
     }
 
@@ -214,8 +213,7 @@ public class TextFilter extends AbstractFilter
         return true;
     }
     
-    public Class getOptionsClass() {
-        return TextOptions.class;
+    public Class<?> getOptionsClass() {
+        return Map.class;
     }
-
 }

@@ -58,6 +58,9 @@ public class Convert20to21 {
      */
     public static void convertFiltersConfig(final File fromFile,
             final File toFile) throws Exception {
+        if (!fromFile.exists()) {
+            return;
+        }
         String c = read(fromFile);
         org.omegat.convert.v20to21.data.Filters filters;
         XMLDecoder xmldec = new XMLDecoder(new ByteArrayInputStream(c
@@ -99,6 +102,8 @@ public class Convert20to21 {
             }
         }
 
+        convertTextFilter(res);
+        
         JAXBContext CTX = JAXBContext.newInstance(Filters.class);
         Marshaller m = CTX.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -144,5 +149,36 @@ public class Convert20to21 {
         res = res.replace("org.omegat.filters3.xml.xhtml.XHTMLOptions",
                 "org.omegat.convert.v20to21.data.XHTMLOptions");
         return res;
+    }
+    
+    /**
+     * Convert TextFiletr options from int to string.
+     * 
+     * @param res
+     */
+    private static void convertTextFilter(Filters res) {
+        for (Filter f : res.getFilter()) {
+            if (!f.getClassName().equals("org.omegat.filters2.text.TextFilter")) {
+                continue;
+            }
+            for (Filter.Option opt : f.getOption()) {
+                if (opt.getName().equals("segmentOn")) {
+                    try {
+                        switch (Integer.parseInt(opt.getValue())) {
+                        case 1:
+                            opt.setValue("BREAKS");
+                            break;
+                        case 2:
+                            opt.setValue("EMPTYLINES");
+                            break;
+                        case 3:
+                            opt.setValue("NEVER");
+                            break;
+                        }
+                    } catch (Exception ex) {
+                    }
+                }
+            }
+        }
     }
 }

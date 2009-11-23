@@ -25,10 +25,11 @@
 package org.omegat.filters;
 
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import org.junit.Test;
 import org.omegat.filters2.text.TextFilter;
-import org.omegat.filters2.text.TextOptions;
 
 public class TextFilterTest extends TestFilterBase {
     @Test
@@ -42,29 +43,29 @@ public class TextFilterTest extends TestFilterBase {
 
     @Test
     public void testParseNeverBreak() throws Exception {
-	checkFile(TextOptions.SEGMENT_NEVER, 1, 1);
+	checkFile(TextFilter.SEGMENT_NEVER, 1, 1);
     }
 
     @Test
     public void testParseEmptyLinesBreak() throws Exception {
-	checkFile(TextOptions.SEGMENT_EMPTYLINES, 3, 1);
+	checkFile(TextFilter.SEGMENT_EMPTYLINES, 3, 1);
     }
 
     @Test
     public void testParseLinesBreak() throws Exception {
-	checkFile(TextOptions.SEGMENT_BREAKS, 3, 3);
+	checkFile(TextFilter.SEGMENT_BREAKS, 3, 3);
     }
 
-    protected void checkFile(int segValue, int count1, int count2) throws Exception {
-	TextOptions options = new TextOptions();
-	options.setSegmentOn(segValue);
-	TextFilter filter = new TextFilter();
-	filter.setOptions(options);
+    protected void checkFile(String segValue, int count1, int count2) throws Exception {
+        Map<String,String> options = new TreeMap<String, String>();
+        options.put(TextFilter.OPTION_SEGMENT_ON, segValue);
 
-	List<String> entries = parse(filter, "test/data/filters/text/file-TextFilter.txt");
+        TextFilter filter = new TextFilter();
+
+	List<String> entries = parse(filter, "test/data/filters/text/file-TextFilter.txt", options);
 	assertEquals(count1, entries.size());
 
-	entries = parse(filter, "test/data/filters/text/file-TextFilter-noemptylines.txt");
+	entries = parse(filter, "test/data/filters/text/file-TextFilter-noemptylines.txt", options);
 	assertEquals(count2, entries.size());
     }
 }

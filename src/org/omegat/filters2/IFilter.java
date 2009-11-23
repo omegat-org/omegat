@@ -188,4 +188,15 @@ public interface IFilter {
     void setOptions(Serializable options);
 
     Serializable changeOptions(Dialog parent, Serializable currentOptions);
+    
+    /**
+     * Show change options dialog for able to change options.
+     * 
+     * @param parent
+     *            parent window
+     * @param config
+     *            old options
+     * @return new options or null if options not changed
+     */
+    Map<String, String> changeOptions(Dialog parent, Map<String, String> config);
 }

@@ -172,7 +172,10 @@ public class FilterMaster {
                 if (!f.getClass().getName().equals(fc.getClassName())) {
                     continue;
                 }
-                f.setOptions(parseOptions(f.getOptionsClass(), fc.getOption()));
+                if (f.getOptionsClass() != Map.class) {
+                    f.setOptions(parseOptions(f.getOptionsClass(), fc
+                            .getOption()));
+                }
             }
         }
     }
@@ -725,5 +728,23 @@ public class FilterMaster {
             result.put(opt.getName(), opt.getValue());
         }
         return result;
+    }
+    
+    /**
+     * Convert options to xml from map.
+     * 
+     * @param f
+     *            filter
+     * @param newOptions
+     *            options
+     */
+    public static void setOptions(Filter f, Map<String, String> newOptions) {
+        f.getOption().clear();
+        for (Map.Entry<String, String> en : newOptions.entrySet()) {
+            Filter.Option opt = new Filter.Option();
+            opt.setName(en.getKey());
+            opt.setValue(opt.getValue());
+            f.getOption().add(opt);
+        }
     }
 }

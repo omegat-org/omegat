@@ -35,6 +35,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -287,13 +288,23 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         Filter currFilter = config.getFilter().get(fIdx);
         IFilter f = FilterMaster.getInstance().getFilterInstance(
                 currFilter.getClassName());
-
-        Serializable op=FilterMaster.parseOptions(f.getOptionsClass(), currFilter.getOption());
-        Object r = f.changeOptions(this, op);
-        if (r != null) {
-            List<Option> opts = FilterMaster.parseToOptions(r);
-            currFilter.getOption().clear();
-            currFilter.getOption().addAll(opts);
+        
+        if (f.getOptionsClass() == Map.class) {
+            // new options handling
+            Map<String, String> newConfig = f.changeOptions(this, FilterMaster
+                    .forFilter(currFilter.getOption()));
+            if (newConfig != null) {
+                FilterMaster.setOptions(currFilter, newConfig);
+            }
+        } else {
+            Serializable op = FilterMaster.parseOptions(f.getOptionsClass(),
+                    currFilter.getOption());
+            Object r = f.changeOptions(this, op);
+            if (r != null) {
+                List<Option> opts = FilterMaster.parseToOptions(r);
+                currFilter.getOption().clear();
+                currFilter.getOption().addAll(opts);
+            }
         }
     }//GEN-LAST:event_optionsButtonActionPerformed
 

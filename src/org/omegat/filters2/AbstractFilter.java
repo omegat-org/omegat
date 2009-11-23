@@ -93,9 +93,15 @@ public abstract class AbstractFilter implements IFilter {
         TFP_TARGET_LANG_CODE,
         TFP_TARGET_COUNTRY_CODE
     };
-    
+
+    /** Callback for parse. */
     protected IParseCallback entryParseCallback;
+
+    /** Callback for translate. */
     protected ITranslateCallback entryTranslateCallback;
+
+    /** Options for processing time. */
+    protected Map<String, String> processOptions;
     
     /**
      * The default output filename pattern.
@@ -280,6 +286,14 @@ public abstract class AbstractFilter implements IFilter {
     {
         return currentOptions;
     }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Map<String, String> changeOptions(Dialog parent,
+            Map<String, String> config) {
+        return null;
+    }
     
     /**
      * Creates a reader of an input file.
@@ -402,7 +416,13 @@ public abstract class AbstractFilter implements IFilter {
             throws Exception {
         entryParseCallback = callback;
         entryTranslateCallback = null;
-        processFile(inFile, inEncoding, null, null);
+        processOptions = config;
+        try {
+            processFile(inFile, inEncoding, null, null);
+        } finally {
+            entryParseCallback = null;
+            processOptions = null;
+        }
     }
 
     public void alignFile(File inFile, String inEncoding, File outFile,
@@ -416,7 +436,13 @@ public abstract class AbstractFilter implements IFilter {
             throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = callback;
-        processFile(inFile, inEncoding, outFile, outEncoding);
+        processOptions = config;
+        try {
+            processFile(inFile, inEncoding, outFile, outEncoding);
+        } finally {
+            entryTranslateCallback = null;
+            processOptions = null;
+        }
     }
 
     /**

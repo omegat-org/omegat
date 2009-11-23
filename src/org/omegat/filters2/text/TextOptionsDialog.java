@@ -28,6 +28,9 @@ package org.omegat.filters2.text;
 import java.awt.Dialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -48,31 +51,24 @@ public class TextOptionsDialog extends javax.swing.JDialog
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
     
-    private TextOptions options;
+    private Map<String,String> options;
     
     /**
      * Creates new form TextOptionsDialog 
      */
-    public TextOptionsDialog(Dialog parent, TextOptions options)
+    public TextOptionsDialog(Dialog parent, Map<String,String> options)
     {
         super(parent, true);
-        this.options = options;
+        this.options = new TreeMap<String, String>(options);
         initComponents();
-        
-        if (options==null)
-            options = new TextOptions(); // Set default options
 
-        switch (options.getSegmentOn())
-        {
-            case TextOptions.SEGMENT_BREAKS:
-                breaksRB.setSelected(true);
-                break;
-            case TextOptions.SEGMENT_EMPTYLINES:
-                emptyLinesRB.setSelected(true);
-                break;
-            case TextOptions.SEGMENT_NEVER:
-                neverRB.setSelected(true);
-                break;
+        String segmentOn = options.get(TextFilter.OPTION_SEGMENT_ON);
+        if (TextFilter.SEGMENT_BREAKS.equals(segmentOn)) {
+            breaksRB.setSelected(true);
+        } else if (TextFilter.SEGMENT_NEVER.equals(segmentOn)) {
+            neverRB.setSelected(true);
+        } else {
+            emptyLinesRB.setSelected(true);
         }
         
         //  Handle escape key to close the window
@@ -96,7 +92,7 @@ public class TextOptionsDialog extends javax.swing.JDialog
     }
     
     /** Returns updated options. */
-    public TextOptions getOptions()
+    public Map<String,String> getOptions()
     {
         return options;
     }
@@ -185,14 +181,17 @@ public class TextOptionsDialog extends javax.swing.JDialog
     
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
-        options = new TextOptions();
-        if (breaksRB.isSelected())
-            options.setSegmentOn(TextOptions.SEGMENT_BREAKS);
-        else if (emptyLinesRB.isSelected())
-            options.setSegmentOn(TextOptions.SEGMENT_EMPTYLINES);
-        else if (neverRB.isSelected())
-            options.setSegmentOn(TextOptions.SEGMENT_NEVER);
-        
+        String segmentOn;
+        if (breaksRB.isSelected()) {
+            segmentOn = TextFilter.SEGMENT_BREAKS;
+        } else if (neverRB.isSelected()) {
+            segmentOn = TextFilter.SEGMENT_NEVER;
+        } else {
+            segmentOn = TextFilter.SEGMENT_EMPTYLINES;
+        }
+
+        options.put(TextFilter.OPTION_SEGMENT_ON, segmentOn);
+
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
     

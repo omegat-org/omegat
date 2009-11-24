@@ -43,7 +43,7 @@ public class OpenDocFilterTest extends TestFilterBase {
         translate(new OpenDocFilter(), in.getPath());
 
         for (String f : new String[] { "content.xml", "styles.xml", "meta.xml" }) {
-            compareXML(new URL("jar:file:/" + in.getAbsolutePath() + "!/" + f), new URL("jar:file:/"
+            compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f), new URL("jar:file:"
                     + outFile.getAbsolutePath() + "!/" + f));
         }
     }

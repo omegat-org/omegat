@@ -43,7 +43,7 @@ public class OpenXMLFilterTest extends TestFilterBase {
         translate(new OpenXMLFilter(), in.getPath());
 
         for (String f : new String[] { "word/document.xml" }) {
-            compareXML(new URL("jar:file:/" + in.getAbsolutePath() + "!/" + f), new URL("jar:file:/"
+            compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f), new URL("jar:file:"
                     + outFile.getAbsolutePath() + "!/" + f));
         }
     }

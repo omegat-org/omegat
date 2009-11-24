@@ -34,6 +34,7 @@ import java.util.TreeMap;
 
 import org.custommonkey.xmlunit.XMLTestCase;
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
@@ -126,6 +127,14 @@ public abstract class TestFilterBase extends XMLTestCase {
                         return source;
                     }
                 });
+    }
+    
+    protected void align(IFilter filter, String in, String out,
+            IAlignCallback callback) throws Exception {
+        File inFile = new File("test/data/filters/" + in);
+        File outFile = new File("test/data/filters/" + out);
+        filter.alignFile(inFile, null, outFile, null,
+                new TreeMap<String, String>(), callback);
     }
 
     protected void translateText(AbstractFilter filter, String filename)

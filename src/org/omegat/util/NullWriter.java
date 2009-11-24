@@ -22,23 +22,24 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.filters2;
+package org.omegat.util;
+
+import java.io.IOException;
+import java.io.Writer;
 
 /**
- * Callback for align files in filter.
+ * /dev/null writer. Used for filters where writer required by filter, but not
+ * need for application.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
-public interface IAlignCallback {
-    /**
-     * New found aligned data.
-     * 
-     * @param id
-     *            entry id
-     * @param source
-     *            source text
-     * @param translation
-     *            translated text
-     */
-    void addTranslation(String id, String source, String translation);
+public class NullWriter extends Writer {
+    public void write(char[] cbuf, int off, int len) throws IOException {
+    }
+
+    public void flush() throws IOException {
+    }
+
+    public void close() throws IOException {
+    }
 }

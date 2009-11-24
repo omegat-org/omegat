@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2009 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,10 +34,13 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
+import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
 
 /**
@@ -45,9 +49,11 @@ import org.omegat.util.OStrings;
  *
  * @author Maxym Mykhalchuk
  * @author Keith Godfrey
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ResourceBundleFilter extends AbstractFilter
-{
+public class ResourceBundleFilter extends AbstractFilter {
+    
+    protected Map<String, String> align;
     
     public String getFileFormatName()
     {
@@ -68,8 +74,8 @@ public class ResourceBundleFilter extends AbstractFilter
     {
         return new Instance[]
         {
-            new Instance("*.properties", null, null,                            // NOI18N
-                    TFP_NAMEONLY+"_"+TFP_TARGET_LOCALE+"."+TFP_EXTENSION)       // NOI18N
+            new Instance("*.properties", null, null,                            
+                    TFP_NAMEONLY+"_"+TFP_TARGET_LOCALE+"."+TFP_EXTENSION)       
         };
     }
     
@@ -82,7 +88,7 @@ public class ResourceBundleFilter extends AbstractFilter
     throws UnsupportedEncodingException, IOException
     {
         return new BufferedReader(
-                new InputStreamReader(new FileInputStream(infile), "ISO-8859-1")); // NOI18N
+                new InputStreamReader(new FileInputStream(infile), "ISO-8859-1")); 
     }
     
     /**
@@ -99,7 +105,7 @@ public class ResourceBundleFilter extends AbstractFilter
     {
         // resource bundles use ASCII encoding
         return new BufferedWriter(
-                new OutputStreamWriter(new FileOutputStream(outfile), "ISO-8859-1")); // NOI18N
+                new OutputStreamWriter(new FileOutputStream(outfile), "ISO-8859-1")); 
     }
     
     /**
@@ -171,19 +177,19 @@ public class ResourceBundleFilter extends AbstractFilter
         {
             char ch = text.charAt(i);
             if( ch=='\\' )
-                result.append("\\\\");                                          // NOI18N
+                result.append("\\\\");                                          
             else if( ch=='\n' )
-                result.append("\\n");                                           // NOI18N
+                result.append("\\n");                                           
             else if( ch=='\r' )
-                result.append("\\r");                                           // NOI18N
+                result.append("\\r");                                           
             else if( ch=='\t' )
-                result.append("\\t");                                           // NOI18N
+                result.append("\\t");                                           
             else if( key && ch==' ' )
-                result.append("\\ ");                                           // NOI18N
+                result.append("\\ ");                                           
             else if( key && ch=='=' )
-                result.append("\\=");                                           // NOI18N
+                result.append("\\=");                                           
             else if( key && ch==':' )
-                result.append("\\:");                                           // NOI18N
+                result.append("\\:");                                           
             else if( ch>=32 && ch<127 )
                 result.append(ch);
             else
@@ -191,7 +197,7 @@ public class ResourceBundleFilter extends AbstractFilter
                 String code = Integer.toString(ch, 16);
                 while( code.length()<4 )
                     code = '0'+code;
-                result.append("\\u"+code);                                      // NOI18N
+                result.append("\\u"+code);                                      
             }
         }
         
@@ -238,7 +244,7 @@ public class ResourceBundleFilter extends AbstractFilter
     {
         int i;
         for(i=0; i<s.length() && (s.charAt(i)==' ' || s.charAt(i)=='\t'); i++);
-        s = s.replaceAll("\\\\ ", " ");                                         // NOI18N
+        s = s.replaceAll("\\\\ ", " ");                                         
         return s.substring(i, s.length());
     }
     
@@ -269,7 +275,7 @@ public class ResourceBundleFilter extends AbstractFilter
                 outfile.write(toAscii(str, false)+lbpr.getLinebreak());
                 
                 // checking if the next string shouldn't be internationalized
-                if( trimmed.indexOf("NOI18N")>=0 )                              // NOI18N
+                if( trimmed.indexOf("NOI18N")>=0 )                              
                     noi18n=true;
                 
                 continue;
@@ -280,7 +286,7 @@ public class ResourceBundleFilter extends AbstractFilter
             {
                 String next = getNextLine(lbpr);
                 if( next==null )
-                    next="";                                                    // NOI18N
+                    next="";                                                    
                 
                 // gluing this line (w/o '\' on this line)
                 //        with next line (w/o leading spaces)
@@ -328,9 +334,9 @@ public class ResourceBundleFilter extends AbstractFilter
                 }
                 else
                 {
-                    value = value.replaceAll("\\n\\n", "\n \n");                    // NOI18N
-                    String trans=processEntry(value);
-                    trans = trans.replaceAll("\\n\\s\\n", "\n\n");                  // NOI18N
+                    value = value.replaceAll("\\n\\n", "\n \n");                    
+                    String trans = process(key, value);
+                    trans = trans.replaceAll("\\n\\s\\n", "\n\n");                  
                     trans = toAscii(trans, false);
                     if( trans.length()>0 && trans.charAt(0)==' ' )
                         trans = '\\'+trans;
@@ -380,5 +386,35 @@ public class ResourceBundleFilter extends AbstractFilter
             prevChar = ch;
         }
         return -1;
+    }
+    
+    protected String process(String key, String value) {
+        if (entryParseCallback != null) {
+            entryParseCallback.addEntry(key, value, null, false, null, this);
+            return value;
+        } else if (entryTranslateCallback != null) {
+            return entryTranslateCallback.getTranslation(key, value);
+        } else if (entryAlignCallback != null) {
+            align.put(key, value);
+        }
+        return value;
+    }
+
+    protected void alignFile(BufferedReader sourceFile,
+            BufferedReader translatedFile) throws Exception {
+        Map<String, String> source = new HashMap<String, String>();
+        Map<String, String> translated = new HashMap<String, String>();
+
+        align = source;
+        processFile(sourceFile, new NullBufferedWriter());
+        align = translated;
+        processFile(translatedFile, new NullBufferedWriter());
+        for (Map.Entry<String, String> en : source.entrySet()) {
+            String tr = translated.get(en.getKey());
+            if (tr != null) {
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
+                        tr);
+            }
+        }
     }
 }

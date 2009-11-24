@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2009 Alex Buloichik
  Portions Copyright (C) 2006 Martin Wunderlich
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -35,11 +36,11 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Serializable;
-import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 import org.omegat.util.Language;
+import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
 
 /**
@@ -58,6 +59,7 @@ import org.omegat.util.OStrings;
  *
  * @author Maxym Mykhalchuk
  * @author  Martin Wunderlich
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public abstract class AbstractFilter implements IFilter {
     
@@ -99,6 +101,9 @@ public abstract class AbstractFilter implements IFilter {
 
     /** Callback for translate. */
     protected ITranslateCallback entryTranslateCallback;
+    
+    /** Callback for align. */
+    protected IAlignCallback entryAlignCallback;
 
     /** Options for processing time. */
     protected Map<String, String> processOptions;
@@ -241,7 +246,7 @@ public abstract class AbstractFilter implements IFilter {
         return false;
     }
     
-    public Class getOptionsClass() {
+    public Class<?> getOptionsClass() {
         return null;
     }
     
@@ -400,11 +405,12 @@ public abstract class AbstractFilter implements IFilter {
     	BufferedReader reader = createReader(inFile, inEncoding);
     	BufferedWriter writer;
     	
-    	if (outFile!=null) 
-    		writer = createWriter(outFile, outEncoding);
-    	else
-    		writer = new BufferedWriter(new StringWriter());
-    		
+        if (outFile != null) {
+            writer = createWriter(outFile, outEncoding);
+        } else {
+            writer = new NullBufferedWriter();
+        }
+
     	processFile(reader, writer);
         
         reader.close();
@@ -416,7 +422,9 @@ public abstract class AbstractFilter implements IFilter {
             throws Exception {
         entryParseCallback = callback;
         entryTranslateCallback = null;
+        entryAlignCallback = null;        
         processOptions = config;
+        
         try {
             processFile(inFile, inEncoding, null, null);
         } finally {
@@ -428,7 +436,34 @@ public abstract class AbstractFilter implements IFilter {
     public void alignFile(File inFile, String inEncoding, File outFile,
             String outEncoding, Map<String, String> config,
             IAlignCallback callback) throws Exception {
+        entryParseCallback = null;
+        entryTranslateCallback = null;
+        entryAlignCallback = callback;
+        processOptions = config;
+        
+        BufferedReader readerIn = createReader(inFile, inEncoding);
+        BufferedReader readerOut = createReader(outFile, outEncoding);
+
+        try {
+            alignFile(readerIn, readerOut);
+        } finally {
+            readerIn.close();
+            readerOut.close();
+        }
     }
+    
+    /**
+     * Align source file against translated file.
+     * 
+     * @param sourceFile
+     *            source file
+     * @param translatedFile
+     *            translated file
+     */
+    protected void alignFile(BufferedReader sourceFile,
+            BufferedReader translatedFile) throws Exception {
+    }
+    
 
     public void translateFile(File inFile, String inEncoding,
             Language targetLang, File outFile, String outEncoding,
@@ -436,7 +471,9 @@ public abstract class AbstractFilter implements IFilter {
             throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = callback;
+        entryAlignCallback = null;
         processOptions = config;
+        
         try {
             processFile(inFile, inEncoding, outFile, outEncoding);
         } finally {

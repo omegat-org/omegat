@@ -879,8 +879,8 @@ public class EditorController implements IEditor {
         try {
             // no selection? make it the current word
             if (start == end) {
-                start = Utilities.getWordStart(editor, start);
-                end = Utilities.getWordEnd(editor, end);
+                start = EditorUtils.getWordStart(editor, start);
+                end = EditorUtils.getWordEnd(editor, end);
             }
 
             editor.setSelectionStart(start);

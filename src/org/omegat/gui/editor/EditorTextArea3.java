@@ -90,14 +90,14 @@ public class EditorTextArea3 extends JEditorPane {
         addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent e) {
                 try {
-                    int start = Utilities.getWordStart(EditorTextArea3.this, e
+                    int start = EditorUtils.getWordStart(EditorTextArea3.this, e
                             .getMark());
-                    int end = Utilities.getWordEnd(EditorTextArea3.this, e
+                    int end = EditorUtils.getWordEnd(EditorTextArea3.this, e
                             .getMark());
                     String newWord = getText(start, end - start);
                     if (!newWord.equals(currentWord)) {
                         currentWord = newWord;
-                        CoreEvents.fireEditorNewWOrd(newWord);
+                        CoreEvents.fireEditorNewWord(newWord);
                     }
                 } catch (BadLocationException ex) {
                     ex.printStackTrace();
@@ -421,11 +421,10 @@ public class EditorTextArea3 extends JEditorPane {
 
         try {
             // find the word boundaries
-            final int wordStart = Utilities.getWordStart(this, mousepos);
-            final int wordEnd = Utilities.getWordEnd(this, mousepos);
+            final int wordStart = EditorUtils.getWordStart(this, mousepos);
+            final int wordEnd = EditorUtils.getWordEnd(this, mousepos);
 
-            final String word = EditorUtils.removeDirection(getText(wordStart,
-                    wordEnd - wordStart));
+            final String word = getText(wordStart, wordEnd - wordStart);
 
             final AbstractDocument xlDoc = (AbstractDocument) getDocument();
 
@@ -445,7 +444,7 @@ public class EditorTextArea3 extends JEditorPane {
                         public void actionPerformed(ActionEvent e) {
                             try {
                                 int pos = getCaretPosition();
-                                xlDoc.replace(wordStart, word.length(),
+                                xlDoc.replace(wordStart, wordEnd - wordStart,
                                         replacement, null);
                                 setCaretPosition(pos);
                             } catch (BadLocationException exc) {

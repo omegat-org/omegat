@@ -103,15 +103,14 @@ public class ViewLabel extends LabelView {
         JTextComponent c = doc.controller.editor;
         String text;
         try {
-            spellBegin = Utilities.getWordStart(c, spellBegin);
-            spellEnd = Utilities.getWordEnd(c, spellEnd);
+            spellBegin = EditorUtils.getWordStart(c, spellBegin);
+            spellEnd = EditorUtils.getWordEnd(c, spellEnd);
             text = doc.getText(spellBegin, spellEnd - spellBegin);
         } catch (BadLocationException ex) {
             // it shouldn't be throwed
             Log.log(ex);
             return;
         }
-        text = EditorUtils.removeDirection(text);
 
         Token[] words = Core.getTokenizer().tokenizeWordsForSpelling(text);
         for (Token w : words) {

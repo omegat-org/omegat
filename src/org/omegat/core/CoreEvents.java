@@ -221,7 +221,7 @@ public class CoreEvents {
     
 
     /** Fire event. */
-    public static void fireEditorNewWOrd(final String newWord) {
+    public static void fireEditorNewWord(final String newWord) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 synchronized (editorEventListeners) {

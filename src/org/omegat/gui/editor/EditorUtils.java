@@ -24,6 +24,10 @@
 
 package org.omegat.gui.editor;
 
+import javax.swing.text.BadLocationException;
+import javax.swing.text.JTextComponent;
+import javax.swing.text.Utilities;
+
 /**
  * Some utilities methods.
  * 
@@ -46,29 +50,44 @@ public class EditorUtils {
     }
 
     /**
-     * Remove LTR/RTL direction chars(u202A,u202B,u202C) from beginning and
-     * ending of string.
+     * Determines the start of a word for the given model location. This method
+     * skips direction char.
      * 
-     * We shouln't use 'removeDirectionChars' instead this method, because
-     * 'removeDirection' works much faster for chars in the beginning and in the
-     * ending of string. It required to display spell checker errors in the
-     * ViewLabel.
+     * TODO: change to use document's locale
      * 
-     * @param str
-     *            input string
-     * @return string without direction chars
+     * @param c
+     * @param offs
+     * @return
+     * @throws BadLocationException
      */
-    public static String removeDirection(final String str) {
-        String result = str;
-        if (result.length() > 0) {
-            if (isDirectionChar(result.charAt(0))) {
-                result = result.substring(1);
-            }
+    public static int getWordStart(JTextComponent c, int offs)
+            throws BadLocationException {
+        int result = Utilities.getWordStart(c, offs);
+        char ch = c.getDocument().getText(result, 1).charAt(0);
+        if (isDirectionChar(ch)) {
+            result++;
         }
-        if (result.length() > 0) {
-            int last = result.length() - 1;
-            if (isDirectionChar(result.charAt(last))) {
-                result = result.substring(0, last);
+        return result;
+    }
+
+    /**
+     * Determines the end of a word for the given model location. This method
+     * skips direction char.
+     * 
+     * TODO: change to use document's locale
+     * 
+     * @param c
+     * @param offs
+     * @return
+     * @throws BadLocationException
+     */
+    public static int getWordEnd(JTextComponent c, int offs)
+            throws BadLocationException {
+        int result = Utilities.getWordEnd(c, offs);
+        if (result > 0) {
+            char ch = c.getDocument().getText(result - 1, 1).charAt(0);
+            if (isDirectionChar(ch)) {
+                result--;
             }
         }
         return result;

@@ -743,7 +743,7 @@ public class FilterMaster {
         for (Map.Entry<String, String> en : newOptions.entrySet()) {
             Filter.Option opt = new Filter.Option();
             opt.setName(en.getKey());
-            opt.setValue(opt.getValue());
+            opt.setValue(en.getValue());
             f.getOption().add(opt);
         }
     }

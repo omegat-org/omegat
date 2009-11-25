@@ -55,6 +55,7 @@ public class ViewLabel extends LabelView {
 
     @Override
     public void paint(Graphics g, Shape a) {
+        // draw text
         super.paint(g, a);
 
         if (!(getElement().getDocument() instanceof Document3)) {
@@ -87,76 +88,79 @@ public class ViewLabel extends LabelView {
 
         if (spellBegin < spellEnd) {
             // is need spell checking ?
-            try {
-                /*
-                 * Find word boundaries. It required if word splitted to several
-                 * lines.
-                 */
-                JTextComponent c = doc.controller.editor;
-                spellBegin = Utilities.getWordStart(c, spellBegin);
-                spellEnd = Utilities.getWordEnd(c, spellEnd);
+            underlineMisspelled(doc, spellBegin, spellEnd, g, a);
+        }
+    }
 
-                String text = doc.getText(spellBegin, spellEnd - spellBegin);
-                text = EditorUtils.removeDirection(text);
+    /**
+     * Check spelling and underline misspelled words.
+     */
+    protected void underlineMisspelled(Document3 doc, int spellBegin,
+            int spellEnd, Graphics g, Shape a) {
+        /*
+         * Find word boundaries. It required if word splitted to several lines.
+         */
+        JTextComponent c = doc.controller.editor;
+        String text;
+        try {
+            spellBegin = Utilities.getWordStart(c, spellBegin);
+            spellEnd = Utilities.getWordEnd(c, spellEnd);
+            text = doc.getText(spellBegin, spellEnd - spellBegin);
+        } catch (BadLocationException ex) {
+            // it shouldn't be throwed
+            Log.log(ex);
+            return;
+        }
+        text = EditorUtils.removeDirection(text);
 
-                Token[] words = Core.getTokenizer().tokenizeWordsForSpelling(
-                        text);
-                for (Token w : words) {
-                    /*
-                     * Document can merge several 'insert's into one element,
-                     * so, direction chars could be added to word.
-                     */
-                    if (doc.controller.spellCheckerThread.isIncorrect(text
-                            .substring(w.getOffset(), w.getOffset()
-                                    + w.getLength()))) {
-                        int posBegin=-99;
-                        int posEnd=-99;
-                        try {
-                        posBegin = Math.max(spellBegin + w.getOffset(),
-                                getStartOffset());
-                        posEnd = Math.min(spellBegin + w.getOffset()
-                                + w.getLength(), getEndOffset());
-                            if (posEnd <= posBegin) {
-                                /*
-                                 * It happen when we try to spell check word
-                                 * outside currently displayed label. For
-                                 * example, "CD-ROM" can be splitted to "CD" and
-                                 * "ROM" tokens depends of tokenizer, then we
-                                 * process label "ROM", and try to start spell
-                                 * checking from begin of "CD-ROM" word. In this
-                                 * case, "CD" will be out of scope of current
-                                 * label.
-                                 * Exception("TextHitInfo is out of range") can
-                                 * be throwed if we will try continue.
-                                 */
-                                continue;
-                            }
-                        Rectangle b = modelToView(posBegin, a,
-                                Position.Bias.Forward).getBounds();
-                        Rectangle e = modelToView(posEnd, a,
-                                Position.Bias.Backward).getBounds();
-                        Rectangle line = new Rectangle();
-                        line.x = b.x;
-                        line.y = b.y;
-                        line.width = e.x - b.x;
-                        line.height = b.height;
-                        paintJaggedLine(g, line, Color.red);
-                        } catch (Exception ex) {
-                            // TODO: remove
-                            Log.log("Error in ViewLabel: text='" + text
-                                    + "' posBegin=" + posBegin + " posEnd="
-                                    + posEnd + " spellBegin=" + spellBegin
-                                    + " spellEnd=" + spellEnd + " w.off="
-                                    + w.getOffset() + " w.len=" + w.getLength()
-                                    + " startOffset=" + getStartOffset()
-                                    + " endOffset=" + getEndOffset());
-                            Log.log(ex);
-                        }
+        Token[] words = Core.getTokenizer().tokenizeWordsForSpelling(text);
+        for (Token w : words) {
+            /*
+             * Document can merge several 'insert's into one element, so,
+             * direction chars could be added to word.
+             */
+            if (doc.controller.spellCheckerThread.isIncorrect(text.substring(w
+                    .getOffset(), w.getOffset() + w.getLength()))) {
+                int posBegin = -99;
+                int posEnd = -99;
+                try {
+                    posBegin = Math.max(spellBegin + w.getOffset(),
+                            getStartOffset());
+                    posEnd = Math.min(spellBegin + w.getOffset()
+                            + w.getLength(), getEndOffset());
+                    if (posEnd <= posBegin) {
+                        /*
+                         * It happen when we try to spell check word outside
+                         * currently displayed label. For example, "CD-ROM" can
+                         * be splitted to "CD" and "ROM" tokens depends of
+                         * tokenizer, then we process label "ROM", and try to
+                         * start spell checking from begin of "CD-ROM" word. In
+                         * this case, "CD" will be out of scope of current
+                         * label. Exception("TextHitInfo is out of range") can
+                         * be throwed if we will try continue.
+                         */
+                        continue;
                     }
+                    Rectangle b = modelToView(posBegin, a,
+                            Position.Bias.Forward).getBounds();
+                    Rectangle e = modelToView(posEnd, a, Position.Bias.Backward)
+                            .getBounds();
+                    Rectangle line = new Rectangle();
+                    line.x = b.x;
+                    line.y = b.y;
+                    line.width = e.x - b.x;
+                    line.height = b.height;
+                    paintJaggedLine(g, line, Color.red);
+                } catch (Exception ex) {
+                    // something wrong in modelToView
+                    Log.log("Error in ViewLabel: text='" + text + "' posBegin="
+                            + posBegin + " posEnd=" + posEnd + " spellBegin="
+                            + spellBegin + " spellEnd=" + spellEnd + " w.off="
+                            + w.getOffset() + " w.len=" + w.getLength()
+                            + " startOffset=" + getStartOffset()
+                            + " endOffset=" + getEndOffset());
+                    Log.log(ex);
                 }
-            } catch (BadLocationException ex) {
-                // it shouldn't be throwed
-                ex.printStackTrace();
             }
         }
     }

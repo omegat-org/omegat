@@ -116,6 +116,21 @@ public class ViewLabel extends LabelView {
                                 getStartOffset());
                         posEnd = Math.min(spellBegin + w.getOffset()
                                 + w.getLength(), getEndOffset());
+                            if (posEnd <= posBegin) {
+                                /*
+                                 * It happen when we try to spell check word
+                                 * outside currently displayed label. For
+                                 * example, "CD-ROM" can be splitted to "CD" and
+                                 * "ROM" tokens depends of tokenizer, then we
+                                 * process label "ROM", and try to start spell
+                                 * checking from begin of "CD-ROM" word. In this
+                                 * case, "CD" will be out of scope of current
+                                 * label.
+                                 * Exception("TextHitInfo is out of range") can
+                                 * be throwed if we will try continue.
+                                 */
+                                continue;
+                            }
                         Rectangle b = modelToView(posBegin, a,
                                 Position.Bias.Forward).getBounds();
                         Rectangle e = modelToView(posEnd, a,

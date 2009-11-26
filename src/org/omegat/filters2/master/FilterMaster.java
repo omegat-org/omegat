@@ -35,13 +35,8 @@ import gen.core.filters.Filter;
 import gen.core.filters.Filters;
 import gen.core.filters.Filter.Option;
 
-import java.beans.BeanInfo;
-import java.beans.Introspector;
-import java.beans.PropertyDescriptor;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
-import java.lang.reflect.Method;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,7 +115,7 @@ public class FilterMaster {
      */
     private FilterMaster() {
         filtersInstances = new ArrayList<IFilter>();
-        for (Class c : PluginUtils.getFilterClasses()) {
+        for (Class<?> c : PluginUtils.getFilterClasses()) {
             try {
                 filtersInstances.add((IFilter) c.newInstance());
             } catch (Exception ex) {
@@ -132,8 +127,6 @@ public class FilterMaster {
         loadConfig();
         
         addNewFiltersToConfig(config);
-
-        applyOptions();
         
         saveConfig();
     }
@@ -159,101 +152,6 @@ public class FilterMaster {
         }
     }
 
-    /**
-     * TODO: change filters to support text options
-     */
-    public void applyOptions() {
-        for (IFilter f : filtersInstances) {
-            if (!f.hasOptions()) {
-                // filter doesn't support options
-                continue;
-            }
-            for (Filter fc : config.getFilter()) {
-                if (!f.getClass().getName().equals(fc.getClassName())) {
-                    continue;
-                }
-                if (f.getOptionsClass() != Map.class) {
-                    f.setOptions(parseOptions(f.getOptionsClass(), fc
-                            .getOption()));
-                }
-            }
-        }
-    }
-
-    /**
-     * TODO: change filters to support text options
-     */
-    public static Serializable parseOptions(Class optClass, List<Option> configOpts) {
-        if (optClass == null) {
-            return null;
-        }
-        Serializable opts;
-        try {
-            opts = (Serializable) optClass.newInstance();
-        } catch (Exception ex) {
-            Log.log(ex);
-            return null;
-        }
-        // found filter's config
-        try {
-            BeanInfo bi = Introspector.getBeanInfo(opts.getClass());
-            for (PropertyDescriptor prop : bi.getPropertyDescriptors()) {
-                if ("class".equals(prop.getName())) {
-                    continue;
-                }
-                // find option value in config
-                String val = null;
-                for (Option opt : configOpts) {
-                    if (prop.getName().equals(opt.getName())) {
-                        val = opt.getValue();
-                        break;
-                    }
-                }
-                if (val == null) {
-                    continue;
-                }
-                Method wr = prop.getWriteMethod();
-                Class pt = wr.getParameterTypes()[0];
-                if (pt == int.class) {
-                    wr.invoke(opts, Integer.parseInt(val));
-                } else if (pt == boolean.class) {
-                    wr.invoke(opts, Boolean.parseBoolean(val));
-                } else if (pt == String.class) {
-                    wr.invoke(opts, val);
-                } else {
-                    Log.log("Unknown param type:" + pt);
-                }
-            }
-            return opts;
-        } catch (Exception ex) {
-            Log.log(ex);
-            return null;
-        }
-    }
-
-    /**
-     * TODO: change filters to support text options
-     */
-    public static List<Option> parseToOptions(Object opts) {
-        List<Option> result = new ArrayList<Option>();
-        try {
-            BeanInfo bi = Introspector.getBeanInfo(opts.getClass());
-            for (PropertyDescriptor prop : bi.getPropertyDescriptors()) {
-                if ("class".equals(prop.getName())) {
-                    continue;
-                }
-                Object value = prop.getReadMethod().invoke(opts);
-                Filter.Option op = new Filter.Option();
-                op.setName(prop.getName());
-                op.setValue(value.toString());
-                result.add(op);
-            }
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
-        return result;
-    }
-    
     /**
      * Returns the only instance of this class.
      */
@@ -637,7 +535,6 @@ public class FilterMaster {
      */
     public void setConfig(final Filters config) {
         this.config = config;
-        applyOptions();
     }
 
     /**

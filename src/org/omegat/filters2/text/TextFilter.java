@@ -212,8 +212,4 @@ public class TextFilter extends AbstractFilter
     {
         return true;
     }
-    
-    public Class<?> getOptionsClass() {
-        return Map.class;
-    }
 }

@@ -26,7 +26,6 @@ package org.omegat.filters2;
 
 import java.awt.Dialog;
 import java.io.File;
-import java.io.Serializable;
 import java.util.Map;
 
 import org.omegat.util.Language;
@@ -183,12 +182,6 @@ public interface IFilter {
 
     boolean hasOptions();
 
-    Class<?> getOptionsClass();
-
-    void setOptions(Serializable options);
-
-    Serializable changeOptions(Dialog parent, Serializable currentOptions);
-    
     /**
      * Show change options dialog for able to change options.
      * 

@@ -35,7 +35,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
@@ -244,52 +243,6 @@ public abstract class AbstractFilter implements IFilter {
     public boolean hasOptions()
     {
         return false;
-    }
-    
-    public Class<?> getOptionsClass() {
-        return null;
-    }
-    
-    /** Holds filter's options. */
-    private Serializable options = null;
-    
-    /**
-     * Returns deserialized filter's options.
-     * May return null indicating that the filter had not yet set any options.
-     *
-     * @return Filter's options.
-     */
-    public final Serializable getOptions()
-    {
-        return options;
-    }
-    
-    /**
-     * Called by the OmegaT filter engine to set filter's options.
-     * Do not call it in your code.
-     *
-     * @param options Filter's options.
-     */
-    public final void setOptions(Serializable options)
-    {
-        this.options = options;
-    }
-    
-    /**
-     * Is called by OmegaT if the filter has options to edit them.
-     * Filter authors should override this to show a <b>modal</b>
-     * dialog to edit options specific to their filters and return
-     * changed options if user confirmed the changes, and current 
-     * options if the user cancelled the dialog.
-     * By default returns current options.
-     *
-     * @param parent Parent dialog to declare a modal dialog.
-     * @param currentOptions Current options of the filter.
-     * @return Updated filter options if user confirmed the changes, and current options otherwise.
-     */
-    public Serializable changeOptions(Dialog parent,Serializable currentOptions)
-    {
-        return currentOptions;
     }
 
     /**

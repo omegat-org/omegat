@@ -509,7 +509,6 @@ public class MainWindowMenuHandler {
         if (dlg.result != null) {
             // saving config
             FilterMaster.getInstance().setConfig(dlg.result);
-            FilterMaster.getInstance().applyOptions();
             FilterMaster.getInstance().saveConfig();
 
             if (Core.getProject().isProjectLoaded()) {

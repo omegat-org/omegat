@@ -26,15 +26,12 @@ package org.omegat.gui.filters2;
 
 import gen.core.filters.Filter;
 import gen.core.filters.Filters;
-import gen.core.filters.Filter.Option;
 
 import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.Serializable;
-import java.util.List;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
@@ -289,22 +286,11 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener
         IFilter f = FilterMaster.getInstance().getFilterInstance(
                 currFilter.getClassName());
         
-        if (f.getOptionsClass() == Map.class) {
-            // new options handling
-            Map<String, String> newConfig = f.changeOptions(this, FilterMaster
-                    .forFilter(currFilter.getOption()));
-            if (newConfig != null) {
-                FilterMaster.setOptions(currFilter, newConfig);
-            }
-        } else {
-            Serializable op = FilterMaster.parseOptions(f.getOptionsClass(),
-                    currFilter.getOption());
-            Object r = f.changeOptions(this, op);
-            if (r != null) {
-                List<Option> opts = FilterMaster.parseToOptions(r);
-                currFilter.getOption().clear();
-                currFilter.getOption().addAll(opts);
-            }
+        // new options handling
+        Map<String, String> newConfig = f.changeOptions(this, FilterMaster
+                .forFilter(currFilter.getOption()));
+        if (newConfig != null) {
+            FilterMaster.setOptions(currFilter, newConfig);
         }
     }//GEN-LAST:event_optionsButtonActionPerformed
 

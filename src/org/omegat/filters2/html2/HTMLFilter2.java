@@ -79,10 +79,6 @@ public class HTMLFilter2 extends AbstractFilter
      */
     private HashMap<String, String> skipMetaAttributes;
 
-    /** The options of this filter */
-    private HTMLOptions options;
-
-
     /**
      * Customized version of creating input reader for HTML files,
      * aware of encoding by using <code>EncodingAwareReader</code> class.
@@ -137,10 +133,7 @@ public class HTMLFilter2 extends AbstractFilter
             throw new IOException(OStrings.getString("HTML__FILE_TOO_BIG"));
         }
 
-        if (this.hasOptions()) // HHC filter has no options
-        {
-            this.options = new HTMLOptions(processOptions);
-        }
+        HTMLOptions options = new HTMLOptions(processOptions);
 
         // Prepare matcher
         String skipRegExp = options.getSkipRegExp();
@@ -250,10 +243,6 @@ public class HTMLFilter2 extends AbstractFilter
         return true;
     }
     
-    public Class<?> getOptionsClass() {
-        return Map.class;
-    }
-
     /**
      * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.
      * 

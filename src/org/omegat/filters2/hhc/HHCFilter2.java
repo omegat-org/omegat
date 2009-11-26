@@ -81,14 +81,6 @@ public class HHCFilter2 extends HTMLFilter2
     
     //////////////////////////////////////////////////////////////////////////
     
-    /** Package-internal processEntry to give it to FilterVisitor */
-    String privateProcessEntry(String entry)
-    {
-        return super.processEntry(entry);
-    }
-    
-    //////////////////////////////////////////////////////////////////////////
-
     public String getFileFormatName()
     {
         return OStrings.getString("HHC__FILTER_NAME");

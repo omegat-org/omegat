@@ -30,11 +30,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Enumeration;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.ZipEntry;
@@ -45,8 +43,8 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.LFileCopy;
-import org.omegat.util.OStrings;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 
 /**
  * Filter for Open Document file format.
@@ -86,7 +84,7 @@ public class OpenDocFilter extends AbstractFilter
     }
 
     OpenDocXMLFilter xmlfilter = null;
-    private OpenDocXMLFilter getXMLFilter()
+    private OpenDocXMLFilter getXMLFilter(Map<String, String> options)
     {
         if (xmlfilter==null) {
             xmlfilter = new OpenDocXMLFilter();
@@ -95,7 +93,7 @@ public class OpenDocFilter extends AbstractFilter
         // Defining the actual dialect, because at this step 
         // we have the options
         OpenDocDialect dialect = (OpenDocDialect) xmlfilter.getDialect();
-        dialect.defineDialect((OpenDocOptions) this.getOptions());
+        dialect.defineDialect(new OpenDocOptions(options));
   
         return xmlfilter;
     }
@@ -134,7 +132,7 @@ public class OpenDocFilter extends AbstractFilter
                 
                 try
                 {
-                    getXMLFilter().processFile(tmpin, null, tmpout, null);
+                    getXMLFilter(processOptions).processFile(tmpin, null, tmpout, null);
                 }
                 catch (Exception e)
                 {
@@ -219,8 +217,8 @@ public class OpenDocFilter extends AbstractFilter
         return true;
     }
     
-    public Class getOptionsClass() {
-        return OpenDocOptions.class;
+    public Class<?> getOptionsClass() {
+        return Map.class;
     }
     
     /**
@@ -230,24 +228,23 @@ public class OpenDocFilter extends AbstractFilter
      * @return Updated filter options if user confirmed the changes, 
      * and current options otherwise.
      */
-    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
+    public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions)
     {
         try
         {
-            OpenDocOptions options = (OpenDocOptions) currentOptions;
             EditOpenDocOptionsDialog dialog = 
-                    new EditOpenDocOptionsDialog(parent, options);
+                    new EditOpenDocOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
             if( EditOpenDocOptionsDialog.RET_OK==dialog.getReturnStatus() )
-                return dialog.getOptions();
+                return dialog.getOptions().getOptionsMap();
             else
-                return currentOptions;
+                return null;
         }
         catch( Exception e )
         {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
             Log.log(e);
-            return currentOptions;
+            return null;
         }
     }
 }

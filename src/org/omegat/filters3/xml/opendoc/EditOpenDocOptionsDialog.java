@@ -27,6 +27,9 @@ package org.omegat.filters3.xml.opendoc;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -48,13 +51,11 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
     public static final int RET_OK = 1;
     
     /** Creates new form EditOpenDocOptionsDialog */
-    public EditOpenDocOptionsDialog(java.awt.Dialog parent, OpenDocOptions options)
+    public EditOpenDocOptionsDialog(java.awt.Dialog parent, Map<String, String> config)
     {
         super(parent, true);
-        this.options = options;
+        this.options = new OpenDocOptions(new TreeMap<String, String>(config));
         initComponents();
-        if (options==null)
-            options = new OpenDocOptions(); // Set default options
         
         translateIndexesCB.setSelected(options.getTranslateIndexes());
         translateBookmarksCB.setSelected(options.getTranslateBookmarks());
@@ -231,8 +232,6 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
     
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
-        options = new OpenDocOptions();
-        
         options.setTranslateIndexes(translateIndexesCB.isSelected());
         options.setTranslateBookmarks(translateBookmarksCB.isSelected());
         options.setTranslateBookmarkRefs(translateBookmarkRefsCB.isSelected());

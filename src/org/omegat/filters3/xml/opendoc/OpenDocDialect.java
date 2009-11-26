@@ -48,9 +48,6 @@ public class OpenDocDialect extends DefaultXMLDialect
      */
     public void defineDialect(OpenDocOptions options)
     {
-        if (options == null)
-            options = new OpenDocOptions();
-
         defineShortcuts(new String[]{
             "text:line-break", "br",                                            // NOI18N
             "text:a", "a",                                                      // NOI18N

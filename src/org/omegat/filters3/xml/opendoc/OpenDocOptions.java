@@ -20,19 +20,19 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml.opendoc;
 
-import java.io.Serializable;
+import java.util.Map;
 
+import org.omegat.filters2.AbstractOptions;
 
 /**
- * Options for OpenDoc filter.
- * Serializable to allow saving to / reading from configuration file.
+ * Options for OpenDoc filter. Serializable to allow saving to / reading from
+ * configuration file.
  * <p>
- * OpenDoc filter have the following options
- * ([+] means default on).
+ * OpenDoc filter have the following options ([+] means default on).
  * Translatable elements:
  * <ul>
  * <li>[+] Index entries
@@ -41,96 +41,88 @@ import java.io.Serializable;
  * <li>[+] Notes
  * <li>[+] Comments
  * </ul>
+ * 
  * @author Didier Briel
  */
-public class OpenDocOptions implements Serializable
-{    
-     
-    /** Hold value of properties. */
-    private boolean translateIndexes = true;
-    private boolean translateBookmarks = false;
-    private boolean translateBookmarkRefs = true;
-    private boolean translateNotes = true;
-    private boolean translateComments = true;
-    
+public class OpenDocOptions extends AbstractOptions {
+    private static final String OPTION_TRANSLATE_INDEXES = "translateIndexes";
+    private static final String OPTION_TRANSLATE_BOOKMARKS = "translateBookmarks";
+    private static final String OPTION_TRANSLATE_BOOKMARKS_REFS = "translateBookmarkRefs";
+    private static final String OPTION_TRANSLATE_NOTES = "translateNotes";
+    private static final String OPTION_TRANSLATE_COMMENTS = "translateComments";
+
+    public OpenDocOptions(Map<String, String> config) {
+        super(config);
+    }
+
     /**
      * Returns whether Indexes should be translated.
      */
-    public boolean getTranslateIndexes()
-    {
-        return this.translateIndexes;
+    public boolean getTranslateIndexes() {
+        return getBoolean(OPTION_TRANSLATE_INDEXES, true);
     }
 
     /**
      * Sets whether Indexes be translated.
      */
-    public void setTranslateIndexes(boolean translateIndexes)
-    {
-        this.translateIndexes = translateIndexes;
+    public void setTranslateIndexes(boolean translateIndexes) {
+        setBoolean(OPTION_TRANSLATE_INDEXES, translateIndexes);
     }
-   
+
     /**
      * Returns whether Bookmarks should be translated.
      */
-    public boolean getTranslateBookmarks()
-    {
-        return this.translateBookmarks;
+    public boolean getTranslateBookmarks() {
+        return getBoolean(OPTION_TRANSLATE_BOOKMARKS, false);
     }
 
     /**
      * Sets whether Bookmarks should be translated.
      */
-    public void setTranslateBookmarks(boolean translateBookmarks)
-    {
-        this.translateBookmarks = translateBookmarks;
+    public void setTranslateBookmarks(boolean translateBookmarks) {
+        setBoolean(OPTION_TRANSLATE_BOOKMARKS, translateBookmarks);
     }
- 
-        /**
+
+    /**
      * Returns whether Bookmark references should be translated.
      */
-    public boolean getTranslateBookmarkRefs()
-    {
-        return this.translateBookmarkRefs;
+    public boolean getTranslateBookmarkRefs() {
+        return getBoolean(OPTION_TRANSLATE_BOOKMARKS_REFS, true);
     }
 
     /**
      * Sets whether Bookmarks references should be translated.
      */
-    public void setTranslateBookmarkRefs(boolean translateBookmarkRefs)
-    {
-        this.translateBookmarkRefs = translateBookmarkRefs;
+    public void setTranslateBookmarkRefs(boolean translateBookmarkRefs) {
+        setBoolean(OPTION_TRANSLATE_BOOKMARKS_REFS, translateBookmarkRefs);
     }
-  
+
     /**
      * Returns whether Notes should be translated.
      */
-    public boolean getTranslateNotes()
-    {
-        return this.translateNotes;
+    public boolean getTranslateNotes() {
+        return getBoolean(OPTION_TRANSLATE_NOTES, true);
     }
 
     /**
      * Sets whether Notes should be translated.
      */
-    public void setTranslateNotes(boolean translateNotes)
-    {
-        this.translateNotes = translateNotes;
+    public void setTranslateNotes(boolean translateNotes) {
+        setBoolean(OPTION_TRANSLATE_NOTES, translateNotes);
     }
+
     /**
      * Returns whether Comments should be translated.
      */
-    
-    public boolean getTranslateComments()
-    {
-        return this.translateComments;
+
+    public boolean getTranslateComments() {
+        return getBoolean(OPTION_TRANSLATE_COMMENTS, true);
     }
 
     /**
      * Sets whether Comments should be translated.
      */
-    public void setTranslateComments(boolean translateComments)
-    {
-        this.translateComments = translateComments;
+    public void setTranslateComments(boolean translateComments) {
+        setBoolean(OPTION_TRANSLATE_COMMENTS, translateComments);
     }
-
 }

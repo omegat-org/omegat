@@ -103,6 +103,7 @@ public class Convert20to21 {
         }
 
         convertTextFilter(res);
+        convertHTMLFilter2(res);
         
         JAXBContext CTX = JAXBContext.newInstance(Filters.class);
         Marshaller m = CTX.createMarshaller();
@@ -152,7 +153,7 @@ public class Convert20to21 {
     }
     
     /**
-     * Convert TextFiletr options from int to string.
+     * Convert TextFilter options from int to string.
      * 
      * @param res
      */
@@ -172,6 +173,40 @@ public class Convert20to21 {
                             opt.setValue("EMPTYLINES");
                             break;
                         case 3:
+                            opt.setValue("NEVER");
+                            break;
+                        }
+                    } catch (Exception ex) {
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Convert HTMLFilter2 options from int to string.
+     * 
+     * @param res
+     */
+    private static void convertHTMLFilter2(Filters res) {
+        for (Filter f : res.getFilter()) {
+            if (!f.getClassName().equals("org.omegat.filters2.html2.HTMLFilter2")) {
+                continue;
+            }
+            for (Filter.Option opt : f.getOption()) {
+                if (opt.getName().equals("rewriteEncoding")) {
+                    try {
+                        switch (Integer.parseInt(opt.getValue())) {
+                        case 1:
+                            opt.setValue("ALWAYS");
+                            break;
+                        case 2:
+                            opt.setValue("IFHEADER");
+                            break;
+                        case 3:
+                            opt.setValue("IFMETA");
+                            break;
+                        case 4:
                             opt.setValue("NEVER");
                             break;
                         }

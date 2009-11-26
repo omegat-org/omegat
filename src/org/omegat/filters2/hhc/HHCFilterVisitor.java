@@ -41,7 +41,7 @@ class HHCFilterVisitor extends FilterVisitor
 {
     public HHCFilterVisitor(HHCFilter2 hhcfilter, BufferedWriter bufwriter)
     {
-        super(hhcfilter, bufwriter);
+        super(hhcfilter, bufwriter, null);
     }
 
     /////////////////////////////////////////////////////////////////////////

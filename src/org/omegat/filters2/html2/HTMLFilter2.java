@@ -30,9 +30,9 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
@@ -106,7 +106,7 @@ public class HTMLFilter2 extends AbstractFilter
             throws UnsupportedEncodingException, IOException
     {
         HTMLWriter hwriter;
-        HTMLOptions options = (HTMLOptions) getOptions();
+        HTMLOptions options = new HTMLOptions(processOptions);
         if (encoding==null)
             this.targetEncoding = sourceEncoding;
         else
@@ -139,9 +139,7 @@ public class HTMLFilter2 extends AbstractFilter
 
         if (this.hasOptions()) // HHC filter has no options
         {
-            this.options = (HTMLOptions) this.getOptions();
-            if (this.options == null)
-                this.options = new HTMLOptions();
+            this.options = new HTMLOptions(processOptions);
         }
 
         // Prepare matcher
@@ -171,7 +169,7 @@ public class HTMLFilter2 extends AbstractFilter
         try
         {
             parser.setInputHTML(all.toString());
-            parser.visitAllNodesWith(new FilterVisitor(this, outfile));
+            parser.visitAllNodesWith(new FilterVisitor(this, outfile, options));
         }
         catch( ParserException pe )
         {
@@ -252,36 +250,35 @@ public class HTMLFilter2 extends AbstractFilter
         return true;
     }
     
-    public Class getOptionsClass() {
-        return HTMLOptions.class;
+    public Class<?> getOptionsClass() {
+        return Map.class;
     }
 
     /**
      * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.
-     *
-     * @param currentOptions Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current options otherwise.
+     * 
+     * @param currentOptions
+     *            Current options to edit.
+     * @return Updated filter options if user confirmed the changes, and current
+     *         options otherwise.
      */
-    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
-    {
-        try
-        {
-            HTMLOptions options = (HTMLOptions) currentOptions;
-            EditOptionsDialog dialog = new EditOptionsDialog(parent, options);
+    public Map<String, String> changeOptions(Dialog parent,
+            Map<String, String> config) {
+        try {
+            EditOptionsDialog dialog = new EditOptionsDialog(parent, config);
             dialog.setVisible(true);
-            if( EditOptionsDialog.RET_OK==dialog.getReturnStatus() )
-                return dialog.getOptions();
-            else
-                return currentOptions;
-        }
-        catch( Exception e )
-        {
+            if (EditOptionsDialog.RET_OK == dialog.getReturnStatus()) {
+                return dialog.getOptions().getOptionsMap();
+            } else {
+                return null;
+            }
+        } catch (Exception e) {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
             Log.log(e);
-            return currentOptions;
+            return null;
         }
     }
-
+    
     /**
      * Returns the encoding of the html writer (if already set)
      * @return the target encoding

@@ -28,6 +28,8 @@ package org.omegat.filters2.html2;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Map;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -51,27 +53,25 @@ public class EditOptionsDialog extends javax.swing.JDialog
 
     /** Creates new form EditOptionsDialog */
     public EditOptionsDialog(java.awt.Dialog parent,
-                             HTMLOptions options)
+                             Map<String,String> config)
     {
         super(parent, true);
-        this.options = options;
         initComponents();
 
-        if (options==null)
-            options = new HTMLOptions(); // Set default options
+        options = new HTMLOptions(config);
         
         switch (options.getRewriteEncoding())
         {
-            case HTMLOptions.REWRITE_ALWAYS:
+            case ALWAYS:
                 alwaysRB.setSelected(true);
                 break;
-            case HTMLOptions.REWRITE_IFHEADER:
+            case IFHEADER:
                 ifHasHeaderRB.setSelected(true);
                 break;
-            case HTMLOptions.REWRITE_IFMETA:
+            case IFMETA:
                 ifHasMetaRB.setSelected(true);
                 break;
-            case HTMLOptions.REWRITE_NEVER:
+            case NEVER:
                 neverRB.setSelected(true);
                 break;
         }
@@ -338,15 +338,14 @@ public class EditOptionsDialog extends javax.swing.JDialog
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
-        options = new HTMLOptions();
         if (alwaysRB.isSelected())
-            options.setRewriteEncoding(HTMLOptions.REWRITE_ALWAYS);
+            options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.ALWAYS);
         else if (ifHasHeaderRB.isSelected())
-            options.setRewriteEncoding(HTMLOptions.REWRITE_IFHEADER);
+            options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.IFHEADER);
         else if (ifHasMetaRB.isSelected())
-            options.setRewriteEncoding(HTMLOptions.REWRITE_IFMETA);
+            options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.IFMETA);
         else if (neverRB.isSelected())
-            options.setRewriteEncoding(HTMLOptions.REWRITE_NEVER);
+            options.setRewriteEncoding(HTMLOptions.REWRITE_MODE.NEVER);
 
         options.setTranslateHref(translateHrefCB.isSelected());
         options.setTranslateSrc(translateSrcCB.isSelected());

@@ -57,15 +57,10 @@ public class FilterVisitor extends NodeVisitor
     private BufferedWriter writer;
     private HTMLOptions options;
 
-    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter)
+    public FilterVisitor(HTMLFilter2 htmlfilter, BufferedWriter bufwriter, HTMLOptions options)
     {
         this.filter = htmlfilter;
-        if (this.filter.hasOptions()) // HHC filter has no options
-        {
-            this.options = (HTMLOptions) this.filter.getOptions();
-            if (this.options == null)
-                this.options = new HTMLOptions();
-        }
+        this.options = options; // HHC filter has no options
         this.writer = bufwriter;
     }
 

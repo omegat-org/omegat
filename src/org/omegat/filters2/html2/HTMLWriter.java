@@ -84,10 +84,8 @@ public class HTMLWriter extends Writer
             throws FileNotFoundException, UnsupportedEncodingException
     {
         this.encoding = encoding;
-        if (options!=null)
-            this.options = options;
-        else
-            this.options = new HTMLOptions();
+
+        this.options = options;
 
         writer = new StringWriter();
         FileOutputStream fos = new FileOutputStream(fileName);
@@ -150,7 +148,7 @@ public class HTMLWriter extends Writer
             
             String contents = buffer.toString();
 
-            if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_NEVER)
+            if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_MODE.NEVER)
             {
                 Matcher matcher_header = PatternConsts.XML_HEADER.matcher(contents);
                 boolean xhtml = false;
@@ -169,12 +167,12 @@ public class HTMLWriter extends Writer
                 Matcher matcher_enc = PatternConsts.HTML_ENCODING.matcher(contents);
                 if( matcher_enc.find() )
                     contents = matcher_enc.replaceFirst(HTML_META);
-                else if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_IFMETA)
+                else if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_MODE.IFMETA)
                 {
                     Matcher matcher_head = PatternConsts.HTML_HEAD.matcher(contents);
                     if( matcher_head.find() )
                         contents = matcher_head.replaceFirst("<head>\n    "+HTML_META); // NOI18N
-                    else if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_IFHEADER)
+                    else if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_MODE.IFHEADER)
                     {
                         Matcher matcher_html = PatternConsts.HTML_HTML.matcher(contents);
                         if( matcher_html.find() )

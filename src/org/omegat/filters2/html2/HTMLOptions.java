@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
+               2009 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -58,6 +59,7 @@ import org.omegat.filters2.AbstractOptions;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class HTMLOptions extends AbstractOptions {
 

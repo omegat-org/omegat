@@ -93,9 +93,6 @@ public class XHTMLDialect extends DefaultXMLDialect
      */
     public void defineDialect(XHTMLOptions options)
     {
-        if (options == null)
-            options = new XHTMLOptions();
-
         defineParagraphTags(new String[]
         {
             "html", "head", "title", "body",                                    // NOI18N

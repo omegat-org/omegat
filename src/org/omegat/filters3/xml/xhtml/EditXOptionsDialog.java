@@ -28,6 +28,9 @@ package org.omegat.filters3.xml.xhtml;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -50,13 +53,11 @@ public class EditXOptionsDialog extends javax.swing.JDialog
     public static final int RET_OK = 1;
 
     /** Creates new form EditOptionsDialog */
-    public EditXOptionsDialog(java.awt.Dialog parent, XHTMLOptions options)
+    public EditXOptionsDialog(java.awt.Dialog parent, Map<String,String> config)
     {
         super(parent, true);
-        this.options = options;
+        this.options = new XHTMLOptions(new TreeMap<String, String>(config));
         initComponents();
-        if (options==null)
-            options = new XHTMLOptions(); // Set default options
 
         translateHrefCB.setSelected(options.getTranslateHref());
         translateSrcCB.setSelected(options.getTranslateSrc());
@@ -296,8 +297,6 @@ public class EditXOptionsDialog extends javax.swing.JDialog
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
-        options = new XHTMLOptions();
-
         options.setTranslateHref(translateHrefCB.isSelected());
         options.setTranslateSrc(translateSrcCB.isSelected());
         options.setTranslateLang(translateLangCB.isSelected());

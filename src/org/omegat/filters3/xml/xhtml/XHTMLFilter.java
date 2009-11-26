@@ -27,7 +27,6 @@ package org.omegat.filters3.xml.xhtml;
 
 import java.awt.Dialog;
 import java.io.File;
-import java.io.Serializable;
 import java.util.Map;
 import java.util.regex.Pattern;
 
@@ -120,7 +119,7 @@ public class XHTMLFilter extends XMLFilter
                 // Defining the actual dialect, because at this step 
                 // we have the options
                 XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
-                dialect.defineDialect((XHTMLOptions) this.getOptions());
+                dialect.defineDialect(new XHTMLOptions(config));
                 super.processFile(inFile, inEncoding, null, null);
             }
             catch (Exception e)
@@ -166,8 +165,8 @@ public class XHTMLFilter extends XMLFilter
         return true;
     }
     
-    public Class getOptionsClass() {
-        return XHTMLOptions.class;
+    public Class<?> getOptionsClass() {
+        return Map.class;
     }
     
     /**
@@ -177,23 +176,22 @@ public class XHTMLFilter extends XMLFilter
      * @return Updated filter options if user confirmed the changes, 
      * and current options otherwise.
      */
-    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
+    public Map<String,String> changeOptions(Dialog parent, Map<String,String> currentOptions)
     {
         try
         {
-            XHTMLOptions options = (XHTMLOptions) currentOptions;
-            EditXOptionsDialog dialog = new EditXOptionsDialog(parent, options);
+            EditXOptionsDialog dialog = new EditXOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
             if( EditXOptionsDialog.RET_OK==dialog.getReturnStatus() )
-                return dialog.getOptions();
+                return dialog.getOptions().getOptionsMap();
             else
-                return currentOptions;
+                return null;
         }
         catch( Exception e )
         {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
             Log.log(e);
-            return currentOptions;
+            return null;
         }
     }
 }

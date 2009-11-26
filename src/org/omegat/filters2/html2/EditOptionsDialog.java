@@ -29,6 +29,7 @@ package org.omegat.filters2.html2;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -58,7 +59,7 @@ public class EditOptionsDialog extends javax.swing.JDialog
         super(parent, true);
         initComponents();
 
-        options = new HTMLOptions(config);
+        options = new HTMLOptions(new TreeMap<String, String>(config));
         
         switch (options.getRewriteEncoding())
         {

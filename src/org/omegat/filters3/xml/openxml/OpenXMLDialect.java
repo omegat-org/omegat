@@ -34,11 +34,6 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  */
 public class OpenXMLDialect extends DefaultXMLDialect
 {
- 
-    /** Creates a new instance of OpenXML */
-    public OpenXMLDialect()
-    {     
-    }
 
     /**
      * Actually defines the dialect.
@@ -47,9 +42,6 @@ public class OpenXMLDialect extends DefaultXMLDialect
      */
     public void defineDialect(OpenXMLOptions options)
     {    
-        if (options == null)
-            options = new OpenXMLOptions();
-        
         defineParagraphTags(new String[]
         {
             // Word

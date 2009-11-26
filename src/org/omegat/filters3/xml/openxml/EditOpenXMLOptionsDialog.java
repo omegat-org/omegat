@@ -27,6 +27,9 @@ package org.omegat.filters3.xml.openxml;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.Map;
+import java.util.TreeMap;
+
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
@@ -48,13 +51,11 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
     public static final int RET_OK = 1;
     
     /** Creates new form EditOpenXMLOptionsDialog */
-    public EditOpenXMLOptionsDialog(java.awt.Dialog parent, OpenXMLOptions options)
+    public EditOpenXMLOptionsDialog(java.awt.Dialog parent, Map<String,String> config)
     {
         super(parent, true);
-        this.options = options;
+        this.options = new OpenXMLOptions(new TreeMap<String, String>(config));
         initComponents();
-        if (options==null)
-            options = new OpenXMLOptions(); // Set default options
 
         translateHiddenTextCB.setSelected(options.getTranslateHiddenText());
         translateCommentsCB.setSelected(options.getTranslateComments());
@@ -294,8 +295,6 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
     
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
     {
-        options = new OpenXMLOptions();
-        
         options.setTranslateHiddenText(translateHiddenTextCB.isSelected());
         options.setTranslateComments(translateCommentsCB.isSelected());
         options.setTranslateFootnotes(translateFootnotesCB.isSelected());

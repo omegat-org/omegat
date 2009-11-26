@@ -31,7 +31,6 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
@@ -67,7 +66,7 @@ public class OpenXMLFilter extends AbstractFilter
     /**
      * Defines the documents to read according to options
      */
-    private void defineDOCUMENTSOptions()
+    private void defineDOCUMENTSOptions(Map<String,String> config)
     {
 /*    
     // Complete string when all options are enabled
@@ -80,9 +79,7 @@ public class OpenXMLFilter extends AbstractFilter
     "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)|(notesSlide\\d+\\.xml)"                                 
 */          
         if (!optionsAlreadyRead){
-            OpenXMLOptions options = (OpenXMLOptions) this.getOptions();
-            if (options == null)
-                options = new OpenXMLOptions();
+            OpenXMLOptions options = new OpenXMLOptions(config);
 
             if (options.getTranslateComments())
                 DOCUMENTS += "|(comments\\.xml)";                               // NOI18N
@@ -118,7 +115,7 @@ public class OpenXMLFilter extends AbstractFilter
     {
         try
         {
-            defineDOCUMENTSOptions(); // Define the documents to read
+            defineDOCUMENTSOptions(config); // Define the documents to read
             
             ZipFile file = new ZipFile(inFile);
             Enumeration<? extends ZipEntry> entries = file.entries();
@@ -145,7 +142,7 @@ public class OpenXMLFilter extends AbstractFilter
         // Defining the actual dialect, because at this step 
         // we have the options
         OpenXMLDialect dialect = (OpenXMLDialect) xmlfilter.getDialect();
-        dialect.defineDialect((OpenXMLOptions) this.getOptions());
+        dialect.defineDialect(new OpenXMLOptions(processOptions));
         
         return xmlfilter;
     }
@@ -187,7 +184,7 @@ public class OpenXMLFilter extends AbstractFilter
                             String outEncoding) 
                             throws IOException, TranslationException
     {
-	defineDOCUMENTSOptions(); // Define the documents to read
+	defineDOCUMENTSOptions(processOptions); // Define the documents to read
 	 
 	ZipFile zipfile = new ZipFile(inFile);
         ZipOutputStream zipout = null;
@@ -362,8 +359,8 @@ public class OpenXMLFilter extends AbstractFilter
         return true;
     }
     
-    public Class getOptionsClass() {
-        return OpenXMLOptions.class;
+    public Class<?> getOptionsClass() {
+        return Map.class;
     }
 
     /**
@@ -373,24 +370,23 @@ public class OpenXMLFilter extends AbstractFilter
      * @return Updated filter options if user confirmed the changes, 
      * and current options otherwise.
      */
-    public Serializable changeOptions(Dialog parent, Serializable currentOptions)
+    public Map<String,String> changeOptions(Dialog parent, Map<String,String> currentOptions)
     {
         try
         {
-            OpenXMLOptions options = (OpenXMLOptions) currentOptions;
             EditOpenXMLOptionsDialog dialog = 
-                    new EditOpenXMLOptionsDialog(parent, options);
+                    new EditOpenXMLOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
             if( EditOpenXMLOptionsDialog.RET_OK==dialog.getReturnStatus() )
-                return dialog.getOptions();
+                return dialog.getOptions().getOptionsMap();
             else
-                return currentOptions;
+                return null;
         }
         catch( Exception e )
         {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
             Log.log(e);
-            return currentOptions;
+            return null;
         }
     }
 }

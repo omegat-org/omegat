@@ -48,6 +48,7 @@ import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
@@ -219,6 +220,31 @@ public class RealProject implements IProject
     }
     
     /**
+     * Align project.
+     */
+    public Map<String, String> align(final ProjectProperties props,
+            final File translatedDir) throws Exception {
+        FilterMaster fm = FilterMaster.getInstance();
+
+        List<String> srcFileList = new ArrayList<String>();
+        File root = new File(m_config.getSourceRoot());
+        StaticUtils.buildFileList(srcFileList, root, true);
+
+        AlignFilesCallback alignFilesCallback = new AlignFilesCallback();
+
+        String srcRoot = m_config.getSourceRoot();
+        for (String filename : srcFileList) {
+            // shorten filename to that which is relative to src root
+            String midName = filename.substring(srcRoot.length());
+
+            Language targetLang = getProjectProperties().getTargetLanguage();
+            fm.alignFile(srcRoot, midName, targetLang, translatedDir.getPath(),
+                    alignFilesCallback);
+        }
+        return alignFilesCallback.data;
+    }
+    
+    /**
      * {@inheritDoc}
      */
     public boolean isProjectLoaded() {
@@ -308,6 +334,7 @@ public class RealProject implements IProject
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
         
+        //TODO: remove
         Set<File> processedFiles = new HashSet<File>();
         
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
@@ -795,4 +822,14 @@ public class RealProject implements IProject
             return tr != null ? tr.translation : segmentSource;
         }
     };
+    
+    private class AlignFilesCallback implements IAlignCallback {
+        Map<String, String> data = new HashMap<String, String>();
+
+        public void addTranslation(String id, String source, String translation) {
+            if (source != null && translation != null) {
+                data.put(source, translation);
+            }
+        }
+    }
 }

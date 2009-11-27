@@ -67,7 +67,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
 public class Main {
     /** Application execution mode. */
     enum RUN_MODE {
-        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX;
+        GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN;
         public static RUN_MODE parse(String s) {
             try {
                 return valueOf(s.toUpperCase().replace('-', '_'));
@@ -170,6 +170,9 @@ public class Main {
             break;
         case CONSOLE_CREATEPSEUDOTRANSLATETMX:
             runCreatePseudoTranslateTMX();
+            break;
+        case CONSOLE_ALIGN:
+            runConsoleAlign();
             break;
         }
     }
@@ -348,6 +351,67 @@ public class Main {
                         "\n" +                                                      // NOI18N
                         e.getMessage());
             }
+
+            System.out.println("Finished");
+        } catch (Exception e) {
+            System.err.println("An error has occured: " + e.toString());
+            System.exit(1);
+        }
+    }
+    
+    public static void runConsoleAlign() {
+        Log.log("Alignment mode");
+        Log.log("");
+
+        if (projectLocation == null) {
+            System.out.println("Project location not defined");
+            System.exit(1);
+        }
+
+        String dir = params.get("alignDir");
+        if (dir == null) {
+            System.out.println("Translated files location not defined");
+            System.exit(1);
+        }
+
+        System.out.println("Initializing");
+        try {
+            Core.initializeConsole(params);
+        } catch (Throwable ex) {
+            showError(ex);
+        }
+        try {
+            System.out.println("Loading Project");
+
+            // check if project okay
+            ProjectProperties projectProperties = null;
+            try {
+                projectProperties = ProjectFileStorage
+                        .loadProjectProperties(projectLocation);
+                if (!projectProperties.verifyProject()) {
+                    System.out.println("The project cannot be verified");
+                    System.exit(1);
+                }
+            } catch (Exception ex) {
+                Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                System.out.println(OStrings
+                        .getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
+                System.exit(1);
+            }
+
+            RealProject p = new RealProject(projectProperties, false);
+            Core.setProject(p);
+
+            System.out.println("Align project against " + dir);
+
+            Map<String, String> data = p.align(p.getProjectProperties(),
+                    new File(dir));
+
+            String tmxFile = p.getProjectProperties().getProjectInternal()
+                    + "align.tmx";
+
+            TMXWriter.buildTMXFile(tmxFile, false, false, p
+                    .getProjectProperties(), data);
 
             System.out.println("Finished");
         } catch (Exception e) {

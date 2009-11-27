@@ -50,6 +50,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
@@ -262,7 +263,44 @@ public class FilterMaster {
                     outEncoding, lookup.config, translateCallback);
         } catch (Exception ex) {
             Log.log(ex);
-        }    
+        }
+    }
+    
+    public void alignFile(String sourceDir, String fileName,Language targetLang, String targetdir, 
+            IAlignCallback alignCallback) throws Exception {
+        
+        LookupInformation lookup = lookupFilter(sourceDir+File.separator+fileName);
+        if( lookup==null )
+        {
+            // The file is not supported by any of the filters.
+            // Skip it
+            return;
+        }
+        
+        File inFile = new File(sourceDir+File.separator+fileName);
+        String inEncoding = lookup.outFilesInfo.getSourceEncoding();
+        
+        String name = inFile.getName();
+        String path = fileName.substring(0, fileName.length()-name.length());
+        
+        File outFile =
+                new File(
+                targetdir + File.separator +
+                path + File.separator +
+                constructTargetFilename(
+                lookup.outFilesInfo.getSourceFilenameMask(),
+                name,
+                lookup.outFilesInfo.getTargetFilenamePattern(),
+                targetLang));
+        String outEncoding = lookup.outFilesInfo.getTargetEncoding();
+        
+        IFilter filterObject = lookup.filterObject;
+        try {
+            filterObject.alignFile(inFile, inEncoding, outFile,
+                    outEncoding, lookup.config, alignCallback);
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
     }
     
     class LookupInformation {

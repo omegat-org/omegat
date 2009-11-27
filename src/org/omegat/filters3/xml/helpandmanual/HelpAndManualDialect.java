@@ -47,9 +47,8 @@ public class HelpAndManualDialect extends DefaultXMLDialect
         defineParagraphTags(new String[] {
             "para", "title", "keyword", "li", 
         });
-//        defineShortcut("text", "text");
-//        defineShortcut("var", "var");
-//        defineShortcut("link", "link");
+
+        defineShortcut("link", "li");
     }
                                        
 }

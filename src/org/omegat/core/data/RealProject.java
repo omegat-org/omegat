@@ -102,15 +102,15 @@ public class RealProject implements IProject
     /**
      * Storage for orphaned segments.
      */
-    private Map<String, TransEntry> orphanedSegments;
+    private final Map<String, TransEntry> orphanedSegments;
 
     /**
      * Storage for translation for current project.
      */
-    private Map<String, TransEntry> translations;
+    private final Map<String, TransEntry> translations;
 
     /** Segments count in project files. */
-    private List<FileInfo> projectFilesList;
+    private final List<FileInfo> projectFilesList;
     
     /**
      * Create new project instance. It required to call {@link #createProject()
@@ -127,6 +127,7 @@ public class RealProject implements IProject
         transMemories = new TreeMap<String, List<TransMemory>>();
         orphanedSegments = new HashMap<String, TransEntry>();
         translations = new HashMap<String, TransEntry>();
+        projectFilesList = new ArrayList<FileInfo>();
         
         m_config = props;
     }
@@ -535,8 +536,6 @@ public class RealProject implements IProject
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
-        
-        projectFilesList = new ArrayList<FileInfo>();
         
         for (String filename : srcFileList) {
             // strip leading path information;

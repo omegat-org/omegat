@@ -778,7 +778,8 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public int getCurrentEntryNumber() {
-        return getCurrentEntry().entryNum();
+        SourceTextEntry e = getCurrentEntry();
+        return e != null ? e.entryNum() : 0;
     }
 
     /**

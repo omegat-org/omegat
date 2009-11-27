@@ -41,7 +41,6 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.TreeMap;
 
 import javax.swing.JOptionPane;
@@ -224,10 +223,9 @@ public class FilterMaster {
      * @param filename  The name of the source inFile to process (only the part, relative to source folder).
      * @param targetdir The folder to place the translated inFile to.
      * @param targetLang The target language for the translated file.
-     * @param processedFiles Set of all already processed files not to redo them again.
      */
     public void translateFile(String sourcedir, String filename,
-            Language targetLang, String targetdir, Set<File> processedFiles,
+            Language targetLang, String targetdir, 
             ITranslateCallback translateCallback) throws IOException,
             TranslationException {
         LookupInformation lookup = lookupFilter(sourcedir+File.separator+filename);

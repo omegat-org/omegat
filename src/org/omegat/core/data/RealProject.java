@@ -334,23 +334,17 @@ public class RealProject implements IProject
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
         
-        //TODO: remove
-        Set<File> processedFiles = new HashSet<File>();
-        
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
         
         for(String filename : fileList)
         {
-            File file = new File(filename);
-            if (processedFiles.contains(file))
-                continue;
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
 	        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX",
                     midName);
 
 	    Language targetLang = getProjectProperties().getTargetLanguage();
-            fm.translateFile(srcRoot, midName, targetLang, locRoot, processedFiles, translateFilesCallback);
+            fm.translateFile(srcRoot, midName, targetLang, locRoot, translateFilesCallback);
         }
         Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
 

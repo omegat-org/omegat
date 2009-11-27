@@ -46,7 +46,9 @@ public class ProjectFactory {
      * Create new project.
      */
     public static void createProject(ProjectProperties newProps) {
-        Core.setProject(new RealProject(newProps, true));
+        RealProject p = new RealProject(newProps);
+        p.createProject();
+        Core.setProject(p);
         Core.getAutoSave().enable();        
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
     }
@@ -60,7 +62,9 @@ public class ProjectFactory {
      */
     public static void loadProject(ProjectProperties props) {
         Core.getAutoSave().disable();
-        Core.setProject(new RealProject(props, false));
+        RealProject p = new RealProject(props);
+        p.loadProject();
+        Core.setProject(p);
         Core.getAutoSave().enable();
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.LOAD);
     }

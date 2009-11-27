@@ -84,7 +84,7 @@ public class RealProject implements IProject
     private static final Logger LOGGER = Logger.getLogger(RealProject.class
             .getName());
 
-    private ProjectProperties m_config;
+    private final ProjectProperties m_config;
 
     private boolean m_modifiedFlag;
 
@@ -113,26 +113,22 @@ public class RealProject implements IProject
     private List<FileInfo> projectFilesList;
     
     /**
-     * Create new project instance.
+     * Create new project instance. It required to call {@link #createProject()
+     * createProject} or {@link #loadProject() loadProject} methods just after
+     * constructor before use project.
      * 
      * @param props
-     *                project properties
+     *            project properties
      * @param isNewProject
-     *                true if project need to be created
+     *            true if project need to be created
      */
-    public RealProject(final ProjectProperties props, final boolean isNewProject) {
+    public RealProject(final ProjectProperties props) {
         allProjectEntries = new ArrayList<SourceTextEntry>(4096);
         transMemories = new TreeMap<String, List<TransMemory>>();
         orphanedSegments = new HashMap<String, TransEntry>();
         translations = new HashMap<String, TransEntry>();
         
-        if (isNewProject) {
-            createProject(props);
-        }
-        loadProject(props);
-        
-        // make required collections unmodifiable
-        allProjectEntries = Collections.unmodifiableList(allProjectEntries);
+        m_config = props;
     }
     
     public void saveProjectProperties() throws IOException {
@@ -142,12 +138,41 @@ public class RealProject implements IProject
     }
     
     /**
+     * Create new project.
+     */
+    public void createProject()
+    {
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_START"));
+        UIThreadsUtil.mustNotBeSwingThread();
+        
+        try
+        {
+            createDirectory(m_config.getProjectRoot(), null);
+            createDirectory(m_config.getProjectInternal(), null);
+            createDirectory(m_config.getSourceRoot(), "src");
+            createDirectory(m_config.getGlossaryRoot(), "glos");
+            createDirectory(m_config.getTMRoot(), "tm");
+            createDirectory(m_config.getDictRoot(), "dictionary");
+            createDirectory(m_config.getTargetRoot(), "target");
+            
+            saveProjectProperties();
+            
+            allProjectEntries = Collections.unmodifiableList(allProjectEntries);
+        }
+        catch(IOException e)
+        {
+            // trouble in tinsletown...
+            Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
+            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
+        }
+        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_END"));
+    }
+
+    /**
      * Load exist project in a "big" sense -- loads project's properties, glossaries,
      * tms, source files etc.
-     * 
-     * @param props properties for new project
      */
-    private void loadProject(final ProjectProperties props) {
+    public void loadProject() {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
         
@@ -155,10 +180,8 @@ public class RealProject implements IProject
         try
         {
             Preferences.setPreference(Preferences.CURRENT_FOLDER, new File(
-                    props.getProjectRoot()).getParentFile().getAbsolutePath());
+                    m_config.getProjectRoot()).getParentFile().getAbsolutePath());
             Preferences.save();
-            
-            m_config = props;
             
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
             
@@ -181,6 +204,8 @@ public class RealProject implements IProject
             String fn = getProjectProperties().getProjectInternal()
                     + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat);
+            
+            allProjectEntries = Collections.unmodifiableList(allProjectEntries);
             
             // Project Loaded...
             Core.getMainWindow().showStatusMessageRB(null);
@@ -432,36 +457,6 @@ public class RealProject implements IProject
         
         Core.getAutoSave().enable();
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_END"));
-    }
-   
-    /**
-     * Create new project.
-     */
-    private void createProject(final ProjectProperties newProps)
-    {
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_START"));
-        UIThreadsUtil.mustNotBeSwingThread();
-        
-        m_config = newProps;
-        try
-        {
-            createDirectory(m_config.getProjectRoot(), null);
-            createDirectory(m_config.getProjectInternal(), null);
-            createDirectory(m_config.getSourceRoot(), "src");
-            createDirectory(m_config.getGlossaryRoot(), "glos");
-            createDirectory(m_config.getTMRoot(), "tm");
-            createDirectory(m_config.getDictRoot(), "dictionary");
-            createDirectory(m_config.getTargetRoot(), "target");
-            
-            saveProjectProperties();            
-        }
-        catch(IOException e)
-        {
-            // trouble in tinsletown...
-            Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
-            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
-        }
-        LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_END"));
     }
     
     /**

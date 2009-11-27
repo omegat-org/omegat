@@ -262,7 +262,8 @@ public class Main {
                 System.exit(1);
             }
 
-            RealProject p = new RealProject(projectProperties, false);
+            RealProject p = new RealProject(projectProperties);
+            p.loadProject();
             Core.setProject(p);
 
             System.out.println("Translating Project");
@@ -307,7 +308,8 @@ public class Main {
                 System.exit(1);
             }
 
-            RealProject p = new RealProject(projectProperties, false);
+            RealProject p = new RealProject(projectProperties);
+            p.loadProject();
             Core.setProject(p);
 
             System.out.println("Create pseudo-translate TMX");
@@ -399,7 +401,7 @@ public class Main {
                 System.exit(1);
             }
 
-            RealProject p = new RealProject(projectProperties, false);
+            RealProject p = new RealProject(projectProperties);
             Core.setProject(p);
 
             System.out.println("Align project against " + dir);

@@ -100,12 +100,14 @@ public class RealProject implements IProject
     private final Map<String, List<TransMemory>> transMemories;
 
     /**
-     * Storage for orphaned segments.
+     * Storage for orphaned segments. The key is the source text, the value the 
+     * translation with additional properties.
      */
     private final Map<String, TransEntry> orphanedSegments;
 
     /**
-     * Storage for translation for current project.
+     * Storage for translation for current project. The key is the source text, 
+     * the value the translation with additional properties.
      */
     private final Map<String, TransEntry> translations;
 
@@ -248,7 +250,7 @@ public class RealProject implements IProject
     /**
      * Align project.
      */
-    public Map<String, String> align(final ProjectProperties props,
+    public Map<String, TransEntry> align(final ProjectProperties props,
             final File translatedDir) throws Exception {
         FilterMaster fm = FilterMaster.getInstance();
 
@@ -306,22 +308,20 @@ public class RealProject implements IProject
         // - TMX Level 2, with OmegaT formatting tags wrapped in TMX inline tags
         try
         {
-            Map<String,String> tmx = TMXWriter.prepareTMXData(translations, new TreeMap<String, TransEntry>());
-            
             // build TMX with OmegaT tags
             String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
                         + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, false, false, m_config, tmx);
+            TMXWriter.buildTMXFile(fname, false, false, m_config, translations);
 
             // build TMX level 1 compliant file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
                         + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, true, false, m_config, tmx);
+            TMXWriter.buildTMXFile(fname, true, false, m_config, translations);
 
             // build three-quarter-assed TMX level 2 file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
                     + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, false, true, m_config, tmx);
+            TMXWriter.buildTMXFile(fname, false, true, m_config, translations);
         }
         catch (IOException e)
         {
@@ -418,9 +418,14 @@ public class RealProject implements IProject
         try
         {
             saveProjectProperties();
-            
-            Map<String,String> tmx = TMXWriter.prepareTMXData(translations, orphanedSegments);            
-            TMXWriter.buildTMXFile(s, false, false, m_config, tmx);
+
+            int sz = translations.size() + orphanedSegments.size();
+            Map<String, TransEntry> data = new HashMap<String, TransEntry>(sz);
+            data.putAll(translations);
+            // Write orphan strings.
+            data.putAll(orphanedSegments);
+
+            TMXWriter.buildTMXFile(s, false, false, m_config, data);
             m_modifiedFlag = false;
         }
         catch (IOException e)
@@ -588,7 +593,14 @@ public class RealProject implements IProject
     /** 
      * Loads TMX file.
      * Either the one of the project with project's translation,
-     * or the legacy ones.
+     * or the legacy ones. IF the projects TMX is loaded, it is also backed up.
+     * The translations are added to either {@link translations} or to 
+     * {@link orphanedSegments} for project TMX, or to a transMemory in 
+     * {@link transMemories}.
+     * @param fname     The name of the TMX file
+     * @param encoding  The encoding of the tmx, usually "UTF-8"
+     * @param isProject Set to true when loading the projects TMX 
+     *                  (e.g. project_save.tmx)
      */
     private void loadTMXFile(String fname, String encoding, boolean isProject)
             throws IOException
@@ -812,11 +824,11 @@ public class RealProject implements IProject
     };
     
     private class AlignFilesCallback implements IAlignCallback {
-        Map<String, String> data = new HashMap<String, String>();
+        Map<String, TransEntry> data = new HashMap<String, TransEntry>();
 
         public void addTranslation(String id, String source, String translation) {
             if (source != null && translation != null) {
-                data.put(source, translation);
+                data.put(source, new TransEntry(translation));
             }
         }
     }

@@ -30,7 +30,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,35 +41,6 @@ import org.omegat.core.data.TransEntry;
  * Class that store TMX (Translation Memory Exchange) files.
  */
 public class TMXWriter {
-    /**
-     * Prepare TMX data for export to file.
-     * 
-     * @param addOrphans
-     *            When true, the segments in the m_orphanedList are added to the
-     *            TMX as well.
-     * @param m_strEntryList
-     *            List of translated segments
-     * @param m_orphanedList
-     *            List of translated segments that have no match in the current
-     *            sources
-     * @return map of strings for TMX
-     */
-    public static Map<String, String> prepareTMXData(
-            final Map<String, TransEntry> translations,
-            final Map<String, TransEntry> orphanedSegments) {
-        int sz = translations.size() + orphanedSegments.size();
-        Map<String, String> result = new HashMap<String, String>(sz);
-
-        for (Map.Entry<String, TransEntry> en : translations.entrySet()) {
-            result.put(en.getKey(), en.getValue().translation);
-        }
-
-        // Write orphan strings. Assume N/A when pseudo-translate.
-        for (Map.Entry<String, TransEntry> en : orphanedSegments.entrySet()) {
-            result.put(en.getKey(), en.getValue().translation);
-        }
-        return result;
-    }
 
     /**
      * Saves a TMX file to disk
@@ -81,11 +51,11 @@ public class TMXWriter {
      * @param forceValidTMX  When true, OmegaT-tags are stripped from the segments.
      * @param levelTwo    When true, the tmx is made compatible with level 2 (TMX version 1.4)
      * @param m_config    Project configuration, to get the languages
-     * @param data        Data for save to TMX
+     * @param data        Data for save to TMX, a map of {source segments, translation}
      * @throws IOException
      */
     public static void buildTMXFile(final String filename, final boolean forceValidTMX, 
-            final boolean levelTwo, final ProjectProperties m_config, final Map<String,String> data) throws IOException {
+            final boolean levelTwo, final ProjectProperties m_config, final Map<String,TransEntry> data) throws IOException {
         // we got this far, so assume lang codes are proper
         String sourceLocale = m_config.getSourceLanguage().toString();
         String targetLocale = m_config.getTargetLanguage().toString();
@@ -130,22 +100,26 @@ public class TMXWriter {
         // Write TUs
         String source = null;
         String target = null;
-        for(Map.Entry<String, String> en:data.entrySet()) {
-            source = forceValidTMX ? StaticUtils.stripTags(en.getKey()) : en
-                    .getKey();
-            target = forceValidTMX ? StaticUtils.stripTags(en.getValue()) : en
-                    .getValue();
+        for(Map.Entry<String, TransEntry> en:data.entrySet()) {
+            TransEntry transEntry = en.getValue();
+            source = forceValidTMX ? StaticUtils.stripTags(en.getKey()) : 
+                en.getKey();
+            target = forceValidTMX ? 
+                StaticUtils.stripTags(transEntry.translation) : 
+                    transEntry.translation;
             if (levelTwo) {
                 source = makeLevelTwo(source);
                 target = makeLevelTwo(target);
             }
             source = StaticUtils.makeValidXML(source);
             target = StaticUtils.makeValidXML(target);
+            String changeIdPropertyString = (transEntry.changeId != null && !"".equals(transEntry.changeId) ? " changeid=\""+transEntry.changeId+"\"" : "");
+            String changeDatePropertyString = (transEntry.changeDate != null ? " changedate=\""+org.w3c.util.DateParser.getIsoDateNoMillis(transEntry.changeDate)+"\"" : "");
             out.println("    <tu>");
             out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">");
             out.println("        <seg>" + source + "</seg>");
             out.println("      </tuv>");
-            out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\">");
+            out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\""+changeDatePropertyString+changeIdPropertyString + ">");
             out.println("        <seg>" + target + "</seg>");
             out.println("      </tuv>");
             out.println("    </tu>");

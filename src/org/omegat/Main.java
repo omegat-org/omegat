@@ -47,6 +47,7 @@ import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TransEntry;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -332,20 +333,20 @@ public class Main {
             }
             
             // prepare tmx
-            Map<String, String> tmx = new HashMap<String, String>();
+            Map<String, TransEntry> data = new HashMap<String, TransEntry>();
             for(SourceTextEntry ste: entries) {
                 switch (pseudoTranslateType) {
                 case EQUAL:
-                    tmx.put(ste.getSrcText(), ste.getSrcText());
+                    data.put(ste.getSrcText(), new TransEntry(ste.getSrcText()));
                     break;
                 case EMPTY:
-                    tmx.put(ste.getSrcText(), "");
+                    data.put(ste.getSrcText(), new TransEntry(""));
                     break;
                 }
             }
             
             try {
-                TMXWriter.buildTMXFile(fname, false, true, m_config, tmx);
+                TMXWriter.buildTMXFile(fname, false, true, m_config, data);
             } catch (IOException e) {
                 Log.logErrorRB("CT_ERROR_CREATING_TMX");
                 Log.log(e);
@@ -406,7 +407,7 @@ public class Main {
 
             System.out.println("Align project against " + dir);
 
-            Map<String, String> data = p.align(p.getProjectProperties(),
+            Map<String, TransEntry> data = p.align(p.getProjectProperties(),
                     new File(dir));
 
             String tmxFile = p.getProjectProperties().getProjectInternal()

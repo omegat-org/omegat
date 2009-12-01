@@ -246,15 +246,14 @@ public class TagValidationFrame extends JFrame
             String src = ste.getSrcText();
             TransEntry trans = Core.getProject().getTranslation(ste);
             if (src.length() > 0 && trans != null) {
-                int entryNum = ste.entryNum() + 1;
                 output.append("<tr>");                                          // NOI18N
                 output.append("<td>");                                          // NOI18N
                 output.append("<a href=");                                      // NOI18N
                 output.append("\"");                                            // NOI18N
-                output.append(entryNum);
+                output.append(ste.entryNum());
                 output.append("\"");                                            // NOI18N
                 output.append(">");                                             // NOI18N
-                output.append(entryNum);
+                output.append(ste.entryNum());
                 output.append("</a>");                                          // NOI18N
                 output.append("</td>");                                         // NOI18N
                 output.append("<td>");                                          // NOI18N

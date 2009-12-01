@@ -262,6 +262,9 @@ OmegaT uses the following libraries:
 
   JAXB 2.1.7 (GPLv2 + classpath exception)
 
+OmegaT uses sources from Jigsaw (http://www.w3.org/Jigsaw/) under the W3C license, 
+available in lib/COPYRIGHT.html
+
 ==============================================================================
  5.  Is OmegaT bugging you? Do you need help?
 

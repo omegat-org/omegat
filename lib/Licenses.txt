@@ -39,6 +39,10 @@ exception dual license
 Sources are available in OmegaT sources, in the directory lib/sources/JAXB
 Complete JAXB sources are available from https://jaxb.dev.java.net/2.1.7/
 
+OmegaT uses sources from Jigsaw (http://www.w3.org/Jigsaw/) under the W3C license, 
+available in COPYRIGHT.html
+Sources are available in OmegaT sources, in the directory src/org/w3c
+
 
 
 

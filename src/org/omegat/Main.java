@@ -54,6 +54,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 
 import com.vlsolutions.swing.docking.DockingDesktop;
@@ -424,15 +425,20 @@ public class Main {
     }
 
     public static void showError(Throwable ex) {
+        String msg;
+        if (StringUtil.isEmpty(ex.getMessage())) {
+            msg = ex.getClass().getName();
+        } else {
+            msg = ex.getMessage();
+        }
         switch (runMode) {
         case GUI:
-            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), ex
-                    .getMessage(),
+            JOptionPane.showMessageDialog(JOptionPane.getRootFrame(), msg,
                     OStrings.getString("STARTUP_ERRORBOX_TITLE"),
                     JOptionPane.ERROR_MESSAGE);
             break;
         case CONSOLE_TRANSLATE:
-            System.err.println(ex.getMessage());
+            System.err.println(msg);
             break;
         }
         System.exit(1);

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.1
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.1.1 vs. 2.1.0
@@ -19,6 +19,11 @@
 
   - New options to enable checking localisation variables
   (see http://sourceforge.net/support/tracker.php?aid=2890624)
+
+   - [stopwords] (simplify segments for matching purposes)
+  http://sourceforge.net/support/tracker.php?aid=1599201
+ (Requires version 0.4-2.1 of the tokenizers for English)
+ 
 
   Bug Fixes:
 

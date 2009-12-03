@@ -42,6 +42,8 @@ public class OneFilterTableModel extends AbstractTableModel {
   
     private final Filter filter;
     private boolean sourceEncodingVariable, targetEncodingVariable;
+    
+    private final String ENC_AUTO_NAME = OStrings.getString("ENCODING_AUTO");
 
     public OneFilterTableModel(final Filter f) {
         this.filter = f;
@@ -112,10 +114,10 @@ public class OneFilterTableModel extends AbstractTableModel {
                 instance.setSourceFilenameMask(aValue.toString());
                 break;
             case 1:
-                instance.setSourceEncoding(aValue.toString());
+                instance.setSourceEncoding(setEncodingName(aValue.toString()));
                 break;
             case 2:
-                instance.setTargetEncoding(aValue.toString());
+                instance.setTargetEncoding(setEncodingName(aValue.toString()));
                 break;
             case 3:
                 instance.setTargetFilenamePattern(aValue.toString());
@@ -139,6 +141,9 @@ public class OneFilterTableModel extends AbstractTableModel {
     }
     
     private String getEncodingName(final String enc) {
-        return enc != null ? enc : OStrings.getString("ENCODING_AUTO");
+        return enc != null ? enc : ENC_AUTO_NAME;
+    }
+    private String setEncodingName(final String encName) {
+        return ENC_AUTO_NAME.equals(encName)?null:encName;
     }
 }

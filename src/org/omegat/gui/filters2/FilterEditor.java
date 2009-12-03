@@ -400,9 +400,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         if( ie.getReturnStatus()==InstanceEditor.RET_OK )
         {
             Files ff=new Files();
-            ff.setSourceEncoding(ie.getSourceEncoding());
+            ff.setSourceEncoding(setEncodingName(ie.getSourceEncoding()));
             ff.setSourceFilenameMask(ie.getSourceFilenameMask());
-            ff.setTargetEncoding(ie.getTargetEncoding());
+            ff.setTargetEncoding(setEncodingName(ie.getTargetEncoding()));
             ff.setTargetFilenamePattern(ie.getTargetFilenamePattern());
             filter.getFiles().add(ff);
             instances.setModel(new OneFilterTableModel(filter));
@@ -427,9 +427,9 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         if( ie.getReturnStatus()==InstanceEditor.RET_OK )
         {
             Files ff=new Files();
-            ff.setSourceEncoding(ie.getSourceEncoding());
+            ff.setSourceEncoding(setEncodingName(ie.getSourceEncoding()));
             ff.setSourceFilenameMask(ie.getSourceFilenameMask());
-            ff.setTargetEncoding(ie.getTargetEncoding());
+            ff.setTargetEncoding(setEncodingName(ie.getTargetEncoding()));
             ff.setTargetFilenamePattern(ie.getTargetFilenamePattern());
             filter.getFiles().set(row, ff);
             instances.setModel(new OneFilterTableModel(filter));
@@ -454,6 +454,10 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
         result = r;
         setVisible(false);
         dispose();
+    }
+    
+    private String setEncodingName(final String encName) {
+        return OStrings.getString("ENCODING_AUTO").equals(encName)?null:encName;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

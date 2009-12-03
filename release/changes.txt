@@ -15,7 +15,7 @@
   - Use tokenizers as plugins
   (Requires version x.x-2.1 of the tokenizers)
 
-  - Text selected in the Matches pane can be inserted with a right click
+  - Text selected in the Glossary pane can be inserted with a right click
 
   - New options to enable checking localisation variables
   (see http://sourceforge.net/support/tracker.php?aid=2890624)

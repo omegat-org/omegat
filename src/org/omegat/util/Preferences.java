@@ -143,6 +143,9 @@ public class Preferences
     /** Tag Validation Option: check all printf-tags */
     public static final String CHECK_ALL_PRINTF_TAGS = "tagValidation_elaborateCheck"; //NOI18N
 
+    /** Team option: author ID */
+    public static final String TEAM_AUTHOR = "team_Author"; //NOI18N
+
     /** 
      * allow automatic spell checking or not
      */

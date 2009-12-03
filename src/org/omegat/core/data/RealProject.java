@@ -744,7 +744,7 @@ public class RealProject implements IProject
         if (StringUtil.isEmpty(trans)) {
             translations.remove(entry.getSrcText());
         } else {
-            translations.put(entry.getSrcText(), new TransEntry(trans));
+            translations.put(entry.getSrcText(), new TransEntry(trans, Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name")), new Date()));
         }
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation
                 : null;
@@ -774,6 +774,10 @@ public class RealProject implements IProject
         
     private class LoadFilesCallback extends ParseEntry {  
         private FileInfo fileInfo;
+        /**
+         * a special 'reference' TMX that is used as extra refrence during 
+         * translation. It is filled with fuzzy translations from source files.
+         */
         private List<TransMemory> tmForFile;
 
         public LoadFilesCallback() {
@@ -785,6 +789,9 @@ public class RealProject implements IProject
             tmForFile = null;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         protected void addSegment(String id, short segmentIndex,
                 String segmentSource, String segmentTranslation, String comment) {
             // if the source string is empty, don't add it to TM

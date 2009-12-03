@@ -738,13 +738,22 @@ public class RealProject implements IProject
      * {@inheritDoc}
      */
     public void setTranslation(final SourceTextEntry entry, String trans) {
+        TransEntry prevTrEntry = translations.get(entry.getSrcText());
+
+        //don't change anything if nothing has changed
+        if (prevTrEntry == null) {
+            if ("".equals(trans)) return;
+        } else {
+            if (trans.equals(prevTrEntry.translation)) return;
+        }
+
         m_modifiedFlag = true;
 
-        TransEntry prevTrEntry = translations.get(entry.getSrcText());
         if (StringUtil.isEmpty(trans)) {
             translations.remove(entry.getSrcText());
         } else {
-            translations.put(entry.getSrcText(), new TransEntry(trans, Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name")), new Date()));
+            String changeId = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name"));
+            translations.put(entry.getSrcText(), new TransEntry(trans, changeId, new Date()));
         }
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation
                 : null;

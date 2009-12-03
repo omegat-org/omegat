@@ -87,7 +87,7 @@ public interface IProject {
     List<SourceTextEntry> getAllEntries();
 
     /**
-     * Set translation for entry.
+     * Set translation for entry. Use when user has typed a new translation.
      * 
      * @param entry entry
      * @param trans translation

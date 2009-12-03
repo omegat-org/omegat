@@ -63,9 +63,12 @@ public abstract class ParseEntry implements IParseCallback {
      * @param source
      *            Translatable source string
      * @param translation
-     *            exist source's string translation
+     *            translation of the source string, if format supports it
      * @param isFuzzy
-     *            flag for fuzzy translation
+     *            flag for fuzzy translation. If a translation is fuzzy, it is 
+     *            not added to the projects TMX, but it is added to the 
+     *            generated 'reference' TMX, a special TMX that is used as 
+     *            extra refrence during translation.
      * @param comment
      *            entry's comment, if format supports it
      * @param filter
@@ -132,8 +135,26 @@ public abstract class ParseEntry implements IParseCallback {
         }
     }
 
+    /**
+     * Adds the source and translation to the generated 'reference TMX', a 
+     * special TMX that is used as extra refrence during translation.
+     */
     public abstract void addFileTMXEntry(String source, String translation);
 
+    /**
+     * Adds a segment to the project. If a translation is given, it it added to 
+     * the projects TMX.
+     * @param id
+     *            ID of entry, if format supports it
+     * @param segmentIndex
+     *            Number of the segment-part of the original source string.
+     * @param segmentSource
+     *            Translatable source string
+     * @param segmentTranslation
+     *            non fuzzy translation of the source string, if format supports it
+     * @param comment
+     *            entry's comment, if format supports it
+     */
     protected abstract void addSegment(String id, short segmentIndex,
             String segmentSource, String segmentTranslation, String comment);
 }

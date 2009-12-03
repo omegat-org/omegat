@@ -26,7 +26,9 @@
 package org.omegat.util;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -79,6 +81,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         m_encoding          = encoding;
         m_srcList           = new ArrayList<String>();
         m_tarList           = new ArrayList<String>();
+        m_tarChangeIdList   = new ArrayList<String>(); //list of changeIds (authors) for the target segments
+        m_tarChangeDateList = new ArrayList<Date>(); ////list of change dates for the target segments
         m_properties        = new HashMap<String, String>();
         m_variantLanguages  = new HashSet<String>();
         this.sourceLang = sourceLanguage;
@@ -103,7 +107,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     /** Returns the number of segments */
     public int numSegments() 
     {
-        return m_srcList.size();        
+        return m_srcList.size();
     }
     
     /** Returns an original text of a source segment #n */
@@ -123,7 +127,23 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         else
             return m_tarList.get(n);
     }
-    
+    /** Returns changeId (author) of target segment #n */
+    public String getTargetChangeId(int n) 
+    {
+        if (n < 0 || n >= numSegments())
+            return null;
+        else
+            return m_tarChangeIdList.get(n);
+    }
+    /** Returns changeDate of target segment #n */
+    public Date getTargetChangeDate(int n) 
+    {
+        if (n < 0 || n >= numSegments())
+            return null;
+        else
+            return m_tarChangeDateList.get(n);
+    }
+
     private String creationtool = null;
     /** Creation Tool attribute value of OmegaT TMXs: "OmegaT" */
     public static final String CT_OMEGAT = "OmegaT";                            // NOI18N
@@ -389,7 +409,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     ///////////////////////////////////////////////////////////////////////////
 
     /** Collects a segment from TMX. Performs upgrades of a segment if needed. */
-    private void storeSegment(String source, String translation)
+    private void storeSegment(String source, String translation, String changeId, Date changeDate)
     {
         source = upgradeSegment(source);
         translation = upgradeSegment(translation);
@@ -408,18 +428,24 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                     String tarseg = tarSegments.get(j);
                     m_srcList.add(srcseg);
                     m_tarList.add(tarseg);
+                    m_tarChangeDateList.add(changeDate);
+                    m_tarChangeIdList.add(changeId);
                 }
             }
             else
             {
                 m_srcList.add(source);
                 m_tarList.add(translation);
+                m_tarChangeDateList.add(changeDate);
+                m_tarChangeIdList.add(changeId);
             }
         }
         else
         {
             m_srcList.add(source);
             m_tarList.add(translation);
+            m_tarChangeDateList.add(changeDate);
+            m_tarChangeIdList.add(changeId);
         }
     }
     
@@ -437,7 +463,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
     
     /**
-      * Determins if TMX level 2 codes should be included or skipped.
+      * Determines if TMX level 2 codes should be included or skipped.
       */
     private void checkLevel2() {
         includeLevel2 = creationtool.equals(CT_OMEGAT);
@@ -911,19 +937,29 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         if (target == null)
             target = new TUV(); // empty target
 
+        String changeId =target.changeId;
+        if (changeId == null) changeId = target.creationId;
+        Date changeDate = null;
+        try {
+            changeDate = TMXDateParser.parse(target.changeDate);
+        } catch (ParseException e) {
+            try {
+                changeDate = TMXDateParser.parse(target.creationDate);
+            } catch (ParseException e2) {}
+        }
         // store the source & target segment
-        storeSegment(source.text.toString(), target.text.toString());
+        storeSegment(source.text.toString(), target.text.toString(), changeId, changeDate);
 
         // store the source & target sub segments
         // create exactly as many target subs as there are source subs
-        // "pad" with empty strings, or ommit segments if necessary
+        // "pad" with empty strings, or omit segments if necessary
         // NOTE: this is not the most ideal solution, but the best possible
         for (int i = 0; i < source.subSegments.size(); i++) 
         {
             String starget = new String();
             if (i < target.subSegments.size())
                 starget = target.subSegments.get(i).toString();
-            storeSegment(source.subSegments.get(i).toString(), starget);
+            storeSegment(source.subSegments.get(i).toString(), starget, changeId, changeDate);
         }
 
         // store alternative translations
@@ -935,7 +971,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                     && (tuv != target)
                     && (   m_variantLanguages.isEmpty()
                         || m_variantLanguages.contains(tuv.language.substring(0, 2).toUpperCase())))
-                   storeSegment(source.text.toString(), tuv.text.toString());
+                   storeSegment(source.text.toString(), tuv.text.toString(), changeId, changeDate);
             }
         }
     }
@@ -970,6 +1006,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         // put a new TUV in the TUV list
         TUV tuv = new TUV();
         tuv.language = language;
+        tuv.changeDate = attributes.getValue(TMX_ATTR_CHANGEDATE);
+        tuv.changeId = attributes.getValue(TMX_ATTR_CHANGEID);
+        tuv.creationDate = attributes.getValue(TMX_ATTR_CREATIONDATE);
+        tuv.creationId = attributes.getValue(TMX_ATTR_CREATIONID);
         tuvs.add(tuv);
         
         // mark the current position as in a tuv
@@ -1108,12 +1148,18 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     private final static String TMX_ATTR_SEGTYPE             = "segtype";       // NOI18N
     private final static String TMX_ATTR_SRCLANG             = "srclang";       // NOI18N
     private final static String TMX_ATTR_TYPE                = "type";          // NOI18N
+    private final static String TMX_ATTR_CHANGEID            = "changeid";      // NOI18N
+    private final static String TMX_ATTR_CHANGEDATE          = "changedate";    // NOI18N
+    private final static String TMX_ATTR_CREATIONID          = "creationid";      // NOI18N
+    private final static String TMX_ATTR_CREATIONDATE        = "creationdate";    // NOI18N
 
     private final static String PROPERTY_VARIANT_LANGUAGES = "OmegaT:VariantLanguages"; // NOI18N
 
     private String  m_encoding;
     private List<String>    m_srcList;
     private List<String>    m_tarList;
+    private List<String>    m_tarChangeIdList;
+    private List<Date>      m_tarChangeDateList;
     private Map<String,String>     m_properties;       // Map<String, String> of TMX properties, specified in the header
     private Set<String>     m_variantLanguages; // Set of (user) acceptable variant languages
     private Language sourceLang, targetLang;
@@ -1149,6 +1195,22 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
           * Segment text
           */
         public StringBuffer text;
+        /**
+         * Specifies the date of the last modification of the element.
+         */
+        public String changeDate;
+        /**
+         * Change identifier - Specifies the identifier of the user who modified the element last.
+         */
+        public String changeId;
+        /**
+         * Specifies the date of creation of the element.
+         */
+        public String creationDate;
+        /**
+         * Creation identifier - Specifies the identifier of the user who created the element.
+         */
+        public String creationId;
         
         /**
           * Contains StringBuffers for subsegments

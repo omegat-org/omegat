@@ -668,13 +668,15 @@ public class RealProject implements IProject
             }
 
             if (isProject) {
+                String changeId = tmx.getTargetChangeId(i);
+                Date changeDate = tmx.getTargetChangeDate(i);
                 if (exist.contains(src)) {
                     /* Entry found in source files - translation. */
 
-                    translations.put(src, new TransEntry(trans));
+                    translations.put(src, new TransEntry(trans, changeId, changeDate));
                 } else {
                     /* Entry found in source files - translation. */
-                    orphanedSegments.put(src, new TransEntry(trans));
+                    orphanedSegments.put(src, new TransEntry(trans, changeId, changeDate));
                 }
             }
             else

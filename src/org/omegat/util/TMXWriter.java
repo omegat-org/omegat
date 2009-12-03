@@ -114,7 +114,7 @@ public class TMXWriter {
             source = StaticUtils.makeValidXML(source);
             target = StaticUtils.makeValidXML(target);
             String changeIdPropertyString = (transEntry.changeId != null && !"".equals(transEntry.changeId) ? " changeid=\""+transEntry.changeId+"\"" : "");
-            String changeDatePropertyString = (transEntry.changeDate != null ? " changedate=\""+org.w3c.util.DateParser.getIsoDateNoMillis(transEntry.changeDate)+"\"" : "");
+            String changeDatePropertyString = (transEntry.changeDate != null ? " changedate=\""+TMXDateParser.getTMXDate(transEntry.changeDate)+"\"" : "");
             out.println("    <tu>");
             out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">");
             out.println("        <seg>" + source + "</seg>");

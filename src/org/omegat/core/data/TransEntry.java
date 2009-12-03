@@ -48,4 +48,10 @@ public class TransEntry {
     public TransEntry(String translation) {
         this.translation = translation;
     }
+
+    public TransEntry(String translation, String changeId, Date changeDate) {
+        this.translation = translation;
+        this.changeId = changeId;
+        this.changeDate = changeDate;
+    }
 }

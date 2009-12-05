@@ -107,12 +107,14 @@ public class TMXWriter {
             target = forceValidTMX ? 
                 StaticUtils.stripTags(transEntry.translation) : 
                     transEntry.translation;
+            source = StaticUtils.makeValidXML(source);
+            target = StaticUtils.makeValidXML(target);
+            // TO DO: This *possibly* converts occurrences in the actual text of &lt;fX&gt;
+            //        which it should not.
             if (levelTwo) {
                 source = makeLevelTwo(source);
                 target = makeLevelTwo(target);
             }
-            source = StaticUtils.makeValidXML(source);
-            target = StaticUtils.makeValidXML(target);
             String changeIdPropertyString = (transEntry.changeId != null && !"".equals(transEntry.changeId) ? " changeid=\""+transEntry.changeId+"\"" : "");
             String changeDatePropertyString = (transEntry.changeDate != null ? " changedate=\""+TMXDateParser.getTMXDate(transEntry.changeDate)+"\"" : "");
             out.println("    <tu>");

@@ -221,6 +221,7 @@ public class FindMatchesThread extends Thread {
             return;
         }
 
+        // First percent value - with stemming if possible
         int similarityStem = FuzzyMatcher.calcSimilarity(distance, strTokensStem, candTokens);
 
         if (similarityStem < OConsts.FUZZY_MATCH_THRESHOLD)
@@ -228,11 +229,13 @@ public class FindMatchesThread extends Thread {
 
         Token[] candTokensNoStem = Core.getTokenizer().tokenizeWords(
                 source, ITokenizer.StemmingMode.NONE);
+        // Second percent value - without stemming
         int similarityNoStem = FuzzyMatcher.calcSimilarity(distance, strTokensNoStem, candTokensNoStem);
 
         if (haveChanceToAdd(similarityStem, similarityNoStem)) {
             Token[] candTokensAll = Core.getTokenizer().tokenizeAllExactly(
                     source);
+            // Third percent value - with numbers, tags, etc.
             int simAdjusted = FuzzyMatcher.calcSimilarity(distance, strTokensAll, candTokensAll);
 
             addNearString(source, translation, similarityStem,

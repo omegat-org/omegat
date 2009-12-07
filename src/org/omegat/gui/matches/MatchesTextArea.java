@@ -26,6 +26,7 @@
 package org.omegat.gui.matches;
 
 import java.awt.Font;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -42,7 +43,6 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
-import org.omegat.core.data.StringEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
@@ -53,7 +53,6 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
-import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -269,88 +268,100 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
         if (matches == null || matches.isEmpty())
             return;
 
-        // set up the menu
-        if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-            // find out the clicked item
-            int clickedItem = -1;
+        // find out the clicked item
+        int clickedItem = -1;
 
-            // where did we click?
-            int mousepos = this.viewToModel(e.getPoint());
+        // where did we click?
+        int mousepos = this.viewToModel(e.getPoint());
 
-            int i;
-            for (i = 0; i < delimiters.size() - 1; i++) {
-                int start = delimiters.get(i);
-                int end = delimiters.get(i + 1);
+        int i;
+        for (i = 0; i < delimiters.size() - 1; i++) {
+            int start = delimiters.get(i);
+            int end = delimiters.get(i + 1);
 
-                if (mousepos >= start && mousepos < end) {
-                    clickedItem = i;
-                    break;
-                }
+            if (mousepos >= start && mousepos < end) {
+                clickedItem = i;
+                break;
             }
-
-            if (clickedItem == -1)
-                clickedItem = delimiters.size() - 1;
-
-            final int clicked = clickedItem;
-
-            // create the menu
-            JPopupMenu popup = new JPopupMenu();
-
-            JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
-            item.addActionListener(new ActionListener() {
-                // the action: insert this match
-                public void actionPerformed(ActionEvent e) {
-                    setActiveMatch(clicked);
-                    mw.doInsertTrans();
-                }
-            });
-
-            item = popup.add(OStrings.getString("MATCHES_REPLACE"));
-            item.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    setActiveMatch(clicked);
-                    mw.doRecycleTrans();
-                }
-            });
-
-            popup.addSeparator();
-
-            if (clicked >= matches.size())
-                return;
-
-            final NearString ns = matches.get(clicked);
-            String project = ns.proj;
-
-            item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));
-
-            if (project == null || project.equals("")) {
-                item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        /*
-                         * Goto segment with contains matched source. Since it
-                         * enough rarely executed code, it will be better to
-                         * find this segment each time, instead use additional
-                         * memory storage.
-                         */
-                        List<SourceTextEntry> entries = Core.getProject()
-                                .getAllEntries();
-                        int entryNum = 0;
-                        for (int i = 0; i < entries.size(); i++) {
-                            if (entries.get(i).getSrcText().equals(
-                                    ns.source)) {
-                                // found entry with the same source
-                                entryNum = i;
-                                break;
-                            }
-                        }
-                        Core.getEditor().gotoEntry(entryNum + 1);
-                    }
-                });
-            } else {
-                item.setEnabled(false);
-            }
-
-            popup.show(this, e.getX(), e.getY());
         }
+
+        if (clickedItem == -1)
+            clickedItem = delimiters.size() - 1;
+
+        if (clickedItem >= matches.size())
+            return;
+
+        // set up the menu
+        if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()>1) {
+            mouseDoubleClick(clickedItem, e.getPoint());
+        }
+        if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
+            mouseRightClick(clickedItem, e.getPoint());
+        }
+    }
+    
+    private void mouseOneClick(final int clickedItem, final Point clickedPoint) {
+        // show colored source segment
+    }
+
+    private void mouseDoubleClick(final int clickedItem, final Point clickedPoint) {
+        setActiveMatch(clickedItem);
+    }
+    
+    private void mouseRightClick(final int clickedItem, final Point clickedPoint) {
+        // create the menu
+        JPopupMenu popup = new JPopupMenu();
+
+        JMenuItem item = popup.add(OStrings.getString("MATCHES_INSERT"));
+        item.addActionListener(new ActionListener() {
+            // the action: insert this match
+            public void actionPerformed(ActionEvent e) {
+                setActiveMatch(clickedItem);
+                mw.doInsertTrans();
+            }
+        });
+
+        item = popup.add(OStrings.getString("MATCHES_REPLACE"));
+        item.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setActiveMatch(clickedItem);
+                mw.doRecycleTrans();
+            }
+        });
+
+        popup.addSeparator();
+
+        final NearString ns = matches.get(clickedItem);
+        String project = ns.proj;
+
+        item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));
+
+        if (project == null || project.equals("")) {
+            item.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    /*
+                     * Goto segment with contains matched source. Since it
+                     * enough rarely executed code, it will be better to find
+                     * this segment each time, instead use additional memory
+                     * storage.
+                     */
+                    List<SourceTextEntry> entries = Core.getProject()
+                            .getAllEntries();
+                    int entryNum = 0;
+                    for (int i = 0; i < entries.size(); i++) {
+                        if (entries.get(i).getSrcText().equals(ns.source)) {
+                            // found entry with the same source
+                            entryNum = i;
+                            break;
+                        }
+                    }
+                    Core.getEditor().gotoEntry(entryNum + 1);
+                }
+            });
+        } else {
+            item.setEnabled(false);
+        }
+
+        popup.show(this, clickedPoint.x, clickedPoint.y);
     }
 }

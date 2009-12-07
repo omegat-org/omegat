@@ -115,9 +115,6 @@ public class OConsts
     /** The name of the file with the exported selection */
     public static final String SELECTION_EXPORT = "selection.txt";              // NOI18N
 
-    /** The smallest threshold to detect a fuzzy match string */
-    public static final int    FUZZY_MATCH_THRESHOLD    = 30;
-    
     public static final int    ST_MAX_SEARCH_RESULTS    = 1000;
     
     public static final String TF_SRC_FONT_NAME		= "source_font";				// NOI18N

@@ -222,46 +222,77 @@ public class FindMatchesThread extends Thread {
         }
 
         // First percent value - with stemming if possible
-        int similarityStem = FuzzyMatcher.calcSimilarity(distance, strTokensStem, candTokens);
+        int similarityStem = FuzzyMatcher.calcSimilarity(distance,
+                strTokensStem, candTokens);
 
-        if (similarityStem < OConsts.FUZZY_MATCH_THRESHOLD)
+        // check if we have chance by first percentage only
+        if (!haveChanceToAdd(similarityStem, 101, 101)) {
             return;
-
-        Token[] candTokensNoStem = Core.getTokenizer().tokenizeWords(
-                source, ITokenizer.StemmingMode.NONE);
-        // Second percent value - without stemming
-        int similarityNoStem = FuzzyMatcher.calcSimilarity(distance, strTokensNoStem, candTokensNoStem);
-
-        if (haveChanceToAdd(similarityStem, similarityNoStem)) {
-            Token[] candTokensAll = Core.getTokenizer().tokenizeAllExactly(
-                    source);
-            // Third percent value - with numbers, tags, etc.
-            int simAdjusted = FuzzyMatcher.calcSimilarity(distance, strTokensAll, candTokensAll);
-
-            addNearString(source, translation, similarityStem,
-                    similarityNoStem, simAdjusted, null, tmxName);
         }
+
+        Token[] candTokensNoStem = Core.getTokenizer().tokenizeWords(source,
+                ITokenizer.StemmingMode.NONE);
+        // Second percent value - without stemming
+        int similarityNoStem = FuzzyMatcher.calcSimilarity(distance,
+                strTokensNoStem, candTokensNoStem);
+
+        // check if we have chance by first and second percentages
+        if (!haveChanceToAdd(similarityStem, similarityNoStem, 101)) {
+            return;
+        }
+
+        Token[] candTokensAll = Core.getTokenizer().tokenizeAllExactly(source);
+        // Third percent value - with numbers, tags, etc.
+        int simAdjusted = FuzzyMatcher.calcSimilarity(distance, strTokensAll,
+                candTokensAll);
+
+        // check if we have chance by first, second and third percentages
+        if (!haveChanceToAdd(similarityStem, similarityNoStem, simAdjusted)) {
+            return;
+        }
+
+        addNearString(source, translation, similarityStem, similarityNoStem,
+                simAdjusted, null, tmxName);
     }
 
     /**
-     * Check if entry have a chance to be added to result list. 
-     * If no, there is no sense to calculate other parameters.
+     * Check if entry have a chance to be added to result list. If no, there is
+     * no sense to calculate other parameters.
      * 
-     * @param similarity
-     *                calculate similarity
-     * @return true if additional calculation need
+     * @param simStem
+     *            similarity with stemming
+     * @param simNoStem
+     *            similarity without stemming
+     * @param simExactly
+     *            exactly similarity
+     * @return true if we have chance
      */
-    protected boolean haveChanceToAdd(final int similarity, final int similarityNoStem) {
+    protected boolean haveChanceToAdd(final int simStem, final int simNoStem,
+            final int simExactly) {
         if (result.size() < OConsts.MAX_NEAR_STRINGS) {
             return true;
         }
         NearString st = result.get(result.size() - 1);
-        if (st.score < similarity) {
+        Boolean chanse = checkScore(st.score, simStem);
+        if (chanse == null) {
+            chanse = checkScore(st.scoreNoStem, simNoStem);
+        }
+        if (chanse == null) {
+            chanse = checkScore(st.adjustedScore, simExactly);
+        }
+        if (chanse == null) {
+            chanse = true;
+        }
+        return chanse;
+    }
+
+    private Boolean checkScore(final int storedScore, final int checkedStore) {
+        if (storedScore < checkedStore) {
             return true;
-        } else if (st.score>similarity) {
+        } else if (storedScore > checkedStore) {
             return false;
-        }else {
-            return st.scoreNoStem <= similarityNoStem;
+        } else {
+            return null;
         }
     }
 

@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Kako delati s formatiranim besedilom - Priročnik za uporabnika OmegaT 1.8</title>
+
+  <title>Kako delati s formatiranim besedilom - Priročnik za uporabnika OmegaT 2.0</title>
 </head>
 
 <body>
@@ -22,8 +23,7 @@
     </li>
 
     <li>
-      <p><a href=
-      "#nesting">Gnezdenje skupin oznak</a></p>
+      <p><a href="#nesting">Gnezdenje skupin oznak</a></p>
     </li>
 
     <li>
@@ -47,47 +47,47 @@
   <p><a name="naming" id="naming"></a><b>Poimenovanje oznak:</b> Oznake so sestavljene iz enega do treh znakov in števil. Na osnovi enolične številke je mogoče zbrati v skupino tiste oznake, ki spadajo skupaj, oziroma razlikovati med oznakami, ki imajo sicer isto kratico, pa se kljub temu med seboj razlikujejo. Znaki včasih nakazujejo vrsto oblikovanja, ki ga oznaka predstavlja (npr. krepko, ležeče itd.).</p>
 
   <p><a name="numbering" id="numbering"></a><b>Številčenje oznak:</b>Oznake se številči v rastočem vrstnem redu za <strong>skupine oznak</strong>. Pod izrazom "skupine oznak" je razumeti bodisi eno samo oznako (kot recimo <code><font color=
-  "#Fb0000">&lt;br1&gt;</font></code>), ki stoji sama zase, ali dve oznaki, ki tvorita par (kot na primer <code><font color="#Fb0000">&lt;i0&gt;</font></code> in <code><font color="#Fb0000">&lt;/i0&gt;</font></code>). Znotraj segmenta dobi prva skupina (samec ali par) številko <strong>0</strong>, druga številko <strong>1</strong> itd. Prvi primer spodaj ima 3 skupine oznak (prvi par, enega samca in  drugi par), drugi primer pa ima eno skupino (par).</p>
+  "#FB0000">&lt;br1&gt;</font></code>), ki stoji sama zase, ali dve oznaki, ki tvorita par (kot na primer <code><font color="#FB0000">&lt;i0&gt;</font></code> in <code><font color="#FB0000">&lt;/i0&gt;</font></code>). Znotraj segmenta dobi prva skupina (samec ali par) številko <strong>0</strong>, druga številko <strong>1</strong> itd. Prvi primer spodaj ima 3 skupine oznak (prvi par, enega samca in  drugi par), drugi primer pa ima eno skupino (par).</p>
 
   <p><a name="pairs" id="pairs"></a><b>Pari in samci:</b> oznake se vedno pojavljajo v parih ali kot samci. <strong>Posamezne oznake</strong> se nanašajo na oblikovalno informacijo, ki ne vpliva na okoliško besedilo (primer za to bi bil dodaten presledek ali pa nova vrstica).</p>
   <pre>
-        <strong>&lt;segment 2132&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>&lt;Ctrl+N&gt;<font color=
-"#Fb0000">&lt;/b0&gt;</font>, <font color=
-"#Fb0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
-"#Fb0000">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 2132&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>&lt;Ctrl+N&gt;<font color=
+"#FB0000">&lt;/b0&gt;</font>, <font color=
+"#FB0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
+"#FB0000">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong>
 </pre>
 
-  <p><code><strong><font color="#Fb0000">&lt;br1&gt;</font></strong></code> je oznaka samec in na besedilo pred sabo in za sabo nima vpliva. <strong>Pari oznak</strong> običajno predstavljajo oblikovalno informacijo, ki se tiče besedila med začetno in končno oznako v paru.  Začetna oznaka para mora vedno stati pred oznako, ki par zapre:</p>
+  <p><code><strong><font color="#FB0000">&lt;br1&gt;</font></strong></code> je oznaka samec in na besedilo pred sabo in za sabo nima vpliva. <strong>Pari oznak</strong> običajno predstavljajo oblikovalno informacijo, ki se tiče besedila med začetno in končno oznako v paru.  Začetna oznaka para mora vedno stati pred oznako, ki par zapre:</p>
   <pre>
-        <strong>&lt;segment 3167&gt;</strong>Datoteka log(<font color=
-"#Fb0000">&lt;b0&gt;</font>log.txt<font color=
-"#Fb0000">&lt;/b0&gt;</font>), s katero se zasleduje operacije in napake<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 3167&gt;</strong>Datoteka log(<font color=
+"#FB0000">&lt;b0&gt;</font>log.txt<font color=
+"#FB0000">&lt;/b0&gt;</font>), s katero se zasleduje operacije in napake<strong>&lt;end segment&gt;</strong>
 </pre>
 
-  <p><code><strong><font color="#Fb0000">&lt;b0&gt;</font></strong></code> <font size="3">in</font> <code><strong><font color=
-  "#Fb0000">&lt;/b0&gt;</font></strong></code> tvorita par, ki vpliva na <code><strong>log.txt</strong></code>.</p>
+  <p><code><strong><font color="#FB0000">&lt;b0&gt;</font></strong></code> <font size="3">in</font> <code><strong><font color=
+  "#FB0000">&lt;/b0&gt;</font></strong></code> tvorita par, ki vpliva na <code><strong>log.txt</strong></code>.</p>
   <hr>
 
   <h3><a name="tag_segmenting" id="tag_segmenting"></a>Oznake in segmentiranje povedi</h3>
 
-  <p>OmegaT ustvari oznake, preden začne segmentirati besedilo. Glede na pravila segmentiranja bo morda videti, kot da oznake ne spoštujejo pravil za parjenje in številčenje, ki smo jih opisali zgoraj. Oglejte si tole besedilo:  "<em>Pred: \. Po: \s"</em><font color="#Fb0000">.</font> <font color="#000000">Pričakovati bi bilo segmentiranje, kot sledi (&lt;b0&gt; in &lt;/b0&gt; predstavljata začetek in konec kurzivnih črk):</font></p>
+  <p>OmegaT ustvari oznake, preden začne segmentirati besedilo. Glede na pravila segmentiranja bo morda videti, kot da oznake ne spoštujejo pravil za parjenje in številčenje, ki smo jih opisali zgoraj. Oglejte si tole besedilo:  "<em>Pred: \. Po: \s"</em><font color="#FB0000">.</font> <font color="#000000">Pričakovati bi bilo segmentiranje, kot sledi (&lt;b0&gt; in &lt;/b0&gt; predstavljata začetek in konec kurzivnih črk):</font></p>
   <pre>
-        <strong>&lt;segment ....&gt;</strong> <font color=
-"#Fb0000">&lt;b0&gt;</font>Pred: \. Po: \s<font color=
-"#Fb0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment ....&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>Pred: \. Po: \s<font color=
+"#FB0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>Če pa se uporabi na tem segmentu privzeta pravila za segmentacijo, bo končni rezultat videti kot sledi:</p>
   <pre>
-        <strong>&lt;segment 1990&gt;</strong> <font color=
-"#Fb0000">&lt;b0&gt;</font>Pred: \. <strong>&lt;end segment&gt;</strong>
-<strong>&lt;segment 1991&gt;</strong> Po: \s<font color=
-"#Fb0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>   
+ <strong>&lt;segment 1990&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>Pred: \. <strong>&lt;end segment&gt;</strong><br>
+<strong>&lt;segment 1991&gt;</strong> Potem: \s<font color=
+"#FB0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong> <br>
 </pre>
 
-  <p>Pravilo <i>segment za piko, ki ji sledi presledek</i> loči prvotno besedilo v dva segmenta, četudi bi obe oznaki, <code><font color="#Fb0000">&lt;b0&gt;</font></code> in <code><font color=
-  "#Fb0000">&lt;/b0&gt;</font></code> morali biti skupaj v enem in istem segmentu. V nekaterih primerih ima to lahko za posledico probleme, recimo kadar je oznake zaradi slovničnih pravil v ciljnem jeziku treba prestavljati.(glej <a href="#tag_operation">Operacije z oznakami</a> spodaj).</p>
+  <p>Pravilo <i>segment za piko, ki ji sledi presledek</i> loči prvotno besedilo v dva segmenta, četudi bi obe oznaki, <code><font color="#FB0000">&lt;b0&gt;</font></code> in <code><font color=
+  "#FB0000">&lt;/b0&gt;</font></code> morali biti skupaj v enem in istem segmentu. V nekaterih primerih ima to lahko za posledico probleme, recimo kadar je oznake zaradi slovničnih pravil v ciljnem jeziku treba prestavljati.(glej <a href="#tag_operation">Operacije z oznakami</a> spodaj).</p>
   <hr>
 
   <h3><a name="tag_operation" id="tag_operation"></a>Operacije z oznakami</h3>
@@ -98,52 +98,52 @@
 
   <p>Primer:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>To formatiranje<font color=
-"#Fb0000">&lt;/b0&gt;</font> bomo podvojili tukaj.<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>To formatiranje<font color=
+"#FB0000">&lt;/b0&gt;</font> bomo podvojili tukaj.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>Po podvojitvi:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>To formatiranje <font color=
-"#Fb0000">&lt;/b0&gt;</font> smo <font color=
-"#Fb0000">&lt;b0&gt;</font>tu podvojili<font color=
-"#Fb0000">&lt;/b0&gt;</font>.<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>To formatiranje <font color=
+"#FB0000">&lt;/b0&gt;</font> smo <font color=
+"#FB0000">&lt;b0&gt;</font>tu podvojili<font color=
+"#FB0000">&lt;/b0&gt;</font>.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p><a name="deletion" id="deletion"></a><b>Brisanje skupin oznak:</b>Skupino oznak odstranite iz segmenta tako, da jo izbrišete. Paziti morate, da izbrišete tako začetno kot končno oznako in s tem vse sledi formatiranja, sicer lahko prevedeno datoteko pokvarite do take mere, da je ne bo mogoče več odpreti. Z brisanjem skupine oznak odstranite to oblikovanje iz datoteke s prevodom.</p>
 
   <p>Primer:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>To formatiranje<font color=
-"#Fb0000">&lt;/b0&gt;</font> bomo zbrisali.<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>To formatiranje<font color=
+"#FB0000">&lt;/b0&gt;</font> bomo zbrisali.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>Po brisanju:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong>To formatiranje bomozbrisali.<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong>To formatiranje smo zbrisali.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p><b>Spreminjanje vrstnega reda v skupinah oznak:</b> Če morate zaradi drugačne stavčne strukture v ciljnem jeziku spremeniti vrstni red oznak, enostavno prestavite skupino oznak na želeno mesto v prevodu. Oblikovanje bo veljalo za besedilo, kamor ste ga prestavili.</p>
 
   <p>Primer:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>Za formatiranje tu<font color=
-"#Fb0000">&lt;/b0&gt;</font> in <font color=
-"#Fb0000">&lt;b1&gt;</font>formatiranje tam<font color=
-"#Fb0000">&lt;/b1&gt;</font> bomo spremenili vrstni red.<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Za formatiranje tu<font color=
+"#FB0000">&lt;/b0&gt;</font> in <font color=
+"#FB0000">&lt;b1&gt;</font>formatiranje tam<font color=
+"#FB0000">&lt;/b1&gt;</font> bomo spremenili vrstni red.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>Po spremembi vrstnega reda:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b1&gt;</font>Formatiranje tam<font color=
-"#Fb0000">&lt;/b1&gt;</font> in <font color=
-"#Fb0000">&lt;b0&gt;</font>formatiranje tu<font color=
-"#Fb0000">&lt;/b0&gt;</font> sta v obratnem vrstnem redu.<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b1&gt;</font>Formatiranje tam<font color=
+"#FB0000">&lt;/b1&gt;</font> in <font color=
+"#FB0000">&lt;b0&gt;</font>formatiranje tu<font color=
+"#FB0000">&lt;/b0&gt;</font> sta v obratnem vrstnem redu.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <h3><a name="nesting" id="nesting"></a>Gnezdenje skupin oznak</h3>
@@ -152,19 +152,19 @@
 
   <p>Primer:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>Formatiranje<font color=
-"#Fb0000">&lt;/b0&gt;</font> <font color=
-"#Fb0000">&lt;b1&gt;</font>ena<font color=
-"#Fb0000">&lt;/b1&gt;</font> bomo ugnezdili v formatiranje nič.<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatiranje<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;b1&gt;</font>ena<font color=
+"#FB0000">&lt;/b1&gt;</font> bomo ugnezdili v formatiranje nič.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>Po gnezdenju:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>Formatiranje <font color=
-"#Fb0000">&lt;b1&gt;</font>ena<font color=
-"#Fb0000">&lt;/b1&gt;&lt;/b0&gt;</font>smo ugnezdili v formatiranje nič.<strong>&lt;end segment</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatiranje <font color=
+"#FB0000">&lt;b1&gt;</font>ena<font color=
+"#FB0000">&lt;/b1&gt;&lt;/b0&gt;</font>smo ugnezdili v formatiranje nič.<strong>&lt;end segment</strong>
 </pre>
   <hr>
 
@@ -172,64 +172,79 @@
 
   <p>Prekrivanje se lahko zgodi zaradi napačnega spreminjanja parov oznak in vedno povzroči okvarjen zapis besedila, zaradi česar datoteke včasih ni mogoče odpreti . Primer:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>Formatiranje<font color=
-"#Fb0000">&lt;/b0&gt;</font> <font color=
-"#Fb0000">&lt;b1&gt;</font>&gt;tukaj<font color=
-"#Fb0000">&lt;/b1&gt;</font>bomo malo pokvarili.<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatiranje<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;b1&gt;</font>&gt;tukaj<font color=
+"#FB0000">&lt;/b1&gt;</font>bomo malo pokvarili.<strong>&lt;end segment&gt;</strong>
 </pre>
 
   <p>Po napaki v obdelavi:</p>
   <pre>
-        <strong>&lt;segment 0001&gt;</strong><font color=
-"#Fb0000">&lt;b0&gt;</font>Formatiranje <font color=
-"#Fb0000">&lt;b1&gt;</font>one<font color=
-"#Fb0000">&lt;/b0&gt;</font> <font color=
-"#Fb0000">&lt;/b1&gt;</font>je sedaj precej pokvarjeno<strong>&lt;end segment&gt;</strong>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatiranje <font color=
+"#FB0000">&lt;b1&gt;</font>one<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;/b1&gt;</font>je sedaj precej pokvarjeno<strong>&lt;end segment&gt;</strong>
 </pre>
   <hr>
 
   <h3><a name="tag_validation" id="tag_validation"></a>Preverjanje skupin oznak</h3>
 
-  <p>Preverjanje oznak odkrije spremenjene oznake (najsi bo namenoma, ali pa nehote), in prikaže prizadete segmente. Ko zaženete s Ctrl+T to funkcijo, vam bo v novem oknu med uporabo odprla drugega za drugim vse segmente, v katerih odkrije nesoglasje, kar se oznak tiče. Napake v oznakah prevedenih besedil, so pogosten vzrok za težave pri datotekah OpenDocument in OpenOffice.org , ki se ne dajo več mogoče odpreti. S pomočjo funkcije za preverjanje oznak lahko brez težav in sistematično preverite vse vprašljive segmente in nato ponovno ustvarite ciljne dokumente.</p>
+  <p>Preverjanje oznak odkrije spremenjene oznake (najsi bo namenoma, ali pa nehote), in prikaže prizadete segmente. Ko zaženete s Ctrl+T to funkcijo, vam bo v novem oknu med uporabo odprla drugega za drugim vse segmente, v katerih odkrije nesoglasje, kar se oznak tiče. Napake v oznakah prevedenih besedil so pogosten vzrok za težave pri datotekah OpenDocument in OpenOffice.org , ki jih ni več mogoče odpreti. S pomočjo funkcije za preverjanje oznak  je mogoče vse vprašljive segmente brez težav in sistematično preveriti. V oknu, ki se ga odpre s Ctrl+T, se nahaja tabela s tremi stolpci in s  povezavo na izvorno in prevedeno vsebino segmenta:</p><br>
 
-  <p>V oknu, ki se odpre, ko vtipkate Ctrl+T, se nahaja tabela s tremi stolpci:</p>
+  <table align="center" border="1" width="80%" summary="">
+    <tbody>
+      <tr>
+        <td>1</td>
 
-  <ul>
-    <li>
-      <p>povezava na segment </p>
-    </li>
+        <td>A different display font can be selected via the
+        <strong><font color="blue">&lt;b0&gt;</font></strong>Display
+        Font<strong><font color="blue">&lt;/b0&gt;</font></strong> dialog. Open
+        it via the <strong><font color=
+        "blue">&lt;i1&gt;</font></strong>Settings<strong><font color=
+        "blue">&lt;/i1&gt;</font></strong> &gt; <strong><font color=
+        "blue">&lt;i2&gt;</font></strong>Display Font...<strong><font color=
+        "blue">&lt;/i2&gt;</font></strong> menu item. The font type and size
+        can be changed from the dialog.</td>
 
-    <li>
-      <p>vsebina izvirnega segmenta,</p>
-    </li>
-
-    <li>
-      <p>vsebina prevedenega segmenta.</p>
-    </li>
-  </ul>
+        <td>'n Mens kan 'n ander vertoonfont kies met die <strong><font color=
+        "blue">&lt;b0&gt;</font></strong>Vertoonfont<strong><font color=
+        "blue">&lt;/b0&gt;</font></strong>-dialoogkassie. Kies
+        <strong><font color=
+        "blue">&lt;i1&gt;</font></strong>Opstelling<strong><font color=
+        "blue">&lt;/i1&gt;</font></strong> &gt; Vertoonfont... op die kieslys.
+        Die lettertipe én die lettergrootte kan met dié dialoogkassie verander
+        word.</td>
+      </tr>
+    </tbody>
+  </table>
 
   <p>Oznake so okrepljene v modri barvi, da je laže primerjati izvorni in ciljni segment. Če kliknete na povezavo, se segment odpre v urejevalniku. Popravite po potrebi napake in pritisnite <code><a href="menu.html#shortcuts">Ctrl+T</a></code>, da se vrnete nazaj v okno za preverjanje napak. <a href="#intro">Napake v oznakah</a> so posledice <a href="#tag_operation">manipulacij na oznakah</a>, zaradi katerih se v ciljnem dokumentu oznake ne pojavljajo v istem vrstnem redu in številu kot pa v originalnem besedilu. Nekatere teh manipulacij so potrebne in dobronamerne, pri drugih bo prišlo do problemov, ko se ustvarja ciljni dokument. </p>
   <hr>
 
   <h3><a name="tag_hints" id="tag_hints"></a>Nasveti za ravnanje z oznakami</h3>
 
-  <p>Oznake navadno predstavljajo kak ukaz za oblikovanje izvirnega besedila. Če se formatiranje izvornega besedila lahko<strong> poenostavite</strong>, ima lahko za posledico znatno manj oznak kasneje. Poizkusite uskladiti uporabljene pisave, njihove velikosti, barve itd., saj s tem poenostavite prevajanje in zmanjšate verjetnost napak v oznakah. Oglejte si točko <a href="#tag_operation">Operacije z oznakami</a> , da vidite, kaj lahko storite z oznakami. Če vas oznake motijo in v trenutnem besedilu oblikovanje ni zelo pomembno, si lahko prevajanje olajšate tudi tako, da iz izvirnega besedila odstranite čim več ukazov za oblikovanje.</p>
+  <p>Oznake navadno predstavljajo kak ukaz za oblikovanje izvirnega besedila. Če se formatiranje izvornega besedila lahko<strong> poenostavite</strong>, ima lahko za posledico znatno manj oznak kasneje. Poizkusite uskladiti uporabljene pisave, njihove velikosti, barve itd., saj s tem poenostavite prevajanje in zmanjšate verjetnost napak v oznakah. Oglejte si točko <a href=
+  "#tag_operation">Operacije z oznakami</a> , da vidite, kaj lahko storite z oznakami. Če vas oznake motijo in v trenutnem besedilu oblikovanje ni zelo pomembno, si lahko prevajanje olajšate tudi tako, da iz izvirnega besedila odstranite čim več ukazov za oblikovanje.</p>
 
-  <p>Če v OmegaT oznake želite videti, vendar večine oblikovanja v izhodnem dokumentu ne potrebujete, lahko v prevedenih segmentih oznake mirno izpuščate. V tem primeru <strong>pazite predvsem na pare oznak</strong>, ker lahko s tem, da pozabite zbrisati eno od obeh polovic, pokvarite formatiranje svojega dokumenta.  Ker besedilo že samo vključuje oznake, je mogoče prilagoditi <a href="./segmentation.html">pravila za segmentacijo</a> tako, da imajo ciljni segmenti manj oznak. Gre za napredno možnost programa, ki zahteva določeno merico izkušenj in zato ni namenjena začetnikom.</p>
+  <p>Če v OmegaT oznake želite videti, vendar večine oblikovanja v izhodnem dokumentu ne potrebujete, lahko v prevedenih segmentih oznake mirno izpuščate. V tem primeru <strong>pazite predvsem na pare oznak</strong>, ker lahko s tem, da pozabite zbrisati eno od obeh polovic, pokvarite formatiranje svojega dokumenta.  Ker besedilo že samo vključuje oznake, je mogoče prilagoditi <a href=
+  "./segmentation.html">pravila za segmentacijo</a> tako, da imajo ciljni segmenti manj oznak. Gre za napredno možnost programa, ki zahteva določeno merico izkušenj in zato ni namenjena začetnikom.</p>
 
   <p><strong>Važno:</strong> Program OmegaT ne odkrije vseh napak v oblikovanju samodejno, zato vas morda o kakšni napaki ali spremenjenem oblikovanju v ciljnem dokumentu ne bo opozoril. Lahko se tudi zgodi, da bo prevedena datoteka videti polomljena, datoteke vrste OpenDocument oziroma OpenOffice.org pa mogoče ne boste mogli več odpreti.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" summary="samo za formatiranje" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
-        <td style="text-align: center;"><a href="index.html">Domov</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Domov</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

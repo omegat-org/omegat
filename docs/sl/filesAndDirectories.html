@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Datoteke in imeniki - Priročnik za uporabnika OmegaT 1.8</title>
+
+  <title>Datoteke in imeniki - Priročnik za uporabnika OmegaT 2.0</title>
 </head>
 
 <body>
@@ -41,32 +42,27 @@
 
   <h3><a name="project_location" id="project_location"></a>Mesto za datoteke za prevodni projekt </h3>
 
-  <p>Ko odprete nov prevodni projekt, bo OmegaT samodejno ustvaril več podimenikov, ki bodo kasneje služili kot odlagališče za datoteke, poleg tega pa več datotek, v katerih se bodo nahajale vaše nastavitve in vaš prevodni spomin za projekt. Imenike za prevodni projekt bo OmegaT odprl pod glavnim imenikom za projekt.  Ko odpirate - bodisi nov ali pa že obstoječ - projekt, si lahko si tudi izberete druga mesta za te imenike.  Tako je vam samim prepuščeno, ali boste uporabili imenike, ki že obstajajo, ali pa jih boste odprli na mestih, ki ustrezajo vašemu načinu dela. Če želite mesto vaših imenikov spremeniti zatem, ko ste ga ustvarili, odprite <strong>Projekt → Lastnosti...</strong> in spremenite nastavitve, kot vam odgovarja.</p>
+  <p>Ko odprete nov prevodni projekt, bo OmegaT samodejno ustvaril več podimenikov, ki bodo kasneje služili kot odlagališče za datoteke, poleg tega pa več datotek, v katerih se bodo nahajale vaše nastavitve in vaš prevodni spomin za projekt. Imenike za prevodni projekt bo OmegaT odprl pod glavnim imenikom za projekt.  Ko odpirate - bodisi nov ali pa že obstoječ - projekt, si lahko si tudi izberete druga mesta za te imenike.  Tako je vam samim prepuščeno, ali boste uporabili imenike, ki že obstajajo, ali pa jih boste odprli na mestih, ki ustrezajo vašemu načinu dela. Če želite mesto vaših imenikov spremeniti zatem, ko ste ga ustvarili, odprite <strong>Projekt → Lastnosti ...</strong> in spremenite nastavitve, kot vam odgovarja.</p>
 
   <h3><a name="project_list" id="project_list"></a>Seznam datotek za prevodni projekt </h3>
 
   <p>V dvogovoru za datoteke, ki ga OmegaT odpre, bo prevodni projekt ime videz datoteke, označene z ikono OmegaT. V brskalniku pa bo prevodni projekt videti tako kot vsak drug imenik. </p>
 
   <p><br></p><img src="images/OmegaT_projects_and_subdirectories.png" name=
-  "grafika3" alt="Projekti in podimeniki OmegaT" align="left" border="1"
-  id="grafika3"><br clear="left">
+  "grafika3" alt="Projekti in podimeniki OmegaT" id="grafika3" align=
+  "left" border="1"><br clear="left">
 
   <p><br>
   <br></p>
 
   <p>Da projekt odprete, zadošča, če izberete predmet z ikono OmegaT. Prevodni projekt z imenom <b>Example_Project</b> se bo ustvaril s prednastavljenimi vrednostmi, kot novo podmapo z naslednjo strukturo:</p>
 
-  <p>&nbsp;</p>
-
-  <ul>
-    <li><img src="images/Omegatproject.png" name="grafika1" alt=
-    "OmegaT Projekt" align="left" border="0" id="grafika1"><br clear=
-    "left"></li>
-  </ul>Podimenik <b>glossary</b> je ob začetku projekta prazen. V njem se bodo nahajali geslovniki, ki jih boste morebiti pripravili za svoj novi projekt.<h3>OmegaT</h3>
+  <p>&nbsp;</p><img src="images/Omegatproject.png" name="grafika1" alt=
+  "OmegaT Projekt" id="grafika1" align="left" border="0"><br clear="left">.Podimenika <b>glossary</b> in <b>glossary</b>  bosta ob začetku projekta prazna. To je mesto za vaše slovarje in geslovnike, če jih nameravate uporabljati v svojem projektu.<h3>OmegaT</h3>
 
   <dl>
-    <dt>Podimenik <b>omegat</b> bo vseboval vsaj dvoje datotek, to je datoteko sprevodnim spominom <em>project_save.tmx</em> (<a href="translationMemories.html">...</a>) in datoteko <em>project_stats.txt (<a href=
-    "userInterface.html#files">...</a>)</em>, ki vsebuje statistične podatke o projektu. Datoteka <em>project_save.tmx</em> je delovni prevodni spomin za projekt. Če ste aktivirali funkcijo autosave, se bo datoteka s prevodnim spominom samodejno ažurirala, ko prekinete delo s projektom.  S tem prevodnim spominom se ustvarja datoteke v ciljnem jeziku. Sčasoma se bo v ta podimenik dodajalo datoteke TMX z imeni oblike project_save.tmx.<i>&lt;datum in ura</i>&gt;.bak (<a href=
+    <dt>Podimenik <b>omegat</b> bo vseboval vsaj dvoje datotek, to je datoteko sprevodnim spominom <em>project_save.tmx</em> (<a href=
+    "translationMemories.html">...</a>) in datoteko <em>project_stats.txt (<a href="userInterface.html#files">...</a>)</em>, ki vsebuje statistične podatke o projektu. Datoteka <em>project_save.tmx</em> je delovni prevodni spomin za projekt. Če ste aktivirali funkcijo autosave, se bo datoteka s prevodnim spominom samodejno ažurirala, ko prekinete delo s projektom.  S tem prevodnim spominom se ustvarja datoteke v ciljnem jeziku. Sčasoma se bo v ta podimenik dodajalo datoteke TMX z imeni oblike project_save.tmx.<i>&lt;datum in ura</i>&gt;.bak (<a href=
     "translationMemories.html#TMX_backup">...</a>). Njih namen je zaščita projektnega spomina, obnovijo pa se vsakič, ko ponovno odprete projekt, tako da prikazujejo stanje TM, preden je prišlo do kasnejših sprememb.</dt>
 
     <dd>Datoteka <b>stats.txt</b> vsebuje statistiko projekta in jo lahko odprete v programu za preglednice, da vidite podatke o številu segmentov in besed. Na razpolago boste imeli dodatne podatke, ki jih v oknu za <em>projektne datoteke</em> ni mogoče vseh prikazati. </dd>
@@ -77,7 +73,7 @@
   <h3>Source</h3>
 
   <dl>
-    <dt>Mapa source je mesto, kjer se nahajajo datoteke, ki jih je treba prevesti.  Navedete lahko katerokoli mapo, poleg tega ji lahko kasneje po želji dodajate nove datoteke. Pomnite, da je struktura izvornega podimenika popolnoma vaša stvar. Če se datoteke, ki jih želite prevesti, nahajajo v drevesu s podrejenimi podimeniki, zadostuje, da za izvorni imenik navedete vrh tega drevesa - OmegaT bo drevo kopiral v celoti, ne da bi pri tem strukturo drevesa spreminjal.</dt>
+    <dt>Mapa Source je mesto, kjer se nahajajo datoteke, ki jih je treba prevesti.  Navedete lahko katerokoli mapo, poleg tega ji lahko kasneje po želji dodajate nove datoteke. Pomnite, da je struktura izvornega podimenika popolnoma vaša stvar. Če se datoteke, ki jih želite prevesti, nahajajo v drevesu s podrejenimi podimeniki, zadostuje, da za izvorni imenik navedete vrh tega drevesa - OmegaT bo drevo kopiral v celoti, ne da bi pri tem strukturo drevesa spreminjal.</dt>
   </dl>
 
   <h3>Target</h3>
@@ -89,14 +85,13 @@
   <h3>Tm</h3>
 
   <dl>
-    <dd>Prevodne spomine iz predhodnih projektov lahko namestite v ta podimenik. Biti morajo v formatu <b>tmx</b>. Za preoblikovanje iz drugih oblik uporabljajte orodja, ki so na razpolago. Pomnite, da je prevodni spomin, ki posreduje med vašim izvornim besedilom in končnim prevodom, spravljen v datoteki project_save.tmx. Priročne datoteke TM pa so na razpolago zato, da v njih program lahko išče za najbolj primernim predlogom za segmente, ki še niso prevedeni.</dd>
+    <dd>Prevodne spomine iz predhodnih projektov lahko namestite v ta podimenik. Biti morajo v formatu <b>tmx</b>. Za preoblikovanje iz drugih oblik uporabljajte orodja, ki so na razpolago. Pomnite, da je prevodni spomin, ki posreduje med vašim izvornim besedilom in končnim prevodom, spravljen v datoteki project_save.tmx. Priročne datoteke TM pa so na razpolago,  zato da v njih program lahko išče za najbolj primernim predlogom za segmente, ki še niso prevedeni.</dd>
   </dl>
 
   <h3>omegat.project</h3>
 
   <dl>
-    <dd>Ko uporabnik odpre nov projekt, OmegaT samodejno ustvari to datoteko. Vsebuje <a href=
-    "projectProperties.html">parametre projekta</a>. Parametre, ki se nahajajo v tej datoteki, lahko spreminjate v okna za lastnosti projekta.</dd>
+    <dd>Ko uporabnik odpre nov projekt, OmegaT samodejno ustvari to datoteko. Vsebuje <a href="projectProperties.html">parametre projekta</a>. Parametre, ki se nahajajo v tej datoteki, lahko spreminjate v okna za lastnosti projekta.</dd>
 
     <dt>project_name-omegat.tmx (<a href=
     "translationMemories.html#TMX_files_location_and_purpose">...</a>)<br> project_name-level1.tmx<br> ime_projekta-level2.tmx</dt>
@@ -111,132 +106,141 @@
 
   <p>Uporabnikove datoteke se nahajajo na ločenem mestu, kjer so dostopne za vse verzije OmegaT. Kje se bodo nahajale, je odvisno od platforme, ki jo uporabljate:</p>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+  <table summary="samo za formatiranje" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
     <col width="33*">
     <col width="223*">
 
-    <tr valign="top">
-      <td width="13%">
-        <p>Windows</p>
-      </td>
+    <tbody>
+      <tr valign="top">
+        <td width="13%">
+          <p>Windows</p>
+        </td>
 
-      <td width="87%">
-        <dl>
-          <dd><strong>2000 in XP: Documents and Settings\&lt;User Name&gt;\Application Data\OmegaT</strong></dd>
-          <dd><strong>Vista: Users\&lt;User Name&gt;\AppData\Roaming\OmegaT</strong>
-          <dd><strong>Drugi: &lt;Nekaj&gt;\OmegaT</strong> (&lt;Nekaj&gt;ustreza "domačemu" imeniku, kot ga Java zve od operacijskega sistema.)</dl>
-      </td>
-    </tr>
+        <td width="87%">
+          <dl>
+            <dd><strong>2000 in XP: Documents and Settings\&lt;User Name&gt;\Application Data\OmegaT</strong></dd>
 
-    <tr valign="top">
-      <td width="13%">
-        <dl>
-          <dt>
-          Linux/Solaris/FreeBSD</dt>
-        </dl>
-      </td>
+            <dd><strong>Vista: Users\&lt;User
+            Name&gt;\AppData\Roaming\OmegaT</strong></dd>
 
-      <td width="87%">
-        <dl>
-          <dd><strong>&lt;User Home&gt;/.omegat</strong> (.omegat je imenik, zaradi pike pred imenom je neviden, razen če ne uporabite <code>ls -a</code> ali kakega podobnega ukaza.)</dd>
-        </dl>
-      </td>
-    </tr>
+            <dd><strong>Drugi: &lt;Nekaj&gt;\OmegaT</strong> (&lt;Nekaj&gt;ustreza "domačemu" imeniku, kot ga Java zve od operacijskega sistema.)</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="13%">
-        <dl>
-          <dt>Mac OS X</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>Linux/Solaris/FreeBSD</dt>
+          </dl>
+        </td>
 
-      <td width="87%">
-        <dl>
-          <dd><strong>&lt;User
-          Home&gt;/Library/Preferences/OmegaT</strong></dd>
-        </dl>
-      </td>
-    </tr>
-    
-    <tr valign="top">
-      <td width="13%">
-        <dl>
-          <dt>Drugo</dt>
-        </dl>
-      </td>
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User Home&gt;/.omegat</strong> (.omegat je imenik, zaradi pike pred imenom je neviden, razen če ne uporabite <code>ls -a</code> ali kakega podobnega ukaza.)</dd>
+          </dl>
+        </td>
+      </tr>
 
-      <td width="87%">
-        <dl>
-          <dd><strong>&lt;User
-          Home&gt;</strong></dd>
-        </dl>
-      </td>
-    </tr>
- 
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>Mac OS X</dt>
+          </dl>
+        </td>
+
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User
+            Home&gt;/Library/Preferences/OmegaT</strong></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>Drugo</dt>
+          </dl>
+        </td>
+
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User Home&gt;</strong></dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h3><a name="user_list" id="user_list"></a>Seznam uporabnikovih datotek<br></h3>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+  <table summary="samo za formatiranje" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
     <col width="27*">
     <col width="229*">
 
-    <tr valign="top">
-      <td width="11%">
-        <dl>
-          <dt>log.txt</dt>
-        </dl>
-      </td>
+    <tbody>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>log.txt</dt>
+          </dl>
+        </td>
 
-      <td width="89%">
-        <dl>
-          <dd>V to datoteko shranjuje Java napake, do katerih pride med uporabo OmegaT.  Če imate občutek, da se OmegaT čudno vede, je pomembno, da pošljete <a href="website.html">sporočilo o problemih</a> in da sporočilu dodate tudi to datoteko oziroma tisti del v njej, ki se problema tiče.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="89%">
+          <dl>
+            <dd>V to datoteko shranjuje Java napake, do katerih pride med uporabo OmegaT.  Če imate občutek, da se OmegaT čudno vede, je pomembno, da pošljete <a href=
+            "website.html">sporočilo o problemih</a> in da sporočilu dodate tudi to datoteko oziroma tisti del v njej, ki se problema tiče.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="11%">
-        <dl>
-          <dt>omegat.prefs</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>omegat.prefs</dt>
+          </dl>
+        </td>
 
-      <td width="89%">
-        <dl>
-          <dd>XML datoteka, ki vsebuje vse nastavitve za uporabniški vmesnik in pa podatke o položaju in velikosti odprtih oken. </dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="89%">
+          <dl>
+            <dd>XML datoteka, ki vsebuje vse nastavitve za uporabniški vmesnik in pa podatke o položaju in velikosti odprtih oken. </dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="11%">
-        <dl>
-          <dt>filters.conf</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>filters.conf</dt>
+          </dl>
+        </td>
 
-      <td width="89%">
-        <dl>
-          <dd>XML datoteka z nastavitvami <a href="fileFilters.html">filtrov za datoteke</a>. </dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="89%">
+          <dl>
+            <dd>XML datoteka z nastavitvami <a href=
+            "fileFilters.html">filtrov za datoteke</a>. </dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="11%">
-        <dl>
-          <dt>
-          segmentation.conf</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>segmentation.conf</dt>
+          </dl>
+        </td>
 
-      <td width="89%">
-        <dl>
-          <dd>XML datoteka s podatki o <a href="./segmentation.html">nastavitvah za stavčno segmentacijo</a>. </dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="89%">
+          <dl>
+            <dd>XML datoteka s podatki o <a href=
+            "./segmentation.html">nastavitvah za stavčno segmentacijo</a>. </dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <p><br>
@@ -245,177 +249,179 @@
 
   <h3><a name="application" id="application"></a>Datoteke aplikacije</h3>
 
-  <p>OmegaT je na razpolago kot paket, ki ga lahko naložite z SourceForge. V tem poglavju si bomo ogledali od <a href=
-  "installingAndRunning.html#Other_systems">platforme neodvisni paket</a>, ki vsebuje aplikacijo v obliki, ki je za Javo standardna.  Ostali paketi vsebujejo Linux <code>.tar</code> paket, nameščevalnik za Windows -z ali brez Java Runtime Environment -, nameščevalnik za Mac OS X in paket z izvorno kodo za razvijalce. Ta paket lahko uporabljate na <strong>katerikoli</strong> platformi, na kateri teče okolje JRE (Java Runtime Environment) 1.4.2 JRE, med drugimi tudi na platformah, za katere je paket že na razpolago. Od platforme neodvisni paket je na razpolago kot komprimirana datoteka, ki jo morate najprej razširiti v imenik za namestitev. Za razširjanje v večini primerov zadostuje dvoklik za naloženi paket. Med razširjanjem bo nastala mapa, ki vsebuje datoteke za OmegaT:</p>
+  <p>OmegaT je na razpolago kot paket, ki ga lahko naložite s SourceForge. V tem poglavju si bomo ogledali od <a href=
+  "installingAndRunning.html#Other_systems">platforme neodvisni paket</a>, ki vsebuje aplikacijo v obliki, ki je za Javo standardna.  Ostali paketi vsebujejo Linux <code>.tar</code> paket, nameščevalnik za Windows -z ali brez Java Runtime Environment -, nameščevalnik za Mac OS X in paket z izvorno kodo za razvijalce. Ta paket lahko uporabljate na <strong>katerikoli</strong> platformi, na kateri teče okolje JRE (Java Runtime Environment) 1.5, med drugimi tudi na platformah, za katere je paket že na razpolago. Od platforme neodvisni paket je na razpolago kot komprimirana datoteka, ki jo morate najprej razširiti v imenik za namestitev. Za razširjanje v večini primerov zadostuje dvoklik za naloženi paket. Med razširjanjem bo nastala mapa, ki vsebuje datoteke za OmegaT:</p>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+  <table summary="samo za formatiranje" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
     <col width="19*">
     <col width="237*">
 
-    <tr valign="top">
-      <td width="8%">
-        <p><b>Datoteka/<br> podimenik</b></p>
-      </td>
+    <tbody>
+      <tr valign="top">
+        <td width="8%">
+          <p><b>Datoteka/<br> podimenik</b></p>
+        </td>
 
-      <td width="92%">
-        <p><b>vsebina</b></p>
-      </td>
-    </tr>
+        <td width="92%">
+          <p><b>vsebina</b></p>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">/docs/</td>
+      <tr valign="top">
+        <td width="8%">/docs/</td>
 
-      <td width="92%">
-        <dl>
-          <dt>V tej mapi se nahajajo vse datoteke za dokumentacijo.  Za dostop do zunanjih povezav jih odpirajte v brskalniku.</dt>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dt>V tej mapi se nahajajo vse datoteke za dokumentacijo.  Za dostop do zunanjih povezav jih odpirajte v brskalniku.</dt>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>/images/</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>/images/</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>vsebuje ikone in logo grafiko.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>vsebuje ikone in logo grafiko.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>/lib/</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>/lib/</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>vsebuje datoteke za Javo. Te datoteke so potrebne za delo OmegaT.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>vsebuje datoteke za Javo. Te datoteke so potrebne za delo OmegaT.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>join.html</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>join.html</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Gre za običajno datoteko html, ki vas bo, če jo odprete v brskalniku, napotila na uporabniško skupino za OmegaT, ki jo gosti Yahoo Groups. Tudi če se v uporabniško skupino ne boste včlanili, dobite tako dostop do dodatnih informacij in vpogled v diskusije o aplikaciji. Arhivi skupine so javni in zato, da po njih lahko iščete, se vam v skupino ni treba včlaniti.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Gre za običajno datoteko html, ki vas bo, če jo odprete v brskalniku, napotila na uporabniško skupino za OmegaT, ki jo gosti Yahoo Groups. Tudi če se v uporabniško skupino ne boste včlanili, dobite tako dostop do dodatnih informacij in vpogled v diskusije o aplikaciji. Arhivi skupine so javni, da po njih lahko iščete, se vam v skupino ni treba včlaniti.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>changes.txt</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>changes.txt</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Relativno natančen seznam sprememb med trenutno in prejšnjimi verzijami aplikacije.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Relativno natančen seznam sprememb med trenutno in prejšnjimi verzijami aplikacije.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>license.txt</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>license.txt</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>The GNU GENERAL PUBLIC LICENSE. Ta licenca vam dovoljuje določene stvari z OmegaT, med drugim spreminjanje in razširjanje.  V kolikor bi želeli OmegaT spreminjati ali razširjati, si dobro oglejte ta dokument, preden se česarkoli lotite, tako da boste zagotovo vedeli, kakšne so lahko posledice. V kolikor niste čisto na jasnem, se ne obotavljajte neposredno vprašati člane projekta, bodisi s pomočjo E-pošte na strani v Source Page ali prek javnega sporočila v uporabniški skupini.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>The GNU GENERAL PUBLIC LICENSE. Ta licenca vam dovoljuje določene stvari z OmegaT, med drugim spreminjanje in razširjanje.  V kolikor bi želeli OmegaT spreminjati ali razširjati, si dobro oglejte ta dokument, preden se česarkoli lotite, tako da boste zagotovo vedeli, kakšne so lahko posledice. V kolikor niste čisto na jasnem, se ne obotavljajte neposredno vprašati člane projekta, bodisi s pomočjo E-pošte na strani v Source Page ali prek javnega sporočila v uporabniški skupini.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>doc-license.txt</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>doc-license.txt</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>The GNU GENERAL PUBLIC LICENSE. Ta licenca se tiče dokumentacije. Glejte zgoraj.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>The GNU GENERAL PUBLIC LICENSE. Ta licenca se tiče dokumentacije. Glejte zgoraj.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>readme.txt</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>readme.txt</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Ta datoteka je zelo pomembna in zagotovo jo preberite, preden začnete delati z OmegaT. Vsebuje splošne informacije o OmegaT, kje lahko dobite dodatne informacije, kako lahko sodelujete itd.  Datoteka je prevedena v številne jezike. </dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Ta datoteka je zelo pomembna in zagotovo jo preberite, preden začnete delati z OmegaT. Vsebuje splošne informacije o OmegaT, kje lahko dobite dodatne informacije, kako lahko sodelujete itd.  Datoteka je prevedena v številne jezike. </dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>OmegaT</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Besedilna datoteka z dvema vrsticama:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Datoteka vam je lahko koristna, če je spremenite v izvajalno obliko z (<code>chmod +x OmegaT</code>) v <a href=
-          "installingAndRunning.html#command_line">ukazni vrstici</a>, pri čemer se morate nahajati v mapi <code>OmegaT_1.8/</code>. Odslej lahko OmegaT zaženete z ukazne vrstice s klicem te datoteke.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Besedilna datoteka z dvema vrsticama:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Datoteka vam je lahko koristna, če je spremenite v izvajalno obliko z (<code>chmod +x OmegaT</code>) v <a href=
+            "installingAndRunning.html#command_line">ukazni vrstici</a>, pri čemer se morate nahajati v mapi <code>OmegaT_2.0/</code>. Odslej lahko OmegaT zaženete z ukazne vrstice s klicem te datoteke.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>OmegaT.bat</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT.bat</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Datoteka, s katero se pod Windows OmegaT zažene s <a href=
-          "installingAndRunning.html#command_line">ukazne vrstice</a>. Vsebuje samo naslednjo vrstico:</dd>
+        <td width="92%">
+          <dl>
+            <dd>Datoteka, s katero se pod Windows OmegaT zažene s <a href=
+            "installingAndRunning.html#command_line">ukazne vrstice</a>. Vsebuje samo naslednjo vrstico:</dd>
 
-          <dd><code>java -jar
-          OmegaT.jar %*</code></dd>
-        </dl>
-      </td>
-    </tr>
+            <dd><code>java -jar OmegaT.jar %*</code></dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>OmegaT.jar</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT.jar</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dt>Glavna aplikacija OmegaT. Če hočete zagnati OmegaT, morate ali poklicati to datoteko z ukazne vrstice ali pa jo pognati s skrbnikom za datoteko (dvoklik običajno zadošča).</dt>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dt>Glavna aplikacija OmegaT. Če hočete zagnati OmegaT, morate ali poklicati to datoteko z ukazne vrstice ali pa jo pognati s skrbnikom za datoteko (dvoklik običajno zadošča).</dt>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <dl>
@@ -423,16 +429,18 @@
     <br></dd>
   </dl>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" summary="samo za formatiranje" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
-        <td style="text-align: center;"><a href="index.html">Domov</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Domov</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

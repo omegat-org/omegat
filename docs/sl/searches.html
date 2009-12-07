@@ -2,7 +2,7 @@
 <head>
 	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Iskanja - Priročnik za uporabnika OmegaT 1.8</title>
+  <title>Iskanja - Priročnik za uporabnika OmegaT 2.0</title>
 </head>
 
 <body>
@@ -26,7 +26,7 @@
 
   <p><a href="#searchmethods">Metode za iskanje</a></p>
 
-  <p><a href="#usingwildcards">uporaba nadomestnih znakov</a></p>
+  <p><a href="#usingwildcards">Uporaba nadomestnih znakov</a></p>
 
   <p><a href="#usingregularexpressions">Iskanje z regularnimi izrazi</a></p>
 
@@ -42,9 +42,7 @@
 
   <h3><a name="calling" id="calling"></a>Kako začeti iskati</h3>
 
-  <p>OmegaT nudi krepko zalogo funkcij za iskanje. Odprite <strong>iskalno okno</strong> z <code>Ctrl+F</code> in vtipkajte besedo ali izraz, ki ga iščete, v polje <strong> Išči:</strong>. Lahko tudi v ciljnem polju aktivnega segmenta izberete besede ali izraz, potem pa pritisnete na <code>Ctrl+F</code>. V tem primeru bo program iskani izraz ali besedo sam vnesel v polje <strong>Išči</strong>.</p>
-
-  <p>Vsak klic <strong>Išči</strong> odpre svoje lastno okno. Ne pozabite jih zapirati, saj drugače zasteljejo namizje. </p>
+  <p>OmegaT nudi krepko zalogo funkcij za iskanje. Odprite <strong>iskalno okno</strong> z <code>Ctrl+F</code> in vtipkajte besedo ali izraz, ki ga iščete, v polje <strong> Išči:</strong>. Lahko tudi v ciljnem polju aktivnega segmenta izberete besede ali izraz, potem pa pritisnete na <code>Ctrl+F</code>. Besedo ali stavek se v tem primeru  vnese v  polje<strong> Išči </strong> samodejno. Vsak klic <strong> Išči</strong>  odpre svoje novo okno. Ne pozabite jih zapirati, saj drugače zasmetijo namizje. </p>
 
   <h3><a name="location" id="location"></a>Mesto iskanja</h3>
 
@@ -64,81 +62,79 @@
     </li>
   </ul>
 
-  <p>Med iskanjem po datotekah se bo iskalo samo po datotekah, ki jih je mogoče brati (glejte <a href="filesToTranslate.html">Podprti formati datotek</a>).</p>
+  <p>kadar preiskujete datoteke, bo OmegaT omejil iskanje na datoteke s formati za izvirne datoteke (glejte <a href="filesToTranslate.html">Podprti formati datotek</a>). Na primer, četudi je OmegaT vsekakor sposoben obdelovati datoteke TMX, jih bo pri iskanju ignoriral. </p>
   <hr>
 
   <h2><a name="searchmethods" id="searchmethods"></a>Metode za iskanje</h2>
 
   <p>Z radijski gumbi izberete metodo za iskanje. Lahko izbirate med dvema metodama iskanja:</p>
 
-  <table width="555" border="0" cellpadding="3" cellspacing="0">
-    <col width="115">
-    <col width="428">
+  <table summary= "samo za formatiranje" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
 
     <tr>
-      <td width="115">
+      <td width="20%">
         <p><strong>Eksaktno iskanje</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Iskanje po segmentih, ki vsebujejo navedeni niz</p>
       </td>
     </tr>
 
     <tr>
-      <td width="115">
+      <td width="20%">
         <p><strong>Iskanje s ključnimi besedami</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>išče vse segmente, ki vsebujejo vse navedene ključe, v poljubnem vrstnem redu.</p>
       </td>
     </tr>
   </table>
 
-  <p><strong>Eksaktno iskanje</strong> išče izraz, z drugo besedo, če ste vnesli več besed, jih bo program našel samo v primeru, da nastopajo v točno istem vrstnem redu. Eksaktno iskanje poteka na podoben način kot iskanje za "eksaktni izraz" v mrežnih iskalnikih, kot je na primer Google.</p>
-
-  <p>Izberite <strong>iskanje po ključnih besedah</strong>, če želite seznam vseh segmentov, v katerih nastopajo vse navedene besede. OmegaT bo sestavil seznam segmentov, ki vsebujejo napake. Iskanje na ključ poteka na podoben način kot iskanje za "vse besed" v mrežnih iskalnikih, kot je na primer Google (z logičnim IN).</p>
+  <p><strong>Eksaktno iskanje</strong> išče izraz, z drugo besedo, če ste vnesli več besed, jih bo program našel samo v primeru, da nastopajo v točno istem vrstnem redu. Eksaktno iskanje poteka na podoben način kot iskanje za "egzaktni izraz" v mrežnih iskalnikih, kot je na primer Google. Izberite <strong>iskanje po ključnih besedah</strong>, če želite seznam vseh segmentov, v katerih nastopajo vse navedene besede. OmegaT bo sestavil seznam segmentov, ki vsebujejo napake. Iskanje na ključ poteka na podoben način kot iskanje za "vse besed" v mrežnih iskalnikih, kot je na primer Google (z logičnim IN).</p>
 
   <p>Za obe metodi so vam na razpolago še naslednje tri možnosti:</p>
 
-  <table width="556" border="0" cellpadding="3" cellspacing="0">
-    <col width="116">
-    <col width="428">
+  <table summary= "samo za formatiranje" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>Razlikuj velike in male črke</strong></p>
       </td>
 
-      <td width="428">
-        <p>Iskanje bo potekalo natančno tako, kot je niz napisan; v nasprotnem primeru se bo razlike veliko/malo ignoriralo.</p>
+      <td width="80%">
+        <p>Iskanje bo potekalo natančno tako, kot je niz napisan, v nasprotnem primeru se bo razlike veliko/malo ignoriralo.</p>
       </td>
     </tr>
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>Regularni izrazi</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Niz bo razumljen kot regularni izraz (pri iskanju s ključi bo razumljen kot več izrazov).</p>
       </td>
     </tr>
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>Išči po TM</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Iskalo se bo po vseh prevodnih spominih.</p>
       </td>
     </tr>
   </table>
   <hr>
 
-  <h2><a name="usingwildcards" id="usingwildcards"></a>uporaba nadomestnih znakov</h2>
+  <h2><a name="usingwildcards" id="usingwildcards"></a>Uporaba nadomestnih znakov</h2>
 
   <p>Tako v eksaktnem iskanju kot v iskanju s ključi lahko uporabljate nadomestna znaka '<code>*</code>' in '<code>?</code>' . Pazite, da pri tem ne potrdite možnosti <strong>regularni izrazi</strong> , ker imata ta znaka v tem primeru drugačen pomen.</p>
 
@@ -148,7 +144,7 @@
     </li>
 
     <li>
-      <p>'<strong>?</strong>' je ograda za natančno en sam znak. '<strong>slik?</strong>' bo torej našla '<strong>slika</strong>','<strong>sliko</strong>', ne pa na primer <strong>slik</strong>' ali '<strong>slikar</strong>').</p>
+      <p>'<strong>?</strong>' je ograda za natančno en sam znak. '<strong>slik?</strong>' bo torej našla '<strong>slika</strong>','<strong>sliko</strong>', ne pa na primer '<strong>slik</strong>' ali '<strong>slikar</strong>').</p>
     </li>
   </ul>
 
@@ -158,21 +154,21 @@
   <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>Iskanje z regularnimi izrazi</h2>
 
   <p>Z regularnimi izrazi imate zelo veliko možnosti iskanja po segmentih. Poteka podobno kot običajno iskanje, le da je veliko bolj prožno, kar se iskanih izrazov tiče. Na razpolago so regularni izrazi, ki jih podpira Java. Kratek povzetek pravil boste našli v prilogi <a href="regexp.html">Sestavki iz regularnih izrazov</a>. Če potrebujete bolj konkretno informacijo, si prosimo oglejte <a href=
-  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
 
   <p>Enostavne primere lahko najdete na mreži (recimo <a href=
-  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>e.)</p>
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
   <hr>
 
   <h2><a name="display" id="display"></a>Prikaz rezultatov iskanja</h2>
 
-  <p>Če vnesete niz za iskanje v polje in pritisnete gumb išči, bo program navedel vse segmente v projektu, ki iskani niz vsebujejo. OmegaT obravnava enake segmente kot eno samo enoto -- če spremenite enega od njih, se bodo spremenili vsi ostali enaki segmenti -- prikazan pa bo samo prvi.</p>
+  <p>Če vnesete niz za iskanje v polje in pritisnete gumb išči, bo program navedel vse segmente v projektu, ki iskani niz vsebujejo. OmegaT obravnava enake segmente kot eno samo enoto,  prikazan pa bo samo prvi od njih.</p>
 
-  <p>Segmente se prikazuje v vrstnem redu, v katerem nastopajo v projektu. Prevedeni segmenti bodo prikazani z izvirnikom zgoraj in prevodom pod njim, pri neprevedenih segmentih pa je prikazano samo izvirno besedilo.</p>
+  <p>Segmente se prikazuje v vrstnem redu, v katerem nastopajo v projektu. Prevedeni segmenti bodo prikazani z izvirnikom zgoraj in prevodom pod njim, pri neprevedenih segmentih pa se prikaže samo izvirno besedilo.</p>
 
-  <p>Če kliknete na segment, se bo odprl v urejevalniku. Potem lahko skočite nazaj v iskalno okno in si pogledate naslednji segment, ki ga boste morda tudi morali spremeniti.</p>
+  <p>Če kliknete na segment, se bo odprl v urejevalniku, da ga lahko spremenite. Kasneje lahko spet skočite nazaj v iskalno okno, da si na primer ogledate in po potrebi popravite izrazoslovje.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table summary= "samo za formatiranje" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>

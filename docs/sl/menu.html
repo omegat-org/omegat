@@ -2,10 +2,11 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>OmegaT Meni in bližnjice - Priročnik za uporabnika OmegaT 1.8</title>
+
+  <title>OmegaT Meni in bližnjice - Priročnik za uporabnika OmegaT 2.0</title>
 </head>
 
-<body lang="en-US" dir="ltr">
+<body>
   <h2>Glavni meni in bližnjice</h2>
 
   <h3><a href="#menu">Glavni meni</a></h3>
@@ -40,676 +41,720 @@
   <p>Vse funkcije OmegaT se da izvesti preko glavnega menija vrh okna z urejevalnikom. Večino funkcij je mogoče izvesti tudi s pomočjo <a href=
   "#shortcuts">bližnjic</a>. Bližnjice aktivirate s pritiskom na tipko <strong>Ctrl</strong> in ustrezno črko. V nekaterih primerih uporabljajo bližnjice poleg črk še druge tipke. Zaradi boljše čitljivosti uporabljamo velike črke. <strong>Ctrl</strong> uporabljajo Windows, UNIX in izvedenke UNIXa, s tipkovnicami, na katerih se nahaja tipka  <strong>Ctrl</strong> / <strong>Control</strong>. Uporabniki Mac računalnikov naj pod tem razumejo in uporabljajo <strong>cmd+tipka</strong>. Tipka <strong>cmd</strong> je na tipkovnicah Apple označena kot <strong>command</strong> ali <strong>jabolko</strong> </p>
 
-  <table width="500" border="1" cellpadding="3" cellspacing="0">
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p align="center"><a href="#ProjectMenu">Projekt</a></p>
-      </td>
+  <table summary="samo za formatiranje" border="1" cellpadding="3" cellspacing="0"
+  width="500">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p align="center"><a href="#ProjectMenu">Projekt</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#EditMenu">Uredi</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#EditMenu">Uredi</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#GoToMenu">Skoči na </a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#GoToMenu">Skoči na </a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#ViewMenu">Pogled</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#ViewMenu">Pogled</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#ToolsMenu">Orodja</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#ToolsMenu">Orodja</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#OptionsMenu">Možnosti</a></p>
-      </td>
+        <td>
+          <p align="center"><a href="#OptionsMenu">Možnosti</a></p>
+        </td>
 
-      <td>
-        <p align="center"><a href="#HelpMenu">Pomoč</a></p>
-      </td>
-    </tr>
+        <td>
+          <p align="center"><a href="#HelpMenu">Pomoč</a></p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
-  <table border="0" cellpadding="5" cellspacing="0">
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="ProjectMenu" id="ProjectMenu"></a>Projekt</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Nov</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Ustvari in odpre nov projekt Uporablja se isti dvogovor kot za <a href="projectProperties.html">uredi projekt</a>.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>&amp;Odpri</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+O</code></p>
-      </td>
-
-      <td>
-        <p>Odpre obstoječ projekt.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Uvozi izvorne datoteke...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Kopira izbrane datoteke v imenik <code>/source</code> in projekt ponovno naloži, tako da vsebuje tudi dodane datoteke</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Uvozi iz MediaWiki...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Uvozi enote s strani MediaWiki, na katere kaže navedeni URL</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Ponovno naloži</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Ponovno naloži projekt, tako da upošteva tudi spremembe v izvornih datotekah, .podedovanih prevodnih spominih ali slovarjih. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Zapri</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Shrani prevod in projekt zapre.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Shrani</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+S</code></p>
-      </td>
-
-      <td>
-        <p>Shrani prevod v prevodni spomin projekta. OmegaT sam od sebe prevod vsakih 10 minut shranjuje, poleg tega tudi ko projekt odprete ali ko OmegaT zapustite.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Ustvari prevedene dokumente</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>S pomočjo vašega prevoda prevede vhodne datoteke v dokumente v ciljnem jeziku.  Dokumenti se nahajajo v mapi <code>/target</code>.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Lastnosti ...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+E</code></p>
-      </td>
-
-      <td>
-        <p>Prikaže dvogovor <a href="projectProperties.html">Lastnosti projekta</a>, v katerem lahko prilagodite imenike in jezike projekta.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Projektne datoteke…</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+L</code></p>
-      </td>
-
-      <td>
-        <p>Odpre oziroma zapre <a href="userInterface.html#Project_Files">okno s projektnimi datotekami</a> (odpre, če je zaprto, zapre pa, če je okno odprto).</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Izhod</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Q</code></p>
-      </td>
-
-      <td>
-        <p>Shrani prevod in prekine OmegaT. V kolikor projekta niste ročno shranili, vas program vpraša, če želite projekt res prekiniti.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="EditMenu" id="EditMenu"></a>Uredi</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <p>Opomba: Funkcij, ki so splošno znane (kopiraj/izreži/prilepi) , se ne kaže izrecno, so pa na razpolago kot bližnjice.  Primer:</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Kopiraj</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+C</code></p>
-      </td>
-
-      <td>
-        <p>kopira izbrano besedilo v odlagališče.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Izreži</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+X</code></p>
-      </td>
-
-      <td>
-        <p>Izbrano besedilo kopira v odlagališče in ga zbriše.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Prilepi</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+V</code></p>
-      </td>
-
-      <td>
-        <p>Besedilo prilepi iz odlagališča na mesto, kjer se nahaja kazalka.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <p><strong>Meni Uredi vsebuje naslednje postavke:</strong></p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Razveljavi zadnje dejanje</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Z</code></p>
-      </td>
-
-      <td>
-        <p>Vrne trenutni segment v stanje pred zadnjim korakom pri urejanju.  V kolikor je spremenjeni segment bil potrjen, ta operacija ni več mogoča. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Ponovi zadnje dejanje</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Y</code></p>
-      </td>
-
-      <td>
-        <p>Vrne se nazaj na stanje pred zadnjo razveljavitvijo. V kolikor je spremenjeni segment bil potrjen, ta operacija ni več mogoča. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Zamenjaj z zadetkom</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+R</code></p>
-      </td>
-
-      <td>
-        <p>Zamenja cilj trenutnega segmenta z izbranim zadetkom (zadetek na prvem mestu je izbran sam po sebi)</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Vstavi zadetek</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+I</code></p>
-      </td>
-
-      <td>
-        <p>Vstavi trenutno izbrani zadetek na mesto, kjer se trenutno nahaja kazalka. Pri tem funkcija, če se jo izbere, prepiše del ciljnega segmenta.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Zamenjaj z izvorom</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Shift+Ctrl+R</code></p>
-      </td>
-
-      <td>
-        <p>Prepiše cilj trenutnega segmenta z izvornim besedilom.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Vstavi izvor</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Shift+Ctrl+I</code></p>
-      </td>
-
-      <td>
-        <p>Vstavi izvor na mesto, kjer se trenutno nahaja kazalka.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Preišči projekt…</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+F</code></p>
-      </td>
-
-      <td>
-        <p>Odpre novo <a href="userInterface.html#Search_Window">Okno za iskanje</a>.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Spremeni velikost črk v...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Shift + F3</code></p>
-
-        <p><code>(glejte besedilo)</code></p>
-      </td>
-
-      <td>
-        <p>Spremeni velikost črk v označenem delu izvornega segmenta v skladu z izbiro (majhne črke, velike črke, naslov). S pomočjo Shift+F3 lahko krožite skozi navedene izbire.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Izberi predlog #N</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+#N</code></p>
-      </td>
-
-      <td>
-        <p>((#N je cifra od 1 do 5) - izbere Nti zadetek v oknu z zadetki (zadetek na prvem mestu je izbran sam po sebi) Pomen barv je podrobno opisan v poglavju <a href="userInterface.html#Fuzzy_Matches">Mehki zadetki</a>.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="GoToMenu" id="GoToMenu"></a>Skoči na </h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Naslednji neprevedeni segment</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+U</code></p>
-      </td>
-
-      <td>
-        <p>Premakne urejevalno polje na naslednji segment, ki ga v prevodnem spominu projekta še ni.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Naslednji segment</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+N</code> ali <code>Enter</code> ali <code>Tab</code></p>
-      </td>
-
-      <td>
-        <p>Premakne urejevalno polje na naslednji segment  Če je trenutni segment zadnji segment v vhodni datoteki, se pri tem odpre prvi segment naslednje datoteke. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Prejšnji segment</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+P</code> ali <code>Ctrl+Enter</code> ali <code>Ctrl+Tab</code></p>
-      </td>
-
-      <td>
-        <p>Premakne urejevalno polje na predhodni segment. Če je trenutni segment prvi segment v datoteki, se bo program premaknil na zadnji segment v predhodni datoteki.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Številka segmenta...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+J</code></p>
-      </td>
-
-      <td>
-        <p>Odpre segment z navedeno zaporedno številko. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Nazaj v zgodovino...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Shift+P</code></p>
-      </td>
-
-      <td>
-        <p>OmegaT si obdelane segmente zapomni. S tem ukazom se lahko pomaknete en ali več segmentov nazaj v času, nakar se lahko spet vrnete na trenutno aktualni segment. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Naprej skozi zgodovino...</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Shift+N</code></p>
-      </td>
-
-      <td>
-        <p>S tem ukazom se lahko pomaknete v času naprej skozi segmente, ki ste jih obiskali z "nazaj v zgodovino".</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="ViewMenu" id="ViewMenu"></a>Pogled</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Označi prevedene segmente</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Če se izbiro aktivira, bodo prevedeni segmenti obarvani rumeno. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Označi neprevedene segmente</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Če se izbiro aktivira, bodo neprevedeni segmenti obarvani vijolično.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Prikaži izvorne segmente</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Če se izbiro aktivira, se bo izvorne segmente kazalo, obarvani bodo zeleno. Če te možnosti ne izberete, izvornih segmentov (razen aktualnega) program ne bo kazal.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="ToolsMenu" id="ToolsMenu"></a>Orodja</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Preveri oznake</code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+T</code></p>
-      </td>
-
-      <td>
-        <p>Preveri formatirane datoteke na manjkajoče oziroma napačno postavljene oznake. Prikazal se bo seznam segmentov, ki vsebujejo napake. Poglavje <a href=
-        "userInterface.html#Tag_Validation">Okno za preverjanje oznak</a> opisuje, kaj je v seznamu videti, poglavje <a href="formattedText.html">Kako delati s formatiranim besedilom</a> pa zakaj tako.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="OptionsMenu" id=
-        "OptionsMenu"></a><code>Možnosti</code></h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Uporabi Tab za pomikanje</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Uporabljaj <code>Tab</code> . kot tipko za potrditev segmenta namesto <code>&lt;Enter&gt;</code>. Ta alternativa pride prav pri nekaterih kitajskih, japonskih in korejskih sistemih za vnos znakov. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Prekinitev vedno potrditi </code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Preden konča z delom, bo program vedno najprej vprašal vas, če sme zaključiti.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Pisava…</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Pokaže dvogovor <a href="fontSettings.html">Nastavitve pisave</a>, s katerim lahko nastavite velikost in vrsto pisave, ki se uporablja za prikaz.  Za uporabnike starejših računalnikov je pametneje, če pisavo spremenijo, preden projekt odprejo.  Časovni zamik je najbolj viden pri kombinaciji G4 + Mac OS X + japonščina.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Filtri za datoteke…</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Odpre dvogovor <a href="fileFilters.html">Lastnosti projekta</a>, v katerem lahko prilagodite imenike in jezike projekta.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Segmentiranje...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Odpre dvogovor <a href="./segmentation.html">Segmentiranje izvora</a>, v katerem lahko prilagodite način, kako se izvorno besedilo segmentira.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Črkovanje ...</code></p>
-      </td>
-      <td width="17%"></td>
-
-      <td>
-        <p>Odpre okno <a href="spellchecker.html">Nastavitve črkovalnika</a>, s katerim se namesti, prilagodi in aktivira črkovalnik.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Vedenje ob urejanju…</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Odpre dvogovor <a href="translationEditing.html">Urejanje prevoda</a>,za konfiguriranje.</p>
-
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Obnovi glavno okno</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Obnovi dele (urejevalnik, okni za prikaz zadetkov in izrazov) glavnega okna OmegaT v njihovem privzetem stanju. Uporabite to funkcijo, če ste odklopili, premaknili, skrili eno ali več komponent, nakar vam zamotane situacije ne uspe več razmotati.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="HelpMenu" id="HelpMenu"></a>Pomoč</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td width="23%">
-        <p><code>Priročnik za uporabnika... </code></p>
-      </td>
-
-      <td width="17%">
-        <p><code>F1</code></p>
-      </td>
-
-      <td>
-        <p>Odpre posebno okno za <a href="userInterface.html#Help_Browser">brskalnik za pomoč</a> , ki kaže tale priročnik. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td width="23%">
-        <p><code>Vizitka ...</code></p>
-      </td>
-
-      <td width="17%"></td>
-
-      <td>
-        <p>Prikaže avtorske pravice, zahvale in licenčno informacijo.</p>
-      </td>
-    </tr>
+  <table summary="samo za formatiranje" border="0" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ProjectMenu" id="ProjectMenu"></a>Projekt</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Nov</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Ustvari in odpre nov projekt Uporablja se isti dvogovor kot za <a href="projectProperties.html">uredi projekt</a>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>&amp;Odpri</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>Odpre obstoječ projekt.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Uvozi izvorne datoteke...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Kopira izbrane datoteke v imenik <code>/source</code> in projekt ponovno naloži, tako da vsebuje tudi dodane datoteke</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Uvozi iz MediaWiki...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Uvozi enote s strani MediaWiki, na katere kaže navedeni URL</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Ponovno naloži</code></p>
+        </td>
+
+        <td width="17%"><code>F5</code></td>
+
+        <td>
+          <p>Ponovno naloži projekt, tako da upošteva tudi spremembe v izvornih datotekah, .podedovanih prevodnih spominih ali slovarjih. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Zapri</code></p>
+        </td>
+
+        <td width="17%"><code>Ctrl+Shift+W</code></td>
+
+        <td>
+          <p>Shrani prevod in projekt zapre.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Shrani</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Shrani prevod v prevodni spomin projekta. OmegaT sam od sebe prevod vsakih 10 minut shranjuje, poleg tega tudi ko projekt odprete ali ko OmegaT zapustite.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Ustvari prevedene dokumente</code></p>
+        </td>
+
+        <td width="17%"><code>Ctrl+D</code></td>
+
+        <td>
+          <p>S pomočjo vašega prevoda prevede vhodne datoteke v dokumente v ciljnem jeziku.  Dokumenti se nahajajo v mapi <code>/target</code>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Lastnosti ...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Prikaže dvogovor <a href="projectProperties.html">Lastnosti projekta</a>, v katerem lahko prilagodite imenike in jezike projekta.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Projektne datoteke…</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Odpre oziroma zapre <a href="userInterface.html#Project_Files">okno s projektnimi datotekami</a> (odpre, če je zaprto, zapre pa, če je okno odprto).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Izhod</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Q</code></p>
+        </td>
+
+        <td>
+          <p>Shrani prevod in prekine OmegaT. V kolikor projekta niste ročno shranili, vas program vpraša, če želite projekt res prekiniti.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="EditMenu" id="EditMenu"></a>Uredi</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>Opomba: Funkcij, ki so splošno znane (kopiraj/izreži/prilepi) , se ne kaže izrecno, so pa na razpolago kot bližnjice.  Primer:</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Kopiraj</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>kopira izbrano besedilo v odlagališče.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Izreži</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+X</code></p>
+        </td>
+
+        <td>
+          <p>Izbrano besedilo kopira v odlagališče in ga zbriše.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Prilepi</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+V</code></p>
+        </td>
+
+        <td>
+          <p>Besedilo prilepi iz odlagališča na mesto, kjer se nahaja kazalka.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p><strong>Meni Uredi vsebuje naslednje postavke:</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Razveljavi zadnje dejanje</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Vrne trenutni segment v stanje pred zadnjim korakom pri urejanju.  V kolikor je spremenjeni segment bil potrjen, ta operacija ni več mogoča. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Ponovi zadnje dejanje</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Vrne se nazaj na stanje pred zadnjo razveljavitvijo. V kolikor je spremenjeni segment bil potrjen, ta operacija ni več mogoča. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Zamenjaj z zadetkom</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Zamenja cilj trenutnega segmenta z izbranim zadetkom (zadetek na prvem mestu je izbran sam po sebi)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Vstavi zadetek</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Vstavi trenutno izbrani zadetek na mesto, kjer se trenutno nahaja kazalka. Pri tem funkcija, če se jo izbere, prepiše del ciljnega segmenta.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Zamenjaj s strojnim prevodom</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Zamenja ciljni del segmenta s prevodom Google Translate. Brez posledic, če Google Translate ni aktiven (glejte meni &gt; možnosti spodaj).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Zamenjaj z izvorom</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Prepiše cilj trenutnega segmenta z izvornim besedilom.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Vstavi izvor<br></code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Vstavi izvor na mesto, kjer se trenutno nahaja kazalka.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Izvozi izbiro</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Izvozi trenutno izbiro v datoteko v nadaljnjo obdelavo. V kolikor trenutne izbire ni, se izvorni del odprtega segmenta zapiše v datoteko. Ko uporabnik zapusti OmegaT, se datoteke ne sprazni, tako da se datoteka vede kot se običajno vede odlagališče. Vsebino, ki se izvaža, se zavaja v datoteko <span style=
+          "font-style: italic;">selection.txt</span>, ki se nahaja v mapi uporabnika za nastavitve (glejte&nbsp;<a href=
+          "filesAndDirectories.html#user" target="_blank">datoteke in imeniki</a>).&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>a, Preišči projekt…</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Odpre novo <a href="userInterface.html#Search_Window">Okno za iskanje</a>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Spremeni velikost črk v...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift + F3</code></p>
+
+          <p><code>(glejte besedilo)</code></p>
+        </td>
+
+        <td>
+          <p>Spremeni velikost črk v označenem delu izvornega segmenta v skladu z izbiro (majhne črke, velike črke, naslov). S pomočjo Shift+F3 lahko krožite skozi navedene izbire. Če ni izbranega besedila, bo OmegaT izbrala besedo, ki vsebuje črko neposredno na desni strani kazalke.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Izberi predlog #N</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>((#N je cifra od 1 do 5) - izbere Nti zadetek v oknu z zadetki (zadetek na prvem mestu je izbran sam po sebi) Pomen barv je podrobno opisan v poglavju <a href="userInterface.html#Fuzzy_Matches">Mehki zadetki</a>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="GoToMenu" id="GoToMenu"></a>Skoči na </h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Naslednji neprevedeni segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Premakne urejevalno polje na naslednji segment, ki ga v prevodnem spominu projekta še ni.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Naslednji segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+N</code> ali <code>Enter</code> ali <code>Tab</code></p>
+        </td>
+
+        <td>
+          <p>Premakne urejevalno polje na naslednji segment  Če je trenutni segment zadnji segment v vhodni datoteki, se pri tem odpre prvi segment naslednje datoteke. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Prejšnji segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+P</code> ali <code>Ctrl+Enter</code> ali <code>Ctrl+Tab</code></p>
+        </td>
+
+        <td>
+          <p>Premakne urejevalno polje na predhodni segment. Če je trenutni segment prvi segment v datoteki, se bo program premaknil na zadnji segment v predhodni datoteki.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Številka segmenta...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Odpre segment z navedeno zaporedno številko. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Naprej skozi zgodovino...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT si ukaze, ki jih izvedel, zapomni. S tem ukazom se lahko pomaknete v času naprej skozi segmente, ki ste jih  z "nazaj v zgodovino bili obiskali.&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Nazaj v zgodovino...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>S tem ukazom se lahko pomaknete en ali več segmentov nazaj v času, kasneje se lahko vrnete na trenutno aktualni segment. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ViewMenu" id="ViewMenu"></a>Pogled</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Označi prevedene segmente</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Če se izbiro aktivira, bodo prevedeni segmenti obarvani rumeno. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Označi neprevedene segmente</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Če se izbiro aktivira, bodo neprevedeni segmenti obarvani vijolično.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Prikaži izvorne segmente</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Če se izbiro aktivira, se bo izvorne segmente kazalo, obarvani bodo zeleno. Če te možnosti ne izberete, izvornih segmentov (razen aktualnega) program ne bo kazal.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ToolsMenu" id="ToolsMenu"></a>Orodja</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Preveri oznake</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Preveri formatirane datoteke na manjkajoče oziroma napačno postavljene oznake. Prikazal se bo seznam segmentov, ki vsebujejo napake. Poglavje <a href=
+          "userInterface.html#Tag_Validation">Okno za preverjanje oznak</a> opisuje, kaj je v seznamu videti, poglavje <a href="formattedText.html">Kako delati s formatiranim besedilom</a> pa zakaj tako.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="OptionsMenu" id="OptionsMenu"></a>Možnosti</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Uporabi TAB za pomikanje</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Uporabljaj <code>Tab</code> . kot tipko za potrditev segmenta namesto <code>&lt;Enter&gt;</code>. Ta alternativa pride prav pri nekaterih kitajskih, japonskih in korejskih sistemih za vnos znakov. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Prekinitev vedno potrditi </code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Preden konča z delom, bo program vedno najprej vprašal vas, če sme zaključiti.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td><code>Google Translate</code></td>
+
+        <td></td>
+
+        <td>
+          <p><a href="GoogleTranslate.html">Google Translate</a> aktiven / ni aktiven. V kolikor je aktiven, bo &nbsp;<code>Ctrl+M</code> predlo ga prevod vstavil v ciljni del odprtega segmenta.. Predlog za prevod si lahko naprej ogledati v podokno za  Google Translate</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Pisava…</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Pokaže dvogovor <a href="fontSettings.html">Nastavitve pisave</a>, s katerim lahko nastavite velikost in vrsto pisave, ki se uporablja za prikaz.  Če uporabljate starejši tip računalnika in se vam zdi, da se velikost oken ne spreminja zadosti hitro, lahko poskusite spremeniti pisavo.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Filtri za datoteke…</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Odpre dvogovor <a href="fileFilters.html">Lastnosti projekta</a>, v katerem lahko prilagodite imenike in jezike projekta.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Segmentiranje...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Odpre dvogovor <a href="./segmentation.html">Segmentiranje izvora</a>, v katerem lahko prilagodite način, kako se izvorno besedilo segmentira.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Črkovanje ...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Odpre okno <a href="spellchecker.html">Nastavitve črkovalnika</a>, s katerim se namesti, prilagodi in aktivira črkovalnik.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Vedenje ob urejanju…</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Odpre dvogovor <a href="translationEditing.html">Urejanje prevoda</a> za konfiguriranje.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Obnovi glavno okno</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Obnovi dele glavnega okna OmegaT (urejevalnik, okna za prikaz zadetkov in izrazov ter okno za Google Translate)  v njihovem privzetem stanju. Uporabite to funkcijo, če ste odklopili, premaknili, skrili eno ali več komponent, pa vam zamotane situacije ne uspe več razmotati. Uporabite to možnost tudi po namestitvi nove verzije OmegaT, v kolikor se vam okna nočejo prikazati.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="HelpMenu" id="HelpMenu"></a>Pomoč</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Priročnik za uporabnika... </code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Odpre posebno okno za <a href="userInterface.html#Help_Browser">brskalnik za pomoč</a> , ki kaže tale priročnik. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Vizitka ...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Prikaže avtorske pravice, zahvale in licenčno informacijo.</p>
+        </td>
+      </tr>
+    </tbody>
   </table>
   <hr>
 
@@ -719,7 +764,7 @@
 
   <p>Bližnjice aktivirate s pritiskom na tipko <code><strong>Ctrl</strong></code> in ustrezno črko. V nekaterih primerih uporabljajo bližnjice poleg črk še druge tipke. Zaradi boljše čitljivosti uporabljamo velike črke.</p>
 
-  <p><strong><code>Ctrl</code></strong> uporabljajo Windows, UNIX in izvedenke UNIXa, s tipkovnicami, na katerih se nahaja tipka  <strong><code>Ctrl</code></strong> / <code><strong>Control</strong></code>. Uporabniki Mac računalnikov naj pod tem razumejo in uporabljajo <code><strong>cmd+tipka</strong></code>. Tipka <code><strong>cmd</strong></code> je na tipkovnicah Apple označena z <code><strong>command</strong></code> ali z <strong>jabolkom</strong> </p>
+  <p><strong><code>Ctrl</code></strong> uporabljajo Windows, UNIX in izvedenke UNIXa, s tipkovnicami, na katerih se nahaja tipka  <strong><code>Ctrl</code></strong> / <code><strong>Control</strong></code>. Uporabniki Mac računalnikov naj pod tem razumejo in uporabljajo <code><strong>cmd+tipka</strong></code>. Tipka <code><strong>cmd</strong></code> je na tipkovnicah Apple označena s <code><strong>command</strong></code> ali z <strong>jabolkom</strong> </p>
 
   <ul>
     <li>
@@ -743,339 +788,412 @@
     </li>
   </ul>
 
-  <table border="0" cellpadding="3" cellspacing="0">
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Project_management" id="Project_management"></a>Delo s projekti</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Odpri projekt</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+O</code></p>
-      </td>
-
-      <td>
-        <p>Prikaže dvogovor, s katerim lahko poiščete že obstoječi projekt. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Shrani</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+S</code></p>
-      </td>
-
-      <td>
-        <p>Shrani opravljeno delo v datoteko project_save.tmx, ki se nahaja v projektni mapi /omegat/.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Lastnosti projekta</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+E</code></p>
-      </td>
-
-      <td>
-        <p>Prikaže lastnosti projekta, ki jih po želji lahko modificirate.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Editing" id="Editing"></a>Urejanje</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Razveljavi zadnje dejanje</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+Z</code></p>
-      </td>
-
-      <td>
-        <p>Razveljavi zadnje dejanje oziroma dejanja v cilju trenutnega segmenta</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Ponovi zadnje dejanje</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+Y</code></p>
-      </td>
-
-      <td>
-        <p>Ponovi zadnje dejanje oziroma dejanja, ki se jih je razveljavilo, v cilju trenutnega segmenta</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Izberi predlog #N</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+#N</code></p>
-      </td>
-
-      <td>
-        <p>#N je cifra med 1 in 5. Bližnjica aktivira N<sup>ti</sup> zadetek, ki se nahaja v oknu z zadetki (zadetek na prvem mestu je izbran sam po sebi)</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Zamenjaj z zadetkom</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+R</code></p>
-      </td>
-
-      <td>
-        <p>Zamenja cilj trenutnega segmenta z izbranim zadetkom (zadetek na prvem mestu je izbran sam po sebi)</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Vstavi zadetek</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+I</code></p>
-      </td>
-
-      <td>
-        <p>Vstavi izbrani zadetek na mesto, kjer se v ciljnem besedilu nahaja kazalka (zadetek na prvem mestu je izbran sam po sebi)</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Zamenjaj z izvorom</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+Shift+R</code></p>
-      </td>
-
-      <td>
-        <p>Zamenja cilj trenutnega segmenta z izvornim besedilom.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Vstavi izvor</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+Shift+I</code></p>
-      </td>
-
-      <td>
-        <p>Vstavi izvirno besedilo na mesto, kjer se v ciljnem besedilu nahaja kazalka</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Preišči projekt…</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+F</code></p>
-      </td>
-
-      <td>
-        <p>Prikaže dvogovor, s katerim lahko preiščete že obstoječi projekt. </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Moving_around"></a>Premikanje</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Naslednji neprevedeni segment</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+U</code></p>
-      </td>
-
-      <td>
-        <p>Premakne urejevalno polje na naslednji segment, ki še ni registriran v prevodnem spominu projekta.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Naslednji segment</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+N<br>
-        Enter Return</code></p>
-      </td>
-
-      <td>
-        <p>Premakne urejevalno polje na naslednji segment </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Prejšnji segment</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+P</code></p>
-      </td>
-
-      <td>
-        <p>Premakne urejevalno polje na predhodni segment</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Številka segmenta...</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+J</code></p>
-      </td>
-
-      <td>
-        <p>Premakne aktivni segment na vneseno številko segmenta</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Nazaj v zgodovino...</p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Shift+P</code></p>
-      </td>
-
-      <td>
-        <p>Premakne za en segment nazaj v zgodovino.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Naprej skozi zgodovino...</p>
-      </td>
-
-      <td width="17%">
-        <p><code>Ctrl+Shift+N</code></p>
-      </td>
-
-      <td>
-        <p>Premakne za en segment naprej skozi zgodovino.</p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Reference_windows" id="Reference_windows"></a>Referenčna okna</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Seznam projektnih datotek</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+L</code></p>
-      </td>
-
-      <td>
-        <p>Prikaže seznam datotek v projektu </p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td colspan="3">
-        <hr>
-
-        <h3><a name="Other" id="Other"></a>Drugo</h3>
-      </td>
-    </tr>
-
-    <tr bgcolor="#DDDDDD">
-      <td>
-        <p>Preveri oznake</p>
-      </td>
-
-      <td>
-        <p><code>Ctrl+T</code></p>
-      </td>
-
-      <td>
-        <p>Odpre okno za <a href="userInterface.html#Tag_Validation">preverjanje oznak</a></p>
-      </td>
-    </tr>
-
-    <tr bgcolor="#FFFFFF">
-      <td>
-        <p>Datoteke za pomoč</p>
-      </td>
-
-      <td>
-        <p><code>F1</code></p>
-      </td>
-
-      <td>
-        <p>Pokaže v ločenem oknu pomoč za OmegaT</p>
-      </td>
-    </tr>
-  </table>
-  <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table summary="samo za formatiranje" border="0" cellpadding="3" cellspacing="0">
     <tbody>
-      <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
-        <td style="text-align: center;"><a href="index.html">Domov</a>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Project_management" id="Project_management"></a>Delo s projekti</h3>
         </td>
-        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Odpri projekt</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>Prikaže dvogovor, s katerim lahko poiščete že obstoječi projekt. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Shrani</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Shrani opravljeno delo v datoteko project_save.tmx, ki se nahaja v projektni mapi /omegat/.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Zapri projekt</p>
+        </td>
+
+        <td>
+          <p><code>Shift+Ctrl+W</code></p>
+        </td>
+
+        <td>
+          <p>Zapre odprti projekt</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Ustvari prevedene dokumente</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+D</code></p>
+        </td>
+
+        <td>
+          <p>Shrani prevedene datoteke v ciljnem imeniku projekta.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Lastnosti projekta</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Prikaže lastnosti projekta, ki jih po želji lahko modificirate.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Editing" id="Editing"></a>Urejanje</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Razveljavi zadnje dejanje</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Razveljavi zadnje dejanje oziroma dejanja v cilju trenutnega segmenta</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Ponovi zadnje dejanje</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Ponovi zadnje dejanje oziroma dejanja, ki se jih je razveljavilo, v cilju trenutnega segmenta</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Izberi predlog #N</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>#N je cifra med 1 in 5. Bližnjica aktivira N<sup>ti</sup> zadetek, ki se nahaja v oknu z zadetki (zadetek na prvem mestu je izbran sam po sebi)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Zamenjaj z zadetkom</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Zamenja cilj trenutnega segmenta z izbranim zadetkom (zadetek na prvem mestu je izbran sam po sebi)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Vstavi zadetek</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Vstavi izbrani zadetek na mesto, kjer se v ciljnem besedilu nahaja kazalka (zadetek na prvem mestu je izbran sam po sebi)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Zamenjaj z izvorom</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Zamenja cilj trenutnega segmenta z izvornim besedilom.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Vstavi izvor</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Vstavi izvirno besedilo na mesto, kjer se v ciljnem besedilu nahaja kazalka</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Preišči projekt…</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Prikaže dvogovor, s katerim lahko preiščete že obstoječi projekt. </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>Zamenjaj s strojnim prevodom</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Zamenja ciljni del segmenta s predlogom Google Translate za izvorni del segmenta. Brez posledic, če Google Translate ni aktiven (glejte meni &gt; možnosti &gt; Google Translate).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Moving_around" id="Moving_around"></a>Premikanje</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Naslednji neprevedeni segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Premakne urejevalno polje na naslednji segment, ki še ni registriran v prevodnem spominu projekta.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Naslednji segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+N<br> Enter ali Return&nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Premakne urejevalno polje na naslednji segment </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Prejšnji segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+P</code></p>
+        </td>
+
+        <td>
+          <p>Premakne urejevalno polje na predhodni segment</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Številka segmenta...</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Premakne aktivni segment na vneseno številko segmenta</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Nazaj v zgodovino...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Premakne za en segment nazaj v zgodovino.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Naprej skozi zgodovino...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>Premakne za en segment naprej skozi zgodovino.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Reference_windows" id="Reference_windows"></a>Referenčna okna</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Seznam projektnih datotek</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Prikaže seznam datotek v projektu </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Other" id="Other"></a>Drugo</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Preveri oznake</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Odpre okno za <a href="userInterface.html#Tag_Validation">preverjanje oznak</a></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Izvozi izbiro</p>
+        </td>
+
+        <td>
+          <p><code>Shift+</code><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Izvozi trenutno izbiro oziroma izvorni del, če ni izbire</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Preišči projekt&nbsp;&nbsp; &nbsp;</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F&nbsp;&nbsp; &nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Odpre novo Okno za iskanje</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Datoteke za pomoč</p>
+        </td>
+
+        <td>
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Pokaže v ločenem oknu pomoč za OmegaT</p>
+        </td>
       </tr>
     </tbody>
   </table>
+  <hr>
 
+  <table style="width: 100%;" summary="samo za formatiranje" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Domov</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

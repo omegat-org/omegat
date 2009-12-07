@@ -2,178 +2,197 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Kaj je OmegaT - Priročnik za uporabnika OmegaT 1.8</title>
+
+  <title>Kaj je OmegaT - Priročnik za uporabnika OmegaT 2.0</title>
 </head>
 
 <body>
-  <h1>Kako namestite in uporabljate OmegaT</h1>Opomba: 1.8.X spodaj označuje najnovejšo stabilno verzijo 1.8 OmegaT.<hr>
+  <h1>Kako namestite in uporabljate OmegaT</h1>Opomba: 2.0.X spodaj označuje najnovejšo stabilno verzijo 2.0. OmegaT.<hr>
 
-  <table border="0" cellpadding="3" cellspacing="3">
-    <tr>
-      <td width="50%">
-        <h3><a href="#Linux_users">Uporabniki Linux (Intel) </a></h3>
+  <table summary="samo za formatiranje" border="0" cellpadding="3" cellspacing="3">
+    <tbody>
+      <tr>
+        <td width="50%">
+          <h3><a href="#Linux_users">Uporabniki Linux (Intel) </a></h3>
 
-        <ul>
-          <li>
-            <p><a href="#linux_which">Kateri paket naj naložim ?</a></p>
-          </li>
+          <ul>
+            <li>
+              <p><a href="#linux_which">Kateri paket naj naložim ?</a></p>
+            </li>
 
-          <li>
-            <p><a href="#linux_install">Instalacija</a></p>
-          </li>
+            <li>
+              <p><a href="#linux_install">Instalacija</a></p>
+            </li>
 
-          <li>
-            <p><a href="#linux_menu">Nastavitev OS menija</a></p>
+            <li>
+              <p><a href="#linux_menu">Nastavitev OS menija</a></p>
 
-            <ul>
-              <li>
-                <p><a href="#menu_kde">v KDE.</a></p>
-              </li>
+              <ul>
+                <li>
+                  <p><a href="#menu_kde">v KDE.</a></p>
+                </li>
 
-              <li>
-                <p><a href="#menu_gnome">v GNOME</a></p>
-              </li>
-            </ul>
-          </li>
+                <li>
+                  <p><a href="#menu_gnome">v GNOME</a></p>
+                </li>
+              </ul>
+            </li>
 
-          <li>
-            <p><a href="#linux_running">Kako zagnati OmegaT</a></p>
-          </li>
-        </ul>
-      </td>
+            <li>
+              <p><a href="#linux_running">Kako zagnati OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
 
-      <td width="50%">
-        <h3><a href="#Windows_users">Uporabniki Windows</a></h3>
+        <td width="50%">
+          <h3><a href="#Windows_users">Uporabniki Windows</a></h3>
 
-        <ul>
-          <li>
-            <p><a href="#windows_which">Kateri paket naj naložim ?</a></p>
-          </li>
+          <ul>
+            <li>
+              <p><a href="#windows_which">Kateri paket naj naložim ?</a></p>
+            </li>
 
-          <li>
-            <p><a href="#windows_install">Instalacija</a></p>
-          </li>
+            <li>
+              <p><a href="#windows_install">Instalacija</a></p>
+            </li>
 
-          <li>
-            <p><a href="#windows_menu">Nastavitev menija Windows</a></p>
-          </li>
+            <li>
+              <p><a href="#windows_menu">Nastavitev menija Windows</a></p>
+            </li>
 
-          <li>
-            <p><a href="#windows_running">Kako zagnati OmegaT</a></p>
-          </li>
-        </ul>
-      </td>
-    </tr>
+            <li>
+              <p><a href="#windows_running">Kako zagnati OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="50%">
-        <h3><a href="#MacOSX_users">Uporabniki MacOSX</a></h3>
+      <tr>
+        <td width="50%">
+          <h3><a href="#MacOSX_users">Uporabniki MacOSX</a></h3>
 
-        <ul>
-          <li>
-            <p><a href="#osx_which">Kateri paket naj naložim ?</a></p>
-          </li>
+          <ul>
+            <li>
+              <p><a href="#osx_which">Kateri paket naj naložim ?</a></p>
+            </li>
 
-          <li>
-            <p><a href="#osx_install">Instalacija</a></p>
-          </li>
+            <li>
+              <p><a href="#osx_install">Instalacija</a></p>
+            </li>
 
-          <li>
-            <p><a href="#osx_dock">Nastavitev v doku</a></p>
-          </li>
+            <li>
+              <p><a href="#osx_dock">Nastavitev v doku</a></p>
+            </li>
 
-          <li>
-            <p><a href="#osx_running">Kako zagnati OmegaT</a></p>
-          </li>
-        </ul>
-      </td>
+            <li>
+              <p><a href="#osx_running">Kako zagnati OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
 
-      <td width="50%">
-        <h3><a href="#Other_systems">Drugi sistemi - Solaris SPARC/x86/x64,</a> <a href="#Other_systems">Linux x64/PowerPC, Windows x64</a></h3>
+        <td width="50%">
+          <h3><a href="#Other_systems">Drugi sistemi - Solaris SPARC/x86/x64,</a> <a href="#Other_systems">Linux x64/PowerPC, Windows x64</a></h3>
 
-        <ul>
-          <li>
-            <p><a href="#other_which">Kateri paket naj naložim ?</a></p>
-          </li>
+          <ul>
+            <li>
+              <p><a href="#other_which">Kateri paket naj naložim ?</a></p>
+            </li>
 
-          <li>
-            <p><a href="#other_install">Instalacija</a></p>
-          </li>
+            <li>
+              <p><a href="#other_install">Instalacija</a></p>
+            </li>
 
-          <li>
-            <p><a href="#other_menu">Nastavitev OS menija</a></p>
-          </li>
+            <li>
+              <p><a href="#other_menu">Nastavitev OS menija</a></p>
+            </li>
 
-          <li>
-            <p><a href="#other_running">Kako zagnati OmegaT</a></p>
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </table>
+            <li>
+              <p><a href="#other_running">Kako zagnati OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
 
-  <h3><a href="#command_line">Zagon z ukazne vrstice</a></h3>
+      <tr>
+        <td>
+          <h3><a href="installingAndRunning.html#command_line">Zagon z ukazne vrstice</a></h3>
 
-  <ul>
-    <li>
-      <p><a href="#terminal">Kako odpreti okno za ukazno vrstico</a></p>
-    </li>
+          <ul>
+            <li>
+              <p><a href="installingAndRunning.html#command_line">Kako odpreti okno za ukazno vrstico</a></p>
+            </li>
 
-    <li>
-      <p><a href="#script">Kako spremeniti skript za zagon</a></p>
-    </li>
+            <li>
+              <p><a href="installingAndRunning.html#script">Kako spremeniti skript za zagon</a></p>
+            </li>
 
-    <li>
-      <p><a href="#arguments">Argumenti skripta za zagon</a></p>
-    </li>
-  </ul>
+            <li>
+              <p><a href="installingAndRunning.html#arguments">Argumenti za začetni ukaz </a></p>
+            </li>
+          </ul>
+        </td>
 
-  <h3><a href="#source_build">Kako zgraditi OmegaT iz izvorne kode</a></h3>
+        <td>
+          <h3><a href="installingAndRunning.html#source_build">Kako zgraditi OmegaT iz izvorne kode</a></h3>
 
-  <ul>
-    <li>
-      <p><a href="#build_which">Kateri paket naj naložim ?</a></p>
-    </li>
+          <ul>
+            <li>
+              <p><a href="installingAndRunning.html#build_which">Kateri paket naj naložim ?</a></p>
+            </li>
 
-    <li>
-      <p><a href="#ant">Postopek graditve</a></p>
-    </li>
-  </ul>
+            <li>
+              <p><a href="installingAndRunning.html#ant">Postopek graditve&nbsp;</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Using_WebStart_">Kako uporabljati  Java Web Start</a></h3>
+        </td>
+
+        <td></td>
+      </tr>
+    </tbody>
+  </table><br>
   <hr>
 
   <h2><a name="Linux_users" id="Linux_users"></a>Uporabniki Linux (Intel) </h2>
 
   <h3><a name="linux_which" id="linux_which"></a>Kateri paket naj naložim ?</h3>
 
-  <p>Ali imate implementacijo Jave, ki je kompatibilna z verzijo SUN Java 1.4 JRE?</p>
+  <p>Ali imate verzijo Jave, ki je združljiva z Java JRE SUN 1.5?</p>
 
-  <table border="0" cellpadding="3" cellspacing="3">
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>Da:&nbsp;</strong></p>
-      </td>
+  <table summary="samo za formatiranje" border="0" cellpadding="3" cellspacing="3">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Da:&nbsp;</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Naložite <em>OmegaT_1.8.X_Without_JRE.zip</em>. Ta paket lahko uporabljate na vseh platformah, ki imajo instalirano JRE okolje, ki je kompatibilno z 1.4 JRE.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>prenesite <em> OmegaT_2.0.x_Without_JRE.zip </em> . Ta paket se lahko uporablja na katerikoli platformi, kjer je nameščeno z 1.5 Java JRE združljivo okolje Java.</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="11%">
-        <p><strong>Ne / ne vem</strong></p>
-      </td>
+      <tr>
+        <td width="11%">
+          <p><strong>Ne / ne vem</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Naložite <em>OmegaT_1.8.X_Linux.tar.gz</em>. V tem paketu se nahaja tudi JRE SUN okolje. To JRE okolje drugih implementacij, ki so mogoče že na vašem sistemu, ne bo motilo.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>prenesite <em> OmegaT_2.0.x_Linux.tar.gz </em> . V tem paketu se nahaja tudi JRE SUN okolje. To JRE okolje drugih implementacij, ki so mogoče že na vašem sistemu, ne bo motilo.</p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h3><a name="linux_install" id="linux_install"></a>Instalacija OmegaT </h3>
 
   <p>Da instalirate OmegaT, morate samo razpakirati/raztarati naloženo datoteko. Operacija bo ustvarila v vašem delovnem podimeniku imenik omegat/, v katerem bodo vse datoteke, ki so za delo z OmegaT potrebne . Da raztarate datoteko <em>.tar.gz</em>:</p>
 
-  <p><em>$ tar xf downloaded_file.tar.gz</em></p>
+  <p><em>$ tar xf posneta_datoteka.tar.gz</em></p>
 
   <h3><a name="linux_menu" id="linux_menu"></a>Kako dodati OmegaT vaši verziji KDE ali Gnome</h3>
 
@@ -183,7 +202,7 @@
 
   <ul>
     <li>
-      <p><em>Kontrolni center - namizje - paneli - meniji - uredi K meni - datoteka - nov element/nov podmeni</em></p>
+      <p><em>Kontrolni center - namizje - podokna - meniji - uredi K meni - datoteka - nov element/nov podmeni</em></p>
     </li>
 
     <li>
@@ -213,8 +232,11 @@
     </li>
 
     <li>
-      <p>Vnesite "OmegaT" v polje za ime; V polju "Ukaz" poiščite z gumbom za navigacijo vaš skript za zagon OmegaT (datoteko z imenom OmegaT v razpakiranem imeniku) in ga izberite. Izberite ga. in kliknite V redu.</p>
+      <p>V polje "ime" vtipkajte OmegaT; za polje "ukaz" poiščite z gumbom za navigacijo vaš skript za zagon OmegaT (datoteko z imenom OmegaT v razpakirani mapi) . Izberite ga. in kliknite V redu.</p>
     </li>
+
+    <li>Kliknite na ikono, nato pa na Prebrskaj ... in zakrmarite v  do podmapo /images v mapi za OmegaT. Izberite ikono <span style=
+    "font-style: italic;"> OmegaT.png </span>. GNOME lahko da ne prikaže ikon za datoteke v formatih, ki so na voljo, zato se lahko sprva zdi, da pričakuje datoteko SVG, vendar če je mapa izbrana, se datoteke morajo prikazati, tako da je OmegaT_icon.png mogoče izbrati.</li>
   </ul>
 
   <h3><a name="linux_running" id="linux_running"></a>Kako zagnati OmegaT</h3>
@@ -228,26 +250,28 @@
 
   <p>Ali imate implementacijo Jave, ki je kompatibilna z verzijo SUN Java 1.4 JRE?</p>
 
-  <table border="0" cellpadding="3" cellspacing="0">
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>Da:</strong></p>
-      </td>
+  <table summary="samo za formatiranje" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Da:</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Naložite <em>OmegaT_1.8.X_Windows_without_JRE.exe</em>. Ta paket lahko uporabljate na vseh Windows platformah, ki imajo instalirano JRE okolje, kompatibilno z 1.4 JRE.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>Naložite <em>OmegaT_2.0.X_Windows_without_JRE.exe</em>. Ta paket lahko uporabljate na vseh Windows platformah, ki imajo instalirano JRE okolje, združljivo z 1.5 JRE.</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="11%">
-        <p><strong>Ne / ne vem</strong></p>
-      </td>
+      <tr>
+        <td width="11%">
+          <p><strong>Ne / ne vem</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Naložite <em>OmegaT_1.8.X_Windows.exe</em>. V tem paketu se nahaja tudi JRE SUN okolje. To JRE okolje drugih implementacij, ki so mogoče že na vašem sistemu, ne bo motilo.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>Naložite <em>OmegaT_2.0.X_Windows.exe</em>. V tem paketu se nahaja tudi JRE SUN okolje. To JRE okolje drugih implementacij, ki so mogoče že na vašem sistemu, ne bo motilo.</p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h3><a name="windows_install" id="windows_install"></a>Instalacija OmegaT </h3>
@@ -264,7 +288,7 @@
 
   <p>Ko je aplikacija enkrat nameščena, lahko OmegaT poženete neposredno s klikom na <em>OmegaT.jar</em>, lahko pa tudi neposredno tudi ukazne vrstice.</p>
 
-  <p>Najbolj enostavno pa je izvesti program OmegaT.exe. Zagonske parametre bo v tem primeru program pobral iz datoteke <em>OmegaT.l4J.ini</em>, ki se nahaja v istem podimeniku kot datoteka exe. Datoteko ini seveda lahko po svoje uredite. Naslednja datoteka INI bo rezervirala 1GB spomina, zahtevala francoski jezik za uporabniški vmesnik in za državo Portugalsko:</p>
+  <p>Najbolj enostavno pa je izvesti program OmegaT.exe. Zagonske parametre bo v tem primeru program pobral iz datoteke <em>OmegaT.l4J.ini</em>, ki se nahaja v istem podimeniku kot datoteka exe. Datoteko ini si seveda lahko uredite po svoje. Naslednja datoteka INI bo rezervirala 1GB spomina, zahtevala francoski jezik za uporabniški vmesnik in za državo Portugalsko:</p>
 
   <p><code># OmegaT.exe runtime configuration<br> #<br> # zbrišite '#' pred '-', če želite parameter uporabiti<br> # Memory<br> -Xmx1024M<br> # Language<br> -Duser.language=FR<br> # Country<br> -Duser.country=PT<br> # Anti-aliasing (Java 1.4 and 1.5 only)<br> #-Dswing.aatext=true<br> # Entity expansion for XML (Java 1.4 only)<br> #-DentityExpansionLimit=400000</code></p>
   <hr>
@@ -273,11 +297,13 @@
 
   <h3><a name="osx_which" id="osx_which"></a>Kateri paket naj naložim ?</h3>
 
-  <p>Naložite <em>OmegaT_1.8.X_MacOSX.zip</em>.</p>
+  <p>OmegaT 2.0 za izvajanje potrebuje Java 1.5, Uporabniki Mac OSX 10.4 (Tiger) se morajo pred namestitvijo OmegaT prepričati, da uporabljajo najnovejšo različico Jave. Uporabite "Software Update ..." v meniju Apple, da posodobite svojo različico Java.</p>
+
+  <p>Prenesite <em>OmegaT_2.0.x_Mac.zip</em>.</p>
 
   <h3><a name="osx_install" id="osx_install"></a>Instalacija OmegaT </h3>
 
-  <p>Dvokliknite na <em>OmegaT_1.8.X_MacOSX.zip</em>, da datoteko razpakirate. OSX slika diska (<em>OmegaT.dmg</em>) se bo namestila in prikazali se bosta 2 datoteki:  <em>documentation.html</em> in <em>OmegaT.app</em>. Prekopirajte si ti dve datoteki na ustrezno mesto (npr. Applications, kjer si lahko odprete imenik za OmegaT). Ko ste to enkrat opravili, lahko <em>OmegaT_1.8.X_MacOSX.zip</em> zbrišete.</p>
+  <p>Dvokliknite na <em>OmegaT_2.0.x_Mac.zip</em>, da datoteko razpakirate. S tem ustvarite mapo <em>OmegaT</em>z  ikono  OmegaT. Mapa vsebuje 2 datoteki: <em>documentation.html</em> in <em>OmegaT.app</em>. Kopirajte mapo v ustrezno mapo (npr. Applications). Ko ste to opravili, , lahko datoteko <em> OmegaT_2.0.x_Mac.zip </em> zbrišete.</p>
 
   <h3><a name="osx_dock" id="osx_dock"></a>Kako dodati OmegaT v dok.</h3>
 
@@ -287,59 +313,73 @@
 
   <p>Dvokliknite na <em>OmegaT.app</em> ali pa kliknite OmegaT v doku.</p>
 
-  <p>Če bi želeli spremeniti zagonske parametre za Javo v ukazni vrstici, vam svetujemo, da uporabite paket, ki je na razpolago za "druge sisteme", gl. dalje.  Lahko tudi neposredno spremenite datoteko <em>Info.plist</em>, ki se nahaja v paketu <em>OmegaT.app</em>.</p>
+  <p>V kolikor želite prirediti parametre za zagon Jave, lahko spremenite prednastavitve OmegaT.app  v datoteki <em>Info.plist</em> , ki se nahaja v <em>OmegaT.app/Contents//</em>. Desnokliknite na datoteko "Info.plist" in jo obdelajte z editorjem po vaši izbiri. Spremenite lahko tako del  <em>Properties</em> , kot tudi <em>VMOptions</em> . Če dodajate vrednosti v <em>VMOptions</em>,  uporabite presledek kot ločilo.  Na primer, z <code>-Xmx1024M -Duser.language=ja</code> se bo OmegaT zagnalo s 1024MB spomina in z uporabniškim vmesnikomv japonščini.</p>
+
+  <p>V kolikor zaženete <em>OmegaT.app</em> neposredno,  boste lahko kreirali eno samo instanco <em>OmegaT.app</em>. V kolikor potrebujete večkratne instance  <em>OmegaT.app</em>, uporabite v ta namen datoteko <em>JavaApplicationStub</em>, ki se nahaja v <em>OmegaT.app/ Contents/MacOS/</em>.</p>
+
+  <p>It is not possible to use the Lucene stemmer from the <em>OmegaT.app</em> package. OmegaT morate zagnati s komandno vrstico (gl. dalje). </p>
+
+  <p>Če želite spremeniti zagonske parametre za Javo v ukazni vrstici, pokličite datoteko <em>OmegaT.jar</em> , ki se nahaja v <em>OmegaT.app/Contents/Resources/ Java/</em>. Zagon <em>OmegaT.app</em> s komandne vrstice je enakovreden uporabi "generičnega" paketa za OmegaT. Uporabljaliu boste lahko več instanc OmegaT, poleg tega pa tudi Lucene stemmer. Poglejte si  "Zagon z ukazne vrstice" v nadaljnjem besedilu za dodatne informacije.</p>
+
+  <p>Da pridete do kateregakoli dela paketa <em>OmegaT.app</em>, desnokliknite na <em>OmegaT.app</em> in izberite  "Pokaži vsebino paketa", ali pa skočite z "cd"  neposredno tja z ukazne vrstice.</p>
+
+  <h4>Priboljški Mac OSX</h4>
+
+  <p><em>OmegaT.app</em>  je na razpolago med ponudbami  Storitev Mac OSX. Tako lahko kjerkoli v OmegaT izberete kako besedo in s pomočjo Storitev besedo preverite v vseh aplikacijah v okviru Services, ki nudijo slovarske usluge, kot sta na primer Spotlight ali Google. S pomočjo  AppleScript ali  Automator si lahko tudi pripravite Storitve ali skripte za avtomatizacijo pogostnih procesov.</p>
   <hr>
 
   <h2><a name="Other_systems" id="Other_systems"></a>Drugi sistemi</h2>
 
   <h3><a name="other_which" id="other_which"></a>Kateri paket naj naložim ?</h3>
 
-  <p>OmegaT je v kombinaciji z SUN Java JRE na razpolago za platformi Linux (Intel x86) in Windows. Uporabniki drugih platform (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 itd.) morajo imeti na razpolago na svojem sistemu Java JRE okolje, če hočejo uporabljati OmegaT.</p>
+  <p>OmegaT je v kombinaciji s SUN Java JRE na razpolago za platformi Linux (Intel x86) in Windows. Uporabniki drugih platform (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 itd.) morajo imeti na razpolago na svojem sistemu Java JRE okolje, če hočejo uporabljati OmegaT.</p>
 
-  <p>Ali imate implementacijo Jave, ki je kompatibilna z verzijo SUN Java 1.4 JRE?</p>
+  <p>Ali imate verzijo Jave, ki je združljiva z Java JRE SUN 1.5?</p>
 
-  <table border="0" cellpadding="3" cellspacing="0">
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>Da:</strong></p>
-      </td>
+  <table summary="samo za formatiranje" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Da:</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Naložite <em>OmegaT_1.8.X_Without_JRE.zip</em>. Ta paket lahko uporabljate na vseh platformah, ki imajo instalirano JRE okolje, ki je kompatibilno z 1.4 JRE.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>prenesite <em> OmegaT_2.0.x_Without_JRE.zip </em> . Ta paket se lahko uporablja na katerikoli platformi, kjer je nameščeno z 1.5 Java JRE združljivo okolje Java.</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>Ne vem:</strong></p>
-      </td>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Ne vem:</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>odprite terminal in vtipkajte "java -version". Če je odgovor "command not found" ali kaj podobnega, potem na vašem sistemu precej verjetno ni Jave.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>odprite terminal in vtipkajte "java -version". Če je odgovor "command not found" ali kaj podobnega, potem na vašem sistemu precej verjetno ni Jave.</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>Ne:</strong></p>
-      </td>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Ne:</strong></p>
+        </td>
 
-      <td width="70%">
-        <dl>
-          <dd>priskrbite si Java JRE za svoj sistem (gl. zgoraj) in snemite <em>OmegaT_1.8.X_Without_JRE.zip</em>. SUN nudi JRE okolja za Solaris SPARC/x86 (Java 1.4) in za Linux x64, Solaris x64, Windows x64 (Java 1.5): <strong>http://java.sun.com/products/archive/</strong>. IBM nudi JRE za Linux PowerPC:</dd>
+        <td width="70%">
+          <dl>
+            <dd>priskrbite si Java JRE za svoj sistem (gl. zgoraj) in snemite <em>OmegaT_12.0.x_Without_JRE.zip</em>. SUN nudi JRE okolja za Solaris SPARC/x86 (Java 1.4) in za Linux x64, Solaris x64, Windows x64 (Java 1.5): <strong>http://java.sun.com/products/archive/</strong>. IBM nudi JRE za Linux PowerPC:</dd>
 
-          <dd>
-          <strong>http://www.ibm.com/developerworks/java/jdk/linux/download.html</strong></dd>
+            <dd>
+            <strong>http://www.ibm.com/developerworks/java/jdk/linux/download.html</strong></dd>
 
-          <dd>Sledite navodilom za nameščanje paketa, ki ga potrebujete.</dd>
-        </dl>
-      </td>
-    </tr>
+            <dd>Sledite navodilom za nameščanje paketa, ki ga potrebujete.</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h3><a name="other_install" id="other_install"></a>Instalacija OmegaT </h3>
 
-  <p>Da instalirate OmegaT, morate samo razpakirati/raztarati naloženo datoteko <strong><em>OmegaT_1.8.X_Without_JRE.zip</em></strong>. V delovnem imeniku bo nastal imenik <em>./OmegaT_1.8.X_Without_JRE/</em> , v katerem bodo vse datoteke, ki so za delo z OmegaT potrebne.</p>
+  <p>Da instalirate OmegaT, enostavno samo razpakirajte naloženo datoteko <strong><em>OmegaT_2.0.x_Without_JRE.zip</em></strong>. S tem ustvarite imenik<em>./OmegaT_2.0.x_Without_JRE/</em> v delovnem imeniku, z vsemi datotekami, ki so za OmegaT potrebne.</p>
 
   <h3><a name="other_menu" id="other_menu"></a>Kako si pripraviti udobne bližnjice</h3>
 
@@ -353,8 +393,6 @@
   <h2><a name="command_line" id="command_line"></a>Zagon z ukazne vrstice</h2>
 
   <p>Običajno OmegaT ni potrebno zaganjati z ukazne vrstice. S to metodo pa lahko vplivate na to, kako se bo OmegaT vedel med izvajanjem. OmegaT lahko z ukazne vrstice poženete na dva načina.</p>
-
-  <p><a name="terminal" id="terminal"></a>Uporabnikom Mac OSX, ki bi želeli kontrolirati OmegaT prek ukazne vrstice, svetujemo, da uporabite paket, ki je na razpolago za "druge sisteme", gl. dalje.  Glejte zgoraj.</p>
 
   <h3>Metoda 1: Kako odpreti okno za ukazno vrstico</h3>
 
@@ -373,14 +411,15 @@
 
     <dt>V Mac OSX</dt>
 
-    <dd><em>cd /Applications/OmegaT</em></dd>
+    <dd><em>cd &lt;OmegaT.app
+    location&gt;/OmegaT.app/Contents/Resources/Java/</em></dd>
 
     <dt>V Linux</dt>
 
     <dd><em>cd /usr/local/omegat</em></dd>
   </dl>
 
-  <p>Po tem ukazu smo v mapi, v katerem se nahaja datoteka za izvajanje OmegaT. Z drugi ukazom poženemo OmegaT. Najbolj enostavna oblika za ta ukaz je:</p>
+  <p>Po tem ukazu smo v mapi, v katerem se nahaja datoteka za izvajanje OmegaT. Z drugim ukazom poženemo OmegaT. Najbolj enostavna oblika za ta ukaz je:</p>
 
   <p><em>java -jar OmegaT.jar</em></p>
 
@@ -396,58 +435,84 @@
 
   <h3><a name="arguments" id="arguments"></a>Argumenti skripta za zagon</h3>
 
-  <p>Osnovni ukaz je že opisan v predhodnem besedilu.  Drugi ukaz lahko razširimo z "argumenti".  Dodaja se jih med začetni "<em>java</em>", in zaključni "<em>-jar OmegaT.jar</em>" del. Pomnite, da v Windows lahko svoje preference navedete z datoteko <em>OmegaT.l4J.ini</em></p>
+  <p>Osnovni ukaz je že opisan v predhodnem besedilu.  Drugi ukaz lahko razširimo z "argumenti".  Dodaja se jih med začetni "<em>java</em>", in zaključni "<em>-jar OmegaT.jar</em>" del. Pomnite, da v Windows lahko svoje preference navedete z datoteko <em>OmegaT.l4J.ini</em> Na Mac OSX lahko spremenite v ta namen <em>Info.plist</em>, ki se nahaja v <em>OmegaT.app/Contents/</em></p>
 
-  <p>Tu seznam možnih argumentov. Če vas zanimajo še drugi argumenti za Javo, si jih lahko ogledate, če v terminalnem oknu vtipkate <em>man java</em>. Ukaz <em>man</em> v terminalnem oknu prikaže priročnik za ukaz, v našem primeru priročnik za ukaz java. Pod Windows lahko uporabite za osnovno informacijo o parametrih za Javo ukaz  <em>java -?</em> v MS-DOS oknu.</p>
+  <p>Tu seznam možnih argumentov. Če vas zanimajo še drugi argumenti za Javo, si jih lahko ogledate, če v terminalnem oknu vtipkate <em>man java</em> - <em>man</em> je ukaz za terminalno okno, da vam sistem izpiše priročnik za navedeni ukaz. Pod Windows lahko uporabite za osnovno informacijo o parametrih za Javo ukaz  <em>java -?</em> v MS-DOS oknu.</p>
 
-  <p><b>Elementi uporabniškega vmesnika: </b><em>-Duser.language=XX</em></p>
+  <p><b>Jezik uporabniškega vmesnika:&nbsp;</b> <em>-Duser.language=XX</em></p>
 
-  <table>
-    <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <table summary="samo za formatiranje">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-      <td>
-        <p>Običajno, to je v primeru, da OmegaT zaženete brez argumentov, bo program najprej preveril jezikovno nastavitev uporabnikovega operacijskega sistema. V koliko je za ta jezik uporabniški vmesnik na razpolago, ga OmegaT uporabi. Če je na primer uporabnikov operacijski sistem v slovenščini in če je slovenska lokalizacije OmegaT na razpolago, bo OmegaT uporabil slovenski vmesnik, menije v slovenščini itd. Če OmegaT za jezik operacijskega sistema niso lokalizirali, bo program uporabil angleško različico. To je privzeto vedenje. <br> <br> Jezik za vmesnik pa lahko uporabnik eksplicitno zahteva s pomočjo argumenta "<em>-Duser.language=XX</em>" - OmegaT namesto jezika operacijskega uporabi navedeni jezik . "XX" je koda za zaželeni jezik - SL na primer za slovenščino (gl. prilogo za ISO seznam jezikovnih kod). Da OmegaT poženete s slovenskim vmesnikom (recimo na angleških Windows), boste ukaz razširili takole:<em>java -Duser.language=sl -jar OmegaT.jar</em></p>
-      </td>
-    </tr>
+        <td>
+          <p>Običajno, to je v primeru, da OmegaT zaženete brez argumentov, bo program najprej preveril jezikovno nastavitev uporabnikovega operacijskega sistema. V koliko je za ta jezik uporabniški vmesnik na razpolago, ga OmegaT uporabi. Če je na primer uporabnikov operacijski sistem v slovenščini in če je slovenska lokalizacije OmegaT na razpolago, bo OmegaT uporabil slovenski vmesnik, menije v slovenščini itd. Če OmegaT za jezik operacijskega sistema niso lokalizirali, bo program uporabil angleško različico. To je privzeto vedenje. <br> <br> Jezik za vmesnik pa lahko uporabnik eksplicitno zahteva s pomočjo argumenta "<em>-Duser.language=XX</em>" - OmegaT namesto jezika operacijskega uporabi navedeni jezik . "XX" je koda za zaželeni jezik - SL na primer za slovenščino (gl. prilogo za ISO seznam jezikovnih kod). Da OmegaT poženete s slovenskim vmesnikom (recimo na angleških Windows), boste ukaz razširili takole:</p>
+
+          <p><em>java -Duser.language=sl -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <p><strong>Elementi uporabniškega vmesnika: </strong><em>-Duser.language=XX</em></p>
 
-  <table>
-    <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <p>Poleg jezika lahko tudi določite državo, recimo US, ali UK ali ZA za angleščino, ali pa CN ali TW pri kitajščini. Za pravilno verzijo kratkega vodiča skozi OmegaT potrebujete v nekaterih primerih oboje. Obvezno je oboje tudi v primerih, če obstaja ena sama varianta, na primer pt in BR za brazilsko portugalščino.</p>
 
-      <td>
-        <p>Poleg jezika lahko tudi določite državo, recimo US, ali UK ali ZA za angleščino, ali pa CN ali TW pri kitajščini. Za pravilno verzijo kratkega vodiča skozi OmegaT potrebujete v nekaterih primerih oboje. Obvezno je oboje tudi v primerih, če obstaja ena sama varianta, na primer pt in BR za brazilsko portugalščino.</p>
-      </td>
-    </tr>
+  <table summary="samo za formatiranje">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
   </table>
 
   <p><strong>Font antialiasing:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
 
-  <table>
-    <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <table summary="samo za formatiranje">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-      <td>
-        <p>S tem argumentom se odpravlja prekrivanje pri prikazanih črkah, tako da ima besedilo lepši videz.</p>
-      </td>
-    </tr>
+        <td>
+          <p>S tem argumentom se odpravlja prekrivanje pri prikazanih črkah, tako da ima besedilo lepši videz.</p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
-  <p><strong>Memory assignment:</strong><em>&nbsp;-XmxZZM</em></p>
+  <p><strong>Font antialiasing (Java 6 onwards)
+  :</strong><em>&nbsp;-</em><span style=
+  "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
 
-  <table>
-    <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <table summary="samo za formatiranje">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-      <td>
-        <p>S tem ukazom date OmegaT več spomina na razpolago. Privzeta vrednost je 256 MB, tako da se manj kot toliko ne splača navajati. "ZZ" je količina spomina v megabajtih. Če hočemo OmegaT dati na razpolago 1024 MB (1 gigabajt) spomina, je treba vesti naslednjo vrstico: <em>java -Xmx1024M -jar OmegaT.jar</em></p>
+        <td>
+          <p>&nbsp;Možne vrednosti za "XX" so "false", "on", "gasp" in "lcd". Za uporabnike Linuxa bosta lahko da možnosti  "on" ali "lcd",  odvisno od vrste in velikosti izbrane pisave, izboljšali njen videz. </p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-        <p>Argumente se lahko kombinira: če želimo uporabiti vse navedene argumente, bo potem ukazna vrstica videti kot sledi:<br> <em>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -jar OmegaT.jar</em></p>
-      </td>
-    </tr>
+  <p><strong>Spomin na razpolago:</strong><em>&nbsp;-XmxZZM</em></p>
+
+  <table summary="samo za formatiranje">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>S tem ukazom daste OmegaT več spomina na razpolago. Privzeta vrednost je 256 MB, tako da se manj kot toliko ne splača navajati. "ZZ" je količina spomina v megabajtih. Če hočemo OmegaT dati na razpolago 1024 MB (1 gigabajt) spomina, je treba vnesti naslednjo vrstico:</p>
+
+          <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+
+          <p>Argumente se lahko kombinira: če želimo uporabiti vse navedene argumente, bo potem ukazna vrstica videti kot sledi:<br> <em>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
   </table>
   <hr>
 
@@ -456,11 +521,11 @@
   <h3><a name="build_which" id="build_which"></a>Kateri paket naj naložim ?</h3>
 
   <dl>
-    <dt>Naložite O<em>OmegaT_1.8.X_Source.zip</em></dt>
+    <dt>Naložite <em>OmegaT_2.0.x_Source.zip</em></dt>
 
-    <dd>Ta paket vsebuje vse izvorne datoteke za objavljeno verzijo in ga je mogoče uporabljati na vseh platformah z Java 1.4 JDK ali kompatibilnim sistemom Java. Potrebovali boste tudi priročni program za zgraditev OmegaT. Razvojna ekipa OmegaT uporablja <em>ant</em> (http://ant.apache.org)</dd>
+    <dd>Ta paket vsebuje vse izvorne datoteke za objavljeno verzijo in ga je mogoče uporabljati na vseh platformah z Java 1.5 JDK ali kompatibilnim sistemom Java. Potrebovali boste tudi priročni program za zgraditev OmegaT. Razvojna ekipa OmegaT uporablja <em>ant</em> (http://ant.apache.org)</dd>
 
-    <dt>Za nadzor verzij uporablja OmegaT SubVersion. Najnovejše verzije OmegaT v razvoju so vam na razpolago prek SVN strežnika:</dt>
+    <dt>Za nadzor verzij uporablja OmegaT Subversion. Najnovejše verzije OmegaT v razvoju so vam na razpolago prek SVN strežnika:</dt>
 
     <dd><em>https://omegat.svn.sourceforge.net/svnroot/omegat/trunk</em></dd>
   </dl>
@@ -468,7 +533,7 @@
   <h3><a name="ant" id="ant"></a>Kako zgraditi OmegaT</h3>
 
   <dl>
-    <dd>Razpakirajte datoteko <em>OmegaT_1.8.X_Source.zip</em> in vnesite imenik <em>OmegaT_1.8.X_Source</em> ali pa v SVN navedite <em>./omegat/</em> kot ciljni imenik. Prepričajte se, da se v tem imeniku nahaja <em>build.xml</em> Na ukazni vrstici nato vtipkajte:</dd>
+    <dd>Razpakirajte datoteko <em>OmegaT_2.0.x_Source.zip</em> in vnesite imenik <em>OmegaT_2.0.x_Source</em> ali pa v SVN navedite <em>./omegat/</em> kot ciljni imenik za prevzeto kodo. Prepričajte se, da se v tem imeniku nahaja <em>build.xml</em> Na ukazni vrstici nato vtipkajte:</dd>
   </dl>
 
   <p><em>$ ant jar release</em></p>
@@ -476,17 +541,37 @@
   <dl>
     <dd>S tem ukazom boste v mapi <em>./dist/</em> sestavili kompletno distribucijo OmegaT, ki bo vsebovala vse za delo z OmegaT potrebne datoteke.</dd>
   </dl>
+  <hr style="width: 100%; height: 2px;">
+
+  <h2><a name="Using_WebStart_" id="Using_WebStart_"></a>Kako uporabljati  Java Web Start</h2>
+
+  <dl>
+    <dt>S pomočjo tehnologije Java Web Start (sestavni del Jave od verzije 1.5 dalje), je mogoče  z enim samim klikom  razpošiljati samostojne aplikacije v Javi po mreži. Java Web Start zagotavlja, da imate vedno na razpolago najnovejšo verzijo aplikacije, ki se jo razpošilja na ta način, pa tudi vedno pravilno verzijo <a href="http://java.sun.com/j2se/desktopjava/jre/index.jsp" title=
+    "Java Runtime Environment (JRE)">Java Runtime Environment (JRE)</a>. Preden prvič zaženete OmegaT s pomočjo Java Web Start, si v svoj brskalnik naložite naslednjo povezavo:</dt>
+
+    <dd><span style="font-style: italic;">&nbsp;&nbsp;&nbsp; http://omegat.sourceforge.net/webstart/OmegaT.jnlp</span><br> <br> Snemite datoteko <span style="font-style: italic;">OmegaT.jnlp</span> in nato kliknite nanjo. Med nameščanje lahko - odvisno od vašega operacijskega sistema - pride enega ali več varnostnih opozoril. Certifikat je samo-podpisan z "Didier Briel". Postopki, ki jih s to verzijo dovolite na svojem računalniku  (govora je o 
+"neomejenem dostopu do računalnika") , so isti postopki, ki bodo opisani kasneje v tem poglavju: gre za pravico dostopa do vašega diska. Kasnejši kliki na <span style=
+    "font-style: italic;">OmegaT.jnlp</span>
+ bodo namestili namestili novejšo verzijo, v kolikor jo bodo našli, nato pa zagnali OmegaT. Ko je začetna namestitev opravljena, lahko seveda <span style=
+    "font-style: italic;">OmegaT.jnlp</span> uporabljate tudi, če niste online. <span style="font-weight: bold;"><br> <br> Zasebnost:</span> OmegaT Java Web Start ne shranjuje nobenih podatkov izven vašega računalnika. Aplikacija se odvija edinole na vašem sistemu. Vaši dokumenti in prevodni spomini ostajajo na vašem računalniku in projekt OmegaT do vašega dela ali podatkov nima nikakršnega dostopa.<br> <br> Pomnite, da boste v primeru, da potrebujete parametre za zagon, morali uporabiti normalno namestitev (gl. zgoraj). </dd>
+  </dl>
+
+  <dl>
+    <dt><br></dt>
+  </dl>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table summary="samo za formatiranje" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
-        <td style="text-align: center;"><a href="index.html">Domov</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Domov</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

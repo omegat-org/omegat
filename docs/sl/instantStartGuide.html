@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title> Kratek vodič skozi OmegaT - Priročnik za uporabnika OmegaT 1.8</title>
+
+  <title> Kratek vodič skozi OmegaT - Priročnik za uporabnika OmegaT 2.0</title>
 </head>
 
 <body>
@@ -28,11 +29,11 @@
     </li>
 
     <li>
-      <p><a href="#tm">Kako uporabljati prevodni spomin in zadetke iz geslovnikov</a></p>
+      <p><a href="#tm">Kako uporabljati prevodni spomin, geslovnike in slovarje</a></p>
     </li>
 
     <li>
-      <p><a href="#searches">Kako iščete</a></p>
+      <p><a href="#searches">Kako lahko iščete in uporabljate Google Translate</a></p>
     </li>
 
     <li>
@@ -73,17 +74,19 @@
 
   <p>- v ta namen v meniju izberite <strong>Projekt → Nov..</strong>.</p>
 
-  <p> Zakrmarite do mape, v katero bi želeli shraniti projektne datoteke, in vnesite ime za prevajalni projekt. Ime, ki ga vnesete, bo tudi ime projekta in projektne mape;  v to mapo in njegove podimenike se bo shranjevalo vse s prevajanjem povezane datoteke.</p>
+  <p> Zakrmarite do mape, v katero bi želeli shraniti projektne datoteke, in vnesite ime za prevajalni projekt. Ime, ki ga vnesete, bo tudi ime projekta in projektnega imenika, v katerega se bo shranjevalo vse s prevajanjem zvezane datoteke.</p>
 
   <p>OmegaT vas bo z dvogovorom spodaj pozval, da potrdite ali pa spremenite projektne mape, ki jih bo ustvaril.</p>
 
-  <p align="center"><a name="graphics2" id="graphics2"></a><img src=
-  "images/NewProject.png" name="graphics3" alt="Okno za projektne nastavitve" align=
-  "bottom" width="398" height="428" border="0" id="graphics3"></p>
+  <p align="center"><a name="graphics2" id="graphics2"></a></p>
 
-  <p>Mesti za podimenike lahko potrdite, vendar prej preverite, ali <a href="languages.html">kodiranji</a> za izvirni in ciljni jezik ustrezata. V spustnem seznamu izberite kodo jezika (2 črki) ali kodo jezika in države (2 + 2 črki), lahko pa ju vnesete ročno (držite se vzorca z 2 črkama). Zapomnite si, kje se nahaja mapa Target (s prevedenimi datotekami). Če želite, da OmegaT namesto po odstavkih segmentiranje izvede po povedih, znova preverite <a href="./segmentation.html">pravila za segmentiranje.</a></p>
+  <p><img style="width: 362px; height: 476px;" alt="novi dvogovor za projekt "
+  title="novi dvogovor za projekt " src="images/NewProject.png"></p>
+
+  <p>Mesti za podimenike lahko potrdite, vendar prej preverite, ali <a href="languages.html">kodiranji</a> za izvirni in ciljni jezik ustrezata. V spustnem seznamu izberite kodo jezika (2 črki) ali kodo jezika in države (2 + 2 črki), lahko pa ju vnesete ročno (koda za jezik ima lahko 2 ali 3 črke). Zapomnite si, kje se nahaja mapa Target (s prevedenimi datotekami). Če želite, da OmegaT namesto po odstavkih segmentiranje izvede po povedih, znova preverite <a href="./segmentation.html">pravila za segmentiranje.</a></p>
 
   <p>Ko kliknete V redu in s tem potrdite nastavitve projekta, vas OmegaT pozove, da izberete izvirne dokumente za uvoz. Uvažate lahko posamezne datoteke ali celotne hierarhije (imenike in podimenike). Če uvozite napačne dokumente ali preveč dokumentov, jih lahko enostavno odstranite iz mape z izvirnimi datotekami  (na primer s pomočjo sistemskega upravitelja za datoteke).</p>
+
   <p>Seznam datotek, ki se jih bo prevajalo, lahko preverite v oknu <strong>Projektne datoteke</strong> (Meni:  <strong>Projekt → Projektne datoteke...</strong>, v kolikor se ne prikaže sam od sebe). Če ste primorani spremeniti vsebino imenika Source, ne pozabite pred nadaljnjim delom ponovno naložiti projekta (Meni:  <strong>Projekt → Ponovno naloži</strong>). OmegaT samodejno odpre prvo datoteko na seznamu. Pomnite, da lahko OmegaT prevaja datoteke v spodaj navedenih <a href="filesToTranslate.html">formatih samo</a>, če ustrezajo vzorcem v <a href="fileFilters.html">datotečnih filtrih</a>. Druge datoteke bo pri odpiranju prezrl.</p>
 
   <ul>
@@ -96,7 +99,7 @@
     </li>
 
     <li>
-      <p>enojezični .po</p>
+      <p>.po</p>
     </li>
 
     <li>
@@ -126,13 +129,33 @@
     <li>
       <p>Okapi enojezični XLIFF</p>
     </li>
+
+    <li>
+      <p> QuarkXPress CopyFlowGold</p>
+    </li>
+
+    <li>
+      <p>datoteke za podnaslove (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p> podporne datoteke za  Android</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
   </ul>
 
   <h3><a name="segments" id="segments"></a>Prevedite segmente drugega za drugim</h3>
 
   <p>Ko določite projekt in datoteke, ki jih je treba prevesti, OmegaT odpre prvo datoteko na seznamu.</p>
 
-  <p>Aktivni segment je označen zeleno; pod njim je v "ciljnem polju" kopija izvirnega besedila. (V tem trenutku so vsa besedila, ki se nahajajo izven ciljnega polja zavarovana in jih ne morete spreminjati ) Med oznaki <code>&lt;segment 0001&gt;</code> in <code>&lt;end segment&gt;</code> morate čez izvorno besedilo vtipkati svoj prevod.  Pritisnite na "<strong>ENTER</strong>", da skočite na naslednji segment. Opomba:</p>
+  <p>Aktivni segment je označen zeleno, pod njim je v "ciljnem polju" kopija izvirnega besedila. (V tem trenutku so vsa besedila, ki se nahajajo izven ciljnega polja zavarovana in jih ne morete spreminjati ) Med oznaki <code>&lt;segment 0001&gt;</code> in <code>&lt;end segment&gt;</code> morate čez izvorno besedilo vtipkati svoj prevod.  Pritisnite na "<strong>ENTER</strong>", da skočite na naslednji segment. Opomba:</p>
 
   <ul>
     <li>
@@ -150,15 +173,15 @@
 
   <p>Ko pritisnete na "<strong>ENTER</strong>", se pripeti par stvari, ki jih ni videti :  OmegaT doda oba dela segmenta (izvorni del in njegov prevod) v prevodni spomin, poleg tega pa sam od sebe prevede še ostale identične segmente, ki jih je najti v ostalih datotekah projekta Hkrati preišče prevodni spomin in slovar ter zbere predloge za naslednji neprevedeni segment.</p>
 
-  <h3><a name="tm" id="tm"></a>Kako uporabljati prevodni spomin in zadetke iz geslovnikov</h3>
+  <h3><a name="tm" id="tm"></a>Kako uporabljati prevodni spomin, geslovnike in slovarje&nbsp;</h3>
 
   <h3><a name="tm_matches" id="tm_matches"></a>Zadetki iz spomina prevodov</h3>
 
-  <p>Če OmegaT v prevodnem spominu za naslednji segment naleti na nepopolna ujemanja (30 % ali več, glej priročnik), jih bo navedel v prikazovalniku zadetkov. Prikazovalnik zadetkov samodejno označi prvi zadetek na seznamu.</p>
+  <p>Če OmegaT za naslednji segment v prevodnih spominih, ki so na razpolago,   naleti na nepopolna ujemanja (30 % ali več, glej priročnik), jih bo navedel v prikazovalniku zadetkov. Prikazovalnik zadetkov samodejno označi prvi zadetek na seznamu.</p>
 
   <p><br>
   <br></p><img src="images/MatchesPane.png" name="graphics4" alt="Podokno za zadetke"
-  align="left" width="469" height="289" border="0" id="graphics4"><br clear=
+  id="graphics4" align="left" border="0" height="289" width="469"><br clear=
   "left">
 
   <p><br>
@@ -191,17 +214,17 @@
   <p>(OmegaT lahko tudi naročite, naj vsak zadetek, ki je nad nastavljenim odstotkom skladanja, sam od sebe vstavi v ciljno polje, ko odpre nov segment. To možnost imate na razpolago v <strong>Možnosti → <a href=
   "translationEditing.html">Vedenje ob urejanju</a>..</strong>)</p>
 
-  <h3><a name="gloss_matches" id="gloss_matches"></a>Zadetki iz slovarjev</h3>
+  <h3><a name="gloss_matches" id="gloss_matches"></a>Zadetki iz geslovnikov in slovarjev</h3>
 
-  <p>100% zadetki v <a href="glossaries.html">geslovnikih</a> vam bodo na razpolago v prikazovalniku slovarjev. Bližnjic za njihovo uporabo ni.</p>
+  <p>Zadetki v <a href="glossaries.html">geslovnikih</a> in slovarjih, ki ste jih dodali  projektu, vam bodo na razpolago v podoknih za slovarje in za geslovnike. &nbsp;</p>
 
   <h3><a name="searches" id="searches"></a>Kako iščete</h3>
 
   <p>OmegaT nudi krepko zalogo funkcij za <a href="searches.html">iskanje</a>. Odprite iskalno okno z <code>Ctrl+F</code> in vtipkajte besedo ali izraz, ki ga iščete, v polje "Išči:". Lahko tudi v ciljnem polju aktivnega segmenta izberete besede ali izraz, potem pa pritisnete na <code>Ctrl+F</code>. V tem primeru bo program iskani izraz ali besedo sam vnesel v polje "Išči".</p>
 
-  <h3><a name="create_trans" id="create_trans"></a>Ustvarite prevedene dokumente</h3>
+  <h3>Kako uporabljati Google Translate</h3>Če je <a href="GoogleTranslate.html">Google Translate</a> aktiviran in podokno zanj odprto, boste v njem samodejno dobili predlog za aktivni segment.  S <code>Ctrl+M</code> ga lahko vstavite v ciljni segment.<h3><a name="create_trans" id="create_trans"></a>Ustvarite prevedene dokumente</h3>
 
-  <p>Ko prevedete vse segmente (po potrebi tudi prej), OmegaT na podlagi prevodov, ki jih je shranil v spomin, obnovi vse izhodne dokumente. Da ustvarite ciljne dokumente, izberite v glavnem meniju <strong>Projekt -&gt; Ustvari prevedene dokumente</strong>. OmegaT sestavi prevode vseh datotek v projektnem imeniku Source, ne glede na to, ali so prevedene v celoti. Delne ali v celoti prevedene datoteke nato shrani v projektni imenik Target. Prevajanje zaključite s pregledom ciljnih datotek v ustrezni aplikaciji (brskalniku, urejevalniku besedil...) , da se prepričate, da je vsebina in oblikovanje prevoda v redu. Po potrebi lahko znova odprete OmegaT in opravite potrebne spremembe; ne pozabite ponovno ustvariti izhodnih datotek.</p>
+  <p>Ko prevedete vse segmente (po potrebi tudi prej), OmegaT na podlagi prevodov, ki jih je shranil v spomin, obnovi vse izhodne dokumente. Da ustvarite ciljne dokumente, izberite v glavnem meniju <strong>Projekt -&gt; Ustvari prevedene dokumente</strong>. OmegaT sestavi prevode vseh datotek v projektnem imeniku Source, ne glede na to, ali so prevedene v celoti. Delne ali v celoti prevedene datoteke nato shrani v projektni imenik Target. Prevajanje zaključite s pregledom ciljnih datotek v ustrezni aplikaciji (brskalniku, urejevalniku besedil...) , da se prepričate, da je vsebina in oblikovanje prevoda v redu. Po potrebi lahko znova odprete OmegaT, opravite potrebne spremembe in znova ustvarite izhodne datoteke.</p>
   <hr>
 
   <h2><a name="tags" id="tags"></a>Kako se lotiti besedila z oznakami</h2>
@@ -215,22 +238,24 @@
   <p>V teh primerih so oznake označene z barvo, da jih je laže prepoznati; OmegaT jih ne bo posebej poudarjal. Oznake <font color="#0000FF">modre</font> barve bo OmegaT ignoriral, ker v celoti obkrožajo segment. Oznake, poudarjene <font color=
   "#008000">zeleno</font>, mora OmegaT obdelati, ker se nahajajo znotraj segmenta. Tukaj je primer za segmentiranje v HTML:</p>
 
-  <p><code><font color="#0000FF">&lt;p&gt;</font>Pisavo za prikaz je mogoče izbrati v dvogovoru </code> <code><font color=
-  "#008000">&lt;b&gt;</font>Pisava za prikaz<font color=
-  "#008000">&lt;/b&gt;</font> dialog. Dvogovor odprete prek </code> <code><font color=
-  "#008000">&lt;i&gt;</font>Nastavitve<font color="#008000">&lt;/i&gt;</font> →</code> <code><font color="#008000">&lt;i&gt;</font>Pisava za prikaz....<font color="#008000">&lt;/i&gt;</font> V dvogovoru lahko spremenite vrsto in velikost pisave.<font color=
+  <p><code><font color="#0000FF">&lt;p&gt;</font>A different display font can
+  be selected via the<font color="#008000">&lt;b&gt;</font>Display
+  Font<font color="#008000">&lt;/b&gt;</font>dialog. Open it via
+  the<font color="#008000">&lt;i&gt;</font>Settings<font color=
+  "#008000">&lt;/i&gt;</font> →<font color="#008000">&lt;i&gt;</font>Display
+  Font...<font color="#008000">&lt;/i&gt;</font>menu item. The font type and
+  size can be changed from the dialog.<font color=
   "#0000FF">&lt;/p&gt;</font></code></p>
 
-  <p><br>
-  <br></p>
+  <p><br></p>
 
-  <p>OmegaT bo ta stavek (preveden v Afrikanščino!) prikazal takole:</p>
+  <p>OmegaT bo ta stavek (preveden v afrikanščino!) prikazal takole:</p>
 
   <p><br>
   <br></p>
 
   <p><img src="images/tagged_segment.png" name="graphics6" alt="segment z oznakami"
-  align="bottom" width="592" height="150" border="0" id="graphics6"></p>
+  id="graphics6" align="bottom" border="0" height="150" width="592"></p>
 
   <p><br>
   <br></p>
@@ -238,26 +263,28 @@
   <p>Ko OmegaT ustvari ciljno besedilo, bo HTML videti takole:</p>
 
   <p><img src="images/tagged_segment_target.png" name="graphics5" alt=
-  "segment z oznakami - ciljna verzija" align="bottom" width="592" height="122" border="0"
-  id="graphics5"></p>
+  "segment z oznakami - ciljna verzija" id="graphics5" align="bottom" border="0" height=
+  "122" width="592"></p>
 
   <h3><a name="tag_verif" id="tag_verif"></a>Preverjanje oznak</h3>
 
   <p>OmegaT napačnih oznak v ciljnem dokumentu ne zazna samodejno. Preden prevod predate stranki, torej preverite, ali je besedilo brez napak. Uporabite v ta namen točko v meniju točko <strong>Orodja → <a href=
-  "formattedText.html#tag_validation">Preveri oznake </a></strong>. Prikazal se bo seznam segmentov, kjer prihaja do neskladja med oznakami v izvirnem besedilu in v prevodu. Kliknite na številko segmenta. V oknu urejevalnika se bo prikazal segment, ki vsebuje napake, tako da boste lahko oznake preverili in po potrebi popravili.</p>
+  "formattedText.html#tag_validation">Preveri oznake </a></strong>. Prikazal se bo seznam segmentov, kjer prihaja do neskladja med oznakami v izvirnem besedilu in v prevodu. Kliknite na številko segmenta. V oknu urejevalnika se bo prikazal segment, ki vsebuje napake, tako da boste lahko oznake preverili in po potrebi popravili. Pritisnite na <span style="font-weight: bold;">Enter</span>, da popravljen segment potrdite, nato pa ponovno preverite popravek s tem, da pritisnete znova na <span style="font-weight: bold;">Ctrl+T,</span></p>
 
   <p>V nekaterih primerah lahko napake v oznaka tudi preprečijo, da bi prevod sploh lahko odprli. Preverite zato naprej oznake, preden začnete z ustvarjanjem ciljnih datotek. Na koncu dokument in njegovo oblikovanje še dodatno preverite v urejevalniku ali v pregledovalniku za to vrsto dokumenta.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" summary="samo za formatiranje" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a> </td>
-        <td style="text-align: center;"><a href="index.html">Domov</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Kazalo</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Pravni poduk</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Domov</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Kazalo</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

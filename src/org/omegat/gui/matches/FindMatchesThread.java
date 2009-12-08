@@ -226,7 +226,7 @@ public class FindMatchesThread extends Thread {
                 strTokensStem, candTokens);
 
         // check if we have chance by first percentage only
-        if (!haveChanceToAdd(similarityStem, 101, 101)) {
+        if (!haveChanceToAdd(similarityStem, Integer.MAX_VALUE, Integer.MAX_VALUE)) {
             return;
         }
 
@@ -237,7 +237,7 @@ public class FindMatchesThread extends Thread {
                 strTokensNoStem, candTokensNoStem);
 
         // check if we have chance by first and second percentages
-        if (!haveChanceToAdd(similarityStem, similarityNoStem, 101)) {
+        if (!haveChanceToAdd(similarityStem, similarityNoStem, Integer.MAX_VALUE)) {
             return;
         }
 
@@ -269,6 +269,10 @@ public class FindMatchesThread extends Thread {
      */
     protected boolean haveChanceToAdd(final int simStem, final int simNoStem,
             final int simExactly) {
+        if (simStem < OConsts.FUZZY_MATCH_THRESHOLD
+                && simNoStem < OConsts.FUZZY_MATCH_THRESHOLD) {
+            return false;
+        }
         if (result.size() < OConsts.MAX_NEAR_STRINGS) {
             return true;
         }

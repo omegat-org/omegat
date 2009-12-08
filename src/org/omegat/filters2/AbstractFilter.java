@@ -355,19 +355,24 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected void processFile(File inFile, String inEncoding, File outFile, String outEncoding) throws IOException, TranslationException
     {
-    	BufferedReader reader = createReader(inFile, inEncoding);
-    	BufferedWriter writer;
-    	
-        if (outFile != null) {
-            writer = createWriter(outFile, outEncoding);
-        } else {
-            writer = new NullBufferedWriter();
-        }
+        BufferedReader reader = createReader(inFile, inEncoding);
+        try {
+            BufferedWriter writer;
 
-    	processFile(reader, writer);
-        
-        reader.close();
-        writer.close();
+            if (outFile != null) {
+                writer = createWriter(outFile, outEncoding);
+            } else {
+                writer = new NullBufferedWriter();
+            }
+
+            try {
+                processFile(reader, writer);
+            } finally {
+                writer.close();
+            }
+        } finally {
+            reader.close();
+        }
     }
     
     public void parseFile(File inFile, String inEncoding,

@@ -292,9 +292,6 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
             return;
 
         // set up the menu
-        if (e.getButton()==MouseEvent.BUTTON1 && e.getClickCount()>1) {
-            mouseDoubleClick(clickedItem, e.getPoint());
-        }
         if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
             mouseRightClick(clickedItem, e.getPoint());
         }
@@ -302,10 +299,6 @@ public class MatchesTextArea extends JTextPane implements IMatcher {
     
     private void mouseOneClick(final int clickedItem, final Point clickedPoint) {
         // show colored source segment
-    }
-
-    private void mouseDoubleClick(final int clickedItem, final Point clickedPoint) {
-        setActiveMatch(clickedItem);
     }
     
     private void mouseRightClick(final int clickedItem, final Point clickedPoint) {

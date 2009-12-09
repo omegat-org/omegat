@@ -2,7 +2,7 @@
  OmegaT 2.1.1
 ----------------------------------------------------------------------
   6 Enhancements
-  3 Bugfixes
+  5 Bugfixes
 ----------------------------------------------------------------------
 2.1.1 vs. 2.1.0
 
@@ -37,6 +37,9 @@
 as a repetition in Match Statistics
 
   - Wrong spell checker display if word split to several lines
+
+  - PO filter doubles up end-of-line spaces and newlines
+  http://sourceforge.net/support/tracker.php?aid=2910616
 
 ----------------------------------------------------------------------
  OmegaT 2.1.0

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.1
 ----------------------------------------------------------------------
-  7 Enhancements
+  8 Enhancements
   5 Bugfixes
 ----------------------------------------------------------------------
 2.1.1 vs. 2.1.0
@@ -26,6 +26,9 @@
 
    - Dated TUs in TM
   http://sourceforge.net/support/tracker.php?aid=1546824
+
+  - Automatic bundle aligner in console mode
+  http://sourceforge.net/support/tracker.php?aid=2911321
 
   Bug Fixes:
 

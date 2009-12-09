@@ -68,7 +68,7 @@ public abstract class ParseEntry implements IParseCallback {
      *            flag for fuzzy translation. If a translation is fuzzy, it is 
      *            not added to the projects TMX, but it is added to the 
      *            generated 'reference' TMX, a special TMX that is used as 
-     *            extra refrence during translation.
+     *            extra reference during translation.
      * @param comment
      *            entry's comment, if format supports it
      * @param filter
@@ -76,33 +76,13 @@ public abstract class ParseEntry implements IParseCallback {
      */
     public void addEntry(String id, String source, String translation,
             boolean isFuzzy, String comment, IFilter filter) {
-        // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
-        // this is reversed at the end of the method
-        // fix for bug 1462566
-        boolean crlf = source.indexOf("\r\n") > 0;
-        if (crlf)
-            source = source.replace("\\r\\n", "\n");
-        boolean cr = source.indexOf("\r") > 0;
-        if (cr)
-            source = source.replace("\\r", "\n");
+        ParseEntryResult tmp = new ParseEntryResult();
 
-        // Some special space handling: skip leading and trailing whitespace
-        // and non-breaking-space
-        int len = source.length();
-        int b = 0;
-        while (b < len
-                && (Character.isWhitespace(source.charAt(b)) || source.charAt(b) == '\u00A0')) {
-            b++;
+        source = stripSomeChars(source, tmp);
+        if (translation != null) {
+            translation = stripSomeChars(translation, tmp);
         }
-
-        int e = len - 1;
-        while (e >= b
-                && (Character.isWhitespace(source.charAt(e)) || source.charAt(e) == '\u00A0')) {
-            e--;
-        }
-
-        source = StaticUtils.fixChars(source.substring(b, e + 1));
-
+       
         String segTranslation = isFuzzy ? null : translation;
         
         if (m_config.isSentenceSegmentingEnabled()) {
@@ -123,7 +103,7 @@ public abstract class ParseEntry implements IParseCallback {
         } else {
             addSegment(id, (short) 0, source, segTranslation, comment);
         }
-        if (translation != null) {
+        if (translation != null) {            
             // Add systematically the TU as a legacy TMX
             String tmxSource;
             if (isFuzzy) {
@@ -157,4 +137,71 @@ public abstract class ParseEntry implements IParseCallback {
      */
     protected abstract void addSegment(String id, short segmentIndex,
             String segmentSource, String segmentTranslation, String comment);
+
+    /**
+     * Strip some chars for represent string in UI.
+     * 
+     * @param src
+     *            source string to strip chars
+     * @return result
+     */
+    static String stripSomeChars(final String src, final ParseEntryResult per) {
+        String r = src;
+
+        /**
+         * AB: we need to find begin/end spaces first, then replace \r,\n chars.
+         * Since \r,\n are spaces, we will not need to store spaces in buffer,
+         * but we can just remember spaces count at the begin and at the end,
+         * then restore spaces from original string.
+         */
+
+        /*
+         * Some special space handling: skip leading and trailing whitespace and
+         * non-breaking-space
+         */
+        int len = r.length();
+        int b = 0;
+        while (b < len
+                && (Character.isWhitespace(r.charAt(b)) || r.charAt(b) == '\u00A0')) {
+            b++;
+        }
+        per.spacesAtBegin = b;
+
+        int pos = len - 1;
+        int e = 0;
+        while (pos >= b
+                && (Character.isWhitespace(r.charAt(pos)) || r.charAt(pos) == '\u00A0')) {
+            pos--;
+            e++;
+        }
+        per.spacesAtEnd = e;
+
+        r = r.substring(b, pos);
+
+        /*
+         * Replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF
+         * (\n). This is reversed on create translation. (fix for bug 1462566)
+         * We don't need to remember crlf/cr presents on parse, but only on
+         * translate.
+         */
+        per.crlf = r.indexOf("\r\n") > 0;
+        if (per.crlf)
+            r = r.replace("\\r\\n", "\n");
+        per.cr = r.indexOf("\r") > 0;
+        if (per.cr)
+            r = r.replace("\\r", "\n");
+
+        r = StaticUtils.fixChars(r);
+
+        return r;
+    }
+
+    /**
+     * Storage for results of entry parsing, i.e. cr/crlf flags, spaces counts
+     * on the begin and end.
+     */
+    public static class ParseEntryResult {
+        public boolean crlf, cr;
+        int spacesAtBegin, spacesAtEnd;
+    }
 }

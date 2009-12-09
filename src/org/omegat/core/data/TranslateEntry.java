@@ -31,7 +31,6 @@ import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.Language;
-import org.omegat.util.StaticUtils;
 
 /**
  * Base class for entry translation.
@@ -54,43 +53,12 @@ public abstract class TranslateEntry implements ITranslateCallback {
      * @param source
      *            source text
      */
-    public String getTranslation(String id, String source) {
-        // replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF (\n)
-        // this is reversed at the end of the method
-        // fix for bug 1462566
-        boolean crlf = source.indexOf("\r\n") > 0;
-        if (crlf)
-            source = source.replace("\\r\\n", "\n");
-        boolean cr = source.indexOf("\r") > 0;
-        if (cr)
-            source = source.replace("\\r", "\n");
+    public String getTranslation(final String id, final String origSource) {
+        ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
 
-        // Some special space handling: skip leading and trailing whitespace
-        // and non-breaking-space
-        int len = source.length();
-        int b = 0;
-        StringBuffer bs = new StringBuffer();
-        while (b < len
-                && (Character.isWhitespace(source.charAt(b)) || source
-                        .charAt(b) == '\u00A0')) {
-            bs.append(source.charAt(b));
-            b++;
-        }
-
-        int e = len - 1;
-        StringBuffer es = new StringBuffer();
-        while (e >= b
-                && (Character.isWhitespace(source.charAt(e)) || source
-                        .charAt(e) == '\u00A0')) {
-            es.append(source.charAt(e));
-            e--;
-        }
-        es.reverse();
-
-        source = StaticUtils.fixChars(source.substring(b, e + 1));
-
+        final String source = ParseEntry.stripSomeChars(origSource, spr);
+       
         StringBuffer res = new StringBuffer();
-        res.append(bs);
 
         if (m_config.isSentenceSegmentingEnabled()) {
             List<StringBuffer> spaces = new ArrayList<StringBuffer>();
@@ -105,22 +73,30 @@ public abstract class TranslateEntry implements ITranslateCallback {
             }
             res.append(Segmenter.glue(sourceLang, targetLang, segments, spaces,
                     brules));
-        } else
+        } else {
             res.append(getSegmentTranslation(id, 0, source));
-
-        res.append(es);
+        }
 
         // replacing all occurrences of LF (\n) by either single CR (\r) or CRLF
         // (\r\n)
         // this is a reversal of the process at the beginning of this method
         // fix for bug 1462566
-        String result = res.toString();
-        if (crlf)
-            result = result.replace("\\n", "\r\n");
-        else if (cr)
-            result = result.replace("\\n", "\r");
+        String r = res.toString();
+        if (spr.crlf) {
+            r = r.replace("\\n", "\r\n");
+        } else if (spr.cr) {
+            r = r.replace("\\n", "\r");
+        }
 
-        return result;
+        if (spr.spacesAtBegin > 0) {
+            r = origSource.substring(0, spr.spacesAtBegin) + r;
+        }
+
+        if (spr.spacesAtEnd > 0) {
+            r = r + origSource.substring(source.length() - spr.spacesAtEnd);
+        }
+
+        return r;
     }
 
     protected abstract String getSegmentTranslation(String id,

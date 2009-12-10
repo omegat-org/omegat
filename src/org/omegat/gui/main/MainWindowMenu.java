@@ -193,6 +193,8 @@ public class MainWindowMenu implements ActionListener {
                 .add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
         viewMenu
                 .add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
+        viewMenu
+                .add(viewDisplayModificationInfoCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_MODIFICATION_INFO"));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
@@ -251,6 +253,7 @@ public class MainWindowMenu implements ActionListener {
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
 
         viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplaySegmentSources());
+        viewDisplayModificationInfoCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplayModificationInfo());
         
         updateEditOverwriteMachineTranslationMenuItem();
     }
@@ -437,6 +440,7 @@ public class MainWindowMenu implements ActionListener {
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem upperCaseMenuItem;
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
+    JCheckBoxMenuItem viewDisplayModificationInfoCheckBoxMenuItem;
     JMenuItem viewFileListMenuItem;
     JCheckBoxMenuItem viewMarkTranslatedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkUntranslatedSegmentsCheckBoxMenuItem;

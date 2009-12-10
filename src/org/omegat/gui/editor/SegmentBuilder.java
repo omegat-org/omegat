@@ -25,6 +25,7 @@
 package org.omegat.gui.editor;
 
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.Locale;
 
 import javax.swing.text.AttributeSet;
@@ -54,6 +55,7 @@ public class SegmentBuilder {
     protected static final AttributeSet ATTR_TRANS_TRANSLATED = Styles.TRANSLATED;
     protected static final AttributeSet ATTR_TRANS_UNTRANSLATED = Styles.UNTRANSLATED;
     protected static final AttributeSet ATTR_ACTIVE = new SimpleAttributeSet();
+    protected static final AttributeSet ATTR_INFO = Styles.ITALIC;
     public static final String SEGMENT_MARK_ATTRIBUTE = "SEGMENT_MARK_ATTRIBUTE";
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
@@ -161,6 +163,9 @@ public class SegmentBuilder {
     private void createActiveSegmentElement(TransEntry trans)
             throws BadLocationException {
 
+        if (settings.isDisplayModificationInfo()) {
+            addModificationInfoPart(trans, ATTR_INFO);
+        }
         addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
 
         String activeText;
@@ -326,27 +331,46 @@ public class SegmentBuilder {
 
     /**
      * Add inactive segment part, without segment begin/end marks.
-     * 
-     * @param parent
-     *            parent element
-     * @param text
-     *            segment part text
-     * @param attrs
-     *            attributes
-     * @param langIsRTL
-     * @return true if language is RTL
+     * @param isSource
+     * @param text segment part text
+     * @param attrs attributes
+     * @throws BadLocationException
      */
     private void addInactiveSegPart(boolean isSource, String text,
             AttributeSet attrs) throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = isSource ? controller.sourceLangIsRTL
                 : controller.targetLangIsRTL;
-        insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL-
-        // embedding
+        insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
         insert(text, attrs);
         insert("\u202c", null); // end of embedding
         insert("\n", null);
         setAttributes(prevOffset, offset, isSource);
+    }
+
+    /**
+     * 
+     * @param changeId Author ID of last change
+     * @param changeDate
+     * @param attrs
+     * @throws BadLocationException
+     * @todo implement better
+     */
+    private void addModificationInfoPart(TransEntry trans, AttributeSet attrs) throws BadLocationException {
+        if (trans == null ) return;
+
+        Date cD = new Date(trans.changeDate);
+        //TODO: I18N and undeprecated date string.
+        String text = "Last modified by "+(trans.changeId==null?"unknown":trans.changeId)
+            +(trans.changeDate!=0?" at "+cD.toLocaleString():"");
+
+        int prevOffset = offset;
+        boolean rtl = localeIsRTL();
+        insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
+        insert(text, attrs);
+        insert("\u202c", null); // end of embedding
+        insert("\n", null);
+        setAttributes(prevOffset, offset, false);
     }
 
     /**
@@ -409,17 +433,7 @@ public class SegmentBuilder {
         String text = startMark ? OConsts.segmentStartString
                 : OConsts.segmentEndString;
 
-        boolean markIsRTL;
-        String language = Locale.getDefault().getLanguage().toLowerCase();
-        /*
-         * Hardcode for future - if somebody will translate marks to RTL
-         * language.
-         */
-        if ("some_RTL_language_code".equals(language)) {
-            markIsRTL = true;
-        } else {
-            markIsRTL = false;
-        }
+        boolean markIsRTL = localeIsRTL();
 
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
@@ -433,5 +447,24 @@ public class SegmentBuilder {
         text = (markIsRTL ? '\u202b' : '\u202a') + text + '\u202c';
 
         return text;
+    }
+
+    /**
+     * Returns whether the current locale is a Right-to-Left language or not. 
+     * @return true when current locale is a RTL language, false if not.
+     */
+    private boolean localeIsRTL() {
+        boolean markIsRTL;
+        String language = Locale.getDefault().getLanguage().toLowerCase();
+        /*
+         * Hardcode for future - if somebody will translate marks to RTL
+         * language.
+         */
+        if ("some_RTL_language_code".equals(language)) {
+            markIsRTL = true;
+        } else {
+            markIsRTL = false;
+        }
+        return markIsRTL;
     }
 }

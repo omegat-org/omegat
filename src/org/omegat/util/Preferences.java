@@ -160,6 +160,10 @@ public class Preferences
      * display the segment sources
      */
     public static final String DISPLAY_SEGMENT_SOURCES = "display_segment_sources";     // NOI18N
+    /**
+     * display modification info (author and modification date)
+     */
+    public static final String DISPLAY_MODIFICATION_INFO = "display_modification_info";     // NOI18N
     
     /** 
      * Version of file filters. 

@@ -58,6 +58,8 @@ public final class Styles
         
     /** Disabled, i.e grayed out text. */
     public final static MutableAttributeSet DISABLED;
+    /** Italic text. */
+    public final static MutableAttributeSet ITALIC;
     
     /** 
      * Extra text in fuzzy match that is not there in source segment.
@@ -82,6 +84,8 @@ public final class Styles
                 uidefaults.getColor("TextPane.foreground"));                    // NOI18N
         BOLD = new SimpleAttributeSet();
         StyleConstants.setBold(BOLD, true);
+        ITALIC = new SimpleAttributeSet();
+        StyleConstants.setItalic(ITALIC, true);
         GREEN = new SimpleAttributeSet();
         StyleConstants.setBold(GREEN, true);
         StyleConstants.setBackground(GREEN, new Color(192, 255, 192));
@@ -102,7 +106,7 @@ public final class Styles
     
     /**
      * return a new MutableAttributeSet with the background color of the base and
-     * all other attributes of toApply (currently: foreground, bold, underline)
+     * all other attributes of toApply (currently: foreground, bold, underline, italic)
      */
     public static MutableAttributeSet applyStyles(AttributeSet base, AttributeSet toApply) {
         MutableAttributeSet result = new SimpleAttributeSet();
@@ -117,7 +121,8 @@ public final class Styles
         StyleConstants.setForeground(result, StyleConstants.getForeground(toApply));
         StyleConstants.setBold(result, StyleConstants.isBold(toApply));
         StyleConstants.setUnderline(result, StyleConstants.isUnderline(toApply));
-        
+        StyleConstants.setItalic(result, StyleConstants.isItalic(toApply));
+
         return result;
 }
 }

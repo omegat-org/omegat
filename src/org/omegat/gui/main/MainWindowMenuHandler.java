@@ -456,6 +456,10 @@ public class MainWindowMenuHandler {
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings().setDisplaySegmentSources(mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
     }
+    public void viewDisplayModificationInfoCheckBoxMenuItemActionPerformed() {
+        Core.getEditor().getSettings().setDisplayModificationInfo(mainWindow.menu.viewDisplayModificationInfoCheckBoxMenuItem.isSelected());
+    }
+
 
     public void toolsValidateTagsMenuItemActionPerformed() {
         Core.getTagValidation().validateTags();

@@ -45,6 +45,7 @@ public class EditorSettings {
     private boolean markTranslated;
     private boolean markUntranslated;
     private boolean displaySegmentSources;
+    private boolean displayModificationInfo;
     private boolean autoSpellChecking;
 
     protected EditorSettings(final EditorController parent) {
@@ -58,6 +59,8 @@ public class EditorSettings {
                 .isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences
                 .isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
+        displayModificationInfo = Preferences
+                .isPreference(Preferences.DISPLAY_MODIFICATION_INFO);
         autoSpellChecking = Preferences
                 .isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
     }
@@ -147,6 +150,27 @@ public class EditorSettings {
             parent.activateEntry();
         }
     }
+
+    /** display the modification information or not */
+    public boolean isDisplayModificationInfo() {
+        return displayModificationInfo;
+    }
+
+    public void setDisplayModificationInfo(boolean displayModificationInfo) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.displayModificationInfo = displayModificationInfo;
+        Preferences.setPreference(Preferences.DISPLAY_MODIFICATION_INFO,
+                displayModificationInfo);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
 
     /** need to check spell or not */
     public boolean isAutoSpellChecking() {

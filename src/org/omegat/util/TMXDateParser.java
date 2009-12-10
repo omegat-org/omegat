@@ -95,50 +95,15 @@ public class TMXDateParser {
     public static String getTMXDate(Date date) {
         return tmxDateFormat.format(date);
     }
-
-
-    /* TEST TEST TEST */
-
-
-    public static void test(String tmxDate) {
-        System.out.println("In: string "+tmxDate);
-        try {
-            Date date = parse(tmxDate);
-            System.out.println("Interpreted as: " + date.toString() + " [" + date.getTime()
-                    + "]");
-            System.out.println("Printed as " + getTMXDate(date));
-        } catch (ParseException ex) {
-            System.err.println(tmxDate + " is invalid at offset "+ex.getErrorOffset());
-            System.err.println(ex.getMessage());
-        }
-        System.out.println("----------------------------------");
+    
+    /**
+     * Returns the string representation of the date according to the preferred 
+     * TMX date format 'YYYYMMDDThhmmssZ'
+     * 
+     * @param date unix timestamp (ms since 1970)
+     * @return a string representing the date in the ISO 8601 compatible format 'YYYYMMDDThhmmssZ'
+     */
+    public static String getTMXDate(long date) {
+        return tmxDateFormat.format(new Date(date));
     }
-
-    public static void test(Date date) {
-        String tmxDate = null;
-        try {
-            System.out.println("In: date " + date.toString() + " [" + date.getTime()
-                    + "]");
-            tmxDate = getTMXDate(date);
-            System.out.println("Printed as: " + tmxDate);
-            date = parse(tmxDate);
-            System.out.println("Interpreted as " + date.toString() + " [" + date.getTime()
-                    + "]");
-        } catch (ParseException ex) {
-            System.err.println(tmxDate + " is invalid  at offset "+ex.getErrorOffset());
-            System.err.println(ex.getMessage());
-        }
-        System.out.println("----------------------------------");
-    }
-
-    public static void main(String args[]) {
-        test("19971116T192059Z"); //normal time
-        test("19970716T192059Z"); //daylight savings time.
-        test("19971116T19205Zs"); //hmm, no error, interpreted as '19971116T192005Z' +'s'. should we add a check or not? I think not useful.
-        test("19971116T");//error, too short
-        String x=null;
-        test(x); //error
-        test(new Date()); //ok.
-    }
-
 }

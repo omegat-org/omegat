@@ -24,8 +24,6 @@
 
 package org.omegat.core.data;
 
-import java.util.Date;
-
 /**
  * Storage for translation information, like translation, author, date,
  * comments, etc.
@@ -39,7 +37,7 @@ public class TransEntry {
     /**
      * Specifies the date of the last modification of the element.
      */
-    public Date changeDate;
+    public long changeDate;
     /**
      * Change identifier - Specifies the identifier of the user who modified the element last.
      */
@@ -49,7 +47,13 @@ public class TransEntry {
         this.translation = translation;
     }
 
-    public TransEntry(String translation, String changeId, Date changeDate) {
+    /**
+     * Creates a new transentry with the properties set to the given values. 
+     * @param translation The translation
+     * @param changeId The author of the last modification
+     * @param changeDate The date (as unix timestamp) of the last modification.
+     */
+    public TransEntry(String translation, String changeId, long changeDate) {
         this.translation = translation;
         this.changeId = changeId;
         this.changeDate = changeDate;

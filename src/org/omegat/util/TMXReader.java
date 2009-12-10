@@ -82,7 +82,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         m_srcList           = new ArrayList<String>();
         m_tarList           = new ArrayList<String>();
         m_tarChangeIdList   = new ArrayList<String>(); //list of changeIds (authors) for the target segments
-        m_tarChangeDateList = new ArrayList<Date>(); ////list of change dates for the target segments
+        m_tarChangeDateList = new ArrayList<Long>(); ////list of change dates for the target segments
         m_properties        = new HashMap<String, String>();
         m_variantLanguages  = new HashSet<String>();
         this.sourceLang = sourceLanguage;
@@ -135,11 +135,11 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         else
             return m_tarChangeIdList.get(n);
     }
-    /** Returns changeDate of target segment #n */
-    public Date getTargetChangeDate(int n) 
+    /** Returns changeDate (unix timestamp) of target segment #n. Returns 0 if not set or #n invalid. */
+    public long getTargetChangeDate(int n) 
     {
         if (n < 0 || n >= numSegments())
-            return null;
+            return 0;
         else
             return m_tarChangeDateList.get(n);
     }
@@ -409,7 +409,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     ///////////////////////////////////////////////////////////////////////////
 
     /** Collects a segment from TMX. Performs upgrades of a segment if needed. */
-    private void storeSegment(String source, String translation, String changeId, Date changeDate)
+    private void storeSegment(String source, String translation, String changeId, long changeDate)
     {
         source = upgradeSegment(source);
         translation = upgradeSegment(translation);
@@ -939,13 +939,17 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
         String changeId =target.changeId;
         if (changeId == null) changeId = target.creationId;
-        Date changeDate = null;
-        try {
-            changeDate = TMXDateParser.parse(target.changeDate);
-        } catch (ParseException e) {
+        long changeDate=0;
+        if (target.changeDate != null) {
             try {
-                changeDate = TMXDateParser.parse(target.creationDate);
-            } catch (ParseException e2) {}
+                changeDate = TMXDateParser.parse(target.changeDate).getTime();
+            } catch (ParseException e) {
+                if (target.creationDate != null) {
+                    try {
+                        changeDate = TMXDateParser.parse(target.creationDate).getTime();
+                    } catch (ParseException e2) {}
+                }
+            }
         }
         // store the source & target segment
         storeSegment(source.text.toString(), target.text.toString(), changeId, changeDate);
@@ -1159,7 +1163,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     private List<String>    m_srcList;
     private List<String>    m_tarList;
     private List<String>    m_tarChangeIdList;
-    private List<Date>      m_tarChangeDateList;
+    private List<Long>      m_tarChangeDateList;
     private Map<String,String>     m_properties;       // Map<String, String> of TMX properties, specified in the header
     private Set<String>     m_variantLanguages; // Set of (user) acceptable variant languages
     private Language sourceLang, targetLang;

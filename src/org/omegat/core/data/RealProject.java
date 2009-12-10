@@ -669,7 +669,7 @@ public class RealProject implements IProject
 
             if (isProject) {
                 String changeId = tmx.getTargetChangeId(i);
-                Date changeDate = tmx.getTargetChangeDate(i);
+                long changeDate = tmx.getTargetChangeDate(i);
                 if (exist.contains(src)) {
                     /* Entry found in source files - translation. */
 
@@ -753,7 +753,7 @@ public class RealProject implements IProject
             translations.remove(entry.getSrcText());
         } else {
             String changeId = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name"));
-            translations.put(entry.getSrcText(), new TransEntry(trans, changeId, new Date()));
+            translations.put(entry.getSrcText(), new TransEntry(trans, changeId, new Date().getTime()));
         }
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation
                 : null;

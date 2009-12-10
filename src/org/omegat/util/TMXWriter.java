@@ -116,7 +116,7 @@ public class TMXWriter {
                 target = makeLevelTwo(target);
             }
             String changeIdPropertyString = (transEntry.changeId != null && !"".equals(transEntry.changeId) ? " changeid=\""+transEntry.changeId+"\"" : "");
-            String changeDatePropertyString = (transEntry.changeDate != null ? " changedate=\""+TMXDateParser.getTMXDate(transEntry.changeDate)+"\"" : "");
+            String changeDatePropertyString = (transEntry.changeDate != 0 ? " changedate=\""+TMXDateParser.getTMXDate(transEntry.changeDate)+"\"" : "");
             out.println("    <tu>");
             out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">");
             out.println("        <seg>" + source + "</seg>");

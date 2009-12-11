@@ -88,10 +88,16 @@ public class Document3 extends DefaultStyledDocument {
      * Returns editor's font. Only bold style may be changed.
      */
     public Font getFont(AttributeSet attr) {
-        if (StyleConstants.isBold(attr)) {
-            return controller.boldFont;
+        if (!StyleConstants.isBold(attr) && !StyleConstants.isItalic(attr)) {
+            return controller.font;
+        } else if (StyleConstants.isBold(attr) && !StyleConstants.isItalic(attr)) {
+            return controller.fontb;
+        } else if (!StyleConstants.isBold(attr) && StyleConstants.isItalic(attr)) {
+            return controller.fonti;
+        } else if (StyleConstants.isBold(attr) && StyleConstants.isItalic(attr)) {
+            return controller.fontbi;
         } else {
-            return controller.baseFont;
+            return null;
         }
     }
 

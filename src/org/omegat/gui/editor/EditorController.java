@@ -44,7 +44,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Utilities;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
@@ -117,7 +116,7 @@ public class EditorController implements IEditor {
 
     protected final SpellCheckerThread spellCheckerThread;
 
-    protected Font baseFont, boldFont;
+    protected Font font, fontb, fonti, fontbi;
 
     private enum SHOW_TYPE {
         INTRO, EMPTY_PROJECT, FIRST_ENTRY, NO_CHANGE
@@ -205,7 +204,7 @@ public class EditorController implements IEditor {
                         editor.repaint();
 
                         // fonts have changed
-                        emptyProjectPane.setFont(baseFont);
+                        emptyProjectPane.setFont(font);
                     }
                 });
 
@@ -264,8 +263,10 @@ public class EditorController implements IEditor {
     }
 
     private void setFont(final Font font) {
-        this.baseFont = font;
-        this.boldFont = new Font(font.getFontName(), Font.BOLD, font.getSize());
+        this.font = font;
+        this.fontb = new Font(font.getFontName(), Font.BOLD, font.getSize());
+        this.fonti = new Font(font.getFontName(), Font.ITALIC, font.getSize());
+        this.fontbi = new Font(font.getFontName(), Font.BOLD | Font.ITALIC, font.getSize());
 
         editor.setFont(font);
     }

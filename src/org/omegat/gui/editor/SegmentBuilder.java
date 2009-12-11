@@ -24,7 +24,9 @@
 
 package org.omegat.gui.editor;
 
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -37,7 +39,9 @@ import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -59,6 +63,8 @@ public class SegmentBuilder {
     public static final String SEGMENT_MARK_ATTRIBUTE = "SEGMENT_MARK_ATTRIBUTE";
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
+    private static final DateFormat dateFormat = DateFormat.getDateInstance();
+    private static final DateFormat timeFormat = DateFormat.getTimeInstance();
 
     final SourceTextEntry ste;
     final int segmentNumberInProject;
@@ -349,21 +355,30 @@ public class SegmentBuilder {
     }
 
     /**
-     * 
-     * @param changeId Author ID of last change
-     * @param changeDate
-     * @param attrs
+     * Adds a string that displays the modification info (author and date). 
+     * Does nothing if the translation entry is null.
+     * @param trans The translation entry (can be null)
+     * @param attrs Font attributes
      * @throws BadLocationException
-     * @todo implement better
      */
     private void addModificationInfoPart(TransEntry trans, AttributeSet attrs) throws BadLocationException {
         if (trans == null ) return;
 
-        Date cD = new Date(trans.changeDate);
-        //TODO: I18N and undeprecated date string.
-        String text = "Last modified by "+(trans.changeId==null?"unknown":trans.changeId)
-            +(trans.changeDate!=0?" at "+cD.toLocaleString():"");
-
+        String author = (trans.changeId==null?OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR"):trans.changeId);
+        String template;
+        String text;
+        if (trans.changeDate != 0) {
+            template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR_DATE");
+            Date changeDate = new Date(trans.changeDate);
+            String changeDateString = dateFormat.format(changeDate);
+            String changeTimeString = timeFormat.format(changeDate);
+            Object[] args = {author, changeDateString, changeTimeString};
+            text = StaticUtils.format(template, args);
+        } else {
+            template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR");
+            Object[] args = {author};
+            text = StaticUtils.format(template, args);
+        }
         int prevOffset = offset;
         boolean rtl = localeIsRTL();
         insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
@@ -375,20 +390,9 @@ public class SegmentBuilder {
 
     /**
      * Add active segment part, with segment begin/end marks.
-     * 
-     * @param parent
-     *            parent element
-     * @param text
-     *            segment part text
-     * @param attrs
-     *            attributes
-     * @param markBeg
-     *            text of begin mark
-     * @param markEnd
-     *            text of end mark
-     * @param langIsRTL
-     *            true if language is RTL
-     * @return segment part element
+     * @param text segment part text
+     * @param attrs attributes
+     * @throws BadLocationException
      */
     private void addActiveSegPart(String text, AttributeSet attrs)
             throws BadLocationException {
@@ -450,7 +454,7 @@ public class SegmentBuilder {
     }
 
     /**
-     * Returns whether the current locale is a Right-to-Left language or not. 
+     * Returns whether the current locale is a Right-to-Left language or not.
      * @return true when current locale is a RTL language, false if not.
      */
     private boolean localeIsRTL() {

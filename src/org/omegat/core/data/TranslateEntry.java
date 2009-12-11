@@ -93,7 +93,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         }
 
         if (spr.spacesAtEnd > 0) {
-            r = r + origSource.substring(source.length() - spr.spacesAtEnd);
+            r = r + origSource.substring(origSource.length() - spr.spacesAtEnd);
         }
 
         return r;

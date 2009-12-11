@@ -192,10 +192,10 @@ public abstract class ParseEntry implements IParseCallback {
          */
         per.crlf = r.indexOf("\r\n") > 0;
         if (per.crlf)
-            r = r.replace("\\r\\n", "\n");
+            r = r.replace("\r\n", "\n");
         per.cr = r.indexOf("\r") > 0;
         if (per.cr)
-            r = r.replace("\\r", "\n");
+            r = r.replace("\r", "\n");
 
         r = StaticUtils.fixChars(r);
 

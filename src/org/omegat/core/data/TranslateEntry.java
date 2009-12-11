@@ -83,9 +83,9 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // fix for bug 1462566
         String r = res.toString();
         if (spr.crlf) {
-            r = r.replace("\\n", "\r\n");
+            r = r.replace("\n", "\r\n");
         } else if (spr.cr) {
-            r = r.replace("\\n", "\r");
+            r = r.replace("\n", "\r");
         }
 
         if (spr.spacesAtBegin > 0) {

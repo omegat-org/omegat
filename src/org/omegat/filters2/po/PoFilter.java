@@ -31,7 +31,6 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -61,13 +60,14 @@ public class PoFilter extends AbstractFilter {
             .compile("#,.* fuzzy.*");
     protected static Pattern COMMENT_NOWRAP = Pattern.compile("#,.* no-wrap.*");
     protected static Pattern MSG_ID = Pattern
-            .compile("msgid(_plural)? \"(.*)\"");
+            .compile("msgid(_plural)?\\s+\"(.*)\"");
     protected static Pattern MSG_STR = Pattern
-            .compile("msgstr(\\[[0-9]+\\])? \"(.*)\"");
+            .compile("msgstr(\\[[0-9]+\\])?\\s+\"(.*)\"");
+    protected static Pattern MSG_CTX = Pattern.compile("msgctxt\\s+\"(.*)\"");
     protected static Pattern MSG_OTHER = Pattern.compile("\"(.*)\"");
 
     enum MODE {
-        MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL
+        MSGID, MSGSTR, MSGID_PLURAL, MSGSTR_PLURAL, MSGCTX
     };
 
     private StringBuilder[] sources, targets;
@@ -207,9 +207,19 @@ public class PoFilter extends AbstractFilter {
                 }
                 continue;
             }
+            
+            if ((m = MSG_CTX.matcher(s)).matches()) {
+                currentMode = MODE.MSGCTX;
+                eol(s);
+
+                continue;
+            }
 
             if ((m = MSG_OTHER.matcher(s)).matches()) {
                 String text = m.group(1);
+                if (currentMode == null) {
+                    throw new IOException("Invalid file format");
+                }
                 switch (currentMode) {
                 case MSGID:
                     sources[0].append(text);
@@ -224,6 +234,8 @@ public class PoFilter extends AbstractFilter {
                     break;
                 case MSGSTR_PLURAL:
                     targets[currentPlural].append(text);
+                    break;
+                case MSGCTX:
                     break;
                 }
                 continue;

@@ -40,6 +40,7 @@ import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.TagValidationOptionsDialog;
+import org.omegat.gui.dialogs.TeamOptionsDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filters2.FiltersCustomizer;
@@ -585,6 +586,14 @@ public class MainWindowMenuHandler {
      */
     public void optionsTagValidationMenuItemActionPerformed() {
         new TagValidationOptionsDialog(mainWindow).setVisible(true);
+    }
+    
+    /**
+     * Displays the team options dialog to allow customizing the diverse
+     * team options.
+     */
+    public void optionsTeamMenuItemActionPerformed() {
+        new TeamOptionsDialog(mainWindow).setVisible(true);
     }
 
     /**

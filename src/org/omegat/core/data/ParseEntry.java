@@ -38,6 +38,7 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.util.Language;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 
 /**
  * Process one entry on parse source file.
@@ -76,6 +77,11 @@ public abstract class ParseEntry implements IParseCallback {
      */
     public void addEntry(String id, String source, String translation,
             boolean isFuzzy, String comment, IFilter filter) {
+        if (StringUtil.isEmpty(source)) {
+            // empty string - not need to save
+            return;
+        }
+        
         ParseEntryResult tmp = new ParseEntryResult();
 
         source = stripSomeChars(source, tmp);
@@ -176,7 +182,7 @@ public abstract class ParseEntry implements IParseCallback {
         }
         per.spacesAtEnd = e;
 
-        r = r.substring(b, pos);
+        r = r.substring(b, pos + 1);
 
         /*
          * Replacing all occurrences of single CR (\r) or CRLF (\r\n) by LF

@@ -753,7 +753,7 @@ public class RealProject implements IProject
             translations.remove(entry.getSrcText());
         } else {
             String changeId = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name"));
-            translations.put(entry.getSrcText(), new TransEntry(trans, changeId, new Date().getTime()));
+            translations.put(entry.getSrcText(), new TransEntry(trans, changeId, System.currentTimeMillis()));
         }
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation
                 : null;

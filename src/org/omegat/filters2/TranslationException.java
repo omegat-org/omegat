@@ -45,4 +45,16 @@ public class TranslationException extends Exception
     {
         super(msg);
     }
+    
+    /**
+     * Constructs an instance of <code>TranslationException</code> 
+     * with the specified detail message and cause.
+     *
+     * @param msg the detail message.
+     * @param cause cause the cause
+     */
+    public TranslationException(String msg, Throwable cause)
+    {
+        super(msg, cause);
+    }
 }

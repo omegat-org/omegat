@@ -277,9 +277,10 @@ public class OpenXMLFilter extends AbstractFilter
                 }
                 catch (Exception e)
                 {
+                    e.printStackTrace();
                     throw new TranslationException(e.getLocalizedMessage() +
-                            "\n" +                                              // NOI18N
-                            OStrings.getString("OpenXML_ERROR_IN_FILE")+inFile);
+                            "\n" +                                              
+                            OStrings.getString("OpenXML_ERROR_IN_FILE")+inFile, e);
                 }
                 
                 if (zipout!=null)

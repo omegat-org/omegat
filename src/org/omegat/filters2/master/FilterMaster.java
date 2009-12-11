@@ -292,6 +292,11 @@ public class FilterMaster {
                 targetLang));
         String outEncoding = lookup.outFilesInfo.getTargetEncoding();
         
+        if (!outFile.exists()) {
+            // out file not exist - skip
+            return;
+        }
+        
         IFilter filterObject = lookup.filterObject;
         try {
             filterObject.alignFile(inFile, inEncoding, outFile,

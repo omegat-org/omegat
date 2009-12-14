@@ -846,7 +846,11 @@ public class RealProject implements IProject
 
         public void addTranslation(String id, String source, String translation) {
             if (source != null && translation != null) {
-                data.put(source, new TransEntry(translation));
+                ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
+                final String sourceS = ParseEntry.stripSomeChars(source, spr);
+                final String transS = ParseEntry.stripSomeChars(translation, spr);
+                
+                data.put(sourceS, new TransEntry(transS));
             }
         }
     }

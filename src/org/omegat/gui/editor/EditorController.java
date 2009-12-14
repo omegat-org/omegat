@@ -800,6 +800,7 @@ public class EditorController implements IEditor {
         commitAndDeactivate();
 
         displayedFileIndex = fileIndex;
+        displayedEntryIndex = 0;
         loadDocument();
         
         activateEntry();

@@ -27,11 +27,15 @@ package org.omegat.filters2.text.ini;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
-import org.omegat.util.OStrings;
 import org.omegat.util.LinebreakPreservingReader;
+import org.omegat.util.NullBufferedWriter;
+import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 
 /**
  * Filter to support Files with Key=Value pairs,
@@ -41,6 +45,7 @@ import org.omegat.util.LinebreakPreservingReader;
  */
 public class INIFilter extends AbstractFilter
 {
+    protected Map<String, String> align;
     
     public String getFileFormatName()
     {
@@ -115,11 +120,36 @@ public class INIFilter extends AbstractFilter
             String value=str.substring(equalsPos+1);
             
             value = leftTrim(value);
-            String trans=processEntry(value);
-            outfile.write(trans);
             
-            //outfile.write("\n");                                                // NOI18N
-            outfile.write(lbpr.getLinebreak()); // fix for bug 1462566            // NOI18N
+            if (entryAlignCallback!=null) {
+                String key = str.substring(0, equalsPos).trim();
+                align.put(key, value);
+            } else {
+                String trans=processEntry(value);
+                outfile.write(trans);
+                
+                //outfile.write("\n");                                                // NOI18N
+                outfile.write(lbpr.getLinebreak()); // fix for bug 1462566            // NOI18N
+            }
+        }
+    }
+    
+    @Override
+    protected void alignFile(BufferedReader sourceFile,
+            BufferedReader translatedFile) throws Exception {
+        Map<String, String> source = new HashMap<String, String>();
+        Map<String, String> translated = new HashMap<String, String>();
+
+        align = source;
+        processFile(sourceFile, new NullBufferedWriter());
+        align = translated;
+        processFile(translatedFile, new NullBufferedWriter());
+        for (Map.Entry<String, String> en : source.entrySet()) {
+            String tr = translated.get(en.getKey());
+            if (!StringUtil.isEmpty(tr)) {
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
+                        tr);
+            }
         }
     }
 }

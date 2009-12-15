@@ -42,6 +42,7 @@ import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 
 /**
  * Filter to support Java Resource Bundles - the files that are used to I18ze
@@ -411,7 +412,7 @@ public class ResourceBundleFilter extends AbstractFilter {
         processFile(translatedFile, new NullBufferedWriter());
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
-            if (tr != null) {
+            if (!StringUtil.isEmpty(tr)) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
                         tr);
             }

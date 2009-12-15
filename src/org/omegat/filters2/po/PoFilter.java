@@ -100,18 +100,24 @@ public class PoFilter extends AbstractFilter {
     public void processFile(File inFile, String inEncoding, File outFile,
             String outEncoding) throws IOException, TranslationException {
         BufferedReader reader = createReader(inFile, inEncoding);
-        BufferedWriter writer;
+        try {
+            BufferedWriter writer;
 
-        if (outFile != null)
-            writer = createWriter(outFile, outEncoding);
-        else
-            writer = null;
+            if (outFile != null) {
+                writer = createWriter(outFile, outEncoding);
+            } else {
+                writer = null;
+            }
 
-        processFile(reader, writer);
-
-        reader.close();
-        if (writer != null) {
-            writer.close();
+            try {
+                processFile(reader, writer);
+            } finally {
+                if (writer != null) {
+                    writer.close();
+                }
+            }
+        } finally {
+            reader.close();
         }
     }
 

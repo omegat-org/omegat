@@ -120,6 +120,19 @@ public class PoFilter extends AbstractFilter {
             reader.close();
         }
     }
+    
+    @Override
+    protected void alignFile(BufferedReader sourceFile,
+            BufferedReader translatedFile) throws Exception {
+        // BOM (byte order mark) bugfix
+        translatedFile.mark(1);
+        int ch = translatedFile.read();
+        if (ch != 0xFEFF)
+            translatedFile.reset();
+
+        this.out = null;
+        processPoFile(translatedFile);
+    }
 
     public void processFile(BufferedReader in, BufferedWriter out)
             throws IOException {
@@ -270,11 +283,19 @@ public class PoFilter extends AbstractFilter {
         if (translation.length() == 0) {
             translation = null;
         }
-        entryParseCallback.addEntry(null, source, translation, fuzzy, null, this);
+        if (entryParseCallback != null) {
+            entryParseCallback.addEntry(null, source, translation, fuzzy, null,
+                    this);
+        } else if (entryAlignCallback != null) {
+            entryAlignCallback.addTranslation(null, source, translation);
+        }
     }
-    
+
     protected void alignHeader(String header) {
-        entryParseCallback.addEntry(null, unescape(header), null, false, null, this);
+        if (entryParseCallback != null) {
+            entryParseCallback.addEntry(null, unescape(header), null, false,
+                    null, this);
+        }
     }
 
     protected void flushTranslation(MODE currentMode) throws IOException {

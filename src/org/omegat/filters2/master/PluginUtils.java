@@ -42,6 +42,7 @@ import java.util.jar.Manifest;
 
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.StaticUtils;
 
 /**
  * Static utilities for OmegaT filter plugins.
@@ -201,7 +202,7 @@ public final class PluginUtils
      * than one jar.
      */
     public static void loadPlugins2() {
-        File pluginsDir = new File("plugins/");
+        File pluginsDir = new File(StaticUtils.installDir(), "plugins");
         try {
             URLClassLoader cls;
             // list all jars in /plugins/

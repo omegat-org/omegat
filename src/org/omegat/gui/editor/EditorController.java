@@ -164,6 +164,7 @@ public class EditorController implements IEditor {
                 case CLOSE:
                     history.clear();
                     showType = SHOW_TYPE.INTRO;
+                    deactivateWithoutCommit();
                     break;
                 default:
                     showType = SHOW_TYPE.NO_CHANGE;
@@ -672,6 +673,23 @@ public class EditorController implements IEditor {
         editor.cancelUndo();
     }
 
+    /**
+     * Deactivate active translation without save. Required on project close
+     * postprocessing, for example.
+     */
+    protected void deactivateWithoutCommit() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        Document3 doc = editor.getOmDocument();
+
+        if (doc == null) {
+            // there is no active doc, it's empty project
+            return;
+        }
+
+        doc.stopEditMode();
+    }
+    
     /**
      * {@inheritDoc}
      */

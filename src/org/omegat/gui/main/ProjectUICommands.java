@@ -316,7 +316,7 @@ public class ProjectUICommands {
         }
 
         new SwingWorker<Object>() {
-            int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber() + 1;
+            int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
             
             protected Object doInBackground() throws Exception {
                 Core.getProject().saveProject();

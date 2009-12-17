@@ -128,13 +128,21 @@ public class CreateDocIndexUtil {
         String country = localeTag.length() >= 5 ? localeTag.substring(3, 5)
                 : "";
         Locale locale = new Locale(language, country);
+        
+        String name;
         // The following test is necessary to fix
         // [1748552] sh language is not expanded in the manual
         // since Java does not display correctly the "sh" langage name
         if (language.equalsIgnoreCase("sh"))
-            return "srpskohrvatski";
+            name = "srpskohrvatski";
         else
-            return locale.getDisplayName(locale);
+            name = locale.getDisplayName(locale);
+        
+        if ("eo".equals(language) || "eu".equals(language)) {
+            // fix for 'Esperanto' and 'Basque'
+            name = name.toLowerCase();
+        }
+        return name;
     }
 
     private static String getDocVersion(String locale) throws IOException {

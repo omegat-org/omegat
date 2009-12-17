@@ -135,13 +135,16 @@ public class CreateDocIndexUtil {
         // since Java does not display correctly the "sh" langage name
         if (language.equalsIgnoreCase("sh"))
             name = "srpskohrvatski";
+        // eo and eu are harcoded, because Java does not have a proper
+        // local name, and reverts to another language
+        else if ("eo".equals(language)) 
+            name = "Esperanto";
+        else if ("eu".equals(language))
+            name = "Euskara";
         else
             name = locale.getDisplayName(locale);
         
-        if ("eo".equals(language) || "eu".equals(language)) {
-            // fix for 'Esperanto' and 'Basque'
-            name = name.toLowerCase();
-        }
+        
         return name;
     }
 

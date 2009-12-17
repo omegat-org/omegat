@@ -29,6 +29,7 @@ import java.util.Map;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.core.matching.ITokenizer;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
@@ -175,20 +176,25 @@ public class Core {
      * @return component implementation
      */
     protected static ITokenizer createTokenizer(final Map<String, String> params) {
+        ITokenizer t = null;
         try {
             String implClassName = params.get("ITokenizer");
-            if (implClassName == null) {
-                implClassName="org.omegat.core.matching.Tokenizer";
-            }
-            for(Class<?> c:PluginUtils.getTokenizerClasses()) {
-                if (c.getName().equals(implClassName)) {
-                    return (ITokenizer)c.newInstance();
+            if (implClassName != null) {
+                for (Class<?> c : PluginUtils.getTokenizerClasses()) {
+                    if (c.getName().equals(implClassName)) {
+                        t = (ITokenizer) c.newInstance();
+                        break;
+                    }
                 }
             }
         } catch (Exception ex) {
             Log.log(ex);
         }
-        return null;
+        if (t == null) {
+            t = new Tokenizer();
+        }
+        Log.log("Tokenizer: " + t.getClass().getName());
+        return t;
     }
 
     /**

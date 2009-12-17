@@ -1,4 +1,19 @@
 ----------------------------------------------------------------------
+ OmegaT 2.1.1 update 1
+----------------------------------------------------------------------
+  0 Enhancement
+  1 Bugfix
+----------------------------------------------------------------------
+2.1.1 update 1 vs. 2.1.1
+
+  Bug fixes:
+
+  - When the project was reloaded after pressing OK in Project Properties,
+the current segment was moved to the next one. If "Copy source text" was
+set in Editing Behaviour, the previous segment was entered as translation.
+
+
+----------------------------------------------------------------------
  OmegaT 2.1.1
 ----------------------------------------------------------------------
   8 Enhancements

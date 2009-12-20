@@ -132,6 +132,12 @@
 
     <li>If you prefer to translate into an empty target field, set this option
     in <strong>Options → Editing Behaviour...</strong>.</li>
+
+    <li>
+      <p>You can change the setup of the Editor pane (for instance to show or
+      not the source text, highlight the translated text etc) in the Main menu
+      entry <span style="font-weight: bold;">View.</span></p>
+    </li>
   </ul>
 
   <p>When you press "<strong>ENTER</strong>", several things happen invisibly:
@@ -141,16 +147,21 @@
   translation memory and glossary in search of matches for the next
   untranslated segment.</p><a name="tm" id="tm"></a>
 
-  <h3>Use the translation memory and the matches in your glossaries and
+  <h3>Use matches in the translation memories, glossaries and
   dictionaries</h3><a name="tm_matches" id="tm_matches"></a>
 
   <h3>Translation memory matches</h3>
 
   <p>If OmegaT finds any fuzzy matches (30% or over) for the next segment in
-  the translation memory, it displays these in the Match Viewer. The first
-  match is pre-selected in the Match Viewer by default. To insert translation
-  memory matches from the Match Viewer into your target field, you can use
-  keyboard shortcuts:</p>
+  the translation memory, it displays them in the Match Viewer. The first match
+  is pre-selected in the Match Viewer by default.</p><img src=
+  "images/MatchesPane.png" name="graphics4" alt="matches pane" id="graphics4"
+  style="border: 0px solid ;"><br clear="left">
+
+  <p><br></p>
+
+  <p>To insert translation memory matches from the Match Viewer into your
+  target field, you can use keyboard shortcuts:</p>
 
   <ul>
     <li>Press <code>Ctrl+I</code> to insert the pre-selected match at the
@@ -177,11 +188,11 @@
   Set this option using <strong>Options → Editing
   Behaviour...</strong>)</p><a name="gloss_matches" id="gloss_matches"></a>
 
-  <h3>Glossary and dictionary&nbsp; matches</h3>
+  <h3>Glossary and dictionary matches</h3>
 
   <p>Matching terms in glossaries and dictionaries, that you may have included
   in the project, will be displayed for reference in the glossary and
-  dictionary panes.&nbsp;</p><a name="searches" id="searches"></a>
+  dictionary panes.</p><a name="searches" id="searches"></a>
 
   <h3>Use searches</h3>
 
@@ -237,7 +248,7 @@
 
   <p><code><font color="blue">&lt;p&gt;</font>A different display font can be
   selected via the <font color="green">&lt;b&gt;</font>Display Font<font color=
-  "green">&lt;/b&gt;</font>dialog. Open it via the <font color=
+  "green">&lt;/b&gt;</font> dialog. Open it via the <font color=
   "green">&lt;i&gt;</font>Settings<font color="green">&lt;/i&gt;</font> →
   <font color="green">&lt;i&gt;</font>Display Font...<font color=
   "green">&lt;/i&gt;</font> menu item. The font type and size can be changed
@@ -246,14 +257,13 @@
   <p>Here is how OmegaT will display it, with the translation in
   Afrikaans:</p><br>
 
-  <p><img src="images/tagged_segment.png" alt="" border="0" height="150" width=
-  "592"></p><br>
+  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
 
   <p>When OmegaT has created the translated document, the HTML will look like
   this:</p>
 
-  <p><img src="images/tagged_segment_target.png" alt="" border="0" height="122"
-  width="592"></p><a name="tag_verif" id="tag_verif"></a>
+  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
+  "tag_verif" id="tag_verif"></a>
 
   <h3>Tag verification</h3>
 
@@ -265,8 +275,8 @@
   be displayed showing the segments where the source and target tags do not
   correspond. Click on the segment number. You will be taken automatically to
   the questionable segment in the Editor, where you can correct the tagging.
-  Hit <code>Enter</code> to validate the corrected
-  segment and check the correction by pressing again <code>Ctrl-T</code>.</p>
+  Hit <code>Enter</code> to validate the corrected segment and check the
+  correction by pressing again <code>Control-T</code>.</p>
 
   <p>In some cases tag errors may even prevent a document from opening. You
   should therefore ensure that you have corrected any tag errors before you

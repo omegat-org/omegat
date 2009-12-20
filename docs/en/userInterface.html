@@ -487,34 +487,42 @@
   #5. To use the <strong>selected</strong> match in your translation, use
   <code><a href="menu.html#shortcuts">Ctrl+R</a></code> to replace the target
   field with that match or use <code><a href=
-  "menu.html#shortcuts">Ctrl+I</a></code> to insert it at the cursor position.
-  &nbsp;</p>
+  "menu.html#shortcuts">Ctrl+I</a></code> to insert it at the cursor
+  position.</p>
 
-  <p>The matching percentage is roughly equivalent to taking the number of
-  common words in the matched and the matching segment and dividing it by the
-  number of words in the longer of the two. The words can be reduced to their
-  stems with a help of a tokenizer, or they can be taken &nbsp;"as is"&nbsp; -
-  this is the first two percentages below the match. In the above case (46/46)
-  they are equal, as the tokenizer has not been used. The third&nbsp;metric
-  (39% in the above example) takes into account the differences in&nbsp; tags
-  and punctuation marks as well.&nbsp;</p>
+  <p>The matching percentage - i.e. the measure of the difference between the
+  source segment and matching candidates - is roughly equivalent to the number
+  of common words in the matched and the matching segment, divided by the
+  number of words in the longer of the two. In case the tokenizer plug-in is
+  used, the words in the two segments get first reduced to their stems.
+  Alternatively, the words are left as they are, and only the interpunction,
+  numbers and tags are ignored. Finally, differences in tags, numbers and in
+  the interpunction - which have been ignored in the first two cases - can be
+  included in the calculation. The Match Viewer eventually displays the three
+  metrics as follows:</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
+  "font-style: italic;">% match, when tokenizer plugin is used / % for the
+  default OmegaT match / % match with tags, numbers, punctuation
+  included</span>&gt;&nbsp;
 
-  <p>&nbsp;If there's no file name displayed, the source is the default project
+  <p>In the example above, the first two metrics (46/46) are equal, as the
+  tokenizer has not been used. The third percentage (39) is lower because of
+  dfifferences in the interpunction and tags used.</p>
+
+  <p>If there's no file name displayed, the source is the default project
   translation memory. Orphan segments (the match #1) mark segments in the
   default project translation memory without a corresponding text in the source
-  files. &nbsp;In the above case, the original sentence, translated already
-  with OmegaT, has been edited .<br></p>
+  files. In the above case, the original sentence, translated already with
+  OmegaT, has been edited .<br></p>
 
   <h3><a name="Glossary" id="Glossary"></a>Glossary</h3>
 
-  <p>Glossary pane allows you to access your private collection of
-  &nbsp;expressions and specialty terminologies, which you have accumulated in
-  your&nbsp; <a href="glossaries.html">glossary files</a>. It shows translation
-  of terms found in the current segment, but it only shows it for reference
-  purposes, and does not allow to insert or replace the term with its
-  translation.</p><img src="images/Glossary_pane.png" name="grafika3" alt=
-  "OmegaT Glossary pane" id="grafika3" align="left" border="0"><br clear=
-  "left">
+  <p>Glossary pane allows you to access your private collection of expressions
+  and specialty terminologies, which you have accumulated in your <a href=
+  "glossaries.html">glossary files</a>. It shows translation of terms found in
+  the current segment, but it only shows it for reference purposes, and does
+  not allow to insert or replace the term with its translation.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="OmegaT Glossary pane" id=
+  "grafika3" align="left" border="0"><br clear="left">
 
   <p><br></p>
 

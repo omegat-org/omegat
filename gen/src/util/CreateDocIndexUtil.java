@@ -21,7 +21,7 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
- 
+
 package util;
 
 import java.io.File;
@@ -29,6 +29,7 @@ import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Reader;
@@ -47,7 +48,17 @@ public class CreateDocIndexUtil {
     protected static final String MARK_BEG = "<table>";
     protected static final String MARK_END = "</table>";
 
+    protected static Properties langExceptionsNames = new Properties();
+
     public static void main(String[] args) throws Exception {
+        InputStream in = CreateDocIndexUtil.class
+                .getResourceAsStream("lang_exceptions.properties");
+        try {
+            langExceptionsNames.load(in);
+        } finally {
+            in.close();
+        }
+
         File[] ls = new File("docs").listFiles(new FileFilter() {
             public boolean accept(File f) {
                 return f.isDirectory() && new File(f, "index.html").exists();
@@ -92,7 +103,8 @@ public class CreateDocIndexUtil {
             text.append(transVersion);
             if (transVersion.equals(OStrings.VERSION))
                 text.append("</strong>");
-            text.append("</font>)</td></tr>" + System.getProperty("line.separator"));
+            text.append("</font>)</td></tr>"
+                    + System.getProperty("line.separator"));
             count++;
         }
         text.append("</table>");
@@ -125,26 +137,15 @@ public class CreateDocIndexUtil {
      */
     private static String getLocaleName(String localeTag) {
         String language = localeTag.substring(0, 2);
-        String country = localeTag.length() >= 5 ? localeTag.substring(3, 5)
-                : "";
-        Locale locale = new Locale(language, country);
-        
-        String name;
-        // The following test is necessary to fix
-        // [1748552] sh language is not expanded in the manual
-        // since Java does not display correctly the "sh" langage name
-        if (language.equalsIgnoreCase("sh"))
-            name = "srpskohrvatski";
-        // eo and eu are harcoded, because Java does not have a proper
-        // local name, and reverts to another language
-        else if ("eo".equals(language)) 
-            name = "Esperanto";
-        else if ("eu".equals(language))
-            name = "Euskara";
-        else
+        String name = langExceptionsNames.getProperty(language);
+        if (name == null) {
+            String country = localeTag.length() >= 5 ? localeTag
+                    .substring(3, 5) : "";
+            Locale locale = new Locale(language, country);
+
             name = locale.getDisplayName(locale);
-        
-        
+        }
+
         return name;
     }
 

@@ -49,6 +49,7 @@ import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.IAlignCallback;
+import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.FileUtil;
@@ -844,12 +845,17 @@ public class RealProject implements IProject
     private class AlignFilesCallback implements IAlignCallback {
         Map<String, TransEntry> data = new HashMap<String, TransEntry>();
 
-        public void addTranslation(String id, String source, String translation) {
+        public void addTranslation(String id, String source,
+                String translation, boolean isFuzzy, String comment,
+                IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
-                final String sourceS = ParseEntry.stripSomeChars(source, spr);
-                final String transS = ParseEntry.stripSomeChars(translation, spr);
-                
+                String sourceS = ParseEntry.stripSomeChars(source, spr);
+                String transS = ParseEntry.stripSomeChars(translation, spr);
+                if (isFuzzy) {
+                    transS = "[" + filter.getFuzzyMark() + "] " + transS;
+                }
+
                 data.put(sourceS, new TransEntry(transS));
             }
         }

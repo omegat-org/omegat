@@ -25,6 +25,7 @@
 package org.omegat.filters;
 
 import org.omegat.filters2.IAlignCallback;
+import org.omegat.filters2.IFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 public class ResourceBundleFilterTest extends TestFilterBase {
@@ -45,7 +46,8 @@ public class ResourceBundleFilterTest extends TestFilterBase {
                 "resourceBundle/file-ResourceBundleFilter_be.properties",
                 new IAlignCallback() {
                     public void addTranslation(String id, String source,
-                            String translation) {
+                            String translation, boolean isFuzzy,
+                            String comment, IFilter filter) {
                         ar.found = id.equals("ID") && source.equals("Value")
                                 && translation.equals("test");
                     }

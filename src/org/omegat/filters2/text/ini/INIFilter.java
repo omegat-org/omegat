@@ -148,7 +148,7 @@ public class INIFilter extends AbstractFilter
             String tr = translated.get(en.getKey());
             if (!StringUtil.isEmpty(tr)) {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
-                        tr);
+                        tr, false, null, this);
             }
         }
     }

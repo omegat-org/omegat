@@ -287,7 +287,8 @@ public class PoFilter extends AbstractFilter {
             entryParseCallback.addEntry(null, source, translation, fuzzy, null,
                     this);
         } else if (entryAlignCallback != null) {
-            entryAlignCallback.addTranslation(null, source, translation);
+            entryAlignCallback.addTranslation(null, source, translation, fuzzy,
+                    null, this);
         }
     }
 

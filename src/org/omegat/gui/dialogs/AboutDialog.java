@@ -80,6 +80,10 @@ public class AboutDialog extends JDialog
                 StaticUtils.format(OStrings.getString("ABOUTDIALOG_VERSION"),
                                      new Object[]{OStrings.VERSION}));
         }
+        Object[] args = {Runtime.getRuntime().totalMemory()/1024/1024, Runtime.getRuntime().freeMemory()/1024/1024, Runtime.getRuntime().maxMemory()/1024/1024};
+        String aboutString = StaticUtils.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"), args); 
+        abouttext.setText(aboutString); // NOI18N
+
         invalidate();
         pack();
     }

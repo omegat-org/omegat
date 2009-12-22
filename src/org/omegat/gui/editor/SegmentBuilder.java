@@ -38,6 +38,7 @@ import javax.swing.text.SimpleAttributeSet;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -168,7 +169,7 @@ public class SegmentBuilder {
      */
     private void createActiveSegmentElement(TransEntry trans)
             throws BadLocationException {
-
+        try {
         if (settings.isDisplayModificationInfo()) {
             addModificationInfoPart(trans, ATTR_INFO);
         }
@@ -209,6 +210,27 @@ public class SegmentBuilder {
                 .createPosition(activeTranslationBeginOffset - 1);
         doc.activeTranslationEndP1 = doc
                 .createPosition(activeTranslationEndOffset + 1);
+        } catch (OutOfMemoryError oome) {
+            // Oh shit, we're all out of storage space!
+            // Of course we should've cleaned up after ourselves earlier,
+            // but since we didn't, do a bit of cleaning up now, otherwise
+            // we can't even inform the user about our slacking off.
+            doc.remove(0, doc.getLength());
+
+            // Well, that cleared up some, GC to the rescue!
+            System.gc();
+
+            // There, that should do it, now inform the user
+            Object[] args = {Runtime.getRuntime().maxMemory()/1024/1024};
+            Log.logErrorRB("OUT_OF_MEMORY", args);
+            Log.log(oome);
+            Core.getMainWindow().showErrorDialogRB(
+                    "OUT_OF_MEMORY",args,
+                    "TF_ERROR");
+            // Just quit, we can't help it anyway
+            System.exit(0);
+            
+        }
     }
 
     /**

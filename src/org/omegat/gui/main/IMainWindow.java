@@ -99,12 +99,13 @@ public interface IMainWindow {
      * 
      * @param message 
      *                message key in resource bundle of message that is to be 
-     *                displayed 
+     *                displayed
+     * @param args    arguments of the resource bundle message 
      * @param title 
      *                title of dialog. message key in resource bundle of title 
      *                that is to be displayed
      */
-    void showErrorDialogRB(String message, String title);
+    void showErrorDialogRB(String message, Object[] args, String title);
 
     /**
      * Add new dockable pane into application frame. This method called on

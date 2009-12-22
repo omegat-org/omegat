@@ -236,11 +236,11 @@ public class RealProject implements IProject
             System.gc();
 
             // There, that should do it, now inform the user
-            Log.logErrorRB("OUT_OF_MEMORY");
+            Object[] args = {Runtime.getRuntime().maxMemory()/1024/1024};
+            Log.logErrorRB("OUT_OF_MEMORY", args );
             Log.log(oome);
             Core.getMainWindow().showErrorDialogRB(
-                    "OUT_OF_MEMORY",
-                    "TF_ERROR");
+                    "OUT_OF_MEMORY", args, "TF_ERROR");
             // Just quit, we can't help it anyway
             System.exit(0);
         }

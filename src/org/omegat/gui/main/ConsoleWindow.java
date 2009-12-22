@@ -84,8 +84,8 @@ public class ConsoleWindow implements IMainWindow {
     /**
      * {@inheritDoc}
      */
-    public void showErrorDialogRB(String message, String title) {
-        System.err.println(OStrings.getString(message));
+    public void showErrorDialogRB(String message, Object[] args, String title) {
+        System.err.println(StaticUtils.format(OStrings.getString(message), args));
     }
     
     public void addDockable(Dockable pane) {

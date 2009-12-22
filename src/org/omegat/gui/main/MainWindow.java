@@ -466,9 +466,10 @@ public class MainWindow extends JFrame implements IMainWindow {
     /**
      * {@inheritDoc}
      */
-    public void showErrorDialogRB(String message, String title) {
+    public void showErrorDialogRB(String message, Object[] args, String title) {
+        
         JOptionPane.showMessageDialog(this.getApplicationFrame(),
-                OStrings.getString(message), OStrings
-                        .getString(title), JOptionPane.ERROR_MESSAGE);
+                StaticUtils.format(OStrings.getString(message), args), 
+                OStrings.getString(title), JOptionPane.ERROR_MESSAGE);
     }
 }

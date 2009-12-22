@@ -239,8 +239,8 @@ public class RealProject implements IProject
             Log.logErrorRB("OUT_OF_MEMORY");
             Log.log(oome);
             Core.getMainWindow().showErrorDialogRB(
-                    OStrings.getString("OUT_OF_MEMORY"),
-                    OStrings.getString("TF_ERROR"));
+                    "OUT_OF_MEMORY",
+                    "TF_ERROR");
             // Just quit, we can't help it anyway
             System.exit(0);
         }

@@ -208,7 +208,7 @@
    </target>
 
     <!-- Creates a Windows Installer -->
-    <target name="do-win" depends="init,jar,zip">
+    <target name="do-win" depends="init,jar,zip" description="Creates a Windows Installer. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path.">
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
  
@@ -222,7 +222,7 @@
     </target>
 
     <!-- Creates a Windows Installer with JRE-->
-    <target name="do-win-jre" depends="check-jre" if="jre.exists">
+    <target name="do-win-jre" depends="check-jre" if="jre.exists" description="Creates a Windows Installer with JRE. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and a JRE must be present in ..\\jre\\ ">
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
         
@@ -250,7 +250,7 @@
         <available file="../jre-linux" type="dir" property="jre-linux.exists" />
     </target>
 
-    <target name="win" description="Build Win32 distro if on Windows" 
+    <target name="win" description="Build Win32 distro if on Windows. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and for the JRE-version a JRE must be present in ..\\jre\\ "
                                         depends="check-win" if="os.windows">
         <ant target="do-win" />
         <ant target="do-win-jre" />

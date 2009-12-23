@@ -70,7 +70,7 @@ public abstract class TestCore extends TestCase {
             public void showStatusMessageRB(String messageKey, Object... params) {
             }
             
-            public void showErrorDialogRB(String message, String title) {
+            public void showErrorDialogRB(String message, Object[] args, String title) {
             }
 
             public void unlockUI() {

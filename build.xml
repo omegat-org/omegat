@@ -294,6 +294,9 @@
 				<pathelement path="build/classes" />
 			</classpath>
 		</javac>
+		<copy todir="build/genclasses">
+			<fileset dir="gen/src" excludes="**/*.java"/>
+		</copy>
 
 		<java classname="util.CreateDocIndexUtil">
 			<classpath>

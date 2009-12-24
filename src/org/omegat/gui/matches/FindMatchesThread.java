@@ -328,6 +328,13 @@ public class FindMatchesThread extends Thread {
                     if (st.adjustedScore < simAdjusted) {
                         break;
                     }
+                    // Patch contributed by Antonio Vilei
+                    String entrySource = processedEntry.getSrcText();
+                    // text with the same case has precedence
+                    if (similarity == 100 && !st.source.equals(entrySource) &&
+                        source.equals(entrySource)) {
+                        break;
+                    }
                 }
             }
             pos = i + 1;

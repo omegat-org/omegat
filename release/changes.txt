@@ -1,7 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.1 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
+
   1 Bugfix
 ----------------------------------------------------------------------
 2.1.1 update 1 vs. 2.1.1
@@ -9,6 +10,9 @@
   Other enhancements:
   
   - The About dialog displays memory usage
+
+  - When there are several 100% matches, and one of them is a real
+exact match, it is ordered first
 
   Bug fixes:
 

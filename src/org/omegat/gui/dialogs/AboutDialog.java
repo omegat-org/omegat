@@ -81,8 +81,8 @@ public class AboutDialog extends JDialog
                                      new Object[]{OStrings.VERSION}));
         }
         Object[] args = {Runtime.getRuntime().totalMemory()/1024/1024, Runtime.getRuntime().freeMemory()/1024/1024, Runtime.getRuntime().maxMemory()/1024/1024};
-        String aboutString = StaticUtils.format(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS"), args); 
-        abouttext.setText(aboutString); // NOI18N
+        String memoryUsage = StaticUtils.format(OStrings.getString("MEMORY_USAGE"), args);
+        memoryusage.setText(memoryUsage); // NOI18N
 
         invalidate();
         pack();
@@ -107,6 +107,7 @@ public class AboutDialog extends JDialog
         jPanel1 = new javax.swing.JPanel();
         licenseButton = new javax.swing.JButton();
         okButton = new javax.swing.JButton();
+        memoryusage = new javax.swing.JLabel();
         versionLabel = new javax.swing.JLabel();
         abouttext = new javax.swing.JTextArea();
 
@@ -144,6 +145,9 @@ public class AboutDialog extends JDialog
         jPanel1.add(okButton);
 
         buttonPanel.add(jPanel1, java.awt.BorderLayout.EAST);
+
+        org.openide.awt.Mnemonics.setLocalizedText(memoryusage, OStrings.getString("MEMORY_USAGE")); // NOI18N
+        buttonPanel.add(memoryusage, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
@@ -195,6 +199,7 @@ public class AboutDialog extends JDialog
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton licenseButton;
+    private javax.swing.JLabel memoryusage;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel versionLabel;
     // End of variables declaration//GEN-END:variables

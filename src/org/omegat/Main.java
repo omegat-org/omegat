@@ -149,13 +149,13 @@ public class Main {
         }
 
         Log.log("\n"
-                + // NOI18N
+                + 
                 "==================================================================="
-                + // NOI18N
-                "\n" + // NOI18N
-                OStrings.getDisplayVersion() + // NOI18N
-                " (" + new Date() + ") " + // NOI18N
-                " Locale " + Locale.getDefault()); // NOI18N
+                + 
+                "\n" + 
+                OStrings.getDisplayVersion() + 
+                " (" + new Date() + ") " + 
+                " Locale " + Locale.getDefault()); 
 
         Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System
                 .getProperty("java.version"), System.getProperty("java.home"));
@@ -195,11 +195,11 @@ public class Main {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 
             // MacOSX-specific
-            System.setProperty("apple.laf.useScreenMenuBar", "true"); // NOI18N
+            System.setProperty("apple.laf.useScreenMenuBar", "true"); 
             System
                     .setProperty(
                             "com.apple.mrj.application.apple.menu.about.name",
-                            "OmegaT"); // NOI18N
+                            "OmegaT"); 
         } catch (Exception e) {
             // do nothing
             Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");
@@ -352,7 +352,7 @@ public class Main {
                 Log.logErrorRB("CT_ERROR_CREATING_TMX");
                 Log.log(e);
                 throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
-                        "\n" +                                                      // NOI18N
+                        "\n" +                                                      
                         e.getMessage());
             }
 

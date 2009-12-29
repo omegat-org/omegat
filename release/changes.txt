@@ -2,8 +2,7 @@
  OmegaT 2.1.1 update 1
 ----------------------------------------------------------------------
   2 Enhancements
-
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.1 update 1 vs. 2.1.1
 
@@ -20,6 +19,8 @@ exact match, it is ordered first
 the current segment was moved to the next one. If "Copy source text" was
 set in Editing Behaviour, the previous segment was entered as translation.
 
+  - OmT loses msgctxt content in PO files
+  http://sourceforge.net/support/tracker.php?aid=2920637
 
 ----------------------------------------------------------------------
  OmegaT 2.1.1

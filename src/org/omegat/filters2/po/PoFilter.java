@@ -255,6 +255,7 @@ public class PoFilter extends AbstractFilter {
                     targets[currentPlural].append(text);
                     break;
                 case MSGCTX:
+                    eol(s);
                     break;
                 }
                 continue;

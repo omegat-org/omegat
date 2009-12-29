@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
 
-  <title>Console Mode - OmegaT 2.0 User Manual</title>
+  <title>Console Mode - OmegaT 2.1 User Manual</title>
 </head>
 
 <body>
@@ -46,7 +46,7 @@
     OmegaT in console mode, it will use the same settings. If you can't run
     OmegaT normally (no graphical environment available):</li>
 
-    <li>copy the settings files from some other OmegaT installation on another
+    <li>Copy the settings files from some other OmegaT installation on another
     machine to a specific directory. The location does not matter, since you
     can add it to the command-line at startup. The relevant files are
     filters.conf and segmentation.conf and can be found in the user home
@@ -69,6 +69,10 @@
   <p>Example of translate project:<br>
   <code>$&gt;java -jar OmegaT.jar /path/to/project
   --config-dir=/path/to/config-files/ --mode=console-translate</code><br>
+  Example of translate project for a single file:<br>
+  <code>$&gt;java -jar OmegaT.jar /path/to/project
+  --config-dir=/path/to/config-files/ --mode=console-translate
+  --source-pattern=test\.html</code><br>
   Example of create pseudo translated tmx:<br>
   <code>java -jar OmegaT.jar /path/to/project
   --config-dir=/path/to/config-files/ --mode=console-createpseudotranslatetmx
@@ -119,6 +123,40 @@
           OmegaT format, and thus can be used in OmegaT. See also <a href=
           "translationMemories.html#pseudo_translate">Translation
           memories</a></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <code>--source-pattern=&lt;regular expression&gt;</code></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Only valid when mode is <code>console-translate</code>.
+          Specifies which source files will be translated. Target
+          subdirectories are however created regardless of whether some source
+          files match or not. The parameter is a regular expression.
+          Examples:</p>
+
+          <ul>
+            <li><code>.*</code>: all files will be translated. This is
+            equivalent to not using the parameter.</li>
+
+            <li><code>\.html</code>: all HTML files will be translated.</li>
+
+            <li><code>dir-10\\test\.html</code>: only the file
+            <code>test.html</code> in the directory <code>dir-10</code> will be
+            translated. Directories are relative to the root of the source
+            directory of the project. The directory separator is platform
+            dependent. <code>\\</code> has to be used under Windows, and
+            <code>/</code> on other platforms.</li>
+
+            <li><code>^test\.html</code>: only the file <code>test.html</code>
+            at the root of the source directory will be translated. If there
+            are other files named test.html in other directories, they will be
+            ignored.</li>
+          </ul>
+
+          <p>The parameter is optional and defaults to <code>.*</code>.</p>
         </td>
       </tr>
 

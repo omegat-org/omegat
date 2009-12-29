@@ -353,7 +353,7 @@ public class ProjectUICommands {
         new SwingWorker<Object>() {
             protected Object doInBackground() throws Exception {
                 Core.getProject().saveProject();
-                Core.getProject().compileProject();
+                Core.getProject().compileProject(".*");
                 return null;
             }
 

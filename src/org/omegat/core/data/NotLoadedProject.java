@@ -40,7 +40,8 @@ import org.omegat.filters2.TranslationException;
  */
 public class NotLoadedProject implements IProject {
 
-    public void compileProject() throws IOException, TranslationException {
+    public void compileProject(String sourcePattern)
+            throws IOException, TranslationException {
     }
 
     public void closeProject() {

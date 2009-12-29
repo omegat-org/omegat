@@ -59,7 +59,8 @@ public interface IProject {
     /**
      * Create translated documents.
      */
-    void compileProject() throws IOException, TranslationException;
+    void compileProject(String sourcePattern)
+            throws IOException, TranslationException;
 
     /**
      * Get project properties.

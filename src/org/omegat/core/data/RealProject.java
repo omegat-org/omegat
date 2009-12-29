@@ -4,8 +4,9 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
-               2008      Alex Buloichik
- Portions copyright 2007 Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Zoltan Bartko
+               2008 Alex Buloichik
+               2009 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +42,8 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
@@ -76,8 +79,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
- * @author Bartko Zoltan
+ * @author Bartko Zoltan (bartkozoltan@bartkozoltan.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class RealProject implements IProject
 {
@@ -296,12 +300,20 @@ public class RealProject implements IProject
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
     }
     
-    /** Builds all translated files and creates fresh TM files. */
-    public void compileProject()
+    /** Builds translated files corresponding to sourcePattern
+     * and creates fresh TM files.
+     *
+     * @param sourcePattern The regexp of files to create
+     * @throws IOException
+     * @throws TranslationException
+     */
+    public void compileProject(String sourcePattern)
             throws IOException, TranslationException
     {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_COMPILE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
+
+        Pattern FILE_PATTERN = Pattern.compile(sourcePattern);
 
         // build 3 TMX files:
         // - OmegaT-specific, with inline OmegaT formatting tags
@@ -363,15 +375,17 @@ public class RealProject implements IProject
         
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
         
-        for(String filename : fileList)
-        {
+	Language targetLang = getProjectProperties().getTargetLanguage();
+        
+        for(String filename : fileList) {
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
-	        Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX",
-                    midName);
-
-	    Language targetLang = getProjectProperties().getTargetLanguage();
-            fm.translateFile(srcRoot, midName, targetLang, locRoot, translateFilesCallback);
+	    Matcher fileMatch = FILE_PATTERN.matcher(midName);
+            if (fileMatch.matches()){
+                Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX",
+                        midName);
+                fm.translateFile(srcRoot, midName, targetLang, locRoot, translateFilesCallback);
+            }
         }
         Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
 

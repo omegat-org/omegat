@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2009 Martin Fleurke, Alex Buloichik
+               2009 Martin Fleurke, Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -65,6 +65,7 @@ import com.vlsolutions.swing.docking.DockingDesktop;
  * @author Keith Godfrey
  * @author Martin Fleurke
  * @author Alex Buloichik
+ * @author Didier Briel
  */
 public class Main {
     /** Application execution mode. */
@@ -269,7 +270,12 @@ public class Main {
             Core.setProject(p);
 
             System.out.println("Translating Project");
-            p.compileProject();
+
+            String sourceMask = params.get("source-pattern");
+            if (sourceMask != null)
+                p.compileProject(sourceMask);
+            else
+                p.compileProject(".*");
 
             System.out.println("Finished");
         } catch (Exception e) {

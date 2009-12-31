@@ -516,13 +516,32 @@ public class FilterVisitor extends NodeVisitor
 
         String uncompressed = paragraph.toString();
         String compressed = uncompressed;
-
+        String spacePrefix = "";
+        String spacePostfix = "";
+        int size = uncompressed.length();
         // We're compressing the space if this paragraph wasn't inside <PRE> tag
         // But if the translator does not translate the paragraph,
         // then we write out the uncompressed version,
         // as documented in http://sourceforge.net/support/tracker.php?aid=1364265
-        if( !preformatting )
+        // The spaces that are around the segment are not removed. To have 
+        // similar effect, the spaces can be compressed to max 1, but for better
+        // layout the original spacing can be kept better.
+        if( !preformatting ) {
+            
+            for (int i=0; i < size; i++) {
+                if (!Character.isWhitespace(uncompressed.charAt(i))) {
+                    spacePrefix = uncompressed.substring(0, i);
+                    break;
+                }
+            }
+            for (int i=size-1; i > 0; i--) {
+                if (!Character.isWhitespace(uncompressed.charAt(i))) {
+                    spacePostfix = uncompressed.substring(i+1, size);
+                    break;
+                }
+            }
             compressed = StaticUtils.compressSpaces(uncompressed);
+        }
 
         // getting the translation
         String translation = filter.privateProcessEntry(compressed);
@@ -537,7 +556,9 @@ public class FilterVisitor extends NodeVisitor
         // expands tag shortcuts into full-blown tags
         translation = unshorcutize(translation);
         // writing out the paragraph into target file
+        writeout(spacePrefix);
         writeout(translation);
+        writeout(spacePostfix);
 
         // writing out all tags after the "last good" one
         for(int i=lastgood+1; i<all.size();i++)

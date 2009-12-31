@@ -77,4 +77,10 @@ public class StaticUtilsTest extends TestCase
             fail("Wrong tags found in '"+str+"': " + tagList.toString());
     }
 
+    public void testCompressSpace()
+    {
+        if ( !"One Two Three Four Five".equals(StaticUtils.compressSpaces(" One Two\nThree   Four\r\nFive ")) ) fail("Space wrongly compressed");
+        if ( !"Six seven".equals(StaticUtils.compressSpaces("Six\tseven")) ) fail("Space wrongly compressed");
+    }
+
 }

@@ -18,7 +18,7 @@
   - When there are several 100% matches, and one of them is a real
 exact match, it is ordered first
 
-  - Spaces are better preserved in the HTML filter
+  - Spaces around segments are better preserved in the HTML filter
 
   Bug fixes:
 

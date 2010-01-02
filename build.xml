@@ -142,7 +142,7 @@
     <target name="src" depends="init" description="Build source distribution">
         <mkdir dir="dist2"/>
         <zip destfile="dist2/OmegaT_${distversion}_Source.zip" basedir="." 
-                includes="addons/** docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** manifest-template.mf build.xml native/**"
+                includes="addons/** docs/** images/** lib/** nbproject/** lib-mnemonics/** release/** src/** test/** gen/** manifest-template.mf build.xml native/**"
                 excludes="**/nbproject/private/** **/build/** **/dist/**" />
     </target>
 

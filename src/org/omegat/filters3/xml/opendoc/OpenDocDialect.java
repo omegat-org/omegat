@@ -46,8 +46,7 @@ public class OpenDocDialect extends DefaultXMLDialect
      * It cannot be done during creation, because options are not known
      * at that step.
      */
-    public void defineDialect(OpenDocOptions options)
-    {
+    public void defineDialect(OpenDocOptions options) {
         defineShortcuts(new String[]{
             "text:line-break", "br",                                            
             "text:a", "a",                                                      
@@ -87,8 +86,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             "text:note-body", "nb",                                             
         });
         
-        defineParagraphTags(new String[]
-        {
+        defineParagraphTags(new String[]{
             "text:p",                                                           
             "text:h",                                                           
             "dc:title",                                                         
@@ -100,8 +98,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             "text:tab",                                                         
         });
         
-        defineOutOfTurnTags(new String[]
-        {
+        defineOutOfTurnTags(new String[] {
             // Drawing Shapes from OO specifications
             // Correction for [ 1541277 ] OO: Segmenting on inline drawings
             // Commented until [ 1642994 ] Subtexts are not segmented is solved
@@ -125,8 +122,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             "draw:custom-shape",                                                
 */ 
         });
-        defineIntactTags(new String[]
-        {
+        defineIntactTags(new String[] {
             "text:note-citation",                                               
             "text:change",                                                      
             "text:tracked-changes",                                             
@@ -147,14 +143,11 @@ public class OpenDocDialect extends DefaultXMLDialect
             "meta:editing-duration",                                            
             "meta:user-defined",                                                
         });
-        if (options.getTranslateNotes())
-        {
+        if (options.getTranslateNotes()) {
             defineOutOfTurnTag("text:note");                                    
             // OOo 1.x
             defineOutOfTurnTag("text:footnote");                                
-        }
-        else
-        {
+        } else {
             defineIntactTag("text:note");                                       
             // OOo 1.x
             defineIntactTag("text:footnote");                                   
@@ -168,8 +161,7 @@ public class OpenDocDialect extends DefaultXMLDialect
             defineTranslatableTagAttributes(
                 "text:alphabetical-index-mark",                                 
                 new String[] { "text:string-value", "text:key1", "text:key2" });
-        if (options.getTranslateBookmarks())
-        {
+        if (options.getTranslateBookmarks()) {
             defineTranslatableTagsAttribute(
                 new String[] 
                     {"text:bookmark", "text:bookmark-start",                    
@@ -177,8 +169,7 @@ public class OpenDocDialect extends DefaultXMLDialect
                      "text:name");                                              
             defineTranslatableTagAttribute("text:bookmark-ref", "text:ref-name");
         }
-        if (!options.getTranslateBookmarkRefs())
-        {
+        if (!options.getTranslateBookmarkRefs()) {
             defineIntactTag("text:bookmark-ref");                               
         }    
     

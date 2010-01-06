@@ -49,55 +49,55 @@ public class OpenDocDialect extends DefaultXMLDialect
     public void defineDialect(OpenDocOptions options)
     {
         defineShortcuts(new String[]{
-            "text:line-break", "br",                                            // NOI18N
-            "text:a", "a",                                                      // NOI18N
-            "text:span", "f",                                                   // NOI18N
-            "text:s", "s",                                                      // NOI18N
-            "text:alphabetical-index-mark", "i",                                // NOI18N
-            "text:alphabetical-index-mark-start", "is",                         // NOI18N
-            "text:alphabetical-index-mark-end", "ie",                           // NOI18N
-            "text:tab-stop", "t",                                               // NOI18N
-            "text:user-defined", "ud",                                          // NOI18N
-            "text:sequence", "seq",                                             // NOI18N
+            "text:line-break", "br",                                            
+            "text:a", "a",                                                      
+            "text:span", "f",                                                   
+            "text:s", "s",                                                      
+            "text:alphabetical-index-mark", "i",                                
+            "text:alphabetical-index-mark-start", "is",                         
+            "text:alphabetical-index-mark-end", "ie",                           
+            "text:tab-stop", "t",                                               
+            "text:user-defined", "ud",                                          
+            "text:sequence", "seq",                                             
         
             // Donated by Didier Briel
             // http://sourceforge.net/support/tracker.php?aid=1458673
-            "draw:image", "di",                                                 // NOI18N
-            "draw:frame", "df",                                                 // NOI18N
-            "draw:object-ole", "do",                                            // NOI18N
+            "draw:image", "di",                                                 
+            "draw:frame", "df",                                                 
+            "draw:object-ole", "do",                                            
 
-            "text:bookmark", "bk",                                              // NOI18N
-            "text:bookmark-start", "bs",                                        // NOI18N
-            "text:bookmark-end", "be",                                          // NOI18N
-            "text:bookmark-ref", "bf",                                          // NOI18N
-            "text:reference-mark", "rm",                                        // NOI18N
-            "text:reference-mark-start", "rs",                                  // NOI18N
-            "text:reference-mark-end", "re",                                    // NOI18N
-            "text:reference-ref", "rf",                                         // NOI18N
+            "text:bookmark", "bk",                                              
+            "text:bookmark-start", "bs",                                        
+            "text:bookmark-end", "be",                                          
+            "text:bookmark-ref", "bf",                                          
+            "text:reference-mark", "rm",                                        
+            "text:reference-mark-start", "rs",                                  
+            "text:reference-mark-end", "re",                                    
+            "text:reference-ref", "rf",                                         
         
-            "text:change", "tc",                                                // NOI18N
-            "text:change-start", "ts",                                          // NOI18N
-            "text:change-end", "te",                                            // NOI18N
-            "dc:creator", "dc",                                                 // NOI18N
-            "dc:date", "dd",                                                    // NOI18N
+            "text:change", "tc",                                                
+            "text:change-start", "ts",                                          
+            "text:change-end", "te",                                            
+            "dc:creator", "dc",                                                 
+            "dc:date", "dd",                                                    
             // End of contribution
 
             // http://sourceforge.net/support/tracker.php?aid=1461154
-            "text:note-citation", "nc",                                         // NOI18N
-            "text:note-body", "nb",                                             // NOI18N
+            "text:note-citation", "nc",                                         
+            "text:note-body", "nb",                                             
         });
         
         defineParagraphTags(new String[]
         {
-            "text:p",                                                           // NOI18N
-            "text:h",                                                           // NOI18N
-            "dc:title",                                                         // NOI18N
-            "dc:description",                                                   // NOI18N
-            "dc:subject",                                                       // NOI18N
-            "meta:keyword",                                                     // NOI18N
-            "dc:language",                                                      // NOI18N
-            "meta:user-defined",                                                // NOI18N
-            "text:tab",                                                         // NOI18N
+            "text:p",                                                           
+            "text:h",                                                           
+            "dc:title",                                                         
+            "dc:description",                                                   
+            "dc:subject",                                                       
+            "meta:keyword",                                                     
+            "dc:language",                                                      
+            "meta:user-defined",                                                
+            "text:tab",                                                         
         });
         
         defineOutOfTurnTags(new String[]
@@ -106,80 +106,80 @@ public class OpenDocDialect extends DefaultXMLDialect
             // Correction for [ 1541277 ] OO: Segmenting on inline drawings
             // Commented until [ 1642994 ] Subtexts are not segmented is solved
 /*
-            "draw:rect",                                                        // NOI18N
-            "draw:line",                                                        // NOI18N
-            "draw:polyline",                                                    // NOI18N
-            "draw:polygon",                                                     // NOI18N
-            "draw:regular-polygon",                                             // NOI18N
-            "draw:path",                                                        // NOI18N
-            "draw:circle",                                                      // NOI18N
-            "draw:ellipse",                                                     // NOI18N 
-            "draw:g",                                                           // NOI18N
-            "draw:page-thumbnail",                                              // NOI18N
-            "draw:frame",                                                       // NOI18N
-            "draw:measure",                                                     // NOI18N    
-            "draw:caption",                                                     // NOI18N
-            "draw:connector",                                                   // NOI18N
-            "draw:control",                                                     // NOI18N
-            "dr3d:scene",                                                       // NOI18N
-            "draw:custom-shape",                                                // NOI18N
+            "draw:rect",                                                        
+            "draw:line",                                                        
+            "draw:polyline",                                                    
+            "draw:polygon",                                                     
+            "draw:regular-polygon",                                             
+            "draw:path",                                                        
+            "draw:circle",                                                      
+            "draw:ellipse",                                                      
+            "draw:g",                                                           
+            "draw:page-thumbnail",                                              
+            "draw:frame",                                                       
+            "draw:measure",                                                         
+            "draw:caption",                                                     
+            "draw:connector",                                                   
+            "draw:control",                                                     
+            "dr3d:scene",                                                       
+            "draw:custom-shape",                                                
 */ 
         });
         defineIntactTags(new String[]
         {
-            "text:note-citation",                                               // NOI18N
-            "text:change",                                                      // NOI18N
-            "text:tracked-changes",                                             // NOI18N
+            "text:note-citation",                                               
+            "text:change",                                                      
+            "text:tracked-changes",                                             
             
-            "office:scripts",                                                   // NOI18N
-            "office:font-face-decls",                                           // NOI18N
-            "office:automatic-styles",                                          // NOI18N
-            "office:styles",                                                    // NOI18N
+            "office:scripts",                                                   
+            "office:font-face-decls",                                           
+            "office:automatic-styles",                                          
+            "office:styles",                                                    
             
-            "meta:generator",                                                   // NOI18N
-            "meta:initial-creator",                                             // NOI18N
-            "meta:creation-date",                                               // NOI18N
-            "meta:print-date",                                                  // NOI18N
-            "dc:creator",                                                       // NOI18N
-            "dc:date",                                                          // NOI18N
-            "dc:language",                                                      // NOI18N
-            "meta:editing-cycles",                                              // NOI18N
-            "meta:editing-duration",                                            // NOI18N
-            "meta:user-defined",                                                // NOI18N
+            "meta:generator",                                                   
+            "meta:initial-creator",                                             
+            "meta:creation-date",                                               
+            "meta:print-date",                                                  
+            "dc:creator",                                                       
+            "dc:date",                                                          
+            "dc:language",                                                      
+            "meta:editing-cycles",                                              
+            "meta:editing-duration",                                            
+            "meta:user-defined",                                                
         });
         if (options.getTranslateNotes())
         {
-            defineOutOfTurnTag("text:note");                                    // NOI18N
+            defineOutOfTurnTag("text:note");                                    
             // OOo 1.x
-            defineOutOfTurnTag("text:footnote");                                // NOI18N
+            defineOutOfTurnTag("text:footnote");                                
         }
         else
         {
-            defineIntactTag("text:note");                                       // NOI18N
+            defineIntactTag("text:note");                                       
             // OOo 1.x
-            defineIntactTag("text:footnote");                                   // NOI18N
+            defineIntactTag("text:footnote");                                   
         }
         if (options.getTranslateComments())
-            defineOutOfTurnTag("office:annotation");                            // NOI18N
+            defineOutOfTurnTag("office:annotation");                            
         else    
-            defineIntactTag("office:annotation");                               // NOI18N        
+            defineIntactTag("office:annotation");                                       
    
         if (options.getTranslateIndexes())
             defineTranslatableTagAttributes(
-                "text:alphabetical-index-mark",                                 // NOI18N
-                new String[] { "text:string-value", "text:key1", "text:key2" });// NOI18N
+                "text:alphabetical-index-mark",                                 
+                new String[] { "text:string-value", "text:key1", "text:key2" });
         if (options.getTranslateBookmarks())
         {
             defineTranslatableTagsAttribute(
                 new String[] 
-                    {"text:bookmark", "text:bookmark-start",                    // NOI18N
-                     "text:bookmark-end"},                                      // NOI18N
-                     "text:name");                                              // NOI18N
-            defineTranslatableTagAttribute("text:bookmark-ref", "text:ref-name");// NOI18N
+                    {"text:bookmark", "text:bookmark-start",                    
+                     "text:bookmark-end"},                                      
+                     "text:name");                                              
+            defineTranslatableTagAttribute("text:bookmark-ref", "text:ref-name");
         }
         if (!options.getTranslateBookmarkRefs())
         {
-            defineIntactTag("text:bookmark-ref");                               // NOI18N
+            defineIntactTag("text:bookmark-ref");                               
         }    
     
     }

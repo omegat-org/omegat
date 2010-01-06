@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel
+               2007-2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -171,7 +171,10 @@ public class OpenDocDialect extends DefaultXMLDialect
         }
         if (!options.getTranslateBookmarkRefs()) {
             defineIntactTag("text:bookmark-ref");                               
-        }    
+        }
+        if (!options.getTranslatePresNotes()) {
+            defineIntactTag("presentation:notes");
+        }
     
     }
 

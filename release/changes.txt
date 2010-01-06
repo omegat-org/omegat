@@ -1,15 +1,18 @@
 ----------------------------------------------------------------------
- OmegaT 2.1.1 update 1
+ OmegaT 2.1.2 
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
-2.1.1 update 1 vs. 2.1.1
+2.1.2 vs. 2.1.1
 
   Implemented requests:
 
    - Selection of files to translate in console mode
   http://sourceforge.net/support/tracker.php?aid=2890282
+
+  - Allow translating or not presentation notes in Impress
+  http://sourceforge.net/support/tracker.php?aid=2926510
 
   Other enhancements:
   

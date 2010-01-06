@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007 Didier Briel
+ Copyright (C) 2007-2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -40,6 +40,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[+] Bookmark references
  * <li>[+] Notes
  * <li>[+] Comments
+ * <li>[+] Presentation notes
  * </ul>
  * 
  * @author Didier Briel
@@ -50,6 +51,7 @@ public class OpenDocOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_BOOKMARKS_REFS = "translateBookmarkRefs";
     private static final String OPTION_TRANSLATE_NOTES = "translateNotes";
     private static final String OPTION_TRANSLATE_COMMENTS = "translateComments";
+    private static final String OPTION_TRANSLATE_PRES_NOTES = "translatePresNotes";
 
     public OpenDocOptions(Map<String, String> config) {
         super(config);
@@ -125,4 +127,19 @@ public class OpenDocOptions extends AbstractOptions {
     public void setTranslateComments(boolean translateComments) {
         setBoolean(OPTION_TRANSLATE_COMMENTS, translateComments);
     }
+    /**
+     * Returns whether Presentation notes should be translated.
+     */
+
+    public boolean getTranslatePresNotes() {
+        return getBoolean(OPTION_TRANSLATE_PRES_NOTES, true);
+    }
+
+    /**
+     * Sets whether Presentation notes should be translated.
+     */
+    public void setTranslatePresNotes(boolean translatePresNotes) {
+        setBoolean(OPTION_TRANSLATE_PRES_NOTES, translatePresNotes);
+    }
+
 }

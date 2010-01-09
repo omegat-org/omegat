@@ -267,10 +267,10 @@
 
     <li>Click on the icon button, then hit Browse... and navigate to the
     /images subfolder in the OmegaT application folder. Select the <span style=
-    "font-style: italic;">OmegaT_icon.png</span> . GNOME may fail to display the
-    icon files in the available formats and initially appear to expect an SVG
-    file, but if the folder is selected, the files should appear and OmegaT_icon.png
-    can be selected.</li>
+    "font-style: italic;">OmegaT_icon.png</span> . GNOME may fail to display
+    the icon files in the available formats and initially appear to expect an
+    SVG file, but if the folder is selected, the files should appear and
+    OmegaT_icon.png can be selected.</li>
   </ul>
 
   <h3><a name="linux_running" id="linux_running"></a>Running OmegaT</h3>
@@ -391,12 +391,12 @@
 
   <p>If you want to change the Java launch parameters you can modify the
   OmegaT.app default settings by editing the <em>Info.plist</em> file located
-  in <em>OmegaT.app/Contents/</em>. Open the file "Info.plist" by right-clicking
-  on it and selecting your text editor of choice. You can modify the
-  <em>Properties</em> part as well as the <em>VMOptions</em> part. If you want
-  to add values to <em>VMOptions</em>, put a space between them. For example,
-  <code>-Xmx1024M -Duser.language=ja</code> will launch OmegaT with 1024MB of
-  memory and with the user interface in Japanese.</p>
+  in <em>OmegaT.app/Contents/</em>. Open the file "Info.plist" by
+  right-clicking on it and selecting your text editor of choice. You can modify
+  the <em>Properties</em> part as well as the <em>VMOptions</em> part. If you
+  want to add values to <em>VMOptions</em>, put a space between them. For
+  example, <code>-Xmx1024M -Duser.language=ja</code> will launch OmegaT with
+  1024MB of memory and with the user interface in Japanese.</p>
 
   <p>Launching <em>OmegaT.app</em> directly will not allow you to run multiple
   instances of <em>OmegaT.app</em>. If you need to run multiple instances of
@@ -447,8 +447,8 @@
         </td>
 
         <td width="70%">
-          <p>download <em>OmegaT_2.0.x_Without_JRE.zip</em>. This package can be
-          used on any platform where a Java 1.5 compatible JRE is
+          <p>download <em>OmegaT_2.0.x_Without_JRE.zip</em>. This package can
+          be used on any platform where a Java 1.5 compatible JRE is
           installed.</p>
         </td>
       </tr>
@@ -684,11 +684,32 @@
           of memory is therefore:</p>
 
           <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Proxy server address and
+  port:</strong><em>&nbsp;-Dhttp.proxyHost=&lt;server IP
+  address&gt;&nbsp;-Dhttp.proxyPort=&lt;port number&gt;</em></p>
+
+  <table summary="just formatting">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>This command defines a proxy server, to be able to access the
+          Internet from behind a proxy.</p>
+
+          <p><em>java -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar
+          OmegaT.jar</em></p>
 
           <p>Arguments can be combined: to launch OmegaT with all the examples
           described above, the command would be:<br>
           <em>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR
-          -Xmx1024M -jar OmegaT.jar</em></p>
+          -Xmx1024M -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar
+          OmegaT.jar</em></p>
         </td>
       </tr>
     </tbody>

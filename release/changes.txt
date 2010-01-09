@@ -104,10 +104,15 @@ as a repetition in Match Statistics
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 1
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 1 vs. 2.0.5
+
+  Implemented requests:
+
+  - Document proxy setting
+  http://sourceforge.net/support/tracker.php?aid=1878073
 
   Other enhancements:
 

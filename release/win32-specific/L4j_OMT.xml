@@ -15,7 +15,7 @@
   <icon>..\..\Images\OmegaT.ico</icon>
   <jre>
     <path>jre</path>
-    <minVersion>1.4.2</minVersion>
+    <minVersion>1.5.0</minVersion>
     <maxVersion></maxVersion>
     <jdkPreference>preferJdk</jdkPreference>
   </jre>

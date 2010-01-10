@@ -2,7 +2,7 @@
  OmegaT 2.1.2 
 ----------------------------------------------------------------------
   5 Enhancements
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 vs. 2.1.1
 
@@ -31,6 +31,9 @@ set in Editing Behaviour, the previous segment was entered as translation.
 
   - OmT loses msgctxt content in PO files
   http://sourceforge.net/support/tracker.php?aid=2920637
+
+  - Same accelerator for "Tab", "Team" and "Tag Validation"
+  http://sourceforge.net/support/tracker.php?aid=2929351
 
 ----------------------------------------------------------------------
  OmegaT 2.1.1

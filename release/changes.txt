@@ -128,7 +128,7 @@ as a repetition in Match Statistics
 
   - Images are included in the minimal localisation pack
 
-  - <wp:align> tags are hidden in the OpenXML filter 
+  - <wp:align> and <w:drawing> tags are hidden in the OpenXML filter 
 
   Bug Fixes:
 

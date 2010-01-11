@@ -45,26 +45,26 @@ public class OpenXMLDialect extends DefaultXMLDialect
         defineParagraphTags(new String[]
         {
             // Word
-            "w:p",                                                              // NOI18N
-            "w:tab",                                                            // NOI18N
-            "w:br",                                                             // NOI18N
+            "w:p",                                                              
+            "w:tab",                                                            
+            "w:br",                                                             
             // Excel
-            "si",                                                               // NOI18N
+            "si",                                                               
             // PowerPoint
-            "a:p",                                                              // NOI18N
+            "a:p",                                                              
         });
         
         if (options.getTranslateHiddenText()) // Word
-            defineOutOfTurnTag("w:instrText");                                  // NOI18N
+            defineOutOfTurnTag("w:instrText");                                  
         else
-            defineIntactTag("w:instrText");                                     // NOI18N
+            defineIntactTag("w:instrText");                                     
         
         defineIntactTags(new String[]
         {
             // Excel
-            "authors",                                                          // NOI18N
+            "authors",                                                          
             // PowerPoint
-            "p:attrName",                                                       // NOI18N
+            "p:attrName",                                                       
         });        
     }
 }

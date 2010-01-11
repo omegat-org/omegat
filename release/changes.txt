@@ -107,7 +107,7 @@ as a repetition in Match Statistics
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 1
 ----------------------------------------------------------------------
-  6 Enhancements
+  7 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 1 vs. 2.0.5
@@ -126,7 +126,9 @@ as a repetition in Match Statistics
 
   - Hunspell for Linux 64-bit updated to 1.2.8
 
-  - Images are included in the minimal localisation pack 
+  - Images are included in the minimal localisation pack
+
+  - <wp:align> tags are hidden in the OpenXML filter 
 
   Bug Fixes:
 

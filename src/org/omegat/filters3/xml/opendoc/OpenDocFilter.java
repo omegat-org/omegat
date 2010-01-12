@@ -84,11 +84,9 @@ public class OpenDocFilter extends AbstractFilter
     }
 
     OpenDocXMLFilter xmlfilter = null;
-    private OpenDocXMLFilter getXMLFilter(Map<String, String> options)
+    private OpenDocXMLFilter createXMLFilter(Map<String, String> options)
     {
-        if (xmlfilter==null) {
-            xmlfilter = new OpenDocXMLFilter();
-        }
+        xmlfilter = new OpenDocXMLFilter();
         xmlfilter.setCallbacks(entryParseCallback, entryTranslateCallback);
         // Defining the actual dialect, because at this step 
         // we have the options
@@ -132,7 +130,7 @@ public class OpenDocFilter extends AbstractFilter
                 
                 try
                 {
-                    getXMLFilter(processOptions).processFile(tmpin, null, tmpout, null);
+                    createXMLFilter(processOptions).processFile(tmpin, null, tmpout, null);
                 }
                 catch (Exception e)
                 {

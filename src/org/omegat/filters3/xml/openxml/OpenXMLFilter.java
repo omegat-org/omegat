@@ -133,11 +133,9 @@ public class OpenXMLFilter extends AbstractFilter
     }
 
     OpenXMLXMLFilter xmlfilter = null;
-    private OpenXMLXMLFilter getXMLFilter()
+    private OpenXMLXMLFilter createXMLFilter()
     {
-        if (xmlfilter==null) {
-            xmlfilter = new OpenXMLXMLFilter();
-        }
+        xmlfilter = new OpenXMLXMLFilter();
         xmlfilter.setCallbacks(entryParseCallback, entryTranslateCallback);
         // Defining the actual dialect, because at this step 
         // we have the options
@@ -273,7 +271,7 @@ public class OpenXMLFilter extends AbstractFilter
              
                 try
                 {
-                    getXMLFilter().processFile(tmpin, null, tmpout, null);
+                    createXMLFilter().processFile(tmpin, null, tmpout, null);
                 }
                 catch (Exception e)
                 {

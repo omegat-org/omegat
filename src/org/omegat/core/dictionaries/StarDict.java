@@ -154,8 +154,8 @@ public class StarDict implements IDictionary {
     /**
      * Get one article.
      */
-    public String readArticle(String word, Object acticleData) {
-        return (String) acticleData;
+    public String readArticle(String word, Object articleData) {
+        return (String) articleData;
     }
 
     /**

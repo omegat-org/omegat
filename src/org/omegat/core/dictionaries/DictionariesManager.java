@@ -100,6 +100,17 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                 } catch (Exception ex) {
                     Log.log("Error load dictionary: " + ex.getMessage());
                 }
+            } else if (fn.endsWith(".dsl")) {
+                try {
+                    IDictionary dict = new LingvoDSL(file);
+                    Map<String, Object> header = dict.readHeader();
+                    synchronized (this) {
+                        infos.put(fn, new DictionaryInfo(dict, header));
+                    }
+                    Log.log("Loaded dictionary from " + fn);
+                } catch (Exception ex) {
+                    Log.log("Error load dictionary: " + ex.getMessage());
+                }
             }
         }
         pane.refresh();

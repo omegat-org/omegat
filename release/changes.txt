@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.2 
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 vs. 2.1.1
@@ -22,6 +22,8 @@
 exact match, it is ordered first
 
   - Spaces around segments are better preserved in the HTML filter
+
+  - Support for Lingvo DSL dictionaries
 
   Bug fixes:
 

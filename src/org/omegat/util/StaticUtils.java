@@ -709,14 +709,14 @@ public class StaticUtils
         }
         else 
         {
-            // convert * (0 or more characters) and ? (0 or 1 character)
+            // convert * (0 or more characters) and ? (1 character)
             // to their regex equivalents (\S* and \S? respectively)
 //            text = text.replaceAll("\\?", "\\S?"); // do ? first, or * will be converted twice
 //            text = text.replaceAll("\\*", "\\S*");
 //          The above lines were not working:
 //          [ 1680081 ] Search: simple wilcards do not work
 //          The following correction was contributed by Tiago Saboga
-            text = text.replaceAll("\\?", "\\\\S?"); // do ? first, or * will be converted twice
+            text = text.replaceAll("\\?", "\\\\S"); // do ? first, or * will be converted twice
             text = text.replaceAll("\\*", "\\\\S*");
         }
 

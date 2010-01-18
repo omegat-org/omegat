@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.2 
 ----------------------------------------------------------------------
-  6 Enhancements
+  7 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 vs. 2.1.1
@@ -13,6 +13,9 @@
 
   - Allow translating or not presentation notes in Impress
   http://sourceforge.net/support/tracker.php?aid=2926510
+
+  - Insert Source Tags
+  http://sourceforge.net/support/tracker.php?aid=2873562
 
   Other enhancements:
   
@@ -110,7 +113,7 @@ as a repetition in Match Statistics
  OmegaT 2.0.5 update 1
 ----------------------------------------------------------------------
   7 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 1 vs. 2.0.5
 
@@ -140,6 +143,8 @@ as a repetition in Match Statistics
   http://sourceforge.net/support/tracker.php?aid=1895401
 
   - The /gen folder was not included in the source package
+
+  - Correct accelerators for Export Selection and Switch Case
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5

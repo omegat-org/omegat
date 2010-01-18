@@ -8,6 +8,7 @@
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel, Alex Buloichik
+               2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -70,6 +71,7 @@ import org.omegat.util.OConsts;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Wildrich Fourie
  */
 public class MainWindowMenuHandler {
     private final MainWindow mainWindow;
@@ -464,6 +466,36 @@ public class MainWindowMenuHandler {
 
     public void toolsValidateTagsMenuItemActionPerformed() {
         Core.getTagValidation().validateTags();
+    }
+
+    public void editTagPainterMenuItemActionPerformed() {
+        // Identify all the tags in the source text and automatically inserts
+        // them into the target text
+        String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
+        String tagString = "";
+
+        while (sourceText != null && sourceText.contains("<") && sourceText.contains(">"))
+            if(sourceText.indexOf("<") < sourceText.indexOf(">"))
+            {
+                int index1 = sourceText.indexOf("<");
+                int index2 = sourceText.indexOf(">");
+                int index3 = sourceText.indexOf("<", index2);
+
+                String space = "";
+                if(index3 - index2 > 1)
+                    space = " ";
+
+                // Test max char
+                int len = index2 - index1;
+                if(len <= 5)
+                    tagString = tagString + sourceText.substring(index1, index2 + 1) + space;
+                sourceText = sourceText.substring(index2 + 1);
+            }
+
+        if(!tagString.equals(""))
+        {
+            Core.getEditor().insertText(tagString);
+        }
     }
     
     public void toolsShowStatisticsStandardMenuItemActionPerformed() {

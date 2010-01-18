@@ -8,6 +8,7 @@
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel, Alex Buloichik
+               2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -66,6 +67,7 @@ import org.openide.awt.Mnemonics;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Wildrich Fourie
  */
 public class MainWindowMenu implements ActionListener {
     private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
@@ -160,6 +162,8 @@ public class MainWindowMenu implements ActionListener {
         editMenu.add(new JSeparator());
         editMenu.add(editOverwriteSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_OVERWRITE"));
         editMenu.add(editInsertSourceMenuItem = createMenuItem("TF_MENU_EDIT_SOURCE_INSERT"));
+        editMenu.add(new JSeparator());
+        editMenu.add(editTagPainterMenuItem = createMenuItem("TF_MENU_EDIT_TAGPAINT"));
         editMenu.add(new JSeparator());
         editMenu.add(editExportSelectionMenuItem = createMenuItem("TF_MENU_EDIT_EXPORT_SELECTION"));
         editMenu.add(new JSeparator());
@@ -351,7 +355,7 @@ public class MainWindowMenu implements ActionListener {
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
                 projectCompileMenuItem,
 
-                editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem,
+                editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem, editTagPainterMenuItem,
                 editOverwriteSourceMenuItem, editOverwriteTranslationMenuItem, editRedoMenuItem,
                 editSelectFuzzy1MenuItem, editSelectFuzzy2MenuItem, editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem,
                 editSelectFuzzy5MenuItem, editUndoMenuItem, switchCaseSubMenu, editOverwriteMachineTranslationMenuItem,
@@ -359,7 +363,7 @@ public class MainWindowMenu implements ActionListener {
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem,
 
-                viewFileListMenuItem, toolsValidateTagsMenuItem,
+                viewFileListMenuItem, toolsValidateTagsMenuItem, 
                 toolsShowStatisticsStandardMenuItem,
                 toolsShowStatisticsMatchesMenuItem };
 
@@ -398,6 +402,7 @@ public class MainWindowMenu implements ActionListener {
     JMenuItem editSelectFuzzy4MenuItem;
     JMenuItem editSelectFuzzy5MenuItem;
     JMenuItem editUndoMenuItem;
+    JMenuItem editTagPainterMenuItem;
     JMenuItem editExportSelectionMenuItem;
     public JMenuItem gotoHistoryBackMenuItem;
     public JMenuItem gotoHistoryForwardMenuItem;

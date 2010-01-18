@@ -36,6 +36,8 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.Calendar;
+import java.util.Date;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -48,8 +50,10 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.SpinnerDateModel;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 import javax.swing.text.StringContent;
@@ -82,6 +86,7 @@ public class SearchWindow extends JFrame
         //super(par, false);
         m_parent = par;
 
+        //box Search bSearch
         m_searchLabel = new JLabel();
         m_searchField = new MFindField();
 
@@ -97,23 +102,66 @@ public class SearchWindow extends JFrame
         m_exactSearchRB   = new JRadioButton();
         m_keywordSearchRB = new JRadioButton();
         m_resultsLabel    = new JLabel();
+        m_advancedButton  = new JButton();
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(m_exactSearchRB);
         bg.add(m_keywordSearchRB);
 
+        //box Radio Box bRB
         Box bRB = Box.createHorizontalBox();
         bRB.add(m_exactSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
         bRB.add(m_keywordSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
         bRB.add(m_resultsLabel);
+        bRB.add(Box.createHorizontalGlue());
+        bRB.add(m_advancedButton);
+
+        //box AuthorBox
+        m_authorCB = new JCheckBox();
+        m_authorField = new MFindField();
+        m_authorField.setEditable(false);
+        bAB = Box.createHorizontalBox();
+        bAB.add(m_authorCB);
+        bAB.add(m_authorField);
+        bAB.setVisible(false);
+
+        //box DateBox
+        Calendar calendar= Calendar.getInstance();
+        Date initDate = calendar.getTime();
+        calendar.add(Calendar.YEAR, -100);
+        Date earliestDate = calendar.getTime();
+        Date latestDate = initDate;
+        m_dateFromModel = new SpinnerDateModel(initDate,
+                earliestDate,
+                latestDate,
+                Calendar.YEAR);
+        m_dateFromCB       = new JCheckBox();
+        m_dateFromSpinner  = new JSpinner(m_dateFromModel);
+        m_dateFromSpinner.setEnabled(false);
+        bDB = Box.createHorizontalBox();
+        bDB.add(m_dateFromCB);
+        bDB.add(m_dateFromSpinner);
+
+        m_dateToModel = new SpinnerDateModel(initDate,
+                earliestDate,
+                latestDate,
+                Calendar.YEAR);
+        m_dateToCB       = new JCheckBox();
+        m_dateToSpinner  = new JSpinner(m_dateToModel);
+        m_dateToSpinner.setEnabled(false);
+        bDB.add(m_dateToCB);
+        bDB.add(m_dateToSpinner);
+        bDB.add(Box.createHorizontalGlue());
+        bDB.setVisible(false);
 
         m_caseCB          = new JCheckBox();
         m_regexCB         = new JCheckBox();
         m_tmSearchCB      = new JCheckBox();
         m_allResultsCB    = new JCheckBox();
 
+        //box OptionsBox bOB
         Box bOB = Box.createHorizontalBox();
         bOB.add(m_caseCB);
         bOB.add(Box.createHorizontalStrut(10));
@@ -125,6 +173,7 @@ public class SearchWindow extends JFrame
         m_viewer = new EntryListPane(par);
         JScrollPane viewerScroller = new JScrollPane(m_viewer);
 
+        //box Directory bDir
         m_dirLabel = new JLabel();
         m_dirField = new JTextField();
         m_dirField.setEditable(false);
@@ -143,6 +192,7 @@ public class SearchWindow extends JFrame
 
         m_dismissButton = new JButton();
 
+        //box CheckBox
         Box bCB = Box.createHorizontalBox();
         bCB.add(m_dirCB);
         bCB.add(Box.createHorizontalStrut(10));
@@ -176,6 +226,14 @@ public class SearchWindow extends JFrame
         gridbag.setConstraints(bOB, c);
         cp.add(bOB);
 
+        //author search
+        gridbag.setConstraints(bAB, c);
+        cp.add(bAB);
+
+        //date search
+        gridbag.setConstraints(bDB, c);
+        cp.add(bDB);
+
         // view pane
         c.weighty = 3.0;
         c.fill = GridBagConstraints.BOTH;
@@ -208,6 +266,36 @@ public class SearchWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 doSearch();
+            }
+        });
+        
+        m_advancedButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                showHideAdvanced();
+            }
+        });
+        
+        m_authorCB.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                enableDisableAuthor();
+                
+            }
+        });
+        m_dateToCB.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                enableDisableDateTo();
+                
+            }
+        });
+        m_dateFromCB.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                enableDisableDateFrom();
+                
             }
         });
         
@@ -584,13 +672,38 @@ public class SearchWindow extends JFrame
                                    m_caseCB.isSelected(),
                                    m_regexCB.isSelected(),
                                    m_tmSearchCB.isSelected(),
-                                   m_allResultsCB.isSelected());
+                                   m_allResultsCB.isSelected(),
+                                   m_authorCB.isSelected(),
+                                   m_authorField.getText(),
+                                   m_dateFromCB.isSelected(),
+                                   m_dateFromModel.getDate().getTime(),
+                                   m_dateToCB.isSelected(),
+                                   m_dateToModel.getDate().getTime()
+                                   );
         }
     }
     
     private void doCancel()
     {
         dispose();
+    }
+    
+    private void showHideAdvanced() {
+        boolean visible = !bAB.isVisible();
+        bAB.setVisible(visible);
+        bDB.setVisible(visible);
+    }
+    private void enableDisableAuthor() {
+        boolean editable = m_authorCB.isSelected();
+        m_authorField.setEditable(editable);
+    }
+    private void enableDisableDateFrom() {
+        boolean enable = m_dateFromCB.isSelected();
+        m_dateFromSpinner.setEnabled(enable);
+    }
+    private void enableDisableDateTo() {
+        boolean enable = m_dateToCB.isSelected();
+        m_dateToSpinner.setEnabled(enable);
     }
     
     private void updateUIText()
@@ -602,6 +715,11 @@ public class SearchWindow extends JFrame
 
         Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.getString("SW_EXACT_SEARCH"));
         Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.getString("SW_WORD_SEARCH"));
+        Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_ADVANCED_SEARCH"));
+        
+        Mnemonics.setLocalizedText(m_authorCB, OStrings.getString("SW_AUTHOR"));
+        Mnemonics.setLocalizedText(m_dateFromCB, OStrings.getString("SW_CHANGED_AFTER"));
+        Mnemonics.setLocalizedText(m_dateToCB, OStrings.getString("SW_CHANGED_BEFORE"));
 
         Mnemonics.setLocalizedText(m_caseCB, OStrings.getString("SW_CASE_SENSITIVE"));
         Mnemonics.setLocalizedText(m_regexCB, OStrings.getString("SW_REG_EXPRESSIONS"));
@@ -688,6 +806,20 @@ public class SearchWindow extends JFrame
     private JRadioButton m_exactSearchRB;
     private JRadioButton m_keywordSearchRB;
     private JLabel       m_resultsLabel;
+    private JButton      m_advancedButton;
+
+    private Box          bAB;
+    private JCheckBox    m_authorCB;
+    private JTextField   m_authorField;
+
+    private Box          bDB;
+    private JCheckBox    m_dateFromCB;
+    private JSpinner     m_dateFromSpinner;
+    private SpinnerDateModel m_dateFromModel;
+
+    private JCheckBox    m_dateToCB;
+    private JSpinner     m_dateToSpinner;
+    private SpinnerDateModel m_dateToModel;
 
     private JCheckBox m_caseCB;
     private JCheckBox m_regexCB;

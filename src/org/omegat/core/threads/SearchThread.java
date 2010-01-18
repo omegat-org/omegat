@@ -87,7 +87,7 @@ public class SearchThread extends Thread
      * Starts a search if another is not currently running.
      * To search current project only, set rootDir to null.
      *
-     * @param text string to searh for
+     * @param text string to search for
      * @param rootDir folder to search in
      * @param recursive search in subfolders of rootDir too
      * @param exact search for a substring
@@ -95,6 +95,13 @@ public class SearchThread extends Thread
      * @param caseSensitive search case sensitive
      * @param regex enable regular expressions, otherwise just use wildcards (*?)
      * @param tm search in legacy and orphan TM strings too
+     * @param allResults
+     * @param searchAuthor search for tmx segments modified by author id/name
+     * @param author string to search for in TMX attribute modificationId
+     * @param searchDateAfter search for translation segments modified after the given date
+     * @param dateAfter the date after which the modification date has to be
+     * @param searchDateBefore search for translation segments modified before the given date
+     * @param dateBefore the date before which the modification date has to be
      */
     public void requestSearch(String  text,
                               String  rootDir,
@@ -104,7 +111,14 @@ public class SearchThread extends Thread
                               boolean caseSensitive,
                               boolean regex,
                               boolean tm,
-                              boolean allResults)
+                              boolean allResults,
+                              boolean searchAuthor,
+                              String  author,
+                              boolean searchDateAfter,
+                              long    dateAfter,
+                              boolean searchDateBefore,
+                              long    dateBefore
+                              )
     {
         if (!m_searching)
         {
@@ -112,7 +126,11 @@ public class SearchThread extends Thread
             m_searchRecursive = recursive;
             m_tmSearch = tm;
             m_allResults = allResults;
+            m_searchAuthor = searchAuthor;
+            m_searchDateAfter = searchDateAfter;
+            m_searchDateBefore = searchDateBefore;
             m_searching = true;
+            
             m_entrySet = new HashSet<String>(); // HP
 
             // create a list of matchers
@@ -161,6 +179,12 @@ public class SearchThread extends Thread
                     }
                 }
             }
+           // create a matcher for the author search string
+            if (!regex)
+                author = StaticUtils.escapeNonRegex(author, false);
+            m_author = Pattern.compile(author, flags).matcher("");
+            m_dateBefore=dateBefore;
+            m_dateAfter = dateAfter;
         }
     }
     
@@ -199,7 +223,7 @@ public class SearchThread extends Thread
                     if (m_searchDir == null)
                     {
                         // if no search directory specified, then we are
-                        //	searching currnet project only
+                        // searching current project only
                         searchProject();
                     }
                     else
@@ -300,9 +324,13 @@ public class SearchThread extends Thread
 
             // if the source or translation contain all
             // search strings, report the hit
-            if (   searchString(srcText)
-                || searchString(locText))
+            if ((   searchString(srcText) || searchString(locText))
+                && (!m_searchAuthor || searchAuthor(te))
+                && (!m_searchDateBefore || te.changeDate != 0 && te.changeDate < m_dateBefore )
+                && (!m_searchDateAfter  || te.changeDate != 0 && te.changeDate > m_dateAfter )
+                ) {
                 foundString(i, null, srcText, locText);
+            }
 
             // stop searching if the max. nr of hits has been reached
             if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
@@ -316,34 +344,43 @@ public class SearchThread extends Thread
             for (Map.Entry<String, TransEntry> en : Core.getProject()
                     .getOrphanedSegments().entrySet()) {
                 String srcText = en.getKey();
-                String locText = en.getValue().translation;
+                TransEntry te = en.getValue();
 
                 // if the source or translation contain all
                 // search strings, report the hit
-                if (searchString(srcText) || searchString(locText)) {
-                    foundString(-1, file, srcText, locText);
+                if ((searchString(srcText) || searchString(te.translation))
+                    && (!m_searchAuthor || searchAuthor(te))
+                    && (!m_searchDateBefore || te.changeDate != 0 && te.changeDate < m_dateBefore )
+                    && (!m_searchDateAfter  || te.changeDate != 0 && te.changeDate > m_dateAfter )
+                    ){
+                    foundString(-1, file, srcText, te.translation);
                     // stop searching if the max. nr of hits has been reached
                     if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
                         break;
                     }
                 }
             }
-            // search TM entries
-            for (Map.Entry<String, List<TransMemory>> tmEn : Core.getProject()
+            // search TM entries, unless we search for date or author. 
+            // They are not available in external TM, so skip the search in 
+            // that case.
+            if (!m_searchAuthor && !m_searchDateAfter && !m_searchDateBefore) {
+                for (Map.Entry<String, List<TransMemory>> tmEn : Core.getProject()
                     .getTransMemories().entrySet()) {
-                file = tmEn.getKey();
-                for (TransMemory tm : tmEn.getValue()) {
-                    String srcText = tm.source;
-                    String locText = tm.target;
+                    file = tmEn.getKey();
+                    for (TransMemory tm : tmEn.getValue()) {
+                        String srcText = tm.source;
+                        String locText = tm.target;
 
-                    // if the source or translation contain all
-                    // search strings, report the hit
-                    if (searchString(srcText) || searchString(locText)) {
-                        foundString(-1, file, srcText, locText);
-                        // stop searching if the max. nr of hits has been
-                        // reached
-                        if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
-                            break;
+                        // if the source or translation contain all
+                        // search strings, report the hit
+                        if (searchString(srcText) || searchString(locText)) {
+
+                            foundString(-1, file, srcText, locText);
+                            // stop searching if the max. nr of hits has been
+                            // reached
+                            if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                                break;
+                            }
                         }
                     }
                 }
@@ -418,6 +455,28 @@ public class SearchThread extends Thread
         // so this is a hit
         return true;
     }
+    
+    /**
+     * Looks for an occurrence of the author search string in the supplied text string.
+     *
+     * @param author The text string to search in
+     *
+     * @return True if the text string contains the search string
+     */
+   private boolean searchAuthor(TransEntry te) {
+       if (te == null || m_author == null )
+           return false;
+       String author = te.changeId;
+       if (author == null) return false;
+
+       // check the text against the author matcher
+       m_author.reset(author);
+       if (!m_author.find()) return false;
+
+       // if we arrive here, the search string has been matched,
+       // so this is a hit
+       return true;
+   }
 
     /////////////////////////////////////////////////////////////////
     // interface used by FileHandlers
@@ -428,9 +487,10 @@ public class SearchThread extends Thread
         if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
             return;
 
-        if (searchString(seg))
+        if (searchString(seg)) {
             // found a match - do something about it
             foundString(-1, m_curFileName, seg, null);
+        }
     }
 
     private SearchWindow m_window;
@@ -440,9 +500,15 @@ public class SearchThread extends Thread
     private String    m_curFileName;
     private boolean   m_tmSearch;
     private boolean   m_allResults;
+    private boolean   m_searchAuthor;
+    private boolean   m_searchDateAfter;
+    private boolean   m_searchDateBefore;
     private Set<String>   m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
     private List<Matcher> m_matchers; // HP: contains a matcher for each search string
                                   //     (multiple if keyword search)
+    private Matcher   m_author;
+    private long m_dateBefore;
+    private long m_dateAfter;
 
     private int m_numFinds;
 }

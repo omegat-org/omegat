@@ -113,7 +113,7 @@ as a repetition in Match Statistics
  OmegaT 2.0.5 update 1
 ----------------------------------------------------------------------
   7 Enhancements
-  4 Bugfixes
+  5 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 1 vs. 2.0.5
 
@@ -145,6 +145,9 @@ as a repetition in Match Statistics
   - The /gen folder was not included in the source package
 
   - Correct accelerators for Export Selection and Switch Case
+
+  - The Linux "with JRE" script wasn't working when the path contained
+a space
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5

@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.2 
 ----------------------------------------------------------------------
-  7 Enhancements
-  3 Bugfixes
+  8 Enhancements
+  4 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 vs. 2.1.1
 
@@ -28,6 +28,9 @@ exact match, it is ordered first
 
   - Support for Lingvo DSL dictionaries
 
+  - It is now possible to search for Author (changeid) and date of change 
+(changedate)
+
   Bug fixes:
 
   - When the project was reloaded after pressing OK in Project Properties,
@@ -39,6 +42,9 @@ set in Editing Behaviour, the previous segment was entered as translation.
 
   - Same accelerator for "Tab", "Team" and "Tag Validation"
   http://sourceforge.net/support/tracker.php?aid=2929351
+
+  - In search: '?' would find 0 or 1 character, while search instructions 
+clearly state that it should find 1 character, which is now the case
 
 ----------------------------------------------------------------------
  OmegaT 2.1.1

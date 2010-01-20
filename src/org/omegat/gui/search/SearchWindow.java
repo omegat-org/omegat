@@ -708,7 +708,7 @@ public class SearchWindow extends JFrame
 
         Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.getString("SW_EXACT_SEARCH"));
         Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.getString("SW_WORD_SEARCH"));
-        Mnemonics.setLocalizedText(m_regexpSearchRB, OStrings.getString("SW_REG_EXPRESSIONS"));
+        Mnemonics.setLocalizedText(m_regexpSearchRB, OStrings.getString("SW_REGEXP_SEARCH"));
         Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_ADVANCED_SEARCH"));
         
         Mnemonics.setLocalizedText(m_authorCB, OStrings.getString("SW_AUTHOR"));

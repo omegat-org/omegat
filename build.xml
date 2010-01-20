@@ -212,6 +212,7 @@
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
  
+        <delete file="dist/OmegaT.iss"/>
         <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.iss" filtering="on"/>
         
@@ -226,6 +227,7 @@
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
         
+        <delete file="dist/OmegaT-JRE.iss"/>
         <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
         <copy todir="dist" file="release/win32-specific/OmegaT-JRE.iss" filtering="on"/>
         <exec executable="${iscc.exe}">

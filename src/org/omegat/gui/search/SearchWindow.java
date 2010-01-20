@@ -122,7 +122,6 @@ public class SearchWindow extends JFrame
         bRB.add(Box.createHorizontalStrut(10));
         bRB.add(m_resultsLabel);
         bRB.add(Box.createHorizontalGlue());
-        bRB.add(m_advancedButton);
 
         //box AuthorBox
         m_authorCB = new JCheckBox();
@@ -172,6 +171,7 @@ public class SearchWindow extends JFrame
         bOB.add(Box.createHorizontalStrut(10));
         bOB.add(m_tmSearchCB);
         bOB.add(m_allResultsCB);
+        bOB.add(m_advancedButton);
 
         m_viewer = new EntryListPane(par);
         JScrollPane viewerScroller = new JScrollPane(m_viewer);

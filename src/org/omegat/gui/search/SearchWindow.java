@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
                2009 Didier Briel
+               2010 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -79,6 +80,7 @@ import org.openide.awt.Mnemonics;
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Didier Briel
+ * @author Martin Fleurke
  */
 public class SearchWindow extends JFrame
 {

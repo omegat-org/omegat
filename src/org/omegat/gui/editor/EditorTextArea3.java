@@ -1,10 +1,11 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
                2009 Didier Briel
+               2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +27,9 @@
 package org.omegat.gui.editor;
 
 import java.awt.Point;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.Transferable;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -45,6 +49,7 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
+import javax.swing.text.Highlighter.Highlight;
 import javax.swing.text.IconView;
 import javax.swing.text.ParagraphView;
 import javax.swing.text.StyleConstants;
@@ -56,17 +61,20 @@ import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.gui.glossary.GlossaryEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Wildrich Fourie
  */
 public class EditorTextArea3 extends JEditorPane {
 
@@ -76,6 +84,8 @@ public class EditorTextArea3 extends JEditorPane {
     protected final EditorController controller;
 
     protected String currentWord;
+
+    private Highlight[] transtipUnderlines;
 
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
@@ -105,6 +115,12 @@ public class EditorTextArea3 extends JEditorPane {
             }
         });
     }
+    
+    // Returns the Highlights as used in the TransTips
+    private void getHighlights()
+    {
+        transtipUnderlines = this.getHighlighter().getHighlights();
+    }
 
     /** Orders to cancel all Undoable edits. */
     public void cancelUndo() {
@@ -131,6 +147,10 @@ public class EditorTextArea3 extends JEditorPane {
                 controller.goToSegmentAtLocation(getCaretPosition());
             }
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
+                // insert trans tip
+                if(createTransTipPopUp(e.getPoint()))
+                    return;
+
                 // any spell checking to be done?
                 if (createSpellCheckerPopUp(e.getPoint()))
                     return;
@@ -330,7 +350,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     /**
      * Check if specified key pressed.
-     * 
+     *
      * @param e
      *            pressed key event
      * @param code
@@ -383,9 +403,11 @@ public class EditorTextArea3 extends JEditorPane {
                 - OConsts.segmentStartStringFull.length()
                 && mousepos <= getOmDocument().getTranslationEnd()
                         + OConsts.segmentStartStringFull.length())
-            return false;
+            return false;        
 
         JPopupMenu popup = new JPopupMenu();
+
+        createDefaultContextMenu(popup);
 
         JMenuItem item = popup
                 .add(OStrings.getString("MW_PROMPT_SEG_NR_TITLE"));
@@ -404,7 +426,7 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * create the spell checker popup menu - suggestions for a wrong word, add
      * and ignore. Works only for the active segment, for the translation
-     * 
+     *
      * @param point
      *            : where should the popup be shown
      */
@@ -430,10 +452,12 @@ public class EditorTextArea3 extends JEditorPane {
 
             if (!Core.getSpellChecker().isCorrect(word)) {
                 // get the suggestions and create a menu
-                List<String> suggestions = Core.getSpellChecker().suggest(word);
+                List<String> suggestions = Core.getSpellChecker().suggest(word);                
 
                 // create the menu
                 JPopupMenu popup = new JPopupMenu();
+
+                createDefaultContextMenu(popup);
 
                 // the suggestions
                 for (final String replacement : suggestions) {
@@ -493,7 +517,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     /**
      * add a new word to the spell checker or ignore a word
-     * 
+     *
      * @param word
      *            : the word in question
      * @param offset
@@ -515,6 +539,132 @@ public class EditorTextArea3 extends JEditorPane {
 
         // redraw segments
         repaint();
+    }
+
+     // Creates the Cut, Copy and Paste menu items
+    protected void createDefaultContextMenu(JPopupMenu popup)
+    {
+        final String selText = this.getSelectedText();
+        final Clipboard omClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        Transferable contents = omClipboard.getContents(this);
+        final EditorTextArea3 ref = this;
+        boolean added = false;
+
+        if(selText != null)
+        {
+            JMenuItem cutContextItem = popup.add(OStrings.getString("CCP_CUT"));
+            JMenuItem copyContextItem = popup.add(OStrings.getString("CCP_COPY"));
+
+            // ActionListeners
+            cutContextItem.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e)
+                {
+                    ref.cut();
+                }});
+            copyContextItem.addActionListener(new ActionListener(){
+                public void actionPerformed(ActionEvent e)
+                {
+                    ref.copy();
+                }});
+
+                added = true;
+        }
+
+        if(contents != null)
+        {
+            JMenuItem pasteContextItem = popup.add(OStrings.getString("CCP_PASTE"));
+            pasteContextItem.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent e)
+            {
+                ref.paste();
+            }});
+
+            added = true;
+        }
+
+        if(added)
+            popup.addSeparator();
+    }
+
+    // Insert a TransTip
+    protected boolean createTransTipPopUp(final Point point)
+    {
+        if(!Preferences.isPreference(Preferences.TRANSTIPS))
+            return false;
+
+        // Convert to point to actual pointer location
+        final int mousepos = this.viewToModel(point);
+
+        // create the menu
+        JPopupMenu popup = new JPopupMenu();
+
+        // Test if clicked on a highlighted word
+        getHighlights();
+        boolean matched = false;
+        final AbstractDocument xlDoc = (AbstractDocument) getDocument();
+        for(int i = 0; i < transtipUnderlines.length; i++)
+        {
+            if(mousepos >= transtipUnderlines[i].getStartOffset() &&
+                    mousepos <= transtipUnderlines[i].getEndOffset())
+            {
+                matched  = true;
+
+                createDefaultContextMenu(popup);
+
+                // Get the glossary entries
+                List<GlossaryEntry> glos = Core.getGlossary().nowEntries;
+                String src = "";
+                try
+                {
+                    src = xlDoc.getText(0, xlDoc.getLength());
+                }
+                catch (BadLocationException bx) { /* Unthrowable */ }
+
+                String woord = src.substring(transtipUnderlines[i].getStartOffset(),
+                        transtipUnderlines[i].getEndOffset());
+
+                // Get the translations
+                GlossaryEntry ge = null;
+                for(int k=0; k < glos.size(); k++)
+                {
+                    if(glos.get(k).getSrcText().toLowerCase().equals(woord.toLowerCase()))
+                    {
+                        ge = glos.get(k);
+                        continue;
+                    }
+                }
+
+                if(ge != null)
+                {
+                    // Split the terms and remove the leading space.
+                    String[] locs = ge.getLocText().split(",");
+                    for(int l=1; l < locs.length; l++)
+                    {
+                        locs[l] = locs[l].trim();
+                    }
+
+                    // Create the MenuItems
+                    for(int l=0; l < locs.length; l++)
+                    {
+                        final String txt = locs[l];
+                        JMenuItem it = popup.add(locs[l]);
+                        it.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e)
+                            {
+                                Core.getEditor().insertText(txt);
+                            }
+                        });
+                    }
+                    i = transtipUnderlines.length;
+                }
+            }
+        }
+        if(!matched)
+            return false;
+        else
+            popup.show(this, (int) point.getX(), (int) point.getY());
+
+        return true;
     }
 
     /**

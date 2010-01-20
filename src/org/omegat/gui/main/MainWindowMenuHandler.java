@@ -524,6 +524,16 @@ public class MainWindowMenuHandler {
         mainWindow.menu.updateEditOverwriteMachineTranslationMenuItem();
     }
 
+    public void optionsTransTipsEnableMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.TRANSTIPS,
+                mainWindow.menu.optionsTransTipsEnableMenuItem.isSelected());
+    }
+
+    public void optionsTransTipsExactMatchMenuItemActionPerformed() {
+        Preferences.setPreference(Preferences.TRANSTIPS_EXACT_SEARCH,
+                mainWindow.menu.optionsTransTipsExactMatchMenuItem.isSelected());
+    }
+
     /**
      * Displays the font dialog to allow selecting the font for source, target
      * text (in main window) and for match and glossary windows.

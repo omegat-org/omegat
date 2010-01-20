@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -24,7 +25,9 @@
 
 package org.omegat.gui.editor;
 
+import java.util.List;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.glossary.GlossaryEntry;
 
 /**
  * Interface for access to editor functionality.
@@ -32,6 +35,7 @@ import org.omegat.core.data.SourceTextEntry;
  * Almost all methods must be called from UI thread.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Wildrich Fourie
  */
 public interface IEditor {
     enum CHANGE_CASE_TO {
@@ -202,4 +206,10 @@ public interface IEditor {
      * Must be called only from UI thread.
      */
     String getSelectedText();
+
+    /**
+     * Underlines the words in the editor that has glossary matches.
+     * @param entries List&lt;GlossaryEntry&gt;
+     */
+    public void highlightTransTips(List<GlossaryEntry> entries);    
 }

@@ -17,6 +17,12 @@
   - Insert Source Tags
   http://sourceforge.net/support/tracker.php?aid=2873562
 
+  - Glossary match identification
+  http://sourceforge.net/support/tracker.php?aid=2921520
+
+  - TransTips for glossary items
+  http://sourceforge.net/support/tracker.php?aid=2935633
+
   Other enhancements:
   
   - The About dialog displays memory usage
@@ -30,6 +36,9 @@ exact match, it is ordered first
 
   - It is now possible to search for Author (changeid) and date of change 
 (changedate)
+
+  - Cut, Copy, Paste popup menu in the Editor. It performs the same functions as
+Ctrl+X, Ctrl+C and Ctrl+V.
 
   Bug fixes:
 

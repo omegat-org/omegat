@@ -1,9 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -52,16 +53,17 @@ import org.omegat.util.Log;
 
 /**
  * Class which contains all components instances.
- * 
+ *
  * Note about threads synchronization: each component must have only local
  * synchronization. It mustn't synchronize around other components or some other
  * objects.
- * 
+ *
  * Components which works in Swing UI thread can have other synchronization
  * idea: it can not be synchronized to access to some data which changed only in
  * UI thread.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Wildrich Fourie
  */
 public class Core {
     private static IProject currentProject;
@@ -117,13 +119,18 @@ public class Core {
     public static ISpellChecker getSpellChecker() {
         return spellChecker;
     }
-    
+
     public static GoogleTranslateTextArea getGoogleTranslatePane() {
         return googleTranslatePane;
     }
 
     public static IAutoSave getAutoSave() {
         return saveThread;
+    }
+
+    /** Get glossary instance. */
+    public static GlossaryTextArea getGlossary(){
+        return glossary;
     }
 
     /**
@@ -134,7 +141,7 @@ public class Core {
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
-        // 2. Initialize application frame
+        // 2. Initialize application frame        
         MainWindow me = new MainWindow();
         mainWindow = me;
 
@@ -170,7 +177,7 @@ public class Core {
 
     /**
      * Create tokenizer by class specified in command line, or by default class.
-     * 
+     *
      * @param params
      *            command line
      * @return component implementation
@@ -199,7 +206,7 @@ public class Core {
 
     /**
      * Set main window instance for unit tests.
-     * 
+     *
      * @param mainWindow
      */
     protected static void setMainWindow(IMainWindow mainWindow) {
@@ -208,7 +215,7 @@ public class Core {
 
     /**
      * Set project instance for unit tests.
-     * 
+     *
      * @param currentProject
      */
     protected static void setCurrentProject(IProject currentProject) {

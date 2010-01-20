@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Zoltan Bartko
                2008-2009 Didier Briel
+               2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +52,7 @@ import org.omegat.util.xml.XMLStreamReader;
  * @author Henry Pijffers
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Didier Briel
+ * @author Wildrich Fourie
  */
 public class Preferences
 {
@@ -114,6 +116,10 @@ public class Preferences
     public static final String ALWAYS_CONFIRM_QUIT     = "always_confirm_quit"; // NOI18N
     
     public static final String ALLOW_GOOGLE_TRANSLATE = "allow_google_translate";
+    /** Enable TransTips */
+    public static final String TRANSTIPS = "transtips";
+    /** TransTips Option: Only match exact words */
+    public static final String TRANSTIPS_EXACT_SEARCH = "transtips_exact_search";
     
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";   // NOI18N

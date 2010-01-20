@@ -1,11 +1,11 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
-               2009 Wildrich Fourie
+               2009-2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,7 +41,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a Glossary pane that displays glossary entries.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Didier Briel
@@ -56,6 +56,11 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
      * In this case, new find should be started.
      */
     protected StringEntry processedEntry;
+
+    /**
+    * Holds the current GlossaryEntries for the TransTips
+    */
+    public List<GlossaryEntry> nowEntries;
 
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea() {
@@ -105,6 +110,11 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
      */
     protected void setFoundResult(List<GlossaryEntry> entries) {
         UIThreadsUtil.mustBeSwingThread();
+
+        // If the TransTips is enabled then underline all the matched glossary entries
+        if(org.omegat.util.Preferences.isPreference(org.omegat.util.Preferences.TRANSTIPS))
+            Core.getEditor().highlightTransTips(entries);
+        nowEntries = entries;
 
         StringBuffer buf = new StringBuffer();
         for (GlossaryEntry entry : entries) {

@@ -8,6 +8,7 @@
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel
+               2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -57,6 +58,8 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.gui.glossary.GlossaryEntry;
+import org.omegat.gui.glossary.TransTipsUnderliner;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
@@ -85,6 +88,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Wildrich Fourie
  */
 public class EditorController implements IEditor {
 
@@ -1157,5 +1161,50 @@ public class EditorController implements IEditor {
         }
         // Default to English, if no translation exists
         return "en";
+    }
+
+    /**{@inheritDoc}*/
+    public void highlightTransTips(List<GlossaryEntry> entries)
+    {
+        if(!entries.isEmpty())
+        {
+            TransTipsUnderliner ttu =
+                    new TransTipsUnderliner(((EditorController)Core.getEditor()).editor,
+                    java.awt.Color.blue);
+
+            // Get the index of the current segment in the whole document
+            String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
+            sourceText = sourceText.toLowerCase();
+            // WordSearch Variables
+            int wsStart = 0;
+            int wsEnd = 0;
+            try
+            {
+                Document3 xldoc = ((EditorController)Core.getEditor()).editor.getOmDocument();
+                String allText = xldoc.getText(0, xldoc.getLength());
+                wsStart = allText.toLowerCase().indexOf(sourceText);
+                wsEnd = wsStart + sourceText.length();
+            }
+            catch (Exception ex) { /* Unthrowable */ }
+
+            for(GlossaryEntry ent : entries)
+            {
+                String nowEntry = ent.getSrcText();
+                // Double check
+                if(sourceText.toLowerCase().contains(nowEntry.toLowerCase()))
+                {
+                    int startIndex = 0;
+                    int lastIndex = sourceText.toLowerCase().lastIndexOf(nowEntry.toLowerCase());
+
+                    do
+                    {
+                        startIndex = sourceText.toLowerCase().indexOf(nowEntry.toLowerCase(), startIndex);
+                        int len = nowEntry.length();
+                        ttu.search(nowEntry, wsStart, wsEnd);
+                        startIndex += len;
+                    } while(startIndex < lastIndex);
+                }
+            }
+        }
     }
 }

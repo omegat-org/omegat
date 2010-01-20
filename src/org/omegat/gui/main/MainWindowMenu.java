@@ -208,6 +208,10 @@ public class MainWindowMenu implements ActionListener {
         optionsMenu
                 .add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
         optionsMenu.add(optionsGoogleTranslateMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GOOGLETRANSLATE"));
+
+        optionsMenu.add(optionsTransTipsMenu = createMenu("TF_OPTIONSMENU_TRANSTIPS"));
+        optionsTransTipsMenu.add(optionsTransTipsEnableMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_ENABLE"));
+        optionsTransTipsMenu.add(optionsTransTipsExactMatchMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_EXACTMATCH"));
         optionsMenu.add(new JSeparator());
         optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
         optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
@@ -253,6 +257,8 @@ public class MainWindowMenu implements ActionListener {
         optionsTabAdvanceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isUseTabForAdvance());
         optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
         optionsGoogleTranslateMenuItem.setSelected(Preferences.isPreference(Preferences.ALLOW_GOOGLE_TRANSLATE));
+        optionsTransTipsEnableMenuItem.setSelected(Preferences.isPreference(Preferences.TRANSTIPS));
+        optionsTransTipsExactMatchMenuItem.setSelected(Preferences.isPreference(Preferences.TRANSTIPS_EXACT_SEARCH));
 
         viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkTranslated());
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
@@ -425,6 +431,9 @@ public class MainWindowMenu implements ActionListener {
     JMenuItem optionsSpellCheckMenuItem;
     JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     JCheckBoxMenuItem optionsGoogleTranslateMenuItem;
+    JMenu optionsTransTipsMenu;
+    JCheckBoxMenuItem optionsTransTipsEnableMenuItem;
+    JCheckBoxMenuItem optionsTransTipsExactMatchMenuItem;
     JMenuItem optionsWorkflowMenuItem;
     JMenuItem optionsTagValidationMenuItem;
     JMenuItem optionsTeamMenuItem;

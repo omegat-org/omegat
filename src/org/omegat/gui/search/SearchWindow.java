@@ -48,6 +48,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JSpinner;
@@ -67,6 +68,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.gui.OmegaTFileChooser;
+import org.omegat.util.gui.UIThreadsUtil;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -101,18 +103,22 @@ public class SearchWindow extends JFrame
 
         m_exactSearchRB   = new JRadioButton();
         m_keywordSearchRB = new JRadioButton();
+        m_regexpSearchRB  = new JRadioButton();
         m_resultsLabel    = new JLabel();
         m_advancedButton  = new JButton();
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(m_exactSearchRB);
         bg.add(m_keywordSearchRB);
+        bg.add(m_regexpSearchRB);
 
         //box Radio Box bRB
         Box bRB = Box.createHorizontalBox();
         bRB.add(m_exactSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
         bRB.add(m_keywordSearchRB);
+        bRB.add(Box.createHorizontalStrut(10));
+        bRB.add(m_regexpSearchRB);
         bRB.add(Box.createHorizontalStrut(10));
         bRB.add(m_resultsLabel);
         bRB.add(Box.createHorizontalGlue());
@@ -157,15 +163,12 @@ public class SearchWindow extends JFrame
         bDB.setVisible(false);
 
         m_caseCB          = new JCheckBox();
-        m_regexCB         = new JCheckBox();
         m_tmSearchCB      = new JCheckBox();
         m_allResultsCB    = new JCheckBox();
 
         //box OptionsBox bOB
         Box bOB = Box.createHorizontalBox();
         bOB.add(m_caseCB);
-        bOB.add(Box.createHorizontalStrut(10));
-        bOB.add(m_regexCB);
         bOB.add(Box.createHorizontalStrut(10));
         bOB.add(m_tmSearchCB);
         bOB.add(m_allResultsCB);
@@ -350,13 +353,6 @@ public class SearchWindow extends JFrame
             }
         });
 
-        m_regexCB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                // move focus to search edit field
-                m_searchField.requestFocus();
-            }
-        });
-
         m_tmSearchCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 m_tmSearch = m_tmSearchCB.isSelected();
@@ -456,18 +452,13 @@ public class SearchWindow extends JFrame
             searchType = SEARCH_TYPE_EXACT;
         m_exactSearchRB.setSelected(searchType.equals(SEARCH_TYPE_EXACT));
         m_keywordSearchRB.setSelected(searchType.equals(SEARCH_TYPE_KEYWORD));
+        m_regexpSearchRB.setSelected(searchType.equals(SEARCH_TYPE_REGEXP));
 
         // case sensitivity
         String caseSens = Preferences.getPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE);
         if ((caseSens == null) || (caseSens.length() == 0))
             caseSens = "false";
         m_caseCB.setSelected(Boolean.valueOf(caseSens).booleanValue());
-
-        // regular expressions
-        String regex = Preferences.getPreference(Preferences.SEARCHWINDOW_REG_EXPRESSIONS);
-        if ((regex == null) || (regex.length() == 0))
-            regex = "false";
-        m_regexCB.setSelected(Boolean.valueOf(regex).booleanValue());
 
         // TM search
         String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
@@ -503,12 +494,12 @@ public class SearchWindow extends JFrame
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_EXACT);
         else if (m_keywordSearchRB.isSelected())
             Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_KEYWORD);
+        else if (m_regexpSearchRB.isSelected())
+            Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE, SEARCH_TYPE_REGEXP);
 
         // search options
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE,
                                   Boolean.toString(m_caseCB.isSelected()));
-        Preferences.setPreference(Preferences.SEARCHWINDOW_REG_EXPRESSIONS,
-                                  Boolean.toString(m_regexCB.isSelected()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH,
                                   Boolean.toString(m_tmSearch)); // don't use radio button status!
         Preferences.setPreference(Preferences.SEARCHWINDOW_ALL_RESULTS,
@@ -669,8 +660,8 @@ public class SearchWindow extends JFrame
                                    m_recursiveCB.isSelected(),
                                    m_exactSearchRB.isSelected(),
                                    m_keywordSearchRB.isSelected(),
+                                   m_regexpSearchRB.isSelected(),
                                    m_caseCB.isSelected(),
-                                   m_regexCB.isSelected(),
                                    m_tmSearchCB.isSelected(),
                                    m_allResultsCB.isSelected(),
                                    m_authorCB.isSelected(),
@@ -715,6 +706,7 @@ public class SearchWindow extends JFrame
 
         Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.getString("SW_EXACT_SEARCH"));
         Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.getString("SW_WORD_SEARCH"));
+        Mnemonics.setLocalizedText(m_regexpSearchRB, OStrings.getString("SW_REG_EXPRESSIONS"));
         Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_ADVANCED_SEARCH"));
         
         Mnemonics.setLocalizedText(m_authorCB, OStrings.getString("SW_AUTHOR"));
@@ -722,7 +714,6 @@ public class SearchWindow extends JFrame
         Mnemonics.setLocalizedText(m_dateToCB, OStrings.getString("SW_CHANGED_BEFORE"));
 
         Mnemonics.setLocalizedText(m_caseCB, OStrings.getString("SW_CASE_SENSITIVE"));
-        Mnemonics.setLocalizedText(m_regexCB, OStrings.getString("SW_REG_EXPRESSIONS"));
         Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.getString("SW_SEARCH_TM"));
         Mnemonics.setLocalizedText(m_allResultsCB, OStrings.getString("SW_ALL_RESULTS"));
 
@@ -732,6 +723,36 @@ public class SearchWindow extends JFrame
         Mnemonics.setLocalizedText(m_dirButton, OStrings.getString("SW_BROWSE"));
         
         Mnemonics.setLocalizedText(m_dismissButton, OStrings.getString("BUTTON_CLOSE"));
+    }
+    /**
+     * Display message dialog with the error as message
+     * @param ex
+     *                exception to show
+     * @param errorKey
+     *                error message key in resource bundle
+     * @param params
+     *                error text parameters
+     */
+    public void displayErrorRB(final Throwable ex, final String errorKey,
+            final Object... params) {
+        UIThreadsUtil.executeInSwingThread(new Runnable() {
+            public void run() {
+                String msg;
+                if (params != null) {
+                    msg = StaticUtils.format(OStrings.getString(errorKey),
+                            params);
+                } else {
+                    msg = OStrings.getString(errorKey);
+                }
+
+                String fulltext = msg;
+                if (ex != null)
+                    fulltext += "\n" + ex.getLocalizedMessage(); // NOI18N
+                JOptionPane.showMessageDialog(SearchWindow.this, fulltext,
+                        OStrings.getString("TF_ERROR"),
+                        JOptionPane.ERROR_MESSAGE);
+            }
+        });
     }
     
     class MFindField extends JTextField
@@ -805,6 +826,7 @@ public class SearchWindow extends JFrame
 
     private JRadioButton m_exactSearchRB;
     private JRadioButton m_keywordSearchRB;
+    private JRadioButton m_regexpSearchRB;
     private JLabel       m_resultsLabel;
     private JButton      m_advancedButton;
 
@@ -822,7 +844,6 @@ public class SearchWindow extends JFrame
     private SpinnerDateModel m_dateToModel;
 
     private JCheckBox m_caseCB;
-    private JCheckBox m_regexCB;
     private JCheckBox m_tmSearchCB;
     private JCheckBox m_allResultsCB;
 
@@ -842,4 +863,5 @@ public class SearchWindow extends JFrame
 
     private final static String SEARCH_TYPE_EXACT   = "EXACT";
     private final static String SEARCH_TYPE_KEYWORD = "KEYWORD";
+    private final static String SEARCH_TYPE_REGEXP  = "REGEXP";
 }

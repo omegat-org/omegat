@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -90,10 +91,10 @@ public class SearchThread extends Thread
      * @param text string to search for
      * @param rootDir folder to search in
      * @param recursive search in subfolders of rootDir too
-     * @param exact search for a substring
-     * @param keyword search for keywords
+     * @param exact search for a substring, including wildcards (*?)
+     * @param keyword search for keywords, including wildcards (*?)
+     * @param regex search based on regular expressions
      * @param caseSensitive search case sensitive
-     * @param regex enable regular expressions, otherwise just use wildcards (*?)
      * @param tm search in legacy and orphan TM strings too
      * @param allResults
      * @param searchAuthor search for tmx segments modified by author id/name
@@ -108,8 +109,8 @@ public class SearchThread extends Thread
                               boolean recursive,
                               boolean exact,
                               boolean keyword,
-                              boolean caseSensitive,
                               boolean regex,
+                              boolean caseSensitive,
                               boolean tm,
                               boolean allResults,
                               boolean searchAuthor,
@@ -142,47 +143,56 @@ public class SearchThread extends Thread
             // if exact search, just use the entire search string as a single
             // search string; otherwise, if keyword, break up the string into
             // separate words (= multiple search strings)
-            if (exact) {
-                // escape the search string, if it's not supposed to be a regular expression
-                if (!regex)
+            try {
+                if (exact) {
+                    // escape the search string, it's not supposed to be a regular expression
                     text = StaticUtils.escapeNonRegex(text, false);
 
-                // create a matcher for the search string
-                m_matchers.add(Pattern.compile(text, flags).matcher(""));
-            }
-            else {
-                // break the search string into keywords,
-                // each of which is a separate search string
-                text = text.trim();
-                if (text.length() > 0) {
-                    int wordStart = 0;
-                    while (wordStart < text.length()) {
-                        // get the location of the next space
-                        int spacePos = text.indexOf(' ', wordStart);
+                    // create a matcher for the search string
+                    m_matchers.add(Pattern.compile(text, flags).matcher(""));
+                } else if (regex) {
+                    // create a matcher for the search string
+                    m_matchers.add(Pattern.compile(text, flags).matcher(""));
+                } else {
+                    // break the search string into keywords,
+                    // each of which is a separate search string
+                    text = text.trim();
+                    if (text.length() > 0) {
+                        int wordStart = 0;
+                        while (wordStart < text.length()) {
+                            // get the location of the next space
+                            int spacePos = text.indexOf(' ', wordStart);
 
-                        // get the next word
-                        String word = (spacePos == -1) // last word reached
-                                          ? text.substring(wordStart, text.length()).trim()
-                                          : text.substring(wordStart, spacePos).trim();
+                            // get the next word
+                            String word = (spacePos == -1) // last word reached
+                                              ? text.substring(wordStart, text.length()).trim()
+                                                      : text.substring(wordStart, spacePos).trim();
 
-                        if (word.length() > 0) {
-                            // escape the word, if it's not supposed to be a regular expression
-                            if (!regex)
-                                word = StaticUtils.escapeNonRegex(word, false);
+                            if (word.length() > 0) {
+                                // escape the word, if it's not supposed to be a regular expression
+                                if (!regex)
+                                    word = StaticUtils.escapeNonRegex(word, false);
 
-                            // create a matcher for the word
-                            m_matchers.add(Pattern.compile(word, flags).matcher(""));
+                                // create a matcher for the word
+                                m_matchers.add(Pattern.compile(word, flags).matcher(""));
+                            }
+
+                            // set the position for the start of the next word
+                            wordStart = (spacePos == -1) ? text.length() : spacePos + 1;
                         }
-
-                        // set the position for the start of the next word
-                        wordStart = (spacePos == -1) ? text.length() : spacePos + 1;
                     }
                 }
+                // create a matcher for the author search string
+                if (!regex)
+                    author = StaticUtils.escapeNonRegex(author, false);
+                
+                m_author = Pattern.compile(author, flags).matcher("");
+            } catch (PatternSyntaxException e) {
+                // bad regexp input
+                // alert user to badness
+                m_window.displayErrorRB(e, "ST_REGEXP_ERROR");
+                m_window.setSearchControlFocus();
             }
-           // create a matcher for the author search string
-            if (!regex)
-                author = StaticUtils.escapeNonRegex(author, false);
-            m_author = Pattern.compile(author, flags).matcher("");
             m_dateBefore=dateBefore;
             m_dateAfter = dateAfter;
         }

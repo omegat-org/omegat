@@ -247,27 +247,7 @@ public class Main {
             showError(ex);
         }
         try {
-            System.out.println("Loading Project");
-
-            // check if project okay
-            ProjectProperties projectProperties = null;
-            try {
-                projectProperties = ProjectFileStorage
-                        .loadProjectProperties(projectLocation);
-                if (!projectProperties.verifyProject()) {
-                    System.out.println("The project cannot be verified");
-                    System.exit(1);
-                }
-            } catch (Exception ex) {
-                Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                System.out.println(OStrings.getString
-                        ("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
-                System.exit(1);
-            }
-
-            RealProject p = new RealProject(projectProperties);
-            p.loadProject();
-            Core.setProject(p);
+            RealProject p = selectProjectConsoleMode(true);
 
             System.out.println("Translating Project");
 
@@ -298,27 +278,7 @@ public class Main {
             showError(ex);
         }
         try {
-            System.out.println("Loading Project");
-
-            // check if project okay
-            ProjectProperties projectProperties = null;
-            try {
-                projectProperties = ProjectFileStorage
-                        .loadProjectProperties(projectLocation);
-                if (!projectProperties.verifyProject()) {
-                    System.out.println("The project cannot be verified");
-                    System.exit(1);
-                }
-            } catch (Exception ex) {
-                Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                System.out.println(OStrings.getString
-                        ("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
-                System.exit(1);
-            }
-
-            RealProject p = new RealProject(projectProperties);
-            p.loadProject();
-            Core.setProject(p);
+            RealProject p = selectProjectConsoleMode(true);
 
             System.out.println("Create pseudo-translate TMX");
 
@@ -391,26 +351,7 @@ public class Main {
             showError(ex);
         }
         try {
-            System.out.println("Loading Project");
-
-            // check if project okay
-            ProjectProperties projectProperties = null;
-            try {
-                projectProperties = ProjectFileStorage
-                        .loadProjectProperties(projectLocation);
-                if (!projectProperties.verifyProject()) {
-                    System.out.println("The project cannot be verified");
-                    System.exit(1);
-                }
-            } catch (Exception ex) {
-                Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                System.out.println(OStrings
-                        .getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
-                System.exit(1);
-            }
-
-            RealProject p = new RealProject(projectProperties);
-            Core.setProject(p);
+            RealProject p = selectProjectConsoleMode(false);
 
             System.out.println("Align project against " + dir);
 
@@ -428,6 +369,38 @@ public class Main {
             System.err.println("An error has occured: " + e.toString());
             System.exit(1);
         }
+    }
+
+    /**
+     * creates the project class and adds it to the Core. Loads the project if specified.
+     * An exit occurs on error loading the project. 
+     * This method is for the different console modes, to prevent code duplication.
+     * @param loadProject load the project or not
+     * @return the project.
+     */
+    private static RealProject selectProjectConsoleMode(boolean loadProject) {
+        System.out.println("Loading Project");
+
+        // check if project okay
+        ProjectProperties projectProperties = null;
+        try {
+            projectProperties = ProjectFileStorage
+                    .loadProjectProperties(projectLocation);
+            if (!projectProperties.verifyProject()) {
+                System.out.println("The project cannot be verified");
+                System.exit(1);
+            }
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+            System.out.println(OStrings.getString
+                    ("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
+            System.exit(1);
+        }
+
+        RealProject p = new RealProject(projectProperties);
+        if (loadProject) p.loadProject();
+        Core.setProject(p);
+        return p;
     }
 
     public static void showError(Throwable ex) {

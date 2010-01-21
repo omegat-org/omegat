@@ -45,8 +45,12 @@ public class EditorSettings {
     private boolean markTranslated;
     private boolean markUntranslated;
     private boolean displaySegmentSources;
-    private boolean displayModificationInfo;
+    private String displayModificationInfo;
     private boolean autoSpellChecking;
+
+    public static String DISPLAY_MODIFICATION_INFO_NONE = "none";
+    public static String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
+    public static String DISPLAY_MODIFICATION_INFO_ALL = "all";
 
     protected EditorSettings(final EditorController parent) {
         this.parent = parent;
@@ -60,7 +64,7 @@ public class EditorSettings {
         displaySegmentSources = Preferences
                 .isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
         displayModificationInfo = Preferences
-                .isPreference(Preferences.DISPLAY_MODIFICATION_INFO);
+                .getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO, DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences
                 .isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
     }
@@ -151,12 +155,17 @@ public class EditorSettings {
         }
     }
 
-    /** display the modification information or not */
-    public boolean isDisplayModificationInfo() {
+    /** returns the setting for display the modification information or not
+     * Either DISPLAY_MODIFICATION_INFO_NONE, DISPLAY_MODIFICATION_INFO_SELECTED, DISPLAY_MODIFICATION_INFO_ALL */
+    public String getDisplayModificationInfo() {
         return displayModificationInfo;
     }
 
-    public void setDisplayModificationInfo(boolean displayModificationInfo) {
+    /** Sets the setting for display the modification information or not
+     * @param displayModificationInfo Either DISPLAY_MODIFICATION_INFO_NONE
+     * , DISPLAY_MODIFICATION_INFO_SELECTED
+     * , DISPLAY_MODIFICATION_INFO_ALL */
+    public void setDisplayModificationInfo(String displayModificationInfo) {
         UIThreadsUtil.mustBeSwingThread();
 
         parent.commitAndDeactivate();

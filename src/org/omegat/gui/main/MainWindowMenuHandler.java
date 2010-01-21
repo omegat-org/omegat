@@ -43,6 +43,7 @@ import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.TagValidationOptionsDialog;
 import org.omegat.gui.dialogs.TeamOptionsDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
+import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.help.HelpFrame;
@@ -459,8 +460,14 @@ public class MainWindowMenuHandler {
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings().setDisplaySegmentSources(mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
     }
-    public void viewDisplayModificationInfoCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setDisplayModificationInfo(mainWindow.menu.viewDisplayModificationInfoCheckBoxMenuItem.isSelected());
+    public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
+        Core.getEditor().getSettings().setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);
+    }
+    public void viewDisplayModificationInfoSelectedRadioButtonMenuItemActionPerformed() {
+        Core.getEditor().getSettings().setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED);
+    }
+    public void viewDisplayModificationInfoAllRadioButtonMenuItemActionPerformed() {
+        Core.getEditor().getSettings().setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL);
     }
 
 
@@ -610,7 +617,7 @@ public class MainWindowMenuHandler {
                 sc.destroy();
                 sc.initialize();
             }
-            Core.getEditor().getSettings().setAutoSpellChecking(isNeedToSpell);            
+            Core.getEditor().getSettings().setAutoSpellChecking(isNeedToSpell);
         }
     }
 

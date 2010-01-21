@@ -37,10 +37,12 @@ import java.lang.reflect.Method;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import javax.swing.ButtonGroup;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSeparator;
 
 import net.roydesign.mac.MRJAdapter;
@@ -49,6 +51,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.gui.editor.EditorSettings;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -191,14 +194,14 @@ public class MainWindowMenu implements ActionListener {
         gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
 
-        viewMenu
-                .add(viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_TRANSLATED"));
-        viewMenu
-                .add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
-        viewMenu
-                .add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
-        viewMenu
-                .add(viewDisplayModificationInfoCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_MODIFICATION_INFO"));
+        viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_TRANSLATED"));
+        viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
+        viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
+        viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
+        ButtonGroup viewModificationInfoMenuBG = new ButtonGroup(); 
+        viewModificationInfoMenu.add(viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem("MW_VIEW_MENU_MODIFICATION_INFO_NONE",viewModificationInfoMenuBG));
+        viewModificationInfoMenu.add(viewDisplayModificationInfoSelectedRadioButtonMenuItem = createRadioButtonMenuItem("MW_VIEW_MENU_MODIFICATION_INFO_SELECTED",viewModificationInfoMenuBG));
+        viewModificationInfoMenu.add(viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem("MW_VIEW_MENU_MODIFICATION_INFO_ALL",viewModificationInfoMenuBG));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
@@ -264,8 +267,11 @@ public class MainWindowMenu implements ActionListener {
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
 
         viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplaySegmentSources());
-        viewDisplayModificationInfoCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplayModificationInfo());
-        
+
+        viewDisplayModificationInfoNoneRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
+        viewDisplayModificationInfoSelectedRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
+        viewDisplayModificationInfoAllRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
+
         updateEditOverwriteMachineTranslationMenuItem();
     }
 
@@ -328,6 +334,21 @@ public class MainWindowMenu implements ActionListener {
         JCheckBoxMenuItem result = new JCheckBoxMenuItem();
         Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
         result.addActionListener(this);
+        return result;
+    }
+    
+    /**
+     * Create menu item instance and set title.
+     * 
+     * @param titleKey
+     *                title name key in resource bundle
+     * @return menu item instance
+     */
+    private JRadioButtonMenuItem createRadioButtonMenuItem(final String titleKey, ButtonGroup buttonGroup) {
+        JRadioButtonMenuItem result = new JRadioButtonMenuItem();
+        Mnemonics.setLocalizedText(result, OStrings.getString(titleKey));
+        result.addActionListener(this);
+        buttonGroup.add(result);
         return result;
     }
 
@@ -456,7 +477,10 @@ public class MainWindowMenu implements ActionListener {
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem upperCaseMenuItem;
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
-    JCheckBoxMenuItem viewDisplayModificationInfoCheckBoxMenuItem;
+    JMenu viewModificationInfoMenu;
+    JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;
+    JRadioButtonMenuItem viewDisplayModificationInfoSelectedRadioButtonMenuItem;
+    JRadioButtonMenuItem viewDisplayModificationInfoAllRadioButtonMenuItem;
     JMenuItem viewFileListMenuItem;
     JCheckBoxMenuItem viewMarkTranslatedSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkUntranslatedSegmentsCheckBoxMenuItem;

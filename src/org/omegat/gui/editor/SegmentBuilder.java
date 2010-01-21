@@ -26,7 +26,6 @@ package org.omegat.gui.editor;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -170,7 +169,9 @@ public class SegmentBuilder {
     private void createActiveSegmentElement(TransEntry trans)
             throws BadLocationException {
         try {
-        if (settings.isDisplayModificationInfo()) {
+        if (  EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
+           || EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(settings.getDisplayModificationInfo())
+           ) {
             addModificationInfoPart(trans, ATTR_INFO);
         }
         addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
@@ -238,6 +239,9 @@ public class SegmentBuilder {
      */
     private void createInactiveSegmentElement(TransEntry trans)
             throws BadLocationException {
+        if (  EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo()) ) {
+            addModificationInfoPart(trans, ATTR_INFO);
+        }
         if (settings.isDisplaySegmentSources()) {
             addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
         }

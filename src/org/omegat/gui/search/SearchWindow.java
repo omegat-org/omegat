@@ -172,7 +172,9 @@ public class SearchWindow extends JFrame
         bOB.add(m_caseCB);
         bOB.add(Box.createHorizontalStrut(10));
         bOB.add(m_tmSearchCB);
+        bOB.add(Box.createHorizontalStrut(10));
         bOB.add(m_allResultsCB);
+        bOB.add(Box.createHorizontalGlue());
         bOB.add(m_advancedButton);
 
         m_viewer = new EntryListPane(par);

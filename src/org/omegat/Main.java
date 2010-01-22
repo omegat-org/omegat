@@ -313,12 +313,13 @@ public class Main {
             }
             
             try {
-                TMXWriter.buildTMXFile(fname, false, true, m_config, data);
+                //Write OmegaT-project-compatible TMX:
+                TMXWriter.buildTMXFile(fname, false, false, m_config, data);
             } catch (IOException e) {
                 Log.logErrorRB("CT_ERROR_CREATING_TMX");
                 Log.log(e);
                 throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
-                        "\n" +                                                      
+                        "\n" +
                         e.getMessage());
             }
 

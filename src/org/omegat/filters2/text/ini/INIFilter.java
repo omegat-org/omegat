@@ -89,7 +89,8 @@ public class INIFilter extends AbstractFilter
     {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
-        //while( (str=reader.readLine())!=null )
+        String group="";
+        
         while( (str=lbpr.readLine())!=null )
         {
             String trimmed = str.trim();
@@ -101,6 +102,11 @@ public class INIFilter extends AbstractFilter
                 //outfile.write(str+"\n");                          // NOI18N
                 outfile.write(str+lbpr.getLinebreak()); // fix for bug 1462566 // NOI18N
                 continue;
+            }
+            
+            if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
+                // group name
+                group = trimmed;
             }
             
             // key=value pairs
@@ -123,7 +129,7 @@ public class INIFilter extends AbstractFilter
             
             if (entryAlignCallback!=null) {
                 String key = str.substring(0, equalsPos).trim();
-                align.put(key, value);
+                align.put(group + '.' + key, value);
             } else {
                 String trans=processEntry(value);
                 outfile.write(trans);

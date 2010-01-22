@@ -856,7 +856,7 @@ public class RealProject implements IProject
         }
     };
     
-    private class AlignFilesCallback implements IAlignCallback {
+    static class AlignFilesCallback implements IAlignCallback {
         Map<String, TransEntry> data = new HashMap<String, TransEntry>();
 
         public void addTranslation(String id, String source,

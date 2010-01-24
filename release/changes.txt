@@ -37,6 +37,9 @@ exact match, it is ordered first
   - It is now possible to search for Author (changeid) and date of change 
 (changedate)
 
+  - It is possible to select to display no change information, only for the
+current segment, or for all the (translated) segments
+
   - Cut, Copy, Paste popup menu in the Editor. It performs the same functions as
 Ctrl+X, Ctrl+C and Ctrl+V.
 

@@ -335,9 +335,9 @@ public class SearchThread extends Thread
             // if the source or translation contain all
             // search strings, report the hit
             if ((   searchString(srcText) || searchString(locText))
-                && (!m_searchAuthor || searchAuthor(te))
-                && (!m_searchDateBefore || te.changeDate != 0 && te.changeDate < m_dateBefore )
-                && (!m_searchDateAfter  || te.changeDate != 0 && te.changeDate > m_dateAfter )
+                && (!m_searchAuthor || te != null && searchAuthor(te))
+                && (!m_searchDateBefore || te != null && te.changeDate != 0 && te.changeDate < m_dateBefore )
+                && (!m_searchDateAfter  || te != null && te.changeDate != 0 && te.changeDate > m_dateAfter )
                 ) {
                 foundString(i, null, srcText, locText);
             }

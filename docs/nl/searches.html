@@ -2,7 +2,7 @@
 <head>
 	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Zoeken - OmegaT 1.8 Gebruikershandleiding</title>
+  <title>Zoeken - OmegaT 2.0 Gebruikershandleiding</title>
 </head>
 
 <body>
@@ -42,9 +42,7 @@
 
   <h3><a name="calling" id="calling"></a>Een zoekactie beginnen</h3>
 
-  <p>OmegaT verschaft een groot scala aan zoekfuncties. Roep het venster <strong>Zoeken</strong> op met <code>Ctrl+F</code> en voer het woord of de frase waarnaar u wilt zoeken in het vak <strong>Zoeken naar</strong> in. Als alternatief kunt u in het venster Bewerken een woord of frase selecteren in het bewerkingsveld (doeltekst of het actieve segment) en drukken op <code>Ctrl+F</code>. Het woord of de frase wordt in dit geval automatisch ingevoegd in het vak <strong>Zoeken naar</strong>.</p>
-
-  <p>Elke aanroep van het venster <strong>Zoeken</strong> zal zijn eigen nieuwe venster maken. Vergeet niet om ze te sluiten, zodat u uw bureaublad niet vol zet.</p>
+  <p>OmegaT verschaft een groot scala aan zoekfuncties. Roep het venster <strong>Zoeken</strong> op met <code>Ctrl+F</code> en voer het woord of de frase waarnaar u wilt zoeken in het vak <strong>Zoeken naar</strong> in. Als alternatief kunt u in het venster Bewerken een woord of frase selecteren in het bewerkingsveld (doeltekst of het actieve segment) en drukken op <code>Ctrl+F</code>. Het woord of de frase wordt in dit geval automatisch ingevoegd in het vak <strong>Zoeken naar</strong>. Elke aanroep van het venster <strong>Zoeken</strong> maakt zijn eigen nieuwe venster. Vergeet niet om ze te sluiten, zodat u uw bureaublad niet vol zet.</p>
 
   <h3><a name="location" id="location"></a>Zoeklocatie</h3>
 
@@ -64,74 +62,72 @@
     </li>
   </ul>
 
-  <p>bij het zoeken in bestanden zal OmegaT zich beperken tot de bestanden die het kan lezen (Zie <a href="filesToTranslate.html">Ondersteunde bestandsformaten</a>).</p>
+  <p>bij het zoeken in bestanden zal OmegaT zich beperken tot de indeling van de bronbestanden (Zie <a href="filesToTranslate.html">Ondersteunde bestandsformaten</a>). Hoewel, bijvoorbeeld, OmegaT in staat is om TMX-bestanden af te handelen, zullen die niet worden opgenomen in de zoekactie.</p>
   <hr>
 
   <h2><a name="searchmethods" id="searchmethods"></a>Zoeken methodes</h2>
 
   <p>Selecteer de methode met behulp van de optieknoppen. U kunt kiezen uit twee methodes om te zoeken:</p>
 
-  <table width="555" border="0" cellpadding="3" cellspacing="0">
-    <col width="115">
-    <col width="428">
+  <table summary= "alleen opmaak" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
 
     <tr>
-      <td width="115">
+      <td width="20%">
         <p><strong>Exact zoeken</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Zoekt naar segmenten die de tekenreeks bevatten die u heeft opgegeven.</p>
       </td>
     </tr>
 
     <tr>
-      <td width="115">
+      <td width="20%">
         <p><strong>Sleutelwoorden zoeken</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Zoekt naar segmenten die alle sleutelwoorden bevatten die u heeft opgegeven, in willekeurige volgorde.</p>
       </td>
     </tr>
   </table>
 
-  <p><strong>Exact zoeken</strong> kijkt naar een frase, dat is: als er meerdere woorden zijn ingevoerd, zullen zij slechts  worden gevonden als zij in exact dezelfde volgorde voorkomen. Exact zoeken is hetzelfde als een zoekactie met "exacte frase" in een internetzoekmachine zoals Google.</p>
-
-  <p>Selecteer <strong>Sleutelwoorden zoeken</strong> om te zoeken naar een willekeurig aantal individuele woorden, gescheiden door spaties en in willekeurige volgorde. OmegaT zal een lijst weergeven waarin alle segmenten staan waarin de woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties "met alle woorden" in een internetzoekmachine zoals Google (logische EN).</p>
+  <p><strong>Exact zoeken</strong> kijkt naar een frase, dat is: als er meerdere woorden zijn ingevoerd, zullen zij slechts  worden gevonden als zij in exact dezelfde volgorde voorkomen. Exact zoeken is hetzelfde als een zoekactie met "exacte frase" in een internetzoekmachine zoals Google. Selecteer <strong>Sleutelwoorden zoeken</strong> om te zoeken naar een willekeurig aantal individuele woorden, gescheiden door spaties en in willekeurige volgorde. OmegaT zal een lijst weergeven waarin alle segmenten staan waarin de woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties "met alle woorden" in een internetzoekmachine zoals Google (logische EN).</p>
 
   <p>Voor elk van deze twee methoden kunt u de volgende drie opties kiezen:</p>
 
-  <table width="556" border="0" cellpadding="3" cellspacing="0">
-    <col width="116">
-    <col width="428">
+  <table summary= "alleen opmaak" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>Hoofd-/kleine letters</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Het zoeken zal worden uitgevoerd voor de exact opgegeven tekenreeks, anders zullen hoofdletters worden genegeerd.</p>
       </td>
     </tr>
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>Reguliere uitdrukkingen</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>De tekenreeks, waarnaar gezocht wordt, zal worden behandeld als een reguliere uitdrukking (in het geval van zoeken naar sleutelwoorden worden ze behandeld als meerdere uitdrukkingen).</p>
       </td>
     </tr>
 
     <tr>
-      <td width="116">
+      <td width="20%">
         <p><strong>Zoeken in TM's</strong></p>
       </td>
 
-      <td width="428">
+      <td width="80%">
         <p>Alle vertaalgeheugens worden opgenomen in de zoekactie.</p>
       </td>
     </tr>
@@ -158,7 +154,7 @@
   <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>Reguliere uitdrukkingen gebruiken</h2>
 
   <p>Een zoekactie met reguliere uitdrukkingen is een krachtig middel om te zoeken naar tekenreeksen. Het komt overeen met zoeken met jokertekens, maar is veel meer flexibel. De reguliere uitdrukkingen die worden gebruikt in zoekacties zijn die welke worden ondersteund door Java. Een korte samenvatting is beschikbaar in de appendix <a href="regexp.html">Constructies van reguliere uitdrukkingen</a>. Als u meer specifieke informatie nodig heeft raadpleeg dan <a href=
-  "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
 
   <p>U kunt eenvoudige handleidingen vinden op het web (<a href=
   "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a> bijvoorbeeld.)</p>
@@ -166,13 +162,13 @@
 
   <h2><a name="display" id="display"></a>Zoekresultaten weergeven</h2>
 
-  <p>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project, die de gezochte tekenreeks bevatten, worden weergegeven. Omdat OmegaT alle identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond.</p>
+  <p>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project, die de gezochte tekenreeks bevatten, worden weergegeven. Omdat OmegaT identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond.</p>
 
-  <p>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten zullen worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten zullen alleen in originele tekst worden weergegeven.</p>
+  <p>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten zullen worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten zullen alleen als bron worden weergegeven.</p>
 
-  <p>Klik op een segment om het te openen in het venster Bewerken om te wijzigen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, aan te passen.</p>
+  <p>Klikken op een segment zal het openen in het venster Bewerken om het aan te passen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, aan te passen.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table summary= "alleen opmaak" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>

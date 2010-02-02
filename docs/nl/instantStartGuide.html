@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Gids Snel starten - OmegaT 1.8 Gebruikershandleiding</title>
+
+  <title>Gids Snel starten - OmegaT 2.0 Gebruikershandleiding</title>
 </head>
 
 <body>
@@ -28,11 +29,11 @@
     </li>
 
     <li>
-      <p><a href="#tm">Overeenkomsten in vertaalgeheugen en in woordenlijsten gebruiken</a></p>
+      <p><a href="#tm">Overeenkomsten in het vertaalgeheugen en in woordenlijsten gebruiken</a></p>
     </li>
 
     <li>
-      <p><a href="#searches">Zoeken gebruiken</a></p>
+      <p><a href="#searches">Gebruik zoeken en Google translate</a></p>
     </li>
 
     <li>
@@ -77,13 +78,15 @@
 
   <p>OmegaT zal u vragen om de te maken projectmappen te bevestigen of te wijzigen, met behulp van onderstaand dialoogvenster:</p>
 
-  <p align="center"><a name="graphics2" id="graphics2"></a><img src=
-  "images/NewProject.png" name="graphics3" alt="venster Project instellen" align=
-  "bottom" width="398" height="428" border="0" id="graphics3"></p>
+  <p align="center"><a name="graphics2" id="graphics2"></a></p>
 
-  <p>U kunt eenvoudigweg de locatie van de submappen accepteren, maar overtuig u er van dat de <a href="languages.html">codes voor de bron- en vertalingstaal</a> correct zijn. Selecteer de taalcode (2 letters) of taal-en-landcode (2 + 2 letters) uit de keuzelijst of typ ze met de hand in (blijf bij het 2-letterpatroon). Maak een mentale notitie van de locatie van de submap Target (voor uw vertaalde documenten). Als u wilt dat OmegaT segmenteert per zin in plaats van per "alinea", is het een goed idee om de <a href="segmentation.html">segmentatieregels</a> nog eens te controleren.</p>
+  <p><img alt="dialoogvenster Nieuw project"
+  title="dialoogvenster Nieuw project" src="images/NewProject.png"></p>
+
+  <p>U kunt eenvoudigweg de locatie van de submappen accepteren, maar overtuig u er van dat de <a href="languages.html">codes voor de bron- en vertalingstaal</a> correct zijn. Selecteer de taalcode (2 letters) of taal-en-landcode (2 + 2 letters) uit de keuzelijst of typ ze met de hand in (de taalcode kan 2 of 3 letters zijn). Maak een mentale notitie van de locatie van de submap Target (voor uw vertaalde documenten). Als u wilt dat OmegaT segmenteert per zin in plaats van per "alinea", is het een goed idee om de <a href="segmentation.html">segmentatieregels</a> nog eens te controleren.</p>
 
   <p>Als u op OK klikt om de instellingen van het project te accepteren, zal OmegaT u vragen om de brondocumenten te selecteren om die te importeren. U kunt individuele bestanden importeren of u kunt hele map-structuren importeren (met alle bestanden in alle submappen). Als u per ongeluk de verkeerde documenten heeft geïmporteerd of teveel documenten, kunt u ze eenvoudigweg verwijderen uit de map Source van uw OmegaT-project (bijvoorbeeld met behulp van bestandsbeheer van uw systeem).</p>
+
   <p>Kijk in het venster <strong>Projectbestanden</strong> om uw lijst met bestanden te controleren die vertaald moeten worden (Menu: <strong>Project → Projectbestanden...</strong>, als het niet automatisch opent). Als u de inhoud van de map Source heeft moeten veranderen, vergeet dan niet om het project eerst opnieuw te laden (Menu: <strong>Project → Herladen</strong>). OmegaT opent standaard het eerste bestand van de projectlijst. Onthoud dat OmegaT alleen bestanden kan vertalen in de onderstaande <a href="filesToTranslate.html">formaten</a> als zij overeenkomen met de patronen die zijn gedefinieerd in de <a href="fileFilters.html">bestandsfilters</a>. Alle andere bestanden zullen worden genegeerd.</p>
 
   <ul>
@@ -96,7 +99,7 @@
     </li>
 
     <li>
-      <p>ééntalige .po</p>
+      <p>.po</p>
     </li>
 
     <li>
@@ -126,6 +129,26 @@
     <li>
       <p>Okapi ééntalige XLIFF</p>
     </li>
+
+    <li>
+      <p>QuarkXPress CopyFlowGold</p>
+    </li>
+
+    <li>
+      <p>Bestanden voor ondertiteling (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p>Android-bron</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
   </ul>
 
   <h3><a name="segments" id="segments"></a>Vertaal de segmenten één voor één</h3>
@@ -148,17 +171,17 @@
     </li>
   </ul>
 
-  <p>Als u op "<strong>ENTER</strong>" drukt gebeuren er verschillende onzichtbare dingen: OmegaT voegt het segmentenpaar (het bronsegment en de vertaling daarvan) toe aan het vertaalgeheugen en vertaalt ook automatisch alle andere identieke segmenten die het in de andere projectbestanden ontdekt. Het kijkt ook in het vertaalgeheugen en woordenlijst naar overeenkomsten voor het volgende niet-vertaalde segment.`</p>
+  <p>Als u op "<strong>ENTER</strong>" drukt gebeuren er verschillende onzichtbare dingen: OmegaT voegt het segmentenpaar (het bronsegment en de vertaling daarvan) toe aan het vertaalgeheugen en vertaalt ook automatisch alle andere identieke segmenten die het in de andere projectbestanden ontdekt. Het kijkt ook in het vertaalgeheugen en woordenlijst naar overeenkomsten voor het volgende niet-vertaalde segment.</p>
 
-  <h3><a name="tm" id="tm"></a>Overeenkomsten in het vertaalgeheugen en in woordenlijsten gebruiken</h3>
+  <h3><a name="tm" id="tm"></a>Overeenkomsten in de vertaalgeheugens en in woordenlijsten gebruiken&nbsp;</h3>
 
   <h3><a name="tm_matches" id="tm_matches"></a>Overeenkomsten in het vertaalgeheugen</h3>
 
-  <p>Als OmegaT een fuzzy overeenkomst (30% of meer) voor het volgende segment in het vertaalgeheugen vindt, geeft het dit weer in het venster Overeenkomsten. In het venster Overeenkomsten wordt standaard de eerste overeenkomst geselecteerd.</p>
+  <p>Als OmegaT een fuzzy overeenkomst (30% of meer) voor het volgende segment in de vertaalgeheugens vindt, geeft het dit weer in het venster Overeenkomsten. In het venster Overeenkomsten wordt standaard de eerste overeenkomst geselecteerd.</p>
 
   <p><br>
   <br></p><img src="images/MatchesPane.png" name="graphics4" alt="venster Overeenkomsten"
-  align="left" width="469" height="289" border="0" id="graphics4"><br clear=
+  id="graphics4" align="left" border="0"><br clear=
   "left">
 
   <p><br>
@@ -191,15 +214,15 @@
   <p>(U kunt OmegaT vertellen dat elke eerste overeenkomst boven een bepaald percentage van overeenkomst automatisch in het doelveld moet worden ingevoegd als het segment opent. Stel deze optie in met behulp van <strong>Opties → <a href=
   "translationEditing.html">Bewerken (gedrag)...</a></strong>)</p>
 
-  <h3><a name="gloss_matches" id="gloss_matches"></a>Overeenkomsten in woordenlijsten</h3>
+  <h3><a name="gloss_matches" id="gloss_matches"></a>Overeenkomsten in woordenlijsten en woordenboeken</h3>
 
-  <p>100% overeenkomende termen in de <a href="glossaries.html">woordenlijst</a> zullen als verwijzing weergegeven worden in het venster Woordenlijst. Zij kunnen niet worden verplaatst met behulp van sneltoetsen.</p>
+  <p>Overeenkomende termen in <a href="glossaries.html">woordenlijsten</a> en woordenboeken, die u heeft opgenomen in het project, zullen als verwijzing worden weergegeven in de vensters Woordenlijst en Woordenboek.&nbsp;</p>
 
   <h3><a name="searches" id="searches"></a>Zoeken gebruiken</h3>
 
   <p>OmegaT verschaft een groot scala aan <a href="searches.html">zoek</a>functies. Roep het venster Zoeken op met <code>Ctrl+F</code> en voer het woord of de frase waarnaar u wilt zoeken in het vak "Zoeken naar" in. Als alternatief kunt u een woord of frase selecteren in het bewerkingsveld (doeltekst van het actieve segment) en op <code>Ctrl+F</code> drukken. Het woord of de frase wordt in dit geval automatisch ingevoegd in het vak "Zoeken naar".</p>
 
-  <h3><a name="create_trans" id="create_trans"></a>Vertaalde documenten maken</h3>
+  <h3>Google Translate gebruiken</h3>In het venster <a href="./GoogleTranslate.html">Google Translate</a>, indien geactiveerd, zult u automatisch een suggestie krijgen vor de vertaling van het huidige segment. U kunt het met <code>Ctrl+M</code> in het doelsegment invoegen.<h3><a name="create_trans" id="create_trans"></a>Vertaalde documenten maken</h3>
 
   <p>Als u alle segmenten heeft vertaald (of eerder als u dat wilt), zal OmegaT de doeldocumenten bijwerken met behulp van de opgeslagen vertalingen in het vertaalgeheugen. Selecteer <strong>Project → Vertaalde documenten maken</strong> uit het menu om dat te doen. OmegaT zal vertaalde versies van alle vertaalbare documenten in de map Source van het project maken, ongeacht of zij wel of niet volledig vertaald zijn. De geheel of gedeeltelijk vertaalde bestanden zullen worden opgeslagen in de map Target van het project. Open de doelbestanden met hun gekoppelde toepassing (browser, tekstverwerkingsprogramma...) om de inhoud en opmaak van uw vertaling te controleren om uw vertaalwerk te voltooien. U kunt dan terugkeren naar OmegaT om de nodige correcties te maken; vergeet niet om de vertaalde documenten opnieuw te maken.</p>
   <hr>
@@ -212,17 +235,14 @@
 
   <h3><a name="example" id="example"></a>Een voorbeeld...</h3>
 
-  <p>In deze voorbeelden hebben we de tags geaccentueerd om ze gemakkelijker te laten zien, maar in OmegaT zullen ze niet geaccentueerd zijn. De HTML-tags, geaccentueerd in <font color="#0000FF">blauw,</font> zullen door OmegaT worden genegeerd omdat zij het segment volledig omsluiten. De tags, hieronder geaccentueerd in <font color=
+  <p>In deze voorbeelden hebben we de tags geaccentueerd om ze gemakkelijker te laten zien, maar in OmegaT zullen ze niet geaccentueerd zijn. De HTML-tags, geaccentueerd in <font color="#0000FF">blauw</font>, zullen door OmegaT worden genegeerd omdat zij het segment volledig omsluiten. De tags, hieronder geaccentueerd in <font color=
   "#008000">groen</font> moeten door OmegaT worden afgehandeld omdat zij binnen het segment staan. Hier is een voorbeeld van een segment in HTML:</p>
 
-  <p><code><font color="#0000FF">&lt;p&gt;</font>Een ander lettertype voor weergave kan worden geselecteerd via het dialoogvenster</code> <code><font color=
-  "#008000">&lt;b&gt;</font>Lettertype weergeven<font color=
-  "#008000">&lt;/b&gt;</font>. Open het via het menu-item </code> <code><font color=
-  "#008000">&lt;i&gt;</font>Instellingen<font color="#008000">&lt;/i&gt;</font> →</code>  <code><font color="#008000">&lt;i&gt;</font>Lettertype weergeven...<font color="#008000">&lt;/i&gt;</font>. Het lettertype en de afmetingen kunnen worden gewijzigd in het dialoogvenster.<font color=
+  <p><code><font color="#0000FF">&lt;p&gt;</font>Een ander lettertype voor weergave kan worden geselecteerd via het dialoogvenster <font color="#008000">&lt;b&gt;</font>Lettertype weergeven<font color="#008000">&lt;/b&gt;</font>. Open het via het menu-item <font color="#008000">&lt;i&gt;</font>Instellingen<font color=
+  "#008000">&lt;/i&gt;</font> →<font color="#008000">&lt;i&gt;</font>Lettertype weergeven...<font color="#008000">&lt;/i&gt;</font>. Het lettertype en de afmetingen kunnen worden gewijzigd in het dialoogvenster.<font color=
   "#0000FF">&lt;/p&gt;</font></code></p>
 
-  <p><br>
-  <br></p>
+  <p><br></p>
 
   <p>Hier ziet u hoe OmegaT het zal weergeven, met de vertaling in Afrikaans:</p>
 
@@ -230,7 +250,7 @@
   <br></p>
 
   <p><img src="images/tagged_segment.png" name="graphics6" alt="getagd segment"
-  align="bottom" width="592" height="150" border="0" id="graphics6"></p>
+  id="graphics6" align="bottom" border="0"></p>
 
   <p><br>
   <br></p>
@@ -238,26 +258,27 @@
   <p>Als OmegaT het vertaalde document heeft gemaakt, zal de HTML er zo uitzien:</p>
 
   <p><img src="images/tagged_segment_target.png" name="graphics5" alt=
-  "getagd segment - doel" align="bottom" width="592" height="122" border="0"
-  id="graphics5"></p>
+  "getagd segment - doel" id="graphics5" align="bottom" border="0"></p>
 
   <h3><a name="tag_verif" id="tag_verif"></a>Tag-verificatie</h3>
 
   <p>OmegaT detecteert niet automatisch foutieve tags in het vertaalde document. Voordat u het document aflevert aan uw cliënt, moet u daarom eerst de tags controleren op fouten. Selecteer <strong>Extra → <a href=
-  "formattedText.html#tag_validation">Tags valideren</a></strong> uit het menu. Een tabel zal worden weergegeven waarin de segmenten worden getoond waarvan de bron- en doeltags niet overeenkomen. Klik op het segmentnummer. U wordt automatisch naar het verdachte segment gebracht in het venster Bewerken waar u de tags kunt corrigeren.</p>
+  "formattedText.html#tag_validation">Tags valideren</a></strong> uit het menu. Een tabel zal worden weergegeven waarin de segmenten worden getoond waarvan de bron- en doeltags niet overeenkomen. Klik op het segmentnummer. U wordt automatisch naar het verdachte segment gebracht in het venster Bewerken waar u de tags kunt corrigeren. Druk op <span style="font-weight: bold;">Enter</span> om het gecorrigeerde segment te valideren en controleer de correctie door opnieuw op <span style="font-weight: bold;">Control-T</span> te drukken</p>
 
-  <p>In sommige gevallen kunnen tag-fouten er voor zorgen dat het document niet geopend kan worden. U moet u er dan ook van overtuigen dat u alle tag-fouten heeft gecorrigeerd voordat u de vertaalde documenten maakt. Tenslotte moet u de uiteindelijke opmaak altijd controleren door het document te openen in de gekoppelde viewer of bewerkingsprogramma.</p>
+  <p>In sommige gevallen kunnen tagfouten er voor zorgen dat het document niet geopend kan worden. U moet u er dan ook van overtuigen dat u alle tagfouten heeft gecorrigeerd voordat u de vertaalde documenten maakt. Tenslotte moet u de uiteindelijke opmaak altijd controleren door het document te openen in de gekoppelde viewer of bewerkingsprogramma.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" summary="alleen opmaak" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>
-        <td style="text-align: center;"><a href="index.html">Home</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

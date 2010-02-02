@@ -2,7 +2,7 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Vertaalgeheugens - OmegaT 1.8 Gebruikershandleiding</title>
+  <title>Vertaalgeheugens - OmegaT 2.0 Gebruikershandleiding</title>
 </head>
 
 <body>
@@ -36,6 +36,8 @@
     </li>
 
     <li><a href="#using_OmegaT_TM">OmegaT vertaalgeheugens gebruiken in andere vertaalprogramma's</a></li>
+    
+    <li><a href="#pseudo_translate">Pseudo-vertaald geheugen</a></li>
 
     <li><a href="#upgrading_TM">Vertaalgeheugens bijwerken</a></li>
   </ul>
@@ -75,12 +77,12 @@
         <li>Het bestand <em>omegat</em> is inclusief OmegaT specifieke opmaaktags zodat het bestand kan worden gebruikt in andere OmegaTprojecten</li>
       </ul>
 
-      <p>De map <em>/tm/</em> kan elk aantal TMX-bestanden bevatten. Zulke bestanden moeten correcte TMX-bestanden zijn en kunnen ofwel alleen tekstuele informatie bevatten (niveau 1 TMX), OmegaT tekstuele en opmaakinformatie (omegat TMX) of TMX tekstuele en opmaakinformatie (niveau 2 TMX). De verschillen tussen hen zijn technisch van aard (zie hieronder voor de details), en als u een vertaalgeheugen uit een eerder project wilt gebruiken, zijn zij grotendeels uitwisselbaar, dat is zij zullen allemaal goed werken.</p>
-    </li>
-
-    <li><a name="TMX_backup" id="TMX_backup"></a></li>
+      </li><li>De map <em>/tm/</em> kan elk aantal TMX-bestanden bevatten. Zulke bestanden moeten correcte TMX-bestanden zijn en kunnen ofwel alleen tekstuele informatie bevatten (niveau 1 TMX), OmegaT tekstuele en opmaakinformatie (omegat TMX) of TMX tekstuele en opmaakinformatie (niveau 2 TMX). De verschillen tussen hen zijn technisch van aard (zie hieronder voor de details), en als u een vertaalgeheugen uit een eerder project wilt gebruiken, zijn zij grotendeels uitwisselbaar, dat is zij zullen allemaal goed werken.</li>
   </ul>
+  <p>Optioneel kunt u OmegaT een aanvullend TMX-bestand (OmegaT-stijl) laten maken waar u maar wilt, dat alle vertaalbare segmenten van het project bevat. Zie <a href="#pseudo_translate">pseudo-vertaald geheugen</a>.</p>
+  
 
+  <a name="TMX_backup" id="TMX_backup"></a>
   <h3>TMX back-up</h3>
 
   <p>Bij het vertalen van uw bestanden slaat OmegaT al uw voortgang op in het vertaalgeheugen in de submap <em>/omegat</em> van het project.</p>
@@ -132,7 +134,7 @@
 
   <p>Wanneer u de doeldocumenten maakt in een OmegaT-project, wordt het vertaalgeheugen van het project uitgevoerd in de vorm van drie bestanden in de hoofdmap van uw OmegaT-project (zie de bovenstaande beschrijving). U kunt deze drie TMX-bestanden, (-<em>omegat.tmx</em>", "<em>-level1.tmx</em>" en "<em>-level2.tmx</em>"), beschouwen als een "exporteerbaar vertaalgeheugen", dat is als een exporteerbaar tweetalig overzicht van uw huidige project.</p>
 
-  <p>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als "invoer vertaalgeheugens", dat is voor import in uw nieuwe project. In dit geval plaatst u de vertaalgeheugens die u wilt gebruiken in de map <em>\tm</em> van uw nieuwe project.</p>
+  <p>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als "invoer vertaalgeheugens", dat is voor import in uw nieuwe project. In dit geval plaats u de vertaalgeheugens die u wilt gebruiken in de map <em>\tm</em> van uw nieuwe project.</p>
 
   <p>Standaard staat de map <em>\tm</em> onder de hoofdmap van het project (bijvoorbeeld ..<em>\MynProject\tm)</em>, maar u kunt een andere map kiezen in het dialoogvenster Projecteigenschappen als u dat wilt. Dit is handig als u regelmatig eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld omdat zij over hetzelfde onderwerp gaan of voor dezelfde klant zijn. In dit geval zou een handige procedure zijn:</p>
 
@@ -168,15 +170,27 @@
 
   <p>OmegaT exporteert TMX-bestanden versie 1.4 (zowel niveau 1 als niveau 2). De export van niveau 2 is geen standaard niveau 2 maar is goed genoeg om correcte overeenkomsten te genereren in TMX niveau 2 ondersteunende vertaalprogramma's. Als u alleen tekstuele informatie wilt (en geen opmaakinformatie) gebruik dan het niveau 1-bestand dat OmegaT heeft gemaakt.</p>
   <hr>
-  <a name="upgrading_TM" id="upgrading_TM"></a>
+  <a name="pseudo_translate" id="pseudo_translate"></a>
+  <h2>Pseudo-vertaald geheugen</h2>
+  <p>Er kunnen gevallen zijn waarin u de segmenten vooraf of anders wilt verwerken dan OmegaT toelaat. U wilt bijvoorbeeld voor testdoeleinden een pseudo-vertaling maken.</p>
+  <p>OmegaT laat het toe dat u een extra TMX-bestand maakt dat alle segmenten van het project bevat. De vertaling in deze TMX kan zijn ofwel<ul><li>vertaling is gelijk aan bron (standaard)</li>
+  <li>vertaalsegment is leeg</li></ul>
+  <p>Het TMX-bestand kan elke naam hebben die u opgeeft, maar de extensie '.tmx' wordt toegevoegd, indien niet opgegeven.</p>
+  <P>Het daadwerkelijk maken wordt geactiveerd met de volgende parameters voor de opdrachtregel:</P>
+  <code>java -jar omegat.jar <em>--pseudotranslatetmx=&lt;filename&gt; [pseudotranslatetype=[equal|empty]]</em></code>
+  <p>Vervang &lt;filename&gt; door de naam van het bestand dat u wilt maken, absoluut of relatief aan de werkmap (de map van waaruit u OmegaT start).</p>
+  <p>Het tweede argument <em>--pseudotranslatetype</em> is optioneel. De waarde daarvan is <em>equal</em> (voor bron=doel) of <em>empty</em> (doelsegment is leeg) en de standaard is <em>equal</em>.</p>
+  <p>U kunt het gemaakte TMX-bestand met elk programma bewerken dat u wilt. Het opnieuw gebruiken in OmegaT:<br> hernoem het naar <em>project_save.tmx</em> en plaats het in de map <em>omegat</em> van uw project.</p>
+  <hr>
 
+  <a name="upgrading_TM" id="upgrading_TM"></a>
   <h2>Vertaalgeheugens bijwerken</h2>
 
-  <p>Eerdere versies van OmegaT waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de opmaaktags in HTML- en Open Document-bestanden niet consistent. OmegaT 1.8 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen -- zodat u niet alles over hoeft te doen.</p>
+  <p>Eerdere versies van OmegaT waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de opmaaktags in HTML- en Open Document-bestanden niet consistent. OmegaT 2.0 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en uw vertaling op peil te brengen -- zodat u niet alles over hoeft te doen.</p>
 
-  <p>De TMX van een project wordt maar één keer bijgewerkt en zal in de bijgewerkte vorm worden weggeschreven en eerder gemaakte TMX-bestanden worden direct bijgewerkt, elke keer als het project wordt geladen. Wees er attent op dat sommige wijzigingen in bestandsfilters in OmegaT 1.8 zouden kunnen leiden tot totaal afwijkende segmentatie. Dus in zeer uitzonderlijke gevallen moet u uw vertaling handmatig bijwerken.</p>
+  <p>De TMX van een project wordt maar één keer bijgewerkt en zal in de bijgewerkte vorm worden weggeschreven en eerder gemaakte TMX-bestanden worden direct bijgewerkt, elke keer als het project wordt geladen. Wees er attent op dat sommige wijzigingen in bestandsfilters in OmegaT 2.0 zouden kunnen leiden tot totaal afwijkende segmentatie. Dus in zeer uitzonderlijke gevallen moet u uw vertaling handmatig bijwerken.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table summary="alleen opmaak"  style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>

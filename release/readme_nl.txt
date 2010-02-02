@@ -39,6 +39,9 @@ OmegaT's belangrijkste mogelijkheden zijn:
   - fuzzy overeenkomsten
   - slimme afhandeling van projecten inclusief complexe mappenhiërarchiën
   - ondersteuning voor woordenlijsten (terminologie-controles)
+  - ondersteuning voor Open Bron direct-gemaakte spellingcontroles
+  - ondersteuning voor StarDict woordenboeken
+  - ondersteuning voor de Google Translate machinale vertaalservices
   - heldere en uitgebreide documentatie en handleiding
   - vertaald in een aantal talen.
 
@@ -53,6 +56,11 @@ OmegaT ondersteunt standaard de volgende bestandsformaten:
   - DocBook documentatie bestandsformaat
   - Microsoft OpenXML-bestanden
   - Okapi ééntalige XLIFF-bestanden
+  - QuarkXPress CopyFlowGold
+  - Bestanden voor ondertiteling (SRT)
+  - ResX
+  - Android-bron
+  - LaTeX
 
 OmegaT kan ook worden aangepast voor andere bestandsformaten.
 
@@ -67,8 +75,22 @@ De gebruikershandleiding zit in het pakket dat u zojuist heeft gedownload. U kun
 
 3.1 Algemeen
 OmegaT vereist dat een Java Runtime Environment (JRE) versie 
-1.4 of hoger is geïnstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT is nu standaard voorzien van de Java Runtime Environment om gebruikers de moeite van het
+1.5 of hoger is geïnstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT is nu standaard voorzien van de Java Runtime Environment om gebruikers de moeite van het
 selecteren, verkrijgen en installeren te besparen. 
+
+Als u al Java hebt is de eenvoudigste manier om de huiidige versie van OmegaT te installeren de Java Web Start te gebruiken. 
+Download daarvoor het volgende bestand en voer het uit:
+
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+
+Het zal de juiste omgeving voor uw computer installeren en de toepassing zelf bij de eerste uitvoering er van. Latere aanroepen behoeven niet online te worden gedaan.
+
+Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende veiligheidswaarschuwingen kunnen krijgen. Het certificaat is zelf-ondertekend door "Didier Briel". 
+De toestemmingen die u deze versie geeft (welke kunnen worden vermeld als "onbeperkte toegang tot de computer") zijn identiek aan de toestemmingen die u aan de lokale versie geeft, als die wordt geïinstalleerd door de procedure die later wordt beschreven: zij geven toegang tot de harde schijf van de computer. Opeenvolgend klikken op  OmegaT.jnlp 
+zal controleren op upgrades, indien u online bent, ze installeren als er zijn, 
+en dan OmegaT starten. 
+
+De alternatieve manieren voor het downloaden en installeren van OmegaT worden hieronder vermeld. 
 
 Windows- en Linuxgebruikers: als u er van overtuigd bent dat op uw systeem al een passende versie van de JRE is geïnstalleerd, dan kunt u de versie van OmegaT zonder de JRE installeren (dit wordt aangegeven in de naam van de versie, namelijk "Without_JRE"). 
 Als u twijfelt raden wij u aan om de "standaard" versie te gebruiken, 
@@ -80,7 +102,9 @@ Sun's Java Runtime Environment (JRE) via bovenstaande koppeling of download en i
 Mac-gebruikers: de JRE is al geïnstalleerd op Mac OS X.
 
 Linux op PowerPC-systemen: gebruikers moeten IBM's JRE downloaden omdat Sun geen JRE voor PPC-systemen levert. Download in dit geval van:
+
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
+
 
 3.2 Installatie
 * Windows-gebruikers: Start eenvoudigweg het installatieprogramma. Het installatieprogramma kan snelkoppelingen maken om OmegaT te starten, als u dat wilt.
@@ -165,7 +189,7 @@ Code is bijgedragen door
 Andere bijdragen door
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary
+  Jean-Christophe Helary (localisatiemanager)
   Vito Smolej (documentatiemanager)
   Samuel Murray
   Marc Prior (localisatiemanager)

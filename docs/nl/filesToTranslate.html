@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Te vertalen bestanden - OmegaT 1.8 Gebruikershandleiding</title>
+
+  <title>Te vertalen bestanden - OmegaT 2.0 Gebruikershandleiding</title>
 </head>
 
 <body>
@@ -67,38 +68,34 @@
   </ul>
   <hr>
 
-  <h3><a name="RTLbidi"></a>Van rechts naar links talen</h3>
+  <h2><a name="RTLbidi" id="RTLbidi"></a>Van rechts naar links talen</h2>Uitvulling van de bron- en doelsegmenten is afhankelijk van de projecttalen. Standaard worden "van-links-naar-rechts"-talen (LTR) links uitgevuld en rechts uitgevuld voor "van-rechts-naar-links"-talen (RTL). U kunt tussen de verschillende weergavemodi schakelen door te drukken op Ctrl+Shift+O (dit is de letter O en niet het cijfer 0). De schakelcombinatie Shift+Ctrl+O heeft drie statussen:<ul>
+    <li>standaard (d.i. taal) uitvulling</li>
 
-  <h4><a name="RTL_Changing_direction"></a>Wijzigen van de richting van invoeren/weergeven van tekst</h4>Voor alle taken die kunnen worden uitgevoerd in OmegaT kunt u schakelen tussen de modi LTR-weergeven/invoeren en RTL-weergeven/invoeren door op Ctrl+Shift+O te drukken (dit is de letter O en niet het getal 0). Gebruiken van de modus RTL in OmegaT heeft geen enkele invloed op de modus weergeven van de vertaalde documenten die werden gemaakt in OmegaT. De modus weergeven van de vertaalde documenten zal moeten worden aangepast binnen de gewoonlijk gebruikte toepassing om ze weer te geven of te wijzigen (bekijk de relevante handleidingen voor de details). Gebruiken van Ctrl+Shift+O zorgt er voor dat zowel de tekstinvoer als de weergave in OmegaT wordt gewijzigd naar RTL. Door te klikken op het venster en te schakelen met de weergavemodus kan het afzonderlijk worden gebruikt voor alle drie vensters (Bewerken, Overeenkomsten en Woordenlijst). Het kan ook worden gebruikt in alle invoervelden in OmegaT (zoekvenster, segmentatieregels etc.)<p>Opmerking: Mac OSX gebruiken dezelfde toetscombinatie (en niet Cmd+Shift+O).</p>
+    <li>links uitvullen</li>
 
-  <h4><a name="RTL_mixing"></a>LTR- en RTL-tekenreeksen in segmenten mixen</h4>Bij het schrijven van pure RTL-tekst, kan de standaard (LTR) weergave worden gebruikt. In veel gevallen is het echter noodzakelijk om LTR-tekst in RTL-tekst in te bedden. Bijvoorbeeld in OmegaT-tags, produktnamen die moeten worden behouden in de LTR-brontaal, tijdelijke plaatsaanduidingen in localisatie-bestanden en getallen in tekst. In dit soort gevallen is het noodzakelijk om te schakelen naar de modus RTL, zodat de RTL- (in feite meerdere richtingen) tekst correct wordt weergegeven. Waarbij dient te worden opgemerkt dat als OmegaT in de modus RTL staat, zowel de bron als het doel worden weergegeven in de modus RTL. Dit betekent dat als de brontaal in LTR is en de doeltaal is RTL, of vice versa, het nodig zou kunnen zijn om heen en weer te schakelen tussen de modi RTL en LTR om eenvoudiger de bron te bekijken  en het doel in te voeren in hun respectievelijke modus.<h4><a name="RTL_tags"></a>OmegaT-tags in RTL-segmenten</h4>
+    <li>rechts uitvullen</li>
+  </ul>Gebruiken van de modus RTL in OmegaT heeft geen enkele invloed op de modus weergeven van de vertaalde documenten die werden gemaakt in OmegaT. De modus weergeven van de vertaalde documenten zal moeten worden aangepast binnen de gewoonlijk gebruikte toepassing om ze weer te geven of te wijzigen (bekijk de relevante handleidingen voor de details). Gebruiken van Ctrl+Shift+O zorgt er voor dat zowel de tekstinvoer als de weergave in OmegaT wordt gewijzigd naar RTL. Door te klikken op het venster en te schakelen met de weergavemodus kan het afzonderlijk worden gebruikt voor alle drie vensters (Bewerken, Overeenkomsten en Woordenlijst). Het kan ook worden gebruikt in alle invoervelden in OmegaT (zoekvenster, segmentatieregels etc.) <b>Opmerking</b>: Mac OSX gebruikt dezelfde toetscombinatie (en niet Cmd+Shift+O).<h3><a name="RTL_mixing" id="RTL_mixing"></a>LTR- en RTL-tekenreeksen in segmenten mixen</h3>Bij het schrijven van pure RTL-tekst, kan de standaard (LTR) weergave worden gebruikt. In veel gevallen is het echter noodzakelijk om LTR-tekst in RTL-tekst in te bedden. Bijvoorbeeld in OmegaT-tags, productnamen die moeten worden behouden in de LTR-brontaal, tijdelijke plaatsaanduidingen in localisatie-bestanden en getallen in tekst. In dit soort gevallen is het noodzakelijk om te schakelen naar de modus RTL, zodat de RTL- (in feite meerdere richtingen) tekst correct wordt weergegeven. Waarbij dient te worden opgemerkt dat als OmegaT in de modus RTL staat, zowel de bron als het doel worden weergegeven in de modus RTL. Dit betekent dat als de brontaal in LTR is en de doeltaal is RTL, of vice versa, het nodig zou kunnen zijn om heen en weer te schakelen tussen de modi RTL en LTR om eenvoudiger de bron te bekijken  en het doel in te voeren in hun respectievelijke modus.<h3><a name="RTL_tags" id="RTL_tags"></a>OmegaT-tags in RTL-segmenten</h3>
 
   <p>Zoals hierboven beschreven zijn OmegaT-tags LTR-tekenreeksen. Bij het vertalen tussen RTL- en LTR-talen kan het nodig zijn dat de vertaler, om de tags juist te lezen uit de bron en om ze dan juist in te voeren in het doel, vele malen moet schakelen tussen de modi LTR en RTL.</p>
 
   <p>Indien het document het toelaat wordt het de vertaler sterk aangeraden om opmaakinformatie uit het originele document te verwijderen zodat er zo weinig mogelijk tags als nodig is in de OmegaT-interface verschijnen. Volg de aanwijzingen die worden gegeven in Hints voor tagbeheer. Valideer de tags regelmatig (zie <a href=
   "userInterface.html#Tag_validation">Tag-validatie)</a> en maak met regelmatige tussenpozen vertaalde documenten (zie hieronder en <a href="menu.html">Menu</a>) om het eenvoudiger te maken om problemen te zien die opkomen. Het zou mogelijk moeten zijn om een platte tekst-versie van de tekst te vertalen en later de noodzakelijke opmaak in de relevante toepassing toe te passen.</p>
 
-  <h4><a name="RTL_CreatingTranslatedDocuments" id=
-  "RTL_CreatingTranslatedDocuments"></a>Vertaalde RTL-documenten maken</h4>
+  <h3><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Vertaalde RTL-documenten maken</h3>
 
-  <p>Als het vertaalde document wordt gemaakt zal de weergaverichting hetzelfde zijn als het originele document. Als het originele document LTR was, moet de weergaverichting van het doeldocument handmatig worden gewijzigd naar RTL in de toepassing waarin het wordt weergegeven. Elk uitvoerformaat heeft specifieke manieren om om te gaan met RTL-weergave, controleeer de relevante toepassingshandleidingen voor details.</p>
+  <p>Als het vertaalde document wordt gemaakt zal de weergaverichting hetzelfde zijn als het originele document. Als het originele document LTR was, moet de weergaverichting van het doeldocument handmatig worden gewijzigd naar RTL in de toepassing waarin het wordt weergegeven. Elk uitvoerformaat heeft specifieke manieren om om te gaan met RTL-weergave, controleer de relevante toepassingshandleidingen voor details.</p>
 
   <p>Het is soms mogelijk om de weergaveparameters voor het bronbestand te wijzigen zodat dergelijke parameters worden geërfd door de doelbestanden, om te vermijden dat de weergaveparameters voor de doelbestanden elke keer moeten worden gewijzigd als de bestanden worden geopend. Dergelijke aanpassingen zijn bijvoorbeeld mogelijk in OpenOffice.org bestanden.</p>
   <hr>
 
-  <h3><a name="formats" id="formats"></a>Bestandsformaten</h3>
+  <h2><a name="formats" id="formats"></a>Bestandsformaten</h2>
 
   <p>Met OmegaT kunt u bestanden vertalen in een aantal bestandsformaten. Er zijn twee basale typen van bestandsformaten, de <strong>platte tekst</strong>- en de <strong>opgemaakte tekst</strong>-formaten.</p>
 
   <h3><a name="plaintext" id="plaintext"></a>Platte-tekst bestanden</h3>
 
-  <p>Platte tekst-bestanden bevatten alleen maar tekst, zodat hun vertaling zo eenvoudig is als het typen van die vertaling.</p>
-
-  <p>Er zijn meerdere <a href="plainText.html">methoden</a> om de codering van een bestand te specificeren zodat de inhoud niet door elkaar wordt gegooid bij het openen in OmegaT.</p>
-
-  <p>Zulke bestanden worden geacht niet meer opmaak te bevatten dan "witte ruimten" voor inspringen-/uitlijningdoeleinden. Zij worden meestal gewijzigd in tekstbewerkers en het is in het algemeen niet mogelijk om in een dergelijk formaat lettertype/kleur/marges en dergelijke informatie te behouden.</p>
-
-  <p>Momenteel ondersteunt OmegaT de volgende platte tekst-formaten:</p>
+  <p>Platte tekst-bestanden bevatten alleen maar tekst, zodat hun vertaling zo eenvoudig is als het typen van die vertaling. Er zijn meerdere <a href="plainText.html">methoden</a> om de codering van een bestand te specificeren zodat de inhoud niet door elkaar wordt gegooid bij het openen in OmegaT. Zulke bestanden bevatten geen opmaak, uitgezonderd de "witruimte" die wordt gebruikt om tekst uit te lijnen, alinea's aan te geven of pagina-einden in te voegen. Zij kunnen geen informatie met betrekking tot de kleur, lettertype etc. van de tekst bevatten/behouden. Momenteel ondersteunt OmegaT de volgende platte tekst-formaten:</p>
 
   <ul>
     <li>
@@ -128,11 +125,9 @@
 
   <h3><a name="tagged" id="tagged"></a>Opgemaakte tekstbestanden</h3>
 
-  <p>Opgemaakte tekstbestanden bevatten zowel tekst als informatie, zoals lettertype, afmeting, kleur etc. Zij worden normaal gesproken gemaakt met tekstbewerkingsprogramma's of programma's voor het maken van homepages. Zulke bestanden worden zodanig opgeslagen dat zij hun opmaakinformatie behouden. Zulke opmaakinformatie kan eenvoudig zijn zoals <strong>dit is vet</strong> of zo complex als tabelgegevens met verschillende lettertype-afmetingen, kleur, positie etc. In de meeste vertalingen wordt het belangrijk geacht dat het vertaalde document er uitziet zoals het origineel. OmegaT stelt u in staat om dit te doen door het markeren van de tekens/woorden die een speciale opmaak hebben met eenvoudig te bewerken <a href="formattedText.html">tags</a>. Vereenvoudigen van de opmaak van de originele tekst draagt enorm bij aan het verminderen van het aantal tags. Het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc zou indien mogelijk moeten worden overwogen, om het vertalen te vereenvoudigen en het verminderen van het aantal mogelijke <a href=
-  "userInterface.html#Tag_validation">fouten in tags</a>.</p>
-
-  <p><a name="specifics" id="specifics"></a>Elk bestandstype wordt verschillend behandeld in OmegaT. Specifiek gedrag kan worden ingesteld in de <a href=
-  "fileFilters.html">bestandsfilters</a>. Momenteel ondersteunt OmegaT de volgende formaten voor opgemaakte tekst:</p>
+  <p>Opgemaakte tekstbestanden bevatten zowel tekst als informatie, zoals lettertype, afmeting, kleur etc. Zij worden normaal gesproken gemaakt met tekstverwerkingsprogramma's of programma's voor het maken van homepages. Zulke bestanden worden zodanig opgeslagen dat zij hun opmaakinformatie behouden. Zulke opmaakinformatie kan eenvoudig zijn zoals <strong>dit is vet</strong> of zo complex als tabelgegevens met verschillende lettertype-afmetingen, kleur, positie etc. In de meeste vertalingen wordt het belangrijk geacht dat het vertaalde document er uitziet zoals het origineel. OmegaT stelt u in staat om dit te doen door het markeren van de tekens/woorden die een speciale opmaak hebben met eenvoudig te bewerken <a href="formattedText.html">tags</a>. Vereenvoudigen van de opmaak van de originele tekst draagt enorm bij aan het verminderen van het aantal tags. Het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc zou indien mogelijk moeten worden overwogen, om het vertalen te vereenvoudigen en het verminderen van het aantal mogelijke <a href=
+  "userInterface.html#Tag_validation">fouten in tags</a>. <a name="specifics" id=
+  "specifics"></a>Elk bestandstype wordt anders afgehandeld in OmegaT. Specifiek gedrag kan worden ingesteld in de <a href="fileFilters.html">bestandsfilters</a>. Momenteel ondersteunt OmegaT de volgende formaten voor opgemaakte tekst:</p>
 
   <ul>
     <li>
@@ -162,6 +157,26 @@
     <li>
       <p>Okapi ééntalige XLIFF</p>
     </li>
+
+    <li>
+      <p>QuarkXPress CopyFlowGold</p>
+    </li>
+
+    <li>
+      <p>Bestanden voor ondertiteling (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p>Android-bron</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
   </ul>
 
   <p>Andere opgemaakte tekst-bestanden kunnen worden behandeld door OmegaT door hun bestandstype te <a href=
@@ -178,7 +193,8 @@
 
   <p><br></p>
 
-  <table width="100%" border="0" cellpadding="4" cellspacing="0">
+  <table width="100%" border="0" cellpadding="4" cellspacing="0" summary=
+  "alleen opmaak">
     <col width="50*">
     <col width="206*">
 
@@ -226,16 +242,18 @@
     </tr>
   </table>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="alleen opmaak">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>
-        <td style="text-align: center;"><a href="index.html">Home</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Inhoudsopgave</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

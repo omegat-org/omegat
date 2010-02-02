@@ -1,160 +1,259 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Fordítandó állományok - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Fordítandó állományok - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
+
 <body>
+  <h1>Fordítandó állományok</h1>
 
-	<h1>Fordítandó állományok</h1>
+  <p><a href="#RTLbidi">Jobbról balra író nyelvek</a></p>
 
-	<ul>
-		<li><a href="#bidi">Jobbról balra írású nyelvek</a>
-			<ul>
-				<li><a href="#bidi_transl">Fordítás</a></li>
-				<li><a href="#bidi_create">Lefordított állományok létrehozása</a></li>
-			</ul>
-		</li>
-		 <li>
-		    <a href="#formats">Állományformátumok</a>
-			<ul>
-				<li><a href="#plaintext">Egyszerű szöveg</a></li>
-				<li><a href="#tagged">Formázott szövegek</a></li>
-				<li><a href="#specifics">Az állományformátumok adatai</a></li>
-				<li><a href="#others">Egyéb állományformátumok</a>
-					<ul>
-						<li><a href="#ooo">OpenOffice.org</a></li>
-						<li><a href="#okapi">Okapi Framework</a></li>
-						<li><a href="#tt">Translate Toolkit</a></li>
-						<li><a href="#po4a">po4a</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
+  <ul>
+    <li>
+      <p><a href="#RTL_Changing_direction">A bemeneti/megjelenített szöveg irányának megváltoztatása</a></p>
+    </li>
 
-	<hr>
+    <li>
+      <p><a href="#RTL_mixing">Balról jobbra és jobbról balra írt szövegegységek a szövegrészekben</a></p>
+    </li>
 
-	<a name="bidi" id="bidi"></a>
-	<h1>Jobbról balra írású nyelvek</h1>
-	
-	<a name="bidi_transl" id="bidi_transl"></a>
-	<h2>Fordítás</h2>
+    <li>
+      <p><a href="#RTL_tags">Az OmegaT címkéi jobbról balra írt szövegegységekben</a></p>
+    </li>
 
-	<p>Amikor két szövegirányú nyelveket fordít az OmegaT-vel, két szempontot kell tekintetbe venni: 1) a szövegbevitelt és 2) a szöveg megjelenítését. RTL-szöveg (jobbról balra, pl. urdu, arab stb.) LTR-nézetben (balról jobbra) való írása közben a szöveg nem mindig a beírás szerinti rendben jelenik meg. Ez nem teljesen nyilvánvaló, amikor csak RTL-szöveg bevitelére kerül sor, ilyen esetben használhatja az alapbeállítás szerinti (LTR) nézetet.</p>
+    <li>
+      <p><a href="#RTL_CreatingTranslatedDocuments">Lefordított jobbról balra írt dokumentumok létrehozása</a></p>
+    </li>
+  </ul>
 
-	<p>Számos esetben azonban RTL-célnyelv esetén szükségessé válik LTR-szöveg beágyazása. Például néhány terméknevet meg kell őrizni angolul, vagy a grafikus felhasználói felület fordítása során egyes kódokat eredeti formájukban kell megőrizni.</p>
+  <p><a href="#formats">Állományformátumok</a></p>
 
-	<p>Ha LTR-szöveget ágyaz be RTL-szövegbe, az nem a beírás szerinti rendben jelenik meg. Ahhoz, hogy az OmegaT ezt kezelni tudja, a nézetet a <code>Ctrl+Shift+O</code> kombinációval kell váltogatni.</p>
-	
-	<p><strong>Figyelem:</strong> Ugyanez a billentyűkombináció használható Mac OSX esetén is.</p>
-	
-	<p>RTL-szöveget szintén könnyebb beírni, ha átkapcsol RTL-nézetre, mert alapnézetben az RTL-szöveg beírása során először beírt szóközök a szövegtől jobbra, a következő RTL-karakter pedig balra jelenik meg.</p>
+  <ul>
+    <li>
+      <p><a href="#plaintext">Egyszerű szöveg</a></p>
+    </li>
 
-	<p>A <code>Ctrl+Shift+O</code> használata nyomán mind a szövegbevitel, mind az OmegaT-ben megjelenített szöveg RTL-re módosul. Ez mindhárom panel esetén (Szerkesztés, Bizonytalan egyezések és Szójegyzék) külön-külön használható.</p>
+    <li>
+      <p><a href="#tagged">Formázott szöveges állományok</a></p>
+    </li>
 
-	<a name="bidi_create" id="bidi_create"></a>
-	<h2>Lefordított állományok létrehozása</h2>
-	
-	<p>Ha előáll a lefordított dokumentum, annak megjelenítési szövegiránya LTR lesz, akárcsak az eredeti dokumentumé. Ezt kézzel módosíthatja. Minden kimeneti forma sajátos módon kezeli az RTL-megjelenítést, a részleteket olvassa el a vonatkozó felhasználói kézikönyvből.<hr>
-	
-	<a name="formats" id="formats"></a>
-	<h1>Állományformátumok</h1>
+    <li>
+      <p><a href="#specifics">Az állományformátumok adatai</a></p>
+    </li>
 
-	<p>Az OmegaT-vel számos fájlformátumú állományt fordíthat. Alapvetően kétféle fájlformátum különböztethető meg: az <strong>egyszerű szöveg</strong> és a <strong>formázott szöveg</strong>.</p>
+    <li>
+      <p><a href="#others">Egyéb állományformátumok</a></p>
 
-	<a name="plaintext" id="plaintext"></a>
-	<h2>Egyszerű szöveg</h2>
+      <ul>
+        <li>
+          <p><a href="#ooo">OpenOffice.org</a></p>
+        </li>
 
-	<p>Az egyszerű szöveg csak szöveget tartalmaz, ezért fordításához mindössze a fordított szöveg begépelésére van szükség.</p>
-	
-	<p>Egy állomány kódolását különféle <a href="plainText.html">módszerekkel</a> adhatja meg, így elkerülhető, hogy az OmegaT krikszkrakszokat jelenítsen meg.</p>
+        <li>
+          <p><a href="#okapi">Okapi keretrendszer</a></p>
+        </li>
 
-	<p>Az ilyen állományokban a behúzások/igazítások kizárólag "helykihagyással" történnek. Ezek módosítása rendszerint szövegszerkesztőkkel érhető el, ebben a formátumban általában nincs lehetőség olyan adatok tárolására, mint a betű típusa, színe, a margók stb.</p>
+        <li>
+          <p><a href="#tt">Translate Toolkit</a></p>
+        </li>
 
-	<p>Jelenleg az OmegaT az alábbi formátumú egyszerű szöveges állományokat támogatja:</p>
+        <li>
+          <p><a href="#po4a">po4a</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
 
-	<ul>
-		<li>ASCII-szöveg (.txt stb.)</li>
-		<li>Kódot tartalmazó szöveg</li>
-		<li>Java nyelvi forrásszövegek (.properties)</li>
-		<li>PO-állományok (.po)</li>
-		<li>INI (kulcs=érték) szövegek (.ini)</li>
-	</ul>
+  <h2><a name="RTLbidi" id="RTLbidi"></a>Jobbról balra író nyelvek</h2>A forrásszövegek és a fordítások igazítása az adott projektnyelvektől függően történik. LTR-nyelvek esetén alaphelyzetben a szöveg balra, míg RTL-nyelvek esetén jobbra igazodik. A különféle megjelenítési módok között a Ctrl+Shift+O (az O betű!) lenyomásával váltogathat. A Ctrl+Shift+O kombinációnak három állapota van:<ul>
+    <li>alapigazítás (vagyis a nyelvnek megfelelő)</li>
 
-	<p>Más egyszerű szöveges állományokat úgy kezelhet az OmegaT-vel, hogy ezek kiterjesztését <a href="fileFilters.html">társítja</a> valamelyik támogatott fájltípussal (például a <code>.pod</code> állományok társíthatók az ASCII-szövegszűrővel), előfeldolgozásukhoz pedig speciális <a href="segmentation.html">darabolási</a>  szabályokat ad meg.</p>
+    <li>balra igazítás</li>
 
+    <li>jobbra igazítás</li>
+  </ul>Ha RTL- (jobbról balra) írásmódot használ, ez az OmegaT által létrehozott és az OmegaT-vel lefordított dokumentumok megjelenítésére semmilyen hatással nincs. A lefordított dokumentumok megjelenítését a kijelzésükre vagy módosításukra általában  használatos alkalmazással kell megváltoztatni (a részleteket lásd az alkalmazások kézikönyveiben). A Ctrl+Shift+O használatakor a szöveg bevitele és megjelenítése átkapcsolható jobbról balra üzemmódra. Az üzemmód mindhárom panel (Szerkesztő, Bizonytalan egyezések és Szójegyzék) esetén külön-külön módosítható a panelre kattintással és az üzemmód átkapcsolásával. Ugyancsak használható az OmegaT összes szövegbeviteli mezőjében (keresőablak, szövegdarabolási szabályok stb.) <b>Megjegyzés</b>: Mac OSX esetén is ugyanaz a billentyűkombináció (azaz nem a Cmd+Shift+O) használandó.<h3><a name="RTL_mixing" id="RTL_mixing"></a>Balról jobbra és jobbról balra írt szövegegységek a szövegrészekben</h3>Kizárólag jobbról balra írt szöveg írásakor használható az alapértelmezett (balról jobbra) megjelenítés. Sokszor azonban balról jobbra írt szöveget kell jobbról balra írt szövegbe beágyazni. Például az OmegaT címkéiben a termékneveket, a helykitöltőket és a szövegben szereplő számokat balról jobbra írt forrásnyelvi alakban kell megőrizni. Ilyenkor a szöveg helyes megjelenítése érdekében át kell kapcsolni jobbról balra (valójában kétirányú) üzemmódra. Amikor az OmegaT jobbról balra üzemmódban van, mind a forrásnyelvi, mind a célnyelvi szöveg jobbról balra üzemmódban jelenik meg. Ez azt jelenti, hogy ha a forrásnyelvi szöveg jobbról balra íródik, a célnyelvi pedig balról jobbra, vagy megfordítva, akkor szükség lehet az üzemmódot átváltogatására azért, hogy a kétféle szöveget könnyen lehessen olvasni.<h3><a name="RTL_tags" id="RTL_tags"></a>Az OmegaT címkéi jobbról balra írt szövegegységekben</h3>
 
-	<a name="tagged" id="tagged"></a>
-	<h2>Formázott szövegek</h2>
+  <p>Mint fentebb említettük, az OmegaT címkéi balról jobbra írásúak. A forrásszövegből vett címkék megfelelő célnyelvi átültetéséhez a fordítónak esetenként többször át kell váltania az üzemmódok között.</p>
 
-	<p>A formázott szöveges állományok szövegen kívül olyan formázási információkat is tartalmaznak, mint a betűtípus, a méret, a szín stb. Ezeket rendszerint szövegszerkesztőkkel vagy honlapszerkesztőkkel hozzák létre.</p>
-	
-	<p>Ezen állományok esetén a rendszer megőrzi a formázási információkat. Ezek a formázási információk lehetnek egyszerűek, mint pl. <strong>ez a szöveg vastag</strong>, vagy lehetnek bonyolultak, pl. eltérő betűméretű, -színű, elrendezésű táblázatadatok stb.</p>
-	
-	<p>A fordítási feladatok többségénél elvárás, hogy a fordítás hasonlítson az eredetire. Az OmegaT ezt a sajátos formázású karakterek/szavak könnyen kezelhető <a href="formattedText.html">címkékkel</a> való megkülönböztetésével oldja meg.</p>
-	
-	<p>Az eredeti szöveg formázásának egyszerűsítése nagy mértékben csökkenti a használandó címkék számát. Ha lehetséges, célszerű megfontolni a használt betűtípusok, -méretek, -színek egységesítését a fordítás egyszerűbbé tétele és a címkék használatával összefüggő hibák mennyiségének a csökkentése érdekében.</p>
+  <p>Ha a dokumentum megengedi, a fordítónak mindenképpen ajánlatos eltávolítani az  eredeti dokumentumból a formázási információkat, hogy az OmegaT felületén a lehető legkevesebb címke jelenjen meg. Kövesse az Ötletek a jelölők kezeléséhez alatt leírtakat. A címkéket ellenőrizze gyakran (lásd: <a href=
+  "userInterface.html#tag_validation">Címkeellenőrzés)</a> és rendszeres időközönként állítsa elő a lefordított dokumentumokat (lásd alább és a <a href="menu.html">Menü</a> pontot), hogy hamarabb előjöjjenek az esetleges gondok. Megoldható a helyzet úgy is, hogy a szöveg egyszerű szöveges változatát fordítja le, majd később a megfelelő alkalmazásban hozzáadja a szükséges formázási stílust.</p>
 
-	<p>Jelenleg az OmegaT az alábbi formázott szöveges állományokat támogatja:</p>
+  <h3><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Lefordított jobbról balra írt dokumentumok létrehozása</h3>
 
-	<ul>
-		<li>OpenOffice.org</li>
-		<li>OpenDocument</li>
-		<li>Microsoft Open XML</li>
-		<li>(X)HTML</li>
-		<li>HTML Help Compiler</li>
-		<li>DocBook</li>
-		<li>Okapi egynyelvű XLIFF</li>
-	</ul>
+  <p>Amikor előáll a lefordított dokumentum, annak megjelenítési iránya megegyezik az eredeti dokumentuméval. Ha az eredeti iratot balról jobbra írták, a célnyelvi megjelenítését az erre szolgáló alkalmazásban kézzel át kell állítani jobbról balra irányúra. Minden kimeneti formának megvannak a sajátos jobbról balra irányú megjelenítési módozatai, ennek részleteiről olvassa el az adott alkalmazás kézikönyvét.</p>
 
-	<p>Más típusú formázott szöveges állományokat úgy kezelhet az OmegaT-vel, hogy ezek kiterjesztését <a href="fileFilters.html">társítja</a> valamelyik támogatott fájltípussal, előfeldolgozásukhoz pedig speciális &lt;a2&gt;darabolási&lt;/a2&gt; szabályokat ad meg.</p>
+  <p>Ha el akarja kerülni a célnyelvi állományok megnyitásakor a megjelenítési paramétereinek ismétlődő módosítgatását, esetenként megváltoztathatja a forrásnyelvi állomány megjelenítési paramétereit, így azokat a célnyelviek megöröklik. Ilyesfajta módosításokat hajthat végre például OpenOffice.org állományok esetén.</p>
+  <hr>
 
-	
-	<a name="specifics" id="specifics"></a>
-	<h2>Az állományformátumok adatai</h2>
+  <h2><a name="formats" id="formats"></a>Állományformátumok</h2>
 
-	<p>Az OmegaT minden állománytípust más-más módon kezel. A konkrét viselkedés beállítása <a href="fileFilters.html">állományszűrőkkel</a> történik.<a name="others" id="others"></a>
-	<h2>Egyéb állományformátumok</h2>
+  <p>Az OmegaT-vel számos formátumban elkészült állományt lefordíthat. Alapvetően kétféle fájlformátum létezik: az <strong>egyszerű szöveg</strong> és a <strong>formázott szöveg</strong>.</p>
 
-	<p>Más egyszerű szövegtípusokat és formázott szövegeket szintén fordíthat az OmegaT-vel.</p>
-	
-	<p>A nem támogatott fájlformátumokat külső eszközökkel átalakíthatja valamelyik támogatott formátumra. A lefordított állományt visszakonvertálhatja az eredeti formátumra. Így egy sor egyszerű szövegfajtát fordíthat az OmegaT-vel (pl. LaTex stb.) PO-formájúra való átalakítás után. Hasonlóképpen egy sor formázott állományfajta (ideértve a Microsoft Office állományokat) fordítható az OmegaT segítségével Open Document formájúra való alakítás után.</p>
-	
-	<p>A lefordított állomány minősége függ az oda-vissza alakítás milyenségétől. Mielőtt nekilát az átalakításnak, ellenőrizze, hogy kipróbált-e minden lehetőséget.</p>
-	
-	<p>Ingyenesen elérhetők az alábbi átalakító eszközök:</p>
-	
-	<a name="ooo" id="ooo"></a>
-	<h3>OpenOffice.org</h3>
+  <h3><a name="plaintext" id="plaintext"></a>Egyszerű szöveg</h3>
 
-	<p>Az OmegaT közvetlenül nem támogatja a Microsoft Office Word, Excel és PowerPoint formátumait. Az OpenOffice.org (és annak változatai) azonban átalakítják ezeket az állományokat OpenDocument-formátumba, amelyet az OmegaT eredendően támogat.</p>
-	
-	<p><a href="http://www.openoffice.org/">Az OpenOffice.org hivatalos portálja</a></p>
+  <p>Az egyszerű szöveg csak szöveget tartalmaz, ezért fordítása megegyezik a fordított szöveg begépelésével. Többféle <a href="plainText.html">módszer</a> közül választhat az adott állomány kódolásának a megadásához annak érdekében, hogy annak tartalma az OmegaT-ben való megnyitás során ne keveredjen össze. Az ilyen állományokban a szöveg igazítására, a bekezdések vagy a laptörés jelölésére használt nem nyomtatott karaktereken kívül semmi egyéb információ nem szerepel. Nem tárolható bennük a szöveg színére, betűtípusára stb. vonatkozó adat. Jelenleg az OmegaT az alábbi formátumú egyszerű szöveges állományokat támogatja:</p>
 
-	<a name="okapi" id="okapi"></a>
-	<h3>Okapi Framework</h3>
+  <ul>
+    <li>
+      <p>ASCII-szöveg (.txt stb.)</p>
+    </li>
 
-	<p>Az Okapi Framework szövegkinyerő segédeszközével létrehozható egy projektmappa-szerkezet az OmegaT-hez. Létrehozhat vele az OmegaT-nek megfelelő XLIFF-állományt is. Az Okapi nemrégiben bocsátott rendelkezésre eszközöket, amelyek Mono nevű, a legtöbb operációs rendszeren elérhető ingyenes platform alatt futtathatók.</p>
+    <li>
+      <p>Kódolt szöveg</p>
+    </li>
 
-	<p><a href="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Az Okapi Mono-változata</a>, <a href="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">oktatóanyag</a></p>
+    <li>
+      <p>Java nyelvi forrásszövegek (.properties)</p>
+    </li>
 
-	<a name="tt" id="tt"></a>
-	<h3>Translate Toolkit</h3>
-	
-	<p>A Translate Toolkit nevű, pythonban fejlesztett eszközkészlettel a felhasználók egy sor Portable Object típusba és típusból való átalakítást végezhetnek el, ideértve a Mozilla .properties és dtd típusú állományait, a CSV-állományokat, a Qt .ts típusú állományait, az XLIFF-állományokat. Egy sor eszközt kínál az OmegaT-hez állományok fordítás előtti és utáni manipulálásához.</p>
+    <li>
+      <p>PO-állományok (.po)</p>
+    </li>
 
-	<p><a href="http://translate.sourceforge.net/wiki/toolkit/index">A Translate Toolkit hivatalos portálja</a></p>
+    <li>
+      <p>INI (kulcs=érték) állományok (.ini)</p>
+    </li>
+  </ul>
 
-	<a name="po4a" id="po4a"></a>
-	<h3>po4a</h3>
+  <p>Az egyéb egyszerű szövegeket az OmegaT akkor képes kezelni, ha kiterjesztésüket valamely támogatott szövegtípushoz <a href=
+  "fileFilters.html">társítja</a> (például a <code>.pod</code> kiterjesztésű állományok az ASCII szövegszűrőhöz  kapcsolhatók) és konkrét <a href=
+  "segmentation.html">szövegdarabolási</a> szabályokkal előre feldolgozza.</p>
 
-	<p>A po4a egy Debian perl programnyelven írt eszköz. Oda-vissza alakít át állományokat LaTeX, TeX, POD stb. és Portable Object között.</p>
+  <h3><a name="tagged" id="tagged"></a>Formázott szöveges állományok</h3>
 
-	<p><a href="http://po4a.alioth.debian.org/">A po4a hivatalos portálja</a></p>
-	
-	<hr>
+  <p>A formázott szöveges állományok a szövegen kívül olyan formázási információkat is tartalmaznak, mint a betűtípus, a méret, a szín stb. Ezeket rendszerint szövegszerkesztőkkel vagy honlapszerkesztőkkel hozzák létre. Ezen állományok esetén a rendszer megőrzi a formázási információkat. Ezek a formázási információk lehetnek egyszerűek, mint pl. <strong>ez a szöveg vastag</strong>, vagy lehetnek összetettek, mint pl. eltérő betűméretű, -színű, elrendezésű táblázatbeli adatok stb. A fordítási feladatok többségénél elvárás, hogy a fordítás hasonlítson az eredetire.  Az OmegaT-vel ezt a sajátos formázású karakterek/szavak könnyen kezelhető <a href="formattedText.html">címkékkel</a> való megkülönböztetésével érheti el. Az eredeti szöveg formázásának egyszerűsítése nagy mértékben csökkenti a használandó címkék számát. Ha lehetséges, célszerű megfontolni a használt betűtípusok, -méretek, -színek egységesítését a fordítás egyszerűbbé tétele és a <a href=
+  "userInterface.html#tag_validation">címkehibák</a> mennyiségének a csökkentése érdekében.<a name="specifics" id=
+  "specifics"></a>Az OmegaT eltérően kezel minden egyes típust. A konkrét viselkedést az <a href="fileFilters.html">állományszűrőkkel</a> lehet megadni. Jelenleg az OmegaT az alábbi formázott szöveges állományokat támogatja:</p>
 
-	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
+  <ul>
+    <li>
+      <p>OpenOffice.org</p>
+    </li>
+
+    <li>
+      <p>OpenDocument</p>
+    </li>
+
+    <li>
+      <p>Microsoft Open XML</p>
+    </li>
+
+    <li>
+      <p>(X)HTML</p>
+    </li>
+
+    <li>
+      <p>HTML Help Compiler állományok</p>
+    </li>
+
+    <li>
+      <p>DocBook</p>
+    </li>
+
+    <li>
+      <p>Okapi egynyelvű XLIFF</p>
+    </li>
+
+    <li>
+      <p>QuarkXPress CopyFlowGold</p>
+    </li>
+
+    <li>
+      <p>Feliratok (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p>Android forrásfájlok</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
+  </ul>
+
+  <p>Az egyéb formázott szövegeket az OmegaT akkor képes kezelni, ha kiterjesztésüket valamely támogatott állománytípushoz <a href=
+  "fileFilters.html">társítja</a> és konkrét <a href=
+  "segmentation.html">szövegdarabolási</a> szabályokkal előre feldolgozza.</p>
+
+  <h3><a name="others" id="others"></a>Egyéb állományformátumok</h3>
+
+  <p>Egyéb egyszerű szövegtípusokat és formázott szövegeket is lefordíthat az OmegaT segítségével.</p>
+
+  <p>Külső eszközökkel az állományokat átalakíthatja valamilyen támogatott formátumúra. Ne feledkezzen el arról, hogy a lefordított állományokat vissza kell alakítania eredeti formátumúra. Egy sor egyszerű szövegfajta lefordítható az OmegaT-vel (pl. LaTex stb.) PO-formájúra való átalakítás után. Hasonlóképpen egy sor formázott állományfajta (ideértve a Microsoft Office állományokat) lefordítható az OmegaT segítségével Open Document formájúra alakítás után.</p>
+
+  <p>A lefordított állomány minősége az átalakítások minőségén múlik. Az átalakítás előtt ellenőrizze, hogy kipróbált-e minden lehetséges megoldást. Az ingyenes átalakító eszközök közé tartoznak:</p>
+
+  <p><br></p>
+
+  <table width="100%" border="0" cellpadding="4" cellspacing="0" summary=
+  "csak formázás">
+    <col width="50*">
+    <col width="206*">
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="ooo" id="ooo"></a>OpenOffice.org<a href=
+        "http://www.openoffice.org/"><br> Az OpenOffice.org hivatalos portálja</a></p>
+      </td>
+
+      <td width="81%">
+        <p>Az OmegaT nem támogatja közvetlenül a Microsoft Office Word, Excel és Power Point termékeinek formátumát. Ugyanakkor az OpenOffice.org (és annak változatai) alkalmasak az ilyen formátumok OpenDocument formátumúra alakítására, melyet az OmegaT eredendően támogat.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="okapi" id="okapi"></a>Okapi keretrendszer<a href=
+        "http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm"><br> Az Okapi for Mono letöltési weboldala</a>, <a href=
+        "http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">oktatóanyag</a></p>
+      </td>
+
+      <td width="81%">
+        <p>Az Okapi Framework szövegkiszedő segédeszközével létrehozható egy OmegaT projekthez tartozó mappaszerkezet. Ugyancsak létrehozható egy OmegaT-specifikus XLIFF-állomány. Az Okapi nemrégen olyan eszközöket bocsátott közre, amelyek a legtöbb operációs rendszeren elérhető ingyenes platform, a Mono alatt futtathatók.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="tt" id="tt"></a>Translate Toolkit<br> A <a href="http://translate.sourceforge.net/wiki/toolkit/index">Translate Toolkit hivatalos portálja</a></p>
+      </td>
+
+      <td width="81%">
+        <p>A Translate Toolkit python nyelven megírt eszköz, mellyel a felhasználó számos Portable Object formátumba és formátumból való átalakító birtokába jut, beleértve a Mozilla .properties és dtd állományait, a CSV-állományokat, a Qt .ts és XLIFF típusú fájlokat. Egy sor eszközt tartalmaz az ezen állományok OmegaT-vel való lefordítása előtti vagy utáni átalakításához.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="po4a" id="po4a"></a>Po4a<br> A <a href="http://po4a.alioth.debian.org/">po4a hivatalos portálja</a></p>
+      </td>
+
+      <td width="81%">
+        <p>A po4a egy Debian alatt futó perl eszköz. Segítségével olyan formátumú állományok alakíthatók át Portable Object alakba és vissza, mint a LaTeX, a TeX, a POD stb.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="csak formázás">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

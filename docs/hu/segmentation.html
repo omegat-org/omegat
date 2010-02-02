@@ -1,144 +1,228 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Forrásszöveg darabolása - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>A forrásszöveg darabolása - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
 
 <body>
-	<h1>Forrásszöveg darabolása</h1>
+  <h2>A forrásszöveg darabolása</h2>
 
-	<ul>
-		<li><a href="#structure">Szerkezetszintű szövegdarabolás</a></li>
-		<li><a href="#sentence">Mondatszintű szövegdarabolás</a>
-			<ul>
-				<li><a href="#about">Szövegdarabolási szabályok</a></li>
-				<li><a href="#setup">A szabályok beállítása</a>
-					<ul>
-						<li><a href="#priority">Elsődlegesség</a></li>
-						<li><a href="#creation">A szabályok létrehozása</a></li>
-						<li><a href="#breal">Töréspont/Kivétel</a></li>
-						<li><a href="#setup">Egyszerű példák</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="regexp.html">Reguláris kifejezéseket tartalmazó szerkezetek</a></li>
-	</ul>
-	
-	<p>A fordítási memóriák szövegrészeknek nevezett egységeket kezelnek. Az OmegaT egy szöveget kétféleképpen tud feldarabolni: bekezdésekre vagy mondatokra.</p>
+  <ul>
+    <li>
+      <p><a href="#structure">Szerkezeti szintű darabolás</a></p>
+    </li>
 
-	<p>A szövegdarabolás típusának megadásához a főmenüből válassza ki a <strong>Beállítások → Szövegdarabolás...</strong> pontot.</p>
+    <li>
+      <p><a href="#sentence">Mondatszintű darabolás</a></p>
 
-	<p>Ha mondatokra darabolást választott, a szabályok beállításához a főmenüből válassza ki a <strong>Beállítások → Szövegdarabolás...</strong> pontot.</p>
+      <ul>
+        <li>
+          <p><a href="#about">A szövegdarabolás szabályai</a></p>
+        </li>
 
-	<p>A fejlesztés során számottevő figyelmet fordítottunk a megbízható szövegdarabolásra, így az esetek túlnyomó részében nem lesz szüksége arra, hogy saját darabolási szabályokat írjon. Ugyanakkor ez a lehetőség hasznosnak bizonyulhat egyes speciális esetekben, mivel megengedi, hogy azt fordítsa, ami lefordítandó, annak veszélye nélkül, hogy megváltoztatná azt, aminek változatlanul kell megmaradnia.</p>
-	
-	<p><strong>Vigyázat!</strong> Ha a szűrők beállításait nyitott projekt mellett módosítja, adatvesztést idézhet elő. Ha nyitott projekt mellett módosítja a szűrők beállításait, azok életbe lépéséhez a projektet újból be kell töltenie.</p>
+        <li>
+          <p><a href="#setup">Szabályok beállítása</a></p>
 
+          <ul>
+            <li>
+              <p><a href="#priority">Elsőbbség</a></p>
+            </li>
 
-	<hr>
-	<a name="structure" id="structure"></a>
-	<h1>Szerkezetszintű szövegdarabolás</h1>
+            <li>
+              <p><a href="#creation">Szabályok létrehozása</a></p>
+            </li>
 
-	<p>Az OmegaT a szövegen először szerkezeti szintű darabolást hajt végre. Ezalatt csak a forrásállomány szerkezete alapján állítja elő a szövegdarabokat.</p>
-	
-	<p>A <a href="fileFilters.html#filter_options">szöveges állományok</a> feldarabolhatók például sortörésnél, üres sornál, illetve szerkezeti szinten el is maradhat a feldarabolásuk. A formázott állományok (OpenOffice.org, HTML-dokumentumok stb.) blokkonként (bekezdésjelenként) tagolódnak. XHTML- vagy HTML-állományokban a lefordítható <a href="fileFilters.html#filter_options">objektumattribútumok</a> ) szintén külön szövegrészekbe kerülnek.</p>
+            <li>
+              <p><a href="#break">Töréspont/Kivétel</a></p>
+            </li>
 
-	<hr>
-	<a name="sentence" id="sentence"></a>
-	<h1>Mondatszintű szövegdarabolás</h1>
+            <li>
+              <p><a href="#examples">Néhány egyszerű példa</a></p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
 
-	<p>Amikor az OmegaT a forrásállományt logikai egységekre darabolta, ezeket az egységeket tovább darabolja mondatokra.</p>
-	
-	<a name="about" id="about"></a>
-	<h2>Szövegdarabolási szabályok</h2>
+    <li>
+      <p><a href="regexp.html">A reguláris kifejezést tartalmazó szerkezetek</a></p>
+    </li>
+  </ul>
 
-	<p>A szövegdarabolás folyamata ekként ábrázolható: képzelje el, hogy a kurzor a szövegen karakterről karakterre halad. Minden egyes kurzorpozíciónál minden egyes szabályt a megadott sorrendben alkalmaz és a kurzortól balra lévő egész szövegre megpróbálja alkalmazni az <strong>Előtte</strong> mintát, a jobbra lévőre pedig az <strong>Utána</strong> mintát. Ha a szabály a mintára illeszthető, a program abbahagyja a szabályvizsgálatot (a kivételszabályt illetően), vagy létrehozza az új szövegrészt (a töréspont szabálya szerint).</p>
+  <p>A fordítási memóriák szövegegységeknek nevezett elemekre épülnek. Az OmegaT egy szöveget kétféleképpen képes tagolni: bekezdésekre és mondatokra darabolva. A darabolás mikéntjének beállításához válassza ki a főmenüből a <strong>Projekt → Beállítások...</strong> menüpontot és jelölje be a megfelelő négyzetet. A bekezdésekre darabolás meglehetősen elavult megoldás, a projektek túlnyomó többségében a mondatokra darabolást célszerű választani. A mondatokra darabolás kiválasztása után a szabályok beállításához a főmenüből válassza ki a <strong>Beállítások → Szövegdarabolás...</strong> pontot.</p>
 
-	<p>A mondatdarabolás kidolgozása a <a href= "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> szövegdarabolási csereszabvány segítségével történt - megjegyzendő, hogy a program nem támogatja az összes SRX-funkciót. Emellett nincs lehetőség az SRX-formájú szabályok importálására/exportálására sem. Ha azonban ismeri, hogyan működik az SRX, alapvonalakban tudni fogja, miként kezeli az OmegaT a szövegdarabolást.</p>
+  <p>A program fejlesztése során számottevő energiát fordítottunk megbízható darabolási szabályok kidolgozására, ezért az esetek túlnyomó részében nem lesz szüksége saját szabályok kidolgozására. Másrészről ez a funkció hasznosnak bizonyulhat egyes konkrét esetekben, így lehetősége nyílik annak meghatározására, hogy mi fordítandó, és mi nem.</p>
 
-	<p>Két szabályfajta létezik:</p>
+  <p><strong>Figyelem!</strong> Ha a szűrők beállításait nyitott projekt mellett próbálja megváltoztatni, ennek adatvesztés lehet az eredménye. A darabolási beállítások nyitott projekt melletti módosítása esetén a változások érvényesítéséhez a projektet újból be kell töltenie.</p>
+  <hr>
 
-	<ul>
-		<li>A <strong>töréspontszabályok</strong> a forrásszöveget szövegrészekre tördelik.<p><strong>Példa</strong>: A </i>"Volt értelme? Nem voltam biztos benne."</i> két szövegrészre tördelendő.<br> A "<code>?</code>" kezelésére be kell vezetni egy töréspontszabályt.</p></li>
-		<li>A <strong>kivételszabályok</strong> megadják, mely szövegelemek NEM választhatók el a többitől.<p><strong>Példa</strong>: A <i>"Mrs. Dalloway "</i> nem választandó el, ezért kivételszabályt kell alkotni a Mrs (a Mr, a Dr, a prof stb.) esetére, amennyiben pont követi.</p></li>
-	</ul>
+  <h2><a name="structure" id="structure"></a>Szerkezeti szintű darabolás</h2>
 
-	<p>Az előre meghatározott töréspontszabályok a legtöbb európai nyelv és a japán esetén elegendőnek bizonyulnak. Ajánlatos azonban további kivételszabályokat megfogalmazni az adott forrásnyelvre, így értelmesebb és koherensebb szövegrészre tagolás érhető el.</p>
+  <p>Az OmegaT először szerkezeti szintű darabolást hajt végre a szövegen. Ez alatt csak a forrásállomány szerkezete alapján állítja elő a szövegegységeket.</p>
 
-	<a name="setup" id="setup"></a>
-	<h2>A szabályok beállítása</h2>
+  <p>A <a href="fileFilters.html#filter_options">szöveges állományok</a> feldarabolhatók például sortörésnél, üres sornál, illetve szerkezeti szinten el is maradhat a darabolás. A formázott állományok (OpenOffice.org, OpenDocument, XHTML- és HTML-dokumentumok) blokkszintű címkék szerint (bekezdésjelenként) tagolódnak. XHTML- vagy HTML-állományokban a lefordítható objektum<a href=
+  "fileFilters.html#filter_options">attribútumok</a> szintén külön szövegegységekbe kerülnek.</p>
+  <hr>
 
+  <h2><a name="sentence" id="sentence"></a>Mondatszintű darabolás</h2>
 
-	<a name="priority" id="priority"></a>
-	<h3>Elsődlegesség</h3>
+  <p>Miután a forrásállományokat logikai egységekre tagolta, az OmegaT ezeket a blokkokat továbbtagolja mondatokra.</p>
 
-	<p>Minden adott nyelvhez tartozó szövegdarabolási szabálykészlet alkalmazása meghatározott sorrendben történik, így a megadott nyelvre érvényes szabályok megelőzik az alapbeállítás szerintieket.</p>
-	
-	<p>Például a kanadai francia (FR-CA) szabályai megelőzik a franciáét (FR.*), amely viszont megelőzi az alapbeállítás szerintieket (.*). Így kanadai francia szöveg fordítása közben a projekt az ehhez megadott szabályokat használja, majd utána a franciát, és végül az alapbeállítás szabályait, ebben a sorrendben.</p>
+  <h3><a name="about" id="about"></a>A szövegdarabolás szabályai</h3>
 
-	<a name="creation" id="creation"></a>
-	<h3>A szabályok létrehozása</h3>
-	
-	<p>Egy üres szabálykészlet létrehozásához kattintson a párbeszédablak felső részén lévő <strong>Hozzáadás</strong> pontra. Egy táblázat jelenik meg, alján egy üres sorral.</p>
-	
-	<p>Módosítsa a szabálykészlet és a nyelvi minta megnevezését. A nyelvi minta szerkezete a <a href="regexp.html">reguláris kifejezések</a> szintaxisát követi. Ha szabálykészlete egy nyelv-ország párost kezel, tanácsos azt a <strong>Mozgatás felfelé</strong> gombbal feljebb vinni. Szabálykészlet szerkesztéséhez kattintson rá a táblázatban, ennek hatására az ablak alsó részén megjelenik a szabálykészlet.</p>
+  <p>A tagolás folyamat a következő: a kurzor végigmegy a szövegen karakterről karakterre. Minden egyes kurzorpozíciónál minden egyes szabály alkalmazása a megadott sorrendben történik annak megállapítása céljából, hogy a kurzortól balra lévő szövegre illeszkedik-e az <strong>Előtte</strong> minta, a jobbra lévőre pedig az <strong>Utána</strong> minta. Ha a szabály alkalmazható, a program befejezi a szabályok vizsgálatát (a kivételszabályt illetően), vagy létrehoz egy új szövegegységet (az elhatároló szabály alapján).</p>
 
-	<a name="break" id="break"></a>
-	<h3>Töréspont/Kivétel</h3>
-	
-	<p>A Töréspont/Kivétel jelölőnégyzettel azt állíthatja be, hogy töréspontszabályról (van pipa) vagy kivételszabályról (nincs pipa) van-e szó. Két reguláris kifejezés, az Előtte és az Utána határozza meg, hogy mi jelenjen meg egy adott helyzet előtt és után ahhoz, hogy az töréspontszabálynak vagy kivételszabálynak minősüljön.</p>
+  <p>A mondatokra darabolás a <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> szabványon alapul - ugyanakkor a program nem támogatja az összes SRX-jellemző használatát. Emellett nincs mód az összes SRX-formájú szabály importálására/exportálására sem. Ha azonban tisztában van azzal, hogy hogyan működik az SRX, akkor alapvetően tudni fogja azt is, miként történik az egységekre tagolás az OmegaT esetén.</p>
 
+  <p>Két szabályfajta létezik:</p>
 
-	<a name="examples" id="examples"></a>
-	<h3>Egyszerű példák</h3>
+  <ul>
+    <li>
+      <p>Az <strong>elhatároló szabályok</strong> a szöveget szövegegységekre bontják. Például a <i>"Volt értelme? Nem voltam biztos benne."</i> két szövegegységre tagolandó, vagyis a "<code>?</code>"-re léteznie kell egy elhatároló szabálynak.</p>
+    </li>
 
-	<table border="0" cellpadding="4" cellspacing="0">
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><strong>Rendeltetés</strong></td>
-			<td><strong>Előtte</strong></td>
-			<td><strong>Utána</strong></td>
-			<td width="50%"><strong>Megjegyzés</strong></td>
-		</tr>
-		<tr>
-			<td>szövegrész kijelölése pont ('<code>.</code>') előtt és szóköz után</td>
-			<td><code>\.</code></td>
-			<td><code>\s</code></td>
-			<td>A "<code>\.</code>" a "<code>.</code>"-t jelenti. A "<code>\s</code>" jelentése: bármely helykihagyó karakter</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>ne legyen szövegrész kijelölése a Mr. után</td>
-			<td><code>Mr\.</code></td>
-			<td><code>\s</code></td>
-			<td>Ez egy kivételszabály, ezért a szabály jelölőnégyzetében nem lehet pipa</td>
-		</tr>
-		<tr>
-			<td><code>szövegrész kijelölése az </code> <code>"</code><code>。</code><code>"</code> <code>(japán pont) után</code></td>
-			<td><code>。</code> </td>
-			<td></td>
-			<td>Figyelje meg, hogy az <i>Utána</i> üres</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>ne legyen szövegrész kijelölése a M., Mr., Mrs. és Ms. után</td>
-			<td><code>Mr??s??\.</code></td>
-			<td><code>\s</code></td>
-			<td>kivételszabály - figyelje meg a ? használatát reguláris kifejezésekben (szűk kvantor)</td>
-		</tr>
-	</table>
+    <li>
+      <p>A <strong>kivételszabályok</strong> megadják, mely szövegelemek NEM választhatók el a többitől. A pont ellenére a <i>"Mrs. Dalloway"</i> nem tagolandó két szövegegységre, ezért ha a Mrs (Mr, Dr, prof stb.) után pont áll, egy kivételszabályt kell létrehozni.</p>
+    </li>
+  </ul>
 
-	<hr>
-	<a name="regex" id="regex"></a>
-	<h1>A reguláris kifejezések rövid összegzése</h1>
+  <p>Az előre meghatározott elhatároló szabályok a legtöbb európai nyelv és a japán esetén elegendőek. A rendszer rugalmassága alapján ajánlatos lehet további kivételszabályokat megfogalmazni az adott forrásnyelvre annak érdekében, hogy az előálló szövegegységek relevánsabbak és koherensebbek legyenek.</p>
 
-	<p>A keresésekben és szövegdarabolásban használatos reguláris kifejezések megegyeznek a Java által támogatottakkal. Ezek rövid összegzését megtalálja a <a href="regexp.html">Reguláris kifejezések szerkezete</a> függelékben.</p>
-	
-	<p>Ha további információkra van szüksége, ezeket megtalálja itt: <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Egyszerű oktatóprogramot számos helyen találhat a neten (pl. <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+  <h3><a name="setup" id="setup"></a>Szabályok beállítása</h3>
 
-	<hr>
+  <h3><a name="priority" id="priority"></a>Elsőbbség</h3>
 
-	<p><code><a href="legalNotices.html">Jogi tudnivalók</a></code></p>
+  <p>Minden adott nyelvhez tartozó szövegdarabolási szabálykészlet alkalmazása meghatározott sorrendben történik, így a megadott nyelvre érvényes szabályok megelőzik az alapbeállítás szerintieket. Például a kanadai francia (FR-CA) szabályai megelőzik a franciáét (FR.*), amely viszont megelőzi az alapbeállítás szerintieket (.*). Így kanadai francia szöveg fordítása közben a projekt az ehhez megadott szabályokat használja, majd utána a franciát, végül pedig az alapbeállítás szabályait, ebben a sorrendben.</p>
+
+  <h3><a name="creation" id="creation"></a>Szabályok létrehozása</h3>
+
+  <p>Egy meglévő szabálykészlet szerkesztéséhez vagy bővítéséhez kattintson rá a felső táblázatban. Ennek hatására az ablak alsó részén megjelenik a szabálykészlet.</p>
+
+  <p>Egy új nyelvi mintához való üres szabálykészlet létrehozásához kattintson a  párbeszédablak felső részén lévő <strong>Hozzáadás</strong> pontra. Egy üres sor jelenik meg a fenti táblázat alján <font color="black" face=
+  "Times New Roman" size="3"><span style="font-size: 12pt; color: black;" lang=
+  "EN-US">(előfordulhat, hogy megtekintéséhez lefelé kell görgetnie a panelt)</span></font>. Módosítsa a szabálykészlet és a nyelvi minta megnevezését. A nyelvi minta szerkezete a <a href="regexp.html">reguláris kifejezések</a> szintaxisát követi. Ha szabálykészlete egy nyelv-ország párost kezel, tanácsos azt az <strong>Áthelyezés feljebb</strong> gombbal legfölülre vinni.&nbsp;</p>
+
+  <h3><a name="break" id="break"></a>Töréspont/Kivétel</h3>
+
+  <p>A Töréspont/Kivétel jelölőnégyzettel azt állíthatja be, hogy elhatároló (pipa) vagy kivételszabályt (nincs pipa) alkalmaz-e. Két reguláris kifejezés, az Előtte és az Utána határozza meg, hogy mi jelenjen meg egy adott helyzet előtt és után ahhoz, hogy darabolási szabálynak vagy kivételszabálynak minősüljön.</p>
+
+  <h3><a name="examples" id="examples"></a>Néhány egyszerű példa</h3>
+
+  <table summary="csak formázás" border="0" cellpadding="4" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p><strong>Cél</strong></p>
+        </td>
+
+        <td>
+          <p><strong>Előtte</strong></p>
+        </td>
+
+        <td>
+          <p><strong>Utána</strong></p>
+        </td>
+
+        <td width="52%">
+          <p><strong>Megjegyzés</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="26%">
+          <p>szövegegység kijelölése pont ('<code>.</code>') után és szóköz előtt</p>
+        </td>
+
+        <td>
+          <p><code>\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>a "<code>\.</code>" a "<code>.</code>" karakter, a "<code>\s</code>" pedig a bármely nem nyomtatott karakter</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p>ne legyen szövegegység kijelölve a Mr. után</p>
+        </td>
+
+        <td>
+          <p><code>Mr\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>Ez kivételszabály, ezért a szabálynégyzetben nem lehet pipa</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="26%">
+          <p>szövegegység kijelölése a "ã€‚" (japán pont) után</p>
+        </td>
+
+        <td>
+          <p><span lang="zxx"><code>ã€‚</code></span></p>
+        </td>
+
+        <td></td>
+
+        <td width="52%">
+          <p>Az <i>Utána</i> üres</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p>ne legyen szövegegység kijelölve a M., Mr., Mrs. és Ms. után</p>
+        </td>
+
+        <td>
+          <p><code>Mr??s??\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>kivételszabály - lásd a ? használatát reguláris kifejezésekben (szűk kvantor)</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="regex" id="regex"></a>Reguláris kifejezések</h2>
+
+  <p>A keresésekben és a szövegdarabolásban használatos reguláris kifejezések megegyeznek a Java által támogatottakkal. Rövid összegzésüket lásd a <a href="regexp.html">Reguláris kifejezések</a> függelékben. További információkat talál itt: <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+  <p>Egyszerű oktatóprogramot számos helyen találhat a neten (pl. <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+  <hr>
+
+  <table summary="csak formázás" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

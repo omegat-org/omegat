@@ -1,140 +1,205 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Állományszűrők - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Állományszűrők - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
 
 <body>
-	<h1>Állományszűrők</h1>
+  <h1>Állományszűrők</h1>
+  <hr>
 
-	<ul>
-		<li><a href="#filter_dialog">Az Állományszűrők párbeszédablak</a>
-			<ul>
-				<li><a href="#filter_options">Szűrőbeállítások</a></li>
-				<li><a href="#edit_dialog">A Szűrőszerkesztés párbeszédablak</a>
-					<ul>
-						<li><a href="#source_file_name">Forrásállomány típusa, állománynevek mintái</a>.</li>
-						<li><a href="#encoding">Forrásállományok és célnyelvi állományok kódolása</a></li>
-						<li><a href="#target_file_name">A célnyelvi állomány neve</a>
-							<ul>
-								<li><a href="#pattern_dialog">A Minta hozzáadása/szerkesztése párbeszédablak</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
+  <ul>
+    <li>
+      <p><a href="#filter_dialog">Az Állományszűrők párbeszédablak</a></p>
 
-	<p>Az OmegaT rugalmasan alakítható szűrőket tartalmaz, amelyekkel működésüket alapvetően Ön határozhatja meg. Az állományszűrők olyan programrészek, amelyekkel:<ul>
-			<li>A dokumentumot meghatározott állományformátumban olvashatja be. Ilyen például az egyszerű szöveg.</li>
-			<li>A fordítandó tartalmat kiemelheti az állományból.</li>
-			<li>Automatizálhatja a lefordított dokumentumok nevének módosítását, miközben a fordítandó szöveg helyére annak fordítása kerül.</li>
-		</ul>
-		<p>Az állományszűrők alapbeállításai a legtöbb felhasználó igényeinek megfelelnek. Ha változtatni szeretne a beállításokon, a főmenü <strong>Beállítások -&gt; Állományszűrők...</strong> pontját kiválasztva nyissa ki a fő párbeszédablakot.</p>
-		<p><strong>Vigyázat!</strong> Ha a szűrők beállításait nyitott projekt mellett módosítja, adatvesztést idézhet elő. Ha nyitott projekt mellett módosítja a szűrők beállításait, azok életbe lépéséhez a projektet újból be kell töltenie.</p>
+      <ul>
+        <li>
+          <p><a href="#filter_options">Szűrési lehetőségek</a></p>
+        </li>
+      </ul>
+    </li>
 
-<hr>
+    <li>
+      <p><a href="#edit_dialog">A Szűrőszerkesztés párbeszédablak</a></p>
 
+      <ul>
+        <li>
+          <p><a href="#source_file_name">A forrásállomány típusa és nevének megadása</a>.</p>
+        </li>
 
-	<a name="filter_dialog" id="filter_dialog"></a>
-	<h1>Az Állományszűrők párbeszédablak</h1>
+        <li>
+          <p><a href="#encoding">A forrásnyelvi és célnyelvi állományok kódolása</a></p>
+        </li>
 
-	<p>A párbeszédablak az elérhető állományszűrők felsorolását tartalmazza. Ha valamilyen típusú állományokat nem szeretne az OmegaT-vel lefordítani, a mellettük lévő név bejelölésének megszüntetésével kikapcsolhatja az adott szűrőt. Ekkor az OmegaT a projekt betöltésekor a bejelöletlen állományfajtákat kihagyja és a célállományok létrehozásakor módosítás nélkül átmásolja őket. Ha a későbbiek folyamán mégis a szűrő használata mellett dönt, mindössze jelölje be a négyzetet.</p>
+        <li>
+          <p><a href="#target_file_name">A célnyelvi állomány neve</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
-	<p>Az <strong>Alapbeállítások</strong> pontra kattintva az állományszűrőket visszaállíthatja alapbeállításukra.</p>
+  <p>Az OmegaT rugalmasan alakítható szűrőket tartalmaz, amelyekkel működésük zömét a felhasználó határozhatja meg. Az állományszűrők olyan programrészek, amelyekkel:</p>
 
-	<p>Ha be akarja állítani, hogy az adott szűrő mely állományokat milyen kódolásban dolgozzon fel, válassza ki a szűrőt a listáról és kattintson a <strong>Szerkesztés</strong> pontra.</p>
-	
-	<a name="filter_options" id="filter_options"></a>
-	<h2>Szűrőbeállítások</h2>
-	
-	<p>Három szűrő rendelkezik speciális beállításokkal. A beállítások módosításához válassza ki a szűrőt a listáról és kattintson a <strong>Beállítások</strong> pontra. A szűrők és a hozzájuk tartozó egyes beállítások a következők:<ul>
-			<li>Egyszerű szövegek<dl>
-					<dt>Bekezdésekre tagolás sortöréseknél, üres soroknál vagy sohasem</dt>
-					<dd>Ha a mondatdarabolási szabályok be vannak kapcsolva, a szöveg tovább darabolódik az elérhető szabályok szerint.</dd>
-				</dl>
-			</li>
-			<li>XHTML-állományok<dl>
-					<dt>Attribútumok fordítása</dt>
-					<dd>A kiválasztott attribútumok szövegrészekként jelennek meg a szerkesztőablakban.</dd>
-					<dt>Bekezdés &lt;br /&gt; esetén</dt>
-					<dd>A &lt;br /&gt; HTML-címke megjelenése új bekezdést kezd el szövegdarabolás céljából.</dd>
-				</dl>
-			</li>
-			<li>HTML és XHTML típusú állományok<dl>
-					<dt>Kódolási deklaráció</dt>
-					<dd>Az OmegaT a célállományhoz kiválasztott kódolás alapján hozzáadhat egy kódolási deklarációt vagy felülírhatja az állományhoz tartozó kódolási deklarációt.</dd>
-					<dt>Attribútumok fordítása</dt>
-					<dd>A kiválasztott attribútumok szövegrészekként jelennek meg a szerkesztőablakban.</dd>
-					<dt>Bekezdés &lt;br /&gt; esetén</dt>
-					<dd>A &lt;br /&gt; HTML-címke megjelenése új bekezdést kezd el szövegdarabolás céljából.</dd>
-				</dl>
-			</li>
-		</ul>
-		<h2>A Szűrőszerkesztés párbeszédablak</h2>
-		<p>A párbeszédablakban beállíthatja a szűrő által feldolgozandó forrásfájlok nevének mintáit, testre szabhatja a fordított állományok fájlnevét, valamint kiválaszthatja, milyen kódolásokat fog használni az állományok betöltésére és fordításuk mentésére.</p>
-	
-	<p>Állományszűrő mintájának módosításához módosítsa közvetlenül a mezőket vagy kattintson a <strong>Szerkesztés</strong> pontra.<p>Új állományszűrő hozzáadásához kattintson a <strong>Hozzáadás</strong> pontra.<p>Ugyanaz a párbeszédablak jelenik meg minta hozzáadása és minta szerkesztése esetén. A párbeszédablak hasznos, mert a célállományok nevéhez speciális mintaszerkesztőt foglal magában, amellyel testre szabhatja a kimeneti állományok nevét.</p>
+  <ul>
+    <li>
+      <p>A dokumentumot meghatározott állományformátumban olvashatja be. Ilyen például az egyszerű szöveg.</p>
+    </li>
 
+    <li>
+      <p>A fordítandó tartalmat kiemelheti az állományból.</p>
+    </li>
 
-	<a name="source_file_name" id="source_file_name"></a>
-	<h3>Forrásállomány típusa, állománynév mintája</h3>
+    <li>
+      <p>Automatizálhatja a lefordított dokumentumok nevének módosítását, miközben a fordítandó szöveg helyére annak fordítása kerül.</p>
+    </li>
+  </ul>
 
-	<p>Amikor az OmegaT a forráskönyvtárban egy fájlt észlel, megpróbálja a kiterjesztésének megfelelő szűrőt használni. Pontosabban fogalmazva, az OmegaT megkísérli a forrásállományok nevének mintáját a fájlnévhez illeszteni.</p>
-	
-	<p>Például az <code>*.xhtml</code> minta illik minden <code>.xhtml</code> kiterjesztésű állományhoz. Ha sikerül a megfelelő szűrőt fellelni, akkor az állomány feldolgozása ennek segítségével történik. Például alaphelyzetben a rendszer az XHMTL-szűrőt használja <code>xhtml</code> kiterjesztésű állományok esetén.</p>
-	
-	<p>Az egyes állományszűrőkhöz tartozó állománynevek mintáit módosíthatja, illetve újakat adhat hozzájuk.</p>
+  <p>Az állományszűrők alapbeállításai a legtöbb felhasználó igényeinek megfelelnek. Ha változtatni szeretne a beállításokon, a főmenü <strong>Beállítások -&gt; Állományszűrők...</strong> pontját kiválasztva nyissa meg a fő párbeszédablakot. <strong>Figyelem!</strong> Ha a szűrők beállításait nyitott projekt mellett próbálja megváltoztatni, ennek adatvesztés lehet az eredménye. A szűrőbeállítások nyitott projekt melletti módosítása esetén a változások érvényesítéséhez a projektet újból be kell töltenie.</p>
 
-	<p>A forrásállomány nevének mintája a <strong>Keresés</strong> során használatoshoz hasonló helyettesítő karaktereket használ.</p>
-	
-	<p>A '<strong>*</strong>' karakter nulla vagy több karaktert helyettesít. A '<strong>?</strong>' karakter pontosan egy karakternek felel meg. Az összes többi karakter önmagát reprezentálja.</p>
-	
-	<p>Ha például azt szeretné, hogy az egyszerű szöveg szűrője az (<code>olvassel</code>, <code>olvass.el</code> és <code>olvassel.txt</code>) elolvasandó állományokat egyaránt kezelje, használja az <code>olvass*</code> mintát.</p>
-	
-	<a name="encoding" id="encoding"></a>
-	<h3>Forrásállományok és célnyelvi állományok kódolása</h3>
-	
-	<p>Az állományformáknak csak egy részéhez tartozik kötelező kódolás.</p>
-	
-	<p>Azok az állományformák, amelyek nem írják elő kódolásukat, azt a kódolást használják, amelyet a nevüknek megfelelő kiterjesztéshez Ön meghatároz. Például alapbeállításban a <code>.txt</code> fájlok betöltése az adott operációs rendszerben alapértelmezettként beállított kódolással megy végbe. A forrásszöveg kódolását megadhatja bármely állománynévmintához külön-külön.</p>
+  <h3><a name="filter_dialog" id="filter_dialog"></a>Az Állományszűrők párbeszédablak</h3>
 
-	<p>Az ilyen állományokat bármely kódolás szerint ki is írathatja. Alapbeállításban a mentendő állomány kódolása megegyezik a forrásállományéval.</p>
+  <p>A párbeszédablak a meglévő állományszűrők felsorolását tartalmazza. Ha valamilyen típusú állományokat nem szeretne az OmegaT-vel lefordítani, a típus mellett lévő név bejelölésének megszüntetésével kikapcsolhatja az adott szűrőt. Ekkor az OmegaT a projekt betöltésekor a bejelöletlen állományfajtákat kihagyja és a célállományok létrehozásakor módosítás nélkül átmásolja őket. Ha a későbbiek folyamán mégis a szűrő használata mellett dönt, elég, ha bejelöli a négyzetet. Kattintson az <strong>Eredeti</strong> pontra az állományszűrők eredeti beállításainak visszaállításához. Ha be akarja állítani, hogy az adott szűrő mely állományokat milyen kódolásban dolgozzon fel, válassza ki a szűrőt a listáról és kattintson a <strong>Szerkesztés</strong> pontra.</p>
 
-	<p>A forrásszövegek és a célnyelvi szövegek kódmezői lenyíló elemeket tartalmaznak, melyekben megjelenik az összes támogatott kódolás. <strong>&lt;auto&gt;</strong> esetén a kódolás kiválasztását az OmegaT-re bízza. Ilyenkor a program ekként jár el:</p>
+  <h3><a name="filter_options" id="filter_options"></a>Szűrési lehetőségek</h3>
 
-	<ul>
-		<li>Az OmegaT az esetleges kódolási deklaráció (HTML-állományok, XML alapú állományok) alapján következtet a forrásállomány kódolására.</li>
-		<li>Az OmegaT egyes állományformák (Java properties stb.)esetén kötelező kódolás használatára van beállítva.</li>
-		<li>Az OmegaT szöveges állományok esetén az operációs rendszer alapértelmezett kódolását használja.</li>
-	</ul>
+  <p>Öt szűrőhöz (Szöveges állományok, XHTML-állományok, HTML- és XHTML-állományok, OpenDocument/OpenOffice.org típusú állományok és Microsoft Open XML típusú állományok) egy vagy több sajátos beállítás tartozik. A beállítások módosításához válassza ki a listából a szűrőt és kattintson a <strong>Beállítások</strong> pontra. Az alábbi lehetőségek közül választhat:</p>
 
-	<a name="target_file_name" id="target_file_name"></a>
-	<h3>A célnyelvi állomány neve</h3>
+  <h4>Egyszerű szövegek</h4>
 
-	<p>Vannak helyzetek, amikor hasznos lehet, ha a fordított állományok automatikusan más nevet kapnak, például úgy, hogy a nevük után beszúródik a célnyelv kódja.</p>
+  <ul>
+    <li>
+      <p><i>Bekezdésekre darabolás sortöréseknél, üres soroknál, illetve soha:</i> ha a a mondatdarabolási szabályok használata be van kapcsolva, a szöveg feldarabolása az adott szabályok szerint történik.</p>
+    </li>
+  </ul>
 
-	<p>A célnyelvi állománynév sajátos szerkezetű, ezért ha ezt kívánja szerkeszteni, kattintson inkább a <strong>Szerkesztés...</strong> pontra és térjen át a Mintaszerkesztés párbeszédablakra. Ha a szűrő alapbeállítását szeretné visszaállítani, kattintson az Eredeti gombra.</p>
+  <h4>HTML-állományok, valamint HTML- és XHTML-állományok</h4>
 
-	<p>A nevet módosíthatja közvetlenül az Állományszűrő párbeszédablak Célállománynév mintájának a mezőjében.</p>
+  <ul>
+    <li>
+      <p><i>Kódolási utasítás:</i> az OmegaT hozzáadhat az állományhoz egy kódolási utasítást vagy felülírhatja azt a kiválasztott célnyelvi állományhoz tartozó kódolás alapján.</p>
+    </li>
 
-	<a name="pattern_dialog" id="pattern_dialog"></a>
-	<h4>A Minta hozzáadása/szerkesztése párbeszédablak</h4>
+    <li>
+      <p><i>Attribútumok fordítása:</i> A kiválasztott attribútumok szövegrészekként jelennek meg a szerkesztőablakban.</p>
+    </li>
 
-	<ul>
-		<li>Az alapbeállítás a <code>${filename}</code> -- a forrásállomány teljes neve kiterjesztéssel együtt, így a lefordított állomány neve azonos a forrásállományéval.</li>
-		<li>A <code>${nameOnly}</code> segítségével csak a forrásállomány nevét szúrja be kiterjesztés nélkül.</li>
-		<li><code>${extension}</code> -- a forrásállomány kiterjesztése.</li>
-		<li><code>${targetLocale}</code> - célnyelvi környezet kódja ("xx_YY" alakban).</li>
-		<li><code>${targetLanguage}</code> - a célnyelv és az ország kódja ("XX-YY" alakban).</li>
-		<li><code>${targetLanguageCode}</code> - csak a célnyelv ("XX").</li>
-		<li><code>${targetCoutryCode}</code> - csak a célország ("YY").</li>
-	</ul>
-	<hr>
+    <li>
+      <p><i>Bekezdés &lt;br /&gt; esetén:</i> A &lt;b /r&gt; HTML-címke hatására bekezdés jön létre a szövegdaraboláshoz.</p>
+    </li>
 
+    <li>
+      <p><i>A reguláris kifejezésnek megfelelő szöveg kihagyása:</i> A reguláris kifejezésnek megfelelő szöveg kimarad.</p>
+    </li>
+  </ul>
 
-	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
+  <h4>OpenDocument/OpenOffice.org állományok</h4>
+
+  <p>Az alábbi elemek lefordítása opcionális. Lefordításuk esetén külön szövegrészekként jelennek meg.</p>
+
+  <ul>
+    <li><i>A tartalomjegyzék elemei</i></li>
+
+    <li>Könyvjelzők</li>
+
+    <li>Könyvjelző-hivatkozások</li>
+
+    <li>Megjegyzések</li>
+
+    <li>Magyarázatok</li>
+  </ul>
+
+  <h4>Microsoft Open XML típusú állományok</h4>
+
+  <p>Az alábbi elemek lefordítása opcionális. Lefordításuk esetén külön szövegrészekként jelennek meg.</p>
+
+  <ul>
+    <li><i>Rejtett szöveg (Word)</i></li>
+
+    <li><i>Megjegyzések (Word, Excel)</i></li>
+
+    <li><i>Lábjegyzetek (Word)</i></li>
+
+    <li><i>Végjegyzetek (Word)</i></li>
+
+    <li><i>Fejléc (Word)</i></li>
+
+    <li><i>Lábléc (Word)</i></li>
+
+    <li><i>Diához tartozó megjegyzések (PowerPoint)</i></li>
+  </ul>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>A Szűrőszerkesztés párbeszédablak</h3>
+
+  <p>A párbeszédablakban beállíthatja a szűrő által feldolgozandó forrásfájlok nevének mintáit, testre szabhatja a fordított állományok nevét, valamint kiválaszthatja, milyen kódolásokat fog használni az állományok betöltésére és fordításaik mentésére. Valamely állományszűrő mintájának módosításához vagy közvetlenül szerkessze a mezőket, vagy kattintson a <strong>Szerkesztés</strong> pontra. Egy új állományszűrő-minta hozzáadásához kattintson a <strong>Hozzáadás</strong> gombra. A minta hozzáadása és a minta szerkesztése esetén ugyanaz a párbeszédablak jelenik meg. A párbeszédablak a célállományok nevének megadásához tartalmaz egy külön mintaszerkesztőt.</p>
+
+  <h3><a name="source_file_name" id="source_file_name"></a>A forrásállomány típusa és nevének mintája</h3>
+
+  <p>Amikor az OmegaT a forráskönyvtárban egy fájlt észlel, megpróbálja a kiterjesztésének megfelelő szűrőt használni. Pontosabban fogalmazva, az OmegaT megkísérli a forrásállományok nevének mintáját a fájlnévnek megfeleltetni. Például az <code>*.xhtml</code> minta illeni fog minden <code>.xhtml</code> kiterjesztésű állományra. Ha sikerül a megfelelő szűrőt fellelni, akkor az állomány feldolgozása ennek segítségével történik. Például alaphelyzetben a rendszer az XHMTL-szűrőt használja az <code>xhtml</code> kiterjesztésű állományok esetén. Az egyes állományszűrőkhöz tartozó állománynevek mintáit módosíthatja, illetve újakat adhat hozzájuk. A forrásfájlok nevében helyettesítő karakterek szerepelnek a <strong>Keresési lehetőségek</strong>hez hasonlóan. A '<strong>*</strong>' karakter nulla vagy több karakter-előfordulással egyezik.  A '<strong>?</strong>' helyettesítő karakter csakis egy karaktert helyettesít. Az összes többi karakter önmagának felel meg. Ha például azt szeretné, hogy az egyszerű szöveg szűrője az (<code>olvassel</code>, <code>olvass.el</code> és <code>olvassel.txt</code>) elolvasandó állományokat egyaránt kezelje, használja az <code>olvass*</code> mintát.</p>
+
+  <h3><a name="encoding" id="encoding"></a>A forrásnyelvi és célnyelvi állományok kódolása</h3>
+
+  <p>Az állományformátumoknak csak egy korlátozott száma jelent előírt kódolást. A kódolást elő nem író állományformátumok olyan kódolást használnak, amilyet a felhasználó a nevükhöz tartozó kiterjesztés számára meghatároz. Például alapbeállításban a <code>.txt</code> fájlok betöltése az adott operációs rendszerben alapértelmezettként beállított kódolással megy végbe. A forrásszöveg kódolását bármely állománynévmintához külön-külön megadhatja. Az ilyen állományok mentése bármilyen kódolásban lehetséges. Alapbeállításban a lefordított állomány kódolása megegyezik a forrásállományéval. A forrásszövegek és a célnyelvi szövegek kódmezői lenyíló elemeket tartalmaznak, melyekben megjelenik az összes támogatott kódolás. Az <strong>&lt;auto&gt;</strong> kiválasztásával a kódolást az OmegaT-re bízza. Ez a következők szerint történik:</p>
+
+  <ul>
+    <li>
+      <p style="margin-bottom: 0cm">Az OmegaT a forrásfájl kódolását esetlegesen meglévő saját kódolási utasítása (HTML-állományok, XML alapú állományok) alapján állapítja meg.</p>
+    </li>
+
+    <li>
+      <p style="margin-bottom: 0cm">Az OmegaT egyes fájlformák esetén (pl. Java properties) kötelező kódolást ír elő.</p>
+    </li>
+
+    <li>
+      <p>Az OmegaT szöveges állományok esetén az operációs rendszer alapértelmezett kódolását használja.</p>
+    </li>
+  </ul>
+
+  <h3><a name="target_file_name" id="target_file_name"></a>A célnyelvi állomány neve</h3>
+
+  <p>Vannak helyzetek, amikor hasznos lehet, ha a fordított állományok automatikusan más nevet kapnak, például úgy, hogy a nevük után beszúródik a célnyelv kódja. A célnyelvi állománynév sajátos szerkezetű, ezért ha ezt kívánja szerkeszteni, kattintson inkább a <strong>Szerkesztés...</strong> pontra és térjen át a Mintaszerkesztés párbeszédablakra. Ha a szűrő alapbeállításához szeretne visszatérni, kattintson az <strong>Alapbeállítások</strong> gombra. A nevet módosíthatja közvetlenül is az állományszűrő párbeszédablakának célnyelvi névmintamezőjében. A Minta szerkesztése párbeszédablakból az alábbi lehetőségeket érheti el:</p>
+
+  <ul>
+    <li>
+      <p>Az alapbeállítás a <code>${filename}</code> -- a forrásállomány teljes neve kiterjesztéssel együtt, így a lefordított állomány neve azonos a forrásállományéval.</p>
+    </li>
+
+    <li>
+      <p>A <code>${nameOnly}</code> segítségével csak a forrásállomány nevét szúrja be kiterjesztése nélkül.</p>
+    </li>
+
+    <li>
+      <p><code>${extension}</code> -- a forrásállomány kiterjesztése.</p>
+    </li>
+
+    <li>
+      <p><code>${targetLocale}</code> - célnyelvi környezet kódja ("xx_YY" alakban).</p>
+    </li>
+
+    <li>
+      <p><code>${targetLanguage}</code> - a célnyelv és az ország kódja ("XX-YY" alakban).</p>
+    </li>
+
+    <li>
+      <p><code>${targetLanguageCode}</code> - csak a célnyelv ("XX").</p>
+    </li>
+
+    <li>
+      <p><code>${targetCoutryCode}</code> - csak a célország ("YY").</p>
+    </li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="csak formázás">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

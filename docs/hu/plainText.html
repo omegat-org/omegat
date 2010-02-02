@@ -1,87 +1,99 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Egyszerű szöveg fordítása - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Egyszerű szöveg fordítása - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
 
 <body>
-	<h1>Egyszerű szöveg fordítása</h1>
+  <h2>Egyszerű szöveg fordítása</h2>
 
-	<ul>
-		<li><a href="#Plain_Text_in_OmegaT">Alapbeállítás szerinti kódolás</a></li>
-		<li><a href="#Garbled_displays_3F">Zavaros megjelenítés</a></li>
-		<li><a href="#Character_sets_and_encodings">Karakterkészletek és kódolások</a></li>
-		<li><a href="#The_OmegaT_solution">Az OmegaT által kínált megoldás</a></li>
-	</ul>
+  <ul>
+    <li><a href="#Plain_Text_in_OmegaT">Alapbeállítás szerinti kódolás</a></li>
 
-<hr>
+    <li><a href="#Garbled_displays_3F">Zavaros megjelenítés</a></li>
 
-	<a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
-	<h1>Alapbeállítás szerinti kódolás</h1>
+    <li><a href="#Character_sets_and_encoding">Karakterkészletek és kódolás</a></li>
 
-	<p>Az egyszerű szöveges állományok legtöbbször &lt;s0&gt;.txt&lt;/s0&gt;  kiterjesztésűek - kizárólag szöveges információból épülnek föl. Az egyszerű szöveges állományokban nincs egyértelmű utasítás a számítógép számára arra vonatkozóan, hogy milyen nyelven íródtak. Ez alapvetően azt jelenti, hogy a számítógép abból indul ki, hogy a szöveg nyelve megegyezik a számítógép alapbeállítása szerinti nyelvvel.</p>
+    <li><a href="#The_OmegaT_solution">Az OmegaT által kínált megoldás</a></li>
+  </ul>
+  <hr>
+  <a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
 
-<hr>
+  <h2>Alapbeállítás szerinti kódolás</h2>
 
-	<a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
-	<h1>Zavaros megjelenítés</h1>
+  <p>Az egyszerű szöveges állományok legtöbbször <code>.txt</code>  kiterjesztésűek és kizárólag szöveget tartalmaznak. Az egyszerű szöveges állományokban nincs egyértelmű utasítás a számítógép számára arra vonatkozóan, hogy milyen nyelven íródtak. Ez nagyjából azt jelenti, hogy a számítógép abból indul ki, hogy a szöveg nyelve a számítógép alapbeállítása szerinti nyelvvel megegyezik.</p>
+  <hr>
+  <a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
 
-	<p>Egy orosz felhasználó esetén a számítógép nagy valószínűséggel szintén oroszul működik: a menük oroszul vannak, a megnyíló állományok nyelve is orosz stb. Legtöbbször a számítógép helyes feltételezésből indul ki, mivel a nyelvi környezet minden eleme orosz megjelenítést kíván.</p>
+  <h2>Zavaros megjelenítés</h2>
 
-	<p>Ha egy orosz fordító japán állományokat kap fordításra <strong>egyszerű szöveg</strong> formájában, akkor ezeket a gép orosznak fogja tekinteni. Ennek az az oka, hogy az állományban nincs utasítás a számítógép részére arról, hogy a szöveg milyen nyelven íródott.</p>
+  <p>Egy orosz felhasználó esetén a számítógép nagy valószínűséggel szintén oroszul működik: a menük oroszul vannak, a megnyíló állományok nyelve is orosz stb. Legtöbbször a számítógép helyes feltételezésből indul ki, mivel a nyelvi környezet minden eleme orosz megjelenítést kíván.</p>
 
-	<p>A japán állomány tartalma lehet pl. a következő:</p>
+  <p>Ha egy orosz fordító japán állományokat kap fordításra <strong>egyszerű szöveg</strong> formában, ezeket a gép orosznak fogja tekinteni. Ennek az az oka, hogy az állományban nincs utasítás a számítógép részére arról, hogy a szöveg milyen nyelven íródott. A japán állomány tartalma lehet pl. a következő:</p>
 
-	<p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p>
+  <p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p><br>
 
-	<p>A szövegszerkesztőben azonban ez ekként jelenik meg:</p>
-	<p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≅ВЈБB</p>
+  <p>Mivel orosz tartalmat feltételez, ez a szövegszerkesztőben ekként jelenik meg:</p>
 
-	<p>mivel orosz tartalmat feltételezett... Csakhogy ez nem oroszul van. A japán karakterek helyén orosz betűk láthatók.</p>
-	
-	<p>Az OmegaT szintén így működik. Az OmegaT feltételezi, hogy az <strong>egyszerű szöveg</strong> nyelve megegyezik a számítógép alapbeállítás szerinti nyelvével. Ez nem jelent gondot, ha francia gépen kell a szöveget lefordítani angolra, vagy német gépen kell megnyitni olasz állományokat.</p>
+  <p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</p><br>
 
-<hr>
+  <p>Ez azonban korántsem orosz, itt a japán karakterek helyén hibásan orosz betűk láthatók.</p>
 
-	<a name="Character_sets_and_encodings" id="Character_sets_and_encodings"></a>
-	<h1>Karakterkészletek és kódolások</h1>
+  <p>A többi alkalmazáshoz hasonlóan ez gondot okoz az OmegaT-nek is. Mindössze annyit feltételezhet, hogy alaphelyzetben az <strong>egyszerű szöveges</strong> állományok a rendszer alapbeállításával megjeleníthetők. Ez nem jelent gondot, ha francia gépen kell a szöveget lefordítani angolra, vagy német gépen kell megnyitni olasz állományokat.</p>
+  <hr>
+  <a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
 
-	<p>Miért működik jól az angol és a francia esetén, és miért gond az orosz vagy a japán? Azért, mert az angol és a francia azonos <strong>karakterkészletet</strong> használ. Éspedig a <strong>Latin-1</strong>-et vagy annak egy változatát. Egészen mostanáig az orosz és a japán eltérő karakterkészleteket használt. Az orosz karakterek nem felelnek meg a japánoknak, és fordítva. Ennek eredménye látható fent.</p>
+  <h2>Karakterkészletek és kódolás</h2>
 
-	<p>A japán megbízó japán gépen dolgozik és japán szöveges állományokat hoz létre. Az ügyfél által kiválasztott karakterkészlet az operációs rendszertől és egyéb beállításoktól függ, de bizonyára a kiválasztott (japán) karakterkészlet nem fog helyesen megjelenni az orosz számítógépen.</p>
+  <p>Miért működik jól az angol és a francia esetén, és miért gond az orosz vagy a japán? Azért, mert az angol és a francia azonos <strong>karakterkészletet</strong> használ. Éspedig a <strong>Latin-1</strong>-et vagy annak egy változatát. Egészen mostanáig az orosz és a japán nyelv eltérő karakterkészleteket használt. Az orosz karakterek nem feleltek meg a japánoknak, és fordítva. Ennek eredménye látható fent.</p>
 
-	<p>Az, hogy egy karakterkészletben az adott szöveg fizikailag miként jelenik meg (vagyis a számítógép miként olvassa azt be és <strong>jeleníti meg</strong>), a <strong>kódolástól</strong> függ. Amikor a számítógép beolvassa az állományt, a kódolásnak megfelelően "dekódolja" az információt és a karakterkészletnek megfelelően jeleníti meg. Pontatlanul fogalmazva egy kódolás egy karakterkészletnek felel meg...</p>
+  <p>A japán megbízó japán gépen dolgozik és japán szöveges állományokat hoz létre. Az ügyfél által kiválasztott karakterkészlet az operációs rendszertől és egyéb beállításoktól függ, de bizonyára a kiválasztott (japán) karakterkészlet nem jelenik meg helyesen az orosz számítógépen.</p>
 
-<hr>
+  <p>Az, hogy egy karakterkészletben az adott szöveg fizikailag miként jelenik meg (vagyis a számítógép miként olvassa azt be és jeleníti meg), a <strong>kódolástól</strong> függ. Amikor a számítógép beolvassa az állományt, a kódolásnak megfelelően "dekódolja" az információt és a karakterkészletnek megfelelően jeleníti meg. Alapvetően egy kódolás egy karakterkészletnek felel meg...</p>
+  <hr>
+  <a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
 
-	<a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
-	<h1>Az OmegaT által kínált megoldás</h1>
+  <h2>Az OmegaT által kínált megoldás</h2>
 
-	<p>A helyzet kezelésére az OmegaT 3 alapvető megoldást kínál. A 3 módszer mindegyike a <strong>Beállítások</strong> menü <a href="fileFilters.html">állományszűrőinek</a> használatára épül.</p>
-	
-	<ol>
-		<li>Adja meg <strong>egyszerű szöveges</strong> állományainak - azaz a <code>.txt</code> kiterjesztésű állományoknak - a kódolását.<br> A <a href="fileFilters.html">Szűrőszerkesztés</a> párbeszédablak <strong>Egyszerű szövegek</strong> részében módosítsa a <strong>Forrásállomány kódolását</strong> <strong>&lt;auto&gt;matikusról</strong> a <code>.txt</code> állománynak megfelelő kódolásra.</li><li>Az egyszerű szöveges forrásállományok kiterjesztését módosítsa például japán esetén <code>.txt</code>-ről <code>.jp</code>-re.<br> A <a href="fileFilters.html">Szűrőszerkesztés</a> párbeszédablak <strong>Egyszerű szövegek</strong> részében adja hozzá a <code>*.jp</code> <strong>Forrásállomány nevének mintájához</strong> és válassza ki a megfelelő paramétereket a forrásnyelvi és a célnyelvi kódoláshoz.</li>
+  <p>A helyzet kezelésére az OmegaT három alapvető megoldást kínál. Ezek mindegyike <a href="fileFilters.html">állományszűrők</a>  alkalmazását feltételezi a <strong>Beállítások</strong> menüben.</p>
 
-		<li>Nyissa meg a forrásállományt egy olyan szövegszerkesztőben, amely megfelelően kezeli annak kódolását, az állományt pedig mentse el UTF-8 kódolással.<br> Változtassa meg az állomány kiterjesztését <code>.txt</code>-ről <code>.utf8</code>-ra.<br> Az OmegaT az állományt automatikusan UTF-8 kódolású állományként fogja kezelni.</li>
-    </ol>
-	<p>Jelenleg az OmegaT az alábbi formátumú egyszerű szöveges állományokat támogatja</p>
+  <ol>
+    <li>Adja meg <strong>egyszerű szöveges</strong> állományainak - azaz a <code>.txt</code> kiterjesztésűeknek a kódolását az <strong>Egyszerű szövegek</strong> párbeszédablakban az <a href="fileFilters.html">állományszűrők</a> alatt, éspedig úgy, hogy a <strong>Forrásállomány kódolását</strong> <strong>&lt;auto&gt;</strong>-ról arra az értékre módosítja, amelyik megfelel <code>.txt</code> kiterjesztésű forrásállománynak.</li>
 
-	<ul>
-		<li>A <code>.txt</code> szövegeket az OmegaT automatikusan (<strong>auto</strong>) a számítógép alapbeállítás szerinti kódolásának megfelelően értelmezi.</li>
-		<li>A <code>.txt1</code> állományokat az OmegaT ISO-8859-1 kódolásúnak tekinti (ez a kódolás lefedi a legtöbb <strong>nyugat-európai</strong> nyelvet).</li>
-		<li>A <code>.txt2</code> állományokat az OmegaT ISO-8859-2 kódolásúnak tekinti (ez a kódolás lefedi a legtöbb <strong>közép- és kelet-európai</strong> nyelvet).</li>
-		<li>Az <code>.utf8</code> állományokat az OmegaT UTF-8 kódolásúnak tekinti (ez a kódolás lefedi a világ csaknem <strong>összes</strong> nyelvét).</li>
-	</ul>
+    <li>Módosítsa egyszerű szöveges állományainak kiterjesztését (például japán szöveg esetén <code>.txt</code>-ről <code>.jp</code>-re):&nbsp;Az <strong>Egyszerű szövegek</strong> párbeszédablakban az <a href=
+    "fileFilters.html">állományszűrők</a> alatt vegyen fel egy új <strong>névmintát a forrásállományhoz</strong> (például <code>*.jp)&nbsp;</code> és válassza ki a megfelelő kódolásokat a forrásnyelvhez és a célnyelvhez. </li>
 
-	<p>Ellenőrizheti mindezt, ha a <strong>Beállítások</strong> menüben az <strong>Állományszűrők</strong> pontra kattint.</p>
+    <li>Állományainak kódolását módosítsa unikódra:&nbsp;nyissa meg a forrásállományt egy olyan szövegszerkesztőben, amely megfelelően kezeli annak kódolását, majd mentse el az állományt "UTF-8" kódolásban. Az állomány kiterjesztését módosítsa <code>.txt</code>-ről <code>.utf8</code>-ra. Az OmegaT az állományt UTF-8 kódolású állományként fogja kezelni.</li>
+  </ol>
 
-	<p>Az OmegaT ezen felsorolás használatával segítséget nyújt egyes egyszerű szöveges állományok kezeléséhez.</p>
-	
-	<p>Ha például cseh szöveges állománnyal van dolga (amely minden valószínűség szerint <strong>ISO-8859-2</strong> kódolású), akkor a <code>.txt</code> kiterjesztés <code>.txt2</code>-re módosítása esetén az OmegaT annak tartalmát helyesen fogja értelmezni.</p>
+  <p>Az OmegaT alaphelyzetben az alábbi lehetőségeket kínálja fel az egyszerű szövegek kezeléséhez:</p>
 
-	<hr>
+  <ul>
+    <li>a <code>.txt</code> szövegeket az OmegaT automatikusan (<strong>auto</strong>) a számítógép alapbeállítás szerinti kódolásának megfelelően értelmezi.</li>
 
-	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
+    <li>a <code>.txt1</code> állományokat az OmegaT ISO-8859-1 kódolásúnak tekinti (ez a kódolás lefedi a legtöbb <strong>nyugat-európai</strong> nyelvet).</li>
+
+    <li>a <code>.txt2</code> állományokat az OmegaT ISO-8859-2 kódolásúnak tekinti (ez a kódolás lefedi a legtöbb <strong>közép- és kelet-európai</strong> nyelvet).</li>
+
+    <li>az <code>.utf8</code> állományokat az OmegaT UTF-8 kódolásúnak tekinti (ez a kódolás lefedi csaknem a világ <strong>összes</strong> nyelvét).</li>
+  </ul>
+
+  <p>Ellenőrizheti a beállítást, ha az <strong>Állományszűrők</strong>  pontra kattint a <strong>Beállítások</strong> menüben. Ha például cseh szöveggel van dolga (amely feltehetőleg <strong>ISO-8859-2</strong> kódolású), akkor mindössze annyi a dolga, hogy a <code>.txt</code>-kiterjesztést <code>.txt2</code>-kiterjesztésre módosítja, melynek eredményeként az OmegaT annak tartalmát helyesen fogja értelmezni. Ha pedig teljesen biztosra akar menni, alakítsa át az efféle állományokat unikódba, azaz .utf8 állományformára.</p>
+  <hr>
+
+  <table style="width: 100%;" summary="csak formázás" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

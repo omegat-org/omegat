@@ -1,443 +1,1199 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Az OmegaT menüi és gyorsbillentyűi - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Az OmegaT menüje és gyorsbillentyűi - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
+
 <body>
+  <h2>A főmenü és a gyorsbillentyűk</h2>
 
-	<h1>A főmenü és a gyorsbillentyűk</h1>
-	
-	<ul>
-		<li><a href="#menu">Főmenü</a>&nbsp;<table border="1" width="60%" cellpadding="3" cellspacing="0">
-			<tr bgcolor="#DDDDDD" align="center">
-				<td><a href="#ProjectMenu"><code>Projekt</code></a></td>
-				<td><a href="#EditMenu"><code>Szerkesztés</code></a></td>
-				<td><a href="#GoToMenu"><code>Ugrás</code></a></td>
-				<td><a href="#ToolsMenu"><code>Eszközök</code></a></td>
-				<td><a href="#OptionsMenu"><code>Beállítások</code></a></td>
-				<td><a href="#HelpMenu"><code>Súgó</code></a></td>
-			</tr>
-			</table>
-		</li>
-	</ul>
-	<ul>
-		<li><a href="#shortcuts">Gyorsbillentyűk</a>
-		<ul>
-			<li><a href="#Project_management">A projekt irányítása</a></li>
-			<li><a href="#Editing">Szerkesztés</a></li>
-			<li><a href="#Moving_around">Menüpontról menüpontra</a></li>
-			<li><a href="#Reference_windows">Projektállományok</a></li>
-			<li><a href="#Other">Egyebek</a></li>
-		</ul>
-		</li>
-	</ul>
+  <h3><a href="#menu">Főmenü</a></h3>
 
-	
-	<hr>
+  <h3><a href="#shortcuts">Gyorsbillentyűk</a></h3>
 
-	<a name="menu" id="menu"></a>
-	<h1>Főmenü</h1>
-	
-	<p>Az OmegaT minden funkciója elérhető a szerkesztőablak tetején lévő menüsorról. Számos funkció használható <a href= "menu.html#shortcuts">gyorsbillentyűkkel</a> is.</p>
+  <ul>
+    <li>
+      <p><a href="#Project_management">A projekt kezelése</a></p>
+    </li>
 
-	<p>A gyorsbillentyűk a <strong><code>Ctrl</code></strong> és egy betű lenyomásával használhatók. Egyes gyorsbillentyűk más billentyűkkel együtt használatosak. Az olvashatóság érdekében a betűk itt nagybetűs formában jelennek meg.</p>
-	
-	<p>A <strong><code>Ctrl</code></strong> használatos a Windows, UNIX és UNIX-szerű, <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong> billentyűt használó operációs rendszerekben. Mac-felhasználók a <strong><code>cmd+key</code></strong> kombinációt használják. A <strong><code>cmd</code></strong> billentyűn van egy <strong><code>command</code></strong> címke, de használhatják az Apple klaviatúráján lévő <strong>alma</strong>-billentyűt is.</p>
+    <li>
+      <p><a href="#Editing">Szerkesztés</a></p>
+    </li>
 
-	<p></p>
+    <li>
+      <p><a href="#Moving_around">Menüpontról menüpontra</a></p>
+    </li>
 
-		<table border="1" width="400" cellpadding="3" cellspacing="0">
-			<tr bgcolor="#DDDDDD" align="center">
-				<td><a href="#ProjectMenu"><code>Projekt</code></a></td>
-				<td><a href="#EditMenu"><code>Szerkesztés</code></a></td>
-				<td><a href="#GoToMenu"><code>Ugrás</code></a></td>
-				<td><a href="#ToolsMenu"><code>Eszközök</code></a></td>
-				<td><a href="#OptionsMenu"><code>Beállítások</code></a></td>
-				<td><a href="#HelpMenu"><code>Súgó</code></a></td>
-			</tr>
-		</table>
-		<table border="0" cellpadding="5" cellspacing="0">
+    <li>
+      <p><a href="#Reference_windows">Projektállományok</a></p>
+    </li>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="ProjectMenu" colspan="3">
-			<hr><a name="ProjectMenu" id="ProjectMenu"></a><h2><code>Projekt</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><code>Új</code></td>
-			<td width="10%"></td>
-			<td>Létrehoz és megnyit egy új projektet. A projekt létrehozásához használt párbeszédablak ugyanaz, mint a <a href="projectProperties.html">projekt szerkesztéséhez használt párbeszédablak</a>.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Megnyitás</code></td>
-			<td><code>&lt;Ctrl+O&gt;</code></td>
-			<td>Megnyit egy korábban létrehozott projektet.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Forrásszövegek importálása...</code></td>
-			<td></td>
-			<td>Átmásolja a kiválasztott állományokat a <code>/source</code> könyvtárba és az újak betöltéséhez újból betölti a projektet.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Importálás MediaWikiből...</code></td>
-			<td></td>
-			<td>A megadott URL alapján importál MediaWiki-oldalakat</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Újratöltés</code></td>
-			<td></td>
-			<td>Újból betölti a projektet a kívülről módosított állományok változásainak, a régebbi fordítási memóriáknak és szójegyzékeknek a figyelembevétele végett.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Bezárás</code></td>
-			<td></td>
-			<td>Menti a fordítást és bezárja a projektet.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Mentés</code></td>
-			<td><code>&lt;Ctrl+S&gt;</code></td>
-			<td>Elmenti a fordítást a projekt fordítási memóriájába. Az OmegaT 10 percenként és a projekt bezárásakor vagy a programból való kilépéskor automatikusan elmenti a fordítást.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Lefordított állományok létrehozása</code></td>
-			<td></td>
-			<td>A szövegfordítások alapján létrehozza a célnyelvi dokumentumokat. A dokumentumok a <code>/target</code> könyvtárba kerülnek.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Beállítások</code></td>
-			<td><code>&lt;Ctrl+E&gt;</code></td>
-			<td>Megjeleníti a <a href="projectProperties.html">Projekt szerkesztése</a> párbeszédablakot a projekt nyelveinek és a mappák helyének beállításához.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Projektállományok...</code></td>
-			<td><code>&lt;Ctrl+L&gt;</code></td>
-			<td>Bezárja vagy megnyitja a <a href="userInterface.html#Project_Files">Projektállományok</a> ablakot (attól függően, hogy nyitva vagy zárva van-e).</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Kilépés</code></td>
-			<td><code>&lt;Ctrl+Q&gt;</code></td>
-			<td>Elmenti a projektet és kilép az OmegaT-ből. Ha kézzel nem mentette el a projektet, rákérdez, hogy tényleg ki akar-e lépni a programból.</td>
-		</tr>
+    <li>
+      <p><a href="#Other">Egyéb</a></p>
+    </li>
+  </ul>
+  <hr>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="name" colspan="3">
-			<hr><a name="EditMenu" id="EditMenu"></a><h2><code>Szerkesztés</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-		        <td></td>
-				<td colspan="2">A legtöbb programban meglévő funkciókat (másolás/kivágás/beillesztés) a menü nem tartalmazza, ezeket rendszerének gyorsbillentyűivel érheti el. Például:</td>
-			</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Másolás</code></td>
-			<td><code>&lt;Ctrl+C&gt;</code></td>
-			<td>A kiválasztott szöveget a vágólapra másolja.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Kivágás</code></td>
-			<td><code>&lt;Ctrl+X&gt;</code></td>
-			<td>A kiválasztott szöveget törli, egyben a vágólapra másolja.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Beillesztés</code></td>
-			<td><code>&lt;Ctrl+V&gt;</code></td>
-			<td>A vágólapról a szöveget a kurzor helyére szúrja be.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td></td>
-			<td colspan="2"><strong>A menü az alábbi funkciókat tartalmazza:</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Utolsó művelet visszavonása</code></td>
-			<td><code>&lt;Ctrl+Z&gt;</code></td>
-			<td>Visszatér az előző szerkesztési lépést megelőző állapothoz. A módosított szövegrész ellenőrzése után nem használható.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Utolsó művelet megismétlése</code></td>
-			<td><code>&lt;Ctrl+Y&gt;</code></td>
-			<td>Visszatér az előzőleg törölt szerkesztési lépés előtti állapothoz. A módosított szövegrész ellenőrzése után nem használható.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Fordítás felülírása</code></td>
-			<td><code>&lt;Ctrl+R&gt;</code></td>
-			<td>Felülírja az egész célnyelvi szövegdarabot a kiválasztott (alapbeállításban az első) bizonytalan egyezéssel.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Fordítás beszúrása</code></td>
-			<td><code>&lt;Ctrl+I&gt;</code></td>
-			<td>A kiválasztott bizonytalan egyezést beszúrja a kurzor helyére. Beszúráskor akkor sem írja felül a célnyelvi szöveget, ha azt kijelölte.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Felülírás a forrással</code></td>
-			<td><code>&lt;Shift+Ctrl+R&gt;</code></td>
-			<td>Az egész célnyelvi szövegrészt felülírja a forrásszöveggel.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Felülírás a forrással</code></td>
-			<td><code>&lt;Shift+Ctrl+I&gt;</code></td>
-			<td>A kurzor helyére beszúrja a forrásszöveget.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Keresés a projektben...</code></td>
-			<td><code>&lt;Ctrl+F&gt;</code></td>
-			<td>Megnyit egy új <a href="userInterface.html#Search_Window">Szöveg keresése</a> ablakot.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>X. számú bizonytalan egyezés kiválasztása</code></td>
-			<td><code>&lt;Ctrl+szám&gt;</code></td>
-			<td>(az X egy 1 és 5 közötti számjegy) - A szövegrész cseréjéhez vagy beszúráshoz kiválasztja az X. számú bizonytalan egyezést a Bizonytalan egyezések ablakból. A <a href= "userInterface.html#Fuzzy_Matches">Bizonytalan egyezések</a> fejezet részletesen tájékoztatja a színkódolásról.</td>
-		</tr>
+  <h2><a name="menu" id="menu"></a>Főmenü</h2>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="GotoMenu" colspan="3">
-			<hr><a name="GoToMenu" id="GoToMenu"></a><h2><code>Ugrás</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Következő fordítandó szövegrész</code></td>
-			<td><code>&lt;Ctrl+U&gt;</code></td>
-			<td>A fordítási memóriában nem talált következő szövegrészre ugrik.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Következő szövegrész</code></td>
-			<td><code>&lt;Ctrl+N&gt;</code> vagy <code>&lt;Enter&gt;</code> vagy <code>&lt;Tab&gt;</code></td>
-			<td>A következő szövegrészre ugrik. Ha a pillanatnyi szövegrész az adott állomány utolsó szövegrésze, akkor következő szöveg első elemére ugrik.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Előző szövegrész</code></td>
-			<td><code>&lt;Ctrl+P&gt;</code> vagy <code>&lt;Ctrl+Enter&gt;</code> vagy <code>&lt;Ctrl+Tab&gt;</code></td>
-			<td>Az előző szövegrészre ugrik. Ha a pillanatnyi szövegrész az adott állomány első eleme, akkor az előző szöveg utolsó szövegrészére ugrik.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Szövegrész száma...</code></td>
-			<td><code>&lt;Ctrl+J&gt;</code></td>
-			<td>A szövegrész számának megadása után megnyitja az  adott szövegrészt.</td>
-		</tr>
+  <p>Az OmegaT minden funkciója elérhető a szerkesztőablak tetején lévő menüsorról. Számos funkció használható <a href=
+  "#shortcuts">gyorsbillentyűk</a> segítségével is. A gyorsbillentyűk a <strong>Ctrl</strong> billentyű és egy betű lenyomásával működnek. Egyes gyorsbillentyűknél más billentyűkombináció használatos. Az olvashatóság érdekében a betűk itt nagybetűs formában jelennek meg. A <strong>Ctrl</strong> használatos a Windows, a UNIX és UNIX-szerű, <strong>Ctrl</strong> / <strong>Control</strong> billentyűt használó operációs rendszereken. A Mac-felhasználók a <strong>cmd+billentyű</strong> kombinációt használhatják. A <strong>cmd</strong> billentyű a <strong>parancsikont</strong> vagy az <strong>alma</strong>-jelet használhatják az Apple klaviatúráján.</p>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="ToolsMenu" colspan="3">
-			<hr><a name="ToolsMenu" id="ToolsMenu"></a><h2><code>Eszközök</code></h2>
-			</td>
-		</tr>
+  <table summary="csak formázás" border="1" cellpadding="3" cellspacing="0"
+  width="400">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p align="center"><a href="#ProjectMenu">Projekt</a></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Címkék ellenőrzése</code></td>
-			<td><code>&lt;Ctrl+T&gt;</code></td>
-			<td>Formázott állományokban ellenőrzi a hiányzó vagy rossz helyre került címkéket. Megjeleníti a címkehibás szövegrészeket. A <a href= "userInterface.html#Tag_Validation">Módosított címkék ellenőrzése</a> ablak felsorolja az érintett részeket, a <a href="formattedText.html">Formázott szöveg kezelése</a> c. fejezet pedig tájékoztatja a részletekről.</td>
-		</tr>
+        <td>
+          <p align="center"><a href="#EditMenu">Szerkesztés</a></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="OptionsMenu" colspan="3"><hr><h2><code>Beállítások</code></h2></td>
-		</tr>
+        <td>
+          <p align="center"><a href="#GoToMenu">Ugrás</a></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Továbblépés a tabulátorral</code></td>
-			<td></td>
-			<td>A szövegrész ellenőrzésére szolgáló billentyűt <code>&lt;Tabulátor&gt;</code>-ra állítja az alapbeállítás szerinti <code>&lt;Enter&gt;</code> helyett. Ez a beállítás kapóra jöhet egyes kínai, japán vagy koreai karakteríró rendszerek esetén.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>[bizonytalan] Betű...</code></td>
-			<td></td>
-			<td>Megjeleníti a <a href="fontSettings.html">Megjelenítés betűje</a> párbeszédablakot, melyben beállítható a szöveg megjelenítésére használatos betűkészlet. Régi számítógépet használóknak tanácsos betűkészletüket lecserélni a projekt megnyitása előtt, ellenkező esetben romolhat a gép teljesítménye. A legreménytelenebbnek a G4 + Mac OS X + japán kombináció tűnik.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Állományszűrők...</code></td>
-			<td></td>
-			<td>Megjeleníti az <a href="fileFilters.html">Állományszűrők</a> párbeszédablakot az állománykezelés és -feldolgozás beállításához.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Szövegdarabolás...</code></td>
-			<td></td>
-			<td>Megnyitja a <a href="segmentation.html">Szövegdarabolás beállítása</a> párbeszédablakot a szövegdarabolás beállításához.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Szerkesztési mód...</code></td>
-			<td></td>
-			<td>Megjeleníti a <a href="translationEditing.html">Szerkesztési mód beállításai</a> párbeszédablakot a még lefordítatlan szövegrészek célnyelvi mezőinek beállításához.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Főablak visszaállítása</code></td>
-			<td></td>
-			<td>Visszaállítja eredeti állapotukba az OmegaT főablakának elemeit (a szerkesztőt, a Bizonytalan egyezések és a Szójegyzék ablakot). Akkor használja ezt a funkciót, ha egy vagy több összetevőt elmozdított vagy elrejtett, és nem tudja a kívánt módon visszaállítani.</td>
-		</tr>
+        <td>
+          <p align="center"><a href="#ViewMenu">Nézet</a></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="HelpMenu" colspan="3">
-			<hr><a name="HelpMenu" id="HelpMenu"></a><h2><code>Súgó</code></h2>
-			</td>
-		</tr>
+        <td>
+          <p align="center"><a href="#ToolsMenu">Eszközök</a></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Felhasználói kézikönyv... </code></td>
-			<td><code>&lt;F1&gt;</code></td>
-			<td>Egy külön <a href="userInterface.html#Help_Browser">Felhasználói kézikönyv</a> ablakban megnyitja ezt a kézikönyvet.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Névjegy...</code></td>
-			<td></td>
-			<td>Megjeleníti a köszönetnyilvánításokat, a szerzői jogra és a használati engedélyre vonatkozó tudnivalókat.</td>
-		</tr>
-	</table>
-	<hr>
+        <td>
+          <p align="center"><a href="#OptionsMenu">Beállítások</a></p>
+        </td>
 
-	<a name="shortcuts"></a>
-	<h1>Gyorsbillentyűk</h1>
-	
-	<p>A főablakból a következő gyorsbillentyűket használhatja. Ha egy másik ablak került előtérbe, kattintson a főablakra és hozza előre, vagy az <strong><code>Esc</code></strong> lenyomásával zárja be az előbbi ablakot.</p>
+        <td>
+          <p align="center"><a href="#HelpMenu">Súgó</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-	<p>A gyorsbillentyűk a <strong><code>Ctrl</code></strong> és egy betű lenyomásával használhatók. Egyes gyorsbillentyűk más billentyűkkel együtt használatosak. Az olvashatóság érdekében a betűk itt nagybetűs formában jelennek meg.</p>
-	
-	<p>A <strong><code>Ctrl</code></strong> használatos a Windows, UNIX és UNIX-szerű, <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong> billentyűt használó operációs rendszerekben. Mac-felhasználók a <strong><code>cmd+key</code></strong> kombinációt használják. A <strong><code>cmd</code></strong> billentyűn van egy <strong><code>command</code></strong> címke, de használhatják az Apple klaviatúráján lévő <strong>alma</strong>-billentyűt is.</p>
+  <table summary="csak formázás" border="0" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
 
-	<ul>
-		<li><a href="#Project_management">A projekt irányítása</a></li>
-		<li><a href="#Editing">Szerkesztés</a></li>
-		<li><a href="#Moving_around">Menüpontról menüpontra</a></li>
-		<li><a href="#Reference_windows">Projektállományok</a></li>
-		<li><a href="#Other">Egyebek</a></li>
-	</ul>
+          <h3><a name="ProjectMenu" id="ProjectMenu"></a>Projekt</h3>
+        </td>
+      </tr>
 
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Új</code></p>
+        </td>
 
-	<table border="0" cellpadding="3" cellspacing="0">
+        <td width="17%"></td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Project_management" id="Project_management"></a><h2>A projekt irányítása</h2>
-			</td>
-		</tr>
+        <td>
+          <p>Létrehoz és megnyit egy új projektet. A projekt létrehozásához használt párbeszédablak ugyanaz, mint a <a href="projectProperties.html">projekt szerkesztéséhez használt párbeszédablak</a>.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Projekt megnyitása</td>
-			<td><code>&lt;Ctrl+O&gt;</code></td>
-			<td>A megnyíló párbeszédablakból elérhető egy már létező projekt</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td>Mentés</td>
-			<td><code>&lt;Ctrl+S&gt;</code></td>
-			<td>Az aktuális munkát a projekt /omegat/ könyvtárában lévő project_save.tmx állományba menti</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>A projekt beállításai</td>
-			<td><code>&lt;Ctrl+E&gt;</code></td>
-			<td>Esetleges módosításhoz kijelzi a projekt beállításait.</td>
-		</tr>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Megnyitás</code></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Editing" id="Editing"></a><h2>Szerkesztés</h2>
-			</td>
-		</tr>
+        <td width="17%">
+          <p><code>Ctrl+O</code></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Utolsó lépés visszavonása</td>
-			<td><code>&lt;Ctrl+Z&gt;</code></td>
-			<td>Az adott célnyelvi szövegrészen belül visszavonja az utolsó szerkesztési lépést</td>
-		</tr>
+        <td>
+          <p>Megnyit egy korábban létrehozott projektet.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Utolsó művelet megismétlése</td>
-			<td><code>&lt;Ctrl+Y&gt;</code></td>
-			<td>Az adott célnyelvi szövegdarabon belül megismétli az éppen visszavont szerkesztési lépéseket</td>
-		</tr>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Forrásszövegek importálása...</code></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>X. egyezés kiválasztása</td>
-			<td><code>&lt;Ctrl+szám&gt;</code></td>
-			<td>A szám 1 és 5 közötti számjegy lehet. Kiválasztja az X<sup></sup>. egyezést a Bizonytalan egyezések ablakból (alapbeállításban az első egyezést választja ki)</td>
-		</tr>
+        <td width="17%"></td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Csere az egyezésre</td>
-			<td><code>&lt;Ctrl+R&gt;</code></td>
-			<td>Az adott célnyelvi szövegrész helyére beilleszti a kiválasztott egyezést (alapbeállításban az első egyezést választja ki)</td>
-		</tr>
+        <td>
+          <p>Átmásolja a kiválasztott állományokat a <code>/source</code> könyvtárba és az újak betöltéséhez ismét betölti a projektet.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Egyezés beszúrása</td>
-			<td><code>&lt;Ctrl+I&gt;</code></td>
-			<td>Az adott célnyelvi szövegrészbe a kurzor helyére beszúrja a kiválasztott egyezést (alapbeállításban az első egyezést választja ki)</td>
-		</tr>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Importálás MediaWikiből...</code></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Csere a forrásszövegre</td>
-			<td><code>&lt;Ctrl+Shift+R&gt;</code></td>
-			<td>Az adott célnyelvi szövegrész helyére beilleszti a forrásszöveg tartalmát</td>
-		</tr>
+        <td width="17%"></td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Forrás beszúrása</td>
-			<td><code>&lt;Ctrl+Shift+I&gt;</code></td>
-			<td>Az adott célnyelvi szövegrészbe a kurzor helyére beszúrja a forrásszöveg tartalmát</td>
-		</tr>
+        <td>
+          <p>A megadott URL alapján MediaWiki-oldalakat importál</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Keresés a projektben...</td>
-			<td><code>&lt;Ctrl+F&gt;</code></td>
-			<td>A megnyíló párbeszédablakból keresést hajthat végre a projektben</td>
-		</tr>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Újratöltés</code></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Moving_around" id="Moving_around"></a><h2>Menüpontról menüpontra</h2>
-			</td>
-		</tr>
+        <td width="17%"><code>F5</code></td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Következő fordítandó szövegrész</td>
-			<td><code>&lt;Ctrl+U&gt;</code></td>
-			<td>A szerkesztési mezőt a projekt fordítási memóriájában még nem rögzített szövegrészhez viszi</td>
-		</tr>
+        <td>
+          <p>Újból betölti a projektet a kívülről módosított állományok, a régebbi fordítási memóriák és a szójegyzékek  változásainak a figyelembevétele végett.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Következő szövegrész</td>
-			<td><code>&lt;Ctrl+N&gt;<br> Nyomja le a Return-billentyűt</code></td>
-			<td>A szerkesztési mezőt a következő szövegrészhez viszi</td>
-		</tr>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Bezárás</code></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Előző szövegrész</td>
-			<td><code>&lt;Ctrl+P&gt;</code></td>
-			<td>A szerkesztési mezőt az előző szövegrészhez viszi</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td>Szövegrész száma...</td>
-			<td><code>&lt;Ctrl+J&gt;</code></td>
-			<td>a megadott számú szövegrészre ugrik.</td>
-		</tr>
+        <td width="17%"><code>Ctrl+Shift+W</code></td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Reference_windows" id="Reference_windows"></a><h2>Projektállományok</h2>
-			</td>
-		</tr>
+        <td>
+          <p>Menti a fordítást és bezárja a projektet.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Projektállományok felsorolása</td>
-			<td><code>&lt;Ctrl+L&gt;</code></td>
-			<td>Megjeleníti a projektállományok felsorolását</td>
-		</tr>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Mentés</code></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Other" id="Other"></a><h2>Egyebek</h2>
-			</td>
-		</tr>
+        <td width="17%">
+          <p><code>Ctrl+S</code></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Címkék ellenőrzése</td>
-			<td><code>&lt;Ctrl+T&gt;</code></td>
-			<td>Ellenőrzi, hogy a forrásszövegben lévő összes címke megjelenik-e a fordításban is.</td>
-		</tr>
+        <td>
+          <p>Elmenti a fordítást a projekt fordítási memóriájába. Az OmegaT 10 percenként és a projekt bezárásakor vagy a programból való kilépéskor automatikusan menti a fordítást.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Súgóállományok </td>
-			<td><code>&lt;F1&gt;</code></td>
-			<td>Külön ablakban megjeleníti az OmegaT súgóállományait</td>
-		</tr>
-	</table>
-	<hr>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Lefordított állományok előállítása</code></p>
+        </td>
 
-	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
+        <td width="17%"><code>Ctrl+D</code></td>
+
+        <td>
+          <p>A szövegfordítások alapján létrehozza a célnyelvi dokumentumokat. A dokumentumok a <code>/target</code> célkönyvtárba kerülnek.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Beállítások</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Megjeleníti a <a href="projectProperties.html">Projekt szerkesztése</a> párbeszédablakot a projekt nyelveinek és a mappák helyének a beállításához.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Projektállományok...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Bezárja vagy megnyitja a <a href="userInterface.html#Project_Files">Projektállományok</a> ablakot (attól függően, hogy az nyitva vagy zárva van-e).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Kilépés</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Q</code></p>
+        </td>
+
+        <td>
+          <p>Menti a projektet és kilép az OmegaT-ből. Ha nem mentette kézzel a projektet, rákérdez, hogy valóban ki akar-e lépni a programból.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="EditMenu" id="EditMenu"></a>Szerkesztés</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>Megjegyzés: a legtöbb programban meglévő funkciókat (másolás/kivágás/beillesztés) a menü nem tartalmazza, ezek az adott rendszer gyorsbillentyűivel érhetők el. Például:</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Másolás</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>A kiválasztott szöveget a vágólapra másolja.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Kivágás</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+X</code></p>
+        </td>
+
+        <td>
+          <p>A kiválasztott szöveget törli, egyben a vágólapra másolja.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Beillesztés</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+V</code></p>
+        </td>
+
+        <td>
+          <p>A vágólapról a szöveget a kurzor helyére szúrja be.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p><strong>A Szerkesztés menü az alábbi funkciókat tartalmazza:</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Utolsó művelet visszavonása</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Visszatér az előző szerkesztési lépés előtti állapothoz. A módosított szövegegység ellenőrzése után nem használható.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Utolsó művelet ismétlése</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Visszatér az előzőleg törölt szerkesztési lépés előtti állapothoz. A módosított szövegegység ellenőrzése után nem használható.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Csere az egyezésre</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Felülírja az egész célnyelvi szövegegységet a kiválasztott (alapbeállításban az első) bizonytalan egyezéssel.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Egyezés beszúrása</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>A kiválasztott bizonytalan egyezést beszúrja a kurzor helyére. Beszúráskor akkor sem írja felül a célnyelvi szöveget, ha azt kijelölte.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Csere a &amp;gépi fordításra</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a Google Translate fordítását. Hatástalan, ha a Google Translate nincs bekapcsolva (lásd alább: Menü &gt; Beállítások).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Csere a forrásszövegre</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Felülírja a célnyelvi szövegegységet a forrásszöveggel.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Forrás beszúrása<br></code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>A kurzor helyére beszúrja a forrásszöveget.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>A kiválasztott rész exportálása</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>A kiválasztott szöveget további feldolgozás céljából szövegfájlba exportálja. Ha nincs kiválasztva szöveg, akkor az adott forrásszöveget írja ki ebbe az állományba. Amikor a felhasználó kilép az OmegaT-ből, a vágólap szokásos viselkedésének megfelelően az állomány tartalma megmarad. Az exportált tartalom a <span style=
+          "font-style: italic;">selection.txt</span> állományba kerül, amely a felhasználó kedvenc államoányainak mappájában található (lásd az <a href=
+          "filesAndDirectories.html#user" target="_blank">állományok és könyvtárak</a> c. részt).&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Keresés a projektben...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Megnyit egy új <a href="userInterface.html#Search_Window">Szöveg keresése</a> ablakot.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Betűváltás...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift + F3</code></p>
+
+          <p><code>(lásd a leírást)</code></p>
+        </td>
+
+        <td>
+          <p>A célnyelvi szövegben kijelölt szöveg betűit a kiválasztott érték szerintire alakítja (kisbetűs, nagybetűs vagy címszavas). A Shift+F3 ismételt megnyomásával választhat a három alternatíva közül. Ha nincs kiválasztva szöveg, akkor az OmegaT a kurzortól közvetlenül jobbra álló betűt tartalmazó szót választja ki.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>n. bizonytalan egyezés kiválasztása</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+n</code></p>
+        </td>
+
+        <td>
+          <p>(az n egy 1 és 5 közötti szám) - A szövegegység cseréjéhez vagy beszúrásához kiválasztja az n. bizonytalan egyezést a Bizonytalan egyezések ablakából. A <a href="userInterface.html#Fuzzy_Matches">Bizonytalan egyezések</a> fejezetből részletesen megismerkedhet a színkódolással.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="GoToMenu" id="GoToMenu"></a>Ugrás</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Következő fordítandó szövegegység</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>A fordítási memóriában nem talált következő szövegegységre ugrik.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Következő szövegegység</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+N</code> vagy <code>Enter</code> vagy <code>Tab</code></p>
+        </td>
+
+        <td>
+          <p>A következő szövegegységre ugrik. Ha a pillanatnyi szövegegység az adott állomány utolsó szövegegysége, akkor a következő szöveg első egységére ugrik.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Előző szövegegység</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+P</code> vagy <code>Ctrl+Enter</code> vagy <code>Ctrl+Tab</code></p>
+        </td>
+
+        <td>
+          <p>Az előző szövegegységre ugrik. Ha a pillanatnyi szövegegység az adott állomány első szövegegysége, akkor az előző szöveg utolsó egységére ugrik.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Szövegegység száma...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>A szövegegység a száma beírásakor megnyílik.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Előrelépés...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>Az OmegaT megjegyzi a feldolgozott egységeket. Ezzel a paranccsal előreléphet arra a szövegegységre, amelyet előzőleg a "Visszalépés" paranccsal elhagyott.&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Visszalépés...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Ezzel a paranccsal egy vagy több szövegegységgel visszaléphet időben, majd később visszatérhet az adott szövegegységhez.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ViewMenu" id="ViewMenu"></a>Nézet</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Lefordított állományok megjelölése</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Bejelölése esetén a lefordított szövegegységek sárga háttérrel jelennek meg.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Lefordítandó állományok megjelölése</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Bejelölése esetén a lefordítandó szövegegységek lila háttérrel jelennek meg.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Forrásegységek megjelenítése</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Bejelölése esetén a forrásszöveg egységei zöld háttérrel jelennek meg. Ha nincs bejelölve, a forrásszöveg egységei nem zöld háttérrel jelennek meg.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ToolsMenu" id="ToolsMenu"></a>Eszközök</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Címkék ellenőrzése</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Formázott állományokban ellenőrzi a hiányzó vagy áthelyezett címkéket. Megjeleníti a címkehibát tartalmazó szövegegységeket. A <a href=
+          "userInterface.html#Tag_Validation">Módosított címkéket tartalmazó egységek</a> ablakban jelennek meg a szövegegységek, a <a href="formattedText.html">Formázott szövegek fordítása</a> részből pedig megtudhatja, mi a gond.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="OptionsMenu" id="OptionsMenu"></a>Beállítások</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Továbblépés a tabulátorral</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>A szövegegység ellenőrzésére szolgáló billentyűt <code>&lt;Tab&gt;</code>-ra állítja az alapbeállítás szerinti <code>&lt;Enter&gt;</code> helyett. Ez a beállítás kapóra jöhet egyes kínai, japán vagy koreai karaktereket használó rendszerek esetén.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Kilépés csak megerősítés után</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>A program befejezés előtt mindig ellenőrzést hajt végre.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td><code>Google Translate</code></td>
+
+        <td></td>
+
+        <td>
+          <p>A <a href="GoogleTranslate.html">Google Translate</a> bekapcsolva/kikapcsolva. Bekapcsolása esetén a <code>Ctrl+M</code> hatására a Google Translate által javasolt fordítás bekerül az adott szövegegység célnyelvi részébe. A javasolt megoldást beszúrás előtt a Google Translate panelen ellenőrizheti.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Betű...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Megjeleníti a <a href="fontSettings.html">Megjelenítés betűtípusa</a> párbeszédablakot, melyben beállítható a szöveg megjelenítésére használatos betűkészlet. Users of old computers who feel window resizing is very slow can try changing the font.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Állományszűrők...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Megjeleníti az <a href="fileFilters.html">Állományszűrők</a> párbeszédablakot az állománykezelés és -feldolgozás beállításához.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Szövegdarabolás...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Megnyitja a <a href="segmentation.html">Szövegdarabolás beállítása</a> párbeszédablakot a szövegdarabolás beállításához.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Helyesírás-ellenőrzés...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Megjeleníti a  <a href="spellchecker.html">Helyesírás-ellenőrző beállítása</a> ablakot a helyesírás-ellenőrző telepítéséhez, beállításához és bekapcsolásához.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Szerkesztési mód...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Megnyitja a <a href="translationEditing.html">Szerkesztési mód beállításai</a> párbeszédablakot a beállításhoz.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Főablak visszaállítása</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Visszaállítja az OmegaT fő ablakának elemeit (Szerkesztő, Bizonytalan egyezések Szójegyzék és Szótár) eredeti állapotukba. Akkor használja ezt a funkciót, ha egy vagy több összetevőt elmozdított vagy elrejtett, és nem tudja a kívánt módon visszaállítani.. Akkor is ezt használja, ha az OmegaT másik változatát használja, vagy ha gondja támadt, mert az ablakok rejtve maradnak.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="HelpMenu" id="HelpMenu"></a>Súgó</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Felhasználói kézikönyv...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Egy külön <a href="userInterface.html#Help_Browser">Felhasználói kézikönyv</a> ablakban megnyitja ezt a kézikönyvet.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Névjegy...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Megjeleníti a köszönetnyilvánításokat, a szerzői jogra és az engedélyekre vonatkozó tudnivalókat.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="shortcuts" id="shortcuts"></a>Gyorsbillentyűk</h2>
+
+  <p>A fő ablakból a következő gyorsbillentyűket használhatja. Ha egy másik ablak került előtérbe, kattintson a fő ablakra és hozza előre, vagy az <code><strong>Esc</strong></code> lenyomásával zárja be az előző ablakot.</p>
+
+  <p>A gyorsbillentyűk a  <code><strong>Ctrl</strong></code> billentyű és egy betű lenyomásával működnek. Egyes gyorsbillentyűknél más billentyűkombináció használatos. Az olvashatóság érdekében a betűk itt nagybetűs formában jelennek meg.</p>
+
+  <p>[?] A <strong><code>Ctrl</code></strong> használatos a Windows, a UNIX és UNIX-szerű, <strong><code>Ctrl</code></strong> / <code><strong>Control</strong></code> billentyűt használó operációs rendszereken. A Mac-felhasználók a <code><strong>cmd+billentyű</strong></code> kombinációt használhatják. A <code><strong>cmd</strong></code> billentyűn a <code><strong>command</strong></code> címke vagy egy <strong>alma</strong>-jel látható az Apple klaviatúráján.</p>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">A projekt kezelése</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">Szerkesztés</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">Menüpontról menüpontra</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">Projektállományok</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">Egyéb</a></p>
+    </li>
+  </ul>
+
+  <table summary="csak formázás" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Project_management" id="Project_management"></a>A projekt kezelése</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Projekt megnyitása</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>A lenyíló párbeszédablakból kikereshető egy korábban létrehozott projekt</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Mentés</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Az adott munkát a projekt /omegat/ könyvtárában lévő project_save.tmx állományba menti.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Close Project</p>
+        </td>
+
+        <td>
+          <p><code>Shift+Ctrl+W</code></p>
+        </td>
+
+        <td>
+          <p>Bezárja az aktuális projektet</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Lefordított állományok előállítása</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+D</code></p>
+        </td>
+
+        <td>
+          <p>A lefordított dokumentumokat a projekt célmappájába (target) menti.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Beállítások</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Esetleges módosításhoz kijelzi a projekt beállításait</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Editing" id="Editing"></a>Szerkesztés</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Utolsó művelet visszavonása</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegységen belül visszavonja az utolsó szerkesztési lépést</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Utolsó művelet megismétlése</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegységen belül megismétli az utoljára visszavont szerkesztési lépéseket</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>n. egyezés kiválasztása</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+n</code></p>
+        </td>
+
+        <td>
+          <p>Az n egy 1 és 5 közötti szám. Kiválasztja az n<sup></sup>. egyezést a Bizonytalan egyezések ablakból (alapbeállításban az első egyezést választja ki)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Csere az egyezésre</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a kiválasztott egyezést (alapbeállításban az első egyezést választja ki)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Egyezés beszúrása</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegységbe a kurzor helyére beszúrja a kiválasztott egyezést (alapbeállításban az első egyezést választja ki)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Csere a forrásszövegre</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a forrásszöveg tartalmát</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Forrásszöveg beszúrása</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegységbe a kurzor helyére beszúrja a forrásszöveg tartalmát</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Keresés a projektben...</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>A lenyíló párbeszédablakban keresést hajthat végre a projektben</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>Csere a &amp;gépi fordításra</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a Google Translate fordítását. Hatástalan, ha a Google Translate nincs bekapcsolva (lásd alább: Menü &gt; Beállítások &gt; Google Translate).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Moving_around" id="Moving_around"></a>Menüpontról menüpontra</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Következő fordítandó szövegegység</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>A szerkesztési mezőt a projekt fordítási memóriájában még nem rögzített szövegegységhez viszi</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Következő szövegegység</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+N<br> Enter vagy Return&nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>A szerkesztési mezőt a következő szövegegységhez viszi</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Előző szövegegység</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+P</code></p>
+        </td>
+
+        <td>
+          <p>A szerkesztési mezőt az előző szövegegységhez viszi</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Szövegegység száma...</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Áttér a megadott számú szövegegységre</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Visszalépés...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Egy szövegegységgel korábbra lép vissza.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Előrelépés...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>Egy szövegegységgel előbbre lép.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Reference_windows" id="Reference_windows"></a>Projektállományok</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Felsorolja a projekt állományait</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Megjeleníti a projektállományok felsorolását</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Other" id="Other"></a>Egyéb</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Címkék ellenőrzése</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Megnyitja a <a href="userInterface.html#Tag_Validation">Módosított címkéket tartalmazó egységek</a> ablakot.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>A kiválasztott rész exportálása</p>
+        </td>
+
+        <td>
+          <p><code>Shift+</code><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>A kiválasztott szöveget vagy, ha nincs szöveg kiválasztva, az aktuális forrásszöveget exportálja.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Keresés a projektben...&nbsp;&nbsp; &nbsp;</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F&nbsp;&nbsp; &nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Megnyit egy új Szöveg keresése ablakot.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Súgóállományok</p>
+        </td>
+
+        <td>
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Külön ablakban megjeleníti az OmegaT súgóállományait</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <table style="width: 100%;" summary="csak formázás" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

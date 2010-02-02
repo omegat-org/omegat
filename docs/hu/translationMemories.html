@@ -1,142 +1,205 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Fordítási memóriák - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Fordítási memóriák - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
+
 <body>
+  <h2>Fordítási memóriák</h2>
 
-	<h1>Fordítási memóriák</h1>
+  <ul>
+    <li>
+      <a href="#OmegaT_and_TMX_files">Az OmegaT és a TMX-állományok</a>
 
-	<ul>
-		<li><a href="#OmegaT_and_TMX_files">Az OmegaT és a TMX-állományok</a>
-			<ul>
-				<li><a href="#TMX_files_location_and_purpose">Hely és rendeltetés</a></li>
-				<li><a href="#TMX_backup">A TMX biztonsági mentése</a></li>
-				<li><a href="#TMX_files_and_language">A TMX és a nyelv</a></li>
-			</ul>
-		</li>
-		<li><a href="#keeping_a_memory">Hogyan emlékezik az OmegaT a fordításaira</a></li>
-		<li><a href="#using_memories">Más fordítási eszközökkel készült memóriák használata</a>
-			<ul>
-				<li><a href="#importing_files">Állományok importálása</a></li>
-				<li><a href="#imported_files_handling">Importált állományok kezelése</a></li>
-			</ul>
-		</li>
-		<li><a href="#using_OmegaT_TM">Az OmegaT-vel készült memóriák felhasználása más fordítási eszközökben</a></li>
-		<li><a href="#upgrading_TM">Fordítási memóriák frissítése</a></li>
-	</ul>
+      <ul>
+        <li><a href="#TMX_files_location_and_purpose">Hely és rendeltetés</a></li>
 
+        <li><a href="#TMX_backup">A TMX biztonsági mentése</a></li>
 
-<hr>
+        <li><a href="#TMX_files_and_language">A TMX és a nyelv</a></li>
+      </ul>
+    </li>
 
-	<a name="OmegaT_and_TMX_files" id="OmegaT_and_TMX_files"></a>
-	<h1>Az OmegaT és a TMX-állományok</h1>
+    <li><a href="#keeping_a_memory">Hogyan jegyzi meg az OmegaT az Ön fordításait?</a></li>
 
-	<a name="TMX_files_location_and_purpose" id="TMX_files_location_and_purpose"></a>
-	<h2>A TMX-állományok helye és rendeltetése</h2>
+    <li><a href="#Using_TMs_from_previous_projects">Korábbi projektekből származó fordítási memóriák felhasználása</a></li>
 
-	<p>Az OmegaT a TMX-állományokat 3 különböző helyen használja.</p>
+    <li>
+      <a href="#using_memories">Más fordítási eszközökkel készült memóriák felhasználása</a>
 
-	<ul>
-		<li><p>Az <code>/omegat/</code> mappában van a <code>project_save.tmx</code> és esetlegesen a TMX-állományokról készült biztonsági mentések.</p>
-		<p>A &lt;c1&gt;project_save.tmx&lt;/c1&gt;-állomány tartalmazza a projekt kezdete óta rögzített összes szövegrészt.</p></li>
-		<li><p>A projekt főmappájába 3 TMX-állomány kerül:<ol>
-				<li><code>projekt_neve-omegat.tmx</code></li>
-				<li><code>projekt_neve-level1.tmx</code></li>
-				<li><code>projekt_neve-level2.tmx</code></li>
-			</ol>(a <i>projekt_neve</i> a projektjének a neve).<p>Ezek az állományok tartalmazzák a /source/ mappában lévő forrásnyelvi és célnyelvi szövegrészeket (általában a lefordított állományok létrehozásakor elkészült állapotban).</p>
-				<ul>
-				<li>A <code>level1</code> állományok csak szöveges információkat tartalmaznak.</li>
-				<li>A <code>level2</code> állományban helyet kapnak az OmegaT saját címkéi megfelelő TMX-címkék formájában, így ez az állomány a formázási információkkal együtt felhasználható vagy olyan fordítási eszközben, amely támogatja a 2. szintű TMX-memóriák használatát, vagy magában az OmegaT-ben.</li>
-				<li>A <code>omegat</code> állomány a formázási információkkal együtt felhasználható egy másik OmegaT projektben.</li>
-			</ul>
+      <ul>
+        <li><a href="#importing_files">Állományok importálása</a></li>
 
+        <li><a href="#imported_files_handling">Importált állományok kezelése</a></li>
+      </ul>
+    </li>
 
-		</li><li><p>A <code>/tm/</code> mappa tetszőleges számú TMX-állományt tartalmazhat.</p>
-		
-		<p>Az ilyen állományoknak helyesen formált TMX-állományoknak kell lenni, és egyaránt tartalmazhatnak csak szöveges információt (1. szintű TMX), OmegaT szerinti szöveges és formázási információt (omegat TMX), illetve TMX szerinti szöveges és formázási információt (2. szintű  TMX).</p></li>
-	</ul>
+    <li><a href="#using_OmegaT_TM">Az OmegaT-vel készült memóriák felhasználása más fordítási eszközökben</a></li>
+    
+    <li><a href="#pseudo_translate">Munkamemória</a></li>
 
-	<a name="TMX_backup" id="TMX_backup"></a>
-	<h2>A TMX biztonsági mentése</h2>
-	
-	<p>Fordítás közben az OmegaT a folyamat mindenkori eredményét a projekt <code>/omegat</code> nevű alkönyvtárában lévő fordítási memóriában tárolja.</p>
-	
-	<p>Emellett az OmegaT a fordítási memóriáról biztonsági másolatot készít egy <code>project_save.tmx.YEARMMDDHHNN.bak</code> nevű állományban, amikor a projektet megnyitja vagy újból betölti. A YEAR az évszám 4 számjegye, az MM a hónap, a DD a nap, a HH és az NN pedig a fordítási memória korábbi mentésének  órája és perce.</p>
-	
-	<p>Ha úgy gondolja, fordítási adatok vesztek el, kövesse az alábbi eljárást:<ol>
-			<li>zárja be a projektet</li>
-			<li>nevezze át a <code>project_save.tmx</code> állományt valami könnyen megjegyezhetőre (pl. <code>project_save.tmx.ideiglenes</code>-re)</li>
-			<li>válassza ki azt a biztonsági mentésű fordítási memóriát, amelyik feltehetőleg tartalmazza a keresett adatokat</li>
-			<li>nevezze át <code>project_save.tmx</code>-re</li>
-			<li>nyissa meg a projektet</li>
-		</ol>
+    <li><a href="#upgrading_TM">A fordítási memóriák frissítése</a></li>
+  </ul>
+  <hr>
+  <a name="OmegaT_and_TMX_files" id="OmegaT_and_TMX_files"></a>
 
+  <h2>Az OmegaT és a TMX-állományok</h2><a name="TMX_files_location_and_purpose" id=
+  "TMX_files_location_and_purpose"></a>
 
-	<a name="TMX_files_and_language" id="TMX_files_and_language"></a>
-	<h2>A TMX-állományok és a nyelv</h2>
+  <h3>A TMX-állományok - helyük és rendeltetésük</h3>
 
-	<p>A TMX-állományok olyan <i>fordítási egységekből</i> állnak, amelyek különböző nyelveken rögzített egyenértékű szövegrészeket jelentenek. A fordítási egység legalább két <i>fordításiegység-változatból</i> (tuv) épül fel. Ezek bármelyike lehet forrásszöveg vagy célnyelvi szöveg.</p>
+  <p>Az OmegaT a TMX-állományokat 3 különböző helyen használja.</p>
 
-	<p>A projekt beállításai döntik el, melyik lesz a forrásnyelv, és melyik a célnyelv. Így az OmegaT a forrásnyelvi kódnak megfelelő <strong>tuv</strong>ot veszi alapul forrásszövegként, a célnyelvnek megfelelő <strong>tuv</strong>ot pedig célnyelvi nyelvkódként és szövegrészként kezeli. Az OmegaT ezeket a következő két szabványos jelölés alapján ismeri fel:</p>
+  <ul>
+    <li>
+      <p>Az <em>/omegat/</em> mappában telálható a <em>project_save.tmx</em> és adott esetben a TMX-állományokról készült biztonsági mentések.</p>
 
-	<ul>
-		<li>két betű (pl.: <strong>JA</strong> a japán esetén), vagy</li>
-		<li>2 betűs nyelvkód, melyet 2 betűs országkód (pl. <strong>EN-US</strong>) követ.</li>
-	</ul>
+      <p>A <em>project_save.tmx</em> állomány tartalmazza a projekt kezdete óta rögzített összes szövegegységet.</p>
+    </li>
 
-	<p>A nyelvek és országok kódjainak részleges felsorolását lásd a <a href="languages.html">Nyelvek</a> alatt.</p>
+    <li>
+      <p>A projekt fő mappájába 3 TMX-állomány kerül:</p>
 
-	<p>Ha teljes az egyezés a projekt nyelvkódjai és a TMX nyelvkódjai között, akkor a szövegrészek betöltődnek a memóriába. Ha a kódok csak a nyelv tekintetében egyeznek, de az országot illetően nem, akkor a szövegrészek szintén betöltődnek a memóriába. Ha sem a nyelvkód, sem az országkód nem egyezik, akkor a szövegrészek nem töltődnek be a memóriába.</p>
+      <ol>
+        <li><em>project_name-omegat.tmx</em></li>
 
+        <li><em>project_name-level1.tmx</em></li>
 
-<hr>
+        <li><em>project_name-level2.tmx</em></li>
+      </ol>(a <i>project_name</i> a projekt neve).<p>Ezek az állományok tartalmazzák a /source/ mappa tartalmának megfelelő forrásnyelvi és célnyelvi szövegegységeket (rendszerint akkor, amikor létrejönnek a lefordított állományok).</p>
 
-	<a name="keeping_a_memory" id="keeping_a_memory"></a>
-	<h1>Hogyan emlékezik az OmegaT a fordításaira</h1>
+      <ul>
+        <li>A <em>level1</em> olyan TMX, amely csak szöveges információkat tartalmaz.</li>
 
-	<p>A <code>project_save.tmx</code>-állomány tartalmazza a projekt kezdete óta rögzített összes szövegrészt. Ha bármilyen módosítást hajt végre például a projekt szövegdarabolásán, a <code>project_save.tmx</code> rögzíteni fogja az újonnan fordított párokat, de megőrzi az összes korábbi információt is.</p>
-	
-	<p>Ez esetlegesen a Bizonytalan egyezések ablakban <strong>pár nélküli</strong> szövegrészek megjelenését idézheti elő. Az ilyen egyezések már nem létező, de még a módosítások végrehajtása előtt rögzített szövegrészekre hivatkoznak. Ha a módosítás tévesen történt, térjen vissza a korábbi beállításhoz, melynek eredményeként a korábban rögzített egyezések ismét megjelennek.</p>
+        <li>A <em>level2</em> olyan TMX, amelyben helyet kapnak az OmegaT címkéi megfelelő TMX-címkék formájában, így ez az állomány a formázási információkkal együtt felhasználható akár olyan fordítási eszközben, amely támogatja a 2. szintű TMX-memóriák használatát, akár magában az OmegaT-ben.</li>
 
+        <li>Az <em>omegat</em> olyan TMX, amelyben helyet kapnak az OmegaT saját formázó címkéi, így ez az állomány a formázási információkkal együtt felhasználható más OmegaT projektekben.</li>
+      </ul>
 
-<hr>
+      </li><li>A <em>/tm/</em> mappa tetszőleges számú TMX-állományt tartalmazhat. Az ilyen állományoknak helyesen formált TMX-állományoknak kell lenni, és egyaránt tartalmazhatnak csak szöveges információt (1. szintű TMX), OmegaT szerinti szöveges és formázási információt (omegat TMX), illetve TMX szerinti szöveges és formázási információt (2. szintű  TMX). A közöttük lévő különbségek technikai jellegűek (lásd alább), ezért ja egy korábbi projekt memóriáját kívánja használni, ennek nincs akadálya.</li>
+  </ul>
+  <p>Alternatív megoldásként az OmegaT egy megadott helyen létrehoz egy külön TMX-állományt (az OmegaT formátumában), melyben benne van a projekt összes lefordítandó szövegegysége. Lásd: <a href="#pseudo_translate">munkamemória</a>.</p>
+  
 
-	<a name="using_memories" id="using_memories"></a>
-	<h1>Más fordítási eszközökkel készült memóriák használata</h1>
+  <a name="TMX_backup" id="TMX_backup"></a>
+  <h3>A TMX biztonsági mentése</h3>
 
-	<a name="importing_files" id="importing_files"></a>
-	<h2>Állományok importálása</h2>
+  <p>Fordítás közben az OmegaT a folyamat mindenkori eredményét a projekt <em>/omegat</em> nevű alkönyvtárában lévő fordítási memóriában tárolja.</p>
 
-	<p>Az OmegaT (1. és 2. szintű) 1.1-1.4b verziójú TMX importálását támogatja. Ennek köszönhetően az OmegaT képes beolvasni más eszközökkel készített fordítási memóriákat. Ugyanakkor az OmegaT nem <i>teljesen</i> támogatja 2. szintű TMX importálását (melyek a fordítás mellett a formázást is tartalmazzák), ezért a bizonytalan egyezések minősége 2. szintű TMX importálásakor valamivel alacsonyabb lesz.</p>
+  <p>Emellett az OmegaT a fordítási memóriáról minden alkalommal biztonsági másolatot készít egy <em>project_save.tmx.YEARMMDDHHNN.bak</em> nevű állományban, ha a projektet megnyitja vagy újból betölti. Az <em>ÉÉÉÉ</em> az évszám 4 számjegye, a <em>HH</em> a hónap, a <em>NN</em> a nap, az <em>ÓÓ</em> és a <em>PP</em> pedig a fordítási memória korábbi mentésének az órája és perce.</p>
 
-	<a name="imported_files_handling" id="imported_files_handling"></a>
-	<h2>Importált állományok kezelése</h2>
+  <p>Ha úgy véli, hogy elvesztek fordítási adatai, kövesse az alábbi lépéseket:</p>
 
-	<p>Az OmegaT igen szigorú eljárások révén kezeli a fordítási memóriákat (a TMX-állományokat). Ha egy állományban bármilyen hibát észlel, azt az OmegaT be sem tölti.</p>
+  <ol>
+    <li>zárja be a projektet</li>
 
-	<p>Egyes eszközök bizonyos esetekben hibás TMX-állományokat állítanak elő. Ha ilyet kíván az OmegaT-ben referenciaként használni, a hibákat el kell hárítania, amennyiben az állományt az OmegaT nem fogadja el. A hibaelhárítás egyszerű művelet, az OmegaT pedig kapcsolódó hibaüzenettel ad ehhez útmutatást. Ha elakad, segítséget kérhet a <a href="http://groups.yahoo.com/group/OmegaT/">felhasználói csoporttól</a>.</p>
+    <li>nevezze át a <em>project_save.tmx</em> állományt valamilyen könnyen megjegyezhető névre (például <em>project_save.tmx.ideiglenes</em>-re)</li>
 
+    <li>válassza ki azt a fordítási memóriát, amelyik feltételezhetően az Ön által keresett adatokat tartalmazza</li>
 
-<hr>
+    <li>nevezze át <em>project_save.tmx</em>-re</li>
 
-	<a name="using_OmegaT_TM" id="using_OmegaT_TM"></a>
-	<h1>Az OmegaT-vel készült memóriák felhasználása más fordítási eszközökben</h1>
+    <li>nyissa meg a projektet</li>
+  </ol><a name="TMX_files_and_language" id="TMX_files_and_language"></a>
 
-	<p>Az OmegaT (mind 1., mind 2. szintű) 1.1-1.4b verziójú TMX-állományokat exportál. A 2. szintű exportálás nem szabványos szint, ugyanakkor elegendő ahhoz, hogy megfelelő egyezéseket állítson elő 2. szintű TMX-et támogató fordítási eszközök számára. Ha csak szöveges információra van szüksége (formázásra viszont nem), használja az OmegaT által előállított 1. szintű állományt.</p>
+  <h3>A TMX-állományok helye és a nyelv</h3>
 
+  <p>A TMX-állományok olyan <i>fordítási egységekből</i> állnak, amelyek különböző nyelveken rögzített egyenértékű szövegegységeket jelentenek. A fordítási egység legalább két <i>változatból</i> (tuv) épül fel. Ezek bármelyike lehet forrásnyelvi vagy célnyelvi szöveg.</p>
 
-<hr>
+  <p>A projekt beállításai döntik el, melyik lesz a forrásnyelv, és melyik a célnyelv. Így az OmegaT a forrásnyelvi kódnak megfelelő <strong>tuv</strong>-ot veszi alapul forrásszövegként, a célnyelvnek megfelelő <strong>tuv</strong>-ot pedig célnyelvi szövegegységként kezeli. Az OmegaT két szabvány alapján ismeri fel őket:</p>
 
-	<a name="upgrading_TM" id="upgrading_TM"></a>
-	<h1>Fordítási memóriák frissítése</h1>
+  <ul>
+    <li>2 betű (pl. a japán esetén <strong>JA</strong>), illetve</li>
 
-	<p>Az OmegaT korábbi verzióival csak bekezdésekre darabolhatta a forrásszöveget, emellett HTML és Open Document típusú állományok esetén a formázási címkék számozása sem volt következetes. Az OmegaT 1.7.3 az ilyen TMX-állományokat kapásból észleli és frissíti, így jobb lesz a bizonytalan egyezések minősége és jobban támogatja a meglévő fordításokat, tehát ezeket nem szükséges újból előállítania.</p>
+    <li>2 betűs nyelvkód, utána 2 betűs orszűágkód (pl. <strong>EN-US</strong>)</li>
+  </ul>
 
-	<p>Egy projekt TMX-ét csak egyszer frissíti, majd frissített formában rögzíti, a korábbi TMX-állományokat pedig a projekt minden egyes betöltésekor menet közben frissíti. Ne feledje, hogy az OmegaT 1.7.3 változata esetén az állományszűrők módosítása teljesen más daraboláshoz vezethet, ezért egyes esetekben előfordulhat, hogy a fordítást kézzel kell frissítenie.</p>
-	<hr>
+  <p>A nyelvek és országok kódjának részleges felsorolását megtalálja a <a href="languages.html">Nyelvek</a> c. állományban.</p>
 
-	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
+  <p>Ha teljes az egyezés a projekt nyelvkódjai és a TMX nyelvkódjai között, akkor a szövegegységek betöltődnek a memóriába. Ha a kódok csak a nyelv tekintetében egyeznek, de az országot illetően nem, a szövegegységek szintén betöltődnek a memóriába. Ha sem a nyelvkód, sem az országkód nem egyezik, akkor a szövegegységek nem kerülnek bele a memóriába.</p>
+  <hr>
+  <a name="keeping_a_memory" id="keeping_a_memory"></a>
+
+  <h2>Hogyan jegyzi meg az OmegaT az Ön fordításait?</h2>
+
+  <p>A project_save.tmx állomány tartalmazza a projekt kezdete óta rögzített összes szövegegységet. Ha bármilyen módosítást hajt végre például a projekt darabolásán, a <em>project_save.tmx</em> rögzíteni fogja az újonnan fordított párokat, de megőrzi az összes korábbi információt is.</p>
+
+  <p>Ez esetlegesen a Bizonytalan egyezések ablakban <strong>pár nélküli szövegegységek</strong> megjelenését idézheti elő. Az ilyen egyezések már nem létező, a módosítások végrehajtása előtti szövegegységekre hivatkoznak. Ha a módosítás tévesen történt, térjen vissza a korábbi beállításhoz, melynek eredményeként a korábban rögzített egyezések ismét megjelennek.</p>
+  <hr>
+  <a name="Using_TMs_from_previous_projects" id=
+  "Using_TMs_from_previous_projects"></a>
+
+  <h2>Korábbi projektekből származó fordítási memóriák felhasználása</h2>
+
+  <p>Ha egy OmegaT projektben létrehozza a célnyelvi dokumentumokat, a projekt fordítási memóriája három állományba kerül a projekt gyökérkönyvtárában (lásd a fenti leírást). A három TMX-állomány (-<em>omegat.tmx</em>", "<em>-level1.tmx</em>" és "<em>-level2.tmx</em>") tekinthető egyfajta "exportált fordítási memóriának", vagyis munkája kétnyelvű összegzésének.</p>
+
+  <p>Ha egy korábbi projekt fordítási memóriáját kívánja újból felhasználni (például annak okán, hogy az új projekt hasonlít egy korábbira, esetleg terminológiája rokon egy korábbiéval), a fordítási memóriát felhasználhatja mint "bemeneti fordítási memóriát", azaz importálhatja új projektjébe. Ez esetben a használni kívánt memóriát helyezze az új projekt <em>\tm</em> nevű mappájába.</p>
+
+  <p>Alapesetben a <em>\tm</em> mappa a projekt gyökérkönyvtára alá kerül (pl. ..<em>\Projekt\tm)</em>, de ha szükséges, a beállításoknál megadhat egy másik könyvtárat. Ez akkor hasznos, ha gyakran használ fel korábbi memóriákat - például a téma vagy az ügyfél azonossága miatt. Ez esetben ajánlatos a következők végrehajtása:</p>
+
+  <ul>
+    <li>A merevlemez egy alkalmas helyén hozzon létre egy mappát az adott témához vagy ügyfélhez tartozó fordítási memóriákhoz (egy "tárhelyet").</li>
+
+    <li>Ha végez egy projekttel, másolja át a három "exportált" fordítási memória valamelyikét erre a tárhelyre.</li>
+
+    <li>Ha egy új projektbe kezd ugyanazon témán belül vagy ugyanazon ügyfél számára, térjen át a <em>Projekt &gt; Beállítások &gt; Projekt szerkesztése</em> párbeszédablakra és válassza ki mint a fordítási memóriát tartalmazó mappát.</li>
+  </ul>
+
+  <p>A program induláskor a <em>/tm</em> tárhelyen lévő összes TMX-állományt feldolgozza, ezért ha az összes elérhető TMX-állományt itt tárolja, az szükségszerűen lelassítja az OmegaT-t. Érdemes lehet a kifejezetten szükséges állományokat kiemelni (például meghagyhatja őket a <em>/tm</em> alkönyvtárban, de módosíthatja kiterjesztésüket), ha tartalmuk átkerült az adott projekt <em>project_save.tmx</em> állományába.</p>
+
+  <p><a name="using_memories" id="using_memories"></a></p>
+
+  <h2>Más fordítási eszközökkel készült memóriák felhasználása</h2>
+
+  <h3><a name=
+  "importing_files" id="importing_files"></a>Állományok importálása</h3>
+
+  <p>Az OmegaT (1. és 2. szintű) 1.1-1.4b verziójú TMX importálását támogatja. Ennek köszönhetően az OmegaT képes beolvasni más eszközökkel készített fordítási memóriákat. Ugyanakkor az OmegaT nem <i>teljesen</i> támogatja 2. szintű TMX importálását (melyek a fordítás mellett a formázást is tartalmazzák), ezért a bizonytalan egyezések minősége 2. szintű TMX importálásakor valamivel alacsonyabb lesz.</p>
+
+  <h3><a name=
+  "imported_files_handling" id="imported_files_handling"></a>Importált állományok kezelése</h3>
+
+  <p>Az OmegaT igen szigorú eljárások révén kezeli a fordítási memóriákat (azaz a TMX-állományokat). Ha egy állományban bármilyen hibát észlel, azt az OmegaT be sem tölti.</p>
+
+  <p>Egyes eszközök bizonyos esetekben érvénytelen TMX-állományokat állítanak elő. Ha ilyet kíván az OmegaT-ben referenciaként használni, a hibákat el kell hárítania, amennyiben az állományt az OmegaT nem fogadja el. A hibaelhárítás egyszerű művelet, az OmegaT pedig útmutatást ad a kapcsolódó hibaüzenetben. Ha elakad, segítséget kérhet a <a href="http://groups.yahoo.com/group/OmegaT/">felhasználói csoporttól</a>.</p>
+  <hr>
+  <a name="using_OmegaT_TM" id="using_OmegaT_TM"></a>
+
+  <h2>Az OmegaT-vel készült memóriák felhasználása más fordítási eszközökben</h2>
+
+  <p>Az OmegaT (mind 1., mind 2. szintű) 1.4 verziójú TMX-állományokat exportál. A 2. szintű exportálás nem szabványos szint, ugyanakkor elegendő ahhoz, hogy megfelelő egyezéseket állítson elő 2. szintű TMX-et támogató fordítási eszközök számára. Ha csak szöveges információra van szüksége (formázásra viszont nem), használja az OmegaT által előállított 1. szintű állományt.</p>
+  <hr>
+  <a name="pseudo_translate" id="pseudo_translate"></a>
+  <h2>Munkamemória</h2>
+  <p>Előfordulhat, hogy előfeldolgozást vagy a szövegegységek más szempontok szerinti, az OmegaT által nem támogatott feldolgozását szeretné elvégezni. Például létrehozhat egy fordítást tesztelés céljára.</p>
+  <p>Az OmegaT-vel létrehozhat egy külön TMX-állományt, melyben benne van a projekt összes lefordítandó szövegegysége. Ebben a tmx-ben a fordítás lehet<ul><li>a fordítás és a forrásszöveg megegyezik (alapbeállítás)</li>
+  <li>a fordítási egység üres</li></ul>
+  <p>A tmx-nek tetszőleges nevet adhat, de ha nem ad hozzá kiterjesztést, a program automatikusan '.tmx'-kiterjesztést rendel hozzá.</p>
+  <P>Az állomány előállításához a parancssorból használja az alábbi parancsot:</P>
+  <code>java -jar omegat.jar <em>--pseudotranslatetmx=&lt;fájlnév&gt; [pseudotranslatetype=[equal|empty]]</em></code>
+  <p>A &lt;fájlnév&gt; helyére írja be a tetszése szerinti állománynevet a munkakönyvtárral együtt(az útvonal az OmegaT indítási helyétől számítandó).</p>
+  <p>A második  <em>--pseudotranslatetype</em> argumentum megadása opcionális. Értéke lehet <em>equal</em> (ha a forrás és a fordítás megegyezik) vagy <em>empty</em> (ha a fordítás üres), alaphelyzetben: <em>equal</em>.</p>
+  <p>Az előállított tmx-et tetszése szerinti eszközzel dolgozhatja föl. Az OmegaT-ben való újbóli felhasználáshoz:<br> nevezze át <em>project_save.tmx</em>-re és helyezze át a projekt <em>omegat</em> mappájába.</p>
+  <hr>
+
+  <a name="upgrading_TM" id="upgrading_TM"></a>
+  <h2>A fordítási memóriák frissítése</h2>
+
+  <p>Az OmegaT korábbi verzióival csak bekezdésekre darabolhatta a forrásszöveget, emellett a formázást jelölő elemek számozása sem volt következetes HTML és Open Document típusú állományok esetén. Az OmegaT 2.0 az ilyen TMX-állományokat kapásból észleli és frissíti, így jobb lesz a bizonytalan egyezések minősége és jobban támogatja meglévő fordításait, ezért ezeket nem szükséges újból előállítani.</p>
+
+  <p>Egy projekt TMX-ét csak egyszer frissíti, majd frissített formában rögzíti, a korábbi TMX-állományokat pedig a projekt minden egyes betöltésekor menet közben frissíti. Ne feledje, hogy az OmegaT 2.0 változata esetén az állományszűrők módosítása teljesen más daraboláshoz vezethet, ezért egyes ritka esetekben előfordulhat, hogy a fordítást kézzel kell frissítenie.</p>
+  <hr>
+  <table summary="csak formázás"  style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a> </td>
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

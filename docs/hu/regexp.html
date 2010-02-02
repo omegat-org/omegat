@@ -1,192 +1,733 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Reguláris kifejezések - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Reguláris kifejezések - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
+
 <body>
+  <h2>Reguláris kifejezések</h2>
 
-	<h1>A reguláris kifejezések szerkezete</h1>
+  <p>A keresésekben és a szövegdarabolásban használatos reguláris kifejezések megegyeznek a Java által támogatottakkal. További információkat talál itt: <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>. További hivatkozásokat és példákat talál alább.&nbsp;</p>
 
-	<p>A keresésekben és szövegdarabolásban használatos reguláris kifejezések megegyeznek a Java által támogatottakkal. Ha további információkra van szüksége, ezeket megtalálja itt: <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Egyszerű oktatóprogramot számos helyen találhat a neten (pl. <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+  <table summary="csak formázás" style="width: 80%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="width: 40%;">
+          <h3><a href="#Flags__">Beállítás</a></h3>
+        </td>
 
+        <td style="width: 60%;">
+          <h3><a href="#Characters_">Karakterek</a></h3>
+        </td>
+      </tr>
 
-	<table border="0" cellpadding="3" cellspacing="0">
+      <tr>
+        <td>
+          <h3><a href="#Quotation_">Idézőkarakter</a></h3>
+        </td>
 
-		<tr>
-			<td width="40%"><h2>Az alábbi szerkezet:</h2></td>
-			<td><h2>A következő egyezésnek felel meg:</h2></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Jelölők</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>(?i)</code></td>
-			<td>Kikapcsolja a nagy- és kisbetűk közötti különbségtételt (alaphelyzetben a minta érzékeny a kis- és nagybetűkre).</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Karakterek</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>x</strong></td>
-			<td>Az <strong>x</strong> karakter, kivéve az alábbiakat...</td>
-		</tr>
-		<tr>
-			<td><code>\u</code><strong>hhhh</strong></td>
-			<td>A hexadecimális&nbsp;&nbsp;<code>0x</code><strong>hhhh</strong> karakter</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\t</code></td>
-			<td>A tabulátor (<code>'\u0009'</code>)</td>
-		</tr>
-		<tr>
-			<td><code>\n</code></td>
-			<td>Az új sor (soremelés) (<code>'\u000A'</code>)</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\r</code></td>
-			<td>A kocsivissza (<code>'\u000D'</code>)</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Idézőkarakter</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\</code></td>
-			<td>Semmi, mindössze eredeti jelentésében idézi a következő karaktert. Erre akkor van szükség, ha a <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakarakterekre önmagukban szeretne rákeresni.</td>
-		</tr>
-		<tr>
-			<td><code>\\</code></td>
-			<td>Ezzel kereshet magára a visszaperjelre</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\Q</code></td>
-			<td>Semmi, csak idéz minden karaktert az <code>\E</code>-ig</td>
-		</tr>
-		<tr>
-			<td><code>\E</code></td>
-			<td>Semmi, csak lezárja a <code>\Q</code>-val megkezdett idézést</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Karakterosztályok</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>[abc]</code></td>
-			<td>az <code>a</code>, <code>b</code> vagy <code>c</code> alkotta osztály (egyszerű osztály)</td>
-		</tr>
-		<tr>
-			<td><code>[^abc]</code></td>
-			<td>Az <code>a</code>, <code>b</code> vagy <code>c</code> kivételével bármely karakter (tagadás)</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>[a-zA-Z]</code></td>
-			<td><code>a</code>-tól <code>z</code>ig vagy <code>A</code>-tól <code>Z</code>-ig terjedő tartomány</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Sajátos jelentésű karakterek</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>.</code></td>
-			<td>Bármely karakter (kivéve a sort lezárókat)</td>
-		</tr>
-		<tr>
-			<td><code>\d</code></td>
-			<td>Számjegy: <code>[0-9]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\D</code></td>
-			<td>Nem számjegy (betű): <code>[^0-9]</code></td>
-		</tr>
-		<tr>
-			<td><code>\s</code></td>
-			<td>Helykihagyó karakter: <code>[ \t\n\x0B\f\r]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\S</code></td>
-			<td>Nem helykihagyó karakter: <code>[^\s]</code></td>
-		</tr>
-		<tr>
-			<td><code>\w</code></td>
-			<td>Szó: <code>[a-zA-Z_0-9]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\W</code></td>
-			<td>Nem szó: <code>[^\w]</code></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Határolók</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>^</code></td>
-			<td>Sor eleje</td>
-		</tr>
-		<tr>
-			<td><code>$</code></td>
-			<td>Sor vége</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\b</code></td>
-			<td>Szóhatár</td>
-		</tr>
-		<tr>
-			<td><code>\B</code></td>
-			<td>Nem szóhatár</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Tág kvantorok</h3></td>
-		</tr>
-		<tr>
-			<td colspan="2">A lehető legtágabb egyezéssel keresnek. Például az <code>a+</code> megtalálja az <code>aaa</code>-t az <code>aaabbb</code>-ben</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>?</code></td>
-			<td><strong>X</strong> nulla vagy egy előfordulása</td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>*</code></td>
-			<td><strong>X</strong> nulla vagy több előfordulása</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>+</code></td>
-			<td><strong>X</strong> legalább egy előfordulása</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Szűk kvantorok</h3></td>
-		</tr>
-		<tr>
-			<td colspan="2">A lehető legszűkebb egyezéssel keresnek. Például az <code>a+?</code> az <code>a</code> első előfordulását találja meg az <code>aaabbb</code>-ben</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>??</code></td>
-			<td><strong>X</strong> nulla vagy egy előfordulása</td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>*?</code></td>
-			<td><strong>X</strong> nulla vagy több előfordulása</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>+?</code></td>
-			<td><strong>X</strong> legalább egy előfordulása</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Logikai operátorok</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>XY</strong></td>
-			<td><strong>X</strong>, utána <strong>Y</strong></td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
-			<td>Vagy <strong>X</strong>, vagy <strong>Y</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>(</code><strong>XY</strong><code>)</code></td>
-			<td><strong>XY</strong> egyetlen csoportként</td>
-		</tr></table>
+        <td>
+          <h3><a name="Classes_for_Uncode_blocks_and_" id=
+          "Classes_for_Uncode_blocks_and_"></a><a href=
+          "#Classes_for_Uncode_blocks_and_">Unikódos blokkok és kategóriák osztályai</a></h3>
+        </td>
+      </tr>
 
-	<hr>
+      <tr>
+        <td>
+          <h3><a href="#Character_classes_">Karakterosztályok</a></h3>
+        </td>
 
-	<a href="legalNotices.html">Jogi tudnivalók</a>
+        <td>
+          <h3><a href="#Predefined_character_classes_">Sajátos jelentésű karakterek</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width: 257px;">
+          <h3><a href="#Boundary_matchers_">Határolók</a></h3>
+        </td>
+
+        <td style="width: 517px;">
+          <h3><a href="#Greedy_quantifiers_">Tág kvantorok</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Reluctant_non-greedy_quantifiers_">Szűk kvantorok</a></h3>
+        </td>
+
+        <td>
+          <h3><a href="#Logical_operators_">Logikai operátorok</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#References_and_examples_">Eszközök és példák a reguláris kifejezések használatához</a></h3>
+        </td>
+      </tr>
+    </tbody>
+  </table>&nbsp;&nbsp; &nbsp;
+
+  <p>&nbsp;<br></p>
+  <hr>
+
+  <table summary="csak formázás" border="0" cellpadding="3" cellspacing="0">
+    <col width="15%">
+    <col width="80%">
+
+    <tbody>
+      <tr>
+        <td width="355">
+          <h3>Kifejezés</h3>
+        </td>
+
+        <td width="877">
+          <h3>Jelentése</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Flags__" id="Flags__"></a>Beállítás</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(?i)</code></p>
+        </td>
+
+        <td width="877">
+          <p>Kikapcsolja a nagy- és kisbetűk közötti különbségtételt (alaphelyzetben a minta érzékeny a kis-/nagybetűkre).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Characters_" id="Characters_"></a>Karakterek</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>x</code></p>
+        </td>
+
+        <td width="877">
+          <p>Az <strong>x</strong> karakter, kivéve az alábbiakat...</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\uhhhh</code></p>
+        </td>
+
+        <td width="877">
+          <p>A hexadecimális&nbsp;&nbsp;<code>0x</code><strong>hhhh</strong> karakter</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\t</code></p>
+        </td>
+
+        <td width="877">
+          <p>A tabulátor (<code>'\u0009'</code>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\n</code></p>
+        </td>
+
+        <td width="877">
+          <p>Az új sor (soremelés) (<code>'\u000A'</code>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\r</code></p>
+        </td>
+
+        <td width="877">
+          <p>A kocsivissza (<code>'\u000D'</code>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\f</tt></p>
+        </td>
+
+        <td width="877">
+          <p>A lapemelés (<tt>'\u000C'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\a</tt></p>
+        </td>
+
+        <td width="877">
+          <p>A jelző (csengő) karakter (<tt>'\u0007'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\e</tt></p>
+        </td>
+
+        <td width="877">
+          <p>A váltókarakter (<tt>'\u001B'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\c</tt><i>x</i></p>
+        </td>
+
+        <td width="877">
+          <p>Az <i>x</i>-nek megfelelő vezérlőkarakter</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>n</i></p>
+        </td>
+
+        <td width="877">
+          <p>Az oktális <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7) értékű karakter</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\0</tt><i>nn</i></p>
+        </td>
+
+        <td width="877">
+          <p>Az oktális <tt>0</tt><i>nn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7) értékű karakter</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>mnn</i></p>
+        </td>
+
+        <td width="877">
+          <p>Az oktális <tt>0</tt><i>mnn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7) értékű karakter</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\x</tt><i>hh</i></p>
+        </td>
+
+        <td width="877">
+          <p>A hexadecimális&nbsp;<tt>0x</tt><i>hh</i> értékű karakter</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Quotation_" id="Quotation_"></a>Idézőkarakter</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\</code></p>
+        </td>
+
+        <td width="877">
+          <p>Semmi, mindössze eredeti jelentésében idézi a következő karaktert. Erre akkor van szükség, ha a <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakarakterekre önmagukban szeretne rákeresni.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\\</code></p>
+        </td>
+
+        <td width="877">
+          <p>Ezzel kereshet magára a vissza perjelre.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\Q</code></p>
+        </td>
+
+        <td width="877">
+          <p>Minden karaktert idéz az <code>\E</code>-ig.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\E</code></p>
+        </td>
+
+        <td width="877">
+          <p>Lezárja a <tt>\Q</tt>-val megkezdett idézést</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Classes_for_Unicode_blocks_and" id=
+          "Classes_for_Unicode_blocks_and"></a>Unikódos blokkok és kategóriák osztályai</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Egy karakter a görög blokkon belül (egyszerű <a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc"> blokk</a>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\p{Lu}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Nagybetű (egyszerű <a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc"> kategória</a>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{Sc}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Pénznemjel</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>[?] \p{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Bármely karakter a görög blokk kivételével (tagadás)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td height="33" width="355">
+          <p><code><tt>[\p{L}&amp;&amp;[^\p{Lu}]]</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Bármely nem nagybetűs betű (kivonás)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Character_classes_" id=
+          "Character_classes_"></a>Karakterosztályok</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p>a <code>a</code>, <code>b</code> vagy <code>c</code> alkotta osztály (egyszerű osztály)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>[^abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p>A <code>a</code>, <code>b</code> vagy <code>c</code> kivételével bármely karakter (tagadás)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[a-zA-Z]</code></p>
+        </td>
+
+        <td width="877">
+          <p>Az <code>a</code>-tól <code>z</code>-ig vagy <code>A</code> -tól <code>Z</code>-ig (tartomány)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Predefined_character_classes_" id=
+          "Predefined_character_classes_"></a>Sajátos jelentésű karakterek</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>.</code></p>
+        </td>
+
+        <td width="877">
+          <p>Bármely karakter (kivéve a sort lezárókat)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\d</code></p>
+        </td>
+
+        <td width="877">
+          <p>Számjegy: <code>[0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\D</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nem számjegy: <code>[^0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nem nyomtatott karakter: <code>[ \t\n\x0B\f\r]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\S</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nyomtatott karakter: <code>[^\s]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\w</code></p>
+        </td>
+
+        <td width="877">
+          <p>Szó: <code>[a-zA-Z_0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\W</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nem szó: <code>[^\w]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Boundary_matchers_" id="Boundary_matchers_"></a>Határolók</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>^</code></p>
+        </td>
+
+        <td width="877">
+          <p>Sor eleje</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>$</code></p>
+        </td>
+
+        <td width="877">
+          <p>Sor vége</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\b</code></p>
+        </td>
+
+        <td width="877">
+          <p>Szóhatár</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\B</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nem szóhatár</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Greedy_quantifiers_" id="Greedy_quantifiers_"></a>Tág kvantorok</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>A lehető legtágabb egyezéssel keresnek. Például az <code>a+</code> megtalálja az <code>aaa</code>-t az <code>aaabbb</code>-ben</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>?</code></p>
+        </td>
+
+        <td width="877">
+          <p>az <strong>X</strong> nulla vagy egy előfordulása</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*</code></p>
+        </td>
+
+        <td width="877">
+          <p>Az <strong>X</strong> nulla vagy több előfordulása</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+</code></p>
+        </td>
+
+        <td width="877">
+          <p>Az <strong>X</strong> legalább egy előfordulása</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Reluctant_non-greedy_quantifiers_" id=
+          "Reluctant_non-greedy_quantifiers_"></a>Szűk kvantorok</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>A lehető legszűkebb egyezéssel keresnek. Például az <code>a+?</code> az <code>a</code> első előfordulását találja meg az <code>aaabbb</code>-ben</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>?</code></p>
+        </td>
+
+        <td width="877">
+          <p>az <strong>X</strong> nulla vagy egy előfordulása</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*?</code></p>
+        </td>
+
+        <td width="877">
+          <p>Az <strong>X</strong> nulla vagy több előfordulása</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+?</code></p>
+        </td>
+
+        <td width="877">
+          <p>Az <strong>X</strong> legalább egy előfordulása</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Logical_operators_" id="Logical_operators_"></a>Logikai operátorok</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>XY</strong></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, utána <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>|</code><strong>Y</strong></p>
+        </td>
+
+        <td width="877">
+          <p>Vagy <strong>X</strong>, vagy <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(</code><strong>XY</strong><code>)</code></p>
+        </td>
+
+        <td width="877">
+          <p>Az <strong>XY</strong> egyetlen csoportként</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <br>
+
+  <h2><a name="References_and_examples_" id=
+  "References_and_examples_"></a>Eszközök és példák a reguláris kifejezések használatához</h2><br>Reguláris kifejezések kidolgozására és ellenőrzésére számos interaktív eszköz érhető el. Ezek mindegyike nagyjából hasonlóképpen működik (lásd az alábbi példát a FireFoxhoz való, reguláris kifejezések ellenőrzésére szolgáló segédprogram példája alapján): a reguláris kifejezés (felső bejegyzés) elemzi a keresés szövegét (középső szövegdoboz) , majd az eredményt tartalmazó szövegdobozban közli a találatokat.<br> <br> <img style="width: 726px; height: 524px;" alt=
+  "Segédprogram FireFoxhoz a reguláris kifejezések ellenőrzésére" src=
+  "images/RegexTester.png"><br> <br> Lásd a Windows,Linux, Mac, FreeBSD köznyezetben használatos önálló <a href="http://www.weitz.de/regex-coach/">Regex Coach</a>&nbsp;eszközt, amely alapvetően azonos a fenti példában látottal.<br> <br> Maga az OmegaT is komoly példatárat közöl a reguláris kifejezések használatát illetően (lásd: Beállítások &gt; <a href=
+  "segmentation.html">Szövegdarabolás...</a>). Az alábbi felsorolásban olyan kifejezések láthatók, amelyek hasznosak lehetnek a fordítási memóriában való kereséshez:<br>
+  <br>
+
+  <table summary="csak formázás" style="text-align: left; width: 600px;"
+  border="1" cellpadding="0" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="font-weight: bold;">Reguláris kifejezés</td>
+
+        <td style="font-weight: bold;">Mire keres rá:</td>
+      </tr>
+
+      <tr>
+        <td>(\b\w+\b)\s\1\b<br></td>
+
+        <td>szóismétlődés&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>[?] \s</td>
+
+        <td>vesszők és pontok vegyesen</td>
+      </tr>
+
+      <tr>
+        <td>\. \s$</td>
+
+        <td>fölös szóközök a sorvégi pont után</td>
+      </tr>
+
+      <tr>
+        <td>\s+a\s+[aeiou]</td>
+
+        <td>&nbsp;angol esetén:&nbsp;magánhangzóval kezdődő szavak előtt "an" állhat az "a" helyett</td>
+      </tr>
+
+      <tr>
+        <td>\s+an\s+[^aeiou]</td>
+
+        <td>&nbsp;angol esetén: a fenti ellenőrzés fordítottja mássalhangzókra ("an" helyett "a")</td>
+      </tr>
+
+      <tr>
+        <td>\s\s+</td>
+
+        <td>egynél több szóköz</td>
+      </tr>
+
+      <tr>
+        <td>\.[A-Z]</td>
+
+        <td>pont és új mondat kezdete között hiányzó szóköz</td>
+      </tr>
+    </tbody>
+  </table><br>
+  <br>
+  <hr>
+
+  <table summary="csak formázás" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

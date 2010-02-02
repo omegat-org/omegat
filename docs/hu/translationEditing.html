@@ -1,54 +1,96 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Fordítások szerkesztése - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Fordítások szerkesztése - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
+
 <body>
+  <h2>A szerkesztő mező működése</h2>
 
-	<h1>A szerkesztő mező viselkedése</h1>
+  <ul>
+    <li>
+      <p><a href="#auto_insert">Egyezés automatikus beillesztése</a></p>
+    </li>
 
-	<ul>
-		<li><a href="#auto_insert">Egyezés automatikus beszúrása</a></li>
-		<li><a href="#validation">Nem fordítandó szövegrészek</a></li>
-	</ul>
+    <li>
+      <p><a href="#validation">Nem módosítható szövegegységek</a></p>
+    </li>
+  </ul>
 
+  <p>A szerkesztő mező viselkedését a következő módokon befolyásolhatja:</p>
 
-	<p>A szerkesztési mező viselkedését az alábbiak szerint szabályozhatja:</p>
-	
-	<ul>
-		<li>A legjobb egyezés automatikus beszúrása</li>
-		<li>A lefordított szövegrészeknek az eredetivel azonosnak tekintése</li>
-	</ul>
-	
-	<hr>
-	
-	<a name="auto_insert" id="auto_insert"></a>
-	<h1>Egyezés automatikus beszúrása</h1>
-	
-	<p>Ha az állományokat szövegrészről szövegrészre haladva fordítja, akkor egy adott időben mindig egyetlen szövegrésszel van elfoglalva. Előfordulhat, hogy a szövegrészek között mozogva szeretné, ha a szerkesztési mezőben megjelenne a fordítás vagy a forrásszöveg.</p>
-	
-	<p>A <strong>Beállítások → Szerkesztési mód...</strong> pontban az OmegaT az alábbi lehetőségeket biztosítja:</p>
+  <ul>
+    <li>
+      <p>A legvalószínűbb bizonytalan egyezés automatikus beszúrása</p>
+    </li>
 
-	<dl>
-		<dt><strong>A forrásszöveget</strong></dt><dd>ekkor az OmegaT automatikusan kitölti a szerkesztési mezőt a forrásszöveggel. Ez különösen hasznos, ha a szövegben egy sor olyan szimbólum és tulajdonnév van, amelyet változatlanul szeretne megtartani.</dd>
-		<dt><strong>Hagyja a szerkesztési mezőt üresen</strong></dt><dd>az OmegaT a szerkesztési mezőt üresen hagyhatja. Ilyenkor a fordítást úgy gépelheti be, hogy a forrásszöveget nem kell kitörölni, amivel megtakaríthat egy-két leütést (<code>Ctrl+A</code> és <code>Del</code>).</dd>
-		<dt><strong>A legjobb bizonytalan egyezés beszúrása</strong></dt><dd>Az OmegaT-vel beszúrathatja a forrásszöveg szerinti legvalószínűbb fordítást, ha annak hasonlósági küszöbértékét itt meghatározza.</dd>
-	</dl>
+    <li>
+      <p>A fordítás az eredetivel egyezőnek tekintendő</p>
+    </li>
+  </ul>
+  <hr>
 
-<hr>
+  <h2><a name="auto_insert" id="auto_insert"></a>Egyezés automatikus beillesztése</h2>
 
-	<a name="validation" id="validation"></a>
-	<h1>Nem fordítandó szövegrészek</h1>
+  <p>Fordítás közben szövegegységről szövegegységre halad, egy adott időpontban mindig egy szövegegységet dolgoz fel. A szövegegységek között mozogva hasznos lehet, ha a szerkesztő mezőben megjelenik vagy egy korábbról meglévő fordítás, vagy a forrásnyelvi szöveg.</p>
 
-	<p>A fordítandó dokumentumokban előfordulhatnak olyan kereskedelmi védjegyek, nevek és más tulajdonnevek, amelyeket a fordításban változatlan formában kell megőrizni. Az ilyen szövegrészekkel kapcsolatosan két stratégia alkalmazható.</p>
+  <p>A <strong>Beállítások → Szerkesztési mód...</strong> menüpontban az OmegaT az alábbi lehetőségeket biztosítja:</p>
 
-	<p>Először is dönthet úgy, hogy nem fordítja le őket, habár ha később megfeledkezik arról, hogy ezeket változatlanul hagyta, a fordítás ellenőrzésekor pedig lefordítja őket, az OmegaT ezeket lefordítatlanként mutatja ki. Ez az alapbeállítás.</p>
+  <table summary="csak formázás" cellpadding="2" cellspacing="2">
+    <tr valign="top">
+      <td>
+        <p><strong>A forrásszöveget</strong></p>
+      </td>
 
-	<p>Másodszor az OmegaT-vel eltárolhatja a fordítást akkor is, ha az egyezik a forrásszöveggel, így viszont az OmegaT úgy értelmezi, hogy a szöveget lefordította, csak úgy döntött, hogy az megegyezik a forrásszöveggel. Térjen át a <strong>Beállítások -&gt; Szerkesztési mód...</strong> pontra és jelölje be az <strong>A fordítás lehet azonos a forrással&lt;/s4&gt; opciót.</p>
+      <td>
+        <p>a szerkesztési mezőt automatikusan kitöltheti a forrásszöveggel. Ez különösen hasznos, ha a szövegben egy sor olyan szimbólum és tulajdonnév van, amelyet változatlanul szeretne megtartani.</p>
+      </td>
+    </tr>
 
-	<hr>
+    <tr valign="top">
+      <td>
+        <p><strong>Hagyja a szövegegységet üresen</strong></p>
+      </td>
 
-	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
+      <td>
+        <p>Az OmegaT a szerkesztési mezőt üresen hagyja. Ilyenkor a fordítást úgy gépelheti be, hogy a forrásszöveget nem kell kitörölni, amivel megtakaríthat egy-két billentyűlenyomást (<code>Ctrl+A</code> és <code>Del</code>).</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>A legvalószínűbb bizonytalan egyezés beszúrása</strong></p>
+      </td>
+
+      <td>
+        <p>Az OmegaT-vel beszúrathatja a fordítandó szöveghez leginkább hasonló szöveget, amennyiben az meghaladja azt a hasonlósági küszöbértéket, amelyet Ön beállított.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="validation" id="validation"></a>Nem módosítható szövegegységek</h2>
+
+  <p>A fordítandó dokumentumokban előfordulhatnak olyan kereskedelmi védjegyek, nevek és más tulajdonnevek, amelyek a fordításban változatlan formában maradnak. Az ilyen szövegegységekkel kapcsolatosan két stratégia alkalmazható.</p>
+
+  <p>Dönthet úgy, hogy nem fordítja le őket, az OmegaT ezeket az egységeket lefordítatlanként jelöli meg. Ez az alapbeállítás.</p>
+
+  <p>Az OmegaT-vel eltárolhatja a fordítást akkor is, ha az egyezik a forrásszöveggel, így viszont az OmegaT úgy értelmezi, hogy a szöveget lefordította, csak Ön úgy döntött, hogy az megegyezik a forrásszöveggel. Ehhez térjen át a <strong>Beállítások -&gt; Szerkesztési mód...</strong> pontra és jelölje be az <strong>A fordítás megegyezhet a a forrásszöveggel </strong> menüpontot.</p>
+  <hr>
+
+  <table summary="csak formázás" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

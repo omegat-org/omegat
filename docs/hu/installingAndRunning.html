@@ -1,308 +1,574 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Az OmegaT telepítése és működtetése - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Az OmegaT leírása - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
 
 <body>
-	<h1>Az OmegaT telepítése és működtetése</h1>
-
-	<ul>
-		<li><a href="#Linux_users">Linux-felhasználók (Intel)</a>
-			<ul>
-				<li><a href="#linux_which">Letöltendő csomag</a></li>
-				<li><a href="#linux_install">Telepítés</a></li>
-				<li><a href="#linux_menu">Az operációs rendszer menüjének beállítása</a>
-					<ul>
-						<li><a href="#menu_kde">KDE-ben</a></li>
-						<li><a href="#menu_gnome">GNOME-ban</a></li>
-					</ul>
-				</li>
-				<li><a href="#linux_running">Az OmegaT működtetése</a></li>
-			</ul>
-		</li>
-		<li><a href="#Windows_users">Windows-felhasználók</a>
-			<ul>
-				<li><a href="#windows_which">Letöltendő csomag</a></li>
-				<li><a href="#windows_install">Telepítés</a></li>
-				<li><a href="#windows_menu">A Windows menüjének beállítása</a></li>
-				<li><a href="#windows_running">Az OmegaT működtetése</a></li>
-			</ul>
-		</li>
-		<li><a href="#MacOSX_users">MacOSX-felhasználók</a>
-			<ul>
-				<li><a href="#osx_which">Letöltendő csomag</a></li>
-				<li><a href="#osx_install">Telepítés</a></li>
-				<li><a href="#osx_dock">Dock-beállítás</a></li>
-				<li><a href="#osx_running">Az OmegaT működtetése</a></li>
-			</ul>
-		</li>
-		<li><a href="#Other_systems">Egyéb rendszerek (Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64)</a>
-			<ul>
-				<li><a href="#other_which">Letöltendő csomag</a></li>
-				<li><a href="#other_install">Telepítés</a></li>
-				<li><a href="#other_menu">Az operációs rendszer menüjének beállítása</a></li>
-				<li><a href="#other_running">Az OmegaT működtetése</a></li>
-			</ul>
-		</li>
-		<li><a href="#command_line">Indítás a parancssorból</a>
-			<ul>
-				<li><a href="#terminal">Parancssori ablak megnyitása</a></li>
-				<li><a href="#script">A futtatási kód módosítása</a></li>
-				<li><a href="#arguments">Parancsargumentumok futtatása</a></li>
-			</ul>
-		</li>
-		<li><a href="#source_build">Az OmegaT forráskódból való előállítása</a>
-			<ul>
-				<li><a href="#build_which">Letöltendő csomag</a></li>
-				<li><a href="#ant">Az előállítás folyamata</a></li>
-			</ul>
-		</li>
-	</ul>
-
-	<hr>
-
-	<a name="Linux_users" id="Linux_users"></a>
-	<h1>Linux-felhasználók (Intel)</h1>
-
-	<a name="linux_which" id="linux_which"></a>
-	<h2>Melyik csomagot töltsem le?</h2>Van a SUN Java 1.4 JRE-jével kompatibilis Java-környezete?<dl>
-		<dt><strong>→ Van</strong></dt>
-		<dd>töltse le az <code>OmegaT_1.7.3_Without_JRE.zip</code>  állományt<br> <em>* Ez a csomag használható bármely platformon, ahol a Java 1.4 JRE-vel kompatibilis JRE van telepítve.</em></dd>
-		<dt><strong>→ Nincs / Nem tudom</strong></dt>
-		<dd>töltse le az <code>OmegaT_1.7.3_Linux.tar.gz</code> állományt<br> <em>* Ez a csomag tartalmazza a SUN Java futtatási környezetét is. Ez a JRE nem ütközik a rendszerén esetlegesen telepített egyéb Java-környezetekkel.</em></dd>
-	</dl>
-
-	<a name="linux_install" id="linux_install"></a>
-	<h2>Az OmegaT telepítése</h2>
-
-	<p>Az OmegaT telepítéséhez mindössze csomagolja ki a letöltött állományt. Ezzel az adott könyvtárban létrejön az omegat/ könyvtár, amelyben megtalálja az OmegaT futtatásához szükséges összes állományt.</p>
-
-	<p>A <code>.tar.gz</code> állomány kicsomagolása:</p>
-
-	<p><code>$ tar xf letöltött_állomány.tar.gz</code></p>
-
-	<a name="linux_menu" id="linux_menu"></a>
-	<h2>Az OmegaT menükhöz (KDE) vagy panelekhez (Gnome) való hozzáadása</h2>
-
-	<a name="menu_kde" id="menu_kde"></a>
-	<h3>KDE-felhasználók</h3>
-
-	<p>Az OmegaT-t az alábbiak szerint adhatja hozzá menüihez:</p>
-
-	<ul>
-		<li><code>Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New Submenu</code></li>
-		<li>Ezt követően egy megfelelő menü kiválasztása után adjon hozzá egy almenüt/menüpontot: <code>File - New Submenu and File - New Item</code>. Az új menüpont nevének adja meg az OmegaT-t.</li>
-		<li>A "Command" mezőben az iránybillentyűvel keresse ki az OmegaT futtatási kódját (a kicsomagolatlan könyvtárban az OmegaT nevű állományt) és válassza ki.</li>
-		<li>Kattintson az ikonra (a Name/Description/Comment mezőktől jobbra) - Other Icons - Browse, majd térjen át az OmegaT-alkalmazás mappájában az /images almappába. Válassza ki az OmegaT.png ikont.</li>
-		<li>Végül a <code>File - Save</code> segítségével mentse el a módosításokat.</li>
-	</ul>
-
-	<a name="menu_gnome" id="menu_gnome"></a>
-	<h3>Gnome-felhasználók</h3>
-
-	<p>Az OmegaT-t hozzáadhatja paneljéhez (a képernyő tetején lévő sávhoz) az alábbiak szerint:</p>
-
-	<ul>
-		<li>A jobb gombbal kattintson a panelre - <code>Add New Launcher</code>.</li>
-		<li>A "Name" mezőben adja meg az "OmegaT"-t; a "Command" mezőben az iránybillentyűvel keresse ki az OmegaT futtatási kódját (a kicsomagolatlan könyvtárban az OmegaT nevű állományt). válassza ki, majd kattintson az OK-ra.</li>
-	</ul>
-
-	<a name="linux_running" id="linux_running"></a>
-	<h2>Az OmegaT működtetése</h2>
-	
-	<p>Ha telepítette az OmegaT-t, elindíthatja az alkalmazást a parancssorból, vagy létrehoz egy kódrészletet a parancssori futtatási paraméterekkel, vagy közvetlenül az <code>OmegaT.jar</code>-ra kattintva elindíthatja az alkalmazást. A módszer az adott csomagtól függően változhat. Ellenőrizze, hogy a <code>PATH</code> beállításai helyesek-e és a <code>.jar</code>-fájlok megfelelően vannak-e társítva a Java futtató programjához.</p>
-	
-	<hr>
-
-	<a name="Windows_users" id="Windows_users"></a>
-	<h1>Windows-felhasználók</h1>
+  <h1>Az OmegaT telepítése és futtatása</h1>Megjegyzés: Alább a 2.0.x az OmegaT 2.0 utolsó stabil verzióját jelöli.<hr>
+
+  <table summary="csak formázás" border="0" cellpadding="3" cellspacing="3">
+    <tbody>
+      <tr>
+        <td width="50%">
+          <h3><a href="#Linux_users">Linux (Intel) felhasználók</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="#linux_which">Letöltendő csomag</a></p>
+            </li>
+
+            <li>
+              <p><a href="#linux_install">Telepítés</a></p>
+            </li>
+
+            <li>
+              <p><a href="#linux_menu">A rendszermenü beállítása</a></p>
+
+              <ul>
+                <li>
+                  <p><a href="#menu_kde">KDE esetén,</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#menu_gnome">GNOME esetén</a></p>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <p><a href="#linux_running">Az OmegaT futtatása</a></p>
+            </li>
+          </ul>
+        </td>
+
+        <td width="50%">
+          <h3><a href="#Windows_users">Windows-felhasználók</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="#windows_which">Letöltendő csomag</a></p>
+            </li>
+
+            <li>
+              <p><a href="#windows_install">Telepítés</a></p>
+            </li>
+
+            <li>
+              <p><a href="#windows_menu">A Windows-menü beállítása</a></p>
+            </li>
+
+            <li>
+              <p><a href="#windows_running">Az OmegaT futtatása</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="50%">
+          <h3><a href="#MacOSX_users">MacOSX-felhasználók</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="#osx_which">Letöltendő csomag</a></p>
+            </li>
+
+            <li>
+              <p><a href="#osx_install">Telepítés</a></p>
+            </li>
+
+            <li>
+              <p><a href="#osx_dock">A Dock beállítása</a></p>
+            </li>
+
+            <li>
+              <p><a href="#osx_running">Az OmegaT futtatása</a></p>
+            </li>
+          </ul>
+        </td>
+
+        <td width="50%">
+          <h3><a href="#Other_systems">Egyéb rendszerek - Solaris SPARC/x86/x64,</a> <a href="#Other_systems">Linux x64/PowerPC, Windows x64</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="#other_which">Letöltendő csomag</a></p>
+            </li>
+
+            <li>
+              <p><a href="#other_install">Telepítés</a></p>
+            </li>
+
+            <li>
+              <p><a href="#other_menu">A rendszermenü beállítása</a></p>
+            </li>
+
+            <li>
+              <p><a href="#other_running">Az OmegaT futtatása</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="installingAndRunning.html#command_line">Indítás a parancssorból</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="installingAndRunning.html#command_line">Parancsablak megnyitása</a></p>
+            </li>
+
+            <li>
+              <p><a href="installingAndRunning.html#script">Az indítási programsor módosítása</a></p>
+            </li>
+
+            <li>
+              <p><a href="installingAndRunning.html#arguments">Az indítási parancs argumentumai</a></p>
+            </li>
+          </ul>
+        </td>
 
-	<a name="windows_which" id="windows_which"></a>
-	<h2>Melyik csomagot töltsem le?</h2>Van a SUN Java 1.4 JRE-jével kompatibilis Java-környezete?<dl>
-		<dt><strong>→ Van</strong></dt>
-		<dd>töltse le az <code>OmegaT_1.7.3_Without_JRE.zip</code>  állományt<br> <em>* Ez a csomag használható bármely platformon, ahol a Java 1.4 JRE-vel kompatibilis JRE van telepítve.</em></dd>
-		<dt><strong>→ Nincs / Nem tudom</strong></dt>
-		<dd>töltse le a <code>OmegaT_1.7.3_Windows.zip</code> állományt<br> <em>* Ez a csomag tartalmazza a SUN Java futtatási környezetét is. Ez a JRE nem ütközik a rendszerén esetlegesen telepített egyéb Java-környezetekkel.</em></dd>
-	</dl>
-
-	<a name="windows_install" id="windows_install"></a>
-	<h2>Az OmegaT telepítése</h2>
-
-	<p>Az OmegaT telepítéséhez hozzon létre egy alkönyvtárat, amelybe bemásolja a letöltött állományt (pl. <code>C:\Program Files\OmegaT</code>). Kétszer rákattintva csomagolja ki. A könyvtárban megtalálja az OmegaT futtatásához szükséges összes állományt. Ezután a letöltött állományt kitörölheti.</p>
-
-	<a name="windows_menu" id="windows_menu"></a>
-	<h2>Az OmegaT hozzáadása a Start-menühöz vagy az Asztalhoz</h2>
+        <td>
+          <h3><a href="installingAndRunning.html#source_build">Az OmegaT létrehozása forráskód alapján</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="installingAndRunning.html#build_which">Letöltendő csomag</a></p>
+            </li>
 
-	<p>Az <code>OmegaT-JRE.exe</code>, <code>OmegaT.exe</code> vagy <code>OmegaT.bat</code> állomány parancsikonját az Asztalra vagy a Start-menübe húzhatja.</p>
-	
-	<a name="windows_running" id="windows_running"></a>
-	<h2>Az OmegaT működtetése</h2>
-	
-	<p>Ha telepítette az OmegaT-t, az <code>OmegaT.jar</code>-ra kattintva közvetlenül elindíthatja az alkalmazást, vagy az <code>OmegaT.bat</code> állományra kattintva megadhatja a parancssori futtatási paramétereket, illetve közvetlenül elindíthatja az alkalmazást a parancssorból.</p>
-	
-	<hr>
+            <li>
+              <p><a href="installingAndRunning.html#ant">Az összeállítás folyamata&nbsp;</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
 
-	<a name="MacOSX_users" id="MacOSX_users"></a>
-	<h1>MacOSX-felhasználók</h1>
+      <tr>
+        <td>
+          <h3><a href="#Using_WebStart_">A Java Web Start használata</a></h3>
+        </td>
 
-	<a name="osx_which" id="osx_which"></a>
-	<h2>Melyik csomagot töltsem le?</h2>
+        <td></td>
+      </tr>
+    </tbody>
+  </table><br>
+  <hr>
 
-	<p>Töltse le a <code>OmegaT_1.7.3_MacOSX.zip</code> állományt.</p>
+  <h2><a name="Linux_users" id="Linux_users"></a>Linux (Intel) felhasználók</h2>
 
-	<a name="osx_install" id="osx_install"></a>
-	<h2>Az OmegaT telepítése</h2>
+  <h3><a name="linux_which" id="linux_which"></a>Melyik csomagot töltsem le?</h3>
 
-	<p>Kicsomagoláshoz kattintson kétszer az <code>OmegaT_1.7.3_MacOSX.zip</code> állományra. Magától felcsatolódik egy OSX-tárolóegység (<code>OmegaT.dmg</code>) és 2 állományt jelenít meg: <code>documentation.html</code> és <code>OmegaT.app</code>. Másolja át a két állományt egy megfelelő mappába (pl. az Applications-mappába, ahol létrehozhat egy OmegaT-mappát). Ha elkészült, kitörölheti az <code>OmegaT_1.7.3_MacOSX.zip</code> állományt.</p>
+  <p>Van a gépén telepítve SUN Java 1.5 JRE-vel kompatibilis Java?</p>
 
-	<a name="osx_dock" id="osx_dock"></a>
-	<h2>Az OmegaT hozzáadása a Dockhoz</h2>
+  <table summary="csak formázás" border="0" cellpadding="3" cellspacing="3">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Van:&nbsp;</strong></p>
+        </td>
 
-	<p>Az OmegaT-t hozzáadhatja a Dockhoz, ha az <code>OmegaT.app</code> állományt elhúzza és beleejti a Dockba.</p>
-	
-	<a name="osx_running" id="osx_running"></a>
-	<h2>Az OmegaT működtetése</h2>
-	
-	<p>Kattintson kétszer az <code>OmegaT.app</code> alkalmazáson vagy kattintson a Dockban lévő helyén.</p>
-	
-	<p>Ha a Java futtatási paramétereit a parancssorból kívánja módosítani, ajánlatos az Egyéb rendszerekhez használatos csomagot választania, lásd alább. De módosíthatja közvetlenül az <code>OmegaT.app</code> csomagban lévő <code>Info.plist</code> állományt is.</p>
+        <td width="70%">
+          <p>töltse le az <em>OmegaT_2.0.x_Without_JRE.zip</em> csomagot. Ezt a platformfüggetlen csomagot bármely Java 1.5 JRE futtatási környezettel felszerelt platformon használhatja.</p>
+        </td>
+      </tr>
 
-	<hr>
+      <tr>
+        <td width="11%">
+          <p><strong>Nincs / Nem tudom:</strong></p>
+        </td>
 
-	<a name="Other_systems" id="Other_systems"></a>
-	<h1>Egyéb rendszerek</h1>
+        <td width="70%">
+          <p>töltse le az <em>OmegaT_2.0.x_Linux.tar.gz</em> csomagot. Ez a csomag tartalmazza a SUN Java futtatási környezetét is. A JRE ezen példánya a rendszerén esetleg már telepített más Java változatokkal békésen megfér.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-	<a name="other_which" id="other_which"></a>
-	<h2>Melyik csomagot töltsem le?</h2>
+  <h3><a name="linux_install" id="linux_install"></a>Az OmegaT telepítése</h3>
 
-	<p>Az OmegaT rendelkezésére áll SUN Java JRE-vel összecsomagolt változatban Linuxhoz (Intel x86) és Windowshoz. Egyéb platformok felhasználóinak (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 stb.) az OmegaT használatához rendelkezniük kell kompatibilis futtatható Java JRE környezettel.</p>Van a SUN Java 1.4 JRE-jével kompatibilis Java-környezete?<dl>
-		<dt><strong>→ Van</strong></dt>
-		<dd>töltse le az <code>OmegaT_1.7.3_Without_JRE.zip</code>  állományt<br> <em>* Ez a csomag használható bármely platformon, ahol a Java 1.4 JRE-vel kompatibilis JRE van telepítve.</em></dd>
-		<dt><strong>→ Nem tudom</strong></dt>
-		<dd>nyisson meg egy terminált és írja be a "java -version" parancsot. Ha megjelenik egy "command not found" vagy hasonló üzenet, akkor feltehetőleg a Java nincs telepítve rendszerén.</dd>
-		<dt><strong>→ Nincs</strong></dt>
-		<dd>szerezzen be egy Java JRE-t a rendszeréhez (lásd alább) és töltse le az <code>OmegaT_1.7.3_Without_JRE.zip</code> állományt.<p>A SUN-tól beszerezhető JRE Solaris SPARC/x86 (Java 1.4) és Linux x64, Solaris x64, Windows x64 (Java 1.5) rendszerekhez:<br> <strong>http://java.sun.com/products/archive/</strong><br> Az IBM-től JRE tölthető le a Linux PowerPC-hez:<br> <strong>http://www.ibm.com/developerworks/java/jdk/linux/download.html</strong></p></dd>
-	</dl>
+  <p>Az OmegaT telepítéséhez csomagolja ki a letöltött állományt. Ekkor létrejön egy omegat/ könyvtár azon munkakönyvtáron belül, amelyben megtalálható az OmegaT futtatásához szükséges összes állomány. A <em>.tar.gz</em> állomány kicsomagolása:</p>
 
-	<p>Kövesse a szükséges csomaghoz tartozó utasításokat.</p>
+  <p><em>$ tar xf letöltött_fájl.tar.gz</em></p>
 
-	<a name="other_install" id="other_install"></a>
-	<h2>Az OmegaT telepítése</h2>
+  <h3><a name="linux_menu" id="linux_menu"></a>Az OmegaT hozzáadása menüihez (KDE) vagy paneljeihez (Gnome)</h3>
 
-	<p>Az OmegaT telepítéséhez mindössze csomagolja ki az <strong><code>OmegaT_1.7.3_Without_JRE.zip</code></strong> állományt. Ezzel az adott könyvtárban létrejön az <code>./OmegaT_1.7.3_Without_JRE/</code> könyvtár, amelyben megtalálja az OmegaT futtatásához szükséges összes állományt.</p>
+  <h3><a name="menu_kde" id="menu_kde"></a>KDE-felhasználók</h3>
 
-	<h2>Kényelmes gyorsbillentyűk telepítése</h2>
+  <p>Az OmegaT-t az alábbiak szerint adhatja hozzá menüihez:</p>
 
-	<p>Rendszerének utasításait követve telepítsen kényelmes elérhető helyekre gyorsbillentyűket az OmegaT-hez.</p>
-	
-	<a name="other_running" id="other_running"></a>
-	<h2>Az OmegaT működtetése</h2>
+  <ul>
+    <li>
+      <p><em>Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New Submenu.</em></p>
+    </li>
 
-	<p>Ha telepítette az OmegaT-t, elindíthatja az alkalmazást a parancssorból, vagy létrehoz egy kódrészletet a parancssori futtatási paraméterekkel, vagy közvetlenül az <code>OmegaT.jar</code>-ra kattintva elindíthatja az alkalmazást. A módszer az adott csomagtól függően változhat. Ellenőrizze, hogy a <code>PATH</code> beállításai helyesek-e és a <code>.jar</code>-fájlok megfelelően vannak-e társítva a Java futtató programjához.</p>
+    <li>
+      <p>Ezt követően a megfelelő menü kiválasztása után hozzon létre egy almenüt/menüelemet: <em>File - New Submenu és File - New Item</em>. Az új elem neveként adja meg az OmegaT-t.</p>
+    </li>
 
-	<hr>
-	
-	<a name="command_line" id="command_line"></a>
-	<h1>Indítás a parancssorból</h1>
-	
-	<p>Általában az OmegaT-t nem szükséges a parancssorból elindítani. Ugyanakkor az OmegaT-t parancssorból való elindításával módosíthatja a program viselkedését. Az OmegaT-t kétféleképpen indíthatja el parancssorból.</p>
-	
-	<p>A Mac OSX csomag felhasználóinak a parancssorból való indításhoz ajánlatos az Egyéb rendszerek alatt tárgyalt csomagot választani. Lásd fent.<a name="terminal" id="terminal"></a>
-	<h2>1. módszer: parancssori ablak megnyitása</h2>
+    <li>
+      <p>A "Command" mezőben a böngésző gombbal keresse meg az  OmegaT indító programkódját (a kicsomagolatlan könyvtárban az OmegaT nevű állományt), majd válassza ki.</p>
+    </li>
 
-	<p>A parancssori ablak másik elnevezése a "terminálablak". Windows alatt "Parancssor" a neve és a Start-menü/Minden program/Kellékek menüpontból érhető el. Mac OSX alatt ennek az Applications → Utilities útvonalon elérhető Terminal a megfelelője.</p>
+    <li>
+      <p>Kattintson az ikongombra (a Name/Description/Comment fields-től jobbra) - Other Icons - Browse, majd térjen át az OmegaT alkalmazás mappájában az /images alkönyvtárra. Válassza ki az OmegaT.png ikont.</p>
+    </li>
 
-	<p>Az OmegaT elindításához  általában két parancsot kell beírnia. Az első:</p>
+    <li>
+      <p>Végezetül a <em>File - Save</em> segítségével mentse el a változtatásokat.</p>
+    </li>
+  </ul>
 
-	<p><code>cd {folder}</code></p>
+  <h3><a name="menu_gnome" id="menu_gnome"></a>Gnome-felhasználók</h3>
 
-	<p>ahol a <code>{folder}</code> azon mappa neve teljes útvonallal, ahol az OmegaT program, konkrétan az <code>OmegaT.jar</code> található. Ennek megfelelően a parancs formája az alábbihoz lesz hasonló:</p>
-	
-	<dl>
-		<dt>Windows esetén</dt>
-		<dd><code>cd C:\Program Files\OmegaT</code></dd>
-		<dt>MacOSX esetén</dt>
-		<dd><code>cd /Applications/OmegaT</code></dd>
-		<dt>Linux esetén:</dt>
-		<dd><code>cd /usr/local/omegat</code></dd>
-    </dl>
-	<p>Ez a parancs az aktuális mappát az OmegaT futtatható állományát tartalmazó mappára módosítja. A második parancs indítja el voltaképpen az OmegaT-t. Legelemibb formájában a parancs a következő:</p>
+  <p>Az OmegaT-t az alábbiak szerint adhatja hozzá paneljéhez (a képernyő tetején lévő sávhoz):</p>
 
-	<p><code>java -jar OmegaT.jar</code></p>
+  <ul>
+    <li>
+      <p>A jobb gombbal kattintson az <em>Add New Launcher</em> panelre.</p>
+    </li>
 
-	<p>Ügyeljen a nagybetűkre, mert értékük nem azonos a kisbetűkével!</p>
+    <li>
+      <p>A "Name" mezőbe írja be az OmegaT-t; a "Command" mezőben a böngésző gombbal keresse meg az  OmegaT indító programkódját (a kicsomagolatlan könyvtárban az OmegaT nevű állományt). Nyomja meg az OK gombot.</p>
+    </li>
 
-	<p>Ez a módszer előnyös, mivel alkalmas hibaszűrésre: ha a program használata során hiba lép fel, a terminálablakban megjelenik egy hibaüzenet, amely tájékoztathatja a hiba okáról.</p>
+    <li>Kattintson az ikongombra, majd a Browse-ra, aztán térjen át az OmegaT alkalmazás mappájában az alkalmazás könyvtárára. Válassza ki az <span style=
+    "font-style: italic;">OmegaT.png</span> ikont. Előfordulhat, hogy a GNOME az elérhető formátumokban nem tudja megjeleníteni az ikonokat és eleinte SVG-fájlt vár, de a mappa kiválasztása után a fájlok megjelennek és az OmegaT.png-t ki tudja választani.</li>
+  </ul>
 
-	<a name="script" id="script"></a>
-	<h2>2. módszer: a <code>.bat</code> futtatási kód módosítása</h2>
+  <h3><a name="linux_running" id="linux_running"></a>Az OmegaT futtatása</h3>
 
-	<p>Az 1. módszer rendszeres használata nem túl praktikus. Ezért a két fent leírt parancs egyetlen állományban (melynek neve Windows-rendszereken "<code>.bat</code>-állomány") van megadva.</p>
-	
-	<p>Amikor ezt az állományt futtatja, a benne lévő utasítások automatikusan végrehajtódnak. Ezért az indító parancs módosításához elegendő ezt az állományt módosítania. Az OmegaT ezen állományból való elindításakor sor kerül az új parancsok végrehajtására.</p>
+  <p>Ha sikerült telepíteni az OmegaT-t, közvetlenül a parancssorból elindíthatja, létrehozhat egy kódot, amely tartalmazza a parancssori indítási paramétereket, vagy rákattinthat az <em>OmegaT.jar</em> állományra és közvetlenül futtathatja az alkalmazást. A módszerek a csomagtól függően különböznek egymástól. Ellenőrizze, hogy <em>útvonalának</em> beállításai helyesek-e és a <em>.jar</em> kiterjesztésű fájlok megfelelően össze vannak-e kapcsolva a Java indítóprogramjával.</p>
+  <hr>
 
-	<a name="arguments" id="arguments"></a>
-	<h2>Parancsargumentumok futtatása</h2>
+  <h2><a name="Windows_users" id="Windows_users"></a>Windows-felhasználók</h2>
 
-	<p>Az alapvető parancs leírását lásd fentebb. A parancs módosítása "argumentumok" hozzáadását jelenti. Az argumentumok helye a kezdő "<code>java</code>" és az azt követő "<code>-jar OmegaT.jar</code>" rész között van.</p>
-	
-	<p>Alább megadjuk a lehetséges argumentumok felsorolását. További részleteket olvashat el az argumentumokkal kapcsolatosan, ha a terminálablakban beírja a <code>man java</code> parancsot. A <code>man</code> olyan parancs, amellyel a kiválasztott program kézikönyve jeleníthető meg. Előfordulhat, hogy rendszerén a <code>java</code> a saját nyelvén nem érhető el.</p>
+  <h3><a name="windows_which" id="windows_which"></a>Melyik csomagot töltsem le?</h3>
 
-	<dl>
-		<dt><code>-Duser.language=XX</code></dt>
-		<dd><p>Amikor az OmegaT argumentumok nélkül indul el, a program először kideríti a felhasználó operációs rendszerének a nyelvét. Ha létezik ezen a nyelven felhasználói felület, akkor az OmegaT ezt használja. Ha tehát a felhasználó operációs rendszere orosz és az OmegaT le van fordítva oroszra, akkor az OmegaT orosz felhasználói felülettel, orosz nyelvű menükkel stb. jelenik meg. Ha felhasználó rendszerének megfelelő nyelvi változat nem áll rendelkezésre, akkor az OmegaT angol nyelven lesz használható. Ez az alapbeállítása.</p>
+  <p>Van a gépén telepítve SUN Java 1.4 JRE-vel kompatibilis Java?</p>
 
-		<p>A "<code>-Duser.language=XX</code>" argumentummal az OmegaT a megadott nyelvet fogja használni a felhasználó operációs rendszerének nyelve helyett. A parancsban az "XX" a használni kívánt nyelv kétbetűs kódját jelenti. Ha francia felülettel szeretné használni az OmegaT-t (például orosz operációs rendszeren), akkor a következő parancsot kell beírnia:</p>
+  <table summary="csak formázás" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Van:</strong></p>
+        </td>
 
-		<p><code>java -Duser.language=fr -jar OmegaT.jar</code></p></dd>
+        <td width="70%">
+          <p>töltse le az <em>OmegaT_2.0.x_Windows_without_JRE.exe</em> állományt. Ezt a csomagot bármely Java 1.5 JRE futtatási környezettel felszerelt Windows-platformon használhatja.</p>
+        </td>
+      </tr>
 
-		<dt><code>-Duser.country=XX</code></dt>
-		<dd><p>A nyelv mellett megadható az ország is, pl. kínai esetén CN vagy TW. Például a helyes Útmutató az azonnali kezdéshez megjelenítéséhez mind a nyelvet, mind az országot meg kell adnia. Erre akkor is szükség van, ha csak egy nyelvi kombináció áll rendelkezésre, mint pl. a pt_BR a portugál / brazil esetén. .</p></dd>
+      <tr>
+        <td width="11%">
+          <p><strong>Nincs / Nem tudom:</strong></p>
+        </td>
 
-		<dt><code>-Dswing.aatext=true</code></dt>
-		<dd><p>Ez az argumentum a betűkészleteken élfinomítást végez, így javítja megjelenésüket.</p></dd>
+        <td width="70%">
+          <p>töltse le az <em>OmegaT_2.0.x__Windows.exe</em> állományt. Ez a csomag tartalmazza a SUN Java futtatási környezetét is. A JRE ezen példánya a rendszerén esetleg már telepített más Java változatokkal békésen megfér.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-		<dt><code>-XmxZZM</code></dt>
-		<dd><p>Ezzel a paranccsal több memóriát rendelhet az OmegaT-hez. Alaphelyzetben 256 Mb van hozzárendelve, ezért ennél alacsonyabb érték beállításának nincs értelme. A "ZZ" a hozzárendelt memóriát jelzi megabájtban. Így ha az OmegaT-t 1024 Mb (1 gigabájt) memóriával kívánja elindítani, akkor a parancs:</p>
+  <h3><a name="windows_install" id="windows_install"></a>Az OmegaT telepítése</h3>
 
-		<p><code>java -Xmx1024M -jar OmegaT.jar</code></p></dd>
-	</dl>
-	
-	<p>Az argumentumokat kombinálhatja. Ha az OmegaT-t a fenti példának megfelelően kívánja futtatni, ezt a parancsot kell beírnia:</p>
+  <p>Az OmegaT telepítéséhez kattintson kétszer a letöltött programra, majd kövesse az utasításokat.</p>
 
-	<p><code>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -jar OmegaT.jar</code></p>
+  <h3><a name="windows_menu" id="windows_menu"></a>Az OmegaT hozzáadása a Start menühöz vagy az Asztalhoz</h3>
 
-	<hr>
+  <p>Telepítés közben a program megkérdezi, kíván-e létrehozni mappát a <em>Start menüben</em> és gyorsbillentyűt az asztalhoz és a gyorsindító sávhoz.</p>
 
-	<a name="build" id="build"></a>
-	<h1>Az OmegaT forráskódból való előállítása</h1>
+  <p>A kapcsolatot létrehozhatja később is, ha az <em>OmegaT.exe</em>-t az Asztalra húzza vagy a <em>Start menühöz</em> kapcsolja.</p>
 
-	<a name="build_which" id="build_which"></a>
-	<h2>Melyik csomagot töltsem le?</h2>
+  <h3><a name="windows_running" id="windows_running"></a>Az OmegaT futtatása</h3>
 
-	<dl>
-		<dt>Töltse le az OmegaT_1.7.3_Source.zip állományt</dt>
-		<dd>Ez a csomag tartalmazza az adott változat forrásállományait, és bármely rendszeren használható, ha azon telepítve van a Java 1.4 JDK vagy annak megfelelő Java-rendszer. Az OmegaT előállításához szüksége lesz az ant nevű segédprogramra is.</dd>
-		<dt>A legfrissebb forráskód elérhető a CVS-szerverről is:</dt>
-		<dd><code>cvs -z3 -d:pserver:anonymous@omegat.cvs.sourceforge.net:/cvsroot/omegat co -P omegat</code></dd>
-	</dl>
+  <p>Ha sikerült telepíteni az OmegaT-t, rákattinthat az <em>OmegaT.jar</em> állományra és közvetlenül futtathatja az alkalmazást vagy elindíthatja közvetlenül a parancssorból.</p>
 
-	<a name="ant" id="ant"></a>
-	<h2>Az OmegaT előállítása</h2>
+  <p>A legegyszerűbb módszer, ha magát az OmegaT.exe programot futtatja. Ez esetben a program az indítási paramétereket az <em>OmegaT.l4J.ini</em> állományból veszi, amely az exe-fájllal azonos könyvtárban található és kedvenc beállításainak megfelelően szerkeszthető. Az alábbi INI-állomány 1 Gb memóriát tart fenn, francia felhasználói nyelvet feltételez, országnak pedig Portugáliát tekinti:</p>
 
-	<dl>
-		<dd>Csomagolja ki az OmegaT_1.7.3_Source.zip állományt és adja meg az OmegaT_1.7.3_Source könyvtárat vagy írja be az ./omegat/ könyvtárat a CVS kódállománya számára. Ellenőrizze, hogy a könyvtárban van-e build.xml nevű állomány. Ezután a parancssorba írja be:</dd>
-	</dl>
+  <p><code># OmegaT.exe futásidejű konfiguráció<br> #<br> # Paraméter használatához törölje a '-' előtt lévő '#' jelet. <br> # Memória<br> -Xmx1024M<br> # Nyelv<br> -Duser.language=FR<br> # Ország<br> -Duser.country=PT<br> # Finomítás (csak Java 1.4 és 1.5 esetén)<br> #-Dswing.aatext=true<br> # Entitásbővítés XML-hez (csak Java 1.4 esetén)<br> #-DentityExpansionLimit=400000</code></p>
+  <hr>
 
-	<p><code>$ ant jar release</code></p>
+  <h2><a name="MacOSX_users" id="MacOSX_users"></a>MacOSX-felhasználók</h2>
 
-	<dl>
-		<dd>Ezzel létrejön a ./dist/ könyvtárban az OmegaT teljes változata, amelyben megtalálja az OmegaT futtatásához szükséges összes állományt.</dd>
-	</dl>
-	<hr>
+  <h3><a name="osx_which" id="osx_which"></a>Melyik csomagot töltsem le?</h3>
 
-	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
+  <p>Az OmegaT 2.0 futtatásához Java 1.5 szükséges. A Mac OSX 10.4 (Tiger) felhasználóinak az OmegaT telepítése előtt ellenőrizni kell, hogy a Java legújabb változatát használják-e. Az Apple menüben a "Software Update..." menüpontból frissítse a Java verzióját.</p>
+
+  <p>Töltse le az Download <em>OmegaT_2.0.x_Mac.zip</em> csomagot.</p>
+
+  <h3><a name="osx_install" id="osx_install"></a>Az OmegaT telepítése</h3>
+
+  <p>Kicsomagoláshoz kattintson kétszer az <em>OmegaT_2.0.x_MacOSX.zip</em> fájlra. Ekkor létrejön egy <em>OmegaT</em> mappa, rajta az OmegaT ikonjával. A mappában két állomány található: a <em>documentation.html</em> és az <em>OmegaT.app</em>. Másolja át a mappát egy megfelelő helyre (pl. Applications). Ha ezzel elkészült, kitörölheti az <em>OmegaT_2.0.x_MacOSX.zip</em> állományt.</p>
+
+  <h3><a name="osx_dock" id="osx_dock"></a>Az OmegaT hozzáadása a Dockhoz</h3>
+
+  <p>Az OmegaT-t az <em>OmegaT.app</em> állomány Dockra húzásával adhatja hozzá a Dockhoz.</p>
+
+  <h3><a name="osx_running" id="osx_running"></a>Az OmegaT futtatása</h3>
+
+  <p>Kattintson kétszer az <em>OmegaT.app</em> fájlra vagy kattintson a Dockban lévő helyére.</p>
+
+  <p>Ha módosítani kívánja a Java indítási paramétereit, megváltoztathatja az OmegaT.app alapbeállításait az <em>Info.plist</em> szerkesztésével, amely az <em>OmegaT.app/Contents/.</em> alatt található . A jobb gombbal kattintva nyissa meg az "Info.plist" állományt és válassza ki a tetszése szerinti szövegszerkesztőt. Mind a <em>Properties</em> (Tulajdonságok), mind a <em>VMOptions</em> részen módosíthat. Ha a <em>VMOptions</em>-höz értékeket akar hozzáadni, tegyen közéjük szóközt. Például: a <code>-Xmx1024M -Duser.language=ja</code> esetén az OmegaT 1024MB memóriával és japán felhasználói felülettel indul el.</p>
+
+  <p>Ha közvetlenül indítja el az <em>OmegaT.app</em>-t, akkor nem fogja tudni több példányban futtatni az <em>OmegaT.app</em> alkalmazást. Ha az <em>OmegaT.app</em>  alkalmazást több példányban futtatja, helyette használja a <em>JavaApplicationStub</em>-ot, amely az <em>OmegaT.app/ Contents/MacOS/</em> alatt található.</p>
+
+  <p>A Lucene szótőelemző az <em>OmegaT.app</em> csomaggal nem használható. Ehhez az OmegaT-t a parancssorból kell elindítania (l. alább).</p>
+
+  <p>A Java indítási paramétereinek parancssorból való módosításához hívja meg az  <em>OmegaT.jar</em> fájlt, amely az <em>OmegaT.app/Contents/Resources/ Java/</em> alatt található. Az <em>OmegaT.app</em> parancssorból való elindítása egyenértékű az OmegaT komplett csomagjának a használatával. Egyszerre több példányban futtathatja az OmegaT-t, és használhatja a Lucene szótőelemzőt is. További részleteket olvashat alább az "Indítás a parancssorból" c. részben.</p>
+
+  <p>At <em>OmegaT.app</em> csomagban bármely hely eléréséhez kattintson a jobb gombbal az <em>OmegaT.app</em>-ra és válassza ki a "Show Package Contents" elemet vagy a "cd"-vel menjen a parancssorból rá közvetlenül.</p>
+
+  <h4>Mac OSX segédprogramok</h4>
+
+  <p>Az <em>OmegaT.app</em> a Mac OSX által kínált Services segítségével érhető el. Ezzel az OmegaT-ben bárhol kiválaszthat egy szót és a Services segítségével ellenőrizheti a Services szótárprogramokkal Spotlight vagy Google alatt. A gyakori tevékenységek automatizálásához létrehozhatja a Servicest vagy írhat programkódokat az AppleScript vagy az Automator segítségével.</p>
+  <hr>
+
+  <h2><a name="Other_systems" id="Other_systems"></a>Egyéb rendszerek</h2>
+
+  <h3><a name="other_which" id="other_which"></a>Melyik csomagot töltsem le?</h3>
+
+  <p>Az OmegaT tartalmazza a SUN Java JRE-t Linux (Intel x86) és Windows platformokhoz. Egyéb platformok (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 stb.) felhasználóinak az OmegaT használatához a rendzserükön rendelkezniük kell egy kompatibilis futtatható Java JRE-vel.</p>
+
+  <p>Van a gépén telepítve SUN Java 1.5 JRE-vel kompatibilis Java?</p>
+
+  <table summary="csak formázás" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Van:</strong></p>
+        </td>
+
+        <td width="70%">
+          <p>töltse le az <em>OmegaT_2.0.x_Without_JRE.zip</em> csomagot. Ezt a csomagot bármely Java 1.5 JRE-vel felszerelt platformon használhatja.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Nem tudom:</strong></p>
+        </td>
+
+        <td width="70%">
+          <p>nyisson meg egy terminálablakot és írja be a következőt: "java -version". Ha egy "command not found" [a parancs nem található] vagy hasonló üzenetet kap, akkor rendszerén a Java feltehetőleg nincs telepítve.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Nincs:</strong></p>
+        </td>
+
+        <td width="70%">
+          <dl>
+            <dd>szerezzen be rendszeréhez egy Java-t (lásd alább) és töltse le az <em>OmegaT_2.0.x_Without_JRE.zip</em> csomagot. A SUN biztosít JRE-t Solaris SPARC/x86 (Java 1.5), Linux x64, Solaris x64, Windows x64 (Java 1.5) platformokhoz: <strong>http://java.sun.com/products/archive/</strong>. Az IBM JRE-t biztosít a Linux PowerPC-hez:</dd>
+
+            <dd>
+            <strong>http://www.ibm.com/developerworks/java/jdk/linux/download.html</strong></dd>
+
+            <dd>Kövesse a szükséges csomaghoz tartozó telepítési utasításokat.</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><a name="other_install" id="other_install"></a>Az OmegaT telepítése</h3>
+
+  <p>Az OmegaT telepítéséhez csomagolja ki az <strong><em>OmegaT_2.0.x_Without_JRE.zip</em></strong> állományt. Ekkor létrejön egy <em>./OmegaT_2.0.x_Without_JRE/</em> könyvtár azon munkakönyvtáron belül, amelyben megtalálható az OmegaT futtatásához szükséges összes állomány.</p>
+
+  <h3><a name="other_menu" id="other_menu"></a>Kényelmes gyorsbillentyűk telepítése</h3>
+
+  <p>Kövesse rendszere utasításait az OmegaT gyorsbillentyűinek megfelelő helyeken való telepítéséhez.</p>
+
+  <h3><a name="other_running" id="other_running"></a>Az OmegaT futtatása</h3>
+
+  <p>Ha sikerült telepíteni az OmegaT-t, közvetlenül a parancssorból elindíthatja, létrehozhat egy kódot, amely tartalmazza a parancssori indítási paramétereket, vagy rákattinthat az <em>OmegaT.jar</em> állományra és közvetlenül futtathatja az alkalmazást. A módszerek a csomagtól függően különböznek egymástól. Ellenőrizze, hogy <em>útvonalának</em> beállításai helyesek-e és a <em>.jar</em> kiterjesztésű fájlok megfelelően össze vannak-e kapcsolva a Java indítóprogramjával.</p>
+  <hr>
+
+  <h2><a name="command_line" id="command_line"></a>Indítás a parancssorból</h2>
+
+  <p>Általában véve az OmegaT-t nem szükséges parancssorból elindítani. Ugyanakkor az OmegaT parancssorból való indításakor befolyásolhatja a program viselkedését. Az OmegaT parancssorból való indítása kétféleképpen történhet.</p>
+
+  <h3>1. módszer: nyisson meg egy parancssor-ablakot.</h3>
+
+  <p>A parancssor-ablak másik elnevezése a "terminálablak". Windows esetén ennek "MS-DOS ablak" a neve, és a Start/Minden program/Kellékek/Parancssor menüpontból érhető el. Mac OSX alatt ennek megfelelője a Terminal nevű, Applications → Utilities alatt található alkalmazás.</p>
+
+  <p>Az OmegaT elindításához rendszerint két parancsot kell megadni. Ezek közül az első:</p>
+
+  <p><em>cd {mappa}</em></p>
+
+  <p>Ahol a <em>{mappa}</em> annak a teljes útvonallal megadott könyvtárnak a neve, ahol az OmegaT program - konkrétan at <em>OmegaT.jar</em> - található. A gyakorlatban a parancs feltehetőleg az alábbi lesz:</p>
+
+  <dl>
+    <dt>Windows esetén</dt>
+
+    <dd><em>cd C:\Program Files\OmegaT</em></dd>
+
+    <dt>Mac OSX esetén</dt>
+
+    <dd><em>cd &lt;OmegaT.app
+    location&gt;/OmegaT.app/Contents/Resources/Java/</em></dd>
+
+    <dt>Linux esetén</dt>
+
+    <dd><em>cd /usr/local/omegat</em></dd>
+  </dl>
+
+  <p>A parancs átvált arra a könyvtárra, ahol az OmegaT futtatható állománya található. A második az a parancs, amely ténylegesen elindítja az OmegaT-t. Ennek alapformája a következő:</p>
+
+  <p><em>java -jar OmegaT.jar</em></p>
+
+  <p>Ügyeljen a kis- és nagybetűk közötti különbségre!</p>
+
+  <p>Ennek a módszernek megvan az az előnye, hogy hibaszűrésre ad lehetőséget: ha hibe jelentkezik a program használata közben, a képernyőn megjelenik egy hibaüzenet, amely hasznos információkat tartalmazhat annak okára vonatkozóan.</p>
+
+  <h3><a name="script" id="script"></a>2. módszer: a <em>.bat</em> parancsállomány módosítása</h3>
+
+  <p>Az 1. módszer a program szokásos indítására kevéssé praktikus. Ezért a fenti két parancsot egy állomány tartalmazza (ennek kiterjesztése Windows esetén "<em>.bat</em>).</p>
+
+  <p>Ezen állomány futtatásakor a benne lévő parancsok végrehajtása automatikusan történik. Ezért a program indításának módosításához elegendő a parancsállományt megváltoztatni. Ha az OmegaT-t állományból indítja el, a rendszer a módosított parancsokat futtatja le.</p>
+
+  <h3><a name="arguments" id="arguments"></a>Az indítási parancs argumentumai</h3>
+
+  <p>Az alapvető parancsról szó volt fentebb. Ennek a parancsnak a módosítása "argumentumok" hozzáadásával történik. Az argumentumok a "<em>java</em>" után és a "<em>-jar OmegaT.jar</em>" elé írandók. Ne feledje, hogy Windows esetén a beállításokat módosíthatja az <em>OmegaT.l4J.ini</em> állomány megfelelő megváltoztatásával. Mac OSX esetén ugyanez elérhető az <em>Info.plist</em> módosításával is, az <em>OmegaT.app/Contents/</em> alatt .</p>
+
+  <p>Az alábbi felsorolás egy sor lehetséges argumentumot tartalmaz. Az argumentumokról egyes rendszerekben bővebb információt kap, ha  beírja a <em>man java</em> parancsot. A <em>man</em> olyan parancssorból futtatható utasítás, amely tájékoztat a kiválasztott parancs használatáról. Előfordulhat, hogy rendszere nem tartalmazza a <em>java</em> kézikönyvét az Ön nyelvén.</p>
+
+  <p><b>A felhasználói felület nyelve:&nbsp;</b> <em>-Duser.language=XX</em></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Ha az OmegaT-t argumentumok nélkül indítja el, a program először az operációs rendszer felhasználói felületének nyelvét deríti fel. Ha ezen a nyelven létezik az OmegaT-hez felhasználói felület, akkor a program ezt fogja használni. Ha például az operációs rendszer orosz és az OmegaT rendelkezik orosz nyelvi változattal, akkor az OmegaT orosz felhasználói felülettel, orosz menükkel stb. lesz látható. Ellenkező esetben az OmegaT az alapértelmezett angol nyelvi felhasználói felülettel fog elindulni. Ez az alapbeállítás szerinti viselkedés.<br> <br> A "<em>-Duser.language=XX</em>" argumentummal beállítható, hogy az  OmegaT a megadott nyelvet használja az operációs rendszer felhasználói felületének nyelve hyelett. A parancsban az "XX" jelöli a kívánt nyelv kétbetűs kódját. Ha az OmegaT-t francia felülettel kívánja használni (például orosz operációs rendszeren), akkor a parancs a következő lesz:</p>
+
+          <p><em>java -Duser.language=fr -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>A felhasználó országának beállítása:</strong><em>&nbsp;-Duser.country=XX</em></p>
+
+  <p>A nyelv mellett megadhatja az országot is, például a kínai esetén választhat a CN vagy a TW közül. Az azonnali kezdéshez írt  megfelelő útmutató kiválasztásához mind a nyelvet, mind az országot meg kell adnia. Erre akkor is szükség van, ha csak egy kombináció létezik, mint a pt_BR a portugál / Brazília esetén.</p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Betűk élsimítása:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Ez az argumentum a fontok élsimítását befolyásolja, melynek eredményeként javul megjelenésük.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Font antialiasing (Java 6-tól fölfelé) :</strong><em>&nbsp;-</em><span style=
+  "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>&nbsp;Az "XX" lehetséges értékei: "false", "on", "gasp" és "lcd". Linux-felhasználóknál előfordulhat, hogy a kiválasztott betűtípustól és -mérettől függően az "on" vagy az "lcd" hatására javul a betűk megjelenése.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Memória hozzárendelése:</strong><em>&nbsp;-XmxZZM</em></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Ezzel a paranccsal több memória rendelhető az OmegaT-hez. Alaphelyzetben 256 Mb van hozzárendelve, így ennél alacsonyabb érték megadásától nem remélhet előnyöket. A "ZZ" a hozzárendelt memória mennyisége megabyte-ban. Ennek alapján az OmegaT-t 1024 MB (1 gigabyte) memóriával ekként indíthatja el:</p>
+
+          <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+
+          <p>Az argumentumokat kombinálhatja: ha az OmegaT-t az összes fenti példában szereplő értékekkel kívánja elindítani, akkor az utasítás a következő lesz:<br> <em>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="source_build" id="source_build"></a>Az OmegaT létrehozása forráskód alapján</h2>
+
+  <h3><a name="build_which" id="build_which"></a>Melyik csomagot töltsem le?</h3>
+
+  <dl>
+    <dt>Töltse le az <em>OmegaT_2.0.x_Source.zip</em> állományt.</dt>
+
+    <dd>Ez a csomag tartalmazza az adott változat forrásfájljait, amely bármely rendszeren használható, amelyen Java 1.5 JDK vagy azzal kompatibilis Java van telepítve. Emellett szüksége lesz az <em>ant</em> segédprogramra az OmegaT előállításához.</dd>
+
+    <dt>A verziók követésére az OmegaT a SubVersiont használja. A legfrissebb kód az SVN-szerverről érhető el:</dt>
+
+    <dd><em>https://omegat.svn.sourceforge.net/svnroot/omegat/trunk</em></dd>
+  </dl>
+
+  <h3><a name="ant" id="ant"></a>Az OmegaT összeállítása</h3>
+
+  <dl>
+    <dd>Csomagolja ki az <em>OmegaT_2.0.x_Source.zip</em> állományt és adja meg az  <em>OmegaT_2.0.x_Source</em> könyvtárat, vagy írja be az SVN-nel ellenőrzött kód <em>./omegat/</em> könyvtárát. Ellenőrizze, hogy a könyvtár tartalmazza-e a <em>build.xml</em> állományt. Ezután a parancssorba írja be a következőt:</dd>
+  </dl>
+
+  <p><em>$ ant jar release</em></p>
+
+  <dl>
+    <dd>Ennek hatására létrejön az OmegaT teljes változata a <em>./dist/</em> könyvtárban, ahol is megtalálja az OmegaT futtatásához szükséges összes állományt.</dd>
+  </dl>
+  <hr style="width: 100%; height: 2px;">
+
+  <h2><a name="Using_WebStart_" id="Using_WebStart_"></a>A Java Web Start használata</h2>
+
+  <dl>
+    <dt>A Java Web Start technológiájával (a Java 1.5 és későbbi változatainak része) Java alkalmazásokat futtathat a hálózaton egyetlen kattintással. A Java Web Start az alkalmazás legfrissebb változatát használja a megfelelő <a href="http://java.sun.com/j2se/desktopjava/jre/index.jsp" title=
+    "A Java futtatási környezet (JRE)">Java futtatási környezettel (JRE)</a> együtt. Az OmegaT Java Web Starttal való első futtatásához írja be a böngészője címsorába a következő URL-t:</dt>
+
+    <dd><span style="font-style: italic;">&nbsp;&nbsp;&nbsp; http://omegat.sourceforge.net/webstart/OmegaT.jnlp</span><br> <br> Töltse le az <span style="font-style: italic;">OmegaT.jnlp</span> állományt és kattintson rá.&nbsp;Operációs rendszerétől függően a telepítés során megjelenhet néhány biztonsági figyelmeztetés. A tanúsítványon "Didier Briel" aláírása szerepel. A jelen változathoz megadott engedélyei (melyek lehetnek "korlátlan hozzáférés a számítógéphez") azonosak a helyi változathoz hozzárendelt engedélyeivel, vagyis a hozzáférés a számítógép merevlemezére vonatkozik. Ha később az <span style=
+    "font-style: italic;">OmegaT.jnlp</span>-re kattint, a rendszer ellenőrzi a frissítéseket és telepíti őket, mielőtt elindítaná az OmegaT-t. Az első telepítés után internetes kapcsolat nélkül is használhatja az <span style=
+    "font-style: italic;">OmegaT.jnlp</span>-t. <span style="font-weight: bold;"><br> <br> Személyi jogok:</span> az OmegaT Java Web Start semmilyen adatot nem ment el a számítógépen kívüli környezetre. Az alkalmazás csak a számítógépen fut. Dokumentumai és fordítási memóriái számítógépén maradnak, az OmegaT projekt nem fér hozzá az Ön adataihoz.<br> <br> Ne feledje, hogy parancssorból való használathoz (l. fentebb) a szokásos telepítési módot kell használnia.</dd>
+  </dl>
+
+  <dl>
+    <dt><br></dt>
+  </dl>
+  <hr>
+
+  <table summary="csak formázás" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

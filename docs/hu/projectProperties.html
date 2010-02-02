@@ -1,71 +1,83 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>A projekt beállításai - OmegaT 1.7.3 felhasználói kézikönyv</title>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>A projekt beállításai - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
+
 <body>
+  <h2>Beállítások</h2>
 
-	<h1>A projekt beállításai</h1>
+  <ul>
+    <li>
+      <a href="Párbeszédablak">A Beállítások párbeszédablak</a>
 
-	<ul>
-		<li><a href="#dialog">A Beállítások párbeszédablak</a>
-			<ul>
-				<li><a href="#language">A nyelv megváltoztatása</a></li>
-				<li><a href="#segments">A szövegdarabolás megváltoztatása</a></li>
-				<li><a href="#folder">A könyvtárszerkezet megváltoztatása</a></li>
-			</ul>
-		</li>
-		<li><a href="[bizonytalan] Figyelem!">A projekt beállításainak folyamat közbeni megváltoztatása </a></li>
-	</ul>
-	
-<hr>
+      <ul>
+        <li><a href="#language">A nyelv módosítása</a></li>
 
-	<a name="dialog" id="dialog"></a>
-	<h1>A Beállítások párbeszédablak</h1>
+        <li><a href="#segments">A szövegdarabolás módosítása</a></li>
 
-	<p>Ebben a párbeszédablakban módosíthatók a projektmappák és a nyelvek. Megnyitása a <code><a href= "menu.html#shortcuts">Ctrl+E</a></code> lenyomásával vagy a <a href="menu.html">főmenü</a> <strong>Projekt -&gt; Beállítások...</strong> pontjából lehetséges. A párbeszédablak elemei:</p>
+        <li><a href="#folder">A mappaszerkezet módosításai</a></li>
+      </ul>
+    </li>
 
-	<ul>
-		<li>A projekt forrás- és célnyelvének beállítása a legördülő menük segítségével</li>
-		<li>Szövegdarabolási beállítások jelölése</li>
-		<li>A projekt könyvtárszerkezetének beállítására szolgáló terület</li>
-	</ul>
+    <li><a href="#warning">A projekt beállításainak módosítása a fordítási folyamat közben</a></li>
+  </ul>
+  <hr>
+  <a name="dialog" id="dialog"></a>
 
-	<p>Mindegyik mező szerkeszthető. Vagy gépelje be a nyelvek nevét, vagy válasszon a lenyíló menükből. A nem létező mappák nevét begépelheti, az OmegaT pedig létrehozza őket.</p>
-	
+  <h2>A Beállítások párbeszédablak</h2>
 
-	<a name="language" id="language"></a>
-	<h2>A nyelv megváltoztatása</h2>
-	
-	<p>Ne feledje, hogy a nyelvek módosítása következtében a használatban lévő fordítási memóriák használhatatlanná válhatnak, mivel a megadott és az új nyelvek eltérőek lesznek.</p>
-	
-	<a name="segments" id="segments"></a>
-	<h2>A szövegdarabolás megváltoztatása</h2>
-	
-	<p>A szövegdarabolás megváltoztatása csak az OmegaT forrásállomány-kezelését érinti. A már meglévő fordítási memóriák szövegdarabolását nem befolyásolja.</p>
-	
-	<p>Ha megváltoztatja a szövegdarabolás beállításait, előfordulhat, hogy egyes már lefordított szövegrészeket a program szétvágja vagy egyesíti. Ennek eredményeként az érintett részek "lefordítatlan" állapotba kerülnek, mivel akkor sem fognak egyezni a projekt memóriájában lévő szövegrészekkel, ha a memória tartalmazza a régi, de most már nem egyező fordítást.</p>
-	
-	<p>Az OmegaT a szövegdarabolást korábban nem használó <a href= "translationMemories.html#Upgrading_Translation_Memories">régi fordítási memóriákat frissíteni tudja</a>, de megfordítva nem, mint ahogy a fordítási memóriát sem tudja módosítani, ha Ön fordítás közben meggondolja magát.</p>
+  <p>Ebben a párbeszédablakban módosíthatók a projektmappák és a nyelvek. Megnyitása a <code><a href="menu.html#shortcuts">Ctrl+E</a></code> lenyomásával vagy a <strong>Projekt -&gt; Beállítások...</strong> pontból lehetséges a <a href=
+  "menu.html">főmenüből</a>. A párbeszédablak elemei:</p>
 
-	<a name="folder" id="folder"></a>
-	<h2>A könyvtárszerkezet megváltoztatása</h2>
-	
-	<p>Ha a projekt könyvtárszerkezetét meg kívánja változtatni, ne feledje, hogy ezzel a régi mappákban lévő állományok nem kerülnek át az új mappákba. Így előfordulhat, hogy sem Ön, sem az OmegaT nem fogja tudni azonosítani a mappákat, sem azt, hogy éppen melyikük van használatban.</p>
+  <ul>
+    <li>A projekt forrás- és célnyelvének beállítása a legördülő menük segítségével</li>
 
-<hr>
+    <li>Szövegdarabolási beállítások jelölése</li>
 
-	<a name="warning" id="warning"></a>
-	<h1>A projekt beállításainak folyamat közbeni megváltoztatása </h1>
+    <li>Projektmappák beállítására szolgáló terület</li>
+  </ul>
 
-	<p>Fordítás során módosíthatja a projekt beállításait.</p>
-	
-	<p>A biztonság érdekében a fordítás megkezdése után azonban tekintsen minden beállítást véglegesnek, hacsak valamilyen komoly hibát nem észlel. A munka eredményének megvédésével kapcsolatosan l. az <a href= "preventingDataLoss.html">Adatvesztés elkerülése</a> c. részt.</p>
+  <p>Mindegyik mező szerkeszthető. Vagy gépelje be a nyelvek nevét, vagy válasszon a lenyíló menükből. A nem létező mappák nevét írja be, az OmegaT ezután létrehozza őket.</p><a name="language" id="language"></a>
 
+  <h3>A nyelv módosítása</h3>
 
-	<hr>
+  <p>A nyelv módosítása következtében a használatban lévő fordítási memóriák használhatatlanná válhatnak, mivel a megadott és az új nyelvek eltérőek lesznek.</p><a name="segments" id="segments"></a>
 
-	<p><a href="legalNotices.html">Jogi tudnivalók</a></p>
+  <h3>A szövegdarabolás módosítása</h3>
+
+  <p>A szövegdarabolási beállítások csak a forrásállományok OmegaT általi kezelését érintik. A már meglévő fordítási memóriákra nincsenek hatással.</p>
+
+  <p>Ha módosítja a szövegdarabolási beállításokat, előfordulhat, hogy egyes, már lefordított szövegegységek feldarabolódnak vagy egyesülnek. Ennek eredményeként gyakorlatilag "lefordítatlan" állapotba kerülnek, mivel a továbbiakban nem fognak egyezni a projektben rögzített szövegegységekkel, noha a régi, de már nem egyező fordítást a memória továbbra is megőrzi.</p>
+
+  <p>Az OmegaT a mondatdarabolást korábban nem használó <a href="translationMemories.html#upgrading_TM"> régi fordítási memóriákat frissíteni tudja</a>, de megfordítva ez nincs így. A fordítási memóriát sem tudja módosítani, ha fordítás közben gondolja meg magát.</p><a name="folder" id=
+  "folder"></a>
+
+  <h3>A mappaszerkezet módosításai</h3>
+
+  <p>Ne feledje, hogy ha módosítja a projekt mappáit, ettől a régi mappákban lévő állományok nem kerülnek át az újakba. Így előfordulhat, hogy sem Ön, sem az OmegaT nem fogja tudni azonosítani a mappákat és azt, melyikük van éppen használatban.</p>
+  <hr>
+  <a name="warning" id="warning"></a>
+
+  <h2>A projekt beállításainak módosítása a fordítási folyamat közben</h2>
+
+  <p>Fordítás során bármikor módosíthatja a projekt beállításait. A legbiztonságosabb megoldás, ha a fordítás megkezdése után minden beállítást véglegesnek tekint, hacsak valamilyen súlyos hibát nem észlel. A munka megvédésével kapcsolatosan lásd az <a href="preventingDataLoss.html">
+Adatvesztés elkerülése</a> c. részt.</p>
+  <hr>
+
+  <table style="width: 100%;" summary="csak formázás" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

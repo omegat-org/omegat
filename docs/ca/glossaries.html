@@ -2,7 +2,7 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Glossaris - Manual d'usuari de l'OmegaT 1.8</title>
+  <title>Glossaris - Manual d'usuari de l'OmegaT 2.0</title>
 </head>
 <body>
 <h2>Glossaris</h2>
@@ -27,30 +27,28 @@
 <p>Si un projecte de l'OmegaT té un o més glossaris, i el segment actiu conté termes que apareguin als glossaris, es mostraran automàticament al <a href="userInterface.html#Glossary">visualitzador de glossaris</a>.</p>
 <hr>
 <h2><a name="usage" id="usage"></a>Ús</h2>
-<p>Per utilitzar un glossari existent, col·loqueu-lo dins de la carpeta dels glossaris (per defecte, "<span style="font-style: italic;">/glossary</span>") un cop creat el projecte. En obrir un projecte, l'OmegaT detecta automàticament els fitxers de glossari d'aquesta carpeta. Si l'OmegaT troba algun terme del segment actiu als fitxers de glossari, el mostrarà a la subfinestra Glossari:</p>
+<p>Per utilitzar un glossari existent, col·loqueu-lo dins de la carpeta dels glossaris (per defecte, «<span style="font-style: italic;">/glossary</span>») un cop creat el projecte. En obrir un projecte, l'OmegaT detecta automàticament els fitxers de glossari d'aquesta carpeta. Si l'OmegaT troba algun terme del segment actiu als fitxers de glossari, el mostrarà a la subfinestra Glossari:</p>
 <p><img src="images/Glossary_pane.png" name="graphics1"
  alt="Subfinestra Glossari" id="graphics1"
- style="border: 0px solid"><br>
+ style="border: 0px"><br>
 </p>
-<br>La paraula d'abans del signe = és el terme de partida, i la traducció és la paraula o les paraules de després del signe =. Cada entrada del glossari pot incloure un comentari (vegeu "verb transitiu" al segon terme). La funció de glossari només troba coincidències exactes amb l'entrada del glossari (és a dir, no troba formes declinades, etc.). Podeu afegir termes nous manualment als fitxers de glossari durant la traducció (per exemple, amb un editor de textos), però les entrades noves que hi afegiu no es reconeixeran fins que torneu a carregar el projecte.<hr>
+<br>La paraula d'abans del signe = és el terme de partida, i la traducció és la paraula o les paraules de després del signe =. Cada entrada del glossari pot incloure un comentari (vegeu «verb transitiu» al segon terme). La funció de glossari només troba coincidències exactes amb l'entrada del glossari (és a dir, no troba formes declinades, etc.). Podeu afegir termes nous manualment als fitxers de glossari durant la traducció (per exemple, amb un editor de textos), però les entrades noves que hi afegiu no es reconeixeran fins que torneu a carregar el projecte.<hr>
 <h2><a name="fileformat" id="fileformat"></a>Format de fitxer</h2>
 <p>Els fitxers de glossari són simples fitxers de text net amb una llista de tres columnes delimitades per tabuladors que conté els termes de partida i d'arribada a la primera i segona columna, respectivament. La tercera columna es pot utilitzar per incloure-hi informació addicional. Els fitxers de glossari poden tenir la codificació per defecte del sistema (que s'indica amb l'extensió <code>.tab</code>) o en format UTF-8 (amb l'extensió <code>.utf8</code>). És recomanable utilitzar la codificació Unicode (UTF8).</p>
 <hr>
-<h2><a name="howtocreate" id="howtocreate"></a>Com crear glossaris</h2>
-<br>Aquest mètode és senzill i no dóna problemes, si se segueixen les instruccions amb atenció. Necessiteu l'OpenOffice.org Writer; per tant, si encara ho ho heu fet, baixeu i instal·leu l'OpenOffice.org. Inicieu l'OpenOffice.org i obriu un document de text nou, o bé inicieu l'"OpenOffice.org Writer".<br> <br> Al document buit, escriviu els termes del glossari d'aquesta manera: un terme de la llengua de partida, tabulació, el terme en la llengua d'arribada, tabulació, un comentari o explicació de l'entrada, i un retorn. La tabulació correspon a la tecla de tabulació de l'esquerra del teclat. Si no voleu afegir cap comentari, podeu ometre la segona tabulació. Un "terme" pot ser una sola paraula o tota una frase. A la segona línia, escriviu el segon terme i la traducció corresponent, tot seguint el mateix procediment. A continuació, a la tercera línia escriviu-hi la tercera parella de termes, etcètera.<br> Quan hàgiu acabat d'escriure tots els termes, tindreu dues "columnes" de termes: els termes en la llengua de partida a l'esquerra i els termes corresponents en la llengua d'arribada a la dreta (i potser una tercera columna que conté comentaris i explicacions). Els caràcters de tabulació (→ en l'exemple següent) i de retorn (¶&nbsp;) es poden visualitzar fent clic a la icona ¶ de la barra d'eines estàndard de l'OpenOffice.org Writer. El següent és un exemple d'un glossari de l'anglès al català:<br>
+<h2><a name="howtocreate" id="howtocreate"></a>Com crear glossaris</h2>Aquest mètode és senzill i no dóna problemes, si se segueixen les instruccions amb atenció. Necessiteu l'OpenOffice.org Writer; per tant, si encara no ho heu fet, baixeu i instal·leu l'OpenOffice.org. Inicieu l'OpenOffice.org i obriu un document de text nou, o bé inicieu l'«OpenOffice.org Writer».<br> <br> Al document buit, escriviu els termes del glossari d'aquesta manera: un terme de la llengua de partida, tabulació, el terme en la llengua d'arribada, tabulació, un comentari o explicació de l'entrada, i un retorn. La tabulació correspon a la tecla de tabulació de l'esquerra del teclat. Si no voleu afegir cap comentari, podeu ometre la segona tabulació. Un «terme» pot ser una sola paraula o tota una frase. A la segona línia, escriviu el segon terme i la traducció corresponent.<br> <br> Quan hàgiu acabat d'escriure tots els termes, tindreu dues «columnes» de termes: els termes en la llengua de partida a l'esquerra i els termes corresponents en la llengua d'arribada a la dreta (i potser una tercera columna que conté comentaris i explicacions). Els caràcters de tabulació (→ en l'exemple següent) i de retorn (¶&nbsp;) es poden visualitzar fent clic a la icona ¶ de la barra d'eines estàndard de l'OpenOffice.org Writer. El següent és un exemple d'un glossari de l'anglès al català:<br>
 <br>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; advanced→avançat -ada→adj.</div>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; file→fitxer→masc. (no: arxiu)¶</div>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; key→tecla, clau→fem.</div>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; e-mail address→adreça electrònica→fem. (abrev. a/e)¶</div>
-<br>NO utilitzeu la funció de "columnes" de l'OpenOffice.org per crear columnes; simplement separeu cada terme de partida i d'arribada amb una única tabulació.<br> <br> Quan hàgiu acabat d'escriure les entrades, seleccioneu <span
- style="font-style: italic;">Fitxer &gt; Anomena i desa</span>. Al quadre "Nom del fitxer", escriviu un nom per al fitxer de glossari, seguit de l'extensió "<span style="font-weight: bold;">.utf8</span>" (per exemple, "<span style="font-style: italic;">glossari.utf8</span>").&nbsp;A "<span style="font-style: italic;">Tipus de fitxers</span>", seleccioneu "<span style="font-style: italic;">Text codificat (.txt.)</span>".&nbsp;Desactiveu la casella "<span style="font-style: italic;">Extensió automàtica del nom del fitxer</span>" i activeu "<span style="font-style: italic;">Edita els paràmetres del filtre</span>":<br> <br> <img 
- alt="Diàleg Anomena i desa per al glossari"
- src="images/saveglossary.jpg"><br> <br> Confirmeu prement D'acord. S'obre un quadre de diàleg amb dues opcions: "<span
- style="font-style: italic;">Sí</span>" i&nbsp;"<span style="font-style: italic;">No</span>". Premeu "<span style="font-style: italic;">Sí</span>" per desar el fitxer en format de text codificat. <br> <br> Al diàleg Opcions del filtre ASCII (que es mostra a continuació), seleccioneu "<span style="font-style: italic;">Unicode (UTF-8)</span>" com a joc de caràcters:<br> <br> <img 
+<br>NO utilitzeu la funció de «columnes» de l'OpenOffice.org per crear columnes; simplement separeu cada terme de partida i d'arribada amb una única tabulació.<br> <br> Quan hàgiu acabat d'escriure les entrades, seleccioneu <span
+ style="font-style: italic;">Fitxer &gt; Anomena i desa</span>. Al quadre «Nom del fitxer», escriviu un nom per al fitxer de glossari, seguit de l'extensió «<span style="font-weight: bold;">.utf8</span>» (per exemple, «<span style="font-style: italic;">glossari.utf8</span>»).&nbsp;A «<span style="font-style: italic;">Tipus de fitxers</span>», seleccioneu «<span style="font-style: italic;">Text codificat (.txt.)</span>».&nbsp;Desactiveu la casella «<span style="font-style: italic;">Extensió automàtica del nom del fitxer</span>» i activeu «<span style="font-style: italic;">Edita els paràmetres del filtre</span>»:<br> <br> <img alt="Diàleg Anomena i desa per al glossari"
+ src="images/saveglossary.png"><br> <br> Confirmeu prement D'acord. S'obre un quadre de diàleg amb dues opcions: «<span
+ style="font-style: italic;">Sí</span>» i&nbsp;«<span style="font-style: italic;">No</span>». Premeu «<span style="font-style: italic;">Sí</span>» per desar el fitxer en format de text codificat. <br> <br> Al diàleg Opcions del filtre ASCII (que es mostra a continuació), seleccioneu «<span style="font-style: italic;">Unicode (UTF-8)</span>» com a joc de caràcters:<br> <br> <img 
  alt="Diàleg Opcions del filtre ASCII per al glossari"
- src="./images/AsciiFilteroptions.jpg"><br> <br> Confirmeu prement D'acord.<br> <br> Després de crear un projecte de l'OmegaT, copieu o mogueu aquest fitxer a dins de la carpeta <span style="font-style: italic;">\glossary</span> del projecte. Si ja teniu obert el projecte, torneu-lo a carregar després d'haver copiat el fitxer de glossari. Podeu fer canvis al fitxer de glossari mentre s'està utilitzant al projecte, però aquests canvis no es mostraran fins que torneu a carregar el projecte.<br> <br> En obrir un segment que contingui algun terme del text de partida, la subfinestra del glossari mostrarà les entrades del glossari (o dels glossaris, ja que en podeu utilitzar més d'un) que s'hagin trobat al segment de partida.<h3><a name="multiterm" id="multiterm"></a>Ús del Trados Multiterm</h3>
-<p>Els glossaris creats mitjançant la funció d'exportació de text del Trados Multiterm poden utilitzar-se com a glossaris de l'OmegaT sense cap modificació, sempre que tinguin l'extensió de fitxer <code>.tab</code> i que els dos primers camps siguin els camps de terme de partida i d'arribada, respectivament. Si exporteu mitjançant l'opció del sistema "exportació delimitada per tabuladors", haureu de suprimir les primeres 5 columnes (Seq. Nr, Date created etc.) que apareixen abans del dos termes que us interessen.</p>
+ src="./images/AsciiFilteroptions.png"><br> <br> Confirmeu prement D'acord.<br> <br> Després de crear un projecte de l'OmegaT, copieu o mogueu aquest fitxer a dins de la carpeta <span style="font-style: italic;">\glossary</span> del projecte. Si ja teniu obert el projecte, torneu-lo a carregar després d'haver copiat el fitxer de glossari. Podeu fer canvis al fitxer de glossari mentre s'està utilitzant al projecte. Els canvis que realitzeu al glossari es detecten automàticament cada segon i les modificacions es carreguen de forma transparent en segon pla. Per tant, no cal tornar a carregar el projecte després de desar el fitxer de glossari modificat.<br> <br> En obrir un segment que contingui algun terme del text de partida, la subfinestra del glossari mostrarà les entrades del glossari (o dels glossaris, ja que en podeu utilitzar més d'un i també poden estar en subcarpetes dins de <i>glossary</i>) que s'hagin trobat al segment de partida.<h3><a name="multiterm" id="multiterm"></a>Ús del Trados Multiterm</h3>
+<p>Els glossaris creats mitjançant la funció d'exportació de text del Trados Multiterm poden utilitzar-se com a glossaris de l'OmegaT sense cap modificació, sempre que tinguin l'extensió de fitxer <code>.tab</code> i que els dos primers camps siguin els camps de terme de partida i d'arribada, respectivament. Si exporteu mitjançant l'opció del sistema «exportació delimitada per tabuladors», haureu de suprimir les primeres 5 columnes (Seq. Nr, Date created etc.) que apareixen abans del dos termes que us interessen.</p>
 <hr>
 <h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Problemes comuns dels glossaris</h2>
 <dl>
@@ -58,7 +56,7 @@
   <dd>Causes possibles:</dd>
 </dl>
 <ul>
-  <li>No hi ha cap fitxer de glossari a la carpeta dels glossaris (per defecte, "glossary").</li>
+  <li>No hi ha cap fitxer de glossari a la carpeta dels glossaris (per defecte, «glossary»).</li>
   <li>El fitxer de glossari és buit.</li>
   <li>Els termes no estan separats amb un caràcter de tabulació.</li>
   <li>El fitxer de glossari no té l'extensió correcta (.tab o .utf8).</li>
@@ -75,7 +73,7 @@
   <li>L'extensió i la codificació del fitxer no coincideixen.</li>
 </ul>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="format">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>

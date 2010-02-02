@@ -2,171 +2,190 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Quant a l'OmegaT - Manual d'usuari de l'OmegaT 1.8</title>
+
+  <title>Quant a l'OmegaT - Manual d'usuari de l'OmegaT 2.0</title>
 </head>
 
 <body>
-  <h1>Instal·lació i execució de l'OmegaT</h1>Nota: 1.8.X es refereix a l'última versió 1.8 estable de l'OmegaT.<hr>
+  <h1>Instal·lació i execució de l'OmegaT</h1>Nota: 2.0.x es refereix a l'última versió 2.0 de l'OmegaT.<hr>
 
-  <table border="0" cellpadding="3" cellspacing="3">
-    <tr>
-      <td width="50%">
-        <h3><a href="#Linux_users">Usuaris del Linux (Intel)</a></h3>
+  <table summary="format" border="0" cellpadding="3" cellspacing="3">
+    <tbody>
+      <tr>
+        <td width="50%">
+          <h3><a href="#Linux_users">Usuaris del Linux (Intel)</a></h3>
 
-        <ul>
-          <li>
-            <p><a href="#linux_which">Paquet a baixar</a></p>
-          </li>
+          <ul>
+            <li>
+              <p><a href="#linux_which">Paquet a baixar</a></p>
+            </li>
 
-          <li>
-            <p><a href="#linux_install">Instal·lació</a></p>
-          </li>
+            <li>
+              <p><a href="#linux_install">Instal·lació</a></p>
+            </li>
 
-          <li>
-            <p><a href="#linux_menu">Configuració del menú del sistema operatiu</a></p>
+            <li>
+              <p><a href="#linux_menu">Configuració del menú del sistema operatiu</a></p>
 
-            <ul>
-              <li>
-                <p><a href="#menu_kde">Per al KDE</a></p>
-              </li>
+              <ul>
+                <li>
+                  <p><a href="#menu_kde">Per al KDE</a></p>
+                </li>
 
-              <li>
-                <p><a href="#menu_gnome">Per al GNOME</a></p>
-              </li>
-            </ul>
-          </li>
+                <li>
+                  <p><a href="#menu_gnome">Per al GNOME</a></p>
+                </li>
+              </ul>
+            </li>
 
-          <li>
-            <p><a href="#linux_running">Execució de l'OmegaT</a></p>
-          </li>
-        </ul>
-      </td>
+            <li>
+              <p><a href="#linux_running">Execució de l'OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
 
-      <td width="50%">
-        <h3><a href="#Windows_users">Usuaris del Windows</a></h3>
+        <td width="50%">
+          <h3><a href="#Windows_users">Usuaris del Windows</a></h3>
 
-        <ul>
-          <li>
-            <p><a href="#windows_which">Paquet a baixar</a></p>
-          </li>
+          <ul>
+            <li>
+              <p><a href="#windows_which">Paquet a baixar</a></p>
+            </li>
 
-          <li>
-            <p><a href="#windows_install">Instal·lació</a></p>
-          </li>
+            <li>
+              <p><a href="#windows_install">Instal·lació</a></p>
+            </li>
 
-          <li>
-            <p><a href="#windows_menu">Configuració del menú del Windows</a></p>
-          </li>
+            <li>
+              <p><a href="#windows_menu">Configuració del menú del Windows</a></p>
+            </li>
 
-          <li>
-            <p><a href="#windows_running">Execució de l'OmegaT</a></p>
-          </li>
-        </ul>
-      </td>
-    </tr>
+            <li>
+              <p><a href="#windows_running">Execució de l'OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="50%">
-        <h3><a href="#MacOSX_users">Usuaris del MacOSX</a></h3>
+      <tr>
+        <td width="50%">
+          <h3><a href="#MacOSX_users">Usuaris del MacOSX</a></h3>
 
-        <ul>
-          <li>
-            <p><a href="#osx_which">Paquet a baixar</a></p>
-          </li>
+          <ul>
+            <li>
+              <p><a href="#osx_which">Paquet a baixar</a></p>
+            </li>
 
-          <li>
-            <p><a href="#osx_install">Instal·lació</a></p>
-          </li>
+            <li>
+              <p><a href="#osx_install">Instal·lació</a></p>
+            </li>
 
-          <li>
-            <p><a href="#osx_dock">Configuració de l'acoblador</a></p>
-          </li>
+            <li>
+              <p><a href="#osx_dock">Configuració de l'acoblador</a></p>
+            </li>
 
-          <li>
-            <p><a href="#osx_running">Execució de l'OmegaT</a></p>
-          </li>
-        </ul>
-      </td>
+            <li>
+              <p><a href="#osx_running">Execució de l'OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
 
-      <td width="50%">
-        <h3><a href="#Other_systems">Altres sistemes: Solaris SPARC/x86/x64, </a><a href="#Other_systems">Linux x64/PowerPC, Windows x64</a></h3>
+        <td width="50%">
+          <h3><a href="#Other_systems">Altres sistemes: Solaris SPARC/x86/x64, </a><a href="#Other_systems">Linux x64/PowerPC, Windows x64</a></h3>
 
-        <ul>
-          <li>
-            <p><a href="#other_which">Paquet a baixar</a></p>
-          </li>
+          <ul>
+            <li>
+              <p><a href="#other_which">Paquet a baixar</a></p>
+            </li>
 
-          <li>
-            <p><a href="#other_install">Instal·lació</a></p>
-          </li>
+            <li>
+              <p><a href="#other_install">Instal·lació</a></p>
+            </li>
 
-          <li>
-            <p><a href="#other_menu">Configuració del menú del sistema operatiu</a></p>
-          </li>
+            <li>
+              <p><a href="#other_menu">Configuració del menú del sistema operatiu</a></p>
+            </li>
 
-          <li>
-            <p><a href="#other_running">Execució de l'OmegaT</a></p>
-          </li>
-        </ul>
-      </td>
-    </tr>
-  </table>
+            <li>
+              <p><a href="#other_running">Execució de l'OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
 
-  <h3><a href="#command_line">Execució mitjançant la línia d'ordres</a></h3>
+      <tr>
+        <td>
+          <h3><a href="installingAndRunning.html#command_line">Execució mitjançant la línia d'ordres</a></h3>
 
-  <ul>
-    <li>
-      <p><a href="#terminal">Obrir una finestra de línia d'ordres</a></p>
-    </li>
+          <ul>
+            <li>
+              <p><a href="installingAndRunning.html#command_line">Obrir una finestra de línia d'ordres</a></p>
+            </li>
 
-    <li>
-      <p><a href="#script">Canviar l'script d'execució</a></p>
-    </li>
+            <li>
+              <p><a href="installingAndRunning.html#script">Canviar l'script d'execució</a></p>
+            </li>
 
-    <li>
-      <p><a href="#arguments">Arguments de l'ordre d'execució</a></p>
-    </li>
-  </ul>
+            <li>
+              <p><a href="installingAndRunning.html#arguments">Arguments de l'ordre d'execució</a></p>
+            </li>
+          </ul>
+        </td>
 
-  <h3><a href="#source_build">Muntatge de l'OmegaT des del codi font</a></h3>
+        <td>
+          <h3><a href="installingAndRunning.html#source_build">Muntatge de l'OmegaT des del codi font</a></h3>
 
-  <ul>
-    <li>
-      <p><a href="#build_which">Paquet a baixar</a></p>
-    </li>
+          <ul>
+            <li>
+              <p><a href="installingAndRunning.html#build_which">Paquet a baixar</a></p>
+            </li>
 
-    <li>
-      <p><a href="#ant">Procés de muntatge</a></p>
-    </li>
-  </ul>
+            <li>
+              <p><a href="installingAndRunning.html#ant">Procés de muntatge&nbsp;</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Using_WebStart_">Ús del Java Web Start</a></h3>
+        </td>
+
+        <td></td>
+      </tr>
+    </tbody>
+  </table><br>
   <hr>
 
   <h2><a name="Linux_users" id="Linux_users"></a>Usuaris del Linux (Intel)</h2>
 
   <h3><a name="linux_which" id="linux_which"></a>Quin paquet cal baixar?</h3>
 
-  <p>Teniu instal·lada una implementació del Java compatible amb el Java 1.4 JRE de SUN?</p>
+  <p>Teniu instal·lada una implementació del Java compatible amb el Java 1.5 JRE de SUN?</p>
 
-  <table border="0" cellpadding="3" cellspacing="3">
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>Sí:&nbsp;</strong></p>
-      </td>
+  <table summary="format" border="0" cellpadding="3" cellspacing="3">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Sí:&nbsp;</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Baixeu el paquet <em>OmegaT_1.8.X_Without_JRE.zip</em>. Aquest paquet es pot utilitzar en qualsevol plataforma que tingui instal·lat un JRE compatible amb Java 1.4 JRE.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>Baixeu el paquet <em>OmegaT_2.0.x_Without_JRE.zip</em>. Aquest paquet es pot utilitzar en qualsevol plataforma que tingui instal·lat un JRE compatible amb Java 1.5 JRE.</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="11%">
-        <p><strong>No / No ho sé:</strong></p>
-      </td>
+      <tr>
+        <td width="11%">
+          <p><strong>No / No ho sé:</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Baixeu el paquet <em>OmegaT_1.8.X_Linux.tar.gz</em>. Aquest paquet inclou l'entorn d'execució del Java de SUN. Aquest JRE no interferirà amb altres implementacions del Java que hi hagi instal·lades al sistema.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>Baixeu el paquet <em>OmegaT_2.0.x_Linux.tar.gz</em>. Aquest paquet inclou l'entorn d'execució del Java de SUN. Aquest JRE no interferirà amb altres implementacions del Java que hi hagi instal·lades al sistema.</p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h3><a name="linux_install" id="linux_install"></a>Instal·lació de l'OmegaT</h3>
@@ -191,11 +210,11 @@
     </li>
 
     <li>
-      <p>Al camp "Ordre", utilitzeu el botó de navegació per cercar l'script d'execució de l'OmegaT (el fitxer anomenat OmegaT a la carpeta descomprimida) i seleccioneu-lo.</p>
+      <p>Al camp «Ordre», utilitzeu el botó de navegació per cercar l'script d'execució de l'OmegaT (el fitxer anomenat OmegaT a la carpeta descomprimida) i seleccioneu-lo.</p>
     </li>
 
     <li>
-      <p>Feu clic al botó de la icona (a la part dreta dels camps Nom/Descripció/Comentari) - Altres icones - Navega, i navegueu fins a la subcarpeta /images de la carpeta d'instal·lació de l'OmegaT. Seleccioneu la icona OmegaT.png.</p>
+      <p>Feu clic al botó de la icona (a la part dreta dels camps Nom/Descripció/Comentari) - Altres icones - Navega, i navegueu fins a la subcarpeta /images de la carpeta d'instal·lació de l'OmegaT. Seleccioneu la icona de l'OmegaT.</p>
     </li>
 
     <li>
@@ -213,8 +232,11 @@
     </li>
 
     <li>
-      <p>Escriviu "OmegaT" al camp "Nom"; al camp "Ordre", utilitzeu el botó de navegació per cercar l'script d'execució de l'OmegaT (el fitxer anomenat OmegaT a la carpeta descomprimida). Seleccioneu-lo i feu clic al botó D'acord.</p>
+      <p>Escriviu «OmegaT» al camp «Nom»; al camp «Ordre», utilitzeu el botó de navegació per cercar l'script d'execució de l'OmegaT (el fitxer anomenat OmegaT a la carpeta descomprimida). Seleccioneu-lo i feu clic al botó D'acord.</p>
     </li>
+
+    <li>Feu clic al botó de la icona, feu clic a Navega... i navegueu fins a la subcarpeta /images de la carpeta d'instal·lació de l'OmegaT. Seleccioneu el fitxer <span style=
+    "font-style: italic;">OmegaT_icon.png</span> . És possible que el GNOME no mostri els fitxers d'icona amb els formats disponibles i que inicialment sembli que cal seleccionar un fitxer SVG, però si seleccioneu la carpeta, apareixeran els fitxers i podreu seleccionar el fitxer OmegaT_icon.png.</li>
   </ul>
 
   <h3><a name="linux_running" id="linux_running"></a>Execució de l'OmegaT</h3>
@@ -228,26 +250,28 @@
 
   <p>Teniu instal·lada una implementació del Java compatible amb el Java 1.4 JRE de SUN?</p>
 
-  <table border="0" cellpadding="3" cellspacing="0">
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>Sí:</strong></p>
-      </td>
+  <table summary="format" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Sí:</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Baixeu el paquet <em>OmegaT_1.8.X_Windows_without_JRE.exe</em>. Aquest paquet es pot utilitzar en qualsevol plataforma Windows que tingui instal·lat un JRE compatible amb Java 1.4 JRE.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>Baixeu el paquet <em>OmegaT_2.0.x_Windows_without_JRE.exe</em>. Aquest paquet es pot utilitzar en qualsevol plataforma Windows que tingui instal·lat un JRE compatible amb Java 1.5 JRE.</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="11%">
-        <p><strong>No / No ho sé:</strong></p>
-      </td>
+      <tr>
+        <td width="11%">
+          <p><strong>No / No ho sé:</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Baixeu el paquet <em>OmegaT_1.8.X_Windows.exe</em>. Aquest paquet inclou l'entorn d'execució del Java de SUN. Aquest JRE no interferirà amb altres implementacions del Java que hi hagi instal·lades al sistema.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>Baixeu el paquet <em>OmegaT_2.0.x_Windows.exe</em>. Aquest paquet inclou l'entorn d'execució del Java de SUN. Aquest JRE no interferirà amb altres implementacions del Java que hi hagi instal·lades al sistema.</p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h3><a name="windows_install" id="windows_install"></a>Instal·lació de l'OmegaT</h3>
@@ -264,20 +288,22 @@
 
   <p>Un cop instal·lat l'OmegaT, podeu fer clic a <em>OmegaT.jar</em> per executar-lo directament, o bé podeu executar-lo directament des de la línia d'ordres.</p>
 
-  <p>No obstant, el més senzill és executar el programa OmegaT.exe. En aquest cas, els paràmetres d'execució es llegiran del fitxer <em>OmegaT.l4J.ini</em>, que es troba a la mateixa carpeta que el fitxer exe i que podeu editar per tal de definir les vostres preferències. El fitxer INI següent reservarà 1 GB de memòria, utilitzarà el francès com a idioma de l'usuari i Portugal com a país:</p>
+  <p>No obstant, el més senzill és executar el programa OmegaT.exe. En aquest cas, els paràmetres d'execució es llegiran del fitxer <em>OmegaT.l4J.ini</em>, que es troba a la mateixa carpeta que el fitxer exe i que podeu editar per tal de definir les vostres preferències. El fitxer INI següent reservarà 1 GB de memòria, utilitzarà el francès com a llengua de l'usuari i Portugal com a país:</p>
 
-  <p><code># Configuració en temps d'execució de l'OmegaT.exe<br> #<br> # Per utilitzar un paràmetre, elimineu el caràcter '#' que apareix abans de '-'<br> # Memòria<br> -Xmx1024M<br> # Llengua<br> -Duser.language=FR<br> # País<br> -Duser.country=PT<br> # Antialiàsing (només Java 1.4 i 1.5)<br> #-Dswing.aatext=true<br> # Expansió d'entitats per a XML (només Java 1.4)<br> #-DentityExpansionLimit=400000</code></p>
+  <p><code># Configuració en temps d'execució de l'OmegaT.exe<br> #<br> # Per utilitzar un paràmetre, elimineu el caràcter «#» que apareix abans de «-»<br> # Memòria<br> -Xmx1024M<br> # Llengua<br> -Duser.language=FR<br> # País<br> -Duser.country=PT<br> # Antialiàsing (només Java 1.4 i 1.5)<br> #-Dswing.aatext=true<br> # Expansió d'entitats per a XML (només Java 1.4)<br> #-DentityExpansionLimit=400000</code></p>
   <hr>
 
   <h2><a name="MacOSX_users" id="MacOSX_users"></a>Usuaris del MacOSX</h2>
 
   <h3><a name="osx_which" id="osx_which"></a>Quin paquet cal baixar?</h3>
 
-  <p>Baixeu el paquet <em>OmegaT_1.8.X_MacOSX.zip</em>.</p>
+  <p>L'OmegaT 2.0 necessita Java 1.5 per funcionar. Els usuaris del Mac OSX 10.4 (Tiger) han d'assegurar-se que utilitzin la versió més recent de Java abans d'instal·lar l'OmegaT. Utilitzeu la funció de cerca d'actualitzacions del programari del menú Apple per actualitzar la versió de Java.</p>
+
+  <p>Baixeu el paquet <em>OmegaT_2.0.x_Mac.zip</em>.</p>
 
   <h3><a name="osx_install" id="osx_install"></a>Instal·lació de l'OmegaT</h3>
 
-  <p>Feu doble clic a <em>OmegaT_1.8.X_MacOSX.zip</em> per descomprimir-lo. Es muntarà automàticament una imatge de disc de l'OSX (<em>OmegaT.dmg</em>), que contindrà dos fitxers:  <em>documentation.html</em> i <em>OmegaT.app</em>. Copieu aquests dos fitxers a una carpeta adient (per exemple, Aplicacions, dins de la qual podeu crear la carpeta OmegaT). A continuació, podeu suprimir el fitxer <em>OmegaT_1.8.X_MacOSX.zip</em>.</p>
+  <p>Feu doble clic a <em>OmegaT_2.0.x_Mac.zip</em> per descomprimir-lo. Això crearà una carpeta anomenada <em>OmegaT</em> amb la icona de l'OmegaT. La carpeta conté dos fitxers: <em>documentation.html</em> i <em>OmegaT.app</em>. Copieu la carpeta a una carpeta adient (per exemple, Aplicacions). A continuació, podeu suprimir el fitxer <em>OmegaT_2.0.x_Mac.zip</em>.</p>
 
   <h3><a name="osx_dock" id="osx_dock"></a>Com afegir l'OmegaT a l'acoblador</h3>
 
@@ -287,7 +313,19 @@
 
   <p>Feu doble clic a <em>OmegaT.app</em> o feu clic a la icona corresponent de l'acoblador.</p>
 
-  <p>Si voleu canviar els paràmetres d'execució del Java des de la línia d'ordres, és recomanable que utilitzeu el paquet disponible per a "Altres sistemes", descrit a continuació. També podeu modificar directament el fitxer <em>Info.plist</em>, que es troba dins del paquet <em>OmegaT.app</em>.</p>
+  <p>Si voleu canviar els paràmetres d'execució del Java, podeu modificar els paràmetres per defecte d'OmegaT.app editant el fitxer <em>Info.plist</em> que es troba a <em>OmegaT.app/Contents/</em>. Obriu el fitxer «Info.plist» fent-hi clic amb el botó dret i seleccionant l'editor de text que vulgueu. Podeu modificar la part <em>Properties</em> i la part <em>VMOptions</em>. Si voleu afegir valors a <em>VMOptions</em>, separeu-los amb espais. Per exemple, <code>-Xmx1024M -Duser.language=ca</code> iniciarà l'OmegaT amb 1024 MB de memòria i amb la interfície d'usuari en català.</p>
+
+  <p>Si inicieu l'<em>OmegaT.app</em> directament, no podreu executar diverses instàncies de l'<em>OmegaT.app</em>. Si us cal executar diverses instàncies de l'<em>OmegaT.app</em>, utilitzeu el fitxer <em>JavaApplicationStub</em> que es troba a <em>OmegaT.app/Contents/MacOS/</em>.</p>
+
+  <p>No es pot utilitzar l'analitzador lèxic Lucene Stemmer des del paquet <em>OmegaT.app</em>. Heu d'executar l'OmegaT des de la línia d'ordres (vegeu més avall).</p>
+
+  <p>Per canviar els paràmetres d'execució del Java des de la línia d'ordres, crideu el fitxer <em>OmegaT.jar</em> que es troba a <em>OmegaT.app/Contents/Resources/Java/</em>. Executar l'<em>OmegaT.app</em> des de la línia d'ordres és equivalent a utilitzar el paquet «genèric» de l'OmegaT. Podreu executar diverses instàncies de l'OmegaT, així com utilitzar l'analitzador lèxic Lucene Stemmer. Vegeu «Execució mitjançant la línia d'ordres» més endavant per obtenir més informació.</p>
+
+  <p>Per accedir a qualsevol ubicació amb el paquet <em>OmegaT.app</em>, feu clic amb el botó dret a <em>OmegaT.app</em> i seleccioneu l'opció de mostrar el contingut del paquet, o bé utilitzeu l'ordre «cd» directament des de la línia d'ordres per anar-hi.</p>
+
+  <h4>Funcions addicionals del Mac OSX</h4>
+
+  <p>Podeu accedir a l'<em>OmegaT.app</em> des dels serveis que ofereix el Mac OSX. Per tant, podeu seleccionar qualsevol paraula a l'OmegaT i utilitzar els servis per consultar la paraula als serveis que proporcionin aplicacions de diccionari, a l'Spotlight o a Google. També podeu utilitzar l'AppleScript o l'Automator per crear serveis o scripts que automatitzin les accions freqüents.</p>
   <hr>
 
   <h2><a name="Other_systems" id="Other_systems"></a>Altres sistemes</h2>
@@ -296,50 +334,52 @@
 
   <p>L'OmegaT està disponible amb un Java JRE de SUN per a les plataformes Linux (Intel x86) i Windows. Els usuaris d'altres plataformes (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64, etc.) han de tenir al sistema un Java JRE compatible que funcioni correctament per poder utilitzar l'OmegaT.</p>
 
-  <p>Teniu instal·lada una implementació del Java compatible amb el Java 1.4 JRE de SUN?</p>
+  <p>Teniu instal·lada una implementació del Java compatible amb el Java 1.5 JRE de SUN?</p>
 
-  <table border="0" cellpadding="3" cellspacing="0">
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>Sí:</strong></p>
-      </td>
+  <table summary="format" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Sí:</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Baixeu el paquet <em>OmegaT_1.8.X_Without_JRE.zip</em>. Aquest paquet es pot utilitzar en qualsevol plataforma que tingui instal·lat un JRE compatible amb el Java 1.4 JRE.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>Baixeu el paquet <em>OmegaT_2.0.x_Without_JRE.zip</em>. Aquest paquet es pot utilitzar en qualsevol plataforma que tingui instal·lat un JRE compatible amb Java 1.5.</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>No ho sé:</strong></p>
-      </td>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>No ho sé:</strong></p>
+        </td>
 
-      <td width="70%">
-        <p>Obriu una finestra de terminal i escriviu "java -version". Si es mostra el missatge "no s'ha trobat l'ordre" o semblant, és probable que no el Java no estigui instal·lat al sistema.</p>
-      </td>
-    </tr>
+        <td width="70%">
+          <p>Obriu una finestra de terminal i escriviu «java -version». Si es mostra el missatge «no s'ha trobat l'ordre» o semblant, és probable que no el Java no estigui instal·lat al sistema.</p>
+        </td>
+      </tr>
 
-    <tr>
-      <td width="11%" valign="top">
-        <p><strong>No:</strong></p>
-      </td>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>No:</strong></p>
+        </td>
 
-      <td width="70%">
-        <dl>
-          <dd>Obtingueu un Java JRE per al vostre sistema (vegeu més endavant) i baixeu el paquet <em>OmegaT_1.8.X_Without_JRE.zip</em>. SUN ofereix diversos JRE per al Solaris SPARC/x86 (Java 1.5) i per al Linux x64, Solaris x64 i Windows x64 (Java 1.5):  <strong>http://java.sun.com/products/archive/</strong>. IBM ofereix diversos JRE per al Linux PowerPC:</dd>
+        <td width="70%">
+          <dl>
+            <dd>Obtingueu un Java JRE per al vostre sistema (vegeu més endavant) i baixeu el paquet <em>OmegaT_2.0.x_Without_JRE.zip</em>. SUN ofereix diversos JRE per al Solaris SPARC/x86 (Java 1.5) i per al Linux x64, Solaris x64 i Windows x64 (Java 1.5):  <strong>http://java.sun.com/products/archive/</strong>. IBM ofereix diversos JRE per al Linux PowerPC:</dd>
 
-          <dd>
-          <strong>http://www.ibm.com/developerworks/java/jdk/linux/download.html</strong></dd>
+            <dd>
+            <strong>http://www.ibm.com/developerworks/java/jdk/linux/download.html</strong></dd>
 
-          <dd>Seguiu les instruccions del paquet que necessiteu.</dd>
-        </dl>
-      </td>
-    </tr>
+            <dd>Seguiu les instruccions del paquet que necessiteu.</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h3><a name="other_install" id="other_install"></a>Instal·lació de l'OmegaT</h3>
 
-  <p>Per instal·lar l'OmegaT, descomprimiu el fitxer <strong><em>OmegaT_1.8.X_Without_JRE.zip</em></strong>. Això crearà el directori <em>./OmegaT_1.8.X_Without_JRE/</em> a la carpeta de treball, que contindrà tots els fitxers necessaris per executar l'OmegaT.</p>
+  <p>Per instal·lar l'OmegaT, descomprimiu el fitxer <strong><em>OmegaT_2.0.x_Without_JRE.zip</em></strong>. Això crearà el directori <em>./OmegaT_2.0.x_Without_JRE/</em> a la carpeta de treball, que contindrà tots els fitxers necessaris per executar l'OmegaT.</p>
 
   <h3><a name="other_menu" id="other_menu"></a>Instal·lació de dreceres útils</h3>
 
@@ -354,11 +394,9 @@
 
   <p>Normalment, no cal executar l'OmegaT des de la línia d'ordres. No obstant, el mètode de la línia d'ordres per executar l'OmegaT permet controlar aspectes del comportament del programa mitjançant modificacions. Hi ha dues maneres d'executar l'OmegaT des de la línia d'ordres.</p>
 
-  <p><a name="terminal" id="terminal"></a>És recomanable que els usuaris del paquet del Mac OSX que vulguin controlar l'OmegaT des de la línia d'ordres utilitzin el paquet disponible per a "Altres sistemes". Vegeu-ne la descripció més amunt.</p>
-
   <h3>Mètode 1: Obrir una finestra de línia d'ordres</h3>
 
-  <p>La finestra de línia d'ordres també s'anomena "finestra de terminal". Al Windows, s'anomena "finestra de l'MS-DOS" i s'hi pot accedir anant al menú d'Inici, Programes i seleccionant "MS-DOS". L'equivalent al Mac OSX és l'aplicació Terminal, que es troba dins d'Aplicacions → Utilitats.</p>
+  <p>La finestra de línia d'ordres també s'anomena «finestra de terminal». Al Windows, s'anomena «finestra de l'MS-DOS» i s'hi pot accedir anant al menú d'Inici, Programes i seleccionant «MS-DOS». L'equivalent al Mac OSX és l'aplicació Terminal, que es troba dins d'Aplicacions → Utilitats.</p>
 
   <p>Per executar l'OmegaT, normalment cal escriure dues ordres. La primera ordre és:</p>
 
@@ -373,7 +411,7 @@
 
     <dt>Mac OSX</dt>
 
-    <dd><em>cd /Applications/OmegaT</em></dd>
+    <dd><em>cd &lt;ubicació OmegaT.app&gt;/OmegaT.app/Contents/Resources/Java/</em></dd>
 
     <dt>Linux</dt>
 
@@ -390,64 +428,89 @@
 
   <h3><a name="script" id="script"></a>Mètode 2: Canviar l'script d'execució/el fitxer <em>.bat</em></h3>
 
-  <p>El mètode 1 no és pràctic per executar un programa amb certa freqüència. Per això, les dues ordres descrites més amunt s'inclouen dins d'un sol fitxer (un "script", o un "fitxer <em>.bat</em>" en sistemes Windows).</p>
+  <p>El mètode 1 no és pràctic per executar un programa amb certa freqüència. Per això, les dues ordres descrites més amunt s'inclouen dins d'un sol fitxer (un «script», o un «fitxer <em>.bat</em>» en sistemes Windows).</p>
 
   <p>En executar aquest fitxer, s'executaran automàticament les ordres que inclou. Per tant, per fer canvis a l'ordre d'execució, només cal modificar el fitxer. En executar l'OmegaT mitjançant el fitxer, s'executaran les ordres noves.</p>
 
   <h3><a name="arguments" id="arguments"></a>Arguments de l'ordre d'execució</h3>
 
-  <p>L'ordre bàsica ja s'ha esmentat més amunt. Per canviar l'ordre, s'hi afegeixen "arguments". Els arguments s'afegeixen després del "<em>java</em>" inicial i abans de la part "<em>-jar OmegaT.jar</em>". Tingueu en compte que al Windows podeu modificar el fitxer <em>OmegaT.l4J.ini</em> per tal de definir les vostres preferències.</p>
+  <p>L'ordre bàsica ja s'ha esmentat més amunt. Per canviar l'ordre, s'hi afegeixen «arguments». Els arguments s'afegeixen després del «<em>java</em>» inicial i abans de la part «<em>-jar OmegaT.jar</em>». Tingueu en compte que al Windows podeu modificar el fitxer <em>OmegaT.l4J.ini</em> per tal de definir les vostres preferències. Per fer el mateix al Mac OSX, podeu canviar el fitxer <em>Info.plist</em> que es troba a <em>OmegaT.app/Contents/</em>.</p>
 
-  <p>A continuació es detallen els arguments possibles. Per obtenir més informació sobre els arguments, escriviu <em>man java</em> a la finestra de terminal. <em>man</em> és una ordre de la finestra de terminal que mostra un manual de l'ordre especificada. És possible que el sistema no tingui el manual de l'ordre <em>java</em> en la vostra llengua.</p>
+  <p>A continuació es detallen els arguments possibles. Per obtenir més informació sobre els arguments, escriviu <em>man java</em> a la finestra de terminal (<em>man</em> és una ordre de la finestra de terminal que mostra un manual de l'ordre especificada). És possible que el sistema no tingui el manual de l'ordre <em>java</em> en la vostra llengua.</p>
 
-  <p><b>Llengua de la interfície d'usuari:&nbsp;</b><em>-Duser.language=XX</em></p>
+  <p><b>Llengua de la interfície d'usuari:</b> <em>-Duser.language=XX</em></p>
 
-  <table>
-    <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-      <td>
-        <p>Quan l'OmegaT s'executa sense cap argument, el programa detecta la llengua del sistema operatiu de l'usuari. Si hi ha disponible una interfície d'usuari en aquesta llengua, l'OmegaT la utilitza. Per exemple, si el sistema operatiu de l'usuari és en rus i l'OmegaT s'ha traduït al rus, la interfície d'usuari, els menús, etc. de l'OmegaT apareixeran en rus. Si la llengua del sistema de l'usuari no està disponible, l'OmegaT s'executarà per defecte en anglès. Aquest és el comportament estàndard.<br> <br> L'argument "<em>-Duser.language=XX</em>" fa que l'OmegaT utilitzi la llengua especificada en comptes de la llengua del sistema operatiu de l'usuari. "XX" indica el codi de dos dígits de la llengua que voleu. Així doncs, per iniciar l'OmegaT amb la interfície en català (per exemple, en un sistema operatiu en rus), l'ordre seria: <em>java -Duser.language=ca -jar OmegaT.jar</em></p>
-      </td>
-    </tr>
+        <td>
+          <p>Quan l'OmegaT s'executa sense cap argument, el programa detecta la llengua del sistema operatiu de l'usuari. Si hi ha disponible una interfície d'usuari en aquesta llengua, l'OmegaT la utilitza. Per exemple, si el sistema operatiu de l'usuari és en rus i l'OmegaT s'ha traduït al rus, la interfície d'usuari, els menús, etc. de l'OmegaT apareixeran en rus. Si la llengua del sistema de l'usuari no està disponible, l'OmegaT s'executarà per defecte en anglès. Aquest és el comportament estàndard.<br> <br> L'argument «<em>-Duser.language=XX</em>» fa que l'OmegaT utilitzi la llengua especificada en comptes de la llengua del sistema operatiu de l'usuari. «XX» indica el codi de dos dígits de la llengua que voleu. Així doncs, per iniciar l'OmegaT amb la interfície en català (per exemple, en un sistema operatiu en rus), l'ordre seria:</p>
+
+          <p><em>java -Duser.language=ca -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <p><strong>Configuració del país de l'usuari:</strong><em>&nbsp;-Duser.country=XX</em></p>
 
-  <table>
-    <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <p>A continuació de la llengua, també podeu especificar el país, per exemple, CN o TW en el cas del xinès. Per veure la Guia d'inici ràpid correcta, cal que especifiqueu tant la llengua com el país. Això és necessari encara que només hi hagi una sola combinació disponible, com per exemple, pt_BR en el cas del portuguès de Brasil.</p>
 
-      <td>
-        <p>A continuació de la llengua, també podeu especificar el país, per exemple, CN o TW en el cas del xinès. Per veure la Guia d'inici ràpid correcta, cal que especifiqueu tant la llengua com el país. Això és necessari encara que només hi hagi una sola combinació disponible, com per exemple, pt_BR en el cas del portuguès de Brasil.</p>
-      </td>
-    </tr>
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
   </table>
 
   <p><strong>Antialiàsing del tipus de lletra:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
 
-  <table>
-    <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-      <td>
-        <p>Aquest argument afecta l'antialiàsing (suavització) dels tipus de lletra, cosa que en millora l'aspecte.</p>
-      </td>
-    </tr>
+        <td>
+          <p>Aquest argument afecta l'antialiàsing (suavització) dels tipus de lletra, cosa que en millora l'aspecte.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Antialiàsing del tipus de lletra (Java 6 o posterior) :</strong><em>&nbsp;-</em><span style=
+  "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
+
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>&nbsp;Els valors possibles per a «XX» són «false», «on», «gasp» i «lcd». Els usuaris del Linux veuran que, en funció del tipus de lletra i de la mida seleccionats, els valors «on» o «lcd» poden millorar l'aspecte dels tipus de lletra.</p>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <p><strong>Assignació de memòria:</strong><em>&nbsp;-XmxZZM</em></p>
 
-  <table>
-    <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
-      <td>
-        <p>Aquest argument assigna més memòria a l'OmegaT. Per defecte, s'assignen 256 MB. Per tant, no té sentit assignar menys memòria que aquesta xifra. "ZZ" indica la quantitat de memòria assignada, en megabytes. Així doncs, l'ordre per executar l'OmegaT amb una assignació de 1024 MB (1 gigabyte) de memòria seria: <em>java -Xmx1024M -jar OmegaT.jar</em></p>
+        <td>
+          <p>Aquest argument assigna més memòria a l'OmegaT. Per defecte, s'assignen 256 MB. Per tant, no té sentit assignar menys memòria que aquesta xifra. «ZZ» indica la quantitat de memòria assignada, en megabytes. Així doncs, l'ordre per executar l'OmegaT amb una assignació de 1024 MB (1 gigabyte) de memòria seria:</p>
 
-        <p>Els arguments es poden combinar: Per iniciar l'OmegaT amb tots els exemples descrits més amunt, l'ordre seria:<br> <em>java -Dswing.aatext=true -Duser.language=ca -Duser.country=AD -Xmx1024M -jar OmegaT.jar</em></p>
-      </td>
-    </tr>
+          <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+
+          <p>Els arguments es poden combinar: Per iniciar l'OmegaT amb tots els exemples descrits més amunt, l'ordre seria:<br> <em>java -Dswing.aatext=true -Duser.language=ca -Duser.country=AD -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
   </table>
   <hr>
 
@@ -456,9 +519,9 @@
   <h3><a name="build_which" id="build_which"></a>Quin paquet cal baixar?</h3>
 
   <dl>
-    <dt>Baixeu el paquet <em>OmegaT_1.8.X_Source.zip</em>.</dt>
+    <dt>Baixeu el paquet <em>OmegaT_2.0.x_Source.zip</em>.</dt>
 
-    <dd>Aquest paquet conté els fitxers font corresponents a la versió alliberada i es poden utilitzar en qualsevol sistema que tingui instal·lat un Java 1.4 JDK o un sistema Java compatible. També necessitareu la utilitat <em>ant</em> per muntar l'OmegaT.</dd>
+    <dd>Aquest paquet conté els fitxers font corresponents a la versió alliberada i es poden utilitzar en qualsevol sistema que tingui instal·lat un Java 1.5 JDK o un sistema Java compatible. També necessitareu la utilitat <em>ant</em> per muntar l'OmegaT.</dd>
 
     <dt>L'OmegaT&nbsp;utilitza el SubVersion per al control de versions. El codi més recent està disponible al servidor SVN:</dt>
 
@@ -468,7 +531,7 @@
   <h3><a name="ant" id="ant"></a>Muntatge de l'OmegaT</h3>
 
   <dl>
-    <dd>Descomprimiu el fitxer <em>OmegaT_1.8.X_Source.zip</em> i aneu al directori <em>OmegaT_1.8.X_Source</em> o aneu al directori <em>./omegat/</em> del codi d'SVN que heu extret. Comproveu que la carpeta contingui el fitxer <em>build.xml</em>. A continuació, des de la línia d'ordres, escriviu:</dd>
+    <dd>Descomprimiu el fitxer <em>OmegaT_2.0.x_Source.zip</em> i aneu al directori <em>OmegaT_2.0.x_Source</em> o aneu al directori <em>./omegat/</em> del codi d'SVN que heu extret. Comproveu que la carpeta contingui el fitxer <em>build.xml</em>. A continuació, des de la línia d'ordres, escriviu:</dd>
   </dl>
 
   <p><em>$ ant jar release</em></p>
@@ -476,17 +539,35 @@
   <dl>
     <dd>Això crearà una distribució completa de l'OmegaT al directori <em>./dist/</em>, on hi trobareu tots els fitxers necessaris per executar l'OmegaT.</dd>
   </dl>
+  <hr style="width: 100%; height: 2px;">
+
+  <h2><a name="Using_WebStart_" id="Using_WebStart_"></a>Ús del Java Web Start</h2>
+
+  <dl>
+    <dt>Mitjançant la tecnologia Java Web Start (part de Java 1.5 i superior), les aplicacions de programari de Java autònomes poden desplegar-se amb un sol clic a través de la xarxa. El Java Web Start assegura que es desplegarà la versió més actual de l'aplicació, així com la versió correcta de l'<a href="http://java.sun.com/j2se/desktopjava/jre/index.jsp" title=
+    "Entorn d'execució de Java (JRE)">Entorn d'execució de Java (JRE)</a>. Per iniciar l'OmegaT la primera vegada amb el Java Web Start, aneu al següent URL al navegador:</dt>
+
+    <dd><span style="font-style: italic;">&nbsp;&nbsp;&nbsp; http://omegat.sourceforge.net/webstart/OmegaT.jnlp</span><br> <br> Baixeu el fitxer <span style="font-style: italic;">OmegaT.jnlp</span> i feu-hi clic. Durant la instal·lació, en funció del sistema operatiu, és possible que es mostrin diversos avisos de seguretat. El certificat és autosignat per «Didier Briel». Els permisos que doneu a aquesta versió (possiblement s'hi faci referència com a un «accés no restringit a l'ordinador») són idèntics als permisos que doneu a la versió local: permeten l'accés al disc dur de l'ordinador. Cada vegada que executeu l'<span style=
+    "font-style: italic;">OmegaT.jnlp</span>, es comprovarà si hi ha alguna actualització, si n'hi ha alguna s'instal·larà i, a continuació, s'iniciarà l'OmegaT. Per descomptat, després de la instal·lació inicial, també podeu utilitzar l'<span style=
+    "font-style: italic;">OmegaT.jnlp</span> quan esteu fora de línia. <span style="font-weight: bold;"><br> <br> Privadesa:</span> El Java Web Start de l'OmegaT no desa cap informació fora de l'ordinador on s'executa. L'aplicació només s'executa al vostre ordinador. Els documents i les memòries de traducció romanen al vostre ordinador i el projecte OmegaT no té accés ni a la vostra feina ni a la vostra informació.<br> <br> Tingueu en compte que, si us cal utilitzar algun argument de l'ordre d'execució (vegeu més amunt), haureu d'utilitzar la instal·lació normal.</dd>
+  </dl>
+
+  <dl>
+    <dt><br></dt>
+  </dl>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table summary="format" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
-        <td style="text-align: center;"><a href="index.html">Inici</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inici</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índex</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

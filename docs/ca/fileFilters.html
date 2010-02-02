@@ -2,7 +2,7 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Filtres de fitxers - Manual d'usuari de l'OmegaT 1.8</title>
+  <title>Filtres de fitxers - Manual d'usuari de l'OmegaT 2.0</title>
 </head>
 
 <body>
@@ -135,7 +135,7 @@
 
   <h3><a name="source_file_name" id="source_file_name"></a>Tipus i patró de nom de fitxer dels fitxers de partida</h3>
 
-  <p>Quan l'OmegaT detecta un fitxer dins de la carpeta dels fitxers de partida del projecte (per defecte, "source"), intenta seleccionar el filtre a partir de l'extensió del fitxer. Concretament, l'OmegaT compara els patrons de nom de fitxer de partida de cada filtre amb el nom del fitxer. Per exemple, el patró <code>*.xhtml</code> coincidirà amb qualsevol fitxer que tingui l'extensió <code>.xhtml</code>. Si es troba un filtre adient, s'utilitzarà per processar el fitxer. Per exemple, per defecte s'utilitzarà el filtre XHTML per processar els fitxers que tinguin l'extensió <code>.xhtml</code>. Podeu canviar o afegir patrons de nom de fitxer per als fitxers que gestionarà cada filtre de fitxer. Els patrons de nom de fitxer de partida utilitzen caràcters comodí semblants als que s'utilitzen a les <strong>Cerques</strong>. El caràcter '<strong>*</strong>' representa zero o més caràcters. El caràcter '<strong>?</strong>' representa un caràcter exactament. La resta de caràcters representen els propis caràcters. Per exemple, si voleu que el filtre de text gestioni els fitxers "readme" (<code>readme</code>, <code>read.me</code> i <code>readme.txt</code>), utilitzeu el patró <code>read*</code>.</p>
+  <p>Quan l'OmegaT detecta un fitxer dins de la carpeta dels fitxers de partida del projecte (per defecte, «source»), intenta seleccionar el filtre a partir de l'extensió del fitxer. Concretament, l'OmegaT compara els patrons de nom de fitxer de partida de cada filtre amb el nom del fitxer. Per exemple, el patró <code>*.xhtml</code> coincidirà amb qualsevol fitxer que tingui l'extensió <code>.xhtml</code>. Si es troba un filtre adient, s'utilitzarà per processar el fitxer. Per exemple, per defecte s'utilitzarà el filtre XHTML per processar els fitxers que tinguin l'extensió <code>.xhtml</code>. Podeu canviar o afegir patrons de nom de fitxer per als fitxers que gestionarà cada filtre de fitxer. Els patrons de nom de fitxer de partida utilitzen caràcters comodí semblants als que s'utilitzen a les <strong>Cerques</strong>. El caràcter «<strong>*</strong>» representa zero o més caràcters. El caràcter «<strong>?</strong>» representa un caràcter exactament. La resta de caràcters representen els propis caràcters. Per exemple, si voleu que el filtre de text gestioni els fitxers «readme» (<code>readme</code>, <code>read.me</code> i <code>readme.txt</code>), utilitzeu el patró <code>read*</code>.</p>
 
   <h3><a name="encoding" id="encoding"></a>Codificació dels fitxers de partida i dels fitxers traduïts</h3>
 
@@ -173,24 +173,24 @@
     </li>
 
     <li>
-      <p><code>${targetLocale}</code>: El codi de l'idioma d'arribada (amb el format "xx_YY").</p>
+      <p><code>${targetLocale}</code>: El codi de llengua d'arribada (amb el format «xx_YY»).</p>
     </li>
 
     <li>
-      <p><code>${targetLanguage}</code>: El codi de llengua i país d'arribada (amb el format "XX-YY").</p>
+      <p><code>${targetLanguage}</code>: El codi de llengua i país d'arribada (amb el format «XX-YY»).</p>
     </li>
 
     <li>
-      <p><code>${targetLanguageCode}</code>: La llengua d'arribada ("XX").</p>
+      <p><code>${targetLanguageCode}</code>: La llengua d'arribada («XX»).</p>
     </li>
 
     <li>
-      <p><code>${targetCoutryCode}</code>: El país d'arribada ("YY").</p>
+      <p><code>${targetCoutryCode}</code>: El país d'arribada («YY»).</p>
     </li>
   </ul>
   <hr>
 
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="format">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>

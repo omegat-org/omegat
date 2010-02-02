@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Guia d'inici ràpid - Manual d'usuari de l'OmegaT 1.8</title>
+
+  <title>Guia d'inici ràpid - Manual d'usuari de l'OmegaT 2.0</title>
 </head>
 
 <body>
@@ -28,11 +29,11 @@
     </li>
 
     <li>
-      <p><a href="#tm">Ús de les coincidències trobades a les memòries de traducció i als glossaris</a></p>
+      <p><a href="#tm">Utilització de les coincidències de les memòries de traducció, glossaris i diccionaris</a></p>
     </li>
 
     <li>
-      <p><a href="#searches">Ús de les cerques</a></p>
+      <p><a href="#searches">Ús de cerques i del Google Traductor</a></p>
     </li>
 
     <li>
@@ -54,17 +55,17 @@
     </li>
   </ul>
 
-  <p>Aquesta guia d'inici ràpid només cobreix els aspectes més bàsics. Idealment, caldria que tots els usuaris llegissin el manual d'usuari per familiaritzar-se amb totes les funcions que ofereix l'OmegaT. A les dreceres utilitzades en aquest document es fa referència al conveni "Ctrl+tecla", però tingueu en compte que els usuaris de Mac han d'utilitzar "cmd+tecla". Als teclats d'Apple, la tecla "cmd" és la que té l'etiqueta "command" o té dibuixada una "poma".</p>
+  <p>Aquesta guia d'inici ràpid només cobreix els aspectes més bàsics. Idealment, caldria que tots els usuaris llegissin el manual d'usuari per familiaritzar-se amb totes les funcions que ofereix l'OmegaT. A les dreceres utilitzades en aquest document es fa referència al conveni «Ctrl+tecla», però tingueu en compte que els usuaris de Mac han d'utilitzar «cmd+tecla». Als teclats d'Apple, la tecla «cmd» és la que té l'etiqueta «command» o té dibuixada una «poma».</p>
   <hr>
 
   <h2><a name="summary" id="summary"></a>Breu resum de com funciona l'OmegaT</h2>
 
   <p>La pantalla de l'OmegaT està formada per <a href="userInterface.html">un espai amb tres finestres diferents</a>. Podeu canviar la mida de cadascuna mitjançant el ratolí. A la part esquerra hi ha l'editor, la finestra on escriviu la traducció. A la part superior dreta hi ha el visualitzador de coincidències, on es mostren les coincidències trobades a les memòries de traducció. A sota, hi ha el visualitzador de glossaris, on es mostren les coincidències trobades als glossaris.</p>
 
-  <p>A la finestra de l'editor, l'OmegaT mostra el text de partida "<a href=
-  "segmentation.html">segmentat</a>" per frases (o per paràgrafs). Aquests segments els heu de traduir un per un. A mesura que aneu avançant d'un segment al següent, les vostres traduccions es van enregistrant en una <a href="translationMemories.html">memòria de traducció</a>. Un cop traduïts tots els segments (o abans, si així ho voleu), l'OmegaT utilitzarà la memòria de traducció per generar els documents traduïts a la carpeta dels fitxers traduïts (per defecte, anomenada "target").</p>
+  <p>A la finestra de l'editor, l'OmegaT mostra el text de partida «<a href=
+  "segmentation.html">segmentat</a>» per frases (o per paràgrafs). Aquests segments els heu de traduir un per un. A mesura que aneu avançant d'un segment al següent, les vostres traduccions es van enregistrant en una <a href="translationMemories.html">memòria de traducció</a>. Un cop traduïts tots els segments (o abans, si així ho voleu), l'OmegaT utilitzarà la memòria de traducció per generar els documents traduïts a la carpeta dels fitxers traduïts (per defecte, anomenada «target»).</p>
 
-  <p>L'OmegaT organitza la feina de traducció en "projectes de traducció". Per a cada projecte, l'OmegaT crearà un conjunt de carpetes. Aquestes carpetes s'utilitzen per emmagatzemar els <a href="filesToTranslate.html">documents de partida</a> que voleu traduir, així com els <a href="glossaries.html">glossaris</a> i les <a href="translationMemories.html">memòries de traducció</a> que vulgueu utilitzar. L'OmegaT també crea la carpeta dels fitxers traduïts (per defecte, "target"), que contindrà els documents traduïts finals.</p>
+  <p>L'OmegaT organitza la feina de traducció en «projectes de traducció». Per a cada projecte, l'OmegaT crearà un conjunt de carpetes. Aquestes carpetes s'utilitzen per emmagatzemar els <a href="filesToTranslate.html">documents de partida</a> que voleu traduir, així com els <a href="glossaries.html">glossaris</a> i les <a href="translationMemories.html">memòries de traducció</a> que vulgueu utilitzar. L'OmegaT també crea la carpeta dels fitxers traduïts (per defecte, «target»), que contindrà els documents traduïts finals.</p>
   <hr>
 
   <h2><a name="translate" id="translate"></a>Com es tradueix mitjançant l'OmegaT</h2>
@@ -77,13 +78,15 @@
 
   <p>L'OmegaT us demanarà que confirmeu o canvieu les carpetes de projecte que es crearan, mitjançant el següent diàleg:</p>
 
-  <p align="center"><a name="graphics2" id="graphics2"></a><img src=
-  "images/NewProject.png" name="graphics3" alt="Finestra de configuració del projecte" align=
-  "bottom" border="0" id="graphics3"></p>
+  <p align="center"><a name="graphics2" id="graphics2"></a></p>
 
-  <p>Podeu acceptar la ubicació de les subcarpetes, però primer assegureu-vos que els <a href="languages.html">codis de la llengua</a> de partida i d'arribada siguin correctes. Seleccioneu el codi de llengua (2 lletres) o el codi de llengua i regió (2 + 2 lletres) a la llista desplegable, o bé escriviu-los manualment (utilitzant el patró de 2 lletres). Recordeu la ubicació de la subcarpeta dels fitxers traduïts (per defecte, "target"). Si voleu que l'OmegaT segmenti per frases en comptes de fer-ho per "paràgrafs", seria una bona idea revisar les <a href="segmentation.html">Regles de segmentació</a>.</p>
+  <p><img alt="diàleg de projecte nou"
+  title="diàleg de projecte nou" src="images/NewProject.png"></p>
 
-  <p>En fer clic a D'acord per acceptar la configuració del projecte, l'OmegaT us demanarà que seleccioneu els documents de partida per importar-los. Podeu seleccionar fitxers individuals o bé tot un arbre de carpetes (que inclourà tots els fitxers de les respectives subcarpetes). Si heu importat accidentalment els documents incorrectes, o massa documents, senzillament podeu eliminar-los de la carpeta dels fitxers de partida (per defecte, "source") del projecte de l'OmegaT (mitjançant el gestor de fitxers del sistema operatiu, per exemple).</p>
+  <p>Podeu acceptar la ubicació de les subcarpetes, però primer assegureu-vos que els <a href="languages.html">codis de la llengua</a> de partida i d'arribada siguin correctes. Seleccioneu el codi de llengua (2 lletres) o el codi de llengua i regió (2 + 2 lletres) a la llista desplegable, o bé escriviu-los manualment (el codi de llengua pot tenir 2 o 3 lletres). Recordeu la ubicació de la subcarpeta dels fitxers traduïts (per defecte, «target»). Si voleu que l'OmegaT segmenti per frases en comptes de fer-ho per «paràgrafs», seria una bona idea revisar les <a href="segmentation.html">Regles de segmentació</a>.</p>
+
+  <p>En fer clic a D'acord per acceptar la configuració del projecte, l'OmegaT us demanarà que seleccioneu els documents de partida per importar-los. Podeu seleccionar fitxers individuals o bé tot un arbre de carpetes (que inclourà tots els fitxers de les respectives subcarpetes). Si heu importat accidentalment els documents incorrectes, o massa documents, senzillament podeu eliminar-los de la carpeta dels fitxers de partida (per defecte, «source») del projecte de l'OmegaT (mitjançant el gestor de fitxers del sistema operatiu, per exemple).</p>
+
   <p>Per comprovar la llista de fitxers que cal traduir, obriu la finestra <strong>Fitxers del projecte</strong> (menú <strong>Projecte → Fitxers del projecte...</strong>, si no s'obre automàticament). Si heu hagut de canviar el contingut de la carpeta dels fitxers de partida, recordeu que primer cal tornar a carregar el projecte (menú <strong>Projecte → Torna a carregar</strong>). Per defecte, l'OmegaT obrirà el primer fitxer de la llista de fitxers. Tingueu en compte que l'OmegaT només pot traduir els fitxers que tinguin els següents <a href="filesToTranslate.html">formats</a> si coincideixen amb els patrons definits als <a href="fileFilters.html">filtres de fitxers</a>. La resta de fitxers s'ometran.</p>
 
   <ul>
@@ -96,7 +99,7 @@
     </li>
 
     <li>
-      <p>.po monolingües</p>
+      <p>.po</p>
     </li>
 
     <li>
@@ -112,7 +115,7 @@
     </li>
 
     <li>
-      <p>INI (format "clau=valor")</p>
+      <p>INI (format «clau=valor»)</p>
     </li>
 
     <li>
@@ -126,13 +129,33 @@
     <li>
       <p>XLIFF monolingües de l'Okapi</p>
     </li>
+
+    <li>
+      <p>QuarkXPress CopyFlowGold</p>
+    </li>
+
+    <li>
+      <p>Fitxers de subtítols (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p>Recurs de l'Android</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
   </ul>
 
   <h3><a name="segments" id="segments"></a>Traducció dels segments un per un</h3>
 
   <p>Un cop definits el projecte i els fitxers que cal traduir, l'OmegaT obrirà el primer fitxer de partida en l'editor.</p>
 
-  <p>El segment actiu es ressaltarà de color verd i es mostrarà una còpia del text de partida a sota, al "camp de traducció". En aquest punt, tot el text fora del camp de traducció romandrà protegit i no el podreu modificar. Escriviu-ne la traducció entre les etiquetes <code>&lt;segment 0001&gt;</code> i <code>&lt;fi del segment&gt;</code>, sobreescrivint el text de partida. Premeu "<strong>Retorn</strong>" per avançar fins al segment següent. Nota:</p>
+  <p>El segment actiu es ressaltarà de color verd i es mostrarà una còpia del text de partida a sota, al «camp de traducció». En aquest punt, tot el text fora del camp de traducció romandrà protegit i no el podreu modificar. Escriviu-ne la traducció entre les etiquetes <code>&lt;segment 0001&gt;</code> i <code>&lt;fi del segment&gt;</code>, sobreescrivint el text de partida. Premeu «<strong>Retorn</strong>» per avançar fins al segment següent. Nota:</p>
 
   <ul>
     <li>
@@ -148,17 +171,17 @@
     </li>
   </ul>
 
-  <p>Quan premeu "<strong>Retorn</strong>" es realitzen diverses operacions de forma transparent: L'OmegaT afegeix la parella de segments (el segment de partida i la respectiva traducció) a la memòria de traducció i tradueix automàticament tots els segments idèntics que detecti a la resta dels fitxers del projecte. També cerca a la memòria de traducció i al glossari les possibles coincidències per al següent segment sense traduir.</p>
+  <p>Quan premeu «<strong>Retorn</strong>» es realitzen diverses operacions de forma transparent: L'OmegaT afegeix la parella de segments (el segment de partida i la respectiva traducció) a la memòria de traducció i tradueix automàticament tots els segments idèntics que detecti a la resta dels fitxers del projecte. També cerca a la memòria de traducció i al glossari les possibles coincidències per al següent segment sense traduir.</p>
 
-  <h3><a name="tm" id="tm"></a>Utilització de les coincidències de les memòries de traducció i dels glossaris</h3>
+  <h3><a name="tm" id="tm"></a>Utilització de les coincidències de les memòries de traducció, glossaris i diccionaris&nbsp;</h3>
 
   <h3><a name="tm_matches" id="tm_matches"></a>Coincidències de les memòries de traducció</h3>
 
-  <p>Si l'OmegaT troba a la memòria de traducció coincidències parcials (amb una similitud del 30% o més) per al següent segment, les mostra al visualitzador de coincidències. Per defecte, la primera coincidència se selecciona automàticament al visualitzador de coincidències.</p>
+  <p>Si l'OmegaT troba a les memòries de traducció disponibles coincidències parcials (amb una similitud del 30% o més) per al següent segment, les mostra al visualitzador de coincidències. Per defecte, la primera coincidència se selecciona automàticament al visualitzador de coincidències.</p>
 
   <p><br>
   <br></p><img src="images/MatchesPane.png" name="graphics4" alt="Subfinestra de Coincidències"
-  align="left" border="0" id="graphics4"><br clear=
+  id="graphics4" align="left" border="0"><br clear=
   "left">
 
   <p><br>
@@ -191,23 +214,23 @@
   <p>(Podeu configurar l'OmegaT de manera que, en obrir un segment, insereixi automàticament al camp de traducció la primera coincidència que tingui un determinat percentatge mínim de similitud. Per fer-ho, aneu a <strong>Opcions → <a href=
   "translationEditing.html">Comportament de l'edició...</a></strong>)</p>
 
-  <h3><a name="gloss_matches" id="gloss_matches"></a>Coincidències dels glossaris</h3>
+  <h3><a name="gloss_matches" id="gloss_matches"></a>Coincidències dels glossaris i diccionaris</h3>
 
-  <p>Els termes del <a href="glossaries.html">glossari</a> que coincideixin el 100% es mostraran com a referència al visualitzador del Glossari. Actualment, no es poden transferir mitjançant dreceres.</p>
+  <p>Els termes que es trobin als <a href="glossaries.html">glossaris</a> i als diccionaris que hàgiu inclòs al projecte es mostraran com a referència a les subfinestres del glossari i del diccionari.&nbsp;</p>
 
   <h3><a name="searches" id="searches"></a>Ús de les cerques</h3>
 
-  <p>L'OmegaT ofereix un gran ventall de funcions de <a href="searches.html">cerca</a>. Obriu la finestra de cerca prement <code>Ctrl+F</code> i escriviu la paraula o la frase que voleu cercar al camp "Cerca". També podeu seleccionar una paraula o una frase al camp d'edició (al text d'arribada del segment actiu) i prémer <code>Ctrl+F</code>. En aquest cas, la paraula o la frase apareixerà automàticament al camp "Cerca".</p>
+  <p>L'OmegaT ofereix un gran ventall de funcions de <a href="searches.html">cerca</a>. Obriu la finestra de cerca prement <code>Ctrl+F</code> i escriviu la paraula o la frase que voleu cercar al camp «Cerca». També podeu seleccionar una paraula o una frase al camp d'edició (al text d'arribada del segment actiu) i prémer <code>Ctrl+F</code>. En aquest cas, la paraula o la frase apareixerà automàticament al camp «Cerca».</p>
 
-  <h3><a name="create_trans" id="create_trans"></a>Creació dels documents traduïts</h3>
+  <h3>Ús del Google Traductor</h3>A la subfinestra <a href="GoogleTranslate.html">Google Traductor</a>, si està activada, es mostrarà automàticament un suggeriment de la traducció del segment actual. Podeu inserir-lo al segment d'arribada prement <code>Ctrl+M</code>.<h3><a name="create_trans" id="create_trans"></a>Creació dels documents traduïts</h3>
 
-  <p>Un cop traduïts tots els segments (o abans, com vulgueu), l'OmegaT actualitzarà els documents traduïts utilitzant les traduccions emmagatzemades a la memòria de traducció. Per fer-ho, seleccioneu <strong>Projecte → Crea els documents traduïts</strong> al menú. L'OmegaT generarà les versions traduïdes de tots els documents traduïbles a la carpeta dels fitxers de partida del projecte (per defecte, "source"), fins i tot dels documents que encara no s'hagin acabat de traduir. Els fitxers traduïts totalment o parcial es desaran a la carpeta dels fitxers traduïts del projecte (per defecte, "target"). Per acabar la traducció, obriu els fitxers traduïts amb les corresponents aplicacions associades (navegador, processador de textos, etc.) per comprovar-ne el contingut i el format. Si cal, podeu tornar a l'OmegaT per tal de realitzar les correccions necessàries (si ho feu, no oblideu tornar a crear els documents traduïts).</p>
+  <p>Un cop traduïts tots els segments (o abans, com vulgueu), l'OmegaT actualitzarà els documents traduïts utilitzant les traduccions emmagatzemades a la memòria de traducció. Per fer-ho, seleccioneu <strong>Projecte → Crea els documents traduïts</strong> al menú. L'OmegaT generarà les versions traduïdes de tots els documents traduïbles a la carpeta dels fitxers de partida del projecte (per defecte, «source»), fins i tot dels documents que encara no s'hagin acabat de traduir. Els fitxers traduïts totalment o parcial es desaran a la carpeta dels fitxers traduïts del projecte (per defecte, «target»). Per acabar la traducció, obriu els fitxers traduïts amb les corresponents aplicacions associades (navegador, processador de textos, etc.) per comprovar-ne el contingut i el format. Si cal, podeu tornar a l'OmegaT per tal de realitzar les correccions necessàries (si ho feu, no oblideu tornar a crear els documents traduïts).</p>
   <hr>
 
   <h2><a name="tags" id="tags"></a>Com treballar amb text amb etiquetes</h2>
 
   <p>L'OmegaT s'assegura que no es perdi el format dels documents de partida (negreta, cursiva, etc.) mitjançant l'ús d'<a href=
-  "formattedText.html#intro">etiquetes especials</a>. Les etiquetes de l'OmegaT estan formades per una o més lletres seguides d'un o més dígits, i s'utilitza el caràcter "/" com a tancament (per exemple: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;, etc.). Aneu en compte en manipular aquestes etiquetes i assegureu-vos d'incloure-les correctament als segments traduïts (vegeu <a href=
+  "formattedText.html#intro">etiquetes especials</a>. Les etiquetes de l'OmegaT estan formades per una o més lletres seguides d'un o més dígits, i s'utilitza el caràcter «/» com a tancament (per exemple: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;, etc.). Aneu en compte en manipular aquestes etiquetes i assegureu-vos d'incloure-les correctament als segments traduïts (vegeu <a href=
   "formattedText.html#Tag_operations">Operacions amb etiquetes</a>).</p>
 
   <h3><a name="example" id="example"></a>Un exemple...</h3>
@@ -215,18 +238,11 @@
   <p>En aquests exemples, s'han ressaltat les etiquetes per facilitar-ne la visualització, tot i que dins l'OmegaT no apareixeran ressaltades. L'OmegaT ometrà les etiquetes HTML ressaltades de color <font color="#0000FF">blau</font>, ja que es troben completament fora del segment. En canvi, l'OmegaT haurà de manipular les etiquetes ressaltades de color <font color=
   "#008000">verd</font> perquè es troben dins del segment. El següent exemple mostra un segment en format HTML:</p>
 
-  <p><code><font color="#0000FF">&lt;p&gt;</font>A different display font can
-  be selected via the</code> <code><font color=
-  "#008000">&lt;b&gt;</font>Display Font<font color=
-  "#008000">&lt;/b&gt;</font>dialog. Open it via the</code> <code><font color=
-  "#008000">&lt;i&gt;</font>Settings<font color="#008000">&lt;/i&gt;</font>
-  →</code> <code><font color="#008000">&lt;i&gt;</font>Display
-  Font...<font color="#008000">&lt;/i&gt;</font>menu item. The font type and
-  size can be changed from the dialog.<font color=
+  <p><code><font color="#0000FF">&lt;p&gt;</font>Podeu seleccionar un tipus de lletra diferent per a la visualització al diàleg <font color="#008000">&lt;b&gt;</font>Tipus de lletra de visualització<font color="#008000">&lt;/b&gt;</font>. Per obrir-lo, seleccioneu <font color="#008000">&lt;i&gt;</font>Opcions<font color=
+  "#008000">&lt;/i&gt;</font> → <font color="#008000">&lt;i&gt;</font>Tipus de lletra...<font color="#008000">&lt;/i&gt;</font> al menú. En aquest diàleg, podeu canviar el tipus de lletra i la mida.<font color=
   "#0000FF">&lt;/p&gt;</font></code></p>
 
-  <p><br>
-  <br></p>
+  <p><br></p>
 
   <p>A l'OmegaT es mostrarà així, amb la traducció al català:</p>
 
@@ -234,7 +250,7 @@
   <br></p>
 
   <p><img src="images/tagged_segment.png" name="graphics6" alt="Segment amb etiquetes"
-  align="bottom" border="0" id="graphics6"></p>
+  id="graphics6" align="bottom" border="0"></p>
 
   <p><br>
   <br></p>
@@ -242,26 +258,29 @@
   <p>Quan l'OmegaT hagi creat el document traduït, el codi HTML tindrà aquest aspecte:</p>
 
   <p><img src="images/tagged_segment_target.png" name="graphics5" alt=
-  "Segment amb etiquetes traduït" align="bottom" border="1"
-  id="graphics5"></p>
+  "Segment amb etiquetes traduït" id="graphics5" align="bottom" border="0"></p>
 
   <h3><a name="tag_verif" id="tag_verif"></a>Verificació de les etiquetes</h3>
 
   <p>L'OmegaT no detecta automàticament les etiquetes incorrectes del document traduït. Per tant, abans de lliurar el document al client, cal que comproveu si hi ha errors d'etiquetes. Seleccioneu <strong>Eines → <a href=
-  "formattedText.html#tag_validation">Valida les etiquetes</a></strong> al menú. Es mostrarà una taula amb tots els segments en els quals les etiquetes del text de partida no concordin amb les del text traduït. Feu clic al número de segment. Anireu automàticament al segment potencialment incorrecte a l'Editor, on podreu corregir-ne les etiquetes.</p>
+  "formattedText.html#tag_validation">Valida les etiquetes</a></strong> al menú. Es mostrarà una taula amb tots els segments en els quals les etiquetes del text de partida no concordin amb les del text traduït. Feu clic al número de segment. Anireu automàticament al segment potencialment incorrecte a l'Editor, on podreu corregir-ne les etiquetes. Premeu <code>Retorn</code> per validar el segment corregit i comproveu-ne la correcció tornant a prémer <code>Ctrl+T</code>.</p>
 
   <p>En alguns casos, fins i tot és possible que els errors d'etiquetes no deixin obrir el document. Per tant, és important que corregiu tots els errors d'etiquetes abans de crear els documents traduïts. Finalment, cal que comproveu el format final del document traduït obrint-lo amb el corresponent visualitzador o editor.</p>
+  
+  <p>En alguns llenguatges de programació (p. ex. PHP, C), es fan servir etiquetes especials com a text variable en aquelles cadenes que s'utilitzen en combinació amb la funció printf. L'OmegaT pot detectar i validar aquestes etiquetes si habiliteu l'opció corresponent. Seleccioneu <strong>Opcions → <a href="formattedText.html#printf">Validació de les etiquetes...</a></strong> al menú. Podeu triar entre una validació simple i una validació completa. La validació simple només comprova les variants més simples dels possibles valors de text variable. És útil si el codi font no conté els textos variables més expressius i complexes o si obteniu molts falsos positius.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" summary="format" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
-        <td style="text-align: center;"><a href="index.html">Inici</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inici</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índex</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

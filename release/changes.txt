@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.2 
 ----------------------------------------------------------------------
-  8 Enhancements
+ 13 Enhancements
   4 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 vs. 2.1.1
@@ -43,6 +43,8 @@ current segment, or for all the (translated) segments
   - Cut, Copy, Paste popup menu in the Editor. It performs the same functions as
 Ctrl+X, Ctrl+C and Ctrl+V.
 
+  - Catalan localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
+  
   Bug fixes:
 
   - When the project was reloaded after pressing OK in Project Properties,
@@ -135,6 +137,7 @@ as a repetition in Match Statistics
   Other enhancements:
   - Basque localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
   - Welsh localisation updated to 2.0.5 (UI, Readme, Instant Start)
+  - Catalan localisation updated to 2.0.5, backported from 2.1.1 (UI, Readme, Instant Start, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 1

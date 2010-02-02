@@ -1,7 +1,4 @@
-Aquesta traducció és obra d'en Jordi Serratosa, copyright© 2009.
-Han participat en la localització de l'OmegaT al català:
-Mikel Forcada Zubizarreta (versió 1.4)
-Jordi Serratosa Quintana (versió 1.6 a l'actual)
+Aquesta traducció és obra de Jordi Serratosa, copyright© 2010.
 
 ==============================================================================
   OmegaT 2.0, fitxer LLEGIU-ME
@@ -50,6 +47,9 @@ Les principals característiques de l'OmegaT són:
   - Gestió intel·ligent de projectes, fins i tot quan contenen jerarquies de
     carpetes complexes.
   - Ús de glossaris (per a la comprovació de terminologia).
+  - Ús de verificadors ortogràfics de codi obert a l'instant.
+  - Ús de diccionaris de l'StarDict.
+  - Ús dels serveis de traducció automàtica del Google Traductor.
   - Documentació i guia d'aprenentatge entenedores i completes.
   - Localització en diverses llengües.
 
@@ -64,13 +64,18 @@ L'OmegaT admet els següents formats de fitxer de manera nativa:
   - Fitxers de documentació en format DocBook
   - Fitxers Microsoft OpenXML
   - Fitxers XLIFF monolingües de l'Okapi
+  - QuarkXPress CopyFlowGold
+  - Fitxers de subtítols (SRT)
+  - ResX
+  - Recursos de l'Android
+  - LaTeX
 
 L'OmegaT es pot personalitzar per tal d'admetre altres formats de fitxer.
 
 L'OmegaT analitzarà automàticament la jerarquia de carpetes dels fitxers de
-partida (per defecte, "source"), per complexa que sigui, processarà tots els
+partida (per defecte, «source»), per complexa que sigui, processarà tots els
 fitxers admesos i generarà una carpeta per als fitxers d'arribada (per defecte,
-"target") amb exactament la mateixa estructura (fins i tot hi inclourà còpies
+«target») amb exactament la mateixa estructura (fins i tot hi inclourà còpies
 de tots els fitxers no admesos).
 
 Per veure una guia d'aprenentatge, inicieu l'OmegaT i llegiu la Guia d'inici
@@ -84,15 +89,37 @@ des del menú Ajuda un cop iniciat l'OmegaT.
 
 3.1 General
 Per poder executar l'OmegaT, és necessari tenir instal·lat al sistema l'entorn
-d'execució de Java (Java Runtime Environment, JRE) versió 1.4 o superior.
+d'execució de Java (Java Runtime Environment, JRE) versió 1.5 o superior.
 Actualment, la versió estàndard de l'OmegaT inclou l'entorn d'execució de Java
 per tal d'estalviar als usuaris la necessitat de seleccionar-lo, de baixar-lo i
 d'instal·lar-lo.
 
+Si ja teniu Java instal·lat, la manera més senzilla d'instal·lar la versió
+actual de l'OmegaT és utilitzant el Java Web Start.
+Per fer-ho, baixeu el fitxer següent i executeu-lo:
+
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+
+Quan l'executeu, s'instal·larà l'entorn correcte per a l'ordinador i l'OmegaT.
+En les posteriors execucions, no cal que estigueu en línia.
+
+Durant la instal·lació, en funció del sistema operatiu, és possible que es
+mostrin diversos avisos de seguretat. El certificat és autosignat per «Didier
+Briel».
+Els permisos que doneu a aquesta versió (possiblement s'hi faci referència com
+a un «accés no restringit a l'ordinador») són idèntics als permisos que doneu a
+la versió local, instal·lada mitjançant el procediment que es descriu més
+endavant: permeten l'accés al disc dur de l'ordinador. Cada vegada que executeu
+l'OmegaT.jnlp, es comprovarà si hi ha alguna actualització (si esteu en línia),
+si n'hi ha alguna s'instal·larà i, a continuació, s'iniciarà l'OmegaT.
+
+A continuació es descriuen els mètodes alternatius per baixar i per instal·lar
+l'OmegaT:
+
 Usuaris del Windows i Linux: si esteu segur que el sistema ja té instal·lada
 una versió correcta del JRE, podeu instal·lar la versió de l'OmegaT sense el
-JRE (que s'indica al nom de la versió, "Without_JRE").
-Si teniu dubtes, és recomanable que utilitzeu la versió "estàndard", que inclou
+JRE (que s'indica al nom de la versió, «Without_JRE»).
+Si teniu dubtes, és recomanable que utilitzeu la versió «estàndard», que inclou
 el JRE. No patiu: encara que ja tingueu una versió del JRE instal·lada al
 sistema, aquesta versió no interferirà amb l'altra.
 
@@ -101,31 +128,33 @@ implementacions del Java lliures o de codi obert que s'inclouen en moltes
 distribucions del Linux (per exemple, l'Ubuntu), ja que no són actuals o són
 incompletes. Podeu baixar i instal·lar l'entorn d'execució de Java (JRE) de Sun
 des de l'enllaç anterior, o bé podeu baixar i instal·lar l'OmegaT amb el JRE
-inclòs (el paquet .tar.gz que conté el text "Linux").
+inclòs (el paquet .tar.gz que conté el text «Linux»).
 
 Usuaris del Mac: el Mac OS X ja té instal·lat el JRE.
 
 Usuaris del Linux en sistemes PowerPC: cal baixar el JRE d'IBM, ja que Sun no
 ofereix cap JRE per a sistemes PPC. En aquest cas, el podeu baixar des d'aquí:
+
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
+
 
 3.2 Instal·lació
 * Usuaris del Windows: Executeu el programa d'instal·lació. Si voleu, el
-  programa d'instal·lació pot crear dreceres per iniciar l'OmegaT.
+programa d'instal·lació pot crear dreceres per iniciar l'OmegaT.
 * Altres: Per instal·lar l'OmegaT, creeu una carpeta per a l'OmegaT (per
-  exemple, /usr/local/lib al Linux). Copieu l'arxiu zip o tar.gz de l'OmegaT a
-  aquesta carpeta i descomprimiu-lo.
+exemple, /usr/local/lib al Linux). Copieu l'arxiu zip o tar.gz de l'OmegaT a
+aquesta carpeta i descomprimiu-lo.
 
 3.3 Execució de l'OmegaT
 L'OmegaT es pot executar de diverses maneres:
 
 * Usuaris del Windows: Fent doble clic al fitxer OmegaT.exe. Si al gestor de
-  fitxers (l'Explorador del Windows) hi veieu el fitxer OmegaT però no
-  l'OmegaT.exe, canvieu la configuració per tal que es mostrin les extensions
-  dels fitxers.
+fitxers (l'Explorador del Windows) hi veieu el fitxer OmegaT però no
+l'OmegaT.exe, canvieu la configuració per tal que es mostrin les extensions
+dels fitxers.
 
 * Fent doble clic al fitxer OmegaT.jar. Només funcionarà si el tipus de fitxer
-  .jar està associat amb el Java al sistema.
+.jar està associat amb el Java al sistema.
 
 * Des de la línia d'ordres. L'ordre per executar l'OmegaT és:
 
@@ -138,12 +167,12 @@ Si teniu instal·lat el Java a nivell del sistema, no és necessari especificar
 el camí complet.
 
 * Usuaris del Windows: El programa d'instal·lació pot crear dreceres al menú
-  d'inici, a l'escriptori i a l'àrea d'inici ràpid. També podeu arrossegar el
-  fitxer OmegaT.exe al menú d'inici, a l'escriptori o a l'àrea d'inici ràpid 
-  per tal de crear-hi un enllaç.
+d'inici, a l'escriptori i a l'àrea d'inici ràpid. També podeu arrossegar el
+fitxer OmegaT.exe al menú d'inici, a l'escriptori o a l'àrea d'inici ràpid per
+tal de crear-hi un enllaç.
 
 * Usuaris del KDE (Linux): Podeu afegir l'OmegaT als menús seguint aquestes
-  instruccions:
+instruccions:
 
 Centre de control - Escriptori - Plafons - Menús - Edita el menú K - Fitxer -
 Element nou/Submenú nou.
@@ -152,7 +181,7 @@ A continuació, després de seleccionar un menú adient, afegiu-hi un
 submenú/element seleccionant Fitxer - Submenú nou i Fitxer - Element nou.
 Escriviu OmegaT com a nom de l'element nou.
 
-Al camp "Ordre", utilitzeu el botó de navegació per cercar l'script d'execució
+Al camp «Ordre», utilitzeu el botó de navegació per cercar l'script d'execució
 de l'OmegaT i seleccioneu-lo.
 
 Feu clic al botó de la icona (a la part dreta dels camps
@@ -163,10 +192,10 @@ icona OmegaT.png.
 Finalment, deseu els canvis seleccionant Fitxer - Desa.
 
 * Usuaris del GNOME (Linux): Podeu afegir l'OmegaT al quadre (la barra de la
-  part de dalt de la pantalla) seguint aquestes instruccions:
+part de dalt de la pantalla) seguint aquestes instruccions:
 
 Feu clic amb el botó dret al quadre - Afegeix un nou llançador. Escriviu
-"OmegaT" al camp "Nom"; al camp "Ordre", utilitzeu el botó de navegació per
+«OmegaT» al camp «Nom»; al camp «Ordre», utilitzeu el botó de navegació per
 cercar l'script d'execució de l'OmegaT. Seleccioneu-lo i feu clic al botó
 D'acord.
 
@@ -190,8 +219,8 @@ Per contribuir d'altres maneres, primer subscriviu-vos al grup d'usuaris:
 
 I així us fareu una idea d'allò que passa al món de l'OmegaT...
 
-  L'OmegaT és una obra original d'en Keith Godfrey.
-  En Marc Prior és el coordinador del projecte OmegaT.
+  L'OmegaT és una obra original de Keith Godfrey.
+  Marc Prior és el coordinador del projecte OmegaT.
 
 Contribucions prèvies:
 (en ordre alfabètic)
@@ -217,10 +246,10 @@ Han participat en el codi:
 Altres contribucions:
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary
+  Jean-Christophe Helary (cap de localització)
   Vito Smolej (cap de documentació)
   Samuel Murray
-  Marc Prior (cap de localització)
+  Marc Prior
   i moltes altres persones que han aportat una ajuda inestimable.
 
 (Si creieu que heu contribuït considerablement al projecte OmegaT i el vostre
@@ -228,13 +257,13 @@ nom no apareix a la llista, no dubteu en posar-vos en contacte amb nosaltres.)
 
 L'OmegaT utilitza les biblioteques següents:
 
-  HTMLParser, creada per Somik Raha, Derrick Oswald i altres (llicència LGPL).
+  HTMLParser, per Somik Raha, Derrick Oswald i altres (llicència LGPL).
   http://sourceforge.net/projects/htmlparser
 
-  MRJ Adapter 1.0.8, creada per Steve Roy (llicència LGPL)
+  MRJ Adapter 1.0.8, per Steve Roy (llicència LGPL)
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework 2.1.4, creada per VLSolutions (llicència CeCILL).
+  VLDocking Framework 2.1.4, per VLSolutions (llicència CeCILL).
   http://www.vlsolutions.com/en/products/docking/
 
   Hunspell, per László Németh i altres (llicència LGPL)
@@ -253,8 +282,8 @@ L'OmegaT utilitza les biblioteques següents:
 Abans de notificar un error, consulteu la documentació amb deteniment. És
 possible que, allò que considereu un error, de fet sigui una característica de
 l'OmegaT que acabeu de descobrir. Si consulteu el registre de l'OmegaT i hi
-veieu paraules com ara "Error", "Avís", "Excepció" o "ha finalitzat de manera
-inesperada", pot ser que hàgiu trobat un problema (el fitxer de registre
+veieu paraules com ara «Error», «Avís», «Excepció» o «ha finalitzat de manera
+inesperada», pot ser que hàgiu trobat un problema (el fitxer de registre
 log.txt es troba al directori de preferències de l'usuari, consulteu el manual
 d'usuari per obtenir més informació sobre la ubicació).
 
@@ -287,7 +316,7 @@ SourceForge.
 ==============================================================================
 6.   Detalls de la versió
 
-Consulteu el fitxer 'changes.txt' per veure informació detallada sobre els
+Consulteu el fitxer «changes.txt» per veure informació detallada sobre els
 canvis realitzats en aquesta versió i en les anteriors.
 
 

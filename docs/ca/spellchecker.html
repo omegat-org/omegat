@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Verificador ortogràfic - Manual d'usuari de l'OmegaT 1.8</title>
+
+  <title>Verificador ortogràfic - Manual d'usuari de l'OmegaT 2.0</title>
 </head>
 
 <body>
@@ -57,13 +58,11 @@
 
   <p><br></p>
 
-  <p>L'exemple anterior ja té diccionaris disponibles. Inicialment, no hi apareixerà cap diccionari, i caldrà que especifiqueu la ubicació on l'OmegaT ha de cercar-los. En fer clic a <strong>Trieu...</strong>, s'obrirà una finestra de diàleg on podeu seleccionar la subcarpeta correcta: el <b>Directori dels fitxers de diccionari</b>, que a l'exemple anterior és <i>C:\Archivos de programa\OpenOffice.org 2.3\share\dict\ooo</i>. Aquest directori és el directori que conté els diccionaris de codi obert. L'OmegaT detecta els diccionaris vàlids d'aquesta ubicació i els mostra. Si el diccionari que voleu utilitzar ja hi apareix, no cal que feu res més. Si no és així, és a dir, si la llista de llengües disponibles és buida, podeu fer clic a <b>Instal·la</b> i deixar que l'OmegaT cerqui els diccionaris disponibles. Seleccioneu els diccionaris a la finestra emergent i feu clic a <b>Instal·la</b>. Els diccionaris seleccionats s'instal·laran i apareixeran a la finestra de configuració de la verificació ortogràfica (és possible que tardi una mica).</p>
+  <p>L'exemple anterior ja té diccionaris disponibles. Inicialment, no hi apareixerà cap diccionari i caldrà que especifiqueu la ubicació on l'OmegaT ha de cercar-los. Feu clic a <strong>Trieu...</strong> per obrir una finestra de diàleg on podeu seleccionar una subcarpeta amb diccionaris existents de l'OpenOffice.org o del Mozilla. La manera més senzilla de trobar-los és cercant els fitxers que tinguin les extensions <i>aff</i> o <i>dic</i>. L'OmegaT detectarà els diccionaris vàlids disponibles en aquella ubicació i els mostrarà. Si el diccionari que voleu utilitzar ja hi apareix, no cal que feu res més. Si no trobeu cap diccionari, podeu seleccionar un lloc adient per posar-los i, a continuació, feu clic a <b>Instal·la</b> per tal que l'OmegaT cerqui els diccionaris disponibles. Seleccioneu els diccionaris que necessiteu a la finestra emergent i feu clic a <b>Instal·la</b>. Els diccionaris seleccionats s'instal·laran i apareixeran a la finestra de configuració de la verificació ortogràfica (és possible que tardi una mica).</p>
 
-  <p>Tingueu en compte que l'instal·lador depèn d'una llista de diccionaris d'Internet. L'OmegaT obté la llista d'<a href=
-  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/">OpenOffice.org/contrib/dictionaries</a>. Si no està actualitzada, haureu de cercar els diccionaris pel vostre compte. Cerqueu fitxers que tinguin un nom que indiqui la llengua que voleu i que tinguin les extensions <i>aff</i> i <i>dic.</i> Possiblement, el Wiki de l'OpenOffice.org conté el recull de diccionaris més ampli: <a href=
-  "http://wiki.services.openoffice.org/wiki/Dictionaries">Diccionaris del Wiki de l'OpenOffice.org</a>. Els diccionaris compatibles amb l'OmegaT són els diccionaris "Hunspell" o "Myspell".</p>
+  <p>Tingueu en compte que l'instal·lador depèn d'una llista de diccionaris d'Internet. Si no està actualitzada o no inclou la llengua que us interessa, haureu de cercar els diccionaris pel vostre compte. Probablement, l'OpenOffice.org conté el recull de diccionaris més ampli a la <a href="http://extensions.services.openoffice.org/dictionary">pàgina de diccionaris de l'OpenOffice.org</a>. Després de baixar i d'instal·lar l'extensió del diccionari, els fitxers <i>aff</i> i <i>dic</i> corresponents passaran a estar disponibles. També podeu aconseguir el mateix resultat afegint una extensió de verificador ortogràfic al Firefox o al Thunderbird; en aquest cas, els fitxers del verificador ortogràfic s'emmagatzemaran al vostre perfil (del Firefox o del Thunderbird).</p>
 
-  <p>Assegureu-vos que el codi de llengua dels fitxers traduïts correspongui al codi de llengua del diccionari: un diccionari FR-FR no funcionarà si el paràmetre de fitxers traduïts és FR. Cal que canvieu el paràmetre a FR-FR per tal que el verificador ortogràfic pugui reconèixer el diccionari correcte per als fitxers traduïts.</p>
+  <p>Assegureu-vos que el codi de llengua dels fitxers traduïts correspongui al codi de llengua del diccionari: un diccionari FR-FR no funcionarà si el paràmetre de fitxers traduïts és FR. Cal que canvieu el paràmetre a FR-FR per tal que el verificador ortogràfic pugui reconèixer el diccionari correcte per als fitxers traduïts. Cerqueu fitxers que tinguin un nom que indiqui la llengua que voleu i que tinguin les extensions <i>aff</i> i <i>dic</i>.</p>
 
   <h3><a name="Hints" id="Hints"></a>Consells</h3>
 
@@ -71,28 +70,30 @@
 
   <ol>
     <li>
-      <p>El quadre de selecció “Verifica automàticament l'ortografia del text” ha d'estar activat.</p>
+      <p>El quadre de selecció «Verifica automàticament l'ortografia del text» ha d'estar activat.</p>
     </li>
 
     <li>
-      <p>Compareu el codi de llengua dels fitxers traduïts del vostre projecte amb el dels diccionaris disponibles a la finestra de configuració. El verificador ortogràfic determina la llengua que cal utilitzar a partir del codi de llengua dels fitxers traduïts: si el codi de llengua és portuguès de Brasil (PT_BR), la carpeta dels diccionaris ha de tenir dos fitxers de diccionari, anomenats pt_br.aff i pt_br.dic.</p>
+      <p>Compareu el codi de llengua dels fitxers traduïts del vostre projecte amb el dels diccionaris disponibles a la finestra de configuració. El verificador ortogràfic determina la llengua que cal utilitzar a partir del codi de llengua dels fitxers traduïts: si el codi de llengua és portuguès de Brasil (PT_BR), la carpeta dels diccionaris ha de tenir dos fitxers de diccionari, anomenats <i>pt_br.aff</i> i <i>pt_br.dic</i>.</p>
     </li>
   </ol>
 
-  <p>Si ja heu traduït una bona part del text i llavors us adoneu que el codi de llengua dels fitxers traduïts del projecte no coincideix amb el codi de llengua del verificador ortogràfic (per exemple, heu especificat "en" com a llengua, però no hi ha cap diccionari per a "en"), podeu copiar els dos fitxers corresponents (per exemple pt_PT.arr i pt_PT.dic) i canviar el nom dels fitxers (per pt_BR.arr i pt_BR.dic). També podeu canviar el codi de llengua del projecte (de pt a pt_BR); no obstant, caldrà que propagueu aquest canvi per tots els fitxers TMX del projecte, que no és la manera més segura de procedir.</p>
+  <p>Si ja heu traduït una bona part del text i llavors us adoneu que el codi de llengua dels fitxers traduïts del projecte no coincideix amb el codi de llengua del verificador ortogràfic (per exemple, heu especificat pt_BR com a llengua, però no hi ha cap diccionari per a pt_BR), podeu copiar els dos fitxers corresponents i reanomenar-los (de «pt_PT.aff» i «pt_PT.dic» a «pt_BR.aff» i «pt_BR.dic»). Òbviament, sempre és més recomanable baixar la versió correcta del verificador ortogràfic.</p>
 
   <p>Tingueu en compte que l'opció Desinstal·la suprimeix físicament els diccionaris ressaltats. Si formen part de l'OpenOffice, com en el cas anterior, també desapareixeran d'aquesta aplicació. Si per qualsevol motiu heu de fer servir aquesta opció sovint, és recomanable que copieu els fitxers implicats en una altra carpeta, reservada només per a l'OmegaT.</p>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="format">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
-        <td style="text-align: center;"><a href="index.html">Inici</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inici</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índex</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

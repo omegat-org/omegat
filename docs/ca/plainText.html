@@ -1,85 +1,99 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Com treballar amb text net - Manual d'usuari de l'OmegaT 1.8</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Com treballar amb text net - Manual d'usuari de l'OmegaT 2.0</title>
 </head>
 
 <body>
-	<h2>Com treballar amb text net</h2>
+  <h2>Com treballar amb text net</h2>
 
-	<ul>
-		<li><a href="#Plain_Text_in_OmegaT">Codificació per defecte</a></li>
-		<li><a href="#Garbled_displays_3F">Text il·legible</a></li>
-		<li><a href="#Character_sets_and_encoding">Jocs i codificació de caràcters</a></li>
-		<li><a href="#The_OmegaT_solution">Solució de l'OmegaT</a></li>
-	</ul>
+  <ul>
+    <li><a href="#Plain_Text_in_OmegaT">Codificació per defecte</a></li>
 
-<hr>
+    <li><a href="#Garbled_displays_3F">Text il·legible</a></li>
 
-	<a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
-	<h2>Codificació per defecte</h2>
+    <li><a href="#Character_sets_and_encoding">Jocs i codificació de caràcters</a></li>
 
-	<p>Els fitxers de text net, que generalment tenen l'extensió <code>.txt</code>, contenen exclusivament informació textual. No hi ha cap manera clarament definida d'informar l'ordinador de la llengua que contenen. A grans trets, això significa que, per defecte, l'ordinador considerarà que el fitxer és en la mateixa llengua que la utilitzada pel propi ordinador.</p>
-
-<hr>
-
-	<a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
-	<h2>Text il·legible</h2>
-
-	<p>Si l'usuari és rus, és molt probable que el seu ordinador també treballi en rus: els menús es mostren en rus, els fitxers que obre són en rus, etc. En la majoria dels casos, l'ordinador normalment realitza la decisió correcta sobre el contingut dels fitxers: tots són en rus i no en cap altra llengua que no es pugui representar amb caràcters russos.</p>
-		<p>Ara bé, si l'usuari és un traductor rus que tradueix del japonès i ha de treballar amb fitxers de <strong>text net</strong> en japonès, molt probablement l'ordinador considerarà que el contingut d'aquests fitxers és en rus. Això passa perquè el fitxer en sí no conté informació que indiqui a l'ordinador en quina llengua s'han escrit. Per exemple, el fitxer en japonès podria contenir el text:</p>
-		<p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p>
-		<br>
-		<p>Com que espera que el contingut sigui en rus, però, l'editor de textos podria mostrar-lo així:</p>
-	<p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≅ВЈБB</p>
-		<br>
-		<p>No obstant, això no és rus: són caràcters japonesos que es mostren incorrectament com a caràcters russos.</p>
-	
-	<p>Com qualsevol altra aplicació, l'OmegaT també és susceptible de tenir aquest problema. Només pot pressuposar que, per defecte, els fitxers de <strong>text net</strong> es poden visualitzar utilitzant els valors per defecte del sistema. Això funciona bé, per exemple, quan l'ordinador treballa en francès i l'usuari tradueix fitxers en anglès, o quan l'ordinador treballa en alemany i l'usuari tradueix fitxers en italià.</p>
-
-<hr>
-
-	<a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
-	<h2>Jocs i codificació de caràcters</h2>
-
-	<p>Com és que funciona amb l'anglès i el francès però no amb el rus i el japonès? Perquè l'anglès i el francès comparteixen un mateix <strong>joc de caràcters</strong>. Concretament, <strong>Llatí-1</strong>, o alguna variant d'aquest. Fins fa poc, el rus i el japonès no compartien cap joc de caràcters. Els jocs de caràcters russos més actuals no cobreixen els caràcters japonesos, i a la inversa. El resultat és el que heu vist abans.</p>
-
-	<p>El client japonès treballa amb un ordinador japonès i crea fitxers de text que contenen japonès. El joc de caràcters seleccionat per l'ordinador del client dependrà del sistema operatiu i d'altres paràmetres, però és molt poc probable que l'ordinador rus interpreti correctament el joc de caràcters escollit (japonès).</p>
-
-	<p>Ara bé, la manera en què la informació textual del joc de caràcters especificat es transmet físicament (és a dir, quins són els codis numèrics que l'ordinador utilitza per interpretar i per mostrar el text) depèn de la <strong>codificació</strong>. Quan l'ordinador llegeix el fitxer, "descodifica" la informació en funció de la codificació i el visualitza en funció del joc de caràcters. A grans trets, una codificació correspon a un joc de caràcters...</p>
-
-<hr>
-
-	<a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
-	<h2>Solució de l'OmegaT</h2>
-
-	<p>Bàsicament, hi ha tres maneres de solucionar aquest problema a l'OmegaT. Totes tres impliquen l'aplicació de <a href="fileFilters.html">filtres de fitxers</a> del menú <strong>Opcions</strong>.</p>
-	
-	<ol>
-		<li>Especifiqueu la codificació dels fitxers de <strong>text net</strong>, és a dir, els fitxers amb l'extensió <code>.txt</code>: A l'apartat <strong>Fitxers de text</strong> del diàleg <a href="fileFilters.html">Filtres de fitxers</a>, canvieu la <strong>Codificació del text de partida</strong> <strong>&lt;automàtic&gt;</strong> per la codificació que correspongui al vostre fitxer <code>.txt</code> de partida.</li><li>Canvieu les extensions dels fitxers de partida de text net (per exemple, <code>.txt</code> per <code>.jp</code> per a fitxers de text net en japonès): A l'apartat <strong>Fitxers de text</strong> del diàleg <a href="fileFilters.html">Filtres de fitxers</a>, afegiu un <strong>Patró de nom de fitxer de partida</strong> nou (per exemple, <code>*.jp</code>) i seleccioneu els paràmetres adients per a la codificació del fitxer de partida i del fitxer traduït.</li>
-			<li>Obriu el fitxer de partida en un editor de textos que n'interpreti correctament la codificació i deseu-lo amb la codificació "UTF-8". Canvieu l'extensió del fitxer <code>.txt</code> per <code>.utf8</code>. L'OmegaT interpretarà automàticament el fitxer com a un fitxer UTF-8.</li>
-		</ol>
-	<p>Per defecte, l'OmegaT inclou aquesta breu llista per facilitar-vos el treball amb alguns fitxers de text net:</p>
-
-	<ul>
-		<li>L'OmegaT interpreta els fitxers <code>.txt</code> automàticament (<strong>automàtic</strong>) com a fitxers amb la codificació per defecte del sistema.</li>
-		<li>Els fitxers <code>.txt1</code> tenen la codificació ISO-8859-1, que cobreix la majoria de les llengües d'<strong>Europa occidental</strong>.</li>
-		<li>Els fitxers <code>.txt2</code> tenen la codificació ISO-8859-2, que cobreix la majoria de les llengües d'<strong>Europa central i oriental</strong>.</li>
-		<li>L'OmegaT interpreta els fitxers <code>.utf8</code> com a fitxers amb codificació UTF-8 (que cobreix gairebé <strong>totes</strong> les llengües del món).</li>
-	</ul>
-		<p>Podeu comprovar-ho seleccionant <strong>Filtres de fitxers</strong> al menú <strong>Opcions</strong>. Per exemple, si teniu un fitxer de partida en txec (molt probablement amb codificació <strong>ISO-8859-2</strong>), només us cal canviar l'extensió <code>.txt</code> per <code>.txt2</code> i l'OmegaT n'interpretarà el contingut correctament. Si voleu evitar-vos problemes, però, considereu l'opció de convertir aquests tipus de fitxers a Unicode, és a dir, al format de fitxer .utf8.</p>
+    <li><a href="#The_OmegaT_solution">Solució de l'OmegaT</a></li>
+  </ul>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
+
+  <h2>Codificació per defecte</h2>
+
+  <p>Els fitxers de text net, que generalment tenen l'extensió <code>.txt</code>, contenen exclusivament informació textual. No hi ha cap manera clarament definida d'informar l'ordinador de la llengua que contenen. A grans trets, això significa que, per defecte, l'ordinador considerarà que el fitxer és en la mateixa llengua que la utilitzada pel propi ordinador.</p>
+  <hr>
+  <a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
+
+  <h2>Text il·legible</h2>
+
+  <p>Si l'usuari és rus, és molt probable que el seu ordinador també treballi en rus: els menús es mostren en rus, els fitxers que obre són en rus, etc. En la majoria dels casos, l'ordinador normalment realitza la decisió correcta sobre el contingut dels fitxers: tots són en rus i no en cap altra llengua que no es pugui representar amb caràcters russos.</p>
+
+  <p>Ara bé, si l'usuari és un traductor rus que tradueix del japonès i ha de treballar amb fitxers de <strong>text net</strong> en japonès, molt probablement l'ordinador considerarà que el contingut d'aquests fitxers és en rus. Això passa perquè el fitxer en sí no conté informació que indiqui a l'ordinador en quina llengua s'han escrit. Per exemple, el fitxer en japonès podria contenir el text:</p>
+
+  <p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p><br>
+
+  <p>Com que espera que el contingut sigui en rus, però, l'editor de textos podria mostrar-lo així:</p>
+
+  <p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</p><br>
+
+  <p>No obstant, això no és rus: són caràcters japonesos que es mostren incorrectament com a caràcters russos.</p>
+
+  <p>Com qualsevol altra aplicació, l'OmegaT també és susceptible de tenir aquest problema. Només pot pressuposar que, per defecte, els fitxers de <strong>text net</strong> es poden visualitzar utilitzant els valors per defecte del sistema. Això funciona bé, per exemple, quan l'ordinador treballa en francès i l'usuari tradueix fitxers en anglès, o quan l'ordinador treballa en alemany i l'usuari tradueix fitxers en italià.</p>
+  <hr>
+  <a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
+
+  <h2>Jocs i codificació de caràcters</h2>
+
+  <p>Com és que funciona amb l'anglès i el francès però no amb el rus i el japonès? Perquè l'anglès i el francès comparteixen un mateix <strong>joc de caràcters</strong>. Concretament, <strong>Llatí-1</strong>, o alguna variant d'aquest. Fins fa poc, el rus i el japonès no compartien cap joc de caràcters. Els jocs de caràcters russos més actuals no cobreixen els caràcters japonesos, i a la inversa. El resultat és el que heu vist abans.</p>
+
+  <p>El client japonès treballa amb un ordinador japonès i crea fitxers de text que contenen japonès. El joc de caràcters seleccionat per l'ordinador del client dependrà del sistema operatiu i d'altres paràmetres, però és molt poc probable que l'ordinador rus interpreti correctament el joc de caràcters escollit (japonès).</p>
+
+  <p>Ara bé, la manera en què la informació textual del joc de caràcters especificat es transmet físicament (és a dir, quins són els codis numèrics que l'ordinador utilitza per interpretar i per mostrar el text) depèn de la <strong>codificació</strong>. Quan l'ordinador llegeix el fitxer, «descodifica» la informació en funció de la codificació i el visualitza en funció del joc de caràcters. A grans trets, una codificació correspon a un joc de caràcters...</p>
+  <hr>
+  <a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
+
+  <h2>Solució de l'OmegaT</h2>
+
+  <p>Bàsicament, hi ha tres maneres de solucionar aquest problema a l'OmegaT. Totes tres impliquen l'aplicació de <a href="fileFilters.html">filtres de fitxers</a> del menú <strong>Opcions</strong>.</p>
+
+  <ol>
+    <li>Especifiqueu la codificació dels fitxers de <strong>text net</strong>, és a dir, els fitxers amb l'extensió <code>.txt</code>: A l'apartat <strong>Fitxers de text</strong> del diàleg <a href="fileFilters.html">Filtres de fitxers</a>, canvieu la <strong>Codificació del text de partida</strong> <strong>&lt;automàtic&gt;</strong> per la codificació que correspongui al vostre fitxer <code>.txt</code> de partida.</li>
+
+    <li>Canvieu les extensions dels fitxers de partida de text net (per exemple, <code>.txt</code> per <code>.jp</code> per a fitxers de text net en japonès): A l'apartat <strong>Fitxers de text</strong> del diàleg <a href=
+    "fileFilters.html">Filtres de fitxers</a>, afegiu un <strong>Patró de nom de fitxer de partida</strong> nou (per exemple, <code>*.jp</code>) i seleccioneu els paràmetres adients per a la codificació del fitxer de partida i del fitxer traduït.</li>
+
+    <li>Obriu el fitxer de partida en un editor de textos que n'interpreti correctament la codificació i deseu-lo amb la codificació «UTF-8». Canvieu l'extensió del fitxer <code>.txt</code> per <code>.utf8</code>. L'OmegaT interpretarà automàticament el fitxer com a un fitxer UTF-8.</li>
+  </ol>
+
+  <p>Per defecte, l'OmegaT inclou aquesta breu llista per facilitar-vos el treball amb alguns fitxers de text net:</p>
+
+  <ul>
+    <li>L'OmegaT interpreta els fitxers <code>.txt</code> automàticament (<strong>automàtic</strong>) com a fitxers amb la codificació per defecte del sistema.</li>
+
+    <li>Els fitxers <code>.txt1</code> tenen la codificació ISO-8859-1, que cobreix la majoria de les llengües d'<strong>Europa occidental</strong>.</li>
+
+    <li>Els fitxers <code>.txt2</code> tenen la codificació ISO-8859-2, que cobreix la majoria de les llengües d'<strong>Europa central i oriental</strong>.</li>
+
+    <li>L'OmegaT interpreta els fitxers <code>.utf8</code> com a fitxers amb codificació UTF-8 (que cobreix gairebé <strong>totes</strong> les llengües del món).</li>
+  </ul>
+
+  <p>Podeu comprovar-ho seleccionant <strong>Filtres de fitxers</strong> al menú <strong>Opcions</strong>. Per exemple, si teniu un fitxer de partida en txec (molt probablement amb codificació <strong>ISO-8859-2</strong>), només us cal canviar l'extensió <code>.txt</code> per <code>.txt2</code> i l'OmegaT n'interpretarà el contingut correctament. Si voleu evitar-vos problemes, però, considereu l'opció de convertir aquests tipus de fitxers a Unicode, és a dir, al format de fitxer .utf8.</p>
+  <hr>
+
+  <table style="width: 100%;" summary="format" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
-        <td style="text-align: center;"><a href="index.html">Inici</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inici</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índex</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

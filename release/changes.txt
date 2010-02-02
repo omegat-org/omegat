@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.2 
 ----------------------------------------------------------------------
- 14 Enhancements
+ 15 Enhancements
   4 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 vs. 2.1.1
@@ -42,6 +42,8 @@ current segment, or for all the (translated) segments
 
   - Cut, Copy, Paste popup menu in the Editor. It performs the same functions as
 Ctrl+X, Ctrl+C and Ctrl+V.
+
+  - Display the tokenizer used on startup in the console
 
   - Catalan localisation updated to 2.1.1 (UI, Readme, Instant Start, documentation)
   - New Swedish localisation (2.1.0) (UI, Readme, Instant Start)

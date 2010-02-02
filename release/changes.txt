@@ -134,7 +134,7 @@ as a repetition in Match Statistics
 
   Other enhancements:
   - Basque localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
-
+  - Welsh localisation updated to 2.0.5 (UI, Readme, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 1

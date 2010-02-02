@@ -140,6 +140,7 @@ as a repetition in Match Statistics
   - Welsh localisation updated to 2.0.5 (UI, Readme, Instant Start)
   - Catalan localisation updated to 2.0.5, backported from 2.1.1 (UI, Readme, Instant Start, documentation)
   - Swedish localisation updated to 2.0.5, backported from 2.1.0 (UI, Readme, Instant Start)
+  - Czech localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 1

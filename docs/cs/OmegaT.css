@@ -19,14 +19,15 @@ h3
     }
 h4
     {
-    font-size: 12;
+    font-size: 13;
     }
 
-p, dd, dt
+p, dd, dt, li, body
     {
     margin: 5px 5px 5px 5px;
     padding: 0px;
     color: #000;
+    font-family: serif;
     }
     
 table

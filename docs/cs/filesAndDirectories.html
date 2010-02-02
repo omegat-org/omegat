@@ -2,7 +2,7 @@
 <head>
   <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Soubory a adresáře - OmegaT 1.8 Uživatelská příručka</title>
+  <title>Soubory a adresáře - OmegaT 2.0 Uživatelská příručka</title>
 </head>
 
 <body>
@@ -27,11 +27,11 @@
   <p>OmegaT pracuje se třemi typy souborů.</p>
 
   <ul>
-    <li>Soubory projektu překladu: Představují projekt překladu. Jejich ztráta může ovlivnit celistvost projektu a  možnost dokončit danou práci. Soubory projektu jsou nejdůležitějšími soubory v programu OmegaT. Jsou to soubory, které představují základ vašeho překladu.</li>
+    <li>Soubory projektu překladu: Představují projekt překladu. Jejich ztráta může ovlivnit celistvost projektu a možnost dokončit danou práci. Soubory projektu jsou nejdůležitějšími soubory v programu OmegaT. Jsou to soubory, které představují základ vašeho překladu.</li>
 
     <li>Jsou vytvořeny, když uživatel pozmění chování programu OmegaT prostřednictvím nastavení dostupných voleb. Jejich ztráta znamená, že budete pracovat s programem OmegaT v jeho „továrním“ nastavení. Pokud změníte nastavení když zrovna překládáte, může to někdy zapříčinit menší problémy.</li>
 
-    <li>Soubory Aplikace: Jsou obsaženy v balíku, který jste si stáhli, většina z nich je nezbytná pro správné fungování programu OmegaT. Pokud jsou z nějakého důvodu takovéto soubory ztraceny, jednoduše si stáhněte a/nebo přeinstalujte program OmegaT, a tím budou všechny tyto soubory obnoveny.</li>
+    <li>Soubory aplikace: Jsou obsaženy v balíku, který jste si stáhli, většina z nich je nezbytná pro správné fungování programu OmegaT. Pokud jsou z nějakého důvodu takovéto soubory ztraceny, jednoduše si stáhněte a/nebo přeinstalujte program OmegaT, a tím budou všechny tyto soubory obnoveny.</li>
   </ul>
   <hr>
 
@@ -45,7 +45,7 @@
 
   <h3><a name="project_list" id="project_list"></a>Seznam souborů překladového projektu.</h3>
 
-  <p>V dialogovém okně programu OmegaT vypadá překladový projekt jako soubor opatřený ikonou asociovanou k programu OmegaT. Při pohledu ze správce souborů vypadá ten stejný  překladový projekt jako jakýkoliv jiný adresář.</p>
+  <p>V dialogovém okně programu OmegaT vypadá překladový projekt jako soubor opatřený ikonou asociovanou k programu OmegaT. Při pohledu přes správce souborů vypadá ten stejný  překladový projekt jako jakýkoliv jiný adresář.</p>
 
   <p><br></p><img src="images/OmegaT_projects_and_subdirectories.png" name=
   "grafika3" alt="Soubory a adresáře aplikace OmegaT" align="left" border="1"
@@ -62,7 +62,7 @@
     <li><img src="images/Omegatproject.png" name="grafika1" alt=
     "OmegaT Project" align="left" border="0" id="grafika1"><br clear=
     "left"></li>
-  </ul>Když začínáte práci s novým projektem, bude <b>slovníkový</b> podadresář prázdný. Toto je místo pro vaše slovníky, tedy za předpokladu, že již nějaké pro tento projekt máte.<h3>Omegat</h3>
+  </ul>Když začínáte práci s novým projektem, bude adresář <b>vlastního slovníku</b> prázdný. Toto je místo pro vaše slovníky, tedy za předpokladu, že již nějaké pro tento projekt máte.<h3>Omegat</h3>
 
   <dl>
     <dt>Podadresář <b>omegat</b> bude obsahovat přinejmenším dva soubory, překladovou paměť <em>project_save.tmx</em> (<a href="translationMemories.html">...</a>) a soubor se statistikami<em>project_stats.txt (<a href=
@@ -83,7 +83,7 @@
   <h3>Adresář Target / Cíl</h3>
 
   <dl>
-    <dd>Když vyberete <strong>Project → Vytvořit přeložené dokumenty</strong> a současně je otevřen jiný projekt, všechny soubory v <strong>/source/</strong>, ať už přeložené nebo ne, tu budou znovu vytvořeny se stejnou adresářovou strukturou, a odrazí tak aktuální stav překladu. Prakticky to znamená, že OmegaT sloučí informaci o překladu uloženou v <strong>/omegat/project_save.tmx</strong> se zdrojovými dokumenty, aby vytvořila obsah <strong>/target/</strong>.</dd>
+    <dd>Když vyberete <strong>Projekt → Vytvořit přeložené dokumenty</strong> a současně je otevřen jiný projekt, všechny soubory v <strong>/source/</strong>, ať už přeložené nebo ne, tu budou znovu vytvořeny se stejnou adresářovou strukturou, a odrazí tak aktuální stav překladu. Prakticky to znamená, že OmegaT sloučí informaci o překladu uloženou v <strong>/omegat/project_save.tmx</strong> se zdrojovými dokumenty, aby vytvořila obsah <strong>/target/</strong>.</dd>
   </dl>
 
   <h3>Adresář Tm / Překladová paměť</h3>
@@ -96,13 +96,10 @@
 
   <dl>
     <dd>OmegaT vytvoří tento soubor automaticky jakmile je vytvořen projekt. Obsahuje <a href=
-    "projectProperties.html"> parametry projektu</a>. Parametry, které jsou obsaženy v tomto souboru mohou být změněny z okna Vlastnosti projektu.</dd>
+    "projectProperties.html">parametry projektu</a>. Parametry, které jsou obsaženy v tomto souboru mohou být změněny z okna Vlastnosti projektu.</dd>
 
-    <dt>project_name-omegat.tmx
-    (<a href=
-    "translationMemories.html#TMX_files_location_and_purpose">...</a>)<br>
-    project_name-level1.tmx<br>
-    project_name-level2.tmx</dt>
+    <dt>nazev_projektu-omega.tmx(<a href=
+    "translationMemories.html#TMX_files_location_and_purpose">...</a>)<br> nazev_projektu-level1.tmx<br> nazev_projektu-level2.tmx</dt>
 
     <dd>Tyto soubory obsahují zdrojové a cílové segmenty v souladu s obsahem adresáře /source/ a to v momentu jejich vytvoření (obvykle když se vytvoří přeložené dokumenty).</dd>
   </dl>
@@ -114,7 +111,7 @@
 
   <p>Uživatelské soubory jsou uloženy v odděleném umístění, kde k nim lze přistupovat s jakoukoliv verzí programu OmegaT. Umístění záleží na platformě, kterou používáte:</p>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary="just formatting">
     <col width="33*">
     <col width="223*">
 
@@ -125,10 +122,9 @@
 
       <td width="87%">
         <dl>
-          <dd><strong>2000 and XP: Documents
-          and Settings\&lt;User Name&gt;\Application Data\OmegaT</strong></dd>
-          <dd><strong>Vista: Users\&lt;User Name&gt;\AppData\Roaming\OmegaT</strong>
-          <dd><strong>Ostatní: &lt;Něco...&gt;\OmegaT</strong> (&lt;Něco...&gt; odpovídá umístění výchozí domovské složky(„home“), která je určena Javou.)</dl>
+          <dd><strong>2000 a XP: Dokumenty a nastavení\&lt;Jméno uživatele&gt;\Data aplikací\OmegaT</strong></dd>
+          <dd><strong>Vista: Users\&lt;Jméno uživatele&gt;\AppData\Roaming\OmegaT</strong>
+          <dd><strong>Ostatní: &lt;Něco...&gt;\OmegaT</strong> (&lt;Něco...&gt; odpovídá umístění výchozí domovské složky („home“), která je určena Javou.)</dl>
       </td>
     </tr>
 
@@ -142,7 +138,7 @@
 
       <td width="87%">
         <dl>
-          <dd><strong>&lt;User Home&gt;/.omegat</strong> (.omegat je adresář, tečka před názvem znamená, že je neviditelný dokud nenapíšete <code>ls -a</code> nebo odpovídající příkaz.)</dd>
+          <dd><strong>&lt;Home uživatele&gt;/.omegat</strong> (.omegat je adresář, tečka před názvem znamená, že je neviditelný dokud nenapíšete <code>ls -a</code> nebo odpovídající příkaz.)</dd>
         </dl>
       </td>
     </tr>
@@ -181,7 +177,7 @@
 
   <h3><a name="user_list" id="user_list"></a>Seznam souborů uživatele<br></h3>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0"  summary="just formatting">
     <col width="27*">
     <col width="229*">
 
@@ -252,7 +248,7 @@
   <p>OmegaT je k dispozici jako balík, který je možno stahovat ze SourceForge. V této kapitole se budeme zabývat <a href=
   "installingAndRunning.html#Other_systems">balíkem nezávislým na platformě</a>, který obsahuje aplikaci ve standardní formě Java. Ostatní balíky obsahují Linuxový balík <code>.tar</code>, instalace Windows - buď s, nebo bez prostředí Java Runtime Environment, instalace pro MacOSX a balík se zdrojovým kódem pro vývojáře. Balík, který není závislý na platformě, lze používat na <strong>jakékoliv</strong> platformě s funkčním prostředím Java 1.4.2, včetně platforem, pro které existuje specifický balík. Tento balík, který je nezávislý na platformě, je k dispozici jako komprimovaný soubor, který je nutno rozbalit do libovolného adresáře pro instalaci. Dekomprese se obvykle provede dvojitým kliknutím na stažený balík. Po rozbalení bude vytvořen adresář obsahující následující soubory:</p>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0"  summary="just formatting">
     <col width="19*">
     <col width="237*">
 
@@ -313,7 +309,7 @@
 
       <td width="92%">
         <dl>
-          <dd>Toto je běžný html soubor, který vás po otevření v internetovém prohlížeči přesměruje na uživatelskou skupinu OmegaT, která je nabízena v rámci služby Yahoo Groups. Registrace do uživatelské skupiny není nutná, ale zpřístupní vám některé extra služby jako přístup k některým souborům, nepravidelné průzkumy mínění, nebo také možnost připojit se k diskusím na téma aplikace OmegaT. Archívy skupiny jsou veřejné a pro rešerši se nemusíte do skupiny registrovat.</dd>
+          <dd>Toto je běžný soubor html, který vás po otevření v internetovém prohlížeči přesměruje na uživatelskou skupinu OmegaT, která je nabízena v rámci služby Yahoo Groups. Registrace do uživatelské skupiny není nutná, ale zpřístupní vám některé extra služby jako přístup k některým souborům, nepravidelné průzkumy mínění, nebo také možnost připojit se k diskusím na téma aplikace OmegaT. Archívy skupiny jsou veřejné a pro rešerši se nemusíte do skupiny registrovat.</dd>
         </dl>
       </td>
     </tr>
@@ -427,7 +423,7 @@
     <br></dd>
   </dl>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>

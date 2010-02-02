@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Režim konzole - OmegaT 2.0 Uživatelská příručka</title>
+</head>
+<body>
+<h1>OmegaT Režim konzole</h1>
+<ul>
+  <li>
+    <p><a href="#prerequisites">Co budeme potřebovat</a></p>
+  </li>
+  <li>
+    <p><a href="#start">Spouštění aplikace v režimu konzole</a></p>
+  </li>
+  <li>
+    <p><a href="#extra">Extra nastavení</a></p>
+    <p>&nbsp;</p>
+  </li>
+</ul>
+<p>Důvod proč využívat příkazový řádek (konzoli) je použití aplikace OmegaT jako překladatelský nástroj ve skriptovacím prostředí. Když aplikaci spustíte v konzoli, tak se nenahraje žádné grafické prostředí / GUI (takže lze pracovat na jakémkoliv typu příkazového řádku) a daný projekt bude automaticky přeložen.</p>
+<hr>
+<h3><a name="prerequisites" id="prerequisites"></a>Co budeme potřebovat</h3>
+<p>Aby šlo spustit aplikaci OmegaT, musíme mít platný projekt OmegaT. Umístění není důležité, protože se tento údaj stejně musí zadat v příkazu při startu.</p>
+<p>Jestli budete chtít změnit nastavení, musíte mít konfigurační soubory. Toho lze dosáhnout dvěma způsoby:</p>
+<ol>
+  <li>Spusťte aplikaci běžným způsobem (přes grafické prostředí / GUI) a zvolte vhodné nastavení. Když OmegaT běží v konzoli, tak bude použito stejné nastavení. Když nejde OmegaT spustit běžným způsobem (není dostupné žádné grafické prostředí)</li>
+  <li>zkopírujte do patřičného adresáře soubory nastavení z jiné instalace aplikace OmegaT na jiném počítači. Umístění není důležité, protože se tento údaj může zadat v příkazu při startu. Důležité soubory jsou filters.conf a segmentation.conf a můžete je najít v adresáři home daného uživatele (např. C:\Dokumenty a nastavení\%Uživatel%\OmegaT ve Windows, %uživatel%/.omegat/ v Linuxu)</li>
+</ol>
+<br>
+<h3><a name="start" id="start"></a>Spouštění aplikace v režimu konzole</h3>
+<p>Pro spuštění aplikace OmegaT v konzoli musíte při startu nastavit pár extra parametrů. Nejdůležitější je <code>&lt;project-dir&gt;</code>, a volitelně <code>--config-dir=&lt;config-dir&gt;</code></p>
+<p>Příklad: <code>$&gt; java -jar OmegaT.jar /cesta/k/projektu --config-dir=/cesta/ke/konfiguračním-souborům/ --mode=console-translate</code>
+
+<p><span style="font-weight: bold;">Vysvětlení:</span></p>
+<table style="width: 80%;" cellpadding="2" cellspacing="2" summary="just formatting">
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><code>&lt;project-dir&gt;</code></td>
+      <td style="text-align: left;">
+      <p>sděluje aplikaci kde najde projekt pro překlad když je to zadáno, OmegaT se spustí v konzoli a přeloží zadaný projekt.</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><code>--config-dir=&lt;config-dir&gt;</code></td>
+      <td style="text-align: left;">
+      <p>&nbsp;umožňuje sdělit aplikaci ve kterém adresáři jsou uloženy konfigurační soubory. Když není zadáno, OmegaT s vrátí k výchozím hodnotám (adresář OmegaT dir ve složce home uživatele, nebo když není dostupné: adresář, ve kterém se právě pracuje).</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><code>--mode=console-translate</code></td>
+      <td style="text-align: left;">
+      <p>&nbsp;OmegaT se spustí v konzoli a přeloží zadaný projekt.</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3><a name="extra" id="extra"></a>Extra nastavení</h3>
+<p>Existuje jeden extra parametr příkazového řádku, který je specifický pro režim konzole: <code>--quiet</code>. V režimu ‚quiet‘ (‚ticho‘) se na obrazovce zobrazuje méně informací. Všechna hlášení, která byste obvykle nalezli ve stavové liště se nebudou zobrazovat.<br> Použití: <code>java -jar OmegaT.jar /path/to/project --quiet</code> </p>
+<hr>
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"  summary="just formatting">
+<tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>
+      <td style="text-align: center;"><a href="index.html">Obsah</a>
+      </td>
+      <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a> </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

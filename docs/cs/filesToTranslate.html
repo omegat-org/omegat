@@ -2,7 +2,8 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Soubory, které lze s touto aplikací překládat - OmegaT 1.8 Uživatelská příručka</title>
+
+  <title>Soubory, které lze s touto aplikací překládat - OmegaT 2.0 Uživatelská příručka</title>
 </head>
 
 <body>
@@ -56,7 +57,7 @@
         </li>
 
         <li>
-          <p><a href="#tt">Soubor překladových nástrojů Translate Toolkit</a></p>
+          <p><a href="#tt">Translate Toolkit</a></p>
         </li>
 
         <li>
@@ -67,38 +68,34 @@
   </ul>
   <hr>
 
-  <h3><a name="RTLbidi"></a>Jazyky se zápisem zprava doleva</h3>
+  <h2><a name="RTLbidi" id="RTLbidi"></a>Jazyky se zápisem zprava doleva</h2>Zarovnání zdrojových a cílových segmentů závisí na jazycích projektu. Ve výchozím nastavení se vychází ze zarovnání vlevo pro jazyky LTR a zarovnání vpravo pro jazyky RTL. Můžete přepínat mezi různými způsoby zobrazení stisknutím Ctrl+Shift+O (jedná se o písmeno O, ne o číslici 0). Při přepínání Ctrl+Shift+O se volí mezi třemi nastaveními:<ul>
+    <li>výchozí (tj. jazykové) zarovnání</li>
 
-  <h4><a name="RTL_Changing_direction"></a>Změna směru při zadávání či zobrazení textu</h4>Pro všechny úkoly vykonávané v aplikaci OmegaT můžete přepínat mezi způsobem zápisu / zobrazování textu z LTR (zleva doprava) a RTL (zprava doleva) stisknutím kombinace kláves Ctrl+Shift+O (jedná se zde o velké O, ne nulu). Použití módu RTL v aplikaci OmegaT nikterak neovlivní zobrazovací mód přeložených dokumentů, které byly sestaveny prostřednictvím OmegaT. Zobrazovací mód přeloženého dokumentu bude nutno upravit s aplikací, která je běžně určena k zobrazování a úpravě takového textu (více informací v konkrétních manuálech). Použití zkratky Ctrl+Shift+O vyvolá v aplikaci OmegaT změnu na RTL, a to jak pro vkládání, tak i pro zobrazení textu. Lze ji použít odděleně pro všechny tři okna (Editor, Přibližné překlady a Slovník). Tuto možnost lze použít i ve všech polích pro zadávání textu v rámci OmegaT (okno pro vyhledávání, segmentační pravidla atd.)<p>Poznámka: uživatelé Max OSX použijí stejnou zkratku (a ne Cmd+Shift+O).</p>
+    <li>zarovnání vlevo</li>
 
-  <h4><a name="RTL_mixing"></a>Současné užívání řetězců LTR a RTL v segmentech</h4>Když zadáváte prostý text ve směru RTL, můžete používat výchozí (LTR) zobrazení. Nicméně v mnoha případech je nutné vložit text LTR do textu RTL. Například u tagů aplikace OmegaT jako názvy produktů, které musí zůstat ve směru LTR zdrojového jazyka, různé náhrady textu v lokalizačních souborech a čísla. V takovýchto případech je důležité přepnout do módu RTL, takže text RTL (ve skutečnosti dvousměrný) bude zobrazován správně. Je nutno uvést, že když je OmegaT v módu RTL, tak oba, jak zdrojový, tak i cílový text, texty jsou zobrazeny v módu RTL. To znamená, že jestli je zdrojový jazyk LTR a cílový RTL, nebo naopak, může být nezbytné vzájemně přepínat mezi módy RTL a LTR a jednoduchým způsobem zobrazovat zdroj a vkládat cílový text v odpovídajícím módu.<h4><a name="RTL_tags"></a>Tagy aplikace OmegaT v segmentech typu RTL</h4>
+    <li>zarovnání vpravo</li>
+  </ul>Použití módu RTL v aplikaci OmegaT nikterak neovlivní zobrazovací mód přeložených dokumentů, které byly sestaveny prostřednictvím OmegaT. Zobrazovací mód přeloženého dokumentu bude nutno upravit s aplikací, která je běžně určena k zobrazování a úpravě takového textu (více informací v konkrétních manuálech). Použití zkratky Ctrl+Shift+O vyvolá v aplikaci OmegaT změnu na RTL, a to jak pro vkládání, tak i pro zobrazení textu. Lze ji použít odděleně pro všechny tři okna (Editor, Přibližné překlady a Slovník). Tuto možnost lze použít i ve všech polích pro zadávání textu v rámci OmegaT (okno pro vyhledávání, segmentační pravidla atd.) <b>Pozor</b>: Mac OSX používá stejnou zkratku (a ne Cmd+Shift+O) .<h3><a name="RTL_mixing" id="RTL_mixing"></a>Současné užívání řetězců LTR a RTL v segmentech</h3>Když zadáváte prostý text ve směru RTL, můžete používat výchozí (LTR) zobrazení. Nicméně v mnoha případech je nutné vložit text LTR do textu RTL. Například u tagů aplikace OmegaT jako názvy produktů, které musí zůstat ve směru LTR zdrojového jazyka, různé náhrady textu v lokalizačních souborech a čísla. V takovýchto případech je důležité přepnout do módu RTL, takže text RTL (ve skutečnosti dvousměrný) bude zobrazován správně. Je nutno uvést, že když je OmegaT v módu RTL, tak oba, jak zdrojový, tak i cílový text, texty jsou zobrazeny v módu RTL. To znamená, že jestli je zdrojový jazyk LTR a cílový RTL, nebo naopak, může být nezbytné vzájemně přepínat mezi módy RTL a LTR a jednoduchým způsobem zobrazovat zdroj a vkládat cílový text v odpovídajícím módu.<h3><a name="RTL_tags" id="RTL_tags"></a>Tagy aplikace OmegaT v segmentech typu RTL</h3>
 
   <p>Jak již byl dříve zmíněno, tagy OmegaT jsou řetězce typu LTR. Když překládáte mezi jazyky RTL a LTR, tak abyste mohli tagy správně číst ze zdroje a řádně je vkládat do cílového textu,budete mít určitě zájem často přepínat mezi módy LTR a RTL.</p>
 
   <p>Pokud to dokument umožní, lze překladateli doporučit odstranit informace o stylu z originálního dokumentu tak, aby se pak v prostředí OmegaT zobrazovalo tagů co nejméně. Bližší informace poskytují údaje v části Tipy pro správu tagů. Často ověřujte tagy (vizte <a href=
   "userInterface.html#tag_validation">Ověření tagů)</a> a vytvářejte přeložené dokumenty (vizte níže a <a href="menu.html">Menu</a>) v pravidelných časových odstupech především kvůli tomu, že je pak jednodušší vyřešit případné problémy. Taktéž lze přeložit text v podobě prostého textu a později přidat potřebný styl v příslušné aplikaci.</p>
 
-  <h4><a name="RTL_CreatingTranslatedDocuments" id=
-  "RTL_CreatingTranslatedDocuments"></a>Vytvoření dokumentů se zápisem RTL</h4>
+  <h3><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Vytvoření dokumentů se zápisem RTL</h3>
 
   <p>Když aplikace vytvoří přeložený dokument, jeho směr zobrazování textu bude stejný jako v původním dokumentu. Pokud byl výchozí dokument typu LTR, směr zobrazování cílového dokumentu se musí změnit ručně na RLT v aplikaci pro otevírání a zobrazování takovýchto dokumentů. Každý výchozí formát má určitý způsob jak zobrazit RTL text, více naleznete v příručce týkající se konkrétní aplikace.</p>
 
   <p>Abyste se vyhnuli měnění zobrazovacích parametrů cílového souboru při každém otevření souboru, je u vybraných typů možné změnit zobrazovací parametry u zdrojového souboru a to tak, že tyto parametry budou přeneseny na cílový soubor. Takové úpravy je možné provádět například u souborů OpenOffice.org.</p>
   <hr>
 
-  <h3><a name="formats" id="formats"></a>Formáty souborů</h3>
+  <h2><a name="formats" id="formats"></a>Formáty souborů</h2>
 
   <p>S programem OmegaT můžete překládat soubory mnoha formátů. V podstatě existují dva základní typy formátů, formát <strong>prostého textu</strong> a <strong>formátovaného textu</strong>.</p>
 
   <h3><a name="plaintext" id="plaintext"></a>Soubory v prostém textu</h3>
 
-  <p>Soubory v prostém textu obsahují pouze text, takže jejich překlad je jednoduchý; prostě přímo píšete text překladu.</p>
-
-  <p>Existuje několik <a href="plainText.html">metod</a> jak blíže určit kódování souboru, takže při otevření souboru v programu OmegaT nebude obsah souboru zobrazen chybně. </p>
-
-  <p>U takovýchto souborů se nepředpokládá, že by obsahovaly jiné formátování pro účely odsazení/zarovnání než je použití „mezery“ . Obvykle se upravují pomocí textových editorů a všeobecně není možné, aby si takovéto formáty ponechaly informace o písmu/barvě/okraji atd.</p>
-
-  <p>V současnosti podporuje OmegaT následující formáty prostého textu:</p>
+  <p>Soubory prostého textu obsahují jen text, takže jejich překlad je tak jednoduchý jako přímé zadávání překladu. Existuje několik <a href="plainText.html">metod</a> jak blíže určit kódování souboru, takže při otevření souboru v programu OmegaT nebude obsah souboru zobrazen chybně.  Takové soubory neobsahují žádné informace k formátování kromě „bílých znaků“, kterých se využívá k zarovnání textu, identifikaci odstavců nebo vkládání konce stránek. Takové znaky neumí vyjádřit informace k textu týkající se barvy, písma a pod. V současnosti podporuje OmegaT následující formáty prostého textu:</p>
 
   <ul>
     <li>
@@ -128,11 +125,9 @@
 
   <h3><a name="tagged" id="tagged"></a>Soubory s formátovaným textem</h3>
 
-  <p>Soubory s formátovaným textem obsahují text a zároveň i informace jako je font, velikost, barva atd. Běžně jsou vytvářeny pomocí textových procesorů nebo editorů webových stránek. Takovéto formáty souborů už dokáží uložit informace o formátování. Informace o formátování mohou být buď jednoduché, jako je <strong>toto tučné písmo</strong>, nebo složité, jako např. tabulkové údaje s různými velikostmi písma, barvami, umístěním atd. Ve většině překladatelských zakázek bývá důležité, aby přeložený dokument vypadal stejně jako originál. OmegaT vám to umožní označením znaků/slov, které mají speciální formátování pomocí jednoduchých a přehledných <a href="formattedText.html">tagů</a>. Zjednodušení formátování původního textu ve velké míře přispívá ke snížení počtu tagů. Za úmyslem zjednodušení překladu a snížení počtu možných <a href=
-  "userInterface.html#tag_validation">chyb tagů</a> lze sjednotit použité fonty, velikosti písem, barev atd.</p>
-
-  <p><a name="specifics" id="specifics"></a>Každý typ souboru zpracovává OmegaT jinak. Specifický přístup lze nastavit ve <a href=
-  "fileFilters.html">filtrech souborů</a>. V současnosti podporuje OmegaT následující formáty pro formátovaný text:</p>
+  <p>Soubory s formátovaným textem obsahují text a zároveň i informace jako je font, velikost, barva atd. Běžně jsou vytvářeny pomocí textových procesorů nebo editorů webových stránek. Takovéto formáty souborů už dokáží uložit informace o formátování. Informace o formátování mohou být buď jednoduché, jako je <strong>toto tučné písmo</strong>, nebo složité, jako např. tabulkové údaje s různými velikostmi písma, barvami, umístěním atd. Ve většině překladatelských zakázek bývá důležité, aby přeložený dokument vypadal stejně jako originál. OmegaT vám to umožní označením znaků/slov, které mají speciální formátování pomocí jednoduchých a přehledných <a href="formattedText.html">tagů</a>. Zjednodušení formátování původního textu ve velké míře přispívá ke snížení počtu tagů. Za účelem zjednodušení překladu a snížení počtu možných <a href=
+  "userInterface.html#tag_validation">chyb tagů</a> lze sjednotit použité fonty, velikosti písem, barev atd. <a name="specifics" id=
+  "specifics"></a>Každý typ souboru OmegaT zpracovává jinak. Specifický přístup lze nastavit ve <a href="fileFilters.html">filtrech souborů</a>. V současnosti podporuje OmegaT následující formáty pro formátovaný text:</p>
 
   <ul>
     <li>
@@ -162,6 +157,26 @@
     <li>
       <p>jednojazyčné soubory Okapi XLIFF</p>
     </li>
+
+    <li>
+      <p>QuarkXPress CopyFlowGold</p>
+    </li>
+
+    <li>
+      <p>soubory titulků (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p>Android resource</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
   </ul>
 
   <p>Jiné typy souborů obsahujících prostý text mohou být zpracovány programem OmegaT pomocí <a href=
@@ -172,13 +187,14 @@
 
   <p>V aplikaci OmegaT mohou být přístupné i jiné souborové formáty prostého nebo formátovaného textu.</p>
 
-  <p>Převod souborů na podporované formáty lze provádět prostřednictvím externích nástrojů. Mějte ale na paměti, že přeložené soubory bude nutno převést zpět do originálního formátu. Tímto způsobem lze programem OmegaT překládat množství formátů prostého textu (včetně LaTex atd.), a to prostřednictvím konverze do formátu PO. Podobně může být množství formátů formátovaného textu (včetně souboru Microsoft Office) překládáno pomocí OmegaT prostřednictvím konverze do formátu Open Document.</p>
+  <p>Převod souborů na podporované formáty lze provádět prostřednictvím externích nástrojů. Nezapomeňte, že přeložené soubory bude nutno převést zpět do originálního formátu. Tímto způsobem lze programem OmegaT překládat množství formátů prostého textu (včetně LaTeX atd.), a to prostřednictvím konverze do formátu PO. Podobně může být množství formátů formátovaného textu (včetně souboru Microsoft Office) překládáno pomocí OmegaT prostřednictvím konverze do formátu Open Document.</p>
 
   <p>Kvalita přeloženého souboru bude záležet na kvalitě obousměrné konverze. Ujistěte se, že jste ověřili všechny možnosti před zahájením práce s takovými konverzemi. Dostupné svobodné nástroje pro konverzi:</p>
 
   <p><br></p>
 
-  <table width="100%" border="0" cellpadding="4" cellspacing="0">
+  <table width="100%" border="0" cellpadding="4" cellspacing="0" summary=
+  "just formatting">
     <col width="50*">
     <col width="206*">
 
@@ -226,16 +242,18 @@
     </tr>
   </table>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>
-        <td style="text-align: center;"><a href="index.html">Obsah</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Obsah</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

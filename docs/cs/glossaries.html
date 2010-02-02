@@ -2,10 +2,10 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Slovníky - OmegaT 1.8 Uživatelská příručka</title>
+  <title>Slovníky - OmegaT 2.0 Uživatelská příručka</title>
 </head>
 <body>
-<h2>Slovníky</h2>
+<h2>Vlastní slovníky</h2>
 <ul>
   <li>
     <p><a href="#usage">Používání</a></p>
@@ -14,68 +14,67 @@
     <p><a href="#fileformat">Formát souboru</a></p>
   </li>
   <li>
-    <p><a href="#howtocreate">Jak slovníky vytvořit</a></p>
+    <p><a href="#howtocreate">Jak vlastní slovníky vytvořit</a></p>
   </li>
   <li>
     <p><a href="#multiterm">Použití Trados Multiterm</a></p>
   </li>
   <li>
-    <p><a href="#commonglossaryproblems">Obecné problémy slovníku</a></p>
+    <p><a href="#commonglossaryproblems">Obecné problémy s Vlastním slovníkem</a></p>
   </li>
 </ul>
-<p>Slovníky představují soubory, které jsou pro použití v OmegaT tvořené a aktualizované ručně.</p>
-<p>Pokud projekt OmegaT obsahuje jeden či více slovníků, jakékoliv termíny ve slovníku, pokud jsou nalezené v aktivním segmentu, budou automaticky zobrazené v okně <a href="userInterface.html#Glossary">Slovník</a>.</p>
+<p>Slovníky představují takové soubory, které jsou pro použití v OmegaT tvořené a aktualizované ručně.</p>
+<p>Pokud projekt OmegaT obsahuje jeden či více vlastních slovníků, tak program automaticky zobrazí v okně <a href="userInterface.html#Glossary">Vlastní slovník</a> všechny termíny nalezené v aktivním segmentu.</p>
 <hr>
 <h2><a name="usage" id="usage"></a>Používání</h2>
-<p>Pro použití existujícího slovníku jej, jakmile vytvoříte projekt, jednoduše umístěte do adresáře <span style="font-style: italic;">/glossary</span>. Když je projekt otevřený, OmegaT v tomto adresáři soubory slovníku automaticky detekuje. Výrazy aktivního segmentu, které OmegaT najde v souboru (souborech) slovníku, se zobrazují v okně Slovník.</p>
+<p>Pro použití existujícího vlastního slovníku jej po vytvoření projektu jednoduše umístěte do adresáře <span style="font-style: italic;">/glossary</span>. Když je projekt otevřený, OmegaT v tomto adresáři soubory vlastního slovníku automaticky detekuje. Výrazy aktivního segmentu, které OmegaT najde v souboru (souborech) vlastního slovníku, se zobrazují v okně Vlastní slovník:</p>
 <p><img src="images/Glossary_pane.png" name="graphics1"
  alt="Okno Slovník" id="graphics1"
  style="border: 0px solid ; width: 321px; height: 147px;"><br>
 </p>
-<br>Slovo před znakem rovnítka (=) je termín ze zdroje a jeho překlad (překlady) jsou za rovnítkem. K záznamu ve slovníku můžete přidat komentář (viz „transitive verb“ u druhé položky). Funkce slovníku nalezne jen přesné shody s položkou ve slovníku (např. nenalezne skloňované tvary atd.). Nové záznamy mohou být přidané do souboru / souborů slovníku v průběhu překladu manuálně (např. v textovém editoru), ale nově vložené pojmy budou rozpoznané až po novém načtení projektu.<hr>
+<br>Slovo před znakem rovnítka (=) je termín zdrojového jazyka a jeho překlad (překlady) jsou za rovnítkem. K záznamu ve slovníku můžete přidat komentář (viz „transitive verb“ u druhé položky). Funkce vlastního slovníku nalezne jen přesné shody s položkou ve vlastním slovníku (např. nenalezne skloňované tvary atd.). Nové záznamy mohou být přidané do souboru / souborů vlastního slovníku v průběhu překladu manuálně (např. v textovém editoru), ale nově vložené pojmy budou rozpoznané až po novém načtení projektu.<hr>
 <h2><a name="fileformat" id="fileformat"></a>Formát souboru</h2>
-<p>Soubory slovníku představují jednoduché soubory v prostém textu a obsahují tři, tabulátorem oddělené sloupce, ve kterých se nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace. Soubory slovníku mohou být buď v předvoleném kódování systému (a mít koncovku <code>.tab</code>) nebo v kódování UTF-8 (s koncovkou <code>.utf8</code>). Upřednostuňuje se kódování unicode (UTF8).</p>
+<p>Soubory slovníku představují jednoduché soubory v prostém textu a obsahují tři tabulátorem oddělené sloupce, ve kterých se nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace. Soubory slovníku mohou být buď ve výchozím kódování systému (a mít koncovku <code>.tab</code>) nebo v kódování UTF-8 (s koncovkou <code>.utf8</code>). Pro svou univerzálnost se upřednostňuje kódování Unicode (UTF-8).</p>
 <hr>
-<h2><a name="howtocreate" id="howtocreate"></a>Jak slovníky vytvořit</h2>
-<br>Pokud dodržujete přesně zadaný formát, není vytváření slovníků nikterak složité. Potřebujete k tomu OpenOffice.org Writer - pokud tento program dosud nemáte, tak si jej můžete stáhnout a nainstalovat balík OpenOffice.org. Spusťte OpenOffice.org a otevřte nový textový dokument nebo spusťte „OpenOffice.org Writer“.<br> <br> Do prázdného dokumentu vložte záznamy pro váš slovník: termín ze zdrojového jazyka, tabulátor, termín z cílového jazyka, tabulátor, komentář či bližší vysvětlení pro položku, na závěr Enter. Klávesa tabulátoru se nachází v levé části klávesnice. Pokud nechcete přidávat žádné komentáře, nemusíte druhý tabulátor vkládat. „Termínem“ se rozumí jak jednotlivé slovo, tak i celá fráze. Na druhý řádek vložíte stejným způsobem druhý termín a jeho překlad. Pak třetí pár na třetí řádek atd.<br> Když jste dokončili vkládání termínů, budete mít dva „sloupce“ termínů: ve zdrojovém jazyce vlevo a jejich překlad v cílovém jazyce vpravo, a možná i třetí sloupec obsahující komentáře a vysvětlivky. Zobrazení symbolů pro tabulátor (v našem příkladě →) a Enter (¶) můžete zapnout kliknutím na ikonu ¶ v programu Writer na panelu Standarní. Zde je pro ukázku česko-německý slovník)<br>
+<h2><a name="howtocreate" id="howtocreate"></a>Jak vlastní slovníky vytvořit</h2>Pokud dodržujete přesně zadaný formát, není vytváření slovníků nikterak složité. Potřebujete k tomu OpenOffice.org Writer - pokud tento program dosud nemáte, tak si jej můžete stáhnout a nainstalovat balík OpenOffice.org. Spusťte OpenOffice.org a otevřete nový textový dokument nebo spusťte „OpenOffice.org Writer“.<br> <br> Do prázdného dokumentu vložte záznamy pro vlastní slovník: termín ze zdrojového jazyka, tabulátor, termín z cílového jazyka, tabulátor, komentář či bližší vysvětlení pro položku, na závěr Enter. Klávesa tabulátoru se nachází v levé části klávesnice. Pokud nechcete přidávat žádné komentáře, nemusíte druhý tabulátor vkládat. „Termínem“ se rozumí jak jednotlivé slovo, tak i celá fráze. Na druhý řádek vložte druhý termín a jeho překlad.<br> <br> Když jste dokončili vkládání termínů, budete mít dva „sloupce“ termínů: ve zdrojovém jazyce vlevo a jejich překlad v cílovém jazyce vpravo, a možná i třetí sloupec obsahující komentáře a vysvětlivky. Zobrazení symbolů pro tabulátor (v našem příkladě →) a Enter (¶) můžete zapnout kliknutím na ikonu ¶ v programu Writer na panelu Standarní. Zde je pro ukázku česko-německý vlastní slovník:<br>
 <br>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; slovo→Wort→das (-/e/s, Wörter/-e)¶</div>
-<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; domeček→Häuschen→das, (pl&nbsp;Häuschen)¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; domek→Häuschen→das, (pl&nbsp;Häuschen)¶</div>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; pes→Hund→m, f Hündin¶</div>
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; kůň→Pferd→n, m Hengst f Stute n Fohlen¶</div>
 <br>NEPOUŽÍVEJTE v programu OpenOffice.org funkci „sloupce“ k vytvoření sloupců slovníku: pouze oddělte každý zdrojový termín a jeho překlad jedním tabulátorem.<br> <br> Když jste dokončili vkládání záznamů do slovníku, vyberte <span
- style="font-style: italic;">Soubor &gt; Uložit jako</span>. V okně „Umístění souboru“ vložte jméno pro soubor slovníku, s koncovkou „<span style="font-weight: bold;">.utf8</span>“ (např. „<span style="font-style: italic;">MujSlovnik.utf8</span>“).&nbsp;U „<span style="font-style: italic;">Typu souboru</span>“ označte „<span style="font-style: italic;">Text (.txt.)</span>“.&nbsp;Zrušte zaškrtnutí políčka „<span style="font-style: italic;">Automatická přípona názvu souboru</span>“ a aktivujte „<span style="font-style: italic;">Upravit nastavení filtru</span>“:<br> <br> <img style="width: 478px; height: 313px;"
- alt="Uložit soubor jako zdroj dat pro slovník"
- src="images/saveglossary.jpg"><br> <br> Potvrďte tlačítkem OK. Zobrazí se dialogové okno nabízející dvě možnosti: „<span
+ style="font-style: italic;">Soubor &gt; Uložit jako</span>. V okně „Umístění souboru“ vložte jméno souboru vlastního slovníku, s koncovkou „<span style="font-weight: bold;">.utf8</span>“ (např. „<span style="font-style: italic;">MujSlovnik.utf8</span>“).&nbsp;U „<span style="font-style: italic;">Typu souboru</span>“ označte „<span style="font-style: italic;">Text (.txt.)</span>“.&nbsp;Zrušte zaškrtnutí políčka „<span style="font-style: italic;">Automatická přípona názvu souboru</span>“ a aktivujte „<span style="font-style: italic;">Upravit nastavení filtru</span>“:<br> <br> <img style="width: 478px; height: 313px;"
+ alt="Uložit soubor jako zdroj dat pro vlastní slovník"
+ src="images/saveglossary.jpg"><br> <br> Potvrďte stiskem OK. Zobrazí se dialogové okno nabízející dvě možnosti: „<span
  style="font-style: italic;">Ano</span>“ a „<span style="font-style: italic;">Ne</span>“. Vyberte „<span style="font-style: italic;">Ano</span>“ pro uložení souboru v textovém formátu. <br> <br> V dialogovém okně Možností filtrů ASCII (vizte níže), vyberte kódování „<span style="font-style: italic;">Unicode (UTF-8)</span>“:<br> <br> <img style="width: 510px; height: 158px;"
- alt="Možnosti souborového filtru ASCII pro slovník"
- src="./images/AsciiFilteroptions.jpg"><br> <br> Potvrďte tlačítkem OK.<br> <br> Po té, co si založíte projekt OmegaT, zkopírujte nebo přesuňte tento soubor do adresáře projektu <span style="font-style: italic;">\glossary</span>. Pokud máte projekt již otevřen, tak po zkopírování souboru slovníku zvolte Znovu načíst. V souboru slovníku můžete provádět změny i během používání projektu, ale tyto se projeví až po novém načtení projektu.<br> <br> Když je otevřený segment se zdrojovým textem, tak se v okně Slovník zobrazí jen ty záznamy pro vybrané položky ve zdrojovém segmentu, které se již nachází ve slovníku (či slovnících - můžete jich současně používat více).<h3><a name="multiterm" id="multiterm"></a>Použití Trados Multiterm</h3>
+ alt="Možnosti souborového filtru ASCII pro vlastní slovník"
+ src="./images/AsciiFilteroptions.jpg"><br> <br> Potvrďte tlačítkem OK.<br> <br> Po založení projektu OmegaT, zkopírujte nebo přesuňte tento soubor do adresáře projektu <span style="font-style: italic;">\glossary</span>. Pokud máte projekt již otevřen, tak po zkopírování souboru vlastního slovníku zvolte Znovu načíst. V souboru vlastního slovníku můžete provádět změny i během práce na projektu. Vlastní slovník je programem kontrolován přibližně každou sekundu a změny se průběžně projeví, takže po úpravách a uložení souboru slovníku není nutno znovu načítat projekt.<br> <br> Když je otevřený segment se zdrojovým textem, tak se v okně Vlastní slovník zobrazí jen ty záznamy pro vybrané položky ve zdrojovém segmentu, které se již nachází ve vlastním slovníku (či slovnících - můžete jich současně používat více, zároveň mohou být uloženy v různých podadresářích adresáře <i>glossary</i>).<h3><a name="multiterm" id="multiterm"></a>Použití Trados Multiterm</h3>
 <p>Slovníky vytvořené pomocí funkce textového exportu Trados Multiterm mohou být používané přímo bez další změny, s podmínkou, že se opatří příponou <code>.tab</code> a pole zdrojového (první sloupec) a cílového (druhý sloupec) pojmu představují první dvě pole. Když exportujete data použitím možnosti „Tab-delimited export“, budete muset smazat prvních 5 sloupců (Seq. Nr, Date created atd.) ještě před těmi dvěma položkami, která jsou pro nás podstatné.</p>
 <hr>
-<h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Obecné problémy slovníku</h2>
+<h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Obecné problémy s Vlastním slovníkem</h2>
 <dl>
-  <dt><span style="font-weight: bold;">Problém:</span> Nezobrazují se žádné termíny ze slovníku.</dt>
+  <dt><span style="font-weight: bold;">Problém:</span> Nezobrazují se žádné termíny z vlastního slovníku.</dt>
   <dd>Možné příčiny:</dd>
 </dl>
 <ul>
-  <li>ve složce „glossary“ není umístěn žádný slovník</li>
-  <li>soubor slovníku je prázdný</li>
-  <li>položky slovníky nejsou od sebe odděleny tabulátorem</li>
-  <li>soubor slovníku nemá správnou koncovku (.tab nebo .utf8)</li>
-  <li>není nalezena PŘESNÁ shoda mezi záznamem ve slovníku a zdrojovým textem ve vašem dokumentu - například když položka je v množném čísle</li>
-  <li>soubor slovníku nemá správné kódování</li>
-  <li>v aktivním segmentu nejsou žádné termíny, které se kryjí s termíny ve slovníku</li>
+  <li>v adresáři „/glossary“ není umístěn žádný vlastní slovník</li>
+  <li>soubor vlastního slovníku je prázdný</li>
+  <li>položky vlastního slovníky nejsou od sebe odděleny tabulátorem</li>
+  <li>soubor vlastního slovníku nemá správnou koncovku (.tab nebo .utf8)</li>
+  <li>není nalezena PŘESNÁ shoda mezi záznamem ve vlastním slovníku a zdrojovým textem ve vašem dokumentu - například když je daná položka v množném čísle</li>
+  <li>soubor vlastního slovníku nemá správné kódování</li>
+  <li>v aktivním segmentu nejsou žádné termíny, které se kryjí s termíny ve vlastním slovníku</li>
   <li>jeden nebo více z nahoře zmíněných problémů byl vyřešen, ale projekt nebyl nově načten.</li>
 </ul>
 <dl>
-  <dt><span style="font-weight: bold;">Problém:</span> V okně Slovníku se některé znaky nezobrazují správně (ale stejné znaky v okně Editoru jsou zobrazeny správě).</dt>
+  <dt><span style="font-weight: bold;">Problém:</span> V okně Vlastního slovníku se některé znaky nezobrazují správně (ale stejné znaky v okně Editoru jsou zobrazeny správě).</dt>
   <dd>Možné příčiny:</dd>
 </dl>
 <ul>
   <li>koncovka a kódování souboru se liší</li>
 </ul>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a> </td>

@@ -1,87 +1,99 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Testu hutsarekin lanean - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Testu arruntarekin lanean - OmegaT 2.0 erabiltzailearen eskuliburua</title>
 </head>
 
 <body>
-	<h1>Testu hutsarekin lanean</h1>
+  <h2>Testu arruntarekin lanean</h2>
 
-	<ul>
-		<li><a href="#Plain_Text_in_OmegaT">Kodeketa lehenetsia</a></li>
-		<li><a href="#Garbled_displays_3F">Bistaratze nahasiak</a></li>
-		<li><a href="#Character_sets_and_encodings">Karaktere-sortak eta kodeketak</a></li>
-		<li><a href="#The_OmegaT_solution">OmegaT-ren konponbidea</a></li>
-	</ul>
+  <ul>
+    <li><a href="#Plain_Text_in_OmegaT">Kodeketa lehenetsia</a></li>
 
-<hr>
+    <li><a href="#Garbled_displays_3F">Bistaratze nahasiak</a></li>
 
-	<a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
-	<h1>Kodeketa lehenetsia</h1>
+    <li><a href="#Character_sets_and_encoding">Karaktere-sortak eta kodeketa</a></li>
 
-	<p>Testu hutseko fitxategiak - gehienetan <code>.txt</code> luzapena daukate.  - testu-informazioa besterik ez dute gordetzen. Ez dago modu argirik zein hizkuntzatako testua gordetzen duten jakiteko. Asko sinplifikatuz, horrek esan nahi du ordenagailuak erabakitzen duela testua ordenagailuaren hizkuntza berean dagoela.</p>
+    <li><a href="#The_OmegaT_solution">OmegaT-ren konponbidea</a></li>
+  </ul>
+  <hr>
+  <a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
 
-<hr>
+  <h2>Kodeketa lehenetsia</h2>
 
-	<a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
-	<h1>Bistaratze nahasiak</h1>
+  <p>Testu arrunteko fitxategiak - gehienetan <code>.txt</code> luzapena daukate  - testu-informazioa besterik ez dute gordetzen. Ez dago modu argirik zein hizkuntzatako testua gordetzen duten jakiteko. Asko sinplifikatuz, horrek esan nahi du ordenagailuak erabakitzen duela testua ordenagailuaren hizkuntza berean dagoela.</p>
+  <hr>
+  <a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
 
-	<p>Errusiarra bazara, seguru asko zure ordenagailuak errusieraz egiten du lan: menuak errusieraz daude, irekitzen dituzun fitxategiak errusierazkoak dira, etab. Kasu gehienetan, ordenagailuak uste zuzena dauka fitxategi gehienen edukiari buruz: errusierazko testuak gordetzen dituzte eta, beraz, pantailan ezin dira errusierazko karaktereak besterik erakutsi.</p>
+  <h2>Bistaratze nahasiak</h2>
 
-	<p>Haatik, japonieratik errusierara itzultzen duzun itzultzailea bazara, eta <strong>testu hutsekoak</strong> diren japonierazko fitxategiak jasotzen badituzu, ordenagailuak errusiera daukaten fitxategiak direla uste izango du. Izan ere, fitxategiak berak ez dauka informaziorik barruan gorderik daukan testuaren hizkuntzari buruz.</p>
+  <p>Errusiarra bazara, seguru asko zure ordenagailuak errusieraz egiten du lan: menuak errusieraz daude, irekitzen dituzun fitxategiak errusierazkoak dira, etab. Kasu gehienetan, ordenagailuak uste zuzena dauka fitxategi gehienen edukiari buruz: errusierazko testuak gordetzen dituzte eta, beraz, pantailan ezin dira errusierazko karaktereak besterik erakutsi.</p>
 
-	<p>Japonierazko fitxategiaren edukia ondokoa izan daiteke:</p>
+  <p>Haatik, japonieratik errusierara itzultzen duzun itzultzailea bazara, eta <strong>testu arruntekoak</strong> diren japonierazko fitxategiak jasotzen badituzu, ordenagailuak errusiera daukaten fitxategiak direla uste izango du. Izan ere, fitxategiak berak ez dauka informaziorik barruan gorderik daukan testuaren hizkuntzari buruz. Japonierazko fitxategiaren edukia ondokoa izan daiteke:</p>
 
-	<p>とは、コンピュータを利用した翻訳ツールです。</p>
+  <p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p><br>
 
-	<p>Baina zure testu-editoreak beste modu honetan erakutsi dezake:</p>
-	<p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≅ВЈБB</p>
+  <p>Edukia errusieraz egotea espero duenez, zure testu-editoreak beste modu honetan erakutsi dezake:</p>
 
-	<p>Edukiak errusieraz daudela uste duelako... Baina ez da errusiera. Errusieraz erakutsitako japonierazko karaktereak dira.</p>
-	
-	<p>OmegaT ez da desberdina. OmegaT-k uste du <strong>testu hutseko</strong> fitxategien edukia automatikoki ordenagailuak lehenetsitako moduan erakutsi daitekeela. Horrek emaitza egokia ematen du ordenagailuak fratsesez lan egiten badu eta ingelesezko fitxategiak jasotzen badituzu, edo ordenagailua alemanezkoa bada eta italierazko fitxategiak jasotzen badituzu.</p>
+  <p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦЦуГcБ[ГЛВ≈ВЈБB</p><br>
 
-<hr>
+  <p>Hala ere, hori ez da errusiera, errusierazko karaktere gisa erakutsitako japonierazko karaktereak dira.</p>
 
-	<a name="Character_sets_and_encodings" id="Character_sets_and_encodings"></a>
-	<h1>Karaktere-sortak eta kodeketak</h1>
+  <p>Beste edozein aplikaziotan bezala, OmegaT-ren kasuan ere arazo hau gerta daiteke. Gauza bakarra egin dezake: onartzea modu lehenetsian <strong>tesu arrunteko</strong> fitxategiak automatikoki ordenagailuak lehenetsitako moduan erakutsi daitezkeela. Horrek emaitza egokia ematen du adibidez ordenagailuak fratsesez lan egiten badu eta ingelesezko fitxategiak jasotzen badituzu, edo ordenagailua alemanezkoa bada eta italierazko fitxategiak jasotzen badituzu.</p>
+  <hr>
+  <a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
 
-	<p>Zergatik da emaitza ona ingelesa eta frantsesa nahastean eta okerra errusiera eta japoniera nahastean? Ingelesak eta frantsesak <strong>karaktere-sorta</strong> bera erabiltzen dutelako. Bere izena, <strong>Latin-1</strong> edo bere aldaeretako bat. Duela gutxira arte, errusierak eta japonierak ez zuten karaktere-sortarik partekatzen. Errusierazko karaktere-sorta gehienek ez dute japoniera kontuan hartzen, ezta alderantziz ere. Emaitza goian erakutsi dena da.</p>
+  <h2>Karaktere-sortak eta kodeketa</h2>
 
-	<p>Bezero japoniarrak japonierazko ordenagailu batekin egiten du lan eta japoniera daukaten testu-fitxategiak sortzen ditu. Bezeroaren ordenagailuak hautatutako karaktere-sorta sistema eragilearen eta beste hainbat ezarpenen araberakoa izango da, baina seguru asko errusierazko ordenagailuak gaizki interpretatuko du jatorrizko ordenagailuaren (japonierazko) karaktere-sorta hautatua.</p>
+  <p>Zergatik da emaitza ona ingelesa eta frantsesa nahastean eta okerra errusiera eta japoniera nahastean? Ingelesak eta frantsesak <strong>karaktere-sorta</strong> bera erabiltzen dutelako. Bere izena, <strong>Latin-1</strong> edo bere aldaeretako bat. Duela gutxira arte, errusierak eta japonierak ez zuten karaktere-sortarik partekatzen. Errusierazko karaktere-sorta gehienek ez dute japoniera kontuan hartzen, ezta alderantziz ere. Emaitza goian erakutsi dena da.</p>
 
-	<p>Karaktere-sorta jakin bat darabilen testu-informazioa nola transmititzen den (alegia, fitxategian nola dagoen <strong>idatzita</strong>, ordenagailuak interpretatu eta erakutsi ahal dezan), <strong>kodeketaren</strong> araberakoa da. Ordenagailuak fitxategia irakurtzen duenean, bere kodeketaren arabera "dekodetzen" du eta karaktere-sortaren arabera erakusten du. Oro har, kodeketa bati karaktere-sorta bat dagokio...</p>
+  <p>Bezero japoniarrak japonierazko ordenagailu batekin egiten du lan eta japoniera daukaten testu-fitxategiak sortzen ditu. Bezeroaren ordenagailuak hautatutako karaktere-sorta sistema eragilearen eta beste hainbat ezarpenen araberakoa izango da, baina seguru asko errusierazko ordenagailuak gaizki interpretatuko du jatorrizko ordenagailuaren (japonierazko) karaktere-sorta hautatua.</p>
 
-<hr>
+  <p>Karaktere-sorta jakin bat darabilen testu-informazioa nola transmititzen den (alegia, zeintzuk diren ordenagailuak testua interpretatu eta erakusteko erabiltzen dituen zenbaki-kodeak), <strong>kodeketaren</strong> araberakoa da. Ordenagailuak fitxategia irakurtzen duenean, bere kodeketaren arabera "dekodetzen" du eta karaktere-sortaren arabera erakusten du. Oro har, kodeketa bati karaktere-sorta bat dagokio...</p>
+  <hr>
+  <a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
 
-	<a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
-	<h1>OmegaT-ren konponbidea</h1>
+  <h2>OmegaT-ren konponbidea</h2>
 
-	<p>OmegaT-k hiru bide dauzka arazo hau konpontzeko. Hiru bideek <strong>Aukerak</strong> menuko <a href="fileFilters.html">fitxategi-iragazkiak</a> erabiltzea suposatzen dute.</p>
-	
-	<ol>
-		<li><strong>Testu hutseko</strong> fitxategien (hau da, <code>.txt</code> luzapena duten fitxategien) kodeketa zehaztu.<br> <a href="fileFilters.html">Fitxagien iragazkien</a> leihoko <strong>Testu-fitxategiak</strong> atalean, aldatu <strong>Sorburu-fitxategien kodeketa</strong> <strong>&lt;auto&gt;</strong>-tik zure <code>.txt</code> fitxategiari dagokion kodeketara.</li><li>Aldatu testu hutseko zure fitxategien luzapenak, esaterako <code>.txt</code>-tik <code>.jp</code>-ra japonierako testuetan.<br> <a href="fileFilters.html">Fitxagien iragazkien</a> leihoko <strong>Testu-fitxategiak</strong> atalean, gehitu <code>*.jp</code> <strong>sorburu-fitxategien eredua</strong> eta hautatu sorburu- eta helburu-kodeketetarako parametro egokiak.</li>
+  <p>OmegaT-k hiru bide dauzka arazo hau konpontzeko. Hiru bideek <strong>Aukerak</strong> menuko <a href="fileFilters.html">fitxategi-iragazkiak</a> erabiltzea suposatzen dute.</p>
 
-		<li>Ireki zure sorburu-fitxategia bere kodeketa modu zuzenean ulertuko duen testu-editore batean eta gorde fitxategia "UTF-8" kodeketa erabiliz.<br> Aldatu bere luzapena <code>.txt</code>-tik <code>.utf8</code>-ra.<br> OmegaT-k fitxategia UTF-8 motakoa bailitzan interpretatuko du.</li>
-    </ol>
-	<p>Egun, OmegaT-k honela ulertzen ditu testu hutseko fitxategiak</p>
+  <ol>
+    <li>Zehaztu zure <strong>testu arrunteko</strong> fitxategien kodeketa - alegia, <code>.txt</code> luzapena duten fitxategiena - :&nbsp;<a href="fileFilters.html">fitxategi-iragazkien</a> koadroko <strong>Testu-fitxategiak</strong> atalean, aldatu <strong>Sorburu-fitxategien kodeketa</strong> <strong>&lt;auto&gt;</strong> aukeratik zure jatorrizko <code>.txt</code> fitxategiari dagokion kodeketara.</li>
 
-	<ul>
-		<li>OmegaT-k automatikoki (<strong>auto</strong>) interpretatzen du <code>.txt</code> fitxategiek ordenagailuaren kodeketa lehenetsi bera erabiltzen dutela.</li>
-		<li><code>.txt1</code> fitxategiak ISO-8859-1 dira, hau da, <strong>Europa mendebaldeko</strong> hizkuntza gehienak barne hartzen dituen kodeketa.</li>
-		<li><code>.txt2</code> fitxategiak ISO-8859-2 dira, hau da, <strong>Europa erdialde eta ekialdeko</strong> hizkuntza gehienak barne hartzen dituen kodeketa.</li>
-		<li>OmegaT-k interpretatzen du <code>.utf8</code> fitxategiek UTF-8 kodeketa (munduko hizkuntza ia <strong>guztiak</strong> barne hartzen dituena) erabiltzen dutela.</li>
-	</ul>
+    <li>Aldatu zure jatorrizko testu arrunteko fitxategien luzapenak (adibidez, <code>.txt</code> luzapenetik <code>.jp</code> luzapenera, japonierazko testu arruntak badira):  <a href=
+    "fileFilters.html">fitxategi-iragazkien</a> leihoko <strong>Testu-fitxategiak</strong> atalean, gehitu <strong>Sorburu-fitxategiaren izen-eredu</strong> berri bat (esaterako, <code>*.jp)&nbsp;</code> eta hautatu sorburu- eta helburu-kodeketetarako parametro egokiak.</li>
 
-	<p>Zure kabuz egiaztatu dezakezu hori, <strong>Aukerak</strong> menuko <strong>Fitxategien iragazkiak</strong> aukera hautatuz.</p>
+    <li>Aldatu zure fitxategien kodeketa Unicode formatura: ireki zure sorburu-fitxategia bere kodeketa modu zuzenean ulertuko duen testu-editore batean eta gorde fitxategia "UTF-8" kodeketa erabiliz. Aldatu fitxategiaren luzapena <code>.txt</code> motatik <code>.utf8</code> motara. OmegaT-k fitxategia UTF-8 motakoa bailitzan interpretatuko du.</li>
+  </ol>
 
-	<p>OmegaT-k zerrenda labur hau prestatu du testu hutseko zenbait fitxategi errazago kudeatu ahal ditzazun.</p>
-	
-	<p>Esaterako, txekieraz dagoen testu-fitxategi bat edukiz gero (gehienetan <strong>ISO-8859-2</strong> kodeketa erabiliko duena), luzapena aldatu eta <code>.txt</code> ordez <code>.txt2</code> idatziz, OmegaT-k modu zuzenean interpretatuko ditu bere edukiak.</p>
+  <p>OmegaT-k hurrengo zerrenda laburra dauka lehenetsita, testu hutseko zenbait fitxategi errazago kudeatu ahal ditzazun:</p>
 
-	<hr>
+  <ul>
+    <li>OmegaT-k automatikoki (<strong>auto</strong>) interpretatzen du <code>.txt</code> fitxategiek ordenagailuaren kodeketa lehenetsi bera erabiltzen dutela.</li>
 
-	<p><a href="legalNotices.html">Legezko oharrak</a></p>
+    <li><code>.txt1</code> fitxategiak ISO-8859-1 dira, hau da, <strong>Europa mendebaldeko</strong> hizkuntza gehienak barne hartzen dituen kodeketa.</li>
+
+    <li><code>.txt2</code> fitxategiak ISO-8859-2 dira, hau da, <strong>Europa erdialde eta ekialdeko</strong> hizkuntza gehienak barne hartzen dituen kodeketa.</li>
+
+    <li>OmegaT-k interpretatzen du <code>.utf8</code> fitxategiek UTF-8 kodeketa (munduko hizkuntza ia <strong>guztiak</strong> barne hartzen dituena) erabiltzen dutela.</li>
+  </ul>
+
+  <p>Zure kabuz egiaztatu dezakezu hori, <strong>Aukerak</strong> menuko <strong>Fitxategien iragazkiak</strong> aukera hautatuz. Esaterako, txekieraz dagoen testu-fitxategi bat edukiz gero (gehienetan <strong>ISO-8859-2</strong> kodeketa erabiliko duena), luzapena aldatu eta <code>.txt</code> ordez <code>.txt2</code> idatziz, OmegaT-k modu zuzenean interpretatuko ditu bere edukiak. Eta noski, seguru lan egin nahi baduzu, fitxategi-mota hauek Unicode-ra bihur ditzakezu, alegia, .utf8 formatura.</p>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Orri nagusia</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

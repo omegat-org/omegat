@@ -1,144 +1,228 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Sorburuaren segmentazioa - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Sorburuaren segmentazioa - OmegaT 2.0 erabiltzailearen eskuliburua</title>
 </head>
 
 <body>
-	<h1>Sorburuaren segmentazioa</h1>
+  <h2>Sorburuaren segmentazioa</h2>
 
-	<ul>
-		<li><a href="#structure">Egitura mailako segmentazioa</a></li>
-		<li><a href="#sentence">Esaldi mailako segmentazioa</a>
-			<ul>
-				<li><a href="x] Honi buruz...">Segmentazio-arauak</a></li>
-				<li><a href="#setup">Arauen konfigurazioa</a>
-					<ul>
-						<li><a href="#priority">Lehentasuna</a></li>
-						<li><a href="#creation">Arauen sorrera</a></li>
-						<li><a href="#breal">Etena/Salbuespena</a></li>
-						<li><a href="#setup">Adibide sinpleak</a></li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-		<li><a href="regexp.html">Adierazpen erregularrak</a></li>
-	</ul>
-	
-	<p>Itzulpen-memoriak kudeatzeko tresnek segmentu deritzen testu-unitateekin egiten dute lan. OmegaT-k testu bat segmentatzeko bi modu dauzka: paragrafo mailako segmentazioa eta esaldi mailako segmentazioa.</p>
+  <ul>
+    <li>
+      <p><a href="#structure">Egitura mailako segmentazioa</a></p>
+    </li>
 
-	<p>Segmentazio-mota ezartzeko, hautatu <strong>Proiektua → Propietateak</strong> menu nagusian eta erabili bertan dagoen kontrol-laukia.</p>
+    <li>
+      <p><a href="#sentence">Esaldi mailako segmentazioa</a></p>
 
-	<p>Esaldi mailako segmentazioa hautatu bada, joan menu nagusiko <strong>Aukerak → Segmentazioa...</strong> atalera arauak ezartzeko.</p>
+      <ul>
+        <li>
+          <p><a href="#about">Segmentazio-arauak</a></p>
+        </li>
 
-	<p>Kontuan izan garapenaren zati handi bat segmentazio-arau fidagarriak garatzen eman dela; beraz, kasurik gehienetan ez da beharrezkoa izango segmentazio-arau propioak idaztea. Bestalde, funtzionaltasun hau oso erabilgarria da kasu berezietan, batez ere benetan itzuli nahi dena itzultzeko aldaketarik gabe geratu behar duena aldatzeko arriskutik salbu utziz.</p>
-	
-	<p><strong>Oharra!</strong> Proiektua irekita dagoen bitartean iragazkien aukerak aldatzeak datu-galerak eragin ditzake. Segmentazio-ezarpenak proiektua hasi ondoren aldatzen badituzu, proiektua birkargatu egin beharko duzu aldaketak indarrean sartzeko.</p>
+        <li>
+          <p><a href="#setup">Arauen konfigurazioa</a></p>
 
+          <ul>
+            <li>
+              <p><a href="#priority">Lehentasuna</a></p>
+            </li>
 
-	<hr>
-	<a name="structure" id="structure"></a>
-	<h1>Egitura mailako segmentazioa</h1>
+            <li>
+              <p><a href="#creation">Arauen sorrera</a></p>
+            </li>
 
-	<p>OmegaT-k, hasteko, testua egitura-mailan segmentatzen du. Prozesu honetan zehar, sorburu-fitxategiaren egitura erabiltzen da soilik segmentuak sortzeko.</p>
-	
-	<p>Esaterako, <a href="fileFilters.html#filter_options">testu-fitxategiak</a> segmentatzeko lerro-jauziak, lerro hutsak eta antzekoak erabiltzen dira. Gertatu daiteke egitura-mailako segmentaziorik ez sortzea. Formatua daukaten fitxategiak (OpenOffice.org-eko dokumentuak, HTML dokumentuak, etab.) bloke (paragrafo) mailako etiketak erabiliz segmentatzen dira. XHTML edo HTML fitxategietan itzulgai diren objektuen <a href="fileFilters.html#filter_options">atributuak</a> ere segmentuak banatzeko erauzi daitezke.</p>
+            <li>
+              <p><a href="#break">Etena/Salbuespena</a></p>
+            </li>
 
-	<hr>
-	<a name="sentence" id="sentence"></a>
-	<h1>Esaldi mailako segmentazioa</h1>
+            <li>
+              <p><a href="#examples">Adibide sinple batzuk</a></p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
 
-	<p>Sorburu-fitxategia unitate logikoetan segmentatu ondoren, OmegaT-k bloke hauek esaldietan segmentatuko ditu.</p>
-	
-	<a name="about" id="about"></a>
-	<h2>Segmentazio-arauak</h2>
+    <li>
+      <p><a href="regexp.html">Adierazpen erregularrak</a></p>
+    </li>
+  </ul>
 
-	<p>Segmentazio-prozesu honelakoa da: irudikatu kurtsorea testuan zehar mugitzen ari dela, bakoitzean karaktere bat igaroz. Kurtsorearen posizio bakoitzerako arau bakoitza aplikatzen da, taulan adierazitako ordenan, eta <strong>Aurretik</strong> eredua aplikatzen zaio kurtsorearen ezkerraldean dagoen testuari eta <strong>Ondoren</strong> eredua kurtsoaren eskuinaldean dagoenari. Araua testuarekin bat badator, aplikazioak gelditu egiten du arauen azterketa (salbuespen-arauaren kasuan) edo segmentu berri bat sortzen du (eten-arauaren kasuan).</p>
+  <p>Itzulpen-memoriak kudeatzeko tresnek segmentu deritzen testu-unitateekin egiten dute lan. OmegaT-k testu bat segmentatzeko bi modu dauzka: paragrafo mailako segmentazioa eta esaldi mailako segmentazioa. Segmentazio-mota ezartzeko, hautatu <strong>Proiektua → Propietateak</strong> menu nagusian eta erabili bertan dagoen kontrol-laukia. Kontuan izan paragrafo mailako segmentazioa zaharkitua dagoela eta proiekturik gehienetan esaldi mailako segmentazioa erabiltzea komeni dela. Esaldi mailako segmentazioa hautatu bada, joan menu nagusiko <strong>Aukerak → Segmentazioa...</strong> atalera arauak ezartzeko.</p>
 
-	<p>Esaldien segmentazioa garatzeko <a href= "http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> estandarra jarraitu da - hala ere, OmegaT-k ez ditu SRX formatuaren ezaugarri guztiak onartzen. Eta ezin dira SRX formatuan definitutatko arauak inportatu/esportatu. Hala ere, SRX-a ezagutzen baduzu, orduan badakizu OmegaT-k nola egiten duen segmentazioa.</p>
+  <p>Kontuan izan garapenaren zati handi bat segmentazio-arau fidagarriak garatzen eman dela; beraz, kasurik gehienetan ez da beharrezkoa izango segmentazio-arau propioak idaztea. Bestalde, funtzionaltasun hau oso erabilgarria da kasu berezietan, batez ere benetan itzuli nahi dena itzultzeko aldaketarik gabe geratu behar duena aldatzeko arriskutik salbu utziz.</p>
 
-	<p>Bi arau-mota daude.</p>
+  <p><strong>Oharra!</strong> Proiektua irekita dagoen bitartean iragazkien aukerak aldatzeak datu-galerak eragin ditzake. Segmentazio-ezarpenak proiektua hasi ondoren aldatzen badituzu, proiektua birkargatu egin beharko duzu aldaketak indarrean sartzeko.</p>
+  <hr>
 
-	<ul>
-		<li><strong>Eten-arauek</strong> testua segmentuetan banatzen dute.<p><strong>Eten-arauen adibidea</strong>: <i>"Ba al zuen zentzurik? Ez nago ziur."</i> bi segmentutan banatu beharko litzateke.<br> Eten-arau bat egon beharko litzateke "<code>?</code>" ikurrerako.</p></li>
-		<li><strong>Salbuespen-arauek</strong> banatu behar EZ diren testu-zatiak zehazten dituzte.<p><strong>Adibidea</strong>: <i>"Mrs. Dalloway "</i> ez litzateke banatu behar; beraz, salbuespen-arau bat finkatu beharko litzateke Mrs hitzerako (eta Mr, Dr, prof, etab-etarako), puntu batekin jarraituz.</p></li>
-	</ul>
+  <h2><a name="structure" id="structure"></a>Egitura mailako segmentazioa</h2>
 
-	<p>Aurredefinitutako eten-arauek aski izan beharko lukete Europako hizkuntza gehienetan eta japonieran. Zure hizkuntzetarako salbuespen-arau gehiago definitu zenitzake,segmentu esanguratsu eta koherenteagoak sortzeko.</p>
+  <p>OmegaT-k, hasteko, testua egitura-mailan segmentatzen du. Prozesu honetan zehar, sorburu-fitxategiaren egitura erabiltzen da soilik segmentuak sortzeko.</p>
 
-	<a name="setup" id="setup"></a>
-	<h2>Arauen konfigurazioa</h2>
+  <p>Esaterako, <a href="fileFilters.html#filter_options">testu-fitxategiak</a> segmentatzeko lerro-jauziak, lerro hutsak eta antzekoak erabiltzen dira. Gertatu daiteke egitura-mailako segmentaziorik ez sortzea. Formatua daukaten fitxategiak (OpenOffice.org-eko dokumentuak, HTML dokumentuak, etab.) bloke (paragrafo) mailako etiketak erabiliz segmentatzen dira. XHTML edo HTML fitxategietan itzulgai diren objektuen <a href=
+  "fileFilters.html#filter_options">atributuak</a> ere segmentuak banatzeko erauzi daitezke.</p>
+  <hr>
 
+  <h2><a name="sentence" id="sentence"></a>Esaldi mailako segmentazioa</h2>
 
-	<a name="priority" id="priority"></a>
-	<h3>Lehentasuna</h3>
+  <p>Sorburu-fitxategia unitate logikoetan segmentatu ondoren, OmegaT-k bloke hauek esaldietan segmentatuko ditu.</p>
 
-	<p>Hizkuntza-eredu bati dagozkion segmentazio-arauen multzoak hizkuntzaren lehentasun ordenan aplikatzen dira, alegia, hizkuntza espezifikoetarako arauak lehenetsitako hizkuntzetarako arauen gainetik egongo dira.</p>
-	
-	<p>Esaterako, Kanadako frantsesaren (FR-CA) arauek lehentasuna izango dute frantsesaren (FR.*) arauen gainetik, eta azken hau, lehenetsitakoen (.*) gainetik egongo da. Beraz, Kanadako frantsesetik itzultzen bada, proiektuak hizkuntza horretarako definitutako arauak, frantseserako definitutakoak eta lehenetsitakoak erabiliko ditu, ordena horretan.</p>
+  <h3><a name="about" id="about"></a>Segmentazio-arauak</h3>
 
-	<a name="creation" id="creation"></a>
-	<h3>Arauen sorrera</h3>
-	
-	<p>Arauen multzo hutsa sortzeko, sakatu koadroaren goiko aldean ageri den <strong>Gehitu...</strong> botoia. Lerro hutsa ageriko da taularen behealdean.</p>
-	
-	<p>Aldatu arauen multzoaren izena eta hizkuntza-eredua. Hizkuntza-ereduaren sintaxia <a href="regexp.html">adierazpen erregularren</a> sintaxiaren moldekoa da. Zure arauen multzoa hizkuntza-herrialdea bikote bati badagokio, <strong>Mugitu gora</strong> botoia erabiliz taularen goialdera eraman dezazun gomendatzen dizugu. Arauen multzo bat editatzeko sakatu bere gainean, hautatutako multzoaren arauak koadroaren azpiko leihoan agertuko dira.</p>
+  <p>Segmentazio-prozesu honelakoa da: irudikatu kurtsorea testuan zehar mugitzen ari dela, bakoitzean karaktere bat igaroz. Kurtsorearen posizio bakoitzerako arau bakoitza aplikatzen da, taulan adierazitako ordenan, eta <strong>Aurretik</strong> eredua aplikatzen zaio kurtsorearen ezkerraldean dagoen testuari eta <strong>Ondoren</strong> eredua kurtsoaren eskuinaldean dagoenari. Araua testuarekin bat badator, aplikazioak gelditu egiten du arauen azterketa (salbuespen-arauaren kasuan) edo segmentu berri bat sortzen du (eten-arauaren kasuan).</p>
 
-	<a name="break" id="break"></a>
-	<h3>Etena/Salbuespena</h3>
-	
-	<p>Etena/Salbuespena zutabeko kontrol-laukiak arauaren izaera ezartzen du: kontrol-laukia markatuta badago, arauak etenak sortuko ditu, eta markatu gabe badago, salbuespenak sortuko ditu. Bi adierazpen erregularrek, Aurretik eta Ondoren zutabeetan adierazten direnek, kokapen baten aurretik eta ondoren zerk egon behar duen zehazten dute, eten- edo salbuespen-araua eratuz.</p>
+  <p>Esaldien segmentazioa garatzeko <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> estandarra jarraitu da - hala ere, OmegaT-k ez ditu SRX formatuaren ezaugarri guztiak onartzen. Eta ezin dira SRX formatuan definitutatko arauak inportatu/esportatu. Hala ere, SRX-a ezagutzen baduzu, orduan badakizu OmegaT-k nola egiten duen segmentazioa.</p>
 
+  <p>Bi arau-mota daude.</p>
 
-	<a name="examples" id="examples"></a>
-	<h3>Adibide sinple batzuk</h3>
+  <ul>
+    <li>
+      <p><strong>Eten-arauek</strong> testua segmentuetan banatzen dute. Adibiez, <i>"Ba al zuen zentzurik? Ez nago ziur."</i> bi segmentutan banatu beharko litzateke, eten-araua egon beharko litzateke "<code>?</code>" ikurrerako.</p>
+    </li>
 
-	<table border="0" cellpadding="4" cellspacing="0">
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><strong>Asmoa</strong></td>
-			<td><strong>Aurretik</strong></td>
-			<td><strong>Ondoren</strong></td>
-			<td width="50%"><strong>Oharra</strong></td>
-		</tr>
-		<tr>
-			<td>sortu segmentu bat puntu baten ('<code>.</code>') eta zuriune baten artean</td>
-			<td><code>\.</code></td>
-			<td><code>\s</code></td>
-			<td>"<code>\.</code>" zeinuak  "<code>.</code>" karakterea ordezkatzen du. "<code>\s</code>" zeinuak edozein espazio zuri ordezkatzen du</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>ez sortu segmentua Mr. ondoren</td>
-			<td><code>Mr\.</code></td>
-			<td><code>\s</code></td>
-			<td>Salbuespen-araua da, beraz arauaren kontrol-laukiak markatu gabe egon behar du</td>
-		</tr>
-		<tr>
-			<td><code>sortu segmentu bat  </code> <code>"</code><code>。</code><code>"</code> ondoren <code>(japonierako puntua)</code></td>
-			<td><code>。</code> </td>
-			<td></td>
-			<td>Ohartu <i>ondoren</i> hutsik dagoela</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>ez sortu segmentua M., Mr., Mrs. eta Ms. ondoren</td>
-			<td><code>Mr??s??\.</code></td>
-			<td><code>\s</code></td>
-			<td>salbuespen-araua - ikusi ?-ren erabilera Adierazpen erregularretan (identifikatzaile asea)</td>
-		</tr>
-	</table>
+    <li>
+      <p><strong>Salbuespen-arauek</strong> banatu behar EZ diren testu-zatiak zehazten dituzte. Puntua duen arren, <i>"XX. mendea"</i> ez litzateke banatu behar; beraz, salbuespen-arau bat finkatu beharko litzateke XX hitzerako (eta XIX, XVIII, etab-etarako), puntu bat badaukate ondoren.</p>
+    </li>
+  </ul>
 
-	<hr>
-	<a name="regex" id="regex"></a>
-	<h1>Adierazpen erregularren laburpena</h1>
+  <p>Aurredefinitutako eten-arauek aski izan beharko lukete Europako hizkuntza gehienetan eta japonieran. Zure hizkuntzetarako salbuespen-arau gehiago definitu zenitzake,segmentu esanguratsu eta koherenteagoak sortzeko.</p>
 
-	<p>Segmentazio-arauetan erabiltzen diren adierazpen erregularrak Javak onartzen dituenak dira. <a href="regexp.html">Adierazpen erregularren formak</a> eranskinean laburpen bat dago.</p>
-	
-	<p>Informazio zehatzagoa behar baduzu, kontsultatu <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Sarean gai honi buruzko tutorial errazak aurki ditzakezu (esaterako, <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+  <h3><a name="setup" id="setup"></a>Arauen konfigurazioa</h3>
 
-	<hr>
+  <h3><a name="priority" id="priority"></a>Lehentasuna</h3>
 
-	<p><code><a href="legalNotices.html">Legezko oharrak</a></code></p>
+  <p>Hizkuntza-eredu bati dagozkion segmentazio-arauen multzoak hizkuntzaren lehentasun ordenan aplikatzen dira, alegia, hizkuntza espezifikoetarako arauak lehenetsitako hizkuntzetarako arauen gainetik egongo dira. Esaterako, Kanadako frantsesaren (FR-CA) arauek lehentasuna izango dute frantsesaren (FR.*) arauen gainetik, eta azken hau, lehenetsitakoen (.*) gainetik egongo da. Beraz, Kanadako frantsesetik itzultzen bada, proiektuak hizkuntza horretarako definitutako arauak, frantseserako definitutakoak eta lehenetsitakoak erabiliko ditu, ordena horretan.</p>
+
+  <h3><a name="creation" id="creation"></a>Arauen sorrera</h3>
+
+  <p>Arauen multzo hutsa editatu edo hedatzeko, sakatu bere izenean koadroan. Hautatutako multzoaren arauak koadroaren azpiko leihoan agertuko dira.</p>
+
+  <p>Hizkuntza berri baterako arau-multzo hutsa sortzeko, sakatu koadroaren goiko aldean ageri den <strong>Gehitu...</strong> botoia. Lerro hutsa ageriko da taularen behealdean <font color="black" face=
+  "Times New Roman" size="3"><span style="font-size: 12pt; color: black;" lang=
+  "EN-US">(agian beherantz mugitu beharko duzu korritze-barra hura ikusteko)</span></font>. Aldatu arauen multzoaren izena eta hizkuntza-eredua. Hizkuntza-ereduaren sintaxia <a href="regexp.html">adierazpen erregularren</a> sintaxiaren moldekoa da. Zure arauen multzoa hizkuntza-herrialdea bikote bati badagokio, <strong>Mugitu gora</strong> botoia erabiliz taularen goialdera eraman dezazun gomendatzen dizugu.&nbsp;</p>
+
+  <h3><a name="break" id="break"></a>Etena/Salbuespena</h3>
+
+  <p>Etena/Salbuespena zutabeko kontrol-laukiak arauaren izaera ezartzen du: kontrol-laukia markatuta badago, arauak etenak sortuko ditu, eta markatu gabe badago, salbuespenak sortuko ditu. Bi adierazpen erregularrek, Aurretik eta Ondoren zutabeetan adierazten direnek, kokapen baten aurretik eta ondoren zerk egon behar duen zehazten dute, eten- edo salbuespen-araua eratuz.</p>
+
+  <h3><a name="examples" id="examples"></a>Adibide sinple batzuk</h3>
+
+  <table summary="just formatting" border="0" cellpadding="4" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p><strong>Asmoa</strong></p>
+        </td>
+
+        <td>
+          <p><strong>Aurretik</strong></p>
+        </td>
+
+        <td>
+          <p><strong>Ondoren</strong></p>
+        </td>
+
+        <td width="52%">
+          <p><strong>Oharra</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="26%">
+          <p>sortu segmentu bat puntu baten ('<code>.</code>') eta zuriune baten artean</p>
+        </td>
+
+        <td>
+          <p><code>\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>"<code>\.</code>" zeinuak  "<code>.</code>" karakterea ordezkatzen du. "<code>\s</code>" zeinuak edozein espazio zuri ordezkatzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p>ez sortu segmentua Mr. ondoren</p>
+        </td>
+
+        <td>
+          <p><code>Mr\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>Salbuespen-araua da, beraz arauaren kontrol-laukiak markatu gabe egon behar du</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="26%">
+          <p>sortu segmentu bat "。" ondoren (japonierako puntua)</p>
+        </td>
+
+        <td>
+          <p><span lang="zxx"><code>。,</code></span></p>
+        </td>
+
+        <td></td>
+
+        <td width="52%">
+          <p>Begiratu nola <i>ondoren</i> hutsik dagoen</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p>ez sortu segmentua M., Mr., Mrs. eta Ms. ondoren</p>
+        </td>
+
+        <td>
+          <p><code>Mr??s??\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>salbuespen-araua - ikusi ?-ren erabilera Adierazpen erregularretan (identifikatzaile asea)</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="regex" id="regex"></a>Adierazpen erregularrak</h2>
+
+  <p>Segmentazio-arauetan erabiltzen diren adierazpen erregularrak Javak onartzen dituenak dira. <a href="regexp.html">Adierazpen erregularren formak</a> eranskinean laburpen bat dago. Informazio zehatzagoa behar baduzu, kontsultatu <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+  <p>Sarean gai honi buruzko tutorial errazak aurki ditzakezu (esaterako, <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+  <hr>
+
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Orri nagusia</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

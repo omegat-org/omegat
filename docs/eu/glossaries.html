@@ -1,110 +1,87 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Glossaries - OmegaT 1.7.3 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Glosarioak - OmegaT 2.0 erabiltzailearen eskuliburua</title>
 </head>
 <body>
-
-	<h1>Glosarioak</h1>
-
-	<ul>
-		<li><a href="#usage">Erabilera</a></li>
-		<li><a href="#fileformat">Fitxategi-formatua</a></li>
-		<li><a href="#howtocreate">Nola sortu glosarioak</a>
-			<ul>
-				<li><a href="#text_editor">Testu-editore bat erabiliz</a></li>
-				<li><a href="#spreadsheet">Kalkulu-orri bat erabiliz</a></li>
-				<li><a href="#multiterm">Trados Multiterm erabiliz</a></li>
-			</ul>
-		</li>
-		<li><a href="#commonglossaryproblems">Glosarioen arazo arruntak</a></li>
-	</ul>
-
-	<p>OmegaT-k erabiltzen dituen glosarioak eskuz sortu eta eguneratzen diren fitxategiak dira.</p>
-	
-	<p>OmegaT-ren proiektu batek glosario bat edo bat baino gehiago badauka, glosarioan dauden eta segmentu aktiboan ere agertzen diren termino guztiak <a href="userInterface.html#Glossary">glosarioen bisorean</a> erakutsiko dira.</p>
-
+<h2>Glosarioak</h2>
+<ul>
+  <li>
+    <p><a href="#usage">Erabilera</a></p>
+  </li>
+  <li>
+    <p><a href="#fileformat">Fitxategi-formatua</a></p>
+  </li>
+  <li>
+    <p><a href="#howtocreate">Nola sortu glosarioak</a></p>
+  </li>
+  <li>
+    <p><a href="#multiterm">Trados Multiterm erabiliz</a></p>
+  </li>
+  <li>
+    <p><a href="#commonglossaryproblems">Glosarioen arazo arruntak</a></p>
+  </li>
+</ul>
+<p>OmegaT-k erabiltzen dituen glosarioak eskuz sortu eta eguneratzen diren fitxategiak dira.</p>
+<p>OmegaT-ren proiektu batek glosario bat edo bat baino gehiago badauka, glosarioan dauden eta segmentu aktiboan ere agertzen diren termino guztiak <a href="userInterface.html#Glossary">glosarioen bisorean</a> erakutsiko dira.</p>
 <hr>
-
-	<a name="usage" id="usage"></a>
-	<h1>Erabilera</h1>
-
-	<p>Existitzen den glosario bat erabiltzeko, <code>/glossary</code> karpetan kokatu behar da, proiektua sortu ondoren. Proiektu bat irekitzen denean, OmegaT-k automatikoki detektatzen ditu karpeta honetan dauden glosario-fitxategiak.</p>
-	
-	<p>OmegaT-k segmentu aktiboko edozein hitz glosario-fitxategietan aurkitzen badu, glosarioen bisorean erakusten du. Glosarioen funtzioak parekatze zehatzak aurkitzen ditu soilik (ez forma deklinatuak, etab.)</p>
-
-	<p>Glosario-fitxategiei termino berriak erantsi dakizkieke itzulpena egin ahala (adibidez, testu-editore bat erabiliz), baina OmegaT-k ez ditu gehitutako hitz berriak ezagutuko proiektua birkargatzen den arte.</p>
-
+<h2><a name="usage" id="usage"></a>Erabilera</h2>
+<p>Existitzen den glosario bat erabiltzeko, <span style="font-style: italic;">/glossary</span> karpetan kokatu behar da, proiektua sortu ondoren. Proiektu bat irekitzen denean, OmegaT-k automatikoki detektatzen ditu karpeta honetan dauden glosario-fitxategiak. OmegaT-k segmentu aktiboko edozein hitz glosario-fitxategietan aurkitzen badu, glosario-panelean erakusten du:</p>
+<p><img src="images/Glossary_pane.png" name="graphics1"
+ alt="Glosario-panela" id="graphics1"
+ style="border: 0px solid;"><br>
+</p>
+<br>= ikurraren aurretik dagoen hitza sorburu-hitza da eta bere itzulpena(k) = ikurraren ondoren dago. Hiztegiko sarrera bakoitzari iruzkin bat erants dakioke (ikus "aditz iragankor" bigarren elementurako). Glosarioen funtzioak parekatze zehatzak aurkitzen ditu soilik (alegia, ez ditu forma flexiboak aurkitzen, etab.). Glosario-fitxategiei termino berriak erantsi dakizkieke itzulpena egin ahala (adibidez, testu-editore bat erabiliz), baina OmegaT-k ez ditu gehitutako hitz berriak ezagutuko proiektua birkargatzen den arte.<hr>
+<h2><a name="fileformat" id="fileformat"></a>Fitxategi-formatua</h2>
+<p>Glosario-fitxategiak hiru zutabez osatutako testu arrunteko fitxategiak dira. Zutabeak tabuladorez mugaturik daude. Lehen eta bigarren zutabeek sorburu- eta helburu-terminoak gordetzen dituzte, hurrenez hurren. Hirugarren zutabea informazio osagarria gordetzeko erabili daiteke. Glosario-fitxategiek sistemaren kodeketa lehenetsia eduki dezakete (fitxategiek <code>.tab</code> luzapena izango dute) edo UTF-8 kodeketa (<code>.utf8</code> luzapena edukiko dute). Unicode kodeketa (UTF-8) hobesten da, arrazoi nabariengatik. </p>
 <hr>
-
-	<a name="fileformat" id="fileformat"></a>
-	<h1>Fitxategi-formatua</h1>
-
-	<p>Glosario-fitxategiak hiru zutabez osatutako testu hutseko fitxategiak dira. Zutabeak tabuladorez mugaturik daude. Lehen eta bigarren zutabeek sorburu- eta helburu-terminoak gordetzen dituzte, hurrenez hurren. Hirugarren zutabea informazio osagarria gordetzeko erabili daiteke.</p>
-
-	<p>Glosario-fitxategiek sistemaren kodeketa lehenetsia eduki dezakete (kasu horretan fitxategiek <code>.tab</code> luzapena izango dute) edo UTF-8 kodeketa (beste kasu honetan, <code>.utf8</code> luzapena edukiko dute).</p>
-
+<h2><a name="howtocreate" id="howtocreate"></a>Nola sortu glosarioak</h2>Metodoa oso erraza da arreta pixka bat eskaintzen bazaio. OpenOffice.org Writer behar da, eta beraz, oraindik ez baduzu egin, deskargatu eta instala ezazu OpenOffice.org. Abiarazi OpenOffice.org eta ireki testuko dokumentu bat edo abiarazi zuzenean "OpenOffice.org Writer".<br> <br> Zurian dagoen dokumentuan sartu glosarioko zure terminoak, honela: sorburu-hizkuntzako terminoa, tabuladorea, helburu-hizkuntzako terminoa, tabuladorea, elementuaren iruzkina edo azalpena, eta Enter tekla sakatu. Tabuladorea teklatuaren ezkerretara dagoen gezidun tekla da. Ez baduzu iruzkinik erantsi nahi, bigarren tabuladorea ez da beharrezkoa. "Termino" bat hitz bakarra edo esaldi osoa izan daiteke. Bigarren lerroan, sartu bigarren terminoa eta bere itzulpena.<br> <br> Terminoak sartzea amaitu ondoren, bi "zutabe" egongo dira dokumentuan, sorburu-hizkuntzako terminoak ezkerrekoan eta helburu-hizkuntzakoak eskuinekoan, eta agian hirugarren zutabe bat, zure iruzkin eta azalpenak dituena. Tabuladorea (→ azpiko adibidean) eta Enter karaktereak ikusteko moduan jar daitezke, Writer aplikazioaren goiko barran dagoen ¶ ikonoan sakatuta. Adibidetzat, hemen daude ingelesa-euskara glosario baten lerro gutxi batzuk:<br>
+<br>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; word →hitz→(hitza, hitzak)¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; small house→etxola→(etxe)¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; dog →txakur→(zakur)¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; horse→zaldi→¶</div>
+<br>EZ erabili OpenOffice.org-en "zutabeen" funtzioa zutabeak sortzeko: tabuladorea besterik ezin da erabili sorburu- eta helburu-terminoak banatzeko.<br> <br> Amaitu ondoren, hautatu <span
+ style="font-style: italic;">Fitxategia &gt; Gorde honela</span>. "Fitxategiaren kokapena" kutxan, eman izan bat zure glosarioari, eta atzetik idatzi "<span style="font-weight: bold;">.utf8</span>" luzapena (adibidez "<span style="font-style: italic;">nireglosarioa.utf8</span>").&nbsp;"<span style="font-style: italic;">Iragazkia</span>" atalerako, hautatu "<span style="font-style: italic;">Testu kodetua (.txt.)</span>".&nbsp; Kendu marka "<span style="font-style: italic;">Fitxategiaren luzapen automatikoa</span>" kutxari eta aktibatu "<span style="font-style: italic;">Editatu iragazkiaren ezarpenak</span>":<br> <br> <img alt='"Gorde fitxategia honela" koadroa glosarioetarako'
+ src="images/saveglossary.jpg"><br> <br> Onartu OK sakatuz. Koadro bat agertuko da bi aukera emanez:&nbsp; "<span
+ style="font-style: italic;">Bai</span>" eta&nbsp; "<span style="font-style: italic;">Ez</span>". Hautatu "<span style="font-style: italic;">Bai</span>" testu kodetuko fitxategi-formatuan gordetzeko. <br> <br> ASCII fitxategien aukeren koadroa (ikus azpian), hautatu "<span style="font-style: italic;">Unicode (UTF-8)</span>" karaktere-sorta gisa:<br> <br> <img alt="ASCII fitxategien iragazkia glosarioetarako"
+ src="./images/AsciiFilteroptions.jpg"><br> <br> Onartu OK sakatuz.<br> <br> OmegaT-ren proiektu bat sortu ondoren, kopiatu edo mugitu fitxategia proiektuaren <span style="font-style: italic;">\glossary</span> karpetara. Proiektua irekita badago, birgargatu ezazu glosarioaren fitxategia kopiatu ondoren. Glosarioaren fitxategian aldaketak egin ditzakezu proiektua irekita eduki arren. Glosario-aldaketak segundoro antzematen dira eta aldaketok modu gardenean kargatzen dira atzealdean; beraz, ez da beharrezkoa proiektua birkargatzea glosarioaren fitxategi berria gorde ondoren.<br> <br> Sorburu-testua duen segmentu bat irekitzen denean, glosario-panelak glosarioko sarrerak erakusten ditu sorburu-segmentuan glosarioan gordeta dauden hitzak agertzen badira (glosario bat baino gehiago eduki daiteke kargatuta, eta glosario-fitxategiak azpikarpetetan antolatuta egon daitezke, <i>glossary</i> karpetan gordeta).<h3><a name="multiterm" id="multiterm"></a>Trados Multiterm erabiliz</h3>
+<p>Trados Multiterm-en testuen esportazio-funtzioa erabiliz sortutako glosarioak OmegaT-ren glosario gisa erabili daitezke aldaketarik gabe, betiere fitxategiari <code>.tab</code> luzapena ematen bazaio eta sorburu- eta helburu-hitzen zutabeak lehen biak badira. Sistemaren "Tab-delimited export" aukera erabiliz egiten baduzu esportazioa, OmegaT-k erabiliko dituen bi zutabeak baino lehen ageri diren 5 zutabeak ezabatu beharko dituzu  (Seq. Nr, Date created, etab.).</p>
 <hr>
+<h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Glosarioen arazo arruntak</h2>
+<dl>
+  <dt><span style="font-weight: bold;">Arazoa: </span>ez da glosarioko terminorik erakusten.</dt>
+  <dd>Kausa posibleak:</dd>
+</dl>
+<ul>
+  <li>ez dago glosario-fitxategirik "glosario" karpetan</li>
+  <li>glosario-fitxategia hutsik dago</li>
+  <li>elementuak ez daude TAB karaktere bidez banatuta</li>
+  <li>glosario-fitxategiak ez dauka luzapen zuzena (.tab edo .utf8)</li>
+  <li>Ez dago parekatze ZEHATZIK glosarioko sarreraren eta zure dokumentuko sorburu-testuaren artean - esaterako, elementua pluralean dagoelako</li>
+  <li>glosario-fitxategiak ez dauka kodeketa zuzena</li>
+  <li>segmentu aktiboak ez dauka glosarioko terminoekin bat datorren hitzik</li>
+  <li>aurreko arazoetako bat zuzendu da, baina proiektua ez da birkargatu.</li>
+</ul>
+<dl>
+  <dt><span style="font-weight: bold;">Arazoa: </span>glosario-panelean, karaktere batzuk ez dira zuzen agertzen (baina karaktere berak ondo erakusten dira editore-panelean).</dt>
+  <dd>Kausa posibleak:</dd>
+</dl>
+<ul>
+  <li>luzapena eta fitxategi-kodeketa ez datoz bat.</li>
+</ul>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a> </td>
+        <td style="text-align: center;"><a href="index.html">Orri nagusia</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
-	<a name="howtocreate" id="howtocreate"></a>
-	<h1>Nola sortu glosarioak</h1>
-
-	<a name="text_editor" id="text_editor"></a>
-	<h2>Testu-editore bat erabiliz</h2>
-
-	<p>Sortu fitxategi bat gogokoen duzun testu-editorean eta emaiozu <code>.tab</code> luzapena duen izena, esaterako <code>nire_glosarioa.tab</code>.</p>
-
-	<p>Idatzi sarrera bat sorburu-hizkuntzan, ondoren <code>tab</code> tekla, eta amaitzeko, itzulpena helburu-hizkuntzan. Nahi izanez gero, iruzkin bat erantsi ahal zaio bigarren <code>tab</code> bat sartu ondoren. Sakatu <code>Enter</code> beste sarrera bat idazteko.</p>
-	
-	<p>Sarrera guztiak sartu ondoren, gorde dokumentua. Bi hizkuntzek ez badute karaktere-mota bera, orduan fitxategia UTF-8 kodeketa erabiliz gorde behar da. Kasu horretan, deitu <code>nire_glosarioa.utf8</code> fitxategiari.</p>
-
-	<a name="spreadsheet" id="spreadsheet"></a>
-	<h2>Kalkulu-orri bat erabiliz</h2>
-
-	<p>Excel edo Calc erabiltzen dutenentzat, bigarren metodo hau oso egokia da, sarrerak ordenatzea ahalbidetzen baitu (UTF-8 behar ez izanez gero).</p>
-
-	<p>Hasi orri huts batekin. Sartu elementuak, lerro bakoitzean bat. Sorburu-esamoldeak lehen zutabean idatzi, helburu-hitzak bigarren zutaberan; hirugarren zutabean iruzkinak sar daitezke.</p>
-	
-	<p>Amaitu ondoren, gorde fitxategia Fitxategia/Gorde honela... erabiliz.</p>
-	
-	<p>Fitxategi-mota aukeran, hautatu Testua (tabuladorez mugatua, edo CSV), zehaztu <strong>eremu-mugatzailea</strong> <strong>tabulazioa</strong> izan dadin eta <strong>hitz-banatzailea</strong> hutsik utzi (ezabatu eremuan dagoena). Erabili <code>.tab</code> fitxategi-luzapen gisa.</p>
-	
-	<p>Softwareak zenbait galdera egingo dizkizu gordetzen ari den orriaren formatu-galeraren inguruan; edonola ere, sakatu OK.</p>
-	
-	<p>Erabili zure fitxategi-kudeatzailea fitxategiaren izena <code>nire_glosarioa.tab</code> dela eta <code>nire_glosarioa.tab.csv</code> ez dela segurtatzeko. Zuzendu, beharrezkoa bada.</p>
-	
-	<p>Gorde baino lehen, UTF-8 kodeketa hauta dezakezu, beharrekoa bada. Kasu horretan, deitu <code>nire_glosarioa.utf8</code> fitxategiari.<a name="multiterm" id="multiterm"></a>
-	</p><h2>Trados Multiterm erabiliz</h2>
-	
-	<p>Trados Multiterm-en testuen esportazio-funtzioa erabiliz sortutako glosarioak OmegaT-ren glosario gisa erabili daitezke aldaketarik gabe, betiere fitxategiari <code>.tab</code> luzapena ematen bazaio eta sorburu- eta helburu-hitzen zutabeak lehen biak badira.</p>
-
-<hr>
-
-	<a name="commonglossaryproblems" id="commonglossaryproblems"></a>
-	<h1>Glosarioen arazo arruntak</h1>
-
-	<dl>
-		<dt>Arazoa: ez da glosarioko terminorik erakusten.</dt>
-		<dd>Kausa posibleak:<ul>
-			<li>ez dago glosario-fitxategirik "glosario" karpetan</li>
-			<li>glosario-fitxategia hutsik dago</li>
-			<li>glosario-fitxategiak ez dauka luzapen zuzena (.tab edo .utf8)</li>
-			<li>glosario-fitxategiak ez dauka kodeketa zuzena</li>
-			<li>segmentu aktiboak ez dauka glosarioko terminoekin bat datorren hitzik</li>
-			<li>aurreko arazoetako bat zuzendu da, baina proiektua ez da birkargatu.</li>
-		</ul>
-		</dd>
-
-		<dt>Arazoa: glosario-panelean, karaktere batzuk ez dira zuzen agertzen (baina karaktere berak ondo erakusten dira editore-panelean).</dt>
-		<dd>Kausa posibleak:<ul>
-			<li>luzapena eta fitxategiaren kodeketa ez datoz bat.</li>
-		</ul>
-		</dd>
-	</dl>
-	
-	<hr>
-
-	<p><a href="legalNotices.html">Legezko oharrak</a></p>
 </body>
 </html>

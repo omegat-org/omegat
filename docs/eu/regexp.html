@@ -1,192 +1,733 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Adierazpen erregularrak - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Adierazpen erregularrak - OmegaT 2.0 erabiltzailearen eskuliburua</title>
 </head>
+
 <body>
+  <h2>Adierazpen erregularrak</h2>
 
-	<h1>Adierazpen erregularrak</h1>
+  <p>Bilaketetan eta segmentazio-arauetan erabiltzen diren adierazpen erregularrak (laburtuz, regex-ak) Javak onartzen dituenak dira. Informazio zehatzagoa behar baduzu, kontsultatu <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>. Ikus erreferentzia eta adibide geghiao beherago.&nbsp;</p>
 
-	<p>Bilaketetan eta segmentazio-arauetan erabiltzen diren adierazpen erregularrak Javak onartzen dituenak dira. Informazio zehatzagoa behar baduzu, kontsultatu <a href= "http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>.</p>
-		
-	<p>Sarean gai honi buruzko tutorial errazak aurki ditzakezu (esaterako, <a href="http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.)</p>
+  <table summary="just formatting" style="width: 80%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="width: 40%;">
+          <h3><a href="#Flags__">Banderak</a></h3>
+        </td>
 
+        <td style="width: 60%;">
+          <h3><a href="#Characters_">Karaktereak</a></h3>
+        </td>
+      </tr>
 
-	<table border="0" cellpadding="3" cellspacing="0">
+      <tr>
+        <td>
+          <h3><a href="#Quotation_">Komatxoak</a></h3>
+        </td>
 
-		<tr>
-			<td width="40%"><h2>Ondoko adierazpena:</h2></td>
-			<td><h2>Bat dator ondoko sekuentziarekin:</h2></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Banderak</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>(?i)</code></td>
-			<td>Maiuskulak/minuskulak bereizten ez dituen bilaketa ahalbidetzen du (portaera lehenetsia bereiztea da)</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Karaktereak</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>x</strong></td>
-			<td><strong>x</strong> karakterea, ondokoak salbu...</td>
-		</tr>
-		<tr>
-			<td><code>\u</code><strong>hhhh</strong></td>
-			<td><code>0x</code><strong>hhhh</strong> balio hamaseitarra duen karakterea</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\t</code></td>
-			<td>Tabuladore karakterea (<code>'\u0009'</code>)</td>
-		</tr>
-		<tr>
-			<td><code>\n</code></td>
-			<td>Lerro berria sortzeko karakterea (<code>'\u000A'</code>)</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\r</code></td>
-			<td>Orga-itzuleraren karakterea (<code>'\u000D'</code>)</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Komatxoak</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\</code></td>
-			<td>Ondoren datorren karakterea komatxo artean jartzen du. Hau derrigorrezkoa da <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakaraktereak bilatu nahi badituzu. </td>
-		</tr>
-		<tr>
-			<td><code>\\</code></td>
-			<td>Esaterako, hau alderantzizko barra da.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\Q</code></td>
-			<td><code>\E</code> dagoen tokira arteko karaktere guztiak komatxo artean jartzen ditu</td>
-		</tr>
-		<tr>
-			<td><code>\E</code></td>
-			<td><code>\Q</code> bidez hasi diren komatxoen amaiera</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Karaktere-klaseak</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>[abc]</code></td>
-			<td><code>a</code>, <code>b</code>, edo <code>c</code> (klase sinplea)</td>
-		</tr>
-		<tr>
-			<td><code>[^abc]</code></td>
-			<td>Edozein karaktere, <code>a</code>, <code>b</code>, edo <code>c</code> salbu (ezeztapena)</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>[a-zA-Z]</code></td>
-			<td><code>a</code>-tik <code>z</code>-ra edo <code>A</code>-tik <code>Z</code>-ra, (tartea)</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Aurredefinitutako karaktere-klaseak</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>.</code></td>
-			<td>Edozein karaktere (lerro-amaierak salbu)</td>
-		</tr>
-		<tr>
-			<td><code>\d</code></td>
-			<td>Digitu bat: <code>[0-9]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\D</code></td>
-			<td>Digitua ez den karaktere bat: <code>[^0-9]</code></td>
-		</tr>
-		<tr>
-			<td><code>\s</code></td>
-			<td>Zuriune bat: <code>[ \t\n\x0B\f\r]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\S</code></td>
-			<td>Zuriunea ez den karaktere bat: <code>[^\s]</code></td>
-		</tr>
-		<tr>
-			<td><code>\w</code></td>
-			<td>Hizki bat: <code>[a-zA-Z_0-9]</code></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\W</code></td>
-			<td>Hizkia ez den karaktere bat: <code>[^\w]</code></td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Muga-formak</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>^</code></td>
-			<td>Lerroaren hasiera</td>
-		</tr>
-		<tr>
-			<td><code>$</code></td>
-			<td>Lerroaren amaiera</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>\b</code></td>
-			<td>Hitz-muga</td>
-		</tr>
-		<tr>
-			<td><code>\B</code></td>
-			<td>Hitzak ez diren karaktere-multzoen muga</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Zenbatzaile asezinak</h3></td>
-		</tr>
-		<tr>
-			<td colspan="2">Hauek ahalik eta baliokide gehien bilatuko dituzte. Esaterako, <code>a+</code> formak <code>aaa</code> aurkituko du <code>aaabbb</code> katean</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>?</code></td>
-			<td><strong>X</strong>, zero edo bat</td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>*</code></td>
-			<td><strong>X</strong>, zero edo gehiago</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>+</code></td>
-			<td><strong>X</strong>, bat edo gehiago</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Zenbatzaile motelak (aseak)</h3></td>
-		</tr>
-		<tr>
-			<td colspan="2">Hauek ahalik eta baliokide gutxien bilatuko dituzte. Esaterako, <code>a+?</code> formak lehen <code>a</code> aurkituko du <code>aaabbb</code> katean</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>??</code></td>
-			<td><strong>X</strong>, zero edo bat</td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>*?</code></td>
-			<td><strong>X</strong>, zero edo gehiago</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>X</strong><code>+?</code></td>
-			<td><strong>X</strong>, bat edo gehiago</td>
-		</tr>
-		<tr>
-			<td colspan="2"><hr><h3>Eragile logikoak</h3></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><strong>XY</strong></td>
-			<td><strong>X</strong> eta ondoren <strong>Y</strong></td>
-		</tr>
-		<tr>
-			<td><strong>X</strong><code>|</code><strong>Y</strong></td>
-			<td><strong>X</strong> zein <strong>Y</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>(</code><strong>XY</strong><code>)</code></td>
-			<td><strong>XY</strong> multzo bakar gisa</td>
-		</tr></table>
+        <td>
+          <h3><a name="Classes_for_Uncode_blocks_and_" id=
+          "Classes_for_Uncode_blocks_and_"></a><a href=
+          "#Classes_for_Uncode_blocks_and_">Klaseak Unicode bloke eta kategorietarako</a></h3>
+        </td>
+      </tr>
 
-	<hr>
+      <tr>
+        <td>
+          <h3><a href="#Character_classes_">Karaktere-klaseak</a></h3>
+        </td>
 
-	<a href="legalNotices.html">Legezko oharrak</a>
+        <td>
+          <h3><a href="#Predefined_character_classes_">Aurredefinitutako karaktere-klaseak</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width: 257px;">
+          <h3><a href="#Boundary_matchers_">Muga-formak</a></h3>
+        </td>
+
+        <td style="width: 517px;">
+          <h3><a href="#Greedy_quantifiers_">Zenbatzaile asezinak</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Reluctant_non-greedy_quantifiers_">Zenbatzaile motelak (aseak)</a></h3>
+        </td>
+
+        <td>
+          <h3><a href="#Logical_operators_">Eragile logikoak</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#References_and_examples_">Regex tresnak eta adibideak</a></h3>
+        </td>
+      </tr>
+    </tbody>
+  </table>&nbsp;&nbsp; &nbsp;
+
+  <p>&nbsp;<br></p>
+  <hr>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
+    <col width="15%">
+    <col width="80%">
+
+    <tbody>
+      <tr>
+        <td width="355">
+          <h3>Hurrengo adierazpena...</h3>
+        </td>
+
+        <td width="877">
+          <h3>... hurrengoarekin bat dator:</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Flags__" id="Flags__"></a>Banderak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(?i)</code></p>
+        </td>
+
+        <td width="877">
+          <p>Maiuskulak/minuskulak bereizten ez dituen bilaketa ahalbidetzen du (portaera lehenetsia bereiztea da)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Characters_" id="Characters_"></a>Karaktereak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>x</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>x</strong> karakterea, ondokoak salbu...</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\uhhhh</code></p>
+        </td>
+
+        <td width="877">
+          <p><code>0x</code><strong>hhhh</strong> balio hamaseitarra duen karakterea</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\t</code></p>
+        </td>
+
+        <td width="877">
+          <p>Tabuladore-karakterea (<code>'\u0009'</code>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\n</code></p>
+        </td>
+
+        <td width="877">
+          <p>Lerro berria sortzeko karakterea (<code>'\u000A'</code>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\r</code></p>
+        </td>
+
+        <td width="877">
+          <p>Orga-itzuleraren karakterea (<code>'\u000D'</code>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\f</tt></p>
+        </td>
+
+        <td width="877">
+          <p>Orri-jauzien karakterea (<tt>'\u000C'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\a</tt></p>
+        </td>
+
+        <td width="877">
+          <p>Alerta (kanpaitxoa) karakterea (<tt>'\u0007'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\e</tt></p>
+        </td>
+
+        <td width="877">
+          <p>Ihes-karakterea (<tt>'\u001B'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\c</tt><i>x</i></p>
+        </td>
+
+        <td width="877">
+          <p><i>x</i>-i dagokion kontrol-karakterea</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>n</i></p>
+        </td>
+
+        <td width="877">
+          <p><tt>0</tt><i>n</i> balio zortzitarra duen karakterea (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\0</tt><i>nn</i></p>
+        </td>
+
+        <td width="877">
+          <p><tt>0</tt><i>nn</i> balio zortzitarra duen karakterea (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>mnn</i></p>
+        </td>
+
+        <td width="877">
+          <p><tt>0</tt><i>mnn</i> balio zortzitarra duen karakterea (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\x</tt><i>hh</i></p>
+        </td>
+
+        <td width="877">
+          <p><tt>0x</tt><i>hh</i> balio hamaseitarra duen karakterea</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Quotation_" id="Quotation_"></a>Komatxoak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\</code></p>
+        </td>
+
+        <td width="877">
+          <p>Ondoren datorren karakterea komatxo artean jartzen du. Hau derrigorrezkoa da <code>!$()*+.&lt;&gt;?[\]^{|}</code> metakaraktereak bilatu nahi badituzu. </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\\</code></p>
+        </td>
+
+        <td width="877">
+          <p>Esaterako, hau alderantzizko barra da.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\Q</code></p>
+        </td>
+
+        <td width="877">
+          <p><code>\E</code> dagoen tokira arteko karaktere guztiak komatxo artean jartzen ditu</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\E</code></p>
+        </td>
+
+        <td width="877">
+          <p><tt>\Q</tt> bidez hasi diren komatxoen amaiera</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Classes_for_Unicode_blocks_and" id=
+          "Classes_for_Unicode_blocks_and"></a>Klaseak Unicode bloke eta kategorietarako</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Karaktere bat grezierazko blokean (<a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">bloke</a> sinplea)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\p{Lu}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Letra maiuskula bat (<a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">kategoria</a> sinplea)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{Sc}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Moneta-ikurra</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\P{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Edozein karaktere, grezierazko blokekoa salbu (ezeztapena)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td height="33" width="355">
+          <p><code><tt>[\p{L}&amp;&amp;[^\p{Lu}]]</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Edozein letra, letra maiuskula bat salbu (kenketa)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Character_classes_" id=
+          "Character_classes_"></a>Karaktere-klaseak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p><code>a</code>, <code>b</code>, edo <code>c</code> (klase sinplea)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>[^abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p>Edozein karaktere, <code>a</code>, <code>b</code>, edo <code>c</code> salbu (ezeztapena)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[a-zA-Z]</code></p>
+        </td>
+
+        <td width="877">
+          <p><code>a</code>-tik <code>z</code>-ra edo <code>A</code>-tik <code>Z</code>-ra, (tartea)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Predefined_character_classes_" id=
+          "Predefined_character_classes_"></a>Aurredefinitutako karaktere-klaseak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>.</code></p>
+        </td>
+
+        <td width="877">
+          <p>Edozein karaktere (lerro-amaierak salbu)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\d</code></p>
+        </td>
+
+        <td width="877">
+          <p>Digitu bat: <code>[0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\D</code></p>
+        </td>
+
+        <td width="877">
+          <p>Digitua ez den karaktere bat: <code>[^0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="877">
+          <p>Zuriune bat: <code>[ \t\n\x0B\f\r]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\S</code></p>
+        </td>
+
+        <td width="877">
+          <p>Zuriunea ez den karaktere bat: <code>[^\s]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\w</code></p>
+        </td>
+
+        <td width="877">
+          <p>Hizki bat: <code>[a-zA-Z_0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\W</code></p>
+        </td>
+
+        <td width="877">
+          <p>Hizkia ez den karaktere bat: <code>[^\w]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Boundary_matchers_" id="Boundary_matchers_"></a>Muga-formak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>^</code></p>
+        </td>
+
+        <td width="877">
+          <p>Lerroaren hasiera</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>$</code></p>
+        </td>
+
+        <td width="877">
+          <p>Lerroaren amaiera</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\b</code></p>
+        </td>
+
+        <td width="877">
+          <p>Hitz-muga</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\B</code></p>
+        </td>
+
+        <td width="877">
+          <p>Hitzak ez diren karaktere-multzoen muga</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Greedy_quantifiers_" id="Greedy_quantifiers_"></a>Zenbatzaile asezinak</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>Hauek ahalik eta baliokide gehien bilatuko dituzte. Esaterako, <code>a+</code> formak <code>aaa</code> aurkituko du <code>aaabbb</code> katean</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, zero edo bat</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, zero edo gehiago</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, bat edo gehiago</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Reluctant_non-greedy_quantifiers_" id=
+          "Reluctant_non-greedy_quantifiers_"></a>Zenbatzaile motelak (aseak)</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>Hauek ahalik eta baliokide gutxien bilatuko dituzte. Esaterako, <code>a+?</code> formak lehen <code>a</code> aurkituko du <code>aaabbb</code> katean</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>??</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, zero edo bat</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, zero edo gehiago</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, bat edo gehiago</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Logical_operators_" id="Logical_operators_"></a>Eragile logikoak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>XY</strong></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong> eta ondoren <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>|</code><strong>Y</strong></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong> zein <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(</code><strong>XY</strong><code>)</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>XY</strong> multzo bakar gisa</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <br>
+
+  <h2><a name="References_and_examples_" id=
+  "References_and_examples_"></a>Regex tresnak eta adibideak</h2><br>Hainbat tresna interaktibo existitzen da adierazpen erregularrak garatu eta probatzeko. Denek jarraitzen dute eredu bera (ikus behean adibide bat Firefoxerako plugin batekin): adierazpen erregularrak (goiko sarrera) bilaketa-testua analizatzen du (erdialdean ageri den kutxa), agerraldi-kopurua emanez (emaitzen kutxan erakusten dira).<br> <br> <img alt=
+  "adierazpen erregularren plugin probatzailea Firefoxerako" src=
+  "images/RegexTester.png"><br> <br> Ikus baita ere <a href="http://www.weitz.de/regex-coach/">The Regex Coach</a>&nbsp;Windows, Linux, Mac eta FreeBSD-rako. Tresna autonomo honek goiko adibidean erakutsiko emaitzen oso antzekoak ematen ditu.<br> <br> OmegaT-k berak regex kasuen bilduma ona eskaintzen du (ikus Aukerak &gt; <a href=
+  "segmentation.html">Segmentazioa...</a>). Hurrengo zerrendan itzulpen-memorietan barrena bilaketak egiterakoan erabilgarriak izan daitezkeen zenbait adierazpen ematen dira:<br>
+  <br>
+
+  <table summary="just formatting" style="text-align: left; width: 600px;"
+  border="1" cellpadding="0" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="font-weight: bold;">Adierazpen erregularra</td>
+
+        <td style="font-weight: bold;">Hurrengoa aurkitzen du:</td>
+      </tr>
+
+      <tr>
+        <td>(\b\w+\b)\s\1\b<br></td>
+
+        <td>hitz bikoitzak&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>[\.,]\s*[\.,]+</td>
+
+        <td>komak eta puntuak nahastean</td>
+      </tr>
+
+      <tr>
+        <td>\. \s$</td>
+
+        <td>soberako zuriuneak puntuen ondoren lerroen amaieran</td>
+      </tr>
+
+      <tr>
+        <td>\s+a\s+[aeiou]</td>
+
+        <td>&nbsp;Ingelesez: bokalez hasten diren hitzek "an" eraman behar dute aurretik, ez "a"</td>
+      </tr>
+
+      <tr>
+        <td>\s+an\s+[^aeiou]</td>
+
+        <td>&nbsp;Ingelesez: goikoaren berdina, baina kontsonanteentzat ("a", ez "an")</td>
+      </tr>
+
+      <tr>
+        <td>\s\s+</td>
+
+        <td>zuriune bat baino gehiago</td>
+      </tr>
+
+      <tr>
+        <td>\.[A-Z]</td>
+
+        <td>zuriunerik eza puntu baten ondoren eta esaldi baten hasieran</td>
+      </tr>
+    </tbody>
+  </table><br>
+  <br>
+  <hr>
+
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Orri nagusia</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

@@ -1,142 +1,205 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Itzulpen-memoriak - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Itzulpen-memoriak - OmegaT 2.0 erabiltzailearen eskuliburua</title>
 </head>
+
 <body>
+  <h2>Itzulpen-memoriak</h2>
 
-	<h1>Itzulpen-memoriak</h1>
+  <ul>
+    <li>
+      <a href="#OmegaT_and_TMX_files">OmegaT eta TMX fitxategiak</a>
 
-	<ul>
-		<li><a href="#OmegaT_and_TMX_files">OmegaT eta TMX fitxategiak</a>
-			<ul>
-				<li><a href="#TMX_files_location_and_purpose">Kokapena eta xedea</a></li>
-				<li><a href="#TMX_backup">TMX-en babeskopia</a></li>
-				<li><a href="#TMX_files_and_language">TMX fitxategiak eta hizkuntza</a></li>
-			</ul>
-		</li>
-		<li><a href="#keeping_a_memory">Nola gogoratzen dituen OmegaT-k zure itzulpenak</a></li>
-		<li><a href="#using_memories">Beste itzulpen-tresna batzuek sortutako memoriak erabiltzea</a>
-			<ul>
-				<li><a href="#importing_files">Fitxategiak inportatzea</a></li>
-				<li><a href="#imported_files_handling">Inportatutako fitxategiak kudeatzea</a></li>
-			</ul>
-		</li>
-		<li><a href="#using_OmegaT_TM">OmegaT-n sortutako itzulpen-memoriak beste itzulpen-tresna batzuetan erabiltzea</a></li>
-		<li><a href="#upgrading_TM">Itzulpen-memoriak berritzea</a></li>
-	</ul>
+      <ul>
+        <li><a href="#TMX_files_location_and_purpose">Kokapena eta xedea</a></li>
 
+        <li><a href="#TMX_backup">TMX-en babeskopia</a></li>
 
-<hr>
+        <li><a href="#TMX_files_and_language">TMX fitxategiak eta hizkuntza</a></li>
+      </ul>
+    </li>
 
-	<a name="OmegaT_and_TMX_files" id="OmegaT_and_TMX_files"></a>
-	<h1>OmegaT eta TMX fitxategiak</h1>
+    <li><a href="#keeping_a_memory">Nola gogoratzen dituen OmegaT-k zure itzulpenak</a></li>
 
-	<a name="TMX_files_location_and_purpose" id="TMX_files_location_and_purpose"></a>
-	<h2>TMX fitxategiak - kokapena eta xedea</h2>
+    <li><a href="#Using_TMs_from_previous_projects">Aurreko proiektuetako itzulpen-memoriak erabiltzea</a></li>
 
-	<p>OmegaT-k 3 tokitan gordetako TMX fitxategiak erabiltzen ditu.</p>
+    <li>
+      <a href="#using_memories">Beste itzulpen-tresna batzuek sortutako memoriak erabiltzea</a>
 
-	<ul>
-		<li><p><code>/omegat/</code> karpetak <code>project_save.tmx</code> izeneko fitxategi bat eta babeskopiak diren hainbat TMX fitxategi gordetzen ditu.</p>
-		<p><code>project_save.tmx</code> fitxategiak proiektua hasi zenuenetik sortu dituzun segmentu guztiak gordetzen ditu.</p></li>
-		<li><p>Proiektuaren karpeta nagusiak 3 TMX fitxategi dauzka:</p><ol>
-				<li><code>proiektuarenizena-omegat.tmx</code></li>
-				<li><code>ment 0834&gt; proiektuarenizena-level1.tmx</code></li>
-				<li><code>proiektuarenizena-level2.tmx</code></li>
-			</ol>(<i>proiektuarenizena</i> zure proiektuaren izena izanik).<p>Fitxategi hauek /source/ karpetaren edukiei dagozkien segmentuen sorburua eta helburua gordetzen dituzte (betiere fitxategi itzuliak sortu diren unekoak). </p>
-				<ul>
-				<li><code>level1</code> fitxategiak testu-informazioa soilik gordetzen du.</li>
-				<li><code>level2</code> fitxategiak OmegaT-ren berezko etiketak TMX formatuko etiketa zuzen gisa kapsulatuta gordetzen ditu. Honi esker, fitxategia bere formatu-informazioarekin batera erabili daiteke, bai OmegaT-n bertan bai 2. mailako TMX memoriak onartzen dituen beste edozein itzulpen-tresnatan.</li>
-				<li><code>omegat</code> fitxategiak OmegaT-ren berezko etiketak gordetzen ditu. Honi esker, fitxategia OmegaT-ren beste proiektu batean erabili daiteke.</li>
-			</ul>
+      <ul>
+        <li><a href="#importing_files">Fitxategiak inportatzea</a></li>
 
+        <li><a href="#imported_files_handling">Inportatutako fitxategiak kudeatzea</a></li>
+      </ul>
+    </li>
 
-		</li><li><p><code>/tm/</code> karpeta beste TMX fitxategi batzuen gordelekua izan daiteke.</p>
-		
-		<p>Fitxategi hauek TMX formatu zuzena eduki behar dute eta 3 motatakoak izan daitezke: testu-informazioa dutenak soilik (TMX 1. maila), OmegaT-ren testu- eta formatu-informazioa dutenak (omegat TMX) eta TMX motako testu- eta formatu-informazioa dutenak (TMX 2. maila).</p></li>
-	</ul>
+    <li><a href="#using_OmegaT_TM">OmegaT-n sortutako itzulpen-memoriak beste itzulpen-tresna batzuetan erabiltzea</a></li>
+    
+    <li><a href="#pseudo_translate">Sasiitzulpenen memoria</a></li>
 
-	<a name="TMX_backup" id="TMX_backup"></a>
-	<h2>TMX-en babeskopia</h2>
-	
-	<p>Zure fitxategiak itzultzen dituzunean, OmegaT-k aldaketa guztiak itzulpen-memoria batean gordetzen ditu, proiektuaren <code>/omegat</code> azpidirektorioan.</p>
-	
-	<p>OmegaT-k itzulpen-memoriaren <code>project_save.tmx.URTEAHHEEOOMM.bak</code> izeneko babeskopia egiten du, azpidirektorio berean, proiektua ireki edo birkargatzen den bakoitzean. Babeskopiaren izena sortzeko, aurreko itzulpen-memoria gorde den azken unea erabiltzen da: <code>URTEA</code> uneko urtea da, <code>HH</code> hilabetea, <code>EE</code> eguna, <code>OO</code> eta <code>MM</code> orduak eta minutuak dira.</p>
-	
-	<p>Itzulpen baten datuak galdu dituzula uste baduzu, jarraitu ondorengo prozedura:</p><ol>
-			<li>Itxi proiektua.</li>
-			<li>Aldatu izena <code>project_save.tmx</code> fitxategiari eta jarri erraz gogoratu dezakezun izen bat (esaterako, <code>project_save.tmx.tmp</code>).</li>
-			<li>Galdu dituzun datuak dituela uste duzun itzulpen-memoria hautatu.</li>
-			<li>Aldatu izena eta jarri <code>proiektuarenizena.tmx</code>.</li>
-			<li>Ireki proiektua.</li>
-		</ol>
+    <li><a href="#upgrading_TM">Itzulpen-memoriak berritzea</a></li>
+  </ul>
+  <hr>
+  <a name="OmegaT_and_TMX_files" id="OmegaT_and_TMX_files"></a>
 
+  <h2>OmegaT eta TMX fitxategiak</h2><a name="TMX_files_location_and_purpose" id=
+  "TMX_files_location_and_purpose"></a>
 
-	<a name="TMX_files_and_language" id="TMX_files_and_language"></a>
-	<h2>TMX fitxategiak eta hizkuntza</h2>
+  <h3>TMX fitxategiak - kokapena eta xedea</h3>
 
-	<p>TMX fitxategiak <i>itzulpen-unitatez</i> osaturik daude. Unitate hauek hainbat hizkuntzatako segmentu baliokideak gordetzen dituzte. Itzulpen-unitate batek gutxienez bi <i>aldaera</i> (translation unit variation, tuv) dauzka. Biak ala biak erabili daitezke bai sorburu gisa bai helburu gisa.</p>
+  <p>OmegaT-k 3 tokitan gordetako TMX fitxategiak erabiltzen ditu.</p>
 
-	<p>Zure proiektuaren ezarpenek adieraziko dute zein den sorburu-hizkuntza eta zein helburu-hizkuntza. OmegaT-k proiektuaren sorburu-hizkuntzaren kodeari dagokion <strong>tuv</strong>-a hartuko du eta segmentu hori sorburutzat erabiliko du, eta proiektuaren helburu-hizkuntzaren kodeari dagokion <strong>tuv</strong>-a hartuko du eta helburutzat erabiliko du. OmegaT-k ondorengo bi konbentzio estandarrak jarraituz ezagutzen ditu:</p>
+  <ul>
+    <li>
+      <p><em>/omegat/</em> karpetak <em>project_save.tmx</em> izeneko fitxategi bat eta babeskopiak diren hainbat TMX fitxategi gordetzen ditu.</p>
 
-	<ul>
-		<li>2 letra (esaterako, <strong>JA</strong> japonierarako), edo</li>
-		<li>2 letrarekin osatutako hizkuntza-kodea eta 2 letrarekin osatutako herrialde-kodea (esaterako, <strong>EN-US</strong>)</li>
-	</ul>
+      <p><em>project_save.tmx</em> fitxategiak proiektua hasi zenuenetik sortu dituzun segmentu guztiak gordetzen ditu.</p>
+    </li>
 
-	<p>Joan <a href="languages.html">Hizkuntzak</a> atalera hizkuntza- eta herrialde-kodeen zerrenda bat ikusteko.</p>
+    <li>
+      <p>Proiektuaren karpeta nagusiak 3 TMX fitxategi dauzka:</p>
 
-	<p>Proiektuaren hizkuntza-kodea eta TMX-aren hizkuntza-kodea bat badatoz, segmentuak memorian kargatzen dira. Kodeak hizkuntzan bat badatoz baina herrialdean bat ez badatoz, kasu honetan ere segmentuak memorian kargatzen dira. Ez hizkuntza ez herrialdea bat ez badatoz, segmentuak ez dira memorian kargatzen.</p>
+      <ol>
+        <li><em>proiektuarenizena-omegat.tmx</em></li>
 
+        <li><em>proiektuarenizena-level1.tmx</em></li>
 
-<hr>
+        <li><em>proiektuarenizena-level2.tmx</em></li>
+      </ol>(<i>proiektuarenizena</i> zure proiektuaren izena izanik).<p>Fitxategi hauek /source/ karpetaren edukiei dagozkien segmentuen sorburua eta helburua gordetzen dituzte (betiere fitxategi itzuliak sortu diren unekoak). </p>
 
-	<a name="keeping_a_memory" id="keeping_a_memory"></a>
-	<h1>Nola gogoratzen dituen OmegaT-k zure itzulpenak</h1>
+      <ul>
+        <li><em>level1</em> fitxategiak testu-informazioa soilik gordetzen du.</li>
 
-	<p><code>project_save.tmx</code> fitxategiak proiektua hasi zenuenetik sortu dituzun segmentu guztiak gordetzen ditu. Proiektuaren segmentazioan aldaketak egiten badituzu, <code>project_save.tmx</code> fitxategiak itzulpen-bikote berriak gordeko ditu, baina aurretik zegoen informazioa ere gordeko du.</p>
-	
-	<p>Honen ondorioz, zenbaitetan <strong>kate umezurtzak</strong> agertu daitezke parekatzeen bisorean. Parekatze horiek ez datoz bat uneko segmentuekin, baizik eta aldaketak egin baino lehenago gorde ziren segmentuekin. Aldaketa desegin eta aurreko ezarpenetara itzultzen bazara, parekatze zaharrak berriro agertuko dira.</p>
+        <li><em>level2</em>fitxategiak OmegaT-ren berezko etiketak TMX formatuko etiketa zuzen gisa kapsulatuta gordetzen ditu. Honi esker, fitxategia bere formatu-informazioarekin batera erabili daiteke, bai OmegaT-n bertan bai 2. mailako TMX memoriak onartzen dituen beste edozein itzulpen-tresnatan.</li>
 
+        <li><em>omegat</em> fitxategiak OmegaT-ren berezko etiketak gordetzen ditu. Honi esker, fitxategia OmegaT-ren beste proiektu batean erabili daiteke.</li>
+      </ul>
 
-<hr>
+      </li><li><em>/tm/</em> karpeta beste TMX fitxategi batzuen gordelekua izan daiteke. Fitxategi hauek TMX formatu zuzena eduki behar dute eta 3 motatakoak izan daitezke: testu-informazioa dutenak soilik (TMX 1. maila), OmegaT-ren testu- eta formatu-informazioa dutenak (omegat TMX) eta TMX motako testu- eta formatu-informazioa dutenak (TMX 2. maila). Haien arteko desberdintasunak teknikoak dira (ikus behean xehetasun gehiagorako), eta proiektu zahar bateko itzulpen-memoria bat erabili nahi baduzu kontuan izan trukagarriak direla, alegia, berdin-berdin funtzionatuko dutela.</li>
+  </ul>
+  <p>Aukeran, OmegaT-k beste TMX bat (OmegaT-ren estilokoa) zuk nahi duzun tokian sor dezan erabaki dezakezu. TMX honek proiektuaren segmentu itzulgarri guztiak edukiko ditu.  Ikus <a href="#pseudo_translate">sasiitzulpenen memoria</a>.</p>
+  
 
-	<a name="using_memories" id="using_memories"></a>
-	<h1>Beste itzulpen-tresna batzuek sortutako memoriak erabiltzea</h1>
+  <a name="TMX_backup" id="TMX_backup"></a>
+  <h3>TMX-en babeskopia</h3>
 
-	<a name="importing_files" id="importing_files"></a>
-	<h2>Fitxategiak inportatzea</h2>
+  <p>Zure fitxategiak itzultzen dituzunean, OmegaT-k aldaketa guztiak itzulpen-memoria batean gordetzen ditu, proiektuaren <em>/omegat</em> azpidirektorioan.</p>
 
-	<p>OmegaT-k 1.1 eta 1.4b bertsioen arteko TMX fitxategiak (1. mailakoak zein 2. mailakoak) onartzen ditu. Hortaz, OmegaT-k beste tresna batzuekin sortutako itzulpen-memoriak erabili ditzake. Hala ere, OmegaT-k ez ditu <i>osorik</i> onartzen 2. mailako TMX fitxategi inportatuak (alegia, itzulpenaz gaina formatua ere gordetzen dutenak). Hortaz, parekatze lausoen kalitatea apur bat txikiagoa izango da 2. mailako TMX fitxategiak inportatu eta erabiltzean.</p>
+  <p>OmegaT-k itzulpen-memoriaren <em>project_save.tmx.URTEAHHEEOOMM.bak</em> izeneko babeskopia egiten du, azpikarpeta berean, proiektua ireki edo birkargatzen den bakoitzean. Babeskopiaren izena sortzeko, aurreko itzulpen-memoria gorde den azken unea erabiltzen da: <em>URTEA</em> uneko urtea da, <em>HH</em> hilabetea, <em>EE</em> eguna, <em>OO</em> eta <em>MM</em> orduak eta minutuak dira.</p>
 
-	<a name="imported_files_handling" id="imported_files_handling"></a>
-	<h2>Inportatutako fitxategiak kudeatzea</h2>
+  <p>Itzulpen baten datuak galdu dituzula uste baduzu, jarraitu ondorengo prozedura:</p>
 
-	<p>OmegaT-k oso prozedura zorrotza jarraitzen du itzulpen-memorien fitxategiak (TMX fitxategiak) maneiatzen dituenean. Fitxategietako batean edozein akats aurkitzen badu, ez du kargatuko.</p>
+  <ol>
+    <li>Itxi proiektua.</li>
 
-	<p>Zenbait tresnek TMX fitxategi baliogabeak sortzen dituzte zenbait kasutan. Fitxategi horiek erreferentziako itzulpen gisa erabili nahi badituzu OmegaT-n, lehenago konpondu egin beharko dituzu. Konponketa hauek oso azalekoak izan ohi dira; OmegaT-k konponketa egiteko argibideak emango dizkizu fitxategia zabaltzean ematen duen errore-mezuan. Arazoak badauzkazu, laguntza eskatu dezakezu <a href="http://groups.yahoo.com/group/OmegaT/">erabiltzaile-taldean</a>.</p>
+    <li>Aldatu izena <em>project_save.tmx</em> fitxategiari eta jarri erraz gogoratu dezakezun izen bat (esaterako, <em>project_save.tmx.tmp</em>).</li>
 
+    <li>Galdu dituzun datuak dituela uste duzun itzulpen-memoria hautatu.</li>
 
-<hr>
+    <li>Aldatu izena eta jarri <em>project_save.tmx</em>.</li>
 
-	<a name="using_OmegaT_TM" id="using_OmegaT_TM"></a>
-	<h1>OmegaT-n sortutako itzulpen-memoriak beste itzulpen-tresna batzuetan erabiltzea</h1>
+    <li>ireki proiektua.</li>
+  </ol><a name="TMX_files_and_language" id="TMX_files_and_language"></a>
 
-	<p>OmegaT-k 1.4 bertsioko TMX fitxategiak (1. mailakoak zein 2. mailakoak) esportatzen ditu. 2. mailako esportazioa ez da 2. maila estandarra, baina aski da 2. mailako TMX fitxategiak onartzen dituzten itzulpen-tresnetan parekatze zuzenak sortzeko. Testu-informazioa soilik (eta ez formatu-informazioa) behar baduzu, erabili OmegaT-k sortutako 1. mailako fitxategia.</p>
+  <h3>TMX fitxategiak eta hizkuntza</h3>
 
+  <p>TMX fitxategiak <i>itzulpen-unitatez</i> osaturik daude. Unitate hauek hainbat hizkuntzatako segmentu baliokideak gordetzen dituzte. Itzulpen-unitate batek gutxienez bi <i>aldaera</i> (translation unit variation, tuv) dauzka. Biak ala biak erabili daitezke bai sorburu gisa bai helburu gisa.</p>
 
-<hr>
+  <p>Zure proiektuaren ezarpenek adieraziko dute zein den sorburu-hizkuntza eta zein helburu-hizkuntza. OmegaT-k proiektuaren sorburu-hizkuntzaren kodeari dagokion <strong>tuv</strong>-a hartuko du eta segmentu hori sorburutzat erabiliko du, eta proiektuaren helburu-hizkuntzaren kodeari dagokion <strong>tuv</strong>-a hartuko du eta helburutzat erabiliko du. OmegaT-k ondorengo bi konbentzio estandarrak jarraituz ezagutzen ditu:</p>
 
-	<a name="upgrading_TM" id="upgrading_TM"></a>
-	<h1>Itzulpen-memoriak berritzea</h1>
+  <ul>
+    <li>2 letra (esaterako, <strong>JA</strong> japonierarako), edo</li>
 
-	<p>OmegaT-ren aurreko bertsioek paragrafotan soilik zatitutako segmentuak sor zitzaketen, eta ez ziren zehatzak formatu-etiketei zenbakia ematean HTML eta Open Document fitxategiak erabiltzen zirenean. OmegaT 1.7.3 bertsioak TMX fitxategi horiek momentuan detektatu eta berritu ditzake, parekatze lausoen kalitatea gehituz eta zure uneko itzulpena hobetuz.</p>
+    <li>2 letrarekin osatutako hizkuntza-kodea eta 2 letrarekin osatutako herrialde-kodea (esaterako, <strong>EN-US</strong>)</li>
+  </ul>
 
-	<p>Proiektu baten TMX-a behin bakarrik berrituko da eta forma berrituan gordeko da. TMX fitxategi zaharrak proiektua kargatzen den bakoitzean berrituko dira. Kontuan izan zenbait kasutan OmegaT 1.7.3 bertsioan fitxategi-iragazkietan aldaketak egiteak segmentazio guztiz desberdina sortzea eragin dezakeela. Kasu bakan horietan itzulpena eskuz berritu beharko duzu.</p>
-	<hr>
+  <p>Joan <a href="languages.html">Hizkuntzak</a> atalera hizkuntza- eta herrialde-kodeen zerrenda bat ikusteko.</p>
 
-	<p><a href="legalNotices.html">Legezko oharrak</a></p>
+  <p>Proiektuaren hizkuntza-kodea eta TMXaren hizkuntza-kodea bat badatoz, segmentuak memorian kargatzen dira. Kodeak hizkuntzan bat badatoz baina herrialdean bat ez badatoz, kasu honetan ere segmentuak memorian kargatzen dira. Ez hizkuntza ez herrialdea bat ez badatoz, segmentuak ez dira memorian kargatzen.</p>
+  <hr>
+  <a name="keeping_a_memory" id="keeping_a_memory"></a>
+
+  <h2>Nola gogoratzen dituen OmegaT-k zure itzulpenak</h2>
+
+  <p>project_save.tmx fitxategiak proiektua hasi zenuenetik sortu dituzun segmentu guztiak gordetzen ditu. Proiektuaren segmentazioan aldaketak egiten badituzu, <em>project_save.tmx</em> fitxategiak itzulpen-bikote berriak gordeko ditu, baina aurretik zegoen informazioa ere gordeko du.</p>
+
+  <p>Honen ondorioz, zenbaitetan <strong>kate umezurtzak</strong> agertu daitezke parekatzeen bisorean. Parekatze horiek ez datoz bat uneko segmentuekin, baizik eta aldaketak egin baino lehenago gorde ziren segmentuekin. Aldaketa desegin eta aurreko ezarpenetara itzultzen bazara, parekatze zaharrak berriro agertuko dira.</p>
+  <hr>
+  <a name="Using_TMs_from_previous_projects" id=
+  "Using_TMs_from_previous_projects"></a>
+
+  <h2>Aurreko proiektuetako itzulpen-memoriak erabiltzea</h2>
+
+  <p>OmegaT-ren proiektu batean helburu-dokumentuak sortzean, hiru itzulpen-memoria sortzen dira proiektuaren karpeta nagusian (ikus goiko deskribapena). TMX fitxategi hauek (-<em>omegat.tmx</em>", "<em>-level1.tmx</em>" eta "<em>-level2.tmx</em>") "esportatutako itzulpen-memoria" gisa erabil ditzakezu, alegia, zure uneko proiektuaren laburpen elebidun esportagarri gisa.</p>
+
+  <p>Proiektu zahar bateko itzulpen-memoria berrerabili nahi izanez gero (adibidez, proiektu berria aurrekoaren oso antzekoa delako, edo lehendik erabilitako terminologia duelako), "sarrerako itzulpen-memoria" gisa erabil daitezke, zure proiektu berrian inportatuz. Kasu horretan, erabili nahi dituzun itzulpen-memoriak zure proiektu berriaren <em>\tm</em> karpetan.</p>
+
+  <p>Modu lehenetsian, <em>\tm</em> karpeta proiektuaren karpeta nagusiaren azpian dago (alegia, <em>\nireproiektua\tm)</em>, baina beste karpeta bat hauta dezakesu proiektuaren propietateen leihoan. Hau erabilgarria da iraganean sortutako itzulpen-memoriak sarritan erabiltzen badituzu, adibidez gai berari buruzkoa delako edo bezero berarentzat delako. Kasu horretan, hurrengo urratsak jarrai ditzakezu:</p>
+
+  <ul>
+    <li>Sortu karpeta bat ("biltegi-karpeta" bat) zure disko gogorreko kokapen egoki batean zure bezeroaren edo gaiaren itzulpen-memoriak gordetzeko.</li>
+
+    <li>Proiektu bat amaitzen duzunero, kopiatu hiru itzulpen-memoria "esportagarrietako" bat proiektuaren karpeta nagusitik biltegi-karpetara.</li>
+
+    <li>Gai beraren inguruko edo bezero berarentzako proiektu berria hasten duzunean, joan biltegi-karpetara <em>Proiektua &gt; Propietateak &gt; Editatu proiektua</em> koadroan eta hautatu huraxe itzulpen-memorien karpeta gisa.</li>
+  </ul>
+
+  <p>Gogoan izan <em>/tm</em> karpetako TMX fitxategi guztiak analizatzen direla aplikazioa abiarazten denean; beraz, TMX fitxategi guztiak erabiliz gero, OmegaT moteldu egin daiteke. Guztiz beharrezkoak direnak kentzea ere azter dezakezu (adibidez, <em>/tm</em> azpikarpetan utziz baina beren luzapena aldatuz),  behin bere edukiak zure uneko proiektuaren <em>project_save.tmx</em> fitxategira migratu ondoren.</p>
+
+  <p><a name="using_memories" id="using_memories"></a></p>
+
+  <h2>Beste itzulpen-tresna batzuek sortutako memoriak erabiltzea</h2>
+
+  <h3><a name=
+  "importing_files" id="importing_files"></a>Fitxategiak inportatzea</h3>
+
+  <p>OmegaT-k 1.1 eta 1.4b bertsioen arteko TMX fitxategiak (1. mailakoak zein 2. mailakoak) onartzen ditu. Hortaz, OmegaT-k beste tresna batzuekin sortutako itzulpen-memoriak erabili ditzake. Hala ere, OmegaT-k ez ditu <i>osorik</i> onartzen 2. mailako TMX fitxategi inportatuak (alegia, itzulpenaz gaina formatua ere gordetzen dutenak). Hortaz, parekatze lausoen kalitatea apur bat txikiagoa izango da 2. mailako TMX fitxategiak inportatu eta erabiltzean.</p>
+
+  <h3><a name=
+  "imported_files_handling" id="imported_files_handling"></a>Inportatutako fitxategiak kudeatzea</h3>
+
+  <p>OmegaT-k oso prozedura zorrotza jarraitzen du itzulpen-memorien fitxategiak (TMX fitxategiak) maneiatzen dituenean. Fitxategietako batean edozein akats aurkitzen badu, ez du kargatuko.</p>
+
+  <p>Zenbait tresnek TMX fitxategi baliogabeak sortzen dituzte zenbait kasutan. Fitxategi horiek erreferentziako itzulpen gisa erabili nahi badituzu OmegaT-n, lehenago konpondu egin beharko dituzu. Konponketa hauek oso azalekoak izan ohi dira; OmegaT-k konponketa egiteko argibideak emango dizkizu fitxategia zabaltzean ematen duen errore-mezuan. Arazoak badauzkazu, laguntza eskatu dezakezu <a href="http://groups.yahoo.com/group/OmegaT/">erabiltzaile-taldean</a>.</p>
+  <hr>
+  <a name="using_OmegaT_TM" id="using_OmegaT_TM"></a>
+
+  <h2>OmegaT-n sortutako itzulpen-memoriak beste itzulpen-tresna batzuetan erabiltzea</h2>
+
+  <p>OmegaT-k 1.4 bertsioko TMX fitxategiak (1. mailakoak zein 2. mailakoak) esportatzen ditu. 2. mailako esportazioa ez da 2. maila estandarra, baina aski da 2. mailako TMX fitxategiak onartzen dituzten itzulpen-tresnetan parekatze zuzenak sortzeko. Testu-informazioa soilik (eta ez formatu-informazioa) behar baduzu, erabili OmegaT-k sortutako 1. mailako fitxategia.</p>
+  <hr>
+  <a name="pseudo_translate" id="pseudo_translate"></a>
+  <h2>Sasiitzulpenen memoria</h2>
+  <p>Zenbait kasutan gerta daiteke itzulpenen pretratamendua edo OmegaT-k onartzen ez duen beste tratamenduren bat egin nahi izatea. Esaterako, probatarako sasiitzulpen bat egin nahi izatea.</p>
+  <p>OmegaT-k proiektuaren segmentu guztiak dituen TMX fitxategi estra bat sortzea ahalbidetzen du. TMX honetako itzulpena hurrengo motakoa izan daiteke:<ul><li>itzulpena sorburuaren berdina da (lehenetsia)</li>
+  <li>helburu-segmentua hutsik dago</li></ul>
+  <p>TMX fitxategiak zuk nahi duzun izena eduki dezake, baina ".tmx" luzapena automatikoki esleitzen zaio eskuz jartzen ez badiozu.</p>
+  <P>Sasiitzulpenaren sorrera komando-lerroko hurrengo parametroen bidez aktibatzen da:</P>
+  <code>java -jar omegat.jar <em>--pseudotranslatetmx=&lt;fitxategi-izena&gt; [pseudotranslatetype=[equal|empty]]</em></code>
+  <p>Ordezkatu &lt;fitxategi-izena&gt; sortu nahi duzun fitxategiaren izenarekin, bai bide-izen absolutua erabiliz bai erlatiboa erabiliz (azken kasuan OmegaT abiarazi zenuen direktorioan utziko du fitxategia).</p>
+  <p>Bigarren argumentua,<em>--pseudotranslatetype</em>, hautazkoa da.  Bere balioa <em>equal</em> (sorburua=helburua) edo <em>empty</em> (helburu-segmentua hutsik dago) izan daiteke, eta lehenetsia <em>equal</em> da.</p>
+  <p>Sortutako TMX fitxategia zure aukerako tresnarekin molda dezakezu. OmegaT-n erabili nahi izanez gero:<br> izenez aldatu eta <em>project_save.tmx</em> jarri, eta zure proiektuko <em>omegat</em> karpetan utzi.</p>
+  <hr>
+
+  <a name="upgrading_TM" id="upgrading_TM"></a>
+  <h2>Itzulpen-memoriak berritzea</h2>
+
+  <p>OmegaT-ren aurreko bertsioek paragrafotan soilik zatitutako segmentuak sor zitzaketen, eta ez ziren zehatzak formatu-etiketei zenbakia ematean HTML eta Open Document fitxategiak erabiltzen zirenean. OmegaT 2.0 bertsioak TMX fitxategi horiek momentuan detektatu eta berritu ditzake, parekatze lausoen kalitatea gehituz eta zure uneko itzulpena hobetuz.</p>
+
+  <p>Proiektu baten TMX-a behin bakarrik berrituko da eta forma berrituan gordeko da. TMX fitxategi zaharrak proiektua kargatzen den bakoitzean berrituko dira. Kontuan izan zenbait kasutan OmegaT 2.0 bertsioan fitxategi-iragazkietan aldaketak egiteak segmentazio guztiz desberdina sortzea eragin dezakeela. Kasu bakan horietan itzulpena eskuz berritu beharko duzu.</p>
+  <hr>
+  <table summary="just formatting"  style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a> </td>
+        <td style="text-align: center;"><a href="index.html">Orri nagusia</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
 </body>
 </html>

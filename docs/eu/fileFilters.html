@@ -1,140 +1,206 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>Fitxategi iragazkiak - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Fitxategi-iragazkiak - OmegaT 2.0 erabiltzailearen eskuliburua</title>
 </head>
 
 <body>
-	<h1>Fitxategi-iragazkiak</h1>
+  <h1>Fitxategi-iragazkiak</h1>
+  <hr>
 
-	<ul>
-		<li><a href="#filter_dialog">Fitxategi-iragazkien koadroa</a>
-			<ul>
-				<li><a href="#filter_options">Iragazkien aukerak</a></li>
-				<li><a href="#edit_dialog">Iragazkiak editatzeko koadroa</a>
-					<ul>
-						<li><a href="#source_file_name">Sorburu-fitxategiaren mota, izen-eredua</a>.</li>
-						<li><a href="#encoding">Sorburu- eta helburu-fitxategien kodeketa</a></li>
-						<li><a href="#target_file_name">Helburu-fitxategiaren izena</a>
-							<ul>
-								<li><a href="#pattern_dialog">Ereduak gehitu edo editatzeko koadroa</a></li>
-							</ul>
-						</li>
-					</ul>
-				</li>
-			</ul>
-		</li>
-	</ul>
+  <ul>
+    <li>
+      <p><a href="#filter_dialog">Fitxategi-iragazkien koadroa</a></p>
 
-	<p>OmegaT-ren ezaugarri bat oso pertsonalizagarriak diren iragazkiak dira. Iragazkien ezaugarri gehienak aldatu egin daitezke. Fitxategi-iragazkiak ondoko hauek egiteko gai dira:</p><ul>
-			<li>Fitxategi-formatu jakin batean dauden dokumentuak irakurtzea. Esaterako, testu hutseko fitxategiak.</li>
-			<li>Eduki itzulgarriak fitxategitik erauztea.</li>
-			<li>Itzulitako dokumentuen fitxategi-izenen aldaketa automatizatzea, eduki itzulgarriak bere itzulpenarekin ordeztuz.</li>
-		</ul>
-		<p>Erabiltzaile gehienek balekotzat jotzen dituzte fitxategi-iragazkietarako lehenetsitako aukerak. Zuretzat aski ez badira, ireki koadro nagusia <strong>Aukerak → Fitxategi-iragazkiak</strong> hautatuz menu nagusian.</p>
-		<p><strong>Oharra!</strong> Proiektua irekita dagoen bitartean iragazkien aukerak aldatzeak datu-galerak eragin ditzake. Iragazki-ezarpenak proiektua hasi ondoren aldatzen badituzu, proiektua birkargatu egin beharko duzu aldaketak indarrean sartzeko.</p>
+      <ul>
+        <li>
+          <p><a href="#filter_options">Iragazkien aukerak</a></p>
+        </li>
+      </ul>
+    </li>
 
-<hr>
+    <li>
+      <p><a href="#edit_dialog">Iragazkiak editatzeko koadroa</a></p>
 
+      <ul>
+        <li>
+          <p><a href="#source_file_name">Sorburu-fitxategiaren mota, izen-eredua</a>.</p>
+        </li>
 
-	<a name="filter_dialog" id="filter_dialog"></a>
-	<h1>Fitxategi-iragazkien koadroa</h1>
+        <li>
+          <p><a href="#encoding">Sorburu- eta helburu-fitxategien kodeketa</a></p>
+        </li>
 
-	<p>Koadroak erabilgarri diren fitxategi-iragazkien zerrenda ematen du. Fitxategi-motaren bat OmegaT-rekin itzuli nahi ez baduzu, iragazkia desaktibatu dezakezu iragazkiaren izenaren ondoan dagoen kontrol-laukiaren marka kenduz. Orduan, OmegaT-k ez ditu kargatuko aipatu fitxategiak, eta aldaketarik gabe kopiatuko ditu helburu-dokumentuak sortzerakoan. Gero, iragazkia berriro erabili nahi baduzu, markatu berriro kontrol-laukia.</p>
+        <li>
+          <p><a href="#target_file_name">Helburu-fitxategiaren izena</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
 
-	<p>Klikatu <strong>Lehenetsitako balioak</strong> fitxategi-iragazkiak jatorrizko balioetara berrezartzeko.</p>
+  <p>OmegaT-ren ezaugarri bat oso pertsonalizagarriak diren iragazkiak dira. Iragazkien ezaugarri gehienak aldatu egin daitezke. Fitxategi-iragazkiak ondoko hauek egiteko gai dira:</p>
 
-	<p>Iragazkiak zein fitxategi eta zein kodeketa prozesatuko duen editatzeko, hautatu iragazkia zerrendan eta klikatu <strong>Editatu</strong> botoia.</p>
-	
-	<a name="filter_options" id="filter_options"></a>
-	<h2>Iragazkien aukerak</h2>
-	
-	<p>Hiru iragazkik aukera espezifikoak dauzkate. Aukerak aldatzeko, hautatu iragazkia zerrendatik eta klikatu <strong>Aukerak</strong>. Iragazkiak eta haien aukerak ondokoak dira:</p><ul>
-			<li>Testu-fitxategiak<dl>
-					<dt>Paragrafoen segmentazioa lerro-jauzietan, lerro hutsetan edo inoiz ez</dt>
-					<dd>Esaldien segmentaziorako arauak aktibatuta badaude, testua arau aktiboak jarraituz segmentatuko da.</dd>
-				</dl>
-			</li>
-			<li>XHTML fitxategiak<dl>
-					<dt>Atributuen itzulpena</dt>
-					<dd>Hautatutako atributuak segmentu eran agertuko dira editore-lehioan.</dd>
-					<dt>Paragrafoa &lt;br&gt; etiketan</dt>
-					<dd>HTML-ko &lt;br&gt; etiketak paragrafo bat sortuko du segmentaziorako.</dd>
-				</dl>
-			</li>
-			<li>HTML eta XHTML fitxategiak<dl>
-					<dt>Kodeketa-deklarazioa</dt>
-					<dd>OmegaT-k fitxategiaren kodeketa-deklarazioa gehitu edo berridatzi dezake helburu-fitxategirako hautatu den kodeketan oinarrituz.</dd>
-					<dt>Atributuen itzulpena</dt>
-					<dd>Hautatutako atributuak segmentu eran agertuko dira editore-lehioan.</dd>
-					<dt>Paragrafoa &lt;br&gt; etiketan</dt>
-					<dd>HTML-ko &lt;br&gt; etiketak paragrafo bat sortuko du segmentaziorako.</dd>
-				</dl>
-			</li>
-		</ul>
-		<h2>Iragazkiak editatzeko koadroa</h2>
-		<p>Koadro honetan iragazkiak prozesatuko dituen fitxategi-izen ereduak ezarri ditzakezu, itzulitako fitxategien izenak pertsonalizatu ditzakezu, eta fitxategia kargatzeko eta itzulitako bere kidea gordetzeko erabiliko diren kodeketak hautatu ditzakezu.</p>
-	
-	<p>Fitxategi-iragazki baten eredua aldatzeko, aldatu fitxategia zuzenean edo klikatu <strong>Editatu</strong>.</p><p>Fitxategi-iragazkien eredu berria gehitzeko, klikatu <strong>Gehitu</strong>.</p><p>Eredu bat gehitu edo existitzen den bat editatu nahi denean, koadro bera erabiltzen da. Koadroak helburu-fitxategien izen-ereduak aldatzeko editore berezi bat dauka.</p>
+  <ul>
+    <li>
+      <p>Fitxategi-formatu jakin batean dauden dokumentuak irakurtzea. Esaterako, testu arrunteko fitxategiak.</p>
+    </li>
 
+    <li>
+      <p>Eduki itzulgarriak fitxategitik erauztea.</p>
+    </li>
 
-	<a name="source_file_name" id="source_file_name"></a>
-	<h3>Sorburu-fitxategiaren mota, izen-eredua</h3>
+    <li>
+      <p>Itzulitako dokumentuen fitxategi-izenen aldaketa automatizatzea, eduki itzulgarriak bere itzulpenarekin ordeztuz.</p>
+    </li>
+  </ul>
 
-	<p>OmegaT-k fitxategi bat aurkitzen duenean sorburu-direktorioan, iragazki egokia hautatzen saiatzen da fitxategiaren luzapena erabiliz. Zehazki, OmegaT-k iragazki bakoitzari esleitu zaizkion sorburu-fitxategien izen-ereduak fitxategiaren luzapenarekin alderatzen ditu.</p>
-	
-	<p>Esaterako, <code>*.xhtml</code> ereduak bat egingo du <code>.xhtml</code> luzapena duen edozein fitxategirekin. Iragazki egokia aurkitzen bada, huraxe erabiltzen da fitxategia prozesatzeko. Aurreko adibidean, lehenetsitako XHTML iragazkia erabiliko da <code>.xhtml</code> luzapena duten fitxategiak prozesatzeko.</p>
-	
-	<p>Fitxategi-iragazki bakoitzak kudeatu ditzakeen fitxategien izen-ereduak aldatu egin daitezke, edo berriak gehitu.</p>
+  <p>Erabiltzaile gehienek balekotzat jotzen dituzte fitxategi-iragazkietarako lehenetsitako aukerak. Zuretzat aski ez badira, ireki koadro nagusia <strong>Aukerak → Fitxategi-iragazkiak</strong> hautatuz menu nagusian. Oharra! Proiektua irekita dagoen bitartean iragazkien aukerak aldatzeak datu-galerak eragin ditzake. Iragazki-ezarpenak proiektua hasi ondoren aldatzen badituzu, proiektua birkargatu egin beharko duzu aldaketak indarrean sartzeko.</p>
 
-	<p>Sorburu-fitxategien izen-ereduek komodinak erabiltzen dituzte, <strong>Bilaketak</strong> atalean erabiltzen diren gisara.</p>
-	
-	<p>'<strong>*</strong>' karaktereak zero edo gehiago karaktere ordezkatzen ditu. '<strong>?</strong>' karaktereak karaktere bat eta soilik bat ordezkatzen du. Gainerako karaktereek beren ikurra ordezkatzen dute.</p>
-	
-	<p>Esaterako, testu-iragazkiak readme fitxategiak (<code>readme</code>, <code>read.me</code>, eta <code>readme.txt</code>) kontuan har ditzan nahi baduzu, <code>read*</code> eredua erabili beharko baduzu.</p>
-	
-	<a name="encoding" id="encoding"></a>
-	<h3>Sorburu- eta helburu-fitxategien kodeketa</h3>
-	
-	<p>Fitxategi-formatu gutxi batzuk soilik behartzen dute kodeketa edukitzera.</p>
-	
-	<p>Kodeketarik zehazten ez duten fitxategi-formatuen kasuan, beren izenarekin bat datorren luzapenerako ezarri den kodeketa erabiliko da. Esaterako, <code>.txt</code> fitxategiak sistema eragilean lehenetsitako kodeketa erabiliz kargatuko dira. Sorburu-fitxategien izen-eredu bakoitzerako, sorburuaren kodeketa aldatu egin daiteke.</p>
+  <h3><a name="filter_dialog" id="filter_dialog"></a>Fitxategi-iragazkien koadroa</h3>
 
-	<p>Fitxategi horiek edozein kodeketa erabiliz idatzi daitezke. Portaera lehenetsi gisa, fitxategia gordetzeko erabiltzen den kodeketa fitxategi bera kargatzeko erabili dena izaten da.</p>
+  <p>Koadroak erabilgarri diren fitxategi-iragazkien zerrenda ematen du. Fitxategi-motaren bat OmegaT-rekin itzuli nahi ez baduzu, iragazkia desaktibatu dezakezu iragazkiaren izenaren ondoan dagoen kontrol-laukiaren marka kenduz. Orduan, OmegaT-k ez ditu kargatuko aipatu fitxategiak, eta aldaketarik gabe kopiatuko ditu helburu-dokumentuak sortzerakoan. Gero, iragazkia berriro erabili nahi baduzu, markatu berriro kontrol-laukia. Egin klik <strong>Lehenetsitako balioak</strong> aukeran fitxategi-iragazkiak jatorrizko balioetara berrezartzeko. Iragazkiak zein fitxategi eta zein kodeketa prozesatuko duen editatzeko, hautatu iragazkia zerrendan eta egin klik Editatu botoian.</p>
 
-	<p>Sorburuko eta helburuko kodeketa eremuek konbinazio-koadroak erabiltzen dituzte OmegaT-k barne hartzen dituen kodeketa guztiak erakusteko. <strong>&lt;auto&gt;</strong>-k OmegaT-ri uzten dio kodeketa aukeratzeko ardura. Honela egiten du:</p>
+  <h3><a name="filter_options" id="filter_options"></a>Iragazkien aukerak</h3>
 
-	<ul>
-		<li>OmegaT-k sorburu-fitxategiaren kodeketa aurkitzen du, kodeketarik baldin badauka (HTML fitxategiak, XML-n oinarritutako fitxategiak).</li>
-		<li>OmegaT kodeketa bat erabiltzera behartzen da (Java-ren propietate-fitxategiak, etab.)</li>
-		<li>OmegaT-k sistema eragilearen kodeketa lehenetsia erabiltzen du testu fitxategietarako.</li>
-	</ul>
+  <p>Bost iragazkik (testu-fitxategiarenak, XHTML fitxategiarenak, HTML eta XHTML fitxategiarenak, OpenDocument/OpenOffice.org fitxategiarenak eta Microsoft Open XML fitxategiarenak) aukera espezifiko bat edo gehiago dauzkate. Aukerak aldatzeko, hautatu iragazkia zerrendatik eta egin klik <strong>Aukerak</strong> atalean. Haien aukerak hurrengoak dira:</p>
 
-	<a name="target_file_name" id="target_file_name"></a>
-	<h3>Helburu-fitxategiaren izena</h3>
+  <h4>Testu-fitxategiak</h4>
 
-	<p>Batzuetan itzulgai diren fitxategien izena automatikoki aldatu nahi izaten da, adibidez fitxategiaren izenaren ondoran hizkuntza-kode bat gehituz.</p>
+  <ul>
+    <li>
+      <p><i>Paragrafoen segmentazioa lerro-jauzietan, lerro hutsetan edo inoiz ez:</i> esaldien segmentaziorako arauak aktibatuta badaude, testua arau aktiboak jarraituz segmentatuko da.</p>
+    </li>
+  </ul>
 
-	<p>Helburu-fitxategien izen-ereduek sintaxi berezia erabiltzen dute; beraz, eremu hau editatu nahi baduzu, <strong>Editatu...</strong> klikatu eta ereduak editatzeko koadrora sartu behar duzu. Iragazkiaren lehenetsitako konfigurazioa berreskuratu nahi baduzu, klikatu <strong>Lehenetsitako balioak</strong>.</p>
+  <h4>HTML fitxategiak edo HTML eta XHTML fitxategiak</h4>
 
-	<p>Beste aukera bat, izena zuzenean helburu-fitxategiaren izenaren eremuan edo fitxategi-iragazkien koadroan aldatzea da.</p>
+  <ul>
+    <li>
+      <p><i>Kodeketa-deklarazioa:</i> OmegaT-k fitxategiaren kodeketa-deklarazioa gehitu edo berridatzi dezake helburu-fitxategirako hautatu den kodeketan oinarrituz.</p>
+    </li>
 
-	<a name="pattern_dialog" id="pattern_dialog"></a>
-	<h4>Ereduak gehitu edo editatzeko koadroa</h4>
+    <li>
+      <p><i>Atributuen itzulpena:</i> Hautatutako atributuak segmentu eran agertuko dira editore-lehioan.</p>
+    </li>
 
-	<ul>
-		<li>Lehenetsitakoa <code>${filename}</code> da -- sorburu-fitxategiaren izen osoa, luzapena barne, itzulitako fitxategiaren izena sorburu-fitxategiaren bera izan dadin.</li>
-		<li><code>${nameOnly}</code> -- sorburu-fitxategiaren izena, luzapenik gabe, txertatzea ahalbidetzen du.</li>
-		<li><code>${extension}</code> -- sorburu-fitxategiaren luzapena.</li>
-		<li><code>${targetLocale}</code> -- helburu-kodeketa lokala ("xx_YY" formakoa).</li>
-		<li><code>${targetLanguage}</code> -- helburu-hizkuntzaren eta herrialdearen kodeak batera ("XX-YY formakoa").</li>
-		<li><code>${targetLanguageCode}</code> -- helburu-hizkuntza soilik ("XX").</li>
-		<li><code>${targetCountryCode}</code> -- helburu-herrialdea soilik ("YY").</li>
-	</ul>
-	<hr>
+    <li>
+      <p><i>Paragrafoa &lt;br&gt; markan:</i> HTML-ko &lt;br&gt; etiketak paragrafo bat sortuko du segmentaziorako.</p>
+    </li>
 
+    <li>
+      <p>
+<i>Adierazpen erregularrak betetzen dituzten testuak saltatzea:</i> Adierazpen erregularrak betetzen dituen testua saltatu egingo da.</p>
+    </li>
+  </ul>
 
-	<p><a href="legalNotices.html">Legezko oharrak</a></p>
+  <h4>OpenDocument/OpenOffice.org fitxategiak</h4>
+
+  <p>Hurrengo elementuak itzul daitezke edo ez. Itzultzen badira, segmentu bereizi modura agertuko dira.</p>
+
+  <ul>
+    <li><i>Aurkibideko sarrerak</i></li>
+
+    <li>Laster-markak</li>
+
+    <li>Laster-marken erreferentziak</li>
+
+    <li>Oharrak</li>
+
+    <li>Iruzkinak</li>
+  </ul>
+
+  <h4>Microsoft-en Open XML fitxategiak</h4>
+
+  <p>Hurrengo elementuak itzul daitezke edo ez. Itzultzen badira, segmentu bereizi modura agertuko dira.</p>
+
+  <ul>
+    <li><i>Testu ezkutua (Word)</i></li>
+
+    <li><i>Iruzkinak (Word, Excel)</i></li>
+
+    <li><i>Oin-oharrak (Word)</i></li>
+
+    <li><i>Amaiera-oharrak (Word)</i></li>
+
+    <li><i>Goiburuak (Word)</i></li>
+
+    <li><i>Orri-oinak (Word)</i></li>
+
+    <li><i>Diapositiben iruzkinak (PowerPoint)</i></li>
+  </ul>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Iragazkiak editatzeko koadroa</h3>
+
+  <p>Koadro honetan iragazkiak prozesatuko dituen fitxategi-izen ereduak ezarri ditzakezu, itzulitako fitxategien izenak pertsonalizatu ditzakezu, eta fitxategia kargatzeko eta itzulitako bere kidea gordetzeko erabiliko diren kodeketak hautatu ditzakezu. Fitxategi-iragazki baten eredua aldatzeko, aldatu fitxategia zuzenean edo egin klik <strong>Editatu</strong> aukeran. Fitxategi-iragazkien eredu berria gehitzeko, egin klik <strong>Gehitu</strong> aukeran. Eredu bat gehitu edo existitzen den bat editatu nahi denean, koadro bera erabiltzen da. Koadroak helburu-fitxategien izen-ereduak aldatzeko editore berezi bat dauka.</p>
+
+  <h3><a name="source_file_name" id="source_file_name"></a>Sorburu-fitxategiaren mota, izen-eredua</h3>
+
+  <p>OmegaT-k fitxategi bat aurkitzen duenean sorburu-karpetan, iragazki egokia hautatzen saiatzen da fitxategiaren luzapena erabiliz. Zehazki, OmegaT-k iragazki bakoitzari esleitu zaizkion sorburu-fitxategien izen-ereduak fitxategiaren luzapenarekin alderatzen ditu. Esaterako, <code>*.xhtml</code> ereduak bat egingo du <code>.xhtml</code> luzapena duen edozein fitxategirekin. Iragazki egokia aurkitzen bada, huraxe erabiltzen da fitxategia prozesatzeko. Aurreko adibidean, lehenetsitako XHTML iragazkia erabiliko da <code>.xhtml</code> luzapena duten fitxategiak prozesatzeko. Fitxategi-iragazki bakoitzak kudeatu ditzakeen fitxategien izen-ereduak aldatu egin daitezke, edo berriak gehitu. Sorburu-fitxategien izen-ereduek komodinak erabiltzen dituzte, <strong>Bilaketak</strong> atalean erabiltzen diren gisara. '<strong>*</strong>' karaktereak zero edo gehiago karaktere ordezkatzen ditu. '<strong>?</strong>' karaktereak karaktere bat eta soilik bat ordezkatzen du. Gainerako karaktereek beren ikurra ordezkatzen dute. Esaterako, testu-iragazkiak readme fitxategiak (<code>readme</code>, <code>read.me</code>, eta <code>readme.txt</code>) kontuan har ditzan nahi baduzu,  <code>read*</code> eredua erabili beharko baduzu.</p>
+
+  <h3><a name="encoding" id="encoding"></a>Sorburu- eta helburu-fitxategien kodeketa</h3>
+
+  <p>Fitxategi-formatu gutxi batzuk soilik behartzen dute kodeketa edukitzera. Kodeketarik zehazten ez duten fitxategi-formatuen kasuan, beren izenarekin bat datorren luzapenerako ezarri den kodeketa erabiliko da. Esaterako, <code>.txt</code> fitxategiak sistema eragilean lehenetsitako kodeketa erabiliz kargatuko dira. Sorburu-fitxategien izen-eredu bakoitzerako, sorburuaren kodeketa aldatu egin daiteke. Fitxategi horiek edozein kodeketa erabiliz idatzi daitezke. Portaera lehenetsi gisa, fitxategia gordetzeko erabiltzen den kodeketa fitxategi bera kargatzeko erabili dena izaten da. Sorburuko eta helburuko kodeketa eremuek konbinazio-koadroak erabiltzen dituzte OmegaT-k barne hartzen dituen kodeketa guztiak erakusteko. <strong>&lt;auto&gt;</strong>-k OmegaT-ri uzten dio kodeketa aukeratzeko ardura. Honela egiten du:</p>
+
+  <ul>
+    <li>
+      <p style="margin-bottom: 0cm">OmegaT-k sorburu-fitxategiaren kodeketa aurkitzen du, kodeketarik baldin badauka (HTML fitxategiak, XML-n oinarritutako fitxategiak).</p>
+    </li>
+
+    <li>
+      <p style="margin-bottom: 0cm">OmegaT kodeketa bat erabiltzera behartzen da (Java-ren propietate-fitxategiak, etab.)</p>
+    </li>
+
+    <li>
+      <p>OmegaT-k sistema eragilearen kodeketa lehenetsia erabiltzen du testu fitxategietarako.</p>
+    </li>
+  </ul>
+
+  <h3><a name="target_file_name" id="target_file_name"></a>Helburu-fitxategiaren izena</h3>
+
+  <p>Batzuetan itzulgai diren fitxategien izena automatikoki aldatu nahi izaten da, adibidez fitxategiaren izenaren ondoran hizkuntza-kode bat gehituz. Helburu-fitxategien izen-ereduek sintaxi berezia erabiltzen dute; beraz, eremu hau editatu nahi baduzu, egin klik <strong>Editatu...</strong> aukeran eta ereduak editatzeko koadrora sartu behar duzu. Iragazkiaren lehenetsitako konfigurazioa berreskuratu nahi baduzu, egin klik <strong>Lehenetsitako balioak</strong> aukeran. Beste aukera bat, izena zuzenean helburu-fitxategiaren izenaren eremuan edo fitxategi-iragazkien koadroan aldatzea da. Ereduak editatzeko koadroak hurrengo aukerak ditu:</p>
+
+  <ul>
+    <li>
+      <p>Lehenetsitakoa <code>${filename}</code> da -- sorburu-fitxategiaren izen osoa, luzapena barne, itzulitako fitxategiaren izena sorburu-fitxategiaren bera izan dadin.</p>
+    </li>
+
+    <li>
+      <p><code>${nameOnly}</code> -- sorburu-fitxategiaren izena, luzapenik gabe, txertatzea ahalbidetzen du.</p>
+    </li>
+
+    <li>
+      <p><code>${extension}</code> -- sorburu-fitxategiaren luzapena.</p>
+    </li>
+
+    <li>
+      <p><code>${targetLocale}</code> -- helburu-kodeketa lokala ("xx_YY" formakoa).</p>
+    </li>
+
+    <li>
+      <p><code>${targetLanguage}</code> -- helburu-hizkuntzaren eta herrialdearen kodeak batera ("XX-YY formakoa").</p>
+    </li>
+
+    <li>
+      <p><code>${targetLanguageCode}</code> -- helburu-hizkuntza soilik ("XX").</p>
+    </li>
+
+    <li>
+      <p><code>${targetCountryCode}</code> -- helburu-herrialdea soilik ("YY").</p>
+    </li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Orri nagusia</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

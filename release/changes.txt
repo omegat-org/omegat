@@ -128,6 +128,15 @@ as a repetition in Match Statistics
   http://sourceforge.net/support/tracker.php?aid=2876217 
 
 ----------------------------------------------------------------------
+ OmegaT 2.0.5 update 2
+----------------------------------------------------------------------
+2.0.5 update 2 vs. 2.0.5 update 1
+
+  Other enhancements:
+  - Basque localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
+
+
+----------------------------------------------------------------------
  OmegaT 2.0.5 update 1
 ----------------------------------------------------------------------
   7 Enhancements

@@ -1,443 +1,1199 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>OmegaT-ren menue eta lasterteklak - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>OmegaT-ren menu eta lasterteklak - OmegaT 2.0 erabiltzailearen eskuliburua</title>
 </head>
+
 <body>
+  <h2>Menu nagusia eta lasterteklak</h2>
 
-	<h1>Menu nagusia eta lasterteklak</h1>
-	
-	<ul>
-		<li><a href="#menu">Menu nagusia</a> <br>&nbsp;<table border="1" width="60%" cellpadding="3" cellspacing="0">
-			<tr bgcolor="#DDDDDD" align="center">
-				<td><a href="#ProjectMenu"><code>Proiektua</code></a></td>
-				<td><a href="#EditMenu"><code>Editatu</code></a></td>
-				<td><a href="#GoToMenu"><code>Joan</code></a></td>
-				<td><a href="#ToolsMenu"><code>Tresnak</code></a></td>
-				<td><a href="#OptionsMenu"><code>Aukerak</code></a></td>
-				<td><a href="#HelpMenu"><code>Laguntza</code></a></td>
-			</tr>
-			</table>
-		</li>
-	</ul>
-	<ul>
-		<li><a href="#shortcuts">Lasterteklak</a>
-		<ul>
-			<li><a href="#Project_management">Proiektuaren kudeaketa</a></li>
-			<li><a href="#Editing">Edizioa</a></li>
-			<li><a href="#Moving_around">Aurrera eta atzera mugitzea</a></li>
-			<li><a href="#Reference_windows">Erreferentziako leihoak</a></li>
-			<li><a href="#Other">Beste batzuk</a></li>
-		</ul>
-		</li>
-	</ul>
+  <h3><a href="#menu">Menu nagusia</a></h3>
 
-	
-	<hr>
+  <h3><a href="#shortcuts">Lasterteklak</a></h3>
 
-	<a name="menu" id="menu"></a>
-	<h1>Menu nagusia</h1>
-	
-	<p>OmegaT-ren funtzionaltasun guztiak editore-leihoaren goialdean dagoen menuan bildu dira. Funtzio gehienak <a href= "menu.html#shortcuts">lasterteklak</a> erabiliz ere eskuragarri daude. </p>
+  <ul>
+    <li>
+      <p><a href="#Project_management">Proiektuaren kudeaketa</a></p>
+    </li>
 
-	<p>Lasterteklak aktibatzeko, sakatu <strong><code>Ktrl</code></strong> eta letra bat. Zenbait lasterteklak beste tekla batzuen laguntza behar dute. Laguntza hau irakurterrazagoa izan dadin, ondoko adibideak letra larriz idatzi dira.</p>
-	
-	<p><strong><code>Ktrl</code></strong> agindua, <strong><code>Ktrl</code></strong> / <strong><code>Kontrol</code></strong> tekladun teklatua daukaten Windows, UNIX eta UNIXen antzeko sistema eragileetan erabiltzen da. Mac OS X sistemaren erabiltzaileek <strong><code>cmd+key</code></strong> tekla erabili behar dute. <strong><code>Cmd</code></strong> teklak <strong><code>command</code></strong> etiketa edo <strong>sagar</strong> marka dauka Apple teklatuetan.</p>
+    <li>
+      <p><a href="#Editing">Edizioa</a></p>
+    </li>
 
-	<p></p>
+    <li>
+      <p><a href="#Moving_around">Aurrera eta atzera mugitzea</a></p>
+    </li>
 
-		<table border="1" width="400" cellpadding="3" cellspacing="0">
-			<tr bgcolor="#DDDDDD" align="center">
-				<td><a href="#ProjectMenu"><code>Proiektua</code></a></td>
-				<td><a href="#EditMenu"><code>Editatu</code></a></td>
-				<td><a href="#GoToMenu"><code>Joan</code></a></td>
-				<td><a href="#ToolsMenu"><code>Tresnak</code></a></td>
-				<td><a href="#OptionsMenu"><code>Aukerak</code></a></td>
-				<td><a href="#HelpMenu"><code>Laguntza</code></a></td>
-			</tr>
-		</table>
-		<table border="0" cellpadding="5" cellspacing="0">
+    <li>
+      <p><a href="#Reference_windows">Erreferentziako leihoak</a></p>
+    </li>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="ProjectMenu" colspan="3">
-			<hr><a name="ProjectMenu" id="ProjectMenu"></a><h2><code>Proiektua</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td width="25%"><code>Berria...</code></td>
-			<td width="10%"></td>
-			<td>Proiektu berria sortu eta irekitzen du. Proiektua sortzeko koadroa, <a href="projectProperties.html">proiektua editatzeko koadro</a> bera da.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Ireki</code></td>
-			<td><code>&lt;Ctrl+O&gt;</code></td>
-			<td>Existitzen den proiektu bat irekitzen du.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Inportatu sorburu-fitxategiak...</code></td>
-			<td></td>
-			<td>Fitxategi hautatuak <code>/source/</code> karpeta kopiatzen ditu eta proiektua birkargatzen du fitxategi berriak kargatzeko.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Inportatu MediaWikitik...</code></td>
-			<td></td>
-			<td>MediaWiki orrietatik unitateak inportatzen ditu, sartu den URLaren arabera.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Birkargatu</code></td>
-			<td></td>
-			<td>Proiektua birkargatzen du sorburu-fitxategietan, itzulpen-memoria erantsi berrietan edo glosarioetan egon diren aldaketak kargatzeko.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Itxi</code></td>
-			<td></td>
-			<td>Itzulpena gorde eta proiektua ixten du.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Gorde</code></td>
-			<td><code>&lt;Ctrl+S&gt;</code></td>
-			<td>Proiektuaren itzulpen-memoriak sortzen ditu egindako itzulpenetik abiatuz. OmegaT-k 10 minutuan behin automatikoki gordetzen du itzulpena. Proiektutik irtetean ere itzulpena automatikoki gordetzen da.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Sortu dokumentu itzuliak</code></td>
-			<td></td>
-			<td>Helburu-dokumentuak sortzen ditu zure itzulpenean oinarrituz. Dokumentuak <code>/target/</code> karpetan gordeko dira.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Propietateak</code></td>
-			<td><code>&lt;Ctrl+E&gt;</code></td>
-			<td><a href="projectProperties.html">Proiektuaren propietateak</a> koadroa erakusten du, proiektuaren hizkuntzak eta direktorioen kokapena zehazteko.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Proiektuaren fitxategiak...</code></td>
-			<td><code>&lt;Ctrl+L&gt;</code></td>
-			<td><a href="userInterface.html#Project_Files">Proiektuaren fitxategiak</a> leihoa itxi edo irekitzen du (irekita edo itxita badago, hurrenez hurren).</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Irten</code></td>
-			<td><code>&lt;Ctrl+Q&gt;</code></td>
-			<td>Proiektua gorde eta OmegaT-tik irteten da. Proiektua eskuz gorde ez baduzu, benetan irten nahi duzun baieztatzeko eskatzen du.</td>
-		</tr>
+    <li>
+      <p><a href="#Other">Beste batzuk</a></p>
+    </li>
+  </ul>
+  <hr>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="name" colspan="3">
-			<hr><a name="EditMenu" id="EditMenu"></a><h2><code>Editatu</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-		        <td></td>
-				<td colspan="2">Aplikazio gehienetan agertzen diren hainbat agindu (kopiatu/ebaki/itsatsi) ez dira agertzen menu honetan, baina sistemaren lasterteklen bitartez erabili daitezke. Adibidea:</td>
-			</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Kopiatu</code></td>
-			<td><code>&lt;Ctrl+C&gt;</code></td>
-			<td>Testu hautatua arbelean kopiatzen du.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Ebaki</code></td>
-			<td><code>&lt;Ctrl+X&gt;</code></td>
-			<td>Testu hautatua arbelean kopiatzen du eta jatorrizko lekutik ezabatzen du.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Itsatsi</code></td>
-			<td><code>&lt;Ctrl+V&gt;</code></td>
-			<td>Testua arbeletik kurtsorea dagoen tokira kopiatzen du.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td></td>
-			<td colspan="2"><strong>Editatu menuak ondoko elementuak dauzka:</strong></td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Desegin azken ekintza</code></td>
-			<td><code>&lt;Ctrl+Z&gt;</code></td>
-			<td>Azken edizioa egin baino lehen zegoen egoerara itzultzen da. Ez du funtzionatzen aldatutako segmentua balidatu bada.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Berregin azken ekintza</code></td>
-			<td><code>&lt;Ctrl+Y&gt;</code></td>
-			<td>Azken edizioa desegin baino lehen zegoen egoerara itzultzen da. Ez du funtzionatzen aldatutako segmentua balidatu bada.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Ordezkatu parekatze honekin</code></td>
-			<td><code>&lt;Ctrl+R&gt;</code></td>
-			<td>Helburu-segmentuaren ordez, uneko parekatze hautatua jartzen du (portaera lehenetsia lehen parekatzea hautatzea da).</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Txertatu parekatzea</code></td>
-			<td><code>&lt;Ctrl+I&gt;</code></td>
-			<td>Uneko parekatze hautatua txertatzen du kurtsorea dagoen tokian. Funtzio honek ez du inoiz helburu-segmentua gainidatziko, ezta hautatua badago ere.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Ordezkatu sorburu honekin</code></td>
-			<td><code>&lt;Shift+Ctrl+R&gt;</code></td>
-			<td>Helburu-segmentuaren ordez sorburua idazten du.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Txertatu sorburua</code></td>
-			<td><code>&lt;Shift+Ctrl+I&gt;</code></td>
-			<td>Sorburua txertatzen du kurtsorea dagoen tokian.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Bilatu proiektuan...</code></td>
-			<td><code>&lt;Ctrl+F&gt;</code></td>
-			<td><a href="userInterface.html#Search_Window">Bilaketa-leiho</a> berri bat irekitzen du.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Hautatu #N parekatze lausoa</code></td>
-			<td><code>&lt;Ctrl+#N&gt;</code></td>
-			<td>(#N 1etik 5era doan zenbaki bat da) - Parekatzeen leihoan erakusten ari den N-garren parekatzea hautatzen du eta segmentuan txertatu edo hura ordezkatzen du. <a href= "userInterface.html#Fuzzy_Matches">Parekatze lausoen</a> atalak kolore bidezko kodeketa xehetasun gehiagoz deskribatzen du.</td>
-		</tr>
+  <h2><a name="menu" id="menu"></a>Menu nagusia</h2>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="GotoMenu" colspan="3">
-			<hr><a name="GoToMenu" id="GoToMenu"></a><h2><code>Joan</code></h2>
-			</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Itzuli gabeko hurrengo segmentura</code></td>
-			<td><code>&lt;Ctrl+U&gt;</code></td>
-			<td>Itzulpen-memorian baliokiderik ez daukan hurrengo segmentura mugitzen du edizio-eremua.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Hurrengo segmentura</code></td>
-			<td><code>&lt;Ctrl+N&gt;</code> edo <code>&lt;Enter&gt;</code> edo <code>&lt;Tab&gt;</code></td>
-			<td>Edizio-eremua hurrengo segmentura mugitzen du. Uneko segmentua fitxategi bateko azkena bada, hurrengo fitxategiko lehen segmentura mugitzen du.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Aurreko segmentura</code></td>
-			<td><code>&lt;Ctrl+P&gt;</code> edo <code>&lt;Ctrl+Enter&gt;</code> edo <code>&lt;Ctrl+Tab&gt;</code></td>
-			<td>Edizio-eremua aurreko segmentura mugitzen du. Aurreko fitxategiaren azken segmentura mugitzen du, uneko segmentua fitxategi bateko lehena bada.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Segmentuaren zenbakia...</code></td>
-			<td><code>&lt;Ctrl+J&gt;</code></td>
-			<td>Segmentuaren segmentu-zenbakia sartuz, segmentua irekitzen du</td>
-		</tr>
+  <p>OmegaT-ren funtzionaltasun guztiak editore-leihoaren goialdean dagoen menuan bildu dira. Funtzio gehienak <a href=
+  "#shortcuts">lasterteklak</a> erabiliz ere eskuragarri daude.  Lasterteklak aktibatzeko, sakatu <strong>Ctrl</strong> eta letra bat. Zenbait lasterteklak beste tekla batzuen laguntza behar dute. Laguntza hau irakurterrazagoa izan dadin, ondoko adibideak letra larriz idatzi dira. <strong>Ctrl</strong> agindua, <strong>Ctrl</strong> / <strong>Control</strong> tekladun teklatua daukaten Windows, UNIX eta UNIXen antzeko sistema eragileetan erabiltzen da. Mac OS X sistemaren erabiltzaileek <strong>cmd+key</strong> tekla erabili behar dute. <strong>Cmd</strong> teklak <strong>command</strong> etiketa edo <strong>sagar</strong> marka dauka Apple teklatuetan.</p>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="ToolsMenu" colspan="3">
-			<hr><a name="ToolsMenu" id="ToolsMenu"></a><h2><code>Tresnak</code></h2>
-			</td>
-		</tr>
+  <table summary="just formatting" border="1" cellpadding="3" cellspacing="0"
+  width="400">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p align="center"><a href="#ProjectMenu">Proiektua</a></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Balidatu etiketak</code></td>
-			<td><code>&lt;Ctrl+T&gt;</code></td>
-			<td>Etiketa galduak edo okerrak bilatzen ditu formatudun testuetan. Etiketa-erroreak dituzten segmentuen zerrenda bat erakusten du. <a href= "userInterface.html#Tag_Validation">Etiketak balidatzeko leihoa</a> atalak leiho horretan zer erakusten den azaltzen du eta <a href="formattedText.html">Testu formatudunarekin lanean</a> atalak zergatia azaltzen du.</td>
-		</tr>
+        <td>
+          <p align="center"><a href="#EditMenu">Editatu</a></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="OptionsMenu" colspan="3"><hr><h2><code>Aukerak</code></h2></td>
-		</tr>
+        <td>
+          <p align="center"><a href="#GoToMenu">Joan</a></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Erabili TAB aurrera joateko</code></td>
-			<td></td>
-			<td>Segmentua balidatzeko tekla <code>&lt;Tab&gt;</code> dela ezartzen du, lehenetsitako <code>&lt;Enter&gt;</code> ordez. Aukera hau karaktereak idazteko zenbait sistema txinatar, japoniar eta korearretan erabiltzen da.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Letra-tipoa</code></td>
-			<td></td>
-			<td><a href="fontSettings.html">Letra-tipoen</a> koadroa erakusten du, testua erakusteko erabiltzen den letra-tipoa aldatzeko. Ordenagailu zaharren erabiltzaileek letra-tipoa aldatu beharko lukete proiektu bat ireki baino lehen, bestela performantzia-galera jasango dute. Galera handiagoa izan ohi da G4 + Mac OS X +  Japoniera konbinazioa erabiltzen denean.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>File Filters..</code></td>
-			<td></td>
-			<td><a href="fileFilters.html">Fitxategi-iragazkien</a> koadroa erakusten du, fitxategien maneiua eta analisia konfiguratzeko.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Segmentazioa</code></td>
-			<td></td>
-			<td><a href="segmentation.html">Sorburuaren segmentaziorako</a> koadroa irekitzen du, testua nola segmentatzen den konfiguratzeko.</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td><code>Editatu portaera</code></td>
-			<td></td>
-			<td><a href="translationEditing.html">Itzulpenaren ediziorako</a> koadroa irekitzen du, itzuli gabe dauden segmentuen eremuan agertuko diren edukiak konfiguratzeko.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Berrezarri leiho nagusia</code></td>
-			<td></td>
-			<td>OmegaT-ren leiho nagusiaren osagaiak (editorea, parekatzeen bisorea eta glosarioaren bisorea) lehenetsitako egoerara leheneratzen ditu. Erabili ezaugarri hau osagai bat edo gehiago desatrakatu, mugitu edo ezkutatu baduzu eta hasieran zeuden kokapenean berrezarri nahi badituzu.</td>
-		</tr>
+        <td>
+          <p align="center"><a href="#ViewMenu">Ikusi</a></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td id="HelpMenu" colspan="3">
-			<hr><a name="HelpMenu" id="HelpMenu"></a><h2><code>Laguntza</code></h2>
-			</td>
-		</tr>
+        <td>
+          <p align="center"><a href="#ToolsMenu">Tresnak</a></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td><code>Erabiltzailearen eskuliburua...</code></td>
-			<td><code>&lt;F1&gt;</code></td>
-			<td>Eskuliburu hau erakusten duen <a href="userInterface.html#Help_Browser">Laguntza-arakatzailea</a> irekitzen du beste leiho batean.</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td><code>Honi buruz...</code></td>
-			<td></td>
-			<td>Copyright-ari, kredituei eta lizentziari buruzko informazioa erakusten du.</td>
-		</tr>
-	</table>
-	<hr>
+        <td>
+          <p align="center"><a href="#OptionsMenu">Aukerak</a></p>
+        </td>
 
-	<a name="shortcuts"></a>
-	<h1>Lasterteklak</h1>
-	
-	<p>Ondoren, leiho nagusian erabili daitezkeen lasterteklak azalduko dira. Aurreko planoan beste leiho bat badago, klikatu leiho nagusia aurreko planora ekartzeko edo sakatu <strong><code>Esc</code></strong> leihoa ixteko.</p>
+        <td>
+          <p align="center"><a href="#HelpMenu">Laguntza</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-	<p>Lasterteklak aktibatzeko, sakatu <strong><code>Ktrl</code></strong> eta letra bat. Zenbait lasterteklak beste tekla batzuen laguntza behar dute. Laguntza hau irakurterrazagoa izan dadin, ondoko adibideak letra larriz idatzi dira.</p>
-	
-	<p><strong><code>Ktrl</code></strong> agindua, <strong><code>Ktrl</code></strong> / <strong><code>Kontrol</code></strong> tekladun teklatua daukaten Windows, UNIX eta UNIXen antzeko sistema eragileetan erabiltzen da. Mac OS X sistemaren erabiltzaileek <strong><code>cmd+key</code></strong> tekla erabili behar dute. <strong><code>Cmd</code></strong> teklak <strong><code>command</code></strong> etiketa edo <strong>sagar</strong> marka dauka Apple teklatuetan.</p>
+  <table summary="just formatting" border="0" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
 
-	<ul>
-		<li><a href="#Project_management">Proiektuaren kudeaketa</a></li>
-		<li><a href="#Editing">Edizioa</a></li>
-		<li><a href="#Moving_around">Aurrera eta atzera mugitzea</a></li>
-		<li><a href="#Reference_windows">Erreferentziako leihoak</a></li>
-		<li><a href="#Other">Beste batzuk</a></li>
-	</ul>
+          <h3><a name="ProjectMenu" id="ProjectMenu"></a>Proiektua</h3>
+        </td>
+      </tr>
 
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Berria...</code></p>
+        </td>
 
-	<table border="0" cellpadding="3" cellspacing="0">
+        <td width="17%"></td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Project_management" id="Project_management"></a><h2>Proiektuaren kudeaketa</h2>
-			</td>
-		</tr>
+        <td>
+          <p>Proiektu berria sortu eta irekitzen du. Proiektua sortzeko koadroa, <a href="projectProperties.html">proiektua editatzeko koadro</a> bera da.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Ireki proiektua</td>
-			<td><code>&lt;Ctrl+O&gt;</code></td>
-			<td>Existitzen den proiektu bat irekitzeko koadroa erakusten du</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td>Gorde</td>
-			<td><code>&lt;Ctrl+S&gt;</code></td>
-			<td>Uneko lana gordetzen du proiektuaren /omegat/ karpetan dagoen project_save.tmx fitxategian</td>
-		</tr>
-		<tr bgcolor="#DDDDDD">
-			<td>Proiektuaren propietateak</td>
-			<td><code>&lt;Ctrl+E&gt;</code></td>
-			<td>Proiektuaren ezarpenak erakutsi eta aldatzea ahalbidetzen du</td>
-		</tr>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Ireki</code></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Editing" id="Editing"></a><h2>Edizioa</h2>
-			</td>
-		</tr>
+        <td width="17%">
+          <p><code>Ctrl+O</code></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Desegin azken ekintza</td>
-			<td><code>&lt;Ctrl+Z&gt;</code></td>
-			<td>Azken edizio-ekintzak desegiten ditu uneko helburu-segmentuan</td>
-		</tr>
+        <td>
+          <p>Existitzen den proiektu bat irekitzen du.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Berregin azken ekintza</td>
-			<td><code>&lt;Ctrl+Y&gt;</code></td>
-			<td>Desegin diren azken edizio-ekintzak berregiten ditu uneko helburu-segmentuan</td>
-		</tr>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Inportatu sorburu-fitxategiak...</code></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Hautatu #N parekatzea</td>
-			<td><code>&lt;Ctrl+#N&gt;</code></td>
-			<td>#N 1etik 5era arteko zenbaki bat da. Parekatzeen leihoan erakusten ari den N-garren parekatzea hautatzen du (portaera lehenetsia lehen parekatzea hautatzea da)</td>
-		</tr>
+        <td width="17%"></td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Ordezkatu parekatze honekin</td>
-			<td><code>&lt;Ctrl+R&gt;</code></td>
-			<td>Uneko helburu-segmentuaren ordez, parekatze hautatua jartzen du (portaera lehenetsia lehen parekatzea hautatzea da)</td>
-		</tr>
+        <td>
+          <p>Fitxategi hautatuak <code>/source/</code> karpeta kopiatzen ditu eta proiektua birkargatzen du fitxategi berriak kargatzeko.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Txertatu parekatzea</td>
-			<td><code>&lt;Ctrl+I&gt;</code></td>
-			<td>Uneko helburu-segmentuan kurtsorea dagoen tokian parekatze hautatua txertatzen du (portaera lehenetsia lehen parekatzea txertatzea da)</td>
-		</tr>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Inportatu MediaWikitik...</code></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Ordezkatu sorburuarekin</td>
-			<td><code>&lt;Ctrl+Shift+R&gt;</code></td>
-			<td>Uneko helburu-segmentuaren ordez, sorburu-testuaren edukiak jartzen ditu</td>
-		</tr>
+        <td width="17%"></td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Txertatu sorburua</td>
-			<td><code>&lt;Ctrl+Shift+I&gt;</code></td>
-			<td>Uneko helburu-segmentuan kurtsorea dagoen tokian sorburu-testuaren edukiak txertatzen ditu</td>
-		</tr>
+        <td>
+          <p>MediaWiki orrietatik unitateak inportatzen ditu, sartu den URLaren arabera.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Bilatu proiektuan</td>
-			<td><code>&lt;Ctrl+F&gt;</code></td>
-			<td>Proiektuan bilaketak egiteko koadro bat erakusten du</td>
-		</tr>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Birkargatu</code></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Moving_around" id="Moving_around"></a><h2>Aurrera eta atzera mugitzea</h2>
-			</td>
-		</tr>
+        <td width="17%"><code>F5</code></td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Itzuli gabeko hurrengo segmentura</td>
-			<td><code>&lt;Ctrl+U&gt;</code></td>
-			<td>Edizio-eremua proiektuaren itzulpen-memorian erregistratu ez den hurrengo segmentura mugitzen du</td>
-		</tr>
+        <td>
+          <p>Proiektua birkargatzen du sorburu-fitxategietan, itzulpen-memoria erantsi berrietan edo glosarioetan egon diren aldaketak kargatzeko.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Hurrengo segmentura</td>
-			<td><code>&lt;Ctrl+N&gt;<br> Sakatu Return</code></td>
-			<td>Edizio-eremua hurrengo segmentura mugitzen du</td>
-		</tr>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Itxi</code></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Aurreko segmentura</td>
-			<td><code>&lt;Ctrl+P&gt;</code></td>
-			<td>Edizio-eremua aurreko segmentura mugitzen du</td>
-		</tr>
-		<tr bgcolor="#FFFFFF">
-			<td>Segmentuaren zenbakia...</td>
-			<td><code>&lt;Ctrl+J&gt;</code></td>
-			<td>hurrengo segmentura mugitzen da</td>
-		</tr>
+        <td width="17%"><code>Ctrl+Shift+W</code></td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Reference_windows" id="Reference_windows"></a><h2>Erreferentziako leihoak</h2>
-			</td>
-		</tr>
+        <td>
+          <p>Itzulpena gorde eta proiektua ixten du.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Proiektuaren fitxategien zerrenda</td>
-			<td><code>&lt;Ctrl+L&gt;</code></td>
-			<td>Proiektuaren fitxategien zerrenda erakusten du</td>
-		</tr>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Gorde</code></p>
+        </td>
 
-		<tr bgcolor="#FFFFFF">
-			<td colspan="3">
-			<hr><a name="Other" id="Other"></a><h2>Beste batzuk</h2>
-			</td>
-		</tr>
+        <td width="17%">
+          <p><code>Ctrl+S</code></p>
+        </td>
 
-		<tr bgcolor="#DDDDDD">
-			<td>Balidatu etiketak</td>
-			<td><code>&lt;Ctrl+T&gt;</code></td>
-			<td>Sorburu-testuan dauden etiketa guztiak helburu-testuan agertzen direla egiaztatzen du</td>
-		</tr>
+        <td>
+          <p>Proiektuaren itzulpen-memoriak sortzen ditu egindako itzulpenetik abiatuz. OmegaT-k 10 minutuan behin automatikoki gordetzen du itzulpena. Proiektutik irtetean ere itzulpena automatikoki gordetzen da.</p>
+        </td>
+      </tr>
 
-		<tr bgcolor="#FFFFFF">
-			<td>Laguntza-fitxategiak</td>
-			<td><code>&lt;F1&gt;</code></td>
-			<td>OmegaT-ren laguntza-fitxategiak erakusten ditu beste leiho batean</td>
-		</tr>
-	</table>
-	<hr>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Sortu dokumentu itzuliak</code></p>
+        </td>
 
-	<p><a href="legalNotices.html">Legezko oharrak</a></p>
+        <td width="17%"><code>Ctrl+D</code></td>
+
+        <td>
+          <p>Helburu-dokumentuak sortzen ditu zure itzulpenean oinarrituz. Dokumentuak <code>/target/</code> karpetan gordeko dira.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Propietateak</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p><a href="projectProperties.html">Proiektuaren propietateak</a> koadroa erakusten du, proiektuaren hizkuntzak eta direktorioen kokapena zehazteko.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Proiektuaren fitxategiak...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p><a href="userInterface.html#Project_Files">Proiektuaren fitxategiak</a> leihoa itxi edo irekitzen du (irekita edo itxita badago, hurrenez hurren).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Irten</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Q</code></p>
+        </td>
+
+        <td>
+          <p>Proiektua gorde eta OmegaT-tik irteten da. Proiektua eskuz gorde ez baduzu, benetan irten nahi duzun baieztatzeko eskatzen du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="EditMenu" id="EditMenu"></a>Editatu</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>Oharra: Aplikazio gehienetan agertzen diren hainbat agindu (kopiatu/ebaki/itsatsi) ez dira agertzen menu honetan, baina sistemaren lasterteklen bitartez erabili daitezke. Adibidea:</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Kopiatu</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Testu hautatua arbelean kopiatzen du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Ebaki</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+X</code></p>
+        </td>
+
+        <td>
+          <p>Testu hautatua arbelean kopiatzen du eta jatorrizko lekutik ezabatzen du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Itsatsi</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+V</code></p>
+        </td>
+
+        <td>
+          <p>Testua arbeletik kurtsorea dagoen tokira kopiatzen du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p><strong>Editatu menuak ondoko elementuak dauzka:</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Desegin azken ekintza</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Azken edizioa egin baino lehen zegoen egoerara itzultzen da. Ez du funtzionatzen aldatutako segmentua balidatu bada.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Berregin azken ekintza</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Azken edizioa desegin baino lehen zegoen egoerara itzultzen da. Ez du funtzionatzen aldatutako segmentua balidatu bada.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Ordezkatu parekatze honekin</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Helburu-segmentuaren ordez, uneko parekatze hautatua jartzen du (portaera lehenetsia lehen parekatzea hautatzea da).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Txertatu parekatzea</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Uneko parekatze hautatua txertatzen du kurtsorea dagoen tokian. Funtzio honek helburu-segmentua gainidatziko du hautatua badago.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Ordezkatu itzulpen automatikoarekin</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Helburu-segmentuaren ordez Google Translate-ren itzulpena jartzen du. Ez du funtzionatzen Google Translate aktibaturik ez badago (ikus Aukerak azpian).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Ordezkatu sorburuarekin</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Helburu-segmentuaren ordez sorburua idazten du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Txertatu sorburua<br></code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Sorburua txertatzen du kurtsorea dagoen tokian.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Esportatu hautapena</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Uneko hautapena testu-fitxategi batera esportatzen du Hautapenik ez badago, uneko sorburua idazten da fitxategian. Erabiltzailea OmegaT-tik irteten denean, fitxategia ez da husten, arbelaren portaera normalarekin koherentea izateko. Esportatutako edukia <span style=
+          "font-style: italic;">selection.txt</span>m izeneko fitxategi batean gordetzen da, erabiltzailearen hobespenen karpetan (ikus&nbsp;<a href=
+          "filesAndDirectories.html#user" target="_blank">fitxategiak eta direktorioak</a>).&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Bilatu proiektuan...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p><a href="userInterface.html#Search_Window">Bilaketa-leiho</a> berri bat irekitzen du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Aldatu maiuskulak/minuskulak...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift + F3</code></p>
+
+          <p><code>(ikus testua)</code></p>
+        </td>
+
+        <td>
+          <p>Helburu-segmentuan nabarmendutako testuaren maiuskulak/minuskulak aldatzen ditu hautatzen den modura (minuskulak, maiuskulak edo izenburua). Erabili Shift + F3 hiru aukeren artean txandaka mugitzeko. Ez badago testurik hautatuta, OmegaT-k kurtsorearen eskuinaldean dagoen hitza hautatzen du automatikoki.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Hautatu #N parekatze lausoa</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>(#N 1etik 5era doan zenbaki bat da) - Parekatzeen leihoan erakusten ari den N-garren parekatzea hautatzen du eta segmentuan txertatu edo hura ordezkatzen du. <a href="userInterface.html#Fuzzy_Matches">Parekatze lausoen</a> atalak kolore bidezko kodeketa xehetasun gehiagoz deskribatzen du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="GoToMenu" id="GoToMenu"></a>Joan</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Itzuli gabeko hurrengo segmentura</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Itzulpen-memorian baliokiderik ez daukan hurrengo segmentura mugitzen du edizio-eremua.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Hurrengo segmentura</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+N</code> edo <code>Enter</code> edo <code>Tab</code></p>
+        </td>
+
+        <td>
+          <p>Edizio-eremua hurrengo segmentura mugitzen du. Uneko segmentua fitxategi bateko azkena bada, hurrengo fitxategiko lehen segmentura mugitzen du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Aurreko segmentura</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+P</code> edo <code>Ctrl+Enter</code> edo <code>Ctrl+Tab</code></p>
+        </td>
+
+        <td>
+          <p>Edizio-eremua aurreko segmentura mugitzen du. Aurreko fitxategiaren azken segmentura mugitzen du, uneko segmentua fitxategi bateko lehena bada.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Segmentuaren zenbakia...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Segmentuaren segmentu-zenbakia sartuz, segmentua irekitzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Aurrera historian...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT-k aurretik aktiboak ziren segmentuak gogoratzen ditu. Komando honekin segmentu aktiboen zerrendan aurrera egin dezakezu, atzerantz mugitu bazara "Atzera historian..." komandoarekin.&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Atzera historian...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Komando honekin segmentu aktiboen historian atzera mugi zaitezke, eta ondoren uneko segmentura itzul zaitezke.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ViewMenu" id="ViewMenu"></a>Ikusi</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Markatu itzulitako segmentuak</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Aktibatuta badago, itzulitako segmentuak horiz markatuko dira.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Markatu itzuli gabeko segmentuak</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Aktibatuta badago, itzuli gabeko segmentuak morez markatuko dira.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Erakutsi sorburu-segmentuak</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Aktibatuta badago, sorburu-segmentuak berdez markatuta erakutsiko dira. Aktibatuta ez badago, sorburu-segmentuak ez dira erakutsiko.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ToolsMenu" id="ToolsMenu"></a>Tresnak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Balidatu etiketak</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Etiketa galduak edo okerrak bilatzen ditu formatudun testuetan. Etiketa-erroreak dituzten segmentuen zerrenda bat erakusten du. <a href=
+          "userInterface.html#Tag_Validation">Etiketak balidatzeko leihoa</a> atalak leiho horretan zer erakusten den azaltzen du eta <a href="formattedText.html">Testu formatudunarekin lanean</a> atalak zergatia azaltzen du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="OptionsMenu" id="OptionsMenu"></a>Aukerak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Erabili TAB aurrera joateko</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Segmentua balidatzeko tekla <code>&lt;Tab&gt;</code> dela ezartzen du, lehenetsitako <code>&lt;Enter&gt;</code> ordez. Aukera hau karaktereak idazteko zenbait sistema txinatar, japoniar eta korearretan erabiltzen da.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Baieztatu beti irteera</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Programak galdetu egingo dizu beti proiektua itxi aurretik.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td><code>Google Translate</code></td>
+
+        <td></td>
+
+        <td>
+          <p><a href="GoogleTranslate.html">Google Translate</a> aktiboa/ez aktiboa. Aktibo dagoenean, <code>Ctrl+M</code> aukerak Google Translate-ren iradokizuna txartatuko du segmentu aktiboaren helburuan. Iradokizuna segmentuan txertatu baino lehen, Google Translate panelean errebisa daiteke.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Letra-tipoa</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p><a href="fontSettings.html">Letra-tipoen</a> koadroa erakusten du, testua erakusteko erabiltzen den letra-tipoa aldatzeko. Ordenagailu zaharretan OmegaT-ren leihoen tamaina aldatzea oso motela bada, letra-tipoa alda dezakezu ea eragiketa hori azkartzen den.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Fitxategi-iragazkiak...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p><a href="fileFilters.html">Fitxategi-iragazkien</a> koadroa erakusten du, fitxategien maneiua eta analisia konfiguratzeko.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Segmentazioa...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p><a href="segmentation.html">Sorburuaren segmentaziorako</a> koadroa irekitzen du, testua nola segmentatzen den konfiguratzeko.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Ortografia-egiaztatzailea...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p><a href="spellchecker.html">Ortografia-egiaztatzailearen konfiguraziorako</a> leihoa erakusten du, egiaztatzailea instalatu, konfiguratu eta aktibatzeko.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Editatu portaera...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p><a href="translationEditing.html">Itzulpenaren ediziorako</a> koadroa erakusten du.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Berrezarri leiho nagusia</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>OmegaT-ren leiho nagusiaren osagaiak (editorea, parekatzeen bisorea, glosarioaren eta hiztegien bisoreak eta Google Translate-ren panela) lehenetsitako egoerara leheneratzen ditu. Erabili ezaugarri hau osagai bat edo gehiago desatrakatu, mugitu edo ezkutatu baduzu eta hasieran zeuden kokapenean berrezarri nahi badituzu. Erabili ezazu baita OmegaT-ren bertsioa aldatu baduzu eta arazoak badituzu leihoekin, esaterako zenbait leiho ez direla agertzen.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="HelpMenu" id="HelpMenu"></a>Laguntza</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Erabiltzailearen eskuliburua...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Eskuliburu hau erakusten duen <a href="userInterface.html#Help_Browser">Laguntza-arakatzailea</a> irekitzen du beste leiho batean.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Honi buruz...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Copyright-ari, kredituei eta lizentziari buruzko informazioa erakusten du.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="shortcuts" id="shortcuts"></a>Lasterteklak</h2>
+
+  <p>Ondoren, leiho nagusian erabili daitezkeen lasterteklak azalduko dira. Aurreko planoan beste leiho bat badago, egin klik leiho nagusian aurreko planora ekartzeko edo sakatu <code><strong>Esc</strong></code> leihoa ixteko.</p>
+
+  <p>Lasterteklak aktibatzeko, sakatu <code><strong>Ctrl</strong></code> eta letra bat. Zenbait lasterteklak beste tekla batzuen laguntza behar dute. Laguntza hau irakurterrazagoa izan dadin, ondoko adibideak letra larriz idatzi dira.</p>
+
+  <p><strong><code>Ctrl</code></strong> agindua, <strong><code>Ctrl</code></strong> / <code><strong>Control</strong></code> tekladun teklatua daukaten Windows, UNIX eta UNIXen antzeko sistema eragileetan erabiltzen da. Mac OS X sistemaren erabiltzaileek <code><strong>cmd+key</strong></code> tekla erabili behar dute. <code><strong>Cmd</strong></code> teklak <code><strong>command</strong></code> etiketa edo <strong>apple</strong> marka dauka Apple teklatuetan.</p>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">Proiektuaren kudeaketa</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">Edizioa</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">Aurrera eta atzera mugitzea</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">Erreferentziako leihoak</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">Beste batzuk</a></p>
+    </li>
+  </ul>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Project_management" id="Project_management"></a>Proiektuaren kudeaketa</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Ireki proiektua</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>Existitzen den proiektu bat irekitzeko koadroa erakusten du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Gorde</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Uneko lana gordetzen du proiektuaren /omegat/ karpetan dagoen project_save.tmx fitxategian</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Itxi proiektua</p>
+        </td>
+
+        <td>
+          <p><code>Shift+Ctrl+W</code></p>
+        </td>
+
+        <td>
+          <p>Uneko proiektua ixten du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Sortu dokumentu itzuliak</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+D</code></p>
+        </td>
+
+        <td>
+          <p>Dokumentu itzuliak sortzen ditu proiektuaren helburu-karpetan</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Proiektuaren propietateak</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Proiektuaren ezarpenak erakutsi eta aldatzea ahalbidetzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Editing" id="Editing"></a>Edizioa</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Desegin azken ekintza</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Azken edizio-ekintzak desegiten ditu uneko helburu-segmentuan</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Berregin azken ekintza</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Desegin diren azken edizio-ekintzak berregiten ditu uneko helburu-segmentuan</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Select match #N</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>#N 1etik 5era arteko zenbaki bat da. Parekatzeen leihoan erakusten ari den N-garren parekatzea hautatzen du (portaera lehenetsia lehen parekatzea hautatzea da)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Ordezkatu parekatze honekin</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Uneko helburu-segmentuaren ordez, parekatze hautatua jartzen du (portaera lehenetsia lehen parekatzea hautatzea da)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Txertatu parekatzea</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Uneko helburu-segmentuan kurtsorea dagoen tokian parekatze hautatua txertatzen du (portaera lehenetsia lehen parekatzea txertatzea da)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Ordezkatu sorburuarekin</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Uneko helburu-segmentuaren ordez, sorburu-testuaren edukiak jartzen ditu</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Txertatu sorburua</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Uneko helburu-segmentuan kurtsorea dagoen tokian sorburu-testuaren edukiak txertatzen ditu</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Bilatu proiektuan</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Proiektuan bilaketak egiteko koadro bat erakusten du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>Ordezkatu itzulpen automatikoarekin</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Helburu-segmentuaren ordez Google Translate-ren itzulpena jartzen du. Ez du funtzionatzen Google Translate aktibaturik ez badago (ikus Aukerak &gt; Google Translate).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Moving_around" id="Moving_around"></a>Aurrera eta atzera mugitzea</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Itzuli gabeko hurrengo segmentura</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Edizio-eremua proiektuaren itzulpen-memorian erregistratu ez den hurrengo segmentura mugitzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Hurrengo segmentura</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+N<br> Enter edo Return&nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Edizio-eremua hurrengo segmentura mugitzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Aurreko segmentura</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+P</code></p>
+        </td>
+
+        <td>
+          <p>Edizio-eremua aurreko segmentura mugitzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Segmentuaren zenbakia...</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Hurrengo segmentura mugitzen da</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Atzera historian...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Segmentu bat atzera mugitzen da historian.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Aurrera historian...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>Segmentu bat aurrera mugitzen da historian.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Reference_windows" id="Reference_windows"></a>Erreferentziako leihoak</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Proiektuaren fitxategien zerrenda</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Proiektuaren fitxategien zerrenda erakusten du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Other" id="Other"></a>Beste batzuk</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Balidatu etiketak</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p><a href="userInterface.html#Tag_Validation">Etiketen balidaziorako leihoa</a> irekitzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Esportatu hautapena</p>
+        </td>
+
+        <td>
+          <p><code>Shift+</code><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Uneko hautapena edo uneko sorburua, hautapenik ez badago, esportatzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Bilatu proiektuan&nbsp;&nbsp; &nbsp;</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F&nbsp;&nbsp; &nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Bilaketa-leiho berri bat irekitzen du</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Laguntza-fitxategiak</p>
+        </td>
+
+        <td>
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT-ren laguntza-fitxategiak erakusten ditu beste leiho batean</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Orri nagusia</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

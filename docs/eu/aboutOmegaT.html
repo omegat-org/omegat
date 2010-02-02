@@ -1,51 +1,43 @@
 <html>
 <head>
-	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<title>OmegaT-ri buruz - OmegaT 1.7.3 erabiltzailearen eskuliburua</title>
+  <link type="text/css" href="./OmegaT.css" rel="stylesheet">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>OmegaT-ri buruz - OmegaT 2.0 erabiltzailearen eskuliburua</title>
 </head>
 <body>
-
-	<h1>OmegaT-ri buruz</h1>
-
-	<ul>
-		<li><a href="#tm">Itzulpen-memoria</a></li>
-		<li><a href="#glossary">Terminologiaren kudeaketa</a></li>
-		<li><a href="#process">Itzulpen prozesua</a></li>
-	</ul>
-	
-	<p>OmegaT Ordenagailuz Lagundutako Itzulpenak egiteko tresna plataforma anitza da.</p>
-
+<table border="0"  cellpadding="4" cellspacing="0" summary="just formatting"
+ frame="below" rules="none" width="100%">
+  <col width="128*"> <col width="128*"> <tbody>
+    <tr valign="top">
+    <td align="left"> 
+      <img src="images/OmegaT_icon.png" name="grafika1"
+alt="OmegaT-ren logoa">
+      </td>
+      <td align="left">
+      <h1>OmegaT-ri buruz</h1>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>OmegaT Ordenagailuz Lagundutako Itzulpenak egiteko tresna plataforma anitza da. Hurrengo ezaugarriak nabarmen daitezke:</p>
+<h3><a name="tm"></a>Itzulpen-memoria</h3>
+<p>OmegaT-k itzulgai den testuaren memoria bat gordetzen du itzulpen-memoria deitutako fitxategietan. Aldi berean, aurretik egindako beste itzulpen batzuen memoriak erabil ditzake erreferentzia gisa. Itzulpen-memoriak oso erabilgarriak izan daitezke itzuli beharreko testuak antzeko segmentuak dituzten errepikapen asko baldin baditu. OmegaT-k itzulpen-memoriak erabiltzen ditu aurretik egindako itzulpenak gogoratzeko, eta lantzen ari zaren testurako itzulpenik probableenak erakusten dizkizu.</p>
+<p>Aurretiaz itzulita dagoen dokumentu bat eguneratu behar denean ere, itzulpen-memoriak oso erabilgarriak dira. Aldatu gabeko esaldiak itzulitzat hartuko dira, eta eguneratutako esaldietan esaldi beraren bertsio zaharrago baten itzulpena erakutsiko da itzulpen probable gisa. Honi esker, jatorrizko dokumentuan egindako aldaketak modu errazagoan maneiatuko dira. Aurretiaz sortutako itzulpen-memoriak erabiltzen badituzu, adibidez itzulpen-agentziak edo zure bezeroak emandakoak, OmegaT-k erreferentzia gisa erabili ahal izango ditu.</p>
+<p>OmegaT-k TMX fitxategi-formatu estandarra erabiltzen du itzulpen-memoriak gorde eta atzitzeko; horri esker, zure itzulpenak formatu hau onartzen duten beste OLI aplikazio batzuekin partekatu ahal izango duzu.</p>
+<h3><a name="glossary"></a>Terminologiaren kudeaketa</h3>
+<p>Terminologiaren kudeaketak garrantzi berezia du itzulpenen koherentziari eusteko. OmegaT-k hitz bakanak edo esaldi laburrak gorde ditzaketen glosarioak erabiltzen ditu, alegia, eremu berezi baterako hiztegi elebidunen antzekoak. OmegaT-k uneko segmentuan ageri diren hitzen itzulpena erakusten du.</p>
+<h3><a name="process"></a>Itzulpen-prozesua</h3>
+<p>Itzulpen-lanak fitxategi bakarrekoak izan daitezke, baina baita azpidirektorioetan sakabanatuta dauden formatu askotako hainbat fitxategi dituen direktorio batenak ere. OmegaT-ri jakinarazten zaionean fitxategi horiek itzuli behar direla, OmegaT-k onartutako fitxategiak bilatzen ditu fitxategiak iragazteko dituen arauak jarraituz, testua diren zatiak bereizten ditu, testu-talde handienak zatitzen ditu segmentazio-arauak jarraituz, eta segmentuak banaka erakusten ditu. Une horretan, itzulpenari ekin ahal zaio. OmegaT-k zure itzulpena memorian gordeko du eta itzulpen-hautagaiak proposatuko dizkizu memorian gordeta dauden segmentuen antzekoak diren segmentuetarako. Itzulpena egin ondoren fitxategiek zein itxura izango duten ikusi nahi baduzu, itzulitako fitxategiak sortu ditzakezu, aplikazio egokian ireki eta itzulpenaren itxura ikusteko.</p>
 <hr>
-
-	<a name="tm" id="tm"></a>
-	<h2>Itzulpen-memoria</h2>
-
-	<p>OmegaT-k itzulgai den testuaren memoria bat gordetzen du eta, aldi berean, aurretik egindako beste itzulpen batzuen memoriak erabili ditzake erreferentzia gisa.</p>
-
-	<p>Itzulpen-memoriak oso erabilgarriak izan daitezke itzuli beharreko testuak antzeko segmentuak dituzten errepikapen asko baldin baditu. OmegaT-k itzulpen-memoriak erabiltzen ditu aurretik egindako itzulpenak gogoratzeko, eta lantzen ari zaren testurako itzulpenik probableenak erakusten dizkizu.</p>
-
-	<p>Aurretiaz itzulita dagoen dokumentu bat eguneratu behar denean ere, itzulpen-memoriak oso erabilgarriak dira. Aldatu gabeko esaldiak itzulitzat hartuko dira, eta eguneratutako esaldietan esaldi beraren bertsio zaharrago baten itzulpena erakutsiko da itzulpen probable gisa. Honi esker, jatorrizko dokumentuan egindako aldaketak modu errazagoan maneiatuko dira.</p>
-
-	<p>Aurretiaz sortutako itzulpen-memoriak erabiltzen badituzu, adibidez itzulpen-agentziak edo zure bezeroak emandakoak, OmegaT-k erreferentzia gisa erabili ahal izango ditu.</p>
-
-	<a name="glossary" id="glossary"></a>
-	<h2>Terminologiaren kudeaketa</h2>
-
-	<p>Terminologiaren kudeaketak garrantzi berezia du itzulpenen koherentziari eusteko. OmegaT-k hitz bakanak edo esaldi laburrak gorde ditzaketen glosarioak erabiltzen ditu, alegia, eremu berezi baterako hiztegi elebidunen antzekoak. OmegaT-k uneko segmentuan ageri diren hitzen itzulpena erakusten du.</p>
-
-	<a name="process" id="process"></a>
-	<h2>Itzulpen prozesua</h2>
-
-	<p>Itzulpen-lanak fitxategi bakarrez osaturik egon daitezke, baina baita azpidirektorioetan sakabanatutako hainbat fitxategi dituen direktorio batez ere. Fitxategiak hainbat formatu ezberdinetakoak izan daitezke.</p>
-	
-	<p>OmegaT-ri jakinarazten zaionean fitxategi horiek itzuli behar direla, OmegaT-k <a href="filesAndDirectories.html">onartutako fitxategiak</a> bilatzen ditu <a href="fileFilters.html">fitxategiak iragazteko dituen arauak</a> jarraituz, testua diren zatiak bereizten ditu, testu-talde handienak zatitzen ditu <a href="segmentation.html">segmentazio-arauak</a> jarraituz, eta segmentuak banaka erakusten ditu. Une horretan, itzulpenari ekin ahal zaio.</p>
-
-	<p>OmegaT-k zure itzulpena memorian gordeko du eta itzulpen-hautagaiak proposatuko dizkizu memorian gordeta dauden segmentuen antzekoak diren segmentuetarako.</p>
-
-	<p>Itzulpena egin ondoren fitxategiek zein itxura izango duten ikusi nahi baduzu, <a href="userInterface.html">itzulitako fitxategiak</a> sortu ditzakezu, aplikazio egokian ireki eta itzulpenaren itxura ikusteko.</p>
-	<hr>
-
-	<p><a href="legalNotices.html">Legezko oharrak</a></p>
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a> </td>
+      <td style="text-align: center;"><a href="index.html">Orri nagusia</a>
+      </td>
+      <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a> </td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>

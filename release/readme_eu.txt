@@ -1,11 +1,10 @@
-Itzulpen hau Asier Sarasua Garmendiaren lana da, copyright 2007.
+Itzulpen hau Asier Sarasua Garmendiaren lana da, copyright 2009.
 
-==============================================================================
-  OmegaT 1.7.3, Read Me fitxategia
+OmegaT 2.0, Read Me fitxategia
 
   1.  OmegaT-ri buruzko informazioa
   2.  Zer da OmegaT?
-  3.  Java & OmegaT-ri buruzko ohar orokorrak
+  3.  OmegaT-ren instalazioa
   4.  OmegaT-ri laguntzeko
   5.  OmegaT-k erroreak al dauzka? Laguntzarik behar al duzu?
   6.  Bertsioaren xehetasunak
@@ -23,7 +22,8 @@ Erabiltzaileentzako laguntza, Yahoo-ren erabiltzaile-taldean (eleanitza). Mezuak
 Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
 
-Erroreen jakinarazpenak (ingelesez), SourceForge-ko gunean:
+Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
+     http://sourceforge.net/tracker/?group_id=68187&atid=520350
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 ==============================================================================
@@ -31,29 +31,37 @@ Erroreen jakinarazpenak (ingelesez), SourceForge-ko gunean:
 
 OmegaT Ordenagailuz Lagundutako Itzulpenak edo OLI (ingelesez, CAT) motako tresna bat da. Librea da, hau da, ez da ezer ordaindu behar hura erabiltzeko, ezta modu profesionalean erabili nahi bada ere, eta hura moldatu edota birbanatzeko libre zara, erabiltzailearen lizentzia errespetatzen baduzu.
 
-OmegaT-ren ezaugarri nagusiak ondokoak dira:
-  - Java onartzen duen edozein sistema eragiletan erabili daiteke
-  - edozein TMX fitxategi baliozko erabili dezake itzulpen-erreferentzia gisa
-  - esaldien segmentazio malgua (SRX motako metodoa erabiliz)
-  - proiektuan eta erreferentziako itzulpen-memorietan egiten ditu bilaketak
-  - edozein karpetatan gordetako fitxategietan egin ditu bilaketak, fitxategiak OmegaT-k onartutakoak badira 
-  - parekatze lausoa
-  - proiektuen kudeaketa adimentsua, baita karpeten hierarkia konplexuak dituztenean ere
-  - glosarioak erabili daitezke (terminologiaren egiaztapena)
-  - dokumentazio eta tutorial argi eta zabalak
-  - lokalizazioa hainbat hizkuntzatara
+OmegaT-ren ezaugarri nagusiak hurrengoak dira:
+  - Java onartzen duen edozein sistema eragiletan erabil daiteke
+  - baliozko edozein TMX fitxategi erabil daiteke itzulpenerako erreferentzia gisa
+  - esaldien segmentazio malgua (SRX-en antzeko metodoa erabiliz)
+  - bilaketak proiektuan eta erreferentziako itzulpen-memorietan
+  - bilaketak edozein karpetatako fitxategietan (onartutako formatuetan) 
+  - parekatze lausoak
+  - proiektuen kudeaketa adimentsua, karpeten hierarkia konplexuak barne
+  - glosarioak onartzen ditu (terminologiaren egiaztapena) 
+  - kode irekiko ortografia-egiaztatzaileen erabilera automatikoa onartzen du
+  - StarDict hiztegiak onartzen ditu
+  - Google Translate itzulpengintza automatikoko zerbitzua onartzen du
+  - dokumentazio eta tutorial argi eta osoak
+  - hainbat hizkuntzatara lokalizatua.
 
-OmegaT-k ondoko formatuak onartzen ditu bere hartan:
-  - testu hutsa
+OmegaT-k hurrengo fitxategi-formatuak onartzen ditu zuzenean:
+  - testu arrunta
   - HTML eta XHTML
-  - HTML laguntza konpilatzeko fitxategiak
-  - OpenDocument / OpenOffice.org
+  - HTML Help Compiler
+  - OpenDocument/OpenOffice.org
   - Java-ren baliabide-paketeak (.properties)
-  - INI fitxategiak (edozein kodeketarekin gordetako gako=balio bikotedun fitxategiak)
+  - INI fitxategiak ('gako=balio' bikoteak edozein kodeketan kodetuta dituzten fitxategiak)
   - PO fitxategiak
   - DocBook dokumentazioko fitxategi-formatua
-  - Microsoft OpenXML fitxategiak
+  - Microsoft-en OpenXML fitxategiak
   - Okapi-ren XLIFF fitxategi elebakarrak
+  - QuarkXPress-en CopyFlowGold
+  - Azpitituluen fitxategiak (SRT)
+  - ResX
+  - Android-en baliabideak
+  - LaTeX
 
 OmegaT beste formatu batzuk ere onartzeko pertsonalizatu daiteke.
 
@@ -66,7 +74,19 @@ Erabiltzailearen eskuliburua deskargatu berri duzun paketean dago. [Laguntza] me
 ==============================================================================
  3. OmegaT-ren instalazioa
 
-3.1 Orokorra. OmegaT-k Java Runtime Environment (JRE) 1.4 edo altuagoa behar du zure sisteman instalatu ahal izateko. Orain, OmegaT-ren bertsio estandarrarekin batera, Java Runtime Environment bat banatzen da, erabiltzaileak JREa hautatu, eskuratu eta instalatu behar izan ez dezan. 
+3.1 Orokorra. OmegaT-k Java Runtime Environment (JRE) 1.5 edo altuagoa behar du zure sisteman instalatu ahal izateko. Orain, OmegaT-ren bertsio estandarrarekin batera, Java Runtime Environment bat banatzen da, erabiltzaileak JREa hautatu, eskuratu eta instalatu behar izan ez dezan. 
+
+Java dagoeneko instalatuta badaukazu, OmegaT-ren egungo bertsioa instalatzeko modurik errazena Java Web Start erabiltzea da. 
+Horretarako, deskargatu hurrengo fitxategia eta exekuta ezazu:
+
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+
+Zure ordenagailuak behar duen ingurune egokia eta aplikazioa bera instalatuko du. Geroagoko abioetan ez da beharrezkoa izango linean egotea. 
+
+Instalazioan zehar, sistema eragilearen arabera, segurtasuneko hainbat ohar jaso ditzakezu. OmegaT Java Web Start-en erabiltzeko behar den ziurtagiria "Didier Briel" izenarekin sinatuta dago jadanik. 
+Bertsio honi emango dizkiozun baimenak ("ordenagailuaren atzitze mugagabea" hitzekin adierazita etor daitekeena) bertsio lokala instalatzean ematen diren berak dira: ordenagailuaren disko gogorra atzitzea baimentzen da. OmegaT.jnlp fitxategian klik egiten den hurrengoetan eguneraketak bilatuko dira, linean bazaude, eguneraketok instalatuko dira eta ondoren OmegaT abiatuko da. 
+
+OmegaT deskargatu eta instalatzeko modu alternatiboak beherago erakusten dira. 
 
 Windows eta Linux erabiltzaileak: zuen sistemak jadanik JRE-ren bertsio egoki bat instalatuta daukala badakizue, JRE-rik gabe banatzen den OmegaT-ren bertsioa instalatu dezakezue (bertsio honen izenean "Without_JRE" jartzen du). 
 Zalantzarik baduzue, bertsio "estandarra", JRE-a duena alegia, erabili dezazuen aholkatzen dizuegu. Zuen sistemak JRE bat instalatuta eduki arren, OmegaT-ren bertsio honek ez du bestea trabatuko.
@@ -76,47 +96,33 @@ Linux erabiltzaileek: kontuan hartu OmegaT-k ez duela funtzionatuko hainbat Linu
 Mac erabiltzaileak: JRE-a jadanik instalatuta dator Mac OS X-en.
 
 Linux PowerPC sistematan: erabiltzaileek IBM-ren JRE-a deskargatu beharko dute, Sun-ek ez baitu PPC sistementzako JRE-rik eskaintzen. Kasu honetan, deskargatu JRE-a hemendik:
+
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
 
-3.2 Instalazioa. OmegaT instalatzeko, sortu OmegaT gordetzeko karpeta egoki bat (esaterako, C:\Program Files\OmegaT Windows-en edo /usr/local/lib Linux-en). Kopiatu OmegaT-ren ZIP fitxategia karpeta horretan eta destrinkotu bertan.
 
-OmegaT abiaraztea
+3.2 Instalazioa
+* Windows erabiltzaileak: Abiarazi instalazio-programa. Nahi izanez gero, instalazio-programak lasterbideak sor ditzake OmegaT abiarazteko.
+Besteak: OmegaT instalatzeko, sortu OmegaT gordetzeko karpeta egoki bat (esaterako, /usr/local/lib Linux-en). Kopiatu OmegaT-ren zip edo tar.gz fitxategia karpeta horretan eta destrinkotu bertan.
 
-3.3.1 Windows erabiltzaileak
-
+3.3 OmegaT-ren abioa
 OmegaT hainbat modutan abiarazi daiteke.
 
-OmegaT-JRE.exe fitxategian birritan klikatuz, JRE-a barne hartzen duen bertsioa erabiltzen ari bazarete, edo bestela OmegaT.exe fitxategian birritan klikatuz.
+* Windows erabiltzaileak: egin klik bi aldiz OmegaT.exe fitxategian. Zure fitxategi-kudeatzailean (Windows Explorer) OmegaT fitxategia ikus badezakezu, eta ez OmegaT.exe fitxategia, aldatu Windows-en hobespenak fitxategien luzapenak erakuts ditzan.
 
-* OmegaT.bat fitxategian birritan klikatuz. Zure fitxategi kudeatzailean (Windows Explorer) OmegaT fitxategia ikusi badezakezu, eta ez OmegaT.bat fitxategia, aldatu Windows-en hobespenak fitxategien luzapenak erakutsi ditzan.
-
-* OmegaT.bat fitxategian birritan klikatuz. Komando horrek funtzionatzeko, .jar fitxategi-motak Javari lotuta egon behar du zure sisteman.
+* OmegaT.jar fitxategian birritan klik eginez. Komando horrek funtzionatzeko, .jar fitxategi-motak Javari lotuta egon behar du zure sisteman.
 
 * Komando-lerrotik. OmegaT abiarazteko komandoa ondoko hau da:
 
-  cd <OmegaT.jar kokatuta dagoen karpeta>
+cd <OmegaT.jar kokatuta dagoen karpeta>
 
-  <Java fitxategi exekutagarriaren izena eta bidea> -jar OmegaT.jar
+<Java fitxategi exekutagarriaren izena eta bidea> -jar OmegaT.jar
 
-(Java fitxategi exekutagarria java.exe deitzen da.
+(Java fitxategi exekutagarria java.exe deitzen da Windows-en eta java Linux-en.
 Java sistema mailan instalatuta badago, ez da beharrezkoa bide osoa sartzea.)
 
-OmegaT-JRE.exe, OmegaT.exe edo OmegaT.bat fitxategietako bat mahaigainera edo hasiera menura arrastatu daiteke aplikazioa bertatik abiarazteko.
+* Windows erabiltzaileak: Instalazio-programak lasterbideak sor ditzake hasiera-menuan, mahaigainean eta abiarazte bizkorreko arean. OmegaT.exe fitxategia mahaigainera edo hasiera-menura arrastatu daiteke aplikazioa bertatik abiarazteko.
 
-3.3.2 Linux erabiltzaileak
-
-* Komando-lerrotik, exekutatu:
-
-  cd <OmegaT.jar kokatuta dagoen karpeta>
-
-  <Java fitxategi exekutagarriaren izena eta bidea> -jar OmegaT.jar
-
-(Java fitxategi exekutagarria java deitzen da. Java sistema mailan instalatuta badago, ez da beharrezkoa bide osoa sartzea.)
-
-
-3.3.2.1 Linux KDE erabiltzaileak
-
-OmegaT zuen menuari gehitzeko, egin ondoko hau:
+* Linux KDE erabiltzaileak: OmegaT zuen menuari gehitzeko, egin ondoko hau:
 
 Kontrol gunea - Mahaigaina - Panelak - Menuak - Editatu K menua - Fitxategia - Elementu berria/Berria
 
@@ -124,15 +130,13 @@ Gero, menu egoki bat hautatu ondoren, gehitu azpimenu/elementu bat Fitxategia - 
 
 "Komandoa" eremuan, erabili nabigazio-botoia OmegaT-ren abioko script-a bilatzeko, eta hautatu ezazue. 
 
-Klikatu ikono-botoian (Izena/Deskribapena/Iruzkinak eremuen eskuinaldean) - Beste ikonoak - Arakatu, eta joan OmegaT-ren /images azpikarpetara. Hautatu OmegaT.png ikonoa.
+Egin klik ikono-botoian (Izena/Deskribapena/Iruzkinak eremuen eskuinaldean) - Beste ikonoak - Arakatu, eta joan OmegaT-ren /images azpikarpetara. Hautatu OmegaT.png ikonoa.Hautatu OmegaT.png ikonoa.
 
 Azkenik, gorde aldaketak Fitxategia - Gorde aukera erabiliz.
 
-3.3.2.2 Linux GNOME erabiltzaileak
+* Linux GNOME erabiltzaileak: OmegaT zuen panelari (pantailaren goialdean dagoen barrari alegia) gehitzeko, egin ondoko hau:
 
-OmegaT zuen menuari (pantailaren goialdean dagoen barrari alegia) gehitzeko, egin ondoko hau:
-
-Eskuineko botoiarekin klikatu "Panelari gehitu - Abiarazle berezitua". "Izena" eremuan sartu "OmegaT" ; "Komandoa" eremuan, erabili arakatze-botoia OmegaT-ren abioko script-a bilatzeko. Hautatu script-a eta onartu OK sakatuz.
+Egin klik eskuineko botoiarekin "Panelari gehitu - Abiarazle berezitua". "Izena" eremuan sartu "OmegaT" ; "Komandoa" eremuan, erabili arakatze-botoia OmegaT-ren abioko script-a bilatzeko. Hautatu script-a eta onartu OK sakatuz.Hautatu script-a eta onartu OK sakatuz.
 
 ==============================================================================
  4. OmegaT proiektuan parte hartzeko
@@ -157,38 +161,55 @@ Eta hasi begiratzen OmegaT-ren munduan zer ari den gertatzen...
 
 Ondoko hauek (ordena alfabetikoan) ekarpenak egin dituzte:
 
-Kodearen garatzaileak
+Kodeari ekarpenak egin dizkiotenak:
   Zoltan Bartko
-  Didier Briel (bertsio kudeatzailea)
+  Didier Briel (release manager)
   Kim Bruning
-  Sacha Chua
+  Alex Buloichik
+  Sandra Jean Chua
+  Martin Fleurke  
+  Wildrich Fourie
   Thomas Huriaux
-  Maxym Mykhalchuk
-  Henry Pijffers
+  Fabián Mandelbaum
+  Maxym Mykhalchuk 
+  Arno Peters
+  Henry Pijffers 
   Tiago Saboga
+  Andrzej Sawuła
   Benjamin Siband
   Martin Wunderlich
 
-Beste ekarpen batzuk
+Beste ekarpen batzuk:
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary
-  Vito Smolej (dokumentazio kudeatzailea)
+  Jean-Christophe Helary (lokalizazio-kudeatzailea)
+  Vito Smolej (dokumentazio-kudeatzailea)
   Samuel Murray
-  Marc Prior (lokalizazio kudeatzailea)
-  eta beste lagun asko eta asko
+  Marc Prior 
+  eta beste hainbat eta hainbat lagun
 
 (OmegaT proiektuari ekarpen esanguratsua egin diozula uste baduzu eta zure izena hemen agertzen ez bada, mesedez hitz egin gurekin.)
 
 OmegaT-k ondoko liburutegiak erabiltzen ditu:
-  HTMLParser: Somik Raha, Derrick Oswald eta beste batzuk (LGPL lizentzia).
+
+  HTMLParser: Somik Raha, Derrick Oswald eta beste batzuk (LGPL lizentzia)
   http://sourceforge.net/projects/htmlparser
 
-  MRJ Adapter: Steve Roy (LGPL lizentzia).
+  MRJ Adapter 1.0.8: Steve Roy (LGPL lizentzia)
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework: VLSolutions (CeCILL lizentzia).
+  VLDocking Framework 2.1.4: VLSolutions (CeCILL lizentzia)
   http://www.vlsolutions.com/en/products/docking/
+
+  Hunspell: László Németh eta beste batzuk (LGPL lizentzia)
+
+  JNA: Todd Fast, Timothy Wall eta beste batzuk (LGPL lizentzia)
+
+  Swing-Layout 1.0.2 (LGPL lizentzia)
+
+  Jmyspell 2.1.4 (LGPL lizentzia)
+
+  JAXB 2.1.7 (GPLv2 + classpath salbuespena)
 
 ==============================================================================
  5.  OmegaT-k erroreak al dauzka? Laguntzarik behar al duzu?
@@ -198,7 +219,8 @@ Errore baten berri eman baino lehen, ziurtatu dokumentazioa sakonki aztertu duzu
 Egin behar duzun hurrengo gauza, beste erabiltzaile batzuekin aurkitu duzuna baieztatzea da, arazoa jada jakinarazi ez dela ziurtatzeko. Erroreak jakinarazteko orria ere SourceForge-n aurkituko duzu. Gertatu behar izango ez lukeen zerbait eragin duen sekuentzia edo gertaera bat aurkitu duzula seguru dakizunean, soilik orduan bete beharko zenuke errore-jakinarazpen bat.
 
 Errore-jakinarazpen egokiek hiru gauza behar dituzte.
-  - Urratsak errorea errepikatzeko,
+  
+- Arazoa birsortzeko,
   - Zer espero zenuen ikustea, eta
   - Zer ikusi zenuen.
 
@@ -219,4 +241,3 @@ Mesedez, ikusi 'changes.txt' fitxategia bertsio honetan zein aurrekoetan egon di
 
 
 ==============================================================================
-

@@ -44,7 +44,7 @@ current segment, or for all the (translated) segments
 Ctrl+X, Ctrl+C and Ctrl+V.
 
   - Catalan localisation updated to 2.1.1 (UI, Readme, Instant Start, documentation)
-  - Swedish localisation updated to 2.1.0 (UI, Readme, Instant Start)
+  - New Swedish localisation (2.1.0) (UI, Readme, Instant Start)
   
   Bug fixes:
 
@@ -141,7 +141,7 @@ as a repetition in Match Statistics
   - Basque localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
   - Welsh localisation updated to 2.0.5 (UI, Readme, Instant Start)
   - Catalan localisation updated to 2.0.5, backported from 2.1.1 (UI, Readme, Instant Start, documentation)
-  - Swedish localisation updated to 2.0.5, backported from 2.1.0 (UI, Readme, Instant Start)
+  - New Swedish localisation (2.0.5), backported from 2.1.0 (UI, Readme, Instant Start)
   - Czech localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
   - Hungarian localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
 

@@ -18,6 +18,9 @@ OmegaT-Filter: true
 Name: org.omegat.filters2.po.PoFilter
 OmegaT-Filter: true
 
+Name: org.omegat.filters2.rc.RcFilter
+OmegaT-Filter: true
+
 Name: org.omegat.filters2.text.bundles.ResourceBundleFilter
 OmegaT-Filter: true
 

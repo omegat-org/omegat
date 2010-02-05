@@ -32,8 +32,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import javax.swing.SwingUtilities;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
@@ -43,6 +41,7 @@ import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.LevenshteinDistance;
 import org.omegat.core.matching.NearString;
+import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Token;
@@ -53,8 +52,8 @@ import org.omegat.util.Token;
  * Since we can use stemmers to prepare tokens, we should use 3-pass comparison
  * of similarity. Similarity will be calculated in 3 steps:
  * 
- * 1. Split original segment into word-only tokens using stemmer (with stop words
- * list), then compare tokens.
+ * 1. Split original segment into word-only tokens using stemmer (with stop
+ * words list), then compare tokens.
  * 
  * 2. Split original segment into word-only tokens without stemmer, then compare
  * tokens.
@@ -65,38 +64,38 @@ import org.omegat.util.Token;
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class FindMatchesThread extends Thread {
+public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     private static final Logger LOGGER = Logger
             .getLogger(FindMatchesThread.class.getName());
-    
-    private final MatchesTextArea matcherController;
 
     /**
      * Entry which is processed currently.
      * 
-     * If entry in controller was changed, it means user has moved to another 
+     * If entry in controller was changed, it means user has moved to another
      * entry, and there is no sense to continue.
      */
     private final SourceTextEntry processedEntry;
 
     /** Result list. */
-    private List<NearString> result = new ArrayList<NearString>(OConsts.MAX_NEAR_STRINGS + 1);
-    
+    private List<NearString> result = new ArrayList<NearString>(
+            OConsts.MAX_NEAR_STRINGS + 1);
+
     private ISimilarityCalculator distance = new LevenshteinDistance();
 
     /** Tokens for original string, with and without stems. */
     private Token[] strTokensStem, strTokensNoStem;
-    
+
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
 
-    public FindMatchesThread(final MatchesTextArea matcherController, final SourceTextEntry entry) {
-        this.matcherController = matcherController;
+    public FindMatchesThread(final MatchesTextArea matcherPane,
+            final SourceTextEntry entry) {
+        super(matcherPane, entry);
         this.processedEntry = entry;
     }
 
     @Override
-    public void run() {
+    protected List<NearString> search() throws Exception {
         final List<SourceTextEntry> entries = Core.getProject().getAllEntries();
         Set<Map.Entry<String, TransEntry>> translations = Core.getProject()
                 .getTranslationsSet();
@@ -106,8 +105,7 @@ public class FindMatchesThread extends Thread {
                 .getTransMemories();
         if (entries == null || memories == null || orphaned == null) {
             // project is closed
-            clear();
-            return;
+            return result;
         }
 
         long before = 0;
@@ -120,19 +118,21 @@ public class FindMatchesThread extends Thread {
         strTokensStem = Core.getTokenizer().tokenizeWords(
                 processedEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
         if (strTokensStem.length == 0) {
-            clear();
-            return;
-            // HP: maybe also test on strTokensComplete.size(), if strTokensSize is 0
-            // HP: perhaps that would result in better number/non-word matching too
+            return result;
+            // HP: maybe also test on strTokensComplete.size(), if strTokensSize
+            // is 0
+            // HP: perhaps that would result in better number/non-word matching
+            // too
         }
         strTokensNoStem = Core.getTokenizer().tokenizeWords(
                 processedEntry.getSrcText(), ITokenizer.StemmingMode.NONE);
-        strTokensAll = Core.getTokenizer().tokenizeAllExactly(processedEntry.getSrcText());// HP: includes non-word tokens
+        strTokensAll = Core.getTokenizer().tokenizeAllExactly(
+                processedEntry.getSrcText());// HP: includes non-word tokens
 
         // travel by project entries
         for (Map.Entry<String, TransEntry> en : translations) {
-            if (needStop()) {
-                return;
+            if (isEntryChanged()) {
+                return null;
             }
             if (en.getKey().equals(processedEntry.getSrcText())) {
                 // skip original==original entry comparison
@@ -144,17 +144,17 @@ public class FindMatchesThread extends Thread {
         // travel by orphaned
         String file = OStrings.getString("CT_ORPHAN_STRINGS");
         for (Map.Entry<String, TransEntry> en : orphaned.entrySet()) {
-            if (needStop()) {
-                return;
+            if (isEntryChanged()) {
+                return null;
             }
             processEntry(en.getKey(), en.getValue().translation, file);
         }
-        
+
         // travel by translation memories
-        for(Map.Entry<String, List<TransMemory>> en:memories.entrySet()) {
-            for(TransMemory tmen:en.getValue()) {
-                if (needStop()) {
-                    return;
+        for (Map.Entry<String, List<TransMemory>> en : memories.entrySet()) {
+            for (TransMemory tmen : en.getValue()) {
+                if (isEntryChanged()) {
+                    return null;
                 }
                 processEntry(tmen.source, tmen.target, en.getKey());
             }
@@ -175,43 +175,14 @@ public class FindMatchesThread extends Thread {
             LOGGER.finer("Time for find matches: " + (after - before));
         }
 
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                if (!needStop()) {
-                    matcherController.setMatches(result);
-                }
-            }
-        });
-    }
-    
-    /**
-     * Check if processed entry changed. In this case, we don't need to find and
-     * display data for old entry.
-     * 
-     * @return true if need stop to find
-     */
-    private boolean needStop() {
-        return matcherController.processedEntry != processedEntry;
-    }
-    
-    /**
-     * Clear result window.
-     */
-    private void clear() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                if (matcherController.processedEntry == processedEntry) {
-                    matcherController.clear();
-                }
-            }
-        });
+        return result;
     }
 
     /**
      * Compare one entry with original entry.
      * 
      * @param candEntry
-     *                entry to compare
+     *            entry to compare
      */
     protected void processEntry(final String source, final String translation,
             final String tmxName) {
@@ -226,7 +197,8 @@ public class FindMatchesThread extends Thread {
                 strTokensStem, candTokens);
 
         // check if we have chance by first percentage only
-        if (!haveChanceToAdd(similarityStem, Integer.MAX_VALUE, Integer.MAX_VALUE)) {
+        if (!haveChanceToAdd(similarityStem, Integer.MAX_VALUE,
+                Integer.MAX_VALUE)) {
             return;
         }
 
@@ -237,7 +209,8 @@ public class FindMatchesThread extends Thread {
                 strTokensNoStem, candTokensNoStem);
 
         // check if we have chance by first and second percentages
-        if (!haveChanceToAdd(similarityStem, similarityNoStem, Integer.MAX_VALUE)) {
+        if (!haveChanceToAdd(similarityStem, similarityNoStem,
+                Integer.MAX_VALUE)) {
             return;
         }
 
@@ -301,8 +274,8 @@ public class FindMatchesThread extends Thread {
     }
 
     /**
-     * Add near string into result list. 
-     * Near strings sorted by "similarity,simAdjusted"
+     * Add near string into result list. Near strings sorted by
+     * "similarity,simAdjusted"
      */
     protected void addNearString(final String source, final String translation,
             final int similarity, final int similarityNoStem,
@@ -312,9 +285,10 @@ public class FindMatchesThread extends Thread {
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
             NearString st = result.get(i);
-            if (tmxName==null && st.proj.length()==0 && source.equals(st.source)) {
+            if (tmxName == null && st.proj.length() == 0
+                    && source.equals(st.source)) {
                 // the same source text already in list - don't need to add
-                // only if they are from translations 
+                // only if they are from translations
                 return;
             }
             if (st.score < similarity) {
@@ -331,8 +305,8 @@ public class FindMatchesThread extends Thread {
                     // Patch contributed by Antonio Vilei
                     String entrySource = processedEntry.getSrcText();
                     // text with the same case has precedence
-                    if (similarity == 100 && !st.source.equals(entrySource) &&
-                        source.equals(entrySource)) {
+                    if (similarity == 100 && !st.source.equals(entrySource)
+                            && source.equals(entrySource)) {
                         break;
                     }
                 }

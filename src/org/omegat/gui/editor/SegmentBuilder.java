@@ -68,6 +68,12 @@ public class SegmentBuilder {
 
     final SourceTextEntry ste;
     final int segmentNumberInProject;
+    
+    /**
+     * Version of displayed variant of segment. Required for check in delayed
+     * thread, lile skell checking.
+     */
+    long displayVersion;
 
     private final Document3 doc;
     private final EditorController controller;
@@ -107,6 +113,8 @@ public class SegmentBuilder {
      */
     public void createSegmentElement(final boolean isActive) {
         UIThreadsUtil.mustBeSwingThread();
+        
+        displayVersion++;
 
         beginSpellCheckPM1 = null;
         endSpellCheckPM1 = null;

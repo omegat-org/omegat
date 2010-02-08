@@ -48,7 +48,7 @@ import org.omegat.util.Log;
 public class UnderlineFactory {
 
     public static class SolidUnderliner extends Underliner {
-        protected Color color;
+        protected final Color color;
 
         public SolidUnderliner(final Color c) {
             color = c;
@@ -56,7 +56,7 @@ public class UnderlineFactory {
 
         @Override
         protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
-            g.setColor(color == null ? c.getSelectionColor() : color);
+            g.setColor(c.getSelectionColor());
 
             FontMetrics fm = c.getFontMetrics(c.getFont());
             int baseline = rect.y + rect.height - fm.getDescent() + 1;
@@ -65,7 +65,7 @@ public class UnderlineFactory {
     }
 
     public static class SolidBoldUnderliner extends Underliner {
-        protected Color color;
+        protected final Color color;
 
         public SolidBoldUnderliner(final Color c) {
             color = c;
@@ -73,12 +73,40 @@ public class UnderlineFactory {
 
         @Override
         protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
-            g.setColor(color == null ? c.getSelectionColor() : color);
+            g.setColor(c.getSelectionColor());
 
             FontMetrics fm = c.getFontMetrics(c.getFont());
             int baseline = rect.y + rect.height - fm.getDescent() + 1;
             g.drawLine(rect.x, baseline, rect.x + rect.width, baseline);
             g.drawLine(rect.x, baseline + 1, rect.x + rect.width, baseline + 1);
+        }
+    }
+    
+    public static class WaveUnderline extends Underliner {
+        protected final Color color;
+
+        public WaveUnderline(final Color c) {
+            color = c;
+        }
+
+        @Override
+        protected void paint(Graphics g, Rectangle a, JTextComponent c) {
+            g.setColor(c.getSelectionColor());
+
+            int y = a.y + a.height - 1;
+            int x1 =  a.x;
+            int x2 =a.x + a.width;
+
+            int w = 3;
+            int h = 2;
+
+            //Shape prevClip = g.getClip();
+            //g.setClip(a);
+            for (int i = x1; i <= x2; i += w * 2) {
+                g.drawArc(i + 0, y - h, w, h, 0, 180);
+                g.drawArc(i + w, y - h, w, h, 180, 181);
+            }
+            //g.setClip(prevClip);
         }
     }
 

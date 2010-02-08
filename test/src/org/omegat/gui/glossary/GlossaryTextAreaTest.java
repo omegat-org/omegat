@@ -48,7 +48,7 @@ public class GlossaryTextAreaTest extends TestCore
         final GlossaryTextArea gta = new GlossaryTextArea();
         SwingUtilities.invokeAndWait(new Runnable() {
            public void run() {
-               gta.setFoundResult(entries);
+               gta.setFoundResult(null, entries);
             } 
         });
         String GTATEXT = "source1 = translation1\n\nsource2 = translation2\ncomment2\n\n";
@@ -67,7 +67,7 @@ public class GlossaryTextAreaTest extends TestCore
         final GlossaryTextArea gta = new GlossaryTextArea();
         SwingUtilities.invokeAndWait(new Runnable() {
             public void run() {
-                gta.setFoundResult(entries);
+                gta.setFoundResult(null, entries);
              } 
          });
         gta.clear();

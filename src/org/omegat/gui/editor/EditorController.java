@@ -8,7 +8,6 @@
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel
-               2010 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -45,6 +44,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Highlighter.HighlightPainter;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
@@ -58,8 +58,6 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.gui.glossary.TransTipsUnderliner;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
@@ -88,7 +86,6 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
- * @author Wildrich Fourie
  */
 public class EditorController implements IEditor {
 
@@ -101,6 +98,10 @@ public class EditorController implements IEditor {
 
     /** Editor instance. */
     protected final EditorTextArea3 editor;
+
+    /** Class for process marks for editor. */
+    protected Marker marker;
+
     private String introPaneTitle, emptyProjectPaneTitle;
     private JTextPane introPane, emptyProjectPane;
     protected final MainWindow mw;
@@ -112,7 +113,7 @@ public class EditorController implements IEditor {
     protected int displayedFileIndex, previousDisplayedFileIndex;
     /** Current active segment in current file. */
     protected int displayedEntryIndex;
-
+    
     /** Object which store history of moving by segments. */
     private SegmentHistory history = new SegmentHistory();
 
@@ -134,6 +135,8 @@ public class EditorController implements IEditor {
 
         editor = new EditorTextArea3(this);
         setFont(Core.getMainWindow().getApplicationFont());
+        
+        marker = new Marker(editor);
 
         pane = new DockableScrollPane("EDITOR", " ", editor, false);
         pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale
@@ -401,7 +404,7 @@ public class EditorController implements IEditor {
      */
     protected void loadDocument() {
         UIThreadsUtil.mustBeSwingThread();
-
+        
         // Currently displayed file
         IProject.FileInfo file = Core.getProject().getProjectFiles().get(
                 displayedFileIndex);
@@ -444,6 +447,8 @@ public class EditorController implements IEditor {
             }
         });
 
+        marker.clearAllMarks();
+        
         editor.repaint();
     }
 
@@ -464,6 +469,9 @@ public class EditorController implements IEditor {
 
         if (!Core.getProject().isProjectLoaded())
             return;
+
+        // forget about old marks
+        marker.clearActiveEntryMarks();
 
         m_docSegList[displayedEntryIndex].createSegmentElement(true);
 
@@ -494,7 +502,7 @@ public class EditorController implements IEditor {
             CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles()
                     .get(displayedFileIndex).filePath);
         }
-
+        
         editor.repaint();
 
         // fire event about new segment activated
@@ -635,6 +643,9 @@ public class EditorController implements IEditor {
             // there is no active doc, it's empty project
             return;
         }
+
+        // clear marks
+        marker.clearActiveEntryMarks();
 
         String newTrans = doc.extractTranslation();
         doc.stopEditMode();
@@ -1163,48 +1174,19 @@ public class EditorController implements IEditor {
         return "en";
     }
 
-    /**{@inheritDoc}*/
-    public void highlightTransTips(List<GlossaryEntry> entries)
-    {
-        if(!entries.isEmpty())
-        {
-            TransTipsUnderliner ttu =
-                    new TransTipsUnderliner(((EditorController)Core.getEditor()).editor,
-                    java.awt.Color.blue);
+    /**
+     * {@inheritDoc}
+     */
+    public void markActiveEntrySource(final SourceTextEntry requiredActiveEntry,
+            final List<Mark> marks, final HighlightPainter painter) {
+        UIThreadsUtil.mustBeSwingThread();
 
-            // Get the index of the current segment in the whole document
-            String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
-            sourceText = sourceText.toLowerCase();
-            // WordSearch Variables
-            int wsStart = 0;
-            int wsEnd = 0;
-            try
-            {
-                Document3 xldoc = ((EditorController)Core.getEditor()).editor.getOmDocument();
-                String allText = xldoc.getText(0, xldoc.getLength());
-                wsStart = allText.toLowerCase().indexOf(sourceText);
-                wsEnd = wsStart + sourceText.length();
-            }
-            catch (Exception ex) { /* Unthrowable */ }
-
-            for(GlossaryEntry ent : entries)
-            {
-                String nowEntry = ent.getSrcText();
-                // Double check
-                if(sourceText.toLowerCase().contains(nowEntry.toLowerCase()))
-                {
-                    int startIndex = 0;
-                    int lastIndex = sourceText.toLowerCase().lastIndexOf(nowEntry.toLowerCase());
-
-                    do
-                    {
-                        startIndex = sourceText.toLowerCase().indexOf(nowEntry.toLowerCase(), startIndex);
-                        int len = nowEntry.length();
-                        ttu.search(nowEntry, wsStart, wsEnd);
-                        startIndex += len;
-                    } while(startIndex < lastIndex);
-                }
-            }
+        SourceTextEntry realActive = m_docSegList[displayedEntryIndex].ste;
+        if (realActive != requiredActiveEntry) {
+            return;
         }
+
+        marker.addActiveEntryMarks(m_docSegList[displayedEntryIndex], marks,
+                painter);
     }
 }

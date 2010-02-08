@@ -97,7 +97,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
      * list should be an instance of {@link NearString}.
      */
     @Override
-    protected void setFoundResult(List<NearString> newMatches) {
+    protected void setFoundResult(final SourceTextEntry se, List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
 
         activeMatch = -1;
@@ -241,7 +241,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
     public void clear() {
         UIThreadsUtil.mustBeSwingThread();
 
-        setFoundResult(new ArrayList<NearString>());
+        setFoundResult(null, new ArrayList<NearString>());
     }
 
     protected MouseListener mouseListener = new MouseAdapter() {

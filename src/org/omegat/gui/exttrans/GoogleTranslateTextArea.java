@@ -30,7 +30,6 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.StringEntry;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.gui.main.DockableScrollPane;
@@ -72,7 +71,7 @@ public class GoogleTranslateTextArea extends EntryInfoPane<String> {
     }
 
     @Override
-    protected void setFoundResult(String data) {
+    protected void setFoundResult(final SourceTextEntry se, final String data) {
         UIThreadsUtil.mustBeSwingThread();
 
         setText(data != null ? data : "");

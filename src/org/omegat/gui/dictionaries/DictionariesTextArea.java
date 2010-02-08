@@ -152,7 +152,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     }
 
     @Override
-    protected void setFoundResult(final List<DictionaryEntry> data) {
+    protected void setFoundResult(final SourceTextEntry se, final List<DictionaryEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
 
         displayedWords.clear();

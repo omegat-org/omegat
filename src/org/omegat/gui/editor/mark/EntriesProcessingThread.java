@@ -39,7 +39,7 @@ import org.omegat.gui.editor.SegmentBuilder;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public abstract class EntriesProcessingThread extends
+public class EntriesProcessingThread extends
         SwingWorker<Object, EntryVersion<List<Mark>>> {
     private final List<EntryVersion<List<Mark>>> items = new ArrayList<EntryVersion<List<Mark>>>();
 
@@ -60,20 +60,16 @@ public abstract class EntriesProcessingThread extends
                 segmentVersion));
     }
 
-    abstract List<Mark> processInBackground(SegmentBuilder sb) throws Exception;
-
-    abstract void displayInForeground(SegmentBuilder sb, List<Mark> marks);
-
     @Override
     protected Void doInBackground() throws Exception {
         Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
         Thread.currentThread().setName(this.getClass().getSimpleName());
 
         for (EntryVersion<List<Mark>> ev : items) {
-            ev.result = processInBackground(ev.builder);
-            if (ev.result.size() > 0) {
-                publish(ev);
-            }
+//            ev.result = processInBackground(ev.builder);
+//            if (ev.result.size() > 0) {
+//                publish(ev);
+//            }
         }
 
         return null;

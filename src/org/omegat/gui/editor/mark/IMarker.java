@@ -35,5 +35,13 @@ import org.omegat.gui.editor.Mark;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IMarker {
+    /**
+     * Calculate marks for inactive entry.
+     * 
+     * Method will be called NOT in Swing thread.
+     * 
+     * @param entry
+     * @return
+     */
     List<Mark> getMarksForInactiveEntry(SourceTextEntry entry);
 }

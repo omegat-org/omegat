@@ -58,6 +58,8 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.gui.editor.mark.EntriesProcessingThread;
+import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
@@ -448,6 +450,11 @@ public class EditorController implements IEditor {
         });
 
         marker.clearAllMarks();
+        
+        // call all markers
+        for (IMarker m : Core.getMarkers()) {
+            new EntriesProcessingThread(this, m).execute();
+        }
         
         editor.repaint();
     }

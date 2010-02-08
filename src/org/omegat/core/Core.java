@@ -25,6 +25,8 @@
 
 package org.omegat.core;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.omegat.core.data.IProject;
@@ -40,6 +42,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
+import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.exttrans.GoogleTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.main.ConsoleWindow;
@@ -80,6 +83,8 @@ public class Core {
     private static GoogleTranslateTextArea googleTranslatePane;
     private static DictionariesTextArea dictionaries;
 
+    private static final List<IMarker> markers = new ArrayList<IMarker>();
+    
     /** Get project instance. */
     public static IProject getProject() {
         return currentProject;
@@ -220,5 +225,19 @@ public class Core {
      */
     protected static void setCurrentProject(IProject currentProject) {
         Core.currentProject = currentProject;
+    }
+    
+    /**
+     * Register class for calculate marks.
+     * 
+     * @param marker
+     *            marker implementation
+     */
+    public static void registerMarker(IMarker marker) {
+        markers.add(marker);
+    }
+    
+    public static List<IMarker> getMarkers() {
+        return markers;
     }
 }

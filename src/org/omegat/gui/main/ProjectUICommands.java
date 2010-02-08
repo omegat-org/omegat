@@ -29,6 +29,7 @@ import java.io.File;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
+import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
@@ -41,7 +42,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
-import org.omegat.util.gui.SwingWorker;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -85,7 +85,7 @@ public class ProjectUICommands {
         final String projectRoot = newProps.getProjectRoot();
 
         if (projectRoot != null && projectRoot.length() > 0) {
-            new SwingWorker<Object>() {
+            new SwingWorker<Object, Void>() {
                 protected Object doInBackground() throws Exception {
                     ProjectFactory.createProject(newProps);
                     Core.getProject().saveProjectProperties();
@@ -156,7 +156,7 @@ public class ProjectUICommands {
 
         final boolean saveProperties = needToSaveProperties;
         final ProjectProperties newProps = props;
-        new SwingWorker<Object>() {
+        new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
                 // TODO: check loading if need to show dialog
                 ProjectFactory.loadProject(newProps);
@@ -190,7 +190,7 @@ public class ProjectUICommands {
         final ProjectProperties props = Core.getProject()
                 .getProjectProperties();
 
-        new SwingWorker<Object>() {
+        new SwingWorker<Object, Void>() {
             int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
             protected Object doInBackground() throws Exception {
@@ -229,7 +229,7 @@ public class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
-        new SwingWorker<Object>() {
+        new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
 
@@ -261,7 +261,7 @@ public class ProjectUICommands {
         
         Core.getEditor().commitAndLeave();
 
-        new SwingWorker<Object>() {
+        new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
 
@@ -315,7 +315,7 @@ public class ProjectUICommands {
             return;
         }
 
-        new SwingWorker<Object>() {
+        new SwingWorker<Object, Void>() {
             int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
             
             protected Object doInBackground() throws Exception {
@@ -350,7 +350,7 @@ public class ProjectUICommands {
         // commit the current entry first
         Core.getEditor().commitAndLeave();
 
-        new SwingWorker<Object>() {
+        new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
                 Core.getProject().saveProject();
                 Core.getProject().compileProject(".*");

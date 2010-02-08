@@ -32,6 +32,7 @@ package org.omegat.gui.main;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
@@ -53,12 +54,11 @@ import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.FileUtil;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.SwingWorker;
-import org.omegat.util.OConsts;
 
 /**
  * Handler for main menu items.
@@ -182,7 +182,7 @@ public class MainWindowMenuHandler {
 
         flushExportedSegments();
 
-        new SwingWorker<Object>() {
+        new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
                 MainWindowUI.saveScreenLayout(mainWindow);
                 Preferences.save();

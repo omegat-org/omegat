@@ -33,15 +33,15 @@ import org.omegat.gui.editor.SegmentBuilder;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class EntryVersion<T> {
-    int segmentIndex;
+    int entryIndex;
     SegmentBuilder builder;
-    long segmentVersion;
+    long entryVersion;
     T result;
 
-    public EntryVersion(int segmentIndex, SegmentBuilder builder,
-            long segmentVersion) {
-        this.segmentIndex = segmentIndex;
+    public EntryVersion(int entryIndex, SegmentBuilder builder,
+            long entryVersion) {
+        this.entryIndex = entryIndex;
         this.builder = builder;
-        this.segmentVersion = segmentVersion;
+        this.entryVersion = entryVersion;
     }
 }

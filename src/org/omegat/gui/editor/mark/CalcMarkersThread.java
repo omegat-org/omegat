@@ -29,7 +29,6 @@ import java.util.List;
 
 import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.gui.editor.EditorController;
-import org.omegat.gui.editor.Mark;
 import org.omegat.gui.editor.SegmentBuilder;
 
 /**
@@ -39,12 +38,16 @@ import org.omegat.gui.editor.SegmentBuilder;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class EntriesProcessingThread extends
+public class CalcMarkersThread extends
         SwingWorker<Object, EntryVersion<List<Mark>>> {
     private final List<EntryVersion<List<Mark>>> items = new ArrayList<EntryVersion<List<Mark>>>();
 
-    public EntriesProcessingThread(EditorController ec, IMarker marker) {
+    private final EditorController ec;
+    private final IMarker marker;
 
+    public CalcMarkersThread(EditorController ec, IMarker marker) {
+        this.ec = ec;
+        this.marker = marker;
     }
 
     /**
@@ -66,10 +69,13 @@ public class EntriesProcessingThread extends
         Thread.currentThread().setName(this.getClass().getSimpleName());
 
         for (EntryVersion<List<Mark>> ev : items) {
-//            ev.result = processInBackground(ev.builder);
-//            if (ev.result.size() > 0) {
-//                publish(ev);
-//            }
+            if (!ec.isEntryChanged(ev.entryIndex, ev.builder, ev.entryVersion)) {
+                ev.result = marker.getMarksForInactiveEntry(ev.builder
+                        .getSourceTextEntry());
+                if (ev.result.size() > 0) {
+                    publish(ev);
+                }
+            }
         }
 
         return null;
@@ -78,7 +84,8 @@ public class EntriesProcessingThread extends
     @Override
     protected void process(List<EntryVersion<List<Mark>>> chunks) {
         for (EntryVersion<List<Mark>> ev : chunks) {
-
+            ec.markInactiveEntry(ev.entryIndex, ev.builder, ev.entryVersion,
+                    ev.result, marker.getPainter());
         }
     }
 }

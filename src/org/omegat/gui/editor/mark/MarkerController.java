@@ -22,7 +22,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.gui.editor;
+package org.omegat.gui.editor.mark;
 
 import java.util.HashMap;
 import java.util.List;
@@ -34,6 +34,7 @@ import javax.swing.text.JTextComponent;
 import javax.swing.text.Highlighter.Highlight;
 import javax.swing.text.Highlighter.HighlightPainter;
 
+import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.util.Log;
 
 /**
@@ -41,28 +42,28 @@ import org.omegat.util.Log;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-class Marker {
+public class MarkerController {
     private Map<Mark, Highlighter.Highlight> activeEntryMarks = new HashMap<Mark, Highlight>();
 
     private final Highlighter highlighter;
 
-    Marker(JTextComponent comp) {
+    public MarkerController(JTextComponent comp) {
         this.highlighter = comp.getHighlighter();
     }
 
-    void clearAllMarks() {
+    public void clearAllMarks() {
         highlighter.removeAllHighlights();
         activeEntryMarks.clear();
     }
 
-    void clearActiveEntryMarks() {
+    public void clearActiveEntryMarks() {
         for (Highlighter.Highlight h : activeEntryMarks.values()) {
             highlighter.removeHighlight(h);
         }
         activeEntryMarks.clear();
     }
 
-    void addActiveEntryMarks(SegmentBuilder sb, List<Mark> marks,
+    public void addActiveEntryMarks(SegmentBuilder sb, List<Mark> marks,
             HighlightPainter painter) {
         int startOffset = sb.getStartPosition() + 1;// skip direction char
         for (Mark m : marks) {

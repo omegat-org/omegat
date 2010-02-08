@@ -29,6 +29,7 @@ import java.util.List;
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.editor.mark.Mark;
 
 /**
  * Interface for access to editor functionality.

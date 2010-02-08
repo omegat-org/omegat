@@ -280,6 +280,10 @@ public class SegmentBuilder {
         }
     }
 
+    public SourceTextEntry getSourceTextEntry() {
+        return ste;
+    }
+    
     /**
      * Get segment's start position.
      * 

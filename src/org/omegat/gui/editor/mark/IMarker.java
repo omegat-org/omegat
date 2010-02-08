@@ -26,8 +26,9 @@ package org.omegat.gui.editor.mark;
 
 import java.util.List;
 
+import javax.swing.text.Highlighter.HighlightPainter;
+
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.gui.editor.Mark;
 
 /**
  * Interface for calculate marks in editor.
@@ -35,6 +36,15 @@ import org.omegat.gui.editor.Mark;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IMarker {
+    /**
+     * Get painter for specified marker.
+     * 
+     * Painter should be instantiated once, then returns always.
+     * 
+     * @return painter
+     */
+    HighlightPainter getPainter();
+
     /**
      * Calculate marks for inactive entry.
      * 

@@ -58,8 +58,10 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.gui.editor.mark.EntriesProcessingThread;
+import org.omegat.gui.editor.mark.CalcMarkersThread;
 import org.omegat.gui.editor.mark.IMarker;
+import org.omegat.gui.editor.mark.Mark;
+import org.omegat.gui.editor.mark.MarkerController;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
@@ -102,7 +104,7 @@ public class EditorController implements IEditor {
     protected final EditorTextArea3 editor;
 
     /** Class for process marks for editor. */
-    protected Marker marker;
+    protected MarkerController markerController;
 
     private String introPaneTitle, emptyProjectPaneTitle;
     private JTextPane introPane, emptyProjectPane;
@@ -138,7 +140,7 @@ public class EditorController implements IEditor {
         editor = new EditorTextArea3(this);
         setFont(Core.getMainWindow().getApplicationFont());
         
-        marker = new Marker(editor);
+        markerController = new MarkerController(editor);
 
         pane = new DockableScrollPane("EDITOR", " ", editor, false);
         pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale
@@ -449,11 +451,11 @@ public class EditorController implements IEditor {
             }
         });
 
-        marker.clearAllMarks();
+        markerController.clearAllMarks();
         
         // call all markers
         for (IMarker m : Core.getMarkers()) {
-            new EntriesProcessingThread(this, m).execute();
+            new CalcMarkersThread(this, m).execute();
         }
         
         editor.repaint();
@@ -478,7 +480,7 @@ public class EditorController implements IEditor {
             return;
 
         // forget about old marks
-        marker.clearActiveEntryMarks();
+        markerController.clearActiveEntryMarks();
 
         m_docSegList[displayedEntryIndex].createSegmentElement(true);
 
@@ -652,7 +654,7 @@ public class EditorController implements IEditor {
         }
 
         // clear marks
-        marker.clearActiveEntryMarks();
+        markerController.clearActiveEntryMarks();
 
         String newTrans = doc.extractTranslation();
         doc.stopEditMode();
@@ -1180,7 +1182,36 @@ public class EditorController implements IEditor {
         // Default to English, if no translation exists
         return "en";
     }
+    
+    /**
+     * Check if entry changed.
+     * 
+     * @param entryIndex
+     * @param sb
+     * @param entryVersion
+     * @return
+     */
+    public boolean isEntryChanged(int entryIndex, SegmentBuilder sb,
+            long entryVersion) {
+        SegmentBuilder ssb;
+        try {
+            ssb = m_docSegList[entryIndex];
+        } catch (Exception e) {
+            return true;
+        }
+        return ssb != sb || ssb.displayVersion != entryVersion;
+    }
 
+    public void markInactiveEntry(final int entryIndex,
+            final SegmentBuilder sb, final long entryVersion,
+            final List<Mark> marks, final HighlightPainter painter) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (isEntryChanged(entryIndex, sb, entryVersion)) {
+            return;
+        }
+    }
+    
     /**
      * {@inheritDoc}
      */
@@ -1193,7 +1224,7 @@ public class EditorController implements IEditor {
             return;
         }
 
-        marker.addActiveEntryMarks(m_docSegList[displayedEntryIndex], marks,
+        markerController.addActiveEntryMarks(m_docSegList[displayedEntryIndex], marks,
                 painter);
     }
 }

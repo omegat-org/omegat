@@ -29,7 +29,7 @@ import java.util.List;
 
 import javax.swing.text.JTextComponent;
 
-import org.omegat.gui.editor.Mark;
+import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Preferences;
 
 /**

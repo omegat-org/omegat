@@ -49,9 +49,7 @@ public interface IMarker {
      * Calculate marks for inactive entry.
      * 
      * Method will be called NOT in Swing thread.
-     * 
-     * @param entry
-     * @return
      */
-    List<Mark> getMarksForInactiveEntry(SourceTextEntry entry);
+    List<Mark> getMarksForInactiveEntry(SourceTextEntry entry,
+            boolean sourceDisplayed, boolean translationDisplayed);
 }

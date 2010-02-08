@@ -74,6 +74,8 @@ public class SegmentBuilder {
      * thread, lile skell checking.
      */
     long displayVersion;
+    boolean sourceDisplayed;
+    boolean translationDisplayed;
 
     private final Document3 doc;
     private final EditorController controller;
@@ -183,6 +185,7 @@ public class SegmentBuilder {
             addModificationInfoPart(trans, ATTR_INFO);
         }
         addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
+        sourceDisplayed = true;
 
         String activeText;
         if (trans != null) {
@@ -206,6 +209,7 @@ public class SegmentBuilder {
         }
 
         addActiveSegPart(activeText, ATTR_ACTIVE);
+        translationDisplayed = true;
 
         if (settings.isAutoSpellChecking()) {
             beginSpellCheckPM1 = doc
@@ -252,6 +256,9 @@ public class SegmentBuilder {
         }
         if (settings.isDisplaySegmentSources()) {
             addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
+            sourceDisplayed = true;
+        } else {
+            sourceDisplayed = false;
         }
 
         boolean needToCheckSpelling = false;
@@ -273,15 +280,28 @@ public class SegmentBuilder {
                 endSpellCheckPM1 = doc.createPosition(offset - 2);
                 spellPM = true;
             }
+            translationDisplayed = true;
         } else if (!settings.isDisplaySegmentSources()) {
             // translation not exist, and source part doesn't displayed yet
             addInactiveSegPart(true, ste.getSrcText(), settings
                     .getUntranslatedAttributeSet());
+            translationDisplayed = false;
+            sourceDisplayed = true;
+        } else {
+            translationDisplayed = false;
         }
     }
 
     public SourceTextEntry getSourceTextEntry() {
         return ste;
+    }
+    
+    public boolean isSourceDisplayed() {
+        return sourceDisplayed;
+    }
+    
+    public boolean isTranslationDisplayed() {
+        return translationDisplayed;
     }
     
     /**

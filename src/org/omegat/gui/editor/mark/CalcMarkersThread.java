@@ -71,7 +71,8 @@ public class CalcMarkersThread extends
         for (EntryVersion<List<Mark>> ev : items) {
             if (!ec.isEntryChanged(ev.entryIndex, ev.builder, ev.entryVersion)) {
                 ev.result = marker.getMarksForInactiveEntry(ev.builder
-                        .getSourceTextEntry());
+                        .getSourceTextEntry(), ev.builder.isSourceDisplayed(),
+                        ev.builder.isTranslationDisplayed());
                 if (ev.result.size() > 0) {
                     publish(ev);
                 }

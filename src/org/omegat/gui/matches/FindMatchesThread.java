@@ -33,6 +33,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
@@ -68,6 +69,9 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     private static final Logger LOGGER = Logger
             .getLogger(FindMatchesThread.class.getName());
 
+    /** Current project. */
+    private final IProject project;
+
     /**
      * Entry which is processed currently.
      * 
@@ -89,20 +93,19 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     private Token[] strTokensAll;
 
     public FindMatchesThread(final MatchesTextArea matcherPane,
-            final SourceTextEntry entry) {
+            final IProject project, final SourceTextEntry entry) {
         super(matcherPane, entry);
+        this.project = project;
         this.processedEntry = entry;
     }
 
     @Override
     protected List<NearString> search() throws Exception {
-        final List<SourceTextEntry> entries = Core.getProject().getAllEntries();
-        Set<Map.Entry<String, TransEntry>> translations = Core.getProject()
+        final List<SourceTextEntry> entries = project.getAllEntries();
+        Set<Map.Entry<String, TransEntry>> translations = project
                 .getTranslationsSet();
-        Map<String, TransEntry> orphaned = Core.getProject()
-                .getOrphanedSegments();
-        Map<String, List<TransMemory>> memories = Core.getProject()
-                .getTransMemories();
+        Map<String, TransEntry> orphaned = project.getOrphanedSegments();
+        Map<String, List<TransMemory>> memories = project.getTransMemories();
         if (entries == null || memories == null || orphaned == null) {
             // project is closed
             return result;

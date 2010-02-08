@@ -89,7 +89,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
-        new FindMatchesThread(MatchesTextArea.this, newEntry).start();
+        new FindMatchesThread(MatchesTextArea.this, Core.getProject(), newEntry).start();
     }
 
     /**

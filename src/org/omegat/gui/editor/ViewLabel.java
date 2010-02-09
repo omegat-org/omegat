@@ -188,4 +188,13 @@ public class ViewLabel extends LabelView {
 
         g.setColor(old);
     }
+
+       public float getPreferredSpan(int axis) {
+        if (axis == ViewLabel.Y_AXIS) {
+            return Math.round(super.getPreferredSpan(axis));
+        } else {
+            return super.getPreferredSpan(axis);
+        }
+    }
+
 }

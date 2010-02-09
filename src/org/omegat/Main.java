@@ -162,7 +162,7 @@ public class Main {
                 .getProperty("java.version"), System.getProperty("java.home"));
 
         ConvertConfigs.convert();
-        PluginUtils.loadPlugins2();
+        PluginUtils.loadPlugins(params);
         
         switch (runMode) {
         case GUI:

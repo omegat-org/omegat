@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2010 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -20,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2.master;
 
@@ -43,21 +44,26 @@ import org.omegat.util.StaticUtils;
 
 /**
  * Static utilities for OmegaT filter plugins.
- *
+ * 
  * @author Maxym Mykhalchuk
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public final class PluginUtils
-{
-    
+public final class PluginUtils {
+
+    enum PLUGIN_TYPE {
+        FILTER, TOKENIZER, MARKER, UNKNOWN
+    };
+
     /** Private constructor to disallow creation */
-    private PluginUtils() {}
+    private PluginUtils() {
+    }
 
     /**
      * Loads all plugins from main classloader and from /plugins/ dir. We should
      * load all jars from /plugins/ dir first, because some plugin can use more
      * than one jar.
      */
-    public static void loadPlugins2() {
+    public static void loadPlugins(final Map<String, String> params) {
         File pluginsDir = new File(StaticUtils.installDir(), "plugins");
         try {
             URLClassLoader cls;
@@ -90,20 +96,23 @@ public final class PluginUtils
                     // found main manifest - not in development mode
                     foundMain = true;
                 }
-                loadByManifest(m, cls);
+                loadFromManifest(m, cls);
             }
             if (!foundMain) {
                 // development mode - load main manifest template
-                File mf = new File("manifest-template.mf");
-                if (mf.exists()) {
-                    InputStream in = new FileInputStream(mf);
+                String manifests = params.get("dev-manifests");
+                if (manifests == null) {
+                    manifests = "manifest-template.mf";
+                }
+                for (String mf : manifests.split(File.pathSeparator)) {
                     Manifest m;
+                    InputStream in = new FileInputStream(mf);
                     try {
                         m = new Manifest(in);
                     } finally {
                         in.close();
                     }
-                    loadByManifest(m, cls);
+                    loadFromManifest(m, cls);
                 }
             }
         } catch (Exception ex) {
@@ -114,14 +123,20 @@ public final class PluginUtils
     public static List<Class<?>> getFilterClasses() {
         return filterClasses;
     }
-    
+
     public static List<Class<?>> getTokenizerClasses() {
         return tokenizerClasses;
+    }
+
+    public static List<Class<?>> getMarkerClasses() {
+        return markerClasses;
     }
 
     protected static List<Class<?>> filterClasses = new ArrayList<Class<?>>();
 
     protected static List<Class<?>> tokenizerClasses = new ArrayList<Class<?>>();
+
+    protected static List<Class<?>> markerClasses = new ArrayList<Class<?>>();
 
     /**
      * Parse one manifest file.
@@ -132,7 +147,7 @@ public final class PluginUtils
      *            classloader
      * @throws ClassNotFoundException
      */
-    protected static void loadByManifest(final Manifest m,
+    protected static void loadFromManifest(final Manifest m,
             final ClassLoader classLoader) throws ClassNotFoundException {
         if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
             return;
@@ -141,13 +156,29 @@ public final class PluginUtils
         Map<String, Attributes> entries = m.getEntries();
         for (String key : entries.keySet()) {
             Attributes attrs = (Attributes) entries.get(key);
-            String isfilter = attrs.getValue("OmegaT-Filter");
-            if ("true".equals(isfilter)) {
-                filterClasses.add(classLoader.loadClass(key));
+            String sType = attrs.getValue("OmegaT-Plugin");
+            if ("true".equals(attrs.getValue("OmegaT-Tokenizer"))) {
+                // TODO remove after release new tokenizers
+                sType = "tokenizer";
             }
-            String istokenizer = attrs.getValue("OmegaT-Tokenizer");
-            if ("true".equals(istokenizer)) {
+            PLUGIN_TYPE pType;
+            try {
+                pType = PLUGIN_TYPE.valueOf(sType.toUpperCase());
+            } catch (Exception ex) {
+                pType = PLUGIN_TYPE.UNKNOWN;
+            }
+            switch (pType) {
+            case FILTER:
+                filterClasses.add(classLoader.loadClass(key));
+                break;
+            case TOKENIZER:
                 tokenizerClasses.add(classLoader.loadClass(key));
+                break;
+            case MARKER:
+                markerClasses.add(classLoader.loadClass(key));
+                break;
+            default:
+                Log.logErrorRB("PLUGIN_UNKNOWN", key);
             }
         }
     }

@@ -7,61 +7,61 @@ Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar lib/vldo
 OmegaT-Plugin: true
 
 Name: org.omegat.filters3.xml.android.AndroidFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.text.TextFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.latex.LatexFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.po.PoFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.rc.RcFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.text.bundles.ResourceBundleFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.xhtml.XHTMLFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.helpandmanual.HelpAndManualFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.html2.HTMLFilter2
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.hhc.HHCFilter2
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.text.ini.INIFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.docbook.DocBookFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.opendoc.OpenDocFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.openxml.OpenXMLFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.xliff.XLIFFFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.subtitles.SrtFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters2.xtagqxp.XtagFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.resx.ResXFilter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.filters3.xml.typo3.Typo3Filter
-OmegaT-Filter: true
+OmegaT-Plugin: filter
 
 Name: org.omegat.core.matching.Tokenizer
-OmegaT-Tokenizer: true
+OmegaT-Plugin: tokenizer

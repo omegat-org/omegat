@@ -56,7 +56,7 @@ public class UnderlineFactory {
 
         @Override
         protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
-            g.setColor(c.getSelectionColor());
+            g.setColor(color);
 
             FontMetrics fm = c.getFontMetrics(c.getFont());
             int baseline = rect.y + rect.height - fm.getDescent() + 1;
@@ -73,7 +73,7 @@ public class UnderlineFactory {
 
         @Override
         protected void paint(Graphics g, Rectangle rect, JTextComponent c) {
-            g.setColor(c.getSelectionColor());
+            g.setColor(color);
 
             FontMetrics fm = c.getFontMetrics(c.getFont());
             int baseline = rect.y + rect.height - fm.getDescent() + 1;
@@ -91,7 +91,7 @@ public class UnderlineFactory {
 
         @Override
         protected void paint(Graphics g, Rectangle a, JTextComponent c) {
-            g.setColor(c.getSelectionColor());
+            g.setColor(color);
 
             int y = a.y + a.height - 1;
             int x1 =  a.x;

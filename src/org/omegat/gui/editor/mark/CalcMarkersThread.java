@@ -25,11 +25,15 @@
 package org.omegat.gui.editor.mark;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
-import org.jdesktop.swingworker.SwingWorker;
-import org.omegat.gui.editor.EditorController;
+import javax.swing.SwingUtilities;
+
+import org.omegat.gui.editor.MarkerController;
 import org.omegat.gui.editor.SegmentBuilder;
+import org.omegat.util.Log;
 
 /**
  * This class calls all marks calculators in background, check if source entry
@@ -38,55 +42,106 @@ import org.omegat.gui.editor.SegmentBuilder;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class CalcMarkersThread extends
-        SwingWorker<Object, EntryVersion<List<Mark>>> {
-    private final List<EntryVersion<List<Mark>>> items = new ArrayList<EntryVersion<List<Mark>>>();
+public class CalcMarkersThread extends Thread {
 
-    private final EditorController ec;
+    private final Queue<EntryMarks> forCheck = new LinkedList<EntryMarks>();
+    private final Queue<EntryMarks> forOutput = new LinkedList<EntryMarks>();
+
+    private final MarkerController mController;
     private final IMarker marker;
 
-    public CalcMarkersThread(EditorController ec, IMarker marker) {
-        this.ec = ec;
+    public CalcMarkersThread(MarkerController mc, IMarker marker) {
+        this.mController = mc;
         this.marker = marker;
     }
 
-    /**
-     * Add item for check. All items should be added BEFORE thread start.
-     * 
-     * @param segmentIndex
-     * @param builder
-     * @param segmentVersion
-     */
-    public void add(int segmentIndex, SegmentBuilder builder,
-            long segmentVersion) {
-        items.add(new EntryVersion<List<Mark>>(segmentIndex, builder,
-                segmentVersion));
+    public void reset() {
+        synchronized (forCheck) {
+            forCheck.clear();
+        }
+        synchronized (forOutput) {
+            forOutput.clear();
+        }
+        marker.reset();
+    }
+
+    public void add(SegmentBuilder[] entryBuilders) {
+        List<EntryMarks> vers = new ArrayList<EntryMarks>(entryBuilders.length);
+
+        for (int i = 0; i < entryBuilders.length; i++) {
+            EntryMarks v = new EntryMarks(i, entryBuilders[i], entryBuilders[i]
+                    .getDisplayVersion());
+            vers.add(v);
+        }
+
+        synchronized (forCheck) {
+            forCheck.addAll(vers);
+            forCheck.notifyAll();
+        }
     }
 
     @Override
-    protected Void doInBackground() throws Exception {
+    public void run() {
         Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
-        Thread.currentThread().setName(this.getClass().getSimpleName());
+        Thread.currentThread().setName(
+                this.getClass().getSimpleName() + " - "
+                        + marker.getClass().getSimpleName());
 
-        for (EntryVersion<List<Mark>> ev : items) {
-            if (!ec.isEntryChanged(ev.entryIndex, ev.builder, ev.entryVersion)) {
-                ev.result = marker.getMarksForInactiveEntry(ev.builder
-                        .getSourceTextEntry(), ev.builder.isSourceDisplayed(),
-                        ev.builder.isTranslationDisplayed());
-                if (ev.result.size() > 0) {
-                    publish(ev);
+        try {
+            while (true) {
+                EntryMarks ev;
+                synchronized (forCheck) {
+                    ev = forCheck.poll();
+                    if (ev == null) {
+                        // there is no strings in queue - output all
+                        showOutput();
+                        // wait next
+                        forCheck.wait();
+                    }
+                }
+                if (ev == null) {
+                    continue;
+                }
+
+                // Calculate only if entry not changed yet
+                if (!mController.isEntryChanged(ev.entryIndex, ev.builder,
+                        ev.entryVersion)) {
+                    ev.result = marker.getMarksForInactiveEntry(ev.builder
+                            .getSourceTextEntry(), ev.builder
+                            .isSourceDisplayed(), ev.builder
+                            .isTranslationDisplayed());
+                    if (ev.result != null && ev.result.size() > 0) {
+                        // if there are marks - output
+                        synchronized (forOutput) {
+                            forOutput.add(ev);
+                        }
+                    }
                 }
             }
+        } catch (InterruptedException ex) {
+            Log.log(ex);
         }
-
-        return null;
     }
 
-    @Override
-    protected void process(List<EntryVersion<List<Mark>>> chunks) {
-        for (EntryVersion<List<Mark>> ev : chunks) {
-            ec.markInactiveEntry(ev.entryIndex, ev.builder, ev.entryVersion,
-                    ev.result, marker.getPainter());
-        }
+    /**
+     * Show marks in Swing thread.
+     */
+    protected void showOutput() {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                while (true) {
+                    EntryMarks ev;
+                    synchronized (forOutput) {
+                        ev = forOutput.poll();
+                    }
+                    if (ev == null) {
+                        // end of queue
+                        return;
+                    }
+                    mController.markInactiveEntry(ev.entryIndex, ev.builder,
+                            ev.entryVersion, ev.result, marker.getPainter());
+                }
+            }
+        });
     }
 }

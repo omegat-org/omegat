@@ -65,3 +65,6 @@ OmegaT-Plugin: filter
 
 Name: org.omegat.core.matching.Tokenizer
 OmegaT-Plugin: tokenizer
+
+Name: org.omegat.gui.glossary.TransTipsMarker
+OmegaT-Plugin: Marker

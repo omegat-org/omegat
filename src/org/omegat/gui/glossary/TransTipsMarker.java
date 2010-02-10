@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
@@ -22,39 +22,36 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.gui.editor.mark;
+package org.omegat.gui.glossary;
 
+import java.awt.Color;
 import java.util.List;
 
 import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.gui.editor.UnderlineFactory;
+import org.omegat.gui.editor.mark.IMarker;
+import org.omegat.gui.editor.mark.Mark;
 
 /**
- * Interface for calculate marks in editor.
+ * Stub for marker, for be able to add marks.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public interface IMarker {
-    /**
-     * Get painter for specified marker.
-     * 
-     * Painter should be instantiated once, then returns always.
-     * 
-     * @return painter
-     */
-    HighlightPainter getPainter();
+public class TransTipsMarker implements IMarker {
+    protected final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(
+            Color.blue);
 
-    /**
-     * Reset internal buffers, if exist. Called on the edited file changed.
-     */
-    void reset();
+    public HighlightPainter getPainter() {
+        return transTipsUnderliner;
+    }
 
-    /**
-     * Calculate marks for inactive entry.
-     * 
-     * Method will be called NOT in Swing thread.
-     */
-    List<Mark> getMarksForInactiveEntry(SourceTextEntry entry,
-            boolean sourceDisplayed, boolean translationDisplayed);
+    public void reset() {
+    }
+
+    public List<Mark> getMarksForInactiveEntry(SourceTextEntry entry,
+            boolean sourceDisplayed, boolean translationDisplayed) {
+        return null;
+    }
 }

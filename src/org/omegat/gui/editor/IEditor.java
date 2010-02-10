@@ -26,8 +26,6 @@ package org.omegat.gui.editor;
 
 import java.util.List;
 
-import javax.swing.text.Highlighter.HighlightPainter;
-
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.gui.editor.mark.Mark;
 
@@ -216,9 +214,9 @@ public interface IEditor {
      *            then marks will be skipped
      * @param marks
      *            list of marks
-     * @param painter
-     *            painter for underline
+     * @param markerClassName
+     *            marker's class name
      */
     void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-            HighlightPainter painter);
+            String markerClassName);
 }

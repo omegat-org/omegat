@@ -26,20 +26,16 @@
 
 package org.omegat.gui.glossary;
 
-import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.text.Highlighter.HighlightPainter;
-
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
 import org.omegat.gui.common.EntryInfoPane;
-import org.omegat.gui.editor.UnderlineFactory;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.OStrings;
@@ -57,9 +53,6 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     /** Glossary manager instance. */
     protected final GlossaryManager manager = new GlossaryManager(this);
     
-    protected final HighlightPainter transTipsUnderliner = new UnderlineFactory.SolidBoldUnderliner(
-            Color.blue);
-
     /**
      * Currently processed entry. Used to detect if user moved into new entry.
      * In this case, new find should be started.
@@ -158,7 +151,7 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
                 TransTipsUnderliner.search(en.getSrcText(), nowEntry, marks);
             }
             Core.getEditor().markActiveEntrySource(en, marks,
-                    transTipsUnderliner);
+                    TransTipsMarker.class.getName());
         }
     }
 

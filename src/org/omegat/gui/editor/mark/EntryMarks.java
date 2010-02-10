@@ -24,6 +24,8 @@
 
 package org.omegat.gui.editor.mark;
 
+import java.util.List;
+
 import org.omegat.gui.editor.SegmentBuilder;
 
 /**
@@ -32,13 +34,13 @@ import org.omegat.gui.editor.SegmentBuilder;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class EntryVersion<T> {
+public class EntryMarks {
     int entryIndex;
     SegmentBuilder builder;
     long entryVersion;
-    T result;
+    List<Mark> result;
 
-    public EntryVersion(int entryIndex, SegmentBuilder builder,
+    public EntryMarks(int entryIndex, SegmentBuilder builder,
             long entryVersion) {
         this.entryIndex = entryIndex;
         this.builder = builder;

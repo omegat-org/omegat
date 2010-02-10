@@ -44,7 +44,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.BadLocationException;
-import javax.swing.text.Highlighter.HighlightPainter;
 import javax.swing.undo.CannotRedoException;
 import javax.swing.undo.CannotUndoException;
 
@@ -58,10 +57,7 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.gui.editor.mark.CalcMarkersThread;
-import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
-import org.omegat.gui.editor.mark.MarkerController;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
@@ -140,7 +136,7 @@ public class EditorController implements IEditor {
         editor = new EditorTextArea3(this);
         setFont(Core.getMainWindow().getApplicationFont());
         
-        markerController = new MarkerController(editor);
+        markerController = new MarkerController(this);
 
         pane = new DockableScrollPane("EDITOR", " ", editor, false);
         pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale
@@ -155,10 +151,12 @@ public class EditorController implements IEditor {
 
         spellCheckerThread = new SpellCheckerThread();
         spellCheckerThread.start();
+        
 
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 spellCheckerThread.resetCache();
+                markerController.reset(0);
 
                 SHOW_TYPE showType;
                 switch (eventType) {
@@ -190,6 +188,7 @@ public class EditorController implements IEditor {
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             public void onNewFile(String activeFileName) {
                 spellCheckerThread.resetCache();
+                markerController.reset(0);
 
                 updateState(SHOW_TYPE.NO_CHANGE);
             }
@@ -451,12 +450,10 @@ public class EditorController implements IEditor {
             }
         });
 
-        markerController.clearAllMarks();
+        markerController.reset(m_docSegList.length);
         
         // call all markers
-        for (IMarker m : Core.getMarkers()) {
-            new CalcMarkersThread(this, m).execute();
-        }
+        markerController.process(m_docSegList);
         
         editor.repaint();
     }
@@ -480,7 +477,7 @@ public class EditorController implements IEditor {
             return;
 
         // forget about old marks
-        markerController.clearActiveEntryMarks();
+        markerController.resetEntryMarks(displayedEntryIndex);
 
         m_docSegList[displayedEntryIndex].createSegmentElement(true);
 
@@ -654,7 +651,7 @@ public class EditorController implements IEditor {
         }
 
         // clear marks
-        markerController.clearActiveEntryMarks();
+        markerController.resetEntryMarks(displayedEntryIndex);
 
         String newTrans = doc.extractTranslation();
         doc.stopEditMode();
@@ -1184,39 +1181,11 @@ public class EditorController implements IEditor {
     }
     
     /**
-     * Check if entry changed.
-     * 
-     * @param entryIndex
-     * @param sb
-     * @param entryVersion
-     * @return
-     */
-    public boolean isEntryChanged(int entryIndex, SegmentBuilder sb,
-            long entryVersion) {
-        SegmentBuilder ssb;
-        try {
-            ssb = m_docSegList[entryIndex];
-        } catch (Exception e) {
-            return true;
-        }
-        return ssb != sb || ssb.displayVersion != entryVersion;
-    }
-
-    public void markInactiveEntry(final int entryIndex,
-            final SegmentBuilder sb, final long entryVersion,
-            final List<Mark> marks, final HighlightPainter painter) {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (isEntryChanged(entryIndex, sb, entryVersion)) {
-            return;
-        }
-    }
-    
-    /**
      * {@inheritDoc}
      */
-    public void markActiveEntrySource(final SourceTextEntry requiredActiveEntry,
-            final List<Mark> marks, final HighlightPainter painter) {
+    public void markActiveEntrySource(
+            final SourceTextEntry requiredActiveEntry, final List<Mark> marks,
+            final String markerClassName) {
         UIThreadsUtil.mustBeSwingThread();
 
         SourceTextEntry realActive = m_docSegList[displayedEntryIndex].ste;
@@ -1224,7 +1193,8 @@ public class EditorController implements IEditor {
             return;
         }
 
-        markerController.addActiveEntryMarks(m_docSegList[displayedEntryIndex], marks,
-                painter);
+        int mi = markerController.getMarkerIndex(markerClassName);
+        markerController.setEntryMarks(displayedEntryIndex,
+                m_docSegList[displayedEntryIndex], marks, mi);
     }
 }

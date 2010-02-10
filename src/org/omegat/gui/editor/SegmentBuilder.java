@@ -73,9 +73,9 @@ public class SegmentBuilder {
      * Version of displayed variant of segment. Required for check in delayed
      * thread, lile skell checking.
      */
-    long displayVersion;
-    boolean sourceDisplayed;
-    boolean translationDisplayed;
+    private long displayVersion;
+    private boolean sourceDisplayed;
+    private boolean translationDisplayed;
 
     private final Document3 doc;
     private final EditorController controller;
@@ -294,6 +294,10 @@ public class SegmentBuilder {
 
     public SourceTextEntry getSourceTextEntry() {
         return ste;
+    }
+    
+    public long getDisplayVersion() {
+        return displayVersion;
     }
     
     public boolean isSourceDisplayed() {

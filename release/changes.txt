@@ -146,10 +146,15 @@ as a repetition in Match Statistics
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 3
-  0 Enhancement
+  1 Enhancement
   2 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 3 vs. 2.0.5 update 2
+
+  Implemented requests:
+
+  - Segmentation rule for header number and the header body
+  http://sourceforge.net/support/tracker.php?aid=2948997
 
   Bug Fixes:
 

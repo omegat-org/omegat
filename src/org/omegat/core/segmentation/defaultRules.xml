@@ -3646,6 +3646,12 @@
      <afterbreak>\s+\P{Lu}</afterbreak>
     </rule>
     <rule break="yes">
+     <!--numbered headers break rule 
+         contributed by Jean-Christophe Helary -->
+     <beforebreak>^\s*[\p{Nd}\.]+\s*</beforebreak>
+     <afterbreak>.</afterbreak>
+    </rule>
+    <rule break="yes">
      <!-- .?! break rule -->
      <beforebreak>[\.\?\!]+</beforebreak>
      <afterbreak>\s</afterbreak>

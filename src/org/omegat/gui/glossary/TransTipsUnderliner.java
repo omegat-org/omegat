@@ -100,7 +100,7 @@ public class TransTipsUnderliner
             {
                 if(isWordAlone(content, lastIndex, word))
                 {
-                        marks.add(new Mark("glossary", lastIndex,endIndex));
+                        marks.add(new Mark(Mark.ENTRY_PART.SOURCE, lastIndex,endIndex));
 
                     if (firstOffset == -1)
                         firstOffset = lastIndex;
@@ -108,7 +108,7 @@ public class TransTipsUnderliner
             }
             else
             {
-                    marks.add(new Mark("glossary", lastIndex,endIndex));
+                    marks.add(new Mark(Mark.ENTRY_PART.SOURCE, lastIndex,endIndex));
 
                 if (firstOffset == -1)
                     firstOffset = lastIndex;

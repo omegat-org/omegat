@@ -48,10 +48,13 @@ public class CalcMarkersThread extends Thread {
     private final Queue<EntryMarks> forOutput = new LinkedList<EntryMarks>();
 
     private final MarkerController mController;
+    private final int markerIndex;
     private final IMarker marker;
 
-    public CalcMarkersThread(MarkerController mc, IMarker marker) {
+    public CalcMarkersThread(MarkerController mc, IMarker marker,
+            int markerIndex) {
         this.mController = mc;
+        this.markerIndex = markerIndex;
         this.marker = marker;
     }
 
@@ -76,6 +79,16 @@ public class CalcMarkersThread extends Thread {
 
         synchronized (forCheck) {
             forCheck.addAll(vers);
+            forCheck.notifyAll();
+        }
+    }
+
+    public void add(int entryIndex, SegmentBuilder entryBuilder) {
+        EntryMarks v = new EntryMarks(entryIndex, entryBuilder, entryBuilder
+                .getDisplayVersion());
+
+        synchronized (forCheck) {
+            forCheck.add(v);
             forCheck.notifyAll();
         }
     }
@@ -106,10 +119,15 @@ public class CalcMarkersThread extends Thread {
                 // Calculate only if entry not changed yet
                 if (!mController.isEntryChanged(ev.entryIndex, ev.builder,
                         ev.entryVersion)) {
-                    ev.result = marker.getMarksForInactiveEntry(ev.builder
-                            .getSourceTextEntry(), ev.builder
-                            .isSourceDisplayed(), ev.builder
-                            .isTranslationDisplayed());
+                    try {
+                        ev.result = marker.getMarksForInactiveEntry(ev.builder
+                                .getSourceTextEntry(), ev.builder
+                                .isSourceDisplayed(), ev.builder
+                                .isTranslationDisplayed());
+                    } catch (Exception ex) {
+                        ev.result = null;
+                        Log.log(ex);
+                    }
                     if (ev.result != null && ev.result.size() > 0) {
                         // if there are marks - output
                         synchronized (forOutput) {
@@ -138,8 +156,8 @@ public class CalcMarkersThread extends Thread {
                         // end of queue
                         return;
                     }
-                    mController.markInactiveEntry(ev.entryIndex, ev.builder,
-                            ev.entryVersion, ev.result, marker.getPainter());
+                    mController.setEntryMarks(ev.entryIndex, ev.builder,
+                            ev.result, markerIndex);
                 }
             }
         });

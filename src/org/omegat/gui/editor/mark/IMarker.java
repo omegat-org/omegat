@@ -47,6 +47,8 @@ public interface IMarker {
 
     /**
      * Reset internal buffers, if exist. Called on the edited file changed.
+     * 
+     * Method will be called in Swing thread.
      */
     void reset();
 
@@ -56,5 +58,6 @@ public interface IMarker {
      * Method will be called NOT in Swing thread.
      */
     List<Mark> getMarksForInactiveEntry(SourceTextEntry entry,
-            boolean sourceDisplayed, boolean translationDisplayed);
+            boolean sourceDisplayed, boolean translationDisplayed)
+            throws Exception;
 }

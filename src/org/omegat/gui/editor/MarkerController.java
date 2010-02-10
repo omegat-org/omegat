@@ -39,7 +39,7 @@ import org.omegat.util.Log;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * Class for store, manage marks, and controll all markers.
+ * Class for manage marks and controll all markers.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -84,12 +84,19 @@ public class MarkerController {
             IMarker m = ms.get(i);
             markerNames[i] = m.getClass().getName();
             painters[i] = m.getPainter();
-            markerThreads[i] = new CalcMarkersThread(this, m);
+            markerThreads[i] = new CalcMarkersThread(this, m, i);
             markerThreads[i].start();
         }
     }
 
-    public int getMarkerIndex(final String markerClassName) {
+    /**
+     * Get marker's index by class name.
+     * 
+     * @param markerClassName
+     *            marker's class name
+     * @return marker's index
+     */
+    int getMarkerIndex(final String markerClassName) {
         for (int i = 0; i < markerNames.length; i++) {
             if (markerNames[i].equals(markerClassName)) {
                 return i;
@@ -105,6 +112,8 @@ public class MarkerController {
      *            count of newly displayed entries
      */
     void reset(int newEntriesCount) {
+        UIThreadsUtil.mustBeSwingThread();
+
         for (CalcMarkersThread th : markerThreads) {
             th.reset();
         }
@@ -134,14 +143,29 @@ public class MarkerController {
         }
     }
 
+    /**
+     * Add entries list to processing queue. Used on display new file.
+     */
     public void process(SegmentBuilder[] entryBuilders) {
         for (CalcMarkersThread th : markerThreads) {
             th.add(entryBuilders);
         }
     }
 
-    void setEntryMarks(int entryIndex, SegmentBuilder sb, List<Mark> newMarks,
-            int markerIndex) {
+    /**
+     * Add entry to processign queue. Used on one entry changed.
+     */
+    public void process(int entryIndex, SegmentBuilder entryBuilder) {
+        for (CalcMarkersThread th : markerThreads) {
+            th.add(entryIndex, entryBuilder);
+        }
+    }
+
+    /**
+     * Set marks for specified entry and marker.
+     */
+    public void setEntryMarks(int entryIndex, SegmentBuilder sb,
+            List<Mark> newMarks, int markerIndex) {
         // remove old marks for specified entry and marker
         Highlighter.Highlight[] me = marks[entryIndex][markerIndex];
         if (me != null) {
@@ -152,9 +176,12 @@ public class MarkerController {
         marks[entryIndex][markerIndex] = null;
 
         Highlighter.Highlight[] nm = new Highlighter.Highlight[newMarks.size()];
-        int startOffset = sb.getStartPosition() + 1;// skip direction char
+        int sourceStartOffset = sb.getStartPosition() + 1;
+        int translationStartOffset = sb.getStartSpellPosition();
         for (int i = 0; i < newMarks.size(); i++) {
             Mark m = newMarks.get(i);
+            int startOffset = m.entryPart == Mark.ENTRY_PART.SOURCE ? sourceStartOffset
+                    : translationStartOffset;
             try {
                 nm[i] = (Highlighter.Highlight) highlighter.addHighlight(
                         startOffset + m.startOffset, startOffset + m.endOffset,
@@ -168,11 +195,6 @@ public class MarkerController {
 
     /**
      * Check if entry changed.
-     * 
-     * @param entryIndex
-     * @param sb
-     * @param entryVersion
-     * @return
      */
     public boolean isEntryChanged(int entryIndex, SegmentBuilder sb,
             long entryVersion) {
@@ -183,17 +205,5 @@ public class MarkerController {
             return true;
         }
         return ssb != sb || ssb.getDisplayVersion() != entryVersion;
-    }
-
-    public void markInactiveEntry(final int entryIndex,
-            final SegmentBuilder sb, final long entryVersion,
-            final List<Mark> marks, final HighlightPainter painter) {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (isEntryChanged(entryIndex, sb, entryVersion)) {
-            return;
-        }
-
-        // addInactiveEntryMarks(ec.m_docSegList[entryIndex], marks, painter);
     }
 }

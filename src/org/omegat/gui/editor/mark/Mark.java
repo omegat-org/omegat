@@ -30,15 +30,15 @@ package org.omegat.gui.editor.mark;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class Mark {
-    public String owner;
-    public int startOffset, endOffset;
+    public enum ENTRY_PART {
+        SOURCE, TRANSLATION
+    };
 
-    public Mark(int start, int end) {
-        this(null, start, end);
-    }
+    public final ENTRY_PART entryPart;
+    public final int startOffset, endOffset;
 
-    public Mark(String owner, int start, int end) {
-        this.owner = owner;
+    public Mark(ENTRY_PART entryPart, int start, int end) {
+        this.entryPart = entryPart;
         this.startOffset = start;
         this.endOffset = end;
     }

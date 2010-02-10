@@ -481,6 +481,9 @@ public class EditorController implements IEditor {
 
         m_docSegList[displayedEntryIndex].createSegmentElement(true);
 
+        // then add new marks
+        markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
+
         editor.cancelUndo();
 
         history
@@ -650,7 +653,7 @@ public class EditorController implements IEditor {
             return;
         }
 
-        // clear marks
+        // forget about old marks
         markerController.resetEntryMarks(displayedEntryIndex);
 
         String newTrans = doc.extractTranslation();
@@ -691,6 +694,10 @@ public class EditorController implements IEditor {
                 }
             }
         }
+        
+        // then add new marks
+        markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
+
         editor.cancelUndo();
     }
 

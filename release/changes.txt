@@ -145,6 +145,18 @@ as a repetition in Match Statistics
   http://sourceforge.net/support/tracker.php?aid=2876217 
 
 ----------------------------------------------------------------------
+ OmegaT 2.0.5 update 3
+  0 Enhancement
+  2 Bugfixes
+----------------------------------------------------------------------
+2.0.5 update 3 vs. 2.0.5 update 2
+
+  Bug Fixes:
+
+  - References to Java 1.4 removed in OmegaT.l4J.ini
+  - Various corrections in the manual
+
+----------------------------------------------------------------------
  OmegaT 2.0.5 update 2
   7 Enhancements
   0 Bugfix

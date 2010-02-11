@@ -299,11 +299,19 @@ public class SegmentBuilder {
     }
     
     public int getStartSourcePosition() {
-        return posSourceBeg.getOffset();
+        if (posSourceBeg != null) {
+            return posSourceBeg.getOffset();
+        } else {
+            return -1;
+        }
     }
 
     public int getStartTranslationPosition() {
-        return posTranslationBeg.getOffset();
+        if (posTranslationBeg != null) {
+            return posTranslationBeg.getOffset();
+        } else {
+            return -1;
+        }
     }
 
     /**

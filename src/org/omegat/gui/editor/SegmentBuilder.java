@@ -196,18 +196,10 @@ public class SegmentBuilder {
         if (trans != null) {
             // translation exist
             translationText = trans.translation;
-            if (settings.isAutoSpellChecking()) {
-                // spell it
-                doc.controller.spellCheckerThread.addForCheck(trans.translation);
-            }
         } else if (!Preferences
                 .isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
             // need to insert source text on empty translation
             translationText = ste.getSrcText();
-            if (settings.isAutoSpellChecking()) {
-                // spell it
-                doc.controller.spellCheckerThread.addForCheck(ste.getSrcText());
-            }
         } else {
             // empty text on non-exist translation
             translationText = "";
@@ -265,14 +257,13 @@ public class SegmentBuilder {
             sourceText = null;
         }
 
+        //TODO check if need this flag
         boolean needToCheckSpelling = false;
         if (trans!=null) {
             // translation exist
             if (settings.isAutoSpellChecking()) {
                 // spell it
                 needToCheckSpelling = true;
-                doc.controller.spellCheckerThread
-                        .addForCheck(trans.translation);
             }
             int prevOffset = offset;
 

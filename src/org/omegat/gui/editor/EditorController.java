@@ -119,8 +119,6 @@ public class EditorController implements IEditor {
 
     protected final EditorSettings settings;
 
-    protected final SpellCheckerThread spellCheckerThread;
-
     protected Font font, fontb, fonti, fontbi;
 
     private enum SHOW_TYPE {
@@ -149,13 +147,8 @@ public class EditorController implements IEditor {
 
         settings = new EditorSettings(this);
 
-        spellCheckerThread = new SpellCheckerThread();
-        spellCheckerThread.start();
-        
-
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                spellCheckerThread.resetCache();
                 markerController.reset(0);
 
                 SHOW_TYPE showType;
@@ -187,7 +180,6 @@ public class EditorController implements IEditor {
         // register entry changes callback
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             public void onNewFile(String activeFileName) {
-                spellCheckerThread.resetCache();
                 markerController.reset(0);
 
                 updateState(SHOW_TYPE.NO_CHANGE);
@@ -1200,6 +1192,14 @@ public class EditorController implements IEditor {
         }
         // Default to English, if no translation exists
         return "en";
+    }
+    
+    /**
+     * Calls markers for reprocess active entry.
+     */
+    void remarkOneMarker(final String markerClassName) {
+        int mi = markerController.getMarkerIndex(markerClassName);
+        markerController.process(m_docSegList, mi);
     }
     
     /**

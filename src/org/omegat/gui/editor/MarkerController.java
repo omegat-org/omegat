@@ -154,6 +154,14 @@ public class MarkerController {
     }
 
     /**
+     * Add entries list to processing queue for one marker only. Used for
+     * recheck displayed file against one marker.
+     */
+    public void process(SegmentBuilder[] entryBuilders, int markerIndex) {
+        markerThreads[markerIndex].add(entryBuilders);
+    }
+
+    /**
      * Add entry to processign queue. Used on one entry changed.
      */
     public void process(int entryIndex, SegmentBuilder entryBuilder) {

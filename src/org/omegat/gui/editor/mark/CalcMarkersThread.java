@@ -65,7 +65,6 @@ public class CalcMarkersThread extends Thread {
         synchronized (forOutput) {
             forOutput.clear();
         }
-        marker.reset();
     }
 
     public void add(SegmentBuilder[] entryBuilders) {

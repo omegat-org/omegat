@@ -88,16 +88,13 @@ public class SegmentBuilder {
 
     protected int activeTranslationBeginOffset, activeTranslationEndOffset;
 
+    /** Boundary of full entry display. */
     protected Position beginPosP1, endPosM1;
 
-    /**
-     * true if beginSpellCheck/endSpellCheck is P/M mode, i.e. smaller of real
-     * text - used for inactive text
-     * 
-     * false if M/P mode, i.e. bigger of real text - used for active text
-     */
-    protected boolean spellPM;
-    protected Position beginSpellCheckPM1, endSpellCheckPM1;
+    /** Source start position - for marks. */
+    protected Position posSourceBeg;
+    /** Translation start position - for marks. */
+    protected Position posTranslationBeg;    
 
     protected int offset;
 
@@ -123,9 +120,6 @@ public class SegmentBuilder {
         
         displayVersion++;
         this.active = isActive;
-
-        beginSpellCheckPM1 = null;
-        endSpellCheckPM1 = null;
 
         doc.trustedChangesInProgress = true;
         try {
@@ -190,8 +184,11 @@ public class SegmentBuilder {
            ) {
             addModificationInfoPart(trans, ATTR_INFO);
         }
+        
+        int prevOffset = offset;
         sourceText = ste.getSrcText();
         addInactiveSegPart(true, sourceText, ATTR_SOURCE);
+        posSourceBeg = doc.createPosition(prevOffset + 1);
 
         if (trans != null) {
             // translation exist
@@ -206,14 +203,7 @@ public class SegmentBuilder {
         }
 
         addActiveSegPart(translationText, ATTR_ACTIVE);
-
-        if (settings.isAutoSpellChecking()) {
-            beginSpellCheckPM1 = doc
-                    .createPosition(activeTranslationBeginOffset - 1);
-            endSpellCheckPM1 = doc
-                    .createPosition(activeTranslationEndOffset + 1);
-            spellPM = false;
-        }
+        posTranslationBeg = null;
 
         doc.activeTranslationBeginM1 = doc
                 .createPosition(activeTranslationBeginOffset - 1);
@@ -250,41 +240,41 @@ public class SegmentBuilder {
         if (  EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo()) ) {
             addModificationInfoPart(trans, ATTR_INFO);
         }
+        
+        AttributeSet attrSource = null;
         if (settings.isDisplaySegmentSources()) {
-            addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
             sourceText = ste.getSrcText();
+            attrSource = ATTR_SOURCE;
         } else {
             sourceText = null;
         }
 
-        //TODO check if need this flag
-        boolean needToCheckSpelling = false;
         if (trans!=null) {
             // translation exist
-            if (settings.isAutoSpellChecking()) {
-                // spell it
-                needToCheckSpelling = true;
-            }
-            int prevOffset = offset;
-
             translationText = trans.translation;
-            addInactiveSegPart(false, translationText, settings
-                    .getTranslatedAttributeSet());
-
-            if (needToCheckSpelling) {
-                // remember about u202{a,b,c} chars !
-                beginSpellCheckPM1 = doc.createPosition(prevOffset + 2);
-                endSpellCheckPM1 = doc.createPosition(offset - 2);
-                spellPM = true;
-            }
         } else if (!settings.isDisplaySegmentSources()) {
             // translation not exist, and source part doesn't displayed yet
             translationText = null;
             sourceText = ste.getSrcText();
-            addInactiveSegPart(true, sourceText, settings
-                    .getUntranslatedAttributeSet());
+            attrSource = settings.getUntranslatedAttributeSet();
         } else {
             translationText = null;
+        }
+        
+        if (sourceText != null) {
+            int prevOffset = offset;
+            addInactiveSegPart(true, sourceText, attrSource);
+            posSourceBeg = doc.createPosition(prevOffset + 1);
+        } else {
+            posSourceBeg = null;
+        }
+        if (translationText != null) {
+            int prevOffset = offset;
+            addInactiveSegPart(false, translationText, settings
+                    .getTranslatedAttributeSet());
+            posTranslationBeg = doc.createPosition(prevOffset + 1);
+        } else {
+            posTranslationBeg = null;
         }
     }
 
@@ -308,6 +298,14 @@ public class SegmentBuilder {
         return translationText;
     }
     
+    public int getStartSourcePosition() {
+        return posSourceBeg.getOffset();
+    }
+
+    public int getStartTranslationPosition() {
+        return posTranslationBeg.getOffset();
+    }
+
     /**
      * Get segment's start position.
      * 
@@ -359,42 +357,6 @@ public class SegmentBuilder {
     public boolean isInsideSegment(int location) {
         return beginPosP1.getOffset() - 1 <= location
                 && location < endPosM1.getOffset() + 1;
-    }
-
-    /**
-     * Get spell check start position.
-     * 
-     * @return start position
-     */
-    public int getStartSpellPosition() {
-        if (beginSpellCheckPM1 == null) {
-            return 0;
-        }
-        int b = beginSpellCheckPM1.getOffset();
-        if (spellPM) {
-            b--;
-        } else {
-            b++;
-        }
-        return b;
-    }
-
-    /**
-     * Get spell check end position.
-     * 
-     * @return end position
-     */
-    public int getEndSpellPosition() {
-        if (endSpellCheckPM1 == null) {
-            return 0;
-        }
-        int e = endSpellCheckPM1.getOffset();
-        if (spellPM) {
-            e++;
-        } else {
-            e--;
-        }
-        return e;
     }
 
     /**

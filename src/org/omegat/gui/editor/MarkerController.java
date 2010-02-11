@@ -184,13 +184,19 @@ public class MarkerController {
         }
         marks[entryIndex][markerIndex] = null;
 
-        if (newMarks == null) {
+        if (newMarks == null || newMarks.isEmpty()) {
             // there is no marks
             return;
         }
         Highlighter.Highlight[] nm = new Highlighter.Highlight[newMarks.size()];
-        int sourceStartOffset = sb.getStartPosition() + 1;
-        int translationStartOffset = sb.getStartSpellPosition();
+        int sourceStartOffset = sb.getStartSourcePosition();
+        int translationStartOffset;
+        if (sb.isActive()) {
+            translationStartOffset = ec.editor.getOmDocument()
+                    .getTranslationStart();
+        } else {
+            translationStartOffset = sb.getStartTranslationPosition();
+        }
         for (int i = 0; i < newMarks.size(); i++) {
             Mark m = newMarks.get(i);
             int startOffset = m.entryPart == Mark.ENTRY_PART.SOURCE ? sourceStartOffset

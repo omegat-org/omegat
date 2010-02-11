@@ -44,13 +44,6 @@ public interface IMarker {
     HighlightPainter getPainter();
 
     /**
-     * Reset internal buffers, if exist. Called on the edited file changed.
-     * 
-     * Method will be called in Swing thread.
-     */
-    void reset();
-
-    /**
      * Calculate marks for inactive entry.
      * 
      * Method will be called NOT in Swing thread.

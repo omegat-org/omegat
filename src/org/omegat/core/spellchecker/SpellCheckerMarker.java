@@ -50,9 +50,6 @@ public class SpellCheckerMarker implements IMarker {
         return PAINTER;
     }
 
-    public void reset() {
-    }
-
     public List<Mark> getMarksForEntry(String sourceText,
             String translationText, boolean isActive) throws Exception {
         if (translationText == null) {

@@ -71,11 +71,16 @@ public class SegmentBuilder {
     
     /**
      * Version of displayed variant of segment. Required for check in delayed
-     * thread, lile skell checking.
+     * thread, like skell checking. Version changed(in Swing thread only) each
+     * time when entry drawed, and when user edit it(for active entry).
      */
     private long displayVersion;
-    private boolean sourceDisplayed;
-    private boolean translationDisplayed;
+    /** Source text of entry, or null if not displayed. */
+    private String sourceText;
+    /** Translation text of entry, or null if not displayed. */
+    private String translationText;
+    /** True if entry is active. */
+    private boolean active;
 
     private final Document3 doc;
     private final EditorController controller;
@@ -117,6 +122,7 @@ public class SegmentBuilder {
         UIThreadsUtil.mustBeSwingThread();
         
         displayVersion++;
+        this.active = isActive;
 
         beginSpellCheckPM1 = null;
         endSpellCheckPM1 = null;
@@ -184,13 +190,12 @@ public class SegmentBuilder {
            ) {
             addModificationInfoPart(trans, ATTR_INFO);
         }
-        addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
-        sourceDisplayed = true;
+        sourceText = ste.getSrcText();
+        addInactiveSegPart(true, sourceText, ATTR_SOURCE);
 
-        String activeText;
         if (trans != null) {
             // translation exist
-            activeText = trans.translation;
+            translationText = trans.translation;
             if (settings.isAutoSpellChecking()) {
                 // spell it
                 doc.controller.spellCheckerThread.addForCheck(trans.translation);
@@ -198,18 +203,17 @@ public class SegmentBuilder {
         } else if (!Preferences
                 .isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
             // need to insert source text on empty translation
-            activeText = ste.getSrcText();
+            translationText = ste.getSrcText();
             if (settings.isAutoSpellChecking()) {
                 // spell it
                 doc.controller.spellCheckerThread.addForCheck(ste.getSrcText());
             }
         } else {
             // empty text on non-exist translation
-            activeText = "";
+            translationText = "";
         }
 
-        addActiveSegPart(activeText, ATTR_ACTIVE);
-        translationDisplayed = true;
+        addActiveSegPart(translationText, ATTR_ACTIVE);
 
         if (settings.isAutoSpellChecking()) {
             beginSpellCheckPM1 = doc
@@ -256,9 +260,9 @@ public class SegmentBuilder {
         }
         if (settings.isDisplaySegmentSources()) {
             addInactiveSegPart(true, ste.getSrcText(), ATTR_SOURCE);
-            sourceDisplayed = true;
+            sourceText = ste.getSrcText();
         } else {
-            sourceDisplayed = false;
+            sourceText = null;
         }
 
         boolean needToCheckSpelling = false;
@@ -271,7 +275,9 @@ public class SegmentBuilder {
                         .addForCheck(trans.translation);
             }
             int prevOffset = offset;
-            addInactiveSegPart(false, trans.translation, settings
+
+            translationText = trans.translation;
+            addInactiveSegPart(false, translationText, settings
                     .getTranslatedAttributeSet());
 
             if (needToCheckSpelling) {
@@ -280,15 +286,14 @@ public class SegmentBuilder {
                 endSpellCheckPM1 = doc.createPosition(offset - 2);
                 spellPM = true;
             }
-            translationDisplayed = true;
         } else if (!settings.isDisplaySegmentSources()) {
             // translation not exist, and source part doesn't displayed yet
-            addInactiveSegPart(true, ste.getSrcText(), settings
+            translationText = null;
+            sourceText = ste.getSrcText();
+            addInactiveSegPart(true, sourceText, settings
                     .getUntranslatedAttributeSet());
-            translationDisplayed = false;
-            sourceDisplayed = true;
         } else {
-            translationDisplayed = false;
+            translationText = null;
         }
     }
 
@@ -300,12 +305,16 @@ public class SegmentBuilder {
         return displayVersion;
     }
     
-    public boolean isSourceDisplayed() {
-        return sourceDisplayed;
+    public boolean isActive() {
+        return active;
     }
     
-    public boolean isTranslationDisplayed() {
-        return translationDisplayed;
+    public String getSourceText() {
+        return sourceText;
+    }
+    
+    public String getTranslationText() {
+        return translationText;
     }
     
     /**
@@ -532,5 +541,13 @@ public class SegmentBuilder {
             markIsRTL = false;
         }
         return markIsRTL;
+    }
+    
+    /**
+     * Called on the active entry changed. Required for update translation text.
+     */
+    void onActiveEntryChanged() {
+        translationText = doc.extractTranslation();
+        displayVersion++;
     }
 }

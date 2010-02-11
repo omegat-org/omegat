@@ -439,14 +439,17 @@ public class EditorController implements IEditor {
         doc.addDocumentListener(new DocumentListener() {
             public void changedUpdate(DocumentEvent e) {
                 showLengthMessage();
+                onTextChanged();
             }
 
             public void insertUpdate(DocumentEvent e) {
                 showLengthMessage();
+                onTextChanged();
             }
 
             public void removeUpdate(DocumentEvent e) {
                 showLengthMessage();
+                onTextChanged();
             }
         });
 
@@ -529,6 +532,18 @@ public class EditorController implements IEditor {
             String lMsg = " " + ste.getSrcText().length() + "/"
                     + trans.length() + " ";
             Core.getMainWindow().showLengthMessage(lMsg);
+        }
+    }
+    
+    /**
+     * Called on the text changed in document. Required for recalculate marks
+     * for active segment.
+     */
+    void onTextChanged() {
+        Document3 doc = editor.getOmDocument();
+        if (doc.isEditMode()) {
+            m_docSegList[displayedEntryIndex].onActiveEntryChanged();
+            markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
         }
     }
 
@@ -1194,6 +1209,12 @@ public class EditorController implements IEditor {
             final SourceTextEntry requiredActiveEntry, final List<Mark> marks,
             final String markerClassName) {
         UIThreadsUtil.mustBeSwingThread();
+        
+        for (Mark m : marks) {
+            if (m.entryPart != Mark.ENTRY_PART.SOURCE) {
+                throw new RuntimeException("Mark must be for source only");
+            }
+        }
 
         SourceTextEntry realActive = m_docSegList[displayedEntryIndex].ste;
         if (realActive != requiredActiveEntry) {

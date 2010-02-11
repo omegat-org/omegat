@@ -35,15 +35,19 @@ import org.omegat.gui.editor.SegmentBuilder;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class EntryMarks {
-    int entryIndex;
-    SegmentBuilder builder;
-    long entryVersion;
+    public int entryIndex;
+    public SegmentBuilder builder;
+    public long entryVersion;
     List<Mark> result;
+    String sourceText, translationText;
+    final boolean isActive;
 
-    public EntryMarks(int entryIndex, SegmentBuilder builder,
-            long entryVersion) {
+    public EntryMarks(int entryIndex, SegmentBuilder builder, long entryVersion) {
         this.entryIndex = entryIndex;
         this.builder = builder;
         this.entryVersion = entryVersion;
+        this.isActive = builder.isActive();
+        this.sourceText = builder.getSourceText();
+        this.translationText = builder.getTranslationText();
     }
 }

@@ -33,6 +33,7 @@ import javax.swing.text.Highlighter.HighlightPainter;
 
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.editor.mark.CalcMarkersThread;
+import org.omegat.gui.editor.mark.EntryMarks;
 import org.omegat.gui.editor.mark.IMarker;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Log;
@@ -175,6 +176,10 @@ public class MarkerController {
         }
         marks[entryIndex][markerIndex] = null;
 
+        if (newMarks == null) {
+            // there is no marks
+            return;
+        }
         Highlighter.Highlight[] nm = new Highlighter.Highlight[newMarks.size()];
         int sourceStartOffset = sb.getStartPosition() + 1;
         int translationStartOffset = sb.getStartSpellPosition();
@@ -196,14 +201,13 @@ public class MarkerController {
     /**
      * Check if entry changed.
      */
-    public boolean isEntryChanged(int entryIndex, SegmentBuilder sb,
-            long entryVersion) {
+    public boolean isEntryChanged(EntryMarks ev) {
         SegmentBuilder ssb;
         try {
-            ssb = ec.m_docSegList[entryIndex];
+            ssb = ec.m_docSegList[ev.entryIndex];
         } catch (Exception e) {
             return true;
         }
-        return ssb != sb || ssb.getDisplayVersion() != entryVersion;
+        return ssb != ev.builder || ssb.getDisplayVersion() != ev.entryVersion;
     }
 }

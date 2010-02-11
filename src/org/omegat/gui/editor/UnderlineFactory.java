@@ -81,7 +81,7 @@ public class UnderlineFactory {
             g.drawLine(rect.x, baseline + 1, rect.x + rect.width, baseline + 1);
         }
     }
-    
+
     public static class WaveUnderline extends Underliner {
         protected final Color color;
 
@@ -93,20 +93,20 @@ public class UnderlineFactory {
         protected void paint(Graphics g, Rectangle a, JTextComponent c) {
             g.setColor(color);
 
-            int y = a.y + a.height - 1;
-            int x1 =  a.x;
-            int x2 =a.x + a.width;
+            int y = a.y + a.height - 2;
+            int x1 = a.x;
+            int x2 = a.x + a.width;
 
             int w = 3;
             int h = 2;
 
-            //Shape prevClip = g.getClip();
-            //g.setClip(a);
+            Shape prevClip = g.getClip();
+            g.setClip(a);
             for (int i = x1; i <= x2; i += w * 2) {
                 g.drawArc(i + 0, y - h, w, h, 0, 180);
                 g.drawArc(i + w, y - h, w, h, 180, 181);
             }
-            //g.setClip(prevClip);
+            g.setClip(prevClip);
         }
     }
 

@@ -117,23 +117,24 @@ public class CalcMarkersThread extends Thread {
                 }
 
                 // Calculate only if entry not changed yet
-                if (!mController.isEntryChanged(ev.entryIndex, ev.builder,
-                        ev.entryVersion)) {
-                    try {
-                        ev.result = marker.getMarksForInactiveEntry(ev.builder
-                                .getSourceTextEntry(), ev.builder
-                                .isSourceDisplayed(), ev.builder
-                                .isTranslationDisplayed());
-                    } catch (Exception ex) {
-                        ev.result = null;
-                        Log.log(ex);
+                try {
+                    if (mController.isEntryChanged(ev)) {
+                        continue;
                     }
-                    if (ev.result != null && ev.result.size() > 0) {
-                        // if there are marks - output
-                        synchronized (forOutput) {
-                            forOutput.add(ev);
-                        }
+                    ev.result = marker.getMarksForEntry(ev.sourceText,
+                            ev.translationText, ev.isActive);
+                    if (mController.isEntryChanged(ev)) {
+                        continue;
                     }
+                    if (mController.isEntryChanged(ev)) {
+                        continue;
+                    }
+                    synchronized (forOutput) {
+                        // output marks
+                        forOutput.add(ev);
+                    }
+                } catch (Exception ex) {
+                    Log.log(ex);
                 }
             }
         } catch (InterruptedException ex) {
@@ -156,8 +157,10 @@ public class CalcMarkersThread extends Thread {
                         // end of queue
                         return;
                     }
-                    mController.setEntryMarks(ev.entryIndex, ev.builder,
-                            ev.result, markerIndex);
+                    if (!mController.isEntryChanged(ev)) {
+                        mController.setEntryMarks(ev.entryIndex, ev.builder,
+                                ev.result, markerIndex);
+                    }
                 }
             }
         });

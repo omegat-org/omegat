@@ -189,27 +189,30 @@ public class EditorPopups {
                     .getSystemClipboard();
             Transferable contents = omClipboard.getContents(this);
 
-            if (selText != null) {
-                JMenuItem cutContextItem = menu.add(OStrings
-                        .getString("CCP_CUT"));
+            // only on selected text
+            if (selText != null && comp.getSelectionStart() <= mousepos
+                    && mousepos <= comp.getSelectionEnd()) {
+                if (isInActiveTranslation) {
+                    // cut only in editable zone
+                    JMenuItem cutContextItem = menu.add(OStrings
+                            .getString("CCP_CUT"));
+                    cutContextItem.addActionListener(new ActionListener() {
+                        public void actionPerformed(ActionEvent e) {
+                            comp.cut();
+                        }
+                    });
+                }
+                // copy in any place
                 JMenuItem copyContextItem = menu.add(OStrings
                         .getString("CCP_COPY"));
-
-                // ActionListeners
-                cutContextItem.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        comp.cut();
-                    }
-                });
                 copyContextItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         comp.copy();
                     }
                 });
-
             }
 
-            if (contents != null) {
+            if (contents != null && isInActiveTranslation) {
                 JMenuItem pasteContextItem = menu.add(OStrings
                         .getString("CCP_PASTE"));
                 pasteContextItem.addActionListener(new ActionListener() {
@@ -217,7 +220,6 @@ public class EditorPopups {
                         comp.paste();
                     }
                 });
-
             }
 
             menu.addSeparator();

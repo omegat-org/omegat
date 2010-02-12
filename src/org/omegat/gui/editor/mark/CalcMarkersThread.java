@@ -118,14 +118,17 @@ public class CalcMarkersThread extends Thread {
                 // Calculate only if entry not changed yet
                 try {
                     if (mController.isEntryChanged(ev)) {
+                        // already changed
                         continue;
                     }
                     ev.result = marker.getMarksForEntry(ev.sourceText,
                             ev.translationText, ev.isActive);
-                    if (mController.isEntryChanged(ev)) {
+                    if (ev.result == null) {
+                        // null returned - not need to change anything
                         continue;
                     }
                     if (mController.isEntryChanged(ev)) {
+                        // already changed
                         continue;
                     }
                     synchronized (forOutput) {

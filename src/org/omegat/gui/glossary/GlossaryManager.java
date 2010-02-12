@@ -25,14 +25,7 @@
 
 package org.omegat.gui.glossary;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,8 +47,9 @@ import org.omegat.util.Log;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class GlossaryManager implements DirectoryMonitor.Callback {
-    private final String EXT_DEF_ENC = ".tab";
-    private final String EXT_UTF8_ENC = ".utf8";
+    protected static final String EXT_DEF_ENC = ".tab";
+    protected static final String EXT_CSV = ".csv";
+    protected static final String EXT_UTF8_ENC = ".utf8";
 
     protected DirectoryMonitor monitor;
 
@@ -85,71 +79,39 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
             glossaries.remove(file.getName());
         }
         if (file.exists()) {
-            String fname_lower = file.getName().toLowerCase();
-            if (fname_lower.endsWith(EXT_DEF_ENC)
-                    || fname_lower.endsWith(EXT_UTF8_ENC)) {
-                Log.logRB("CT_LOADING_GLOSSARY",
-                        new Object[] { file.getName() });
-                try {
-                    List<GlossaryEntry> entries = loadGlossaryFile(file);
+            try {
+                List<GlossaryEntry> entries = loadGlossaryFile(file);
+                if (entries != null) {
                     synchronized (this) {
                         glossaries.put(file.getName(), entries);
                     }
-                } catch (Exception ex) {
-                    Log.logRB("CT_ERROR_ACCESS_GLOSSARY_DIR");
-                    Log.log(ex);
                 }
+            } catch (Exception ex) {
+                Log.logRB("CT_ERROR_ACCESS_GLOSSARY_DIR");
+                Log.log(ex);
             }
         }
         pane.refresh();
     }
 
     /**
-     * Loads one glossary file. Detects a file format and loads a file in
-     * appropriate encoding.
+     * Loads one glossary file. It choose and calls required required reader.
      */
     private List<GlossaryEntry> loadGlossaryFile(final File file)
-            throws FileNotFoundException, UnsupportedEncodingException,
-            IOException {
-        final List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
+            throws Exception {
         String fname_lower = file.getName().toLowerCase();
-        InputStreamReader reader = null;
         if (fname_lower.endsWith(EXT_DEF_ENC)) {
-            reader = new InputStreamReader(new FileInputStream(file));
+            Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
+            return GlossaryReaderTSV.read(file);
         } else if (fname_lower.endsWith(EXT_UTF8_ENC)) {
-            InputStream fis = new FileInputStream(file);
-            reader = new InputStreamReader(fis, "UTF-8"); // NOI18N
+            Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
+            return GlossaryReaderTSV.read(file);
+        } else if (fname_lower.endsWith(EXT_CSV)) {
+            Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
+            return GlossaryReaderCSV.read(file);
+        } else {
+            return null;
         }
-
-        BufferedReader in = new BufferedReader(reader);
-
-        // BOM (byte order mark) bugfix
-        in.mark(1);
-        int ch = in.read();
-        if (ch != 0xFEFF)
-            in.reset();
-
-        for (String s = in.readLine(); s != null; s = in.readLine()) {
-            // skip lines that start with '#'
-            if (s.startsWith("#")) // NOI18N
-                continue;
-
-            // divide lines on tabs
-            String tokens[] = s.split("\t"); // NOI18N
-            // check token list to see if it has a valid string
-            if (tokens.length < 2 || tokens[0].length() == 0)
-                continue;
-
-            // creating glossary entry and add it to the hash
-            // (even if it's already there!)
-            String comment = ""; // NOI18N
-            if (tokens.length >= 3)
-                comment = tokens[2];
-            result.add(new GlossaryEntry(tokens[0], tokens[1], comment));
-        }
-        in.close();
-
-        return result;
     }
 
     /**

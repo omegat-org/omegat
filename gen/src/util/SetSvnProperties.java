@@ -71,7 +71,7 @@ public class SetSvnProperties {
             return;
         }
         if (filename.startsWith("./test/data/")) {
-            if (filename.endsWith(".xml")) {
+            if (filename.endsWith(".xml") || filename.endsWith(".tbx")) {
                 set("text/xml");
             } else if (filename.endsWith(".hhc") || filename.endsWith(".hhk")) {
                 set("text/html");
@@ -87,7 +87,7 @@ public class SetSvnProperties {
                 set("text/plain");
             } else if (filename.endsWith(".properties")) {
                 set("text/plain");
-            } else if (filename.endsWith(".txt")) {
+            } else if (filename.endsWith(".txt") || filename.endsWith(".tab") || filename.endsWith(".csv")) {
                 set("text/plain");
             } else if (filename.endsWith(".srt")) {
                 set("text/plain");

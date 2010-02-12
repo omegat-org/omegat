@@ -30,6 +30,7 @@ import java.util.List;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.TestCore;
+import org.omegat.util.Preferences;
 
 /**
  *
@@ -42,6 +43,8 @@ public class GlossaryTextAreaTest extends TestCore
      */
     public void testSetGlossaryEntries() throws Exception 
     {
+        Preferences.setPreference(org.omegat.util.Preferences.TRANSTIPS, false);
+
         final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", ""));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2"));
@@ -61,6 +64,8 @@ public class GlossaryTextAreaTest extends TestCore
      */
     public void testClear() throws Exception
     {
+        Preferences.setPreference(org.omegat.util.Preferences.TRANSTIPS, false);
+
         final List<GlossaryEntry> entries = new ArrayList<GlossaryEntry>();
         entries.add(new GlossaryEntry("source1", "translation1", ""));
         entries.add(new GlossaryEntry("source2", "translation2", "comment2"));

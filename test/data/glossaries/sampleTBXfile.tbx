@@ -1,0 +1,43 @@
+﻿<?xml version='1.0' encoding="UTF-8"?>
+<!DOCTYPE martif SYSTEM "TBXcoreStructV02.dtd">
+<!-- VERSION HISTORY
+	version 1.1 (2008.12.23) - corrected XCS name to end in .xcs
+-->
+<!-- The following lines are required when validating this file against the TBX RNG schema.
+    If you want to use this schema for validation, instead of the DTD, you must uncomment the following
+    two lines, and comment-out the DOCTYPE statement on line 2.-->
+<!--<?oxygen SCHSchema="TBX_RNGV02.rng"?>-->
+<!--<?oxygen RNGSchema="TBX_RNGV02.rng" type="xml"?>-->
+<martif type="TBX" xml:lang="en">
+    <martifHeader>
+        <fileDesc>
+            <sourceDesc>
+                <p>from an Oracle corporation termBase</p>
+            </sourceDesc>
+        </fileDesc>
+        <encodingDesc>
+            <p type="XCSURI">http://www.lisa.org/fileadmin/standards/tbx/TBXXCSV02.xcs</p>
+        </encodingDesc>
+    </martifHeader>
+    <text>
+        <body>
+            <termEntry id="eid-Oracle-67">
+                <descrip type="subjectField">manufacturing</descrip>
+                <descrip type="definition">A value between 0 and 1 used in ...</descrip>
+                <langSet xml:lang="en">
+                    <tig>
+                        <term id="tid-Oracle-67-en1">alpha smoothing factor</term>
+                        <termNote type="termType">fullForm</termNote>
+                        <termNote type="partOfSpeech">noun</termNote>
+                    </tig>
+                </langSet>
+                <langSet xml:lang="hu">
+                    <tig>
+                        <term id="tid-Oracle-67-hu1">Alfa simítási tényezo</term>
+                        <termNote type="partOfSpeech">noun</termNote>
+                    </tig>
+                </langSet>
+            </termEntry>
+        </body>
+    </text>
+</martif>

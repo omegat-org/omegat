@@ -203,6 +203,7 @@ public class EditorController implements IEditor {
                 .registerFontChangedEventListener(new IFontChangedEventListener() {
                     public void onFontChanged(Font newFont) {
                         setFont(newFont);
+                        ViewLabel.fontHeight = 0;
                         editor.revalidate();
                         editor.repaint();
 

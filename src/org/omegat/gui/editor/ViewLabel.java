@@ -25,6 +25,7 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Shape;
 
@@ -38,6 +39,8 @@ import javax.swing.text.LabelView;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ViewLabel extends LabelView {
+    /** Maximum font height for display labels. */
+    protected static int fontHeight;
 
     public ViewLabel(final Element el) {
         super(el);
@@ -52,14 +55,20 @@ public class ViewLabel extends LabelView {
             // document didn't created yet
             return;
         }
+
+        if (fontHeight == 0) {
+            FontMetrics fm = g.getFontMetrics();
+            fontHeight = fm.getHeight();
+        }
     }
 
-       public float getPreferredSpan(int axis) {
-        if (axis == ViewLabel.Y_AXIS) {
-            return Math.round(super.getPreferredSpan(axis));
+    public float getPreferredSpan(int axis) {
+        if (fontHeight > 0 && axis == ViewLabel.Y_AXIS) {
+            System.out.println("Calculated: " + super.getPreferredSpan(axis)
+                    + " height: " + fontHeight);
+            return fontHeight;
         } else {
             return super.getPreferredSpan(axis);
         }
     }
-
 }

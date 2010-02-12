@@ -180,8 +180,6 @@ public class EditorController implements IEditor {
         // register entry changes callback
         CoreEvents.registerEntryEventListener(new IEntryEventListener() {
             public void onNewFile(String activeFileName) {
-                markerController.reset(0);
-
                 updateState(SHOW_TYPE.NO_CHANGE);
             }
 

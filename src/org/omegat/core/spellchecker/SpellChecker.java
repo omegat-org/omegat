@@ -351,17 +351,18 @@ public class SpellChecker implements ISpellChecker {
         boolean isCorrect;
         
         // if it is valid (learned), it is ok
-        if (learnedList.contains(word) || ignoreList.contains(word))
+        if (learnedList.contains(word) || ignoreList.contains(word)) {
             isCorrect = true;
-        if (pHunspell != null) {
+        } else if (pHunspell != null) {
+            isCorrect = false;
             try {
-                if (0 != hunspell.Hunspell_spell(pHunspell, prepareString(word))) {
+                if (0 != hunspell
+                        .Hunspell_spell(pHunspell, prepareString(word))) {
                     isCorrect = true;
                 }
             } catch (UnsupportedEncodingException ex) {
                 Log.log("Unsupported encoding " + encoding);
             }
-            isCorrect = false;
         } else if (jmyspell != null) {
             isCorrect = jmyspell.isCorrect(word);
         } else {

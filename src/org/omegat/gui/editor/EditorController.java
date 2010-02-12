@@ -219,6 +219,8 @@ public class EditorController implements IEditor {
                                         + "]", e);
                     }
                 });
+        
+        EditorPopups.init(this);
     }
 
     private void updateState(SHOW_TYPE showType) {
@@ -1223,5 +1225,10 @@ public class EditorController implements IEditor {
         int mi = markerController.getMarkerIndex(markerClassName);
         markerController.setEntryMarks(displayedEntryIndex,
                 m_docSegList[displayedEntryIndex], marks, mi);
+    }
+    
+    public void registerPopupMenuConstructors(int priority,
+            IPopupMenuConstructor constructor) {
+        editor.registerPopupMenuConstructors(priority, constructor);
     }
 }

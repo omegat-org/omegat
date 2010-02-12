@@ -219,4 +219,15 @@ public interface IEditor {
      */
     void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
             String markerClassName);
+
+    /**
+     * Register constructor of popup menu.
+     * 
+     * @param priority
+     *            priority of process order
+     * @param constructor
+     *            constructor instance
+     */
+    void registerPopupMenuConstructors(int priority,
+            IPopupMenuConstructor constructor);
 }

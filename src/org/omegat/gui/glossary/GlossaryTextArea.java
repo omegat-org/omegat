@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
                2009-2010 Wildrich Fourie
+               2010 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,6 +40,7 @@ import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.OStrings;
+import org.omegat.util.Preferences;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -48,6 +50,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Wildrich Fourie
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     /** Glossary manager instance. */
@@ -62,7 +65,7 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     /**
     * Holds the current GlossaryEntries for the TransTips
     */
-    public List<GlossaryEntry> nowEntries;
+    protected static List<GlossaryEntry> nowEntries;
 
     /** Creates new form MatchGlossaryPane */
     public GlossaryTextArea() {
@@ -76,6 +79,8 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
                 new DockableScrollPane("GLOSSARY", title, this, true));
 
         addMouseListener(mouseListener);
+        
+        Core.getEditor().registerPopupMenuConstructors(200, new TransTipsPopup());
     }
 
     @Override
@@ -114,7 +119,7 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
         UIThreadsUtil.mustBeSwingThread();
 
         // If the TransTips is enabled then underline all the matched glossary entries
-        if(org.omegat.util.Preferences.isPreference(org.omegat.util.Preferences.TRANSTIPS)) {
+        if(Preferences.isPreference(Preferences.TRANSTIPS)) {
             // TODO move marks construction into search thread
             highlightTransTips(en, entries);
         }
@@ -141,14 +146,19 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     {
         if(!entries.isEmpty())
         {
-            List<Mark> marks = new ArrayList<Mark>();
+            final List<Mark> marks = new ArrayList<Mark>();
             // Get the index of the current segment in the whole document
             String sourceText = en.getSrcText();
             sourceText = sourceText.toLowerCase();
             
+            TransTips.Search callback = new TransTips.Search() {
+                public void found(GlossaryEntry ge, int start, int end) {
+                    marks.add(new Mark(Mark.ENTRY_PART.SOURCE, start, end));
+                }
+            };
+
             for (GlossaryEntry ent : entries) {
-                String nowEntry = ent.getSrcText();
-                TransTipsUnderliner.search(en.getSrcText(), nowEntry, marks);
+                TransTips.search(en.getSrcText(), ent, callback);
             }
             Core.getEditor().markActiveEntrySource(en, marks,
                     TransTipsMarker.class.getName());

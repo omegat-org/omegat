@@ -26,20 +26,16 @@
 
 package org.omegat.gui.editor;
 
-import java.awt.Point;
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-import java.awt.datatransfer.Transferable;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.swing.JEditorPane;
-import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 import javax.swing.event.CaretEvent;
@@ -49,7 +45,6 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
-import javax.swing.text.Highlighter.Highlight;
 import javax.swing.text.IconView;
 import javax.swing.text.ParagraphView;
 import javax.swing.text.StyleConstants;
@@ -59,20 +54,12 @@ import javax.swing.text.View;
 import javax.swing.text.ViewFactory;
 import javax.swing.undo.UndoManager;
 
-import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.spellchecker.SpellCheckerMarker;
-import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.util.Log;
-import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
- *
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Wildrich Fourie
@@ -84,9 +71,9 @@ public class EditorTextArea3 extends JEditorPane {
 
     protected final EditorController controller;
 
-    protected String currentWord;
+    protected final List<PopupMenuConstructorInfo> popupConstructors = new ArrayList<PopupMenuConstructorInfo>();
 
-    private Highlight[] transtipUnderlines;
+    protected String currentWord;
 
     public EditorTextArea3(EditorController controller) {
         this.controller = controller;
@@ -101,8 +88,8 @@ public class EditorTextArea3 extends JEditorPane {
         addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent e) {
                 try {
-                    int start = EditorUtils.getWordStart(EditorTextArea3.this, e
-                            .getMark());
+                    int start = EditorUtils.getWordStart(EditorTextArea3.this,
+                            e.getMark());
                     int end = EditorUtils.getWordEnd(EditorTextArea3.this, e
                             .getMark());
                     String newWord = getText(start, end - start);
@@ -115,12 +102,6 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
         });
-    }
-    
-    // Returns the Highlights as used in the TransTips
-    private void getHighlights()
-    {
-        transtipUnderlines = this.getHighlighter().getHighlights();
     }
 
     /** Orders to cancel all Undoable edits. */
@@ -148,20 +129,82 @@ public class EditorTextArea3 extends JEditorPane {
                 controller.goToSegmentAtLocation(getCaretPosition());
             }
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
-                // insert trans tip
-                if(createTransTipPopUp(e.getPoint()))
-                    return;
+                PopupMenuConstructorInfo[] cons;
+                synchronized (popupConstructors) {
+                    /**
+                     * Copy constructors - for disable blocking in the procesing
+                     * time.
+                     */
+                    cons = popupConstructors
+                            .toArray(new PopupMenuConstructorInfo[popupConstructors
+                                    .size()]);
+                }
 
-                // any spell checking to be done?
-                if (createSpellCheckerPopUp(e.getPoint()))
-                    return;
+                // where is the mouse
+                int mousepos = viewToModel(e.getPoint());
+                boolean isInActiveTranslation = mousepos >= getOmDocument()
+                        .getTranslationStart()
+                        && mousepos <= getOmDocument().getTranslationEnd();
+                boolean isInActiveEntry;
+                int ae = controller.displayedEntryIndex;
+                SegmentBuilder sb = controller.m_docSegList[ae];
+                if (sb.isActive()) {
+                    isInActiveEntry = mousepos >= sb.getStartPosition()
+                            && mousepos <= sb.getEndPosition();
+                } else {
+                    isInActiveEntry = false;
+                }
 
-                // fall back to go to segment
-                if (createGoToSegmentPopUp(e.getPoint()))
-                    return;
+                JPopupMenu popup = new JPopupMenu();
+                for (PopupMenuConstructorInfo c : cons) {
+                    // call each constructor
+                    c.constructor.addItems(popup, EditorTextArea3.this,
+                            mousepos, isInActiveEntry, isInActiveTranslation,
+                            sb);
+                }
+
+                if (popup.getComponentCount() > 0
+                        && popup.getComponent(0) instanceof JSeparator) {
+                    // remove first separator
+                    popup.remove(0);
+                }
+                if (popup.getComponentCount() > 0
+                        && popup.getComponent(popup.getComponentCount() - 1) instanceof JSeparator) {
+                    // remove last separator
+                    popup.remove(popup.getComponentCount() - 1);
+                }
+                for (int i = 0; i < popup.getComponentCount() - 1; i++) {
+                    if (popup.getComponent(i) instanceof JSeparator
+                            && popup.getComponent(i + 1) instanceof JSeparator) {
+                        // remove duplicate separators
+                        popup.remove(i);
+                    }
+                }
+                if (popup.getComponentCount() > 0) {
+                    popup.show(EditorTextArea3.this, (int) e.getPoint().getX(),
+                            (int) e.getPoint().getY());
+                }
             }
         }
     };
+
+    /**
+     * Add new constructor into list and sort full list by priority.
+     */
+    protected void registerPopupMenuConstructors(int priority,
+            IPopupMenuConstructor constructor) {
+        synchronized (popupConstructors) {
+            popupConstructors.add(new PopupMenuConstructorInfo(priority,
+                    constructor));
+            Collections.sort(popupConstructors,
+                    new Comparator<PopupMenuConstructorInfo>() {
+                        public int compare(PopupMenuConstructorInfo o1,
+                                PopupMenuConstructorInfo o2) {
+                            return o1.priority - o2.priority;
+                        }
+                    });
+        }
+    }
 
     /**
      * Redefine some keys behavior. We can't use key listeners, because we have
@@ -351,7 +394,7 @@ public class EditorTextArea3 extends JEditorPane {
 
     /**
      * Check if specified key pressed.
-     *
+     * 
      * @param e
      *            pressed key event
      * @param code
@@ -394,278 +437,6 @@ public class EditorTextArea3 extends JEditorPane {
     }
 
     /**
-     * creates a popup menu for inactive segments - with an item allowing to go
-     * to the given segment.
-     */
-    private boolean createGoToSegmentPopUp(Point point) {
-        final int mousepos = this.viewToModel(point);
-
-        if (mousepos >= getOmDocument().getTranslationStart()
-                - OConsts.segmentStartStringFull.length()
-                && mousepos <= getOmDocument().getTranslationEnd()
-                        + OConsts.segmentStartStringFull.length())
-            return false;        
-
-        JPopupMenu popup = new JPopupMenu();
-
-        createDefaultContextMenu(popup);
-
-        JMenuItem item = popup
-                .add(OStrings.getString("MW_PROMPT_SEG_NR_TITLE"));
-        item.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                setCaretPosition(mousepos);
-                controller.goToSegmentAtLocation(getCaretPosition());
-            }
-        });
-
-        popup.show(this, (int) point.getX(), (int) point.getY());
-
-        return true;
-    }
-
-    /**
-     * create the spell checker popup menu - suggestions for a wrong word, add
-     * and ignore. Works only for the active segment, for the translation
-     *
-     * @param point
-     *            : where should the popup be shown
-     */
-    protected boolean createSpellCheckerPopUp(final Point point) {
-        if (!controller.getSettings().isAutoSpellChecking())
-            return false;
-
-        // where is the mouse
-        int mousepos = viewToModel(point);
-
-        if (mousepos < getOmDocument().getTranslationStart()
-                || mousepos > getOmDocument().getTranslationEnd())
-            return false;
-
-        try {
-            // find the word boundaries
-            final int wordStart = EditorUtils.getWordStart(this, mousepos);
-            final int wordEnd = EditorUtils.getWordEnd(this, mousepos);
-
-            final String word = getText(wordStart, wordEnd - wordStart);
-
-            final AbstractDocument xlDoc = (AbstractDocument) getDocument();
-
-            if (!Core.getSpellChecker().isCorrect(word)) {
-                // get the suggestions and create a menu
-                List<String> suggestions = Core.getSpellChecker().suggest(word);                
-
-                // create the menu
-                JPopupMenu popup = new JPopupMenu();
-
-                createDefaultContextMenu(popup);
-
-                // the suggestions
-                for (final String replacement : suggestions) {
-                    JMenuItem item = popup.add(replacement);
-                    item.addActionListener(new ActionListener() {
-                        // the action: replace the word with the selected
-                        // suggestion
-                        public void actionPerformed(ActionEvent e) {
-                            try {
-                                int pos = getCaretPosition();
-                                xlDoc.replace(wordStart, wordEnd - wordStart,
-                                        replacement, null);
-                                setCaretPosition(pos);
-                            } catch (BadLocationException exc) {
-                                Log.log(exc);
-                            }
-                        }
-                    });
-                }
-
-                // what if no action is done?
-                if (suggestions.size() == 0) {
-                    JMenuItem item = popup.add(OStrings
-                            .getString("SC_NO_SUGGESTIONS"));
-                    item.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            // just hide the menu
-                        }
-                    });
-                }
-
-                popup.add(new JSeparator());
-
-                // let us ignore it
-                JMenuItem item = popup.add(OStrings.getString("SC_IGNORE_ALL"));
-                item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        addIgnoreWord(word, wordStart, false);
-                    }
-                });
-
-                // or add it to the dictionary
-                item = popup.add(OStrings.getString("SC_ADD_TO_DICTIONARY"));
-                item.addActionListener(new ActionListener() {
-                    public void actionPerformed(ActionEvent e) {
-                        addIgnoreWord(word, wordStart, true);
-                    }
-                });
-
-                popup.show(this, (int) point.getX(), (int) point.getY());
-            }
-        } catch (BadLocationException ex) {
-            Log.log(ex);
-        }
-        return true;
-    }
-
-    /**
-     * add a new word to the spell checker or ignore a word
-     *
-     * @param word
-     *            : the word in question
-     * @param offset
-     *            : the offset of the word in the editor
-     * @param add
-     *            : true for add, false for ignore
-     */
-    protected void addIgnoreWord(final String word, final int offset,
-            final boolean add) {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (add) {
-            Core.getSpellChecker().learnWord(word);
-        } else {
-            Core.getSpellChecker().ignoreWord(word);
-        }
-        
-        controller.remarkOneMarker(SpellCheckerMarker.class.getName());
-    }
-
-     // Creates the Cut, Copy and Paste menu items
-    protected void createDefaultContextMenu(JPopupMenu popup)
-    {
-        final String selText = this.getSelectedText();
-        final Clipboard omClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
-        Transferable contents = omClipboard.getContents(this);
-        final EditorTextArea3 ref = this;
-        boolean added = false;
-
-        if(selText != null)
-        {
-            JMenuItem cutContextItem = popup.add(OStrings.getString("CCP_CUT"));
-            JMenuItem copyContextItem = popup.add(OStrings.getString("CCP_COPY"));
-
-            // ActionListeners
-            cutContextItem.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e)
-                {
-                    ref.cut();
-                }});
-            copyContextItem.addActionListener(new ActionListener(){
-                public void actionPerformed(ActionEvent e)
-                {
-                    ref.copy();
-                }});
-
-                added = true;
-        }
-
-        if(contents != null)
-        {
-            JMenuItem pasteContextItem = popup.add(OStrings.getString("CCP_PASTE"));
-            pasteContextItem.addActionListener(new ActionListener(){
-            public void actionPerformed(ActionEvent e)
-            {
-                ref.paste();
-            }});
-
-            added = true;
-        }
-
-        if(added)
-            popup.addSeparator();
-    }
-
-    // Insert a TransTip
-    protected boolean createTransTipPopUp(final Point point)
-    {
-        if(!Preferences.isPreference(Preferences.TRANSTIPS))
-            return false;
-
-        // Convert to point to actual pointer location
-        final int mousepos = this.viewToModel(point);
-
-        // create the menu
-        JPopupMenu popup = new JPopupMenu();
-
-        // Test if clicked on a highlighted word
-        getHighlights();
-        boolean matched = false;
-        final AbstractDocument xlDoc = (AbstractDocument) getDocument();
-        for(int i = 0; i < transtipUnderlines.length; i++)
-        {
-            if(mousepos >= transtipUnderlines[i].getStartOffset() &&
-                    mousepos <= transtipUnderlines[i].getEndOffset())
-            {
-                matched  = true;
-
-                createDefaultContextMenu(popup);
-
-                // Get the glossary entries
-                List<GlossaryEntry> glos = Core.getGlossary().nowEntries;
-                String src = "";
-                try
-                {
-                    src = xlDoc.getText(0, xlDoc.getLength());
-                }
-                catch (BadLocationException bx) { /* Unthrowable */ }
-
-                String woord = src.substring(transtipUnderlines[i].getStartOffset(),
-                        transtipUnderlines[i].getEndOffset());
-
-                // Get the translations
-                GlossaryEntry ge = null;
-                for(int k=0; k < glos.size(); k++)
-                {
-                    if(glos.get(k).getSrcText().toLowerCase().equals(woord.toLowerCase()))
-                    {
-                        ge = glos.get(k);
-                        continue;
-                    }
-                }
-
-                if(ge != null)
-                {
-                    // Split the terms and remove the leading space.
-                    String[] locs = ge.getLocText().split(",");
-                    for(int l=1; l < locs.length; l++)
-                    {
-                        locs[l] = locs[l].trim();
-                    }
-
-                    // Create the MenuItems
-                    for(int l=0; l < locs.length; l++)
-                    {
-                        final String txt = locs[l];
-                        JMenuItem it = popup.add(locs[l]);
-                        it.addActionListener(new ActionListener() {
-                            public void actionPerformed(ActionEvent e)
-                            {
-                                Core.getEditor().insertText(txt);
-                            }
-                        });
-                    }
-                    i = transtipUnderlines.length;
-                }
-            }
-        }
-        if(!matched)
-            return false;
-        else
-            popup.show(this, (int) point.getX(), (int) point.getY());
-
-        return true;
-    }
-
-    /**
      * Factory for create own view.
      */
     public static ViewFactory factory3 = new ViewFactory() {
@@ -689,4 +460,15 @@ public class EditorTextArea3 extends JEditorPane {
             return new ViewLabel(elem);
         }
     };
+
+    private static class PopupMenuConstructorInfo {
+        final int priority;
+        final IPopupMenuConstructor constructor;
+
+        public PopupMenuConstructorInfo(int priority,
+                IPopupMenuConstructor constructor) {
+            this.priority = priority;
+            this.constructor = constructor;
+        }
+    }
 }

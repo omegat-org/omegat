@@ -29,14 +29,13 @@ import java.util.List;
 
 import javax.swing.text.JTextComponent;
 
-import org.omegat.gui.editor.mark.Mark;
 import org.omegat.util.Preferences;
 
 /**
  * Underlines all the terms in the SourceTextEntry that has matches in the Glossary.
  * @author W. Fourie
  */
-public class TransTipsUnderliner
+public class TransTips
 {
     // The current textComponent on which the lines should be drawn
     protected JTextComponent comp;
@@ -71,14 +70,16 @@ public class TransTipsUnderliner
     /**
      * Search for a word and returns the offset of the first occurrence.
      * Highlights are added for all occurrences found.
-     * @param word To be searched
+     * @param glossaryEntry To be searched
      * @param start Starting position
      * @param end Ending position
      * @return The offset of the first occurrence
      */
-    public static void search(String sourceText, String word, List<Mark> marks)
+    public static void search(String sourceText, GlossaryEntry glossaryEntry, Search callback)
     {
         int firstOffset = -1;
+        
+        String word = glossaryEntry.getSrcText();
         // Test for invalid word.
         if (word == null || word.equals(""))
         {
@@ -100,7 +101,7 @@ public class TransTipsUnderliner
             {
                 if(isWordAlone(content, lastIndex, word))
                 {
-                        marks.add(new Mark(Mark.ENTRY_PART.SOURCE, lastIndex,endIndex));
+                    callback.found(glossaryEntry, lastIndex,endIndex);
 
                     if (firstOffset == -1)
                         firstOffset = lastIndex;
@@ -108,7 +109,7 @@ public class TransTipsUnderliner
             }
             else
             {
-                    marks.add(new Mark(Mark.ENTRY_PART.SOURCE, lastIndex,endIndex));
+                callback.found(glossaryEntry, lastIndex,endIndex);
 
                 if (firstOffset == -1)
                     firstOffset = lastIndex;
@@ -170,5 +171,9 @@ public class TransTipsUnderliner
         {
             return false;
         }
-    }    
+    }
+    
+    public interface Search {
+        void found(GlossaryEntry glossaryEntry, int start, int end);
+    }
 }

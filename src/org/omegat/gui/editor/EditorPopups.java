@@ -189,37 +189,61 @@ public class EditorPopups {
                     .getSystemClipboard();
             Transferable contents = omClipboard.getContents(this);
 
-            // only on selected text
+            boolean cutEnabled = false;
+            boolean copyEnabled = false;
+            boolean pasteEnabled = false;
+
+            // Calc enabled/disabled
             if (selText != null && comp.getSelectionStart() <= mousepos
                     && mousepos <= comp.getSelectionEnd()) {
+                // only on selected text
                 if (isInActiveTranslation) {
                     // cut only in editable zone
-                    JMenuItem cutContextItem = menu.add(OStrings
-                            .getString("CCP_CUT"));
-                    cutContextItem.addActionListener(new ActionListener() {
-                        public void actionPerformed(ActionEvent e) {
-                            comp.cut();
-                        }
-                    });
+                    cutEnabled = true;
                 }
                 // copy in any place
-                JMenuItem copyContextItem = menu.add(OStrings
-                        .getString("CCP_COPY"));
+                copyEnabled = true;
+            }
+            if (contents != null && isInActiveTranslation) {
+                pasteEnabled = true;
+            }
+
+            // Cut
+            JMenuItem cutContextItem = menu.add(OStrings.getString("CCP_CUT"));
+            if (cutEnabled) {
+                cutContextItem.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        comp.cut();
+                    }
+                });
+            } else {
+                cutContextItem.setEnabled(false);
+            }
+
+            // Copy
+            JMenuItem copyContextItem = menu
+                    .add(OStrings.getString("CCP_COPY"));
+            if (copyEnabled) {
                 copyContextItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         comp.copy();
                     }
                 });
+            } else {
+                copyContextItem.setEnabled(false);
             }
 
-            if (contents != null && isInActiveTranslation) {
-                JMenuItem pasteContextItem = menu.add(OStrings
-                        .getString("CCP_PASTE"));
+            // Paste
+            JMenuItem pasteContextItem = menu.add(OStrings
+                    .getString("CCP_PASTE"));
+            if (pasteEnabled) {
                 pasteContextItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
                         comp.paste();
                     }
                 });
+            } else {
+                pasteContextItem.setEnabled(false);
             }
 
             menu.addSeparator();

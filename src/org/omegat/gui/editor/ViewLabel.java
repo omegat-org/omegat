@@ -64,8 +64,8 @@ public class ViewLabel extends LabelView {
 
     public float getPreferredSpan(int axis) {
         if (fontHeight > 0 && axis == ViewLabel.Y_AXIS) {
-            System.out.println("Calculated: " + super.getPreferredSpan(axis)
-                    + " height: " + fontHeight);
+//            System.out.println("Calculated: " + super.getPreferredSpan(axis)
+//                    + " height: " + fontHeight);
             return fontHeight;
         } else {
             return super.getPreferredSpan(axis);

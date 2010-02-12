@@ -63,6 +63,7 @@ import javax.swing.JTextArea;
 import javax.swing.KeyStroke;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.Border;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ListSelectionEvent;
@@ -235,6 +236,11 @@ public class ProjectFrame extends JFrame {
                     setVisible(true);
                     tableFiles.requestFocus();
                     buildTotalTableLayout();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            toFront();
+                        }
+                    });
                     break;
                 }
             }

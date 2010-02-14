@@ -3649,7 +3649,7 @@
      <!--numbered headers break rule 
          contributed by Jean-Christophe Helary -->
      <beforebreak>^\s*[\p{Nd}\.]+\s*</beforebreak>
-     <afterbreak>.</afterbreak>
+     <afterbreak>\p{Lu}</afterbreak>
     </rule>
     <rule break="yes">
      <!-- .?! break rule -->

@@ -149,8 +149,6 @@ public class EditorController implements IEditor {
 
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
-                markerController.reset(0);
-
                 SHOW_TYPE showType;
                 switch (eventType) {
                 case CREATE:
@@ -161,10 +159,12 @@ public class EditorController implements IEditor {
                     } else {
                         showType = SHOW_TYPE.EMPTY_PROJECT;
                     }
+                    markerController.reset(0);
                     setInitialOrientation();
                     break;
                 case CLOSE:
                     history.clear();
+                    markerController.reset(0);
                     showType = SHOW_TYPE.INTRO;
                     deactivateWithoutCommit();
                     break;

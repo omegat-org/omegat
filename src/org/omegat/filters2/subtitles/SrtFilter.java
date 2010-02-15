@@ -27,12 +27,16 @@ package org.omegat.filters2.subtitles;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 
 /**
  * Filter for subtitles files. Format described on
@@ -48,6 +52,8 @@ public class SrtFilter extends AbstractFilter {
     enum READ_STATE {
         WAIT_TIME, WAIT_TEXT
     };
+
+    protected Map<String, String> align;
 
     @Override
     public Instance[] getDefaultInstances() {
@@ -75,25 +81,52 @@ public class SrtFilter extends AbstractFilter {
         READ_STATE state = READ_STATE.WAIT_TIME;
         String s;
         int num = 0;
+        String key = null;
+        StringBuilder text = new StringBuilder();
         while ((s = inFile.readLine()) != null) {
             switch (state) {
             case WAIT_TIME:
                 if (PATTERN_TIME_INTERVAL.matcher(s).matches()) {
                     state = READ_STATE.WAIT_TEXT;
                 }
+                key = s;
+                text.setLength(0);
                 outFile.write(s);
                 outFile.write(EOL);
                 break;
             case WAIT_TEXT:
                 if (s.trim().length() == 0) {
                     state = READ_STATE.WAIT_TIME;
+                    if (align != null) {
+                        align.put(key, text.toString());
+                    }
                 }
+                text.append(s).append('\n');
                 String tr = processEntry(s);
                 outFile.write(tr);
                 outFile.write(EOL);
                 break;
             }
             num++;
+        }
+    }
+
+    @Override
+    protected void alignFile(BufferedReader sourceFile,
+            BufferedReader translatedFile) throws Exception {
+        Map<String, String> source = new HashMap<String, String>();
+        Map<String, String> translated = new HashMap<String, String>();
+
+        align = source;
+        processFile(sourceFile, new NullBufferedWriter());
+        align = translated;
+        processFile(translatedFile, new NullBufferedWriter());
+        for (Map.Entry<String, String> en : source.entrySet()) {
+            String tr = translated.get(en.getKey());
+            if (!StringUtil.isEmpty(tr)) {
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
+                        tr, false, null, this);
+            }
         }
     }
 }

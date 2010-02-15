@@ -30,6 +30,9 @@ package org.omegat.core.data;
 import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
+import java.io.RandomAccessFile;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -91,6 +94,9 @@ public class RealProject implements IProject
 
     private final ProjectProperties m_config;
 
+    private FileChannel lockChannel;
+    private FileLock lock;
+    
     private boolean m_modifiedFlag;
 
     /** List of all segments in project. */
@@ -140,7 +146,9 @@ public class RealProject implements IProject
     }
     
     public void saveProjectProperties() throws IOException {
+        unlockProject();
         ProjectFileStorage.writeProjectFile(m_config);
+        lockProject();
         Preferences.setPreference(Preferences.SOURCE_LOCALE, m_config.getSourceLanguage().toString());
         Preferences.setPreference(Preferences.TARGET_LOCALE, m_config.getTargetLanguage().toString());
     }
@@ -152,6 +160,8 @@ public class RealProject implements IProject
     {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CREATE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
+        
+        lockProject();
         
         try
         {
@@ -184,6 +194,8 @@ public class RealProject implements IProject
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
         UIThreadsUtil.mustNotBeSwingThread();
         
+        lockProject();
+
         // load new project
         try
         {
@@ -296,8 +308,35 @@ public class RealProject implements IProject
      * and if it's still being loaded, core thread shouldn't throw
      * any error.
      */
-    public void closeProject() {        
+    public void closeProject() {
+        unlockProject();
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
+    }
+    
+    /**
+     * Lock omegat.project file against rename or move project.
+     */
+    protected void lockProject() {
+        try {
+            File lockFile = new File(m_config.getProjectRoot(),
+                    OConsts.FILE_PROJECT);
+            lockChannel = new RandomAccessFile(lockFile, "rw").getChannel();
+            lock = lockChannel.lock();
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+    }
+
+    /**
+     * Unlock omegat.project file against rename or move project.
+     */
+    protected void unlockProject() {
+        try {
+            lock.release();
+            lockChannel.close();
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
     }
     
     /** Builds translated files corresponding to sourcePattern

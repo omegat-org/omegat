@@ -661,6 +661,10 @@ public class EditorController implements IEditor {
             return;
         }
 
+        if (!doc.isEditMode()) {
+            return;
+        }
+        
         // forget about old marks
         markerController.resetEntryMarks(displayedEntryIndex);
 

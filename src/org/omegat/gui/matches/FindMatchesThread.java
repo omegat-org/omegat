@@ -120,13 +120,6 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         // get tokens for original string
         strTokensStem = Core.getTokenizer().tokenizeWords(
                 processedEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
-        if (strTokensStem.length == 0) {
-            return result;
-            // HP: maybe also test on strTokensComplete.size(), if strTokensSize
-            // is 0
-            // HP: perhaps that would result in better number/non-word matching
-            // too
-        }
         strTokensNoStem = Core.getTokenizer().tokenizeWords(
                 processedEntry.getSrcText(), ITokenizer.StemmingMode.NONE);
         strTokensAll = Core.getTokenizer().tokenizeAllExactly(
@@ -191,9 +184,6 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             final String tmxName) {
         Token[] candTokens = Core.getTokenizer().tokenizeWords(source,
                 ITokenizer.StemmingMode.MATCHING);
-        if (candTokens.length == 0) {
-            return;
-        }
 
         // First percent value - with stemming if possible
         int similarityStem = FuzzyMatcher.calcSimilarity(distance,

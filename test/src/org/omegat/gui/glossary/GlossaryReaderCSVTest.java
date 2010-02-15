@@ -40,11 +40,11 @@ public class GlossaryReaderCSVTest extends TestCase {
         assertEquals(g.get(0).getLocText(), "csv kde");
         assertEquals(g.get(1).getSrcText(), "question");
         assertEquals(g.get(1).getLocText(), "csv q");
-        assertEquals(g.get(2).getSrcText(), "kde, question");
+        assertEquals(g.get(2).getSrcText(), "kde; question");
         assertEquals(g.get(2).getLocText(), "comma");
-        assertEquals(g.get(3).getSrcText(), "kde; qu");
+        assertEquals(g.get(3).getSrcText(), "kde, qu");
         assertEquals(g.get(3).getLocText(), "comma dot");
-        assertEquals(g.get(4).getSrcText(), "\"kde\";\"q\"");
+        assertEquals(g.get(4).getSrcText(), "\"kde\",\"q\"");
         assertEquals(g.get(4).getLocText(), "cdk");
         assertEquals(g.get(5).getSrcText(), "\"\"k");
         assertEquals(g.get(5).getLocText(), "k");

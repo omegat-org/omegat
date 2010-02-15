@@ -40,6 +40,9 @@ import java.util.List;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class GlossaryReaderCSV {
+    /** Fields separator. Can be dependent of regional options. */
+    protected static final char SEPARATOR = ',';
+    
     public static List<GlossaryEntry> read(final File file) throws IOException {
         InputStreamReader reader = new InputStreamReader(new FileInputStream(
                 file));
@@ -104,7 +107,7 @@ public class GlossaryReaderCSV {
                     fopened = false;
                 }
                 break;
-            case ';':
+            case SEPARATOR:
                 if (fopened) {
                     w.append(c);
                 } else {

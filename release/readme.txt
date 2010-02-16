@@ -66,6 +66,8 @@ OmegaT supports the following file formats out of the box:
   - ResX
   - Android resource
   - LaTeX
+  - Help & Manual
+  - Windows RC resources
 
 OmegaT can be customized to support other file formats as well.
 

@@ -1,10 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.2 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 update 1 vs. 2.1.2
+
+  Implemented requests:
+
+   - CSV glossary format
+  http://sourceforge.net/support/tracker.php?aid=2952761
+
 
   Other enhancements:
   

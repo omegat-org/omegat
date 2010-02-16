@@ -32,6 +32,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omegat.util.OConsts;
+
 /**
  * Reader for comma separated glossaries.
  * 
@@ -45,7 +47,7 @@ public class GlossaryReaderCSV {
     
     public static List<GlossaryEntry> read(final File file) throws IOException {
         InputStreamReader reader = new InputStreamReader(new FileInputStream(
-                file));
+                file), OConsts.UTF8);
 
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
         BufferedReader in = new BufferedReader(reader);

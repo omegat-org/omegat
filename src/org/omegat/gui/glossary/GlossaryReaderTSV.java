@@ -34,6 +34,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.omegat.util.OConsts;
+
 /**
  * Reader for tab separated glossaries.
  * 
@@ -49,7 +51,7 @@ public class GlossaryReaderTSV {
             reader = new InputStreamReader(new FileInputStream(file));
         } else if (fname_lower.endsWith(GlossaryManager.EXT_UTF8_ENC)) {
             InputStream fis = new FileInputStream(file);
-            reader = new InputStreamReader(fis, "UTF-8");
+            reader = new InputStreamReader(fis, OConsts.UTF8);
         } else {
             return null;
         }

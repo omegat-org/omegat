@@ -70,6 +70,7 @@ public class HelpAndManualFilter extends XMLFilter
         return new Instance[] 
         {
             new Instance("*.xml", null, null),
+            new Instance("*.hmxp", null, null),
         };
     }
 

@@ -2,7 +2,7 @@
  OmegaT 2.1.2 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 update 1 vs. 2.1.2
 
@@ -11,8 +11,11 @@
   - Windows Resources (RC) file filter
 
   Bug fixes:
+
   - OS allowed to rename a project directory while in use
   http://sourceforge.net/support/tracker.php?aid=1956239
+
+  - Help & Manual: Some translatable text was not available
 
 ----------------------------------------------------------------------
  OmegaT 2.1.2 

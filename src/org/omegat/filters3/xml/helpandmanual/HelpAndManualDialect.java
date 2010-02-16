@@ -37,15 +37,14 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  */
 public class HelpAndManualDialect extends DefaultXMLDialect
 {
-    public static final Pattern HAM_ROOT_TAG = Pattern.compile("topic");
-
+    public static final Pattern HAM_ROOT_TAG = Pattern.compile("topic|map|helpproject");
 
     public HelpAndManualDialect()
     {
         defineConstraint(CONSTRAINT_ROOT, HAM_ROOT_TAG);
 
         defineParagraphTags(new String[] {
-            "para", "title", "keyword", "li", 
+            "caption", "config-value", "variable", "para", "title", "keyword", "li", 
         });
 
         defineShortcut("link", "li");

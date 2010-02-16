@@ -11,9 +11,8 @@
   - Windows Resources (RC) file filter
 
   Bug fixes:
-   - OS allowed to rename a project directory while in used
+  - OS allowed to rename a project directory while in use
   http://sourceforge.net/support/tracker.php?aid=1956239
-
 
 ----------------------------------------------------------------------
  OmegaT 2.1.2 

@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Wildrich Fourie
+ Copyright (C) 2010 Wildrich Fourie, Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +34,8 @@ import org.omegat.util.Preferences;
 /**
  * Underlines all the terms in the SourceTextEntry that has matches in the Glossary.
  * @author W. Fourie
+ * @author Alex Buloichik
+ * @author Didier Briel
  */
 public class TransTips
 {
@@ -87,7 +89,9 @@ public class TransTips
         }
 
         // Search for the word.
-        String content = sourceText;
+        // Since we're comparing with lower case,
+        // the source text has to be in lower case too.
+        String content = sourceText.toLowerCase();
 
         word = word.toLowerCase();        
         int lastIndex = 0;

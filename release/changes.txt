@@ -2,7 +2,7 @@
  OmegaT 2.1.2 update 1
 ----------------------------------------------------------------------
   2 Enhancements
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 update 1 vs. 2.1.2
 
@@ -10,7 +10,6 @@
 
    - CSV glossary format
   http://sourceforge.net/support/tracker.php?aid=2952761
-
 
   Other enhancements:
   
@@ -22,6 +21,9 @@
   http://sourceforge.net/support/tracker.php?aid=1956239
 
   - Help & Manual: Some translatable text was not available
+
+  - TransTip doesn't highlight words in uppercase
+  http://sourceforge.net/support/tracker.php?aid=2953462
 
 ----------------------------------------------------------------------
  OmegaT 2.1.2 

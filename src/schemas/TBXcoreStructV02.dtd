@@ -1,0 +1,246 @@
+<!-- start schema here tbx_core.dtd -->
+<!-- TBXcoreStructV02.dtd -->
+<!-- note: see XCS for values of type on meta data-categories and for values of
+xml:lang -->
+<!-- =================================================================================
+SOME USEFUL ENTITIES THAT ARE REFERENCED BELOW
+================================================================================== -->
+<!ENTITY % basicText '(#PCDATA | hi)*'>
+<!ENTITY % noteText '(#PCDATA | hi | foreign | bpt | ept | ph)*'>
+<!ENTITY % auxInfo '(descrip | descripGrp | admin | adminGrp | transacGrp | note | ref
+| xref)*' >
+<!ENTITY % noteLinkInfo '(admin | adminGrp | transacGrp | note | ref | xref)*' >
+<!-- Entities that define common sets of attributes -->
+<!ENTITY % impIDLang '
+id ID #IMPLIED
+xml:lang CDATA #IMPLIED
+'>
+<!ENTITY % impIDType '
+id ID #IMPLIED
+type CDATA #IMPLIED
+'>
+<!ENTITY % impIDLangTypTgtDtyp '
+id ID #IMPLIED
+xml:lang CDATA #IMPLIED
+type CDATA #REQUIRED
+target IDREF #IMPLIED
+datatype CDATA #IMPLIED
+'>
+<!-- ================================================================================
+ELEMENTS USED FOR TEXT MARKUP
+================================================================================ -->
+<!ELEMENT hi (#PCDATA) >
+<!ATTLIST hi
+type CDATA #IMPLIED
+target IDREF #IMPLIED
+xml:lang CDATA #IMPLIED
+>
+<!ELEMENT foreign %noteText; >
+<!ATTLIST foreign
+id ID #IMPLIED
+xml:lang CDATA #IMPLIED
+>
+<!ELEMENT bpt (#PCDATA) >
+<!ATTLIST bpt
+i CDATA #IMPLIED
+type CDATA #IMPLIED
+
+>
+<!ELEMENT ept (#PCDATA) >
+<!ATTLIST ept
+i CDATA #IMPLIED
+>
+<!ELEMENT ph (#PCDATA) >
+<!ATTLIST ph
+type CDATA #IMPLIED
+>
+<!-- ================================================================================
+ELEMENTS NEEDED FOR TERMINOLOGICAL ENTRIES (IN ALPHABETICAL ORDER)
+================================================================================ -->
+<!ELEMENT admin %noteText; >
+<!ATTLIST admin
+%impIDLangTypTgtDtyp;
+>
+<!ELEMENT adminGrp (admin, (adminNote|note|ref|xref)*) >
+<!ATTLIST adminGrp
+id ID #IMPLIED
+>
+<!ELEMENT adminNote (#PCDATA) >
+<!ATTLIST adminNote
+%impIDLangTypTgtDtyp;
+>
+<!ELEMENT date (#PCDATA) >
+<!ATTLIST date
+id ID #IMPLIED
+>
+<!ELEMENT descrip %noteText; >
+<!ATTLIST descrip
+%impIDLangTypTgtDtyp;
+>
+<!ELEMENT descripGrp (descrip, (descripNote|admin|adminGrp|transacGrp|note|ref|xref)*)
+>
+<!ATTLIST descripGrp
+id ID #IMPLIED
+>
+<!ELEMENT descripNote (#PCDATA) >
+<!ATTLIST descripNote
+%impIDLangTypTgtDtyp;
+>
+<!ELEMENT langSet ((%auxInfo;), (tig | ntig)+) >
+<!ATTLIST langSet
+id ID #IMPLIED
+xml:lang CDATA #REQUIRED
+>
+<!ELEMENT note %noteText; >
+<!ATTLIST note %impIDLang;
+>
+<!ELEMENT ntig (termGrp, %auxInfo;) >
+<!ATTLIST ntig
+id ID #IMPLIED
+>
+<!ELEMENT ref (#PCDATA) >
+<!ATTLIST ref
+%impIDLangTypTgtDtyp;
+>
+<!ELEMENT term %basicText; >
+<!ATTLIST term
+id ID #IMPLIED
+>
+<!ELEMENT termComp (#PCDATA) >
+<!ATTLIST termComp
+%impIDLang;
+>
+<!ELEMENT termCompGrp (termComp, (termNote|termNoteGrp)*, %noteLinkInfo;) >
+<!ATTLIST termCompGrp
+id ID #IMPLIED
+>
+<!ELEMENT termCompList ((%auxInfo;), (termComp | termCompGrp)+) >
+<!ATTLIST termCompList
+id ID #IMPLIED
+type CDATA #REQUIRED
+>
+<!ELEMENT termEntry ((%auxInfo;),(langSet+)) >
+<!ATTLIST termEntry
+id ID #IMPLIED
+>
+<!ELEMENT termGrp (term, (termNote|termNoteGrp)*, (termCompList)* ) >
+<!ATTLIST termGrp
+id ID #IMPLIED
+>
+<!ELEMENT termNote %noteText; >
+<!ATTLIST termNote
+%impIDLangTypTgtDtyp;
+>
+<!ELEMENT termNoteGrp (termNote, %noteLinkInfo;) >
+<!ATTLIST termNoteGrp
+id ID #IMPLIED
+>
+<!ELEMENT tig (term, (termNote)*, %auxInfo;) >
+<!ATTLIST tig
+id ID #IMPLIED
+>
+<!ELEMENT transac (#PCDATA) >
+<!ATTLIST transac
+%impIDLangTypTgtDtyp;
+>
+<!ELEMENT transacGrp (transac, (transacNote|date|note|ref|xref)* ) >
+<!ATTLIST transacGrp
+id ID #IMPLIED
+>
+
+<!ELEMENT transacNote (#PCDATA) >
+<!ATTLIST transacNote
+%impIDLangTypTgtDtyp;
+>
+<!ELEMENT xref (#PCDATA) >
+<!ATTLIST xref
+%impIDType;
+target CDATA #REQUIRED
+>
+<!--
+===================================================================================
+OTHER ELEMENTS (in hierarchical order)
+===================================================================================
+-->
+<!ELEMENT martif (martifHeader, text) > <!-- *** starting element *** -->
+<!ATTLIST martif
+type CDATA #REQUIRED
+xml:lang CDATA #REQUIRED
+>
+<!ELEMENT martifHeader (fileDesc, encodingDesc?, revisionDesc?) >
+<!ATTLIST martifHeader
+id ID #IMPLIED
+>
+<!ELEMENT p %noteText; > <!-- p is used in several header elements -->
+<!ATTLIST p
+id ID #IMPLIED
+type (DCSName|XCSURI|XCSContent) #IMPLIED
+xml:lang CDATA #IMPLIED
+>
+<!ELEMENT fileDesc (titleStmt?, publicationStmt?, sourceDesc+) >
+<!ATTLIST fileDesc
+id ID #IMPLIED
+>
+<!ELEMENT titleStmt (title, note*) >
+<!ATTLIST titleStmt
+%impIDLang;
+>
+<!ELEMENT title (#PCDATA) >
+<!ATTLIST title
+%impIDLang;
+>
+<!ELEMENT publicationStmt (p+) >
+<!ATTLIST publicationStmt
+id ID #IMPLIED
+>
+<!ELEMENT sourceDesc (p+) >
+<!ATTLIST sourceDesc
+%impIDLang;
+>
+<!ELEMENT encodingDesc (p+) >
+<!ATTLIST encodingDesc
+id ID #IMPLIED
+
+>
+<!ELEMENT revisionDesc (change+) >
+<!ATTLIST revisionDesc
+%impIDLang;
+>
+<!ELEMENT change (p+) >
+<!ATTLIST change
+%impIDLang; >
+<!ELEMENT text (body, back?) >
+<!ATTLIST text
+id ID #IMPLIED
+>
+<!ELEMENT body (termEntry+) >
+<!ATTLIST body
+id ID #IMPLIED
+>
+<!ELEMENT back ((refObjectList)*) >
+<!ATTLIST back
+id ID #IMPLIED
+>
+<!ELEMENT refObjectList (refObject+) >
+<!ATTLIST refObjectList
+id ID #IMPLIED
+type CDATA #REQUIRED
+>
+<!ELEMENT refObject ((itemSet | itemGrp | item)+) >
+<!ATTLIST refObject
+id ID #IMPLIED
+>
+<!ELEMENT item %noteText; >
+<!ATTLIST item
+%impIDType;
+>
+<!ELEMENT itemGrp (item, %noteLinkInfo;)>
+<!ATTLIST itemGrp
+id ID #IMPLIED
+>
+<!ELEMENT itemSet ((item | itemGrp)+)>
+<!ATTLIST itemSet
+%impIDType;
+>
+<!-- end -->
+<!-- end schema here -->

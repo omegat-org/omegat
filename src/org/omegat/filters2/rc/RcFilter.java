@@ -27,12 +27,17 @@ package org.omegat.filters2.rc;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.NullBufferedWriter;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
 
 /**
  * Filter for support Windows resource files.
@@ -45,17 +50,21 @@ import org.omegat.util.OStrings;
 public class RcFilter extends AbstractFilter {
 
     protected static final Pattern RE_DIALOG = Pattern
-            .compile("\\S+\\s+DIALOG(EX)?\\s+.+");
+            .compile("(\\S+)\\s+DIALOG(EX)?\\s+.+");
     protected static final Pattern RE_MENU = Pattern
-            .compile("\\S+\\s+MENU(EX)?\\s*");
+            .compile("(\\S+)\\s+MENU(EX)?\\s*");
     protected static final Pattern RE_MESSAGETABLE = Pattern
-            .compile("\\S+\\s+MESSAGETABLE\\s*");
+            .compile("(\\S+)\\s+MESSAGETABLE\\s*");
     protected static final Pattern RE_STRINGTABLE = Pattern
             .compile("STRINGTABLE\\s*");
 
     enum PART {
         DIALOG, MENU, MESSAGETABLE, STRINGTABLE, OTHER, UNKNOWN
     };
+
+    protected String blockId;
+
+    protected Map<String, String> align;
 
     public String getFileFormatName() {
         return OStrings.getString("RCFILTER_FILTER_NAME");
@@ -78,6 +87,7 @@ public class RcFilter extends AbstractFilter {
         PART cPart = PART.UNKNOWN;
         int cLevel = 0;
 
+        blockId = null;
         String s;
         while ((s = inFile.readLine()) != null) {
             String strim = s.trim();
@@ -100,6 +110,7 @@ public class RcFilter extends AbstractFilter {
                 int b = s.indexOf('"');
                 int e = s.lastIndexOf('"');
                 if (b < e && e > 0) {
+                    String id = parseId(cPart, s, b, e);
                     // extract source
                     loc = s.substring(b + 1, e);
                     if (entryParseCallback != null) {
@@ -110,6 +121,8 @@ public class RcFilter extends AbstractFilter {
                         String trans = entryTranslateCallback.getTranslation(
                                 null, loc);
                         s = s.substring(0, b + 1) + trans + s.substring(e);
+                    } else if (entryAlignCallback != null && id != null) {
+                        align.put(blockId + "/" + id, loc);
                     }
                 }
             }
@@ -118,19 +131,58 @@ public class RcFilter extends AbstractFilter {
         }
     }
 
+    @Override
+    protected void alignFile(BufferedReader sourceFile,
+            BufferedReader translatedFile) throws Exception {
+        Map<String, String> source = new HashMap<String, String>();
+        Map<String, String> translated = new HashMap<String, String>();
+
+        align = source;
+        processFile(sourceFile, new NullBufferedWriter());
+        align = translated;
+        processFile(translatedFile, new NullBufferedWriter());
+        for (Map.Entry<String, String> en : source.entrySet()) {
+            String tr = translated.get(en.getKey());
+            if (!StringUtil.isEmpty(tr)) {
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
+                        tr, false, null, this);
+            }
+        }
+    }
+
     private PART parseFirstLineInBlock(String line) {
-        if (RE_DIALOG.matcher(line).matches()) {
+        Matcher m;
+        if ((m = RE_DIALOG.matcher(line)).matches()) {
+            blockId = m.group(1);
             return PART.DIALOG;
         }
-        if (RE_MENU.matcher(line).matches()) {
+        if ((m = RE_MENU.matcher(line)).matches()) {
+            blockId = m.group(1);
             return PART.MENU;
         }
-        if (RE_MESSAGETABLE.matcher(line).matches()) {
+        if ((m = RE_MESSAGETABLE.matcher(line)).matches()) {
+            blockId = m.group(1);
             return PART.MESSAGETABLE;
         }
         if (RE_STRINGTABLE.matcher(line).matches()) {
+            blockId = "";
             return PART.STRINGTABLE;
         }
         return PART.OTHER;
+    }
+
+    private String parseId(PART cPart, String line, int b, int e) {
+        String[] w;
+        switch (cPart) {
+        case DIALOG:
+        case MENU:
+            w = line.substring(e).split(",");
+            return w.length > 1 ? w[1].trim() : null;
+        case MESSAGETABLE:
+        case STRINGTABLE:
+            w = line.split(",");
+            return w[0].trim();
+        }
+        return null;
     }
 }

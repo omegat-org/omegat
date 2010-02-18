@@ -72,7 +72,7 @@ import org.openide.awt.Mnemonics;
  * @author Didier Briel
  * @author Wildrich Fourie
  */
-public class MainWindowMenu implements ActionListener {
+public class MainWindowMenu implements ActionListener, IMainMenu {
     private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
     
     /** MainWindow instance. */
@@ -210,7 +210,7 @@ public class MainWindowMenu implements ActionListener {
         optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_ADVANCE"));
         optionsMenu
                 .add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
-        optionsMenu.add(optionsGoogleTranslateMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_GOOGLETRANSLATE"));
+        optionsMenu.add(optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE"));
 
         optionsMenu.add(optionsTransTipsMenu = createMenu("TF_OPTIONSMENU_TRANSTIPS"));
         optionsTransTipsMenu.add(optionsTransTipsEnableMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_ENABLE"));
@@ -259,7 +259,6 @@ public class MainWindowMenu implements ActionListener {
     private void updateCheckboxesOnStart() {
         optionsTabAdvanceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isUseTabForAdvance());
         optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
-        optionsGoogleTranslateMenuItem.setSelected(Preferences.isPreference(Preferences.ALLOW_GOOGLE_TRANSLATE));
         optionsTransTipsEnableMenuItem.setSelected(Preferences.isPreference(Preferences.TRANSTIPS));
         optionsTransTipsExactMatchMenuItem.setSelected(Preferences.isPreference(Preferences.TRANSTIPS_EXACT_SEARCH));
 
@@ -271,8 +270,6 @@ public class MainWindowMenu implements ActionListener {
         viewDisplayModificationInfoNoneRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
         viewDisplayModificationInfoSelectedRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
         viewDisplayModificationInfoAllRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
-
-        updateEditOverwriteMachineTranslationMenuItem();
     }
 
     /**
@@ -400,20 +397,12 @@ public class MainWindowMenu implements ActionListener {
         for (JMenuItem item : itemsToSwitchOn) {
             item.setEnabled(isProjectOpened);
         }
-
-        updateEditOverwriteMachineTranslationMenuItem();
     }
 
-    /**
-     * Enable or disable 'Override Machine Translation' menu item.
-     */
-    protected void updateEditOverwriteMachineTranslationMenuItem() {
-        editOverwriteMachineTranslationMenuItem
-                .setEnabled(Core.getProject().isProjectLoaded()
-                        && Preferences
-                                .isPreference(Preferences.ALLOW_GOOGLE_TRANSLATE));
+    public JMenu getMachineTranslationMenu() {
+        return optionsMachineTranslateMenu;
     }
-
+    
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
     JMenuItem editInsertSourceMenuItem;
@@ -451,7 +440,7 @@ public class MainWindowMenu implements ActionListener {
     JMenuItem optionsSetupFileFiltersMenuItem;
     JMenuItem optionsSpellCheckMenuItem;
     JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
-    JCheckBoxMenuItem optionsGoogleTranslateMenuItem;
+    JMenu optionsMachineTranslateMenu;
     JMenu optionsTransTipsMenu;
     JCheckBoxMenuItem optionsTransTipsEnableMenuItem;
     JCheckBoxMenuItem optionsTransTipsExactMatchMenuItem;

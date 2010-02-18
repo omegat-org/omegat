@@ -116,6 +116,9 @@ public class Preferences
     public static final String ALWAYS_CONFIRM_QUIT     = "always_confirm_quit"; // NOI18N
     
     public static final String ALLOW_GOOGLE_TRANSLATE = "allow_google_translate";
+
+    public static final String ALLOW_BELAZAR_TRANSLATE = "allow_belazar_translate";
+
     /** Enable TransTips */
     public static final String TRANSTIPS = "transtips";
     /** TransTips Option: Only match exact words */

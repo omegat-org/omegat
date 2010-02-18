@@ -115,4 +115,9 @@ public interface IMainWindow {
      *                dockable pane
      */
     void addDockable(Dockable pane);
+    
+    /**
+     * Retrieve main manu instance.
+     */
+    IMainMenu getMainMenu();
 }

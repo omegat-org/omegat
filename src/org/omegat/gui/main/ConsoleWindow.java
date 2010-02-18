@@ -109,4 +109,7 @@ public class ConsoleWindow implements IMainWindow {
     public void unlockUI() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+    public IMainMenu getMainMenu() {
+        throw new NoSuchMethodError("Invalid call of ConsoleWindow");
+    }
 }

@@ -43,7 +43,7 @@ import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.editor.mark.IMarker;
-import org.omegat.gui.exttrans.GoogleTranslateTextArea;
+import org.omegat.gui.exttrans.MachineTranslateTextArea;
 import org.omegat.gui.glossary.GlossaryTextArea;
 import org.omegat.gui.main.ConsoleWindow;
 import org.omegat.gui.main.IMainWindow;
@@ -80,7 +80,7 @@ public class Core {
     private static IAutoSave saveThread;
 
     private static GlossaryTextArea glossary;
-    private static GoogleTranslateTextArea googleTranslatePane;
+    private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
 
     private static final List<IMarker> markers = new ArrayList<IMarker>();
@@ -125,8 +125,8 @@ public class Core {
         return spellChecker;
     }
 
-    public static GoogleTranslateTextArea getGoogleTranslatePane() {
-        return googleTranslatePane;
+    public static MachineTranslateTextArea getMachineTranslatePane() {
+        return machineTranslatePane;
     }
 
     public static IAutoSave getAutoSave() {
@@ -155,7 +155,7 @@ public class Core {
         tagValidation = new TagValidationTool(me);
         matcher = new MatchesTextArea(me);
         glossary = new GlossaryTextArea();
-        googleTranslatePane = new GoogleTranslateTextArea();
+        machineTranslatePane = new MachineTranslateTextArea();
         dictionaries = new DictionariesTextArea();
         tokenizer = createTokenizer(params);
         spellChecker = new SpellChecker();

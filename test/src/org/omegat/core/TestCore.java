@@ -29,6 +29,7 @@ import java.awt.Font;
 import javax.swing.JFrame;
 
 import org.omegat.core.data.NotLoadedProject;
+import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
 
 import com.vlsolutions.swing.docking.Dockable;
@@ -74,6 +75,9 @@ public abstract class TestCore extends TestCase {
             }
 
             public void unlockUI() {
+            }
+            public IMainMenu getMainMenu() {
+                return null;
             }
         });
         Core.setCurrentProject(new NotLoadedProject());

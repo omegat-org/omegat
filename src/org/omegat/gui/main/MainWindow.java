@@ -165,6 +165,13 @@ public class MainWindow extends JFrame implements IMainWindow {
     }
     
     /**
+     * {@inheritDoc}
+     */
+    public IMainMenu getMainMenu() {
+        return menu;
+    }
+    
+    /**
      * Set new font to application.
      * 
      * @param newFont

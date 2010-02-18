@@ -227,10 +227,9 @@ public class MainWindowMenuHandler {
     }
 
     public void editOverwriteMachineTranslationMenuItemActionPerformed() {
-        String tr = Core.getGoogleTranslatePane().getText();
+        String tr = Core.getMachineTranslatePane().getDisplayedTranslation();
         if (!StringUtil.isEmpty(tr)) {
-            Core.getEditor().replaceEditText(
-                    Core.getGoogleTranslatePane().getText());
+            Core.getEditor().replaceEditText(tr);
         }
     }
     
@@ -523,12 +522,6 @@ public class MainWindowMenuHandler {
     public void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed() {
         Preferences.setPreference(Preferences.ALWAYS_CONFIRM_QUIT,
                 mainWindow.menu.optionsAlwaysConfirmQuitCheckBoxMenuItem.isSelected());
-    }
-
-    public void optionsGoogleTranslateMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.ALLOW_GOOGLE_TRANSLATE,
-                mainWindow.menu.optionsGoogleTranslateMenuItem.isSelected());
-        mainWindow.menu.updateEditOverwriteMachineTranslationMenuItem();
     }
 
     public void optionsTransTipsEnableMenuItemActionPerformed() {

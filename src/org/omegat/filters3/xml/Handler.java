@@ -507,6 +507,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             intacttagEntry = null;
             intacttagName = null;
             intacttagAttributes = null;
+            removeTranslatableTag();
         }
         else if (collectingOutOfTurnText() && isOutOfTurnTag(tag))
         {
@@ -519,8 +520,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             if (isParagraphTag(tag) && !collectingOutOfTurnText()
                 && !collectingIntactText())
                 translateAndFlush();
+            removeTranslatableTag();
         }
-        removeTranslatableTag();
     }
 
     /**

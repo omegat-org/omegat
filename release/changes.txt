@@ -2,7 +2,7 @@
  OmegaT 2.1.2 update 1
 ----------------------------------------------------------------------
   2 Enhancements
-  4 Bugfixes
+  5 Bugfixes
 ----------------------------------------------------------------------
 2.1.2 update 1 vs. 2.1.2
 
@@ -26,6 +26,10 @@
   http://sourceforge.net/support/tracker.php?aid=2953462
 
   - Line spacing wasn't always fixed in the Editor
+
+  - Missings paragraphs after an out of turn tag
+  http://sourceforge.net/support/tracker.php?aid=2954272
+
 
 ----------------------------------------------------------------------
  OmegaT 2.1.2 

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Kim Bruning
+               2010 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,20 +26,28 @@
 package org.omegat.util;
 
 import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.URLEncoder;
+import java.util.Map;
 
 /**
  * Import pages from MediaWiki
  *
  * @author Kim Bruning
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class WikiGet 
 {
+    protected static final String CHARSET_MARK = "charset=";
+    
     /** 
      * ~inverse of String.split() 
      * refactor note: In future releases, this might best be moved to a different file 
@@ -175,7 +184,7 @@ public class WikiGet
         {
             URL url = new URL(target);
             InputStream in = url.openStream();
-            byte[] b = new byte[4096];	
+            byte[] b = new byte[4096];  
             for (int n; (n = in.read(b)) != -1;) 
             {
                 page.append(new String(b, 0, n, "UTF-8"));                      // NOI18N
@@ -186,5 +195,65 @@ public class WikiGet
             e.printStackTrace();
         } 
         return page.toString();
+    }
+    
+    /**
+     * Post data to the remote URL.
+     * 
+     * @param address
+     *            address to post
+     * @param params
+     *            parameters
+     * @return sever output
+     */
+    public static String post(String address, Map<String, String> params)
+            throws IOException {
+        URL url = new URL(address);
+
+        ByteArrayOutputStream pout = new ByteArrayOutputStream();
+        for (Map.Entry<String, String> p : params.entrySet()) {
+            if (pout.size() > 0) {
+                pout.write('&');
+            }
+            pout.write(p.getKey().getBytes(OConsts.UTF8));
+            pout.write('=');
+            pout.write(URLEncoder.encode(p.getValue(), OConsts.UTF8).getBytes(
+                    OConsts.UTF8));
+        }
+
+        HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+        try {
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type",
+                    "application/x-www-form-urlencoded");
+            conn.setRequestProperty("Content-Length", Integer.toString(pout
+                    .size()));
+
+            conn.setDoInput(true);
+            conn.setDoOutput(true);
+
+            OutputStream cout = conn.getOutputStream();
+            cout.write(pout.toByteArray());
+            cout.flush();
+
+            if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
+                throw new IOException(conn.getResponseMessage());
+            }
+            String contentType=conn.getHeaderField("Content-Type");            
+            int cp = contentType != null ? contentType.indexOf(CHARSET_MARK)
+                    : -1;
+            String charset = cp >= 0 ? contentType.substring(cp
+                    + CHARSET_MARK.length()) : "ISO8859-1";
+            ByteArrayOutputStream res = new ByteArrayOutputStream();
+            InputStream in = conn.getInputStream();
+            try {
+                LFileCopy.copy(in, res);
+            } finally {
+                in.close();
+            }
+            return new String(res.toByteArray(), charset);
+        } finally {
+            conn.disconnect();
+        }
     }
 }

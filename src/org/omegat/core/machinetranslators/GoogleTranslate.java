@@ -24,7 +24,8 @@
 
 package org.omegat.core.machinetranslators;
 
-import java.net.URLEncoder;
+import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -36,10 +37,12 @@ import org.omegat.util.WikiGet;
 /**
  * Support of Google Translate machine translation.
  * 
+ * http://code.google.com/intl/be/apis/ajaxlanguage/documentation/#Translation
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class GoogleTranslate extends BaseTranslate {
-    protected static final String GT_URL = "http://ajax.googleapis.com/ajax/services/language/translate?v=1.0&langpair=#sourceLang#|#targetLang#&q=";
+    protected static final String GT_URL = "http://ajax.googleapis.com/ajax/services/language/translate";
     protected static final String MARK_BEG = "{\"translatedText\":\"";
     protected static final String MARK_END = "\"}";
     protected static final Pattern RE_UNICODE = Pattern
@@ -60,11 +63,14 @@ public class GoogleTranslate extends BaseTranslate {
             throws Exception {
         String trText = text.length() > 5000 ? text.substring(0, 4997) + "..."
                 : text;
-        String url = GT_URL.replace("#sourceLang#", sLang.getLanguageCode())
-                .replace("#targetLang#", tLang.getLanguageCode())
-                + URLEncoder.encode(trText, "UTF-8");
 
-        String v = WikiGet.getURL(url);
+        Map<String, String> p = new TreeMap<String, String>();
+        p.put("v", "1.0");
+        p.put("langpair", sLang.getLanguageCode() + '|'
+                + tLang.getLanguageCode());
+        p.put("q", trText);
+
+        String v = WikiGet.post(GT_URL, p);
         while (true) {
             Matcher m = RE_UNICODE.matcher(v);
             if (!m.find()) {

@@ -21,6 +21,9 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters2.rc.RcFilter
 OmegaT-Plugin: filter
 
+Name: org.omegat.filters2.mozdtd.MozillaDTDFilter
+OmegaT-Plugin: filter
+
 Name: org.omegat.filters2.text.bundles.ResourceBundleFilter
 OmegaT-Plugin: filter
 

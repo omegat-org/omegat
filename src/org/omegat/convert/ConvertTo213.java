@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2009 Alex Buloichik
+ Copyright (C) 2010 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,38 +25,32 @@
 package org.omegat.convert;
 
 import java.io.File;
+import java.io.FileOutputStream;
 
-import org.omegat.convert.v20to21.Convert20to21;
-import org.omegat.gui.main.MainWindowUI;
-import org.omegat.util.Log;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 /**
- * Check old config versions and convert to current version.
+ * Convert UI settings to v2.1.3.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class ConvertConfigs {
-    public static void convert() {
-        File newFilters = new File(StaticUtils.getConfigDir() + "filters.xml");
-        if (!newFilters.exists()) {
-            File oldFilters = new File(StaticUtils.getConfigDir()
-                    + "filters.conf");
-            try {
-                Convert20to21.convertFiltersConfig(oldFilters, newFilters);
-            } catch (Exception ex) {
-                Log.log(ex);
-            }
-        }
+public class ConvertTo213 {
+    public static void convertUIConfig(File out) throws Exception {
+        String layout = Preferences
+                .getPreference(Preferences.MAINWINDOW_LAYOUT);
+        if (layout.length() > 0) {
+            byte[] bytes = StaticUtils.uudecode(layout);
+            String xml = new String(bytes, "UTF-8");
+            xml = xml.replace("GOOGLE_TRANSLATE", "MACHINE_TRANSLATE");
 
-        File newUI = new File(StaticUtils.getConfigDir()
-                + MainWindowUI.UI_LAYOUT_FILE);
-        if (!newUI.exists()) {
+            FileOutputStream o = new FileOutputStream(out);
             try {
-                ConvertTo213.convertUIConfig(newUI);
-            } catch (Exception ex) {
-                Log.log(ex);
+                o.write(xml.getBytes("UTF-8"));
+            } finally {
+                o.close();
             }
         }
+        Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, "");
     }
 }

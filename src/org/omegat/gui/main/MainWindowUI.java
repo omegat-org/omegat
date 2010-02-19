@@ -35,6 +35,9 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.InputStream;
 
 import javax.swing.BorderFactory;
@@ -67,6 +70,8 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MainWindowUI {
+    public static String UI_LAYOUT_FILE = "uiLayout.xml";
+    
     /**
      * Create main UI panels.
      */
@@ -157,14 +162,17 @@ public class MainWindowUI {
             }
         }
         mainWindow.setBounds(x, y, w, h);
-
-        String layout = Preferences.getPreference(Preferences.MAINWINDOW_LAYOUT);
-        if (layout.length() > 0) {
-            byte[] bytes = StaticUtils.uudecode(layout);
+        
+        File uiLayoutFile = new File(StaticUtils.getConfigDir()
+                + MainWindowUI.UI_LAYOUT_FILE);
+        if (uiLayoutFile.exists()) {
             try {
-                ByteArrayInputStream in = new ByteArrayInputStream(bytes);
-                mainWindow.desktop.readXML(in);
-                in.close();
+                FileInputStream in = new FileInputStream(uiLayoutFile);
+                try {
+                    mainWindow.desktop.readXML(in);
+                } finally {
+                    in.close();
+                }
             } catch (Exception e) {
                 Log.log(e);
             }
@@ -180,15 +188,17 @@ public class MainWindowUI {
         Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, mainWindow.getWidth());
         Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, mainWindow.getHeight());
 
+        File uiLayoutFile = new File(StaticUtils.getConfigDir()
+                + MainWindowUI.UI_LAYOUT_FILE);
         try {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            mainWindow.desktop.writeXML(out);
-            out.close();
-            byte[] buf = out.toByteArray();
-            String layout = StaticUtils.uuencode(buf);
-            Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, layout);
-        } catch (Exception e) {
-            Preferences.setPreference(Preferences.MAINWINDOW_LAYOUT, new String());
+            FileOutputStream out = new FileOutputStream(uiLayoutFile);
+            try {
+                mainWindow.desktop.writeXML(out);
+            } finally {
+                out.close();
+            }
+        } catch (Exception ex) {
+            Log.log(ex);
         }
     }
     

@@ -34,6 +34,7 @@ import java.net.URLEncoder;
 
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 
 /**
@@ -50,7 +51,7 @@ public class BelazarTranslate extends BaseTranslate {
     }
 
     public String getName() {
-        return "Belazar";
+        return OStrings.getString("MT_ENGINE_BELAZAR");
     }
 
     @Override

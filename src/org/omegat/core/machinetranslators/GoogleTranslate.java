@@ -29,6 +29,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.util.Language;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.WikiGet;
 
@@ -51,7 +52,7 @@ public class GoogleTranslate extends BaseTranslate {
     }
 
     public String getName() {
-        return "Google Translate";
+        return OStrings.getString("MT_ENGINE_GOOGLE");
     }
 
     @Override

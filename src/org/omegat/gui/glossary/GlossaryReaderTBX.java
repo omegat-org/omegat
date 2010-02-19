@@ -89,9 +89,9 @@ public class GlossaryReaderTBX {
                 for (Object o : ls.getTigOrNtig()) {
                     if (o instanceof Tig) {
                         Tig t = (Tig) o;
-                        if (sLang.equals(lang)) {
+                        if (sLang.equalsIgnoreCase(lang)) {
                             sTerm = t.getTerm().getvalue();
-                        } else if (tLang.equals(lang)) {
+                        } else if (tLang.equalsIgnoreCase(lang)) {
                             tTerm = t.getTerm().getvalue();
                         }
                         for (TermNote tn : t.getTermNote()) {

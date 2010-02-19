@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.3 
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   5 Bugfixes
 ----------------------------------------------------------------------
 2.1.3 update 2.1.2
@@ -10,6 +10,9 @@
 
    - CSV glossary format
   http://sourceforge.net/support/tracker.php?aid=2952761
+
+   - File filter for DTD and Mozilla .properties files
+  http://sourceforge.net/support/tracker.php?aid=1848169
 
   Other enhancements:
   

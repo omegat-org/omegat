@@ -47,9 +47,9 @@ public class GlossaryReaderTSV {
     public static List<GlossaryEntry> read(final File file) throws IOException {
         InputStreamReader reader;
         String fname_lower = file.getName().toLowerCase();
-        if (fname_lower.endsWith(GlossaryManager.EXT_DEF_ENC)) {
+        if (fname_lower.endsWith(GlossaryManager.EXT_TSV_DEF)) {
             reader = new InputStreamReader(new FileInputStream(file));
-        } else if (fname_lower.endsWith(GlossaryManager.EXT_UTF8_ENC)) {
+        } else if (fname_lower.endsWith(GlossaryManager.EXT_TSV_UTF8)) {
             InputStream fis = new FileInputStream(file);
             reader = new InputStreamReader(fis, OConsts.UTF8);
         } else {

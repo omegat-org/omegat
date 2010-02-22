@@ -185,7 +185,7 @@ as a repetition in Match Statistics
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 3
   1 Enhancement
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 3 vs. 2.0.5 update 2
 
@@ -196,6 +196,9 @@ as a repetition in Match Statistics
 
   Bug Fixes:
 
+  - Webstart for linux amd64 doesn't work
+  http://sourceforge.net/support/tracker.php?aid=2953631
+ 
   - References to Java 1.4 removed in OmegaT.l4J.ini
   - Various corrections in the manual
 

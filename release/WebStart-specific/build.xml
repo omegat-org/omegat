@@ -26,7 +26,7 @@
 
 		<jar jarfile="${root}/build/webstart/hunspell-win.jar" basedir="${root}/native" includes="hunspell.dll" />
 		<jar jarfile="${root}/build/webstart/hunspell-lin-i386.jar" basedir="${root}/native" includes="libhunspell-i386.so" />
-		<jar jarfile="${root}/build/webstart/hunspell-lin-adm64.jar" basedir="${root}/native" includes="libhunspell-amd64.so" />
+		<jar jarfile="${root}/build/webstart/hunspell-lin-amd64.jar" basedir="${root}/native" includes="libhunspell-amd64.so" />
 		<jar jarfile="${root}/build/webstart/hunspell-mac.jar" basedir="${root}/native" includes="libhunspell.dylib" />
 
 		<signjar keystore="${signkey.keystore}" alias="${signkey.alias}" storepass="${signkey.storepass}" keypass="${signkey.keypass}">

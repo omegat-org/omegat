@@ -167,6 +167,10 @@ public final class PluginUtils {
                 // TODO remove after release new tokenizers
                 sType = "tokenizer";
             }
+            if (sType == null) {
+                // WebStart signing section, or other section
+                continue;
+            }
             PLUGIN_TYPE pType;
             try {
                 pType = PLUGIN_TYPE.valueOf(sType.toUpperCase());

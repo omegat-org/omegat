@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+  <header
+    creationtool="OmegaT"
+    creationtoolversion="2.1.3"
+    segtype="paragraph"
+    o-tmf="OmegaT TMX"
+    adminlang="EN-US"
+    srclang="en"
+    datatype="plaintext"
+  >
+  </header>
+  <body>
+    <tu>
+      <tuv xml:lang="en">
+        <seg>entuv</seg>
+      </tuv>
+      <tuv xml:lang="be">
+        <seg>betuv</seg>
+      </tuv>
+    </tu>
+  </body>
+</tmx>

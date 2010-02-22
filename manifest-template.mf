@@ -63,6 +63,9 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters3.xml.resx.ResXFilter
 OmegaT-Plugin: filter
 
+Name: org.omegat.filters3.xml.wix.WiXFilter
+OmegaT-Plugin: filter
+
 Name: org.omegat.filters3.xml.typo3.Typo3Filter
 OmegaT-Plugin: filter
 

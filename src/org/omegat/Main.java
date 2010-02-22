@@ -148,6 +148,10 @@ public class Main {
         if (params.containsKey("quiet")) {
             RuntimePreferences.setQuietMode(true);
         }
+        
+        if (params.containsKey("disable-project-locking")) {
+            RuntimePreferences.setProjectLockingEnabled(false);
+        }
 
         Log.log("\n"
                 + 

@@ -38,6 +38,8 @@ public class RuntimePreferences {
     /** Force use specified config dir. */
     private static String configDir;
 
+    private static boolean projectLockingEnabled = true;
+
     public static boolean isQuietMode() {
         return quietMode;
     }
@@ -52,5 +54,13 @@ public class RuntimePreferences {
 
     public static void setConfigDir(String v) {
         configDir = v;
+    }
+
+    public static boolean isProjectLockingEnabled() {
+        return projectLockingEnabled;
+    }
+
+    public static void setProjectLockingEnabled(boolean v) {
+        projectLockingEnabled = v;
     }
 }

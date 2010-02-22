@@ -66,6 +66,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader;
@@ -317,26 +318,32 @@ public class RealProject implements IProject
      * Lock omegat.project file against rename or move project.
      */
     protected void lockProject() {
-//        try {
-//            File lockFile = new File(m_config.getProjectRoot(),
-//                    OConsts.FILE_PROJECT);
-//            lockChannel = new RandomAccessFile(lockFile, "rw").getChannel();
-//            lock = lockChannel.lock();
-//        } catch (Exception ex) {
-//            Log.log(ex);
-//        }
+        if (!RuntimePreferences.isProjectLockingEnabled()) {
+            return;
+        }
+        try {
+            File lockFile = new File(m_config.getProjectRoot(),
+                    OConsts.FILE_PROJECT);
+            lockChannel = new RandomAccessFile(lockFile, "rw").getChannel();
+            lock = lockChannel.lock();
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
     }
 
     /**
      * Unlock omegat.project file against rename or move project.
      */
     protected void unlockProject() {
-//        try {
-//            lock.release();
-//            lockChannel.close();
-//        } catch (Exception ex) {
-//            Log.log(ex);
-//        }
+        if (!RuntimePreferences.isProjectLockingEnabled()) {
+            return;
+        }
+        try {
+            lock.release();
+            lockChannel.close();
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
     }
     
     /** Builds translated files corresponding to sourcePattern

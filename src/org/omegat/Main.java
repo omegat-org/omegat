@@ -113,6 +113,20 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Log.log("\n"
+                + 
+                "==================================================================="
+                + 
+                "\n" + 
+                OStrings.getDisplayVersion() + 
+                " (" + new Date() + ") " + 
+                " Locale " + Locale.getDefault()); 
+
+        Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System
+                .getProperty("java.version"), System.getProperty("java.home"));
+        
+        System.setProperty("http.user", OStrings.getDisplayVersion());
+
         /*
          * Parse command line arguments info map.
          */
@@ -152,19 +166,7 @@ public class Main {
         if (params.containsKey("disable-project-locking")) {
             RuntimePreferences.setProjectLockingEnabled(false);
         }
-
-        Log.log("\n"
-                + 
-                "==================================================================="
-                + 
-                "\n" + 
-                OStrings.getDisplayVersion() + 
-                " (" + new Date() + ") " + 
-                " Locale " + Locale.getDefault()); 
-
-        Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System
-                .getProperty("java.version"), System.getProperty("java.home"));
-
+        
         ConvertConfigs.convert();
         PluginUtils.loadPlugins(params);
         

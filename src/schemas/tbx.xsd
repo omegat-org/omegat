@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+	<xs:element name="hi">
+		<xs:complexType mixed="true">
+			<xs:attribute name="type" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="foreign">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="hi"/>
+				<xs:element ref="foreign"/>
+				<xs:element ref="bpt"/>
+				<xs:element ref="ept"/>
+				<xs:element ref="ph"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="bpt">
+		<xs:complexType mixed="true">
+			<xs:attribute name="i" type="xs:anySimpleType"/>
+			<xs:attribute name="type" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ept">
+		<xs:complexType mixed="true">
+			<xs:attribute name="i" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ph">
+		<xs:complexType mixed="true">
+			<xs:attribute name="type" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="admin">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="hi"/>
+				<xs:element ref="foreign"/>
+				<xs:element ref="bpt"/>
+				<xs:element ref="ept"/>
+				<xs:element ref="ph"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute name="datatype" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="adminGrp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="admin"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="adminNote"/>
+					<xs:element ref="note"/>
+					<xs:element ref="ref"/>
+					<xs:element ref="xref"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="adminNote">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute name="datatype" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="date">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="descrip">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="hi"/>
+				<xs:element ref="foreign"/>
+				<xs:element ref="bpt"/>
+				<xs:element ref="ept"/>
+				<xs:element ref="ph"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute name="datatype" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="descripGrp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="descrip"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="descripNote"/>
+					<xs:element ref="admin"/>
+					<xs:element ref="adminGrp"/>
+					<xs:element ref="transacGrp"/>
+					<xs:element ref="note"/>
+					<xs:element ref="ref"/>
+					<xs:element ref="xref"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="descripNote">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute name="datatype" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="langSet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="descrip"/>
+						<xs:element ref="descripGrp"/>
+						<xs:element ref="admin"/>
+						<xs:element ref="adminGrp"/>
+						<xs:element ref="transacGrp"/>
+						<xs:element ref="note"/>
+						<xs:element ref="ref"/>
+						<xs:element ref="xref"/>
+					</xs:choice>
+				</xs:choice>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="tig"/>
+					<xs:element ref="ntig"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="note">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="hi"/>
+				<xs:element ref="foreign"/>
+				<xs:element ref="bpt"/>
+				<xs:element ref="ept"/>
+				<xs:element ref="ph"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ntig">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="termGrp"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="descrip"/>
+					<xs:element ref="descripGrp"/>
+					<xs:element ref="admin"/>
+					<xs:element ref="adminGrp"/>
+					<xs:element ref="transacGrp"/>
+					<xs:element ref="note"/>
+					<xs:element ref="ref"/>
+					<xs:element ref="xref"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ref">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute name="datatype" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="term">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="hi"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="termComp">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="termCompGrp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="termComp"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="termNote"/>
+					<xs:element ref="termNoteGrp"/>
+				</xs:choice>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="admin"/>
+					<xs:element ref="adminGrp"/>
+					<xs:element ref="transacGrp"/>
+					<xs:element ref="note"/>
+					<xs:element ref="ref"/>
+					<xs:element ref="xref"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="termCompList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="descrip"/>
+						<xs:element ref="descripGrp"/>
+						<xs:element ref="admin"/>
+						<xs:element ref="adminGrp"/>
+						<xs:element ref="transacGrp"/>
+						<xs:element ref="note"/>
+						<xs:element ref="ref"/>
+						<xs:element ref="xref"/>
+					</xs:choice>
+				</xs:choice>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="termComp"/>
+					<xs:element ref="termCompGrp"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="termEntry">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice>
+					<xs:choice minOccurs="0" maxOccurs="unbounded">
+						<xs:element ref="descrip"/>
+						<xs:element ref="descripGrp"/>
+						<xs:element ref="admin"/>
+						<xs:element ref="adminGrp"/>
+						<xs:element ref="transacGrp"/>
+						<xs:element ref="note"/>
+						<xs:element ref="ref"/>
+						<xs:element ref="xref"/>
+					</xs:choice>
+				</xs:choice>
+				<xs:choice>
+					<xs:element ref="langSet" maxOccurs="unbounded"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="termGrp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="term"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="termNote"/>
+					<xs:element ref="termNoteGrp"/>
+				</xs:choice>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="termCompList"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="termNote">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="hi"/>
+				<xs:element ref="foreign"/>
+				<xs:element ref="bpt"/>
+				<xs:element ref="ept"/>
+				<xs:element ref="ph"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute name="datatype" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="termNoteGrp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="termNote"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="admin"/>
+					<xs:element ref="adminGrp"/>
+					<xs:element ref="transacGrp"/>
+					<xs:element ref="note"/>
+					<xs:element ref="ref"/>
+					<xs:element ref="xref"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="tig">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="term"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="termNote"/>
+				</xs:choice>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="descrip"/>
+					<xs:element ref="descripGrp"/>
+					<xs:element ref="admin"/>
+					<xs:element ref="adminGrp"/>
+					<xs:element ref="transacGrp"/>
+					<xs:element ref="note"/>
+					<xs:element ref="ref"/>
+					<xs:element ref="xref"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="transac">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute name="datatype" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="transacGrp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="transac"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="transacNote"/>
+					<xs:element ref="date"/>
+					<xs:element ref="note"/>
+					<xs:element ref="ref"/>
+					<xs:element ref="xref"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="transacNote">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute name="target" type="xs:IDREF"/>
+			<xs:attribute name="datatype" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="xref">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="type" type="xs:anySimpleType"/>
+			<xs:attribute name="target" use="required" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="martif">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="martifHeader"/>
+				<xs:element ref="text"/>
+			</xs:sequence>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+			<xs:attribute ref="xml:lang" use="required"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="martifHeader">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="fileDesc"/>
+				<xs:element ref="encodingDesc" minOccurs="0"/>
+				<xs:element ref="revisionDesc" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="p">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="hi"/>
+				<xs:element ref="foreign"/>
+				<xs:element ref="bpt"/>
+				<xs:element ref="ept"/>
+				<xs:element ref="ph"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="type">
+				<xs:simpleType>
+					<xs:restriction base="xs:NMTOKEN">
+						<xs:enumeration value="XCSURI"/>
+						<xs:enumeration value="DCSName"/>
+						<xs:enumeration value="XCSContent"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="fileDesc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="titleStmt" minOccurs="0"/>
+				<xs:element ref="publicationStmt" minOccurs="0"/>
+				<xs:element ref="sourceDesc" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="titleStmt">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="title"/>
+				<xs:element ref="note" minOccurs="0" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="title">
+		<xs:complexType mixed="true">
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="publicationStmt">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="p" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="sourceDesc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="p" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="encodingDesc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="p" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="revisionDesc">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="change" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="change">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="p" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute ref="xml:lang"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="text">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="body"/>
+				<xs:element ref="back" minOccurs="0"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="body">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="termEntry" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="back">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="refObjectList"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="refObjectList">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="refObject" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="type" use="required" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="refObject">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="itemSet"/>
+					<xs:element ref="itemGrp"/>
+					<xs:element ref="item"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="item">
+		<xs:complexType mixed="true">
+			<xs:choice minOccurs="0" maxOccurs="unbounded">
+				<xs:element ref="hi"/>
+				<xs:element ref="foreign"/>
+				<xs:element ref="bpt"/>
+				<xs:element ref="ept"/>
+				<xs:element ref="ph"/>
+			</xs:choice>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="type" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="itemGrp">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="item"/>
+				<xs:choice minOccurs="0" maxOccurs="unbounded">
+					<xs:element ref="admin"/>
+					<xs:element ref="adminGrp"/>
+					<xs:element ref="transacGrp"/>
+					<xs:element ref="note"/>
+					<xs:element ref="ref"/>
+					<xs:element ref="xref"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="itemSet">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:choice maxOccurs="unbounded">
+					<xs:element ref="item"/>
+					<xs:element ref="itemGrp"/>
+				</xs:choice>
+			</xs:sequence>
+			<xs:attribute name="id" type="xs:ID"/>
+			<xs:attribute name="type" type="xs:anySimpleType"/>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

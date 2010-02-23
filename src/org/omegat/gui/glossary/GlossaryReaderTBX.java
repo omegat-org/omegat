@@ -63,9 +63,10 @@ public class GlossaryReaderTBX {
                     .getString("STARTUP_JAXB_LINKAGE_ERROR"));
         }
     }
+
     static SAXParserFactory SAX_FACTORY = SAXParserFactory.newInstance();
     static {
-        SAX_FACTORY.setNamespaceAware(false);
+        SAX_FACTORY.setNamespaceAware(true);
         SAX_FACTORY.setValidating(false);
     }
 
@@ -85,20 +86,20 @@ public class GlossaryReaderTBX {
             String tTerm = null;
             note.setLength(0);
             for (LangSet ls : te.getLangSet()) {
-                String lang = ls.getXmlLang();
+                String lang = ls.getLang();
                 for (Object o : ls.getTigOrNtig()) {
                     if (o instanceof Tig) {
                         Tig t = (Tig) o;
                         if (sLang.equalsIgnoreCase(lang)) {
-                            sTerm = t.getTerm().getvalue();
+                            sTerm = readContent(t.getTerm().getContent());
                         } else if (tLang.equalsIgnoreCase(lang)) {
-                            tTerm = t.getTerm().getvalue();
+                            tTerm = readContent(t.getTerm().getContent());
                         }
                         for (TermNote tn : t.getTermNote()) {
                             if (note.length() > 0) {
                                 note.append('\n');
                             }
-                            note.append(tn.getvalue());
+                            note.append(readContent(tn.getContent()));
                         }
                     }
                 }
@@ -109,6 +110,14 @@ public class GlossaryReaderTBX {
         }
 
         return result;
+    }
+
+    protected static String readContent(final List<Object> content) {
+        StringBuilder res = new StringBuilder();
+        for (Object o : content) {
+            res.append(o.toString());
+        }
+        return res.toString();
     }
 
     /**
@@ -141,12 +150,7 @@ public class GlossaryReaderTBX {
         }
 
         public InputSource resolveEntity(String publicId, String systemId) {
-            if (systemId.toLowerCase().endsWith(".dtd")) {
-                return new InputSource(GlossaryReaderTBX.class.getResource(
-                        "/schemas/TBXcoreStructV02.dtd").toExternalForm());
-            } else {
-                return EMPTY_INPUT_SOURCE;
-            }
+            return EMPTY_INPUT_SOURCE;
         }
     }
 }

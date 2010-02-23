@@ -71,7 +71,7 @@ import org.omegat.util.Log;
 public class Core {
     private static IProject currentProject;
     private static IMainWindow mainWindow;
-    private static IEditor editor;
+    protected static IEditor editor;
     private static ITagValidation tagValidation;
     private static IMatcher matcher;
     private static ITokenizer tokenizer;

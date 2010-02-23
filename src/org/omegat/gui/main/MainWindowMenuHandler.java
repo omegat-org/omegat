@@ -34,6 +34,7 @@ import javax.swing.JOptionPane;
 
 import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -184,9 +185,6 @@ public class MainWindowMenuHandler {
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                MainWindowUI.saveScreenLayout(mainWindow);
-                Preferences.save();
-
                 if (Core.getProject().isProjectLoaded()) {
                     // Save the list of learned and ignore words
                     ISpellChecker sc = Core.getSpellChecker();
@@ -194,12 +192,19 @@ public class MainWindowMenuHandler {
                     Core.getProject().saveProject();
                 }
 
+                CoreEvents.fireApplicationShutdown();
+
                 return null;
             }
 
             protected void done() {
                 try {
                     get();
+                    
+                    MainWindowUI.saveScreenLayout(mainWindow);
+                    
+                    Preferences.save();
+
                     System.exit(0);
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");

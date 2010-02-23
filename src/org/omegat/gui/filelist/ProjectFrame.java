@@ -42,7 +42,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -79,6 +78,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IApplicationEventListener;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -162,7 +162,7 @@ public class ProjectFrame extends JFrame {
         setContentPane(cp);
 
         m_addNewFileButton = new JButton();
-        org.openide.awt.Mnemonics.setLocalizedText(m_addNewFileButton, OStrings
+        Mnemonics.setLocalizedText(m_addNewFileButton, OStrings
                 .getString("TF_MENU_FILE_IMPORT"));
         m_addNewFileButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -170,7 +170,7 @@ public class ProjectFrame extends JFrame {
             }
         });
         m_wikiImportButton = new JButton();
-        org.openide.awt.Mnemonics.setLocalizedText(m_wikiImportButton, OStrings
+        Mnemonics.setLocalizedText(m_wikiImportButton, OStrings
                 .getString("TF_MENU_WIKI_IMPORT"));
         m_wikiImportButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -279,6 +279,16 @@ public class ProjectFrame extends JFrame {
                                 + LINE_SPACING);
                     }
                 });
+        
+        CoreEvents
+                .registerApplicationEventListener(new IApplicationEventListener() {
+                    public void onApplicationStartup() {
+                    }
+
+                    public void onApplicationShutdown() {
+                        saveWindowLayout();
+                    }
+                });
 
         tableFiles.addMouseListener(new MouseAdapter() {
             @Override
@@ -335,16 +345,6 @@ public class ProjectFrame extends JFrame {
                 getHeight());
         Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_X, getX());
         Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_Y, getY());
-    }
-
-    public void processWindowEvent(WindowEvent w) {
-        int evt = w.getID();
-        if (evt == WindowEvent.WINDOW_CLOSING
-                || evt == WindowEvent.WINDOW_CLOSED) {
-            // save window size and position
-            saveWindowLayout();
-        }
-        super.processWindowEvent(w);
     }
 
     private void doCancel() {

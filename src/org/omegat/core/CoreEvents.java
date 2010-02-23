@@ -165,16 +165,13 @@ public class CoreEvents {
 
     /** Fire event. */
     public static void fireApplicationShutdown() {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
-                synchronized (applicationEventListeners) {
-                    for (IApplicationEventListener listener : applicationEventListeners) {
-                        listener.onApplicationShutdown();
-                    }
-                }
+        // We shouldn't invoke it later, because need to shutdown immediately.
+        Log.logInfoRB("LOG_INFO_EVENT_APPLICATION_SHUTDOWN");
+        synchronized (applicationEventListeners) {
+            for (IApplicationEventListener listener : applicationEventListeners) {
+                listener.onApplicationShutdown();
             }
-        });
+        }
     }
 
     /** Fire event. */

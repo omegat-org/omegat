@@ -2,11 +2,16 @@
  OmegaT 2.1.3 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  0 Bugfix
+  1 Bugfix
 ----------------------------------------------------------------------
 2.1.3 update 1 vs. 2.1.3
 
    - File filter for WiX localisation files (.wxl)
+
+  Bug fixes:
+
+  - Project Files window doesn't remember its position
+  http://sourceforge.net/support/tracker.php?aid=2893165
 
 ----------------------------------------------------------------------
  OmegaT 2.1.3 

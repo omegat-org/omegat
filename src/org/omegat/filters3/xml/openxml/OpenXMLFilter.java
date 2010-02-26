@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2007-2008 Didier Briel
+           (C) 2007-2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -57,12 +57,10 @@ import org.omegat.util.OStrings;
  */
 public class OpenXMLFilter extends AbstractFilter
 {
-    private String DOCUMENTS = "(document\\.xml)";                              // NOI18N 
+    private String DOCUMENTS;                              
     private Pattern TRANSLATABLE; 
     private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");      // NOI18N
-
     
-    private boolean optionsAlreadyRead = false;
     /**
      * Defines the documents to read according to options
      */
@@ -78,30 +76,30 @@ public class OpenXMLFilter extends AbstractFilter
     // PowerPoint
     "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)|(notesSlide\\d+\\.xml)"                                 
 */          
-        if (!optionsAlreadyRead){
-            OpenXMLOptions options = new OpenXMLOptions(config);
 
-            if (options.getTranslateComments())
-                DOCUMENTS += "|(comments\\.xml)";                               // NOI18N
-            if (options.getTranslateFootnotes())
-                DOCUMENTS += "|(footnotes\\.xml)";                              // NOI18N
-            if (options.getTranslateEndnotes())
-                DOCUMENTS += "|(endnotes\\.xml)";                               // NOI18N
-            if (options.getTranslateHeaders())
-                DOCUMENTS += "|(header\\d+\\.xml)";                             // NOI18N
-            if (options.getTranslateFooters())
-                DOCUMENTS += "|(footer\\d+\\.xml)";                             // NOI18N
-            DOCUMENTS += "|(sharedStrings\\.xml)";                              // NOI18N    
-            if (options.getTranslateExcelComments())
-                DOCUMENTS += "|(comments\\d+\\.xml)";                           // NOI18N
-            DOCUMENTS += "|(slide\\d+\\.xml)";                                  // NOI18N
-            if (options.getTranslateSlideMasters())          
-                DOCUMENTS += "|(slideMaster\\d+\\.xml)";                        // NOI18N
-            if (options.getTranslateSlideComments())
-                DOCUMENTS += "|(notesSlide\\d+\\.xml)";                         // NOI18N
-            TRANSLATABLE = Pattern.compile(DOCUMENTS);
-            optionsAlreadyRead = true;
-        }
+        DOCUMENTS = "(document\\.xml)";
+
+        OpenXMLOptions options = new OpenXMLOptions(config);
+
+        if (options.getTranslateComments())
+            DOCUMENTS += "|(comments\\.xml)";                               // NOI18N
+        if (options.getTranslateFootnotes())
+            DOCUMENTS += "|(footnotes\\.xml)";                              // NOI18N
+        if (options.getTranslateEndnotes())
+            DOCUMENTS += "|(endnotes\\.xml)";                               // NOI18N
+        if (options.getTranslateHeaders())
+            DOCUMENTS += "|(header\\d+\\.xml)";                             // NOI18N
+        if (options.getTranslateFooters())
+            DOCUMENTS += "|(footer\\d+\\.xml)";                             // NOI18N
+        DOCUMENTS += "|(sharedStrings\\.xml)";                              // NOI18N
+        if (options.getTranslateExcelComments())
+            DOCUMENTS += "|(comments\\d+\\.xml)";                           // NOI18N
+        DOCUMENTS += "|(slide\\d+\\.xml)";                                  // NOI18N
+        if (options.getTranslateSlideMasters())
+            DOCUMENTS += "|(slideMaster\\d+\\.xml)";                        // NOI18N
+        if (options.getTranslateSlideComments())
+            DOCUMENTS += "|(notesSlide\\d+\\.xml)";                         // NOI18N
+        TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
         
     

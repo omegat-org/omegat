@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Zoltan Bartko
                2008 Alex Buloichik
-               2009 Didier Briel
+               2009-2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -480,8 +480,7 @@ public class RealProject implements IProject
         {
             saveProjectProperties();
 
-            int sz = translations.size() + orphanedSegments.size();
-            Map<String, TransEntry> data = new HashMap<String, TransEntry>(sz);
+            Map<String, TransEntry> data = new TreeMap<String, TransEntry>();
             data.putAll(translations);
             // Write orphan strings.
             data.putAll(orphanedSegments);

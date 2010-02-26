@@ -59,7 +59,7 @@ public class OpenXMLFilter extends AbstractFilter
 {
     private String DOCUMENTS;                              
     private Pattern TRANSLATABLE; 
-    private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");      // NOI18N
+    private static final Pattern DIGITS = Pattern.compile("(\\d+)\\.xml");      
     
     /**
      * Defines the documents to read according to options
@@ -82,23 +82,23 @@ public class OpenXMLFilter extends AbstractFilter
         OpenXMLOptions options = new OpenXMLOptions(config);
 
         if (options.getTranslateComments())
-            DOCUMENTS += "|(comments\\.xml)";                               // NOI18N
+            DOCUMENTS += "|(comments\\.xml)";                               
         if (options.getTranslateFootnotes())
-            DOCUMENTS += "|(footnotes\\.xml)";                              // NOI18N
+            DOCUMENTS += "|(footnotes\\.xml)";                              
         if (options.getTranslateEndnotes())
-            DOCUMENTS += "|(endnotes\\.xml)";                               // NOI18N
+            DOCUMENTS += "|(endnotes\\.xml)";                               
         if (options.getTranslateHeaders())
-            DOCUMENTS += "|(header\\d+\\.xml)";                             // NOI18N
+            DOCUMENTS += "|(header\\d+\\.xml)";                             
         if (options.getTranslateFooters())
-            DOCUMENTS += "|(footer\\d+\\.xml)";                             // NOI18N
-        DOCUMENTS += "|(sharedStrings\\.xml)";                              // NOI18N
+            DOCUMENTS += "|(footer\\d+\\.xml)";                             
+        DOCUMENTS += "|(sharedStrings\\.xml)";                              
         if (options.getTranslateExcelComments())
-            DOCUMENTS += "|(comments\\d+\\.xml)";                           // NOI18N
-        DOCUMENTS += "|(slide\\d+\\.xml)";                                  // NOI18N
+            DOCUMENTS += "|(comments\\d+\\.xml)";                           
+        DOCUMENTS += "|(slide\\d+\\.xml)";                                  
         if (options.getTranslateSlideMasters())
-            DOCUMENTS += "|(slideMaster\\d+\\.xml)";                        // NOI18N
+            DOCUMENTS += "|(slideMaster\\d+\\.xml)";                        
         if (options.getTranslateSlideComments())
-            DOCUMENTS += "|(notesSlide\\d+\\.xml)";                         // NOI18N
+            DOCUMENTS += "|(notesSlide\\d+\\.xml)";                         
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
         
@@ -146,7 +146,7 @@ public class OpenXMLFilter extends AbstractFilter
     /** Returns a temporary file for Open XML. A nasty hack, to say polite way. */
     private File tmp() throws IOException
     {
-        return File.createTempFile("o-xml-temp", ".xml");                       // NOI18N
+        return File.createTempFile("o-xml-temp", ".xml");                       
     }
     
     /**
@@ -166,8 +166,8 @@ public class OpenXMLFilter extends AbstractFilter
      */
     private String removeXML(String fileName)
     {
-        if ( fileName.endsWith(".xml") )                                        // NOI18N
-            fileName = fileName.substring(0, fileName.lastIndexOf(".xml"));     // NOI18N
+        if ( fileName.endsWith(".xml") )                                        
+            fileName = fileName.substring(0, fileName.lastIndexOf(".xml"));     
         return fileName;
     }
    
@@ -199,8 +199,8 @@ public class OpenXMLFilter extends AbstractFilter
              {
                  String s1 = z1.getName();
                  String s2 = z2.getName();
-                 String[] words1 = s1.split("\\d+\\.");                         // NOI18N
-                 String[] words2 = s2.split("\\d+\\.");                         // NOI18N
+                 String[] words1 = s1.split("\\d+\\.");                         
+                 String[] words2 = s2.split("\\d+\\.");                         
                  // Digits at the end and same text
                  if ( ( words1.length > 1 && words2.length > 1 ) && // Digits
                       ( words1[0].equals(words2[0]) ) )  // Same text
@@ -229,10 +229,10 @@ public class OpenXMLFilter extends AbstractFilter
                                        
                      // Specific case for Excel
                      // because "comments" is present twice in DOCUMENTS
-                     if ( shortname1.indexOf("sharedStrings")>=0 ||             // NOI18N
-                          shortname2.indexOf("sharedStrings")>=0 )              // NOI18N
+                     if ( shortname1.indexOf("sharedStrings")>=0 ||             
+                          shortname2.indexOf("sharedStrings")>=0 )              
                      {
-                         if ( shortname2.indexOf("sharedStrings") >=0 )         // NOI18N
+                         if ( shortname2.indexOf("sharedStrings") >=0 )         
                              return 1; // sharedStrings must be first
                          else
                              return -1;                                    
@@ -322,9 +322,9 @@ public class OpenXMLFilter extends AbstractFilter
     {
         return new Instance[] 
         {
-                new Instance("*.doc?"),                                         // NOI18N
-                new Instance("*.xls?"),                                         // NOI18N
-                new Instance("*.ppt?"),                                         // NOI18N
+                new Instance("*.doc?"),                                         
+                new Instance("*.xls?"),                                         
+                new Instance("*.ppt?"),                                         
         };
     }
 
@@ -344,7 +344,7 @@ public class OpenXMLFilter extends AbstractFilter
     protected void processFile(BufferedReader inFile, BufferedWriter outFile) 
                    throws IOException, TranslationException
     {
-        throw new IOException("Not Implemented!");                              // NOI18N
+        throw new IOException("Not Implemented!");                              
     }
 
     /**

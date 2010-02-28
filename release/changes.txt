@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.3 update 1
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.1.3 update 1 vs. 2.1.3
@@ -13,6 +13,9 @@
 
   - Make order of TUs stable in project_save.tmx
   http://sourceforge.net/support/tracker.php?aid=2948323
+
+  - Add .txt extension as tab-separated glossary in UTF-8
+  http://sourceforge.net/support/tracker.php?aid=2942348
 
    Other enhancements:
 

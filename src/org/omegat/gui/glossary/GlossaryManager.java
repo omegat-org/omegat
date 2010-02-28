@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2009 Alex Buloichik
+               2009-2010 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,6 +49,7 @@ import org.omegat.util.Log;
 public class GlossaryManager implements DirectoryMonitor.Callback {
     protected static final String EXT_TSV_DEF = ".tab";
     protected static final String EXT_TSV_UTF8 = ".utf8";
+    protected static final String EXT_TSV_TXT = ".txt";
     protected static final String EXT_CSV_UTF8 = ".csv";
     protected static final String EXT_TBX = ".tbx";
 
@@ -104,7 +105,8 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
         if (fname_lower.endsWith(EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
             return GlossaryReaderTSV.read(file);
-        } else if (fname_lower.endsWith(EXT_TSV_UTF8)) {
+        } else if ( fname_lower.endsWith(EXT_TSV_UTF8) ||
+                    fname_lower.endsWith(EXT_TSV_TXT) ) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
             return GlossaryReaderTSV.read(file);
         } else if (fname_lower.endsWith(EXT_CSV_UTF8)) {

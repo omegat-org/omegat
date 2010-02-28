@@ -1,24 +1,24 @@
-==============================================================================
+﻿==============================================================================
   File Leggimi di OmegaT 1.6.1
 
   1.  Informazioni su OmegaT
-  2.  Che cosa �OmegaT?
+  2.  Che cosa è OmegaT?
   3.  Note generali su Java e OmegaT
   4.  Contributi a OmegaT
-  5.  OmegaT genera problemi? Si ha necessit�di assistenza?
+  5.  OmegaT genera problemi? Si ha necessità di assistenza?
   6.  Informazioni sulla release
 
 ==============================================================================
   1.  Informazioni su OmegaT
 
-Le informazioni pi aggiornate su OmegaT possono essere reperite accedendo a:
+Le informazioni più aggiornate su OmegaT possono essere reperite accedendo a:
       http://www.omegat.org/omegat/omegat.html
 
 Ulteriori informazioni sono reperibili anche nelle seguenti pagine:
 
 Assistenza all'utente: gruppo di utenti Yahoo:
      http://groups.yahoo.com/group/OmegaT/
-     Archivi consultabili senza necessit�di iscrizione.
+     Archivi consultabili senza necessità di iscrizione.
 
 Per le richieste di miglioramenti, accedere al sito SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -27,15 +27,15 @@ Per la segnalazione di errori, accedere al sito SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 ==============================================================================
-  2.  Che cosa �OmegaT?
+  2.  Che cosa è OmegaT?
 
-OmegaT �uno strumento per la traduzione assistita (CAT). �gratuito, nel senso
+OmegaT è uno strumento per la traduzione assistita (CAT). È gratuito, nel senso
 che per utilizzarlo non viene richiesto alcun pagamento, anche per un uso
-professionale, e nel senso che si ha la libert�di modificarlo e/o
+professionale, e nel senso che si ha la libertà di modificarlo e/o
 ridistribuirlo fintanto che viene rispettata la licenza per l'utente.
 
 Le funzioni principali di OmegaT sono
-  - possibilit�di "girare" su qualsiasi sistema operativo in grado di gestire
+  - possibilità di "girare" su qualsiasi sistema operativo in grado di gestire
     Java;
   - utilizzo di qualsiasi file TMX valido per avere a disposizione una memoria
     di riferimento;
@@ -47,14 +47,14 @@ Le funzioni principali di OmegaT sono
     particolarmente complesse;
   - gestione dei glossari (ricerca terminologica);
   - documentazione e materiale di addestramento facile da comprendere;
-  - localizzazione in pi lingue.
+  - localizzazione in più lingue.
 
-OmegaT �in grado di leggere file OpenDocument, file Microsoft Office
+OmegaT è in grado di leggere file OpenDocument, file Microsoft Office
 (utilizzando OpenOffice.org come filtro di conversione, o tramite conversione
 in HTML), file OpenOffice.org o StarOffice e file (X)HTML, Java localization
 oppure file di solo testo.
 
-OmegaT analizza automaticamente anche la struttura di directory pi complessa
+OmegaT analizza automaticamente anche la struttura di directory più complessa
 per poter successivamente accedere a tutti i file riconosciuti e generazione
 di una struttura di directory di destinazione esattamente uguale a quella di
 partenza, comprendente anche le copie di tutti i file non riconosciuti.
@@ -63,21 +63,21 @@ Per iniziare a operare subito con OmegaT, avviare il programma e leggere
 la "Guida di avvio rapido" che viene proposta.
 
 Il manuale per l'utente si trova nel pacchetto appena scaricato e vi si
-potr�accedere dal menu [?] (Guida), dopo aver avviato OmegaT.
+potrà accedere dal menu [?] (Guida), dopo aver avviato OmegaT.
 
 ==============================================================================
  3. Note generali su Java e OmegaT
 
 OmegaT richiede che sul sistema sia stato installato Java Runtime Environment,
-versione 1.4 o superiore. �reperibile accedendo a:
+versione 1.4 o superiore. È reperibile accedendo a:
     http://java.com
 
-Se non �ancora presente nel sistema, agli utenti Windows e Linux potrebbe
+Se non è ancora presente nel sistema, agli utenti Windows e Linux potrebbe
 venire richiesto di installare Java.
 Il progetto OmegaT prevede anche una versione che contiene Java. Gli utenti
-Mac OSX operano su un sistema sul quale Java �gi�stato installato.
+Mac OSX operano su un sistema sul quale Java è già stato installato.
 
-Dopo aver effettuato una corretta installazione, OmegaT potr�essere avviato
+Dopo aver effettuato una corretta installazione, OmegaT potrà essere avviato
 facendo semplicemente doppio clic sul file OmegaT.jar.
 
 Dopo aver installato Java, potrebbe essere necessario modificare la
@@ -85,15 +85,15 @@ variabile di percorso del sistema, in modo che questa includa la directory
 nella quale si trova l'applicazione "Java".
 
 Gli utenti Linux dovrebbero prestare attenzione al fatto che OmegaT non
-sar�in grado di operare con gli sviluppi gratuiti/open-source reperibili
-in molti siti per Linux (per esempio, Ubuntu), poich�si tratta di componenti
+sarà in grado di operare con gli sviluppi gratuiti/open-source reperibili
+in molti siti per Linux (per esempio, Ubuntu), poiché si tratta di componenti
 obsolete, oppure incomplete. Scaricare e installare Java Runtime Envirionment
 (JRE) di Sun servendosi del link sopra riportato, oppure scaricare e
 installare la versione di OmegaT completa di JRE (il pacchetto .tar.gz
 contrassegnato "Linux").
 
 Quando si utilizza Linux su un sistema PowerPC, gli utenti dovrebbero
-scaricare JRE di IBM, poich�Sun non mette a disposizione un JRE per
+scaricare JRE di IBM, poiché Sun non mette a disposizione un JRE per
 sistemi PPC. Scaricarne uno da:
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html
 
@@ -114,10 +114,10 @@ e iscriversi all'elenco dei traduttori:
 Per altri tipi di contributi, prima iscriversi al gruppo di utenti a:
       http://groups.yahoo.com/group/OmegaT/
 
-Avrete cos�un'idea di che cosa accade nel mondo di OmegaT...
+Avrete così un'idea di che cosa accade nel mondo di OmegaT...
 
-  OmegaT �un lavoro originale di Keith Godfrey.
-  Marc Prior �il coordinatore del progetto OmegaT.
+  OmegaT è un lavoro originale di Keith Godfrey.
+  Marc Prior è il coordinatore del progetto OmegaT.
 
 Elenco dei contributi precedenti (in ordine alfabetico)
 
@@ -171,27 +171,28 @@ OmegaT utilizza le seguenti librerie:
   VLDocking Framework di VLSolutions (CeCILL License).
 
 ==============================================================================
- 5.  OmegaT genera problemi? Si ha necessit�di assistenza?
+ 5.  OmegaT genera problemi? Si ha necessità di assistenza?
 
 Prima di segnalare un difetto, accertarsi di aver consultato attentamente
-la documentazione. Ci�che viene proposto potrebbe essere una caratteristica
-particolare di OmegaT che si �appena scoperta. Se si apre il file di log
+la documentazione. Ciò che viene proposto potrebbe essere una caratteristica
+particolare di OmegaT che si è appena scoperta. Se si apre il file di log
 di OmegaT, e nello stesso vengono riportate parole come "Error", "Warning",
-"Exception" oppure "died unexpectedly", allora si sar�in presenza di un
+"Exception" oppure "died unexpectedly", allora si sarà in presenza di un
 errore (il file log.txt viene memorizzato nella directory delle preferenze
 dell'utente; per il percorso di memorizzazione si rimanda al manuale).
 
-La successiva cosa da fare �di chiedere conferma di quanto �accaduto
-agli altri utenti, in modo da verificare se si tratta di un problema gi�segnalato. Si pu�anche accedere alla pagina di riferimento degli
+La successiva cosa da fare è di chiedere conferma di quanto è accaduto
+agli altri utenti, in modo da verificare se si tratta di un problema già
+segnalato. Si può anche accedere alla pagina di riferimento degli
 errori di SourceForge. Inviare una segnalazione di errore solo quando si
-�sicuri di essere stati i primi ad aver rilevato una sequenza
+è sicuri di essere stati i primi ad aver rilevato una sequenza
 riproducibile di un evento che ha generato un qualche cosa che non sarebbe
 dovuto accadere.
 
 Una qualsiasi segnalazione di errore dovrebbe prevedere tre elementi:
   - sequenza operativa da riprodurre;
   - che cosa ci si aspettava di ottenere, e
-  - che cosa, invece, si �ottenuto.
+  - che cosa, invece, si è ottenuto.
 
 Si possono allegare copie di file, parti del file di log, schermate e
 qualsiasi cosa si ritenga possa essere d'aiuto agli sviluppatori
@@ -225,15 +226,15 @@ Formati di file riconosciuti:
 
 Modifiche sostanziali:
   - Segmentazione flessibile (per frase)
-  - Possibilit�di creare filtri di formato file sotto forma di plug-in
+  - Possibilità di creare filtri di formato file sotto forma di plug-in
   - Codici rielaborati con ulteriori commenti
   - Installatore Windows
-  - Traducibilit�degli attributi dei tag HTML
-  - Piena compatibilit�con TMX 1.1-1.4b Livello 1
+  - Traducibilità degli attributi dei tag HTML
+  - Piena compatibilità con TMX 1.1-1.4b Livello 1
   - Gestione parziale di TMX 1.4b Livello 2
 
 Nuove caratteristiche della UI (rispetto alla serie OmegaT 1.4):
-  - Interfaccia della funzione di ricerca riscritta, con funzionalit�avanzata
+  - Interfaccia della funzione di ricerca riscritta, con funzionalità avanzata
   - Interfaccia principale migliorata, con adozione di finestre posizionabili
 
 ==============================================================================

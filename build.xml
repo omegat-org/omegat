@@ -236,6 +236,35 @@
         </exec>
     </target>
 
+    <!-- Builds a Mac distribution -->    
+    <target name="mac" description="Build Mac distro. PRE: A Mac Java Application Stub must be present in ../" depends="jar,release,check-mac-java-stub" if="mac-java-stub.exists">
+        <!-- Build directories -->
+        <mkdir dir="dist2"/>
+        <mkdir dir="dist2/mac/"/>
+        <mkdir dir="dist2/mac/OmegaT.app"/>
+        <mkdir dir="dist2/mac/OmegaT.app/Contents"/>
+        <mkdir dir="dist2/mac/OmegaT.app/Contents/MacOS"/>
+        <mkdir dir="dist2/mac/OmegaT.app/Contents/Resources"/>
+        <mkdir dir="dist2/mac/OmegaT.app/Contents/Resources/Java"/>
+        
+        <copy todir="dist2/mac/" file="release/mac-specific/index.html"/>
+        <copy todir="dist2/mac/" file="release/mac-specific/OmegaT.css"/>       
+        <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
+        <copy todir="dist2/mac/OmegaT.app/Contents" file="release/mac-specific/Info.plist" filtering="on"/>
+        <copy todir="dist2/mac/OmegaT.app/Contents" file="release/mac-specific/PkgInfo"/>
+        <copy todir="dist2/mac/OmegaT.app/Contents/MacOS" file="../JavaApplicationStub"/>
+        <copy todir="dist2/mac/OmegaT.app/Contents/Resources" file="release/mac-specific/OmegaT.icns"/>
+        
+        <copy todir="dist2/mac/OmegaT.app/Contents/Resources/Java">
+            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/> 
+        </copy>
+
+        <zip destfile="dist2/OmegaT_${distversion}_Mac.zip">
+            <zipfileset dir="dist2/mac/"/>
+        </zip>
+        
+    </target>
+
     <target name="check-win" depends="init">
         <condition property="os.windows">
             <and>
@@ -252,6 +281,10 @@
     <target name="check-jre-linux">
         <available file="../jre-linux" type="dir" property="jre-linux.exists" />
     </target>
+
+    <target name="check-mac-java-stub">
+        <available file="../JavaApplicationStub" type="file" property="mac-java-stub.exists" />
+    </target>   
 
     <target name="win" description="Build Win32 distro if on Windows. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and for the JRE-version a JRE must be present in ..\\jre\\ "
                                         depends="check-win" if="os.windows">

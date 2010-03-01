@@ -102,6 +102,7 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
         });
+        setToolTipText("");
     }
 
     /** Orders to cancel all Undoable edits. */
@@ -434,6 +435,13 @@ public class EditorTextArea3 extends JEditorPane {
     public String getSelectedText() {
         String st = super.getSelectedText();
         return st != null ? EditorUtils.removeDirectionChars(st) : null;
+    }
+    
+    @Override
+    public String getToolTipText(MouseEvent event) {
+        int pos = viewToModel(event.getPoint());
+        int s = controller.getSegmentIndexAtLocation(pos);
+        return controller.markerController.getToolTips(s, pos);
     }
 
     /**

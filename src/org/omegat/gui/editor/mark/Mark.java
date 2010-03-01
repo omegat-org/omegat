@@ -36,6 +36,7 @@ public class Mark {
 
     public final ENTRY_PART entryPart;
     public final int startOffset, endOffset;
+    public String toolTipText;
 
     public Mark(ENTRY_PART entryPart, int start, int end) {
         this.entryPart = entryPart;

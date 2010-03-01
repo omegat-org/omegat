@@ -625,6 +625,15 @@ public class EditorController implements IEditor {
     protected void goToSegmentAtLocation(int location) {
         // clicked segment
 
+        int segmentAtLocation = getSegmentIndexAtLocation(location);
+        if (displayedEntryIndex != segmentAtLocation) {
+            commitAndDeactivate();
+            displayedEntryIndex = segmentAtLocation;
+            activateEntry();
+        }
+    }
+
+    protected int getSegmentIndexAtLocation(int location) {
         int segmentAtLocation = m_docSegList.length - 1;
         for (int i = 0; i < m_docSegList.length; i++) {
             if (location < m_docSegList[i].getStartPosition()) {
@@ -632,11 +641,7 @@ public class EditorController implements IEditor {
                 break;
             }
         }
-        if (displayedEntryIndex != segmentAtLocation) {
-            commitAndDeactivate();
-            displayedEntryIndex = segmentAtLocation;
-            activateEntry();
-        }
+        return segmentAtLocation;
     }
 
     /**

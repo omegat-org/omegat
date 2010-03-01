@@ -53,7 +53,7 @@ public class MarkerController {
      * 2nd dimension - marker,<br/>
      * 3rd dimension - marks
      */
-    private Highlighter.Highlight[][][] marks;
+    private MarkInfo[][][] marks;
 
     /** List of marker's class names. */
     private final String[] markerNames;
@@ -120,9 +120,9 @@ public class MarkerController {
         }
 
         highlighter.removeAllHighlights();
-        marks = new Highlighter.Highlight[newEntriesCount][][];
+        marks = new MarkInfo[newEntriesCount][][];
         for (int i = 0; i < marks.length; i++) {
-            marks[i] = new Highlighter.Highlight[markerNames.length][];
+            marks[i] = new MarkInfo[markerNames.length][];
         }
     }
 
@@ -134,10 +134,10 @@ public class MarkerController {
      */
     void resetEntryMarks(int entryIndex) {
         for (int i = 0; i < marks[entryIndex].length; i++) {
-            Highlighter.Highlight[] me = marks[entryIndex][i];
+            MarkInfo[] me = marks[entryIndex][i];
             if (me != null) {
                 for (int j = 0; j < me.length; j++) {
-                    highlighter.removeHighlight(me[j]);
+                    highlighter.removeHighlight(me[j].underscore);
                 }
             }
             marks[entryIndex][i] = null;
@@ -171,15 +171,49 @@ public class MarkerController {
     }
 
     /**
+     * Return tooltips texts for specified editor position.
+     * 
+     * @param entryIndex
+     * @param pos
+     * @return
+     */
+    public String getToolTips(int entryIndex, int pos) {
+        if (entryIndex < 0 || entryIndex >= marks.length) {
+            return null;
+        }
+        if (marks[entryIndex] == null) {
+            return null;
+        }
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < marks[entryIndex].length; i++) {
+            if (marks[entryIndex][i] == null) {
+                continue;
+            }
+            for (MarkInfo t : marks[entryIndex][i]) {
+                if (t != null && t.tooltip != null) {
+                    if (t.underscore.getStartOffset() <= pos
+                            && t.underscore.getEndOffset() >= pos) {
+                        if (res.length() > 0) {
+                            res.append('\n');
+                        }
+                        res.append(t.tooltip);
+                    }
+                }
+            }
+        }
+        return res.toString();
+    }
+
+    /**
      * Set marks for specified entry and marker.
      */
     public void setEntryMarks(int entryIndex, SegmentBuilder sb,
             List<Mark> newMarks, int markerIndex) {
         // remove old marks for specified entry and marker
-        Highlighter.Highlight[] me = marks[entryIndex][markerIndex];
+        MarkInfo[] me = marks[entryIndex][markerIndex];
         if (me != null) {
             for (int j = 0; j < me.length; j++) {
-                highlighter.removeHighlight(me[j]);
+                highlighter.removeHighlight(me[j].underscore);
             }
         }
         marks[entryIndex][markerIndex] = null;
@@ -188,7 +222,7 @@ public class MarkerController {
             // there is no marks
             return;
         }
-        Highlighter.Highlight[] nm = new Highlighter.Highlight[newMarks.size()];
+        MarkInfo[] nm = new MarkInfo[newMarks.size()];
         int sourceStartOffset = sb.getStartSourcePosition();
         int translationStartOffset;
         if (sb.isActive()) {
@@ -202,9 +236,11 @@ public class MarkerController {
             int startOffset = m.entryPart == Mark.ENTRY_PART.SOURCE ? sourceStartOffset
                     : translationStartOffset;
             try {
-                nm[i] = (Highlighter.Highlight) highlighter.addHighlight(
-                        startOffset + m.startOffset, startOffset + m.endOffset,
-                        painters[markerIndex]);
+                nm[i] = new MarkInfo();
+                nm[i].underscore = (Highlighter.Highlight) highlighter
+                        .addHighlight(startOffset + m.startOffset, startOffset
+                                + m.endOffset, painters[markerIndex]);
+                nm[i].tooltip = m.toolTipText;
             } catch (BadLocationException ex) {
                 Log.log(ex);
             }
@@ -223,5 +259,13 @@ public class MarkerController {
             return true;
         }
         return ssb != ev.builder || ssb.getDisplayVersion() != ev.entryVersion;
+    }
+
+    /**
+     * Class for store info about displayed mark.
+     */
+    protected static class MarkInfo {
+        Highlighter.Highlight underscore;
+        String tooltip;
     }
 }

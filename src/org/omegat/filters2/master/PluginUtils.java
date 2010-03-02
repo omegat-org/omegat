@@ -75,7 +75,7 @@ public final class PluginUtils {
             });
             URL[] urls = new URL[fs.size()];
             for (int i = 0; i < urls.length; i++) {
-                urls[i] = fs.get(i).toURL();
+                urls[i] = fs.get(i).toURI().toURL();
             }
             boolean foundMain = false;
             // look on all manifests

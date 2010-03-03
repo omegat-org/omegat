@@ -248,7 +248,7 @@
         <mkdir dir="dist2/mac/OmegaT.app/Contents/Resources/Java"/>
         
         <copy todir="dist2/mac/" file="release/mac-specific/index.html"/>
-        <copy todir="dist2/mac/" file="release/mac-specific/OmegaT.css"/>       
+        <copy todir="dist2/mac/OmegaT.app/Contents" file="release/mac-specific/OmegaT.css"/>       
         <filter token="VERSION_NUMBER_SUBST" value="${distversion}"/>
         <copy todir="dist2/mac/OmegaT.app/Contents" file="release/mac-specific/Info.plist" filtering="on"/>
         <copy todir="dist2/mac/OmegaT.app/Contents" file="release/mac-specific/PkgInfo"/>
@@ -260,7 +260,8 @@
         </copy>
 
         <zip destfile="dist2/OmegaT_${distversion}_Mac.zip">
-            <zipfileset dir="dist2/mac/"/>
+            <zipfileset dir="dist2/mac/" excludes="JavaApplicationStub"/>
+            <zipfileset dir="dist2/mac/" includes="JavaApplicationStub" filemode="755"/>
         </zip>
         
     </target>

@@ -260,8 +260,8 @@
         </copy>
 
         <zip destfile="dist2/OmegaT_${distversion}_Mac.zip">
-            <zipfileset dir="dist2/mac/" excludes="JavaApplicationStub"/>
-            <zipfileset dir="dist2/mac/" includes="JavaApplicationStub" filemode="755"/>
+            <zipfileset dir="dist2/mac/" excludes="OmegaT.app/Contents/MacOS/JavaApplicationStub"/>
+            <zipfileset dir="dist2/mac/" includes="OmegaT.app/Contents/MacOS/JavaApplicationStub" filemode="755"/>
         </zip>
         
     </target>

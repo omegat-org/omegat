@@ -39,7 +39,10 @@ Les principales fonctions d'OmegaT sont :
   - recherche de fichiers dans les formats acceptés dans n'importe quel dossier 
   - correspondances automatiques
   - gestion intelligente des projets incluant des structures complexes de dossiers
-  - glossaires (vérifications terminologiques)
+  - glossaires (vérifications terminologiques) 
+  - prise en charge de vérificateurs orthographiques libres en temps réel
+  - prise en charge des dictionnaires StarDict
+  - prise en charge des services de traduction automatique Google Translate
   - documentation et tutoriel clairs et détaillés
   - localisation dans de nombreuses langues
 
@@ -50,10 +53,19 @@ OmegaT prend en charge directement les formats de fichier suivants :
   - OpenDocument/OpenOffice.org
   - ensemble de ressources Java (Bundle.properties)
   - fichiers INI (fichiers dans un encodage quelconque constitués de paires clé=valeur)
-  - fichiers PO monolingues (après passage par msgcat)
+  - fichiers PO
   - fichiers de documentation format DocBook
   - Fichiers Microsoft Open XML
   - Fichiers XLIFF Okapi monolingues
+  - QuarkXPress CopyFlowGold
+  - Fichiers de sous-titres (SRT)
+  - ResX
+  - Ressource Android
+  - LaTeX
+  - LocManager Typo3
+  - Help & Manual
+  - Ressources Windows RC
+  - DTD Mozilla
 
 Il est également possible de personnaliser OmegaT pour accepter d'autres formats.
 
@@ -67,7 +79,19 @@ Le manuel utilisateur se trouve dans le paquet que vous avez téléchargé, vous
  3. Installer OmegaT
 
 3.1 Informations générales
-Pour fonctionner, OmegaT a besoin d'un environnement d'exécution Java (JRE) de version 1.4 ou supérieure. Le JRE est maintenant fourni en standard avec OmegaT, afin d'éviter aux utilisateurs d'avoir à le sélectionner, l'obtenir et l'installer. 
+Pour fonctionner, OmegaT a besoin d'un environnement d'exécution Java (JRE) de version 1.5 ou supérieure. Le JRE est maintenant fourni en standard avec OmegaT, afin d'éviter aux utilisateurs d'avoir à le sélectionner, l'obtenir et l'installer. 
+
+Si vous disposez déjà de Java, la façon la plus simple d'installer la version actuelle d'OmegaT est d'utiliser Java Web Start. 
+Pour ce faire, téléchargez le fichier suivant et exécutez-le :
+
+   http://omegat.sourceforge.net/webstart/OmegaT.jnlp
+
+Il installera l'environnement approprié pour votre ordinateur et l'application elle-même lors de la première exécution. Il ne sera pas nécessaire d'être en ligne pour les lancements suivants.
+
+Durant l'installation, en fonction de votre système d'exploitation, vous recevrez peut-être plusieurs avertissements de sécurité. Le certificat est auto-signé par « Didier Briel ». 
+Les autorisations que vous accordez à cette version (qui peuvent être mentionnées comme étant un « accès sans restriction à l'ordinateur ») sont identiques aux autorisations que vous donnez à la version locale, telle qu'installée par une des procédures décrites plus loin : elles autorisent l'accès au disque dur de l'ordinateur. Les clics suivants sur OmegaT.jnlp vérifieront l'existence de mises à jour, si vous êtes en ligne, les installeront le cas échéant et démarreront ensuite OmegaT. 
+
+Les méthodes et les moyens alternatifs pour télécharger et installer OmegaT sont indiqués ci-dessous. 
 
 Utilisateurs de Windows et Linux : si vous êtes certain qu'une version convenable du JRE est déjà installée, vous pouvez installer une version d'OmegaT sans le JRE (cela est indiqué par le nom de la version, « Without_JRE »). 
 Si vous avez un doute quelconque, nous vous recommandons d'utiliser la version « standard », c'est à dire avec un JRE. Cela est sûr, puisque même si le JRE est déjà installé, cette version n'interférera pas avec la version système.
@@ -77,7 +101,9 @@ Utilisateurs de Linux : notez qu'OmegaT ne fonctionne pas avec les implémentati
 Utilisateurs de Mac : le JRE est déjà installé sur Mac OX X.
 
 Linux sur des architectures Power PC :  les utilisateurs devront télécharger le JRE d'IBM, puisque Sun ne fournit pas de JRE pour les systèmes PPC. Dans ce cas, téléchargez à partir de :
+
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
+
 
 3.2 Installation
 * Utilisateurs de Windows : Exécutez simplement le programme d'installation. Si vous le souhaitez, le programme d'installation peut créer des raccourcis pour exécuter OmegaT.
@@ -145,7 +171,7 @@ Les personnes qui ont contribué incluent :
 
 Contributions au code :
   Zoltan Bartko
-  Didier Briel (responsable de version)
+  Didier Briel (responsable de versions)
   Kim Bruning
   Alex Buloichik
   Sandra Jean Chua
@@ -164,10 +190,10 @@ Contributions au code :
 Autres contributions par :
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary
+  Jean-Christophe Helary (responsable localisations)
   Vito Smolej (responsable documentation)
   Samuel Murray
-  Marc Prior (responsable localisations)
+  Marc Prior 
   ainsi que beaucoup d'autres personnes.
 
 (Si vous pensez avoir contribué à OmegaT de manière significative et si votre nom ne se trouve pas sur cette liste, n'hésitez pas à nous contacter.)

@@ -164,6 +164,8 @@ public class Main {
 
         Log.logRB("LOG_STARTUP_INFO", System.getProperty("java.vendor"), System
                 .getProperty("java.version"), System.getProperty("java.home"));
+        
+        System.setProperty("http.user", OStrings.getDisplayVersion());
 
         ConvertConfigs.convert();
         PluginUtils.loadPlugins(params);

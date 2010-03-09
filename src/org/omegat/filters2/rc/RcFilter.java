@@ -95,6 +95,11 @@ public class RcFilter extends AbstractFilter {
             int b = -1, e = -1;
             String id = null;
             String strim = s.trim();
+
+            if (strim.startsWith("//") || strim.startsWith("#")) {
+                continue;
+            }
+
             if (strim.length() == 0) {
                 if (cLevel == 0) {
                     cPart = PART.UNKNOWN;
@@ -112,7 +117,9 @@ public class RcFilter extends AbstractFilter {
                     && cPart != PART.UNKNOWN) {
                 b = s.indexOf('"');
                 e = s.lastIndexOf('"');
-                id = parseId(cPart, s, b, e);
+                if (b < e && e > 0) {
+                    id = parseId(cPart, s, b, e);
+                }
             } else if (cLevel == 0 && cPart == PART.DIALOG) {
                 if (RE_DIALOG_CAPTION.matcher(strim).matches()) {
                     b = s.indexOf('"');

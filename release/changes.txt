@@ -2,7 +2,7 @@
  OmegaT 2.1.3 update 1
 ----------------------------------------------------------------------
   5 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 ----------------------------------------------------------------------
 2.1.3 update 1 vs. 2.1.3
 
@@ -33,6 +33,9 @@
 
   - OpenXML options enabled only after restarting OmegaT
   http://sourceforge.net/support/tracker.php?aid=2959514
+
+  - Windows RC filter: some files (in "Pascal notation") were not 
+recognised
 
 ----------------------------------------------------------------------
  OmegaT 2.1.3 

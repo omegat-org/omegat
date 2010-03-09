@@ -51,12 +51,14 @@ public class RcFilter extends AbstractFilter {
 
     protected static final Pattern RE_DIALOG = Pattern
             .compile("(\\S+)\\s+DIALOG(EX)?\\s+.+");
+    protected static final Pattern RE_DIALOG_CAPTION = Pattern
+            .compile("CAPTION\\s+.+");
     protected static final Pattern RE_MENU = Pattern
-            .compile("(\\S+)\\s+MENU(EX)?\\s*");
+            .compile("(\\S+)\\s+MENU(EX)?\\s*.*");
     protected static final Pattern RE_MESSAGETABLE = Pattern
-            .compile("(\\S+)\\s+MESSAGETABLE\\s*");
+            .compile("(\\S+)\\s+MESSAGETABLE\\s*.*");
     protected static final Pattern RE_STRINGTABLE = Pattern
-            .compile("STRINGTABLE\\s*");
+            .compile("STRINGTABLE\\s*.*");
 
     enum PART {
         DIALOG, MENU, MESSAGETABLE, STRINGTABLE, OTHER, UNKNOWN
@@ -90,6 +92,8 @@ public class RcFilter extends AbstractFilter {
         blockId = null;
         String s;
         while ((s = inFile.readLine()) != null) {
+            int b = -1, e = -1;
+            String id = null;
             String strim = s.trim();
             if (strim.length() == 0) {
                 if (cLevel == 0) {
@@ -97,33 +101,39 @@ public class RcFilter extends AbstractFilter {
                 }
             } else if (cPart == PART.UNKNOWN) {
                 cPart = parseFirstLineInBlock(strim);
-            } else if ("{".equals(strim)) {
+            } else if ("{".equals(strim) || "BEGIN".equalsIgnoreCase(strim)) {
                 cLevel++;
-            } else if ("}".equals(strim)) {
+            } else if ("}".equals(strim) || "END".equalsIgnoreCase(strim)) {
                 cLevel--;
                 if (cLevel == 0) {
                     cPart = PART.UNKNOWN;
                 }
             } else if (cLevel > 0 && cPart != PART.OTHER
                     && cPart != PART.UNKNOWN) {
-                String loc;
-                int b = s.indexOf('"');
-                int e = s.lastIndexOf('"');
-                if (b < e && e > 0) {
-                    String id = parseId(cPart, s, b, e);
-                    // extract source
-                    loc = s.substring(b + 1, e);
-                    if (entryParseCallback != null) {
-                        entryParseCallback.addEntry(null, loc, null, false,
-                                null, this);
-                    } else if (entryTranslateCallback != null) {
-                        // replace translation
-                        String trans = entryTranslateCallback.getTranslation(
-                                null, loc);
-                        s = s.substring(0, b + 1) + trans + s.substring(e);
-                    } else if (entryAlignCallback != null && id != null) {
-                        align.put(blockId + "/" + id, loc);
-                    }
+                b = s.indexOf('"');
+                e = s.lastIndexOf('"');
+                id = parseId(cPart, s, b, e);
+            } else if (cLevel == 0 && cPart == PART.DIALOG) {
+                if (RE_DIALOG_CAPTION.matcher(strim).matches()) {
+                    b = s.indexOf('"');
+                    e = s.lastIndexOf('"');
+                    id = "__CAPTION__";
+                }
+            }
+
+            if (b < e && e > 0) {
+                // extract source
+                String loc = s.substring(b + 1, e);
+                if (entryParseCallback != null) {
+                    entryParseCallback.addEntry(blockId + "/" + id, loc, null,
+                            false, null, this);
+                } else if (entryTranslateCallback != null) {
+                    // replace translation
+                    String trans = entryTranslateCallback.getTranslation(null,
+                            loc);
+                    s = s.substring(0, b + 1) + trans + s.substring(e);
+                } else if (entryAlignCallback != null && id != null) {
+                    align.put(blockId + "/" + id, loc);
                 }
             }
             outFile.write(s);

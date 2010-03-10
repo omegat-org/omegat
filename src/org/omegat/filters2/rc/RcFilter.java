@@ -65,6 +65,7 @@ public class RcFilter extends AbstractFilter {
     };
 
     protected String blockId;
+    protected int b, e;
 
     protected Map<String, String> align;
 
@@ -92,7 +93,8 @@ public class RcFilter extends AbstractFilter {
         blockId = null;
         String s;
         while ((s = inFile.readLine()) != null) {
-            int b = -1, e = -1;
+            b = -1;
+            e = -1;
             String id = null;
             String strim = s.trim();
 
@@ -115,22 +117,20 @@ public class RcFilter extends AbstractFilter {
                 }
             } else if (cLevel > 0 && cPart != PART.OTHER
                     && cPart != PART.UNKNOWN) {
-                b = s.indexOf('"');
-                e = s.lastIndexOf('"');
-                if (b < e && e > 0) {
+                markForTranslation(s);
+                if (b >= 0 && e >= 0 && b < e && e > 0) {
                     id = parseId(cPart, s, b, e);
                 }
             } else if (cLevel == 0 && cPart == PART.DIALOG) {
                 if (RE_DIALOG_CAPTION.matcher(strim).matches()) {
-                    b = s.indexOf('"');
-                    e = s.lastIndexOf('"');
+                    markForTranslation(s);
                     id = "__CAPTION__";
                 }
             }
 
-            if (b < e && e > 0) {
+            if (b >= 0 && e >= 0 && b < e && e > 0) {
                 // extract source
-                String loc = s.substring(b + 1, e);
+                String loc = s.substring(b + 1, e).replace("\"\"", "\"");
                 if (entryParseCallback != null) {
                     entryParseCallback.addEntry(blockId + "/" + id, loc, null,
                             false, null, this);
@@ -201,5 +201,26 @@ public class RcFilter extends AbstractFilter {
             return w[0].trim();
         }
         return null;
+    }
+
+    private void markForTranslation(String s) {
+        b = s.indexOf('"');
+        if (b < 0) {
+            return;
+        }
+        e = b;
+        while (true) {
+            e = s.indexOf('"', e + 1);
+            if (e < 0) {
+                break;
+            }
+            if (e < s.length() - 1) {
+                if (s.charAt(e + 1) == '"') {
+                    e++;
+                    continue;
+                }
+            }
+            break;
+        }
     }
 }

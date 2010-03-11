@@ -83,34 +83,35 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
             infos.remove(fn);
         }
         if (file.exists()) {
-            if (file.getName().equals("ignore.txt")) {
-                try {
+            try {
+                long st = System.currentTimeMillis();
+
+                if (file.getName().equals("ignore.txt")) {
                     loadIgnoreWords(file);
-                } catch (Exception ex) {
-                    Log.log("Error load ignore words:" + ex.getMessage());
-                }
-            } else if (fn.endsWith(".ifo")) {
-                try {
+                } else if (fn.endsWith(".ifo")) {
                     IDictionary dict = new StarDict(file);
                     Map<String, Object> header = dict.readHeader();
                     synchronized (this) {
                         infos.put(fn, new DictionaryInfo(dict, header));
                     }
-                    Log.log("Loaded dictionary from " + fn);
-                } catch (Exception ex) {
-                    Log.log("Error load dictionary: " + ex.getMessage());
-                }
-            } else if (fn.endsWith(".dsl")) {
-                try {
+                } else if (fn.endsWith(".dsl")) {
                     IDictionary dict = new LingvoDSL(file);
                     Map<String, Object> header = dict.readHeader();
                     synchronized (this) {
                         infos.put(fn, new DictionaryInfo(dict, header));
                     }
-                    Log.log("Loaded dictionary from " + fn);
-                } catch (Exception ex) {
-                    Log.log("Error load dictionary: " + ex.getMessage());
+                } else {
+                    fn = null;
                 }
+
+                if (fn != null) {
+                    long en = System.currentTimeMillis();
+                    Log.log("Loaded dictionary from '" + fn + "': " + (en - st)
+                            + "ms");
+                }
+            } catch (Exception ex) {
+                Log.log("Error load dictionary from '" + fn + "': "
+                        + ex.getMessage());
             }
         }
         pane.refresh();

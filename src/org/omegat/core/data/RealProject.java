@@ -596,6 +596,7 @@ public class RealProject implements IProject
     private void loadSourceFiles()
             throws IOException, InterruptedIOException, TranslationException
     {
+        long st = System.currentTimeMillis();
         FilterMaster fm = FilterMaster.getInstance();
         
         List<String> srcFileList = new ArrayList<String>();
@@ -624,6 +625,8 @@ public class RealProject implements IProject
             }
         }
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
+        long en = System.currentTimeMillis();
+        Log.log("Load project source files: " + (en - st) + "ms");
     }
     
     /** Locates and loads external TMX files with legacy translations. */

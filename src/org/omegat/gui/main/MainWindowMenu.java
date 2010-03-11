@@ -224,6 +224,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         optionsMenu.add(optionsTagValidationMenuItem = createMenuItem("MW_OPTIONSMENU_TAGVALIDATION"));
         optionsMenu.add(optionsTeamMenuItem = createMenuItem("MW_OPTIONSMENU_TEAM"));
         optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
+        
+        optionsMenu.add(new JSeparator());
 
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
         helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));
@@ -401,6 +403,10 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
 
     public JMenu getMachineTranslationMenu() {
         return optionsMachineTranslateMenu;
+    }
+    
+    public JMenu getOptionsMenu() {
+        return optionsMenu;
     }
     
     JMenuItem cycleSwitchCaseMenuItem;

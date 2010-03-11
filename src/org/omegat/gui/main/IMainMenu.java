@@ -33,4 +33,6 @@ import javax.swing.JMenu;
  */
 public interface IMainMenu {
     JMenu getMachineTranslationMenu();
+
+    JMenu getOptionsMenu();
 }

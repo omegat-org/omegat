@@ -59,6 +59,7 @@ import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.WikiGet;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.ResourcesUtil;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -142,6 +143,8 @@ public class MainWindow extends JFrame implements IMainWindow {
             public void onApplicationStartup() {
                 MainWindowUI.resetDesktopLayout(MainWindow.this);
                 MainWindowUI.loadScreenLayout(MainWindow.this);
+                
+                DockingUI.removeUnusedMenuSeparators(menu.getOptionsMenu().getPopupMenu());
             }
             public void onApplicationShutdown() {
             }

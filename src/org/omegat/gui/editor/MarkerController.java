@@ -185,6 +185,8 @@ public class MarkerController {
             return null;
         }
         StringBuilder res = new StringBuilder();
+        res.append("<html>");
+        boolean wasText = false;
         for (int i = 0; i < marks[entryIndex].length; i++) {
             if (marks[entryIndex][i] == null) {
                 continue;
@@ -193,15 +195,21 @@ public class MarkerController {
                 if (t != null && t.tooltip != null) {
                     if (t.underscore.getStartOffset() <= pos
                             && t.underscore.getEndOffset() >= pos) {
-                        if (res.length() > 0) {
-                            res.append('\n');
+                        if (wasText) {
+                            res.append("<br>");
+                        } else {
+                            wasText = true;
                         }
                         res.append(t.tooltip);
                     }
                 }
             }
         }
-        return res.toString();
+        res.append("</html>");
+        String r = res.toString();
+        r = r.replace("<suggestion>", "<b>");
+        r = r.replace("</suggestion>", "</b>");
+        return r;
     }
 
     /**

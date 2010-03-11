@@ -34,6 +34,8 @@ import java.awt.Window;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JPopupMenu;
+import javax.swing.JSeparator;
 import javax.swing.UIManager;
 
 import org.omegat.core.Core;
@@ -142,5 +144,28 @@ public class DockingUI {
         dLocation.x = mCenter.x - dSize.width / 2;
         dLocation.y = mCenter.y - dSize.height / 2;
         window.setLocation(dLocation);
+    }
+
+    /**
+     * Removes first, last and duplicate separators from menu.
+     */
+    public static void removeUnusedMenuSeparators(final JPopupMenu menu) {
+        if (menu.getComponentCount() > 0
+                && menu.getComponent(0) instanceof JSeparator) {
+            // remove first separator
+            menu.remove(0);
+        }
+        if (menu.getComponentCount() > 0
+                && menu.getComponent(menu.getComponentCount() - 1) instanceof JSeparator) {
+            // remove last separator
+            menu.remove(menu.getComponentCount() - 1);
+        }
+        for (int i = 0; i < menu.getComponentCount() - 1; i++) {
+            if (menu.getComponent(i) instanceof JSeparator
+                    && menu.getComponent(i + 1) instanceof JSeparator) {
+                // remove duplicate separators
+                menu.remove(i);
+            }
+        }
     }
 }

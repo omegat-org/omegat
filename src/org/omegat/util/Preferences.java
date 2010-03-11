@@ -181,6 +181,8 @@ public class Preferences
      */
     public static final String FILTERS_VERSION = "filters_version";             // NOI18N
     
+    public static final String LT_DISABLED = "lt_disabled";
+    
     
     /** Private constructor, because this file is singleton */
     static

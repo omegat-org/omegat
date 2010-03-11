@@ -37,7 +37,6 @@ import java.util.List;
 
 import javax.swing.JEditorPane;
 import javax.swing.JPopupMenu;
-import javax.swing.JSeparator;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
 import javax.swing.text.AbstractDocument;
@@ -56,6 +55,7 @@ import javax.swing.undo.UndoManager;
 
 import org.omegat.core.CoreEvents;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.DockingUI;
 
 /**
  * Changes of standard JEditorPane implementation for support custom behavior.
@@ -164,23 +164,8 @@ public class EditorTextArea3 extends JEditorPane {
                             sb);
                 }
 
-                if (popup.getComponentCount() > 0
-                        && popup.getComponent(0) instanceof JSeparator) {
-                    // remove first separator
-                    popup.remove(0);
-                }
-                if (popup.getComponentCount() > 0
-                        && popup.getComponent(popup.getComponentCount() - 1) instanceof JSeparator) {
-                    // remove last separator
-                    popup.remove(popup.getComponentCount() - 1);
-                }
-                for (int i = 0; i < popup.getComponentCount() - 1; i++) {
-                    if (popup.getComponent(i) instanceof JSeparator
-                            && popup.getComponent(i + 1) instanceof JSeparator) {
-                        // remove duplicate separators
-                        popup.remove(i);
-                    }
-                }
+                DockingUI.removeUnusedMenuSeparators(popup);
+
                 if (popup.getComponentCount() > 0) {
                     popup.show(EditorTextArea3.this, (int) e.getPoint().getX(),
                             (int) e.getPoint().getY());

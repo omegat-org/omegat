@@ -46,7 +46,8 @@ public class EditorUtils {
                 || "iw".equalsIgnoreCase(language)
                 || "he".equalsIgnoreCase(language)
                 || "fa".equalsIgnoreCase(language)
-                || "ur".equalsIgnoreCase(language);
+                || "ur".equalsIgnoreCase(language)
+                || "ug".equalsIgnoreCase(language);
     }
 
     /**

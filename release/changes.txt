@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.4 
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   4 Bugfixes
 ----------------------------------------------------------------------
 2.1.4 vs. 2.1.3
@@ -16,6 +16,11 @@
 
   - Add .txt extension as tab-separated glossary in UTF-8
   http://sourceforge.net/support/tracker.php?aid=2942348
+
+  - Add LanguageTool support
+  http://sourceforge.net/support/tracker.php?aid=2950346
+(Requires LangageTool plugin from 
+http://sourceforge.net/projects/omegat-plugins)
 
    Other enhancements:
 
@@ -213,7 +218,7 @@ as a repetition in Match Statistics
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 3
-  1 Enhancement
+  2 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 3 vs. 2.0.5 update 2
@@ -222,6 +227,9 @@ as a repetition in Match Statistics
 
   - Segmentation rule for header number and the header body
   http://sourceforge.net/support/tracker.php?aid=2948997
+
+  - Define Uyghur as RTL
+  http://sourceforge.net/support/tracker.php?aid=2970467
 
   Bug Fixes:
 

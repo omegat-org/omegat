@@ -130,7 +130,9 @@ public class RcFilter extends AbstractFilter {
 
             if (b >= 0 && e >= 0 && b < e && e > 0) {
                 // extract source
-                String loc = s.substring(b + 1, e).replace("\"\"", "\"");
+                String loc = s.substring(b + 1, e);
+                boolean wasDouble = loc.indexOf("\"\"") >= 0;
+                loc = loc.replace("\\\"", "\"").replace("\"\"", "\"");
                 if (entryParseCallback != null) {
                     entryParseCallback.addEntry(blockId + "/" + id, loc, null,
                             false, null, this);
@@ -138,6 +140,11 @@ public class RcFilter extends AbstractFilter {
                     // replace translation
                     String trans = entryTranslateCallback.getTranslation(null,
                             loc);
+                    if (wasDouble) {
+                        trans = trans.replace("\"", "\"\"");
+                    } else {
+                        trans = trans.replace("\"", "\\\"");
+                    }
                     s = s.substring(0, b + 1) + trans + s.substring(e);
                 } else if (entryAlignCallback != null && id != null) {
                     align.put(blockId + "/" + id, loc);
@@ -214,8 +221,13 @@ public class RcFilter extends AbstractFilter {
             if (e < 0) {
                 break;
             }
+            if (s.charAt(e - 1) == '\\') {
+                // skip escaped quote
+                continue;
+            }
             if (e < s.length() - 1) {
                 if (s.charAt(e + 1) == '"') {
+                    // skip double quote
                     e++;
                     continue;
                 }

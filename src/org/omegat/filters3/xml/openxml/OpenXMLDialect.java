@@ -65,6 +65,7 @@ public class OpenXMLDialect extends DefaultXMLDialect
             "authors",                                                          
             // PowerPoint
             "p:attrName",
+            "a:tableStyleId",
             // Word
             "wp:align",
             "w:drawing",

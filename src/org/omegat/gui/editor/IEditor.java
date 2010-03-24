@@ -230,4 +230,9 @@ public interface IEditor {
      */
     void registerPopupMenuConstructors(int priority,
             IPopupMenuConstructor constructor);
+    
+    /**
+     * Calls specified marker for reprocess all entries.
+     */
+    void remarkOneMarker(String markerClassName);
 }

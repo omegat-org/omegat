@@ -154,10 +154,20 @@ public class MarkerController {
     }
 
     /**
-     * Add entries list to processing queue for one marker only. Used for
-     * recheck displayed file against one marker.
+     * Remove all marks for specified marker and add entries list to processing
+     * queue for one marker only. Used for recheck displayed file against one
+     * marker.
      */
     public void process(SegmentBuilder[] entryBuilders, int markerIndex) {
+        for (int i = 0; i < marks.length; i++) {
+            MarkInfo[] me = marks[i][markerIndex];
+            if (me != null) {
+                for (int j = 0; j < me.length; j++) {
+                    highlighter.removeHighlight(me[j].underscore);
+                }
+            }
+            marks[i][markerIndex] = null;
+        }
         markerThreads[markerIndex].add(entryBuilders);
     }
 

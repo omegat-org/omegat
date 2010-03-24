@@ -1205,13 +1205,13 @@ public class EditorController implements IEditor {
     }
     
     /**
-     * Calls markers for reprocess active entry.
+     * {@inheritDoc}
      */
-    void remarkOneMarker(final String markerClassName) {
+    public void remarkOneMarker(final String markerClassName) {
         int mi = markerController.getMarkerIndex(markerClassName);
         markerController.process(m_docSegList, mi);
     }
-    
+
     /**
      * {@inheritDoc}
      */

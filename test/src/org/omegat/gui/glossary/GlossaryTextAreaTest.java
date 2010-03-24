@@ -162,6 +162,8 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void requestFocus() {
             }
+            public void remarkOneMarker(String markerClassName) {
+            }
         });
     }
 }

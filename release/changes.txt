@@ -2,15 +2,17 @@
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bugfix
+  2 Bugfixes
+----------------------------------------------------------------------
+2.1.4 update 1 vs. 2.1.3
 
   Bug fixes:
 
+  - No filters available when locale is tr
+  http://sourceforge.net/support/tracker.php?aid=2976351
+
   - Exception when project was reloaded after some project properties
 changes
-
-----------------------------------------------------------------------
-2.1.4 update 1 vs. 2.1.3
 
 ----------------------------------------------------------------------
  OmegaT 2.1.4 

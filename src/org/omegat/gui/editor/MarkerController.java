@@ -133,8 +133,14 @@ public class MarkerController {
      *            entry index
      */
     void resetEntryMarks(int entryIndex) {
-        for (int i = 0; i < marks[entryIndex].length; i++) {
-            MarkInfo[] me = marks[entryIndex][i];
+        MarkInfo[][] m;
+        try {
+            m = marks[entryIndex];
+        } catch (IndexOutOfBoundsException ex) {
+            return;
+        }
+        for (int i = 0; i < m.length; i++) {
+            MarkInfo[] me = m[i];
             if (me != null) {
                 for (int j = 0; j < me.length; j++) {
                     highlighter.removeHighlight(me[j].underscore);

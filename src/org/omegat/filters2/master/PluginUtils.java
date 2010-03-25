@@ -34,6 +34,7 @@ import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -173,7 +174,7 @@ public final class PluginUtils {
             }
             PLUGIN_TYPE pType;
             try {
-                pType = PLUGIN_TYPE.valueOf(sType.toUpperCase());
+                pType = PLUGIN_TYPE.valueOf(sType.toUpperCase(Locale.ENGLISH));
             } catch (Exception ex) {
                 pType = PLUGIN_TYPE.UNKNOWN;
             }

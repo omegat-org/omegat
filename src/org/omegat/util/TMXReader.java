@@ -32,6 +32,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.Stack;
@@ -775,10 +776,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                 // add the language to the set, but trim off any region indicators
                 // for simplicity's sake, and convert it to all uppercase
                 if (language.length() > 0) {
-                    m_variantLanguages.add(language.substring(0, 2).toUpperCase());
+                    m_variantLanguages.add(language.substring(0, 2).toUpperCase(Locale.ENGLISH));
                     if (languages.length() > 0)
                         languages.append(", ");
-                    languages.append(language.substring(0, 2).toUpperCase());
+                    languages.append(language.substring(0, 2).toUpperCase(Locale.ENGLISH));
                 }
 
                 // trim the list of languages
@@ -974,7 +975,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                 if (   (tuv != source)
                     && (tuv != target)
                     && (   m_variantLanguages.isEmpty()
-                        || m_variantLanguages.contains(tuv.language.substring(0, 2).toUpperCase())))
+                        || m_variantLanguages.contains(tuv.language.substring(0, 2).toUpperCase(Locale.ENGLISH))))
                    storeSegment(source.text.toString(), tuv.text.toString(), changeId, changeDate);
             }
         }

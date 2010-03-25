@@ -86,8 +86,8 @@ public class Language
                 this.languageCode = m.group(1);
                 if( m.group(2)!=null )
                     this.countryCode = m.group(2);
-                this.locale = new Locale(this.languageCode.toLowerCase(), 
-                        this.countryCode.toUpperCase());
+                this.locale = new Locale(this.languageCode.toLowerCase(Locale.ENGLISH), 
+                        this.countryCode.toUpperCase(Locale.ENGLISH));
             }
         }
     }

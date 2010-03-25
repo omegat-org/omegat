@@ -1187,8 +1187,8 @@ public class EditorController implements IEditor {
      */
     private String detectInstantStartLanguage() {
         // Get the system language and country
-        String language = Locale.getDefault().getLanguage().toLowerCase();
-        String country = Locale.getDefault().getCountry().toUpperCase();
+        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
+        String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
 
         // Check if there's a translation for the full locale (lang + country)
         if (HelpFrame.getHelpFileURL(language + "_" + country,

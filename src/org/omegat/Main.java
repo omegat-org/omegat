@@ -73,7 +73,7 @@ public class Main {
         GUI, CONSOLE_TRANSLATE, CONSOLE_CREATEPSEUDOTRANSLATETMX, CONSOLE_ALIGN;
         public static RUN_MODE parse(String s) {
             try {
-                return valueOf(s.toUpperCase().replace('-', '_'));
+                return valueOf(s.toUpperCase(Locale.ENGLISH).replace('-', '_'));
             } catch (Exception ex) {
                 // default mode
                 return GUI;
@@ -89,7 +89,7 @@ public class Main {
         EQUAL, EMPTY;
         public static PSEUDO_TRANSLATE_TYPE parse(String s) {
             try {
-                return valueOf(s.toUpperCase().replace('-', '_'));
+                return valueOf(s.toUpperCase(Locale.ENGLISH).replace('-', '_'));
             } catch (Exception ex) {
                 // default mode
                 return EQUAL;

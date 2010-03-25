@@ -299,8 +299,8 @@ public class HelpFrame extends JFrame {
      */
     private static String detectInitialLanguage() {
         // Get the system locale (language and country)
-        String language = Locale.getDefault().getLanguage().toLowerCase();
-        String country = Locale.getDefault().getCountry().toUpperCase();
+        String language = Locale.getDefault().getLanguage().toLowerCase(Locale.ENGLISH);
+        String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
 
         // Check if there's a translation for the full locale (lang + country)
         String locale = language + "_" + country;

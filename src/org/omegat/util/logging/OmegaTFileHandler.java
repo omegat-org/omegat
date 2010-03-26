@@ -38,6 +38,7 @@ import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
 
+import org.omegat.util.OConsts;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -102,6 +103,7 @@ public class OmegaTFileHandler extends StreamHandler {
             lockStream = new FileOutputStream(lockFile);
             if (lockStream.getChannel().tryLock() != null) {
                 rotate(dir, fileName);
+                setEncoding(OConsts.UTF8);
                 setOutputStream(new FileOutputStream(new File(dir, fileName
                         + ".log"), true));
                 break;

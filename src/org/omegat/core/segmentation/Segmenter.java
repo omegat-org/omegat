@@ -27,6 +27,7 @@ package org.omegat.core.segmentation;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
@@ -307,7 +308,7 @@ public final class Segmenter
             sp.append(spaces.get(2*i-1));
             sp.append(spaces.get(2*i));
             
-            if (CJK_LANGUAGES.contains(targetLang.getLanguageCode()))
+            if (CJK_LANGUAGES.contains(targetLang.getLanguageCode().toUpperCase(Locale.ENGLISH)))
             {
                 Rule rule = brules.get(i-1);
                 char lastChar = res.charAt(res.length() - 1);
@@ -316,7 +317,7 @@ public final class Segmenter
                        || !PatternConsts.SPACY_REGEX.matcher(rule.getAfterbreak()).matches()))
                     sp.setLength(0);
             }
-            else if (CJK_LANGUAGES.contains(sourceLang.getLanguageCode()) && 
+            else if (CJK_LANGUAGES.contains(sourceLang.getLanguageCode().toUpperCase(Locale.ENGLISH)) && 
                     sp.length()==0)
                 sp.append(" ");                                                 // NOI18N
 	    

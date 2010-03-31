@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,6 +43,7 @@ import javax.xml.parsers.SAXParserFactory;
 import javax.xml.transform.sax.SAXSource;
 
 import org.omegat.core.Core;
+import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.xml.sax.InputSource;
 import org.xml.sax.XMLReader;
@@ -52,6 +53,7 @@ import org.xml.sax.helpers.XMLFilterImpl;
  * Reader for TBX glossaries.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Didier Briel
  */
 public class GlossaryReaderTBX {
     protected static final JAXBContext TBX_CONTEXT;
@@ -86,7 +88,9 @@ public class GlossaryReaderTBX {
             String tTerm = null;
             note.setLength(0);
             for (LangSet ls : te.getLangSet()) {
-                String lang = ls.getLang();
+                Language termLanguage = new Language(ls.getLang());
+                // We use only the language code
+                String lang = termLanguage.getLanguageCode();
                 for (Object o : ls.getTigOrNtig()) {
                     if (o instanceof Tig) {
                         Tig t = (Tig) o;
@@ -149,6 +153,7 @@ public class GlossaryReaderTBX {
             super(xmlReader);
         }
 
+        @Override
         public InputSource resolveEntity(String publicId, String systemId) {
             return EMPTY_INPUT_SOURCE;
         }

@@ -2,7 +2,7 @@
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  3 Bugfixes
+  4 Bugfixes
 ----------------------------------------------------------------------
 2.1.4 update 1 vs. 2.1.3
 
@@ -20,6 +20,8 @@ changes
 
   - Specific segmentation processing was not working when CJK language 
 codes were entered in lowercase
+
+  - TBX terms with country code (e.g., de-AT) were ignored
 
 ----------------------------------------------------------------------
  OmegaT 2.1.4 

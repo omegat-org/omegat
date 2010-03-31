@@ -2,7 +2,7 @@
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.1.4 update 1 vs. 2.1.3
 
@@ -17,6 +17,9 @@
 
   - Exception when project was reloaded after some project properties
 changes
+
+  - Specific segmentation processing was not working when CJK language 
+codes were entered in lowercase
 
 ----------------------------------------------------------------------
  OmegaT 2.1.4 

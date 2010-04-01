@@ -33,6 +33,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;     // HP
 import java.awt.event.KeyEvent;        // HP
 import javax.swing.AbstractAction;     // HP
@@ -189,6 +190,9 @@ public class DictionaryInstallerDialog extends JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void installButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installButtonActionPerformed
+        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = getCursor();
+        setCursor(hourglassCursor);
         Object[] selection = dictionaryList.getSelectedValues();
         for (int i = 0; i < selection.length; i++) {
             // install the respective dictionaries
@@ -196,13 +200,17 @@ public class DictionaryInstallerDialog extends JDialog {
             String langCode = (item).substring(0,item.indexOf(" "));
             try {
                 dicMan.installRemoteDictionary(langCode);
+                ((SpellcheckerConfigurationDialog)this.getParent()).updateLanguageList();
             } catch (MalformedURLException ex) {
+                setCursor(oldCursor);
                 JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(),
                         "Error", JOptionPane.ERROR_MESSAGE);
+                setCursor(hourglassCursor);
             } catch (IOException ex) {
                 ex.printStackTrace();
             }
         }
+        setCursor(oldCursor);
     }//GEN-LAST:event_installButtonActionPerformed
 
     private void closeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_closeButtonActionPerformed

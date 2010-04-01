@@ -130,7 +130,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     /**
      * Updates the language list based on the directory text field
      */
-    private void updateLanguageList() {
+    public void updateLanguageList() {
         String dirName = directoryTextField.getText();
         
         // should we do anything?
@@ -353,6 +353,14 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_directoryChooserButtonActionPerformed
 
     private void installButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_installButtonActionPerformed
+        if (dicMan == null) {
+            JOptionPane.showMessageDialog(this,
+                    OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE"),
+                    OStrings.getString("GUI_SPELLCHECKER_INSTALL_UNABLE_TITLE"),
+                    JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         DictionaryInstallerDialog installerDialog;
         try {
             installerDialog = new DictionaryInstallerDialog(this, dicMan);
@@ -368,32 +376,32 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 // any dictionary manager available
         if (dicMan == null)
             return; // this should never happen - just in case it does
-        
+
         if (currentLanguage != null) {
-            String selectedItem = (String) languageListModel.getElementAt(
-                    languageList.getSelectedIndex());
-            
-            String selectedLocaleName = selectedItem.substring(
-                    0, selectedItem.indexOf(" "));
-            
-            if (selectedLocaleName.equals(currentLanguage.getLocaleCode())) {
-                if (JOptionPane.showConfirmDialog(this,
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT"),
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT_TITLE"),
-                        JOptionPane.YES_NO_OPTION
-                        ) == JOptionPane.NO_OPTION)
-                    return;
+            Object[] selection = languageList.getSelectedValues();
+            for (int i = 0; i < selection.length; i++) {
+                String selectedItem = (String) selection[i];
+                String selectedLocaleName = selectedItem.substring(
+                        0, selectedItem.indexOf(" "));
+
+                if (selectedLocaleName.equals(currentLanguage.getLocaleCode())) {
+                    if (JOptionPane.showConfirmDialog(this,
+                            OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT"),
+                            OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_CURRENT_TITLE"),
+                            JOptionPane.YES_NO_OPTION
+                    ) == JOptionPane.NO_OPTION)
+                        return;
+                }
+
+                if (!dicMan.uninstallDictionary(selectedLocaleName))
+                    JOptionPane.showMessageDialog(this,
+                            OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE"),
+                            OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE_TITLE"),
+                            JOptionPane.ERROR_MESSAGE);
+
+                languageListModel.remove(languageList.getSelectedIndex());
+                uninstallButton.setEnabled(languageListModel.size() > 0);
             }
-            
-            if (!dicMan.uninstallDictionary(selectedLocaleName))
-                JOptionPane.showMessageDialog(this,
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE"),
-                        OStrings.getString("GUI_SPELLCHECKER_UNINSTALL_UNABLE_TITLE"),
-                        JOptionPane.ERROR_MESSAGE);
-            
-            languageListModel.remove(languageList.getSelectedIndex());
-            uninstallButton.setEnabled(languageListModel.size() > 0);
-            
         }
     }//GEN-LAST:event_uninstallButtonActionPerformed
 

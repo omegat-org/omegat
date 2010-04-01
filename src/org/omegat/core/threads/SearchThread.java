@@ -103,6 +103,9 @@ public class SearchThread extends Thread
      * @param dateAfter the date after which the modification date has to be
      * @param searchDateBefore search for translation segments modified before the given date
      * @param dateBefore the date before which the modification date has to be
+     * @internal The main loop (in the run method) waits for the variable 
+     *           m_searching to be set to true. This variable is set to true
+     *           in this function on successful setting of the search parameters.
      */
     public void requestSearch(String  text,
                               String  rootDir,
@@ -130,8 +133,7 @@ public class SearchThread extends Thread
             m_searchAuthor = searchAuthor;
             m_searchDateAfter = searchDateAfter;
             m_searchDateBefore = searchDateBefore;
-            m_searching = true;
-            
+
             m_entrySet = new HashSet<String>(); // HP
 
             // create a list of matchers
@@ -195,6 +197,8 @@ public class SearchThread extends Thread
             }
             m_dateBefore=dateBefore;
             m_dateAfter = dateAfter;
+
+            m_searching = true;
         }
     }
     

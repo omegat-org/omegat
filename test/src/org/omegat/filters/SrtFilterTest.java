@@ -35,7 +35,7 @@ public class SrtFilterTest extends TestFilterBase {
         assertEquals(lines.size(), 3);
         assertEquals("First title", lines.get(0));
         assertEquals("Second title", lines.get(1));
-        assertEquals("Third title", lines.get(2));
+        assertEquals("Third title\nand again", lines.get(2));
     }
 
     public void testTranslate() throws Exception {

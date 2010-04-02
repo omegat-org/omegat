@@ -60,7 +60,7 @@ public class SourceTextEntry {
         return src;
     }
 
-    /** Returns the number of this entry is a project. */
+    /** Returns the number of this entry in a project. */
     public int entryNum() {
         return m_entryNum;
     }

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   4 Bugfixes
 ----------------------------------------------------------------------
 2.1.4 update 1 vs. 2.1.4
@@ -10,6 +10,9 @@
 
   - SRT filter: read time group into a single segment
   http://sourceforge.net/support/tracker.php?aid=2980046
+
+  - Spell checker dialog improvements
+  http://sourceforge.net/support/tracker.php?aid=2980991
 
   Other enhancements:
 

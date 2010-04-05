@@ -24,6 +24,8 @@
 
 package org.omegat.gui.glossary;
 
+import gen.core.tbx.Descrip;
+import gen.core.tbx.DescripGrp;
 import gen.core.tbx.LangSet;
 import gen.core.tbx.Martif;
 import gen.core.tbx.TermEntry;
@@ -82,11 +84,13 @@ public class GlossaryReaderTBX {
                 .getTargetLanguage().getLanguageCode();
 
         StringBuilder note = new StringBuilder();
+        StringBuilder desc = new StringBuilder();
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
         List<String> sTerms = new ArrayList<String>();
         List<String> tTerms = new ArrayList<String>();
         for (TermEntry te : tbx.getText().getBody().getTermEntry()) {
             note.setLength(0);
+            desc.setLength(0);
             for (LangSet ls : te.getLangSet()) {
                 Language termLanguage = new Language(ls.getLang());
                 // We use only the language code
@@ -105,12 +109,34 @@ public class GlossaryReaderTBX {
                             }
                             note.append(readContent(tn.getContent()));
                         }
+                        for (Object od : t.getDescripOrDescripGrpOrAdmin()) {
+                            Descrip d = null;
+                            if (od instanceof Descrip) {
+                                d = (Descrip) od;
+                            } else if (od instanceof DescripGrp) {
+                                DescripGrp dg = (DescripGrp) od;
+                                d = dg.getDescrip();
+                            }
+                            if (d != null) {
+                                if (desc.length() > 0) {
+                                    desc.append('\n');
+                                }
+                                desc.append(d.getType()).append(':');
+                                desc.append(readContent(d.getContent()));
+                            }
+                        }
                     }
                 }
             }
+            if (note.length() > 0) {
+                if (desc.length() > 0) {
+                    desc.append('\n');
+                }
+                desc.append(note);
+            }
             for (String s : sTerms) {
                 for (String t : tTerms) {
-                    result.add(new GlossaryEntry(s, t, note.toString()));
+                    result.add(new GlossaryEntry(s, t, desc.toString()));
                 }
             }
             sTerms.clear();
@@ -127,7 +153,7 @@ public class GlossaryReaderTBX {
         }
         return res.toString();
     }
-
+    
     /**
      * Load tbx file, but skip DTD resolving.
      */

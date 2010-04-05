@@ -83,9 +83,9 @@ public class GlossaryReaderTBX {
 
         StringBuilder note = new StringBuilder();
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
+        List<String> sTerms = new ArrayList<String>();
+        List<String> tTerms = new ArrayList<String>();
         for (TermEntry te : tbx.getText().getBody().getTermEntry()) {
-            String sTerm = null;
-            String tTerm = null;
             note.setLength(0);
             for (LangSet ls : te.getLangSet()) {
                 Language termLanguage = new Language(ls.getLang());
@@ -95,9 +95,9 @@ public class GlossaryReaderTBX {
                     if (o instanceof Tig) {
                         Tig t = (Tig) o;
                         if (sLang.equalsIgnoreCase(lang)) {
-                            sTerm = readContent(t.getTerm().getContent());
+                            sTerms.add(readContent(t.getTerm().getContent()));
                         } else if (tLang.equalsIgnoreCase(lang)) {
-                            tTerm = readContent(t.getTerm().getContent());
+                            tTerms.add(readContent(t.getTerm().getContent()));
                         }
                         for (TermNote tn : t.getTermNote()) {
                             if (note.length() > 0) {
@@ -108,9 +108,13 @@ public class GlossaryReaderTBX {
                     }
                 }
             }
-            if (sTerm != null && tTerm != null) {
-                result.add(new GlossaryEntry(sTerm, tTerm, note.toString()));
+            for (String s : sTerms) {
+                for (String t : tTerms) {
+                    result.add(new GlossaryEntry(s, t, note.toString()));
+                }
             }
+            sTerms.clear();
+            tTerms.clear();
         }
 
         return result;

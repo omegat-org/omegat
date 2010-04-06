@@ -89,7 +89,8 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
-        new FindMatchesThread(MatchesTextArea.this, Core.getProject(), newEntry).start();
+        new FindMatchesThread(MatchesTextArea.this, Core.getProject(), newEntry)
+                .start();
     }
 
     /**
@@ -97,12 +98,19 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
      * list should be an instance of {@link NearString}.
      */
     @Override
-    protected void setFoundResult(final SourceTextEntry se, List<NearString> newMatches) {
+    protected void setFoundResult(final SourceTextEntry se,
+            List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
 
         activeMatch = -1;
         matches.clear();
         delimiters.clear();
+
+        if (newMatches == null) {
+            setText("");
+            return;
+        }
+
         matches.addAll(newMatches);
         delimiters.add(0);
         StringBuffer displayBuffer = new StringBuffer();
@@ -215,7 +223,8 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
 
         NearString match = matches.get(activeMatch);
         // List tokens = match.str.getSrcTokenList();
-        Token[] tokens = Core.getTokenizer().tokenizeAllExactly(match.source);
+        Token[] tokens = Core.getProject().getSourceTokenizer()
+                .tokenizeAllExactly(match.source);
         // fix for bug 1586397
         byte[] attributes = match.attr;
         for (int i = 0; i < tokens.length; i++) {

@@ -51,6 +51,8 @@ import java.util.regex.Pattern;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.core.matching.ITokenizer;
+import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
@@ -58,6 +60,7 @@ import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
@@ -105,6 +108,8 @@ public class RealProject implements IProject
     
     private final StatisticsInfo hotStat = new StatisticsInfo();
     
+    private final ITokenizer sourceTokenizer, targetTokenizer;
+    
     /**
      * Storage for all translation memories, which shouldn't be changed and
      * saved, i.e. for /tm/*.tmx files, aligned data from source files.
@@ -144,6 +149,10 @@ public class RealProject implements IProject
         projectFilesList = new ArrayList<FileInfo>();
         
         m_config = props;
+        
+        sourceTokenizer = createTokenizer(Core.getParams().get("ITokenizer"));
+        targetTokenizer = createTokenizer(Core.getParams().get(
+                "ITokenizerTarget"));
     }
     
     public void saveProjectProperties() throws IOException {
@@ -835,6 +844,48 @@ public class RealProject implements IProject
     
     public Map<String, TransEntry> getOrphanedSegments() {
         return orphanedSegments;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public ITokenizer getSourceTokenizer() {
+        return sourceTokenizer;
+    }
+    
+    /**
+     * {@inheritDoc}
+     */
+    public ITokenizer getTargetTokenizer() {
+        return targetTokenizer;
+    }
+    
+    /**
+     * Create tokenizer by class specified in command line, or by default class.
+     *
+     * @param params
+     *            command line
+     * @return component implementation
+     */
+    protected static ITokenizer createTokenizer(final String implClassName) {
+        ITokenizer t = null;
+        try {
+            if (implClassName != null) {
+                for (Class<?> c : PluginUtils.getTokenizerClasses()) {
+                    if (c.getName().equals(implClassName)) {
+                        t = (ITokenizer) c.newInstance();
+                        break;
+                    }
+                }
+            }
+        } catch (Exception ex) {
+            Log.log(ex);
+        }
+        if (t == null) {
+            t = new Tokenizer();
+        }
+        Log.log("Tokenizer: " + t.getClass().getName());
+        return t;
     }
     
     /**

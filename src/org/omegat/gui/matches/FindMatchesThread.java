@@ -92,15 +92,22 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     /** Tokens for original string, includes numbers and tags. */
     private Token[] strTokensAll;
 
+    private final ITokenizer tok;
+
     public FindMatchesThread(final MatchesTextArea matcherPane,
             final IProject project, final SourceTextEntry entry) {
         super(matcherPane, entry);
         this.project = project;
         this.processedEntry = entry;
+        tok = Core.getProject().getSourceTokenizer();
     }
 
     @Override
     protected List<NearString> search() throws Exception {
+        if (tok == null) {
+            return null;
+        }
+
         final List<SourceTextEntry> entries = project.getAllEntries();
         Set<Map.Entry<String, TransEntry>> translations = project
                 .getTranslationsSet();
@@ -118,12 +125,12 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         }
 
         // get tokens for original string
-        strTokensStem = Core.getTokenizer().tokenizeWords(
-                processedEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
-        strTokensNoStem = Core.getTokenizer().tokenizeWords(
-                processedEntry.getSrcText(), ITokenizer.StemmingMode.NONE);
-        strTokensAll = Core.getTokenizer().tokenizeAllExactly(
-                processedEntry.getSrcText());// HP: includes non-word tokens
+        strTokensStem = tok.tokenizeWords(processedEntry.getSrcText(),
+                ITokenizer.StemmingMode.MATCHING);
+        strTokensNoStem = tok.tokenizeWords(processedEntry.getSrcText(),
+                ITokenizer.StemmingMode.NONE);
+        strTokensAll = tok.tokenizeAllExactly(processedEntry.getSrcText());
+        /* HP: includes non - word tokens */
 
         // travel by project entries
         for (Map.Entry<String, TransEntry> en : translations) {
@@ -160,8 +167,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         for (NearString near : result) {
             // fix for bug 1586397
             byte[] similarityData = FuzzyMatcher.buildSimilarityData(
-                    strTokensAll, Core.getTokenizer().tokenizeAllExactly(
-                            near.source));
+                    strTokensAll, tok.tokenizeAllExactly(near.source));
             near.attr = similarityData;
         }
 
@@ -182,7 +188,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
      */
     protected void processEntry(final String source, final String translation,
             final String tmxName) {
-        Token[] candTokens = Core.getTokenizer().tokenizeWords(source,
+        Token[] candTokens = tok.tokenizeWords(source,
                 ITokenizer.StemmingMode.MATCHING);
 
         // First percent value - with stemming if possible
@@ -195,7 +201,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             return;
         }
 
-        Token[] candTokensNoStem = Core.getTokenizer().tokenizeWords(source,
+        Token[] candTokensNoStem = tok.tokenizeWords(source,
                 ITokenizer.StemmingMode.NONE);
         // Second percent value - without stemming
         int similarityNoStem = FuzzyMatcher.calcSimilarity(distance,
@@ -207,7 +213,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             return;
         }
 
-        Token[] candTokensAll = Core.getTokenizer().tokenizeAllExactly(source);
+        Token[] candTokensAll = tok.tokenizeAllExactly(source);
         // Third percent value - with numbers, tags, etc.
         int simAdjusted = FuzzyMatcher.calcSimilarity(distance, strTokensAll,
                 candTokensAll);

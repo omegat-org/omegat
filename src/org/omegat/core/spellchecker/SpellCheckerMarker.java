@@ -61,8 +61,8 @@ public class SpellCheckerMarker implements IMarker {
             return null;
         }
         List<Mark> result = new ArrayList<Mark>();
-        for (Token tok : Core.getTokenizer().tokenizeWordsForSpelling(
-                translationText)) {
+        for (Token tok : Core.getProject().getTargetTokenizer()
+                .tokenizeWordsForSpelling(translationText)) {
             int st = tok.getOffset();
             int en = tok.getOffset() + tok.getLength();
             String word = translationText.substring(st, en);

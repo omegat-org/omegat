@@ -44,6 +44,7 @@ import javax.swing.text.html.HTMLDocument;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.dictionaries.DictionariesManager;
 import org.omegat.core.dictionaries.DictionaryEntry;
@@ -68,11 +69,13 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
 
     protected final List<String> displayedWords = new ArrayList<String>();
 
+    protected ITokenizer tokenizer;
+
     public DictionariesTextArea() {
         super(true);
 
         setContentType("text/html");
-        ((HTMLDocument)getDocument()).setPreservesUnknownTags(false);
+        ((HTMLDocument) getDocument()).setPreservesUnknownTags(false);
 
         // setEditable(false);
         String title = OStrings
@@ -92,13 +95,16 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     @Override
     protected void onProjectOpen() {
         clear();
-        manager.start(Core.getProject().getProjectProperties().getDictRoot());
+        IProject project = Core.getProject();
+        tokenizer = project.getSourceTokenizer();
+        manager.start(project.getProjectProperties().getDictRoot());
     }
 
     @Override
     protected void onProjectClose() {
         clear();
         manager.stop();
+        tokenizer = null;
     }
 
     /** Clears up the pane. */
@@ -152,10 +158,17 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     }
 
     @Override
-    protected void setFoundResult(final SourceTextEntry se, final List<DictionaryEntry> data) {
+    protected void setFoundResult(final SourceTextEntry se,
+            final List<DictionaryEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
 
         displayedWords.clear();
+
+        if (data == null) {
+            setText("");
+            return;
+        }
+
         StringBuilder txt = new StringBuilder();
         boolean wasPrev = false;
         int i = 0;
@@ -214,15 +227,20 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     public class DictionaryEntriesSearchThread extends
             EntryInfoSearchThread<List<DictionaryEntry>> {
         protected final String src;
+        protected final ITokenizer tok;
 
         public DictionaryEntriesSearchThread(final SourceTextEntry newEntry) {
             super(DictionariesTextArea.this, newEntry);
             src = newEntry.getSrcText();
+            tok = tokenizer;
         }
 
         @Override
         protected List<DictionaryEntry> search() {
-            Token[] tokenList = Core.getTokenizer().tokenizeWords(src,
+            if (tok == null) {
+                return null;
+            }
+            Token[] tokenList = tok.tokenizeWords(src,
                     ITokenizer.StemmingMode.NONE);
             Set<String> words = new TreeSet<String>();
             for (Token tok : tokenList) {

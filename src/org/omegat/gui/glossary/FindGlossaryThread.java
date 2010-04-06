@@ -77,8 +77,13 @@ public class FindGlossaryThread extends
 
     @Override
     protected List<GlossaryEntry> search() {
+        ITokenizer tok = Core.getProject().getSourceTokenizer();
+        if (tok == null) {
+            return null;
+        }
+
         // computer source entry tokens
-        Token[] strTokens = Core.getTokenizer().tokenizeWords(src,
+        Token[] strTokens = tok.tokenizeWords(src,
                 ITokenizer.StemmingMode.GLOSSARY);
 
         List<GlossaryEntry> entries = manager.getGlossaryEntries();
@@ -90,7 +95,7 @@ public class FindGlossaryThread extends
 
                 // computer glossary entry tokens
                 String glosStr = glosEntry.getSrcText();
-                Token[] glosTokens = Core.getTokenizer().tokenizeWords(glosStr,
+                Token[] glosTokens = tok.tokenizeWords(glosStr,
                         ITokenizer.StemmingMode.GLOSSARY);
                 int glosTokensN = glosTokens.length;
                 if (glosTokensN == 0)

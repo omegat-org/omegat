@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
 
@@ -80,6 +81,16 @@ public interface IProject {
      * Is project modified ?
      */
     boolean isProjectModified();
+    
+    /**
+     * Returns tokenizer for source language.
+     */
+    ITokenizer getSourceTokenizer();
+
+    /**
+     * Returns tokenizer for target language.
+     */
+    ITokenizer getTargetTokenizer();
 
     /**
      * Get all source segments. It's unmodifiable list, so, there is no need

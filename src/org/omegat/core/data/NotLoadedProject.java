@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.Map.Entry;
 
+import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
 
@@ -108,5 +109,13 @@ public class NotLoadedProject implements IProject {
     }
     
     public void setTranslation(SourceTextEntry entry, String trans) {
+    }
+    
+    public ITokenizer getSourceTokenizer() {
+        return null;
+    }
+    
+    public ITokenizer getTargetTokenizer() {
+        return null;
     }
 }

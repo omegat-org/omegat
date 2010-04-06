@@ -31,14 +31,11 @@ import java.util.Map;
 
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.matching.ITokenizer;
-import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
-import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
@@ -52,7 +49,6 @@ import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
-import org.omegat.util.Log;
 
 /**
  * Class which contains all components instances.
@@ -74,7 +70,6 @@ public class Core {
     protected static IEditor editor;
     private static ITagValidation tagValidation;
     private static IMatcher matcher;
-    private static ITokenizer tokenizer;
     private static ISpellChecker spellChecker;
 
     private static IAutoSave saveThread;
@@ -82,6 +77,8 @@ public class Core {
     private static GlossaryTextArea glossary;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
+    
+    private static Map<String, String> cmdLineParams;
 
     private static final List<IMarker> markers = new ArrayList<IMarker>();
     
@@ -115,11 +112,6 @@ public class Core {
         return matcher;
     }
 
-    /** Get tokenizer component instance. */
-    public static ITokenizer getTokenizer() {
-        return tokenizer;
-    }
-
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
         return spellChecker;
@@ -143,6 +135,8 @@ public class Core {
      */
     public static void initializeGUI(final Map<String, String> params)
             throws Exception {
+        cmdLineParams = params;
+        
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
@@ -157,7 +151,6 @@ public class Core {
         glossary = new GlossaryTextArea();
         machineTranslatePane = new MachineTranslateTextArea();
         dictionaries = new DictionariesTextArea();
-        tokenizer = createTokenizer(params);
         spellChecker = new SpellChecker();
 
         SaveThread th = new SaveThread();
@@ -172,46 +165,17 @@ public class Core {
      */
     public static void initializeConsole(final Map<String, String> params)
             throws Exception {
+        cmdLineParams = params;
+        
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
-
-        tokenizer = createTokenizer(params);
 
         SRX.getSRX();
     }
 
     /**
-     * Create tokenizer by class specified in command line, or by default class.
-     *
-     * @param params
-     *            command line
-     * @return component implementation
-     */
-    protected static ITokenizer createTokenizer(final Map<String, String> params) {
-        ITokenizer t = null;
-        try {
-            String implClassName = params.get("ITokenizer");
-            if (implClassName != null) {
-                for (Class<?> c : PluginUtils.getTokenizerClasses()) {
-                    if (c.getName().equals(implClassName)) {
-                        t = (ITokenizer) c.newInstance();
-                        break;
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            Log.log(ex);
-        }
-        if (t == null) {
-            t = new Tokenizer();
-        }
-        Log.log("Tokenizer: " + t.getClass().getName());
-        return t;
-    }
-
-    /**
      * Set main window instance for unit tests.
-     *
+     * 
      * @param mainWindow
      */
     protected static void setMainWindow(IMainWindow mainWindow) {
@@ -239,5 +203,9 @@ public class Core {
     
     public static List<IMarker> getMarkers() {
         return markers;
+    }
+    
+    public static Map<String, String> getParams() {
+        return cmdLineParams;
     }
 }

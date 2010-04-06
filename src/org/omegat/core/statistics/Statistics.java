@@ -156,7 +156,8 @@ public class Statistics {
             final Map<String, Token[]> tokensCache, final String str) {
         Token[] result = tokensCache.get(str);
         if (result == null) {
-            result = Core.getTokenizer().tokenizeAllExactly(str);
+            result = Core.getProject().getSourceTokenizer().tokenizeAllExactly(
+                    str);
             tokensCache.put(str, result);
         }
         return result;

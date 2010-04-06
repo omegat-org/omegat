@@ -117,6 +117,12 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
      */
     protected void setFoundResult(SourceTextEntry en, List<GlossaryEntry> entries) {
         UIThreadsUtil.mustBeSwingThread();
+        
+        if (entries == null) {
+            nowEntries = new ArrayList<GlossaryEntry>();
+            setText("");
+            return;
+        }
 
         // If the TransTips is enabled then underline all the matched glossary entries
         if(Preferences.isPreference(Preferences.TRANSTIPS)) {

@@ -538,34 +538,20 @@ public class FilterMaster {
         }
         
         String res = pattern;
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_FILENAME),
-                filename);
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_NAMEONLY),
-                nameOnly);
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_EXTENSION),
-                extension);
-        
-        
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LOCALE),
-                targetLang.getLocaleCode());
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANGUAGE),
-                targetLang.getLanguage());
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_LANG_CODE),
-                targetLang.getLanguageCode());
-        res = res.replaceAll(targetRegexer(AbstractFilter.TFP_TARGET_COUNTRY_CODE),
-                targetLang.getCountryCode());
-        
+        res = res.replace(AbstractFilter.TFP_FILENAME, filename);
+        res = res.replace(AbstractFilter.TFP_NAMEONLY, nameOnly);
+        res = res.replace(AbstractFilter.TFP_EXTENSION, extension);
+
+        res = res.replace(AbstractFilter.TFP_TARGET_LOCALE, targetLang
+                .getLocaleCode());
+        res = res.replace(AbstractFilter.TFP_TARGET_LANGUAGE, targetLang
+                .getLanguage());
+        res = res.replace(AbstractFilter.TFP_TARGET_LANG_CODE, targetLang
+                .getLanguageCode());
+        res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang
+                .getCountryCode());
+
         return res;
-    }
-    
-    private String targetRegexer(String tfp)
-    {
-        String pattern = tfp;
-        pattern = pattern.replaceAll("\\$", "\\\\\\$");                         // NOI18N
-        pattern = pattern.replaceAll("\\{", "\\\\{");                           // NOI18N
-        pattern = pattern.replaceAll("\\}", "\\\\}");                           // NOI18N
-        pattern = "(?i)"+pattern;                                               // NOI18N
-        return pattern;
     }
 
     /**

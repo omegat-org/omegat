@@ -260,7 +260,7 @@ as a repetition in Match Statistics
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 3
   2 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 3 vs. 2.0.5 update 2
 
@@ -277,7 +277,11 @@ as a repetition in Match Statistics
   - Webstart for linux amd64 doesn't work
   http://sourceforge.net/support/tracker.php?aid=2953631
  
+  - $ Dollar sign in filenames gives error 
+  http://sourceforge.net/support/tracker.php?aid=2982509
+
   - References to Java 1.4 removed in OmegaT.l4J.ini
+
   - Various corrections in the manual
 
 ----------------------------------------------------------------------

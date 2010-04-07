@@ -372,6 +372,9 @@ public class EditorController implements IEditor {
             // there is no current entry
             return null;
         }
+        if (m_docSegList[displayedEntryIndex] == null) {
+            return null;
+        }
         return m_docSegList[displayedEntryIndex].ste;
     }
 

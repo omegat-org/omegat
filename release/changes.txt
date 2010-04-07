@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   6 Bugfixes
 ----------------------------------------------------------------------
 2.1.4 update 1 vs. 2.1.4
@@ -16,6 +16,9 @@
 
   - TBX: recognize <descrip> elements
   http://sourceforge.net/support/tracker.php?aid=2978608
+
+  - TBX: display termNotes only for target language
+  http://sourceforge.net/support/tracker.php?aid=2978610
 
   Other enhancements:
 

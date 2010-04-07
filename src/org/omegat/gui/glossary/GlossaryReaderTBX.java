@@ -75,7 +75,6 @@ public class GlossaryReaderTBX {
     }
 
     public static List<GlossaryEntry> read(final File file) throws Exception {
-
         Martif tbx = load(file);
 
         String sLang = Core.getProject().getProjectProperties()
@@ -84,13 +83,16 @@ public class GlossaryReaderTBX {
                 .getTargetLanguage().getLanguageCode();
 
         StringBuilder note = new StringBuilder();
-        StringBuilder desc = new StringBuilder();
+        StringBuilder descTerm = new StringBuilder();
+        StringBuilder descTig = new StringBuilder();
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
         List<String> sTerms = new ArrayList<String>();
         List<String> tTerms = new ArrayList<String>();
         for (TermEntry te : tbx.getText().getBody().getTermEntry()) {
             note.setLength(0);
-            desc.setLength(0);
+            descTerm.setLength(0);
+            descTig.setLength(0);
+            appendDescOrNote(te.getDescripOrDescripGrpOrAdmin(), descTerm);
             for (LangSet ls : te.getLangSet()) {
                 Language termLanguage = new Language(ls.getLang());
                 // We use only the language code
@@ -102,41 +104,19 @@ public class GlossaryReaderTBX {
                             sTerms.add(readContent(t.getTerm().getContent()));
                         } else if (tLang.equalsIgnoreCase(lang)) {
                             tTerms.add(readContent(t.getTerm().getContent()));
+                            appendDescOrNote(t.getTermNote(), note);
                         }
-                        for (TermNote tn : t.getTermNote()) {
-                            if (note.length() > 0) {
-                                note.append('\n');
-                            }
-                            note.append(readContent(tn.getContent()));
-                        }
-                        for (Object od : t.getDescripOrDescripGrpOrAdmin()) {
-                            Descrip d = null;
-                            if (od instanceof Descrip) {
-                                d = (Descrip) od;
-                            } else if (od instanceof DescripGrp) {
-                                DescripGrp dg = (DescripGrp) od;
-                                d = dg.getDescrip();
-                            }
-                            if (d != null) {
-                                if (desc.length() > 0) {
-                                    desc.append('\n');
-                                }
-                                desc.append(d.getType()).append(':');
-                                desc.append(readContent(d.getContent()));
-                            }
-                        }
+                        appendDescOrNote(t.getDescripOrDescripGrpOrAdmin(), descTig);
                     }
                 }
             }
-            if (note.length() > 0) {
-                if (desc.length() > 0) {
-                    desc.append('\n');
-                }
-                desc.append(note);
-            }
+            StringBuilder comment = new StringBuilder();
+            appendLine(comment, descTerm.toString());
+            appendLine(comment, descTig.toString());
+            appendLine(comment, note.toString());
             for (String s : sTerms) {
                 for (String t : tTerms) {
-                    result.add(new GlossaryEntry(s, t, desc.toString()));
+                    result.add(new GlossaryEntry(s, t, comment.toString()));
                 }
             }
             sTerms.clear();
@@ -144,6 +124,37 @@ public class GlossaryReaderTBX {
         }
 
         return result;
+    }
+    
+    /**
+     * Add description or note into StringBuilder.
+     */
+    protected static void appendDescOrNote(final List<?> list,
+            StringBuilder str) {
+        for (Object o : list) {
+            String line = null;
+            if (o instanceof Descrip) {
+                Descrip d = (Descrip) o;
+                line = d.getType() + ':' + readContent(d.getContent());
+            } else if (o instanceof DescripGrp) {
+                DescripGrp dg = (DescripGrp) o;
+                line = dg.getDescrip().getType() + ':'
+                        + readContent(dg.getDescrip().getContent());
+            } else if (o instanceof TermNote) {
+                TermNote tn = (TermNote) o;
+                line = readContent(tn.getContent());
+            }
+            if (line != null) {
+                appendLine(str, line);
+            }
+        }
+    }
+    
+    protected static void appendLine(final StringBuilder str, String line) {
+        if (str.length() > 0) {
+            str.append('\n');
+        }
+        str.append(line);
     }
 
     protected static String readContent(final List<Object> content) {

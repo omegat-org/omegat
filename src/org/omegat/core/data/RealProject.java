@@ -150,9 +150,8 @@ public class RealProject implements IProject
         
         m_config = props;
         
-        sourceTokenizer = createTokenizer(Core.getParams().get("ITokenizer"));
-        targetTokenizer = createTokenizer(Core.getParams().get(
-                "ITokenizerTarget"));
+        sourceTokenizer = createTokenizer(true);
+        targetTokenizer = createTokenizer(false);
     }
     
     public void saveProjectProperties() throws IOException {
@@ -863,16 +862,22 @@ public class RealProject implements IProject
     /**
      * Create tokenizer by class specified in command line, or by default class.
      *
-     * @param params
-     *            command line
-     * @return component implementation
+     * @param forSource
+     *            true if tokenizer for source language
+     * @return tokenizer implementation
      */
-    protected static ITokenizer createTokenizer(final String implClassName) {
+    protected ITokenizer createTokenizer(final boolean forSource) {
+        String className;
+        if (forSource) {
+            className = Core.getParams().get("ITokenizer");
+        } else {
+            className = Core.getParams().get("ITokenizerTarget");
+        }
         ITokenizer t = null;
         try {
-            if (implClassName != null) {
+            if (className != null) {
                 for (Class<?> c : PluginUtils.getTokenizerClasses()) {
-                    if (c.getName().equals(implClassName)) {
+                    if (c.getName().equals(className)) {
                         t = (ITokenizer) c.newInstance();
                         break;
                     }
@@ -882,9 +887,17 @@ public class RealProject implements IProject
             Log.log(ex);
         }
         if (t == null) {
-            t = new Tokenizer();
+            if (forSource) {
+                t = new Tokenizer();
+            } else {
+                t = sourceTokenizer;
+            }
         }
-        Log.log("Tokenizer: " + t.getClass().getName());
+        if (forSource) {
+            Log.log("Source tokenizer: " + t.getClass().getName());
+        } else {
+            Log.log("Target tokenizer: " + t.getClass().getName());
+        }
         return t;
     }
     

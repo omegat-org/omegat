@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
-  3 Enhancements
-  4 Bugfixes
+  4 Enhancements
+  5 Bugfixes
 ----------------------------------------------------------------------
 2.1.4 update 1 vs. 2.1.4
 
@@ -13,6 +13,9 @@
 
   - Spell checker dialog improvements
   http://sourceforge.net/support/tracker.php?aid=2980991
+
+  - TBX: recognize <descrip> elements
+  http://sourceforge.net/support/tracker.php?aid=2978608
 
   Other enhancements:
 
@@ -30,6 +33,9 @@ changes
 codes were entered in lowercase
 
   - TBX terms with country code (e.g., de-AT) were ignored
+
+  - Only one translation is kept in TBX glossaries
+  http://sourceforge.net/support/tracker.php?aid=2978575
 
 ----------------------------------------------------------------------
  OmegaT 2.1.4 

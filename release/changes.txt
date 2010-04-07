@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
-  4 Enhancements
-  5 Bugfixes
+  5 Enhancements
+  6 Bugfixes
 ----------------------------------------------------------------------
 2.1.4 update 1 vs. 2.1.4
 
@@ -21,6 +21,9 @@
 
    - Log file switched to UTF-8. It was previously in system encoding.
 
+   - It is possible to specify a target tokenizer with --ITokenizerTarget.
+If it is not specified, the source tokenizer will be used.
+
   Bug fixes:
 
   - No filters available when locale is tr
@@ -36,6 +39,9 @@ codes were entered in lowercase
 
   - Only one translation is kept in TBX glossaries
   http://sourceforge.net/support/tracker.php?aid=2978575
+
+  - Japanese stemmer interferes with French spellchecker
+  http://sourceforge.net/support/tracker.php?aid=2946389
 
 ----------------------------------------------------------------------
  OmegaT 2.1.4 

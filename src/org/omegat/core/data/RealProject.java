@@ -395,7 +395,7 @@ public class RealProject implements IProject
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") +
-                    "\n" +                                                      // NOI18N
+                    "\n" +                                                      
                     e.getMessage());
         }
         
@@ -567,7 +567,7 @@ public class RealProject implements IProject
         {
             if (!tmxFile.exists())
             {
-                Log.logErrorRB("CT_ERROR_CANNOT_FIND_TMX", tmxFile.getAbsolutePath()); // NOI18N
+                Log.logErrorRB("CT_ERROR_CANNOT_FIND_TMX", tmxFile.getAbsolutePath()); 
                 // nothing to do here
                 return;
             }
@@ -587,7 +587,7 @@ public class RealProject implements IProject
             //  they were loaded, load each string then look for it's
             //  owner
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            loadTMXFile(tmxFile.getAbsolutePath(), "UTF-8", true); // NOI18N
+            loadTMXFile(tmxFile.getAbsolutePath(), "UTF-8", true); 
         }
         catch (IOException e)
         {
@@ -638,20 +638,18 @@ public class RealProject implements IProject
     }
     
     /** Locates and loads external TMX files with legacy translations. */
-    private void loadTM() throws IOException
-    {
-        File f = new File(m_config.getTMRoot());
-        String[] fileList = f.list();
-        for (String file : fileList) {
+    private void loadTM() throws IOException {
+
+        List<String> tmFileList = new ArrayList<String>();
+        File tmRoot = new File(m_config.getTMRoot());
+        StaticUtils.buildFileList(tmFileList, tmRoot, true);
+
+        for (String file : tmFileList) {
             String fname = file;
             int lastdot = fname.lastIndexOf('.');
             if (lastdot<0)
                 lastdot = fname.length();
             String ext = fname.substring(lastdot);
-            fname = m_config.getTMRoot();
-            if (!fname.endsWith(File.separator))
-                fname += File.separator;
-            fname += file;
             
             if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION)) {
                 loadTMXFile(fname, "UTF-8", false);
@@ -701,18 +699,35 @@ public class RealProject implements IProject
             long fileMillis = tmxFile.lastModified();
             if (fileMillis==0L) // IO Error
                 fileMillis = new Date().getTime();
-            LFileCopy.copy(fname, fname+"."+millisToDateTime(fileMillis)+".bak");   // NOI18N
+            LFileCopy.copy(fname, fname+"."+millisToDateTime(fileMillis)+".bak");   
             
             FileUtil.removeOldBackups(tmxFile);
         }
 
         // TM for store entries, if not a project_save.tmx
         List<TransMemory> currentTM=null;
-        
+
+        // Define whether translations from this TM are applied aumatically
+        boolean isAuto = false;
+
         // If a legacy TM, creating one
         // and adding to the list of legacy TMs
         if (!isProject) {
             String fn = new File(fname).getName();
+            String path = new File(fname).getParent();
+            if (!path.endsWith(File.separator))
+                path += File.separator;
+
+            if ( !path.equals(m_config.getTMRoot()) ) {
+                // We're in a subdirectory,
+                // so we add it in front of the TM name.
+                String tmDir = path.substring(m_config.getTMRoot().length());
+                if (tmDir.startsWith("auto" + File.separator))
+                    isAuto = true;
+                if (!tmDir.endsWith(File.separator))
+                    tmDir += File.separator;
+                fn = tmDir + fn;
+            }
             currentTM = transMemories.get(fn);
             if (currentTM == null) {
                 // create new TM hash for this file
@@ -722,7 +737,7 @@ public class RealProject implements IProject
         }
         
         Set<String> exist = null;
-        if (isProject) {
+        if (isProject || isAuto) {
             // create list of all exist sources
             exist = new HashSet<String>(allProjectEntries.size() / 2);
             for (SourceTextEntry ste : allProjectEntries) {
@@ -738,20 +753,31 @@ public class RealProject implements IProject
                 continue;
             }
 
-            if (isProject) {
+            if (isProject || isAuto) {
                 String changeId = tmx.getTargetChangeId(i);
                 long changeDate = tmx.getTargetChangeDate(i);
                 if (exist.contains(src)) {
                     /* Entry found in source files - translation. */
-
-                    translations.put(src, new TransEntry(trans, changeId, changeDate));
-                } else {
-                    /* Entry found in source files - translation. */
+                    boolean isNewTrans = false;
+                    if (isAuto) {
+                        if (translations.get(src) == null)
+                            isNewTrans = true;
+                        else {
+                            String existTrans = translations.get(src).translation;
+                            if (StringUtil.isEmpty(existTrans))
+                                isNewTrans = true;
+                        }
+                    }
+                    // We don't want to override an existing translation
+                    if (isProject || isNewTrans)
+                        translations.put(src, 
+                                new TransEntry(trans, changeId, changeDate));
+                } else if (isProject) {
+                    /* Entry not found in source files - translation. */
                     orphanedSegments.put(src, new TransEntry(trans, changeId, changeDate));
                 }
             }
-            else
-            {
+            if (!isProject) {
                 // not in a project - remember this as a translation
                 //	memory string and add it to near list
                 StringEntry se = new StringEntry(src);

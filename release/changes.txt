@@ -1,4 +1,20 @@
 ----------------------------------------------------------------------
+ OmegaT 2.1.4 update 2
+----------------------------------------------------------------------
+  2 Enhancements
+  0 Bugfix
+----------------------------------------------------------------------
+2.1.4 update 2 vs. 2.1.4 update 1
+
+  Implemented requests:
+
+  - Load TMXs from nested folders
+  http://sourceforge.net/support/tracker.php?aid=2986574
+
+  - Insert exact matches from TMXs in the auto folder
+  http://sourceforge.net/support/tracker.php?aid=2131989
+
+----------------------------------------------------------------------
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
   6 Enhancements

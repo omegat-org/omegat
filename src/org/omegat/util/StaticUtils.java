@@ -61,22 +61,22 @@ public class StaticUtils
 	/**
 	 * Configuration directory on Windows platforms
 	 */
-	private final static String WINDOWS_CONFIG_DIR = "\\OmegaT\\";              // NOI18N
+	private final static String WINDOWS_CONFIG_DIR = "\\OmegaT\\";              
 
 	/**
 	 * Configuration directory on UNIX platforms
 	 */
-	private final static String UNIX_CONFIG_DIR = "/.omegat/";                  // NOI18N
+	private final static String UNIX_CONFIG_DIR = "/.omegat/";                  
 	
 	/**
 	 * Configuration directory on Mac OS X
 	 */
-	private final static String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";// NOI18N
+	private final static String OSX_CONFIG_DIR = "/Library/Preferences/OmegaT/";
 
   	/**
 	 * Script directory
 	 */
-	private final static String SCRIPT_DIR = "script";                          // NOI18N
+	private final static String SCRIPT_DIR = "script";                          
 
 	/**
 	 * Contains the location of the directory containing the configuration files.
@@ -100,7 +100,7 @@ public class StaticUtils
         final int STATE_NORMAL = 1;
         final int STATE_COLLECT_TAG = 2;
 
-        String tag = "";							// NOI18N
+        String tag = "";							
         char c;
         
         int state = STATE_NORMAL;
@@ -111,7 +111,7 @@ public class StaticUtils
             c = str.charAt(j);
             if (c == '<') // Possible start of a tag
             {
-                tag="";                                                         // NOI18N
+                tag="";                                                         
                 state = STATE_COLLECT_TAG;
             }
             else if (c == '>') // Possible end of a tag
@@ -121,7 +121,7 @@ public class StaticUtils
                 if(PatternConsts.OMEGAT_TAG_ONLY.matcher(tag).matches())
                     tagList.add(tag);
                 state = STATE_NORMAL;
-                tag = "";												// NOI18N
+                tag = "";												
             }
             else if (state == STATE_COLLECT_TAG)
                 tag += c;
@@ -203,7 +203,7 @@ public class StaticUtils
     
    
     // List of CVS or SVN folders
-    private static final String CVS_SVN_FOLDERS = "(CVS)|(.svn)|(_svn)";        // NOI18N
+    private static final String CVS_SVN_FOLDERS = "(CVS)|(.svn)|(_svn)";        
     
     private static final Pattern IGNORED_FOLDERS = 
             Pattern.compile(CVS_SVN_FOLDERS);
@@ -235,15 +235,15 @@ public class StaticUtils
         switch( c )
         {
             //case '\'':
-            //    return "&apos;";	// NOI18N
+            //    return "&apos;";	
             case '&':
-                return "&amp;";	// NOI18N
+                return "&amp;";	
             case '>':
-                return "&gt;";	// NOI18N
+                return "&gt;";	
             case '<':
-                return "&lt;";	// NOI18N
+                return "&lt;";	
             case '"':
-                return "&quot;";	// NOI18N
+                return "&quot;";	
             default:
                 return String.valueOf(c);
         }
@@ -344,7 +344,7 @@ public class StaticUtils
         if( INSTALLDIR!=null )
             return INSTALLDIR;
         
-        String cp = System.getProperty("java.class.path");                      // NOI18N
+        String cp = System.getProperty("java.class.path");                      
         String path;
         
         // running from a Jar ?
@@ -356,7 +356,7 @@ public class StaticUtils
         
         // WTF?!! using current directory
         if( path==null )
-            path = ".";                                                         // NOI18N
+            path = ".";                                                         
         
         // absolutizing the path
         path = new File(path).getAbsolutePath();
@@ -405,17 +405,17 @@ public class StaticUtils
         try
         {
             // get the name of the operating system
-            os = System.getProperty("os.name");                                 // NOI18N
+            os = System.getProperty("os.name");                                 
 
             // get the user's home directory
-            home = System.getProperty("user.home");                             // NOI18N
+            home = System.getProperty("user.home");                             
         }
         catch (SecurityException e)
         {
             // access to the os/user home properties is restricted,
             // the location of the config dir cannot be determined,
             // set the config dir to the current working dir
-            m_configDir = new File(".").getAbsolutePath() + File.separator;     // NOI18N
+            m_configDir = new File(".").getAbsolutePath() + File.separator;     
 
             // log the exception, only do this after the config dir
             // has been set to the current working dir, otherwise
@@ -432,23 +432,23 @@ public class StaticUtils
                 (home == null) || (home.length() == 0))
         {
             // set the config dir to the current working dir
-            m_configDir = new File(".").getAbsolutePath() + File.separator;     // NOI18N
+            m_configDir = new File(".").getAbsolutePath() + File.separator;     
             return m_configDir;
         }
         
         // check for Windows versions
-        if (os.startsWith("Windows"))                                           // NOI18N
+        if (os.startsWith("Windows"))                                           
         {
             // Trying to locate "Application Data" for 2000 and XP
             // C:\Documents and Settings\<User>\Application Data
             // We do not use %APPDATA%
-            File appDataFile = new File(home, "Application Data");              // NOI18N
+            File appDataFile = new File(home, "Application Data");              
             String appData = null;
             if (appDataFile.exists())
                 appData = appDataFile.getAbsolutePath();
             else // No "Application Data", we're trying Vista
             {
-                File appDataFileVista = new File(home, "AppData\\Roaming");     // NOI18N
+                File appDataFileVista = new File(home, "AppData\\Roaming");     
                 if (appDataFileVista.exists())
                     appData = appDataFileVista.getAbsolutePath();
             } 
@@ -468,16 +468,16 @@ public class StaticUtils
         }
         // Check for UNIX varieties
         // Solaris is generally detected as SunOS
-        else if (os.equals("Linux") ||                                          // NOI18N
-                 os.equals("SunOS") ||                                          // NOI18N              
-                 os.equals("Solaris") ||                                        // NOI18N
-                 os.equals("FreeBSD"))                                          // NOI18N
+        else if (os.equals("Linux") ||                                          
+                 os.equals("SunOS") ||                                                        
+                 os.equals("Solaris") ||                                        
+                 os.equals("FreeBSD"))                                          
         {
             // set the config dir to the user's home dir + "/.omegat/", so it's hidden
             m_configDir = home + UNIX_CONFIG_DIR;
         }
         // check for Mac OS X
-        else if (os.equals("Mac OS X"))                                         // NOI18N
+        else if (os.equals("Mac OS X"))                                         
         {
             // set the config dir to the user's home dir + 
             // "/Library/Preferences/OmegaT/"
@@ -507,7 +507,7 @@ public class StaticUtils
                     if (!created) {
                         Log.logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");
                         m_configDir = 
-                                new File(".").getAbsolutePath() + File.separator;// NOI18N
+                                new File(".").getAbsolutePath() + File.separator;
                     }
                 }
             }
@@ -515,7 +515,7 @@ public class StaticUtils
             {
                 // the system doesn't want us to write where we want to write
                 // reset the config dir to the current working dir
-                m_configDir = new File(".").getAbsolutePath() + File.separator; // NOI18N
+                m_configDir = new File(".").getAbsolutePath() + File.separator; 
                 
                 // log the exception, but only after the config dir has been reset
                 Log.logErrorRB("SU_CONFIG_DIR_CREATE_ERROR");
@@ -570,7 +570,7 @@ public class StaticUtils
         try
         {
             // get the name of the operating system
-            os = System.getProperty("os.name");                                 // NOI18N
+            os = System.getProperty("os.name");                                 
         }
         catch (SecurityException e)
         {
@@ -588,7 +588,7 @@ public class StaticUtils
      */
     public static String stripTags(String xml)
     {
-        return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");            // NOI18N
+        return PatternConsts.OMEGAT_TAG.matcher(xml).replaceAll("");            
     }
     
     /**
@@ -624,7 +624,7 @@ public class StaticUtils
      */
     public static byte[] uudecode(String buf)
     {
-        String[] bytes = buf.split("#");                                        // NOI18N
+        String[] bytes = buf.split("#");                                        
         byte[] res = new byte[bytes.length];
         for (int i=0; i<bytes.length; i++)
         {
@@ -839,12 +839,12 @@ public class StaticUtils
     
      /* remove leading whitespace */
     public static String ltrim(String source) {
-        return source.replaceAll("^\\s+", "");  // NOI18N
+        return source.replaceAll("^\\s+", "");  
     }
 
     /* remove trailing whitespace */
     public static String rtrim(String source) {
-        return source.replaceAll("\\s+$", "");  // NOI18N
+        return source.replaceAll("\\s+$", "");  
     }
 
     /**

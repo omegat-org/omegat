@@ -5,8 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik 
-               2008 Didier Briel
-               2009 Didier Briel
+               2008 - 2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -128,6 +127,59 @@ public class StaticUtils
         }
     }
     
+    /**
+     * Lists all OmegaT-style tags within the supplied string.
+     * Everything that looks like <code>&lt;xx0&gt;</code>,
+     * <code>&lt;yy1/&gt;</code> or <code>&lt;/zz2&gt;</code>
+     * is considered to probably be a tag.
+     *
+     * @return a string containing the tags with &lt; and &gt; around,
+     * and with a space between tags if there
+     * is text between them.
+     */
+    public static String buildPaintTagList(String str)
+    {
+        // The code is nearly the same as in listShortTags in Entry.java
+        final int STATE_NORMAL = 1;
+        final int STATE_COLLECT_TAG = 2;
+        boolean somethingBetween = false;
+
+        int state = STATE_NORMAL;
+
+        String res = "";
+        StringBuffer tag = new StringBuffer(str.length());
+        for (int i=0; i<str.length(); i++)
+        {
+             char c = str.charAt(i);
+             if (c == '<') // Possible start of a tag
+             {
+                 tag.setLength(0);
+                 tag.append(c);
+                 state = STATE_COLLECT_TAG;
+             }
+             else if (c == '>') // Possible end of a tag
+             {
+                 // checking if the tag looks like OmegaT tag,
+                 // not 100% correct, but is the best what I can think of now
+                 tag.append(c);
+                 if (PatternConsts.OMEGAT_TAG.matcher(tag).matches())
+                 {
+                     if (somethingBetween) // There was text between the tags
+                         res += " ";
+                     res += tag.toString();
+                     tag.setLength(0);
+                     state = STATE_NORMAL;
+                     somethingBetween = false;
+                 }
+             }
+             else if (state == STATE_COLLECT_TAG)
+                 tag.append(c);
+             else if (!StringUtil.isEmpty(res))
+                 somethingBetween = true;
+        }
+        return res;
+    }
+
     /**
      * Returns a list of all files under the root directory
      * by absolute path.

@@ -235,4 +235,16 @@ public interface IEditor {
      * Calls specified marker for reprocess all entries.
      */
     void remarkOneMarker(String markerClassName);
+
+    /**
+     * Adds a filter to this editor. The filter causes only the selected entries
+     * to be shown in the editor.
+     * @param entryList List of project-wide entry numbers
+     */
+    void addFilter(List<Integer> entryList);
+
+    /**
+     * Removes the current filter.
+     */
+    void removeFilter();
 }

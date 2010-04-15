@@ -197,6 +197,10 @@ public class SearchWindow extends JFrame
         m_recursiveCB.setSelected(true);
         m_recursiveCB.setEnabled(false);
 
+        m_removeFilterButton = new JButton();
+        m_removeFilterButton.setEnabled(false);
+        m_filterButton = new JButton();
+        m_filterButton.setEnabled(false);
         m_dismissButton = new JButton();
 
         //box CheckBox
@@ -205,6 +209,8 @@ public class SearchWindow extends JFrame
         bCB.add(Box.createHorizontalStrut(10));
         bCB.add(m_recursiveCB);
         bCB.add(Box.createHorizontalGlue());
+        bCB.add(m_removeFilterButton);
+        bCB.add(m_filterButton);
         bCB.add(m_dismissButton);
 
         //////////////////////////////////////
@@ -265,6 +271,20 @@ public class SearchWindow extends JFrame
             public void actionPerformed(ActionEvent e)
             {
                 doCancel();
+            }
+        });
+        m_filterButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                doFilter();
+            }
+        });
+        m_removeFilterButton.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+            {
+                doRemoveFilter();
             }
         });
         
@@ -552,6 +572,7 @@ public class SearchWindow extends JFrame
             StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
                                new Object[] {new Integer(m_viewer.getNrEntries())})
         );
+        m_filterButton.setEnabled(true);
     }
     
     public void addEntry(int num, String preamble, String src, String tar)
@@ -626,7 +647,18 @@ public class SearchWindow extends JFrame
         String str = dir.getAbsolutePath() + File.separator;
         m_dirField.setText(str);
     }
-    
+
+    private void doFilter() {
+        m_filterButton.setEnabled(false);
+        Core.getEditor().addFilter(m_viewer.getEntryList());
+        m_removeFilterButton.setEnabled(true);
+    }
+
+    private void doRemoveFilter() {
+        m_removeFilterButton.setEnabled(false);
+        Core.getEditor().removeFilter();
+    }
+
     private void doSearch()
     {
         if (m_thread == null)
@@ -727,6 +759,8 @@ public class SearchWindow extends JFrame
         Mnemonics.setLocalizedText(m_dirButton, OStrings.getString("SW_BROWSE"));
         
         Mnemonics.setLocalizedText(m_dismissButton, OStrings.getString("BUTTON_CLOSE"));
+        Mnemonics.setLocalizedText(m_filterButton, OStrings.getString("BUTTON_FILTER"));
+        Mnemonics.setLocalizedText(m_removeFilterButton, OStrings.getString("BUTTON_REMOVEFILTER"));
     }
     /**
      * Display message dialog with the error as message
@@ -860,6 +894,8 @@ public class SearchWindow extends JFrame
     private JCheckBox  m_recursiveCB;
 
     private JButton m_dismissButton;
+    private JButton m_filterButton;
+    private JButton m_removeFilterButton;
 
     private EntryListPane m_viewer;
 

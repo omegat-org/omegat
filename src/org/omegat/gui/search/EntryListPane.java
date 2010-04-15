@@ -158,6 +158,10 @@ class EntryListPane extends JTextPane
     public int getNrEntries() {
         return m_entryList.size();
     }
+    
+    public List<Integer> getEntryList() {
+        return m_entryList;
+    }
 
     private StringBuffer    m_stringBuf;
     private List<Integer>        m_entryList;

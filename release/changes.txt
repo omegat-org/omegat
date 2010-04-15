@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.5
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.1.5 vs. 2.1.4 update 1
@@ -13,6 +13,11 @@
 
   - Insert exact matches from TMXs in the auto folder
   http://sourceforge.net/support/tracker.php?aid=2131989
+
+  Other enhancements:
+
+  - Filter search results in the Editor
+For explanations, see Searches in the English documentation 
 
   Bug fixes:
 

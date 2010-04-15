@@ -8,20 +8,16 @@
 <body>
   <h2>Searches</h2>
 
+  <p><a href="#searchwindow">Search window</a></p>
+
   <ul>
-    <li>
-      <p><a href="#searchwindow">Search window</a></p>
+      <li>
+        <a href="#calling">Calling up a search</a>
+      </li>
 
-      <ul>
-        <li>
-          <p><a href="#calling">Calling up a search</a></p>
-        </li>
-
-        <li>
-          <p><a href="#location">Search location</a></p>
-        </li>
-      </ul>
-    </li>
+      <li>
+        <a href="#location">Search location</a>
+      </li>
   </ul>
 
   <p><a href="#searchmethods">Search methods</a></p>
@@ -31,6 +27,8 @@
   <p><a href="#usingregularexpressions">Using regular expressions</a></p>
 
   <p><a href="#display">Search results display</a></p>
+  
+  <p><a href="#filter">Filter entries in editor according to search</a></p>
   <hr>
 
   <h2><a name="searchwindow" id="searchwindow"></a>Search window</h2><img src=
@@ -218,6 +216,23 @@
   <p>Clicking on a segment will open it in the Editor for modifications. You may
   then switch back to Search window for the next found segment, for instance to
   control and if necessary correct the terminology.</p>
+  <hr>
+
+  <h2><a name="filter" id="filter"></a>Filter entries in editor according to search</h2>
+
+  <p>For easier navigation in the search result set, you can apply the search to
+  the editor. Press the 'filter' button on the bottom to limit the shown entries 
+  in the editor window to those that match the current search. You can use 
+  normal navigation to go to e.g. the next (untranslated) segment that matches
+  the search criteria.</p>
+  <p>Note that a search is limited to 1000 items, so if you search on a common
+  phrase, the editor then shows only those 1000 matching entries, and not all 
+  entries that match the search criteria. Note also that a file might have no 
+  matching entries, so it will show empty.</p>
+
+  <p>To remove a filter, press the 'remove filter' button, or reload a project.
+  </p>
+
   <hr>
   <table summary= "just formatting" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>

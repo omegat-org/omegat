@@ -164,6 +164,12 @@ public class GlossaryTextAreaTest extends TestCore {
             }
             public void remarkOneMarker(String markerClassName) {
             }
+
+            public void addFilter(List<Integer> entryList) {
+            }
+
+            public void removeFilter() {
+            }
         });
     }
 }

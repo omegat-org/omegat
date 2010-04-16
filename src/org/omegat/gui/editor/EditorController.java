@@ -1308,6 +1308,8 @@ public class EditorController implements IEditor {
         IProject project = Core.getProject();
         if (doc != null && project !=null && project.getProjectFiles()!=null) {
             loadDocument();
+            if (getCurrentEntry()==null) nextEntry();
+            else activateEntry();
         }
     }
 
@@ -1321,6 +1323,8 @@ public class EditorController implements IEditor {
         IProject project = Core.getProject();
         if (doc != null && project !=null && project.getProjectFiles()!=null) {
             loadDocument();
+            if (getCurrentEntry()==null) nextEntry();
+            else activateEntry();
         }
     }
 

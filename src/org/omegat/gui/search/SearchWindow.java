@@ -649,7 +649,6 @@ public class SearchWindow extends JFrame
     }
 
     private void doFilter() {
-        m_filterButton.setEnabled(false);
         Core.getEditor().addFilter(m_viewer.getEntryList());
         m_removeFilterButton.setEnabled(true);
     }

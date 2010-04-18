@@ -98,17 +98,17 @@ class EntryListPane extends JTextPane
     public void addEntry(int num, String preamble, String src, String loc)
     {
         if (m_stringBuf.length() > 0)
-            m_stringBuf.append("---------\n");                                    // NOI18N
+            m_stringBuf.append("---------\n");                                    
 
-        if (preamble != null && !preamble.equals(""))                // NOI18N
-            m_stringBuf.append(preamble + "\n");                                // NOI18N
-        if (src != null && !src.equals(""))                            // NOI18N
+        if (preamble != null && !preamble.equals(""))                
+            m_stringBuf.append(preamble + "\n");                                
+        if (src != null && !src.equals(""))                            
         {
-            m_stringBuf.append("-- "+src + "\n");                                // NOI18N
+            m_stringBuf.append("-- "+src + "\n");                                
         }
-        if (loc != null && !loc.equals(""))                            // NOI18N
+        if (loc != null && !loc.equals(""))                            
         {
-            m_stringBuf.append("-- "+loc + "\n");                                // NOI18N
+            m_stringBuf.append("-- "+loc + "\n");                                
         }
 
         m_entryList.add(num);
@@ -126,7 +126,7 @@ class EntryListPane extends JTextPane
     public void addMessage(String message) {
         // Insert entry/message separator if necessary
         if (m_stringBuf.length() > 0)
-            m_stringBuf.append("---------\n");                                    // NOI18N
+            m_stringBuf.append("---------\n");                                    
 
         // Insert the essage text
         m_stringBuf.append(message);
@@ -135,7 +135,7 @@ class EntryListPane extends JTextPane
     public void finalize()
     {
         String srcFont = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
-        if (!srcFont.equals(""))                                        // NOI18N
+        if (!srcFont.equals(""))                                        
         {
             int fontsize;
             try 
@@ -155,7 +155,7 @@ class EntryListPane extends JTextPane
         m_entryList.clear();
         m_offsetList.clear();
         m_stringBuf.setLength(0);
-        setText("");                                                            // NOI18N
+        setText("");                                                            
     }
 
     public int getNrEntries() {

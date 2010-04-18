@@ -4,6 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2006-2007 Henry Pijffers
+               2008 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,6 +48,7 @@ import org.omegat.util.Preferences;
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Alex Buloichik
  */
 class EntryListPane extends JTextPane
 {

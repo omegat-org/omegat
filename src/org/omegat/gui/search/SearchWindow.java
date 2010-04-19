@@ -565,14 +565,17 @@ public class SearchWindow extends JFrame
     ////////////////////////////////////////////////////////////////
     // interface for displaying text in viewer
     
-    public void displayResults()
-    {
+    public void displayResults() {
         m_viewer.finalize();
         m_resultsLabel.setText(
             StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
                                new Object[] {new Integer(m_viewer.getNrEntries())})
         );
         m_filterButton.setEnabled(true);
+
+        // save user preferences
+        savePreferences();
+
     }
     
     public void addEntry(int num, String preamble, String src, String tar)

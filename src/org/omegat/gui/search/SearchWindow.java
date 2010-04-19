@@ -344,8 +344,8 @@ public class SearchWindow extends JFrame
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
 
         // need to control check boxes and radio buttons manually
         //
@@ -630,7 +630,7 @@ public class SearchWindow extends JFrame
         browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
         String curDir = m_dirField.getText();
         
-        if (!curDir.equals(""))											// NOI18N
+        if (!curDir.equals(""))											
         {
             File dir = new File(curDir);
             if (dir.exists() && dir.isDirectory())
@@ -784,7 +784,7 @@ public class SearchWindow extends JFrame
 
                 String fulltext = msg;
                 if (ex != null)
-                    fulltext += "\n" + ex.getLocalizedMessage(); // NOI18N
+                    fulltext += "\n" + ex.getLocalizedMessage(); 
                 JOptionPane.showMessageDialog(SearchWindow.this, fulltext,
                         OStrings.getString("TF_ERROR"),
                         JOptionPane.ERROR_MESSAGE);
@@ -804,8 +804,8 @@ public class SearchWindow extends JFrame
                     undo();
                 }
             };
-            getInputMap().put(undo, "UNDO");                                                  // NOI18N
-            getActionMap().put("UNDO", undoAction);               // NOI18N
+            getInputMap().put(undo, "UNDO");                                                  
+            getActionMap().put("UNDO", undoAction);               
 
             //  Handle redo (CtrlCmd+Y);
             KeyStroke redo = StaticUtils.onMacOSX()
@@ -816,8 +816,8 @@ public class SearchWindow extends JFrame
                     redo();
                 }
             };
-            getInputMap().put(redo, "REDO");                                                  // NOI18N
-            getActionMap().put("REDO", redoAction);               // NOI18N
+            getInputMap().put(redo, "REDO");                                                  
+            getActionMap().put("REDO", redoAction);               
         }
 
         protected Document createDefaultModel() {
@@ -833,7 +833,7 @@ public class SearchWindow extends JFrame
             if (e.getKeyCode() == KeyEvent.VK_ENTER &&
                     e.getID() == KeyEvent.KEY_PRESSED)
             {
-                if (!getText().equals(""))								// NOI18N
+                if (!getText().equals(""))								
                     doSearch();
             }
             else

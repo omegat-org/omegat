@@ -78,7 +78,7 @@ public class SearchThread extends Thread
         m_entrySet = null; // HP
                 
         m_numFinds = 0;
-        m_curFileName = "";	// NOI18N
+        m_curFileName = "";	
     }
     
     /////////////////////////////////////////////////////////
@@ -303,7 +303,7 @@ public class SearchThread extends Thread
         {
            if (!m_entrySet.contains(src + target) || m_allResults) { // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
-                m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	// NOI18N
+                m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	
                 if (!m_allResults) // If we filter results
                     m_entrySet.add(src + target); // HP
            }

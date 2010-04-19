@@ -101,17 +101,17 @@ class EntryListPane extends JTextPane
     public void addEntry(int num, String preamble, String src, String loc)
     {
         if (m_stringBuf.length() > 0)
-            m_stringBuf.append("---------\n");                                    
+            m_stringBuf.append("\n");                                    
 
         if (preamble != null && !preamble.equals(""))                
             m_stringBuf.append(preamble + "\n");                                
         if (src != null && !src.equals(""))                            
         {
-            m_stringBuf.append("-- "+src + "\n");
+            m_stringBuf.append(src + "\n");
         }
         if (loc != null && !loc.equals(""))                            
         {
-            m_stringBuf.append("-- "+loc + "\n");
+            m_stringBuf.append(loc + "\n");
         }
 
         m_entryList.add(num);

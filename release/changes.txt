@@ -2,7 +2,7 @@
  OmegaT 2.1.5 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  0 Bugfix
+  1 Bugfix
 ----------------------------------------------------------------------
 2.1.5 update 1 vs. 2.1.5
 
@@ -10,6 +10,10 @@
 
   - Memorize search settings after each search
   http://sourceforge.net/support/tracker.php?aid=1605843
+
+  Bug fixes:
+
+  - User-defined font wasn't used when first opening the Search window
 
 ----------------------------------------------------------------------
  OmegaT 2.1.5

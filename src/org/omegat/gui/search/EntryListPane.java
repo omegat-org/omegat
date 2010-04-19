@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006-2007 Henry Pijffers
                2008 Alex Buloichik
+               2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,6 +50,7 @@ import org.omegat.util.Preferences;
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik
+ * @author Didier Briel
  */
 class EntryListPane extends JTextPane
 {
@@ -61,6 +63,7 @@ class EntryListPane extends JTextPane
 
         addMouseListener(new MouseAdapter()
         {
+            @Override
             public void mouseClicked(MouseEvent e)
             {
                 super.mouseClicked(e);
@@ -94,7 +97,7 @@ class EntryListPane extends JTextPane
         setEditable(false);
     }
 
-    // add entry text - remember what it's number is and where it ends
+    // add entry text - remember what its number is and where it ends
     public void addEntry(int num, String preamble, String src, String loc)
     {
         if (m_stringBuf.length() > 0)
@@ -104,11 +107,11 @@ class EntryListPane extends JTextPane
             m_stringBuf.append(preamble + "\n");                                
         if (src != null && !src.equals(""))                            
         {
-            m_stringBuf.append("-- "+src + "\n");                                
+            m_stringBuf.append("-- "+src + "\n");
         }
         if (loc != null && !loc.equals(""))                            
         {
-            m_stringBuf.append("-- "+loc + "\n");                                
+            m_stringBuf.append("-- "+loc + "\n");
         }
 
         m_entryList.add(num);
@@ -132,21 +135,25 @@ class EntryListPane extends JTextPane
         m_stringBuf.append(message);
     }
 
-    public void finalize()
-    {
+    public void setFont() {
         String srcFont = Preferences.getPreference(OConsts.TF_SRC_FONT_NAME);
-        if (!srcFont.equals(""))                                        
-        {
+        if (!srcFont.equals("")) {
             int fontsize;
-            try 
-            {
+            try {
                 fontsize = Integer.valueOf(
                         Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE)).
                         intValue();
             }
-            catch (NumberFormatException nfe) { fontsize = 12; }
+            catch (NumberFormatException nfe) {
+                fontsize = 12; }
             setFont(new Font(srcFont, Font.PLAIN, fontsize));
         }
+
+    }
+
+    @Override
+    public void finalize() {
+        setFont();
         setText(m_stringBuf.toString());
     }
 

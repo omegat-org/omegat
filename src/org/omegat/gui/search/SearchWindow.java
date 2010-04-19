@@ -410,8 +410,9 @@ public class SearchWindow extends JFrame
         updateUIText();
         loadPreferences();
 
+        m_viewer.setFont(); // Otherwise, the user-defined font is not used
         m_viewer.setText(OStrings.getString("SW_VIEWER_TEXT"));
-
+        
         if (!Core.getProject().isProjectLoaded())
         {
             // restrict user to file only access

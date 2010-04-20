@@ -306,8 +306,8 @@ My boss
 <listitem><para><cmdsynopsis><command>grep <parameter>root</parameter> <filename>/etc/passwd /etc/nofiles</filename> &gt; <filename>grepresults</filename></command></cmdsynopsis></para></listitem>
 <listitem><para><cmdsynopsis><command>/etc/init.d/sshd <parameter>start</parameter> &gt; <filename>/var/tmp/output</filename></command></cmdsynopsis></para></listitem>
 <listitem><para><cmdsynopsis><command>/etc/init.d/crond <parameter>start</parameter> &gt; <filename>/var/tmp/output</filename> 2&gt;&amp;1</command></cmdsynopsis></para></listitem>
-<para>Now check your results by issuing the commands again, now redirecting standardoutput to the file <filename>/var/tmp/output</filename> and standard error to the file <filename>/var/tmp/error</filename>.</para>
 </itemizedlist>
+<para>Now check your results by issuing the commands again, now redirecting standardoutput to the file <filename>/var/tmp/output</filename> and standard error to the file <filename>/var/tmp/error</filename>.</para>
 
 </listitem>
 <listitem><para>How many processes are you currently running?</para></listitem>

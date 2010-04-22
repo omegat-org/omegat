@@ -950,17 +950,17 @@ public class EditorController implements IEditor {
                 if (firstEntry.entryNum() <= entryNum
                         && lastEntry.entryNum() >= entryNum) {
                     // this file
+                    if (i != displayedFileIndex) {
+                        //it's other file than displayed
+                        displayedFileIndex = i;
+                        loadDocument();
+                    }
                     //find correct displayedEntryIndex
                     for (int j=0; j<m_docSegList.length; j++) {
                         if (m_docSegList[j].segmentNumberInProject == entryNum) {
                             displayedEntryIndex = j;
                             break;
                         }
-                    }
-                    if (i != displayedFileIndex) {
-                        // it's other file than displayed
-                        displayedFileIndex = i;
-                        loadDocument();
                     }
                     break;
                 }

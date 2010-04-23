@@ -1305,24 +1305,25 @@ public class EditorController implements IEditor {
     public void addFilter(List<Integer> entryList) {
         this.entryFilterList = entryList;
 
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
         int curEntryNum = getCurrentEntryNumber();
-        loadDocument(); //rebuild entrylist
-        if (isInFilter(curEntryNum)) {
-            gotoEntry(curEntryNum);
-        } else {
-            //go to next (available) segment. But first, we need to reset the 
-            //displayedEntryIndex to the number where the current but filtered 
-            //entry could have been if it was not filtered.
-            for (int j=0; j<m_docSegList.length; j++) {
-                if (m_docSegList[j].segmentNumberInProject >= curEntryNum) { //
-                    displayedEntryIndex = j-1;
-                    break;
+        Document3 doc = editor.getOmDocument();
+        IProject project = Core.getProject();
+        if (doc != null && project !=null && project.getProjectFiles()!=null) { //prevent nullpointererrors in loadDocument. Only load if there is a document.
+            loadDocument(); //rebuild entrylist
+            if (isInFilter(curEntryNum)) {
+                gotoEntry(curEntryNum);
+            } else {
+                //go to next (available) segment. But first, we need to reset the 
+                //displayedEntryIndex to the number where the current but filtered 
+                //entry could have been if it was not filtered.
+                for (int j=0; j<m_docSegList.length; j++) {
+                    if (m_docSegList[j].segmentNumberInProject >= curEntryNum) { //
+                        displayedEntryIndex = j-1;
+                        break;
+                    }
                 }
+                nextEntry();
             }
-            nextEntry();
         }
     }
 
@@ -1332,12 +1333,13 @@ public class EditorController implements IEditor {
      */
     public void removeFilter() {
         this.entryFilterList = null;
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
         int curEntryNum = getCurrentEntryNumber();
-        loadDocument();
-        gotoEntry(curEntryNum);
+        Document3 doc = editor.getOmDocument();
+        IProject project = Core.getProject();
+        if (doc != null && project !=null && project.getProjectFiles()!=null) { //prevent nullpointererrors in loadDocument. Only load if there is a document.
+            loadDocument();
+            gotoEntry(curEntryNum);
+        }
     }
 
     /**

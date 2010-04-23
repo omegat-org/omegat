@@ -2,7 +2,7 @@
  OmegaT 2.1.5 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.5 update 1 vs. 2.1.5
 
@@ -12,6 +12,9 @@
   http://sourceforge.net/support/tracker.php?aid=1605843
 
   Bug fixes:
+
+  - Go To/Segment Number goes to wrong segment
+  http://sourceforge.net/support/tracker.php?aid=2990761
 
   - User-defined font wasn't used when first opening the Search window
 

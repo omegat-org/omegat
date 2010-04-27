@@ -603,7 +603,7 @@ public class ProjectFrame extends JFrame {
         }
 
         protected void setValue(Object value) {
-            if (pattern != null) {
+            if (pattern != null && value instanceof Number) {
                 super.setValue(pattern.format((Number) value));
             } else {
                 super.setValue(value);

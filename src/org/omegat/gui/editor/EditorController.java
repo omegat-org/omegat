@@ -1336,9 +1336,12 @@ public class EditorController implements IEditor {
         int curEntryNum = getCurrentEntryNumber();
         Document3 doc = editor.getOmDocument();
         IProject project = Core.getProject();
-        if (doc != null && project !=null && project.getProjectFiles()!=null) { //prevent nullpointererrors in loadDocument. Only load if there is a document.
-            loadDocument();
-            gotoEntry(curEntryNum);
+        if (doc != null && project !=null)  { //prevent nullpointererrors in loadDocument. Only load if there is a document.
+            List<FileInfo> files = project.getProjectFiles();
+            if (files!= null && !files.isEmpty()) {
+                loadDocument();
+                gotoEntry(curEntryNum);
+            }
         }
     }
 

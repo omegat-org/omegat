@@ -84,6 +84,7 @@ import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.gui.main.MainWindow;
+import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
@@ -604,6 +605,7 @@ public class ProjectFrame extends JFrame {
 
         protected void setValue(Object value) {
             if (pattern != null && value instanceof Number) {
+                Log.log("DEBUG: class="+value.getClass().getName()+" val="+value);
                 super.setValue(pattern.format((Number) value));
             } else {
                 super.setValue(value);

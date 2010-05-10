@@ -1,0 +1,27 @@
+=== Header ===
+
+This is a flow text.
+
+multiple spaces in text
+
+* asterisk * asterisk
+  * list item
+- minus - minus
+  - numeric item
+
+before code
+<code java>This 
+ is 
+ ignored</code>
+mid code
+<code>
+ignore code </code>
+after code
+ 
+<html> any html </html>
+~~MACRO~~
+<php> any php </php>
+{{..:images:f_n_16.png|Number}}
+<file> any file </file>
+<del>deleted</del>
+^ header | cell1 | cell2 | cell3 {{..:images:f_n_16.png|Number}} |

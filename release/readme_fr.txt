@@ -66,6 +66,7 @@ OmegaT prend en charge directement les formats de fichier suivants :
   - Help & Manual
   - Ressources Windows RC
   - DTD Mozilla
+  - DokuWiki
 
 Il est également possible de personnaliser OmegaT pour accepter d'autres formats.
 
@@ -171,6 +172,7 @@ Les personnes qui ont contribué incluent :
 
 Contributions au code :
   Zoltan Bartko
+  Volker Berlin
   Didier Briel (responsable de versions)
   Kim Bruning
   Alex Buloichik

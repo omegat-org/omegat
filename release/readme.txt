@@ -70,6 +70,7 @@ OmegaT supports the following file formats out of the box:
   - Help & Manual
   - Windows RC resources
   - Mozilla DTD
+  - DokuWiki
 
 OmegaT can be customized to support other file formats as well.
 
@@ -217,6 +218,7 @@ Previous contributors include:
 
 Code has been contributed by
   Zoltan Bartko
+  Volker Berlin
   Didier Briel (release manager)
   Kim Bruning
   Alex Buloichik

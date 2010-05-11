@@ -2,7 +2,7 @@
  OmegaT 2.1.6
 ----------------------------------------------------------------------
   2 Enhancements
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.6 vs. 2.1.5 update 1
 
@@ -19,6 +19,8 @@
 
   - Calling the Project Files window (Ctrl+L) could generate an error 
 in some circumstances
+
+  - Some files were not closed when translating in console mode
 
 ----------------------------------------------------------------------
  OmegaT 2.1.5 update 1

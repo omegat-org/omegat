@@ -200,13 +200,23 @@ public abstract class AbstractFilter implements IFilter {
      */
     public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config)
     {
+        BufferedReader reader = null;
         try
         {
-            return isFileSupported(createReader(inFile, inEncoding));
+            reader = createReader(inFile, inEncoding);
+            return isFileSupported(reader);
         }
         catch (IOException e)
         {
             return false;
+        } finally {
+            try {
+                if( reader != null ){
+                    reader.close();
+                }
+            } catch( Exception e ) {
+                // ignore it
+            }
         }
     }
     

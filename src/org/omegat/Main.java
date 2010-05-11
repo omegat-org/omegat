@@ -263,6 +263,7 @@ public class Main {
             else
                 p.compileProject(".*");
 
+            p.closeProject();
             System.out.println("Finished");
         } catch (Exception e) {
             System.err.println("An error has occured: " + e.toString());

@@ -1,10 +1,15 @@
 ----------------------------------------------------------------------
- OmegaT 2.1.5 update 2
+ OmegaT 2.1.6
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
-2.1.5 update 2 vs. 2.1.5 update 1
+2.1.6 vs. 2.1.5 update 1
+
+  Implemented requests:
+
+  - Apertium machine translation
+  http://sourceforge.net/support/tracker.php?aid=2999892
 
   Other enhancements:
 

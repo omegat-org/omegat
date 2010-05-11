@@ -226,6 +226,7 @@ Code has been contributed by
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Maxym Mykhalchuk 
   Arno Peters

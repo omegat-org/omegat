@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2009.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2010.
 
 ==============================================================================
   OmegaT 2.0, fichier « Lisez-moi »
@@ -180,6 +180,7 @@ Contributions au code :
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Maxym Mykhalchuk 
   Arno Peters

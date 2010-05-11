@@ -86,3 +86,7 @@ OmegaT-Plugin: MachineTranslator
 
 Name: org.omegat.core.machinetranslators.BelazarTranslate
 OmegaT-Plugin: MachineTranslator
+
+Name: org.omegat.core.machinetranslators.ApertiumTranslate
+OmegaT-Plugin: MachineTranslator
+

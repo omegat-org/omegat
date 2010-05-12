@@ -1,36 +1,43 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>关于 OmegaT - OmegaT 1.6.1 用户手册</title>
+  <link type="text/css" href="./OmegaT.css" rel="stylesheet">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>关于 OmegaT - OmegaT 2.0 用户手册</title>
 </head>
 <body>
-
-<h1>关于 OmegaT </h1>
-
-<p>OmegaT 是一种免费的多平台计算机辅助翻译工具。</p>
-
-<h2>译法记忆</h2>
-
-<p>OmegaT 将你对文本的翻译方式作为记忆保留，并将之前记忆的译法用作参考。</p>
-
-<p>对于那些要处理许多重复和相似内容的翻译工作来说，译法记忆是非常有用的功能。OmegaT 使用了译法记忆，因此它记住了你对之前的片段的译法，并能把和当前片段最相似的那些记忆提供为建议。</p>
-
-<p>当之前翻译过的文档需要更新时，这一功能也非常有用。未变化的句子将保留已译状态；对于已更新的句子，则会把旧版中同一句子作为最可能译法的一起显示出来。对原始文档之修正版的处理也因此而更加轻松。</p>
-
-<p>如果你正在使用已创建好的译法记忆（比如来自翻译代理商或客户），OmegaT 也可以把它们用作参考记忆。</p>
-
-<h2>专业术语管理</h2>
-
-<p>对于保持译法的一致性，专业术语管理是件非常重要的工作。OmegaT 使用了包含单词和短语的词汇表，这是一种面向特定领域的简化双语字典。OmegaT 把当前片段中出现的那些术语的译法作为参考显示出来。</p>
-
-<h2>翻译过程</h2>
-
-<p>假如你不得不对一个充斥着子目录和文件的目录中所有内容进行翻译。而这些文件又由各种不同的格式组成。你只需告诉 OmegaT 你想翻译哪些文件，它就会使用<a href="fileFilters.html" title="文件过滤器">文件过滤规则</a>在其中查找<a href="fileFormats.html" title="支持的文件格式">所支持的文件</a>，将文本部分识别出来，并按照<a href="segmentation.html" title="源片段">分段规则</a>对最大的文本组进行分割，最后将片段逐段显示出来以便你进行翻译。</p>
-
-<p>如果你想看看这些文件翻译好之后的样子，你可以<a href="userInterface.html" title="用户界面">创建已译文件</a>, 并使用适当的应用程序将打开它们进行查看。</p>
-
+<table border="0"  cellpadding="4" cellspacing="0" summary="只有格式"
+ frame="below" rules="none" width="100%">
+  <col width="128*"> <col width="128*"> <tbody>
+    <tr valign="top">
+    <td align="left"> 
+      <img src="images/OmegaT_icon.png" name="grafika1"
+ height="128" width="128" alt="OmegaT 标识">
+      </td>
+      <td align="left">
+      <h1>关于 OmegaT </h1>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>OmegaT 是一种免费的多平台计算机辅助翻译工具,具有以下突出特色：</p>
+<h3><a name="tm"></a>译法记忆</h3>
+<p>OmegaT 在译法记忆中保存您的翻译内容。同时，它可以将之前翻译工作的记忆用作参考。对于那些要处理许多重复和相似文本片段的翻译工作来说，译法记忆是非常有用的功能。OmegaT 使用译法记忆保存您之前的翻译，并为您当前进行翻译的文本提供最可能的译法。</p>
+<p>当已经翻译过的文档需要更新时，这一功能非常有用。未变化的句子将保留已译状态；对于已更新的句子，则会把旧版中同一句子作为最可能译法一同显示出来。对原始文档之修正版的处理工作也因此变得更加轻松。如果您正在使用已创建好的译法记忆（比如来自翻译中介商或客户），OmegaT 也可以把它们用作参考记忆。</p>
+<p>OmegaT 使用标准的 TMX文件格式来保存和读取译法记忆，这使得你可以与其它支持这一文件格式的 CAT 应用程序交换译法资料。</p>
+<h3><a name="glossary"></a>术语管理</h3>
+<p>为保持译法的一致性，专业术语管理非常重要。OmegaT 所使用的包含单词和短语的词汇表是一种面向特定领域的简化双语字典。OmegaT 把当前片段中出现的那些术语的译法作为参考显示出来。</p>
+<h3><a name="process"></a>翻译过程</h3>
+<p>想象一下不得不对从单个文件到整个文件夹（包含带有各种文件格式的子文件夹）进行翻译的情形。您只需告诉 OmegaT 你想翻译哪些文件，它就会使用文件过滤规则在其中查找所支持的文件，将文本部分识别出来，并按照分段规则对最大的文本组进行分割，最后将片段逐段显示出来以便你进行翻译。OmegaT 将会记住你的译法，并为那些在记忆中有相似片段的为你提取译法建议。如果你想看看这些文件翻译好之后的样子，你可以创建已译文件, 并使用适当的应用程序将打开并查看它们。</p>
 <hr>
-<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
-
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="只有格式">
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">法律声明</a> </td>
+      <td style="text-align: center;"><a href="index.html">首页</a>
+      </td>
+      <td style="text-align: right;"><a href="xindex.html">内容索引</a> </td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>

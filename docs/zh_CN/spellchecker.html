@@ -1,0 +1,99 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>拼写检查 - OmegaT 2.0 用户手册</title>
+</head>
+
+<body>
+  <h2>拼写检查</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#introduction">介绍</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">拼写检查选项</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Hints">提示</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a>介绍</h3>
+
+  <p><br></p>
+
+  <p>为纠正在翻译过程中出现的拼写错误，可安装并使用拼写检查工具指出目标文本中需要更正的单词。该功能应该不会令人称奇: OmegaT 使用 OpenOffice.org、 Firefox 和 Thunderbird 中也使用的 <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a> 拼写检查程序。如果在用这些程序，你可能已经安装了拼写检查程序，只需将 OmegaT 和它连接起来。</p>
+
+  <p>如果激活了该拼写检查器，同时也存在目标语言的词库的话，拼写检查程序将监测编辑窗格中显示的目标片段。可疑的单词将用红色波浪下划线标出:</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "检查文本的拼写" align="left" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>右键单击突出显示的词汇（上面的 <i>Artund</i> ）打开一份下拉菜单，将列出更正建议 (<i>Art und</i>) 。此外，你也可以要求拼写检查器 <b>忽略所有</b> 该词的出现，或者 <b>将其添加到字典</b>。注意这是一种在线拼写检查：如果需要对文本进行全局拼写检查，你必须自行完整浏览文本并监视波浪线出现的情况。另一方法是通过某种编辑器来对目标文件进行拼写检查，换言之在 OmegaT 之外操作，因此所作修改将不会影响译法记忆。</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>拼写检查选项</h3>
+
+  <p>点击 <b>选项 &gt; 拼写检查...</b> 将打开下面的窗口：</p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "拼写检查设置" align="left" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>上述例子中已经包含了可用词汇表。最初它应该是空的，因此你必须指定 OmegaT 从何处查找词汇表。点击 <strong>选择……</strong> 打开一个对话框窗口，在其中您可以选择现有的 OpenOffice.org 或 Mozilla 词汇子文件夹。找到它们的最简单方法是查找扩展名为 <i>aff</i> 或 <i>dic</i> 的文件。OmegaT 将识别该位置所有的有效字典并显示它们。如果想要使用的字典已经在那里且被 OmegaT 识别出来了，你已经大功告成了。如果未找到字典，你可以为它们选择一个合适的位置并点击 <b>安装</b> 让 OmegaT 查找可用词汇。在弹出窗口中选择需要的只会然后点击 <b>安装</b>。随后选中的语言将会被安装，并出现在拼写检查器窗口中（可能需要一段时间）。</p>
+
+  <p>请注意安装程序取决于互联网列出的字典。如果已经过期或者不包含所需的语言，你就得自己动手查找词汇表了。在 <a href="http://extensions.services.openoffice.org/dictionary">OpenOffice.org Dictionary site</a> OpenOffice.org 可能包括了最大型的词汇表集合。在下载安装字典扩展后，就可以使用相应的 <i>aff</i> 和 <i>dic</i> 了。可以通过增加火狐或者雷鸟的拼写插件来达到相同的目的；在此情况下拼写检查文件将会保存在火狐或雷鸟的用户文档中。</p>
+
+  <p>请确保目标文件的语言代码与字典的语言代码相同：FR-FR 字典在 FR 目标设置下将无法正常使用。你必须将设置修改为 FR-FR 以允许拼写检查器为目标语言正确识别字典。通过表示语言种类及 aff 和 dic 扩展名的文件名称进行查找。</p>
+
+  <h3><a name="Hints" id="Hints"></a>提示</h3>
+
+  <p>拼写检查器不工作的可能原因包括：</p>
+
+  <ol>
+    <li>
+      <p>“自动检查文本的拼写” 复选框必须被选中。</p>
+    </li>
+
+    <li>
+      <p>在设置窗口中对照可用词汇表检查项目的目标语言代码。拼写检查器根据目标语言代码来决定要使用的语言：如果目标语言是巴西葡萄牙语 (PT_BR)，存放词汇表的目录必须包括两份词汇表，名为 pt_br.aff 和 pt_br.dic 。</p>
+    </li>
+  </ol>
+
+  <p>如果已经译了一大段文本，但是才意识到项目的目标语言代码与拼写检查器的语言代码不符(如将 en 设为目标语言，但没有 en 词汇表），你只需拷贝两份对应的文件（例如 pt_PT.arr 和 pt_PT.dic) 并将拷贝更名（pt._BR.arr and pt_BR.dic)。当然，中断一小段时间并下载正确的拼写检查器版本的做法更加理智。</p>
+
+  <p>注意物理反安装将会删除选中的词汇表。在上述词汇表是 OpenOffice 组成部分的情况下，它们也将从该应用程序中消失。如果出于某种原因，你必须反复重复该操作，将这些文件复制到其它目录并为 OmegaT 保留它们是非常有意义的，</p>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="只有格式">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a></td>
+
+        <td style="text-align: center;"><a href="index.html">首页</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

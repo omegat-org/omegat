@@ -1,0 +1,733 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>正则表达式 - OmegaT 2.0 用户手册</title>
+</head>
+
+<body>
+  <h2>正则表达式构造</h2>
+
+  <p>在搜索和片段切分规则中使用的是 Java 支持的正则表达式(或简称为 regex)。如果你需要更多的信息，请参阅<a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>。查阅下面提到的附加参考和范例。&nbsp;</p>
+
+  <table summary="只有格式" style="width: 80%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="width: 40%;">
+          <h3><a href="#Flags__">标志</a></h3>
+        </td>
+
+        <td style="width: 60%;">
+          <h3><a href="#Characters_">字符</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Quotation_">引用</a></h3>
+        </td>
+
+        <td>
+          <h3><a name="Classes_for_Uncode_blocks_and_" id=
+          "Classes_for_Uncode_blocks_and_"></a><a href=
+          "#Classes_for_Uncode_blocks_and_">为 Unicode 字块和分类准备的类</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Character_classes_">字符分类</a></h3>
+        </td>
+
+        <td>
+          <h3><a href="#Predefined_character_classes_">预定义字符类</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width: 257px;">
+          <h3><a href="#Boundary_matchers_">边界匹配</a></h3>
+        </td>
+
+        <td style="width: 517px;">
+          <h3><a href="#Greedy_quantifiers_">贪婪量词</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Reluctant_non-greedy_quantifiers_">勉强 (非贪婪) 量词</a></h3>
+        </td>
+
+        <td>
+          <h3><a href="#Logical_operators_">逻辑操作符</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#References_and_examples_">正则表达式的工具和使用实例</a></h3>
+        </td>
+      </tr>
+    </tbody>
+  </table>&nbsp;&nbsp; &nbsp;
+
+  <p>&nbsp;<br></p>
+  <hr>
+
+  <table summary="只有格式" border="0" cellpadding="3" cellspacing="0">
+    <col width="15%">
+    <col width="80%">
+
+    <tbody>
+      <tr>
+        <td width="355">
+          <h3>构造……</h3>
+        </td>
+
+        <td width="877">
+          <h3>……匹配下列内容：</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Flags__" id="Flags__"></a>标志</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(?i)</code></p>
+        </td>
+
+        <td width="877">
+          <p>激活大小写不敏感匹配（缺省模式为大小写敏感）</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Characters_" id="Characters_"></a>字符</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>x</code></p>
+        </td>
+
+        <td width="877">
+          <p>字符 <strong>x</strong>, 除了以下内容……</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\uhhhh</code></p>
+        </td>
+
+        <td width="877">
+          <p>以十六进制数值表示的字符&lt;t0&gt;0x&lt;/t0&gt;<strong>hhhh</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\t</code></p>
+        </td>
+
+        <td width="877">
+          <p>制表符 (&lt;t0&gt;'\u0009'&lt;/t0&gt;)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\n</code></p>
+        </td>
+
+        <td width="877">
+          <p>新行 (换行) 字符 (&lt;t0&gt;'\u000A'&lt;/t0&gt;)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\r</code></p>
+        </td>
+
+        <td width="877">
+          <p>回车字符(&lt;t0&gt;'\u000D'&lt;/t0&gt;)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\f</tt></p>
+        </td>
+
+        <td width="877">
+          <p>换页符 (<tt>'\u000C'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\a</tt></p>
+        </td>
+
+        <td width="877">
+          <p>报警 (响铃) 字符 (<tt>'\u0007'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\e</tt></p>
+        </td>
+
+        <td width="877">
+          <p>转移字符 (<tt>'\u001B'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\c</tt><i>x</i></p>
+        </td>
+
+        <td width="877">
+          <p>对应<i>x</i>的控制字符 </p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>n</i></p>
+        </td>
+
+        <td width="877">
+          <p>后跟八进制数值的字符 <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\0</tt><i>nn</i></p>
+        </td>
+
+        <td width="877">
+          <p>后跟八进制数值的字符 <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>mnn</i></p>
+        </td>
+
+        <td width="877">
+          <p>后跟八进制数值的字符 <tt>0</tt><i>mnn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\x</tt><i>hh</i></p>
+        </td>
+
+        <td width="877">
+          <p>以十六进制数值表示的字符<tt>0x</tt><i>hh</i></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Quotation_" id="Quotation_"></a>引用</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\</code></p>
+        </td>
+
+        <td width="877">
+          <p>什么都不是，但对以下字符进行引用。当你需要对 <code>!$()*+.&lt;&gt;?[\]^{|}</code> 进行匹配时需要使用它。</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\\</code></p>
+        </td>
+
+        <td width="877">
+          <p>例如，这是反斜杠字符</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\Q</code></p>
+        </td>
+
+        <td width="877">
+          <p>什么都不是，但是引用 &lt;t0&gt;\E&lt;/t0&gt;之前的所有字符</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\E</code></p>
+        </td>
+
+        <td width="877">
+          <p>什么都没有，但是结束由 <tt>\Q</tt>开始的引用</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Classes_for_Unicode_blocks_and" id=
+          "Classes_for_Unicode_blocks_and"></a>为 Unicode 字块和分类准备的类</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>希腊字块中的字符 (简单地使用 <a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc"> block</a>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\p{Lu}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>大写字母 (简单地使用 <a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc"> category</a>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{Sc}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>货币符号</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\P{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>任何不在 Greek 字块中的字符 (取反)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td height="33" width="355">
+          <p><code><tt>[\p{L}&amp;&amp;[^\p{Lu}]]</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>除大写字母之外的所有字母 (减法)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Character_classes_" id=
+          "Character_classes_"></a>字符分类</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p>&lt;t0&gt;a&lt;/t0&gt;、 &lt;t1&gt;b&lt;/t1&gt;或者 &lt;t2&gt;c&lt;/t2&gt; (简单分类)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>[^abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p>除了 &lt;t0&gt;a&lt;/t0&gt;、&lt;t1&gt;b&lt;/t1&gt; 或 &lt;t2&gt;c&lt;/t2&gt; (取反)之外的任何字符。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[a-zA-Z]</code></p>
+        </td>
+
+        <td width="877">
+          <p>&lt;t0&gt;a&lt;/t0&gt; 到 &lt;t1&gt;z&lt;/t1&gt; 并 &lt;t2&gt;A&lt;/t2&gt; 到 &lt;t3&gt;Z&lt;/t3&gt;, 包含（范围）</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Predefined_character_classes_" id=
+          "Predefined_character_classes_"></a>预定义字符类</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>.</code></p>
+        </td>
+
+        <td width="877">
+          <p>任何字符 （除了行结束符之外）</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\d</code></p>
+        </td>
+
+        <td width="877">
+          <p>单个数字： <code>[0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\D</code></p>
+        </td>
+
+        <td width="877">
+          <p>一个非数字字符： &lt;t0&gt;[^0-9]&lt;/t0&gt;</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="877">
+          <p>一个空白字符： <code>[ \t\n\x0B\f\r]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\S</code></p>
+        </td>
+
+        <td width="877">
+          <p>一个非空字符： &lt;t0&gt;[^\s]&lt;/t0&gt;</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\w</code></p>
+        </td>
+
+        <td width="877">
+          <p>一个单词字符： &lt;t0&gt;[a-zA-Z_0-9]&lt;/t0&gt;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\W</code></p>
+        </td>
+
+        <td width="877">
+          <p>一个非单词字符： &lt;t0&gt;[^\w]&lt;/t0&gt;</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Boundary_matchers_" id="Boundary_matchers_"></a>边界匹配</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>^</code></p>
+        </td>
+
+        <td width="877">
+          <p>行首</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>$</code></p>
+        </td>
+
+        <td width="877">
+          <p>行尾</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\b</code></p>
+        </td>
+
+        <td width="877">
+          <p>单词边界</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\B</code></p>
+        </td>
+
+        <td width="877">
+          <p>非单词边界</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Greedy_quantifiers_" id="Greedy_quantifiers_"></a>贪婪量词</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>该符号导致尽可能进行匹配。例如，<code>a+</code> 将会匹配<code>aaabbb</code>中的<code>aaa</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>一次或根本不出现</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>出现0次或多次</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>出现1次以上</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Reluctant_non-greedy_quantifiers_" id=
+          "Reluctant_non-greedy_quantifiers_"></a>勉强 (非贪婪) 量词</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>该字符将导致尽可能少地进行匹配。例如： <code>a+?</code> 将会匹配<code>aaabbb</code>中的 <code>a</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>??</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>一次或根本不出现</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>出现0次或多次</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>出现1次以上</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Logical_operators_" id="Logical_operators_"></a>逻辑操作符</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>XY</strong></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong> 后面紧跟一个<strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>|</code><strong>Y</strong></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong> 或 <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(</code><strong>XY</strong><code>)</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>XY</strong> 作为单个组出现</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <br>
+
+  <h2><a name="References_and_examples_" id=
+  "References_and_examples_"></a>正则表达式的工具和使用实例</h2><br>有许多用于开发和测试正则表达式的交互工具。他们都几乎按照同样的模式（见下面的用于火狐浏览器的伊纳形式插件）:正则表达式（上面的条目）分析了搜索文本（中间的文本框），进行点击，显示结果文本框。 <br><br><img style="width: 726px; height: 524px;" alt=
+  "火狐浏览器的正则表达式测试插件" src=
+  "images/RegexTester.png"><br><br>参见 Windows,Linux, Mac, FreeBSD 版本的独立工具 <a href="http://www.weitz.de/regex-coach/">The Regex Coach</a>&nbsp;，它几乎与上面的例子一模一样。<br><br>可在 OmegaT 内（参见 选项 &gt; <a href=
+  "segmentation.html">片段分割</a>）找到非常有用 regex 实例集合。在搜索译法记忆时，下列表所包含的表达式可能会有用:<br>
+  <br>
+
+  <table summary="只有格式" style="text-align: left; width: 600px;"
+  border="1" cellpadding="0" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="font-weight: bold;">正则表达式</td>
+
+        <td style="font-weight: bold;">查找以下内容：</td>
+      </tr>
+
+      <tr>
+        <td>(\b\w+\b)\s\1\b<br></td>
+
+        <td>双字&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>[\.,]\s*[\.,]+</td>
+
+        <td>t 逗号及句点的组合</td>
+      </tr>
+
+      <tr>
+        <td>\. \s$</td>
+
+        <td>额外的空格，后面紧跟着句点和行尾</td>
+      </tr>
+
+      <tr>
+        <td>\s+a\s+[aeiou]</td>
+
+        <td>&nbsp;英语：单词，以元音开始，可以是 "an" 而不能是 "a"</td>
+      </tr>
+
+      <tr>
+        <td>\s+an\s+[^aeiou]</td>
+
+        <td>&nbsp;英语：如上一条表达式，但辅音（"a", 而不是 "an")</td>
+      </tr>
+
+      <tr>
+        <td>\s\s+</td>
+
+        <td>一个以上空格</td>
+      </tr>
+
+      <tr>
+        <td>\.[A-Z]</td>
+
+        <td>在句点和新句子头部之前缺失了一个空白</td>
+      </tr>
+    </tbody>
+  </table><br>
+  <br>
+  <hr>
+
+  <table summary="只有格式" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a></td>
+
+        <td style="text-align: center;"><a href="index.html">首页</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,195 +1,182 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Searches - OmegaT 1.6.1 User Manual</title>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>搜索 - OmegaT 2.0 用户手册</title>
 </head>
+
 <body>
+  <h2>搜索</h2>
 
-<h1>搜索</h1>
-
-<h2>内容</h2>
-
-<ul type="none">
-   <li>1. <a href="#Search_window">搜索窗口</a></li>
-   <li>2. <a href="#Search_locations">搜索位置</a></li>
-
-   <li>3. <a href="#Search_methods">搜索方法</a>
-
-      <ul type="none">
-         <li>3.1. <a href="#Exact searches">精确搜索</a></li>
-         <li>3.2. <a href="#Keyword_searches">关键词搜索</a></li>
-      </ul>
-   </li>
-
-   <li>4. <a href="#Searching_using_wildcards">使用通配符搜索</a></li>
-
-   <li>5. <a href="#Searching_using_regular_expressions">使用正则表达式搜索</a>
+  <ul>
+    <li>
+      <p><a href="#searchwindow">搜索窗口</a></p>
 
       <ul>
-         <li>5.1. <a href="#Regular_Expressions_to_use_in_searches">搜索使用的正则表达式</a></li>
-         <li>5.2. <a href="#Short_summary_of_regular-expression_constructs">正则表达式快捷概要</a></li>
+        <li>
+          <p><a href="#calling">调用搜索</a></p>
+        </li>
+
+        <li>
+          <p><a href="#location">搜索位置</a></p>
+        </li>
       </ul>
-   </li>
-</ul>
+    </li>
+  </ul>
 
-<a name="Search_window"></a>
-<h2>搜索窗口</h2>
+  <p><a href="#searchmethods">搜索方法</a></p>
 
-<p>OmegaT 提供了强大的搜索功能</p>
+  <p><a href="#usingwildcards">使用通配符</a></p>
 
-<p>使用 <code>Ctrl+F</code> 调出搜索窗口，在“查找”文本框输入你要搜索的单词或短语。</p>
+  <p><a href="#usingregularexpressions">使用正则表达式</a></p>
 
-<p>此外，在编辑区域（激活片段的目标文本）选择一个单词或短语，然后按<code>Ctrl+F</code>键。在这种情况下，单词或者短语将会自动输入“查找”文本框中。</p>
+  <p><a href="#display">搜索结果展示</a></p>
+  <hr>
 
-<p>调出搜索窗口总是会创建它的一个新实例。如果你忘记关闭它们的话，最后你可能打开了数个搜索窗口。</p>
+  <h2><a name="searchwindow" id="searchwindow"></a>搜索窗口</h2><img src=
+  "images/TextSearch.png" name="graphics1" align="left" border="0" id="graphics1" alt="文本搜索窗口"><br clear="left">
 
-<p>搜索在项目的源和目标文件中同时进行。</p>
+  <p><br>
+  <br></p>
 
-<a name="Search_locations"></a>
-<h2>搜索位置</h2>
+  <h3><a name="calling" id="calling"></a>调用搜索</h3>
 
-<p>使用检查框选择位置。</p>
+  <p>OmegaT 提供了强大的搜索功能。使用 <code>Ctrl+F</code> 调出搜索窗口，在<strong>“查找”</strong>文本框输入要搜索的单词或短语。此外，还可以在编辑区域（激活片段的目标文本）选择一个单词或短语，然后按<code>Ctrl+F</code>键。在该情况下，单词或者短语将会自动输入到<strong>“查找”<strong>文本框中。每次调用 搜索 功能都会创建一个新的窗口。别忘记关闭它们，这样它们才不会弄乱你的桌面。</p>
 
-<p>你可以为要进行的搜索选择多个位置：</p>
+  <h3><a name="location" id="location"></a>搜索位置</h3>
 
-<ul>
-   <li>只在项目中（缺省设置）</li>
-   <li>在项目和/tm/中的参考翻译记忆中（勾上<i>Search TMs</i>）</li>
-   <li>单独的文件或包含一系列文件的文件夹（勾上 <i>Search files</i>选项）</li>
-</ul>
+  <p>搜索在项目的源和目标部分同时进行。你可以仅在</p>
 
-<p>在后面的情形中，OmegaT至搜索它能够读取的文件（查阅<a href="fileFormats">Supported File Formats</a>）。</p>
+  <ul>
+    <li>
+      <p>项目中搜索（缺省设置）。</p>
+    </li>
 
-<a name="Search_methods"></a>
-<h2>搜索方法</h2>
+    <li>
+      <p>在项目和/tm/中的参考翻译记忆中（勾上<i>搜索 TMs</i>）</p>
+    </li>
 
-<p>使用无线按钮选择方法</p>
+    <li>
+      <p>单独的文件或包含一系列文件的文件夹（勾上 <i>搜索文件</i>选项）</p>
+    </li>
+  </ul>
 
-<p>你可以在两个方法之中选择其一：</p>
+  <p>在文件中搜索时，OmegaT 将严格限制源文件格式（查阅 <a href="filesToTranslate.html">所支持的文件格式</a>)。例如，尽管 OmegaT 能够很好地处理 TMX 文件，但它不会将其纳入搜索范围。</p>
+  <hr>
 
-<ul>
-   <li><strong>精确搜索</strong>：找出包括你指定字符串的片段。</li>
-   <li><strong>关键词搜索</strong>：找出所有包括你指定的关键字的片段，不考虑顺序。</li>
-</ul>
+  <h2><a name="searchmethods" id="searchmethods"></a>搜索方法</h2>
 
-<p>对于以上两种方法，你可以选择下列三个选择：</p>
+  <p>使用无线按钮选择搜索方法你可以在两个方法之中选择其一：</p>
 
-<ul>
-   <li>
-      <strong>大小写敏感</strong>：如果选上该选项，搜索工作将会严格匹配指定的字符串；否则大小写状态将会被忽略。</li>
+  <table summary= "只有格式" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
 
-   <li>
-      <strong>正则表达式</strong>：如果选上该选项，搜索字符串将会被当作正则表达式对待（在关键词搜索中，它会被当作多个表达式）。</li>
+    <tr>
+      <td width="20%">
+        <p><strong>精确搜索</strong></p>
+      </td>
 
-   <li>
-      <strong>搜索 TMs</strong>: 如果选上该选项，所有的翻译记忆都被包括在搜索路径中。</li>
-</ul>
+      <td width="80%">
+        <p>找出包括指定字符串的片段。</p>
+      </td>
+    </tr>
 
-<a name="Exact_searches"></a>
-<h2>精确搜索</h2>
+    <tr>
+      <td width="20%">
+        <p><strong>关键词搜索</strong></p>
+      </td>
 
-<p>精确搜索查找短语，例如如果输入了多个词汇，只有当它们的顺序也完全相同时才会找到它们。精确搜索和互联网上类似Google的搜索引擎的“精确词语”搜索相似。</p>
+      <td width="80%">
+        <p>找出所有包括指定关键字的片段，不考虑顺序。</p>
+      </td>
+    </tr>
+  </table>
 
-<a name="Keyword_searches"></a>
-<h2>关键词搜索</h2>
+  <p><strong>精确搜索</strong>查找某条短语，也就是说，如果输入了多个词汇，只有它们以相同顺序出现时才会被找出来。精确搜索和互联网上 Google 之类搜索引擎的“精确词语”搜索相似。选择 “关键词搜索” 搜索任何数量以空格相间、以任何顺序排列的单个词汇。OmegaT 将会显示所有词汇均出现了的片段清单。关键词搜索和互联网 Google 搜索引擎的 “使用所有词”方式相似（AND逻辑）。</p>
 
-<p>选择“关键词搜索”输入数个单词，用空格以任何顺序分隔，OmegaT鉴定会显示所有词都出现的片段列表。关键词搜索和互联网Google搜索引擎的 “使用所有词”方式相似（AND逻辑）。</p>
+  <p>对于以上两种方法，均可以在下列三个选项中选择：</p>
 
-<a name="Searching_using_wildcards"></a>
-<h2>使用通配符搜索</h2>
+  <table summary= "只有格式" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
 
-<p>无论是精确还是关键词搜索，都可以使用通配符 '<code>*</code>' 和 '<code>?</code>' 。要使用通配符，必须确保选项 <strong>正则表达式</strong> 没有被选中，否则这些字符将会被识别为特殊的正则表达式字符。</p>
+    <tr>
+      <td width="20%">
+        <p><strong>区分大小写</strong></p>
+      </td>
 
-<p>通配符 '<code>?</code>' 匹配任何单个的字符，如： '<code>b?d</code>' 将会找到实例： '<code>bad</code>' 和 '<code>bid</code>'。通配符 '<code>*</code>' 匹配任何数量的字符，例如 '<code>b*d</code>' 将会找到实例： '<code>bad</code>', '<code>bid</code>', '<code>bold</code>' 和 '<code>band</code>'.</p>
+      <td width="80%">
+        <p>搜索工作将会严格匹配指定字符串；否则将忽略大小写状态。</p>
+      </td>
+    </tr>
 
-<p>如果你希望查找包括这些字符的片段，你需要使用正则表达式进行转换，你需要使用一个反斜杠('<code>\</code>') 对它们进行转义。例如： '<code>x\*y</code>' 用来查找实例'<code>x*y</code>' ； '<code>x\?y</code>' 用来查找实例 '<code>x?y</code>'。</p>
+    <tr>
+      <td width="20%">
+        <p><strong>正则表达式</strong></p>
+      </td>
 
-<a name="Searching_using_regular_expressions"></a>
-<h2>使用正则表达式搜索</h2>
+      <td width="80%">
+        <p>搜索字符串将会被当作正则表达式对待（在关键词搜索中，它会被当作多个表达式）。</p>
+      </td>
+    </tr>
 
-<p>正则表达式是一种查找字符串实例的强大方法。它和普通搜索类似，但具有大得多的灵活性。你可以在网站(<a href="http://www.regular-expressions.info/quickstart.html" title="http://www.regular-expressions.info/quickstart.html" rel="nofollow">http://www.regular-expressions.info/quickstart.html</a>找到一份简单的入门指南。)</p>
+    <tr>
+      <td width="20%">
+        <p><strong>搜索 TMs</strong></p>
+      </td>
 
-<a name="Regular_Expressions_to_use_in_searches"></a>
-<h3>搜索中使用的正则表达式</h3>
+      <td width="80%">
+        <p>将在所有译法记忆中搜索。</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
 
-<p>在搜索中使用的正则表达式是Java所支持的哪些。如果你需要更多的信息，请参阅<a href="http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>。</p>
+  <h2><a name="usingwildcards" id="usingwildcards"></a>使用通配符</h2>
 
-<a name="Short_summary_of_regular-expression_constructs"></a>
-<h4>正则表达式构造的简要介绍</h4>
+  <p>无论是精确还是关键词搜索，都可以使用通配符 '<code>*</code>' 和 '<code>?</code>' 。要使用通配符，必须确保未选中 <strong>正则表达式</strong> 选项，否则字符将会被识别为特殊的正则表达式字符。</p>
 
-<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="正则表达式的构造以及所匹配的内容">
-    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">构造&nbsp;</th><th align="left">匹配</th></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="flags">标志</th></tr>
-    <tr><td><tt>(?i)</tt></td><td>激活大小写不敏感匹配（缺省模式为大小写敏感）</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr><th align="left" colspan="2" id="characters">字符</th></tr>
+  <ul>
+    <li>
+      <p>'<strong>*</strong>' 字符匹配零或多个字符。比如搜索条件 '<strong>run*</strong>' 将会匹配 '<strong>run</strong>' 、 '<strong>runs</strong>' 和 '<strong>running</strong>' 。</p>
+    </li>
 
-    <tr><td><strong>x</strong></td><td>字符 <strong>x</strong>, 除了以下内容……</td></tr>
-    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>以十六进制数值表示的字符<tt>0x</tt><strong>hhhh</strong></td></tr>
-    <tr><td><tt>\t</tt></td><td>制表符 (<tt>'\u0009'</tt>)</td></tr>
+    <li>
+      <p>'<strong>?</strong>' 匹配任何单个字符。例如， '<strong>run?</strong>' 将会匹配 '<strong>runs</strong>' 和 '<strong>rung</strong>'，但并不匹配 '<strong>run</strong>' 或 '<strong>running</strong>'。</p>
+    </li>
+  </ul>
 
-    <tr><td><tt>\n</tt></td><td>新行 (换行) 字符 (<tt>'\u000A'</tt>)</td></tr>
-    <tr><td><tt>\r</tt></td><td>回车字符(<tt>'\u000D'</tt>)</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="quot">引用</th></tr>
+  <p>如果希望查找包 <strong>*</strong> 或 <strong>?</strong> 的片段，你需要使用正则表达式进行转换，并使用一个反斜杠('&lt;c0&gt;\&lt;/c0&gt;') 对它们进行转义。例如： 用 'x\*y' 用来查找实例'<code>x*y</code>' ， '<code>x\?y</code>' 用来查找实例 '&lt;c4&gt;x?y&lt;/c4&gt;'。</p>
+  <hr>
 
-    <tr><td><tt>\</tt></td><td>什么都不是，但对以下字符进行引用。当你需要对 <code>!$()*+.&lt;&gt;?[\]^{|}</code> 进行匹配时需要使用它。</td></tr>
-    <tr><td><tt>\\</tt></td><td>这是反斜杠字符</td></tr>
-    <tr><td><tt>\Q</tt></td><td>什么都没有，但是引用 <tt>\E</tt>之前的所有字符</td></tr>
+  <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>使用正则表达式</h2>
 
-    <tr><td><tt>\E</tt></td><td>什么都没有，但是结束由 <tt>\Q</tt>开始的引用</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="classes">字符分类</th></tr>
-    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>或者 <tt>c</tt> (简单分类)</td></tr>
+  <p>正则表达式是一种功能强大的字符串实例查找方法。它和通配符搜索类似，但灵活性要大得多。在搜索中使用的是Java所支持的那些正则表达式。附录 <a href="regexp.html">正则表达式</a> 中有一份简短的摘要。如果你需要更多的信息，请参阅<a href="regexp.html"> http://java.sun.com/j2se/1.4.2/docs/api/java/util/regex/Pattern.html</a>。</p>
 
-    <tr><td><tt>[^abc]</tt></td><td>除了 <tt>a</tt>, <tt>b</tt>, or <tt>c</tt> (否定)之外的任何字符。</td></tr>
-    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> 到 <tt>z</tt> 并且 <tt>A</tt> 到 <tt>Z</tt>, 包含（范围）</td></tr>
+  <p>在网站(<a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>）可以找到一份简单的入门指南。</p>
+  <hr>
 
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="predef">预定义字符类</th></tr>
-    <tr><td><tt>.</tt></td><td>任何字符 （除了行结束符之外）</td></tr>
-    <tr><td><tt>\d</tt></td><td>单个数字： <tt>[0-9]</tt></td></tr>
-    <tr><td><tt>\D</tt></td><td>一个非数字字符： <tt>[^0-9]</tt></td></tr>
+  <h2><a name="display" id="display"></a>搜索结果展示</h2>
 
-    <tr><td><tt>\s</tt></td><td>一个空白字符： <tt>[ \t\n\x0B\f\r]</tt></td></tr>
-    <tr><td><tt>\S</tt></td><td>一个非空白字符： <tt>[^\s]</tt></td></tr>
-    <tr><td><tt>\w</tt></td><td>一个单词字符： <tt>[a-zA-Z_0-9]</tt></td></tr>
-    <tr><td><tt>\W</tt></td><td>一个非单词字符： <tt>[^\w]</tt></td></tr>
+  <p>在搜索字段输入一个字符串然后点击搜索按钮，将会把项目中所有包含搜索字段的片段显示出来。由于 OmegaT 将相同片段视为同一实体，因此将只显示第一个独特的片段。</p>
 
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="bounds">边界匹配</th></tr>
-    <tr><td><tt>^</tt></td><td>行开始</td></tr>
-    <tr><td><tt>$</tt></td><td>行结束</td></tr>
-    <tr><td><tt>\b</tt></td><td>单词边界</td></tr>
+  <p>片段以在项目中出现的顺序显示。译好的片段将会以上面显示原始文本、下面显示翻译文本的形式显示，未译片段将只显示原始文本。</p>
 
-    <tr><td><tt>\B</tt></td><td>非单词边界</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="greedy">贪婪量词</th></tr>
-    <tr><td colspan="2">这些符号将可能进行匹配。例如，<code>a+</code> 将会匹配<code>aaabbb</code>中的<code>aaa</code></td></tr>
+  <p>点击某片段将会编辑器中将它打开。然后你可以转回搜索窗口以编辑下一找到的片段，例如为了控制或者在必要时调整术语。</p>
+  <hr>
+  <table summary= "只有格式" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a> </td>
+        <td style="text-align: center;"><a href="index.html">首页</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
-    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>一次或根本不出现</td></tr>
-    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>出现0次或多次</td></tr>
-    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>出现1次以上</td></tr>
-
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="reluc">勉强 (非贪婪) 量词</th></tr>
-    <tr><td colspan="2">这些字符将会尽可能少地进行匹配。例如： <code>a+?</code> 将会匹配<code>aaabbb</code>中的 <code>a</code></td></tr>
-    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>一次或根本不出现</td></tr>
-
-    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>出现0次或多次</td></tr>
-    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>出现1次以上</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="logical">逻辑操作符</th></tr>
-
-    <tr><td><strong>XY</strong></td><td><strong>X</strong> 后面紧跟一个<strong>Y</strong></td></tr>
-    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td> <strong>X</strong> 或 <strong>Y</strong></td></tr>
-
-    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> 作为单个组出现</td></tr>
-</table>
-
-<hr>
-<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
 
 </body>
 </html>

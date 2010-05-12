@@ -1,0 +1,223 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>命令行参数 - OmegaT 2.1用户手册</title>
+</head>
+
+<body>
+  <h1>命令行参数</h1>
+
+  <p>可以使用额外的参数运行 OmegaT 以改变其行为或者告诉它启动时采取哪些行为。为添加这些参数，你需要在命令行中输入带有参数的运行命令，或者修改脚本为你执行这些动作。要了解如何启动 OmegaT 的更多信息，请参阅 <a href="installingAndRunning.html">安装和运行</a>。</p>
+  <h2>行为转换参数</h2>
+  
+  <p>转变 OmegaT 行为的参数实际上是 Java 虚拟机的参数。<br>c参数添加于初始的 "<em>java</em>" 之后， "<em>-jar OmegaT.jar</em>" 部分之前。请注意，在 Windows 环境中，你可以修改<em> OmegaT.l4J.ini </em>文件来选择自己的偏好。在 Mac OSX 中，你可以修改 <em>OmegaT.app/Contents/</em> 处的 <em>Info.plist</em> 文件来达到同样的效果。</p>
+
+  <p>下面给出了可用参数的清单：可以在终端窗口输入 <em>java</em> 或者 <em>man java</em> 了解更多参数的信息——<em>man</em> 是一条对所选命令获取手册的终端窗口命令。您所用的系统可能有也可能没有您所使用语言的<em> java </em>命令手册。</p>
+
+  <p><b>用户界面语言：</b><em>-Duser.language=XX</em></p>
+
+  <table summary="只有格式">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>正常情况下，也就是 OmegaT 不带任何参数启动的情况下，程序将首先检测用户操作系统所使用的语言。如果存在所用语言的界面， OmegaT 将会使用它。因此，如果用户的操作系统为俄语版，而 OmageT 有俄语版的本地化版本，它将显示为俄语用户界面、俄语菜单等等。如果用户系统的语言不存在，OmegaT 将默认使用英语。这是标准行为。<br><br>"<em>-Duser.language=XX</em>" 参数导致 OmegaT 使用指定的语言而不是用户操作系统的语言。命令中的 "XX" 代表所需语言的双数字代码。要想 OmegaT 以法语界面启动（例如在俄语操作系统上），该命令应该为:</p>
+
+          <p><em>java -Duser.language=fr -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>用户国家设置：</strong><em>&nbsp;-Duser.country=XX</em></p>
+  
+  <table summary="只有格式">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>语言之后，你也可以指定国家，例如对于中文情况下的 CN 或 TW 。要得到正确的即时入门指南，你必须同时指定语言和国家。甚至在只要一种可用组合的情况下，这也是必须的，比如 Portuguese / Brazil 情况下的  pt_BR 。</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>字体抗锯齿：</strong><em>&nbsp;-Dswing.aatext=true</em></p>
+
+  <table summary="只有格式">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>该参数影响字体的抗锯齿效果，从而改善其外观。</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>字体抗锯齿（Java 6 开始） :</strong><em>&nbsp;-</em><span style=
+  "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
+
+  <table summary="只有格式">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>&nbsp;"XX" 的可能值包括： "false", "on", "gasp" 和 "lcd". Linux用户可能会发现，根据所选字体类型和大小的不同，“on”或“lcd”会改善对字体的外观。</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>内存分配：</strong><em>&nbsp;-XmxZZM</em></p>
+
+  <table summary="只有格式">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>该命令给 OmegaT 分配更多内存。缺省情况下，将会分配 256 MB 内存，因此分配低于此大小的内存是没有好处的。"ZZ" 代表以兆字节为单位的内存。因此，启动 OmegaT 时分配 1024 MB(1G)内存的命令是：</p>
+
+          <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>代理服务器地址和端口:</strong><em>&nbsp;-Dhttp.proxyHost=&lt;server IP address&gt;&nbsp;-Dhttp.proxyPort=&lt;port number&gt;</em></p>
+
+  <table summary="只有格式">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>该命令定义代理服务器，使 OmegaT 具备通过代理访问互联网的能力。</p>
+
+          <p><em>java -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar
+          OmegaT.jar</em></p>
+
+          <p>参数可以进行组合：要想以上面所举所有例子为参数启动 OmegaT 的话，命令可能是：<br><em>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>行为参数</h2>
+  
+  <p>下面的命令告诉 OmegaT 怎么做。它们必须放置在 "<em>-jar OmegaT.jar</em>" 部分之后。您必须在启动脚本/快捷方式中添加这些参数或自己在命令行键入。你不能像对待行为转换参数那样将它们放置在配置文件当中。</p>
+  
+  <table style="width: 80%;" cellpadding="2" cellspacing="2" summary=
+  "只有格式">
+    <tbody>
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>&lt;项目-目录&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>告诉 OmegaT 在启动时加载指定的项目。例如： <code>/home/user/omegat_projects/myProject</code> 或 <code>"C:\Localization Projects\myProject"</code>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>---config-dir=&lt;配置-目录&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;告诉 OmegaT 哪个目录中存储了配置文件。如果不给定该参数，OmegaT 将转而使用缺省值（即用户主目录中的 OmegaT 目录，如果不可用的话则是当前的工作目录）。</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--mode=[console-translate |
+        console-createpseudotranslatetmx]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;使用 <a href="consoleMode.html">控制台模式</a> 启动 OmegaT。如果是 <code>console-translate</code> 模式它将翻译指定的项目。如果是 <code>createpseudotranslatetmx</code> 模式，它将创建一份包括项目中所有片段的译法记忆文件（通过参数 <code>--pseudotranslatetmx</code> 指定），哪怕这些片段之前从未翻译过。对这些片段的翻译取决于参数 <code>--pseudotranslatetype</code>. 译法记忆相当于 OmegaT 的格式，因此可以在 OmegaT 中使用。另见 <a href=
+          "translationMemories.html#pseudo_translate">Translation memories</a></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--source-pattern=&lt;regular expression&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;仅当模式为 <code>console-translate</code> 时有效指定要翻译的源文件。但是无论是否存在匹配的源文件都将创建目标子文件夹。参数为一条正则表达式。例如：</p>
+
+          <ul>
+            <li><code>.*</code>: 将翻译所有文件。这和不使用参数的效果是等同的。</li>
+
+            <li><code>.*\.html</code>: 将翻译所有的 HTML 文件。</li>
+
+            <li><code>dir-10\\test\.html</code>: 只有在 <code>dir-10</code> 文件夹中的 <code>test.html</code> 文件将会被翻译。目录相对于项目源文件根目录。目录的分割符取决于平台。在 Windows 下使用 <code>\\</code> ，而在其它平台使用 <code>/</code>。</li>
+
+            <li><code>test\.html</code>: 只有根目录下的 <code>test.html</code> 文件将会被翻译。如果在其它目录下有名为 test.html 的文件，它们将会被忽略。</li>
+          </ul>
+
+          <p>该参数是可选的，默认情况下为 <code>.*</code>。</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetmx=&lt;file.tmx&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;仅当模式为 <code>console-translate</code> 时有效指定译法记忆输出到哪个文件。如果文件不以 <code>.tmx</code> 结尾，它将加上该扩展名。名称可以是绝对的也可以相对于工作目录（启动 OmegaT 的目录）。</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetype=[empty|equal]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;仅当模式为 <code>console-translate</code> 时有效指定为每个片段创建何种类型的翻译。可能值包括：</p>
+
+          <ul>
+            <li><code>empty</code>: 目标片段将会是空片段</li>
+
+            <li><code>equal</code>: 目标片段与源片段相同。</li>
+          </ul>
+
+          <p>该参数是可选的，默认情况下为 <code>equal</code>。</p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--quiet</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;只适用于控制台模式。在安静【Quiet】模式下，屏幕上将显示更少的日志信息。在状态栏通常可以看到的所有信息都不会被显示。<p>参数是可选的，默认情况下信息将显示到屏幕上。</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="只有格式">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a></td>
+
+        <td style="text-align: center;"><a href="index.html">首页</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+

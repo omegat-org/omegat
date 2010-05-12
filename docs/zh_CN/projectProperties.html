@@ -1,43 +1,82 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>项目属性 - OmegaT 1.6.1 用户手册</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>项目属性 - OmegaT 2.0 用户手册</title>
 </head>
+
 <body>
+  <h2>项目属性</h2>
 
-<h1>项目属性</h1>
+  <ul>
+    <li>
+      <a href="#dialog">属性对话框</a>
 
-<p>该对话框用来修改项目文件夹和语种。可以通过按 <a href="keyboardShortcuts.html" title="OmegaT 键盘快捷方式"><code>Ctrl+E</code></a> 键或者从<a href="menu.html" title="主菜单">主菜单</a>调用 <strong>项目 -&gt;属性……</strong>  来打开它。</p>
+      <ul>
+        <li><a href="#language">语言修改</a></li>
 
-<p>该对话框包括：</p>
+        <li><a href="#segments">片段修改</a></li>
 
-<ul>
-   <li>使用下拉菜单选择项目源和目标语言的区域。</li>
-   <li>片段设置标志</li>
-   <li>设置项目文件夹的区域</li>
-</ul>
+        <li><a href="#folder">文件夹结构修改</a></li>
+      </ul>
+    </li>
 
-<p>所有的字段都是可编辑的你可以手动输入语种或者使用下拉菜单。你也可以输入并不存在的文件夹名称，OmegaT将会为你创建它们。</p>
+    <li><a href="#warning">在翻译过程中修改项目属性</a></li>
+  </ul>
+  <hr>
+  <a name="dialog" id="dialog"></a>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>中途修改项目属性</h3>
+  <h2>属性对话框</h2>
 
-<p>虽然可能发生，但并不鼓励在翻译的过程中对项目属性进行修改。一旦翻译工作开始，所有的设置工作必须认为已经完成，除非你意识到犯了一个大错误。</p>
+  <p>该对话框用来修改项目文件夹和语种。可以通过按 <code><a href="menu.html#shortcuts">Ctrl+E</a></code> 键或者从<a href=
+  "menu.html">主菜单</a>调用 <strong>项目 -&gt;属性……</strong>  来打开它。该对话框包括：</p>
 
-<p>特定：</p>
+  <ul>
+    <li>使用下拉菜单选择项目源和目标语言的区域。</li>
 
-<ul>
-   <li>对语种进行修改可能会破坏当前使用的翻译记忆，因为它们的语言可不新的语种不匹配。</li>
+    <li>片段设置标志</li>
 
-   <li>改变片段设置可能会导致已经翻译的片段被分隔或者合并，并被转换为“未翻译”状态，虽然新旧不匹配的翻译仍然在翻译记忆中。如果你在翻译的中途改变主意，OmegaT 可能既不使用句子片段，反之也不使用项目翻译记忆 <a href="translationMemories.html#Upgrading_Translation_Memories" title="翻译记忆"> 更新旧的翻译记忆</a>。</li>
+    <li>设置项目文件夹的区域</li>
+  </ul>
 
-   <li>改变项目文件夹并不会将文件从旧文件夹移动到心 文件夹中，因此这样你将冒着风险是：到最后你或者OmegaT都不知道这个文件夹在哪里，也不知道究竟使用了哪一个。</li>
-</ul>
+  <p>所有的字段都是可编辑的你可以手动输入语种或者使用下拉菜单。你也可以输入并不存在的文件夹名称，OmegaT将会为你创建它们。</p><a name="language" id="language"></a>
 
-<p>查阅 <a href="preventingDataLoss.html" title="防止数据丢失">防止数据丢失</a> 部分了解如何保护你的工作成果。</p>
+  <h3>语言修改</h3>
 
-<hr>
-<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+  <p>必须要记住：修改语言可能会导致当前使用的译法记忆变得不可用，由于语言不再与新语言相匹配。</p><a name="segments" id="segments"></a>
 
+  <h3>片段修改</h3>
+
+  <p>片段设置只影响 OmegaT 处理源文件的方式。它不会对已经译好译法记忆进行修改。</p>
+
+  <p>如果改变了片段设置，一些已经译好的片段可能被分拆或者合并。这实际上会让它们回到“未译”状态，因为它们不在和记录在译法记忆中的片段相匹配，即便旧的和当前的匹配翻译仍然存在。</p>
+
+  <p>OmegaT 可能会 <a href="translationMemories.html#upgrading_TM">升级旧的未使用句子片段的译法记忆</a> ，但反过来却不会。如果你在翻译的当中改变了主意，项目的译法记忆将不会被修改。</p><a name="folder" id=
+  "folder"></a>
+
+  <h3>文件夹结构修改</h3>
+
+  <p>在想要修改项目文件夹的情况下，必须紧记这样做并不会将所包含的文件从旧文件夹移动到新的当中。你所要承担的风险是到最后 OmegaT 不知道你要使用的文件夹，也不知道当前正在使用哪个文件夹。</p>
+  <hr>
+  <a name="warning" id="warning"></a>
+
+  <h2>在翻译过程中修改项目属性</h2>
+
+  <p>可以在翻译进行的过程中对项目的属性进行修改。然而，最安全的办法是在翻译启动的时候考虑所有的设置问题——除非你意识到自己犯了一个严重的错误。查阅 <a href="preventingDataLoss.html">防止数据丢失</a> 部分了解如何保护你的工作成果。</p>
+  <hr>
+
+  <table style="width: 100%;" summary="只有格式" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a></td>
+
+        <td style="text-align: center;"><a href="index.html">首页</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

@@ -1,179 +1,1199 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>主菜单 - OmegaT 1.6.1 用户手册</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>OmegaT 菜单和键盘快捷方式 - OmegaT 2.0 用户手册</title>
 </head>
+
 <body>
+  <h2>OmegaT 菜单和键盘快捷方式</h2>
 
-<h1>主菜单</h1>
+  <h3><a href="#menu">主菜单</a></h3>
 
-<p>OmegaT所有的功能都可以通过编辑器窗口顶部的菜单条来调用。多数功能也可以通过 <a href="keyboardShortcuts.html">键盘快捷方式</a>调用。</p>
+  <h3><a href="#shortcutsp">键盘快捷方式</a></h3>
 
-<p><strong><code>Ctrl</code></strong> 键在Windows系统下使用， UNIX 和类 UNIX操作系统使用 <strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong> 键。Mac OS的用户应该转为使用苹果键 <img src="images/AppleKey.gif" alt="苹果键" width="19" height="19"> 。</p>
+  <ul>
+    <li>
+      <p><a href="#Project_management">项目管理</a></p>
+    </li>
 
-<h2>内容</h2>
-<ul type="none">
-   <li>1. <a href="#Project_Menu">项目菜单</a></li>
-   <li>2. <a href="#Edit_Menu">编辑菜单</a></li>
-   <li>3. <a href="#Go_to_Menu">前往菜单</a></li>
-   <li>4. <a href="#Tools_Menu">工具菜单</a></li>
-   <li>5. <a href="#Options_Menu">选项菜单</a></li>
-   <li>6. <a href="#Help_Menu">帮助菜单</a></li>
-</ul>
+    <li>
+      <p><a href="#Editing">编辑</a></p>
+    </li>
 
-<a name="Project_Menu"></a>
-<h4>项目菜单</h4>
+    <li>
+      <p><a href="#Moving_around">来回移动</a></p>
+    </li>
 
-<p>
-<dl>
-   <dt>新建</dt>
-   <dd>创建并打开一个新项目创建项目的对话框和<a href="projectProperties.html">编辑项目</a>的对话框是一样的。</dd>
+    <li>
+      <p><a href="#Reference_windows">参考窗口</a></p>
+    </li>
 
-   <dt>打开 <code>&lt;Ctrl+O&gt;</code></dt>
-   <dd>打开之前创建的项目</dd>
+    <li>
+      <p><a href="#Other">其它</a></p>
+    </li>
+  </ul>
+  <hr>
 
-   <dt>导入源文件……</dt>
-   <dd>将选中的文件拷贝到 <code>/source</code> 目录，并重新装载项目以载入新文件。</dd>
+  <h2><a name="menu" id="menu"></a>主菜单</h2>
 
-   <dt>重新装载</dt>
-   <dd>重新装载项目，以使源文件的外部改变生效，并继承翻译记忆和属于表的内容。</dd>
+  <p>OmegaT 的所有功能均可通过编辑器窗口顶部的菜单条来调用。多数功能也可以通过 <a href=
+  "#shortcutsp">键盘快捷方式</a>调用。快捷方式通过按 <strong>Ctrl</strong> 加字母键来激活。某些快捷方式还涉及了其他按键。为了增强可读性，本手册中这些字母以大写形式出现。<strong>Ctrl</strong> 键在Windows系统下使用， UNIX 和类 UNIX操作系统使用 <strong>Ctrl</strong> / <strong>Control</strong> 键。Mac 用户应当使用 <strong>cmd+key</strong> 来代替它。<strong>"cmd”</strong>键就是在苹果键盘上印有<strong>“Command”</strong>或<strong>“苹果”</strong>标记的那个键。</p>
 
-   <dt>关闭</dt>
-   <dd>保存翻译并关闭项目</dd>
+  <table summary="只有格式" border="1" cellpadding="3" cellspacing="0"
+  width="500">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p align="center"><a href="#ProjectMenu">项目</a></p>
+        </td>
 
-   <dt>保存 <code>&lt;Ctrl+S&gt;</code></dt>
-   <dd>将翻译保存到项目翻译记忆。OmegaT 每十分钟保存一次翻译，或者在退出项目前自动保存翻译。</dd>
+        <td>
+          <p align="center"><a href="#EditMenu">编辑</a></p>
+        </td>
 
-   <dt>创建已译文档</dt>
-   <dd>根据你的翻译的文档文本创建目标文档。创建的文档将位于 <code>/target</code> 目录下。</dd>
+        <td>
+          <p align="center"><a href="#GoToMenu">转到</a></p>
+        </td>
 
-   <dt>属性 <code>&lt;Ctrl+E&gt;</code></dt>
-   <dd>显示 <a href="projectProperties.html">项目属性</a> 对话框来编辑项目语言和文件夹位置。</dd>
+        <td>
+          <p align="center"><a href="#ViewMenu">查看</a></p>
+        </td>
 
-   <dt>项目文件…… <code>&lt;Ctrl+L&gt;</code></dt>
-   <dd>关闭或打开 <a href="userInterface.html#Project_Files">项目文件窗口</a> （取决于它处于打开或是关闭状态）</dd>
+        <td>
+          <p align="center"><a href="#ToolsMenu">工具</a></p>
+        </td>
 
-   <dt>退出 <code>&lt;Ctrl+Q&gt;</code></dt>
-   <dd>保存项目并退出 OmegaT. 如果你还没有手动保存项目，将会让你确认是否真要要退出。</dd>
-</dl>
-</p>
+        <td>
+          <p align="center"><a href="#OptionsMenu">选项</a></p>
+        </td>
 
-<a name="Edit_Menu"></a>
-<h4>编辑菜单</h4>
+        <td>
+          <p align="center"><a href="#HelpMenu">帮助</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>在多数程序中可以找到的条目（拷贝/剪切/粘贴）没有出现在这个菜单中，但是可以通过你系统的快捷方式使用。例如，在Windows平台下：</p>
+  <table summary="只有格式" border="0" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
 
-<p>
-<dl>
-   <dt>拷贝 <code>&lt;Ctrl+C&gt;</code></dt>
-   <dd>将会拷贝选中的文本到剪贴板。</dd>
+          <h3><a name="ProjectMenu" id="ProjectMenu"></a>项目</h3>
+        </td>
+      </tr>
 
-   <dt>剪切<code>&lt;Ctrl+X&gt;</code></dt>
-   <dd>将会拷贝选中的文本到剪贴板并删除选中的文本。</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>新建</code></p>
+        </td>
 
-   <dt>粘贴 <code>&lt;Ctrl+V&gt;</code></dt>
-   <dd>将剪贴板中的文本粘贴到光标位置。</dd>
-</dl>
-</p>
+        <td width="17%"></td>
 
-<p>该菜单自身包括下列条目：</p>
+        <td>
+          <p>创建并打开一个新项目。创建项目和<a href="projectProperties.html">编辑项目</a>使用相同的对话框。</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>取消上一个动作 <code>&lt;Ctrl+Z&gt;</code></dt>
-   <dd>回到上一个编辑动作发生之前的状态。在所编辑的片段生效后将会失效。</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>打开</code></p>
+        </td>
 
-   <dt>重复上一个动作 <code>&lt;Ctrl+Y&gt;</code></dt>
-   <dd>回到上一个编辑动作被取消之前的状态。在所编辑的片段生效后将会失效。</dd>
+        <td width="17%">
+          <p><code>Ctrl+O</code></p>
+        </td>
 
-   <dt>覆盖翻译 <code>&lt;Ctrl+R&gt;</code></dt>
-   <dd>使用选中的模糊匹配覆盖整个目标片段（缺省情况下选中第1个匹配）</dd>
+        <td>
+          <p>打开之前创建的项目。</p>
+        </td>
+      </tr>
 
-   <dt>插入翻译 <code>&lt;Ctrl+I&gt;</code></dt>
-   <dd>将当前选中的模糊匹配插入到光标位置即使目标段落有被选中文本，该功能不会覆盖其中的任何一部分。</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>导入源文件……</code></p>
+        </td>
 
-   <dt>使用源覆盖 <code>&lt;Shift+Ctrl+R&gt;</code></dt>
-   <dd>使用源片段覆盖整个目标片段。</dd>
+        <td width="17%"></td>
 
-   <dt>插入源 <code>&lt;Shift+Ctrl+I&gt;</code></dt>
-   <dd>在光标位置插入源段落内容。</dd>
+        <td>
+          <p>将选中的文件拷贝到 <code>/source</code> 目录，并重新装载项目以载入新文件。</p>
+        </td>
+      </tr>
 
-   <dt>在项目中搜索…… <code>&lt;Ctrl+F&gt;</code></dt>
-   <dd>打开一个新的 <a href="userInterface.html#Search_Window">搜索窗口</a>.</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>从 MediaWiki 导入……</code></p>
+        </td>
 
-   <dt>选择第 #N <code>&lt;Ctrl+N&gt;</code> 个模糊匹配（N 为从1 to 5）</dt>
-   <dd>选中匹配窗口中显示的第 N 个模糊匹配，以将它替换或插入到当前片段中。<a href="userInterface.html#Fuzzy_Matches">模糊匹配</a>部分讲述了关于颜色代码的细节问题。</dd>
-</dl>
-</p>
+        <td width="17%"></td>
 
-<a name="Go_to_Menu"></a>
-<h4>前往菜单</h4>
+        <td>
+          <p>基于所输入的 URL 从 MediaWiki 导入物件。</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>下一未翻译片段 <code>&lt;Ctrl+U&gt;</code></dt>
-   <dd>移动到翻译记忆中无相同内容的下一个片段。</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>重新装载</code></p>
+        </td>
 
-   <dt>下一片段 <code>&lt;Ctrl+N&gt;</code>, <code>&lt;回车键&gt;</code> / <code>&lt;Tab&gt;</code>
-   </dt>
-   <dd>移动到下一片段。如果当前片段是文件中的最后一个片段，将移动到下个文件的第一个片段。</dd>
+        <td width="17%"><code>F5</code></td>
 
-   <dt>前一片段 <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+回车键&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
-   </dt>
-   <dd>移动到前一片段如果当前片段是文件的第一个片段，将会移动到前一个文件的最后一个片段。</dd>
-</dl>
-</p>
+        <td>
+          <p>重新装载项目以使源文件的外部修改生效，并保留之前的翻译记忆和术语表内容。</p>
+        </td>
+      </tr>
 
-<a name="Tools_Menu"></a>
-<h4>工具菜单</h4>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>关闭</code></p>
+        </td>
 
-<p>
-<dl>
-   <dt>验证标签 <code>&lt;Ctrl+T&gt;</code></dt>
-   <dd>检查格式化文件中的丢失或者错误放置的标签。将会显示一个标签出错的片段列表。 <a href="userInterface.html#Tag_Validation">标签验证窗口</a> 部分列出了你所看到内容，<a href="formattedText.html">处理格式化文本</a>告诉你原因</dd>
-</dl>
-</p>
+        <td width="17%"><code>Ctrl+Shift+W</code></td>
 
-<a name="Options_Menu"></a>
-<h4>选项菜单</h4>
+        <td>
+          <p>保存翻译并关闭项目。</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>使用Tab 前进</dt>
-   <dd>将片段检验键设置为 <code>&lt;Tab&gt;</code> 取代缺省的 <code>&lt;回车键&gt;</code>. 该选项对于一些中文、日文、韩文字符输入系统非常有用。</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>保存</code></p>
+        </td>
 
-   <dt>字体……</dt>
-   <dd>显示 <a href="fontSettings.html">字体设置</a> 对话框来编辑文本显示字体。使用旧计算机的用户应该在打开项目之前修改字体，否则界面的表现将会非常糟糕。这种不利情况在 G4 + Mac OS X + Japanese 组合上更加严重。</dd>
+        <td width="17%">
+          <p><code>Ctrl+S</code></p>
+        </td>
 
-   <dt>文件过滤器……</dt>
-   <dd>显示 <a href="fileFilters.html">文件过滤器</a> 窗口来设置文件处理和分析</dd>
+        <td>
+          <p>将译法保存到项目翻译记忆。OmegaT 每十分钟保存一次翻译，且在关闭项目或退出前自动保存。</p>
+        </td>
+      </tr>
 
-   <dt>片段……</dt>
-   <dd>打开 <a href="segmentation.html">源片段</a>对话框来配置文本片段。</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>创建已译文档</code></p>
+        </td>
 
-   <dt>编辑行为……</dt>
-   <dd>显示一个 <a href="translationEditing.html">翻译编辑</a> 对话框来配置未翻译片段的目标字段内容</dd>
+        <td width="17%"><code>Ctrl+D</code></td>
 
-   <dt>恢复主窗口</dt>
-   <dd>恢复OemgaT窗口的组建（编辑器、匹配查阅器、词汇表查阅器）到缺省状态。在对一个或多个组建进行了分离、移动、隐藏操作之后无法对它们进行还原时可以使用这个功能。</dd>
-</dl>
-</p>
+        <td>
+          <p>根据您对文档文本的翻译创建目标文档。创建的文档将位于 <code>/target</code> 文件夹中。</p>
+        </td>
+      </tr>
 
-<a name="Help_Menu"></a>
-<h4>帮助菜单</h4>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>属性</code></p>
+        </td>
 
-<p>
-<dl>
-   <dt>用户手册……<code>&lt;F1&gt;</code></dt>
-   <dd>在独立的窗口中使用 <a href="userInterface.html#Help_Browser">帮助浏览器</a>打开本手册。 </dd>
+        <td width="17%">
+          <p><code>Ctrl+E</code></p>
+        </td>
 
-   <dt>关于……</dt>
-   <dd>显示版权、制作人员和授权信息。</dd>
-</dl>
-</p>
+        <td>
+          <p>显示 <a href="projectProperties.html">项目属性</a> 对话框来编辑项目语言和文件夹位置。</p>
+        </td>
+      </tr>
 
-<hr>
-<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>项目文件……</code></p>
+        </td>
 
+        <td width="17%">
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>关闭或打开 <a href="userInterface.html#Project_Files">项目文件窗口</a> （取决于它处于打开或是关闭状态）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>退出</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Q</code></p>
+        </td>
+
+        <td>
+          <p>保存项目并退出 OmegaT如果您未手动保存项目，系统将会让你确认是否真要要退出。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="EditMenu" id="EditMenu"></a>编辑</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>注意：在多数程序中可以找到的（拷贝/剪切/粘贴）条目没有出现在这个菜单中，但是您可以通过系统快捷方式使用。例如：</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>复制</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>将会拷贝选中的文本到剪贴板。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>剪切</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+X</code></p>
+        </td>
+
+        <td>
+          <p>将选中的文本拷贝到剪贴板并删除选中文本。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>粘贴</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+V</code></p>
+        </td>
+
+        <td>
+          <p>将剪贴板中的文本粘贴到光标位置。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p><strong>该菜单本身包括下列条目：</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>取消上一个动作</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>回到上一个编辑动作发生之前的状态。一旦所修改的片段生效，该操作将会失效。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>重做上一个动作</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>回到上一个编辑动作被取消之前的状态。一旦所修改的片段生效，该操作将会失效。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>用匹配替代</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>使用当前选中的模糊匹配覆盖整个目标片段（默认选中第1个匹配）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>插入匹配</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>将当前选中的模糊匹配插入到光标位置该功能将会覆盖目标片段中被选中部分的文本。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>使用机器翻译替代</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>使用谷歌翻译的译文取代目标片段。如果未激活谷歌翻译（参阅下面的 菜单 &gt; 选项），将不会有任何动作。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>用源文本替代</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>使用源片段覆盖整个目标片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>插入源文本<br></code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>在光标位置插入源段落内容。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>导出选中部分</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>将当前选中内容导出至文本文件进行处理。如果未选中内容，将导出当前的源片段至该文件。当用户退出 OmegaT 时，如果该文件没有清空，将与通常的剪贴板行为一致。导出的内容将被复制到位于用户偏好文件文件夹（参阅&nbsp;<a href=
+          "filesAndDirectories.html#user" target="_blank">文件和目录</a>）的<span style=
+          "font-style: italic;">selection.txt</span> 文件中。&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>在项目中搜索……</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>打开一个新的 <a href="userInterface.html#Search_Window">搜索窗口</a></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>切换大小写状态为……</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift + F3</code></p>
+
+          <p><code>（查阅文本）</code></p>
+        </td>
+
+        <td>
+          <p>将目标片段中突出显示的文本之大小写状态修改为选定选项（小写、 大写或首字大写）。可使用 Shift+F3 在三种选择之间循环切换。如果为选中文本， OmegaT 将选中紧挨着光标右边的单词。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>选择第 #N 号模糊匹配</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>(#N 为 1 至 5 之间的数字) - 选择在匹配视窗中列出的第 N 个模糊匹配项，并将其替代或插入该段中。<a href="userInterface.html#Match">模糊匹配</a> 部分讲述了关于颜色代码的更多细节。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="GoToMenu" id="GoToMenu"></a>转到</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>下一未译片段</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>移动到翻译记忆中无相同内容的下一个片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>下一片段</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+N</code> 或 <code>Enter</code> 或 <code>Tab</code></p>
+        </td>
+
+        <td>
+          <p>移动到下一片段。如果当前片段是文件中的最后一个片段，将移动到下个文件的第一个片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>前一片段</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+P</code> 或 <code>Ctrl+Enter</code> 或 <code>Ctrl+Tab</code></p>
+        </td>
+
+        <td>
+          <p>移动到前一片段。如果当前片段是文件的第一个片段，将会移动到前一个文件的最后一个片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>片段序号……</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>通过输入片段序号打开片段</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>在编辑历史中前进……</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT 能够记住执行过的片段。使用该命令可以前进到某片段，即你使用“回退到编辑历史”命令之前所处片段。&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>回退到编辑历史中……</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>通过该命令可以返回一个或多个时间片段，并在稍后返回当前的片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ViewMenu" id="ViewMenu"></a>查看</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>标记已译片段</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>如果选上该选项，已译片段将会标记为黄色。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>标记未译片段</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>如果选上该选项，未译片段将会标记为紫色。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>显示源片段</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>如果选上该选项，将会显示源片段并标记为绿色。如果未选上，将不会显示源片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ToolsMenu" id="ToolsMenu"></a>工具</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>检验标签</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>检查格式化文件中的丢失或者错误放置的标签。将会显示一份标签出错的片段清单。<a href=
+          "userInterface.html#tag_Validation">标签验证窗口</a> 部分列出了你所看到内容，<a href="formattedText.html">处理格式化文本</a>告诉你原因</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="OptionsMenu" id="OptionsMenu"></a>选项</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>使用 Tab 前进</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>将片段检验键设置为 <code>&lt;Tab&gt;</code> 而不是默认的 <code>&lt;回车键&gt;</code>。该选项对于一些中文、日文、韩文字符输入系统非常有用。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>退出前总是确认</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>程序在关闭前将总是让您确认。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td><code>谷歌翻译</code></td>
+
+        <td></td>
+
+        <td>
+          <p>激活 <a href="GoogleTranslate.html">谷歌翻译</a> /关闭当处于激活状态时，按 <code>Ctrl+M</code> 将用谷歌翻译建议替代当前激活状态的片段的译文部分。可以在插入前查看谷歌翻译窗格查看建议内容。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>字体……</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>显示 <a href="fontSettings.html">字体设置</a> 对话框以编辑文本显示字体。感觉窗口尺寸变化非常缓慢的旧款计算机的用户可以尝试改变字体。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>文件过滤器……</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>显示 <a href="fileFilters.html">文件过滤器</a> 窗口来设置文件处理和分析</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>片段……</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>打开 <a href="segmentation.html">源片段</a>对话框来配置文本片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>拼写检查……</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>显示 <a href="spellchecker.html">拼写检查工具设置</a> 窗口以安装、配置和激活拼写检查工具。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>编辑行为……</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>显示 <a href="translationEditing.html">翻译编辑</a> 对话框以进行配置工作</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>恢复主窗口</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>将 OemgaT 窗口的组件（编辑器、匹配查阅器、词汇表查阅器、谷歌翻译窗格）恢复到缺省状态。在对一个或多个组件进行了分离、移动、隐藏操作之后，无法对它们进行还原时可以使用这个功能。如果改变 OmegaT 版本后遇到了窗口无法出现的问题，也可以使用该功能。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="HelpMenu" id="HelpMenu"></a>帮助</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>用户手册……</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>在独立的窗口中使用 <a href="userInterface.html#Help_Browser">帮助浏览器</a> 打开本手册。 </p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>关于……</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>显示版权、制作人员和授权信息。</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="shortcuts" id="shortcuts"></a>键盘快捷方式</h2>
+
+  <p>以下快捷方式可以在主窗口中使用。当其他窗口挡在前面时，点击主窗口使它位于前方，或者按<code><strong>Esc</strong></code> 键关闭当前窗口。</p>
+
+  <p>快捷方式通过按 <code><strong>Ctrl</strong></code> 加字母键来激活。某些快捷方式还涉及了其他按键。为了增强可读性，本手册中这些字母以大写形式出现。</p>
+
+  <p><strong><code>Ctrl</code></strong> 键在Windows系统下使用， UNIX 和类 UNIX操作系统使用 <strong><code>Ctrl</code></strong> / <code><strong>Control</strong></code> 键。Mac 用户应当使用 <code><strong>cmd+key</strong></code> 来代替它。<code><strong>cmd</strong></code> 键就是在苹果键盘上印有 <code><strong>command</strong></code> 或<strong>apple</strong> 标记的那个键。</p>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">项目管理</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">编辑</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">来回移动</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">参考窗口</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">其它</a></p>
+    </li>
+  </ul>
+
+  <table summary="只有格式" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Project_management" id="Project_management"></a>项目管理</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>打开项目</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>打开对话框以打开一个已经存在的项目</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>保存</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>将当前的工作保存到位于项目的 /omegat 目录下的 project_save.tmx 文件中。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>关闭项目</p>
+        </td>
+
+        <td>
+          <p><code>Shift+Ctrl+W</code></p>
+        </td>
+
+        <td>
+          <p>关闭当前项目</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>创建已译文档</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+D</code></p>
+        </td>
+
+        <td>
+          <p>在项目的目标文件夹创建已译文档</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>项目属性</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>显示项目设置并进行可能的修改。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Editing" id="Editing"></a>编辑</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>取消上一个动作</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>取消当前片段中的上一个编辑动作。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>重做上一个动作</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>在当前目标片段中重做刚被取消的动作。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>-选择第 #N 号匹配</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>#N 为 1 至 5 之间的数字. 选中匹配窗口中显示的<sup>第</sup> N 个匹配内容。（缺省情况下选中第1个匹配）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>用匹配替代</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>使用选中的匹配更换当前目标段内容（缺省情况下选中第1个匹配）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>插入匹配</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>向当前的片段插入选中的匹配（缺省情况下插入第一个匹配）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>用源文本替代</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>用源文本内容替换当前的目标片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>插入源文本</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>向当前的目标片段的当前位置插入源文本内容。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>在项目中搜索……</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>显示一个对话框了引导在项目中的搜索</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>使用机器翻译替代</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>使用原文的谷歌翻译的译文取代目标片段。如果未激活谷歌翻译（参阅 菜单 &gt; 选项 &gt; 谷歌翻译），将不会有任何动作。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Moving_around" id="Moving_around"></a>来回移动</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>下一未译片段</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>将编辑字段转到项目翻译记忆中未登记的下一个片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>下一片段</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+N<br>Enter 或 Return&nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>将编辑字段转到下一段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>前一片段</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+P</code></p>
+        </td>
+
+        <td>
+          <p>将编辑区域转移到前一个片段</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>片段序号……</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>移动到所提供序号的片段</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>回退到编辑历史中……</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>移动到编辑历史中的上一片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>在编辑历史中前进……</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>移动到编辑历史中的下一片段。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Reference_windows" id="Reference_windows"></a>参考窗口</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>项目文件清单</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>显示项目文件列表</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Other" id="Other"></a>其它</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>检验标签</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>打开 <a href="userInterface.html#tag_Validation">标签检验</a> 窗口</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>导出选中部分</p>
+        </td>
+
+        <td>
+          <p><code>Shift+</code><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>输出当前选中内容，如果未选中的话输出当前源片段</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>在项目中搜索……&nbsp;&nbsp; &nbsp;</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F&nbsp;&nbsp; &nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>打开一个新的搜索窗口</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>帮助文件</p>
+        </td>
+
+        <td>
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>在独立的窗口中显示 OmegaT 的帮助文件。</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <table style="width: 100%;" summary="只有格式" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a></td>
+
+        <td style="text-align: center;"><a href="index.html">首页</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

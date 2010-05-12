@@ -1,219 +1,291 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>快速入门指南 - OmegaT 1.6.1 用户手册</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>快速入门指南 - OmegaT 2.0 用户手册</title>
 </head>
+
 <body>
+  <h2>（五分钟内学会使用 OmegaT ）<br>快速入门指南</h2>
 
-<h1>快速入门指南</h1>
-<p><small>（五分钟内学会使用 OmegaT ）</small></p>
+  <ul>
+    <li>
+      <p><a href="#summary">OmegaT 的简要工作机制</a></p>
+    </li>
 
-<p><strong>这份快速入门指南只覆盖了非常基础的内容。理论上，所有的用户应该这份用户手册来熟悉OmegaT所能提供的一切。</strong></p>
+    <li>
+      <p><a href="#translate">如何使用 OmegaT 翻译</a></p>
 
-<h2>内容</h2>
+      <ul>
+        <li>
+          <p><a href="#create">创建并打开一个新的项目</a></p>
+        </li>
+      </ul>
+    </li>
 
-<ol type="I">
-   <li><a href="#Briefly.2C_how_OmegaT_works">OmegaT的简要工作机制</a></li>
-   <li><a href="#How_to_translate_using_OmegaT">如何使用OmegaT翻译</a>
-      <ol type="a">
-         <li><a href="#Create_and_open_a_new_project">创建并打开一个新的项目</a></li>
-         <li><a href="#Translate_the_segments_one_by_one">逐段翻译</a></li>
-         <li><a href="#Use_TM_and_glossary_matches">使用翻译记忆和词汇表匹配</a></li>
-         	<ol type="1">
-         		<li><a href="#TM_matches">翻译记忆匹配</a></li>
-         		<li><a href="#Glossary_matches">词汇表匹配</a></li>
-         	</ol>
-         <li><a href="#Create_the_translated_documents">生成翻译好的文档</span></a></li>
-      </ol>
-   </li>
-   <li><a href="#Dealing_with_tagged_text">处理标签文本</a>
-      <ol type="a">
-         <li><a href="#An_example...">一个例子……</a></li>
-         <li><a href="#Tag_verification">标记验证</a></li>
-      </ol>
-   </li>
-</ol>
+    <li>
+      <p><a href="#segments">逐段翻译</a></p>
+    </li>
 
-<a name="Briefly.2C_how_OmegaT_works"></a>
-<h2>I. OmegaT的简要工作机制</h2>
+    <li>
+      <p><a href="#tm">使用译法记忆、词汇表和字典中的匹配项</a></p>
+    </li>
 
-<p>OmegaT 屏幕由三个不同的窗口组成。每个窗口都可以使用鼠标调整大小。左边的窗口是你输入翻译文本的编辑器。在右边，上方是匹配阅读器，用来显示翻译记忆中匹配的内容；下方是词汇表阅读器，用来显示词汇表的匹配内容。</p>
+    <li>
+      <p><a href="#searches">使用搜索和谷歌翻译</a></p>
+    </li>
 
-<p>在编辑器窗口中，OmegaT将源文本每一句分割成一个片段（Segment）显示。（或者段落——参阅 <a href="./segmentation.html">源片段</a>). 你一个片段一个片段地进行翻译。当你从一个片段翻译到另一个片段，你的翻译被记录在翻译记忆中。当所有的片段都被翻译好之后（或者之前，如果你要求）OmegaT将会使用翻译记忆在“目标”（Target）目录中生成翻译好的文档。</p>
+    <li>
+      <p><a href="#create_trans">生成翻译好的文档</a></p>
+    </li>
 
-<p>OmegaT 将你的翻译工作组织成所谓的翻译项目（Project）。对于每个项目，OmegaT将会创建一系列的文件夹。这些文件夹用来保存你要翻译的源文档、将要用到的词汇表，以及你想用到的翻译记忆。同时，OmegaT 也创建一个“目标”文件夹，用来保存最后翻译完成的文档。</p>
+    <li>
+      <p><a href="-标记">如何处理标记［Tagged］文本</a></p>
 
-<a name="How_to_translate_using_OmegaT"></a>
-<h2>II. 如何使用OmegaT翻译</h2>
+      <ul>
+        <li>
+          <p><a href="-例如：">一个例子……</a></p>
+        </li>
+      </ul>
+    </li>
 
-<a name="Create_and_open_a_new_project"></a>
-<h3>a. 创建并打开一个新的项目</h3>
+    <li>
+      <p><a href="#tag_verif">标记验证</a></p>
+    </li>
+  </ul>
 
-<p>从菜单中选择 <strong>项目 → 新建...</strong></p>
+  <p>这份快速入门指南只包括了最基础的内容。理论上，所有用户均应该阅读用户手册来熟悉 OmegaT 所提供的一切。这里描述的快捷方式使用“ctr+key”约定，但 Mac 用户应该改为使用“cmd+key”。“cmd”键就是在苹果键盘上印有“Command”或“苹果”标记的那个键。</p>
+  <hr>
 
-<p>找到你想保存项目文件的文件夹，为翻译项目输入一个名字。这个名字将被用作主项目文件夹的名字，所有的项目文件将被保存在这个文件夹或者它的子文件夹中。</p>
+  <h2><a name="summary" id="summary"></a>OmegaT 的简要工作机制</h2>
 
-<p>OmegaT 将使用下面的对话框提示你确认或者改变要创建的项目夹。</p>
+  <p>OmegaT 屏幕由 <a href="userInterface.html">三个不同窗口组成的空间</a> 组成。每个窗口都可以使用鼠标调整大小。左边的窗口是输入翻译文本的编辑器［Editor］。在右边，上面是匹配视窗［Match Viewer］，用于显示翻译记忆中匹配的内容。下面是词汇表视窗[Glossary Viewer]，用于显示词汇表的匹配内容。</p>
 
-<center><img src="images/NewProject.png" alt="项目设置窗口" /></center>
+  <p>在编辑器窗口中，OmegaT 将源文本<a href=
+  "segmentation.html">切分</a>成句子（或段落）来显示。您逐一对这些“片段”进行翻译。在您从一个片段翻译到另一个片段的同时，翻译均被记录在<a href="translationMemories.html">翻译记忆</a>中。一旦所有的片段都被翻译好之后（如果你要求的话，或者完成之前也可以）OmegaT 将会使用翻译记忆在“目标”［Target］目录中生成翻译好的文档。</p>
 
-<p>你可以简单地接受子文件夹的位置，但是必须首先确认源和翻译语言编码正确。从下拉菜单中选择语言代码（2字母）或者语言和地区代码（2+2字母），或者直接手工输入代码（匹配2字母模式）。用心记住目标文件夹的位置（用来保存翻译好的文档的位置）。</p>
+  <p>OmegaT 将您的翻译工作组织成所谓的翻译项目［Project］。OmegaT 将对每个项目创建一系列的文件夹。这些文件夹用来保存要翻译的 <a href="filesToTranslate.html">源文档</a>、希望用到的<a href="glossaries.html">词汇表</a>，以及任何可能用到的<a href="translationMemories.html">译法记忆</a>。同时 OmegaT 也创建一个“目标”文件夹，用于保存最后译好的文档。</p>
+  <hr>
 
-<p>如果你希望OmegaT逐句而不是逐段分割，你就必须选上分段规则。</p>
+  <h2><a name="translate" id="translate"></a>如何使用 OmegaT 翻译</h2>
 
-<p>当你点击确认接受项目设置，OmegaT 将会提示选择要导入的源文档。你可以导入单个的文件，也可以导入整个目录树（包括所有子文件夹中的所有文件）如果你偶然地导入了错误的文档，或者过多的文档，你只需要从你的OmegaT源文件夹中删除它们。（比如使用你的系统文件管理工具）</p>
+  <h3><a name="create" id="create"></a>创建并打开一个新的项目</h3>
 
-<p>如果要查看要翻译的文件，可以考虑使用<strong>项目文件</strong>窗口（如果没有自动打开的话，使用菜单： <strong>项目 → 项目文件……</strong>）如果你需要改变源文件夹的内容，记住首先要重新载入项目。（使用菜单： <strong>项目 → 重新载入</strong>). 缺省情况下，OmegaT 打开项目清单中的第一个文件。</p>
+  <p>从菜单中选择 <strong>项目 → 新建...</strong></p>
 
-<p>记住，OmegaT 只能翻译下列格式的文件：其它任何文件将会被忽略。<ul>
-<li>开放文档格式(ODF ISO/IEC 26300)</li>
-<li>OpenOffice.org </li>
-<li>XHTML, HTML </li>
-<li>HTML 帮助编译器格式(HCC)</li>
-<li>DocBook </li>
-<li>文本文件</li>
-<li>bundle.properties Java </li>
-<li>单语言 .po</li>
-<li>INI ('key=value' 格式)</li>
-</ul>
-</p>
+  <p>找到您想保存项目文件的文件夹，并为该翻译项目输入一个名字。该名字将被用作主项目的文件夹名，所有的项目文件将被保存在这个文件夹及其子文件夹中。</p>
 
-<a name="Translate_the_segments_one_by_one"></a>
-<h3>b. 逐段翻译</h3>
+  <p>OmegaT 将使用下面的对话框提示您确认或者改变要创建的项目夹。</p>
 
-<p>当你定义好项目以及要翻译的文件之后，OmegaT将会在编辑器中打开第一个源文件。第一个片段将以绿色高亮度显示，在下方“目标区域”将会显示一段源文本的拷贝。（此时，目标区域之外的所有文本都受到保护无法修改）你必须在标记&lt;segment 0001&gt;和&lt;end segment&gt;之间输入你的翻译，并覆盖源文本。</p>
+  <p align="center"><a name="graphics2" id="graphics2"></a></p>
 
-<p>输入“"<strong>ENTER（回车）</strong>”进入到下个片段。</p>
+  <p><img alt="新项目对话框"
+  title="新项目对话框" src="images/NewProject.png"></p>
 
-<p>注意：<br/>- 要想移动到文本的其他任何部分，无论是前面还是后面，双击你想打开的段落或者句子。<br/>- 如果你喜欢在空白的目标区域输入翻译文字，在<strong>选项 → 编辑行为……</strong>中设置该选项。</p>
+  <p>你仅需简单地接受子文件夹的位置，但是必须首先确认源和翻译<a href="languages.html">语言编码</a>是正确的。从下拉菜单中选择语言代码（双字母）或者语言和地区代码（2+2字母），或者直接手工输入代码（按照双字母模式）。记下目标文件夹（用于保存译好文档）的位置。如果希望 OmegaT 逐“句”而不是逐“段”切分片段，您必须仔细检查<a href="segmentation.html">分段规则</a>。</p>
 
-<p>当年按下“<strong>ENTER（回车）</strong>”键的时候，在背后发生许多事情：<br/>OmegaT 将片段对（源片段和它的翻译）增加到翻译记忆中，并将项目文件中找到的同一片段自动进行翻译。同时，它也为下一个未翻译的片段在翻译记忆和词汇表中进行匹配搜索。</p>
+  <p>点击确认接受项目设置之后，OmegaT 将会提示您选择要导入的源文档。您可以导入单个的文件，也可以导入整个文件夹的树形结构（包括所有子文件夹中的所有文件）如果您不小心导入了错误的文档，或者过多的文档，仅需从 OmegaT 源文件夹中删除它们（如通过使用系统文件管理工具）。</p>
 
-<a name="Use_TM_and_glossary_matches"></a>
-<h3>c. 使用翻译记忆和词汇表匹配</h3>
+  <p>如欲查看要翻译的文件清单，可以考虑使用<strong>项目文件</strong>窗口（如果没有自动开启的话，可使用菜单： <strong>项目 → 项目文件……</strong>激活）。如果需要改变源文件夹的内容，记住首先要重新载入项目。（使用菜单： <strong>项目 → 重新载入</strong>)。缺省情况下，OmegaT 打开项目清单中的第一个文件。请记住，OmegaT 仅能翻译下面列出的能够被 <a href="fileFilters.html">文件过滤器</a> 所匹配的 <a href="filesToTranslate.html">格式</a> 的文件。其它任何文件将会被忽略。</p>
 
-<a name="TM_matches"></a>
-<h4>1. 翻译记忆匹配</h4>
+  <ul>
+    <li>
+      <p>OpenDocument/OpenOffice.org</p>
+    </li>
 
-<p>如果 OmegaT 在翻译记忆中为下一片段发现了任何模糊匹配（30% 或者更高 – 查阅手册），它将在匹配查阅器中显示出来。缺省情况下，第一个匹配将会被预选中。</p>
-<p>你可以使用键盘快捷方式将翻译记忆匹配从匹配查阅器插入到目标区域中:<br/>
-<ul>
-   <li>按 <code>Ctrl+I</code> 将预选中的匹配插入当前光标位置，或者……</li>
-   <li>按 <code>Ctrl+R</code> 键用预选中匹配覆盖整个片段。</li>
-</ul>
-</p>
+    <li>
+      <p>纯文本</p>
+    </li>
 
-<p>如果发现了多个匹配，而你不想使用预选中的匹配：<br/>
-<ul>
-	<li>在匹配查阅器中选择你所希望的匹配：<code>Ctrl+2</code> 选择第二个显示出匹配，<code>Ctrl+3</code> 选择第三个匹配，依此类推。</li>
-	<li>然后像上面那样使用 <code>Ctrl+I</code> 或者 <code>Ctrl+R</code> 快捷键。</li>
-</ul>
-</p>
+    <li>
+      <p>.po</p>
+    </li>
 
-<p>（你可以让OmegaT打开片段时自动插入任何高于特定匹配百分比的第一个匹配。可以通过 <strong>选项 → 编辑行为……</strong>来设置这个选项）</p>
+    <li>
+      <p>Java 的 Bundle.properties 文件</p>
+    </li>
 
-<a name="Glossary_matches"></a>
-<h4>2. 词汇表匹配</h4>
+    <li>
+      <p>XHTML, HTML</p>
+    </li>
 
-<p>如果 OmegaT 在词汇表中发现了 100% 匹配的术语，将会把它们显示在词汇表查阅器中。但是不能通过快捷键方式进行传送。</p>
+    <li>
+      <p>HTML 帮助编译文件</p>
+    </li>
 
-<a name="Create_the_translated_documents"></a>
-<h3>d. 生成翻译好的文档</h3>
+    <li>
+      <p>INI ('key=value' 格式)</p>
+    </li>
 
-<p>当你完成所有片段的翻译之后（或者如果你愿意的话，在更早的时候），OmegaT将会使用翻译记忆中储存的记忆更新目标文档。</p>
+    <li>
+      <p>DocBook</p>
+    </li>
 
-<p>要完成这项工作，选择菜单 <strong>项目 → 创建翻译文档</strong>。</p>
+    <li>
+      <p>微软开放 XML</p>
+    </li>
 
-<p>OmegaT 将会为项目源文件夹中所有可翻译文档创建翻译版本，无论它们是否已经被完整翻译。被完整或部分翻译的文件将会被保存到项目的目标文件夹中。</p>
+    <li>
+      <p>Okapi 单语 XLIFF 文件</p>
+    </li>
 
-<p>为了结束翻译工作，用相关的应用程序打开目标文件（浏览器、字处理器）对你的翻译成果的内容和格式进行检查。然后你可以回到OmegaT进行任何必须的修正工作，但不要忘记重新创建翻译好的文档。</p>
+    <li>
+      <p>QuarkXPress CopyFlowGold</p>
+    </li>
 
+    <li>
+      <p>字幕文件 (SRT)</p>
+    </li>
 
-<a name="Dealing_with_tagged_text"></a>
-<h2>III. 处理标签文本</h2>
+    <li>
+      <p>ResX</p>
+    </li>
 
-<p>OmegaT 使用特殊的标签做标记来确保源文档的格式（如加粗、斜体等）不会丢失。OmegaT 的标签由一个或多个字母加上一个或多个数字，有时还有一个"/" 字符组成。（例如： &lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; etc.).</p>
+    <li>
+      <p>Android 资源</p>
+    </li>
 
-<p>你必须小心处理这些标签，确保它们在目标片段中处于正确位置。（查阅OmegaT用户手册了解高级标签编辑）</p>
+    <li>
+      <p>LaTeX</p>
+    </li>
+  </ul>
 
-<a name="An_example..."></a>
-<h3>a. 一个例子……</h3>
+  <h3><a name="segments" id="segments"></a>逐段翻译</h3>
 
-<p>在这些例子中，为了让标签更容易看到，我们使用<font color="#ff0000">红色</font>使它们突出示，但是在OmegaT中它们不会被突出。</p>
+  <p>一旦定义好项目以及要翻译的文件之后，OmegaT 将会在编辑器中打开第一份源文件。</p>
 
-<p>
-<strong>下面是一个HTML中的片段例子：</strong>
-</p>
+  <p>处于激活状态的片段将以绿色高亮度显示，在下方的“目标区域”将会显示一段源文本的拷贝。（此时，目标区域之外的所有文本都受到保护无法修改）您必须在标记<code>&lt;segment 0001&gt;</code>和<code>&lt;end segment&gt;</code>之间输入译文来覆盖原文。输入“"<strong>ENTER（回车）</strong>”以进入下个片段。注意：</p>
 
-<p>
-<code><font color="#ff0000">&lt;p&gt;</font>A different display font can be 
-selected via the <font color="#ff0000">&lt;b&gt;</font>Display 
-Font<font color="#ff0000">&lt;/b&gt;</font> dialog.  Open it via the 
+  <ul>
+    <li>
+      <p>如果想移动到文本的任何其它部分，无论是前面还是后面，可用鼠标双击想打开的段落或者句子。</p>
+    </li>
 
-<font color="#ff0000">&lt;i&gt;</font>Settings<font color="#ff0000">&lt;/i&gt;</font> 
-&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Display 
-Font...<font color="#ff0000">&lt;/i&gt;</font> menu item.  The font type and 
-size can be changed from the dialog.<font color="#ff0000">&lt;/p&gt;</font></code>
-</p>
+    <li>
+      <p>如果希望在空白的目标区域输入译文，可在<strong>选项 → <a href="translationEditing.html">编辑行为……</a></strong>中进行设置。</p>
+    </li>
 
-<p>
-<strong>下面是OmegaT如何显示它们，突出部分使用红色。</strong>
-</p>
+    <li>
+      <p>您可以通过主菜单的<a href="menu.html"><b>查看</b></a>项中修改编辑器窗格的设置（例如是否显示原文、高亮显示已译文本等等）。</p>
+    </li>
+  </ul>
 
-<p>
-<code>A different display font can be selected via the 
-<font color="#ff0000">&lt;b0&gt;</font>Display 
-Font<font color="#ff0000">&lt;/b0&gt;</font> dialog.  Open it via the 
+  <p>当您按下 "<strong>回车键</strong>"，在背后发生几件事情：OmegaT 将片段对（原文片段和译文）添加到翻译记忆中，并自动翻译了其它项目文件中所找到的相同片段。同时，它也对下一个未译片段在翻译记忆和词汇表中进行匹配搜索。</p>
 
-<font color="#ff0000">&lt;i1&gt;</font>Settings<font color="#ff0000">&lt;/i1&gt;</font> 
-&gt; <font color="#ff0000">&lt;i2&gt;</font>Display 
-Font...<font color="#ff0000">&lt;/i2&gt;</font> menu item.  The font type and 
-size can be changed from the dialog.</code>
-</p>
+  <h3><a name="tm" id="tm"></a>使用译法记忆、词汇表和字典中的匹配项。</h3>
 
-<p>
-<strong>下面的例子显示你应该如何翻译它（本例为斐语）</strong>
-</p>
+  <h3><a name="tm_matches" id="tm_matches"></a>翻译记忆匹配</h3>
 
-<p>
-<code>'n Mens kan 'n ander vertoonfont kies met die 
-<font color="#ff0000">&lt;b0&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b0&gt;</font>-dialoogkassie. 
-Kies <font color="#ff0000">&lt;i1&gt;</font>Opstelling<font color="#ff0000">&lt;/i1&gt;</font> 
+  <p>如果 OmegaT 在译法记忆中找到了下一片段的模糊匹配（30% 或者更高），它将在匹配视窗中显示结果。缺省情况下，匹配视窗中的第一条匹配结果将会被预先选中。</p>
 
-&gt; <font color="#ff0000">&lt;i2&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i2&gt;</font> 
-op die kieslys. Die lettertipe én die lettergrootte kan met dié 
-dialoogkassie verander word.</code>
-</p>
+  <p><br>
+  <br></p><img src="images/MatchesPane.png" name="graphics4" alt="匹配窗格"
+  id="graphics4" align="left" border="0"><br clear=
+  "left">
 
-<p>
-<strong>当OmegaT创建翻译文档时，HTML看起来将会像下面的样子：</strong>
-</p>
+  <p><br>
+  <br></p>
 
-<p>
-<code><font color="#ff0000">&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies 
-met die <font color="#ff0000">&lt;b&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b&gt;</font>-dialoogkassie. 
-Kies <font color="#ff0000">&lt;i&gt;</font>Opstelling<font color="#ff0000">&lt;/i&gt;</font> 
+  <p>可以使用<a href="menu.html#shortcuts">键盘快捷方式</a>将翻译记忆匹配从匹配视窗插入到目标区域中:</p>
 
-&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i&gt;</font> 
-op die kieslys. Die lettertipe én die lettergrootte kan met dié 
-dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
-</p>
+  <ul>
+    <li>
+      <p>按 <code>Ctrl+I</code> 将预选中的匹配插入当前光标位置，或者……</p>
+    </li>
 
-<a name="Tag_verification"></a>
-<h3>b. 标记验证</h3>
+    <li>
+      <p>按 <code>Ctrl+R</code> 键用预选中匹配覆盖整个片段。</p>
+    </li>
+  </ul>
 
-<p>OmegaT 不会对翻译文档中的错误标签进行自动检测。因此在将文档交付给客户之前，你必须检查标签的错误。</p>
+  <p>如果发现了多个匹配，而您又不想使用预选中的匹配：</p>
 
-<p>从菜单中选择 <strong>工具 → 检验标签</strong> 。将会显示一个表格显示哪些片段中源和目标的标签不一致。点击片段编号。</p>
+  <ul>
+    <li>
+      <p>在匹配视窗中选择喜欢的匹配：<code>Ctrl+2</code> 选择第二个显示出匹配，<code>Ctrl+3</code> 选择第三个匹配，依此类推。</p>
+    </li>
 
-<p>你将会在编辑器中自动前往错误片段，然后你就可以纠正错误的标签了。</p>
+    <li>
+      <p>然后像刚才那样使用 <code>Ctrl+I</code> 或者 <code>Ctrl+R</code> 快捷键。</p>
+    </li>
+  </ul>
 
-<p>某些时候，错误的标签甚至可能导致文档无法打开。在创建翻译文档之前，你必须保证已经修正了所有的标签错误。</p>
+  <p>（您可以让 OmegaT 打开片段时自动插入任何高于特定匹配百分比的第一个匹配。可以通过 <strong>选项 → <a href=
+  "translationEditing.html">编辑行为……</a></strong>来设置该选项）</p>
 
-<p>最后，你应该总是通过在相关的翻译文档阅读器或者编辑器中反复检查最终格式。</p>
+  <h3><a name="gloss_matches" id="gloss_matches"></a>词汇表和词典匹配</h3>
 
-<hr>
-<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
+  <p>项目中可能包含的<a href="glossaries.html">词汇表</a>和词典中的匹配术语将在词汇和字典显示窗格以供参考。&nbsp;</p>
 
+  <h3><a name="searches" id="searches"></a>使用检索功能</h3>
+
+  <p>OmegaT 提供了强大的<a href="searches.html">搜索</a>功能。使用 <code>Ctrl+F</code> 调出搜索窗口，在“查找”文本框输入要搜索的单词或短语。此外，还可以在编辑区域（激活片段的目标文本）选择一个单词或短语，然后按<code>Ctrl+F</code>键。在该情况下，单词或者短语将会自动输入到“查找”文本框中。</p>
+
+  <h3>使用谷歌翻译</h3>如果激活了该功能，在<a href="GoogleTranslate.html">谷歌翻译</a>窗格中将自动获得一个当前片段的翻译建议。可以通过 <code>Ctrl+M</code> 将其插入到目标片段中。<h3><a name="create_trans" id="create_trans"></a>创建已译文档</h3>
+
+  <p>完成所有片段的翻译之后（如果愿意的话，也可在更早的时候），OmegaT将会使用翻译记忆中储存的记忆更新目标文档。要完成这项工作，请选择菜单 <strong>项目 → 创建已译文档</strong>。OmegaT 将会为项目源文件夹中所有可翻译文档创建已译版本，无论它们是否已经被完整翻译。被完整或部分翻译的文件将会被保存到项目的目标文件夹中。为终结翻译工作，可用相关的应用程序打开目标文件（浏览器、字处理器……）对翻译成果的内容和格式进行检查。然后，可以回到 OmegaT 进行任何必须的修正工作，但不要忘记重新创建已译文档。</p>
+  <hr>
+
+  <h2><a name="tags" id="tags"></a>如何处理标记［Tagged］文本</h2>
+
+  <p>OmegaT 使用 <a href=
+  "formattedText.html#intro">特殊标签</a> 做标记以确保源文档的格式（如加粗、斜体等）不会丢失。OmegaT 标记由一个或多个字母加上一个或多个数字的组成，使用 "/" 字符来封闭（例如 &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; 等等）。您必须小心处理这些标记，以确保它们以正确的风格出现在目标片段中（参阅 <a href=
+  "formattedText.html#Tag_operations">tag 操作</a>）。</p>
+
+  <h3><a name="example" id="example"></a>一个例子……</h3>
+
+  <p>在这些例子中，为了让标签更容易看到，我们将它们突出显示，但是在 OmegaT 中它们并不会被突出显示。以 <font color="#0000FF">蓝色</font> 突出显示的 HTML 标记在 OmegaT 中将会被忽略，因为它们完整地包围了片段。以 <font color=
+  "#008000">绿色</font> 突出显示的标记必须由 OmegaT 进行处理，因为它们出现在片段之内。下面是一个 HTML 中的片段例子：</p>
+
+  <p><code><font color="#0000FF">&lt;p&gt;</font>A different display font can
+  be selected via the <font color="#008000">&lt;b&gt;</font>Display
+  Font<font color="#008000">&lt;/b&gt;</font>dialog. Open it via
+  the <font color="#008000">&lt;i&gt;</font>Settings<font color=
+  "#008000">&lt;/i&gt;</font> →<font color="#008000">&lt;i&gt;</font>Display
+  Font...<font color="#008000">&lt;/i&gt;</font> menu item. The font type and
+  size can be changed from the dialog.<font color=
+  "#0000FF">&lt;/p&gt;</font></code></p>
+
+  <p><br></p>
+
+  <p>下面是 OmegaT 如何以南非荷兰语译文来显示它们：</p>
+
+  <p><br>
+  <br></p>
+
+  <p><img src="images/tagged_segment.png" name="graphics6" alt="标记片段"
+  id="graphics6" align="bottom" border="0"></p>
+
+  <p><br>
+  <br></p>
+
+  <p>当 OmegaT 创建已译文档时，HTML 看起来将会像下面的样子：</p>
+
+  <p><img src="images/tagged_segment_target.png" name="graphics5" alt=
+  "标记片段 - 目标" id="graphics5" align="bottom" border="0"></p>
+
+  <h3><a name="tag_verif" id="tag_verif"></a>标记验证</h3>
+
+  <p>OmegaT 不会对翻译文档中的错误标签进行自动检测。因此在将文档交付给客户之前，您必须检查标签的错误。从菜单中选择 <strong>工具 → <a href=
+  "formattedText.html#tag_validation">检验标签</a></strong> 。将会使用一张表格来显示原文和目标的哪些片段的标签不一致。点击片段编号。编辑器将把您自动带到错误片段处，然后你就可以纠正错误的标签了。按 <code>回车键</code> 验证已纠正的片段，并通过再次按下 <code>Ctrl-T</code> 键检查更正的内容。</p>
+
+  <p>某些情况下，错误的标签甚至可能导致文档无法打开。因此，在创建翻译文档之前，你必须保证已经修正了所有的标签错误。最后一点，你应该总是通过相关的阅读或编辑器打开已译文档来仔细检查最终格式。</p>
+  
+  <p>在一些编程语言（如PHP的，C）中，特殊标记被组合用作 printf 函数的字符串占位符。如果激活了该功能，OmegaT 可以检测并检验这些标签。从菜单中选择 <strong>选项 → <a href="formattedText.html#printf">标签检验……</a></strong>。您可以在简单和完整检验间进行选择。在简单检验模式下，只有简单的可能占位符变量值将会被使用。在源代码不包含复杂、繁复的占位符，且你获得很多误报的情况下，该模式将会很有帮助。</p>
+  <hr>
+
+  <table style="width: 100%;" summary="只有格式" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a></td>
+
+        <td style="text-align: center;"><a href="index.html">首页</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

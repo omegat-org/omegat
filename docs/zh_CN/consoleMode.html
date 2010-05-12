@@ -1,0 +1,62 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>控制台模式 - OmegaT 2.1 用户手册</title>
+</head>
+
+<body>
+  <h1>OmegaT 控制台模式</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">先决条件</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">以终端模式启动</a></p>
+    </li>
+
+  </ul>
+  <p>&nbsp;</p>
+
+  <p>终端模式的目的是将 OmegaT 用作脚本环境的翻译工具。在控制台模式下，将不会载入任何图形化界面（因此仅在某控制台中运行）。根据运行模式的不同，给定的项目将会自动翻译或创建一份伪翻译译法记忆。</p>
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>先决条件</h3>
+
+  <p>为运行 OmegaT ，必须存在一个有效的 OmegaT 项目。位置并不重要，因为无论如何启动时你都必须将位置添加到命令行。</p>
+
+  <p>如果需要变更设置，必须提供配置文件。可通过两种方式达到这个目的：</p>
+
+  <ol>
+    <li>正常运行 OmegaT（带图形用户界面）并进行设置。如果您以终端模式启动 OmegaT，它将使用同样的设置。如果您无法正常运行 OmegaT（没有可用的图形化环境）：</li>
+
+    <li>可将另一机器上的 OmegaT 安装的设置文件拷贝到特定的目录。位置并不重要，因为无论如何，启动时你都必须将位置添加到命令行。相关的文件是可在用户注目录找到的 filters.conf 和 segmentation.conf （如：Windows 环境中的 C:\Documents and Settings\%User%\OmegaT 或 Linux 环境下的   %user%/.omegat/ ）。</li>
+  </ol><br>
+
+  <h3><a name="start" id="start"></a>以终端模式启动</h3>
+
+  <p>要以终端模式启动 OmegaT，必须在启动时传入额外的参数。必须的参数包括：<code>&lt;project-dir&gt;</code> 和 <code>--mode=&lt;mode&gt;</code>.</p>
+
+  <p>根据模式的不同，必须（或者能够）提供附加的参数。参阅 <a href="commandlineArguments.html">命令行参数</a> 获取更多信息。</p>
+
+  <p>翻译项目的例子： <br><code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code><br>单位文件的翻译项目例子：<br><code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate --source-pattern=test\.html</code><br>创建伪翻译 TMX 的例子:<br><code>java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code></p>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="只有格式">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a></td>
+
+        <td style="text-align: center;"><a href="index.html">首页</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

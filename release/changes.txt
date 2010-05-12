@@ -350,7 +350,7 @@ as a repetition in Match Statistics
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 3
-  3 Enhancements
+  4 Enhancements
   4 Bugfixes
 ----------------------------------------------------------------------
 2.0.5 update 3 vs. 2.0.5 update 2
@@ -365,6 +365,8 @@ as a repetition in Match Statistics
 
   Other enhancements:
   - Russian localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
+  - Simplified Chinese localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
+    (backported from 2.1.x)
 
   Bug Fixes:
 

@@ -1,113 +1,99 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Working with Plain Text - OmegaT 1.6.1 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>处理纯文本- OmegaT 2.0 用户手册</title>
 </head>
+
 <body>
+  <h2>处理纯文本</h2>
 
-<h1>处理纯文本</h1>
+  <ul>
+    <li><a href="#Plain_Text_in_OmegaT">缺省编码</a></li>
 
-<h2>内容</h2>
+    <li><a href="#Garbled_displays_3F">显示乱码</a></li>
 
-<ul type="none">
-   <li>1. <a href="#Plain_Text_in_OmegaT">OmegaT中的纯文本文件</a></li>
+    <li><a href="#Character_sets_and_encoding">字符设置和编码</a></li>
 
-   <li>2. <a href="#Garbled_displays_.3F">混乱的显示？</a>
+    <li><a href="#The_OmegaT_solution">OmegaT 解决方案</a></li>
+  </ul>
+  <hr>
+  <a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
 
-      <ul type="none">
-         <li>2.1. <a href="#Character_sets_and_encodings">字符集和编码</a></li>
-         <li>2.2. <a href="#The_OmegaT_solution">OmegaT 解决方案</a></li>
-      </ul>
-   </li>
-</ul>
+  <h2>缺省编码</h2>
 
-<a name="Plain_Text_in_OmegaT"></a>
-<h2>OmegaT中的纯文本文件</h2>
+  <p>纯文本文件——多数情况下其名称以 <code>.txt</code> 结尾。扩展名 —— 只包含文本信息。目前还没有明确的办法告诉计算机该文件包含了何种语言的内容。在（非常）简单的情况下，这意味着计算机将会假定该文本写入时使用了计算机所使用相同语言。</p>
+  <hr>
+  <a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
 
-<p>纯文本文件只包含文本信息。纯文本文件无法让计算机知道它使用了何种语言。大概上说来，这意味着计算机缺省地认为其中的内容和计算机自身使用的语种相同。</p>
+  <h2>显示乱码</h2>
 
-<p>在大多数情况下，纯文本文件以<strong>.txt</strong>作为文件名的结尾。</p>
+  <p>如果你是俄罗斯人，非常有可能你的计算机也使用俄文工作，菜单是俄文的，你打开的文件也是俄文的等等。在多数情况下，计算机通常使用对文件的内容作出正确的假设：只包括俄文而且俄文字符都能够显示所有内容。</p>
 
-<a name="Garbled_displays_.3F"></a>
-<h2>混乱的显示？</h2>
+  <p>现在，如果你是一位俄国翻译要翻译日文，你将会获得日文文件，如果它们是<strong>纯文本</strong> 文件，计算机将会认为它们只包含俄文。因为在文件中没有任何信息向计算机指出该文件是用何种语言书写的。日文文件内容可能是：</p>
 
-<p>如果你是俄罗斯人，非常有可能你的计算机也使用俄文工作，菜单是俄文的，你打开的文件也是俄文的等等。在多数情况下，计算机通常使用对文件的内容作出正确的假设：只包括俄文而且俄文字符都能够显示所有内容。</p>
+  <p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p><br>
 
-<p>现在，如果你是一位俄国翻译要翻译日文，你将会获得日文文件，如果它们是<strong>纯文本</strong> 文件，计算机将会认为它们只包含俄文。因为在文件中没有任何信息向计算机指出该文件是用何种语言书写的。</p>
+  <p>由于期待内容为俄文，你的文字编辑软件非常可能将它显示为下面这个样子：</p>
 
-<p>日文文件内容可能是：</p>
+  <p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</p><br>
 
-<pre>   OmegaTとは、コンピュータを利用した翻訳ツールです。</pre>
+  <p>然而，这绝对不是俄文，它是被错误显示为俄文字符的日文字符。</p>
 
-<p>但你的文本不久前可能会很好地以下列方式显示它们：</p>
+  <p>和其它应用程序一样，OmegaT 也遇到了这个问题。它只能假定默认的 <strong>纯文本</strong> 文件可以使用系统缺省设置来显示。当计算机的工作环境为法文而所翻译的文件为英文的情况下，或者计算机使用德文而要处理的文件为意大利文时，这没有问题。</p>
+  <hr>
+  <a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
 
-<pre>   OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</pre>
+  <h2>字符设置和编码</h2>
 
-<p>因为它假定文件内容是俄文的……但这确实不是俄文。日文字符被错误地当作了俄文显示。</p>
+  <p>为什么 OmegaT 在英语和法语环境下工作情况正常而在俄语和日语下就不行呢？因为英语和法语共享同一个通用 <strong>字符集</strong>。名为 <strong>Latin-1</strong> 或者其它变种。直到最近，俄语和日语还没有通用的字符集。当前绝大多数俄语字符集和日语字符集互不覆盖。结果就是上面你所看到的。</p>
 
-<p>OmegaT 也不例外。OmegaT 认为 <strong>纯文本</strong> 文件包含的文本可以使用计算机缺省设置自动显示。这种方式在你的计算机在法语环境工作而你翻译英文文件，或者你的计算机在德语环境工作而你得到意大利语文件时是运行得很好。</p>
+  <p>日本客户使用日语计算机，并创建包含日语的文本文件。而客户计算机所选择的字符集取决于操作系统或其他的设置，但所选的日语字符集不太可能被俄语计算机正确识别。</p>
 
-<a name="Character_sets_and_encodings"></a>
-<h3>字符集和编码</h3>
+  <p>指定字符集的文本信息是如何进行物理转换（即计算机用于解释和显示文本的数字编码是什么）取决于 <strong>编码</strong>。当计算机读入文件时，它根据编码方式对信息进行“译码”，并采用相应的字符集显示。总体上来说，一种编码往往对应一种字符集……</p>
+  <hr>
+  <a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
 
-<p>为什么OmegaT在英语和法语环境下工作情况正常而在俄语和日语下就不行呢？因为英语和法语共享同一个标准<strong>字符集</strong>。也就是<strong>Latin-1</strong>,或者它的变体。</p>
+  <h2>OmegaT 解决方案</h2>
 
-<p>直到最近，俄语和日语还没有共同的字符集。当前绝大多数俄语字符集和日语字符集互不覆盖。结果就是上面所显示的那样。</p>
+  <p>基本上，OmegaT 中有三种方法来解决这个问题。它们都与 <strong>选项</strong> 菜单中的 <a href="fileFilters.html">文件管理器</a> 应用程序相关。</p>
 
-<p>日本客户使用日语计算机，并创建包含日语的文本文件。而客户计算机所选择的字符集取决于操作系统或其他的设置，但所选的日语字符集不太可能被俄语计算机正确识别。</p>
+  <ol>
+    <li>给 <strong>纯文本</strong> 文件——即以 <code>.txt</code> 为扩展名的文件——指定编码：在 <a href="fileFilters.html">文件过滤器</a> 对话框的 <strong>文本文件</strong> 部分，将 <strong>源文件编码</strong> 从 <strong>&lt;自动&gt;</strong> 修改为 <code>.txt</code> 文件对应的编码。</li>
 
-<p>目前，指定字符集的文本信息的物理传输（如何 <strong>写入</strong> 文件让计算机来识别和显示）取决于 <strong>编码</strong>。当计算机读入文件时，它根据编码方式对信息进行“译码”，并采用字符集显示。总体上来说，一种编码往往对应一种字符集……</p>
+    <li>修改纯文本文件的扩展名（例如，为日文纯文本文件将 <code>.txt</code> 修改为 <code>.jp</code>:&nbsp;在 <a href=
+    "fileFilters.html">文件过滤器</a> 对话框的 <strong>文本文件</strong> 部分，新增一个新的 <strong>源文件名模式</strong> (比如 <code>*.jp)&nbsp;</code> 并为该源文件和目标文件选择对应的参数。</li>
 
-<a name="The_OmegaT_solution"></a>
-<h3>OmegaT 解决方案</h3>
+    <li>将文件编码修改为 Unicode:&nbsp;使用能够正确解析编码的文本编辑器打开源文件，并使用 "UTF-8" 编码保存文件。将文件扩展名由 <code>.txt</code> 修改为 <code>.utf8</code>。 OmegaT 将会自动将文件解析为 UTF-8 文件。</li>
+  </ol>
 
-<p>OmegaT采用3种方法来解决这个问题。</p>
+  <p>缺省情况下，OmegaT 使用下面的短名单帮助你处理一些纯文本文件：</p>
 
-<ol>
-   <li>极端方法：<ul>
-         <li>告诉OmegaT使用<strong>.txt</strong>结尾的 <strong>纯文本</strong> 文件必须用你制定的编码识别。</li>
-      </ul>
-   </li>
+  <ul>
+    <li><code>.txt</code> 文件自动 (<strong>auto</strong>) 被 OmegaT 以计算机缺省的编码进行识别。</li>
 
-   <li>可选方法：<ul>
-         <li>将纯文本文件改成你喜欢的“外国”文件名（例如：something.japanese ）；</li>
+    <li><code>.txt1</code> 文件是用 ISO-8859-1 编码的文件，覆盖了绝大多数 <strong>西欧</strong> 语言。</li>
 
-         <li>并告诉OmegaT所有以".japanese" 结尾的文件必须以指定的编码进行识别。</li>
-      </ul>
-   </li>
+    <li><code>.txt2</code>  文件是用 ISO-8859-2 编码的文件，覆盖了绝大多数 <strong>中东欧</strong> 语言。</li>
 
-   <li> "Unicode" 方法：<ul>
-         <li>在能够正确识别你的“外语”文件编码的文字编辑器中打开文件（或者在错误中不断尝试）；</li>
+    <li>&lt;s0&gt;.utf8&lt;/s0&gt; 文件被 OmegaT 以UTF-8编码（一种几乎覆盖了 世界上<strong>所有</strong> 语言的编码）识别。</li>
+  </ul>
 
-         <li>然后以 "UTF-8" 编码保存文件。</li>
+  <p>可以通过在 <strong>选项</strong> 菜单中选择 <strong>文件过滤器</strong> 菜单项来自己看看是不是这样。比方说，当你拿到一份捷克文本文件（非常有可能使用 <strong>ISO-8859-2</strong> 编码编写），你仅需将扩展名 <code>.txt</code> 修改为 <code>.txt2</code> ，而 OmegaT 将会正确地解析其内容。当然，如果你希望更加安全，可以将这类文件转换为 Unicode，即 .utf8 文件格式。</p>
+  <hr>
 
-         <li>将文件名从 <strong>something.txt</strong> 改为 <strong>something.utf8</strong>. OmegaT 将会把它当作UTF-8文件来识别。</li>
-      </ul>
-   </li>
-</ol>
+  <table style="width: 100%;" summary="只有格式" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律声明</a></td>
 
-<p>当前，OmegaT以下列方式来识别纯文本文件：（你可以通过选择菜单<strong>选项</strong>中的<strong>文件过滤器</strong>自己检查一下点击 <strong>文本文件</strong> 列然后点击 <strong>编辑</strong> 按钮）</p>
+        <td style="text-align: center;"><a href="index.html">首页</a></td>
 
-<ul>
-   <li>
-      <strong>.txt</strong> 文件自动 (<strong>auto</strong>) 被OmegaT以计算机缺省的编码进行识别。</li>
-
-   <li>
-      <strong>.txt1</strong> 文件被OmegaT以ISO-8859-1编码识别（一种覆盖了绝大多数 <strong>Western Europe</strong> 语言的编码）。</li>
-
-   <li>
-      <strong>.txt2</strong> 文件被OmegaT以ISO-8859-2编码识别（一种覆盖了绝大多数 <strong>中欧和西欧</strong> 语言的编码）。</li>
-
-   <li>
-      <strong>.utf8</strong> 文件被OmegaT以UTF-8编码（一种几乎覆盖了 世界上<strong>所有</strong> 语言的编码）识别。</li>
-</ul>
-
-<p>当然，<strong>.txt1</strong>, <strong>.txt2</strong>和 <strong>.utf8</strong> 文件扩展名在现实应用中并不存在。OmegaT 只为你们准备了一个简短的列表，来帮助你们更轻松地处理一些<strong>外国</strong>文件。</p>
-
-<p>因此，如果你手头有一个法语文件（如：<strong>in_french.txt</strong>）要在一台日语计算机上翻译，因为它很可能被创建为<strong>ISO-8859-1</strong> 编码文件，你知道只需要在文件名的尾部加上一个 <strong>1</strong> 变成 (<strong>in_french.txt1</strong>)，OmegaT就能正确地识别出它的内容是以 ISO-8859-1编码的……Et voilà!</p>
-
-<hr>
-<p><a href="legalNotices.html" title="法律注意事项">法律注意事项</a></p>
-
+        <td style="text-align: right;"><a href="xindex.html">内容索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

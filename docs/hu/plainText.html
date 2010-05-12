@@ -23,7 +23,8 @@
 
   <h2>Alapbeállítás szerinti kódolás</h2>
 
-  <p>Az egyszerű szöveges állományok legtöbbször <code>.txt</code>  kiterjesztésűek és kizárólag szöveget tartalmaznak. Az egyszerű szöveges állományokban nincs egyértelmű utasítás a számítógép számára arra vonatkozóan, hogy milyen nyelven íródtak. Ez nagyjából azt jelenti, hogy a számítógép abból indul ki, hogy a szöveg nyelve a számítógép alapbeállítása szerinti nyelvvel megegyezik.</p>
+  <p>
+Az egyszerű szöveges állományok legtöbbször <code>.txt</code>  kiterjesztésűek és kizárólag szöveget tartalmaznak. Az egyszerű szöveges állományokban nincs egyértelmű utasítás a számítógép számára arra vonatkozóan, hogy milyen nyelven íródtak. Ez nagyjából azt jelenti, hogy a számítógép abból indul ki, hogy a szöveg nyelve a számítógép alapbeállítása szerinti nyelvvel megegyezik.</p>
   <hr>
   <a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
 
@@ -57,13 +58,13 @@
 
   <h2>Az OmegaT által kínált megoldás</h2>
 
-  <p>A helyzet kezelésére az OmegaT három alapvető megoldást kínál. Ezek mindegyike <a href="fileFilters.html">állományszűrők</a>  alkalmazását feltételezi a <strong>Beállítások</strong> menüben.</p>
+  <p>A helyzet kezelésére az OmegaT három alapvető megoldást kínál. Ezek mindegyike az <a href="fileFilters.html">állományszűrők</a> alkalmazását feltételezi a <strong>Beállítások</strong> menüben .</p>
 
   <ol>
-    <li>Adja meg <strong>egyszerű szöveges</strong> állományainak - azaz a <code>.txt</code> kiterjesztésűeknek a kódolását az <strong>Egyszerű szövegek</strong> párbeszédablakban az <a href="fileFilters.html">állományszűrők</a> alatt, éspedig úgy, hogy a <strong>Forrásállomány kódolását</strong> <strong>&lt;auto&gt;</strong>-ról arra az értékre módosítja, amelyik megfelel <code>.txt</code> kiterjesztésű forrásállománynak.</li>
+    <li>Adja meg <strong>egyszerű szöveges</strong> állományainak - azaz a <code>.txt</code> kiterjesztésűeknek a kódolását az <strong>Egyszerű szövegek</strong> párbeszédablakban az <a href="fileFilters.html">állományszűrők</a> alatt, éspedig úgy, hogy módosítja a <strong>Forrásállomány kódolását</strong> <strong>&lt;auto&gt;</strong>-ról arra az értékre, amelyik megfelel <code>.txt</code> kiterjesztésű forrásállományának.</li>
 
     <li>Módosítsa egyszerű szöveges állományainak kiterjesztését (például japán szöveg esetén <code>.txt</code>-ről <code>.jp</code>-re):&nbsp;Az <strong>Egyszerű szövegek</strong> párbeszédablakban az <a href=
-    "fileFilters.html">állományszűrők</a> alatt vegyen fel egy új <strong>névmintát a forrásállományhoz</strong> (például <code>*.jp)&nbsp;</code> és válassza ki a megfelelő kódolásokat a forrásnyelvhez és a célnyelvhez. </li>
+    "fileFilters.html">állományszűrők</a> alatt vegyen fel egy új <strong>névmintát a forrásállományhoz</strong> (például <code>*.jp)&nbsp;</code> és válassza ki a megfelelő kódolásokat a forrásnyelvhez és a célnyelvhez.</li>
 
     <li>Állományainak kódolását módosítsa unikódra:&nbsp;nyissa meg a forrásállományt egy olyan szövegszerkesztőben, amely megfelelően kezeli annak kódolását, majd mentse el az állományt "UTF-8" kódolásban. Az állomány kiterjesztését módosítsa <code>.txt</code>-ről <code>.utf8</code>-ra. Az OmegaT az állományt UTF-8 kódolású állományként fogja kezelni.</li>
   </ol>

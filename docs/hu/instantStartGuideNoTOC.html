@@ -9,7 +9,7 @@
 <body>
   <h2>Vegye használatba az OmegaT-t 5 percen belül!<br> - Útmutató az azonnali kezdéshez</h2>
 
-  <p>Ez az azonnali kezdéshez való útmutató csak a legelemibb ismereteket tárgyalja. Minden felhasználónak elolvasásra ajánljuk, mert megtudhatja belőle mindazt, amit az OmegaT számára tartogat. Az itt leírt gyorsbillentyűket a "ctrl+billentyű" kombinációval, Mac esetén a "cmd+billentyű" kombinációval használhatja. A "cmd" billentyű az "alma"-jel az Apple klaviatúráján.</p>
+  <p>Ez az azonnali kezdéshez való útmutató csak a legelemibb ismereteket tárgyalja. Minden felhasználónak elolvasásra ajánljuk, mert megtudhatja belőle mindazt, amit az OmegaT az ő számára tartogat. Az itt leírt gyorsbillentyűket a "ctrl+billentyű" kombinációval, Mac esetén a "cmd+billentyű" kombinációval használhatja. A "cmd" billentyű az "alma"-jel az Apple klaviatúráján.</p>
   <hr>
   <a name="summary" id="summary"></a>
 
@@ -23,7 +23,7 @@
   <hr>
   <a name="translate" id="translate"></a>
 
-  <h2>Hogyan fordíthat az OmegaT-vel?</h2><a name="create" id="create"></a>
+  <h2>Hogyan fordíthat az OmegaT-vel</h2><a name="create" id="create"></a>
 
   <h3>Új projekt létrehozása és megnyitása</h3>
 
@@ -34,7 +34,7 @@
   <p>Az OmegaT a létrehozandó projektmappák megerősítésére vagy módosítására az alábbi párbeszédablakot használja:</p>
 
   <p align="center"><img src="images/NewProject.png" name="graphics1" alt=
-  "A Projektbeállítások ablak" id="graphics1" align="bottom" border="0"></p>
+  "Projektbeállítások ablaka" id="graphics1" align="bottom" border="0"></p>
 
   <p>Elfogadhatja az almappák felkínált helyét, de előtte ellenőrizze, hogy a forrásnyelvi és a célnyelvi kódok helyesek-e. A lenyíló listából válassza ki a nyelvi kódot (2 betűs) vagy a nyelvi- és régiókódot (2 + 2 betűs), vagy írja be őket (a a nyelvi kód 2 vagy 3 betűs lehet). Jegyezze meg a 'target' almappa helyét (ahová a lefordított szövegek kerülnek majd). Ha "bekezdésenkénti" szövegdarabolás helyett mondatonkéntit szeretne használni, ellenőrizze a szövegdarabolási szabályokat.</p>
 
@@ -76,21 +76,31 @@
 
   <h3>Szövegrészek fordítása egyesével</h3>
 
-  <p>Ha meghatározta a projektet és a fordítandó állományokat, az OmegaT a szerkesztőben megnyitja az első forrásszöveget. Az első szövegegység zöld színnel kiemelve látható; alatta a célnyelvi mezőben megismétlődik a forrásszöveg. (Ekkor a célnyelvi mezőn kívüli összes szöveg zárolva van és nem módosítható.) A <code>&lt;0001. egység&gt;</code> és az <code>&lt;egység vége&gt;</code> címkék közé kell beírnia a fordítást a forrásszöveg felülírásával. A következő egységre az "<strong>ENTER</strong>" lenyomásával térhet át. Megjegyzés:</p>
+  <p>Ha meghatározta a projektet és a fordítandó állományokat, az OmegaT a szerkesztőben megnyitja az első forrásszöveget. Az első szövegegység zöld színnel kiemelve látható; alatta a célnyelvi mezőben megismétlődik a forrásszöveg. (Ekkor a célnyelvi mezőn kívüli összes szöveg zárolva van és nem módosítható.) A <code>&lt;0001. egység&gt;</code> és az <code>&lt;egység vége&gt;</code> címkék közé kell beírnia a fordítást a forrásszöveg felülírásával. A következő szövegegységre az "<strong>ENTER</strong>" lenyomásával térhet át. Megjegyzés:</p>
 
   <ul>
     <li>Bármely, akár feljebb, akár lejjebb lévő szövegrészre áttérhet, ha kétszer rákattint a megnyitni kívánt mondatra vagy bekezdésre.</li>
 
     <li>Ha inkább üres célnyelvi mezőbe szeretné beírni a fordítást, módosítsa ennek megfelelően a <strong>Beállítások → Szerkesztési mód...</strong> beállítását.</li>
+
+    <li>
+      <p>A főmenü <span style="font-weight: bold;">Nézet</span> menüpontjából módosíthatja a szerkesztőablak beállításait (pl. azt, hogy látsszon-e a forrásnyelvi szöveg, hogyan jelenjen meg a lefordított szöveg stb.).</p>
+    </li>
   </ul>
 
   <p>Az "<strong>ENTER</strong>" megnyomásakor több dolog történik a háttérben: az OmegaT a szövegegységpárt (a forrást és annak fordítását) hozzáadja a fordítási memóriához és automatikusan lefordítja az összes ezzel egyező, de más projektfájlokban fellelt szöveget. Ezen túl végignézi a fordítási memóriát és a szójegyzéket, nincs-e bennük egyezés a következő lefordítatlan szövegegységgel.</p><a name="tm" id="tm"></a>
 
-  <h3>A fordítási memória, valamint a szójegyzékek és a szótárak egyezéseinek felhasználása</h3><a name="tm_matches" id="tm_matches"></a>
+  <h3>A fordítási memória, a szójegyzékek és a szótárak egyezéseinek felhasználása</h3><a name="tm_matches" id="tm_matches"></a>
 
   <h3>Egyezések a fordítási memóriában</h3>
 
-  <p>Ha az OmegaT a fordítási memóriában bizonytalan (30% vagy azt meghaladó mértékű) egyezést talál a következő szövegdarabhoz, akkor megjeleníti azokat a Bizonytalan egyezések ablakban. Alaphelyzetben a Bizonytalan egyezések ablakból az első egyezést választja ki. Ha valamely egyezést a célnyelvi mezőbe kíván beszúrni, használhatja az alábbi gyorsbillentyűket:</p>
+  <p>Ha az OmegaT a fordítási memóriában  a következő szövegegységhez bizonytalan (30% vagy azt meghaladó mértékű) egyezést talál, akkor megjeleníti azokat a Bizonytalan egyezések ablakban. Alaphelyzetben a Bizonytalan egyezések ablakból az első egyezést választja ki.</p><img src=
+  "images/MatchesPane.png" name="graphics4" alt="Egyezések panel" id="graphics4"
+  style="border: 0px solid ;"><br clear="left">
+
+  <p><br></p>
+
+  <p>Ha egy egyezést a célnyelvi mezőbe kíván beszúrni, használhatja az alábbi gyorsbillentyűket:</p>
 
   <ul>
     <li>A <code>Ctrl+I</code> lenyomásával a kiválasztott egyezést beszúrja a kurzor helyére, illetve...</li>
@@ -106,25 +116,25 @@
     <li>Ezután használhatja a <code>Ctrl+I</code> vagy a <code>Ctrl+R</code> gyorsbillentyűket a fent leírtak szerint.</li>
   </ul>
 
-  <p>(Arra is utasíthatja az OmegaT-t, hogy bármely megadott százalék fölötti egyezést automatikusan szúrjon be a célnyelvi mezőbe, ha a szövegdarab megnyílik. Ezt a lehetőséget a <strong>Beállítások → Szerkesztési mód...</strong> pontban állíthatja be.)</p><a name="gloss_matches" id="gloss_matches"></a>
+  <p>(Arra is utasíthatja az OmegaT-t, hogy bármely megadott százalék fölötti egyezést automatikusan szúrjon be a célnyelvi mezőbe, ha a szövegdarab megnyílik. Ezt a lehetőséget a <strong>Beállítások → Szerkesztési mód... pontban állíthatja be.</strong>)</p><a name="gloss_matches" id="gloss_matches"></a>
 
   <h3>A szójegyzékek és a szótárak egyezései</h3>
 
-  <p>Tájékozódás céljából a projektbe felvett szójegyzékekben és szótárakban fellelhető egyezéseket a Szójegyzék és a Szótár panel jeleníti meg.&nbsp;</p><a name="searches" id="searches"></a>
+  <p>Tájékozódás céljából a projektbe felvett szójegyzékekben és szótárakban fellelhető egyezéseket a Szójegyzék és a Szótár panel jeleníti meg.</p><a name="searches" id="searches"></a>
 
   <h3>Keresések</h3>
 
-  <p>Az OmegaT kiterjedt keresési lehetőségeket biztosít. A Keresés ablakot hívja elő a <code>Ctrl+F</code>-fel és a "Keresendő" mezőbe írja be a megkeresendő szót vagy kifejezést. Másik megoldásként jelölje ki a szerkesztőmezőben (az éppen fordítandó szöveg célnyelvi mezőjében) a keresendő szót vagy kifejezést, majd használja a <code>Ctrl+F</code> billentyűkombinációt. A kijelölt szó vagy kifejezés ekkor automatikusan belekerül a "Keresendő" mezőbe.</p>
+  <p>Az OmegaT kiterjedt keresési lehetőségeket biztosít. A Keresés ablakot hívja elő a <code>Ctrl+F</code>-fel és a "Keresendő" mezőbe írja be a megkeresendő szót vagy kifejezést. Másik megoldásként jelölje ki a szerkesztőpanelen a keresendő szót vagy kifejezést, majd használja a <code>Ctrl+F</code> billentyűkombinációt. A kijelölt szó vagy kifejezés ekkor automatikusan belekerül a "Keresendő" mezőbe.</p>
 
   <h3>A Google Translate használata</h3>
 
-  <p>A Google Translate panelen automatikusan megjelenik egy fordítási javaslat at aktuális szövegegységre vonatkozóan. A célnyelvi szövegbe való beszúrásra használja a <code>Ctrl+M</code> billentyűkombinációt.<br></p>
+  <p>A Google Translate ablakban automatikusan megjelenik egy fordítási javaslat az aktuális szövegegységre vonatkozóan. A célnyelvi szövegbe való beszúrásra használja a <code>Ctrl+M</code> billentyűkombinációt.<br></p>
 
   <p><a name="create_trans" id="create_trans"></a></p>
 
-  <h3>Lefordított állományok létrehozása</h3>
+  <h3>Lefordított állományok előállítása</h3>
 
-  <p>Ha minden szövegrészt lefordított (vagy akár már előtte), az  OmegaT a fordítási memóriában tárolt fordítások alapján frissíti a céldokumentumo(ka)t. Ehhez a menüsorról válassza ki a <strong>Projekt → Lefordított állományok létrehozása</strong> pontot. Az OmegaT előállítja a projekt forrásmappájában lévő összes állomány fordítását, akár teljesen elkészültek, akár nem. A teljesen vagy részben kész állományokat a projekt célmappájába (target) menti. A fordítás befejezéséhez nyissa meg a célnyelvi szövegeket a velük használatos alkalmazásban (böngészőben, szövegszerkesztőben...), majd ellenőrizze a fordítás tartalmát és szerkesztését. Ezután visszatérhet az OmegaT-hez és elvégezheti a szükséges javításokat; ne feledkezzen el a lefordított szövegek végleges előállításáról.</p>
+  <p>Ha minden szövegrészt lefordított (vagy akár már előtte), az  OmegaT frissíti a céldokumentumo(ka)t a fordítási memóriában tárolt fordítások alapján. Ehhez a menüsorról válassza ki a <strong>Projekt → Lefordított állományok előállítása</strong> pontot. Az OmegaT előállítja a projekt forrásmappájában lévő összes állomány fordítását, akár teljesen elkészültek, akár nem. A teljesen vagy részben kész állományokat a projekt célmappájába (target) menti. A fordítás befejezéséhez nyissa meg a célnyelvi szövegeket a velük használatos alkalmazásban (böngészőben, szövegszerkesztőben...), majd ellenőrizze a fordítás tartalmát és szerkesztését. Ezután visszatérhet az OmegaT-hez és elvégezheti a szükséges javításokat; ne feledkezzen el a lefordított szövegek végleges előállításáról.</p>
   <hr>
   <a name="tags" id="tags"></a>
 
@@ -144,22 +154,23 @@
 
   <p>Ezt az OmegaT az alábbi módon jeleníti meg afrikaans fordítás esetén:</p><br>
 
-  <p><img src="images/tagged_segment.png" alt="" border="0" height="150" width=
-  "592"></p><br>
+  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
 
   <p>Amikor az OmegaT előállította a fordítást, a HTML ekként néz ki:</p>
 
-  <p><img src="images/tagged_segment_target.png" alt="" border="0" height="122"
-  width="592"></p><a name="tag_verif" id="tag_verif"></a>
+  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
+  "tag_verif" id="tag_verif"></a>
 
-  <h3>Címkék ellenőrzése</h3>
+  <h3>Címkék utóellenőrzése</h3>
 
   <p>Az OmegaT nem ellenőrzi automatikusan a lefordított dokumentumban lévő hibás címkéket. A szöveg leadása előtt Önnek kell ellenőriznie a címkék helyességét.</p>
 
-  <p>Válassza a menüből az <strong>Eszközök→ Címkék ellenőrzése </strong> pontot. Ekkor egy táblázat jelenik meg, amelyben látható, hol nem egyeznek a forrásnyelvi és célnyelvi címkék. Kattintson az egység számára. Ennek hatására automatikusan a szerkesztőben a hibás egységhez kerül, ahol kijavíthatja a hibás címkét. A kijavított egység ellenőrzéséhez nyomja meg az <span style="font-weight: bold;">Enter</span>-t, majd ellenőrizze véglegesen a <span style=
-  "font-weight: bold;">Control-T</span> újbóli megnyomásával.</p>
+  <p>Válassza a menüből az <strong>Eszközök→ Jelölő-ellenőrzés </strong>  pontot. Ekkor egy táblázat jelenik meg, amelyben látható, hol nem egyeznek a forrásnyelvi és célnyelvi címkék. Kattintson a szövegegység számára. Ennek hatására automatikusan a szerkesztőben a hibás szövegegységhez kerül, ahol kijavíthatja a hibás címkét. Hit <code>Enter</code> to validate the corrected segment and check the correction by pressing again <code>Control-T</code>.</p>
 
   <p>Egyes esetekben címkehiba miatt nem lehet a dokumentumot megnyitni. Ezért mindig javítsa ki a hibás címkéket, mielőtt előállítja a lefordított állományokat. Végezetül nyissa meg a böngészőben vagy a szerkesztőben a lefordított szöveget és ellenőrizze a végső formázást.</p>
+
+  <p>Egyes programozási nyelvekben (pl. PHP, C) speciális címkéket használnak helyőrzőként a printf függvénnyel kombinálva. Ha bekapcsolja ezt a funkciót, az OmegaT felderíti és ellenőrzi a címkéket. A menüből válassza ki a <strong>Beállítások→ Címkeellenőrzés...</strong> pontot. Választhat egyszerű és átfogó ellenőrzés közül. Egyszerű ellenőrzés esetén a rendszer a lehetséges helyőrzők értékeinek csak az egyszerűbb  változatait használja. Ez akkor jön kapóra, amikor a forráskódban nincsenek bonyolultabb helyőrzők, az eredményben pedig sok a téves találat.</p>
+
   <hr>
 </body>
 </html>

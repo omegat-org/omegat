@@ -1,7 +1,8 @@
 <html>
 <head>
-  <link rel="stylesheet" href="OmegaT.css " type="text/css">
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
   <title>Állományok és könyvtárak - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
 
@@ -41,46 +42,45 @@
 
   <h3><a name="project_location" id="project_location"></a>A fordítási projekt állományainak helye</h3>
 
-  <p>Amikor létrehoz egy fordítási projektet, az OmegaT automatikusan létrehoz egy sor könyvtárat a későbbi állományok tárolásához, továbbá különféle állományokat, amelyek a projekt beállításainak megadására és a projekt fordítási memóriájának tárolására szolgálnak. Alaphelyzetben a fordítási projekt könyvtárai a fő projektkönyvtár alá kerülnek. A könyvtárak helyét megadhatja a projekt létrehozása közben, illetve a fordítás folyamán. Ily módon munkavégzésének és megszokásának megfelelően adhat meg létező vagy hozhat létre új könyvtárakat. Ha a könyvtárak helyét a projekt létrehozása után kívánja módosítani, nyissa meg a <strong>Projekt → Beállítások...</strong> menüpontot és hajtsa végre a szükséges változtatásokat.</p>
+  <p>Amikor létrehoz egy fordítási projektet, az OmegaT automatikusan létrehoz egy sor könyvtárat a későbbi állományok tárolásához, továbbá különféle állományokat, amelyek a projekt beállításainak megadására és a projekt fordítási memóriájának tárolására szolgálnak. Alaphelyzetben a fordítási projekt könyvtárai a fő projektkönyvtár alá kerülnek. A könyvtárak helyét megadhatja a projekt létrehozása közben, illetve a fordítás folyamán. Ily módon munkavégzésének és megszokásának megfelelően adhat meg már létező, vagy hozhat létre új könyvtárakat. Ha a könyvtárak helyét a projekt létrehozása után kívánja módosítani, nyissa meg a <strong>Projekt → Beállítások...</strong> menüpontot és hajtsa végre a szükséges változtatásokat.</p>
 
   <h3><a name="project_list" id="project_list"></a>A fordítási projekt állományainak felsorolása</h3>
 
   <p>Amikor a fordítási projektet egy OmegaT által megnyitott párbeszédablakban nézi, a fordítási projekt egy hozzá társított OmegaT-ikonnal jelenik meg. Ugyanakkor egy fájlkezelővel ugyanaz a fordítási projekt semmiben sem különbözik a többi könyvtártól.</p>
 
   <p><br></p><img src="images/OmegaT_projects_and_subdirectories.png" name=
-  "grafika3" alt="Az OmegaT projektjei és alkönyvtárai" align="left" border="1"
-  id="grafika3"><br clear="left">
+  "grafika3" alt="Az OmegaT projektjei és alkönyvtárai" id="grafika3" align=
+  "left" border="1"><br clear="left">
 
   <p><br>
   <br></p>
 
   <p>Amikor egy OmegaT-ikonnal megjelölt elemet kiválaszt, megnyílik a hozzá tartozó projekt. Alaphelyzetben egy új alkönyvtárban létrejön egy <b>Example_Project</b> (Mintaprojekt) elnevezésű fordítási projekt, melynek felépítése a következő:</p>
 
-  <p>&nbsp;</p>
+  <p>&nbsp;</p><img src="images/Omegatproject.png" name="grafika1" alt=
+  "OmegaT projekt" id="grafika1" align="left" border="0"><br clear="left">
+  Amikor új projektbe kezd, a <b>dictionary</b> (szótár) és a <b>glossary&nbsp;</b> (szójegyzék) alkönyvtár üres. Ide kerülhetnek a projekthez esetleg már meglévő szótárak és szójegyzékek.
 
-  <ul>
-    <li><img src="images/Omegatproject.png" name="grafika1" alt=
-    "OmegaT projekt" align="left" border="0" id="grafika1"><br clear=
-    "left"></li>
-  </ul>Amikor új projektbe kezd, a <b>glossary</b> (szójegyzék) alkönyvtár üres. Ide kerülhetnek a projekthez esetleg már meglévő szójegyzékek.<h3>Omegat</h3>
+  <h3>Omegat</h3>
 
   <dl>
-    <dt>Az <b>omegat</b> alkönyvtár legalább két állományt tartalmaz: a <em>project_save.tmx</em> (<a href="translationMemories.html">...</a>) fordítási memóriát és a <em>project_stats.txt (<a href=
-    "userInterface.html#files">...</a>)</em>  statisztikát. A <em>project_save.tmx</em> tartalmazza a projekt fordítási memóriájának munkapéldányát. Bekapcsolt automatikus mentés esetén frissítése kilépéskor automatikusan megtörténik. Ez az a fordítási memória, amellyel a lefordított állományokat létrehozza. A későbbiek során számos project_save.tmx.<i>&lt;dátum és idő</i>&gt;.bak (<a href=
+    <dt>Az <b>omegat</b> alkönyvtár legalább két állományt tartalmaz: a <em>project_save.tmx</em> (<a href=
+    "translationMemories.html">...</a>) fordítási memóriát és a <em>project_stats.txt (<a href="userInterface.html#files">...</a>)</em>  statisztikát. A <em>project_save.tmx</em> tartalmazza a projekt fordítási memóriájának munkapéldányát. Bekapcsolt automatikus mentés esetén frissítése kilépéskor automatikusan megtörténik. Ez az a fordítási memória, amellyel a lefordított állományokat létrehozza. A későbbiek során számos project_save.tmx.<i>&lt;dátum és idő</i>&gt;.bak (<a href=
     "translationMemories.html#TMX_backup">...</a>) formátumú TMX-állomány jön létre ebben az alkönyvtárban. Ezek a projekt fordítási memóriájának biztonsági mentésére szolgálnak és a projekt egyes újbóli megnyitásakor jönnek létre, vagyis azt a tartalmat tükrözik, amely az adott munkafolyamat előtt volt érvényben.</dt>
 
     <dd>A <b>stats.txt</b> állomány az adott projektre vonatkozó statisztikát tartalmazza, a szövegrészekre és szószámra vonatkozó információkat egy táblázatkezelőben tekintheti meg. A benne szereplő információ részletesebb, mint amilyen a <em>Projektállományok</em> ablakban látható.</dd>
 
-    <dd><br clear="left">Az <strong>ignored_words.txt</strong> és a <strong>learned_words.txt</strong> állományok az OmegaT későbbi változataiban használandó helyesírás-ellenőrző számára vannak fenntartva.</dd>
+    <dd><br clear="left">
+    Az <strong>ignored_words.txt</strong> és a <strong>learned_words.txt</strong> állományok az OmegaT későbbi változataiban használandó helyesírás-ellenőrző számára vannak fenntartva.</dd>
   </dl>
 
-  <h3>Forrás (Source)</h3>
+  <h3>source (forrás)</h3>
 
   <dl>
     <dt>A source (forrás) alkönyvtárba kerülnek a fordítandó állományok. Megadhat egy új alkönyvtárat és állományokat adhat hozzá a projekt későbbi szakaszában, vagy használhatja a Projektállományok ablakban megjelenő menüpontot. A forrásszövegek alkönyvtárának kialakítása teljes mértékben Önre van bízva. Ha a lefordítandó állományok faszerkezetben vannak elrendezve, elegendő a legfelső alkönyvtárat megadnia, az OmegaT a faszerkezet megtartása mellett átmásolja az egészet.</dt>
   </dl>
 
-  <h3>Cél (target)</h3>
+  <h3>target (cél)</h3>
 
   <dl>
     <dd>Ha nyitott projekt mellett kiválasztja a <strong>Projekt → Lefordított állományok létrehozása</strong> menüpontot, a <strong>/source/</strong> alkönyvtár összes állománya - akár le vannak fordítva, akár nem - előáll a forráséval megegyező könyvtárszerkezetben, ily módon jelezve a teljes projekt lefordításának pillanatnyi állását. Gyakorlatilag az OmegaT egyesíti a <strong>/omegat/project_save.tmx</strong> állományban szereplő fordítási információkat a forrásszövegekkel és előállítja a <strong>/target/</strong> alkönyvtár célnyelvi állományait.</dd>
@@ -95,11 +95,9 @@
   <h3>omegat.project</h3>
 
   <dl>
-    <dd>Az OmegaT a projekt létrehozásakor automatikusan előállítja ezt az állományt Ez tartalmazza a <a href=
-    "projectProperties.html">projekt paramétereit</a>. A benne szereplő paramétereket a Beállítások menüből módosíthatja.</dd>
+    <dd>Az OmegaT a projekt létrehozásakor automatikusan előállítja ezt az állományt Ez tartalmazza a <a href="projectProperties.html">projekt paramétereit</a>. A benne szereplő paramétereket a Beállítások menüből módosíthatja.</dd>
 
-    <dt>project_name-omegat.tmx
-    (<a href=
+    <dt>project_name-omegat.tmx (<a href=
     "translationMemories.html#TMX_files_location_and_purpose">...</a>)<br>
     project_name-level1.tmx<br>
     project_name-level2.tmx</dt>
@@ -114,132 +112,140 @@
 
   <p>A felhasználói állományok külön helyre kerülnek, ahonnan az OmegaT bármely változata eléri őket. Az adott hely a használt operációs rendszertől függ:</p>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary="csak formázás">
+  <table summary="csak formázás" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
     <col width="33*">
     <col width="223*">
 
-    <tr valign="top">
-      <td width="13%">
-        <p>Windows</p>
-      </td>
+    <tbody>
+      <tr valign="top">
+        <td width="13%">
+          <p>Windows</p>
+        </td>
 
-      <td width="87%">
-        <dl>
-          <dd><strong>2000 és XP: Documents and Settings\&lt;Felhasználó&gt;\Application Data\OmegaT</strong></dd>
-          <dd><strong>Vista: Felhasználók\&lt;Felhasználó&gt;\AppData\Roaming\OmegaT</strong>
-          <dd><strong>Egyéb: &lt;Valami&gt;\OmegaT</strong> (A &lt;Valami&gt; a Java által meghatározott "home" könyvtárat jelenti.)</dl>
-      </td>
-    </tr>
+        <td width="87%">
+          <dl>
+            <dd><strong>2000 és XP: Documents and Settings\&lt;Felhasználó&gt;\Application Data\OmegaT</strong></dd>
 
-    <tr valign="top">
-      <td width="13%">
-        <dl>
-          <dt>
-          Linux/Solaris/FreeBSD</dt>
-        </dl>
-      </td>
+            <dd><strong>Vista: Felhasználók\&lt;Felhasználó&gt;\AppData\Roaming\OmegaT</strong></dd>
 
-      <td width="87%">
-        <dl>
-          <dd><strong>&lt;User Home&gt;/.omegat</strong> (az .omegat könyvtár, a név előtti pont miatt láthatatlan, kivéve, ha egy <code>ls -a</code> vagy azzal egyenértékű parancsot ír be.)</dd>
-        </dl>
-      </td>
-    </tr>
+            <dd><strong>Egyéb: &lt;Valami&gt;\OmegaT</strong> (A &lt;Valami&gt; a Java által meghatározott "home" könyvtárat jelenti.)</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="13%">
-        <dl>
-          <dt>MacOSX</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>Linux/Solaris/FreeBSD</dt>
+          </dl>
+        </td>
 
-      <td width="87%">
-        <dl>
-          <dd><strong>&lt;User
-          Home&gt;/Library/Preferences/OmegaT</strong></dd>
-        </dl>
-      </td>
-    </tr>
-    
-    <tr valign="top">
-      <td width="13%">
-        <dl>
-          <dt>Egyéb</dt>
-        </dl>
-      </td>
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User Home&gt;/.omegat</strong> (az .omegat könyvtár, a név előtti pont miatt láthatatlan, kivéve, ha egy <code>ls -a</code> vagy azzal egyenértékű parancsot ír be.)</dd>
+          </dl>
+        </td>
+      </tr>
 
-      <td width="87%">
-        <dl>
-          <dd><strong>&lt;User
-          Home&gt;</strong></dd>
-        </dl>
-      </td>
-    </tr>
- 
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>MacOSX</dt>
+          </dl>
+        </td>
+
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User
+            Home&gt;/Library/Preferences/OmegaT</strong></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>Egyebek</dt>
+          </dl>
+        </td>
+
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User Home&gt;</strong></dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <h3><a name="user_list" id="user_list"></a>A felhasználói állományok felsorolása<br></h3>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0"  summary="csak formázás">
+  <table summary="csak formázás" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
     <col width="27*">
     <col width="229*">
 
-    <tr valign="top">
-      <td width="11%">
-        <dl>
-          <dt>log.txt</dt>
-        </dl>
-      </td>
+    <tbody>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>log.txt</dt>
+          </dl>
+        </td>
 
-      <td width="89%">
-        <dl>
-          <dd>Ebben az állományban tárolódnak az OmegaT futása közben a Java hibaüzenetei. Ha úgy véli, hogy az OmegaT hibásan működik, ezt az állományt vagy annak vonatkozó részét mindenképpen mellékelje az esetleges <a href="website.html">hibajelentésbe</a>.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="89%">
+          <dl>
+            <dd>Ebben az állományban tárolódnak az OmegaT futása közben a Java hibaüzenetei. Ha úgy véli, hogy az OmegaT hibásan működik, ezt az állományt vagy annak vonatkozó részét mindenképpen mellékelje az esetleges <a href=
+            "website.html">hibajelentéshez</a>.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="11%">
-        <dl>
-          <dt>omegat.prefs</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>omegat.prefs</dt>
+          </dl>
+        </td>
 
-      <td width="89%">
-        <dl>
-          <dd>Ez az xml-állomány tartalmazza a grafikus felületről elérhető összes beállítást, valamint az ablak pozíciójára vonatkozó adatokat.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="89%">
+          <dl>
+            <dd>Ez az xml-állomány tartalmazza a grafikus felületről elérhető összes beállítást, valamint az ablak pozíciójára vonatkozó adatokat.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="11%">
-        <dl>
-          <dt>filters.conf</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>filters.conf</dt>
+          </dl>
+        </td>
 
-      <td width="89%">
-        <dl>
-          <dd>Ez az xml-állomány tartalmazza az <a href="fileFilters.html">állományszűrők</a> beállításaira vonatkozó adatokat.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="89%">
+          <dl>
+            <dd>Ez az xml-állomány tartalmazza az <a href=
+            "fileFilters.html">állományszűrők</a> beállításaira vonatkozó adatokat.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="11%">
-        <dl>
-          <dt>
-          segmentation.conf</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>segmentation.conf</dt>
+          </dl>
+        </td>
 
-      <td width="89%">
-        <dl>
-          <dd>Ez az xml-állomány tartalmazza a <a href="segmentation.html">mondatdarabolás</a> beállításaira vonatkozó összes adatot.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="89%">
+          <dl>
+            <dd>Ez az xml-állomány tartalmazza a <a href=
+            "segmentation.html">mondatdarabolás</a> beállításaira vonatkozó összes adatot.</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <p><br>
@@ -251,174 +257,176 @@
   <p>Az OmegaT a SourceForge portáljáról letölthető csomag. Ebben a fejezetben azt a <a href=
   "installingAndRunning.html#Other_systems">platformfüggetlen csomagot</a> vesszük szemügyre, amely az alkalmazást szabványos Java-formában tartalmazza. A többi csomagot egy Linux <code>.tar</code> csomag, egy Windows telepítő Java futtatási  környezettel vagy a nélkül, egy MacOSX telepítő, valamint egy fejlesztőknek szánt, a forráskódot tartalmazó csomag alkotja. A jelen platformfüggetlen csomag <strong>bármely</strong> Java 1.5 futtatási környezettel felszerelt platformon használható, beleértve azokat a platformokat, amelyekre konkrét csomag is rendelkezésre áll. A platformfüggetlen csomag tömörített formában érhető el, melyet telepítéshez az Önnek megfelelő könyvtárba kell kicsomagolnia. A kicsomagoláshoz általában elegendő kétszer a letöltött csomagra kattintani. Kicsomagolás után az alábbi tartalmú könyvtárszerkezet jön létre:</p>
 
-  <table width="100%" border="1" cellpadding="4" cellspacing="0"  summary="csak formázás">
+  <table summary="csak formázás" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
     <col width="19*">
     <col width="237*">
 
-    <tr valign="top">
-      <td width="8%">
-        <p><b>Állomány/<br> almappa</b></p>
-      </td>
+    <tbody>
+      <tr valign="top">
+        <td width="8%">
+          <p><b>Állomány/<br> almappa</b></p>
+        </td>
 
-      <td width="92%">
-        <p><b>Tartalom</b></p>
-      </td>
-    </tr>
+        <td width="92%">
+          <p><b>Tartalomjegyzék</b></p>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">/docs/</td>
+      <tr valign="top">
+        <td width="8%">/docs/</td>
 
-      <td width="92%">
-        <dl>
-          <dt>A felhasználói kézikönyvet alkotó összes állomány ebbe a könyvtárba kerül. Böngészőben megnyitva elérhetővé válnak a külső internetes ugrópontok.</dt>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dt>A felhasználói kézikönyvet alkotó összes állomány ebbe a könyvtárba kerül. Böngészőben megnyitva elérhetővé válnak a külső internetes ugrópontok.</dt>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>/images/</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>/images/</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Itt találhatók az ikonok és a logók.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Itt találhatók az ikonok és a logók grafikái.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>/lib/</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>/lib/</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Itt kapnak helyet a Java-fájlok. Ezekre az OmegaT megfelelő működéséhez van szükség.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Itt kapnak helyet a Java-fájlok. Ezekre az OmegaT megfelelő működéséhez van szükség.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>join.html</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>join.html</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Ez egy szokásos html-állomány, melynek böngészőben való megnyitásakor átkerül az OmegaT Yahoo Groups által működtetett felhasználói csoportjához. Noha nem szükséges csatlakoznia, érdemes fontolóra venni, mert az OmegaT-vel kapcsolatos kérdések megvitatásán túl olyan külön szolgáltatásokhoz juthat hozzá, mint például hozzáférés egyes állományokhoz vagy felmérésekhez. A csoport archívumai nyilvánosak, tanácsadáshoz pedig nem szükséges feliratkoznia a csoportfórumra.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Ez egy szokásos html-állomány, melynek böngészőben való megnyitásakor átkerül az OmegaT Yahoo Groups által működtetett felhasználói csoportjához. Noha nem szükséges csatlakoznia, érdemes fontolóra venni, mert az OmegaT-vel kapcsolatos kérdések megvitatásán túl olyan külön szolgáltatásokhoz juthat hozzá, mint például hozzáférés egyes állományokhoz vagy felmérésekhez. A csoport archívumai nyilvánosak, tanácsadáshoz pedig nem szükséges feliratkoznia a csoportfórumra.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>changes.txt</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>changes.txt</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Viszonylag részletes felsorolás az aktuális verzió és a korábbi változatok közötti módosításokról.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Viszonylag részletes felsorolás az aktuális verzió és a korábbi változatok közötti módosításokról.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>license.txt</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>license.txt</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>GNU ÁLTALÁNOS NYILVÁNOS ENGEDÉLY Ez az engedély lehetővé teszi, hogy bizonyos dolgokat hajtson végre az OmegaT-vel, például módosítsa vagy forgalmazza. Amennyiben az OmegaT módosítása vagy forgalmazása iránt érdeklődik, alaposan tanulmányozza át ezt a dokumentumot és mérje fel az ezzel járó következményeket, mielőtt hozzálát. Ha kételye támad, kérdéseivel forduljon bizalommal a projekt tagjaihoz akár közvetlenül a Source Forge weboldaláról küldött levélben, akár a felhasználói csoportnak küldött nyilvános levélben.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>GNU ÁLTALÁNOS NYILVÁNOS ENGEDÉLY Ez az engedély lehetővé teszi, hogy bizonyos dolgokat hajtson végre az OmegaT-vel, például módosítsa vagy forgalmazza. Amennyiben az OmegaT módosítása vagy forgalmazása iránt érdeklődik, alaposan tanulmányozza át ezt a dokumentumot és mérje fel az ezzel járó következményeket, mielőtt hozzálát. Ha kételye támad, kérdéseivel forduljon bizalommal a projekt tagjaihoz akár közvetlenül a Source Forge weboldaláról küldött levélben, akár a felhasználói csoportnak küldött nyilvános levélben.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>doc-license.txt</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>doc-license.txt</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>GNU ÁLTALÁNOS NYILVÁNOS ENGEDÉLY Ez az engedély a dokumentációra vonatkozik. Lásd fent.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>GNU ÁLTALÁNOS NYILVÁNOS ENGEDÉLY Ez az engedély a dokumentációra vonatkozik. Lásd fent.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>readme.txt</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>readme.txt</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Ez az állomány igen fontos, ezért mindenképpen olvassa el, mielőtt használni kezdi az OmegaT-t. Benne általános információkat talál az OmegaT-ről, további információk fellelhetőségéről, a hozzájárulás módjáról stb. Fordítása számos nyelven elérhető.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Ez az állomány igen fontos, ezért mindenképpen olvassa el, mielőtt használni kezdi az OmegaT-t. Benne általános információkat talál az OmegaT-ről, további információk fellelhetőségéről, a hozzájárulás módjáról stb. Fordítása számos nyelven elérhető.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>OmegaT</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Egy két sorból álló szöveges állomány:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Kapóra jöhet, ha futtatni kívánja (<code>chmod +x OmegaT</code>) a <a href=
-          "installingAndRunning.html#command_line">parancssorból</a>, ha az <code>/OmegaT_2.0/</code> könyvtárban tartózkodik. Mostantól elindíthatja az OmegaT-t, ha a parancssorból meghívja ezt a fájlt.</dd>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dd>Egy két sorból álló szöveges állomány:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Kapóra jöhet, ha futtatni kívánja (<code>chmod +x OmegaT</code>) a <a href=
+            "installingAndRunning.html#command_line">parancssorból</a>, ha az <code>/OmegaT_2.0/</code> könyvtárban tartózkodik. Mostantól elindíthatja az OmegaT-t, ha a parancssorból meghívja ezt a fájlt.</dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>OmegaT.bat</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT.bat</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dd>Kötegfájl az OmegaT Windows <a href=
-          "installingAndRunning.html#command_line">parancssorból</a> való elindításához. Mindössze az alábbi sort tartalmazza:</dd>
+        <td width="92%">
+          <dl>
+            <dd>Kötegfájl az OmegaT Windows <a href=
+            "installingAndRunning.html#command_line">parancssorból</a> való elindításához. Mindössze az alábbi sort tartalmazza:</dd>
 
-          <dd><code>java -jar
-          OmegaT.jar %*</code></dd>
-        </dl>
-      </td>
-    </tr>
+            <dd><code>java -jar OmegaT.jar %*</code></dd>
+          </dl>
+        </td>
+      </tr>
 
-    <tr valign="top">
-      <td width="8%">
-        <dl>
-          <dt>OmegaT.jar</dt>
-        </dl>
-      </td>
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT.jar</dt>
+          </dl>
+        </td>
 
-      <td width="92%">
-        <dl>
-          <dt>Az OmegaT fő alkalmazása. Az OmegaT elindításához hívja meg ezt a fájlt a parancssorból vagy indítsa el a fájlkezelőből (rendszerint kétszer rákattintva).</dt>
-        </dl>
-      </td>
-    </tr>
+        <td width="92%">
+          <dl>
+            <dt>Az OmegaT fő alkalmazása. Az OmegaT elindításához hívja meg ezt a fájlt a parancssorból vagy indítsa el a fájlkezelőből (alapesetben kétszer rákattintva).</dt>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
   </table>
 
   <dl>
@@ -426,16 +434,18 @@
     <br></dd>
   </dl>
   <hr>
-  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="csak formázás">
+
+  <table style="width: 100%;" summary="csak formázás" border="0" cellpadding=
+  "2" cellspacing="2">
     <tbody>
       <tr>
-        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a> </td>
-        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a>
-        </td>
-        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a> </td>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
       </tr>
     </tbody>
   </table>
-
 </body>
 </html>

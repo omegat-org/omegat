@@ -29,7 +29,7 @@
         </li>
 
         <li>
-          <p><a href="#encoding">A forrásnyelvi és célnyelvi állományok kódolása</a></p>
+          <p><a href="#encoding">A forrásnyelvi és a célnyelvi állományok kódolása</a></p>
         </li>
 
         <li>
@@ -39,7 +39,7 @@
     </li>
   </ul>
 
-  <p>Az OmegaT rugalmasan alakítható szűrőket tartalmaz, amelyekkel működésük zömét a felhasználó határozhatja meg. Az állományszűrők olyan programrészek, amelyekkel:</p>
+  <p>Az OmegaT rugalmasan alakítható szűrőket tartalmaz, amelyekkel működésük zömét Ön határozhatja meg. Az állományszűrők olyan programrészek, amelyekkel:</p>
 
   <ul>
     <li>
@@ -59,7 +59,7 @@
 
   <h3><a name="filter_dialog" id="filter_dialog"></a>Az Állományszűrők párbeszédablak</h3>
 
-  <p>A párbeszédablak a meglévő állományszűrők felsorolását tartalmazza. Ha valamilyen típusú állományokat nem szeretne az OmegaT-vel lefordítani, a típus mellett lévő név bejelölésének megszüntetésével kikapcsolhatja az adott szűrőt. Ekkor az OmegaT a projekt betöltésekor a bejelöletlen állományfajtákat kihagyja és a célállományok létrehozásakor módosítás nélkül átmásolja őket. Ha a későbbiek folyamán mégis a szűrő használata mellett dönt, elég, ha bejelöli a négyzetet. Kattintson az <strong>Eredeti</strong> pontra az állományszűrők eredeti beállításainak visszaállításához. Ha be akarja állítani, hogy az adott szűrő mely állományokat milyen kódolásban dolgozzon fel, válassza ki a szűrőt a listáról és kattintson a <strong>Szerkesztés</strong> pontra.</p>
+  <p>A párbeszédablak a választható állományszűrők felsorolását tartalmazza. Ha valamilyen típusú állományokat nem szeretne az OmegaT-vel lefordítani, a típus mellett lévő név bejelölésének megszüntetésével kikapcsolhatja az adott szűrőt. Ekkor az OmegaT a projekt betöltésekor a bejelöletlen állományfajtákat kihagyja és a célállományok létrehozásakor módosítás nélkül átmásolja őket. Ha a későbbiek folyamán mégis a szűrő használata mellett dönt, elég, ha bejelöli a négyzetet. Kattintson az <strong>Eredeti</strong> pontra az állományszűrők eredeti beállításainak visszaállításához. Ha be akarja állítani, hogy az adott szűrő mely állományokat milyen kódolásban dolgozzon fel, válassza ki a szűrőt a listáról és kattintson a <strong>Szerkesztés</strong> pontra.</p>
 
   <h3><a name="filter_options" id="filter_options"></a>Szűrési lehetőségek</h3>
 
@@ -69,7 +69,7 @@
 
   <ul>
     <li>
-      <p><i>Bekezdésekre darabolás sortöréseknél, üres soroknál, illetve soha:</i> ha a a mondatdarabolási szabályok használata be van kapcsolva, a szöveg feldarabolása az adott szabályok szerint történik.</p>
+      <p><i>Bekezdésekre darabolás sortöréseknél, üres soroknál, illetve soha:</i> ha a mondatdarabolási szabályok használata be van kapcsolva, a szöveg feldarabolása az adott szabályok szerint történik.</p>
     </li>
   </ul>
 
@@ -93,20 +93,21 @@
     </li>
   </ul>
 
-  <h4>OpenDocument/OpenOffice.org állományok</h4>
+  <h4>OpenDocument/OpenOffice.org típusú állományok</h4>
 
   <p>Az alábbi elemek lefordítása opcionális. Lefordításuk esetén külön szövegrészekként jelennek meg.</p>
 
   <ul>
     <li><i>A tartalomjegyzék elemei</i></li>
 
-    <li>Könyvjelzők</li>
+    <li><i>Könyvjelzők</i></li>
 
-    <li>Könyvjelző-hivatkozások</li>
+    <li><i>
+Könyvjelző-hivatkozások</i></li>
 
-    <li>Megjegyzések</li>
+    <li><i>Megjegyzések</i></li>
 
-    <li>Magyarázatok</li>
+    <li><i>Magyarázatok</i></li>
   </ul>
 
   <h4>Microsoft Open XML típusú állományok</h4>
@@ -116,7 +117,7 @@
   <ul>
     <li><i>Rejtett szöveg (Word)</i></li>
 
-    <li><i>Megjegyzések (Word, Excel)</i></li>
+    <li><i>Magyarázatok (Word, Excel)</i></li>
 
     <li><i>Lábjegyzetek (Word)</i></li>
 
@@ -126,28 +127,30 @@
 
     <li><i>Lábléc (Word)</i></li>
 
-    <li><i>Diához tartozó megjegyzések (PowerPoint)</i></li>
+    <li><i>Diához tartozó magyarázatok (PowerPoint)</i></li>
+
+    <li><i>Diaminták (PowerPoint)</i></li>
   </ul>
 
   <h3><a name="edit_dialog" id="edit_dialog"></a>A Szűrőszerkesztés párbeszédablak</h3>
 
-  <p>A párbeszédablakban beállíthatja a szűrő által feldolgozandó forrásfájlok nevének mintáit, testre szabhatja a fordított állományok nevét, valamint kiválaszthatja, milyen kódolásokat fog használni az állományok betöltésére és fordításaik mentésére. Valamely állományszűrő mintájának módosításához vagy közvetlenül szerkessze a mezőket, vagy kattintson a <strong>Szerkesztés</strong> pontra. Egy új állományszűrő-minta hozzáadásához kattintson a <strong>Hozzáadás</strong> gombra. A minta hozzáadása és a minta szerkesztése esetén ugyanaz a párbeszédablak jelenik meg. A párbeszédablak a célállományok nevének megadásához tartalmaz egy külön mintaszerkesztőt.</p>
+  <p>A párbeszédablakban beállíthatja a szűrő által feldolgozandó forrásfájlok nevének mintáit, testre szabhatja a fordított állományok fájlnevét, valamint kiválaszthatja, milyen kódolásokat fog használni az állományok betöltésére és fordításaik mentésére. Valamely állományszűrő mintájának módosításához vagy közvetlenül szerkessze a mezőket, vagy kattintson a <strong>Szerkesztés</strong>. Egy új állományszűrő-minta hozzáadásához kattintson a <strong>Hozzáadás</strong> gombra. A minta hozzáadása és a minta szerkesztése esetén ugyanaz a párbeszédablak jelenik meg. A párbeszédablak tartalmaz egy külön mintaszerkesztőt a célállományok nevének megadásához.</p>
 
   <h3><a name="source_file_name" id="source_file_name"></a>A forrásállomány típusa és nevének mintája</h3>
 
-  <p>Amikor az OmegaT a forráskönyvtárban egy fájlt észlel, megpróbálja a kiterjesztésének megfelelő szűrőt használni. Pontosabban fogalmazva, az OmegaT megkísérli a forrásállományok nevének mintáját a fájlnévnek megfeleltetni. Például az <code>*.xhtml</code> minta illeni fog minden <code>.xhtml</code> kiterjesztésű állományra. Ha sikerül a megfelelő szűrőt fellelni, akkor az állomány feldolgozása ennek segítségével történik. Például alaphelyzetben a rendszer az XHMTL-szűrőt használja az <code>xhtml</code> kiterjesztésű állományok esetén. Az egyes állományszűrőkhöz tartozó állománynevek mintáit módosíthatja, illetve újakat adhat hozzájuk. A forrásfájlok nevében helyettesítő karakterek szerepelnek a <strong>Keresési lehetőségek</strong>hez hasonlóan. A '<strong>*</strong>' karakter nulla vagy több karakter-előfordulással egyezik.  A '<strong>?</strong>' helyettesítő karakter csakis egy karaktert helyettesít. Az összes többi karakter önmagának felel meg. Ha például azt szeretné, hogy az egyszerű szöveg szűrője az (<code>olvassel</code>, <code>olvass.el</code> és <code>olvassel.txt</code>) elolvasandó állományokat egyaránt kezelje, használja az <code>olvass*</code> mintát.</p>
+  <p>Amikor az OmegaT a forráskönyvtárban egy fájlt észlel, megpróbálja a kiterjesztésének megfelelő szűrőt használni. Pontosabban fogalmazva, az OmegaT megkísérli a forrásállományok nevének mintáját a fájlnévnek megfeleltetni. Például az <code>*.xhtml</code> minta illeni fog minden <code>.xhtml</code> kiterjesztésű állományra.é Ha sikerül a megfelelő szűrőt fellelni, akkor az állomány feldolgozása ennek segítségével történik. Például alaphelyzetben a rendszer az XHMTL-szűrőt használja az <code>xhtml</code> kiterjesztésű állományok esetén. Az egyes állományszűrőkhöz tartozó állománynevek mintáit módosíthatja, illetve újakat adhat hozzájuk. A forrásfájlok nevében helyettesítő karakterek szerepelnek a <strong>Keresési lehetőségek</strong>hez hasonlóan. A '<strong>*</strong>' karakter nulla vagy több karakter-előfordulással egyezik. A ''<strong>?</strong>' helyettesítő karakter pontosan egy karakterrel egyezik. Az összes többi karakter önmagának felel meg. Ha például azt szeretné, hogy az egyszerű szöveg szűrője az (<code>olvassel</code>, <code>olvass.el</code> és <code>olvassel.txt</code>) elolvasandó állományokat egyaránt kezelje, használja az <code>olvass*</code> mintát.</p>
 
-  <h3><a name="encoding" id="encoding"></a>A forrásnyelvi és célnyelvi állományok kódolása</h3>
+  <h3><a name="encoding" id="encoding"></a>A forrásnyelvi és a célnyelvi állományok kódolása</h3>
 
   <p>Az állományformátumoknak csak egy korlátozott száma jelent előírt kódolást. A kódolást elő nem író állományformátumok olyan kódolást használnak, amilyet a felhasználó a nevükhöz tartozó kiterjesztés számára meghatároz. Például alapbeállításban a <code>.txt</code> fájlok betöltése az adott operációs rendszerben alapértelmezettként beállított kódolással megy végbe. A forrásszöveg kódolását bármely állománynévmintához külön-külön megadhatja. Az ilyen állományok mentése bármilyen kódolásban lehetséges. Alapbeállításban a lefordított állomány kódolása megegyezik a forrásállományéval. A forrásszövegek és a célnyelvi szövegek kódmezői lenyíló elemeket tartalmaznak, melyekben megjelenik az összes támogatott kódolás. Az <strong>&lt;auto&gt;</strong> kiválasztásával a kódolást az OmegaT-re bízza. Ez a következők szerint történik:</p>
 
   <ul>
     <li>
-      <p style="margin-bottom: 0cm">Az OmegaT a forrásfájl kódolását esetlegesen meglévő saját kódolási utasítása (HTML-állományok, XML alapú állományok) alapján állapítja meg.</p>
+      <p style="margin-bottom: 0cm;">Az OmegaT a forrásfájl kódolását esetlegesen meglévő saját kódolási utasítása (HTML-állományok, XML alapú állományok) alapján állapítja meg.</p>
     </li>
 
     <li>
-      <p style="margin-bottom: 0cm">Az OmegaT egyes fájlformák esetén (pl. Java properties) kötelező kódolást ír elő.</p>
+      <p style="margin-bottom: 0cm;">Az OmegaT egyes fájlformák esetén (pl. Java properties) kötelező kódolást ír elő.</p>
     </li>
 
     <li>

@@ -1,73 +1,62 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-  <link rel="stylesheet" href="OmegaT.css " type="text/css">
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Használat a parancssorból - OmegaT 2.0 felhasználói kézikönyv</title>
-</head>
-<body>
-<h1>Az OmegaT használata a parancssorból</h1>
-<ul>
-  <li>
-    <p><a href="#prerequisites">Előfeltételek</a></p>
-  </li>
-  <li>
-    <p><a href="#start">A parancssorból való használat elindítása</a></p>
-  </li>
-  <li>
-    <p><a href="#extra">További lehetőség</a></p>
-    <p>&nbsp;</p>
-  </li>
-</ul>
-<p>Az OmegaT használható külön felhasználói felület nélkül, a parancssorból. A parancssor használata esetén nincs grafikus felhasználói felület (vagyis bármely konzolról futtatható), és az adott projekt fordítása automatikusan történik.</p>
-<hr>
-<h3><a name="prerequisites" id="prerequisites"></a>Előfeltételek</h3>
-<p>Az OmegaT futtatásához érvényes OmegaT-projekttel kell rendelkeznie. A projekt helye közömbös, mivel azt egyébként is a parancssorban kell megadnia.</p>
-<p>Ha megváltozott beállításokra lesz szüksége, akkor a konfigurációs állományoknak is jelen kell lenni. Ez kétféleképpen érhető el:</p>
-<ol>
-  <li>Futtassa az OmegaT-t a szokásos módon (a grafikus felülettel), és állítsa be a beállításokat. Ha az OmegaT-t a parancssorból indítja el, az ezeket a beállításokat fogja majd használni. Ha az OmegaT-t nem tudja a szokásos módon használni (nincs grafikus felület):</li>
-  <li>másolja át a beállításokat az OmegaT egy másik gépen lévő telepítéséről valamely könyvtárba. A hely közömbös, mivel azt a parancssorban megadhatja. Az érintett állományok a filters.conf és a segmentation.conf, melyek a felhasználó gyökérkönyvtárában találhatók (pl. C:\Documents and Settings\%User%\OmegaT, ha Windowst használ, %user%/.omegat/ Linux esetén)</li>
-</ol>
-<br>
-<h3><a name="start" id="start"></a>A parancssorból való használat elindítása</h3>
-<p>Az OmegaT parancssorból való futtatásához néhány plusz paramétert kell megadnia. A legfontosabb a <code>&lt;project-dir&gt;</code>, valamint adott esetben a <code>--config-dir=&lt;config-dir&gt;</code>.</p>
-<p>Példa: <code>$&gt; java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code>
 
-<p><span style="font-weight: bold;">Magyarázat:</span></p>
-<table style="width: 80%;" cellpadding="2" cellspacing="2" summary="csak formázás">
-  <tbody>
-    <tr>
-      <td style="text-align: left;"><code>&lt;project-dir&gt;</code></td>
-      <td style="text-align: left;">
-      <p>tudatja az OmegaT-vel, hol található a fordítandó projekt. Megadása esetén az OmegaT a parancssorból indul el és lefordítja az adott projektet.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left;"><code>--config-dir=&lt;config-dir&gt;</code></td>
-      <td style="text-align: left;">
-      <p>&nbsp;tudatja az OmegaT-vel, mely könyvtárban vannak a konfigurációs állományok. Ha nincs megadva, az OmegaT az alapbeállítást használja (a felhasználó gyökérkönyvtárában az OmegaT könyvtárát, ha ez hiányzik, akkor az aktuális munkakönyvtárat).</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left;"><code>--mode=console-translate</code></td>
-      <td style="text-align: left;">
-      <p>&nbsp;Az OmegaT a parancssorból indul el és lefordítja az adott projektet.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h3><a name="extra" id="extra"></a>További lehetőség</h3>
-<p>Van egy további parancssori paraméter, amely csak parancssoros használat esetén áll rendelkezésre: a <code>--quiet</code>, azaz csendes üzem. Csendes üzem esetén kevesebb információ jelenik meg a képernyőn. Nem jelennek meg az állapotsoron egyébként megjelenő üzenetek.<br> Használata: <code>java -jar OmegaT.jar /path/to/project --quiet</code> </p>
-<hr>
-<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"  summary="csak formázás">
-<tbody>
-    <tr>
-      <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a> </td>
-      <td style="text-align: center;"><a href="index.html">Kezdőoldal</a>
-      </td>
-      <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a> </td>
-    </tr>
-  </tbody>
-</table>
+  <title>Használat a parancssorból - OmegaT 2.1 felhasználói kézikönyv</title>
+</head>
+
+<body>
+  <h1>Az OmegaT használata a parancssorból</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Előfeltételek</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">A parancssorból való használat elindítása</a></p>
+    </li>
+
+  </ul>
+  <p>&nbsp;</p>
+
+  <p>Az OmegaT használható külön felhasználói felület nélkül, a parancssorból. A parancssor használata esetén nincs grafikus felhasználói felület (vagyis a program bármely konzolról futtatható). Az adott futtatási módtól függően az adott projekt fordítása automatikusan vagy félig automatikus fordítási memória létrehozásával történik.</p>
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Előfeltételek</h3>
+
+  <p>Az OmegaT futtatásához érvényes OmegaT-projekttel kell rendelkeznie. A projekt helye közömbös, mivel azt egyébként is a parancssorban kell megadnia.</p>
+
+  <p>Ha megváltozott beállításokra lesz szüksége, akkor a konfigurációs állományoknak is jelen kell lenni. Ez kétféleképpen érhető el:</p>
+
+  <ol>
+    <li>Futtassa az OmegaT-t a szokásos módon (a grafikus felülettel), és állítsa be a beállításokat. Ha az OmegaT-t a parancssorból indítja el, az ezeket a beállításokat fogja majd használni. Ha az OmegaT-t nem tudja a szokásos módon használni (nincs grafikus felület):</li>
+
+    <li>másolja át a beállításokat az OmegaT egy másik gépen lévő telepítéséről valamely könyvtárba. A hely közömbös, mivel azt a parancssorban megadhatja. Az érintett állományok a filters.conf és a segmentation.conf, melyek a felhasználó gyökérkönyvtárában találhatók (pl. C:\Documents and Settings\%User%\OmegaT, ha Windowst használ, %user%/.omegat/ Linux esetén)</li>
+  </ol><br>
+
+  <h3><a name="start" id="start"></a>A parancssorból való használat elindítása</h3>
+
+  <p>Az OmegaT parancssorból való futtatásához néhány plusz paramétert kell megadnia. Kötelező a <code>&lt;project-dir&gt;</code> és a <code>--mode=&lt;mode&gt;</code> megadása.</p>
+
+  <p>A futtatás módjától függően további paramétereket kell (vagy lehet) megadni. A további részleteket lásd a <a href="commandlineArguments.html">parancssori paraméterek</a> alatt.</p>
+
+  <p>Példa a fordítási projektre:<br> <code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code><br> Példa egy állományt tartalmazó fordítási projektre:<br> <code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate --source-pattern=test\.html</code><br> Példa a félig automatikus fordítási memória létrehozására:<br> <code>java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code></p>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="csak formázás">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

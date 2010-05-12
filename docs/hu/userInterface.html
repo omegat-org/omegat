@@ -1,6 +1,6 @@
-﻿<html>
+<html>
 <head>
-  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <link type="text/css" href="./OmegaT.css " rel="stylesheet">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
   <title>A felhasználói felület - OmegaT 2.0 felhasználói kézikönyv</title>
@@ -38,7 +38,7 @@
 
               <ul>
                 <li>
-                  <p><a href="#Editor">A szerkesztőpanel</a></p>
+                  <p><a href="#Editor">A Szerkesztő ablak</a></p>
                 </li>
 
                 <li>
@@ -62,7 +62,7 @@
                 </li>
 
                 <li>
-                  <p><a href="#menu">Főmenü</a></p>
+                  <p><a href="#menu">A főmenü</a></p>
                 </li>
 
                 <li>
@@ -147,19 +147,17 @@
     <tbody>
       <tr>
         <td width="24%">
-          <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
-
           <p><strong>Az OmegaT főablaka</strong></p>
         </td>
 
         <td width="83%">
-          <p>részei a főmenü, az állapotsor és 3 panel:</p>
+          <p>részei a főmenü, az állapotsor és 3 ablak:</p>
         </td>
       </tr>
 
       <tr>
         <td width="24%">
-          <p>--- Szerkesztő panel</p>
+          <p>--- Szerkesztő ablak</p>
         </td>
 
         <td width="83%">
@@ -169,7 +167,7 @@
 
       <tr>
         <td width="24%">
-          <p>--- Bizonytalan egyezések panel</p>
+          <p>--- Bizonytalan egyezések ablak</p>
         </td>
 
         <td width="83%">
@@ -179,7 +177,7 @@
 
       <tr>
         <td width="24%">
-          <p>--- Szójegyzék panel</p>
+          <p>--- Szójegyzék ablak</p>
         </td>
 
         <td width="83%">
@@ -337,65 +335,96 @@
     </tbody>
   </table>
   <hr>
+  <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
 
   <h2>Az OmegaT főablaka</h2><img src="images/OmegaT_panes.png" name="grafika1"
-  alt="Az OmegaT paneljei" id="grafika1" style=
-  "border: 0px solid ; width: 800px; height: 600px;"><br clear="left">
+  alt="Az OmegaT paneljei" id="grafika1" border="0"><br clear="left">
 
   <p><br>
   <br></p>
 
-  <p>A főablak részei a panelek, a főmenü és az állapotsor. Bármely panel helyzetét módosíthatja, sőt, külön ablakba helyezheti, ha a panelt a nevénél fogva elhúzza. A panel állapotától függően különböző jelek jelenhetnek meg a jobb felső sarkában:</p>
+  <p>A főablak részei at ablakok, a főmenü és az állapotsor.  Bármely ablak helyzetét módosíthatja, sőt, külön ablakba helyezheti, ha a nevénél fogva elhúzza. Az ablak állapotától függően különböző jelek jelenhetnek meg a jobb felső sarkában:</p>
 
   <p><img src="images/Minimize.gif" name="graphics1" alt="Kis méret" id=
-  "graphics1" align="bottom" border="0" height="18" width="18">a panelnek csak a neve látszik lent az állapotsor mellett.<br> <img src="images/Maximize.gif" name="graphics2" alt="Teljes méret" id="graphics2"
-  align="bottom" border="0" height="18" width="18"> a panel az ablak teljes területét kitölti.<br> <img src="images/Restore.gif" name="graphics3" alt="Előző méret" id="graphics3"
-  align="bottom" border="0" height="18" width="18"> a panelt visszaállítja előző, kis vagy nagy méret előtti méretére.<br> <img src="images/Undock.gif" name="graphics4" alt="Feloldás" id="graphics4"
-  align="bottom" border="0" height="18" width="18"> a panelt önálló ablak formájában lekapcsolja a főablakról.<br> <img src="images/Dock.gif" name="graphics5" alt="Rögzítés" id="graphics5" align=
-  "bottom" border="0" height="18" width="18"> a panelt visszahelyezi a főablakba.</p>
+  "graphics1" align="bottom" border="0" height="18" width="18"> az ablaknak csak a neve látszik lent, az állapotsor mellett.<br> <img src="images/Maximize.gif" name="graphics2" alt="Teljes méret" id="graphics2"
+  align="bottom" border="0" height="18" width="18"> az ablak a rendelkezésre álló teljes területet kitölti.<br> <img src="images/Restore.gif" name="graphics3" alt="Előző méret" id="graphics3"
+  align="bottom" border="0" height="18" width="18"> az ablakot visszaállítja előző, kis vagy nagy méret előtti méretére.<br> <img src="images/Undock.gif" name="graphics4" alt="Feloldás" id="graphics4"
+  align="bottom" border="0" height="18" width="18"> az ablakot önálló ablak formájában lekapcsolja a fő ablakról.<br> <img src="images/Dock.gif" name="graphics5" alt="Rögzítés" id="graphics5" align=
+  "bottom" border="0" height="18" width="18"> az ablakot visszahelyezi a fő ablakba.</p>
 
-  <p>A paneleket akár egymás fölé is helyezheti. Ez esetben a panelek tetején egy fül látszik. A fülre kattintva hozhatja előre a panelt. A panelek közötti elválasztók húzásával a panelek átméretezhetők.</p>
+  <p>Az ablakokat akár egymás fölé is helyezheti. Ez esetben az ablakok tetején egy fül látszik. A fülre kattintva hozhatja előre az ablakot. Az ablakok közötti elválasztók húzásával átméretezheti az egyes ablakokat.</p>
 
-  <h3><a name="Editor" id="Editor"></a>A szerkesztőpanel</h3>
+  <p>A jobb alsó sarokban lévő számlálók a fordítási folyamatot követik nyomon:</p>
 
-  <p>Itt történik a fordítás szerkesztése. A szerkesztőpanelben a részben lefordított szöveg jelenik meg: a már lefordított szöveg fordításként, a többi eredeti forrásnyelvi szövegként látszik. A megjelenített szöveg darabokra van osztva, az egész dokumentumot végigböngészheti és bármely szövegegységre kattintva nekiláthat a fordításának. A fenti esetben a lefordított szövegegységek sárga színűek, de a beállítást kedve szerint módosíthatja (lásd a <a href=
-  "menu.html">Nézet</a>  menüt).</p>
+  <p><img alt="főmenü-számlálók" title="főmenü-számlálók" src=
+  "images/Main_pane_counters.png"></p>
 
-  <p>A szövegegységek közül egy mindig aktív. Mindig csakis ez látható két részletben: a felső rész forrásnyelven van, vastag betűs, zöld hátteres szövegként. Az alatta lévő rész a szerkesztőmező, melyet két jel határol: a bal oldali jel az  <strong><code>&lt;nnnn. egység&gt;</code></strong>,  ahol az <strong><code>nnnn.</code></strong>  a projektben az adott szövegegység sorszáma, míg a jobb oldali jel a <strong><code>&lt;egység vége&gt;</code></strong>. A felső rész a fordítandó szöveget jelzi, a szerkesztőmező pedig a felülírással vagy módosítással elkészítendő fordítást tartalmazza.</p>
+  <table summary="" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td>31/34</td>
 
-  <p>A szerkesztőmező <a href="translationEditing.html">szerkesztési módjától</a> függően az éppen fordítandó szövegmező lehet üres vagy tartalmazhatja a forrásszövegre leginkább hasonlító fordítást. Amikor áttér egy másik szövegegységre, megtörténik a fordítás ellenőrzése és tárolása. Ha nem kívánja lefordítani az adott szövegegységet, töröljön belőle minden szöveget (kiválasztás: <code>Ctrl+A</code>, törlés: <code>Del</code>). Az OmegaT előhívhat egy fordítást, ha az megegyezik a forrásnyelvi szöveggel. Ez hasznos lehet olyan szövegek esetén, amelyekben kereskedelmi védjegyek, nevek és más tulajdonnevek fordulnak elő, illetve olyan harmadik nyelvi szövegek, amelyeket nem szükséges lefordítani.</p>
+        <td>szövegegységek száma -&nbsp; lefordított / összes, az adott állományt illetően</td>
+      </tr>
+
+      <tr>
+        <td>2530/2605</td>
+
+        <td>egyedi szövegegységek száma -&nbsp; lefordított / összes, az egész projektet illetően</td>
+      </tr>
+
+      <tr>
+        <td>3196</td>
+
+        <td>a szövegegységek száma a projektben (ismétlődésekkel együtt)</td>
+      </tr>
+
+      <tr>
+        <td>39/53</td>
+
+        <td>szavak száma a forrásnyelvi és a célnyelvi szövegegységben&nbsp;</td>
+      </tr>
+    </tbody>
+  </table><br>
+
+  <h3><a name="Editor" id="Editor"></a>A Szerkesztő ablak</h3>
+
+  <p>Itt történik a fordítás szerkesztése. A szerkesztőpanelben a részben lefordított szöveg jelenik meg: a már lefordított szöveg fordításként, a többi eredeti forrásnyelvi szövegként látszik. A megjelenített szöveg darabokra van osztva, az egész dokumentumot végigböngészheti és bármely szövegegységre kattintva nekiláthat a fordításának. A fenti esetben a lefordított szövegegységek nincsenek külön megjelölve, de a beállítást kedve szerint módosíthatja, pl. sárgával jelölheti őket (lásd a <a href="menu.html">Nézet</a> menüt).</p>
+
+  <p>A szövegegységek közül egy mindig aktív. Mindig csakis ez látható két részletben: a felső rész forrásnyelven van, vastag betűs, zöld hátteres szövegként. Az alatta lévő rész a szerkesztő mező, melyet két jel határol: a bal oldali jel az  <strong><code>&lt;nnnn. egység&gt;</code></strong>,  ahol az <strong><code>nnnn.</code></strong>  a projektben az adott szövegegység sorszáma, míg a jobb oldali jel a <strong><code>&lt;egység vége&gt;</code></strong>. A felső rész a fordítandó szöveget jelzi, a szerkesztő mező pedig a felülírással vagy módosítással elkészítendő fordítást tartalmazza.</p>
+
+  <p>A szerkesztő mező <a href="translationEditing.html">szerkesztési módjától</a> függően az éppen fordítandó szövegmező lehet üres, vagy tartalmazhatja a forrásszövegre leginkább hasonlító fordítást. Amikor áttér egy másik szövegegységre, megtörténik a fordítás ellenőrzése és tárolása. Ha nem kívánja lefordítani az adott szövegegységet, töröljön belőle minden szöveget (kiválasztás: <code>Ctrl+A</code>, törlés: <code>Del</code>). Az OmegaT előhívhat egy fordítást, ha az megegyezik a forrásnyelvi szöveggel. Ez hasznos lehet olyan szövegek esetén, amelyekben kereskedelmi védjegyek, nevek és más tulajdonnevek fordulnak elő, illetve olyan harmadik nyelvi szövegek, amelyeket nem szükséges lefordítani.</p>
 
   <p>További részletek: <a href="translationEditing.html">Fordítások szerkesztése</a>.</p>
 
-  <h3><a name="Match" id="Match"></a>A Bizonytalan egyezések ablak</h3><img src=
-  "images/MatchesPane.png" name="grafika2" alt="Az OmegaT Bizonytalan egyezések panelje" id=
-  "grafika2" align="left" border="0" height="520" width="520"><br clear="left">
-
-  <p><br>
-  <br></p>
-
-  <p>A Bizonytalan egyezések panelben <a href=
-  "translationMemories.html">a fordítási memóriák</a> alapján legvalószínűbbnek talált szövegegységek jelennek meg mind az éppen fordított projektre, mind a korábban készített vagy az ügyféltől, fordítóirodától kapott fordítási memóriákra támaszkodva.</p>
-
-  <p>A következő szövegegységre való áttéréskor az első bizonytalan egyezést (a legjobb egyezési százalékot mutatót) a rendszer automatikusan választja ki. Az egyezések közül <a href=
-  "menu.html#shortcuts">kiválaszthat</a> egy másikat a <code>Ctrl+2</code>, <code>3</code>, <code>4</code> vagy az <code>5</code> lenyomásával. Ha nincs 5. egyezés, akkor természetesen a <code>Ctrl+5</code> lenyomása hatástalan lesz.</p>
-
-  <p>A <strong>kiválasztott</strong> egyezés felhasználásához nyomja meg a <code><a href="menu.html#shortcuts">Ctrl+R</a></code>-t, ha a célnyelvi szöveget az egyezéssel kívánja felcserélni, illetve a <code><a href=
-  "menu.html#shortcuts">Ctrl+I</a></code>-t, ha a kurzor helyére be kívánja szúrni az adott egyezést.</p>
-
-  <p>Az egyezés százalékát a rendszer nagyjából az egyező szavak számának összehasonlításával és a kettő közül a hosszabbik szószámával elosztva állapítja meg. A kiválasztott bizonytalan egyezés <strong>vastagbetűsen</strong> jelenik meg, a fordítandó szövegből hiányzó elemek színe <strong><font color=
-  "#0000FF">kék</font></strong>, az őket körülvevő szavak színe <font color="#00FF00"><b>zöld</b></font>. A fenti példában a forrásnyelvi szövegegység az <strong><i>Information about Java &amp; OmegaT.</i></strong> A legjobb egyezés mértéke 75%, mert a 4 közül 3 szó egyezik (az &amp;-t a rendszer figyelmen kívül hagyja). Az egyezés mellett megtalálható az a forrásnyelvi szöveg is, amely a TMX-ből került elő. Ha nem jelenik meg mellette állománynév, akkor a forrás az alapbeállítás szerinti fordítási memória. A pár nélküli szövegegységek (4. egyezés) azokat  az alapbeállítás szerinti fordítási memóriában talált egyezéseket jelentik, amelyekhez nincs meg a megfelelő forrásnyelvi szövegegység.<br>
-  <br></p>
-
-  <h3><a name="Glossary" id="Glossary"></a>Szójegyzék</h3>
-
-  <p>A Szójegyzék panelen keresztül saját,  <a href="glossaries.html">szójegyzékfájlokba gyűjtött</a>  szószedeteit és kifejezésgyűjteményeit érheti el. Az adott szövegegységben megjelenő kifejezések fordítását mutatja, de csak hivatkozás gyanánt, vagyis nem szúrható be és nem cserélhető ki a fordítás egy darabjával.</p><img src="images/Glossary_pane.png" name="grafika3" alt=
-  "Az OmegaT Szójegyzék panelje" id="grafika3" align="left" border="0" height="150"
-  width="328"><br clear="left">
+  <h3><a name="Match" id="Match"></a>A Bizonytalan egyezések ablak</h3>A Bizonytalan egyezések panelben <a href="translationMemories.html">a fordítási memóriák</a> alapján legvalószínűbbnek talált szövegegységek jelennek meg mind az éppen fordított projektre, mind a korábban készített vagy az ügyféltől, fordítóirodától kapott fordítási memóriákra támaszkodva.<br>
+  <img src="images/MatchesPane.png" name="grafika2" alt="Az OmegaT Bizonytalan egyezések panelje" id=
+  "grafika2" align="left" border="0"><br clear="left">
 
   <p><br></p>
 
-  <p>A fenti példában a forrásnyelvi szövegegység az “<i>In most translation jobs it is considered important to have the translated document look similar to the original.</i>” volt, belőle két szó, a document és a translation szerepelt a szójegyzékfájlban. Az OmegaT támogatja több szóból álló kifejezések alapszintű használatát: ha egy kifejezés mindkét szava előfordul az adott szövegdarabban, akkor a kifejezést kijelzi.</p><br>
+  <p>A következő szövegegységre való áttéréskor az első bizonytalan egyezést (a legjobb egyezési százalékot mutatót) a rendszer automatikusan választja ki. A kiválasztott bizonytalan egyezés <strong>vastagbetűsen</strong> jelenik meg, a fordítandó szövegből hiányzó elemek színe <strong><font color=
+  "#0000FF">kék</font></strong>, az őket körülvevő szavak színe <font color="#00FF00"><b>zöld</b></font>. Az egyezések közül <a href=
+  "menu.html#shortcuts">kiválaszthat</a> egy másikat a <code>Ctrl+2</code>, <code>3</code>, <code>4</code> vagy az <code>5</code> lenyomásával. Ha nincs 5. egyezés, akkor természetesen a <code>Ctrl+5</code> lenyomása hatástalan lesz. A <strong>kiválasztott</strong> egyezés felhasználásához nyomja meg a <code><a href="menu.html#shortcuts">Ctrl+R</a></code>-t, ha a célnyelvi szöveget az egyezéssel kívánja felcserélni, illetve a <code><a href=
+  "menu.html#shortcuts">Ctrl+I</a></code>-t, ha a kurzor helyére be kívánja szúrni az adott egyezést.</p>
+
+  <p>Az egyezés százalékát a rendszer nagyjából az egyező szavak számának összehasonlításával és a kettő közül a hosszabbik szószámával elosztva állapítja meg. Ha szóelemző kiegészítőt használ, akkor a két egységben szereplő szavak először szótöveikre bontódnak. Másik megoldásként a szavak megtartják alakjukat, és a rendszer csak a központozást, a számokat és a címkéket hagyja figyelmen kívül. Végezetül a kalkulációban szerepelhet az előző két esetben kihagyott központozás, számok és  címkék is. Az egyezések mutatója a háromféle mérési eredményt a következő módon jeleníti meg:</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
+  "font-style: italic;">% egyezés szóelemző használata esetén / % az OmegaT szerinti alapegyezés esetén / % egyezés központozással, számokkal és  címkékkel együtt</span>&gt;&nbsp;
+
+  <p>A fenti két példában az első két adat (46/46) azonos, mert nem került sor szóelemző használatára. A harmadik százalék (39) a központozás és a címkék eltérése miatt alacsonyabb.</p>
+
+  <p>Ha nem jelenik meg mellette állománynév, akkor a forrás az alapbeállítás szerinti fordítási memória. A pár nélküli szövegegységek (1. egyezés) azokat  az alapbeállítás szerinti fordítási memóriában talált egyezéseket jelentik, amelyekhez nincs meg a megfelelő forrásnyelvi szövegegység. A fenti esetben az OmegaT-vel már lefordított eredeti mondat szerkesztésére került sor.<br></p>
+
+  <h3><a name="Glossary" id="Glossary"></a>Szójegyzék</h3>
+
+  <p>A Szójegyzék ablakból saját,  <a href=
+  "glossaries.html">szójegyzékfájlokba gyűjtött</a>  szószedeteit és kifejezésgyűjteményeit érheti el. Az adott szövegegységben megjelenő kifejezések fordítását mutatja, de csak hivatkozás gyanánt, vagyis nem szúrható be és nem cserélhető ki a fordítás egy darabjával.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="Az OmegaT Szójegyzék ablaka" id=
+  "grafika3" align="left" border="0"><br clear="left">
+
+  <p><br></p>
+
+  <p>A fenti példában a forrásnyelvi szövegegység az “<i>In most translation jobs it is considered important to have the translated document look similar to the original.</i>” volt, belőle két szó, a document és a translation szerepelt a szójegyzékfájlban. Az OmegaT támogatja több szóból álló kifejezések alapszintű használatát: ha egy kifejezés mindkét szava előfordul az adott szövegegységben, akkor megjeleníti a kifejezést.</p><br>
 
   <h3><a name="Dictionaries" id="Dictionaries"></a>Szótárak</h3>
 
@@ -404,9 +433,10 @@
   <h3><a name="Google_Translate" id="Google_Translate"></a>Google
   Translate</h3>
 
-  <p>A <a href="GoogleTranslate.html">Google Translate</a> panelen megnyitásakor megjelenik az aktuális forrásszöveg fordítása, melyet beszúrhat a célnyelvi szövegbe.&nbsp;</p><br>
+  <p>Ha a  Menü → Beállítások menüponton keresztül bekapcsolja a <a href=
+  "GoogleTranslate.html">Google Translate</a> panelt, annak megnyitásakor megjelenik az aktuális forrásszöveg fordítása, melyet beszúrhat a célnyelvi szövegbe.</p><br>
 
-  <h3><a name="menu" id="menu"></a>Főmenü</h3>
+  <h3><a name="menu" id="menu"></a>A főmenü</h3>
 
   <p>A főmenüből elérhető az OmegaT összes funkciója. Az összes menü és menüelem részletes leírásával kapcsolatosan lásd a <a href="menu.html#menu">Főmenü</a> mellékletet. A leggyakrabban használt funkciók elérhetők <a href="menu.html#shortcuts">gyorsbillentyűkkel</a>, így ha megszokja használatukat, fordítás közben nem lesz szükség a menükben való böngészésre.</p>
 
@@ -419,7 +449,7 @@
 
   <h3><a name="files" id="files"></a>Projektállományok</h3>
 
-  <p>A Projektállományok ablak egyéb projektadatok mellett a projektállományok felsorolását tartalmazza. Az ablak automatikusan megjelenik, amikor az OmegaT betölt egy projektet. Bezárása: <code>Esc</code>, megnyitása vagy előtérbe hozása: <code>Ctrl+L</code>.</p>
+  <p>A Projektállományok ablak egyéb projektadatok mellett a projektállományok felsorolását tartalmazza. Az ablak automatikusan megjelenik, amikor az OmegaT betölt egy projektet. Bezására: <code>Esc</code>, megnyitása vagy előtérbe hozása: <code>Ctrl+L</code>.</p>
 
   <h3><a name="proj_files" id="proj_files"></a>A Projektállományok ablak tulajdonságai</h3>
 
@@ -444,7 +474,7 @@
     </li>
 
     <li>
-      <p>a már lefordított egyedi szövegegységek száma. Ezt a rendszer minden egyes szövegegység lefordítása után frissíti.</p>
+      <p>A már lefordított egyedi szövegegységek száma. Ezt a rendszer minden egyes szövegegység lefordítása után frissíti.</p>
     </li>
   </ul>
 
@@ -463,7 +493,7 @@
 
   <h3><a name="search" id="search"></a>Keresőablak</h3>
 
-  <p>A Szöveg keresése ablak a projekten belül egyes szövegegységek előkeresésére szolgál. Egy időben több keresőablak is nyitva lehet. Egy ablak megnyitásához használja a főablakban a <code><a href="menu.html#shortcuts">Ctrl+F</a></code> gyorsbillentyűt. A keresőablakban van egy szövegmező a keresőkifejezések vagy kulcsszavak számára, valamint gombok és négyzetek a keresés pontosításához, továbbá egy megjelenítési terület, amely a keresés eredményét tartalmazza.</p>
+  <p>A Szöveg keresése ablak a projekten belül egyes szövegegységek előkeresésére szolgál. Egy időben több keresőablak is nyitva lehet. Egy ablak megnyitásához használja a főablakban a <code><a href="menu.html#shortcuts">Ctrl+F</a></code> gyorsbillentyűt. A keresősablakban van egy szövegmező a keresőkifejezések vagy kulcsszavak számára, valamint gombok és négyzetek a keresés pontosításához, továbbá egy megjelenítési terület, amely a keresés eredményét tartalmazza.</p>
 
   <h3><a name="search_types" id="search_types"></a>Keresési típusok</h3>
 
@@ -497,19 +527,19 @@
   "menu.html#shortcuts">Ctrl+T</a></code> gyorsbillentyűt. Az ablak háromhasábos táblázatból áll, ugróponttal a szövegegységhez, annak forrásnyelvi és célnyelvi tartalmához:</p>
 
   <p><img src="images/TagValidator.png" name="grafika4" alt=
-  "Az OmegaT címkeellenőrzője" id="grafika4" align="left" border="0" height="318"
-  width="556"><br clear="left">
+  "Az OmegaT címkeellenőrzője" id="grafika4" align="left" border="0"><br clear=
+  "left">
   <br>
   <br></p>
 
-  <p>A címkék vastag kék betűvel jelennek meg az eredeti és a lefordított tartalom könnyű egybevetése érdekében. Ha az ugrópontra kattint, a kurzor a szerkesztőben az adott szövegrészre ugrik.. Javítsa ki a hibát, ha szükséges, majd a <code><a href="menu.html#shortcuts">Ctrl+T</a></code> lenyomásával térjen vissza a címkeellenőrzés ablakához és javítsa ki a fennmaradó hibákat. A fenti első és a harmadik esetben a címkék hibásan alkotnak párt, a másodikban a kezdő címkéből hiányzik a &lt; jel.</p>
+  <p>A címkék vastag kék betűvel jelennek meg az eredeti és a lefordított tartalom könnyű egybevetése érdekében. Ha az ugrópontra kattint, a kurzor a szerkesztőben az adott szövegrészre ugrik.. Javítsa ki a hibát, ha szükséges, majd a <code><a href="menu.html#shortcuts">Ctrl+T</a></code> lenyomásával térjen vissza a címkeellenőrzés ablakához és javítsa ki a fennmaradó hibákat. Az első és a harmadik esetben a címkék hibásan alkotnak párt, a másodikban a kezdő címkéből hiányzik a &lt; jel.</p>
 
   <p>A fordításban a <a href="formattedText.html#intro">címke</a>hibák olyan <a href=
-  "formattedText.html#tag_operation">címkeműveletek</a>, amelyek az eredeti szövegrészétől eltérő elrendezésű vagy számú címkét eredményezik. Egyes címkeműveletek szükségszerűek és ártalmatlanok, míg mások gondot okoznak a lefordított dokumentum előállítása során. A címkék rendszerint az eredeti szöveg valamilyen formázását mutatják. <strong>Az eredeti szöveg egyszerűsítése</strong> számottevően csökkenti a címkék számát.</p>
+  "formattedText.html#tag_operation">címkemanipulációk</a>, amelyek az eredeti szövegrészétől eltérő elrendezésű címkéket eredményeznek. Egyes címkeműveletek szükségszerűek és ártalmatlanok, míg mások gondot okoznak a lefordított dokumentum előállítása során. A címkék rendszerint az eredeti szöveg valamilyen formázását mutatják. <strong>Az eredeti szöveg egyszerűsítése</strong> számottevően csökkenti a címkék számát.</p>
 
   <h3>Súgó</h3>
 
-  <p>A súgó (amely megjeleníti ezt a kézikönyvet) az <a href="menu.html#shortcuts">F1</a> lenyomásával vagy a <strong>Súgó -&gt; Felhasználói kézikönyv...</strong> pontból hívható elő <a href="menu.html">főmenüből</a>.</p>
+  <p>A súgó (amely megjeleníti ezt a kézikönyvet) az <a href="menu.html#shortcuts">F1</a> lenyomásával vagy a <strong>Súgó -&gt; Felhasználói kézikönyv...</strong> pontból a <a href="menu.html">főmenüből</a> hívható elő.</p>
 
   <h3><a name="manual" id="manual"></a>A Súgó tartalmának böngészése</h3>
 
@@ -517,7 +547,7 @@
 
   <h3>A felhasználói kézikönyv OmegaT nélküli böngészése</h3>
 
-  <p>A felhasználói kézikönyv az OmegaT telepítési mappájában a <code>doc</code> almappában található. Ennek megfelelően megtekintheti a magyar dokumentációt, ha a böngészőjében megnyitja a <code>doc/hu/index.hmtl</code> állományt. Ily módon követheti a külső internetes hivatkozásokat is, melyek elérését viszont a beépített súgó nem támogatja.</p>
+  <p>A felhasználói kézikönyv az OmegaT telepítési mappájában a <code>doc</code> almappában található. Ennek megfelelően megtekintheti a magyar dokumentációt, ha a böngészőjében megnyitja a <code>doc/hu/index.hmtl</code> állományt. Ily módon követheti a külső internetes ugrópontokat is, melyek elérését viszont a beépített súgó nem támogatja.</p>
   <hr>
 
   <table summary="csak formázás" style="width: 100%;" border="0" cellpadding=

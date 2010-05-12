@@ -1,0 +1,227 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Parancssori argumentumok - OmegaT 2.1 felhasználói kézikönyv</title>
+</head>
+
+<body>
+  <h1>Parancssori argumentumok</h1>
+
+  <p>Az OmegaT futtatható olyan argumentumok megadásával, amelyek módosítják viselkedését vagy arra utasítják, milyen tevékenységeket hajtson végre a program indításakor. Argumentumokat az indítási parancs mellé írhat be a parancssorba, vagy létrehozhat egy olyan kódsort, amely ezt végrehajtja Ön helyett. Az OmegaT indításával kapcsolatos további információkat lásd: <a href="./installingAndRunning.html">Telepítés és futtatás</a>.
+  
+  </p>
+  <h2>A viselkedést megváltoztató argumentumok</h2>
+  
+  <p>Az OmegaT viselkedését megváltoztató argumentumokat valójában a virtuális java-gép fogadja.<br> Az argumentumok a "<em>java</em>" után és a "<em>-jar OmegaT.jar</em>" elé írandók. Ne feledje, hogy Windows esetén a beállításokat módosíthatja az <em>OmegaT.l4J.ini</em> állomány megfelelő megváltoztatásával. Mac OSX esetén ugyanez elérhető az <em>Info.plist</em> módosításával is, az <em>OmegaT.app/Contents/</em> alatt .</p>
+
+  <p>Az alábbi felsorolás egy sor lehetséges argumentumot tartalmaz. Az argumentumokról egyes rendszerekben bővebb információt kap, ha a terminálablakba beírja a <em>java</em> vagy a <em>man java</em> parancsot. A <em>man</em> olyan parancssorból futtatható utasítás, amely tájékoztat a kiválasztott parancs használatáról. Előfordulhat, hogy rendszere az Ön nyelvén nem tartalmazza a <em>java</em> kézikönyvét.</p>
+
+  <p><b>A felhasználói felület nyelve:&nbsp;</b> <em>-Duser.language=XX</em></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Ha az OmegaT-t argumentumok nélkül indítja el, a program először az operációs rendszer felhasználói felületének nyelvét deríti fel. Ha ezen a nyelven létezik az OmegaT-hez felhasználói felület, akkor a program ezt fogja használni. Ha például az operációs rendszer orosz és az OmegaT rendelkezik orosz nyelvi változattal, akkor az OmegaT orosz felhasználói felülettel, orosz menükkel stb. lesz látható. Ellenkező esetben az OmegaT az alapértelmezett angol nyelvi felhasználói felülettel fog elindulni. Ez az alapbeállítás szerinti viselkedés.<br> <br> A "<em>-Duser.language=XX</em>" argumentummal beállítható, hogy az  OmegaT a megadott nyelvet használja az operációs rendszer felhasználói felületének nyelve helyett. A parancsban az "XX" jelöli a kívánt nyelv kétbetűs kódját. Ha az OmegaT-t francia felülettel kívánja használni (például orosz operációs rendszeren), akkor a parancs a következő lesz:</p>
+
+          <p><em>java -Duser.language=fr -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>A felhasználó országának beállítása:</strong><em>&nbsp;-Duser.country=XX</em></p>
+  
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>A nyelv mellett megadhatja az országot is, például a kínai esetén választhat a CN vagy a TW közül. Az azonnali kezdéshez írt  megfelelő útmutató kiválasztásához mind a nyelvet, mind az országot meg kell adnia. Erre akkor is szükség van, ha csak egy kombináció létezik, mint a pt_BR a portugál / Brazília esetén.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Betűk élsimítása:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Ez az argumentum a fontok élsimítását befolyásolja, melynek eredményeként javul megjelenésük.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Font antialiasing (Java 6-tól fölfelé) :</strong><em>&nbsp;-</em><span style=
+  "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>&nbsp;Az "XX" lehetséges értékei: "false", "on", "gasp" és "lcd". Linux-felhasználóknál előfordulhat, hogy a kiválasztott betűtípustól és -mérettől függően az "on" vagy az "lcd" hatására javul a betűk megjelenése.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Memória hozzárendelése:</strong><em>&nbsp;-XmxZZM</em></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Ezzel a paranccsal több memória rendelhető az OmegaT-hez. Alaphelyzetben 256 Mb van hozzárendelve, így ennél alacsonyabb érték megadásától nem remélhet előnyöket. A "ZZ" a hozzárendelt memória mennyisége megabyte-ban. Ennek alapján az OmegaT-t 1024 MB (1 gigabyte) memóriával ekként indíthatja el:</p>
+
+          <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>A proxyszerver címe és portja:</strong><em>&nbsp;-Dhttp.proxyHost=&lt;a szerver IP-címe&gt;&nbsp;-Dhttp.proxyPort=&lt;a port száma&gt;</em></p>
+
+  <table summary="csak formázás">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Ezzel a paranccsal a proxyszerver egy proxy mögül érheti el az Internetet.</p>
+
+          <p><em>java -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar
+          OmegaT.jar</em></p>
+
+          <p>Az argumentumokat kombinálhatja: ha az OmegaT-t az összes fenti példában szereplő értékekkel kívánja elindítani, akkor az utasítás a következő lesz:<br> <em>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>Tevékenységek argumentumai</h2>
+  
+  <p>Az OmegaT-nek az alábbi parancsokkal mondhatja meg, mit tegyen. Ezeknek a "<em>-jar OmegaT.jar</em>" rész UTÁN kell következni. Az argumentumokat vagy a programot elindító kódban, vagy a parancssorba beírva kell megadnia. A viselkedést módosító argumentumoktól eltérően ezek nem helyezhetők el egy konfigurációs fájlban.</p>
+  
+  <table style="width: 80%;" cellpadding="2" cellspacing="2" summary=
+  "csak formázás">
+    <tbody>
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>&lt;project-dir&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>utasítja az OmegaT-t a megadott projekt indításkor való betöltésére. Pl. <code>/home/user/omegat_projects/myProject</code> vagy <code>"C:\Honositas\Projektem"</code>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--config-dir=&lt;config-dir&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;tudatja az OmegaT-vel, mely könyvtárban vannak a konfigurációs állományok. Ha nincs megadva, az OmegaT az alapbeállítást használja (a felhasználó gyökérkönyvtárában az OmegaT könyvtárát, ha ez hiányzik, akkor az aktuális munkakönyvtárat).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--mode=[console-translate |
+        console-createpseudotranslatetmx]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Az OmegaT <a href="consoleMode.html">parancssori üzemmódban</a> indul. Ha az üzemmód <code>console-translate</code>, az OmegaT lefordítja az adott projektet. Ha az üzemmód <code>createpseudotranslatetmx</code>, akkor létrehoz egy fordítási memóriát (a <code>--pseudotranslatetmx</code> paraméterben megadottak szerint), amely tartalmazza a projekt összes szövegegységét, ideértve a korábban le nem fordítottakat is. Az egységek lefordítása a <code>--pseudotranslatetype</code> paramétertől függ. A fordítási memória megfelel az OmegaT formátumának, így az OmegaT-vel használható. Lásd még: <a href=
+          "translationMemories.html#pseudo_translate">Fordítási memóriák</a></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--forrás mintája=&lt;reguláris kifejezés&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Csak <code>console-translate</code> üzemmód esetén használható. Meghatározza a lefordítandó forrásállományokat. A célkönyvtárak azonban attól függetlenül létrejönnek, hogy vannak-e egyező forrásfájlok, avagy nincsenek. A paraméter egy reguláris kifejezés. Példák:</p>
+
+          <ul>
+            <li><code>.*</code>: minden állomány fordítására sor kerül. Ez egyenértékű azzal az esettel, amikor nem adunk meg paramétereket.</li>
+
+            <li><code>.*\.html</code>: minden HTML-állomány fordítására sor kerül.</li>
+
+            <li><code>dir-10\\test\.html</code>: csak a <code>test.html</code> nevű, <code>dir-10</code> könyvtárban lévő HTML állomány fordítására kerül sor. A projekt forráskönyvtárának gyökeréhez viszonyított könyvtárak. A könyvtárelválasztó használata platformtól függ. <code>\\</code> használandó Windows esetén, <code>/</code> pedig egyéb platformokon.</li>
+
+            <li><code>test\.html</code>: csak a <code>test.html</code> nevű, a  forráskönyvtár gyökerében lévő állomány fordítására kerül sor. Az egyéb könyvtárakban lévő test.html nevű állományokat a rendszer figyelmen kívül hagyja.</li>
+          </ul>
+
+          <p>A paraméter használata választható, alapesetben <code>.*</code>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetmx=&lt;file.tmx&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Csak <code>console-createpseudotranslatetmx</code> üzemmód esetén használható. Meghatározza, milyen állományba kerüljön a fordítási memória. Ha az állomány neve nem <code>.tmx</code>-re végződik, hozzáadja a kiterjesztést. A fájlnév lehet abszolút vagy a munkakönyvtárhoz (az OmegaT indítási helyétől számított) könyvtárhoz viszonyított név.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetype=[empty|equal]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Csak <code>console-createpseudotranslatetmx</code> üzemmód esetén használható. Meghatározza, milyen fordítások jöjjenek létre az egyes egységekhez. Lehetséges értékek:</p>
+
+          <ul>
+            <li><code>empty</code>: a célnyelvi egység üres lesz</li>
+
+            <li><code>equal</code>: a célnyelvi egység megegyezik a forrásnyelvivel.</li>
+          </ul>
+
+          <p>A paraméter használata választható, alapesetben <code>equal</code>.</p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--quiet</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Csak konzolos üzemmód esetén használható. Csendes üzem esetén kevesebb információ jelenik meg a képernyőn. Nem jelennek meg az állapotsoron egyébként megjelenő üzenetek.
+
+          <p>A paraméter használata nem kötelező, alapesetben  a képernyőn megjelennek az üzenetek.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="csak formázás">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Jogi tudnivalók</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Kezdőoldal</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tartalomjegyzék</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+

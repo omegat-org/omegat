@@ -37,6 +37,10 @@
     <li>
       <p><a href="#tag_hints">Ötletek a címkék kezeléséhez</a></p>
     </li>
+
+    <li>
+      <p><A href="#printf">printf-helyőrzők</A></p>
+    </li>
   </ul>
 
   <p>A forrásszövegben lévő formázást rendszerint elő kell állítani a fordításban is. Az OmegaT a támogatott (jelenleg: DocBook, HTML, XHTML, Open Document, OpenOffice.org) állományokban a sorok közötti formázási adatokat címkék használatával jeleníti meg. A rendszer a címkéket a szövegrészek hasonlóságának megállapítása során rendszerint figyelmen kívül hagyja. A fordításban megőrzött címkék megjelennek a célnyelvi dokumentumban.</p>
@@ -58,7 +62,7 @@
 "#FB0000">&lt;/b2&gt;</font><strong>&lt;egység vége&gt;</strong>
 </pre>
 
-  <p><code><strong><font color="#FB0000">&lt;br1&gt;</font></strong></code> egyedüli címke és nem befolyásolja a környező szöveget. A <strong>páros címkék</strong> általában olyan stilizálási információkat tartalmaznak, amelyek a címkepár nyitó és záró eleme közötti részre érvényesek. Bármilyen változás éri a címkepárt, a nyitó címkének mindig meg kell előznie a záró címkét.</p>
+  <p><code>A <strong><font color="#FB0000">&lt;br1&gt; </font></strong></code> egyedüli címke és nem befolyásolja a környező szöveget. A <strong>páros címkék</strong> általában olyan stilizálási információkat tartalmaznak, amelyek a címkepár nyitó és záró eleme közötti részre érvényesek. Bármilyen változás éri a címkepárt, a nyitó címkének mindig meg kell előznie a záró címkét.</p>
   <pre>
  <strong>&lt;3167. egység&gt;</strong>Naplófájl (<font color=
 "#FB0000">&lt;b0&gt;</font>log.txt<font color=
@@ -71,18 +75,18 @@
 
   <h3><a name="tag_segmenting" id="tag_segmenting"></a>Címkék és mondatdarabolás</h3>
 
-  <p>Az OmegaT a címkéket a mondatok darabolása előtt állítja elő. A szövegdarabolási szabályoktól függően úgy tűnhet, hogy a címkék nem követik a fenti számozási és csoportosítási szabályokat. Vegyük szemügyre az alábbi szöveget: "<em>Előtte: \. [?] Utána: \s"</em><font color="#FB0000">.</font> <font color="#000000">Az alábbi szövegdarabolást várnánk (a &lt;b0&gt; és a &lt;/b0&gt; a dőlt szöveg elejét és végét jelzik):</font></p>
+  <p>Az OmegaT a címkéket a mondatok darabolása előtt állítja elő. A szövegdarabolási szabályoktól függően úgy tűnhet, hogy a címkék nem követik a fenti számozási és csoportosítási szabályokat. Vegyük szemügyre az alábbi szöveget: "<em>Előtte: \. \s"</em><font color="#FB0000"> után: </font> <font color="#000000">Az alábbi szövegdarabolást várnánk (a &lt;b0&gt; és a &lt;/b0&gt; a dőlt szöveg elejét és végét jelzik):</font></p>
   <pre>
- [?] <strong>&lt;... . egység&gt;</strong> <font color=
-"#FB0000">&lt;b0&gt;</font>Előtte: \. [?] Utána: \s<font color=
+ <strong>&lt;... . egység&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>\. előtt \s után:<font color=
 "#FB0000">&lt;/b0&gt;</font><strong>&lt;egység vége&gt;</strong>
 </pre>
 
   <p>Ha a szövegrészre a vonatkozó darabolási alapszabályokat alkalmazzuk, akkor a következő eredményt kapjuk:</p>
   <pre>
- [?] <strong>&lt;1990. egység&gt;</strong> <font color=
-"#FB0000">&lt;b0&gt;</font>Előtte: \. <strong>&lt;egység vége&gt;</strong><br>
-<strong>&lt;1991. egység&gt;</strong> Utána: \s<font color=
+ <strong>&lt;1990. egység&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>\. előtt <strong>&lt;egység vége&gt;</strong><br>
+<strong>&lt;1991. egység&gt;</strong> \s után<font color=
 "#FB0000">&lt;/b0&gt;</font><strong>&lt;egység vége&gt;</strong> <br>
 </pre>
 
@@ -92,7 +96,7 @@
 
   <h3><a name="tag_operation" id="tag_operation"></a>Címkeműveletek</h3>
 
-  <p>A címkékkel óvatosan kell bánni. Ha véletlenül módosulnak, az akár a végleges állomány egész formázását tönkreteheti. A helyes megközelítés a "Ne javítsd azt, ami nem ment tönkre". Ennek ellenére célszerű tisztában lenni a lehetőségekkel.</p>
+  <p>A címkékkel óvatosan kell bánni. Ha véletlenül módosulnak, az akár a végleges állomány egész formázását tönkreteheti. A helyes megközelítés a "ne javítsd ki azt, ami nem romlott el". Ennek ellenére célszerű tisztában lenni a lehetőségekkel.</p>
 
   <p><a name="duplication" id="duplication"></a><b>Címkecsoport másolása:</b> A címkecsoportokat egyszerűen a kívánt helyre másolhatja. Ne feledje, hogy címkepár esetén a nyitó címkének mindig meg kell előznie a záró címkét. Az átmásolt csoport által képviselt formázás a másolás helyén megismétlődik.</p>
 
@@ -191,18 +195,18 @@
 
   <h3><a name="tag_validation" id="tag_validation"></a>Címkecsoportok ellenőrzése</h3>
 
-  <p>A címkeellenőrzési funkcióval felderítheti a (szándékosan vagy véletlenül) felcserélt címkéket és megjelenítheti a hibás szövegrészeket. A Ctrl+T gyorsbillentyűvel elérhető használata során egy párbeszédablak nyílik meg, benne az állományban gyaníthatóan hibás vagy széttagolt összes jelölővel. Ez a gond gyakran jelentkezik OpenDocument vagy OpenOffice.org állományokban, amelyek a fordítás során létrejövő címkehibák miatt esetenként nem nyithatók meg. A címkék kijavítása és a célszöveg újbóli előállítása könnyen végrehajtható a címke-ellenőrzési funkcióval. Az ablak háromhasábos táblázatból áll, ugróponttal a szövegegységhez, annak forrásnyelvi és célnyelvi tartalmához:</p><br>
+  <p>A címke-ellenőrzési funkcióval felderítheti a (szándékosan vagy véletlenül) felcserélt címkéket és megjelenítheti a hibás szövegrészeket. A Ctrl+T gyorsbillentyűvel elérhető használata során egy párbeszédablak nyílik meg, benne az állományban gyaníthatóan hibás vagy széttagolt összes jelölővel. Ez a gond gyakran jelentkezik OpenDocument vagy OpenOffice.org állományokban, amelyek a fordítás során létrejövő címkehibák miatt esetenként nem nyithatók meg. A címkék kijavítása és a célszöveg újbóli előállítása könnyen végrehajtható a címke-ellenőrzési funkcióval.  A Ctrl+T-vel megnyitható ablak háromhasábos táblázatból áll, ugróponttal a szövegegységhez, annak forrásnyelvi és célnyelvi tartalmához:</p><br>
 
-  <table align="center" border="1" width="80%">
+  <table align="center" border="1" width="80%" summary="">
     <tbody>
       <tr>
-        <td><a href="">1</a></td>
+        <td>1</td>
 
         <td>Egy másik megjelenítési betűtípust választhat a <strong><font color="blue">&lt;b0&gt;</font></strong>Megjelenítendő betű<strong><font color="blue">&lt;/b0&gt;</font></strong>  párbeszédablakból. Megnyitása a <strong><font color=
         "blue">&lt;i1&gt;</font></strong>Beállítások <strong><font color=
         "blue">&lt;/i1&gt;</font></strong> &gt; <strong><font color=
         "blue">&lt;i2&gt;</font></strong>Betű...<strong><font color=
-        "blue">&lt;/i2&gt;</font></strong> menüpontból lehetséges. A párbeszédablakban módosíthatja a betű típusát és méretét.</td>
+        "blue">&lt;/i2&gt;</font></strong> menüpontból lehetséges. A párbeszédablakban beállíthatja a betű típusát és méretét.</td>
 
         <td>'n Mens kan 'n ander vertoonfont kies met die <strong><font color=
         "blue">&lt;b0&gt;</font></strong>Vertoonfont<strong><font color=
@@ -228,6 +232,26 @@
   "segmentation.html">szövegdarabolási szabályokkal</a> elérhető, hogy csökkenjen a szövegrészekben lévő címkék száma. Ennek a funkciónak a használatát kezdő felhasználóknak nem ajánljuk.</p>
 
   <p><strong>Fontos:</strong> Az OmegaT még nem teljesen automatikusan kezeli a formázási hibák felderítését, ezért nem jelez, ha Ön hibát ejt vagy a célszöveg formázását a nyelv igényei szerint módosítja. Esetenként a lefordított állomány hibásan jelenik meg, OpenDocument / OpenOffice.org fájlok esetén pedig akár meg sem nyílik.</p>
+
+  <hr>
+
+  <h3><a name="printf"></a>printf-helyőrzők</h3>
+
+  <p>Egyes programozási nyelvekben (pl. PHP, C) speciális címkéket használnak helyőrzőként a printf függvénnyel kombinálva. Pl.:
+  </p>
+  <pre>$var =_("cool");
+echo printf(_("Az OmegaT nagyon %s"),$var);</pre>
+
+  <p>Ha a szöveget ebből a forráskódból állítjuk elő (pl. egy PO-szűrővel), akkor az OmegaT ezeket a változókat nem cseréli ki címkékre, mivel nem lehet eldönteni, hogy pl. az <code>%s</code> valóban helyőrző-e, vagy magának a szövegnek egy része. Ugyanakkor lehetősége van ezen helyőrzők ellenőrzésére. A menüből válassza ki a <strong>Beállítások→ Címkeellenőrzés...</strong> pontot. Választhat egyszerű és átfogó ellenőrzés közül.</p>
+
+  <p>A printf-változók hivatalos szintaxisa a következő:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Az átfogó ellenőrzés teljesen támogatja a fenti formátumot, a <code>WIDTHSPECIFIER</code> kivételével. Egyszerű ellenőrzés esetén az alábbi szintaxis ellenőrzésére kerül sor:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>A helyőrzők sorrendjét módosíthatja, de ekkor - ha még nincs megadva - meg kell adnia az ARGUMENTSWAPSPECIFIER paramétert. Vagyis egy sorszámot és egy dollárjelet kell megadnia a <code>%</code> után. Pl. a <code>"%s egy %s alkalmazás"</code> megegyezik azzal, hogy a <code>"%1$s egy %2$s alkalmzás"</code>, melyet lefordíthat ekként: a <code>"a %2$s alkalmazás egy %1$s"</code>.
+  </p>
   <hr>
 
   <table style="width: 100%;" summary="csak formázás" border="0" cellpadding=

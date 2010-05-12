@@ -1,0 +1,227 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Arguments de la línia d'ordres - Manual d'usuari de l'OmegaT 2.1</title>
+</head>
+
+<body>
+  <h1>Arguments de la línia d'ordres</h1>
+
+  <p>L'OmegaT es pot executar amb arguments addicionals que modifiquen el comportament de l'OmegaT o que indiquen a l'OmegaT quines accions cal realitzar en iniciar-se. Per afegir els arguments, heu d'escriure les ordres d'inici i els arguments a la línia d'ordres o bé podeu afegir-los a l'script d'inici. Per veure més informació sobre com iniciar l'OmegaT, vegeu <a href="installingAndRunning.html">Instal·lació i execució</a>.
+  
+  </p>
+  <h2>Arguments que alteren el comportament</h2>
+  
+  <p>De fet, els arguments que alteren el comportament de l'OmegaT són arguments de la màquina virtual de Java.<br> Els arguments s'afegeixen després del «<em>java</em>» inicial i abans de la part «<em>-jar OmegaT.jar</em>». Tingueu en compte que al Windows podeu modificar el fitxer <em>OmegaT.l4J.ini</em> per tal de definir les vostres preferències. Per fer el mateix al Mac OSX, podeu canviar el fitxer <em>Info.plist</em> que es troba a <em>OmegaT.app/Contents/</em>.</p>
+
+  <p>A continuació es detallen els arguments possibles. Per obtenir més informació sobre els arguments, escriviu <em>java</em> o <em>man java</em> a la finestra de terminal (<em>man</em> és una ordre de la finestra de terminal que mostra un manual de l'ordre especificada). És possible que el sistema no tingui el manual de l'ordre <em>java</em> en la vostra llengua.</p>
+
+  <p><b>Llengua de la interfície d'usuari:</b> <em>-Duser.language=XX</em></p>
+
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Quan l'OmegaT s'executa sense cap argument, el programa detecta la llengua del sistema operatiu de l'usuari. Si hi ha disponible una interfície d'usuari en aquesta llengua, l'OmegaT la utilitza. Per exemple, si el sistema operatiu de l'usuari és en rus i l'OmegaT s'ha traduït al rus, la interfície d'usuari, els menús, etc. de l'OmegaT apareixeran en rus. Si la llengua del sistema de l'usuari no està disponible, l'OmegaT s'executarà per defecte en anglès. Aquest és el comportament estàndard.<br> <br> L'argument «<em>-Duser.language=XX</em>» fa que l'OmegaT utilitzi la llengua especificada en comptes de la llengua del sistema operatiu de l'usuari. «XX» indica el codi de dos dígits de la llengua que voleu. Així doncs, per iniciar l'OmegaT amb la interfície en català (per exemple, en un sistema operatiu en rus), l'ordre seria:</p>
+
+          <p><em>java -Duser.language=ca -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Configuració del país de l'usuari:</strong><em>&nbsp;-Duser.country=XX</em></p>
+  
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>A continuació de la llengua, també podeu especificar el país, per exemple, CN o TW en el cas del xinès. Per veure la Guia d'inici ràpid correcta, cal que especifiqueu tant la llengua com el país. Això és necessari encara que només hi hagi una sola combinació disponible, com per exemple, pt_BR en el cas del portuguès de Brasil.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Antialiàsing del tipus de lletra:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
+
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Aquest argument afecta l'antialiàsing (suavització) dels tipus de lletra, cosa que en millora l'aspecte.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Antialiàsing del tipus de lletra (Java 6 o posterior) :</strong><em>&nbsp;-</em><span style=
+  "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
+
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>&nbsp;Els valors possibles per a «XX» són «false», «on», «gasp» i «lcd». Els usuaris del Linux veuran que, en funció del tipus de lletra i de la mida seleccionats, els valors «on» o «lcd» poden millorar l'aspecte dels tipus de lletra.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Assignació de memòria:</strong><em>&nbsp;-XmxZZM</em></p>
+
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Aquest argument assigna més memòria a l'OmegaT. Per defecte, s'assignen 256 MB. Per tant, no té sentit assignar menys memòria que aquesta xifra. «ZZ» indica la quantitat de memòria assignada, en megabytes. Així doncs, l'ordre per executar l'OmegaT amb una assignació de 1024 MB (1 gigabyte) de memòria seria:</p>
+
+          <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Adreça i port del servidor intermediari:</strong><em>&nbsp;-Dhttp.proxyHost=&lt;adreça IP del servidor&gt;&nbsp;-Dhttp.proxyPort=&lt;número de port&gt;</em></p>
+
+  <table summary="format">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Aquesta ordre defineix un servidor intermediari, per tal d'accedir a Internet mitjançant un servidor intermediari.</p>
+
+          <p><em>java -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar
+          OmegaT.jar</em></p>
+
+          <p>Els arguments es poden combinar: Per iniciar l'OmegaT amb tots els exemples descrits més amunt, l'ordre seria:<br> <em>java -Dswing.aatext=true -Duser.language=ca -Duser.country=AD -Xmx1024M -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>Arguments d'acció</h2>
+  
+  <p>Les ordres següents indiquen a l'OmegaT quines accions cal realitzar en iniciar-se. S'han d'afegir DESPRÉS de la part «<em>-jar OmegaT.jar</em>». Cal afegir els arguments a l'script d'inici / drecera o bé escriure'ls directament a la línia d'ordres. No es poden afegir en cap fitxer de configuració, a diferència dels arguments que alteren el comportament.</p>
+  
+  <table style="width: 80%;" cellpadding="2" cellspacing="2" summary=
+  "format">
+    <tbody>
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>&lt;dir-projecte&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>Indica a l'OmegaT que carregui el projecte especificat en iniciar-se. Per exemple, <code>/home/usuari/projectes_omegat/ElMeuProjecte</code> o bé <code>"C:\Projectes de localització\ElMeuProjecte"</code>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--config-dir=&lt;dir-config&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Indica a l'OmegaT el directori on hi ha emmagatzemats els fitxers de configuració. Si no s'especifica, l'OmegaT utilitzarà els valors per defecte (el directori OmegaT dins del directori inicial de l'usuari, o si no està disponible, el directori de treball actual).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--mode=[console-translate |
+        console-createpseudotranslatetmx]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;L'OmegaT s'inicia en <a href="consoleMode.html">mode de consola</a>. Si el mode és <code>console-translate</code>, l'OmegaT traduirà el projecte especificat. Si el mode és <code>createpseudotranslatetmx</code>, l'OmegaT crearà un fitxer de memòria de traducció (especificat pel paràmetre <code>--pseudotranslatetmx</code>) que inclourà tots els segments del projecte, fins i tot els segments que no s'havien traduït prèviament. La traducció dels segments depèn del paràmetre <code>--pseudotranslatetype</code>. La memòria de traducció té el format de l'OmegaT i, per tant, es pot utilitzar amb l'OmegaT. Vegeu també <a href=
+          "translationMemories.html#pseudo_translate">Memòries de traducció</a>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--source-pattern=&lt;expressió regular&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Només es vàlid quan el mode és <code>console-translate</code>. Especifica els fitxers de partida que es traduiran. Els subdirectoris de destinació es crearan independentment de si hi ha fitxers de partida que coincideixin o no. El paràmetre és una expressió regular. Exemples:</p>
+
+          <ul>
+            <li><code>.*</code>: es traduiran tots els fitxers. És el paràmetre per defecte si no se n'especifica cap.</li>
+
+            <li><code>.*\.html</code>: es traduiran tots els fitxers HTML.</li>
+
+            <li><code>dir-10\\prova\.html</code>: només es traduirà el fitxer <code>prova.html</code> del directori <code>dir-10</code>. Els directoris són relatius a l'arrel del directori «source» del projecte. El separador de directori depèn de la plataforma. Cal utilitzar <code>\\</code> al Windows i <code>/</code> en altres plataformes.</li>
+
+            <li><code>prova\.html</code>: només es traduirà el fitxer <code>prova.html</code> de l'arrel del directori «source». Si hi ha altres fitxers anomenats prova.html en altres directoris, s'ometran.</li>
+          </ul>
+
+          <p>Aquest paràmetre és opcional i el valor per defecte és <code>.*</code>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetmx=&lt;fitxer.tmx&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Només es vàlid quan el mode és <code>console-createpseudotranslatetmx</code>. Especifica el fitxer en el qual s'escriurà la memòria de traducció. Si el nom de fitxer no acaba en <code>.tmx</code>, s'hi afegirà l'extensió. El nom pot ser tant absolut com relatiu al directori de treball (el directori des d'on inicieu l'OmegaT).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetype=[empty|equal]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Només es vàlid quan el mode és <code>console-createpseudotranslatetmx</code>. Especifica quin tipus de traducció cal crear per a cada segment. Els valors possibles són:</p>
+
+          <ul>
+            <li><code>empty</code>: El segment d'arribada serà un segment buit.</li>
+
+            <li><code>equal</code>: El segment d'arribada serà igual al segment de partida.</li>
+          </ul>
+
+          <p>El paràmetre és opcional i per defecte és <code>equal</code>.</p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--quiet</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Només és vàlid en el mode de consola. Si s'especifica, es mostra menys informació a la pantalla. No es mostra cap dels missatges que normalment es mostrarien a la barra d'estat.
+
+          <p>Aquest paràmetre és opcional; per defecte, es mostren els missatges a la pantalla.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="format">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inici</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índex</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+

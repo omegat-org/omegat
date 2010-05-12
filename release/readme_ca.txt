@@ -1,4 +1,7 @@
-Aquesta traducció és obra de Jordi Serratosa, copyright© 2010.
+Aquesta traducció és obra de Jordi Serratosa Quintana, copyright© 2010.
+Han participat en la localització de l'OmegaT al català:
+Mikel Forcada Zubizarreta (versió 1.4)
+Jordi Serratosa Quintana (versió 1.6 a l'actual)
 
 ==============================================================================
   OmegaT 2.0, fitxer LLEGIU-ME
@@ -69,6 +72,10 @@ L'OmegaT admet els següents formats de fitxer de manera nativa:
   - ResX
   - Recursos de l'Android
   - LaTeX
+  - Typo3 LocManager
+  - Help & Manual
+  - Recursos RC del Windows
+  - Mozilla DTD
 
 L'OmegaT es pot personalitzar per tal d'admetre altres formats de fitxer.
 

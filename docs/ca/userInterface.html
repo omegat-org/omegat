@@ -346,7 +346,7 @@
   <p>La finestra principal té diverses subfinestres, un menú principal i una barra d'estat. Podeu canviar la posició de qualsevol subfinestra o desacoblar-la en una finestra separada arrossegant la subfinestra per la barra de títol. En funció de l'estat de la subfinestra, poden mostrar-se icones diferents a l'extrem superior dret:</p>
 
   <p><img src="images/Minimize.gif" name="graphics1" alt="Minimitza" id=
-  "graphics1" align="bottom" border="0" height="18" width="18">redueix la subfinestra de manera que només se'n vegi el nom i la col·loca a la part inferior, prop de la barra d'estat.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximitza" id="graphics2"
+  "graphics1" align="bottom" border="0" height="18" width="18"> redueix la subfinestra de manera que només se'n vegi el nom i la col·loca a la part inferior, prop de la barra d'estat.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximitza" id="graphics2"
   align="bottom" border="0" height="18" width="18"> fa que la subfinestra ocupi tot l'espai disponible de la finestra.<br> <img src="images/Restore.gif" name="graphics3" alt="Restaura" id="graphics3"
   align="bottom" border="0" height="18" width="18"> restableix la subfinestra a la posició on era abans de maximitzar-la o minimitzar-la.<br> <img src="images/Undock.gif" name="graphics4" alt="Desacobla" id="graphics4"
   align="bottom" border="0" height="18" width="18"> desacobla la subfinestra de la finestra principal de manera que passa a ser una finestra independent.<br> <img src="images/Dock.gif" name="graphics5" alt="Acobla" id="graphics5" align=
@@ -354,7 +354,7 @@
 
   <p>Les subfinestres també es poden col·locar de manera que es superposin. En aquest cas, es mostrarà una pestanya per cada subfinestra a la part superior. En fer clic a la pestanya, la subfinestra passarà a primer pla. Els separadors de les subfinestres es poden arrossegar per tal de canviar-ne la mida.</p>
 
-  <p>Els comptadors de la part inferior dreta fan el seguiment del progrés de la traducció.</p>
+  <p>Els comptadors de la part inferior dreta fan el seguiment del progrés de la traducció:</p>
 
   <p><img alt="comptadors del menú principal" title="comptadors del menú principal" src=
   "images/Main_pane_counters.png"></p>
@@ -406,17 +406,21 @@
   <p>En passar al segment següent, la primera coincidència parcial (la que tingui el millor percentatge de coincidència) se seleccionarà automàticament. La coincidència parcial seleccionada es ressaltarà en <strong>negreta</strong>, les paraules que falten al segment que esteu traduint es ressaltaran de color <strong><font color=
   "#0000FF">blau</font></strong> i les paraules adjacents a les parts que falten es ressaltaran de color <font color="#00FF00"><b>verd</b></font>. Podeu <a href=
   "menu.html#shortcuts">seleccionar</a> una altra coincidència prement <code>Ctrl+2</code>, <code>3</code>, <code>4</code> o <code>5</code>. Òbviament, si no hi ha cap coincidència número 5, prémer <code>Ctrl+5</code> no farà res. Si voleu utilitzar la coincidència <strong>seleccionada</strong> a la traducció, premeu <code><a href="menu.html#shortcuts">Ctrl+R</a></code> per reemplaçar el camp d'edició per la coincidència, o premeu <code><a href=
-  "menu.html#shortcuts">Ctrl+I</a></code> per inserir-la a la posició del cursor. &nbsp;</p>
+  "menu.html#shortcuts">Ctrl+I</a></code> per inserir-la a la posició del cursor.</p>
 
-  <p>A grans trets, el percentatge de coincidència es calcula a partir del nombre de paraules comunes del segment actiu i del segment coincident dividit entre el nombre total de paraules del segment més llarg dels dos. Les paraules es poden reduir a les seves arrels amb l'ajuda d'un analitzador lèxic (o «tokenizer» en anglès), o bé es poden utilitzar «tal qual» (això correspon als dos primers percentatges de sota la coincidència). Al cas anterior, són iguals (60/60), ja que no s'ha utilitzat cap analitzador lèxic. La tercera mesura (72% a l'exemple anterior) també té en compte les diferències d'etiquetes i els signes de puntuació.&nbsp;</p>
+  <p>A grans trets, el percentatge de coincidència (és a dir, la mesura de la diferència entre el segment de partida i les coincidències) es calcula a partir del nombre de paraules comunes del segment actiu i del segment coincident dividit entre el nombre total de paraules del segment més llarg dels dos. Si s'utilitza el connector d'analitzador lèxic (o «tokenizer» en anglès), primer les paraules d'ambdós segments es redueixen a llurs arrels. Si no s'utilitza, les paraules no es modifiquen i només s'ometen els signes de puntuació, les xifres i les etiquetes. Finalment, les diferències d'etiquetes, de xifres i de puntuació (que s'ometen als dos casos anteriors) es poden incloure al càlcul. El visualitzador de coincidències mostra les tres mesures d'aquesta manera:</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
+  "font-style: italic;">% de coincidència, quan s'utilitza l'analitzador lèxic / % de coincidència per defecte de l'OmegaT / % de coincidència amb etiquetes, xifres i puntuació incloses</span>&gt;&nbsp;
 
-  <p>&nbsp;Si no es mostra cap nom de fitxer, vol dir que la coincidència s'ha trobat a la memòria de traducció per defecte del projecte. Els segments orfes (la coincidència número 4) són els segments de la memòria de traducció per defecte del projecte que no corresponen a cap segment dels fitxers de partida. Al cas anterior, s'ha editat la frase original, que ja s'havia traduït amb l'OmegaT.<br></p>
+  <p>Al l'exemple anterior, les dues primeres mesures (60/60) són iguals, ja que no s'ha utilitzat cap analitzador lèxic. El tercer percentatge (72) inclou les diferències de puntuació, d'etiquetes i de xifres.</p>
+
+  <p>Si no es mostra cap nom de fitxer, vol dir que la coincidència s'ha trobat a la memòria de traducció per defecte del projecte. Els segments orfes (la coincidència número 4) són els segments de la memòria de traducció per defecte del projecte que no corresponen a cap segment dels fitxers de partida. Al cas anterior, s'ha editat la frase original, que ja s'havia traduït amb l'OmegaT.<br></p>
 
   <h3><a name="Glossary" id="Glossary"></a>Glossari</h3>
 
-  <p>La subfinestra Glossari us permet accedir al recull d'expressions i de terminologia especialitzada que hàgiu inclòs als <a href="glossaries.html">fitxers de glossari</a>. Mostra la traducció dels termes que apareixen en el segment actual, però només els mostra com a referència, ja que no permet inserir ni reemplaçar-ne la traducció.</p><img src="images/Glossary_pane.png" name="grafika3" alt=
-  "Subfinestra de glossari de l'OmegaT" id="grafika3" align="left" border="0"><br clear=
-  "left">
+  <p>La subfinestra Glossari us permet accedir al recull d'expressions i de terminologia especialitzada que hàgiu inclòs als <a href=
+  "glossaries.html">fitxers de glossari</a>. Mostra la traducció dels termes que apareixen en el segment actual, però només els mostra com a referència, ja que no permet inserir ni reemplaçar-ne la traducció.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="Subfinestra de glossari de l'OmegaT" id=
+  "grafika3" align="left" border="0"><br clear="left">
 
   <p><br></p>
 
@@ -519,7 +523,7 @@
   <h3><a name="tag_validation" id="tag_validation"></a>Validació de les etiquetes</h3>
 
   <p>La finestra de validació de les etiquetes detecta els errors d'etiquetes de la traducció i els mostra en una llista. Per obrir la finestra, premeu <code><a href=
-  "menu.html#shortcuts">Ctrl+T</a></code>. La finestra conté una taula amb tres columnes amb un enllaç al segment i amb el contingut del text de partida i del text traduït.</p>
+  "menu.html#shortcuts">Ctrl+T</a></code>. La finestra conté una taula amb tres columnes amb un enllaç al segment i amb el contingut del text de partida i del text traduït:</p>
 
   <p><img src="images/TagValidator.png" name="grafika4" alt=
   "Validació d'etiquetes de l'OmegaT" id="grafika4" align="left" border="0"><br clear=

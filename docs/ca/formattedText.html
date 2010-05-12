@@ -238,11 +238,12 @@
 
   <h3><a name="printf"></a>Textos variables de la funció printf</h3>
 
-  <p>En alguns llenguatges de programació (p. ex. PHP, C), es fan servir etiquetes especials com a text variable en aquelles cadenes que s'utilitzen en combinació amb la funció printf. Per exemple:</p>
+  <p>En alguns llenguatges de programació (p. ex. PHP, C), es fan servir etiquetes especials com a text variable en aquelles cadenes que s'utilitzen en combinació amb la funció printf. Per exemple:
+  </p>
   <pre>$var =_("excel·lent");
 echo printf(_("L'OmegaT és %s"),$var);</pre>
 
-  <p>Si s'extreuen les cadenes de text d'aquest codi font (per exemple, mitjançant el PO-filter), l'OmegaT no reemplaça aquestes variables per etiquetes, ja que no pot saber del cert si, per exemple, <code>%s</code> és de fet un text variable o senzillament una part del text. Això no obstant, podeu habilitar la validació d'aquests textos variables, Seleccioneu <strong>Opcions→ Validació de les etiquetes...</strong> al menú. Podeu triar entre una validació simple i una validació completa.</p>
+  <p>Si s'extreuen les cadenes de text d'aquest codi font (per exemple, mitjançant el PO-filter), l'OmegaT no reemplaça aquestes variables per etiquetes, ja que no pot saber del cert si, per exemple, <code>%s</code> és de fet un text variable o senzillament una part del text. Això no obstant, podeu habilitar la validació d'aquests textos variables. Seleccioneu <strong>Opcions→ Validació de les etiquetes...</strong> al menú. Podeu triar entre una validació simple i una validació completa.</p>
 
   <p>La sintaxi oficial de les variables de printf és</p>
   <pre>"%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
@@ -250,7 +251,8 @@ echo printf(_("L'OmegaT és %s"),$var);</pre>
   <p>La validació de totes les variables admet aquest format, a excepció de <code>WIDTHSPECIFIER</code>. En la validació simple, es comprova la sintaxi següent:</p>
   <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
 
-  <p>Podeu canviar l'ordre dels textos variables, però llavors cal que afegiu ARGUMENTSWAPSPECIFIER si no hi apareix. Això vol dir que cal que afegiu un número de seqüència i un signe de dòlar després del <code>%</code>. Per exemple, <code>«%s és una aplicació %s»</code> és igual a <code>«%1$s és una aplicació %2$s»</code>, i es pot traduir per <code>«una aplicació %2$s és %1$s»</code>.</p>
+  <p>Podeu canviar l'ordre dels textos variables, però llavors cal que afegiu ARGUMENTSWAPSPECIFIER si no hi apareix. Això vol dir que cal que afegiu un número de seqüència i un signe de dòlar després del <code>%</code>. Per exemple, <code>«%s és una aplicació %s»</code> és igual a <code>«%1$s és una aplicació %2$s»</code>, i es pot traduir per <code>«una aplicació %2$s és %1$s»</code>.
+  </p>
   <hr>
 
   <table style="width: 100%;" summary="format" border="0" cellpadding=

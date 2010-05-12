@@ -67,7 +67,9 @@
         <li><em>nom_projecte-level1.tmx</em></li>
 
         <li><em>nom_projecte-level2.tmx</em></li>
-      </ol>(<i>nom_projecte</i> és el nom del projecte).<p>Aquests fitxers contenen els segments de partida i els segments traduïts, que corresponen al contingut de la carpeta /source/ en el moment que es va crear (generalment en crear els fitxers traduïts).</p>
+      </ol>(<i>nom_projecte</i> és el nom del projecte).
+
+      <p>Aquests fitxers contenen els segments de partida i els segments traduïts, que corresponen al contingut de la carpeta /source/ en el moment que es va crear (generalment en crear els fitxers traduïts).</p>
 
       <ul>
         <li>El fitxer <em>level1</em> conté només informació textual.</li>
@@ -77,7 +79,8 @@
         <li>El fitxer <em>omegat</em> conté les etiquetes de format específiques de l'OmegaT, de manera que es pot utilitzar en altres projectes de l'OmegaT.</li>
       </ul>
 
-      </li><li>La carpeta de les memòries de traducció (per defecte, <em>/tm/</em>) pot contenir qualsevol nombre de fitxers TMX. Cal que aquests fitxers siguin fitxers TMX correctes, que poden contenir únicament informació textual (TMX de nivell 1), informació textual i de format de l'OmegaT (TMX de l'OmegaT) o bé informació textual i de format de TMX (TMX de nivell 2). Les diferències entre les dues són tècniques (vegeu-ne els detalls a continuació) i, si voleu utilitzar una memòria de traducció d'un projecte anterior, es poden intercanviar; és a dir, ambdues funcionaran correctament.</li>
+      </li><li>La carpeta de les memòries de traducció (per defecte, <em>/tm/</em>) pot contenir qualsevol nombre de fitxers TMX. Cal que aquests fitxers siguin fitxers TMX correctes, que poden contenir únicament informació textual (TMX de nivell 1), informació textual i de format de l'OmegaT (TMX de l'OmegaT) o bé informació textual i de format de TMX (TMX de nivell 2). Les diferències entre les dues són tècniques (vegeu-ne els detalls a continuació) i, si voleu utilitzar una memòria de traducció d'un projecte anterior, es poden intercanviar; és a dir, ambdues funcionaran correctament.
+    </li>
   </ul>
   <p>Opcionalment, podeu fer que l'OmegaT creï un fitxer TMX addicional (amb el format de l'OmegaT) que contingui tots els segments traduïbles del projecte. Vegeu l'apartat <a href="#pseudo_translate">Memòria pseudotraduïda</a>.</p>
   
@@ -134,7 +137,7 @@
 
   <p>Quan creeu els documents traduïts en un projecte de l'OmegaT, la memòria de traducció del projecte es genera en forma de tres fitxers a la carpeta arrel del projecte de l'OmegaT (vegeu la descripció més amunt). Podeu considerar aquests tres fitxers TMX («<em>-omegat.tmx</em>», «<em>-level1.tmx</em>» i «<em>-level2.tmx</em>») com a «exportacions de la memòria de traducció», és a dir, un resum bilingüe exportable del projecte actual.</p>
 
-  <p>Si voleu reutilitzar una memòria de traducció d'un projecte anterior (per exemple, perquè el projecte nou és semblant a un projecte anterior, o bé utilitza terminologia que ja heu utilitzat anteriorment), podeu utilitzar aquestes memòries de traducció com a «memòries de traducció d'entrada», és a dir, memòries de referència per al projecte nou. En aquest cas, col·loqueu les memòries de traducció que voleu utilitzar a  la carpeta <em>\tm</em> del projecte nou.</p>
+  <p>Si voleu reutilitzar una memòria de traducció d'un projecte anterior (per exemple, perquè el projecte nou és semblant a un projecte anterior, o bé utilitza terminologia que ja heu utilitzat anteriorment), podeu utilitzar aquestes memòries de traducció com a «memòries de traducció d'entrada», és a dir, memòries de referència per al projecte nou. En aquest cas, col·loqueu les memòries de traducció que voleu utilitzar a la carpeta <em>\tm</em> del projecte nou.</p>
 
   <p>Per defecte, la carpeta <em>\tm</em> es troba dins de la carpeta arrel del projecte (p. ex., ..<em>\ElMeuProjecte\tm)</em>, però podeu triar una altra carpeta mitjançant el diàleg de propietats del projecte, si és necessari. Això us pot ser útil si sovint utilitzeu memòries de traducció que heu creat prèviament, per exemple, perquè tracten el mateix tema o són del mateix client. En aquest cas, un procediment útil pot ser aquest:</p>
 
@@ -173,7 +176,8 @@
   <a name="pseudo_translate" id="pseudo_translate"></a>
   <h2>Memòria pseudotraduïda</h2>
   <p>A vegades, és possible que vulgueu realitzar un processament previ dels segments o algun tipus de processament que l'OmegaT no ofereix. Per exemple, potser voleu crear una pseudotraducció amb finalitat de proves.</p>
-  <p>L'OmegaT permet crear un fitxer TMX addicional que conté tots els segments del projecte. En aquest fitxer TMX, la traducció pot ser:<ul><li>El segment traduït és igual al segment de partida (valor per defecte)</li>
+  <p>L'OmegaT permet crear un fitxer TMX addicional que conté tots els segments del projecte. En aquest fitxer TMX, la traducció pot ser: 
+  <ul><li>El segment traduït és igual al segment de partida (valor per defecte)</li>
   <li>El segment traduït és buit</li></ul>
   <p>El fitxer TMX pot tenir qualsevol nom que vulgueu, però s'afegirà l'extensió «.tmx» al nom si no l'especifiqueu.</p>
   <P>La generació s'activa en mode de consola. Vegeu el <a href="consoleMode.html">mode de consola</a> per obtenir més informació.</P>

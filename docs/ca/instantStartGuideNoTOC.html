@@ -82,6 +82,10 @@
     <li>Per moure's fins a qualsevol altra part del text, ja sigui més amunt o més avall, feu doble clic a la frase o al paràgraf que voleu obrir.</li>
 
     <li>Si preferiu traduir amb un camp de traducció buit, podeu definir aquesta opció al menú <strong>Opcions → Comportament de l'edició...</strong></li>
+
+    <li>
+      <p>A l'entrada del menú principal <span style="font-weight: bold;">Visualització</span>, podeu canviar la configuració de la subfinestra de l'Editor (per exemple, per mostrar o no el text de partida, per ressaltar el text traduït, etc.)</p>
+    </li>
   </ul>
 
   <p>Quan premeu «<strong>Retorn</strong>» es realitzen diverses operacions de forma transparent: L'OmegaT afegeix la parella de segments (el segment de partida i la respectiva traducció) a la memòria de traducció i tradueix automàticament tots els segments idèntics que detecti a la resta dels fitxers del projecte. També cerca a la memòria de traducció i al glossari les possibles coincidències per al següent segment sense traduir.</p><a name="tm" id="tm"></a>
@@ -90,7 +94,13 @@
 
   <h3>Coincidències de les memòries de traducció</h3>
 
-  <p>Si l'OmegaT troba a la memòria de traducció coincidències parcials (amb una similitud del 30% o més) per al següent segment, les mostra al visualitzador de coincidències. Per defecte, la primera coincidència se selecciona automàticament al visualitzador de coincidències. Per inserir coincidències de la memòria de traducció al camp de traducció, podeu utilitzar les següents dreceres de teclat:</p>
+  <p>Si l'OmegaT troba a la memòria de traducció coincidències parcials (amb una similitud del 30% o més) per al següent segment, les mostra al visualitzador de coincidències. Per defecte, la primera coincidència se selecciona automàticament al visualitzador de coincidències.</p><img src=
+  "images/MatchesPane.png" name="graphics4" alt="Subfinestra de Coincidències" id="graphics4"
+  style="border: 0px solid ;"><br clear="left">
+
+  <p><br></p>
+
+  <p>Per inserir coincidències de la memòria de traducció al camp de traducció, podeu utilitzar les següents dreceres de teclat:</p>
 
   <ul>
     <li>Premeu <code>Ctrl+I</code> per inserir la coincidència presseleccionada a la posició actual del cursor, o bé...</li>
@@ -110,11 +120,11 @@
 
   <h3>Coincidències dels glossaris i diccionaris</h3>
 
-  <p>Els termes que es trobin als glossaris i als diccionaris que hàgiu inclòs al projecte es mostraran com a referència a les subfinestres del glossari i del diccionari.&nbsp;</p><a name="searches" id="searches"></a>
+  <p>Els termes que es trobin als glossaris i als diccionaris que hàgiu inclòs al projecte es mostraran com a referència a les subfinestres del glossari i del diccionari.</p><a name="searches" id="searches"></a>
 
   <h3>Ús de les cerques</h3>
 
-  <p>L'OmegaT ofereix un gran ventall de funcions de cerca. Obriu la finestra de cerca prement <code>Ctrl+F</code> i escriviu la paraula o la frase que voleu cercar al camp «Cerca». També podeu seleccionar una paraula o una frase al camp d'edició (al text d'arribada del segment actiu) i prémer <code>Ctrl+F</code>. En aquest cas, la paraula o la frase apareixerà automàticament al camp «Cerca».</p>
+  <p>L'OmegaT ofereix un gran ventall de funcions de cerca. Obriu la finestra de cerca prement <code>Ctrl+F</code> i escriviu la paraula o la frase que voleu cercar al camp «Cerca». També podeu seleccionar una paraula o una frase de qualsevol lloc de la subfinestra Editor i prémer <code>Ctrl+F</code>. En aquest cas, la paraula o la frase apareixerà automàticament al camp «Cerca».</p>
 
   <h3>Ús del Google Traductor</h3>
 
@@ -130,7 +140,7 @@
 
   <h2>Com treballar amb text amb etiquetes</h2>
 
-  <p>L'OmegaT s'assegura que no es perdi el format dels documents de partida (negreta, cursiva, etc.) mitjançant l'ús d'etiquetes especials. Les etiquetes de l'OmegaT estan formades per una o més lletres seguides d'un o més dígits, i s'utilitza el caràcter «/» com a tancament (per exemple: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;, etc.). Aneu en compte en manipular aquestes etiquetes i assegureu-vos d'incloure-les correctament als segments traduïts (vegeu <em>Operacions amb etiquetes</em>).</p><a name="example" id="example"></a>
+  <p>L'OmegaT s'assegura que no es perdi el format dels documents de partida (negreta, cursiva, etc.) mitjançant l'ús d'etiquetes especials. Les etiquetes de l'OmegaT estan formades per una o més lletres seguides d'un o més dígits, i s'utilitza el caràcter «/» com a tancament (per exemple: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;, etc.). Aneu amb compte en manipular aquestes etiquetes i assegureu-vos d'incloure-les correctament als segments traduïts (vegeu <em>Operacions amb etiquetes</em>).</p><a name="example" id="example"></a>
 
   <h3>Un exemple...</h3>
 
@@ -148,7 +158,8 @@
 
   <p>Quan l'OmegaT hagi creat el document traduït, el codi HTML tindrà aquest aspecte:</p>
 
-  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name="tag_verif" id="tag_verif"></a>
+  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
+  "tag_verif" id="tag_verif"></a>
 
   <h3>Verificació de les etiquetes</h3>
 
@@ -158,7 +169,7 @@
 
   <p>En alguns casos, fins i tot és possible que els errors d'etiquetes no deixin obrir el document. Per tant, és important que corregiu tots els errors d'etiquetes abans de crear els documents traduïts. Finalment, cal que comproveu el format final del document traduït obrint-lo amb el corresponent visualitzador o editor.</p>
 
-  <p>En alguns llenguatges de programació (p. ex. PHP, C), es fan servir etiquetes especials com a text variable en aquelles cadenes que s'utilitzen en combinació amb la funció printf. L'OmegaT pot detectar i validar aquestes etiquetes si habiliteu l'opció corresponent. Seleccioneu <strong>Opcions → Validació de les etiquetes...</a></strong> al menú. Podeu triar entre una validació simple i una validació completa. La validació simple només comprova les variants més simples dels possibles valors de text variable. És útil si el codi font no conté els textos variables més expressius i complexes o si obteniu molts falsos positius.</p>
+  <p>En alguns llenguatges de programació (p. ex. PHP, C), es fan servir etiquetes especials com a text variable en aquelles cadenes que s'utilitzen en combinació amb la funció printf. L'OmegaT pot detectar i validar aquestes etiquetes si habiliteu l'opció corresponent. Seleccioneu <strong>Opcions→ Validació de les etiquetes...</strong> al menú. Podeu triar entre una validació simple i una validació completa. La validació simple només comprova les variants més simples dels possibles valors de text variable. És útil si el codi font no conté els textos variables més expressius i complexes o si obteniu molts falsos positius.</p>
 
   <hr>
 </body>

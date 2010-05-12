@@ -1,91 +1,62 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
   <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Mode de consola - Manual d'usuari de l'OmegaT 2.0</title>
-</head>
-<body>
-<h1>Mode de consola de l'OmegaT</h1>
-<ul>
-  <li>
-    <p><a href="#prerequisites">Prerequisits</a></p>
-  </li>
-  <li>
-    <p><a href="#start">Inici en mode de consola</a></p>
-  </li>
-  <li>
-    <p><a href="#extra">Opcions addicionals</a></p>
-    <p>&nbsp;</p>
-  </li>
-</ul>
-<p>L'objectiu del mode de consola és utilitzar l'OmegaT com a una eina de traducció en un entorn d'scripts En iniciar l'OmegaT en mode de consola, no es carrega la interfície gràfica d'usuari (per tant, funcionarà en qualsevol consola). En funció del mode d'execució, el projecte específic es traduirà automàticament o es crearà una memòria de traducció pseudotraduïda.</p>
-<hr>
-<h3><a name="prerequisites" id="prerequisites"></a>Prerequisits</h3>
-<p>Per executar a l'OmegaT, cal que hi hagi un projecte de l'OmegaT vàlid. La ubicació no és important, ja que de totes maneres l'haureu d'especificar a la línia d'ordres durant l'inici.</p>
-<p>Si necessiteu utilitzar paràmetres diferents, cal que estiguin especificats als fitxers de configuració. Això es pot fer de dues maneres:</p>
-<ol>
-  <li>Executeu l'OmegaT normalment (amb la interfície gràfica d'usuari) i definiu els paràmetres. Quan executeu l'OmegaT en mode de consola, s'utilitzaran els mateixos paràmetres. Si no podeu executar l'OmegaT normalment (per exemple, perquè no disposeu d'un entorn gràfic):</li>
-  <li>Copieu els fitxers de configuració d'alguna altra instal·lació de l'OmegaT (en una altra màquina) a un directori específic. La ubicació no és important, ja que la podeu especificar a la línia d'ordres durant l'inici. Els fitxers rellevants són filters.conf i segmentation.conf, que es troben al directori inicial de l'usuari (per exemple, C:\Documents and Settings\%User%\OmegaT al Windows, %user%/.omegat/ al Linux).</li>
-</ol>
-<br>
-<h3><a name="start" id="start"></a>Inici en mode de consola</h3>
-<p>Per iniciar l'OmegaT en mode de consola, cal especificar certs paràmetres addicionals durant l'inici. Els paràmetres necessaris són <code>&lt;dir-projecte&gt;</code> i <code>--mode=&lt;mode&gt;</code>. Un paràmetre opcional és <code>--config-dir=&lt;dir-config&gt;</code>.</p>
-<p>En funció del mode, cal (o es poden) especificar paràmetres addicionals. Per al mode <code>console-createpseudotranslatetmx</code>, el paràmetre necessari és <code>--pseudotranslatetmx=&lt;fitxer.tmx&gt;</code> i l'opcional és <code>--pseudotranslatetype=&lt;tipus&gt;</code></p>
-<p>Exemple de traducció d'un projecte:<br> <code>$&gt;java -jar OmegaT.jar /camí/al/projecte --config-dir=/camí/als/fitxers-config/ --mode=console-translate</code><br> Exemple de creació d'un fitxer TMX pseudotraduït:<br> <code>java -jar OmegaT.jar /camí/al/projecte --config-dir=/camí/als/fitxers-config/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=tots_els_segments.tmx --pseudotranslatetype=equal</code>
 
-<p><span style="font-weight: bold;">Explicació:</span></p>
-<table style="width: 80%;" cellpadding="2" cellspacing="2" summary="format">
-  <tbody>
-    <tr>
-      <td style="text-align: left;" valign="top"><code>&lt;dir-projecte&gt;</code></td>
-      <td style="text-align: left;" valign="top">
-      <p>Indica a l'OmegaT on es troba el projecte. Per exemple, <code>/home/usuari/projectes_omegat/ElMeuProjecte</code> o bé <code>«C:\Projectes de localització\ElMeuProjecte»</code>.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left;" valign="top"><code>--config-dir=&lt;dir-config&gt;</code></td>
-      <td style="text-align: left;" valign="top">
-      <p>&nbsp;Indica a l'OmegaT el directori on hi ha emmagatzemats els fitxers de configuració. Si no s'especifica, l'OmegaT utilitzarà els valors per defecte (el directori OmegaT dins del directori inicial de l'usuari, o si no està disponible, el directori de treball actual).</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left;" valign="top"><code>--mode=[console-translate | console-createpseudotranslatetmx]</code></td>
-      <td style="text-align: left;" valign="top">
-      <p>&nbsp;L'OmegaT s'inicia en mode de consola. Si el mode és <code>console-translate</code>, l'OmegaT traduirà el projecte especificat. Si el mode és <code>createpseudotranslatetmx</code>, l'OmegaT crearà un fitxer de memòria de traducció (especificat pel paràmetre <code>--pseudotranslatetmx</code>) que inclourà tots els segments del projecte, fins i tot els segments que no s'havien traduït prèviament. La traducció dels segments depèn del paràmetre <code>--pseudotranslatetype</code>. La memòria de traducció té el format de l'OmegaT i, per tant, es pot utilitzar amb l'OmegaT. Vegeu també <a href="translationMemories.html#pseudo_translate">Memòries de traducció</a>.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left;" valign="top"><code>--pseudotranslatetmx=&lt;fitxer.tmx&gt;</code></td>
-      <td style="text-align: left;" valign="top">
-      <p>&nbsp;Només es vàlid quan el mode és <code>console-createpseudotranslatetmx</code>. Especifica el fitxer en el qual s'escriurà la memòria de traducció. Si el nom de fitxer no acaba en <code>.tmx</code>, s'hi afegirà l'extensió. El nom pot ser tant absolut com relatiu al directori de treball (el directori des d'on inicieu l'OmegaT).</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left;" valign="top"><code>--pseudotranslatetype=[empty|equal]</code></td>
-      <td style="text-align: left;" valign="top">
-      <p>&nbsp;Només es vàlid quan el mode és <code>console-createpseudotranslatetmx</code>. Especifica quin tipus de traducció cal crear per a cada segment. Els valors possibles són:</p>
-      <ul>
-      <li><code>empty</code>: El segment d'arribada serà un segment buit.</li>
-      <li><code>equal</code>: El segment d'arribada serà igual al segment de partida.</li>
-      </ul>
-      <p>El paràmetre és opcional i per defecte és <code>equal</code>.</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h3><a name="extra" id="extra"></a>Opcions addicionals</h3>
-<p>Hi ha un paràmetre de la línia d'ordres addicional específic per al mode de consola: <code>--quiet</code>. Si s'especifica, es mostra menys informació a la pantalla. No es mostra cap dels missatges que normalment es mostrarien a la barra d'estat.<br> Sintaxi: <code>java -jar OmegaT.jar /camí/al/projecte --quiet</code> </p>
-<hr>
-<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"  summary="format">
-<tbody>
-    <tr>
-      <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a> </td>
-      <td style="text-align: center;"><a href="index.html">Inici</a>
-      </td>
-      <td style="text-align: right;"><a href="xindex.html">Índex</a> </td>
-    </tr>
-  </tbody>
-</table>
+  <title>Mode de consola - Manual d'usuari de l'OmegaT 2.1</title>
+</head>
+
+<body>
+  <h1>Mode de consola de l'OmegaT</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Prerequisits</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">Inici en mode de consola</a></p>
+    </li>
+
+  </ul>
+  <p>&nbsp;</p>
+
+  <p>L'objectiu del mode de consola és utilitzar l'OmegaT com a una eina de traducció en un entorn d'scripts. En iniciar l'OmegaT en mode de consola, no es carrega la interfície gràfica d'usuari (per tant, funcionarà en qualsevol consola). En funció del mode d'execució, el projecte específic es traduirà automàticament o es crearà una memòria de traducció pseudotraduïda.</p>
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Prerequisits</h3>
+
+  <p>Per executar a l'OmegaT, cal que hi hagi un projecte de l'OmegaT vàlid. La ubicació no és important, ja que de totes maneres l'haureu d'especificar a la línia d'ordres durant l'inici.</p>
+
+  <p>Si necessiteu utilitzar paràmetres diferents, cal que estiguin especificats als fitxers de configuració. Això es pot fer de dues maneres:</p>
+
+  <ol>
+    <li>Executeu l'OmegaT normalment (amb la interfície gràfica d'usuari) i definiu els paràmetres. Quan executeu l'OmegaT en mode de consola, s'utilitzaran els mateixos paràmetres. Si no podeu executar l'OmegaT normalment (per exemple, perquè no disposeu d'un entorn gràfic):</li>
+
+    <li>Copieu els fitxers de configuració d'alguna altra instal·lació de l'OmegaT (en una altra màquina) a un directori específic. La ubicació no és important, ja que la podeu especificar a la línia d'ordres durant l'inici. Els fitxers rellevants són filters.conf i segmentation.conf, que es troben al directori inicial de l'usuari (per exemple, C:\Documents and Settings\%User%\OmegaT al Windows, %user%/.omegat/ al Linux).</li>
+  </ol><br>
+
+  <h3><a name="start" id="start"></a>Inici en mode de consola</h3>
+
+  <p>Per iniciar l'OmegaT en mode de consola, cal especificar certs paràmetres addicionals durant l'inici. Els paràmetres necessaris són <code>&lt;dir-projecte&gt;</code> i <code>--mode=&lt;mode&gt;</code>.</p>
+
+  <p>En funció del mode, cal (o es poden) especificar paràmetres addicionals. Vegeu <a href="commandlineArguments.html">Arguments de la línia d'ordres</a> per obtenir més informació.</p>
+
+  <p>Exemple de traducció d'un projecte:<br> <code>$&gt;java -jar OmegaT.jar /camí/al/projecte --config-dir=/camí/als/fitxers-config/ --mode=console-translate</code><br> Exemple de traducció d'un sol fitxer del projecte:<br> <code>$&gt;java -jar OmegaT.jar /camí/al/projecte --config-dir=/camí/als/fitxers-config/ --mode=console-translate --source-pattern=prova\.html</code><br> Exemple de creació d'un fitxer TMX pseudotraduït:<br> <code>java -jar OmegaT.jar /camí/al/projecte --config-dir=/camí/als/fitxers-config/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code></p>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="format">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inici</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índex</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

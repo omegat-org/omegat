@@ -42,7 +42,7 @@
 
   <h3><a name="project_location" id="project_location"></a>Ubicació dels fitxers del projecte de traducció</h3>
 
-  <p>Quan creeu un projecte de traducció, l'OmegaT automàticament crea una llista de directoris, que més endavant servirà de dipòsit de fitxers, així com una sèrie de fitxers que s'utilitzaran per establir algunes preferències del projecte i per mantenir la memòria de traducció del projecte. Per defecte, els directoris d'un projecte de traducció es troben agrupats dins d'una carpeta de projecte principal. Podeu escollir altres ubicacions alternatives per als directoris durant la creació del projecte o durant la traducció. D'aquesta manera, és possible seleccionar directoris ja existents o crear directoris en ubicacions que reflecteixin la vostra manera de treballar. Per canviar la ubicació dels directoris un cop ja heu creat el projecte, seleccioneu <strong>Projecte → Propietats...</strong> i feu els canvis necessaris.</p>
+  <p>Quan creeu un projecte de traducció, l'OmegaT automàticament crea una llista de directoris, que més endavant servirà de dipòsit de fitxers, així com una sèrie de fitxers que s'utilitzaran per establir algunes preferències del projecte i per mantenir la memòria de traducció del projecte. Per defecte, els directoris d'un projecte de traducció es troben agrupats dins d'una carpeta de projecte principal. Podeu triar altres ubicacions alternatives per als directoris durant la creació del projecte o durant la traducció. D'aquesta manera, és possible seleccionar directoris ja existents o crear directoris en ubicacions que reflecteixin la vostra manera de treballar. Per canviar la ubicació dels directoris un cop ja heu creat el projecte, seleccioneu <strong>Projecte → Propietats...</strong> i feu els canvis necessaris.</p>
 
   <h3><a name="project_list" id="project_list"></a>Llista dels fitxers del projecte de traducció</h3>
 
@@ -58,16 +58,20 @@
   <p>Per obrir un projecte de traducció, simplement cal seleccionar l'element amb la icona de l'OmegaT. Un projecte de traducció <b>Exemple_Projecte</b> creat amb la configuració per defecte es crearà com a una subcarpeta nova amb l'estructura següent:</p>
 
   <p>&nbsp;</p><img src="images/Omegatproject.png" name="grafika1" alt=
-  "Projecte de l'OmegaT" id="grafika1" align="left" border="0"><br clear="left">En iniciar un projecte nou, les subcarpetes dels diccionaris (<b>dictionary</b>) i dels glossaris (<b>glossary</b>) seran buides. Aquí s'hi col·loquen els glossaris i els diccionaris, si en teniu algun disponible per al projecte.<h3>Omegat</h3>
+  "Projecte de l'OmegaT" id="grafika1" align="left" border="0"><br clear="left">
+  En iniciar un projecte nou, les subcarpetes dels diccionaris (<b>dictionary</b>) i dels glossaris (<b>glossary</b>) seran buides. Aquí s'hi col·loquen els glossaris i els diccionaris, si en teniu algun disponible per al projecte.
+
+  <h3>Omegat</h3>
 
   <dl>
     <dt>La subcarpeta <b>omegat</b> contindrà com a mínim dos fitxers: el fitxer de memòria de traducció <em>project_save.tmx</em> (<a href=
     "translationMemories.html">...</a>) i el fitxer d'estadístiques <em>project_stats.txt (<a href="userInterface.html#files">...</a>)</em>. El fitxer <em>project_save.tmx</em> és la memòria de traducció de treball per al projecte. Amb la funció de desament automàtic activada, s'actualitzarà automàticament en sortir de l'OmegaT. És la memòria de traducció que s'utilitzarà per crear els fitxers traduïts. En aquesta subcarpeta, posteriorment també s'hi aniran afegint una sèrie de fitxers TMX anomenats project_save.tmx.<i>&lt;data i hora</i>&gt;.bak (<a href=
-    "translationMemories.html#TMX_backup">...</a>). Són còpies de seguretat de la memòria de traducció del projecte. Se'n crea una cada vegada que obriu un projecte, que reflecteix el contingut de la memòria abans que la sessió actual la modifiqui</dt>
+    "translationMemories.html#TMX_backup">...</a>). Són còpies de seguretat de la memòria de traducció del projecte. Se'n crea una cada vegada que obriu un projecte, que reflecteix el contingut de la memòria abans que la sessió actual la modifiqui.</dt>
 
     <dd>El fitxer <b>stats.txt</b> conté les estadístiques del projecte actual; es pot obrir en una aplicació de full de càlcul i conté informació de recompte de paraules i de segments. La informació és més detallada que la que es mostra a la finestra <em>Fitxers del projecte</em>.</dd>
 
-    <dd><br clear="left">Els fitxers <strong>ignored_words.txt</strong> i <strong>learned_words.txt</strong> són fitxers reservats per al verificador ortogràfic en versions posteriors de l'OmegaT.</dd>
+    <dd><br clear="left">
+    Els fitxers <strong>ignored_words.txt</strong> i <strong>learned_words.txt</strong> són fitxers reservats per al verificador ortogràfic en versions posteriors de l'OmegaT.</dd>
   </dl>
 
   <h3>Source</h3>

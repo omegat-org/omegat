@@ -349,6 +349,18 @@ as a repetition in Match Statistics
   http://sourceforge.net/support/tracker.php?aid=2876217 
 
 ----------------------------------------------------------------------
+ OmegaT 2.0.5 update 4
+  1 Enhancement
+  0 Bugfix
+----------------------------------------------------------------------
+2.0.5 update 4 vs. 2.0.5 update 3
+
+  Other enhancements:
+  - New Galician localisation (UI, Readme, Instant Start)
+  (backported from 2.1.4)
+
+
+----------------------------------------------------------------------
  OmegaT 2.0.5 update 3
   4 Enhancements
   4 Bugfixes

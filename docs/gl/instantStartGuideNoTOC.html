@@ -1,0 +1,176 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css." type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Guía de inicio rápido  - Manual de usuario de OmegaT 2.0</title>
+</head>
+
+<body>
+  <h2>Comezar a empregar OmegaT en 5 minutos!<br> - Guía de inicio rápido</h2>
+
+  <p>Esta guía de inicio rápido cobre só o moi básico. Idealmente todos os usuarios deberían ler o manual de usuario para familiarizarse con todas as funcionalidades que OmegaT ofrece. Os atallos descritos aquí usan a convención "CTRL+tecla" aínda que os usuarios de Mac deberían de ler no seu lugar "CMD+tecla". A tecla "CMD" tamén ten a etiqueta "command" ou unha marca de mazá nos teclados de Apple</p>
+  <hr>
+  <a name="summary" id="summary"></a>
+
+  <h2>Rapidamente, como traballa OmegaT</h2>
+
+  <p>A pantalla de OmegaT consiste nun espazo con 3 xanelas distintas. A cada unha delas pódeselle cambiar o tamaño empregando o rato. Á esquerda está o Editor que é onde se escribirán as súas traducións Na parte superior dereita está o visor de coincidencias, onde se mostran as coincidencias da memoria de tradución. Debaixo está o visor de glosario, onde se mostran as coincidencias co glosario.</p>
+
+  <p>Na xanela editor do OmegaT mostra o texto orixe "segmentado" en sentenzas (ou parágrafos). Vostede terá que traducir estes segmentos un por un. Ao pasar dun segmento a outro a súa tradución será gardada na memoria de tradución. En canto todos os segmentos estean traducidos (ou antes, se o pide) OmegaT empregará a memoria de tradución para xerar os documentos traducidos no cartafol "destino".</p>
+
+  <p>OmegaT organiza o seu traballo de tradución nos chamados proxectos de tradución. Para cada proxecto OmegaT creará un conxunto de cartafoles. Estes empréganse para almacenar os documentos orixinais que serán traducidos, os glosarios se quere empregalos, e calquera memoria de tradución que queira empregar OmegaT tamén emprega un cartafol "destino" que conterá os documentos finais traducidos.</p>
+  <hr>
+  <a name="translate" id="translate"></a>
+
+  <h2>Como traducir empregando OmegaT</h2><a name="create" id="create"></a>
+
+  <h3>Crear e abrir un novo proxecto</h3>
+
+  <p>Seleccione <strong>Proxecto → Novo...</strong> desde o menú.</p>
+
+  <p>Navegue ao cartafol onde quere gardar os ficheiros do proxecto, e escriba o nome do proxecto de tradución. Este nome será empregado para o cartafol principal do proxecto, e todos os ficheiros serán almacenados neste cartafol e os seus subcartafoles.</p>
+
+  <p>OmegaT preguntaralle se quere confirmar ou cambiar os cartafoles do proxecto para a súa creación, empregando o diálogo de abaixo:</p>
+
+  <p align="center"><img src="images/NewProject.png" name="graphics1" alt=
+  "Xanela de preferencias do proxecto" id="graphics1" align="bottom" border="0"></p>
+
+  <p>Simplemente debe aceptar a localización dos subcartafoles, aínda que ten que asegurarse de que os códigos de idioma orixe e destino son correctos. Seleccione o código de idioma (2 letras) ou código de idioma e rexión (2 + 2 letras) desde a lista despregábel, ou insíraos a man (o código de idioma pode ter dúas ou tres letras) Lembre a localización do subcartafol destino (xa que alí estarán os seus documentos traducidos). Se quere que OmegaT segmente  por sentenza no canto de por "parágrafo", comprobe de novo as Regras de segmentación.</p>
+
+  <p>Entón prema en Aceptar para aceptar a configuración do proxecto, OmegaT pediralle confirmación para seleccionar os documentos orixe que quere importar. Pode importar ficheiros de forma individual, ou pode importar árbores de cartafoles enteiros ( con todos os ficheiros en todos os subcartafoles). Se importou accidentalmente os documentos incorrectos, ou importou demasiados documentos, pode eliminalos de forma moi sinxela no cartafol Orixe do seu proxecto de OmegaT (usando o seu xestor de ficheiros do sistema, por exemplo).</p>
+
+  <p>Para comprobar a lista de ficheiros a traducir, consulte a xanela <strong>Ficheiros do proxecto</strong> (Menú: <strong>Proxecto → Ficheiros do proxecto...</strong>, se non se abre automaticamente). Se vostede tivo que cambiar os contidos do cartafol orixe, lembre recargar o proxecto (Menú: <strong>Proxecto → Recargar</strong> OmegaT abre o primeiro ficheiro da listaxe do proxecto por defecto. Lembre, OmegaT só pode traducir ficheiros nos formatos que se mostran abaixo se coinciden cos patróns definidos nos filtros de ficheiro. Calquera outro ficheiro será ignorado.</p>
+
+  <ul>
+    <li>OpenDocument/OpenOffice.org</li>
+
+    <li>Texto plano</li>
+
+    <li>.po</li>
+
+    <li>Paquetes .properties de Java</li>
+
+    <li>XHTML, HTML</li>
+
+    <li>Compilador de axuda HTML</li>
+
+    <li>INI (formato 'chave=valor')</li>
+
+    <li>DocBook</li>
+
+    <li>Microsoft Open XML</li>
+
+    <li>Ficheiros XLIFF monolingüaxe de Okapi</li>
+
+    <li>QuarkXPress CopyFlowGold</li>
+
+    <li>Ficheiros de subtítulo (SRT)</li>
+
+    <li>ResX</li>
+
+    <li>Recurso Android</li>
+
+    <li>LaTeX</li>
+  </ul><a name="segments" id="segments"></a>
+
+  <h3>Traducir os segmentos un por un.</h3>
+
+  <p>Unha vez definido o proxecto e os ficheiros que serán traducidos, OmegaT abrirá o primeiro ficheiro orixe no Editor. O primeiro segmento resaltarase en verde e copiarase o texto orixe no "campo destino" debaixo do mesmo. (Neste punto, todo o texto fora do campo destino está protexido e non pode ser modificado.) Vostede debe escribir a tradución entre as etiquetas <code>&lt;segment 0001&gt;</code> e <code>&lt;end segment&gt;</code>, sobrescribindo o texto orixe. Prema "<strong>INTRO</strong>" para avanzar ó seguinte segmento. Nota:</p>
+
+  <ul>
+    <li>para moverse a calquera parte do texto, sexa arriba ou abaixo, faga dobre clic na sentenza ou parágrafo que desexe abrir.</li>
+
+    <li>Se prefire traducir nun campo destino baleiro, configure a opción en <strong>Opcións → Editar comportamento...</strong>.</li>
+
+    <li>
+      <p>Pode cambiar a configuración do panel do Editor (por exemplo para mostrar ou non o texto orixe, realzar o texto traducido, etc) na entrada do menú principal <span style="font-weight: bold;">Ver.</span></p>
+    </li>
+  </ul>
+
+  <p>Cando prema "<strong>INTRO</strong>", acontecen algunhas cousas de forma invisíbel: OmegaT engade o par de segmentos (o segmento orixe e a súa tradución) á memoria de tradución e traduce automaticamente calquera segmento idéntico que detecte en calquera outro ficheiro no proxecto. Tamén analizará a memoria de tradución e glosario na procura de coincidencias co seguinte segmento sen traducir.</p><a name="tm" id="tm"></a>
+
+  <h3>Usar as coincidencias nas memorias de traducións, glosarios e dicionarios</h3><a name="tm_matches" id="tm_matches"></a>
+
+  <h3>Coincidencias coa memoria de tradución</h3>
+
+  <p>Se OmegaT encontra calquera coincidencia dubidosa (30% ou máis) para o seguinte segmento na memoria de tradución, mostraraas no Visor de coincidencias. A primeira coincidencia está preseleccionada de forma predefinida no Visor de coincidencias.</p><img src=
+  "images/MatchesPane.png" name="graphics4" alt="panel de coincidencias" id="graphics4"
+  style="border: 0px solid ;"><br clear="left">
+
+  <p><br></p>
+
+  <p>Para inserir a coincidencia coa memoria de tradución desde o Visor de coincidencias no campo destino, pode usar os seguintes atallos de teclado:</p>
+
+  <ul>
+    <li>Prema <code>CTRL+I</code> para inserir a coincidencia preseleccionada na posición do cursor, ou...</li>
+
+    <li>Prema <code>CTRL+R</code> para sobrescribir o segmento enteiro coa coincidencia preseleccionada.</li>
+  </ul>
+
+  <p>Se hai varias coincidencias e prefire usar unha coincidencia distinta á preseleccionada.</p>
+
+  <ul>
+    <li>Seleccione a coincidencia que prefire no Visor de coincidencias como segue: <code>CTRL+2</code> para a segunda coincidencia mostrada, <code>CTRL+3</code> para a terceira, etc.</li>
+
+    <li>Entón use os atallos <code>CTRL+I</code> ou <code>CTRL+R</code> como se describe arriba.</li>
+  </ul>
+
+  <p>(Pode dicirlle a OmegaT que insira automaticamente no campo destino a primeira coincidencia se ten a súa porcentaxe de coincidencia é superior a un número especificado cando abra o segmento. Configure esta opción usando <strong>Opcións → Editar comportamento...</strong></p><a name="gloss_matches" id="gloss_matches"></a>
+
+  <h3>Coincidencias do glosario e o dicionario</h3>
+
+  <p>Os termos que coincidan nos glosarios e dicionarios, que puido incluír no proxecto, mostraranse como referencia nos paneis de glosario e dicionario.</p><a name="searches" id="searches"></a>
+
+  <h3>Usar buscas</h3>
+
+  <p>OmegaT fornece un conxunto moi potente de funcións de busca. Para facer buscas prema <code>CTRL+F</code> e mostrarase a xanela de busca, nela insira no campo "Buscar por" unha palabra ou frase que queira buscar. De forma análoga, seleccione unha palabra ou calquera frase no panel do Editor e prema <code>CTRL+F</code>. A palabra ou frase inserirase automaticamente na caixa "Buscar por" neste caso.</p>
+
+  <h3>Usar Google Translate</h3>
+
+  <p>No panel de Google Translate, automaticamente obterá unha suxestión para a tradución do segmento actual. Pode inserila con <code>CTRL+M</code> no segmento destino.<br></p>
+
+  <p><a name="create_trans" id="create_trans"></a></p>
+
+  <h3>Crear documentos traducidos</h3>
+
+  <p>Cando remate de traducir todos os segmentos (ou antes se o desexa) OmegaT actualizará os documentos destino usando as traducións almacenadas na memoria de tradución. Para facelo, seleccione <strong>Proxecto → Crear documentos traducidos...</strong> desde o menú. OmegaT construirá as versións traducidas para todos os documentos traducíbeis no cartafol de orixe, estean ou non traducidos completamente. Os ficheiros traducidos completa ou parcialmente serán gardados no cartafol destino do proxecto. Para rematar a tradución, abra os ficheiros destino na aplicación asociada (navegador, procesador de textos...) para comprobar o contido e formato das súas traducións. Pode volver a OmegaT para facer calquera corrección necesaria, non esqueza volver a crear os documentos traducidos en cando remate a corrección.</p>
+  <hr>
+  <a name="tags" id="tags"></a>
+
+  <h2>Como manipular o texto etiquetado</h2>
+
+  <p>OmegaT asegurase de que o formato dos documentos orixe (negra, cursiva, etc.) non se perda marcándoos con etiquetas especiais. As etiquetas de OmegaT están compostas por unha ou máis letras seguidas dun ou máis díxitos, empregando o carácter "/" para o peche (por exemplo: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; etc. Debe xestionar estas etiquetas con coidado e asegurarse que as inclúe nos segmentos destino dunha forma axeitada (vexa <em>operacións de etiquetas</em>).</p><a name="example" id="example"></a>
+
+  <h3>Un exemplo...</h3>
+
+  <p>Nestes exemplos realzamos as etiquetas para que as poida ver mellor, pero OmegaT non as realzará. As etiquetas HTML realzadas en <font color="blue">azul</font>, ignoraranse por OmegaT xa que encaixan perfectamente co segmento. As etiquetas realzadas abaixo en <font color=
+  "green">verde</font> deben ser manipuladas por OmegaT xa que están entre o segmento. Aquí ten un exemplo dun segmento en HTML:</p>
+
+  <p><code><font color="blue">&lt;p&gt;</font>Pode seleccionar un tipo de letra diferente mediante o diálogo <font color="green">&lt;b&gt;</font>Tipo de letra da pantalla<font color=
+  "green">&lt;/b&gt;</font>. Ábrao mediante o elemento do menú <font color=
+  "green">&lt;i&gt;</font>Opcións<font color="green">&lt;/i&gt;</font> → <font color="green">&lt;i&gt;</font>Tipo de letra...<font color=
+  "green">&lt;/i&gt;</font>. O tipo de letra e o tamaño pode cambiarse desde o diálogo.<font color="blue">&lt;/p&gt;</font></code></p>
+
+  <p>Así é como OmegaT o mostrará, coa tradución en Africano:</p><br>
+
+  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
+
+  <p>Cando OmegaT creou os documentos traducidos, o HTML verase así:</p>
+
+  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
+  "tag_verif" id="tag_verif"></a>
+
+  <h3>Verificación de etiquetas</h3>
+
+  <p>OmegaT non detecta automaticamente etiquetado erróneo nos documentos traducidos. Antes de distribuír o documento ao seu cliente, debería comprobar as etiquetas na busca de erros.</p>
+
+  <p>Seleccione <strong>Ferramentas → Validar etiquetas</strong> desde o menú. Mostrarase unha táboa mostrando os segmentos onde as etiquetas orixe e destino non teñen correspondencia. Faga clic no número de segmento. Será levado automaticamente ao segmento en cuestión no Editor, onde pode corrixir o etiquetado. Prema <code>INTRO</code> para validar o segmento corrixido e comprobe a corrección premendo de novo <code>CTRL+T</code>.</p>
+
+  <p>Nalgúns casos os erros nas etiquetas poden causar o estrago de documentos Debería asegurarse que corrixiu calquera erro de etiquetado antes de crear os ficheiros traducidos. Finalmente, debería comprobar o formatado final abrindo o documento traducido no seu visor ou editor asociado.</p>
+
+  <p>Nalgunhas linguaxes de programación (p.ex. PHP, C) as etiquetas especiais poden empregarse como parámetros de substitución nas cadeas que se empregan en combinación coa función printf. OmegaT pode detectar e validar estas etiquetas se vostede o activa. Seleccione <strong>Opcións→ Validación de etiquetas...</strong> desde o menú. Pode escoller entre a validación simple e a completa. Na validación simple só se usan as variantes sinmples dos valores dos marcadores de posición posíbeis. Isto é útil cando un código fonte non contén os marcadores de posición máis complexos ou custosos.</p>
+
+  <hr>
+</body>
+</html>

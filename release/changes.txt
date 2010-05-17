@@ -1,14 +1,24 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.6 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
-  0 Bugfix
+  3 Enhancements
+  1 Bugfix
 ----------------------------------------------------------------------
 2.1.6 update 1 vs. 2.1.6
+
+  Implemented requests:
+
+  - Sort Project Files according to locale
+  http://sourceforge.net/support/tracker.php?aid=3002616
 
   Other enhancements:
   - Catalan localisation updated to 2.1.4 (UI, Readme, Instant Start, documentation)
   - Hungarian localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
+
+  Bug fixes:
+
+  - Project Files list not sorted on some systems
+  http://sourceforge.net/support/tracker.php?aid=3000377
 
 ----------------------------------------------------------------------
  OmegaT 2.1.6

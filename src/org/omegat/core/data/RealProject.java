@@ -632,6 +632,7 @@ public class RealProject implements IProject
                 projectFilesList.add(fi);
             }
         }
+        Collections.sort(projectFilesList);
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
         long en = System.currentTimeMillis();
         Log.log("Load project source files: " + (en - st) + "ms");

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,8 +26,10 @@
 package org.omegat.core.data;
 
 import java.io.IOException;
+import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -39,6 +42,7 @@ import org.omegat.filters2.TranslationException;
  * instance of IProject.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public interface IProject {
 
@@ -149,9 +153,15 @@ public interface IProject {
      */
     List<FileInfo> getProjectFiles();
 
-    public static class FileInfo {
+    public static class FileInfo implements Comparable<FileInfo> {
         public String filePath;
         
         public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
+        public int compareTo(FileInfo o) {
+            //Get the local collator and set its strength to PRIMARY
+            Collator localCollator = Collator.getInstance(Locale.getDefault());
+            localCollator.setStrength(Collator.PRIMARY);
+            return localCollator.compare(filePath, o.filePath);
+        }
     }
 }

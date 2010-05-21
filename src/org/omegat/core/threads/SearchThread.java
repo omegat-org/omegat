@@ -290,7 +290,8 @@ public class SearchThread extends Thread
     
     /**
      * Queue found string.
-     * Since 1.6.0 RC9 removes duplicate segments (by Henry Pijffers)
+     * Removes duplicate segments (by Henry Pijffers)
+     * except if m_allResults = true
      */
     private void foundString(int entryNum, String intro, String src, String target)
     {

@@ -2,7 +2,7 @@
  OmegaT 2.1.6 update 1
 ----------------------------------------------------------------------
   3 Enhancements
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.6 update 1 vs. 2.1.6
 
@@ -19,6 +19,10 @@
 
   - Project Files list not sorted on some systems
   http://sourceforge.net/support/tracker.php?aid=3000377
+
+  - Cursor jumps to end of selection during Shift+left
+  http://sourceforge.net/support/tracker.php?aid=3006297
+
 
 ----------------------------------------------------------------------
  OmegaT 2.1.6

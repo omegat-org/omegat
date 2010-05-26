@@ -42,6 +42,7 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
+import javax.swing.text.Caret;
 import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
@@ -359,14 +360,14 @@ public class EditorTextArea3 extends JEditorPane {
         if (spos != epos) {
             // dealing with a selection here - make sure it's w/in bounds
             if (spos < start) {
-                setSelectionStart(start);
+                fixSelectionStart(start);
             } else if (spos > end) {
-                setSelectionStart(end);
+                fixSelectionStart(end);
             }
             if (epos > end) {
-                setSelectionEnd(end);
+                fixSelectionEnd(end);
             } else if (epos < start) {
-                setSelectionStart(start);
+                fixSelectionStart(start);
             }
         } else {
             // non selected text
@@ -376,6 +377,28 @@ public class EditorTextArea3 extends JEditorPane {
                 setCaretPosition(end);
             }
         }
+    }
+    
+    /**
+     * Need to use own implementation, because standard method moves caret at
+     * the end.
+     */
+    private void fixSelectionStart(int start) {
+        if (getCaretPosition() <= start) {
+            // caret at the left - mark from ent to start
+            setCaretPosition(getSelectionEnd());
+            moveCaretPosition(start);
+        } else {
+            setSelectionStart(start);
+        }
+    }
+
+    /**
+     * Need to use own implementation, because standard method moves caret at
+     * the end.
+     */
+    private void fixSelectionEnd(int end) {
+        setSelectionEnd(end);
     }
 
     /**

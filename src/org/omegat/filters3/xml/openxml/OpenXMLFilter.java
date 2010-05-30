@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2007-2010 Didier Briel
+               2007-2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -74,7 +74,8 @@ public class OpenXMLFilter extends AbstractFilter
     // Excel
     "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" +                             
     // PowerPoint
-    "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)|(notesSlide\\d+\\.xml)"                                 
+    "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)" +
+    "|(notesSlide\\d+\\.xml)"
 */          
 
         DOCUMENTS = "(document\\.xml)";
@@ -97,6 +98,8 @@ public class OpenXMLFilter extends AbstractFilter
         DOCUMENTS += "|(slide\\d+\\.xml)";                                  
         if (options.getTranslateSlideMasters())
             DOCUMENTS += "|(slideMaster\\d+\\.xml)";                        
+        if (options.getTranslateSlideLayouts())
+            DOCUMENTS += "|(slideLayout\\d+\\.xml)";
         if (options.getTranslateSlideComments())
             DOCUMENTS += "|(notesSlide\\d+\\.xml)";                         
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
@@ -109,6 +112,7 @@ public class OpenXMLFilter extends AbstractFilter
     }
 
     /** Returns true if it's an Open XML file. */
+    @Override
     public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config)
     {
         try
@@ -176,6 +180,7 @@ public class OpenXMLFilter extends AbstractFilter
      * which is actually a ZIP file consisting of many XML files, 
      * some of which should be translated.
      */
+    @Override
     public void processFile(File inFile, String inEncoding, File outFile, 
                             String outEncoding) 
                             throws IOException, TranslationException
@@ -351,6 +356,7 @@ public class OpenXMLFilter extends AbstractFilter
      * Returns true to indicate that the OpenXML filter has options.
      * @return True, because the OpenXML filter has options.
      */
+    @Override
     public boolean hasOptions()
     {
         return true;
@@ -363,6 +369,7 @@ public class OpenXMLFilter extends AbstractFilter
      * @return Updated filter options if user confirmed the changes, 
      * and current options otherwise.
      */
+    @Override
     public Map<String,String> changeOptions(Dialog parent, Map<String,String> currentOptions)
     {
         try

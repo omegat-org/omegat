@@ -66,6 +66,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         translateExcelCommentsCB.setSelected(options.getTranslateExcelComments());
         translateSlideCommentsCB.setSelected(options.getTranslateSlideComments());
         translateSlideMastersCB.setSelected(options.getTranslateSlideMasters());
+        translateSlideLayoutsCB.setSelected(options.getTranslateSlideLayouts());
         
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -122,6 +123,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jLabel5 = new javax.swing.JLabel();
         translateSlideCommentsCB = new javax.swing.JCheckBox();
         translateSlideMastersCB = new javax.swing.JCheckBox();
+        translateSlideLayoutsCB = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setTitle(OStrings.getString("OpenXML_FILTER_OPTIONS")); // NOI18N
@@ -161,7 +163,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("OpenDoc_TRANSLATE_ELEMENTS")); // NOI18N
         jPanel1.add(jLabel2);
 
-        jLabel3.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("OpenXML_WORD")); // NOI18N
         jPanel1.add(jLabel3);
@@ -219,7 +221,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateFootersCB);
 
-        jLabel4.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("OpenXML_EXCEL")); // NOI18N
         jPanel1.add(jLabel4);
@@ -233,7 +235,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateExcelCommentsCB);
 
-        jLabel5.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, OStrings.getString("OpenXML_POWER_POINT")); // NOI18N
         jPanel1.add(jLabel5);
@@ -249,6 +251,9 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
 
         org.openide.awt.Mnemonics.setLocalizedText(translateSlideMastersCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_MASTERS")); // NOI18N
         jPanel1.add(translateSlideMastersCB);
+
+        org.openide.awt.Mnemonics.setLocalizedText(translateSlideLayoutsCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LAYOUTS")); // NOI18N
+        jPanel1.add(translateSlideLayoutsCB);
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "                                                                 ");
         jLabel1.setEnabled(false);
@@ -304,6 +309,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         options.setTranslateExcelComments(translateExcelCommentsCB.isSelected());
         options.setTranslateSlideComments(translateSlideCommentsCB.isSelected());
         options.setTranslateSlideMasters(translateSlideMastersCB.isSelected());
+        options.setTranslateSlideLayouts(translateSlideLayoutsCB.isSelected());
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
     
@@ -345,6 +351,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
     private javax.swing.JCheckBox translateHeadersCB;
     private javax.swing.JCheckBox translateHiddenTextCB;
     private javax.swing.JCheckBox translateSlideCommentsCB;
+    private javax.swing.JCheckBox translateSlideLayoutsCB;
     private javax.swing.JCheckBox translateSlideMastersCB;
     // End of variables declaration//GEN-END:variables
 }

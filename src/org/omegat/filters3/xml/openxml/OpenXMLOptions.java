@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2007-2008 Didier Briel
+ Copyright (C) 2007-2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,6 +43,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[+] Footer (Words)
  * <li>[+] Slide comments (PowerPoint)
  * <li>[] Slide Masters (PowerPoint)
+ * <li>[] Slide Layouts (PowerPoint)
  * </ul>
  * 
  * @author Didier Briel
@@ -57,6 +58,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_EXCEL_COMMENTS = "translateExcelComments";
     private static final String OPTION_TRANSLATE_SLIDE_COMMENTS = "translateSlideComments";
     private static final String OPTION_TRANSLATE_SLIDE_MASTERS = "translateSlideMasters";
+    private static final String OPTION_TRANSLATE_SLIDE_LAYOUTS = "translateSlideLayouts";
 
     public OpenXMLOptions(Map<String, String> options) {
         super(options);
@@ -186,5 +188,19 @@ public class OpenXMLOptions extends AbstractOptions {
      */
     public void setTranslateSlideMasters(boolean translateSlideMasters) {
         setBoolean(OPTION_TRANSLATE_SLIDE_MASTERS, translateSlideMasters);
+    }
+
+    /**
+     * Returns whether Slide Layouts should be translated.
+     */
+    public boolean getTranslateSlideLayouts() {
+        return getBoolean(OPTION_TRANSLATE_SLIDE_LAYOUTS, false);
+    }
+
+    /**
+     * Sets whether Slide Layouts should be translated.
+     */
+    public void setTranslateSlideLayouts(boolean translateSlideLayouts) {
+        setBoolean(OPTION_TRANSLATE_SLIDE_LAYOUTS, translateSlideLayouts);
     }
 }

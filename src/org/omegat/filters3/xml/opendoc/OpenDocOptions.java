@@ -41,6 +41,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[+] Notes
  * <li>[+] Comments
  * <li>[+] Presentation notes
+ * <li>[] Links (URL)
  * </ul>
  * 
  * @author Didier Briel
@@ -52,6 +53,7 @@ public class OpenDocOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_NOTES = "translateNotes";
     private static final String OPTION_TRANSLATE_COMMENTS = "translateComments";
     private static final String OPTION_TRANSLATE_PRES_NOTES = "translatePresNotes";
+    private static final String OPTION_TRANSLATE_LINKS = "translateLinks";
 
     public OpenDocOptions(Map<String, String> config) {
         super(config);
@@ -127,10 +129,10 @@ public class OpenDocOptions extends AbstractOptions {
     public void setTranslateComments(boolean translateComments) {
         setBoolean(OPTION_TRANSLATE_COMMENTS, translateComments);
     }
+
     /**
      * Returns whether Presentation notes should be translated.
      */
-
     public boolean getTranslatePresNotes() {
         return getBoolean(OPTION_TRANSLATE_PRES_NOTES, true);
     }
@@ -142,4 +144,17 @@ public class OpenDocOptions extends AbstractOptions {
         setBoolean(OPTION_TRANSLATE_PRES_NOTES, translatePresNotes);
     }
 
+    /**
+     * Returns whether Links should be translated.
+     */
+    public boolean getTranslateLinks() {
+        return getBoolean(OPTION_TRANSLATE_LINKS, false);
+    }
+
+    /**
+     * Sets whether Presentation notes should be translated.
+     */
+    public void setTranslateLinks(boolean translateLinks) {
+        setBoolean(OPTION_TRANSLATE_LINKS, translateLinks);
+    }
 }

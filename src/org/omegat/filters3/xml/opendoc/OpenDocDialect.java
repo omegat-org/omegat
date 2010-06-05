@@ -175,6 +175,9 @@ public class OpenDocDialect extends DefaultXMLDialect
         if (!options.getTranslatePresNotes()) {
             defineIntactTag("presentation:notes");
         }
+        if (options.getTranslateLinks()) {
+            defineTranslatableAttribute("xlink:href");
+        }
     
     }
 

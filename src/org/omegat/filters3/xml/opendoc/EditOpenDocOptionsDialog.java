@@ -63,6 +63,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         translateNotesCB.setSelected(options.getTranslateNotes());
         translateCommentsCB.setSelected(options.getTranslateComments());
         translatePresNotesCB.setSelected(options.getTranslatePresNotes());
+        translateLinksCB.setSelected(options.getTranslateLinks());
         
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -112,6 +113,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         translateNotesCB = new javax.swing.JCheckBox();
         translateCommentsCB = new javax.swing.JCheckBox();
         translatePresNotesCB = new javax.swing.JCheckBox();
+        translateLinksCB = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
         setTitle(OStrings.getString("OpenDoc_FILTER_OPTIONS")); // NOI18N
@@ -205,6 +207,9 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translatePresNotesCB);
 
+        org.openide.awt.Mnemonics.setLocalizedText(translateLinksCB, OStrings.getString("OpenDoc_TRANSLATE_LINKS")); // NOI18N
+        jPanel1.add(translateLinksCB);
+
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "                                                                       ");
         jLabel1.setEnabled(false);
         jPanel1.add(jLabel1);
@@ -244,6 +249,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         options.setTranslateNotes(translateNotesCB.isSelected());
         options.setTranslateComments(translateCommentsCB.isSelected());
         options.setTranslatePresNotes(translatePresNotesCB.isSelected());
+        options.setTranslateLinks(translateLinksCB.isSelected());
         
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
@@ -282,6 +288,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
     private javax.swing.JCheckBox translateBookmarksCB;
     private javax.swing.JCheckBox translateCommentsCB;
     private javax.swing.JCheckBox translateIndexesCB;
+    private javax.swing.JCheckBox translateLinksCB;
     private javax.swing.JCheckBox translateNotesCB;
     private javax.swing.JCheckBox translatePresNotesCB;
     // End of variables declaration//GEN-END:variables

@@ -168,6 +168,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="translatePresNotesCBradiosActionPerformed"/>
           </Events>
         </Component>
+        <Component class="javax.swing.JCheckBox" name="translateLinksCB">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="OpenDoc_TRANSLATE_LINKS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="                                                                       "/>

@@ -72,31 +72,28 @@
   same translation project looks like just any other folder.</p>
 
   <p><br></p><img src="images/OmegaT_projects_and_subdirectories.png" name=
-  "grafika3" alt="OmegaT projects and subdirectories" id="grafika3" align=
-  "left" border="1"><br clear="left">
+  "grafika3" alt="OmegaT projects and subdirectories" align="left" border="1"
+  id="grafika3"><br clear="left">
 
   <p><br>
   <br></p>
 
   <p>Selecting the item with the OmegaT icon is enough to open the project A
   translation project <b>Example_Project</b> created with the default settings
-  will be created as a new subfolder with the following structure:</p>
+  will be created as a new subfolder with the following structure:</p><img src=
+  "images/Omegatproject.png" name="grafika1" alt="OmegaT Project" align="left"
+  border="0" id="grafika1"><br clear="left">
 
-  <p>&nbsp;</p><img src="images/Omegatproject.png" name="grafika1" alt=
-  "OmegaT Project" id="grafika1" align="left" border="0"><br clear="left">
-  The <b>dictionary</b> and <b>glossary</b> subfolders are empty, when
-  starting a new project. It is the place for your dictionaries and glossaries,
-  if you have any available for the project.
+  <p>Initially all the subfolders of a project will be empty.</p>
 
   <h3>Omegat</h3>
 
   <dl>
-    <dt>The subfolder <b>omegat</b> will contain at least two files, the
-    translation memory file <em>project_save.tmx</em> (<a href=
-    "translationMemories.html">...</a>) and the statistics file
-    <em>project_stats.txt (<a href="userInterface.html#files">...</a>)</em> .
-    The file <em>project_save.tmx</em> is the working translation memory for
-    the project. With the autosave function activated, it will be automatically
+    <dt>The subfolder <b>omegat</b> will eventually contain several files, the
+    most important among them being the translation memory file
+    <em>project_save.tmx</em> (<a href="translationMemories.html">...</a>). The
+    file <em>project_save.tmx</em> is the working translation memory for the
+    project. With the autosave function activated, it will be automatically
     updated when you quit. It is the translation memory used to create the
     translated files. A number of TMX files with names of the form
     project_save.tmx.<i>&lt;date and time</i>&gt;.bak (<a href=
@@ -105,15 +102,13 @@
     added each time you reopen a project, thus reflecting its contents before
     the current session has changed it.</dt>
 
-    <dd>The <b>stats.txt</b> file contains the statistics about the current
-    project and can be opened in a spreadsheet application to display segment
-    and word count information. The information it contains is more detailed
-    that what is displayed in the <em>Project Files</em> window.</dd>
-
-    <dd><br clear="left">
-    The <strong>ignored_words.txt</strong> and
-    <strong>learned_words.txt</strong> files are reserved for the use by the
-    spell checker in the forthcoming versions of OmegaT.</dd>
+    <dd>The <b>stats.txt</b> file (<a href="userInterface.html#files">...</a>)
+    contains the statistics about the current project and can be opened in a
+    spreadsheet application to display segment and word count information. The
+    information it contains is more detailed that what is displayed in the
+    <em>Project Files</em> window. The <strong>ignored_words.txt</strong> and
+    <strong>learned_words.txt</strong> files, if they exist, will be used by
+    the spell checker.</dd>
   </dl>
 
   <h3>Source</h3>
@@ -130,7 +125,7 @@
   <h3>Target</h3>
 
   <dl>
-    <dd>When <strong>Project →&nbsp; Create Translated Documents</strong> is
+    <dd>When <strong>Project â†’ Create Translated Documents</strong> is
     selected while a project is opened, all the files in
     <strong>/source/</strong>, translated or not, will be reproduced here with
     the same folder hierarchy to reflect the current state of the translation.
@@ -176,149 +171,145 @@
   <p>User files are stored in a separate location where they can be accessed by
   any version of OmegaT. The location depends on the platform you use:</p>
 
-  <table summary="just formatting" border="1" cellpadding="4" cellspacing="0"
-  width="100%">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "just formatting">
     <col width="33*">
     <col width="223*">
 
-    <tbody>
-      <tr valign="top">
-        <td width="13%">
-          <p>Windows</p>
-        </td>
+    <tr valign="top">
+      <td width="13%">
+        <p>Windows</p>
+      </td>
 
-        <td width="87%">
-          <dl>
-            <dd><strong>2000 and XP: Documents and Settings\&lt;User
-            Name&gt;\Application Data\OmegaT</strong></dd>
+      <td width="87%">
+        <dl>
+          <dd><strong>2000 and XP: Documents and Settings\&lt;User
+          Name&gt;\Application Data\OmegaT</strong></dd>
 
-            <dd><strong>Vista: Users\&lt;User
-            Name&gt;\AppData\Roaming\OmegaT</strong></dd>
+          <dd><strong>Vista: Users\&lt;User
+          Name&gt;\AppData\Roaming\OmegaT</strong></dd>
 
-            <dd><strong>Other: &lt;Something&gt;\OmegaT</strong>
-            (&lt;Something&gt; corresponds to the location of the "home" folder
-            as determined by Java.)</dd>
-          </dl>
-        </td>
-      </tr>
+          <dd><strong>Other: &lt;Something&gt;\OmegaT</strong>
+          (&lt;Something&gt; corresponds to the location of the "home" folder
+          as determined by Java.)</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="13%">
-          <dl>
-            <dt>Linux/Solaris/FreeBSD</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>Linux/Solaris/FreeBSD</dt>
+        </dl>
+      </td>
 
-        <td width="87%">
-          <dl>
-            <dd><strong>&lt;User Home&gt;/.omegat</strong> (.omegat is a
-            directory, the dot preceding its name makes it invisible unless you
-            type <code>ls -a</code> or an equivalent command.)</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;User Home&gt;/.omegat</strong> (.omegat is a
+          directory, the dot preceding its name makes it invisible unless you
+          type <code>ls -a</code> or an equivalent command.)</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="13%">
-          <dl>
-            <dt>MacOSX</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>MacOSX</dt>
+        </dl>
+      </td>
 
-        <td width="87%">
-          <dl>
-            <dd><strong>&lt;User
-            Home&gt;/Library/Preferences/OmegaT</strong></dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;User
+          Home&gt;/Library/Preferences/OmegaT</strong></dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="13%">
-          <dl>
-            <dt>Other</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>Other</dt>
+        </dl>
+      </td>
 
-        <td width="87%">
-          <dl>
-            <dd><strong>&lt;User Home&gt;</strong></dd>
-          </dl>
-        </td>
-      </tr>
-    </tbody>
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;User Home&gt;</strong></dd>
+        </dl>
+      </td>
+    </tr>
   </table>
 
   <h3><a name="user_list" id="user_list"></a>User files list<br></h3>
 
-  <table summary="just formatting" border="1" cellpadding="4" cellspacing="0"
-  width="100%">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "just formatting">
     <col width="27*">
     <col width="229*">
 
-    <tbody>
-      <tr valign="top">
-        <td width="11%">
-          <dl>
-            <dt>log.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>log.txt</dt>
+        </dl>
+      </td>
 
-        <td width="89%">
-          <dl>
-            <dd>This file records Java error messages while OmegaT is running.
-            When you think OmegaT is behaving erratically it is important to
-            include this file or the relevant part in any <a href=
-            "website.html">trouble report</a>.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="89%">
+        <dl>
+          <dd>This file records Java error messages while OmegaT is running.
+          When you think OmegaT is behaving erratically it is important to
+          include this file or the relevant part in any <a href=
+          "website.html">trouble report</a>.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="11%">
-          <dl>
-            <dt>omegat.prefs</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>omegat.prefs</dt>
+        </dl>
+      </td>
 
-        <td width="89%">
-          <dl>
-            <dd>An xml file with all the GUI accessible option settings, as
-            well as window position data.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="89%">
+        <dl>
+          <dd>An xml file with all the GUI accessible option settings, as well
+          as window position data.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="11%">
-          <dl>
-            <dt>filters.conf</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>filters.conf</dt>
+        </dl>
+      </td>
 
-        <td width="89%">
-          <dl>
-            <dd>An xml file with all the data set by the <a href=
-            "fileFilters.html">file filters</a> preferences.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="89%">
+        <dl>
+          <dd>An xml file with all the data set by the <a href=
+          "fileFilters.html">file filters</a> preferences.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="11%">
-          <dl>
-            <dt>segmentation.conf</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>segmentation.conf</dt>
+        </dl>
+      </td>
 
-        <td width="89%">
-          <dl>
-            <dd>An xml file with all the data set by the <a href=
-            "segmentation.html">sentence segmentation</a> preferences.</dd>
-          </dl>
-        </td>
-      </tr>
-    </tbody>
+      <td width="89%">
+        <dl>
+          <dd>An xml file with all the data set by the <a href=
+          "segmentation.html">sentence segmentation</a> preferences.</dd>
+        </dl>
+      </td>
+    </tr>
   </table>
 
   <p><br>
@@ -341,207 +332,205 @@
   double clicking on the downloaded package. Once decompressed, a folder
   containing the following contents will be created:</p>
 
-  <table summary="just formatting" border="1" cellpadding="4" cellspacing="0"
-  width="100%">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "just formatting">
     <col width="19*">
     <col width="237*">
 
-    <tbody>
-      <tr valign="top">
-        <td width="8%">
-          <p><b>File/<br>
-          subfolder</b></p>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <p><b>File/<br>
+        subfolder</b></p>
+      </td>
 
-        <td width="92%">
-          <p><b>Contents</b></p>
-        </td>
-      </tr>
+      <td width="92%">
+        <p><b>Contents</b></p>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">/docs/</td>
+    <tr valign="top">
+      <td width="8%">/docs/</td>
 
-        <td width="92%">
-          <dl>
-            <dt>All the user manual files are in this folder. You can open them
-            in an internet browser to have access to external links.</dt>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dt>All the user manual files are in this folder. You can open them
+          in an internet browser to have access to external links.</dt>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>/images/</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>/images/</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Icons and logo graphics are included here.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>Icons and logo graphics are included here.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>/lib/</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>/lib/</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Java files are included here. They are necessary to the well
-            functioning of OmegaT.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>Java files are included here. They are necessary to the well
+          functioning of OmegaT.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>join.html</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>join.html</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>This is a normal html file that once opened in your internet
-            browser will redirect you to the OmegaT user group hosted on Yahoo
-            Groups. Joining is not necessary but will give you access to some
-            extra services like access to some files and irregular polls,
-            besides for being able to join in OmegaT related discussions. The
-            group archives are public and consultation does not require
-            subscription to the group.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>This is a normal html file that once opened in your internet
+          browser will redirect you to the OmegaT user group hosted on Yahoo
+          Groups. Joining is not necessary but will give you access to some
+          extra services like access to some files and irregular polls, besides
+          for being able to join in OmegaT related discussions. The group
+          archives are public and consultation does not require subscription to
+          the group.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>changes.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>changes.txt</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>A relatively detailed list of modifications between this
-            version and the preceding versions.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>A relatively detailed list of modifications between this version
+          and the preceding versions.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>license.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>license.txt</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>The GNU GENERAL PUBLIC LICENSE. This license allows you to do
-            certain things with OmegaT, including modifying and distributing
-            it. If you are interested in modifying or distributing OmegaT, take
-            a good look at this document and make sure you are aware of all its
-            implications before doing anything. In case you are in doubt, don't
-            hesitate to ask project members directly either by sending them a
-            mail from the Source Forge page or by sending a public mail to the
-            user group.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>The GNU GENERAL PUBLIC LICENSE. This license allows you to do
+          certain things with OmegaT, including modifying and distributing it.
+          If you are interested in modifying or distributing OmegaT, take a
+          good look at this document and make sure you are aware of all its
+          implications before doing anything. In case you are in doubt, don't
+          hesitate to ask project members directly either by sending them a
+          mail from the Source Forge page or by sending a public mail to the
+          user group.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>doc-license.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>doc-license.txt</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>The GNU GENERAL PUBLIC LICENSE. This license covers the
-            documentation. See above.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>The GNU GENERAL PUBLIC LICENSE. This license covers the
+          documentation. See above.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>readme.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>readme.txt</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>This file is very important and you should make sure you read
-            it before starting OmegaT. It includes general information about
-            OmegaT, where to find more information, how to contribute etc. It
-            is translated to a number of languages.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>This file is very important and you should make sure you read it
+          before starting OmegaT. It includes general information about OmegaT,
+          where to find more information, how to contribute etc. It is
+          translated to a number of languages.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>OmegaT</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>A text file that containing two lines:<br>
-            <code>#!/bin/bash</code><br>
-            <code>java -jar OmegaT.jar $*</code><br>
-            You may find this file useful if you make it executable
-            (<code>chmod +x OmegaT</code>) from the <a href=
-            "installingAndRunning.html#command_line">command line</a> after
-            making sure you are in the <code>/OmegaT_2.0/</code> directory.
-            From now on you'll be able to start OmegaT by calling this file
-            from the command line.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>A text file that containing two lines:<br>
+          <code>#!/bin/bash</code><br>
+          <code>java -jar OmegaT.jar $*</code><br>
+          You may find this file useful if you make it executable (<code>chmod
+          +x OmegaT</code>) from the <a href=
+          "installingAndRunning.html#command_line">command line</a> after
+          making sure you are in the <code>/OmegaT_2.0/</code> directory. From
+          now on you'll be able to start OmegaT by calling this file from the
+          command line.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>OmegaT.bat</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT.bat</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>A batch file, used to launch OmegaT from the Windows <a href=
-            "installingAndRunning.html#command_line">command line</a>. It
-            contains just the following line:</dd>
+      <td width="92%">
+        <dl>
+          <dd>A batch file, used to launch OmegaT from the Windows <a href=
+          "installingAndRunning.html#command_line">command line</a>. It
+          contains just the following line:</dd>
 
-            <dd><code>java -jar OmegaT.jar %*</code></dd>
-          </dl>
-        </td>
-      </tr>
+          <dd><code>java -jar OmegaT.jar %*</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>OmegaT.jar</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT.jar</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dt>The main OmegaT application. To launch OmegaT you have to
-            either call this file from the command line or launch it from your
-            file manager (usually by double-clicking it).</dt>
-          </dl>
-        </td>
-      </tr>
-    </tbody>
+      <td width="92%">
+        <dl>
+          <dt>The main OmegaT application. To launch OmegaT you have to either
+          call this file from the command line or launch it from your file
+          manager (usually by double-clicking it).</dt>
+        </dl>
+      </td>
+    </tr>
   </table>
 
   <dl>
@@ -550,8 +539,8 @@
   </dl>
   <hr>
 
-  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
-  "2" cellspacing="2">
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Legal

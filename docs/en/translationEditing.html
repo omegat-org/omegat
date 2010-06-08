@@ -15,22 +15,19 @@
     </li>
 
     <li>
-      <p><a href="#validation">Segments not to modify</a></p>
-    </li>
-  </ul>
-
-  <p>The editing field can be set to behave the following ways:</p>
-
-  <ul>
-    <li>
-      <p>Insert automatically the best match available</p>
+      <p><a href="#validation">Allow the translation to be equal to
+      source</a></p>
     </li>
 
     <li>
-      <p>Consider as translated segments identical to the original</p>
+      <p><a href="#Export">Export the segment to text files</a></p>
     </li>
-  </ul>
-  <hr>
+  </ul><img alt="Editing Behaviour - dialog" src=
+  "images/EditingBehaviourOptions.png"><br>
+
+  <p>This dialogue window, available under Options &gt; Editing Behaviour..,
+  lets the user determine, how the current segment be initialized and
+  handled.</p>
 
   <h2><a name="auto_insert" id="auto_insert"></a>Automatic match insertion</h2>
 
@@ -75,14 +72,18 @@
 
       <td>
         <p>OmegaT will insert the translation of the string most similar to the
-        current source, if it is above the similarity threshold you can adjust
-        in this case.</p>
+        current source, if it is above the similarity threshold, set in the
+        dialogue (100% in the above case). If the match has been found, the
+        target segment will get a prefix, specified in the Prefix text field
+        ([fuzzy] in the example above). This makes it easy to search for
+        pretranslated segments later.</p>
       </td>
     </tr>
   </table>
   <hr>
 
-  <h2><a name="validation" id="validation"></a>Segments not to modify</h2>
+  <h2><a name="validation" id="validation"></a>Allow the translation to be
+  equal to source</h2>
 
   <p>Documents you need to translate might contain trade marks, names or other
   proper nouns that have to be the same in translated documents. There are two
@@ -96,6 +97,13 @@
   to keep the target segment equal to the source. To be able to do so, go to
   <strong>Options → Editing Behaviour...</strong> and check the box
   <strong>Allow translation to be equal to source</strong>.</p>
+
+  <h2><a name="Export" id="Export"></a>Export the segment to text files</h2>
+
+  <p>You may prefer to leave the untranslated segments as they are and come
+  back later to them. In this case you can activate the checkbox Allow the
+  translation to be equal to source and OmegaT will save such source segments
+  to a file to be translated later.</p>
   <hr>
 
   <table summary="just formatting" style="width: 100%;" border="0" cellpadding=

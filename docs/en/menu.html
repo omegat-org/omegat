@@ -143,7 +143,7 @@
         <td width="17%"></td>
 
         <td>
-          <p>Imports units from MediaWiki pages, based on the URL entered</p>
+          <p>Imports units from MediaWiki pages, based on the URL entered.</p>
         </td>
       </tr>
 
@@ -307,76 +307,130 @@
 
       <tr bgcolor="#FFFFFF">
         <td colspan="3">
-          <p><strong>The Edit menu itself contains the following
-          items:</strong></p>
-        </td>
-      </tr>
+          <p>The <strong>Edit</strong> menu contains the following shortcuts:</p>
 
       <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Undo Last Action</code></p>
+        <td>
+          <p>Undo last action</p>
         </td>
 
-        <td width="17%">
+        <td>
           <p><code>Ctrl+Z</code></p>
         </td>
 
         <td>
-          <p>Goes back to the status before the last editing action was taken.
-          Does not work once the modified segment has been validated.</p>
+          <p>Undoes the last editing actions, in the current target segment.</p>
         </td>
       </tr>
 
       <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Redo Last Action</code></p>
+        <td>
+          <p>Redo last action</p>
         </td>
 
-        <td width="17%">
+        <td>
           <p><code>Ctrl+Y</code></p>
         </td>
 
         <td>
-          <p>Goes back to the status before the last editing action was
-          cancelled. Does not work once the modified segment has been
-          validated.</p>
+          <p>Redoes the editing actions that have just been undone, in the
+          current target segment.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Replace With Match</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+R</code></p>
+        <td>
+          <p>Select match #N</p>
         </td>
 
         <td>
-          <p>Overwrites the whole target segment with the currently selected
-          fuzzy match (by default the first match is selected).</p>
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>#N is a digit from 1 to 5. The short-cut selects the
+          N<sup>th</sup> match displayed in the match window (the first match
+          is selected by default).</p>
         </td>
       </tr>
 
       <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Insert Match</code></p>
+        <td>
+          <p>Replace with match</p>
         </td>
 
-        <td width="17%">
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Replaces the current target segment contents with the selected
+          match (the first match is selected by default).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Insert match</p>
+        </td>
+
+        <td>
           <p><code>Ctrl+I</code></p>
         </td>
 
         <td>
-          <p>Inserts the currently selected fuzzy match at the cursor position.
-          This function will overwrite a portion of the target segment if it is
-          selected.</p>
+          <p>Inserts the selected match at the cursor position in the current
+          target segment (the first match is inserted by default).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Replace with source</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Replaces the current target segment contents with the source text
+          Contents.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Insert source</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Inserts the source text Contents at the cursor position in the
+          current target segment.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Search project</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Displays a dialogue to conduct searches in the project.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p><code>Replace with Machine Translation</code></p>
+          <p>Replace with Machine Translation</p>
         </td>
 
         <td width="17%">
@@ -384,111 +438,9 @@
         </td>
 
         <td>
-          <p>Replaces the target segment with the Google Translate translation.
-          No action, if &nbsp;Google Translate not activated (see Menu &gt;
-          options below).</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Replace With Source</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+R</code></p>
-        </td>
-
-        <td>
-          <p>Overwrites the whole target segment with the source.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Insert Source<br></code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+I</code></p>
-        </td>
-
-        <td>
-          <p>Inserts the source at the cursor position.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Export Selection</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+C</code></p>
-        </td>
-
-        <td>
-          <p>Exports the current selection to a text file for processing. If
-          there is no selection, the current source is written to this file.
-          When the user exits OmegaT, this file is not emptied, to be
-          consistent with usual clipboard behaviour. The exported contents is
-          copied to the file <span style=
-          "font-style: italic;">selection.txt</span> located in the User's
-          preference files folder (see&nbsp;<a href=
-          "filesAndDirectories.html#user" target="_blank">files and
-          directories</a>).&nbsp;</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Search Project...</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+F</code></p>
-        </td>
-
-        <td>
-          <p>Opens a new <a href="userInterface.html#Search_Window">Search
-          window</a>.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Switch case to...</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift + F3</code></p>
-
-          <p><code>(see text)</code></p>
-        </td>
-
-        <td>
-          <p>Changes the case of the highlighted text in the target segment to
-          the selected option (Lower case, Upper case or Title case). Use
-          Shift+F3 to cycle through the three alternatives. If no text is
-          selected, OmegaT selects the word that contains the letter
-          immediately to the right of the cursor.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Select Fuzzy Match #N</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+#N</code></p>
-        </td>
-
-        <td>
-          <p>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
-          displayed in the match viewer to replace or insert it to the segment.
-          The <a href="userInterface.html#Match">Fuzzy matches</a>
-          section describes the colour coding in detail.</p>
+          <p>Replaces the target segment with the Google Translate translation
+          of the source. No action, if &nbsp;Google Translate not activated
+          (see Menu &gt; options &gt; Google Translate).</p>
         </td>
       </tr>
 
@@ -556,7 +508,7 @@
         </td>
 
         <td>
-          <p>The segment is opened on entering its segment number</p>
+          <p>The segment is opened on entering its segment number.</p>
         </td>
       </tr>
 
@@ -894,7 +846,7 @@
         </td>
 
         <td>
-          <p>Displays a dialogue to locate an already existing project</p>
+          <p>Displays a dialogue to locate an already existing project.</p>
         </td>
       </tr>
 
@@ -909,7 +861,7 @@
 
         <td>
           <p>Saves the current work to the file project_save.tmx located in the
-          project's /omegat/ folder</p>
+          project's /omegat/ folder.</p>
         </td>
       </tr>
 
@@ -923,7 +875,7 @@
         </td>
 
         <td>
-          <p>Closes the current project</p>
+          <p>Closes the current project.</p>
         </td>
       </tr>
 
@@ -938,7 +890,7 @@
 
         <td>
           <p>Creates the translated documents in the project's Target
-          folder</p>
+          folder.</p>
         </td>
       </tr>
 
@@ -952,7 +904,7 @@
         </td>
 
         <td>
-          <p>Displays the project's settings for eventual modification</p>
+          <p>Displays the project's settings for eventual modification.</p>
         </td>
       </tr>
 
@@ -974,7 +926,7 @@
         </td>
 
         <td>
-          <p>Undoes the last editing actions, in the current target segment</p>
+          <p>Undoes the last editing actions, in the current target segment.</p>
         </td>
       </tr>
 
@@ -989,7 +941,7 @@
 
         <td>
           <p>Redoes the editing actions that have just been undone, in the
-          current target segment</p>
+          current target segment.</p>
         </td>
       </tr>
 
@@ -1005,7 +957,7 @@
         <td>
           <p>#N is a digit from 1 to 5. The short-cut selects the
           N<sup>th</sup> match displayed in the match window (the first match
-          is selected by default)</p>
+          is selected by default).</p>
         </td>
       </tr>
 
@@ -1019,8 +971,8 @@
         </td>
 
         <td>
-          <p>Replaces the current target segment Contents with the selected
-          match (the first match is selected by default)</p>
+          <p>Replaces the current target segment contents with the selected
+          match (the first match is selected by default).</p>
         </td>
       </tr>
 
@@ -1035,7 +987,7 @@
 
         <td>
           <p>Inserts the selected match at the cursor position in the current
-          target segment (the first match is inserted by default)</p>
+          target segment (the first match is inserted by default).</p>
         </td>
       </tr>
 
@@ -1049,8 +1001,8 @@
         </td>
 
         <td>
-          <p>Replaces the current target segment Contents with the source text
-          Contents</p>
+          <p>Replaces the current target segment contents with the source text
+          Contents.</p>
         </td>
       </tr>
 
@@ -1065,7 +1017,7 @@
 
         <td>
           <p>Inserts the source text Contents at the cursor position in the
-          current target segment</p>
+          current target segment.</p>
         </td>
       </tr>
 
@@ -1079,7 +1031,7 @@
         </td>
 
         <td>
-          <p>Displays a dialogue to conduct searches in the project</p>
+          <p>Displays a dialogue to conduct searches in the project.</p>
         </td>
       </tr>
 
@@ -1118,7 +1070,7 @@
 
         <td>
           <p>Moves the editing field to the next segment that is not registered
-          in the project's translation memory</p>
+          in the project's translation memory.</p>
         </td>
       </tr>
 
@@ -1133,7 +1085,7 @@
         </td>
 
         <td>
-          <p>Moves the editing field to the next segment</p>
+          <p>Moves the editing field to the next segment.</p>
         </td>
       </tr>
 
@@ -1147,7 +1099,7 @@
         </td>
 
         <td>
-          <p>Moves the editing field to the previous segment</p>
+          <p>Moves the editing field to the previous segment.</p>
         </td>
       </tr>
 
@@ -1161,7 +1113,7 @@
         </td>
 
         <td>
-          <p>Moves to the segment number provided</p>
+          <p>Moves to the segment number provided.</p>
         </td>
       </tr>
 
@@ -1212,7 +1164,7 @@
         </td>
 
         <td>
-          <p>Displays the Project files listing</p>
+          <p>Displays the Project files listing.</p>
         </td>
       </tr>
 
@@ -1235,7 +1187,7 @@
 
         <td>
           <p>Opens the <a href="userInterface.html#tag_Validation">Tag
-          validation</a> window</p>
+          validation</a> window.</p>
         </td>
       </tr>
 
@@ -1250,7 +1202,7 @@
 
         <td>
           <p>Exports the current selection or the current source, if there's no
-          selection</p>
+          selection.</p>
         </td>
       </tr>
 
@@ -1264,7 +1216,7 @@
         </td>
 
         <td>
-          <p>Opens a new Search window</p>
+          <p>Opens a new Search window.</p>
         </td>
       </tr>
 
@@ -1278,7 +1230,7 @@
         </td>
 
         <td>
-          <p>Displays the OmegaT help files in a separate window</p>
+          <p>Displays the OmegaT help files in a separate window.</p>
         </td>
       </tr>
     </tbody>

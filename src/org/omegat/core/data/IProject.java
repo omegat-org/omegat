@@ -26,10 +26,8 @@
 package org.omegat.core.data;
 
 import java.io.IOException;
-import java.text.Collator;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -153,15 +151,9 @@ public interface IProject {
      */
     List<FileInfo> getProjectFiles();
 
-    public static class FileInfo implements Comparable<FileInfo> {
+    public static class FileInfo {
         public String filePath;
         
         public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
-        public int compareTo(FileInfo o) {
-            //Get the local collator and set its strength to PRIMARY
-            Collator localCollator = Collator.getInstance(Locale.getDefault());
-            localCollator.setStrength(Collator.PRIMARY);
-            return localCollator.compare(filePath, o.filePath);
-        }
     }
 }

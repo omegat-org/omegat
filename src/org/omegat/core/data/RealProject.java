@@ -33,13 +33,16 @@ import java.io.InterruptedIOException;
 import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
+import java.text.Collator;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -610,6 +613,7 @@ public class RealProject implements IProject
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
+        Collections.sort(srcFileList, new FileNameComparator());
         
         for (String filename : srcFileList) {
             // strip leading path information;
@@ -632,7 +636,6 @@ public class RealProject implements IProject
                 projectFilesList.add(fi);
             }
         }
-        Collections.sort(projectFilesList);
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
         long en = System.currentTimeMillis();
         Log.log("Load project source files: " + (en - st) + "ms");
@@ -1011,6 +1014,15 @@ public class RealProject implements IProject
 
                 data.put(sourceS, new TransEntry(transS));
             }
+        }
+    }
+    
+    static class FileNameComparator implements Comparator<String> {
+        public int compare(String o1, String o2) {
+            // Get the local collator and set its strength to PRIMARY
+            Collator localCollator = Collator.getInstance(Locale.getDefault());
+            localCollator.setStrength(Collator.PRIMARY);
+            return localCollator.compare(o1, o2);
         }
     }
 }

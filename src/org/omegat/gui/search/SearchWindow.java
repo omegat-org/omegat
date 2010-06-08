@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
                2009 Didier Briel
-               2010 Martin Fleurke
+               2010 Martin Fleurke, Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,6 +39,8 @@ import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.Calendar;
 import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -68,6 +70,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
 import org.openide.awt.Mnemonics;
@@ -81,6 +84,7 @@ import org.openide.awt.Mnemonics;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Antonio Vilei
  */
 public class SearchWindow extends JFrame
 {
@@ -89,6 +93,8 @@ public class SearchWindow extends JFrame
     {
         //super(par, false);
         m_parent = par;
+
+        m_dateFormat = new SimpleDateFormat(SAVED_DATE_FORMAT);
 
         //box Search bSearch
         m_searchLabel = new JLabel();
@@ -100,14 +106,13 @@ public class SearchWindow extends JFrame
         Box bSearch = Box.createHorizontalBox();
         bSearch.add(m_searchLabel);
         bSearch.add(m_searchField);
-        bSearch.add(Box.createHorizontalStrut(10));
+        bSearch.add(Box.createHorizontalStrut(H_MARGIN));
         bSearch.add(m_searchButton);
 
         m_exactSearchRB   = new JRadioButton();
         m_keywordSearchRB = new JRadioButton();
         m_regexpSearchRB  = new JRadioButton();
         m_resultsLabel    = new JLabel();
-        m_advancedButton  = new JButton();
 
         ButtonGroup bg = new ButtonGroup();
         bg.add(m_exactSearchRB);
@@ -117,13 +122,38 @@ public class SearchWindow extends JFrame
         //box Radio Box bRB
         Box bRB = Box.createHorizontalBox();
         bRB.add(m_exactSearchRB);
-        bRB.add(Box.createHorizontalStrut(10));
+        bRB.add(Box.createHorizontalStrut(H_MARGIN));
         bRB.add(m_keywordSearchRB);
-        bRB.add(Box.createHorizontalStrut(10));
+        bRB.add(Box.createHorizontalStrut(H_MARGIN));
         bRB.add(m_regexpSearchRB);
-        bRB.add(Box.createHorizontalStrut(10));
+        bRB.add(Box.createHorizontalStrut(H_MARGIN));
         bRB.add(m_resultsLabel);
         bRB.add(Box.createHorizontalGlue());
+
+        m_caseCB         = new JCheckBox();
+        m_searchSourceCB = new JCheckBox();
+        m_searchTargetCB = new JCheckBox();
+        m_tmSearchCB     = new JCheckBox();
+        m_allResultsCB    = new JCheckBox();
+
+        //box OptionsBox bOB
+        Box bOB = Box.createHorizontalBox();
+        bOB.add(m_caseCB);
+        bOB.add(Box.createHorizontalStrut(H_MARGIN));
+        bOB.add(m_searchSourceCB);
+        bOB.add(Box.createHorizontalStrut(H_MARGIN));
+        bOB.add(m_searchTargetCB);
+        bOB.add(Box.createHorizontalStrut(H_MARGIN));
+        bOB.add(m_tmSearchCB);
+        bOB.add(Box.createHorizontalStrut(H_MARGIN));
+        bOB.add(m_allResultsCB);
+
+        m_advancedButton  = new JButton();
+
+        // Box for advanced options button
+        Box bAO = Box.createHorizontalBox();
+        bAO.add(m_advancedButton);
+        bAO.add(Box.createHorizontalGlue());
 
         //box AuthorBox
         m_authorCB = new JCheckBox();
@@ -132,7 +162,6 @@ public class SearchWindow extends JFrame
         bAB = Box.createHorizontalBox();
         bAB.add(m_authorCB);
         bAB.add(m_authorField);
-        bAB.setVisible(false);
 
         //box DateBox
         Calendar calendar= Calendar.getInstance();
@@ -146,10 +175,13 @@ public class SearchWindow extends JFrame
                 Calendar.YEAR);
         m_dateFromCB       = new JCheckBox();
         m_dateFromSpinner  = new JSpinner(m_dateFromModel);
-        m_dateFromSpinner.setEnabled(false);
+        m_dateFromButton   = new JButton();
         bDB = Box.createHorizontalBox();
         bDB.add(m_dateFromCB);
         bDB.add(m_dateFromSpinner);
+        bDB.add(m_dateFromButton);
+        bDB.add(Box.createHorizontalStrut(H_MARGIN));
+        bDB.add(Box.createHorizontalGlue());
 
         m_dateToModel = new SpinnerDateModel(initDate,
                 earliestDate,
@@ -157,25 +189,10 @@ public class SearchWindow extends JFrame
                 Calendar.YEAR);
         m_dateToCB       = new JCheckBox();
         m_dateToSpinner  = new JSpinner(m_dateToModel);
-        m_dateToSpinner.setEnabled(false);
+        m_dateToButton   = new JButton();
         bDB.add(m_dateToCB);
         bDB.add(m_dateToSpinner);
-        bDB.add(Box.createHorizontalGlue());
-        bDB.setVisible(false);
-
-        m_caseCB          = new JCheckBox();
-        m_tmSearchCB      = new JCheckBox();
-        m_allResultsCB    = new JCheckBox();
-
-        //box OptionsBox bOB
-        Box bOB = Box.createHorizontalBox();
-        bOB.add(m_caseCB);
-        bOB.add(Box.createHorizontalStrut(10));
-        bOB.add(m_tmSearchCB);
-        bOB.add(Box.createHorizontalStrut(10));
-        bOB.add(m_allResultsCB);
-        bOB.add(Box.createHorizontalGlue());
-        bOB.add(m_advancedButton);
+        bDB.add(m_dateToButton);
 
         m_viewer = new EntryListPane(par);
         JScrollPane viewerScroller = new JScrollPane(m_viewer);
@@ -188,7 +205,7 @@ public class SearchWindow extends JFrame
         Box bDir = Box.createHorizontalBox();
         bDir.add(m_dirLabel);
         bDir.add(m_dirField);
-        bDir.add(Box.createHorizontalStrut(10));
+        bDir.add(Box.createHorizontalStrut(H_MARGIN));
         bDir.add(m_dirButton);
 
         m_dirCB = new JCheckBox();
@@ -206,7 +223,7 @@ public class SearchWindow extends JFrame
         //box CheckBox
         Box bCB = Box.createHorizontalBox();
         bCB.add(m_dirCB);
-        bCB.add(Box.createHorizontalStrut(10));
+        bCB.add(Box.createHorizontalStrut(H_MARGIN));
         bCB.add(m_recursiveCB);
         bCB.add(Box.createHorizontalGlue());
         bCB.add(m_removeFilterButton);
@@ -231,11 +248,11 @@ public class SearchWindow extends JFrame
         gridbag.setConstraints(bSearch, c);
         cp.add(bSearch);
         
-        // search type
+        // search type (exact/keyword/regex) + results counter
         gridbag.setConstraints(bRB, c);
         cp.add(bRB);
 
-        // search options (case/regex/TM)
+        // search options (case/source/target/TM/all results)
         gridbag.setConstraints(bOB, c);
         cp.add(bOB);
 
@@ -246,6 +263,10 @@ public class SearchWindow extends JFrame
         //date search
         gridbag.setConstraints(bDB, c);
         cp.add(bDB);
+
+        // advanced options button
+        gridbag.setConstraints(bAO, c);
+        cp.add(bAO);
 
         // view pane
         c.weighty = 3.0;
@@ -300,7 +321,7 @@ public class SearchWindow extends JFrame
         {
             public void actionPerformed(ActionEvent e)
             {
-                showHideAdvanced();
+                toggleAdvancedOptions();
             }
         });
         
@@ -308,21 +329,34 @@ public class SearchWindow extends JFrame
         {
             public void actionPerformed(ActionEvent e) {
                 enableDisableAuthor();
-                
             }
         });
+
         m_dateToCB.addActionListener(new ActionListener() 
         {
             public void actionPerformed(ActionEvent e) {
                 enableDisableDateTo();
-                
             }
         });
+
+        m_dateToButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                doResetDateTo();
+            }
+        });
+
+        m_dateFromButton.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent e) {
+                doResetDateFrom();
+            }
+        });
+
         m_dateFromCB.addActionListener(new ActionListener() 
         {
             public void actionPerformed(ActionEvent e) {
                 enableDisableDateFrom();
-                
             }
         });
         
@@ -429,7 +463,7 @@ public class SearchWindow extends JFrame
         m_searchField.requestFocus();
 
         // start the search in a separate thread
-        m_thread = new SearchThread(par, this, startText);
+        m_thread = new SearchThread(this);
         m_thread.start();
     }
     
@@ -453,27 +487,27 @@ public class SearchWindow extends JFrame
         }
         catch (NumberFormatException nfe) {
             // set default size and position
-            setSize(650, 700);
+            setSize(800, 700);
         }
 
         // search dir options
         String searchFiles = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_FILES);
-        if ((searchFiles == null) || (searchFiles.length() == 0))
+        if (StringUtil.isEmpty(searchFiles))
             searchFiles = "false";
         m_dirCB.setSelected(Boolean.valueOf(searchFiles).booleanValue());
         String searchDir = Preferences.getPreference(Preferences.SEARCHWINDOW_DIR);
-        if (!searchDir.equals(""))
+        if (!StringUtil.isEmpty(searchDir))
             m_dirField.setText(searchDir);
         m_dirField.setEditable(m_dirCB.isSelected());
         String recursive = Preferences.getPreference(Preferences.SEARCHWINDOW_RECURSIVE);
-        if ((recursive == null) || (recursive.length() == 0))
+        if (StringUtil.isEmpty(recursive))
             recursive = "true";
         m_recursiveCB.setSelected(Boolean.valueOf(recursive).booleanValue());
         m_recursiveCB.setEnabled(m_dirCB.isSelected());
 
         // search type
         String searchType = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_TYPE);
-        if ((searchType == null) || (searchType.length() == 0))
+        if (StringUtil.isEmpty(searchType))
             searchType = SEARCH_TYPE_EXACT;
         m_exactSearchRB.setSelected(searchType.equals(SEARCH_TYPE_EXACT));
         m_keywordSearchRB.setSelected(searchType.equals(SEARCH_TYPE_KEYWORD));
@@ -481,26 +515,42 @@ public class SearchWindow extends JFrame
 
         // case sensitivity
         String caseSens = Preferences.getPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE);
-        if ((caseSens == null) || (caseSens.length() == 0))
+        if (StringUtil.isEmpty(caseSens))
             caseSens = "false";
         m_caseCB.setSelected(Boolean.valueOf(caseSens).booleanValue());
 
+        // search source
+        String searchSource = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE);
+        if (StringUtil.isEmpty(searchSource))
+            searchSource = "true";
+        m_searchSourceCB.setSelected(Boolean.valueOf(searchSource).booleanValue());
+
+        // search target
+        String searchTarget = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_TARGET);
+        if (StringUtil.isEmpty(searchTarget))
+            searchTarget = "true";
+        m_searchTargetCB.setSelected(Boolean.valueOf(searchTarget).booleanValue());
+
         // TM search
         String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
-        if ((tmSearch == null) || (tmSearch.length() == 0))
+        if (StringUtil.isEmpty(tmSearch))
             tmSearch = "true"; 
         m_tmSearchCB.setSelected(Boolean.valueOf(tmSearch).booleanValue());
         m_tmSearch = Boolean.valueOf(tmSearch).booleanValue();
 
-        // All results
+        // all results
         String allResults = Preferences.getPreference(Preferences.SEARCHWINDOW_ALL_RESULTS);
-        if ((allResults == null) || (allResults.length() == 0))
+        if (StringUtil.isEmpty(allResults))
             allResults = "false";
         m_allResultsCB.setSelected(Boolean.valueOf(allResults).booleanValue());
 
-
-        // update the enabled/selected status of all options
+        // update the enabled/selected status of normal options
         updateOptionStatus();
+
+        // load advanced options settings from user preferences
+        loadAdvancedOptionPreferences();
+        // update advanced options status
+        updateAdvancedOptionStatus();
     }
 
     /**
@@ -525,10 +575,28 @@ public class SearchWindow extends JFrame
         // search options
         Preferences.setPreference(Preferences.SEARCHWINDOW_CASE_SENSITIVE,
                                   Boolean.toString(m_caseCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_SOURCE,
+                                  Boolean.toString(m_searchSourceCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TARGET,
+                                  Boolean.toString(m_searchTargetCB.isSelected()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH,
                                   Boolean.toString(m_tmSearch)); // don't use radio button status!
         Preferences.setPreference(Preferences.SEARCHWINDOW_ALL_RESULTS,
                                   Boolean.toString(m_allResultsCB.isSelected()));
+        // advanced search options
+        Preferences.setPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE,
+                                  Boolean.toString(m_advancedVisible));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR,
+                                  Boolean.toString(m_authorCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME, m_authorField.getText());
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM,
+                                  Boolean.toString(m_dateFromCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE,
+                                  m_dateFormat.format(m_dateFromModel.getDate()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO,
+                                  Boolean.toString(m_dateToCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE,
+                                  m_dateFormat.format(m_dateToModel.getDate()));
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, m_dirField.getText());
@@ -608,6 +676,7 @@ public class SearchWindow extends JFrame
     ///////////////////////////////////////////////////////////////
     // internal functions
     
+    @Override
     public void processWindowEvent(WindowEvent w)
     {
         int evt = w.getID();
@@ -703,6 +772,8 @@ public class SearchWindow extends JFrame
                                    m_caseCB.isSelected(),
                                    m_tmSearchCB.isSelected(),
                                    m_allResultsCB.isSelected(),
+                                   m_searchSourceCB.isSelected(),
+                                   m_searchTargetCB.isSelected(),
                                    m_authorCB.isSelected(),
                                    m_authorField.getText(),
                                    m_dateFromCB.isSelected(),
@@ -712,30 +783,117 @@ public class SearchWindow extends JFrame
                                    );
         }
     }
-    
+
     private void doCancel()
     {
         dispose();
     }
-    
-    private void showHideAdvanced() {
-        boolean visible = !bAB.isVisible();
-        bAB.setVisible(visible);
-        bDB.setVisible(visible);
+
+    private void toggleAdvancedOptions()
+    {
+        m_advancedVisible = !m_advancedVisible;
+        updateAdvancedOptionStatus();
     }
-    private void enableDisableAuthor() {
+
+    private void enableDisableAuthor()
+    {
         boolean editable = m_authorCB.isSelected();
         m_authorField.setEditable(editable);
     }
-    private void enableDisableDateFrom() {
+
+    private void enableDisableDateFrom()
+    {
         boolean enable = m_dateFromCB.isSelected();
         m_dateFromSpinner.setEnabled(enable);
+        m_dateFromButton.setEnabled(enable);
     }
-    private void enableDisableDateTo() {
+
+    private void doResetDateFrom()
+    {
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        m_dateFromModel.setEnd(now);
+        m_dateFromModel.setValue(now);
+    }
+
+    private void doResetDateTo()
+    {
+        Calendar calendar = Calendar.getInstance();
+        Date now = calendar.getTime();
+        m_dateToModel.setEnd(now);
+        m_dateToModel.setValue(now);
+    }
+
+    private void enableDisableDateTo() 
+    {
         boolean enable = m_dateToCB.isSelected();
         m_dateToSpinner.setEnabled(enable);
+        m_dateToButton.setEnabled(enable);
     }
-    
+
+    private void loadAdvancedOptionPreferences()
+    {
+        // advanced options visibility
+        String advancedVisible = Preferences.getPreference(Preferences.SEARCHWINDOW_ADVANCED_VISIBLE);
+        if (StringUtil.isEmpty(advancedVisible))
+            advancedVisible = "false";
+        m_advancedVisible = Boolean.valueOf(advancedVisible).booleanValue();
+
+        // author options
+        String searchAuthor = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_AUTHOR);
+        if (StringUtil.isEmpty(searchAuthor))
+            searchAuthor = "false";
+        m_authorCB.setSelected(Boolean.valueOf(searchAuthor).booleanValue());
+        String authorName = Preferences.getPreference(Preferences.SEARCHWINDOW_AUTHOR_NAME);
+        if (!StringUtil.isEmpty(authorName))
+            m_authorField.setText(authorName);
+
+        // date options
+        try {
+            // from date
+            String dateFrom = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_FROM);
+            if (StringUtil.isEmpty(dateFrom))
+                dateFrom = "false";
+            m_dateFromCB.setSelected(Boolean.valueOf(dateFrom).booleanValue());
+            String dateFromValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_FROM_VALUE);
+            if (!StringUtil.isEmpty(dateFromValue))
+                m_dateFromModel.setValue(m_dateFormat.parse(dateFromValue));
+
+            // to date
+            String dateTo = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_TO);
+            if (StringUtil.isEmpty(dateTo))
+                dateTo = "false";
+            m_dateToCB.setSelected(Boolean.valueOf(dateTo).booleanValue());
+            String dateToValue = Preferences.getPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE);
+            if (!StringUtil.isEmpty(dateToValue))
+                m_dateToModel.setValue(m_dateFormat.parse(dateToValue));
+        } catch (ParseException e) {
+            // use safe settings in case of parsing error
+            m_dateFromCB.setSelected(false);
+            m_dateToCB.setSelected(false);
+        }
+
+        // if advanced options are enabled (e.g. author/date search),
+        // let the user see them anyway. This is important because
+        // search results will be affected by these settings
+        if (m_authorCB.isSelected() || m_dateFromCB.isSelected() || m_dateToCB.isSelected()) {
+            m_advancedVisible = true;
+        }
+    }
+
+    private void updateAdvancedOptionStatus()
+    {
+
+        bAB.setVisible(m_advancedVisible);
+        bDB.setVisible(m_advancedVisible);
+
+        m_authorField.setEditable(m_authorCB.isSelected());
+        m_dateFromSpinner.setEnabled(m_dateFromCB.isSelected());
+        m_dateFromButton.setEnabled(m_dateFromCB.isSelected());
+        m_dateToSpinner.setEnabled(m_dateToCB.isSelected());
+        m_dateToButton.setEnabled(m_dateToCB.isSelected());
+    }
+
     private void updateUIText()
     {
         setTitle(OStrings.getString("SW_TITLE"));
@@ -746,11 +904,16 @@ public class SearchWindow extends JFrame
         Mnemonics.setLocalizedText(m_exactSearchRB, OStrings.getString("SW_EXACT_SEARCH"));
         Mnemonics.setLocalizedText(m_keywordSearchRB, OStrings.getString("SW_WORD_SEARCH"));
         Mnemonics.setLocalizedText(m_regexpSearchRB, OStrings.getString("SW_REGEXP_SEARCH"));
-        Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_ADVANCED_SEARCH"));
         
+        Mnemonics.setLocalizedText(m_searchSourceCB, OStrings.getString("SW_SEARCH_SOURCE"));
+        Mnemonics.setLocalizedText(m_searchTargetCB, OStrings.getString("SW_SEARCH_TARGET"));
+
+        Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_ADVANCED_OPTIONS"));
         Mnemonics.setLocalizedText(m_authorCB, OStrings.getString("SW_AUTHOR"));
+        Mnemonics.setLocalizedText(m_dateFromButton, OStrings.getString("SW_NOW"));
         Mnemonics.setLocalizedText(m_dateFromCB, OStrings.getString("SW_CHANGED_AFTER"));
         Mnemonics.setLocalizedText(m_dateToCB, OStrings.getString("SW_CHANGED_BEFORE"));
+        Mnemonics.setLocalizedText(m_dateToButton, OStrings.getString("SW_NOW"));
 
         Mnemonics.setLocalizedText(m_caseCB, OStrings.getString("SW_CASE_SENSITIVE"));
         Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.getString("SW_SEARCH_TM"));
@@ -824,6 +987,7 @@ public class SearchWindow extends JFrame
             getActionMap().put("REDO", redoAction);               
         }
 
+        @Override
         protected Document createDefaultModel() {
             PlainDocument doc = new PlainDocument(new StringContent());
             //doc.addDocumentListener(this);
@@ -832,6 +996,7 @@ public class SearchWindow extends JFrame
             return doc;
         }
 
+        @Override
         protected void processKeyEvent(KeyEvent e)
         {
             if (e.getKeyCode() == KeyEvent.VK_ENTER &&
@@ -861,6 +1026,8 @@ public class SearchWindow extends JFrame
 
     private MainWindow m_parent;
 
+    private SimpleDateFormat m_dateFormat;
+
     private JLabel      m_searchLabel;
     private JTextField  m_searchField;
     private JButton     m_searchButton;
@@ -871,16 +1038,23 @@ public class SearchWindow extends JFrame
     private JLabel       m_resultsLabel;
     private JButton      m_advancedButton;
 
+    private JCheckBox    m_searchSourceCB;
+    private JCheckBox    m_searchTargetCB;
+
+    private boolean      m_advancedVisible;
+
     private Box          bAB;
     private JCheckBox    m_authorCB;
     private JTextField   m_authorField;
 
     private Box          bDB;
     private JCheckBox    m_dateFromCB;
+    private JButton      m_dateFromButton;
     private JSpinner     m_dateFromSpinner;
     private SpinnerDateModel m_dateFromModel;
 
     private JCheckBox    m_dateToCB;
+    private JButton      m_dateToButton;
     private JSpinner     m_dateToSpinner;
     private SpinnerDateModel m_dateToModel;
 
@@ -907,4 +1081,8 @@ public class SearchWindow extends JFrame
     private final static String SEARCH_TYPE_EXACT   = "EXACT";
     private final static String SEARCH_TYPE_KEYWORD = "KEYWORD";
     private final static String SEARCH_TYPE_REGEXP  = "REGEXP";
+
+    private final static String SAVED_DATE_FORMAT   = "yyyy/MM/dd HH:mm";
+
+    private final static int H_MARGIN = 10;
 }

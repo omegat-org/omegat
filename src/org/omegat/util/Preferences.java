@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Zoltan Bartko
                2008-2009 Didier Briel
-               2010 Wildrich Fourie
+               2010 Wildrich Fourie and Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,6 +53,7 @@ import org.omegat.util.xml.XMLStreamReader;
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Didier Briel
  * @author Wildrich Fourie
+ * @author Antonio Vilei
  */
 public class Preferences
 {
@@ -84,18 +85,27 @@ public class Preferences
     public static final String PROJECT_FILES_USE_FONT      = "project_files_use_font";      // NOI18N
         
     // Search window size and position    
-    public static final String SEARCHWINDOW_WIDTH           = "search_window_width";            // NOI18N
-    public static final String SEARCHWINDOW_HEIGHT          = "search_window_height";           // NOI18N
-    public static final String SEARCHWINDOW_X               = "search_window_x";                // NOI18N
-    public static final String SEARCHWINDOW_Y               = "search_window_y";                // NOI18N
-    public static final String SEARCHWINDOW_SEARCH_TYPE     = "search_window_search_type";      // NOI18N
-    public static final String SEARCHWINDOW_CASE_SENSITIVE  = "search_window_case_sensitive";   // NOI18N
-    public static final String SEARCHWINDOW_REG_EXPRESSIONS = "search_window_reg_expressions";  // NOI18N
-    public static final String SEARCHWINDOW_TM_SEARCH       = "search_window_tm_search";        // NOI18N
-    public static final String SEARCHWINDOW_ALL_RESULTS     = "search_window_all_results";
-    public static final String SEARCHWINDOW_DIR             = "search_window_dir";              // NOI18N
-    public static final String SEARCHWINDOW_SEARCH_FILES    = "search_window_search_files";     // NOI18N
-    public static final String SEARCHWINDOW_RECURSIVE       = "search_window_search_recursive"; // NOI18N
+    public static final String SEARCHWINDOW_WIDTH            = "search_window_width";            // NOI18N
+    public static final String SEARCHWINDOW_HEIGHT           = "search_window_height";           // NOI18N
+    public static final String SEARCHWINDOW_X                = "search_window_x";                // NOI18N
+    public static final String SEARCHWINDOW_Y                = "search_window_y";                // NOI18N
+    public static final String SEARCHWINDOW_SEARCH_TYPE      = "search_window_search_type";      // NOI18N
+    public static final String SEARCHWINDOW_CASE_SENSITIVE   = "search_window_case_sensitive";   // NOI18N
+    public static final String SEARCHWINDOW_SEARCH_SOURCE    = "search_window_search_source";    // NOI18N
+    public static final String SEARCHWINDOW_SEARCH_TARGET    = "search_window_search_target";    // NOI18N
+    public static final String SEARCHWINDOW_REG_EXPRESSIONS  = "search_window_reg_expressions";  // NOI18N
+    public static final String SEARCHWINDOW_TM_SEARCH        = "search_window_tm_search";        // NOI18N
+    public static final String SEARCHWINDOW_ALL_RESULTS      = "search_window_all_results";
+    public static final String SEARCHWINDOW_ADVANCED_VISIBLE = "search_window_advanced_visible"; // NOI18N
+    public static final String SEARCHWINDOW_SEARCH_AUTHOR    = "search_window_search_author";    // NOI18N
+    public static final String SEARCHWINDOW_AUTHOR_NAME      = "search_window_author_name";      // NOI18N
+    public static final String SEARCHWINDOW_DATE_FROM        = "search_window_date_from";        // NOI18N
+    public static final String SEARCHWINDOW_DATE_FROM_VALUE  = "search_window_date_from_value";  // NOI18N
+    public static final String SEARCHWINDOW_DATE_TO          = "search_window_date_to";          // NOI18N
+    public static final String SEARCHWINDOW_DATE_TO_VALUE    = "search_window_date_to_value";    // NOI18N
+    public static final String SEARCHWINDOW_DIR              = "search_window_dir";              // NOI18N
+    public static final String SEARCHWINDOW_SEARCH_FILES     = "search_window_search_files";     // NOI18N
+    public static final String SEARCHWINDOW_RECURSIVE        = "search_window_search_recursive"; // NOI18N
 
     
     // Tag validation window size and position    

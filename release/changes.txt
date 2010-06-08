@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.7
 ----------------------------------------------------------------------
-  5 Enhancements
+  7 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.1.7 vs. 2.1.6
@@ -11,11 +11,18 @@
   - Sort Project Files according to locale
   http://sourceforge.net/support/tracker.php?aid=3002616
 
+  - Remember advanced search settings
+  http://sourceforge.net/support/tracker.php?aid=2997454
+
+  - Add source/target selection to the search window
+  http://sourceforge.net/support/tracker.php?aid=2860161
+
+  Other enhancements:
+
   - OpenXML filter: option to translate slide layouts in PowerPoint presentations
 
   - OpenOffice.org filter: option to translate links (URL)
 
-  Other enhancements:
   - Catalan localisation updated to 2.1.4 (UI, Readme, Instant Start, documentation)
   - Hungarian localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
 

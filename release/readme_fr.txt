@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2010.
+﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2010.
 
 ==============================================================================
   OmegaT 2.0, fichier « Lisez-moi »
@@ -188,6 +188,7 @@ Contributions au code :
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Antonio Vilei
   Martin Wunderlich
 
 Autres contributions par :

@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
                2009 Didier Briel
+               2010 Martin Fleurke, Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -47,7 +48,6 @@ import org.omegat.core.data.TransMemory;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -63,13 +63,13 @@ import org.omegat.util.StaticUtils;
  * @author Keith Godfrey
  * @author Henry Pijffers
  * @author Didier Briel
+ * @author Martin Fleurke
+ * @author Antonio Vilei
  */
 public class SearchThread extends Thread
 {
-    public SearchThread(MainWindow par, SearchWindow window, String startText)
+    public SearchThread(SearchWindow window)
     {
-        setPriority(Thread.MIN_PRIORITY);
-        
         m_window = window;
         m_searchDir = null;
         m_searchRecursive = false;
@@ -97,6 +97,8 @@ public class SearchThread extends Thread
      * @param caseSensitive search case sensitive
      * @param tm search in legacy and orphan TM strings too
      * @param allResults
+     * @param searchSource search in source text
+     * @param searchTarget search in target text
      * @param searchAuthor search for tmx segments modified by author id/name
      * @param author string to search for in TMX attribute modificationId
      * @param searchDateAfter search for translation segments modified after the given date
@@ -116,6 +118,8 @@ public class SearchThread extends Thread
                               boolean caseSensitive,
                               boolean tm,
                               boolean allResults,
+                              boolean searchSource,
+                              boolean searchTarget,
                               boolean searchAuthor,
                               String  author,
                               boolean searchDateAfter,
@@ -130,6 +134,8 @@ public class SearchThread extends Thread
             m_searchRecursive = recursive;
             m_tmSearch = tm;
             m_allResults = allResults;
+            m_searchSource = searchSource;
+            m_searchTarget = searchTarget;
             m_searchAuthor = searchAuthor;
             m_searchDateAfter = searchDateAfter;
             m_searchDateBefore = searchDateBefore;
@@ -204,9 +210,13 @@ public class SearchThread extends Thread
     
     ///////////////////////////////////////////////////////////
     // thread main loop
+    @Override
     public void run()
     {
         boolean firstPass = true;
+
+        setPriority(Thread.MIN_PRIORITY);
+
         try
         {
             while( !interrupted() )
@@ -337,12 +347,17 @@ public class SearchThread extends Thread
             TransEntry te = Core.getProject().getTranslation(ste);
             String locText = te != null ? te.translation : "";
 
-            // if the source or translation contain all
-            // search strings, report the hit
-            if ((   searchString(srcText) || searchString(locText))
+            // If the source or translation contain all
+            // search strings, report the hit. Search is performed in
+            // source and translation according to the value of
+            // m_searchSource and m_searchTarget fields respectively.
+            if ( ((m_searchSource && searchString(srcText)) ||
+                  (m_searchTarget && searchString(locText)))
                 && (!m_searchAuthor || te != null && searchAuthor(te))
-                && (!m_searchDateBefore || te != null && te.changeDate != 0 && te.changeDate < m_dateBefore )
-                && (!m_searchDateAfter  || te != null && te.changeDate != 0 && te.changeDate > m_dateAfter )
+                && (!m_searchDateBefore || te != null && te.changeDate != 0 &&
+                    te.changeDate < m_dateBefore )
+                && (!m_searchDateAfter  || te != null && te.changeDate != 0 &&
+                    te.changeDate > m_dateAfter )
                 ) {
                 foundString(i, null, srcText, locText);
             }
@@ -361,12 +376,17 @@ public class SearchThread extends Thread
                 String srcText = en.getKey();
                 TransEntry te = en.getValue();
 
-                // if the source or translation contain all
-                // search strings, report the hit
-                if ((searchString(srcText) || searchString(te.translation))
+                // If the source or translation contain all
+                // search strings, report the hit. Search is performed in
+                // source and translation according to the value of
+                // m_searchSource and m_searchTarget fields respectively.
+                if ( ((m_searchSource && searchString(srcText)) ||
+                      (m_searchTarget && searchString(te.translation)))
                     && (!m_searchAuthor || searchAuthor(te))
-                    && (!m_searchDateBefore || te.changeDate != 0 && te.changeDate < m_dateBefore )
-                    && (!m_searchDateAfter  || te.changeDate != 0 && te.changeDate > m_dateAfter )
+                    && (!m_searchDateBefore || te.changeDate != 0 &&
+                        te.changeDate < m_dateBefore )
+                    && (!m_searchDateAfter  || te.changeDate != 0 &&
+                        te.changeDate > m_dateAfter )
                     ){
                     foundString(-1, file, srcText, te.translation);
                     // stop searching if the max. nr of hits has been reached
@@ -375,7 +395,7 @@ public class SearchThread extends Thread
                     }
                 }
             }
-            // search TM entries, unless we search for date or author. 
+            // Search TM entries, unless we search for date or author.
             // They are not available in external TM, so skip the search in 
             // that case.
             if (!m_searchAuthor && !m_searchDateAfter && !m_searchDateBefore) {
@@ -386,9 +406,12 @@ public class SearchThread extends Thread
                         String srcText = tm.source;
                         String locText = tm.target;
 
-                        // if the source or translation contain all
-                        // search strings, report the hit
-                        if (searchString(srcText) || searchString(locText)) {
+                        // If the source or translation contain all
+                        // search strings, report the hit. Search is performed in
+                        // source and translation according to the value of
+                        // m_searchSource and m_searchTarget fields respectively.
+                        if ( (m_searchSource && searchString(srcText)) ||
+                             (m_searchTarget && searchString(locText)) ) {
 
                             foundString(-1, file, srcText, locText);
                             // stop searching if the max. nr of hits has been
@@ -515,6 +538,8 @@ public class SearchThread extends Thread
     private String    m_curFileName;
     private boolean   m_tmSearch;
     private boolean   m_allResults;
+    private boolean   m_searchSource;
+    private boolean   m_searchTarget;
     private boolean   m_searchAuthor;
     private boolean   m_searchDateAfter;
     private boolean   m_searchDateBefore;

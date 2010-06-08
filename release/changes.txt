@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.7
 ----------------------------------------------------------------------
-  7 Enhancements
+  8 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.1.7 vs. 2.1.6
@@ -22,6 +22,8 @@
   - OpenXML filter: option to translate slide layouts in PowerPoint presentations
 
   - OpenOffice.org filter: option to translate links (URL)
+
+  - Various enhancements in the manual
 
   - Catalan localisation updated to 2.1.4 (UI, Readme, Instant Start, documentation)
   - Hungarian localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)

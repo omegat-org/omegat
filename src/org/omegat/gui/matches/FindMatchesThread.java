@@ -99,7 +99,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         super(matcherPane, entry);
         this.project = project;
         this.processedEntry = entry;
-        tok = Core.getProject().getSourceTokenizer();
+        tok = project.getSourceTokenizer();
     }
 
     @Override

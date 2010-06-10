@@ -108,6 +108,9 @@ public class NotLoadedProject implements IProject {
     public void saveProjectProperties() throws IOException {
     }
     
+    public void setAuthorTranslation(String author, SourceTextEntry entry, String trans) {
+    }
+
     public void setTranslation(SourceTextEntry entry, String trans) {
     }
     

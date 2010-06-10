@@ -838,8 +838,13 @@ public class RealProject implements IProject
     /**
      * {@inheritDoc}
      */
-    public void setTranslation(final SourceTextEntry entry, String trans) {
+    public void setAuthorTranslation(String author, SourceTextEntry entry, String trans)
+    {
         TransEntry prevTrEntry = translations.get(entry.getSrcText());
+
+        if (StringUtil.isEmpty(author)) {
+            throw new IllegalArgumentException("Illegal author argument.");
+        }
 
         //don't change anything if nothing has changed
         if (prevTrEntry == null) {
@@ -853,8 +858,7 @@ public class RealProject implements IProject
         if (StringUtil.isEmpty(trans)) {
             translations.remove(entry.getSrcText());
         } else {
-            String changeId = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name"));
-            translations.put(entry.getSrcText(), new TransEntry(trans, changeId, System.currentTimeMillis()));
+            translations.put(entry.getSrcText(), new TransEntry(trans, author, System.currentTimeMillis()));
         }
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation
                 : null;
@@ -865,6 +869,15 @@ public class RealProject implements IProject
         int diff = StringUtil.isEmpty(prevTranslation) ? 0 : -1;
         diff += StringUtil.isEmpty(trans) ? 0 : +1;
         hotStat.numberofTranslatedSegments += diff;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setTranslation(final SourceTextEntry entry, String trans) {
+        String changeId = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR, System.getProperty("user.name"));
+
+        setAuthorTranslation(changeId, entry, trans);
     }
 
     public Map<String, List<TransMemory>> getTransMemories() {

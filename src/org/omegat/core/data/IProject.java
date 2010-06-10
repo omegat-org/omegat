@@ -109,6 +109,15 @@ public interface IProject {
     void setTranslation(SourceTextEntry entry, String trans);
 
     /**
+     * Set author and translation for entry. Use when user has typed a new translation.
+     * 
+     * @param author author
+     * @param entry entry
+     * @param trans translation
+     */
+    void setAuthorTranslation(String author, SourceTextEntry entry, String trans);
+
+    /**
      * Get statistics for project.
      * 
      * @return

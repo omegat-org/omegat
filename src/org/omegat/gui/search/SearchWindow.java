@@ -404,7 +404,28 @@ public class SearchWindow extends JFrame
             }
         });
 
+        m_regexpSearchRB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // move focus to search edit field
+                m_searchField.requestFocus();
+            }
+        });
+
         m_caseCB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // move focus to search edit field
+                m_searchField.requestFocus();
+            }
+        });
+
+        m_searchSourceCB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // move focus to search edit field
+                m_searchField.requestFocus();
+            }
+        });
+
+        m_searchTargetCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 // move focus to search edit field
                 m_searchField.requestFocus();
@@ -799,6 +820,14 @@ public class SearchWindow extends JFrame
     {
         boolean editable = m_authorCB.isSelected();
         m_authorField.setEditable(editable);
+
+        if (editable) {
+            // move focus to author field
+            m_authorField.requestFocus();
+        } else {
+            // move focus to search edit field
+            m_searchField.requestFocus();
+        }
     }
 
     private void enableDisableDateFrom()
@@ -806,6 +835,14 @@ public class SearchWindow extends JFrame
         boolean enable = m_dateFromCB.isSelected();
         m_dateFromSpinner.setEnabled(enable);
         m_dateFromButton.setEnabled(enable);
+
+        if (enable) {
+            // move focus to date spinner
+            m_dateFromSpinner.requestFocus();
+        } else {
+            // move focus to search edit field
+            m_searchField.requestFocus();
+        }
     }
 
     private void doResetDateFrom()
@@ -829,6 +866,14 @@ public class SearchWindow extends JFrame
         boolean enable = m_dateToCB.isSelected();
         m_dateToSpinner.setEnabled(enable);
         m_dateToButton.setEnabled(enable);
+
+        if (enable) {
+            // move focus to date spinner
+            m_dateToSpinner.requestFocus();
+        } else {
+            // move focus to search edit field
+            m_searchField.requestFocus();
+        }
     }
 
     private void loadAdvancedOptionPreferences()

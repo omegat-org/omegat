@@ -668,9 +668,11 @@ public class SearchWindow extends JFrame
 
     }
     
-    public void addEntry(int num, String preamble, String src, String tar)
-    {
-        m_viewer.addEntry(num, preamble, src, tar);
+    public void addEntry(int num, String preamble, String srcPrefix,
+            String src, String tar, SearchThread.Match[] srcMatch,
+            SearchThread.Match[] targetMatch) {
+        m_viewer.addEntry(num, preamble, srcPrefix, src, tar, srcMatch,
+                targetMatch);
     }
     
     public void postMessage(String message)

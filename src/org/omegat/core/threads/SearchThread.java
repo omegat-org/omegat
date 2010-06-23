@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
                2009 Didier Briel
-               2010 Martin Fleurke, Antonio Vilei
+               2010 Martin Fleurke, Antonio Vilei, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -65,6 +65,7 @@ import org.omegat.util.StaticUtils;
  * @author Didier Briel
  * @author Martin Fleurke
  * @author Antonio Vilei
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SearchThread extends Thread
 {
@@ -303,25 +304,25 @@ public class SearchThread extends Thread
      * Removes duplicate segments (by Henry Pijffers)
      * except if m_allResults = true
      */
-    private void foundString(int entryNum, String intro, String src, String target)
-    {
+    private void foundString(int entryNum, String intro, String src,
+            String target, Match[] srcMatches, Match[] targetMatches) {
         if (m_numFinds++ > OConsts.ST_MAX_SEARCH_RESULTS)
         {
             return;
         }
 
-        if (entryNum >= 0)
-        {
-           if (!m_entrySet.contains(src + target) || m_allResults) { // HP, duplicate entry prevention
+        if (entryNum >= 0) {
+            if (!m_entrySet.contains(src + target) || m_allResults) {
+                // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
-                m_window.addEntry(entryNum+1, null, (entryNum+1)+"> "+src, target);	
+                m_window.addEntry(entryNum + 1, null, (entryNum + 1) + "> ",
+                        src, target, srcMatches, targetMatches);
                 if (!m_allResults) // If we filter results
                     m_entrySet.add(src + target); // HP
-           }
-        }
-        else
-        {
-            m_window.addEntry(entryNum, intro, src, target);
+            }
+        } else {
+            m_window.addEntry(entryNum, intro, null, src, target, srcMatches,
+                    targetMatches);
         }
 
         if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
@@ -347,24 +348,12 @@ public class SearchThread extends Thread
             TransEntry te = Core.getProject().getTranslation(ste);
             String locText = te != null ? te.translation : "";
 
-            // If the source or translation contain all
-            // search strings, report the hit. Search is performed in
-            // source and translation according to the value of
-            // m_searchSource and m_searchTarget fields respectively.
-            if ( ((m_searchSource && searchString(srcText)) ||
-                  (m_searchTarget && searchString(locText)))
-                && (!m_searchAuthor || te != null && searchAuthor(te))
-                && (!m_searchDateBefore || te != null && te.changeDate != 0 &&
-                    te.changeDate < m_dateBefore )
-                && (!m_searchDateAfter  || te != null && te.changeDate != 0 &&
-                    te.changeDate > m_dateAfter )
-                ) {
-                foundString(i, null, srcText, locText);
-            }
+            checkEntry(srcText, locText, te, i, null);
 
             // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS)
+            if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
                 break;
+            }
         }
 
         // search the TM, if requested
@@ -376,23 +365,11 @@ public class SearchThread extends Thread
                 String srcText = en.getKey();
                 TransEntry te = en.getValue();
 
-                // If the source or translation contain all
-                // search strings, report the hit. Search is performed in
-                // source and translation according to the value of
-                // m_searchSource and m_searchTarget fields respectively.
-                if ( ((m_searchSource && searchString(srcText)) ||
-                      (m_searchTarget && searchString(te.translation)))
-                    && (!m_searchAuthor || searchAuthor(te))
-                    && (!m_searchDateBefore || te.changeDate != 0 &&
-                        te.changeDate < m_dateBefore )
-                    && (!m_searchDateAfter  || te.changeDate != 0 &&
-                        te.changeDate > m_dateAfter )
-                    ){
-                    foundString(-1, file, srcText, te.translation);
-                    // stop searching if the max. nr of hits has been reached
-                    if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
-                        break;
-                    }
+                checkEntry(srcText, te.translation, te, -1, file);
+
+                // stop searching if the max. nr of hits has been reached
+                if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                    break;
                 }
             }
             // Search TM entries, unless we search for date or author.
@@ -403,27 +380,69 @@ public class SearchThread extends Thread
                     .getTransMemories().entrySet()) {
                     file = tmEn.getKey();
                     for (TransMemory tm : tmEn.getValue()) {
-                        String srcText = tm.source;
-                        String locText = tm.target;
 
-                        // If the source or translation contain all
-                        // search strings, report the hit. Search is performed in
-                        // source and translation according to the value of
-                        // m_searchSource and m_searchTarget fields respectively.
-                        if ( (m_searchSource && searchString(srcText)) ||
-                             (m_searchTarget && searchString(locText)) ) {
-
-                            foundString(-1, file, srcText, locText);
-                            // stop searching if the max. nr of hits has been
-                            // reached
-                            if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
-                                break;
-                            }
+                        checkEntry(tm.source, tm.target, null, -1, file);
+                        // stop searching if the max. nr of hits has been reached
+                        if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                            break;
                         }
                     }
                 }
             }
         }
+    }
+    
+    /**
+     * Check if specified entry should be found.
+     * 
+     * @param srcText
+     *            source text
+     * @param locText
+     *            translation text
+     * @param entry
+     *            entry
+     * @param entryNum
+     *            entry number
+     * @param intro
+     *            file
+     */
+    protected void checkEntry(String srcText, String locText, TransEntry entry,
+            int entryNum, String intro) {
+        Match[] srcMatches = null;
+        if (m_searchSource) {
+            if (searchString(srcText)) {
+                srcMatches = foundMatches
+                        .toArray(new Match[foundMatches.size()]);
+            }
+        }
+        Match[] targetMatches = null;
+        if (m_searchTarget) {
+            if (searchString(locText)) {
+                targetMatches = foundMatches.toArray(new Match[foundMatches
+                        .size()]);
+            }
+        }
+
+        if (srcMatches == null && targetMatches == null) {
+            return;
+        }
+
+        if (entry != null) {
+            if (m_searchAuthor && !searchAuthor(entry)) {
+                return;
+            }
+            if (m_searchDateBefore && entry.changeDate != 0
+                    && entry.changeDate > m_dateBefore) {
+                return;
+            }
+            if (m_searchDateAfter && entry.changeDate != 0
+                    && entry.changeDate < m_dateAfter) {
+                return;
+            }
+        }
+
+        // found
+        foundString(entryNum, intro, srcText, locText, srcMatches, targetMatches);
     }
 
     private void searchFiles() throws IOException, TranslationException
@@ -479,6 +498,7 @@ public class SearchThread extends Thread
         if (text == null || m_matchers == null || m_matchers.isEmpty())
             return false;
 
+        foundMatches.clear();
         // check the text against all matchers
         for (Matcher matcher : m_matchers) {
             // check the text against the current matcher
@@ -487,10 +507,20 @@ public class SearchThread extends Thread
             matcher.reset(text);
             if (!matcher.find())
                 return false;
+
+            while (true) {
+                foundMatches.add(new Match(matcher.start(), matcher.end()
+                        - matcher.start()));
+                int pos = matcher.start();
+                if (!matcher.find(pos + 1)) {
+                    break;
+                }
+            }
         }
 
         // if we arrive here, all search strings have been matched,
         // so this is a hit
+        
         return true;
     }
     
@@ -526,8 +556,9 @@ public class SearchThread extends Thread
             return;
 
         if (searchString(seg)) {
+            Match[] matches=foundMatches.toArray(new Match[foundMatches.size()]);
             // found a match - do something about it
-            foundString(-1, m_curFileName, seg, null);
+            foundString(-1, m_curFileName, seg, null,matches,null);
         }
     }
 
@@ -551,5 +582,19 @@ public class SearchThread extends Thread
     private long m_dateAfter;
 
     private int m_numFinds;
+    
+    private final List<Match> foundMatches=new ArrayList<Match>();
+    
+    /**
+     * Class for store info about matching position.
+     */
+    public static class Match {
+        public int start, length;
+
+        public Match(int start, int length) {
+            this.start = start;
+            this.length = length;
+        }
+    }
 }
 

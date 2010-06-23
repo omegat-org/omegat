@@ -5,8 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006-2007 Henry Pijffers
-               2008 Alex Buloichik
-               2010 Didier Briel
+               2010 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,11 +34,16 @@ import java.util.List;
 
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
 
 import org.omegat.core.Core;
+import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.Styles;
 
 /** 
  * EntryListPane displays translation segments and, upon doubleclick
@@ -49,13 +53,16 @@ import org.omegat.util.Preferences;
  *
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
- * @author Alex Buloichik
+ * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
 class EntryListPane extends JTextPane
 {
+    protected static final AttributeSet FOUND_MARK = Styles.BOLD;
+    
     public EntryListPane(MainWindow trans)
     {
+        setDocument(new DefaultStyledDocument());
         m_transFrame = trans;
         m_offsetList = new ArrayList<Integer>();
         m_entryList = new ArrayList<Integer>();
@@ -98,20 +105,38 @@ class EntryListPane extends JTextPane
     }
 
     // add entry text - remember what its number is and where it ends
-    public void addEntry(int num, String preamble, String src, String loc)
-    {
+    public void addEntry(int num, String preamble, String srcPrefix,
+            String src, String loc, SearchThread.Match[] srcMatches,
+            SearchThread.Match[] targetMatches) {
         if (m_stringBuf.length() > 0)
             m_stringBuf.append("---------\n");
 
-        if (preamble != null && !preamble.equals(""))                
-            m_stringBuf.append(preamble + "\n");                                
-        if (src != null && !src.equals(""))                            
-        {
-            m_stringBuf.append("-- " + src + "\n");
+        if (preamble != null && !preamble.equals(""))
+            m_stringBuf.append(preamble + "\n");
+        if (src != null && !src.equals("")) {
+            m_stringBuf.append("-- ");
+            if (srcPrefix != null) {
+                m_stringBuf.append(srcPrefix);
+            }
+            if (srcMatches != null) {
+                for (SearchThread.Match m : srcMatches) {
+                    m.start += m_stringBuf.length();
+                    matches.add(m);
+                }
+            }
+            m_stringBuf.append(src);
+            m_stringBuf.append('\n');
         }
-        if (loc != null && !loc.equals(""))                            
-        {
-            m_stringBuf.append("-- "+ loc + "\n");
+        if (loc != null && !loc.equals("")) {
+            m_stringBuf.append("-- ");
+            if (targetMatches != null) {
+                for (SearchThread.Match m : targetMatches) {
+                    m.start += m_stringBuf.length();
+                    matches.add(m);
+                }
+            }
+            m_stringBuf.append(loc);
+            m_stringBuf.append('\n');
         }
 
         m_entryList.add(num);
@@ -154,7 +179,12 @@ class EntryListPane extends JTextPane
     @Override
     public void finalize() {
         setFont();
+
+        DefaultStyledDocument doc = (DefaultStyledDocument) getDocument();
         setText(m_stringBuf.toString());
+        for (SearchThread.Match m : matches) {
+            doc.setCharacterAttributes(m.start, m.length, FOUND_MARK, false);
+        }
     }
 
     public void reset()    
@@ -162,7 +192,8 @@ class EntryListPane extends JTextPane
         m_entryList.clear();
         m_offsetList.clear();
         m_stringBuf.setLength(0);
-        setText("");                                                            
+        setText("");
+        matches.clear();
     }
 
     public int getNrEntries() {
@@ -177,4 +208,5 @@ class EntryListPane extends JTextPane
     private List<Integer>        m_entryList;
     private List<Integer> m_offsetList;
     private MainWindow    m_transFrame;
+    private final List<SearchThread.Match> matches = new ArrayList<SearchThread.Match>();
 }

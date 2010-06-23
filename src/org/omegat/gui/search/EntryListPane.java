@@ -26,6 +26,7 @@
 
 package org.omegat.gui.search;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -34,16 +35,15 @@ import java.util.List;
 
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
 
 import org.omegat.core.Core;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.Styles;
 
 /** 
  * EntryListPane displays translation segments and, upon doubleclick
@@ -58,7 +58,13 @@ import org.omegat.util.gui.Styles;
  */
 class EntryListPane extends JTextPane
 {
-    protected static final AttributeSet FOUND_MARK = Styles.BOLD;
+    protected static final SimpleAttributeSet FOUND_MARK;
+    
+    static {
+        FOUND_MARK = new SimpleAttributeSet();
+        StyleConstants.setBold(FOUND_MARK, true);
+        StyleConstants.setForeground(FOUND_MARK, Color.BLUE);
+    }
     
     public EntryListPane(MainWindow trans)
     {

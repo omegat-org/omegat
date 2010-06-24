@@ -59,6 +59,7 @@ import org.omegat.util.Preferences;
 class EntryListPane extends JTextPane
 {
     protected static final SimpleAttributeSet FOUND_MARK;
+    protected static final int MARKS_PER_REQUEST = 100;
     
     static {
         FOUND_MARK = new SimpleAttributeSet();
@@ -186,12 +187,30 @@ class EntryListPane extends JTextPane
     public void finalize() {
         setFont();
 
-        DefaultStyledDocument doc = (DefaultStyledDocument) getDocument();
         setText(m_stringBuf.toString());
-        for (SearchThread.Match m : matches) {
-            doc.setCharacterAttributes(m.start, m.length, FOUND_MARK, false);
-        }
+
+        SwingUtilities.invokeLater(displayMatches);
     }
+
+    protected Runnable displayMatches = new Runnable() {
+        public void run() {
+            DefaultStyledDocument doc = (DefaultStyledDocument) getDocument();
+            boolean needExecuteAgain;
+            synchronized (matches) {
+                List<SearchThread.Match> display = matches.subList(0, Math.min(
+                        MARKS_PER_REQUEST, matches.size()));
+                for (SearchThread.Match m : display) {
+                    doc.setCharacterAttributes(m.start, m.length, FOUND_MARK,
+                            true);
+                }
+                display.clear();
+                needExecuteAgain = matches.size() > 0;
+            }
+            if (needExecuteAgain) {
+                SwingUtilities.invokeLater(displayMatches);
+            }
+        }
+    };
 
     public void reset()    
     {
@@ -199,7 +218,9 @@ class EntryListPane extends JTextPane
         m_offsetList.clear();
         m_stringBuf.setLength(0);
         setText("");
-        matches.clear();
+        synchronized (matches) {
+            matches.clear();
+        }
     }
 
     public int getNrEntries() {

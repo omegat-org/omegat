@@ -30,6 +30,7 @@ package org.omegat.core.threads;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -520,6 +521,22 @@ public class SearchThread extends Thread
         // if we arrive here, all search strings have been matched,
         // so this is a hit
         
+        
+        // merge overlapped matches for better performance to mark on UI
+        Collections.sort(foundMatches);
+        for (int i = 1; i < foundMatches.size();) {
+            Match pr = foundMatches.get(i - 1);
+            Match cu = foundMatches.get(i);
+            // check for overlapped
+            if (pr.start <= cu.start && pr.start + pr.length >= cu.start) {
+                int cuEnd = cu.start + cu.length;
+                pr.length = cuEnd - pr.start;
+                foundMatches.remove(i);
+            } else {
+                i++;
+            }
+        }
+
         return true;
     }
     
@@ -555,9 +572,10 @@ public class SearchThread extends Thread
             return;
 
         if (searchString(seg)) {
-            Match[] matches=foundMatches.toArray(new Match[foundMatches.size()]);
+            Match[] matches = foundMatches.toArray(new Match[foundMatches
+                    .size()]);
             // found a match - do something about it
-            foundString(-1, m_curFileName, seg, null,matches,null);
+            foundString(-1, m_curFileName, seg, null, matches, null);
         }
     }
 
@@ -582,17 +600,25 @@ public class SearchThread extends Thread
 
     private int m_numFinds;
     
-    private final List<Match> foundMatches=new ArrayList<Match>();
-    
+    private final List<Match> foundMatches = new ArrayList<Match>();
+ 
     /**
      * Class for store info about matching position.
      */
-    public static class Match {
+    public static class Match implements Comparable<Match> {
         public int start, length;
 
         public Match(int start, int length) {
             this.start = start;
             this.length = length;
+        }
+
+        public int compareTo(Match o) {
+            int diff = start - o.start;
+            if (diff == 0) {
+                diff = length - o.length;
+            }
+            return diff;
         }
     }
 }

@@ -512,7 +512,7 @@ public class SearchThread extends Thread
                 foundMatches.add(new Match(matcher.start(), matcher.end()
                         - matcher.start()));
                 int pos = matcher.start();
-                if (!matcher.find(pos + 1)) {
+                if (pos >= text.length() || !matcher.find(pos + 1)) {
                     break;
                 }
             }

@@ -342,6 +342,10 @@ public class SearchThread extends Thread
         // search through all project entries
         IProject dataEngine = Core.getProject();
         for (int i = 0; i < project.getAllEntries().size(); i++) {
+            // stop searching if the max. nr of hits has been reached
+            if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                break;
+            }
             // get the source and translation of the next entry
             SourceTextEntry ste = dataEngine.getAllEntries().get(i);
             String srcText = ste.getSrcText();
@@ -349,11 +353,6 @@ public class SearchThread extends Thread
             String locText = te != null ? te.translation : "";
 
             checkEntry(srcText, locText, te, i, null);
-
-            // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
-                break;
-            }
         }
 
         // search the TM, if requested
@@ -362,15 +361,15 @@ public class SearchThread extends Thread
             String file = OStrings.getString("CT_ORPHAN_STRINGS");
             for (Map.Entry<String, TransEntry> en : Core.getProject()
                     .getOrphanedSegments().entrySet()) {
-                String srcText = en.getKey();
-                TransEntry te = en.getValue();
-
-                checkEntry(srcText, te.translation, te, -1, file);
-
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
                     break;
                 }
+
+                String srcText = en.getKey();
+                TransEntry te = en.getValue();
+
+                checkEntry(srcText, te.translation, te, -1, file);
             }
             // Search TM entries, unless we search for date or author.
             // They are not available in external TM, so skip the search in 
@@ -380,12 +379,12 @@ public class SearchThread extends Thread
                     .getTransMemories().entrySet()) {
                     file = tmEn.getKey();
                     for (TransMemory tm : tmEn.getValue()) {
-
-                        checkEntry(tm.source, tm.target, null, -1, file);
                         // stop searching if the max. nr of hits has been reached
                         if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
                             break;
                         }
+
+                        checkEntry(tm.source, tm.target, null, -1, file);
                     }
                 }
             }

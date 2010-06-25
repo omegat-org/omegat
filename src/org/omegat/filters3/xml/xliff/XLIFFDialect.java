@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2007-2009 Didier Briel
+               2007-2009 Didier Briel
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -41,31 +41,31 @@ public class XLIFFDialect extends DefaultXMLDialect
     {      
         defineParagraphTags(new String[]
         {
-            "source",                                                           // NOI18N
-            "target",                                                           // NOI18N
+            "source",                                                           
+            "target",                                                           
         });
         
         defineOutOfTurnTags(new String[]
         {
-            "sub",                                                               // NOI18N
+            "sub",                                                               
         });
       
         defineIntactTags(new String[]
         {
-            "source",                                                           // NOI18N
-            "header",                                                           // NOI18N
-            "bin-unit",                                                         // NOI18N
-            "prop-group",                                                       // NOI18N
-            "count-group",                                                      // NOI18N
-            "alt-trans",                                                        // NOI18N
-            "note",                                                             // NOI18N
-//            "mrk", only <mrk mtype="protected"> should be an intact tag       // NOI18N
-            "ph",                                                               // NOI18N
-            "bpt",                                                              // NOI18N
-            "ept",                                                              // NOI18N
-            "it",                                                               // NOI18N
-            "context",                                                          // NOI18N
-            "seg-source",                                                       // NOI18N
+            "source",                                                           
+            "header",                                                           
+            "bin-unit",                                                         
+            "prop-group",                                                       
+            "count-group",                                                      
+            "alt-trans",                                                        
+            "note",                                                             
+//            "mrk", only <mrk mtype="protected"> should be an intact tag       
+            "ph",                                                               
+            "bpt",                                                              
+            "ept",                                                              
+            "it",                                                               
+            "context",                                                          
+            "seg-source",                                                       
         });
 
     }

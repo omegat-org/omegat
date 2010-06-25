@@ -529,8 +529,9 @@ public class SearchThread extends Thread
             Match cu = foundMatches.get(i);
             // check for overlapped
             if (pr.start <= cu.start && pr.start + pr.length >= cu.start) {
-                int cuEnd = cu.start + cu.length;
-                pr.length = cuEnd - pr.start;
+                int end = Math.max(cu.start + cu.length, pr.start + pr.length);
+                pr.length = end - pr.start;
+                // leave only one region
                 foundMatches.remove(i);
             } else {
                 i++;

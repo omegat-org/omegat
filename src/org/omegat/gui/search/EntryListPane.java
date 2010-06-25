@@ -40,7 +40,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 
 import org.omegat.core.Core;
-import org.omegat.core.threads.SearchThread;
+import org.omegat.core.search.SearchMatch;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OConsts;
 import org.omegat.util.Preferences;
@@ -113,8 +113,8 @@ class EntryListPane extends JTextPane
 
     // add entry text - remember what its number is and where it ends
     public void addEntry(int num, String preamble, String srcPrefix,
-            String src, String loc, SearchThread.Match[] srcMatches,
-            SearchThread.Match[] targetMatches) {
+            String src, String loc, SearchMatch[] srcMatches,
+            SearchMatch[] targetMatches) {
         if (m_stringBuf.length() > 0)
             m_stringBuf.append("---------\n");
 
@@ -126,7 +126,7 @@ class EntryListPane extends JTextPane
                 m_stringBuf.append(srcPrefix);
             }
             if (srcMatches != null) {
-                for (SearchThread.Match m : srcMatches) {
+                for (SearchMatch m : srcMatches) {
                     m.start += m_stringBuf.length();
                     matches.add(m);
                 }
@@ -137,7 +137,7 @@ class EntryListPane extends JTextPane
         if (loc != null && !loc.equals("")) {
             m_stringBuf.append("-- ");
             if (targetMatches != null) {
-                for (SearchThread.Match m : targetMatches) {
+                for (SearchMatch m : targetMatches) {
                     m.start += m_stringBuf.length();
                     matches.add(m);
                 }
@@ -197,9 +197,9 @@ class EntryListPane extends JTextPane
             DefaultStyledDocument doc = (DefaultStyledDocument) getDocument();
             boolean needExecuteAgain;
             synchronized (matches) {
-                List<SearchThread.Match> display = matches.subList(0, Math.min(
+                List<SearchMatch> display = matches.subList(0, Math.min(
                         MARKS_PER_REQUEST, matches.size()));
-                for (SearchThread.Match m : display) {
+                for (SearchMatch m : display) {
                     doc.setCharacterAttributes(m.start, m.length, FOUND_MARK,
                             true);
                 }
@@ -235,5 +235,5 @@ class EntryListPane extends JTextPane
     private List<Integer>        m_entryList;
     private List<Integer> m_offsetList;
     private MainWindow    m_transFrame;
-    private final List<SearchThread.Match> matches = new ArrayList<SearchThread.Match>();
+    private final List<SearchMatch> matches = new ArrayList<SearchMatch>();
 }

@@ -37,10 +37,11 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParseException;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -64,6 +65,7 @@ import javax.swing.text.StringContent;
 import javax.swing.undo.UndoManager;
 
 import org.omegat.core.Core;
+import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
@@ -668,11 +670,12 @@ public class SearchWindow extends JFrame
 
     }
     
-    public void addEntry(int num, String preamble, String srcPrefix,
-            String src, String tar, SearchThread.Match[] srcMatch,
-            SearchThread.Match[] targetMatch) {
-        m_viewer.addEntry(num, preamble, srcPrefix, src, tar, srcMatch,
-                targetMatch);
+    public void addEntries(List<SearchResultEntry> entries) {
+        for (SearchResultEntry e : entries) {
+            m_viewer.addEntry(e.getEntryNum(), e.getPreamble(),
+                    e.getSrcPrefix(), e.getSrcText(), e.getTranslation(),
+                    e.getSrcMatch(), e.getTargetMatch());
+        }
     }
     
     public void postMessage(String message)

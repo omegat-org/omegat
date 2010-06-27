@@ -745,6 +745,12 @@ public class StaticUtils
         // handle backslash
         text = text.replaceAll("\\\\", "\\\\\\\\"); // yes, that's the correct nr of backslashes
 
+        // [3021915] Search window - search items containing $ behave strangely
+        // If $ is included in "escape" below, it creates a
+        // java.lang.StringIndexOutOfBoundsException: String index out of range: 3
+        // See http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=5024613
+        text = text.replace("$", "\\" + "$");
+
         // handle rest of characters to be escaped
         //String escape = "^.*+[]{}()&|-:=?!<>";
         String escape = "^.+[]{}()&|-:=!<>";

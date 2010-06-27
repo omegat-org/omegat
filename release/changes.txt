@@ -2,7 +2,7 @@
  OmegaT 2.1.7 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.7 update 1 vs. 2.1.7
 
@@ -15,6 +15,9 @@
 
   - Some search options widgets do not set focus to Search field
   http://sourceforge.net/support/tracker.php?aid=3013796
+
+  - Search window - search items containing $ behave strangely
+  http://sourceforge.net/support/tracker.php?aid=3021915
 
 ----------------------------------------------------------------------
  OmegaT 2.1.7

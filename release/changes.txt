@@ -11,6 +11,12 @@
   - Highlight search results
   http://sourceforge.net/support/tracker.php?aid=2956986
 
+  Other enhancements:
+
+  - Danish localisation updated to 2.1.x (UI, Readme, Instant Start)
+  - Hungarian localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
+
+
   Bug fixes:
 
   - Some search options widgets do not set focus to Search field

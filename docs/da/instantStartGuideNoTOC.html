@@ -1,112 +1,176 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
-
 <html>
-
 <head>
-<title>OmegaT: Hurtig start</title>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-<meta name="version" content="0.3.1">
-<link rel="stylesheet" type="text/css" href="./omegat.css">
-<meta name="copyright" content="Copyright (c) 2005 Samuel Murray, med tilføjelser af Maxym Mykhalchuk">
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Hurtig start - OmegaT 2.0 Brugervejledning</title>
 </head>
 
-<body lang="da" dir="LTR">
-<hr>
-<h1 align="center">Hurtig start</h1>
+<body>
+  <h2>Lœr at bruge OmegaT på 5 minutter! <br> - Hurtig start</h2>
 
-<ol>
-<li>Kort oversigt over hvordan OmegaT virker</li>
-<li>Sådan benyttes OmegaT til oversættelse</li>
-<li>Håndtering af markeret tekst</li>
-</ol>
+  <p>Denne vejledning beskriver kun de grundlœggende funktioner. Det anbefales alle brugere at læse brugervejledningen for at blive bekendt med alle OmegaTs funktioner. Genveje beskrevet her bruger "Ctrl + tast" konventionen; Mac-brugere bør læse "cmd+tast" i stedet, "cmd" tasten har enten har et "cmd" mœrke eller et æblemærke på Apple-tastaturer.</p>
+  <hr>
+  <a name="summary" id="summary"></a>
 
-<p><strong>Denne vejledning beskriver kun de absolut nødvendige funktioner. Bedst er det dog hvis alle brugere læser OmegaT-brugerhåndbogen for at blive bekendt med alle funktionerne i OmegaT.</strong></p>
+  <h2>Kort om hvordan OmegaT virker</h2>
 
-<h2>Kort oversigt over hvordan OmegaT virker</h2>
+  <p> OmegaT skærmen består af et vindue, delt i tre dele. Hver del kan ændres i størrelse ved hjælp af musen. I venstre side er Redigering, hvor du skriver din oversættelse. Øverst til højre, ses match vinduet, hvor matcher fra oversættelseshukommelse vises. Under dette er et ordliste vindue, hvor ordliste match vil blive vist.</p>
 
-<p>OmegaT består af to vinduer som du helt uafhængigt af hinanden kan flytte rundt på skærmen. Vinduet i den venstre side er redigeringsvinduet, hvor du skriver din oversættelse. I højre side findes vinduet til visning af fundne oversættelser i oversættelseshukommelsen (øverste del) samt vinduet til visning af ordlister (nederste del).</p>
+  <p>I redigerings-vinduet viser OmegaT kildeteksten segmenteret (opdelt) i sætninger (eller afsnit). Disse segmenter oversættes et efter et. Når du går fra segment til segment bliver dine oversættelser automatisk registreret i en oversættelseshukommelse. Når alle segmenter er blevet oversat (eller når du vil) anvender OmegaT oversættelseshukommelse til at generere det oversatte dokument i en "mål" mappe.</p>
 
-<p>OmegaT udtrækker segmenter fra kildedokumentet og viser disse i redigeringsvinduet, hvor du oversætter disse og gemmer dem i oversættelseshukommelsen. Når oversættelsesarbejdet er færdigt (eller når du vil) opretter OmegaT et nyt dokument med oversættelsen på basis af kildedokumentet og de oversatte segmenter fra oversættelseshukommelsen.</p>
+  <p>OmegaT organiserer din oversættelse projekter. For hvert projekt skaber OmegaT et sæt mapper som bruges til at gemme kildedokumenterne der skal oversættes, ordlisterne du måtte ønske at bruge og de oversættelseshukommelser du eventuelt ønsker at bruge. OmegaT skaber også en "mål" mappe til de oversatte dokumenter.</p>
+  <hr>
+  <a name="translate" id="translate"></a>
 
-<p>OmegaT organiserer dit oversættelsesarbejde i såkaldte projekter. Til hvert projekt opretter OmegaT en mappestruktur som du skal kopiere kildedokumenter, ordlister samt allerede eksisterende oversættelseshukommelser over i. OmegaT opretter også en mappe til de oversatte dokumenter.</p>
+  <h2>Sådan oversœtter man i OmegaT</h2><a name="create" id="create"></a>
 
-<h2>Sådan benyttes OmegaT til oversættelse</h2>
+  <h3>Opret og åbn et nyt projekt</h3>
 
-<h3>1. Opret og åbn et nyt projekt</h3>
+  <p>Gå til <strong>Projekt → Nyt...</strong> fra menuen.</p>
 
-<p>Vælg <strong>Projekt -&gt; Ny...</strong> i menuen.</p>
+  <p>Naviger til den mappe, hvor du ønsker at gemme projektfilerne, og indtast et navn for oversættelseprojektet. Dette navn bliver også navnet på projektmappen; alle projektfiler vil blive gemt i denne mappe eller undermapper.</p>
 
-<p>Gå til mappen hvor du vil gemme projektfilerne og skriv navnet på oversættelsesprojektet. Dette navn bliver også navnet på projektmappen og alle projektfiler gemmes i denne mappe.</p>
+  <p>OmegaT vil bede dig om at acceptere eller ændre de oprettede projektmapper ved hjælp af dialogboksen nedenfor:</p>
 
-<p>OmegaT vil derefter spørge om du vil ændre eller acceptere de mapper, der skal oprettes. Det vil se nogenlunde ud som på billedet:</p>
+  <p align="center"><img src="images/NewProject.png" name="graphics1" alt=
+  "Projekt indstillinger " id="graphics1" align="bottom" border="0"></p>
 
-<div align="center"><img src="images/createproj.png" alt="Opret nyt projekt" border="0"></div>
+  <p>Du kan blot acceptere placeringen af undermapperne, men sørg først for at kilde- og målsprogkoder er korrekte. Vælg den sprogkode (2 bogstaver) eller sprog- og regionkode (2 + 2 bogstaver) fra rullemenuen, eller skriv dem manuelt (sprogkoden kan være 2 eller 3 bogstaver). Noter dig placeringen af målsprog undermappen (for dine oversatte dokumenter). Hvis du vil have OmegaT til segmentere i sætninger i stedet for afsnit, er det en god ide at dobbelt-tjekke reglerne om segmentering.</p>
 
-<p>Du kan ganske enkelt bare acceptere placeringen af undermapperne (i OmegaT kaldet "mapper"), men du skal sikre dig at indstillingene for kilde- og målsprog er korrekte. Vælg sprogkode eller koden for sprog-og-land på listen eller tilføj dem selv. Det er vigtigt at huske placeringen af  undermappen "mål" for det er her måldokumenterne gemmes.</p>
+  <p>Når du klikker på OK for at acceptere projektets indstillinger, vil OmegaT bede dig om at vælge kildedokumentet til import. Du kan importere individuelle filer, eller du kan importere hele mappetræer (med alle filer i alle undermapper). Hvis du ved et uheld har importeret de forkerte dokumenter, eller for mange dokumenter, kan du blot fjerne dem fra kildemappen i dit OmegaT projekt (ved hjælp af dit systems filhåndtering, for eksempel).</p>
 
-<p>Hvis du ønsker at OmegaT skal segmentere kildefilerne på basis af sætninger, i stedet for efter afsnit, er det en god ide at kontroller segmenteringsreglerne en ekstra gang.</p>
+  <p>Hvis du vil se listen over filer, der skal oversættes, gå til <strong>Projekt filer</strong> vindue (Menu: <strong>Projekt → Projekt filer...</strong>), hvis det ikke åbnede automatisk. Hvis du var nød til at ændre indholdet af kildemappen, skal du huske at genindlæse projektet før du begynder arbejdet (Menu:<strong>Projekt → genindlœs</strong>). OmegaT åbner automatisk den første fil i projekt listen. Husk: OmegaT kan kun oversætte filer i formater vist nedenfor, hvis de passer til reglerne der er defineret i filfiltrerne. Alle andre filer vil blive ignoreret.</p>
 
-<p>Når du klikker på knappen OK for at godkende projektopsætningen vil OmegaT bede dig om at importere kildedokumenterne. Du kan importere filer en ad gangen, men det er også muligt at importere hele mappestrukturer (med alle filer i alle undermapper). Hvis du ved et uheld er kommet til at importere de forkerte dokumenter eller for mange dokumenter kan du ganske enkelt fjerne dem fra mappen Kilde i dit OmegaT-projekt.</p>
+  <ul>
+    <li>OpenDocument/OpenOffice.org</li>
 
-<p>Husk, OmegaT kan kun oversætte OpenDocument-filer, OpenOffice.org-dokumenter, HTML, almindelige tekst og visse java-filer. Andre filtyper bliver ignoreret af OmegaT.</p>
+    <li>Almindelig tekst</li>
 
-<p>Kontroller at <strong>Vis -&gt; Projektfiler...</strong> er aktiveret og vælg derefter <strong>Projekt -&gt; Genindlæs</strong> for at vise en liste med alle de filer, der skal oversættes. OmegaT indlæser den første fil på listen som standard.</p>
+    <li>.po</li>
 
-<h3>2. Oversæt segmenterne et efter et</h3>
+    <li>Bundle.properties Java</li>
 
-<p>OmegaT viser det aktuelle segment med grøn baggrund og en kopi af kildeteksten imellem to de segmentmarkeringer &lt;segment 0001&gt; og &lt;segment slut&gt;. Skriv din oversættelse imellem de to segmentmarkeringer ved at overskrive teksten.</p>
+    <li>XHTML, HTML</li>
 
-<p>Tryk på tasten "ENTER" for at gå til det næste segment.</p>
+    <li>HTML Hjælp Compiler</li>
 
-<p>Når du trykker på tasten "ENTER" sker der flere ting; OmegaT tilføjer det oversatte segment til oversættelseshukommelsen men søger samtidig i oversættelseshukommelsen og ordlisten efter et match til det næste uoversatte segment.</p>
+    <li>INI ("nøgle=værdi 'format)</li>
 
-<p>Hvis der findes et fuzzymatch til det næste segment i oversættelseshukommen, bliver det vist i den øverste halvdel af vinduet i den højre side af skærmen. Hvis der i segmentet findes ord, der findes i ordlisten vises de i den nederste del af vinduet til højre på skærmen, der hvor ordlisten vises.</p>
+    <li>DocBook</li>
 
-<p>Hvis der findes et fuzzymatch kan du indsætte denne tekst i redigeringsvinduet på følgende måde:</p>
+    <li>Microsoft Open XML</li>
 
-<ul><li>Vælg det korrekte fuzzymatch med ctrl+1, ctrl+2 osv.</li>
-<li>Tryk på tasterne ctrl+I for at indsætte teksten, der hvor markøren befinder sig eller...</li>
-<li>Tryk på tasterne ctrl+R for at overskrive hele segmentet.</li>
-</ul>
+    <li>Okapi ensprogede XLIFF</li>
 
-<p>Hvis du ikke vil have at OmegaT kopierer kildeteksten ind i målfeltet eller hvis du foretrækker at fuzzymatch med høj match procent skal indsættes automatisk i målfeltet, kan du indstille disse funktioner under <strong>Indstillinger -&gt; Redigeringsfelt...</strong>.<h3>3. Opret måldokumenter</h3>
+    <li>QuarkXPress CopyFlowGold</li>
 
-<p>Når oversættelsesarbejdet er færdigt (eller når du vil) kan OmegaT oprette et nyt dokument med oversættelsen på basis af kildedokumentet og de oversatte segmenter fra oversættelseshukommelsen.</p>
+    <li>Undertekst filer (SRT)</li>
 
-<p>Sådan oprettes måldokumenter, vælg <strong>Projekt -&gt; Opret måldokumenter</strong> i menuen. OmegaT opretter målversioner af alle gyldige dokumenter i projektets kildemappe uanset hvor mange af filerne, der er oversat.</p>
+    <li>ResX</li>
 
-<p>Du kan på ethvert tidspunkt kontrollere hvordan måldokumentet aktuelt ser ud ved at oprette måldokumenterne. Du kan redigere eksisterende oversættelser i projektet og derefter gendanne måldokumenterne så tit du ønsker.</p>
+    <li>Android resource</li>
 
-<p>De oversatte filer findes nu i projektets "mål" mappe.</p>
+    <li>LaTeX</li>
+  </ul><a name="segments" id="segments"></a>
 
-<h2>Håndtering af markeret tekst</h2>
+  <h3>Oversæt segmenterne et efter et</h3>
 
-<p>I OpenDocument-filer, OpenOffice.org-dokumenter eller HTML-filer, har visse ord i en sætning tit deres egen formattering. For eksampel kan en sætning være skrevet i kursiv men et ord midt i sætningen med fedtypografi.</p>
+  <p>Når du har defineret projektet og de filer, der skal oversættes, vil OmegaT åbne den første kildefil i redigering. Det første segment er fremhævet med grønt; en kopi af kildeteksten er vist under det, i "mål feltet". (Nu er al tekst uden for målfeltet beskyttet og kan ikke ændres.) Du skal skrive din oversættelse mellem disse tags <code>&lt;segment 0001&gt;</code> og <code>&lt;segment slut&gt;</code>, dermed overskriver du kildeteksten. Tast "<strong>ENTER</strong>" for at gå videre til nœste segment. Bemærk:</p>
 
-<p>OmegaT markerer disse format ændringer med specielle markeringer, som du skal overføre til den oversatte tekst. Se brugerhåndbogen til OmegaT vedrørende avanceret redigering af sådanne typografimarkeringer.</p>
+  <ul>
+    <li>For at flytte til en anden del af teksten, enten over eller under, dobbelt-klik på den sætning eller afsnit, du ønsker at åbne.</li>
 
-<h3>Et eksempel...</h3>
+    <li>Hvis du foretrækker at oversætte til et tomt mål felt, findes denne mulighed i <strong> Funktioner → Redigering adfærd ... </strong> .</li>
 
-<p>I disse eksempler har vi fremhævet markeringerne med <font COLOR=#ff0000>rødt</font> for at gøre dem mere iøjnefaldende, men i OmegaT er de ikke fremhævet.</p>
+    <li>
+      <p>Du kan ændre opsætningen af redigerings feltet (for eksempel til at vise eller ikke vise kildeteksten, fremhæve den oversatte tekst osv.) i hovedmenuen under <span style="font-weight: bold;"> Vis. </span></p>
+    </li>
+  </ul>
 
-<p><strong>Her er et eksempel på et segment i HTML:</strong></p>
+  <p>Når du trykker på " <strong> ENTER </strong> ", sker der flere ting usynligt: OmegaT tilføjer segment parret (kilde segmentet og oversættelsen) til oversættelseshukommelsen og oversætter også automatisk alle andre identiske segmenter der findes i de andre projekt filer. Der bliver også scannet i oversættelseshukommelsen og ordlisterne efter matcher for det næste uoversatte segment.</p><a name="tm" id="tm"></a>
 
-<p><code><font COLOR=#ff0000>&lt;b0&gt;</font>Der kan vælges en anden skærmskrifttype i dialogboksen <font COLOR=#ff0000>&lt;b&gt;</font>Skærmskrifttype<font COLOR=#ff0000>&lt;/b&gt;</font>. Åbn dialogboksen med menuelementet <font COLOR=#ff0000>&lt;i&gt;</font>Skærmsskrifttyper...<font COLOR=#ff0000>&lt;/i&gt;</font> i menuen <font COLOR=#ff0000>&lt;i&gt;</font>Indstillinger<font COLOR=#ff0000>&lt;/i&gt;</font>. Skrifttypen og størrelsen kan ændres i denne dialogboks.<font COLOR=#ff0000>&lt;/p&gt;</font></code></p>
+  <h3>Brug matcher fra oversættelseshukommelser, ordlister og ordbøger</h3><a name="tm_matches" id="tm_matches"></a>
 
-<p><strong>Her kan du se hvordan OmegaT vil vise markereringen med rødt:</strong></p>
+  <h3>Oversættelseshukommelses matcher</h3>
 
-<p><code>Der kan vælges en anden skærmskrifttype i dialogboksen <font COLOR=#ff0000>&lt;b0&gt;</font>Skærmskrifttype<font COLOR=#ff0000>&lt;/b0&gt;</font>. Åbn dialogboksen med menuelementet <font COLOR=#ff0000>&lt;i1&gt;</font>Skærmsskrifttyper...<font COLOR=#ff0000>&lt;/i1&gt;</font> i menuen <font COLOR=#ff0000>&lt;i0&gt;</font>Indstillinger<font COLOR=#ff0000>&lt;/i0&gt;</font>. Skrifttypen og størrelsen kan ændres i denne dialogboks.</code></p>
+  <p>Hvis OmegaT finder nogle fuzzy matcher (30% eller derover) for det næste segment i oversættelseshukommelsen, vises det i match vinduet. Den første match er automatisk udvalgt på forhånd i match vinduet.</p><img src=
+  "images/MatchesPane.png" name="graphics4" alt="match viser vindue" id="graphics4"
+  style="border: 0px solid ;"><br clear="left">
 
-<p><strong>Og her kan du se hvordan du ville oversætte teksten (dette eksempel er i afrikaans):</strong></p>
+  <p><br></p>
 
-<p><code>'n Mens kan 'n ander vertoonfont kies met die <font COLOR=#ff0000>&lt;b0&gt;</font>Vertoonfont<font COLOR=#ff0000>&lt;/b0&gt;</font>-dialoogkassie. Kies <font COLOR=#ff0000>&lt;i0&gt;</font>Opstelling<font COLOR=#ff0000>&lt;/i0&gt;</font> &gt; <font COLOR=#ff0000>&lt;i1&gt;</font>Vertoonfont...<font COLOR=#ff0000>&lt;/i1&gt;</font> op die kieslys. Die lettertipe én die lettergrootte kan met dié dialoogkassie verander word.</code></p>
+  <p>Indsœt oversættelseshukommelse matcher fra match vinduet i mål feltet ved hjœlp af tastaturgenveje:</p>
 
-<p><strong>Når OmegaT opretter måldokumentet ser HTML sådan ud:</strong></p>
+  <ul>
+    <li>Tryk <code>Ctrl+I</code> eller œble+1 for at indsœtte den på forhånd valgte match ved markørens position, eller...</li>
 
-<p><code><font COLOR=#ff0000>&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies met die <font COLOR=#ff0000>&lt;b&gt;</font>Vertoonfont<font COLOR=#ff0000>&lt;/b&gt;</font>-dialoogkassie. Kies <font COLOR=#ff0000>&lt;i&gt;</font>Opstelling<font COLOR=#ff0000>&lt;/i&gt;</font> &amp;gt; <font COLOR=#ff0000>&lt;i&gt;</font>Vertoonfont...<font COLOR=#ff0000>&lt;/i&gt;</font> op die kieslys. Die lettertipe én die lettergrootte kan met dié dialoogkassie verander word.<font COLOR=#ff0000>&lt;/p&gt;</font></code></p>
+    <li>Tryk <code>Ctrl+R</code> eller œble+r for at overskrive hele segmentet med den forhåndsvalgte match.</li>
+  </ul>
 
-<p>OmegaT opdager ikke automatisk fejl i markeringen af den oversatte tekst. Før du leverer måldokumentet til din kunde bør du kontrollere det for markeringsfejl ved at vælge <strong>Kontroller markeringer</strong> i menuen Værktøj. Bedst er det hvis du åbner dokumentet i et passende program og kontrollerer formatteringen.</p>
+  <p>Hvis flere matcher er fundet, og du foretrækker ikke at bruge den på forhånd valgte match:</p>
 
-<hr>
+  <ul>
+    <li>Vælg den match, du foretrækker i match vinduet: <code> Ctrl +2 </code> for nummer 2 match vist, <code> Ctrl 3 </code> for nummer 3, osv.</li>
+
+    <li>Brug derefter <code>Ctrl+I</code> eller <code>Ctrl+R</code> genvejene som vist ovenfor.</li>
+  </ul>
+
+  <p>(Du kan indstille OmegaT til automatisk at indsætte den første match, over en specificeret match procent, i mål feltet når segmentet åbnes. Lav denne indstilling ved hjœlp af <strong>Funktioner → redigerings adfœrd...</strong>)</p><a name="gloss_matches" id="gloss_matches"></a>
+
+  <h3>Ordliste- og ordbog match</h3>
+
+  <p>Matchende ord fra ordlister og ordbøger, som du har inkluderet i projektet, vil blive vist som reference i ordliste og ordbogs sektioner.</p><a name="searches" id="searches"></a>
+
+  <h3>Brug af søgninger</h3>
+
+  <p>OmegaT leverer en effektiv række af søgefunktioner. Fremkald søgevinduet med <code>Ctrl+F</code> og indtast ord eller udtryk du ønsker at søge i søgefeltet. Alternativt kan du vælge et ord eller en sætning i redigerings feltet (i målteksten af det aktive segment) og tast <code> Ctrl + F </code> . Ordet eller sætningen bliver så automatisk skrevet i "søg efter" feltet.</p>
+
+  <h3>Brug af Google oversæt</h3>
+
+  <p>I Google oversætter ruden, vil du automatisk få et forslag til oversættelse af det aktuelle segment. Du kan indsætte det med <code> Ctrl + M </code> i mål segmentet.<br></p>
+
+  <p><a name="create_trans" id="create_trans"></a></p>
+
+  <h3>Opret oversatte dokumenter</h3>
+
+  <p>Når du har oversat alle segmenter (eller tidligere, hvis du ønsker det), vil OmegaT opdatere målsprogs dokumentet ved hjælp af oversættelser gemt i oversættelseshukommelsen. For at gøre dette: vœlg <strong>Projekt → Opret oversatte dokumenter</strong> fra menuen. OmegaT bygger oversatte versioner af alle de oversætbare dokumenter i projektets kildemappe, uanset om de er fuldt oversat. De helt eller delvist oversatte filer vil blive gemt i projektets målmappe. Når du er klar til at afslutte din oversættelse: åbn målfiler i deres tilhørende applikationer (browser, tekstbehandling ...) for at kontrollere indhold og formatering af din oversættelse. Du kan derefter vende tilbage til OmegaT og foretage de nødvendige korrektioner, glem ikke at genskabe de oversatte dokumenter.</p>
+  <hr>
+  <a name="tags" id="tags"></a>
+
+  <h2>Hvordan man håndtere tagget tekst</h2>
+
+  <p>OmegaT sikrer, at formateringen af kildedokumenter (fed, kursiv osv.) ikke går tabt ved at markere det med specielle tags. OmegaT tags er sammensat af et eller flere bogstaver efterfulgt af et eller flere cifre, ved hjælp af "/"-tegnet for lukning (for eksempel: &lt;f0&gt; , &lt;/f0&gt;&lt;br&gt; , &lt;/s2&gt; osv.). Du skal håndtere disse tags med omhu og sikre at de indgår korrekt i målsegmentet (se <em> tag operationer </em> ).</p><a name="example" id="example"></a>
+
+  <h3>Et eksempel ...</h3>
+
+  <p>I disse eksempler har vi fremhævet tags, for at gøre dem lettere at se, men i OmegaT vil  de ikke være fremhævet. HTML-tags, fremhævet i <font color="blue"> blå </font> , vil blive ignoreret af OmegaT, da de omslutter segmentet fuldtud. Tags, fremhævet nedenfor i<font color=
+  "green"> grønt </font> er nødt til at blive behandlet af OmegaT fordi de er inden for segmentet. Her er et eksempel på et segment i HTML:</p>
+
+  <p><code><font color="blue">&lt;p&gt;</font>En anden skœrm skrifttype kan vœlges via <font color="green">&lt;b&gt;</font>skœrm skrifttype<font color=
+  "green">&lt;/b&gt;</font> dialogboks. Åbn via <font color=
+  "green">&lt;i&gt;</font>Indstillinger<font color="green">&lt;/i&gt;</font> → <font color="green">&lt;i&gt;</font>skœrm skrifttype...<font color=
+  "green">&lt;/i&gt;</font> menupunkt. Skrifttype og størrelse kan ændres fra dialogboksen. <font color="blue">&lt;/p&gt;</font></code></p>
+
+  <p>Her ses hvordan OmegaT vil vise det; med oversættelsen på afrikaans:</p><br>
+
+  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
+
+  <p>Når OmegaT har skabt det oversatte dokument, vil HTML-se sådan ud:</p>
+
+  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
+  "tag_verif" id="tag_verif"></a>
+
+  <h3>Tag verificering</h3>
+
+  <p>OmegaT opdager ikke automatisk tag fejl i det oversatte dokument. Før du afleverer dokumentet til din kunde, bør du derfor kontrollere dine tags for fejl.</p>
+
+  <p>Vœlg <strong>Vœrktøjer → Validér Tags</strong> fra menuen. En tabel viser de segmenter, hvor kilde- og mål-tags ikke matcher. Klik på segment nummeret. Du vil automatisk blive taget til det tvivlsomme segment i redigering, hvorfra du kan rette tagget. Tast <code>Enter</code> for at validere det korrigerede segment og kontroller korrektionen ved igen at trykke <code>Control-T</code>.</p>
+
+  <p>I nogle tilfælde kan tag-fejl forhindre et dokument i at åbne. Du bør derfor sikre, at du har løst alle tag-fejl, inden du opretter de oversatte filer. Endelig bør du altid dobbelt-tjekke den endelige formatering ved at åbne det oversatte dokument i dets associerede fremviser eller editor.</p>
+
+  <p>I nogle programmerings sprog (fx PHP, C) bruges specielle tags som pladsholdere i strenge der bruges i kombination med printf-funktion. OmegaT kan registrere og validere disse tags, hvis du tillader det. Vœlg <strong>Vœrktøjer → Validér tags</strong> fra menuen. Du kan vælge mellem enkel og komplet validering. Ved enkel validering er kun simple varianter af de mulige pladsholder værdier brugt. Dette er nyttigt, hvis kildekoden ikke indeholder de mere ekspressive og komplekse pladsholdere og du får en masse falske positiver.</p>
+
+  <hr>
 </body>
 </html>

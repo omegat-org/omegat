@@ -1,6 +1,6 @@
 <html>
 <head>
-  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <link rel="stylesheet" href=" " type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
   <title>Stručný úvodní průvodce - OmegaT 2.0 Uživatelská příručka</title>
@@ -33,7 +33,7 @@
     </li>
 
     <li>
-      <p><a href="#searches">Použití funkce Vyhledávání a Google translate</a></p>
+      <p><a href="#searches">Použití funkce Vyhledávání a Google překladač</a></p>
     </li>
 
     <li>
@@ -60,7 +60,7 @@
 
   <h2><a name="summary" id="summary"></a>Krátce o tom, jak OmegaT pracuje</h2>
 
-  <p>Okno aplikace OmegaT se skládá z <a href="userInterface.html">jednoho celkového prostoru se třemi různými okny</a> Velikost každého z těchto oken může být změněná za použití myši. Vlevo je Editor, sem vpisujete svůj překlad. Napravo nahoře je okno Přibližných překladů, kde se zobrazují nalezené položky z překladové paměti. Pod ním je okno Vlastního slovníku, zde se zobrazují nalezené záznamy ze slovníku.</p>
+  <p>Okno aplikace OmegaT se skládá z <a href="userInterface.html">jednoho celkového prostoru se třemi různými okny</a> Velikost každého z těchto oken může být změněná za použití myši. Vlevo je Editor, sem vpisujete svůj překlad. Napravo nahoře je okno Přibližných překladů, kde se zobrazují nalezené položky z překladové paměti. Pod ním je okno Glosáře, zde se zobrazují nalezené záznamy ze slovníku.</p>
 
   <p>V okně Editoru zobrazuje OmegaT zdrojový text ‚<a href=
   "segmentation.html">segmentovaný</a>‘ do vět (nebo odstavců). Tyto segmenty překládáte jednotlivě jeden za druhým. Když přecházíte od segmentu k segmentu, vaše překlady se zaznamenávají v <a href="translationMemories.html">překladové paměti</a>. Jakmile jsou všechny segmenty přeloženy (nebo dle potřeby i dříve) OmegaT použije překladovou paměť pro vygenerování přeloženého dokumentu (přeložených dokumentů) do složky „Target“, tj. do cílové složky.</p>
@@ -80,14 +80,14 @@
 
   <p align="center"><a name="graphics2" id="graphics2"></a></p>
 
-  <p><img style="width: 362px; height: 476px;" alt="dialogové okno nového projektu"
+  <p><img alt="dialogové okno nového projektu"
   title="dialogové okno nového projektu" src="images/NewProject.png"></p>
 
   <p>Můžete jednoduše ponechat umístění podadresářů, ale ujistěte se, že <a href="languages.html">kódy zdrojového a cílového jazyka</a> jsou správné. Vyberte kódy jazyka (2 písmena) nebo kód jazyka-a-oblasti (2 + 2 písmena) z rozbalovacího seznamu, nebo je napište ručně (kód jazyka může sestávat z 2 nebo 3 písmen). Zapamatujete si umístění cílového podadresáře (pro vaše přeložené cílové dokumenty). Pokud chcete, aby program OmegaT segmentoval podle vět místo podle „odstavců“, je dobré překontrolovat <a href="segmentation.html">Pravidla segmentace</a>.</p>
 
   <p>Když kliknete na OK pro přijetí nastavení projektu, OmegaT vás požádá o vybrání zdrojových dokumentů pro import. Můžete importovat jednotlivé soubory, ale můžete také importovat celé adresářové stromy (se všemi soubory ve všech podadresářích). Pokud jste náhodou importovali nesprávné dokumenty, nebo příliš mnoho dokumentů, můžete je jednoduše odstranit ze zdrojového adresáře (tj. Source) vašeho OmegaT projektu (například za pomoci správce souborů vašeho systému).</p>
 
-  <p>Pro kontrolu vašeho seznamu souborů určených k překladu, můžete použít okno <strong>Soubory projektu</strong> (Menu: <strong>Projekt → Soubory projektu ...</strong>, pokud se neotevře automaticky). Pokud jste museli změnit obsah zdrojového adresáře, nezapomeňte nejdříve znovu načíst projekt (Menu: <strong>Projekt → Znovu načíst</strong>). Podle výchozího nastavení programu OmegaT bude otevřen první soubor v seznamu projektu. Mějte na paměti, že OmegaT může překládat pouze soubory v níže uvedených <a href="filesToTranslate.html">formátech</a> pokud odpovídají vzorům definovaným ve <a href="fileFilters.html">filtrech souborů</a>. Jakékoliv jiné soubory budou ignorovány.</p>
+  <p>Pro kontrolu vašeho seznamu souborů určených k překladu, můžete použít okno <strong>Soubory projektu</strong> (Hlavní nabídka: <strong>Projekt → Soubory projektu ...</strong>, pokud se neotevře automaticky). Pokud jste museli změnit obsah zdrojového adresáře, nezapomeňte nejdříve znovu načíst projekt (Hlavní nabídka: <strong>Projekt → Znovu načíst</strong>). Podle výchozího nastavení programu OmegaT bude otevřen první soubor v seznamu projektu. Mějte na paměti, že OmegaT může překládat pouze soubory v níže uvedených <a href="filesToTranslate.html">formátech</a> pokud odpovídají vzorům definovaným ve <a href="fileFilters.html">filtrech souborů</a>. Jakékoliv jiné soubory budou ignorovány.</p>
 
   <ul>
     <li>
@@ -143,7 +143,7 @@
     </li>
 
     <li>
-      <p>Android resource</p>
+      <p>Soubory Android Resource</p>
     </li>
 
     <li>
@@ -171,9 +171,9 @@
     </li>
   </ul>
 
-  <p>Když stisknete „<strong>ENTER</strong>“ tak se děje hned několik věcí doslova neviditelně: OmegaT přidá přeložený pár segmentů (zdrojový segment a jeho překlad) do překladové paměti a také automaticky překládá jakékoliv identické segmenty, které nalezne v jiných souborech projektu. Také hledá v překladové paměti a ve vlastním slovníku shodu s následujícím nepřeloženým segmentem.</p>
+  <p>Když stisknete „<strong>ENTER</strong>“ tak se děje hned několik věcí doslova neviditelně: OmegaT přidá přeložený pár segmentů (zdrojový segment a jeho překlad) do překladové paměti a také automaticky překládá jakékoliv identické segmenty, které nalezne v jiných souborech projektu. Také hledá v překladové paměti a v glosáři shodu s následujícím nepřeloženým segmentem.</p>
 
-  <h3><a name="tm" id="tm"></a>Použití přibližných překladů v překladové paměti a záznamů ve slovníku a ve vlastním slovníku. &nbsp;</h3>
+  <h3><a name="tm" id="tm"></a>Použití přibližných překladů v překladové paměti a záznamů v glosáři a ve slovníku. </h3>
 
   <h3><a name="tm_matches" id="tm_matches"></a>Shodné položky z překladové paměti</h3>
 
@@ -181,7 +181,7 @@
 
   <p><br>
   <br></p><img src="images/MatchesPane.png" name="graphics4" alt="Okno Přibližné překlady"
-  id="graphics4" align="left" border="0" height="289" width="469"><br clear=
+  id="graphics4" align="left" border="0"><br clear=
   "left">
 
   <p><br>
@@ -214,17 +214,19 @@
   <p>(Můžete programu OmegaT zadat, aby automaticky vložil jakoukoliv první shodnou položku nad zadané procento shody do cílového pole hned při otevření segmentu. Nastavte tuto volbu pomocí <strong>Možnosti → <a href=
   "translationEditing.html">Nastavení editace ...</a></strong>)</p>
 
-  <h3><a name="gloss_matches" id="gloss_matches"></a>Záznamy ze slovníku</h3>
+  <h3><a name="gloss_matches" id="gloss_matches"></a>Záznamy z glosáře a ze slovníku</h3>
 
-  <p>Shodné záznamy ve <a href="glossaries.html">vlastních slovnících</a>, které jste zahrnuli do svého projektu, se zobrazí v podokně Vlastní slovník.&nbsp;</p>
+  <p>Shodné záznamy v <a href="glossaries.html">glosářích</a>, které jste zahrnuli do svého projektu, se zobrazí v podokně Glosář.&nbsp;</p>
 
   <h3><a name="searches" id="searches"></a>Použití funkce Vyhledávání</h3>
 
-  <p>OmegaT poskytuje množství výkonných <a href="searches.html">vyhledávacích</a> funkcí. Okno Hledat otevřete pomocí zkratky <code>Ctrl+F</code>, pak zadejte slovo nebo frázi, kterou chcete vyhledat do pole „Hledat“. Nebo vyberte slovo nebo frázi v editačním poli (cílový text aktivního segmentu) a stiskněte <code>Ctrl+F</code>. Slovo nebo fráze je v tomto případě zadané do pole „Hledat“ automaticky.</p>
+  <p>OmegaT poskytuje množství výkonných <a href="searches.html">vyhledávacích</a> funkcí. Okno Hledat otevřete pomocí zkratky <code>Ctrl+F</code>, pak zadejte slovo nebo frázi, kterou chcete vyhledat do pole „Hledat“. Nebo vyberte slovo či frázi kdekoliv v podokně Editoru a stiskněte <code>Ctrl+F</code>. Slovo nebo fráze je v tomto případě zadané do pole „Hledat“ automaticky.</p>
 
-  <h3>Použití Google translate</h3>V okně <a href="GoogleTranslate.html">Google translate</a>, pokud jej máte aktivováno, se budou automaticky zobrazovat návrhy pro překlad právě aktivního segmentu. Překlad vložíte do cílového segmentu pomocí <code>Ctrl+M</code>.<h3><a name="create_trans" id="create_trans"></a>Vytvořit přeložené dokumenty</h3>
+  <h3>Použití Google překladač</h3>V podokně <a href="GoogleTranslate.html">Google překladač</a>, pokud jej máte aktivováno, se budou automaticky zobrazovat návrhy pro překlad právě aktivního segmentu. Překlad vložíte do cílového segmentu pomocí <code>Ctrl+M</code>.
 
-  <p>Když jste již přeložili všechny segmenty (nebo i dříve, pokud chcete) OmegaT aktualizuje cílové dokumenty pomocí překladů uložených v překladové paměti. Aby se tak stalo, vyberte z menu <strong>Projekt → Vytvořit přeložené dokumenty</strong>. OmegaT vytvoří přeložené verze všech přeložitelných dokumentů ve zdrojovém adresáři projektu („Source“), bez ohledu na to, zda byly úplně přeložené. Úplně nebo částečně přeložené soubory budou uloženy v cílovém projektovém adresáři. Pro konečnou úpravu vašeho překladu otevřete cílové soubory v příslušných aplikacích (prohlížeč, textový editor, ...), abyste mohli provést kontrolu obsahu a formátování vašeho překladu. Potom se můžete vrátit k OmegaT pro provedení potřebných úprav; nezapomeňte znovu vytvořit přeložené dokumenty.</p>
+  <h3><a name="create_trans" id="create_trans"></a>Vytvořit přeložené dokumenty</h3>
+
+  <p>Když jste již přeložili všechny segmenty (nebo i dříve, pokud chcete) OmegaT aktualizuje cílové dokumenty pomocí překladů uložených v překladové paměti. Aktualizaci provedete vybráním položky v hlavní nabídce <strong>Projekt → Vytvořit přeložené dokumenty</strong>. OmegaT vytvoří přeložené verze všech přeložitelných dokumentů ve zdrojovém adresáři projektu („Source“), bez ohledu na to, zda byly úplně přeložené. Úplně nebo částečně přeložené soubory budou uloženy v cílovém projektovém adresáři. Pro konečnou úpravu vašeho překladu otevřete cílové soubory v příslušných aplikacích (prohlížeč, textový editor, ...), abyste mohli provést kontrolu obsahu a formátování vašeho překladu. Potom se můžete vrátit k OmegaT pro provedení potřebných úprav; nezapomeňte znovu vytvořit přeložené dokumenty.</p>
   <hr>
 
   <h2><a name="tags" id="tags"></a>Jak zacházet s textem obsahujícím tagy</h2>
@@ -249,8 +251,8 @@
   <p><br>
   <br></p>
 
-  <p><img src="images/tagged_segment.png" name="graphics6" alt="tagged segment"
-  id="graphics6" align="bottom" border="0" height="150" width="592"></p>
+  <p><img src="images/tagged_segment.png" name="graphics6" alt="segment obsahující tagy"
+  id="graphics6" align="bottom" border="0"></p>
 
   <p><br>
   <br></p>
@@ -258,15 +260,16 @@
   <p>Když OmegaT vytvoří přeložený dokument, HTML bude vypadat takto:</p>
 
   <p><img src="images/tagged_segment_target.png" name="graphics5" alt=
-  "tagged segment - target" id="graphics5" align="bottom" border="0" height=
-  "122" width="592"></p>
+  "cílový segment obsahující tagy" id="graphics5" align="bottom" border="0"></p>
 
   <h3><a name="tag_verif" id="tag_verif"></a>Ověření tagů</h3>
 
-  <p>OmegaT nedetekuje automaticky chybné značkování/tagování v přeloženém dokumentu. Proto před tím, než dodáte cílový dokument vašemu klientovi, měli byste zkontrolovat, zda vaše tagy neobsahují chyby. Vyberte z menu <strong>Nástroje → <a href=
-  "formattedText.html#tag_validation">Ověření tagů</a></strong>. Zobrazí se tabulka znázorňující, kde se zdrojové a cílové tagy neshodují. Klikněte na číslo segmentu. V Editoru budete automaticky přemístěni na sporný segment, kde můžete tagování opravit. Stiskněte <span style="font-weight: bold;">Enter</span> pro potvrzení opraveného segmentu a zkontrolujte správnost opětovným stiskem <span style="font-weight: bold;">Ctrl+T,</span></p>
+  <p>OmegaT nedetekuje automaticky chybné značkování/tagování v přeloženém dokumentu. Proto před tím, než dodáte cílový dokument vašemu klientovi, měli byste zkontrolovat, zda vaše tagy neobsahují chyby. Vyberte z nabídky <strong>Nástroje → <a href=
+  "formattedText.html#tag_validation">Ověření tagů</a></strong>. Zobrazí se tabulka znázorňující, kde se zdrojové a cílové tagy neshodují. Klikněte na číslo segmentu. V Editoru budete automaticky přemístěni na sporný segment, kde můžete tagování opravit. Stiskněte <code>Enter</code> pro potvrzení opraveného segmentu a zkontrolujte správnost opětovným stiskem <code>Ctrl+T</code>.</p>
 
   <p>V některých případech mohou chyby tagů způsobit dokonce to, že dokument nebude možno otevřít. Proto byste se měli ujistit, že jste opravili všechny chyby tagů před tím, než vytvoříte přeložené soubory. A závěrem, vždy byste měli překontrolovat konečné formátování otevřením přeloženého dokumentu v příslušné aplikaci nebo editoru.</p>
+  
+  <p>V některých programovacích jazycích (např. PHP, C) se používají speciální tagy v roli zástupných symbolů v řetězcích, které se používají v kombinaci s funkcí printf. Pokud to uživatel povolí, OmegaT může detekovat a ověřit tyto tagy. V menu vyberte <strong>Nástroje → <a href="formattedText.html#printf">Ověření tagů</a></strong>. Můžete si vybrat mezi jednoduchým a nebo plným ověřením Jednoduché ověření znamená, že budou použity jednoduché varianty možných hodnot zástupných znaků. Toto se hodí když zdrojový kód neobsahuje spousty expresivních a komplexních zástupných znaků a spousty falešných hlášení.</p>
   <hr>
 
   <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
@@ -277,7 +280,7 @@
 
         <td style="text-align: center;"><a href="index.html">Obsah</a></td>
 
-        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a></td>
+        <td style="text-align: right;"><a href="xindex.html">Tematický rejstřík</a></td>
       </tr>
     </tbody>
   </table>

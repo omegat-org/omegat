@@ -1,0 +1,227 @@
+<html>
+<head>
+  <link rel="stylesheet" href=" " type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Parametry příkazové řádky - OmegaT 2.1 Uživatelská příručka</title>
+</head>
+
+<body>
+  <h1>Parametry příkazové řádky</h1>
+
+  <p>Aplikaci OmegaT lze spouštět se speciálními parametry, které upravují chování programu nebo aplikaci přikazují, které akce se mají spustit při startu. Chcete-li přidat parametry, musíte napsat spouštěcí příkazy s včetně parametrů do příkazové řádky, nebo musíte pozměnit skript, který to za vás provede. Více informací o tom, jak spouštět aplikaci OmegaT naleznete v <a href="installingAndRunning.html">Instalace a spuštění</a>.
+  
+  </p>
+  <h2>Parametry měnící chování programu</h2>
+  
+  <p>Parametry, které mění chování programu OmegaT jsou vlastně parametry pro Java virtual machine.<br> Jednotlivé parametry se přidávají za počáteční „<em>java</em>“ a před část „<em>-jar OmegaT.jar</em>“. Povšimněte si, že ve Windows budete měnit soubor <em>OmegaT.l4J.ini</em> a tak definovat své priority. Pod Mac OSX, budete za stejným účelem měnit soubor <em>Info.plist</em>, který je umístěn v <em>OmegaT.app/Contents/</em>.</p>
+
+  <p>Seznam možných parametrů je uveden níže. Po zadání <em>java</em> nebo <em>man java</em> do terminálového okna získáte více informací o parametrech - <em>man</em> je terminálový příkaz , který zobrazí manuál k danému příkazu. Váš systém může, ale taky nemusí, mít manuál pro příkaz <em>java</em> přímo ve vašem jazyce.</p>
+
+  <p><b>User interface language / Jazyk uživatelského rozhraní:&nbsp;</b><em>-Duser.language=XX</em></p>
+
+  <table summary="just formatting">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Program běžně, tj. když se OmegaT spouští bez jakýchkoliv parametrů, nejprve detekuje jazyk uživatelova operačního systému. Pokud je uživatelské prostředí v tomto jazyce k dispozici, tak ho OmegaT použije. To znamená, že když je uživatelův operační systém v ruštině a OmegaT byla lokalizována do ruštiny, bude OmegaT zobrazena s ruským uživatelským prostředím, ruskými menu, atd. Pokud jazyk uživatelova systému není k dispozici, OmegaT použije výchozí angličtinu. Toto je standardní postup.<br> <br> Parametr „<em>-Duser.language=XX</em>“ způsobí, že OmegaT použije definovaný jazyk, a ne jazyk uživatelova operačního systému. Proměnná „XX“ v příkazu znamená dvouznakový kód požadovaného jazyka. Při spouštění OmegaT s francouzským prostředím (např. v ruském operačním systému) bude příkaz vypadat takto:</p>
+
+          <p><em>java -Duser.language=fr -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>User country setup / Nastavení země: </strong><em>&nbsp;-Duser.country=XX</em></p>
+  
+  <table summary="just formatting">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Vedle jazyka můžete specifikovat i zemi, např. v případě čínštiny CN nebo TW. Správou verzi Stručného úvodního průvodce získáte příslušnou specifikací jak jazyka, tak i země. Toto je důležité dokonce i tehdy, když je k dispozici jen jedna varianta, např. pt_BR v případě portugalštiny v Brazílii.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Font antialiasing / Vyhlazování písem:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
+
+  <table summary="just formatting">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Tento parametr má za účinek vyhlazování fontů, tím zlepšíte jejich zobrazování.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Vyhlazování fontů (Java 6 a novější):</strong><em>&nbsp;-</em><span style=
+  "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
+
+  <table summary="just formatting">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>&nbsp;Možné hodnoty pro „XX“ jsou „false“, „on“, „gasp“ a „lcd“. Uživatelé Linuxu mohou pozorovat, že podle použitého fontu a velikosti volby „on“ nebo „lcd“ zlepší vzhled fontu.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Memory assignment / Přiřazení množství paměti:</strong><em>&nbsp;-XmxZZM</em></p>
+
+  <table summary="just formatting">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Tento příkaz přiřadí více paměti programu OmegaT. Výchozí hodnota je nastavena na 256 MB, takže asi bude nevýhodné nastavovat menší hodnotu. Proměnná „ZZ“ reprezentuje část paměti zadávanou v megabytech. Příkaz pro spouštění OmegaT s nastavením 1024 MB (1 gigabyte) paměti je tedy:</p>
+
+          <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Adresa proxy serveru a port:</strong><em>&nbsp;-Dhttp.proxyHost=&lt;server IP address&gt;&nbsp;-Dhttp.proxyPort=&lt;port number&gt;</em></p>
+
+  <table summary="just formatting">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Tento příkaz definuje proxy server, aby tak bylo možno přistupovat k internetu zpoza proxy.</p>
+
+          <p><em>java -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar
+          OmegaT.jar</em></p>
+
+          <p>Parametry lze kombinovat: pro spuštění aplikace OmegaT se všemi výše uvedenými příklady bude příkaz vypadat následovně:<br> <em>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>Parametry akcí</h2>
+  
+  <p>Následující příkazy zprostředkovávají aplikaci OmegaT, co má dělat. Musí být umístěny ZA  část „<em>-jar OmegaT.jar</em>“. Musíte přidat parametry do spouštěcího skriptu / spouštěče (zástupce) nebo je napsat do příkazové řádky. Nelze je přidávat do konfiguračního souboru jako parametry měnící chování programu.</p>
+  
+  <table style="width: 80%;" cellpadding="2" cellspacing="2" summary=
+  "just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>&lt;project-dir&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>říká programu OmegaT, aby při startu načetl zadaný projekt. Např. <code>/home/uzivatel/omegat_projecty/mujProjekt</code> nebo <code>"C:\Lokalizacni projekty\mujProjekt"</code>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--config-dir=&lt;config-dir&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;umožňuje sdělit aplikaci ve kterém adresáři jsou uloženy konfigurační soubory. Když není zadáno, OmegaT se vrátí k výchozím hodnotám (adresář OmegaT dir ve složce home uživatele, nebo když není dostupné: adresář, ve kterém se právě pracuje).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--mode=[console-translate |
+        console-createpseudotranslatetmx]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;OmegaT se spouští v <a href="consoleMode.html">režimu konzole</a>. Pokud je režim na hodnotě <code>console-translate</code>, pak program přeloží zadaný projekt. Pokud je režim na hodnotě <code>createpseudotranslatetmx</code>, tak program vytvoří soubor překladové paměti (podle parametrů <code>--pseudotranslatetmx</code>), který obsahuje všechny segment projektu, dokonce i ty, které dosud nebyly přeloženy. Překlad segmentů závisí na parametru <code>--pseudotranslatetype</code>. Překladová paměť odpovídá formátu OmegaT, a proto ji lze používat programem OmegaT. Více v části <a href=
+          "translationMemories.html#pseudo_translate">Překladové paměti</a></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--source-pattern=&lt;regular expression&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Tento parametr je platný pouze tehdy, když je režim na hodnotě <code>console-translate</code>. Určuje, které zdrojové soubory budou přeloženy. Cílové podadresáře budou vytvořeny bez ohledu na to, jestli všechny zdrojové soubory mají nějaký překlad. Tento parametr je regulárním výrazem. Příklady:</p>
+
+          <ul>
+            <li><code>.*</code>: přeloží všechny soubory. To se rovná situaci, kdy se nepoužije žádný parametr.</li>
+
+            <li><code>.*\.html</code>: přeloží všechny soubory HTML.</li>
+
+            <li><code>dir-10\\test\.html</code>: přeloží jen soubor <code>test.html</code> v adresáři <code>dir-10</code>  Cesta k adresářům je relativní k výchozímu adresáři projektu. Oddělovač adresářů se liší vždy podle dané platformy. <code>\\</code> se používá pod Windows, pro jiné platformy slouží <code>/</code></li>
+
+            <li><code>test\.html</code>: přeloží jen soubor <code>test.html</code> ve výchozí úrovni zdrojového adresáře. Pokud se nachází jiné soubory s názvem test.html v jiných adresářích, tak tyto budou ignorovány.</li>
+          </ul>
+
+          <p>Tento parametr je nepovinný a výchozí hodnota je <code>.*</code>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetmx=&lt;file.tmx&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Tento parametr je platný pouze tehdy, když je režim na hodnotě <code>console-createpseudotranslatetmx</code>. Určuje, do kterého souboru se zapisuje překladová paměť. Pokud název souboru nekončí <code>.tmx</code>, bude koncovka přidána. Název může být buď absolutní nebo relativní k pracovnímu adresáři (adresář, ze kterého startujete program OmegaT).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetype=[empty|equal]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Tento parametr je platný pouze tehdy, když je režim na hodnotě <code>console-createpseudotranslatetmx</code>. Určuje typ překladu aplikovaný na každý segment. Možné hodnoty jsou:</p>
+
+          <ul>
+            <li><code>empty</code>: cílový segment bude prázdný</li>
+
+            <li><code>equal</code>: cílový segment se rovná zdroji</li>
+          </ul>
+
+          <p>Tento parametr je nepovinný a výchozí hodnota je <code>equal</code>.</p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--quiet</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Platí pouze v režimu konzole. V režimu ‚quiet‘ (‚ticho‘) se na obrazovce zobrazuje méně informací. Všechna hlášení, která byste obvykle nalezli ve stavové liště se nebudou zobrazovat.</p>
+
+          <p>Parametr je nepovinný a ve výchozím nastavení se hlášení budou zobrazovat na obrazovce.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Právní poznámky</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Obsah</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Tematický rejstřík</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+

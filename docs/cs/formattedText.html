@@ -1,9 +1,9 @@
 <html>
 <head>
-  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <link rel="stylesheet" href=" " type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-  <title>Práce s formátovaným textem - OmegaT 2.0 Uživatelská příručka</title>
+  <title>Práce s formátovaným textem - OmegaT 1.8 Uživatelská příručka</title>
 </head>
 
 <body>
@@ -37,19 +37,23 @@
     <li>
       <p><a href="#tag_hints">Tipy pro správu tagů</a></p>
     </li>
+
+    <li>
+      <p><A href="#printf">zástupné symboly printf</A></p>
+    </li>
   </ul>
 
-  <p>Informace k formátování nacházející se ve zdrojovém souboru je potřebné přenést do cílového souboru. Formátovací informace, které jsou „in-line“, tzn. v řádku, budou u podporovaných formátů (v současnosti DocBook, HTML, XHTML, Open Document a OpenOffice.org) v aplikaci OmegaT zobrazeny jako tagy.  Za normálních okolností jsou tagy ignorovány, t.j. pokud mluvíme o podobnosti mezi různými texty pro účely nalezení podobných úseků. Tagy, které jste reprodukovali do přeloženého segmentu, budou přítomny i v přeloženém dokumentu.</p>
+  <p>Formátovací informace obsažené ve zdrojovém souboru obvykle musí být opakovány v cílovém souboru. Formátovací informace, které jsou „in-line“, tzn. v řádku, budou u podporovaných formátů (v současnosti DocBook, HTML, XHTML, Open Document a OpenOffice.org) v aplikaci OmegaT zobrazeny jako tagy.  V běžném případě jsou tagy ignorovány s ohledem na podobnost mezi různými texty používanými pro porovnání. Tagy, které vložíte do přeloženého segmentu budou přítomné v přeloženém dokumentu.</p>
   <hr>
 
   <h3><a name="intro" id="intro"></a>Formátovací tagy</h3>
 
-  <p><a name="naming" id="naming"></a><b>Pojmenování tagů:</b> Tagy se skládají z jednoho až tří znaků a čísla. Jedinečné číslo umožňuje zopakovat stejné tagy, které si odpovídají, a rozlišovat tagy, které mohou nést znaky zkratky, ale ve skutečnosti jsou rozdílné. Znaky mohou, ale nemusí odrážet hodnotu formátování, kterou reprezentují tagy (např. tučně, kurzíva, atd.)</p>
+  <p><a name="naming" id="naming"></a><b>Názvy tagů:</b> Tagy se skládají z jednoho až tří znaků a čísla. Jedinečné číslo umožňuje zopakovat stejné tagy, které si odpovídají, a rozlišovat tagy, které mohou nést znaky zkratky, ale ve skutečnosti jsou rozdílné. Znaky mohou, ale nemusí odrážet hodnotu formátování, kterou reprezentují tagy (např. tučně, kurzíva, atd.)</p>
 
-  <p><a name="numbering" id="numbering"></a><b>Číslování tagů:</b> Tagy jsou číslovány vzestupně, vždy podle <strong>skupiny tagů</strong>. To co nazýváme „skupina tagů“ je buď jednoduchý, nepárový tag (jako <code><font color=
-  "#FB0000">&lt;br1&gt;</font></code>), samotný, nebo dva tagy tvořící pár (jako <code><font color="#FB0000">&lt;i0&gt;</font></code> a <code><font color="#FB0000">&lt;/i0&gt;</font></code>). V rámci segmentu, první skupina (pár nebo samostatný tag) dostane číslo <strong>0</strong>, druhá číslo <strong>1</strong> atd. První příklad uvedený níže má tři skupiny tagů (pár, samostatný a pak další pár), druhý příklad má jen jednu skupinu (pár).</p>
+  <p><a name="numbering" id="numbering"></a><b>Číslování tagů:</b> Tagy jsou číslovány postupně v rámci <strong>skupiny tagů</strong>. To co nazýváme „skupiny tagů“ je buď jednoduchý samostatně stojící tag (jako <code><font color=
+  "#FB0000">&lt;br1&gt;</font></code>) nebo 2 tagy v páru (jako <code><font color="#FB0000">&lt;i0&gt;</font></code> a <code><font color="#FB0000">&lt;/i0&gt;</font></code>). V rámci segmentu, první skupina (pár nebo samostatný tag) dostane číslo <strong>0</strong>, druhá číslo <strong>1</strong> atd. První příklad uvedený níže má tři skupiny tagů (pár, samostatný a pak další pár), druhý příklad má jen jednu skupinu (pár).</p>
 
-  <p><a name="pairs" id="pairs"></a><b>Párové a nepárové tagy:</b> Tagy se v textu vždy vyskytují buď jako nepárové nebo párové. <strong>Nepárové tagy</strong> označují formátovací informace, které neovlivňují okolní text (např. mezera navíc nebo zalomení řádku).</p>
+  <p><a name="pairs" id="pairs"></a><b>Párové a nepárové tagy:</b> Tagy se v textu vždy vyskytují buď jako nepárové nebo párové. <strong>Jednoduché / nepárové tagy</strong> označují formátovací informaci, která neovlivňuje okolní text (např. mezera navíc nebo zalomení řádku)</p>
   <pre>
  <strong>&lt;segment 2132&gt;</strong><font color=
 "#FB0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
@@ -58,7 +62,7 @@
 "#FB0000">&lt;/b2&gt;</font><strong>&lt;konec segmentu&gt;</strong>
 </pre>
 
-  <p><code><strong><font color="#FB0000">&lt;br1&gt;</font></strong></code> je nepárový tag a neovlivňuje žádný okolní text. <strong>Párové tagy</strong> obvykle označují informace o stylu, které se vztahují na text mezi otevíracím a uzavíracím tagem. Při používání párových tagů je nutno dbát na to, aby otevírací tag byl vždy umístěn před uzavíracím tagem.</p>
+  <p><code><strong><font color="#FB0000">&lt;br1&gt;</font></strong></code> je nepárový tag a neovlivňuje okolní text. <strong>Párové tagy</strong> obvykle označují informace o stylu, které se vztahují na text mezi otevíracím a uzavíracím tagem. Při používání párových tagů je nutno dbát na to, aby otevírací tag byl vždy umístěn před uzavíracím tagem.</p>
   <pre>
  <strong>&lt;segment 3167&gt;</strong>Log file (<font color=
 "#FB0000">&lt;b0&gt;</font>log.txt<font color=
@@ -66,35 +70,36 @@
 </pre>
 
   <p><code><strong><font color="#FB0000">&lt;b0&gt;</font></strong></code> <font size="3">a</font> <code><strong><font color=
-  "#FB0000">&lt;/b0&gt;</font></strong></code> jsou párové a ovlivní text <code><strong>log.txt</strong></code>.</p>
+  "#FB0000">&lt;/b0&gt;</font></strong></code> jsou párové a ovlivňují text <code><strong>log.txt</strong></code>.</p>
   <hr>
 
   <h3><a name="tag_segmenting" id="tag_segmenting"></a>Tagy a větná segmentace</h3>
 
-  <p>OmegaT vytváří své tagy před tím, než se použije větná segmentace. V závislosti na pravidlech segmentace, se můžete setkat s případy, kdy tagy jakoby nerespektovaly výše zmíněná pravidla číslování a seskupování. Vezměme si jako příklad následující text: „<em>Vzor před: \. Vzor za: \s“</em><font color="#FB0000">.</font> <font color="#000000"> Zde bychom očekávali segmentaci jako (&lt;b0&gt; a &lt;/b0&gt; znamenají začátek a konec kurzívy):</font></p>
+  <p>OmegaT vytváří své tagy před tím, než se použije větná segmentace. V závislosti na pravidlech segmentace se může zdát, jakoby tagy nerespektovaly výše uvedená pravidla číslování a seskupování. Např. následující text: „<em>Before: \. After: \s“</em><font color="#FB0000">.</font> <font color="#000000"> Zde bychom očekávali segmentaci jako (&lt;b0&gt; a &lt;/b0&gt; znamenají začátek a konec kurzívy):</font></p>
   <pre>
  <strong>&lt;segment ....&gt;</strong> <font color=
-"#FB0000">&lt;b0&gt;</font>Vzor před: \. Vzor za: \s<font color=
+"#FB0000">&lt;b0&gt;</font>Before: \. 
+After: \s<font color=
 "#FB0000">&lt;/b0&gt;</font><strong>&lt;konec segmentu&gt;</strong>
 </pre>
 
-  <p>Nicméně, když použijeme předvolená pravidla segmentace na tento segment, tak získáme následující výsledek:</p>
+  <p>Ale když by se uplatnila výchozí pravidla segmentace na tento segment, tak získáme tyto výsledky:</p>
   <pre>
- <strong>&lt;segment 1554&gt;</strong> <font color=
-"#FB0000">&lt;b0&gt;</font>Vzor před: \. <strong>&lt;konec segmentu&gt;</strong><br>
-<strong>&lt;segment 1991&gt;</strong>Vzor za: \s<font color=
+ <strong>&lt;segment 1990&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>Before: \. <strong>&lt;konec segmentu&gt;</strong><br>
+<strong>&lt;segment 1991&gt;</strong> After: \s<font color=
 "#FB0000">&lt;/b0&gt;</font><strong>&lt;konec segmentu&gt;</strong> <br>
 </pre>
 
   <p>Když použijeme pravidlo <i>rozdělit za tečkou, za kterou následuje mezera</i>, bude původní text rozdělen do dvou segmentů, dokonce i když by oba tagy <code><font color="#FB0000">&lt;b0&gt;</font></code> a <code><font color=
-  "#FB0000">&lt;/b0&gt;</font></code> měly zůstat uvnitř jednoho segmentu. V některých případech může formátování dokonce zapříčinit problémy při překladu, a to tehdy, když tagy musí být v cílovém jazyce přemístěny tak, aby odrážely slovosled tohoto jazyka (viz <a href="#tag_operation">Operace s tagy</a> níže) </p>
+  "#FB0000">&lt;/b0&gt;</font></code> měly zůstat uvnitř jednoho segmentu. V některých případech to může zapříčinit problémy při překladu, a to tehdy, pokud musíte rozmístit tagy odlišně v cílovém jazyce, abyste vystihli správný pořádek slov tohoto jazyka (viz <a href="#tag_operation">Operace s tagy</a> níže).</p>
   <hr>
 
   <h3><a name="tag_operation" id="tag_operation"></a>Operace s tagy</h3>
 
-  <p>S tagy se musí zacházet opatrně. Pokud jsou náhodou změněny, formátování výsledného souboru může být poškozeno. Platný postup je „Nespojuj co není rozděleno“. Nicméně je dobré vědět, co je možno provést a jak to provést.</p>
+  <p>S tagy se musí zacházet opatrně. Když je náhodou změníte, můžete tak poškodit formátování cílového dokumentu. Správný přístup je „Nehas co tě nepálí“ - tzn. nesnažte se opravit to, co není špatně. Nicméně je dobré vědět, co je možno provést a jak to provést.</p>
 
-  <p><a name="duplication" id="duplication"></a><b>Duplikace skupiny tagů:</b> Pro duplikaci skupin tagů je stačí zkopírovat na libovolnou pozici. Mějte na paměti, že v párové skupině se otevírací tag musí nacházet před uzavíracím tagem. Formátování reprezentované skupinou, kterou jste duplikovali, bude použito na sekci, do které jste ji duplikovali.</p>
+  <p><a name="duplication" id="duplication"></a><b>Duplikace skupiny tagů:</b> Duplikaci skupiny tagů provedete tak, že jednoduše zkopírujete na vybranou pozici. Pamatujte ale, že v rámci páru musí být otevírací tag umístěn před uzavíracím. Formátování zapsané pomocí duplikované skupiny bude uplatněno na tu část textu, kam jste toto formátování duplikováním zkopírovali.</p>
 
   <p>Příklad:</p>
   <pre>
@@ -103,7 +108,7 @@
 "#FB0000">&lt;/b0&gt;</font> bude duplikováno sem.<strong>&lt;konec segmentu&gt;</strong>
 </pre>
 
-  <p>Po duplikaci:</p>
+  <p>Po duplikaci</p>
   <pre>
  <strong>&lt;segment 0001&gt;</strong><font color=
 "#FB0000">&lt;b0&gt;</font>Toto formátování<font color=
@@ -112,7 +117,7 @@
 "#FB0000">&lt;/b0&gt;</font>.<strong>&lt;konec segmentu&gt;</strong>
 </pre>
 
-  <p><a name="deletion" id="deletion"></a><b>Smazání skupiny tagů:</b> Smazání skupiny tagů provedete jejich prostým odstraněním ze segmentu. Pamatujte, že u párového tagu musí být smazán jak otevírací, tak uzavírací tag, a tím aby se zajistilo, že všechny stopy formátování jsou správně vymazané, jinak by mohl být přeložený soubor poškozen. Vymazáním skupiny tagů odstraníte příslušné formátování z přeloženého souboru.</p>
+  <p><a name="deletion" id="deletion"></a><b>Smazání skupiny tagů:</b> Smazání skupiny tagů provedete jejich prostým odstraněním ze segmentu. Nezapomeňte, že u párových tagů musí být smazán jak příslušný otevírací a také příslušný ukončovací tag, a jenom tak se zajistí, že jsou řádně odebrány všechny stopy formátování, jinak může dojít k poškození přeloženého souboru. Vymazáním skupiny tagů odstraníte příslušné formátování z přeloženého souboru.</p>
 
   <p>Příklad:</p>
   <pre>
@@ -126,7 +131,7 @@
  <strong>&lt;segment 0001&gt;</strong>Toto formátování bylo smazáno.<strong>&lt;konec segmentu&gt;</strong>
 </pre>
 
-  <p><b>Změnit pořadí tagů ve skupině:</b>Když chcete změnit pořadí skupiny tagů tak, aby se formátování odráženo na jinou strukturu jazyka v překladu, jednoduše umístěte skupinu tagů tam, kde by měla být v překladu. Formátování bude ovlivňovat tu část, na kterou je aplikováno.</p>
+  <p><b>Úpravy pořadí párových tagů:</b>Chcete-li změnit a přizpůsobit pořadí párových tagů podle odlišné struktury jazyka překladu, jednoduše tagy přesuňte na požadované místo v překladu. Formátování bude aplikováno na příslušnou část textu.</p>
 
   <p>Příklad:</p>
   <pre>
@@ -134,21 +139,21 @@
 "#FB0000">&lt;b0&gt;</font>Formátování nula<font color=
 "#FB0000">&lt;/b0&gt;</font> a <font color=
 "#FB0000">&lt;b1&gt;</font>formátování jedna<font color=
-"#FB0000">&lt;/b1&gt;</font> budou vzájemně přesunuta.<strong>&lt;konec segmentu&gt;</strong>
+"#FB0000">&lt;/b1&gt;</font> budou přehozena.<strong>&lt;konec segmentu&gt;</strong>
 </pre>
 
-  <p>Po změně pořadí:</p>
+  <p>Po úpravách pořadí:</p>
   <pre>
  <strong>&lt;segment 0001&gt;</strong><font color=
 "#FB0000">&lt;b1&gt;</font>Formátování jedna<font color=
 "#FB0000">&lt;/b1&gt;</font> a <font color=
-"#FB0000">&lt;b0&gt;</font> formátování nula<font color=
-"#FB0000">&lt;/b0&gt;</font> bylo vzájemně přesunuto.<strong>&lt;konec segmentu&gt;</strong>
+"#FB0000">&lt;b0&gt;</font>formátování nula<font color=
+"#FB0000">&lt;/b0&gt;</font> byla přehozena.<strong>&lt;konec segmentu&gt;</strong>
 </pre>
 
   <h3><a name="nesting" id="nesting"></a>Vnořování skupiny tagů</h3>
 
-  <p>Úprava pořadí skupiny tagů může vyústit ve vnoření skupiny tagů do jiné skupiny tagů. Toto je možné pouze dokud uzavírací skupina úplně zavírá uzavřenou skupinu. Jinými slovy, když posunujete párové tagy, ujistěte se, že oba, jak otevírající tak uzavírající tag, jste přesunuli správně, jinak může dojít k poškození souboru a tento by se nemuselo podařit otevřít. Na vnořenou část se budou vztahovat oba způsoby formátování.</p>
+  <p>Úpravy pořadí párových tagů mohou vyústit do vnořování skupiny tagů do jiné skupiny tagů. Toto bude fungovat do té doby, dokud budou páry řádně uzavírány a nebudou se křížit. Jinými slovy, když budete manipulovat s párovými tagy, tak se ujistěte, že oba - jak otevírající, tak uzavírající tag - byly přesunuty do cílového segmentu, jinak může dojít k poškození přeloženého souboru a ten by pak nešel otevřít. Vnořená část pak bude ovlivněna formátováním obou formátů.</p>
 
   <p>Příklad:</p>
   <pre>
@@ -162,21 +167,21 @@
   <p>Po vnoření:</p>
   <pre>
  <strong>&lt;segment 0001&gt;</strong><font color=
-"#FB0000">&lt;b0&gt;</font>Formátování <font color=
+"#FB0000">&lt;b0&gt;</font>Formátování<font color=
 "#FB0000">&lt;b1&gt;</font>jedna<font color=
-"#FB0000">&lt;/b1&gt;&lt;/b0&gt;</font> bylo vnořeno do formátování nula.<strong>&lt;konec segmentu&gt;</strong>
+"#FB0000">&lt;/b1&gt;&lt;/b0&gt;</font> bylo vnořeno dovnitř do segmentu nula.<strong>&lt;konec segmentu</strong>
 </pre>
   <hr>
 
   <h3><a name="tag-overlapping" id="tag-overlapping"></a>Překrývání skupiny tagů</h3>
 
-  <p>Překrývání je výsledkem chybné manipulace s párovými tagy a určitě bude mít za následek poškození formátování a někdy může způsobit, že přeložený soubor nepůjde otevřít. Příklad:</p>
+  <p>K překrývání dochází v důsledku chybné manipulace s párovými tagy a tak určitě vyústí v poškození formátování a někdy může být přeložený soubor poškozen v takové  míře, že už nepůjde otevřít. Příklad:</p>
   <pre>
  <strong>&lt;segment 0001&gt;</strong><font color=
-"#FB0000">&lt;b0&gt;</font>Formátování <font color=
+"#FB0000">&lt;b0&gt;</font>Formátování<font color=
 "#FB0000">&lt;/b0&gt;</font> <font color=
 "#FB0000">&lt;b1&gt;</font>jedna<font color=
-"#FB0000">&lt;/b1&gt;</font> bude poškozeno.<strong>&lt;konec segmentu&gt;</strong>
+"#FB0000">&lt;/b1&gt;</font> bude zpřeházeno.<strong>&lt;konec segmentu&gt;</strong>
 </pre>
 
   <p>Po chybné manipulaci:</p>
@@ -185,24 +190,24 @@
 "#FB0000">&lt;b0&gt;</font>Formátování <font color=
 "#FB0000">&lt;b1&gt;</font>jedna<font color=
 "#FB0000">&lt;/b0&gt;</font> <font color=
-"#FB0000">&lt;/b1&gt;</font>je nyní velmi poškozeno.<strong>&lt;konec segmentu&gt;</strong>
+"#FB0000">&lt;/b1&gt;</font>je výrazně zpřeházeno.<strong>&lt;konec segmentu&gt;</strong>
 </pre>
   <hr>
 
   <h3><a name="tag_validation" id="tag_validation"></a>Ověření skupiny tagů</h3>
 
-  <p>Funkce ověření tagů detekuje tagy, které byly ať již úmyslně nebo náhodou změněny, a ukáže příslušné segmenty. Spuštění této funkce - stisknutím kombinace Ctrl+T - otevřete okno obsahující všechny segmenty v soubory, které pravděpodobně obsahují tagy poškozené během překladu. Takovéto chyby bývají často problémem v souborech OpenDocument nebo OpenOffice.org, které nelze otevřít kvůli problémům s tagy vytvořenými v procesu překladu. Opravení tagů a opětovné vytvoření cílových dokumentů je s funkcí Ověření tagů opravdu snadné. Okno, které se zobrazí po stisku Ctrl+T, obsahuje tabulku o třech sloupcích s odkazy na segmenty a jejich textem zdroje a překladu:</p><br>
+  <p>Funkce Ověření tagů detekuje změněné tagy (které jste měnili cíleně nebo nechtěně) a ukáže dotyčný segment. Spuštění této funkce - stiskem Ctrl + T - otevřete okno obsahující všechny segmenty souboru, které mohou obsahovat pravděpodobně poškozené nebo chybné tagy v překladu. Chyby v přeloženém otagovaném textu jsou často problémem v souborech typu OpenDocument nebo OpenOffice.org, protože nemusí jít otevřít právě kvůli chybám tagů, které vyvstaly během procesu překladu. Když budete používat tuto prověřovací funkci tagů, tak oprava tagů a opětovné vytvoření cílových dokumentů bude snadné. Okno, které se otevře po stisku Ctrl+T, je tvořeno třemi sloupci tabulky s odkazy na segment, původní a cílový segment:</p><br>
 
-  <table align="center" border="1" width="80%">
+  <table align="center" border="1" width="80%" summary="">
     <tbody>
       <tr>
-        <td><a href="">1</a></td>
+        <td>1</td>
 
-        <td>Jiné písmo pro zobrazení textu může být vybrané přes dialogové okn <strong><font color="blue">&lt;b0&gt;</font></strong>Písm<strong><font color="blue">&lt;/b0&gt;</font></strong>. Otevřete jej přes<strong><font color=
+        <td>Jiné písmo pro zobrazení textu může být vybráno přes dialogové okno <strong><font color="blue">&lt;b0&gt;</font></strong>Písmo<strong><font color="blue">&lt;/b0&gt;</font></strong>. Otevřete jej přes položku nabídky <strong><font color=
         "blue">&lt;i1&gt;</font></strong>Možnosti<strong><font color=
         "blue">&lt;/i1&gt;</font></strong> &gt; <strong><font color=
-        "blue">&lt;i2&gt;</font></strong>Písmo...<strong><font color=
-        "blue">&lt;/i2&gt;</font></strong> . Font a velikost písma mohou být změněny z dialogového okna.</td>
+        "blue">&lt;i2&gt;</font></strong>Display Font...<strong><font color=
+        "blue">&lt;/i2&gt;</font></strong>. Font a velikost písma mohou být změněny z dialogového okna.</td>
 
         <td>'n Mens kan 'n ander vertoonfont kies met die <strong><font color=
         "blue">&lt;b0&gt;</font></strong>Vertoonfont<strong><font color=
@@ -216,18 +221,38 @@
     </tbody>
   </table>
 
-  <p>Tagy jsou zvýrazněné tučným modrým písmem a lze snadno srovnat původní obsah s obsahem přeloženým. Pro aktivaci segmentu v Editoru klikněte na odkaz. Pokud je to nutné, opravte chybu a stiskněte <code><a href="menu.html#shortcuts">Ctrl+T</a></code> pro návrat k oknu Ověření tagů a tak můžete opravit případné další chyby. Chyby <a href="#intro">tagů</a> vyvstávají z <a href="#tag_operation">manipulace tagů</a> během překladu, které opakují stejný pořádek a počet tagů, po vzoru původního segmentu. Některé změny tagů jsou nutné a neškodné, oproti tomu některé zapříčiní problémy při vytváření přeložených dokumentů.</p>
+  <p>Tagy jsou zvýrazněné tučným modrým písmem a lze snadno srovnat původní obsah s obsahem přeloženým. Klikněte na odkaz pro přejití na segment v Editoru. Pokud je to nutné, opravte chybu a stiskněte <code><a href="menu.html#shortcuts">Ctrl+T</a></code> pro návrat k oknu Ověření tagů a tak můžete opravit případné další chyby. Chyby <a href="#intro">tagů</a> vyvstávají při <a href="#tag_operation">manipulaci s tagy</a> během překladu, které nereflektují stejný pořádek a počet tagů, po vzoru původního segmentu. Některé změny tagů jsou nutné a neškodné, oproti tomu některé zapříčiní problémy při vytváření přeložených dokumentů.</p>
   <hr>
 
   <h3><a name="tag_hints" id="tag_hints"></a>Tipy pro správu tagů</h3>
 
-  <p>Tagy všeobecně představují nějaký druh formátování  původního textu. <strong>Zjednodušení formátování původního textu</strong> ve velké míře přispívá ke snížení počtu tagů. Za úmyslem zjednodušení překladu a snížení pravděpodobnosti výskytu možných chyb tagů lze sjednotit použité fonty, velikosti písem, barev atd. Pokud se chcete blíže seznámit s tím, co všechno se s tagy dá dělat, navštivte sekci <a href=
-  "#tag_operation">Operace s tagy</a>. Pamatujte, že pokud vás tagy obtěžují a formátování není pro aktuální práci extrémně důležité, odstranění tagů ze zdrojového dokumentu může představovat nejjednodušší způsob jak se vyhnout potížím..</p>
+  <p>Tagy všeobecně představují nějaký druh formátování v původním textu. <strong>Zjednodušení formátování původního textu</strong> ve velké míře přispívá ke snížení počtu tagů. Když to jde, tak se snažme snížit množství písem, velikostí písem, barev, atd. a tím zjednodušit překlad a snížit množství chyb tagů. Projděte si část <a href=
+  "#tag_operation">Operace s tagy</a> pro více informací k tématu, co vše lze s tagy dělat. Pamatujte, že pokud vás tagy ruší a formátování není v daném překladu extrémně důležité, tak odstranění tagů může být nejjednodušší cesta ven z problémů.</p>
 
-  <p>Pokud potřebujete vidět tagy v OmegaT, ale nepotřebujete ponechat většinu formátování v přeloženém dokumentu, nemusíte tagy do překladu přidávat. V tom případě <strong>věnujte zvláštní pozornost párovým tagům</strong>, protože pokud odstraníte jednu část páru, a zapomenete vymazat druhou část, je jisté, že poškodíte formátování vašeho dokumentu. Jakmile jsou tagy zahrnuté v samotném textu, je možné použít <a href=
-  "segmentation.html">pravidla segmentace</a> pro vytvoření segmentů, které obsahují méně tagů. Toto je pokročilá vlastnost a pro její řádnou aplikaci se předpokládají adekvátní zkušenosti.</p>
+  <p>Pokud potřebujete vidět tagy v aplikaci OmegaT ale nemusíte zachovat většinou formátování v přeloženém dokumentu, tak se můžete volně rozhodnout, zda tagy do překladu zařadíte. V tomto případě <strong>věnujte zvýšenou pozornost párovým tagům</strong>, protože jak se smaže jedna část a ne obě, tak si jistě poškodíte formátování dokumentu. Vzhledem k tomu, že tagy jsou obsaženy v samotném textu, je možné použít <a href=
+  "segmentation.html">Pravidla segmentace</a> k vytvoření segmentů s méně tagy. Toto je již pokročilé nastavení a k dobrým výsledkům bude zapotřebí mít určitou zkušenost.</p>
 
-  <p><strong>Důležité:</strong> Program OmegaT ještě není schopen detekovat chyby ve formátování plně automaticky, takže vás nemusí upozornit na každý případ, kdy uděláte chybu nebo změníte formátování, které jste upravili tak, aby lépe vyhovovalo vašemu cílovému jazyku. Může se tedy stát, že váš přeložený soubor bude vypadat zkresleně, a v případě souborů OpenDocument / OpenOffice.org může dokonce být znemožněno jeho otevření.</p>
+  <p><strong>Důležitá informace:</strong> OmegaT zatím neumí odhalit chyby ve formátování zcela automaticky, takže vás neupozorní, pokud uděláte chybu nebo změníte formátování tak, aby lépe vyhovovalo vašemu cílovému jazyku. Nicméně někdy může váš přeložený soubor vypadat podivně a v případě souborů typu OpenDocument / OpenOffice.org třeba nepůjde otevřít.</p>
+
+  <hr>
+
+  <h3><a name="printf"></a>zástupné symboly printf</h3>
+
+  <p>V některých programovacích jazycích (např. PHP, C) se používají speciální tagy v roli zástupných symbolů v řetězcích, které se používají v kombinaci s funkcí printf. Např.
+  </p>
+  <pre>$var =_("cool");
+echo printf(_("OmegaT is very %s"),$var);</pre>
+
+  <p>Pokud je textový řetězec extrahován z tohoto zdrojového kódu (např. přes PO filtr), OmegaT nenahradí tyto proměnné prostřednictvím tagů, protože nemůže jednoznačně zjistit, jestli např. <code>%s</code> je ve skutečnosti zástupný symbol nebo jen část textu. Nicméně stejně můžete umožnit ověření takovýchto zástupných znaků. V menu vyberte <strong>Nástroje → Ověření tagů</strong>. Můžete si vybrat mezi jednoduchým a nebo plným ověřením</p>
+
+  <p>Oficiální syntaxe pro printf proměnné je</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Kompletní ověření zcela podporuje tento formát, kromě <code>WIDTHSPECIFIER</code>. Při jednoduchém ověření se kontroluje následující syntaxe:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Můžete změnit pořádek zástupných symbolů, ale pak musíte přidat ARGUMENTSWAPSPEICFIER pokud tam ještě není zadaný. To znamená přidat sled čísel a znak dolaru za <code>%</code>. Např. <code>"%s je %s aplikace"</code> rovnající se <code>"%1$s je %2$s aplikace"</code> kterou můžete přeložit jako <code>"%2$s aplikace je %1$s"</code>.
+  </p>
   <hr>
 
   <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
@@ -238,7 +263,7 @@
 
         <td style="text-align: center;"><a href="index.html">Obsah</a></td>
 
-        <td style="text-align: right;"><a href="xindex.html">Tématický rejstřík</a></td>
+        <td style="text-align: right;"><a href="xindex.html">Tematický rejstřík</a></td>
       </tr>
     </tbody>
   </table>

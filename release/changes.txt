@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  3 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.1.7 update 1 vs. 2.1.7
@@ -14,9 +14,8 @@
   Other enhancements:
 
   - Danish localisation updated to 2.1.x (UI, Readme, Instant Start)
-  - Hungarian localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
-
-
+  - Czech localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
+  
   Bug fixes:
 
   - Some search options widgets do not set focus to Search field

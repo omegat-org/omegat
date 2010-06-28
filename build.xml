@@ -310,7 +310,7 @@
     </target>
         
     <!-- Builds all OmegaT products -->
-    <target name="all" depends="l10n-pack,src,jar,zip,win, linux" />
+    <target name="all" depends="l10n-pack,src,jar,zip,win,linux,mac" />
 
 	<target name="gen">
 		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">

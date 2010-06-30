@@ -307,7 +307,7 @@ public abstract class AbstractFilter implements IFilter {
      * Processes a single file given a reader and a writer.
      * Generally this method should read strings from the input reader
      * and write them to the output reader. In order to let OmegaT know
-     * what strings are translatable and to get thair translation,
+     * what strings are translatable and to get their translation,
      * filter should call {@link #processEntry(String)} method.
      * <p>
      * Note that outFile is never null, even when the project is loading.

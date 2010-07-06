@@ -74,11 +74,10 @@ public class Searcher
      * @param project
      *            Current project
      */
-    public Searcher(final IProject project)
-    {
+    public Searcher(final IProject project, final ISearchCheckStop stopCallback) {
         m_project = project;
+        this.stopCallback = stopCallback;
     }
-
     
     /**
      * Search for an expression and return a list of results.
@@ -182,7 +181,6 @@ public class Searcher
         }
 
         return (m_searchResults);
-
     }
 
     
@@ -244,6 +242,9 @@ public class Searcher
             String locText = te != null ? te.translation : "";
 
             checkEntry(srcText, locText, te, i, null);
+            if (stopCallback.isStopped()) {
+                return;
+            }
         }
 
         // search the TM, if requested
@@ -261,6 +262,9 @@ public class Searcher
                 TransEntry te = en.getValue();
 
                 checkEntry(srcText, te.translation, te, -1, file);
+                if (stopCallback.isStopped()) {
+                    return;
+                }
             }
             // Search TM entries, unless we search for date or author.
             // They are not available in external TM, so skip the search in 
@@ -277,6 +281,9 @@ public class Searcher
                         }
 
                         checkEntry(tm.source, tm.target, null, -1, file);
+                        if (stopCallback.isStopped()) {
+                            return;
+                        }
                     }
                 }
             }
@@ -363,6 +370,9 @@ public class Searcher
                 public void addFileTMXEntry(String source, String translation) {
                 }
             });
+            if (stopCallback.isStopped()) {
+                return;
+            }
         }
     }
 
@@ -462,6 +472,10 @@ public class Searcher
         if (m_numFinds >= m_maxResults)
             return;
 
+        if (stopCallback.isStopped()) {
+            return;
+        }
+
         if (searchString(seg)) {
             SearchMatch[] matches = foundMatches
                     .toArray(new SearchMatch[foundMatches.size()]);
@@ -470,6 +484,9 @@ public class Searcher
         }
     }
 
+    public interface ISearchCheckStop {
+        boolean isStopped();
+    }
 
     private List<SearchResultEntry> m_searchResults;
     private IProject  m_project;
@@ -493,5 +510,6 @@ public class Searcher
     private int m_numFinds;
     private int m_maxResults;
 
+    private final ISearchCheckStop stopCallback;
     private final List<SearchMatch> foundMatches = new ArrayList<SearchMatch>();
 }

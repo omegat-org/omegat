@@ -196,7 +196,7 @@ public class SearchWindow extends JFrame
         bDB.add(m_dateToSpinner);
         bDB.add(m_dateToButton);
 
-        m_viewer = new EntryListPane(par);
+        m_viewer = new EntryListPane();
         JScrollPane viewerScroller = new JScrollPane(m_viewer);
 
         //box Directory bDir
@@ -484,10 +484,6 @@ public class SearchWindow extends JFrame
         }
 
         m_searchField.requestFocus();
-
-        // start the search in a separate thread
-        m_thread = new SearchThread(this);
-        m_thread.start();
     }
     
     /**
@@ -656,49 +652,22 @@ public class SearchWindow extends JFrame
 
     ////////////////////////////////////////////////////////////////
     // interface for displaying text in viewer
-    
-    public void displayResults() {
-        m_viewer.finalize();
-        m_resultsLabel.setText(
-            StaticUtils.format(OStrings.getString("SW_NR_OF_RESULTS"),
-                               new Object[] {new Integer(m_viewer.getNrEntries())})
-        );
-        m_filterButton.setEnabled(true);
 
-        // save user preferences
-        savePreferences();
+    /**
+     * Show search result for user
+     */
+    public void displaySearchResult(final List<SearchResultEntry> entries) {
+        UIThreadsUtil.executeInSwingThread(new Runnable() {
+            public void run() {
+                m_viewer.displaySearchResult(entries);
+                m_resultsLabel.setText(StaticUtils.format(
+                        OStrings.getString("SW_NR_OF_RESULTS"),
+                        new Object[] { new Integer(m_viewer.getNrEntries()) }));
+                m_filterButton.setEnabled(true);
+            }
+        });
+    }
 
-    }
-    
-    public void addEntries(List<SearchResultEntry> entries) {
-        for (SearchResultEntry e : entries) {
-            m_viewer.addEntry(e.getEntryNum(), e.getPreamble(),
-                    e.getSrcPrefix(), e.getSrcText(), e.getTranslation(),
-                    e.getSrcMatch(), e.getTargetMatch());
-        }
-    }
-    
-    public void postMessage(String message)
-    {
-        m_viewer.addMessage(message);
-    }
-    
-    /////////////////////////////////////////////////////////////////
-    // misc public functions
-    
-    // put keyboard focus on search field
-    public void setSearchControlFocus()
-    {
-        m_searchField.requestFocus();
-    }
-    
-    // called by controlling thread
-    public void threadDied()
-    {
-        m_thread = null;
-        dispose();
-    }
-    
     ///////////////////////////////////////////////////////////////
     // internal functions
     
@@ -714,8 +683,9 @@ public class SearchWindow extends JFrame
             // notify main window
             m_parent.removeSearchWindow(this);
 
-            if (m_thread != null)
-                m_thread.interrupt();
+            if (m_thread != null) {
+                m_thread.fin();
+            }
         }
         super.processWindowEvent(w);
     }
@@ -757,39 +727,44 @@ public class SearchWindow extends JFrame
         Core.getEditor().removeFilter();
     }
 
-    private void doSearch()
-    {
-        if (m_thread == null)
-            doCancel();
-        else
-        {
-            m_viewer.reset();
-            String root = null;
-            if (m_dirCB.isSelected())
-            {
-                // make sure it's a valid directory name
-                root = m_dirField.getText();
-                if (!root.endsWith(File.separator))
-                    root += File.separator;
-                File f = new File(root);
-                if (!f.exists() || !f.isDirectory())
-                {
-                    String error = StaticUtils.format(
-                            OStrings.getString("SW_ERROR_BAD_DIR"), 
-                            new Object[] {m_dirField.getText()} );
-                    m_viewer.setText(error);
-                    Log.log(error);
-                    return;
-                }
-                if (m_dirCB.isSelected())
-                {
-                    Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, root);
-                    // need to explicitly save preferences because project
-                    //	might not be open
-                    Preferences.save();
-                }
+    private void doSearch() {
+        UIThreadsUtil.mustBeSwingThread();
+        if (m_thread != null) {
+            // stop old search thread
+            m_thread.fin();
+        }
+        
+        m_searchField.requestFocus();
+
+        m_viewer.reset();
+        String root = null;
+        if (m_dirCB.isSelected()) {
+            // make sure it's a valid directory name
+            root = m_dirField.getText();
+            if (!root.endsWith(File.separator))
+                root += File.separator;
+            File f = new File(root);
+            if (!f.exists() || !f.isDirectory()) {
+                String error = StaticUtils.format(
+                        OStrings.getString("SW_ERROR_BAD_DIR"),
+                        new Object[] { m_dirField.getText() });
+                m_viewer.setText(error);
+                Log.log(error);
+                return;
             }
-            m_thread.requestSearch(m_searchField.getText(),
+//            if (m_dirCB.isSelected()) {
+//                Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, root);
+//                // need to explicitly save preferences because project
+//                // might not be open
+//                Preferences.save();
+//            }
+        }
+
+        // save user preferences
+        savePreferences();
+
+        // start the search in a separate thread
+        m_thread = new SearchThread(this, m_searchField.getText(),
                                    root,
                                    m_recursiveCB.isSelected(),
                                    m_exactSearchRB.isSelected(),
@@ -807,11 +782,15 @@ public class SearchWindow extends JFrame
                                    m_dateToCB.isSelected(),
                                    m_dateToModel.getDate().getTime()
                                    );
-        }
+       
+        m_thread.start();        
     }
 
-    private void doCancel()
-    {
+    private void doCancel() {
+        UIThreadsUtil.mustBeSwingThread();
+        if (m_thread != null) {
+            m_thread.fin();
+        }
         dispose();
     }
 

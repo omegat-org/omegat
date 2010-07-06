@@ -2,7 +2,7 @@
  OmegaT 2.1.7 update 2
 ----------------------------------------------------------------------
   1 Enhancement
-  0 Bugfix
+  1 Bugfix
 ----------------------------------------------------------------------
 2.1.7 update 2 vs. 2.1.7 update 1
 
@@ -10,6 +10,10 @@
 
   - When a project is empty, the message mentions the documentation
 on supported file formats
+
+  Bug fixes:
+
+  - In some circumstances, the search results could be highlighted
 
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 1

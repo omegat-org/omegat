@@ -90,6 +90,7 @@
                     docs/en/images/NewProject.png
                     docs/en/images/tagged_segment.png
                     docs/en/images/tagged_segment_target.png
+                    docs/en/images/MatchesPane.png
                     src/**/Bundle.properties"/>
         </copy>
         <copy file="release/readme.txt"

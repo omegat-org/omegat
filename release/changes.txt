@@ -1,12 +1,14 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.1.7 update 2 vs. 2.1.7 update 1
 
   Other enhancements:
+
+  - Japanese localisation updated to 2.1.x (UI, Readme, Instant Start)
 
   - When a project is empty, the message mentions the documentation
 on supported file formats

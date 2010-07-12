@@ -70,12 +70,12 @@ public class OpenXMLFilter extends AbstractFilter
     // Complete string when all options are enabled
     // Word
     "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)" +    
-    "|(header\\d+\\.xml)|(footer\\d+\\.xml)" +                                  
+    "|(header\\d+\\.xml)|(footer\\d+\\.xml)|(data\\d+\\.xml)" +                                  
     // Excel
     "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" +                             
     // PowerPoint
     "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)" +
-    "|(notesSlide\\d+\\.xml)"
+    "|(notesSlide\\d+\\.xml)|(chart\\d+\\.xml)"
 */          
 
         DOCUMENTS = "(document\\.xml)";

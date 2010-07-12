@@ -11,6 +11,11 @@
   - Extended project statistics
   http://sourceforge.net/support/tracker.php?aid=2988953
 
+  Other enhancements:
+  
+  - OpenXML filter: new options to translate diagrams (Word) and 
+charts (PowerPoint)
+
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2
 ----------------------------------------------------------------------

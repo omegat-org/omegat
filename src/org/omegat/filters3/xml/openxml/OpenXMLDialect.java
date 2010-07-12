@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2007-2010 Didier Briel
+               2007-2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,7 +51,8 @@ public class OpenXMLDialect extends DefaultXMLDialect
             // Excel
             "si",                                                               
             // PowerPoint
-            "a:p",                                                              
+            "a:p",
+            "c:v",
         });
         
         if (options.getTranslateHiddenText()) // Word
@@ -66,6 +67,7 @@ public class OpenXMLDialect extends DefaultXMLDialect
             // PowerPoint
             "p:attrName",
             "a:tableStyleId",
+            "c:f",
             // Word
             "wp:align",
             "w:drawing",

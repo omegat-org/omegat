@@ -92,7 +92,9 @@ public class OpenXMLFilter extends AbstractFilter
             DOCUMENTS += "|(header\\d+\\.xml)";                             
         if (options.getTranslateFooters())
             DOCUMENTS += "|(footer\\d+\\.xml)";                             
-        DOCUMENTS += "|(sharedStrings\\.xml)";                              
+        if (options.getTranslateDiagrams())
+            DOCUMENTS += "|(data\\d+\\.xml)";
+        DOCUMENTS += "|(sharedStrings\\.xml)";
         if (options.getTranslateExcelComments())
             DOCUMENTS += "|(comments\\d+\\.xml)";                           
         DOCUMENTS += "|(slide\\d+\\.xml)";                                  
@@ -102,6 +104,9 @@ public class OpenXMLFilter extends AbstractFilter
             DOCUMENTS += "|(slideLayout\\d+\\.xml)";
         if (options.getTranslateSlideComments())
             DOCUMENTS += "|(notesSlide\\d+\\.xml)";                         
+        if (options.getTranslateCharts())
+            DOCUMENTS += "|(chart\\d+\\.xml)";
+
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
         

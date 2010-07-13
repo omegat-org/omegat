@@ -64,28 +64,34 @@ public class CalcStandardStatistics extends LongProcessThread {
             OStrings.getString("CT_STATS_Remaining"),
             OStrings.getString("CT_STATS_Unique"),
             OStrings.getString("CT_STATS_Unique_Remaining") };
-    private static final boolean[] htAlign = new boolean[] { false, true, true,
-            true, true };
+    private static final boolean[] htAlign = new boolean[] {
+	false, true, true, true, true
+    };
 
     private static final String[] ftHeaders = new String[] {
             OStrings.getString("CT_STATS_FILE_Name"),
             OStrings.getString("CT_STATS_FILE_Total_Segments"),
             OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Total_Words"),
             OStrings.getString("CT_STATS_FILE_Remaining_Words"),
             OStrings.getString("CT_STATS_FILE_Unique_Words"),
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Words"),
             OStrings.getString("CT_STATS_FILE_Total_Characters_NOSP"),
             OStrings.getString("CT_STATS_FILE_Remaining_Characters_NOSP"),
             OStrings.getString("CT_STATS_FILE_Unique_Characters_NOSP"),
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters_NOSP"),
             OStrings.getString("CT_STATS_FILE_Total_Characters"),
             OStrings.getString("CT_STATS_FILE_Remaining_Characters"),
             OStrings.getString("CT_STATS_FILE_Unique_Characters"),
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"),
     };
 
     private static final boolean[] ftAlign = new boolean[] {
-	false, true, true, true, true, true, true,
-	true, true, true, true, true, true
+	false,
+	true, true, true, true, true, true, true, true,
+	true, true, true, true, true, true, true, true,
     };
 
     private StatisticsWindow callback;
@@ -163,6 +169,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         }
 
         List<FileData> counts = new ArrayList<FileData>();
+        Map<String, Boolean> firstSeenUniqueSegment = new HashMap<String, Boolean>();
         for (FileInfo file : project.getProjectFiles()) {
             FileData numbers = new FileData();
             numbers.filename = file.filePath;
@@ -198,11 +205,20 @@ public class CalcStandardStatistics extends LongProcessThread {
                 numbers.total.charsWithSpaces += chars;
 
 		Integer uniqueCount = uniqueSegment.get(src);
-		if (uniqueCount == 1) {
+		Boolean firstSeen = firstSeenUniqueSegment.get(src);
+		if (firstSeen == null) {
+		    firstSeenUniqueSegment.put(src, false);
 		    numbers.unique.segments++;
 		    numbers.unique.words += words;
 		    numbers.unique.charsWithoutSpaces += charsNoSpaces;
 		    numbers.unique.charsWithSpaces += chars;
+
+		    if (tr == null) {
+			numbers.remainingUnique.segments++;
+			numbers.remainingUnique.words += words;
+			numbers.remainingUnique.charsWithoutSpaces += charsNoSpaces;
+			numbers.remainingUnique.charsWithSpaces += chars;
+		    }
 		}
 
                 if (tr == null) {
@@ -254,7 +270,7 @@ public class CalcStandardStatistics extends LongProcessThread {
 
     protected static String[][] calcFilesTable(
             final ProjectProperties m_config, final List<FileData> counts) {
-        String[][] table = new String[counts.size()][13];
+        String[][] table = new String[counts.size()][17];
 
         int r = 0;
         for (FileData numbers : counts) {
@@ -263,16 +279,22 @@ public class CalcStandardStatistics extends LongProcessThread {
             table[r][1] = Integer.toString(numbers.total.segments);
             table[r][2] = Integer.toString(numbers.remaining.segments);
             table[r][3] = Integer.toString(numbers.unique.segments);
-            table[r][4] = Integer.toString(numbers.total.words);
-            table[r][5] = Integer.toString(numbers.remaining.words);
-            table[r][6] = Integer.toString(numbers.unique.words);
-            table[r][7] = Integer.toString(numbers.total.charsWithoutSpaces);
-            table[r][8] = Integer
+            table[r][4] = Integer.toString(numbers.remainingUnique.segments);
+            table[r][5] = Integer.toString(numbers.total.words);
+            table[r][6] = Integer.toString(numbers.remaining.words);
+            table[r][7] = Integer.toString(numbers.unique.words);
+            table[r][8] = Integer.toString(numbers.remainingUnique.words);
+            table[r][9] = Integer.toString(numbers.total.charsWithoutSpaces);
+            table[r][10] = Integer
                     .toString(numbers.remaining.charsWithoutSpaces);
-            table[r][9] = Integer.toString(numbers.unique.charsWithoutSpaces);
-            table[r][10] = Integer.toString(numbers.total.charsWithSpaces);
-            table[r][11] = Integer.toString(numbers.remaining.charsWithSpaces);
-            table[r][12] = Integer.toString(numbers.unique.charsWithSpaces);
+            table[r][11] = Integer.toString(numbers.unique.charsWithoutSpaces);
+            table[r][12] = Integer
+		    .toString(numbers.remainingUnique.charsWithoutSpaces);
+            table[r][13] = Integer.toString(numbers.total.charsWithSpaces);
+            table[r][14] = Integer.toString(numbers.remaining.charsWithSpaces);
+            table[r][15] = Integer.toString(numbers.unique.charsWithSpaces);
+            table[r][16] = Integer
+		    .toString(numbers.remainingUnique.charsWithSpaces);
             r++;
         }
         return table;
@@ -280,12 +302,13 @@ public class CalcStandardStatistics extends LongProcessThread {
 
     public static class FileData {
         public String filename;
-        public StatCount total, unique, remaining;
+        public StatCount total, unique, remaining, remainingUnique;
 
         public FileData() {
             total = new StatCount();
 	    unique = new StatCount();
             remaining = new StatCount();
+            remainingUnique = new StatCount();
         }
     }
 }

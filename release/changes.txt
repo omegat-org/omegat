@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 3
 ----------------------------------------------------------------------
-  1 Enhancement
-  0 Bugfix
+  2 Enhancements
+  1 Bugfix
 ----------------------------------------------------------------------
 2.1.7 update 3 vs. 2.1.7 update 2
 
@@ -15,6 +15,12 @@
   
   - OpenXML filter: new options to translate diagrams (Word) and 
 charts (PowerPoint)
+
+  Bug fixes:
+
+  - In some circumstances, the search results could be all highlighted.
+The issue was not totally corrected in update 2
+
 
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2

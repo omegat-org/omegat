@@ -111,9 +111,10 @@ class EntryListPane extends JTextPane {
         m_entryList.clear();
         m_offsetList.clear();
         matches.clear();
+        setText("");
+        setDocument(new DefaultStyledDocument());
         if (entries == null) {
             // just reset
-            setText("");
             return;
         }
 

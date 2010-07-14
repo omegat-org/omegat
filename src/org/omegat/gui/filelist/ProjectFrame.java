@@ -605,7 +605,6 @@ public class ProjectFrame extends JFrame {
 
         protected void setValue(Object value) {
             if (pattern != null && value instanceof Number) {
-                Log.log("DEBUG: class="+value.getClass().getName()+" val="+value);
                 super.setValue(pattern.format((Number) value));
             } else {
                 super.setValue(value);

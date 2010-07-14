@@ -70,7 +70,7 @@ public class OpenXMLDialect extends DefaultXMLDialect
             "c:f",
             // Word
             "wp:align",
-            "w:drawing",
+            "wp:posOffset",
         });        
     }
 }

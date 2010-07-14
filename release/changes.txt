@@ -2,7 +2,7 @@
  OmegaT 2.1.7 update 3
 ----------------------------------------------------------------------
   2 Enhancements
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.1.7 update 3 vs. 2.1.7 update 2
 
@@ -23,6 +23,12 @@ The issue was not totally corrected in update 2
 
   - Superfluous debug message (visible in the console and in the log),
 e.g., 15082: Info: DEBUG: class=java.lang.Integer val=24, has been removed
+
+  - OpenXML filter: for some Word shapes, the text presented to the 
+translator was not the text visible in Word 2007/2010, but only the "fallback"
+text for backward compatibility. As a result, the text appeared untranslated 
+in the target document. Now both text are presented to the
+translator.
 
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2

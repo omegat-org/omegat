@@ -2,7 +2,7 @@
  OmegaT 2.1.7 update 3
 ----------------------------------------------------------------------
   2 Enhancements
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.7 update 3 vs. 2.1.7 update 2
 
@@ -21,6 +21,8 @@ charts (PowerPoint)
   - In some circumstances, the search results could be all highlighted.
 The issue was not totally corrected in update 2
 
+  - Superfluous debug message (visible in the console and in the log),
+e.g., 15082: Info: DEBUG: class=java.lang.Integer val=24, has been removed
 
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2

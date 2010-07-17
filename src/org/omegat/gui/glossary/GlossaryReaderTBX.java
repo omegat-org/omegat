@@ -99,7 +99,7 @@ public class GlossaryReaderTBX {
                 // We use only the language code
                 String lang = termLanguage.getLanguageCode();
                 for (Object o : ls.getTigOrNtig()) {
-                    if (o instanceof Tig){
+                    if (o instanceof Tig) {
                         Tig t = (Tig) o;
                         if (sLang.equalsIgnoreCase(lang)) {
                             sTerms.add(readContent(t.getTerm().getContent()));

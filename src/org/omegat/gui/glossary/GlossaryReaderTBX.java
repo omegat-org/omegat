@@ -28,6 +28,7 @@ import gen.core.tbx.Descrip;
 import gen.core.tbx.DescripGrp;
 import gen.core.tbx.LangSet;
 import gen.core.tbx.Martif;
+import gen.core.tbx.Ntig;
 import gen.core.tbx.TermEntry;
 import gen.core.tbx.TermNote;
 import gen.core.tbx.Tig;
@@ -98,7 +99,7 @@ public class GlossaryReaderTBX {
                 // We use only the language code
                 String lang = termLanguage.getLanguageCode();
                 for (Object o : ls.getTigOrNtig()) {
-                    if (o instanceof Tig) {
+                    if (o instanceof Tig){
                         Tig t = (Tig) o;
                         if (sLang.equalsIgnoreCase(lang)) {
                             sTerms.add(readContent(t.getTerm().getContent()));
@@ -107,6 +108,15 @@ public class GlossaryReaderTBX {
                             appendDescOrNote(t.getTermNote(), note);
                         }
                         appendDescOrNote(t.getDescripOrDescripGrpOrAdmin(), descTig);
+                    } else if (o instanceof Ntig) {
+                        Ntig n = (Ntig) o;
+                        if (sLang.equalsIgnoreCase(lang)) {
+                            sTerms.add(readContent(n.getTermGrp().getTerm().getContent()));
+                        } else if (tLang.equalsIgnoreCase(lang)) {
+                            tTerms.add(readContent(n.getTermGrp().getTerm().getContent()));
+                            appendDescOrNote(n.getTermGrp().getTermNoteOrTermNoteGrp(), note);
+                        }
+                        appendDescOrNote(n.getDescripOrDescripGrpOrAdmin(), descTig);
                     }
                 }
             }

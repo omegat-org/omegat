@@ -21,8 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
-
+ **************************************************************************/
 
 package org.omegat.core.spellchecker;
 
@@ -35,20 +34,12 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.UnsupportedEncodingException;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.charset.CharacterCodingException;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.logging.Logger;
 
-import org.dts.spell.dictionary.OpenOfficeSpellDictionary;
-import org.dts.spell.dictionary.SpellDictionary;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
@@ -56,84 +47,42 @@ import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
-import org.omegat.util.Platform;
 import org.omegat.util.Preferences;
-import org.omegat.util.StaticUtils;
-
-import com.sun.jna.Native;
-import com.sun.jna.Pointer;
-import com.sun.jna.ptr.PointerByReference;
 
 /**
- * Spell check implementation for use Hunspell or JMySpell.
+ * Common spell checker interface for use any spellchecker providers.
  * 
  * @author Zoltan Bartko (bartkozoltan at bartkozoltan dot com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
 public class SpellChecker implements ISpellChecker {
-    /** Local logger. */
-    private static final Logger LOGGER = Logger.getLogger(SpellChecker.class
-            .getName());
+    /** The spell checking provider. */
+    private ISpellCheckerProvider checker;
 
-    /**
-     * The spell checking interface
-     */
-    private Hunspell hunspell;
-
-    private Hunspell hunspellSave;
-    
-    private org.dts.spell.SpellChecker jmyspell;
-    
     /** the list of ignored words */
     private List<String> ignoreList = new ArrayList<String>();
-    
+
     /** the list of learned (valid) words */
     private List<String> learnedList = new ArrayList<String>();
-    
+
     /** Cache of correct words. */
     private final Set<String> correctWordsCache = new HashSet<String>();
     /** Cache of incorrect words. */
     private final Set<String> incorrectWordsCache = new HashSet<String>();
 
-    /** the pointer to the hunspell class */
-    private Pointer pHunspell = null;
-    
-    /** dictionary encoding */
-    private String encoding;
-    
     /**
      * the file name with the ignored words
      */
     private String ignoreFileName;
-    
+
     /**
      * the file name with the learned words
      */
     private String learnedFileName;
-    
+
     /** Creates a new instance of SpellChecker */
-    public  SpellChecker() {
-        String libraryPath;
-        if (Platform.isWebStart()) {
-            libraryPath = Native
-                    .getWebStartLibraryPath(OConsts.SPELLCHECKER_LIBRARY_NAME)
-                    + File.separator
-                    + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
-        } else {
-            libraryPath = StaticUtils.installDir() + File.separator
-                    + OConsts.NATIVE_LIBRARY_DIR + File.separator
-                    + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
-        }
-        
-        try {
-            hunspell = (Hunspell) Native.loadLibrary(libraryPath, Hunspell.class);
-            Log.log("Hunspell loaded successfully from " + libraryPath);
-        } catch (Exception ex) {
-            Log.log("Error loading hunspell: "+ex.getMessage());
-        } catch (Error err) {
-            Log.log("Error loading hunspell: "+err.getMessage());
-        }
+    public SpellChecker() {
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 switch (eventType) {
@@ -157,71 +106,31 @@ public class SpellChecker implements ISpellChecker {
             }
         });
     }
-    
+
     /**
-     * Initialize the library for the given project. Loads the lists of ignored 
+     * Initialize the library for the given project. Loads the lists of ignored
      * and learned words for the project
      */
     public void initialize() {
-        
         // initialize the spell checker - get the data from the preferences
-        
-        String language = 
-                Core.getProject().getProjectProperties().getTargetLanguage()
-                .getLocaleCode();
-        
-        String dictionaryDir = Preferences.getPreference(
-                Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY);
-        
+        String language = Core.getProject().getProjectProperties()
+                .getTargetLanguage().getLocaleCode();
+
+        String dictionaryDir = Preferences
+                .getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY);
+
         if (dictionaryDir != null) {
-            String affixName = dictionaryDir + File.separator + language +
-                    OConsts.SC_AFFIX_EXTENSION;
+            String affixName = dictionaryDir + File.separator + language
+                    + OConsts.SC_AFFIX_EXTENSION;
 
-            String dictionaryName = dictionaryDir + File.separator + language +
-                    OConsts.SC_DICTIONARY_EXTENSION;
-            
-            // Prevents Hunspell from crashing if the dictionary doesn't exist
-            // That's a hack. Ideally, the fact that the Hunspell library
-            // could be loaded (i.e., hunspell != null) should be separated
-            // from the fact that there is
-            // a dictionary available for a given project
-            File dicFile = new File(dictionaryName);
-            if (!dicFile.exists()){
-                if (hunspell != null){
-                    hunspellSave = hunspell; // Save for the next project
-                    hunspell = null;
-                }
-                return;
-            }
-            if (hunspell == null && hunspellSave != null)
-                hunspell = hunspellSave;
-            // End of hack
+            String dictionaryName = dictionaryDir + File.separator + language
+                    + OConsts.SC_DICTIONARY_EXTENSION;
 
-            if (hunspell != null) {
-                pHunspell = hunspell.Hunspell_create(affixName, dictionaryName);
-                encoding = hunspell.Hunspell_get_dic_encoding(pHunspell);
-                LOGGER
-                        .finer("Initialize SpellChecker by Hunspell for language '"
-                                + language + "' dictionary " + dictionaryName);
-            } else {
-                try {
-                    SpellDictionary dict = new OpenOfficeSpellDictionary(new File(dictionaryName), new File(affixName), false);
-                    jmyspell = new org.dts.spell.SpellChecker(dict);
-                    jmyspell.setCaseSensitive(false);
-                } catch (Exception ex) {
-                    Log.log("Error loading jmyspell: " + ex.getMessage());
-                    return;
-                }
-                LOGGER
-                        .finer("Initialize SpellChecker by JMySpell for language '"
-                                + language + "' dictionary " + dictionaryName);
-            }            
             // find out the internal project directory
-            String projectDir = 
-                    Core.getProject().getProjectProperties().getProjectInternal();
+            String projectDir = Core.getProject().getProjectProperties()
+                    .getProjectInternal();
 
             // load the ignore list
-
             ignoreFileName = projectDir + OConsts.IGNORED_WORD_LIST_FILE_NAME;
 
             // Since we read from disk, we clean the list first
@@ -229,52 +138,61 @@ public class SpellChecker implements ISpellChecker {
             fillWordList(ignoreFileName, ignoreList);
 
             // now the correct words
-
             learnedFileName = projectDir + OConsts.LEARNED_WORD_LIST_FILE_NAME;
 
             // Since we read from disk, we clean the list first
             learnedList = new ArrayList<String>();
             fillWordList(learnedFileName, learnedList);
-            if (hunspell != null) {
+
+            checker = null;
+            if (new File(dictionaryName).exists()) {
                 try {
-                    // load the learned words into the spell checker
-                    for (int i = 0; i < learnedList.size(); i++) {
-                        addWord(pHunspell, prepareString((String) learnedList.get(i)));
-                    }
-                } catch (UnsupportedEncodingException ex) {
-                    Log.log("Unsupported encoding " + encoding);
+                    checker = new SpellCheckerHunspell(language,
+                            dictionaryName, affixName);
+                } catch (Exception ex) {
+                    Log.log("Error loading hunspell: " + ex.getMessage());
+                } catch (Error err) {
+                    Log.log("Error loading hunspell: " + err.getMessage());
                 }
+                if (checker == null) {
+                    try {
+                        checker = new SpellCheckerJMySpell(language,
+                                dictionaryName, affixName);
+                    } catch (Exception ex) {
+                        Log.log("Error loading jmyspell: " + ex.getMessage());
+                    }
+                }
+            }
+            if (checker == null) {
+                checker = new SpellCheckerDummy();
+                Log.log("No spell checker loaded");
+            }
+            for (String w : learnedList) {
+                checker.learnWord(w);
             }
         }
     }
-    
+
     /**
      * destroy the library
      */
     public void destroy() {
-        if (pHunspell != null) {
-            hunspell.Hunspell_destroy(pHunspell);
-            
-            saveWordLists();
-            pHunspell = null;
-        }
-        if (jmyspell != null) {
-            jmyspell = null;
-        }
-
+        saveWordLists();
+        checker.destroy();
+        checker = null;
     }
-    
+
     protected void resetCache() {
         synchronized (this) {
             incorrectWordsCache.clear();
             correctWordsCache.clear();
         }
     }
-    
+
     /**
      * Save the word lists to disk
      */
-    public void saveWordLists(){
+    public void saveWordLists() {
         // Write the ignored and learned words to the disk
         dumpWordList(ignoreList, ignoreFileName);
         dumpWordList(learnedList, learnedFileName);
@@ -283,30 +201,30 @@ public class SpellChecker implements ISpellChecker {
     /**
      * fill the word list (ignore or learned) with contents from the disk
      */
-    private void fillWordList(String filename, List<String> list) {         
+    private void fillWordList(String filename, List<String> list) {
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new InputStreamReader
-                    (new FileInputStream(filename), OConsts.UTF8));
-            
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(
+                    filename), OConsts.UTF8));
+
             String thisLine;
             while ((thisLine = br.readLine()) != null) {
                 list.add(thisLine);
-            } 
+            }
         } catch (FileNotFoundException ex) {
             // discard this
         } catch (IOException ex) {
             // so now what?
         } finally {
             try {
-                if (br != null) 
+                if (br != null)
                     br.close();
             } catch (IOException ex) {
                 // so now what?
             }
         }
     }
-    
+
     /**
      * dump word list to a file
      */
@@ -315,8 +233,8 @@ public class SpellChecker implements ISpellChecker {
             return;
         BufferedWriter bw = null;
         try {
-            bw = new BufferedWriter(new OutputStreamWriter
-                                 (new FileOutputStream(filename),OConsts.UTF8));
+            bw = new BufferedWriter(new OutputStreamWriter(
+                    new FileOutputStream(filename), OConsts.UTF8));
 
             for (String text : list) {
                 bw.write(text);
@@ -333,9 +251,9 @@ public class SpellChecker implements ISpellChecker {
             }
         }
     }
-    
+
     /**
-     * Check the word. If it is ignored or learned (valid), returns true. 
+     * Check the word. If it is ignored or learned (valid), returns true.
      * Otherwise false.
      */
     public boolean isCorrect(String word) {
@@ -347,28 +265,16 @@ public class SpellChecker implements ISpellChecker {
                 return true;
             }
         }
-        
+
         boolean isCorrect;
-        
+
         // if it is valid (learned), it is ok
         if (learnedList.contains(word) || ignoreList.contains(word)) {
             isCorrect = true;
-        } else if (pHunspell != null) {
-            isCorrect = false;
-            try {
-                if (0 != hunspell
-                        .Hunspell_spell(pHunspell, prepareString(word))) {
-                    isCorrect = true;
-                }
-            } catch (UnsupportedEncodingException ex) {
-                Log.log("Unsupported encoding " + encoding);
-            }
-        } else if (jmyspell != null) {
-            isCorrect = jmyspell.isCorrect(word);
         } else {
-            isCorrect = true;
+            isCorrect = checker.isCorrect(word);
         }
-        
+
         // remember in cache
         synchronized (this) {
             if (isCorrect) {
@@ -379,70 +285,18 @@ public class SpellChecker implements ISpellChecker {
         }
         return isCorrect;
     }
-    
+
     /**
      * return a list of strings as suggestions
      */
     public List<String> suggest(String word) {
-        List<String> aList = new ArrayList<String>();
-        
-        if (isCorrect(word))
-            return aList;
-        
-        if (pHunspell!=null) {        
-            // the pointer to the string reference to be sent
-            PointerByReference strings = new PointerByReference();
-
-            // total suggestions
-            int total = 0;
-            try {
-                // try some wrong word
-                total = hunspell.Hunspell_suggest(
-                        pHunspell, strings, prepareString(word));
-            } catch (UnsupportedEncodingException ex) {
-                Log.log("Unsupported encoding "+encoding);
-            }
-
-            Pointer[] pointerArray = null;
-            Pointer pointer = strings.getValue();
-            if (pointer != null)
-            try {
-                pointerArray = pointer.getPointerArray(0,total);
-            } catch (NullPointerException ex) {
-              // Just eat exception
-            }
-
-            if (pointerArray != null) { // If there are sugggestions
-                // convert it back
-                Charset charset = Charset.forName(encoding);
-                CharsetDecoder decoder = charset.newDecoder();
-
-                for (int i = 0; i < total; i++) {
-                    try {
-                        // get the string
-                        int bufferCursor = 0;
-                        byte[] buffer = new byte[100];
-                        byte current;
-                        while (bufferCursor < 100 &&
-                                (current = pointerArray[i].getByte(bufferCursor)) != 0) {
-                            buffer[bufferCursor]=current;
-                            bufferCursor++;
-                        }
-
-                        CharBuffer cbuf = decoder.decode(ByteBuffer.wrap(buffer));
-                        aList.add(cbuf.toString().trim());
-                    } catch (CharacterCodingException ex) {
-                        Log.log("Unsupported encoding "+encoding);
-                    }
-                }
-            }
-        } else if (jmyspell != null) {
-            aList.addAll(jmyspell.getDictionary().getSuggestions(word, 20));
+        if (isCorrect(word)) {
+            return Collections.EMPTY_LIST;
         }
-        
-        return aList;
+
+        return checker.suggest(word);
     }
-    
+
     /**
      * Add a word to the list of ignored words
      */
@@ -455,99 +309,17 @@ public class SpellChecker implements ISpellChecker {
             }
         }
     }
-    
+
     /**
      * Add a word to the list of correct words
      */
     public void learnWord(String word) {
         if (!learnedList.contains(word)) {
             learnedList.add(word);
-            if (pHunspell != null) {
-                try {
-                    addWord(pHunspell, prepareString(word));
-                } catch (UnsupportedEncodingException ex) {
-                    Log.log("Unsupported encoding " + encoding);
-                }            
-            }
+            checker.learnWord(word);
             synchronized (this) {
                 incorrectWordsCache.remove(word);
                 correctWordsCache.add(word);
-            }
-        }
-    }
-    
-    /**
-     * convert the string a byte array in the encoding of the dictionary and 
-     * add a terminating NUL to the end.
-     */
-    protected byte[] prepareString(String word) throws UnsupportedEncodingException {
-        return (word+"\u0000").getBytes(encoding);
-    } 
-    
-    /**
-     * amended version of System.mapLibraryName().
-     * shamelessly stolen from JNA (https://jna.dev.java.net)
-     */
-    private static String mapLibraryName(String libName) {
-        
-        if (Platform.isMac()) {
-            if (libName.matches("lib.*\\.(dylib|jnilib)$")) {
-                return libName;
-            }
-            String name = System.mapLibraryName(libName);
-            // On MacOSX, System.mapLibraryName() returns the .jnilib extension
-            // (the suffix for JNI libraries); ordinarily shared libraries have 
-            // a .dylib suffix
-            if (name.endsWith(".jnilib")) {
-                return name.substring(0, name.lastIndexOf(".jnilib")) + ".dylib";
-            }
-            return name;
-        } else if (Platform.isLinux()) {
-            //
-            // A specific version was requested - use as is for search
-            //
-            if (libName.matches("lib.*\\.so\\.[0-9]+$")) {
-                return libName;
-            }
-            libName = libName + "-" + System.getProperty("os.arch");
-        } 
-        
-        return System.mapLibraryName(libName);
-    }
-
-    /**
-     * If Hunspell_add is not supported, whether this has already
-     * be recorded in the log
-     */
-    private boolean addNotSupportedLogged = false;
-
-    /**
-     * Whether adding words to Hunspell works or not
-     */
-    private boolean addToHunspell = true;
-
-    /**
-     * Try to use Hunspell_add to add a word to the dictionnary.
-     * If that fails, try to use Hunspell_put_word
-     * (old Hunspell librairies). If that fails too, set hunspell to null
-     * @param pHunspell Pointer to the Hunspell class
-     * @param word Word to add
-     */
-    private void addWord(Pointer pHunspell, byte[] word){
-        if (!addToHunspell)
-            return;
-        try {
-            hunspell.Hunspell_add(pHunspell, word);
-        } catch (Error err1) {
-            if (!addNotSupportedLogged){
-                Log.log("Hunspell_add not supported");
-                addNotSupportedLogged = true;
-            }
-            try {
-                hunspell.Hunspell_put_word(pHunspell, word);
-            } catch (Error err2) {
-                Log.log("Hunspell_put_word not supported");
-                addToHunspell = false;
             }
         }
     }

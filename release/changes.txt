@@ -2,7 +2,7 @@
  OmegaT 2.1.7 update 3
 ----------------------------------------------------------------------
   2 Enhancements
-  4 Bugfixes
+  5 Bugfixes
 ----------------------------------------------------------------------
 2.1.7 update 3 vs. 2.1.7 update 2
 
@@ -32,6 +32,9 @@ translator.
 
   - Some TBX glossaries were not read (e.g., Microsoft glossaries)
 
+  - Webstart jnidispatch error on Windows 64-bit
+  http://sourceforge.net/support/tracker.php?aid=3024102
+  
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2
 ----------------------------------------------------------------------

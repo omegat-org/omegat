@@ -2,7 +2,7 @@
  OmegaT 2.1.7 update 3
 ----------------------------------------------------------------------
   2 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 ----------------------------------------------------------------------
 2.1.7 update 3 vs. 2.1.7 update 2
 
@@ -29,6 +29,8 @@ translator was not the text visible in Word 2007/2010, but only the "fallback"
 text for backward compatibility. As a result, the text appeared untranslated 
 in the target document. Now both text are presented to the
 translator.
+
+  - Some TBX glossaries were not read (e.g., Microsoft glossaries)
 
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2

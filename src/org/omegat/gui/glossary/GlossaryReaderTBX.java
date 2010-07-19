@@ -98,6 +98,7 @@ public class GlossaryReaderTBX {
                 Language termLanguage = new Language(ls.getLang());
                 // We use only the language code
                 String lang = termLanguage.getLanguageCode();
+                appendDescOrNote(ls.getDescripOrDescripGrpOrAdmin(), descTig);
                 for (Object o : ls.getTigOrNtig()) {
                     if (o instanceof Tig) {
                         Tig t = (Tig) o;

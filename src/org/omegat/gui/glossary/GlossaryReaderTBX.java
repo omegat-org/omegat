@@ -146,7 +146,7 @@ public class GlossaryReaderTBX {
             String line = null;
             if (o instanceof Descrip) {
                 Descrip d = (Descrip) o;
-                line = d.getType() + ':' + readContent(d.getContent());
+                line = d.getType() + ": " + readContent(d.getContent());
             } else if (o instanceof DescripGrp) {
                 DescripGrp dg = (DescripGrp) o;
                 line = dg.getDescrip().getType() + ": "

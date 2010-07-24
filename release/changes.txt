@@ -9,7 +9,7 @@
   Other enhancements:
 
   - Italian localisation updated to 2.1.7 (UI, Readme, Instant Start)
-  - Spanish localisation updated to 2.1 (Instant Start, documentation)
+  - Spanish localisation updated to 2.1.7 (UI, Readme, Instant Start, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 3

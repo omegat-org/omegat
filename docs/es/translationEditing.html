@@ -1,0 +1,94 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Editando la Traducción ― OmegaT 2.1 Manual de Usuario</title>
+</head>
+
+<body>
+  <h2>Comportamiento del campo de edición</h2>
+
+  <ul>
+    <li>
+      <p><a href="#auto_insert">Insertando coincidencias automáticamente</a></p>
+    </li>
+
+    <li>
+      <p><a href="#validation">Permitir que la traducción sea igual al original</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Export">&amp;Exportar el segmento a un archivo de texto</a></p>
+    </li>
+  </ul><img alt="Comportamiento del campo de edición ― Diálogo" src=
+  "images/EditingBehaviourOptions.png"><br>
+
+  <p>Este cuadro de diálogo, disponible en Opciones → Comportamiento del campo de edición..., permite al usuario determinar, cómo inicializar y manipular el segmento actual.</p>
+
+  <h2><a name="auto_insert" id="auto_insert"></a>Insertando coincidencias automáticamente</h2>
+
+  <p>Usted traduce sus archivos moviéndose de segmento a segmento, al mismo tiempo que edita el segmento en curso. Cuando se mueve entre los segmentos, es posible desee que el campo de edición se rellene con la traducción existente o con el texto original.</p>
+
+  <p>En <strong>Opciones → Comportamiento del campo de edición...</strong> OmegaT le ofrece las siguientes alternativas:</p>
+
+  <table summary="sólo formatea" cellpadding="2" cellspacing="2">
+    <tr valign="top">
+      <td>
+        <p><strong>El texto original</strong></p>
+      </td>
+
+      <td>
+        <p>puede rellenar automáticamente el campo de edición con el texto original. Esto es bastante útil para texto que contienen muchas marcas y otros nombres propios que necesita dejar intactos.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>Dejar el segmento vacío</strong></p>
+      </td>
+
+      <td>
+        <p>OmegaT deja en blanco el campo de edición. Esta opción le permite introducir la traducción sin la necesidad de eliminar el texto fuente, lo cual le ahorra un par de pulsaciones de teclado (<code>Ctrl+A</code> y <code>Del</code>)</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>Insertar la coincidencia parcial más parecida</strong></p>
+      </td>
+
+      <td>
+        <p>OmegaT insertará la traducción de la cadena más parecida a la fuente actual, si está por encima del umbral de similitud, establecida en el diálogo (100% en el caso de arriba). Si se encuentra la coincidencia, el segmento destino tendrá un prefijo, especificado en el campo de texto ([Prefijo] en el ejemplo anterior). Esto, más tarde, facilita la búsqueda de segmentos pretraducidos.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="validation" id="validation"></a>Permitir que la traducción sea igual al original</h2>
+
+  <p>Los documentos que necesita traducir podrían contener marcas, nombres u otros nombres propios que tienen que ser los mismos en los documentos traducidos. Hay dos estrategias para segmentos que únicamente contengan tal texto invariable.</p>
+
+  <p>Usted puede decidir no traducir en absoluto tales segmentos ― como resultado OmegaT informará de estos segmentos como que no se han traducido. Este es el predeterminado.</p>
+
+  <p>La alternativa es introducir la traducción, incluso si es igual al texto original, de modo que OmegaT recuerde que ha revisado el texto y decidió quedarse con el segmento destino igual al original. Para poder hacerlo, vaya a <strong>Opciones → Comportamiento del campo de edición...</strong> y marque la casilla <strong>Permitir traducciones idénticas al original</strong>.</p>
+
+  <h2><a name="Export" id="Export"></a>&amp;Exportar el segmento a un archivo de texto</h2>
+
+  <p>Es posible que prefiera dejar sin traducir los segmentos como están y volver más tarde para ellos. En este caso, usted puede activar la casilla de verificación Permitir que la traducción sea igual al original y OmegaT guardará los segmentos originales, por ejemplo a un archivo para traducirlos más adelante.</p>
+  <hr>
+
+  <table summary="sólo formatea" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Aviso Legal</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inicio</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice de Contenido</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

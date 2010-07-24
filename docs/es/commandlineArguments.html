@@ -1,0 +1,227 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Argumentos de la Línea de Comandos ― OmegaT 2.1 Manual de Usuario</title>
+</head>
+
+<body>
+  <h1>Argumentos de la Línea de Comandos</h1>
+
+  <p>OmegaT se puede ejecutar con argumentos extra que alteran el comportamiento de OmegaT o que dicen a OmegaT qué acciones realizar al arrancar. Para añadir los argumentos, tiene que escribir los comandos de inicio con los argumentos en la línea de comandos, o tiene que modificar el script que hace eso por usted. Para obtener más información de cómo iniciar OmegaT, consulte <a href="installingAndRunning.html">Instalación y ejecución</a>.
+  
+  </p>
+  <h2>Los argumentos alteran el comportamiento</h2>
+  
+  <p>Los argumentos que alteran el comportamiento de OmegaT, de hecho, son argumentos para la máquina virtual de Java.<br> Los argumentos se añaden después del "<em>java</em>" inicial y antes de la parte "<em>-jar OmegaT.jar</em>". Tenga en cuenta que en Windows usted puede cambiar el archivo <em>OmegaT.l4J.ini</em> para reflejar sus preferencias. En Mac OSX, puede cambiar el <em>Info.plist</em> ubicado en <em>OmegaT.app/Contents/</em> para obtener el mismo resultado.</p>
+
+  <p>A continuación se muestra una lista de posibles argumentos. Usted puede obtener mayor información sobre los argumentos tecleando <em>java</em> o <em>man java</em> en la ventana de la terminal ― <em>man</em> es un comando de la ventana de la terminal que muestra el manual del comando seleccionado. Su sistema puede o no tener un manual en su idioma para el comando <em>java</em>.</p>
+
+  <p><b>Idioma de la interfaz de usuario: </b><em>-Duser.language=XX</em></p>
+
+  <table summary="sólo formatea">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Normalmente, es decir, cuando lanza OmegaT sin ningún argumento, el programa, primero detecta el idioma del usuario del sistema operativo. Si hay disponible una interfaz de usuario en ese idioma, OmegaT lo utiliza. Por lo tanto, si el sistema operativo del usuario es Ruso y OmegaT está traducido al Ruso, OmegaT muestra una interfaz de usuario Rusa, con los menús de Rusia, etc. Si el idioma del sistema del usuario no está disponible, de manera predeterminada OmegaT estará en Inglés. Este es el comportamiento estándar.<br> <br> El argumento "<em>-Duser.language=XX</em>" provoca que OmegaT utilice el idioma especificado en lugar del idioma de usuario del sistema operativo. "XX" en el comando representa el código de dos dígitos del idioma deseado. Para lanzar OmegaT con una interfaz en Francés (por ejemplo, en un sistema operativo Ruso), por lo tanto el comando sería:</p>
+
+          <p><em>java -Duser.language=fr -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Configuración de país del usuario:</strong><em>&nbsp;-Duser.country=XX</em></p>
+  
+  <table summary="sólo formatea">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>En seguida del idioma, también puede especificar el país, por ejemplo CN o TW en caso de idioma Chino. Para obtener la guía de inicio rápido correcta, tiene que especificar tanto el idioma como el país. Esto es necesario incluso si sólo hay una combinación disponible, como pt_BR en el caso de Portugués / Brasil.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Antialiasing del tipo de letra:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
+
+  <table summary="sólo formatea">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Este argumento afecta el antialiasing del texto, mejorando así su apariencia.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Antialiasing del tipo de letra (Java 6 en adelante) :</strong><em>&nbsp;-</em><span style=
+  "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
+
+  <table summary="sólo formatea">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>&nbsp;Los valores posibles para "XX" son "false", "on", "gasp" y "lcd". Los usuarios de Linux pueden encontrar que, dependiendo del tamaño y tipo de letra seleccionado, "on" o "lcd" mejoran la apariencia de los tipos de letras.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Asignación de memoria:</strong><em>&nbsp;-XmxZZM</em></p>
+
+  <table summary="sólo formatea">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Este comando asigna más memoria a OmegaT. De manera predeterminada, se asignan 256 MB, por lo que no hay ninguna ventaja en asignar una cifra menor a esta. "ZZ" determina la cantidad de memoria asignada, en megabytes. El comando para lanzar OmegaT con una asignación de memoria de 1024 MB (1 GB) por lo tanto es:</p>
+
+          <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Dirección y puerto para el servidor proxy:</strong><em>&nbsp;-Dhttp.proxyHost=&lt;servidor dirección IP&gt;&nbsp;-Dhttp.proxyPort=&lt;número de puerto&gt;</em></p>
+
+  <table summary="sólo formatea">
+    <tbody>
+      <tr>
+        <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+
+        <td>
+          <p>Este comando define un servidor proxy, para poder acceder e la Internet de detrás de un proxy.</p>
+
+          <p><em>java -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar
+          OmegaT.jar</em></p>
+
+          <p>Se pueden combinar los argumentos: para lanzar OmegaT con todos los ejemplos descritos anteriormente, el comando sería:<br> <em>java -Dswing.aatext=true -Duser.language=pt -Duser.country=BR -Xmx1024M -Dhttp.proxyHost=192.198.1.1 -Dhttp.proxyPort=3128 -jar OmegaT.jar</em></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <h2>Argumentos de acción</h2>
+  
+  <p>Los siguientes comandos le dicen a OmegaT qué hacer. Estos se tienen que colocar DESPUÉS de la parte "<em>-jar OmegaT.jar</em>". Usted tiene que añadir los argumentos al script de arranque o escribirlos usted mismo en la línea de comandos. Usted no puede ponerlos en un archivo de configuración, si el comportamiento altera los argumentos.</p>
+  
+  <table style="width: 80%;" cellpadding="2" cellspacing="2" summary=
+  "sólo formatea">
+    <tbody>
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>&lt;directorio-del-proyecto&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>le dice  a OmegaT que al arrancar, cargue el proyecto especificado. Por ejemplo, <code>/home/usuario/proyectos_omegat/miProyecto</code> o <code>"C:\Ubicación de Proyectos\MiProyecto"</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--config-dir=&lt;directorio-de-configuración&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;permite decirle a OmegaT en qué directorio están almacenados los archivos de configuración. Si no se indica, OmegaT carga los valores predeterminados (directorio OmegaT bajo el home del usuario, o si no está disponible: el directorio de trabajo actual).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--mode=[console-translate |
+        console-createpseudotranslatetmx]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;OmegaT inicia en <a href="consoleMode.html">modo consola</a>. Si el modo es <code>console-translate</code> traducirá el proyecto. Si el modo es <code>createpseudotranslatetmx</code> creará un archivo de memoria traducción (especificado por el parámetro <code>--pseudotranslatetmx</code>) incluyendo todos los segmentos del proyecto, incluso aquellos segmentos que no se hubiesen traducidos antes. La traducción de los segmentos depende del parámetro <code>--pseudotranslatetype</code>. La memoria de traducción es igual al formato de OmegaT, y por lo tanto se puede utilizar en OmegaT. Vea también <a href=
+          "translationMemories.html#pseudo_translate">Memorias de traducción</a></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--source-pattern=&lt;expresión regular&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Sólo es válido cuando el modo es <code>console-translate</code>. Especifica qué archivos fuente se deben traducir. Los subdirectorios de destino, sin embargo, son creados independentemente de que algunos archivos fuente coincidan o no. El parámetro es una expresión regular. Ejemplos:</p>
+
+          <ul>
+            <li><code>.*</code> :Todos los archivos serán traducidos. Esto es equivalente a no utilizar el parámetro.</li>
+
+            <li><code>.*\.html</code>: todos los archivos HTML serán traducidos.</li>
+
+            <li><code>dir-10\\prueba\.html</code>: únicamente será traducido el archivo <code>prueba.html</code> en el directorio <code>dir-10</code>. Los directorios son relativos a la raíz del directorio fuente del proyecto. El separador de directorio es dependiente de la plataforma. bajo Windows debe utilizar <code>\\</code> y <code>/</code> en otras plataformas.</li>
+
+            <li><code>prueba\.html</code>: únicamente traducirá el archivo <code>prueba.html</code> en la raíz del directorio fuente. Si hay otros archivos llamados prueba.html en otros directorios, serán omitidos.</li>
+          </ul>
+
+          <p>El parámetro es opcional y de manera predeterminada es <code>.*</code>.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetmx=&lt;archivo.tmx&gt;</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Sólo es válido cuando el modo es <code>console-createpseudotranslatetmx</code>. Especifica a cual archivo escribir la memoria de traducción. Si el nombre del archivo no termina con la extensión <code>.tmx</code>, ésta se agregará automáticamente. El nombre puede ser absoluto o relativo al directorio de trabajo (el directorio en dónde arrancó OmegaT).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--pseudotranslatetype=[empty|equal]</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Sólo es válido cuando el modo es <code>console-createpseudotranslatetmx</code>. Especifica qué tipo de traducción se va a crear para cada segmento. Los valores posibles son:</p>
+
+          <ul>
+            <li><code>empty</code>: el segmento destino será un segmento vacío</li>
+
+            <li><code>equal</code>: el segmento destino será igual al segmento fuente.</li>
+          </ul>
+
+          <p>El parámetro es opcional y de manera predeterminada es <code>equal</code>.</p>
+        </td>
+      </tr>
+      
+      <tr>
+        <td style="text-align: left;" valign="top">
+        <p><code>--quiet</code></p></td>
+
+        <td style="text-align: left;" valign="top">
+          <p>&nbsp;Sólo es válido en mode-console. En modo silencioso (quit), se muestra menos información en la pantalla. No muestra todos los mensajes que normalmente exhibe en la barra de estado.</p>
+
+          <p>El parámetro es opcional y de manera predeterminada los mensajes son registrados en la pantalla.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="sólo formatea">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Aviso Legal</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inicio</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice de Contenido</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>
+

@@ -1,0 +1,438 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Archivos y Directorios ― OmegaT 2.1 Manual de Usuario</title>
+</head>
+
+<body>
+  <h1>Archivos y Directorios de OmegaT</h1>
+
+  <ul>
+    <li>
+      <p><a href="#project">Archivos del proyecto de traducción</a></p>
+    </li>
+
+    <li>
+      <p><a href="#user">Archivos de usuario</a></p>
+    </li>
+
+    <li>
+      <p><a href="#application">Archivos de la aplicación</a></p>
+
+      <p>&nbsp;</p>
+    </li>
+  </ul>
+
+  <p>OmegaT trabaja con tres tipos de archivos.</p>
+
+  <ul>
+    <li>Los archivos del proyecto de traducción: Los que constituyen un proyecto de traducción. Perderlos puede afectar la integridad del proyecto y su capacidad para completar un trabajo. Los archivos del proyecto son los archivos más importantes en OmegaT. Estos son los archivos con los que tratará cotidianamente mientras traduce.</li>
+
+    <li>Los archivos de configuración del usuario: Se crean cuando el comportamiento de OmegaT es modificado por el usuario, puede acceder a ellos por medio de la configuración de preferencias. Perderlos, por lo general se traducirá en que OmegaT tenga que trabajar con la configuración de "fábrica". Esto a veces puede causar un poco de dificultad cuando se está en mitad de una traducción.</li>
+
+    <li>Los archivos de la aplicación: Incluidos en el paquete que usted descargó, la mayoría de ellos son necesarios para que OmegaT funcione correctamente. Si por alguna razón se pierden estos archivos, sólo tiene que descargar y/o volver a instalar OmegaT para restaurarlos.</li>
+  </ul>
+  <hr>
+
+  <h3><a name="project" id="project"></a>Archivos del proyecto de traducción</h3>
+
+  <p>Un proyecto de traducción OmegaT consta de una serie de directorios y archivos.</p>
+
+  <h3><a name="project_location" id="project_location"></a>Ubicación de los archivos del proyecto de traducción</h3>
+
+  <p>Cuando usted crea un proyecto de traducción, OmegaT automáticamente crea una lista de directorios que posteriormente sirven como depósito de archivos, así como una serie de archivos que se utilizan para establecer algunas preferencias para el proyecto y para mantener la memoria de traducción del proyecto. De manera predeterminada, los directorios de un proyecto de traducción se agrupan bajo el directorio principal del proyecto. Se puede elegir una ubicación alternativa para los directorios durante la creación del proyecto o durante la traducción. De esta forma es posible seleccionar directorios existentes o crear directorios en lugares que reflejen sus hábitos de flujo de trabajo. Para cambiar la ubicación de los directorios después de haber creado un proyecto, abra <strong>Proyecto → Propiedades...</strong> y haga los cambios necesarios.</p>
+
+  <h3><a name="project_list" id="project_list"></a>Lista de archivos de traducción del proyecto</h3>
+
+  <p>En un cuadro de diálogo abierto por OmegaT un proyecto de traducción se verá como un archivo con un icono de OmegaT asociado a él. Desde un explorador de archivos, sin embargo, el mismo proyecto de traducción se ve como si se tratara de cualquier otro directorio.</p>
+
+  <p><br></p><img src="images/OmegaT_projects_and_subdirectories.png" name=
+  "grafika3" alt="Proyectos OmegaT y subdirectorios" align="left" border="1"
+  id="grafika3"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Seleccionar el elemento con el icono de OmegaT es suficiente para abrir el proyecto. Un proyecto de traducción <b>Proyecto_de_ejemplo</b> creado con la configuración predeterminada, creará un nuevo subdirectorio con la siguiente estructura:</p><img src=
+  "images/Omegatproject.png" name="grafika1" alt="Proyecto OmegaT" align="left"
+  border="0" id="grafika1"><br clear="left">
+
+  <p>Inicialmente todos los subdirectorios de un proyecto estarán vacíos.</p>
+
+  <h3>OmegaT </h3>
+
+  <dl>
+    <dt>El subdirectorio <b>omegat</b> eventualmente debe contener varios archivos, el más importante entre ellos es el archivo de la memoria de traducción <em>project_save.tmx</em> (<a href="translationMemories.html">...</a>). El archivo <em>project_save.tmx</em> es la memoria de traducción con el cual trabaja el proyecto. Con la función de guardado automático activada, este se actualizará automáticamente al salir. La memoria de traducción se utiliza para crear los archivos traducidos. Una variedad de archivos TMX con nombres en la forma de project_save.tmx.<i>&lt;fecha y hora</i>&gt;.bak (<a href=
+    "translationMemories.html#TMX_backup">...</a>) serán agregados más tarde a este subdirectorio. Estos sirven como una copia de seguridad para la TM del proyecto y se agregan cada vez que se vuelve a abrir un proyecto, estos reflejan su contenido antes de hacerle cambios en la sesión actual.</dt>
+
+    <dd>El archivo <b>stats.txt</b> (<a href="userInterface.html#files">...</a>) contiene las estadísticas del proyecto actual y se puede abrir en una aplicación de hoja de cálculo para mostrar información de los segmentos y contabilización de palabras. Contiene información más detallada que la mostrada en la ventana <em>Archivos de proyecto</em>. Los archivos <strong>ignored_words.txt</strong> y <strong>learned_words.txt</strong>, si existen, serán utilizados por el corrector ortográfico.</dd>
+  </dl>
+
+  <h3>Source</h3>
+
+  <dl>
+    <dt>El subdirectorio 'source' es el espacio para los archivos a traducir. Usted puede especificar un nuevo subdirectorio y agregar los archivos para el proyecto más adelante, así como en la ventana lista del proyecto. Tenga en cuenta que la estructura del subdirectorio 'source' está completamente en sus manos. Si los archivos a traducir son parte de una estructura de árbol, sólo tiene que especificar el subdirectorio superior y OmegaT copiará todo, manteniendo intacta la estructura del árbol.</dt>
+  </dl>
+
+  <h3>Target</h3>
+
+  <dl>
+    <dd>Cuándo selecciona <strong>Proyecto → Crear documentos finales</strong> mientras un proyecto esté abierto, todos los archivos en <strong>/source/</strong>, traducidos o no, serán reproducidos aquí con la misma jerarquía de directorios para reflejar el estado actual de la traducción. Prácticamente hablando, OmegaT combina la información guardada en la traducción <strong>/omegat/project_save.tmx</strong> con los documentos fuente para producir el contenido en <strong>/target/</strong>.</dd>
+  </dl>
+
+  <h3>Tm</h3>
+
+  <dl>
+    <dd>Las memorias de traducción, de traducciones anteriores se pueden poner en éste subdirectorio. Tienen que estar en formato <b>tmx</b>. Utilice las herramientas disponibles para transformarlas desde otros formatos. Tenga en cuenta que project_save.tmx es la memoria de traducción que media entre la fuente y el eventual destino. Sin embargo, los archivos TM auxiliares están disponibles para encontrar candidatos más convenientes para los segmentos sin traducir.</dd>
+  </dl>
+
+  <h3>omegat.project</h3>
+
+  <dl>
+    <dd>OmegaT automáticamente crea este archivo cuando crea el proyecto. Este contiene los <a href="projectProperties.html">parámetros del proyecto</a>. Los parámetros incluidos en este archivo, se pueden modificar desde la ventana propiedades del proyecto.</dd>
+
+    <dt>nombre-del-proyecto-omegat.tmx (<a href=
+    "translationMemories.html#TMX_files_location_and_purpose">...</a>)<br> nombre-del-proyecto-level1.tmx<br> nombre-del-proyecto-level2.tmx</dt>
+
+    <dd>Estos archivos contienen tanto los segmentos originales como la traducción correspondiente del directorio /source/ en el momento de su creación (por lo general cuando se han creado los archivos traducidos).</dd>
+  </dl>
+  <hr>
+
+  <h3><a name="user" id="user"></a>Archivos de usuario</h3>
+
+  <h3><a name="user_location" id="user_location"></a>Ubicación de los archivos del usuario</h3>
+
+  <p>Los archivos del usuario se almacenan en un lugar separado donde los pueda acceder cualquier versión de OmegaT. La ubicación depende de la plataforma que utilice:</p>
+
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "sólo formatea">
+    <col width="33*">
+    <col width="223*">
+
+    <tr valign="top">
+      <td width="13%">
+        <p>Windows</p>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>2000 y XP: Documents and Settings\&lt;Nombre de Usuario&gt;\Application Data\OmegaT</strong></dd>
+
+          <dd><strong>Vista: Users\&lt;Nombre de usuario&gt;\AppData\Roaming\OmegaT</strong></dd>
+
+          <dd><strong>Otros: &lt;AlgunaCosa&gt;\OmegaT</strong> (&lt;AlgunaCosa&gt; corresponde a la ubicación del directorio "home" determinado por Java.)</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>Linux/Solaris/FreeBSD</dt>
+        </dl>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;Home del Usuario&gt;/.omegat</strong> (.omegat es un directorio, el punto que precede al nombre indica que es invisible, a menos que usted escriba <code>ls -a</code> o algún comando equivalente.)</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>MacOSX</dt>
+        </dl>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;Home del Usuario&gt;/Library/Preferences/OmegaT</strong></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>Otro</dt>
+        </dl>
+      </td>
+
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;Home del Usuario&gt;</strong></dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <h3><a name="user_list" id="user_list"></a>Lista de archivos del usuario<br></h3>
+
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "sólo formatea">
+    <col width="27*">
+    <col width="229*">
+
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>log.txt</dt>
+        </dl>
+      </td>
+
+      <td width="89%">
+        <dl>
+          <dd>En este archivo se registran los mensajes de error de Java, mientras que OmegaT se está ejecutando. Cuando usted piense que el comportamiento de OmegaT es errático, es importante incluir este archivo o la parte correspondiente en cualquier <a href=
+          "website.html">informe de problemas</a>.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>omegat.prefs</dt>
+        </dl>
+      </td>
+
+      <td width="89%">
+        <dl>
+          <dd>Un archivo xml con toda la configuración accesible de la interfaz gráfica del usuario, así como datos de posición de la ventana.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>filters.conf</dt>
+        </dl>
+      </td>
+
+      <td width="89%">
+        <dl>
+          <dd>Un archivo XML con todos los datos establecidos por las preferencias de <a href=
+          "fileFilters.html">Filtros de archivo</a>.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>segmentation.conf</dt>
+        </dl>
+      </td>
+
+      <td width="89%">
+        <dl>
+          <dd>Un archivo XML con todos los datos establecidos por las preferencias de <a href=
+          "segmentation.html">segmentación de frases</a>.</dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <p><br>
+  <br></p>
+  <hr>
+
+  <h3><a name="application" id="application"></a>Archivos de la aplicación</h3>
+
+  <p>OmegaT viene como un paquete que usted puede descargar desde SourceForge. En este capítulo vamos a considerar el <a href=
+  "installingAndRunning.html#Other_systems">paquete independiente de la plataforma</a> que contiene la aplicación en forma de Java estándar. Otros paquetes incluyen un paquete <code>.tar</code> Linux, un instalador de Windows, con o sin entorno de ejecución Java, un instalador MacOSX y un paquete de código fuente para desarrolladores. Este paquete independiente de la plataforma se puede utilizar en <strong>cualquier</strong> plataforma con un entorno de ejecución Java 1.5 ejecutándose, incluyendo las plataformas para las que exista un paquete específico. El paquete independiente de la plataforma se presenta como un archivo comprimido que necesita descomprimirse en el directori de su elección para instalarlo. La descompresión se hace generalmente con un doble clic sobre el paquete descargado. Una vez descomprimido, será creado un directorio que tiene el siguiente contenido:</p>
+
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "sólo formatea">
+    <col width="19*">
+    <col width="237*">
+
+    <tr valign="top">
+      <td width="8%">
+        <p><b>Archivo/<br> subdirectorio</b></p>
+      </td>
+
+      <td width="92%">
+        <p><b>Contenido</b></p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">/docs/</td>
+
+      <td width="92%">
+        <dl>
+          <dt>Todos los archivos del manual de usuario están en este directorio. Usted puede abrirlos en un navegador de Internet para tener acceso a los enlaces externos.</dt>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>/images/</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Aquí se incluyen iconos y gráficos del logo.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>/lib/</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Aquí se incluyen los archivos Java. Estos son necesarios para el buen funcionamiento de OmegaT.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>join.html</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Este es un archivo HTML normal el cual una vez que se abre en su navegador de Internet, le dirigirá al grupo de usuarios de OmegaT alojado en Yahoo Groups. No es necesario participar, pero le dará acceso a algunos servicios adicionales como el acceso a algunos archivos y encuestas irregulares, además de proporcionarle la capacidad para participar en discusiones relacionadas con OmegaT. Los archivos del grupo son públicos y la consulta no requiere suscripción al grupo.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>changes.txt</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Una lista de modificaciones relativamente detallada entre esta versión y las versiones anteriores.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>license.txt</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>La GNU GENERAL PUBLIC LICENSE. Esta licencia le permite hacer ciertas cosas con OmegaT, incluyendo la modificación y distribución. Si usted está interesado en modificar o distribuir OmegaT, dele un buen vistazo a este documento y asegúrese de que está consciente de todas sus consecuencias antes de actuar. En caso de que tenga algún problema, no dude en preguntar directamente a los miembros del proyecto o bien, mediante el envío de un correo electrónico desde la página de Source Forge o enviando un correo público al grupo de usuarios.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>doc-license.txt</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>La GNU GENERAL PUBLIC LICENSE. Esta licencia cubre la documentación. Vea más arriba.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>readme_es.txt</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Este archivo es muy importante y debe asegurarse de leerlo antes de lanzar OmegaT. Incluye información general sobre OmegaT, donde encontrará más información sobre cómo contribuir, etc. Este está traducido a varios idiomas.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Un archivo de texto que contiene dos líneas:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Usted puede encontrar útil este archivo si lo hace ejecutable (<code>chmod +x OmegaT</code>) desde la <a href=
+          "installingAndRunning.html#command_line">línea de comandos</a> después de asegurarse de que está en el directorio <code>/OmegaT_2.1/</code>. A partir de ahora podrá lanzar OmegaT llamando a este archivo desde la línea de comandos.</dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT.bat</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dd>Un archivo de proceso por lotes, utilizado para lanzar OmegaT desde <a href=
+          "installingAndRunning.html#command_line">la línea de comandos</a> Windows. Sólo contiene la siguiente línea:</dd>
+
+          <dd><code>java -jar OmegaT.jar %*</code></dd>
+        </dl>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT.jar</dt>
+        </dl>
+      </td>
+
+      <td width="92%">
+        <dl>
+          <dt>La aplicación principal de OmegaT. Para lanzar OmegaT tiene que llamar a cualquiera de estos archivos desde la línea de comandos o lanzarlo desde el gestor de archivos (generalmente haciendo doble clic en él).</dt>
+        </dl>
+      </td>
+    </tr>
+  </table>
+
+  <dl>
+    <dd><br>
+    <br></dd>
+  </dl>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="sólo formatea">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Aviso Legal</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inicio</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice de Contenido</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

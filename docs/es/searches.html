@@ -1,0 +1,196 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Búsquedas ― OmegaT 2.1 Manual de Usuario</title>
+</head>
+
+<body>
+  <h2>Búsquedas</h2>
+
+  <p><a href="#searchwindow">Ventana de búsqueda</a></p>
+
+  <ul>
+      <li>
+        <a href="#calling">Invocando una búsqueda</a>
+      </li>
+
+      <li>
+        <a href="#location">Ubicación de búsqueda</a>
+      </li>
+  </ul>
+
+  <p><a href="#searchmethods">Métodos de búsqueda</a></p>
+
+  <p><a href="#usingwildcards">Usando comodines</a></p>
+
+  <p><a href="#usingregularexpressions">Usando expresiones regulares</a></p>
+
+  <p><a href="#display">Mostrando resultados de búsqueda</a></p>
+  
+  <p><a href="#filter">Filtrando entradas en el editor de acuerdo a la búsqueda</a></p>
+  <hr>
+
+  <h2><a name="searchwindow" id="searchwindow"></a>Ventana de búsqueda</h2><img src=
+  "images/TextSearch.png" name="graphics1" align="left" width="659" height=
+  "446" border="0" id="graphics1" alt="Ventana de búsqueda de texto"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="calling" id="calling"></a>Invocando una búsqueda</h3>
+
+  <p>OmegaT proporciona una potente gama de funciones de búsqueda. Invoque a la ventana de <strong>Búsqueda</strong> con <code>Ctrl+F</code> e introduzca la palabra o frase que desea buscar en la caja <strong>Buscar</strong>. Como alternativa, seleccione una palabra o frase en cualquier lugar del panel de Edición y pulse <code>Ctrl+F</code>. En este caso, la palabra o frase se introduce de forma automática en el cuadro <strong>"Buscar"</strong>. Cada llamada a la ventana de <strong>Búsqueda</strong> crea su propia ventana nueva. No olvide cerrarlas, para no saturar su escritorio.</p>
+
+  <h3><a name="location" id="location"></a>Ubicación de búsqueda</h3>
+
+  <p>Las búsquedas ocurren tanto en la fuente como en la sección destino del proyecto. Usted puede buscar en</p>
+
+  <ul>
+    <li>
+      <p>El proyecto únicamente (configuración predeterminada)</p>
+    </li>
+
+    <li>
+      <p>El proyecto así como en las referencias a memorias de traducción en el directorio /tm/ (marque la casilla <i>Buscar en Memorias</i>)</p>
+    </li>
+
+    <li>
+      <p>Un único archivo o un directorio que contenga un conjunto de archivos (marque la casilla <i>Buscar archivos</i>)</p>
+    </li>
+  </ul>
+
+  <p>Al buscar a través de archivos, OmegaT restringirá la búsqueda a los archivos en el formato del archivo fuente (Vea <a href="filesToTranslate.html#formats">Formatos de archivo</a>). Por ejemplo, si bien OmegaT es muy capaz de manejar archivos TMX, no los incluirá en la búsqueda.</p>
+  <hr>
+
+  <h2><a name="searchmethods" id="searchmethods"></a>Métodos de búsqueda</h2>
+
+  <p>Seleccione el método a utilizar en los botones de radio. Usted puede elegir entre dos métodos de búsqueda:</p>
+
+  <table summary= "sólo formatea" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
+
+    <tr>
+      <td width="20%">
+        <p><strong>Búsqueda exacta</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>Búsqueda de segmentos que contienen la cadena de texto especificada.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>Búsqueda por palabras clave</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>Busca segmentos que contienen todas las palabras clave que ha especificado, en cualquier orden.</p>
+      </td>
+    </tr>
+  </table>
+
+  <p>Una <strong>Búsqueda exacta</strong> busca una frase, es decir, si se introducen varias palabras, se encuentran únicamente si se producen exactamente en la misma secuencia. Las búsquedas exactas son similares a la búsqueda de frase "exacta" en un motor de búsqueda de Internet como Google. Seleccione <strong>Búsqueda por palabra clave</strong> para buscar cualquier número de palabras individuales, separadas por espacios y en cualquier orden. OmegaT mostrará una lista con todos los segmentos en los que se producen todas las palabras. Las búsquedas por palabras clave son similares a una búsqueda "con todas las palabras" en un motor de búsqueda en Internet como Google (y logic).</p>
+
+  <p>Para cualquiera de estos dos métodos, puede seleccionar las tres siguientes opciones:</p>
+
+  <table summary= "sólo formatea" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
+
+    <tr>
+      <td width="20%">
+        <p><strong>Sensible a mayúsculas y minúsculas</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>La búsqueda se realiza exactamente por la cadena de caracteres especificada, de lo contrario las mayúsculas serán omitidas.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>Expresiones regulares</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>La cadena de búsqueda será tratada como una expresión regular (en caso de una búsqueda por palabras clave se tratarán múltiples como expresiones).</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>Búsqueda TMs</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>Incluye todas las memorias de traducción en la búsqueda.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="usingwildcards" id="usingwildcards"></a>Usando comodines</h2>
+
+  <p>En ambos tipos de búsqueda, exacta y palabras clave, se pueden utilizar los caracteres comodín de búsqueda '<code>*</code>' y '<code>?</code>'. Para usar comodines, asegúrese de que no ha seleccionado la opción <strong>expresiones regulares</strong>, de lo contrario estos caracteres se interpretan como caracteres especiales de las expresiones regulares.</p>
+
+  <ul>
+    <li>
+      <p>'<strong>*</strong>' coincide con cero o más caracteres. El término a buscar, '<strong>run*</strong>' por ejemplo, debe coincidir con '<strong>run</strong>', '<strong>runs</strong>' y '<strong>running</strong>'.</p>
+    </li>
+
+    <li>
+      <p>'<strong>?</strong>' coincide con un sólo caracter. Por ejemplo, '<strong>run?</strong>' igualará a '<strong>runs</strong>' y '<strong>rung</strong>', pero no a '<strong>run</strong>' o '<strong>running</strong>'.</p>
+    </li>
+  </ul>
+
+  <p>Si desea buscar segmentos que contienen ya sea <strong>*</strong> o <strong>?</strong>, tendrá que cambiar la expresión regular, y escapar estos caracteres anteponiéndoles una barra invertida ('\'), es decir, 'x\*y' para hallar instancias de 'x*y' y 'x\?<code>y</code> para encontrar instancias de '<code>x?y</code>'.</p>
+  <hr>
+
+  <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>Usando expresiones regulares</h2>
+
+  <p>Una expresión regular es una poderosa manera para buscar instancias de una cadena. Es similar a una búsqueda con comodines, pero permite mucha más flexibilidad. Las expresiones regulares utilizadas en las búsquedas son compatibles con Java. Está disponible un breve resumen en el apéndice <a href="regexp.html">Construcción de expresiones regulares</a>. Si necesita información más específica, por favor consulte <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+  <p>Puede encontrar tutoriales sencillos en la web (<a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>, por ejemplo.)</p>
+  <hr>
+
+  <h2><a name="display" id="display"></a>Mostrando resultados de búsqueda</h2>
+
+  <p>Al pulsar el botón de búsqueda después de ingresar una cadena en el campo de búsqueda, le mostrará todos los segmentos en el proyecto que incluyen la cadena de búsqueda. Dado que OmegaT maneja los segmentos idénticos como una sola entidad, únicamente figura el primer segmento.</p>
+
+  <p>Los segmentos se muestran en el orden de aparición en el proyecto. Los segmentos traducidos se mostrarán con el texto original en la parte superior y el texto traducido en la parte inferior, los segmentos sin traducir mostrarán únicamente el original.</p>
+
+  <p>Al hacer clic en un segmento, éste se abrirá en el Editor para su modificación. A continuación, puede cambiar de nuevo a la ventana de búsqueda para el siguiente segmento encontrado, por ejemplo, para comprobarlo y si es necesario corregir la terminología.</p>
+  <hr>
+
+  <h2><a name="filter" id="filter"></a>Filtrando entradas en el editor de acuerdo a la búsqueda</h2>
+
+  <p>Para facilitar la navegación en el conjunto de resultados de búsqueda, usted puede aplicar la búsqueda al editor. Pulse el botón 'filtro' en la parte inferior para limitar las entradas que figuran en la ventana del editor a las que coinciden con la búsqueda actual. Usted puede utilizar la navegación normal por ejemplo, para ir al siguiente segmento (sin traducir) que coincide con los criterios de búsqueda.</p>
+  <p>NB:</p>
+  <ul><li>una búsqueda está limitada a 1000 unidades, así que si usted busca una frase común, entonces el editor muestra sólo las 1000 entradas coincidentes, y no todas las entradas que coinciden con los criterios de búsqueda.</li>
+  <li>Un archivo puede no tener entradas coincidentes, por lo tanto se muestran vacíos.</li> 
+  <li>Si una búsqueda elimina duplicados, puede perder duplicados en el editor.</li>
+  </ul>
+
+  <p>Para quitar un filtro, presione el botón  "Remover filtro", o vuelva a cargar el proyecto.
+  </p>
+
+  <hr>
+  <table summary= "sólo formatea" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Aviso Legal</a> </td>
+        <td style="text-align: center;"><a href="index.html">Inicio</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Índice de Contenido</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</body>
+</html>

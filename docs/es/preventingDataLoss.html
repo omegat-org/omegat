@@ -1,0 +1,57 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Previniendo la Pérdida de Datos ― OmegaT 2.1 Manual de Usuario</title>
+</head>
+
+<body>
+  <h2>Previniendo la Pérdida de Datos</h2>
+
+  <p>OmegaT es una aplicación robusta. Sin embargo, cuando utilice OmegaT, al igual que con cualquier otra aplicación, usted debe tomar ciertas precauciones contra la pérdida de datos. Al traducir sus archivos, OmegaT almacena todo su progreso en la memoria de traducción <code>project_save.tmx</code> que reside en el subdirectorio <code>/omegat</code> del proyecto.</p>
+
+  <p>OmegaT también respalda la memoria de traducción <code>project_save.tmx.AÑOMESDÍAHHNN.bak</code> en el mismo subdirectorio cada vez que abre o vuelve a cargar un proyecto. <code>AÑO</code> es el año de 4 dígitos, <code>MM</code> es un mes, <code>DD</code> es el día del mes, <code>HH</code> y <code>NN</code> son horas y minutos respectivamente, de cuando se había guardado la memoria de traducción anterior.</p>
+
+  <p>Si usted cree que ha perdido datos de la traducción lleve a cabo el siguiente procedimiento que devolverá el proyecto a su estado grabado más reciente, en la mayoría de los casos dentro de los 10 minutos anteriores a la modificación más reciente:</p>
+
+  <ol>
+    <li>cierre el proyecto</li>
+
+    <li>cambie el nombre del archivo <code>project_save.tmx</code> actual a cualquiera que usted desee (como <code>project_save.tmx.temporal</code>, por ejemplo)</li>
+
+    <li>seleccione la copia de seguridad de la memoria de traducción que sea la más probable que contenga los datos que está buscando</li>
+
+    <li>cámbiele el nombre a <code>project_save.tmx</code></li>
+
+    <li>abra el proyecto</li>
+  </ol>
+
+  <p>Para evitar perder datos importantes:</p>
+
+  <ul>
+    <li>Haga copias de manera regular del archivo <code>/omegat/project_save.tmx</code> a otros medios de copia de seguridad, tales como CD o DVD.</li>
+
+    <li>Hasta que esté familiarizado con OmegaT, genere archivos traducidos a intervalos regulares y compruebe que el archivo traducido contiene la última versión de su traducción.</li>
+
+    <li>Tenga especial cuidado cuando haga cambios a los archivos en <code>/source</code> mientras está en mitad de un proyecto. Si modifica el archivo fuente, después de haber comenzado la traducción, OmegaT puede ser incapaz de encontrar un segmento que usted ya ha traducido.</li>
+
+    <li>Empiece con la ayuda de estos textos. Si encuentra problemas, publique un mensaje en el <a href=
+    "http://groups.yahoo.com/group/omegat">grupo de usuarios OmegaT</a>. No dude en publicar en el idioma con el que se sienta más familiarizado.</li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" summary="sólo formatea" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Aviso Legal</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inicio</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice de Contenido</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

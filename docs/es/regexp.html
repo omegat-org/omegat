@@ -1,0 +1,735 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Expresiones Regulares ― OmegaT 2.1 Manual de Usuario</title>
+</head>
+
+<body>
+  <h2>Construyendo Expresiones Regulares</h2>
+
+  <p>Las expresiones regulares (o regex para abreviar) utilizadas en las búsquedas y reglas de segmentación son compatibles con Java. Si necesita información más específica, por favor consulte <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>. Vea referencias adicionales y los siguientes ejemplos.&nbsp;</p>
+
+  <table summary="sólo formatea" style="width: 80%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="width: 40%;">
+          <h3><a href="#Flags__">Indicadores</a></h3>
+        </td>
+
+        <td style="width: 60%;">
+          <h3><a href="#Characters_">Caracteres</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Quotation_">Citando</a></h3>
+        </td>
+
+        <td>
+          <h3><a name="Classes_for_Uncode_blocks_and_" id=
+          "Classes_for_Uncode_blocks_and_"></a><a href=
+          "#Classes_for_Uncode_blocks_and_">Clases para bloques Unicode y categorías</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Character_classes_">Clases de caracteres</a></h3>
+        </td>
+
+        <td>
+          <h3><a href="#Predefined_character_classes_">Clases de caracteres predefinidos</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width: 257px;">
+          <h3><a href="#Boundary_matchers_">Límite de coincidencias</a></h3>
+        </td>
+
+        <td style="width: 517px;">
+          <h3><a href="#Greedy_quantifiers_">Cuantificadores codiciosos</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Reluctant_non-greedy_quantifiers_">Cuantificadores tímidos (no codiciosos)</a></h3>
+        </td>
+
+        <td>
+          <h3><a href="#Logical_operators_">Operadores lógicos</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#References_and_examples_">Herramientas Regex y ejemplos de uso</a></h3>
+        </td>
+      </tr>
+    </tbody>
+  </table>&nbsp;&nbsp; &nbsp;
+
+  
+
+  <p>&nbsp;<br></p>
+  <hr>
+
+  <table summary="sólo formatea" border="0" cellpadding="3" cellspacing="0">
+    <col width="15%">
+    <col width="80%">
+
+    <tbody>
+      <tr>
+        <td width="355">
+          <h3>La construcción...</h3>
+        </td>
+
+        <td width="877">
+          <h3>...coincide con el siguiente texto:</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Flags__" id="Flags__"></a>Indicadores</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(?i)</code></p>
+        </td>
+
+        <td width="877">
+          <p>Habilita la coincidencia de mayúsculas y minúsculas (de manera predeterminada, el patrón distingue entre mayúsculas y minúsculas).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Characters_" id="Characters_"></a>Caracteres</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>x</code></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter <strong>x</strong>, salvo en la siguiente...</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\uhhhh</code></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter con valor hexadecimal <code>0x</code><strong>hhhh</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\t</code></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter de tabulación (<code>'\u0009'</code>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\n</code></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter de nueva línea (line feed) (<code>'\u000A'</code>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\r</code></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter de retorno de carro (<code>'\u000D'</code>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\f</tt></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter de alimentación de hoja (<tt>'\u000C'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\a</tt></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter alerta (campana) (<tt>'\u0007'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\e</tt></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter escape (<tt>'\u001B'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\c</tt><i>x</i></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter de control correspondiente a <i>x</i></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>n</i></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter con valor octal de <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\0</tt><i>nn</i></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter con valor octal de <tt>0</tt><i>nn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>mnn</i></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter octal con valor de <tt>0</tt><i>mnn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\x</tt><i>hh</i></p>
+        </td>
+
+        <td width="877">
+          <p>El caracter hexadecimal&nbsp;con valor <tt>0x</tt><i>hh</i></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Quotation_" id="Quotation_"></a>Citando</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nada, pero cita el siguiente caracter. Este se requiere si desea ingresar los caracteres meta <code>!$()*+.&lt;&gt;?[\]^{|}</code> para que coincidan con ellos mismos.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\\</code></p>
+        </td>
+
+        <td width="877">
+          <p>Por ejemplo, este es el caracter de barra invertida</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\Q</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nada, pero cita a todos los caracteres hasta <code>\E</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\E</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nada, pero termina citados iniciados por <tt>\Q</tt></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Classes_for_Unicode_blocks_and" id=
+          "Classes_for_Unicode_blocks_and"></a>Clases para bloques Unicode y categorías</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Un caracter en el bloque Griego (<a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">bloque</a> simple)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\p{Lu}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Una letra mayúscula (<a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">categoría</a> simple)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{Sc}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Un símbolo de moneda</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\P{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Cualquier caracter excepto uno en el bloque Griego (negación)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td height="33" width="355">
+          <p><code><tt>[\p{L}&amp;&amp;[^\p{Lu}]]</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Cualquier letra excepto una letra en mayúscula (sustracción)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Character_classes_" id=
+          "Character_classes_"></a>Clases de caracteres</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p><code>a</code>, <code>b</code>, o <code>c</code> (clase simple)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>[^abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p>Cualquier caracter excepto <code>a</code>, <code>b</code> o <code>c</code> (negación)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[a-zA-Z]</code></p>
+        </td>
+
+        <td width="877">
+          <p>Desde la <code>a</code> hasta la <code>z</code> o <code>A</code> hasta <code>Z</code>, inclusive (rango)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Predefined_character_classes_" id=
+          "Predefined_character_classes_"></a>Clases de caracteres predefinidos</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>.</code></p>
+        </td>
+
+        <td width="877">
+          <p>Cualquier caracter (excepto los terminadores de línea)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\d</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un dígito: <code>[0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\D</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un caracter que no sea dígito: <code>[^0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un caracter de espacio en blanco: <code>[ \t\n\x0B\f\r]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\S</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un caracter que no sea espacio en blanco: <code>[^\s]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\w</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un caracter constituyente de palabra: <code>[a-zA-Z_0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\W</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un caracter que no sea constituyente de palabra: <code>[^\w]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Boundary_matchers_" id="Boundary_matchers_"></a>Límite de coincidencias</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>^</code></p>
+        </td>
+
+        <td width="877">
+          <p>Al comienzo de una línea</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>$</code></p>
+        </td>
+
+        <td width="877">
+          <p>Al final de una línea</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\b</code></p>
+        </td>
+
+        <td width="877">
+          <p>En los límites de una palabra</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\B</code></p>
+        </td>
+
+        <td width="877">
+          <p>En los límites de un caracter no constituyente de palabra</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Greedy_quantifiers_" id="Greedy_quantifiers_"></a>Cuantificadores codiciosos</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>Estos coinciden con tanto como puedan. Por ejemplo, <code>a+</code> debe coincidir con <code>aaa</code> en <code>aaabbb</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, una vez o ninguna en absoluto</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, cero o más veces</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, una o más veces</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Reluctant_non-greedy_quantifiers_" id=
+          "Reluctant_non-greedy_quantifiers_"></a>Cuantificadores tímidos (no codiciosos)</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>Éstos coinciden con tan poco como sea posible. Por ejemplo, <code>a+?</code> debe coincidir la primera <code>a</code> en <code>aaabbb</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>??</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, una vez o ninguna en absoluto</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, cero o más veces</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, una o más veces</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Logical_operators_" id="Logical_operators_"></a>Operadores lógicos</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>XY</strong></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong> seguida por <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>|</code><strong>Y</strong></p>
+        </td>
+
+        <td width="877">
+          <p>Cualquier <strong>X</strong> o <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(</code><strong>XY</strong><code>)</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>XY</strong> como un solo grupo</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <br>
+
+  <h2><a name="References_and_examples_" id=
+  "References_and_examples_"></a>Herramientas Regex y ejemplos de uso</h2><br>
+  Hay una serie de herramientas interactivas para desarrollar y probar expresiones regulares. Todas ellas más o menos siguen el mismo patrón (vea más abajo para un ejemplo en forma de plug-in para Firefox): la expresión regular (primer entrada) analiza el texto de búsqueda (vea el recuadro en el centro), dando consejos, se muestra en el cuadro de texto de resultados.<br> <br> <img alt=
+  "Probador de expresiones regulares para Firefox plug-in tester" src=
+  "images/RegexTester.png"><br> <br> Vea <a href="http://www.weitz.de/regex-coach/">The Regex Coach</a> para las versiones Windows, Linux, Mac, FreeBSD de una herramienta independiente, esta es casi idéntica al ejemplo anterior.<br> <br> Una buena colección de casos de expresiones regulares muy útiles se puede encontrar en OmegaT mismo (vea Opciones → <a href=
+  "segmentation.html">Segmentación...</a>) La siguiente lista incluye expresiones, que pueden ser útiles cuando se busca a través de la memoria de traducción: <br>
+  <br>
+
+  <table summary="sólo formatea" style="text-align: left; width: 600px;"
+  border="1" cellpadding="0" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="font-weight: bold;">Expresión regular</td>
+
+        <td style="font-weight: bold;">Busca lo siguiente:</td>
+      </tr>
+
+      <tr>
+        <td>(\b\w+\b)\s\1\b<br></td>
+
+        <td>palabras dobles&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>[\.,]\s*[\.,]+</td>
+
+        <td>t comas y puntos confusos</td>
+      </tr>
+
+      <tr>
+        <td>\. \s$</td>
+
+        <td>espacios en blanco extra, tras el punto al final de la línea</td>
+      </tr>
+
+      <tr>
+        <td>\s+a\s+[aeiou]</td>
+
+        <td>&nbsp;Inglés: las palabras, que comienzan con vocales, deben estar precedidas por "an" y no "a"</td>
+      </tr>
+
+      <tr>
+        <td>\s+an\s+[^aeiou]</td>
+
+        <td>&nbsp;Inglés: la misma comprobación que la anterior, pero para las consonantes ("a", no "an")</td>
+      </tr>
+
+      <tr>
+        <td>\s\s+</td>
+
+        <td>más de un espacio</td>
+      </tr>
+
+      <tr>
+        <td>\.[A-Z]</td>
+
+        <td>espacio faltante entre un punto y el comienzo de una nueva frase</td>
+      </tr>
+    </tbody>
+  </table><br>
+  <br>
+  <hr>
+
+  <table summary="sólo formatea" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Aviso Legal</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inicio</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice de Contenido</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

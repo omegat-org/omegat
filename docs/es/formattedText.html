@@ -1,0 +1,270 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Trabajando con el Formato del Texto ― OmegaT 2.1 Manual de Usuario</title>
+</head>
+
+<body>
+  <h2>Trabajando con el Formato del Texto</h2>
+
+  <ul>
+    <li>
+      <p><a href="#intro">Etiquetas de formato</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_segmenting">Etiquetas y segmentación por frases</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_operation">Operaciones con etiquetas</a></p>
+    </li>
+
+    <li>
+      <p><a href="#nesting">Anidando grupos de etiquetas</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag-overlapping">Agrupando etiquetas solapadas</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_validation">Validando etiquetas agrupadas</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_hints">Consejos para la gestión de etiquetas</a></p>
+    </li>
+
+    <li>
+      <p><A href="#printf">Marcadores de posición printf</A></p>
+    </li>
+  </ul>
+
+  <p>La información de formato presente en el archivo fuente, por lo general tiene que reproducirse en el archivo destino. La información de formato en línea se ha hecho posible gracias a los formatos compatibles (actualmente DocBook, HTML, XHTML, Open Document y OpenOffice.org) en OmegaT se presenta como etiquetas. En un caso normal se toman en cuenta las etiquetas al examinar la similitud entre los diferentes textos para propósito de alineación. Las etiquetas reproducidas en el segmento traducido estarán presentes en el documento final.</p>
+  <hr>
+
+  <h3><a name="intro" id="intro"></a>Etiquetas de formato</h3>
+
+  <p><a name="naming" id="naming"></a><b>Nomenclatura de etiquetas:</b> Las etiquetas consisten de uno a tres caracteres y un número. Únicamente se permiten números para agrupar las etiquetas que se corresponden entre sí, y así diferenciar las etiquetas que pueden tener el mismo caracter de acceso directo, pero en realidad son diferentes. Los caracteres pueden o no reflejar el valor del formato que representa la etiqueta (por ejemplo, negrita, cursiva, etc.)</p>
+
+  <p><a name="numbering" id="numbering"></a><b>Numeración de Etiquetas:</b> Las etiquetas se numeran de manera incremental por <strong>grupo de etiquetas</strong>. Lo que aquí llamamos "grupo de etiquetas" es o bien una sola etiqueta individual (como <code><font color=
+  "#FB0000">&lt;br1&gt;</font></code>), por sí misma, o 2 etiquetas que forman una pareja (como <code><font color="#FB0000">&lt;i0&gt;</font></code> y <code><font color="#FB0000">&lt;/i0&gt;</font></code>). Dentro de un segmento, el primer grupo (pareja o individual) obtiene el número <strong>0</strong>, el segundo el número <strong>1</strong> y así sucesivamente. A continuación, el primer ejemplo tiene 3 grupos de etiquetas (una pareja, una individual y luego otra pareja), el segundo ejemplo tiene un solo grupo (una pareja).</p>
+
+  <p><a name="pairs" id="pairs"></a><b>Parejas e individuales:</b> Las etiquetas siempre vienen ya sea en forma de pareja o individuales. Las <strong>etiquetas individuales</strong> indican información de formato que no afecta al texto que la rodea (espacio extra o salto de línea, por ejemplo).</p>
+  <pre>
+ <strong>&lt;segment 2132&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
+"#FB0000">&lt;/b0&gt;</font>, <font color=
+"#FB0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
+"#FB0000">&lt;/b2&gt;</font><strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#FB0000">&lt;br1&gt;</font></strong></code> es una etiqueta individual y no afectará a ningún texto que la rodee. <strong>Las parejas de etiquetas</strong> por lo general, indican información del estilo que se aplica al texto entre la etiqueta de apertura y la etiqueta de cierre de una pareja. Pase lo que pase a una pareja, la etiqueta de apertura, siempre debe venir antes de la etiqueta de cierre:</p>
+  <pre>
+ <strong>&lt;segment 3167&gt;</strong>Archivo de registro (<font color=
+"#FB0000">&lt;b0&gt;</font>log.txt<font color=
+"#FB0000">&lt;/b0&gt;</font>) para operaciones de seguimiento y registro de errores.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#FB0000">&lt;b0&gt;</font></strong></code> <font size="3">y</font> <code><strong><font color=
+  "#FB0000">&lt;/b0&gt;</font></strong></code> son pareja y afectan al texto <code><strong>log.txt</strong></code>.</p>
+  <hr>
+
+  <h3><a name="tag_segmenting" id="tag_segmenting"></a>Etiquetas y segmentación por frases</h3>
+
+  <p>OmegaT crea sus etiquetas antes de aplicar la segmentación de frases. Dependiendo de las reglas de segmentación, puede parecer como si las etiquetas no respetasen las reglas de numeración y agrupación anteriores. Revise el siguiente texto: "<em>Antes: \. Después: \s"</em><font color="#FB0000">.</font> <font color="#000000">Uno esperaría la segmentación de la siguiente manera (&lt;b0&gt; y &lt;/b0&gt; al inicio y final de cursiva):</font></p>
+  <pre>
+ <strong>&lt;segment ....&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>Antes: \. Después: \s<font color=
+"#FB0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Sin embargo, cuando se aplican las reglas de segmentación predeterminadas a este segmento, debemos terminar con el siguiente resultado:</p>
+  <pre>
+ <strong>&lt;segment 1990&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>Antes: \. <strong>&lt;end segment&gt;</strong><br>
+<strong>&lt;segment 1991&gt;</strong> Después: \s<font color=
+"#FB0000">&lt;/b0&gt;</font><strong>&lt;end segment&gt;</strong> <br>
+</pre>
+
+  <p>Aplicando la regla <i>segmento después de un punto seguido de un espacio</i> empalma el texto original en dos segmentos, incluso si las dos etiquetas <code><font color="#FB0000">&lt;b0&gt;</font></code> y <code><font color=
+  "#FB0000">&lt;/b0&gt;</font></code> deban mantenerse unidas en el mismo segmento. En algunos casos, incluso puede causar problemas en la traducción, cuando las etiquetas se deben colocar de manera diferente en el idioma destino para reflejar el orden de las palabras de ese idioma (vea <a href="#tag_operation">Operaciones con etiquetas</a> más adelante).</p>
+  <hr>
+
+  <h3><a name="tag_operation" id="tag_operation"></a>Operaciones con etiquetas</h3>
+
+  <p>Se debe tener cuidado con las etiquetas. Si las cambia accidentalmente, puede dañar el formato del archivo final. Un buen enfoque es "No corrija, lo que no necesita corrección". Sin embargo, es bueno saber qué es posible hacer y cómo hacerlo.</p>
+
+  <p><a name="duplication" id="duplication"></a><b>Duplicando grupos de etiquetas:</b> Para duplicar grupos de etiquetas, sólo tiene que copiarlos en la posición de su elección. Tenga en cuenta que en una pareja agrupada las etiquetas de apertura deben estar antes de las etiquetas de cierre. El formato representado por el grupo duplicado se aplicará a la sección en la que se duplique.</p>
+
+  <p>Ejemplo:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Este formato<font color=
+"#FB0000">&lt;/b0&gt;</font> se va a repetir aquí.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Después de duplicarlo:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Este formato<font color=
+"#FB0000">&lt;/b0&gt;</font> se ha <font color=
+"#FB0000">&lt;b0&gt;</font>repetido aquí<font color=
+"#FB0000">&lt;/b0&gt;</font>.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><a name="deletion" id="deletion"></a><b>Suprimiendo grupos de etiquetas:</b> Para eliminar grupos de etiquetas, sólo retírelas del segmento. Tenga en cuenta que un grupo debe tener su pareja de apertura, así como su etiqueta de cierre para garantizar que suprime correctamente todo rastro del formato borrado, de lo contrario, se podría corromper el archivo traducido. Al eliminar un grupo de etiquetas, usted deberá eliminar el formato del archivo traducido relacionado.</p>
+
+  <p>Ejemplo:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Este formato<font color=
+"#FB0000">&lt;/b0&gt;</font> se va a eliminar.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Después de eliminarlo:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong>Este formato se ha eliminado.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p><b>Modificando el orden de los grupos de etiquetas:</b> Para cambiar el orden de un grupo de etiquetas para reflejar una estructura diferente al idioma en la traducción, simplemente ponga el grupo de etiquetas donde tiene que estar en la traducción. El formato seguirá en la parte a la cual se aplica.</p>
+
+  <p>Ejemplo:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong>El <font color=
+"#FB0000">&lt;b0&gt;</font>formato cero<font color=
+"#FB0000">&lt;/b0&gt;</font> y el <font color=
+"#FB0000">&lt;b1&gt;</font>formato uno<font color=
+"#FB0000">&lt;/b1&gt;</font> se van a invertir.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Después de modificar el orden:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong>El <font color=
+"#FB0000">&lt;b1&gt;</font>formato uno<font color=
+"#FB0000">&lt;/b1&gt;</font> y el <font color=
+"#FB0000">&lt;b0&gt;</font>formato cero<font color=
+"#FB0000">&lt;/b0&gt;</font> se han invertido.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <h3><a name="nesting" id="nesting"></a>Anidando grupos de etiquetas</h3>
+
+  <p>La modificación del orden de los grupos de etiquetas puede resultar en la anidación de un grupo de etiquetas dentro de otro grupo de etiquetas. Esto está bien, siempre y cuando, el grupo incluido rodee al grupo encerrado. En otras palabras, cuando mueva parejas de etiquetas, asegúrese de que tanto la etiqueta de apertura como la de cierre se han movido a su objetivo, de lo contrario, podría corromper el archivo traducido y no se podría abrir. Entonces se aplicarán ambos formatos a la parte anidada.</p>
+
+  <p>Ejemplo:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>El formato<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;b1&gt;</font>uno<font color=
+"#FB0000">&lt;/b1&gt;</font> se va a anidar dentro del formato cero.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Después de anidarlo:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>El formato <font color=
+"#FB0000">&lt;b1&gt;</font>uno<font color=
+"#FB0000">&lt;/b1&gt;&lt;/b0&gt;</font> se ha anidado dentro del formato cero.<strong>&lt;end segment</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag-overlapping" id="tag-overlapping"></a>Agrupando etiquetas solapadas</h3>
+
+  <p>La superposición es el resultado de una incorrecta manipulación de las parejas de etiquetas, y sin duda se traducirá en formato corrupto y, en ocasiones, no podrá abrir el archivo de la traducción en absoluto. Ejemplo:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>El formato<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;b1&gt;</font>uno<font color=
+"#FB0000">&lt;/b1&gt;</font> se va a corromper.<strong>&lt;end segment&gt;</strong>
+</pre>
+
+  <p>Después de una manipulación incorrecta:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>El formato <font color=
+"#FB0000">&lt;b1&gt;</font>uno<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;/b1&gt;</font>ahora se ha estropeado.<strong>&lt;end segment&gt;</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Validando etiquetas agrupadas</h3>
+
+  <p>La función de validación de etiquetas detecta las etiquetas cambiadas (ya sea que se haya hecho a propósito o por accidente) y muestra los segmentos afectados. Para iniciar esta función ―presione las teclas Ctrl+T― esto abrirá una ventana que contiene todos los segmentos en el archivo en los que cabe la sospecha de etiquetas rotas o incorrectas en la traducción. Los errores en el etiquetado de un texto traducido, a menudo son problemáticos tanto en archivos OpenDocument, así como en OpenOffice.org o en archivos que no se pueden abrir debido a problemas creados por el etiquetado en el proceso de traducción. La corrección de las etiquetas y recreación de los documentos finales es fácil con la función de validación de etiquetas. La ventana, que se abre al pulsar Ctrl+T, cuenta con una tabla de 3 columnas con un enlace a ese segmento, el segmento original y el segmento destino:</p><br>
+
+  <table align="center" border="1" width="80%" summary="">
+    <tbody>
+      <tr>
+        <td>1</td>
+
+        <td>Puede seleccionar un tipo de letra diferente por medio del cuadro de diálogo <strong><font color="blue">&lt;b0&gt;</font></strong>Tipo de letra<strong><font color="blue">&lt;/b0&gt;</font></strong>. Ábralo por medio del elemento <strong><font color=
+        "blue">&lt;i1&gt;</font></strong>Opciones<strong><font color=
+        "blue">&lt;/i1&gt;</font></strong> → <strong><font color=
+        "blue">&lt;i2&gt;</font></strong>Tipo de letra...<strong><font color=
+        "blue">&lt;/i2&gt;</font></strong>. Puede cambiar el tamaño y tipo de letra desde el cuadro de diálogo.</td>
+
+        <td>'n Mens kan 'n ander vertoonfont kies met die <strong><font color=
+        "blue">&lt;b0&gt;</font></strong>Vertoonfont<strong><font color=
+        "blue">&lt;/b0&gt;</font></strong>-dialoogkassie. Kies
+        <strong><font color=
+        "blue">&lt;i1&gt;</font></strong>Opstelling<strong><font color=
+        "blue">&lt;/i1&gt;</font></strong> &gt; Vertoonfont... op die kieslys.
+        Die lettertipe én die lettergrootte kan met dié dialoogkassie verander
+        word.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Las etiquetas están resaltadas en negrita azul para facilitar la comparación entre el contenido original y el traducido. Haga clic en el enlace para activar el segmento en el editor. Corrija el error si es necesario y pulse <code><a href="menu.html#shortcuts">Ctrl+T</a></code> para volver a la ventana de validación de etiquetas para corregir otros errores. Los errores de <a href="#intro">etiquetas</a> se deben a una incorrecta <a href="#tag_operation">manipulación de etiquetas</a> en la traducción que no reproducen el mismo orden de la etiqueta y número como en el segmento original. Algunas manipulaciones en las etiquetas son necesarias y son benignas, algunas causan problemas al crear el documento traducido.</p>
+  <hr>
+
+  <h3><a name="tag_hints" id="tag_hints"></a>Consejos para la gestión de etiquetas</h3>
+
+  <p>Las etiquetas, generalmente, representan algún tipo de formato del texto original. <strong>Simplificar el formato del texto original</strong> contribuye en gran medida a reducir el número de etiquetas. Debe considerar de ser posible, la unificación del tipo de letra, tamaño, color, etc.,  ya que podría simplificar la traducción y reducir la posibilidad de errores de etiqueta. Dele un vistazo a la sección <a href=
+  "#tag_operation">Operaciones con etiquetas</a> para ver qué se puede hacer con las etiquetas. Recuerde que si le molestan las etiquetas y el formato no es muy relevante para la traducción real, la eliminación de etiquetas puede ser la forma más fácil de evitarse problemas.</p>
+
+  <p>Si necesita ver las etiquetas en OmegaT, pero no es necesario retener la mayor parte del formato en el documento traducido, usted está en libertad de no incluir etiquetas en la traducción. En este caso, <strong>preste mayor atención a las parejas de etiquetas</strong> dado que al suprimir un lado de la pareja pero, si olvida eliminar el otro, va a corromper el formato de su documento. Dado que las etiquetas están incluidas en el texto mismo, es posible utilizar <a href=
+  "segmentation.html">Reglas de segmentación</a> para crear segmentos con menos etiquetas. Esta es una característica avanzada y se necesita algo de experiencia si desea aplicarlas correctamente.</p>
+
+  <p><strong>Importante:</strong> OmegaT aún no es capaz de detectar errores en el formato de forma totalmente automática, por lo tanto, no le preguntará si usted comete un error o cambia el formato para adaptarse mejor a su idioma destino. En ocasiones, sin embargo, su archivo traducido puede parecer extraño e incluso, en el caso de archivos OpenDocument/OpenOffice.org, puede negarse a abrirlos.</p>
+
+  <hr>
+
+  <h3><a name="printf"></a>Marcadores de posición printf</h3>
+
+  <p>En algunos lenguajes de programación (por ejemplo, PHP, C) se utilizan etiquetas especiales como marcadores de posición en cadenas que se utilizan en combinación con la función printf. Por ejemplo:
+  </p>
+  <pre>$var =_("genial");
+echo printf(_("OmegaT es %s"),$var);</pre>
+
+  <p>Si se extraen las cadenas de caracteres del texto de este código fuente (por ejemplo, a través de PO-filter), OmegaT no sustituye estas variables con etiquetas, porque no puede saber con certeza si por ejemplo, <code>%s</code> realmente es un marcador de posición o sólo una parte de un texto. Sin embargo, puede habilitar la validación de los marcadores de posición. Seleccione en el menú <strong>Opciones → Validación de etiquetas...</strong>. Puede elegir entre la validación simple y completa.</p>
+
+  <p>La sintaxis oficial para variables printf es:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>La validación completa es totalmente compatible con este formato, salvo el <code>WIDTHSPECIFIER</code>. En una validación simple se comprueba la siguiente sintaxis:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Usted puede cambiar el orden de los marcadores de posición, pero entonces tiene que agregar el ARGUMENTSWAPSPECIFIER si todavía no está allí. Esto significa añadir un número de secuencia y un signo de dólar después del <code>%</code>. Por ejemplo, <code>"%s es una aplicación %s" </code>es igual a<code> "%1$s es una aplicación %2$s"</code> que usted puede traducir con <code>"a%2$s aplicación %1$s"</code>.
+  </p>
+  <hr>
+
+  <table style="width: 100%;" summary="sólo formatea" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Aviso Legal</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Inicio</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice de Contenido</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

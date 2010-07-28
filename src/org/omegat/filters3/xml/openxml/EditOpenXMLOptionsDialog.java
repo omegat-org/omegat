@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
+               2010 Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -69,6 +70,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         translateSlideMastersCB.setSelected(options.getTranslateSlideMasters());
         translateSlideLayoutsCB.setSelected(options.getTranslateSlideLayouts());
         translateChartsCB.setSelected(options.getTranslateCharts());
+        aggregateTagsCB.setSelected(options.getAggregateTags());
         
         //  Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -129,6 +131,8 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         translateSlideLayoutsCB = new javax.swing.JCheckBox();
         translateChartsCB = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        aggregateTagsCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("OpenXML_FILTER_OPTIONS")); // NOI18N
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -274,6 +278,17 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jLabel1.setEnabled(false);
         jPanel1.add(jLabel1);
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, OStrings.getString("OpenXML_GENERIC_OPTIONS")); // NOI18N
+        jPanel1.add(jLabel6);
+
+        org.openide.awt.Mnemonics.setLocalizedText(aggregateTagsCB, OStrings.getString("OpenXML_AGGREGATE_TAGS")); // NOI18N
+        aggregateTagsCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aggregateTagsCBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(aggregateTagsCB);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -327,6 +342,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         options.setTranslateSlideMasters(translateSlideMastersCB.isSelected());
         options.setTranslateSlideLayouts(translateSlideLayoutsCB.isSelected());
         options.setTranslateCharts(translateChartsCB.isSelected());
+        options.setAggregateTags(aggregateTagsCB.isSelected());
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
     
@@ -344,6 +360,10 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
     private void translateDiagramsCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateDiagramsCBradiosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_translateDiagramsCBradiosActionPerformed
+
+    private void aggregateTagsCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggregateTagsCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_aggregateTagsCBActionPerformed
     
     private void doClose(int retStatus)
     {
@@ -353,6 +373,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox aggregateTagsCB;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
@@ -361,6 +382,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton okButton;

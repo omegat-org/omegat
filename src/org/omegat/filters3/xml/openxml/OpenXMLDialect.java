@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
+               2010 Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -71,6 +72,15 @@ public class OpenXMLDialect extends DefaultXMLDialect
             // Word
             "wp:align",
             "wp:posOffset",
-        });        
+        });
+
+        boolean aggregationEnabled = options.getAggregateTags();
+        /*
+         * The current OpenXML filter finds too many tags, usually causing what
+         * users call the "tag soup". Tags aggregation can help alleviate this
+         * problem, but can sometimes lead to semantic issues. Aggregation is OK
+         * only as a temporary hack, until we improve the OpenXML filter.
+         */
+        setTagsAggregationEnabled(aggregationEnabled);
     }
 }

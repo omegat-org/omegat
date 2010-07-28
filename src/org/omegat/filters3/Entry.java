@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
+               2010 Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -56,7 +57,9 @@ public class Entry
     ////////////////////////////////////////////////////////////////////////////
     // Dealing with source here
     ////////////////////////////////////////////////////////////////////////////
-    
+
+    private boolean tagsAggregationEnabled = false;
+
     /**
      * Whether the "first translatable" and "last translatable" tags were 
      * detected. They are the first starting tag that has its ending in the 
@@ -100,10 +103,60 @@ public class Entry
     {
         if (!tagsDetected)
         {
+            if (tagsAggregationEnabled) {
+                aggregateTags();
+            }
             detectTags();
             tagsDetected = true;
             enumerateTags();
         }
+    }
+
+    /** 
+     * Aggregate tags.
+     * The current OpenXML filter finds too many tags, usually causing what
+     * users call the "tag soup". Tags aggregation can help alleviate this
+     * problem, but can sometimes lead to semantic issues. Aggregation is OK
+     * only as a temporary hack, until we improve the OpenXML filter.
+     */
+    private void aggregateTags()
+    {
+        List<Element> newElements = new ArrayList<Element>();
+        AggregatedTag aggregated = null;
+
+        for (Element elem : elements) {
+            if (elem instanceof Tag) {
+                // Add this tag to the aggregated tag
+                if (aggregated == null) {
+                    aggregated = new AggregatedTag(
+                            "tag", null, Tag.TYPE_ALONE, new Attributes());
+                }
+                aggregated.add((Tag)elem);
+            } else {
+                /*
+                 * This element is not a tag:
+                 * - add previous aggregated tag (if any)
+                 * - add this element
+                 */
+                if (aggregated != null) {
+                    newElements.add(aggregated);
+                    aggregated = null;
+                }
+                newElements.add(elem);
+            }
+        }
+        // Check if there is remaining aggregated tag
+        if (aggregated != null) {
+            newElements.add(aggregated);
+            aggregated = null;
+        }
+
+        // Copy everything to elements
+        elements.clear();
+        for (Element elem : newElements) {
+            elements.add(elem);
+        }
+        newElements.clear();
     }
 
     /**
@@ -297,15 +350,29 @@ public class Entry
      * This is what the user translates.
      * E.g. for <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should return 
      * <code>Here's &lt;b0&gt;bold text&lt;/b0&gt;</code>.
+     *
+     * @param tagsAggregation Whether tags of this entry can be aggregated.
      */
-    public String sourceToShortcut()
+    public String sourceToShortcut(boolean tagsAggregation)
     {
         StringBuffer buf = new StringBuffer();
+
+        if (tagsAggregation != this.tagsAggregationEnabled) {
+            this.tagsAggregationEnabled = tagsAggregation;
+            // Each change to tags aggregation setting resets detected tags
+            tagsDetected = false;
+        }
+        
         for(int i=getFirstGood(); i<=getLastGood(); i++)
             buf.append(get(i).toShortcut());
         return buf.toString();
     }
-    
+
+    private String sourceToShortcut()
+    {
+        return sourceToShortcut(tagsAggregationEnabled);
+    }
+
     /** 
      * Returns long XML-encoded representation of the source entry for storing in TMX. 
      * E.g. for <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should return 

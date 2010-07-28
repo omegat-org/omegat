@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Martin Fleurke, Alex Buloichik, Didier Briel
                2009 Didier Briel
+               2010 Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -534,7 +535,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         if (currEntry().size()==0)
             return;
 
-        String src = currEntry().sourceToShortcut();
+        boolean tagsAggregation = isTagsAggregationEnabled();
+        String src = currEntry().sourceToShortcut(tagsAggregation);
         Element lead = currEntry().get(0);
         String translation = src;
         if ( (lead instanceof Tag) &&
@@ -704,9 +706,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
             translatableTagName.pop(); // Remove it
     }
 
-
     private boolean isClosingTagRequired(){
         return dialect.getClosingTagRequired();
+    }
+
+    private boolean isTagsAggregationEnabled() {
+        return dialect.getTagsAggregationEnabled();
     }
 
     /** Returns whether we face out of turn tag we should collect separately. */

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007-2010 Didier Briel
+               2010 Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -47,8 +48,12 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[] Slide Layouts (PowerPoint)
  * <li>[] Charts (PowerPoint)
  * </ul>
- * 
- * @author Didier Briel
+ * Generic options:
+ * <ul>
+ * <li>[+] Tags Aggregation
+ * </ul>
+ *
+ * @author Didier Briel, Antonio Vilei
  */
 public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_HIDDEN_TEXT = "translateHiddenText";
@@ -63,6 +68,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_SLIDE_MASTERS = "translateSlideMasters";
     private static final String OPTION_TRANSLATE_SLIDE_LAYOUTS = "translateSlideLayouts";
     private static final String OPTION_TRANSLATE_CHARTS = "translateCharts";
+    private static final String OPTION_AGGREGATE_TAGS = "aggregateTags";
 
     public OpenXMLOptions(Map<String, String> options) {
         super(options);
@@ -232,6 +238,20 @@ public class OpenXMLOptions extends AbstractOptions {
      */
     public void setTranslateCharts(boolean translateCharts) {
         setBoolean(OPTION_TRANSLATE_CHARTS, translateCharts);
+    }
+
+    /**
+     * Returns whether OpenXML tags should be aggregated.
+     */
+    public boolean getAggregateTags() {
+        return getBoolean(OPTION_AGGREGATE_TAGS, true);
+    }
+
+    /**
+     * Sets whether OpenXML tags should be aggregated.
+     */
+    public void setAggregateTags(boolean aggregateTags) {
+        setBoolean(OPTION_AGGREGATE_TAGS, aggregateTags);
     }
 
 }

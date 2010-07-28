@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Martin Fleurke
                2009 Didier Briel
+               2010 Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -397,6 +398,25 @@ public class DefaultXMLDialect implements XMLDialect
      */
     public Boolean getClosingTagRequired(){
         return closingTagRequired;
+    }
+
+    /**
+     * The parameter setting whether tags aggregation can be enabled
+     */
+    private boolean tagsAggregationEnabled = false;
+
+    /**
+     * {@inheritDoc}
+     */
+    public void setTagsAggregationEnabled(boolean onOff){
+        tagsAggregationEnabled = onOff;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public Boolean getTagsAggregationEnabled(){
+        return tagsAggregationEnabled;
     }
 
 }

@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Martin Fleurke
                2009 Didier Briel
+               2010 Antonio Vilei
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -215,4 +216,16 @@ public interface XMLDialect
      * Gives the value of closingTagRequired.
      */
     Boolean getClosingTagRequired();
+
+    /**
+     * Sets tagsAggregationEnabled to <code>true</code> or <code>false</code>
+     * @param onOff The parameter setting whether tags aggregation can be
+     * enabled in order to reduce the number of tags shown to the user.
+     */
+    void setTagsAggregationEnabled(boolean onOff);
+
+    /**
+     * Gives the value of tagsAggregationEnabled.
+     */
+    Boolean getTagsAggregationEnabled();
 }

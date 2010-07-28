@@ -1,10 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.8 
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   0 Bugfix
 ----------------------------------------------------------------------
 2.1.8 vs. 2.1.7 update 3
+
+  Implemented requests:
+
+  - Aggregate OpenXML tags
+  http://sourceforge.net/support/tracker.php?aid=3036227
 
   Other enhancements:
 

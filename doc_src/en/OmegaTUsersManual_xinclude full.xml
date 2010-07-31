@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+
+<book lang="en">  <bookinfo>
+    <title>OmegaT User Manual</title>
+
+    <author><firstname>Vito</firstname>
+<surname>Smolej</surname>
+    </author>
+
+    <pubdate><?dbtimestamp format="d B Y"?></pubdate>
+  </bookinfo>
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="01_AboutOmegaT.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="02_InstantStartGuide.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="02_InstallingAndRunning.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="03_UserInterface.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="04_Menu.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="04_ProjectProperties.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FileFilters.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FilesAndDirectories.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FilesToTranslate.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="06_TranslationEditing.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_FormattedText.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_PlainText.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_TranslationMemories.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="08_Regexp.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="08_Searches.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="09_Segmentation.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="10_Dictionaries.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="10_Glossaries.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="11_GoogleTranslate.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="12_Spellchecker.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="13_Miscelanea.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A1_Website.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A2_Languages.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A3_Keyboard.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A4_LegalNotices.xml" />
+  <index></index>
+</book>

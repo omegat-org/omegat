@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<chapter id="ch07.formatted.text">
+  <title>Working with formatted texts</title>
+
+  <para>Formatting information present in the source file usually needs to be
+  reproduced in the target file. The in-line formatting information made
+  possible by the supported formats (at present DocBook, HTML, XHTML, Open
+  Document, and OpenOffice.org) is presented as tags in <application>OmegaT</application>. In a normal
+  case tags are ignored when considering the similarity between different
+  texts for matching purposes. Tags reproduced in the translated segment will
+  be present in the translated document.</para>
+
+  <section id="formatting.tags">
+    <title>Formatting tags</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Tag naming:</term>
+
+        <listitem>
+          <para>The tags consist of one to three characters and a number.
+          Unique number allows to group those tag that correspond to each
+          other, and differentiate the tags that can have the same shortcut
+          character, but are in fact different. The characters may or may not
+          reflect the value of the formatting the tag represents (e.g. bold,
+          italics, etc.)</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Tag numbering:</term>
+
+        <listitem>
+          <para>Tags are numbered in an incremental way by tag group. What we
+          call "tag groups" here is either a single tag (like &lt;br1&gt;), on
+          its own, or 2 tags forming a pair (like &lt;i0&gt; and &lt;/i0&gt;).
+          Within a segment, the first group (pair or singleton) gets the
+          number 0, the second the number 1 etc. The first example below has 3
+          tag groups (a pair, a singleton, and then another pair), the second
+          example only has one group (a pair).</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Pairs and singletons:</term>
+
+        <listitem>
+          <para>Tags always come either in singletons or in pairs. Single tags
+          indicate formatting information that does not affect the surrounding
+          text (extra space or line break for example).</para>
+
+          <para><literal> &lt;segment
+          2132&gt;&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+          &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;end segment&gt;
+          </literal></para>
+
+          <para>&lt;br1&gt; is a single tag and does not affect any
+          surrounding text. Paired tags usually indicate style information
+          that applies to the text between the opening tag and the closing tag
+          of a pair. Whatever happens to a pair, the opening tag should always
+          come before the closing tag:</para>
+
+          <para> &lt;<literal>segment 3167&gt;Log file
+          (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and
+          errors.&lt;end segment&gt; </literal></para>
+
+          <para>&lt;b0&gt; and &lt;/b0&gt; are paired and affect the text
+          log.txt.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="tags.and.sentence.segmenting">
+    <title>Tags and sentence segmenting</title>
+
+    <para><application>OmegaT</application> creates its tags before sentences segmenting is applied.
+    Depending on the segmenting rules, it may appear as if tags do not respect
+    the above rules of numbering and grouping. Check the following text:
+    "Before: \. After: \s". One would expect segmentation as
+    follows(&lt;b0&gt; and &lt;/b0&gt; stand for the start and end of
+    italics):</para>
+
+    <para><literal> &lt;segment ....&gt; &lt;b0&gt;Before: \. After:
+    \s&lt;/b0&gt;&lt;end segment&gt; </literal></para>
+
+    <para>However, when the default segmenting rules are applied to this
+    segment, we will end with the following result: </para>
+
+    <para><literal>&lt;segment 1990&gt; &lt;b0&gt;Before: \. &lt;end
+    segment&gt;</literal></para>
+
+    <para><literal>&lt;segment 1991&gt; After: \s&lt;/b0&gt;&lt;end
+    segment&gt; </literal></para>
+
+    <para>Applying the rule <emphasis>segment after a period followed by a
+    space </emphasis>splices the original text in two segments, even if the
+    two tags &lt;b0&gt; and &lt;/b0&gt; should be kept together in the same
+    segment. In some cases that may even cause problems in the translation,
+    when tags must be placed differently in the target language to reflect the
+    word order of that language (see Tag operations below).</para>
+  </section>
+
+  <section id="tag.operations">
+    <title>Tag operations</title>
+
+    <para>Care must be exercised with tags. If they are accidentally changed,
+    the formatting of the final file may be corrupted. The sound approach is
+    "Don't fix, what's not broken". However, it is still good to know, what is
+    possible and how to do it.</para>
+
+    <para><emphasis role="bold">Tag duplication: </emphasis>To duplicate tag
+    groups, just copy them in the position of your choice. Keep in mind that
+    in a pair group the opening tag must come before the closing tag. The
+    formatting represented by the group you duplicated will be applied to the
+    section where you duplicated it.</para>
+
+    <para>Example:</para>
+
+    <para><literal> &lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
+    is going to be duplicated here.&lt;end segment&gt; </literal></para>
+
+    <para>After duplication:</para>
+
+    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
+    has been &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;end segment&gt;
+    </literal></para>
+
+    <para><emphasis role="bold">Tag group deletion:</emphasis>To delete tag
+    groups, just remove them from the segment. Keep in mind that a pair group
+    must have its opening as well as its closing tag deleted to ensure that
+    all traces of the formatting are properly erased, otherwise the translated
+    file might get corrupted. By deleting a tag group you will remove the
+    related formatting from the translated file.</para>
+
+    <para>Example:</para>
+
+    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt; is
+    going to be deleted.&lt;end segment&gt; </literal></para>
+
+    <para>After deletion:</para>
+
+    <para><literal>&lt;segment 0001&gt;This formatting has been
+    deleted.&lt;end segment&gt; </literal></para>
+  </section>
+
+  <section id="tag.group.nesting">
+    <title>Tag group nesting</title>
+
+    <para>Modifying a tag group order may result in the nesting of a tag group
+    within another tag group. This is fine as long as the enclosing group
+    totally encloses the enclosed group. In other words, when moving paired
+    tags make sure that both the opening and the closing tag have been move in
+    the target otherwise the translated file might be corrupted and may not
+    open. The nested part will then have both formats apply to it.</para>
+
+    <para>Example:</para>
+
+    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
+    &lt;b1&gt;one&lt;/b1&gt; is going to be nested inside formatting
+    zero.&lt;end segment&gt; </literal></para>
+
+    <para>After nesting:</para>
+
+    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;Formatting
+    &lt;b1&gt;one&lt;/b1&gt;&lt;/b0&gt; has been nested inside formatting
+    zero.&lt;end segment </literal></para>
+  </section>
+
+  <section id="tag.group.overlapping">
+    <title>Tag group overlapping</title>
+
+    <para>Overlapping is the result of bad manipulations of tag pairs and will
+    certainly result in formatting corruption and sometimes in the translating
+    file not opening at all. </para>
+
+    <para>Example:</para>
+
+    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
+    &lt;b1&gt;one&lt;/b1&gt; is going to be messed up.&lt;end segment&gt;
+    </literal></para>
+
+    <para>After a bad manipulation:</para>
+
+    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;Formatting
+    &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is very messed up now.&lt;end
+    segment&gt; </literal></para>
+  </section>
+
+  <section id="tag.group.validation">
+    <title>Tag group validation</title>
+
+    <para>The validate tags function detects changed tags (whether done
+    deliberately or by accident), and shows the affected segments. Starting
+    this function - by pressing <guimenuitem>Ctrl+T</guimenuitem> - will open
+    a window containing all segments in the file that may have suspected
+    broken or bad tags in the translation. Bugs in the translated tagged text
+    are often a problem in OpenDocument or OpenOffice.org files as they may
+    not open due to tag problems created in the process of translation. Fixing
+    the tags and recreating the target documents is easy with the validate
+    tags function. The window, that opens on pressing
+    <guimenuitem>Ctrl+T</guimenuitem>, features a 3 column table with a link
+    to the segment, the original segment and the target segment:</para>
+
+
+      <figure id="tag.validation">
+	  <title>Tag validation entry</title>
+        <imageobject>
+          <imagedata fileref="images/TagValidation.png"></imagedata>
+        </imageobject>
+      </figure>
+
+    <para>The tags are highlighted in bold blue for easy comparison between
+    the original and the translated contents. Click on the link to activate
+    the segment in the Editor. Correct the error if necessary (in the case
+    above it is the missing &lt;i2&gt;&lt;/i2&gt; pair) and press
+    <guimenuitem>Ctrl+T</guimenuitem> to return to the tag validation window
+    to correct other errors. Tag errors are tag manipulations in the
+    translation that do not reproduce the same tag order and number as in the
+    original segment. Some tag manipulations are necessary and are benign,
+    some will cause problems when the translated document is created.</para>
+  </section>
+
+  <section id="hints.for.tag.management">
+    <title>Hints for tags management</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>Simplify the original text formatting</term>
+
+        <listitem>
+          <para>Tags generally represent some kind of formatting of the
+          original text. Simplifying ghe original formatting greatly
+          contributes to reducing the number of tags. Unifying used fonts,
+          font sizes, colors etc should be considered if possible as it could
+          simplify the translation and reduce the possibility for tag errors.
+          Take a look at the Tag operations section to see what can be done
+          with tags. Remember that if tags bother you and formatting is not
+          extremely relevant for the current translation, removing tags may be
+          the easiest way out of problems.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>Pay extra attention to tag pairs</term>
+
+        <listitem>
+          <para>If you need to see tags in <application>OmegaT</application> but do not need to retain
+          most of the format in the translated document you are free not to
+          include tags in the translation. In this case pay extra attention to
+          tag pairs since deleting one side of the pair but forgetting to
+          delete the other one will certainly corrupt your document's
+          formatting. Since tags are included in the text itself, it is
+          possible to use Segmentation rules to create segments with less
+          tags. This is an advanced feature and some experience is required if
+          you want to apply it properly.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para><application>OmegaT</application> is not yet able to detect mistakes in formatting fully
+    automatically, so it will not prompt you if you make an error or change
+    formatting to fit your target language better. Sometimes, however, your
+    translated file may look strange, and in case of OpenDocument /
+    OpenOffice.org files it may even refuse to open.</para>
+  </section>
+</chapter>

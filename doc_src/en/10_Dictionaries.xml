@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<chapter id="ch10.dictionaries">
+  <title>Dictionaries</title>
+
+  <para></para>
+
+  <section>
+    <title>How to download and install dictionaries</title>
+
+    <para>Dictionaries in <application>OmegaT</application> are based on the
+    StartDict Platform. To install the necessary files, proceed as
+    follows:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Search for the required language combination -for instance on
+        the <ulink url="http://stardict.sourceforge.net/index.php">StartDict
+        Platform</ulink> above or on <ulink
+        url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Download the file - it should be a tarball archive (extension
+        <emphasis>tar.bz</emphasis> or <emphasis>tar.bz2</emphasis>).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Use untar (or equivalent (for instance winrar in Windows) to
+        extract its contents into the project folder "Dictionary". There
+        should be three files, with extensions <emphasis>dz, idx
+        </emphasis>and <emphasis>ifo</emphasis>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Note that additionally to "source-target" dictionaries you can, via
+    Dictionary, get access to information such as:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Webster's Revised Unabridged Dictionary (1913)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Longman Dictionary of Contemporary English</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Longman Dictionary of Contemporary English</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>The Britannica Concise Encyclopedia</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>etc...</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Some of the dictionaries have no strings attached - i.e. are "Free
+    to use", and some of them, like the selection above, are under the GPL
+    license. The following example shows Merriam Webster 10th dictionary "in
+    action":</para>
+
+    <figure id="Dict.Merriam.Webster">
+      <title>Merriam Webster dictionary - use</title>
+
+      <imageobject>
+        <imagedata fileref="images/DictMerriamWebster.png" />
+      </imageobject>
+    </figure>
+  </section>
+
+  <section>
+    <title>Problems with dictionaries</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>Are your dict files in the folder (or in one of the subfolders
+        thereof), specified in your Project file? Check in <menuchoice>
+            <shortcut>
+              <keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>E</keycap>
+              </keycombo>
+            </shortcut>
+
+            <guimenu>Project</guimenu>
+
+            <guimenuitem>Properties</guimenuitem>
+          </menuchoice>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Does the folder contain three files of the same name, with
+        extensions ? If there's just one file with the expected name, then
+        check its extension. If it is <emphasis>tar.bz</emphasis>, then you
+        have forgotten to unpack (untar) it.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<appendix id="A4.legal.notices">
+  <title>Legal notices</title>
+
+  <section id="legal.notices.for.documentation">
+    <title>For the documentation</title>
+
+    <para><emphasis role="bold">Copyright</emphasis></para>
+
+    <para>The documentation distributed with <application>OmegaT</application> 2.0 includes the User
+    Manual and the readme.txt document. The documentation, except for the
+    <emphasis role="bold">Instant Start Guide</emphasis> appendix, is Copyright
+    ©2010 Vito Smolej. The Instant Start Guide appendix is Copyright ©2005-2010
+    Samuel Murray.</para>
+
+    <para><emphasis role="bold">Distribution and
+    modifications</emphasis></para>
+
+    <para>The documentation is a free document; you can redistribute it and/or
+    modify it under the terms of the GNU General Public License as published
+    by the Free Software Foundation; either version 2 of the License, or (at
+    your option) any later version.</para>
+
+    <para><emphasis role="bold">Warranty</emphasis></para>
+
+    <para>The documentation is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
+    Public License for more details.</para>
+  </section>
+
+  <section id="legal.ntices.for.application">
+    <title>For the Application</title>
+
+    <para><emphasis role="bold">Copyright</emphasis></para>
+
+    <para><emphasis role="bold"><application>OmegaT</application> 2.0</emphasis> is Copyright © 2000-2010
+    Keith Godfrey, Maxym Mykhalchuk, Zoltan Bartko, Didier Briel, Kim Bruning,
+    Alex Buloichik, Sandra Jean Chua, Martin Fleurke, Thomas Huriaux, Fabián
+    Mandelbaum, Arno Peters, Henry Pijffers, Tiago Saboga, Andrzej Sawuła,
+    Benjamin Siband and Martin Wunderlich.</para>
+
+    <para><emphasis role="bold">Distribution and
+    modifications</emphasis></para>
+
+    <para><emphasis role="bold">O</emphasis><emphasis role="bold">megaT
+    2.0</emphasis> is a free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by the
+    Free Software Foundation; either version 2 of the License, or (at your
+    option) any later version.</para>
+
+    <para><emphasis role="bold">Warranty</emphasis></para>
+
+    <para><emphasis role="bold"> <application>OmegaT</application> 2.0 </emphasis>is distributed in the
+    hope that it will be useful, but WITHOUT ANY WARRANTY; without even the
+    implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+    See the GNU General Public License for more detail.</para>
+  </section>
+</appendix>

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<chapter id="ch11.google.granslate">
+  <title>Google Translate</title>
+
+  <section id="introduction">
+    <title>Introduction</title>
+
+    <para>Google Translate is the service offered by Google, to translate
+    sentences, web sites and complete texts between an ever-growing number of
+    languages. At the time of writing the list includes more than 50
+    languages, from Albanian to Yiddish, including of course all the major
+    languages (see Languages available for translation). It's translation
+    produced by state-of-the-art technology, without the intervention of human
+    translators. Google's research group has developed its own statistical
+    translation system for the language pairs now available on Google
+    Translate. As opposed to user-generated translation memories on one side
+    (like in the case of <application>OmegaT</application>) or rule-based systems (usually found under
+    the name of "machine translation" or MT in short) Google can afford a
+    different approach: they feed the computer billions of words of text, both
+    monolingual text in the target language, and aligned text consisting of
+    examples of human translations between the languages. Statistical learning
+    techniques are then applied to build a translation model, achieving very
+    good results in research evaluations.</para>
+
+    <para>The quality of the translation of course depends on one side on the
+    reservoir of target-language texts and the availability of their bilingual
+    versions, on the other hand on the quality of the models built. It is
+    pretty much certain that while the quality may be insufficient in some
+    cases, it will definitely get better with time and not worse. Even today's
+    most sophisticated software, however, doesn't approach the fluency of a
+    native speaker or possess the skill of a professional translator.
+    Automatic translation is very difficult due to context problems (the
+    sentence "Time flies like an arrow" being just the best known example for
+    it), it may be some time before anyone can offer human quality
+    translations.</para>
+  </section>
+
+  <section>
+    <title><application>OmegaT</application> user and Google Translate</title>
+
+    <para>The <application>OmegaT</application> user is not forced to use Google Translate. If used,
+    neither the user's decision to accept the translation nor the final
+    translation are made available to Google. The following window shows an
+    example of a) the English source b) Spanish and c) Slovenian Google
+    Translate translation.</para>
+
+    <figure id="moby.dick">
+	<title>Google Translate - example</title>
+      <imageobject>
+        <imagedata fileref="images/MobyDick.png" />
+      </imageobject>
+    </figure>
+
+    <para>The Spanish translation is better than the Slovenian. Note
+    <emphasis>interesar</emphasis> and<emphasis> navegar</emphasis> in
+    Spanish, translating the verbs interest and sail correctly. In the
+    Slovenian version both words have been translated as nouns. Remember
+    however, that the difference is solely due to the fact that there's far
+    more bilingual material available for the Spanish language than there is
+    for Slovenian.</para>
+
+    <para>From now on a suggestion for the translation will appear in the
+    Google Translate pane for every new source segment opened. If you find the
+    suggestion acceptable, press <keycombo><keycap>Ctrl</keycap>
+                  <keycap>M</keycap>
+</keycombo> to replace the target part of the opened segment with the suggestion. In the above segment, for
+    instance, <keycombo><keycap>Ctrl</keycap>
+                  <keycap>F</keycap>
+</keycombo> would overwrite the Spanish
+    version with the Slovenian suggestion.</para>
+
+    <para>If you do not want <application>OmegaT</application> to send your source segments to Google to
+    get translated, uncheck the Google Translate menu entry in Options.</para>
+  </section>
+
+  <section id="Google.Translate.troubleshooting">
+    <title>Google Translate trouble shooting</title>
+
+    <para>If there's nothing appearing in the Google Translate pane, then
+    check the following:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Are you online? You need to be online to be able to use Google
+        Translate.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>What is the source language? Google Translate may not as yet be
+        able to offer its services for it.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Check Google Translate online for your language pair. Does it
+        work</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

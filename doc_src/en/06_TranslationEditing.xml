@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+
+<chapter id="ch06.translation.editing">
+
+  <title>Editing field behaviour</title>
+
+  <para>The dialogue window, in <menuchoice><guimenu>Options</guimenu><guimenuitem>Editing Behaviour...</guimenuitem></menuchoice> lets the user determine, how the current segment
+  be initialized and handled:</para>
+
+   
+
+  <figure id="editing.behaviour.options">
+  <title>Editing behaviour options</title>
+    <imageobject>
+      <imagedata fileref="images/EditingBehaviourOptions.png" />
+    </imageobject>
+  </figure>
+
+   
+
+  <section id="automatic.match.insertion">
+    <title>Automatic match insertion</title>
+
+    <para>You translate your files by moving from segment to segment, at the
+    same time editing the current segment. When moving between segments, you
+    may wish the editing field were populated with the existing translation or
+    with the source text. In <menuchoice><guimenu>Options</guimenu><guimenuitem>Editing Behaviour...</guimenuitem></menuchoice>  <application>OmegaT</application> offers you the following alternatives:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>The source text</term>
+
+        <listitem>
+          <para>you may automatically fill the editing field with the source
+          text. This is pretty useful for the text containing many trade marks
+          and other proper nouns you need to leave intact.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Leave the segment empty</term>
+
+        <listitem>
+          <para><application>OmegaT</application> will leave the editing field blank. This option allows
+          you to enter the translation without the need to remove the source
+          text, thus saving you a pair of keystrokes (<emphasis
+          role="bold">Ctrl+A </emphasis>and <emphasis
+          role="bold">Del)</emphasis></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Insert the best fuzzy match</term>
+
+        <listitem>
+          <para><application>OmegaT</application> will insert the translation of the string most similar
+          to the current source, if it is above the similarity threshold you
+          can adjust in this case.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+  <section id="allow.translation.equal.to.source">
+    <title>Allow the translation to be equal to source</title>
+
+    <para>Documents you need to translate might contain trade marks, names or
+    other proper nouns that have to be the same in translated documents. There
+    are two strategies for segments that contain only such invariable
+    text.</para>
+
+    <para>You may decide not to translate such segments at all - as a result
+    <application>OmegaT</application> will report these segments as not translated. This is the default.
+    The alternative is to enter the translation even if it's equal to the
+    source text, so that <application>OmegaT</application> remembers you have reviewed the text and
+    decided to keep the target segment equal to the source. To be able to do
+    so, go to 
+	<menuchoice><guimenu>Options</guimenu><guimenuitem>Editing Behaviour...</guimenuitem></menuchoice> and
+    check the box <emphasis role="bold">Allow translation to be equal to
+    source</emphasis>.</para>
+  </section>
+  <section id="export.segment.to.text.files">
+    <title>Export the segment to text files</title>
+
+    <para>You may prefer to leave the untranslated segments as they are and
+    come back later to them. In this case you can activate the check box Allow
+    the translation to be equal to source and <application>OmegaT</application> will save such source
+    segments to a file to be translated later.</para>
+  </section>
+
+   
+</chapter>

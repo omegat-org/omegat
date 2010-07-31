@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<chapter id="ch07.plain.text">
+  <title>Working with plain text</title>
+
+  <para />
+
+  <section id="default.encoding">
+    <title>Default encoding</title>
+
+    <para>Plain text files - in most of the cases with a .txt. extension -
+    contain exclusively textual information. There is no clearly defined way
+    to inform the computer which language they contain. In (very) simple
+    terms, that means the computer will per default assume the text is written
+    in the same language the computer itself uses.</para>
+  </section>
+
+  <section id="garbled.displays">
+    <title>Garbled displays</title>
+
+    <para>If you are Russian, it is very likely that your computer works in
+    Russian too: the menus are in Russian, the files you open will be in
+    Russian etc. In most cases, the computer makes the right assumption
+    regarding the Contents of files in general: they all contain Russian and
+    nothing Russian characters could not display.</para>
+
+    <para>Now, if you are a Russian translator who translates from Japanese,
+    the Japanese files you will get, if they are plain text files, will most
+    probably be considered by the computer to be files containing Russian.
+    Because there is no information in the file itself that indicates to the
+    computer in which language they are written. The Japanese file contents
+    could be:</para>
+
+    <para>OmegaTとは、コンピュータを利用した翻訳ツールです。</para>
+
+    <para>Because it expects the contents to be Russian, your text editor
+    could very well display it like this:</para>
+
+    <para>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</para>
+
+    <para>However, it is far from Russian, it is Japanese characters wrongly
+    displayed as Russian characters.</para>
+
+    <para>As any other application, <application>OmegaT</application> is subject to this problem too. It
+    can only assume that per default plain text files can be displayed using
+    the system defaults. That works well when the computer works in French for
+    instance and the files are in English, or when the computer is German and
+    you deal with get Italian files.</para>
+  </section>
+
+  <section id="character.sets.and.encoding">
+    <title>Character sets and encoding</title>
+
+    <para>Why would that work with English and French but not with Russian and
+    Japanese? Because English and French share a common character set. Namely
+    <emphasis role="bold">Latin-1,</emphasis> or some variation of it. Until
+    recently, Russian and Japanese have not shared any character sets. Most
+    current Russian characters sets do not cover Japanese and vice versa. The
+    result is what you have seen above.</para>
+
+    <para>The Japanese client works with a Japanese computer and creates text
+    files that contain Japanese. The character set selected by the client
+    computer will depend on the operating system and on other settings, but it
+    is highly unlikely that the chosen (Japanese) character set will be
+    correctly interpreted by the Russian computer.</para>
+
+    <para>How the textual information in the specified character set is
+    physically transmitted (i.e. what are the numeric codes the computer uses
+    to interpret and display text) depends on the encoding. When the computer
+    reads the file, it "decodes" the information according to the encoding and
+    displays it according to the character set. Roughly speaking, one encoding
+    corresponds to one character set...</para>
+  </section>
+
+  <section id="OmegaT.solution">
+    <title>The <application>OmegaT</application> solution</title>
+
+    <para>There are basically three ways to address this problem in <application>OmegaT</application>.
+    They all involve the application of file filters in the<emphasis
+    role="bold"> Options </emphasis>menu.</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Either specify the encoding for your plain text files</term>
+
+        <listitem>
+          <para>- i.e. files with .txt extension - : in the <emphasis
+          role="bold">Text files </emphasis>section of the file filters
+          dialog, change the <emphasis role="bold">Source File Encoding
+          </emphasis>from &lt;auto&gt; to the encoding that corresponds to
+          your source .txt file.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>... or change the extensions of your plain text source
+        files</term>
+
+        <listitem>
+          <para>for instance from .txt to .jp for Japanese plain texts: in the
+          <emphasis role="bold">Text files</emphasis> section of the file
+          filters dialog, add a new <emphasis role="bold">Source Filename
+          Pattern</emphasis> (for example *.jp) and select the appropriate
+          parameters for the source and target encoding</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>... or change the encoding of your files to Unicode</term>
+
+        <listitem>
+          <para>open your source file in a text editor that correctly
+          interprets its encoding and save the file in the "<emphasis
+          role="bold">UTF-8"</emphasis> encoding. Change the file extension
+          from <literal>.txt </literal>to <literal>.utf8.</literal><application>OmegaT</application> will
+          automatically interpret the file as a UTF-8 file</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para><application>OmegaT</application> has by default the following short list available to make it
+    easier for you to deal with some plain text files:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt</literal> files are automatically (&lt;auto&gt;)
+        interpreted by <application>OmegaT</application> as being encoded in the computer's default
+        encoding.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt1 </literal>files are files in ISO-8859-1, covering
+        most <emphasis role="bold">Western Europe</emphasis> languages.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.txt2</literal> files are files in ISO-8859-2, that
+        covers most <emphasis role="bold">Central and Eastern
+        Europe</emphasis> languages</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><literal>.utf8</literal> files are interpreted by <application>OmegaT</application> as
+        being encoded in UTF-8 (an encoding that covers almost all languages
+        in the world).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>You can check that yourself by selecting the item <emphasis
+    role="bold">File Filters</emphasis> in the menu <emphasis
+    role="bold">Options</emphasis>. For example, when you have a Czech text
+    file (very probably written in the <emphasis
+    role="bold">ISO-8859-2</emphasis> code) you just need to change the
+    extension<literal> .txt</literal> to <literal>.txt2 </literal>and <application>OmegaT</application>
+    will interpret its contents correctly. And of course, if you want to be on
+    the safe side, consider converting this kind of files to Unicode, i.e. to
+    the <literal>.utf8 </literal>file format.</para>
+  </section>
+</chapter>

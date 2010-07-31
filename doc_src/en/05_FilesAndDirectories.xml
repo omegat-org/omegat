@@ -1,0 +1,445 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<chapter id="ch05.files.and.directories">
+  <title><application>OmegaT</application> Files and Directories</title>
+
+  <para><application>OmegaT</application> works with three types of files.</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Translation project files: They constitute a translation project.
+      Loosing them may affect the project's integrity and your ability to
+      complete a job. Project files are the most important files in <application>OmegaT</application>.
+      They are the files you will deal with on a daily basis while
+      translating.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>User setting files: They are created when <application>OmegaT</application>'s behavior is
+      modified by user accessible preference settings. Loosing them will
+      usually result in having <application>OmegaT</application> work with "factory" settings. This can
+      sometimes cause a little trouble when you are in the middle of a
+      translation.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Application files: They are included in the package you download,
+      most of them are necessary to have <application>OmegaT</application> function properly. If for some
+      reason such files are lost, just download and/or reinstall <application>OmegaT</application> to
+      restore them all.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="translation.project.files">
+    <title>Translation project files</title>
+
+    <para>An <application>OmegaT</application> translation project consists of a number of files and
+    directories.</para>
+
+    <section id="translation.project.files.location">
+      <title>Translation project files location</title>
+
+      <para>When you create a translation project, <application>OmegaT</application> automatically
+      creates a list of directories that will later serve as files
+      repositories, as well as a number of files that will be used to set some
+      project preferences and to keep the project translation memory. By
+      default, a translation project directories are all grouped under the
+      main project folder. Alternate locations for the directories can be
+      chosen at project creation or during the translation. This way it is
+      possible to select existing directories or create directories in
+      locations that reflect your work flow habits. To change the location of
+      directories after a project has been created, open 
+	  <menuchoice>
+	        <shortcut>
+          <keycombo>
+             <keycap>Ctrl</keycap>
+             <keycap>E</keycap>
+          </keycombo>
+       </shortcut>
+<guimenu>Project</guimenu><guimenuitem>Properties...</guimenuitem></menuchoice> and do the necessary
+      changes.</para>
+    </section>
+
+    <section id="translation.project.files.list">
+      <title>Translation project files list</title>
+
+      <para>In a file dialog opened by <application>OmegaT</application>, a translation project will look
+      like a file with an <application>OmegaT</application> icon associated to it. From a file browser,
+      however, the same translation project looks like just any other
+      folder.</para>
+
+        <figure id="OmegaT.projects.and.subdirectories">
+		<title>OmegaT projects and subdirectories</title>
+          <imageobject>
+            <imagedata fileref="images/OmegaT_projects_and_subdirectories.png" />
+          </imageobject>
+        </figure>
+
+      <para>Selecting the item with the <application>OmegaT</application> icon is enough to open the
+      project A translation project <emphasis
+      role="bold">Example_Project</emphasis> created with the default settings
+      will be created as a new subfolder with the following structure:</para>
+
+        <figure id="OmegaT.project">
+		<title>OmegaT project</title>
+          <imageobject>
+            <imagedata fileref="images/Omegatproject.png" />
+          </imageobject>
+        </figure>
+
+      <para>All the subdirectories will be empty initially. .</para>
+    </section>
+
+    <section id="folder.OmegaT">
+      <title>Omegat</title>
+
+      <para>The subfolder <emphasis role="bold">omegat </emphasis>will
+      eventually contain several files, the most important among them being
+      the translation memory file <filename>project_save.tmx (...)</filename>.
+      The file <filename>project_save.tmx</filename> is the working
+      translation memory for the project. With the autosave function
+      activated, it will be automatically updated when you quit. It is the
+      translation memory used to create the translated files. A number of TMX
+      files with names of the form project_save.tmx.<emphasis>&lt;date and
+      time&gt;.bak</emphasis> (...) will later on be added to this subfolder.
+      They serve as a backup for the project TM and are being added each time
+      you reopen a project, thus reflecting its contents before the current
+      session has changed it.</para>
+
+      <para>The <emphasis role="bold">stats.txt</emphasis> file (...) contains
+      the statistics about the current project and can be opened in a
+      spreadsheet application to display segment and word count information.
+      The information it contains is more detailed that what is displayed in
+      the Project Files window. The <filename>ignored_words.txt</filename> and <filename>learned_words.txt</filename> files are used by the spell
+      checker.</para>
+    </section>
+
+    <section id="folder.source">
+      <title>Source</title>
+
+      <para>The source subfolder is the space for the files to be translated.
+      You can specify a new subfolder and add the files to it the project
+      later as well in the project list window. Note that the structure of the
+      source subfolder is completely in your hands. If the files to be
+      translated are parts of a tree structure, you just need to specify the
+      top subfolder and <application>OmegaT</application> will copy it all, while keeping the tree
+      structure intact.</para>
+    </section>
+
+    <section id="folder.target">
+      <title>Target</title>
+
+      <para>When <menuchoice>
+	        <shortcut>
+          <keycombo>
+             <keycap>Ctrl</keycap>
+             <keycap>D</keycap>
+          </keycombo>
+       </shortcut>
+<guimenu>Project</guimenu><guimenuitem>Create Translated Documents</guimenuitem></menuchoice> is selected , all the files in /source/, translated
+      or not, will be reproduced here with the same folder hierarchy to
+      reflect the current state of the translation. Practically speaking,
+      <application>OmegaT</application> merges the translation information saved in <filename>/omegat/project_save.tmx</filename> with the source
+      documents to produce the <filename >target</filename>.
+      contents.</para>
+    </section>
+
+    <section id="file.omegat.project">
+      <title>omegat.project</title>
+
+      <para><application>OmegaT</application> automatically creates this file when the project is
+      created. It contains the project parameters. The parameters included in
+      this file can be modified from the Project properties window.</para>
+
+      <para><filename>project_name-omegat.tmx (...)</filename></para>
+
+      <para><filename>project_name-level1.tmx</filename></para>
+
+      <para><filename>project_name-level2.tmx</filename></para>
+
+      <para>These files contain the source and target segments corresponding
+      to the contents of the <filename >source</filename> folder 
+      at the time of their creation (usually when the translated files have
+      been created).</para>
+
+      <para />
+    </section>
+  </section>
+
+  <section id="user.files">
+    <title>User files</title>
+
+    <para />
+
+    <section>
+      <title id="user.files.location">User files location</title>
+
+      <para>User files are stored in a separate location where they can be
+      accessed by any version of <application>OmegaT</application>. The location depends on the platform
+      you use:</para>
+
+      <informaltable>
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1" colwidth="100" />
+
+          <tbody>
+            <row>
+              <entry>Windows 2000 and XP:</entry>
+
+              <entry>
+                <literal>Documents and Settings\&lt;User Name&gt;\Application
+                Data\<application>OmegaT</application></literal>
+              </entry>
+            </row>
+
+            <row>
+              <entry>Windows Vista</entry>
+
+              <entry>
+                <literal>Users\&lt;User
+                Name&gt;\AppData\Roaming\<application>OmegaT</application></literal>
+              </entry>
+            </row>
+
+            <row>
+              <entry>Windows other</entry>
+
+              <entry><literal>&lt;Something&gt;\<application>OmegaT</application></literal>
+              (&lt;Something&gt; corresponds to the location of the "home"
+              folder as determined by Java.)</entry>
+            </row>
+
+            <row>
+              <entry>Linux/Solaris/FreeBSD</entry>
+
+              <entry><literal>&lt;User Home&gt;/.omegat </literal>(.omegat is
+              a directory, the dot preceding its name makes it invisible
+              unless you type ls -a or an equivalent command.)</entry>
+            </row>
+
+            <row>
+              <entry>MAC OSX</entry>
+
+              <entry>
+                 <filename >&lt;User
+                Home&gt;/Library/Preferences/<application>OmegaT</application></filename>
+              </entry>
+            </row>
+
+            <row>
+              <entry>Other</entry>
+
+              <entry><filename >User
+                Home&gt;</filename></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+
+    <section id="user.files.list">
+      <title>User files list</title>
+
+      <informaltable>
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1" colwidth="100" />
+
+          <tbody>
+            <row>
+              <entry><filename>log.txt</filename></entry>
+
+              <entry>This file records Java error messages while <application>OmegaT</application> is
+              running. When you think <application>OmegaT</application> is behaving erratically it is
+              important to include this file or the relevant part in any
+              trouble report.</entry>
+            </row>
+
+            <row>
+              <entry>omegat.prefs</entry>
+
+              <entry>An xml file with all the GUI accessible option settings,
+              as well as window position data.</entry>
+            </row>
+
+            <row>
+              <entry>filters.conf</entry>
+
+              <entry>An xml file with all the data set by the file filters
+              preferences.</entry>
+            </row>
+
+            <row>
+              <entry>segmentation.conf</entry>
+
+              <entry>(.omegat is a directory, the dot preceding its name makes
+              it invisible unless you type ls -a or an equivalent
+              command.)</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+  </section>
+
+  <section id="application.files">
+    <title>Application files</title>
+
+    <para><application>OmegaT</application> comes as a package you can download from SourceForge. In this
+    chapter we will consider the platform independent package that contains
+    the application in a standard Java form. Other packages include a Linux
+    .tar package, a Windows installer -with or without a Java Runtime
+    Environment, a MacOSX installer and a source code package for developers.
+    This platform independent package can be used on any platform with a
+    running Java 1.5 runtime environment, including the platforms for which
+    there is a specific package. The platform independent package comes as a
+    compressed file that you need to decompress in the folder of your choice
+    for install. Decompression is usually done by double clicking on the
+    downloaded package. Once decompressed, a folder containing the following
+    contents will be created:</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100" />
+
+        <tbody>
+          <row>
+            <entry>
+              <emphasis role="bold">File/ subfolder</emphasis>
+            </entry>
+
+            <entry>
+              <emphasis role="bold">Contents</emphasis>
+            </entry>
+          </row>
+
+          <row>
+            <entry>/docs/</entry>
+
+            <entry>All the user manual files are in this folder. You can open
+            them in an internet browser to have access to external
+            links.</entry>
+          </row>
+
+          <row>
+            <entry>/images/</entry>
+
+            <entry>Icons and logo graphics are included here.</entry>
+          </row>
+
+          <row>
+            <entry>/lib/</entry>
+
+            <entry>contains Java files, necessary to the operation of
+            <application>OmegaT</application>.</entry>
+          </row>
+
+          <row>
+            <entry>join.html</entry>
+
+            <entry>This is a normal html file that once opened in your
+            internet browser will redirect you to the <application>OmegaT</application> user group hosted
+            on Yahoo Groups. Joining is not necessary but will give you access
+            to some extra services like access to some files and irregular
+            polls, besides for being able to join in <application>OmegaT</application> related
+            discussions. The group archives are public and consultation does
+            not require subscription to the group. a.</entry>
+          </row>
+
+          <row>
+            <entry><filename>changes.txt</filename></entry>
+
+            <entry>A relatively detailed list of modifications between this
+            version and the preceding versions.</entry>
+          </row>
+
+          <row>
+            <entry><filename>license.txt</filename></entry>
+
+            <entry>The GNU GENERAL PUBLIC LICENSE. This license allows you to
+            do certain things with <application>OmegaT</application>, including modifying and
+            distributing it. If you are interested in modifying or
+            distributing <application>OmegaT</application>, take a good look at this document and make
+            sure you are aware of all its implications before doing anything.
+            In case you are in doubt, don't hesitate to ask project members
+            directly either by sending them a mail from the Source Forge page
+            or by sending a public mail to the user group.</entry>
+          </row>
+
+          <row>
+            <entry><filename>doc-license.txt</filename></entry>
+
+            <entry>The GNU GENERAL PUBLIC LICENSE. This license covers the
+            documentation. See above.</entry>
+          </row>
+
+          <row>
+            <entry><filename>readme.txt</filename></entry>
+
+            <entry>This file is very important and you should make sure you
+            read it before starting <application>OmegaT</application>. It includes general information
+            about <application>OmegaT</application>, where to find more information, how to contribute
+            etc. It is translated to a number of languages.</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"><application>OmegaT</application></entry>
+
+            <entry rowsep="0">A text file that containing two lines:</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0" />
+
+            <entry rowsep="0">
+              <literal>#!/bin/bash java</literal>
+            </entry>
+          </row>
+
+          <row>
+            <entry rowsep="0" />
+            <entry rowsep="0">
+              <literal>java -jar <application>OmegaT</application>.jar $*</literal>
+            </entry>
+          </row>
+
+          <row>
+            <entry />
+            <entry>You may find this file useful if you make it executable
+            (<literal>chmod +x <application>OmegaT</application></literal>) from the command line after
+            making sure you are in the /OmegaT_2.0/ directory. From now on
+            you'll be able to start <application>OmegaT</application> by calling this file from the
+            command line.</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"><application>OmegaT</application>.bat</entry>
+
+            <entry rowsep="0">A batch file, used to launch <application>OmegaT</application> from the
+            Windows command line. It contains just the following line:</entry>
+          </row>
+
+          <row>
+            <entry />
+
+            <entry>
+              <literal>java -jar <application>OmegaT</application>.jar %*</literal>
+            </entry>
+          </row>
+
+          <row>
+            <entry><application>OmegaT</application>.jar</entry>
+
+            <entry>The main <application>OmegaT</application> application. To launch <application>OmegaT</application> you have to
+            either call this file from the command line or launch it from your
+            file manager (usually by double-clicking it).</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

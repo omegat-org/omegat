@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<chapter id="Ch02.instant.start.guide">
+  <title>Start Using <application>OmegaT</application> in 5 Minutes! - Instant
+  Start Guide</title>
+
+  <para>This instant start guide covers only the very basics. Ideally, all
+  users should read the User Manual to familiarize themselves with everything
+  <application>OmegaT</application> has to offer. Shortcuts described here use
+  the "<keycombo>
+      <keycap>Ctrl</keycap>
+
+      <keycap>key</keycap>
+    </keycombo>" convention but Mac users should read "<keycombo>
+      <keycap>cmd</keycap>
+
+      <keycap>key</keycap>
+    </keycombo>" instead. The <keycap>"cmd</keycap>" key either has a
+  "command" label or an apple mark on Apple keyboards.</para>
+
+  <section id="briefly.how.OmegaT.works">
+    <title>Briefly, how <application>OmegaT</application> works</title>
+
+    <para>The <application>OmegaT</application> screen consists of one space
+    with <link linkend="windows.you.will.use.frequently">five distinct
+    windows</link>. Each of these can be resized using the mouse. On the left
+    is the Editor where you type your translation. On the top right is the
+    Match Viewer, where translation memory matches will be displayed. Below
+    this is the Glossary Viewer, where glossary matches will be
+    displayed.</para>
+
+    <para>In the Editor window <application>OmegaT</application> presents the
+    source text 'segmented' into sentences (or paragraphs). You translate
+    these segments one by one. As you pass from segment to segment your
+    translations are recorded in a translation memory. Once all the segments
+    have been translated (or before, if you request)
+    <application>OmegaT</application> will use the translation memory to
+    generate the translated document(s) in a “Target” folder.</para>
+
+    <para><application>OmegaT</application> organizes your translation work in
+    so-called translation projects. For each project
+    <application>OmegaT</application> will create a set of folders. These are
+    used to store the source documents to be translated, the glossaries you
+    may wish to use, and any translation memories you may want to use.
+    <application>OmegaT</application> also creates a “Target” folder which
+    will contain the final translated documents.</para>
+  </section>
+
+  <section>
+    <title>How to translate using <application>OmegaT</application></title>
+
+    <section id="create.and.open.new.project">
+      <title>Create and open a new project</title>
+
+      <para>Select <menuchoice>
+          <guimenu>Project</guimenu>
+
+          <guimenuitem>New...</guimenuitem>
+        </menuchoice> from the menu.</para>
+
+      <para>Navigate to the folder where you wish to save the project files,
+      and type in a name for the translation project. This name will be used
+      for the main project folder; all the project files will be stored in
+      this folder or its subfolders.</para>
+
+      <para><application>OmegaT</application> will prompt you to confirm or
+      change the project folders to be created, using the dialog below:</para>
+
+      <figure id="New.project.dialog.window">
+        <title><indexterm class="singular">
+            <primary>Project</primary>
+
+            <secondary>Project dialog window - figure</secondary>
+          </indexterm>New project - dialog window</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/NewProject.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>You can simply accept the location of the subfolders, but make
+      sure first that the source and translation language codes are correct.
+      Select the language code (2 letters) or language-and-region code (2 + 2
+      letters) from the drop-down list, or type them in by hand (the language
+      code can be 2 or 3 letters). Make a mental note of the location of the
+      Target subfolder (for your translated documents). If you want
+      <application>OmegaT</application> to segment by sentence instead of by
+      "paragraph", it's a good idea to double-check the Segmentation
+      Rules.</para>
+
+      <para>When you click OK to accept the project set-up,
+      <application>OmegaT</application> will prompt you to select the source
+      documents for import. You can import individual files, or you can import
+      entire folder trees (with all files in all subfolders). If you've
+      accidentally imported the wrong documents, or too many documents, you
+      can simply remove them from the Source folder of your
+      <application>OmegaT</application> project (using your system's file
+      manager, for example).</para>
+
+      <para>To check your list of files to be translated, consult the
+      <emphasis role="bold">Project Files</emphasis> window (Menu: <menuchoice>
+          <guimenu>Project</guimenu>
+
+          <guimenuitem>Project Files...</guimenuitem>
+        </menuchoice>, if it does not open automatically). If you have had to
+      change the Contents of the Source folder, remember to reload the project
+      first (Menu: <menuchoice>
+          <shortcut>
+            <keycap>F5</keycap>
+          </shortcut>
+
+          <guimenu>Project</guimenu>
+
+          <guimenuitem>Reload</guimenuitem>
+        </menuchoice>.). <application>OmegaT</application> opens the first
+      file in the project list by default. Remember,
+      <application>OmegaT</application> can only translate files in the
+      formats below if they match the patterns defined in the file filters.
+      Any other files will be ignored.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>OpenDocument/OpenOffice.org</para>
+        </listitem>
+
+        <listitem>
+          <para>Plain text</para>
+        </listitem>
+
+        <listitem>
+          <para>.PO</para>
+        </listitem>
+
+        <listitem>
+          <para>Bundle.properties Java</para>
+        </listitem>
+
+        <listitem>
+          <para>XHTML, HTML</para>
+        </listitem>
+
+        <listitem>
+          <para>HTML Help Compiler</para>
+        </listitem>
+
+        <listitem>
+          <para>INI ('key=value' format)</para>
+        </listitem>
+
+        <listitem>
+          <para>DocBook</para>
+        </listitem>
+
+        <listitem>
+          <para>Microsoft Open XML</para>
+        </listitem>
+
+        <listitem>
+          <para>Okapi monolingual XLIFF</para>
+        </listitem>
+
+        <listitem>
+          <para>QuarkXPress CopyFlowGold for QuarkXPress</para>
+        </listitem>
+
+        <listitem>
+          <para>Subtitle files (SRT)</para>
+        </listitem>
+
+        <listitem>
+          <para>ResX</para>
+        </listitem>
+
+        <listitem>
+          <para>Android resource</para>
+        </listitem>
+
+        <listitem>
+          <para>LaTeX</para>
+        </listitem>
+
+        <listitem>
+          <para>Mozilla DTD</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="translate.the.segments.one.by.one">
+      <title>Translate the segments one by one</title>
+
+      <para>Once you have defined the project and the files to be translated,
+      <application>OmegaT</application> will open the first source file in the
+      Editor.</para>
+
+      <para>The active segment is highlighted in green; a copy of the source
+      text is displayed below it, in the “target field”. (At this point, all
+      text outside the target field is protected and cannot be modified.) You
+      must type your translation between the tags <literal>&lt;segment
+      0001&gt; </literal>and <literal>&lt;end segment&gt;,</literal>
+      overwriting the source text. Press <emphasis
+      role="bold">"ENTER"</emphasis> to advance to the next segment.
+      Note:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>To move to any other part of the text, whether above or below,
+          double-click on the sentence or paragraph you wish to open.</para>
+        </listitem>
+
+        <listitem>
+          <para>If you prefer to translate into an empty target field, set
+          this option in <menuchoice>
+              <guimenu>Options</guimenu>
+
+              <guimenuitem>Editing Behaviour...</guimenuitem>
+            </menuchoice></para>
+        </listitem>
+
+        <listitem>
+          <para>You can change the setup of the Editor pane (for instance to
+          show or not the source text, highlight the translated text etc) in
+          the Main menu entry View.</para>
+
+          <para>When you press <emphasis role="bold">"ENTER"</emphasis>,
+          several things happen invisibly: <application>OmegaT</application>
+          adds the segment pair (the source segment and its translation) to
+          the translation memory and also automatically translates any other
+          identical segments that it detects in the other project files. It
+          also scans the translation memory and glossary in search of matches
+          for the next untranslated segment.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="use.matches.in.TMs.dictionaries.and.glossaries">
+      <title>Use matches in the translation memories, dictionaries and
+      glossaries</title>
+
+      <section id="translation.memory.matches">
+        <title>Translation memory matches</title>
+
+        <figure>
+          <title>Matches pane</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchesPane.png" />
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>If <application>OmegaT</application> finds any fuzzy matches
+        (30% or over) for the next segment in translation memories available,
+        it displays these in the Match Viewer. The first match is pre-selected
+        in the Match Viewer by default.</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Press <keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>I</keycap>
+              </keycombo> to insert the pre-selected match at the cursor
+            position, or...</para>
+          </listitem>
+
+          <listitem>
+            <para>Press <keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>R</keycap>
+              </keycombo> to overwrite the entire segment with the
+            pre-selected match.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>If several matches have been found and you prefer not to use the
+        pre-selected match:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Select the match you prefer in the Match Viewer: <keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>2</keycap>
+              </keycombo> for the second match displayed, <keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>3</keycap>
+              </keycombo> for the third match, etc.</para>
+          </listitem>
+
+          <listitem>
+            <para>Then use the <keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>I</keycap>
+              </keycombo> or <keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>R</keycap>
+              </keycombo> shortcuts as above.</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>(You can tell <application>OmegaT</application> to insert any
+        first match above a specified matching percentage automatically into
+        the target field whenever the segment opens. Set this option using
+        <menuchoice>
+            <guimenu>Options</guimenu>
+          </menuchoice></para>
+      </section>
+
+      <section id="glossary.and.dictionary.matches">
+        <title>Glossary and Dictionary matches</title>
+
+        <para>Matching terms in glossaries and dictionaries, that you may have
+        included in the project, will be displayed for reference in the
+        glossary and dictionary panes.</para>
+      </section>
+
+      <section id="use.searches">
+        <title>Use searches</title>
+
+        <para><application>OmegaT</application> provides a powerful range of
+        search functions. Call up the Search window with <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>F</keycap>
+          </keycombo> and type in the word or phrase you wish to search for in
+        the "Search for" box. Alternatively, select a word or phrase anywhere
+        in the Editor pane and press <keycombo>
+            <keycap>Ctrl</keycap>
+
+            <keycap>F</keycap>
+          </keycombo> to put it into the "Search for" box in the window, that
+        opens..</para>
+      </section>
+
+      <section id="use.Google.Translate">
+        <title>Use Google Translate</title>
+
+        <para>In the Google Translate pane, if activated, you will
+        automatically get a suggestion for the translation of the current
+        segment. Press <emphasis>Ctrl+M </emphasis> to replace the target
+        segment with it.</para>
+      </section>
+    </section>
+
+    <section id="create.translated.documents">
+      <title>Create translated documents</title>
+
+      <para>When you have translated all the segments (or earlier if you
+      wish), <application>OmegaT</application> will update the target
+      document(s) using the translations stored in the translation memory. To
+      do so, select <menuchoice>
+          <shortcut>
+            <keycombo>
+              <keycap>Ctrl</keycap>
+
+              <keycap>D</keycap>
+            </keycombo>
+          </shortcut>
+
+          <guimenu>Project</guimenu>
+
+          <guimenuitem>Create Translated Documents</guimenuitem>
+        </menuchoice> from the menu. <application>OmegaT</application> will
+      build translated versions of all the translatable documents in the
+      Source folder of the project, whether or not they have been fully
+      translated. The wholly or partially translated files will be saved to
+      the project's Target folder. To finalize your translation, open the
+      target files in their associated applications (browser, word
+      processor...) to check the content and formatting of your translation.
+      You can then return to <application>OmegaT</application> to make any
+      necessary corrections; do not forget to recreating the translated
+      documents.</para>
+    </section>
+  </section>
+
+  <section id="how.to.handle.tagged.text">
+    <title>How to handle tagged text</title>
+
+    <para><application>OmegaT</application> ensures that the formatting of the
+    source documents (bold, italic etc.) is not lost by marking it with
+    special tags. <application>OmegaT</application> tags are composed of one
+    or more letters followed by one or more digit, using the "/" character for
+    closure (for example: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;
+    etc.). You must handle these tags with care and make sure they will be
+    included in the target segments in a proper fashion (see tag
+    operations).</para>
+
+    <para></para>
+
+    <section>
+      <title>An example...</title>
+
+      <para>In these examples we've highlighted the tags to make them easier
+      to see, but in <application>OmegaT</application> they will not be
+      highlighted. The HTML tags, highlighted in blue, will be ignored by
+      <application>OmegaT</application> as they fully enclose the segment. The
+      tags, highlighted below in green have to be handled by
+      <application>OmegaT</application> because they are within the segment.
+      Here is an example of a segment in HTML:</para>
+
+      <para><literal>&lt;p&gt;A different display font can be selected via
+      the&lt;b&gt;Display Font&lt;/b&gt;dialog. Open it via
+      the&lt;i&gt;Settings&lt;/i&gt; →&lt;i&gt;Display Font...&lt;/i&gt;menu
+      item. The font type and size can be changed from the
+      dialog.&lt;/p&gt;</literal></para>
+
+      <para>Here is how <application>OmegaT</application> will display it,
+      with the translation in Afrikaans:</para>
+
+      <figure id="fig.tagged.segment.source">
+        <title>Source HTML segment</title>
+
+        <screenshot>
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/tagged_segment.png" />
+            </imageobject>
+          </mediaobject>
+        </screenshot>
+      </figure>
+
+      <para>When <application>OmegaT</application> has created the translated
+      document, the HTML will look like this:</para>
+
+      <figure id="fig.tagged.segment.target">
+        <title>Target HTML segment</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/tagged_segment_target.png" />
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="tag.verification">
+      <title>Tag verification</title>
+
+      <para><application>OmegaT</application> doesn't automatically detect
+      faulty tagging in the translated document. Before you deliver the
+      document to your client, you should therefore check your tags for
+      errors. Select <menuchoice>
+          <shortcut>
+            <keycombo>
+              <keycap>Ctrl</keycap>
+
+              <keycap>T</keycap>
+            </keycombo>
+          </shortcut>
+
+          <guimenu>Tools</guimenu>
+
+          <guimenuitem>Validate Tags...</guimenuitem>
+        </menuchoice> from the menu. A table will be displayed showing the
+      segments where the source and target tags do not correspond. Click on
+      the segment number. You will be taken automatically to the questionable
+      segment in the Editor, where you can correct the tagging. Hit <emphasis
+      role="bold">Enter </emphasis> to validate the corrected segment and
+      check the correction by pressing again <keycombo>
+          <keycap>Ctrl</keycap>
+
+          <keycap>T</keycap>
+        </keycombo>.</para>
+
+      <para>In some cases tag errors may even prevent a document from opening.
+      You should therefore ensure that you have corrected any tag errors
+      before you create the translated files. Finally, you should always
+      double-check the final formatting by opening the translated document in
+      its associated viewer or editor.</para>
+    </section>
+  </section>
+</chapter>

@@ -1,0 +1,623 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<chapter id="ch08.regexp">
+  <title>Regular-expression constructs</title>
+
+  <para>The regular expressions (or regex for short) used in searches and
+  segmentation rules are those supported by Java. If you need more specific
+  information, please consult <ulink
+  url="http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">Java
+  Regex documentation</ulink>. See additional references and examples
+  below.</para>
+
+  <table>
+    <title>Regex - Flags</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>Enables case-insensitive matching (by default, the pattern is
+          case-sensitive).</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Character</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>The character x, except the following...</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\uhhhh</emphasis></entry>
+
+          <entry>The character with hexadecimal value
+          <emphasis>0xhhhh</emphasis></entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\t</emphasis></entry>
+
+          <entry>The tab character (<emphasis>'\u0009'</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\n</emphasis></entry>
+
+          <entry>The newline (line feed) character
+          (<emphasis>'\u000A'</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\r</emphasis></entry>
+
+          <entry>The carriage-return character
+          (<emphasis>'\u000D'</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>The form-feed character
+          (<emphasis>'\u000C'</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>The alert (bell) character
+          (<emphasis>'\u0007'</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>The escape character (<emphasis>'\u001B'</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry>\c<emphasis>x</emphasis></entry>
+
+          <entry>The control character corresponding to
+          <emphasis>x</emphasis></entry>
+        </row>
+
+        <row>
+          <entry>\0<emphasis>n</emphasis></entry>
+
+          <entry>The character with octal value 0<emphasis>n</emphasis> (0
+          &lt;= <emphasis>n</emphasis> &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0<emphasis>nn</emphasis></entry>
+
+          <entry>The character with octal value 0<emphasis>nn</emphasis> (0
+          &lt;= <emphasis>n</emphasis> &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0<emphasis>mnn</emphasis></entry>
+
+          <entry>The character with octal value 0<emphasis>mnn</emphasis> (0
+          &lt;= <emphasis>m</emphasis> &lt;= 3, 0 &lt;= <emphasis>n</emphasis>
+          &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\x<emphasis>hh</emphasis></entry>
+
+          <entry>The character with hexadecimal value
+          0x<emphasis>hh</emphasis></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Quotation</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis>\</emphasis></entry>
+
+          <entry>Nothing, but quotes the following character. This is required
+          if you would like to enter of the meta characters
+          <emphasis>!$()*+.&lt;&gt;?[\]^{|}</emphasis> to match as
+          themselves.</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\\</emphasis></entry>
+
+          <entry>For example, this is the backslash character</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\Q</emphasis></entry>
+
+          <entry>Nothing, but quotes all characters until
+          <emphasis>\E</emphasis></entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\E</emphasis></entry>
+
+          <entry>Nothing, but ends quoting started by \Q</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Classes for Unicode blocks and categories</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis>\p{InGreek}</emphasis></entry>
+
+          <entry>A character in the Greek block (simple <ulink
+          url="http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">
+          block</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\p{Lu}</emphasis></entry>
+
+          <entry>An uppercase letter (simple <ulink
+          url="http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">
+          category</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\p{Sc}</emphasis></entry>
+
+          <entry>A currency symbol</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\P{InGreek}</emphasis></entry>
+
+          <entry>Any character except one in the Greek block
+          (negation)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>[\p{L}&amp;&amp;[^\p{Lu}]]</emphasis></entry>
+
+          <entry>Any letter except an uppercase letter (subtraction)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Character classes</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis>[abc]</emphasis></entry>
+
+          <entry><emphasis>a</emphasis>, <emphasis>b</emphasis>, or
+          <emphasis>c</emphasis> (simple class)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>[^abc]</emphasis></entry>
+
+          <entry>Any character except <emphasis>a</emphasis>,
+          <emphasis>b</emphasis>, or <emphasis>c</emphasis> (negation)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>[a-zA-Z]</emphasis></entry>
+
+          <entry><emphasis>a</emphasis> through <emphasis>z</emphasis> or
+          <emphasis>A</emphasis> through <emphasis>Z</emphasis>, inclusive
+          (range)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Predefined character classes</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis>.</emphasis></entry>
+
+          <entry>Any character (except for line terminators)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\d</emphasis></entry>
+
+          <entry>A digit: <emphasis>[0-9]</emphasis></entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\D</emphasis></entry>
+
+          <entry>A non-digit: <emphasis>[^0-9]</emphasis></entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\s</emphasis></entry>
+
+          <entry>A whitespace character: <emphasis>[
+          \t\n\x0B\f\r]</emphasis></entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\S</emphasis></entry>
+
+          <entry>A non-whitespace character:
+          <emphasis>[^\s]</emphasis></entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\w</emphasis></entry>
+
+          <entry>A word character: <emphasis>[a-zA-Z_0-9]</emphasis></entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\W</emphasis></entry>
+
+          <entry>A non-word character: <emphasis>[^\w]</emphasis></entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Boundary matchers</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis>^</emphasis></entry>
+
+          <entry>The beginning of a line</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>$</emphasis></entry>
+
+          <entry>The end of a line</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\b</emphasis></entry>
+
+          <entry>A word boundary</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>\B</emphasis></entry>
+
+          <entry>A non-word boundary</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+     
+
+    <title>Regex - Greedy quantifiers</title>
+
+    - will match as much as they can. For example, 
+
+    <emphasis>a+</emphasis>
+
+     will match 
+
+    <emphasis>aaa</emphasis>
+
+     in 
+
+    <emphasis>aaabbb)</emphasis>
+
+     
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X, once or not at all</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X, zero or more times</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X, one or more times</entry>
+        </row>
+      </tbody>
+    </tgroup>
+
+     
+  </table>
+
+  <table>
+     
+
+    <title>Regex - Reluctant (non-greedy) quantifiers</title>
+
+    - will match as little as they can. For example, 
+
+    <emphasis>a+?</emphasis>
+
+     will match the first 
+
+    <emphasis>a</emphasis>
+
+     in 
+
+    <emphasis>aaabbb</emphasis>
+
+     
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>??</emphasis></entry>
+
+          <entry>X, once or not at all</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*?</emphasis></entry>
+
+          <entry>X, zero or more times</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+?</emphasis></entry>
+
+          <entry>X, one or more times</entry>
+        </row>
+      </tbody>
+    </tgroup>
+
+     
+  </table>
+
+  <table>
+    <title>Regex - Logical operators</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100" />
+
+      <thead>
+        <row>
+          <entry align="left">The construct</entry>
+
+          <entry align="left">...matches the following</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X followed by Y</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>|</emphasis>Y</entry>
+
+          <entry>Either X or Y</entry>
+        </row>
+
+        <row>
+          <entry><emphasis>(</emphasis>XY<emphasis>)</emphasis></entry>
+
+          <entry>XY as a single group</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title>Regex tools and examples of use</title>
+
+    <para>There's a number of interactive tools available to develop and test
+    regular expressions. They all pretty much follow the same pattern (Example
+    from the Regular Expression Tester - see ref below): the regular
+    expression (top entry) analyzes the search text (Text box in the middle) ,
+    yielding the hits, shown in the result Text box.</para>
+
+    <figure id="regerx.tester">
+      <title>Regex Tester</title>
+
+      <imageobject>
+        <imagedata fileref="images/RegexTester.png" />
+      </imageobject>
+    </figure>
+
+    <para>See <ulink url="http://weitz.de/regex-coach/">The Regex
+    Coach</ulink> for Windows,Linux, Mac, FreeBSD versions of a stand-alone
+    tool, that's pretty much identical to the above example.</para>
+
+    <para>A nice collection of useful regex cases can be found in the
+    <application>OmegaT</application> itself (see <emphasis>Options &gt;
+    Segmentation</emphasis>). The following list includes expressions, you may
+    find useful when searching through the translation memory:</para>
+
+    <table>
+      <title>Regex - Examples of regular expressions in translations</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100" />
+
+        <thead>
+          <row>
+            <entry>Regular expression</entry>
+
+            <entry>Finds the following:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>double words</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>commas and periods mix-up</entry>
+          </row>
+
+          <row>
+            <entry>\. \s$</entry>
+
+            <entry>extra blanks, following the period at the end of the
+            line</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>English: words, starting on vowels, should be preceded by
+            "an", not "a"</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>English: the same check as above, but for consonants ("a",
+            not "an")</entry>
+          </row>
+
+          <row>
+            <entry>\s\s+</entry>
+
+            <entry>more than one space</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>space missing between a period and the start of a new
+            sentence</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</chapter>

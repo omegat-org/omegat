@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<appendix id="A1.website">
+  <title><application>OmegaT</application> on the web</title>
+
+  <section id="OmegaT.sites.and.OmegaT.SourceForge.project">
+    <title><application>OmegaT</application> sites and <application>OmegaT</application> SourceForge project</title>
+
+    <para>The<ulink url="http://www.omegat.org/"> <application>OmegaT</application> web site
+    </ulink>contains links to various <application>OmegaT</application> resources, so you should probably
+    start there. User support is provided on a volunteer basis at the <ulink
+    url="http://groups.yahoo.com/group/omegat/"><application>OmegaT</application> Yahoo User
+    Group</ulink>. The <ulink
+    url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ
+    </ulink>corner there may be a good start for your questions. <application>OmegaT</application> also
+    has an IRC (Internet Relay Chat) channel on FreeNode: #omegat. New
+    versions of <application>OmegaT</application> can be downloaded from <ulink
+    url="http://sourceforge.net/projects/omegat"><application>OmegaT</application>
+    SourceForge.net</ulink> Project, where you may also file <ulink
+    url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">bug
+    reports</ulink> and <ulink
+    url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">requests
+    for enhancements.</ulink></para>
+  </section>
+
+  <section id="bug.reports">
+    <title>Bug reports</title>
+
+    <para>Remember that every good bug report needs exactly three
+    things:</para>
+
+    <itemizedlist><listitem>  <para>Steps to reproduce</para></listitem>
+<listitem>  <para>What you expected to see</para></listitem>
+<listitem>  <para>What you saw inst</para></listitem>
+    </itemizedlist>
+
+    <para>More in <ulink
+    url="http://www.joelonsoftware.com/articles/fog0000000029.html">Painless
+    Bug Tracking</ulink> article by Joel Spolsky.</para>
+
+    <para>You should add copies of files, portions of the log (see <application>OmegaT</application>
+    Files and Directories &gt; User files location) , screen shots, anything
+    that you think will help the developers to find and fix your bug. Note
+    that bug reports and requests for enhancements are publicly visible, so
+    you should not add any sensitive files. If you want to keep track of what
+    is happening to the report you should register as a SourceForge user,
+    login and file a bug report being logged in, or simply click Monitor on
+    top of the report.</para>
+  </section>
+
+  <section id="contributing.to.omegat.project">
+    <title>Contributing to <application>OmegaT</application> project</title>
+
+    <variablelist><varlistentry>  <term>To contribute to <application>OmegaT</application></term>
+  <listitem>    <para>first join the <ulink    url="http://groups.yahoo.com/group/OmegaT/">user group</ulink>(via    web or by sending an email to <ulink    url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>).    To get involved in the <application>OmegaT</application> development you can join the<ulink    url="???">developer group</ulink>, via web or by sending an email to    <ulink    url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink>    with subject "subscribe".</para>  </listitem></varlistentry>
+<varlistentry>  <term>To translate <application>OmegaT</application>'s user interface, user manual or other  related documents</term>
+  <listitem>    <para>first read <ulink    url="http://www.omegat.org/en/howtos/localizing_omegat.html">Localizing    and customizing <application>OmegaT</application></ulink> guide, and join the <application>OmegaT</application>    translators' group (via web or by sending an email to <ulink    url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink>    with subject "subscribe").</para>  </listitem></varlistentry>
+    </variablelist>
+
+    <para>And get a feel of what is going on in the <application>OmegaT</application> world...</para>
+  </section>
+</appendix>

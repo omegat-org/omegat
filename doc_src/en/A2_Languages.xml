@@ -1,0 +1,537 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<appendix id="A2.languages">
+  <title>Languages - ISO 639.2 code list</title>
+
+  <para> Please check the<ulink
+  url="http://www.sil.org/ISO639-3/codes.asp"> ISO 639 Code
+  Tables</ulink> for further and up-to-date information about language
+  codes.</para>
+
+  <table id="language.code.list">
+    <title>ISO 639.2 Language code list </title>
+
+    <tgroup cols="4">
+	    <colspec align="left" colnum="1" colwidth="160" />
+
+        <colspec align="left" colnum="2" colwidth="60" />
+		
+	    <colspec align="left" colnum="3" colwidth="160" />
+
+        <colspec align="left" colnum="4" colwidth="60" />
+      <thead>
+        <row>
+          <entry align="left">Name</entry>
+
+          <entry align="left">ISO Code</entry>
+          <entry align="left">Name</entry>
+
+          <entry align="left">ISO Code</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>Afrikaans</entry>
+
+          <entry>af</entry>
+
+          <entry>Amharic</entry>
+
+          <entry>am</entry>
+        </row>
+		  <row>
+        <entry>Arabic</entry>
+
+        <entry>ar</entry>
+
+	   <entry>Arabic</entry>
+
+        <entry>ar</entry>
+      </row>
+
+      <row>
+        <entry>Assamese (India)</entry>
+
+        <entry>as-IN</entry>
+
+        <entry>Azerbaijani</entry>
+
+        <entry>az</entry>
+      </row>
+
+      <row>
+        <entry>Belarusian</entry>
+
+        <entry>be</entry>
+
+        <entry>Belarusian (Belarus)</entry>
+
+        <entry>be-BY</entry>
+      </row>
+
+      <row>
+        <entry>Bulgarian</entry>
+
+        <entry>bg</entry>
+
+        <entry>Bengali</entry>
+
+        <entry>bn</entry>
+      </row>
+
+      <row>
+        <entry>Bengali (Bangladesh)</entry>
+
+        <entry>bn-BD</entry>
+
+        <entry>Bengali (India)</entry>
+
+        <entry>bn-IN</entry>
+      </row>
+
+      <row>
+        <entry>Breton</entry>
+
+        <entry>br</entry>
+
+        <entry>Bosnian</entry>
+
+        <entry>bs</entry>
+      </row>
+
+      <row>
+        <entry>Bosnian (Bosnia)</entry>
+
+        <entry>bs-BA</entry>
+
+        <entry>Catalan</entry>
+
+        <entry>ca</entry>
+      </row>
+
+      <row>
+        <entry>Czech</entry>
+
+        <entry>cs</entry>
+
+        <entry>Welsh</entry>
+
+        <entry>cy</entry>
+      </row>
+
+      <row>
+        <entry>Danish</entry>
+
+        <entry>da</entry>
+
+        <entry>German</entry>
+
+        <entry>de</entry>
+      </row>
+
+      <row>
+        <entry>Dzongkha</entry>
+
+        <entry>dz</entry>
+
+        <entry>Greek</entry>
+
+        <entry>el</entry>
+      </row>
+
+      <row>
+        <entry>English (GB)</entry>
+
+        <entry>en-GB</entry>
+
+        <entry>English (USA)</entry>
+
+        <entry>en-US</entry>
+      </row>
+
+      <row>
+        <entry>English (South Africa)</entry>
+
+        <entry>en-ZA</entry>
+
+        <entry>Esperanto</entry>
+
+        <entry>eo</entry>
+      </row>
+
+      <row>
+        <entry>Spanish</entry>
+
+        <entry>es</entry>
+
+        <entry>Estonian</entry>
+
+        <entry>et</entry>
+      </row>
+
+      <row>
+        <entry>Basque</entry>
+
+        <entry>eu</entry>
+
+        <entry>Farsi</entry>
+
+        <entry>fa</entry>
+      </row>
+
+      <row>
+        <entry>Finnish</entry>
+
+        <entry>fi</entry>
+
+        <entry>French</entry>
+
+        <entry>fr</entry>
+      </row>
+
+      <row>
+        <entry>French (Canada)</entry>
+
+        <entry>fr-CA</entry>
+
+        <entry>Irish</entry>
+
+        <entry>ga</entry>
+      </row>
+
+      <row>
+        <entry>Gaelic (Scotland)</entry>
+
+        <entry>gd</entry>
+
+        <entry>Galician</entry>
+
+        <entry>gl</entry>
+      </row>
+
+      <row>
+        <entry>Gujarati</entry>
+
+        <entry>gu-IN</entry>
+
+        <entry>Hebrew</entry>
+
+        <entry>he</entry>
+      </row>
+
+      <row>
+        <entry>Hindi</entry>
+
+        <entry>hi-IN</entry>
+
+        <entry>Croatian</entry>
+
+        <entry>hr</entry>
+      </row>
+
+      <row>
+        <entry>Upper Sorbian</entry>
+
+        <entry>hsb</entry>
+
+        <entry>Hungarian</entry>
+
+        <entry>hu</entry>
+      </row>
+
+      <row>
+        <entry>Italian</entry>
+
+        <entry>it</entry>
+
+        <entry>Japanese</entry>
+
+        <entry>ja</entry>
+      </row>
+
+      <row>
+        <entry>Khmer Cambodia</entry>
+
+        <entry>km</entry>
+
+        <entry>Kannada</entry>
+
+        <entry>kn-IN</entry>
+      </row>
+
+      <row>
+        <entry>Korean</entry>
+
+        <entry>ko</entry>
+
+        <entry>Kurdish</entry>
+
+        <entry>ku</entry>
+      </row>
+
+      <row>
+        <entry>Lao</entry>
+
+        <entry>lo</entry>
+
+        <entry>Lithuanian</entry>
+
+        <entry>lt</entry>
+      </row>
+
+      <row>
+        <entry>Latvian</entry>
+
+        <entry>lv</entry>
+
+        <entry>Macedonian</entry>
+
+        <entry>mk</entry>
+      </row>
+
+      <row>
+        <entry>Malayalam</entry>
+
+        <entry>ml</entry>
+
+        <entry>Malayalam (India)</entry>
+
+        <entry>ml-IN</entry>
+      </row>
+
+      <row>
+        <entry>Mongolian</entry>
+
+        <entry>mn</entry>
+
+        <entry>Marathi</entry>
+
+        <entry>mr-IN</entry>
+      </row>
+
+      <row>
+        <entry>Malay</entry>
+
+        <entry>ms</entry>
+
+        <entry>Norwegian Bokmål</entry>
+
+        <entry>nb</entry>
+      </row>
+
+      <row>
+        <entry>Nepali</entry>
+
+        <entry>ne</entry>
+
+        <entry>Dutch</entry>
+
+        <entry>nl</entry>
+      </row>
+
+      <row>
+        <entry>Norwegian Nynorsk</entry>
+
+        <entry>nn</entry>
+
+        <entry>Southern Ndebele</entry>
+
+        <entry>nr</entry>
+      </row>
+
+      <row>
+        <entry>Sourthern Sotho - Sepedi</entry>
+
+        <entry>nso</entry>
+
+        <entry>Oriya</entry>
+
+        <entry>or</entry>
+      </row>
+
+      <row>
+        <entry>Oriya (India)</entry>
+
+        <entry>or-IN</entry>
+
+        <entry>Punjabi</entry>
+
+        <entry>pa-IN</entry>
+      </row>
+
+      <row>
+        <entry>Papiamento</entry>
+
+        <entry>pap</entry>
+
+        <entry>Polish</entry>
+
+        <entry>pl</entry>
+      </row>
+
+      <row>
+        <entry>Portuguese</entry>
+
+        <entry>pt</entry>
+
+        <entry>Portuguese (Brazil)</entry>
+
+        <entry>pt-BR</entry>
+      </row>
+
+      <row>
+        <entry>Romanian</entry>
+
+        <entry>ro</entry>
+
+        <entry>Russian</entry>
+
+        <entry>ru</entry>
+      </row>
+
+      <row>
+        <entry>Kinyarwanda</entry>
+
+        <entry>rw</entry>
+
+        <entry>Serbo-Croatian</entry>
+
+        <entry>sh-YU</entry>
+      </row>
+
+      <row>
+        <entry>Slovak</entry>
+
+        <entry>sk</entry>
+
+        <entry>Slovenian</entry>
+
+        <entry>sl</entry>
+      </row>
+
+      <row>
+        <entry>Albanian</entry>
+
+        <entry>sq</entry>
+
+        <entry>Serbian</entry>
+
+        <entry>sr-CS</entry>
+      </row>
+
+      <row>
+        <entry>Swati</entry>
+
+        <entry>ss</entry>
+
+        <entry>Sotho</entry>
+
+        <entry>st</entry>
+      </row>
+
+      <row>
+        <entry>Swedish</entry>
+
+        <entry>sv</entry>
+
+        <entry>Swahili</entry>
+
+        <entry>sw</entry>
+      </row>
+
+      <row>
+        <entry>Swahili (Tanzania)</entry>
+
+        <entry>sw-TZ</entry>
+
+        <entry>Tamil</entry>
+
+        <entry>ta-IN</entry>
+      </row>
+
+      <row>
+        <entry>Telugu (India)</entry>
+
+        <entry>te-IN</entry>
+
+        <entry>Tajik</entry>
+
+        <entry>tg</entry>
+      </row>
+
+      <row>
+        <entry>Thai</entry>
+
+        <entry>th</entry>
+
+        <entry>Tigrinya (Erirowea)</entry>
+
+        <entry>ti-ER</entry>
+      </row>
+
+      <row>
+        <entry>Tswana</entry>
+
+        <entry>tn</entry>
+
+        <entry>Turkish</entry>
+
+        <entry>tr</entry>
+      </row>
+
+      <row>
+        <entry>Tsonga</entry>
+
+        <entry>ts</entry>
+
+        <entry>Ukrainian</entry>
+
+        <entry>uk</entry>
+      </row>
+
+      <row>
+        <entry>Urdu (India)</entry>
+
+        <entry>ur-IN</entry>
+
+        <entry>Venda</entry>
+
+        <entry>ve</entry>
+      </row>
+
+      <row>
+        <entry>Vietnamese</entry>
+
+        <entry>vi</entry>
+
+        <entry>Xhosa</entry>
+
+        <entry>xh</entry>
+      </row>
+
+      <row>
+        <entry>Chinese (simplified)</entry>
+
+        <entry>zh-CN</entry>
+
+        <entry>Chinese (traditional)</entry>
+
+        <entry>zh-TW</entry>
+      </row>
+
+      <row>
+        <entry>Zulu</entry>
+
+        <entry>zu</entry>
+		
+		<entry></entry>
+
+        <entry></entry>
+      </row>
+		
+      </tbody>
+    </tgroup>
+  </table>
+</appendix>

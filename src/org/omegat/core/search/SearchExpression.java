@@ -59,7 +59,7 @@ public class SearchExpression {
         this.searchSource = true;
         this.searchTarget = true;
         this.searchAuthor = false;
-        this.author = null;
+        this.author = "";
         this.searchDateAfter = false;
         this.dateAfter = 0;
         this.searchDateBefore = false;

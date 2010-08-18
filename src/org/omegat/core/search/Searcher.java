@@ -321,27 +321,16 @@ public class Searcher
             }
         }
 
-        if (srcMatches == null && targetMatches == null) {
-            return;
+        // if the search expression is satified, report the hit
+        if ((srcMatches != null || targetMatches != null)
+            && (!m_searchAuthor || entry != null && searchAuthor(entry))
+            && (!m_searchDateBefore || entry != null && entry.changeDate != 0 && entry.changeDate < m_dateBefore)
+            && (!m_searchDateAfter  || entry != null && entry.changeDate != 0 && entry.changeDate > m_dateAfter)) 
+        {
+            // found
+            foundString(entryNum, intro, srcText, locText, srcMatches,
+                    targetMatches);
         }
-
-        if (entry != null) {
-            if (m_searchAuthor && !searchAuthor(entry)) {
-                return;
-            }
-            if (m_searchDateBefore && entry.changeDate != 0
-                    && entry.changeDate > m_dateBefore) {
-                return;
-            }
-            if (m_searchDateAfter && entry.changeDate != 0
-                    && entry.changeDate < m_dateAfter) {
-                return;
-            }
-        }
-
-        // found
-        foundString(entryNum, intro, srcText, locText, srcMatches,
-                targetMatches);
     }
 
     private void searchFiles() throws IOException, TranslationException

@@ -72,6 +72,9 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters3.xml.typo3.Typo3Filter
 OmegaT-Plugin: filter
 
+Name: org.omegat.filters3.xml.svg.SvgFilter
+OmegaT-Plugin: filter
+
 Name: org.omegat.core.matching.Tokenizer
 OmegaT-Plugin: tokenizer
 

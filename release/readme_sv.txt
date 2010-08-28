@@ -1,4 +1,4 @@
-Denna översättning är gjord av Anders Warnqvist, copyright© 2009.
+Denna översättning är gjord av Anders Warnqvist, copyright© 2010.
 
 ==============================================================================
   OmegaT 2.0, Read Me-fil
@@ -29,10 +29,10 @@ Buggrapportering (på engelska) på SourceForge:
 ==============================================================================
   2.  Vad är OmegaT?
 
-OmegaT är ett CAT-verktyg (Computer-Assisted Translation). Programmet är fritt, vilket betyder att du inte behöver betala någonting för att använda det, inte ens för professionellt bruk. Du är också fri att ändra och/eller återdistributera det så länge du respekterar användarlicensen.
+OmegaT är ett CAT-verktyg (Computer-Assisted Translation). Programmet är fritt, vilket betyder att du inte behöver betala någonting för att använda det, inte ens för professionellt bruk. Du är också fri att ändra och/eller återdistributera det så länge som du respekterar användarlicensen.
 
 OmegaT:s huvudsakliga funktioner är:
-  - möjligheten att köra på alla operativsystem som stöder Java
+  - möjligheten att köras på alla operativsystem som stöder Java
   - användning av alla giltiga TMX-filer som översättningsreferens
   - flexibel meningssegmentering (genom en SRX-liknande metod)
   - sökning i projekt- och referensöversättningsminnen
@@ -40,19 +40,19 @@ OmegaT:s huvudsakliga funktioner är:
   - luddiga träffar
   - smart hantering av projekt inklusive komplexa mapphierarkier
   - support för gloslistor (terminologikontroll) 
-  - support för direkta stavningskontroller med öppen källkod
-  - support för StarDict ordlistor
-  - support för Google Translate maskinöversättning
+  - support för stavningskontroll med öppen källkod
+  - support för StarDict ordböcker
+  - support för maskinöversättning med Google översätt
   - tydlig och omfattande dokumentation och instruktion
   - lokalisering på ett flertal språk
 
 OmegaT stöder följande format i grundutförande:
-  - vanlig text
+  - ren text
   - HTML och XHTML
   - HTML Help Compiler
   - OpenDocument/OpenOffice.org
   - Java resource bundles (.properties)
-  - INI-filer (filer med key=value-par i valfri kod)
+  - INI-filer (filer med key=value-par i valfri kodning)
   - PO-filer
   - DocBook dokument
   - Microsoft OpenXML-filer
@@ -62,34 +62,39 @@ OmegaT stöder följande format i grundutförande:
   - ResX
   - Android resource
   - LaTeX
+  - Typo3 LocManager
+  - Help & Manual
+  - Windows RC resources
+  - Mozilla DTD
+  - DokuWiki
 
-OmegaT kan ändras att stödja ytterligare filformat.
+OmegaT kan anpassas att stödja ytterligare filformat.
 
 OmegaT kommer automatiskt analysera den mest komplexa mapphierarki för att tillgå alla filer som stöds, samt producera en målmapp med exakt samma struktur, inklusive kopior av eventuella filer som inte stöds.
 
 För en snabb starthjälp, kör igång OmegaT och läs instruktionerna för Snabbstart som visas.
 
-Användarmanualen är i paketet du just laddat ner. Du kan nå det från [Hjälp]-menyn när du startat OmegaT.
+Användarmanualen finns i paketet du just laddat ner. Du kan nå det från [Hjälp]-menyn när du startat OmegaT.
 
 ==============================================================================
  3. Installera OmegaT
 
 3.1 Allmänt
 För att köra OmegaT krävs Java Runtime Environment (JRE) version 
-1.4 eller högre. OmegaT kommer nu med Java Runtime Environment för att bespara användarna från att välja, skaffa och installera det. 
+1.5 eller högre. OmegaT kommer nu med Java Runtime Environment för att bespara användarna mödan att välja, skaffa och installera det. 
 
 Om du redan har Java är det enklaste sättet att installera OmegaT att använda Java Web Start. 
 För att göra detta, ladda ner följande fil och kör den:
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
-Filen kommer attt installera den rätta miljön på din dator och själva programmet första gången den körs. Senare användning måste ske online.
+Filen kommer att installera den rätta miljön på din dator och själva programmet första gången den körs. Senare användning måste inte ske online.
 
-Under installationen, beroende på ditt operativsystem kan du få flera varningsmeddelanden. Certifikatet är  självsignerat av "Didier Briel". 
+Under installationen, beroende på ditt operativsystem kan du få flera varningsmeddelanden. Certifikatet är självsignerat av "Didier Briel". 
 Tillåtelserna du ger till den här versionen (vilket kan betecknas som 
-"unrestricted access to the computer") är identiska till tillåtelserna du ger till den lokala versionen som installeras i en process som beskrivs nedan: de tillåter åtkomst till datorns hårddisk. Senare klick på OmegaT.jnlp kommer kontrollera för uppdateringar om du är online, och installera dem om det finns några, och sedan starta OmegaT. 
+"unrestricted access to the computer") är identiska till tillåtelserna du ger till den lokala versionen som installeras i en process som beskrivs nedan: de tillåter åtkomst till datorns hårddisk. Senare klick på OmegaT.jnlp kommer leta efter uppdateringar om du är online, och installera dem om det finns några, och sedan starta OmegaT. 
 
-Alternativa sätt att ladda ner och instalera OmegaT visas nedan. 
+Alternativa sätt att ladda ner och installera OmegaT visas nedan. 
 
 Användare av Windows och Linux: om du är säker på att ditt system redan har en stabil version av JRE installerad, kan du installera versionen av OmegaT utan JRE (detta är markerat i namnet på versionen; "Without_JRE"). 
 Om du är tveksam rekommenderar vi att du använder dig av standardversionen, alltså med JRE. Detta är helt riskfritt, eftersom även om du redan har JRE installerat på ditt system, så kommer denna version inte störa den tidigare.
@@ -104,19 +109,18 @@ Linux på PowerPC-system: användare kommer att behöva ladda ner IBM:s JRE, eft
 
 
 3.2 Installation
-* Windows: Starta helt enkelt installationsprogrammet. Om du vill kan installationsprogrammet skapa genvägar för att starta OmegaT.
-* Mac: Öppna dmg-filen och drag sedan programmet till Programmappen. * Andra: För att installera OmegaT, skapa en lämplig mapp för OmegaT
-(t.ex., /usr/local/lib on Linux). Kopiera OmegaT .zip eller tar.gz
-arkivet till denna mapp och packa upp det där.
+* Windows: Kör installationsprogrammet. Om du vill kan installationsprogrammet skapa genvägar för att starta OmegaT.
+* Mac: Öppna dmg-filen och dra sedan programmet till Programmappen. * Andra: För att installera OmegaT, skapa en lämplig mapp för OmegaT
+(t.ex., /usr/local/lib on Linux). Kopiera OmegaT .zip- eller tar.gz-arkivet till denna mapp och packa upp det där.
 
 3.3 Att köra OmegaT
 OmegaT kan startas på flera sätt.
 
-* Windows: dubbelklicka på filen OmegaT.exe. Om du kan se filen OmegaT, men inte OmegaT.exe i Utforskaren, ändra inställningarna så att filtilläggen visas.
+* Windows: dubbelklicka på filen OmegaT.exe. Om du kan se filen OmegaT i Utforskaren, men inte OmegaT.exe, ändra inställningarna så att filtilläggen visas.
 
-* Dubbelklicka på filen OmegaT.jar. Detta kommer bara fungera om .jar filer är associerade med Java på ditt system.
+* Dubbelklicka på filen OmegaT.jar. Detta kommer bara fungera om .jar filer är associerade med Java i ditt system.
 
-* I kommandotolken. Kommandot att köra OmegaT är:
+* I kommandotolken. Kommandot för att köra OmegaT är:
 
 cd <mapp där OmegaT.jar finns>
 
@@ -135,7 +139,7 @@ Submenu.
 Sedan, efter att du valt en en lämplig meny, lägg till en undermeny/post med File - New 
 Submenu and File - New Item. Ange OmegaT som namn på den nya posten.
 
-I "Command"-fältet, använd navigeringsknappen för att hitta OmegaT:s startskript, och välj det. 
+Använd navigeringsknappen i "Command"-fältet för att hitta OmegaT:s startskript, och välj det. 
 
 Klicka på ikonknappen (till höger om fälten Name/Description/Comment fields) 
 - Other Icons - Browse, och navigera till undermappen /images OmegaT:s 
@@ -145,7 +149,7 @@ Spara ändringarna med File - Save.
 
 * Linux GNOME: du kan lägga till OmegaT till dina paneler (högst upp på skärmbilden) så här:
 
-Högerklicka på panelen - Add New Launcher. Ange "OmegaT" i "Name"-fältet; i "Command"-fältet, använd navigeringsknappen för att hitta OmegaT: startskript. Välj det och bekräfta med OK.
+Högerklicka på panelen - Add New Launcher. Ange "OmegaT" i "Name"-fältet; använd navigeringsknappen i "Command"-fältet för att hitta OmegaT:s startskript. Välj det och bekräfta med OK.
 
 ==============================================================================
  4. Gå med i OmegaT-projektet
@@ -172,13 +176,15 @@ Tidigare medarbetare inkluderar (i alfabetisk ordning):
 
 Kod har bidragits av
   Zoltan Bartko
-  Didier Briel (publiceringsansvarig)
+  Volker Berlin
+  Didier Briel (versionsansvarig)
   Kim Bruning
   Alex Buloichik
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Maxym Mykhalchuk 
   Arno Peters
@@ -186,12 +192,13 @@ Kod har bidragits av
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Antonio Vilei
   Martin Wunderlich
 
 Andra bidrag av
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (localiseringsansvarig)
+  Jean-Christophe Helary (lokaliseringsansvarig)
   Vito Smolej (dokumentationsansvarig)
   Samuel Murray
   Marc Prior 
@@ -223,9 +230,9 @@ OmegaT använder följande bibliotek:
 ==============================================================================
  5.  Har OmegaT buggar? Behöver du hjälp?
 
-Innan du rapporterar en bugg, se till att du noggrant har kontrollerat dokumentationen. Det kan istället vara en del av OmegaT du har upptäckt. Om du kontrollerar OmegaT-loggen och du ser ord som "Fel", "Varning", "Undantag" eller "dog oväntat", så har du antagligen upptäckt ett genuint problem (log.txt ligger i mappen för användarinställningar, se manualen för dess plats).
+Innan du rapporterar en bugg, se till att du har kontrollerat dokumentationen noggrant. Det kan istället vara en del av OmegaT som du har upptäckt. Om du kontrollerar OmegaT-loggen och du ser ord som "Error", "Warning", "Exception" eller "died unexpectedly", så har du antagligen upptäckt ett genuint problem (log.txt ligger i mappen för användarinställningar, se manualen för dess plats).
 
-Bekräfta vad du hittat med andra användare för att vara säker på att detta inte redan har rapporterats. Du kan verifiera buggrapporten på SourceForge också. Endast då du är säker på att du är först med att hitta ett återskapningbart händelseförlopp som triggar något som inte skulle ha hänt, ska du skapa en buggrapport.
+Bekräfta vad du hittat med andra användare för att vara säker på att detta inte redan har rapporterats. Du kan verifiera buggrapporten på SourceForge också. Först när du är säker på att du är först med att hitta ett återskapningbart händelseförlopp som triggar något som inte skulle ha hänt, ska du skapa en buggrapport.
 
 En bra buggrapport behöver tre saker.
   - Steg att återskapa,
@@ -237,7 +244,7 @@ Du kan bifoga kopior av filer, delar av loggen, skärmdumpar, allt du kan tänka
 För att leta i användargruppens arkiv, gå till:
      http://groups.yahoo.com/group/OmegaT/
 
-För att söka bland buggrapporter, och eventuellt skicka en buggrapport, gå till:
+För att söka bland buggrapporter, och eventuellt skicka in en buggrapport, gå till:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 För att vara uppdaterad om vad som händer med din buggrapport, kan du registrera dig som Source Forge-användare.

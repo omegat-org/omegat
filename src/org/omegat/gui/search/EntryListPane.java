@@ -108,82 +108,116 @@ class EntryListPane extends JTextPane {
     public void displaySearchResult(List<SearchResultEntry> entries) {
         UIThreadsUtil.mustBeSwingThread();
 
+        currentlyDisplayedMatches = null;
         m_entryList.clear();
         m_offsetList.clear();
-        matches.clear();
-        setText("");
-        setDocument(new DefaultStyledDocument());
+
         if (entries == null) {
-            // just reset
+            // empty marks - just reset
+            setText("");
             return;
         }
 
-        StringBuilder m_stringBuf = new StringBuilder();
-        // display what's been found so far
-        if (entries.size() == 0) {
-            // no match
-            addMessage(m_stringBuf, OStrings.getString("ST_NOTHING_FOUND"));
-        }
-
-        if (entries.size() >= OConsts.ST_MAX_SEARCH_RESULTS) {
-            addMessage(m_stringBuf,
-                    StaticUtils.format(OStrings
-                            .getString("SW_MAX_FINDS_REACHED"),
-                            new Object[] { new Integer(
-                                    OConsts.ST_MAX_SEARCH_RESULTS) }));
-        }
-
-        for (SearchResultEntry e : entries) {
-            addEntry(m_stringBuf, e.getEntryNum(), e.getPreamble(),
-                    e.getSrcPrefix(), e.getSrcText(), e.getTranslation(),
-                    e.getSrcMatch(), e.getTargetMatch());
-        }
-
-        setFont();
-
-        setText(m_stringBuf.toString());
-        setCaretPosition(0);
-
-        SwingUtilities.invokeLater(displayMatches);
+        currentlyDisplayedMatches = new DisplayMatches(entries);
     }
 
-    // add entry text - remember what its number is and where it ends
-    public void addEntry(StringBuilder m_stringBuf, int num, String preamble,
-            String srcPrefix, String src, String loc, SearchMatch[] srcMatches,
-            SearchMatch[] targetMatches) {
-        if (m_stringBuf.length() > 0)
-            m_stringBuf.append("---------\n");
+    protected class DisplayMatches implements Runnable {
+        protected final DefaultStyledDocument doc;
 
-        if (preamble != null && !preamble.equals(""))
-            m_stringBuf.append(preamble + "\n");
-        if (src != null && !src.equals("")) {
-            m_stringBuf.append("-- ");
-            if (srcPrefix != null) {
-                m_stringBuf.append(srcPrefix);
+        private final List<SearchMatch> matches = new ArrayList<SearchMatch>();
+
+        public DisplayMatches(final List<SearchResultEntry> entries) {
+            UIThreadsUtil.mustBeSwingThread();
+
+            this.doc = new DefaultStyledDocument();
+
+            StringBuilder m_stringBuf = new StringBuilder();
+            // display what's been found so far
+            if (entries.size() == 0) {
+                // no match
+                addMessage(m_stringBuf, OStrings.getString("ST_NOTHING_FOUND"));
             }
-            if (srcMatches != null) {
-                for (SearchMatch m : srcMatches) {
-                    m.start += m_stringBuf.length();
-                    matches.add(m);
-                }
+
+            if (entries.size() >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                addMessage(m_stringBuf, StaticUtils.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
+                        new Object[] { new Integer(OConsts.ST_MAX_SEARCH_RESULTS) }));
             }
-            m_stringBuf.append(src);
-            m_stringBuf.append('\n');
-        }
-        if (loc != null && !loc.equals("")) {
-            m_stringBuf.append("-- ");
-            if (targetMatches != null) {
-                for (SearchMatch m : targetMatches) {
-                    m.start += m_stringBuf.length();
-                    matches.add(m);
-                }
+
+            for (SearchResultEntry e : entries) {
+                addEntry(m_stringBuf, e.getEntryNum(), e.getPreamble(), e.getSrcPrefix(), e.getSrcText(),
+                        e.getTranslation(), e.getSrcMatch(), e.getTargetMatch());
             }
-            m_stringBuf.append(loc);
-            m_stringBuf.append('\n');
+
+            try {
+                doc.insertString(0, m_stringBuf.toString(), null);
+            } catch (Exception ex) {
+            }
+            setDocument(doc);
+            setCaretPosition(0);
+
+            setFont();
+
+            if (matches.size() > 0) {
+                SwingUtilities.invokeLater(this);
+            }
         }
 
-        m_entryList.add(num);
-        m_offsetList.add(m_stringBuf.length());
+        // add entry text - remember what its number is and where it ends
+        public void addEntry(StringBuilder m_stringBuf, int num, String preamble, String srcPrefix, String src,
+                String loc, SearchMatch[] srcMatches, SearchMatch[] targetMatches) {
+            if (m_stringBuf.length() > 0)
+                m_stringBuf.append("---------\n");
+
+            if (preamble != null && !preamble.equals(""))
+                m_stringBuf.append(preamble + "\n");
+            if (src != null && !src.equals("")) {
+                m_stringBuf.append("-- ");
+                if (srcPrefix != null) {
+                    m_stringBuf.append(srcPrefix);
+                }
+                if (srcMatches != null) {
+                    for (SearchMatch m : srcMatches) {
+                        m.start += m_stringBuf.length();
+                        matches.add(m);
+                    }
+                }
+                m_stringBuf.append(src);
+                m_stringBuf.append('\n');
+            }
+            if (loc != null && !loc.equals("")) {
+                m_stringBuf.append("-- ");
+                if (targetMatches != null) {
+                    for (SearchMatch m : targetMatches) {
+                        m.start += m_stringBuf.length();
+                        matches.add(m);
+                    }
+                }
+                m_stringBuf.append(loc);
+                m_stringBuf.append('\n');
+            }
+
+            m_entryList.add(num);
+            m_offsetList.add(m_stringBuf.length());
+        }
+
+        public void run() {
+            UIThreadsUtil.mustBeSwingThread();
+
+            if (currentlyDisplayedMatches != this) {
+                // results changed - shouldn't mark old results
+                return;
+            }
+
+            List<SearchMatch> display = matches.subList(0, Math.min(MARKS_PER_REQUEST, matches.size()));
+            for (SearchMatch m : display) {
+                doc.setCharacterAttributes(m.start, m.length, FOUND_MARK, true);
+            }
+            display.clear();
+
+            if (matches.size() > 0) {
+                SwingUtilities.invokeLater(this);
+            }
+        }
     }
 
     /**
@@ -209,36 +243,13 @@ class EntryListPane extends JTextPane {
         if (!srcFont.equals("")) {
             int fontsize;
             try {
-                fontsize = Integer.valueOf(
-                        Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE))
-                        .intValue();
+                fontsize = Integer.valueOf(Preferences.getPreference(OConsts.TF_SRC_FONT_SIZE)).intValue();
             } catch (NumberFormatException nfe) {
                 fontsize = 12;
             }
             setFont(new Font(srcFont, Font.PLAIN, fontsize));
         }
     }
-
-    protected Runnable displayMatches = new Runnable() {
-        public void run() {
-            UIThreadsUtil.mustBeSwingThread();
-
-            DefaultStyledDocument doc = (DefaultStyledDocument) getDocument();
-
-            // we don't need synchronize around matches, because it used only in
-            // UI thread
-            List<SearchMatch> display = matches.subList(0,
-                    Math.min(MARKS_PER_REQUEST, matches.size()));
-            for (SearchMatch m : display) {
-                doc.setCharacterAttributes(m.start, m.length, FOUND_MARK, true);
-            }
-            display.clear();
-
-            if (matches.size() > 0) {
-                SwingUtilities.invokeLater(displayMatches);
-            }
-        }
-    };
 
     public void reset() {
         displaySearchResult(null);
@@ -254,5 +265,5 @@ class EntryListPane extends JTextPane {
 
     private final List<Integer> m_entryList = new ArrayList<Integer>();
     private final List<Integer> m_offsetList = new ArrayList<Integer>();
-    private final List<SearchMatch> matches = new ArrayList<SearchMatch>();
+    private DisplayMatches currentlyDisplayedMatches;
 }

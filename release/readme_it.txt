@@ -1,4 +1,4 @@
-Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2010.
+Questa traduzione è frutto del lavoro di Valter Mura e della revisione di Tonia Santoro, copyright© 2010.
 
 ==============================================================================
   File Leggimi di OmegaT 2.0

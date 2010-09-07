@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.1.8 update 2
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.1.8 update 2 vs. 2.1.8 update 1
@@ -10,6 +10,7 @@
 
   - Swedish localisation updated to 2.1.8 (UI, Readme)
   - Italian localisation updated to 2.1.8 (UI, Readme, Instant Start)
+  - Dutch localisation updated to 2.1.8 (UI, Readme, Instant Start, documentation)
 
   Bug fixes:
 

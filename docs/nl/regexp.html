@@ -2,17 +2,16 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
   <title>Reguliere uitdrukkingen - OmegaT 2.0 Gebruikershandleiding</title>
 </head>
 
 <body>
   <h2>Constructies van reguliere uitdrukkingen</h2>
 
-  <p>De reguliere uitdrukkingen (afgekort tot regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <a href=
-  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>. Zie de aanvullende verwijzingen en voorbeelden hieronder.&nbsp;</p>
+  <p>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.&nbsp;</p>
 
-  <table summary="alleen opmaak" style="width: 80%;" border="0" cellpadding=
+  <table summary="just formatting" style="width: 80%;" border="0" cellpadding=
   "2" cellspacing="2">
     <tbody>
       <tr>
@@ -69,16 +68,18 @@
 
       <tr>
         <td>
-          <h3><a href="#References_and_examples_">Regex-programma's en voorbeelden van gebruik</a></h3>
+          <h3><a href="#References_and_examples_">Regex-programma's en gebruiksvoorbeelden</a></h3>
         </td>
       </tr>
     </tbody>
   </table>&nbsp;&nbsp; &nbsp;
 
+  
+
   <p>&nbsp;<br></p>
   <hr>
 
-  <table summary="alleen opmaak" border="0" cellpadding="3" cellspacing="0">
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
     <col width="15%">
     <col width="80%">
 
@@ -107,7 +108,7 @@
         </td>
 
         <td width="877">
-          <p>Schakelt overeenkomen van hoofd-/kleine letters in (standaard is het patroon hoofdlettergevoelig).</p>
+          <p>Schakelt overeenkomen van hoofd-/kleine letters in (standaard is het patroon hoofdletter-gevoelig).</p>
         </td>
       </tr>
 
@@ -289,7 +290,7 @@
 
       <tr>
         <td width="355">
-          <p><code>\e</code></p>
+          <p><code>\E</code></p>
         </td>
 
         <td width="877">
@@ -340,7 +341,7 @@
 
       <tr>
         <td width="355">
-          <p><code><tt>\p{InGreek}</tt></code></p>
+          <p><code><tt>\P{InGreek}</tt></code></p>
         </td>
 
         <td width="877">
@@ -656,13 +657,14 @@
   <br>
 
   <h2><a name="References_and_examples_" id=
-  "References_and_examples_"></a>Regex-programma's en voorbeelden van gebruik</h2><br>Er zijn een aantal interactieve programma's beschikbaar om reguliere uitdrukkingen te ontwikkelen en te testen. Zij volgen bijna allemaal hetzelfde patroon (zie hieronder voor een voorbeeld in de vorm van een plug-in voor Firefox): de reguliere uitdrukking (bovenste item) analyseert de zoektekst (Tekstvak in het midden), hetgeen de hits oplevert die worden weergegeven in het tekstvak resultaten.<br> <br> <img style="width: 726px; height: 524px;" alt=
-  "tester voor reguliere uitdrukkingen plug-in voor FireFox" src=
-  "images/RegexTester.png"><br> <br> Zie <a href="http://www.weitz.de/regex-coach/">The Regex Coach</a>&nbsp;voor Windows, Linux, Mac, FreeBSD versies van een zelfstandig programma, dat bijna identiek is aan het hierboven vermelde voorbeeld.<br> <br> Een fijne collectie van bruikbare regex-gevallen kan in OmegaT zelf worden gevonden (zie Opties &gt; <a href=
-  "segmentation.html">Segmentatie</a>). De volgende lijst bevat uitdrukkingen die u misschien handig vindt bij het zoeken in een vertaalgeheugen:<br>
+  "References_and_examples_"></a>Regex-programma's en gebruiksvoorbeelden</h2><br>
+  Er zijn een aantal interactieve programma's beschikbaar om reguliere uitdrukkingen te ontwikkelen en te testen. Zij volgen min of meer allemaal hetzelfde patroon (zie hieronder voor een voorbeeld in de vorm van een plug-in voor Firefox): de reguliere uitdrukking (bovenste item) analyseert de zoektekst (tekstvak in het midden), wat de hits oplevert, weergegeven in het tekstvak met het resultaat.<br> <br> <img alt=
+  "Plug-in voor het testen van reguliere uitdrukkingen voor FireFox" src=
+  "images/RegexTester.png"><br> <br> Zie <a href="http://www.weitz.de/regex-coach/">The Regex Coach</a>&nbsp;voor Windows, Linux, Mac, FreeBSD versies van een zelfstandig programma, dat vrijwel identiek is aan het bovenstaande voorbeeld.<br> <br> Een fijne collectie van handige gevallen van reguliere uitdrukkingen kan worden gevonden in OmegaT zelf (zie Opties &gt; <a href=
+  "segmentation.html">Segmentatie</a>). De volgende lijst bevat uitdrukkingen die u misschien handig vindt bij het doorzoeken van het vertaalgeheugen:<br>
   <br>
 
-  <table summary="alleen opmaak" style="text-align: left; width: 600px;"
+  <table summary="just formatting" style="text-align: left; width: 600px;"
   border="1" cellpadding="0" cellspacing="2">
     <tbody>
       <tr>
@@ -686,19 +688,19 @@
       <tr>
         <td>\. \s$</td>
 
-        <td>extra witruimte die volgt op de punt aan het einde van een regel</td>
+        <td>extra witruimte, gevolgd door de punt aan het einde van de regel</td>
       </tr>
 
       <tr>
         <td>\s+a\s+[aeiou]</td>
 
-        <td>&nbsp;Engels:&nbsp; woorden, beginnend met een klinker, zouden moeten worden voorafgegaan door "an", niet "a"</td>
+        <td>&nbsp;Engels:&nbsp; woorden, beginnend met een klinker, zou moeten worden voorafgegaan door "an", niet "a"</td>
       </tr>
 
       <tr>
         <td>\s+an\s+[^aeiou]</td>
 
-        <td>&nbsp;Engels: dezelfde controle als hierboven maar dan voor medeklinkers ("a", niet "an")</td>
+        <td>&nbsp;Engels: dezelfde controle als hierboven, maar voor medeklinkers ("a", niet "an")</td>
       </tr>
 
       <tr>
@@ -710,14 +712,14 @@
       <tr>
         <td>\.[A-Z]</td>
 
-        <td>spatie ontbreekt tussen een punt en het begin van een nieuwe zin</td>
+        <td>missende spatie tussen een punt en het begin van een nieuwe zin</td>
       </tr>
     </tbody>
   </table><br>
   <br>
   <hr>
 
-  <table summary="alleen opmaak" style="width: 100%;" border="0" cellpadding=
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
   "2" cellspacing="2">
     <tbody>
       <tr>

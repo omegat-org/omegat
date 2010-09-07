@@ -41,8 +41,8 @@
   <p>Alle functionaliteiten van OmegaT zijn beschikbaar via de menubalk boven het venster Bewerken. De meeste functies zijn ook beschikbaar via <a href=
   "#shortcuts">toetsenbord-sneltoetsen</a>. Sneltoetsen worden geactiveerd door te drukken op <strong>Ctrl</strong> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters. <strong>Ctrl</strong> wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <strong>Ctrl</strong>- / <strong>Control</strong>-toets. Mac-gebruikers moeten in plaats daarvan <strong>cmd+toets</strong> lezen. De <strong>cmd</strong>-toets heeft ofwel een label <strong>command</strong> of een <strong>Apple</strong>-merkteken op Apple-toetsenborden.</p>
 
-  <table summary="alleen opmaak" border="1" cellpadding="3" cellspacing="0"
-  width="400">
+  <table summary="just formatting" border="1" cellpadding="3" cellspacing="0"
+  width="500">
     <tbody>
       <tr bgcolor="#DDDDDD">
         <td>
@@ -76,7 +76,7 @@
     </tbody>
   </table>
 
-  <table summary="alleen opmaak" border="0" cellpadding="5" cellspacing="0">
+  <table summary="just formatting" border="0" cellpadding="5" cellspacing="0">
     <tbody>
       <tr bgcolor="#FFFFFF">
         <td colspan="3">
@@ -286,69 +286,123 @@
 
       <tr bgcolor="#FFFFFF">
         <td colspan="3">
-          <p><strong>Het menu Bewerken bevat zelf de volgende items:</strong></p>
-        </td>
-      </tr>
+          <p>Het menu Bewerken bevat de volgende sneltoetsen:</p>
 
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Laatste actie ongedaan maken</code></p>
+      </td></tr><tr bgcolor="#DDDDDD">
+        <td>
+          <p>Laatste actie ongedaan maken</p>
         </td>
 
-        <td width="17%">
+        <td>
           <p><code>Ctrl+Z</code></p>
         </td>
 
         <td>
-          <p>Gaat terug naar de status vóórdat de laatste bewerkingsactie werd uitgevoerd. Werkt niet meer als het gewijzigde segment al gevalideerd is.</p>
+          <p>Maakt de laatste actie in het huidige doelsegment ongedaan</p>
         </td>
       </tr>
 
       <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Laatste actie opnieuw</code></p>
+        <td>
+          <p>Laatste actie opnieuw</p>
         </td>
 
-        <td width="17%">
+        <td>
           <p><code>Ctrl+Y</code></p>
         </td>
 
         <td>
-          <p>Gaat terug naar de status vóórdat de laatste bewerkingsactie werd geannuleerd. Werkt niet meer als het gewijzigde segment al gevalideerd is.</p>
+          <p>Voert opnieuw de laatste bewerkingsactie uit die zojuist in het huidige doelsegment ongedaan werd gemaakt</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Vervangen door overeenkomst</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+R</code></p>
+        <td>
+          <p>Selecteer overeenkomst #N</p>
         </td>
 
         <td>
-          <p>Overschrijft het gehele doelsegment met de huidige geselecteerde fuzzy overeenkomst (de eerste overeenkomst wordt standaard geselecteerd).</p>
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>#N is een getal van 1 tot en met 5. De sneltoets selecteert de N<sup>e</sup> overeenkomst die wordt weergegeven in het venster Overeenkomsten (de eerste overeenkomst wordt standaard geselecteerd)</p>
         </td>
       </tr>
 
       <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Overeenkomst invoegen</code></p>
+        <td>
+          <p>Vervangen door overeenkomst</p>
         </td>
 
-        <td width="17%">
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Vervangt de inhoud van het huidige doelsegment door de geselecteerde overeenkomst (de eerste overeenkomst wordt standaard geselecteerd)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Overeenkomst invoegen</p>
+        </td>
+
+        <td>
           <p><code>Ctrl+I</code></p>
         </td>
 
         <td>
-          <p>Voegt de huidige geselecteerde fuzzy overeenkomst in op de cursorpositie. Deze functie zal een deel van het doelsegment overschrijven als dat geselecteerd is.</p>
+          <p>Voegt de geselecteerde overeenkomst in op de cursorpositie in het huidige doelsegment (de eerste overeenkomst wordt standaard geselecteerd)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Vervangen door bron</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Vervangt de inhoud van het huidige doelsegment door de inhoud van de brontekst</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Bron invoegen</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Voegt de inhoud van de brontekst in op de cursorpositie in het huidige doelsegment</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Zoeken in project</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Geeft een dialoogvenster weer waarmee zoekacties kunnen worden uitgevoerd binnen het project</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p><code>Vervangen door vertaling van machine</code></p>
+          <p>Vervangen door machinevertaling</p>
         </td>
 
         <td width="17%">
@@ -356,95 +410,7 @@
         </td>
 
         <td>
-          <p>Vervangt het doelsegment door de vertaling van Google Translate. Geen actie als&nbsp;Google Translate niet actief is (zie Menu &gt; opties hieronder).</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Vervangen door bron</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+R</code></p>
-        </td>
-
-        <td>
-          <p>Overschrijft het gehele doelsegment met de brontekst.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Bron invoegen<br></code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+I</code></p>
-        </td>
-
-        <td>
-          <p>Voegt de brontekst in op de cursorpositie.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Selectie exporteren</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+C</code></p>
-        </td>
-
-        <td>
-          <p>Exporteert de huidige selectie naar een tekstbestand voor verwerking. Als er geen selectie is, wordt de huidige bron naar dit bestand geschreven. Als de gebruiker OmegaT afsluit, wordt dit bestand niet leeg gemaakt, om consistent te zijn met het gebruikelijke gedrag van het klembord. De geëxporteerde inhoud wordt gekopieerd naar het bestand <span style=
-          "font-style: italic;">selectie.txt</span> dat is geplaatst in de map met voorkeursbestanden van de gebruiker (zie&nbsp;<a href=
-          "filesAndDirectories.html#user" target="_blank">bestanden en mappen</a>).&nbsp;</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Zoeken in project...</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+F</code></p>
-        </td>
-
-        <td>
-          <p>Opent een nieuw venster <a href="userInterface.html#Search_Window">Zoeken</a>.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Schakel Hoofd-/kleine letters naar...</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift + F3</code></p>
-
-          <p><code>(zie tekst)</code></p>
-        </td>
-
-        <td>
-          <p>Wijzigt Hoofd-/kleine letters in de geaccentueerde tekst in het doelsegment naar de geselecteerde optie (kleine letters, Hoofdletters of Titels). Gebruik Shift+F3 om door de drie alternatieven te gaan. Indien geen tekst geselecteerd is, selecteert OmegaT het woord dat de letter bevat die onmiddellijk rechts van de cursor staat.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Selecteer fuzzy overeenkomst #N</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+#N</code></p>
-        </td>
-
-        <td>
-          <p>(#N is een getal van 1 tot en met 5) - Selecteert de Ne fuzzy overeenkomst die wordt weergegeven in het venster Overeenkomsten om het in te voegen in het segment of het te vervangen. De sectie <a href="userInterface.html#Fuzzy_Matches">Fuzzy overeenkomsten</a> beschrijft de kleurcodering tot in detail.</p>
+          <p>Vervangt het doelsegment door de vertaling van Google Translate van de bron. Geen actie indien&nbsp;Google Translate niet is geactiveerd (zie Menu &gt; Opties &gt; Google Translate).</p>
         </td>
       </tr>
 
@@ -522,7 +488,7 @@
         </td>
 
         <td>
-          <p>OmegaT onthoudt de verwerkte segmenten.&nbsp;Met deze opdracht kunt u vooruit stappen naar het segment dat u eerder hebt verlaten met de opdracht "terug in geschiedenis".&nbsp;</p>
+          <p>OmegaT onthoudt de verwerkte segmenten.&nbsp;Met deze opdracht gaat u vooruit naar het segment dat u eerder verliet met de opdracht "Terug in geschiedenis".&nbsp;</p>
         </td>
       </tr>
 
@@ -562,7 +528,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td width="23%">
-          <p><code>Markeer onvertaalde segmenten</code></p>
+          <p><code>Markeer niet-vertaalde segmenten</code></p>
         </td>
 
         <td width="17%"></td>
@@ -645,7 +611,7 @@
         <td></td>
 
         <td>
-          <p><a href="./GoogleTranslate.html">Google Translate</a> actief/niet actief. Indien actief zal&nbsp;<code>Ctrl+M</code> de suggestie van Google Translate invoegen in het doelgedeelte van het actieve segment. De suggestie kan, vóór het invoegen, worden nagekeken in het venster Google Translate</p>
+          <p><a href="./GoogleTranslate.html">Google Translate</a> actief/niet actief. Indien actief zal <code>Ctrl+M</code> het doelgedeelte van het actieve segment vervangen door de suggestie van Google Translate. De suggestie kan voor het invoegen worden bekeken in het venster Google Translate</p>
         </td>
       </tr>
 
@@ -657,7 +623,7 @@
         <td width="17%"></td>
 
         <td>
-          <p>Toont het dialoogvenster <a href="fontSettings.html">Lettertype-instellingen</a> om het lettertype voor de tekstweergave aan te passen. Gebruikers van oude computers die vinden dat het wijzigen van de afmetingen van de vensters traag is kunnen proberen om het lettertype te wijzigen.</p>
+          <p>Toont het dialoogvenster <a href="fontSettings.html">Lettertype-instellingen</a> om het lettertype voor de tekstweergave aan te passen. Gebruikers van oudere computers die het aanpassen van de venstergrootte heel traag vinden kunnen proberen om het lettertype te wijzigen.</p>
         </td>
       </tr>
 
@@ -717,7 +683,7 @@
         <td width="17%"></td>
 
         <td>
-          <p>Herstelt de componenten (venster Bewerken, venster Overeenkomsten, venster Woordenlijst, venster Woordenboek en venster Google Translate) van het hoofdvenster van OmegaT naar hun standaardstatus. Gebruik deze mogelijkheid in de gevallen dat u één of meer componenten heeft losgemaakt, verplaatst of verborgen en u ze niet terug kan krijgen op de manier die u wilt. Gebruik het ook als u de versie van OmegaT hebt gewijzigd en u problemen hebt met vensters die niet meer willen verschijnen.</p>
+          <p>Herstelt de componenten (venster Bewerken, venster Overeenkomsten en vensters Woordenlijst en Woordenboek en  het venster Google Translate) van het hoofdvenster van OmegaT naar hun standaardstatus. Gebruik deze mogelijkheid in de gevallen dat u één of meer componenten heeft losgemaakt, verplaatst of verborgen en u ze niet terug kan krijgen op de manier die u wilt. Gebruik het ook als u van versie van OmegaT bent veranderd en u problemen hebt met vensters die niet meer verschijnen.</p>
         </td>
       </tr>
 
@@ -788,7 +754,7 @@
     </li>
   </ul>
 
-  <table summary="alleen opmaak" border="0" cellpadding="3" cellspacing="0">
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
     <tbody>
       <tr bgcolor="#FFFFFF">
         <td colspan="3">
@@ -836,7 +802,7 @@
         </td>
 
         <td>
-          <p>Sluit het huidige project</p>
+          <p>Sluit het huidige project.</p>
         </td>
       </tr>
 
@@ -850,7 +816,7 @@
         </td>
 
         <td>
-          <p>Maakt de vertaalde documenten in de map Target van het project</p>
+          <p>Maakt de vertaalde documenten in de map Target van het project.</p>
         </td>
       </tr>
 
@@ -990,7 +956,7 @@
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p>Vervangen door vertaling van machine</p>
+          <p>Vervangen door machinevertaling</p>
         </td>
 
         <td width="17%">
@@ -998,7 +964,7 @@
         </td>
 
         <td>
-          <p>Vervangt het doelsegment door de vertaling van de bron door Google Translate. Geen actie indien &nbsp;Google Translate niet is geactiveerd (zie Menu &gt; Opties &gt; Google Translate).</p>
+          <p>Vervangt het doelsegment door de vertaling van Google Translate van de bron. Geen actie indien&nbsp;Google Translate niet is geactiveerd (zie Menu &gt; Opties &gt; Google Translate).</p>
         </td>
       </tr>
 
@@ -1148,7 +1114,7 @@
         </td>
 
         <td>
-          <p>Exporteert de huidige selectie of de huidige bron indien er niets geselecteerd is</p>
+          <p>Exporteert de huidige selectie of de huidige bron, als er geen selectie is.</p>
         </td>
       </tr>
 
@@ -1162,7 +1128,7 @@
         </td>
 
         <td>
-          <p>Opent een nieuw venster Zoeken.</p>
+          <p>Opent een nieuw venster &lt;a0&gt;Zoeken&lt;/a0&gt;.</p>
         </td>
       </tr>
 
@@ -1183,7 +1149,7 @@
   </table>
   <hr>
 
-  <table style="width: 100%;" summary="alleen opmaak" border="0" cellpadding=
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
   "2" cellspacing="2">
     <tbody>
       <tr>

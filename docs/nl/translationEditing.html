@@ -15,22 +15,16 @@
     </li>
 
     <li>
-      <p><a href="#validation">Segmenten die niet aangepast moeten worden</a></p>
-    </li>
-  </ul>
-
-  <p>Het bewerkingsveld kan zo worden ingesteld dat het zich op de volgende manieren gedraagt:</p>
-
-  <ul>
-    <li>
-      <p>Voeg automatisch de beste beschikbare overeenkomst in</p>
+      <p><a href="#validation">Vertaling mag gelijk zijn aan brontekst</a></p>
     </li>
 
     <li>
-      <p>Bepaal of vertaalde segmenten identiek zijn aan het origineel</p>
+      <p><a href="#Export">Exporteer het segment naar tekstbestanden</a></p>
     </li>
-  </ul>
-  <hr>
+  </ul><img alt="dialoogvenster - Bewerken (gedrag)" src=
+  "images/EditingBehaviourOptions.png"><br>
+
+  <p>Dit dialoogvenster, beschikbaar onder Opties &gt; Bewerken (gedrag).., laat de gebruiker bepalen hoe het huidige segment wordt geïnitialiseerd en afgehandeld.</p>
 
   <h2><a name="auto_insert" id="auto_insert"></a>Automatisch invoegen van overeenkomst</h2>
 
@@ -38,7 +32,7 @@
 
   <p>In <strong>Opties → Bewerken (gedrag)...</strong> biedt OmegaT u de volgende alternatieven:</p>
 
-  <table summary="alleen opmaak" cellpadding="2" cellspacing="2">
+  <table summary="just formatting" cellpadding="2" cellspacing="2">
     <tr valign="top">
       <td>
         <p><strong>De brontekst</strong></p>
@@ -65,22 +59,26 @@
       </td>
 
       <td>
-        <p>OmegaT zal de vertaling van de tekenreeks die het meest lijkt op die welke u gaat vertalen invoegen, indien die boven de drempel van het percentage van overeenkomst komt kunt u het in dit geval aanpassen.</p>
+        <p>OmegaT zal de vertaling van de tekenreeks die het meest lijkt op die welke u gaat vertalen invoegen, indien die boven de drempel van het percentage van overeenkomst komt dat in het dialoogvenster is ingesteld (100% in het geval hierboven). Indien de overeenkomst is gevonden, krijgt het doelsegment een voorvoegsel, gespecificeerd in het tekstveld Voorvoegsel ([fuzzy] in het voorbeeld hierboven). Dit maakt het eenvoudiger om later naar vooraf vertaalde segmenten te zoeken.</p>
       </td>
     </tr>
   </table>
   <hr>
 
-  <h2><a name="validation" id="validation"></a>Segmenten die niet aangepast moeten worden</h2>
+  <h2><a name="validation" id="validation"></a>Vertaling mag gelijk zijn aan brontekst</h2>
 
   <p>Documenten die u moet vertalen kunnen handelsnamen, namen of andere woorden met hoofdletters bevatten die hetzelfde moeten blijven in vertaalde documenten. Er zijn twee strategieën voor segmenten die slechts zulke onveranderlijke tekst bevatten.</p>
 
-  <p>U zou kunnen besluiten om zulke segmenten niet te vertalen - als resultaat daarvan zal OmegaT aangeven dat deze segmenten nog niet vertaald zijn. Dit is de standaard.</p>
+  <p>U zou kunnen besluiten om zulke segmenten niet te vertalen, het resultaat daarvan is dat OmegaT deze segmenten aanmerkt als niet-vertaald. Dit is de standaard.</p>
 
-  <p>Als alternatief zou u de vertaling in kunnen laten voegen, zelfs als die overeenkomt met de brontekst, zodat OmegaT onthoudt dat u de tekst hebt nagelopen en hebt besloten om het doelsegment hetzelfde te laten als de bron. Ga naar <strong>Opties → Bewerken (gedrag)...</strong> en selecteer het vak <strong>Vertaling mag gelijk zijn aan brontekst</strong> om dat zo te laten doen.</p>
+  <p>Het alternatief is om de vertaling op te slaan, zelfs als die overeenkomt met de brontekst, zodat OmegaT onthoudt dat u de tekst hebt nagelopen en hebt besloten om het doelsegment hetzelfde te laten als de bron. Ga naar <strong>Opties → Bewerken (gedrag)...</strong> en selecteer het vak <strong>Vertaling mag gelijk zijn aan brontekst</strong>.</p>
+
+  <h2><a name="Export" id="Export"></a>Exporteer het segment naar tekstbestanden</h2>
+
+  <p>U zou misschien liever de niet-vertaalde segmenten laten zoals ze zijn om er later naar terug te keren. In dat geval kunt u het keuzevak Vertaling mag gelijk zijn aan brontekst activeren en OmegaT zal zulke bronsegmenten opslaan naar een bestand om later te worden vertaald.</p>
   <hr>
 
-  <table summary="alleen opmaak" style="width: 100%;" border="0" cellpadding=
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
   "2" cellspacing="2">
     <tbody>
       <tr>

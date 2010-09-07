@@ -1,19 +1,21 @@
-Deze vertaling is het werk van Dick Groskamp, copyright© 2009.
+Deze vertaling is het werk van Dick Groskamp, copyright© 2010
 
-OmegaT 2.0, LeesMij-bestand
+==============================================================================
+  OmegaT 2.0, Lees Mij-bestand
 
   1.  Informatie over OmegaT
   2.  Wat is OmegaT?
   3.  Installeren van OmegaT
-  4.  Bijdragen aan OmegaT
+  4.  Deelnemen aan OmegaT
   5.  Heeft u problemen met OmegaT ? Heeft u hulp nodig?
   6.  Uitgavedetails
 
 ==============================================================================
   1.  Informatie over OmegaT
+  2.
 
 
-De meest recente informatie over OmegaT kan worden gevonden op
+De meest recente informatie over OmegaT is te vinden op
       http://www.omegat.org/
 
 Gebruikersondersteuning op de Yahoo gebruikersgroep(meertalig), waar zonder abonnement de archieven kunnen worden doorzocht:
@@ -31,38 +33,43 @@ Foutrapportages (in het Engels) op de SourceForge-website:
 OmegaT is een computer-assisterend vertaalprogramma (CAT). Het is vrij, hetgeen betekent dat u niets hoeft te betalen om het te gebruiken, zelfs niet voor professioneel gebruik en dat het u vrij staat om het aan te passen en opnieuw te distribueren, zo lang als u zich houdt aan de gebruikerslicentie.
 
 OmegaT's belangrijkste mogelijkheden zijn:
-  - de mogelijkheid om op elk besturingssysteem, dat Java ondersteunt, te kunnen worden uitgevoerd
-  - gebruik van elk geldig TMX-bestand als een vertalingsverwijzing
-  - flexibele zinsegmentering (door middel van een SRX-achtige methode)
+  - mogelijk om te worden uitgevoerd op elk besturingssysteem dat Java ondersteunt
+  - gebruiken van geldig TMXbestand als vertaalgeheugen
+  - flexibele zinsegmentatie (gebruik van een SRX-achtige methode)
   - zoekacties in het project en de vertaalgeheugens waarnaar verwezen wordt
-  - zoekacties in bestanden in ondersteunde formaten in elke map
+  - zoeken naar bestanden in ondersteunde indelingen in elke map 
   - fuzzy overeenkomsten
-  - slimme afhandeling van projecten inclusief complexe mappenhiërarchiën
-  - ondersteuning voor woordenlijsten (terminologie-controles)
-  - ondersteuning voor Open Bron direct-gemaakte spellingcontroles
+  - slimme afhandeling van projecten inclusief complexe mappenhiërarchieën
+  - ondersteuning voor woordenlijsten (controles op terminologie) 
+  - ondersteuning voor OpenSource directe spellingscontroles
   - ondersteuning voor StarDict woordenboeken
-  - ondersteuning voor de Google Translate machinale vertaalservices
+  - onndersteuning voor de Google Translate services voor machinevertaling
   - heldere en uitgebreide documentatie en handleiding
-  - vertaald in een aantal talen.
+  - lokalisatie in een aantal talen.
 
-OmegaT ondersteunt standaard de volgende bestandsformaten:
+OmegaT ondersteunt onmiddellijk de volgende bestandsindelingen:
   - platte tekst
   - HTML en XHTML
   - HTML Help Compiler
   - OpenDocument/OpenOffice.org
-  - Java resource bundles (.properties)
-  - INI-bestanden (bestenanden met key=value paren in elke codering)
-  - PO-bestanden
-  - DocBook documentatie bestandsformaat
-  - Microsoft OpenXML-bestanden
-  - Okapi ééntalige XLIFF-bestanden
+  - Java bronbundels (.properties)
+  - INI-bestanden (bestanden met sleutel=waarde-paren in elke codering)
+  - PObestanden
+  - DocBook documentatie bestandsindeling
+  - Microsoft OpenXMLbestanden
+  - Okapi ééntalige XLIFFbestande
   - QuarkXPress CopyFlowGold
-  - Bestanden voor ondertiteling (SRT)
+  - bestanden voor ondertiteling (SRT)
   - ResX
-  - Android-bron
+  - Androidbronnen
   - LaTeX
+  - Typo3 LocManager
+  - Help & Handleiding
+  - Windows RCbronnen
+  - Mozilla DTD
+  - DokuWiki
 
-OmegaT kan ook worden aangepast voor andere bestandsformaten.
+OmegaT kan worden aangepast om ook andere bestandsindelingen te ondersteunen.
 
 OmegaT zal automatisch zelfs de meest complexe bronmap-hiërarchieën parsen om toegang te krijgen tot alle ondersteunde bestanden en een doelmap maken met precies dezelfde structuur, inclusief kopieën van niet-ondersteunde bestanden.
 
@@ -72,36 +79,34 @@ De gebruikershandleiding zit in het pakket dat u zojuist heeft gedownload. U kun
 
 ==============================================================================
  3. Installeren van OmegaT
+  4.
 
 3.1 Algemeen
 OmegaT vereist dat een Java Runtime Environment (JRE) versie 
 1.5 of hoger is geïnstalleerd op uw systeem om uitgevoerd te kunnen worden. OmegaT is nu standaard voorzien van de Java Runtime Environment om gebruikers de moeite van het
 selecteren, verkrijgen en installeren te besparen. 
 
-Als u al Java hebt is de eenvoudigste manier om de huiidige versie van OmegaT te installeren de Java Web Start te gebruiken. 
-Download daarvoor het volgende bestand en voer het uit:
+Als u al Java hebt is de eenvoudigste manier om de huidige versie van OmegaT te installeren het gebruiken van Java Web Start. 
+Download voor dit doel het volgende bestand en voer het uit:
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
-Het zal de juiste omgeving voor uw computer installeren en de toepassing zelf bij de eerste uitvoering er van. Latere aanroepen behoeven niet online te worden gedaan.
+Het zal de juiste omgeving voor uw computer installeren en de toepassing zelf bij de eerste keer dat het wordt uitgevoerd. Latere aanroepen behoeven niet on line te worden gedaan.
 
-Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende veiligheidswaarschuwingen kunnen krijgen. Het certificaat is zelf-ondertekend door "Didier Briel". 
-De toestemmingen die u deze versie geeft (welke kunnen worden vermeld als "onbeperkte toegang tot de computer") zijn identiek aan de toestemmingen die u aan de lokale versie geeft, als die wordt geïinstalleerd door de procedure die later wordt beschreven: zij geven toegang tot de harde schijf van de computer. Opeenvolgend klikken op  OmegaT.jnlp 
-zal controleren op upgrades, indien u online bent, ze installeren als er zijn, 
-en dan OmegaT starten. 
+Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen kunnen ontvangen. Het certificaat is zelf-ondertekend door "Didier Briel". 
+De rechten die u aan deze versie geeft (welke kunnen worden omschreven als een "onbeperkte toegang tot de computer") zijn identiek aan de rechten die u geeft voor de locale versie, zoals die door een procedure geïnstalleerd wordt: zij geven toegang tot de harde schijf van de computer. Opvolgende klikken op OmegaT.jnlp zal leiden tot het controleren op upgrades, als u on line bent, ze installeren als ze er zijn, en dan OmegaT starten. 
 
-De alternatieve manieren voor het downloaden en installeren van OmegaT worden hieronder vermeld. 
+De alternatieve manieren en mogelijkheden voor het downloaden en installeren van OmegaT worden hieronder weergegeven. 
 
 Windows- en Linuxgebruikers: als u er van overtuigd bent dat op uw systeem al een passende versie van de JRE is geïnstalleerd, dan kunt u de versie van OmegaT zonder de JRE installeren (dit wordt aangegeven in de naam van de versie, namelijk "Without_JRE"). 
-Als u twijfelt raden wij u aan om de "standaard" versie te gebruiken, 
-dus met de JRE. Dat is veilig omdat, zelfs als er al een JRE op uw systeem geïnstalleerd is, deze versie die niet zal beïnvloeden.
+Als u twijfelt raden wij u aan om de "standaard" versie te gebruiken, dus met JRE. Dat is veilig omdat, zelfs als er al een JRE op uw systeem geïnstalleerd is, deze versie die niet zal beïnvloeden.
 
 Linuxgebruikers: let er op dat OmegaT niet werkt met de vrije/open-source Java-implementaties die zijn opgenomen in vele Linux-distributies (bijvoorbeeld Ubuntu), omdat ze ofwel gedateerd of incompleet zijn. Download en installeer 
 Sun's Java Runtime Environment (JRE) via bovenstaande koppeling of download en installeer het OmegaTpakket met de gebundelde JRE (de .tar.gz bundel genaamd "Linux").
 
 Mac-gebruikers: de JRE is al geïnstalleerd op Mac OS X.
 
-Linux op PowerPC-systemen: gebruikers moeten IBM's JRE downloaden omdat Sun geen JRE voor PPC-systemen levert. Download in dit geval van:
+Linux op PowerPC-systemen: gebruikers moeten IBM's JRE downloaden omdat Sun geen JRE voor PPC-systemen levert. Download in dat geval vanaf:
 
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
 
@@ -149,7 +154,7 @@ Rechtsklik op het paneel - Nieuwe starter. Voer "OmegaT" in in het veld "Naam", 
 ==============================================================================
  4. Deelnemen aan het OmegaT-project
 
-Om deel te nemen aan de ontwikkeling van OmegaT neemt u kontakt op met de ontwikkelaars via:
+Om deel te nemen aan de ontwikkeling van OmegaT neemt u contact op met de ontwikkelaars via:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 Voor het vertalen van OmegaT's gebruikersinterface, gebruikershandleiding of andere gerelateerde documenten leest u:
@@ -172,24 +177,29 @@ Eerdere bijdragen van:
 
 Code is bijgedragen door
   Zoltan Bartko
+  Volker Berlin
   Didier Briel (uitgavemanager)
   Kim Bruning
   Alex Buloichik
   Sandra Jean Chua
-  Martin Fleurke 
+  Martin Fleurke  
+  Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Maxym Mykhalchuk 
-  Henry Pijffers
+  Arno Peters
+  Henry Pijffers 
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Antonio Vilei
   Martin Wunderlich
 
 Andere bijdragen door
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (localisatiemanager)
+  Jean-Christophe Helary
   Vito Smolej (documentatiemanager)
   Samuel Murray
   Marc Prior (localisatiemanager)
@@ -202,13 +212,13 @@ OmegaT gebruikt de volgende bibliotheken:
   HTMLParser van Somik Raha, Derrick Oswald en anderen (LGPL-licentie)
   http://sourceforge.net/projects/htmlparser
 
-  MRJ Adapter van Steve Roy (LGPL-licentie)
+  MRJ Adapter 1.0.8 door Steve Roy (LGPL License)
   http://homepage.mac.com/sroy/mrjadapter/
 
   VLDocking Framework 2.0.6d van VLSolutions (CeCILL-licentie)
   http://www.vlsolutions.com/en/products/docking/
 
-  Hunspell 1.1.12 van László Németh en anderen (LGPL-licentie)
+  Hunspell van László Németh en anderen (LGPL-licentie)
 
   JNA van Todd Fast, Timothy Wall en anderen (LGPL-licentie)
 
@@ -238,12 +248,12 @@ Bladeren door de archieven van de gebruikersgroep kunt u via:
 Bladeren door de pagina met foutrapportages en, indien nodig, indienen van een nieuw foutenrapport via:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
-U wilt zich misschien registreren als gebruiker van Sourceforge om te kunnen zien wat er met uw foutenrapport gebeurd.
+U wilt zich misschien registreren als gebruiker van SourceForge om te kunnen zien wat er met uw foutenrapport gebeurd.
 
 ==============================================================================
 6.   Uitgavedetails
 
-Bekijk alstublieft het bestand 'changes.txt' voor gedetailleerde informatie over wijzigingen in
+Bekijk het bestand 'changes.txt' voor gedetailleerde informatie over wijzigingen in
 deze en alle eerdere uitgaven.
 
 

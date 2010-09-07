@@ -8,20 +8,16 @@
 <body>
   <h2>Zoeken</h2>
 
+  <p><a href="#searchwindow">venster Zoeken</a></p>
+
   <ul>
-    <li>
-      <p><a href="#searchwindow">venster Zoeken</a></p>
+      <li>
+        <a href="#calling">Een zoekactie beginnen</a>
+      </li>
 
-      <ul>
-        <li>
-          <p><a href="#calling">Een zoekactie beginnen</a></p>
-        </li>
-
-        <li>
-          <p><a href="#location">Zoeklocatie</a></p>
-        </li>
-      </ul>
-    </li>
+      <li>
+        <a href="#location">Zoeklocatie</a>
+      </li>
   </ul>
 
   <p><a href="#searchmethods">Zoeken methodes</a></p>
@@ -31,6 +27,8 @@
   <p><a href="#usingregularexpressions">Reguliere uitdrukkingen gebruiken</a></p>
 
   <p><a href="#display">Zoekresultaten weergeven</a></p>
+  
+  <p><a href="Filter bewerken">Items in de bewerker filteren overeenkomstig de zoekactie</a></p>
   <hr>
 
   <h2><a name="searchwindow" id="searchwindow"></a>venster Zoeken</h2><img src=
@@ -42,7 +40,7 @@
 
   <h3><a name="calling" id="calling"></a>Een zoekactie beginnen</h3>
 
-  <p>OmegaT verschaft een groot scala aan zoekfuncties. Roep het venster <strong>Zoeken</strong> op met <code>Ctrl+F</code> en voer het woord of de frase waarnaar u wilt zoeken in het vak <strong>Zoeken naar</strong> in. Als alternatief kunt u in het venster Bewerken een woord of frase selecteren in het bewerkingsveld (doeltekst of het actieve segment) en drukken op <code>Ctrl+F</code>. Het woord of de frase wordt in dit geval automatisch ingevoegd in het vak <strong>Zoeken naar</strong>. Elke aanroep van het venster <strong>Zoeken</strong> maakt zijn eigen nieuwe venster. Vergeet niet om ze te sluiten, zodat u uw bureaublad niet vol zet.</p>
+  <p>OmegaT verschaft een groot scala aan zoekfuncties. Roep het venster <strong>Zoeken</strong> op met <code>Ctrl+F</code> en voer het woord of de frase waarnaar u wilt zoeken in het vak <strong>Zoeken naar</strong> in. Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <code>Ctrl+F</code>. Het woord of de frase wordt in dit geval automatisch ingevoegd in het vak <strong>Zoeken naar</strong>. Elke aanroep van het venster <strong>Zoeken</strong> zal zijn eigen nieuwe venster maken. Vergeet niet om ze te sluiten, zodat u uw bureaublad niet vol zet.</p>
 
   <h3><a name="location" id="location"></a>Zoeklocatie</h3>
 
@@ -62,14 +60,14 @@
     </li>
   </ul>
 
-  <p>bij het zoeken in bestanden zal OmegaT zich beperken tot de indeling van de bronbestanden (Zie <a href="filesToTranslate.html">Ondersteunde bestandsformaten</a>). Hoewel, bijvoorbeeld, OmegaT in staat is om TMX-bestanden af te handelen, zullen die niet worden opgenomen in de zoekactie.</p>
+  <p>Bij het zoeken in bestanden zal OmegaT zich beperken tot de bestanden in de indelingen van bronbestanden (Zie <a href="filesToTranslate.html#formats">Bestandsformaten</a>). Bijvoorbeeld: hoewel OmegaT goed in staat is om TMXbestanden af te handelen, zal het ze niet opnemen in de zoekactie.</p>
   <hr>
 
   <h2><a name="searchmethods" id="searchmethods"></a>Zoeken methodes</h2>
 
   <p>Selecteer de methode met behulp van de optieknoppen. U kunt kiezen uit twee methodes om te zoeken:</p>
 
-  <table summary= "alleen opmaak" width="100%" border="0" cellpadding="3" cellspacing="0">
+  <table summary= "just formatting" width="100%" border="0" cellpadding="3" cellspacing="0">
     <col width="20%">
     <col width="80%">
 
@@ -98,7 +96,7 @@
 
   <p>Voor elk van deze twee methoden kunt u de volgende drie opties kiezen:</p>
 
-  <table summary= "alleen opmaak" width="100%" border="0" cellpadding="3" cellspacing="0">
+  <table summary= "just formatting" width="100%" border="0" cellpadding="3" cellspacing="0">
     <col width="20%">
     <col width="80%">
 
@@ -154,7 +152,7 @@
   <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>Reguliere uitdrukkingen gebruiken</h2>
 
   <p>Een zoekactie met reguliere uitdrukkingen is een krachtig middel om te zoeken naar tekenreeksen. Het komt overeen met zoeken met jokertekens, maar is veel meer flexibel. De reguliere uitdrukkingen die worden gebruikt in zoekacties zijn die welke worden ondersteund door Java. Een korte samenvatting is beschikbaar in de appendix <a href="regexp.html">Constructies van reguliere uitdrukkingen</a>. Als u meer specifieke informatie nodig heeft raadpleeg dan <a href=
-  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html"> http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
 
   <p>U kunt eenvoudige handleidingen vinden op het web (<a href=
   "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a> bijvoorbeeld.)</p>
@@ -164,11 +162,25 @@
 
   <p>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project, die de gezochte tekenreeks bevatten, worden weergegeven. Omdat OmegaT identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond.</p>
 
-  <p>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten zullen worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten zullen alleen als bron worden weergegeven.</p>
+  <p>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten zullen worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten zullen alleen in de bron worden weergegeven.</p>
 
-  <p>Klikken op een segment zal het openen in het venster Bewerken om het aan te passen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, aan te passen.</p>
+  <p>Klikken op een segment opent het om het in het venster Bewerken aan te kunnen passen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, de terminologie aan te passen.</p>
   <hr>
-  <table summary= "alleen opmaak" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+
+  <h2><a name="filter" id="filter"></a>Items in de bewerker filteren overeenkomstig de zoekactie</h2>
+
+  <p>Om makkelijker te navigeren in de resultaten van de zoekactie, kunt u de zoekactie toepassen op de bewerker. Druk op de knop 'filter' aan de onderzijde om de weergegeven items in de bewerker te beperken tot die welke overeen komen met de huidige zoekactie. U kunt normale navigatie gebruiken om bijvoorbeeld te gaan naar het volgende (niet-vertaalde) segment dat overeen komt met de zoekcriteria.</p>
+  <p>NB:</p>
+  <ul><li>een zoekactie wordt beperkt tot 1000 items, dus als u zoekt op een algemene frase, geeft de bewerker alleen die 1000 overeenkomende items zien, en niet alle items die overeenkomen met de zoekcriteria.</li>
+  <li>een bestand zou geen overeenkomende items kunnen hebben, dus wordt het leeg weergegeven.</li> 
+  <li>indien een zoekactie duplicaten verwijdert, zou u duplicaten in de bewerker kunnen missen.</li>
+  </ul>
+
+  <p>Druk op de knop 'filter verwijderen', of herlaadt een project om een filter te verwijderen.
+  </p>
+
+  <hr>
+  <table summary= "just formatting" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Auteursrechten</a> </td>

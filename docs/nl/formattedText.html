@@ -37,6 +37,10 @@
     <li>
       <p><a href="#tag_hints">Hints voor tagbeheer</a></p>
     </li>
+
+    <li>
+      <p><A href="#printf">Tijdelijke aanduidingen voor printf</A></p>
+    </li>
   </ul>
 
   <p>Opmaakinformatie die aanwezig is in het bronbestand moet meestal worden gereproduceerd in het doelbestand. De in-regelige opmaakinformatie van ondersteunde formaten (momenteel DocBook, HTML, XHTML, Open Document en OpenOffice.org) wordt door OmegaT weergegeven als tags. In normale gevallen worden tags genegeerd bij het bepalen van de gelijkheid tussen de verschillende teksten voor overeenkomst-doeleinden. Tags die zijn gereproduceerd in het vertaalde segment zullen aanwezig zijn in het vertaalde document.</p>
@@ -44,7 +48,7 @@
 
   <h3><a name="intro" id="intro"></a>Tags voor opmaak</h3>
 
-  <p><a name="naming" id="naming"></a><b>Namen van tags:</b> De tags bestaan uit één tot drie tekens en een getal. Met unieke nummers kunnen de tags die met elkaar overeenkomen worden gegroepeerd en onderscheiden zich van de tags die dezelfde tekencombinatie hebben, maar in feite verschillend zijn. De tekens kunnen wel of niet de waarde vertegenwoordigen van de opmaak die de tag vertegenwoordigt (bijv.:  vet, cursief, etc.)</p>
+  <p><a name="naming" id="naming"></a><b>Namen van tags:</b> De tags bestaan uit één tot drie tekens en een getal. Met unieke nummers kunnen de tags die met elkaar overeenkomen worden gegroepeerd en onderscheiden zich van de tags die dezelfde tekencombinatie hebben, maar in feite verschillend zijn. De tekens kunnen wel of niet de waarde vertegenwoordigen van de opmaak die de tag vertegenwoordigt (bijv.: vet, cursief, etc.)</p>
 
   <p><a name="numbering" id="numbering"></a><b>Nummeren van tags:</b>Tags worden op een oplopende manier genummerd door een <strong>tag-groep</strong>. Wat wij hier "tag-groepen" noemen is of één enkele tag (zoals <code><font color=
   "#FB0000">&lt;br1&gt;</font></code>) op zichzelf, of 2 tags die een paar vormen (zoals <code><font color="#FB0000">&lt;i0&gt;</font></code> en <code><font color="#FB0000">&lt;/i0&gt;</font></code>). Binnen een segment krijgt de eerste groep (paar of enkele) het nummer <strong>0</strong>, de tweede het nummer <strong>1</strong> etc. Het eerste voorbeeld hieronder heeft 3 tag-groepen (een paar, een enkele en dan nog een ander paar), het tweede voorbeeld heeft slechts één groep (een paar).</p>
@@ -52,7 +56,7 @@
   <p><a name="pairs" id="pairs"></a><b>Paren en enkelen:</b>Tags bestaan altijd of als enkele of als paar. <strong>Enkele tags</strong> geven opmaakinformatie aan die niet van invloed is op de tekst er omheen (extra spatie of regeleinde bijvoorbeeld).</p>
   <pre>
  <strong>&lt;segment 2132&gt;</strong><font color=
-"#FB0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
+"#FB0000">&lt;b0&gt;</font>&lt;Ctrl+N&gt;<font color=
 "#FB0000">&lt;/b0&gt;</font>, <font color=
 "#FB0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
 "#FB0000">&lt;/b2&gt;</font><strong>&lt;einde segment&gt;</strong>
@@ -71,7 +75,7 @@
 
   <h3><a name="tag_segmenting" id="tag_segmenting"></a>Tags en zin-segmentatie</h3>
 
-  <p>OmegaT maakt zijn tags voordat zin-segmentatie wordt toegepast. Afhankelijk van de segmentatieregels zou het kunnen lijken dat tags geen rekening houden met de hierboven genoemde regels van nummeren en groeperen. Controleer de volgende tekst: "<em>Vóór: \. Na: \s"</em><font color="#FB0000">.</font> <font color="#000000">Men zou de segmentatie als volgt verwachten (&lt;b0&gt; en &lt;/b0&gt; staan voor het begin en einde van cursief):</font></p>
+  <p>OmegaT maakt zijn tags voordat zin-segmentatie wordt toegepast. Afhankelijk van de segmentatieregels zou het kunnen lijken dat tags geen rekening houden met de hierboven genoemde regels van nummeren en groeperen. Controleer de volgende tekst: "<em>Vóór: \. Na: \s"</em><font color="#FB0000">.</font> <font color="#000000">Men zou de segmentatie als volgt verwachten(&lt;b0&gt; en &lt;/b0&gt; staan voor het begin en einde van cursief):</font></p>
   <pre>
  <strong>&lt;segment ....&gt;</strong> <font color=
 "#FB0000">&lt;b0&gt;</font>Vóór: \. Na: \s<font color=
@@ -81,7 +85,7 @@
   <p>Als echter de standaard segmentatieregels op dit segment worden toegepast (het standaard OmegaT-gedrag) krijgen we het volgende resultaat:</p>
   <pre>
  <strong>&lt;segment 1990&gt;</strong> <font color=
-"#FB0000">&lt;b0&gt;</font>Vóór: \. <strong>&lt;einde segment&gt;</strong><br>
+"#FB0000">&lt;b0&gt;</font>Vóór: \. &lt;einde segment&gt;
 <strong>&lt;segment 1991&gt;</strong> Na: \s<font color=
 "#FB0000">&lt;/b0&gt;</font><strong>&lt;einde segment&gt;</strong> <br>
 </pre>
@@ -112,7 +116,7 @@
 "#FB0000">&lt;/b0&gt;</font>.<strong>&lt;einde segment&gt;</strong>
 </pre>
 
-  <p><a name="deletion" id="deletion"></a><b> Verwijderen van tag-groepen:</b>Verwijder ze eenvoudigweg uit het segment om tag-groepen te verwijderen. Onthoud dat van een paar zowel de openings- als de sluitingstag moet worden verwijderd om er voor te zorgen dat alle sporen van de opmaak correct worden uitgewist, anders zou het vertaalde bestand mogelijk beschadigd kunnen raken. Door een tag-groep te verwijderen verwijdert u de gerelateerde opmaak uit het vertaalde document.</p>
+  <p><a name="deletion" id="deletion"></a><b>Verwijderen van tag-groepen:</b>Verwijder ze eenvoudigweg uit het segment om tag-groepen te verwijderen. Onthoud dat van een paar zowel de openings- als de sluitingstag moet worden verwijderd om er voor te zorgen dat alle sporen van de opmaak correct worden uitgewist, anders zou het vertaalde bestand mogelijk beschadigd kunnen raken. Door een tag-groep te verwijderen verwijdert u de gerelateerde opmaak uit het vertaalde document.</p>
 
   <p>Voorbeeld:</p>
   <pre>
@@ -191,17 +195,17 @@
 
   <h3><a name="tag_validation" id="tag_validation"></a>Tag-groep validatie</h3>
 
-  <p>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten. Het activeren van deze functie – door op Ctrl+T te drukken - zal een dialoogvenster openen waarin alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags zijn, worden getoond. Fouten in de vertaalde getagde tekst zijn vaak een probleem in OpenDocument of OpenOffice.org bestanden die niet willen openen wegens problemen met tags die zijn gemaakt gedurende het vertaalproces. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren. Het venster, dat wordt geopend door te drukken op Ctrl+T, heeft een kolom met 3 tabellen met een koppeling naar het segment, het originele segment en het doelsegment.</p><br>
+  <p>De functie Tags valideren detecteert gewijzigde tags (of dat met opzet is gedaan of per ongeluk) en toont de betrokken segmenten. Het activeren van deze functie – door op Ctrl+T te drukken - zal een dialoogvenster openen waarin alle segmenten uit het bestand, waarvan wordt vermoed dat ze zijn verbroken of slechte tags zijn, worden getoond. Fouten in een vertaalde getagde tekst zijn vaak een probleem in OpenDocument of OpenOffice.org bestanden die niet willen openen wegens problemen met tags die zijn gemaakt gedurende het vertaalproces. Repareren van de tags en het opnieuw samenstellen van de doeldocumenten is eenvoudig met de functie Tags valideren. Het venster, dat wordt geopend door te drukken op Ctrl+T, heeft een kolom met 3 tabellen met een koppeling naar het segment, het originele segment en het doelsegment:</p><br>
 
-  <table align="center" border="1" width="80%">
+  <table align="center" border="1" width="80%" summary="">
     <tbody>
       <tr>
-        <td><a href="">1</a></td>
+        <td>1</td>
 
         <td>Een ander lettertype voor weergave kan worden geselecteerd via het dialoogvenster <strong><font color="blue">&lt;b0&gt;</font></strong>Lettertype weergeven<strong><font color="blue">&lt;/b0&gt;</font></strong>. Open het via het menu-item <strong><font color=
         "blue">&lt;i1&gt;</font></strong>Instellingen<strong><font color=
         "blue">&lt;/i1&gt;</font></strong> &gt; <strong><font color=
-        "blue">&lt;i2&gt;</font></strong>Display Font...<strong><font color=
+        "blue">&lt;i2&gt;</font></strong>Lettertype weergeven...<strong><font color=
         "blue">&lt;/i2&gt;</font></strong>. Het lettertype en de afmetingen kunnen worden gewijzigd in het dialoogvenster.</td>
 
         <td>'n Mens kan 'n ander vertoonfont kies met die <strong><font color=
@@ -228,9 +232,29 @@
   "segmentation.html">segmentatieregels</a> te gebruiken om segmenten te maken met minder tags. Dit is een geavanceerde voorziening en enige ervaring is vereist om die juist toe te passen.</p>
 
   <p><strong>Belangrijk:</strong> OmegaT is nog niet in staat om fouten in de opmaak volautomatisch te detecteren, dus het zal geen signaal geven als u een fout maakt of de opmaak wijzigt zodat die beter bij uw doeltaal past. Soms zal uw vertaalde document er echter vervormd uitzien en, in geval van OpenDocument / OpenOffice.org-bestanden, zouden zelfs misschien weigeren te openen.</p>
+
   <hr>
 
-  <table style="width: 100%;" summary="alleen opmaak" border="0" cellpadding=
+  <h3><a name="printf"></a>Tijdelijke aanduidingen voor printf</h3>
+
+  <p>In sommige programmeertalen (bijv. PHP, C) worden speciale tags gebruikt als tijdelijke aanduidingen in tekenreeksen die in combinatie met de functie printf worden gebruikt. Bijv.:
+  </p>
+  <pre>$var =_("handig");
+echo printf(_("OmegaT is erg %s"),$var);</pre>
+
+  <p>Indien tekenreeksen van tekst uit deze broncode worden geëxtraheerd (bijv. via het PO-filter), vervangt OmegaT deze variabelen niet door tags, omdat het niet zeker weet of bijvoorbeeld. <code>%s</code> in feite een tijdelijke aanduiding is of alleen maar een gedeelte van een tekst. U kunt echter de validatie voor deze aanduidingen inschakelen. Selecteer <strong>Opties→ Tagvalidatie...</strong> uit het menu. U kunt kiezen uit eenvoudige of volledige validatie.</p>
+
+  <p>De officiële syntaxis voor variabelen van printf is</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Volledige validatie ondersteunt deze indeling volledig, met uitzondering van de <code>WIDTHSPECIFIER</code>. In eenvoudige validatie wordt de volgende syntaxis gecontroleerd:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>U kunt de volgorde van de aanduidingen wijzigen, maar dan moet u de ARGUMENTSWAPSPECIFIER toevoegen als die er nog niet staat. Dit betekent het toevoegen van een reeksnummer en een dollarteken na de <code>%</code>. Bijv. <code>"%s is een %s toepassing"</code> is gelijk aan <code>"%1$s is een %2$s toepassing"</code> die u kunt vertalen door <code>"a %2$s toepassing is %1$s"</code>.
+  </p>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
   "2" cellspacing="2">
     <tbody>
       <tr>

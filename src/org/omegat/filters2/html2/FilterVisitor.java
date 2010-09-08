@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
+               2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -1136,7 +1137,10 @@ public class FilterVisitor extends NodeVisitor
                     {
                         // named entity?
                         int n = i+1;
-                        while( n<strlen && isLatinLetter(str.charAt(n)) )
+                        while( n<strlen && 
+                             (isLatinLetter(str.charAt(n)) || // Some entities
+                              isDecimalDigit(str.charAt(n)))  // contain numbers
+                             )                                // e.g., frac12
                             n++;
                         String s_entity = str.substring(i+1, n);
                         int n_entity = lookupEntity(s_entity);

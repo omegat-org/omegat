@@ -2,7 +2,7 @@
  OmegaT 2.1.8 update 2
 ----------------------------------------------------------------------
   3 Enhancements
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.1.8 update 2 vs. 2.1.8 update 1
 
@@ -17,6 +17,9 @@
   - Still some corrections about the highlight of the search results
 
   - Rc filter: Correction on the handling of comments and includes
+
+  - HTML entities containing numbers are not recognized
+  http://sourceforge.net/support/tracker.php?aid=3036227
 
 ----------------------------------------------------------------------
  OmegaT 2.1.8 update 1

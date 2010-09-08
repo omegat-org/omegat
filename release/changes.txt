@@ -2,7 +2,7 @@
  OmegaT 2.1.8 update 2
 ----------------------------------------------------------------------
   3 Enhancements
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.8 update 2 vs. 2.1.8 update 1
 
@@ -15,6 +15,8 @@
   Bug fixes:
 
   - Still some corrections about the highlight of the search results
+
+  - Rc filter: Correction on the handling of comments and includes
 
 ----------------------------------------------------------------------
  OmegaT 2.1.8 update 1

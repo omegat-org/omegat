@@ -99,6 +99,8 @@ public class RcFilter extends AbstractFilter {
             String strim = s.trim();
 
             if (strim.startsWith("//") || strim.startsWith("#")) {
+                outFile.write(s);
+                outFile.newLine();
                 continue;
             }
 

@@ -97,6 +97,13 @@ public class SegmentBuilder {
     protected Position posTranslationBeg;    
 
     protected int offset;
+    
+    /**
+     * True if source OR target languages is RTL. In this case, we will insert
+     * RTL/LTR embedded direction chars. Otherwise - will not insert, since JDK
+     * 1.6 has bug with performance with embedded directions chars.
+     */
+    protected boolean hasRTL;
 
     public SegmentBuilder(final EditorController controller,
             final Document3 doc, final EditorSettings settings,
@@ -106,6 +113,8 @@ public class SegmentBuilder {
         this.settings = settings;
         this.ste = ste;
         this.segmentNumberInProject = segmentNumberInProject;
+        
+        hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL;
     }
 
     /**
@@ -379,9 +388,13 @@ public class SegmentBuilder {
         int prevOffset = offset;
         boolean rtl = isSource ? controller.sourceLangIsRTL
                 : controller.targetLangIsRTL;
-        insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
+        if (hasRTL) {
+            insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
+        }
         insert(text, attrs);
-        insert("\u202c", null); // end of embedding
+        if (hasRTL) {
+            insert("\u202c", null); // end of embedding
+        }
         insert("\n", null);
         setAttributes(prevOffset, offset, isSource);
     }
@@ -413,9 +426,13 @@ public class SegmentBuilder {
         }
         int prevOffset = offset;
         boolean rtl = localeIsRTL();
-        insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
+        if (hasRTL) {
+            insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
+        }
         insert(text, attrs);
-        insert("\u202c", null); // end of embedding
+        if (hasRTL) {
+            insert("\u202c", null); // end of embedding
+        }
         insert("\n", null);
         setAttributes(prevOffset, offset, false);
     }
@@ -434,14 +451,17 @@ public class SegmentBuilder {
         insert(createSegmentMarkText(true), ATTR_SEGMENT_MARK);
         insert(" ", null);
 
-        insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL-
-        // embedding
+        if (hasRTL) {
+            insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
+        }
 
         activeTranslationBeginOffset = offset;
         insert(text, attrs);
         activeTranslationEndOffset = offset;
 
-        insert("\u202c", null); // end of embedding
+        if (hasRTL) {
+            insert("\u202c", null); // end of embedding
+        }
 
         insert(" ", null);
         insert(createSegmentMarkText(false), ATTR_SEGMENT_MARK);
@@ -479,8 +499,10 @@ public class SegmentBuilder {
                     .format(segmentNumberInProject));
         }
 
-        // add LTR/RTL embedded chars
-        text = (markIsRTL ? '\u202b' : '\u202a') + text + '\u202c';
+        if (hasRTL) {
+            // add LTR/RTL embedded chars
+            text = (markIsRTL ? '\u202b' : '\u202a') + text + '\u202c';
+        }
 
         return text;
     }

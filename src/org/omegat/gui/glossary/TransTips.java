@@ -135,7 +135,7 @@ public class TransTips
     public static boolean isWordAlone(String sourceText, int testIndex, String glosSrc)
     {
         // Remove directional characters
-        sourceText = sourceText.replaceAll("[\u202A|\u202B|\u202C]", " ");
+        sourceText = sourceText.replaceAll("[\u202A|\u202B|\u202C|\u200B]", " ");
 
         // Check that word stands alone
         char before;

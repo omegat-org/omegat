@@ -2,7 +2,7 @@
  OmegaT 2.1.9
 ----------------------------------------------------------------------
   3 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 ----------------------------------------------------------------------
 2.1.9 vs. 2.1.8 update 1
 
@@ -20,6 +20,9 @@
 
   - HTML entities containing numbers are not recognized
   http://sourceforge.net/support/tracker.php?aid=3036227
+
+  - Very slow editor with Java 1.6 on a Mac
+  http://sourceforge.net/support/tracker.php?aid=3070076
 
 ----------------------------------------------------------------------
  OmegaT 2.1.8 update 1

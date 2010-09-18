@@ -42,7 +42,6 @@ import javax.swing.event.CaretListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.BoxView;
-import javax.swing.text.Caret;
 import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
@@ -93,7 +92,11 @@ public class EditorTextArea3 extends JEditorPane {
                             e.getMark());
                     int end = EditorUtils.getWordEnd(EditorTextArea3.this, e
                             .getMark());
-                    String newWord = getText(start, end - start);
+					if (end - start <= 0) {
+						// word not defined
+						return;
+					}
+					String newWord = getText(start, end - start);
                     if (!newWord.equals(currentWord)) {
                         currentWord = newWord;
                         CoreEvents.fireEditorNewWord(newWord);

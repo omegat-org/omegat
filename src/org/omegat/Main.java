@@ -190,6 +190,11 @@ public class Main {
      * Execute standard GUI.
      */
     protected static void runGUI() {
+		// MacOSX-specific - they must be setted BEFORE any GUI calls
+		System.setProperty("apple.laf.useScreenMenuBar", "true");
+		System.setProperty("com.apple.mrj.application.apple.menu.about.name",
+				"OmegaT");
+
         Log.log("Docking Framework version: "
                 + DockingDesktop.getDockingFrameworkVersion());
         Log.log("");
@@ -200,13 +205,6 @@ public class Main {
             UIManager.getInstalledLookAndFeels();
 
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-
-            // MacOSX-specific
-            System.setProperty("apple.laf.useScreenMenuBar", "true"); 
-            System
-                    .setProperty(
-                            "com.apple.mrj.application.apple.menu.about.name",
-                            "OmegaT"); 
         } catch (Exception e) {
             // do nothing
             Log.logErrorRB("MAIN_ERROR_CANT_INIT_OSLF");

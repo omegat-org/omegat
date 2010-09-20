@@ -19,7 +19,7 @@
   - Rc filter: Correction on the handling of comments and includes
 
   - HTML entities containing numbers are not recognized
-  http://sourceforge.net/support/tracker.php?aid=3036227
+  http://sourceforge.net/support/tracker.php?aid=3060805
 
   - Very slow editor with Java 1.6 on a Mac
   http://sourceforge.net/support/tracker.php?aid=3070076

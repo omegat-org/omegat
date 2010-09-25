@@ -147,7 +147,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
     private String creationtool = null;
     /** Creation Tool attribute value of OmegaT TMXs: "OmegaT" */
-    public static final String CT_OMEGAT = "OmegaT";                            // NOI18N
+    public static final String CT_OMEGAT = "OmegaT";                            
     /** Returns Creation Tool attribute of TMX file */
     public String getCreationTool() 
     {
@@ -156,19 +156,19 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     
     private String creationtoolversion = null;
     /** "1" for OmegaT 1.4.5 and earlier (Creation Tool Version attribute). */
-    public static final String CTV_OMEGAT_1 = "1";                              // NOI18N
+    public static final String CTV_OMEGAT_1 = "1";                              
     /** "1.6" for OmegaT 1.6 RC3 to 1.6.0 RC11 (Creation Tool Version attribute). Pretty misleading. */
-    public static final String CTV_OMEGAT_1_6_RC3_RC11 = "1.6";                 // NOI18N
+    public static final String CTV_OMEGAT_1_6_RC3_RC11 = "1.6";                 
     /** "1.6 RC12" for OmegaT 1.6 RC12 and later RCs (Creation Tool Version attribute). */
-    public static final String CTV_OMEGAT_1_6_RC12 = "1.6 RC12";                // NOI18N
+    public static final String CTV_OMEGAT_1_6_RC12 = "1.6 RC12";                
     /** 1.6.0 for OmegaT 1.6.0-final */
-    public static final String CTV_OMEGAT_1_6_0_FINAL = "1.6.0";                // NOI18N
+    public static final String CTV_OMEGAT_1_6_0_FINAL = "1.6.0";                
     /** 1.6.1 for OmegaT 1.6.1 */
-    public static final String CTV_OMEGAT_1_6_1 = "1.6.1"; // NOI18N
+    public static final String CTV_OMEGAT_1_6_1 = "1.6.1"; 
     /** Current version */
     /** This number is not updated anymore. OStrings.VERSION + OStrings.UPDATE
         is used instead */
-    public static final String CTV_OMEGAT_CURRENT = CTV_OMEGAT_1_6_1;           // NOI18N
+    public static final String CTV_OMEGAT_CURRENT = CTV_OMEGAT_1_6_1;           
     /** Returns Creation Tool attribute of TMX file */
     public String getCreationToolVersion() 
     {
@@ -277,12 +277,12 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         public String toString()
         {
             return
-                    "<" +                                                       // NOI18N
-                    (end ? "/" : "") +                                          // NOI18N
+                    "<" +                                                       
+                    (end ? "/" : "") +                                          
                     name +
                     num +
-                    (alone ? "/" : "") +                                        // NOI18N
-                    ">";                                                        // NOI18N
+                    (alone ? "/" : "") +                                        
+                    ">";                                                        
         }
         
         /** 
@@ -297,11 +297,11 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                 return toString();
             else
                 return
-                        "<" +                                                   // NOI18N
-                        (end ? "" : "/") +                                      // NOI18N
+                        "<" +                                                   
+                        (end ? "" : "/") +                                      
                         name +
                         num +
-                        ">";                                                   // NOI18N
+                        ">";                                                   
         }
     }
     
@@ -454,9 +454,9 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     
     private String segtype;
     /** Segment Type attribute value: "paragraph" */
-    public static final String SEG_PARAGRAPH = "paragraph";                     // NOI18N
+    public static final String SEG_PARAGRAPH = "paragraph";                     
     /** Segment Type attribute value: "sentence" */
-    public static final String SEG_SENTENCE = "sentence";                       // NOI18N
+    public static final String SEG_SENTENCE = "sentence";                       
     /** Returns Segment Type attribute of TMX file */
     public String getSegType() 
     {
@@ -512,7 +512,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
             // parse the TM, provide the current TMX reader as notification handler
             InputSource is = new InputSource(new XMLReader(filename, m_encoding));
-            is.setSystemId("");                                                 // NOI18N
+            is.setSystemId("");                                                 
             parser.parse(is, this);
 
             // if no source could be found for 1 or more TUs, log this fact
@@ -895,7 +895,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                 // match against entire TMX source language
                 if (   (sourceT == null)
                     && (   tuv.language.equalsIgnoreCase(tmxSourceLanguage)
-                        || tmxSourceLanguage.equalsIgnoreCase("*all*")))   // NOI18N
+                        || tmxSourceLanguage.equalsIgnoreCase("*all*")))   
                     // the current TUV is the source according to the TMX source language
                     sourceT = tuv;
                 // match against TMX source language code only
@@ -1101,7 +1101,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         // create new entries in the current TUV's sub segment list and on the stack
         // NOTE: the assumption is made here that sub segments are
         // in the same order in both source and target segments
-        StringBuffer sub = new StringBuffer();                                  // NOI18N
+        StringBuffer sub = new StringBuffer();                                  
         tuvs.get(tuvs.size() - 1).subSegments.add(sub);
         currentSub.push(sub);
     }
@@ -1125,40 +1125,40 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                                                  throws SAXException 
     {
         // simply return an empty dtd
-        return new org.xml.sax.InputSource(new java.io.StringReader(""));       // NOI18N
+        return new org.xml.sax.InputSource(new java.io.StringReader(""));       
     }
 
     // Constants for certain TMX tag names/attributes
-    private final static String TMX_TMX_TAG    = "tmx";                         // NOI18N
-    private final static String TMX_TAG_HEADER = "header";                      // NOI18N
-    private final static String TMX_TAG_BODY   = "body";                        // NOI18N
-    private final static String TMX_TAG_TU     = "tu";                          // NOI18N
-    private final static String TMX_TAG_TUV    = "tuv";                         // NOI18N
-    private final static String TMX_TAG_SEG    = "seg";                         // NOI18N
-    private final static String TMX_TAG_BPT    = "bpt";                         // NOI18N
-    private final static String TMX_TAG_EPT    = "ept";                         // NOI18N
-    private final static String TMX_TAG_HI     = "hi";                          // NOI18N
-    private final static String TMX_TAG_IT     = "it";                          // NOI18N
-    private final static String TMX_TAG_PH     = "ph";                          // NOI18N
-    private final static String TMX_TAG_UT     = "ut";                          // NOI18N
-    private final static String TMX_TAG_SUB    = "sub";                         // NOI18N
-    private final static String TMX_TAG_PROP   = "prop";                        // NOI18N
-    private final static String TMX_TAG_INLINE = "inline"; // made up for convenience // NOI18N
-    private final static String TMX_TAG_NONE   = "none";   // made up for convenience // NOI18N
+    private final static String TMX_TMX_TAG    = "tmx";                         
+    private final static String TMX_TAG_HEADER = "header";                      
+    private final static String TMX_TAG_BODY   = "body";                        
+    private final static String TMX_TAG_TU     = "tu";                          
+    private final static String TMX_TAG_TUV    = "tuv";                         
+    private final static String TMX_TAG_SEG    = "seg";                         
+    private final static String TMX_TAG_BPT    = "bpt";                         
+    private final static String TMX_TAG_EPT    = "ept";                         
+    private final static String TMX_TAG_HI     = "hi";                          
+    private final static String TMX_TAG_IT     = "it";                          
+    private final static String TMX_TAG_PH     = "ph";                          
+    private final static String TMX_TAG_UT     = "ut";                          
+    private final static String TMX_TAG_SUB    = "sub";                         
+    private final static String TMX_TAG_PROP   = "prop";                        
+    private final static String TMX_TAG_INLINE = "inline"; // made up for convenience 
+    private final static String TMX_TAG_NONE   = "none";   // made up for convenience 
 
-    private final static String TMX_ATTR_LANG                = "lang";          // NOI18N
-    private final static String TMX_ATTR_LANG_NS             = "xml:lang";      // NOI18N
-    private final static String TMX_ATTR_CREATIONTOOL        = "creationtool";  // NOI18N
-    private final static String TMX_ATTR_CREATIONTOOLVERSION = "creationtoolversion";   // NOI18N
-    private final static String TMX_ATTR_SEGTYPE             = "segtype";       // NOI18N
-    private final static String TMX_ATTR_SRCLANG             = "srclang";       // NOI18N
-    private final static String TMX_ATTR_TYPE                = "type";          // NOI18N
-    private final static String TMX_ATTR_CHANGEID            = "changeid";      // NOI18N
-    private final static String TMX_ATTR_CHANGEDATE          = "changedate";    // NOI18N
-    private final static String TMX_ATTR_CREATIONID          = "creationid";      // NOI18N
-    private final static String TMX_ATTR_CREATIONDATE        = "creationdate";    // NOI18N
+    private final static String TMX_ATTR_LANG                = "lang";          
+    private final static String TMX_ATTR_LANG_NS             = "xml:lang";      
+    private final static String TMX_ATTR_CREATIONTOOL        = "creationtool";  
+    private final static String TMX_ATTR_CREATIONTOOLVERSION = "creationtoolversion";   
+    private final static String TMX_ATTR_SEGTYPE             = "segtype";       
+    private final static String TMX_ATTR_SRCLANG             = "srclang";       
+    private final static String TMX_ATTR_TYPE                = "type";          
+    private final static String TMX_ATTR_CHANGEID            = "changeid";      
+    private final static String TMX_ATTR_CHANGEDATE          = "changedate";    
+    private final static String TMX_ATTR_CREATIONID          = "creationid";      
+    private final static String TMX_ATTR_CREATIONDATE        = "creationdate";    
 
-    private final static String PROPERTY_VARIANT_LANGUAGES = "OmegaT:VariantLanguages"; // NOI18N
+    private final static String PROPERTY_VARIANT_LANGUAGES = "OmegaT:VariantLanguages"; 
 
     private String  m_encoding;
     private List<String>    m_srcList;

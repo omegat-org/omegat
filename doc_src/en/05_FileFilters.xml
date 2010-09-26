@@ -4,9 +4,9 @@
 <chapter id="ch05.file.filters">
   <title>File Filters</title>
 
-  <para><application>OmegaT</application> features highly customizable filters, enabling you to setup
-  most of the aspects of their work. File filters are pieces of code capable
-  of:</para>
+  <para><application>OmegaT</application> features highly customizable
+  filters, enabling you to setup most of the aspects of their work. File
+  filters are pieces of code capable of:</para>
 
   <itemizedlist>
     <listitem>
@@ -37,23 +37,31 @@
   when a project is open, you will have to reload the project for the changes
   to take effect</para>
 
-  <section id="file.filter.sdialog">
-    <title>File filters dialog</title>
+  <section id="file.filters.dialog">
+    <title>File filters dialog<indexterm class="singular">
+        <primary>File filters</primary>
+
+        <secondary>Dialog</secondary>
+      </indexterm></title>
 
     <para>The dialog lists available file filters. If you don't want to use
-    <application>OmegaT</application> to translate the files of some type, you may turn off the filter by
-    checking off the check box near its name. <application>OmegaT</application> will then omit the
-    appropriate files while loading projects, and will copy them untouched
-    while creating target documents. Later when you decide to use the filter
-    again, just tick the check box. Click <emphasis
-    role="bold">Defaults</emphasis> to reset the file filters to the default
-    settings. To edit what files in what encodings the filter will process,
-    select the filter from the list and click <emphasis
-    role="bold">Edit.</emphasis></para>
+    <application>OmegaT</application> to translate the files of some type, you
+    may turn off the filter by checking off the check box near its name.
+    <application>OmegaT</application> will then omit the appropriate files
+    while loading projects, and will copy them untouched while creating target
+    documents. Later when you decide to use the filter again, just tick the
+    check box. Click <emphasis role="bold">Defaults</emphasis> to reset the
+    file filters to the default settings. To edit what files in what encodings
+    the filter will process, select the filter from the list and click
+    <emphasis role="bold">Edit.</emphasis></para>
   </section>
 
   <section id="filters.options">
-    <title>Filters options</title>
+    <title>Filters options<indexterm class="singular">
+        <primary>File filters</primary>
+
+        <secondary>Options</secondary>
+      </indexterm></title>
 
     <para>Five filters (Text files, XHTML files, HTML and XHTML files,
     OpenDocument/OpenOffice.org files and Microsoft Open XML files) have one
@@ -61,10 +69,8 @@
     the list and click on <emphasis role="bold">Options</emphasis>. The
     available options are:</para>
 
-    <para>
-      <emphasis role="bold">F<emphasis role="bold">ilters
-      options</emphasis></emphasis>
-    </para>
+    <para><emphasis role="bold">F<emphasis role="bold">ilters
+    options</emphasis></emphasis></para>
 
     <itemizedlist>
       <listitem>
@@ -74,15 +80,15 @@
       </listitem>
     </itemizedlist>
 
-    <para>
-      <emphasis role="bold">HTML files and HTML and XHTML Files</emphasis>
-    </para>
+    <para><emphasis role="bold">HTML files and HTML and XHTML
+    Files</emphasis></para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Encoding declaration: </emphasis><application>OmegaT</application> may add or
-        rewrite the file's encoding declaration based on the target file
-        selected encoding.</para>
+        <para><emphasis>Encoding declaration:
+        </emphasis><application>OmegaT</application> may add or rewrite the
+        file's encoding declaration based on the target file selected
+        encoding.</para>
       </listitem>
     </itemizedlist>
 
@@ -107,9 +113,8 @@
       </listitem>
     </itemizedlist>
 
-    <para>
-      <emphasis role="bold">OpenDocument/OpenOffice.org files</emphasis>
-    </para>
+    <para><emphasis role="bold">OpenDocument/OpenOffice.org
+    files</emphasis></para>
 
     <itemizedlist>
       <listitem>
@@ -141,9 +146,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>
-      <emphasis role="bold">Microsoft Open XML files</emphasis>
-    </para>
+    <para><emphasis role="bold">Microsoft Open XML files</emphasis></para>
 
     <para>The following elements can be translated or not. If translated, they
     will appear as separate segments.</para>
@@ -192,7 +195,11 @@
   </section>
 
   <section id="edit.filter.dialog">
-    <title>Edit filter dialog</title>
+    <title>Edit filter dialog<indexterm class="singular">
+        <primary>File filters</primary>
+
+        <secondary>Editing</secondary>
+      </indexterm></title>
 
     <para>The dialog allows you to setup the source filename patterns of files
     the filter will process, customize the filenames of translated files, and
@@ -205,27 +212,49 @@
     editor allows you to customize the names of output files.</para>
 
     <section id="source.filetype.and.filename.pattern">
-      <title>Source file type, filename pattern</title>
+      <title><indexterm class="singular">
+          <primary>Source files</primary>
 
-      <para>When an <application>OmegaT</application> encounters a file in its source folder, it tries to
-      select the filter using file's extension. More precisely, <application>OmegaT</application> tries
-      to match each filter's source filename patterns against the filename.
-      For example, <literal>*.xhtml </literal>pattern will match against any
-      file with <literal>.xhtml</literal> extension. If the appropriate filter
-      is found, it is given the file for processing. For example, by default
-      XHTML filter will be used for processing files with .xhtml extension.
-      You may change or add filename patterns of files each file filter will
-      handle. Source filename patterns use wild card characters similar to
-      those used in <emphasis role="bold">Searches. </emphasis>The '*'
-      character matches zero or more characters. The '?' character matches
-      exactly one character. All the other characters represent themselves.
-      For example, if you want the text filter to handle readme files
-      (<literal>readme, read.me</literal>, and <literal>readme.txt</literal>)
-      you should use the pattern <literal>read*</literal>.</para>
+          <secondary>File type, filename pattern</secondary>
+        </indexterm>Source file type, filename pattern<indexterm
+          class="singular">
+          <primary>File filters</primary>
+
+          <secondary>Source file type, filename</secondary>
+        </indexterm></title>
+
+      <para>When an <application>OmegaT</application> encounters a file in its
+      source folder, it tries to select the filter using file's extension.
+      More precisely, <application>OmegaT</application> tries to match each
+      filter's source filename patterns against the filename. For example,
+      <literal>*.xhtml </literal>pattern will match against any file with
+      <literal>.xhtml</literal> extension. If the appropriate filter is found,
+      it is given the file for processing. For example, by default XHTML
+      filter will be used for processing files with .xhtml extension. You may
+      change or add filename patterns of files each file filter will handle.
+      Source filename patterns use wild card characters similar to those used
+      in <emphasis role="bold">Searches. </emphasis>The '*' character matches
+      zero or more characters. The '?' character matches exactly one
+      character. All the other characters represent themselves. For example,
+      if you want the text filter to handle readme files (<literal>readme,
+      read.me</literal>, and <literal>readme.txt</literal>) you should use the
+      pattern <literal>read*</literal>.</para>
     </section>
 
     <section id="source.and.target.files.encoding">
-      <title>Source and target files encoding</title>
+      <title>Source and Target file encoding</title>
+        <indexterm class="singular">
+		<primary>Source files</primary>
+          <secondary>Encoding</secondary>
+        </indexterm>
+		<indexterm class="singular">
+          <primary>Target files</primary>
+          <secondary>Encoding</secondary>
+        </indexterm>
+		<indexterm class="singular">
+          <primary>File filters</primary>
+          <secondary>Source, target encoding</secondary>
+        </indexterm>
 
       <para>Only a limited number of file formats specify a mandatory
       encoding. File formats that do not specify their encoding will use the
@@ -236,42 +265,52 @@
       any encoding. By default, the translated file encoding in is the same as
       the source file encoding. Source and target encoding fields use combo
       boxes with all supported encodings included. &lt;auto&gt; leaves the
-      encoding choice to <application>OmegaT</application>. Here's how it does:</para>
+      encoding choice to <application>OmegaT</application>. Here's how it
+      does:</para>
 
       <itemizedlist>
         <listitem>
-          <para><application>OmegaT</application> finds the source file encoding by using its encoding
-          declaration if any (HTML files, XML based files).</para>
+          <para><application>OmegaT</application> finds the source file
+          encoding by using its encoding declaration if any (HTML files, XML
+          based files).</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><application>OmegaT</application> is set to use a mandatory encoding for some file
-          formats ( Java properties etc)</para>
+          <para><application>OmegaT</application> is set to use a mandatory
+          encoding for some file formats ( Java properties etc)</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><application>OmegaT</application> uses the default encoding of the operating system for
-          text files.</para>
+          <para><application>OmegaT</application> uses the default encoding of
+          the operating system for text files.</para>
         </listitem>
       </itemizedlist>
     </section>
 
     <section id="target.name">
-      <title>Target filename</title>
+      <title>Target filename<indexterm class="singular">
+          <primary>Target files</primary>
+
+          <secondary>Filenames</secondary>
+        </indexterm></title>
 
       <para>Sometimes you may like to rename the files you translate
       automatically, for example adding a language code after file name.
       Target filename pattern uses a special syntax, so if you wish to edit
       this field, you have to click <emphasis
-      role="bold">Edit...</emphasis>and use the Edit Pattern Dialog. If you
-      want to fall back to default configuration of the filter, click
-      <emphasis role="bold">Defaults.</emphasis> You may also modify the name
-      directly in the target filename pattern field of the file filters
-      dialog. The Edit Pattern Dialog offers the following options:</para>
+      role="bold">Edit...</emphasis>and use the <indexterm class="singular">
+          <primary>File filters</primary>
+
+          <secondary>Dialog</secondary>
+        </indexterm>Edit Pattern Dialog. If you want to fall back to default
+      configuration of the filter, click <emphasis
+      role="bold">Defaults.</emphasis> You may also modify the name directly
+      in the target filename pattern field of the file filters dialog. The
+      Edit Pattern Dialog offers the following options:</para>
 
       <itemizedlist>
         <listitem>
@@ -294,7 +333,7 @@
           form "xx_YY").</para>
         </listitem>
       </itemizedlist>
-	  
+
       <itemizedlist>
         <listitem>
           <para><literal>${targetLanguage} </literal>- the target language and

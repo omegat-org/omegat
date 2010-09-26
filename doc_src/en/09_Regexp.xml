@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch08.regexp">
-  <title>Regular-expression constructs</title>
+<chapter id="ch09.regexp">
+  <title>Regular expressions<indexterm class="singular">
+      <primary>Regular expressions</primary>
+
+      <seealso>Segmentation</seealso>
+
+      <seealso>Searching</seealso>
+    </indexterm></title>
 
   <para>The regular expressions (or regex for short) used in searches and
   segmentation rules are those supported by Java. If you need more specific
@@ -21,7 +27,7 @@
         <row>
           <entry align="left">The construct</entry>
 
-          <entry align="left">...matches the following</entry>
+          <entry align="left">... matches the following</entry>
         </row>
       </thead>
 
@@ -46,7 +52,7 @@
         <row>
           <entry align="left">The construct</entry>
 
-          <entry align="left">...matches the following</entry>
+          <entry align="left">... matches the following</entry>
         </row>
       </thead>
 
@@ -391,7 +397,7 @@
 
     <title>Regex - Greedy quantifiers</title>
 
-    - will match as much as they can. For example, 
+     - will match as much as they can. For example, 
 
     <emphasis>a+</emphasis>
 
@@ -445,7 +451,7 @@
 
     <title>Regex - Reluctant (non-greedy) quantifiers</title>
 
-    - will match as little as they can. For example, 
+     - will match as little as they can. For example, 
 
     <emphasis>a+?</emphasis>
 
@@ -531,7 +537,15 @@
   </table>
 
   <section id="regex.tools.and.examples.of.use">
-    <title>Regex tools and examples of use</title>
+    <title><indexterm class="singular">
+        <primary>Regular expressions</primary>
+
+        <secondary>Tools</secondary>
+      </indexterm>Regex tools and examples of use<indexterm class="singular">
+        <primary>Regular expressions</primary>
+
+        <secondary>Examples of use</secondary>
+      </indexterm></title>
 
     <para>There's a number of interactive tools available to develop and test
     regular expressions. They all pretty much follow the same pattern (Example
@@ -543,10 +557,12 @@
       <title>Regex Tester</title>
 
       <imageobject>
-        <imagedata fileref="images/RegexTester.png" />
+        <imagedata fileref="images/RegexTester.png" width = "60%"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata fileref="images/RegexTester.png" width = "40%"/>
       </imageobject>
     </figure>
-
     <para>See <ulink url="http://weitz.de/regex-coach/">The Regex
     Coach</ulink> for Windows,Linux, Mac, FreeBSD versions of a stand-alone
     tool, that's pretty much identical to the above example.</para>
@@ -584,7 +600,7 @@
           </row>
 
           <row>
-            <entry>\. \s$</entry>
+            <entry>\. \s+$</entry>
 
             <entry>extra blanks, following the period at the end of the
             line</entry>

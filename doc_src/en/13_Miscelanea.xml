@@ -2,10 +2,20 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <chapter id="ch13.Misc">
-  <title>Miscelaneous subjects</title>
+  <title>Miscelaneous subjects<indexterm class="singular">
+      <primary>Miscellanea</primary>
+    </indexterm></title>
 
   <section id="omegat.console.mode">
-    <title><application>OmegaT</application> Console Mode</title>
+    <title><application><indexterm class="singular">
+        <primary>OmegaT console mode</primary>
+
+        <seealso>Miscellanea</seealso>
+      </indexterm>OmegaT</application> Console Mode<indexterm class="singular">
+        <primary>Miscellanea</primary>
+
+        <secondary>OmegaT console mode</secondary>
+      </indexterm></title>
 
     <para>The purpose of the console mode is to use
     <application>OmegaT</application> as translation tool in a scripting
@@ -52,12 +62,17 @@
       <para>To start <application>OmegaT</application> in console mode, some
       extra parameters have to be passed on startup. The most important is
       <literal>&lt;project-dir&gt;</literal>, and
-      optionally<literal>--config-dir=&lt;config-dir&gt;. </literal></para>
+      optionally<literal>--config-dir=&lt;config-dir&gt;.
+      </literal>Example:</para>
 
-      <para>Example: <literal>$&gt; java -jar
-      <application>OmegaT</application>.jar /path/to/project
-      --config-dir=/path/to/config-files/
-      --mode=console-translate</literal></para>
+      <para> <literal>$&gt; java -jar <application>OmegaT</application>.jar
+      /path/to/project \</literal></para>
+
+      <para><literal> --config-dir=/path/to/config-files/ \</literal></para>
+
+      <para><literal> --mode=console-translate \</literal></para>
+
+      <para><literal> --source-pattern={regexp}</literal></para>
 
       <para><emphasis role="bold">Explanation:</emphasis></para>
 
@@ -87,6 +102,12 @@
           <application>OmegaT</application> starts in console mode and will
           translate the given project</para>
         </listitem>
+
+        <listitem>
+          <para>--source-pattern={regexp} The files to be translated can be
+          specified this way. Example for the regular expression:
+          <filename>test\.html</filename></para>
+        </listitem>
       </itemizedlist>
     </section>
 
@@ -103,8 +124,36 @@
     </section>
   </section>
 
+  <section>
+    <title>Automatic Java Properties Aligner<indexterm class="singular">
+        <primary>Miscellanea</primary>
+
+        <secondary>Automatic aligner for Java properties</secondary>
+
+        <seealso>Miscelanea</seealso>
+      </indexterm></title>
+
+    <para>OmegaT can align Java .properties in console mode. If you have the
+    source and the target Properties files for the one and the same contents
+    in your language pair, this procedure will create a corresponding TMX file
+    for these contents. Usage:</para>
+
+    <para><literal>java -jar OmegaT.jar --mode=console-align /my-project-dir
+    --alignDir=/translatedFiles/ </literal></para>
+
+    <para><filename>alignDir </filename>must contain a translation in the
+    target language of the project. E.g., if the project is EN-&gt;FR,
+    alignDir must contain a bundle ending with _fr. The resulting TMX is
+    stored in the <literal>omegat </literal>folder under the name
+    <filename>align.tmx</filename>.</para>
+  </section>
+
   <section id="font.settings">
-    <title>Font settings</title>
+    <title>Font settings<indexterm class="singular">
+        <primary>Miscellanea</primary>
+
+        <secondary>Font settings</secondary>
+      </indexterm></title>
 
     <para>This dialog allows you to modify the font used by
     <application>OmegaT</application> in the following windows:</para>
@@ -128,7 +177,11 @@
       </listitem>
     </itemizedlist>
 
-    <para>The dialog can be called up via the <menuchoice>
+    <para>The dialog can be called up via the <indexterm class="singular">
+        <primary>Menu Options</primary>
+
+        <secondary>Font...</secondary>
+      </indexterm><menuchoice>
         <guimenu>Options</guimenu>
 
         <guimenuitem>Font...</guimenuitem>
@@ -163,7 +216,11 @@
   </section>
 
   <section id="preventing.data.loss">
-    <title>Preventing data loss</title>
+    <title>Preventing data loss<indexterm class="singular">
+        <primary>Miscellanea</primary>
+
+        <secondary>Preventing data Loss</secondary>
+      </indexterm></title>
 
     <para><application>OmegaT</application> is a robust application. However,
     you should take precautions against data loss when using

@@ -2,14 +2,18 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <chapter id="ch04.menu">
-  <title>Main Menu and Keyboard Short-cuts</title>
+  <title>Menu and Keyboard Short-cuts</title>
 
   <section id="ch04.main.menu">
-    <title>Main Menu<indexterm class="singular">
-        <primary>Menu</primary>
+    <title><indexterm class="singular">
+        <primary>Main menu</primary>
+      </indexterm>Main Menu</title>
 
-        <secondary>Keyboard shortcuts</secondary>
-      </indexterm></title>
+    <indexterm class="singular">
+      <primary>Shortcuts</primary>
+
+      <secondary>Main menu</secondary>
+    </indexterm>
 
     <para>All of <application>OmegaT</application>'s functionality is
     available through the menu bar at the top of the Editor window. Most
@@ -53,9 +57,9 @@
 
   <section id="submenu.Project">
     <title>Project<indexterm class="singular">
-        <primary>Project</primary>
+        <primary>Main menu</primary>
 
-        <secondary>Keyboard shortcuts</secondary>
+        <secondary>Project</secondary>
       </indexterm></title>
 
     <table colsep="1">
@@ -210,7 +214,11 @@
   </section>
 
   <section>
-    <title>Edit</title>
+    <title>Edit<indexterm class="singular">
+        <primary>Main menu</primary>
+
+        <secondary>Edit</secondary>
+      </indexterm></title>
 
     <para>Note: Items that one can find in most applications (copy/cut/paste)
     are not displayed in this menu but are available with your system
@@ -218,6 +226,7 @@
 
     <table colsep="1">
       <title>Copy/cut/paste shortcuts</title>
+
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
@@ -225,50 +234,38 @@
 
         <tbody>
           <row>
-            <entry>
-              <guimenuitem>Copy</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Copy</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>C</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Copies selected text to clipboard.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Cut</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Cut</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>X</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Copies selected text to clipboard and deletes selected
             text.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Paste</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Paste</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>V</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Pastes the text from clipboard at cursor.</entry>
           </row>
@@ -280,6 +277,7 @@
 
     <table colsep="1">
       <title>Edit menu</title>
+
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
@@ -287,17 +285,13 @@
 
         <tbody>
           <row>
-            <entry>
-              <guimenuitem>Undo Last Action</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Undo Last Action</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>Z</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Goes back to the status before the last editing action was
             taken. Does not work once the modified segment has been
@@ -305,17 +299,13 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Redo Last Action</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Redo Last Action</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>Y</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Goes back to the status before the last editing action was
             cancelled. Does not work once the modified segment has been
@@ -323,17 +313,13 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Replace With Match</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Replace With Match</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>R</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Overwrites the whole target segment with the currently
             selected fuzzy match (by default the first match is
@@ -341,17 +327,13 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Insert Match</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Insert Match</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>I</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Inserts the currently selected fuzzy match at the cursor
             position. This function will overwrite a portion of the target
@@ -359,17 +341,14 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Replace with Machine Translation</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Replace with Machine
+            Translation</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>M</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Replaces the target segment with the Google Translate
             translation. No action, if Google Translate not activated (see
@@ -377,74 +356,68 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Replace With Source</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Replace With Source</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Shift</keycap>
 
                 <keycap>Ctrl</keycap>
 
                 <keycap>R</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Overwrites the whole target segment with the
             source.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Insert Source</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Insert Source</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Shift</keycap>
 
                 <keycap>Ctrl</keycap>
 
                 <keycap>I</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Inserts the source at the cursor position.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Insert Source Tags</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Insert Source Tags</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Shift</keycap>
 
                 <keycap>Ctrl</keycap>
 
                 <keycap>T</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
-            <entry>Inserts the source tags at the cursor position.</entry>
+            <entry><indexterm class="singular">
+                <primary>Tags</primary>
+
+                <secondary>Inserting source tags</secondary>
+              </indexterm>Inserts the source tags at the cursor position. All
+            tags in the source will be inserted into the current segment,
+            regardless of whether they are already there or not. Texts,
+            bracketed by tags, are replaced by spaces:.
+            <literal>&lt;f0&gt;&lt;f1&gt;This is
+            text&lt;/f0&gt;&lt;/f1&gt;</literal> thus be copied as
+            <literal>&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Export Selection</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Export Selection</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Shift</keycap>
 
                 <keycap>Ctrl</keycap>
 
                 <keycap>C</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Exports the current selection to a text file for
             processing. If there is no selection, the current source is
@@ -458,17 +431,13 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Search Project...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Search Project...</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>F</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Opens a new <ulink
             url="04_UserInterface.xml#Search_Window">Search
@@ -476,9 +445,7 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Switch case to...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Switch case to...</guimenuitem></entry>
 
             <entry><keycombo>
                 <keycap>Shift</keycap>
@@ -488,24 +455,24 @@
 
             <entry>Changes the case of the highlighted text in the target
             segment to the selected option (Lower case, Upper case or Title
-            case). Use Shift+F3 to cycle through the three alternatives. If no
-            text is selected, <application>OmegaT</application> selects the
-            word that contains the letter immediately to the right of the
+            case). Use Shift+F3 <indexterm>
+                <primary>Shortcuts</primary>
+
+                <secondary>Shift+F3 - Case selection</secondary>
+              </indexterm>to cycle through the three alternatives. If no text
+            is selected, <application>OmegaT</application> selects the word
+            that contains the letter immediately to the right of the
             cursor.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Select Fuzzy Match #N</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Select Fuzzy Match #N</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>#N</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
             displayed in the match viewer to replace or insert it to the
@@ -519,10 +486,15 @@
   </section>
 
   <section id="submenu.GoTo">
-    <title>Go to</title>
+    <title>Go to<indexterm class="singular">
+        <primary>Main menu</primary>
+
+        <secondary>Goto</secondary>
+      </indexterm></title>
 
     <table colsep="1">
       <title>Go To menu</title>
+
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
@@ -530,26 +502,21 @@
 
         <tbody>
           <row>
-            <entry>
-              <guimenuitem>Next Untranslated Segment</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Next Untranslated
+            Segment</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>U</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>Moves to the next segment that has no equivalent in the
             translation memory.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Next Segment</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Next Segment</guimenuitem></entry>
 
             <entry><keycombo>
                 <keycap>Ctrl</keycap>
@@ -564,9 +531,7 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Previous Segment</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Previous Segment</guimenuitem></entry>
 
             <entry><keycombo>
                 <keycap>Ctrl</keycap>
@@ -588,36 +553,28 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Segment number...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Segment number...</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>J</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>The segment is opened on entering its segment
             number.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Forward in history...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Forward in history...</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>Shift</keycap>
 
                 <keycap>N</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry><application>OmegaT</application> remembers the segments
             executed. With this command you can step forward to the segment,
@@ -625,19 +582,15 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Back in history...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Back in history...</guimenuitem></entry>
 
-            <entry>
-              <keycombo>
+            <entry><keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>Shift</keycap>
 
                 <keycap>P</keycap>
-              </keycombo>
-            </entry>
+              </keycombo></entry>
 
             <entry>With this command you can move backward one or several
             segments in time, to return later to the current segment.</entry>
@@ -648,48 +601,50 @@
   </section>
 
   <section id="submenu.View">
-    <title>View</title>
+    <title>View<indexterm class="singular">
+        <primary>Main menu</primary>
+
+        <secondary>View</secondary>
+      </indexterm></title>
 
     <table colsep="1">
       <title>View menu</title>
+
       <tgroup cols="2" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
         <tbody>
           <row>
-            <entry>
-              <guimenuitem>Mark Translated Segments</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Mark Translated Segments</guimenuitem></entry>
 
             <entry>If checked, the translated segments will be marked in
             yellow.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Mark Untranslated Segments</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Mark Untranslated
+            Segments</guimenuitem></entry>
 
             <entry>If checked, the untranslated segments will be marked in
             violet.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Display Source Segments</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Display Source Segments</guimenuitem></entry>
 
             <entry>If checked, source segments will be shown and marked in
             green. If not checked, source segments will not be shown.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Display Modification Info</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Display Modification</guimenuitem></entry>
 
-            <entry>Sets the display option (None, All, Selected) for segments'
-            modifications.</entry>
+            <entry>Setting the Display Modification option to
+            <emphasis>Selected</emphasis> will display the time and the author
+            of the last change for the current segment. Setting it
+            to<emphasis> All </emphasis>shows this information for all
+            segments and <emphasis>None</emphasis> turns this option
+            off.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -697,35 +652,50 @@
   </section>
 
   <section id="submenu.Tools">
-    <title>Tools</title>
+    <title>Tools<indexterm class="singular">
+        <primary>Main menu</primary>
+
+        <secondary>Tools</secondary>
+      </indexterm></title>
 
     <table colsep="1">
       <title>Tools menu</title>
+
+      <indexterm class="singular">
+        <primary>Matches</primary>
+
+        <secondary>Matches statistics</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Project</primary>
+
+        <secondary>Match statistics</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Project</primary>
+
+        <secondary>Statistics</secondary>
+      </indexterm>
+
       <tgroup cols="2" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
         <tbody>
           <row>
-            <entry>
-              <guimenuitem>Validate Tags</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Validate Tags</guimenuitem></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>T</keycap>
-              </keycombo>: Checks for missing or displaced tags in formatted
-            files. Will display a list of segments with tag mistakes. The
-            <ulink url="04_UserInterface.xml#Tag_Validation">Tag validation
-            window</ulink> section lists what you see there, and <ulink
-            url="07_FormattedText.xml">Working with formatted texts</ulink>
-            tells you why.</entry>
+            <entry><guimenu>Ctrl+T</guimenu>: Checks for missing or displaced
+            tags in formatted files. Will display a list of segments with tag
+            mistakes. The <ulink url="04_UserInterface.xml#Tag_Validation">Tag
+            validation window</ulink> section lists what you see there, and
+            <ulink url="07_FormattedText.xml">Working with formatted
+            texts</ulink> tells you why.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Statistics</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Statistics</guimenuitem></entry>
 
             <entry>Opens a new window and displays the project statistics,
             i.e. the project totals and totals for every file in the
@@ -733,9 +703,7 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Match Statistics</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Match Statistics</guimenuitem></entry>
 
             <entry>Displays the Match Statistics for the project: the number
             of repetitions, exact matches, fuzzy matches and no-matches, for
@@ -747,22 +715,21 @@
   </section>
 
   <section id="submenu.Options">
-    <title>Options<indexterm class="singular">
-        <primary>Options</primary>
+    <title><indexterm class="singular">
+        <primary>Main menu</primary>
 
-        <secondary>Keyboard shortcuts</secondary>
-      </indexterm></title>
+        <secondary>Options</secondary>
+      </indexterm>Options</title>
 
     <table colsep="1">
       <title>Options menu</title>
+
       <tgroup cols="2" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
         <tbody>
           <row>
-            <entry>
-              <guimenuitem>Use TAB To Advance</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Use TAB To Advance</guimenuitem></entry>
 
             <entry>Sets segment validation key to
             <guimenuitem>Tab</guimenuitem> instead of the default
@@ -771,18 +738,14 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Always Confirm Quit</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Always Confirm Quit</guimenuitem></entry>
 
             <entry>The program will always check with you before closing
             down.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Machine Translate</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Machine Translate</guimenuitem></entry>
 
             <entry>Allows you to activate/deactivate the Machine Translation
             tools offered.When active, <keycombo>
@@ -794,18 +757,22 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>TransTips</guimenuitem>
-            </entry>
+            <entry><guimenuitem>TransTips</guimenuitem></entry>
 
-            <entry>Allows you to activate/deactivate TransTips service and the
-            option Exact Match for it.</entry>
+            <entry>Allows you to activate/deactivate <emphasis>TransTips
+            </emphasis>feature and the option<emphasis> Exact Match
+            </emphasis>for it. With <emphasis>TransTips</emphasis> activated a
+            right click on a highlighted word in the source will open a popup
+            menu with the glossary entries for the word you clicked. You can
+            then click on the preferred translation to insert it into the
+            target segment at the current position. With
+            <emphasis>TransTips/Exact Match </emphasis> checked, only complete
+            words will be checked, otherwise also parts of words will be
+            matched as well.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Font...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Font...</guimenuitem></entry>
 
             <entry>Shows <ulink url="fontSettings.xml">Font settings</ulink>
             dialogue to modify the text display font. Users of old computers
@@ -814,18 +781,14 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>File Filters...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>File Filters...</guimenuitem></entry>
 
             <entry>Displays <ulink url="fileFilters.xml">File filters</ulink>
             dialogue to configure file handling and parsing.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Segmentation...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Segmentation...</guimenuitem></entry>
 
             <entry>Opens <ulink url="segmentation.xml">Source
             segmentation</ulink> dialogue to configure text
@@ -833,9 +796,7 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Spell checking...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Spell checking...</guimenuitem></entry>
 
             <entry>Displays the <ulink url="spellchecker.xml">Spellchecker
             setup</ulink> window to install, configure and activate the spell
@@ -843,36 +804,28 @@
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Editing Behaviour...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Editing Behaviour...</guimenuitem></entry>
 
             <entry>Displays <ulink url="translationEditing.xml">Translation
             editing</ulink> dialogue to configure.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Tag Validation...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Tag Validation...</guimenuitem></entry>
 
             <entry>Allows you to configure the Tag Validator options, as
             regards the programming (%...) variables.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Team</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Team</guimenuitem></entry>
 
-            <entry>Allows you to enter your name or ID, so that the segments,
-            translated by you, will carry your signature.</entry>
+            <entry>Allows you to enter your name or your ID, so that the
+            segments, translated by you, will carry your signature.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>Restore Main Window</guimenuitem>
-            </entry>
+            <entry><guimenuitem>Restore Main Window</guimenuitem></entry>
 
             <entry>Restores the components of the main
             <application>OmegaT</application> window to their default state.
@@ -888,27 +841,28 @@
   </section>
 
   <section id="submenu.Help">
-    <title>Help</title>
+    <title>Help<indexterm class="singular">
+        <primary>Main menu</primary>
+
+        <secondary>Help</secondary>
+      </indexterm></title>
 
     <table colsep="1">
       <title>Help menu</title>
+
       <tgroup cols="2" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
         <tbody>
           <row>
-            <entry>
-              <guimenuitem>User Manual...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>User Manual...</guimenuitem></entry>
 
             <entry><keycap>F1:</keycap> Opens Help browser with this manual in
             a separate window.</entry>
           </row>
 
           <row>
-            <entry>
-              <guimenuitem>About...</guimenuitem>
-            </entry>
+            <entry><guimenuitem>About...</guimenuitem></entry>
 
             <entry>Displays copyright, credits and license
             information.</entry>
@@ -919,7 +873,9 @@
   </section>
 
   <section id="keyboard.shortcuts">
-    <title>Keyboard Short-cuts</title>
+    <title>Keyboard Short-cuts<indexterm class="singular">
+        <primary>Keyboard shortcuts</primary>
+      </indexterm></title>
 
     <para>The following short-cuts are available from the main window. When
     another window is on the foreground, click on the main window to put it on
@@ -965,8 +921,11 @@
     </itemizedlist>
 
     <section>
-      <title id="keyboard.project.management">Project management<indexterm
-          class="singular">
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>Keyboard shortcuts</primary>
+
+          <secondary>Project</secondary>
+        </indexterm>Project management<indexterm class="singular">
           <primary>Project</primary>
 
           <secondary>Project management shortcuts</secondary>
@@ -974,6 +933,7 @@
 
       <table colsep="1">
         <title>Project management shorcuts</title>
+
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
@@ -983,13 +943,11 @@
             <row>
               <entry>Open project</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>O</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Displays a dialogue to locate an already existing
               project.</entry>
@@ -998,15 +956,13 @@
             <row>
               <entry>Save</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>S</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
-              <entry>Saves the current work to the file project_save.tmx
+              <entry>Saves the current work to the file project_save.TMX
               located in the project's <filename>omegat</filename>
               folder.</entry>
             </row>
@@ -1014,15 +970,13 @@
             <row>
               <entry>Close Project</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Shift</keycap>
 
                   <keycap>Ctrl</keycap>
 
                   <keycap>W</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Closes the current project.</entry>
             </row>
@@ -1030,13 +984,11 @@
             <row>
               <entry>Create Translated Documents</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>D</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Creates the translated documents in the project's Target
               folder</entry>
@@ -1045,13 +997,11 @@
             <row>
               <entry>Project properties</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>E</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Displays the project's settings for eventual
               modification</entry>
@@ -1062,14 +1012,19 @@
     </section>
 
     <section id="keyboard.editing">
-      <title>Editing<indexterm class="singular">
-          <primary>Editing</primary>
+      <title><indexterm class="singular">
+          <primary>Keyboard shortcuts</primary>
 
-          <secondary>Keyboard shortcuts</secondary>
+          <secondary>Editingt</secondary>
+        </indexterm>Editing<indexterm class="singular">
+          <primary>Keyboard shortcuts</primary>
+
+          <secondary>Goto</secondary>
         </indexterm></title>
 
       <table colsep="1">
         <title>Editing shortcuts</title>
+
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
@@ -1079,13 +1034,11 @@
             <row>
               <entry>Undo last action</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>Z</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Undoes the last editing actions, in the current target
               segment</entry>
@@ -1094,13 +1047,11 @@
             <row>
               <entry>Redo last action</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>Y</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Redoes the last editing actions, in the current target
               segment</entry>
@@ -1109,13 +1060,11 @@
             <row>
               <entry>Select match #N</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>#N</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>#N is a digit from 1 to 5. The short-cut selects the Nth
               match displayed in the match window (the first match is selected
@@ -1125,13 +1074,11 @@
             <row>
               <entry>Replace with match</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>R</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Replaces the current target segment contents with the
               selected match (the first match is selected by default)</entry>
@@ -1140,13 +1087,11 @@
             <row>
               <entry>Insert match</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>I</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Inserts the selected match at the cursor position in the
               current target segment (the first match is inserted by
@@ -1156,13 +1101,11 @@
             <row>
               <entry>Replace with source</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>Shift+R</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Replaces the current target segment contents with the
               source text contents</entry>
@@ -1171,13 +1114,11 @@
             <row>
               <entry>Insert source</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>Shift+I</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Inserts the source text contents into the target segment
               at the cursor position</entry>
@@ -1186,13 +1127,11 @@
             <row>
               <entry>Insert Source Tags</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>Shift+T</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Inserts the source tags into the target segment at the
               cursor position</entry>
@@ -1201,13 +1140,11 @@
             <row>
               <entry>Search project</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>F</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Displays a dialogue to conduct searches in the
               project</entry>
@@ -1216,13 +1153,11 @@
             <row>
               <entry>Replace with Machine Translation</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>M</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Replaces the target segment with the machine translation
               of the source. No action, if machine tools are deactivated (see
@@ -1234,10 +1169,15 @@
     </section>
 
     <section id="keyboard.moving.around">
-      <title>Moving around</title>
+      <title><indexterm class="singular">
+          <primary>Keyboard shortcuts</primary>
+
+          <secondary>Goto</secondary>
+        </indexterm>Moving around</title>
 
       <table colsep="1">
         <title>Moving around shortcuts</title>
+
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
@@ -1247,13 +1187,11 @@
             <row>
               <entry>Next untranslated segment</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>U</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Moves the editing field to the next segment that is not
               registered in the project's translation memory.</entry>
@@ -1274,13 +1212,11 @@
             <row>
               <entry>Previous segment</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>P</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Moves the editing field to the previous segment.</entry>
             </row>
@@ -1288,13 +1224,11 @@
             <row>
               <entry>Segment number...</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>J</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Moves to the segment number provided.</entry>
             </row>
@@ -1302,13 +1236,11 @@
             <row>
               <entry>Back in history...</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>Shift+P</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Moves one segment back in history.</entry>
             </row>
@@ -1316,13 +1248,11 @@
             <row>
               <entry>Forward in history...</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>Shift+N</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Moves one segment forward in history.</entry>
             </row>
@@ -1331,11 +1261,16 @@
       </table>
     </section>
 
-    <section id="keyboard.reference.windows">
-      <title>Reference windows</title>
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>Keyboard shortcuts</primary>
+
+          <secondary>Other</secondary>
+        </indexterm>Other</title>
 
       <table colsep="1">
-        <title>Project Files shortcut</title>
+        <title>Various shortcuts</title>
+
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
@@ -1345,42 +1280,23 @@
             <row>
               <entry>Project files listing</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>L</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Displays the Project files listing</entry>
             </row>
-          </tbody>
-        </tgroup>
-      </table>
-    </section>
 
-    <section id="keyboard.other">
-      <title>Other</title>
-
-      <table colsep="1">
-        <title>Various shortcuts</title>
-        <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100" />
-
-          <colspec align="left" colnum="2" colwidth="70" />
-
-          <tbody>
             <row>
               <entry>Validate Tags</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>T</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Opens the Tag validation window.</entry>
             </row>
@@ -1388,13 +1304,11 @@
             <row>
               <entry>Export Selection</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Shift</keycap>
 
                   <keycap>Ctrl+C</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Exports the current selection or the current source, if
               there's no selection</entry>
@@ -1403,13 +1317,11 @@
             <row>
               <entry>Search Project</entry>
 
-              <entry>
-                <keycombo>
+              <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>F</keycap>
-                </keycombo>
-              </entry>
+                </keycombo></entry>
 
               <entry>Opens a new Search window.</entry>
             </row>
@@ -1417,9 +1329,7 @@
             <row>
               <entry>Help files</entry>
 
-              <entry>
-                <guimenuitem>F1</guimenuitem>
-              </entry>
+              <entry><guimenuitem>F1</guimenuitem></entry>
 
               <entry>Displays the <application>OmegaT</application> help files
               in a separate window</entry>

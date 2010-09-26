@@ -2,29 +2,30 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <chapter id="Ch02.instant.start.guide">
-  <title>Start Using <application>OmegaT</application> in 5 Minutes! - Instant
-  Start Guide</title>
+  <title>Instant Start Guide</title>
 
-  <para>This instant start guide covers only the very basics. Ideally, all
-  users should read the User Manual to familiarize themselves with everything
-  <application>OmegaT</application> has to offer. Shortcuts described here use
-  the "<keycombo>
-      <keycap>Ctrl</keycap>
+  <section>
+    <title>Start Using <application>OmegaT</application> in 5 Minutes!</title>
 
-      <keycap>key</keycap>
-    </keycombo>" convention but Mac users should read "<keycombo>
-      <keycap>cmd</keycap>
+    <para>This instant start guide covers only the very basics. Ideally, all
+    users should read the User Manual to familiarize themselves with
+    everything <application>OmegaT</application> has to offer. Shortcuts
+    described here use the "<keycombo>
+        <keycap>Ctrl</keycap>
 
-      <keycap>key</keycap>
-    </keycombo>" instead. The <keycap>"cmd</keycap>" key either has a
-  "command" label or an apple mark on Apple keyboards.</para>
+        <keycap>key</keycap>
+      </keycombo>" convention but Mac users should read "<keycombo>
+        <keycap>Cmd</keycap>
 
-  <section id="briefly.how.OmegaT.works">
-    <title>Briefly, how <application>OmegaT</application> works</title>
+        <keycap>key</keycap>
+      </keycombo>" instead. The <keycap>"Cmd</keycap>" key either has a
+    "command" label or an apple mark on Apple keyboards.</para>
 
     <para>The <application>OmegaT</application> screen consists of one space
     with <link linkend="windows.you.will.use.frequently">five distinct
-    windows</link>. Each of these can be resized using the mouse. On the left
+    windows</link>.<indexterm class="singular">
+        <primary>Windows in OmegaT</primary>
+      </indexterm> Each of these can be resized using the mouse. On the left
     is the Editor where you type your translation. On the top right is the
     Match Viewer, where translation memory matches will be displayed. Below
     this is the Glossary Viewer, where glossary matches will be
@@ -51,13 +52,21 @@
     <title>How to translate using <application>OmegaT</application></title>
 
     <section id="create.and.open.new.project">
-      <title>Create and open a new project</title>
+      <title>Create and open a new project<indexterm class="singular">
+          <primary>Project</primary>
+
+          <secondary>Create / open new</secondary>
+        </indexterm></title>
 
       <para>Select <menuchoice>
           <guimenu>Project</guimenu>
 
           <guimenuitem>New...</guimenuitem>
-        </menuchoice> from the menu.</para>
+        </menuchoice><indexterm class="singular">
+          <primary>Menu Project</primary>
+
+          <secondary>New...</secondary>
+        </indexterm> from the menu.</para>
 
       <para>Navigate to the folder where you wish to save the project files,
       and type in a name for the translation project. This name will be used
@@ -74,11 +83,13 @@
             <secondary>Project dialog window - figure</secondary>
           </indexterm>New project - dialog window</title>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="images/NewProject.png" />
-          </imageobject>
-        </mediaobject>
+       <imageobject>
+            <imagedata fileref="images/NewProject.png" width = "60%"/>
+       </imageobject>
+       <imageobject role="fo">
+            <imagedata fileref="images/NewProject.png" width = "40%"/>
+       </imageobject>
+
       </figure>
 
       <para>You can simply accept the location of the subfolders, but make
@@ -101,11 +112,20 @@
       manager, for example).</para>
 
       <para>To check your list of files to be translated, consult the
-      <emphasis role="bold">Project Files</emphasis> window (Menu: <menuchoice>
+      <emphasis role="bold">Project Files</emphasis> <indexterm
+          class="singular">
+          <primary>Project files</primary>
+
+          <secondary>Source files</secondary>
+        </indexterm>window (Menu: <menuchoice>
           <guimenu>Project</guimenu>
 
           <guimenuitem>Project Files...</guimenuitem>
-        </menuchoice>, if it does not open automatically). If you have had to
+        </menuchoice>,<indexterm class="singular">
+          <primary>Menu Project</primary>
+
+          <secondary>Project Files...</secondary>
+        </indexterm> if it does not open automatically). If you have had to
       change the Contents of the Source folder, remember to reload the project
       first (Menu: <menuchoice>
           <shortcut>
@@ -119,73 +139,148 @@
       file in the project list by default. Remember,
       <application>OmegaT</application> can only translate files in the
       formats below if they match the patterns defined in the file filters.
-      Any other files will be ignored.</para>
+      Any other files will be ignored.<indexterm class="singular">
+          <primary>Source files</primary>
+
+          <secondary>File formats</secondary>
+        </indexterm></para>
 
       <itemizedlist>
         <listitem>
-          <para>OpenDocument/OpenOffice.org</para>
-        </listitem>
+          <para><emphasis role="bold"> Plain text file formats<indexterm
+              class="singular">
+              <primary>File Formats</primary>
 
-        <listitem>
-          <para>Plain text</para>
-        </listitem>
+              <secondary>plain text files</secondary>
+            </indexterm></emphasis><itemizedlist>
+              <listitem>
+                <para>ASCII text (.txt, etc.)</para>
+              </listitem>
 
-        <listitem>
-          <para>.PO</para>
-        </listitem>
+              <listitem>
+                <para>Encoded text (*.UTF8)</para>
+              </listitem>
+            </itemizedlist><itemizedlist>
+              <listitem>
+                <para>Java resource bundles (*.properties)</para>
+              </listitem>
+            </itemizedlist><itemizedlist>
+              <listitem>
+                <para>PO files (*.po)</para>
+              </listitem>
+            </itemizedlist><itemizedlist>
+              <listitem>
+                <para>INI (key=value) files (*.ini)</para>
+              </listitem>
+            </itemizedlist><itemizedlist>
+              <listitem>
+                <para>DTD files (*,DTD)</para>
+              </listitem>
 
-        <listitem>
-          <para>Bundle.properties Java</para>
-        </listitem>
-
-        <listitem>
-          <para>XHTML, HTML</para>
-        </listitem>
-
-        <listitem>
-          <para>HTML Help Compiler</para>
-        </listitem>
-
-        <listitem>
-          <para>INI ('key=value' format)</para>
-        </listitem>
-
-        <listitem>
-          <para>DocBook</para>
-        </listitem>
-
-        <listitem>
-          <para>Microsoft Open XML</para>
-        </listitem>
-
-        <listitem>
-          <para>Okapi monolingual XLIFF</para>
-        </listitem>
-
-        <listitem>
-          <para>QuarkXPress CopyFlowGold for QuarkXPress</para>
-        </listitem>
-
-        <listitem>
-          <para>Subtitle files (SRT)</para>
-        </listitem>
-
-        <listitem>
-          <para>ResX</para>
-        </listitem>
-
-        <listitem>
-          <para>Android resource</para>
-        </listitem>
-
-        <listitem>
-          <para>LaTeX</para>
-        </listitem>
-
-        <listitem>
-          <para>Mozilla DTD</para>
+              <listitem>
+                <para>DocuWiki files (*.txt)</para>
+              </listitem>
+            </itemizedlist></para>
         </listitem>
       </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Tagged text file formats<indexterm
+              class="singular">
+              <primary>File Formats</primary>
+
+              <secondary>formatted</secondary>
+            </indexterm></emphasis></para>
+
+          <itemizedlist>
+            <listitem>
+              <para>OpenOffice.org / OpenDocument (*.sx?, *.st?, *.od?,
+              *.ot?)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>Microsoft Open XML (*.doc?. *.xls?, *.ppt?)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>HTML Help Compiler (*.hhc, *.hhk)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>DocBook (*.xml)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>monolingual XLIFF (*.xlf, *.sdlxliff)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>SubRip title files (*.srt)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>ResX files (*.resx)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>Android resource (*.xml)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>LaTex (*.tex, *.latex)</para>
+            </listitem>
+
+            <listitem>
+              <para>Help (*.xml) and Manual (*.hmxp) files</para>
+            </listitem>
+
+            <listitem>
+              <para>Typo3 LocManager (*.xml)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>WiX Localization (*.wxl)</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+
+      <para> additionally to the text you need to translate tagged text files
+      contain invisible information in a form of tags. The tags must be
+      present also in the translation, even if they are invisible and not to
+      be translated, otherwise the text will not be shown the intended way, or
+      - in the worst case - will not be shown at all. </para>
     </section>
 
     <section id="translate.the.segments.one.by.one">
@@ -215,7 +310,11 @@
           this option in <menuchoice>
               <guimenu>Options</guimenu>
 
-              <guimenuitem>Editing Behaviour...</guimenuitem>
+              <guimenuitem>Editing Behaviour...<indexterm class="singular">
+                  <primary>Menu Options</primary>
+
+                  <secondary>Editing behaviour,,,</secondary>
+                </indexterm></guimenuitem>
             </menuchoice></para>
         </listitem>
 
@@ -240,16 +339,26 @@
       glossaries</title>
 
       <section id="translation.memory.matches">
-        <title>Translation memory matches</title>
+        <title>Translation memory matches<indexterm class="singular">
+            <primary>Translation memories</primary>
+
+            <secondary>Fuzzy matches</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>Translation memories</primary>
+
+            <secondary>Matches</secondary>
+          </indexterm></title>
 
         <figure>
           <title>Matches pane</title>
 
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="images/MatchesPane.png" />
-            </imageobject>
-          </mediaobject>
+ 
+       <imageobject>
+          <imagedata fileref="images/MatchesPane.png" width = "60%"/>
+       </imageobject>
+       <imageobject role="fo">
+          <imagedata fileref="images/MatchesPane.png" width = "40%"/>
+      </imageobject>
         </figure>
 
         <para>If <application>OmegaT</application> finds any fuzzy matches
@@ -263,7 +372,11 @@
                 <keycap>Ctrl</keycap>
 
                 <keycap>I</keycap>
-              </keycombo> to insert the pre-selected match at the cursor
+              </keycombo><indexterm class="singular">
+                <primary>Shortcuts</primary>
+
+                <secondary>Ctrl+I - Insert text</secondary>
+              </indexterm> to insert the pre-selected match at the cursor
             position, or...</para>
           </listitem>
 
@@ -271,7 +384,13 @@
             <para>Press <keycombo>
                 <keycap>Ctrl</keycap>
 
-                <keycap>R</keycap>
+                <keycap>R<indexterm class="singular">
+                    <primary>Shortcuts</primary>
+
+                    <secondary>Ctrl+R - Replace text</secondary>
+                  </indexterm><indexterm class="singular">
+                    <secondary>Replace text</secondary>
+                  </indexterm></keycap>
               </keycombo> to overwrite the entire segment with the
             pre-selected match.</para>
           </listitem>
@@ -315,7 +434,11 @@
       </section>
 
       <section id="glossary.and.dictionary.matches">
-        <title>Glossary and Dictionary matches</title>
+        <title>Glossary and Dictionary matches<indexterm class="singular">
+            <primary>Matches</primary>
+
+            <secondary>Glossary, Dictionary matches</secondary>
+          </indexterm></title>
 
         <para>Matching terms in glossaries and dictionaries, that you may have
         included in the project, will be displayed for reference in the
@@ -341,7 +464,11 @@
       </section>
 
       <section id="use.Google.Translate">
-        <title>Use Google Translate</title>
+        <title>Use Google Translate<indexterm class="singular">
+            <primary>Matches</primary>
+
+            <secondary>Google Translate</secondary>
+          </indexterm></title>
 
         <para>In the Google Translate pane, if activated, you will
         automatically get a suggestion for the translation of the current
@@ -351,7 +478,11 @@
     </section>
 
     <section id="create.translated.documents">
-      <title>Create translated documents</title>
+      <title>Create translated documents<indexterm class="singular">
+          <primary>Project files</primary>
+
+          <secondary>Target files</secondary>
+        </indexterm></title>
 
       <para>When you have translated all the segments (or earlier if you
       wish), <application>OmegaT</application> will update the target
@@ -368,7 +499,15 @@
           <guimenu>Project</guimenu>
 
           <guimenuitem>Create Translated Documents</guimenuitem>
-        </menuchoice> from the menu. <application>OmegaT</application> will
+        </menuchoice><indexterm class="singular">
+          <primary>Shortcuts</primary>
+
+          <secondary>Ctrl+D - Create Translated Documents</secondary>
+        </indexterm> <indexterm class="singular">
+          <primary>Menu Project</primary>
+
+          <secondary>Create Translated Documents</secondary>
+        </indexterm>from the menu. <application>OmegaT</application> will
       build translated versions of all the translatable documents in the
       Source folder of the project, whether or not they have been fully
       translated. The wholly or partially translated files will be saved to
@@ -382,7 +521,9 @@
   </section>
 
   <section id="how.to.handle.tagged.text">
-    <title>How to handle tagged text</title>
+    <title>How to handle tagged text<indexterm class="singular">
+        <primary>Tagged text</primary>
+      </indexterm></title>
 
     <para><application>OmegaT</application> ensures that the formatting of the
     source documents (bold, italic etc.) is not lost by marking it with
@@ -396,7 +537,11 @@
     <para></para>
 
     <section>
-      <title>An example...</title>
+      <title>An example...<indexterm class="singular">
+          <primary>Tagged text</primary>
+
+          <secondary>An example</secondary>
+        </indexterm></title>
 
       <para>In these examples we've highlighted the tags to make them easier
       to see, but in <application>OmegaT</application> they will not be
@@ -416,15 +561,17 @@
       with the translation in Afrikaans:</para>
 
       <figure id="fig.tagged.segment.source">
-        <title>Source HTML segment</title>
+        <title>Source <indexterm class="singular">
+            <primary>Segment, Source and Target - figure</primary>
+          </indexterm>HTML segment</title>
 
-        <screenshot>
-          <mediaobject>
+
             <imageobject>
-              <imagedata fileref="images/tagged_segment.png" />
+              <imagedata fileref="images/tagged_segment.png" width = "60%"/>
             </imageobject>
-          </mediaobject>
-        </screenshot>
+            <imageobject role="fo">
+              <imagedata fileref="images/tagged_segment.png" width = "40%"/>
+            </imageobject>
       </figure>
 
       <para>When <application>OmegaT</application> has created the translated
@@ -433,16 +580,23 @@
       <figure id="fig.tagged.segment.target">
         <title>Target HTML segment</title>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="images/tagged_segment_target.png" />
-          </imageobject>
-        </mediaobject>
+      <imageobject>
+         <imagedata fileref="images/tagged_segment_target.png" width = "60%"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata fileref="images/tagged_segment_target.png" width = "40%"/>
+      </imageobject>
       </figure>
     </section>
 
     <section id="tag.verification">
-      <title>Tag verification</title>
+      <title>Tag verification<indexterm class="singular">
+          <primary>Tagged text</primary>
+
+          <secondary>Tag verification</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Tag Verification</primary>
+        </indexterm></title>
 
       <para><application>OmegaT</application> doesn't automatically detect
       faulty tagging in the translated document. Before you deliver the
@@ -467,7 +621,13 @@
       check the correction by pressing again <keycombo>
           <keycap>Ctrl</keycap>
 
-          <keycap>T</keycap>
+          <keycap>T<indexterm class="singular">
+              <primary>Shortcuts</primary>
+
+              <secondary>Ctrl+T - Tag verification</secondary>
+
+              <seealso>Tagged text</seealso>
+            </indexterm></keycap>
         </keycombo>.</para>
 
       <para>In some cases tag errors may even prevent a document from opening.

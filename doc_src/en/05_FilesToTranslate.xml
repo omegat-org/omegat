@@ -6,23 +6,330 @@
 
   <para></para>
 
+  <section id="file.formats">
+    <title>File formats<indexterm class="singular">
+        <primary>Source files</primary>
+
+        <secondary>File formats</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Target files</primary>
+
+        <secondary>File formats</secondary>
+      </indexterm></title>
+
+    <para>With <application>OmegaT</application> you can translate files in a
+    number of file formats. There are basically two types of file formats, the
+    plain text and the formatted text formats.</para>
+
+    <section>
+      <title>Plain text files<indexterm class="singular">
+          <primary>Target files</primary>
+
+          <secondary>Plain text files</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Source files</primary>
+
+          <secondary>Plain text files</secondary>
+        </indexterm></title>
+
+      <para>Plain text files contain text only, so their translation is as
+      simple as typing the translation. There are several methods to specify
+      the file's encoding so that its contents is not garbled when opened in
+      <application>OmegaT</application>. Such files do not contain any
+      formatting information beyond the "white space" used to align text,
+      indicate paragraphs or insert page breaks. They are not able to contain
+      / retain information regarding the color, font etc of the text.
+      Currently, <application>OmegaT</application> supports the following
+      plain text formats:<indexterm class="singular">
+          <primary>File formats</primary>
+
+          <secondary>Unformatted</secondary>
+
+          <seealso>Source files</seealso>
+        </indexterm></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>ASCII text (.txt, etc.)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Encoded text (*.UTF8)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Java resource bundles (*.properties)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>PO files (*.po)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>INI (key=value) files (*.ini)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>DTD files (*,DTD)</para>
+        </listitem>
+
+        <listitem>
+          <para>DocuWiki files (*,txt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Other plain text file types can be handled by
+      <application>OmegaT</application> by associating their file extension to
+      a supported file type (for example, .pod files could be associated to
+      the ASCII text filter) and by pre-processing them with specific
+      segmentation rules.</para>
+    </section>
+
+    <section>
+      <title>Formatted text files<indexterm class="singular">
+          <primary>Target files</primary>
+
+          <secondary>Formatted text files</secondary>
+
+          <seealso>Tagged text</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Source files</primary>
+
+          <secondary>Formatted text files</secondary>
+        </indexterm></title>
+
+      <para>Formatted text files contain text as well as information such as
+      font type, size, color etc. They are commonly created in word processors
+      or home page editors. Such file formats are conceived so that they
+      retain formatting information. Such formatting information can be as
+      simple as this is bold or as complex as table data with different font
+      size, color, position etc. In most translation jobs it is considered
+      important to have the translated document look similar to the original.
+      <application>OmegaT</application> allows you to do this by marking the
+      characters/words that have a special formatting with easy to manipulate
+      tags. Simplifying the original text formatting greatly contributes to
+      reducing the number of tags. Unifying used fonts, font sizes, colors etc
+      should be considered if possible, to simplify the translation and reduce
+      the number of possible tag errors. Each file type is handled differently
+      in <application>OmegaT</application>. Specific behavior can be setup in
+      the file filters. At the time of writing,
+      <application>OmegaT</application> support the following formatted text
+      formats:<indexterm class="singular">
+          <primary>File formats</primary>
+
+          <secondary>formatted</secondary>
+
+          <seealso>Source files</seealso>
+        </indexterm></para>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>OpenOffice.org / OpenDocument (*.sx?, *.st?, *.od?,
+            *.ot?)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Microsoft Open XML (*.doc?. *.xls?, *.ppt?)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>HTML Help Compiler (*.hhc, *.hhk)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>DocBook (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>monolingual XLIFF (*.xlf, *.sdlxliff)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>SubRip title files (*.srt)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>ResX files (*.resx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Android resource (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>LaTex (*.tex, *.latex)</para>
+          </listitem>
+
+          <listitem>
+            <para>Help (*.xml) and Manual (*.hmxp) files</para>
+          </listitem>
+
+          <listitem>
+            <para>Typo3 LocManager (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>WiX Localization (*.wxl)</para>
+          </listitem>
+        </itemizedlist></para>
+
+      <para>Other formatted text file types can be handled by
+      <application>OmegaT</application> by associating their file extension to
+      a supported file type and by pre-processing them with specific
+      segmentation rules.</para>
+    </section>
+  </section>
+
+  <section id="other.file.formats">
+    <title>Other file formats<indexterm class="singular">
+        <primary>Target files</primary>
+
+        <secondary>Other file formats</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Source files</primary>
+
+        <secondary>Other file formats</secondary>
+      </indexterm></title>
+
+    <para>Other plain text or formatted text file formats may also be
+    processed in <application>OmegaT</application>.</para>
+
+    <para><indexterm class="singular">
+        <primary>Target files</primary>
+
+        <secondary>File conversion tools</secondary>
+      </indexterm>External tools can be used to convert files to supported
+    formats. Please remember, that the translated files will need to be
+    converted back to the original format. This way, a number of plain text
+    formats (including LaTex etc) can be translated in
+    <application>OmegaT</application> through conversion to the PO format.
+    Similarly, a number of formatted text formats (including Microsoft Office
+    files) can be translated in <application>OmegaT</application> through the
+    conversion to the Open Document format.</para>
+
+    <para>The quality of the translated file will depend on the quality of the
+    round-trip conversion. Make sure you have tested all your options before
+    proceeding with such conversions. Available free conversion tools
+    include:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><ulink url="http://www.openoffice.org/">OpenOffice.org home
+        page</ulink></term>
+
+        <listitem>
+          <para><application>OmegaT</application> does not offer direct
+          support for Microsoft Office formats Word, Excel and Power Point.
+          However, OpenOffice.org (and variants) can be used to convert such
+          formats to OpenDocument, that <application>OmegaT</application>
+          natively supports.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Okapi Framework <ulink
+        url="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Okapi
+        for Mono - ReadMe </ulink> and <ulink
+        url="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">
+        Okapi for Mono - tutorial</ulink></term>
+
+        <listitem>
+          <para>The Text Extraction Utility from the Okapi Framework has an
+          option for creating an <application>OmegaT</application> project
+          folder tree. It is also possible to create an
+          <application>OmegaT</application> specific XLIFF file. Okapi has
+          recently released tools that run under Mono, a free platform
+          available on most operating systems.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Translate Toolkit - <ulink
+        url="http://translate.sourceforge.net/wiki/toolkit/index">home
+        page</ulink></term>
+
+        <listitem>
+          <para>The Translate Toolkit, a python tool set, provides users with
+          a number of converters to and from Portable Object, including
+          Mozilla .properties and dtd files, CSV files, Qt .ts files, XLIFF
+          files. It includes a number of tools to manipulate such files before
+          or after their translation in
+          <application>OmegaT</application>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Po4a - <ulink url="http://po4a.alioth.debian.org/">po4a official
+        page</ulink></term>
+
+        <listitem>
+          <para>po4a is a Debian perl tool. It can convert files formats such
+          as LaTeX, TeX, POD etc to and from Portable Object.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Anaphraseus</term>
+
+        <listitem>
+          <para>is a free CAT tool with a similar functionality as TRADOS,
+          available as a plug-in for OpenOffice Writer</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
   <section id="right.to.left.languages">
-    <title>Right to left languages</title>
+    <title>Right to left languages<indexterm class="singular">
+        <primary>Right to left languages</primary>
+      </indexterm><indexterm class="singular">
+        <primary>Target files</primary>
+
+        <secondary>Right to left languages</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Source files</primary>
+
+        <secondary>Right to left languages</secondary>
+      </indexterm></title>
 
     <para>Justification of source and target segments depends on the project
-    languages. It is by default left justified for LTR languages and right
-    justified for RTL languages. You can toggle between different display
-    modes by pressing <keycombo><keycap>Shift</keycap><keycap>Ctrl</keycap>
-                  <keycap>O</keycap>
-</keycombo> (this is the letter O
-    and not the numeral 0). The <keycombo><keycap>Shift</keycap><keycap>Ctrl</keycap>
-                  <keycap>O</keycap>
-</keycombo> toggle has
-    three states:</para>
+    languages. It is by default left justified for Left-To-Right (LTR)
+    languages and right justified for Right-To-Left (RTL) languages. You can
+    toggle between different display modes by pressing <keycombo>
+        <keycap>Shift</keycap>
+
+        <keycap>Ctrl</keycap>
+
+        <keycap>O</keycap>
+      </keycombo> (this is the letter O and not the numeral 0). The <keycombo>
+        <keycap>Shift</keycap>
+
+        <keycap>Ctrl</keycap>
+
+        <keycap>O</keycap>
+      </keycombo> toggle has three states:</para>
 
     <itemizedlist>
       <listitem>
-        <para>default (i.e. language) justification</para>
+        <para>default justification, that is as defined by the language</para>
       </listitem>
     </itemizedlist>
 
@@ -38,29 +345,48 @@
       </listitem>
     </itemizedlist>
 
-    <para>Using the RTL mode in <application>OmegaT</application> has no influence whatsoever on the
-    display mode of the translated documents created in <application>OmegaT</application>. The display
-    mode of the translated documents will have to be modified within the
-    application commonly used to display or modify them (check the relevant
-    manuals for details). Using <keycombo><keycap>Shift</keycap><keycap>Ctrl</keycap>
-                  <keycap>O</keycap>
-</keycombo> causes both
-    text input and display in <application>OmegaT</application> to change to RTL. It can be used
+    <para>Using the RTL mode in <application>OmegaT</application> has no
+    influence whatsoever on the display mode of the translated documents
+    created in <application>OmegaT</application>. The display mode of the
+    translated documents will have to be modified within the application
+    commonly used to display or modify them (check the relevant manuals for
+    details). Using <keycombo>
+        <keycap>Shift</keycap>
+
+        <keycap>Ctrl</keycap>
+
+        <keycap>O</keycap>
+      </keycombo> causes both text input and display in
+    <application>OmegaT</application> to change to RTL. It can be used
     separately for all three panes (Editor, Fuzzy Matches and Glossary) by
     clicking on the pane and toggling the display mode. It can also be used in
-    all the input fields found in <application>OmegaT</application> - in the search window, for segmentation rules
-    etc. Mac OS X users, note: use the same shortcut and not cmd+Ctrl+O.</para>
+    all the input fields found in <application>OmegaT</application> - in the
+    search window, for segmentation rules etc. Mac OS X users, note: use the
+    same shortcut and not cmd+Ctrl+O.</para>
 
     <section>
-      <title>Mixing RTL and LTR strings in segments</title>
+      <title>Mixing RTL and LTR strings in segments<indexterm class="singular">
+          <primary>Right to left languages</primary>
+
+          <secondary>Mixing RTL and LTR strings</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Target files</primary>
+
+          <secondary>Mixing RTL and LTR strings</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Source files</primary>
+
+          <secondary>Mixing RTL and LTR string</secondary>
+        </indexterm></title>
 
       <para>When writing purely RTL text, the default (LTR) view may be used.
       In many cases, however, it is necessary to embed LTR text in RTL text.
-      For example, in <application>OmegaT</application> tags, product names that have to remain in the
-      LTR source language, place holders in localization files, and numbers in
-      text. In cases like these it becomes necessary to switch to RTL mode, so
-      that the RTL (in fact bidirectional) text is displayed correctly. It
-      should be noted that when <application>OmegaT</application> is in RTL mode, both source and target
+      For example, in <application>OmegaT</application> tags, product names
+      that have to remain in the LTR source language, place holders in
+      localization files, and numbers in text. In cases like these it becomes
+      necessary to switch to RTL mode, so that the RTL (in fact bidirectional)
+      text is displayed correctly. It should be noted that when
+      <application>OmegaT</application> is in RTL mode, both source and target
       are displayed in RTL mode. This means that if the source language is LTR
       and the target language is RTL, or vice versa, it might be necessary to
       toggle back and forth between RTL and LTR modes to easily view the
@@ -68,25 +394,44 @@
     </section>
 
     <section>
-      <title><application>OmegaT</application> tags in RTL segments</title>
+      <title><application>OmegaT</application> tags in RTL segments<indexterm
+          class="singular">
+          <primary>Right to left languages</primary>
 
-      <para>As written above, <application>OmegaT</application> tags are LTR strings. When translating
-      between RTL and LTR languages, to correctly read the tags from the
-      source and to enter them properly in the target may require the
-      translator to toggle between LTR and RTL modes numerous times.</para>
+          <secondary>OmegaT tags in RTL languages</secondary>
+        </indexterm></title>
+
+      <para>As written above, <application>OmegaT</application> tags are LTR
+      strings. When translating between RTL and LTR languages, to correctly
+      read the tags from the source and to enter them properly in the target
+      may require the translator to toggle between LTR and RTL modes numerous
+      times.</para>
 
       <para>If the document allows, the translator is strongly encouraged to
       remove style information from the original document so that as few tags
-      as possible appear in the <application>OmegaT</application> interface. Follow the indications given
-      in Hints for tags management. Frequently validate tags (see Tag
-      validation) and produce translated documents (see below and Menu) at
-      regular intervals to make it easier to catch any problems that arise. It
-      should be possible to translate a plain text version of the text and to
-      later add the necessary style in the relevant application.</para>
+      as possible appear in the <application>OmegaT</application> interface.
+      Follow the indications given in Hints for tags management. Frequently
+      validate tags (see Tag validation) and produce translated documents (see
+      below and Menu) at regular intervals to make it easier to catch any
+      problems that arise. It should be possible to translate a plain text
+      version of the text and to later add the necessary style in the relevant
+      application.</para>
     </section>
 
     <section>
-      <title>Creating translated RTL documents</title>
+      <title>Creating translated RTL documents<indexterm class="singular">
+          <primary>Right to left languages</primary>
+
+          <secondary>Creating RTL target files</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Right to left languages</primary>
+
+          <secondary>Target files</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Right to left languages</primary>
+
+          <secondary>Creating RTL target text</secondary>
+        </indexterm></title>
 
       <para>When the translated document is created, its display direction
       will be the same as the original document. If the original document was
@@ -100,237 +445,8 @@
       display parameters so that such parameters are inherited by the target
       files. Such modifications are possible in OpenOffice.org files for
       example.</para>
+
+      <para></para>
     </section>
-  </section>
-
-  <section id="file.formats">
-    <title>File formats</title>
-
-    <para>With <application>OmegaT</application> you can translate files in a number of file formats.
-    There are basically two types of file formats, the plain text and the
-    formatted text formats.</para>
-
-    <section>
-      <title>Plain text files</title>
-
-      <para>Plain text files contain text only, so their translation is as
-      simple as typing the translation.There are several methods to specify
-      the file's encoding so that its contents is not garbled when opened in
-      <application>OmegaT</application>. Such files do not contain any formatting information beyond the
-      "white space" used to align text, indicate paragraphs or insert page
-      breaks.They are not able to contain / retain information regarding the
-      color, font etc of the text. Currently, <application>OmegaT</application> supports the following
-      plain text formats:</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>ASCII text (.txt, etc.)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>Encoded text</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>Java resource bundles (.properties)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>PO files (.po)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>INI (key=value) files (.ini)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>Mozilla DTD files</para>
-        </listitem>
-      </itemizedlist>
-
-      <para>Other plain text file types can be handled by <application>OmegaT</application> by
-      associating their file extension to a supported file type (for example,
-      .pod files could be associated to the ASCII text filter) and by
-      pre-processing them with specific segmentation rules.</para>
-    </section>
-
-    <section>
-      <title>Formatted text files</title>
-
-      <para>Formatted text files contain text as well as information such as
-      font type, size, color etc. They are commonly created in word processors
-      or home page editors. Such file formats are conceived so that they
-      retain formatting information. Such formatting information can be as
-      simple as this is bold or as complex as table data with different font
-      size, color, position etc. In most translation jobs it is considered
-      important to have the translated document look similar to the original.
-      <application>OmegaT</application> allows you to do this by marking the characters/words that have a
-      special formatting with easy to manipulate tags. Simplifying the
-      original text formatting greatly contributes to reducing the number of
-      tags. Unifying used fonts, font sizes, colors etc should be considered
-      if possible, to simplify the translation and reduce the number of
-      possible tag errors. Each file type is handled differently in <application>OmegaT</application>.
-      Specific behavior can be setup in the file filters. Currently, <application>OmegaT</application>
-      support the following formatted text formats:</para>
-
-      <itemizedlist>
-        <listitem>
-          <para>OpenOffice.org</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>OpenDocument</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>Microsoft Open XML</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>(X)HTML</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>HTML Help Compiler</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>DocBook</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>Okapi monolingual XLIFF</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>QuarkXPress CopyFlowGold</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>Subtitle files (SRT)</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>ResX</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>Android resource</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>LaTeX</para>
-        </listitem>
-      </itemizedlist>
-
-      <para>Other formatted text file types can be handled by <application>OmegaT</application> by
-      associating their file extension to a supported file type and by
-      pre-processing them with specific segmentation rules.</para>
-    </section>
-  </section>
-
-  <section id="other.file.formats">
-    <title>Other file formats</title>
-
-    <para>Other plain text or formatted text file formats may also be
-    processed in <application>OmegaT</application>.</para>
-
-    <para>External tools can be used to convert files to supported formats.
-    Please remember, that the translated files will need to be converted back
-    to the original format. This way, a number of plain text formats
-    (including LaTex etc) can be translated in <application>OmegaT</application> through conversion to
-    the PO format. Similarly, a number of formatted text formats (including
-    Microsoft Office files) can be translated in <application>OmegaT</application> through conversion to
-    the Open Document format.</para>
-
-    <para>The quality of the translated file will depend on the quality of the
-    round-trip conversion. Make sure you have tested all your options before
-    proceeding with such conversions. Available free conversion tools
-    include:</para>
-
-    <variablelist>
-      <varlistentry>
-        <term><ulink
-        url="http://www.openoffice.org/">OpenOffice.org home page</ulink>
-		</term>
-
-        <listitem>
-          <para><application>OmegaT</application> does not offer direct support for Microsoft Office
-          formats Word, Excel and Power Point. However, OpenOffice.org (and
-          variants) can be used to convert such formats to OpenDocument, that
-          <application>OmegaT</application> natively supports.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Okapi Framework <ulink
-        url="http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm">Okapi for Mono -  ReadMe </ulink> and 
-        <ulink url="http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">
-        Okapi for Mono - tutorial</ulink></term>
-
-        <listitem>
-          <para>The Text Extraction Utility from the Okapi Framework has an
-          option for creating an <application>OmegaT</application> project folder tree. It is also
-          possible to create an <application>OmegaT</application> specific XLIFF file. Okapi has recently
-          released tools that run under Mono, a free platform available on
-          most operating systems.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Translate
-        Toolkit - <ulink
-        url="http://translate.sourceforge.net/wiki/toolkit/index">home page</ulink></term>
-
-        <listitem>
-          <para>The Translate Toolkit, a python tool set, provides users with
-          a number of converters to and from Portable Object, including
-          Mozilla .properties and dtd files, CSV files, Qt .ts files, XLIFF
-          files. It includes a number of tools to manipulate such files before
-          or after their translation in <application>OmegaT</application>.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Po4a - <ulink url="http://po4a.alioth.debian.org/">po4a official page</ulink></term>
-
-        <listitem>
-          <para>po4a is a Debian perl tool. It can convert files formats such
-          as LaTeX, TeX, POD etc to and from Portable Object.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
   </section>
 </chapter>

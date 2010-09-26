@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"file:///C:/docbook-xml-4.5/docbookx.dtd">
+<chapter id="ch11.google.granslate">
+  <title>Machine Translation<indexterm class="singular">
+      <primary>Machine Translation</primary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction<indexterm class="singular">
+        <primary>Machine Translation</primary>
+
+        <secondary>Introduction</secondary>
+      </indexterm></title>
+
+    <para>As opposed to user-generated translation memories on one side (like
+    in the case of <application>OmegaT</application>) Machine translation
+    tools use rule-based linguistic tools to create a translation of the
+    source segment. Statistical learning techniques, based on source and
+    target texts, can then be applied to build a translation model, achieving
+    very good results in research evaluations. Even today's most sophisticated
+    software, however, doesn't approach the fluency of a native speaker or
+    possess the skill of a professional translator. Automatic translation is
+    very difficult due to context problems (the sentence "Time flies like an
+    arrow" being just the best known example for it), it may be some time
+    before anyone can offer human quality translations.</para>
+  </section>
+
+  <section id="introduction">
+    <title>Google Translate<indexterm class="singular">
+        <primary>Machine Translation</primary>
+
+        <secondary>Google Translate</secondary>
+      </indexterm></title>
+
+    <para>Google Translate is the service offered by Google, to translate
+    sentences, web sites and complete texts between an ever-growing number of
+    languages. At the time of writing the list includes more than 50
+    languages, from Albanian to Yiddish, including of course all the major
+    languages (see Languages available for translation). It's translation
+    produced by state-of-the-art technology, without the intervention of human
+    translators. Google's research group has developed its own statistical
+    translation system for the language pairs now available on Google
+    Translate.</para>
+
+    <para>The quality of the translation of course depends on one side on the
+    reservoir of target-language texts and the availability of their bilingual
+    versions, on the other hand on the quality of the models built. It is
+    pretty much certain that while the quality may be insufficient in some
+    cases, it will definitely get better with time and not worse.</para>
+  </section>
+
+  <section>
+    <title><application>OmegaT</application> user and Google Translate</title>
+
+    <para>The <application>OmegaT</application> user is not forced to use
+    Google Translate. If used, neither the user's decision to accept the
+    translation nor the final translation are made available to Google. The
+    following window shows an example of a) the English source b) Spanish and
+    c) Slovenian Google Translate translation.</para>
+
+    <figure id="moby.dick">
+      <title>Google Translate - example</title>
+
+      <imageobject>
+        <imagedata fileref="images/MobyDick.png" width = "60%"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata fileref="images/MobyDick.png" width = "40%"/>
+      </imageobject>
+    </figure>
+
+    <para>The Spanish translation is better than the Slovenian. Note
+    <emphasis>interesar</emphasis> and<emphasis> navegar</emphasis> in
+    Spanish, translating the verbs interest and sail correctly. In the
+    Slovenian version both words have been translated as nouns. It is actually
+    quite probable, that the Spanish translation is based at least partially
+    on the actual translation of the book.</para>
+
+    <para>From now on a suggestion for the translation will appear in the
+    Google Translate pane for every new source segment opened. If you find the
+    suggestion acceptable, press <keycombo>
+        <keycap><indexterm class="singular">
+            <primary>Shortcuts</primary>
+
+            <secondary>Ctrl+M - Machine Translate</secondary>
+          </indexterm>Ctrl</keycap>
+
+        <keycap>M</keycap>
+      </keycombo> to replace the target part of the opened segment with the
+    suggestion. In the above segment, for instance, <keycombo>
+        <keycap>Ctrl</keycap>
+
+        <keycap>M</keycap>
+      </keycombo> would overwrite the Spanish version with the Slovenian
+    suggestion.</para>
+
+    <para>If you do not want <application>OmegaT</application> to send your
+    source segments to Google to get translated, uncheck the Google Translate
+    menu entry in Options.</para>
+
+    <para>Note that nothing but your source segment is sent to the MT service.
+    On-line version of Google Translate allows the user to correct the
+    suggestion and send the corrected segment in. This feature, however, is
+    not implemented in OmegaT.</para>
+  </section>
+
+  <section>
+    <title>Belazar<indexterm class="singular">
+        <primary>Machine Translation</primary>
+
+        <secondary>Belazar</secondary>
+      </indexterm></title>
+
+    <para>Machine language translation tool for the Russian-Belarusian
+    language pair.</para>
+  </section>
+
+  <section>
+    <title>Apertium<indexterm class="singular">
+        <primary>Machine Translation</primary>
+
+        <secondary>Apertium</secondary>
+      </indexterm></title>
+
+    <para>Apertium is a free/open-source machine translation platform,
+    initially aimed at related-language pairs,like CA, ES, GA, PT, OC and FR
+    but recently expanded to deal with more divergent language pairs (such as
+    English-Catalan). Check the web site for the latest list of implemented
+    language pairs. </para>
+
+    <para>The platform provides </para>
+
+    <itemizedlist>
+      <listitem>
+        <para>a language-independent machine translation engine</para>
+      </listitem>
+
+      <listitem>
+        <para>tools to manage the linguistic data necessary to build a machine
+        translation system for a given language pair and</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>linguistic data for a growing number of language pairs</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Apertium uses a shallow-transfer machine translation engine which
+    processes the input text in stages, as in an assembly line: de-formatting,
+    morphological analysis, part-of-speech disambiguation, shallow structural
+    transfer, lexical transfer, morphological generation, and re-formatting.
+    </para>
+
+    <para>The initial design was largely based upon that of systems already
+    developed by the Transducens group at the Universitat d'Alacant, such as
+    interNOSTRUM (Spanish-Catalan), and Traductor Universia
+    (Spanish-Portuguese). </para>
+
+    <para>It is possible to use Apertium to build machine translation systems
+    for a variety of language pairs; to that end, Apertium uses simple
+    XML-based standard formats to encode the linguistic data needed (either by
+    hand or by converting existing data), which are compiled using the
+    provided tools into the high-speed formats used by the engine.</para>
+  </section>
+
+  <section id="Google.Translate.troubleshooting">
+    <title>Machine translation - trouble shooting<indexterm class="singular">
+        <primary>Machine Translation</primary>
+
+        <secondary>Troubleshooting</secondary>
+      </indexterm></title>
+
+    <para>If there's nothing appearing in the Google Translate pane, then
+    check the following:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Are you online? You need to be online to be able to use a MT
+        tool..</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>What is the language pair you need? It could be that the
+        selected service does not offer it. </para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist></itemizedlist>
+  </section>
+</chapter>

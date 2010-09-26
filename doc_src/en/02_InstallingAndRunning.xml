@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
-<chapter id="02.installing.and.running">
-   &gt; 
+<chapter id="Ch02.installing.and.running">
 
   <title>Installing <application>OmegaT</application></title>
 
@@ -12,7 +11,7 @@
     <title>Linux (Intel) Users<indexterm class="singular">
         <primary>Installing OmegaT</primary>
 
-        <secondary>Linux users</secondary>
+        <secondary>Linux</secondary>
       </indexterm></title>
 
     <section id="which.package.to.download.Linux">
@@ -58,7 +57,11 @@
       panels (Gnome)</title>
 
       <section id="KDE.users">
-        <title>KDE 4 Users</title>
+        <title>KDE 4 Users<indexterm class="singular">
+            <primary>Customizing OmegaT</primary>
+
+            <secondary>KDE 4</secondary>
+          </indexterm></title>
 
         <para>You can add <application>OmegaT</application> to your menus as
         follows:</para>
@@ -106,7 +109,11 @@
       </section>
 
       <section id="GNOME.users">
-        <title>GNOME Users</title>
+        <title>GNOME Users<indexterm class="singular">
+            <primary>Customizing OmegaT</primary>
+
+            <secondary>GNOME</secondary>
+          </indexterm></title>
 
         <para>You can add <application>OmegaT</application> to your menus as
         follows:</para>
@@ -142,9 +149,9 @@
 
     <section id="running.OmegaT.Linux">
       <title>Running <application>OmegaT<indexterm class="singular">
-          <primary>Installing OmegaT</primary>
+          <primary>Running OmegaT</primary>
 
-          <secondary>Linux users</secondary>
+          <secondary>Linux</secondary>
         </indexterm></application></title>
 
       <para>Once <application>OmegaT</application> is installed, you can
@@ -164,7 +171,7 @@
     <title id="Windows.users">Windows Users<indexterm class="singular">
         <primary>Installing OmegaT</primary>
 
-        <secondary>Windows Users</secondary>
+        <secondary>Windows</secondary>
       </indexterm></title>
 
     <section>
@@ -201,7 +208,11 @@
 
     <section id="adding.OmegaT.to.the.start.menu.or.desktop">
       <title>Adding <application>OmegaT</application> to the start menu or
-      desktop</title>
+      desktop<indexterm class="singular">
+          <primary>Customizing OmegaT</primary>
+
+          <secondary>Windows</secondary>
+        </indexterm></title>
 
       <para>During the installation, the setup program asks you whether you
       want to create a folder in the <emphasis>start</emphasis> menu, and
@@ -214,7 +225,11 @@
     </section>
 
     <section id="running.OmegaT.Windows">
-      <title>Running <application>OmegaT</application></title>
+      <title>Running <application>OmegaT<indexterm class="singular">
+          <primary>Running OmegaT</primary>
+
+          <secondary>Windows</secondary>
+        </indexterm></application></title>
 
       <para>Once <application>OmegaT</application> is installed, you can click
       on <emphasis><application>OmegaT</application>.jar</emphasis> to launch
@@ -225,7 +240,9 @@
           class="singular">
           <primary>Running OmegaT</primary>
 
-          <secondary>using INI file on Windows</secondary>
+          <secondary>Windows</secondary>
+
+          <tertiary>INI file</tertiary>
         </indexterm>The launch parameters in this case will be read from the
       <emphasis><application>OmegaT</application>.l4J.ini </emphasis>file,
       residing in the same folder as the exe file and which you can edit to
@@ -247,16 +264,20 @@
 
   <section id="MAC.OSX.users">
     <title>Mac OS X Users<indexterm class="singular">
+        <primary>OS X</primary>
+
+        <secondary>Installing OmegaT</secondary>
+      </indexterm><indexterm class="singular">
         <primary>Installing OmegaT</primary>
 
-        <secondary>Mac OS X users</secondary>
+        <secondary>OS X</secondary>
       </indexterm></title>
 
     <section id="which.package.to.download.OSX">
       <title>Which package to download?</title>
 
       <para><application>OmegaT</application> 2.0 requires Java 1.5 to run.
-      Mac OS X 10.4 (Tiger) users should make sure that they use the latest
+      Check the readme file in the installation to make sure tyou use required
       version of Java before installing <application>OmegaT</application>. Use
       "Software Update..." from the Apple menu to update your Java
       version.</para>
@@ -281,7 +302,14 @@
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
-      <title>Adding <application>OmegaT</application> to the Dock</title>
+      <title>Adding <application>OmegaT</application> to the Dock<indexterm
+          class="singular">
+          <primary>OS X</primary>
+
+          <secondary>Adding OmegaT to the Dock</secondary>
+
+          <seealso>Customizing OmegaT</seealso>
+        </indexterm></title>
 
       <para>Add <application>OmegaT</application> to the Dock by dragging and
       dropping the file
@@ -290,7 +318,15 @@
     </section>
 
     <section id="running.OmegaT.OSX">
-      <title>Running <application>OmegaT</application></title>
+      <title>Running <application>OmegaT<indexterm class="singular">
+          <primary>OS X</primary>
+
+          <secondary>Running OmegaT</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Running OmegaT</primary>
+
+          <secondary>OS X</secondary>
+        </indexterm></application></title>
 
       <para>Double-click on<emphasis>
       <application>OmegaT</application>.app</emphasis> or click on its
@@ -299,9 +335,19 @@
       <para>If you want to change the Java launch parameters you can modify
       the <application>OmegaT</application>.app default settings by editing
       the<emphasis> Info.plist </emphasis>file located in
-      <emphasis><application>OmegaT</application>.app/Contents/.
-      </emphasis>Open the file "Info.plist" by right-clicking on it and
-      selecting your text editor of choice. You can modify the
+      <emphasis><application>OmegaT</application>.app/Contents/. <indexterm
+          class="singular">
+          <primary>OS X</primary>
+
+          <secondary>Customizing OmegaT</secondary>
+
+          <tertiary>Launch parameters</tertiary>
+        </indexterm><indexterm class="singular">
+          <primary>OS X</primary>
+
+          <secondary>Customizing OmegaT</secondary>
+        </indexterm></emphasis>Open the file "Info.plist" by right-clicking on
+      it and selecting your text editor of choice. You can modify the
       <emphasis>Properties</emphasis> part as well as the
       <emphasis>VMOptions</emphasis> part. If you want to add values
       to<emphasis> VMOptions</emphasis>, put a space between them. For
@@ -417,7 +463,12 @@
     </section>
 
     <section id="OmegaT.installation.other">
-      <title><application>OmegaT</application> installation</title>
+      <title><application>OmegaT</application> installation<indexterm
+          class="singular">
+          <primary>Installing OmegaT</primary>
+
+          <secondary>Other systems</secondary>
+        </indexterm></title>
 
       <para>To install <application>OmegaT</application>, simply unpack the
       <emphasis role="bold">OmegaT_2.0.x_Without_JRE.zip</emphasis> file. This
@@ -434,7 +485,11 @@
     </section>
 
     <section id="running.OmegaT.other">
-      <title>Running <application>OmegaT</application></title>
+      <title>Running <application>OmegaT<indexterm class="singular">
+          <primary>Running OmegaT</primary>
+
+          <secondary>Other systems</secondary>
+        </indexterm></application></title>
 
       <para>Once <application>OmegaT</application> is installed, you can
       launch it directly from the command line, you can create a script that
@@ -452,6 +507,8 @@
   <section>
     <title>Command Line Launching<indexterm class="singular">
         <primary>Running OmegaT</primary>
+
+        <secondary>Command line launching</secondary>
       </indexterm></title>
 
     <para>Normally, it is not necessary to launch
@@ -545,7 +602,7 @@
       <title>Launch command arguments<indexterm class="singular">
           <primary>Running OmegaT</primary>
 
-          <secondary>Command line arguments</secondary>
+          <secondary>Launch script arguments</secondary>
         </indexterm></title>
 
       <para>The basic command has already been mentioned above. Changes to
@@ -566,7 +623,13 @@
 
       <variablelist>
         <varlistentry>
-          <term>User interface language</term>
+          <term><indexterm class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>User.language</tertiary>
+            </indexterm>User interface language</term>
 
           <listitem>
             <para><emphasis role="bold">-Duser.language=XX
@@ -599,7 +662,13 @@
 
       <variablelist>
         <varlistentry>
-          <term>User country setup</term>
+          <term><indexterm class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>User.country</tertiary>
+            </indexterm>User country setup</term>
 
           <listitem>
             <para><emphasis role="bold">-Duser.country=XX : </emphasis>Next to
@@ -615,8 +684,13 @@
       <variablelist>
         <varlistentry>
           <term>
-            <emphasis role="bold">Font antialiasing - (Java 1.5
-            only)</emphasis>
+            <emphasis role="bold"><indexterm class="singular">
+                <primary>Running OmegaT</primary>
+
+                <secondary>Launch script arguments</secondary>
+
+                <tertiary>Font antialiasing</tertiary>
+              </indexterm>Font antialiasing - (Java 1.5 only)</emphasis>
           </term>
 
           <listitem>
@@ -629,7 +703,13 @@
 
       <variablelist>
         <varlistentry>
-          <term>Memory assignment</term>
+          <term><indexterm class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>Memory assignment</tertiary>
+            </indexterm>Memory assignment</term>
 
           <listitem>
             <para><emphasis role="bold">-XmxZZM: </emphasis>This command
@@ -648,7 +728,13 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Proxy host IP adress</term>
+          <term><indexterm class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>Proxy server IOP address</tertiary>
+            </indexterm>Proxy host IP adress</term>
 
           <listitem>
             <para><emphasis
@@ -658,11 +744,17 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Proxy Server Port Number</term>
+          <term><indexterm class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>Proxy server - Port Number</tertiary>
+            </indexterm>Proxy Server Port Number</term>
 
           <listitem>
             <para><emphasis role="bold">-Dhttp.proxyPort=</emphasis>NNNN: the
-            port number, your system uses to access the proxy server. </para>
+            port number, your system uses to access the proxy server.</para>
           </listitem>
         </varlistentry>
       </variablelist>
@@ -732,7 +824,7 @@
         class="singular">
         <primary>Running OmegaT</primary>
 
-        <secondary>Building OmegaT from sourcer</secondary>
+        <secondary>Building OmegaT from source</secondary>
       </indexterm></title>
 
     <para>Unpack the <emphasis>OmegaT_2.0.x_Source.zip</emphasis> file and

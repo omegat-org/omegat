@@ -2,9 +2,9 @@ if %1.==. exit /b
 call Xincludes %1
 
 cd %1
-md html
-cd html
 md javahelp
+cd javahelp
+md images
 cd..
 cd..
 

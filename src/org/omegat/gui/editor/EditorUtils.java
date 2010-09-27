@@ -102,7 +102,7 @@ public class EditorUtils {
      * @return true if it's direction char
      */
     private static boolean isDirectionChar(final char ch) {
-        return ch == '\u202A' || ch == '\u202B' || ch == '\u202C'|| ch=='\u200B';
+        return ch == '\u202A' || ch == '\u202B' || ch == '\u202C';
     }
 
     /**
@@ -113,6 +113,6 @@ public class EditorUtils {
      * @return string without direction chars
      */
     public static String removeDirectionChars(String text) {
-        return text.replaceAll("[\u202A|\u202B|\u202C|\u200B]", "");
+        return text.replaceAll("[\u202A|\u202B|\u202C]", "");
     }
 }

@@ -197,7 +197,7 @@ public class SegmentBuilder {
         int prevOffset = offset;
         sourceText = ste.getSrcText();
         addInactiveSegPart(true, sourceText, ATTR_SOURCE);
-        posSourceBeg = doc.createPosition(prevOffset + 1);
+        posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
 
         if (trans != null) {
             // translation exist
@@ -273,7 +273,7 @@ public class SegmentBuilder {
         if (sourceText != null) {
             int prevOffset = offset;
             addInactiveSegPart(true, sourceText, attrSource);
-            posSourceBeg = doc.createPosition(prevOffset + 1);
+            posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
         } else {
             posSourceBeg = null;
         }
@@ -281,7 +281,7 @@ public class SegmentBuilder {
             int prevOffset = offset;
             addInactiveSegPart(false, translationText, settings
                     .getTranslatedAttributeSet());
-            posTranslationBeg = doc.createPosition(prevOffset + 1);
+            posTranslationBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
         } else {
             posTranslationBeg = null;
         }
@@ -386,18 +386,14 @@ public class SegmentBuilder {
     private void addInactiveSegPart(boolean isSource, String text,
             AttributeSet attrs) throws BadLocationException {
         int prevOffset = offset;
+        boolean rtl = isSource ? controller.sourceLangIsRTL
+                : controller.targetLangIsRTL;
         if (hasRTL) {
-            boolean rtl = isSource ? controller.sourceLangIsRTL
-                    : controller.targetLangIsRTL;
             insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
-        } else {
-            insert("\u200b", null);
         }
         insert(text, attrs);
         if (hasRTL) {
             insert("\u202c", null); // end of embedding
-        } else {
-            insert("\u200b", null);
         }
         insert("\n", null);
         setAttributes(prevOffset, offset, isSource);
@@ -429,17 +425,13 @@ public class SegmentBuilder {
             text = StaticUtils.format(template, args);
         }
         int prevOffset = offset;
+        boolean rtl = localeIsRTL();
         if (hasRTL) {
-            boolean rtl = localeIsRTL();
             insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
-        } else {
-            insert("\u200b", null);
         }
         insert(text, attrs);
         if (hasRTL) {
             insert("\u202c", null); // end of embedding
-        } else {
-            insert("\u200b", null);
         }
         insert("\n", null);
         setAttributes(prevOffset, offset, false);
@@ -454,15 +446,13 @@ public class SegmentBuilder {
     private void addActiveSegPart(String text, AttributeSet attrs)
             throws BadLocationException {
         int prevOffset = offset;
+        boolean rtl = controller.targetLangIsRTL;
 
         insert(createSegmentMarkText(true), ATTR_SEGMENT_MARK);
         insert(" ", null);
 
         if (hasRTL) {
-            boolean rtl = controller.targetLangIsRTL;
             insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
-        } else {
-            insert("\u200b", null);
         }
 
         activeTranslationBeginOffset = offset;
@@ -471,8 +461,6 @@ public class SegmentBuilder {
 
         if (hasRTL) {
             insert("\u202c", null); // end of embedding
-        } else {
-            insert("\u200b", null);
         }
 
         insert(" ", null);
@@ -501,6 +489,8 @@ public class SegmentBuilder {
         String text = startMark ? OConsts.segmentStartString
                 : OConsts.segmentEndString;
 
+        boolean markIsRTL = localeIsRTL();
+
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
         if (text.indexOf("0000") >= 0) {
@@ -510,11 +500,8 @@ public class SegmentBuilder {
         }
 
         if (hasRTL) {
-            boolean markIsRTL = localeIsRTL();
             // add LTR/RTL embedded chars
             text = (markIsRTL ? '\u202b' : '\u202a') + text + '\u202c';
-        } else {
-            text = '\u200b' + text + '\u200b';
         }
 
         return text;

@@ -1004,6 +1004,13 @@ public class EditorController implements IEditor {
             if (start == end) {
                 start = EditorUtils.getWordStart(editor, start);
                 end = EditorUtils.getWordEnd(editor, end);
+                
+                // adjust the bound again
+                if (start < translationStart && end <= translationEnd)
+                    start = translationStart;
+
+                if (end > translationEnd && start >= translationStart)
+                    end = translationEnd;
             }
 
             editor.setSelectionStart(start);

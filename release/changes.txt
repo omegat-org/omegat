@@ -2,7 +2,7 @@
  OmegaT 2.1.9 update 1
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.1.9 update 1 vs. 2.1.9
 
@@ -10,6 +10,9 @@
 
   - With some fonts, "squares" were displayed in the Editor around 
 segment markers
+
+  - When the files in /source were changed, it was sometime not possible
+to reload the project
 
 ----------------------------------------------------------------------
  OmegaT 2.1.9

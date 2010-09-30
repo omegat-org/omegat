@@ -410,8 +410,13 @@ public class EditorController implements IEditor {
         UIThreadsUtil.mustBeSwingThread();
         
         // Currently displayed file
-        IProject.FileInfo file = Core.getProject().getProjectFiles().get(
-                displayedFileIndex);
+        IProject.FileInfo file;
+        try {
+            file = Core.getProject().getProjectFiles().get(displayedFileIndex);
+        } catch (IndexOutOfBoundsException ex) {
+            // there is no displayedFileIndex file in project - load first file
+            file = Core.getProject().getProjectFiles().get(0);
+        }
 
         Document3 doc = new Document3(this);
 

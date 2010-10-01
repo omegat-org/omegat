@@ -58,72 +58,72 @@ import org.omegat.util.xml.XMLStreamReader;
 public class Preferences
 {
     /** OmegaT-wide Preferences Filename */
-    public static final String FILE_PREFERENCES	= "omegat.prefs";				// NOI18N
+    public static final String FILE_PREFERENCES	= "omegat.prefs";				
     
     // preference names
-    public static final String SOURCE_LOCALE	= "source_lang";                // NOI18N
-    public static final String TARGET_LOCALE	= "target_lang";                // NOI18N
-    public static final String CURRENT_FOLDER	= "current_folder";				// NOI18N
-    public static final String SOURCE_FOLDER	= "source_folder";				// NOI18N
-    public static final String TARGET_FOLDER	= "target_folder";				// NOI18N
-    public static final String TM_FOLDER		= "tm_folder";                  // NOI18N
-    public static final String DICT_FOLDER      = "dict_folder";                  // NOI18N
-    public static final String GLOSSARY_FOLDER	= "glossary_folder";            // NOI18N
+    public static final String SOURCE_LOCALE	= "source_lang";                
+    public static final String TARGET_LOCALE	= "target_lang";                
+    public static final String CURRENT_FOLDER	= "current_folder";				
+    public static final String SOURCE_FOLDER	= "source_folder";				
+    public static final String TARGET_FOLDER	= "target_folder";				
+    public static final String TM_FOLDER		= "tm_folder";                  
+    public static final String DICT_FOLDER      = "dict_folder";                  
+    public static final String GLOSSARY_FOLDER	= "glossary_folder";            
     
-    public static final String MAINWINDOW_WIDTH  = "screen_width";              // NOI18N
-    public static final String MAINWINDOW_HEIGHT = "screen_height";             // NOI18N
-    public static final String MAINWINDOW_X      = "screen_x";                  // NOI18N
-    public static final String MAINWINDOW_Y      = "screen_y";                  // NOI18N
-    public static final String MAINWINDOW_LAYOUT = "docking_layout";            // NOI18N
+    public static final String MAINWINDOW_WIDTH  = "screen_width";              
+    public static final String MAINWINDOW_HEIGHT = "screen_height";             
+    public static final String MAINWINDOW_X      = "screen_x";                  
+    public static final String MAINWINDOW_Y      = "screen_y";                  
+    public static final String MAINWINDOW_LAYOUT = "docking_layout";            
     
     // Project files window size and position    
-    public static final String PROJECT_FILES_WINDOW_WIDTH  = "project_files_window_width";  // NOI18N
-    public static final String PROJECT_FILES_WINDOW_HEIGHT = "project_files_window_height"; // NOI18N
-    public static final String PROJECT_FILES_WINDOW_X      = "project_files_window_x";      // NOI18N
-    public static final String PROJECT_FILES_WINDOW_Y      = "project_files_window_y";      // NOI18N
+    public static final String PROJECT_FILES_WINDOW_WIDTH  = "project_files_window_width";  
+    public static final String PROJECT_FILES_WINDOW_HEIGHT = "project_files_window_height"; 
+    public static final String PROJECT_FILES_WINDOW_X      = "project_files_window_x";      
+    public static final String PROJECT_FILES_WINDOW_Y      = "project_files_window_y";      
     // Using the main font for the Project Files window
-    public static final String PROJECT_FILES_USE_FONT      = "project_files_use_font";      // NOI18N
+    public static final String PROJECT_FILES_USE_FONT      = "project_files_use_font";      
         
     // Search window size and position    
-    public static final String SEARCHWINDOW_WIDTH            = "search_window_width";            // NOI18N
-    public static final String SEARCHWINDOW_HEIGHT           = "search_window_height";           // NOI18N
-    public static final String SEARCHWINDOW_X                = "search_window_x";                // NOI18N
-    public static final String SEARCHWINDOW_Y                = "search_window_y";                // NOI18N
-    public static final String SEARCHWINDOW_SEARCH_TYPE      = "search_window_search_type";      // NOI18N
-    public static final String SEARCHWINDOW_CASE_SENSITIVE   = "search_window_case_sensitive";   // NOI18N
-    public static final String SEARCHWINDOW_SEARCH_SOURCE    = "search_window_search_source";    // NOI18N
-    public static final String SEARCHWINDOW_SEARCH_TARGET    = "search_window_search_target";    // NOI18N
-    public static final String SEARCHWINDOW_REG_EXPRESSIONS  = "search_window_reg_expressions";  // NOI18N
-    public static final String SEARCHWINDOW_TM_SEARCH        = "search_window_tm_search";        // NOI18N
+    public static final String SEARCHWINDOW_WIDTH            = "search_window_width";            
+    public static final String SEARCHWINDOW_HEIGHT           = "search_window_height";           
+    public static final String SEARCHWINDOW_X                = "search_window_x";                
+    public static final String SEARCHWINDOW_Y                = "search_window_y";                
+    public static final String SEARCHWINDOW_SEARCH_TYPE      = "search_window_search_type";      
+    public static final String SEARCHWINDOW_CASE_SENSITIVE   = "search_window_case_sensitive";   
+    public static final String SEARCHWINDOW_SEARCH_SOURCE    = "search_window_search_source";    
+    public static final String SEARCHWINDOW_SEARCH_TARGET    = "search_window_search_target";    
+    public static final String SEARCHWINDOW_REG_EXPRESSIONS  = "search_window_reg_expressions";  
+    public static final String SEARCHWINDOW_TM_SEARCH        = "search_window_tm_search";        
     public static final String SEARCHWINDOW_ALL_RESULTS      = "search_window_all_results";
-    public static final String SEARCHWINDOW_ADVANCED_VISIBLE = "search_window_advanced_visible"; // NOI18N
-    public static final String SEARCHWINDOW_SEARCH_AUTHOR    = "search_window_search_author";    // NOI18N
-    public static final String SEARCHWINDOW_AUTHOR_NAME      = "search_window_author_name";      // NOI18N
-    public static final String SEARCHWINDOW_DATE_FROM        = "search_window_date_from";        // NOI18N
-    public static final String SEARCHWINDOW_DATE_FROM_VALUE  = "search_window_date_from_value";  // NOI18N
-    public static final String SEARCHWINDOW_DATE_TO          = "search_window_date_to";          // NOI18N
-    public static final String SEARCHWINDOW_DATE_TO_VALUE    = "search_window_date_to_value";    // NOI18N
-    public static final String SEARCHWINDOW_DIR              = "search_window_dir";              // NOI18N
-    public static final String SEARCHWINDOW_SEARCH_FILES     = "search_window_search_files";     // NOI18N
-    public static final String SEARCHWINDOW_RECURSIVE        = "search_window_search_recursive"; // NOI18N
+    public static final String SEARCHWINDOW_ADVANCED_VISIBLE = "search_window_advanced_visible"; 
+    public static final String SEARCHWINDOW_SEARCH_AUTHOR    = "search_window_search_author";    
+    public static final String SEARCHWINDOW_AUTHOR_NAME      = "search_window_author_name";      
+    public static final String SEARCHWINDOW_DATE_FROM        = "search_window_date_from";        
+    public static final String SEARCHWINDOW_DATE_FROM_VALUE  = "search_window_date_from_value";  
+    public static final String SEARCHWINDOW_DATE_TO          = "search_window_date_to";          
+    public static final String SEARCHWINDOW_DATE_TO_VALUE    = "search_window_date_to_value";    
+    public static final String SEARCHWINDOW_DIR              = "search_window_dir";              
+    public static final String SEARCHWINDOW_SEARCH_FILES     = "search_window_search_files";     
+    public static final String SEARCHWINDOW_RECURSIVE        = "search_window_search_recursive"; 
 
     
     // Tag validation window size and position    
-    public static final String TAGVWINDOW_WIDTH  = "tagv_window_width";         // NOI18N
-    public static final String TAGVWINDOW_HEIGHT = "tagv_window_height";        // NOI18N
-    public static final String TAGVWINDOW_X      = "tagv_window_x";             // NOI18N
-    public static final String TAGVWINDOW_Y      = "tagv_window_y";             // NOI18N
+    public static final String TAGVWINDOW_WIDTH  = "tagv_window_width";         
+    public static final String TAGVWINDOW_HEIGHT = "tagv_window_height";        
+    public static final String TAGVWINDOW_X      = "tagv_window_x";             
+    public static final String TAGVWINDOW_Y      = "tagv_window_y";             
     
     // Help window size and position    
-    public static final String HELPWINDOW_WIDTH  = "help_window_width";         // NOI18N
-    public static final String HELPWINDOW_HEIGHT = "help_window_height";        // NOI18N
-    public static final String HELPWINDOW_X      = "help_window_x";             // NOI18N
-    public static final String HELPWINDOW_Y      = "help_window_y";             // NOI18N
+    public static final String HELPWINDOW_WIDTH  = "help_window_width";         
+    public static final String HELPWINDOW_HEIGHT = "help_window_height";        
+    public static final String HELPWINDOW_X      = "help_window_x";             
+    public static final String HELPWINDOW_Y      = "help_window_y";             
     
     /** Use the TAB button to advance to the next segment */
-    public static final String USE_TAB_TO_ADVANCE     = "tab_advance";          // NOI18N
+    public static final String USE_TAB_TO_ADVANCE     = "tab_advance";          
     /** Always confirm Quit, even if the project is saved */
-    public static final String ALWAYS_CONFIRM_QUIT     = "always_confirm_quit"; // NOI18N
+    public static final String ALWAYS_CONFIRM_QUIT     = "always_confirm_quit"; 
     
     public static final String ALLOW_GOOGLE_TRANSLATE = "allow_google_translate";
 
@@ -137,61 +137,61 @@ public class Preferences
     public static final String TRANSTIPS_EXACT_SEARCH = "transtips_exact_search";
     
     /** Mark the translated segments with a different color */
-    public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";   // NOI18N
+    public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";   
     
     /** Mark the untranslated segments with a different color */
-    public static final String MARK_UNTRANSLATED_SEGMENTS = "mark_untranslated_segments";   // NOI18N
+    public static final String MARK_UNTRANSLATED_SEGMENTS = "mark_untranslated_segments";   
     
     /** Workflow Option: Don't Insert Source Text Into Translated Segment */
-    public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";                     // NOI18N
+    public static final String DONT_INSERT_SOURCE_TEXT = "wf_noSourceText";                     
     /** Workflow Option: Allow translation to be equal to source */
-    public static final String ALLOW_TRANS_EQUAL_TO_SRC = "wf_allowTransEqualToSrc";       // NOI18N
+    public static final String ALLOW_TRANS_EQUAL_TO_SRC = "wf_allowTransEqualToSrc";       
     /** Workflow Option: Insert Best Match Into Translated Segment */
-    public static final String BEST_MATCH_INSERT = "wf_insertBestMatch";                        // NOI18N
+    public static final String BEST_MATCH_INSERT = "wf_insertBestMatch";                        
     /** Workflow Option: Minimal Similarity Of the Best Fuzzy Match to insert */
-    public static final String BEST_MATCH_MINIMAL_SIMILARITY = "wf_minimalSimilarity";          // NOI18N
+    public static final String BEST_MATCH_MINIMAL_SIMILARITY = "wf_minimalSimilarity";          
     /** Default Value of Workflow Option: Minimal Similarity Of the Best Fuzzy Match to insert */
-    public static final String BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = "80";                    // NOI18N
+    public static final String BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT = "80";                    
     /** Workflow Option: Insert Explanatory Text before the Best Fuzzy Match */
-    public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";              // NOI18N
+    public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";              
     /** Workflow Option: Export current segment  */
-    public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment"; // NOI18N
+    public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment"; 
 
     /** Tag Validation Option: Don't check printf-tags */
-    public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";       //NOI18N
+    public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";       
     /** Tag Validation Option: check simple printf-tags */
-    public static final String CHECK_SIMPLE_PRINTF_TAGS = "tagValidation_simpleCheck"; //NOI18N
+    public static final String CHECK_SIMPLE_PRINTF_TAGS = "tagValidation_simpleCheck"; 
     /** Tag Validation Option: check all printf-tags */
-    public static final String CHECK_ALL_PRINTF_TAGS = "tagValidation_elaborateCheck"; //NOI18N
+    public static final String CHECK_ALL_PRINTF_TAGS = "tagValidation_elaborateCheck"; 
 
     /** Team option: author ID */
-    public static final String TEAM_AUTHOR = "team_Author"; //NOI18N
+    public static final String TEAM_AUTHOR = "team_Author"; 
 
     /** 
      * allow automatic spell checking or not
      */
-    public static final String ALLOW_AUTO_SPELLCHECKING = "allow_auto_spellchecking";   // NOI18N
+    public static final String ALLOW_AUTO_SPELLCHECKING = "allow_auto_spellchecking";   
     
     /**
      * The location of the spell checker dictionaries
      */
-    public static final String SPELLCHECKER_DICTIONARY_DIRECTORY = "spellcheker_dir";   // NOI18N
+    public static final String SPELLCHECKER_DICTIONARY_DIRECTORY = "spellcheker_dir";   
     
     /**
      * display the segment sources
      */
-    public static final String DISPLAY_SEGMENT_SOURCES = "display_segment_sources";     // NOI18N
+    public static final String DISPLAY_SEGMENT_SOURCES = "display_segment_sources";     
     /**
      * display modification info (author and modification date)
      */
-    public static final String DISPLAY_MODIFICATION_INFO = "display_modification_info";     // NOI18N
+    public static final String DISPLAY_MODIFICATION_INFO = "display_modification_info";     
     
     /** 
      * Version of file filters. 
      * Unfortunately cannot put it into filters itself for backwards 
      * compatibility reasons.
      */
-    public static final String FILTERS_VERSION = "filters_version";             // NOI18N
+    public static final String FILTERS_VERSION = "filters_version";             
     
     public static final String LT_DISABLED = "lt_disabled";
     
@@ -217,13 +217,13 @@ public class Preferences
      */
     public static String getPreference(String key)
     {
-        if (key == null || key.equals(""))					// NOI18N
-            return "";								// NOI18N
+        if (key == null || key.equals(""))					
+            return "";								
         if (!m_loaded)
             doLoad();
         
         Integer i = m_preferenceMap.get(key);
-        String v = "";								// NOI18N
+        String v = "";								
         if (i != null)
         {
             // mapping exists - recover defaultValue
@@ -243,7 +243,7 @@ public class Preferences
      */
     public static boolean isPreference(String key)
     {
-        return "true".equals(getPreference(key));                               // NOI18N
+        return "true".equals(getPreference(key));                               
     }
     
     /**
@@ -260,7 +260,7 @@ public class Preferences
     public static String getPreferenceDefault(String key, String defaultValue)
     {
         String val = getPreference(key);
-        if (val.equals("")) // NOI18N
+        if (val.equals("")) 
         {
             val = defaultValue;
             setPreference(key, defaultValue);
@@ -372,15 +372,15 @@ public class Preferences
             String pref;
             String val;
             // advance to omegat tag
-            if (xml.advanceToTag("omegat") == null)	// NOI18N
+            if (xml.advanceToTag("omegat") == null)	
                 return;
             
             // advance to project tag
-            if ((blk = xml.advanceToTag("preference")) == null)	// NOI18N
+            if ((blk = xml.advanceToTag("preference")) == null)	
                 return;
             
-            String ver = blk.getAttribute("version");                           // NOI18N
-            if (ver != null && !ver.equals("1.0"))                              // NOI18N
+            String ver = blk.getAttribute("version");                           
+            if (ver != null && !ver.equals("1.0"))                              
             {
                 // unsupported preference file version - abort read
                 return;
@@ -407,7 +407,7 @@ public class Preferences
                     continue;
                 }
                 val = blk.getText();
-                if (pref != null && !pref.equals("") && val != null)		// NOI18N
+                if (pref != null && !pref.equals("") && val != null)		
                 {
                     // valid match - record these
                     m_preferenceMap.put(pref, m_valList.size());
@@ -435,7 +435,7 @@ public class Preferences
         catch (UnsupportedEncodingException e3)
         {
             // unsupported encoding - forget about it
-            Log.logErrorRB("PM_UNSUPPORTED_ENCODING"); // NOI18N
+            Log.logErrorRB("PM_UNSUPPORTED_ENCODING"); 
             Log.log(e3);
         }
         catch (FileNotFoundException ex) {
@@ -444,7 +444,7 @@ public class Preferences
         catch (IOException e4)
         {
             // can't read file - forget about it and move on
-            Log.logErrorRB("PM_ERROR_READING_FILE"); // NOI18N
+            Log.logErrorRB("PM_ERROR_READING_FILE"); 
             Log.log(e4);
         }
     }
@@ -453,24 +453,24 @@ public class Preferences
     {
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(StaticUtils.getConfigDir() + FILE_PREFERENCES), 
-                "UTF-8"));                                                      // NOI18N
+                "UTF-8"));                                                      
         
-        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");             // NOI18N
-        out.write("<omegat>\n");						// NOI18N
-        out.write("  <preference version=\"1.0\">\n");				// NOI18N
+        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");             
+        out.write("<omegat>\n");						
+        out.write("  <preference version=\"1.0\">\n");				
         
         for (int i=0; i<m_nameList.size(); i++)
         {
             String name = m_nameList.get(i);
             String val = StaticUtils.makeValidXML(m_valList.get(i));
-            if (val.equals(""))							// NOI18N
+            if (val.equals(""))							
                 continue;	// don't write blank preferences
-            out.write("    <" + name + ">");					// NOI18N
+            out.write("    <" + name + ">");					
             out.write(val);
-            out.write("</" + name + ">\n");					// NOI18N
+            out.write("</" + name + ">\n");					
         }
-        out.write("  </preference>\n");						// NOI18N
-        out.write("</omegat>\n");						// NOI18N
+        out.write("  </preference>\n");						
+        out.write("</omegat>\n");						
         out.close();
         m_changed = false;
     }

@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
                2009 Didier Briel
-               2010 Martin Fleurke, Antonio Vilei, Alex Buloichik
+               2010 Martin Fleurke, Antonio Vilei, Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -193,6 +193,7 @@ public class Searcher
         SearchResultEntry entry = new SearchResultEntry(num, preamble,
                 srcPrefix, src, target, srcMatch, targetMatch);
         m_searchResults.add(entry);
+        m_numFinds++;
     }
 
     
@@ -203,7 +204,7 @@ public class Searcher
      */
     private void foundString(int entryNum, String intro, String src,
             String target, SearchMatch[] srcMatches, SearchMatch[] targetMatches) {
-        if (m_numFinds++ > m_maxResults)
+        if (m_numFinds >= m_maxResults)
         {
             return;
         }

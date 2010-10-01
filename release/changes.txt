@@ -2,7 +2,7 @@
  OmegaT 2.1.9 update 1
 ----------------------------------------------------------------------
   0 Enhancement
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.1.9 update 1 vs. 2.1.9
 
@@ -13,6 +13,10 @@ segment markers
 
   - When the files in /source were changed, it was sometime not possible
 to reload the project
+
+  - When a search filter was used (e.g., "Display all results" unchecked, 
+Author), the number of search results returned was limited to the number 
+of unfiltered results
 
 ----------------------------------------------------------------------
  OmegaT 2.1.9

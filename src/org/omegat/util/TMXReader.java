@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
-               2009 Didier Briel
+               2009 Didier Briel, Martin Fleurke
+               2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,7 +29,6 @@ package org.omegat.util;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -66,6 +66,7 @@ import org.xml.sax.SAXParseException;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Martin Fleurke
  */
 public class TMXReader extends org.xml.sax.helpers.DefaultHandler 
 {
@@ -174,7 +175,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     {
         return creationtoolversion;
     }
-    
+
     /**
       * Retrieves the value for the specified property.
       *
@@ -468,6 +469,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
       */
     private void checkLevel2() {
         includeLevel2 = creationtool.equals(CT_OMEGAT);
+        isOmegaT = includeLevel2;
     }
 
     /**
@@ -622,9 +624,20 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                  || qName.equals(TMX_TAG_HI)
                  || qName.equals(TMX_TAG_IT)
                  || qName.equals(TMX_TAG_PH)
-                 || qName.equals(TMX_TAG_UT))
+                 || qName.equals(TMX_TAG_UT)) {
+            tagNumber ++;
+            if (qName.equals(TMX_TAG_EPT)) {
+                closeTag = true;
+                tagNumber --;
+            } else
+                closeTag = false;
+            if (    qName.equals(TMX_TAG_BPT)
+                 || qName.equals(TMX_TAG_EPT))
+                 standAloneTag = false;
+            else
+                standAloneTag = true;
             startElementInline(attributes);
-        else if (qName.equals(TMX_TAG_SUB))
+        } else if (qName.equals(TMX_TAG_SUB))
             startElementSub(attributes);
         else if (qName.equals(TMX_TAG_PROP))
             startElementProperty(attributes);
@@ -659,28 +672,79 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             endElementProperty();
     }
 
+    private int tagNumber;
+    private StringBuffer currentTag = new StringBuffer();
+    private boolean insideTag;
+    private boolean closeTag;
+    private boolean standAloneTag;
+
+    /**
+      * Makes a shortcut from a tag. If the tag contains no letter, uses 'f'
+      * for the shortcut.
+      * @param tag The full tag
+      * @return The shortcut
+      */
+    private StringBuffer makeShortcut(StringBuffer tag){
+        char letter = ' ';
+        String returnTag = "<";
+        String tagEnding = ">";
+
+        if (closeTag)
+            returnTag += "/";
+        if (standAloneTag &&
+            Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH))
+            tagEnding = "/>";
+
+        for (int i=0; i<tag.length(); i++) {
+              letter = tag.charAt(i);
+              if (Character.isLetter(letter)) {
+                  letter = Character.toLowerCase(letter);
+                  return new StringBuffer(returnTag +
+                          String.valueOf(letter) +
+                          Integer.toString(tagNumber) + tagEnding);
+              }
+         }
+            return new StringBuffer (returnTag + "f" +
+                    Integer.toString(tagNumber) + tagEnding);
+    }
+
+
     /**
       * Receives character data in element content. Called by the SAX parser.
       */
     public void characters(char[] ch,
                            int    start,
-                           int    length) throws SAXException 
-    {
-        // only read (sub)segments, properties, and inline codes (if required)
-        if ( inProperty || // We are in a property or
-             ( inSegment && // we're inside a segment and
-               ( ( includeLevel2 && // we read level 2 and
-                                    // we're inside a tag
-                   ( currentElement.peek()).equals(TMX_TAG_INLINE) )
-                 || // or
-                 // we're not inside a tag
-                 ( !(currentElement.peek()).equals(TMX_TAG_INLINE) )
-               )
-             )
-           )
-        {
-            // append the data to the current buffer
-            currentSub.peek().append(ch, start, length);
+                           int    length) throws SAXException {
+
+        if (inProperty || // We are in a property or
+                inSegment) { // we're inside a segment and
+
+            if (currentElement.peek().equals(TMX_TAG_INLINE)) {
+                // We're inside a tag
+                if (!isOmegaT) {  // Not OmegaT TMX
+                    if (Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2)) {
+                        if (!insideTag) {
+                            insideTag = true;
+                            currentTag.setLength(0);
+                        }
+                        currentTag.append(ch, start, length);
+                    }
+                } else {
+                    // append the data to the current buffer
+                    currentSub.peek().append(ch, start, length);
+                }
+
+            } else { // we're not inside a tag
+                if (insideTag && !isOmegaT) { // Not OmegaT TMX
+                    insideTag = false;
+                    if (currentTag.length() > 0) {
+                        currentTag = makeShortcut(currentTag);
+                        currentSub.peek().append(currentTag);
+                    }
+                }
+                // append the data to the current buffer
+                currentSub.peek().append(ch, start, length);
+            }
         }
     }
 
@@ -1022,6 +1086,9 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         
         // clear the stack of sub segments
         currentSub.clear();
+        currentTag.setLength(0);
+        tagNumber = -1;
+
     }
 
     /**
@@ -1172,6 +1239,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     private String  targetLanguage;     // Language/country code set by OmT: LL(-CC)
     private String  tmxSourceLanguage;  // Language/country code as specified in TMX header: LL(-CC)
     private boolean includeLevel2;      // True if TMX level 2 markup must be interpreted
+    private boolean isOmegaT;           // True if it is an OmegaT TMX
     private boolean isProjectTMX;       // True if the TMX file being loaded is the project TMX
     private boolean headerParsed;       // True if the TMX header has been parsed correctly
     private boolean inHeader;           // True if the current parsing point is in the HEADER element

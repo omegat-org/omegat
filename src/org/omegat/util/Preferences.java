@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Zoltan Bartko
                2008-2009 Didier Briel
-               2010 Wildrich Fourie and Antonio Vilei
+               2010 Wildrich Fourie, Antonio Vilei, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -186,6 +186,12 @@ public class Preferences
      */
     public static final String DISPLAY_MODIFICATION_INFO = "display_modification_info";     
     
+    /** External TMX options: Display level 2 tags */
+    public static final String EXT_TMX_SHOW_LEVEL2 = "ext_tmx_show_level2";
+    /** External TMX options: Use / for stand-alone tags */
+    public static final String EXT_TMX_USE_SLASH = "ext_tmx_use_slash";
+
+
     /** 
      * Version of file filters. 
      * Unfortunately cannot put it into filters itself for backwards 

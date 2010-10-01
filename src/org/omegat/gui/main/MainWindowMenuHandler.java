@@ -44,6 +44,7 @@ import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.TagValidationOptionsDialog;
 import org.omegat.gui.dialogs.TeamOptionsDialog;
+import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
@@ -162,8 +163,8 @@ public class MainWindowMenuHandler {
      * Empties the exported segments.
      */
     private void flushExportedSegments(){
-        FileUtil.writeScriptFile("", OConsts.SOURCE_EXPORT);                          // NOI18N
-        FileUtil.writeScriptFile("", OConsts.TARGET_EXPORT);                          // NOI18N
+        FileUtil.writeScriptFile("", OConsts.SOURCE_EXPORT);                          
+        FileUtil.writeScriptFile("", OConsts.TARGET_EXPORT);                          
     }
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
@@ -625,6 +626,30 @@ public class MainWindowMenuHandler {
      */
     public void optionsTeamMenuItemActionPerformed() {
         new TeamOptionsDialog(mainWindow).setVisible(true);
+    }
+
+    /**
+     * Displays the external TMX dialog to allow customizing the external
+     * TMX options.
+     */
+    public void optionsExtTMXMenuItemActionPerformed() {
+        
+        ExternalTMXMatchesDialog externalTMXOptions =
+                new ExternalTMXMatchesDialog(mainWindow);
+        externalTMXOptions.setVisible(true);
+
+        if (externalTMXOptions.getReturnStatus() == 
+                ExternalTMXMatchesDialog.RET_OK &&
+                Core.getProject().isProjectLoaded()) {
+            // asking to reload a project
+            int res = JOptionPane.showConfirmDialog
+                    (mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
+                    OStrings.getString("MW_REOPEN_TITLE"),
+                    JOptionPane.YES_NO_OPTION);
+            if (res == JOptionPane.YES_OPTION)
+                ProjectUICommands.projectReload();
+        }
+
     }
 
     /**

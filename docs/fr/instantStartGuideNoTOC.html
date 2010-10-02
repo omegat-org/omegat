@@ -7,7 +7,8 @@
 </head>
 
 <body>
-  <h2>Pour utiliser OmegaT en 5 minutes !<br>- Tutoriel premiers pas</h2>
+  <h2>Pour utiliser OmegaT en 5 minutes !<br>
+  - Tutoriel premiers pas</h2>
 
   <p>Ce tutoriel ne décrit que les fonctions de base d'OmegaT. Pour avoir une idée de l'intégralité des fonctions offertes par OmegaT, consultez le manuel utilisateur. Les raccourcis clavier décrits ici utilisent la notation «&nbsp;Ctrl+touche&nbsp;» que les utilisateurs de Mac doivent lire «&nbsp;Cmd+touche&nbsp;». La touche «&nbsp;Cmd&nbsp;» est étiquetée «&nbsp;command&nbsp;», ou est indiquée avec une pomme sur les claviers Apple.</p>
   <hr>
@@ -45,7 +46,7 @@
   <ul>
     <li>OpenDocument/OpenOffice.org</li>
 
-    <li>Texte pur</li>
+    <li>Texte brut</li>
 
     <li>.po</li>
 
@@ -82,15 +83,25 @@
     <li>Pour vous déplacer de part et d'autre du texte, double-cliquez sur la phrase ou le paragraphe que vous souhaitez ouvrir.</li>
 
     <li>Si vous préférez qu'OmegaT n'insère pas automatiquement le contenu non-traduit dans la ligne d'édition, modifiez cette option avec le menu <strong>Options → Ligne d'édition...</strong>.</li>
+
+    <li>
+      <p>Vous pouvez modifier la configuration du volet de l'Éditeur, par exemple pour afficher ou pas le texte source, pour mettre en évidence le texte traduit, etc.) dans l'entrée <span style="font-weight: bold;">Affichage</span> du menu principal.</p>
+    </li>
   </ul>
 
   <p>Lorsque vous appuyez sur «&nbsp;<strong>Entrée</strong>&nbsp;», plusieurs choses se passent : OmegaT ajoute la paire de segments (le segment source et sa traduction) à la mémoire de traduction, et traduit également automatiquement tous les autres segments identiques trouvés dans le projet. OmegaT va aussi chercher dans les mémoires de traduction et les glossaires des correspondances avec le segment suivant.</p><a name="tm" id="tm"></a>
 
-  <h3>Utilisation de la mémoire de traduction et les correspondances de vos glossaires et dictionnaires</h3><a name="tm_matches" id="tm_matches"></a>
+  <h3>Utilise des correspondances des mémoires de traduction, des glossaires et des dictionnaires</h3><a name="tm_matches" id="tm_matches"></a>
 
   <h3>Correspondances des mémoires de traduction</h3>
 
-  <p>Si OmegaT trouve dans les mémoires de traduction des correspondances pour le segment à venir  (supérieures à 30%), il les affiche dans la partie Correspondances. La première correspondance affichée est pré-sélectionnée. Il existe des raccourcis clavier pour insérer celle-ci dans la ligne d'édition :</p>
+  <p>Si OmegaT trouve dans les mémoires de traduction des correspondances pour le segment à venir (supérieures à 30%), il les affiche dans la partie Correspondances. La première correspondance affichée est pré-sélectionnée.</p><img src=
+  "images/MatchesPane.png" name="graphics4" alt="Volet des correspondances" id="graphics4"
+  style="border: 0px solid ;"><br clear="left">
+
+  <p><br></p>
+
+  <p>Il existe des raccourcis clavier pour insérer celle-ci dans la ligne d'édition :</p>
 
   <ul>
     <li>Appuyez sur <code>Ctrl+I</code> pour l'insérer à la position du curseur ou...</li>
@@ -110,15 +121,15 @@
 
   <h3>Correspondances des glossaires et des dictionnaires</h3>
 
-  <p>Si OmegaT trouve des correspondances dans les glossaires et les dictionnaires, celles-ci seront affichées pour référence dans les volets «&nbsp;Glossaires&nbsp;» et «&nbsp;Dictionnaires&nbsp;».&nbsp;</p><a name="searches" id="searches"></a>
+  <p>Si OmegaT trouve des correspondances dans les glossaires et les dictionnaires, celles-ci seront affichées pour référence dans les volets «&nbsp;Glossaires&nbsp;» et «&nbsp;Dictionnaires&nbsp;».</p><a name="searches" id="searches"></a>
 
   <h3>Utilisation des recherches</h3>
 
-  <p>OmegaT vous donne accès à de puissantes fonctions de recherche. Ouvrez la fenêtre de recherche avec <code>Ctrl+F</code>, et entrez le mot ou l'expression que vous souhaitez rechercher dans la zone «&nbsp;Rechercher&nbsp;». Vous pouvez également sélectionner un mot ou une phrase dans le champ d'édition (texte cible du segment actif) et appuyer sur <code>Ctrl+F</code>. La partie sélectionnée sera automatiquement affichée dans le champ de recherche.</p>
+  <p>OmegaT vous donne accès à de puissantes fonctions de recherche. Ouvrez la fenêtre de recherche avec <code>Ctrl+F</code>, et entrez le mot ou l'expression que vous souhaitez rechercher dans la zone «&nbsp;Rechercher&nbsp;». Vous pouvez également sélectionner un mot ou une phrase n'importe où dans le volet d'édition est appuyer sur <code>Ctrl+F</code>. La partie sélectionnée sera automatiquement affichée dans le champ de recherche.</p>
 
   <h3>Utilisation de Google Translate</h3>
 
-  <p>Dans le volet Google Translate, vous obtiendrez automatiquement une suggestion de traduction pour le segment actuel. Vous pouvez insérer cette suggestion dans le segment cible avec <code>Ctrl+M</code>.<br></p>
+  <p>Dans le volet Google Translate, vous obtiendrez automatiquement une suggestion de traduction pour le segment actuel. Si vous appuyez sur <code>Ctrl+M</code>, elle remplacera le contenu actuel du segment cible.<br></p>
 
   <p><a name="create_trans" id="create_trans"></a></p>
 
@@ -144,24 +155,22 @@
 
   <p>Voici comment OmegaT va afficher ce segment, avec la traduction en  afrikaans :</p><br>
 
-  <p><img src="images/tagged_segment.png" alt="" border="0" height="150" width=
-  "592"></p><br>
+  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
 
   <p>Lorsque OmegaT créera le document traduit, le balisage HTML sera comme ceci :</p>
 
-  <p><img src="images/tagged_segment_target.png" alt="" border="0" height="122"
-  width="592"></p><a name="tag_verif" id="tag_verif"></a>
+  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
+  "tag_verif" id="tag_verif"></a>
 
   <h3>Validation des balises</h3>
 
   <p>OmegaT ne détecte pas automatiquement les erreurs de balises dans un fichier traduit. Avant de livrer les documents traduits, vérifier que ceux-ci ne contiennent pas d'erreurs de balises.</p>
 
-  <p>Pour ceci, utilisez le menu  <strong>Outils → Valider les balises</strong>. Une table contenant les segments où les balises en source ne correspondent pas aux balises en cible s'affichera. Cliquez sur le numéro du segment. OmegaT affichera automatiquement le segment choisi dans la fenêtre d'édition où vous pourrez modifier les balises dans la ligne d'édition. Appuyez sur <span style="font-weight: bold;">Entrée</span> pour valider le segment corrigé et vérifiez la correction en appuyant à nouveau sur <span style=
-  "font-weight: bold;">Control-T</span>.</p>
+  <p>Pour ceci, utilisez le menu  <strong>Outils → Valider les balises</strong>. Une table contenant les segments où les balises en source ne correspondent pas aux balises en cible s'affichera. Cliquez sur le numéro du segment. OmegaT affichera automatiquement le segment choisi dans la fenêtre d'édition où vous pourrez modifier les balises dans la ligne d'édition. Appuyez sur <code>Entrée</code> pour valider le segment corrigé et vérifiez la correction en appuyant à nouveau sur <code>Control-T</code>.</p>
 
-  <p>Des erreurs de balises peuvent empêcher que le fichiers s'ouvre dans certains cas. Il est donc nécessaire de s'assurer que les erreurs de balises sont corrigées avant de créer les fichiers traduits. Il sera ensuite possible d'ouvrir le document dans l'application associée pour en vérifier le format et les styles.</p>
+  <p>Des erreurs de balises peuvent empêcher que le fichier s'ouvre dans certains cas. Il est donc nécessaire de s'assurer que les erreurs de balises sont corrigées avant de créer les fichiers traduits. Il sera ensuite possible d'ouvrir le document dans l'application associée pour en vérifier le format et les styles.</p>
 
-  <p>Dans certains langages de programmation(ex. : PHP, C), des balises spéciales sont utilisées comme espaces réservés dans des chaînes utilisées en combinaison avec la fonction printf. OmegaT peut détecter et valider ces balises si vous l'y autorisez. Sélectionnez <strong>Options→ Validation des balises...</a> </strong> dans le menu. Vous pouvez choisir entre une validation simple et complète. Dans la validation simple, seules les variantes simples des valeurs d'espaces réservés sont utilisés. Cela est utile lorsque le code source ne contient pas les espaces réservés les plus expressifs et les plus complexes et que vous obtenez beaucoup de faux positifs.</p>
+  <p>Dans certains langages de programmation(ex. : PHP, C), des balises spéciales sont utilisées comme espaces réservés dans des chaînes utilisées en combinaison avec la fonction printf. OmegaT peut détecter et valider ces balises si vous l'y autorisez. Sélectionnez <strong>Options→ Validation des balises...</strong> dans le menu. Vous pouvez choisir entre une validation simple et complète. Dans la validation simple, seules les variantes simples des valeurs d'espaces réservés sont utilisés. Cela est utile lorsque le code source ne contient pas les espaces réservés les plus expressifs et les plus complexes et que vous obtenez beaucoup de faux positifs.</p>
 
   <hr>
 </body>

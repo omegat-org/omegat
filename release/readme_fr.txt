@@ -1,4 +1,4 @@
-﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2010.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2010.
 
 ==============================================================================
   OmegaT 2.0, fichier « Lisez-moi »
@@ -37,7 +37,7 @@ Les principales fonctions d'OmegaT sont :
   - système de segmentation de texte flexible (basé sur la norme SRX)
   - recherche de termes dans le projet et dans les mémoires de référence
   - recherche de fichiers dans les formats acceptés dans n'importe quel dossier 
-  - correspondances automatiques
+  - correspondances partielles
   - gestion intelligente des projets incluant des structures complexes de dossiers
   - glossaires (vérifications terminologiques) 
   - prise en charge de vérificateurs orthographiques libres en temps réel
@@ -47,7 +47,7 @@ Les principales fonctions d'OmegaT sont :
   - localisation dans de nombreuses langues
 
 OmegaT prend en charge directement les formats de fichier suivants :
-  - texte pur
+  - texte brut
   - HTML et XHTML
   HTML Help Compiler
   - OpenDocument/OpenOffice.org

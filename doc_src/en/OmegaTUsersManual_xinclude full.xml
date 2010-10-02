@@ -24,12 +24,12 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_FormattedText.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_PlainText.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_TranslationMemories.xml" />
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="08_Regexp.xml" />
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="08_Searches.xml" />
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="09_Segmentation.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="08_Segmentation.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="09_Regexp.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="09_Searches.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="10_Dictionaries.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="10_Glossaries.xml" />
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="11_GoogleTranslate.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="11_MachineTranslation.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="12_Spellchecker.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="13_Miscelanea.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A1_Website.xml" />

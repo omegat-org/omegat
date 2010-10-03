@@ -16,12 +16,14 @@
           <secondary>Example</secondary>
         </indexterm></title>
 
-      <imageobject>
-        <imagedata fileref="images/search.png" width = "60%"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata fileref="images/search.png" width = "40%"/>
-      </imageobject>
+      <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/search.png" />
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/search.png" width = "40%"/>
+          </imageobject>
+      </mediaobject>
     </figure>
 
     <section>

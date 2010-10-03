@@ -18,12 +18,14 @@
   <figure id="editing.behaviour.options">
     <title>Editing behaviour options</title>
 
-    <imageobject>
-      <imagedata fileref="images/EditingBehaviourOptions.png" width = "60%"/>
-    </imageobject>
-     <imageobject role="fo">
-       <imagedata fileref="images/EditingBehaviourOptions.png" width = "40%"/>
-    </imageobject>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/EditingBehaviourOptions.png" />
+        </imageobject>
+         <imageobject role="fo">
+           <imagedata fileref="images/EditingBehaviourOptions.png" width = "40%"/>
+        </imageobject>
+      </mediaobject>
   </figure>
 
   <section id="automatic.match.insertion">

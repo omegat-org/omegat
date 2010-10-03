@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch11.google.granslate">
+<chapter id="ch11.google.translate">
   <title>Machine Translation<indexterm class="singular">
       <primary>Machine Translation</primary>
     </indexterm></title>
@@ -62,12 +62,14 @@
     <figure id="moby.dick">
       <title>Google Translate - example</title>
 
-      <imageobject>
-        <imagedata fileref="images/MobyDick.png" width = "60%"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata fileref="images/MobyDick.png" width = "40%"/>
-      </imageobject>
+      <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/MobyDick.png" />
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/MobyDick.png" width = "40%"/>
+          </imageobject>
+      </mediaobject>
     </figure>
 
     <para>The Spanish translation is better than the Slovenian. Note
@@ -179,7 +181,7 @@
     <itemizedlist>
       <listitem>
         <para>Are you online? You need to be online to be able to use a MT
-        tool..</para>
+        tool.</para>
       </listitem>
     </itemizedlist>
 
@@ -190,6 +192,5 @@
       </listitem>
     </itemizedlist>
 
-    <itemizedlist></itemizedlist>
   </section>
 </chapter>

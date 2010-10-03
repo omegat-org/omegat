@@ -556,12 +556,14 @@
     <figure id="regerx.tester">
       <title>Regex Tester</title>
 
-      <imageobject>
-        <imagedata fileref="images/RegexTester.png" width = "60%"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata fileref="images/RegexTester.png" width = "40%"/>
-      </imageobject>
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/RegexTester.png" />
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/RegexTester.png" width = "40%"/>
+          </imageobject>
+      </mediaobject>
     </figure>
     <para>See <ulink url="http://weitz.de/regex-coach/">The Regex
     Coach</ulink> for Windows,Linux, Mac, FreeBSD versions of a stand-alone

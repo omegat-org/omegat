@@ -113,12 +113,14 @@
           <seealso>Dictionaries</seealso>
         </indexterm>Merriam Webster dictionary - use</title>
 
-      <imageobject>
-        <imagedata fileref="images/DictMerriamWebster.png" width = "60%"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata fileref="images/DictMerriamWebster.png" width = "40%"/>
-      </imageobject>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/DictMerriamWebster.png" />
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/DictMerriamWebster.png" width = "40%"/>
+          </imageobject>
+        </mediaobject>
     </figure>
   </section>
 

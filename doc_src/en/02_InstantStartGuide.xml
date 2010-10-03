@@ -83,12 +83,14 @@
             <secondary>Project dialog window - figure</secondary>
           </indexterm>New project - dialog window</title>
 
-       <imageobject>
-            <imagedata fileref="images/NewProject.png" width = "60%"/>
-       </imageobject>
-       <imageobject role="fo">
-            <imagedata fileref="images/NewProject.png" width = "40%"/>
-       </imageobject>
+       <mediaobject>
+         <imageobject role="html">
+            <imagedata fileref="images/NewProject.png" />
+         </imageobject>
+         <imageobject role="fo">
+              <imagedata fileref="images/NewProject.png" width = "40%"/>
+         </imageobject>
+       </mediaobject>
 
       </figure>
 
@@ -352,13 +354,15 @@
         <figure>
           <title>Matches pane</title>
 
- 
-       <imageobject>
-          <imagedata fileref="images/MatchesPane.png" width = "60%"/>
-       </imageobject>
-       <imageobject role="fo">
-          <imagedata fileref="images/MatchesPane.png" width = "40%"/>
-      </imageobject>
+    	  <mediaobject>
+		    <imageobject role="html">
+			   <imagedata fileref="images/MatchesPane.png" />
+		    </imageobject>
+		    <imageobject role="fo">
+			   <imagedata fileref="images/MatchesPane.png" width = "40%"/>
+		   </imageobject>
+		  </mediaobject>
+
         </figure>
 
         <para>If <application>OmegaT</application> finds any fuzzy matches
@@ -565,13 +569,14 @@
             <primary>Segment, Source and Target - figure</primary>
           </indexterm>HTML segment</title>
 
-
-            <imageobject>
-              <imagedata fileref="images/tagged_segment.png" width = "60%"/>
-            </imageobject>
-            <imageobject role="fo">
-              <imagedata fileref="images/tagged_segment.png" width = "40%"/>
-            </imageobject>
+            <mediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/tagged_segment.png" />
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata fileref="images/tagged_segment.png" width = "40%"/>
+                </imageobject>
+            </mediaobject>
       </figure>
 
       <para>When <application>OmegaT</application> has created the translated
@@ -580,12 +585,14 @@
       <figure id="fig.tagged.segment.target">
         <title>Target HTML segment</title>
 
-      <imageobject>
-         <imagedata fileref="images/tagged_segment_target.png" width = "60%"/>
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata fileref="images/tagged_segment_target.png" width = "40%"/>
-      </imageobject>
+            <mediaobject>
+              <imageobject role="html">
+                 <imagedata fileref="images/tagged_segment_target.png" />
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="images/tagged_segment_target.png" width = "40%"/>
+              </imageobject>
+            </mediaobject>
       </figure>
     </section>
 

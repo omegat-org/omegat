@@ -92,12 +92,14 @@
       <figure id="OmegaT.projects.and.subdirectories">
         <title>OmegaT projects and subdirectories</title>
 
-        <imageobject>
-          <imagedata fileref="images/OmegaT_projects_and_subdirectories.png" width = "60%"/>
-        </imageobject>
-	    <imageobject role="fo">
-          <imagedata fileref="images/OmegaT_projects_and_subdirectories.png" width = "40%"/>
-        </imageobject>
+        <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/OmegaT_projects_and_subdirectories.png" />
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="images/OmegaT_projects_and_subdirectories.png" width = "40%"/>
+            </imageobject>
+        </mediaobject>
       </figure>
 
       <para>Selecting the item with the <application>OmegaT</application> icon
@@ -108,12 +110,14 @@
       <figure id="OmegaT.project">
         <title>OmegaT project</title>
 
-        <imageobject>
-          <imagedata fileref="images/Omegatproject.png" width = "60%"/>
-        </imageobject>
-        <imageobject role="fo">
-          <imagedata fileref="images/Omegatproject.png" width = "40%"/>
-        </imageobject>
+        <mediaobject>    
+            <imageobject role="html">
+              <imagedata fileref="images/Omegatproject.png"/>
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="images/Omegatproject.png" width = "40%"/>
+            </imageobject>
+        </mediaobject>
       </figure>
 
       <para>All the subdirectories will be empty initially. .</para>

@@ -281,14 +281,16 @@
         <secondary>Main window</secondary>
       </indexterm></title>
 
-    <imageobject>
-      <title><application>OmegaT</application> main window</title>
-      <imagedata fileref="images/OmegaT_panes.png" width = "60%"/>
-    </imageobject>
-    <imageobject role="fo">
-      <title><application>OmegaT</application> main window</title>
-      <imagedata fileref="images/OmegaT_panes.png" width = "40%"/>
-    </imageobject>
+    <mediaobject>
+        <imageobject role="html">
+          <title><application>OmegaT</application> main window</title>
+          <imagedata fileref="images/OmegaT_panes.png" />
+        </imageobject>
+        <imageobject role="fo">
+          <title><application>OmegaT</application> main window</title>
+          <imagedata fileref="images/OmegaT_panes.png" width = "40%"/>
+        </imageobject>
+    </mediaobject>
     <para>Main window consists of several panes, main menu and a status bar.
     You can change the position of any pane or even undock it to a separate
     window by dragging the pane by its name. Depending on the pane status,
@@ -308,8 +310,8 @@
           <row>
             <entry>
               <inlinemediaobject>
-                <imageobject>
-                  <imagedata fileref="images/Minimize.gif" width = "60%"/>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" />
                 </imageobject>
                 <imageobject role="fo">
                   <imagedata fileref="images/Minimize.gif" width = "40%"/>
@@ -324,8 +326,8 @@
           <row>
             <entry>
               <inlinemediaobject>
-                <imageobject>
-                  <imagedata fileref="images/Maximize.gif"  width = "60%"/>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" />
                 </imageobject>
                 <imageobject role="fo">
                   <imagedata fileref="images/Maximize.gif" width = "40%"/>
@@ -339,8 +341,8 @@
           <row>
             <entry>
               <inlinemediaobject>
-                <imageobject>
-                  <imagedata fileref="images/undock.gif" width = "60%"/>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" />
                 </imageobject>
                 <imageobject role="fo">
                   <imagedata fileref="images/undock.gif" width = "40%"/>
@@ -354,8 +356,8 @@
           <row>
             <entry>
               <inlinemediaobject>
-                <imageobject>
-                  <imagedata fileref="images/dock.gif" width = "60%"/>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" />
                 </imageobject>
                 <imageobject role="fo">
                   <imagedata fileref="images/dock.gif" width = "40%"/>
@@ -444,12 +446,14 @@
               <secondary>Matches pane - figure</secondary>
             </indexterm>Matches pane</title>
 
-          <imageobject>
-            <imagedata fileref="images/MatchesPane.png" width = "60%"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="images/MatchesPane.png" width = "40%"/>
-          </imageobject>
+            <mediaobject>
+              <imageobject>
+                <imagedata fileref="images/MatchesPane.png" />
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="images/MatchesPane.png" width = "40%"/>
+              </imageobject>
+          </mediaobject>
         </figure>
       </para>
 
@@ -529,12 +533,14 @@
               <secondary>Glossary window - figure</secondary>
             </indexterm>Glossary pane</title>
 
-          <imageobject>
-            <imagedata fileref="images/Glossary_pane.png" width = "60%"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="images/Glossary_pane.png" width = "40%"/>
-          </imageobject>
+          <mediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/Glossary_pane.png" />
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="images/Glossary_pane.png" width = "40%"/>
+              </imageobject>
+          </mediaobject>
         </figure>
       </para>
 
@@ -742,12 +748,14 @@
               <seealso>Tags</seealso>
             </indexterm>Tag validation window</title>
 
-          <imageobject>
-            <imagedata fileref="images/TagValidator.png" width = "60%"/>
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="images/TagValidator.png" width = "40%"/>
-          </imageobject>
+          <mediaobject>
+              <imageobject role="html">
+                <imagedata fileref="images/TagValidator.png" />
+              </imageobject>
+              <imageobject role="fo">
+                <imagedata fileref="images/TagValidator.png" width = "40%"/>
+              </imageobject>
+          </mediaobject>
         </figure></para>
 
       <para>The tags are highlighted in bold blue for easy comparison between
@@ -824,12 +832,16 @@
           </indexterm></title>
 
  
-            <imageobject>
-              <imagedata fileref="images/MatchStatistics.png" width = "60%"/>
-            </imageobject>
-             <imageobject role="fo">
-              <imagedata fileref="images/MatchStatistics.png" width = "40%"/>
-            </imageobject>
+            <!--
+            <mediaobject> 
+                <imageobject role="html">
+                  <imagedata fileref="images/MatchStatistics.png" />
+                </imageobject>
+                 <imageobject role="fo">
+                  <imagedata fileref="images/MatchStatistics.png" width = "40%"/>
+                </imageobject>
+            </mediaobject>
+            -->
       </figure>
 
       <para>Spaces between segments are not taken into account in the last

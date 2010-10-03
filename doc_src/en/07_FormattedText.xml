@@ -265,12 +265,14 @@
     <figure id="tag.validation">
       <title>Tag validation entry</title>
 
-      <imageobject>
-        <imagedata fileref="images/TagValidation.png" width = "60%"/>
-      </imageobject>
-      <imageobject role="fo">
-          <imagedata fileref="images/TagValidation.png" width = "40%"/>
-      </imageobject>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/TagValidation.png" />
+          </imageobject>
+          <imageobject role="fo">
+              <imagedata fileref="images/TagValidation.png" width = "40%"/>
+          </imageobject>
+        </mediaobject>
     </figure>
 
     <para>The tags are highlighted in bold blue for easy comparison between

@@ -32,8 +32,8 @@
     displayed in the Glossary pane:</para>
 
     <mediaobject>
-      <imageobject>
-        <imagedata fileref="images/Glossary_pane.png" width = "60%"/>
+      <imageobject role="html">
+        <imagedata fileref="images/Glossary_pane.png" />
       </imageobject>
       <imageobject role="fo">
         <imagedata fileref="images/Glossary_pane.png" width = "40%"/>
@@ -154,8 +154,8 @@
     </itemizedlist>
 
     <mediaobject>
-      <imageobject>
-        <imagedata fileref="images/saveglossary.png" width = "60%"/>
+      <imageobject role="html">
+        <imagedata fileref="images/saveglossary.png" />
       </imageobject>
       <imageobject role="fo">
         <imagedata fileref="images/saveglossary.png" width = "40%"/>

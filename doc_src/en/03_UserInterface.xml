@@ -771,7 +771,7 @@
       tag manipulations are necessary and are benign, some will cause problems
       when the translated document is created. Tags generally represent some
       kind of formatting in the original text. Simplifying the original text
-      formating greatly contributes to reducing the number of tags.</para>
+      formatting greatly contributes to reducing the number of tags.</para>
     </section>
 
     <section>

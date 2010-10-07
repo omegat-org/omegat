@@ -54,7 +54,7 @@ OmegaT admite os seguintes formatos de ficheiro:
   - texto plano
   - HTML e XHTML
   - Compilador de axuda HTML
-  - OpenDocument/OpenOffice.org
+  OpenDocument/OpenOffice.org
   - Paquetes de recursos Java (.propierties)
   - Ficheiros Ini (ficheiros con pares chave=valor en calquera codificación=
   - Ficheiros PO
@@ -62,7 +62,7 @@ OmegaT admite os seguintes formatos de ficheiro:
   - Ficheiros OpenXML de Microsoft
   - Ficheiros XLIFF monolingüaxe de Okapi
   - QuarkXPress CopyFlowGold
-  - Ficheiros de subtítulo (SRT)
+  Ficheiros de subtítulo (SRT)
   - ResX
   - Recurso Android
   - LaTeX
@@ -70,6 +70,7 @@ OmegaT admite os seguintes formatos de ficheiro:
   - Axuda e manuais
   - Ficheiros de recursos de Windows RC
   - Mozilla DTD
+  - DokuWiki
 
 OmegaT pode ser personalizado para que admita outros ficheiros do mesmo modo.
 
@@ -210,6 +211,7 @@ Entre os contribuidores anteriores están:
 
 Código contribuído por
   Zoltan Bartko
+  Volker Berlin
   Didier Briel (coordinador de lanzamento)
   Kim Bruning
   Alex Buloichik
@@ -217,6 +219,7 @@ Código contribuído por
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Maxym Mykhalchuk 
   Arno Peters
@@ -224,6 +227,7 @@ Código contribuído por
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Antonio Vilei
   Martin Wunderlich
 
 Outras contribucións feitas por

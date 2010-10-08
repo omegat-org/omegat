@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
                2009 Didier Briel
-               2010 Martin Fleurke, Antonio Vilei
+               2010 Martin Fleurke, Antonio Vilei, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +26,8 @@
 **************************************************************************/
 
 package org.omegat.core.search;
+
+import org.omegat.util.OConsts;
 
 /**
  * Storage for what to search for (search text and options).
@@ -64,6 +66,7 @@ public class SearchExpression {
         this.dateAfter = 0;
         this.searchDateBefore = false;
         this.dateBefore = 0;
+        this.numberOfResults = OConsts.ST_MAX_SEARCH_RESULTS;
 
     }
 
@@ -86,6 +89,7 @@ public class SearchExpression {
      * @param dateAfter The date after which the modification date has to be
      * @param searchDateBefore Search for translation segments modified before the given date
      * @param dateBefore The date before which the modification date has to be
+     * @param The maximum number of results
      */
     public SearchExpression(String  text,
                             String  rootDir,
@@ -103,7 +107,8 @@ public class SearchExpression {
                             boolean searchDateAfter,
                             long    dateAfter,
                             boolean searchDateBefore,
-                            long    dateBefore
+                            long    dateBefore,
+                            int     numberOfResults
                             )
     {
         this.text = text;
@@ -123,6 +128,7 @@ public class SearchExpression {
         this.dateAfter = dateAfter;
         this.searchDateBefore = searchDateBefore;
         this.dateBefore = dateBefore;
+        this.numberOfResults = numberOfResults;
     }
 
     public String  text;
@@ -142,4 +148,5 @@ public class SearchExpression {
     public long    dateAfter;
     public boolean searchDateBefore;
     public long    dateBefore;
+    public int     numberOfResults;
 }

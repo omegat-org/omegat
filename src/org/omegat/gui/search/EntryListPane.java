@@ -105,9 +105,12 @@ class EntryListPane extends JTextPane {
     /**
      * Show search result for user
      */
-    public void displaySearchResult(List<SearchResultEntry> entries) {
+    public void displaySearchResult(List<SearchResultEntry> entries,
+                                    int numberOfResults) {
         UIThreadsUtil.mustBeSwingThread();
 
+        this.numberOfResults = numberOfResults;
+        
         currentlyDisplayedMatches = null;
         m_entryList.clear();
         m_offsetList.clear();
@@ -138,9 +141,9 @@ class EntryListPane extends JTextPane {
                 addMessage(m_stringBuf, OStrings.getString("ST_NOTHING_FOUND"));
             }
 
-            if (entries.size() >= OConsts.ST_MAX_SEARCH_RESULTS) {
+            if (entries.size() >= numberOfResults) {
                 addMessage(m_stringBuf, StaticUtils.format(OStrings.getString("SW_MAX_FINDS_REACHED"),
-                        new Object[] { new Integer(OConsts.ST_MAX_SEARCH_RESULTS) }));
+                        new Object[] { new Integer(numberOfResults) }));
             }
 
             for (SearchResultEntry e : entries) {
@@ -252,7 +255,7 @@ class EntryListPane extends JTextPane {
     }
 
     public void reset() {
-        displaySearchResult(null);
+        displaySearchResult(null, 0);
     }
 
     public int getNrEntries() {
@@ -266,4 +269,5 @@ class EntryListPane extends JTextPane {
     private final List<Integer> m_entryList = new ArrayList<Integer>();
     private final List<Integer> m_offsetList = new ArrayList<Integer>();
     private DisplayMatches currentlyDisplayedMatches;
+    private int numberOfResults;
 }

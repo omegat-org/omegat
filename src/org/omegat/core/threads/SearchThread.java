@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
                2009 Didier Briel
-               2010 Martin Fleurke, Antonio Vilei
+               2010 Martin Fleurke, Antonio Vilei, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,7 +38,6 @@ import org.omegat.core.search.SearchResultEntry;
 import org.omegat.filters2.TranslationException;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.Log;
-import org.omegat.util.OConsts;
 
 /**
  * Each search window has its own search thread to actually do the searching.
@@ -91,6 +90,8 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
      *            search for translation segments modified before the given date
      * @param dateBefore
      *            the date before which the modification date has to be
+     * @param  numberOfResults
+     *            the maximum number of results returned by the thread
      * @internal The main loop (in the run method) waits for the variable
      *           m_searching to be set to true. This variable is set to true in
      *           this function on successful setting of the search parameters.
@@ -100,13 +101,14 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
             boolean caseSensitive, boolean tm, boolean allResults,
             boolean searchSource, boolean searchTarget, boolean searchAuthor,
             String author, boolean searchDateAfter, long dateAfter,
-            boolean searchDateBefore, long dateBefore) {
+            boolean searchDateBefore, long dateBefore, int numberOfResults) {
         m_window = window;
 
         m_searchExpression = new SearchExpression(text, rootDir, recursive,
                 exact, keyword, regex, caseSensitive, tm, allResults,
                 searchSource, searchTarget, searchAuthor, author,
-                searchDateAfter, dateAfter, searchDateBefore, dateBefore);
+                searchDateAfter, dateAfter, searchDateBefore, dateBefore,
+                numberOfResults);
     }
 
     // /////////////////////////////////////////////////////////
@@ -117,7 +119,7 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
             try {
                 List<SearchResultEntry> resultsList = new Searcher(
                         Core.getProject(), this).getSearchResults(
-                        m_searchExpression, OConsts.ST_MAX_SEARCH_RESULTS);
+                        m_searchExpression);
                 
                 if (stopped) {
                     return;

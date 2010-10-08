@@ -1,10 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 1 
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   0 Bugfix
 ----------------------------------------------------------------------
 2.2.0 update 1 vs. 2.2.0
+
+  Implemented requests:
+
+  - Make the number of search results a parameter
+  http://sourceforge.net/support/tracker.php?aid=3084009
+
 
   Other enhancements:
 

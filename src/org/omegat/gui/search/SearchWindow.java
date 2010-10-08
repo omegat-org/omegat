@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Henry Pijffers
                2009 Didier Briel
-               2010 Martin Fleurke, Antonio Vilei
+               2010 Martin Fleurke, Antonio Vilei, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -59,6 +59,10 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 import javax.swing.SpinnerDateModel;
+import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.text.Document;
 import javax.swing.text.PlainDocument;
 import javax.swing.text.StringContent;
@@ -69,6 +73,7 @@ import org.omegat.core.search.SearchResultEntry;
 import org.omegat.core.threads.SearchThread;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
@@ -196,6 +201,24 @@ public class SearchWindow extends JFrame
         bDB.add(m_dateToSpinner);
         bDB.add(m_dateToButton);
 
+        //Box Number of results
+        m_numberModel = new SpinnerNumberModel(OConsts.ST_MAX_SEARCH_RESULTS,
+                                          1, Integer.MAX_VALUE, 1);
+        m_numberOfResults = new JSpinner(m_numberModel);
+        m_numberLabel = new JLabel();
+        bNbr = Box.createHorizontalBox();
+        bNbr.add(m_numberLabel);
+        bNbr.add(m_numberOfResults);
+        bNbr.add(Box.createHorizontalStrut(H_MARGIN));
+        bNbr.add(Box.createHorizontalGlue());
+        // Dummy field to limit previous field size
+        m_dummy = new JSpinner();
+        m_dummy.setVisible(false);
+        bNbr.add(m_dummy);
+        bNbr.add(Box.createHorizontalStrut(H_MARGIN));
+        bNbr.add(Box.createHorizontalGlue());
+        bNbr.add(m_dummy);
+        
         m_viewer = new EntryListPane();
         JScrollPane viewerScroller = new JScrollPane(m_viewer);
 
@@ -265,6 +288,10 @@ public class SearchWindow extends JFrame
         //date search
         gridbag.setConstraints(bDB, c);
         cp.add(bDB);
+
+        // number of results
+        gridbag.setConstraints(bNbr, c);
+        cp.add(bNbr);
 
         // advanced options button
         gridbag.setConstraints(bAO, c);
@@ -464,6 +491,13 @@ public class SearchWindow extends JFrame
             }
         });
 
+        m_numberOfResults.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+               // move focus to search edit field
+                m_searchField.requestFocus();
+            }
+        });
+
         updateUIText();
         loadPreferences();
 
@@ -616,6 +650,8 @@ public class SearchWindow extends JFrame
                                   Boolean.toString(m_dateToCB.isSelected()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_DATE_TO_VALUE,
                                   m_dateFormat.format(m_dateToModel.getDate()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
+                                  ((Integer)m_numberOfResults.getValue()));
 
         // search dir options
         Preferences.setPreference(Preferences.SEARCHWINDOW_DIR, m_dirField.getText());
@@ -659,7 +695,8 @@ public class SearchWindow extends JFrame
     public void displaySearchResult(final List<SearchResultEntry> entries) {
         UIThreadsUtil.executeInSwingThread(new Runnable() {
             public void run() {
-                m_viewer.displaySearchResult(entries);
+                m_viewer.displaySearchResult(entries,
+                                      ((Integer)m_numberOfResults.getValue()));
                 m_resultsLabel.setText(StaticUtils.format(
                         OStrings.getString("SW_NR_OF_RESULTS"),
                         new Object[] { new Integer(m_viewer.getNrEntries()) }));
@@ -780,7 +817,8 @@ public class SearchWindow extends JFrame
                                    m_dateFromCB.isSelected(),
                                    m_dateFromModel.getDate().getTime(),
                                    m_dateToCB.isSelected(),
-                                   m_dateToModel.getDate().getTime()
+                                   m_dateToModel.getDate().getTime(),
+                                   ((Integer)m_numberOfResults.getValue())
                                    );
        
         m_thread.start();        
@@ -902,6 +940,11 @@ public class SearchWindow extends JFrame
             m_dateToCB.setSelected(false);
         }
 
+        // Number of results
+        m_numberOfResults.setValue(Preferences.getPreferenceDefault
+                (Preferences.SEARCHWINDOW_NUMBER_OF_RESULTS,
+                OConsts.ST_MAX_SEARCH_RESULTS));
+
         // if advanced options are enabled (e.g. author/date search),
         // let the user see them anyway. This is important because
         // search results will be affected by these settings
@@ -915,6 +958,7 @@ public class SearchWindow extends JFrame
 
         bAB.setVisible(m_advancedVisible);
         bDB.setVisible(m_advancedVisible);
+        bNbr.setVisible(m_advancedVisible);
 
         m_authorField.setEditable(m_authorCB.isSelected());
         m_dateFromSpinner.setEnabled(m_dateFromCB.isSelected());
@@ -943,6 +987,7 @@ public class SearchWindow extends JFrame
         Mnemonics.setLocalizedText(m_dateFromCB, OStrings.getString("SW_CHANGED_AFTER"));
         Mnemonics.setLocalizedText(m_dateToCB, OStrings.getString("SW_CHANGED_BEFORE"));
         Mnemonics.setLocalizedText(m_dateToButton, OStrings.getString("SW_NOW"));
+        Mnemonics.setLocalizedText(m_numberLabel, OStrings.getString("SW_NUMBER"));
 
         Mnemonics.setLocalizedText(m_caseCB, OStrings.getString("SW_CASE_SENSITIVE"));
         Mnemonics.setLocalizedText(m_tmSearchCB, OStrings.getString("SW_SEARCH_TM"));
@@ -1086,6 +1131,12 @@ public class SearchWindow extends JFrame
     private JButton      m_dateToButton;
     private JSpinner     m_dateToSpinner;
     private SpinnerDateModel m_dateToModel;
+
+    private Box      bNbr;
+    private JLabel   m_numberLabel;
+    private JSpinner m_numberOfResults;
+    private SpinnerModel m_numberModel;
+    private JSpinner m_dummy;
 
     private JCheckBox m_caseCB;
     private JCheckBox m_tmSearchCB;

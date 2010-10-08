@@ -48,7 +48,6 @@ import org.omegat.core.data.TransMemory;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
-import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -86,7 +85,7 @@ public class Searcher
      * @param maxResults maximum number of search results
      * @return list of search results
      */
-    public List<SearchResultEntry> getSearchResults(SearchExpression expression, int maxResults)
+    public List<SearchResultEntry> getSearchResults(SearchExpression expression)
             throws TranslationException, PatternSyntaxException, IOException
     {
         String text = expression.text;
@@ -98,7 +97,7 @@ public class Searcher
 
         m_entrySet = null; // HP
 
-        m_maxResults = maxResults;
+        m_maxResults = expression.numberOfResults;
 
         m_searchDir = expression.rootDir;
         m_searchRecursive = expression.recursive;
@@ -233,7 +232,7 @@ public class Searcher
         IProject dataEngine = m_project;
         for (int i = 0; i < m_project.getAllEntries().size(); i++) {
             // stop searching if the max. nr of hits has been reached
-            if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+            if (m_numFinds >= m_maxResults) {
                 break;
             }
             // get the source and translation of the next entry
@@ -255,7 +254,7 @@ public class Searcher
             for (Map.Entry<String, TransEntry> en : m_project
                     .getOrphanedSegments().entrySet()) {
                 // stop searching if the max. nr of hits has been reached
-                if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                if (m_numFinds >= m_maxResults) {
                     break;
                 }
 
@@ -277,7 +276,7 @@ public class Searcher
                     for (TransMemory tm : tmEn.getValue()) {
                         // stop searching if the max. nr of hits has been
                         // reached
-                        if (m_numFinds >= OConsts.ST_MAX_SEARCH_RESULTS) {
+                        if (m_numFinds >= m_maxResults) {
                             break;
                         }
 

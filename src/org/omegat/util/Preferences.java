@@ -102,7 +102,8 @@ public class Preferences
     public static final String SEARCHWINDOW_DATE_FROM        = "search_window_date_from";        
     public static final String SEARCHWINDOW_DATE_FROM_VALUE  = "search_window_date_from_value";  
     public static final String SEARCHWINDOW_DATE_TO          = "search_window_date_to";          
-    public static final String SEARCHWINDOW_DATE_TO_VALUE    = "search_window_date_to_value";    
+    public static final String SEARCHWINDOW_DATE_TO_VALUE    = "search_window_date_to_value";
+    public static final String SEARCHWINDOW_NUMBER_OF_RESULTS= "search_window_number_of_results";
     public static final String SEARCHWINDOW_DIR              = "search_window_dir";              
     public static final String SEARCHWINDOW_SEARCH_FILES     = "search_window_search_files";     
     public static final String SEARCHWINDOW_RECURSIVE        = "search_window_search_recursive"; 

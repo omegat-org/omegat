@@ -40,7 +40,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 public class DocBookDialect extends DefaultXMLDialect
 {
     public static final Pattern DOCBOOK_PUBLIC_DTD = 
-            Pattern.compile("-//OASIS//DTD DocBook.*");                         // NOI18N
+            Pattern.compile("-//OASIS//DTD DocBook.*");                         
     public static final Pattern DB5_XMLNS = Pattern.compile(
             "xmlns(:\\w+)?=\"http://docbook.org/ns/docbook\"");
     private String nsString = null; // the value of the NS, if any
@@ -51,63 +51,63 @@ public class DocBookDialect extends DefaultXMLDialect
         
         defineParagraphTags(new String[]
         {
-            "book",                                                             // NOI18N
-            "bookinfo",                                                         // NOI18N
-            "title",                                                            // NOI18N
-            "subtitle",                                                         // NOI18N
-            "authorgroup",                                                      // NOI18N
-            "author",                                                           // NOI18N
-            "firstname",                                                        // NOI18N
-            "surname",                                                          // NOI18N
-            "affiliation",                                                      // NOI18N
-            "orgname",                                                          // NOI18N
-            "address",                                                          // NOI18N
-            "email",                                                            // NOI18N
-            "edition",                                                          // NOI18N
-            "pubdate",                                                          // NOI18N
-            "copyright",                                                        // NOI18N
-            "year",                                                             // NOI18N
-            "holder",                                                           // NOI18N
-            "isbn",                                                             // NOI18N
-            "keywordset",                                                       // NOI18N
-            "keyword",                                                          // NOI18N
-            "preface",                                                          // NOI18N
-            "title",                                                            // NOI18N
-            "para",                                                             // NOI18N
-            "chapter",                                                          // NOI18N
-            "table",                                                            // NOI18N
-            "tgroup",                                                           // NOI18N
-            "thead",                                                            // NOI18N
-            "tbody",                                                            // NOI18N
-            "row",                                                              // NOI18N
-            "entry",                                                            // NOI18N
-            "revhistory",                                                       // NOI18N
-            "revision",                                                         // NOI18N
-            "revnumber",                                                        // NOI18N
-            "date",                                                             // NOI18N
-            "authorinitials",                                                   // NOI18N
-            "revremark",                                                        // NOI18N
-            "itemizedlist",                                                     // NOI18N
-            "listitem",                                                         // NOI18N
-            "member",                                                           // NOI18N
+            "book",                                                             
+            "bookinfo",                                                         
+            "title",                                                            
+            "subtitle",                                                         
+            "authorgroup",                                                      
+            "author",                                                           
+            "firstname",                                                        
+            "surname",                                                          
+            "affiliation",                                                      
+            "orgname",                                                          
+            "address",                                                          
+            "email",                                                            
+            "edition",                                                          
+            "pubdate",                                                          
+            "copyright",                                                        
+            "year",                                                             
+            "holder",                                                           
+            "isbn",                                                             
+            "keywordset",                                                       
+            "keyword",                                                          
+            "preface",                                                          
+            "title",                                                            
+            "para",                                                             
+            "chapter",                                                          
+            "table",                                                            
+            "tgroup",                                                           
+            "thead",                                                            
+            "tbody",                                                            
+            "row",                                                              
+            "entry",                                                            
+            "revhistory",                                                       
+            "revision",                                                         
+            "revnumber",                                                        
+            "date",                                                             
+            "authorinitials",                                                   
+            "revremark",                                                        
+            "itemizedlist",                                                     
+            "listitem",                                                         
+            "member",                                                           
         });
         
         defineOutOfTurnTags(new String[]
         {
-            "indexterm",                                                        // NOI18N
+            "indexterm",                                                        
         });
 
         definePreformatTags(new String[]
         {
-            "screen",                                                           // NOI18N
-            "programlisting",                                                   // NOI18N
+            "screen",                                                           
+            "programlisting",                                                   
         });
         
         defineTranslatableAttributes(new String[]
         {        
-                "url",                                                          // NOI18N
-                "lang",                                                         // NOI18N
-                "xml:lang"                                                      // NOI18N
+                "url",                                                          
+                "lang",                                                         
+                "xml:lang"                                                      
         });                                                 
         
     }

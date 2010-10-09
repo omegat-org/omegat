@@ -2,7 +2,7 @@
  OmegaT 2.2.0 update 1 
 ----------------------------------------------------------------------
   4 Enhancements
-  0 Bugfix
+  1 Bugfix
 ----------------------------------------------------------------------
 2.2.0 update 1 vs. 2.2.0
 
@@ -11,12 +11,15 @@
   - Make the number of search results a parameter
   http://sourceforge.net/support/tracker.php?aid=3084009
 
-
   Other enhancements:
 
   - Galician localization updated to 2.1.9 (UI, Instant Start, Readme)
   - Italian localization updated to 2.2.0 (UI, Instant Start, Readme)
   - Japanese localization updated to 2.2.0 (UI, Instant Start, Readme)
+
+  Bug fixes:
+  - XML, wrong handling of comments and PI in translatable text
+  http://sourceforge.net/support/tracker.php?aid=1662205
 
 ----------------------------------------------------------------------
  OmegaT 2.2.0 

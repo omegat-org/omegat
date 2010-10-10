@@ -1,0 +1,180 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>OmegaT 2.0 取扱説明ガイド - 検索</title>
+</head>
+
+<body>
+  <h2>検索</h2>
+
+  <ul>
+    <li>
+      <p><a href="#searchwindow">文字列検索ウィンドウ</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#calling">検索の実行</a></p>
+        </li>
+
+        <li>
+          <p><a href="#location">検索する対象</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><a href="#searchmethods">検索方法</a></p>
+
+  <p><a href="#usingwildcards">ワイルドカードの使用</a></p>
+
+  <p><a href="#usingregularexpressions">正規表現の使用</a></p>
+
+  <p><a href="#display">検索結果表示</a></p>
+  <hr>
+
+  <h2><a name="searchwindow" id="searchwindow"></a>文字列検索ウィンドウ</h2>
+
+  <h3><a name="calling" id="calling"></a>検索の実行</h3>
+
+  <p>OmegaT は強力な検索機能を提供します。<strong>検索</strong>ウィンドウを呼び出すには<code>［Ctrl+F］</code>を押し、<strong>［検索文字列］</strong>欄に、検索する単語または語句を入力します。または、表示された全ての文字列から、単語や語句を選択して<code>［Ctrl+F］</code>を押します。すると<strong>［検索文字列］</strong>欄には自動的にその文字列が入力された状態になります。<strong>検索</strong>ウィンドウは、起動するごとに新しいウィンドウとして表示されます。デスクトップを散らかさないように、検索が終わったら閉じることを忘れないでください。</p>
+
+  <h3><a name="location" id="location"></a>検索する対象</h3>
+
+  <p>検索は、そのプロジェクトの原文と訳文の両方に対して行われます。以下を検索できます：</p>
+
+  <ul>
+    <li>
+      <p>プロジェクトのみ（デフォルトの設定）</p>
+    </li>
+
+    <li>
+      <p>プロジェクトと、tm フォルダにある翻訳メモリ（ <i>[参考翻訳メモリ検索]</i> をチェックしてください。）</p>
+    </li>
+
+    <li>
+      <p>1 ファイルのみ、または複数ファイルを含む 1 フォルダのみ（<i>［ファイル検索］</i>をチェックしてください）</p>
+    </li>
+  </ul>
+
+  <p>複数のファイルを検索する場合、対象となるファイルは、OmegaT が対応しているファイル形式に限定します。（<a href="filesToTranslate.html">ファイル形式</a> を参照してください）例えば、OmegaT は TMX ファイルの取り扱いには慣れていますが、検索対象にはそれらを含みません。</p>
+  <hr>
+
+  <h2><a name="searchmethods" id="searchmethods"></a>検索方法</h2>
+
+  <p>ラジオボタンで検索方法を選択してください。以下の 2 通りから選択できます：</p>
+
+  <table summary= "just formatting" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
+
+    <tr>
+      <td width="20%">
+        <p><strong>完全一致検索</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>指定した文字列を含む分節を検索します。</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>キーワード検索</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>指定した全てのキーワードを含む分節を検索します。指定した順序は問いません。</p>
+      </td>
+    </tr>
+  </table>
+
+  <p><strong>完全一致検索</strong> は、指定された文字列を"語句"として検索します。たとえば、複数の単語で指定した場合、それらの単語の並びを含む検索結果のみが表示されます。完全一致検索は、google などのインターネット検索エンジンの "完全一致（フレーズ）" 検索に似ています。複数の単語の登場順を問わないような検索を行いたい場合は、それらの単語を空白で区切って入力し、<strong>［キーワード検索］</strong>を選択してください。OmegaT は指定した単語を含むすべての分節の一覧が表示されます。キーワード検索は、同じく他の検索エンジンの "全てを含む" 検索（AND 検索）に似ています。</p>
+
+  <p>上記 2 つの方法いずれについても、以下の 3 つのオプションを指定できます：</p>
+
+  <table summary= "just formatting" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
+
+    <tr>
+      <td width="20%">
+        <p><strong>大文字と小文字を区別</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>指定した文字列そのものを検索します。指定しない場合は、大文字/小文字の区別が無視されます。</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>正規表現</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>検索文字列が正規表現として扱われます。（キーワード検索の場合は、複数の正規表現として扱われます。）</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>参考翻訳メモリ検索</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>すべての翻訳メモリの内容が検索対象に含められます。</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="usingwildcards" id="usingwildcards"></a>ワイルドカードの使用</h2>
+
+  <p>［完全一致検索］［キーワード検索］いずれの場合も、ワイルドカードとして「<code>*</code>」と「<code>?</code>」が使用できます。ワイルドカードを使用する場合は、<strong>［正規表現］</strong>にチェックが入っていないことを確認してください。そうでないと、これらを特別な正規表現文字として扱ってしまいます。</p>
+
+  <ul>
+    <li>
+      <p>「<strong>*</strong>」は 0 個以上の任意の文字と一致します。たとえば、検索文字列が「<strong>run*</strong>」である場合は、「<strong>run</strong>」「<strong>runs</strong>」「<strong>running</strong>」に一致します。</p>
+    </li>
+
+    <li>
+      <p>「<strong>?</strong>」は任意の 1 文字と一致します。たとえば、検索文字列が「<strong>run?</strong>」である場合は、「<strong>runs</strong>」「<strong>rung</strong>」には一致しますが、「<strong>run</strong>」や「<strong>running</strong>」には一致しません。</p>
+    </li>
+  </ul>
+
+  <p>もし「<strong>*</strong>」や「<strong>?</strong>」文字そのものを含む分節を検索したい場合は、正規表現での検索を使用し、それら文字の前にバックスラッシュ「\」を加えて除外する必要があります。例えば、「x*y」を検索するためには「x\*y」と指定し、「<code>x?y</code>」を検索するには「<code>x\?y</code>」と指定します。</p>
+  <hr>
+
+  <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>正規表現の使用</h2>
+
+  <p>正規表現による検索は、文字列検索において効果のある方法です。ワイルドカード検索に似ていますが、より柔軟な指定が行えます。文字列検索で使用できる正規表現は、Java でサポートされているものです。概略については、<a href="regexp.html">正規表現における構文</a>を参照してください。より詳細な情報については <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">
+http://java.sun.com/j2se/1.5.0/ja/docs/ja/api/java/util/regex/Pattern.html</a> を参照してください。</p>
+
+  <p>簡単なチュートリアルが（例えば <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a> のように） Web でも参照できます。</p>
+  <hr>
+
+  <h2><a name="display" id="display"></a>検索結果表示</h2>
+
+  <p>［検索文字列］欄に文字列を入力し［検索］ボタンをクリックすると、プロジェクトに含まれるすべてのファイルから、その文字列を含むすべての分節が表示されます。OmegaT は、同一の分節は 1 つの実体として扱うので、見つかった最初の分節のみを表示します。</p>
+
+  <p>検索された分節は、プロジェクト中で現れる順に表示されます。翻訳済みの分節は、その原文とともに表示されます。上段が原文、下段が訳文です。未翻訳の分節は、原文のみが表示されます。</p>
+
+  <p>分節をクリックすると、修正できるように編集ペインが展開されます。必要であれば、用語の確認やを修正を行うため、検索ウィンドウに戻って検索された次の分節を確認することもできます。</p>
+  <hr>
+  <table summary= "just formatting" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a> </td>
+        <td style="text-align: center;"><a href="index.html">ホーム</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">索引</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</body>
+</html>

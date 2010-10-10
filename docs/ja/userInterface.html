@@ -1,324 +1,583 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>ユーザーインターフェース - OmegaT 1.6.2 取扱説明ガイド</title>
+  <link type="text/css" href="./OmegaT.css" rel="stylesheet">
+  <meta content="text/html; charset=utf-8" http-equiv="content-type">
+
+  <title>OmegaT 2.0 取扱説明ガイド - ユーザーインターフェース</title>
 </head>
+
 <body>
+  <h2>ユーザーインターフェース</h2>
 
-<h1>ユーザーインターフェース</h1>
+  <table summary="just formatting" border="0" cellpadding="0" cellspacing="0"
+  width="100%">
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li>
+              <p><a href="#item">ユーザーインターフェースの項目</a></p>
 
-<h2>目次</h2>
+              <ul>
+                <li>
+                  <p><a href="#most">最もよく使用するウィンドウ</a></p>
+                </li>
 
-<ul type="none">
-   <li>1. <a href="#User_Interface_Items">ユーザーインターフェースの項目</a>
+                <li>
+                  <p><a href="#some">時々使用するウィンドウ</a></p>
+                </li>
 
-      <ul type="none">
-         <li>1.1. <a href="#Windows_you.27ll_use_most_of_the_time">最もよく使うウィンドウ</a></li>
-         <li>1.2. <a href="#Windows_you.27ll_use_sometimes">時々使うウィンドウ</a></li>
-         <li>1.3. <a href="#Dialogs_you.27ll_use_to_change_your_project_settings">プロジェクトの設定を変えるときに使うダイアログ</a></li>
-      </ul>
-   </li>
+                <li>
+                  <p><a href="#dialogs">プロジェクトの設定変更時に使用するダイアログ</a></p>
+                </li>
+              </ul>
+            </li>
 
-   <li>2. <a href="#OmegaT_Main_Window">OmegaT メインウィンドウ</a>
+            <li>
+              <p><a href="#OmegaT_Main_Window">OmegaT メインウィンドウ</a></p>
 
-      <ul>
-         <li>2.1. <a href="#Editor_Pane">エディタペイン</a></li>
-         <li>2.2. <a href="#Fuzzy_Matches">参考訳文</a></li>
-         <li>2.3. <a href="#Glossary">用語集</a></li>
-         <li>2.4. <a href="#Main_Menu">メインメニュー</a></li>
-         <li>2.5. <a href="#Status_Bar">ステータスバー</a></li>
-      </ul>
-   </li>
+              <ul>
+                <li>
+                  <p><a href="#Editor">編集ウィンドウ</a></p>
+                </li>
 
-   <li>3. <a href="#Other_Windows">その他のウィンドウ</a>
+                <li>
+                  <p><a href="#Match">参考訳文</a></p>
+                </li>
 
-      <ul>
-         <li>3.1. <a href="#Project_Files">プロジェクトファイル</a></li>
-         <li>3.2. <a href="#Search_Window">検索ウィンドウ</a></li>
+                <li>
+                  <p><a href="#Glossary">用語集</a></p>
+                </li>
 
-         <li>3.3. <a href="#Tag_Validation">タグ検証</a>
+                <li>
+                  <p><a href="#Glossary">用語集</a></p>
+                </li>
 
-            <ul>
-               <li>3.3.1. <a href="#Tag_validation_window">タグ検証ウィンドウ</a></li>
-               <li>3.3.2. <a href="#Tag_errors">タグエラー</a></li>
-               <li>3.3.3. <a href="#Hints_for_tags_management">タグ管理のヒント</a></li>
-            </ul>
-         </li>
+                <li>
+                  <p><a href="#Dictionaries">辞書</a></p>
+                </li>
 
-         <li>3.4. <a href="#Help_Browser">ヘルプブラウザ</a></li>
-      </ul>
-   </li>
+                <li>
+                  <p><a href="#Google_Translate">機械翻訳</a></p>
+                </li>
 
-   <li>4. <a href="#Dialogs">ダイアログ</a></li>
-</ul>
+                <li>
+                  <p><a href="#menu">メインメニュー</a></p>
+                </li>
 
-<a name="User_Interface_Items"></a>
-<h2>ユーザーインターフェースの項目</h2>
+                <li>
+                  <p><a href="#bar">ステータスバー</a></p>
+                </li>
+              </ul>
+            </li>
 
-<p>OmegaT のユーザーインターフェースは多くのアイテムからなります。以下ではまずそれらを要約し、その後でそれぞれについてより詳細について記述します。</p>
+            <li>
+              <p><a href="#dialogs">プロジェクトの設定変更時に使用するダイアログ</a></p>
+            </li>
+          </ul>
+        </td>
 
-<a name="Windows_you.27ll_use_most_of_the_time"></a>
-<h3>最もよく使うウィンドウ</h3>
+        <td>
+          <ul>
+            <li>
+              <p><a href="#Other_windows">その他のウィンドウ</a></p>
 
-<ul>
-   <li>
-      <strong>OmegaT メインウィンドウ</strong> は 3 つのペインからなります。<ul>
-         <li>翻訳を入力、修正する<i>エディタペイン</i> </li>
-         <li>翻訳メモリから最も似ている分節を表示する<i>参考訳文ペイン</i></li>
-         <li>用語集を表示する<i>用語集ペイン</i></li>
-         <li>OmegaT のほとんどの機能にアクセスできる <i>メインメニュー</i></li>
-         <li>ウィンドウの下部にあり、作業に関連するメッセージが表示される<i>ステータスバー</i></li>
-      </ul>
-   </li>
+              <ul>
+                <li>
+                  <p><a href="#files">翻訳対象ファイル一覧</a></p>
 
-   <li>翻訳するファイルの一覧が表示される<strong>翻訳対象ファイル一覧ウィンドウ</strong></li>
-   <li>プロジェクトの特定の分節を見つけるために使われる<strong>文字列検索ウィンドウ</strong></li>
-</ul>
+                  <ul>
+                    <li>
+                      <p><a href="#proj_files">翻訳対象ファイル一覧の機能</a></p>
+                    </li>
 
-<a name="Windows_you.27ll_use_sometimes"></a>
-<h3>時々使うウィンドウ</h3>
+                    <li>
+                      <p><a href="#unique">繰り返しを除いた分節数</a></p>
+                    </li>
 
-<ul>
-   <li>訳文文書のフォーマットの間違いを検出するための<strong>タグ検証ウィンドウ</strong></li>
-   <li>取扱説明ガイドを読むための<strong>ヘルプブラウザ</strong></li>
-</ul>
+                    <li>
+                      <p><a href="#adding_files">プロジェクトへのファイル追加</a></p>
+                    </li>
+                  </ul>
+                </li>
 
-<a name="Dialogs_you.27ll_use_to_change_your_project_settings"></a>
-<h3>プロジェクトの設定を変えるときに使うダイアログ</h3>
+                <li>
+                  <p><a href="#search">文字列検索ウィンドウ</a></p>
 
-<ul>
-   <li>プロジェクトフォルダと言語を変更するための<strong>プロジェクト設定</strong></li>
-   <li>OmegaT が原文、訳文、参考訳文、用語を表示するのに使うフォントを修正するための<strong>フォント設定</strong></li>
-   <li>対応しているファイル形式の扱いを調整するための<strong>ファイルフィルタ</strong></li>
-   <li>文章を文に分節化する方法を変更するための<strong>分節化</strong></li>
-   <li>分節を移動するときの OmegaT の振る舞いを変更するための<strong>翻訳入力行</strong></li>
-</ul>
+                  <ul>
+                    <li>
+                      <p><a href="#search_types">検索タイプ</a></p>
+                    </li>
 
-<a name="OmegaT_Main_Window"></a>
-<h2>OmegaT メインウィンドウ</h2>
+                    <li>
+                      <p><a href="#wildcards_regexp">ワイルドカードと正規表現</a></p>
+                    </li>
 
-<p>メインウィンドウは 3 つのペインとメインメニューとステータスバーからなります。</p>
+                    <li>
+                      <p><a href="#search_display">検索結果表示</a></p>
+                    </li>
+                  </ul>
+                </li>
 
-<p>ペインの位置は変更できますし、ペインをドラッグすることで別のウィンドウに分離することもできます。ペインの状態によって、ペインの右上に 5 つの異なった表示が現れます。表示の上にマウスポインタを置くことで、ツールチップが表示されます。</p>
+                <li>
+                  <p><a href="#tag_validation">タグ検証</a></p>
+                </li>
 
-<p>
-<img src="images/Minimize.gif" alt="最小化" width="18" height="18">ステータスバーの近くに、名前だけの形にペインを縮小します。<br><img src="images/Maximize.gif" alt="最大化" width="18" height="18">そのペインが利用可能なウィンドウスペースの全部を使うようにします。<br><img src="images/Restore.gif" alt="リストア" width="18" height="18">ペインを、最小化または最大化する前の位置に戻します。<br><img src="images/Undock.gif" alt="結合解除" width="18" height="18">ペインをメインウィンドウから切り離して、独立したウィンドウにします。<br><img src="images/Dock.gif" alt="結合" width="18" height="18">そのペインをメインウィンドウの中に戻します。</p>
+                <li>
+                  <p><a href="#manual">ヘルプブラウザ</a></p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
 
-<p>ペインを重ね合わせることも可能です。この場合、ペインは上部のタブとして表示されます。タブをクリックすることでそのペインが前面に表示されます。ペインの間のセパレータをドラッグすれば、ペインのサイズを変えられます。</p>
+  <h2><a name="item" id="item"></a>ユーザーインターフェースの項目</h2>
 
-<a name="Editor_Pane"></a>
-<h3>エディタペイン</h3>
+  <h3><a name="most" id="most"></a>最もよく使用するウィンドウ</h3>
 
-<p>ここで翻訳を入力、修正します。エディタペインには部分的に翻訳された文章が表示されます:既に翻訳された文章は翻訳されて表示され、まだ翻訳されていない文章は原文言語で表示されます。</p>
+  <table summary="just formatting" border="0" cellpadding="0" cellspacing="0"
+  width="100%">
+    <col width="43*">
+    <col width="213*">
 
-<p>表示されている文章は分節に分割されており、文書をスクロールさせて任意の文節をダブルクリックすることでその分節を修正できます。</p>
+    <tbody>
+      <tr>
+        <td width="24%">
+          <dl>
+            <dd><strong>OmegaT メインウィンドウ</strong></dd>
+          </dl>
+        </td>
 
-<p>分節の一つが有効になっています。一つだけが二つの部分で表示されています:上半分は原文言語で、太字で緑色の背景色でで表示され、下半分は編集フィールドで、二つのマーカーで区切られています:左端のマーカーは"&lt;分節 nnnn&gt;"で、"nnnn"はプロジェクトないの分節番号を表し、右端のマーカーは"&lt;/分節&gt;"です。上の部分を参照用に使い、翻訳を含む編集フィールドの内容を上書きまたは修正します。</p>
+        <td width="83%">
+          <dl>
+            <dd>メインメニュー、ステータスバーと、3つのウィンドウからなります。</dd>
+          </dl>
+        </td>
+      </tr>
 
-<pre>この文は翻訳されました。この文も翻訳されました。<strong>Cette phrase est en train d'être traduite.</strong>
-&lt;分節 0003&gt;[ここで次のようにタイプすることになります: この文は翻訳中です。]&lt;/分節&gt;</pre>
+      <tr>
+        <td width="24%">
+          <dl>
+            <dd>--- 編集ウィンドウ</dd>
+          </dl>
+        </td>
 
-<p>移動したときにまだ翻訳されていない編集フィールドは、<a href="translationEditing.html" title="翻訳文書編集">翻訳入力行</a>の設定によって空白のままとなるか、他の文章が表示されるかします:</p>
+        <td width="83%">
+          <dl>
+            <dd>翻訳内容を入力、編集する場所です</dd>
+          </dl>
+        </td>
+      </tr>
 
-<ul>
-   <li>原文</li>
-   <li>翻訳しようとしているものに最も近い文字列の訳文</li>
-</ul>
+      <tr>
+        <td width="24%">
+          <dl>
+            <dd>--- 参考訳文ウィンドウ</dd>
+          </dl>
+        </td>
 
-<p>次の分節に移動すると、訳文は検証されて保存されます。</p>
+        <td width="83%">
+          <dl>
+            <dd>翻訳メモリから、最も類似した分節を表示します</dd>
+          </dl>
+        </td>
+      </tr>
 
-<p>分節を未翻訳のままにしたい場合は、(<code>Ctrl+A</code>で全てを選択し、<code>Del</code>で削除することで)単に編集フィールドを空にしてください。</p>
+      <tr>
+        <td width="24%">
+          <dl>
+            <dd>--- 用語集ウィンドウ</dd>
+          </dl>
+        </td>
 
-<p><a href="translationEditing.html" title="翻訳文書編集">翻訳入力行</a>の設定によっては、OmegaTは訳文が原文と同じでも記憶します。これは、商標や固有名詞など、翻訳されたドキュメントでも同じである必要があるものも含まれている場合に便利です。</p>
+        <td width="83%">
+          <dl>
+            <dd>（専門用語の翻訳などに使用する）用語集を表示します</dd>
+          </dl>
+        </td>
+      </tr>
 
-<p>詳細については <a href="translationEditing.html" title="翻訳文書編集">翻訳文書編集</a> を参照してください。</p>
+      <tr>
+        <td width="24%">
+          <dl>
+            <dd><strong>翻訳対象ファイル一覧ウィンドウ</strong></dd>
+          </dl>
+        </td>
 
-<a name="Fuzzy_Matches"></a>
-<h3>参考訳文</h3>
+        <td width="83%">
+          <dl>
+            <dd>翻訳可能なファイル一覧を表示します。<code>［Ctrl+L］</code> で開くことができ、 <code>［Esc］</code>で閉じます</dd>
+          </dl>
+        </td>
+      </tr>
 
-<p>参考訳文ペインは、このプロジェクトを翻訳中に作成したものと、過去の作業で作成したり顧客や翻訳業者から受け取ってインポートしたものの 2 種類の<a href="translationMemories.html" title="翻訳メモリ">翻訳メモリ</a>の中から、もっともよく似た分節を表示します。</p>
+      <tr>
+        <td width="24%">
+          <dl>
+            <dt><strong>文字列検索ウィンドウ</strong></dt>
+          </dl>
+        </td>
 
-<p>次の文節に移動したとき、最初の参考訳文(一致率が最も高いもの)が自動的に選択されます。利用可能な参考訳文の数によって、<a href="keyboardShortcuts.html" title="キーボードショートカット"><code>Ctrl+2</code>, <code>3</code>, <code>4</code>, <code>5</code>を押す</a>ことで他のものを選択できます。</p>
+        <td width="83%">
+          <dl>
+            <dd>プロジェクト内の特定の分節を検索できます。<code>［Ctrl+F］</code> で開き、 <code>［Esc］</code> で閉じます</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<p><strong>選択した</strong>参考訳文を翻訳に使うには、<a href="keyboardShortcuts.html" title="キーボードショートカット"><code>Ctrl+R</code></a>を押して参考訳文で編集フィールドを置き換えるか、<a href="keyboardShortcuts.html" title="キーボードショートカット"><code>Ctrl+I</code></a>を押して現在のカーソル位置に挿入します。</p>
+  <h3><a name="some" id="some"></a>時々使用するウィンドウ</h3>
 
-<p>大ざっぱに言うと、一致率は比較する分節同士で共通に使われている単語の数を、長い方の分節の単語の数で割ったものです。</p>
+  <table summary="just formatting" border="0" cellpadding="0" cellspacing="0"
+  width="100%">
+    <col width="43*">
+    <col width="213*">
 
-<p>選択された参考訳文</p>
+    <tbody>
+      <tr>
+        <td width="23%">
+          <dl>
+            <dt><strong>タグ検証ウィンドウ</strong></dt>
+          </dl>
+        </td>
 
-<ul>
-   <li>は<strong>太字</strong>で表示されます。</li>
-   <li>翻訳した分節に現れない単語は<font color="blue"><strong>青色</strong></font>になります。</li>
-   <li>青色の単語の近くのものや、原文と似ていない位置にあるものは<font color="green"><strong>緑色</strong></font>になります。</li>
-</ul>
+        <td width="83%">
+          <dl>
+            <dd>翻訳文中のタグ配置が間違っていないかを確認できます。<code>［Ctrl+T］</code> で開き、 <code>［Esc］</code> で閉じます</dd>
+          </dl>
+        </td>
+      </tr>
 
-<p>このような分節を考えます:</p>
+      <tr>
+        <td width="23%">
+          <dl>
+            <dt><strong>ヘルプブラウザ</strong></dt>
+          </dl>
+        </td>
 
-<pre>   <strong>Information about Java &amp; OmegaT</strong></pre>
+        <td width="83%">
+          <dl>
+            <dd>取扱説明書を閲覧できます。 <code><b>［Esc］</b></code> で閉じます</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>マッチした分節:</p>
+  <h3><a name="dialogs" id="dialogs"></a>プロジェクトの設定変更時に使用するダイアログ</h3>
 
-<pre>   <strong>General notes about Java &amp; OmegaT</strong></pre>
+  <p>OmegaT 本体とプロジェクトの設定を変更するときに使用します。各項目については、この取扱説明書の別の項で詳述しています。以下では、どんなことが実行できるかと、どうやって実行するかを要約しておきます：</p>
 
-<p>は以下のように色付けされます:</p>
+  <p><br></p>
 
-<pre>   <strong><font color="blue">General notes</font> <font color="green">about</font> Java &amp; OmegaT</strong></pre>
+  <table summary="just formatting" border="0" cellpadding="0" cellspacing="0"
+  width="100%">
+    <col width="43*">
+    <col width="213*">
 
-<p>そして割合は 3/5=<strong>60%</strong>になります。
+    <tbody>
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>プロジェクトの設定</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>プロジェクトで使用する言語とフォルダ構成を変更できます。  <code>［Ctrl+E］</code>またはメインメニューの <strong>［プロジェクト］→［プロジェクト設定...］</strong> で開くことができ、<code>［Esc］</code>で閉じます。</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>字体設定</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>OmegaT が使用する字体を変更します。原文、訳文、参考訳文、用語集の表示に使用されます。メインメニューの <strong>［設定］→［字体...］</strong>  で開き、 <code>［Esc］</code> で閉じます。</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>ファイルフィルタ</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>OmegaT が取り扱えるファイルフォーマットに関して設定します。<strong>［設定］→［ファイルフイルター...］</strong>で開き、<code>［Esc］</code>で閉じます。</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>分節化</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>文章を分節化する際の規則を設定します。 <strong>［設定］→［分節化規則...］</strong>で開き、<code>［Esc］</code>で閉じます。</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>翻訳入力行</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>複数の分節間にわたって繰り返し作業を行う際、OmegaT にどのような作業を行わせるかを指定します。<strong>［設定］→［翻訳入力行...］</strong> で開き、<code>［Esc］</code>で閉じます。</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
+
+  <h2>OmegaT メインウィンドウ</h2>
+
+  <p>メインウィンドウは、いくつかのウィンドウ、メインメニュー、ステータスバーからなります。ウィンドウの名称部分をドラッグすると、表示位置を変更したり、独立したウィンドウとして表示させることができます。各ウィンドウの右上角には、その表示状態によって異なる、以下のようなボタンが表示されます。</p>
+
+  <p><img src="images/Minimize.gif" name="graphics1" alt="最小化" id=
+  "graphics1" align="bottom" border="0" height="18" width="18"> そのウィンドウの名称だけがステータスバー付近に表示される状態になります。<br><img src="images/Maximize.gif" name="graphics2" alt="最大化" id="graphics2"
+  align="bottom" border="0" height="18" width="18">そのウィンドウをOmegaTのウィンドウ領域全体に表示します。<br><img src="images/Restore.gif" name="graphics3" alt="復元" id="graphics3"
+  align="bottom" border="0" height="18" width="18">そのウィンドウを、最小化または最大化する直前の状態に戻します。<br><img src="images/Undock.gif" name="graphics4" alt="結合解除" id="graphics4"
+  align="bottom" border="0" height="18" width="18">そのウィンドウをメインウィンドウから分離させ、独立したウィンドウとして表示します。<br><img src="images/Dock.gif" name="graphics5" alt="結合" id="graphics5" align=
+  "bottom" border="0" height="18" width="18">そのウィンドウを、独立したウィンドウから、メインウィンドウ内への表示に戻します。</p>
+
+  <p>ウィンドウは重ねて表示させることもできます。この場合、ウィンドウの上部にタブが表示されます。タブをクリックすると、そのウィンドウが最前面に表示されます。ウィンドウ間のセパレーターをドラッグすると、ウィンドウの大きさを変更できます。</p>
+
+  <p>メインウィンドウの右下角には、翻訳の進捗を表示します：</p>
+
+  <p><table border="1" class="omegat" cellpadding="3">
+	<tr><td>① / ②（③ / ④, ⑤）</td><td>⑥ / ⑦</td></tr></table>
+  </p>
+
+  <table summary="" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td>① / ②</td>
+
+        <td>：ファイルの分節数：翻訳済み / すべて</td>
+      </tr>
+
+      <tr>
+        <td>  ③ / ④</td>
+
+        <td>：繰り返しを除いたプロジェクトの分節数：翻訳済み / すべて</td>
+      </tr>
+
+      <tr>
+        <td>⑤</td>
+
+        <td>：プロジェクトの分節数</td>
+      </tr>
+
+      <tr>
+        <td>⑥ / ⑦</td>
+
+        <td>：文字数：原文 / 訳文&nbsp;</td>
+      </tr>
+    </tbody>
+  </table><br>
+
+  <h3><a name="Editor" id="Editor"></a>編集ウィンドウ</h3>
+
+  <p>翻訳を入力、編集する場所です。編集ウィンドウには、部分的に翻訳されたテキストが表示されます。つまり、翻訳済みのテキストは翻訳後の言語で表示され、未翻訳のテキストは原文の言語で表示されます。テキストは分節の集まりとして分割表示され、スクロールで文書内を移動でき、どの分節でもダブルクリックすることで編集できます。上記の場合、翻訳済みのテキストに明確に印がつくことはありません。設定（ <a href="menu.html">［表示］</a> メニュー）から、たとえばそれらを黄色の背景にすることもできます。</p>
+
+  <p>分節のうち、アクティブである（編集可能な）ものは 1 つだけです。その 1 分節の部分のみ、以下の双方の領域が表示されます：上側には原文が緑色背景の太字で表示されます。下側が翻訳入力行で、2 つのマーカーで区切られています：先頭が <strong><code>&lt;分節 nnnn&gt;</code></strong> で、 <strong><code>nnnn</code></strong> はプロジェクト中における分節番号です。末尾に <strong><code>&lt;/分節&gt;</code></strong> が表示されます。上側の原文を参照しながら、下側の翻訳入力行の内容を修正または上書きし翻訳を進めてください。</p>
+
+  <p><a href="translationEditing.html">翻訳入力行</a>の設定により、未翻訳の分節の編集領域は、空欄になっているか、原文と同じテキスト、または最も一致率の高い参考訳文が入った状態になります。別の分節に移ると、入力した訳文が確定され、蓄積されます。その分節を未翻訳のままにしておきたいときは、編集領域のテキストを削除して空欄にしておいてください（<code>［Ctrl+A］</code>で全選択して<code>［Del］</code>で削除します）OmegaT は訳文が原文とまったく同じ状態でも記憶することができます。商標や固有名詞、第 3 の言語の一部など、翻訳の必要がない部分を残しておきたいときに便利です。</p>
+
+  <p>詳細は、<a href="translationEditing.html">翻訳入力行</a> の設定を参照してください。</p>
+
+  <h3><a name="Match" id="Match"></a>参考訳文</h3>
+  
+  <p>参考訳文ウィンドウは、 <a href="translationMemories.html">翻訳メモリ</a> の中から最も一致率の高い分節を表示します。検索対象とできるメモリは、そのプロジェクトの翻訳中に蓄積されていくメモリはもちろん、過去の翻訳作業により残しておいたものや、顧客や翻訳会社から受け取ったものをインポートして使用することもできます。</p>
+
+  <p>次の分節に移動すると、最初の参考訳文（最も一致率の高いもの）が自動的に選択されます。選択された状態の参考訳文は <strong>太字</strong> で表示されます。翻訳しようとしている分節に存在しない単語は <strong><font color=
+  "blue">青字</font></strong> で、その近傍にある単語が <font color="green"><b>緑字</b></font> で表示されます。ここで <code>［Ctrl+2］</code>、<code>［Ctrl+3］</code>、<code>［Ctrl+4］</code> または <code>［Ctrl+5］</code> を押して別の参考訳文を <a href=
+  "menu.html#shortcuts">選択</a> することもできます。もちろん、5 番目の参考訳文が存在しないときに <code>［Ctrl+5］</code> を押しても何も起こりません。<strong>選択した（太字で表示された）</strong> 参考訳文を、現在編集中の訳文と置換して使用するには <code><a href="menu.html#shortcuts">Ctrl+R</a></code> を押します。現在のカーソル位置に挿入する場合は <code><a href=
+  "menu.html#shortcuts">Ctrl+I</a></code> を押します。</p>
+
+  <p>一致率 − つまり、原文分節と参考訳文の差を示す目安 − は、大まかに表現すると、比較する分節どうしで共通している単語の数を、より長いほうの分節の単語の数で割ったものです。トークナイザープラグインを使用している場合、2 つの分節で使用されている単語の基語が最初に取り除かれます。代わりに、単語をそのまま残し、句読点や数字、タグは無視されます。最後に、句読点にあるタグや数字の違い（上記の 2 つの場合では無視されるものです）を計算に含めることができます。参考訳文ウィンドウには次の 3 つの情報が表示されます：</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
+  "font-style: italic;">トークナイザープラグインを使用した場合の一致率 [%] / OmegaT デフォルトの一致率 [%] / タグや数値、句読点を含めた場合の一致率 [%]</span>&gt;&nbsp;
+
+  <p>上記の例では、トークないざーを使用していなかったため、最初の 2 つは等しいです（46/46）3 つめの（39）は、句読点やタグが使用されているため、それらより低くなります。</p>
+
+  <p>ファイル名が表示されていない場合、参照元は現在のプロジェクトの翻訳メモリです。孤立した分節（上図での 1 番目の参考訳文）とは、そのプロジェクトの翻訳メモリ中に存在するが、原文の分節と一致しなくなった分節を指します。上記の例では、原文の文章が、OmegaT によって翻訳され、編集されています。<br></p>
+
+  <h3><a name="Glossary" id="Glossary"></a>用語集</h3>
+
+  <p>用語集ウィンドウには、<a href=
+  "glossaries.html">用語集ファイル</a>にあらかじめ蓄積した、表現や専門用語の対訳を表示できます。現在の分節中に見つかった用語を表示します。しかしこのウィンドウで行えるのはあくまで表示のみで、訳文への挿入や置換は行えません。</p>
+
+  <h3><a name="Dictionaries" id="Dictionaries"></a>辞書</h3>
+
+  <p><a href="dictionaries.html">辞書</a>は Stardict 形式の辞書ファイルデータです。</p>
+
+  <h3><a name="Google_Translate" id="Google_Translate"></a>機械翻訳</h3>
+
+  <p>メニューの［設定］→［機械翻訳］→［Google Translate］が開かれると、<a href=
+  "GoogleTranslate.html">Google Translate</a> で機械翻訳された現在の分節が表示されます。その結果をその分節の訳文の箇所に挿入することもできます。</p>
+
+  <h3><a name="menu" id="menu"></a>メインメニュー</h3>
+
+  <p>メインメニューから、OmegaT の全機能を使用できます。すべてのメニュー項目の詳細については、「メインメニューとキーボードショートカット」ページの<a href="menu.html#menu">メインメニュー</a>の各項目を参照してくさだい。よく使われる機能については <a href="menu.html#shortcuts">キーボードショートカット</a> を使用できます。慣れてしまえば、翻訳作業中にメニューをわざわざたどる必要はなくなります。</p>
+
+  <h3><a name="bar" id="bar"></a>ステータスバー</h3>
+
+  <p>メインウィンドウの底部にあるステータスバーには、実行中の特定の処理についてのメッセージが表示されます。ユーザーへ、現在行われている処理についてのフィードバックメッセージを与えてくれます。現在の分節に対し、参考訳文の一致数と、用語集の用語との一致数も表示されます。</p>
+  <hr>
+
+  <h2><a name="other_windows" id="other_windows"></a>その他のウィンドウ</h2>
+
+  <h3><a name="files" id="files"></a>翻訳対象ファイル一覧</h3>
+
+  <p>翻訳対象ファイル一覧ウィンドウには、プロジェクトに含まれるファイル一式と、プロジェクトにかんする情報が表示されます。OmegaT がプロジェクトを読み込むと、翻訳対象ファイル一覧が自動的に表示されます。閉じるには <code>［Esc］</code> を押し、再度開くには <code>［Ctrl+L］</code> を押します。</p>
+
+  <h3><a name="proj_files" id="proj_files"></a>翻訳対象ファイル一覧の機能</h3>
+
+  <p>以下に示す情報が表示されます。</p>
+
+  <ul>
+    <li>
+      <p>プロジェクト中の翻訳可能なファイルの全リスト。これらのファイルは、原文ファイルフォルダに存在し、<a href=
+      "filesToTranslate.html">OmegaT が扱える形式</a>のものです。クリックすると、翻訳作業のために開くことができます</p>
+    </li>
+
+    <li>
+      <p>現在、編集ウィンドウで開かれているファイルが、青色でハイライト表示されます</p>
+    </li>
+
+    <li>
+      <p>ファイル名の横にそれぞれの分節数が表示されます</p>
+    </li>
+
+    <li>
+      <p>繰り返しを除いたプロジェクト全体の分節数。</p>
+    </li>
+
+    <li>
+      <p>翻訳済みの、繰り返しを除いた分節数。分節を翻訳するたびに更新されます</p>
+    </li>
+  </ul>
+
+  <h3><a name="unique" id="unique"></a>繰り返しを除いた分節数</h3>
+
+  <p><strong>繰り返しを除いた</strong>分節数とは、全ての分節に対して、大文字/小文字を区別し、重複するものを除いて合計して数えたものです。（「Run」と「run」は異なるものとして数えます）</p>
+
+  <p>「分節全体数」と「繰り返しを除いた分節数」の差から、すべての文中に繰り返しの表現がどれくらいあるかを大まかに見積もることができます。ただし、その数そのものが、繰り返しの表現にどれくらい関連性があるか、という点を表しているわけではありません：（運の良い例として）とても長い文章が何度も繰り返し登場する場合もありますし、（やや残念な例としては）短いキーワードが並んだ表が含まれていたから、という場合もあります。 <code>omegat </code> フォルダにある  <code>project_stats.txt </code> には、各ファイルに含まれる分節についての詳細な情報が記載されています。</p>
+
+  <p>分節化規則を調整することで、分節数/繰り返しを除いた分節数の数を変更することができます。しかしこの規則変更は、いったんプロジェクトの翻訳を開始してからはなるべく行わないようにしてください。より詳細な情報は <a href=
+  "segmentation.html">分節化規則</a> を参照してください。</p>
+
+  <h3><a name="adding_files" id="adding_files"></a>プロジェクトへのファイル追加</h3>
+
+  <p>［原文ファイル追加...］ ボタンをクリックして、原文ファイルを追加できます。これを行うと、選択したファイルを <code>source</code> フォルダへ追加し、プロジェクトの再読み込みが自動で行われます。［MediaWikiから原文ファイルを追加...］を押してURLを指定すると、MediaWiki 形式で記述された Web ページを原文ファイルとして追加することができます。</p>
+
+  <h3><a name="search" id="search"></a>文字列検索ウィンドウ</h3>
+
+  <p>プロジェクト内のある分節を見つけるために、検索ウィンドウを活用できます。同時に複数の検索ウィンドウを開くことができます。新しい検索ウィンドウは、メインウィンドウ上で <code><a href="menu.html#shortcuts">［Ctrl+F］</a></code> を押すと開きます。検索ウィンドウは、検索文字列またはキーワードを入力するテキスト領域と、検索の設定を行うラジオボタンやチェックボックス、そしてその下の検索結果を表示する領域からなります。</p>
+
+  <h3><a name="search_types" id="search_types"></a>検索タイプ</h3>
+
+  <dl>
+    <dt>検索には、以下の 2 つの <a href="searches.html#searchmethods">タイプ</a> が利用できます：</dt>
+
+    <dt><strong>完全一致検索</strong> − 現在のプロジェクト内、指定のフォルダ下、またはフォルダ階層下から、文字列を検索します。</dt>
+
+    <dt><strong>キーワード検索</strong> − 現在のプロジェクト内から検索した文字列を含む分節を全て表示します。</dt>
+  </dl>
+
+  <p>検索は、原文・訳文両方を対象に行われます。どのフォルダであっても検索は行えますが、OmegaTが <a href=
+  "filesToTranslate.html">対応しているファイル形式</a> のみが対象となる点にご注意ください。</p>
+
+  <h3><a name="wildcards_regexp" id="wildcards_regexp"></a>ワイルドカードと正規表現</h3>
+
+  <p><a href="searches.html#usingwildcards">ワイルドカード</a> として * と ? を検索時に指定できます。 <a href=
+  "searches.html#usingregularexpressions">正規表現</a> も使用できます。</p>
+
+  <h3><a name="search_display" id="search_display"></a>検索結果表示</h3>
+
+  <p>［検索文字列］欄に文字列を入力し［検索］ボタンをクリックすると、プロジェクトに含まれるすべてのファイルから、その文字列を含むすべての分節が表示されます。</p>
+
+  <p>OmegaT はすべての分節それぞれを 1 つの実体として取り扱うので、最初に見つかった分節のみを検索結果として表示します。全分節に対する検索結果を表示したい場合は、［全て表示］にチェックを入れてください。検索結果の表示順は、プロジェクト中でのその文字列の登場順です。翻訳済みの分節は、上に原文、その下に訳文が表示されます。未翻訳の分節は原文のみが表示されます。</p>
+
+  <p>分節をクリックすると、編集ウィンドウ上に直接表示されるので、修正も行えます。そのまま検索ウィンドウに戻り、次の分節を探して修正することもできます。この手順は、使用した単語の更新作業などの際に便利です。</p>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>タグ検証</h3>
+
+  <p>タグ検証ウィンドウには、訳文中のタグにエラーが見つかった場合それらを表示します。<code><a href=
+  "menu.html#shortcuts">［Ctrl+T］</a></code> でウィンドウを表示できます。ウィンドウは 3 列の表からなり、リンク付きの分節番号、原文、訳文の内容がそれぞれ表示されます：</p>
+
+  <p>  <table align="center" border="1" width="80%" summary="">
+    <tbody>
+      <tr>
+        <td>1</td>
+
+        <td><strong><font color="blue">&lt;b0&gt;</font></strong>Formatting<strong><font color="blue">&lt;/b0&gt;</font></strong> <strong><font color="blue">&lt;b1&gt;</font></strong>one<strong><font color="blue">&lt;/b1&gt;</font></strong> is going to be messed up. &nbsp;&nbsp;</td>
+
+        <td><strong><font color=
+        "blue">&lt;b0&gt;</font></strong>見映え設定<strong><font color=
+        "blue">&lt;b1&gt;</font></strong>1番<strong><font color=
+        "blue">&lt;/b0&gt;</font></strong>は大変なことになりました！<strong><font color=
+        "blue">&lt;/b1&gt;</font></strong>&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+  </table>
 </p>
 
-<a name="Glossary"></a>
-<h3>用語集</h3>
+  <p>原文と訳文で比較しやすいよう、タグは青い太字で強調表示されます。分節番号をクリックすると、編集ウィンドウにその分節を表示できます。必要に応じて訳文を修正し、<code><a href="menu.html#shortcuts">Ctrl+T</a></code> を押すと再度タグ検証ウィンドウに戻り、その他のエラーを表示します。˜上図の例のうち、1 番目と 3 番目はタグの組み合わせが間違っている例で、2番目は開始タグの &lt; 文字が抜けている例です。</p>
 
-<p>用語集ペインは<a href="glossaries.html" title="用語集">用語集ファイル</a>.から読み込んだ、用語翻訳機能を持ちます。ここに現在の分節で見つかった用語の翻訳を表示しますが、参照のために表示するだけで、用語を翻訳のために挿入したり置換したりすることはできません。OmegaTは複数の単語からなる用語にも対応していますが、非常に基本的な方法を使います: もし用語の全てが現在の分節にあれば、その用語が表示されます。</p>
+  <p><a href="formattedText.html#intro">タグ</a> エラーは、<a href=
+  "formattedText.html#tag_operation">タグ操作</a>によって、原文の分節にあるタグの登場順序や数が、訳文に対して反映されない場合におこります。タグ操作の中には、必要なもの、行っても問題ないものもありますが、翻訳後の文書を作成した際に問題となるものもあります。タグがあるということは、多くの場合、ある種のフォーマット・整形がそこで行われているということを表します。<strong>原文の整形をなくして単純にすること</strong>で、タグの数を大きく減らすこともできます。</p>
 
-<p>用語集ペインでの用語のフォーマットは以下のとおりです:</p>
+  <h3>ヘルプブラウザ</h3>
 
-<pre>
-   '原文' = '訳文'
-   この用語に関するコメント(あれば)
-</pre>
+  <p>この取扱説明書を表示するには、<a href="menu.html#shortcuts">［F1］</a>を押すか、<a href="menu.html">メニュー</a>から、<strong>［ヘルプ］→［取扱説明書］</strong>をクリックします。</p>
 
-<a name="Main_Menu"></a>
-<h3>メインメニュー</h3>
+  <h3><a name="manual" id="manual"></a>ヘルプブラウザでの操作</h3>
 
-<p>明らかに、メインメニューから OmegaT の全ての機能にアクセスできます。もっともよく使う機能は<a href="keyboardShortcuts.html" title="キーボードショートカット">キーボードショートカット</a>から利用可能なので、これに慣れれば翻訳中にメニューを使う必要はなくなります。</p>
+  <p>ウィンドウには <strong>［戻る］</strong>と<strong>［目次］</strong>の 2 つのボタンがあります。この取扱説明書は、複数の章の間のリンク構造を持った HTML 形式の文書です。Web ブラウザ上での操作と同様に、各リンクをクリックすると対応したページを表示できます。</p>
 
-<p>全てのメニューとメニュー項目に関する完全な説明については<a href="menu.html" title="メインメニュー">メインメニュー</a>の項目を参照してください。</p>
+  <h3>オフラインでの閲覧</h3>
 
-<a name="Status_Bar"></a>
-<h3>ステータスバー</h3>
+  <p>取扱説明書は OmegaT インストールフォルダにある <code>docs</code> フォルダにあります。例えば英語版を見たい場合は <code>docs/en/index.html</code> ファイルを Web ブラウザで開けば閲覧できます。こうすることで、ヘルプブラウザからは開けない外部サイトへのリンクもたどって開くことができます。</p>
+  <hr>
 
-<p>ステータスバーはメインウィンドウの下部にあり、ワークフローに関するメッセージを表示します。このバーは処理中の特定の操作に関するフィードバックメッセージを表示します。また、現在の分節で一致した参考訳文と用語集の数も表示します。</p>
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a></td>
 
-<a name="Other_Windows"></a>
-<h2>その他のウィンドウ</h2>
+        <td style="text-align: center;"><a href="index.html">ホーム</a></td>
 
-<a name="Project_Files"></a>
-<h3>プロジェクトファイル</h3>
-
-<p>翻訳対象ファイル一覧ウィンドウはプロジェクトのファイルの一覧とその他のプロジェクト情報を表示します。これは OmegaT がプロジェクトを読み込んだときに自動的に表示されます。プロジェクトを開いたとき、メインメニューで<a href="keyboardShortcuts.html" title="キーボードショートカット"><code>Ctrl+L</code>ショートカット</a>を押すと、現在表示しているなら閉じ、表示されていないなら表示します。</p>
-
-<p>翻訳対象ファイル一覧ウィンドウの機能:</p>
-
-<ul>
-   <li>プロジェクトにある翻訳可能なファイル全てのクリック可能な一覧です。これはソースファイルフォルダにある、<a href="fileFormats.html" title="対応するファイル形式">OmegaTが扱える</a>ファイルです。ファイルをクリックすることで翻訳のために編集ペインに表示します。</li>
-   <li>各ファイルの分節の数はファイル名の隣に表示されます。</li>
-   <li>プロジェクト全体で繰り返しを除いた(異なった)分節の数。</li>
-   <li>すでに翻訳済みの繰り返しを除いた分節の数。これは分節を翻訳する毎に更新されます。</li>
-</ul>
-
-<p><strong>繰り返しを除いた</strong>分節の集合は、全ての分節を取り出して、大文字小文字まで同じ重複した分節を取り除いたものです("Run"と"run"は別のものと考えます)。</p>
-
-<p>「分節の数」と「繰り返しを除いた分節の数」の差を見れば、文章中にどれくらいの繰り返しがあるかが分かります。この数値は、どれくらい繰り返しが重要かについてはっきりと示すことはありません:比較的長い分節が何回も繰り返しているかもしれません(すごくラッキー!)し、単にキーワードが表いっぱいに並んでいる(あまりラッキーでない…)だけかもしれません。</p>
-
-<p>分節化規則を修正することで分節/繰り返しを除いた分節の数を修正することができます。このような修正はプロジェクトの翻訳を始めた後では「決して」行うべきではありません。更なる情報については<a href="segmentation.html" title="翻訳対象ファイルの分節化">分節化規則</a>を参照して下さい。</p>
-
-<p>「原文ファイル追加」ボタンを押すことでプロジェクトに原文ファイルを追加できます。選択したファイルを<code>/source</code>ディレクトリにコピーし、新しいファイルを読み込むためにプロジェクトを再読み込みします。</p>
-
-<a name="Search_Window"></a>
-<h3>検索ウィンドウ</h3>
-
-<p>文字列検索ウィンドウを使ってプロジェクトの特定の分節を探すことができます。同時に複数の検索ウィンドウを開くことができます。新しいウィンドウを開くには、メインウィンドウで<a href="keyboardShortcuts.html" title="キーボードショートカット"><code>Ctrl+F</code></a>を使います。</p>
-
-<p>このウィンドウには以下のものがあります:</p>
-
-<ul>
-   <li>検索文字列やキーワードを入力するための検索フィールド</li>
-   <li>検索設定を変えるためのチェックボックスやラジオボタン</li>
-   <li>クリック可能な結果表示エリア</li>
-</ul>
-
-<p>検索フィールドに文字列を入力した後検索ボタンを押すと、プロジェクト内で検索文字列を含む分節を全て表示します。OmegaT は等価な分節を全て一つの実体として扱います -- もしそれらのうちの一つを変更すると、同じ分節は全て更新され、最初のユニークな分節が表示されます。</p>
-
-<p>分節はプロジェクトに現れる順番に表示されます。翻訳した分節の場合は上部に原文が、下部に訳文が表示され、翻訳されていない分節の場合は原文のみが表示されます。</p>
-
-<p>プロジェクトファイルの中から文字列が見つかった場合、それをクリックすることで編集用にエディタペインに表示されます。それから検索ウィンドウに戻って、検索された次の文節を修正するために移動することもできます。このようなパターンは大量に用語を更新するときに便利です。</p>
-
-<p>2 種類の検索が可能です:</p>
-
-<ul>
-   <li>完全一致検索では、現在のプロジェクト内、またはフォルダやフォルダ階層を指定して、検索対象文字列を検索することができます。また、完全一致検索は、ワイルドカード（「*」と「？」）を対応しています。'<strong>*'</strong> は文字0個以上にマッチします（例えば、'<strong>run*'</strong>で検索をかけると、'<strong>run'</strong>や'<strong>run'</strong>や'<strong>running'</strong>にマッチします）。半角の「<strong>?</strong>」は文字1個にマッチングします（例えば「<strong>run?</strong>」は、「<strong>runs</strong>」や「<strong>rung</strong>」にはマッチングしますが、「<strong>run</strong>」や「<strong>running</strong>」にはマッチングしません）。この検索は、原文、訳文の両方に対して行うことができます。</li>
-
-   <li>キーワード検索では、開いているプロジェクトを調べて、検索ワードを含む全ての分節を任意の順番で返します。</li>
-</ul>
-
-<p>どのディレクトリの中も検索できますが、<a href="fileFormats.html" title="対応するファイル形式">対応するファイル</a>のみを検索します。</p>
-
-<a name="Tag_Validation"></a>
-<h3>タグ検証</h3>
-
-<a name="Tag_validation_window"></a>
-<h4>タグ検証ウィンドウ</h4>
-
-<p>タグ検証ウィンドウは訳文文書のフォーマットの間違いを検出するために使います。このウィンドウを開くには、<a href="keyboardShortcuts.html" title="キーボードショートカット"><code>Ctrl+T</code></a>を使います。</p>
-
-<p>ウィンドウには以下の 3 つの列があります:</p>
-
-<ul>
-   <li>タグの間違いがあるかもしれない分節へのクリック可能なリンク</li>
-   <li>元の分節の内容</li>
-   <li>翻訳された分節の内容</li>
-</ul>
-
-<p>リンクをクリックするとその分節がエディタペインで有効になります。</p>
-
-<a name="Tag_errors"></a>
-<h4>タグのエラー</h4>
-
-<p>ありえるタグのエラーは以下のものです:</p>
-
-<ul>
-   <li>タグが原文の分節にあったが、翻訳された分節にない。</li>
-   <li>タグは原文の分節にはなかったが、間違って翻訳された分節に挿入された。</li>
-   <li>タグの順序は翻訳された分節では修正されています。</li>
-</ul>
-
-<a name="Hints_for_tags_management"></a>
-<h4>タグ管理のヒント</h4>
-
-<p>タグは一般的に元の文書のある種のフォーマッティングを表現しています。<strong>元の文書フォーマッティングの単純化</strong>はタグの数の削減に大きく貢献しています。使用フォント、フォントサイズ、色などを可能ならば統一することで、翻訳を単純化し、起こりうるタグエラーの数を減らします。</p>
-
-<p>タグに対して出来ることについては、<a href="formattedText.html#Tag_operations" title="フォーマット付きテキストの翻訳">タグ操作</a>の項目を参照してください。</p>
-
-<p>タグが悩みの種で、フォーマットが今の作業にとても重要というわけではないのなら、ほとんどのフォーマットを原文から取り除くことで翻訳が非常に簡単になることを憶えておいて下さい。</p>
-
-<p>OmegaT でタグは表示されてほしいけれどもほとんどのフォーマットが訳文文書には不要の場合、自由に訳文からタグを取り除いてください。この場合、<strong>組タグには特別な注意が必要です</strong>。組タグの片方だけが残ってしまうと、文書のフォーマットが壊れてしまい、翻訳したOpenOffice.org文書が不正になったり、翻訳したHTMLファイルが読めなくなったりします。</p>
-
-<p>タグはテキスト自身に含まれているので、より少ないタグが含まれる分節を作るために<a href="segmentation.html" title="翻訳対象ファイルの分節化">分節化規則</a>を使うことも可能です。これは上級者向け機能で、初心者は使うべきではありません。</p>
-
-<a name="Help_Browser"></a>
-<h3>ヘルプブラウザ</h3>
-
-<p>(このガイドを表示している)ヘルプブラウザは<a href="keyboardShortcuts.html" title="キーボードショートカット">F1</a>を押すか、<a href="menu.html" title="メインメニュー">メインメニュー</a>の<strong>ヘルプ -&gt; 取り扱い説明ガイド...</strong>で呼び出せます。</p>
-
-<p>このウィンドウにはマニュアルおよび<strong>戻る</strong>と<strong>目次</strong>の 2 つのボタンがあります。</p>
-
-<p>取り扱い説明ガイドは他の章へのリンクのあるHTML文書です。Webブラウザのように、リンクをクリックすることで選択したページが表示されます。</p>
-
-<p>取扱説明ガイドはOmegaTインストールフォルダの<code>doc</code>サブフォルダにあるので、例えば英語文書なら<code>doc/en/index.hmtl</code>ファイルをWebブラウザで開くことで読むことができます。この方法では、内蔵ヘルプブラウザでは受け付けない外部へのリンクを辿ることもできます。</p>
-
-<a name="Dialogs"></a>
-<h2>ダイアログ</h2>
-
-<p>OmegaT やプロジェクトの設定を変えるためのダイアログが利用可能です。全てのダイアログは別の項目で記述しているので、以下では単に何のために使うかとどうやって呼び出すかだけをまとめます。</p>
-
-<ul>
-   <li>
-      <a href="projectProperties.html" title="プロジェクト設定">プロジェクト設定</a>はプロジェクトフォルダと言語を変更するために使います。<a href="keyboardShortcuts.html" title="キーボードショートカット"><code>Ctrl+E</code></a>を押すか、<a href="menu.html" title="メインメニュー">メインメニュー</a>から<strong>プロジェクト -&gt;設定</strong>を呼び出すことで開きます。</li>
-
-   <li>
-      <a href="fontSettings.html" title="フォント設定">フォント設定</a>は OmegaT がソース、翻訳、参考訳文、用語集を表示するために使うフォントを変更するダイアログです。これは<a href="menu.html" title="メインメニュー">メインメニュー</a>の<strong>設定 -&gt; フォント設定</strong>から呼び出されます。</li>
-
-   <li><a href="fileFormts.html" title="対応するファイル形式">利用可能なフィルタ</a>のそれぞれで扱われるファイルを修正するために、<a href="fileFilters.html" title="ファイルフィルタ">ファイルフィルタオプション</a>を使えます。</li>
-
-   <li><a href="segmentation.html" title="翻訳対象ファイルの分節化">分節化設定ダイアログ</a>で、文章を文に分節化する方法を変更できます。文単位の分節化は<a href="projectProperties.html" title="プロジェクト設定">プロジェクト設定</a>ダイアログで有効化/無効化できます。</li>
-
-   <li><a href="translationEditing.html" title="翻訳文書編集">翻訳入力行設定ダイアログ</a>は、分節を移動するときのOmegaTの振る舞いを変更します。</li>
-</ul>
-
-<hr>
-<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
-
+        <td style="text-align: right;"><a href="xindex.html">索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

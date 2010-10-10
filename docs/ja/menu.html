@@ -1,179 +1,1199 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>メインメニュー - OmegaT 1.6.2 取扱説明ガイド</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>OmegaT 2.0 取扱説明ガイド - メインメニューとキーボードショートカット</title>
 </head>
+
 <body>
+  <h2>メインメニューとキーボードショートカット</h2>
 
-<h1>メインメニュー</h1>
+  <h3><a href="#menu">メインメニュー</a></h3>
 
-<p>OmegaT の全ての機能はエディタウィンドウの上にあるメニューバーから利用可能です。ほとんどの機能は<a href="keyboardShortcuts.html">キーボードショートカット</a>経由でも利用可能です。</p>
+  <h3><a href="#shortcuts">キーボードショートカット</a></h3>
 
-<p><strong><code>Ctrl</code></strong> は Windows, UNIX, UNIX 風のオペレーティングシステムでは<strong><code>Ctrl</code></strong> / <strong><code>Control</code></strong>キーを使います。Mac OS X ユーザーは代わりに Apple key <img src="images/AppleKey.gif" alt="Apple key" width="19" height="19">を使うことになるでしょう。</p>
+  <ul>
+    <li>
+      <p><a href="#Project_management">プロジェクトの管理</a></p>
+    </li>
 
-<h2>目次</h2>
-<ul type="none">
-   <li>1. <a href="#Project_Menu">プロジェクトメニュー</a></li>
-   <li>2. <a href="#Edit_Menu">編集メニュー</a></li>
-   <li>3. <a href="#Go_to_Menu">Go to Menu移動メニュー</a></li>
-   <li>4. <a href="#Tools_Menu">ツールメニュー</a></li>
-   <li>5. <a href="#Options_Menu">設定メニュー</a></li>
-   <li>6. <a href="#Help_Menu">ヘルプメニュー</a></li>
-</ul>
+    <li>
+      <p><a href="#Editing">編集</a></p>
+    </li>
 
-<a name="Project_Menu"></a>
-<h4>プロジェクトメニュー</h4>
+    <li>
+      <p><a href="#Moving_around">移動</a></p>
+    </li>
 
-<p>
-<dl>
-   <dt>新規作成</dt>
-   <dd>新しいプロジェクトを作成して、開きます。プロジェクトを作成するためのダイアログは<a href="projectProperties.html">プロジェクトの編集</a>のためのものと同じです。</dd>
+    <li>
+      <p><a href="#Reference_windows">ウィンドウの参照</a></p>
+    </li>
 
-   <dt>プロジェクトを開く <code>&lt;Ctrl+O&gt;</code></dt>
-   <dd>以前に作成したプロジェクトを開きます。</dd>
+    <li>
+      <p><a href="#Other">その他</a></p>
+    </li>
+  </ul>
+  <hr>
 
-   <dt>原文ファイルを追加</dt>
-   <dd>選択したファイルを<code>/source</code>ディレクトリにコピーし、新しいファイルを読み込むためにプロジェクトを再読み込みします。</dd>
+  <h2><a name="menu" id="menu"></a>メインメニュー</h2>
 
-   <dt>再読み込み</dt>
-   <dd>原文ファイル、参考用翻訳メモリ、用語集の外部での変化を取り込むために、プロジェクトを再読み込みします。</dd>
+  <p>OmegaT の全ての機能は、編集ウィンドウ上部にあるメニューから実行できます。多くの機能に<a href=
+  "#shortcuts">キーボードショートカット</a>が割り当てられており、それを用いて実行することもできます。ショートカットは<strong>［Ctrl］</strong>キーと文字キーを同時に押します。他のキーを含めて使用するものもあります。判別しやすいよう、文字キーは大文字で表記します。<strong>［Ctrl］</strong>キーは Windows で使用します。UNIX や UNIX 系のオペレーティングシステムでは<strong>［Ctrl］</strong> または <strong>［Control］</strong>キーが該当します。Mac ユーザーは<strong>［cmd］+キー</strong> と読み替えてください。Apple キーボードでは、<strong>［cmd］</strong>キーには <strong>command</strong> または <strong>リンゴ</strong> マークが記されています。</p>
 
-   <dt>閉じる</dt>
-   <dd>翻訳を保存し、プロジェクトを閉じます。</dd>
+  <table summary="just formatting" border="1" cellpadding="3" cellspacing="0"
+  width="500">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p align="center"><a href="#ProjectMenu">プロジェクト</a></p>
+        </td>
 
-   <dt>保存 <code>&lt;Ctrl+S&gt;</code></dt>
-   <dd>翻訳をプロジェクトの翻訳メモリに保存します。10 分毎、またはプロジェクトを閉じるか OmegaT を終了させたときに、OmegaT は自動的に翻訳を保存します。</dd>
+        <td>
+          <p align="center"><a href="#EditMenu">編集</a></p>
+        </td>
 
-   <dt>訳文ファイル生成</dt>
-   <dd>翻訳を基にした訳文を生成します。翻訳されたファイルは、<code>/target</code>ディレクトリに配置されます。</dd>
+        <td>
+          <p align="center"><a href="#GoToMenu">移動</a></p>
+        </td>
 
-   <dt>設定 <code>&lt;Ctrl+E&gt;</code></dt>
-   <dd>プロジェクト言語とフォルダ位置を編集するための<a href="projectProperties.html">プロジェクト設定</a>ダイアログを表示します。</dd>
+        <td>
+          <p align="center"><a href="#ViewMenu">表示</a></p>
+        </td>
 
-   <dt>翻訳対象ファイル一覧... <code>&lt;Ctrl+L&gt;</code></dt>
-   <dd><a href="userInterface.html#Project_Files">翻訳対象ファイル一覧ウィンドウ</a>を閉じるか開くかします(現在開いているか閉じているかに依存します)。</dd>
+        <td>
+          <p align="center"><a href="#ToolsMenu">ツール</a></p>
+        </td>
 
-   <dt>終了 <code>&lt;Ctrl+Q&gt;</code></dt>
-   <dd>プロジェクトを保存し、OmegaT を終了します。もしプロジェクトを手動で保存していなかった場合、本当に終了していいか確認します。</dd>
-</dl>
-</p>
+        <td>
+          <p align="center"><a href="#OptionsMenu">設定</a></p>
+        </td>
 
-<a name="Edit_Menu"></a>
-<h4>編集メニュー</h4>
+        <td>
+          <p align="center"><a href="#HelpMenu">ヘルプ</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>ほとんどのアプリケーションで見つけられる機能(コピー/切り取り/貼り付け)はこのメニューには表示されていませんが、システムショートカットを使うことで利用可能です。例えば、 Windows では:</p>
+  <table summary="just formatting" border="0" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
 
-<p>
-<dl>
-   <dt>コピー <code>&lt;Ctrl+C&gt;</code></dt>
-   <dd>選択した文章をクリップボードにコピーします。</dd>
+          <h3><a name="ProjectMenu" id="ProjectMenu"></a>プロジェクト</h3>
+        </td>
+      </tr>
 
-   <dt>切り取り <code>&lt;Ctrl+X&gt;</code></dt>
-   <dd>選択した文章をクリップボードにコピーし、選択した文章を削除します。</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［新規作成...］</code></p>
+        </td>
 
-   <dt>貼り付け <code>&lt;Ctrl+V&gt;</code></dt>
-   <dd>クリップボードからカーソル位置に文章を貼り付けます。</dd>
-</dl>
-</p>
+        <td width="17%"></td>
 
-<p>メニュー自身には以下の項目があります:</p>
+        <td>
+          <p>新しいプロジェクトを作成し、開きます。ここで表示されるウィンドウは<a href="projectProperties.html">［プロジェクト設定］</a>ウィンドウと同じです。</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>操作取り消し &amp;U <code>&lt;Ctrl+Z&gt;</code></dt>
-   <dd>直前に行なった編集動作の前の状態に戻ります。修正された分節が検証されてしまうと動作しません。</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［開く...］</code></p>
+        </td>
 
-   <dt>操作繰り返し <code>&lt;Ctrl+Y&gt;</code></dt>
-   <dd>直前の編集動作を取り消す前の状態に戻ります。修正された分節が検証されてしまうと動作しません。</dd>
+        <td width="17%">
+          <p><code>［Ctrl+O］</code></p>
+        </td>
 
-   <dt>参考訳文に置換 <code>&lt;Ctrl+R&gt;</code></dt>
-   <dd>現在注目している分節の内容を選択した参考訳文で置き換えます(デフォルトでは 1 番目の参考訳文が選択されています)</dd>
+        <td>
+          <p>すでに作成したプロジェクトを開きます。</p>
+        </td>
+      </tr>
 
-   <dt>参考訳文を挿入 <code>&lt;Ctrl+I&gt;</code></dt>
-   <dd>カーソル位置に選択した参考訳文を挿入します。この機能は、たとえ文章が選択状態でも、訳文分節は上書きしません。</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>原文ファイル追加…</code></p>
+        </td>
 
-   <dt>原文に置換 <code>&lt;Shift+Ctrl+R&gt;</code></dt>
-   <dd>現在注目している分節の内容を原文で置き換えます。</dd>
+        <td width="17%"></td>
 
-   <dt>原文を挿入 <code>&lt;Shift+Ctrl+I&gt;</code></dt>
-   <dd>カーソル位置に原文を挿入します。</dd>
+        <td>
+          <p>選択したファイルをプロジェクトの <code>source</code> フォルダーにコピーし、その新しいファイルを読み込むために、プロジェクトを再読み込みします。</p>
+        </td>
+      </tr>
 
-   <dt>プロジェクトを検索... <code>&lt;Ctrl+F&gt;</code></dt>
-   <dd>新しい<a href="userInterface.html#Search_Window">検索ウィンドウ</a>を開きます。</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［MediaWiki から原文を追加...］</code></p>
+        </td>
 
-   <dt>参考訳文 #N を選択<code>&lt;Ctrl+N&gt;</code> (N は 1 から 5)</dt>
-   <dd>分節に置換または挿入するために、参考訳文ウィンドウに表示されているN番目の参考訳文を選択します。<a href="userInterface.html#Fuzzy_Matches">参考訳文</a>の項目に色の意味に関する詳細が記述されています。</dd>
-</dl>
-</p>
+        <td width="17%"></td>
 
-<a name="Go_to_Menu"></a>
-<h4>移動メニュー</h4>
+        <td>
+          <p>入力した URL をもとに MediaWiki 形式のページを開き、編集可能な部分を原文として追加します。</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>次の未翻訳分節 <code>&lt;Ctrl+U&gt;</code></dt>
-   <dd>翻訳メモリに対応するものがない次の分節に移動します。</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［再読み込み］</code></p>
+        </td>
 
-   <dt>次の分節<code>&lt;Ctrl+N&gt;</code>, <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
-   </dt>
-   <dd>次の分節に移動します。現在の分節がファイルの最後の場合、次のファイルの最初の分節に移動します。</dd>
+        <td width="17%"><code>［F5］</code></td>
 
-   <dt>前の分節<code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
-   </dt>
-   <dd>前の分節に移動します。現在の分節がファイルの最初の場合、前のファイルの最後の分節に移動します。</dd>
-</dl>
-</p>
+        <td>
+          <p>外部からの原文ファイルの変更や、過去の翻訳メモリや用語集を認識させるために、プロジェクト全体を再読み込みします。</p>
+        </td>
+      </tr>
 
-<a name="Tools_Menu"></a>
-<h4>ツールメニュー</h4>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［閉じる］</code></p>
+        </td>
 
-<p>
-<dl>
-   <dt>タグ検証 <code>&lt;Ctrl+T&gt;</code></dt>
-   <dd>フォーマット化ファイルでタグがなくなったり位置が変わったりしていないかを調べます。タグを間違えている分節の一覧を表示します。<a href="userInterface.html#Tag_Validation">タグ検証ウィンドウ</a>の項目に、ここで何が表示されているかが説明されていて、<a href="formattedText.html">フォーマット付きテキストの翻訳</a>でなぜかを説明しています。</dd>
-</dl>
-</p>
+        <td width="17%"><code>［Ctrl+Shift+W］</code></td>
 
-<a name="Options_Menu"></a>
-<h4>設定メニュー</h4>
+        <td>
+          <p>それまでの翻訳内容を保存し、プロジェクトを閉じます。</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>TABで進む</dt>
-   <dd>分節検証キーをデフォルトの<code>&lt;Enter&gt;</code>から<code>&lt;Tab&gt;</code>に変更します。このオプションは中国、日本、韓国の文字入力システムで便利です。</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［保存］</code></p>
+        </td>
 
-   <dt>フォント...</dt>
-   <dd>文書表示用フォントを変更するための<a href="fontSettings.html">フォント設定</a>ダイアログを表示します。古いコンピューターのユーザーは、プロジェクトを開く前にフォントを変更した方が良いでしょう。このペナルティは G4 + Mac OS X + 日本語の組み合わせのときに最大になります。</dd>
+        <td width="17%">
+          <p><code>［Ctrl+S］</code></p>
+        </td>
 
-   <dt>ファイルフィルタ...</dt>
-   <dd>ファイルの扱いと解析の設定のための<a href="fileFilters.html">ファイルフィルタ</a>ダイアログを表示します。</dd>
+        <td>
+          <p>プロジェクトの翻訳メモリを保存します。OmegaT は 10 分ごとに自動的に、または、プロジェクトを閉じるか、OmegaT を終了させるときに、開いているプロジェクトを保存します。</p>
+        </td>
+      </tr>
 
-   <dt>分節化...</dt>
-   <dd>文書分節化を設定するために<a href="segmentation.html">翻訳文書分節化</a>ダイアログを表示します。</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［訳文ファイルを生成］</code></p>
+        </td>
 
-   <dt>翻訳入力行...</dt>
-   <dd>まだ翻訳されていない分節の訳文フィールドを設定するための<a href="translationEditing.html">翻訳入力行設定</a>ダイアログを表示します。</dd>
+        <td width="17%"><code>［Ctrl+D］</code></td>
 
-   <dt>ウィンドウ初期設定に戻す</dt>
-   <dd>メイン OmegaT ウィンドウのコンポーネント(エディタ、参考訳文、用語集)をデフォルトの状態に戻します。これらのコンポーネントを結合解除したり移動したり他のコンポーネントで隠したりして、元の状態に戻せなくなったときにこの機能を使ってください。</dd>
-</dl>
-</p>
+        <td>
+          <p>それまで翻訳した内容をもとに訳文ファイルを生成します。訳文ファイルは <code>target</code> フォルダーに保存されます。</p>
+        </td>
+      </tr>
 
-<a name="Help_Menu"></a>
-<h4>ヘルプメニュー</h4>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［プロジェクト設定］</code></p>
+        </td>
 
-<p>
-<dl>
-   <dt>取り扱い説明ガイド... <code>&lt;F1&gt;</code></dt>
-   <dd>このガイドを別のウィンドウで表示する為の<a href="userInterface.html#Help_Browser">ヘルプブラウザ</a>を開きます。</dd>
+        <td width="17%">
+          <p><code>［Ctrl+E］</code></p>
+        </td>
 
-   <dt>OmegaTについて...</dt>
-   <dd>著作権、クレジット、ライセンス情報を表示します。</dd>
-</dl>
-</p>
+        <td>
+          <p>プロジェクトの言語や使用フォルダーを変更するため<a href="projectProperties.html">［プロジェクト設定］</a>ウィンドウを表示します。</p>
+        </td>
+      </tr>
 
-<hr>
-<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［翻訳対象ファイル一覧...］</code></p>
+        </td>
 
+        <td width="17%">
+          <p><code>［Ctrl+L］</code></p>
+        </td>
+
+        <td>
+          <p><a href="userInterface.html#Project_Files">［翻訳対象ファイル一覧］</a>ウィンドウを開きます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［終了］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+Q］</code></p>
+        </td>
+
+        <td>
+          <p>プロジェクトを保存し OmegaT を終了します。まだ一度も手動で保存していなかった場合は、本当に閉じてもよいかどうか確認メッセージが表示されます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="EditMenu" id="EditMenu"></a>編集</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>多くのアプリケーションで使える機能（コピー、切り取り、貼り付け）は、一覧には表示していませんが、お使いのシステムのショートカットとして OmegaT でも使用できます。例えば：</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［コピー］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+C］</code></p>
+        </td>
+
+        <td>
+          <p>選択したテキストをクリップボードにコピーします。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［切り取り］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+X］</code></p>
+        </td>
+
+        <td>
+          <p>選択したテキストを削除し、クリップボードにコピーします。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［貼り付け］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+V］</code></p>
+        </td>
+
+        <td>
+          <p>現在のカーソル位置に、クリップボードにあるテキストを貼り付けます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p><strong>編集メニューに存在するのは以下の項目です：</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［取り消す］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+Z］</code></p>
+        </td>
+
+        <td>
+          <p>直前の編集が行われる前の状態に戻します。分節の編集が確定された後の場合は、機能しません。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［やり直す］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+Y］</code></p>
+        </td>
+
+        <td>
+          <p>直前に取り消された操作を再度行います。分節の編集が確定された後の場合は、機能しません。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［参考訳文に置換］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+R］</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節の全体を、選択されている参考訳文で上書きします。（デフォルトでは最初の参考訳文が選択されています）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［参考訳文を挿入］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+I］</code></p>
+        </td>
+
+        <td>
+          <p>現在のカーソル位置に、選択されている参考訳文を挿入します。もし訳文の一部を選択した状態であれば、その部分を上書きします。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［機械翻訳に置換］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+M］</code></p>
+        </td>
+
+        <td>
+          <p>訳文分節を機械翻訳エンジンによる翻訳内容に置換します。Google Translate が有効になっていない場合は、何も行いません。（メニューの［設定］→［機械翻訳］を確認してください）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［原文に置換］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Shift+Ctrl+R］</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節を、原文の内容と置換します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［原文を挿入］<br></code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Shift+Ctrl+I］</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節のカーソル位置に、原文の内容を挿入します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>選択領域を出力</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Shift+Ctrl+C］</code></p>
+        </td>
+
+        <td>
+          <p>選択した領域を別のテキストファイルに出力します。選択領域がない場合、現在開いている原文がこのファイルに書き込まれます。OmegaT を閉じるとき、このファイルは空の状態ではなく、通常のクリップボードと同じように機能します。出力された内容は、ユーザーファイルがあるフォルダー（<a href=
+          "filesAndDirectories.html#user" target="_blank">ファイルとディレクトリ</a> のページを参照してください）に、<span style=
+          "font-style: italic;">selection.txt</span> というファイルにコピーされます。&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［プロジェクトを検索...］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+F］</code></p>
+        </td>
+
+        <td>
+          <p><a href="userInterface.html#Search_Window">［検索］</a>ウィンドウを新しく開きます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［大/小文字設定...］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Shift + F3］</code></p>
+
+          <p><code>（右を参照）</code></p>
+        </td>
+
+        <td>
+          <p>訳文分節中の選択したテキストに対し、ケースを変更します。（全て小文字→全て大文字→タイトル形式：単語先頭のみ大文字）［Shift+F3］で、上記 3 通りを順に切り替えて実行します。テキストを何も選択していない場合、OmegaT はカーソル右にある単語をその場で選択して実行します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［参考訳文 #N を選択］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+#N］</code></p>
+        </td>
+
+        <td>
+          <p>現在の分節に対して、置換または挿入するために、参考訳文ウィンドウに表示された N 番目の参考訳文を選択します。（#N は 1 から 5 の数字）<a href="userInterface.html#Match">参考訳文</a> の項に、色表示を含めた詳細の説明があります。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="GoToMenu" id="GoToMenu"></a>移動</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［次の未翻訳分節］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+U］</code></p>
+        </td>
+
+        <td>
+          <p>プロジェクトの翻訳メモリにまだ存在していない（未翻訳の）次の分節に移動します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［次の分節］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+N］</code>または<code>［Enter］</code>または<code>［Tab］</code></p>
+        </td>
+
+        <td>
+          <p>次の分節に移動します。現在の分節がファイル末尾である場合は、次のファイルの最初の分節へ移動します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［前の分節］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+P］</code>または<code>［Ctrl+Enter］</code>または<code>［Ctrl+Tab］</code></p>
+        </td>
+
+        <td>
+          <p>一つ前の分節に移動します。現在の分節がファイル先頭である場合は、前のファイルの末尾の分節へ移動します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［分節番号を指定...］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+J］</code></p>
+        </td>
+
+        <td>
+          <p>指定した番号の分節を開きます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［選択した分節履歴をさかのぼる］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+Shift+N］</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT は分節を編集した履歴を記憶しています。このコマンドを実行すると、［前に移動した分節に戻る］コマンドによって移動した履歴をたどり、1 回前に編集した分節へ移動できます。&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［選択した分節履歴をくだる］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+Shift+P］</code></p>
+        </td>
+
+        <td>
+          <p>1 回前、または複数回前に編集した分節へ戻ることができます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ViewMenu" id="ViewMenu"></a>表示</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［翻訳済み分節を色づけ］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>チェックがある場合、翻訳済みの分節が黄色でハイライト表示されます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［未翻訳分節を色づけ］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>チェックがある場合、未翻訳の分節が紫色でハイライト表示されます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［原文を表示］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>チェックがある場合、各分節に対応した原文が緑色にハイライト表示されます。チェックがない場合、原文の分節は表示されません。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ToolsMenu" id="ToolsMenu"></a>ツール</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［タグ検証］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+T］</code></p>
+        </td>
+
+        <td>
+          <p>整形されたファイルの中で、タグが欠けていたり、位置が変わったりしている箇所がないかを調べます。タグの間違いがある分節の一覧が表示されます。この詳細は <a href=
+          "userInterface.html#tag_Validation">［タグ検証］</a>ウィンドウの項目で説明しています。<a href="formattedText.html">整形されたテキストを扱う</a> のページでこの検証がなぜ必要なのかを解説しています。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="OptionsMenu" id="OptionsMenu"></a>設定</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［TAB で進む］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>編集する分節を次へ進めるキーを、デフォルトの<code>［Enter］</code>キーの代わりに<code>［Tab］</code>キーとします。この設定は、中国語、日本語、または朝鮮語のような入力システムの場合に便利です。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［終了時に常に確認］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>OmegaT を終了する前に、常に確認ウィンドウが表示されます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td><code>機械翻訳</code></td>
+
+        <td></td>
+
+        <td>
+          <p><a href="GoogleTranslate.html">Google Translate</a> を有効または無効にします。有効な場合、<code>［Ctrl+M］</code>を押すと、現在の分節のうち選択された部分を、Google Translate による機械翻訳に置換します。機械翻訳ウィンドウに翻訳内容が表示されるので、置換する前にそれを確認することもできます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［字体...］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>テキスト表示する字体を設定する<a href="fontSettings.html">［表示用字体の設定］</a>ウィンドウを表示します。古いコンピュータを使用しており、ウィンドウのサイズ変更が非常に遅いと感じるユーザーは、字体の変更を試してください。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［ファイルフィルター...］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>ファイルの取り扱いを設定する<a href="fileFilters.html">［ファイルフィルターの設定］</a>ウィンドウを表示します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［分節化規則...］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>テキストの分節化を設定する<a href="segmentation.html">［分節化規則の設定］</a>ウィンドウを表示します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［綴り確認...］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>綴り確認機能を組み込み、設定するための <a href="spellchecker.html">［綴り確認機能の設定］</a>ウィンドウを表示します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［翻訳入力行...］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p><a href="translationEditing.html">［翻訳入力行の設定］</a> ウィンドウを表示します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［ウィンドウを初期位置に復元］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>OmegaT で使用する各ウィンドウ（編集、参考訳文、用語集、辞書、機械翻訳）を、初期位置に戻します。各ウィンドウの表示が切り離されたり、移動したり、隠れてしまった後、元の状態に戻したいときに使用してください。また、OmegaT のバージョンを変更し、いくつかのウィンドウが表示されなくなったような場合にも、使用できます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="HelpMenu" id="HelpMenu"></a>ヘルプ</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>［取扱説明書...］</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>［F1］</code></p>
+        </td>
+
+        <td>
+          <p><a href="userInterface.html#Help_Browser">取扱説明書</a> を独立したウィンドウで開きます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>［OmegaT について...］</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>著作権やクレジット、ライセンス情報を表示します。</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="shortcuts" id="shortcuts"></a>キーボードショートカット</h2>
+
+  <p>以下のショートカットは、メインウィンドウ上で使用できます。他のウィンドウが前面に表示されている場合、<code><strong>［Esc］</strong></code>を押してそのウィンドウを閉じるか、メインウィンドウを一度クリックして、前面に出してください。</p>
+
+  <p><code><strong>［Ctrl］</strong></code>キーと文字キーを同時に押すと、ショートカットが動作します。他のキーを含めて使用するものもあります。判別しやすいよう、文字キーは大文字で表記します。</p>
+
+  <p><strong><code>［Ctrl］</code></strong> キーは Windows で使用します。UNIX や UNIX 系のオペレーティングシステムでは <strong><code>［Ctrl］</code></strong> または <code><strong>［Control］</strong></code>キーが該当します。Mac ユーザーは <code><strong>［cmd］+キー</strong></code> と読み替えてください。<code><strong>［cmd］</strong></code> キーには、Apple キーボードでは <code><strong>command</strong></code> または <strong>リンゴ</strong> マークが記されています。</p>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">プロジェクトの管理</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">編集</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">移動</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">ウィンドウの参照</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">その他</a></p>
+    </li>
+  </ul>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Project_management" id="Project_management"></a>プロジェクトの管理</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［プロジェクトを開く］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+O］</code></p>
+        </td>
+
+        <td>
+          <p>既存のプロジェクトを選択するウィンドウを表示します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［保存］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+S］</code></p>
+        </td>
+
+        <td>
+          <p>現在の翻訳内容を、プロジェクトの omegat フォルダにある project_save.tmx に保存します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［プロジェクトを閉じる］</p>
+        </td>
+
+        <td>
+          <p><code>［Shift+Ctrl+W］</code></p>
+        </td>
+
+        <td>
+          <p>現在のプロジェクトを閉じます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［訳文ファイルを生成］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+D］</code></p>
+        </td>
+
+        <td>
+          <p>プロジェクトの target フォルダに訳文ファイルを生成します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>プロジェクトの設定</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+E］</code></p>
+        </td>
+
+        <td>
+          <p>プロジェクト設定ウィンドウを表示します。設定の変更も行えます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Editing" id="Editing"></a>編集</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［取り消す］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+Z］</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節において、直前の編集が行われる前の状態に戻します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［やり直す］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+Y］</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節において、直前に取り消された操作を再度行います。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［参考訳文 #N を選択］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+#N］</code></p>
+        </td>
+
+        <td>
+          <p>#N は 1 から 5 の数字。現在の分節に対して、置換または挿入するために、参考訳文ウィンドウに表示された N 番目の参考訳文を選択します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［参考訳文に置換］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+R］</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節の内容を、選択されている参考訳文に置換します。（デフォルトでは最初の参考訳文が選択されています）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［参考訳文を挿入］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+I］</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節のカーソル位置に、選択されている参考訳文を挿入します。（デフォルトでは最初の参考訳文が選択されています）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［原文に置換］</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節を原文の内容と置換します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［原文を挿入］</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節のカーソル位置に、原文の内容を挿入します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［プロジェクトを検索...］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+F］</code></p>
+        </td>
+
+        <td>
+          <p>検索ウィンドウを表示します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>［機械翻訳に置換］</p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+M］</code></p>
+        </td>
+
+        <td>
+          <p>現在の訳文分節を、機械翻訳エンジンによる機械翻訳に置換します。Google Translate が有効になっていない場合は、何も行いません。（メニューの［設定］→［機械翻訳］を確認してください）</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Moving_around" id="Moving_around"></a>移動</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［次の未翻訳分節］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+U］</code></p>
+        </td>
+
+        <td>
+          <p>編集入力行を、プロジェクトの翻訳メモリにまだ存在していない（未翻訳の）次の分節に移動させます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［次の分節］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+N］<br>［Enter］または［Return］&nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>翻訳入力行を、次の分節に移動させます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［前の分節］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+P］</code></p>
+        </td>
+
+        <td>
+          <p>翻訳入力行を、1 つ前の分節に移動させます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［分節番号を指定...］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+J］</code></p>
+        </td>
+
+        <td>
+          <p>指定した分節番号に翻訳入力行を移動させます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［選択した分節履歴をくだる］</p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+Shift+P］</code></p>
+        </td>
+
+        <td>
+          <p>分節移動の履歴をたどり、1 つ前に戻ります。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［選択した分節履歴をさかのぼる］</p>
+        </td>
+
+        <td width="17%">
+          <p><code>［Ctrl+Shift+N］</code></p>
+        </td>
+
+        <td>
+          <p>分節移動の履歴をたどり、1 つ次に進みます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Reference_windows" id="Reference_windows"></a>ウィンドウの参照</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［翻訳対象ファイル一覧］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+L］</code></p>
+        </td>
+
+        <td>
+          <p>プロジェクト内の翻訳対象となるファイルを一覧表示します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Other" id="Other"></a>その他</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［タグ検証］</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+T］</code></p>
+        </td>
+
+        <td>
+          <p><a href="userInterface.html#tag_Validation">［タグ検証］</a>ウィンドウを開きます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>選択領域を出力</p>
+        </td>
+
+        <td>
+          <p><code>［Shift+</code><code>Ctrl+C］</code></p>
+        </td>
+
+        <td>
+          <p>選択した領域（または選択領域がない場合は現在の原文）を出力します。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>［プロジェクトを検索...］&nbsp;&nbsp; &nbsp;</p>
+        </td>
+
+        <td>
+          <p><code>［Ctrl+F］&nbsp;&nbsp; &nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>［検索］ウィンドウを開きます。</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>［ヘルプ］</p>
+        </td>
+
+        <td>
+          <p><code>［F1］</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT 取扱説明書を別ウィンドウで表示します。</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a></td>
+
+        <td style="text-align: center;"><a href="index.html">ホーム</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

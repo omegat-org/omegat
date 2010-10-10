@@ -1,207 +1,274 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>雀 お手軽スタートガイド ー OmegaT 1.6.1 取扱説明ガイド</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>お手軽スタートガイド - OmegaT 2.0 取扱説明ガイド</title>
 </head>
+
 <body>
+  <h2>５分間でOmegaTを使って翻訳スタート！<br>お手軽スタートガイド</h2>
 
-<h1>お手軽スタートガイド</h1>
-<p><small>５分間でOmegaTを使って翻訳スタート！</small></p>
+  <ul>
+    <li>
+      <p><a href="#summary">OmegaTのしくみ</a></p>
+    </li>
 
-<p><strong>ここでは、OmegaTの基本的な使い方を説明します。OmegaTの提供する機能を理解するため、必ず、取扱説明ガイドをよく読んでください。</strong></p>
+    <li>
+      <p><a href="#translate">OmegaTを使って翻訳しよう</a></p>
 
-<h2>目次</h2>
+      <ul>
+        <li>
+          <p><a href="#create">プロジェクトを新規作成して開く</a></p>
+        </li>
+      </ul>
+    </li>
 
-<ol type="I">
-   <li><a href="#Briefly.2C_how_OmegaT_works">OmegaTはどのように働くか</a></li>
-   <li><a href="#How_to_translate_using_OmegaT">OmegaTで、どのように翻訳するか</a>
-      <ol type="a">
-         <li><a href="#Create_and_open_a_new_project">プロジェクトを新規作成して開く</a></li>
-         <li><a href="#Translate_the_segments_one_by_one">分節を１つずつ翻訳する</a></li>
-         <li><a href="#Use_TM_and_glossary_matches">参考翻訳メモリ−と用語集の使用</a></li>
-         	<ol type="1">
-         		<li><a href="#TM_matches">参考翻訳メモリーファッジー訳文</a></li>
-         		<li><a href="#Glossary_matches">用語集の一致項目</a></li>
-         	</ol>
-         <li><a href="#Create_the_translated_documents">訳文ファイルを生成する</span></a></li>
-      </ol>
-   </li>
-   <li><a href="#Dealing_with_tagged_text">タグ付けテキストの対処法</a>
-      <ol type="a">
-         <li><a href="#An_example...">例えば…</a></li>
-         <li><a href="#Tag_verification">タグの確認</a></li>
-      </ol>
-   </li>
-</ol>
+    <li>
+      <p><a href="#segments">分節を１つずつ翻訳する</a></p>
+    </li>
 
-<a name="Briefly.2C_how_OmegaT_works"></a>
-<h2>I. OmegaTはどのように働くか</h2>
+    <li>
+      <p><a href="#tm">参考訳文・用語集・辞書の活用</a></p>
+    </li>
 
-<p>OmegaTの画面は3つの異なるウインドウで構成されています。ウインドウはすべてマウスでサイズを変更できます。左側のウィンドウは、あなたの翻訳文を入力する「エディタウィンドウ」です。 上右側のウィンドウは「立候補訳文ウィンドウ」で、ファジー訳文があれば、そこに表示されますその下に「用語ウィンドウ」があって、用語集の一致項目があれば、そこに表示されます。</p>
+    <li>
+      <p><a href="#searches">文字列検索と Google Translate 機械翻訳</a></p>
+    </li>
 
-<p>OmegaTはエディタウインドウにて、翻訳対象文書を「分節化」して（またはパラグラフ単位で－詳しくは<a href="./segmentation.html">翻訳対象ファイルの分節化</a>を参照してください）表示します。分節を１つずつ翻訳していきます。分節を一つずつ翻訳するごとに、OmegaTは翻訳結果を翻訳メモリに蓄積していきます。すべての分節を翻訳し終えると、（それ以前でも）OmegaTは翻訳メモリを起動させて、「target」フォルダに翻訳済み文書を出力します。</p>
+    <li>
+      <p><a href="#create_trans">訳文ファイルの作成</a></p>
+    </li>
 
-<p>OmegaTは、あなたの翻訳作業を"翻訳プロジェクト"として管理します。OmegaTはプロジェクトごとに翻訳作業に必要なフォルダを作成します。作成されるフォルダには、翻訳対象文書を収めるフォルダ、翻訳に使用する用語集用フォルダや翻訳メモリ用フォルダがあります。さらに、OmegaTは、「target」という、翻訳済みのドキュメントのフォルダも作成します。</p>
+    <li>
+      <p><a href="#tags">タグ付けテキストの扱い</a></p>
 
-<a name="How_to_translate_using_OmegaT"></a>
-<h2>II. OmegaTで、どのように翻訳するか</h2>
+      <ul>
+        <li>
+          <p><a href="#example">例えば…</a></p>
+        </li>
+      </ul>
+    </li>
 
-<a name="Create_and_open_a_new_project"></a>
-<h3>a. プロジェクトを新規作成して開く</h3>
+    <li>
+      <p><a href="#tag_verif">タグの確認</a></p>
+    </li>
+  </ul>
 
-<p>メニューから、<strong>プロジェクト→新規作成</strong>を選択します。</p>
+  <p>ここでは、OmegaTの基本的な使い方を説明します。OmegaTの提供する機能を理解するため、必ず、取扱説明ガイドをよく読んでください。ここに書かれているショートカットは「ctrl+キー」として書かれていますが、Macの場合はそれを「cmd+キー」と読んでください。Apple社のキーボードにおいて、「cmd」というキーは「リンゴ」マークや「command」の付いたキーです。</p>
+  <hr>
 
-<p>プロジェクトファイルを保存したいフォルダを指定したら、「翻訳プロジェクト」名を入力します。この名前を、プロジェクトのフォルダ名として使います。すべてのプロジェクトファイルとサブフォルだは、このフォルダに保存されます。</p>
+  <h2><a name="summary" id="summary"></a>OmegaTのしくみ</h2>
 
-<p>続いて、作成するプロジェクトフォルダを設定できるダイアログが表示されます。</p>
+  <p>OmegaT の画面は主に <a href="userInterface.html">3 つの独立したウィンドウ</a> で構成されています。ウインドウはすべてマウスで大きさを変更できます。左側のウィンドウは、翻訳文を入力する「編集」ウィンドウです。上右側のウィンドウは「参考訳文」ウィンドウで、参考訳文があれば、そこに表示されますその下に「用語集」ウィンドウがあって、用語集の一致項目があれば、そこに表示されます。</p>
 
-<center><img src="images/NewProject.png" alt="プロジェクト設定ウインドウ" /></center>
+  <p>OmegaT は翻訳対象の原文に対し、文章（または段落）単位で「<a href=
+  "segmentation.html">分節化</a>」して編集ウインドウに表示します。分節を１つずつ翻訳していきます。翻訳するごとに、入力した翻訳内容が、<a href="translationMemories.html">翻訳メモリ</a>に自動的に記録されます。すべての分節を翻訳し終えると、（それ以前でも）OmegaTは翻訳メモリを起動させて、「target」フォルダに翻訳済み文書を出力します。</p>
 
-<p>サブフォルダの場所は、そのままで構いません。ただし、ソースとターゲット言語のコードを正しく選択してください。 言語コード（２文字）または言語-地域別コード（２文字＋２文字）をドロップダウンリストで選択するか、キーボードから入力します。手入力の場合は２文字形式にしてください。このとき、「target」フォルダの場所を覚えておいてください。ここに翻訳されたファイルが作成されます。</p>
+  <p>OmegaTは、あなたの翻訳作業を「翻訳プロジェクト」として管理します。OmegaTはプロジェクトごとに翻訳作業に必要なフォルダを作成します。翻訳前の <a href="filesToTranslate.html">原文ファイル</a>や、もし使用する場合は <a href="glossaries.html">用語集</a> や <a href="translationMemories.html">翻訳メモリ</a> を、その中にそれぞれサブフォルダを作成して保存します。さらに、OmegaTは、「target」という、翻訳済みのドキュメントのフォルダも作成します。</p>
+  <hr>
 
-<p>もしも、OmegaTの分節を段落の代わりに文で区切りたいなら、セグメントルールを調べるといいでしょう。</p>
+  <h2><a name="translate" id="translate"></a>OmegaTを使って翻訳しよう</h2>
 
-<p>プロジェクトの設定でOKをクリックすると、OmegaTはソースドキュメントをインポートするよう指示します。ファイルは個別にインポートできますが、フォルダ全体をインポートすることも可能です。（中のサブフォルダの全ファイルが対象になります。）もしも、不正なファイルやファイルの数が多すぎてインポートが上手くいかない場合は、プロジェクトの「source」フォルダから、そのファイルを削除してください。</p>
+  <h3><a name="create" id="create"></a>プロジェクトを新規作成して開く</h3>
 
-<p>翻訳対象ファイルを一覧するには、<strong>翻訳対象ファイル一覧</strong>ウインドウを参照してください（もし翻訳対象ファイル一覧が自動的に開かないときは、メニューの<strong>プロジェクト→翻訳対象ファイル一覧</strong>から開いてください）。「source」フォルダの内容を変更した場合は、メニューの<strong>プロジェクト→再読み込み</strong>でプロジェクトを再度読み込んでください。OmegaTは、デフォルトで、ファイル一覧の最初のファイルをまず表示します。</p>
+  <p>メニューから、<strong>プロジェクト→新規作成</strong>を選択します。</p>
 
-<p>OmegaTが翻訳できるのは、下記のファイル形式のみです。他の種類のファイルは、OmegaTは無視します。<ul>
-<li>Open Document 形式（ODF ISO/IEC 26300）</li>
-<li>OpenOffice.org </li>
-<li>XHTML、HTML</li>
-<li>HTMLヘルプコンパイラ（HCC）</li>
-<li>DocBook </li>
-<li>プレーンテキスト</li>
-<li>bundle.properties Java </li>
-<li>単一言語の .po ファイル</li>
-<li>INI（キー値 形式）</li>
-</ul>
-</p>
+  <p>プロジェクトのファイルを保存したいフォルダを指定したら、「翻訳プロジェクト」名を入力します。この名前を、プロジェクトのフォルダ名として使います。プロジェクトのすべてのファイルとサブフォルダは、このフォルダに保存されます。</p>
 
-<a name="Translate_the_segments_one_by_one"></a>
-<h3>b. 分節を１つずつ翻訳する</h3>
+  <p>続いて、作成するプロジェクトフォルダを設定できるダイアログが表示されます。</p>
 
-<p>OmegaTは翻訳プロジェクトと翻訳対象ファイルの設定が終わると先頭の対象ファイルを表示します。最初の分節において, OmegaTは、原文テキストを緑色の背景色で表示します。そして、ターゲットとなる行に原文テキストのコピーを表示します。（この時点では、現在翻訳している分節以外の分節は保護がかけられていて修正できません）翻訳をおこなうには、タグ「&lt;分節 0001&gt;」と「&lt;/分節&gt;」の中にある原文を上書きしてください。</p>
+  <p align="center"><a name="graphics2" id="graphics2"></a></p>
 
-<p><strong>「ENTER」</strong>キーを押すと、次の分節に進みます。</p>
+  <p><img alt="プロジェクト新規作成ダイアログ"
+  title="プロジェクト新規作成ダイアログ" src="images/NewProject.png"></p>
 
-<p>注意：<br/>[fuzzy] ー他の分節や段落を翻訳したいときは、（上下どちらの方向であれ）翻訳しようとする分節や段落をダブルクリックしてください。<br/>ー未翻訳の分節に移動した場合に（原文を上書きするかわりに）空白の分節に翻訳文を入力したい場合は、メニューの<strong>設定→翻訳入力行</strong>にて設定をおこなってください。</p>
+  <p>ここではまず、原文と訳文の<a href="languages.html">言語コード</a>が正しく設定されていることを確認してください。その下で、各フォルダの場所も確認できます。言語コード（2 文字）または言語-地域コード（2+2 文字）を、リストから選択するか、直接手入力で指定してください。（言語コードは 2 または 3 文字で指定できます。）このとき、「target」フォルダの場所を覚えておいてください。ここに翻訳されたファイルが作成されます。もし、OmegaT による分節化を「段落」でなく文章ごとに行いたい場合は、<a href="segmentation.html">分節化規則</a>を確認するとよいでしょう。</p>
 
-<p>分節の翻訳が終了して<strong>「ENTER」</strong>を押せば、OmegaTは自動的にさまざまな処理をおこないます。<br/>OmegaTは原文と翻訳文両方の分節を翻訳メモリに蓄積し、翻訳対象ファイルの中に翻訳箇所を同じ原文があれば自動的に翻訳文に置き換えます。OmegaTは翻訳メモリーと用語集を検索して、これから翻訳しようとする箇所で使えそうな参考訳文や用語を検索します。</p>
+  <p>プロジェクトの設定でOKをクリックすると、OmegaTは原文ファイルを選択するよう指示します。ファイルは個別に取り込むことができますし、フォルダ全体を取り込むことも可能です。（中のサブフォルダの全ファイルが対象になります。）もしも、間違ったファイルや数が多すぎてファイルが追加された場合は、プロジェクトの"source"フォルダから、そのファイルを削除してください。</p>
 
-<a name="Use_TM_and_glossary_matches"></a>
-<h3>c. 参考翻訳メモリ−と用語集の使用</h3>
+  <p>翻訳対象ファイルを一覧するには、<strong>翻訳対象ファイル一覧</strong>ウインドウを参照してください（もし翻訳対象ファイル一覧が自動的に開かないときは、メニューの<strong>プロジェクト→翻訳対象ファイル一覧</strong>から開いてください）。「source」フォルダの内容を変更した場合は、メニューの<strong>プロジェクト→再読み込み</strong>でプロジェクトを再度読み込んでください。OmegaTは、デフォルトで、ファイル一覧の最初のファイルをまず表示します。OmegaT は、あらかじめ定義した<a href="fileFilters.html">ファイルフィルタ</a>に一致する<a href="filesToTranslate.html">形式</a>のファイルのみを翻訳できます。他の種類のファイルは、OmegaTは無視します。</p>
 
-<a name="TM_matches"></a>
-<h4>1. 参考翻訳メモリーファッジー訳文</h4>
+  <ul>
+    <li>
+      <p>OpenDocument や OpenOffice.org</p>
+    </li>
 
-<p>OmegaTが翻訳メモリから、現在の分節で使えそうな参考訳文を見つけたときは（３０％以上一致－詳細は取扱説明ガイドを参照してください）、参考訳文を「立候補訳文ウインドウ」に表示します。OmegaTはデフォルトで、最も一致率の高い訳文をまず表示します。</p>
-<p>訳文として利用したい参考訳文が「立候補訳文ウインドウ」にあれば、キーボードのショートカット:<br/>
-<ul>
-   <li>「<code>Ctrl+I</code>」を押すと、選択した参考訳文がカーソルのある位置より後ろに挿入されます。</li>
-   <li>または、「<code>Ctrl+R</code>」を押すと、分節全体を上書きします。</li>
-</ul>
-</p>
+    <li>
+      <p>プレーンテキスト</p>
+    </li>
 
-<p>もし複数の参考訳文が表示された場合で、デフォルトで選択された訳文以外の訳文を利用したいときは:<br/>
-<ul>
-	<li>立候補訳文ウインドウから利用したい訳文を選びます。例えば2番目に表示される訳文を利用したい場合は、「<code>Ctrl+2</code>」を押すと2番目の訳文が選択されます。同様に「<code>Ctrl+3</code>」を押すと3番目の訳文が選択されます（以下同様）</li>
-	<li>訳文を選択後、上に記したように「<code>Ctrl+I</code>」または「<code>Ctrl+R</code>」を押せば訳文が利用できます。</li>
-</ul>
-</p>
+    <li>
+      <p>.po</p>
+    </li>
 
-<p>（未翻訳の分節に移動したときに、最も一致率の高い参考訳文を自動的に挿入するよう設定することもできます。このオプションは、<strong>設定→翻訳入力行</strong>で設定できます。）</p>
+    <li>
+      <p>bundle.properties Java</p>
+    </li>
 
-<a name="Glossary_matches"></a>
-<h4>2. 用語集の一致項目</h4>
+    <li>
+      <p>XHTML、HTML</p>
+    </li>
 
-<p>OmegaTが用語集から１００％合致する用語を見つけ出したら、その用語を用語集ウインドウに表示します。用語集に表示される用語はショートカットでエディタウインドウに移動させることはできません。</p>
+    <li>
+      <p>HTMLヘルプコンパイラ</p>
+    </li>
 
-<a name="Create_the_translated_documents"></a>
-<h3>d. 訳文ファイルを生成する</h3>
+    <li>
+      <p>INI（キー値 形式）</p>
+    </li>
 
-<p>すべての分節の翻訳が終了すれば（または訳文ファイルを生成したくなった時ならいつでも）、OmegaTは翻訳メモリーに蓄積された翻訳結果を利用して訳文ファイルを生成します。</p>
+    <li>
+      <p>DocBook</p>
+    </li>
 
-<p>訳文ファイルを生成するには、メニューから<strong>プロジェクト→訳文ファイル生成</strong>を選択します。</p>
+    <li>
+      <p>Microsoft Open XML</p>
+    </li>
 
-<p>OmegaTは、どれだけ翻訳しているかに関係なく、プロジェクトの「source」フォルダに、対応するファイルの訳文版を作成します。完全に、及び部分的に翻訳されたファイルは、プロジェクトの「target」フォルダにあります。</p>
+    <li>
+      <p>Okapiツール作の単一言語XLIFF</p>
+    </li>
 
-<p>翻訳作業を終える前に、訳文ファイルをアプリケーション（ブラウザ、ワードプロセッサなど）で開き、内容や書式を確認してください。もし修正したい箇所があれば、OmegaTを再度立ち上げて必要な修正をしてください。修正作業が終われば、必ず訳文ファイルをもう一度生成してください。</p>
+    <li>
+      <p>CopyFlow Gold for QuarkXPress</p>
+    </li>
 
+    <li>
+      <p>字幕ファイル (SRT)</p>
+    </li>
 
-<a name="Dealing_with_tagged_text"></a>
-<h2>III. タグ付けテキストの対処法</h2>
+    <li>
+      <p>ResX</p>
+    </li>
 
-<p>OmegaTでは、太字斜体などは特別のタグを使って認識します。そのため、生成された訳文ファイルでも、太字斜体などは元どおり表示されます。OmegaTが使っているタグはいくつかのアルファベット文字と数字、場合によって「/」を使って構成されます。例えば：&lt;f0&gt;、&lt;br10/&gt;、&lt;/s2&gt;など…</p>
+    <li>
+      <p>Android リソース</p>
+    </li>
 
-<p>これらの特別なタグ混じりの箇所を翻訳するときは、タグの扱いにはくれぐれも注意して、タグを消してしまわないようにしてください。（OmegaT取扱説明ガイドの「スタイルの付いたファイルの翻訳」を見てください。）</p>
+    <li>
+      <p>LaTeX</p>
+    </li>
+  </ul>
 
-<a name="An_example..."></a>
-<h3>a. 例えば…</h3>
+  <h3><a name="segments" id="segments"></a>分節を１つずつ翻訳する</h3>
 
-<p>これらのサンプルでは、分かりやすくするために、タグを<font color="#ff0000">赤色</font>で表しますが、 OmegaTではこのように表示されません。</p>
+  <p>OmegaTは翻訳プロジェクトと翻訳対象ファイルの設定が終わると先頭の対象ファイルを表示します。</p>
 
-<p>
-<strong>これは、HTMLファイルの分節のサンプルです。</strong>
-</p>
+  <p>編集対象となる（アクティブな）分節が、緑色でハイライト表示されます。原文テキストがその下、訳文となる行にコピーされて表示されます。（この時点では、現在翻訳している分節以外の分節は保護がかけられていて修正できません）翻訳をおこなうには、タグ「<code>&lt;分節 0001&gt;</code>」と「<code>&lt;/分節&gt;</code>」の中にある原文を上書きしてください。<strong>「ENTER」</strong>キーを押すと、次の分節に進みます。注意：</p>
 
-<p>
-<code><font color="#ff0000">&lt;p&gt;</font><font color="#ff0000">&lt;b&gt;</font>フォント表示<font color="#ff0000">&lt;/b&gt;</font>ダイアログでは、異なるフォント表示を選択できる。開くには、メニューから<font color="#ff0000">&lt;i&gt;</font>設定<font color="#ff0000">&lt;/i&gt;</font> &amp;gt; <font color="#ff0000">&lt;i&gt;</font>フォント表示<font color="#ff0000">&lt;/i&gt;</font> を選択する。フォントの種類とサイズは、ダイアログで変更できる。<font color="#ff0000">&lt;/p&gt;</font></code>
-</p>
+  <ul>
+    <li>
+      <p>ー他の分節や段落を翻訳したいときは、（上下どちらの方向であれ）翻訳しようとする分節や段落をダブルクリックしてください。</p>
+    </li>
 
-<p>
-<strong>これは、OmegaTがタグを赤色で表示するサンプルです。</strong>
-</p>
+    <li>
+      <p>もし、訳文となる行を（原文のコピーではなく）空白にしておきたい場合は、 <strong>［設定］→<a href="translationEditing.html">［翻訳入力行...］</a></strong> で設定してください。</p>
+    </li>
 
-<p>
-<code><font color="#ff0000">&lt;b0&gt;</font>フォント表示<font color="#ff0000">&lt;/b0&gt;</font>ダイアログでは、異なるフォント表示を選択できる。開くには、メニューから<font color="#ff0000">&lt;i1&gt;</font>設定<font color="#ff0000">&lt;/i1&gt;</font> &gt; <font color="#ff0000">&lt;i2&gt;</font>フォント表示<font color="#ff0000">&lt;/i2&gt;</font> を選択する。フォントの種類とサイズは、ダイアログで変更できる。</code>
-</p>
+    <li>
+      <p>メインメニューの <a href="menu.html"><b>［表示］</b></a> より、編集ウィンドウの設定を変更することができます。（例えば原文テキストを表示するかどうか、ハイライト表示するかどうかなど）</p>
+    </li>
+  </ul>
 
-<p>
-<strong>これは、このようなタグ付き文をどのように訳すかのサンプルです(this example is in Afrikaans)。</strong>
-</p>
+  <p>この「<strong>ENTER</strong>」キーを押したとき、いくつかのことが起こります。まずOmegaTは原文と翻訳文両方の分節を翻訳メモリに蓄積し、翻訳対象ファイルの中に翻訳箇所を同じ原文があれば自動的に翻訳文に置き換えます。OmegaTは翻訳メモリーと用語集を検索して、これから翻訳しようとする箇所で使えそうな参考訳文や用語を検索します。</p>
 
-<p>
-<code>'n Mens kan 'n ander vertoonfont kies met die 
-<font color="#ff0000">&lt;b0&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b0&gt;</font>-dialoogkassie. 
-Kies <font color="#ff0000">&lt;i1&gt;</font>Opstelling<font color="#ff0000">&lt;/i1&gt;</font> 
+  <h3><a name="tm" id="tm"></a>参考訳文・用語集・辞書の活用</h3>
 
-&gt; <font color="#ff0000">&lt;i2&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i2&gt;</font> 
-op die kieslys. Die lettertipe én die lettergrootte kan met dié 
-dialoogkassie verander word.</code>
-</p>
+  <h3><a name="tm_matches" id="tm_matches"></a>参考訳文</h3>
 
-<p>
-<strong>OmegaTが翻訳済みドキュメントを生成すると、HTMLファイルは次のようになります。</strong>
-</p>
+  <p>もし OmegaT が次の分節に対して使用できそうな（30% 以上一致した）参考訳文を翻訳メモリ中に見つけた場合、これらを参考訳文ウィンドウに表示します。OmegaTはデフォルトで、最も一致率の高い訳文をまず表示します。</p>
 
-<p>
-<code><font color="#ff0000">&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies 
-met die <font color="#ff0000">&lt;b&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b&gt;</font>-dialoogkassie. 
-Kies <font color="#ff0000">&lt;i&gt;</font>Opstelling<font color="#ff0000">&lt;/i&gt;</font> 
+  <table border="1" class="omegat">
+  <tr><td><p><strong>1) If OmegaT finds any fuzzy matches (30% or over) for the next segment in the translation memory, it displays them in the Match Viewer.<br>もし OmegaT が次の分節に対して使用できそうな（30%以上一致した）参考訳文を翻訳メモリ中に見つけた場合、これらを参考訳文ビューアに表示します。<br>&lt;100/82/92% auto/mini_2.0.5-level2_en-ja_instantStartGuideNoTOC.tmx &gt;</strong></p>
+<p>2) Orphan segments (the match #1) mark segments in the default project translation memory without a corresponding text in the source files.<br>孤立した分節（上図での 1 番目の参考訳文）とは、そのプロジェクトの翻訳メモリ中に存在するが、原文の分節と一致しなくなった分節を指します。<br>&lt;37/17/49% &gt;</p></td></tr></table>
 
-&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i&gt;</font> 
-op die kieslys. Die lettertipe én die lettergrootte kan met dié 
-dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
-</p>
+  <p>参考訳文ウィンドウに表示された参考訳文を、訳文入力行に挿入する場合は、以下の<a href="menu.html#shortcuts">キーボードショートカット</a>が使用できます：</p>
 
-<a name="Tag_verification"></a>
-<h3>b. タグの確認</h3>
+  <ul>
+    <li>
+      <p>「<code>Ctrl+I</code>」を押すと、選択した参考訳文がカーソルのある位置より後ろに挿入されます。</p>
+    </li>
 
-<p>OmegaTは、翻訳文のタグの入力間違いを自動的に見つけません。訳文を顧客に渡す前に、タグの間違いがないかを調べてください。</p>
+    <li>
+      <p>または、「<code>Ctrl+R</code>」を押すと、分節全体を上書きします。</p>
+    </li>
+  </ul>
 
-<p>メニューから<strong>ツール→タグ検証</strong>を選択して確認してください。タグ検証表では、原文と訳文でタグが一致しない箇所を一覧表示します。タグを修正する場合は、分節番号をクリックしてください。</p>
+  <p>もし複数の参考訳文が表示された場合で、デフォルトで選択された訳文以外の訳文を利用したいときは：</p>
 
-<p>タグに不具合のある分節が開きますので、タグを修正してください。</p>
+  <ul>
+    <li>
+      <p>参考訳文ウインドウから利用したい訳文を選びます。例えば２番目に表示される訳文を利用したい場合は、「<code>Ctrl+2</code>」を押すと２番目の訳文が選択されます。同様に「<code>Ctrl+3</code>」を押すと３番目の訳文が選択されます（以下同様）。</p>
+    </li>
 
-<p>タグに不具合があれば、生成された訳文ファイルが開けなくなることがあります。そのため、訳文ファイルを生成する前にタグを検証して、タグの不具合を修正することをおすすめします。</p>
+    <li>
+      <p>訳文を選択後、上に記したように「<code>Ctrl+I</code>」または「<code>Ctrl+R</code>」を押せば訳文が利用できます。</p>
+    </li>
+  </ul>
 
-<p>
-Finally, you should always double-check the final formatting by opening the translated document in its associated viewer or editor.
-</p>
+  <p>（未翻訳の分節に移動したときに、最も一致率の高い参考訳文を自動的に挿入するよう設定することもできます。この設定は<strong>［設定］→<a href=
+  "translationEditing.html">［翻訳入力行...］</a></strong>で行えます。）</p>
 
-<hr>
-<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+  <h3><a name="gloss_matches" id="gloss_matches"></a>用語集と辞書</h3>
 
+  <p>プロジェクトに<a href="glossaries.html">用語集</a>と辞書が含まれる場合は、その中に一致した項目があれば、それぞれ用語集ウィンドウと辞書ウィンドウに表示されます。&nbsp;</p>
+
+  <h3><a name="searches" id="searches"></a>検索</h3>
+
+  <p>OmegaT は強力な <a href="searches.html">文字列検索</a> 機能を備えています。<code>［Ctrl+F］</code>で文字列検索ウィンドウを開き、［検索文字列］欄に検索したい単語または語句を入力します。または、表示された全ての文字列から、単語や語句を選択して<code>［Ctrl+F］</code>を押します。この場合、「検索文字列」テキストボックスに単語又は文が自動的に入力されます。</p>
+
+  <h3>Google Translate 機械翻訳</h3><a href="GoogleTranslate.html">機械翻訳</a>ウィンドウには、現在の分節に対応した機械翻訳エンジンによる翻訳内容を自動的に表示できます。<code>［Ctrl+M］</code>を押すと、現在の訳文分節をその翻訳内容に置換できます。
+
+  <h3><a name="create_trans" id="create_trans"></a>訳文ファイル生成</h3>
+
+  <p>すべての分節の翻訳が終了すれば（または訳文ファイルを生成したくなった時ならいつでも）、OmegaTは翻訳メモリーに蓄積された翻訳結果を利用して訳文ファイルを生成します。訳文ファイルを生成するには、メニューから<strong>プロジェクト→訳文ファイル生成</strong>を選択します。OmegaTは、どれだけ翻訳しているかに関係なく、プロジェクトの「source」フォルダに、対応するファイルの訳文版を作成します。完全に、及び部分的に翻訳されたファイルは、プロジェクトの「target」フォルダにあります。翻訳作業を終える前に、訳文ファイルをアプリケーション（ブラウザ、ワードプロセッサなど）で開き、内容や書式を確認してください。もし修正したい箇所があれば、OmegaTに戻って、必要な修正をしてください。修正作業が終われば、必ず訳文ファイルをもう一度生成してください。</p>
+  <hr>
+
+  <h2><a name="tags" id="tags"></a>タグ付けテキストの扱い</h2>
+
+  <p>OmegaT は、原文文書の見栄え（太字や斜体などの情報）を失わないため、特殊な<a href=
+  "formattedText.html#intro">タグ</a>を使って、文書に目印を付けます。タグはいくつかのアルファベット文字と数字、閉じタグの場合は「/」を使って構成されます。例えば：&lt;f0&gt;、&lt;/f0&gt;、&lt;br&gt;、 &lt;/s2&gt;など。タグが含まれる分節を翻訳する場合は、必ず、訳文にも同じタグが含まれるように注意してください（<a href=
+  "formattedText.html#Tag_operations">「タグ操作」</a>の項を参照してください。）</p>
+
+  <h3><a name="example" id="example"></a>例えば…</h3>
+
+  <p>これらのサンプルでは、分かりやすくするために、タグを赤色で表しますが、 OmegaTではこのように表示されません。<font color="#0000FF">青字</font>で示した HTML タグは、この分節全体を囲むものであるため、OmegaT は無視します。<font color=
+  "#008000">緑色</font>で色つけられたタグは分節の中にあるのでOmegaTに無視されます。これは、HTMLファイルの分節のサンプルです。</p>
+
+  <p><code><font color="#0000FF">&lt;p&gt;</font>The OmegaT screen consists of <font color="#008000">&lt;a href="userInterface.html"&gt;</font>one space with
+  three distinct windows<font color="#008000">&lt;/a&gt;</font>.<font color="#0000FF">&lt;/p&gt;</font></code></p>
+
+  <p>これは、日本語訳で、OmegaTが表示するサンプルです。</p>
+  
+  <table border="1" cellpadding="0" class="omegat">
+	<tr><td><span class="source">The OmegaT screen consists of &lt;a0&gt;one space with three distinct windows&lt;/a0&gt;.</span></td></tr>
+	<tr><td><strong>&lt;分節&nbsp;1127&gt;</strong> OmegaT の画面は主に &lt;a0&gt;3 つの独立したウィンドウ&lt;/a0&gt; で構成されています。 <strong>&lt;/分節&gt;</strong></td></tr>
+  </table>
+
+  <p>OmegaTが翻訳済みドキュメントを生成すると、HTMLファイルは次のようになります。</p>
+
+  <p><code><font color="#0000FF">&lt;p&gt;</font>OmegaT の画面は主に <font color="#008000">&lt;a href="userInterface.html"&gt;</font>3 つの独立したウィンドウ<font color="#008000">&lt;/a&gt;</font>で構成されています。<font color="#0000FF">&lt;/p&gt;</font></code></p>
+
+  <h3><a name="tag_verif" id="tag_verif"></a>タグの確認</h3>
+
+  <p>OmegaTは、翻訳文のタグの入力間違いを自動的に見つけません。訳文を顧客に渡す前に、タグの間違いがないかを調べてください。メニューから<strong>［ツール］→<a href=
+  "formattedText.html#tag_validation">［タグ検証］</a></strong>を選択してください。タグ検証表では、原文と訳文でタグが一致しない箇所を一覧表示します。タグを修正する場合は、分節番号をクリックしてください。タグに不具合のある分節が開きますので、タグを修正してください。<code>［Enter］</code>でその分節の修正内容を確定した後、 再度 <code>［Ctrl+T］</code> でタグ検証結果を確認してください。</p>
+
+  <p>タグに不具合があれば、生成された訳文ファイルが開けなくなることがあります。そのため、訳文ファイルを生成する前にタグを検証して、タグの不具合を修正することをおすすめします。最後に訳文ファイルをダブルクリックして開き、アプリケーションできちんと表示されているか確認してください。</p>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a></td>
+
+        <td style="text-align: center;"><a href="index.html">ホーム</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

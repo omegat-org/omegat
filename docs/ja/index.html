@@ -1,57 +1,153 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>目次 ー OmegaT 1.6.2 取扱説明ガイド</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <title>OmegaT 2.0 取扱説明ガイド - 目次</title>
 </head>
+
 <body>
+  <h2>OmegaT 2.0 取扱説明ガイド - 目次</h2>
+  <hr>
 
-<h1>OmegaT 1.6.2 取扱説明ガイド</h1>
-<h3>目次</h3>
+  <h3><a href="./aboutOmegaT.html">OmegaTについて</a><br></h3>
 
-<p>
-<ol>
-   <li><a href="aboutOmegaT.html" title="OmegaTについて">OmegaTについて</a></li>
+  <h3><a href="./installingAndRunning.html">OmegaT のインストールと実行</a></h3>
 
-   <li>OmegaT入門<ul>
-         <li><a href="instantStartGuide.html" title="お手軽スタートガイド">お手軽スタートガイド</a></li>
-         <li><a href="userInterface.html" title="ユーザーインターフェース">ユーザーインターフェース</a></li>
-         <li><a href="filesToTranslate.html" title="翻訳対象ファイル">翻訳対象ファイル</a></li>
-         <li><a href="plainText.html" title="プレーンテキストの翻訳">プレーンテキストの翻訳</a></li>
-         <li><a href="formattedText.html" title="フォーマット付きテキストの翻訳">フォーマット付きテキストの翻訳</a></li>
-         <li><a href="translationMemories.html" title="翻訳メモリ">翻訳メモリ</a></li>
-         <li><a href="glossaries.html" title="用語集">用語集</a></li>
-         <li><a href="searches.html" title="検索">検索</a></li>
-         <li><a href="preventingDataLoss.html" title="データ損失対策">データ損失対策</a></li>
-      </ul>
-   </li>
+  <table border="0" width="100%" summary="just formatting">
+    <tr>
+      <td valign="top">
+        <h3>OmegaT の基礎</h3>
 
-   <li>OmegaT のカスタマイズ<ul>
-         <li><a href="projectProperties.html" title="プロジェクト設定">プロジェクト設定</a></li>
-         <li><a href="fontSettings.html" title="フォント設定">フォント設定</a></li>
-         <li><a href="fileFilters.html" title="ファイルフィルタ">ファイルフィルタ</a></li>
-         <li><a href="segmentation.html" title="翻訳対象ファイルの分節化">翻訳対象ファイルの分節化</a></li>
-         <li><a href="translationEditing.html" title="翻訳文書編集">翻訳文書編集</a></li>
-      </ul>
-   </li>
+        <dl>
+          <dt><a href="./instantStartGuide.html">5 分間で OmegaT を使って翻訳スタート！</a></dt>
 
-   <li>付録<ul>
-         <li><a href="fileFormats.html" title="対応するファイル形式">対応するファイル形式</a></li>
-         <li><a href="menu.html" title="メインメニュー">メインメニュー</a></li>
-         <li><a href="keyboardShortcuts.html" title="キーボードショートカット">キーボードショートカット</a></li>
-         <li><a href="website.html" title="ウェブ上のOmegaTプロジェクト、バグ報告、貢献方法など">ウェブ上のOmegaTプロジェクト、バグ報告、貢献方法など</a></li>
-      </ul>
-   </li>
-</ol>
-</p>
+          <dd>→ 簡単なチュートリアル（このページから本ガイドの他項目を参照することもできます）</dd>
 
-<p>この取り扱い説明ガイドは Jean-Christophe Helary, Samuel Murray, Maxym Mykhalchuk, Henry Pijffers の共同作業の成果です。</p>
+          <dt><a href="./userInterface.html">ユーザーインターフェース</a></dt>
 
-<p>Marc Prior が作成して OmegaT version 1.4.2 まで保守し、Dmitri Gabinski が OmegaT version 1.4.4 のために更新した元のドキュメント及び、ユーザーリストからの情報と OmegaT の開発に参加した多くの人々の助けなしには、このようなガイドを一から書くことはできなかったでしょう。OmegaT コミュニティの全ての人々のエネルギーとインスピレーションにも感謝します。</p>
+          <dd>→ ウィンドウやダイアログボックスの説明</dd>
 
-<p>このガイドは完全ではなく、時が経つにつれて、また OmegaT の進化に従って修正されます。もしここに記述されていることと OmegaT の振る舞いとの食い違いに気付いたら、遠慮なく Jean-Christophe Helary ( brandelune AT users DOT sourceforge DOT net)に連絡してください。</p>
+          <dt><a href="./menu.html">メインメニューとショートカット</a></dt>
 
-<hr>
-<p><a href="legalNotices.html">特記事項</a></p>
+          <dd>→ メインメニューから実行できるすべての機能とショートカットについて</dd>
 
+          <dt><a href="./filesToTranslate.html">翻訳対象ファイル</a></dt>
+
+          <dd>→ 対応するファイル形式、変換、右から左へ表示される言語の取り扱い</dd>
+
+          <dt><a href="./plainText.html">プレーンテキストを扱う</a></dt>
+
+          <dd>→ 文字エンコーディングに関する注意点など</dd>
+
+          <dt><a href="./formattedText.html">整形されたテキストを扱う</a></dt>
+
+          <dd>→ タグ表記のルールやタグ検証について</dd>
+
+          <dt><a href="./translationMemories.html">翻訳メモリ</a></dt>
+
+          <dd>→ プロジェクトごとの翻訳メモリ、外部翻訳メモリ、翻訳メモリの差し替え</dd>
+
+          <dt><a href="./glossaries.html">用語集</a>、<a href=
+          "./dictionaries.html">辞書</a></dt>
+
+          <dd>→ 用語集と辞書の作成、使用手順</dd>
+
+          <dt><a href="./GoogleTranslate.html">機械翻訳</a></dt>
+
+          <dd>→ Google Translate を用いた機械翻訳による分節の取得</dd>
+
+          <dt><a href="./searches.html">検索</a></dt>
+
+          <dd>→ 検索引数とワイルドカード</dd>
+
+          <dt><a href="spellchecker.html">綴り確認</a></dt>
+
+          <dd>→ 翻訳作業中の綴り確認</dd>
+
+          <dt><a href="preventingDataLoss.html">データを失わないために</a></dt>
+
+          <dd>→ バックアップとデータ修復</dd>
+        </dl>
+      </td>
+
+      <td valign="top">
+        <h3>OmegaT のカスタマイズ</h3>
+
+        <dl>
+          <dt><a href="./projectProperties.html">プロジェクトの設定</a></dt>
+
+          <dd>→ フォルダ構成、言語の設定</dd>
+
+          <dt><a href="./fontSettings.html">字体設定</a></dt>
+
+          <dd>→ メインウィンドウの字体設定</dd>
+
+          <dt><a href="./fileFilters.html">ファイルフィルタ</a></dt>
+
+          <dd>→ 原文ファイルと訳文ファイルのフィルタ表示</dd>
+
+          <dt><a href="./segmentation.html">原文の分節化</a></dt>
+
+          <dd>→ 言語ごとの分節化ルールの設定</dd>
+
+          <dt><a href="./translationEditing.html">翻訳入力行の動作</a></dt>
+
+          <dd>→ 自動訳文挿入などの設定</dd>
+
+          <dd><a href="translationEditing.html"></a></dd>
+        </dl>
+
+        <h3>付録</h3>
+
+        <dl>
+          <dt><a href="filesAndDirectories.html">ファイルとディレクトリ</a></dt>
+
+          <dd>→ OmegaT が使用するファイルとディレクトリについて</dd>
+
+          <dt><a href="./languages.html">使用言語と言語コード</a></dt>
+
+          <dd>→ プロジェクト設定と分節化ルール設定で使用します</dd>
+
+          <dt><a href="./regexp.html">正規表現</a></dt>
+
+          <dd>→ 検索と分節化ルール設定時に使用します</dd>
+
+          <dt><a href="./consoleMode.html">コンソールモード</a></dt>
+
+          <dd>→ GUI を使わずコマンドラインから OmegaT を使用する場合</dd>
+
+          <dt><a href="./website.html">Web 上の OmegaT 情報</a></dt>
+
+          <dd>→ ユーザーサポート、開発や翻訳への貢献について</dd>
+        </dl>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h3>クレジット</h3>
+
+  <p>この取扱説明ガイドの作成は、Jean-Christophe Helary、Samuel Murray、Maxym Mykhalchuk、Henry Pijffers そして Vito Smolej により共同で行われました。</p>
+
+  <p>バージョン 1.4.2 までを作成、管理されていた Marc Prior、バージョン 1.4.4 への更新を行われた Dmitri Gabinski、またこれまで OmegaT 開発に貢献された多くの人々からの情報提供があったからこそ、このような文書の完成に至れたことでしょう。また、OmegaT コミュニティの人々の情熱と創造性にも心より感謝いたします。</p>
+
+  <h3>連絡先</h3>
+
+  <p>この取扱説明ガイドは完全なものではなく、時間の経過と OmegaT の進展にともなって修正されて行く可能性もあります。ここに書かれた内容と、実際の OmegaT の挙動とに何らかの相違が見つかった場合は、ご遠慮なく Vito Smolej (vitosmolej AT users DOT sourceforge DOT net) までご連絡をお願いします。</p>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a></td>
+
+        <td style="text-align: center;"><a href="index.html">ホーム</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

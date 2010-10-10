@@ -1,43 +1,82 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>プロジェクト設定 - OmegaT 1.6.2 取扱説明ガイド</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <title>OmegaT 2.0 取扱説明ガイド - プロジェクトの設定</title>
 </head>
+
 <body>
+  <h2>プロジェクトの設定</h2>
 
-<h1>プロジェクト設定</h1>
+  <ul>
+    <li>
+      <a href="#dialog">［プロジェクト設定変更］ウィンドウ</a>
 
-<p>このダイアログはプロジェクトフォルダと言語を修正するために使います。<a href="keyboardShortcuts.html" title="キーボードショートカット"><code>Ctrl+E</code></a>を押すか、<a href="menu.html" title="メインメニュー">メインメニュー</a>から<strong>プロジェクト -&gt; 設定...</strong>を選択することで開きます。</p>
+      <ul>
+        <li><a href="#language">言語設定の変更</a></li>
 
-<p>このダイアログには以下のものがあります:</p>
+        <li><a href="#segments">分節化設定の変更</a></li>
 
-<ul>
-   <li>プロジェクトの原文言語と訳文言語を設定するためのドロプダウンメニュー付きのエリア</li>
-   <li>分節化設定フラグ</li>
-   <li>プロジェクトフォルダを設定するためのエリア</li>
-</ul>
+        <li><a href="#folder">使用するフォルダ構成の変更</a></li>
+      </ul>
+    </li>
 
-<p>全てのフィールドは編集可能です。言語は直接入力でもドロップダウンメニューででも入力できます。存在しないフォルダ名を入力すると、OmegaT が自動的に作成します。</p>
+    <li><a href="#warning">翻訳作業の途中でプロジェクトの設定を変更する場合</a></li>
+  </ul>
+  <hr>
+  <a name="dialog" id="dialog"></a>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>途中でプロジェクト設定を変更する</h3>
+  <h2>［プロジェクト設定変更］ウィンドウ</h2>
 
-<p>翻訳の途中でプロジェクト設定を変更することはいつでも可能ですが、お勧めしません。大きな誤りに気付いたのでない限り、全ての設定は翻訳を開始したら最終のものと考えるべきです。</p>
+  <p>この設定は、プロジェクトで使用する言語と、フォルダ構成を変更する場合に使用します。<code><a href="menu.html#shortcuts">［Ctrl+E］</a></code>または<a href=
+  "menu.html">メインメニュー</a>の<strong>［プロジェクト］→［設定...］</strong>で開くことができます。このダイアログは以下の項目からなります；</p>
 
-<p>特に:</p>
+  <ul>
+    <li>プロジェクトの原文言語と訳文言語の指定</li>
 
-<ul>
-   <li>言語を変更すると、以前の言語と新しい言語が一致しないので、現在使っている翻訳メモリが使えなくなります。</li>
+    <li>分節化の設定</li>
 
-   <li>分節化の設定を変更すると、既に翻訳した分節が分割されたり結合されたりするので、たとえ新旧のマッチングしない翻訳がまだ翻訳メモリに残っていたとしても、「未翻訳」状態に戻ってしまうことになります。OmegaT は文単位の分節化を使っていない<a href="translationMemories.html#Upgrading_Translation_Memories" title="翻訳メモリ">古い翻訳メモリのアップグレード</a>ができますが、逆はできませんし、翻訳中に気が変わったときのプロジェクトの翻訳メモリには使えません。</li>
+    <li>プロジェクトが使用するフォルダの指定</li>
+  </ul>
 
-   <li>プロジェクトフォルダを変更してもファイルは古いフォルダから新しいフォルダに移動しないので、あなたまたは OmegaT が、フォルダの本当の意味と、どちらのフォルダを使っているのかがわからなくなる可能性があります。</li>
-</ul>
+  <p>すべての欄には、直接入力が可能です。言語の指定は、リストからの選択または直接入力が行えます。フォルダはまだ作成していない場所を指定してもかまいません。その場合は OmegaT が自動で作成します。</p><a name="language" id="language"></a>
 
-<p>作業を守る方法としては<a href="preventingDataLoss.html" title="データ損失対策">データ損失対策</a>を参照して下さい。</p>
+  <h3>言語設定の変更</h3>
 
-<hr>
-<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+  <p>仮に、翻訳途中で言語設定を変更すると、変更前後の言語間で一致が取れなくなり、翻訳メモリが使い物にならなくなることがあるので注意してください。</p><a name="segments" id="segments"></a>
 
+  <h3>分節化設定の変更</h3>
+
+  <p>分節化の設定では、原文ファイルのみの取り扱いについて対応します。すでに存在する翻訳メモリに対しては、分節化は行われません。</p>
+
+  <p>分節化設定を変更した場合、翻訳済みの分節が分離されたり、結合されることがあります。これにより、たとえ新旧のマッチしていない翻訳がまだ翻訳メモリに残っていたとしても、「未翻訳」状態に戻してしまうことになります。</p>
+
+  <p>OmegaT は分節化されていない文章に対応する<a href="translationMemories.html#upgrading_TM">古い翻訳メモリの更新</a>を行うことができますが、逆はできません。翻訳作業中に気が変わったとしても、翻訳メモリを元に戻す変更を行えません。</p><a name="folder" id=
+  "folder"></a>
+
+  <h3>使用するフォルダ構成の変更</h3>
+
+  <p>プロジェクトのフォルダを変更しても、変更前にその場所にあったファイルが新しいフォルダに移動するわけではありませんので、ご注意ください。結局、あなた（もしくは OmegaT 自身も）が、そのフォルダの現在の役割、また変更前後のどちらのフォルダを使用しているのかを混同してしまう危険があります。</p>
+  <hr>
+  <a name="warning" id="warning"></a>
+
+  <h2>翻訳作業の途中でプロジェクトの設定を変更する場合</h2>
+
+  <p>翻訳作業の途中でプロジェクトの設定を変更することは、可能ではありますが、一度翻訳を開始したら、何か致命的な誤りに気づいたのでない限り、そのプロジェクトに関しては設定を変えずにおくことがもっとも安全です。作業中のデータを守る対策については <a href="preventingDataLoss.html">データを失わないために</a> の項を参照してください。</p>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a></td>
+
+        <td style="text-align: center;"><a href="index.html">ホーム</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

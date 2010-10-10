@@ -1,117 +1,206 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>翻訳メモリ - OmegaT 1.6.2 取扱説明ガイド</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <title>OmegaT 2.0 取扱説明ガイド - 翻訳メモリ</title>
 </head>
+
 <body>
+  <h2>翻訳メモリ</h2>
 
-<h1>翻訳メモリ</h1>
+  <ul>
+    <li>
+      <a href="#OmegaT_and_TMX_files">OmegaT と TMX ファイル</a>
 
-<h2>目次</h2>
+      <ul>
+        <li><a href="#TMX_files_location_and_purpose">TMX ファイルの場所と目的</a></li>
 
-<ul type="none">
-   <li>1. <a href="#OmegaT_and_TMX_files">OmegaT と TMX ファイル</a>
+        <li><a href="#TMX_backup">TMX ファイルのバックアップ</a></li>
 
-      <ul type="none">
-         <li><a href="#TMX_files_location_and_purpose">TMX ファイルの位置と目的</a></li>
-         <li><a href="#TMX_files_and_language">TMX ファイルと言語</span></a></li>
+        <li><a href="#TMX_files_and_language">TMX ファイルと言語</a></li>
       </ul>
-   </li>
+    </li>
 
-   <li>2. <a href="#Keeping_a_memory_of_your_translation_with_OmegaT">OmegaT で行なった翻訳のメモリを保存する</a></li>
+    <li><a href="#keeping_a_memory">OmegaT はどのように翻訳内容を記憶するのか</a></li>
 
-   <li>5. <a href="#Using_memories_created_by_other_translation_tools">OmegaT の翻訳メモリを他の翻訳ツールで使う</span></a>
+    <li><a href="#Using_TMs_from_previous_projects">過去のプロジェクトの翻訳メモリを使用する</a></li>
 
-      <ul type="none">
-         <li>5.1. <a href="#Importing_files">ファイルのインポート</a></li>
-         <li>5.2. <a href="#Imported_files_handling">インポートしたファイルの扱い</a></li>
+    <li>
+      <a href="#using_memories">他の翻訳ツールで作成された翻訳メモリを使用する</a>
+
+      <ul>
+        <li><a href="#importing_files">ファイルのインポート</a></li>
+
+        <li><a href="#imported_files_handling">インポートしたファイルの取り扱い</a></li>
       </ul>
-   </li>
+    </li>
 
-   <li>6. <a href="#Using_OmegaT_translation_memories_in_other_translation_tools">OmegaT の翻訳メモリを他の翻訳ツールで使う</a></li>
-   <li>7. <a href="#Upgrading_Translation_Memories">翻訳メモリのアップグレード</a></li>
-</ul>
+    <li><a href="#using_OmegaT_TM">OmegaT の翻訳メモリを他の翻訳ツールで使用する</a></li>
+    
+    <li><a href="#pseudo_translate">疑似（Pseudo）翻訳メモリ</a></li>
 
-<a name="OmegaT_and_TMX_files"></a>
-<h2>OmegaT と TMX ファイル</h2>
+    <li><a href="#upgrading_TM">翻訳メモリの更新</a></li>
+  </ul>
+  <hr>
+  <a name="OmegaT_and_TMX_files" id="OmegaT_and_TMX_files"></a>
 
-<a name="TMX_files_location_and_purpose"></a>
-<h3>TMX ファイルの位置と目的</h3>
+  <h2>OmegaT と TMX ファイル</h2><a name="TMX_files_location_and_purpose" id=
+  "TMX_files_location_and_purpose"></a>
 
-<p>OmegaT は 三箇所の別々の場所にある TMX ファイルを使います。</p>
+  <h3>TMX ファイル − 場所と目的</h3>
 
-<ul>
-   <li>/omegat/ フォルダには、<strong>project_save.tmx</strong> と、最終的に複数のバックアップ TMX ファイルがあります。project_save.tmx ファイルにはプロジェクトを開始してからの <strong>全ての</strong> 分節が記憶されています。</li>
+  <p>OmegaT は異なる 3 つの場所にある TMX ファイルを使用します。</p>
 
-   <li>プロジェクトのメインフォルダには 3 つの TMX ファイルがあります: <strong>&lt;プロジェクト名&gt;-omegat.tmx</strong>, <strong>&lt;プロジェクト名&gt;-level1.tmx</strong>, and <strong>&lt;プロジェクト名&gt;-level2.tmx</strong>, ここで <code>&lt;project_name&gt;</code> は単純にプロジェクトの名前です。これらのファイルはエクスポートされた TMX ファイルで、翻訳されたペアのみを含みます。<ul>
-         <li>&lt;プロジェクト名&gt;-level1.tmx は文書情報のみを含む TMX ファイルです。</li>
+  <ul>
+    <li>
+      <p> <em>omegat</em> フォルダーには <em>project_save.tmx</em> が生成され、定期的に TMX ファイルのバックアップが複数保存されます。</p>
 
-         <li>&lt;プロジェクト名&gt;-level2.tmx はOmegaT 固有の TMX タグを正しい TMX タグにカプセル化したものなので、このファイルは TMX レベル 2 に対応した翻訳ツールや OmegaT 地震において、フォーマット情報を使えます。</li>
+      <p><em>project_save.tmx</em> には、そのプロジェクトで作業を開始してから翻訳した全ての分節が含まれます。</p>
+    </li>
 
-         <li>&lt;プロジェクト名&gt;-omegat.tmx は OmegaT 固有のフォーマットタグを含んだ TMX なので、このファイルによって他の OmegaT プロジェクトでフォーマット情報を使えます。</li>
+    <li>
+      <p>プロジェクトのフォルダーには3つの TMX ファイルが含まれます：</p>
+
+      <ol>
+        <li><em>project_name-omegat.tmx</em></li>
+
+        <li><em>project_name-level1.tmx</em></li>
+
+        <li><em>(プロジェクト名)-level2.tmx</em></li>
+      </ol>（<i>project_name</i> には指定したプロジェクト名が入ります）
+
+      <p>これらのファイルには、そのファイル生成時（多くの場合、翻訳済みファイルが生成されたとき）の、source フォルダの内容に対応する、原文と訳文の分節が含まれます。</p>
+
+      <ul>
+        <li><em>level1</em> ファイルには、文書情報のみが含まれます。</li>
+
+        <li><em>level2</em> ファイルには、OmegaT 特有のタグが適切な TMX タグにカプセル化されて含まれます。したがってそのフォーマット情報は、TMX レベル2の翻訳メモリに対応した他の翻訳ツールや、OmegaT 自身で使用することができます。</li>
+
+        <li><em>omegat</em> ファイルには、OmegaT 特有のフォーマットを持ったタグが含まれるので、他の OmegaT プロジェクトで使用できます。</li>
       </ul>
-   </li>
 
-   <li>/tm/ フォルダには任意の数の TMX ファイルを置くことができます。そのようなファイルは正しい TMX ファイルである必要があり、文書情報のみを含む(level 1 TMX)か、 OmegaT の文書情報とフォーマット情報を含む(omegat TMX)か、TMX の文書情報とフォーマット情報を含む(level 2 TMX)かのいずれかです。</li>
-</ul>
+      </li><li><em>tm</em> フォルダーには TMX ファイルをいくつでも置いておくことができます。これらのファイルは、適切な形式を持った TMX ファイルでなければなりません。次のいずれかを含む形式が使用できます：文書情報のみ（レベル 1 TMX）、OmegaT 特有の文書情報とフォーマット情報（omegat TMX）、または TMX の文書情報とフォーマット情報（レベル 2 TMX）。これら 3 つの間の差は技術的なものであり（詳細は下記を参照してください）、過去のプロジェクトから翻訳メモリを流用したいときは、ほとんどの場合、交換可能なものとして使用できます。
+    </li>
+  </ul>
+  <p>必要に応じて、プロジェクト内の翻訳可能な全分節を含む TMX ファイル（OmegaT 形式）を、指定した場所に作成することもできます。<a href="#pseudo_translate">疑似翻訳メモリ</a> の項を参照してください。</p>
+  
 
-<a name="TMX_files_and_language"></a>
-<h3>TMX ファイルと言語</h3>
+  <a name="TMX_backup" id="TMX_backup"></a>
+  <h3>TMX ファイルのバックアップ</h3>
 
-<p>TMX ファイルは、異なった言語に対して等価な分節からなる<i>翻訳単位</i>を含みます。翻訳単位は少なくとも二つの<i>translation unit variation</i> (tuv)で構成されます。どちらも原文にも訳文にもなります。</p>
+  <p>OmegaT は、翻訳作業中の全ての翻訳内容をプロジェクト内の <em>omegat</em> フォルダーに蓄積していきます。</p>
 
-<p>プロジェクトの設定により、どちらが原文言語でどちらが訳文言語かを指定します。したがって、OmegaT はプロジェクトの原文言語に対応する<strong>tuv</strong>を取って原文分節として使い、プロジェクトの訳文言語に対応する<strong>tuv</strong>を取ってその分節を目標の分節として使います。</p>
+  <p>また OmegaT は、プロジェクトが開かれたり、再読み込みされたりするたびに、同じフォルダーに <em>project_save.tmx.YEARMMDDHHNN.bak</em> としてバックアップファイルを保存します。その翻訳メモリが保存された日時をファイル名末尾に加えます。（<em>YEAR</em> は 4 桁の年、 <em>MM</em><em>DD</em> は月日、<em>HH</em><em>NN</em> は時刻）</p>
 
-<p>言語コードには様々な形式があります。OmegaT は現在のところ以下の形のもののみを認識します:</p>
+  <p>もし翻訳中のデータを失ってしまったと気づいた場合、以下の手順に従ってください。これにより、直前に保存された状態（多くの場合、最後の修正から 10 分以内）に、プロジェクトを修復できます：</p>
 
-<ul><li>2 文字の文字コード (ex: 日本語は <strong>JA</strong>)</li></ul>
+  <ol>
+    <li>プロジェクトを閉じる</li>
 
-<p>または</p>
+    <li>現在の <em>project_save.tmx</em> ファイルの名前を一時的に変更する（たとえば <em>project_save.tmx.temporary</em> ）</li>
 
-<ul><li>言語コードが 2 文字、国コードが 2 文字で、間にハイフンを入れます(例:<strong>JA-JP</strong> は日本で使われている日本語です)</li></ul>
+    <li>探している内容ともっとも近い翻訳メモリのバックアップファイルを選択する</li>
 
-<p>プロジェクトの言語コードと TMX の言語コードが完全に一致した場合、分節はメモリに読み込まれます。言語コードのみが一致して国コードは一致しなかった場合も、分節はメモリに読み込まれます。言語コードと国コードのどちらも一致しなかった場合、分節はメモリに読み込まれません。</p>
+    <li>そのファイル名を <em>project_save.tmx</em> と変更する</li>
 
-<a name="Keeping_a_memory_of_your_translation_with_OmegaT"></a>
-<h2>OmegaT で行なった翻訳のメモリを保存する</h2>
+    <li>プロジェクトを再度開く</li>
+  </ol><a name="TMX_files_and_language" id="TMX_files_and_language"></a>
 
-<p>project_save.tmx ファイルにはプロジェクトを開始してからの <strong>全ての</strong> 分節が記憶されています。たとえばプロジェクトの分節に変更を加えると、project_save.tmx は新しい翻訳の組を記録しますが、以前の全ての情報も残されます。これは参考訳文ウィンドウで <strong>オーファン文字列</strong>と表示されます。このようなマッチングは、既に存在はしないけれども修正される前に記録された分節を参照しています。修正を間違えたときは、以前の設定に戻せば古い記録が復活します。</p>
+  <h3>TMX ファイルと言語</h3>
 
-<a name="Using_memories_created_by_other_translation_tools"></a>
-<h2>他の翻訳ツールで作成されたメモリを使う</h2>
+  <p>TMX ファイルには、ある同じ分節に対し、複数の異なる言語で表記された <i>翻訳対</i> が含まれています。翻訳対は、少なくとも 2 つの<i>翻訳対差異（tuv）</i>からできています。そのうちいずれかが、原文または訳文に使用されます。</p>
 
-<a name="Importing_files"></a>
-<h3>ファイルのインポート</h3>
+  <p>プロジェクトの設定により、それぞれどちらが原文の言語で、どちらが訳文の言語であるかを指定します。OmegaT は、プロジェクトの原文言語に対応する <strong>翻訳対差異</strong> を原文の分節として扱い、訳文言語に対応する <strong>翻訳対差異</strong> を訳文の分節として扱います。OmegaT はその指定に以下の 2 通りのような標準的な表記を使用します：</p>
 
-<p>OmegaT は TMX バージョン 1.1-1.4b (レベル 1 と レベル 2 の両方)のインポートに対応しています。これにより、他のツールで作成した翻訳メモリを OmegaT に読み込ませることができます。</p>
+  <ul>
+    <li>2 文字の言語コード（例：日本語は <strong>JA</strong>）または</li>
 
-<p>しかし、OmegaT は <i>完全には</i>レベル2 TMX ファイル(翻訳だけでなくフォーマットも含むもの)に対応していないので、参考訳文検索の精度は、レベル 2 TMX ファイルを読み込んだときには少し落ちます。</p>
+    <li>2 文字の言語コードに続く 2 文字の国コード（例： <strong>EN-US</strong>）</li>
+  </ul>
 
-<a name="Imported_files_handling"></a>
-<h3>インポートしたファイルの扱い</h3>
+  <p>言語コードと国コードについては <a href="languages.html">使用言語と言語コード</a> に例示しています。</p>
 
-<p>OmegaT は翻訳メモリファイル(TMX ファイル)を扱う場合、非常に厳密な手続きに従います。</p>
+  <p>プロジェクトの言語コードと TMX の言語コードが完全に一致する場合、分節はメモリに読み込まれます。言語コードのみが一致し、国コードは一致しない場合も、分節はメモリに読み込まれます。言語コードと国コードいずれも一致しない場合は、分節はメモリに読み込まれません。</p>
+  <hr>
+  <a name="keeping_a_memory" id="keeping_a_memory"></a>
 
-<p>このファイルになんらかの問題があれば、OmegaT は単純にそれを読み込みません。</p>
+  <h2>OmegaT はどのように翻訳内容を記憶するのか</h2>
 
-<p>ツールの中には場合によっては不正な TMX ファイルを生成することが知られています。もしそのようなファイルを OmegaT で参考訳文として使いたい場合、OmegaT が拒否した部分を修正する必要があります。修正は単純な操作で、OmegaT は関係するエラーメッセージで指示を与えます。もし手に負えないと感じたなら、ユーザーグループで助言を求めることもできます。</p>
+  <p>project_save.tmx ファイルには、プロジェクトを開始してから翻訳された全ての分節が含まれています。たとえば、そのプロジェクトの分節に何らかの変更を加えた場合、 <em>project_save.tmx</em> に新しい翻訳のペア（※訳注＝その分節に対応する原文と訳文）を記録しますが、既存の情報も保持します。</p>
 
-<a name="Using_OmegaT_translation_memories_in_other_translation_tools"></a>
-<h2>OmegaT の翻訳メモリを他の翻訳ツールで使う</h2>
+  <p>これにより、まれに参考訳文ウィンドウに <strong>孤立した文字列</strong> が表示されることがあります。この参考訳文は、既に存在しないが、修正される前に記録された分節を参照しています。その変更が間違いだった場合、過去の状態に戻すことで以前の記録が再度表示されるようになります。</p>
+  <hr>
+  <a name="Using_TMs_from_previous_projects" id=
+  "Using_TMs_from_previous_projects"></a>
 
-<p>OmegaT は TMX ファイルバージョン 1.4 (レベル 1 と 2 の両方)をエクスポートします。レベル 2 エクスポートは 標準 レベル 2 ではありませんが、TMX レベル 2 に対応した翻訳ツールで正しいマッチングを生成するのに十分です。</p>
+  <h2>過去のプロジェクトの翻訳メモリを使用する</h2>
 
-<p>文章情報のみが必要(フォーマット情報は不要)の場合は、OmegaT が作成したレベル 1 ファイルを使って下さい。</p>
+  <p>OmegaT プロジェクト内で訳文文書を作成すると、プロジェクトの翻訳メモリは、そのプロジェクトフォルダに3つのファイルとして出力されます。（詳細は、上述した部分を参照ください）これら 3 つの TMX&nbsp;ファイル（ " <em>-omegat.tmx</em> "、" <em>-level1.tmx</em>"、"<em>-level2.tmx</em>"）を「エクスポートした翻訳メモリ」として、つまり現在のプロジェクトについて外部出力した2言語での要約として、扱うことができます。</p>
 
-<a name="Upgrading_Translation_Memories"></a>
-<h2>翻訳メモリのアップグレード</h2>
+  <p>過去のプロジェクトで使用した翻訳メモリを再利用したいとき（例えば、今度作成する新しいプロジェクトが「過去のものと非常に似ている」または「以前に使用したかもしれない専門用語を含んでいる」というような場合など）、この翻訳メモリを「入力用翻訳メモリ」として、新しいプロジェクトにインポートできます。この場合は、使用したい翻訳メモリを新しいプロジェクトの <em>tm</em> フォルダーへ置いてください。</p>
 
-<p>以前のバージョンの OmegaT は段落単位でしか原文を分節化できず、HTML と Open Document ファイルで一貫性のない番号を付けたフォーマットタグがありました。OmegaT 1.6.2 は、参考訳文の品質を向上し、既にある翻訳をよりよく使うために、このような TMX をその場で検出してアップグレードします -- これにより、やり直す必要がなくなります。</p>
+  <p>デフォルトでは、 <em>tm</em> フォルダーはプロジェクトのルートフォルダーの下にあります。（つまり <em>/MyProject/tm ）</em>しかし必要であれば、プロジェクトの設定でその位置を変えてもかまいません。これは、過去に作成した翻訳メモリを何度も使用するような場合に便利です。たとえば、同じ顧客向けであったり、同じ分野の翻訳であったりする場合が挙げられます。この場合、使いやすい手順は以下の通りです：</p>
 
-<p>プロジェクトのTMXは1度だけアップグレードされ、アップグレードされた形式で書き込まれ、古いTMXファイルはプロジェクトが読み込まれる度にその場でアップグレードされます。OmegaT 1.6.2 においてファイルフィルタに変更が加えられたため、分節が全く違うものになってしまい、翻訳メモリを手動でアップグレードする必要があることが稀にあることに注意してください。</p>
+  <ul>
+    <li>特定の顧客や分野の翻訳メモリ用として、ハードディスク内に 1 つフォルダー（たとえば「保管フォルダー」）を作成する</li>
 
-<hr>
-<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+    <li>プロジェクトを閉じて終了したとき、常に「エクスポートした」3 つの翻訳メモリファイルを、プロジェクトのルートフォルダーから、その保管フォルダーにコピーしておく</li>
+
+    <li>同じ顧客または分野について、プロジェクトを新しく作成するときは、<em>［プロジェクト］→「プロジェクト設定...］</em> ウィンドウで、［翻訳メモリフォルダー］にその保管フォルダーを指定する</li>
+  </ul>
+
+  <p>ご注意点：OmegaT 起動時には <em>tm</em> フォルダーにある全ての TMX ファイルが読み込まれるので、持っている全ての TMX ファイルをそこに置いておくと、不必要に起動を遅くしてしまう場合があります。いったん現在のプロジェクトの <em>project_save.tmx</em> に移し替えたあとは、本当に必要なものだけを退避しておく（例えば <em>tm</em> フォルダに残しておいて、拡張子だけ変更するなど）のもよいでしょう。</p>
+
+  <p><a name="using_memories" id="using_memories"></a></p>
+
+  <h2>他の翻訳ツールで作成された翻訳メモリを使用する</h2>
+
+  <h3><a name=
+  "importing_files" id="importing_files"></a>ファイルのインポート</h3>
+
+  <p>OmegaT は TMX バージョン 1.1 から 1.4b （レベル 1 と レベル 2 の両方）をインポートすることができます。これにより、他のツールで作成された翻訳メモリを、OmegaT で読み込むことができます。しかし、OmegaTはレベル 2 の（文書情報だけでなく、フォーマット情報も含む） TMX ファイルに<i>完全には</i>対応しておらず、参考訳文の一致率が若干下がってしまう可能性があります。 </p>
+
+  <h3><a name=
+  "imported_files_handling" id="imported_files_handling"></a>インポートしたファイルの取り扱い</h3>
+
+  <p>OmegaT が翻訳メモリファイル（TMX ファイル）を取り扱う際には、非常に厳密な処理が行われます。ファイル中に何か誤りが見つかった場合、そのファイルは読み込まれません。</p>
+
+  <p>一部で、正しくない TMX ファイルを生成してしまうツールがあることが確認されています。そのような翻訳メモリを OmegaT に参照させたいときに、 そのファイルを読み込めない場合があります。その場合は、修正を行う必要があります。修正は簡単な操作で行えることが多く、OmegaT は関連するエラーメッセージを表示して情報を与えてくれます。不明な点があれば <a href="http://groups.yahoo.com/group/OmegaT/">ユーザーグループ</a> に問い合わせてください。</p>
+  <hr>
+  <a name="using_OmegaT_TM" id="using_OmegaT_TM"></a>
+
+  <h2>OmegaT の翻訳メモリを他の翻訳ツールで使用する</h2>
+
+  <p>OmegaT は（レベル 1、レベル 2 とも）バージョン 1.4 の TMX ファイルを出力します。出力されたレベル 2 TMXファイルは、標準のレベル 2 形式ではありませんが、TMX レベル 2 に対応した翻訳ツールで適切に使用できる参考訳文を生成できます。もし、文書情報のみが必要な場合（フォーマット情報が必要でない場合）は、OmegaT が作成したレベル 1 ファイルを使用してください。</p>
+  <hr>
+  <a name="pseudo_translate" id="pseudo_translate"></a>
+  <h2>疑似（Pseudo）翻訳メモリ</h2>
+  <p>OmegaT が作成する翻訳メモリに対して、分節に対する前処理や、何らかの別処理を加えたい場合があるかもしれません。例えば、テストのために疑似的な翻訳を行いたいような場合です。</p>
+  <p>OmegaT は、プロジェクトの全ての分節を含む、別の TMX ファイルを作成することができます。この TMX ファイル中の翻訳内容は以下のいずれかです： 
+  <ul><li>翻訳（訳文）が原文と全く同じであるもの（既定の設定）</li>
+  <li>翻訳（訳文）が空のもの</li></ul>
+  <p>この TMX ファイルには任意の名称を付けることができます。拡張子は、何も指定しなかった場合「.tmx」が付加されます。</p>
+  <P>このファイルの作成は、コンソールモードで行えます。詳細は <a href="consoleMode.html">コンソールモード</a> を参照してください。</P>
+  <p>作成した TMX ファイルは、任意のツールで処理することができます。これを OmegaT で再利用するには：<br>ファイル名を <em>project_save.tmx</em> と変更し、プロジェクトフォルダーにある <em>omegat</em> フォルダーに置いてください。</p>
+  <hr>
+
+  <a name="upgrading_TM" id="upgrading_TM"></a>
+  <h2>翻訳メモリの更新</h2>
+
+  <p>以前のバージョンの OmegaT は、段落単位でしか原文を分節化できず、また HTML と Open Document ファイルに対しては、フォーマットタグに対する番号付けが適切に行えない場合がありました。OmegaT 2.0 では、参考訳文の品質を向上し、既に存在する翻訳内容をより活用するため、このような TMX ファイルをその場で検出し、更新できます。− つまりもうこの手動の繰り返し作業は必要なくなります。</p>
+
+  <p>プロジェクトの TMX は 1 度だけ更新され、更新後の形式で書き込まれます。以前の TMX ファイルは、プロジェクトが読み込まれるたびにその場で更新されます。OmegaT 2.0 ではファイルフィルターに変更が加えられたため、分節化の内容が全く異なるものになる可能性があります。ごくまれに、翻訳メモリを手動で更新していく必要があることにもご注意ください。</p>
+  <hr>
+  <table summary="just formatting"  style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a> </td>
+        <td style="text-align: center;"><a href="index.html">ホーム</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">索引</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
 </body>
 </html>

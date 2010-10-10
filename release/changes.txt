@@ -15,7 +15,7 @@
 
   - Galician localization updated to 2.1.9 (UI, Instant Start, Readme)
   - Italian localization updated to 2.2.0 (UI, Instant Start, Readme)
-  - Japanese localization updated to 2.2.0 (UI, Instant Start, Readme)
+  - Japanese localization updated to 2.2.0 (UI, Instant Start, Readme, 2.0.5 documentation)
 
   Bug fixes:
   - XML, wrong handling of comments and PI in translatable text

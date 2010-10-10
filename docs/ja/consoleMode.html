@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+  <title>OmegaT 2.0 取扱説明ガイド - コンソールモード</title>
+</head>
+<body>
+<h1>OmegaT コンソールモード</h1>
+<ul>
+  <li>
+    <p><a href="#prerequisites">必要な条件</a></p>
+  </li>
+  <li>
+    <p><a href="#start">コンソールモードで起動する</a></p>
+  </li>
+  <li>
+    <p><a href="#extra">追加のオプション</a></p>
+    <p>&nbsp;</p>
+  </li>
+</ul>
+<p>コンソールモードは、スクリプト環境で OmegaT を翻訳ツールとして用いる場合に使用できます。コンソールモードで開始すると、どのコンソール上でも起動できるようにGUI は起動されません。起動モードによって、指定されたプロジェクトは自動翻訳が行われるか疑似的な翻訳メモリが作成されます。</p>
+<hr>
+<h3><a name="prerequisites" id="prerequisites"></a>必要な条件</h3>
+<p>OmegaT を起動するためには、有効な OmegaT プロジェクトが存在している必要があります。プロジェクトの場所は、起動時にコマンドライン上で指定するので、どこであってもかまいません。 </p>
+<p>別の設定を用いる場合は、有効な設定ファイルも存在している必要があります。その場合は、次の 2 つのうちいずれかの方法をとってください： </p>
+<ol>
+  <li>OmegaT を通常通り（GUI 経由で）起動して設定しておきます。そのままコンソールモードで起動すると、同じ設定が適用されます。仮に、OmegaT を通常通り起動できない（GUI 環境がない）場合は次の方法をとってください： </li>
+  <li>同じ端末の他の場所、または別の端末にある OmegaT の設定ファイルを、あらかじめ決めたディレクトリにコピーしておきます。そのディレクトリの場所は、起動時にコマンドライン上で指定するので、どこであってもかまいません。関連ファイルは、 filters.conf と segmentation.conf、そしてユーザーのホームディレクトリ（Windows の場合 C:¥Documents and Settings¥%User%¥OmegaT、Linux の場合 %user%/.omegat/）にあるファイルです。（¥ は \ とも表記されます） </li>
+</ol>
+<br>
+<h3><a name="start" id="start"></a>コンソールモードで起動する</h3>
+<p>コンソールモードで OmegaT を起動する場合、いくつかの引数が必要になります。必須引数：<code>&lt;project-dir&gt;</code> と <code>--mode=&lt;mode&gt;</code>、任意引数：<code>--config-dir=&lt;config-dir&gt;</code>
+</p>
+<p>起動モードによって必須引数や任意引数が異なります。<code>console-createpseudotranslatetmx</code> の場合は必須引数：<code>--pseudotranslatetmx=&lt;file.tmx&gt;</code>、任意引数：<code>--pseudotranslatetype=&lt;type&gt;</code>。</p>
+<p>自動翻訳プロジェクトの例：<br><code>$&gt; java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code><br>疑似的な翻訳メモリ作成の例：<br><code>java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code>
+
+<p><span style="font-weight: bold;">説明：</span></p>
+<table style="width: 80%;" cellpadding="2" cellspacing="2" summary="just formatting">
+  <tbody>
+    <tr>
+      <td style="text-align: left;" valign="top"><code>&lt;project-dir&gt;</code></td>
+      <td style="text-align: left;" valign="top">
+      <p>プロジェクトがどの場所にあるかを指定します。例えば： <code>/home/user/omegat_projects/myProject</code> や <code>"C:\Localization Projects\myProject"</code></p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;" valign="top"><code>--config-dir=&lt;config-dir&gt;</code></td>
+      <td style="text-align: left;" valign="top">
+      <p>&nbsp;設定ファイルがどの場所にあるかを指定します。このオプションが指定されない場合は、OmegaT は初期設定を使用します。（ユーザホームディレクトリの下の OmegaT ディレクトリ、存在しない場合は現在のワーキングディレクトリ）</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;" valign="top"><code>--mode=[console-translate | console-createpseudotranslatetmx]</code></td>
+      <td style="text-align: left;" valign="top">
+      <p>&nbsp;OmegaT がコンソールモードで開始します。起動モードは　<code>console-translate</code> の場合は指定されたプロジェクトが翻訳されます。起動モードは <code>createpseudotranslatetmx</code> の場合は、<code>--pseudotranslatetmx</code> によって指定された翻訳メモリが作成されます。その翻訳メモリはプロジェクトの未翻訳分節を含めて全ての分節を含めます。分節の翻訳は <code>--pseudotranslatetype</code>　引数によって異なります。翻訳メモリの形式はそのままでOmegaT翻訳プロジェクトの中で使えます。<a href="translationMemories.html#pseudo_translate">翻訳メモリ</a>を参照してください。</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;" valign="top"><code>--pseudotranslatetmx=&lt;file.tmx&gt;</code></td>
+      <td style="text-align: left;" valign="top">
+      <p>&nbsp;起動モードは <code>console-createpseudotranslatetmx</code> のみで有効です。出力先の翻訳メモリを指定します。ファイル名は拡張子 <code>.tmx</code> で終わらないときにそれは自動的に追加されます。ファイル名は絶対パスか OmegaT の起動フォルダーを基準にした相対パスで指定できます。</p>
+      </td>
+    </tr>
+    <tr>
+      <td style="text-align: left;" valign="top"><code>--pseudotranslatetype=[empty|equal]</code></td>
+      <td style="text-align: left;" valign="top">
+      <p>&nbsp;起動モードは <code>console-createpseudotranslatetmx</code> のみで有効です。翻訳の週類を指定します。可能な値は次のとおりです：</p>
+      <ul>
+      <li><code>empty</code>：訳文を空にする</li>
+      <li><code>equal</code>：訳文を原文にする 
+        </li>
+      </ul>
+      <p>引数は任意であって、デフォルト値は<code>equal</code>です。</p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h3><a name="extra" id="extra"></a>追加のオプション</h3>
+<p>追加のコンソールモードのオプションとしてもう 1 つ <code>--quiet</code> があります。このオプションを指定すると、画面出力が極力抑えられます。ステータスバーに表示されるようなメッセージは表示されなくなります。<br>例：<code>java -jar OmegaT.jar /path/to/project --quiet</code> </p>
+<hr>
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"  summary="just formatting">
+<tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a> </td>
+      <td style="text-align: center;"><a href="index.html">ホーム</a>
+      </td>
+      <td style="text-align: right;"><a href="xindex.html">索引</a> </td>
+    </tr>
+  </tbody>
+</table>
+</body>
+</html>

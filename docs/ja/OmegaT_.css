@@ -7,6 +7,14 @@ h1, h2, table, dt {
 	color: navy;
 }
 
+table.omegat {
+	color: black;
+}
+
+span.source {
+	background: #ccffcc;
+}
+
 h3, h4, ul a {
 	color: green;
 }

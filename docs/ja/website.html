@@ -1,49 +1,65 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>ウェブ上のOmegaTプロジェクト、バグ報告、貢献方法など - OmegaT 1.6.2 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta http-equiv="content-language" content="en">
+  <title>OmegaT 2.0 取扱説明ガイド - Web 上の OmegaT プロジェクト（エラー報告と開発への貢献方法）</title>
 </head>
+
 <body>
+  <h2>Web 上の OmegaT 情報</h2>
 
-<h1>ウェブ上のOmegaTプロジェクト、バグ報告、貢献方法など</h1>
+  <h3>OmegaT Web サイトと SourceForge プロジェクトについて</h3>
 
-<a name="Additional_Information_about_OmegaT"></a>
-<h2>OmegaT に関する追加情報</h2>
+  <p><a href="http://www.omegat.org/">OmegaT Web サイト</a>には OmegaT に関する様々な情報へのリンクがあります。最初に目を通しておくとよいでしょう。OmegaT のユーザサポートはボランティアベースであり、<a href=
+  "http://groups.yahoo.com/group/OmegaT/">Yahoo ユーザーグループ</a>で提供されています。<a href=
+  "http://tech.groups.yahoo.com/group/OmegaT/database?method=reportRows&amp;tbl=1">よくある質問（FAQ）ページ</a>はあなたの疑問に答えてくれる出発点になるでしょう。freenode が提供するサーバーに IRC（Internet Relay Chat）のチャンネル「#omegat」があります。最新バージョンは SourceForge.net の <a href=
+  "http://sourceforge.net/projects/omegat/">OmegaT プロジェクト</a> からダウンロードできます。<a href=
+  "http://sourceforge.net/tracker/?group_id=68187&amp;atid=520347">バグ報告</a>や<a href=
+  "http://sourceforge.net/tracker/?group_id=68187&amp;atid=520350">機能改善リクエスト</a>などもこちらで行えます。</p>
 
-<p><a href="http://www.omegat.org/omegat/omegat.html">OmegaT web site</a>には OmegaT リソースに関する様々なリンクがあるので、おそらくはここから始めるべきです。</p>
+  <h3>バグ報告</h3>
 
-<p>ユーザーサポートは<a href="http://groups.yahoo.com/group/OmegaT/">OmegaT Yahoo User Group</a>で提供されています。アーカイブはグループに参加しなくても検索可能です。</p>
+  <p>良いバグ報告には、必ず、次の 3 点が含まれていることを覚えておいてください：</p>
 
-<p>OmegaT の新バージョンは<a href="http://sourceforge.net/projects/omegat/">OmegaT SourceForge.net Project</a>からダウンロードでき、ここからは<a href="http://sourceforge.net/tracker/?group_id=68187&amp;atid=520347">バグレポート</a>と<a href="http://sourceforge.net/tracker/?group_id=68187&amp;atid=520350">機能拡張の要望</a>も出すことができます。</p>
+  <ul>
+    <li>再現するまでの手順</li>
 
-<p>しかしながら、よいバグレポートのためには正確に三つの項目が必要であることを忘れないで下さい:</p>
+    <li>その操作によって期待される動作</li>
 
-<ul>
-   <li>再現手順</li>
-   <li>その動作によって予想していた結果</li>
-   <li>実際に発生した結果</li>
-</ul>
+    <li>実際の動作</li>
+  </ul>
 
-<p>詳しくは Joel Spolsky による<a href="http://www.joelonsoftware.com/articles/fog0000000029.html">やさしいバグトラッキング</a>にあります。</p>
+  <p>詳しくは、Joel Spolsky の<a href=
+  "http://www.joelonsoftware.com/articles/fog0000000029.html">『やさしいバグトラッキング（Painless Bug Tracking）』</a>を見てください。</p>
 
-<p>ファイルのコピーやログ、それに画面のスクリーンショットなどの開発者側がバグを見つけることができ、修正をするのに役立つ資料を一緒につけて提出するべきです。バグレポートと機能拡張の要望は公開されるので、公開されたくないファイルをつけないように注意して下さい。</p>
+  <p>開発者がバグを発見し、修正するのに助けとなる情報を添付してください。例えば、該当ファイルやログの一部（（取扱説明ガイドの<em>「ファイルとディレクトリ」→「ユーザーファイル」</em>の項を参照してください。）、スクリーンショットなどです。バグ報告や機能改善の要望は公開されますので、機密を含むファイルは追加しないでください。報告するバグの経過を知りたいときは、SourceForge ユーザー登録後、ログインしてから報告するか、報告ページ上部の Monitor をクリックしてください。</p>
 
-<p>出したレポートに対して何が行なわれているかを追跡したい場合は、SourceForge ユーザーとして登録し、ログインして、ログインした状態でバグレポートを出すか、あるいは単純にレポートの先頭にあるモニターボタンをクリックするべきです。</p>
+  <h3>OmegaT プロジェクトに貢献する</h3>
 
-<a name="Contributing_to_OmegaT_Project"></a>
-<h2>OmegaT プロジェクトへの貢献</h2>
+  <p>OmegaT に何らかの形で貢献する場合は、まず<a href=
+  "http://groups.yahoo.com/group/OmegaT/">ユーザーグループ</a>に参加してください。（Web 経由、または <a href=
+  "mailto:OmegaT-subscribe@yahoogroups.com">OmegaT-subscribe@yahoogroups.com</a> 宛にメールを送信してください。）OmegaT の開発に協力したい場合は、<a href=
+  "https://lists.sourceforge.net/lists/listinfo/omegat-development">開発者グループ</a>へ参加してください。Web経由、または件名を subscribe としたメールを <a href=
+  "mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</a> に送信してください。</p>
 
-<p>OmegaT に貢献したい場合、まず (web経由または<a href="mailto:OmegaT-subscribe@yahoogroups.com">OmegaT-subscribe@yahoogroups.com</a>にメールを送ることによって)<a href="http://groups.yahoo.com/group/OmegaT/">ユーザーグループ</a>に参加して下さい。</p>
+  <p>OmegaT のユーザーインターフェイス、取扱説明ガイドや関連ドキュメントの翻訳にご協力いただける場合は、まず <a href=
+  "http://www.omegat.org/en/howtos/localizing_omegat.html">OmegaT の多言語化と翻訳について</a> をお読みいただき、<a href=
+  "https://lists.sourceforge.net/lists/listinfo/omegat-l10n">OmegaT 翻訳者グループ</a> に参加してください。（Web 経由、または件名を subscribe としたメールを <a href=
+  "mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</a> 宛てに送信してください。）</p>
 
-<p>OmegaT の開発に貢献したい場合、(web経由または<a href="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe"
->omegat-development-request@lists.sourceforge.net</a>に"subscribe"という件名でメールを送ることによって)<a href="https://lists.sourceforge.net/lists/listinfo/omegat-development">開発者グループ</a>に参加して下さい。</p>
-
-<p>OmegaT ユーザーインターフェイスやマニュアル、または他の関連文書の翻訳に協力したい場合、まず<a href="http://www.omegat.org/omegat/translation-info.html">Localizing and customizing OmegaT</a>ガイドを読み、 (web経由または<a href="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</a>に"subscribe"という件名でメールを送ることによって)<a href="https://lists.sourceforge.net/lists/listinfo/omegat-l10n">OmegaT 翻訳者グループ</a>に参加して下さい。</p>
-
-<p>そして、OmegaTの世界でどんなことが進行しているか、感じ取ってください…</p>
-
-<hr>
-<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+  <p>そして、OmegaTの世界でどんなことが進行しているか、感じ取ってください…</p>
+  <hr>
+  <table summary="just formatting"  style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a> </td>
+        <td style="text-align: center;"><a href="index.html">ホーム</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">索引</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
 </body>
 </html>

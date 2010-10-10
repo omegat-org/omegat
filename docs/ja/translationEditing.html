@@ -1,47 +1,96 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>翻訳文書編集 - OmegaT 1.6.2 User Manual</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="CONTENT-TYPE" content="text/html; charset=utf-8">
+
+  <title>OmegaT 2.0 取扱説明ガイド - 翻訳入力行</title>
 </head>
+
 <body>
+  <h2>翻訳入力行の動作</h2>
 
-<h1>翻訳文書編集</h1>
+  <ul>
+    <li>
+      <p><a href="#auto_insert">自動訳文挿入</a></p>
+    </li>
 
-<p>翻訳は分節から分節に移動しながら行い、一度には一つの分節を編集します。分節間を移動するときに、編集フィールドが他の文章と置き換えられることがあります。例えば、既に翻訳した分節に移動すると、編集フィールドは常に既存の翻訳に置き換えられるので、以前の翻訳を編集できます。</p>
+    <li>
+      <p><a href="#validation">修正されない分節</a></p>
+    </li>
+  </ul>
 
-<p>しかし、まだ翻訳されていない分節に移動した場合、OmegaT は設定されたテキストを分節に設定できるので、好みの方法で編集できます:</p>
+  <p>翻訳入力領域の動作を、以下のように定めることができます：</p>
 
-<ul>
-   <li>まず、自動的に編集フィールドに原文を設定できます。これは、商標や固有名詞などのそのまま残しておく必要のあるものが多く含まれている文書では極めて便利です。<strong>設定 -&gt; 翻訳入力行...</strong>に移動して<strong>原文</strong>ラジオボタンが選択されていることを確認して下さい。</li>
+  <ul>
+    <li>
+      <p>最も一致率の高い参考訳文を自動的に挿入する</p>
+    </li>
 
-   <li>または、編集フィールドを空白のままにしておくこともできます。このオプションにより、原文テキストを削除することなく翻訳を入力できるので、2 キーストローク (<code>Ctrl+A</code> と <code>Del</code>) を節約できます。<srong>設定 -&gt; 翻訳入力行...</strong>に移動して<strong>何も入れません</strong>ラジオボタンを選択します。</li>
+    <li>
+      <p>原文とまったく同じ内容を、翻訳済みの分節とみなす</p>
+    </li>
+  </ul>
+  <hr>
 
-   <li>あるいは、今から編集しようとしているものに最も似ている文字列の翻訳を挿入することもできます。<strong>設定 -&gt; 翻訳入力行...</strong>に移動して、<strong>最も一致率の高い参考訳文</strong>のフラグを選択して、自動的に挿入するための最小一致率を調整してください。</li>
-</ul>
+  <h2><a name="auto_insert" id="auto_insert"></a>自動訳文挿入</h2>
 
-<p>OmegaT で以下のいずれかの設定を行なう場合は、<strong>設定 -&gt; 翻訳入力行...</strong>に移動して...</p>
+  <p>翻訳作業は、分節間を行き来しながら、分節を編集することで進めていきます。分節を移動したときは、参考訳文を挿入することもできますし、原文のままにしておくこともできます。</p>
 
-<ul>
-   <li><strong>原文</strong>ラジオボタンが選択されていることを確認して下さい。これはデフォルトで、ほとんどの場合これが正解です。</li>
+  <p><strong>［設定］→［翻訳入力行...］</strong>の設定により、OmegaT では、以下の設定ができます：</p>
 
-   <li><strong>何も入れません</strong>ラジオボタンを選択して下さい。</li>
+  <table summary="just formatting" cellpadding="2" cellspacing="2">
+    <tr valign="top">
+      <td>
+        <p><strong>原文を入れる</strong></p>
+      </td>
 
-   <li><strong>最も一致率の高い参考訳文</strong>のフラグを選択して、自動的に挿入するための最小一致率を調整してください。また、参考訳文を挿入したことを区別するための前置詞を変更することもできます。</li>
-</ul>
+      <td>
+        <p>翻訳入力行に、対応する原文を入力した状態にします。商標や固有名詞など、あえて翻訳しない部分を多く含んでいるような文書の場合に非常に便利です。</p>
+      </td>
+    </tr>
 
-<p>... そして<strong>OK</strong>をクリックして下さい。</p>
+    <tr valign="top">
+      <td>
+        <p><strong>原文を入れない</strong></p>
+      </td>
 
-<a name="Text_To_Store"></a>
-<h2>保存する文書</h2>
+      <td>
+        <p>OmegaT は翻訳入力行を空欄にします。翻訳入力の前に、原文を削除するキー入力の手間（つまり <code>Ctrl+A</code> と <code>Del</code>）が省けます。</p>
+      </td>
+    </tr>
 
-<p>翻訳する必要のあるドキュメントには、商標や固有名詞など、翻訳されたドキュメントでも同じである必要があるものも含まれています。このような変化しない文書を含む分節については二つの戦略があります。</p>
+    <tr valign="top">
+      <td>
+        <p><strong>最も一致率の高い参考訳文</strong></p>
+      </td>
 
-<p>まず、そのような分節を翻訳しないままにしておくことができますが、OmegaT はそのような翻訳していない分節を通知するので、後の翻訳レビューの時に、変化しないものであることを思い出せずに翻訳してしまうかもしれません。これはデフォルトです。</p>
+      <td>
+        <p>OmegaT はその原文に最も近い参考訳文を自動挿入します。挿入するかどうかの一致率のしきい値（最小一致率）は、変更できます。</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
 
-<p>二つ目は、たとえ訳文が原文と同じでも訳文を保存するように OmegaT に指示することで、こうすると OmegaT は文書を見直して、同じ内容に翻訳することにしたことを思い出させてくれます。<strong>設定 -&gt; 翻訳入力行...</strong>に移動して<strong>原文と等しい訳文を許可する</strong>フラグを選択します。</p>
+  <h2><a name="validation" id="validation"></a>修正されない分節</h2>
 
-<hr>
-<p><a href="legalNotices.html" title="特記事項">特記事項</a></p>
+  <p>文書によっては、商標、名称、その他の固有名詞など、原文と同じ状態で残す必要のある箇所を含んでいる場合があります。変更すべきでないテキストを残しておくには 2 通りの方法があります。</p>
 
+  <p>まず、そのような箇所を全く翻訳せずに残しておくことができます。OmegaT としては未翻訳の分節として残すことになります。こちらが初期設定です。</p>
+
+  <p>もう1つの方法として、原文と全く同じでも、OmegaT にはそこを翻訳したものとして記憶させることができます。そうする場合は、<strong>［設定］→［翻訳入力行...］</strong>で表示される画面の<strong>［原文と等しい訳文］</strong>をチェックしてください。</p>
+  <hr>
+
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">法律上の表示</a></td>
+
+        <td style="text-align: center;"><a href="index.html">ホーム</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">索引</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

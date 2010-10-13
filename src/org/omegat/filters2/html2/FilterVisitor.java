@@ -214,7 +214,7 @@ public class FilterVisitor extends NodeVisitor
         String attr = tag.getAttribute(key);
         if( attr!=null )
         {
-            String trans = filter.privateProcessEntry(attr);
+            String trans = filter.privateProcessEntry(entitiesToChars(attr));
             tag.setAttribute(key, trans);
         }
     }

@@ -1,4 +1,17 @@
 ----------------------------------------------------------------------
+ OmegaT 2.2.0 update 2 
+----------------------------------------------------------------------
+  0 Enhancement
+  1 Bugfix
+----------------------------------------------------------------------
+2.2.0 update 2 vs. 2.2.0 update 1
+
+  Bug fixes:
+
+  - HTML filter: Entities from attributes were not converted to 
+characters. This applied also to the HTML Help Compiler Filter.
+
+----------------------------------------------------------------------
  OmegaT 2.2.0 update 1 
 ----------------------------------------------------------------------
   4 Enhancements
@@ -18,6 +31,7 @@
   - Japanese localization updated to 2.2.0 (UI, Instant Start, Readme, 2.0.5 documentation)
 
   Bug fixes:
+
   - XML, wrong handling of comments and PI in translatable text
   http://sourceforge.net/support/tracker.php?aid=1662205
 

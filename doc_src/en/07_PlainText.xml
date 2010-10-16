@@ -46,12 +46,16 @@
     computer in which language they are written. The Japanese file contents
     could be:</para>
 
-    <para>OmegaTとは、コンピュータを利用した翻訳ツールです。</para>
+    <screenshot>
+      <graphic align="left" fileref="images/OmT_Japanese.png" />
+    </screenshot>
 
     <para>Because it expects the contents to be Russian, your text editor
     could very well display it like this:</para>
 
-    <para>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</para>
+    <screenshot>
+      <graphic align="left" fileref="images/OmT_Cyrillic.png" />
+	  </screenshot>
 
     <para>However, it is far from Russian: it is Japanese characters wrongly
     displayed using Russian alphabet.</para>
@@ -67,7 +71,8 @@
   <section id="character.sets.and.encoding">
     <title>Character sets and encoding<indexterm class="singular">
         <primary>Character sets</primary>
-		<seealso>Default encoding</seealso>
+
+        <seealso>Default encoding</seealso>
       </indexterm></title>
 
     <para>Why would that work with English and French but not with Russian and

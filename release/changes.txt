@@ -2,7 +2,7 @@
  OmegaT 2.2.0 update 2 
 ----------------------------------------------------------------------
   0 Enhancement
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.2.0 update 2 vs. 2.2.0 update 1
 
@@ -10,6 +10,9 @@
 
   - HTML filter: Entities from attributes were not converted to 
 characters. This applied also to the HTML Help Compiler Filter.
+
+  - MT using Google fails to give results in Traditional Chinese
+  http://sourceforge.net/support/tracker.php?aid=3086757
 
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 1 
@@ -239,7 +242,6 @@ on supported file formats
 
   - Cursor jumps to end of selection during Shift+left
   http://sourceforge.net/support/tracker.php?aid=3006297
-
 
 ----------------------------------------------------------------------
  OmegaT 2.1.6

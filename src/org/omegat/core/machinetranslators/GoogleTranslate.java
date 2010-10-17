@@ -66,8 +66,16 @@ public class GoogleTranslate extends BaseTranslate {
 
         Map<String, String> p = new TreeMap<String, String>();
         p.put("v", "1.0");
+        String targetLang = tLang.getLanguageCode();
+        // Differentiate in target between simplified and traditional Chinese
+        if ((tLang.getLanguage().compareToIgnoreCase("zh-cn" ) == 0) ||
+            (tLang.getLanguage().compareToIgnoreCase("zh-tw") == 0)) 
+            targetLang = tLang.getLanguage();
+        else if ((tLang.getLanguage().compareToIgnoreCase("zh-hk") == 0))
+			targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
+			
         p.put("langpair", sLang.getLanguageCode() + '|'
-                + tLang.getLanguageCode());
+                + targetLang);
         p.put("q", trText);
 
         String v = WikiGet.post(GT_URL, p);

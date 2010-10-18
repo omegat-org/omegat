@@ -219,9 +219,9 @@ Previous contributors include:
 Code has been contributed by
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (release manager)
+  Didier Briel (development manager)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (lead developer)
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie

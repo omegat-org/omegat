@@ -1,0 +1,99 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Correttore ortografico - Manuale per l'Utente di OmegaT 2.0</title>
+</head>
+
+<body>
+  <h2>Correttore ortografico</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#introduction">Introduzione</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Opzioni del correttore ortografico</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Hints">Consigli</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a> Introduzione</h3>
+
+  <p><br></p>
+
+  <p>Il correttore ortografico può essere installato e usato per indicare le parole da correggere nel testo tradotto durante il lavoro di traduzione. Non sorprenderà sapere che OmegaT usa il correttore ortografico <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a>, utilizzato anche, tra gli altri, in OpenOffice.org, Firefox e Thunderbird. Se si utilizza almeno uno di questi programmi, è probabile che si abbiano già installati gli elementi fondamentali del correttore ortografico e sia solo necessario collegarvi OmegaT.</p>
+
+  <p>Dopo aver attivato il correttore ortografico e reso disponibile il vocabolario per la lingua di destinazione, il correttore controllerà i segmenti tradotti visualizzati nel riquadro di modifica. Le parole sospette vengono sottolineate con una riga ondulata rossa:</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "Controllare l'ortografia del testo" align="left" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Se si fa clic col pulsante tasto destro del mouse su una parola evidenziata (<i>Inditro</i>, sopra), si aprirà un menu a discesa che elenca i suggerimenti per la correzione (<i>Indietro, Indite, Indissero, ecc.</i>). È possibile ordinare al correttore di <b>ignorare tutte</b> le occorrenze della parola oppure di <b>aggiungerla al dizionario</b>. Si noti che questo è un correttore ortografico in linea: se si deve eseguire un controllo generale dei testi è necessario navigare nei testi e ricercare le varie sottolineature rosse. L'alternativa è eseguire il controllo nei file di arrivo tramite un editor, ossia al di fuori di OmegaT: in questo caso le modifiche eseguite non saranno incorporate nella memoria di traduzione.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Opzioni del correttore ortografico</h3>
+
+  <p>Quando si fa clic su <b>Opzioni &gt; Correzione ortografica...</b> si apre la finestra mostrata sotto:</p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "Impostazioni del correttore ortografico" align="left" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>L'esempio sopra contiene già il vocabolario disponibile. Al principio il riquadro sarà vuoto e si dovrà specificare dove OmegaT dovrà cercare i vocabolari. Fare clic Click su <strong>Scegli...</strong> per aprire una finestra in cui selezionare la sottocartella dei vocabolari di OpenOffice.org o di Mozilla esistenti. Il metodo più semplice per trovarli è eseguire una ricerca dei file con estensione <i>aff</i> o <i>dic</i>. OmegaT riconoscerà tutti i dizionari disponibili in quella posizione e li mostrerà. Se il dizionario che si desidera usare è già lì ed è visibile in OmegaT, il processo è terminato. Se i dizionari non sono presenti, è possibile selezionare la loro corretta posizione, poi premere il pulsante <b>Installa</b>, per permettere a OmegaT di reperire i vocabolari. Selezionare i vocabolari richiesti all'interno della finestra a comparsa, poi premere <b>installa</b>. Verranno installate le lingue selezionate, le quali potranno eventualmente apparire nella finestra di configurazione del correttore ortografico (ciò potrebbe richiedere del tempo).</p>
+
+  <p>Si noti che l'installatore dipende dall'elenco Internet dei dizionari. Nel caso in cui l'elenco non sia aggiornato o la lingua desiderata non sia inclusa, bisogna cercare manualmente i vocabolari. OpenOffice.org contiene molto probabilmente la più vasta raccolta di vocabolari nel <a href="http://extensions.services.openoffice.org/dictionary">repository OpenOffice.org dei dizionari</a>. Una volta scaricata e installata l'estensione di dizionario, i corrispondenti <i>aff</i> e <i>dic</i> diverranno disponibili. Si otterrà lo stesso risultato aggiungendo un'estensione di correzione ortografica a quella di Firefox o Thunderbird; in questo caso, i file del correttore saranno memorizzati nel proprio profilo (Firefox o Thunderbird).</p>
+
+  <p>Assicurarsi che il codice della lingua dei file di arrivo corrispondano a quelli del dizionario: un dizionario IT-IT non funzionerà con un codice di arrivo impostato a IT. Affinché il correttore ortografico riconosca il giusto dizionario per i segmenti tradotti, bisognerà modificare l'impostazione in IT-IT. Eseguire una ricerca dei file col nome che indica la lingua utilizzata e dalle estensioni <i>aff</i> e <i>dic.</i></p>
+
+  <h3><a name="Hints" id="Hints"></a>Consigli</h3>
+
+  <p>Probabili motivi per i quali il correttore ortografico non funziona:</p>
+
+  <ol>
+    <li>
+      <p>La casella "Controlla automaticamente l'ortografia" deve essere attivata.</p>
+    </li>
+
+    <li>
+      <p>Confrontare il codice della lingua di destinazione del proprio progetto con i dizionari disponibili all'interno della finestra di configurazione. Il correttore ortografico determina la lingua da utilizzare dal codice della lingua di destinazione: se quest'ultima è il Portoghese brasiliano (PT_BR), la sottocartella contenente i dizionari deve contenere due file di dizionario chiamati rispettivamente <i>pt_br.aff</i> e <i>pt_br.dic</i>.</p>
+    </li>
+  </ol>
+
+  <p>Nel caso in cui si sia già tradotta un'ampia porzione di testo e ci si accorga che il codice della lingua di destinazione non corrisponde col codice della lingua del correttore ortografico (poiché è stata specificata pt_BR come lingua, per esempio, ma non è presente alcun dizionario pt_BR), basta copiare e rinominare i due file corrispondenti (pt_PT.aff e pt_PT.dic in pt_BR.aff e pt_BR.dic, rispettivamente). Sarebbe più opportuno, naturalmente, prendersi una pausa e scaricare la versione corretta del correttore ortografico.</p>
+
+  <p>Si noti che il comando "Rimuovi" elimina fisicamente i dizionari selezionati. Se essi sono parte di OpenOffice, come nel caso illustrato sopra, scompariranno anche dall'applicazione. Se, per una qualsiasi ragione, si dovesse eseguire l'operazione e si ha anche in progetto di ripeterla, si dovrebbero copiare i file coinvolti in una cartella diversa, riservata solo agli scopi di OmegaT.</p>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avvertenze legali</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Pagina iniziale</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indice</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

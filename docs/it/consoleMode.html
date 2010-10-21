@@ -1,0 +1,62 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Modalità console - Manuale per l'Utente di OmegaT 2.1</title>
+</head>
+
+<body>
+  <h1>Modalità console di OmegaT</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Prerequisiti</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">Avvio in modalità console</a></p>
+    </li>
+
+  </ul>
+  <p>&nbsp;</p>
+
+  <p>Lo scopo della modalità console è usare OmegaT come strumento di traduzione in un ambiente di scripting. Quando è avviato in modalità console, non viene caricata alcuna interfaccia grafica (e funzionerà in qualsiasi console). A seconda del modo di avvio, il progetto dato è automaticamente tradotto o viene creata una memoria di traduzione pseudo-tradotta.</p>
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Prerequisiti</h3>
+
+  <p>Per avviare OmegaT deve essere presente un progetto OmegaT valido. Non importa la posizione, poiché è necessario aggiungerla comunque alla riga di comando all'avvio.</p>
+
+  <p>Se si necessita di modificare le impostazioni, devono essere presenti i file di configurazione. Questo può essere eseguito in due modi:</p>
+
+  <ol>
+    <li>Avviare normalmente OmegaT (con l'interfaccia grafica) e regolare le impostazioni. Se si avvia OmegaT in modalità console, esso userà le stesse impostazioni. Se non è possibile avviare normalmente OmegaT (ambiente grafico non disponibile):</li>
+
+    <li>Copiare i file delle impostazioni da qualche altra installazione di OmegaT su un'altra macchina in una directory specifica. Non importa la posizione, poiché è possibile aggiungerla alla riga di comando all'avvio. I file importanti sono filters.conf e segmentation.conf che si possono trovare nella directory home dell'utente (Es., C:\Documents and Settings\%User%\OmegaT sotto Windows, %user%/.omegat/ sotto Linux)</li>
+  </ol><br>
+
+  <h3><a name="start" id="start"></a>Avvio in modalità console</h3>
+
+  <p>Per avviare OmegaT in modalità console, all'avvio devono essere passati alcuni parametri aggiuntivi. Sono richiesti <code>&lt;project-dir&gt;</code> e <code>--mode=&lt;mode&gt;</code>.</p>
+
+  <p>A seconda della modalità, devono (o possono) essere aggiunti altri parametri aggiuntivi. Per ulteriori informazioni si veda quanto riportato negli <a href="commandlineArguments.html">argomenti a riga di comando</a>.</p>
+
+  <p>Esempio di progetto di traduzione:<br> <code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code><br> Esempio di progetto di traduzione per un solo file:<br> <code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate --source-pattern=test\.html</code><br> Esempio di creazione di una tmx pseudo tradotta:<br> <code>java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code></p>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avvertenze legali</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Pagina iniziale</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indice</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

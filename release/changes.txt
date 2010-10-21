@@ -1,10 +1,14 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 2 
 ----------------------------------------------------------------------
-  0 Enhancement
+  1 Enhancement
   2 Bugfixes
 ----------------------------------------------------------------------
 2.2.0 update 2 vs. 2.2.0 update 1
+
+  Other enchancements:
+
+  - Italian localisation updated to 2.2.0 update 1 (UI, Instant Start, Readme, documentation)
 
   Bug fixes:
 
@@ -29,9 +33,9 @@ characters. This applied also to the HTML Help Compiler Filter.
 
   Other enhancements:
 
-  - Galician localization updated to 2.1.9 (UI, Instant Start, Readme)
-  - Italian localization updated to 2.2.0 (UI, Instant Start, Readme)
-  - Japanese localization updated to 2.2.0 (UI, Instant Start, Readme, 2.0.5 documentation)
+  - Galician localisation updated to 2.1.9 (UI, Instant Start, Readme)
+  - Italian localisation updated to 2.2.0 (UI, Instant Start, Readme)
+  - Japanese localisation updated to 2.2.0 (UI, Instant Start, Readme, 2.0.5 documentation)
 
   Bug fixes:
 

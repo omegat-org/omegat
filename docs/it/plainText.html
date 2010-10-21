@@ -1,113 +1,99 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Lavorazione di file di solo testo - Manuale per l'Utente di OmegaT 1.6.1</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Lavorazione di file di solo testo - Manuale per l'Utente di OmegaT 2.0</title>
 </head>
+
 <body>
+  <h2>Lavorazione di file di solo testo</h2>
 
-<h1>Lavorazione di file di solo testo</h1>
+  <ul>
+    <li><a href="#Plain_Text_in_OmegaT">Codifica predefinita</a></li>
 
-<h2>Sommario</h2>
+    <li><a href="#Garbled_displays_3F">Caratteri strani</a></li>
 
-<ul type="none">
-   <li>1. <a href="#Plain_Text_in_OmegaT">File di solo testo in OmegaT</a></li>
+    <li><a href="#Character_sets_and_encoding">Set di caratteri e codifica</a></li>
 
-   <li>2. <a href="#Garbled_displays_.3F">Caratteri strani?</a>
+    <li><a href="#The_OmegaT_solution">La soluzione OmegaT</a></li>
+  </ul>
+  <hr>
+  <a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
 
-      <ul type="none">
-         <li>2.1. <a href="#Character_sets_and_encodings">Set di caratteri e codifiche</a></li>
-         <li>2.2. <a href="#The_OmegaT_solution">La soluzione OmegaT</a></li>
-      </ul>
-   </li>
-</ul>
+  <h2>Codifica predefinita</h2>
 
-<a name="Plain_Text_in_OmegaT"></a>
-<h2>File di solo testo in OmegaT</h2>
+  <p>I file di solo testo - nella maggior parte dei casi hanno un'estensione <code>.txt</code> - contengono solo informazioni di tipo testuale. Non esiste un sistema chiaramente definito per indicare al computer in quale lingua sono stati scritti. In parole (molto) povere, ciò significa che il computer presupporrà, per impostazione predefinita, che il testo sia scritto nello stessa lingua usata dal sistema operativo.</p>
+  <hr>
+  <a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
 
-<p>I file di solo testo contengono solo informazioni di tipo testuale. I file di solo testo non prevedono un sistema chiaramente definito per indicare al computer in quale lingua sono stati scritti. Da un punto di vista molto generale, ciò significa che il computer considererà per default che il contenuto del file sia nello stesso linguaggio adottato dal computer stesso.</p>
+  <h2>Caratteri strani</h2>
 
-<p>Un file di solo testo è, nella maggior parte dei casi, un file al quale viene associata l'estensione <strong>.txt</strong>.</p>
+  <p>Se si è russi, molto probabilmente il computer sul quale si opera lavorerà anch'esso in lingua russa: i menu saranno in russo, i file che si apriranno saranno in russo, e così via. Nella maggior parte dei casi, il computer prende le decisioni corrette per quanto riguarda il contenuto dei file, almeno in linea generale: contiene la lingua russa e sarà in grado di visualizzare solo i caratteri russi.</p>
 
-<a name="Garbled_displays_.3F"></a>
-<h2>Caratteri strani?</h2>
+  <p>A questo punto, se si è un traduttore russo che traduce dal giapponese, i file giapponesi che riceverete, se sono in formato <strong>solo testo</strong>, verranno, con tutta probabilità, considerati dal computer come file associati alla lingua russa. E questo accade proprio perché i file di solo testo non contengono informazioni che indichino al computer in quale lingua sono stati scritti. Supponiamo che il contenuto giapponese del file sia:</p>
 
-<p>Se si è russi, molto probabilmente il computer sul quale si opera lavorerà anch'esso in lingua russa: i menu saranno in russo, i file che si apriranno saranno in russo, e così via. Nella maggior parte dei casi, il computer prende le decisioni corrette per quanto riguarda il contenuto dei file, almeno in linea generale: contiene la lingua russa e sarà in grado di visualizzare solo i caratteri russi.</p>
+  <p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p><br>
 
-<p>A questo punto, se si è un traduttore russo che traduce dal giapponese, i file giapponesi che riceverete, se sono in formato <strong>solo testo</strong>, verranno, con tutta probabilità, considerati dal computer come file associati alla lingua russa. E questo accade proprio perché i file di solo testo non contengono informazioni che indichino al computer in quale lingua sono stati scritti.</p>
+  <p>Dato che il computer si aspetta che il contenuto del file sia in russo, il vostro editor di testo potrebbe visualizzarlo in questo modo</p>
 
-<p>Supponiamo che il contenuto giapponese del file sia:</p>
+  <p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</p><br>
 
-<pre>   OmegaTとは、コンピュータを利用した翻訳ツールです。</pre>
+  <p>Tuttavia, non è per nulla Russo, sono caratteri giapponesi visualizzati scorrettamente in caratteri cirillici.</p>
 
-<p>Ma che il vostro editor di testo lo visualizzi in questo modo:</p>
+  <p>Come qualsiasi altra applicazione, anche OmegaT presenta questo problema. Può solo presupporre che, per impostazione predefinita, i file di <strong>solo testo</strong> possano essere visualizzati tramite le impostazioni predefinite del sistema. Questo non genera problemi, fintanto che il computer lavora in francese, per esempio, e si aprono file in Inglese, o quando il computer è tedesco e si gestiscono file in Italiano.</p>
+  <hr>
+  <a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
 
-<pre>   OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</pre>
+  <h2>Set di caratteri e codifica</h2>
 
-<p>Questo accade perché il computer si aspetta che il contenuto del file sia in russo... Ma questo non è russo! Questo non è altro che una riproduzione dei caratteri giapponesi visualizzati, in modo non corretto, con caratteri cirillici.</p>
+  <p>Ma perché tutto funziona bene quando si lavora con l'Inglese e il Francese, ma non funziona col Russo e il Giapponese? La ragione sta nel fatto che l'inglese e il francese condividono lo stesso <strong>set di caratteri</strong>. In particolare, il set <strong>Latin-1</strong>, o una sua variante. Fino a poco tempo fa, Russo e Giapponese non condividevano alcun set di caratteri. La maggior parte dei comuni set di caratteri russi non riconoscono il giapponese, e viceversa. Il risultato finale è quello mostrato sopra.</p>
 
-<p>OmegaT non si comporta diversamente. OmegaT presume che i file di <strong>solo testo</strong> contengano un testo che possa venire automaticamente visualizzato utilizzando le impostazioni di default del computer sul quale si sta lavorando. Questo non genera problemi, fintanto che il computer lavora in francese e si aprono file in Inglese, o quando il computer è tedesco e si aprono file in italiano.</p>
+  <p>Il cliente giapponese lavora con un computer giapponese, e crea i propri file di solo testo che contengono il set di caratteri giapponese. Il set di caratteri selezionato dal computer del cliente dipenderà dal sistema operativo e da altre impostazioni, ma sarà altamente improbabile che il set di caratteri selezionato (giapponese) venga correttamente interpretato dal computer russo.</p>
 
-<a name="Character_sets_and_encodings"></a>
-<h3>Set di caratteri e codifiche</h3>
+  <p>Il modo in cui vengono fisicamente trasmesse le informazioni testuali nel set di caratteri specificato (per es., quali sono i codici numerici che il computer usa per interpretare e visualizzare il testo) dipende dalla <strong>codifica</strong>. Quando il computer legge il file, ne “decodifica” le informazioni in base alla propria codifica e li visualizza in base al proprio set di caratteri. Banalmente parlando, si potrebbe affermare che una codifica corrisponde a un particolare set di caratteri...</p>
+  <hr>
+  <a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
 
-<p>Ma perché tutto funziona bene quando si parla dell'inglese e del francese ma non è lo stesso quando si parla del russo e del giapponese? La ragione sta nel fatto che l'inglese e il francese condividono lo stesso <strong>set di caratteri</strong>. In particolare, il set <strong>Latin-1</strong>, o una sua variante.</p>
+  <h2>La soluzione OmegaT</h2>
 
-<p>Fino a poco tempo fa, il russo e il giapponese non condividevano alcun set di caratteri. La maggior parte dei comuni set di caratteri russi non riconoscono il giapponese, e viceversa. Il risultato finale è quello più sopra esemplificato.</p>
+  <p>Ci sono fondamentalmente tre modi per affrontare questo problema in OmegaT. Tutti comportano l'applicazione di <a href="fileFilters.html">filtri di file</a> nel menu <strong>Opzioni</strong> menu.</p>
 
-<p>Il cliente giapponese lavora con un computer giapponese, e crea i propri file di solo testo che contengono il set di caratteri giapponese. Il set di caratteri selezionato dal computer del cliente dipenderà dal sistema operativo e da altre impostazioni, ma sarà molto improbabile che il set di caratteri selezionato (giapponese) venga correttamente interpretato dal computer russo.</p>
+  <ol>
+    <li>Specificare la codifica dei propri file di <strong>solo testo</strong> - ad es., file con estensione <code>.txt</code> - :&nbsp;nella sezione <strong>File di testo</strong> della finestra di dialogo <a href="fileFilters.html">filtri dei file</a>, modificare la <strong>Codifica del file sorgente</strong> da <strong>&lt;auto&gt;</strong> a quella corrispondente al file <code>.txt</code> sorgente.</li>
 
-<p>Ora, il modo nel quale vengano fisicamente trasmesse le informazioni testuali nel set di caratteri specificato (ovvero, come vengono <strong>scritti</strong> nel file in modo che il computer possa interpretarli e visualizzarli) dipende da una <strong>codifica</strong>. Quando il computer legge il file, ne “decodifica” le informazioni in base alla propria codifica e li visualizza in base al proprio set di caratteri. Banalmente parlando, si potrebbe affermare che una codifica corrisponda a un particolare set di caratteri...</p>
+    <li>Modificare l'estensione dei file di solo testo di partenza (per esempio, da <code>.txt</code> a <code>.jp</code> per i file di solo testo in Giapponese):&nbsp;nella sezione <strong>File di testo</strong> della finestra di dialogo <a href=
+    "fileFilters.html">filtri dei file</a>, aggiungere un nuovo <strong>Modello del nome del file sorgente</strong> (per esempio, <code>*.jp)</code> e selezionare i corretti parametri per la codifica dei file sorgenti e di arrivo.</li>
 
-<a name="The_OmegaT_solution"></a>
-<h3>La soluzione OmegaT</h3>
+    <li>Modificare la codifica dei propri file in Unicode:&nbsp;aprire il file sorgente in un editori di testo che interpreta correttamente la sua codifica e salvare il file nella codifica "UTF-8". Modificare l'estensione del file da <code>.txt</code> a <code>.utf8</code>. OmegaT lo interpreterà automaticamente come file con codifica UTF-8.</li>
+  </ol>
 
-<p>Sostanzialmente, OmegaT ha a disposizione 3 modi per risolvere il problema.</p>
+  <p>Per impostazione predefinita, OmegaT mette a disposizione il seguente breve elenco che facilita la gestione di alcuni tipi di file di solo testo:</p>
 
-<ol>
-   <li>Quello più drastico è:<ul>
-         <li>“indicare” a OmegaT che i <strong>file di solo testo</strong> con estensione <strong>.txt</strong> dovranno venire interpretati in base a una codifica specifica.</li>
-      </ul>
-   </li>
+  <ul>
+    <li>i file <code>.txt</code> sono automaticamente (<strong>&lt;auto&gt;</strong>) interpretati da OmegaT come se si trattasse di file codificati con la codifica predefinita del computer;</li>
 
-   <li>Un sistema più selettivo è:<ul>
-         <li>modificare i nomi dei file di solo testo “stranieri” in un qualcosa di appropriato (per esempio, “nome_file.gapponese”);</li>
+    <li>i file <code>.txt1</code> sono file ISO-8859-1, che copre la maggior parte delle lingue dell'<strong>Europa occidentale</strong>;</li>
 
-         <li>“indicare” a OmegaT che tutti i file con estensione “.giapponese” dovranno venire interpretati in base a una specifica codifica.</li>
-      </ul>
-   </li>
+    <li>i file <code>.txt2</code> sono file in ISO-8859-2, che copre la maggior parte delle lingue dell'<strong>Europa centrale e orientale</strong>;</li>
 
-   <li>Il sistema “Unicode”:<ul>
-         <li>aprire il file “straniero” con un editor di testo che sia in grado di interpretare correttamente la codifica del file (o di adottare una procedura di “prove ed errori”);</li>
+    <li>i file <code>.utf8</code> sono interpretati da OmegaT come se fossero codificati in UTF-8 (codifica che copre quasi <strong>tutti</strong> le lingue del mondo).</li>
+  </ul>
 
-         <li>salvare il file con la codifica “UTF-8”;</li>
+  <p>Lo si potrà verificare di persona selezionando il comando <strong>Filtri dei file</strong> del menu <strong>Opzioni</strong>. Ad esempio, se si ha un file di testo scritto in Ceco (molto probabilmente con codifica <strong>ISO-8859-2</strong>), basta modificare l'estensione <code>.txt</code> in <code>.txt2</code> affinché OmegaT interpreti correttamente il suo contenuto. Naturalmente, per non correre rischi, si prenda in considerazione di convertire questi tipi di file in Unicode, ad es., nel formato di file .utf8.</p>
+  <hr>
 
-         <li>cambiare il nome del file da <strong>nome_file.txt</strong> in <strong>nome_file.utf8</strong>. OmegaT, a questo punto, interpreterà il file come file con codifica UTF-8.</li>
-      </ul>
-   </li>
-</ol>
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avvertenze legali</a></td>
 
-<p>Attualmente, OmegaT è impostato per riconoscere i file di solo testo in questo modo: (si potrà verificarlo di persona selezionando il comando <strong>Filtri dei file</strong> del menu <strong>Opzioni</strong>. Fare clic sulla riga <strong>File di testo</strong> e, quindi, sul pulsante <strong>Modifica</strong>).</p>
+        <td style="text-align: center;"><a href="index.html">Pagina iniziale</a></td>
 
-<ul>
-   <li>
-      I file con estensione <strong>.txt</strong> verranno interpretati da OmegaT automaticamente (<strong>auto</strong>) come se si trattasse di file codificati con la codifica di default del computer.</li>
-
-   <li>
-      I file <strong>.txt1</strong> vengono interpretati da OmegaT come se fossero codificati ISO-8859-1 (una codifica che copre la maggior parte delle lingue dell'<strong>Europa occidentale</strong>).</li>
-
-   <li>
-      I file <strong>.txt2</strong> vengono interpretati da OmegaT come se fossero codificati ISO-8859-2 (una codifica che copre la maggior parte delle lingue dell'<strong>Europa centrale e orientale</strong>).</li>
-
-   <li>
-      I file <strong>.utf8</strong> vengono interpretati da OmegaT come file con codifica UTF-8 (una codifica che copre quasi <strong>tutte</strong> le lingue del mondo).</li>
-</ul>
-
-<p>Naturalmente, le estensioni <strong>.txt1</strong>, <strong>.txt2</strong>, e <strong>.utf8</strong> non esistono nella vita reale. OmegaT non ha fatto altro che inserire un breve elenco che vi faciliterà la gestione di alcuni file <strong>stranieri</strong>.</p>
-
-<p>A questo punto, quando si riceverà un file francese (<strong>in_french.txt</strong>, per esempio) da tradurre su un computer giapponese, poiché con molta probabilità il file francese sarà stato creato con codifica <strong>ISO-8859-1</strong>, si saprà che con la semplice aggiunta di un <strong>1</strong> all'estensione del file (<strong>in_french.txt1</strong>) OmegaT sarà in grado di interpretarne correttamente il contenuto con una codifica ISO-8859-1... Et voilà!</p>
-
-<hr>
-<p><a href="legalNotices.html" title="Avvertenze legali">Avvertenze legali</a></p>
-
+        <td style="text-align: right;"><a href="xindex.html">Indice</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

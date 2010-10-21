@@ -1,43 +1,82 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Proprietà del progetto - Manuale per l'Utente di OmegaT 1.6.1</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Proprietà del progetto - Manuale per l'Utente di OmegaT 2.0</title>
 </head>
+
 <body>
+  <h2>Proprietà del progetto</h2>
 
-<h1>Proprietà del progetto</h1>
+  <ul>
+    <li>
+      <a href="#dialog">Finestra delle proprietà</a>
 
-<p>Questa finestra di dialogo viene utilizzata per modificare il percorso di memorizzazione dei file e le lingue del progetto. La si può aprire servendosi della combinazione rapida da tastiera <a href="keyboardShortcuts.html" title="Sistemi rapidi da tastiera di OmegaT"><code>Ctrl+E</code></a>, oppure richiamandola con il comando <strong>Progetto -&gt; Proprietà...</strong> della <a href="menu.html" title="Barra dei menu">barra dei menu</a>.</p>
+      <ul>
+        <li><a href="#language">Modifiche della lingua</a></li>
 
-<p>La finestra di dialogo contiene:</p>
+        <li><a href="#segments">Modifiche della segmentazione</a></li>
 
-<ul>
-   <li>Un'area per impostare la lingua di partenza e quella di arrivo del progetto, associata a due elenchi a cascata.</li>
-   <li>Casella di controllo e pulsante per l'impostazione della segmentazione.</li>
-   <li>Area per la definizione delle cartelle di memorizzazione dei file.</li>
-</ul>
+        <li><a href="#folder">Modifiche della struttura delle cartelle</a></li>
+      </ul>
+    </li>
 
-<p>Tutti i campi sono modificabili. L'indicazione della lingua può essere inserita manualmente, oppure tramite una selezione da uno degli elenchi a cascata disponibili. Si ha la possibilità di inserire manualmente i nomi delle cartelle non ancora esistenti; in questo modo OmegaT si occuperà automaticamente della loro creazione.</p>
+    <li><a href="#warning">Modificare le proprietà del progetto durante la sessione</a></li>
+  </ul>
+  <hr>
+  <a name="dialog" id="dialog"></a>
 
-<a name="Modifying_Project_Properties_Half-Way"></a>
-<h3>Modifica delle proprietà del progetto nel corso della lavorazione</h3>
+  <h2>Finestra delle proprietà</h2>
 
-<p>Nel corso di un processo di traduzione è sempre possibile, anche se non consigliabile, modificare le proprietà del progetto sul quale si sta lavorando. Tutte le impostazioni dovrebbero essere definite prima di iniziale la traduzione, a meno che, in corso d'opera, ci si accorga di aver commesso un errore di impostazione iniziale.</p>
+  <p>Questa finestra di dialogo viene utilizzata per modificare il percorso di memorizzazione dei file e delle lingue del progetto. La si può aprire servendosi della combinazione rapida da tastiera <code><a href="menu.html#shortcuts">Ctrl+E</a></code>, oppure richiamandola con il comando <strong>Progetto → Proprietà...</strong> dal <a href=
+  "menu.html">menu principale</a>. La finestra di dialogo contiene:</p>
 
-<p>In particolare:</p>
+  <ul>
+    <li>Un'area per impostare la lingua di partenza e quella di arrivo del progetto, associata a due elenchi a cascata.</li>
 
-<ul>
-   <li>La modifica delle lingue potrebbe fare sì che la memoria di traduzione in uso risulti inutile nel caso in cui la coppia di lingue precedentemente impostata non corrisponda a quella immessa in corso d'opera.</li>
+    <li>Casella di controllo e pulsante per l'impostazione della segmentazione.</li>
 
-   <li>La modifica delle impostazioni di segmentazione potrebbe fare sì che i segmenti già tradotti vengano frazionati o accorpati e ciò li trasformerebbe in segmenti “non ancora tradotti”, anche se la precedente traduzione, ora non più concordante, è effettivamente presente nella memoria di traduzione. OmegaT può <a href="translationMemories.html#Upgrading_Translation_Memories" title="Memorie di traduzione">aggiornare le vecchie memorie di traduzione</a> che non utilizzano la segmentazione per frasi, ma non viceversa, così come non può aggiornare la memoria di traduzione di un progetto nel caso in cui, nel corso di lavorazione, si cambi idea.</li>
+    <li>Area per la definizione delle cartelle di memorizzazione dei file.</li>
+  </ul>
 
-   <li>La modifica delle cartelle di memorizzazione non sposterà i file dalle vecchie cartelle alle nuove, pertanto, si rischia di trovarsi in una situazione nella quale né OmegaT, né l'utente siano consapevoli del significato reale delle cartelle né di quali cartelle siano state utilizzate.</li>
-</ul>
+  <p>Tutti i campi sono modificabili. L'indicazione della lingua può essere inserita manualmente, oppure tramite una selezione da uno degli elenchi a cascata disponibili. È possibile inserire manualmente i nomi delle cartelle non ancora esistenti; in questo modo OmegaT si occuperà automaticamente della loro creazione.</p><a name="language" id="language"></a>
 
-<p>I vari sistemi a disposizione dell'utente per proteggere il proprio lavoro, vengono descritti nella sezione <a href="preventingDataLoss.html" title="Come evitare la perdita di dati">Come evitare la perdita di dati</a>.</p>
+  <h3>Modifica della lingua</h3>
 
-<hr>
-<p><a href="legalNotices.html" title="Avvertenze legali">Avvertenze legali</a></p>
+  <p>Bisogna aver ben chiaro il concetto che la modifica delle lingue potrebbe far sì che la memoria di traduzione in uso risulti inutile nel caso in cui la coppia di lingue precedentemente impostata non corrisponda più a quella immessa in corso d'opera.</p><a name="segments" id="segments"></a>
 
+  <h3>Modifiche della segmentazione</h3>
+
+  <p>Le impostazioni di segmentazione si occupano solo del modo in cui OmegaT gestisce i file di partenza. Esse non modificano la segmentazione delle memorie di traduzione già esistenti.</p>
+
+  <p>Se si modificano le impostazioni di segmentazione, alcuni segmenti già tradotti potrebbero risultare frazionati o accorpati. Ciò li riporterebbe alla condizione di "non tradotti", dato che, nonostante la vecchia traduzione sia ancora presente, non corrisponderebbero più ai segmenti registrati nella memoria del progetto.</p>
+
+  <p>OmegaT può <a href="translationMemories.html#upgrading_TM">aggiornare le vecchie memorie di traduzione</a> che non utilizzano la segmentazione per frasi, ma non viceversa. Se durante la traduzione si dovesse cambiare idea, la memoria di traduzione del progetto non verrà modificata.</p><a name="folder" id=
+  "folder"></a>
+
+  <h3>Modifiche della struttura delle cartelle</h3>
+
+  <p>Nel caso si volessero modificare le cartelle del progetto, ricordare che l'azione non sposterà i file contenuti dalle vecchie cartelle a quelle nuove. Si rischia, pertanto, di trovarsi nella situazione in cui né OmegaT, né l'utente sono consapevoli del significato reale delle cartelle, né di quali cartelle sono state utilizzate.</p>
+  <hr>
+  <a name="warning" id="warning"></a>
+
+  <h2>Modificare le proprietà del progetto durante la sessione</h2>
+
+  <p>Nel corso di una sessione di traduzione è possibile modificare le proprietà del progetto. Tuttavia, il metodo più sicuro è definire tutte le impostazioni prima di iniziare la traduzione, a meno che non ci si accorga di aver commesso un grave errore. I vari sistemi a disposizione dell'utente per proteggere il proprio lavoro, vengono descritti nella sezione <a href="preventingDataLoss.html">Come evitare la perdita di dati</a>.</p>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avvertenze legali</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Pagina iniziale</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indice</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

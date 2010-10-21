@@ -1,30 +1,57 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Come evitare la perdita di dati - Manuale per l'Utente di OmegaT 1.6.1</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Come evitare la perdita di dati - Manuale per l'Utente di OmegaT 2.0</title>
 </head>
+
 <body>
+  <h2>Come evitare la perdita di dati</h2>
 
-<h1>Come evitare la perdita di dati</h1>
+  <p>OmegaT è un'applicazione stabile. Tuttavia, sarebbe bene adottare le opportune precauzioni per evitare, quando si lavora con OmegaT, la possibile perdita dei dati, proprio come si dovrebbe fare con una qualsiasi altra applicazione. Quando si traducono i file, OmegaT memorizza tutte le modifiche nella memoria di traduzione <code>project_save.tmx</code> nella sottocartella <code>/omegat</code> del progetto.</p>
 
-<p>OmegaT è un'applicazione stabile. Tuttavia, sarebbe bene adottare le opportune precauzioni per evitare, quando si lavora con OmegaT, la possibile perdita dei dati, proprio come si dovrebbe fare con una qualsiasi altra applicazione.</p>
+  <p>OmegaT, inoltre, nella stessa sottocartella, e ogni volta che un progetto viene aperto o ricaricato, crea anche file di backup della memoria di traduzione, ai quali assegna il nome <code>project_save.tmx.ANNOMMGGHHNN.bak</code>. <code>ANNO</code> è l'anno espresso in 4 cifre, <code>MM</code> è il mese, <code>GG</code> è il giorno del mese, <code>HH</code> e <code>NN</code> corrispondono alle ore e ai minuti in cui è stata salvata la precedente memoria di traduzione.</p>
 
-<p>Quando si traducono i file, OmegaT memorizza tutte le modifiche alla memoria di traduzione nella sottodirectory <code>/omegat</code> del progetto. OmegaT, inoltre, nella stessa sottodirectory, e ogni volta che un progetto viene aperto o ricaricato, crea anche file di backup della memoria di traduzione, ai quali assegna il nome <code>project_save.tmx.ANNOMMGGHHNN.bak</code>. <code>ANNO</code> è l'anno, composto da 4 cifre, <code>MM</code> è il mese, <code>GG</code> è il giorno del mese, <code>HH</code> e <code>NN</code> corrispondono alle ore e ai minuti ai quali è stata salvata la precedente memoria di traduzione.</p>
+  <p>Se si ritiene di aver perso i dati di traduzione, seguire la procedura riportata sotto, che permetterà di ripristinare il progetto al punto di salvataggio più recente, nella maggior parte dei casi non oltre dieci minuti dalle modifiche più recenti:</p>
 
-<p>Per evitare possibili perdite di dati:</p>
+  <ol>
+    <li>chiudere il progetto</li>
 
-<ul>
-   <li>Effettuare regolarmente copie del file <code>/omegat/project_save.tmx</code> su periferiche di backup, come CD o DVD.</li>
+    <li>rinominare l'attuale file <code>project_save.tmx</code> in un nome a propria scelta (tipo <code>project_save.tmx.temporaneo</code>, per esempio)</li>
 
-   <li>Fino a quando non si sarà familiarizzato con OmegaT, creare file finali a intervalli regolari e controllare che i file tradotti contengano l'ultima versione della traduzione.</li>
+    <li>selezionare la copia di sicurezza della memoria di traduzione che si ritiene essere quella più probabile a contenere i dati che si stanno cercando</li>
 
-   <li>Prestare particolare attenzione quando si apportano modifiche ai file contenuti nella directory <code>/source</code> mentre ci si trova a un livello intermedio del lavoro di traduzione. Se il file originale viene modificato dopo aver iniziato la traduzione, OmegaT potrebbe non essere più in grado di reperire un segmento del file che è stato precedentemente tradotto.</li>
+    <li>rinominarla in <code>project_save.tmx</code></li>
 
-   <li>Iniziare a lavorare con l'assistenza di questi testi della Guida. Nel caso in cui si dovessero presentare problemi, inviare un messaggio al <a href="http://groups.yahoo.com/group/omegat" >Gruppo di utenti di OmegaT</a>. Non esitare a inviare un messaggio nella lingua che vi è più familiare.</li>
-</ul>
+    <li>aprire il progetto</li>
+  </ol>
 
-<hr>
-<p><a href="legalNotices.html" title="Avvertenze legali">Avvertenze legali</a></p>
+  <p>Per evitare di perdere dati importanti:</p>
 
+  <ul>
+    <li>Effettuare regolarmente copie del file <code>/omegat/project_save.tmx</code> su periferiche di backup, come CD o DVD.</li>
+
+    <li>Fino a quando non si sarà familiarizzato con OmegaT, creare file finali a intervalli regolari e controllare che i file tradotti contengano l'ultima versione della traduzione.</li>
+
+    <li>Prestare particolare attenzione quando si apportano modifiche ai file contenuti nella cartella <code>/source</code> mentre ci si trova a un livello intermedio del lavoro di traduzione. Se il file originale viene modificato dopo aver iniziato la traduzione, OmegaT potrebbe non essere più in grado di reperire un segmento del file che è stato precedentemente tradotto.</li>
+
+    <li>Iniziare a lavorare con l'assistenza di questi testi della Guida. Nel caso in cui si dovessero presentare problemi, inviare un messaggio al <a href=
+    "http://groups.yahoo.com/group/omegat">Gruppo di utenti di OmegaT</a>. Non esitare a inviare un messaggio nella lingua che vi è più familiare.</li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avvertenze legali</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Pagina iniziale</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indice</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

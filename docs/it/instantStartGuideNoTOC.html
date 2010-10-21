@@ -15,7 +15,7 @@
 
   <h2>In breve: come funziona OmegaT</h2>
 
-  <p>La schermata di lavoro di OmegaT è composta da uno spazio con tre finestre distinte. Ogni finestra può essere ridimensionata servendosi del mouse. La parte sinistra della schermata principale è la "finestra dell'Editor", nella quale si eseguirà la traduzione. A destra, in alto, è presente la finestra delle “Corrispondenze fuzzy”, in cui vengono visualizzate le corrispondenze con la memoria di traduzione (TM). Immediatamente sotto si trova la finestra “Glossario”, nella quale vengono visualizzate le corrispondenze con il glossario.</p>
+  <p>La schermata di lavoro di OmegaT è composta da uno spazio con tre finestre distinte. Ogni finestra può essere ridimensionata servendosi del mouse. La parte sinistra della schermata principale è la "finestra dell'Editor", nella quale si eseguirà la traduzione. A destra, in alto, è presente la finestra delle “Corrispondenze parziali (fuzzy)”, in cui vengono visualizzate le corrispondenze con la memoria di traduzione (TM). Immediatamente sotto si trova la finestra “Glossario”, nella quale vengono visualizzate le corrispondenze con il glossario.</p>
 
   <p>Nella finestra dell'Editor OmegaT presenta il testo di partenza, “segmentato” in frasi (o paragrafi). I segmenti verranno tradotti singolarmente. Quando si passa da un segmento all'altro, ogni frase precedentemente tradotta verrà memorizzata nella memoria di traduzione. Al termine della traduzione di tutti i segmenti (o prima, quando necessario), OmegaT utilizzerà la memoria di traduzione per creare, nella cartella “Target”, i documenti tradotti.</p>
 
@@ -79,7 +79,7 @@
   <p>Al termine della definizione del progetto, e dopo aver deciso quali file devono essere tradotti, OmegaT aprirà, nella finestra dell'Editor, il primo file di partenza dell'elenco del progetto. Il primo segmento da tradurre verrà evidenziato in verde; subito sotto compare una copia del testo di partenza, inserito nel “campo di arrivo”. (A questo punto tutto il testo che si trova all'esterno del campo di destinazione non potrà essere in alcun modo modificato). Il testo sul quale intervenire è quello racchiuso tra i tag <code>&lt;segmento 0001&gt;</code> e <code>&lt;fine segmento&gt;</code> e quanto viene digitato dovrà sovrascrivere il testo di partenza inserito nel “campo di arrivo”. Per passare alla traduzione del segmento successivo, premere semplicemente "<strong>INVIO</strong>". Nota:</p>
 
   <ul>
-    <li>Per trasferirsi a un qualsiasi altro segmento all'interno del documento, sia esso precedente o successivo quello attivo, fare doppio clic sulla frase o sul paragrafo da aprire.</li>
+    <li>per trasferirsi a un qualsiasi altro segmento all'interno del documento, sia esso precedente o successivo quello attivo, fare doppio clic sulla frase o sul paragrafo da aprire.</li>
 
     <li>– Se si preferisce inserire la traduzione in un campo di destinazione vuoto, impostare tale opzione utilizzando il comando <strong>Opzioni → Campo di modifica...</strong>.</li>
 
@@ -94,13 +94,13 @@
 
   <h3>Corrispondenze della memoria di traduzione (TM)</h3>
 
-  <p>Se OmegaT rileva, per il segmento successivo, la presenza nella memoria di traduzione di una concordanza parziale (fuzzy match) (pari o superiore al 30%), essa viene riportata all'interno della finestra “Corrispondenze fuzzy”. Per impostazione predefinita, nella finestra “Corrispondenze fuzzy” viene selezionata la prima concordanza rilevata.</p><img src=
+  <p>Se OmegaT rileva, per il segmento successivo, la presenza nella memoria di traduzione di una concordanza parziale (fuzzy match) (pari o superiore al 30%), essa viene riportata all'interno della finestra “Corrispondenze parziali (fuzzy)”. Per impostazione predefinita, nella finestra “Corrispondenze parziali (fuzzy)” viene selezionata la prima concordanza rilevata.</p><img src=
   "images/MatchesPane.png" name="graphics4" alt="pannello delle concordanze" id="graphics4"
   style="border: 0px solid ;"><br clear="left">
 
   <p><br></p>
 
-  <p>Per inserire nel campo di arrivo la corrispondenza della memoria di traduzione, prelevandola dalla finestra “Corrispondenze fuzzy”, si può utilizzare uno dei sistemi rapidi da tastiera:</p>
+  <p>Per inserire nel campo di arrivo la corrispondenza della memoria di traduzione, prelevandola dalla finestra “Corrispondenze parziali (fuzzy)”, si può utilizzare uno dei sistemi rapidi da tastiera:</p>
 
   <ul>
     <li>Premere <code>Ctrl+I</code> per inserire, alla posizione del cursore, la concordanza preselezionata, oppure...</li>
@@ -111,7 +111,7 @@
   <p>Se sono state rilevate più concordanze, e si preferisce non utilizzare quella preselezionata:</p>
 
   <ul>
-    <li>selezionare la concordanza più appropriata all'interno della finestra “Corrispondenze fuzzy”; premere <code>Ctrl+2</code> per la seconda concordanza proposta, <code>Ctrl+3</code> per la terza, e così via.</li>
+    <li>selezionare la concordanza più appropriata all'interno della finestra “Corrispondenze parziali (fuzzy)”; premere <code>Ctrl+2</code> per la seconda concordanza proposta, <code>Ctrl+3</code> per la terza, e così via.</li>
 
     <li>Quindi premere <code>Ctrl+I</code>, oppure <code>Ctrl+R</code> come sopra indicato.</li>
   </ul>

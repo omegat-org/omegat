@@ -1,0 +1,735 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Espressioni regolari - Manuale per l'Utente di OmegaT 2.0</title>
+</head>
+
+<body>
+  <h2>Costrutti delle espressioni regolari</h2>
+
+  <p>Le espressioni regolari (regex, in breve) ammesse per le operazioni di ricerca sono quelle riconosciute da Java. Se si desiderano ulteriori informazioni, consultare la pagina <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>. Vedere più avanti per ulteriori riferimenti ed esempi.&nbsp;</p>
+
+  <table summary="just formatting" style="width: 80%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="width: 40%;">
+          <h3><a href="#Flags__">Flag</a></h3>
+        </td>
+
+        <td style="width: 60%;">
+          <h3><a href="#Characters_">Caratteri</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Quotation_">Citazioni</a></h3>
+        </td>
+
+        <td>
+          <h3><a name="Classes_for_Uncode_blocks_and_" id=
+          "Classes_for_Uncode_blocks_and_"></a><a href=
+          "#Classes_for_Uncode_blocks_and_">Classi per blocchi e categorie Unicode</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Character_classes_">Classi di caratteri</a></h3>
+        </td>
+
+        <td>
+          <h3><a href="#Predefined_character_classes_">Classi di carattere predefinite</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td style="width: 257px;">
+          <h3><a href="#Boundary_matchers_">Rilevatori di limitazione</a></h3>
+        </td>
+
+        <td style="width: 517px;">
+          <h3><a href="#Greedy_quantifiers_">Quantificatori di ripetizione</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Reluctant_non-greedy_quantifiers_">Quantificatori riluttanti (non ripetitivi)</a></h3>
+        </td>
+
+        <td>
+          <h3><a href="#Logical_operators_">Operatori logici</a></h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#References_and_examples_">Strumenti per le espressioni regolari ed esempi di utilizzo</a></h3>
+        </td>
+      </tr>
+    </tbody>
+  </table>&nbsp;&nbsp; &nbsp;
+
+  
+
+  <p>&nbsp;<br></p>
+  <hr>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
+    <col width="15%">
+    <col width="80%">
+
+    <tbody>
+      <tr>
+        <td width="355">
+          <h3>Il costrutto...</h3>
+        </td>
+
+        <td width="877">
+          <h3>...corrisponde al seguente:</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Flags__" id="Flags__"></a>Flag</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(?i)</code></p>
+        </td>
+
+        <td width="877">
+          <p>Consente di avviare una ricerca che non consideri le lettere maiuscole e minuscole (per impostazione predefinita, il modello distingue tra maiuscole e minuscole).</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Characters_" id="Characters_"></a>Caratteri</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>x</code></p>
+        </td>
+
+        <td width="877">
+          <p>Viene rilevato il carattere corrispondente a <strong>x</strong>, ma con le seguenti eccezioni...</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\uhhhh</code></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere col valore esadecimale <code>0x</code><strong>hhhh</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\t</code></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere di tabulazione (<code>'\u0009'</code>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\n</code></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere corrispondente a un avanzamento di riga (line feed, LF) (<code>'\u000A'</code>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\r</code></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere corrispondente a un ritorno di carrello (carriage-return, CR) (<code>'\u000D'</code>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\f</tt></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere corrispondente all'inizio di una nuova pagina in una stampa (form feed) (<tt>'\u000C'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\a</tt></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere di controllo bell (<tt>'\u0007'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\e</tt></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere escape (<tt>'\u001B'</tt>)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\c</tt><i>x</i></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere di controllo corrispondente a <i>x</i></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>n</i></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere col valore ottale <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\0</tt><i>nn</i></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere col valore ottale <tt>0</tt><i>nn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><tt>\0</tt><i>mnn</i></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere col valore ottale <tt>0</tt><i>mnn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><tt>\x</tt><i>hh</i></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere col valore esadecimale <tt>0x</tt><i>hh</i></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Quotation_" id="Quotation_"></a>Citazioni</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nulla, se non il carattere immediatamente successivo. È necessario quando si desidera usare i metacaratteri <code>!$()*+.&lt;&gt;?[\]^{|}</code> in modo che vengano utilizzati come caratteri e non come operatori.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\\</code></p>
+        </td>
+
+        <td width="877">
+          <p>Per esempio, questa combinazione corrisponde al carattere della barra rovesciata (“ \ ”).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\Q</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nulla, ma indica tutti i caratteri fino a <code>\E</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\E</code></p>
+        </td>
+
+        <td width="877">
+          <p>Nulla, ma conclude la citazione iniziata da <tt>\Q</tt></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Classes_for_Unicode_blocks_and" id=
+          "Classes_for_Unicode_blocks_and"></a>Classi per blocchi e categorie Unicode</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Carattere nel blocco greco (<a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">blocco</a> semplice)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\p{Lu}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Lettera maiuscola (<a href=
+          "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">categoria</a> semplice)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code><tt>\p{Sc}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Simbolo di valuta</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code><tt>\P{InGreek}</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Qualsiasi carattere, eccetto uno nel blocco greco (negazione)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td height="33" width="355">
+          <p><code><tt>[\p{L}&amp;&amp;[^\p{Lu}]]</tt></code></p>
+        </td>
+
+        <td width="877">
+          <p>Qualsiasi lettera, eccetto una lettera maiuscola (sottrazione)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Character_classes_" id=
+          "Character_classes_"></a>Classi di caratteri</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p><code>a</code>, <code>b</code>, o <code>c</code> (classe semplice)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>[^abc]</code></p>
+        </td>
+
+        <td width="877">
+          <p>Qualsiasi carattere, eccetto <code>a</code>, <code>b</code>, o <code>c</code> (negazione)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>[a-zA-Z]</code></p>
+        </td>
+
+        <td width="877">
+          <p>Da <code>a</code> a <code>z</code> o da <code>A</code> a <code>Z</code>, compresi (intervallo)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Predefined_character_classes_" id=
+          "Predefined_character_classes_"></a>Classi di carattere predefinite</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>.</code></p>
+        </td>
+
+        <td width="877">
+          <p>Qualsiasi carattere (eccetto i terminatori di riga)</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\d</code></p>
+        </td>
+
+        <td width="877">
+          <p>Una cifra: <code>[0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\D</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un carattere non numerico: <code>[^0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un carattere di spazio bianco: <code>[ \t\n\x0B\f\r]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\S</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un carattere che non sia uno spazio bianco: <code>[^\s]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\w</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un carattere parola: <code>[a-zA-Z_0-9]</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\W</code></p>
+        </td>
+
+        <td width="877">
+          <p>Un carattere non-parola: <code>[^\w]</code></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Boundary_matchers_" id="Boundary_matchers_"></a>Rilevatori di limitazione</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>^</code></p>
+        </td>
+
+        <td width="877">
+          <p>Inizio di una riga</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>$</code></p>
+        </td>
+
+        <td width="877">
+          <p>Fine di una riga</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>\b</code></p>
+        </td>
+
+        <td width="877">
+          <p>Limite di una parola</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><code>\B</code></p>
+        </td>
+
+        <td width="877">
+          <p>Limite di una non-parola</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Greedy_quantifiers_" id="Greedy_quantifiers_"></a>Quantificatori di ripetizione</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>Rileveranno tutte le ripetizioni possibili. Per esempio, <code>a+</code> rileverà <code>aaa</code> in <code>aaabbb</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, una sola volta oppure nessuna</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, zero o più volte</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, una o più volte</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Reluctant_non-greedy_quantifiers_" id=
+          "Reluctant_non-greedy_quantifiers_"></a>Quantificatori riluttanti (non ripetitivi)</h3>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <p>Rileveranno il numero minimo possibile. Per esempio, <code>a+?</code> rileverà la prima <code>a</code> in <code>aaabbb</code></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>??</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, una sola volta oppure nessuna</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>*?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, zero o più volte</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>X</strong><code>+?</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong>, una o più volte</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2" width="1238">
+          <hr>
+
+          <h3><a name="Logical_operators_" id="Logical_operators_"></a>Operatori logici</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><strong>XY</strong></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong> seguito da <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="355">
+          <p><strong>X</strong><code>|</code><strong>Y</strong></p>
+        </td>
+
+        <td width="877">
+          <p><strong>X</strong> oppure <strong>Y</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="355">
+          <p><code>(</code><strong>XY</strong><code>)</code></p>
+        </td>
+
+        <td width="877">
+          <p><strong>XY</strong> come gruppo singolo</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <br>
+
+  <h2><a name="References_and_examples_" id=
+  "References_and_examples_"></a>Strumenti per le espressioni regolari ed esempi di utilizzo</h2><br>
+  Sono disponibili diversi strumenti interattivi dedicati allo sviluppo e alla verifica delle espressioni regolari. Essi seguono quasi tutti lo stesso schema (vedere sotto un esempio all'interno di un plugin per Firefox): l'espressione regolare (voce in alto) analizza il testo da ricercare (riquadro al centro), restituendo i risultati, mostrati nel riquadro dei risultati.<br> <br> <img alt=
+  "plugin per Firefox per la verifica delle espressioni regolari" src=
+  "images/RegexTester.png"><br> <br> Per eseguire verifiche con uno strumento indipendente, nelle versioni per Windows, Linux, Mac e FreeBSD, usare <a href="http://www.weitz.de/regex-coach/">The Regex Coach</a>, che funziona in modo quasi identico all'esempio di cui sopra.<br> <br> In OmegaT è pure presente una buona raccolta di utili esempi regex (si veda Opzioni &gt; <a href=
+  "segmentation.html">Segmentazione</a>). L'elenco seguente include espressioni che potrebbero risultare utili quando si eseguono ricerche attraverso la memoria di traduzione:<br>
+  <br>
+
+  <table summary="just formatting" style="text-align: left; width: 600px;"
+  border="1" cellpadding="0" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="font-weight: bold;">Espressione regolare</td>
+
+        <td style="font-weight: bold;">Trova il seguente:</td>
+      </tr>
+
+      <tr>
+        <td>(\b\w+\b)\s\1\b<br></td>
+
+        <td>doppie parole&nbsp;</td>
+      </tr>
+
+      <tr>
+        <td>[\.,]\s*[\.,]+</td>
+
+        <td>t virgole e punti&nbsp; mischiati</td>
+      </tr>
+
+      <tr>
+        <td>\. \s$</td>
+
+        <td>spazi aggiuntivi, che seguono il punto alla fine della riga</td>
+      </tr>
+
+      <tr>
+        <td>\s+a\s+[aeiou]</td>
+
+        <td>&nbsp;Inglese:&nbsp;le parole, inizianti per vocali, devono essere precedute da "an" e non "a"</td>
+      </tr>
+
+      <tr>
+        <td>\s+an\s+[^aeiou]</td>
+
+        <td>&nbsp;Inglese: stesso controllo di cui sopra ma per le consonanti ("a", non "an")</td>
+      </tr>
+
+      <tr>
+        <td>\s\s+</td>
+
+        <td>più di uno spazio</td>
+      </tr>
+
+      <tr>
+        <td>\.[A-Z]</td>
+
+        <td>spazio mancante tra un punto e l'inizio di una nuova frase</td>
+      </tr>
+    </tbody>
+  </table><br>
+  <br>
+  <hr>
+
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avvertenze legali</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Pagina iniziale</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indice</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

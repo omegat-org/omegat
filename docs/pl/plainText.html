@@ -1,0 +1,99 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Praca z tekstem niesformatowanym - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Praca z tekstem niesformatowanym</h2>
+
+  <ul>
+    <li><a href="#Plain_Text_in_OmegaT">Domyślne kodowanie</a></li>
+
+    <li><a href="#Garbled_displays_3F">Niewłaściwe wyświetlanie znaków</a></li>
+
+    <li><a href="#Character_sets_and_encoding">Zestawy znaków i kodowanie</a></li>
+
+    <li><a href="#The_OmegaT_solution">Rozwiązanie problemu w OmegaT</a></li>
+  </ul>
+  <hr>
+  <a name="Plain_Text_in_OmegaT" id="Plain_Text_in_OmegaT"></a>
+
+  <h2>Domyślne kodowanie</h2>
+
+  <p>Pliki tekstowe niesformatowane - w większości wypadków z rozszerzeniem <code>.txt</code> - zawierają wyłącznie informację tekstową. Nie ma jasno zdefiniowanej metody poinformowania komputera, jaki język zawierają. Najprościej mówiąc, oznacza to, że komputer domyślnie zakłada, że tekst jest napisany w tym samym języku, jakiego on sam używa.</p>
+  <hr>
+  <a name="Garbled_displays_3F" id="Garbled_displays_3F"></a>
+
+  <h2>Niewłaściwe wyświetlanie znaków</h2>
+
+  <p>Jeżeli jesteś Rosjaninem, jest bardzo prawdopodobne, że twój komputer pracuje także w języku rosyjskim: menu są po rosyjsku, pliki, które otwierasz, są po rosyjsku itd. W większości wypadków komputer przyjmuje prawidłowe założenie ogólne odnośnie do zawartości plików: wszystkie zawierają język rosyjski i nie zawierają nic, czego nie możnaby wyświetlić rosyjskimi znakami.</p>
+
+  <p>Jeżeli jesteś rosyjskim tłumaczem, który tłumaczy z japońskiego, to japońskie pliki, które dostajesz, jeśli są to <strong>pliki tekstowe niesformatowane</strong>, będą najprawdopodobniej traktowane przez komputer jak pliki w języku rosyjskim. To dlatego, że w samym pliku nie ma informacji, która wskazywałaby komputerowi, w jakim języku jest on zapisany. Zawartość pliku japońskiego mogłaby być następująca:</p>
+
+  <p>OmegaTとは、コンピュータを利用した翻訳ツールです。</p><br>
+
+  <p>Ponieważ twój edytor tekstu spodziewa się, że zawartość jest po rosyjsku, mógłby wyświetlić ją w ten sposób:</p>
+
+  <p>OmegaTВ∆ВЌБAГRГУГsГЕБ[Г^ВрЧШЧpВµВљЦ|ЦуГcБ[ГЛВ≈ВЈБB</p><br>
+
+  <p>Jednak nie ma to nic wspólnego z rosyjskim, to znaki japońskie nieprawidłowo wyświetlone jako znaki rosyjskie.</p>
+
+  <p>Jak każda inna aplikacja, OmegaT również ma z tym problem. Może tylko założyć, że domyślnie <strong>pliki tekstowe niesformatowane</strong> mogą być wyświetlane przy użyciu ustawień domyślnych systemu. Działa to dobrze, kiedy komputer pracuje na przykład w języku francuskim, a pliki są po angielsku lub kiedy komputer jest niemiecki, a pliki po włosku .</p>
+  <hr>
+  <a name="Character_sets_and_encoding" id="Character_sets_and_encoding"></a>
+
+  <h2>Zestawy znaków i kodowanie</h2>
+
+  <p>Dlaczego miałoby to działać z angielskim i francuskim, a nie z rosyjskim i japońskim? Ponieważ angielski i francuski używają wspólnego <strong>zestawu znaków</strong>,  mianowicie <strong>Latin-1</strong> lub jego wariantów. Do niedawna, rosyjski i japoński nie korzystały z żadnych wspólnych zestawów znaków. Większość aktualnych zestawów znaków rosyjskich nie pokrywa się z japońskimi i odwrotnie. Efekt jest taki, jak widać powyżej.</p>
+
+  <p>Japoński klient pracuje na japońskim komputerze i tworzy pliki tekstowe, które zawierają tekst japoński. Zestaw znaków wybrany przez komputer klienta będzie zależał od systemu operacyjnego i innych ustawień, ale jest nieprawdopodobne, aby wybrany (japoński) zestaw znaków został poprawnie zinterpretowany przez komputer rosyjski.</p>
+
+  <p>To, jak informacja tekstowa w konkretnym zestawie znaków jest fizycznie przekazywana (tj. jakie są kody numeryczne, których komputer używa do interpretowania i wyświetlania tekstu), zależy od <strong>kodowania</strong>. Kiedy komputer czyta plik, "dekoduje" informację zgodnie z kodowaniem i wyświetla ją zgodnie z zestawem znaków. Z grubsza biorąc, jedno kodowanie odpowiada jednemu zestawowi znaków...</p>
+  <hr>
+  <a name="The_OmegaT_solution" id="The_OmegaT_solution"></a>
+
+  <h2>Rozwiązanie problemu w OmegaT</h2>
+
+  <p>Są trzy podstawowe sposoby radzenia sobie z tym problemem w OmegaT. Wszystkie one wymagają zastosowania <a href="fileFilters.html">filtrów plików</a> w menu <strong>Opcje</strong>.</p>
+
+  <ol>
+    <li>Podaj kodowanie dla twoich <strong>plików tekstowych niesformatowanch</strong> - tj. plików z rozszerzeniem <code>.txt</code>:&nbsp;w części <strong>Pliki tekstowe</strong> okna dialogowego <a href="fileFilters.html">Filtry plików</a>, zmień <strong>Kodowanie pliku źródłowego</strong> z <strong>&lt;auto&gt;</strong> na kodowanie odpowiadające twojemu plikowi źródłowemu <code>.txt</code>.</li>
+
+    <li>Zmień rozszerzenia twoich źródłowych plików tekstowych niesformatowanych (na przykład z <code>.txt</code> na <code>.jp</code> w przypadku tekstów japońskich):&nbsp;W części <strong>Pliki tekstowe</strong> okna dialogowego <a href=
+    "fileFilters.html">Filtry plików</a> dodaj nowy<strong>Wzór nazwy pliku źródłowego</strong> (na przykład <code>*.jp&nbsp;</code>) i wybierz odpowiednie parametry kodowania pliku źródłowego i docelowego.</li>
+
+    <li>Zmień kodowanie twoich plików na Unicode:&nbsp;otwórz twój plik źródłowy w edytorze tekstu, który prawidłowo interpretuje jego kodowanie, i zapisz ten plik w kodowaniu "UTF-8". Zmień rozszerzenie pliku z <code>.txt</code> na <code>.utf8</code>. OmegaT automatycznie zinterpretuje ten plik jako plik UTF-8.</li>
+  </ol>
+
+  <p>OmegaT domyślnie ma do dyspozycji następujący zestaw, aby ułatwić ci radzenie sobie z niektórymi plikami tekstowymi niesformatowanymi:</p>
+
+  <ul>
+    <li>Pliki <code>.txt</code> są automatycznie (<strong>&lt;auto&gt;</strong>) interpretowane przez program OmegaT jako kodowane w domyślnym kodowaniu komputera.</li>
+
+    <li>Pliki <code>.txt1</code> to pliki w ISO-8859-1, obejmującym większość języków <strong>Europy Zachodniej</strong>.</li>
+
+    <li>Pliki <code>.txt2</code> to pliki w ISO-8859-2, obejmującym większość języków <strong>Europy Środkowej i Wschodniej</strong>.</li>
+
+    <li>Pliki <code>.utf8</code> są interpretowane przez OmegaT jako kodowane w UTF-8 (kodowanie, które obejmuje prawie <strong>wszystkie</strong> języki świata).</li>
+  </ul>
+
+  <p>Możesz sprawdzić to sam, wybierając pozycję <strong>Filtry plików</strong> w menu <strong>Opcje</strong>. Na przykład, kiedy masz czeski plik tekstowy (bardzo prawdopodobne, że napisany w kodzie <strong>ISO-8859-2</strong>), musisz tylko zmienić rozszerzenie <code>.txt</code> na <code>.txt2</code>, a OmegaT zinterpretuje jego zawartość prawidłowo. I oczywiście, jeśli chcesz być całkiem bezpieczny, rozważ przekonwertowanie takich plików do Unicode, tj. do formatu pliku .utf8.</p>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

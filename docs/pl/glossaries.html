@@ -1,0 +1,93 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Glosariusze - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+<body>
+<h2>Glosariusze</h2>
+<ul>
+  <li>
+    <p><a href="#usage">Użycie</a></p>
+  </li>
+  <li>
+    <p><a href="#fileformat">Format pliku</a></p>
+  </li>
+  <li>
+    <p><a href="#howtocreate">Jak tworzyć glosariusze</a></p>
+  </li>
+  <li>
+    <p><a href="#multiterm">Korzystanie z glosariuszy Trados Multiterm</a></p>
+  </li>
+  <li>
+    <p><a href="#commonglossaryproblems">Typowe problemy z glosariuszami</a></p>
+  </li>
+</ul>
+<p>Glosariusze (słowniki użytkownika) to pliki tworzone i uaktualniane ręcznie, do używania w OmegaT.</p>
+<p>Jeżeli projekt OmegaT zawiera przynajmniej jeden glosariusz, terminy z glosariusza, które znajdują się również w aktywnym segmencie, będą automatycznie wyświetlone w oknie <a href="userInterface.html#Glossary">Glosariusze</a>.</p>
+<hr>
+<h2><a name="usage" id="usage"></a>Użycie</h2>
+<p>Aby używać istniejącego glosariusza, wystarczy umieścić go w katalogu <span style="font-style: italic;">/glossary</span> po stworzeniu projektu. OmegaT automatycznie wykrywa pliki glosariuszy w tym katalogu, kiedy projekt jest otwierany. Terminy występujące w aktywnym segmencie, które OmegaT znajduje w pliku glosariusza (plikach glosariuszy), są wyświetlane w oknie "Glosariusze":</p>
+<p><img src="images/Glossary_pane.png" name="graphics1"
+ alt='Okno "Glosariusze"' id="graphics1"
+ style="border: 0px"><br>
+</p>
+<br>Słowo przed znakiem "=" jest terminem źródłowym, a jego tłumaczeniem jest słowo (słowa) za znakiem "=". Hasło słownikowe może mieć dodany komentarz (np. "transitive verb" dla drugiej pozycji). Funkcja glosariusza znajduje tylko dokładne dopasowania do hasła glosariusza (np. nie znajduje form odmienionych itp.). Można dodać ręcznie nowe terminy do pliku (plików) glosariusza podczas tłumaczenia (np. w edytorze tekstu).<hr>
+<h2><a name="fileformat" id="fileformat"></a>Format pliku</h2>
+<p>Pliki glosariuszy to po prostu pliki tekstowe zawierające listy w trzech kolumnach oddzielonych znakami tabulacji. Terminy źródłowe i docelowe muszą znajdować się odpowiednio w pierwszej i drugiej kolumnie . Trzecia kolumna może być wykorzystana na dodatkowe informacje. Pliki glosariuszy mogą być kodowane albo w domyślnym kodowaniu systemu operacyjnego (z rozszerzeniem <code>.tab</code>), albo w kodowaniu UTF-8 (z rozszerzeniem <code>.utf8</code>). Kodowanie Unicode (UTF8) jest preferowane z oczywistych względów.</p>
+<hr>
+<h2><a name="howtocreate" id="howtocreate"></a>Jak tworzyć glosariusze</h2>Przedstawiona tu metoda jest niezawodna, jeśli postępuje się dokładnie według niej. Potrzebny jest do tego OpenOffice.org Writer, więc - jeśli jeszcze tego nie zrobiłeś - pobierz i zainstaluj OpenOffice.org. Uruchom OpenOffice.org i otwórz nowy dokument tekstowy lub uruchom OpenOffice.org Writer.<br> <br> W pustym dokumencie wpisz swoje terminy glosariuszowe w następujący sposób: termin w języku źródłowym, znak tabulacji, termin w języku docelowym, znak tabulacji, komentarz lub wyjaśnienie do tego punktu, klawisz Enter. Znak tabulacji wprowadza się klawiszem "tabulator" znajdującym się z lewej strony klawiatury. Jeśli nie chcesz dodawać żadnych komentarzy, możesz pominąć drugi znak tabulacji. "Termin" może być pojedynczym słowem lub całym wyrażeniem. W następnej linii wpisz następny termin i jego tłumaczenie.<br> <br> Kiedy wprowadzanie terminów zostanie zakończone, będziesz miał dwie kolumny terminów, terminy w języku źródłowym po lewej, a odpowiadające im terminy w języku docelowym po prawej, i być może także trzecią kolumnę, zawierającą komentarze i wyjaśnienia. Znaki tabulacji (→ w przykładzie poniżej)&nbsp;i Enter (¶&nbsp;) można uwidocznić klikając ikonę ¶ na Standardowym pasku narzędzi. Oto kilka linijek z glosariusza angielsko-niemieckiego:<br>
+<br>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;
+word →Wort→das (-/e/s, Wörter/-e)¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;
+small house→Häuschen→das,
+(pl&nbsp;Häuschen)¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;
+dog →Hund→m, f Hündin&nbsp;¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp;
+horse→Pferd→n, m Hengst f Stute n Fohlen¶</div>
+<br>NIE używaj funkcji "kolumny" w OpenOffice.org do tworzenia kolumn:&nbsp;po prostu rozdziel każdą parę terminów w języku źródłowym i docelowym pojedynczym znakiem tabulacji.<br> <br> Po zakończeniu wpisywania haseł,&nbsp;wybierz <span
+ style="font-style: italic;">Plik &gt; Zapisz jako</span>. W polu "Nazwa pliku", wprowadź nazwę dla twojego pliku glosariusza, z rozszerzeniem "<span style="font-weight: bold;">.utf8</span>" (np. "<span style="font-style: italic;">MyGlossary.utf8</span>").&nbsp;W polu "<span style="font-style: italic;">Zapisz jako typ</span>" wybierz "<span style="font-style: italic;">Tekst zakodowany (.txt.)</span>". Odznacz opcję "<span style="font-style: italic;">Automatyczne rozszerzenie nazwy pliku</span>" i zaznacz "<span style="font-style: italic;">Edytuj ustawienia filtru</span>":<br> <br> <img alt="save file as dialog for the glossary"
+ src="images/saveglossary.png"><br> <br> Potwierdź wybierając "Zapisz". Pojawi się okno dialogowe z dwoma możliwościami:&nbsp;"<span
+ style="font-style: italic;">Zachowaj bieżący format</span>" i&nbsp;"<span style="font-style: italic;">Zapisz w formacie ODF</span>". Wybierz "<span style="font-style: italic;">Zachowaj bieżący format</span>", aby zapisać plik w formacie "tekst zakodowany". <br> <br> W oknie dialogowym "Opcje filtra ASCII" (patrz poniżej), wybierz zestaw znaków "<span style="font-style: italic;">Unicode (UTF-8)</span>":<br> <br> <img style="width: 510px; height: 158px;"
+ alt="ascii file filter options for glossary"
+ src="./images/AsciiFilteroptions.png"><br> <br> Potwierdź wybierając OK.<br> <br> Po stworzeniu projektu OmegaT, skopiuj lub przenieś ten plik do katalogu <span style="font-style: italic;">glossary</span> projektu. Jeżeli projekt jest już otwarty, nie trzeba wczytywać go ponownie po skopiowaniu pliku glosariusza. Możesz wprowadzać zmiany w pliku glosariusza, nawet gdy jest on używany w projekcie. Zmiany w glosariuszu są wykrywane w przybliżeniu raz na sekundę, a modyfikacje wczytywane w tle, więc nie ma potrzeby ponownego wczytywania projektu po zapamiętaniu nowego pliku glosariusza.<br> <br> Kiedy otwierany jest segment zawierający tekst źródłowy, w oknie "Glosariusze" wyświetlone zostaną hasła glosariusza dla tych terminów w segmencie źródłowym, które znajdują się w glosariuszu (lub glosariuszach - możesz mieć więcej niż jeden i mogą one być także przechowywane w podkatalogach katalogu <i>glossary</i>).<h3><a name="multiterm" id="multiterm"></a>Korzystanie z glosariuszy Trados Multiterm</h3>
+<p>Glosariusze utworzone na przykład przy użyciu funkcji Trados Multiterm's text export mogą być używane jako glosariusze OmegaT bez dalszych modyfikacji, pod warunkiem że mają one rozszerzenie <code>.tab</code> i że pola z terminem źródłowym i docelowym stanowią odpowiednio dwa pierwsze pola. Jeżeli eksportujesz używając opcji systemu "Tab-delimited export", będziesz musiał usunąć pierwszych 5 kolumn (Seq. Nr, Date created itd.) występujących przed dwoma pozycjami, które nas interesują.</p>
+<hr>
+<h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Typowe problemy z glosariuszami</h2>
+<dl>
+  <dt><span style="font-weight: bold;">Problem: </span>Nie są wyświetlane żadne terminy glosariuszowe.</dt>
+  <dd>Możliwe przyczyny:</dd>
+</dl>
+<ul>
+  <li>brak pliku glosariusza w katalogu "glossary"</li>
+  <li>plik glosariusza jest pusty</li>
+  <li>pozycje nie są rozdzielone znakiem TAB</li>
+  <li>plik glosariusza nie ma prawidłowego rozszerzenia (.tab lub .utf8)</li>
+  <li>nie ma DOKŁADNEGO dopasowania między hasłem glosariusza a tekstem źródłowym w dokumencie - na przykład kiedy pozycja występuje w liczbie mnogiej</li>
+  <li>plik glosariusza nie ma prawidłowego kodowania</li>
+  <li>w aktywnym segmencie nie ma żadnych terminów, które pasują do terminów w glosariuszu</li>
+  <li>jeden lub kilka z powyższych problemów zostało rozwiązanych, ale projekt nie został wczytany ponownie.</li>
+</ul>
+<dl>
+  <dt><span style="font-weight: bold;">Problem: </span>W oknie Glosariusze niektóre znaki nie są wyświetlane poprawnie (ale te same znaki są wyświetlane poprawnie w oknie Edycji).</dt>
+  <dd>Możliwe przyczyny:</dd>
+</dl>
+<ul>
+  <li>rozszerzenie nie pasuje do kodowania pliku.</li>
+</ul>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a> </td>
+        <td style="text-align: center;"><a href="index.html">Spis treści</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

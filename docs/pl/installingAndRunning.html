@@ -1,0 +1,496 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Instalacja i uruchamianie OmegaT - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h1>Instalacja i uruchamianie OmegaT</h1>Uwaga: 2.1.x poniżej oznacza najnowszą wersję 2.1 OmegaT.<hr>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="3">
+    <tbody>
+      <tr>
+        <td width="50%">
+          <h3><a href="#Linux_users">Użytkownicy Linuxa (Intel)</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="#linux_which">Pakiet do pobrania</a></p>
+            </li>
+
+            <li>
+              <p><a href="#linux_install">Instalacja</a></p>
+            </li>
+
+            <li>
+              <p><a href="#linux_menu">Ustawienia menu systemu operacyjnego</a></p>
+
+              <ul>
+                <li>
+                  <p><a href="#menu_kde">w KDE,</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#menu_gnome">w GNOME</a></p>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <p><a href="#linux_running">Uruchamianie OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
+
+        <td width="50%">
+          <h3><a href="#Windows_users">Użytkownicy Windows</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="#windows_which">Pakiet do pobrania</a></p>
+            </li>
+
+            <li>
+              <p><a href="#windows_install">Instalacja</a></p>
+            </li>
+
+            <li>
+              <p><a href="#windows_menu">Ustawienia menu Windows</a></p>
+            </li>
+
+            <li>
+              <p><a href="#windows_running">Uruchamianie OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="50%">
+          <h3><a href="#MacOSX_users">Użytkownicy MacOSX</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="#osx_which">Pakiet do pobrania</a></p>
+            </li>
+
+            <li>
+              <p><a href="#osx_install">Instalacja</a></p>
+            </li>
+
+            <li>
+              <p><a href="#osx_dock">Ustawienia Dock</a></p>
+            </li>
+
+            <li>
+              <p><a href="#osx_running">Uruchamianie OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
+
+        <td width="50%">
+          <h3><a href="#Other_systems">Inne systemy - Solaris SPARC/x86/x64,</a> <a href="#Other_systems">Linux x64/PowerPC, Windows x64</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="#other_which">Pakiet do pobrania</a></p>
+            </li>
+
+            <li>
+              <p><a href="#other_install">Instalacja</a></p>
+            </li>
+
+            <li>
+              <p><a href="#other_menu">Ustawienia menu systemu operacyjnego</a></p>
+            </li>
+
+            <li>
+              <p><a href="#other_running">Uruchamianie OmegaT</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="installingAndRunning.html#command_line">Uruchamianie z linii poleceń</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="installingAndRunning.html#command_line">Otwieranie okna linii poleceń</a></p>
+            </li>
+
+            <li>
+              <p><a href="installingAndRunning.html#script">Zmiana skryptu uruchomieniowego</a></p>
+            </li>
+
+            <li>
+              <p><a href="installingAndRunning.html#arguments">Argumenty linii poleceń</a></p>
+            </li>
+          </ul>
+        </td>
+
+        <td>
+          <h3><a href="installingAndRunning.html#source_build">Budowanie OmegaT ze źródeł</a></h3>
+
+          <ul>
+            <li>
+              <p><a href="installingAndRunning.html#build_which">Pakiet do pobrania</a></p>
+            </li>
+
+            <li>
+              <p><a href="installingAndRunning.html#ant">Proces budowania&nbsp;</a></p>
+            </li>
+          </ul>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <h3><a href="#Using_WebStart_">Używanie Java Web Start</a></h3>
+        </td>
+
+        <td></td>
+      </tr>
+    </tbody>
+  </table><br>
+  <hr>
+
+  <h2><a name="Linux_users" id="Linux_users"></a>Użytkownicy Linuxa (Intel)</h2>
+
+  <h3><a name="linux_which" id="linux_which"></a>Który pakiet pobrać?</h3>
+
+  <p>Czy masz implementację Java zgodną z SUN Java 1.5 JRE?</p>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="3">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Tak:&nbsp;</strong></p>
+        </td>
+
+        <td width="70%">
+          <p>pobierz <em>OmegaT_2.1.x_Without_JRE.zip</em>. Ten pakiet może być użyty na każdej platformie, gdzie jest zainstalowana Java zgodna z Java 1.5 JRE.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="11%">
+          <p><strong>Nie / Nie wiem:</strong></p>
+        </td>
+
+        <td width="70%">
+          <p>pobierz <em>OmegaT_2.1.x_Linux.tar.gz</em>. Ten pakiet zawiera również SUN's Java Runtime Environment (JRE). Instalowane JRE nie będzie kolidować z innymi implementacjami Java, które mogą już być zainstalowane w twoim systemie.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><a name="linux_install" id="linux_install"></a>Instalacja OmegaT</h3>
+
+  <p>W celu zainstalowania programu OmegaT wystarczy rozpakować pobrany plik. Spowoduje to utworzenie katalogu omegat/ w katalogu roboczym, w którym znajdą się wszystkie pliki niezbędne do uruchomienia OmegaT. Aby rozpakować plik <em>.tar.gz</em>:</p>
+
+  <p><em>$ tar xf downloaded_file.tar.gz</em></p>
+
+  <h3><a name="linux_menu" id="linux_menu"></a>Dodawanie OmegaT do twoich menu (KDE) lub paneli (Gnome)</h3>
+
+  <h3><a name="menu_kde" id="menu_kde"></a>Użytkownicy KDE</h3>
+
+  <p>Możesz dodać OmegaT do swoich menu w następujący sposób:</p>
+
+  <ul>
+    <li>
+      <p><em>Centrum sterowania - Pulpit - Panele - Menu - Edycja Menu KDE - Plik - Nowa pozycja/Nowe podmenu</em></p>
+    </li>
+
+    <li>
+      <p>Następnie, po wybraniu odpowiedniego menu, dodaj podmenu/pozycję za pomocą <em>Plik - Nowe podmenu i Plik - Nowa pozycja</em>. Wprowadź OmegaT jako nazwę nowej pozycji.</p>
+    </li>
+
+    <li>
+      <p>W polu "Polecenie" użyj klawisza nawigacji, aby znaleźć skrypt uruchomieniowy OmegaT (plik o nazwie OmegaT w katalogu z rozpakowanym pakietem) i wybierz go.</p>
+    </li>
+
+    <li>
+      <p>Naciśnij klawisz z ikoną (po prawej stronie pól Nazwa/Opis/Komentarz) - Inne ikony - Przeglądaj i przejdź do podkatalogu /images w katalogu aplikacji OmegaT. Wybierz ikonę OmegaT.</p>
+    </li>
+
+    <li>
+      <p>Na koniec, zachowaj zmiany za pomocą <em>Plik - Zapisz</em>.</p>
+    </li>
+  </ul>
+
+  <h3><a name="menu_gnome" id="menu_gnome"></a>Użytkownicy Gnome</h3>
+
+  <p>Możesz dodać OmegaT do swojego panelu (pasek w górze ekranu) w następujący sposób:</p>
+
+  <ul>
+    <li>
+      <p>Kliknij prawym klawiszem na panelu - <em>Dodaj do panelu/Własny aktywator aplikacji</em>.</p>
+    </li>
+
+    <li>
+      <p>Wpisz "OmegaT" w polu "Nazwa"; w polu "Polecenie" użyj klawisza "Przeglądaj", aby znaleźć skrypt uruchomieniowy OmegaT (plik o nazwie OmegaT w katalogu z rozpakowanym pakietem). Wybierz i potwierdź za pomocą OK.</p>
+    </li>
+
+    <li>Kliknij klawisz z ikoną, nastepnie wciśnij Przeglądaj... i przejdź do podkatalogu /images w katalogu aplikacji OmegaT. Wybierz <span style=
+    "font-style: italic;">OmegaT_icon.png</span> . GNOME może nie wyświetlić plików ikon w dostępnych formatach i początkowo może spodziewać się pliku SVG, ale jeżeli katalog jest wybrany, pliki powinny pojawić się i będzie można wybrać OmegaT_icon.png.</li>
+  </ul>
+
+  <h3><a name="linux_running" id="linux_running"></a>Uruchamianie OmegaT</h3>
+
+  <p>Od momentu, kiedy OmegaT jest zainstalowana, możesz uruchomić ją bezpośrednio z linii poleceń, możesz stworzyć skrypt, który zawiera parametry uruchomienia, lub możesz nacisnąć ikonę <em>OmegaT.jar</em>, aby uruchomić ją bezpośrednio. Metody różnią się w zależności od dystrybucji. Upewnij się, że twoje ustawienia zmiennej środowiskowej <em>PATH</em> są poprawne i że pliki <em>.jar</em> są poprawnie powiązane z uruchamiaczem Java (Java launcher).</p>
+  <hr>
+
+  <h2><a name="Windows_users" id="Windows_users"></a>Użytkownicy Windows</h2>
+
+  <h3><a name="windows_which" id="windows_which"></a>Który pakiet pobrać?</h3>
+
+  <p>Czy masz implementację Java zgodną z SUN Java 1.5 JRE?</p>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Tak:</strong></p>
+        </td>
+
+        <td width="70%">
+          <p>pobierz <em>OmegaT_2.1.x_Windows_without_JRE.exe</em>. Ten pakiet może być użyty na każdej platformie Windows, gdzie jest zainstalowana Java zgodna z Java 1.5 JRE.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="11%">
+          <p><strong>Nie / Nie wiem:</strong></p>
+        </td>
+
+        <td width="70%">
+          <p>pobierz <em>OmegaT_2.1.x_Windows.exe</em>. Ten pakiet zawiera również SUN's Java Runtime Environment (JRE). Instalowane JRE nie będzie kolidować z innymi implementacjami Java, które mogą już być zainstalowane w twoim systemie.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><a name="windows_install" id="windows_install"></a>Instalacja OmegaT</h3>
+
+  <p>Aby zainstalować OmegaT, kliknij dwukrotnie na programie, który pobrałeś, i postępuj według instrukcji</p>
+
+  <h3><a name="windows_menu" id="windows_menu"></a>Dodawanie OmegaT do menu start lub do pulpitu</h3>
+
+  <p>Podczas instalacji program instalacyjny pyta, czy chcesz stworzyć katalog w menu <em>start</em> i czy chcesz stworzyć skrót na pulpicie i w menu szybkiego uruchamiania.</p>
+
+  <p>Możesz również utworzyć skrót później, przeciągając <em>OmegaT.exe</em> na pulpit lub menu <em>start</em>, aby tam stworzyć skrót.</p>
+
+  <h3><a name="windows_running" id="windows_running"></a>Uruchamianie OmegaT</h3>
+
+  <p>Od momentu, kiedy OmegaT jest zainstalowana, możesz wybrać <em>OmegaT.jar</em>, aby ją uruchomić, lub możesz uruchomić ją z linii poleceń.</p>
+
+  <p>Jednak najprościej jest wykonać program OmegaT.exe. Parametry uruchomienia w tym przypadku będą czytane z pliku <em>OmegaT.l4J.ini</em>, znajdującego się w tym samym katalogu co plik exe i który możesz edytować, aby odpowiadał twoim ustawieniom. Następujący plik INI&nbsp;zarezerwuje 1GB pamięci, zażąda języka francuskiego jako języka użytkownika i Portugalii jako kraju:</p>
+
+  <p><code># OmegaT.exe runtime configuration (konfiguracja uruchomieniowa OmegaT.exe)<br> #<br> # To use a parameter, remove the '#' before the '-' (Aby użyć parametru, usuń znak "#" przed "-")<br> # Memory (Pamięć)<br> -Xmx1024M<br> # Language (Język)<br> -Duser.language=FR<br> # Country (Kraj)<br> -Duser.country=PT<br> # Anti-aliasing (Java 1.5 only) Antyaliasing (tylko Java 1.5)<br> #-Dswing.aatext=true<br> # Settings to access the Internet behind a proxy (Ustawienia dostępu do internetu przez serwer proxy)<br> #-Dhttp.proxyHost=192.168.1.1<br> #-Dhttp.proxyPort=3128<br>
+
+  <hr>
+
+  <h2><a name="MacOSX_users" id="MacOSX_users"></a>Użytkownicy MacOSX</h2>
+
+  <h3><a name="osx_which" id="osx_which"></a>Który pakiet pobrać?</h3>
+
+  <p>OmegaT 2.1 wymaga środowiska Java 1.5, aby mogła działać. Użytkownicy Mac OSX 10.4 (Tiger) powinni upewnić się przed zainstalowaniem OmegaT, że używają najnowszej wersji Javy. Użyj "Software Update..." z menu Apple, aby uaktualnić twoją wersję Javy.</p>
+
+  <p>Pobierz <em>OmegaT_2.1.x_Mac.zip</em>.</p>
+
+  <h3><a name="osx_install" id="osx_install"></a>Instalacja OmegaT</h3>
+
+  <p>Kliknij dwukrotnie na <em>OmegaT_2.1.x_Mac.zip</em>, aby go rozpakować. Spowoduje to utworzenie katalogu pod nazwą <em>OmegaT</em> z ikoną OmegaT. Katalog zawiera 2 pliki: <em>documentation.html</em> i <em>OmegaT.app</em>. Skopiuj ten katalog do odpowiedniego katalogu (np. Applications). Kiedy to jest zrobione, możesz usunąć plik <em>OmegaT_2.1.x_Mac.zip</em>.</p>
+
+  <h3><a name="osx_dock" id="osx_dock"></a>Dodawanie OmegaT do Dock</h3>
+
+  <p>Dodaj OmegaT do Dock przeciągając i upuszczając plik <em>OmegaT.app</em> na Dock.</p>
+
+  <h3><a name="osx_running" id="osx_running"></a>Uruchamianie OmegaT</h3>
+
+  <p>Kliknij dwukrotnie na <em>OmegaT.app</em> lub kliknij na jej miejsce w Dock</p>
+
+  <p>Jeśli chcesz zmienić parametry uruchomienia Java, możesz zmienić ustawienia domyślne OmegaT.app, edytując plik <em>Info.plist</em>, znajdujący się w <em>OmegaT.app/Contents/</em>. Otwórz plik "Info.plist", klikając na nim prawym klawiszem i wybierając dowolny edytor tekstu. Możesz zmienić część <em>Properties</em>, jak również część <em>VMOptions</em>. Jeśli chcesz dodać wartości do <em>VMOptions</em>, rozdziel je spacjami. Na przykład <code>-Xmx1024M -Duser.language=ja</code> uruchomi OmegaT z 1024MB pamięci i z interfejsem użytkownika w języku japońskim.</p>
+
+  <p>Uruchomienie <em>OmegaT.app</em> bezpośrednio nie pozwoli ci uruchomić wielu kopii <em>OmegaT.app</em>. Jeżeli potrzebujesz uruchomić wiele kopii <em>OmegaT.app</em>, użyj pliku <em>JavaApplicationStub</em> znajdującego się w <em>OmegaT.app/ Contents/MacOS/</em>.</p>
+
+  <p>Nie jest możliwe użycie Lucene stemmer z pakietu <em>OmegaT.app</em>. Musisz uruchomić OmegaT z linii poleceń (patrz poniżej).</p>
+
+  <p>Aby zmienić parametry uruchomienia Javy z linii poleceń, wywołaj plik <em>OmegaT.jar</em>, znajdujący się w <em>OmegaT.app/Contents/Resources/ Java/</em>. Uruchomienie <em>OmegaT.app</em> z linii poleceń jest równoważne użyciu oryginalnego pakietu OmegaT. Będziesz mógł uruchomić wiele kopii OmegaT, jak również użyć Lucene stemmer. Aby uzyskać więcej informacji, przeczytaj "Uruchamianie z linii poleceń" poniżej.</p>
+
+  <p>Aby dostać się do jakiegoś miejsca wewnątrz pakietu <em>OmegaT.app</em>, kliknij prawym klawiszem na <em>OmegaT.app</em> i wybierz "Show Package Contents" lub "cd" bezpośrednio z linii poleceń.</p>
+
+  <h4>Udogodnienia Mac OSX</h4>
+
+  <p><em>OmegaT.app</em> może być dostępna z Services oferowanych przez Mac OSX. Możesz więc wybrać słowo w dowolnym miejscu OmegaT i skorzystać z Services, aby sprawdzić to słowo w Services udostępniających słowniki, w Spotlight lub w Google. Możesz też skorzystać z AppleScript lub Automator, aby utworzyć Services lub skrypty, które zautomatyzują często powtarzające się czynności.</p>
+  <hr>
+
+  <h2><a name="Other_systems" id="Other_systems"></a>Inne systemy</h2>
+
+  <h3><a name="other_which" id="other_which"></a>Który pakiet pobrać?</h3>
+
+  <p>OmegaT jest udostępniana razem z SUN Java JRE dla platform Linux (Intel x86) i Windows. Użytkownicy innych platform (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 itd.) muszą mieć w swoim systemie działające środowisko  zgodne z Java JRE, aby móc korzystać z OmegaT.</p>
+
+  <p>Czy masz implementację Java zgodną z SUN Java 1.5 JRE?</p>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Tak:</strong></p>
+        </td>
+
+        <td width="70%">
+          <p>pobierz <em>OmegaT_2.1.x_Without_JRE.zip</em>. Ten pakiet może być użyty na każdej platformie, gdzie jest zainstalowana Java zgodna z Java 1.5 JRE.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Nie wiem:</strong></p>
+        </td>
+
+        <td width="70%">
+          <p>otwórz okno terminala i wpisz "java -version". Jeśli pojawi się komunikat "command not found" lub podobny, prawdopodobnie Java nie jest zainstalowana w twoim systemie.</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td valign="top" width="11%">
+          <p><strong>Nie:</strong></p>
+        </td>
+
+        <td width="70%">
+          <dl>
+            <dd>uzyskaj Java JRE dla twojego systemu (patrz niżej) i pobierz <em>OmegaT_2.1.x_Without_JRE.zip</em>. SUN dostarcza JRE dla Solaris SPARC/x86 (Java 1.5) i dla Linux x64, Solaris x64, Windows x64 (Java 1.5): <strong>http://java.sun.com/products/archive/</strong>. IBM dostarcza JRE dla Linux PowerPC:</dd>
+
+            <dd>
+            <strong>http://www.ibm.com/developerworks/java/jdk/linux/download.html</strong></dd>
+
+            <dd>Przestrzegaj instrukcji instalacji pakietu, którego potrzebujesz.</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><a name="other_install" id="other_install"></a>Instalacja OmegaT</h3>
+
+  <p>Aby zainstalować OmegaT, wystarczy rozpakować plik<strong><em>OmegaT_2.1.x_Without_JRE.zip</em></strong>. Spowoduje to utworzenie katalogu <em>./OmegaT_2.1.x_Without_JRE/</em> w katalogu roboczym, ze wszystkimi plikami niezbędnymi do uruchomienia OmegaT.</p>
+
+  <h3><a name="other_menu" id="other_menu"></a>Instalowanie dogodnych skrótów</h3>
+
+  <p>Postępuj zgodnie z instrukcjami twojego systemu, aby zainstalować skróty OmegaT w dogodnych miejscach.</p>
+
+  <h3><a name="other_running" id="other_running"></a>Uruchamianie OmegaT</h3>
+
+  <p>Od momentu, kiedy OmegaT jest zainstalowana, możesz uruchomić ją bezpośrednio z linii poleceń, możesz stworzyć skrypt, który zawiera parametry uruchomienia, lub możesz nacisnąć ikonę <em>OmegaT.jar</em>, aby uruchomić ją bezpośrednio. Metody różnią się w zależności od dystrybucji. Upewnij się, że twoje ustawienia zmiennej środowiskowej <em>PATH</em> są poprawne i że pliki <em>.jar</em> są poprawnie powiązane z uruchamiaczem Java (Java launcher).</p>
+  <hr>
+
+  <h2><a name="command_line" id="command_line"></a>Uruchamianie z linii poleceń</h2>
+
+  <p>Zwykle nie ma potrzeby uruchamiania OmegaT z linii poleceń. Jednak uruchamiane z linii poleceń umożliwia modyfikację różnych aspektów działania programu. Istnieją dwa sposoby uruchamiania OmegaT z użyciem linii poleceń.</p>
+
+  <h3>Metoda 1: otworzenie okna linii poleceń</h3>
+
+  <p>Jest ono również nazywane "oknem terminala". W Windows jest nazywane "okno MS-DOS" i jest dostępne Menu Start, w części Programy, pozycja "MS-DOS". Odpowiednikiem w Mac OSX jest aplikacja Terminal znajdująca się w Applications → Utilities.</p>
+
+  <p>Aby uruchomić OmegaT, musisz zwykle wpisać dwa polecenia. Pierwsze z nich to:</p>
+
+  <p><em>cd {katalog}</em></p>
+
+  <p>gdzie <em>{katalog}</em> jest nazwą katalogu (z pełną ścieżką), w którym jest umieszczony program OmegaT, konkretnie - plik <em>OmegaT.jar</em>. W praktyce to polecenie będzie więc wyglądało mniej więcej tak:</p>
+
+  <dl>
+    <dt>W Windows</dt>
+
+    <dd><em>cd C:\Program Files\OmegaT</em></dd>
+
+    <dt>W Mac OSX</dt>
+
+    <dd><em>cd &lt;położenie OmegaT.app&gt;/OmegaT.app/Contents/Resources/Java/</em></dd>
+
+    <dt>W Linuxie</dt>
+
+    <dd><em>cd /usr/local/omegat</em></dd>
+  </dl>
+
+  <p>To polecenie zmienia bieżący katalog na katalog zawierający plik wykonywalny OmegaT. Drugie polecenie to polecenie, które faktycznie uruchamia program OmegaT. W najbardziej uproszczonej formie, to polecenie wygląda następująco:</p>
+
+  <p><em>java -jar OmegaT.jar</em></p>
+
+  <p>Zwróć uwagę na użycie dużych liter - to istotne.</p>
+
+  <p>Ta metoda daje taką korzyść, że jest odpowiednia do wykrywania błędów w programie: jeżeli pojawi się błąd podczas używania programu, w oknie terminala zostanie wyświetlony komunikat o błędzie, który może zawierać użyteczną informację o przyczynie.</p>
+
+  <h3><a name="script" id="script"></a>Metoda 2: zmiana pliku/skryptu uruchomieniowego <em>.bat</em></h3>
+
+  <p>Metoda 1 jest niepraktyczna przy rutynowym uruchamianiu programu. Z tego powodu dwa polecenia opisane powyżej są umieszczane w pliku ("script", zwanym też "plik <em>.bat</em>" w systemie Windows).</p>
+
+  <p>Podczas wykonywania tego pliku, polecenia wewnątrz niego są wykonywane automatycznie. Co za tym idzie, aby zmienić polecenie uruchomienia, wystarczy zmodyfikować plik. Kiedy OmegaT jest uruchamiana ze zmienionego pliku, wykonywane są nowe polecenia.</p>
+
+  <h3><a name="arguments" id="arguments"></a>Argumenty linii poleceń</h3>
+
+  <p>Podstawowe polecenie zostało już wymienione powyżej. Zmiany w tym poleceniu wymagają dodania do niego "argumentów". Są one opisane szczegółowo w rozdziale <a href="commandlineArguments.html">Argumenty linii poleceń</a>.<hr>
+
+  <h2><a name="source_build" id="source_build"></a>Budowanie OmegaT ze źródeł</h2>
+
+  <h3><a name="build_which" id="build_which"></a>Który pakiet pobrać?</h3>
+
+  <dl>
+    <dt>Pobierz <em>OmegaT_2.1.x_Source.zip</em></dt>
+
+    <dd>Ten pakiet zawiera pliki źródłowe odpowiadające wydanej wersji i może być wykorzystany w dowolnym systemie zainstalowanym z Java 1.5 JDK lub zgodnym środowiskiem Java. Do zbudowania OmegaT będziesz również potrzebował pomocy <em>ant</em>.</dd>
+
+    <dt>OmegaT&nbsp;używa Subversion do kontroli wersji. Najnowszy kod jest dostępny na serwerze SVN:</dt>
+
+    <dd><em>https://omegat.svn.sourceforge.net/svnroot/omegat/trunk</em></dd>
+  </dl>
+
+  <h3><a name="ant" id="ant"></a>Budowanie OmegaT</h3>
+
+  <dl>
+    <dd>Rozpakuj plik <em>OmegaT_2.1.x_Source.zip</em> i przejdź do katalogu <em>OmegaT_2.1.x_Source</em> lub przejdź do katalogu <em>./omegat/</em> w źródłach pobranych z serwera SVN. Upewnij się, że plik <em>build.xml</em> znajduje się w tym katalogu. Następnie wpisz w linii komend:</dd>
+  </dl>
+
+  <p><em>$ ant jar release</em></p>
+
+  <dl>
+    <dd>Spowoduje to utworzenie pełnej dystrybucji OmegaT w katalogu <em>./dist/</em>, w którym znajdziesz wszystkie pliki niezbędne do działania OmegaT.</dd>
+  </dl>
+  <hr style="width: 100%; height: 2px;">
+
+  <h2><a name="Using_WebStart_" id="Using_WebStart_"></a>Używanie Java Web Start</h2>
+
+  <dl>
+    <dt>Przy użyciu technologii Java Web Start (część Java 1.5 i nowszych), samodzielne aplikacje Java mogą być uruchamiane pojedynczym kliknięciem w sieci. Java Web Start zapewnia, że zostanie uruchomiona najnowsza wersja aplikacji, jak również odpowiednia wersja <a href="http://java.sun.com/j2se/desktopjava/jre/index.jsp" title=
+    "Java Runtime Environment (JRE)">Java Runtime Environment (JRE)</a>. Aby uruchomić OmegaT po raz pierwszy z użyciem Java Web Start, wpisz następujący adres w swojej przeglądarce internetowej:</dt>
+
+    <dd><span style="font-style: italic;">&nbsp;&nbsp;&nbsp; http://omegat.sourceforge.net/webstart/OmegaT.jnlp</span><br> <br> Pobierz plik <span style="font-style: italic;">OmegaT.jnlp</span> i kliknij na nim.&nbsp;Podczas instalacji, zależnie od twojego systemu operacyjnego, możesz otrzymać kilka ostrzeżeń dotyczących bezpieczeństwa. Ten certyfikat jest podpisany przez "Didier Briel". Zezwolenia, których udzielasz tej wersji (które mogą być oznaczone jako "zabroniony dostęp do komputera") są identyczne jak zezwolenia, których udzielasz lokalnej wersji, tzn. pozwalają na dostęp do twardego dysku komputera. Kolejne kliknięcia na <span style=
+    "font-style: italic;">OmegaT.jnlp</span> spowodują sprawdzenie, czy są nowsze wersje, zainstalowanie ich, jeśli istnieją, a następnie uruchomienie OmegaT. Po początkowej instalacji możesz oczywiście używać <span style=
+    "font-style: italic;">OmegaT.jnlp</span> również wtedy, gdy nie jesteś połączony z internetem. <span style="font-weight: bold;"><br> <br> Prywatność:</span> OmegaT Java Web Start nie przechowuje żadnych twoich informacji na zewnątrz komputera, na którym ją uruchamiasz. Aplikacja działa tylko na twoim urządzeniu. Twoje dokumenty i pamięci tłumaczeniowe pozostają na twoim komputerze i projekt OmegaT nie będzie miał żadnego dostępu do twojej pracy lub informacji.<br> <br> Zauważ, że jeśli potrzebujesz jakichś argumentów linii poleceń (patrz powyżej), będziesz musiał skorzystać z normalnej instalacji.</dd>
+  </dl>
+
+  <dl>
+    <dt><br></dt>
+  </dl>
+  <hr>
+
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Edycja tłumaczenia - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Działanie pola edycyjnego</h2>
+
+  <ul>
+    <li>
+      <p><a href="#auto_insert">Automatyczne wstawianie dopasowania</a></p>
+    </li>
+
+    <li>
+      <p><a href="#validation">Segmenty, które maja pozostać niezmienione</a></p>
+    </li>
+  </ul>
+
+  <p>Można ustawić następujące sposoby działania pola edycyjnego:</p>
+
+  <ul>
+    <li>
+      <p>Wstaw automatycznie najlepsze dostępne dopasowanie</p>
+    </li>
+
+    <li>
+      <p>Segmenty identyczne z oryginalnym uważaj za przetłumaczone</p>
+    </li>
+  </ul>
+  <hr>
+
+  <h2><a name="auto_insert" id="auto_insert"></a>Automatyczne wstawianie dopasowania</h2>
+
+  <p>Tłumaczysz pliki przemieszczając się z segmentu do segmentu, równocześnie edytując bieżący segment. Przemieszczając się między segmentami, możesz chcieć, aby pole edycyjne było wypełnione istniejącym tłumaczeniem lub tekstem źródłowym.</p>
+
+  <p>W części <strong>Opcje → Parametry edytora...</strong> OmegaT oferuje następujące możliwości:</p>
+
+  <table summary="just formatting" cellpadding="2" cellspacing="2">
+    <tr valign="top">
+      <td>
+        <p><strong>Tekst źródłowy</strong></p>
+      </td>
+
+      <td>
+        <p>możesz automatycznie wypełnić pole edycyjne tekstem źródłowym. Jest to całkiem użyteczne w przypadku tekstu zawierającego wiele znaków handlowych i innych nazw własnych, które trzeba pozostawić nietknięte.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>Zostaw segment pusty</strong></p>
+      </td>
+
+      <td>
+        <p>OmegaT zostawi pole edycyjne puste. Ta opcja pozwala wprowadzić tłumaczenie bez potrzeby usuwania tekstu źródłowego, w ten sposób oszczędzając ci kilku uderzeń w klawisze (<code>Ctrl+A</code> i <code>Del</code>)</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td>
+        <p><strong>Wstaw najlepsze dopasowanie rozmyte</strong></p>
+      </td>
+
+      <td>
+        <p>OmegaT wstawi tłumaczenie ciągu znaków najbardziej podobnego do bieżącego źródła, jeśli podobieństwo jest większe od wartości granicznej, którą możesz w tym przypadku ustawić.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="validation" id="validation"></a>Segmenty, które maja pozostać niezmienione</h2>
+
+  <p>Dokumenty, które masz przetłumaczyć, mogą zawierać znaki handlowe, nazwy i inne nazwy własne, które muszą pozostać takie same w przetłumaczonych dokumentach. Są dwie strategie postępowania z segmentami, które zawierają tylko taki niezmienny tekst.</p>
+
+  <p>Możesz zdecydować, że nie tłumaczysz takich segmentów w ogóle - w efekcie OmegaT będzie traktować te segmenty jak nieprzetłumaczone. Jest to ustawienie domyślne.</p>
+
+  <p>Druga możliwość to wprowadzenie tłumaczenia, nawet jeśli jest identyczne z tekstem źródłowym, tak aby program OmegaT pamiętał, że przejrzałeś tekst i zdecydowałeś pozostawić segment docelowy identyczny ze źródłowym. Aby móc tak zrobić, wejdź w <strong>Opcje → Parametry edytora...</strong> i zaznacz opcję <strong>Zezwól, aby tłumaczenie było takie samo jak źródło</strong>.</p>
+  <hr>
+
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

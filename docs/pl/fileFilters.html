@@ -1,0 +1,207 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Filtry plików - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h1>Filtry plików</h1>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#filter_dialog">Okno dialogowe Filtry plików</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#filter_options">Opcje filtrów</a></p>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Okno dialogowe Edycja filtra</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#source_file_name">Typ pliku źródłowego, wzór nazwy pliku</a>.</p>
+        </li>
+
+        <li>
+          <p><a href="#encoding">Kodowanie plików źródłowych i docelowych</a></p>
+        </li>
+
+        <li>
+          <p><a href="#target_file_name">Nazwa pliku docelowego</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p>OmegaT udostępnia konfigurowalne filtry , umożliwiające ustawienie większości opcji ich pracy. Filtry plików to fragmenty kodu, które mają możliwość:</p>
+
+  <ul>
+    <li>
+      <p>Czytania dokumentu w konkretnym formacie pliku. Na przykład, pliki tekstowe niesformatowane.</p>
+    </li>
+
+    <li>
+      <p>Wyodrębniania z pliku zawartości do tłumaczenia.</p>
+    </li>
+
+    <li>
+      <p>Automatycznych modyfikacji nazwy pliku tłumaczonego dokumentu przez zastąpienie zawartości przeznaczonej do tłumaczenia jej tłumaczeniem.</p>
+    </li>
+  </ul>
+
+  <p>Dla większości użytkowników domyślne opcje filtra plików są wystarczające. Jeżeli tak nie jest, otwórz główne okno dialogowe wybierając <strong>Opcje → Filtry plików...</strong> z menu głównego. <strong>Uwaga!</strong> Zmiana opcji filtrów, kiedy projekt jest otwarty, może spowodować utratę danych. Jeśli zmieniasz opcje filtrów, kiedy projekt jest otwarty, będziesz musiał wczytać ponownie projekt, aby zmiany odniosły skutek.</p>
+
+  <h3><a name="filter_dialog" id="filter_dialog"></a>Okno dialogowe Filtry plików</h3>
+
+  <p>Okno dialogowe zawiera listę dostępnych filtrów plików. Jeśli nie chcesz używać programu OmegaT do tłumaczenia plików jakiegoś typu, możesz wyłączyć ten filtr, odznaczając opcję przy jego nazwie. OmegaT będzie wtedy pomijać odpowiadające mu pliki podczas wczytywania projektów i będzie kopiować je bez zmian, tworząc dokumenty docelowe. Później, kiedy postanowisz ponownie używać filtru, zaznacz odpowiednią opcję. Wybierz <strong>Domyślne</strong>, jeśli chcesz przywrócić domyślne ustawienia filtrów plików. Aby wybrać, jakie pliki w jakim kodowaniu filtr będzie przetwarzał, wybierz filtr z listy i wybierz <strong>Edytuj</strong>.</p>
+
+  <h3><a name="filter_options" id="filter_options"></a>Opcje filtrów</h3>
+
+  <p>Pięć filtrów (pliki tekstowe, pliki XHTML, pliki HTML i XHTML, pliki OpenDocument/OpenOffice.org i pliki Microsoft Open XML) ma jedną lub kilka opcji. W celu zmodyfikowania tych opcji, wybierz filtr z listy i wybierz <strong>Opcje</strong>. Dostępne opcje:</p>
+
+  <h4>Pliki tekstowe</h4>
+
+  <ul>
+    <li>
+      <p><i>Podziel tekst źródłowy na akapity w miejscu nowej linii, pustej linii lub wcale:</i> jeśli zasady segmentacji zdań są aktywne, tekst będzie później segmentowany zgodnie z dostępnymi zasadami.</p>
+    </li>
+  </ul>
+
+  <h4>Pliki HTML i pliki HTML i XHTML</h4>
+
+  <ul>
+    <li>
+      <p><i>Deklaracja kodowania:</i> OmegaT może dodać lub przepisać deklarację kodowania pliku, na podstawie wybranego kodowania pliku docelowego.</p>
+    </li>
+
+    <li>
+      <p><i>Tłumaczenie atrybutów:</i> Wybrane atrybuty pojawią się jako segmenty w oknie Edycji.</p>
+    </li>
+
+    <li>
+      <p><i>Akapit w miejscu &lt;br&gt;:</i> Znacznik HTML &lt;br&gt; utworzy akapit do celów segmentacji.</p>
+    </li>
+
+    <li>
+      <p><i>Opuść tekst pasujący do wyrażenia regularnego:</i> Tekst pasujący do wyrażenia regularnego zostanie opuszczony.</p>
+    </li>
+  </ul>
+
+  <h4>Pliki OpenDocument/OpenOffice.org</h4>
+
+  <p>Następujące elementy mogą być tłumaczone lub nie. Jeżeli mają być tłumaczone, pojawią się jako oddzielne segmenty.</p>
+
+  <ul>
+    <li><i>Hasła indeksów</i></li>
+
+    <li><i>Zakładki</i></li>
+
+    <li><i>Odnośniki do zakładek</i></li>
+
+    <li><i>Notatki</i></li>
+
+    <li><i>Komentarze</i></li>
+  </ul>
+
+  <h4>Pliki Microsoft Open XML</h4>
+
+  <p>Następujące elementy mogą być tłumaczone lub nie. Jeżeli mają być tłumaczone, pojawią się jako oddzielne segmenty.</p>
+
+  <ul>
+    <li><i>Tekst ukryty (Word)</i></li>
+
+    <li><i>Komentarze (Word, Excel)</i></li>
+
+    <li><i>Przypisy (Word)</i></li>
+
+    <li><i>Przypisy końcowe (Word)</i></li>
+
+    <li><i>Nagłówki (Word)</i></li>
+
+    <li><i>Stopki (Word)</i></li>
+
+    <li><i>Komentarze do slajdów (PowerPoint)</i></li>
+
+    <li><i>Wzorce slajdów (PowerPoint)</i></li>
+  </ul>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Okno dialogowe Edycja filtra</h3>
+
+  <p>Okno dialogowe pozwala ustawić wzorce nazw plików źródłowych, które filtr będzie przetwarzał, dostosować nazwy plików tłumaczonych i wybrać, jakie kodowania będą używane do wczytywania pliku i zapisywania jego przetłumaczonej kopii. Aby zmodyfikować wzorzec filtra pliku, zmień pola bezpośrednio lub wybierz <strong>Edytuj</strong>. Aby dodać nowy wzorzec filtra pliku, wybierz <strong>Dodaj</strong>. To samo okno dialogowe jest używane do dodawania wzorca i do edycji wzorca. Okno dialogowe jest użyteczne ponieważ zawiera specjalny edytor wzorca nazwy pliku docelowego, który pozwala dostosować nazwy plików wyjściowych.</p>
+
+  <h3><a name="source_file_name" id="source_file_name"></a>Typ pliku źródłowego, wzór nazwy pliku.</h3>
+
+  <p>Kiedy OmegaT napotyka plik w katalogu źródłowym, próbuje wybrać filtr, korzystając z rozszerzenia. Dokładniej, OmegaT próbuje dopasować wzorce nazwy pliku źródłowego każdego filtra do nazwy pliku. Na przykład, wzorzec <code>*.xhtml</code> będzie pasował do każdego pliku z rozszerzeniem <code>.xhtml</code>. Jeżeli został znaleziony odpowiedni filtr, jest on stosowany do przetwarzania pliku. Na przykład, domyślnie filtr XHTML będzie używany do przetwarzania plików z rozszerzeniem <code>.xhtml</code>. Możesz zmienić lub dodać wzorce nazwy plików, które każdy filtr plików będzie obsługiwał. Wzorce nazwy pliku źródłowego używają symboli wieloznacznych podobnych do używanych w <strong>Przeszukaj projekt</strong>. Znakowi '<strong>*</strong>' odpowiada zero lub więcej znaków. Znakowi '<strong>?</strong>' odpowiada dokładnie jeden znak. Wszystkie pozostałe znaki reprezentują siebie. Na przykład, jeśli chcesz, aby filtr tekstu dostarczył pliki readme (<code>readme</code>, <code>read.me</code> i <code>readme.txt</code>), powinieneś użyć wzorca <code>read*</code>.</p>
+
+  <h3><a name="encoding" id="encoding"></a>Kodowanie plików źródłowych i docelowych</h3>
+
+  <p>Tylko ograniczona liczba formatów plików określa wymagane kodowanie. Formaty plików, które nie określają kodowania będą używać kodowania, które jest ustawione dla rozszerzenia pasującego do ich nazwy. Na przykład, domyślnie pliki <code>.txt</code> będą wczytywane z użyciem domyślnego kodowania systemu operacyjnego. Można zmienić kodowanie źródłowe dla każdego wzorca nazwy pliku źródłowego. Takie pliki mogą również być zapisane w dowolnym kodowaniu. Domyślnie, kodowanie pliku przetłumaczonego jest takie samo jak kodowanie pliku źródłowego. Pola kodowania pliku źródłowego i docelowego korzystają z list rozwijanych z wszystkimi obsługiwanymi kodowaniami. <strong>&lt;auto&gt;</strong> pozostawia wybór kodowania programowi OmegaT. Odbywa się to w następujący sposób:</p>
+
+  <ul>
+    <li>
+      <p style="margin-bottom: 0cm;">OmegaT znajduje kodowanie pliku źródłowego używając jego deklaracji kodowania, jeśli istnieje (pliki HTML, pliki oparte na XML).</p>
+    </li>
+
+    <li>
+      <p style="margin-bottom: 0cm;">OmegaT jest tak skonfigurowna, aby korzystać z wymaganego kodowania niektórych formatów plików (Java properties itd.).</p>
+    </li>
+
+    <li>
+      <p>OmegaT używa domyślnego kodowania systemu operacyjnego dla plików tekstowych.</p>
+    </li>
+  </ul>
+
+  <h3><a name="target_file_name" id="target_file_name"></a>Nazwa pliku docelowego</h3>
+
+  <p>Czasem możesz chcieć automatycznie zmienić nazwy plików, które tłumaczysz, na przykład dodając kod języka po nazwie pliku. Wzorzec nazwy pliku docelowego używa specjalnej składni, więc jeśli chcesz zmienić to pole, musisz wybrać <strong>Edytuj...</strong> i użyć okna dialogowego Edytuj wzorzec. Jeśli chcesz powrócić do domyślnej konfiguracji filtru, wybierz <strong>Domyślne</strong>. Możesz również zmienić nazwę bezpośrednio w polu wzorca nazwy pliku docelowego w oknie dialogowym filtra pliku. Okno dialogowe Edytuj wzorzec oferuje następujące możliwości:</p>
+
+  <ul>
+    <li>
+      <p>Domyślna opcja to <code>${filename}</code> -- pełna nazwa pliku źródłowego z rozszerzeniem, tak aby nazwa pliku docelowego była taka sama jak nazwa pliku źródłowego.</p>
+    </li>
+
+    <li>
+      <p><code>${nameOnly}</code> pozwala wstawić tylko nazwę pliku źródłowego bez rozszerzenia.</p>
+    </li>
+
+    <li>
+      <p><code>${extension}</code> -- rozszerzenie pliku źródłowego.</p>
+    </li>
+
+    <li>
+      <p><code>${targetLocale}</code> - kod lokalny pliku docelowego (w postaci "xx_YY").</p>
+    </li>
+
+    <li>
+      <p><code>${targetLanguage}</code> - kod języka i kraju docelowego (w postaci "XX-YY").</p>
+    </li>
+
+    <li>
+      <p><code>${targetLanguageCode}</code> - tylko kod języka docelowego ("XX").</p>
+    </li>
+
+    <li>
+      <p><code>${targetCoutryCode}</code> - tylko kod kraju docelowego ("YY").</p>
+    </li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,205 +1,176 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>W pigułce - Podręcznik użytkownika OmegaT 1.6.2</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>OmegaT w pigułce - Podręcznik użytkownika OmegaT 2.1</title>
 </head>
+
 <body>
+  <h2>Opanuj OmegaT w 5 minut!<br> - OmegaT w pigułce</h2>
 
-<h1>OmegaT w pigułce</h1>
-<p><small>czyli opanuj OmegaT w 5 minut</small></p>
+  <p>Niniejsza instrukcja obejmuje tylko podstawy. Byłoby dobrze, gdyby każdy użytkownik przeczytał podręcznik użytkownika, aby zapoznać się ze wszystkimi możliwościami programu OmegaT. Skróty klawiszowe opisano tutaj jako "ctrl+klawisz", ale użytkownicy MacIntosha powinni czytać to jako "cmd+klawisz". Klawisz "cmd" na klawiaturach Apple ma albo napis "command", albo znak jabłka&gt;.</p>
+  <hr>
+  <a name="summary" id="summary"></a>
 
-<p><strong>Ten tekst opisuje absolutne podstawy aplikacji. Oczywiście byłoby super, gdyby każdy przeczytał podręcznik użytkownika i zaznajomili się ze zwszystkimi funkcjami programu OmegaT. </strong></p>
+  <h2>Krótko o tym, jak działa OmegaT</h2>
 
-<h2>Spis treści</h2>
+  <p>Ekran OmegaT stanowi jeden obszar z trzema oddzielnymi oknami. Rozmiar każdego z nich można zmieniać za pomocą myszy. Po lewej znajduje się okno edycji, w którym wpisujesz tłumaczenie. Po prawej, na górze, znajduje się okno dopasowań rozmytych, w którym będą wyświetlane dopasowania z pamięci tłumaczeniowej. Pod nim znajduje się okno glosariuszy, w którym będą wyświetlane dopasowania z glosariuszy.</p>
 
-<ol type="I">
-   <li><a href="#Briefly.2C_how_OmegaT_works">W skrócie, jak działa OmegaT</a></li>
-   <li><a href="#How_to_translate_using_OmegaT">Jak się tłumaczy przy użyciu OmegaT</a>
-      <ol type="a">
-         <li><a href="#Create_and_open_a_new_project">Utwórz nowy projekt i wczytaj go</a></li>
-         <li><a href="#Translate_the_segments_one_by_one">Tłumacz segmenty jeden po drugim</a></li>
-         <li><a href="#Use_TM_and_glossary_matches"> Używanie pamięci tłumaczeń i słownika</a></li>
-         	<ol type="1">
-         		<li><a href="#TM_matches">Pamięć tłumaczeń</a></li>
-         		<li><a href="#Glossary_matches">Słownik</a></li>
-         	</ol>
-         <li><a href="#Create_the_translated_documents">Tworzenie dokumentów docelowych</span></a></li>
-      </ol>
-   </li>
-   <li><a href="#Dealing_with_tagged_text">Zmagania ze znacznikami</a>
-      <ol type="a">
-         <li><a href="#An_example...">Przykład...</a></li>
-         <li><a href="#Tag_verification">Kontrola znaczników</a></li>
-      </ol>
-   </li>
-</ol>
+  <p>W oknie edycji OmegaT pokazuje tekst źródłowy 'podzielony na segmenty' (zdania lub akapity). Segmenty tłumaczy sie kolejno. Kiedy przechodzisz z segmentu do segmentu, twoje tłumaczenia są zapamiętywane w pamięci tłumaczeniowej. Kiedy wszystkie segmenty zostaną przetłumaczone (albo wcześniej, jeśli chcesz) OmegaT użyje pamięci tłumaczeniowej do utworzenia przetłumaczonego dokumentu (dokumentów) w katalogu “target”.</p>
 
-<a name="Briefly.2C_how_OmegaT_works"></a>
-<h2>I. W skrócie, jak działa OmegaT</h2>
+  <p>OmegaT organizuje twoją pracę w tak zwanych projektach tłumaczeniowych. Dla każdego projektu OmegaT stworzy zestaw katalogów. Są one używane do przechowywania dokumentów źródłowych przeznaczonych do przetłumaczenia oraz glosariuszy i pamięci tłumaczeniowych, z których możesz chcieć korzystać. OmegaT tworzy także katalog “target”, który będzie zawierał docelowe, przetłumaczone dokumenty.</p>
+  <hr>
+  <a name="translate" id="translate"></a>
 
-<p>Ekran OmegaT składa się z trzech oddzielnych okienek. Rozmiar każdego z nich można zmieniać myszką. Po lewej znajduje się okno edycji, gdzie piszesz swoje tłumaczenie. Po prawej na górze, jest okienko dopasowań, gdzie wyświetlane będą odpowiadające tekstowi źródłowemu frazy z pamięci tłumaczeń. Niżej mamy okienko słownika, w którym wyświetlane będą tłumaczenia wyrazów.</p>
+  <h2>Jak tłumaczyć za pomocą OmegaT</h2><a name="create" id="create"></a>
 
-<p>W Oknie Edycji wyświetlony jest tekst podzielony na segmenty - zdania (lub akapity - rzuć okiem na  "&lt;s0&gt;segmentację źródeł&lt;/s0&gt;"). Segmenty te tłumaczone są jeden po drugim. Kiedy przechodzisz do następnego, twoje tłumaczenie jest zapisywane w pamięci tłumaczeń, a kiedy skończysz ostatni, OmegaT użyje pamięci tłumaczeń do utworzenia dokumentu docelowego. Możesz również utworzyć dokument docelowy wcześniej - na żądanie.</p>
+  <h3>Tworzenie i otwieranie nowego projektu</h3>
 
-<p>OmegaT pomaga zorganizować twoją pracę w tak zwane projekty tłumaczeń. Dla każdego projektu OmegaT tworzy katalogi do przechowywania dokumentów źródłowych, słowników i pamięci tłumaczeń których chcesz używać. Program tworzy również katalog docelowy, który będzie zawierał ostateczne wersje tłumaczonych dokumentów.</p>
+  <p>Wybierz z menu <strong>Projekt → Nowy...</strong>.</p>
 
-<a name="How_to_translate_using_OmegaT"></a>
-<h2>II. Jak się tłumaczy przy użyciu OmegaT</h2>
+  <p>Przejdź do katalogu, w którym chcesz zapisać pliki projektu, i podaj nazwę, jaką chcesz nadać projektowi tłumaczeniowemu. Ta nazwa zostanie nadana głównemu katalogowi projektu; wszystkie pliki projektu będą przechowywane w tym katalogu lub jego podkatalogach.</p>
 
-<a name="Create_and_open_a_new_project"></a>
-<h3>a. Utwórz nowy projekt i wczytaj go</h3>
+  <p>OmegaT poprosi o potwierdzenie lub zmianę katalogów projektu, które mają zostać utworzone, korzystając z poniższego okna dialogowego:</p>
 
-<p>Wybierz <strong>Projekt → Nowy...</strong> na pasku menu.</p>
+  <p align="center"><img src="images/NewProject.png" name="graphics1" alt=
+  "Okno ustawień projektu" id="graphics1" align="bottom" border="0"></p>
 
-<p>Przejdź do katalogu w którym chciałbyś zapisać swoje pliki i wpisz nazwę którą nadasz  projektowi. Nazwa ta nadana będzie głównemu folderowi projektu, a wszystkie pliki projektu będą się znajdowały w tym katalogu lub jego podkatalogach.</p>
+  <p>Możesz po prostu zaakceptować położenie podkatalogów, ale upewnij się najpierw, że kody języków - źródłowego i docelowego - są prawidłowe. Wybierz kod języka (2 lub 3 litery) lub kod języka i kraju (2+2 lub 3+2 litery) z listy albo wpisz go ręcznie. Zapamiętaj położenie podkatalogu target (na przetłumaczone dokumenty). Jeżeli chcesz, żeby program OmegaT segmentował tekst na zdania, a nie na akapity, dobrze jest dokładnie sprawdzić zasady segmentacji.</p>
 
-<p>OmegaT poprosi o potwierdzenie lub zmianę katalogów projektu wyświetlając poniższe okienko.</p>
+  <p>Kiedy klikniesz OK, aby zaakceptować ustawienia projektu, OmegaT poprosi cię o wybranie dokumentów źródłowych do zaimportowania. Możesz importować pojedyncze pliki lub całe drzewa katalogów (z wszystkimi podkatalogami). Jeżeli przypadkowo zaimportowałeś niewłaściwe dokumenty lub zbyt wiele dokumentów, możesz po prostu usunąć je z katalogu "source" twojego projektu OmegaT (używając na przykład menedżera plików twojego systemu).</p>
 
-<center><img src="images/NewProject.png" alt="Ustawienia projektu" /></center>
+  <p>Listę plików przeznaczonych do przetłumaczenia możesz sprawdzić w oknie <strong>Pliki projektu</strong> (Menu: <strong>Projekt → Pliki projektu...</strong>, jeśli nie otwiera się automatycznie). Jeżeli musiałeś zmienić zawartość katalogu "source", pamiętaj wczytać ponownie projekt (menu: <strong>Projekt → Wczytaj ponownie</strong>). OmegaT domyślnie otwiera pierwszy plik z listy. Pamiętaj, program OmegaT może tłumaczyć tylko pliki w formatach wymienionych poniżej, jeśli pasują do wzorców zdefiniowanych w filtrach plików. Wszystkie inne pliki będą pomijane.</p>
 
-<p>Możesz spokojnie przyjąć proponowane miejsce dla podkatalogów, ale sprawdź czy języki dokumentów źródłowych i docelowych są wybrane poprawnie. Wybierz kod języka (2 literowy) lub języka-i-regionu (2+2) z rozwijanych menu, lub wpisz je ręcznie. (ale zachowaj formę 2 liter). Zapamiętaj też miejsce katalogu docelowego (zawierającego przetłumaczone dokumenty).</p>
+  <ul>
+    <li>OpenDocument/OpenOffice.org</li>
 
-<p>Jeśli chcesz aby  OmegaT wyznaczył segmenty ze zdań a nie z akapitów, zaznacz to pole i kliknij na zasady segmentacji.</p>
+    <li>Pliki tekstowe niesformatowane (znakowe)</li>
 
-<p>Po zaakceptowaniu ustawień i kliknięciu OK, OmegaT poprosi cię o wskazanie plików, które chcesz przetłumaczyć. Możesz w ten sposób importować pojedyncze pliki, a także całe katalogi z podkatalogami i ich zawartością. Jeśli przez przypadek zaimportowałeś niewłaściwy dokument, lub wczytałeś ich zbyt wiele, możesz je po prostu usunąć z projektu używając dowolnego menadżera plików (będą w podkatalogu "Source" twojego projektu).</p>
+    <li>Pliki PO (.po)</li>
 
-<p>Aby sprawdzić listę plików, które będziesz tłumaczył, otwórz okienko <strong>Pliki projektu</strong> (Menu: <strong>Projekt → Pliki projektu...</strong>, ale zwykle otwiera się automatycznie). Jeśli musiałeś zmienić zawartość katalogu źródłowego, pamiętaj aby najpierw wczytać projekt ponownie (Menu: <strong>Projekt → Wczytaj ponownie</strong>). Domyślnie OmegaT otwiera pierwszy plik z listy.</p>
+    <li>Bundle.properties Java</li>
 
-<p>Pamiętaj! OmegaT będzie otwierać wyłącznie poniższe formaty. Każdy plik innego rodzaju zostanie pominięty.<ul>
-<li>Open Document Format (ODF ISO/IEC 26300)</li>
-<li>OpenOffice.org </li>
-<li>XHTML, HTML </li>
-<li>HTML Help Compiler (HCC)</li>
-<li>DocBook </li>
-<li>zwykły plik tekstowy</li>
-<li>bundle.properties Java </li>
-<li>pliki .po</li>
-<li>INI (pliki formatu "klucz=wartość")</li>
-</ul>
-</p>
+    <li>XHTML, HTML</li>
 
-<a name="Translate_the_segments_one_by_one"></a>
-<h3>b. Tłumacz segmenty jeden po drugim</h3>
+    <li>HTML Help Compiler</li>
 
-<p>Kiedy już utworzyłeś projekt i wiadomo które pliki będziesz tłumaczył, OmegaT otworzy pierwszy z nich w Edytorze. Pierwszy segment jest podświetlany na zielono, a jego kopia wyświetlana jest niżej w "polu wpisywania" (w tym momencie cała reszta dokumentu jest chroniona i nie można jej zmieniać) Swoje tłumaczenie wstukujesz pomiędzy znaczniki &lt;segment 0001&gt; i &lt;koniec segmentu&gt;, nadpisując tekst źródłowy.</p>
+    <li>Pliki INI (format "klucz=wartość") (.ini)</li>
 
-<p>Naciskając "<strong>ENTER</strong>" przechodzisz do następnego segmentu.</p>
+    <li>DocBook</li>
 
-<p>Uwagi:<br/> - Aby przenieść się do innej części tekstu, wyżej czy niżej, kliknij dwukrotnie zdanie lub akapit, który chcesz otworzyć.. <br/> - jeśli wolisz wpisywać tłumaczenie "na czysto" a nie na tekście źródłowym, zmień to ustawienie w  <strong>Opcje → Parametry edytora...</strong>.</p>
+    <li>Microsoft Open XML</li>
 
-<p>Kiedy naciskasz "<strong>ENTER</strong>", klika rzeczy których nie widać dzieje się jednocześnie.&lt;br1&gt; OmegaT dodaje parę segmentów (segment źródłowy i jego tłumaczenie) do pamięci tłumaczeń, i automatycznie tłumaczy pozostałe segmenty identyczne ze źródłowym, znalezione w plikach projektu. Przeszukuje również pamięć tłumaczeń i słownik pod kątem następnego segmentu.</p>
+    <li>Okapi monolingual XLIFF</li>
 
-<a name="Use_TM_and_glossary_matches"></a>
-<h3>c. Używanie pamięci tłumaczeń i słownika.</h3>
+    <li>QuarkXPress CopyFlowGold</li>
 
-<a name="TM_matches"></a>
-<h4>1. Pamięć tłumaczeń</h4>
+    <li>Pliki napisów (SRT)</li>
 
-<p>Jeżeli OmegaT znajdzie w pamięci tłumaczeń elementy pasujące (30% zgodności lub więcej – patrz podręcznik) do następnego segmentu, wyświetla je w oknie dopasowań. Pierwszy element tego okna jest wstępnie wybrany.</p>
-<p>Aby wstawić propozycję z okienka dopasowań do tłumaczonego tekstu możesz użyć skrótów klawiaturowych.<br/>
-<ul>
-   <li>Naciśnij <code>Ctrl+I</code> aby wkleić wybraną propozycję w miejscu kursora, lub...</li>
-   <li>Naciśnij <code>Ctrl+R</code> aby zastąpić cały segment proponowanym tekstem.</li>
-</ul>
-</p>
+    <li>ResX</li>
 
-<p>Jeśli znaleziono kilka dopasowań, a chcesz wstawić inną propozycję niż pierwsza (domyślna):<br/>
-<ul>
-	<li>Wybierz inną propozycję w okienku dopasowań: naciśnij <code>Ctrl+2</code> dla drugiej wyświetlonej propozycji, <code>Ctrl+3</code> dla trzeciej, itd.</li>
-	<li>Potem użyj kombinacji <code>Ctrl+I</code> lub <code>Ctrl+R</code> aby wstawić, lub zastąpić j.w.</li>
-</ul>
-</p>
+    <li>Android resource</li>
 
-<p>(Możesz ustawić w programie, aby za każdym razetm sam wstawiał dopasowany fragment o zgodności wyższej niż zadany procent, do pola wpisywania ilekroć zaczynasz nowy segment. Funkcję tę znajdziesz w <strong>Opcje → Parametry edytora...</strong>)</p>
+    <li>LaTeX</li>
+  </ul><a name="segments" id="segments"></a>
 
-<a name="Glossary_matches"></a>
-<h4>2. Słownik</h4>
+  <h3>Tłumaczenie segmentów jeden po drugim</h3>
 
-<p>Jeśli OmegaT napotka termin pasujący w 100% do znajdującego się w słowniku, wyświetli go w okienku słownika. tych dopasowań nie można przenosić przy użyciu skrótów.</p>
+  <p>Kiedy już zdefiniowałeś projekt i pliki do przetłumaczenia, OmegaT otworzy pierwszy plik źródłowy w oknie edycji. W pierwszym segmencie tekst źródłowy jest podświetlany na zielono; kopia tekstu źródłowego jest wyświetlana pod nim, w “polu docelowym”. (W tym momencie cały tekst poza polem docelowym jest chroniony i nie może zostać zmieniony). Musisz wpisać swoje tłumaczenie pomiędzy znacznikami <code>&lt;segment 0001&gt;</code> i <code>&lt;koniec segmentu&gt;</code>, zastępując tekst źródłowy. Wciśnij "<strong>ENTER</strong>", aby przejść do następnego segmentu. Uwagi:</p>
 
-<a name="Create_the_translated_documents"></a>
-<h3>Tworzenie dokumentów docelowych:</h3>
+  <ul>
+    <li>Aby przejść do innej części tekstu, powyżej albo poniżej, kliknij dwukrotnie na zdaniu lub akapicie, który chcesz otworzyć.</li>
 
-<p>Przetłumaczywszy wszystkie segmenty (albo w dowolnym momencie jeśli tego zechcesz), OmegaT uzupełni dokumenty docelowe używając segmentów przechowywanych w pamięci tłumaczeń.</p>
+    <li>Jeżeli wolisz wpisywać tłumaczenie do pustego pola docelowego, ustaw tę opcję w <strong>Opcje → Parametry edytora...</strong>.</li>
 
-<p>Aby zrobić to ręcznie, wybierz <strong>Projekt → Utwórz dokumenty docelowe</strong> z paska menu.</p>
+    <li>
+      <p>Możesz zmienić ustawienia okna edycji (na przykład, żeby pokazywało tekst źródłowy lub nie, podświetlało tekst przetłumaczony itp.) w podmenu <span style="font-weight: bold;">Widok</span>.</p>
+    </li>
+  </ul>
 
-<p>OmegaT utworzy przetłumaczone wersje wszystkich dostępnych tłumaczeniu dokumentów, znajdujących się w katalogu źródłowym. Również w przypadku, gdy nie zostały one przetłumaczone w całości. Utworzone pliki zapisane zostaną w katalogu docelowych.</p>
+  <p>Kiedy wciskasz "<strong>ENTER</strong>", wiele rzeczy dzieje się w sposób niewidoczny: OmegaT dodaje parę segmentów (segment źródłowy i jego tłumaczenie) do pamięci tłumaczeniowej i, również automatycznie, tłumaczy wszystkie pozostałe identyczne segmenty, jakie znajduje w innych plikach projektu. Przeszukuje także pamięć tłumaczeniową i glosariusz w poszukiwaniu dopasowań dla następnego nieprzetłumaczonego segmentu.</p><a name="tm" id="tm"></a>
 
-<p>Aby zakończyć tłumaczenie, otwórz pliki docelowe używając ich domyślnych aplikacji (procesorze tekstu, przeglądarce internetowej...), aby sprawdzić zawartość i format tłumaczenia. Możesz później wrócić do OmegaT i nanieść niezbędne poprawki. Nie zapomnij utworzyć dokumentów docelowych ponownie.</p>
+  <h3>Korzystanie z dopasowań w pamięciach tłumaczeniowych, glosariuszach i słownikach</h3><a name="tm_matches" id="tm_matches"></a>
 
+  <h3>Dopasowania w pamięciach tłumaczeniowych</h3>
 
-<a name="Dealing_with_tagged_text"></a>
-<h2>III. Zmagania ze znacznikami</h2>
+  <p>Jeśli OmegaT znajduje w pamięci tłumaczeniowej jakieś dopasowania rozmyte (co najmniej 30%) dla następnego segmentu, wyświetla je w oknie dopasowań rozmytych. Pierwsze dopasowanie w oknie dopasowań rozmytych jest domyślnie wstępnie wybierane.</p><img src=
+  "images/MatchesPane.png" name="graphics4" alt="matches pane" id="graphics4"
+  style="border: 0px solid ;"><br clear="left">
 
-<p>OmegaT zapewnia nienaruszalność formatowania dokumentów źródłowych (pogrubienie, kursywa etc.), poprzez wstawianie specjalnych znaczników. Znaczniki OmegaT składają się z przynajmniej jednej litery, po której następuje przynajmniej jedna cyfra i czasem znak "/" (na przykład:&lt;f0&gt;, &lt;br10/&gt;, &lt;/s2&gt; itp.).</p>
+  <p><br></p>
 
-<p>Musisz uważać na te znaczniki, i upewnić się że są one właściwie stosowane w segmentach docelowych (zaawansowaną edycję znaczników opisano w Instrukcji Użytkownika).</p>
+  <p>W celu wstawienia dopasowań pamięci tłumaczeniowej z okna dopasowań rozmytych do pola docelowego możesz użyć skrótów klawiszowych:</p>
 
-<a name="An_example..."></a>
-<h3>a. Przykład...</h3>
+  <ul>
+    <li>Wciśnij <code>Ctrl+I</code>, żeby wstawić wybrane dopasowanie w pozycji kursora albo...</li>
 
-<p>W tych przykładach podświetliliśmy <font color="#ff0000"> czerwone</font> znaczniki, aby łatwiej było je dostrzec, ale podczas edycji w OmegaT nie będą podświetlone.</p>
+    <li>Wciśnij <code>Ctrl+R</code>, żeby zastąpić cały segment wybranym dopasowaniem.</li>
+  </ul>
 
-<p>
-<strong>A oto przykład segmentu w pliku HTML:</strong>
-</p>
+  <p>Jeżeli znaleziono wiele dopasowań i nie chcesz wykorzystać dopasowania wybranego domyślnie:</p>
 
-<p>
-<code><font color="#ff0000">&lt;p&gt;</font> Inna czcionka wyświetlania może być wybrana w okienku <font color="#ff0000">&lt;b&gt;</font>Czcionki <font color="#ff0000">&lt;/b&gt;</font>. Otwiera się je klikając na <font color="#ff0000">&lt;i&gt;</font>Opcje<font color="#ff0000">&lt;/i&gt;</font> &amp;gt; <font color="#ff0000">&lt;i&gt;</font>Czcionki...<font color="#ff0000">&lt;/i&gt;</font> w pasku menu. W okienku możesz dobrać rozmiar i krój czcionki.<font color="#ff0000">&lt;/p&gt;</font></code>
-</p>
+  <ul>
+    <li>Wybierz dopasowanie, które najbardziej ci odpowiada, spośród przedstawionych w oknie dopasowań rozmytych: <code>Ctrl+2</code>, jeśli wybierasz drugie z wyświetlonych dopasowań, <code>Ctrl+3</code>, jeśli trzecie, itd.</li>
 
-<p>
-<strong>Oto jak wyświetli je OmegaT (podświetlone na czerwono):</strong>
-</p>
+    <li>Następnie skorzystaj ze skrótów klawiszowych <code>Ctrl+I</code> lub <code>Ctrl+R</code> opisanych powyżej.</li>
+  </ul>
 
-<p>
-<code>Inna czcionka wyświetlana może być wybrana w okienku <font color="#ff0000">&lt;b0&gt;</font>Czcionki<font color="#ff0000">&lt;/b0&gt;</font>. Otwiera się je klikając na <font color="#ff0000">&lt;i1&gt;</font>Opcje<font color="#ff0000">&lt;/i1&gt;</font> &gt; <font color="#ff0000">&lt;i2&gt;</font>Czcionki<font color="#ff0000">&lt;/i2&gt;</font> w pasku menu. W okienku możesz dobrać rozmiar i krój czcionki.</code>
-</p>
+  <p>(Możesz polecić, aby program OmegaT przy otwieraniu segmentu automatycznie wstawiał do pola docelowego pierwsze dopasowanie powyżej podanej wartości procentu dopasowania. Możesz wybrać tę opcję w <strong>Opcje → Parametry edytora...</strong>)</p><a name="gloss_matches" id="gloss_matches"></a>
 
-<p>
-<strong>A tu jest przykład jak należy to przetłumaczyć(przykład w języku afrykanerskim):</strong>
-</p>
+  <h3>Dopasowania w glosariuszach i słownikach</h3>
 
-<p>
-<code>'n Mens kan 'n ander vertoonfont kies met die 
-<font color="#ff0000">&lt;b0&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b0&gt;</font>-dialoogkassie. 
-Kies <font color="#ff0000">&lt;i1&gt;</font>Opstelling<font color="#ff0000">&lt;/i1&gt;</font> 
+  <p>Pasujące terminy w glosariuszach i słownikach, które możesz mieć dołączone do projektu, będą wyświetlone jako odniesienie w oknach glosariuszy i słowników.</p><a name="searches" id="searches"></a>
 
-&gt; <font color="#ff0000">&lt;i2&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i2&gt;</font> 
-op die kieslys. Die lettertipe én die lettergrootte kan met dié 
-dialoogkassie verander word.</code>
-</p>
+  <h3>Korzystanie z wyszukiwania</h3>
 
-<p>
-<strong>Kiedy OmegaT tworzy dokument docelowy, plik HTML będzie wyglądał tak:</strong>
-</p>
+  <p>OmegaT zapewnia szeroki zakres funkcji wyszukiwania. Wywołaj okno wyszukiwania za pomocą <code>Ctrl+F</code> i wprowadź słowo lub wyrażenie, których chcesz szukać, w polu "Wyszukaj". Lub w inny sposób - wybierz słowo lub wyrażenie w dowolnym miejscu okna edycji i wciśnij <code>Ctrl+F</code>. Słowo lub wyrażenie jest w tym przypadku wpisywane w pole "Wyszukaj" automatycznie.</p>
 
-<p>
-<code><font color="#ff0000">&lt;p&gt;</font>'n Mens kan 'n ander vertoonfont kies 
-met die <font color="#ff0000">&lt;b&gt;</font>Vertoonfont<font color="#ff0000">&lt;/b&gt;</font>-dialoogkassie. 
-Kies <font color="#ff0000">&lt;i&gt;</font>Opstelling<font color="#ff0000">&lt;/i&gt;</font> 
+  <h3>Korzystanie z funkcji Google Translate</h3>
 
-&amp;gt; <font color="#ff0000">&lt;i&gt;</font>Vertoonfont...<font color="#ff0000">&lt;/i&gt;</font> 
-op die kieslys. Die lettertipe én die lettergrootte kan met dié 
-dialoogkassie verander word.<font color="#ff0000">&lt;/p&gt;</font></code>
-</p>
+  <p>W oknie Google Translate, pojawi się automatycznie propozycja tłumaczenia bieżącego segmentu. Możesz wstawić ją do segmentu docelowego za pomocą <code>Ctrl+M</code>.<br></p>
 
-<a name="Tag_verification"></a>
-<h3>b. Kontrola znaczników</h3>
+  <p><a name="create_trans" id="create_trans"></a></p>
 
-<p>OmegaT nie wykrywa nieprawidłowego użycia znaczników w dokumencie docelowym automatycznie. Zanim dostarczysz przetłumaczone dokumenty do klienta zalecane jest sprawdzenie znaczników pod kątem błędów.</p>
+  <h3>Tworzenie dokumentów docelowych</h3>
 
-<p>Wybierz <strong>Narzędzia → Popraw znaczniki</strong> na pasku menu. Wyświetli się tabela przedstawiająca pary segmentów (źródłowy i docelowy) w których znaczniki sobie nie odpowiadają. Wybierz numer segmentu.</p>
+  <p>Kiedy przetłumaczysz wszystkie segmenty (lub wcześniej, jeśli chcesz), OmegaT uaktualni dokument docelowy (dokumenty docelowe), korzystając z tłumaczeń zapamiętanych w pamięci tłumaczeniowej. Aby to zrobić, wybierz z menu <strong>Projekt → Utwórz dokumenty docelowe</strong>. OmegaT utworzy przetłumaczone wersje wszystkich możliwych do przetłumaczenia dokumentów w katalogu źródłowym (source) projektu, niezależnie od tego, czy zostały całkowicie przetłumaczone. Całkowicie lub częściowo przetłumaczone pliki zostaną zapamiętane w katalogu docelowym (target) projektu. Aby zakończyć tłumaczenie, otwórz pliki docelowe w przypisanych do nich aplikacjach (przeglądarka, edytor tekstu...) w celu sprawdzenia zawartości i formatowania twojego tłumaczenia. Możesz wtedy powrócić do programu OmegaT, żeby wykonać potrzebne poprawki; nie zapomnij ponownie utworzyć dokumentów docelowych.</p>
+  <hr>
+  <a name="tags" id="tags"></a>
 
-<p>Przeniesiesz się do segmentu w którym znaleziono błąd, i będziesz mógł go naprawić .</p>
+  <h2>Jak obsługiwać tekst ze znacznikami</h2>
 
-<p>W niektórych przypadkach błędne stosowanie znaczników może nie pozwolić na wczytanie dokumentu. Należy być pewnym co do poprawy wszystkich nieprawidłowych znaczników przed utworzeniem dokumentów docelowych.</p>
+  <p>Formatowanie dokumentów źródłowych (pogrubienie, kursywa itp.) nie jest tracone dzięki temu, że OmegaT oznacza je specjalnymi znacznikami. Znaczniki OmegaT złożone są z jednej lub więcej liter, po których następuje jedna lub więcej cyfr, znak "/" używany jest do zamknięcia (na przykład: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; itd.). Należy obchodzić się ostrożnie z tymi znacznikami i upewnić się, czy zostaną prawidłowo włączone do segmentów docelowych (patrz <em>Operacje na znacznikach</em>).</p><a name="example" id="example"></a>
 
-<p>Na zakończenie, należy również sprawdzić poprawność i formatowanie w domyślnej dla danego dokumentu aplikacji.</p>
+  <h3>Przykład...</h3>
 
-<hr>
-<p><a href="legalNotices.html" title="uwagi prawne">uwagi prawne</a></p>
+  <p>W tych przykładach znaczniki są podświetlone, aby były lepiej widoczne, ale OmegaT ich nie podświetla. Znaczniki HTML, podświetlone na <font color="blue">niebiesko</font>, będą pomijane przez OmegaT, bo całkowicie otaczają segment. Znaczniki podświetlone poniżej na <font color=
+  "green">zielono</font> muszą być obsługiwane przez OmegaT, bo znajdują się wewnątrz segmentu. Oto przykład segmentu w HTML:</p>
 
+  <p><code><font color="blue">&lt;p&gt;</font>Inną czcionkę wyświetlaną można wybrać w oknie dialogowym <font color="green">&lt;b&gt;</font>Czcionka wyświetlana<font color=
+  "green">&lt;/b&gt;</font>. Otwiera się je, wybierając pozycję menu <font color=
+  "green">&lt;i&gt;</font>Opcje<font color="green">&lt;/i&gt;</font> →<font color="green">&lt;i&gt;</font>Czcionka...<font color=
+  "green">&lt;/i&gt;</font>. W oknie dialogowym można zmienić rodzaj i rozmiar czcionki.<font color="blue">&lt;/p&gt;</font></code></p>
+
+  <p>Tak OmegaT wyświetli ten segment, z tłumaczeniem na język afrykanerski:</p><br>
+
+  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
+
+  <p>Kiedy OmegaT utworzy dokument docelowy, HTML będzie wyglądał następująco:</p>
+
+  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
+  "tag_verif" id="tag_verif"></a>
+
+  <h3>Weryfikacja znaczników</h3>
+
+  <p>OmegaT nie wykrywa automatycznie błędnych znaczników w dokumencie docelowym. Zanim dostarczysz dokument twojemu klientowi, powinieneś więc sprawdzić, czy nie ma błędów dotyczących znaczników.</p>
+
+  <p>Wybierz z menu <strong>Narzędzia → Popraw znaczniki</strong>. Zostanie wyświetlona tabela, pokazująca segmenty, w których znaczniki w części źródłowej i docelowej nie są zgodne. Kliknij na numerze segmentu. Przeniesiesz się automatycznie do wątpliwego segmentu w oknie edycji, gdzie możesz poprawić znaczniki. Wciśnij <code>Enter</code>, żeby zatwierdzić poprawiony segment i sprawdź poprawkę, wciskając ponownie <code>Control-T</code>.</p>
+
+  <p>W niektórych przypadkach błędy znaczników mogą nawet nie pozwolić na otworzenie dokumentu. Powinieniś więc upewnić się, że poprawiłeś wszystkie błędy znaczników, zanim utworzysz pliki docelowe. Na koniec, powinieneś zawsze dokładnie sprawdzić ostateczne formatowanie, otwierając dokument docelowy w przypisanej do niego przeglądarce lub edytorze.</p>
+
+  <p>W niektórych językach programowania (np. PHP, C) są używane specjalne znaczniki jako symbole zastępcze w ciągach znaków, które są używane w połączeniu z funkcją printf. OmegaT może wykrywać i sprawdzać te znaczniki, jeśli uaktywnisz taką możliwość. Wybierz z menu <strong>Opcje → Walidacja znaczników...</strong>. Możesz wybrać walidację uproszczoną lub pełną. Przy walidacji uproszczonej używane są tylko proste warianty możliwych wartości symboli zastępczych. Jest to przydatne, kiedy kod źródłowy nie zawiera bardziej złożonych symboli zastępczych i dostajesz wiele fałszywych informacji o błędach.</p>
+
+  <hr>
 </body>
 </html>

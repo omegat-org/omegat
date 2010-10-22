@@ -1,0 +1,202 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Pamięci tłumaczeniowe - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Pamięci tłumaczeniowe</h2>
+
+  <ul>
+    <li>
+      <a href="#OmegaT_and_TMX_files">OmegaT i pliki TMX</a>
+
+      <ul>
+        <li><a href="#TMX_files_location_and_purpose">Położenie i cel</a></li>
+
+        <li><a href="#TMX_backup">Kopia zapasowa TMX</a></li>
+
+        <li><a href="#TMX_files_and_language">TMX i język</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#keeping_a_memory">Jak OmegaT zapamiętuje twoje tłumaczenia</a></li>
+
+    <li><a href="#Using_TMs_from_previous_projects">Używanie pamięci tłumaczeniowych z poprzednich projektów</a></li>
+
+    <li>
+      <a href="#using_memories">Używanie pamięci utworzonych przez inne narzędzia tłumaczeniowe</a>
+
+      <ul>
+        <li><a href="#importing_files">Importowanie plików</a></li>
+
+        <li><a href="#imported_files_handling">Obsługa plików importowanych</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#using_OmegaT_TM">Używanie pamięci tłumaczeniowych OmegaT w innych narzędziach tłumaczeniowych</a></li>
+    
+    <li><a href="#pseudo_translate">Pamięć pozornie przetłumaczona</a></li>
+
+    <li><a href="#upgrading_TM">Aktualizacja pamięci tłumaczeniowych</a></li>
+  </ul>
+  <hr>
+  <a name="OmegaT_and_TMX_files" id="OmegaT_and_TMX_files"></a>
+
+  <h2>OmegaT i pliki TMX</h2><a name="TMX_files_location_and_purpose" id=
+  "TMX_files_location_and_purpose"></a>
+
+  <h3>Pliki TMX - położenie i cel</h3>
+
+  <p>OmegaT używa plików TMX w 3 oddzielnych położeniach.</p>
+
+  <ul>
+    <li>
+      <p>Katalog <em>/omegat/</em> zawiera <em>project_save.tmx</em> i pewną liczbę kopii zapasowych plików TMX.</p>
+
+      <p>Plik <em>project_save.tmx</em> zawiera wszystkie segmenty, które zostały zapamiętane od momentu rozpoczęcia projektu.</p>
+    </li>
+
+    <li>
+      <p>Główny katalog projektu będzie zawierał 3 pliki TMX:</p>
+
+      <ol>
+        <li><em>nazwa_projektu-omegat.tmx</em></li>
+
+        <li><em>nazwa_projektu-level1.tmx</em></li>
+
+        <li><em>nazwa_projektu-level2.tmx</em></li>
+      </ol>(<i>nazwa_projektu</i> oznacza nazwę twojego projektu).<p>Te pliki zawierają segmenty źródłowe i docelowe odpowiadające zawartości katalogu /source/ w czasie ich tworzenia (zwykle po utworzeniu plików przetłumaczonych).</p>
+
+      <ul>
+        <li>Plik <em>level1</em> zawiera tylko informację tekstową.</li>
+
+        <li>Plik <em>level2</em> ma wbudowane specyficzne znaczniki OmegaT w prawidłowe znaczniki TMX; ten plik może być używany, ze swoją informacją o formatowaniu, w narzędziu tłumaczeniowym, które obsługuje pamięci TMX level 2 lub w samym programie OmegaT.</li>
+
+        <li>Plik <em>omegat</em> zawiera specyficzne znaczniki formatowania OmegaT; ten plik może być używany w innych projektach OmegaT</li>
+      </ul>
+
+      </li><li>Katalog <em>/tm/</em> może zawierać dowolną liczbę plików TMX. Te pliki muszą być prawidłowymi plikami TMX i mogą zawierać albo tylko informację tekstową (level 1 TMX), albo informację OmegaT tekstową i o formatowaniu (omegat TMX), albo informację TMX tekstową i o formatowaniu (level 2 TMX). Różnice między nimi są techniczne (szczegóły poniżej) i jeżeli chcesz użyć pamięci tłumaczeniowej z dawnego projektu, są one przeważnie zamienne, tj. będą wszystkie działały równie dobrze.</li>
+  </ul>
+  <p>Opcjonalnie, możesz pozwolić, aby program OmegaT stworzył dodatkowy plik TMX (w postaci OmegaT), w wybranym miejscu, zawierający wszystkie segmenty projektu podlegające tłumaczeniu. Patrz <a href="#pseudo_translate">Pamięć pozornie przetłumaczona</a>.</p>
+  
+
+  <a name="TMX_backup" id="TMX_backup"></a>
+  <h3>Kopia zapasowa TMX</h3>
+
+  <p>Kiedy tłumaczysz pliki, OmegaT przechowuje całą twoją pracę w pamięci tłumaczeniowej w podkatalogu projektu <em>/omegat</em>.</p>
+
+  <p>OmegaT tworzy również kopię zapasową pamięci tłumaczeniowej w <em>project_save.tmx.YEARMMDDHHNN.bak</em> w tym samym podkatalogu za każdym razem, kiedy projekt jest otwierany lub wczytywany ponownie. <em>YEAR</em> jest 4-cyfrową liczbą oznaczającą rok, <em>MM</em> to miesiąc, <em>DD</em> dzień, <em>HH</em> i <em>NN</em> to godziny i minuty, kiedy poprzednia pamięć tłumaczeniowa została zapisana.</p>
+
+  <p>Jeżeli uważasz, że straciłeś dane tłumaczenia, postępuj zgodnie z następującą procedurą:</p>
+
+  <ol>
+    <li>zamknij projekt</li>
+
+    <li>zmień nazwę aktualnego pliku <em>project_save.tmx</em> na taką, jaką łatwo zapamiętasz (na przykład <em>project_save.tmx.temporary</em>)</li>
+
+    <li>wybierz kopię zapasową pamięci tłumaczeniowej, która najprawdopodobniej zawiera dane, których szukasz</li>
+
+    <li>zmień jej nazwę na <em>project_save.tmx</em></li>
+
+    <li>otwórz projekt</li>
+  </ol><a name="TMX_files_and_language" id="TMX_files_and_language"></a>
+
+  <h3>Pliki TMX i język</h3>
+
+  <p>Pliki TMX zawierają <i>jednostki tłumaczeniowe</i>, które są złożone z wielu równoważnych segmentów w różnych językach. Jednostka tłumaczeniowa jest złożona z przynajmniej dwóch <i>wersji jednostki tłumaczeniowej</i> (tuv). Każda z nich może być użyta jako źródło albo cel.</p>
+
+  <p>Ustawienia w twoim projekcie wskażą, który język jest źródłowy, a który docelowy. OmegaT weźmie więc <strong>wersję jednostki tłumaczeniowej</strong> odpowiadającą kodowi języka źródłowego projektu i użyje tego segmentu jako segmentu źródłowego i weźmie <strong>wersję jednostki tłumaczeniowej</strong> odpowiadającą kodowi języka docelowego projektu i użyje tego segmentu jako segmentu docelowego. OmegaT rozpoznaje je korzystając z dwóch następujących standardowych konwencji:</p>
+
+  <ul>
+    <li>2 litery (np. <strong>JA</strong> dla języka japońskiego) lub</li>
+
+    <li>dwuliterowy kod języka, po którym następuje dwuliterowy kod kraju (np. <strong>EN-US</strong>)</li>
+  </ul>
+
+  <p>W rozdziale <a href="languages.html">Języki</a> znajdziesz listę niektórych kodów języków i krajów.</p>
+
+  <p>Jeżeli kody języków projektu i kody języków TMX są w pełni zgodne, segmenty są wczytywane do pamięci. Jeżeli kody pasują tylko do języka, ale nie do kraju, segmenty są również wczytywane do pamięci. Jeżeli ani kod języka, ani kod kraju nie pasują, segmenty nie są wczytywane do pamięci.</p>
+  <hr>
+  <a name="keeping_a_memory" id="keeping_a_memory"></a>
+
+  <h2>Jak OmegaT zapamiętuje twoje tłumaczenia</h2>
+
+  <p>Plik project_save.tmx zawiera wszystkie segmenty, które zostały zapamiętane, od kiedy zacząłeś projekt. Jeśli robisz jakąkolwiek modyfikację, na przykład segmentacji projektu, <em>project_save.tmx</em> zapamięta nowe pary tłumaczeniowe, ale pozostawi wszystkie wcześniejsze informacje.</p>
+
+  <p>To może czasem doprowadzić do wyświetlania <strong>osieroconych tekstów</strong> w oknie dopasowań rozmytych. Takie dopasowania nie odnoszą się już do segmentów występujących w dokumentach źródłowych, ale do segmentów zapamiętanych przed wprowadzeniem modyfikacji. Jeżeli modyfikacja okaże się pomyłką, powróć do poprzednich ustawień, a wcześniej zapamiętane segmenty znów się pojawią.</p>
+  <hr>
+  <a name="Using_TMs_from_previous_projects" id=
+  "Using_TMs_from_previous_projects"></a>
+
+  <h2>Używanie pamięci tłumaczeniowych z poprzednich projektów</h2>
+
+  <p>Kiedy tworzysz dokumenty docelowe w projekcie OmegaT, pamięć tłumaczeniowa projektu jest tworzona w postaci trzech plików w katalogu głównym twojego projektu (patrz powyższy opis). Możesz uważać te trzy pliki TMX&nbsp;(-<em>omegat.tmx</em>", "<em>-level1.tmx</em>" i "<em>-level2.tmx</em>") za "gotową do wyeksportowania pamięć tłumaczeniową", tj. za możliwe do wyeksportowania dwujęzyczne streszczenie twojego bieżącego projektu.</p>
+
+  <p>Jeżeli chciałbyś użyć ponownie pamięci tłumaczeniowej z poprzedniego projektu (na przykład dlatego, że nowy projekt jest podobny do poprzedniego lub używa terminologii, która mogła być wcześniej używana), możesz użyć tych pamięci tłumaczeniowych jako "wejściowych pamięci tłumaczeniowych", tj. do zaimportowania do twojego nowego projektu. W takim przypadku umieść pamięci tłumaczeniowe, których chcesz użyć, w katalogu <em>\tm</em> twojego nowego projektu.</p>
+
+  <p>Domyślnie, katalog <em>\tm</em> jest jednym z podkatalogów głównego katalogu projektu (np. ..<em>\MyProject\tm)</em>, ale jeśli chcesz, możesz wybrać inny katalog w oknie dialogowym właściwości projektu. Jest to wygodne, jeśli często korzystasz z pamięci tłumaczeniowych stworzonych w przeszłości, na przykład dlatego, że dotyczą one tego samego tematu lub są wykonywane dla tego samego klienta. W tym przypadku użyteczna jest następująca procedura:</p>
+
+  <ul>
+    <li>Stwórz katalog ("katalog do przechowywania") w dogodnym miejscu na twoim twardym dysku, przeznaczony na pamięci tłumaczeniowe dla konkretnego klienta lub tematu.</li>
+
+    <li>Kiedy skończysz projekt, skopiuj jeden z trzech plików "gotowych do wyeksportowania" pamięci tłumaczeniowej z głównego katalogu projektu do katalogu do przechowywania.</li>
+
+    <li>Kiedy zaczynasz nowy projekt na ten sam temat lub dla tego samego klienta, przejdź do katalogu do przechowywania w oknie dialogowym <em>Projekt &gt; Właściwości&gt; Edytuj projekt</em> i wybierz go jako katalog pamięci tłumaczeniowej.</li>
+  </ul>
+
+  <p>Zauważ, że wszystkie pliki TMX&nbsp;w katalogu <em>/tm</em> podlegają analizie składniowej podczas startu programu, więc umieszczenie tam wszystkich plików TMX, jakie możesz zdobyć, niepotrzebnie spowolni działanie programu OmegaT. Możesz nawet pomyśleć o wyeliminowaniu tych, które są niezbędne (na przykład pozostawiając je w podkatalogu <em>/tm</em>, ale zmieniając ich rozszerzenie), jak tylko ich zawartość zostanie przeniesiona do <em>project_save.tmx</em> twojego bieżącego projektu.</p>
+
+  <p><a name="using_memories" id="using_memories"></a></p>
+
+  <h2>Używanie pamięci utworzonych przez inne narzędzia tłumaczeniowe</h2>
+
+  <h3><a name=
+  "importing_files" id="importing_files"></a>Importowanie plików</h3>
+
+  <p>OmegaT obsługuje importowanie plików TMX w wersjach 1.1-1.4b (zarówno level 1, jak level 2). Umożliwia to czytanie pamięci tłumaczeniowych utworzonych przyz inne narzędzia przez program OmegaT. Jednak OmegaT nie obsługuje <i>w pełni</i> zaimportowanych plików TMX level 2 (które przechowują nie tylko tłumaczenie, ale również formatowanie), więc jakość dopasowań rozmytych będzie trochę niższa, kiedy zaimportuje się pliki TMX level 2.</p>
+
+  <h3><a name=
+  "imported_files_handling" id="imported_files_handling"></a>Obsługa plików importowanych</h3>
+
+  <p>OmegaT przestrzega bardzo dokładnych procedur podczas obsługi plików pamięci tłumaczeniowych (plików TMX). Jeżeli jakiś błąd zostanie znaleziony w takim pliku, OmegaT po prostu nie wczyta go.</p>
+
+  <p>Wiadomo, że niektóre narzędzia w pewnych okolicznościach tworzą nieprawidłowe pliki TMX . Jeśli chcesz używać takich plików jako tłumaczeń odniesienia w OmegaT, muszą one zostać naprawione, jeżeli OmegaT je odrzuci. Naprawy są prostymi operacjami, a OmegaT udzieli ci wskazówek w odpowiednim komunikacie o błędzie. Możesz poprosić <a href="http://groups.yahoo.com/group/OmegaT/">grupę użytkowników</a> o radę, jeśli masz problemy.</p>
+  <hr>
+  <a name="using_OmegaT_TM" id="using_OmegaT_TM"></a>
+
+  <h2>Używanie pamięci tłumaczeniowych OmegaT w innych narzędziach tłumaczeniowych</h2>
+
+  <p>OmegaT eksportuje pliki TMX w wersji 1.4 (zarówno level 1, jak level 2). Eksportowane pliki level 2 nie są standardowymi plikami level 2, ale są wystarczające do wygenerowania prawidłowych dopasowań przez narzędzia tłumaczeniowe obsługujące TMX level 2. Jeżeli potrzebujesz tylko informacji tekstowej (a nie informacji o formatowaniu), użyj pliku level 1 stworzonego przez OmegaT.</p>
+  <hr>
+  <a name="pseudo_translate" id="pseudo_translate"></a>
+  <h2>Pamięć pozornie przetłumaczona</h2>
+  <p>Może się zdarzyć, że chcesz wykonać wstępne przetwarzanie lub inne przetwarzanie segmentów niż to, na co pozwala OmegaT. Na przykład chcesz stworzyć pozorne tłumaczenie do celów testowych.</p>
+  <p>OmegaT pozwala ci stworzyć dodatkowy plik TMX zawierający wszystkie segmenty projektu. Tłumaczenie w tym TMX może być postaci albo<ul><li>tłumaczenie identyczne ze źródłem (domyślnie), albo</li>
+  <li>segment przetłumaczony jest pusty</li></ul>
+  <p>Plik TMX może otrzymać dowolną nazwę, jaką podasz, ale jest dodawane rozszerzenie '.tmx', jeśli nie zostało podane.</p>
+  <P>Generowanie jest uruchamiane w trybie konsoli. Patrz <a href="consoleMode.html">tryb konsoli</a>, aby dowiedzieć się, jak to zrobić.</P>
+  <p>Możesz przetwarzać wygenerowany TMX przy użyciu dowolnego narzędzia. Aby ponownie używać go w OmegaT:<br> zmień jego nazwę na <em>project_save.tmx</em> i umieść go w katalogu <em>omegat</em> twojego projektu.</p>
+  <hr>
+
+  <a name="upgrading_TM" id="upgrading_TM"></a>
+  <h2>Aktualizacja pamięci tłumaczeniowych</h2>
+
+  <p>Poprzednie wersje OmegaT mogły segmentować pliki źródłowe tylko na akapity i niekonsekwentnie numerowały znaczniki formatujące w plikach HTML i plikach Open Document. OmegaT 2.1 może wykrywać i uaktualniać takie pliki TMX na bieżąco, żeby poprawić jakość dopasowań rozmytych i ulepszyć twoje istniejące tłumaczenie -- zatem nie musisz go przerabiać.</p>
+
+  <p>Pamięć tłumaczeniowa projektu zostanie uaktualniona tylko raz i zostanie zapisana w formie uaktualnionej, a odziedziczone pliki TMX będą uaktualnione na bieżąco za każdym razem, gdy projekt będzie wczytywany. Zauważ, że niektóre zmiany w filtrach plików w OmegaT 2.1 mogą prowadzić do całkowicie innej segmentacji, więc w rzadkich przypadkach będziesz musiał uaktualnić swoje tłumaczenie ręcznie.</p>
+  <hr>
+  <table summary="just formatting"  style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a> </td>
+        <td style="text-align: center;"><a href="index.html">Spis treści</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>

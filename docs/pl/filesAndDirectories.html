@@ -1,0 +1,445 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Pliki i katalogi - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h1>Pliki i katalogi OmegaT </h1>
+
+  <ul>
+    <li>
+      <p><a href="#project">Pliki projektu tłumaczenia</a></p>
+    </li>
+
+    <li>
+      <p><a href="#user">Pliki użytkownika</a></p>
+    </li>
+
+    <li>
+      <p><a href="#application">Pliki aplikacji</a></p>
+
+      <p>&nbsp;</p>
+    </li>
+  </ul>
+
+  <p>OmegaT pracuje z trzema typami plików.</p>
+
+  <ul>
+    <li>Pliki projektu tłumaczenia: One stanowią projekt tłumaczenia. Ich utrata może wpłynąć na całość projektu i możliwość ukończenia pracy. Pliki projektu są najważniejszymi plikami w OmegaT. Są to pliki, z którymi będziesz miał do czynienia codziennie podczas tłumaczenia.</li>
+
+    <li>Pliki ustawień użytkownika: są tworzone, kiedy działanie OmegaT jest modyfikowane przez ustawienia dostępne dla użytkownika. Ich utrata zwykle powoduje pracę OmegaT z ustawieniami "fabrycznymi". Może to czasem spowodować niewielki problem, gdy jesteś w trakcie tłumaczenia.</li>
+
+    <li>Pliki aplikacji: są one zawarte w pakiecie, który pobierasz, większość z nich jest niezbędna do prawidłowego funkcjonowania OmegaT. Jeśli z jakiegoś powodu takie pliki zostaną utracone, pobierz lub/i zainstaluj ponownie OmegaT, aby odtworzyć je wszystkie.</li>
+  </ul>
+  <hr>
+
+  <h3><a name="project" id="project"></a>Pliki projektu tłumaczenia</h3>
+
+  <p>Projekt tłumaczenia OmegaT składa się z wielu plików i katalogów.</p>
+
+  <h3><a name="project_location" id="project_location"></a>Położenie plików projektu tłumaczenia</h3>
+
+  <p>Kiedy tworzysz projekt tłumaczenia, OmegaT automatycznie tworzy listę katalogów, które będą później służyły jako miejsca przechowywania plików, tworzy również wiele plików, które będą używane do ustawienia właściwości projektu i do przechowywania pamięci tłumaczeniowej projektu. Domyślnie, wszystkie katalogi projektu tłumaczenia są zgrupowane w głownym katalogu projektu. Inne położenia katalogów można wybrać w czasie tworzenia projektu lub w trakcie tłumaczenia. W ten sposób jest możliwe wybranie istniejących katalogów lub stworzenie katalogów w miejscach zgodnych z twoimi przyzwyczajeniami. Aby zmienić położenie katalogów po utworzeniu projektu, otwórz <strong>Projekt → Właściwości...</strong> i dokonaj niezbędnych zmian.</p>
+
+  <h3><a name="project_list" id="project_list"></a>Lista plików projektu tłumaczenia</h3>
+
+  <p>W oknie dialogowym plików otwieranym przez OmegaT, projekt tłumaczenia będzie wyglądał jak plik z przypisaną do niego ikoną OmegaT. Jednak w przeglądarce plików ten sam projekt tłumaczenia wygląda po prostu jak każdy inny katalog.</p>
+
+  <p><br></p><img src="images/OmegaT_projects_and_subdirectories.png" name=
+  "grafika3" alt="Projekty i podkatalogi OmegaT" id="grafika3" align=
+  "left" border="1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Wybranie pozycji z ikoną OmegaT wystarczy, aby otworzyć projekt. Projekt tłumaczenia  <b>Example_Project</b> z domyślnymi ustawieniami zostanie utworzony jako nowy podkatalog o następującej strukturze:</p>
+
+  <p>&nbsp;</p><img src="images/Omegatproject.png" name="grafika1" alt=
+  "Projekt OmegaT" id="grafika1" align="left" border="0"><br clear="left">Podkatalogi <b>dictionary</b> i <b>glossary</b> są puste w momencie tworzenia nowego projektu. Jest to miejsce dla twoich słowników i glosariuszy, jeśli masz jakieś dostępne dla tego projektu.<h3>Podkatalog "omegat"</h3>
+
+  <dl>
+    <dt>Podkatalog <b>omegat</b> będzie zawierał co najmniej dwa pliki: plik pamięci tłumaczeniowej <em>project_save.tmx</em> (<a href=
+    "translationMemories.html">...</a>) i plik statystyk <em>project_stats.txt (<a href="userInterface.html#files">...</a>)</em> . Plik <em>project_save.tmx</em> jest roboczą pamięcią tłumaczeniową dla projektu. Jeśli funkcja autosave jest aktywna, pamięć ta będzie automatycznie uaktualniana przy wyjściu z programu. Jest to pamięć tłumaczeniowa używana do tworzenia przetłumaczonych plików. Kolejne pliki TMX o nazwach typu project_save.tmx.<i>&lt;data i czas</i>&gt;.bak (<a href=
+    "translationMemories.html#TMX_backup">...</a>) będą później dodawane do tego podkatalogu. Służą one jako kopia zapasowa pamięci tłumaczeniowej projektu i są dodawane za każdym razem, kiedy otwierasz ponownie projekt, w ten sposób zapamiętując jego zawartość, zanim zostanie zmieniona w bieżącej sesji.</dt>
+
+    <dd>Plik <b>stats.txt</b> zawiera statystyki bieżącego projektu i może być otwarty w arkuszu kalkulacyjnym w celu wyświetlenia informacji o ilości segmentów i słów. Informacja, którą zawiera, jest bardziej szczegółowa niż wyświetlana w oknie <em>Pliki projektu</em> .</dd>
+
+    <dd><br clear="left">Pliki <strong>ignored_words.txt</strong> i <strong>learned_words.txt</strong> są zarezerwowane do użytku funkcji sprawdzania pisowni.</dd>
+  </dl>
+
+  <h3>Podkatalog "source"</h3>
+
+  <dl>
+    <dt>Podkatalog "source" jest miejscem na pliki do przetłumaczenia. Możesz również określić nowy podkatalog w oknie projektu i dodać do niego pliki później. Zauważ, że struktura podkatalogu "source" jest całkowicie w twoich rękach. Jeśli pliki do przetłumaczenia umieszczone są w drzewie katalogów, musisz tylko podać nadrzędny katalog, a OmegaT skopiuje je w całości, zachowując strukturę drzewa bez zmian.</dt>
+  </dl>
+
+  <h3>Podkatalog "target"</h3>
+
+  <dl>
+    <dd>Jeśli wybierzesz <strong>Projekt →&nbsp; Utwórz dokumenty docelowe</strong>, kiedy projekt jest otwarty, wszystkie pliki w katalogu <strong>/source/</strong>, przetłumaczone lub nie, zostaną odtworzone w katalogu target z taką samą hierarchią katalogów, zgodnie z aktualnym stanem tłumaczenia. W praktyce oznacza to, że OmegaT łączy informacje o tłumaczeniu zapisane w pliku <strong>/omegat/project_save.tmx</strong> z dokumentami źródłowymi, aby stworzyć zawartość katalogu <strong>/target/</strong>.</dd>
+  </dl>
+
+  <h3>Podkatalog "tm"</h3>
+
+  <dl>
+    <dd>W tym podkatalogu mogą być umieszczone pamięci tłumaczeniowe z poprzednich tłumaczeń. Muszą one mieć format <b>tmx</b> . Użyj dostępnych narzędzi, aby przekształcić pamięci tłumaczeniowe z innych formatów. Zauważ, że project_save.tmx jest pamięcią tłumaczeniową, pośredniczącą między źródłem a końcowymi plikami docelowymi. Dodatkowe pliki pamięci tłumaczeniowej służą do znajdowania najbardziej odpowiednich propozycji tłumaczenia nieprzetłumaczonych segmentów.</dd>
+  </dl>
+
+  <h3>omegat.project</h3>
+
+  <dl>
+    <dd>OmegaT automatycznie tworzy ten plik podczas tworzenia projektu. Zawiera on <a href="projectProperties.html">właściwości projektu</a>. Parametry zawarte w tym pliku mogą być zmieniane w oknie Właściwości projektu.</dd>
+
+    <dt>project_name-omegat.tmx (<a href=
+    "translationMemories.html#TMX_files_location_and_purpose">...</a>)<br> project_name-level1.tmx<br> nazwa_projektu-level2.tmx</dt>
+
+    <dd>Te pliki zawierają segmenty źródłowe i docelowe odpowiadające zawartości katalogu /source/ w czasie ich tworzenia (zwykle po utworzeniu plików przetłumaczonych).</dd>
+  </dl>
+  <hr>
+
+  <h3><a name="user" id="user"></a>Pliki użytkownika</h3>
+
+  <h3><a name="user_location" id="user_location"></a>Położenie plików użytkownika</h3>
+
+  <p>Pliki użytkownika są przechowywane w oddzielnym miejscu, gdzie może mieć do nich dostęp dowolna wersja OmegaT. Położenie zależy od platformy, z której korzystasz:</p>
+
+  <table summary="just formatting" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
+    <col width="33*">
+    <col width="223*">
+
+    <tbody>
+      <tr valign="top">
+        <td width="13%">
+          <p>Windows</p>
+        </td>
+
+        <td width="87%">
+          <dl>
+            <dd><strong>2000 i XP: Documents and Settings\&lt;Nazwa użytkownika&gt;\Application Data\OmegaT</strong></dd>
+
+            <dd><strong>Vista: Users\&lt;Nazwa użytkownika&gt;\AppData\Roaming\OmegaT</strong></dd>
+
+            <dd><strong>Inne: &lt;Położenie&gt;\OmegaT</strong> (&lt;Położenie&gt; odpowiada położeniu katalogu "home" tak jak określa Java.)</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>Linux/Solaris/FreeBSD</dt>
+          </dl>
+        </td>
+
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User Home&gt;/.omegat</strong> (.omegat jest katalogiem, kropka poprzedzająca jego nazwę powoduje, że jest on niewidoczny, chyba że wpisze się <code>ls -a</code> lub równoważne polecenie.)</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>MacOSX</dt>
+          </dl>
+        </td>
+
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User
+            Home&gt;/Library/Preferences/OmegaT</strong></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="13%">
+          <dl>
+            <dt>Inne</dt>
+          </dl>
+        </td>
+
+        <td width="87%">
+          <dl>
+            <dd><strong>&lt;User Home&gt;</strong></dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><a name="user_list" id="user_list"></a>Lista plików użytkownika<br></h3>
+
+  <table summary="just formatting" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
+    <col width="27*">
+    <col width="229*">
+
+    <tbody>
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>log.txt</dt>
+          </dl>
+        </td>
+
+        <td width="89%">
+          <dl>
+            <dd>W tym pliku zapisywane są komunikaty błędów programu Java podczas działania OmegaT. Jeśli wydaje ci się, że OmegaT działa błędnie, ważne jest, aby dołączyć ten plik lub odpowiednią część do <a href=
+            "website.html">zgłoszenia problemów</a>.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>omegat.prefs</dt>
+          </dl>
+        </td>
+
+        <td width="89%">
+          <dl>
+            <dd>Plik xml ze wszystkimi ustawieniami opcji dostępnymi w GUI, jak również danymi o położeniu okna.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>filters.conf</dt>
+          </dl>
+        </td>
+
+        <td width="89%">
+          <dl>
+            <dd>Plik xml ze wszystkimi danymi określanymi w ustawieniach <a href=
+            "fileFilters.html">Filtrów plików</a>.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="11%">
+          <dl>
+            <dt>segmentation.conf</dt>
+          </dl>
+        </td>
+
+        <td width="89%">
+          <dl>
+            <dd>Plik xml ze wszystkimi danymi określanymi w ustawieniach <a href=
+            "segmentation.html">segmentacji zdań</a>.</dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p><br>
+  <br></p>
+  <hr>
+
+  <h3><a name="application" id="application"></a>Pliki aplikacji</h3>
+
+  <p>OmegaT jest dostarczana jako pakiet, który możesz pobrać z SourceForge. W tym rozdziale będziemy brać pod uwagę <a href=
+  "installingAndRunning.html#Other_systems">pakiet niezależny od platformy</a>, który zawiera aplikację w standartowej postaci Java. Pozostałe pakiety zawierają pakiet Linux <code>.tar</code>, instalator Windows - z lub bez Java Runtime Environment, instalator MacOSX i pakiet z kodem źródłowym dla osób rozwijających OmegaT. Pakiet niezależny od platformy może być używany na <strong>dowolnej</strong> platformie z działającym środowiskiem Java 1.5 Runtime Environment, łącznie z platformami, dla których istnieje specyficzny pakiet. Pakiet niezależny od platformy jest dostarczany jako plik spakowany, który trzeba rozpakować do wybranego katalogu przed instalacją. Rozpakowanie jest zwykle wykonywane przez dwukrotne kliknięcie na pobranym pakiecie. Po rozpakowaniu zostanie utworzony katalog o następującej zawartości:</p>
+
+  <table summary="just formatting" border="1" cellpadding="4" cellspacing="0"
+  width="100%">
+    <col width="19*">
+    <col width="237*">
+
+    <tbody>
+      <tr valign="top">
+        <td width="8%">
+          <p><b>Plik/<br> podkatalog</b></p>
+        </td>
+
+        <td width="92%">
+          <p><b>Zawartość</b></p>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">/docs/</td>
+
+        <td width="92%">
+          <dl>
+            <dt>Wszystkie pliki podręcznika użytkownika znajdują się w tym katalogu. Możesz otworzyć je w przeglądarce internetowej, aby mieć dostęp do linków zewnętrznych.</dt>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>/images/</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>Tu znajdują się ikony i logo.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>/lib/</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>Tu znajdują się pliki Javy. Są one niezbędne do prawidłowego działania OmegaT.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>join.html</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>Jest to zwykły plik html, który otwarty w przeglądarce internetowej przekieruje cię do grupy użytkowników OmegaT w Yahoo Groups. Dołączenie do niej nie jest konieczne, ale da ci dostęp do dodatkowych usług, takich jak dostęp do pewnych plików i nieformalnych sondaży, a także możliwość dołączenia do grup dyskusyjnych dotyczących OmegaT. Archiwa grup są ogólnie dostępne i nie trzeba zapisywać się do grupy, aby z nich korzystać.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>changes.txt</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>Dość szczegółowa lista zmian w obecnej wersji w stosunku do poprzednich.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>license.txt</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>The GNU GENERAL PUBLIC LICENSE. Ta licencja pozwala ci wykonywać pewne czynności z programem OmegaT, w tym modyfikować i rozpowszechniać go. Jeśli jesteś zainteresowany modyfikowaniem lub rozpowszechnianiem OmegaT, przeczytaj uważnie ten dokument i upewnij się, że masz świadomość wszystkich konsekwencji przed zrobieniem czegokolwiek. W razie wątpliwosci, nie wahaj się pytać bezpośrednio członków projektu albo wysyłając do nich e-mail ze strony Source Forge, albo wysyłając e-mail do grupy użytkowników.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>doc-license.txt</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>The GNU GENERAL PUBLIC LICENSE. Ta licencja dotyczy dokumentacji. Patrz powyżej.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>readme.txt</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>Ten plik jest bardzo ważny i powinieneś upewnić się, że przeczytałeś go przed uruchomieniem OmegaT. Zawiera on ogólne informacje o programie OmegaT, wskazówki, gdzie znaleźć więcej informacji, jak wesprzeć projekt itd. Jest on przetłumaczony na wiele języków.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>Plik tekstowy składający się z dwóch linii:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Ten plik może być użyteczny, jeżeli zmienisz go w plik wykonywalny (<code>chmod +x OmegaT</code>) z <a href=
+            "installingAndRunning.html#command_line">linii poleceń</a> po upewnieniu się, że jesteś w katalogu <code>/OmegaT_2.1/</code>. Od tej chwili będziesz mógł uruchamiać OmegaT, wywołując ten plik z linii poleceń.</dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT.bat</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dd>Plik batch, używany do uruchamiania programu OmegaT z <a href=
+            "installingAndRunning.html#command_line">linii poleceń</a> Windows. Zawiera on tylko następującą linię:</dd>
+
+            <dd><code>java -jar OmegaT.jar %*</code></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr valign="top">
+        <td width="8%">
+          <dl>
+            <dt>OmegaT.jar</dt>
+          </dl>
+        </td>
+
+        <td width="92%">
+          <dl>
+            <dt>Główna aplikacja OmegaT. Aby uruchomić OmegaT, musisz albo wywołać ten plik z linii poleceń, albo uruchomić go z twojego menedżera plików (zwykle przez dwukrotne kliknięcie na nim).</dt>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <dl>
+    <dd><br>
+    <br></dd>
+  </dl>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

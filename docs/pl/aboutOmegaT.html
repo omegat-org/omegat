@@ -1,37 +1,43 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>About OmegaT - OmegaT 1.6.2 User Manual</title>
+  <link type="text/css" href="./OmegaT.css" rel="stylesheet">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>O programie OmegaT - Podręcznik użytkownika OmegaT 2.1</title>
 </head>
 <body>
-
-<h1>==============================================================================
-  1.  Informacje na temat OmegaT</h1>
-
-<p>OmegaT jest darmowym, wieloplatformowym narzędziem CAT (tłumaczenia wspomaganego komputerowo)</p>
-
-<h2>Pamięć tłumaczeń</h2>
-
-<p>OmegaT rejestruje  tłumaczone przez Ciebie teksty, a także może wykorzystywać pamięć poprzednich tłumaczeń.</p>
-
-<p>Pamięci tłumaczeń mogą być bardzo użyteczne do przekładu tekstów z licznymi powtórzeniami, lub względnie podobnymi fragmentami. OmegaT używa pamięci tłumaczeń co oznacza, że "podsuwa" Ci tłumaczenia fragmentów najbardziej podobnych do aktualnie opracowywanego.</p>
-
-<p>Pamięci tłumaczeń mogą być również bardzo użyteczne, gdy dokument przetłumaczony uprzednio ma być aktualizowany. Zdania które były w poprzedniej wersji pozostają ze starego tłumaczenia, zaś nowe zestawione zostaną ze starszymi wersjami i ich tłumaczeniami jeśli okażą się wystarczająco podobne. Ułatwi to znacznie zmiany w orginalnym dokumencie.</p>
-
-<p>Jeśłi używasz pamięci tlumaczeń utworzonych wcześniej, na przykład dostasrczonych przez agencję lub klienta, będziesz mógł ich używać w programie OmegaT jako odniesienia.</p>
-
-<h2>Obsługa Słownictwa</h2>
-
-<p>Dobre zarządzanie terminologią ma znaczenie dla spójności tekstu. OmegaT korzysta ze zbiorów zawierających tłumaczenia poszczególnych słów i krótkich zwrotów, będących rodzajem dwujęzycznych uproszczonych słowników danej dziedziny. OmegaT wyświetla tłumaczenia słów które odnajdzie w bieżącym segmencie, do użytku tłumacza.</p>
-
-<h2>Proces tłumaczenia</h2>
-
-<p>Wyobraź sobie, że masz przetłumaczyć coś pomiędzy pojednyczym plikiem a katalogiem pełnym plików w hierarchii podkatalogów. A pliki mają różne formaty. Jeśli użyjesz do tego OmegaT, przejrzy on twoje pliki źródłowe, wybierze  <a href="fileFormats.html" title="Obsługiwane formaty plików">pliki w obsługiwanych formatach</a>, otworzy odpowiednie <a href="fileFilters.html" title="Filtry plików">zasady filtrowania</a>, rozpozna fragmenty tekstu w nich zawarte, porozdziela je według <a href="segmentation.html" title="Segmentacja plików żródłowych.">reguł segmentacji</a>, i wyświetli w segmentach jeden po drugim, gotowe do tłumaczenia.</p>
-
-<p>Jeśli chcesz zobaczyć jak wygląda przetłumaczony plik, możesz <a href="userInterface.html" title="Interfejs użytkownika">utworzyć pliki docelowe</a>, otworzyć je w odpowiednim programie i podziwiać efekty swojej pracy.</p>
-
+<table border="0"  cellpadding="4" cellspacing="0" summary="just formatting"
+ frame="below" rules="none" width="100%">
+  <col width="128*"> <col width="128*"> <tbody>
+    <tr valign="top">
+    <td align="left"> 
+      <img src="images/OmegaT_icon.png" name="grafika1"
+ height="128" width="128" alt="Logo OmegaT">
+      </td>
+      <td align="left">
+      <h1>O programie OmegaT</h1>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<p>OmegaT jest wolnym narzędziem CAT [Computer Aided Translation - tłumaczenie wspomagane komputerowo], działającym na różnych platformach, o następujących cechach:</p>
+<h3><a name="tm"></a>Pamięć tłumaczeniowa</h3>
+<p>OmegaT zapamiętuje tłumaczenia w pamięci tłumaczeniowej. Równocześnie może używać pamięci z poprzednich tłumaczeń do porównania. Pamięci tłumaczeniowe mogą być bardzo przydatne przy tłumaczeniu z dużą ilością powtórzeń lub podobnych segmentów tekstu. OmegaT używa pamięci tłumaczeniowych do pamiętania twoich wcześniejszych tłumaczeń oraz sugerowania najbardziej prawdopodobnych tłumaczeń tekstu, nad którym pracujesz.</p>
+<p>Pamięci tłumaczeniowe mogą być bardzo przydatne, kiedy dokument, który został już przetłumaczony, musi zostać uaktualniony. Niezmienione zdania pozostaną takie, jak były przetłumaczone, a zmienione zdania zostaną pokazane ze starszą wersją tego samego zdania jako najbardziej prawdopodobnym tłumaczeniem. Postępowanie z modyfikacjami oryginalnego dokumentu jest więc bardzo łatwe. Jeżeli używasz wcześniej utworzonych pamięci tłumaczeniowych, na przykład dostarczonych przez biuro tłumaczeniowe lub klienta, OmegaT będzie mogła ich użyć jako pamięci odniesienia.</p>
+<p>OmegaT używa standardowego formatu pliku TMX do przechowywania i dostępu do pamięci tłumaczeniowych, co zapewnia możliwość wymieniania materiałów tłumaczenia z innymi aplikacjami CAT obsługującymi ten format pliku.</p>
+<h3><a name="glossary"></a>Zarządzanie terminologią</h3>
+<p>Zarządzanie terminologią jest ważne dla spójności tłumaczenia. OmegaT używa glosariuszy, które zawierają tłumaczenia pojedynczych słów lub krótkich wyrażeń, jest to rodzaj uproszczonego dwujęzycznego słownika dla konkretnej dziedziny. OmegaT wyświetla tłumaczenia tych słów, które znajdują się w bieżącym segmencie, jako odniesienie.</p>
+<h3><a name="process"></a>Proces tłumaczenia</h3>
+<p>Wyobraź sobie, że musisz coś przetłumaczyć - może to być pojedynczy plik lub katalog zawierający podkatalogi z wieloma plikami w różnych formatach. Kiedy poinformujesz program OmegaT, że chcesz przetłumaczyć te pliki,  program wyszuka wśród nich pliki, które obsługuje, zgodnie z zasadami filtrowania plików, rozpozna w nich partie tekstowe, podzieli duże części tekstu zgodnie z zasadami segmentacji i wyświetli segmenty kolejno, aby można było wykonywać tłumaczenie. OmegaT zapamięta twoje tłumaczenia i przedstawi ci propozycje tłumaczenia segmentów podobnych do zapisanych w pamięci. Kiedy chcesz zobaczyć, jak będą wyglądać pliki po przetłumaczeniu, możesz utworzyć pliki docelowe, otworzyć je przy użyciu odpowiedniej aplikacji i zobaczyć, jak wygląda twoje tłumaczenie.</p>
 <hr>
-<p><a href="legalNotices.html" title="uwagi prawne">uwagi prawne</a></p>
-
+<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a> </td>
+      <td style="text-align: center;"><a href="index.html">Spis treści</a>
+      </td>
+      <td style="text-align: right;"><a href="xindex.html">Indeks</a> </td>
+    </tr>
+  </tbody>
+</table>
 </body>
 </html>

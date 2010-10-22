@@ -1,0 +1,268 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Praca z tekstem sformatowanym - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Praca z tekstem sformatowanym</h2>
+
+  <ul>
+    <li>
+      <p><a href="#intro">Znaczniki formatujące</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_segmenting">Segmentacja znaczników i zdań</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_operation">Operacje na znacznikach</a></p>
+    </li>
+
+    <li>
+      <p><a href="#nesting">Zagnieżdżanie grup znaczników</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag-overlapping">Nakładanie się grup znaczników</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_validation">Walidacja grup znaczników</a></p>
+    </li>
+
+    <li>
+      <p><a href="#tag_hints">Podpowiedzi dotyczące zarządzania znacznikami</a></p>
+    </li>
+
+    <li>
+      <p><A href="#printf">Symbole zastępcze funkcji printf</A></p>
+    </li>
+  </ul>
+
+  <p>Informacja o formatowaniu występująca w pliku źródłowym zazwyczaj musi być odtworzona w pliku docelowym. Wbudowana informacja o formatowaniu występująca w obsługiwanych formatach (aktualnie DocBook, HTML, XHTML, Open Document i OpenOffice.org) jest prezentowana w OmegaT jako znaczniki. W normalnym przypadku znaczniki są ignorowane przy porównywaniu różnych tekstów do celów dopasowania. Znaczniki odtworzone w przetłumaczonym segmencie będą występować w przetłumaczonym dokumencie.</p>
+  <hr>
+
+  <h3><a name="intro" id="intro"></a>Znaczniki formatujące</h3>
+
+  <p><a name="naming" id="naming"></a><b>Nazywanie znaczników:</b> Znaczniki składają się z od jednej do trzech liter i liczby. Unikalny numer pozwala na grupowanie odpowiadających sobie znaczników i rozróżnianie znaczników, które mogą mieć ten sam skrót literowy, ale są w rzeczywistości różne. Litery mogą, ale nie muszą, odzwierciedlać rodzaj formatowania, jaki reprezentuje znacznik (np. pogrubienie, kursywa itp.)</p>
+
+  <p><a name="numbering" id="numbering"></a><b>Numeracja znaczników:</b>Znaczniki są numerowane w porządku rosnącym, tworząc <strong>grupy znaczników</strong>.  "Grupami znaczników" nazywamy tu albo pojedynczy znacznik (jak <code><font color=
+  "#FB0000">&lt;br1&gt;</font></code>), albo 2 znaczniki tworzące parę (jak <code><font color="#FB0000">&lt;i0&gt;</font></code> i <code><font color="#FB0000">&lt;/i0&gt;</font></code>). Wewnątrz segmentu pierwsza grupa (para lub pojedynczy znacznik) otrzymuje numer <strong>0</strong>, druga numer <strong>1</strong> itd. Pierwszy z poniższych przykładów ma 3 grupy znaczników (para, pojedynczy znacznik i kolejna para), drugi przykład ma tylko jedną grupę (parę).</p>
+
+  <p><a name="pairs" id="pairs"></a><b>Pary i pojedyncze znaczniki:</b>Znaczniki zawsze występują albo jako pojedyncze, albo w parach. <strong>Pojedyncze znaczniki</strong> wskazują informację o formatowaniu, która nie wpływa na otaczający tekst (na przykład dodatkowy odstęp lub koniec wiersza).</p>
+  <pre>
+ <strong>&lt;segment 2132&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>&lt;Ctr+N&gt;<font color=
+"#FB0000">&lt;/b0&gt;</font>, <font color=
+"#FB0000">&lt;br1&gt;&lt;b2&gt;</font>&lt;Enter&gt;<font color=
+"#FB0000">&lt;/b2&gt;</font><strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#FB0000">&lt;br1&gt;</font></strong></code> jest pojedynczym znacznikiem i nie wpływa na otaczający tekst. <strong>Pary znaczników</strong> zwykle wskazują informację o stylu, odnoszącą się do tekstu pomiędzy znacznikiem otwierającym i znacznikiem zamykającym z pary. Cokolwiek dzieje sie z parą, znacznik otwierający powinien zawsze poprzedzać znacznik zamykający:</p>
+  <pre>
+ <strong>&lt;segment 3167&gt;</strong>Log file (<font color=
+"#FB0000">&lt;b0&gt;</font>log.txt<font color=
+"#FB0000">&lt;/b0&gt;</font>) dla śledzenia operacji i błędów.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p><code><strong><font color="#FB0000">&lt;b0&gt;</font></strong></code> <font size="3">i</font> <code><strong><font color=
+  "#FB0000">&lt;/b0&gt;</font></strong></code> tworzą parę i wpływają na tekst <code><strong>log.txt</strong></code>.</p>
+  <hr>
+
+  <h3><a name="tag_segmenting" id="tag_segmenting"></a>Segmentacja znaczników i zdań</h3>
+
+  <p>OmegaT tworzy swoje znaczniki przed przeprowadzeniem segmentacji zdań. W zależności od zasad segmentacji, może wydawać się, jakby znaczniki nie respektowały powyższych zasad numerowania i grupowania. Spójrz na następujący tekst: "<em>Before: \. After: \s"</em><font color="#FB0000">.</font> <font color="#000000">Można by się spodziewać następującej segmentacji(&lt;b0&gt; i &lt;/b0&gt; stoją na początku i końcu kursywy):</font></p>
+  <pre>
+ <strong>&lt;segment ....&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>Before: \. After: \s<font color=
+"#FB0000">&lt;/b0&gt;</font><strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p>Jednak kiedy zastosuje się do tego segmentu domyślne zasady segmentacji, otrzyma się następujący rezultat:</p>
+  <pre>
+ <strong>&lt;segment 1990&gt;</strong> <font color=
+"#FB0000">&lt;b0&gt;</font>Before: \. <strong>&lt;koniec segmentu&gt;</strong><br>
+<strong>&lt;segment 1991&gt;</strong> After: \s<font color=
+"#FB0000">&lt;/b0&gt;</font><strong>&lt;koniec segmentu&gt;</strong> <br>
+</pre>
+
+  <p>Zastosowanie zasady <i>podziel segment po kropce, po której następuje spacja</i> dzieli oryginalny tekst na dwa segmenty, mimo że dwa znaczniki <code><font color="#FB0000">&lt;b0&gt;</font></code> i <code><font color=
+  "#FB0000">&lt;/b0&gt;</font></code> powinny być w tym samym segmencie. W niektórych przypadkach może to nawet sprawiać problemy przy tłumaczeniu, kiedy znaczniki muszą być umieszczone inaczej w języku docelowym zgodnie z szykiem wyrazów w danym języku (patrz <a href="#tag_operation">Operacje na znacznikach</a> poniżej).</p>
+  <hr>
+
+  <h3><a name="tag_operation" id="tag_operation"></a>Operacje na znacznikach</h3>
+
+  <p>Ze znacznikami należy postępować ostrożnie. Jeżeli zostaną przypadkowo zmienione, formatowanie pliku docelowego może być błędne. Rozsądne podejście to "Nie naprawiaj tego, co nie jest popsute". Dobrze jest jednak wiedzieć, jakie są możliwości i jak z nich korzystać.</p>
+
+  <p><a name="duplication" id="duplication"></a><b>Powielanie grupy znaczników:</b> Aby powielić grupę znaczników, po prostu skopiuj je w wybranym miejscu. Pamiętaj, że w parze znaczników znacznik otwierający musi poprzedzać znacznik zamykający. Formatowanie reprezentowane przez grupę, którą powieliłeś, zostanie zastosowane do części, do której ją skopiowałeś.</p>
+
+  <p>Przykład:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>To formatowanie<font color=
+"#FB0000">&lt;/b0&gt;</font> zostanie skopiowane tutaj.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p>Po skopiowaniu:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>To formatowanie<font color=
+"#FB0000">&lt;/b0&gt;</font> zostało <font color=
+"#FB0000">&lt;b0&gt;</font>skopiowane tutaj<font color=
+"#FB0000">&lt;/b0&gt;</font>.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p><a name="deletion" id="deletion"></a><b>Usuwanie grup znaczników:</b>Aby usunąć grupy znaczników, po prostu usuń je z segmentu. Pamiętaj, że z pary musi być usunięty zarówno znacznik otwierający, jak zamykający, aby zapewnić prawidłowe usunięcie formatowania, w przeciwnym wypadku plik przetłumaczony może zostać uszkodzony. Usuwając grupę znaczników, usuniesz związane z nią formatowanie z pliku przetłumaczonego.</p>
+
+  <p>Przykład:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>To formatowanie<font color=
+"#FB0000">&lt;/b0&gt;</font> zostanie usunięte.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p>Po skasowaniu:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong>To formatowanie zostało usunięte.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p><b>Zmiana kolejności grup znaczników:</b>Aby zmienić kolejność grup znaczników zgodnie z inną strukturą języka w tłumaczeniu, po prostu umieść grupę znaczników tam, gdzie powinna się znajdować w tłumaczeniu. Formatowanie będzie w ten sposób przeniesione razem z częścią, do której się odnosi.</p>
+
+  <p>Przykład:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatowanie zerowe<font color=
+"#FB0000">&lt;/b0&gt;</font> i <font color=
+"#FB0000">&lt;b1&gt;</font>formatowanie pierwsze<font color=
+"#FB0000">&lt;/b1&gt;</font> zostaną zamienione.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p>Po zmianie kolejności:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b1&gt;</font>Formatowanie pierwsze<font color=
+"#FB0000">&lt;/b1&gt;</font> i <font color=
+"#FB0000">&lt;b0&gt;</font>formatowanie zerowe<font color=
+"#FB0000">&lt;/b0&gt;</font> zostały zamienione.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <h3><a name="nesting" id="nesting"></a>Zagnieżdżanie grup znaczników</h3>
+
+  <p>Zmiana kolejności grup znaczników może spowodować zagnieżdżenie grupy znaczników wewnątrz innej grupy znaczników. Wszystko jest w porządku, jeżeli grupa otaczająca całkowicie otacza grupę otaczaną. Inaczej mówiąc, podczas przenoszenia par znaczników upewnij się, że zarówno znacznik otwierający, jak zamykający zostały przeniesione do tekstu docelowego, w przeciwnym wypadku plik przetłumaczony może zostać uszkodzony i może się nie otwierać. Do zagnieżdżonej części będą więc zastosowane oba formatowania.</p>
+
+  <p>Przykład:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatowanie<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;b1&gt;</font>pierwsze<font color=
+"#FB0000">&lt;/b1&gt;</font> zostanie zagnieżdżone wewnątrz formatowania zerowego.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p>Po zagnieżdżeniu:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatowanie <font color=
+"#FB0000">&lt;b1&gt;</font>pierwsze<font color=
+"#FB0000">&lt;/b1&gt;&lt;/b0&gt;</font> zostało zagnieżdżone wewnątrz formatowania zerowego.<strong>&lt;koniec segmentu</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag-overlapping" id="tag-overlapping"></a>Nakładanie się grup znaczników</h3>
+
+  <p>Nakładanie się jest efektem nieprawidłowych operacji na parach znaczników i powoduje uszkodzenie formatowania, a czasem nawet niemożność otwarcia pliku przetłumaczonego. Przykład:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatowanie<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;b1&gt;</font>pierwsze<font color=
+"#FB0000">&lt;/b1&gt;</font> zostanie poplątane.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+
+  <p>Po nieprawidłowej operacji:</p>
+  <pre>
+ <strong>&lt;segment 0001&gt;</strong><font color=
+"#FB0000">&lt;b0&gt;</font>Formatowanie <font color=
+"#FB0000">&lt;b1&gt;</font>pierwsze<font color=
+"#FB0000">&lt;/b0&gt;</font> <font color=
+"#FB0000">&lt;/b1&gt;</font>jest teraz bardzo poplątane.<strong>&lt;koniec segmentu&gt;</strong>
+</pre>
+  <hr>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Walidacja grup znaczników</h3>
+
+  <p>Funkcja walidacji znaczników wykrywa zmienione znaczniki (celowo lub przypadkowo) i pokazuje segmenty, których to dotyczy. Uruchomienie tej funkcji (przez wciśnięcie Ctrl+T lub wybranie pozycji menu Tools &gt; Validate tags) spowoduje otwarcie okna zawierającego wszystkie segmenty w pliku podejrzane o to, że zawierają błędne znaczniki w tłumaczeniu. Błędy w tłumaczonym tekście ze znacznikami są często problemem w plikach OpenDocument lub OpenOffice.org, ponieważ pliki te mogą nie otwierać się z powodu problemów ze znacznikami powstałych procesie tłumaczenia. Poprawianie znaczników i odtwarzanie dokumentów docelowych jest łatwe przy użyciu funkcji Popraw znaczniki. Okno, które otwiera się po wciśnięciu Ctrl+T, pokazuje tabelę składającą się z 3 kolumn z linkiem do segmentu, segmentem oryginalnym i segmentem docelowym:</p><br>
+
+  <table align="center" border="1" width="80%" summary="">
+    <tbody>
+      <tr>
+        <td>1</td>
+
+        <td>Inną czcionkę wyświetlaną można wybrać w oknie dialogowym <strong><font color="blue">&lt;b0&gt;</font></strong>Czcionka wyświetlana<strong><font color="blue">&lt;/b0&gt;</font></strong>. Otwiera się je wybierając pozycję menu <strong><font color=
+        "blue">&lt;i1&gt;</font></strong>Opcje<strong><font color=
+        "blue">&lt;/i1&gt;</font></strong> &gt; <strong><font color=
+        "blue">&lt;i2&gt;</font></strong>Czcionka...<strong><font color=
+        "blue">&lt;/i2&gt;</font></strong>. W oknie dialogowym można zmienić rodzaj i rozmiar czcionki.</td>
+
+        <td>'n Mens kan 'n ander vertoonfont kies met die <strong><font color=
+        "blue">&lt;b0&gt;</font></strong>Vertoonfont<strong><font color=
+        "blue">&lt;/b0&gt;</font></strong>-dialoogkassie. Kies
+        <strong><font color=
+        "blue">&lt;i1&gt;</font></strong>Opstelling<strong><font color=
+        "blue">&lt;/i1&gt;</font></strong> &gt; Vertoonfont... op die kieslys.
+        Die lettertipe én die lettergrootte kan met dié dialoogkassie verander
+        word.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p>Znaczniki są wyświetlone niebieską czcionką pogrubioną, aby ułatwić porównanie zawartości oryginalnej i przetłumaczonej. Kliknij na link, aby uaktywnić segment w oknie Edycji. Popraw błąd, jeśli to konieczne, i wciśnij <code><a href="menu.html#shortcuts">Ctrl+T</a></code>, aby powrócić do okna walidacji znaczników w celu poprawienia innych błędów. Błędy <a href="#intro">znaczników</a> to <a href="#tag_operation">operacje na znacznikach</a> w tłumaczeniu, które nie odtwarzają takiej samej kolejności i numeracji znaczników jak w oryginalnym segmencie. Niektóre operacje na znacznikach są potrzebne i korzystne, niektóre powodują problemy przy tworzeniu dokumentu przetłumaczonego.</p>
+  <hr>
+
+  <h3><a name="tag_hints" id="tag_hints"></a>Podpowiedzi dotyczące zarządzania znacznikami</h3>
+
+  <p>Znaczniki reprezentują pewien rodzaj formatowania tekstu oryginalnego. <strong>Uproszczenie formatowania tekstu oryginalnego</strong> znacząco przyczynia się do zmniejszenia liczby znaczników. Należy rozważyć, jeśli to możliwe, ujednolicenie używanych rodzajów i rozmiarów czcionek, kolorów itd., ponieważ może to uprościć tłumaczenie i ograniczyć możliwość wystąpienia błędów znaczników. Zajrzyj do rozdziału <a href=
+  "#tag_operation">Operacje na znacznikach</a>, aby zobaczyć, co można robić ze znacznikami. Pamiętaj, że jeżeli znaczniki przeszkadzają ci, a formatowanie nie jest szczególnie istotne dla danego tłumaczenia, usunięcie znaczników może być najłatwiejszym rozwiązaniem problemów.</p>
+
+  <p>Jeżeli chcesz widzieć znaczniki w OmegaT, ale nie musisz zachowywać większości formatowania w dokumencie przetłumaczonym, możesz nie włączać znaczników do tłumaczenia. W takim przypadku <strong>zwróć szczególną uwagę na pary znaczników</strong>, ponieważ usunięcie jednej części z pary, a zapomnienie o usunięciu drugiej, na pewno uszkodzi formatowanie twojego dokumentu. Ponieważ znaczniki są zawarte w samym tekście, można użyć <a href=
+  "segmentation.html">Zasad segmentacji</a> do stworzenia segmentów z mniejszą ilością znaczników. Jest to funkcja zaawansowana i wymagane jest pewne doświadczenie, aby korzystać z niej prawidłowo.</p>
+
+  <p><strong>Ważne:</strong> OmegaT nie jest jeszcze w stanie wykrywać błędów formatowania w pełni automatycznie, zatem nie będzie ci podpowiadać, jeśli zrobisz błąd lub zmienisz formatowanie, aby lepiej pasowało do twojego języka docelowego. Czasem jednak twój plik przetłumaczony może wyglądać dziwnie, a w przypadku plików OpenDocument / OpenOffice.org może się nawet nie otwierać.</p>
+
+  <hr>
+
+  <h3><a name="printf"></a>Symbole zastępcze funkcji printf</h3>
+
+  <p>W niektórych językach programowania (np. PHP, C) są używane specjalne znaczniki jako symbole zastępcze w ciągach znaków, które są używane w połączeniu z funkcją printf. Np.:</p>
+  <pre>$var =_("cool");
+echo printf(_("OmegaT is very %s"),$var);</pre>
+
+  <p>Jeżeli tekstowe ciągi znaków są wyodrębnione z takiego kodu źródłowego (np. za pomocą filtra PO), OmegaT nie zastępuje tych zmiennych znacznikami, ponieważ nie wie na pewno, czy np. <code>%s</code> jest rzeczywiście symbolem zastępczym, czy po prostu częścią tekstu. Możesz jednak włączyć walidację tych symboli zastępczych. Wybierz z menu <strong>Opcje → Walidacja znaczników...</strong>. Możesz wybrać walidację uproszczoną lub pełną.</p>
+
+  <p>Oficjalna składnia dla zmiennych funkcji printf jest następująca</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Pełna walidacja w pełni obsługuje ten format, z wyjątkiem <code>WIDTHSPECIFIER</code>. Przy walidacji uproszczonej sprawdzana jest następująca składnia:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Możesz zmienić kolejność symboli zastępczych, ale wtedy musisz dodać ARGUMENTSWAPSPECIFIER, jeśli go nie ma. Oznacza to dodanie numeru kolejnego i znaku dolara po znaku <code>%</code>. Np. <code>"%s is a %s application"</code> jest równoważne <code>"%1$s is a %2$s application"</code>, co możesz przetłumaczyć jako <code>"a %2$s application is %1$s"</code>.</p>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

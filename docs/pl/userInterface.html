@@ -1,0 +1,564 @@
+<html>
+<head>
+  <link type="text/css" href="./OmegaT.css" rel="stylesheet">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Interfejs użytkownika - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Interfejs użytkownika</h2>
+
+  <table summary="just formatting" border="0" cellpadding="0" cellspacing="0"
+  width="100%">
+    <tbody>
+      <tr>
+        <td>
+          <ul>
+            <li>
+              <p><a href="#item">Elementy interfejsu użytkownika</a></p>
+
+              <ul>
+                <li>
+                  <p><a href="#most">Okna, z których będziesz korzystał przez większość czasu</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#some">Okna, z których możesz korzystać od czasu do czasu</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#dialogs">Okna dialogowe, z których będziesz korzystać w celu zmiany ustawień twojego projektu</a></p>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <p><a href="#OmegaT_Main_Window">Okno główne OmegaT</a></p>
+
+              <ul>
+                <li>
+                  <p><a href="#Editor">Okno Edycja</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#Match">Okno Dopasowania rozmyte</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#Glossary">Glosariusze</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#Glossary">Glosariusze</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#Dictionaries">Słowniki</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#Google_Translate">Google Translate</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#menu">Menu główne</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#bar">Pasek statusu</a></p>
+                </li>
+              </ul>
+            </li>
+
+            <li>
+              <p><a href="#dialogs">Okna dialogowe, z których będziesz korzystać w celu zmiany ustawień twojego projektu</a></p>
+            </li>
+          </ul>
+        </td>
+
+        <td>
+          <ul>
+            <li>
+              <p><a href="#Other_windows">Inne okna</a></p>
+
+              <ul>
+                <li>
+                  <p><a href="#files">Pliki projektu</a></p>
+
+                  <ul>
+                    <li>
+                      <p><a href="#proj_files">Właściwości okna Pliki projektu</a></p>
+                    </li>
+
+                    <li>
+                      <p><a href="#unique">Segmenty niepowtarzające się</a></p>
+                    </li>
+
+                    <li>
+                      <p><a href="#adding_files">Dodawanie plików do projektu</a></p>
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <p><a href="#search">Okno wyszukiwania</a></p>
+
+                  <ul>
+                    <li>
+                      <p><a href="#search_types">Rodzaje wyszukiwania</a></p>
+                    </li>
+
+                    <li>
+                      <p><a href="#wildcards_regexp">Symbole wieloznaczne i wyrażenia regularne</a></p>
+                    </li>
+
+                    <li>
+                      <p><a href="#search_display">Wyświetlanie wyników wyszukiwania</a></p>
+                    </li>
+                  </ul>
+                </li>
+
+                <li>
+                  <p><a href="#tag_validation">Walidacja znaczników</a></p>
+                </li>
+
+                <li>
+                  <p><a href="#manual">Przeglądarka pomocy</a></p>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="item" id="item"></a>Elementy interfejsu użytkownika</h2>
+
+  <h3><a name="most" id="most"></a>Okna, z których będziesz korzystał przez większość czasu</h3>
+
+  <table summary="just formatting" border="0" cellpadding="0" cellspacing="0"
+  width="100%">
+    <col width="43*">
+    <col width="213*">
+
+    <tbody>
+      <tr>
+        <td width="24%">
+          <p><strong>Okno główne OmegaT</strong></p>
+        </td>
+
+        <td width="83%">
+          <p>zawiera menu główne, pasek statusu i trzy okna:</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="24%">
+          <p>--- okno Edycja</p>
+        </td>
+
+        <td width="83%">
+          <p>w którym piszesz i edytujesz tłumaczenie</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="24%">
+          <p>--- okno Dopasowania rozmyte</p>
+        </td>
+
+        <td width="83%">
+          <p>zawierające najbardziej podobne segmenty z pamięci tłumaczeniowych</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="24%">
+          <p>--- okno Glosariusze</p>
+        </td>
+
+        <td width="83%">
+          <p>zawierające tłumaczenie terminologii</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="24%">
+          <p><strong>Okno Pliki projektu</strong></p>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>zawierające listę twoich plików do tłumaczenia, wywoływane za pomocą <code>Ctrl+L</code>, zamykane za pomocą <code>esc</code></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="24%">
+          <dl>
+            <dt><strong>Okno wyszukiwania</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>do wyszukiwania konkretnych segmentów w projekcie, wywoływane za pomocą <code>Ctrl+F</code>, zamykane za pomocą <code>esc</code></dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><a name="some" id="some"></a>Okna, z których możesz korzystać od czasu do czasu</h3>
+
+  <table summary="just formatting" border="0" cellpadding="0" cellspacing="0"
+  width="100%">
+    <col width="43*">
+    <col width="213*">
+
+    <tbody>
+      <tr>
+        <td width="23%">
+          <dl>
+            <dt><strong>Okno walidacji znaczników</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>do sprawdzania błędów dotyczących znaczników w tłumaczeniach, wywoływane za pomocą <code>Ctrl+T</code>, zamykane za pomocą <code>esc</code></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="23%">
+          <dl>
+            <dt><strong>Przeglądarka pomocy</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>do czytania podręcznika użytkownika, zamykane za pomocą<code><b>esc</b></code></dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3><a name="dialogs" id="dialogs"></a>Okna dialogowe, z których będziesz korzystać w celu zmiany ustawień twojego projektu</h3>
+
+  <p>Z poniższych okien dialogowych będziesz korzystać w celu zmiany ustawień programu OmegaT i projektu. Wszystkie z nich są opisane w oddzielnych rozdziałach, poniżej tylko streszczamy, do czego mogą one być użyte i jak możesz je wywołać:</p>
+
+  <p><br></p>
+
+  <table summary="just formatting" border="0" cellpadding="0" cellspacing="0"
+  width="100%">
+    <col width="43*">
+    <col width="213*">
+
+    <tbody>
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>Właściwości projektu</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>do zmiany katalogów i języków projektu, wywoływane za pomocą <code>Ctrl+E</code> lub za pomocą <strong>Projekt → Właściwości...</strong>, zamykane za pomocą <code>esc</code></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>Czcionka</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>do zmiany czcionki, jakiej OmegaT używa do wyświetlania źródła, tłumaczenia, dopasowań i terminów glosariuszowych, wywoływane za pomocą <strong>Opcje → Czcionka...</strong>, zamykane za pomocą <code>esc</code></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>Filtry plików</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>do dostosowania traktowania obsługiwanych formatów plików, wywoływane za pomocą <strong>Opcje → Filtry plików...</strong>, zamykane za pomocą <code>esc</code></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>Segmentacja</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>do zmiany sposobu, w jaki twój tekst jest segmentowany na zdania, wywoływana za pomocą <strong>Opcje → Ustawienia segmentacji</strong>, zamykana za pomocą <code>esc</code></dd>
+          </dl>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="17%">
+          <dl>
+            <dt><strong>Parametry edytora</strong></dt>
+          </dl>
+        </td>
+
+        <td width="83%">
+          <dl>
+            <dd>do zmiany zachowania programu OmegaT, kiedy przemieszczasz się między segmentami, wywoływane za pomocą <strong>Opcje → Parametry edytora...</strong>, zamykane za pomocą <code>esc</code></dd>
+          </dl>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+  <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
+
+  <h2>Okno główne OmegaT</h2><img src="images/OmegaT_panes.png" name="grafika1"
+  alt="Okna (panele) OmegaT" id="grafika1" border="0"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Okno główne składa się z kilku okien (paneli), menu głównego i paska statusu. Możesz zmienić położenie dowolnego okna lub nawet odłączyć je do oddzielnego okna przeciągając okno za jego tytuł. Zależnie od statusu okna, różne znaki mogą pojawić się w jego prawym górnym rogu:</p>
+
+  <p><img src="images/Minimize.gif" name="graphics1" alt="Minimalizuj" id=
+  "graphics1" align="bottom" border="0" height="18" width="18">zmniejsza okno, pokazując tylko jego nazwę na dole, koło paska statusu.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maksymalizuj" id="graphics2"
+  align="bottom" border="0" height="18" width="18"> sprawia, że okno zajmuje całą dostępną przestrzeń okna.<br> <img src="images/Restore.gif" name="graphics3" alt="Przywróć" id="graphics3"
+  align="bottom" border="0" height="18" width="18"> umieszcza okno z powrotem tam, gdzie było zanim zostało zmniejszone lub powiększone.<br> <img src="images/Undock.gif" name="graphics4" alt="Odłącz" id="graphics4"
+  align="bottom" border="0" height="18" width="18"> odłącza okno od okna głównego do oddzielnego okna.<br> <img src="images/Dock.gif" name="graphics5" alt="Dołącz" id="graphics5" align=
+  "bottom" border="0" height="18" width="18"> umieszcza okno z powrotem wewnątrz okna głównego.</p>
+
+  <p>Jest także możliwe umieszczenie okien tak, aby się nakładały. W tym przypadku okna będą wyświetlać na górze zakładkę. Kliknięcie na tej zakładce spowoduje wyciągnięcie danego okna na wierzch. Separatory pomiędzy oknami można przeciągać, aby zmienić wielkość okien.</p>
+
+  <p>Liczniki w prawym dolnym rogu śledzą postęp tłumaczenia:</p>
+
+  <p><img alt="liczniki menu głównego" title="liczniki menu głównego" src=
+  "images/Main_pane_counters.png"></p>
+
+  <table summary="" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td>31/34</td>
+
+        <td>liczba segmentów -&nbsp;przetłumaczonych / całkowita, dla bieżącego pliku</td>
+      </tr>
+
+      <tr>
+        <td>2530/2605</td>
+
+        <td>liczba segmentów niepowtarzających się - przetłumaczonych / całkowita w projekcie</td>
+      </tr>
+
+      <tr>
+        <td>3196</td>
+
+        <td>całkowita liczba segmentów (w tym segmenty powtarzające się) w projekcie</td>
+      </tr>
+
+      <tr>
+        <td>39/53</td>
+
+        <td>liczba słów w segmencie źródłowym i docelowym&nbsp;</td>
+      </tr>
+    </tbody>
+  </table><br>
+
+  <h3><a name="Editor" id="Editor"></a>Okno Edycja</h3>
+
+  <p>Tutaj będziesz wpisywać i edytować tłumaczenie. Okno edycji wyświetla tekst częściowo przetłumaczonego dokumentu: tekst już przetłumaczony jest wyświetlany jako przetłumaczony, a tekst jeszcze nieprzetłumaczony jest wyświetlany w języku oryginalnym. Wyświetlany tekst jest podzielony na segmenty, możesz przewijać dokument i kliknąć dwukrotnie na dowolnym segmencie, aby go edytować. W powyższym przypadku już przetłumaczone segmenty nie są wyraźnie zaznaczone; możesz jednak zmienić ustawienia zgodnie z twoimi upodobaniami - na przykład, zaznaczać je na żółto (patrz menu <a href="menu.html">Widok</a>).</p>
+
+  <p>Jeden z segmentów jest segmentem aktywnym. Jest to jedyny segment, który jest wyświetlany w dwóch częściach: górna część jest w języku oryginalnym, wyświetlana czcionką pogrubioną, na zielonym tle, dolna część to pole edycyjne, ograniczone dwoma znacznikami: znacznik z lewej strony to <strong><code>&lt;segment nnnn&gt;</code></strong>, gdzie <strong><code>nnnn</code></strong> jest numerem segmentu w projekcie, znacznik z prawej strony to <strong><code>&lt;koniec segmentu&gt;</code></strong>. Górnej części używasz jako odniesienia, a nadpisujesz lub zmieniasz zawartość pola edycyjnego twoim tłumaczeniem.</p>
+
+  <p>Zależnie od <a href="translationEditing.html">Parametrów edytora</a> pole edycyjne nieprzetłumaczonego segmentu może być puste, zawierać tekst źródłowy albo tłumaczenie ciągu znaków najbardziej podobnego do tego, który masz przetłumaczyć. Kiedy przemieszczasz się do innego segmentu, tłumaczenie jest zatwierdzane i przechowywane. Jeśli chcesz, żeby segment pozostał nieprzetłumaczony, po prostu zostaw pole edycyjne puste, usuwając cały tekst (zaznacz wszystko za pomocą <code>Ctrl+A</code> i usuń za pomocą <code>Del</code>). OmegaT może zapamiętać tłumaczenie, kiedy jest ono identyczne ze źródłem. Jest to przydatne przy dokumentach, które zawierają znaki handlowe, nazwy lub inne rzeczowniki własne, lub części w trzecim języku, które nie wymagają tłumaczenia.</p>
+
+  <p>Więcej informacji w części <a href="translationEditing.html">Edycja tłumaczenia</a>.</p>
+
+  <h3><a name="Match" id="Match"></a>Okno Dopasowania rozmyte</h3>Okno dopasowań rozmytych pokazuje najbardziej podobne segmenty z <a href="translationMemories.html">pamięci tłumaczeniowych</a>, zarówno z pamięci tłumaczeniowej projektu utworzonej podczas tłumaczenia twojego projektu, jak z odziedziczonych pamięci tłumaczeniowych, które importujesz z twoich wcześniejszych prac lub możesz otrzymać od twojego klienta albo biura tłumaczeń.<br>
+  <img src="images/MatchesPane.png" name="grafika2" alt="Okno dopasowań OmegaT" id=
+  "grafika2" align="left" border="0"><br clear="left">
+
+  <p><br></p>
+
+  <p>Kiedy przemieszczasz się do następnego segmentu, pierwsze dopasowanie rozmyte (z najwyższym procentem dopasowania) jest automatycznie wybierane. Wybrane dopasowanie rozmyte będzie zaznaczone <strong>pogrubieniem</strong>, słowa brakujące w segmencie, który tłumaczysz, będą zaznaczone kolorem <strong><font color=
+  "#0000FF">niebieskim</font></strong>, a słowa sąsiadujące z brakującymi częściami - kolorem <font color="#00FF00"><b>zielonym</b></font>. &nbsp;Możesz <a href=
+  "menu.html#shortcuts">wybrać</a> inne dopasowanie wciskając <code>Ctrl+2</code>, <code>3</code>, <code>4</code> lub <code>5</code>. Oczywiście, wciśnięcie <code>Ctrl+5</code> nie spowoduje niczego, jeśli nie ma dopasowania nr 5. Aby użyć <strong>wybranego</strong> dopasowania w twoim tłumaczeniu, użyj <code><a href="menu.html#shortcuts">Ctrl+R</a></code>, żeby zastąpić pole docelowe tym dopasowaniem lub użyj <code><a href=
+  "menu.html#shortcuts">Ctrl+I</a></code>, żeby wstawić je w pozycji kursora.</p>
+
+  <p>Procent dopasowania - tj. miara różnicy między segmentem źródłowym a propozycjami dopasowania - jest w przybliżeniu równy liczbie wspólnych słów w dopasowywanym i pasującym segmencie, podzielonej przez liczbę słów w dłuższym z nich. W przypadku użycia wtyczki tokenizer, słowa w dwóch segmentach zostają najpierw zredukowane do rdzenia. Albo słowa są pozostawiane bez zmian, a tylko interpunkcja, liczby i znaczniki są ignorowane. Wreszcie, różnice w znacznikach, liczbach i interpunkcji - które były ignorowane w dwóch pierwszych przypadkach - mogą być uwzględnione w obliczeniu. Okno dopasowań rozmytych wyświetla te trzy miary w następujący sposób:</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
+  "font-style: italic;">% dopasowania, kiedy użyta jest wtyczka tokenizer / % dla domyślnego dopasowywania OmegaT / % dopasowania z uwzględnieniem znaczników, liczb i interpunkcji</span>&gt;&nbsp;<p>W powyższym przykładzie pierwsze dwie miary (46/46) są równe, ponieważ tokenizer nie został użyty. Trzeci procent (39) jest mniejszy, z powodu różnic w interpunkcji i znacznikach.</p>
+
+  <p>Jeżeli nie jest obok wyświetlona żadna nazwa pliku, dopasowanie pochodzi z domyślnej pamięci tłumaczeniowej projektu. Segmenty osierocone (dopasowanie nr 1) oznaczają segmenty w domyślnej pamięci tłumaczeniowej projektu bez odpowiadającego im tekstu w plikach źródłowych. W powyższym przypadku oryginalne zdanie, już przetłumaczone przy użyciu programu OmegaT, zostało później zmienione.<br></p>
+
+  <h3><a name="Glossary" id="Glossary"></a>Glosariusze</h3>
+
+  <p>Okno Glosariusze daje ci dostęp do twojego prywatnego zbioru wyrażeń i specjalistycznej terminologii, które zgromadziłeś w swoich <a href=
+  "glossaries.html">plikach glosariuszy</a>. Pokazuje tłumaczenia terminów znalezionych w bieżącym segmencie, ale pokazuje je tylko w celu porównania i nie pozwala wstawiać lub zastępować terminów ich tłumaczeniem.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="Okno Glosariusze programu OmegaT" id=
+  "grafika3" align="left" border="0"><br clear="left">
+
+  <p><br></p>
+
+  <p>Segment źródłowy w powyższym przykładzie to “<i>In most translation jobs it is considered important to have the translated document look similar to the original.</i>”, a dwa słowa z niego, "document" i "translation" zostały odnalezione w pliku glosariusza. OmegaT obsługuje także terminy złożone z wielu słów, ale w bardzo uproszczony sposób: jeśli obydwa słowa terminu zostaną znalezione w bieżącym segmencie, termin zostanie wyświetlony.</p><br>
+
+  <h3><a name="Dictionaries" id="Dictionaries"></a>Słowniki</h3>
+
+  <p><a href="dictionaries.html">Słowniki</a> to elektroniczne wersje drukowanych słowników MerriamWebsters, Duden, Larousse itd., które możesz trzymać na swoim biurku.</p><br>
+
+  <h3><a name="Google_Translate" id="Google_Translate"></a>Google
+  Translate</h3>
+
+  <p>Jeśli opcja Google Translate została uaktywniona w Menu → Opcje, to okno <a href=
+  "GoogleTranslate.html">Google Translate</a> będzie pokazywać tłumaczenie bieżącego segmentu za pomocą Google Translate, które możesz wstawić do docelowej części segmentu.</p><br>
+
+  <h3><a name="menu" id="menu"></a>Menu główne</h3>
+
+  <p>Jest oczywiste, że z Menu głównego możesz mieć dostęp do wszystkich funkcji OmegaT. W części <a href="menu.html#menu">Menu główne</a> znajdziesz pełny opis wszystkich menu i pozycji menu. Najczęściej używane funkcje są dostępne za pomocą <a href="menu.html#shortcuts">skrótów klawiszowych</a>, więc kiedy przyzwyczaisz się do nich, nie będzie więcej potrzeby przeglądania menu podczas tłumaczenia.</p>
+
+  <h3><a name="bar" id="bar"></a>Pasek statusu</h3>
+
+  <p>Pasek statusu na dole okna głównego wyświetla komunikaty związane z przebiegiem pracy . Ten pasek daje użytkownikowi zwrotne komunikaty o trwających operacjach. Wyświetla także liczbę dopasowań rozmytych i glosariuszowych dla bieżącego segmentu.</p>
+  <hr>
+
+  <h2><a name="other_windows" id="other_windows"></a>Inne okna</h2>
+
+  <h3><a name="files" id="files"></a>Pliki projektu</h3>
+
+  <p>Okno Pliki projektu wyświetla listę plików projektu i inne informacje o projekcie. Jest ono wyświetlane automatycznie, kiedy OmegaT wczytuje projekt. Aby je zamknąć, użyj <code>esc</code>, aby otworzyć lub wywołać je na wierzch użyj <code>Ctrl+L</code>.</p>
+
+  <h3><a name="proj_files" id="proj_files"></a>Właściwości okna Pliki projektu</h3>
+
+  <p>Wyświetlana jest następująca informacja.</p>
+
+  <ul>
+    <li>
+      <p>lista wszystkich plików do przetłumaczenia w projekcie. Są to pliki znajdujące się w katalogu plików źródłowych, które <a href=
+      "filesToTranslate.html">OmegaT umie obsługiwać</a>. Kliknięcie na dowolnym pliku otworzy go do tłumaczenia</p>
+    </li>
+
+    <li>
+      <p>plik aktualnie dostępny w oknie Edycji jest zaznaczony niebieskim kolorem tła</p>
+    </li>
+
+    <li>
+      <p>liczba segmentów w każdym pliku jest pokazana obok nazwy pliku.</p>
+    </li>
+
+    <li>
+      <p>liczba segmentów niepowtarzających się w całym projekcie.</p>
+    </li>
+
+    <li>
+      <p>liczba segmentów niepowtarzających się już przetłumaczonych. Jest ona uaktualniana za każdym razem, kiedy tłumaczysz segment.</p>
+    </li>
+  </ul>
+
+  <h3><a name="unique" id="unique"></a>Segmenty niepowtarzające się</h3>
+
+  <p>Zestaw <strong>Niepowtarzających się</strong> segmentów jest wyliczany przez wzięcie wszystkich segmentów i usunięcie wszystkich powtórzonych segmentów z uwzględnieniem wielkości liter ("Run" i "run" są uznawane za różne).</p>
+
+  <p>Różnica między "Liczbą segmentów" a "Liczbą segmentów niepowtarzających się" daje ci przybliżone pojęcie o liczbie powtórzeń w tekście. Zauważ jednak, że liczby nie mówią, jak istotne są powtórzenia: mogą one oznaczać dość długie zdania powtórzone kilka razy (bardzo szczęśliwie!) lub mogą opisywać tabelę słów kluczowych (nie tak szczęśliwie...). Plik <code>project_stats.txt</code> znajdujący się w katalogu <code>/omegat</code> twojego projektu zawiera bardziej szczegółowe informacje o segmentach w pliku.</p>
+
+  <p>Jest możliwa zmiana liczby segmentów/niepowtarzających się segmentów przez zmianę zasad segmentacji. Tego jednak powinieneś unikać za wszelką cenę, od kiedy zacząłeś tłumaczenie projektu. Więcej informacji - patrz <a href=
+  "segmentation.html">Zasady segmentacji</a>.</p>
+
+  <h3><a name="adding_files" id="adding_files"></a>Dodawanie plików do projektu</h3>
+
+  <p>Możesz dodać pliki źródłowe do projektu klikając na pozycję menu "Importuj pliki źródłowe...". Kopiuje ona wybrane pliki do katalogu <code>/source</code> i wczytuje projekt ponownie, żeby wczytać nowe pliki. Możesz także dodać pliki źródłowe ze stron internetowych, napisane w MediaWiki, klikając na "Importuj z MediaWiki" i podając odpowiedni adres.</p>
+
+  <h3><a name="search" id="search"></a>Okno wyszukiwania</h3>
+
+  <p>Z okna wyszukiwania będziesz korzystać do szukania konkretnych segmentów w projekcie. Kilka okien wyszukiwania może być otwartych równocześnie. Aby otworzyć nowe, użyj <code><a href="menu.html#shortcuts">Ctrl+F</a></code> w oknie głównym. Okno wyszukiwania składa się z pola tekstowego, w którym wpisuje się szukany ciąg znaków lub słowa kluczowe, flag i przełączników do ustawiania wyszukiwania oraz pola wyświetlania zawierającego rezultaty wyszukiwania.</p>
+
+  <h3><a name="search_types" id="search_types"></a>Rodzaje wyszukiwania</h3>
+
+  <dl>
+    <dt>Możliwe są dwa <a href="searches.html#searchmethods">rodzaje</a> wyszukiwania:</dt>
+
+    <dt><strong>wyszukiwanie dokładne - </strong>szuka podanego ciągu znaków w bieżącym projekcie albo w dowolnym katalogu lub drzewie katalogów.</dt>
+
+    <dt><strong>wyszukiwanie słów kluczowych - </strong> sprawdza bieżący projekt i zwraca wszystkie segmenty zawierające wszystkie podane ciągi znaków, w dowolnej kolejności.</dt>
+  </dl>
+
+  <p>Wyszukiwanie jest przeprowadzane zarówno w źródle, jak w tłumaczeniu. Możesz również szukać w dowolnym katalogu, ale pamiętaj, że OmegaT może szukać tylko w <a href=
+  "filesToTranslate.html">plikach, jakie obsługuje</a>.</p>
+
+  <h3><a name="wildcards_regexp" id="wildcards_regexp"></a>Symbole wieloznaczne i wyrażenia regularne</h3>
+
+  <p>Wyszukiwanie obsługuje <a href="searches.html#usingwildcards">symbole wieloznaczne</a> * i ? oraz <a href=
+  "searches.html#usingregularexpressions">wyrażenia regularne</a>.</p>
+
+  <h3><a name="search_display" id="search_display"></a>Wyświetlanie wyników wyszukiwania</h3>
+
+  <p>Wciśnięcie klawisza Szukaj po wpisaniu ciągu znaków w polu Wyszukaj spowoduje wyświetlenie wszystkich segmentów w projekcie zawierających szukany ciąg znaków.</p>
+
+  <p>Ponieważ OmegaT traktuje wszystkie identyczne segmenty jak jedną jednostkę, tylko pierwszy z identycznych segmentów jest pokazywany. Wybierz "Wyświetl wszystkie rezultaty", jeśli chcesz wyświetlić wszystkie wystąpienia identycznych segmentów. Segmenty pojawią się w kolejności występowania w projekcie. Przetłumaczone segmenty zostaną wyświetlone z oryginalnym tekstem na górze i przetłumaczonym tekstem na dole, nieprzetłumaczone segmenty zostaną wyświetlone tylko z oryginalnym tekstem.</p>
+
+  <p>Możesz kliknąć na segmencie, żeby przywołać go w oknie Edycji w celu modyfikacji. Następnie możesz przełączyć się z powrotem do okna wyszukiwania i przejść do następnego znalezionego segmentu, żeby zmienić go również. Taki sposób postępowania jest przydatny do wykonywania uaktualnień terminologii.</p>
+
+  <h3><a name="tag_validation" id="tag_validation"></a>Walidacja znaczników</h3>
+
+  <p>Okno walidacji znaczników wykrywa błędy znaczników w tłumaczeniu i wyświetla ich listę. Aby otworzyć to okno, użyj <code><a href=
+  "menu.html#shortcuts">Ctrl+T</a></code>. Okno zawiera tabelę złożoną z 3 kolumn z linkami do segmentu i jego zawartości źródłowej i docelowej:</p>
+
+  <p><img src="images/TagValidator.png" name="grafika4" alt=
+  "Walidacja znaczników OmegaT" id="grafika4" align="left" border="0"><br clear=
+  "left">
+  <br>
+  <br></p>
+
+  <p>Znaczniki są wyświetlone niebieską czcionką pogrubioną, aby ułatwić porównanie zawartości oryginalnej i przetłumaczonej. Kliknij na link, aby przenieść się do danego segmentu w oknie Edycji. Popraw błąd, jeśli to konieczne, i wciśnij <code><a href="menu.html#shortcuts">Ctrl+T</a></code>, aby powrócić do okna walidacji znaczników w celu poprawienia innych błędów. W pierwszym i trzecim przypadku powyżej znaczniki są nieprawidłowo połączone w pary, a w drugim przypadku w znaczniku otwierającym brakuje znaku &lt; .</p>
+
+  <p>Błędy <a href="formattedText.html#intro">znaczników</a> to <a href=
+  "formattedText.html#tag_operation">operacje na znacznikach</a> w tłumaczeniu, które nie odpowiadają liczbie znaczników i ich kolejności w oryginalnym segmencie. Niektóre operacje na znacznikach są potrzebne i korzystne, niektóre powodują problemy przy tworzeniu dokumentu przetłumaczonego. Znaczniki reprezentują pewien rodzaj formatowania tekstu oryginalnego. <strong>Uproszczenie formatowania tekstu oryginalnego</strong> znacząco przyczynia się do zmniejszenia liczby znaczników.</p>
+
+  <h3>Przeglądarka pomocy</h3>
+
+  <p>Przeglądarka pomocy (która wyświetla ten podręcznik) może zostać przywołana przez wciśnięcie <a href="menu.html#shortcuts">F1</a> albo wybranie <strong>Pomoc → Podręcznik użytkownika...</strong> z <a href="menu.html">menu głównego</a>.</p>
+
+  <h3><a name="manual" id="manual"></a>Poruszanie się po przeglądarce pomocy</h3>
+
+  <p>W oknie zobaczysz podręcznik i dwa klawisze: <strong>Wstecz</strong> i <strong>Spis</strong>. Podręcznik użytkownika jest dokumentem HTML z linkami do różnych rozdziałów. Kliknięcie na link, tak jak zrobiłbyś w przeglądarce internetowej, przywołuje żądaną stronę.</p>
+
+  <h3>Przeglądanie podręcznika użytkownika bez podłączenia do internetu</h3>
+
+  <p>Podręcznik użytkownika znajduje się w podkatalogu <code>docs</code> w katalogu instalacyjnym OmegaT, więc możesz zobaczyć dokumentację, na przykład angielską, otwierając plik <code>docs/en/index.html</code> w twojej przeglądarce. W ten sposób będziesz mógł korzystać również z zewnętrznych linków, bo wbudowana przeglądarka pomocy nie udostępnia zewnętrznych linków internetowych.</p>
+  <hr>
+
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

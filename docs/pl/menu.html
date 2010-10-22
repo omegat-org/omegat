@@ -1,0 +1,1199 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Menu OmegaT i skróty klawiszowe - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Menu główne i skróty klawiszowe</h2>
+
+  <h3><a href="#menu">Menu główne</a></h3>
+
+  <h3><a href="#shortcuts">Skróty klawiszowe</a></h3>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">Zarządzanie projektem</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">Edycja</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">Poruszanie się po dokumencie</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">Okna pomocnicze</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">Inne</a></p>
+    </li>
+  </ul>
+  <hr>
+
+  <h2><a name="menu" id="menu"></a>Menu główne</h2>
+
+  <p>Wszystkie funkcje OmegaT są dostępne z paska menu w górze okna Edycji. Większość funkcji jest również dostępna przez <a href=
+  "#shortcuts">skróty klawiszowe</a>. Skróty klawiszowe polegają na wciśnięciu klawisza <strong>Ctrl</strong> i litery. Niektóre skróty wymagają użycia innych klawiszy. Dla większej czytelności, w tekście użyto dużych liter. Klawisz <strong>Ctrl</strong> jest używany w systemach operacyjnych Windows, UNIX i unixopodobnych z klawiaturami, na których znajduje się klawisz <strong>Ctrl</strong> / <strong>Control</strong>. Użytkownicy MacIntosha powinni czytać to jako <strong>cmd+key</strong>. Klawisz <strong>cmd</strong> na klawiaturach Apple ma albo napis <strong>command</strong>, albo znak <strong>apple</strong>.</p>
+
+  <table summary="just formatting" border="1" cellpadding="3" cellspacing="0"
+  width="500">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p align="center"><a href="#ProjectMenu">Projekt</a></p>
+        </td>
+
+        <td>
+          <p align="center"><a href="#EditMenu">Edytuj</a></p>
+        </td>
+
+        <td>
+          <p align="center"><a href="#GoToMenu">Przejdź do</a></p>
+        </td>
+
+        <td>
+          <p align="center"><a href="#ViewMenu">Widok</a></p>
+        </td>
+
+        <td>
+          <p align="center"><a href="#ToolsMenu">Narzędzia</a></p>
+        </td>
+
+        <td>
+          <p align="center"><a href="#OptionsMenu">Opcje</a></p>
+        </td>
+
+        <td>
+          <p align="center"><a href="#HelpMenu">Pomoc</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <table summary="just formatting" border="0" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ProjectMenu" id="ProjectMenu"></a>Projekt</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Nowy</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Tworzy i otwiera nowy projekt. Okno dialogowe tworzenia projektu jest takie samo jak <a href="projectProperties.html">edycji projektu</a>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Otwórz</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>Otwiera wcześniej utworzony projekt.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Importuj pliki źródłowe...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Kopiuje wybrane pliki do katalogu <code>/source</code> i wczytuje ponownie projekt, aby wczytać nowe pliki.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Importuj z MediaWiki...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Importuje moduły ze stron MediaWiki, z podanego adresu internetowego.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Wczytaj ponownie</code></p>
+        </td>
+
+        <td width="17%"><code>F5</code></td>
+
+        <td>
+          <p>Wczytuje ponownie projekt, aby uwzględnić zmiany zewnętrzne w plikach źródłowych, odziedziczone pamięci tłumaczeniowe lub glosariusze.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Zamknij</code></p>
+        </td>
+
+        <td width="17%"><code>Ctrl+Shift+W</code></td>
+
+        <td>
+          <p>Zapisuje tłumaczenie i zamyka projekt.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Zapisz</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Zapisuje tłumaczenie w pamięci tłumaczeniowej projektu. OmegaT automatycznie zapisuje tłumaczenie co 10 minut oraz kiedy zamykasz projekt lub zamykasz OmegaT.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Utwórz dokumenty docelowe</code></p>
+        </td>
+
+        <td width="17%"><code>Ctrl+D</code></td>
+
+        <td>
+          <p>Tworzy dokumenty docelowe na podstawie tłumaczenia tekstu dokumentów. Te dokumenty będą umieszczone w katalogu <code>/target</code>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Właściwości</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Wyświetla okno dialogowe <a href="projectProperties.html">Edytuj projekt</a>, które umożliwia edycję języków projektu i położenia katalogów.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Pliki projektu...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Zamyka lub otwiera okno <a href="userInterface.html#Project_Files">Pliki projektu</a> (zależnie od tego, czy jest ono otwarte, czy zamknięte).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Zakończ</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Q</code></p>
+        </td>
+
+        <td>
+          <p>Zapisuje projekt i zamyka OmegaT. Jeśli nie zapisałeś projektu ręcznie, upewnia się, czy naprawdę chcesz zakończyć.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="EditMenu" id="EditMenu"></a>Edytuj</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>Uwaga: Pozycje, które można znaleźć w większości aplikacji (kopiuj / wytnij / wklej) nie są wyświetlane w tym menu, ale są dostępne przy użyciu skrótów klawiszowych systemu. Na przykład:</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Kopiuj</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Kopiuje zaznaczony tekst do schowka.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Wytnij</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+X</code></p>
+        </td>
+
+        <td>
+          <p>Kopiuje zaznaczony tekst do schowka i usuwa zaznaczony tekst.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Wklej</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+V</code></p>
+        </td>
+
+        <td>
+          <p>Wkleja tekst ze schowka w pozycji kursora.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p><strong>Samo menu Edytuj zawiera następujące pozycje:</strong></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Cofnij ostatnią czynność</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Wraca do stanu sprzed ostatniej czynności edycji. Nie działa, kiedy modyfikowany segment został już zatwierdzony.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Ponów ostatnią czynność</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Wraca do stanu sprzed cofnięcia ostatniej czynności edycji. Nie działa, kiedy modyfikowany segment został już zatwierdzony.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Zastąp dopasowaniem</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Zastępuje cały segment docelowy aktualnie wybranym dopasowaniem rozmytym (domyślnie wybierane jest pierwsze dopasowanie).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Wstaw dopasowanie</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Wstawia aktualnie wybrane dopasowanie rozmyte w pozycji kursora. Zastąpi ono fragment segmentu docelowego, jeśli jest zaznaczony.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Zastąp tłumaczeniem maszynowym</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Zastępuje segment docelowy tłumaczeniem Google Translate. Nie podejmuje żadnej akcji, jeśli funkcja Google Translate nie jest aktywna (patrz Menu &gt; Opcje poniżej).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Zastąp tekstem źródłowym</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Zastępuje cały segment docelowy segmentem źródłowym.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Wstaw tekst źródłowy<br></code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Wstawia tekst źródłowy w pozycji kursora.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Eksportuj zaznaczony fragment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift+Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Eksportuje aktualnie zaznaczony fragment do pliku tekstowego, do dalszego przetwarzania. Jeżeli nic nie jest zaznaczone, w pliku tym jest zapisywane bieżące źródło. Kiedy użytkownik wychodzi z programu OmegaT, zawartość tego pliku nie jest kasowana, zgodnie z zachowaniem schowka. Wyeksportowana zawartość jest kopiowana do pliku <span style=
+          "font-style: italic;">selection.txt</span> znajdującego się w katalogu plików użytkownika (patrz&nbsp;<a href=
+          "filesAndDirectories.html#user" target="_blank">Pliki i katalogi</a>).&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Przeszukaj projekt...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Otwiera nowe okno wyszukiwania <a href="userInterface.html#Search_Window">Szukanie tekstu</a>.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Zmień wielkość liter na</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Shift + F3</code></p>
+
+          <p><code>(patrz tekst)</code></p>
+        </td>
+
+        <td>
+          <p>Zmienia małe/wielkie litery w zaznaczonym tekście w segmencie docelowym zgodnie z wybraną opcją (małe litery, wielkie litery (wersaliki) lub wielkie pierwsze litery). Użyj Shift+F3 do przełączania kolejno tych trzech możliwości. Jeżeli żaden tekst nie jest wybrany, OmegaT wybiera słowo zawierające literę znajdującą się tuż na prawo od kursora.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Wybierz dopasowanie nr #N</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>(#N jest cyfrą od 1 do 5) - Wybiera dopasowanie rozmyte nr N wyświetlone w oknie dopasowań rozmytych, aby zastąpić nim segment lub wstawić je do segmentu. Rozdział <a href="userInterface.html#Match">Dopasowania rozmyte</a> opisuje szczegółowo oznaczenia kolorem.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="GoToMenu" id="GoToMenu"></a>Przejdź do</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Następny nieprzetłumaczony segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Przechodzi do następnego segmentu, który nie ma odpowiednika w pamięci tłumaczeniowej.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Następny segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+N</code> lub <code>Enter</code> lub <code>Tab</code></p>
+        </td>
+
+        <td>
+          <p>Przechodzi do następnego segmentu. Jeżeli bieżący segment jest ostatni w pliku, przechodzi do pierwszego segmentu następnego pliku.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Poprzedni segment</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+P</code> lub <code>Ctrl+Enter</code> lub <code>Ctrl+Tab</code></p>
+        </td>
+
+        <td>
+          <p>Przechodzi do poprzedniego segmentu. Jeżeli bieżący segment jest pierwszy w pliku, przechodzi do ostatniego segmentu poprzedniego pliku.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Segment numer...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Otwierany jest segment o podanym numerze</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>W przód w historii...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT zapamiętuje tłumaczone segmenty.&nbsp;Przy pomocy tego polecenia możesz przejść "w przód" do segmentu, który poprzednio opuściłeś poleceniem "wstecz w historii".&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Wstecz w historii...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Przy pomocy tego polecenia możesz przejść "w tył" o jeden lub kilka segmentów, a później powrócić do bieżącego segmentu.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ViewMenu" id="ViewMenu"></a>Widok</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Zaznaczaj przetłumaczone segmenty</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Jeżeli ta opcja jest zaznaczona, przetłumaczone segmenty będą oznaczone kolorem żółtym.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Zaznaczaj nieprzetłumaczone segmenty</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Jeżeli ta opcja jest zaznaczona, nieprzetłumaczone segmenty będą oznaczone kolorem fioletowym.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Wyświetl segmenty źródłowe</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Jeżeli ta opcja jest zaznaczona, segmenty źródłowe będą wyświetlone i oznaczone kolorem zielonym. Jeżeli ta opcja nie jest zaznaczona, segmenty źródłowe nie będą wyświetlone.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ToolsMenu" id="ToolsMenu"></a>Narzędzia</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Popraw znaczniki</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Sprawdza, czy w formatowanych plikach nie brakuje znaczników lub nie ma znaczników źle umieszczonych. Wyświetla listę segmentów z błędami dotyczącymi znaczników. Rozdział <a href=
+          "userInterface.html#tag_Validation">Okno walidacji znaczników</a> opisuje, co znajduje się w tym oknie, a <a href="formattedText.html">Praca z tekstem sformatowanym</a> objaśnia dlaczego.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="OptionsMenu" id="OptionsMenu"></a>Opcje</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>TAB zmienia segment</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Ustawia <code>Tab</code> zamiast domyślnego <code>Enter</code> jako klawisz zatwierdzenia segmentu. Ta opcja jest przydatna dla niektórych chińskich, japońskich i koreańskich systemów wprowadzania znaków.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Zawsze potwierdzaj zakończenie</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Program będzie zawsze prosił o potwierdzenie przed zakończeniem.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td><code>Google Translate</code></td>
+
+        <td></td>
+
+        <td>
+          <p>Opcja <a href="GoogleTranslate.html">Google Translate</a> aktywna/nieaktywna. Jeśli jest aktywna, <code>Ctrl+M</code> zastąpi część docelową aktywnego segmentu propozycją Google Translate. Można ją przejrzeć przed wstawieniem w oknie Google Translate</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Czcionka...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Pokazuje okno dialogowe <a href="fontSettings.html">Czcionka wyświetlana</a>, które umożliwia zmianę czcionki używanej do wyświetlania tekstu. Użytkownicy starych komputerów, którzy uważają, że zmiana rozmiaru okna następuje bardzo wolno, mogą spróbować zmienić czcionkę.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Filtry plików...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Wyświetla okno dialogowe <a href="fileFilters.html">Filtry plików</a>, które umożliwia konfigurację obsługi i przetwarzania plików.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Ustawienia segmentacji...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Otwiera okno dialogowe <a href="segmentation.html">Ustawienia segmentacji</a>, które umożliwia konfigurację segmentacji tekstu.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Sprawdzanie pisowni...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Wyświetla okno <a href="spellchecker.html">Ustawienia sprawdzania pisowni</a>, umożliwiające instalowanie, konfigurowanie i aktywowanie sprawdzania pisowni.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Parametry edytora...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Wyświetla okno dialogowe <a href="translationEditing.html">Parametry edytora...</a>, umożliwiające konfigurację</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Przywróć okno główne</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Przywraca składniki okna głównego OmegaT (Edycja, Dopasowania rozmyte, Glosariusze i Słowniki oraz okno Google Translate) do ich stanu domyślnego. Użyj tej funkcji, w przypadku gdy odłączyłeś, przesunąłeś lub ukryłeś jeden lub więcej ze składników okna głównego i nie możesz ustawić ich z powrotem w taki sposób, jak chcesz. Użyj jej również, jeśli zmieniłeś wersję OmegaT i masz problem z oknami, które się nie pojawiają.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="HelpMenu" id="HelpMenu"></a>Pomoc</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Podręcznik użytkownika...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Otwiera w osobnym oknie <a href="userInterface.html#Help_Browser">Przeglądarkę pomocy</a> z niniejszym podręcznikiem.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>O programie...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Wyświetla informacje o prawach autorskich, twórcach i licencji.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="shortcuts" id="shortcuts"></a>Skróty klawiszowe</h2>
+
+  <p>Poniższe skróty klawiszowe są dostępne w oknie głównym. Kiedy inne okno jest na wierzchu, kliknij na głównym oknie, aby wyciągnąć je na wierzch lub wciśnij <code><strong>Esc</strong></code>, aby zamknąć to drugie okno.</p>
+
+  <p>Skróty klawiszowe polegają na wciśnięciu klawisza <code><strong>Ctrl</strong></code> i litery. Niektóre skróty wymagają użycia innych klawiszy. Dla większej czytelności, w tekście użyto dużych liter.</p>
+
+  <p><strong><code>Ctrl</code></strong> jest używany w systemach operacyjnych Windows, UNIX i unixopodobnych z klawiaturami, na których znajduje się klawisz <strong><code>Ctrl</code></strong> / <code><strong>Control</strong></code>. Użytkownicy MacIntosha powinni czytać to jako <code><strong>cmd+key</strong></code>. Klawisz <code><strong>cmd</strong></code> na klawiaturach Apple ma albo napis <code><strong>command</strong></code>, albo znak <strong>apple</strong> .</p>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">Zarządzanie projektem</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">Edycja</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">Poruszanie się po dokumencie</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">Okna pomocnicze</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">Inne</a></p>
+    </li>
+  </ul>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Project_management" id="Project_management"></a>Zarządzanie projektem</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Otwórz projekt</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>Wyświetla okno dialogowe, umożliwiające odnalezienie istniejącego projektu</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Zapisz</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Zapisuje aktualny stan pracy w pliku project_save.tmx znajdującym się w katalogu projektu /omegat/</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Zamknij projekt</p>
+        </td>
+
+        <td>
+          <p><code>Shift+Ctrl+W</code></p>
+        </td>
+
+        <td>
+          <p>Zamyka bieżący projekt</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Utwórz dokumenty docelowe</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+D</code></p>
+        </td>
+
+        <td>
+          <p>Tworzy przetłumaczone dokumenty w katalogu projektu Target</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Właściwości projektu</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Wyświetla ustawienia projektu i umożliwia ich zmianę</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Editing" id="Editing"></a>Edycja</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Cofnij ostatnią czynność</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Cofa ostatnie czynności edycji w bieżącym segmencie docelowym</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Ponów ostatnią czynność</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Ponawia czynności edycji, które zostały właśnie cofnięte, w bieżącym segmencie docelowym</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Wybierz dopasowanie nr #N</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>#N jest cyfrą od 1 do 5. Ten skrót wybiera dopasowanie nr N wyświetlone w oknie dopasowań rozmytych (domyślnie wybierane jest pierwsze dopasowanie)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Zastąp dopasowaniem</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Zastępuje zawartośc bieżącego segmentu docelowego wybranym dopasowaniem (domyślnie wybierane jest pierwsze dopasowanie).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Wstaw dopasowanie</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Wstawia wybrane dopasowanie w pozycji kursora w bieżącym segmencie docelowym (domyślnie wstawiane jest pierwsze dopasowanie).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Zastąp tekstem źródłowym</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Zastępuje zawartość bieżącego segmentu docelowego tekstem źródłowym</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Wstaw tekst źródłowy</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Wstawia tekst źródłowy w pozycji kursora w bieżącym segmencie docelowym</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Przeszukaj projekt</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Wyświetla okno dialogowe, umożliwiające prowadzenie wyszukiwania w projekcie</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>Zastąp tłumaczeniem maszynowym</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Zastępuje segment docelowy tłumaczeniem tekstu źródłowego przez Google Translate. Nie podejmuje żadnej akcji, jeśli &nbsp;Google Translate nie jest aktywne (patrz Menu &gt; Opcje &gt; Google Translate).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Moving_around" id="Moving_around"></a>Poruszanie się po dokumencie</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Następny nieprzetłumaczony segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Przenosi pole edycyjne do następnego segmentu, który nie jest zapisany w pamięci tłumaczeniowej projektu</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Następny segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+N<br> Enter lub Return&nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Przenosi pole edycyjne do następnego segmentu</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Poprzedni segment</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+P</code></p>
+        </td>
+
+        <td>
+          <p>Przenosi pole edycyjne do poprzedniego segmentu</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Segment numer...</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Przechodzi do segmentu o podanym numerze</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Wstecz w historii...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Przechodzi do segmentu poprzedniego w historii.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>W przód w historii...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>Przechodzi do segmentu następnego w historii.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Reference_windows" id="Reference_windows"></a>Okna pomocnicze</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Pliki projektu</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Wyświetla listę plików projektu</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Other" id="Other"></a>Inne</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Popraw znaczniki</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Otwiera okno <a href="userInterface.html#tag_Validation">Pozycje, w których zmieniono znaczniki</a></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Eksportuj zaznaczony fragment</p>
+        </td>
+
+        <td>
+          <p><code>Shift+</code><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Eksportuje aktualnie zaznaczony fragment lub - jeżeli nic nie jest zaznaczone - aktualne źródło</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Przeszukaj projekt&nbsp;&nbsp; &nbsp;</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F&nbsp;&nbsp; &nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Otwiera nowe okno wyszukiwania</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Podręcznik użytkownika</p>
+        </td>
+
+        <td>
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Wyświetla podręcznik użytkownika OmegaT w osobnym oknie</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

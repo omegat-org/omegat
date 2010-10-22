@@ -1,0 +1,228 @@
+<html>
+<head>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Segmentacja źródła - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Segmentacja źródła</h2>
+
+  <ul>
+    <li>
+      <p><a href="#structure">Segmentacja na poziomie struktury</a></p>
+    </li>
+
+    <li>
+      <p><a href="#sentence">Segmentacja na poziomie zdań</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#about">Zasady segmentacji</a></p>
+        </li>
+
+        <li>
+          <p><a href="#setup">Ustawienia zasad</a></p>
+
+          <ul>
+            <li>
+              <p><a href="#priority">Priorytet</a></p>
+            </li>
+
+            <li>
+              <p><a href="#creation">Tworzenie zasad</a></p>
+            </li>
+
+            <li>
+              <p><a href="#break">Łamanie/Wyjątek</a></p>
+            </li>
+
+            <li>
+              <p><a href="#examples">Kilka prostych przykładów</a></p>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <p><a href="regexp.html">Składniki wyrażeń regularnych</a></p>
+    </li>
+  </ul>
+
+  <p>Narzędzia pamięci tłumaczeniowej pracują z jednostkami tekstowymi, nazywanymi segmentami. OmegaT ma 2 sposoby segmentowania tekstu: segmentacja akapitów i segmentacja zdań. W celu wybrania rodzaju segmentacji, wybierz <strong>Projekt → Właściwości...</strong> z menu głównego i użyj pola zaznaczania. Zauważ, że segmentacja akapitów jest dość przestarzała i że w większości projektów lepszym wyborem jest segmentacja zdań. Jeśli wybrana została segmentacja zdań, możesz ustawić jej zasady wybierając <strong>Opcje → Ustawienia segmentacji...</strong> z menu głównego.</p>
+
+  <p>Zauważ, że znaczna część rozwoju programu została poświęcona na rozwój niezawodnych zasad segmentacji, więc w większości przypadków nie będziesz potrzebował zajmować się pisaniem własnych zasad segmentacji. Z drugiej strony ta funkcja może być bardzo użyteczna w szczególnych przypadkach, pozwalając ci przetłumaczyć to, co musi zostać przetłumaczone, bez ryzykowania zmiany tego, co musi pozostać niezmienione.</p>
+
+  <p><strong>Uwaga!</strong> Zmiana ustawień segmentacji, kiedy projekt jest otwarty, może spowodować utratę danych. Jeśli zmieniasz ustawienia segmentacji, kiedy projekt jest otwarty, będziesz musiał wczytać ponownie projekt, aby zmiany odniosły skutek.</p>
+  <hr>
+
+  <h2><a name="structure" id="structure"></a>Segmentacja na poziomie struktury</h2>
+
+  <p>OmegaT najpierw dokonuje rozbioru tekstu przy pomocy segmentacji na poziomie struktury. Podczas tego procesu tylko struktura pliku źródłowego jest wykorzystywana do tworzenia segmentów.</p>
+
+  <p>Na przykład <a href="fileFilters.html#filter_options">pliki tekstowe niesformatowane</a> mogą być segmentowane na końcach linii, pustych liniach lub mogą nie być w ogóle segmentowane. Pliki sformatowane (dokumenty OpenOffice.org, dokumenty HTML, itd.) są segmentowane na znacznikach bloków (akapitów). Możliwe do przetłumaczenia <a href=
+  "fileFilters.html#filter_options">atrybuty</a> obiektów w plikach XHTML lub HTML mogą być wyodrębnione jako oddzielne segmenty.</p>
+  <hr>
+
+  <h2><a name="sentence" id="sentence"></a>Segmentacja na poziomie zdań</h2>
+
+  <p>Po segmentacji pliku źródłowego na jednostki logiczne, OmegaT przeprowadzi dalszą segmentację tych bloków na zdania.</p>
+
+  <h3><a name="about" id="about"></a>Zasady segmentacji</h3>
+
+  <p>Proces segmentacji może być zobrazowany następująco: wyobraź sobie, że kursor przemieszcza się po tekście, po jednym znaku. Dla każdego położenia kursora stosowana jest każda zasada w podanej kolejności, aby zobaczyć, czy wzorzec <strong>Po ciągu</strong> stosuje się do tekstu na lewo, a wzorzec <strong>Przed ciągiem</strong> do tekstu na prawo od kursora. Jeżeli zasada pasuje, program przestaje sprawdzać zasady (w przypadku zasady wyjątku) lub tworzy nowy segment (w przypadku zasady łamania).</p>
+
+  <p>Segmentacja na poziomie zdań została zaimplementowana za pomocą standardu <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a> - pamiętaj, że nie wszystkie funkcje SRX są obsługiwane. I nie jest możliwe importowanie/eksportowanie zasad zdefiniowanych w formacie SRX. Jeśli jednak wiesz, jak działa SRX, wiesz już trochę na temat tego, jak OmegaT przeprowadza segmentację.</p>
+
+  <p>Są dwa rodzaje zasad:</p>
+
+  <ul>
+    <li>
+      <p><strong>Zasady łamania</strong> dzielą tekst źródłowy na segmenty. Na przykład, <i>"Czy to miało sens? Nie byłem pewien."</i> powinno być podzielone na dwa segmenty, tzn. powinna być zasada łamania dla "<code>?</code>".</p>
+    </li>
+
+    <li>
+      <p><strong>Zasady wyjątku</strong> określają, które części tekstu NIE powinny być dzielone. Mimo kropki, <i>"Mrs. Dalloway "</i> nie powinno być podzielone na dwa segmenty, więc powinna być ustanowiona zasada wyjątku dla skrótów Mrs (oraz Mr, Dr, prof itd.), zakończonych kropką.</p>
+    </li>
+  </ul>
+
+  <p>Predefiniowane zasady łamania powinny być wystarczające dla większości języków europejskich i języka japońskiego. Dzięki elastyczności możesz rozważyć zdefiniowanie większej ilości zasad wyjątku dla języka, z którego tłumaczysz,aby otrzymać bardziej sensowne i spójne segmenty.</p>
+
+  <h3><a name="setup" id="setup"></a>Ustawienia zasad</h3>
+
+  <h3><a name="priority" id="priority"></a>Priorytet</h3>
+
+  <p>Wszystkie ustawienia zasad segmentacji z odpowiednim wzorcem języka są stosowane w podanej kolejności priorytetu, zatem zasady dla konkretnego języka powinny być wyżej niż domyślne. Na przykład, zasady dla języka francuskiego w wersji kanadyjskiej (FR-CA) powinny być wyżej niż zasady dla języka francuskiego (FR.*) i wyżej niż domyślne (.*). Wtedy podczas tłumaczenia z języka francuskiego kanadyjskiego projekt będzie używał zasad zdefiniowanych dla tego języka, zasad dla języka francuskiego i zasad domyślnych, w odpowiedniej kolejności.</p>
+
+  <h3><a name="creation" id="creation"></a>Tworzenie zasad</h3>
+
+  <p>W celu edycji lub rozszerzenia istniejącego zestawu zasad, kliknij na nim w górnej tabeli. Zasady tego zestawu pojawią się w dolnej połowie okna.</p>
+
+  <p>W celu stworzenia pustego zestawu zasad dla nowego wzorca języka kliknij <strong>Dodaj</strong> w górnej połowie okna dialogowego. Pojawi się pusta linia w dole górnej tabeli <font color="black" face=
+  "Times New Roman" size="3"><span style="font-size: 12pt; color: black;" lang=
+  "EN-US">(być może będziesz musiał przewinąć tabelę w dół, aby zobaczyć tę linię)</span></font>. Zmień nazwę zestawu zasad i wzorca języka. Składnia wzorca języka jest zgodna ze składnią <a href="regexp.html">wyrażeń regularnych</a>. Jeżeli twój zestaw zasad dotyczy pary język-kraj, radzimy przesunąć go na górę, używając klawisza <strong>Przesuń wyżej</strong>.&nbsp;</p>
+
+  <h3><a name="break" id="break"></a>Łamanie/Wyjątek</h3>
+
+  <p>Pole wyboru "Podziel w miejscu:" określa, czy jest to zasada łamania (pole wyboru zaznaczone), czy zasada wyjątku (pole wyboru niezaznaczone). Dwa wyrażenia regularne "Po ciągu" i "Przed ciągiem" określają, co musi znajdować się przed i za jakimś miejscem, aby zastosować zasadę wyjątku lub zasadę łamania.</p>
+
+  <h3><a name="examples" id="examples"></a>Kilka prostych przykładów</h3>
+
+  <table summary="just formatting" border="0" cellpadding="4" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p><strong>Cel</strong></p>
+        </td>
+
+        <td>
+          <p><strong>Po ciągu</strong></p>
+        </td>
+
+        <td>
+          <p><strong>Przed ciągiem</strong></p>
+        </td>
+
+        <td width="52%">
+          <p><strong>Uwagi</strong></p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="26%">
+          <p>ustanowić segment po kropce ('<code>.</code>') i przed spacją</p>
+        </td>
+
+        <td>
+          <p><code>\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>"<code>\.</code>" oznacza znak "<code>.</code>" "<code>\s</code>" oznacza dowolny biały znak</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p>nie dzielić po Mr.</p>
+        </td>
+
+        <td>
+          <p><code>Mr\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>Jest to zasada wyjątku, więc pole wyboru zasady musi być niezaznaczone</p>
+        </td>
+      </tr>
+
+      <tr>
+        <td width="26%">
+          <p>ustanowić segment po "ã€‚" (japońska kropka)</p>
+        </td>
+
+        <td>
+          <p><span lang="xxx"><code>ã€‚</code></span></p>
+        </td>
+
+        <td></td>
+
+        <td width="52%">
+          <p>Zauważ, że wzorzec <i>Przed ciągiem</i> jest pusty</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p>nie dzielić po M. Mr. Mrs. i Ms.</p>
+        </td>
+
+        <td>
+          <p><code>Mr??s??\.</code></p>
+        </td>
+
+        <td>
+          <p><code>\s</code></p>
+        </td>
+
+        <td width="52%">
+          <p>zasada wyjątku - patrz użycie znaku "?" w wyrażeniach regularnych (kwantyfikator niezachłanny)</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="regex" id="regex"></a>Składniki wyrażeń regularnych</h2>
+
+  <p>Wyrażenia regularne używane przy zasadach segmentacji są takie same, jak obsługiwane przez Javę. Skrócone informacje są dostępne w rozdziale <a href="regexp.html">Składniki wyrażeń regularnych</a>. Jeśli potrzebujesz bardziej szczegółowych informacji, przeczytaj <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+  <p>W sieci można znaleźć proste podręczniki (na przykład <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>).</p>
+  <hr>
+
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

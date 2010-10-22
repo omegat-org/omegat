@@ -1,0 +1,99 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Sprawdzanie pisowni - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Sprawdzanie pisowni</h2>
+  <hr>
+
+  <ul>
+    <li>
+      <p><a href="#introduction">Wprowadzenie</a></p>
+    </li>
+
+    <li>
+      <p><a href="#edit_dialog">Opcje sprawdzania pisowni</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Hints">Wskazówki</a></p>
+    </li>
+  </ul>
+
+  <p><br></p>
+
+  <h3><a name="introduction" id="introduction"></a>Wprowadzenie</h3>
+
+  <p><br></p>
+
+  <p>W celu poprawiania błędów pisowni podczas tłumaczenia, można zainstalować sprawdzanie pisowni i używać go do wskazywania słów w tekście docelowym, które muszą zostać poprawione. To nie powinno być niespodzianką: OmegaT korzysta ze sprawdzania pisowni <a href=
+  "http://hunspell.sourceforge.net/">Hunspell</a>, używanego mędzy innymi w OpenOffice.org, Firefox i Thunderbird. Jeżeli używasz któregoś z tych programów, być może masz już zainstalowaną podstawową część sprawdzania pisowni i potrzebujesz tylko podłączyć OmegaT.</p>
+
+  <p>Kiedy sprawdzanie pisowni zostało uaktywnione i jest dostępny słownik dla języka docelowego, sprawdzanie pisowni będzie kontrolowało segmenty docelowe, które są wyświetlane w oknie Edycji. Wątpliwe słowa są podkreślane czerwoną linią falistą:</p>
+
+  <p><br>
+  <br></p><img src="images/SpellcheckingText.png" name="grafika1" alt=
+  "Sprawdzanie pisowni w tekście" align="left" width="535" height="302" border="0"
+  id="grafika1"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <p>Kliknięcie prawym klawiszem na podkreślonym słowie (<i>Artund</i> powyżej) otwiera menu rozwijane, w którym znajdują się propozycje poprawy (<i>Art und</i>) . Dodatkowo możesz polecić, aby <b>ignorować wszystkie</b> wystąpienia danego słowa albo <b>dodać do słownika</b>. Zauważ, że jest to sprawdzanie pisowni na bieżąco - jeśli musisz wykonać sprawdzenie pisowni całych tekstów, będziesz musiał sam przejrzeć tekst i szukać falistych linii. Druga możliwość to sprawdzenie pisowni plików docelowych w edytorze, czyli poza programem OmegaT, więc zmiany, które możesz wprowadzić, nie będą zapamiętane w pamięci tłumaczeniowej.</p>
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Opcje sprawdzania pisowni</h3>
+
+  <p>Kliknięcie na <b>Opcje &gt; Sprawdzanie pisowni...</b> spowoduje otwarcie poniższego okna:</p>
+
+  <p><br></p><img src="images/SpellcheckerSetup2.png" name="grafika2" alt=
+  "Ustawienia sprawdzania pisowni" align="left" width="498" height="325" border="0" id=
+  "grafika2"><br clear="left">
+
+  <p><br></p>
+
+  <p>Powyższy przykład zawiera już dostępne słowniki. Początkowo pole to będzie puste, ponieważ musisz podać, gdzie program OmegaT ma szukać słowników. Kliknij na <strong>Wybierz...</strong>, aby otworzyć okno dialogowe, w którym możesz wybrać podkatalog z istniejącymi słownikami OpenOffice.org lub Mozilla. Najprostszym sposobem znalezienia ich jest szukanie plików z rozszerzeniami <i>aff</i> lub <i>dic</i>. OmegaT rozpozna wszystkie słowniki dostępne w danym miejscu i wyświetli je. Jeśli słownik, którego chcesz używać, znajduje się tam i jest widoczny w OmegaT - zrobione. Jeżeli nie znaleziono słowników, możesz wybrać dla nich odpowiednie miejsce, a następnie kliknąć <b>Zainstaluj</b>, aby program OmegaT wyszukał dostępne słowniki. Wybierz słowniki, których potrzebujesz, w oknie, które się pojawi, a następnie kliknij <b>Zainstaluj</b>. Wybrane języki zostaną zainstalowane i pojawią się w oknie ustawień funkcji sprawdzania pisowni (może to chwilę potrwać).</p>
+
+  <p>Zauważ, że the instalator korzysta z internetowego spisu słowników. W przypadku, gdy jest on nieaktualny lub nie zawiera wymaganego języka, będziesz musiał sam poszukać słowników. OpenOffice.org zawiera prawdopodobnie największą kolekcję słowników w <a href="http://extensions.services.openoffice.org/dictionary">OpenOffice.org Dictionary site</a>. Po tym, jak rozszerzenie słownika zostało pobrane i zainstalowane, odpowiadające <i>aff</i> i <i>dic</i> staną się dostępne. To samo można osiągnąć dodając rozszerzenie sprawdzania pisowni do Firefoxa lub Thunderbirda; w tym przypadku pliki sprawdzania pisowni będą przechowywane w twoim profilu (w programie Firefox lub Thunderbird).</p>
+
+  <p>Upewnij się, że kod języka plików docelowych odpowiada kodowi języka słownika: słownik FR-FR nie będzie działał przy ustawieniu języka docelowego FR. Musisz zmienić ustawienia na FR-FR, aby funkcja sprawdzania pisowni rozpoznała odpowiedni słownik dla twojego języka docelowego. Szukaj plików z nazwą oznaczającą używany język i z rozszerzeniami <i>aff</i> i <i>dic</i>.</p>
+
+  <h3><a name="Hints" id="Hints"></a>Wskazówki</h3>
+
+  <p>Możliwe przyczyny, dla których sprawdzanie pisowni nie działa:</p>
+
+  <ol>
+    <li>
+      <p>Pole wyboru "Automatycznie sprawdzaj pisownię tekstu" musi być zaznaczone.</p>
+    </li>
+
+    <li>
+      <p>Sprawdź, czy kod języka docelowego twojego projektu odpowiada dostępnym słownikom w oknie ustawień. Sprawdzanie pisowni określa używany język na podstawie kodu języka docelowego: jeśli językiem docelowym jest portugalski w wersji brazylijskiej (PT_BR), podkatalog ze słownikami musi zawierać dwa pliki słowników, o nazwach <i>pt_br.aff</i> i <i>pt_br.dic</i>.</p>
+    </li>
+  </ol>
+
+  <p>W przypadku, gdy masz dużą część tekstu już przetłumaczoną, ale wtedy uświadamiasz sobie, że kod języka docelowego projektu nie pasuje do kodu języka funkcji sprawdzania pisowni (na przykład wpisałeś pt_BR jako język, ale nie ma słowników pt_BR), możesz po prostu skopiować dwa odpowiednie pliki i zmienić ich nazwy (z pt_PT.aff i pt_PT.dic na odpowiednio pt._BR.aff i pt_BR.dic). Oczywiście lepiej jest pobrać prawidłowe wersje.</p>
+
+  <p>Zauważ, że Odinstaluj fizycznie usuwa zaznaczone słowniki. Jeśli są one częścią OpenOffice, jak w powyższym przypadku, znikną one również z tej aplikacji. Jeżeli z jakiegokolwiek powodu musisz to zrobić, może być rozsądne skopiowanie tych plików do innego katalogu, zarezerwowanego do celów OmegaT.</p>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

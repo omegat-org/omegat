@@ -1,0 +1,184 @@
+<html>
+<head>
+	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Wyszukiwanie - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h2>Wyszukiwanie</h2>
+
+  <ul>
+    <li>
+      <p><a href="#searchwindow">Okno wyszukiwania</a></p>
+
+      <ul>
+        <li>
+          <p><a href="#calling">Wywoływanie wyszukiwania</a></p>
+        </li>
+
+        <li>
+          <p><a href="#location">Miejsce wyszukiwania</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <p><a href="#searchmethods">Metody wyszukiwania</a></p>
+
+  <p><a href="#usingwildcards">Użycie symboli wieloznacznych</a></p>
+
+  <p><a href="#usingregularexpressions">Użycie wyrażeń regularnych</a></p>
+
+  <p><a href="#display">Wyświetlanie wyników wyszukiwania</a></p>
+  <hr>
+
+  <h2><a name="searchwindow" id="searchwindow"></a>Okno wyszukiwania</h2><img src=
+  "images/TextSearch.png" name="graphics1" align="left" width="659" height=
+  "446" border="0" id="graphics1" alt="Okno Szukanie tekstu"><br clear="left">
+
+  <p><br>
+  <br></p>
+
+  <h3><a name="calling" id="calling"></a>Wywoływanie wyszukiwania</h3>
+
+  <p>OmegaT zapewnia szeroki zakres funkcji wyszukiwania. Wywołaj okno <strong>Szukanie tekstu</strong> za pomocą <code>Ctrl+F</code> i wprowadź słowo lub wyrażenie, których chcesz szukać, w polu <strong>Wyszukaj</strong>. Lub w inny sposób - wybierz słowo lub wyrażenie w dowolnym miejscu okna Edycja i wciśnij <code>Ctrl+F</code>. Słowo lub wyrażenie jest w tym przypadku wpisywane w pole <strong>Wyszukaj</strong> automatycznie. Każde wywołanie okna <strong> Szukanie tekstu</strong> tworzy własne nowe okno. Nie zapomnij o zamykaniu ich, aby nie tworzyły bałaganu na pulpicie.</p>
+
+  <h3><a name="location" id="location"></a>Miejsce wyszukiwania</h3>
+
+  <p>Wyszukiwanie występuje zarówno w części źródłowej, jak i docelowej projektu. Możesz przeszukiwać</p>
+
+  <ul>
+    <li>
+      <p>tylko projekt (ustawienie domyślne)</p>
+    </li>
+
+    <li>
+      <p>projekt i pamięci tłumaczeniowe w /tm/ (zaznacz <i>Przeszukaj pamięci tłumaczeniowe</i>)</p>
+    </li>
+
+    <li>
+      <p>pojedynczy plik lub katalog zawierający grupę plików (zaznacz <i>Przeszukaj pliki</i>)</p>
+    </li>
+  </ul>
+
+  <p>Podczas przeszukiwania plików, OmegaT ograniczy wyszukiwanie do plików w formatach plików źródłowych (Patrz <a href="filesToTranslate.html">Formaty plików</a>). Na przykład, chociaż OmegaT obsługuje pliki TMX, nie włączy ich do wyszukiwania.</p>
+  <hr>
+
+  <h2><a name="searchmethods" id="searchmethods"></a>Metody wyszukiwania</h2>
+
+  <p>Wybierz metodę używając przełączników wyboru. Do wyboru są dwie metody wyszukiwania:</p>
+
+  <table summary= "just formatting" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
+
+    <tr>
+      <td width="20%">
+        <p><strong>wyszukiwanie dokładne</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>Szukanie segmentów zawierających podany ciąg znaków.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>wyszukiwanie słów kluczowych</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>Szukanie segmentów zawierających wszystkie podane słowa kluczowe, w dowolnej kolejności.</p>
+      </td>
+    </tr>
+  </table>
+
+  <p><strong>Wyszukiwanie dokładne</strong> szuka wyrażenia, tj. jeśli wprowadzonych jest wiele słów, są one znajdowane tylko wtedy, gdy występują w dokładnie tej samej kolejności.  Wyszukiwanie dokładne jest podobne do wyszukiwania dokładnych wyrażeń w wyszukiwarce internetowej, takiej jak Google. Wybierz <strong>Wyszukiwanie słów kluczowych</strong>, jeśli chcesz wyszukać dowolną liczbę pojedynczych słów, oddzielonych spacjami i w dowolnej kolejności. OmegaT wyświetli listę wszystkich segmentów, w których występują wszystkie słowa. Wyszukiwanie słów kluczowych jest podobne do wyszukiwania "szukaj wszystkich słów" w wyszukiwarce internetowej, takiej jak Google (logika AND).</p>
+
+  <p>W każdej z tych dwóch metod możesz wybrać następujące trzy opcje:</p>
+
+  <table summary= "just formatting" width="100%" border="0" cellpadding="3" cellspacing="0">
+    <col width="20%">
+    <col width="80%">
+
+    <tr>
+      <td width="20%">
+        <p><strong>Uwzględniaj wielkość liter</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>Zostanie przeprowadzone szukanie dokładnego podanego ciągu znaków; w przeciwnym wypadku wielkość liter będzie ignorowana.</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>Wyrażenia regularne</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>Szukany ciąg znaków będzie traktowany jako wyrażenie regularne (w przypadku wyszukiwania słów kluczowych będzie traktowany jak wiele wyrażeń).</p>
+      </td>
+    </tr>
+
+    <tr>
+      <td width="20%">
+        <p><strong>Przeszukaj pamięci tłumaczeniowe</strong></p>
+      </td>
+
+      <td width="80%">
+        <p>Wszystkie pamięci tłumaczeniowe są brane pod uwagę przy wyszukiwaniu.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <h2><a name="usingwildcards" id="usingwildcards"></a>Użycie symboli wieloznacznych</h2>
+
+  <p>Zarówno w wyszukiwaniu dokładnym, jak i słów kluczowych, można używać symboli wieloznacznych '<code>*</code>' i '<code>?</code>'. Używając symboli wieloznacznych, upewnij się, że nie została wybrana opcja <strong>wyrażenie regularne</strong>, w przeciwnym wypadku znaki te będą interpretowane jako specjalne znaki wyrażeń regularnych.</p>
+
+  <ul>
+    <li>
+      <p>'<strong>*</strong>' reprezentuje zero lub więcej znaków. Na przykład szukany tekst '<strong>run*</strong>' będzie odpowiadał '<strong>run</strong>', '<strong>runs</strong>' i '<strong>running</strong>'.</p>
+    </li>
+
+    <li>
+      <p>'<strong>?</strong>' reprezentuje dokładne jeden znak. Na przykład, '<strong>run?</strong>' będzie odpowiadać '<strong>runs</strong>' i '<strong>rung</strong>', ale nie '<strong>run</strong>' czy '<strong>running</strong>'.</p>
+    </li>
+  </ul>
+
+  <p>Jeśli chcesz wyszukać segmenty zawierające <strong>*</strong> lub <strong>?</strong>, będziesz musiał przełączyć się na wyrażenia regularne i poprzedzić te znaki znakiem backslash ('\'), tj. 'x\*y' aby znaleźć wystąpienia 'x*y' i 'x\?<code>y</code>', aby znaleźć wystąpienia '<code>x?y</code>'.</p>
+  <hr>
+
+  <h2><a name="usingregularexpressions" id="usingregularexpressions"></a>Użycie wyrażeń regularnych</h2>
+
+  <p>Wyszukiwanie z użyciem wyrażeń regularnych to silne narzędzie szukania wystąpień ciągu znaków. Jest ono podobne do wyszukiwania z użyciem symboli wieloznacznych, ale pozwala na o wiele większą elastyczność. Wyrażenia regularne używane przy wyszukiwaniu są takie same, jak obsługiwane przez Javę. Skrócone informacje są dostępne w rozdziale <a href="regexp.html">Składniki wyrażeń regularnych</a>. Jeśli potrzebujesz bardziej szczegółowych informacji, przeczytaj <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
+
+  <p>W sieci można znaleźć proste podręczniki (na przykład <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>).</p>
+  <hr>
+
+  <h2><a name="display" id="display"></a>Wyświetlanie wyników wyszukiwania</h2>
+
+  <p>Wciśnięcie klawisza Szukaj po wpisaniu ciągu znaków w polu Wyszukaj spowoduje wyświetlenie wszystkich segmentów w projekcie zawierających szukany ciąg znaków. Ponieważ OmegaT traktuje identyczne segmenty jako jedną jednostkę, pokazany będzie tylko pierwszy z identycznych segmentów.</p>
+
+  <p>Segmenty są wyświetlane w kolejności pojawiania się w projekcie. Segmenty przetłumaczone będą wyświetlone z oryginalnym tekstem na górze i tekstem przetłumaczonym na dole, segmenty nieprzetłumaczone będą wyświetlone tylko jako tekst źródłowy.</p>
+
+  <p>Kliknięcie na segmencie spowoduje otworzenie go w oknie Edycji w celu modyfikacji. Możesz następnie wrócić do okna wyszukiwania, do następnego znalezionego segmentu, na przykład w celu sprawdzenia i w razie potrzeby poprawienia terminologii.</p>
+  <hr>
+  <table summary= "just formatting" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a> </td>
+        <td style="text-align: center;"><a href="index.html">Spis treści</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a> </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<html>
+<head>
+  <link rel="stylesheet" href="OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Tryb konsoli - Podręcznik użytkownika OmegaT 2.1</title>
+</head>
+
+<body>
+  <h1>Tryb konsoli OmegaT</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Wymagania</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">Uruchamianie w trybie konsoli</a></p>
+    </li>
+
+  </ul>
+  <p>&nbsp;</p>
+
+  <p>Celem trybu konsoli jest używanie OmegaT jako narzędzia tłumaczeniowego w środowisku skryptowym. Przy uruchamianiu w trybie konsoli nie jest ładowany graficzny interfejs użytkownika (GUI), zatem OmegaT będzie działać na każdej konsoli. Zależnie od trybu pracy, dany projekt jest automatycznie tłumaczony lub jest tworzona pozornie przetłumaczona pamięć tłumaczeniowa.</p>
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Wymagania</h3>
+
+  <p>Aby można było uruchomić OmegaT, musi istnieć poprawny projekt OmegaT. Położenie projektu nie ma znaczenia, ponieważ i tak musisz dopisać je do linii komend.</p>
+
+  <p>Jeżeli potrzebne są inne ustawienia, muszą istnieć pliki konfiguracyjne. Można to osiągnąć dwoma sposobami:</p>
+
+  <ol>
+    <li>Uruchomić normalnie OmegaT (z GUI) i zmienić ustawienia. Jeżeli uruchamiasz OmegaT w trybie konsoli, będzie używać tych samych ustawień. Jeżeli nie można uruchomić OmegaT normalnie (nie jest dostępne środowisko graficzne):</li>
+
+    <li>Skopiuj pliki ustawień z innej instalacji OmegaT na innym komputerze do odpowiedniego katalogu. Położenie nie ma znaczenia, ponieważ możesz dopisać je do linii komend. Właściwe pliki to filters.conf i segmentation.conf, które można znaleźć w katalogu prywatnym użytkownika (np. C:\Documents and Settings\%User%\OmegaT w systemie Windows, %user%/.omegat/ w systemie Linux)</li>
+  </ol><br>
+
+  <h3><a name="start" id="start"></a>Uruchamianie w trybie konsoli</h3>
+
+  <p>Aby uruchomić OmegaT w trybie konsoli, trzeba przekazać dodatkowe parametry przy starcie. Wymagane są <code>&lt;project-dir&gt;</code> i <code>--mode=&lt;mode&gt;</code>.</p>
+
+  <p>Zależnie od trybu, trzeba (lub można) podać dodatkowe parametry. Więcej informacji - patrz <a href="commandlineArguments.html">Argumenty linii poleceń</a>.</p>
+
+  <p>Przykład projektu tłumaczenia:<br> <code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code><br> Przykład projektu tłumaczenia dla jednego pliku:<br> <code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate --source-pattern=test\.html</code><br> Przykład tworzenia pozornie przetłumaczonego pliku tmx:<br> <code>java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code></p>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
+</body>
+</html>

@@ -1,30 +1,57 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Zapobieganie utracie danych - Podręcznik Użytkownika OmegaT 1.6.2 </title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Zapobieganie utracie danych - Podręcznik użytkownika OmegaT 2.1</title>
 </head>
+
 <body>
+  <h2>Zapobieganie utracie danych</h2>
 
-<h1>Zapobieganie utracie danych</h1>
+  <p>OmegaT jest solidną aplikacją. Należy jednak przedsięwziąć środki ostrożności, aby nie utracić danych podczas używania OmegaT, tak samo jak w przypadku każdej innej aplikacji. Kiedy tłumaczysz pliki, OmegaT przechowuje całą twoją pracę w pamięci tłumaczeniowej <code>project_save.tmx</code>, która znajduje się w podkatalogu projektu <code>/omegat</code>.</p>
 
-<p>OmegaT jest aplikacją solidną, jednak jak z każdym innym programem, warto podjąć środki ostrożności na wypadek utraty danych.</p>
+  <p>OmegaT tworzy również kopię zapasową pamięci tłumaczeniowej w <code>project_save.tmx.YEARMMDDHHNN.bak</code> w tym samym podkatalogu za każdym razem, kiedy projekt jest otwierany lub wczytywany ponownie. <code>YEAR</code> jest 4-cyfrową liczbą oznaczającą rok, <code>MM</code> to miesiąc, <code>DD</code> dzień, <code>HH</code> i <code>NN</code> to godziny i minuty, kiedy poprzednia pamięć tłumaczeniowa została zapisana.</p>
 
-<p>Podczas gdy ty tłumaczysz swoje pliki, OmegaT przechowuje twoje poczynania w pamięci tłumaczenia, w podkatalogu  <code>/omegat</code> projektu. OmegaT tworzy również kopię zapasową pamięci tłumaczenia w pliku <code>project_save.tmx.YEARMMDDHHNN.bak</code> w tym samym katalogu ilekroć otwierasz lub przeładowujesz projekt. <code>YEAR</code> to rok zapisany w czterech cyfrach, dwucyfrowe <code>MM</code> oznacza miesiąc, dwucyfrowe <code>DD</code> dzień miesiąca, a <code>HH</code> i<code>NN</code> godziny i minuty poprzedniego zapisania pamięci.</p>
+  <p>Jeżeli uważasz, że straciłeś dane tłumaczenia, postępuj zgodnie z następującą procedurą:</p>
 
-<p>Aby uniknąć problemów:</p>
+  <ol>
+    <li>zamknij projekt</li>
 
-<ul>
-   <li>Systematycznie rób kopie zapasowe pliku <code>/omegat/project_save.tmx</code> na zewnętrznych nośnikach jak CD lub DVD</li>
+    <li>zmień nazwę aktualnego pliku <code>project_save.tmx</code> na taką, jaką łatwo zapamiętasz (na przykład <code>project_save.tmx.temporary</code>)</li>
 
-   <li>Dopóki nie zaznajomisz się z OmegaT, twórz pliki docelowe w regularnych odstępach czasu, sprawdzając czy plik wynikowy zawiera ostatnią wersję tłumaczenia.</li>
+    <li>wybierz kopię zapasową pamięci tłumaczeniowej, która najprawdopodobniej zawiera dane, których szukasz</li>
 
-   <li>Uważaj szczególnie gdy dokonujesz jakichkolwiek zmian w plikach katalogu <code>/source</code> podczas pracy nad projektem. Jeśli zmodyfikujesz pliki źródłowe po tym jak zacząłeś tłumaczyć, OmegaT może nie być w stanie odnaleźć segmentu, który już przetłumaczyłeś.</li>
+    <li>zmień jej nazwę na <code>project_save.tmx</code></li>
 
-   <li>Zacznij ratować sytuację od przeczytania tych informacji pomocniczych. Jeśli naprawdę jesteś w tarapatach napisz na <a href="http://groups.yahoo.com/group/omegat" >grupę OmegaT </a>. Nie wahaj się pisać w języku, który najbardziej ci odpowiada.</li>
-</ul>
+    <li>otwórz projekt</li>
+  </ol>
 
-<hr>
-<p><a href="legalNotices.html" title="uwagi prawne">uwagi prawne</a></p>
+  <p>W celu uniknięcia utraty ważnych danych:</p>
 
+  <ul>
+    <li>Twórz regularnie kopie pliku <code>/omegat/project_save.tmx</code> na nośniku zewnętrznym, np. CD lub DVD.</li>
+
+    <li>Dopóki nie znasz dobrze programu OmegaT, twórz pliki docelowe w regularnych odstępach i upewniaj się, czy plik docelowy zawiera ostatnią wersję twojego tłumaczenia.</li>
+
+    <li>Zachowaj szczególną ostrożność, jeśli wprowadzasz zmiany w plikach w katalogu <code>/source</code>, podczas gdy jesteś w trakcie pracy nad projektem. Jeśli plik źródłowy został zmodyfikowany po rozpoczęciu tłumaczenia, OmegaT może nie być w stanie odnaleźć segmentu, który był już przetłumaczony.</li>
+
+    <li>Zacznij z pomocą niniejszego Podręcznika. Jeżeli napotkasz problemy, wyślij wiadomość do Grupy użytkowników OmegaT - <a href=
+    "http://groups.yahoo.com/group/omegat">OmegaT user group</a>. Możesz pisać w języku, który znasz najlepiej.</li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Uwagi prawne</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Spis treści</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Indeks</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

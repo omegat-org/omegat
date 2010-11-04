@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.WikiGet;
 
@@ -40,6 +41,7 @@ import org.omegat.util.WikiGet;
  * http://code.google.com/intl/be/apis/ajaxlanguage/documentation/#Translation
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class GoogleTranslate extends BaseTranslate {
     protected static final String GT_URL = "http://ajax.googleapis.com/ajax/services/language/translate";
@@ -104,6 +106,30 @@ public class GoogleTranslate extends BaseTranslate {
         int beg = v.indexOf(MARK_BEG) + MARK_BEG.length();
         int end = v.indexOf(MARK_END, beg);
         String tr = v.substring(beg, end);
+
+        // Attempt to clean spaces added by GT
+        // Spaces after
+        Matcher tag = PatternConsts.OMEGAT_TAG_SPACE.matcher(tr);
+        while (tag.find()) {
+            String searchTag = tag.group();
+            if (text.indexOf(searchTag) == -1) { // The tag didn't appear with a
+                                          // trailing space in the source text
+                String replacement = searchTag.substring(0, searchTag.length()-1);
+                tr = tr.replace(searchTag, replacement);
+            }
+        }
+
+        // Spaces before
+        tag = PatternConsts.SPACE_OMEGAT_TAG.matcher(tr);
+        while (tag.find()) {
+            String searchTag = tag.group();
+            if (text.indexOf(searchTag) == -1) { // The tag didn't appear with a
+                                          // leading space in the source text
+                String replacement = searchTag.substring(1, searchTag.length());
+                tr = tr.replace(searchTag, replacement);
+            }
+        }
+
         return tr;
     }
 }

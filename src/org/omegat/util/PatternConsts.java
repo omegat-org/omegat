@@ -7,6 +7,7 @@
                2007 Didier Briel, Zoltan Bartko
                2008 Martin Fleurke
                2009 Didier Briel, Martin Fleurke
+               2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -94,7 +95,7 @@ public class PatternConsts
             "<html.*?>",                                                            
             Pattern.CASE_INSENSITIVE);
 
-    /** Pattern for detecting html &ltBR&gt; tags */
+    /** Pattern for detecting html &lt;BR&gt; tags */
     public static final Pattern HTML_BR = Pattern.compile(
             "<BR>", Pattern.CASE_INSENSITIVE);
     
@@ -111,7 +112,23 @@ public class PatternConsts
      */
     public static final Pattern OMEGAT_TAG = Pattern.compile(
             "<\\/?[a-zA-Z]+[0-9]+\\/?>");                                       
-    
+
+    /**
+     * Pattern that matches omegat-specific tags
+     * (with leading &lt; and trailing &gt; in any place of a string)
+     * plus a space after it.
+     */
+    public static final Pattern OMEGAT_TAG_SPACE = Pattern.compile(
+            "<\\/?[a-zA-Z]+[0-9]+\\/?>\\s");
+
+     /**
+     * Pattern that matches omegat-specific tags
+     * (with leading &lt; and trailing &gt; in any place of a string)
+     * with a space before it.
+     */
+    public static final Pattern SPACE_OMEGAT_TAG = Pattern.compile(
+            "\\s<\\/?[a-zA-Z]+[0-9]+\\/?>");
+
     /**
      * Pattern that matches omegat-specific tags 
      * (with leading &lt; and trailing &gt; in any place of a string)

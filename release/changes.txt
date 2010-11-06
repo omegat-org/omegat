@@ -17,6 +17,9 @@
 
   - Hunspell updated to 1.2.12
 
+  - The "HTML and XHTML files segmentation" segmentation rule has been renamed 
+to "HTML, XHTML and ODF segmentation"
+
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 2 
 ----------------------------------------------------------------------

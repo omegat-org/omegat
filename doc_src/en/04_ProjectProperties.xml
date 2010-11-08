@@ -120,7 +120,7 @@
             <secondary>Modifying during the session</secondary>
           </indexterm></emphasis></para>
 
-        <para>t is possible to modify the project properties during a
+        <para>It is possible to modify the project properties during a
         translation session. However, the safest way is to consider all
         settings as final once the translation has started - unless of course
         you realize a major blunder has been made. See the section Preventing

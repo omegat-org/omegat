@@ -122,7 +122,6 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         translateEndnotesCB = new javax.swing.JCheckBox();
         translateHeadersCB = new javax.swing.JCheckBox();
         translateFootersCB = new javax.swing.JCheckBox();
-        translateDiagramsCB = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         translateExcelCommentsCB = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
@@ -132,6 +131,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         translateChartsCB = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        translateDiagramsCB = new javax.swing.JCheckBox();
         aggregateTagsCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("OpenXML_FILTER_OPTIONS")); // NOI18N
@@ -229,14 +229,6 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateFootersCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateDiagramsCB, OStrings.getString("OpenXML_TRANSLATE_DIAGRAMS")); // NOI18N
-        translateDiagramsCB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                translateDiagramsCBradiosActionPerformed(evt);
-            }
-        });
-        jPanel1.add(translateDiagramsCB);
-
         jLabel4.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("OpenXML_EXCEL")); // NOI18N
@@ -280,6 +272,14 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel6, OStrings.getString("OpenXML_GENERIC_OPTIONS")); // NOI18N
         jPanel1.add(jLabel6);
+
+        org.openide.awt.Mnemonics.setLocalizedText(translateDiagramsCB, OStrings.getString("OpenXML_TRANSLATE_DIAGRAMS")); // NOI18N
+        translateDiagramsCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateDiagramsCBradiosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(translateDiagramsCB);
 
         org.openide.awt.Mnemonics.setLocalizedText(aggregateTagsCB, OStrings.getString("OpenXML_AGGREGATE_TAGS")); // NOI18N
         aggregateTagsCB.addActionListener(new java.awt.event.ActionListener() {

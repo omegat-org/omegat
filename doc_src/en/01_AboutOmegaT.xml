@@ -42,7 +42,7 @@
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Terminology
-        management</emphasis>:Terminology management is important for
+        management</emphasis>: Terminology management is important for
         translation consistency. <application>OmegaT</application> uses
         glossaries that contain translations of single words or small phrases,
         a sort of simplified bilingual dictionary for a specific domain.
@@ -165,7 +165,7 @@
         "<emphasis>list segments with target text containing two or more
         consecutive spaces</emphasis>". In the second example the regular
         expression ^s^s+ will find and list the offending segments. Regular
-        expressions are extensively used also segmentation rules.</para>
+        expressions are extensively used also for segmentation rules.</para>
       </listitem>
 
       <listitem>

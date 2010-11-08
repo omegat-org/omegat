@@ -105,13 +105,23 @@
 
   <section id="export.segment.to.text.files">
     <title>Export the segment to text files<indexterm class="singular">
-        <primary>Exporting untranslated segments</primary>
+        <primary>Exporting the current segment</primary>
       </indexterm></title>
 
-    <para>You may prefer to leave the untranslated segments as they are and
-    come back later to them. In this case you can activate the check box Allow
-    the translation to be equal to source and
-    <application>OmegaT</application> will save such source segments to a file
-    to be translated later.</para>
+    <para>The text export function exports data from within the current 
+    <application>OmegaT</application> project to plain-text files. The data 
+    are exported when the segment is opened. The files appear in the /script 
+    subfolder in the OmegaT user files folder, and include:</para>
+    <itemizedlist>
+        <listitem>
+        <para>The content of the segment source text
+        (<filename>source.txt</filename>).</para>
+        </listitem>
+        <listitem>
+        <para>The content of the segment target text
+        (<filename>target.txt</filename>).</para>
+        </listitem>
+    </itemizedlist>
+
   </section>
 </chapter>

@@ -285,7 +285,7 @@
             </row>
 
             <row>
-              <entry>Windows Vista</entry>
+              <entry>Windows Vista and 7</entry>
 
               <entry><literal>Users\&lt;User
               Name&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
@@ -337,7 +337,7 @@
 
           <tbody>
             <row>
-              <entry><filename>log.txt</filename></entry>
+              <entry><filename>logs/OmegaT.log</filename></entry>
 
               <entry>This file records Java error messages while
               <application>OmegaT</application> is running. When you think
@@ -349,12 +349,17 @@
             <row>
               <entry>omegat.prefs</entry>
 
-              <entry>An xml file with all the GUI accessible option settings,
-              as well as window position data.</entry>
+              <entry>An xml file with all the GUI accessible option settings.</entry>
             </row>
 
             <row>
-              <entry>filters.conf</entry>
+              <entry>uiLayout.xml</entry>
+
+              <entry>An xml file with window position data.</entry>
+            </row>
+
+            <row>
+              <entry>filters.xml</entry>
 
               <entry>An xml file with all the data set by the file filters
               preferences.</entry>

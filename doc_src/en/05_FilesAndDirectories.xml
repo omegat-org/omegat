@@ -337,7 +337,7 @@
 
           <tbody>
             <row>
-              <entry><filename>logs/OmegaT.log</filename></entry>
+              <entry>logs/OmegaT.log</entry>
 
               <entry>This file records Java error messages while
               <application>OmegaT</application> is running. When you think

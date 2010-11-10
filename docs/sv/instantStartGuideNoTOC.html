@@ -9,17 +9,17 @@
 <body>
   <h2>Börja använda OmegaT på 5 minuter!<br> Snabbstart</h2>
 
-  <p>Snabbstarten täcker bara grunderna. Egentligen borde alla användare läsa användarmanualen för att ta del av allt som OmegaT har att erbjuda. Genvägar beskrivs här som "ctrl+tangent" , men Mac-användare borde läsa det som "cmd+tangent" istället. Tangenten "cmd" är antingen märkt "command" eller med ett äpple på Apples tangentbord.</p>
+  <p>Snabbstarten täcker bara grunderna. Egentligen borde alla användare läsa Användarmanualen för att ta del av allt som OmegaT har att erbjuda. Genvägar beskrivs här som "ctrl+tangent" , men Mac-användare borde läsa det som "cmd+tangent" istället. Tangenten "cmd" är antingen märkt "command" eller med ett äpple på Apples tangentbord.</p>
   <hr>
   <a name="summary" id="summary"></a>
 
   <h2>Kort om hur OmegaT fungerar</h2>
 
-  <p>OmegaT består av ett fönster med tre distinkta paneler. Du kan ändra storlek på panelerna med musen. Till vänster är Redigeraren, där du skriver din översättning. Överst till höger är Träffgranskaren, där träffar från översättningsminnet kommer att visas. Nedan är Ordlistegranskaren, där träffar från ordlistan kommer att visas.</p>
+  <p>OmegaT består av ett fönster med tre distinkta paneler. Du kan ändra storlek på panelerna med musen. Till vänster är Redigeraren, där du skriver din översättning. Överst till höger är Träffgranskaren, där träffar från översättningsminnet kommer att visas. Nedan är Glosgranskaren, där träffar från gloslistan kommer att visas.</p>
 
-  <p>I Redigeraren presenterar OmegaT källtexten 'segmenterad' i meningar (eller stycken). Du översätter dessa segment ett i taget. När du går igenom segmenten sparas dina översättningar i ett översättningsminne. När alla segment har översatts (eller innan, om du begär det) använder OmegaT översättningsminnet för att skapa de översatta dokumenten i en målkatalog.</p>
+  <p>I Redigeraren presenterar OmegaT källtexten 'segmenterad' i meningar (eller stycken). Du översätter dessa segment ett i taget. Allt eftersom du går igenom segmenten sparas dina översättningar i ett översättningsminne, eller TM. När alla segment har översatts (eller innan, om du begär det) använder OmegaT översättningsminnet för att skapa de översatta dokumenten i en målkatalog.</p>
 
-  <p>OmegaT organiserar ditt översättningsarbete i så kallade översättningsprojekt. För varje projekt skapar OmegaT en uppsättning av mappar. Dessa används för att lagra källdokument som ska översättas, ordlistor som du kan använda, och eventuella översättningsminnen du har. OmegaT skapar också en målkatalog som kommer innehålla de översatta dokumenten..</p>
+  <p>OmegaT organiserar ditt översättningsarbete i så kallade översättningsprojekt. För varje projekt skapar OmegaT en uppsättning av mappar. Dessa används för att lagra källdokumenten som ska översättas, gloslistor som du kan använda, och eventuella översättningsminnen du har. OmegaT skapar också en målkatalog som kommer innehålla de översatta dokumenten..</p>
   <hr>
   <a name="translate" id="translate"></a>
 
@@ -38,9 +38,9 @@
 
   <p>Du kan helt enkelt godkänna placeringen av undermapparna, men se först till att språkkoderna för käll- och målspråk är korrekta. Välj språkkod (2 bokstäver) eller språk-och-regionskod (2+2 bokstäver) från rullgardinslistorna, eller skriv in dem själv (språkkoden kan ha 2 eller 3 bokstäver). Kom ihåg var du lagt Målkatalogen (för dina översatta dokument). Om du vill att OmegaT ska segmentera i meningar istället för stycken är det en bra idé att dubbelkolla Segmenteringsreglerna.</p>
 
-  <p>När du klickar OK för att godkänna inställningarna för projektet, kommer OmegaT be dig att välja källdokument för import. Du kan importera enskilda filer eller hela mappträd (inklusive alla filer i alla undermappar). Om du råkat importera fel dokument, eller för många, kan du helt enkelt ta bort dem från källkatalogen i ditt OmegaT-projekt (exempelvis med operativsystemets filhanterare).</p>
+  <p>När du klickar OK för att godkänna inställningarna för projektet, kommer OmegaT be dig att välja källdokument för import. Du kan importera enskilda filer eller hela mappträd (inklusive alla filer i alla undermappar). Om du råkat importera fel dokument, eller för många, kan du enkelt ta bort dem från källkatalogen i ditt OmegaT-projekt (exempelvis med operativsystemets filhanterare).</p>
 
-  <p>För att kontrollera din lista av filer att översätta, se fönstret <strong>Projektfiler</strong> (Meny: <strong>Projekt → Projektfiler...</strong>, om det inte öppnas automatiskt). Om du måste ändra innehållet i Källkatalogen, kom ihåg att också uppdatera projektet (Meny: <strong>Projekt → Uppdatera</strong>). OmegaT öppnar automatiskt den första filen i fillistan. Kom ihåg att OmegaT endast kan översätta dokument i formaten nedan om de passar mönstren definierade i filfiltren. Alla andra filer kommer ignoreras.</p>
+  <p>För att kontrollera listan med filer att översätta, se fönstret <strong>Projektfiler</strong> (Meny: <strong>Projekt → Projektfiler...</strong>, om det inte öppnas automatiskt). Om du måste ändra innehållet i Källkatalogen, kom ihåg att också uppdatera projektet (Meny: <strong>Projekt → Uppdatera</strong>). OmegaT öppnar automatiskt den första filen i fillistan. Kom ihåg att OmegaT endast kan översätta dokument i formaten nedan om de passar mönstren definierade i filfiltren. Alla andra filer kommer ignoreras.</p>
 
   <ul>
     <li>OpenDocument/OpenOffice.org</li>
@@ -82,15 +82,25 @@
     <li>För att flytta till en annan del av texten, ovanför eller under, dubbelklicka på segmentet du vill öppna.</li>
 
     <li>Om du föredrar att översätta i ett tomt målfält, ställ in detta i <strong>Alternativ → Redigeringsbeteende...</strong>.</li>
+
+    <li>
+      <p>Du kan ändra inställningarna för Redigeringspanelen (t.ex. att visa källtext eller inte, markera översatt text eller inte, etc.) i huvudmenyn under <span style="font-weight: bold;">Visa</span></p>
+    </li>
   </ul>
 
-  <p>När du trycker "<strong>ENTER</strong>", händer flera saker samtidigt: OmegaT lägger till segmentparet (källsegmentet och översättningen) i översättningsminnet och översätter automatiskt eventuella identiska segment som det upptäcker i övriga projektfiler. Det läser också översättningsminnet och ordlistan efter träffar för nästa oöversatta segment.</p><a name="tm" id="tm"></a>
+  <p>När du trycker "<strong>ENTER</strong>", händer flera saker samtidigt: OmegaT lägger till segmentparet (källsegmentet och översättningen) i översättningsminnet och översätter automatiskt eventuella identiska segment som det upptäcker i övriga filer i projektet. Det läser också översättningsminnet och gloslistan efter träffar för nästa oöversatta segment.</p><a name="tm" id="tm"></a>
 
-  <h3>Använd översättningsminnet och träffarna i dina gloslistor och ordlistor</h3><a name="tm_matches" id="tm_matches"></a>
+  <h3>Använda träffar i översättningsminnen, gloslistor och ordböcker</h3><a name="tm_matches" id="tm_matches"></a>
 
   <h3>Träffar från översättningsminnen</h3>
 
-  <p>Om OmegaT hittar luddiga träffar (30 % och uppåt) för nästa segment, visar det dessa i panelen för träffar. Den första träffen är förvald automatiskt. För att infoga träffar från översättningsminnet i målfältet kan du använda dig av  tangentbordsgenvägar:</p>
+  <p>Om OmegaT hittar luddiga träffar (30 % och uppåt) för nästa segment, visas dessa i Träffgranskaren. Den första träffen är automatiskt förvald.</p><img src=
+  "images/MatchesPane.png" name="graphics4" alt="matches pane" id="graphics4"
+  style="border: 0px solid ;"><br clear="left">
+
+  <p><br></p>
+
+  <p>För att infoga träffar från översättningsminnet i målfältet kan du använda dig av  tangentbordsgenvägar:</p>
 
   <ul>
     <li>Tryck <code>Ctrl+I</code> för att infoga den förvalda träffen vid markören, eller...</li>
@@ -110,15 +120,15 @@
 
   <h3>Träffar i gloslista och ordbok</h3>
 
-  <p>Träffar i gloslistor och ordböcker som du lagt till projektet visas som referens i panelerna för gloslistor och ordböcker.&nbsp;</p><a name="searches" id="searches"></a>
+  <p>Träffar i gloslistor och ordböcker som du lagt till projektet visas som referens i panelerna för gloslistor och ordböcker.</p><a name="searches" id="searches"></a>
 
   <h3>Att använda sökningar</h3>
 
-  <p>OmegaT har flera kraftfulla sökfunktioner. Ta fram Sökfönstret med <code>Ctrl+F</code> och ange ett ord eller en fras som du vill söka efter i "Sök efter"-fältet. Alternativt, markera ett ord eller fras i redigeringsfältet (måltexten i det aktiva segmentet) och tryck <code>Ctrl+F</code>. Ordet eller frasen anges då automatiskt i "Sök efter"-fältet.</p>
+  <p>OmegaT har flera kraftfulla sökfunktioner. Ta fram Sökfönstret med <code>Ctrl+F</code> och ange ett ord eller en fras som du vill söka efter i "Sök efter"-fältet. Alternativt, markera ett ord eller fras i redigeringsfältet och tryck <code>Ctrl+F</code>. Ordet eller frasen anges då automatiskt i "Sök efter"-fältet.</p>
 
-  <h3>Använd Google Translate</h3>
+  <h3>Använda Google översätt</h3>
 
-  <p>I panelen för Google Translate, får du automatiskt ett förslag till översättning av det aktuella segmentet. Du kan infoga förslaget med <code>Ctrl+M</code> i målsegmentet.<br></p>
+  <p>I panelen för Google översätt, får du automatiskt ett förslag till översättning av det aktuella segmentet. Tryck <code>Ctrl+M</code> för att ersätta det aktuella segmentet med maskinöversättningen.<br></p>
 
   <p><a name="create_trans" id="create_trans"></a></p>
 
@@ -137,31 +147,30 @@
   <p>I de här exemplen har vi markerat taggarna för att göra dem tydligare, men i OmegaT kommer de inte markeras. HTML-taggarna, märkta i <font color="blue">blått</font>, kommer att ignoreras av OmegaT, eftersom de innefattar hela segmentet. Taggarna markerade med <font color=
   "green">grönt</font> måste hanteras av OmegaT, eftersom de bara gäller en del av segmentet. Här är ett exempel på ett segment i HTML:</p>
 
-  <p><code><font color="blue">&lt;p&gt;</font>A different display font can be selected via the <font color="green">&lt;b&gt;</font>Display Font<font color=
-  "green">&lt;/b&gt;</font>dialog. Open it via the <font color=
-  "green">&lt;i&gt;</font>Settings<font color="green">&lt;/i&gt;</font> → <font color="green">&lt;i&gt;</font>Display Font...<font color=
-  "green">&lt;/i&gt;</font>menu item.Öppna den genom menyn <font color=
-  "green">&lt;i&gt;</font>Inställningar<font color="green">&lt;/i&gt;</font> → <font color="green">&lt;i&gt;</font>Visningstypsnitt...<font color=
-  "green">&lt;/i&gt;</font>. The font type and size can be changed from the dialog.<font color="blue">&lt;/p&gt;</font>Storlek och typ av typsnitt kan ändras i dialogen.<font color="blue">&lt;/p&gt;</font></code></p>
+  <p><code><font color="blue">&lt;p&gt;</font>Du kan välja annat visningstypsnitt med dialogen för <font color="green">&lt;b&gt;</font>Typsnitt<font color=
+  "green">&lt;/b&gt;</font>. Öppna den under menyn  <font color=
+  "green">&lt;i&gt;</font>Alternativ<font color="green">&lt;/i&gt;</font> → <font color="green">&lt;i&gt;</font>Typsnitt...<font color=
+  "green">&lt;/i&gt;</font>. Storlek och typ av typsnitt kan ändras i dialogen.<font color="blue">&lt;/p&gt;</font></code></p>
 
   <p>Så här kommer OmegaT visa segmentet, med översättning till afrikaans:</p><br>
 
-  <p><img src="images/tagged_segment.png" alt="" border="0" height="150" width=
-  "592"></p><br>
+  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
 
   <p>När OmegaT har skapat dokumenten kommer HTML-dokumentet se ut så här:</p>
 
-  <p><img src="images/tagged_segment_target.png" alt="" border="0" height="122"
-  width="592"></p><a name="tag_verif" id="tag_verif"></a>
+  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
+  "tag_verif" id="tag_verif"></a>
 
   <h3>Taggverifiering</h3>
 
-  <p>OmegaT känner inte automatiskt av felaktig taggning i det översatta dokumentet. Innan du skickar dokumentet till din kund borde du därför kontrollera dina taggar.</p>
+  <p>OmegaT känner inte automatiskt av felaktig taggning i det översatta dokumentet. Innan du skickar dokumentet till din kund bör du därför kontrollera dina taggar.</p>
 
-  <p>Välj <strong>Verktyg → Verfifiera taggar</strong> från menyn. En tabell kommer visa de segment där käll- och måltaggar inte stämmer överens. Klicka på segmentnumret. Du kommer automatiskt tas till det ovissa segmentet i Redigeraren, där du kan korrigera taggningen. Tryck <span style="font-weight: bold;">enter</span> för att verfiera det rättare segmentet och kontrollera rättningen genom att trycka <span style=
-  "font-weight: bold;">Ctrl-T</span> igen.</p>
+  <p>Välj <strong>Verktyg → Verfifiera taggar</strong> från menyn. En tabell kommer visa de segment där käll- och måltaggar inte stämmer överens. Klicka på segmentnumret. Du kommer automatiskt tas till det ovissa segmentet i Redigeraren, där du kan korrigera taggningen. Tryck <code>Enter</code> för att verifiera det rättade segmentet och kontrollera genom att trycka <code>Ctrl-T</code> igen.</p>
 
   <p>I vissa fall kan taggfel göra att ett dokument inte kan öppnas. Du bör därför se till att ha korrigerat eventuella fel innan du skapar de översatta filerna. Slutligen bör du dessutom alltid dubbelkolla den slutliga formateringen genom att öppna det översatta dokumentet i dess normala program.</p>
+
+  <p>I vissa programmeringsspråk (t.ex. PHP, C) används speciella taggar som platshållare i strängar som används i kombination med printf-funktionen. OmegaT kan upptäcka och verifiera dessa taggar om du aktiverar det. Välj <strong>Alternativ→ Taggverifiering...</strong> från menyn. Du kan välja mellan enkel och fullständig verifiering. För enkel verifiering används endast enkla varianter av eventuella platshållarvärden. Detta är användbart när källkoden inte innehåller de mer uttrycksfulla och komplexa platshållare och du får en massa falska positiver.</p>
+
   <hr>
 </body>
 </html>

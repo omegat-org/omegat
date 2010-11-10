@@ -177,9 +177,9 @@ Tidigare medarbetare inkluderar (i alfabetisk ordning):
 Kod har bidragits av
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (versionsansvarig)
+  Didier Briel (utvecklingsansvarig)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (huvudutvecklare)
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie

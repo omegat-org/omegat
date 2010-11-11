@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 4 
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   0 Bugfix
 ----------------------------------------------------------------------
 2.2.0 update 4 vs. 2.2.0 update 3
@@ -9,6 +9,7 @@
   Other enhancements:
 
   - Russian localisation updated to 2.2.0 (UI, Instant Start, Readme)
+  - Swedish localisation updated to 2.2.0 (UI, Instant Start, Readme)
 
   - The "Diagrams" option of Open XML has been moved to the Generic options
 section instead of the Word one, because it applies to other documents

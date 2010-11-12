@@ -50,7 +50,8 @@ public class OpenXMLDialect extends DefaultXMLDialect
             "w:tab",                                                            
             "w:br",                                                             
             // Excel
-            "si",                                                               
+            "si",
+            "comment",
             // PowerPoint
             "a:p",
             "c:v",

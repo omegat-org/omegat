@@ -518,6 +518,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         else
         {
             queueEndTag(tag);
+            // TODO: If a file doesn't contain any paragraph tag,
+            // the translatable content will be lost
             if (isParagraphTag(tag) && !collectingOutOfTurnText()
                 && !collectingIntactText())
                 translateAndFlush();

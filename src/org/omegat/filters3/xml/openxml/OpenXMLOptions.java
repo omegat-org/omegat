@@ -37,18 +37,21 @@ import org.omegat.filters2.AbstractOptions;
  * Translatable elements:
  * <ul>
  * <li>[] Hidden text (Word)
- * <li>[+] Comments (Word, Excel)
+ * <li>[+] Comments (Word)
  * <li>[+] Footnotes (Word)
  * <li>[+] Endnotes (Word)
  * <li>[+] Header (Word)
  * <li>[+] Footer (Word)
- * <li>[] Diagrams (Word)
+ * <li>[+] Comments (Excel)
+ * <li>[] Sheet names (Excel)
  * <li>[+] Slide comments (PowerPoint)
  * <li>[] Slide Masters (PowerPoint)
  * <li>[] Slide Layouts (PowerPoint)
- * <li>[] Charts (PowerPoint)
+ * <li>[] Charts (Global)
+ * <li>[] Diagrams (Global)
+ * <li>[] Drawings (Global)
  * </ul>
- * Generic options:
+ * Other options:
  * <ul>
  * <li>[+] Tags Aggregation
  * </ul>
@@ -64,10 +67,12 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_FOOTERS = "translateFooters";
     private static final String OPTION_TRANSLATE_DIAGRAMS = "translateDiagrams";
     private static final String OPTION_TRANSLATE_EXCEL_COMMENTS = "translateExcelComments";
+    private static final String OPTION_TRANSLATE_SHEET_NAMES = "translateSheetNames";
     private static final String OPTION_TRANSLATE_SLIDE_COMMENTS = "translateSlideComments";
     private static final String OPTION_TRANSLATE_SLIDE_MASTERS = "translateSlideMasters";
     private static final String OPTION_TRANSLATE_SLIDE_LAYOUTS = "translateSlideLayouts";
     private static final String OPTION_TRANSLATE_CHARTS = "translateCharts";
+    private static final String OPTION_TRANSLATE_DRAWINGS = "translateDrawings";
     private static final String OPTION_AGGREGATE_TAGS = "aggregateTags";
 
     public OpenXMLOptions(Map<String, String> options) {
@@ -186,6 +191,20 @@ public class OpenXMLOptions extends AbstractOptions {
     }
 
     /**
+     * Returns whether Excel Sheet Names should be translated.
+     */
+    public boolean getTranslateSheetNames() {
+        return getBoolean(OPTION_TRANSLATE_SHEET_NAMES, false);
+    }
+
+    /**
+     * Sets whether Excel Comments should be translated.
+     */
+    public void setTranslateSheetNames(boolean translateExcelSheetNames) {
+        setBoolean(OPTION_TRANSLATE_SHEET_NAMES, translateExcelSheetNames);
+    }
+
+    /**
      * Returns whether Slide Comments should be translated.
      */
     public boolean getTranslateSlideComments() {
@@ -238,6 +257,20 @@ public class OpenXMLOptions extends AbstractOptions {
      */
     public void setTranslateCharts(boolean translateCharts) {
         setBoolean(OPTION_TRANSLATE_CHARTS, translateCharts);
+    }
+
+    /**
+     * Returns whether Drawings should be translated.
+     */
+    public boolean getTranslateDrawings() {
+        return getBoolean(OPTION_TRANSLATE_DRAWINGS, false);
+    }
+
+    /**
+     * Sets whether Drawings should be translated.
+     */
+    public void setTranslateDrawings(boolean translateDrawings) {
+        setBoolean(OPTION_TRANSLATE_DRAWINGS, translateDrawings);
     }
 
     /**

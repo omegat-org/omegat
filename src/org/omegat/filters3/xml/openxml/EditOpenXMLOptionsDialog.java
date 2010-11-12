@@ -43,6 +43,7 @@ import org.omegat.util.OStrings;
  *
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Antonio Vilei
  */
 public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
 {
@@ -66,10 +67,12 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         translateFootersCB.setSelected(options.getTranslateFooters());
         translateDiagramsCB.setSelected(options.getTranslateDiagrams());
         translateExcelCommentsCB.setSelected(options.getTranslateExcelComments());
+        translateSheetNamesCB.setSelected(options.getTranslateSheetNames());
         translateSlideCommentsCB.setSelected(options.getTranslateSlideComments());
         translateSlideMastersCB.setSelected(options.getTranslateSlideMasters());
         translateSlideLayoutsCB.setSelected(options.getTranslateSlideLayouts());
         translateChartsCB.setSelected(options.getTranslateCharts());
+        translateDrawingsCB.setSelected(options.getTranslateDrawings());
         aggregateTagsCB.setSelected(options.getAggregateTags());
         
         //  Handle escape key to close the window
@@ -124,14 +127,17 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         translateFootersCB = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
         translateExcelCommentsCB = new javax.swing.JCheckBox();
+        translateSheetNamesCB = new javax.swing.JCheckBox();
         jLabel5 = new javax.swing.JLabel();
         translateSlideCommentsCB = new javax.swing.JCheckBox();
         translateSlideMastersCB = new javax.swing.JCheckBox();
         translateSlideLayoutsCB = new javax.swing.JCheckBox();
+        jLabel7 = new javax.swing.JLabel();
         translateChartsCB = new javax.swing.JCheckBox();
+        translateDiagramsCB = new javax.swing.JCheckBox();
+        translateDrawingsCB = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        translateDiagramsCB = new javax.swing.JCheckBox();
         aggregateTagsCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("OpenXML_FILTER_OPTIONS")); // NOI18N
@@ -243,7 +249,15 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateExcelCommentsCB);
 
-        jLabel5.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
+        org.openide.awt.Mnemonics.setLocalizedText(translateSheetNamesCB, OStrings.getString("OpenXML_TRANSLATE_EXCEL_SHEET_NAMES")); // NOI18N
+        translateSheetNamesCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateSheetNamesCBradiosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(translateSheetNamesCB);
+
+        jLabel5.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         org.openide.awt.Mnemonics.setLocalizedText(jLabel5, OStrings.getString("OpenXML_POWER_POINT")); // NOI18N
         jPanel1.add(jLabel5);
@@ -263,15 +277,13 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         org.openide.awt.Mnemonics.setLocalizedText(translateSlideLayoutsCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LAYOUTS")); // NOI18N
         jPanel1.add(translateSlideLayoutsCB);
 
+        jLabel7.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, OStrings.getString("OpenXML_GLOBAL")); // NOI18N
+        jPanel1.add(jLabel7);
+
         org.openide.awt.Mnemonics.setLocalizedText(translateChartsCB, OStrings.getString("OpenXML_TRANSLATE_CHARTS")); // NOI18N
         jPanel1.add(translateChartsCB);
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "                                                                 ");
-        jLabel1.setEnabled(false);
-        jPanel1.add(jLabel1);
-
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, OStrings.getString("OpenXML_GENERIC_OPTIONS")); // NOI18N
-        jPanel1.add(jLabel6);
 
         org.openide.awt.Mnemonics.setLocalizedText(translateDiagramsCB, OStrings.getString("OpenXML_TRANSLATE_DIAGRAMS")); // NOI18N
         translateDiagramsCB.addActionListener(new java.awt.event.ActionListener() {
@@ -280,6 +292,21 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
             }
         });
         jPanel1.add(translateDiagramsCB);
+
+        org.openide.awt.Mnemonics.setLocalizedText(translateDrawingsCB, OStrings.getString("OpenXML_TRANSLATE_DRAWINGS")); // NOI18N
+        translateDrawingsCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateDrawingsCBradiosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(translateDrawingsCB);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "                                                                 ");
+        jLabel1.setEnabled(false);
+        jPanel1.add(jLabel1);
+
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, OStrings.getString("OpenXML_GENERIC_OPTIONS")); // NOI18N
+        jPanel1.add(jLabel6);
 
         org.openide.awt.Mnemonics.setLocalizedText(aggregateTagsCB, OStrings.getString("OpenXML_AGGREGATE_TAGS")); // NOI18N
         aggregateTagsCB.addActionListener(new java.awt.event.ActionListener() {
@@ -338,10 +365,12 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         options.setTranslateFooters(translateFootersCB.isSelected());
         options.setTranslateDiagrams(translateDiagramsCB.isSelected());
         options.setTranslateExcelComments(translateExcelCommentsCB.isSelected());
+        options.setTranslateSheetNames(translateSheetNamesCB.isSelected());
         options.setTranslateSlideComments(translateSlideCommentsCB.isSelected());
         options.setTranslateSlideMasters(translateSlideMastersCB.isSelected());
         options.setTranslateSlideLayouts(translateSlideLayoutsCB.isSelected());
         options.setTranslateCharts(translateChartsCB.isSelected());
+        options.setTranslateDrawings(translateDrawingsCB.isSelected());
         options.setAggregateTags(aggregateTagsCB.isSelected());
         doClose(RET_OK);
     }//GEN-LAST:event_okButtonActionPerformed
@@ -364,6 +393,14 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
     private void aggregateTagsCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aggregateTagsCBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aggregateTagsCBActionPerformed
+
+    private void translateDrawingsCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateDrawingsCBradiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_translateDrawingsCBradiosActionPerformed
+
+    private void translateSheetNamesCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateSheetNamesCBradiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_translateSheetNamesCBradiosActionPerformed
     
     private void doClose(int retStatus)
     {
@@ -383,18 +420,21 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton okButton;
     private javax.swing.JCheckBox translateChartsCB;
     private javax.swing.JCheckBox translateCommentsCB;
     private javax.swing.JCheckBox translateDiagramsCB;
+    private javax.swing.JCheckBox translateDrawingsCB;
     private javax.swing.JCheckBox translateEndnotesCB;
     private javax.swing.JCheckBox translateExcelCommentsCB;
     private javax.swing.JCheckBox translateFootersCB;
     private javax.swing.JCheckBox translateFootnotesCB;
     private javax.swing.JCheckBox translateHeadersCB;
     private javax.swing.JCheckBox translateHiddenTextCB;
+    private javax.swing.JCheckBox translateSheetNamesCB;
     private javax.swing.JCheckBox translateSlideCommentsCB;
     private javax.swing.JCheckBox translateSlideLayoutsCB;
     private javax.swing.JCheckBox translateSlideMastersCB;

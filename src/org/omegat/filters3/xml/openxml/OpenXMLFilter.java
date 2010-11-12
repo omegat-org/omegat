@@ -70,12 +70,16 @@ public class OpenXMLFilter extends AbstractFilter
     // Complete string when all options are enabled
     // Word
     "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)" +    
-    "|(header\\d+\\.xml)|(footer\\d+\\.xml)|(data\\d+\\.xml)" +                                  
+    "|(header\\d+\\.xml)|(footer\\d+\\.xml)" +                                  
     // Excel
-    "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" +                             
+    "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" +
     // PowerPoint
     "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)" +
-    "|(notesSlide\\d+\\.xml)|(chart\\d+\\.xml)"
+    "|(notesSlide\\d+\\.xml)
+    // Global
+    "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)" +
+    // Excel
+    "|(workbook\\.xml)"
 */          
 
         DOCUMENTS = "(document\\.xml)";
@@ -92,8 +96,6 @@ public class OpenXMLFilter extends AbstractFilter
             DOCUMENTS += "|(header\\d+\\.xml)";                             
         if (options.getTranslateFooters())
             DOCUMENTS += "|(footer\\d+\\.xml)";                             
-        if (options.getTranslateDiagrams())
-            DOCUMENTS += "|(data\\d+\\.xml)";
         DOCUMENTS += "|(sharedStrings\\.xml)";
         if (options.getTranslateExcelComments())
             DOCUMENTS += "|(comments\\d+\\.xml)";                           
@@ -104,8 +106,15 @@ public class OpenXMLFilter extends AbstractFilter
             DOCUMENTS += "|(slideLayout\\d+\\.xml)";
         if (options.getTranslateSlideComments())
             DOCUMENTS += "|(notesSlide\\d+\\.xml)";                         
+        if (options.getTranslateDiagrams())
+            DOCUMENTS += "|(data\\d+\\.xml)";
         if (options.getTranslateCharts())
             DOCUMENTS += "|(chart\\d+\\.xml)";
+        if (options.getTranslateDrawings())
+            DOCUMENTS += "|(drawing\\d+\\.xml)";
+        if (options.getTranslateSheetNames())
+            DOCUMENTS += "|(workbook\\.xml)";
+
 
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
@@ -268,7 +277,6 @@ public class OpenXMLFilter extends AbstractFilter
             String shortname = zipentry.getName();
             shortname = removePath(shortname);
             Matcher filematch = TRANSLATABLE.matcher(shortname);
-            boolean first = true;
             if (filematch.matches())
             {
                 File tmpin = tmp();
@@ -295,7 +303,6 @@ public class OpenXMLFilter extends AbstractFilter
                     zipout.putNextEntry(outEntry);
                     LFileCopy.copy(tmpout, zipout);
                     zipout.closeEntry();
-                    first = false;
                 }
                 if (!tmpin.delete())
                     tmpin.deleteOnExit();

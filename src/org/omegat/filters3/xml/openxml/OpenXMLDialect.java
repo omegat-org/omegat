@@ -32,6 +32,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * Dialect of Open XML files.
  *
  * @author Didier Briel
+ * @author Antonio Vilei
  */
 public class OpenXMLDialect extends DefaultXMLDialect
 {
@@ -52,6 +53,7 @@ public class OpenXMLDialect extends DefaultXMLDialect
             // Excel
             "si",
             "comment",
+            "definedName",
             // PowerPoint
             "a:p",
             "c:v",
@@ -65,15 +67,24 @@ public class OpenXMLDialect extends DefaultXMLDialect
         defineIntactTags(new String[]
         {
             // Excel
-            "authors",                                                          
+            "authors",
             // PowerPoint
             "p:attrName",
             "a:tableStyleId",
+            // Charts
             "c:f",
+            "c:formatCode",
             // Word
             "wp:align",
             "wp:posOffset",
+            // Drawings
+            "xdr:col",
+            "xdr:row",
+            "xdr:colOff",
+            "xdr:rowOff",
         });
+
+        defineTranslatableTagAttribute("sheet", "name"); // Excel
 
         boolean aggregationEnabled = options.getAggregateTags();
         /*

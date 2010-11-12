@@ -2,7 +2,7 @@
  OmegaT 2.2.0 update 4 
 ----------------------------------------------------------------------
   3 Enhancements
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.2.0 update 4 vs. 2.2.0 update 3
 
@@ -11,11 +11,13 @@
   - Russian localisation updated to 2.2.0 (UI, Instant Start, Readme)
   - Swedish localisation updated to 2.2.0 (UI, Instant Start, Readme)
 
-  - The "Diagrams" option of Open XML has been moved to the Generic options
-section instead of the Word one, because it applies to other documents
-as well (e.g., PowerPoint).
+  - The options of the Open XML filter have been reorganised because 
+some options (e.g., Diagrams) apply to all the documents.
 
   Bug fixes:
+
+  - OpenXML Excel: some parts are not available for translation
+    http://sourceforge.net/support/tracker.php?aid=2885433
 
   - Open XML filter: The comments in Excel sheets didn't appear for 
 translation

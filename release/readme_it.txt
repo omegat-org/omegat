@@ -173,9 +173,9 @@ Elenco dei contributi precedenti (in ordine alfabetico)
 Contributi al codice:
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (gestore dei rilasci)
+  Didier Briel (gestore dello sviluppo)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (sviluppatore primario)
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie

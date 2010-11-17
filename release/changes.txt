@@ -2,13 +2,17 @@
  OmegaT 2.2.0 update 5 
 ----------------------------------------------------------------------
   1 Enhancement
-  0 Bugfix
+  1 Bugfix
 ----------------------------------------------------------------------
 2.2.0 update 5 vs. 2.2.0 update 4
 
   Other enhancements:
 
   - Italian localisation updated to 2.2.0 (UI, Readme, documentation)
+
+  Bug fixes:
+
+  - ResX filter: comments appeared as translatable text.
 
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 4 

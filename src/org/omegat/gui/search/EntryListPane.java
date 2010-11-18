@@ -35,9 +35,8 @@ import java.util.List;
 
 import javax.swing.JTextPane;
 import javax.swing.SwingUtilities;
+import javax.swing.text.AttributeSet;
 import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
 
 import org.omegat.core.Core;
 import org.omegat.core.search.SearchMatch;
@@ -46,6 +45,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -60,14 +60,8 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Didier Briel
  */
 class EntryListPane extends JTextPane {
-    protected static final SimpleAttributeSet FOUND_MARK;
+    protected static final AttributeSet FOUND_MARK = Styles.createAttributeSet(Color.BLUE, null, true, null);
     protected static final int MARKS_PER_REQUEST = 100;
-
-    static {
-        FOUND_MARK = new SimpleAttributeSet();
-        StyleConstants.setBold(FOUND_MARK, true);
-        StyleConstants.setForeground(FOUND_MARK, Color.BLUE);
-    }
 
     public EntryListPane() {
         setDocument(new DefaultStyledDocument());

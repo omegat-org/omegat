@@ -24,6 +24,7 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Color;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
@@ -32,7 +33,6 @@ import java.util.Locale;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Position;
-import javax.swing.text.SimpleAttributeSet;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
@@ -54,12 +54,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class SegmentBuilder {
 
     /** Attributes for show text. */
-    protected static final AttributeSet ATTR_SOURCE = Styles.GREEN;
-    protected static final AttributeSet ATTR_SEGMENT_MARK = Styles.BOLD;
-    protected static final AttributeSet ATTR_TRANS_TRANSLATED = Styles.TRANSLATED;
-    protected static final AttributeSet ATTR_TRANS_UNTRANSLATED = Styles.UNTRANSLATED;
-    protected static final AttributeSet ATTR_ACTIVE = new SimpleAttributeSet();
-    protected static final AttributeSet ATTR_INFO = Styles.ITALIC;
+    protected static final AttributeSet ATTR_SEGMENT_MARK = Styles.createAttributeSet(null, null, true, false);
+    protected static final AttributeSet ATTR_INFO = Styles.createAttributeSet(null, null, null, true);
     public static final String SEGMENT_MARK_ATTRIBUTE = "SEGMENT_MARK_ATTRIBUTE";
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
@@ -81,6 +77,8 @@ public class SegmentBuilder {
     private String translationText;
     /** True if entry is active. */
     private boolean active;
+    /** True if translation exist for entry. */
+    private boolean transExist;
 
     private final Document3 doc;
     private final EditorController controller;
@@ -145,6 +143,7 @@ public class SegmentBuilder {
                 }
 
                 TransEntry trans = Core.getProject().getTranslation(ste);
+                transExist = trans != null;
 
                 int beginOffset = offset;
                 if (isActive) {
@@ -196,7 +195,7 @@ public class SegmentBuilder {
         
         int prevOffset = offset;
         sourceText = ste.getSrcText();
-        addInactiveSegPart(true, sourceText, ATTR_SOURCE);
+        addInactiveSegPart(true, sourceText, attrs(true));
         posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
 
         if (trans != null) {
@@ -211,7 +210,7 @@ public class SegmentBuilder {
             translationText = "";
         }
 
-        addActiveSegPart(translationText, ATTR_ACTIVE);
+        addActiveSegPart(translationText, attrs(false));
         posTranslationBeg = null;
 
         doc.activeTranslationBeginM1 = doc
@@ -246,41 +245,32 @@ public class SegmentBuilder {
      */
     private void createInactiveSegmentElement(TransEntry trans)
             throws BadLocationException {
-        if (  EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo()) ) {
+        if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())) {
             addModificationInfoPart(trans, ATTR_INFO);
         }
-        
-        AttributeSet attrSource = null;
-        if (settings.isDisplaySegmentSources()) {
-            sourceText = ste.getSrcText();
-            attrSource = ATTR_SOURCE;
-        } else {
-            sourceText = null;
-        }
 
-        if (trans!=null) {
+        if (trans != null) {
             // translation exist
             translationText = trans.translation;
-        } else if (!settings.isDisplaySegmentSources()) {
-            // translation not exist, and source part doesn't displayed yet
-            translationText = null;
-            sourceText = ste.getSrcText();
-            attrSource = settings.getUntranslatedAttributeSet();
         } else {
-            translationText = null;
+            if (sourceText == null) {
+                // translation not exist, but source display disabled also -
+                // need to display source
+                sourceText = ste.getSrcText();
+            }
         }
-        
+
         if (sourceText != null) {
             int prevOffset = offset;
-            addInactiveSegPart(true, sourceText, attrSource);
+            addInactiveSegPart(true, sourceText, attrs(true));
             posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
         } else {
             posSourceBeg = null;
         }
+
         if (translationText != null) {
             int prevOffset = offset;
-            addInactiveSegPart(false, translationText, settings
-                    .getTranslatedAttributeSet());
+            addInactiveSegPart(false, translationText, attrs(false));
             posTranslationBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
         } else {
             posTranslationBeg = null;
@@ -532,5 +522,36 @@ public class SegmentBuilder {
     void onActiveEntryChanged() {
         translationText = doc.extractTranslation();
         displayVersion++;
+    }
+    
+    /**
+     * Choose segment's attributes based on rules.
+     */
+    private AttributeSet attrs(boolean isSource) {
+        Color fg;
+        if (ste.getCountInProject() > 1) {
+            fg = Styles.COLOR_LIGHT_GRAY;
+        } else {
+            fg = null;
+        }
+        if (active) {
+            if (isSource) {
+                return Styles.createAttributeSet(fg, Styles.COLOR_GREEN, true, null);
+            } else {
+                return Styles.createAttributeSet(fg, null, null, null);
+            }
+        } else {
+            if (isSource) {
+                if (transExist || settings.isDisplaySegmentSources()) {
+                    return Styles.createAttributeSet(fg, Styles.COLOR_GREEN, true, null);
+                } else {
+                    Color b = settings.isMarkUntranslated() ? Styles.COLOR_UNTRANSLATED : null;
+                    return Styles.createAttributeSet(fg, b, null, null);
+                }
+            } else {
+                Color b = settings.isMarkTranslated() ? Styles.COLOR_TRANSLATED : null;
+                return Styles.createAttributeSet(fg, b, null, null);
+            }
+        }
     }
 }

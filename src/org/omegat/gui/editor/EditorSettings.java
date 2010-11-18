@@ -26,12 +26,9 @@ package org.omegat.gui.editor;
 
 import java.awt.event.KeyEvent;
 
-import javax.swing.text.AttributeSet;
-
 import org.omegat.core.Core;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Preferences;
-import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -76,16 +73,6 @@ public class EditorSettings {
         } else {
             return KeyEvent.VK_ENTER;
         }
-    }
-
-    /** the attribute set used for translated segments */
-    public AttributeSet getTranslatedAttributeSet() {
-        return markTranslated ? Styles.TRANSLATED : Styles.PLAIN;
-    }
-
-    /** the attribute set used for untranslated segments */
-    public AttributeSet getUntranslatedAttributeSet() {
-        return markUntranslated ? Styles.UNTRANSLATED : Styles.PLAIN;
     }
 
     public boolean isUseTabForAdvance() {

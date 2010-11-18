@@ -25,6 +25,7 @@
 
 package org.omegat.gui.matches;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
@@ -216,7 +217,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
         this.activeMatch = activeMatch;
 
         selectAll();
-        setCharacterAttributes(Styles.PLAIN, true);
+        setCharacterAttributes(Styles.createAttributeSet(null, null, null, null), true);
 
         int start = delimiters.get(activeMatch);
         int end = delimiters.get(activeMatch + 1);
@@ -232,14 +233,15 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
             int tokstart = start + 3 + token.getOffset();
             int tokend = start + 3 + token.getOffset() + token.getLength();
             select(tokstart, tokend);
-            if ((attributes[i] & StringData.UNIQ) != 0)
-                setCharacterAttributes(Styles.TEXT_EXTRA, false);
-            else if ((attributes[i] & StringData.PAIR) != 0)
-                setCharacterAttributes(Styles.TEXT_BORDER, false);
+            if ((attributes[i] & StringData.UNIQ) != 0) {
+                setCharacterAttributes(Styles.createAttributeSet(Color.blue, null, null, null), false);
+            } else if ((attributes[i] & StringData.PAIR) != 0) {
+                setCharacterAttributes(Styles.createAttributeSet(Color.green, null, null, null), false);
+            }
         }
 
         select(start, end);
-        setCharacterAttributes(Styles.BOLD, false);
+        setCharacterAttributes(Styles.createAttributeSet(null, null, true, null), false);
         setCaretPosition(end - 2); // two newlines
         final int fstart = start;
 

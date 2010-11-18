@@ -636,9 +636,37 @@ public class RealProject implements IProject
                 projectFilesList.add(fi);
             }
         }
+        
+        calculateEntriesCounts();
+        
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
         long en = System.currentTimeMillis();
         Log.log("Load project source files: " + (en - st) + "ms");
+    }
+    
+    /**
+     * It calculates counts of each entry in project.
+     */
+    private void calculateEntriesCounts() {
+        Map<String, Integer> counts = new HashMap<String, Integer>(16384);
+        // first phrase - calculate
+        for (FileInfo fi : projectFilesList) {
+            for (int i = 0; i < fi.entries.size(); i++) {
+                String src = fi.entries.get(i).getSrcText();
+                Integer c = counts.get(src);
+                if (c == null) {
+                    c = 0;
+                }
+                counts.put(src, c + 1);
+            }
+        }
+        // second phrase - store in entries
+        for (FileInfo fi : projectFilesList) {
+            for (int i = 0; i < fi.entries.size(); i++) {
+                SourceTextEntry se=fi.entries.get(i);
+                se.countInProject=counts.get(se.getSrcText());
+            }
+        }
     }
     
     /** Locates and loads external TMX files with legacy translations. */

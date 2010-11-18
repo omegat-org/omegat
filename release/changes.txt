@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 5 
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.2.0 update 5 vs. 2.2.0 update 4
@@ -9,6 +9,7 @@
   Other enhancements:
 
   - Italian localisation updated to 2.2.0 (UI, Readme, documentation)
+  - Basque localisation updated to 2.2.0 (UI, Readme, documentation)
 
   Bug fixes:
 

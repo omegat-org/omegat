@@ -2,7 +2,7 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Itzulpen-memoriak - OmegaT 2.0 erabiltzailearen eskuliburua</title>
+  <title>Itzulpen-memoriak - OmegaT 2.2 erabiltzailearen eskuliburua</title>
 </head>
 
 <body>
@@ -67,7 +67,9 @@
         <li><em>proiektuarenizena-level1.tmx</em></li>
 
         <li><em>proiektuarenizena-level2.tmx</em></li>
-      </ol>(<i>proiektuarenizena</i> zure proiektuaren izena izanik).<p>Fitxategi hauek /source/ karpetaren edukiei dagozkien segmentuen sorburua eta helburua gordetzen dituzte (betiere fitxategi itzuliak sortu diren unekoak). </p>
+      </ol>(<i>proiektuarenizena</i> zure proiektuaren izena izanik).
+
+      <p>Fitxategi hauek /source/ karpetaren edukiei dagozkien segmentuen sorburua eta helburua gordetzen dituzte (betiere fitxategi itzuliak sortu diren unekoak). </p>
 
       <ul>
         <li><em>level1</em> fitxategiak testu-informazioa soilik gordetzen du.</li>
@@ -76,8 +78,10 @@
 
         <li><em>omegat</em> fitxategiak OmegaT-ren berezko etiketak gordetzen ditu. Honi esker, fitxategia OmegaT-ren beste proiektu batean erabili daiteke.</li>
       </ul>
+    </li>
 
-      </li><li><em>/tm/</em> karpeta beste TMX fitxategi batzuen gordelekua izan daiteke. Fitxategi hauek TMX formatu zuzena eduki behar dute eta 3 motatakoak izan daitezke: testu-informazioa dutenak soilik (TMX 1. maila), OmegaT-ren testu- eta formatu-informazioa dutenak (omegat TMX) eta TMX motako testu- eta formatu-informazioa dutenak (TMX 2. maila). Haien arteko desberdintasunak teknikoak dira (ikus behean xehetasun gehiagorako), eta proiektu zahar bateko itzulpen-memoria bat erabili nahi baduzu kontuan izan trukagarriak direla, alegia, berdin-berdin funtzionatuko dutela.</li>
+    <li><em>/tm/</em> karpeta beste TMX fitxategi batzuen gordelekua izan daiteke. Fitxategi hauek TMX formatu zuzena eduki behar dute eta 3 motatakoak izan daitezke: testu-informazioa dutenak soilik (TMX 1. maila), OmegaT-ren testu- eta formatu-informazioa dutenak (omegat TMX) eta TMX motako testu- eta formatu-informazioa dutenak (TMX 2. maila). Haien arteko desberdintasunak teknikoak dira (ikus behean xehetasun gehiagorako), eta proiektu zahar bateko itzulpen-memoria bat erabili nahi baduzu kontuan izan trukagarriak direla, alegia, berdin-berdin funtzionatuko dutela.
+    </li>
   </ul>
   <p>Aukeran, OmegaT-k beste TMX bat (OmegaT-ren estilokoa) zuk nahi duzun tokian sor dezan erabaki dezakezu. TMX honek proiektuaren segmentu itzulgarri guztiak edukiko ditu.  Ikus <a href="#pseudo_translate">sasiitzulpenen memoria</a>.</p>
   
@@ -173,22 +177,20 @@
   <a name="pseudo_translate" id="pseudo_translate"></a>
   <h2>Sasiitzulpenen memoria</h2>
   <p>Zenbait kasutan gerta daiteke itzulpenen pretratamendua edo OmegaT-k onartzen ez duen beste tratamenduren bat egin nahi izatea. Esaterako, probatarako sasiitzulpen bat egin nahi izatea.</p>
-  <p>OmegaT-k proiektuaren segmentu guztiak dituen TMX fitxategi estra bat sortzea ahalbidetzen du. TMX honetako itzulpena hurrengo motakoa izan daiteke:<ul><li>itzulpena sorburuaren berdina da (lehenetsia)</li>
+  <p>OmegaT-k proiektuaren segmentu guztiak dituen TMX fitxategi estra bat sortzea ahalbidetzen du. TMX honetako itzulpena hurrengo motakoa izan daiteke:</p>
+  <ul><li>itzulpena sorburuaren berdina da (lehenetsia)</li>
   <li>helburu-segmentua hutsik dago</li></ul>
   <p>TMX fitxategiak zuk nahi duzun izena eduki dezake, baina ".tmx" luzapena automatikoki esleitzen zaio eskuz jartzen ez badiozu.</p>
-  <P>Sasiitzulpenaren sorrera komando-lerroko hurrengo parametroen bidez aktibatzen da:</P>
-  <code>java -jar omegat.jar <em>--pseudotranslatetmx=&lt;fitxategi-izena&gt; [pseudotranslatetype=[equal|empty]]</em></code>
-  <p>Ordezkatu &lt;fitxategi-izena&gt; sortu nahi duzun fitxategiaren izenarekin, bai bide-izen absolutua erabiliz bai erlatiboa erabiliz (azken kasuan OmegaT abiarazi zenuen direktorioan utziko du fitxategia).</p>
-  <p>Bigarren argumentua,<em>--pseudotranslatetype</em>, hautazkoa da.  Bere balioa <em>equal</em> (sorburua=helburua) edo <em>empty</em> (helburu-segmentua hutsik dago) izan daiteke, eta lehenetsia <em>equal</em> da.</p>
+  <P>Sorrera kontsola-moduan aktibatzen da. Ikusi <a href="consoleMode.html">Kontsola-modua</a> hau egiten ikasteko.</P>
   <p>Sortutako TMX fitxategia zure aukerako tresnarekin molda dezakezu. OmegaT-n erabili nahi izanez gero:<br> izenez aldatu eta <em>project_save.tmx</em> jarri, eta zure proiektuko <em>omegat</em> karpetan utzi.</p>
   <hr>
 
   <a name="upgrading_TM" id="upgrading_TM"></a>
   <h2>Itzulpen-memoriak berritzea</h2>
 
-  <p>OmegaT-ren aurreko bertsioek paragrafotan soilik zatitutako segmentuak sor zitzaketen, eta ez ziren zehatzak formatu-etiketei zenbakia ematean HTML eta Open Document fitxategiak erabiltzen zirenean. OmegaT 2.0 bertsioak TMX fitxategi horiek momentuan detektatu eta berritu ditzake, parekatze lausoen kalitatea gehituz eta zure uneko itzulpena hobetuz.</p>
+  <p>OmegaT-ren aurreko bertsioek paragrafotan soilik zatitutako segmentuak sor zitzaketen, eta ez ziren zehatzak formatu-etiketei zenbakia ematean HTML eta Open Document fitxategiak erabiltzen zirenean. OmegaT 2.2 bertsioak TMX fitxategi horiek momentuan detektatu eta berritu ditzake, parekatze lausoen kalitatea gehituz eta zure uneko itzulpena hobetuz.</p>
 
-  <p>Proiektu baten TMX-a behin bakarrik berrituko da eta forma berrituan gordeko da. TMX fitxategi zaharrak proiektua kargatzen den bakoitzean berrituko dira. Kontuan izan zenbait kasutan OmegaT 2.0 bertsioan fitxategi-iragazkietan aldaketak egiteak segmentazio guztiz desberdina sortzea eragin dezakeela. Kasu bakan horietan itzulpena eskuz berritu beharko duzu.</p>
+  <p>Proiektu baten TMX-a behin bakarrik berrituko da eta forma berrituan gordeko da. TMX fitxategi zaharrak proiektua kargatzen den bakoitzean berrituko dira. Kontuan izan zenbait kasutan OmegaT 2.2 bertsioan fitxategi-iragazkietan aldaketak egiteak segmentazio guztiz desberdina sortzea eragin dezakeela. Kasu bakan horietan itzulpena eskuz berritu beharko duzu.</p>
   <hr>
   <table summary="just formatting"  style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>

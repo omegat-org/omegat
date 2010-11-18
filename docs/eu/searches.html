@@ -2,26 +2,22 @@
 <head>
 	<link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Bilaketak - OmegaT 2.0 erabiltzailearen eskuliburua</title>
+  <title>Bilaketak - OmegaT 2.2 erabiltzailearen eskuliburua</title>
 </head>
 
 <body>
   <h2>Bilaketak</h2>
 
+  <p><a href="#searchwindow">Bilaketa-leihoa</a></p>
+
   <ul>
-    <li>
-      <p><a href="#searchwindow">Bilaketa-leihoa</a></p>
+      <li>
+        <a href="#calling">Bilaketa egitea</a>
+      </li>
 
-      <ul>
-        <li>
-          <p><a href="#calling">Bilaketa egitea</a></p>
-        </li>
-
-        <li>
-          <p><a href="#location">Bilaketaren kokapena</a></p>
-        </li>
-      </ul>
-    </li>
+      <li>
+        <a href="#location">Bilaketaren kokapena</a>
+      </li>
   </ul>
 
   <p><a href="#searchmethods">Bilaketa-metodoak</a></p>
@@ -31,6 +27,8 @@
   <p><a href="#usingregularexpressions">Adierazpen erregularrak erabiltzea</a></p>
 
   <p><a href="#display">Bilaketaren emaitzak erakustea</a></p>
+  
+  <p><a href="#filter">Editoreko sarrerak iragaztea bilaketaren arabera</a></p>
   <hr>
 
   <h2><a name="searchwindow" id="searchwindow"></a>Bilaketa-leihoa</h2><img src=
@@ -41,7 +39,7 @@
 
   <h3><a name="calling" id="calling"></a>Bilaketa egitea</h3>
 
-  <p>OmegaT-k bilaketa-funtzio asko eta indartsuak eskaintzen ditu. Ireki <strong>bilaketa-leihoa</strong> <code>Ctrl+F</code> sakatuz eta sartu bilatu nahi duzun hitza edo esaldia <strong>Bilatu hau</strong> kutxan. Bestela, editorearen leihoan, hautatu hitz edo esaldi bat edizio-eremuan (alegia, segmentu aktiboaren helburu-testuan) eta sakatu <code>Ctrl+F</code>. Kasu honetan, hitza edo esaldia automatikoki sartuko da <strong>Bilatu hau</strong> kutxan. <strong>Testu-bilaketa</strong> leihoa irekitzen den bakoitzean, leiho berria sortzen da. Ez ahaztu haiek ixtea, bestela mahaigaina leihoz beteko zaizu.</p>
+  <p>OmegaT-k bilaketa-funtzio asko eta indartsuak eskaintzen ditu. Ireki <strong>bilaketa-leihoa</strong> <code>Ctrl+F</code> sakatuz eta sartu bilatu nahi duzun hitza edo esaldia <strong>Bilatu hau</strong> kutxan. Bestela, hautatu hitz edo esaldi bat editore-paneleko edozein tokitan eta sakatu <code>Ctrl+F</code>. Kasu honetan, hitza edo esaldia automatikoki sartuko da <strong>Bilatu hau</strong> kutxan. <strong>Testu-bilaketa</strong> leihoa irekitzen den bakoitzean, leiho berria sortzen da. Ez ahaztu haiek ixtea, bestela mahaigaina leihoz beteko zaizu.</p>
 
   <h3><a name="location" id="location"></a>Bilaketaren kokapena</h3>
 
@@ -61,7 +59,7 @@
     </li>
   </ul>
 
-  <p>fitxategietan barrena bilaketak egitean, sorburu-fitxategietarako onartutako formatuetan soilik bilatuko du OmegaT-k (ikus <a href="filesToTranslate.html">Onartutako fitxategi-formatuak</a>). Esaterako, OmegaT-k TMX fitxategiak erabil ditzake, baina ez ditu bilaketetan kontuan hartzen.</p>
+  <p>Fitxategietan barrena bilaketak egitean, sorburu-fitxategietarako onartutako formatuetan soilik bilatuko du OmegaT-k (ikus <a href="filesToTranslate.html#formats">Fitxategi-formatuak</a>). Esaterako, OmegaT-k TMX fitxategiak erabil ditzake, baina ez ditu bilaketetan kontuan hartzen.</p>
   <hr>
 
   <h2><a name="searchmethods" id="searchmethods"></a>Bilaketa-metodoak</h2>
@@ -166,6 +164,20 @@
   <p>Bilaketa-leihoan erakusten diren segmentuen ordena, proiektuan daukaten ordena bera da. Itzulitako segmentuetan jatorrizko testua goian eta itzulitako testua behean erakutsiko dira; itzuli gabeko segmentuetan jatorrizko testua soilik erakutsiko da.</p>
 
   <p>Segmentu batean klik eginez, editorea agertzen da segmentua aldatu ahal izateko. Aldaketaren ondoren, bilaketa-leihora itzul zaitezke eta aurkitutako hurrengo segmentura joan, esaterako terminologia zuzentzeko.</p>
+  <hr>
+
+  <h2><a name="filter" id="filter"></a>Editoreko sarrerak iragaztea bilaketaren arabera</h2>
+
+  <p>Bilaketa-emaitzetan barrena errazago nabigatzeko, bilaketa editorean bertan aplika dezakezu. Sakatu behealdeko 'iragazkia' botoia editore-leihoan erakutsiko diren sarrerak uneko bilaketan aurkitutakoetara mugatzeko. Nabigazio normala erabil dezakezu, adibidez bilaketa-irizpidea betetzen duen hurrengo (Itzuli gabeko) segmentura joateko.</p>
+  <p>Oharrak:</p>
+  <ul><li>bilaketa bakoitzak 1.000 elementuen muga daukanez, esaldi arrunt bat bilatzen baduzu editoreak 1.000 sarrera soilik erakutsiko ditu, eta ez irizpidea betetzen duten sarrera guztiak.</li>
+  <li>fitxategi batek agian ez du bilaketarekin bat datorren sarrerarik, eta beraz, hutsik agertuko da.</li> 
+  <li>bilaketa batek bikoiztuak kentzen baditu, editorean ere bikoiztuak ez dira agertuko.</li>
+  </ul>
+
+  <p>Iragazki bat kentzeko, sakatu 'kendu iragazkia' botoia edo birkargatu proiektua.
+  </p>
+
   <hr>
   <table summary= "just formatting" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>

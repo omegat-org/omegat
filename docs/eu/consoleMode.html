@@ -1,73 +1,62 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
   <link rel="stylesheet" href="OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-  <title>Kontsola - OmegaT 2.0 erabiltzailearen eskuliburua</title>
-</head>
-<body>
-<h1>OmegaT-ren kontsola-modua</h1>
-<ul>
-  <li>
-    <p><a href="#prerequisites">Aurreko baldintzak</a></p>
-  </li>
-  <li>
-    <p><a href="#start">Kontsola moduan abiatzea</a></p>
-  </li>
-  <li>
-    <p><a href="#extra">Aukera gehigarriak</a></p>
-    <p>&nbsp;</p>
-  </li>
-</ul>
-<p>Kontsola moduaren bidez, OmegaT script-gintzako ingurune batean erabil daiteke itzulpen-tresna gisa. OmegaT kontsola moduan abiatzen denean ez da erabiltzaile-interfazerik kargatzen (beraz, edozein kontsolatan funtzionatuko du) eta proiektua automatikoki itzultzen da.</p>
-<hr>
-<h3><a name="prerequisites" id="prerequisites"></a>Aurreko baldintzak</h3>
-<p>OmegaT kontsola moduan erabiltzeko, OmegaT-ren proiektu bat existitu behar da. Kokapena edozein izan daiteke, kokapen hori komando-lerroan idatzi behar baituzu abioan.</p>
-<p>Beste ezarpen batzuk erabili nahi izanez gero, konfigurazio-fitxategiak existitu behar dira. Bi modu daude:</p>
-<ol>
-  <li>Exekutatu OmegaT modu normalean (EIarekin) eta zehaztu ezarpenak. OmegaT kontsola moduan abiarazten baduzu, ezarpen horiexek erabiliko ditu. OmegaT modu normalean ezin baduzu erabili (ingurune grafikorik ez badago):</li>
-  <li>kopiatu ezarpen-fitxategiak beste ordenagailu bateko OmegaT-ren instalazio batetik eta itsasi direktorio batean. Kokapena edozein izan daiteke, kokapen hori komando-lerroan idatzi ahal baituzu abioan. Kopiatu beharreko fitxategiak filters.conf eta segmentation.conf dira, eta erabiltzailearen direktorio nagusian daude (C:\Documents and Settings\%Erabiltzailea%\OmegaT Windows-en, /home/%erabiltzailea%/.omegat/ Linux-en)</li>
-</ol>
-<br>
-<h3><a name="start" id="start"></a>Kontsola moduan abiatzea</h3>
-<p>OmegaT kontsola moduan abiarazteko, parametro gehigarriak erantsi behar dira abioan. Garrantzitsuena <code>&lt;project-dir&gt;</code> da, eta aukeran, <code>--config-dir=&lt;config-dir&gt;</code>.</p>
-<p>Adibidea: <code>$&gt; java -jar OmegaT.jar /bidea/proiektura --config-dir=/bidea/konfigurazio/fitxategietara --mode=console-translate</code>
 
-<p><span style="font-weight: bold;">Azalpena:</span></p>
-<table style="width: 80%;" cellpadding="2" cellspacing="2" summary="just formatting">
-  <tbody>
-    <tr>
-      <td style="text-align: left;"><code>&lt;project-dir&gt;</code></td>
-      <td style="text-align: left;">
-      <p>itzuli beharreko proiektua non dagoen esaten dio OmegaT-ri. Parametro hau eransten bada, OmegaT kontsola moduan abiatzen da eta adierazitako proiektua itzultzen du.</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left;"><code>--config-dir=&lt;config-dir&gt;</code></td>
-      <td style="text-align: left;">
-      <p>&nbsp;konfigurazio-fitxategiak gordeta dauden direktorioa esaten dio OmegaT-ri. Eransten ez bada, OmegaT balio lehenetsietara itzultzen da (OmegaT direktorioa erabiltzailearen direktorio nagusian edo, hura existitzen ez bada, uneko direktorioa).</p>
-      </td>
-    </tr>
-    <tr>
-      <td style="text-align: left;"><code>--mode=console-translate</code></td>
-      <td style="text-align: left;">
-      <p>&nbsp;OmegaT kontsula moduan abiatzen da eta adierazitako proiektua itzultzen du</p>
-      </td>
-    </tr>
-  </tbody>
-</table>
-<h3><a name="extra" id="extra"></a>Aukera gehigarriak</h3>
-<p>Komando-lerroko beste parametro bat ere erabil daiteke kontsola moduan: <code>--quiet</code>. Modu isilean (quiet), informazio gutxiago erakusten da pantailan. Normalean egoera-barran ematen diren mezu guztiak ez dira erakusten. Erabilera: <code>java -jar OmegaT.jar /bidea/proiektura --quiet</code> </p>
-<hr>
-<table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"  summary="just formatting">
-<tbody>
-    <tr>
-      <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a> </td>
-      <td style="text-align: center;"><a href="index.html">Orri nagusia</a>
-      </td>
-      <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a> </td>
-    </tr>
-  </tbody>
-</table>
+  <title>Kontsola-modua - OmegaT 2.2 erabiltzailearen eskuliburua</title>
+</head>
+
+<body>
+  <h1>OmegaT-ren kontsola-modua</h1>
+
+  <ul>
+    <li>
+      <p><a href="#prerequisites">Aurreko baldintzak</a></p>
+    </li>
+
+    <li>
+      <p><a href="#start">Kontsola moduan abiatzea</a></p>
+    </li>
+
+  </ul>
+  <p>&nbsp;</p>
+
+  <p>Kontsola moduaren bidez, OmegaT script-gintzako ingurune batean erabil daiteke itzulpen-tresna gisa. Kontsola-moduan abiaraztean, ez da EIGrik kargatzen (beraz, edozein kontsolatan funtzionatuko du). Exekuzio-moduaren arabera, proiektua automatikoki itzuliko da edo sasiitzulpena duen itzulpen-memoria bat sortuko da.</p>
+  <hr>
+
+  <h3><a name="prerequisites" id="prerequisites"></a>Aurreko baldintzak</h3>
+
+  <p>OmegaT kontsola moduan erabiltzeko, OmegaT-ren proiektu bat existitu behar da. Kokapena edozein izan daiteke, kokapen hori komando-lerroan idatzi behar baituzu abioan.</p>
+
+  <p>Beste ezarpen batzuk erabili nahi izanez gero, konfigurazio-fitxategiak existitu behar dira. Bi modu daude:</p>
+
+  <ol>
+    <li>Exekutatu OmegaT modu normalean (EIarekin) eta zehaztu ezarpenak. OmegaT kontsola moduan abiarazten baduzu, ezarpen horiexek erabiliko ditu. OmegaT modu normalean ezin baduzu erabili (ingurune grafikorik ez badago):</li>
+
+    <li>Kopiatu ezarpen-fitxategiak beste ordenagailu bateko OmegaT-ren instalazio batetik eta itsasi direktorio batean. Kokapena edozein izan daiteke, kokapen hori komando-lerroan idatzi ahal baituzu abioan. Kopiatu beharreko fitxategiak filters.conf eta segmentation.conf dira, eta erabiltzailearen direktorio nagusian daude (C:\Documents and Settings\%Erabiltzailea%\OmegaT Windows-en, /home/%erabiltzailea%/.omegat/ Linux-en)</li>
+  </ol><br>
+
+  <h3><a name="start" id="start"></a>Kontsola moduan abiatzea</h3>
+
+  <p>OmegaT kontsola moduan abiarazteko, parametro gehigarriak erantsi behar dira abioan. <code>&lt;project-dir&gt;</code> eta <code>--mode=&lt;mode&gt;</code> derrigorrezkoak dira.</p>
+
+  <p>Moduaren arabera, parametro gehiago eman daitezke (edo eman behar dira). Honetan gehiago sakondu nahi izanez gero, irakurri <a href="commandlineArguments.html">komando-lerroko argumentuak</a>.</p>
+
+  <p>Itzulpen-proiektuaren adibidea:<br> <code>$&gt; java -jar OmegaT.jar /bidea/proiektura --config-dir=/bidea/konfigurazio/fitxategietara --mode=console-translate</code><br> Itzulpen-proiektuaren adibidea fitxategi-bakarrerako:<br> <code>$&gt; java -jar OmegaT.jar /bidea/proiektura --config-dir=/bidea/konfigurazio/fitxategietara --mode=console-translate --source-pattern=test\.html</code><br> Sasiitzulpena duen memoriaren adibidea:<br> <code>java -jar OmegaT.jar /bidea/proiektura --config-dir=/bidea/konfigurazio/fitxategietara --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code></p>
+
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Legezko oharrak</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Orri nagusia</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Aurkibidea</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

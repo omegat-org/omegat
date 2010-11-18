@@ -1,6 +1,7 @@
-Itzulpen hau Asier Sarasua Garmendiaren lana da, copyright 2009.
+Itzulpen hau Asier Sarasua Garmendiaren lana da, copyright 2010.
 
-OmegaT 2.0, Read Me fitxategia
+==============================================================================
+  OmegaT 2.2, Read Me fitxategia
 
   1.  OmegaT-ri buruzko informazioa
   2.  Zer da OmegaT?
@@ -23,7 +24,6 @@ Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
 
 Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
-     http://sourceforge.net/tracker/?group_id=68187&atid=520350
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
 ==============================================================================
@@ -32,29 +32,29 @@ Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
 OmegaT Ordenagailuz Lagundutako Itzulpenak edo OLI (ingelesez, CAT) motako tresna bat da. Librea da, hau da, ez da ezer ordaindu behar hura erabiltzeko, ezta modu profesionalean erabili nahi bada ere, eta hura moldatu edota birbanatzeko libre zara, erabiltzailearen lizentzia errespetatzen baduzu.
 
 OmegaT-ren ezaugarri nagusiak hurrengoak dira:
-  - Java onartzen duen edozein sistema eragiletan erabil daiteke
-  - baliozko edozein TMX fitxategi erabil daiteke itzulpenerako erreferentzia gisa
-  - esaldien segmentazio malgua (SRX-en antzeko metodoa erabiliz)
-  - bilaketak proiektuan eta erreferentziako itzulpen-memorietan
-  - bilaketak edozein karpetatako fitxategietan (onartutako formatuetan) 
+  - Java onartzen duen edozein sistema eragiletan erabiltzeko aukera
+  - itzulpenetarako erreferentzia modura edozein TMX fitxategi erabiltzeko aukera
+  - esaldi mailako segmentazio zalua (SRXaren antzeko metodoa erabiliz)
+  - bilaketak proiektuan eta erreferentziako itzulpen-memorietan egiten dira
+  - bilaketak edozein karpetatako onartutako edozein fitxategitan egin daitezke 
   - parekatze lausoak
   - proiektuen kudeaketa adimentsua, karpeten hierarkia konplexuak barne
-  - glosarioak onartzen ditu (terminologiaren egiaztapena) 
-  - kode irekiko ortografia-egiaztatzaileen erabilera automatikoa onartzen du
+  - glosarioak (terminologia-bildumak) onartzen ditu 
+  - kode irekiko ortografia-egiaztatzaileak zuzenean onartzen ditu
   - StarDict hiztegiak onartzen ditu
-  - Google Translate itzulpengintza automatikoko zerbitzua onartzen du
-  - dokumentazio eta tutorial argi eta osoak
-  - hainbat hizkuntzatara lokalizatua.
+  - Google Translate-n itzulpen automatikoko zerbitzuak onartzen ditu
+  - dokumentazio eta tutorial argi eta osoa
+  - lokalizazioa hainbat hizkuntzatan.
 
 OmegaT-k hurrengo fitxategi-formatuak onartzen ditu zuzenean:
   - testu arrunta
   - HTML eta XHTML
-  - HTML Help Compiler
+  - HTML laguntza konpilatzeko fitxategiak
   - OpenDocument/OpenOffice.org
   - Java-ren baliabide-paketeak (.properties)
-  - INI fitxategiak ('gako=balio' bikoteak edozein kodeketan kodetuta dituzten fitxategiak)
+  - INI fitxategiak ('gako=balio' bikoteak edozein kodeketarekin)
   - PO fitxategiak
-  - DocBook dokumentazioko fitxategi-formatua
+  - Dokumentazioko DocBook fitxategi-formatua
   - Microsoft-en OpenXML fitxategiak
   - Okapi-ren XLIFF fitxategi elebakarrak
   - QuarkXPress-en CopyFlowGold
@@ -62,6 +62,11 @@ OmegaT-k hurrengo fitxategi-formatuak onartzen ditu zuzenean:
   - ResX
   - Android-en baliabideak
   - LaTeX
+  - Typo3 LocManager
+  - Laguntzak eta eskuliburuak
+  - Windows-en RC baliabideak
+  - Mozillaren DTD formatua
+  - DokuWiki
 
 OmegaT beste formatu batzuk ere onartzeko pertsonalizatu daiteke.
 
@@ -74,7 +79,8 @@ Erabiltzailearen eskuliburua deskargatu berri duzun paketean dago. [Laguntza] me
 ==============================================================================
  3. OmegaT-ren instalazioa
 
-3.1 Orokorra. OmegaT-k Java Runtime Environment (JRE) 1.5 edo altuagoa behar du zure sisteman instalatu ahal izateko. Orain, OmegaT-ren bertsio estandarrarekin batera, Java Runtime Environment bat banatzen da, erabiltzaileak JREa hautatu, eskuratu eta instalatu behar izan ez dezan. 
+3.1 Orokorra
+OmegaT-k Java Runtime Environment (JRE) 1.5 edo altuagoa behar du zure sisteman instalatu ahal izateko. Orain, OmegaT-ren bertsio estandarrarekin batera, Java Runtime Environment bat banatzen da, erabiltzaileak JREa hautatu, eskuratu eta instalatu behar izan ez dezan. 
 
 Java dagoeneko instalatuta badaukazu, OmegaT-ren egungo bertsioa instalatzeko modurik errazena Java Web Start erabiltzea da. 
 Horretarako, deskargatu hurrengo fitxategia eta exekuta ezazu:
@@ -161,15 +167,17 @@ Eta hasi begiratzen OmegaT-ren munduan zer ari den gertatzen...
 
 Ondoko hauek (ordena alfabetikoan) ekarpenak egin dituzte:
 
-Kodeari ekarpenak egin dizkiotenak:
+Kodea hurrengo lagunek idatzi dute:
   Zoltan Bartko
-  Didier Briel (release manager)
+  Volker Berlin
+  Didier Briel (garapen-kudeatzailea)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (garatzaile nagusia)
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Maxym Mykhalchuk 
   Arno Peters
@@ -177,28 +185,29 @@ Kodeari ekarpenak egin dizkiotenak:
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Antonio Vilei
   Martin Wunderlich
 
-Beste ekarpen batzuk:
+Other contributions by
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (lokalizazio-kudeatzailea)
   Vito Smolej (dokumentazio-kudeatzailea)
   Samuel Murray
   Marc Prior 
-  eta beste hainbat eta hainbat lagun
+  eta lagundu duten beste jende asko
 
 (OmegaT proiektuari ekarpen esanguratsua egin diozula uste baduzu eta zure izena hemen agertzen ez bada, mesedez hitz egin gurekin.)
 
 OmegaT-k ondoko liburutegiak erabiltzen ditu:
 
-  HTMLParser: Somik Raha, Derrick Oswald eta beste batzuk (LGPL lizentzia)
+  HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License)
   http://sourceforge.net/projects/htmlparser
 
-  MRJ Adapter 1.0.8: Steve Roy (LGPL lizentzia)
+  MRJ Adapter 1.0.8 by Steve Roy (LGPL License)
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework 2.1.4: VLSolutions (CeCILL lizentzia)
+  VLDocking Framework 2.1.4 by VLSolutions (CeCILL License)
   http://www.vlsolutions.com/en/products/docking/
 
   Hunspell: László Németh eta beste batzuk (LGPL lizentzia)
@@ -219,8 +228,7 @@ Errore baten berri eman baino lehen, ziurtatu dokumentazioa sakonki aztertu duzu
 Egin behar duzun hurrengo gauza, beste erabiltzaile batzuekin aurkitu duzuna baieztatzea da, arazoa jada jakinarazi ez dela ziurtatzeko. Erroreak jakinarazteko orria ere SourceForge-n aurkituko duzu. Gertatu behar izango ez lukeen zerbait eragin duen sekuentzia edo gertaera bat aurkitu duzula seguru dakizunean, soilik orduan bete beharko zenuke errore-jakinarazpen bat.
 
 Errore-jakinarazpen egokiek hiru gauza behar dituzte.
-  
-- Arazoa birsortzeko,
+  - Urratsak errorea errepikatzeko,
   - Zer espero zenuen ikustea, eta
   - Zer ikusi zenuen.
 

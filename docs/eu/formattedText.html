@@ -3,7 +3,7 @@
   <link rel="stylesheet" href="./OmegaT.css" type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-  <title>Testu formatudunarekin lanean - OmegaT 2.0 erabiltzailearen eskuliburua</title>
+  <title>Testu formatudunarekin lanean - OmegaT 2.2 erabiltzailearen eskuliburua</title>
 </head>
 
 <body>
@@ -36,6 +36,10 @@
 
     <li>
       <p><a href="#tag_hints">Etiketak kudeatzeko aholkuak</a></p>
+    </li>
+
+    <li>
+      <p><A href="#printf">printf leku-markak</A></p>
     </li>
   </ul>
 
@@ -194,10 +198,10 @@
 
   <p>Etiketak balidatzeko funtzioak etiketa aldatuak detektatzen ditu (bai nahita egindakoak bai nahigabe sortutakoak), eta zein segmentutan dauden adierazten ditu. Funtzio hau erabiltzean (Ctrl+T sakatuz), itzulpenean dauden etiketa okerrak edo hautsiak erakusten dituen koadro bat irekitzen da. Etiketadun testuetako akatsek sarritan arazoak eragiten dituzte OpenDocument edo OpenOffice.org-en fitxategietan, eta askotan ezin izaten dira ireki. Etiketak zuzentzea eta helburu-dokumentuak birsortzea erraza da etiketak balidatzeko funtzioa erabiliz. Ctrl+T sakatzean irekitzen den leihoan taula bat agertzen da 3 elementu erakutsiz: segmentura joateko esteka bat, jatorrizko segmentua eta segmentu itzulia erakutsiz.</p><br>
 
-  <table align="center" border="1" width="80%">
+  <table align="center" border="1" width="80%" summary="">
     <tbody>
       <tr>
-        <td><a href="">1</a></td>
+        <td>1</td>
 
         <td>Bistaratzeko beste letra-tipo bat hauta daiteke <strong><font color="blue">&lt;b0&gt;</font></strong>Letra-tipoa<strong><font color="blue">&lt;/b0&gt;</font></strong> koadroa erabiliz Hura irekitzeko, joan <strong><font color=
         "blue">&lt;i1&gt;</font></strong>Aukerak<strong><font color=
@@ -229,6 +233,26 @@
   "segmentation.html">segmentazio-arauak</a> erabiltzea etiketa gutxiago dituzten segmentuak sortzeko. Hau ezaugarri aurreratu bat da eta esperientzia apur bat behar da modu egokian aplikatzeko.</p>
 
   <p><strong>Adi:</strong>OmegaT-k ezin ditu oraindik formatu-akatsak guztiz modu automatikoan detektatu. Beraz, ez dizu ohartaraziko akatsen bat egiten baduzu edo formatua zure hizkuntzara hobeto moldatzeko aldatzen baduzu. Hala ere, zenbaitetan fitxategi itzuliek itxura arraroa edukiko dute, eta OpenDocument / OpenOffice.org-en fitxategien kasuan ireki ere ez dira egingo.</p>
+
+  <hr>
+
+  <h3><a name="printf"></a>printf leku-markak</h3>
+
+  <p>Zenbait programazio-lengoaietan (esaterako PHP, C) etiketa bereziak erabiltzen dira leku-marka modura, printf funtzioarekin konbinatuta erabiltzen diren kateetan. Adib.:
+  </p>
+  <pre>$var =_("polita");
+echo printf(_("OmegaT oso %s da"),$var);</pre>
+
+  <p>Testu-kateak iturburu-kode honetatik erauzten badira (adib. PO iragazkiaren bidez), OmegaT-k ez ditu aldagai hauek etiketekin ordezten, ezin baitu jakin adib. <code>%s</code> leku-marka den ala testuaren atal bat den. Hala ere, leku-marka hauen balidazioa gaitu daiteke. Hautatu <strong>Aukerak→ Etiketa-balidazioa...</strong> menutik. Balidazio sinplea edo balidazio osoa erabil dezakezu.</p>
+
+  <p>printf aldagaietarako sintaxi ofiziala hau da:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [SIGNSPECIFIER] [PADDINGSPECIFIER] [ALIGNMENTSPECIFIER] [WIDTHSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Balidazio osoak formatu hau osorik onartzen du, <code>WIDTHSPECIFIER</code> salbu. Balidazio sinplean hurrengo sintaxia egiaztatzen da:</p>
+  <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
+
+  <p>Leku-marken ordena alda dezakezu, baina gero ARGUMENTSWAPSPECIFIER gehitu behar duzu oraindik existitzen ez bada. Honek esan nahi du sekuentzia-zenbaki bat eta dolar-zeinu bat gehitu behar direla <code>%</code> ondoren. Adib. <code> "%s %s aplikazio bat da"</code>  eta <code> "%1$s %2$s aplikazio bat da"</code> berdinak dira, beraz  <code> "%2$s aplikazioa %1$s da"</code> itzul dezakezu.
+  </p>
   <hr>
 
   <table style="width: 100%;" summary="just formatting" border="0" cellpadding=

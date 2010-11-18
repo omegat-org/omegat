@@ -1,9 +1,9 @@
 <html>
 <head>
-  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <link type="text/css" href="./OmegaT.css" rel="stylesheet">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-  <title>Erabiltzaile-interfazea - OmegaT 2.0 erabiltzailearen eskuliburua</title>
+  <title>Erabiltzaile-interfazea - OmegaT 2.2 erabiltzailearen eskuliburua</title>
 </head>
 
 <body>
@@ -147,8 +147,6 @@
     <tbody>
       <tr>
         <td width="24%">
-          <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
-
           <p><strong>OmegaT-ren leiho nagusia</strong></p>
         </td>
 
@@ -274,7 +272,7 @@
 
         <td width="83%">
           <dl>
-            <dd>proiektuaren karpetak eta hizkuntzak aldatzeko, <code>Ktrl+E</code>  edo <strong>Proiektua → Propietateak...</strong> bidez irekitzen da, <code>esc</code> bidez ezkutatzen da</dd>
+            <dd>proiektuaren karpetak eta hizkuntzak aldatzeko, <code>Ctrl+E</code>  edo <strong>Proiektua → Propietateak...</strong> bidez irekitzen da, <code>esc</code> bidez ezkutatzen da</dd>
           </dl>
         </td>
       </tr>
@@ -337,10 +335,10 @@
     </tbody>
   </table>
   <hr>
+  <a name="OmegaT_Main_Window" id="OmegaT_Main_Window"></a>
 
   <h2>OmegaT-ren leiho nagusia</h2><img src="images/OmegaT_panes.png" name="grafika1"
-  alt="OmegaT-ren panelak" id="grafika1" style=
-  "border: 0px solid;"><br clear="left">
+  alt="OmegaT-ren panelak" id="grafika1" border="0"><br clear="left">
 
   <p><br>
   <br></p>
@@ -348,18 +346,50 @@
   <p>Leiho nagusia hiru panelez, menu nagusiaz eta egoera-barraz osaturik dago. Panela bere izena dagoen tokitik arrastatuz, bere kokapena aldatu dezakezu, baita leiho berri bat sortuz desatrakatu ere. Panelaren egoeraren arabera, goiko ezkerreko izkinan ikur desberdinak agertu daitezke.</p>
 
   <p><img src="images/Minimize.gif" name="graphics1" alt="Ikonotu" id=
-  "graphics1" align="bottom" border="0">panela ikonotzen du, bere izena soilik erakutsiz egoera-barraren ondoan.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximizatu" id="graphics2"
-  align="bottom" border="0">panelak leihoaren espazio osoa bete dezan eragiten du.<br> <img src="images/Restore.gif" name="graphics3" alt="Leheneratu" id="graphics3"
-  align="bottom" border="0">panela ikonotu edo maximizatu baino lehen zegoen egoeran jartzen du.<br> <img src="images/Undock.gif" name="graphics4" alt="Desatrakatu" id="graphics4"
-  align="bottom" border="0">panela leiho nagusitik desatrakatzen du eta leiho berri bat sortzen du.<br> <img src="images/Dock.gif" name="graphics5" alt="Atrakatu" id="graphics5" align=
-  "bottom" border="0">panela berriro leiho nagusian atrakatzen du.</p>
+  "graphics1" align="bottom" border="0" height="18" width="18"> panela ikonotzen du, bere izena soilik erakutsiz egoera-barraren ondoan.<br> <img src="images/Maximize.gif" name="graphics2" alt="Maximizatu" id="graphics2"
+  align="bottom" border="0" height="18" width="18">panelak leihoaren espazio osoa bete dezan eragiten du.<br> <img src="images/Restore.gif" name="graphics3" alt="Leheneratu" id="graphics3"
+  align="bottom" border="0" height="18" width="18">panela ikonotu edo maximizatu baino lehen zegoen egoeran jartzen du.<br> <img src="images/Undock.gif" name="graphics4" alt="Desatrakatu" id="graphics4"
+  align="bottom" border="0" height="18" width="18">panela leiho nagusitik desatrakatzen du eta leiho berri bat sortzen du.<br> <img src="images/Dock.gif" name="graphics5" alt="Atrakatu" id="graphics5" align=
+  "bottom" border="0" height="18" width="18">panela berriro leiho nagusian atrakatzen du.</p>
 
   <p>Era berean, panelak bata bestearen gainean jarri daitezke. Kasu honetan, panelek fitxa bat erakutsiko dute goialdean. Fitxan klik eginez, panela aurreko planora eramango da. Panelen tamaina aldatu nahi izanez gero, beren arteko banatzaileak arrastatu egin daitezke.</p>
 
+  <p>Behean eskuinean dauden kontagailuek itzulpenaren aurrerapena adierazten dute:</p>
+
+  <p><img alt="menu nagusiko kontagailuak" title="menu nagusiko kontagailuak" src=
+  "images/Main_pane_counters.png"></p>
+
+  <table summary="" border="0" cellpadding="2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td>31/34</td>
+
+        <td>segmentu-kopurua - itzulitakoak / guztiak, uneko fitxategirako</td>
+      </tr>
+
+      <tr>
+        <td>2530/2605</td>
+
+        <td>segmentu bakarren kopurua -  itzulitakoak / proiektuko guztiak</td>
+      </tr>
+
+      <tr>
+        <td>3196</td>
+
+        <td>segmentu-kopuru osoa (errepikapenak barne) proiektuan</td>
+      </tr>
+
+      <tr>
+        <td>39/53</td>
+
+        <td>karaktere-kopurua sorburuko segmentuan eta helburukoan&nbsp;</td>
+      </tr>
+    </tbody>
+  </table><br>
+
   <h3><a name="Editor" id="Editor"></a>Editore-panela</h3>
 
-  <p>Hemen itzulpena tekleatu eta editatzen duzu. Editore-panelak partzialki itzulitako dokumentuen testua honela erakusten du: itzulita dagoen testua itzulita erakusten du, eta itzuli gabe dagoen testua jatorrizko hizkuntzan erakusten du. Testua segmentuetan zatituta erakusten da, eta dokumentuan zehar mugi zaitezke edozein segmentutan klik eginez hura editatzeko. Goiko kasuan, itzulitako segmentuak horiz markatuta ageri dira, baina zure nahietara ondoen doitzen den konfigurazioa aukera dezakezu (ikus <a href=
-  "menu.html">Ikusi</a> menua).</p>
+  <p>Hemen itzulpena tekleatu eta editatzen duzu. Editore-panelak partzialki itzulitako dokumentuen testua honela erakusten du: itzulita dagoen testua itzulita erakusten du, eta itzuli gabe dagoen testua jatorrizko hizkuntzan erakusten du. Testua segmentuetan zatituta erakusten da, eta dokumentuan zehar mugi zaitezke edozein segmentutan klik eginez hura editatzeko. Goiko kasuan, jadanik itzulitako segmentuak ez dira esplizituki markatzen; hala ere, zure nahietara ondoen doitzen den konfigurazioa aukera dezakezu - esaterako, horiz marka ditzakezu (ikus <a href="menu.html">Ikusi</a> menua).</p>
 
   <p>Segmentuetako bat segmentu aktiboa da. Bi atal dauzkan bakarra da: goiko aldea jatorrizko hizkuntzan dago, karaktere lodiz eta atzeko plano berdez idatzita, eta beheko aldea edizio-eremua da eta bi markatzailek mugatzen dute: ezkerreko markatzailea <strong><code>&lt;segment nnnn&gt;</code></strong> da, non <strong><code>nnnn</code></strong> segmentuak proiektuaren baitan duen zenbakia den, eta eskuinekoa <strong><code>&lt;end segment&gt;</code></strong> da. Goiko aldeak erreferentzia gisa balio du, eta beheko aldea itzulpena egiteko edo moldatzeko lekua da.</p>
 
@@ -367,30 +397,30 @@
 
   <p>Gai honetan gehiago sakondu nahi izanez gero, ikusi <a href="translationEditing.html">Itzulpenaren edizioa</a>.</p>
 
-  <h3><a name="Match" id="Match"></a>Parekatzeen bisorea</h3><img src=
-  "images/MatchesPane.png" name="grafika2" alt="OmegaT-ren parekatzeen panela" id=
+  <h3><a name="Match" id="Match"></a>Parekatzeen bisorea</h3>Parekatzeen bisoreak <a href="translationMemories.html">itzulpen-memorietan</a> aurkitzen dituen segmenturik antzekoenak erakusten ditu, bai proiektua itzultzean sortu diren itzulpen-memorietan aurkitutakoak, bai beste lan batzuetatik inportatu dituzun itzulpen-memorietakoak edo zure bezeroak edo itzulpen-agentziak eman dizkizun memorietakoak.<br>
+  <img src="images/MatchesPane.png" name="grafika2" alt="OmegaT-ren parekatzeen panela" id=
   "grafika2" align="left" border="0"><br clear="left">
 
-  <p><br>
-  <br></p>
+  <p><br></p>
 
-  <p>Parekatzeen bisoreak <a href=
-  "translationMemories.html">itzulpen-memorietan</a> aurkitzen dituen segmenturik antzekoenak erakusten ditu, bai proiektua itzultzean sortu diren itzulpen-memorietan aurkitutakoak, bai beste lan batzuetatik inportatu dituzun itzulpen-memorietakoak edo zure bezeroak edo itzulpen-agentziak eman dizkizun memorietakoak.</p>
+  <p>Hurrengo segmentura mugitzen zarenean, lehen parekatze lausoa (ehunekoetan parekatze-maila onena duena) automatikoki hautatzen da. Hautatutako parekatze lausoa <strong>letra lodiz</strong> nabarmenduko da, itzultzen ari zaren segmentuan falta diren hitzak <strong><font color=
+  "#0000FF">urdinez</font></strong> eta falta diren zatien inguruan dauden hitzak &lt;s3&gt;<b>berdez</b>&lt;/s3&gt;. Beste edozein parekatze <a href=
+  "menu.html#shortcuts">hautatu</a> dezakezu <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, edo <code>5.</code> sakatuz, eskuragarri dagoen parekatze-kopuruaren arabera. Noski, <code>Ctrl+5</code> sakatzeak ez du ezer egingo, #5 parekatzerik existitzen ez bada. <strong>Hautatutako</strong> parekatzea zure itzulpenean erabiltzeko, sakatu <code><a href="menu.html#shortcuts">Ctrl+R</a></code> edizio-eremuko testuaren ordez parekatzea jartzeko edo sakatu <code><a href=
+  "menu.html#shortcuts">Ctrl+I</a></code> parekatzea kurtsorearen kokapenean txertatzeko.</p>
 
-  <p>Hurrengo segmentura mugitzen zarenean, lehen parekatze lausoa (ehunekoetan parekatze-maila onena duena) automatikoki hautatzen da. Beste edozein parekatze <a href=
-  "menu.html#shortcuts">hautatu</a> dezakezu <code>Ctrl+2</code>, <code>3</code>, <code>4</code>, edo <code>5.</code> sakatuz, eskuragarri dagoen parekatze-kopuruaren arabera.</p>
+  <p>Parekatze-ehunekoa -alegia, sorburu-segmentuaren eta parekatze-hautagaien arteko diferentziaren neurria- gutxi gorabehera kalkulatzen da, bi segmentuetan bat datozen hitzak hartuz eta segmentu luzeenaren hitz-kopuruarekin zatituz. Tokenizer plugin-a erabiliz gero, bi segmentuetako hitzen erroak erabiltzen dira. Bestela, hitzak dauden moduan uzten dira eta soilik puntuazioa, zenbakiak eta etiketak ezikusten dira. Azkenik, etiketak, zenbakiak eta puntuazio-zeinuak -lehen bi kasuetan ezikusi direnak- kontuan hartuta dauden diferentziak sar daitezke kalkuluan. Parekatzeen bisoreak hiru metrikak erakusten ditu hurrengo moduan:</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
+  "font-style: italic;">parekatzeen %, tokenizer plugin-a erabiltzen denean / parekatzeen %, OmegaT-ren balio lehenetsia erabiltzean / parekatzeen % etiketa, zenbaki eta puntuazio-markak barne</span>&gt;&nbsp;
 
-  <p><strong>Hautatutako</strong> parekatzea zure itzulpenean erabiltzeko, sakatu <code><a href="menu.html#shortcuts">Ktrl+R</a></code> edizio-eremuko testuaren ordez parekatzea jartzeko edo sakatu <code><a href=
-  "menu.html#shortcuts">Ktrl+I</a></code> parekatzea kurtsorearen kokapenean txertatzeko.</p>
+  <p>Goiko adibidean, lehen bi metrikak (46/46) berdinak dira tokenizatzailea ez delako erabili. Hirugarren ehunekoa (39) baxuagoa da ezberdintasunak daudelako puntuazioan eta etiketetan.</p>
 
-  <p>Parekatze-ehunekoa gutxi gorabehera kalkulatzen da, bi segmentuetan bat datozen hitzak hartuz eta segmentu luzeenaren hitz-kopuruarekin zatituz. Hautatutako parekatze lausoa <strong>letra lodiz</strong> nabarmenduko da, itzultzen ari zaren segmentuan falta diren hitzak <strong><font color=
-  "#0000FF">urdinez</font></strong> eta falta diren zatien inguruan dauden hitzak &lt;s3&gt;<b>berdez</b>&lt;/s3&gt;. Goiko adibidean sorburu-segmentua <strong><i>Information about Java &amp; OmegaT</i></strong> da. Lehen parekatzea %75ekoa da, lau hitzetik hiru (&amp; ezikusi egiten da) berdinak direlako. Parekatze-ehunekoa erakusten den lerroak parekatzea zein TMX fitxategitan aurkitu den adierazten du. Fitxategi-izenik ez bada erakusten, proiektuaren itzulpen-memoria lehenetsia da sorburua. Segmentu umezurtzak (adibidean #4. parekatzea) proiektuaren itzulpen-memoria lehenetsian sorburu-segmenturik ez dauzkaten segmentuak dira.<br>
-  <br></p>
+  <p>Fitxategi-izenik ez bada erakusten, proiektuaren itzulpen-memoria lehenetsia da sorburua. Segmentu umezurtzak (adibidean #1. parekatzea) proiektuaren itzulpen-memoria lehenetsian sorburu-segmenturik ez dauzkaten segmentuak dira. Goiko kasuan, jatorrizko esaldia, dagoeneko itzulia OmegaT-rekin, editatu egin da.<br></p>
 
   <h3><a name="Glossary" id="Glossary"></a>Glosarioa</h3>
 
-  <p>Glosario-panelari esker, zure adierazpideen eta terminologia berezien bilduma pribatua atzi dezakezu, horiek <a href="glossaries.html">glosario-fitxategietna</a> gorde ondoren. Uneko segmentuan aurkitutako terminoen itzulpenak erakusten ditu, baina erreferentzia gisa soilik, eta ez du onartzen termino berriak eta beren itzulpena txertatzea edo existitzen diren terminoak ordeztea.</p><img src="images/Glossary_pane.png" name="grafika3" alt=
-  "OmegaT-ren glosario-panela" id="grafika3" align="left" border="0"><br clear="left">
+  <p>Glosario-panelari esker, zure adierazpideen eta terminologia berezien bilduma pribatua atzi dezakezu, horiek <a href=
+  "glossaries.html">glosario-fitxategietna</a> gorde ondoren. Uneko segmentuan aurkitutako terminoen itzulpenak erakusten ditu, baina erreferentzia gisa soilik, eta ez du onartzen termino berriak eta beren itzulpena txertatzea edo existitzen diren terminoak ordeztea.</p><img src=
+  "images/Glossary_pane.png" name="grafika3" alt="OmegaT-ren glosario-panela" id=
+  "grafika3" align="left" border="0"><br clear="left">
 
   <p><br></p>
 
@@ -403,7 +433,8 @@
   <h3><a name="Google_Translate" id="Google_Translate"></a>Google
   Translate</h3>
 
-  <p><a href="GoogleTranslate.html">Google Translate</a> panelak, irekita dagoenean, uneko segmenturako Google Translate zerbitzuak emandako itzulpena erakutsiko du, eta itzulpen hori segmentuaren helburuan txertatu ahal izango duzu.&nbsp;</p><br>
+  <p>Google Translate aktibatuta badago Aukerak menuan, <a href=
+  "GoogleTranslate.html">Google Translate</a> panelak uneko segmenturako Google Translate zerbitzuak emandako itzulpena erakutsiko du, eta itzulpen hori segmentuaren helburuan txertatu ahal izango duzu.</p><br>
 
   <h3><a name="menu" id="menu"></a>Menu nagusia</h3>
 
@@ -418,7 +449,7 @@
 
   <h3><a name="files" id="files"></a>Proiektuaren fitxategiak</h3>
 
-  <p>Proiektuaren fitxategiak izeneko leihoak proiektuaren fitxategien zerrenda ematen du eta proiektuari buruzko beste datu batzuk erakusten ditu. OmegaT-k proiektu bat kargatzen duenean automatikoki erakusten da. Ixteko, erabili <code>esc</code>, irekitzeko edo aurrera eramateko, erabili <code>Ktrl+L</code>.</p>
+  <p>Proiektuaren fitxategiak izeneko leihoak proiektuaren fitxategien zerrenda ematen du eta proiektuari buruzko beste datu batzuk erakusten ditu. OmegaT-k proiektu bat kargatzen duenean automatikoki erakusten da. Ixteko, erabili <code>esc</code>, irekitzeko edo aurrera eramateko, erabili <code>Ctrl+L</code>.</p>
 
   <h3><a name="proj_files" id="proj_files"></a>Leiho honek erakusten duena ondoko hau da:</h3>
 
@@ -462,7 +493,7 @@
 
   <h3><a name="search" id="search"></a>Bilaketa-leihoa</h3>
 
-  <p>Proiektuko segmentu jakinak bilatzeko, bilaketa-leihoa erabili dezakezu. Bilaketa-leiho bat baino gehiago eduki daiteke irekita aldi berean. Beste leiho bat irekitzeko, erabili <code><a href="menu.html#shortcuts">Ktrl+F</a></code> leiho nagusian. Bilaketa-leihoak kateak edo gako-hitzak bilatzeko testu-eremu bat dauka, bilaketaren parametroak ezartzeko zenbait kontrol-lauki eta aukera-botoi, eta bilaketaren emaitzak erakusteko bistaratze-area bat.</p>
+  <p>Proiektuko segmentu jakinak bilatzeko, bilaketa-leihoa erabili dezakezu. Bilaketa-leiho bat baino gehiago eduki daiteke irekita aldi berean. Beste leiho bat irekitzeko, erabili <code><a href="menu.html#shortcuts">Ctrl+F</a></code> leiho nagusian. Bilaketa-leihoak kateak edo gako-hitzak bilatzeko testu-eremu bat dauka, bilaketaren parametroak ezartzeko zenbait kontrol-lauki eta aukera-botoi, eta bilaketaren emaitzak erakusteko bistaratze-area bat.</p>
 
   <h3><a name="search_types" id="search_types"></a>Bilaketa-motak</h3>
 
@@ -496,14 +527,15 @@
   "menu.html#shortcuts">Ctrl+T</a></code>. Leihoak 3 zutabeko taula bat erakusten du, segmentura joateko esteka batekin eta sorburu- eta helburu-edukiekin:</p>
 
   <p><img src="images/TagValidator.png" name="grafika4" alt=
-  "OmegaT-ren etiketa-balidatzailea" id="grafika4" align="left" border="0"><br clear="left">
+  "OmegaT-ren etiketa-balidatzailea" id="grafika4" align="left" border="0"><br clear=
+  "left">
   <br>
   <br></p>
 
   <p>Etiketak letra lodi urdinez nabarmendurik daude, jatorrizkoa eta itzulitakoa errazago alderatu daitezen. Egin klik estekan segmentua editorean aktibatzeko. Zuzendu akatsa, beharrezkoa bada, eta sakatu <code><a href="menu.html#shortcuts">Ctrl+T</a></code> etiketak balidatzeko leihora izultzeko eta akatsak zuzentzen jarraitzeko. Goiko lehen eta hirugarren kasuetan, etiketak ez dira bikoteka ondo jarri, eta bigarren kasuan hasierako etiketak ez dauka &lt; ikurra.</p>
 
   <p><a href="formattedText.html#intro">Etiketa</a>-akatsak itzulpenean zehar egindako <a href=
-  "formattedText.html#tag_operation">etiketa-manipulazio</a> okerrak dira, gehienetan etiketen ordena edo zenbakiak ez direlako errespetatu. Etiketak manipulatzea ona izan daiteke zenbaitetan, baina arazoak ekar ditzake itzulitako dokumentua sortzerakoan. Gehienetan etiketek jatorrizko testuan dagoen formatu-motaren bat ordezkatzen dute. <strong>Jatorrizko testuaren formatu-ezaugarriak sinplifikatuz</strong>, etiketa-kopurua txikiagoa izatea lortzen da.</p>
+  "formattedText.html#tag_operation">etiketa-manipulazio</a> okerrak dira, gehienetan etiketen ordena edo kopurua ez direlako errespetatu. Etiketak manipulatzea ona izan daiteke zenbaitetan, baina arazoak ekar ditzake itzulitako dokumentua sortzerakoan. Gehienetan etiketek jatorrizko testuan dagoen formatu-motaren bat ordezkatzen dute. <strong>Jatorrizko testuaren formatu-ezaugarriak sinplifikatuz</strong>, etiketa-kopurua txikiagoa izatea lortzen da.</p>
 
   <h3>Laguntza-arakatzailea</h3>
 

@@ -54,7 +54,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class SegmentBuilder {
 
     /** Attributes for show text. */
-    protected static final AttributeSet ATTR_SEGMENT_MARK = Styles.createAttributeSet(null, null, true, false);
+    protected static final AttributeSet ATTR_SEGMENT_MARK = Styles
+            .createAttributeSet(null, null, true, false);
     protected static final AttributeSet ATTR_INFO = Styles.createAttributeSet(null, null, null, true);
     public static final String SEGMENT_MARK_ATTRIBUTE = "SEGMENT_MARK_ATTRIBUTE";
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
@@ -64,7 +65,7 @@ public class SegmentBuilder {
 
     final SourceTextEntry ste;
     final int segmentNumberInProject;
-    
+
     /**
      * Version of displayed variant of segment. Required for check in delayed
      * thread, like skell checking. Version changed(in Swing thread only) each
@@ -92,10 +93,10 @@ public class SegmentBuilder {
     /** Source start position - for marks. */
     protected Position posSourceBeg;
     /** Translation start position - for marks. */
-    protected Position posTranslationBeg;    
+    protected Position posTranslationBeg;
 
     protected int offset;
-    
+
     /**
      * True if source OR target languages is RTL. In this case, we will insert
      * RTL/LTR embedded direction chars. Otherwise - will not insert, since JDK
@@ -103,15 +104,14 @@ public class SegmentBuilder {
      */
     protected boolean hasRTL;
 
-    public SegmentBuilder(final EditorController controller,
-            final Document3 doc, final EditorSettings settings,
-            final SourceTextEntry ste, final int segmentNumberInProject) {
+    public SegmentBuilder(final EditorController controller, final Document3 doc,
+            final EditorSettings settings, final SourceTextEntry ste, final int segmentNumberInProject) {
         this.controller = controller;
         this.doc = doc;
         this.settings = settings;
         this.ste = ste;
         this.segmentNumberInProject = segmentNumberInProject;
-        
+
         hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL;
     }
 
@@ -124,7 +124,7 @@ public class SegmentBuilder {
      */
     public void createSegmentElement(final boolean isActive) {
         UIThreadsUtil.mustBeSwingThread();
-        
+
         displayVersion++;
         this.active = isActive;
 
@@ -184,39 +184,35 @@ public class SegmentBuilder {
     /**
      * Create method for active segment.
      */
-    private void createActiveSegmentElement(TransEntry trans)
-            throws BadLocationException {
+    private void createActiveSegmentElement(TransEntry trans) throws BadLocationException {
         try {
-        if (  EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
-           || EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(settings.getDisplayModificationInfo())
-           ) {
-            addModificationInfoPart(trans, ATTR_INFO);
-        }
-        
-        int prevOffset = offset;
-        sourceText = ste.getSrcText();
-        addInactiveSegPart(true, sourceText, attrs(true));
-        posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
+            if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
+                    || EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(settings
+                            .getDisplayModificationInfo())) {
+                addModificationInfoPart(trans, ATTR_INFO);
+            }
 
-        if (trans != null) {
-            // translation exist
-            translationText = trans.translation;
-        } else if (!Preferences
-                .isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
-            // need to insert source text on empty translation
-            translationText = ste.getSrcText();
-        } else {
-            // empty text on non-exist translation
-            translationText = "";
-        }
+            int prevOffset = offset;
+            sourceText = ste.getSrcText();
+            addInactiveSegPart(true, sourceText, attrs(true));
+            posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
 
-        addActiveSegPart(translationText, attrs(false));
-        posTranslationBeg = null;
+            if (trans != null) {
+                // translation exist
+                translationText = trans.translation;
+            } else if (!Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
+                // need to insert source text on empty translation
+                translationText = ste.getSrcText();
+            } else {
+                // empty text on non-exist translation
+                translationText = "";
+            }
 
-        doc.activeTranslationBeginM1 = doc
-                .createPosition(activeTranslationBeginOffset - 1);
-        doc.activeTranslationEndP1 = doc
-                .createPosition(activeTranslationEndOffset + 1);
+            addActiveSegPart(translationText, attrs(false));
+            posTranslationBeg = null;
+
+            doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset - 1);
+            doc.activeTranslationEndP1 = doc.createPosition(activeTranslationEndOffset + 1);
         } catch (OutOfMemoryError oome) {
             // Oh shit, we're all out of storage space!
             // Of course we should've cleaned up after ourselves earlier,
@@ -228,23 +224,20 @@ public class SegmentBuilder {
             System.gc();
 
             // There, that should do it, now inform the user
-            Object[] args = {Runtime.getRuntime().maxMemory()/1024/1024};
+            Object[] args = { Runtime.getRuntime().maxMemory() / 1024 / 1024 };
             Log.logErrorRB("OUT_OF_MEMORY", args);
             Log.log(oome);
-            Core.getMainWindow().showErrorDialogRB(
-                    "OUT_OF_MEMORY",args,
-                    "TF_ERROR");
+            Core.getMainWindow().showErrorDialogRB("OUT_OF_MEMORY", args, "TF_ERROR");
             // Just quit, we can't help it anyway
             System.exit(0);
-            
+
         }
     }
 
     /**
      * Create method for inactive segment.
      */
-    private void createInactiveSegmentElement(TransEntry trans)
-            throws BadLocationException {
+    private void createInactiveSegmentElement(TransEntry trans) throws BadLocationException {
         if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())) {
             addModificationInfoPart(trans, ATTR_INFO);
         }
@@ -284,23 +277,23 @@ public class SegmentBuilder {
     public SourceTextEntry getSourceTextEntry() {
         return ste;
     }
-    
+
     public long getDisplayVersion() {
         return displayVersion;
     }
-    
+
     public boolean isActive() {
         return active;
     }
-    
+
     public String getSourceText() {
         return sourceText;
     }
-    
+
     public String getTranslationText() {
         return translationText;
     }
-    
+
     public int getStartSourcePosition() {
         if (posSourceBeg != null) {
             return posSourceBeg.getOffset();
@@ -355,8 +348,7 @@ public class SegmentBuilder {
             rtl = true;
             break;
         case DIFFER:
-            rtl = isSource ? controller.sourceLangIsRTL
-                    : controller.targetLangIsRTL;
+            rtl = isSource ? controller.sourceLangIsRTL : controller.targetLangIsRTL;
             break;
         }
         doc.setAlignment(begin, end, rtl);
@@ -366,22 +358,23 @@ public class SegmentBuilder {
      * Check if location inside segment.
      */
     public boolean isInsideSegment(int location) {
-        return beginPosP1.getOffset() - 1 <= location
-                && location < endPosM1.getOffset() + 1;
+        return beginPosP1.getOffset() - 1 <= location && location < endPosM1.getOffset() + 1;
     }
 
     /**
      * Add inactive segment part, without segment begin/end marks.
+     * 
      * @param isSource
-     * @param text segment part text
-     * @param attrs attributes
+     * @param text
+     *            segment part text
+     * @param attrs
+     *            attributes
      * @throws BadLocationException
      */
-    private void addInactiveSegPart(boolean isSource, String text,
-            AttributeSet attrs) throws BadLocationException {
+    private void addInactiveSegPart(boolean isSource, String text, AttributeSet attrs)
+            throws BadLocationException {
         int prevOffset = offset;
-        boolean rtl = isSource ? controller.sourceLangIsRTL
-                : controller.targetLangIsRTL;
+        boolean rtl = isSource ? controller.sourceLangIsRTL : controller.targetLangIsRTL;
         if (hasRTL) {
             insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
         }
@@ -394,16 +387,21 @@ public class SegmentBuilder {
     }
 
     /**
-     * Adds a string that displays the modification info (author and date). 
-     * Does nothing if the translation entry is null.
-     * @param trans The translation entry (can be null)
-     * @param attrs Font attributes
+     * Adds a string that displays the modification info (author and date). Does
+     * nothing if the translation entry is null.
+     * 
+     * @param trans
+     *            The translation entry (can be null)
+     * @param attrs
+     *            Font attributes
      * @throws BadLocationException
      */
     private void addModificationInfoPart(TransEntry trans, AttributeSet attrs) throws BadLocationException {
-        if (trans == null ) return;
+        if (trans == null)
+            return;
 
-        String author = (trans.changeId==null?OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR"):trans.changeId);
+        String author = (trans.changeId == null ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR")
+                : trans.changeId);
         String template;
         String text;
         if (trans.changeDate != 0) {
@@ -411,11 +409,11 @@ public class SegmentBuilder {
             Date changeDate = new Date(trans.changeDate);
             String changeDateString = dateFormat.format(changeDate);
             String changeTimeString = timeFormat.format(changeDate);
-            Object[] args = {author, changeDateString, changeTimeString};
+            Object[] args = { author, changeDateString, changeTimeString };
             text = StaticUtils.format(template, args);
         } else {
             template = OStrings.getString("TF_CUR_SEGMENT_AUTHOR");
-            Object[] args = {author};
+            Object[] args = { author };
             text = StaticUtils.format(template, args);
         }
         int prevOffset = offset;
@@ -433,12 +431,14 @@ public class SegmentBuilder {
 
     /**
      * Add active segment part, with segment begin/end marks.
-     * @param text segment part text
-     * @param attrs attributes
+     * 
+     * @param text
+     *            segment part text
+     * @param attrs
+     *            attributes
      * @throws BadLocationException
      */
-    private void addActiveSegPart(String text, AttributeSet attrs)
-            throws BadLocationException {
+    private void addActiveSegPart(String text, AttributeSet attrs) throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = controller.targetLangIsRTL;
 
@@ -465,8 +465,7 @@ public class SegmentBuilder {
         setAttributes(prevOffset, offset, false);
     }
 
-    private void insert(String text, AttributeSet attrs)
-            throws BadLocationException {
+    private void insert(String text, AttributeSet attrs) throws BadLocationException {
         doc.insertString(offset, text, attrs);
         offset += text.length();
     }
@@ -480,8 +479,7 @@ public class SegmentBuilder {
      * @return changed mark text
      */
     private String createSegmentMarkText(boolean startMark) {
-        String text = startMark ? OConsts.segmentStartString
-                : OConsts.segmentEndString;
+        String text = startMark ? OConsts.segmentStartString : OConsts.segmentEndString;
 
         boolean markIsRTL = localeIsRTL();
 
@@ -489,8 +487,7 @@ public class SegmentBuilder {
         text = text.trim().replace(' ', '\u00A0');
         if (text.indexOf("0000") >= 0) {
             // Start mark - need to put segment number
-            text = text.replace("0000", NUMBER_FORMAT
-                    .format(segmentNumberInProject));
+            text = text.replace("0000", NUMBER_FORMAT.format(segmentNumberInProject));
         }
 
         if (hasRTL) {
@@ -503,6 +500,7 @@ public class SegmentBuilder {
 
     /**
      * Returns whether the current locale is a Right-to-Left language or not.
+     * 
      * @return true when current locale is a RTL language, false if not.
      */
     private boolean localeIsRTL() {
@@ -519,7 +517,7 @@ public class SegmentBuilder {
         }
         return markIsRTL;
     }
-    
+
     /**
      * Called on the active entry changed. Required for update translation text.
      */
@@ -527,7 +525,7 @@ public class SegmentBuilder {
         translationText = doc.extractTranslation();
         displayVersion++;
     }
-    
+
     /**
      * Choose segment's attributes based on rules.
      */

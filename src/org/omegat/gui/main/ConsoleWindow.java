@@ -35,9 +35,9 @@ import org.omegat.util.StaticUtils;
 import com.vlsolutions.swing.docking.Dockable;
 
 /**
- * The main window of OmegaT application, if the program is started in 
- * consoleMode. 
- *
+ * The main window of OmegaT application, if the program is started in
+ * consoleMode.
+ * 
  * @author Martin Fleurke
  */
 public class ConsoleWindow implements IMainWindow {
@@ -47,8 +47,7 @@ public class ConsoleWindow implements IMainWindow {
     public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
         String msg;
         if (params != null) {
-            msg = StaticUtils.format(OStrings.getString(errorKey),
-                    params);
+            msg = StaticUtils.format(OStrings.getString(errorKey), params);
         } else {
             msg = OStrings.getString(errorKey);
         }
@@ -56,59 +55,67 @@ public class ConsoleWindow implements IMainWindow {
         System.err.println(msg);
         String fulltext = msg;
         if (ex != null)
-            fulltext += "\n" + ex.toString(); 
+            fulltext += "\n" + ex.toString();
         System.err.println(OStrings.getString("TF_ERROR"));
         System.err.println(fulltext);
 
     }
+
     /**
-     * {@inheritDoc}
-     * Nothing is shown in quiet mode.
+     * {@inheritDoc} Nothing is shown in quiet mode.
      */
     public void showStatusMessageRB(String messageKey, Object... params) {
-        if (RuntimePreferences.isQuietMode()) return;
+        if (RuntimePreferences.isQuietMode())
+            return;
 
         final String msg;
         if (messageKey == null) {
             msg = new String() + ' ';
         } else {
             if (params != null) {
-                msg = StaticUtils
-                        .format(OStrings.getString(messageKey), params);
+                msg = StaticUtils.format(OStrings.getString(messageKey), params);
             } else {
                 msg = OStrings.getString(messageKey);
             }
         }
         System.out.println(msg);
     }
+
     /**
      * {@inheritDoc}
      */
     public void showErrorDialogRB(String message, Object[] args, String title) {
         System.err.println(StaticUtils.format(OStrings.getString(message), args));
     }
-    
+
     public void addDockable(Dockable pane) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+
     public Font getApplicationFont() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+
     public JFrame getApplicationFrame() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+
     public void lockUI() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+
     public void showLengthMessage(String messageText) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+
     public void showProgressMessage(String messageText) {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+
     public void unlockUI() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+
     public IMainMenu getMainMenu() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }

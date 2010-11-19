@@ -207,8 +207,7 @@ public class MarkerController {
             }
             for (MarkInfo t : marks[entryIndex][i]) {
                 if (t != null && t.tooltip != null) {
-                    if (t.underscore.getStartOffset() <= pos
-                            && t.underscore.getEndOffset() >= pos) {
+                    if (t.underscore.getStartOffset() <= pos && t.underscore.getEndOffset() >= pos) {
                         if (res.length() > 0) {
                             res.append("<br>");
                         }
@@ -229,8 +228,7 @@ public class MarkerController {
     /**
      * Set marks for specified entry and marker.
      */
-    public void setEntryMarks(int entryIndex, SegmentBuilder sb,
-            List<Mark> newMarks, int markerIndex) {
+    public void setEntryMarks(int entryIndex, SegmentBuilder sb, List<Mark> newMarks, int markerIndex) {
         // remove old marks for specified entry and marker
         MarkInfo[] me = marks[entryIndex][markerIndex];
         if (me != null) {
@@ -248,8 +246,7 @@ public class MarkerController {
         int sourceStartOffset = sb.getStartSourcePosition();
         int translationStartOffset;
         if (sb.isActive()) {
-            translationStartOffset = ec.editor.getOmDocument()
-                    .getTranslationStart();
+            translationStartOffset = ec.editor.getOmDocument().getTranslationStart();
         } else {
             translationStartOffset = sb.getStartTranslationPosition();
         }
@@ -259,9 +256,8 @@ public class MarkerController {
                     : translationStartOffset;
             try {
                 nm[i] = new MarkInfo();
-                nm[i].underscore = (Highlighter.Highlight) highlighter
-                        .addHighlight(startOffset + m.startOffset, startOffset
-                                + m.endOffset, painters[markerIndex]);
+                nm[i].underscore = (Highlighter.Highlight) highlighter.addHighlight(startOffset
+                        + m.startOffset, startOffset + m.endOffset, painters[markerIndex]);
                 nm[i].tooltip = m.toolTipText;
             } catch (BadLocationException ex) {
                 Log.log(ex);

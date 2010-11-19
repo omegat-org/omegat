@@ -92,8 +92,7 @@ public class StarDict implements IDictionary {
         byte[] idxBytes = readFile(idxFile);
         byte[] dataBytes = readFile(dataFile);
 
-        DataInputStream idx = new DataInputStream(new ByteArrayInputStream(
-                idxBytes));
+        DataInputStream idx = new DataInputStream(new ByteArrayInputStream(idxBytes));
 
         ByteArrayOutputStream mem = new ByteArrayOutputStream();
         while (true) {
@@ -129,8 +128,7 @@ public class StarDict implements IDictionary {
      * @param result
      *            result map
      */
-    private void addArticle(final String key, final String text,
-            final Map<String, Object> result) {
+    private void addArticle(final String key, final String text, final Map<String, Object> result) {
         Object data = result.get(key);
         if (data == null) {
             data = text;
@@ -161,8 +159,7 @@ public class StarDict implements IDictionary {
     /**
      * Load acticle's text.
      */
-    private String readArticleText(byte[] data, int off, int len)
-            throws UnsupportedEncodingException {
+    private String readArticleText(byte[] data, int off, int len) throws UnsupportedEncodingException {
         return new String(data, off, len, UTF8).replace("\n", "<br>");
     }
 
@@ -184,8 +181,7 @@ public class StarDict implements IDictionary {
                 gzFile = new File(file.getPath() + ".dz");
             }
             if (gzFile.exists()) {
-                in = new GZIPInputStream(new BufferedInputStream(
-                        new FileInputStream(gzFile), BUFFER_SIZE));
+                in = new GZIPInputStream(new BufferedInputStream(new FileInputStream(gzFile), BUFFER_SIZE));
             } else {
                 throw new FileNotFoundException(file.getPath());
             }
@@ -203,8 +199,7 @@ public class StarDict implements IDictionary {
      * Read header.
      */
     private Map<String, String> readIFO(File ifoFile) throws Exception {
-        BufferedReader rd = new BufferedReader(new InputStreamReader(
-                new FileInputStream(ifoFile), UTF8));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(ifoFile), UTF8));
         try {
             String line = null;
             String first = rd.readLine();

@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml;
 
@@ -28,48 +28,46 @@ import org.omegat.filters3.Tag;
 
 /**
  * XML Tag that surrounds intact portions of XML document.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class XMLIntactTag extends Tag
-{
+public class XMLIntactTag extends Tag {
     private XMLIntactEntry intactContents = new XMLIntactEntry();
-    
+
     /** Returns the entry to collect text surrounded by intact tag. */
-    public XMLIntactEntry getIntactContents()
-    {
+    public XMLIntactEntry getIntactContents() {
         return intactContents;
     }
-    
+
     /** Creates a new instance of XML Tag */
-    public XMLIntactTag(String tag, String shortcut, org.xml.sax.Attributes attributes)
-    {
+    public XMLIntactTag(String tag, String shortcut, org.xml.sax.Attributes attributes) {
         super(tag, shortcut, TYPE_ALONE, XMLUtils.convertAttributes(attributes));
     }
-    
+
     /**
-     * Returns this tag and the intact contents it surrounds.
-     * E.g. for 
-     * <pre>&lt;style&gt;<br>html {<br>&nbsp;&nbsp;&nbsp;background-color: white;<br>}<br>&lt;/style&gt;</pre>
+     * Returns this tag and the intact contents it surrounds. E.g. for
+     * 
+     * <pre>
+     * &lt;style&gt;<br>html {<br>&nbsp;&nbsp;&nbsp;background-color: white;<br>}<br>&lt;/style&gt;
+     * </pre>
+     * 
      * should return absolutely the same.
      */
-    public String toOriginal() 
-    {
+    public String toOriginal() {
         StringBuffer buf = new StringBuffer();
-        
-        buf.append("<");                                                        
+
+        buf.append("<");
         buf.append(getTag());
         buf.append(getAttributes().toString());
-        buf.append(">");                                                        
-        
+        buf.append(">");
+
         buf.append(intactContents.sourceToOriginal());
-        
-        buf.append("<");                                                        
-        buf.append("/");                                                        
+
+        buf.append("<");
+        buf.append("/");
         buf.append(getTag());
-        buf.append(">");                                                        
-        
+        buf.append(">");
+
         return buf.toString();
     }
 }
-

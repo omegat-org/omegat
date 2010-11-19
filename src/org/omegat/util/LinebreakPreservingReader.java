@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util;
 
@@ -29,25 +29,26 @@ import java.io.PushbackReader;
 import java.io.Reader;
 
 /**
-  * Reader class that preserves line breaks when using readLine(),
-  * that can be retrieved through getLastLinebreak()
-  * 
-  * @author Henry Pijffers (henry.pijffers@saxnot.com)
-  */
+ * Reader class that preserves line breaks when using readLine(), that can be
+ * retrieved through getLastLinebreak()
+ * 
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ */
 public class LinebreakPreservingReader extends Reader {
 
     /** Reader for input, must be able to re-insert non-linebreak characters. */
     private PushbackReader in;
 
     /** Default constructor, hidden. */
-    private LinebreakPreservingReader() {}
+    private LinebreakPreservingReader() {
+    }
 
     /** Buffer that contains the last linebreak */
     private StringBuffer linebreak = new StringBuffer(2);;
 
-    /** 
-      * Creates a new reader.
-      */
+    /**
+     * Creates a new reader.
+     */
     public LinebreakPreservingReader(Reader in) {
         this.in = new PushbackReader(in);
     }
@@ -57,10 +58,10 @@ public class LinebreakPreservingReader extends Reader {
     }
 
     /**
-      * Returns the linebreak after the last line read by readLine().
-      * If any other read methods are called after readLine(), the
-      * linebreak returned by this method may be incorrect.
-      */
+     * Returns the linebreak after the last line read by readLine(). If any
+     * other read methods are called after readLine(), the linebreak returned by
+     * this method may be incorrect.
+     */
     public String getLinebreak() {
         return linebreak.toString();
     }
@@ -99,24 +100,24 @@ public class LinebreakPreservingReader extends Reader {
 
         // Read and store characters until a linebreak character is encountered
         while ((chr != -1) && !isLinebreakCharacter(chr)) {
-            line.append((char)chr);
+            line.append((char) chr);
             chr = in.read();
         }
 
         // If the last read character is a linebreak character, save it
         if (isLinebreakCharacter(chr)) {
             // Save the linebreak character
-            linebreak.append((char)chr);
+            linebreak.append((char) chr);
 
             // If the linebreak character is \r, check if it's followed by \n
-            if (((char)chr) == '\r') {
+            if (((char) chr) == '\r') {
                 // Get the next character
                 chr = in.read();
 
                 // If the next character is \n, add it to the current linebreak,
                 // otherwise push it back into the input reader
-                if (((char)chr) == '\n')
-                    linebreak.append((char)chr);
+                if (((char) chr) == '\n')
+                    linebreak.append((char) chr);
                 else
                     in.unread(chr);
             }
@@ -139,8 +140,7 @@ public class LinebreakPreservingReader extends Reader {
     }
 
     private final boolean isLinebreakCharacter(int chr) {
-        return    (((char)chr) == '\n')
-               || (((char)chr) == '\r');
+        return (((char) chr) == '\n') || (((char) chr) == '\r');
     }
 
     /* FOR TESTING ONLY */
@@ -159,4 +159,3 @@ public class LinebreakPreservingReader extends Reader {
     }
 
 }
-

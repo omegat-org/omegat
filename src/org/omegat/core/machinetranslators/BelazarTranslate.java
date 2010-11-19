@@ -55,11 +55,9 @@ public class BelazarTranslate extends BaseTranslate {
     }
 
     @Override
-    protected String translate(Language sLang, Language tLang, String text)
-            throws Exception {
+    protected String translate(Language sLang, Language tLang, String text) throws Exception {
         String mode;
-        if ("be".equalsIgnoreCase(sLang.getLanguageCode())
-                && "ru".equalsIgnoreCase(tLang.getLanguageCode())) {
+        if ("be".equalsIgnoreCase(sLang.getLanguageCode()) && "ru".equalsIgnoreCase(tLang.getLanguageCode())) {
             mode = "br";
         } else if ("ru".equalsIgnoreCase(sLang.getLanguageCode())
                 && "be".equalsIgnoreCase(tLang.getLanguageCode())) {
@@ -68,17 +66,14 @@ public class BelazarTranslate extends BaseTranslate {
             return null;
         }
 
-        String data = "td=" + mode + "&addtags=0&txt="
-                + URLEncoder.encode(text, CHARSET);
+        String data = "td=" + mode + "&addtags=0&txt=" + URLEncoder.encode(text, CHARSET);
 
         byte[] db = data.getBytes(CHARSET);
 
-        HttpURLConnection conn = (HttpURLConnection) new URL(
-                "http://localhost:48762").openConnection();
+        HttpURLConnection conn = (HttpURLConnection) new URL("http://localhost:48762").openConnection();
         conn.setRequestMethod("POST");
 
-        conn.setRequestProperty("Content-Type",
-                "application/x-www-form-urlencoded");
+        conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
         conn.setRequestProperty("Content-Length", Integer.toString(db.length));
         conn.setUseCaches(false);
         conn.setDoInput(true);

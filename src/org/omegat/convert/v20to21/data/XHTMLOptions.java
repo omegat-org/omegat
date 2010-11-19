@@ -21,19 +21,17 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.convert.v20to21.data;
 
 import java.io.Serializable;
 
-
 /**
- * * Options for XHTML filter.
- * Serializable to allow saving to / reading from configuration file.
+ * * Options for XHTML filter. Serializable to allow saving to / reading from
+ * configuration file.
  * <p>
- * XHTML filter have the following options
- * ([+] means default on).<br>
+ * XHTML filter have the following options ([+] means default on).<br>
  * Translatable attributes:
  * <ul>
  * <li>[+] href
@@ -44,13 +42,13 @@ import java.io.Serializable;
  * <li>[+] value (of buttons)
  * </ul>
  * Start a new paragraph on breaks (&lt;br&gt;) []<br>
- * Skip text matchin regExp []
- * Skip content of meta-tag when any of the given attibutename-value pairs is present in the tag
+ * Skip text matchin regExp [] Skip content of meta-tag when any of the given
+ * attibutename-value pairs is present in the tag
+ * 
  * @author Didier Briel
  * @author Martin Fleurke
  */
-public class XHTMLOptions implements Serializable
-{
+public class XHTMLOptions implements Serializable {
 
     /** Hold value of properties. */
     private boolean translateHref = true;
@@ -62,156 +60,135 @@ public class XHTMLOptions implements Serializable
     private boolean paragraphOnBr = false;
 
     private String skipRegExp = "";
-    private String skipMeta= "http-equiv=Content-Type," +
-                             "http-equiv=refresh," +
-                             "name=robots," +
-                             "name=revisit-after," +
-                             "http-equiv=expires," + 
-                             "http-equiv=content-style-type," +
-                             "http-equiv=content-script-type";
+    private String skipMeta = "http-equiv=Content-Type," + "http-equiv=refresh," + "name=robots,"
+            + "name=revisit-after," + "http-equiv=expires," + "http-equiv=content-style-type,"
+            + "http-equiv=content-script-type";
 
     /**
      * Returns whether href attributes should be translated.
      */
-    public boolean getTranslateHref()
-    {
+    public boolean getTranslateHref() {
         return this.translateHref;
     }
 
     /**
      * Sets whether href attributes should be translated.
      */
-    public void setTranslateHref(boolean translateHref)
-    {
+    public void setTranslateHref(boolean translateHref) {
         this.translateHref = translateHref;
     }
 
     /**
      * Returns whether src attributes should be translated.
      */
-    public boolean getTranslateSrc()
-    {
+    public boolean getTranslateSrc() {
         return this.translateSrc;
     }
 
     /**
      * Sets whether src attributes should be translated.
      */
-    public void setTranslateSrc(boolean translateSrc)
-    {
+    public void setTranslateSrc(boolean translateSrc) {
         this.translateSrc = translateSrc;
     }
 
     /**
      * Returns whether lang attributes should be translated.
      */
-    public boolean getTranslateLang()
-    {
+    public boolean getTranslateLang() {
         return this.translateLang;
     }
 
     /**
      * Sets whether lang attributes should be translated.
      */
-    public void setTranslateLang(boolean translateLang)
-    {
+    public void setTranslateLang(boolean translateLang) {
         this.translateLang = translateLang;
     }
 
-   /**
+    /**
      * Returns whether hreflang attributes should be translated.
      */
-    public boolean getTranslateHreflang()
-    {
+    public boolean getTranslateHreflang() {
         return this.translateHreflang;
     }
 
     /**
      * Sets whether hreflang attributes should be translated.
      */
-    public void setTranslateHreflang(boolean translateHreflang)
-    {
+    public void setTranslateHreflang(boolean translateHreflang) {
         this.translateHreflang = translateHreflang;
     }
 
     /**
      * Sets whether value attributes should be translated.
      */
-    public void setTranslateValue(boolean translateValue)
-    {
+    public void setTranslateValue(boolean translateValue) {
         this.translateValue = translateValue;
     }
 
     /**
      * Returns whether value attributes should be translated.
      */
-    public boolean getTranslateValue()
-    {
+    public boolean getTranslateValue() {
         return this.translateValue;
     }
 
     /**
      * Sets whether button value attributes should be translated.
      */
-    public void setTranslateButtonValue(boolean translateButtonValue)
-    {
+    public void setTranslateButtonValue(boolean translateButtonValue) {
         this.translateButtonValue = translateButtonValue;
     }
 
     /**
      * Returns whether button value attributes should be translated.
      */
-    public boolean getTranslateButtonValue()
-    {
+    public boolean getTranslateButtonValue() {
         return this.translateButtonValue;
     }
 
-
-   /**
+    /**
      * Returns whether a new paragraph should be started on BR.
      */
-    public boolean getParagraphOnBr()
-    {
+    public boolean getParagraphOnBr() {
         return this.paragraphOnBr;
     }
 
     /**
      * Sets whether a new paragraph should be started on BR.
      */
-    public void setParagraphOnBr(boolean paragraphOnBr)
-    {
+    public void setParagraphOnBr(boolean paragraphOnBr) {
         this.paragraphOnBr = paragraphOnBr;
     }
 
     /**
      * Returns the regular expression that matches text not to be translated
      */
-    public String getSkipRegExp()
-    {
+    public String getSkipRegExp() {
         return this.skipRegExp;
     }
 
     /**
      * Sets the regular expression that matches text not to be translated
      */
-    public void setSkipRegExp(String skipRegExp)
-    {
+    public void setSkipRegExp(String skipRegExp) {
         this.skipRegExp = skipRegExp;
     }
 
     /**
-     * Returns the meta-tag attribute key-value pairs of which meta-tags should not be translated
+     * Returns the meta-tag attribute key-value pairs of which meta-tags should
+     * not be translated
      */
-    public String getSkipMeta()
-    {
+    public String getSkipMeta() {
         return this.skipMeta;
     }
 
     /**
-     * Sets the meta-tag attribute key-value pairs of which meta-tags should not be translated
+     * Sets the meta-tag attribute key-value pairs of which meta-tags should not
+     * be translated
      */
-    public void setSkipMeta(String skipMeta)
-    {
+    public void setSkipMeta(String skipMeta) {
         this.skipMeta = skipMeta;
     }
 

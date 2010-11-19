@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2.hhc;
 
@@ -31,48 +31,37 @@ import org.htmlparser.Tag;
 import org.omegat.filters2.html2.FilterVisitor;
 
 /**
- * The part of HTML filter that actually does the job.
- * This class is called back by HTMLParser (http://sf.net/projects/htmlparser/).
- *
+ * The part of HTML filter that actually does the job. This class is called back
+ * by HTMLParser (http://sf.net/projects/htmlparser/).
+ * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
-class HHCFilterVisitor extends FilterVisitor
-{
-    public HHCFilterVisitor(HHCFilter2 hhcfilter, BufferedWriter bufwriter)
-    {
+class HHCFilterVisitor extends FilterVisitor {
+    public HHCFilterVisitor(HHCFilter2 hhcfilter, BufferedWriter bufwriter) {
         super(hhcfilter, bufwriter, null);
     }
 
-    /////////////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////////////
     // Variable declaration
-    /////////////////////////////////////////////////////////////////////////
-    
+    // ///////////////////////////////////////////////////////////////////////
+
     /** Do we collect the translatable text now. */
     boolean text = false;
-    
-    public void visitTag(Tag tag)
-    {
-        if( isParagraphTag(tag) && text )
+
+    public void visitTag(Tag tag) {
+        if (isParagraphTag(tag) && text)
             endup();
 
-        if( "PARAM".equals(tag.getTagName()) &&                                 
-           "Name".equalsIgnoreCase(tag.getAttribute("name"))
-           ) 
-        {  
-           maybeTranslateAttribute(tag, "value");                               
+        if ("PARAM".equals(tag.getTagName()) && "Name".equalsIgnoreCase(tag.getAttribute("name"))) {
+            maybeTranslateAttribute(tag, "value");
         }
         queuePrefix(tag);
     }
-   
-    private boolean isParagraphTag(Tag tag)
-    {
-        String tagname = tag.getTagName();
-        return
-                tagname.equals("HTML") ||                                       
-                tagname.equals("HEAD") ||                                       
-                tagname.equals("BODY");                                         
-    }
-  
-}
 
+    private boolean isParagraphTag(Tag tag) {
+        String tagname = tag.getTagName();
+        return tagname.equals("HTML") || tagname.equals("HEAD") || tagname.equals("BODY");
+    }
+
+}

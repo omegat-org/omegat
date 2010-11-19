@@ -37,8 +37,7 @@ import org.omegat.util.StaticUtils;
  */
 public class ConvertTo213 {
     public static void convertUIConfig(File out) throws Exception {
-        String layout = Preferences
-                .getPreference(Preferences.MAINWINDOW_LAYOUT);
+        String layout = Preferences.getPreference(Preferences.MAINWINDOW_LAYOUT);
         if (layout.length() > 0) {
             byte[] bytes = StaticUtils.uudecode(layout);
             String xml = new String(bytes, "UTF-8");

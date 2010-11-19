@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.filters2;
 
@@ -44,125 +44,118 @@ import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;
 
 /**
- * Editor for a single instance of the filter.
- * E.g. HTML filter may have two instances -- one for .html and 
- * other for .htm files.
- *
- * @author  Maxym Mykhalchuk
+ * Editor for a single instance of the filter. E.g. HTML filter may have two
+ * instances -- one for .html and other for .htm files.
+ * 
+ * @author Maxym Mykhalchuk
  */
-public class InstanceEditor extends JDialog
-{
-    
+public class InstanceEditor extends JDialog {
+
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
-    
-    private void init2(boolean sourceEncodingVariable, boolean targetEncodingVariable, String hint)
-    {
+
+    private void init2(boolean sourceEncodingVariable, boolean targetEncodingVariable, String hint) {
         getRootPane().setDefaultButton(addOrUpdateButton);
         this.sourceEncodingField.setEnabled(sourceEncodingVariable);
         this.targetEncodingField.setEnabled(targetEncodingVariable);
-        ((TitledBorder)tfnpPanel.getBorder()).setTitle(OStrings.getString("INSTANCEEDITOR_Target_Filename_Pattern"));
-        
-        sourceFilenameMaskField.setText("*.*");                                 
-        targetFilenamePatternField.setText("${filename}");                      
-        
-        if( hint!=null && hint.length()!=0 )
+        ((TitledBorder) tfnpPanel.getBorder()).setTitle(OStrings
+                .getString("INSTANCEEDITOR_Target_Filename_Pattern"));
+
+        sourceFilenameMaskField.setText("*.*");
+        targetFilenamePatternField.setText("${filename}");
+
+        if (hint != null && hint.length() != 0)
             hintTextArea.setText(hint);
         else
             hintTextArea.setVisible(false);
-            
+
         // HP
-        //  Handle escape key to close the window
+        // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        Action escapeAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
                 dispose();
             }
         };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);
         // END HP
-        
+
         pack();
     }
-    
-    /** 
-     * Creates an InstanceEditor form,
-     * that is used to add a new filter instance.
+
+    /**
+     * Creates an InstanceEditor form, that is used to add a new filter
+     * instance.
      */
-    public InstanceEditor(Dialog parent, boolean sourceEncodingVariable, boolean targetEncodingVariable, String hint)
-    {
+    public InstanceEditor(Dialog parent, boolean sourceEncodingVariable, boolean targetEncodingVariable,
+            String hint) {
         super(parent, true);
         initComponents();
         init2(sourceEncodingVariable, targetEncodingVariable, hint);
         setTitle(OStrings.getString("INSTANCEEDITOR_TITLE_ADD"));
         Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_OK"));
     }
-    
-    /** 
-     * Creates an InstanceEditor form,
-     * that is used to edit an existing filter instance.
+
+    /**
+     * Creates an InstanceEditor form, that is used to edit an existing filter
+     * instance.
      */
-    public InstanceEditor(Dialog parent, boolean sourceEncodingVariable, boolean targetEncodingVariable, String hint, String sourceFilenameMask, String sourceEncoding, String targetEncoding, String targetFilenamePattern)
-    {
+    public InstanceEditor(Dialog parent, boolean sourceEncodingVariable, boolean targetEncodingVariable,
+            String hint, String sourceFilenameMask, String sourceEncoding, String targetEncoding,
+            String targetFilenamePattern) {
         super(parent, true);
         initComponents();
         init2(sourceEncodingVariable, targetEncodingVariable, hint);
-        setTitle( OStrings.getString("INSTANCEEDITOR_TITLE_UPDATE"));
-        
+        setTitle(OStrings.getString("INSTANCEEDITOR_TITLE_UPDATE"));
+
         Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_OK"));
-        
+
         sourceFilenameMaskField.setText(sourceFilenameMask);
         sourceEncodingField.setSelectedItem(sourceEncoding);
         targetEncodingField.setSelectedItem(targetEncoding);
         targetFilenamePatternField.setText(targetFilenamePattern);
     }
-    
-    
+
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
-    public int getReturnStatus()
-    {
+    public int getReturnStatus() {
         return returnStatus;
     }
-    
+
     private String sourceFilenameMask;
-    public String getSourceFilenameMask()
-    {
+
+    public String getSourceFilenameMask() {
         return sourceFilenameMask;
     }
 
     private String sourceEncoding;
-    public String getSourceEncoding()
-    {
+
+    public String getSourceEncoding() {
         return sourceEncoding;
     }
 
     private String targetEncoding;
-    public String getTargetEncoding()
-    {
+
+    public String getTargetEncoding() {
         return targetEncoding;
     }
 
     private String targetFilenamePattern;
-    public String getTargetFilenamePattern()
-    {
+
+    public String getTargetFilenamePattern() {
         return targetFilenamePattern;
     }
-    
-    
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
-    // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    // <editor-fold defaultstate="collapsed"
+    // desc=" Generated Code ">//GEN-BEGIN:initComponents
+    private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
         buttonPanel = new javax.swing.JPanel();
@@ -189,10 +182,8 @@ public class InstanceEditor extends JDialog
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
         org.openide.awt.Mnemonics.setLocalizedText(addOrUpdateButton, OStrings.getString("BUTTON_ADD"));
-        addOrUpdateButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        addOrUpdateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 addOrUpdateButtonActionPerformed(evt);
             }
         });
@@ -200,10 +191,8 @@ public class InstanceEditor extends JDialog
         buttonPanel.add(addOrUpdateButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
-        cancelButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
@@ -240,10 +229,8 @@ public class InstanceEditor extends JDialog
 
         tfnpPanel.setBorder(javax.swing.BorderFactory.createTitledBorder("Target Filename Pattern"));
         org.openide.awt.Mnemonics.setLocalizedText(insertButton, OStrings.getString("BUTTON_INSERT"));
-        insertButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        insertButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 insertButtonActionPerformed(evt);
             }
         });
@@ -266,7 +253,8 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         tfnpPanel.add(substitute, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("INSTANCEEDITOR_Substituted_Variable"));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4,
+                OStrings.getString("INSTANCEEDITOR_Substituted_Variable"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -312,7 +300,8 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(sourceFilenameMaskField, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("INSTANCEEDITOR_SOURCE_ENCODING"));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3,
+                OStrings.getString("INSTANCEEDITOR_SOURCE_ENCODING"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -320,7 +309,8 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jLabel3, gridBagConstraints);
 
-        sourceEncodingField.setModel(new DefaultComboBoxModel(new Vector<String>(FilterMaster.getSupportedEncodings())));
+        sourceEncodingField.setModel(new DefaultComboBoxModel(new Vector<String>(FilterMaster
+                .getSupportedEncodings())));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 2;
@@ -329,7 +319,8 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(sourceEncodingField, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, OStrings.getString("INSTANCEEDITOR_Target_Encoding"));
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6,
+                OStrings.getString("INSTANCEEDITOR_Target_Encoding"));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -337,7 +328,8 @@ public class InstanceEditor extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(jLabel6, gridBagConstraints);
 
-        targetEncodingField.setModel(new DefaultComboBoxModel(new Vector<String>(FilterMaster.getSupportedEncodings())));
+        targetEncodingField.setModel(new DefaultComboBoxModel(new Vector<String>(FilterMaster
+                .getSupportedEncodings())));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 3;
@@ -349,45 +341,44 @@ public class InstanceEditor extends JDialog
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         java.awt.Dimension dialogSize = getSize();
-        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
+        setLocation((screenSize.width - dialogSize.width) / 2, (screenSize.height - dialogSize.height) / 2);
     }
+
     // </editor-fold>//GEN-END:initComponents
 
-    private void insertButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_insertButtonActionPerformed
-    {//GEN-HEADEREND:event_insertButtonActionPerformed
+    private void insertButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_insertButtonActionPerformed
+    {// GEN-HEADEREND:event_insertButtonActionPerformed
         int caret = targetFilenamePatternField.getCaretPosition();
         String oldtext = targetFilenamePatternField.getText();
-        String newtext = oldtext.substring(0, caret) +
-                substitute.getSelectedItem().toString() +
-                oldtext.substring(caret);
+        String newtext = oldtext.substring(0, caret) + substitute.getSelectedItem().toString()
+                + oldtext.substring(caret);
         targetFilenamePatternField.setText(newtext);
         targetFilenamePatternField.setCaretPosition(caret + substitute.getSelectedItem().toString().length());
         targetFilenamePatternField.requestFocus();
-    }//GEN-LAST:event_insertButtonActionPerformed
+    }// GEN-LAST:event_insertButtonActionPerformed
 
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
-    {//GEN-HEADEREND:event_cancelButtonActionPerformed
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cancelButtonActionPerformed
+    {// GEN-HEADEREND:event_cancelButtonActionPerformed
         doClose(RET_CANCEL);
-    }//GEN-LAST:event_cancelButtonActionPerformed
+    }// GEN-LAST:event_cancelButtonActionPerformed
 
-    private void addOrUpdateButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_addOrUpdateButtonActionPerformed
-    {//GEN-HEADEREND:event_addOrUpdateButtonActionPerformed
+    private void addOrUpdateButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_addOrUpdateButtonActionPerformed
+    {// GEN-HEADEREND:event_addOrUpdateButtonActionPerformed
         sourceFilenameMask = sourceFilenameMaskField.getText();
         sourceEncoding = sourceEncodingField.getSelectedItem().toString();
         targetEncoding = targetEncodingField.getSelectedItem().toString();
-        targetFilenamePattern = targetFilenamePatternField.getText();        
+        targetFilenamePattern = targetFilenamePatternField.getText();
         doClose(RET_OK);
-    }//GEN-LAST:event_addOrUpdateButtonActionPerformed
-    
+    }// GEN-LAST:event_addOrUpdateButtonActionPerformed
+
     private int returnStatus = RET_CANCEL;
-    private void doClose(int retStatus)
-    {
+
+    private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
         dispose();
     }
 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addOrUpdateButton;
     private javax.swing.JPanel buttonPanel;
@@ -405,5 +396,5 @@ public class InstanceEditor extends JDialog
     private javax.swing.JTextField targetFilenamePatternField;
     private javax.swing.JPanel tfnpPanel;
     // End of variables declaration//GEN-END:variables
-    
+
 }

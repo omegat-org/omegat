@@ -36,8 +36,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * @author Didier Briel
  */
 public class SvgDialect extends DefaultXMLDialect {
-    public static final Pattern ROOT_PATTERN =
-            Pattern.compile("svg");
+    public static final Pattern ROOT_PATTERN = Pattern.compile("svg");
 
     public SvgDialect() {
         defineConstraint(CONSTRAINT_ROOT, ROOT_PATTERN);

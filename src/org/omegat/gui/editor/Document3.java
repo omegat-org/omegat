@@ -106,8 +106,7 @@ public class Document3 extends DefaultStyledDocument {
      * edit.
      */
     boolean isEditMode() {
-        return activeTranslationBeginM1 != null
-                && activeTranslationEndP1 != null;
+        return activeTranslationBeginM1 != null && activeTranslationEndP1 != null;
     }
 
     /**
@@ -146,13 +145,11 @@ public class Document3 extends DefaultStyledDocument {
      * @param isRightAlignment
      *            false - left alignment, true - right alignment
      */
-    protected void setAlignment(int beginOffset, int endOffset,
-            boolean isRightAlignment) {
+    protected void setAlignment(int beginOffset, int endOffset, boolean isRightAlignment) {
         try {
             writeLock();
 
-            DefaultDocumentEvent changes = new DefaultDocumentEvent(
-                    beginOffset, endOffset - beginOffset,
+            DefaultDocumentEvent changes = new DefaultDocumentEvent(beginOffset, endOffset - beginOffset,
                     DocumentEvent.EventType.CHANGE);
 
             Element root = getDefaultRootElement();
@@ -160,11 +157,9 @@ public class Document3 extends DefaultStyledDocument {
             int parEnd = root.getElementIndex(endOffset - 1);
             for (int par = parBeg; par <= parEnd; par++) {
                 Element el = root.getElement(par);
-                MutableAttributeSet attr = (MutableAttributeSet) el
-                        .getAttributes();
-                attr.addAttribute(StyleConstants.Alignment,
-                        isRightAlignment ? StyleConstants.ALIGN_RIGHT
-                                : StyleConstants.ALIGN_LEFT);
+                MutableAttributeSet attr = (MutableAttributeSet) el.getAttributes();
+                attr.addAttribute(StyleConstants.Alignment, isRightAlignment ? StyleConstants.ALIGN_RIGHT
+                        : StyleConstants.ALIGN_LEFT);
             }
 
             changes.end();

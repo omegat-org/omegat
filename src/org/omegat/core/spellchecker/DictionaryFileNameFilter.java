@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.spellchecker;
 
@@ -29,15 +29,16 @@ import java.io.FilenameFilter;
 
 /**
  * A file name filter for use when searching for dictionary files
+ * 
  * @author bartkoz
  */
 public class DictionaryFileNameFilter implements FilenameFilter {
-    
+
     /**
      * the file name extension
      */
     private String extension;
-    
+
     /** Creates a new instance of DictionaryFileNameFilter */
     public DictionaryFileNameFilter(String extension) {
         this.extension = extension;
@@ -48,11 +49,11 @@ public class DictionaryFileNameFilter implements FilenameFilter {
      */
     public boolean accept(File dir, String name) {
         boolean result = true;
-        
+
         if (extension != null)
             result &= name.endsWith(extension);
-        
+
         return result;
     }
-    
+
 }

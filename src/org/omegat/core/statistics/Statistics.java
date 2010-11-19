@@ -74,10 +74,8 @@ public class Statistics {
      * @return max similarity percent
      */
     public static int getMaxSimilarityPercent(final SourceTextEntry ste,
-            final ISimilarityCalculator distanceCalculator,
-            final List<SourceTextEntry> allEntries,
-            final Map<String, Token[]> tokensCache,
-            final Set<String> alreadyProcessed) {
+            final ISimilarityCalculator distanceCalculator, final List<SourceTextEntry> allEntries,
+            final Map<String, Token[]> tokensCache, final Set<String> alreadyProcessed) {
 
         boolean isFirst = alreadyProcessed.add(ste.getSrcText());
 
@@ -86,7 +84,7 @@ public class Statistics {
             // "Exact matched"
             return PERCENT_EXACT_MATCH;
         }
-        
+
         if (!isFirst) {
             // already processed - repetition
             return PERCENT_REPETITIONS;
@@ -95,8 +93,7 @@ public class Statistics {
         /*
          * Not translated, not already processed. Then find fuzzy matches.
          */
-        Token[] strTokensStem = tokenizeExactlyWithCache(tokensCache, ste
-                .getSrcText());
+        Token[] strTokensStem = tokenizeExactlyWithCache(tokensCache, ste.getSrcText());
         int maxSimilarity = 0; // not matched - 0% yet
 
         /* Travel by project entries. */
@@ -112,30 +109,25 @@ public class Statistics {
                 // target without translation - skip
                 continue;
             }
-            Token[] candTokens = tokenizeExactlyWithCache(tokensCache, cand
-                    .getSrcText());
-            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
-                    strTokensStem, candTokens);
+            Token[] candTokens = tokenizeExactlyWithCache(tokensCache, cand.getSrcText());
+            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);
         }
 
         /* Travel by orphaned. */
         for (String source : Core.getProject().getOrphanedSegments().keySet()) {
             Token[] candTokens = tokenizeExactlyWithCache(tokensCache, source);
-            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator,
-                    strTokensStem, candTokens);
+            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
             maxSimilarity = Math.max(maxSimilarity, newSimilarity);
         }
-        
+
         /* Travel by TMs. */
-        for (List<TransMemory> tmFile : Core.getProject().getTransMemories()
-                .values()) {
+        for (List<TransMemory> tmFile : Core.getProject().getTransMemories().values()) {
             for (int i = 0; i < tmFile.size(); i++) {
                 TransMemory tm = tmFile.get(i);
-                Token[] candTokens = tokenizeExactlyWithCache(tokensCache,
-                        tm.source);
-                int newSimilarity = FuzzyMatcher.calcSimilarity(
-                        distanceCalculator, strTokensStem, candTokens);
+                Token[] candTokens = tokenizeExactlyWithCache(tokensCache, tm.source);
+                int newSimilarity = FuzzyMatcher
+                        .calcSimilarity(distanceCalculator, strTokensStem, candTokens);
                 maxSimilarity = Math.max(maxSimilarity, newSimilarity);
             }
         }
@@ -152,12 +144,10 @@ public class Statistics {
      *            string to tokenize
      * @return tokens
      */
-    private static Token[] tokenizeExactlyWithCache(
-            final Map<String, Token[]> tokensCache, final String str) {
+    private static Token[] tokenizeExactlyWithCache(final Map<String, Token[]> tokensCache, final String str) {
         Token[] result = tokensCache.get(str);
         if (result == null) {
-            result = Core.getProject().getSourceTokenizer().tokenizeAllExactly(
-                    str);
+            result = Core.getProject().getSourceTokenizer().tokenizeAllExactly(str);
             tokensCache.put(str, result);
         }
         return result;
@@ -185,8 +175,7 @@ public class Statistics {
         String tokenStr = new String();
 
         int start = breaker.first();
-        for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker
-                .next()) {
+        for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
             tokenStr = str.substring(start, end);
             boolean word = false;
             for (int i = 0; i < tokenStr.length(); i++) {
@@ -211,8 +200,7 @@ public class Statistics {
      */
     public static void writeStat(String filename, String text) {
         try {
-            OutputStreamWriter out = new OutputStreamWriter(
-                    new FileOutputStream(filename), OConsts.UTF8);
+            OutputStreamWriter out = new OutputStreamWriter(new FileOutputStream(filename), OConsts.UTF8);
             try {
                 out.write(DateFormat.getInstance().format(new Date()) + "\n");
                 out.write(text);

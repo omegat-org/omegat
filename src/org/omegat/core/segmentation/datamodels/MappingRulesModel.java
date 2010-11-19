@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.segmentation.datamodels;
 
@@ -38,149 +38,124 @@ import org.omegat.util.OStrings;
 
 /**
  * Table Model for Sets of segmentation rules.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class MappingRulesModel extends AbstractTableModel
-{
+public class MappingRulesModel extends AbstractTableModel {
     private SRX srx;
-    
+
     /**
-     * Creates a new instance of MappingRulesModel 
+     * Creates a new instance of MappingRulesModel
      */
-    public MappingRulesModel(SRX srx)
-    {
+    public MappingRulesModel(SRX srx) {
         this.srx = srx;
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex)
-    {
+    public Object getValueAt(int rowIndex, int columnIndex) {
         MapRule maprule = srx.getMappingRules().get(rowIndex);
-        switch( columnIndex )
-        {
-            case 0:
-                return maprule.getLanguage();
-            case 1:
-                return maprule.getPattern();
+        switch (columnIndex) {
+        case 0:
+            return maprule.getLanguage();
+        case 1:
+            return maprule.getPattern();
         }
         return null;
     }
 
-    public int getRowCount()
-    {
+    public int getRowCount() {
         return srx.getMappingRules().size();
     }
 
-    public int getColumnCount()
-    {
+    public int getColumnCount() {
         return 2;
     }
 
     /** The names of table columns */
-    private static String[] COLUMN_NAMES = 
-            new String[] {
-                OStrings.getString("CORE_SRX_TABLE_HEADER_Language_Name"), 
-                OStrings.getString("CORE_SRX_TABLE_HEADER_Language_Pattern")};
-            
-    public String getColumnName(int column)
-    {
+    private static String[] COLUMN_NAMES = new String[] {
+            OStrings.getString("CORE_SRX_TABLE_HEADER_Language_Name"),
+            OStrings.getString("CORE_SRX_TABLE_HEADER_Language_Pattern") };
+
+    public String getColumnName(int column) {
         return COLUMN_NAMES[column];
     }
 
-    public boolean isCellEditable(int rowIndex, int columnIndex)
-    {
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
         return true;
     }
-    
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
-    {
+
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         MapRule maprule = srx.getMappingRules().get(rowIndex);
-        switch( columnIndex )
-        {
-            case 0:
-                maprule.setLanguage((String)aValue);
-                break;
-            case 1:
-                try
-                {
-                    maprule.setPattern((String)aValue);
-                }
-                catch( PatternSyntaxException pse )
-                {
-                    fireException(pse);
-                }
-                break;
+        switch (columnIndex) {
+        case 0:
+            maprule.setLanguage((String) aValue);
+            break;
+        case 1:
+            try {
+                maprule.setPattern((String) aValue);
+            } catch (PatternSyntaxException pse) {
+                fireException(pse);
+            }
+            break;
         }
     }
 
-    public Class<?> getColumnClass(int columnIndex)
-    {
+    public Class<?> getColumnClass(int columnIndex) {
         return String.class;
     }
-    
+
     /** Adds a new empty mapping rule. */
-    public int addRow()
-    {
+    public int addRow() {
         int rows = srx.getMappingRules().size();
-        srx.getMappingRules().add(new MapRule(
-                OStrings.getString("SEG_NEW_LN_CO"),
-                "LN-CO",                                                        
-                new ArrayList<Rule>()));
+        srx.getMappingRules().add(
+                new MapRule(OStrings.getString("SEG_NEW_LN_CO"), "LN-CO", new ArrayList<Rule>()));
         fireTableRowsInserted(rows, rows);
         return rows;
     }
 
     /** Removes a mapping rule. */
-    public void removeRow(int row)
-    {
+    public void removeRow(int row) {
         srx.getMappingRules().remove(row);
         fireTableRowsDeleted(row, row);
     }
 
     /** Moves a mapping rule up an order. */
-    public void moveRowUp(int row)
-    {
-        MapRule maprulePrev = srx.getMappingRules().get(row-1);
+    public void moveRowUp(int row) {
+        MapRule maprulePrev = srx.getMappingRules().get(row - 1);
         MapRule maprule = srx.getMappingRules().get(row);
-        srx.getMappingRules().remove(row-1);
+        srx.getMappingRules().remove(row - 1);
         srx.getMappingRules().add(row, maprulePrev);
-        fireTableRowsUpdated(row-1, row);
-    }
-    
-    /** Moves a mapping rule down an order. */
-    public void moveRowDown(int row)
-    {
-        MapRule mapruleNext = srx.getMappingRules().get(row+1);
-        MapRule maprule = srx.getMappingRules().get(row);
-        srx.getMappingRules().remove(row+1);
-        srx.getMappingRules().add(row, mapruleNext);
-        fireTableRowsUpdated(row, row+1);
+        fireTableRowsUpdated(row - 1, row);
     }
 
-//
-//  Managing Listeners of Errorneous Input
-//
+    /** Moves a mapping rule down an order. */
+    public void moveRowDown(int row) {
+        MapRule mapruleNext = srx.getMappingRules().get(row + 1);
+        MapRule maprule = srx.getMappingRules().get(row);
+        srx.getMappingRules().remove(row + 1);
+        srx.getMappingRules().add(row, mapruleNext);
+        fireTableRowsUpdated(row, row + 1);
+    }
+
+    //
+    // Managing Listeners of Errorneous Input
+    //
 
     /** List of listeners */
     protected List<ExceptionListener> listeners = new ArrayList<ExceptionListener>();
 
-    public void addExceptionListener(ExceptionListener l) 
-    {
-	listeners.add(l);
+    public void addExceptionListener(ExceptionListener l) {
+        listeners.add(l);
     }
 
-    public void removeTableModelListener(ExceptionListener l) 
-    {
-	listeners.remove(l);
+    public void removeTableModelListener(ExceptionListener l) {
+        listeners.remove(l);
     }
 
-    public void fireException(Exception e) 
-    {
-	for(int i=listeners.size()-1; i>=0; i--) 
-        {
+    public void fireException(Exception e) {
+        for (int i = listeners.size() - 1; i >= 0; i--) {
             ExceptionListener l = listeners.get(i);
             l.exceptionThrown(e);
-	}
+        }
     }
-    
+
 }

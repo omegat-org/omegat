@@ -43,8 +43,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MachineTranslateTextArea extends
-        EntryInfoPane<MachineTranslationInfo> {
+public class MachineTranslateTextArea extends EntryInfoPane<MachineTranslationInfo> {
     protected final IMachineTranslation[] translators;
 
     protected String displayed;
@@ -53,10 +52,8 @@ public class MachineTranslateTextArea extends
         super(true);
 
         setEditable(false);
-        String title = OStrings
-                .getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
-        Core.getMainWindow().addDockable(
-                new DockableScrollPane("MACHINE_TRANSLATE", title, this, true));
+        String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
+        Core.getMainWindow().addDockable(new DockableScrollPane("MACHINE_TRANSLATE", title, this, true));
 
         List<IMachineTranslation> tr = new ArrayList<IMachineTranslation>();
         for (Class<?> mtc : PluginUtils.getMachineTranslationClasses()) {
@@ -91,26 +88,22 @@ public class MachineTranslateTextArea extends
     }
 
     @Override
-    protected void setFoundResult(final SourceTextEntry se,
-            final MachineTranslationInfo data) {
+    protected void setFoundResult(final SourceTextEntry se, final MachineTranslationInfo data) {
         UIThreadsUtil.mustBeSwingThread();
 
         if (data != null && data.result != null) {
             if (displayed == null) {
                 displayed = data.result;
             }
-            setText(getText() + data.result + "\n<" + data.translatorName
-                    + ">\n\n");
+            setText(getText() + data.result + "\n<" + data.translatorName + ">\n\n");
         }
     }
 
-    protected class FindThread extends
-            EntryInfoSearchThread<MachineTranslationInfo> {
+    protected class FindThread extends EntryInfoSearchThread<MachineTranslationInfo> {
         private final IMachineTranslation translator;
         private final String src;
 
-        public FindThread(final IMachineTranslation translator,
-                final SourceTextEntry newEntry) {
+        public FindThread(final IMachineTranslation translator, final SourceTextEntry newEntry) {
             super(MachineTranslateTextArea.this, newEntry);
             this.translator = translator;
             src = newEntry.getSrcText();
@@ -118,10 +111,8 @@ public class MachineTranslateTextArea extends
 
         @Override
         protected MachineTranslationInfo search() throws Exception {
-            Language source = Core.getProject().getProjectProperties()
-                    .getSourceLanguage();
-            Language target = Core.getProject().getProjectProperties()
-                    .getTargetLanguage();
+            Language source = Core.getProject().getProjectProperties().getSourceLanguage();
+            Language target = Core.getProject().getProjectProperties().getTargetLanguage();
             if (source == null || target == null) {
                 return null;
             }

@@ -46,6 +46,6 @@ public interface IAlignCallback {
      * @param filter
      *            filter which produces entry
      */
-    void addTranslation(String id, String source, String translation,
-            boolean isFuzzy, String comment, IFilter filter);
+    void addTranslation(String id, String source, String translation, boolean isFuzzy, String comment,
+            IFilter filter);
 }

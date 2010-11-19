@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.segmentation;
 
@@ -51,177 +51,152 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
 /**
- * Main dialog for for setting up sentence segmenting.
- * The dialog is created as SRX-like as possible, but the segmentation 
- * is not (yet) SRX-compliant.
- *
- * @author  Maxym Mykhalchuk
+ * Main dialog for for setting up sentence segmenting. The dialog is created as
+ * SRX-like as possible, but the segmentation is not (yet) SRX-compliant.
+ * 
+ * @author Maxym Mykhalchuk
  */
-public class SegmentationCustomizer extends JDialog 
-        implements ListSelectionListener
-{
+public class SegmentationCustomizer extends JDialog implements ListSelectionListener {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
-    
-    private void constructor()
-    {
+
+    private void constructor() {
         // HP
-        //  Handle escape key to close the window
+        // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-        Action escapeAction = new AbstractAction()
-        {
-            public void actionPerformed(ActionEvent e)
-            {
+        Action escapeAction = new AbstractAction() {
+            public void actionPerformed(ActionEvent e) {
                 cancelButtonActionPerformed(null);
             }
         };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);
         // END HP
-    
+
         initComponents();
-        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background")); 
-        
+        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+
         getRootPane().setDefaultButton(okButton);
-        
+
         mapTable.getSelectionModel().addListSelectionListener(this);
         ruleTable.getSelectionModel().addListSelectionListener(this);
-        
-        MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
-        model.addExceptionListener(new ExceptionListener()
-        {
-            public void exceptionThrown(Exception e)
-            {
+
+        MappingRulesModel model = (MappingRulesModel) mapTable.getModel();
+        model.addExceptionListener(new ExceptionListener() {
+            public void exceptionThrown(Exception e) {
                 mapErrorsLabel.setText(e.getLocalizedMessage());
             }
         });
-        
+
         pack();
-        setSize(getWidth()*5/4, getHeight()*5/4);
+        setSize(getWidth() * 5 / 4, getHeight() * 5 / 4);
         Dimension screen = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setLocation((screen.width-getWidth())/2,(screen.height-getHeight())/2);
+        setLocation((screen.width - getWidth()) / 2, (screen.height - getHeight()) / 2);
     }
-    
+
     /**
-     * Creates new form SegmentationCustomizer 
-     * (to be called from a frame)
+     * Creates new form SegmentationCustomizer (to be called from a frame)
      */
-    public SegmentationCustomizer(Frame parent)
-    {
+    public SegmentationCustomizer(Frame parent) {
         super(parent, true);
         constructor();
     }
+
     /**
-     * Creates new form SegmentationCustomizer 
-     * (to be called from a dialog)
+     * Creates new form SegmentationCustomizer (to be called from a dialog)
      */
-    public SegmentationCustomizer(Dialog parent)
-    {
+    public SegmentationCustomizer(Dialog parent) {
         super(parent, true);
         constructor();
     }
-    
+
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
-    public int getReturnStatus()
-    {
+    public int getReturnStatus() {
         return returnStatus;
     }
 
-    public void valueChanged(ListSelectionEvent e)
-    {
-        if (e.getValueIsAdjusting()) return;
-        ListSelectionModel lsm = (ListSelectionModel)e.getSource();
-        if( e.getSource()==mapTable.getSelectionModel() )
-        {
-            mapErrorsLabel.setText("");                                         
-            if (lsm.isSelectionEmpty())
-            {
+    public void valueChanged(ListSelectionEvent e) {
+        if (e.getValueIsAdjusting())
+            return;
+        ListSelectionModel lsm = (ListSelectionModel) e.getSource();
+        if (e.getSource() == mapTable.getSelectionModel()) {
+            mapErrorsLabel.setText("");
+            if (lsm.isSelectionEmpty()) {
                 mapDeleteButton.setEnabled(false);
                 mapUpButton.setEnabled(false);
                 mapDownButton.setEnabled(false);
-                
+
                 ruleTable.setModel(new DefaultTableModel());
                 ruleInsertButton.setEnabled(false);
-            }
-            else
-            {
+            } else {
                 mapDeleteButton.setEnabled(true);
-                
+
                 int selrow = mapTable.getSelectedRow();
                 int rows = mapTable.getRowCount();
-                
-                if( selrow>0 )
+
+                if (selrow > 0)
                     mapUpButton.setEnabled(true);
                 else
                     mapUpButton.setEnabled(false);
-                
-                if( selrow<(rows-1) )
+
+                if (selrow < (rows - 1))
                     mapDownButton.setEnabled(true);
                 else
                     mapDownButton.setEnabled(false);
-                
+
                 MapRule maprule = SRX.getSRX().getMappingRules().get(selrow);
                 SegmentationRulesModel model = new SegmentationRulesModel(maprule.getRules());
                 ruleTable.setModel(model);
-                model.addExceptionListener(new ExceptionListener()
-                {
-                    public void exceptionThrown(Exception e)
-                    {
+                model.addExceptionListener(new ExceptionListener() {
+                    public void exceptionThrown(Exception e) {
                         ruleErrorsLabel.setText(e.getLocalizedMessage());
                     }
                 });
                 ruleInsertButton.setEnabled(true);
             }
-        }
-        else if( e.getSource()==ruleTable.getSelectionModel() )
-        {
-            ruleErrorsLabel.setText("");                                         
-            if (lsm.isSelectionEmpty())
-            {
+        } else if (e.getSource() == ruleTable.getSelectionModel()) {
+            ruleErrorsLabel.setText("");
+            if (lsm.isSelectionEmpty()) {
                 ruleDeleteButton.setEnabled(false);
                 ruleUpButton.setEnabled(false);
                 ruleDownButton.setEnabled(false);
-            }
-            else
-            {
+            } else {
                 ruleDeleteButton.setEnabled(true);
 
                 int rules = ruleTable.getRowCount();
                 int rulerow = ruleTable.getSelectedRow();
-                
-                if( rulerow>0 )
+
+                if (rulerow > 0)
                     ruleUpButton.setEnabled(true);
                 else
                     ruleUpButton.setEnabled(false);
-                
-                if( rulerow<(rules-1) )
+
+                if (rulerow < (rules - 1))
                     ruleDownButton.setEnabled(true);
                 else
                     ruleDownButton.setEnabled(false);
             }
         }
     }
-    
+
     /** Commits all pending edits on tables to allow up/down row movement */
-    private void commitTableEdits()
-    {
-        if( mapTable.getCellEditor()!=null )
+    private void commitTableEdits() {
+        if (mapTable.getCellEditor() != null)
             mapTable.getCellEditor().stopCellEditing();
-        if( ruleTable.getCellEditor()!=null )
+        if (ruleTable.getCellEditor() != null)
             ruleTable.getCellEditor().stopCellEditing();
     }
-    
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
      */
-    // <editor-fold defaultstate="collapsed" desc=" Generated Code ">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    // <editor-fold defaultstate="collapsed"
+    // desc=" Generated Code ">//GEN-BEGIN:initComponents
+    private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
         buttonPanel = new javax.swing.JPanel();
@@ -250,21 +225,18 @@ public class SegmentationCustomizer extends JDialog
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         setTitle(OStrings.getString("GUI_SEGMENTATION_TITLE"));
-        addWindowListener(new java.awt.event.WindowAdapter()
-        {
-            public void windowClosing(java.awt.event.WindowEvent evt)
-            {
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
             }
         });
 
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        org.openide.awt.Mnemonics.setLocalizedText(toDefaultsButton, OStrings.getString("BUTTON_TO_DEFAULTS"));
-        toDefaultsButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        org.openide.awt.Mnemonics
+                .setLocalizedText(toDefaultsButton, OStrings.getString("BUTTON_TO_DEFAULTS"));
+        toDefaultsButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 toDefaultsButtonActionPerformed(evt);
             }
         });
@@ -275,10 +247,8 @@ public class SegmentationCustomizer extends JDialog
         buttonPanel.add(jLabel1);
 
         org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK"));
-        okButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
             }
         });
@@ -286,10 +256,8 @@ public class SegmentationCustomizer extends JDialog
         buttonPanel.add(okButton);
 
         org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL"));
-        cancelButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
             }
         });
@@ -306,7 +274,8 @@ public class SegmentationCustomizer extends JDialog
 
         mapPanel.setLayout(new java.awt.GridBagLayout());
 
-        mapPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_SEGMENTATION_RULESETS")));
+        mapPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings
+                .getString("GUI_SEGMENTATION_RULESETS")));
         mapScrollPane.setPreferredSize(new java.awt.Dimension(300, 100));
         mapTable.setModel(new MappingRulesModel(SRX.getSRX()));
         mapScrollPane.setViewportView(mapTable);
@@ -321,12 +290,11 @@ public class SegmentationCustomizer extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapScrollPane, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_1"));
+        org.openide.awt.Mnemonics.setLocalizedText(mapUpButton,
+                OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_1"));
         mapUpButton.setEnabled(false);
-        mapUpButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mapUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mapUpButtonActionPerformed(evt);
             }
         });
@@ -341,10 +309,8 @@ public class SegmentationCustomizer extends JDialog
 
         org.openide.awt.Mnemonics.setLocalizedText(mapDeleteButton, OStrings.getString("BUTTON_REMOVE"));
         mapDeleteButton.setEnabled(false);
-        mapDeleteButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mapDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mapDeleteButtonActionPerformed(evt);
             }
         });
@@ -358,10 +324,8 @@ public class SegmentationCustomizer extends JDialog
         mapPanel.add(mapDeleteButton, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(mapInsertButton, OStrings.getString("BUTTON_ADD_NODOTS"));
-        mapInsertButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mapInsertButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mapInsertButtonActionPerformed(evt);
             }
         });
@@ -374,12 +338,11 @@ public class SegmentationCustomizer extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         mapPanel.add(mapInsertButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(mapDownButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_1"));
+        org.openide.awt.Mnemonics.setLocalizedText(mapDownButton,
+                OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_1"));
         mapDownButton.setEnabled(false);
-        mapDownButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        mapDownButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mapDownButtonActionPerformed(evt);
             }
         });
@@ -425,7 +388,8 @@ public class SegmentationCustomizer extends JDialog
 
         rulePanel.setLayout(new java.awt.GridBagLayout());
 
-        rulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings.getString("GUI_SEGMENTATION_RULEORDER")));
+        rulePanel.setBorder(javax.swing.BorderFactory.createTitledBorder(OStrings
+                .getString("GUI_SEGMENTATION_RULEORDER")));
         ruleScrollPane.setPreferredSize(new java.awt.Dimension(300, 120));
         ruleScrollPane.setViewportView(ruleTable);
 
@@ -439,12 +403,11 @@ public class SegmentationCustomizer extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleScrollPane, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleUpButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_2"));
+        org.openide.awt.Mnemonics.setLocalizedText(ruleUpButton,
+                OStrings.getString("GUI_SEGMENTATION_BUTTON_UP_2"));
         ruleUpButton.setEnabled(false);
-        ruleUpButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ruleUpButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ruleUpButtonActionPerformed(evt);
             }
         });
@@ -459,10 +422,8 @@ public class SegmentationCustomizer extends JDialog
 
         org.openide.awt.Mnemonics.setLocalizedText(ruleDeleteButton, OStrings.getString("BUTTON_REMOVE_2"));
         ruleDeleteButton.setEnabled(false);
-        ruleDeleteButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ruleDeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ruleDeleteButtonActionPerformed(evt);
             }
         });
@@ -475,12 +436,11 @@ public class SegmentationCustomizer extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleDeleteButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleInsertButton, OStrings.getString("BUTTON_ADD_NODOTS2"));
+        org.openide.awt.Mnemonics
+                .setLocalizedText(ruleInsertButton, OStrings.getString("BUTTON_ADD_NODOTS2"));
         ruleInsertButton.setEnabled(false);
-        ruleInsertButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ruleInsertButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ruleInsertButtonActionPerformed(evt);
             }
         });
@@ -493,12 +453,11 @@ public class SegmentationCustomizer extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         rulePanel.add(ruleInsertButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(ruleDownButton, OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_2"));
+        org.openide.awt.Mnemonics.setLocalizedText(ruleDownButton,
+                OStrings.getString("GUI_SEGMENTATION_BUTTON_DOWN_2"));
         ruleDownButton.setEnabled(false);
-        ruleDownButton.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        ruleDownButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ruleDownButtonActionPerformed(evt);
             }
         });
@@ -531,123 +490,118 @@ public class SegmentationCustomizer extends JDialog
 
     }// </editor-fold>//GEN-END:initComponents
 
-    private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_toDefaultsButtonActionPerformed
-    {//GEN-HEADEREND:event_toDefaultsButtonActionPerformed
+    private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_toDefaultsButtonActionPerformed
+    {// GEN-HEADEREND:event_toDefaultsButtonActionPerformed
         commitTableEdits();
         SRX.init();
         MappingRulesModel model = new MappingRulesModel(SRX.getSRX());
         mapTable.setModel(model);
-        model.addExceptionListener(new ExceptionListener()
-        {
-            public void exceptionThrown(Exception e)
-            {
+        model.addExceptionListener(new ExceptionListener() {
+            public void exceptionThrown(Exception e) {
                 mapErrorsLabel.setText(e.getLocalizedMessage());
             }
         });
         ruleTable.setModel(new DefaultTableModel());
-    }//GEN-LAST:event_toDefaultsButtonActionPerformed
-    
-    private void ruleDownButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ruleDownButtonActionPerformed
-    {//GEN-HEADEREND:event_ruleDownButtonActionPerformed
+    }// GEN-LAST:event_toDefaultsButtonActionPerformed
+
+    private void ruleDownButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_ruleDownButtonActionPerformed
+    {// GEN-HEADEREND:event_ruleDownButtonActionPerformed
         commitTableEdits();
-        SegmentationRulesModel model = (SegmentationRulesModel)ruleTable.getModel();
+        SegmentationRulesModel model = (SegmentationRulesModel) ruleTable.getModel();
         int selrow = ruleTable.getSelectedRow();
         model.moveRowDown(selrow);
         ruleTable.getSelectionModel().clearSelection();
-        ruleTable.getSelectionModel().addSelectionInterval(selrow+1, selrow+1);
-    }//GEN-LAST:event_ruleDownButtonActionPerformed
+        ruleTable.getSelectionModel().addSelectionInterval(selrow + 1, selrow + 1);
+    }// GEN-LAST:event_ruleDownButtonActionPerformed
 
-    private void ruleUpButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ruleUpButtonActionPerformed
-    {//GEN-HEADEREND:event_ruleUpButtonActionPerformed
+    private void ruleUpButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_ruleUpButtonActionPerformed
+    {// GEN-HEADEREND:event_ruleUpButtonActionPerformed
         commitTableEdits();
-        SegmentationRulesModel model = (SegmentationRulesModel)ruleTable.getModel();
+        SegmentationRulesModel model = (SegmentationRulesModel) ruleTable.getModel();
         int selrow = ruleTable.getSelectedRow();
         model.moveRowUp(selrow);
         ruleTable.getSelectionModel().clearSelection();
-        ruleTable.getSelectionModel().addSelectionInterval(selrow-1, selrow-1);
-    }//GEN-LAST:event_ruleUpButtonActionPerformed
+        ruleTable.getSelectionModel().addSelectionInterval(selrow - 1, selrow - 1);
+    }// GEN-LAST:event_ruleUpButtonActionPerformed
 
-    private void ruleDeleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ruleDeleteButtonActionPerformed
-    {//GEN-HEADEREND:event_ruleDeleteButtonActionPerformed
+    private void ruleDeleteButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_ruleDeleteButtonActionPerformed
+    {// GEN-HEADEREND:event_ruleDeleteButtonActionPerformed
         commitTableEdits();
-        SegmentationRulesModel model = (SegmentationRulesModel)ruleTable.getModel();
+        SegmentationRulesModel model = (SegmentationRulesModel) ruleTable.getModel();
         model.removeRow(ruleTable.getSelectedRow());
-    }//GEN-LAST:event_ruleDeleteButtonActionPerformed
+    }// GEN-LAST:event_ruleDeleteButtonActionPerformed
 
-    private void mapDownButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mapDownButtonActionPerformed
-    {//GEN-HEADEREND:event_mapDownButtonActionPerformed
+    private void mapDownButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_mapDownButtonActionPerformed
+    {// GEN-HEADEREND:event_mapDownButtonActionPerformed
         commitTableEdits();
-        MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
+        MappingRulesModel model = (MappingRulesModel) mapTable.getModel();
         int selrow = mapTable.getSelectedRow();
         model.moveRowDown(selrow);
         mapTable.getSelectionModel().clearSelection();
-        mapTable.getSelectionModel().addSelectionInterval(selrow+1, selrow+1);
-    }//GEN-LAST:event_mapDownButtonActionPerformed
+        mapTable.getSelectionModel().addSelectionInterval(selrow + 1, selrow + 1);
+    }// GEN-LAST:event_mapDownButtonActionPerformed
 
-    private void mapUpButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mapUpButtonActionPerformed
-    {//GEN-HEADEREND:event_mapUpButtonActionPerformed
+    private void mapUpButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_mapUpButtonActionPerformed
+    {// GEN-HEADEREND:event_mapUpButtonActionPerformed
         commitTableEdits();
-        MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
+        MappingRulesModel model = (MappingRulesModel) mapTable.getModel();
         int selrow = mapTable.getSelectedRow();
         model.moveRowUp(selrow);
         mapTable.getSelectionModel().clearSelection();
-        mapTable.getSelectionModel().addSelectionInterval(selrow-1, selrow-1);
-    }//GEN-LAST:event_mapUpButtonActionPerformed
+        mapTable.getSelectionModel().addSelectionInterval(selrow - 1, selrow - 1);
+    }// GEN-LAST:event_mapUpButtonActionPerformed
 
-    private void mapDeleteButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mapDeleteButtonActionPerformed
-    {//GEN-HEADEREND:event_mapDeleteButtonActionPerformed
+    private void mapDeleteButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_mapDeleteButtonActionPerformed
+    {// GEN-HEADEREND:event_mapDeleteButtonActionPerformed
         commitTableEdits();
-        MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
+        MappingRulesModel model = (MappingRulesModel) mapTable.getModel();
         String set = model.getValueAt(mapTable.getSelectedRow(), 0).toString();
         String title = OStrings.getString("CONFIRM_DIALOG_TITLE");
-        String message = StaticUtils.format(
-                OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"),
-                new Object[] { set } );
-        if( JOptionPane.showConfirmDialog(this, message , title, JOptionPane.YES_NO_OPTION)
-                == JOptionPane.YES_OPTION )
+        String message = StaticUtils.format(OStrings.getString("SEG_CONFIRM_REMOVE_SENTSEG_SET"),
+                new Object[] { set });
+        if (JOptionPane.showConfirmDialog(this, message, title, JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION)
             model.removeRow(mapTable.getSelectedRow());
-    }//GEN-LAST:event_mapDeleteButtonActionPerformed
+    }// GEN-LAST:event_mapDeleteButtonActionPerformed
 
-    private void ruleInsertButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_ruleInsertButtonActionPerformed
-    {//GEN-HEADEREND:event_ruleInsertButtonActionPerformed
+    private void ruleInsertButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_ruleInsertButtonActionPerformed
+    {// GEN-HEADEREND:event_ruleInsertButtonActionPerformed
         commitTableEdits();
-        SegmentationRulesModel model = (SegmentationRulesModel)ruleTable.getModel();
+        SegmentationRulesModel model = (SegmentationRulesModel) ruleTable.getModel();
         model.addRow();
-    }//GEN-LAST:event_ruleInsertButtonActionPerformed
+    }// GEN-LAST:event_ruleInsertButtonActionPerformed
 
-    private void mapInsertButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_mapInsertButtonActionPerformed
-    {//GEN-HEADEREND:event_mapInsertButtonActionPerformed
+    private void mapInsertButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_mapInsertButtonActionPerformed
+    {// GEN-HEADEREND:event_mapInsertButtonActionPerformed
         commitTableEdits();
-        MappingRulesModel model = (MappingRulesModel)mapTable.getModel();
+        MappingRulesModel model = (MappingRulesModel) mapTable.getModel();
         model.addRow();
-    }//GEN-LAST:event_mapInsertButtonActionPerformed
-    
-    private void okButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_okButtonActionPerformed
+    }// GEN-LAST:event_mapInsertButtonActionPerformed
+
+    private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
         commitTableEdits();
         SRX.getSRX().save();
         doClose(RET_OK);
-    }//GEN-LAST:event_okButtonActionPerformed
-    
-    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cancelButtonActionPerformed
+    }// GEN-LAST:event_okButtonActionPerformed
+
+    private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cancelButtonActionPerformed
     {
         SRX.reload();
         doClose(RET_CANCEL);
-    }//GEN-LAST:event_cancelButtonActionPerformed
-    
+    }// GEN-LAST:event_cancelButtonActionPerformed
+
     /** Closes the dialog */
-    private void closeDialog(java.awt.event.WindowEvent evt)//GEN-FIRST:event_closeDialog
+    private void closeDialog(java.awt.event.WindowEvent evt)// GEN-FIRST:event_closeDialog
     {
         doClose(RET_CANCEL);
-    }//GEN-LAST:event_closeDialog
-    
-    private void doClose(int retStatus)
-    {
+    }// GEN-LAST:event_closeDialog
+
+    private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);
         dispose();
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
@@ -672,7 +626,7 @@ public class SegmentationCustomizer extends JDialog
     private javax.swing.JButton ruleUpButton;
     private javax.swing.JButton toDefaultsButton;
     // End of variables declaration//GEN-END:variables
-    
+
     private int returnStatus = RET_CANCEL;
 
 }

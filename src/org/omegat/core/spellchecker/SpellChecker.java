@@ -113,22 +113,18 @@ public class SpellChecker implements ISpellChecker {
      */
     public void initialize() {
         // initialize the spell checker - get the data from the preferences
-        String language = Core.getProject().getProjectProperties()
-                .getTargetLanguage().getLocaleCode();
+        String language = Core.getProject().getProjectProperties().getTargetLanguage().getLocaleCode();
 
-        String dictionaryDir = Preferences
-                .getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY);
+        String dictionaryDir = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY);
 
         if (dictionaryDir != null) {
-            String affixName = dictionaryDir + File.separator + language
-                    + OConsts.SC_AFFIX_EXTENSION;
+            String affixName = dictionaryDir + File.separator + language + OConsts.SC_AFFIX_EXTENSION;
 
             String dictionaryName = dictionaryDir + File.separator + language
                     + OConsts.SC_DICTIONARY_EXTENSION;
 
             // find out the internal project directory
-            String projectDir = Core.getProject().getProjectProperties()
-                    .getProjectInternal();
+            String projectDir = Core.getProject().getProjectProperties().getProjectInternal();
 
             // load the ignore list
             ignoreFileName = projectDir + OConsts.IGNORED_WORD_LIST_FILE_NAME;
@@ -147,8 +143,7 @@ public class SpellChecker implements ISpellChecker {
             checker = null;
             if (new File(dictionaryName).exists()) {
                 try {
-                    checker = new SpellCheckerHunspell(language,
-                            dictionaryName, affixName);
+                    checker = new SpellCheckerHunspell(language, dictionaryName, affixName);
                 } catch (Exception ex) {
                     Log.log("Error loading hunspell: " + ex.getMessage());
                 } catch (Error err) {
@@ -156,8 +151,7 @@ public class SpellChecker implements ISpellChecker {
                 }
                 if (checker == null) {
                     try {
-                        checker = new SpellCheckerJMySpell(language,
-                                dictionaryName, affixName);
+                        checker = new SpellCheckerJMySpell(language, dictionaryName, affixName);
                     } catch (Exception ex) {
                         Log.log("Error loading jmyspell: " + ex.getMessage());
                     }
@@ -204,8 +198,7 @@ public class SpellChecker implements ISpellChecker {
     private void fillWordList(String filename, List<String> list) {
         BufferedReader br = null;
         try {
-            br = new BufferedReader(new InputStreamReader(new FileInputStream(
-                    filename), OConsts.UTF8));
+            br = new BufferedReader(new InputStreamReader(new FileInputStream(filename), OConsts.UTF8));
 
             String thisLine;
             while ((thisLine = br.readLine()) != null) {
@@ -233,8 +226,7 @@ public class SpellChecker implements ISpellChecker {
             return;
         BufferedWriter bw = null;
         try {
-            bw = new BufferedWriter(new OutputStreamWriter(
-                    new FileOutputStream(filename), OConsts.UTF8));
+            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename), OConsts.UTF8));
 
             for (String text : list) {
                 bw.write(text);

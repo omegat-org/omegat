@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3;
 
@@ -29,46 +29,38 @@ import java.util.List;
 
 /**
  * A list of Tag's attritutes.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class Attributes
-{
+public class Attributes {
     List<Attribute> list = new ArrayList<Attribute>();
-    
+
     /** Number of attributes. */
-    public int size()
-    {
+    public int size() {
         return list.size();
     }
-    
+
     /** Adds an attribute to the list. */
-    public void add(Attribute attr)
-    {
+    public void add(Attribute attr) {
         list.add(attr);
     }
 
     /** Gets one of the attributes from the list. */
-    public Attribute get(int index)
-    {
+    public Attribute get(int index) {
         return list.get(index);
     }
 
     /**
-     * Returns a string representation of the list of attributes.
-     * ' name1="value1" name2="value2" ...'
+     * Returns a string representation of the list of attributes. '
+     * name1="value1" name2="value2" ...'
      */
-    public String toString()
-    {
+    public String toString() {
         StringBuffer buf = new StringBuffer();
-        for (Attribute attr : list)
-        {
+        for (Attribute attr : list) {
             buf.append(' ');
             buf.append(attr.toString());
         }
         return buf.toString();
     }
-    
-    
-    
+
 }

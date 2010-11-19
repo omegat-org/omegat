@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml;
 
@@ -28,16 +28,14 @@ import org.omegat.filters3.Entry;
 
 /**
  * Translatable entry with intact text. Intact text cannot be translated.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class XMLIntactEntry extends Entry
-{
+public class XMLIntactEntry extends Entry {
     /**
      * Intact text cannot be translated, so returns an empty string.
      */
-    public String sourceToShortcut()
-    {
+    public String sourceToShortcut() {
         return new String();
     }
 }

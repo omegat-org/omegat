@@ -42,12 +42,9 @@ public class EditorUtils {
      * @return true if language is RTL
      */
     public static boolean isRTL(final String language) {
-        return "ar".equalsIgnoreCase(language)
-                || "iw".equalsIgnoreCase(language)
-                || "he".equalsIgnoreCase(language)
-                || "fa".equalsIgnoreCase(language)
-                || "ur".equalsIgnoreCase(language)
-                || "ug".equalsIgnoreCase(language);
+        return "ar".equalsIgnoreCase(language) || "iw".equalsIgnoreCase(language)
+                || "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
+                || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language);
     }
 
     /**
@@ -61,8 +58,7 @@ public class EditorUtils {
      * @return
      * @throws BadLocationException
      */
-    public static int getWordStart(JTextComponent c, int offs)
-            throws BadLocationException {
+    public static int getWordStart(JTextComponent c, int offs) throws BadLocationException {
         int result = Utilities.getWordStart(c, offs);
         char ch = c.getDocument().getText(result, 1).charAt(0);
         if (isDirectionChar(ch)) {
@@ -82,8 +78,7 @@ public class EditorUtils {
      * @return
      * @throws BadLocationException
      */
-    public static int getWordEnd(JTextComponent c, int offs)
-            throws BadLocationException {
+    public static int getWordEnd(JTextComponent c, int offs) throws BadLocationException {
         int result = Utilities.getWordEnd(c, offs);
         if (result > 0) {
             char ch = c.getDocument().getText(result - 1, 1).charAt(0);

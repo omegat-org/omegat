@@ -20,13 +20,14 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util;
 
 /**
  * A class to retrieve some platform information. Shamelessly stolen from JNA
  * (https://jna.dev.java.net)
+ * 
  * @author: Zoltan Bartko bartkozoltan@bartkozoltan.com
  */
 public final class Platform {
@@ -36,42 +37,46 @@ public final class Platform {
     private static final int WINDOWS = 2;
     private static final int SOLARIS = 3;
     private static final int osType;
-    
+
     static {
         String osName = System.getProperty("os.name");
         if (osName.startsWith("Linux")) {
             osType = LINUX;
-        } 
-        else if (osName.startsWith("Mac")) {
+        } else if (osName.startsWith("Mac")) {
             osType = MAC;
-        }
-        else if (osName.startsWith("Windows")) {
+        } else if (osName.startsWith("Windows")) {
             osType = WINDOWS;
-        }
-        else if (osName.startsWith("Solaris") || osName.startsWith("SunOS")) {
+        } else if (osName.startsWith("Solaris") || osName.startsWith("SunOS")) {
             osType = SOLARIS;
-        }
-        else {
+        } else {
             osType = UNSPECIFIED;
         }
     }
-    private Platform() { }
+
+    private Platform() {
+    }
+
     public static final boolean isMac() {
         return osType == MAC;
     }
+
     public static final boolean isLinux() {
         return osType == LINUX;
     }
+
     public static final boolean isWindows() {
         return osType == WINDOWS;
     }
+
     public static final boolean isSolaris() {
         return osType == SOLARIS;
     }
+
     public static final boolean isX11() {
         // TODO: check FS or do some other X11-specific test
         return !Platform.isWindows() && !Platform.isMac();
     }
+
     public static final boolean isWebStart() {
         return System.getProperty("javawebstart.version") != null;
     }

@@ -120,26 +120,27 @@ public class OneFilter {
     public void setOn(boolean value) {
         on = value;
     }
-    
+
     /** Holds options of the filter. */
     private Serializable options = null;
 
     /**
      * Returns filter's options.
+     * 
      * @return Filter options object.
      */
-    public Serializable getOptions()
-    {
+    public Serializable getOptions() {
         return this.options;
     }
 
     /**
      * Setter for property options.
-     * @param options New value of property options.
+     * 
+     * @param options
+     *            New value of property options.
      */
-    public void setOptions(Serializable options)
-    {
+    public void setOptions(Serializable options) {
         this.options = options;
     }
-    
+
 }

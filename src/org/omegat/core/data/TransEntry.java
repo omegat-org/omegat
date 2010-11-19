@@ -39,7 +39,8 @@ public class TransEntry {
      */
     public long changeDate;
     /**
-     * Change identifier - Specifies the identifier of the user who modified the element last.
+     * Change identifier - Specifies the identifier of the user who modified the
+     * element last.
      */
     public String changeId;
 
@@ -48,10 +49,14 @@ public class TransEntry {
     }
 
     /**
-     * Creates a new transentry with the properties set to the given values. 
-     * @param translation The translation
-     * @param changeId The author of the last modification
-     * @param changeDate The date (as unix timestamp) of the last modification.
+     * Creates a new transentry with the properties set to the given values.
+     * 
+     * @param translation
+     *            The translation
+     * @param changeId
+     *            The author of the last modification
+     * @param changeDate
+     *            The date (as unix timestamp) of the last modification.
      */
     public TransEntry(String translation, String changeId, long changeDate) {
         this.translation = translation;

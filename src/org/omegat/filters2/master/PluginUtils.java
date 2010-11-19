@@ -81,9 +81,7 @@ public final class PluginUtils {
             boolean foundMain = false;
             // look on all manifests
             cls = new URLClassLoader(urls, PluginUtils.class.getClassLoader());
-            for (Enumeration<URL> mlist = cls
-                    .getResources("META-INF/MANIFEST.MF"); mlist
-                    .hasMoreElements();) {
+            for (Enumeration<URL> mlist = cls.getResources("META-INF/MANIFEST.MF"); mlist.hasMoreElements();) {
                 URL mu = mlist.nextElement();
                 InputStream in = mu.openStream();
                 Manifest m;
@@ -92,8 +90,7 @@ public final class PluginUtils {
                 } finally {
                     in.close();
                 }
-                if ("org.omegat.Main".equals(m.getMainAttributes().getValue(
-                        "Main-Class"))) {
+                if ("org.omegat.Main".equals(m.getMainAttributes().getValue("Main-Class"))) {
                     // found main manifest - not in development mode
                     foundMain = true;
                 }
@@ -132,7 +129,7 @@ public final class PluginUtils {
     public static List<Class<?>> getMarkerClasses() {
         return markerClasses;
     }
-    
+
     public static List<Class<?>> getMachineTranslationClasses() {
         return machineTranslationClasses;
     }
@@ -142,7 +139,7 @@ public final class PluginUtils {
     protected static List<Class<?>> tokenizerClasses = new ArrayList<Class<?>>();
 
     protected static List<Class<?>> markerClasses = new ArrayList<Class<?>>();
-    
+
     protected static List<Class<?>> machineTranslationClasses = new ArrayList<Class<?>>();
 
     /**
@@ -154,8 +151,8 @@ public final class PluginUtils {
      *            classloader
      * @throws ClassNotFoundException
      */
-    protected static void loadFromManifest(final Manifest m,
-            final ClassLoader classLoader) throws ClassNotFoundException {
+    protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader)
+            throws ClassNotFoundException {
         if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
             return;
         }

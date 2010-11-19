@@ -55,8 +55,7 @@ import com.sun.jna.ptr.PointerByReference;
  */
 public class SpellCheckerHunspell implements ISpellCheckerProvider {
     /** Local logger. */
-    private static final Logger LOGGER = Logger
-            .getLogger(SpellCheckerHunspell.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SpellCheckerHunspell.class.getName());
 
     private Hunspell hunspell;
 
@@ -70,30 +69,25 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
      * Initialize the library for the given project. Loads the lists of ignored
      * and learned words for the project
      */
-    public SpellCheckerHunspell(String language, String dictionaryName,
-            String affixName) throws Exception {
+    public SpellCheckerHunspell(String language, String dictionaryName, String affixName) throws Exception {
         if (hunspell == null) {
             String libraryPath;
             if (Platform.isWebStart()) {
-                libraryPath = Native
-                        .getWebStartLibraryPath(OConsts.SPELLCHECKER_LIBRARY_NAME)
-                        + File.separator
-                        + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
+                libraryPath = Native.getWebStartLibraryPath(OConsts.SPELLCHECKER_LIBRARY_NAME)
+                        + File.separator + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
             } else {
-                libraryPath = StaticUtils.installDir() + File.separator
-                        + OConsts.NATIVE_LIBRARY_DIR + File.separator
-                        + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
+                libraryPath = StaticUtils.installDir() + File.separator + OConsts.NATIVE_LIBRARY_DIR
+                        + File.separator + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
             }
 
-            hunspell = (Hunspell) Native.loadLibrary(libraryPath,
-                    Hunspell.class);
+            hunspell = (Hunspell) Native.loadLibrary(libraryPath, Hunspell.class);
             Log.log("Hunspell loaded successfully from " + libraryPath);
         }
 
         pHunspell = hunspell.Hunspell_create(affixName, dictionaryName);
         encoding = hunspell.Hunspell_get_dic_encoding(pHunspell);
-        LOGGER.finer("Initialize SpellChecker by Hunspell for language '"
-                + language + "' dictionary " + dictionaryName);
+        LOGGER.finer("Initialize SpellChecker by Hunspell for language '" + language + "' dictionary "
+                + dictionaryName);
     }
 
     public void destroy() {
@@ -122,8 +116,7 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
         int total = 0;
         try {
             // try some wrong word
-            total = hunspell.Hunspell_suggest(pHunspell, strings,
-                    prepareString(word));
+            total = hunspell.Hunspell_suggest(pHunspell, strings, prepareString(word));
         } catch (UnsupportedEncodingException ex) {
             Log.log("Unsupported encoding " + encoding);
         }
@@ -149,8 +142,7 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
                     int bufferCursor = 0;
                     byte[] buffer = new byte[100];
                     byte current;
-                    while (bufferCursor < 100
-                            && (current = pointerArray[i].getByte(bufferCursor)) != 0) {
+                    while (bufferCursor < 100 && (current = pointerArray[i].getByte(bufferCursor)) != 0) {
                         buffer[bufferCursor] = current;
                         bufferCursor++;
                     }
@@ -217,8 +209,7 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
      * convert the string a byte array in the encoding of the dictionary and add
      * a terminating NUL to the end.
      */
-    protected byte[] prepareString(String word)
-            throws UnsupportedEncodingException {
+    protected byte[] prepareString(String word) throws UnsupportedEncodingException {
         return (word + "\u0000").getBytes(encoding);
     }
 
@@ -237,8 +228,7 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
             // (the suffix for JNI libraries); ordinarily shared libraries have
             // a .dylib suffix
             if (name.endsWith(".jnilib")) {
-                return name.substring(0, name.lastIndexOf(".jnilib"))
-                        + ".dylib";
+                return name.substring(0, name.lastIndexOf(".jnilib")) + ".dylib";
             }
             return name;
         } else if (Platform.isLinux()) {

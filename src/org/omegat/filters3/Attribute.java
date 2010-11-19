@@ -20,56 +20,50 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3;
 
 /**
  * One attribute of a tag.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class Attribute
-{
+public class Attribute {
     private String name;
 
     /** Returns attribute's name. */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
-    
+
     private String value;
-    
+
     /** Returns attribute's value. */
-    public String getValue()
-    {
+    public String getValue() {
         return value;
     }
-    /** 
-     * Sets attribute's value. 
+
+    /**
+     * Sets attribute's value.
      * <p>
      * Actually an ugly hack to allow quick & dirty translation of attributes.
      * Normal solution requires too much time :-(
      */
-    public void setValue(String value)
-    {
+    public void setValue(String value) {
         this.value = value;
     }
-    
+
     /** Creates a new instance of Attribute */
-    public Attribute(String name, String value)
-    {
+    public Attribute(String name, String value) {
         this.name = name;
         this.value = value;
     }
 
     /**
-     * Returns a string representation of the attribute.
-     * name="value".
+     * Returns a string representation of the attribute. name="value".
      */
-    public String toString()
-    {
-        return name+"=\""+value+"\"";                                           
+    public String toString() {
+        return name + "=\"" + value + "\"";
     }
 }

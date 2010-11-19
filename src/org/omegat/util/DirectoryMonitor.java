@@ -39,8 +39,7 @@ import java.util.logging.Logger;
  */
 public class DirectoryMonitor extends Thread {
     /** Local logger. */
-    private static final Logger LOGGER = Logger
-            .getLogger(DirectoryMonitor.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(DirectoryMonitor.class.getName());
 
     private boolean stopped = false;
     protected final File dir;

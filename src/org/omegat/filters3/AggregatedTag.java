@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3;
 
@@ -28,35 +28,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Aggregated Tag is a compound tag made up of other tags.
- * The purpose of this class is reducing the number of tags shown in OpenXML
- * documents. The current OpenXML filter finds too many tags, usually causing
- * what users call the "tag soup". Tags aggregation can help alleviate this
- * problem, but can sometimes lead to semantic issues. Aggregation is OK
- * only as a temporary hack, until we improve the OpenXML filter.
- *
+ * Aggregated Tag is a compound tag made up of other tags. The purpose of this
+ * class is reducing the number of tags shown in OpenXML documents. The current
+ * OpenXML filter finds too many tags, usually causing what users call the
+ * "tag soup". Tags aggregation can help alleviate this problem, but can
+ * sometimes lead to semantic issues. Aggregation is OK only as a temporary
+ * hack, until we improve the OpenXML filter.
+ * 
  * @author Antonio Vilei
  */
 public class AggregatedTag extends Tag {
 
     /** Creates a new instance of Aggregated Tag */
-    public AggregatedTag(String tag, String shortcut, int type, Attributes attributes)
-    {
+    public AggregatedTag(String tag, String shortcut, int type, Attributes attributes) {
         super(tag, shortcut, type, attributes);
     }
 
-
     /** Adds a tag to the aggregated tags list. */
-    public void add(Tag tag)
-    {
+    public void add(Tag tag) {
         tags.add(tag);
     }
 
     /**
      * Returns the tags belonging to this aggregated tag in their original form.
      */
-    public String toOriginal()
-    {
+    public String toOriginal() {
         StringBuffer buf = new StringBuffer();
 
         for (Tag tag : tags) {

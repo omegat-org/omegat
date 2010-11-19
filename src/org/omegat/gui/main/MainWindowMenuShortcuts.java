@@ -47,7 +47,7 @@ public class MainWindowMenuShortcuts {
      * Initialize shortcuts from configured values.
      * 
      * @param menu
-     *                main menu
+     *            main menu
      */
     public static void setShortcuts(final JMenuBar menu) {
         Properties shortcuts = loadPredefinedShortcuts();
@@ -58,12 +58,11 @@ public class MainWindowMenuShortcuts {
      * Travel by all submenus for setup shortcuts.
      * 
      * @param menu
-     *                menu or menu item
+     *            menu or menu item
      * @param shortcuts
-     *                shortcuts list
+     *            shortcuts list
      */
-    private static void setup(final Component[] items,
-            final Properties shortcuts) {
+    private static void setup(final Component[] items, final Properties shortcuts) {
         for (Component c : items) {
             if (c instanceof JMenu) {
                 setup(((JMenu) c).getMenuComponents(), shortcuts);
@@ -79,12 +78,11 @@ public class MainWindowMenuShortcuts {
      * Setup shortcut for one specified menu item.
      * 
      * @param item
-     *                menu item
+     *            menu item
      * @param shortcut
-     *                shortcut text
+     *            shortcut text
      */
-    private static void setAccelerator(final JMenuItem item,
-            final String shortcut) {
+    private static void setAccelerator(final JMenuItem item, final String shortcut) {
         if (shortcut == null) {
             return;
         }
@@ -100,16 +98,13 @@ public class MainWindowMenuShortcuts {
      */
     private static final Properties loadPredefinedShortcuts() {
         Properties shortcuts = new Properties();
-        String name = MainWindowMenuShortcuts.class.getPackage().getName()
-                .replace('.', '/')
+        String name = MainWindowMenuShortcuts.class.getPackage().getName().replace('.', '/')
                 + "/MainMenuShortcuts";
         name += StaticUtils.onMacOSX() ? ".mac.properties" : ".properties";
-        
-        File userShortcuts = new File(StaticUtils.getConfigDir(),
-                "MainMenuShortcuts.properties");
+
+        File userShortcuts = new File(StaticUtils.getConfigDir(), "MainMenuShortcuts.properties");
         try {
-            InputStream in = MainWindowMenuShortcuts.class.getClassLoader()
-                    .getResourceAsStream(name);
+            InputStream in = MainWindowMenuShortcuts.class.getClassLoader().getResourceAsStream(name);
             try {
                 shortcuts.load(in);
             } finally {

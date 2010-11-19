@@ -48,8 +48,7 @@ public class OmegaTLogFormatter extends Formatter {
 
     protected static String lineMark;
 
-    protected static String lineSeparator = System
-            .getProperty("line.separator");
+    protected static String lineSeparator = System.getProperty("line.separator");
 
     private String logMask;
     private boolean isMaskContainsMark;
@@ -59,7 +58,7 @@ public class OmegaTLogFormatter extends Formatter {
     private boolean isMaskContainsKey;
     private boolean isMaskContainsLoggerName;
     private boolean isMaskContainsTime;
-    
+
     private String defaultTimeFormat = "HH:mm:ss";
 
     /**
@@ -103,7 +102,7 @@ public class OmegaTLogFormatter extends Formatter {
         if (logMask == null) {
             logMask = "$mark: $level: $text $key";
         }
-        
+
         String timeFormat = manager.getProperty(cname + ".timeFormat");
         if (timeFormat != null) {
             defaultTimeFormat = timeFormat;
@@ -154,8 +153,8 @@ public class OmegaTLogFormatter extends Formatter {
     /**
      * Format one line and append to output.
      */
-    protected void appendFormattedLine(final StringBuilder out,
-            final LogRecord record, final String line, final boolean isStack) {
+    protected void appendFormattedLine(final StringBuilder out, final LogRecord record, final String line,
+            final boolean isStack) {
         if (line.length() == 0)
             return;
 

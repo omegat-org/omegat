@@ -20,34 +20,29 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util.gui;
 
 import java.io.File;
 
 /**
- * File Chooser to open project.
- * Project is a directory, so it's a bit tricky, we need to react on both:
- * - changing directory
- * - and hitting OK.
- *
+ * File Chooser to open project. Project is a directory, so it's a bit tricky,
+ * we need to react on both: - changing directory - and hitting OK.
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-public class OpenProjectFileChooser extends OmegaTFileChooser
-{
-    
-    public OpenProjectFileChooser()
-    {
+public class OpenProjectFileChooser extends OmegaTFileChooser {
+
+    public OpenProjectFileChooser() {
         setFileSelectionMode(DIRECTORIES_ONLY);
         setMultiSelectionEnabled(false);
     }
-    
-    public void approveSelection()
-    {
+
+    public void approveSelection() {
         // user hit 'open' button - redirect command to open project or
-        //  recurse into lower directory
+        // recurse into lower directory
         if (isProjectDir(getSelectedFile()))
             // The parent directory is made current,
             // and the project's directory is the selected 'file'.
@@ -55,15 +50,12 @@ public class OpenProjectFileChooser extends OmegaTFileChooser
         else
             setCurrentDirectory(getSelectedFile());
     }
-    
-    public void setCurrentDirectory(File dir)
-    {
-        if( isProjectDir(dir) )
-        {
+
+    public void setCurrentDirectory(File dir) {
+        if (isProjectDir(dir)) {
             setSelectedFile(dir);
             approveSelection();
-        }
-        else
+        } else
             super.setCurrentDirectory(dir);
     }
 }

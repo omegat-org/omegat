@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml.openxml;
 
@@ -30,59 +30,41 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * Dialect of Open XML files.
- *
+ * 
  * @author Didier Briel
  * @author Antonio Vilei
  */
-public class OpenXMLDialect extends DefaultXMLDialect
-{
+public class OpenXMLDialect extends DefaultXMLDialect {
 
     /**
-     * Actually defines the dialect.
-     * It cannot be done during creation, because options are not known
-     * at that step.
+     * Actually defines the dialect. It cannot be done during creation, because
+     * options are not known at that step.
      */
-    public void defineDialect(OpenXMLOptions options)
-    {    
-        defineParagraphTags(new String[]
-        {
-            // Word
-            "w:p",                                                              
-            "w:tab",                                                            
-            "w:br",                                                             
-            // Excel
-            "si",
-            "comment",
-            "definedName",
-            // PowerPoint
-            "a:p",
-            "c:v",
-        });
-        
+    public void defineDialect(OpenXMLOptions options) {
+        defineParagraphTags(new String[] {
+                // Word
+                "w:p", "w:tab", "w:br",
+                // Excel
+                "si", "comment", "definedName",
+                // PowerPoint
+                "a:p", "c:v", });
+
         if (options.getTranslateHiddenText()) // Word
-            defineOutOfTurnTag("w:instrText");                                  
+            defineOutOfTurnTag("w:instrText");
         else
-            defineIntactTag("w:instrText");                                     
-        
-        defineIntactTags(new String[]
-        {
-            // Excel
-            "authors",
-            // PowerPoint
-            "p:attrName",
-            "a:tableStyleId",
-            // Charts
-            "c:f",
-            "c:formatCode",
-            // Word
-            "wp:align",
-            "wp:posOffset",
-            // Drawings
-            "xdr:col",
-            "xdr:row",
-            "xdr:colOff",
-            "xdr:rowOff",
-        });
+            defineIntactTag("w:instrText");
+
+        defineIntactTags(new String[] {
+                // Excel
+                "authors",
+                // PowerPoint
+                "p:attrName", "a:tableStyleId",
+                // Charts
+                "c:f", "c:formatCode",
+                // Word
+                "wp:align", "wp:posOffset",
+                // Drawings
+                "xdr:col", "xdr:row", "xdr:colOff", "xdr:rowOff", });
 
         defineTranslatableTagAttribute("sheet", "name"); // Excel
 

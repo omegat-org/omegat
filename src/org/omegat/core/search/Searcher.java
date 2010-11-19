@@ -23,7 +23,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.search;
 
@@ -52,10 +52,9 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
 /**
- * This class implements search functionality.
- * It is non-reentrant: each searcher instance must
- * be used by a single thread.
- *
+ * This class implements search functionality. It is non-reentrant: each
+ * searcher instance must be used by a single thread.
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -64,12 +63,11 @@ import org.omegat.util.StaticUtils;
  * @author Antonio Vilei
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class Searcher
-{
+public class Searcher {
 
     /**
      * Create new searcher instance.
-     *
+     * 
      * @param project
      *            Current project
      */
@@ -77,17 +75,18 @@ public class Searcher
         m_project = project;
         this.stopCallback = stopCallback;
     }
-    
+
     /**
      * Search for an expression and return a list of results.
-     *
-     * @param expression what to search for (search text and options)
-     * @param maxResults maximum number of search results
+     * 
+     * @param expression
+     *            what to search for (search text and options)
+     * @param maxResults
+     *            maximum number of search results
      * @return list of search results
      */
-    public List<SearchResultEntry> getSearchResults(SearchExpression expression)
-            throws TranslationException, PatternSyntaxException, IOException
-    {
+    public List<SearchResultEntry> getSearchResults(SearchExpression expression) throws TranslationException,
+            PatternSyntaxException, IOException {
         String text = expression.text;
         String author = expression.author;
 
@@ -122,7 +121,8 @@ public class Searcher
         // separate words (= multiple search strings)
 
         if (expression.exact) {
-            // escape the search string, it's not supposed to be a regular expression
+            // escape the search string, it's not supposed to be a regular
+            // expression
             text = StaticUtils.escapeNonRegex(text, false);
 
             // create a matcher for the search string
@@ -142,11 +142,12 @@ public class Searcher
 
                     // get the next word
                     String word = (spacePos == -1) // last word reached
-                                        ? text.substring(wordStart, text.length()).trim()
-                                                : text.substring(wordStart, spacePos).trim();
+                    ? text.substring(wordStart, text.length()).trim()
+                            : text.substring(wordStart, spacePos).trim();
 
                     if (word.length() > 0) {
-                        // escape the word, if it's not supposed to be a regular expression
+                        // escape the word, if it's not supposed to be a regular
+                        // expression
                         if (!expression.regex)
                             word = StaticUtils.escapeNonRegex(word, false);
 
@@ -162,49 +163,41 @@ public class Searcher
         // create a matcher for the author search string
         if (!expression.regex)
             author = StaticUtils.escapeNonRegex(author, false);
-        
+
         m_author = Pattern.compile(author, flags).matcher("");
 
         m_dateBefore = expression.dateBefore;
         m_dateAfter = expression.dateAfter;
-        
-        if (m_searchDir == null)
-        {
+
+        if (m_searchDir == null) {
             // if no search directory specified, then we are
             // searching current project only
             searchProject();
-        }
-        else
-        {
+        } else {
             searchFiles();
         }
 
         return (m_searchResults);
     }
 
-    
-    //////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////
     // internal functions
 
-    private void addEntry(int num, String preamble, String srcPrefix,
-            String src, String target, SearchMatch[] srcMatch,
-            SearchMatch[] targetMatch) {
-        SearchResultEntry entry = new SearchResultEntry(num, preamble,
-                srcPrefix, src, target, srcMatch, targetMatch);
+    private void addEntry(int num, String preamble, String srcPrefix, String src, String target,
+            SearchMatch[] srcMatch, SearchMatch[] targetMatch) {
+        SearchResultEntry entry = new SearchResultEntry(num, preamble, srcPrefix, src, target, srcMatch,
+                targetMatch);
         m_searchResults.add(entry);
         m_numFinds++;
     }
 
-    
     /**
-     * Queue found string.
-     * Removes duplicate segments (by Henry Pijffers)
-     * except if m_allResults = true
+     * Queue found string. Removes duplicate segments (by Henry Pijffers) except
+     * if m_allResults = true
      */
-    private void foundString(int entryNum, String intro, String src,
-            String target, SearchMatch[] srcMatches, SearchMatch[] targetMatches) {
-        if (m_numFinds >= m_maxResults)
-        {
+    private void foundString(int entryNum, String intro, String src, String target, SearchMatch[] srcMatches,
+            SearchMatch[] targetMatches) {
+        if (m_numFinds >= m_maxResults) {
             return;
         }
 
@@ -212,19 +205,16 @@ public class Searcher
             if (!m_entrySet.contains(src + target) || m_allResults) {
                 // HP, duplicate entry prevention
                 // entries are referenced at offset 1 but stored at offset 0
-                addEntry(entryNum + 1, null, (entryNum + 1) + "> ", src,
-                        target, srcMatches, targetMatches);
+                addEntry(entryNum + 1, null, (entryNum + 1) + "> ", src, target, srcMatches, targetMatches);
                 if (!m_allResults) // If we filter results
                     m_entrySet.add(src + target); // HP
             }
         } else {
-            addEntry(entryNum, intro, null, src, target, srcMatches,
-                    targetMatches);
+            addEntry(entryNum, intro, null, src, target, srcMatches, targetMatches);
         }
     }
 
-    private void searchProject()
-    {
+    private void searchProject() {
         // reset the number of search hits
         m_numFinds = 0;
 
@@ -251,8 +241,7 @@ public class Searcher
         if (m_tmSearch) {
             // search in orphaned
             String file = OStrings.getString("CT_ORPHAN_STRINGS");
-            for (Map.Entry<String, TransEntry> en : m_project
-                    .getOrphanedSegments().entrySet()) {
+            for (Map.Entry<String, TransEntry> en : m_project.getOrphanedSegments().entrySet()) {
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= m_maxResults) {
                     break;
@@ -267,11 +256,10 @@ public class Searcher
                 }
             }
             // Search TM entries, unless we search for date or author.
-            // They are not available in external TM, so skip the search in 
+            // They are not available in external TM, so skip the search in
             // that case.
             if (!m_searchAuthor && !m_searchDateAfter && !m_searchDateBefore) {
-                for (Map.Entry<String, List<TransMemory>> tmEn : m_project
-                    .getTransMemories().entrySet()) {
+                for (Map.Entry<String, List<TransMemory>> tmEn : m_project.getTransMemories().entrySet()) {
                     file = tmEn.getKey();
                     for (TransMemory tm : tmEn.getValue()) {
                         // stop searching if the max. nr of hits has been
@@ -304,55 +292,50 @@ public class Searcher
      * @param intro
      *            file
      */
-    protected void checkEntry(String srcText, String locText, TransEntry entry,
-            int entryNum, String intro) {
+    protected void checkEntry(String srcText, String locText, TransEntry entry, int entryNum, String intro) {
         SearchMatch[] srcMatches = null;
         if (m_searchSource) {
             if (searchString(srcText)) {
-                srcMatches = foundMatches.toArray(new SearchMatch[foundMatches
-                        .size()]);
+                srcMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             }
         }
         SearchMatch[] targetMatches = null;
         if (m_searchTarget) {
             if (searchString(locText)) {
-                targetMatches = foundMatches
-                        .toArray(new SearchMatch[foundMatches.size()]);
+                targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             }
         }
 
         // if the search expression is satified, report the hit
         if ((srcMatches != null || targetMatches != null)
-            && (!m_searchAuthor || entry != null && searchAuthor(entry))
-            && (!m_searchDateBefore || entry != null && entry.changeDate != 0 && entry.changeDate < m_dateBefore)
-            && (!m_searchDateAfter  || entry != null && entry.changeDate != 0 && entry.changeDate > m_dateAfter)) 
-        {
+                && (!m_searchAuthor || entry != null && searchAuthor(entry))
+                && (!m_searchDateBefore || entry != null && entry.changeDate != 0
+                        && entry.changeDate < m_dateBefore)
+                && (!m_searchDateAfter || entry != null && entry.changeDate != 0
+                        && entry.changeDate > m_dateAfter)) {
             // found
-            foundString(entryNum, intro, srcText, locText, srcMatches,
-                    targetMatches);
+            foundString(entryNum, intro, srcText, locText, srcMatches, targetMatches);
         }
     }
 
-    private void searchFiles() throws IOException, TranslationException
-    {
+    private void searchFiles() throws IOException, TranslationException {
         List<String> fileList = new ArrayList<String>(256);
         if (!m_searchDir.endsWith(File.separator))
             m_searchDir += File.separator;
         StaticUtils.buildFileList(fileList, new File(m_searchDir), m_searchRecursive);
-        
+
         FilterMaster fm = FilterMaster.getInstance();
-        
-        for (String filename :  fileList) {
+
+        for (String filename : fileList) {
             // determine actual file name w/ no root path info
             m_curFileName = filename.substring(m_searchDir.length());
-            
+
             // don't bother to tell handler what we're looking for -
-            //	the search data is already known here (and the
-            //	handler is in the same thread, so info is not volatile)
+            // the search data is already known here (and the
+            // handler is in the same thread, so info is not volatile)
             fm.loadFile(filename, new SearchCallback(m_project.getProjectProperties()) {
-                protected void addSegment(String id, short segmentIndex,
-                        String segmentSource, String segmentTranslation,
-                        String comment) {
+                protected void addSegment(String id, short segmentIndex, String segmentSource,
+                        String segmentTranslation, String comment) {
                     searchText(segmentSource);
                 }
 
@@ -365,25 +348,26 @@ public class Searcher
         }
     }
 
-    protected abstract class SearchCallback extends ParseEntry implements
-            IParseCallback {
+    protected abstract class SearchCallback extends ParseEntry implements IParseCallback {
         public SearchCallback(ProjectProperties config) {
             super(config);
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////
     // search algorithm
-    
+
     /**
-      * Looks for an occurrence of the search string(s) in the supplied text string.
-      *
-      * @param text   The text string to search in
-      *
-      * @return True if the text string contains all search strings
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Looks for an occurrence of the search string(s) in the supplied text
+     * string.
+     * 
+     * @param text
+     *            The text string to search in
+     * 
+     * @return True if the text string contains all search strings
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     private boolean searchString(String text) {
         if (text == null || m_matchers == null || m_matchers.isEmpty())
             return false;
@@ -399,8 +383,7 @@ public class Searcher
                 return false;
 
             while (true) {
-                foundMatches.add(new SearchMatch(matcher.start(), matcher.end()
-                        - matcher.start()));
+                foundMatches.add(new SearchMatch(matcher.start(), matcher.end() - matcher.start()));
                 int pos = matcher.start();
                 if (pos >= text.length() || !matcher.find(pos + 1)) {
                     break;
@@ -429,34 +412,37 @@ public class Searcher
 
         return true;
     }
-    
+
     /**
-     * Looks for an occurrence of the author search string in the supplied text string.
-     *
-     * @param author The text string to search in
-     *
+     * Looks for an occurrence of the author search string in the supplied text
+     * string.
+     * 
+     * @param author
+     *            The text string to search in
+     * 
      * @return True if the text string contains the search string
      */
-   private boolean searchAuthor(TransEntry te) {
-       if (te == null || m_author == null )
-           return false;
-       String author = te.changeId;
-       if (author == null) return false;
+    private boolean searchAuthor(TransEntry te) {
+        if (te == null || m_author == null)
+            return false;
+        String author = te.changeId;
+        if (author == null)
+            return false;
 
-       // check the text against the author matcher
-       m_author.reset(author);
-       if (!m_author.find()) return false;
+        // check the text against the author matcher
+        m_author.reset(author);
+        if (!m_author.find())
+            return false;
 
-       // if we arrive here, the search string has been matched,
-       // so this is a hit
-       return true;
-   }
+        // if we arrive here, the search string has been matched,
+        // so this is a hit
+        return true;
+    }
 
-    /////////////////////////////////////////////////////////////////
+    // ///////////////////////////////////////////////////////////////
     // interface used by FileHandlers
-    
-    public void searchText(String seg)
-    {
+
+    public void searchText(String seg) {
         // don't look further if the max. nr of hits has been reached
         if (m_numFinds >= m_maxResults)
             return;
@@ -466,8 +452,7 @@ public class Searcher
         }
 
         if (searchString(seg)) {
-            SearchMatch[] matches = foundMatches
-                    .toArray(new SearchMatch[foundMatches.size()]);
+            SearchMatch[] matches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             // found a match - do something about it
             foundString(-1, m_curFileName, seg, null, matches, null);
         }
@@ -478,21 +463,23 @@ public class Searcher
     }
 
     private List<SearchResultEntry> m_searchResults;
-    private IProject  m_project;
-    private String    m_searchDir;
-    private boolean   m_searchRecursive;
-    private String    m_curFileName;
-    private boolean   m_tmSearch;
-    private boolean   m_allResults;
-    private boolean   m_searchSource;
-    private boolean   m_searchTarget;
-    private boolean   m_searchAuthor;
-    private boolean   m_searchDateAfter;
-    private boolean   m_searchDateBefore;
-    private Set<String>   m_entrySet; // HP: keeps track of previous results, to avoid duplicate entries
-    private List<Matcher> m_matchers; // HP: contains a matcher for each search string
-                                  //     (multiple if keyword search)
-    private Matcher   m_author;
+    private IProject m_project;
+    private String m_searchDir;
+    private boolean m_searchRecursive;
+    private String m_curFileName;
+    private boolean m_tmSearch;
+    private boolean m_allResults;
+    private boolean m_searchSource;
+    private boolean m_searchTarget;
+    private boolean m_searchAuthor;
+    private boolean m_searchDateAfter;
+    private boolean m_searchDateBefore;
+    private Set<String> m_entrySet; // HP: keeps track of previous results, to
+                                    // avoid duplicate entries
+    private List<Matcher> m_matchers; // HP: contains a matcher for each search
+                                      // string
+    // (multiple if keyword search)
+    private Matcher m_author;
     private long m_dateBefore;
     private long m_dateAfter;
 

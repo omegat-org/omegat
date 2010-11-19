@@ -33,7 +33,6 @@ import javax.swing.text.JTextComponent;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public interface IPopupMenuConstructor {
-    void addItems(JPopupMenu menu, JTextComponent comp, int mousepos,
-            boolean isInActiveEntry, boolean isInActiveTranslation,
-            SegmentBuilder sb);
+    void addItems(JPopupMenu menu, JTextComponent comp, int mousepos, boolean isInActiveEntry,
+            boolean isInActiveTranslation, SegmentBuilder sb);
 }

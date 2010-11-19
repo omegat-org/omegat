@@ -50,13 +50,12 @@ import org.omegat.util.Token;
 public class Tokenizer implements ITokenizer {
 
     /**
-      * Contains a list of tokens for each *unique* string.
-      * By not storing a list of tokens for every string,
-      * memory is saved. Token lists are not saved when
-      * all tokens are requested. Again to save memory.
-      */
+     * Contains a list of tokens for each *unique* string. By not storing a list
+     * of tokens for every string, memory is saved. Token lists are not saved
+     * when all tokens are requested. Again to save memory.
+     */
     private static Map<String, Token[]> tokenCache = new HashMap<String, Token[]>(5000);
-    
+
     private static final Token[] EMPTY_TOKENS_LIST = new Token[0];
 
     public Tokenizer() {
@@ -98,7 +97,7 @@ public class Tokenizer implements ITokenizer {
         }
         return result;
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -111,68 +110,62 @@ public class Tokenizer implements ITokenizer {
      * <p>
      * Examples:
      * <ul>
-     * <li> This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
-     * <li> Fine, thanks, and you? -> "fine", "thanks", "and", "you"
-     * <li> C&all this action -> "call", "this", "action" ('&' is eaten)
+     * <li>This is a semi-good way. -> "this", "is", "a", "semi-good", "way"
+     * <li>Fine, thanks, and you? -> "fine", "thanks", "and", "you"
+     * <li>C&all this action -> "call", "this", "action" ('&' is eaten)
      * </ul>
      * <p>
      * OmegaT tags and other non-word tokens are skipped if the parameter "all"
      * is false.
      * 
      * @param str
-     *                string to tokenize
+     *            string to tokenize
      * @param all
-     *                If true, numbers, tags, and other non-word tokens are
-     *                included in the list
+     *            If true, numbers, tags, and other non-word tokens are included
+     *            in the list
      * @return array of tokens (all)
      */
     private static Token[] tokenizeTextNoCache(final String strOrig, final boolean all) {
-        if (strOrig.length()==0) {
+        if (strOrig.length() == 0) {
             // fixes bug nr. 1382810 (StringIndexOutOfBoundsException)
             return EMPTY_TOKENS_LIST;
         }
 
-        // create a new token list        
+        // create a new token list
         List<Token> tokens = new ArrayList<Token>(64);
 
         // get a word breaker
-        String str = strOrig.toLowerCase(); // HP: possible error, this makes "A" and "a" match, CHECK AND FIX
+        String str = strOrig.toLowerCase(); // HP: possible error, this makes
+                                            // "A" and "a" match, CHECK AND FIX
         BreakIterator breaker = getWordBreaker();
         breaker.setText(str);
 
         int start = breaker.first();
-        for (int end = breaker.next();
-             end!=BreakIterator.DONE; 
-             start = end, end = breaker.next())
-        {
-            String tokenStr = str.substring(start,end);
+        for (int end = breaker.next(); end != BreakIterator.DONE; start = end, end = breaker.next()) {
+            String tokenStr = str.substring(start, end);
             boolean word = false;
-            for (int i=0; i<tokenStr.length(); i++)
-            {
+            for (int i = 0; i < tokenStr.length(); i++) {
                 char ch = tokenStr.charAt(i);
-                if (Character.isLetter(ch))
-                {
+                if (Character.isLetter(ch)) {
                     word = true;
                     break;
                 }
             }
 
-            if (all || (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches()))
-            {
+            if (all || (word && !PatternConsts.OMEGAT_TAG.matcher(tokenStr).matches())) {
                 Token token = new Token(tokenStr, start);
                 tokens.add(token);
             }
         }
-        
+
         return tokens.toArray(new Token[tokens.size()]);
     }
-    
+
     /** Returns an iterator to break sentences into words. */
-    public static BreakIterator getWordBreaker()
-    {
-        //if (wordBreaker==null)
-        //    wordBreaker = new WordIterator();
-        //return wordBreaker;
+    public static BreakIterator getWordBreaker() {
+        // if (wordBreaker==null)
+        // wordBreaker = new WordIterator();
+        // return wordBreaker;
 
         return new WordIterator();
 
@@ -184,7 +177,7 @@ public class Tokenizer implements ITokenizer {
         // exceptions. By returning a new WordIterator each time
         // one is requested, this problem is solved, and it doesn't
         // hurt performance either.
-    }    
+    }
 
     /**
      * Check if array contains token.

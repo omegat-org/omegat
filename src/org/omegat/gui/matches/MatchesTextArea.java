@@ -62,8 +62,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Maxym Mykhalchuk
  * @author Zoltan Bartko
  */
-public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
-        IMatcher {
+public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements IMatcher {
 
     private final List<NearString> matches = new ArrayList<NearString>();
 
@@ -77,10 +76,8 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
         super(true);
         this.mw = mw;
 
-        String title = OStrings
-                .getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches");
-        Core.getMainWindow().addDockable(
-                new DockableScrollPane("MATCHES", title, this, true));
+        String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Fuzzy_Matches");
+        Core.getMainWindow().addDockable(new DockableScrollPane("MATCHES", title, this, true));
 
         setEditable(false);
         setMinimumSize(new Dimension(100, 50));
@@ -90,8 +87,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
-        new FindMatchesThread(MatchesTextArea.this, Core.getProject(), newEntry)
-                .start();
+        new FindMatchesThread(MatchesTextArea.this, Core.getProject(), newEntry).start();
     }
 
     /**
@@ -99,8 +95,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
      * list should be an instance of {@link NearString}.
      */
     @Override
-    protected void setFoundResult(final SourceTextEntry se,
-            List<NearString> newMatches) {
+    protected void setFoundResult(final SourceTextEntry se, List<NearString> newMatches) {
         UIThreadsUtil.mustBeSwingThread();
 
         activeMatch = -1;
@@ -118,10 +113,9 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
 
         for (int i = 0; i < newMatches.size(); i++) {
             NearString match = newMatches.get(i);
-            displayBuffer.append(MessageFormat.format(
-                    "{0}) {1}\n{2}\n<{3}/{4}/{5}% {6} >", i + 1, match.source,
-                    match.translation, match.score, match.scoreNoStem,
-                    match.adjustedScore, match.proj));
+            displayBuffer.append(MessageFormat.format("{0}) {1}\n{2}\n<{3}/{4}/{5}% {6} >", i + 1,
+                    match.source, match.translation, match.score, match.scoreNoStem, match.adjustedScore,
+                    match.proj));
 
             if (i < (newMatches.size() - 1))
                 displayBuffer.append("\n\n");
@@ -169,8 +163,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
             return;
         }
         if (Preferences.isPreference(Preferences.BEST_MATCH_INSERT)) {
-            String percentage_s = Preferences.getPreferenceDefault(
-                    Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
+            String percentage_s = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_MINIMAL_SIMILARITY,
                     Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT);
             // <HP-experiment>
             int percentage = 0;
@@ -179,8 +172,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
                 percentage = Integer.parseInt(percentage_s);
             } catch (Exception exception) {
                 Log.log("ERROR: exception while parsing percentage:");
-                Log
-                        .log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
+                Log.log("Please report to the OmegaT developers (omegat-development@lists.sourceforge.net)");
                 Log.log(exception);
                 return; // deliberately breaking, to simulate previous behaviour
                 // FIX: unknown, but expect number parsing errors
@@ -189,11 +181,9 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
             NearString thebest = matches.get(0);
             if (thebest.score >= percentage) {
                 String translation = Preferences.getPreferenceDefault(
-                        Preferences.BEST_MATCH_EXPLANATORY_TEXT, OStrings
-                                .getString("WF_DEFAULT_PREFIX"))
+                        Preferences.BEST_MATCH_EXPLANATORY_TEXT, OStrings.getString("WF_DEFAULT_PREFIX"))
                         + thebest.translation;
-                SourceTextEntry currentEntry = Core.getEditor()
-                        .getCurrentEntry();
+                SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
                 TransEntry te = Core.getProject().getTranslation(currentEntry);
                 if (te == null) {
                     Core.getEditor().replaceEditText(translation);
@@ -209,8 +199,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
     public void setActiveMatch(int activeMatch) {
         UIThreadsUtil.mustBeSwingThread();
 
-        if (activeMatch < 0 || activeMatch >= matches.size()
-                || this.activeMatch == activeMatch) {
+        if (activeMatch < 0 || activeMatch >= matches.size() || this.activeMatch == activeMatch) {
             return;
         }
 
@@ -224,8 +213,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
 
         NearString match = matches.get(activeMatch);
         // List tokens = match.str.getSrcTokenList();
-        Token[] tokens = Core.getProject().getSourceTokenizer()
-                .tokenizeAllExactly(match.source);
+        Token[] tokens = Core.getProject().getSourceTokenizer().tokenizeAllExactly(match.source);
         // fix for bug 1586397
         byte[] attributes = match.attr;
         for (int i = 0; i < tokens.length; i++) {
@@ -333,8 +321,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements
                      * this segment each time, instead use additional memory
                      * storage.
                      */
-                    List<SourceTextEntry> entries = Core.getProject()
-                            .getAllEntries();
+                    List<SourceTextEntry> entries = Core.getProject().getAllEntries();
                     int entryNum = 0;
                     for (int i = 0; i < entries.size(); i++) {
                         if (entries.get(i).getSrcText().equals(ns.source)) {

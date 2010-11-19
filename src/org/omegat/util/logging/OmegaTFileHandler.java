@@ -70,7 +70,7 @@ public class OmegaTFileHandler extends StreamHandler {
         if (level != null) {
             setLevel(Level.parse(level.trim()));
         }
-        
+
         String maxSizeStr = manager.getProperty(cname + ".size");
         if (maxSizeStr != null) {
             maxSize = Long.parseLong(maxSizeStr);
@@ -94,8 +94,7 @@ public class OmegaTFileHandler extends StreamHandler {
     private void openFiles(final File dir) throws IOException {
         dir.mkdirs();
         for (int instanceIndex = 0; instanceIndex < 100; instanceIndex++) {
-            String fileName = "OmegaT"
-                    + (instanceIndex > 0 ? ("-" + instanceIndex) : "");
+            String fileName = "OmegaT" + (instanceIndex > 0 ? ("-" + instanceIndex) : "");
 
             lockFile = new File(dir, fileName + ".log.lck");
 
@@ -104,8 +103,7 @@ public class OmegaTFileHandler extends StreamHandler {
             if (lockStream.getChannel().tryLock() != null) {
                 rotate(dir, fileName);
                 setEncoding(OConsts.UTF8);
-                setOutputStream(new FileOutputStream(new File(dir, fileName
-                        + ".log"), true));
+                setOutputStream(new FileOutputStream(new File(dir, fileName + ".log"), true));
                 break;
             }
         }
@@ -134,14 +132,12 @@ public class OmegaTFileHandler extends StreamHandler {
             return;
         }
 
-        String suffix = new SimpleDateFormat("yyyyMMdd.HHmm")
-                .format(new Date());
+        String suffix = new SimpleDateFormat("yyyyMMdd.HHmm").format(new Date());
         File destFile = new File(dir, fileName + '.' + suffix + ".log");
         logFile.renameTo(destFile);
         File[] oldLogs = dir.listFiles(new FileFilter() {
             public boolean accept(File pathname) {
-                return pathname.getName().startsWith(fileName + '.')
-                        && pathname.getName().endsWith(".log");
+                return pathname.getName().startsWith(fileName + '.') && pathname.getName().endsWith(".log");
             }
         });
         if (oldLogs != null) {

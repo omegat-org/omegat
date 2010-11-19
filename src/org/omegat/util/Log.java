@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util;
 
@@ -40,21 +40,20 @@ import java.util.logging.LogRecord;
 import java.util.logging.Logger;
 
 /**
-  * A collection of methods to make logging things easier.
-  *
-  * @author Henry Pijffers (henry.pijffers@saxnot.com)
-  * @author Alex Buloichik (alex73mail@gmail.com)
+ * A collection of methods to make logging things easier.
+ * 
+ * @author Henry Pijffers (henry.pijffers@saxnot.com)
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class Log {
-    
+
     private static Logger LOGGER;
-    
+
     static {
         LOGGER = Logger.global;
 
         boolean loaded = false;
-        File usersLogSettings = new File(StaticUtils.getConfigDir(),
-                "logger.properties");
+        File usersLogSettings = new File(StaticUtils.getConfigDir(), "logger.properties");
         if (usersLogSettings.exists()) {
             // try to load logger settings from user home dir
             try {
@@ -71,8 +70,7 @@ public class Log {
         if (!loaded) {
             // load built-in logger settings
             try {
-                InputStream in = Log.class
-                        .getResourceAsStream("/org/omegat/logger.properties");
+                InputStream in = Log.class.getResourceAsStream("/org/omegat/logger.properties");
                 try {
                     init(in);
                 } finally {
@@ -83,11 +81,12 @@ public class Log {
             }
         }
     }
-    
+
     /**
      * Initialize handlers manually. Required for WebStart.
      * 
-     * @param in settings
+     * @param in
+     *            settings
      */
     protected static void init(InputStream in) throws IOException {
         Properties props = new Properties();
@@ -98,8 +97,7 @@ public class Log {
 
             ByteArrayOutputStream b = new ByteArrayOutputStream();
             props.store(b, null);
-            LogManager.getLogManager().readConfiguration(
-                    new ByteArrayInputStream(b.toByteArray()));
+            LogManager.getLogManager().readConfiguration(new ByteArrayInputStream(b.toByteArray()));
 
             Logger rootLogger = LogManager.getLogManager().getLogger("");
 
@@ -116,8 +114,7 @@ public class Log {
                     Handler h = (Handler) clz.newInstance();
                     String fname = props.getProperty(word + ".formatter");
                     if (fname != null) {
-                        Class clzF = Log.class.getClassLoader().loadClass(
-                                fname.trim());
+                        Class clzF = Log.class.getClassLoader().loadClass(fname.trim());
                         h.setFormatter((Formatter) clzF.newInstance());
                     }
                     String level = props.getProperty(word + ".level");
@@ -132,31 +129,32 @@ public class Log {
             }
         }
     }
-    
+
     /**
      * Returns the path to the log file.
      */
-   public static String getLogLocation() {
-       return StaticUtils.getConfigDir() + "/logs";
-   }
-    
+    public static String getLogLocation() {
+        return StaticUtils.getConfigDir() + "/logs";
+    }
+
     /**
      * Logs what otherwise would go to System.out
      */
-    public static void log(String s)
-    {
+    public static void log(String s) {
         LOGGER.info(s);
     }
 
     /**
-      * Logs a message, retrieved from the resource bundle.
-      *
-      * @param key        The key of the message in the resource bundle.
-      * @param parameters Parameters for the message. These are inserted by
-      *                   using StaticUtils.format.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Logs a message, retrieved from the resource bundle.
+     * 
+     * @param key
+     *            The key of the message in the resource bundle.
+     * @param parameters
+     *            Parameters for the message. These are inserted by using
+     *            StaticUtils.format.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static void logRB(String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.INFO)) {
             LogRecord rec = new LogRecord(Level.INFO, key);
@@ -168,35 +166,36 @@ public class Log {
     }
 
     /**
-      * Logs an Exception or Error.
-      *
-      * To the log are written:
-      * - The class name of the Exception or Error
-      * - The message, if any
-      * - The stack trace
-      *
-      * @param throwable The exception or error to log
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Logs an Exception or Error.
+     * 
+     * To the log are written: - The class name of the Exception or Error - The
+     * message, if any - The stack trace
+     * 
+     * @param throwable
+     *            The exception or error to log
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static void log(Throwable throwable) {
         LOGGER.log(Level.SEVERE, "", throwable);
     }
 
     /**
-      * Writes a warning message to the log (to be retrieved from the
-      * resource bundle), preceded by a line containing the warning ID.
-      *
-      * While the warning message can be localised, the warning ID should not,
-      * so developers can determine what warning was given by looking at the
-      * warning ID, instead of trying to interpret localised messages.
-      *
-      * @param key        The key of the warning message in the resource bundle
-      * @param parameters Parameters for the warning message. These are
-      *                   inserted by using StaticUtils.format.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Writes a warning message to the log (to be retrieved from the resource
+     * bundle), preceded by a line containing the warning ID.
+     * 
+     * While the warning message can be localised, the warning ID should not, so
+     * developers can determine what warning was given by looking at the warning
+     * ID, instead of trying to interpret localised messages.
+     * 
+     * @param key
+     *            The key of the warning message in the resource bundle
+     * @param parameters
+     *            Parameters for the warning message. These are inserted by
+     *            using StaticUtils.format.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static void logWarningRB(String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.WARNING)) {
             LogRecord rec = new LogRecord(Level.WARNING, key);
@@ -207,19 +206,20 @@ public class Log {
         }
     }
 
-
     /**
      * Writes the specified info message to the log, preceded by a line
      * containing the info ID.
-     *
-     * While the info message can be localised, the info ID should not,
-     * so developers can determine what info was given by looking at the
-     * info ID, instead of trying to interpret localised messages.
-     *
-     * @param id         An identification string for the info
-     * @param parameters Parameters for the info message. These are
-     *                   inserted by using StaticUtils.format.
-     *
+     * 
+     * While the info message can be localised, the info ID should not, so
+     * developers can determine what info was given by looking at the info ID,
+     * instead of trying to interpret localised messages.
+     * 
+     * @param id
+     *            An identification string for the info
+     * @param parameters
+     *            Parameters for the info message. These are inserted by using
+     *            StaticUtils.format.
+     * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      * @author Alex Buloichik (alex73mail@gmail.com)
      */
@@ -230,23 +230,25 @@ public class Log {
             rec.setParameters(parameters);
             rec.setLoggerName(LOGGER.getName());
             LOGGER.log(rec);
-        }       
+        }
     }
-    
+
     /**
-      * Writes an error message to the log (to be retrieved from the
-      * resource bundle), preceded by a line containing the error ID.
-      *
-      * While the error message can be localised, the error ID should not,
-      * so developers can determine what error was given by looking at the
-      * error ID, instead of trying to interpret localised messages.
-      *
-      * @param id         The key of the error message in the resource bundle
-      * @param parameters Parameters for the error message. These are
-      *                   inserted by using StaticUtils.format.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Writes an error message to the log (to be retrieved from the resource
+     * bundle), preceded by a line containing the error ID.
+     * 
+     * While the error message can be localised, the error ID should not, so
+     * developers can determine what error was given by looking at the error ID,
+     * instead of trying to interpret localised messages.
+     * 
+     * @param id
+     *            The key of the error message in the resource bundle
+     * @param parameters
+     *            Parameters for the error message. These are inserted by using
+     *            StaticUtils.format.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static void logErrorRB(String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.SEVERE)) {
             LogRecord rec = new LogRecord(Level.SEVERE, key);
@@ -258,19 +260,21 @@ public class Log {
     }
 
     /**
-      * Writes an error message to the log (to be retrieved from the
-      * resource bundle), preceded by a line containing the error ID.
-      *
-      * While the error message can be localised, the error ID should not,
-      * so developers can determine what error was given by looking at the
-      * error ID, instead of trying to interpret localised messages.
-      *
-      * @param id         The key of the error message in the resource bundle
-      * @param parameters Parameters for the error message. These are
-      *                   inserted by using StaticUtils.format.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Writes an error message to the log (to be retrieved from the resource
+     * bundle), preceded by a line containing the error ID.
+     * 
+     * While the error message can be localised, the error ID should not, so
+     * developers can determine what error was given by looking at the error ID,
+     * instead of trying to interpret localised messages.
+     * 
+     * @param id
+     *            The key of the error message in the resource bundle
+     * @param parameters
+     *            Parameters for the error message. These are inserted by using
+     *            StaticUtils.format.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static void logErrorRB(Throwable ex, String key, Object... parameters) {
         if (LOGGER.isLoggable(Level.SEVERE)) {
             LogRecord rec = new LogRecord(Level.SEVERE, key);

@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml;
 
@@ -28,76 +28,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Document type declaration in XML file.
- * For example,
+ * Document type declaration in XML file. For example,
  * <code>&lt;!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.1.2//EN"
  * "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd"&gt;</code>.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class DTD extends XMLPseudoTag
-{
+public class DTD extends XMLPseudoTag {
     private String name;
-    
+
     private String publicId;
+
     /** Returns Public ID of this DTD. */
-    public String getPublicId()
-    {
+    public String getPublicId() {
         return publicId;
     }
 
     private String systemId;
+
     /** Returns System ID of this DTD. */
-    public String getSystemId()
-    {
+    public String getSystemId() {
         return systemId;
     }
-    
+
     private List<Entity> entities;
-    
+
     /** Creates a new instance of Doctype */
-    public DTD(String name, String publicId, String systemId)
-    {
+    public DTD(String name, String publicId, String systemId) {
         this.name = name;
         this.publicId = publicId;
         this.systemId = systemId;
         entities = new ArrayList<Entity>();
     }
 
-    public void addEntity(Entity entity)
-    {
+    public void addEntity(Entity entity) {
         entities.add(entity);
     }
-    
+
     /**
      * Returns the DTD in its original form as it was in original document.
      */
-    public String toOriginal()
-    {
+    public String toOriginal() {
         StringBuffer res = new StringBuffer();
-        res.append("<!DOCTYPE");                                                
-        res.append(" ");                                                        
+        res.append("<!DOCTYPE");
+        res.append(" ");
         res.append(name);
-        res.append(" ");                                                        
-        res.append("PUBLIC");                                                   
-        res.append(" ");                                                        
-        res.append("\""+publicId+"\"");                                         
-        res.append(" ");                                                        
-        res.append("\""+systemId+"\"");                                         
+        res.append(" ");
+        res.append("PUBLIC");
+        res.append(" ");
+        res.append("\"" + publicId + "\"");
+        res.append(" ");
+        res.append("\"" + systemId + "\"");
 
-        if (entities.size()>0)
-        {
-            res.append("\n[\n");                                                
-            for (Entity entity : entities)
-            {
+        if (entities.size() > 0) {
+            res.append("\n[\n");
+            for (Entity entity : entities) {
                 res.append(entity.toString());
-                res.append("\n");                                               
+                res.append("\n");
             }
-            res.append("]");                                                    
+            res.append("]");
         }
-        
-        res.append(">");                                                        
-        res.append("\n");                                                       
+
+        res.append(">");
+        res.append("\n");
         return res.toString();
     }
 

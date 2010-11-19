@@ -184,11 +184,9 @@ public class XHTMLOptions extends AbstractOptions {
      * not be translated
      */
     public String getSkipMeta() {
-        return getString(OPTION_SKIP_META, "http-equiv=Content-Type,"
-                + "http-equiv=refresh," + "name=robots,"
-                + "name=revisit-after," + "http-equiv=expires,"
-                + "http-equiv=content-style-type,"
-                + "http-equiv=content-script-type");
+        return getString(OPTION_SKIP_META, "http-equiv=Content-Type," + "http-equiv=refresh,"
+                + "name=robots," + "name=revisit-after," + "http-equiv=expires,"
+                + "http-equiv=content-style-type," + "http-equiv=content-script-type");
     }
 
     /**

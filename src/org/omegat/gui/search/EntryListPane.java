@@ -99,12 +99,11 @@ class EntryListPane extends JTextPane {
     /**
      * Show search result for user
      */
-    public void displaySearchResult(List<SearchResultEntry> entries,
-                                    int numberOfResults) {
+    public void displaySearchResult(List<SearchResultEntry> entries, int numberOfResults) {
         UIThreadsUtil.mustBeSwingThread();
 
         this.numberOfResults = numberOfResults;
-        
+
         currentlyDisplayedMatches = null;
         m_entryList.clear();
         m_offsetList.clear();
@@ -160,8 +159,8 @@ class EntryListPane extends JTextPane {
         }
 
         // add entry text - remember what its number is and where it ends
-        public void addEntry(StringBuilder m_stringBuf, int num, String preamble, String srcPrefix, String src,
-                String loc, SearchMatch[] srcMatches, SearchMatch[] targetMatches) {
+        public void addEntry(StringBuilder m_stringBuf, int num, String preamble, String srcPrefix,
+                String src, String loc, SearchMatch[] srcMatches, SearchMatch[] targetMatches) {
             if (m_stringBuf.length() > 0)
                 m_stringBuf.append("---------\n");
 

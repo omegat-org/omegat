@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml;
 
@@ -30,24 +30,22 @@ import org.omegat.util.StaticUtils;
 
 /**
  * Static XML utility methods.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public final class XMLUtils
-{
-    
+public final class XMLUtils {
+
     /** Private to disallow creation. */
-    private XMLUtils() {}
-    
+    private XMLUtils() {
+    }
+
     /** Converts attributes from org.xml.sax package to OmegaT's. */
-    public static Attributes convertAttributes(org.xml.sax.Attributes attributes)
-    {
+    public static Attributes convertAttributes(org.xml.sax.Attributes attributes) {
         Attributes res = new Attributes();
-        if (attributes==null)
+        if (attributes == null)
             return res;
-        
-        for (int i = 0; i < attributes.getLength(); i++)
-        {
+
+        for (int i = 0; i < attributes.getLength(); i++) {
             String name = StaticUtils.makeValidXML(attributes.getQName(i));
             String value = StaticUtils.makeValidXML(attributes.getValue(i));
             Attribute attr = new Attribute(name, value);
@@ -55,5 +53,5 @@ public final class XMLUtils
         }
         return res;
     }
-    
+
 }

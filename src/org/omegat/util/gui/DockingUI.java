@@ -24,7 +24,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util.gui;
 
@@ -53,65 +53,65 @@ public class DockingUI {
      */
     public static void initialize() {
         DockingUISettings.getInstance().installUI();
-        UIManager.put("DockViewTitleBar.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE")); 
-        UIManager.put("DockViewTitleBar.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE")); 
-        UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE")); 
-        UIManager.put("DockViewTitleBar.attachButtonText", OStrings.getString("DOCKING_HINT_DOCK")); 
-        UIManager.put("DockViewTitleBar.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK")); 
-        UIManager.put("DockViewTitleBar.closeButtonText", new String()); 
-        UIManager.put("DockTabbedPane.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE")); 
-        UIManager.put("DockTabbedPane.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE")); 
-        UIManager.put("DockTabbedPane.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE")); 
-        UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK")); 
+        UIManager.put("DockViewTitleBar.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
+        UIManager.put("DockViewTitleBar.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
+        UIManager.put("DockViewTitleBar.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
+        UIManager.put("DockViewTitleBar.attachButtonText", OStrings.getString("DOCKING_HINT_DOCK"));
+        UIManager.put("DockViewTitleBar.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
+        UIManager.put("DockViewTitleBar.closeButtonText", new String());
+        UIManager.put("DockTabbedPane.minimizeButtonText", OStrings.getString("DOCKING_HINT_MINIMIZE"));
+        UIManager.put("DockTabbedPane.maximizeButtonText", OStrings.getString("DOCKING_HINT_MAXIMIZE"));
+        UIManager.put("DockTabbedPane.restoreButtonText", OStrings.getString("DOCKING_HINT_RESTORE"));
+        UIManager.put("DockTabbedPane.floatButtonText", OStrings.getString("DOCKING_HINT_UNDOCK"));
         UIManager.put("DockTabbedPane.closeButtonText", new String());
 
-        UIManager.put("DockViewTitleBar.titleFont", new JLabel().getFont()); 
+        UIManager.put("DockViewTitleBar.titleFont", new JLabel().getFont());
 
         UIManager.put("DockViewTitleBar.isCloseButtonDisplayed", Boolean.FALSE);
 
-        UIManager.put("DockViewTitleBar.hide", getIcon("minimize.gif")); 
-        UIManager.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif")); 
-        UIManager.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif")); 
-        UIManager.put("DockViewTitleBar.maximize", getIcon("maximize.gif")); 
+        UIManager.put("DockViewTitleBar.hide", getIcon("minimize.gif"));
+        UIManager.put("DockViewTitleBar.hide.rollover", getIcon("minimize.rollover.gif"));
+        UIManager.put("DockViewTitleBar.hide.pressed", getIcon("minimize.pressed.gif"));
+        UIManager.put("DockViewTitleBar.maximize", getIcon("maximize.gif"));
         UIManager.put("DockViewTitleBar.maximize.rollover", getIcon("maximize.rollover.gif"));
         UIManager.put("DockViewTitleBar.maximize.pressed", getIcon("maximize.pressed.gif"));
-        UIManager.put("DockViewTitleBar.restore", getIcon("restore.gif")); 
+        UIManager.put("DockViewTitleBar.restore", getIcon("restore.gif"));
         UIManager.put("DockViewTitleBar.restore.rollover", getIcon("restore.rollover.gif"));
-        UIManager.put("DockViewTitleBar.restore.pressed", getIcon("restore.pressed.gif")); 
-        UIManager.put("DockViewTitleBar.dock", getIcon("restore.gif")); 
-        UIManager.put("DockViewTitleBar.dock.rollover", getIcon("restore.rollover.gif")); 
-        UIManager.put("DockViewTitleBar.dock.pressed", getIcon("restore.pressed.gif")); 
-        UIManager.put("DockViewTitleBar.float", getIcon("undock.gif")); 
-        UIManager.put("DockViewTitleBar.float.rollover", getIcon("undock.rollover.gif")); 
-        UIManager.put("DockViewTitleBar.float.pressed", getIcon("undock.pressed.gif")); 
-        UIManager.put("DockViewTitleBar.attach", getIcon("dock.gif")); 
-        UIManager.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif")); 
-        UIManager.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif")); 
+        UIManager.put("DockViewTitleBar.restore.pressed", getIcon("restore.pressed.gif"));
+        UIManager.put("DockViewTitleBar.dock", getIcon("restore.gif"));
+        UIManager.put("DockViewTitleBar.dock.rollover", getIcon("restore.rollover.gif"));
+        UIManager.put("DockViewTitleBar.dock.pressed", getIcon("restore.pressed.gif"));
+        UIManager.put("DockViewTitleBar.float", getIcon("undock.gif"));
+        UIManager.put("DockViewTitleBar.float.rollover", getIcon("undock.rollover.gif"));
+        UIManager.put("DockViewTitleBar.float.pressed", getIcon("undock.pressed.gif"));
+        UIManager.put("DockViewTitleBar.attach", getIcon("dock.gif"));
+        UIManager.put("DockViewTitleBar.attach.rollover", getIcon("dock.rollover.gif"));
+        UIManager.put("DockViewTitleBar.attach.pressed", getIcon("dock.pressed.gif"));
 
-        UIManager.put("DockViewTitleBar.menu.hide", getIcon("minimize.gif")); 
-        UIManager.put("DockViewTitleBar.menu.maximize", getIcon("maximize.gif")); 
-        UIManager.put("DockViewTitleBar.menu.restore", getIcon("restore.gif")); 
-        UIManager.put("DockViewTitleBar.menu.dock", getIcon("restore.gif")); 
-        UIManager.put("DockViewTitleBar.menu.float", getIcon("undock.gif")); 
-        UIManager.put("DockViewTitleBar.menu.attach", getIcon("dock.gif")); 
+        UIManager.put("DockViewTitleBar.menu.hide", getIcon("minimize.gif"));
+        UIManager.put("DockViewTitleBar.menu.maximize", getIcon("maximize.gif"));
+        UIManager.put("DockViewTitleBar.menu.restore", getIcon("restore.gif"));
+        UIManager.put("DockViewTitleBar.menu.dock", getIcon("restore.gif"));
+        UIManager.put("DockViewTitleBar.menu.float", getIcon("undock.gif"));
+        UIManager.put("DockViewTitleBar.menu.attach", getIcon("dock.gif"));
 
-        UIManager.put("DockViewTitleBar.menu.close", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.close", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.close.rollover", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.menu.hide", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.menu.maximize", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif")); 
-        UIManager.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif")); 
+        UIManager.put("DockViewTitleBar.menu.close", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.close", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.close.rollover", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.close.pressed", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.close", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.hide", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.maximize", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.float", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.closeAll", getIcon("empty.gif"));
+        UIManager.put("DockTabbedPane.menu.closeAllOther", getIcon("empty.gif"));
 
-        UIManager.put("DockingDesktop.closeActionAccelerator", null); 
-        UIManager.put("DockingDesktop.maximizeActionAccelerator", null); 
-        UIManager.put("DockingDesktop.dockActionAccelerator", null); 
-        UIManager.put("DockingDesktop.floatActionAccelerator", null); 
+        UIManager.put("DockingDesktop.closeActionAccelerator", null);
+        UIManager.put("DockingDesktop.maximizeActionAccelerator", null);
+        UIManager.put("DockingDesktop.dockActionAccelerator", null);
+        UIManager.put("DockingDesktop.floatActionAccelerator", null);
 
-        UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage()); 
+        UIManager.put("DragControler.detachCursor", getIcon("undock.gif").getImage());
     }
 
     /**
@@ -124,15 +124,15 @@ public class DockingUI {
     private static ImageIcon getIcon(final String iconName) {
         return ResourcesUtil.getIcon("/org/omegat/gui/resources/" + iconName);
     }
-    
+
     /**
      * Move window to the center of main window.
      * 
-     * @param window window
+     * @param window
+     *            window
      */
     public static void displayCentered(final Window window) {
-        Point mLocation = Core.getMainWindow().getApplicationFrame()
-                .getLocation();
+        Point mLocation = Core.getMainWindow().getApplicationFrame().getLocation();
         Dimension mSize = Core.getMainWindow().getApplicationFrame().getSize();
 
         Point mCenter = new Point();
@@ -150,8 +150,7 @@ public class DockingUI {
      * Removes first, last and duplicate separators from menu.
      */
     public static void removeUnusedMenuSeparators(final JPopupMenu menu) {
-        if (menu.getComponentCount() > 0
-                && menu.getComponent(0) instanceof JSeparator) {
+        if (menu.getComponentCount() > 0 && menu.getComponent(0) instanceof JSeparator) {
             // remove first separator
             menu.remove(0);
         }
@@ -161,8 +160,7 @@ public class DockingUI {
             menu.remove(menu.getComponentCount() - 1);
         }
         for (int i = 0; i < menu.getComponentCount() - 1; i++) {
-            if (menu.getComponent(i) instanceof JSeparator
-                    && menu.getComponent(i + 1) instanceof JSeparator) {
+            if (menu.getComponent(i) instanceof JSeparator && menu.getComponent(i + 1) instanceof JSeparator) {
                 // remove duplicate separators
                 menu.remove(i);
             }

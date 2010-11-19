@@ -20,31 +20,29 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.data;
 
 /**
  * represents a translation memory element stored in memory
- *
+ * 
  * @author Keith Godfrey
  */
-public class TransMemory
-{
-     public TransMemory(String src, String tar, String f)
-     {
-         source = src;
-         target = tar;
-         file = f;
-     }
-     
+public class TransMemory {
+    public TransMemory(String src, String tar, String f) {
+        source = src;
+        target = tar;
+        file = f;
+    }
+
     public TransMemory(String src, String tar) {
         this.source = src;
         this.target = tar;
     }
 
-     public String	source;
-     public String	target;
-     /** @deprecated */
-     public String	file;
+    public String source;
+    public String target;
+    /** @deprecated */
+    public String file;
 }

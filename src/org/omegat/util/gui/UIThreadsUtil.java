@@ -24,7 +24,6 @@
 
 package org.omegat.util.gui;
 
-
 import javax.swing.SwingUtilities;
 
 import org.omegat.util.Log;

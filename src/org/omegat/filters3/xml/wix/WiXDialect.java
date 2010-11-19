@@ -36,8 +36,7 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
  * @author Didier Briel
  */
 public class WiXDialect extends DefaultXMLDialect {
-    public static final Pattern ROOT_PATTERN =
-            Pattern.compile("WixLocalization");
+    public static final Pattern ROOT_PATTERN = Pattern.compile("WixLocalization");
 
     public WiXDialect() {
         defineConstraint(CONSTRAINT_ROOT, ROOT_PATTERN);

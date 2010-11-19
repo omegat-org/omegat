@@ -96,8 +96,7 @@ public class StatisticsWindow extends JDialog {
         p.add(progressBar, BorderLayout.SOUTH);
 
         output.setEditable(false);
-        output.setFont(new Font("Monospaced", Font.PLAIN, Core.getMainWindow()
-                .getApplicationFont().getSize()));
+        output.setFont(new Font("Monospaced", Font.PLAIN, Core.getMainWindow().getApplicationFont().getSize()));
         p.add(new JScrollPane(output), BorderLayout.CENTER);
 
         setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
@@ -108,8 +107,7 @@ public class StatisticsWindow extends JDialog {
                 dispose();
             }
         };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-                escape, "ESCAPE");
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
         getRootPane().getActionMap().put("ESCAPE", escapeAction);
 
         addWindowListener(new WindowAdapter() {

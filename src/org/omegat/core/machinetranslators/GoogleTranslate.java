@@ -47,8 +47,7 @@ public class GoogleTranslate extends BaseTranslate {
     protected static final String GT_URL = "http://ajax.googleapis.com/ajax/services/language/translate";
     protected static final String MARK_BEG = "{\"translatedText\":\"";
     protected static final String MARK_END = "\"}";
-    protected static final Pattern RE_UNICODE = Pattern
-            .compile("\\\\u([0-9A-Fa-f]{4})");
+    protected static final Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
     protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     @Override
@@ -61,23 +60,20 @@ public class GoogleTranslate extends BaseTranslate {
     }
 
     @Override
-    protected String translate(Language sLang, Language tLang, String text)
-            throws Exception {
-        String trText = text.length() > 5000 ? text.substring(0, 4997) + "..."
-                : text;
+    protected String translate(Language sLang, Language tLang, String text) throws Exception {
+        String trText = text.length() > 5000 ? text.substring(0, 4997) + "..." : text;
 
         Map<String, String> p = new TreeMap<String, String>();
         p.put("v", "1.0");
         String targetLang = tLang.getLanguageCode();
         // Differentiate in target between simplified and traditional Chinese
-        if ((tLang.getLanguage().compareToIgnoreCase("zh-cn" ) == 0) ||
-            (tLang.getLanguage().compareToIgnoreCase("zh-tw") == 0)) 
+        if ((tLang.getLanguage().compareToIgnoreCase("zh-cn") == 0)
+                || (tLang.getLanguage().compareToIgnoreCase("zh-tw") == 0))
             targetLang = tLang.getLanguage();
         else if ((tLang.getLanguage().compareToIgnoreCase("zh-hk") == 0))
-			targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
-			
-        p.put("langpair", sLang.getLanguageCode() + '|'
-                + targetLang);
+            targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
+
+        p.put("langpair", sLang.getLanguageCode() + '|' + targetLang);
         p.put("q", trText);
 
         String v = WikiGet.post(GT_URL, p);
@@ -113,8 +109,8 @@ public class GoogleTranslate extends BaseTranslate {
         while (tag.find()) {
             String searchTag = tag.group();
             if (text.indexOf(searchTag) == -1) { // The tag didn't appear with a
-                                          // trailing space in the source text
-                String replacement = searchTag.substring(0, searchTag.length()-1);
+                // trailing space in the source text
+                String replacement = searchTag.substring(0, searchTag.length() - 1);
                 tr = tr.replace(searchTag, replacement);
             }
         }
@@ -124,7 +120,7 @@ public class GoogleTranslate extends BaseTranslate {
         while (tag.find()) {
             String searchTag = tag.group();
             if (text.indexOf(searchTag) == -1) { // The tag didn't appear with a
-                                          // leading space in the source text
+                // leading space in the source text
                 String replacement = searchTag.substring(1, searchTag.length());
                 tr = tr.replace(searchTag, replacement);
             }

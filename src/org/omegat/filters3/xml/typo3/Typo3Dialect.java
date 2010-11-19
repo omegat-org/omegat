@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml.typo3;
 
@@ -34,61 +34,45 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the ResX XML Dialect.
- *
+ * 
  * @author Didier Briel
  */
-public class Typo3Dialect extends DefaultXMLDialect
-{
-    public static final Pattern TYPO3_ROOT_TAG =
-            Pattern.compile("t3_tt_content");
-    public static final Pattern TYPO3_ROOT_TAG2 =
-            Pattern.compile("t3_pages_language_overlay");
+public class Typo3Dialect extends DefaultXMLDialect {
+    public static final Pattern TYPO3_ROOT_TAG = Pattern.compile("t3_tt_content");
+    public static final Pattern TYPO3_ROOT_TAG2 = Pattern.compile("t3_pages_language_overlay");
 
-    public Typo3Dialect(){      
+    public Typo3Dialect() {
 
         defineConstraint(CONSTRAINT_ROOT, TYPO3_ROOT_TAG);
 
-        defineParagraphTags(new String[] {
-            "title",
-            "subtitle",
-            "p",
-            "br",
-            "header",
-            "li",
-            "td",
-            "abstract",
-            "image_link",
-            "imagecaption",
-        });
-             
-        defineIntactTags(new String[] {
-            "l18n_diffsource",
-        });
-        
+        defineParagraphTags(new String[] { "title", "subtitle", "p", "br", "header", "li", "td", "abstract",
+                "image_link", "imagecaption", });
+
+        defineIntactTags(new String[] { "l18n_diffsource", });
+
         // Typo3 requires empty tags to have a closing tag
         // E.g., <title></title> instead of <title/>
         setClosingTagRequired(true);
     }
 
-
-
     /**
      * In the Typo3 LocManager filter, content should be translated in the
-     * following condition:
-     * The attribute localizable should be = "1"
-     * @param tag An XML tag
-     * @param atts The attributes associated with the tag
-     * @return <code>true</code> if the content of this tag should be 
-     * translated, <code>false</code> otherwise
+     * following condition: The attribute localizable should be = "1"
+     * 
+     * @param tag
+     *            An XML tag
+     * @param atts
+     *            The attributes associated with the tag
+     * @return <code>true</code> if the content of this tag should be
+     *         translated, <code>false</code> otherwise
      */
-    public Boolean validateTranslatableTag(String tag,
-                                           Attributes atts) {      
+    public Boolean validateTranslatableTag(String tag, Attributes atts) {
         if (atts != null) {
-            for (int i=0; i < atts.size(); i++) {
-               Attribute oneAttribute = atts.get(i);
-               if ( oneAttribute.getName().equalsIgnoreCase("localizable") &&
-                    oneAttribute.getValue().equalsIgnoreCase("1") )
-                   return true;
+            for (int i = 0; i < atts.size(); i++) {
+                Attribute oneAttribute = atts.get(i);
+                if (oneAttribute.getName().equalsIgnoreCase("localizable")
+                        && oneAttribute.getValue().equalsIgnoreCase("1"))
+                    return true;
             }
         }
         return false;

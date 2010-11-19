@@ -69,7 +69,7 @@ import com.vlsolutions.swing.docking.event.DockableStateWillChangeListener;
  */
 public class MainWindowUI {
     public static String UI_LAYOUT_FILE = "uiLayout.xml";
-    
+
     /**
      * Create main UI panels.
      */
@@ -160,9 +160,8 @@ public class MainWindowUI {
             }
         }
         mainWindow.setBounds(x, y, w, h);
-        
-        File uiLayoutFile = new File(StaticUtils.getConfigDir()
-                + MainWindowUI.UI_LAYOUT_FILE);
+
+        File uiLayoutFile = new File(StaticUtils.getConfigDir() + MainWindowUI.UI_LAYOUT_FILE);
         if (uiLayoutFile.exists()) {
             try {
                 FileInputStream in = new FileInputStream(uiLayoutFile);
@@ -186,8 +185,7 @@ public class MainWindowUI {
         Preferences.setPreference(Preferences.MAINWINDOW_WIDTH, mainWindow.getWidth());
         Preferences.setPreference(Preferences.MAINWINDOW_HEIGHT, mainWindow.getHeight());
 
-        File uiLayoutFile = new File(StaticUtils.getConfigDir()
-                + MainWindowUI.UI_LAYOUT_FILE);
+        File uiLayoutFile = new File(StaticUtils.getConfigDir() + MainWindowUI.UI_LAYOUT_FILE);
         try {
             FileOutputStream out = new FileOutputStream(uiLayoutFile);
             try {
@@ -199,7 +197,6 @@ public class MainWindowUI {
             Log.log(ex);
         }
     }
-    
 
     /**
      * Restores defaults for all dockable parts. May be expanded in the future
@@ -212,8 +209,7 @@ public class MainWindowUI {
      */
     public static void resetDesktopLayout(final MainWindow mainWindow) {
         try {
-            InputStream in = MainWindowUI.class.getResourceAsStream(
-                    "DockingDefaults.xml");
+            InputStream in = MainWindowUI.class.getResourceAsStream("DockingDefaults.xml");
             try {
                 mainWindow.desktop.readXML(in);
             } finally {

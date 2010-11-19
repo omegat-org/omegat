@@ -56,18 +56,15 @@ public class Convert20to21 {
      *            new config file
      * @throws Exception
      */
-    public static void convertFiltersConfig(final File fromFile,
-            final File toFile) throws Exception {
+    public static void convertFiltersConfig(final File fromFile, final File toFile) throws Exception {
         if (!fromFile.exists()) {
             return;
         }
         String c = read(fromFile);
         org.omegat.convert.v20to21.data.Filters filters;
-        XMLDecoder xmldec = new XMLDecoder(new ByteArrayInputStream(c
-                .getBytes("UTF-8")));
+        XMLDecoder xmldec = new XMLDecoder(new ByteArrayInputStream(c.getBytes("UTF-8")));
         try {
-            filters = (org.omegat.convert.v20to21.data.Filters) xmldec
-                    .readObject();
+            filters = (org.omegat.convert.v20to21.data.Filters) xmldec.readObject();
         } finally {
             xmldec.close();
         }
@@ -104,7 +101,7 @@ public class Convert20to21 {
 
         convertTextFilter(res);
         convertHTMLFilter2(res);
-        
+
         JAXBContext CTX = JAXBContext.newInstance(Filters.class);
         Marshaller m = CTX.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
@@ -133,12 +130,10 @@ public class Convert20to21 {
             rd.close();
         }
         String res = r.toString();
-        res = res.replace("org.omegat.filters2.master.Filters",
-                "org.omegat.convert.v20to21.data.Filters");
-        res = res.replace("org.omegat.filters2.master.OneFilter",
-                "org.omegat.convert.v20to21.data.OneFilter");
-        res = res.replace("org.omegat.filters2.Instance",
-                "org.omegat.convert.v20to21.data.Instance");
+        res = res.replace("org.omegat.filters2.master.Filters", "org.omegat.convert.v20to21.data.Filters");
+        res = res
+                .replace("org.omegat.filters2.master.OneFilter", "org.omegat.convert.v20to21.data.OneFilter");
+        res = res.replace("org.omegat.filters2.Instance", "org.omegat.convert.v20to21.data.Instance");
         res = res.replace("org.omegat.filters2.html2.HTMLOptions",
                 "org.omegat.convert.v20to21.data.HTMLOptions");
         res = res.replace("org.omegat.filters2.text.TextOptions",
@@ -151,7 +146,7 @@ public class Convert20to21 {
                 "org.omegat.convert.v20to21.data.XHTMLOptions");
         return res;
     }
-    
+
     /**
      * Convert TextFilter options from int to string.
      * 
@@ -182,7 +177,7 @@ public class Convert20to21 {
             }
         }
     }
-    
+
     /**
      * Convert HTMLFilter2 options from int to string.
      * 

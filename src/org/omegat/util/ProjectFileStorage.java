@@ -48,38 +48,36 @@ import org.omegat.util.xml.XMLStreamReader;
  */
 public class ProjectFileStorage {
 
-    public static ProjectProperties loadProjectProperties(File projectDir)
-            throws IOException, TranslationException {
+    public static ProjectProperties loadProjectProperties(File projectDir) throws IOException,
+            TranslationException {
         ProjectProperties result = new ProjectProperties(projectDir);
 
         File inFile = new File(projectDir, OConsts.FILE_PROJECT);
 
         XMLStreamReader m_reader = new XMLStreamReader();
         m_reader.killEmptyBlocks();
-        m_reader.setStream(inFile.getAbsolutePath(), "UTF-8"); 
+        m_reader.setStream(inFile.getAbsolutePath(), "UTF-8");
 
         // verify valid project file
         XMLBlock blk;
         List<XMLBlock> lst;
 
         // advance to omegat tag
-        if (m_reader.advanceToTag("omegat") == null) 
+        if (m_reader.advanceToTag("omegat") == null)
             return result;
 
         // advance to project tag
-        if ((blk = m_reader.advanceToTag("project")) == null) 
+        if ((blk = m_reader.advanceToTag("project")) == null)
             return result;
 
-        String ver = blk.getAttribute("version"); 
+        String ver = blk.getAttribute("version");
         if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION)) {
-            throw new TranslationException(StaticUtils.format(OStrings
-                    .getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
-                    new Object[] { ver }));
+            throw new TranslationException(StaticUtils.format(
+                    OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), new Object[] { ver }));
         }
 
         // if folder is in default locations, name stored as __DEFAULT__
-        String m_root = inFile.getParentFile().getAbsolutePath()
-                + File.separator;
+        String m_root = inFile.getParentFile().getAbsolutePath() + File.separator;
 
         lst = m_reader.closeBlock(blk);
         if (lst == null)
@@ -90,63 +88,49 @@ public class ProjectFileStorage {
             if (blk.isClose())
                 continue;
 
-            if (blk.getTagName().equals("target_dir")) 
-            {
+            if (blk.getTagName().equals("target_dir")) {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
-                result.setTargetRoot(computeAbsolutePath(m_root, blk.getText(),
-                        OConsts.DEFAULT_TARGET));
-            } else if (blk.getTagName().equals("source_dir")) 
-            {
+                result.setTargetRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_TARGET));
+            } else if (blk.getTagName().equals("source_dir")) {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
-                result.setSourceRoot(computeAbsolutePath(m_root, blk.getText(),
-                        OConsts.DEFAULT_SOURCE));
-            } else if (blk.getTagName().equals("tm_dir")) 
-            {
+                result.setSourceRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_SOURCE));
+            } else if (blk.getTagName().equals("tm_dir")) {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
-                result.setTMRoot(computeAbsolutePath(m_root, blk.getText(),
-                        OConsts.DEFAULT_TM));
-            } else if (blk.getTagName().equals("glossary_dir")) 
-            {
+                result.setTMRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_TM));
+            } else if (blk.getTagName().equals("glossary_dir")) {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
-                result.setGlossaryRoot(computeAbsolutePath(m_root, blk
-                        .getText(), OConsts.DEFAULT_GLOSSARY));
-            } else if (blk.getTagName().equals("dictionary_dir")) 
-            {
+                result.setGlossaryRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_GLOSSARY));
+            } else if (blk.getTagName().equals("dictionary_dir")) {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
-                result.setDictRoot(computeAbsolutePath(m_root, blk
-                        .getText(), OConsts.DEFAULT_DICT));
-            } else if (blk.getTagName().equals("source_lang")) 
-            {
+                result.setDictRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_DICT));
+            } else if (blk.getTagName().equals("source_lang")) {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 if (blk != null)
                     result.setSourceLanguage(blk.getText());
-            } else if (blk.getTagName().equals("target_lang")) 
-            {
+            } else if (blk.getTagName().equals("target_lang")) {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 if (blk != null)
                     result.setTargetLanguage(blk.getText());
-            } else if (blk.getTagName().equals("sentence_seg")) 
-            {
+            } else if (blk.getTagName().equals("sentence_seg")) {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 if (blk != null)
-                    result.setSentenceSegmentingEnabled(Boolean
-                            .parseBoolean(blk.getText()));
+                    result.setSentenceSegmentingEnabled(Boolean.parseBoolean(blk.getText()));
             }
         }
 
@@ -156,40 +140,34 @@ public class ProjectFileStorage {
     /**
      * Saves project file to disk.
      */
-    public static void writeProjectFile(ProjectProperties props)
-            throws IOException {
+    public static void writeProjectFile(ProjectProperties props) throws IOException {
         File outFile = new File(props.getProjectRoot(), OConsts.FILE_PROJECT);
-        String m_root = outFile.getParentFile().getAbsolutePath()
-                + File.separator;
+        String m_root = outFile.getParentFile().getAbsolutePath() + File.separator;
 
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
-                new FileOutputStream(outFile), OConsts.UTF8));
-        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"); 
-        out.write("<omegat>\n"); 
-        out.write("  <project version=\"1.0\">\n"); 
-        out.write("    <source_dir>" + 
-                computeRelativePath(m_root, props.getSourceRoot(),
-                        OConsts.DEFAULT_SOURCE) + "</source_dir>\n"); 
-        out.write("    <target_dir>" + 
-                computeRelativePath(m_root, props.getTargetRoot(),
-                        OConsts.DEFAULT_TARGET) + "</target_dir>\n"); 
-        out.write("    <tm_dir>" + 
-                computeRelativePath(m_root, props.getTMRoot(),
-                        OConsts.DEFAULT_TM) + "</tm_dir>\n"); 
-        out.write("    <glossary_dir>" + 
-                computeRelativePath(m_root, props.getGlossaryRoot(),
-                        OConsts.DEFAULT_GLOSSARY) + "</glossary_dir>\n"); 
-        out.write("    <dictionary_dir>" + 
-                computeRelativePath(m_root, props.getDictRoot(),
-                        OConsts.DEFAULT_DICT) + "</dictionary_dir>\n"); 
-        out.write("    <source_lang>" + props.getSourceLanguage()
-                + "</source_lang>\n"); 
-        out.write("    <target_lang>" + props.getTargetLanguage()
-                + "</target_lang>\n"); 
-        out.write("    <sentence_seg>" + props.isSentenceSegmentingEnabled()
-                + "</sentence_seg>\n"); 
-        out.write("  </project>\n"); 
-        out.write("</omegat>\n"); 
+        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile),
+                OConsts.UTF8));
+        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
+        out.write("<omegat>\n");
+        out.write("  <project version=\"1.0\">\n");
+        out.write("    <source_dir>"
+                + computeRelativePath(m_root, props.getSourceRoot(), OConsts.DEFAULT_SOURCE)
+                + "</source_dir>\n");
+        out.write("    <target_dir>"
+                + computeRelativePath(m_root, props.getTargetRoot(), OConsts.DEFAULT_TARGET)
+                + "</target_dir>\n");
+        out.write("    <tm_dir>" + computeRelativePath(m_root, props.getTMRoot(), OConsts.DEFAULT_TM)
+                + "</tm_dir>\n");
+        out.write("    <glossary_dir>"
+                + computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY)
+                + "</glossary_dir>\n");
+        out.write("    <dictionary_dir>"
+                + computeRelativePath(m_root, props.getDictRoot(), OConsts.DEFAULT_DICT)
+                + "</dictionary_dir>\n");
+        out.write("    <source_lang>" + props.getSourceLanguage() + "</source_lang>\n");
+        out.write("    <target_lang>" + props.getTargetLanguage() + "</target_lang>\n");
+        out.write("    <sentence_seg>" + props.isSentenceSegmentingEnabled() + "</sentence_seg>\n");
+        out.write("  </project>\n");
+        out.write("</omegat>\n");
         out.close();
     }
 
@@ -198,13 +176,12 @@ public class ProjectFileStorage {
      * relative paths (RFE 1111956).
      * 
      * @param relativePath
-     *                relative path from project file.
+     *            relative path from project file.
      * @param defaultName
-     *                default name for such a project's folder, if relativePath
-     *                is "__DEFAULT__".
+     *            default name for such a project's folder, if relativePath is
+     *            "__DEFAULT__".
      */
-    private static String computeAbsolutePath(String m_root,
-            String relativePath, String defaultName) {
+    private static String computeAbsolutePath(String m_root, String relativePath, String defaultName) {
         if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath))
             return m_root + defaultName + File.separator;
         else {
@@ -214,31 +191,27 @@ public class ProjectFileStorage {
                 for (File root : File.listRoots()) {
                     try // Under Windows and Java 1.4, there is an exception if
                     { // using getCanonicalPath on a non-existent drive letter
-                        // [1875331] Relative paths not working under
-                        // Windows/Java 1.4
-                        String platformRelativePath =
-                                relativePath.replace('/', File.separatorChar);
+                      // [1875331] Relative paths not working under
+                      // Windows/Java 1.4
+                        String platformRelativePath = relativePath.replace('/', File.separatorChar);
                         // If a plaform-dependent form of relativePath is not
                         // used, startWith will always fail under Windows,
                         // because Windows uses C:\, while the path is stored as
                         // C:/ in omegat.project
-                        startsWithRoot = platformRelativePath.startsWith(root
-                                .getCanonicalPath());
+                        startsWithRoot = platformRelativePath.startsWith(root.getCanonicalPath());
                     } catch (IOException e) {
                         startsWithRoot = false;
                     }
                     if (startsWithRoot)
                         // path starts with a root --> path is already absolute
-                        return new File(relativePath).getCanonicalPath()
-                                + File.separator;
+                        return new File(relativePath).getCanonicalPath() + File.separator;
                 }
 
                 // path does not start with a system root --> relative to
                 // project root
-                return new File(m_root, relativePath).getCanonicalPath()
-                        + File.separator;
+                return new File(m_root, relativePath).getCanonicalPath() + File.separator;
             } catch (IOException e) {
-                    return relativePath;
+                return relativePath;
             }
         }
     }
@@ -248,13 +221,12 @@ public class ProjectFileStorage {
      * default location, returns "__DEFAULT__".
      * 
      * @param absolutePath
-     *                absolute path to project folder.
+     *            absolute path to project folder.
      * @param defaultName
-     *                default name for such a project's folder.
+     *            default name for such a project's folder.
      * @since 1.6.0
      */
-    private static String computeRelativePath(String m_root,
-            String absolutePath, String defaultName) {
+    private static String computeRelativePath(String m_root, String absolutePath, String defaultName) {
         if (absolutePath.equals(m_root + defaultName + File.separator))
             return OConsts.DEFAULT_FOLDER_MARKER;
 
@@ -267,16 +239,14 @@ public class ProjectFileStorage {
             for (int i = 0; i < 2; i++) {
                 // File separator added to prevent "/MyProject EN-FR/"
                 // to be undesrtood as being inside "/MyProject/" [1879571]
-                if ((abs.getPath() + File.separator).startsWith(root.getPath()
-                        + File.separator)) {
-                    res = prefix
-                            + abs.getPath().substring(root.getPath().length());
+                if ((abs.getPath() + File.separator).startsWith(root.getPath() + File.separator)) {
+                    res = prefix + abs.getPath().substring(root.getPath().length());
                     if (res.startsWith(File.separator))
                         res = res.substring(1);
                     break;
                 } else {
                     root = root.getParentFile();
-                    prefix += File.separator + ".."; 
+                    prefix += File.separator + "..";
                 }
             }
             return res.replace(File.separatorChar, '/');

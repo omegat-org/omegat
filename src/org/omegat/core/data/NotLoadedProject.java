@@ -41,8 +41,7 @@ import org.omegat.filters2.TranslationException;
  */
 public class NotLoadedProject implements IProject {
 
-    public void compileProject(String sourcePattern)
-            throws IOException, TranslationException {
+    public void compileProject(String sourcePattern) throws IOException, TranslationException {
     }
 
     public void closeProject() {
@@ -66,7 +65,7 @@ public class NotLoadedProject implements IProject {
     public TransEntry getTranslation(SourceTextEntry ste) {
         return null;
     }
-    
+
     public Set<Entry<String, TransEntry>> getTranslationsSet() {
         return null;
     }
@@ -86,7 +85,7 @@ public class NotLoadedProject implements IProject {
     public Map<String, TransEntry> getOrphanedSegments() {
         return null;
     }
-    
+
     public Map<String, List<TransMemory>> getTransMemories() {
         return null;
     }
@@ -107,17 +106,17 @@ public class NotLoadedProject implements IProject {
 
     public void saveProjectProperties() throws IOException {
     }
-    
+
     public void setAuthorTranslation(String author, SourceTextEntry entry, String trans) {
     }
 
     public void setTranslation(SourceTextEntry entry, String trans) {
     }
-    
+
     public ITokenizer getSourceTokenizer() {
         return null;
     }
-    
+
     public ITokenizer getTargetTokenizer() {
         return null;
     }

@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2.master;
 
@@ -33,117 +33,106 @@ import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
 
 /**
- * Wrapper around a single file filter class
- * Manages entries in XML config file and provides a table model.
- *
+ * Wrapper around a single file filter class Manages entries in XML config file
+ * and provides a table model.
+ * 
  * @author Maxym Mykhalchuk
  */
 public class OneFilterTableModel extends AbstractTableModel {
-  
+
     private final Filter filter;
     private boolean sourceEncodingVariable, targetEncodingVariable;
-    
+
     private final String ENC_AUTO_NAME = OStrings.getString("ENCODING_AUTO");
 
     public OneFilterTableModel(final Filter f) {
         this.filter = f;
-        IFilter fi = FilterMaster.getInstance().getFilterInstance(
-                f.getClassName());
+        IFilter fi = FilterMaster.getInstance().getFilterInstance(f.getClassName());
         sourceEncodingVariable = fi.isSourceEncodingVariable();
         targetEncodingVariable = fi.isTargetEncodingVariable();
     }
 
-    //////////////////////////////////////////////////////////////////////////
-    //  TableModel implementation
-    //////////////////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////////////////
+    // TableModel implementation
+    // ////////////////////////////////////////////////////////////////////////
 
-    public int getColumnCount()
-    {
+    public int getColumnCount() {
         return 4;
     }
-    
-    public String getColumnName(int columnIndex)
-    {
-        switch( columnIndex )
-        {
-            case 0:
-                return OStrings.getString("ONEFILTER_SOURCE_FILENAME_MASK");
-            case 1:
-                return OStrings.getString("ONEFILTER_SOURCE_FILE_ENCODING");
-            case 2:
-                return OStrings.getString("ONEFILTER_TARGET_FILE_ENCODING");
-            case 3:
-                return OStrings.getString("ONEFILTER_TARGET_FILENAME_ENCODING");
+
+    public String getColumnName(int columnIndex) {
+        switch (columnIndex) {
+        case 0:
+            return OStrings.getString("ONEFILTER_SOURCE_FILENAME_MASK");
+        case 1:
+            return OStrings.getString("ONEFILTER_SOURCE_FILE_ENCODING");
+        case 2:
+            return OStrings.getString("ONEFILTER_TARGET_FILE_ENCODING");
+        case 3:
+            return OStrings.getString("ONEFILTER_TARGET_FILENAME_ENCODING");
         }
         return null;
     }
-    
-    public Class<?> getColumnClass(int columnIndex)
-    {
+
+    public Class<?> getColumnClass(int columnIndex) {
         return String.class;
     }
 
-    public int getRowCount()
-    {
+    public int getRowCount() {
         return filter.getFiles().size();
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex)
-    {
+    public Object getValueAt(int rowIndex, int columnIndex) {
         Files instance = filter.getFiles().get(rowIndex);
-        switch( columnIndex )
-        {
-            case 0:
-                return instance.getSourceFilenameMask();
-            case 1:
-                return getEncodingName(instance.getSourceEncoding());
-            case 2:
-                return getEncodingName(instance.getTargetEncoding());
-            case 3:
-                return instance.getTargetFilenamePattern();
+        switch (columnIndex) {
+        case 0:
+            return instance.getSourceFilenameMask();
+        case 1:
+            return getEncodingName(instance.getSourceEncoding());
+        case 2:
+            return getEncodingName(instance.getTargetEncoding());
+        case 3:
+            return instance.getTargetFilenamePattern();
         }
         return null;
     }
-    
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
-    {
+
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Files instance = filter.getFiles().get(rowIndex);
-        switch( columnIndex )
-        {
-            case 0:
-                instance.setSourceFilenameMask(aValue.toString());
-                break;
-            case 1:
-                instance.setSourceEncoding(setEncodingName(aValue.toString()));
-                break;
-            case 2:
-                instance.setTargetEncoding(setEncodingName(aValue.toString()));
-                break;
-            case 3:
-                instance.setTargetFilenamePattern(aValue.toString());
-                break;
+        switch (columnIndex) {
+        case 0:
+            instance.setSourceFilenameMask(aValue.toString());
+            break;
+        case 1:
+            instance.setSourceEncoding(setEncodingName(aValue.toString()));
+            break;
+        case 2:
+            instance.setTargetEncoding(setEncodingName(aValue.toString()));
+            break;
+        case 3:
+            instance.setTargetFilenamePattern(aValue.toString());
+            break;
         }
     }
-    
-    public boolean isCellEditable(int rowIndex, int columnIndex)
-    {
-        switch( columnIndex )
-        {
-            case 0:
-            case 3:
-                return true;
-            case 1:
-                return sourceEncodingVariable;
-            case 2:
-                return targetEncodingVariable;
+
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        switch (columnIndex) {
+        case 0:
+        case 3:
+            return true;
+        case 1:
+            return sourceEncodingVariable;
+        case 2:
+            return targetEncodingVariable;
         }
         return false;
     }
-    
+
     private String getEncodingName(final String enc) {
         return enc != null ? enc : ENC_AUTO_NAME;
     }
+
     private String setEncodingName(final String encName) {
-        return ENC_AUTO_NAME.equals(encName)?null:encName;
+        return ENC_AUTO_NAME.equals(encName) ? null : encName;
     }
 }

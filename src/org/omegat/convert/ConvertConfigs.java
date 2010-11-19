@@ -40,8 +40,7 @@ public class ConvertConfigs {
     public static void convert() {
         File newFilters = new File(StaticUtils.getConfigDir() + "filters.xml");
         if (!newFilters.exists()) {
-            File oldFilters = new File(StaticUtils.getConfigDir()
-                    + "filters.conf");
+            File oldFilters = new File(StaticUtils.getConfigDir() + "filters.conf");
             try {
                 Convert20to21.convertFiltersConfig(oldFilters, newFilters);
             } catch (Exception ex) {
@@ -49,8 +48,7 @@ public class ConvertConfigs {
             }
         }
 
-        File newUI = new File(StaticUtils.getConfigDir()
-                + MainWindowUI.UI_LAYOUT_FILE);
+        File newUI = new File(StaticUtils.getConfigDir() + MainWindowUI.UI_LAYOUT_FILE);
         if (!newUI.exists()) {
             try {
                 ConvertTo213.convertUIConfig(newUI);

@@ -39,8 +39,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 public class DocumentFilter3 extends DocumentFilter {
     @Override
-    public void remove(FilterBypass fb, int offset, int length)
-            throws BadLocationException {
+    public void remove(FilterBypass fb, int offset, int length) throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
         if (isPossible(fb.getDocument(), offset, length)) {
             super.remove(fb, offset, length);
@@ -48,8 +47,8 @@ public class DocumentFilter3 extends DocumentFilter {
     }
 
     @Override
-    public void insertString(FilterBypass fb, int offset, String string,
-            AttributeSet attr) throws BadLocationException {
+    public void insertString(FilterBypass fb, int offset, String string, AttributeSet attr)
+            throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
         if (isPossible(fb.getDocument(), offset, 0)) {
             super.insertString(fb, offset, string, attr);
@@ -57,8 +56,8 @@ public class DocumentFilter3 extends DocumentFilter {
     }
 
     @Override
-    public void replace(FilterBypass fb, int offset, int length, String text,
-            AttributeSet attrs) throws BadLocationException {
+    public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs)
+            throws BadLocationException {
         UIThreadsUtil.mustBeSwingThread();
         if (isPossible(fb.getDocument(), offset, length)) {
             super.replace(fb, offset, length, text, attrs);
@@ -78,7 +77,6 @@ public class DocumentFilter3 extends DocumentFilter {
         }
 
         // Is inside translation ?
-        return (offset >= doc.getTranslationStart() && offset + length <= doc
-                .getTranslationEnd());
+        return (offset >= doc.getTranslationStart() && offset + length <= doc.getTranslationEnd());
     }
 }

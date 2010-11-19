@@ -126,7 +126,7 @@ public class MainWindowMenuHandler {
      * Save project.
      */
     public void projectSaveMenuItemActionPerformed() {
-       ProjectUICommands.projectSave();
+        ProjectUICommands.projectSave();
     }
 
     /**
@@ -162,10 +162,11 @@ public class MainWindowMenuHandler {
     /**
      * Empties the exported segments.
      */
-    private void flushExportedSegments(){
-        FileUtil.writeScriptFile("", OConsts.SOURCE_EXPORT);                          
-        FileUtil.writeScriptFile("", OConsts.TARGET_EXPORT);                          
+    private void flushExportedSegments() {
+        FileUtil.writeScriptFile("", OConsts.SOURCE_EXPORT);
+        FileUtil.writeScriptFile("", OConsts.TARGET_EXPORT);
     }
+
     /** Quits OmegaT */
     public void projectExitMenuItemActionPerformed() {
         boolean projectModified = false;
@@ -175,8 +176,8 @@ public class MainWindowMenuHandler {
         // RFE 1302358
         // Add Yes/No Warning before OmegaT quits
         if (projectModified || Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT)) {
-            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow, OStrings
-                    .getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
+            if (JOptionPane.YES_OPTION != JOptionPane.showConfirmDialog(mainWindow,
+                    OStrings.getString("MW_QUIT_CONFIRM"), OStrings.getString("CONFIRM_DIALOG_TITLE"),
                     JOptionPane.YES_NO_OPTION)) {
                 return;
             }
@@ -201,16 +202,15 @@ public class MainWindowMenuHandler {
             protected void done() {
                 try {
                     get();
-                    
+
                     MainWindowUI.saveScreenLayout(mainWindow);
-                    
+
                     Preferences.save();
 
                     System.exit(0);
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-                    Core.getMainWindow().displayErrorRB(ex,
-                            "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
             }
         }.execute();
@@ -238,7 +238,7 @@ public class MainWindowMenuHandler {
             Core.getEditor().replaceEditText(tr);
         }
     }
-    
+
     /**
      * replaces entire edited segment text with a the source text of a segment
      * at cursor position
@@ -247,8 +247,7 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        Core.getEditor().replaceEditText(
-                Core.getEditor().getCurrentEntry().getSrcText());
+        Core.getEditor().replaceEditText(Core.getEditor().getCurrentEntry().getSrcText());
     }
 
     /** inserts the source text of a segment at cursor position */
@@ -256,8 +255,7 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        Core.getEditor().insertText(
-                Core.getEditor().getCurrentEntry().getSrcText());
+        Core.getEditor().insertText(Core.getEditor().getCurrentEntry().getSrcText());
     }
 
     public void editExportSelectionMenuItemActionPerformed() {
@@ -277,7 +275,7 @@ public class MainWindowMenuHandler {
 
         FileUtil.writeScriptFile(selection, OConsts.SELECTION_EXPORT);
     }
-    
+
     public void editFindInProjectMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded())
             return;
@@ -350,100 +348,102 @@ public class MainWindowMenuHandler {
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public void gotoSegmentMenuItemActionPerformed() {
-            // Create a dialog for input
-            final JOptionPane input = new JOptionPane(OStrings.getString("MW_PROMPT_SEG_NR_MSG"),
-                    JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_CANCEL_OPTION); // create
-            input.setWantsInput(true); // make it require input
-            final JDialog dialog = new JDialog(mainWindow, OStrings.getString("MW_PROMPT_SEG_NR_TITLE"), true); // create
-            // dialog
-            dialog.setContentPane(input); // add option pane to dialog
+        // Create a dialog for input
+        final JOptionPane input = new JOptionPane(OStrings.getString("MW_PROMPT_SEG_NR_MSG"),
+                JOptionPane.PLAIN_MESSAGE, JOptionPane.OK_CANCEL_OPTION); // create
+        input.setWantsInput(true); // make it require input
+        final JDialog dialog = new JDialog(mainWindow, OStrings.getString("MW_PROMPT_SEG_NR_TITLE"), true); // create
+        // dialog
+        dialog.setContentPane(input); // add option pane to dialog
 
-            // Make the dialog verify the input
-            input.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-                public void propertyChange(java.beans.PropertyChangeEvent event) {
-                    // Handle the event
-                    if (dialog.isVisible() && (event.getSource() == input)) {
-                        // If user pressed Enter or OK, check the input
-                        String property = event.getPropertyName();
-                        Object value = input.getValue();
+        // Make the dialog verify the input
+        input.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent event) {
+                // Handle the event
+                if (dialog.isVisible() && (event.getSource() == input)) {
+                    // If user pressed Enter or OK, check the input
+                    String property = event.getPropertyName();
+                    Object value = input.getValue();
 
-                        // Don't do the checks if no option has been selected
-                        if (value == JOptionPane.UNINITIALIZED_VALUE)
+                    // Don't do the checks if no option has been selected
+                    if (value == JOptionPane.UNINITIALIZED_VALUE)
+                        return;
+
+                    if (property.equals(JOptionPane.INPUT_VALUE_PROPERTY)
+                            || (property.equals(JOptionPane.VALUE_PROPERTY) && ((Integer) value).intValue() == JOptionPane.OK_OPTION)) {
+                        // Prevent the checks from being done twice
+                        input.setValue(JOptionPane.UNINITIALIZED_VALUE);
+
+                        // Get the value entered by the user
+                        String inputValue = (String) input.getInputValue();
+
+                        int maxNr = Core.getProject().getAllEntries().size();
+
+                        // Check if the user entered a value at all
+                        if ((inputValue == null) || (inputValue.trim().length() == 0)) {
+                            // Show error message
+                            displayErrorMessage(maxNr);
                             return;
-
-                        if (property.equals(JOptionPane.INPUT_VALUE_PROPERTY)
-                                || (property.equals(JOptionPane.VALUE_PROPERTY) && ((Integer) value).intValue() == JOptionPane.OK_OPTION)) {
-                            // Prevent the checks from being done twice
-                            input.setValue(JOptionPane.UNINITIALIZED_VALUE);
-
-                            // Get the value entered by the user
-                            String inputValue = (String) input.getInputValue();
-
-                            int maxNr = Core.getProject().getAllEntries().size();
-                            
-                            // Check if the user entered a value at all
-                            if ((inputValue == null) || (inputValue.trim().length() == 0)) {
-                                // Show error message
-                                displayErrorMessage(maxNr);
-                                return;
-                            }
-
-                            // Check if the user really entered a number
-                            int segmentNr = -1;
-                            try {
-                                // Just parse it. If parsed, it's a number.
-                                segmentNr = Integer.parseInt(inputValue);
-                            } catch (NumberFormatException e) {
-                                // If the exception is thrown, the user didn't
-                                // enter a number
-                                // Show error message
-                                displayErrorMessage(maxNr);
-                                return;
-                            }
-
-                            // Check if the segment number is within bounds
-                            if (segmentNr < 1 || segmentNr > maxNr) {
-                                // Tell the user he has to enter a number within
-                                // certain bounds
-                                displayErrorMessage(maxNr);
-                                return;
-                            }
                         }
 
-                        // If we're here, the user has either pressed
-                        // Cancel/Esc,
-                        // or has entered a valid number. In all cases, close
-                        // the dialog.
-                        dialog.setVisible(false);
+                        // Check if the user really entered a number
+                        int segmentNr = -1;
+                        try {
+                            // Just parse it. If parsed, it's a number.
+                            segmentNr = Integer.parseInt(inputValue);
+                        } catch (NumberFormatException e) {
+                            // If the exception is thrown, the user didn't
+                            // enter a number
+                            // Show error message
+                            displayErrorMessage(maxNr);
+                            return;
+                        }
+
+                        // Check if the segment number is within bounds
+                        if (segmentNr < 1 || segmentNr > maxNr) {
+                            // Tell the user he has to enter a number within
+                            // certain bounds
+                            displayErrorMessage(maxNr);
+                            return;
+                        }
                     }
-                }
 
-                private void displayErrorMessage(int maxNr) {
-                    JOptionPane.showMessageDialog(dialog, StaticUtils
-                                .format(OStrings
-                                        .getString("MW_SEGMENT_NUMBER_ERROR"),
-                                        maxNr), OStrings.getString("TF_ERROR"),
-                                JOptionPane.ERROR_MESSAGE);
-                }
-            });
-
-            // Show the input dialog
-            dialog.pack(); // make it look good
-            dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame()); // center it on the main
-            // window
-            dialog.setVisible(true); // show it
-
-            // Get the input value, if any
-            Object inputValue = input.getInputValue();
-            if ((inputValue != null) && !inputValue.equals(JOptionPane.UNINITIALIZED_VALUE)) {
-                // Go to the segment the user requested
-                try {
-                    Core.getEditor().gotoEntry(Integer.parseInt((String) inputValue));
-                } catch (ClassCastException e) {
-                    // Shouldn't happen, but still... Just eat silently.
-                } catch (NumberFormatException e) {
+                    // If we're here, the user has either pressed
+                    // Cancel/Esc,
+                    // or has entered a valid number. In all cases, close
+                    // the dialog.
+                    dialog.setVisible(false);
                 }
             }
+
+            private void displayErrorMessage(int maxNr) {
+                JOptionPane.showMessageDialog(dialog,
+                        StaticUtils.format(OStrings.getString("MW_SEGMENT_NUMBER_ERROR"), maxNr),
+                        OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        // Show the input dialog
+        dialog.pack(); // make it look good
+        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame()); // center
+                                                                                  // it
+                                                                                  // on
+                                                                                  // the
+                                                                                  // main
+        // window
+        dialog.setVisible(true); // show it
+
+        // Get the input value, if any
+        Object inputValue = input.getInputValue();
+        if ((inputValue != null) && !inputValue.equals(JOptionPane.UNINITIALIZED_VALUE)) {
+            // Go to the segment the user requested
+            try {
+                Core.getEditor().gotoEntry(Integer.parseInt((String) inputValue));
+            } catch (ClassCastException e) {
+                // Shouldn't happen, but still... Just eat silently.
+            } catch (NumberFormatException e) {
+            }
+        }
     }
 
     public void gotoHistoryBackMenuItemActionPerformed() {
@@ -455,61 +455,75 @@ public class MainWindowMenuHandler {
     }
 
     public void viewMarkTranslatedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkTranslated(mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings()
+                .setMarkTranslated(mainWindow.menu.viewMarkTranslatedSegmentsCheckBoxMenuItem.isSelected());
     }
 
     public void viewMarkUntranslatedSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkUntranslated(mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
+        Core.getEditor()
+                .getSettings()
+                .setMarkUntranslated(
+                        mainWindow.menu.viewMarkUntranslatedSegmentsCheckBoxMenuItem.isSelected());
     }
 
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setDisplaySegmentSources(mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
-    }
-    public void viewMarkNonUniqueSegmentsCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setMarkNonUniqueSegments(mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
-    }
-    public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);
-    }
-    public void viewDisplayModificationInfoSelectedRadioButtonMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED);
-    }
-    public void viewDisplayModificationInfoAllRadioButtonMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL);
+        Core.getEditor()
+                .getSettings()
+                .setDisplaySegmentSources(
+                        mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
     }
 
+    public void viewMarkNonUniqueSegmentsCheckBoxMenuItemActionPerformed() {
+        Core.getEditor()
+                .getSettings()
+                .setMarkNonUniqueSegments(
+                        mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
+    }
+
+    public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
+        Core.getEditor().getSettings()
+                .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);
+    }
+
+    public void viewDisplayModificationInfoSelectedRadioButtonMenuItemActionPerformed() {
+        Core.getEditor().getSettings()
+                .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED);
+    }
+
+    public void viewDisplayModificationInfoAllRadioButtonMenuItemActionPerformed() {
+        Core.getEditor().getSettings()
+                .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL);
+    }
 
     public void toolsValidateTagsMenuItemActionPerformed() {
         Core.getTagValidation().validateTags();
     }
 
     /**
-     * Identify all the tags in the source text and automatically inserts
-     * them into the target text.
+     * Identify all the tags in the source text and automatically inserts them
+     * into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
-         
+
         String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
         String tagString = StaticUtils.buildPaintTagList(sourceText);
 
-        if(!tagString.equals("")) {
+        if (!tagString.equals("")) {
             Core.getEditor().insertText(tagString);
         }
     }
-    
+
     public void toolsShowStatisticsStandardMenuItemActionPerformed() {
-        new StatisticsWindow(StatisticsWindow.STAT_TYPE.STANDARD)
-                .setVisible(true);
+        new StatisticsWindow(StatisticsWindow.STAT_TYPE.STANDARD).setVisible(true);
     }
 
     public void toolsShowStatisticsMatchesMenuItemActionPerformed() {
-        new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES)
-                .setVisible(true);
+        new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES).setVisible(true);
     }
 
     public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {
-        Core.getEditor().getSettings().setUseTabForAdvance(
-                mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem.isSelected());
+        Core.getEditor().getSettings()
+                .setUseTabForAdvance(mainWindow.menu.optionsTabAdvanceCheckBoxMenuItem.isSelected());
     }
 
     public void optionsAlwaysConfirmQuitCheckBoxMenuItemActionPerformed() {
@@ -532,10 +546,11 @@ public class MainWindowMenuHandler {
      * text (in main window) and for match and glossary windows.
      */
     public void optionsFontSelectionMenuItemActionPerformed() {
-        FontSelectionDialog dlg = new FontSelectionDialog(Core.getMainWindow().getApplicationFrame(), Core.getMainWindow().getApplicationFont());
+        FontSelectionDialog dlg = new FontSelectionDialog(Core.getMainWindow().getApplicationFrame(), Core
+                .getMainWindow().getApplicationFont());
         dlg.setVisible(true);
         if (dlg.getReturnStatus() == FontSelectionDialog.RET_OK_CHANGED) {
-            mainWindow.setApplicationFont(dlg.getSelectedFont());           
+            mainWindow.setApplicationFont(dlg.getSelectedFont());
         }
     }
 
@@ -553,8 +568,8 @@ public class MainWindowMenuHandler {
 
             if (Core.getProject().isProjectLoaded()) {
                 // asking to reload a project
-                int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
-                        .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+                int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
+                        OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
                 if (res == JOptionPane.YES_OPTION)
                     ProjectUICommands.projectReload();
             }
@@ -569,10 +584,11 @@ public class MainWindowMenuHandler {
         SegmentationCustomizer segment_window = new SegmentationCustomizer(mainWindow);
         segment_window.setVisible(true);
 
-        if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK && Core.getProject().isProjectLoaded()) {
+        if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK
+                && Core.getProject().isProjectLoaded()) {
             // asking to reload a project
-            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"), OStrings
-                    .getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
+                    OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
             if (res == JOptionPane.YES_OPTION)
                 ProjectUICommands.projectReload();
         }
@@ -583,19 +599,15 @@ public class MainWindowMenuHandler {
      */
     public void optionsSpellCheckMenuItemActionPerformed() {
         Language currentLanguage = null;
-        if (Core.getProject().isProjectLoaded()){              
-            currentLanguage = 
-                Core.getProject().getProjectProperties().getTargetLanguage();
+        if (Core.getProject().isProjectLoaded()) {
+            currentLanguage = Core.getProject().getProjectProperties().getTargetLanguage();
         } else {
-            currentLanguage = 
-                new Language(
-                    Preferences.getPreference(Preferences.TARGET_LOCALE));
+            currentLanguage = new Language(Preferences.getPreference(Preferences.TARGET_LOCALE));
         }
-            SpellcheckerConfigurationDialog sd = 
-                new SpellcheckerConfigurationDialog(mainWindow, currentLanguage);
+        SpellcheckerConfigurationDialog sd = new SpellcheckerConfigurationDialog(mainWindow, currentLanguage);
 
         sd.setVisible(true);
-        
+
         if (sd.getReturnStatus() == SpellcheckerConfigurationDialog.RET_OK) {
             boolean isNeedToSpell = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
             if (isNeedToSpell && Core.getProject().isProjectLoaded()) {
@@ -622,33 +634,29 @@ public class MainWindowMenuHandler {
     public void optionsTagValidationMenuItemActionPerformed() {
         new TagValidationOptionsDialog(mainWindow).setVisible(true);
     }
-    
+
     /**
-     * Displays the team options dialog to allow customizing the diverse
-     * team options.
+     * Displays the team options dialog to allow customizing the diverse team
+     * options.
      */
     public void optionsTeamMenuItemActionPerformed() {
         new TeamOptionsDialog(mainWindow).setVisible(true);
     }
 
     /**
-     * Displays the external TMX dialog to allow customizing the external
-     * TMX options.
+     * Displays the external TMX dialog to allow customizing the external TMX
+     * options.
      */
     public void optionsExtTMXMenuItemActionPerformed() {
-        
-        ExternalTMXMatchesDialog externalTMXOptions =
-                new ExternalTMXMatchesDialog(mainWindow);
+
+        ExternalTMXMatchesDialog externalTMXOptions = new ExternalTMXMatchesDialog(mainWindow);
         externalTMXOptions.setVisible(true);
 
-        if (externalTMXOptions.getReturnStatus() == 
-                ExternalTMXMatchesDialog.RET_OK &&
-                Core.getProject().isProjectLoaded()) {
+        if (externalTMXOptions.getReturnStatus() == ExternalTMXMatchesDialog.RET_OK
+                && Core.getProject().isProjectLoaded()) {
             // asking to reload a project
-            int res = JOptionPane.showConfirmDialog
-                    (mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
-                    OStrings.getString("MW_REOPEN_TITLE"),
-                    JOptionPane.YES_NO_OPTION);
+            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
+                    OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
             if (res == JOptionPane.YES_OPTION)
                 ProjectUICommands.projectReload();
         }

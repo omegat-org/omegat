@@ -217,8 +217,7 @@ public interface IEditor {
      * @param markerClassName
      *            marker's class name
      */
-    void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks,
-            String markerClassName);
+    void markActiveEntrySource(SourceTextEntry requiredActiveEntry, List<Mark> marks, String markerClassName);
 
     /**
      * Register constructor of popup menu.
@@ -228,9 +227,8 @@ public interface IEditor {
      * @param constructor
      *            constructor instance
      */
-    void registerPopupMenuConstructors(int priority,
-            IPopupMenuConstructor constructor);
-    
+    void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor);
+
     /**
      * Calls specified marker for reprocess all entries.
      */
@@ -239,7 +237,9 @@ public interface IEditor {
     /**
      * Adds a filter to this editor. The filter causes only the selected entries
      * to be shown in the editor.
-     * @param entryList List of project-wide entry numbers
+     * 
+     * @param entryList
+     *            List of project-wide entry numbers
      */
     void addFilter(List<Integer> entryList);
 

@@ -51,8 +51,7 @@ public class LingvoDSL implements IDictionary {
 
     public Map<String, Object> readHeader() throws Exception {
         Map<String, Object> result = new HashMap<String, Object>();
-        BufferedReader rd = new BufferedReader(new InputStreamReader(
-                new FileInputStream(file), CHARSET));
+        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file), CHARSET));
         String s;
         StringBuilder word = new StringBuilder();
         StringBuilder trans = new StringBuilder();

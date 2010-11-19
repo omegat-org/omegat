@@ -49,19 +49,14 @@ import org.omegat.util.gui.TextUtil;
  */
 public class CalcMatchStatistics extends LongProcessThread {
 
-    private String[] header = new String[] { "",
-            OStrings.getString("CT_STATS_Segments"),
-            OStrings.getString("CT_STATS_Words"),
-            OStrings.getString("CT_STATS_Characters_NOSP"),
+    private String[] header = new String[] { "", OStrings.getString("CT_STATS_Segments"),
+            OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
 
-    private String[] rows = new String[] {
-            OStrings.getString("CT_STATSMATCH_RowRepetitions"),
+    private String[] rows = new String[] { OStrings.getString("CT_STATSMATCH_RowRepetitions"),
             OStrings.getString("CT_STATSMATCH_RowExactMatch"),
-            OStrings.getString("CT_STATSMATCH_RowMatch95"),
-            OStrings.getString("CT_STATSMATCH_RowMatch85"),
-            OStrings.getString("CT_STATSMATCH_RowMatch75"),
-            OStrings.getString("CT_STATSMATCH_RowMatch50"),
+            OStrings.getString("CT_STATSMATCH_RowMatch95"), OStrings.getString("CT_STATSMATCH_RowMatch85"),
+            OStrings.getString("CT_STATSMATCH_RowMatch75"), OStrings.getString("CT_STATSMATCH_RowMatch50"),
             OStrings.getString("CT_STATSMATCH_RowNoMatch") };
     private boolean[] align = new boolean[] { false, true, true, true, true };
 
@@ -89,15 +84,14 @@ public class CalcMatchStatistics extends LongProcessThread {
         int percent = 0;
         for (int i = 0; i < allEntries.size(); i++) {
             SourceTextEntry ste = allEntries.get(i);
-            int p = Statistics.getMaxSimilarityPercent(ste, distanceCalculator,
-                    allEntries, tokensCache, alreadyProcessed);
+            int p = Statistics.getMaxSimilarityPercent(ste, distanceCalculator, allEntries, tokensCache,
+                    alreadyProcessed);
             int r = getRowByPercent(p);
 
             result[r].segments++;
             result[r].words += Statistics.numberOfWords(ste.getSrcText());
             String charWithoutTags = StaticUtils.stripTags(ste.getSrcText());
-            result[r].charsWithoutSpaces += Statistics
-                    .numberOfCharactersWithoutSpaces(charWithoutTags);
+            result[r].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(charWithoutTags);
             result[r].charsWithSpaces += charWithoutTags.length();
 
             if (isStopped) {
@@ -115,8 +109,7 @@ public class CalcMatchStatistics extends LongProcessThread {
 
         callback.displayData(outText);
 
-        String fn = Core.getProject().getProjectProperties()
-                .getProjectInternal()
+        String fn = Core.getProject().getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_FILENAME;
         Statistics.writeStat(fn, outText);
     }

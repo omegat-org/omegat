@@ -87,40 +87,39 @@ public class FileUtil {
     /**
      * Writes a text into a UTF-8 text file in the script directory.
      * 
-     * @param textToWrite The text to write in the file
-     * @param fileName The file name without path
+     * @param textToWrite
+     *            The text to write in the file
+     * @param fileName
+     *            The file name without path
      */
     public static void writeScriptFile(String textToWrite, String fileName) {
-        
+
         BufferedWriter bw = null;
         try {
             fileName = StaticUtils.getScriptDir() + fileName;
-            textToWrite = textToWrite.
-                    replaceAll("\n", System.getProperty("line.separator"));
-            bw = new BufferedWriter(new OutputStreamWriter
-                                 (new FileOutputStream(fileName),OConsts.UTF8));
+            textToWrite = textToWrite.replaceAll("\n", System.getProperty("line.separator"));
+            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName), OConsts.UTF8));
             bw.write(textToWrite);
-        }
-        catch (Exception ex){
+        } catch (Exception ex) {
             // Eat exception silently
         } finally {
-              try {
-                    if (bw != null)
-                        bw.close();
-              } catch (IOException ex) {
-                 ex.printStackTrace();
-              }
+            try {
+                if (bw != null)
+                    bw.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
         }
-        
+
     }
 
     /**
      * Find files in subdirectories.
      * 
      * @param dir
-     *                directory to start find
+     *            directory to start find
      * @param filter
-     *                filter for found files
+     *            filter for found files
      * @return list of filtered found files
      */
     public static List<File> findFiles(final File dir, final FileFilter filter) {
@@ -133,14 +132,13 @@ public class FileUtil {
      * Internal find method, which calls himself recursively.
      * 
      * @param dir
-     *                directory to start find
+     *            directory to start find
      * @param filter
-     *                filter for found files
+     *            filter for found files
      * @param result
-     *                list of filtered found files
+     *            list of filtered found files
      */
-    private static void findFiles(final File dir, final FileFilter filter,
-            final List<File> result) {
+    private static void findFiles(final File dir, final FileFilter filter, final List<File> result) {
         File[] list = dir.listFiles();
         if (list != null) {
             for (File f : list) {

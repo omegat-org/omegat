@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util;
 
@@ -35,13 +35,12 @@ import java.util.ResourceBundle;
  * <p>
  * Please don't add any new strings here, use <code>getString</code> method.
  * This class still has so many strings for legacy reasons only.
- *
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
-public class OStrings
-{
+public class OStrings {
 
     /** Resource bundle that contains all the strings */
     private static ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");
@@ -52,14 +51,14 @@ public class OStrings
     public static ResourceBundle getResourceBundle() {
         return bundle;
     }
-    
+
     /**
-      * Loads resources from the specified file.
-      * If the file cannot be loaded, resources are reverted to the default locale.
-      * Useful when testing localisations outside the jar file.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Loads resources from the specified file. If the file cannot be loaded,
+     * resources are reverted to the default locale. Useful when testing
+     * localisations outside the jar file.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static void loadBundle(String filename) {
         boolean loaded = false;
         try {
@@ -68,70 +67,65 @@ public class OStrings
             bundle = new PropertyResourceBundle(in);
             loaded = true;
             in.close();
-        }
-        catch (FileNotFoundException exception) {
-            System.err.println("Resource bundle file not found: " + filename); 
-        }
-        catch (IOException exception) {
-            System.err.println("Error while reading resource bundle file: " + filename); 
+        } catch (FileNotFoundException exception) {
+            System.err.println("Resource bundle file not found: " + filename);
+        } catch (IOException exception) {
+            System.err.println("Error while reading resource bundle file: " + filename);
         }
 
         // Check if the resource bundle has been successfully
         // loaded, and if not, revert to the default
         if (!loaded) {
-            System.err.println("Reverting to resource bundle for the default locale"); 
+            System.err.println("Reverting to resource bundle for the default locale");
             bundle = ResourceBundle.getBundle("org/omegat/Bundle");
         }
     }
 
     /** Returns a localized String for a key */
-    public static String getString(String key)
-    {
+    public static String getString(String key) {
         return bundle.getString(key);
     }
 
-    private static String __VERSION_KEY = "version";                            
-    private static String __UPDATE_KEY  = "update";                             
+    private static String __VERSION_KEY = "version";
+    private static String __UPDATE_KEY = "update";
 
     /** Just a version, e.g. "1.6" */
-    public static final String VERSION =
-            ResourceBundle.getBundle("org/omegat/Version").getString(__VERSION_KEY);
+    public static final String VERSION = ResourceBundle.getBundle("org/omegat/Version").getString(
+            __VERSION_KEY);
 
     /** Update number, e.g. 2, for 1.6.0_02 */
-    public static final String UPDATE =
-            ResourceBundle.getBundle("org/omegat/Version").getString(__UPDATE_KEY);
+    public static final String UPDATE = ResourceBundle.getBundle("org/omegat/Version")
+            .getString(__UPDATE_KEY);
 
     // NOTE: segment start is assumed to contain "0000" string to overwrite
-    //	with entry number.  If zeros not detected, entry number will not be
-    //	displayed
+    // with entry number. If zeros not detected, entry number will not be
+    // displayed
 
     /**
-      * Returns the OmegaT version for display (includes the application name)
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Returns the OmegaT version for display (includes the application name)
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static String getDisplayVersion() {
-        return ((UPDATE != null) && !UPDATE.equals("0"))
-                   ? StaticUtils.format(getString("version-update-template"),
-                                        new Object[] {VERSION, UPDATE})
-                   : StaticUtils.format(getString("version-template"),
-                                        new Object[] {VERSION, UPDATE});
+        return ((UPDATE != null) && !UPDATE.equals("0")) ? StaticUtils.format(
+                getString("version-update-template"), new Object[] { VERSION, UPDATE }) : StaticUtils.format(
+                getString("version-template"), new Object[] { VERSION, UPDATE });
     }
 
     /**
-      * Returns the textual marker for the start of the current segment.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Returns the textual marker for the start of the current segment.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static String getSegmentStartMarker() {
         return "\n" + getString("TF_CUR_SEGMENT_START");
     }
 
     /**
-      * Returns the textual marker for the end of the current segment.
-      *
-      * @author Henry Pijffers (henry.pijffers@saxnot.com)
-      */
+     * Returns the textual marker for the end of the current segment.
+     * 
+     * @author Henry Pijffers (henry.pijffers@saxnot.com)
+     */
     public static String getSegmentEndMarker() {
         return " " + getString("TF_CUR_SEGMENT_END");
     }

@@ -45,7 +45,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 
 /**
  * This is a Glossary pane that displays glossary entries.
- *
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Didier Briel
@@ -55,7 +55,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     /** Glossary manager instance. */
     protected final GlossaryManager manager = new GlossaryManager(this);
-    
+
     /**
      * Currently processed entry. Used to detect if user moved into new entry.
      * In this case, new find should be started.
@@ -63,8 +63,8 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     protected StringEntry processedEntry;
 
     /**
-    * Holds the current GlossaryEntries for the TransTips
-    */
+     * Holds the current GlossaryEntries for the TransTips
+     */
     protected static List<GlossaryEntry> nowEntries;
 
     /** Creates new form MatchGlossaryPane */
@@ -73,13 +73,11 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
 
         setEditable(false);
 
-        String title = OStrings
-                .getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
-        Core.getMainWindow().addDockable(
-                new DockableScrollPane("GLOSSARY", title, this, true));
+        String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
+        Core.getMainWindow().addDockable(new DockableScrollPane("GLOSSARY", title, this, true));
 
         addMouseListener(mouseListener);
-        
+
         Core.getEditor().registerPopupMenuConstructors(200, new TransTipsPopup());
     }
 
@@ -97,8 +95,7 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {
-        new FindGlossaryThread(GlossaryTextArea.this, newEntry, manager)
-                .start();
+        new FindGlossaryThread(GlossaryTextArea.this, newEntry, manager).start();
     }
 
     /**
@@ -117,19 +114,20 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
      */
     protected void setFoundResult(SourceTextEntry en, List<GlossaryEntry> entries) {
         UIThreadsUtil.mustBeSwingThread();
-        
+
         if (entries == null) {
             nowEntries = new ArrayList<GlossaryEntry>();
             setText("");
             return;
         }
 
-        // If the TransTips is enabled then underline all the matched glossary entries
-        if(Preferences.isPreference(Preferences.TRANSTIPS)) {
+        // If the TransTips is enabled then underline all the matched glossary
+        // entries
+        if (Preferences.isPreference(Preferences.TRANSTIPS)) {
             // TODO move marks construction into search thread
             highlightTransTips(en, entries);
         }
-        
+
         nowEntries = entries;
 
         StringBuffer buf = new StringBuffer();
@@ -147,16 +145,14 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
         setText("");
     }
 
-    /**{@inheritDoc}*/
-    public void highlightTransTips(SourceTextEntry en, List<GlossaryEntry> entries)
-    {
-        if(!entries.isEmpty())
-        {
+    /** {@inheritDoc} */
+    public void highlightTransTips(SourceTextEntry en, List<GlossaryEntry> entries) {
+        if (!entries.isEmpty()) {
             final List<Mark> marks = new ArrayList<Mark>();
             // Get the index of the current segment in the whole document
             String sourceText = en.getSrcText();
             sourceText = sourceText.toLowerCase();
-            
+
             TransTips.Search callback = new TransTips.Search() {
                 public void found(GlossaryEntry ge, int start, int end) {
                     marks.add(new Mark(Mark.ENTRY_PART.SOURCE, start, end));
@@ -166,22 +162,18 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
             for (GlossaryEntry ent : entries) {
                 TransTips.search(en.getSrcText(), ent, callback);
             }
-            Core.getEditor().markActiveEntrySource(en, marks,
-                    TransTipsMarker.class.getName());
+            Core.getEditor().markActiveEntrySource(en, marks, TransTipsMarker.class.getName());
         }
     }
 
     /**
-     * MouseListener for the GlossaryTextArea
-     * If there is text selected in the Glossary it will be inserted in the Editor
-     * upon a right-click.
+     * MouseListener for the GlossaryTextArea If there is text selected in the
+     * Glossary it will be inserted in the Editor upon a right-click.
      */
-     protected MouseListener mouseListener = new MouseAdapter() {
+    protected MouseListener mouseListener = new MouseAdapter() {
         @Override
-        public void mouseClicked(MouseEvent e)
-        {
-            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3)
-            {
+        public void mouseClicked(MouseEvent e) {
+            if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
                 insertTerm();
             }
         }
@@ -190,12 +182,10 @@ public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
     /**
      * Inserts the selected text into the EditorTextArea
      */
-    private void insertTerm()
-    {
+    private void insertTerm() {
         String selTxt = this.getSelectedText();
-        if(selTxt == null) { /* Just do nothing */}
-        else
-        {
+        if (selTxt == null) { /* Just do nothing */
+        } else {
             Core.getEditor().insertText(selTxt);
         }
     }

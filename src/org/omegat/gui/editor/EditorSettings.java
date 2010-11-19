@@ -54,20 +54,14 @@ public class EditorSettings {
     protected EditorSettings(final EditorController parent) {
         this.parent = parent;
 
-        useTabForAdvance = Preferences
-                .isPreference(Preferences.USE_TAB_TO_ADVANCE);
-        markTranslated = Preferences
-                .isPreference(Preferences.MARK_TRANSLATED_SEGMENTS);
-        markUntranslated = Preferences
-                .isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
-        displaySegmentSources = Preferences
-                .isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
-        markNonUniqueSegments = Preferences
-                .isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
-        displayModificationInfo = Preferences
-                .getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO, DISPLAY_MODIFICATION_INFO_NONE);
-        autoSpellChecking = Preferences
-                .isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
+        useTabForAdvance = Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE);
+        markTranslated = Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS);
+        markUntranslated = Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
+        displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
+        markNonUniqueSegments = Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
+        displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
+                DISPLAY_MODIFICATION_INFO_NONE);
+        autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
     }
 
     public char getAdvancerChar() {
@@ -84,8 +78,7 @@ public class EditorSettings {
 
     public void setUseTabForAdvance(boolean useTabForAdvance) {
         this.useTabForAdvance = useTabForAdvance;
-        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE,
-                useTabForAdvance);
+        Preferences.setPreference(Preferences.USE_TAB_TO_ADVANCE, useTabForAdvance);
     }
 
     public boolean isMarkTranslated() {
@@ -98,8 +91,7 @@ public class EditorSettings {
         parent.commitAndDeactivate();
 
         this.markTranslated = markTranslated;
-        Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS,
-                markTranslated);
+        Preferences.setPreference(Preferences.MARK_TRANSLATED_SEGMENTS, markTranslated);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
@@ -117,8 +109,7 @@ public class EditorSettings {
         parent.commitAndDeactivate();
 
         this.markUntranslated = markUntranslated;
-        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS,
-                markUntranslated);
+        Preferences.setPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS, markUntranslated);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
@@ -130,7 +121,7 @@ public class EditorSettings {
     public boolean isDisplaySegmentSources() {
         return displaySegmentSources;
     }
-    
+
     public boolean isMarkNonUniqueSegments() {
         return markNonUniqueSegments;
     }
@@ -141,23 +132,21 @@ public class EditorSettings {
         parent.commitAndDeactivate();
 
         this.displaySegmentSources = displaySegmentSources;
-        Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
-                displaySegmentSources);
+        Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES, displaySegmentSources);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();
         }
     }
-    
+
     public void setMarkNonUniqueSegments(boolean markNonUniqueSegments) {
         UIThreadsUtil.mustBeSwingThread();
 
         parent.commitAndDeactivate();
 
         this.markNonUniqueSegments = markNonUniqueSegments;
-        Preferences.setPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS,
-                markNonUniqueSegments);
+        Preferences.setPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS, markNonUniqueSegments);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
@@ -165,31 +154,36 @@ public class EditorSettings {
         }
     }
 
-    /** returns the setting for display the modification information or not
-     * Either DISPLAY_MODIFICATION_INFO_NONE, DISPLAY_MODIFICATION_INFO_SELECTED, DISPLAY_MODIFICATION_INFO_ALL */
+    /**
+     * returns the setting for display the modification information or not
+     * Either DISPLAY_MODIFICATION_INFO_NONE,
+     * DISPLAY_MODIFICATION_INFO_SELECTED, DISPLAY_MODIFICATION_INFO_ALL
+     */
     public String getDisplayModificationInfo() {
         return displayModificationInfo;
     }
 
-    /** Sets the setting for display the modification information or not
-     * @param displayModificationInfo Either DISPLAY_MODIFICATION_INFO_NONE
-     * , DISPLAY_MODIFICATION_INFO_SELECTED
-     * , DISPLAY_MODIFICATION_INFO_ALL */
+    /**
+     * Sets the setting for display the modification information or not
+     * 
+     * @param displayModificationInfo
+     *            Either DISPLAY_MODIFICATION_INFO_NONE ,
+     *            DISPLAY_MODIFICATION_INFO_SELECTED ,
+     *            DISPLAY_MODIFICATION_INFO_ALL
+     */
     public void setDisplayModificationInfo(String displayModificationInfo) {
         UIThreadsUtil.mustBeSwingThread();
 
         parent.commitAndDeactivate();
 
         this.displayModificationInfo = displayModificationInfo;
-        Preferences.setPreference(Preferences.DISPLAY_MODIFICATION_INFO,
-                displayModificationInfo);
+        Preferences.setPreference(Preferences.DISPLAY_MODIFICATION_INFO, displayModificationInfo);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
             parent.activateEntry();
         }
     }
-
 
     /** need to check spell or not */
     public boolean isAutoSpellChecking() {
@@ -205,7 +199,7 @@ public class EditorSettings {
         this.autoSpellChecking = autoSpellChecking;
 
         if (Core.getProject().isProjectLoaded()) {
-         //   parent.loadDocument();
+            // parent.loadDocument();
             parent.activateEntry();
             parent.remarkOneMarker(SpellCheckerMarker.class.getName());
         }

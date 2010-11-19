@@ -37,13 +37,14 @@ public interface IMatcher {
      * Must be called from UI thread only.
      */
     NearString getActiveMatch();
-    
+
     /**
      * Set specified mathc as active.
      * 
-     * @param index new active match
+     * @param index
+     *            new active match
      * 
-     * Must be called from UI thread only.
+     *            Must be called from UI thread only.
      */
     void setActiveMatch(int index);
 }

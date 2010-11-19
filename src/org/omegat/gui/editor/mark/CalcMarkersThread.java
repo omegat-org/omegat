@@ -51,8 +51,7 @@ public class CalcMarkersThread extends Thread {
     private final int markerIndex;
     private final IMarker marker;
 
-    public CalcMarkersThread(MarkerController mc, IMarker marker,
-            int markerIndex) {
+    public CalcMarkersThread(MarkerController mc, IMarker marker, int markerIndex) {
         this.mController = mc;
         this.markerIndex = markerIndex;
         this.marker = marker;
@@ -71,8 +70,7 @@ public class CalcMarkersThread extends Thread {
         List<EntryMarks> vers = new ArrayList<EntryMarks>(entryBuilders.length);
 
         for (int i = 0; i < entryBuilders.length; i++) {
-            EntryMarks v = new EntryMarks(i, entryBuilders[i], entryBuilders[i]
-                    .getDisplayVersion());
+            EntryMarks v = new EntryMarks(i, entryBuilders[i], entryBuilders[i].getDisplayVersion());
             vers.add(v);
         }
 
@@ -83,8 +81,7 @@ public class CalcMarkersThread extends Thread {
     }
 
     public void add(int entryIndex, SegmentBuilder entryBuilder) {
-        EntryMarks v = new EntryMarks(entryIndex, entryBuilder, entryBuilder
-                .getDisplayVersion());
+        EntryMarks v = new EntryMarks(entryIndex, entryBuilder, entryBuilder.getDisplayVersion());
 
         synchronized (forCheck) {
             forCheck.add(v);
@@ -96,8 +93,7 @@ public class CalcMarkersThread extends Thread {
     public void run() {
         Thread.currentThread().setPriority(Thread.MIN_PRIORITY);
         Thread.currentThread().setName(
-                this.getClass().getSimpleName() + " - "
-                        + marker.getClass().getSimpleName());
+                this.getClass().getSimpleName() + " - " + marker.getClass().getSimpleName());
 
         try {
             while (true) {
@@ -121,8 +117,7 @@ public class CalcMarkersThread extends Thread {
                         // already changed
                         continue;
                     }
-                    ev.result = marker.getMarksForEntry(ev.sourceText,
-                            ev.translationText, ev.isActive);
+                    ev.result = marker.getMarksForEntry(ev.sourceText, ev.translationText, ev.isActive);
                     if (ev.result == null) {
                         // null returned - not need to change anything
                         continue;
@@ -160,8 +155,7 @@ public class CalcMarkersThread extends Thread {
                         return;
                     }
                     if (!mController.isEntryChanged(ev)) {
-                        mController.setEntryMarks(ev.entryIndex, ev.builder,
-                                ev.result, markerIndex);
+                        mController.setEntryMarks(ev.entryIndex, ev.builder, ev.result, markerIndex);
                     }
                 }
             }

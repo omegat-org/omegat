@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util;
 
@@ -47,99 +47,98 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 
 /**
- * Class that loads TMX (Translation Memory Exchange) files (any version, we're cool).
+ * Class that loads TMX (Translation Memory Exchange) files (any version, we're
+ * cool).
  * <p>
- * TMX reader loads all TUVs in a TU first, then tries to decide 
- * what's source and what's target, by first matching against the full 
- * source/target language string, then against language codes only. 
- * This improves TMX handling in a number of ways:
+ * TMX reader loads all TUVs in a TU first, then tries to decide what's source
+ * and what's target, by first matching against the full source/target language
+ * string, then against language codes only. This improves TMX handling in a
+ * number of ways:
  * <ol>
  * <li>We now support multiple TUVs in a TU, which makes us more TMX compliant.
  * <li>If an exact language match cannot be found, the best alternative is
- *     loaded, if present. This means that if you set the source or target
- *     language to EN-US, and all you have is EN-GB, EN-GB will be loaded. 
- *     Or if you've set it to EN, and you have both, the first of either will 
- *     be loaded.
+ * loaded, if present. This means that if you set the source or target language
+ * to EN-US, and all you have is EN-GB, EN-GB will be loaded. Or if you've set
+ * it to EN, and you have both, the first of either will be loaded.
  * </ol>
- *
+ * 
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
  */
-public class TMXReader extends org.xml.sax.helpers.DefaultHandler 
-{
-    /** 
-      * Creates a new TMX Reader.
-      * 
-      * @param encoding -- encoding to allow specification of alternative encodings (i.e. wordfast)
-      */
-    public TMXReader(String   encoding,
-                     Language sourceLanguage,
-                     Language targetLanguage,
-                     boolean isSegmentingEnabled) 
-    {
-        m_encoding          = encoding;
-        m_srcList           = new ArrayList<String>();
-        m_tarList           = new ArrayList<String>();
-        m_tarChangeIdList   = new ArrayList<String>(); //list of changeIds (authors) for the target segments
-        m_tarChangeDateList = new ArrayList<Long>(); ////list of change dates for the target segments
-        m_properties        = new HashMap<String, String>();
-        m_variantLanguages  = new HashSet<String>();
+public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
+    /**
+     * Creates a new TMX Reader.
+     * 
+     * @param encoding
+     *            -- encoding to allow specification of alternative encodings
+     *            (i.e. wordfast)
+     */
+    public TMXReader(String encoding, Language sourceLanguage, Language targetLanguage,
+            boolean isSegmentingEnabled) {
+        m_encoding = encoding;
+        m_srcList = new ArrayList<String>();
+        m_tarList = new ArrayList<String>();
+        m_tarChangeIdList = new ArrayList<String>(); // list of changeIds
+                                                     // (authors) for the target
+                                                     // segments
+        m_tarChangeDateList = new ArrayList<Long>(); // //list of change dates
+                                                     // for the target segments
+        m_properties = new HashMap<String, String>();
+        m_variantLanguages = new HashSet<String>();
         this.sourceLang = sourceLanguage;
         this.targetLang = targetLanguage;
         this.sourceLanguage = sourceLanguage.getLanguage();
         this.targetLanguage = targetLanguage.getLanguage();
         this.isSegmentingEnabled = isSegmentingEnabled;
     }
-    
+
     /** Returns the source language */
-    public String getSourceLanguage() 
-    {
+    public String getSourceLanguage() {
         return sourceLanguage;
     }
-    
+
     /** Returns the target language */
-    public String getTargetLanguage() 
-    {
+    public String getTargetLanguage() {
         return targetLanguage;
     }
-    
+
     /** Returns the number of segments */
-    public int numSegments() 
-    {
+    public int numSegments() {
         return m_srcList.size();
     }
-    
+
     /** Returns an original text of a source segment #n */
-    public String getSourceSegment(int n) 
-    {
+    public String getSourceSegment(int n) {
         if (n < 0 || n >= numSegments())
             return new String();
         else
             return m_srcList.get(n);
     }
-    
+
     /** Returns a translation of a target segment #n */
-    public String getTargetSegment(int n) 
-    {
+    public String getTargetSegment(int n) {
         if (n < 0 || n >= numSegments())
             return new String();
         else
             return m_tarList.get(n);
     }
+
     /** Returns changeId (author) of target segment #n */
-    public String getTargetChangeId(int n) 
-    {
+    public String getTargetChangeId(int n) {
         if (n < 0 || n >= numSegments())
             return null;
         else
             return m_tarChangeIdList.get(n);
     }
-    /** Returns changeDate (unix timestamp) of target segment #n. Returns 0 if not set or #n invalid. */
-    public long getTargetChangeDate(int n) 
-    {
+
+    /**
+     * Returns changeDate (unix timestamp) of target segment #n. Returns 0 if
+     * not set or #n invalid.
+     */
+    public long getTargetChangeDate(int n) {
         if (n < 0 || n >= numSegments())
             return 0;
         else
@@ -148,114 +147,114 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
     private String creationtool = null;
     /** Creation Tool attribute value of OmegaT TMXs: "OmegaT" */
-    public static final String CT_OMEGAT = "OmegaT";                            
+    public static final String CT_OMEGAT = "OmegaT";
+
     /** Returns Creation Tool attribute of TMX file */
-    public String getCreationTool() 
-    {
+    public String getCreationTool() {
         return creationtool;
     }
-    
+
     private String creationtoolversion = null;
     /** "1" for OmegaT 1.4.5 and earlier (Creation Tool Version attribute). */
-    public static final String CTV_OMEGAT_1 = "1";                              
-    /** "1.6" for OmegaT 1.6 RC3 to 1.6.0 RC11 (Creation Tool Version attribute). Pretty misleading. */
-    public static final String CTV_OMEGAT_1_6_RC3_RC11 = "1.6";                 
-    /** "1.6 RC12" for OmegaT 1.6 RC12 and later RCs (Creation Tool Version attribute). */
-    public static final String CTV_OMEGAT_1_6_RC12 = "1.6 RC12";                
+    public static final String CTV_OMEGAT_1 = "1";
+    /**
+     * "1.6" for OmegaT 1.6 RC3 to 1.6.0 RC11 (Creation Tool Version attribute).
+     * Pretty misleading.
+     */
+    public static final String CTV_OMEGAT_1_6_RC3_RC11 = "1.6";
+    /**
+     * "1.6 RC12" for OmegaT 1.6 RC12 and later RCs (Creation Tool Version
+     * attribute).
+     */
+    public static final String CTV_OMEGAT_1_6_RC12 = "1.6 RC12";
     /** 1.6.0 for OmegaT 1.6.0-final */
-    public static final String CTV_OMEGAT_1_6_0_FINAL = "1.6.0";                
+    public static final String CTV_OMEGAT_1_6_0_FINAL = "1.6.0";
     /** 1.6.1 for OmegaT 1.6.1 */
-    public static final String CTV_OMEGAT_1_6_1 = "1.6.1"; 
+    public static final String CTV_OMEGAT_1_6_1 = "1.6.1";
     /** Current version */
-    /** This number is not updated anymore. OStrings.VERSION + OStrings.UPDATE
-        is used instead */
-    public static final String CTV_OMEGAT_CURRENT = CTV_OMEGAT_1_6_1;           
+    /**
+     * This number is not updated anymore. OStrings.VERSION + OStrings.UPDATE is
+     * used instead
+     */
+    public static final String CTV_OMEGAT_CURRENT = CTV_OMEGAT_1_6_1;
+
     /** Returns Creation Tool attribute of TMX file */
-    public String getCreationToolVersion() 
-    {
+    public String getCreationToolVersion() {
         return creationtoolversion;
     }
 
     /**
-      * Retrieves the value for the specified property.
-      *
-      * Properties can be specified in the TMX header,
-      * please refer to the TMX specification for more information.
-      *
-      * @param  name - The name of the property to retrieve the value for
-      * @return The value of the specified property, or null if the property is not present
-      */
+     * Retrieves the value for the specified property.
+     * 
+     * Properties can be specified in the TMX header, please refer to the TMX
+     * specification for more information.
+     * 
+     * @param name
+     *            - The name of the property to retrieve the value for
+     * @return The value of the specified property, or null if the property is
+     *         not present
+     */
     public String getProperty(String name) {
         return m_properties.get(name);
     }
-    
-    ///////////////////////////////////////////////////////////////////////////
+
+    // /////////////////////////////////////////////////////////////////////////
     // TMX Upgrades between OmegaT versions
-    
+
     boolean upgradeCheckComplete = false;
     boolean upgrade14X = false;
     boolean upgradeSentSeg = false;
-    
-    /** 
-     * Checks whether any compatibility upgrades are necessary for 
+
+    /**
+     * Checks whether any compatibility upgrades are necessary for
      * OmegaT-generated TMX files.
      */
-    private void checkForUpgrades()
-    {
-        if (!upgradeCheckComplete)
-        {
-            if (getCreationTool()==null || getCreationToolVersion()==null)
+    private void checkForUpgrades() {
+        if (!upgradeCheckComplete) {
+            if (getCreationTool() == null || getCreationToolVersion() == null)
                 return; // we can't check
-            
-            if (CT_OMEGAT.equals(getCreationTool()))
-            {
+
+            if (CT_OMEGAT.equals(getCreationTool())) {
                 upgrade14X = getCreationToolVersion().compareTo(CTV_OMEGAT_1) <= 0;
-                upgradeSentSeg = SEG_PARAGRAPH.equals(getSegType()) && 
-                        isSegmentingEnabled;
+                upgradeSentSeg = SEG_PARAGRAPH.equals(getSegType()) && isSegmentingEnabled;
             }
             upgradeCheckComplete = true;
         }
     }
-    
-    /** 
-     * Do we need to upgrade old TMX files with paragraph segmentation
-     * to new sentence segmentation.
-     * The upgrade simply breaks source and target segments into sentences,
-     * and if there's the same number of segments in target as in source,
-     * several segments are added to memory.
+
+    /**
+     * Do we need to upgrade old TMX files with paragraph segmentation to new
+     * sentence segmentation. The upgrade simply breaks source and target
+     * segments into sentences, and if there's the same number of segments in
+     * target as in source, several segments are added to memory.
      */
-    private boolean isUpgradeSentSeg()
-    {
+    private boolean isUpgradeSentSeg() {
         checkForUpgrades();
         return upgradeSentSeg;
     }
-    
-    /** 
-     * Do we need to upgrade old TMX files from OmegaT 1.4.x series.
-     * The upgrade cannot be done absolutely reliably, but there're some
-     * heuristics there... For example,
-     * the old form can be "Bold&lt;/b1&gt; text here.", and the new form
-     * should be "&lt;b0&gt;Bold&lt;/b0&gt; text here.".
+
+    /**
+     * Do we need to upgrade old TMX files from OmegaT 1.4.x series. The upgrade
+     * cannot be done absolutely reliably, but there're some heuristics there...
+     * For example, the old form can be "Bold&lt;/b1&gt; text here.", and the
+     * new form should be "&lt;b0&gt;Bold&lt;/b0&gt; text here.".
      */
-    private boolean isUpgrade14X()
-    {
+    private boolean isUpgrade14X() {
         checkForUpgrades();
         return upgrade14X;
     }
-    
-    /** 
+
+    /**
      * Upgrades segment if required.
      */
-    private String upgradeSegment(String segment)
-    {
+    private String upgradeSegment(String segment) {
         if (isUpgrade14X()) // if that's 1.4.x, doing both upgrades...
             segment = upgradeOldTagsNumberingAndPairs(segment);
         return segment;
     }
-    
+
     /** Internal class for OmegaT tag */
-    class Tag
-    {
+    class Tag {
         /** is this an ending tag, e.g. &lt;/b4&gt; */
         public boolean end;
         /** name of the tag, e.g. "b" for &lt;/b4&gt; */
@@ -264,70 +263,54 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         public int num;
         /** is this a standalone tag, e.g. &lt;br4/&gt; */
         public boolean alone;
-        
+
         /** Creates a tag */
-        public Tag(boolean end, String name, int num, boolean alone)
-        {
+        public Tag(boolean end, String name, int num, boolean alone) {
             this.end = end;
             this.name = name;
             this.num = num;
             this.alone = alone;
         }
-        
+
         /** String form. */
-        public String toString()
-        {
-            return
-                    "<" +                                                       
-                    (end ? "/" : "") +                                          
-                    name +
-                    num +
-                    (alone ? "/" : "") +                                        
-                    ">";                                                        
+        public String toString() {
+            return "<" + (end ? "/" : "") + name + num + (alone ? "/" : "") + ">";
         }
-        
-        /** 
-         * String form of a paired tag: if this is a start tag,
-         * returns corresponding end tag, if this is an end tag,
-         * returns corresponding start tag, if this is a standalone tag,
-         * returns the same as {@link #toString()}.
+
+        /**
+         * String form of a paired tag: if this is a start tag, returns
+         * corresponding end tag, if this is an end tag, returns corresponding
+         * start tag, if this is a standalone tag, returns the same as
+         * {@link #toString()}.
          */
-        public String toStringPaired()
-        {
+        public String toStringPaired() {
             if (alone)
                 return toString();
             else
-                return
-                        "<" +                                                   
-                        (end ? "" : "/") +                                      
-                        name +
-                        num +
-                        ">";                                                   
+                return "<" + (end ? "" : "/") + name + num + ">";
         }
     }
-    
-    /** 
-     * Upgrades segments of OmegaT's 1.4.x series to new tag numbering,
-     * and to new paired tag policy.
+
+    /**
+     * Upgrades segments of OmegaT's 1.4.x series to new tag numbering, and to
+     * new paired tag policy.
      */
-    private String upgradeOldTagsNumberingAndPairs(String segment)
-    {
+    private String upgradeOldTagsNumberingAndPairs(String segment) {
         if (!PatternConsts.OMEGAT_TAG.matcher(segment).find())
             return segment;
-        
-        try
-        {
+
+        try {
             StringBuffer buf = new StringBuffer(segment);
             Matcher matcher = PatternConsts.OMEGAT_TAG_DECOMPILE.matcher(segment);
 
             int tagstart = matcher.start();
             int tagend = matcher.end();
-            boolean end = matcher.group(1).length()>0;
+            boolean end = matcher.group(1).length() > 0;
             String name = matcher.group(2);
             int num = Integer.parseInt(matcher.group(3));
-            boolean alone = matcher.group(4).length()>0;
+            boolean alone = matcher.group(4).length() > 0;
 
-            if (num==1)
+            if (num == 1)
                 num = 0;
 
             Tag tag = new Tag(end, name, num, alone);
@@ -335,15 +318,12 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             List<Tag> unclosedTags = new ArrayList<Tag>();
             List<Tag> unopenedTags = new ArrayList<Tag>();
 
-            Map<String,Tag> unclosedTagsNames = new HashMap<String, Tag>();
-            Map<String,Tag> unopenedTagsNames = new HashMap<String,Tag>();
-            if (end)
-            {
+            Map<String, Tag> unclosedTagsNames = new HashMap<String, Tag>();
+            Map<String, Tag> unopenedTagsNames = new HashMap<String, Tag>();
+            if (end) {
                 unopenedTags.add(tag);
                 unopenedTagsNames.put(name, tag);
-            }
-            else if (!alone)
-            {
+            } else if (!alone) {
                 unclosedTags.add(tag);
                 unclosedTagsNames.put(name, tag);
             }
@@ -351,32 +331,25 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
             buf.replace(tagstart, tagend, tag.toString());
 
-            while (matcher.find())
-            {
+            while (matcher.find()) {
                 tagstart = matcher.start();
                 tagend = matcher.end();
-                end = matcher.group(1).length()>0;
+                end = matcher.group(1).length() > 0;
                 name = matcher.group(2);
-                alone = matcher.group(4).length()>0;
+                alone = matcher.group(4).length() > 0;
                 tag = new Tag(end, name, num, alone);
 
-                if (end && unclosedTagsNames.containsKey(name))
-                {
+                if (end && unclosedTagsNames.containsKey(name)) {
                     Tag starttag = unclosedTagsNames.get(name);
                     num = starttag.num;
                     unclosedTagsNames.remove(name);
                     unclosedTags.remove(starttag);
-                }
-                else
-                {
+                } else {
                     num = maxnum + 1;
-                    if (end)
-                    {
+                    if (end) {
                         unopenedTags.add(tag);
                         unopenedTagsNames.put(name, tag);
-                    }
-                    else if (!alone)
-                    {
+                    } else if (!alone) {
                         unclosedTags.add(tag);
                         unclosedTagsNames.put(name, tag);
                     }
@@ -388,44 +361,36 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             }
 
             StringBuffer res = new StringBuffer();
-            for (int i = unopenedTags.size()-1; i>0; i--)
-            {
+            for (int i = unopenedTags.size() - 1; i > 0; i--) {
                 tag = unopenedTags.get(i);
                 res.append(tag.toStringPaired());
             }
             res.append(buf);
-            for (int i = unclosedTags.size()-1; i>0; i--)
-            {
+            for (int i = unclosedTags.size() - 1; i > 0; i--) {
                 tag = unclosedTags.get(i);
                 res.append(tag.toStringPaired());
             }
 
             return res.toString();
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             return segment;
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////
+    // /////////////////////////////////////////////////////////////////////////
 
     /** Collects a segment from TMX. Performs upgrades of a segment if needed. */
-    private void storeSegment(String source, String translation, String changeId, long changeDate)
-    {
+    private void storeSegment(String source, String translation, String changeId, long changeDate) {
         source = upgradeSegment(source);
         translation = upgradeSegment(translation);
-        
-        if (isUpgradeSentSeg())
-        {
+
+        if (isUpgradeSentSeg()) {
             List<String> srcSegments = Segmenter.segment(sourceLang, source, null, null);
             List<String> tarSegments = Segmenter.segment(sourceLang, translation, null, null);
 
             int n = srcSegments.size();
-            if( n==tarSegments.size() )
-            {
-                for(int j=0; j<n; j++)
-                {
+            if (n == tarSegments.size()) {
+                for (int j = 0; j < n; j++) {
                     String srcseg = srcSegments.get(j);
                     String tarseg = tarSegments.get(j);
                     m_srcList.add(srcseg);
@@ -433,74 +398,65 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                     m_tarChangeDateList.add(changeDate);
                     m_tarChangeIdList.add(changeId);
                 }
-            }
-            else
-            {
+            } else {
                 m_srcList.add(source);
                 m_tarList.add(translation);
                 m_tarChangeDateList.add(changeDate);
                 m_tarChangeIdList.add(changeId);
             }
-        }
-        else
-        {
+        } else {
             m_srcList.add(source);
             m_tarList.add(translation);
             m_tarChangeDateList.add(changeDate);
             m_tarChangeIdList.add(changeId);
         }
     }
-    
-    ///////////////////////////////////////////////////////////////////////////
-    
+
+    // /////////////////////////////////////////////////////////////////////////
+
     private String segtype;
     /** Segment Type attribute value: "paragraph" */
-    public static final String SEG_PARAGRAPH = "paragraph";                     
+    public static final String SEG_PARAGRAPH = "paragraph";
     /** Segment Type attribute value: "sentence" */
-    public static final String SEG_SENTENCE = "sentence";                       
+    public static final String SEG_SENTENCE = "sentence";
+
     /** Returns Segment Type attribute of TMX file */
-    public String getSegType() 
-    {
+    public String getSegType() {
         return segtype;
     }
-    
+
     /**
-      * Determines if TMX level 2 codes should be included or skipped.
-      */
+     * Determines if TMX level 2 codes should be included or skipped.
+     */
     private void checkLevel2() {
         includeLevel2 = creationtool.equals(CT_OMEGAT);
         isOmegaT = includeLevel2;
     }
 
     /**
-      * Loads the specified TMX file by using a SAX parser.
-      *
-      * The parser makes callbacks to the TMXReader, to the methods
-      * warning, error, fatalError, startDocument, endDocument,
-      * startElement, endElement, characters, ignorableWhiteSpace,
-      * and resolveEntity. Together these methods implement the
-      * parsing of the TMX file.
-      */
-    public void loadFile(String filename, boolean isProjectTMX) 
-            throws IOException 
-    {
+     * Loads the specified TMX file by using a SAX parser.
+     * 
+     * The parser makes callbacks to the TMXReader, to the methods warning,
+     * error, fatalError, startDocument, endDocument, startElement, endElement,
+     * characters, ignorableWhiteSpace, and resolveEntity. Together these
+     * methods implement the parsing of the TMX file.
+     */
+    public void loadFile(String filename, boolean isProjectTMX) throws IOException {
         this.isProjectTMX = isProjectTMX;
 
         // Hack to omit .tmp extensions from displayed file names,
         // so we don't confuse the user. Part of a quick fix for 1583560
-        String displayFilename = filename.endsWith(".tmp")
-                                     ? filename.substring(0, filename.length() -4)
-                                     : filename;
+        String displayFilename = filename.endsWith(".tmp") ? filename.substring(0, filename.length() - 4)
+                : filename;
 
         // parse the TMX file
-        try 
-        {
+        try {
             // log the parsing attempt
-            Log.logRB("TMXR_INFO_READING_FILE", new Object[]{displayFilename});
+            Log.logRB("TMXR_INFO_READING_FILE", new Object[] { displayFilename });
 
             // create a new SAX parser factory
-            javax.xml.parsers.SAXParserFactory parserFactory =
-               javax.xml.parsers.SAXParserFactory.newInstance();
+            javax.xml.parsers.SAXParserFactory parserFactory = javax.xml.parsers.SAXParserFactory
+                    .newInstance();
 
             // configure the factory
             parserFactory.setValidating(false); // skips TMX validity checking
@@ -512,9 +468,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             // so we can handle DTD declarations ourselves
             parser.getXMLReader().setEntityResolver(this);
 
-            // parse the TM, provide the current TMX reader as notification handler
+            // parse the TM, provide the current TMX reader as notification
+            // handler
             InputSource is = new InputSource(new XMLReader(filename, m_encoding));
-            is.setSystemId("");                                                 
+            is.setSystemId("");
             parser.parse(is, this);
 
             // if no source could be found for 1 or more TUs, log this fact
@@ -525,91 +482,84 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             // log the fact that parsing is done
             Log.logRB("TMXR_INFO_READING_COMPLETE");
             Log.log("");
-        }
-        catch (SAXParseException ex) {
-            Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex
-                    .getLineNumber(), ex.getColumnNumber());
-            Core.getMainWindow().displayErrorRB(ex,
-                    "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(),
+        } catch (SAXParseException ex) {
+            Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
+            Core.getMainWindow().displayErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(),
                     ex.getColumnNumber());
         } catch (Exception ex) {
-            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", displayFilename,
-                    Log.getLogLocation());
-            Core.getMainWindow().displayErrorRB(ex,
-                    "TMXR_EXCEPTION_WHILE_PARSING", displayFilename,
+            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", displayFilename, Log.getLogLocation());
+            Core.getMainWindow().displayErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", displayFilename,
                     Log.getLogLocation());
         }
     }
 
     /**
-      * Receives notification of a parser warning. Called by SAX parser.
-      */
-    public void warning(SAXParseException exception) throws SAXException 
-    {
-        Log.logWarningRB("TMXR_WARNING_WHILE_PARSING",
-            new Object[]{String.valueOf(exception.getLineNumber()),
-                         String.valueOf(exception.getColumnNumber())});
+     * Receives notification of a parser warning. Called by SAX parser.
+     */
+    public void warning(SAXParseException exception) throws SAXException {
+        Log.logWarningRB(
+                "TMXR_WARNING_WHILE_PARSING",
+                new Object[] { String.valueOf(exception.getLineNumber()),
+                        String.valueOf(exception.getColumnNumber()) });
         Log.log(exception);
     }
 
     /**
-      * Receives notification of a recoverable XML parsing error. Called by SAX parser.
-      */
-    public void error(SAXParseException exception) throws SAXException 
-    {
-        Log.logErrorRB("TMXR_RECOVERABLE_ERROR_WHILE_PARSING",
-            new Object[]{String.valueOf(exception.getLineNumber()),
-                         String.valueOf(exception.getColumnNumber())});
-        Log.log(exception);
-    }
-    
-    /**
-      * Receives notification of a fatal XML parsing error. Called by SAX parser.
-      */
-    public void fatalError(SAXParseException exception) throws SAXException 
-    {
-        Log.logErrorRB("TMXR_FATAL_ERROR_WHILE_PARSING",
-            new Object[]{String.valueOf(exception.getLineNumber()),
-                         String.valueOf(exception.getColumnNumber())});
+     * Receives notification of a recoverable XML parsing error. Called by SAX
+     * parser.
+     */
+    public void error(SAXParseException exception) throws SAXException {
+        Log.logErrorRB(
+                "TMXR_RECOVERABLE_ERROR_WHILE_PARSING",
+                new Object[] { String.valueOf(exception.getLineNumber()),
+                        String.valueOf(exception.getColumnNumber()) });
         Log.log(exception);
     }
 
     /**
-      * Receives notification of the start of the XML document. Called by SAX parser.
-      */    
-    public void startDocument() 
-    {
+     * Receives notification of a fatal XML parsing error. Called by SAX parser.
+     */
+    public void fatalError(SAXParseException exception) throws SAXException {
+        Log.logErrorRB(
+                "TMXR_FATAL_ERROR_WHILE_PARSING",
+                new Object[] { String.valueOf(exception.getLineNumber()),
+                        String.valueOf(exception.getColumnNumber()) });
+        Log.log(exception);
+    }
+
+    /**
+     * Receives notification of the start of the XML document. Called by SAX
+     * parser.
+     */
+    public void startDocument() {
         // initialise variables needed for parsing of the TMX file
-        headerParsed   = false;
-        inHeader       = false;
-        inTU           = false;
-        inTUV          = false;
-        inSegment      = false;
-        tuvs           = new ArrayList<TUV>();
+        headerParsed = false;
+        inHeader = false;
+        inTU = false;
+        inTUV = false;
+        inSegment = false;
+        tuvs = new ArrayList<TUV>();
         currentElement = new Stack<String>();
-        currentSub     = new Stack<StringBuffer>();
+        currentSub = new Stack<StringBuffer>();
         currentElement.push(TMX_TAG_NONE);
     }
 
     /**
-      * Receives notification of the end of the XML document. Called by SAX parser.
-      */
-    public void endDocument() 
-    {
+     * Receives notification of the end of the XML document. Called by SAX
+     * parser.
+     */
+    public void endDocument() {
         // deallocate temp storage
-        tuvs           = null;
+        tuvs = null;
         currentElement = null;
-        currentSub     = null;
+        currentSub = null;
     }
 
     /**
-      * Receives notification of the start of an element. Called by SAX parser.
-      */
-    public void startElement(String     uri,
-                             String     localName,
-                             String     qName,
-                             Attributes attributes) throws SAXException 
-    {
+     * Receives notification of the start of an element. Called by SAX parser.
+     */
+    public void startElement(String uri, String localName, String qName, Attributes attributes)
+            throws SAXException {
         // determine the type of element and handle it, if required
         if (qName.equals(TMX_TAG_HEADER))
             startElementHeader(attributes);
@@ -619,21 +569,16 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             startElementTUV(attributes);
         else if (qName.equals(TMX_TAG_SEG))
             startElementSegment(attributes);
-        else if (   qName.equals(TMX_TAG_BPT)
-                 || qName.equals(TMX_TAG_EPT)
-                 || qName.equals(TMX_TAG_HI)
-                 || qName.equals(TMX_TAG_IT)
-                 || qName.equals(TMX_TAG_PH)
-                 || qName.equals(TMX_TAG_UT)) {
-            tagNumber ++;
+        else if (qName.equals(TMX_TAG_BPT) || qName.equals(TMX_TAG_EPT) || qName.equals(TMX_TAG_HI)
+                || qName.equals(TMX_TAG_IT) || qName.equals(TMX_TAG_PH) || qName.equals(TMX_TAG_UT)) {
+            tagNumber++;
             if (qName.equals(TMX_TAG_EPT)) {
                 closeTag = true;
-                tagNumber --;
+                tagNumber--;
             } else
                 closeTag = false;
-            if (    qName.equals(TMX_TAG_BPT)
-                 || qName.equals(TMX_TAG_EPT))
-                 standAloneTag = false;
+            if (qName.equals(TMX_TAG_BPT) || qName.equals(TMX_TAG_EPT))
+                standAloneTag = false;
             else
                 standAloneTag = true;
             startElementInline(attributes);
@@ -642,14 +587,11 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         else if (qName.equals(TMX_TAG_PROP))
             startElementProperty(attributes);
     }
-            
+
     /**
-      * Receives notification of the end of an element. Called by SAX parser.
-      */
-    public void endElement(String uri,
-                           String localName,
-                           String qName) throws SAXException 
-    {
+     * Receives notification of the end of an element. Called by SAX parser.
+     */
+    public void endElement(String uri, String localName, String qName) throws SAXException {
         // determine the type of element and handle it, if required
         if (qName.equals(TMX_TAG_HEADER))
             endElementHeader();
@@ -659,12 +601,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             endElementTUV();
         else if (qName.equals(TMX_TAG_SEG))
             endElementSegment();
-        else if (   qName.equals(TMX_TAG_BPT)
-                 || qName.equals(TMX_TAG_EPT)
-                 || qName.equals(TMX_TAG_HI)
-                 || qName.equals(TMX_TAG_IT)
-                 || qName.equals(TMX_TAG_PH)
-                 || qName.equals(TMX_TAG_UT))
+        else if (qName.equals(TMX_TAG_BPT) || qName.equals(TMX_TAG_EPT) || qName.equals(TMX_TAG_HI)
+                || qName.equals(TMX_TAG_IT) || qName.equals(TMX_TAG_PH) || qName.equals(TMX_TAG_UT))
             endElementInline();
         else if (qName.equals(TMX_TAG_SUB))
             endElementSub();
@@ -679,49 +617,45 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     private boolean standAloneTag;
 
     /**
-      * Makes a shortcut from a tag. If the tag contains no letter, uses 'f'
-      * for the shortcut.
-      * @param tag The full tag
-      * @return The shortcut
-      */
-    private StringBuffer makeShortcut(StringBuffer tag){
+     * Makes a shortcut from a tag. If the tag contains no letter, uses 'f' for
+     * the shortcut.
+     * 
+     * @param tag
+     *            The full tag
+     * @return The shortcut
+     */
+    private StringBuffer makeShortcut(StringBuffer tag) {
         char letter = ' ';
         String returnTag = "<";
         String tagEnding = ">";
 
         if (closeTag)
             returnTag += "/";
-        if (standAloneTag &&
-            Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH))
+        if (standAloneTag && Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH))
             tagEnding = "/>";
 
-        for (int i=0; i<tag.length(); i++) {
-              letter = tag.charAt(i);
-              if (Character.isLetter(letter)) {
-                  letter = Character.toLowerCase(letter);
-                  return new StringBuffer(returnTag +
-                          String.valueOf(letter) +
-                          Integer.toString(tagNumber) + tagEnding);
-              }
-         }
-            return new StringBuffer (returnTag + "f" +
-                    Integer.toString(tagNumber) + tagEnding);
+        for (int i = 0; i < tag.length(); i++) {
+            letter = tag.charAt(i);
+            if (Character.isLetter(letter)) {
+                letter = Character.toLowerCase(letter);
+                return new StringBuffer(returnTag + String.valueOf(letter) + Integer.toString(tagNumber)
+                        + tagEnding);
+            }
+        }
+        return new StringBuffer(returnTag + "f" + Integer.toString(tagNumber) + tagEnding);
     }
 
-
     /**
-      * Receives character data in element content. Called by the SAX parser.
-      */
-    public void characters(char[] ch,
-                           int    start,
-                           int    length) throws SAXException {
+     * Receives character data in element content. Called by the SAX parser.
+     */
+    public void characters(char[] ch, int start, int length) throws SAXException {
 
         if (inProperty || // We are in a property or
                 inSegment) { // we're inside a segment and
 
             if (currentElement.peek().equals(TMX_TAG_INLINE)) {
                 // We're inside a tag
-                if (!isOmegaT) {  // Not OmegaT TMX
+                if (!isOmegaT) { // Not OmegaT TMX
                     if (Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2)) {
                         if (!insideTag) {
                             insideTag = true;
@@ -749,73 +683,68 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
 
     /**
-      * Receives ignorable whitespace in element content. Called by the SAX parser.
-      */
-    public void ignorableWhitespace(char[] ch,
-                                    int    start,
-                                    int    length) throws SAXException 
-    {
+     * Receives ignorable whitespace in element content. Called by the SAX
+     * parser.
+     */
+    public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
         // only read (sub)segments, properties, and inline codes (if required)
-        if ( inProperty || // We are in a property or
-             ( inSegment && // we're inside a segment and
-               ( ( includeLevel2 && // we read level 2 and
-                                    // we're inside a tag
-                   ( currentElement.peek()).equals(TMX_TAG_INLINE) )
-                 || // or
-                 // we're not inside a tag
-                 ( !(currentElement.peek()).equals(TMX_TAG_INLINE) )
-               )
-             )
-           )
-        {
+        if (inProperty || // We are in a property or
+                (inSegment && // we're inside a segment and
+                ((includeLevel2 && // we read level 2 and
+                                   // we're inside a tag
+                (currentElement.peek()).equals(TMX_TAG_INLINE)) || // or
+                                                                   // we're not
+                                                                   // inside a
+                                                                   // tag
+                (!(currentElement.peek()).equals(TMX_TAG_INLINE))))) {
             // append the data to the current buffer
             currentSub.peek().append(ch, start, length);
         }
     }
 
     /**
-      * Handles the start of the header of a TMX file.
-      */
-    private void startElementHeader(Attributes attributes) 
-    {
+     * Handles the start of the header of a TMX file.
+     */
+    private void startElementHeader(Attributes attributes) {
         // mark the current position as in the header
         inHeader = true;
 
         // get the header attributes
-        creationtool        = attributes.getValue(TMX_ATTR_CREATIONTOOL);
+        creationtool = attributes.getValue(TMX_ATTR_CREATIONTOOL);
         creationtoolversion = attributes.getValue(TMX_ATTR_CREATIONTOOLVERSION);
-        segtype             = attributes.getValue(TMX_ATTR_SEGTYPE);
-        tmxSourceLanguage   = attributes.getValue(TMX_ATTR_SRCLANG);
+        segtype = attributes.getValue(TMX_ATTR_SEGTYPE);
+        tmxSourceLanguage = attributes.getValue(TMX_ATTR_SRCLANG);
 
         // log some details
-        Log.logRB("TMXR_INFO_CREATION_TOOL",         new Object[]{creationtool});
-        Log.logRB("TMXR_INFO_CREATION_TOOL_VERSION", new Object[]{creationtoolversion});
-        Log.logRB("TMXR_INFO_SEG_TYPE",              new Object[]{segtype});
-        Log.logRB("TMXR_INFO_SOURCE_LANG",           new Object[]{tmxSourceLanguage});
+        Log.logRB("TMXR_INFO_CREATION_TOOL", new Object[] { creationtool });
+        Log.logRB("TMXR_INFO_CREATION_TOOL_VERSION", new Object[] { creationtoolversion });
+        Log.logRB("TMXR_INFO_SEG_TYPE", new Object[] { segtype });
+        Log.logRB("TMXR_INFO_SOURCE_LANG", new Object[] { tmxSourceLanguage });
 
         // give a warning if the TMX source language is
         // different from the project source language
-        if (!tmxSourceLanguage.equalsIgnoreCase(sourceLanguage)) 
-        {
-            Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG",
-                new Object[]{tmxSourceLanguage, sourceLanguage});
+        if (!tmxSourceLanguage.equalsIgnoreCase(sourceLanguage)) {
+            Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", new Object[] { tmxSourceLanguage,
+                    sourceLanguage });
         }
 
         // give a warning that TMX file will be upgraded from 1.4.x
         if (isUpgrade14X())
             Log.logWarningRB("TMXR_WARNING_UPGRADE_14X");
 
-        // give a warning that TMX file will be upgraded to sentence segmentation
+        // give a warning that TMX file will be upgraded to sentence
+        // segmentation
         if (isUpgradeSentSeg())
             Log.logWarningRB("TMXR_WARNING_UPGRADE_SENTSEG");
 
-        // check if level 2 codes should be included (only for OmegaT 1.6.0-final and higher)
+        // check if level 2 codes should be included (only for OmegaT
+        // 1.6.0-final and higher)
         checkLevel2();
     }
 
     /**
-      * Handles the end of the TMX header
-      */
+     * Handles the end of the TMX header
+     */
     private void endElementHeader() {
         // mark the header as parsed
         headerParsed = true;
@@ -823,7 +752,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         // mark the current position as *not* in the header
         inHeader = false;
 
-        // check for property OmegaT:VariantLanguages (only variants in these languages are read)
+        // check for property OmegaT:VariantLanguages (only variants in these
+        // languages are read)
         // if present, parse the property value, and get each separate language
         String propVariantLanguages = getProperty(PROPERTY_VARIANT_LANGUAGES);
         if (propVariantLanguages != null) {
@@ -835,9 +765,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
                 // get the next language
                 String language = commaPos > 0 ? propVariantLanguages.substring(0, commaPos).trim()
-                                               : propVariantLanguages.trim();
+                        : propVariantLanguages.trim();
 
-                // add the language to the set, but trim off any region indicators
+                // add the language to the set, but trim off any region
+                // indicators
                 // for simplicity's sake, and convert it to all uppercase
                 if (language.length() > 0) {
                     m_variantLanguages.add(language.substring(0, 2).toUpperCase(Locale.ENGLISH));
@@ -848,18 +779,16 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
 
                 // trim the list of languages
                 propVariantLanguages = propVariantLanguages.substring(commaPos + 1);
-            }
-            while (commaPos > 0);
+            } while (commaPos > 0);
 
             // Log presence of preferred variant languages
-            Log.logRB("TMXR_INFO_VARIANT_LANGUAGES_DISPLAYED",
-                new Object[]{languages.toString()});
+            Log.logRB("TMXR_INFO_VARIANT_LANGUAGES_DISPLAYED", new Object[] { languages.toString() });
         }
     }
 
     /**
-      * Handles the start of a property
-      */
+     * Handles the start of a property
+     */
     private void startElementProperty(Attributes attributes) throws SAXException {
         currentElement.push(TMX_TAG_PROP);
 
@@ -871,7 +800,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         currentProperty = attributes.getValue(TMX_ATTR_TYPE);
 
         // put a property value buffer on the subsegment stack
-        // (ISSUE: field currentSub should be renamed to reflect this more general use)
+        // (ISSUE: field currentSub should be renamed to reflect this more
+        // general use)
         currentSub.push(new StringBuffer());
 
         // mark the current position as in a property
@@ -879,8 +809,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
 
     /**
-      * Handles the end of a property
-      */
+     * Handles the end of a property
+     */
     private void endElementProperty() {
         currentElement.pop();
 
@@ -899,49 +829,51 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
 
     /**
-      * Handles the start of a translation unit.
-      */
-    private void startElementTU(Attributes attributes) throws SAXException 
-    {
+     * Handles the start of a translation unit.
+     */
+    private void startElementTU(Attributes attributes) throws SAXException {
         currentElement.push(TMX_TAG_TU);
-        
+
         // ensure the header has been parsed
-        // without the header info, we can't determine what's source and what's target
+        // without the header info, we can't determine what's source and what's
+        // target
         if (!headerParsed)
             throw new SAXException(OStrings.getString("TMXR_ERROR_TU_BEFORE_HEADER"));
-    
+
         // mark the current position as in a translation unit
         inTU = true;
-                
+
         // clear the TUV list
         tuvs.clear();
     }
 
     /**
-      * Handles the end of a translation unit.
-      */
-    private void endElementTU() 
-    {
+     * Handles the end of a translation unit.
+     */
+    private void endElementTU() {
         currentElement.pop();
-        
+
         // mark the current position as *not* in a translation unit
         inTU = false;
-        
+
         // determine source and (primary) target tuv
-        TUV source   = null; // source TUV according to source language set by OmT
-        TUV target   = null; // target TUV according to target language set by OmT
-        TUV sourceC  = null; // candidate for source TUV according to source language set by OmT
-        TUV targetC  = null; // candidate for target TUV according to target language set by OmT
-        TUV sourceT  = null; // source TUV according to TMX source language
-        TUV sourceTC = null; // candidate for source TUV according to TMX source language
-        TUV targetT  = null; // target TUV according to TMX source language
-        for (TUV tuv : tuvs) 
-        {
-            // first match TUV language against entire source language (lang code + reg code)
+        TUV source = null; // source TUV according to source language set by OmT
+        TUV target = null; // target TUV according to target language set by OmT
+        TUV sourceC = null; // candidate for source TUV according to source
+                            // language set by OmT
+        TUV targetC = null; // candidate for target TUV according to target
+                            // language set by OmT
+        TUV sourceT = null; // source TUV according to TMX source language
+        TUV sourceTC = null; // candidate for source TUV according to TMX source
+                             // language
+        TUV targetT = null; // target TUV according to TMX source language
+        for (TUV tuv : tuvs) {
+            // first match TUV language against entire source language (lang
+            // code + reg code)
             if ((source == null) && tuv.language.equalsIgnoreCase(sourceLanguage))
                 // the current TUV is the source
                 source = tuv;
-            // against entire target language           
+            // against entire target language
             else if ((target == null) && tuv.language.equalsIgnoreCase(targetLanguage))
                 // the current TUV is the target
                 target = tuv;
@@ -953,23 +885,23 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             else if ((targetC == null) && tuv.language.regionMatches(true, 0, targetLanguage, 0, 2))
                 // the current TUV is a candidate for the target
                 targetC = tuv;
-            // if nothing matches, then try matching against the TMX source language
-            else if (isProjectTMX) 
-            {
+            // if nothing matches, then try matching against the TMX source
+            // language
+            else if (isProjectTMX) {
                 // match against entire TMX source language
-                if (   (sourceT == null)
-                    && (   tuv.language.equalsIgnoreCase(tmxSourceLanguage)
-                        || tmxSourceLanguage.equalsIgnoreCase("*all*")))   
-                    // the current TUV is the source according to the TMX source language
+                if ((sourceT == null)
+                        && (tuv.language.equalsIgnoreCase(tmxSourceLanguage) || tmxSourceLanguage
+                                .equalsIgnoreCase("*all*")))
+                    // the current TUV is the source according to the TMX source
+                    // language
                     sourceT = tuv;
                 // match against TMX source language code only
-                else if (   (sourceTC == null)
-                         && tuv.language.regionMatches(true, 0, tmxSourceLanguage, 0, 2))
-                    // the current TUV is a candidate for the source according to the TMX source language
+                else if ((sourceTC == null) && tuv.language.regionMatches(true, 0, tmxSourceLanguage, 0, 2))
+                    // the current TUV is a candidate for the source according
+                    // to the TMX source language
                     sourceTC = tuv;
- 
-                if (   (targetT == null)
-                    && !tuv.language.equalsIgnoreCase(tmxSourceLanguage))
+
+                if ((targetT == null) && !tuv.language.equalsIgnoreCase(tmxSourceLanguage))
                     targetT = tuv;
             }
 
@@ -987,8 +919,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             source = sourceTC; // try source candidate according to TMX
 
         // if no source was found, log a warning
-        if (source == null) 
-        {
+        if (source == null) {
             sourceNotFound = true;
             return;
         }
@@ -1002,9 +933,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         if (target == null)
             target = new TUV(); // empty target
 
-        String changeId =target.changeId;
-        if (changeId == null) changeId = target.creationId;
-        long changeDate=0;
+        String changeId = target.changeId;
+        if (changeId == null)
+            changeId = target.creationId;
+        long changeDate = 0;
         if (target.changeDate != null) {
             try {
                 changeDate = TMXDateParser.parse(target.changeDate).getTime();
@@ -1012,7 +944,8 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
                 if (target.creationDate != null) {
                     try {
                         changeDate = TMXDateParser.parse(target.creationDate).getTime();
-                    } catch (ParseException e2) {}
+                    } catch (ParseException e2) {
+                    }
                 }
             }
         }
@@ -1023,8 +956,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         // create exactly as many target subs as there are source subs
         // "pad" with empty strings, or omit segments if necessary
         // NOTE: this is not the most ideal solution, but the best possible
-        for (int i = 0; i < source.subSegments.size(); i++) 
-        {
+        for (int i = 0; i < source.subSegments.size(); i++) {
             String starget = new String();
             if (i < target.subSegments.size())
                 starget = target.subSegments.get(i).toString();
@@ -1035,30 +967,29 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         if (!isProjectTMX) {
             for (TUV tuv : tuvs) {
                 // store the TUV as alternative if it's source nor target
-                // and its language appears in the set of useful variant languages
-                if (   (tuv != source)
-                    && (tuv != target)
-                    && (   m_variantLanguages.isEmpty()
-                        || m_variantLanguages.contains(tuv.language.substring(0, 2).toUpperCase(Locale.ENGLISH))))
-                   storeSegment(source.text.toString(), tuv.text.toString(), changeId, changeDate);
+                // and its language appears in the set of useful variant
+                // languages
+                if ((tuv != source)
+                        && (tuv != target)
+                        && (m_variantLanguages.isEmpty() || m_variantLanguages.contains(tuv.language
+                                .substring(0, 2).toUpperCase(Locale.ENGLISH))))
+                    storeSegment(source.text.toString(), tuv.text.toString(), changeId, changeDate);
             }
         }
     }
 
     /**
-      * Handles the start of a tuv element.
-      */
-    private void startElementTUV(Attributes attributes) 
-    {
+     * Handles the start of a tuv element.
+     */
+    private void startElementTUV(Attributes attributes) {
         currentElement.push(TMX_TAG_TUV);
-    
+
         // ensure we're in a translation unit
-        if (!inTU) 
-        {
+        if (!inTU) {
             Log.logWarningRB("TMXR_WARNING_TUV_NOT_IN_TU");
             return;
         }
-    
+
         // get the language of the tuv
         // try "xml:lang" first, then "lang"
         String language = attributes.getValue(TMX_ATTR_LANG_NS);
@@ -1066,8 +997,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
             language = attributes.getValue(TMX_ATTR_LANG);
 
         // if the language is not specified, skip the tuv
-        if (language == null) 
-        {
+        if (language == null) {
             Log.logWarningRB("TMXR_WARNING_TUV_LANG_NOT_SPECIFIED");
             return;
         }
@@ -1080,10 +1010,10 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
         tuv.creationDate = attributes.getValue(TMX_ATTR_CREATIONDATE);
         tuv.creationId = attributes.getValue(TMX_ATTR_CREATIONID);
         tuvs.add(tuv);
-        
+
         // mark the current position as in a tuv
         inTUV = true;
-        
+
         // clear the stack of sub segments
         currentSub.clear();
         currentTag.setLength(0);
@@ -1092,10 +1022,9 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
 
     /**
-      * Handles the end of a tuv element.
-      */
-    private void endElementTUV() 
-    {
+     * Handles the end of a tuv element.
+     */
+    private void endElementTUV() {
         currentElement.pop();
 
         // mark the current position as *not* in a tuv element
@@ -1103,21 +1032,20 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
 
     /**
-      * Handles the start of a segment.
-      */
-    private void startElementSegment(Attributes attributes) 
-    {
+     * Handles the start of a segment.
+     */
+    private void startElementSegment(Attributes attributes) {
         currentElement.push(TMX_TAG_SEG);
 
         // ensure we are currently in a tuv
-        if (!inTUV) 
-        {
+        if (!inTUV) {
             Log.logWarningRB("TMXR_WARNING_SEG_NOT_IN_TUV");
             return;
         }
 
         // put the current TUV's segment buffer on the subsegment stack
-        // (ISSUE: field currentSub should be renamed to reflect this more general use)
+        // (ISSUE: field currentSub should be renamed to reflect this more
+        // general use)
         currentSub.push(tuvs.get(tuvs.size() - 1).text);
 
         // mark the current position as in a segment
@@ -1125,12 +1053,11 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
 
     /**
-      * Handles the end of a segment.
-      */
-    private void endElementSegment() 
-    {
+     * Handles the end of a segment.
+     */
+    private void endElementSegment() {
         currentElement.pop();
-        
+
         // do nothing if not in a TUV
         if (!inTUV)
             return;
@@ -1143,137 +1070,146 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
     }
 
     /**
-      * Handles the start of a TMX inline element (<bpt>,  <ept>, <hi>,  <it>, <ph>,  <ut>).
-      */
-    private void startElementInline(Attributes attributes) 
-    {
+     * Handles the start of a TMX inline element (<bpt>, <ept>, <hi>, <it>,
+     * <ph>, <ut>).
+     */
+    private void startElementInline(Attributes attributes) {
         currentElement.push(TMX_TAG_INLINE);
     }
 
     /**
-      * Handles the end of a TMX inline element (<bpt>,  <ept>, <hi>,  <it>, <ph>,  <ut>).
-      */
-    private void endElementInline() 
-    {
+     * Handles the end of a TMX inline element (<bpt>, <ept>, <hi>, <it>, <ph>,
+     * <ut>).
+     */
+    private void endElementInline() {
         currentElement.pop();
     }
 
     /**
-      * Handles the start of a SUB inline element.
-      */
-    private void startElementSub(Attributes attributes) 
-    {
+     * Handles the start of a SUB inline element.
+     */
+    private void startElementSub(Attributes attributes) {
         currentElement.push(TMX_TAG_SUB);
-        
-        // create new entries in the current TUV's sub segment list and on the stack
+
+        // create new entries in the current TUV's sub segment list and on the
+        // stack
         // NOTE: the assumption is made here that sub segments are
         // in the same order in both source and target segments
-        StringBuffer sub = new StringBuffer();                                  
+        StringBuffer sub = new StringBuffer();
         tuvs.get(tuvs.size() - 1).subSegments.add(sub);
         currentSub.push(sub);
     }
 
     /**
-      * Handles the end of a SUB inline element.
-      */
-    private void endElementSub() throws SAXException 
-    {
+     * Handles the end of a SUB inline element.
+     */
+    private void endElementSub() throws SAXException {
         currentElement.pop();
-        
+
         // remove the current sub from the sub stack
         currentSub.pop();
     }
 
     /**
-      * Makes the parser skip DTDs.
-      */
-    public org.xml.sax.InputSource resolveEntity(String publicId,
-                                                 String systemId) 
-                                                 throws SAXException 
-    {
+     * Makes the parser skip DTDs.
+     */
+    public org.xml.sax.InputSource resolveEntity(String publicId, String systemId) throws SAXException {
         // simply return an empty dtd
-        return new org.xml.sax.InputSource(new java.io.StringReader(""));       
+        return new org.xml.sax.InputSource(new java.io.StringReader(""));
     }
 
     // Constants for certain TMX tag names/attributes
-    private final static String TMX_TMX_TAG    = "tmx";                         
-    private final static String TMX_TAG_HEADER = "header";                      
-    private final static String TMX_TAG_BODY   = "body";                        
-    private final static String TMX_TAG_TU     = "tu";                          
-    private final static String TMX_TAG_TUV    = "tuv";                         
-    private final static String TMX_TAG_SEG    = "seg";                         
-    private final static String TMX_TAG_BPT    = "bpt";                         
-    private final static String TMX_TAG_EPT    = "ept";                         
-    private final static String TMX_TAG_HI     = "hi";                          
-    private final static String TMX_TAG_IT     = "it";                          
-    private final static String TMX_TAG_PH     = "ph";                          
-    private final static String TMX_TAG_UT     = "ut";                          
-    private final static String TMX_TAG_SUB    = "sub";                         
-    private final static String TMX_TAG_PROP   = "prop";                        
-    private final static String TMX_TAG_INLINE = "inline"; // made up for convenience 
-    private final static String TMX_TAG_NONE   = "none";   // made up for convenience 
+    private final static String TMX_TMX_TAG = "tmx";
+    private final static String TMX_TAG_HEADER = "header";
+    private final static String TMX_TAG_BODY = "body";
+    private final static String TMX_TAG_TU = "tu";
+    private final static String TMX_TAG_TUV = "tuv";
+    private final static String TMX_TAG_SEG = "seg";
+    private final static String TMX_TAG_BPT = "bpt";
+    private final static String TMX_TAG_EPT = "ept";
+    private final static String TMX_TAG_HI = "hi";
+    private final static String TMX_TAG_IT = "it";
+    private final static String TMX_TAG_PH = "ph";
+    private final static String TMX_TAG_UT = "ut";
+    private final static String TMX_TAG_SUB = "sub";
+    private final static String TMX_TAG_PROP = "prop";
+    private final static String TMX_TAG_INLINE = "inline"; // made up for
+                                                           // convenience
+    private final static String TMX_TAG_NONE = "none"; // made up for
+                                                       // convenience
 
-    private final static String TMX_ATTR_LANG                = "lang";          
-    private final static String TMX_ATTR_LANG_NS             = "xml:lang";      
-    private final static String TMX_ATTR_CREATIONTOOL        = "creationtool";  
-    private final static String TMX_ATTR_CREATIONTOOLVERSION = "creationtoolversion";   
-    private final static String TMX_ATTR_SEGTYPE             = "segtype";       
-    private final static String TMX_ATTR_SRCLANG             = "srclang";       
-    private final static String TMX_ATTR_TYPE                = "type";          
-    private final static String TMX_ATTR_CHANGEID            = "changeid";      
-    private final static String TMX_ATTR_CHANGEDATE          = "changedate";    
-    private final static String TMX_ATTR_CREATIONID          = "creationid";      
-    private final static String TMX_ATTR_CREATIONDATE        = "creationdate";    
+    private final static String TMX_ATTR_LANG = "lang";
+    private final static String TMX_ATTR_LANG_NS = "xml:lang";
+    private final static String TMX_ATTR_CREATIONTOOL = "creationtool";
+    private final static String TMX_ATTR_CREATIONTOOLVERSION = "creationtoolversion";
+    private final static String TMX_ATTR_SEGTYPE = "segtype";
+    private final static String TMX_ATTR_SRCLANG = "srclang";
+    private final static String TMX_ATTR_TYPE = "type";
+    private final static String TMX_ATTR_CHANGEID = "changeid";
+    private final static String TMX_ATTR_CHANGEDATE = "changedate";
+    private final static String TMX_ATTR_CREATIONID = "creationid";
+    private final static String TMX_ATTR_CREATIONDATE = "creationdate";
 
-    private final static String PROPERTY_VARIANT_LANGUAGES = "OmegaT:VariantLanguages"; 
+    private final static String PROPERTY_VARIANT_LANGUAGES = "OmegaT:VariantLanguages";
 
-    private String  m_encoding;
-    private List<String>    m_srcList;
-    private List<String>    m_tarList;
-    private List<String>    m_tarChangeIdList;
-    private List<Long>      m_tarChangeDateList;
-    private Map<String,String>     m_properties;       // Map<String, String> of TMX properties, specified in the header
-    private Set<String>     m_variantLanguages; // Set of (user) acceptable variant languages
+    private String m_encoding;
+    private List<String> m_srcList;
+    private List<String> m_tarList;
+    private List<String> m_tarChangeIdList;
+    private List<Long> m_tarChangeDateList;
+    private Map<String, String> m_properties; // Map<String, String> of TMX
+                                              // properties, specified in the
+                                              // header
+    private Set<String> m_variantLanguages; // Set of (user) acceptable variant
+                                            // languages
     private Language sourceLang, targetLang;
-    private String  sourceLanguage;     // Language/country code set by OmT: LL(-CC)
-    private String  targetLanguage;     // Language/country code set by OmT: LL(-CC)
-    private String  tmxSourceLanguage;  // Language/country code as specified in TMX header: LL(-CC)
-    private boolean includeLevel2;      // True if TMX level 2 markup must be interpreted
-    private boolean isOmegaT;           // True if it is an OmegaT TMX
-    private boolean isProjectTMX;       // True if the TMX file being loaded is the project TMX
-    private boolean headerParsed;       // True if the TMX header has been parsed correctly
-    private boolean inHeader;           // True if the current parsing point is in the HEADER element
-    private boolean inProperty;         // True if in a PROP element
-    private boolean inTU;               // True if in a TU element
-    private boolean inTUV;              // True if in a TUV element
-    private boolean inSegment;          // True if in a SEG element
-    private boolean sourceNotFound;     // True if no source segment was found for one or more TUs
-    private List<TUV>    tuvs;               // Contains all TUVs of the current TU
-    private Stack<String>   currentElement;     // Stack of tag names up to the current parsing point
-    private Stack<StringBuffer>   currentSub;         // Stack of sub segment buffers
-    private String  currentProperty;    // Name of the current property being parsed (null if none)
+    private String sourceLanguage; // Language/country code set by OmT: LL(-CC)
+    private String targetLanguage; // Language/country code set by OmT: LL(-CC)
+    private String tmxSourceLanguage; // Language/country code as specified in
+                                      // TMX header: LL(-CC)
+    private boolean includeLevel2; // True if TMX level 2 markup must be
+                                   // interpreted
+    private boolean isOmegaT; // True if it is an OmegaT TMX
+    private boolean isProjectTMX; // True if the TMX file being loaded is the
+                                  // project TMX
+    private boolean headerParsed; // True if the TMX header has been parsed
+                                  // correctly
+    private boolean inHeader; // True if the current parsing point is in the
+                              // HEADER element
+    private boolean inProperty; // True if in a PROP element
+    private boolean inTU; // True if in a TU element
+    private boolean inTUV; // True if in a TUV element
+    private boolean inSegment; // True if in a SEG element
+    private boolean sourceNotFound; // True if no source segment was found for
+                                    // one or more TUs
+    private List<TUV> tuvs; // Contains all TUVs of the current TU
+    private Stack<String> currentElement; // Stack of tag names up to the
+                                          // current parsing point
+    private Stack<StringBuffer> currentSub; // Stack of sub segment buffers
+    private String currentProperty; // Name of the current property being parsed
+                                    // (null if none)
     private boolean isSegmentingEnabled;
 
     /**
-      * Internal class to represent translation unit variants
-      */
-    private class TUV 
-    {
+     * Internal class to represent translation unit variants
+     */
+    private class TUV {
         /**
-          * Language and (optional) country code: LL(C-CC)
-          */
+         * Language and (optional) country code: LL(C-CC)
+         */
         public String language;
-        
+
         /**
-          * Segment text
-          */
+         * Segment text
+         */
         public StringBuffer text;
         /**
          * Specifies the date of the last modification of the element.
          */
         public String changeDate;
         /**
-         * Change identifier - Specifies the identifier of the user who modified the element last.
+         * Change identifier - Specifies the identifier of the user who modified
+         * the element last.
          */
         public String changeId;
         /**
@@ -1281,25 +1217,24 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler
          */
         public String creationDate;
         /**
-         * Creation identifier - Specifies the identifier of the user who created the element.
+         * Creation identifier - Specifies the identifier of the user who
+         * created the element.
          */
         public String creationId;
-        
+
         /**
-          * Contains StringBuffers for subsegments
-          */
+         * Contains StringBuffers for subsegments
+         */
         public ArrayList<StringBuffer> subSegments;
-        
+
         /**
-          * Default constructor
-          */
-        public TUV() 
-        {
+         * Default constructor
+         */
+        public TUV() {
             super();
             text = new StringBuffer();
             subSegments = new ArrayList<StringBuffer>();
         }
     }
-    
-}
 
+}

@@ -53,23 +53,16 @@ import org.omegat.util.gui.TextUtil;
  */
 public class CalcStandardStatistics extends LongProcessThread {
 
-    private static final String[] htHeaders = new String[] { "",
-            OStrings.getString("CT_STATS_Segments"),
-            OStrings.getString("CT_STATS_Words"),
-            OStrings.getString("CT_STATS_Characters_NOSP"),
+    private static final String[] htHeaders = new String[] { "", OStrings.getString("CT_STATS_Segments"),
+            OStrings.getString("CT_STATS_Words"), OStrings.getString("CT_STATS_Characters_NOSP"),
             OStrings.getString("CT_STATS_Characters") };
 
-    private static final String[] htRows = new String[] {
-            OStrings.getString("CT_STATS_Total"),
-            OStrings.getString("CT_STATS_Remaining"),
-            OStrings.getString("CT_STATS_Unique"),
+    private static final String[] htRows = new String[] { OStrings.getString("CT_STATS_Total"),
+            OStrings.getString("CT_STATS_Remaining"), OStrings.getString("CT_STATS_Unique"),
             OStrings.getString("CT_STATS_Unique_Remaining") };
-    private static final boolean[] htAlign = new boolean[] {
-	false, true, true, true, true
-    };
+    private static final boolean[] htAlign = new boolean[] { false, true, true, true, true };
 
-    private static final String[] ftHeaders = new String[] {
-            OStrings.getString("CT_STATS_FILE_Name"),
+    private static final String[] ftHeaders = new String[] { OStrings.getString("CT_STATS_FILE_Name"),
             OStrings.getString("CT_STATS_FILE_Total_Segments"),
             OStrings.getString("CT_STATS_FILE_Remaining_Segments"),
             OStrings.getString("CT_STATS_FILE_Unique_Segments"),
@@ -85,14 +78,10 @@ public class CalcStandardStatistics extends LongProcessThread {
             OStrings.getString("CT_STATS_FILE_Total_Characters"),
             OStrings.getString("CT_STATS_FILE_Remaining_Characters"),
             OStrings.getString("CT_STATS_FILE_Unique_Characters"),
-            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"),
-    };
+            OStrings.getString("CT_STATS_FILE_Unique_Remaining_Characters"), };
 
-    private static final boolean[] ftAlign = new boolean[] {
-	false,
-	true, true, true, true, true, true, true, true,
-	true, true, true, true, true, true, true, true,
-    };
+    private static final boolean[] ftAlign = new boolean[] { false, true, true, true, true, true, true, true,
+            true, true, true, true, true, true, true, true, true, };
 
     private StatisticsWindow callback;
 
@@ -124,8 +113,7 @@ public class CalcStandardStatistics extends LongProcessThread {
      * character count of the project, the total number of unique segments, plus
      * the details for each file.
      */
-    public static String buildProjectStats(final IProject project,
-            final StatisticsInfo hotStat) {
+    public static String buildProjectStats(final IProject project, final StatisticsInfo hotStat) {
 
         StatCount total = new StatCount();
         StatCount remaining = new StatCount();
@@ -151,8 +139,7 @@ public class CalcStandardStatistics extends LongProcessThread {
         for (String src : uniqueSegment.keySet()) {
             int words = Statistics.numberOfWords(src);
             String noTags = StaticUtils.stripTags(src);
-            int charsNoSpaces = Statistics
-                    .numberOfCharactersWithoutSpaces(noTags);
+            int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(noTags);
 
             // add to unique
             unique.segments++;
@@ -179,8 +166,7 @@ public class CalcStandardStatistics extends LongProcessThread {
 
                 int words = Statistics.numberOfWords(src);
                 String noTags = StaticUtils.stripTags(src);
-                int charsNoSpaces = Statistics
-                        .numberOfCharactersWithoutSpaces(noTags);
+                int charsNoSpaces = Statistics.numberOfCharactersWithoutSpaces(noTags);
                 int chars = noTags.length();
 
                 // add to total
@@ -204,22 +190,22 @@ public class CalcStandardStatistics extends LongProcessThread {
                 numbers.total.charsWithoutSpaces += charsNoSpaces;
                 numbers.total.charsWithSpaces += chars;
 
-		Integer uniqueCount = uniqueSegment.get(src);
-		Boolean firstSeen = firstSeenUniqueSegment.get(src);
-		if (firstSeen == null) {
-		    firstSeenUniqueSegment.put(src, false);
-		    numbers.unique.segments++;
-		    numbers.unique.words += words;
-		    numbers.unique.charsWithoutSpaces += charsNoSpaces;
-		    numbers.unique.charsWithSpaces += chars;
+                Integer uniqueCount = uniqueSegment.get(src);
+                Boolean firstSeen = firstSeenUniqueSegment.get(src);
+                if (firstSeen == null) {
+                    firstSeenUniqueSegment.put(src, false);
+                    numbers.unique.segments++;
+                    numbers.unique.words += words;
+                    numbers.unique.charsWithoutSpaces += charsNoSpaces;
+                    numbers.unique.charsWithSpaces += chars;
 
-		    if (tr == null) {
-			numbers.remainingUnique.segments++;
-			numbers.remainingUnique.words += words;
-			numbers.remainingUnique.charsWithoutSpaces += charsNoSpaces;
-			numbers.remainingUnique.charsWithSpaces += chars;
-		    }
-		}
+                    if (tr == null) {
+                        numbers.remainingUnique.segments++;
+                        numbers.remainingUnique.words += words;
+                        numbers.remainingUnique.charsWithoutSpaces += charsNoSpaces;
+                        numbers.remainingUnique.charsWithSpaces += chars;
+                    }
+                }
 
                 if (tr == null) {
                     numbers.remaining.segments++;
@@ -232,18 +218,15 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         StringBuilder result = new StringBuilder();
 
-        result.append(OStrings.getString("CT_STATS_Project_Statistics")
-                + "\n\n");
+        result.append(OStrings.getString("CT_STATS_Project_Statistics") + "\n\n");
 
-        String[][] headerTable = calcHeaderTable(new StatCount[] { total,
-                remaining, unique, remainingUnique });
+        String[][] headerTable = calcHeaderTable(new StatCount[] { total, remaining, unique, remainingUnique });
         result.append(TextUtil.showTextTable(htHeaders, headerTable, htAlign));
         result.append("\n\n");
 
         // STATISTICS BY FILE
         result.append(OStrings.getString("CT_STATS_FILE_Statistics") + "\n\n");
-        String[][] filesTable = calcFilesTable(project.getProjectProperties(),
-                counts);
+        String[][] filesTable = calcFilesTable(project.getProjectProperties(), counts);
         result.append(TextUtil.showTextTable(ftHeaders, filesTable, ftAlign));
 
         if (hotStat != null) {
@@ -268,14 +251,12 @@ public class CalcStandardStatistics extends LongProcessThread {
         return table;
     }
 
-    protected static String[][] calcFilesTable(
-            final ProjectProperties m_config, final List<FileData> counts) {
+    protected static String[][] calcFilesTable(final ProjectProperties m_config, final List<FileData> counts) {
         String[][] table = new String[counts.size()][17];
 
         int r = 0;
         for (FileData numbers : counts) {
-            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename,
-                    m_config.getSourceRoot());
+            table[r][0] = StaticUtils.makeFilenameRelative(numbers.filename, m_config.getSourceRoot());
             table[r][1] = Integer.toString(numbers.total.segments);
             table[r][2] = Integer.toString(numbers.remaining.segments);
             table[r][3] = Integer.toString(numbers.unique.segments);
@@ -285,16 +266,13 @@ public class CalcStandardStatistics extends LongProcessThread {
             table[r][7] = Integer.toString(numbers.unique.words);
             table[r][8] = Integer.toString(numbers.remainingUnique.words);
             table[r][9] = Integer.toString(numbers.total.charsWithoutSpaces);
-            table[r][10] = Integer
-                    .toString(numbers.remaining.charsWithoutSpaces);
+            table[r][10] = Integer.toString(numbers.remaining.charsWithoutSpaces);
             table[r][11] = Integer.toString(numbers.unique.charsWithoutSpaces);
-            table[r][12] = Integer
-		    .toString(numbers.remainingUnique.charsWithoutSpaces);
+            table[r][12] = Integer.toString(numbers.remainingUnique.charsWithoutSpaces);
             table[r][13] = Integer.toString(numbers.total.charsWithSpaces);
             table[r][14] = Integer.toString(numbers.remaining.charsWithSpaces);
             table[r][15] = Integer.toString(numbers.unique.charsWithSpaces);
-            table[r][16] = Integer
-		    .toString(numbers.remainingUnique.charsWithSpaces);
+            table[r][16] = Integer.toString(numbers.remainingUnique.charsWithSpaces);
             r++;
         }
         return table;
@@ -306,7 +284,7 @@ public class CalcStandardStatistics extends LongProcessThread {
 
         public FileData() {
             total = new StatCount();
-	    unique = new StatCount();
+            unique = new StatCount();
             remaining = new StatCount();
             remainingUnique = new StatCount();
         }

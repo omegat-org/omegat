@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util;
 
@@ -30,64 +30,58 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * A map that maps keys to sets of values.
- * Does NOT allow null keys/values.
- *
+ * A map that maps keys to sets of values. Does NOT allow null keys/values.
+ * 
  * @author Maxym Mykhalchuk
  */
-public class MultiMap<K,V>
-{
+public class MultiMap<K, V> {
     /** We're backed up by a HashMap<key, HashSet>. */
-    Map<K,Set<V>> map;
-    
+    Map<K, Set<V>> map;
+
     /** Creates an empty MultiMap. */
-    public MultiMap()
-    {
+    public MultiMap() {
         map = new HashMap<K, Set<V>>();
     }
-            
-    /** Returns <tt>true</tt> if this map contains a mapping for the specified key. */
-    public boolean containsKey(K key)
-    {
+
+    /**
+     * Returns <tt>true</tt> if this map contains a mapping for the specified
+     * key.
+     */
+    public boolean containsKey(K key) {
         return map.containsKey(key);
     }
-    
-    /** Returns <tt>true</tt> if this map maps the specified key to the specified value. */
-    public boolean containsPair(K key, V value)
-    {
-        if (containsKey(key))
-        {
+
+    /**
+     * Returns <tt>true</tt> if this map maps the specified key to the specified
+     * value.
+     */
+    public boolean containsPair(K key, V value) {
+        if (containsKey(key)) {
             Set<V> values = map.get(key);
             return values.contains(value);
-        }
-        else
+        } else
             return false;
     }
-    
-    /** 
-     * Associates the specified value with the specified key in this multi-map. 
-     * Unlike normal Map, if the map previously contained a mapping for
-     * this key, the new value is appended to the list of the values
-     * mapped from this key.
+
+    /**
+     * Associates the specified value with the specified key in this multi-map.
+     * Unlike normal Map, if the map previously contained a mapping for this
+     * key, the new value is appended to the list of the values mapped from this
+     * key.
      */
-    public void put(K key, V value)
-    {
-        if (containsKey(key))
-        {
+    public void put(K key, V value) {
+        if (containsKey(key)) {
             Set<V> values = map.get(key);
             values.add(value);
-        }
-        else
-        {
+        } else {
             Set<V> values = new HashSet<V>();
             values.add(value);
             map.put(key, values);
         }
     }
-    
+
     /** Removes all the mappings for this key from this map if it is present. */
-    public void remove(Object key)
-    {
+    public void remove(Object key) {
         map.remove(key);
-    }    
+    }
 }

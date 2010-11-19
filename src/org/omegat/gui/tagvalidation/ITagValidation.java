@@ -24,7 +24,6 @@
 
 package org.omegat.gui.tagvalidation;
 
-
 /**
  * Interface for tag validation.
  * 

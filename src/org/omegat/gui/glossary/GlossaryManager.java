@@ -63,8 +63,7 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     }
 
     public void start() {
-        File dir = new File(Core.getProject().getProjectProperties()
-                .getGlossaryRoot());
+        File dir = new File(Core.getProject().getProjectProperties().getGlossaryRoot());
         monitor = new DirectoryMonitor(dir, this);
         monitor.start();
     }
@@ -99,14 +98,12 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     /**
      * Loads one glossary file. It choose and calls required required reader.
      */
-    private List<GlossaryEntry> loadGlossaryFile(final File file)
-            throws Exception {
+    private List<GlossaryEntry> loadGlossaryFile(final File file) throws Exception {
         String fname_lower = file.getName().toLowerCase();
         if (fname_lower.endsWith(EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
             return GlossaryReaderTSV.read(file);
-        } else if ( fname_lower.endsWith(EXT_TSV_UTF8) ||
-                    fname_lower.endsWith(EXT_TSV_TXT) ) {
+        } else if (fname_lower.endsWith(EXT_TSV_UTF8) || fname_lower.endsWith(EXT_TSV_TXT)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
             return GlossaryReaderTSV.read(file);
         } else if (fname_lower.endsWith(EXT_CSV_UTF8)) {

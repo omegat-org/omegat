@@ -103,8 +103,7 @@ public class HTMLOptions extends AbstractOptions {
      *         {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
      */
     public REWRITE_MODE getRewriteEncoding() {
-        return getEnum(REWRITE_MODE.class, OPTION_REWRITE_ENCODING,
-                REWRITE_MODE.IFHEADER);
+        return getEnum(REWRITE_MODE.class, OPTION_REWRITE_ENCODING, REWRITE_MODE.IFHEADER);
     }
 
     /**
@@ -235,10 +234,8 @@ public class HTMLOptions extends AbstractOptions {
      * not be translated
      */
     public String getSkipMeta() {
-        return getString(OPTION_SKIP_META, "http-equiv=refresh,"
-                + "name=robots," + "name=revisit-after,"
-                + "http-equiv=expires," + "http-equiv=content-style-type,"
-                + "http-equiv=content-script-type");
+        return getString(OPTION_SKIP_META, "http-equiv=refresh," + "name=robots," + "name=revisit-after,"
+                + "http-equiv=expires," + "http-equiv=content-style-type," + "http-equiv=content-script-type");
     }
 
     /**

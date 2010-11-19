@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.spellchecker;
 
@@ -30,29 +30,31 @@ import com.sun.jna.Pointer;
 import com.sun.jna.ptr.PointerByReference;
 
 /**
- * An interface with the Hunspell (http://hunspell.sourceforge.net)
- * spell checking library.
- *
+ * An interface with the Hunspell (http://hunspell.sourceforge.net) spell
+ * checking library.
+ * 
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  * @author Didier Briel
  */
 public interface Hunspell extends Library {
-    
-    /** 
-     * create the spell checker 
-     * @param aff : the affix file
-     * @param dic : the dictionary file
+
+    /**
+     * create the spell checker
+     * 
+     * @param aff
+     *            : the affix file
+     * @param dic
+     *            : the dictionary file
      */
     public Pointer Hunspell_create(String aff, String dic);
-    
+
     /**
      * destroy the spell checker
      */
     public void Hunspell_destroy(Pointer pHunspell);
-    
+
     /**
-     * spell(word) - spellcheck word
-     * output: 0 = bad word, not 0 = good word
+     * spell(word) - spellcheck word output: 0 = bad word, not 0 = good word
      */
     public int Hunspell_spell(Pointer pHunspell, byte[] word);
 
@@ -62,24 +64,23 @@ public interface Hunspell extends Library {
     public String Hunspell_get_dic_encoding(Pointer pHunspell);
 
     /**
-     * suggest(suggestions, word) - search suggestions
-     * input: pointer to an array of strings pointer and the (bad) word
-     *   array of strings pointer (here *slst) may not be initialized
-     * output: number of suggestions in string array, and suggestions in
-     *   a newly allocated array of strings (*slts will be NULL when number
-     *   of suggestion equals 0.)
+     * suggest(suggestions, word) - search suggestions input: pointer to an
+     * array of strings pointer and the (bad) word array of strings pointer
+     * (here *slst) may not be initialized output: number of suggestions in
+     * string array, and suggestions in a newly allocated array of strings
+     * (*slts will be NULL when number of suggestion equals 0.)
      */
     public int Hunspell_suggest(Pointer pHunspell, PointerByReference slst, byte[] word);
-    
+
     /**
      * put a word into the custom dictionary
      */
-    public int Hunspell_put_word(Pointer pHunspell, byte[] word);    
+    public int Hunspell_put_word(Pointer pHunspell, byte[] word);
+
     /**
-     * put a word into the custom dictionary
-     * same function as put_word, renamed as of Hunspell 1.2
-     * (01/11/2007)
-     */  
+     * put a word into the custom dictionary same function as put_word, renamed
+     * as of Hunspell 1.2 (01/11/2007)
+     */
     public int Hunspell_add(Pointer pHunspell, byte[] word);
-        
+
 }

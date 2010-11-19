@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml;
 
@@ -28,37 +28,32 @@ import org.omegat.filters3.Tag;
 
 /**
  * XML Tag.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class XMLTag extends Tag
-{
+public class XMLTag extends Tag {
     /** Creates a new instance of XML Tag */
-    public XMLTag(String tag, String shortcut, int type, org.xml.sax.Attributes attributes)
-    {
+    public XMLTag(String tag, String shortcut, int type, org.xml.sax.Attributes attributes) {
         super(tag, shortcut, type, XMLUtils.convertAttributes(attributes));
     }
-    
+
     /**
-     * Returns the tag in its original form as it was in original document.
-     * E.g. for &lt;strong&gt; tag should return 
-     * &lt;strong&gt;.
+     * Returns the tag in its original form as it was in original document. E.g.
+     * for &lt;strong&gt; tag should return &lt;strong&gt;.
      */
-    public String toOriginal() 
-    {
+    public String toOriginal() {
         StringBuffer buf = new StringBuffer();
-        
-        buf.append("<");                                                        
+
+        buf.append("<");
         if (TYPE_END == getType())
-            buf.append("/");                                                    
+            buf.append("/");
         buf.append(getTag());
         buf.append(getAttributes().toString());
         if (TYPE_ALONE == getType())
-            buf.append("/");                                                    
-        buf.append(">");                                                        
-        
+            buf.append("/");
+        buf.append(">");
+
         return buf.toString();
     }
 
 }
-

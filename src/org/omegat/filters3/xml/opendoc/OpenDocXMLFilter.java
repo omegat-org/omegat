@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml.opendoc;
 
@@ -29,31 +29,24 @@ import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OConsts;
 
 /**
- * Filter for OpenDocument XML files that are inside there the OpenDocument
- * file (which is actually a ZIP file).
- *
+ * Filter for OpenDocument XML files that are inside there the OpenDocument file
+ * (which is actually a ZIP file).
+ * 
  * @author Maxym Mykhalchuk
  */
-public class OpenDocXMLFilter extends XMLFilter
-{
-    
+public class OpenDocXMLFilter extends XMLFilter {
+
     /** Creates a new instance of OpenDocXMLFilter */
-    public OpenDocXMLFilter()
-    {
+    public OpenDocXMLFilter() {
         super(new OpenDocDialect());
     }
 
-    public Instance[] getDefaultInstances()
-    {
-        return new Instance[]
-        {
-            new Instance("*.xml", OConsts.UTF8, OConsts.UTF8),                  
-        };
+    public Instance[] getDefaultInstances() {
+        return new Instance[] { new Instance("*.xml", OConsts.UTF8, OConsts.UTF8), };
     }
 
-    public String getFileFormatName()
-    {
-        throw new RuntimeException("Not implemented!");                         
+    public String getFileFormatName() {
+        throw new RuntimeException("Not implemented!");
     }
-    
+
 }

@@ -20,19 +20,17 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.convert.v20to21.data;
 
 import java.io.Serializable;
 
-
 /**
- * Options for OpenXML filter.
- * Serializable to allow saving to / reading from configuration file.
+ * Options for OpenXML filter. Serializable to allow saving to / reading from
+ * configuration file.
  * <p>
- * OpenDoc filter have the following options
- * ([+] means default on).
+ * OpenDoc filter have the following options ([+] means default on).
  * Translatable elements:
  * <ul>
  * <li>[] Hidden text (Word)
@@ -44,11 +42,11 @@ import java.io.Serializable;
  * <li>[+] Slide comments (PowerPoint)
  * <li>[] Slide Masters (PowerPoint)
  * </ul>
+ * 
  * @author Didier Briel
  */
-public class OpenXMLOptions implements Serializable
-{    
-     
+public class OpenXMLOptions implements Serializable {
+
     /** Hold value of properties. */
     private boolean translateHiddenText = false;
     private boolean translateComments = true;
@@ -59,142 +57,130 @@ public class OpenXMLOptions implements Serializable
     private boolean translateExcelComments = true;
     private boolean translateSlideComments = true;
     private boolean translateSlideMasters = false;
-    
+
     /**
      * Returns whether Hidden Text should be translated.
      */
-    public boolean getTranslateHiddenText()
-    {
+    public boolean getTranslateHiddenText() {
         return this.translateHiddenText;
     }
 
     /**
      * Sets whether Hidden Text should be translated.
      */
-    public void setTranslateHiddenText(boolean translateHiddenText)
-    {
+    public void setTranslateHiddenText(boolean translateHiddenText) {
         this.translateHiddenText = translateHiddenText;
     }
 
     /**
      * Returns whether Commments should be translated.
      */
-    public boolean getTranslateComments()
-    {
+    public boolean getTranslateComments() {
         return this.translateComments;
     }
 
     /**
      * Sets whether Comments should be translated.
      */
-    public void setTranslateComments(boolean translateComments)
-    {
+    public void setTranslateComments(boolean translateComments) {
         this.translateComments = translateComments;
     }
+
     /**
      * Returns whether Footnotes should be translated.
      */
-    public boolean getTranslateFootnotes()
-    {
+    public boolean getTranslateFootnotes() {
         return this.translateFootnotes;
     }
 
     /**
      * Sets whether Footnotes should be translated.
      */
-    public void setTranslateFootnotes(boolean translateFootnotes)
-    {
+    public void setTranslateFootnotes(boolean translateFootnotes) {
         this.translateFootnotes = translateFootnotes;
     }
-   /**
+
+    /**
      * Returns whether Endnotes should be translated.
      */
-    public boolean getTranslateEndnotes()
-    {
+    public boolean getTranslateEndnotes() {
         return this.translateEndnotes;
     }
 
     /**
      * Sets whether Footnotes should be translated.
      */
-    public void setTranslateEndnotes(boolean translateEndnotes)
-    {
+    public void setTranslateEndnotes(boolean translateEndnotes) {
         this.translateEndnotes = translateEndnotes;
-    }    
-   /**
+    }
+
+    /**
      * Returns whether Headers should be translated.
      */
-    public boolean getTranslateHeaders()
-    {
+    public boolean getTranslateHeaders() {
         return this.translateHeaders;
     }
 
     /**
      * Sets whether Headers should be translated.
      */
-    public void setTranslateHeaders(boolean translateHeaders)
-    {
+    public void setTranslateHeaders(boolean translateHeaders) {
         this.translateHeaders = translateHeaders;
-    }        
-   /**
+    }
+
+    /**
      * Returns whether Footers should be translated.
      */
-    public boolean getTranslateFooters()
-    {
+    public boolean getTranslateFooters() {
         return this.translateFooters;
     }
 
     /**
      * Sets whether Footers should be translated.
      */
-    public void setTranslateFooters(boolean translateFooters)
-    {
+    public void setTranslateFooters(boolean translateFooters) {
         this.translateFooters = translateFooters;
-    }        
-   /**
+    }
+
+    /**
      * Returns whether Excel Comments should be translated.
      */
-    public boolean getTranslateExcelComments()
-    {
+    public boolean getTranslateExcelComments() {
         return this.translateExcelComments;
     }
 
     /**
      * Sets whether Excel Comments should be translated.
      */
-    public void setTranslateExcelComments(boolean translateExcelComments)
-    {
+    public void setTranslateExcelComments(boolean translateExcelComments) {
         this.translateExcelComments = translateExcelComments;
-    }  
+    }
+
     /**
      * Returns whether Slide Comments should be translated.
      */
-    public boolean getTranslateSlideComments()
-    {
+    public boolean getTranslateSlideComments() {
         return this.translateSlideComments;
     }
 
     /**
      * Sets whether Slide Comments should be translated.
      */
-    public void setTranslateSlideComments(boolean translateSlideComments)
-    {
+    public void setTranslateSlideComments(boolean translateSlideComments) {
         this.translateSlideComments = translateSlideComments;
-    }     
-    
+    }
+
     /**
      * Returns whether Slide Masters should be translated.
      */
-    public boolean getTranslateSlideMasters()
-    {
+    public boolean getTranslateSlideMasters() {
         return this.translateSlideMasters;
     }
 
     /**
      * Sets whether Slide Masters should be translated.
      */
-    public void setTranslateSlideMasters(boolean translateSlideMasters)
-    {
+    public void setTranslateSlideMasters(boolean translateSlideMasters) {
         this.translateSlideMasters = translateSlideMasters;
     }
 }

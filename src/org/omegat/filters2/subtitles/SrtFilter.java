@@ -80,8 +80,8 @@ public class SrtFilter extends AbstractFilter {
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile)
-            throws IOException, TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException,
+            TranslationException {
         out = outFile;
         READ_STATE state = READ_STATE.WAIT_TIME;
         key = null;
@@ -132,8 +132,7 @@ public class SrtFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile,
-            BufferedReader translatedFile) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 
@@ -144,8 +143,7 @@ public class SrtFilter extends AbstractFilter {
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
             if (!StringUtil.isEmpty(tr)) {
-                entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
-                        tr, false, null, this);
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }
     }

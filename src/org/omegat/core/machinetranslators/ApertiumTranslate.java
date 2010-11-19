@@ -44,8 +44,7 @@ public class ApertiumTranslate extends BaseTranslate {
     protected static String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
     protected static String MARK_BEG = "{\"translatedText\":\"";
     protected static String MARK_END = "\"}";
-    protected static Pattern RE_UNICODE = Pattern
-            .compile("\\\\u([0-9A-Fa-f]{4})");
+    protected static Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
     protected static Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
 
     @Override
@@ -59,17 +58,18 @@ public class ApertiumTranslate extends BaseTranslate {
 
     /**
      * Modify some country codes to fit with Apertium
-     * @param language An OmegaT language
+     * 
+     * @param language
+     *            An OmegaT language
      * @return A code modified for some Apertium languages
      */
     private String apertiumCode(Language language) {
-        
+
         String lCode = language.getLanguageCode().toLowerCase();
-        String locale =language.getLocaleCode();
+        String locale = language.getLocaleCode();
 
         if (!StringUtil.isEmpty(language.getCountryCode())) {
-            if ( locale.equalsIgnoreCase("en_us") ||
-                 locale.equalsIgnoreCase("pt_br") )
+            if (locale.equalsIgnoreCase("en_us") || locale.equalsIgnoreCase("pt_br"))
                 return locale; // We need en_US and pt_BR
             else if (locale.equalsIgnoreCase("oc_ar"))
                 return "oc_aran";
@@ -81,16 +81,14 @@ public class ApertiumTranslate extends BaseTranslate {
     }
 
     @Override
-    protected String translate(Language sLang, Language tLang, String text)
-            throws Exception {
+    protected String translate(Language sLang, Language tLang, String text) throws Exception {
 
         String trText = text;
 
         String sourceLang = apertiumCode(sLang);
         String targetLang = apertiumCode(tLang);
 
-        String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace(
-                "#targetLang#", targetLang);
+        String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang);
         String url = GT_URL + URLEncoder.encode(trText, "UTF-8") + url2;
 
         String v = WikiGet.getURL(url);

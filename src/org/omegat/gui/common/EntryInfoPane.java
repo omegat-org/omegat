@@ -43,19 +43,18 @@ import org.omegat.core.events.IProjectEventListener;
  * @param <T>
  *            result type of found data
  */
-public abstract class EntryInfoPane<T> extends JTextPane implements
-        IProjectEventListener, IEntryEventListener {
+public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEventListener,
+        IEntryEventListener {
     SourceTextEntry currentlyProcessedEntry;
-    
+
     public EntryInfoPane(final boolean useApplicationFont) {
         if (useApplicationFont) {
             setFont(Core.getMainWindow().getApplicationFont());
-            CoreEvents
-                    .registerFontChangedEventListener(new IFontChangedEventListener() {
-                        public void onFontChanged(Font newFont) {
-                            EntryInfoPane.this.setFont(newFont);
-                        }
-                    });
+            CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
+                public void onFontChanged(Font newFont) {
+                    EntryInfoPane.this.setFont(newFont);
+                }
+            });
         }
         CoreEvents.registerProjectChangeListener(this);
         CoreEvents.registerEntryEventListener(this);
@@ -106,8 +105,7 @@ public abstract class EntryInfoPane<T> extends JTextPane implements
      * @param data
      *            found data
      */
-    protected abstract void setFoundResult(SourceTextEntry processedEntry,
-            T data);
+    protected abstract void setFoundResult(SourceTextEntry processedEntry, T data);
 
     /**
      * Callback from search thread if error occured.

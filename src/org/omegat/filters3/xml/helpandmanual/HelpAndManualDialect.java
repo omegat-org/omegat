@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml.helpandmanual;
 
@@ -32,23 +32,20 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the Help&Manual XML Dialect.
- *
+ * 
  * @author Guido Leenders
  * @author Didier Briel
  */
-public class HelpAndManualDialect extends DefaultXMLDialect
-{
+public class HelpAndManualDialect extends DefaultXMLDialect {
     public static final Pattern HAM_ROOT_TAG = Pattern.compile("topic|map|helpproject");
 
-    public HelpAndManualDialect()
-    {
+    public HelpAndManualDialect() {
         defineConstraint(CONSTRAINT_ROOT, HAM_ROOT_TAG);
 
-        defineParagraphTags(new String[] {
-            "caption", "config-value", "variable", "para", "title", "keyword", "li", 
-        });
+        defineParagraphTags(new String[] { "caption", "config-value", "variable", "para", "title", "keyword",
+                "li", });
 
         defineShortcut("link", "li");
     }
-                                       
+
 }

@@ -43,15 +43,14 @@ import org.omegat.util.Token;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SpellCheckerMarker implements IMarker {
-    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(
-            Color.RED);
+    protected static final HighlightPainter PAINTER = new UnderlineFactory.WaveUnderline(Color.RED);
 
     public HighlightPainter getPainter() {
         return PAINTER;
     }
 
-    public List<Mark> getMarksForEntry(String sourceText,
-            String translationText, boolean isActive) throws Exception {
+    public List<Mark> getMarksForEntry(String sourceText, String translationText, boolean isActive)
+            throws Exception {
         if (translationText == null) {
             // translation not displayed
             return null;
@@ -61,8 +60,7 @@ public class SpellCheckerMarker implements IMarker {
             return null;
         }
         List<Mark> result = new ArrayList<Mark>();
-        for (Token tok : Core.getProject().getTargetTokenizer()
-                .tokenizeWordsForSpelling(translationText)) {
+        for (Token tok : Core.getProject().getTargetTokenizer().tokenizeWordsForSpelling(translationText)) {
             int st = tok.getOffset();
             int en = tok.getOffset() + tok.getLength();
             String word = translationText.substring(st, en);

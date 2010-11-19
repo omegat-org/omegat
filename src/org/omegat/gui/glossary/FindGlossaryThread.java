@@ -59,8 +59,7 @@ import org.omegat.util.Token;
  * @author Wildrich Fourie
  * @author Didier Briel
  */
-public class FindGlossaryThread extends
-        EntryInfoSearchThread<List<GlossaryEntry>> {
+public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry>> {
 
     private final String src;
 
@@ -68,8 +67,8 @@ public class FindGlossaryThread extends
 
     private final GlossaryManager manager;
 
-    public FindGlossaryThread(final GlossaryTextArea pane,
-            final SourceTextEntry newEntry, final GlossaryManager manager) {
+    public FindGlossaryThread(final GlossaryTextArea pane, final SourceTextEntry newEntry,
+            final GlossaryManager manager) {
         super(pane, newEntry);
         src = newEntry.getSrcText();
         this.manager = manager;
@@ -83,8 +82,7 @@ public class FindGlossaryThread extends
         }
 
         // computer source entry tokens
-        Token[] strTokens = tok.tokenizeWords(src,
-                ITokenizer.StemmingMode.GLOSSARY);
+        Token[] strTokens = tok.tokenizeWords(src, ITokenizer.StemmingMode.GLOSSARY);
 
         List<GlossaryEntry> entries = manager.getGlossaryEntries();
         if (entries != null) {
@@ -95,8 +93,7 @@ public class FindGlossaryThread extends
 
                 // computer glossary entry tokens
                 String glosStr = glosEntry.getSrcText();
-                Token[] glosTokens = tok.tokenizeWords(glosStr,
-                        ITokenizer.StemmingMode.GLOSSARY);
+                Token[] glosTokens = tok.tokenizeWords(glosStr, ITokenizer.StemmingMode.GLOSSARY);
                 int glosTokensN = glosTokens.length;
                 if (glosTokensN == 0)
                     continue;
@@ -136,8 +133,7 @@ public class FindGlossaryThread extends
      */
     private String bracketEntry(String entry) {
 
-        if (entry.contains(",")
-                && !(entry.contains(";") || entry.contains("\"")))
+        if (entry.contains(",") && !(entry.contains(";") || entry.contains("\"")))
             entry = '"' + entry + '"';
         return entry;
     }
@@ -170,8 +166,7 @@ public class FindGlossaryThread extends
                 // If the Entries are exactely the same, insert a blank entry.
                 if (nowEntry.getSrcText().equals(thenEntry.getSrcText()))
                     if (nowEntry.getLocText().equals(thenEntry.getLocText()))
-                        if (nowEntry.getCommentText().equals(
-                                thenEntry.getCommentText())) {
+                        if (nowEntry.getCommentText().equals(thenEntry.getCommentText())) {
                             result.set(j, replaceEntry);
                             removedDuplicate = true;
                         }
@@ -187,8 +182,7 @@ public class FindGlossaryThread extends
 
             while (myIter.hasNext()) {
                 GlossaryEntry checkEntry = myIter.next();
-                if (checkEntry.getSrcText().equals("")
-                        || checkEntry.getLocText().equals(""))
+                if (checkEntry.getSrcText().equals("") || checkEntry.getLocText().equals(""))
                     myIter.remove();
                 else
                     newList.add(checkEntry);
@@ -276,25 +270,20 @@ public class FindGlossaryThread extends
                     // have been removed earlier.
                     if (!sortList.get(m).getCommentText().equals("")) {
                         if (comTxt.equals(""))
-                            comTxt = comCounter + ". "
-                                    + sortList.get(m).getCommentText();
+                            comTxt = comCounter + ". " + sortList.get(m).getCommentText();
                         else
-                            comTxt += "\n" + comCounter + ". "
-                                    + sortList.get(m).getCommentText();
+                            comTxt += "\n" + comCounter + ". " + sortList.get(m).getCommentText();
                     }
                 } else {
                     if (!sortList.get(m).getCommentText().equals("")) {
                         if (comTxt.equals(""))
-                            comTxt = comCounter + ". "
-                                    + sortList.get(m).getCommentText();
+                            comTxt = comCounter + ". " + sortList.get(m).getCommentText();
                         else
-                            comTxt += "\n" + comCounter + ". "
-                                    + sortList.get(m).getCommentText();
+                            comTxt += "\n" + comCounter + ". " + sortList.get(m).getCommentText();
                     }
                 }
             }
-            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxt,
-                    comTxt);
+            GlossaryEntry combineEntry = new GlossaryEntry(srcTxt, locTxt, comTxt);
             returnList.add(combineEntry);
             // ==================================================================
         }

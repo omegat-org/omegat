@@ -78,10 +78,8 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
         ((HTMLDocument) getDocument()).setPreservesUnknownTags(false);
 
         // setEditable(false);
-        String title = OStrings
-                .getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Dictionary");
-        Core.getMainWindow().addDockable(
-                new DockableScrollPane("DICTIONARY", title, this, true));
+        String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Dictionary");
+        Core.getMainWindow().addDockable(new DockableScrollPane("DICTIONARY", title, this, true));
 
         addMouseListener(mouseCallback);
 
@@ -128,8 +126,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
             if (el != null) {
                 try {
                     // rectangle to be visible
-                    Rectangle rect = getUI().modelToView(this,
-                            el.getStartOffset());
+                    Rectangle rect = getUI().modelToView(this, el.getStartOffset());
                     // show 2 lines
                     if (rect != null) {
                         rect.height *= 2;
@@ -158,8 +155,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     }
 
     @Override
-    protected void setFoundResult(final SourceTextEntry se,
-            final List<DictionaryEntry> data) {
+    protected void setFoundResult(final SourceTextEntry se, final List<DictionaryEntry> data) {
         UIThreadsUtil.mustBeSwingThread();
 
         displayedWords.clear();
@@ -202,11 +198,9 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
                 for (int i = 0; i < displayedWords.size(); i++) {
                     Element el = doc.getElement(Integer.toString(i));
                     if (el != null) {
-                        if (el.getStartOffset() <= mousepos
-                                && el.getEndOffset() >= mousepos) {
+                        if (el.getStartOffset() <= mousepos && el.getEndOffset() >= mousepos) {
                             final String w = displayedWords.get(i);
-                            String hideW = StaticUtils.format(OStrings
-                                    .getString("DICTIONARY_HIDE"), w);
+                            String hideW = StaticUtils.format(OStrings.getString("DICTIONARY_HIDE"), w);
                             JMenuItem item = popup.add(hideW);
                             item.addActionListener(new ActionListener() {
                                 public void actionPerformed(ActionEvent e) {
@@ -224,8 +218,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
     /**
      * Thread for search data in dictionaries.
      */
-    public class DictionaryEntriesSearchThread extends
-            EntryInfoSearchThread<List<DictionaryEntry>> {
+    public class DictionaryEntriesSearchThread extends EntryInfoSearchThread<List<DictionaryEntry>> {
         protected final String src;
         protected final ITokenizer tok;
 
@@ -240,15 +233,13 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
             if (tok == null) {
                 return null;
             }
-            Token[] tokenList = tok.tokenizeWords(src,
-                    ITokenizer.StemmingMode.NONE);
+            Token[] tokenList = tok.tokenizeWords(src, ITokenizer.StemmingMode.NONE);
             Set<String> words = new TreeSet<String>();
             for (Token tok : tokenList) {
                 if (isEntryChanged()) {
                     return null;
                 }
-                String w = src.substring(tok.getOffset(), tok.getOffset()
-                        + tok.getLength());
+                String w = src.substring(tok.getOffset(), tok.getOffset() + tok.getLength());
 
                 words.add(w);
             }

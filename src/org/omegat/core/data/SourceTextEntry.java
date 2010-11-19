@@ -37,7 +37,7 @@ package org.omegat.core.data;
 public class SourceTextEntry {
     /** Source entry text. */
     private String src;
-    
+
     /** If entry with the same source already exist in project. */
     boolean dublicate;
 
@@ -67,7 +67,7 @@ public class SourceTextEntry {
     public int entryNum() {
         return m_entryNum;
     }
-    
+
     /** If entry with the same source already exist in project. */
     public boolean isDublicate() {
         return dublicate;

@@ -90,25 +90,22 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
      *            search for translation segments modified before the given date
      * @param dateBefore
      *            the date before which the modification date has to be
-     * @param  numberOfResults
+     * @param numberOfResults
      *            the maximum number of results returned by the thread
      * @internal The main loop (in the run method) waits for the variable
      *           m_searching to be set to true. This variable is set to true in
      *           this function on successful setting of the search parameters.
      */
-    public SearchThread(SearchWindow window, String text, String rootDir,
-            boolean recursive, boolean exact, boolean keyword, boolean regex,
-            boolean caseSensitive, boolean tm, boolean allResults,
-            boolean searchSource, boolean searchTarget, boolean searchAuthor,
-            String author, boolean searchDateAfter, long dateAfter,
-            boolean searchDateBefore, long dateBefore, int numberOfResults) {
+    public SearchThread(SearchWindow window, String text, String rootDir, boolean recursive, boolean exact,
+            boolean keyword, boolean regex, boolean caseSensitive, boolean tm, boolean allResults,
+            boolean searchSource, boolean searchTarget, boolean searchAuthor, String author,
+            boolean searchDateAfter, long dateAfter, boolean searchDateBefore, long dateBefore,
+            int numberOfResults) {
         m_window = window;
 
-        m_searchExpression = new SearchExpression(text, rootDir, recursive,
-                exact, keyword, regex, caseSensitive, tm, allResults,
-                searchSource, searchTarget, searchAuthor, author,
-                searchDateAfter, dateAfter, searchDateBefore, dateBefore,
-                numberOfResults);
+        m_searchExpression = new SearchExpression(text, rootDir, recursive, exact, keyword, regex,
+                caseSensitive, tm, allResults, searchSource, searchTarget, searchAuthor, author,
+                searchDateAfter, dateAfter, searchDateBefore, dateBefore, numberOfResults);
     }
 
     // /////////////////////////////////////////////////////////
@@ -117,10 +114,9 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
     public void run() {
         try {
             try {
-                List<SearchResultEntry> resultsList = new Searcher(
-                        Core.getProject(), this).getSearchResults(
-                        m_searchExpression);
-                
+                List<SearchResultEntry> resultsList = new Searcher(Core.getProject(), this)
+                        .getSearchResults(m_searchExpression);
+
                 if (stopped) {
                     return;
                 }
@@ -150,7 +146,7 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
     public boolean isStopped() {
         return stopped;
     }
-    
+
     /**
      * Stop search.
      */

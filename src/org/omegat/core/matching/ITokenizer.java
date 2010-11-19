@@ -47,7 +47,7 @@ public interface ITokenizer {
      * Results can be cached for better performance.
      */
     Token[] tokenizeWords(String str, StemmingMode stemmingMode);
-    
+
     /**
      * Breaks a string into word-only tokens. Numbers, tags, and other non-word
      * tokens are NOT included in the result. Stemming must NOT be used.

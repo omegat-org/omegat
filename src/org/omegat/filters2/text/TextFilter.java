@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2.text;
 
@@ -39,61 +39,49 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter to support plain text files (in various encodings).
- *
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
-public class TextFilter extends AbstractFilter
-{
+public class TextFilter extends AbstractFilter {
 
     /**
-     * Text filter should segmentOn text into paragraphs on line breaks. 
+     * Text filter should segmentOn text into paragraphs on line breaks.
      */
     public static final String SEGMENT_BREAKS = "BREAKS";
     /**
-     * Defult. Text filter should segmentOn text into paragraphs on empty lines. 
+     * Defult. Text filter should segmentOn text into paragraphs on empty lines.
      */
     public static final String SEGMENT_EMPTYLINES = "EMPTYLINES";
     /**
-     * Text filter should not segmentOn text into paragraphs. 
+     * Text filter should not segmentOn text into paragraphs.
      */
     public static final String SEGMENT_NEVER = "NEVER";
 
     public static final String OPTION_SEGMENT_ON = "segmentOn";
-    
-    public String getFileFormatName()
-    {
+
+    public String getFileFormatName() {
         return OStrings.getString("TEXTFILTER_FILTER_NAME");
     }
 
-    public Instance[] getDefaultInstances()
-    {
-        return new Instance[] 
-            { 
-                new Instance("*.txt"),                                          
-                new Instance("*.txt1", "ISO-8859-1", "ISO-8859-1"),             
-                new Instance("*.txt2", "ISO-8859-2", "ISO-8859-2"),             
-                new Instance("*.utf8", "UTF-8", "UTF-8")                        
-            };
+    public Instance[] getDefaultInstances() {
+        return new Instance[] { new Instance("*.txt"), new Instance("*.txt1", "ISO-8859-1", "ISO-8859-1"),
+                new Instance("*.txt2", "ISO-8859-2", "ISO-8859-2"), new Instance("*.utf8", "UTF-8", "UTF-8") };
     }
 
-    public boolean isSourceEncodingVariable()
-    {
+    public boolean isSourceEncodingVariable() {
         return true;
     }
 
-    public boolean isTargetEncodingVariable()
-    {
+    public boolean isTargetEncodingVariable() {
         return true;
     }
-    
-    public void processFile(BufferedReader in, BufferedWriter out)
-            throws IOException
-    {
+
+    public void processFile(BufferedReader in, BufferedWriter out) throws IOException {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
-        if (ch!=0xFEFF)
+        if (ch != 0xFEFF)
             in.reset();
 
         String segmentOn = processOptions.get(TextFilter.OPTION_SEGMENT_ON);
@@ -105,91 +93,75 @@ public class TextFilter extends AbstractFilter
             processSegEmptyLines(in, out);
         }
     }
-    
+
     /** Process the file without segmenting it. */
-    private void processNonSeg(BufferedReader in, Writer out)
-            throws IOException
-    {
+    private void processNonSeg(BufferedReader in, Writer out) throws IOException {
         StringBuffer segment = new StringBuffer();
         char[] buf = new char[4096];
         int len;
-        while ((len=in.read(buf))>=0)
+        while ((len = in.read(buf)) >= 0)
             segment.append(buf, 0, len);
         out.write(processEntry(segment.toString()));
     }
-    
+
     /** Processes the file segmenting on line breaks. */
-    private void processSegLineBreaks(BufferedReader in, Writer out)
-            throws IOException
-    {
+    private void processSegLineBreaks(BufferedReader in, Writer out) throws IOException {
         LinebreakPreservingReader lpin = new LinebreakPreservingReader(in);
-        String nontrans = "";                                                    
+        String nontrans = "";
         String s;
-        while( (s=lpin.readLine())!=null )
-        {
-            if( s.trim().length()==0 )
-            {
-                nontrans += s + lpin.getLinebreak();                                            
+        while ((s = lpin.readLine()) != null) {
+            if (s.trim().length() == 0) {
+                nontrans += s + lpin.getLinebreak();
                 continue;
             }
             String srcText = s;
 
             out.write(nontrans);
-            nontrans = "";                                                        
+            nontrans = "";
 
             String translation = processEntry(srcText);
             out.write(translation);
 
-            nontrans += lpin.getLinebreak();                                                    
+            nontrans += lpin.getLinebreak();
         }
 
-        if( nontrans.length()!=0 )
+        if (nontrans.length() != 0)
             out.write(nontrans);
     }
 
     /** Processes the file segmenting on line breaks. */
-    private void processSegEmptyLines(BufferedReader in, Writer out)
-            throws IOException
-    {
+    private void processSegEmptyLines(BufferedReader in, Writer out) throws IOException {
         LinebreakPreservingReader lpin = new LinebreakPreservingReader(in);
         StringBuffer nontrans = new StringBuffer();
         StringBuffer trans = new StringBuffer();
         String s;
-        while( (s=lpin.readLine())!=null )
-        {
-            if (s.length()==0)
-            {
+        while ((s = lpin.readLine()) != null) {
+            if (s.length() == 0) {
                 out.write(nontrans.toString());
                 nontrans.setLength(0);
 
                 out.write(processEntry(trans.toString()));
                 trans.setLength(0);
-                nontrans.append(lpin.getLinebreak());                                          
-            }
-            else
-            {
-                if( s.trim().length()==0 && trans.length()==0 )
-                {
+                nontrans.append(lpin.getLinebreak());
+            } else {
+                if (s.trim().length() == 0 && trans.length() == 0) {
                     nontrans.append(s);
-                    nontrans.append(lpin.getLinebreak());                                      
-                }
-                else
-                {
+                    nontrans.append(lpin.getLinebreak());
+                } else {
                     trans.append(s);
-                    trans.append(lpin.getLinebreak());                                         
+                    trans.append(lpin.getLinebreak());
                 }
             }
         }
 
-        if( nontrans.length()>=0 )
+        if (nontrans.length() >= 0)
             out.write(nontrans.toString());
-        if( trans.length()>=0 )
+        if (trans.length() >= 0)
             out.write(processEntry(trans.toString()));
     }
 
     @Override
-    public Map<String, String> changeOptions(Dialog parent,
-            Map<String, String> config) {
+    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
         try {
             TextOptionsDialog dialog = new TextOptionsDialog(parent, config);
             dialog.setVisible(true);
@@ -206,10 +178,10 @@ public class TextFilter extends AbstractFilter
 
     /**
      * Returns true to indicate that Text filter has options.
+     * 
      * @return True, because Text filter has options.
      */
-    public boolean hasOptions()
-    {
+    public boolean hasOptions() {
         return true;
     }
 }

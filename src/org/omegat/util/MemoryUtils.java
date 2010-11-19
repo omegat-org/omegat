@@ -38,8 +38,7 @@ import java.lang.reflect.Modifier;
  */
 public class MemoryUtils {
     /** JVM architecture. */
-    final protected static boolean IS64 = !"32".equals(System
-            .getProperty("sun.arch.data.model"));
+    final protected static boolean IS64 = !"32".equals(System.getProperty("sun.arch.data.model"));
 
     /** Object footprint - 16 for 64bit, 8 for 32 bit. */
     final protected static int SZ_OBJFOOT = IS64 ? 16 : 8;
@@ -53,8 +52,7 @@ public class MemoryUtils {
      * @return memory size
      */
     public static long getMemoryUsed() {
-        return Runtime.getRuntime().totalMemory()
-                - Runtime.getRuntime().freeMemory();
+        return Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
     }
 
     /**
@@ -99,8 +97,7 @@ public class MemoryUtils {
 
         try {
             if (oc.isArray()) {
-                result = getSimpleTypeSize(oc.getComponentType())
-                        * Array.getLength(obj);
+                result = getSimpleTypeSize(oc.getComponentType()) * Array.getLength(obj);
                 if (!oc.getComponentType().isPrimitive()) {
                     for (int i = 0; i < Array.getLength(obj); i++) {
                         Object v = Array.get(obj, i);

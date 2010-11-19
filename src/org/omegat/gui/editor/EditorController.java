@@ -92,8 +92,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class EditorController implements IEditor {
 
     /** Local logger. */
-    private static final Logger LOGGER = Logger
-            .getLogger(EditorController.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(EditorController.class.getName());
 
     /** Dockable pane for editor. */
     private final DockableScrollPane pane;
@@ -113,9 +112,12 @@ public class EditorController implements IEditor {
 
     /** Current displayed file. */
     protected int displayedFileIndex, previousDisplayedFileIndex;
-    /** Current active segment in current file, if there are segments in file (can be fale if filter active!)*/
+    /**
+     * Current active segment in current file, if there are segments in file
+     * (can be fale if filter active!)
+     */
     protected int displayedEntryIndex;
-    
+
     /** Object which store history of moving by segments. */
     private SegmentHistory history = new SegmentHistory();
 
@@ -129,7 +131,7 @@ public class EditorController implements IEditor {
 
     Document3.ORIENTATION currentOrientation;
     protected boolean sourceLangIsRTL, targetLangIsRTL;
-    
+
     private List<Integer> entryFilterList;
 
     public EditorController(final MainWindow mainWindow) {
@@ -137,12 +139,11 @@ public class EditorController implements IEditor {
 
         editor = new EditorTextArea3(this);
         setFont(Core.getMainWindow().getApplicationFont());
-        
+
         markerController = new MarkerController(this);
 
         pane = new DockableScrollPane("EDITOR", " ", editor, false);
-        pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale
-                .getDefault()));
+        pane.setComponentOrientation(ComponentOrientation.getOrientation(Locale.getDefault()));
         pane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         pane.setMinimumSize(new Dimension(100, 100));
 
@@ -202,29 +203,25 @@ public class EditorController implements IEditor {
         });
 
         // register font changes callback
-        CoreEvents
-                .registerFontChangedEventListener(new IFontChangedEventListener() {
-                    public void onFontChanged(Font newFont) {
-                        setFont(newFont);
-                        ViewLabel.fontHeight = 0;
-                        editor.revalidate();
-                        editor.repaint();
+        CoreEvents.registerFontChangedEventListener(new IFontChangedEventListener() {
+            public void onFontChanged(Font newFont) {
+                setFont(newFont);
+                ViewLabel.fontHeight = 0;
+                editor.revalidate();
+                editor.repaint();
 
-                        // fonts have changed
-                        emptyProjectPane.setFont(font);
-                    }
-                });
+                // fonts have changed
+                emptyProjectPane.setFont(font);
+            }
+        });
 
         // register Swing error logger
-        Thread
-                .setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
-                    public void uncaughtException(Thread t, Throwable e) {
-                        LOGGER.log(Level.SEVERE,
-                                "Uncatched exception in thread [" + t.getName()
-                                        + "]", e);
-                    }
-                });
-        
+        Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+            public void uncaughtException(Thread t, Throwable e) {
+                LOGGER.log(Level.SEVERE, "Uncatched exception in thread [" + t.getName() + "]", e);
+            }
+        });
+
         EditorPopups.init(this);
     }
 
@@ -246,8 +243,7 @@ public class EditorController implements IEditor {
         case FIRST_ENTRY:
             displayedFileIndex = 0;
             displayedEntryIndex = 0;
-            title = StaticUtils.format(OStrings
-                    .getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            title = StaticUtils.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
             SwingUtilities.invokeLater(new Runnable() {
                 public void run() {
@@ -259,8 +255,7 @@ public class EditorController implements IEditor {
             });
             break;
         case NO_CHANGE:
-            title = StaticUtils.format(OStrings
-                    .getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
+            title = StaticUtils.format(OStrings.getString("GUI_SUBWINDOWTITLE_Editor"), getCurrentFile());
             data = editor;
             break;
         }
@@ -285,10 +280,8 @@ public class EditorController implements IEditor {
      * languages.
      */
     private void setInitialOrientation() {
-        String sourceLang = Core.getProject().getProjectProperties()
-                .getSourceLanguage().getLanguageCode();
-        String targetLang = Core.getProject().getProjectProperties()
-                .getTargetLanguage().getLanguageCode();
+        String sourceLang = Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode();
+        String targetLang = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
 
         sourceLangIsRTL = EditorUtils.isRTL(sourceLang);
         targetLangIsRTL = EditorUtils.isRTL(targetLang);
@@ -348,8 +341,7 @@ public class EditorController implements IEditor {
             newOrientation = Document3.ORIENTATION.LTR;
             break;
         }
-        LOGGER.info("Switch document orientation from " + currentOrientation
-                + " to " + newOrientation);
+        LOGGER.info("Switch document orientation from " + currentOrientation + " to " + newOrientation);
         currentOrientation = newOrientation;
         // editor.getOmDocument().setOrientation(currentOrientation);
 
@@ -372,8 +364,7 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public SourceTextEntry getCurrentEntry() {
-        if (m_docSegList == null || displayedEntryIndex < 0
-                || m_docSegList.length <= displayedEntryIndex) {
+        if (m_docSegList == null || displayedEntryIndex < 0 || m_docSegList.length <= displayedEntryIndex) {
             // there is no current entry
             return null;
         }
@@ -408,7 +399,7 @@ public class EditorController implements IEditor {
      */
     protected void loadDocument() {
         UIThreadsUtil.mustBeSwingThread();
-        
+
         // Currently displayed file
         IProject.FileInfo file;
         try {
@@ -432,12 +423,11 @@ public class EditorController implements IEditor {
                 SegmentBuilder.addSegmentSeparator(doc);
             }
         }
-        m_docSegList=temp_docSegList2.toArray(new SegmentBuilder[temp_docSegList2.size()]);
+        m_docSegList = temp_docSegList2.toArray(new SegmentBuilder[temp_docSegList2.size()]);
         doc.setDocumentFilter(new DocumentFilter3());
 
         // add locate for target language to editor
-        Locale targetLocale = Core.getProject().getProjectProperties()
-                .getTargetLanguage().getLocale();
+        Locale targetLocale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
         editor.setLocale(targetLocale);
 
         editor.setDocument(doc);
@@ -462,15 +452,15 @@ public class EditorController implements IEditor {
         });
 
         markerController.reset(m_docSegList.length);
-        
+
         // call all markers
         markerController.process(m_docSegList);
-        
+
         editor.repaint();
     }
 
     /**
-     * Activates the current entry (if available) by displaying source text and 
+     * Activates the current entry (if available) by displaying source text and
      * embedding displayed text in markers.
      * <p>
      * Also moves document focus to current entry, and makes sure fuzzy info
@@ -478,9 +468,9 @@ public class EditorController implements IEditor {
      */
     public void activateEntry() {
         UIThreadsUtil.mustBeSwingThread();
-        
+
         SourceTextEntry ste = getCurrentEntry();
-        if (ste==null) {
+        if (ste == null) {
             return;
         }
 
@@ -502,8 +492,7 @@ public class EditorController implements IEditor {
 
         editor.cancelUndo();
 
-        history
-                .insertNew(m_docSegList[displayedEntryIndex].segmentNumberInProject);
+        history.insertNew(m_docSegList[displayedEntryIndex].segmentNumberInProject);
         // update history menu items
         mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
         mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
@@ -516,16 +505,14 @@ public class EditorController implements IEditor {
             exportCurrentSegment(ste);
         }
 
-        scrollForDisplayNearestSegments(editor.getOmDocument()
-                .getTranslationStart());
+        scrollForDisplayNearestSegments(editor.getOmDocument().getTranslationStart());
 
         // check if file was changed
         if (previousDisplayedFileIndex != displayedFileIndex) {
             previousDisplayedFileIndex = displayedFileIndex;
-            CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles()
-                    .get(displayedFileIndex).filePath);
+            CoreEvents.fireEntryNewFile(Core.getProject().getProjectFiles().get(displayedFileIndex).filePath);
         }
-        
+
         editor.repaint();
 
         // fire event about new segment activated
@@ -540,12 +527,11 @@ public class EditorController implements IEditor {
         String trans = doc.extractTranslation();
         if (trans != null) {
             SourceTextEntry ste = m_docSegList[displayedEntryIndex].ste;
-            String lMsg = " " + ste.getSrcText().length() + "/"
-                    + trans.length() + " ";
+            String lMsg = " " + ste.getSrcText().length() + "/" + trans.length() + " ";
             Core.getMainWindow().showLengthMessage(lMsg);
         }
     }
-    
+
     /**
      * Called on the text changed in document. Required for recalculate marks
      * for active segment.
@@ -589,8 +575,7 @@ public class EditorController implements IEditor {
                                 editor.setCaretPosition(p);
                                 SwingUtilities.invokeLater(new Runnable() {
                                     public void run() {
-                                        editor
-                                                .setCaretPosition(requiredPosition);
+                                        editor.setCaretPosition(requiredPosition);
                                     }
                                 });
                             } catch (IllegalArgumentException iae) {
@@ -611,8 +596,8 @@ public class EditorController implements IEditor {
         TransEntry te = Core.getProject().getTranslation(ste);
         String s2 = te != null ? te.translation : "";
 
-        FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT); 
-        FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT); 
+        FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT);
+        FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT);
     }
 
     /**
@@ -621,8 +606,7 @@ public class EditorController implements IEditor {
      */
     private void showStat() {
         IProject project = Core.getProject();
-        IProject.FileInfo fi = project.getProjectFiles()
-                .get(displayedFileIndex);
+        IProject.FileInfo fi = project.getProjectFiles().get(displayedFileIndex);
         int translatedInFile = 0;
         for (SourceTextEntry ste : fi.entries) {
             if (project.getTranslation(ste) != null) {
@@ -632,9 +616,8 @@ public class EditorController implements IEditor {
 
         StatisticsInfo stat = project.getStatistics();
 
-        String pMsg = " " + Integer.toString(translatedInFile) + "/"
-                + Integer.toString(fi.entries.size()) + " ("
-                + Integer.toString(stat.numberofTranslatedSegments) + "/"
+        String pMsg = " " + Integer.toString(translatedInFile) + "/" + Integer.toString(fi.entries.size())
+                + " (" + Integer.toString(stat.numberofTranslatedSegments) + "/"
                 + Integer.toString(stat.numberOfUniqueSegments) + ", "
                 + Integer.toString(stat.numberOfSegmentsTotal) + ") ";
         Core.getMainWindow().showProgressMessage(pMsg);
@@ -687,7 +670,7 @@ public class EditorController implements IEditor {
         if (!doc.isEditMode()) {
             return;
         }
-        
+
         // forget about old marks
         markerController.resetEntryMarks(displayedEntryIndex);
 
@@ -697,14 +680,13 @@ public class EditorController implements IEditor {
         if (newTrans != null) {
             // segment was active
             SourceTextEntry entry = m_docSegList[displayedEntryIndex].ste;
-            
+
             TransEntry oldTE = Core.getProject().getTranslation(entry);
             String old_translation = oldTE != null ? oldTE.translation : "";
 
             // update memory
             if (newTrans.equals(entry.getSrcText())
-                    && !Preferences
-                            .isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
+                    && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
                 Core.getProject().setTranslation(entry, "");
                 newTrans = "";
             } else {
@@ -721,15 +703,14 @@ public class EditorController implements IEditor {
                         // commited entry, skip
                         continue;
                     }
-                    if (m_docSegList[i].ste.getSrcText().equals(
-                            entry.getSrcText())) {
+                    if (m_docSegList[i].ste.getSrcText().equals(entry.getSrcText())) {
                         // the same source text - need to update
                         m_docSegList[i].createSegmentElement(false);
                     }
                 }
             }
         }
-        
+
         // then add new marks
         markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
 
@@ -752,7 +733,7 @@ public class EditorController implements IEditor {
 
         doc.stopEditMode();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -785,17 +766,20 @@ public class EditorController implements IEditor {
                 displayedEntryIndex = 0;
                 if (displayedFileIndex >= files.size()) {
                     displayedFileIndex = 0;
-                    looped=true;
+                    looped = true;
                 }
                 loadDocument();
             }
-            ste=getCurrentEntry();
-        } while (  ste==null //filtered file has no entries
-                && (!looped || !(   displayedFileIndex  == startFileIndex 
-                                 && displayedEntryIndex >= startEntryIndex
-                                ) //and we have not had all entries
-                   )
-                );
+            ste = getCurrentEntry();
+        } while (ste == null // filtered file has no entries
+                && (!looped || !(displayedFileIndex == startFileIndex && displayedEntryIndex >= startEntryIndex) // and
+                                                                                                                 // we
+                                                                                                                 // have
+                                                                                                                 // not
+                                                                                                                 // had
+                                                                                                                 // all
+                                                                                                                 // entries
+                ));
 
         activateEntry();
         this.editor.setCursor(oldCursor);
@@ -824,18 +808,21 @@ public class EditorController implements IEditor {
                 displayedFileIndex--;
                 if (displayedFileIndex < 0) {
                     displayedFileIndex = files.size() - 1;
-                    looped=true;
+                    looped = true;
                 }
                 loadDocument();
-                displayedEntryIndex = m_docSegList.length-1;
+                displayedEntryIndex = m_docSegList.length - 1;
             }
-            ste=getCurrentEntry();
-        } while (  ste==null //filtered file has no entries
-                && (!looped || !(   displayedFileIndex  == startFileIndex 
-                                 && displayedEntryIndex <= startEntryIndex
-                                ) //and we have not had all entries
-                   )
-                );
+            ste = getCurrentEntry();
+        } while (ste == null // filtered file has no entries
+                && (!looped || !(displayedFileIndex == startFileIndex && displayedEntryIndex <= startEntryIndex) // and
+                                                                                                                 // we
+                                                                                                                 // have
+                                                                                                                 // not
+                                                                                                                 // had
+                                                                                                                 // all
+                                                                                                                 // entries
+                ));
 
         activateEntry();
 
@@ -851,7 +838,7 @@ public class EditorController implements IEditor {
         // check if a document is loaded
         if (Core.getProject().isProjectLoaded() == false)
             return;
-        
+
         Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
         Cursor oldCursor = this.editor.getCursor();
         this.editor.setCursor(hourglassCursor);
@@ -872,19 +859,23 @@ public class EditorController implements IEditor {
                 displayedEntryIndex = 0;
                 if (displayedFileIndex >= files.size()) {
                     displayedFileIndex = 0;
-                    looped=true;
+                    looped = true;
                 }
-                loadDocument(); //to get proper EntryIndex when filter active
+                loadDocument(); // to get proper EntryIndex when filter active
             }
             ste = getCurrentEntry();
-        } while (  ( ste==null //filtered file has no entries
-                   ||Core.getProject().getTranslation(ste) != null //entry is translated
-                   )
-                && (!looped || !(   displayedFileIndex  == startFileIndex 
-                                 && displayedEntryIndex <= startEntryIndex
-                                ) //and we have not had all entries
-                   )
-                );
+        } while ((ste == null // filtered file has no entries
+                || Core.getProject().getTranslation(ste) != null // entry is
+                                                                 // translated
+                )
+                && (!looped || !(displayedFileIndex == startFileIndex && displayedEntryIndex <= startEntryIndex) // and
+                                                                                                                 // we
+                                                                                                                 // have
+                                                                                                                 // not
+                                                                                                                 // had
+                                                                                                                 // all
+                                                                                                                 // entries
+                ));
 
         activateEntry();
 
@@ -918,10 +909,10 @@ public class EditorController implements IEditor {
         displayedFileIndex = fileIndex;
         displayedEntryIndex = 0;
         loadDocument();
-        
+
         activateEntry();
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -950,18 +941,16 @@ public class EditorController implements IEditor {
             for (int i = 0; i < dataEngine.getProjectFiles().size(); i++) {
                 IProject.FileInfo fi = dataEngine.getProjectFiles().get(i);
                 SourceTextEntry firstEntry = fi.entries.get(0);
-                SourceTextEntry lastEntry = fi.entries
-                        .get(fi.entries.size() - 1);
-                if (firstEntry.entryNum() <= entryNum
-                        && lastEntry.entryNum() >= entryNum) {
+                SourceTextEntry lastEntry = fi.entries.get(fi.entries.size() - 1);
+                if (firstEntry.entryNum() <= entryNum && lastEntry.entryNum() >= entryNum) {
                     // this file
                     if (i != displayedFileIndex) {
-                        //it's other file than displayed
+                        // it's other file than displayed
                         displayedFileIndex = i;
                         loadDocument();
                     }
-                    //find correct displayedEntryIndex
-                    for (int j=0; j<m_docSegList.length; j++) {
+                    // find correct displayedEntryIndex
+                    for (int j = 0; j < m_docSegList.length; j++) {
                         if (m_docSegList[j].segmentNumberInProject >= entryNum) { //
                             displayedEntryIndex = j;
                             break;
@@ -1009,7 +998,7 @@ public class EditorController implements IEditor {
             if (start == end) {
                 start = EditorUtils.getWordStart(editor, start);
                 end = EditorUtils.getWordEnd(editor, end);
-                
+
                 // adjust the bound again
                 if (start < translationStart && end <= translationEnd)
                     start = translationStart;
@@ -1071,13 +1060,11 @@ public class EditorController implements IEditor {
 
             for (Token token : tokenList) {
                 // find out the case and change to the selected
-                String result = doChangeCase(token
-                        .getTextFromString(selectionText), toWhat);
+                String result = doChangeCase(token.getTextFromString(selectionText), toWhat);
 
                 // replace this token
-                buffer.replace(token.getOffset() + lengthIncrement, token
-                        .getLength()
-                        + token.getOffset() + lengthIncrement, result);
+                buffer.replace(token.getOffset() + lengthIncrement, token.getLength() + token.getOffset()
+                        + lengthIncrement, result);
 
                 lengthIncrement += result.length() - token.getLength();
             }
@@ -1107,8 +1094,7 @@ public class EditorController implements IEditor {
      *            : one of the CASE_* values - except for case CASE_CYCLE.
      */
     private String doChangeCase(String input, CHANGE_CASE_TO toWhat) {
-        Locale locale = Core.getProject().getProjectProperties()
-                .getTargetLanguage().getLocale();
+        Locale locale = Core.getProject().getProjectProperties().getTargetLanguage().getLocale();
 
         switch (toWhat) {
         case LOWER:
@@ -1117,8 +1103,7 @@ public class EditorController implements IEditor {
             return input.toUpperCase(locale);
         case TITLE:
             // TODO: find out how to get a locale-aware title case
-            return Character.toTitleCase(input.charAt(0))
-                    + input.substring(1).toLowerCase(locale);
+            return Character.toTitleCase(input.charAt(0)) + input.substring(1).toLowerCase(locale);
         }
         // if everything fails
         return input.toUpperCase(locale);
@@ -1230,14 +1215,12 @@ public class EditorController implements IEditor {
                     .setComponentOrientation(EditorUtils.isRTL(language) ? ComponentOrientation.RIGHT_TO_LEFT
                             : ComponentOrientation.LEFT_TO_RIGHT);
             introPane.setEditable(false);
-            introPane.setPage(HelpFrame.getHelpFileURL(language,
-                    OConsts.HELP_INSTANT_START));
+            introPane.setPage(HelpFrame.getHelpFileURL(language, OConsts.HELP_INSTANT_START));
         } catch (IOException e) {
             // editorScroller.setViewportView(editor);
         }
 
-        emptyProjectPaneTitle = OStrings
-                .getString("TF_INTRO_EMPTYPROJECT_FILENAME");
+        emptyProjectPaneTitle = OStrings.getString("TF_INTRO_EMPTYPROJECT_FILENAME");
         emptyProjectPane = new JTextPane();
         emptyProjectPane.setEditable(false);
         emptyProjectPane.setText(OStrings.getString("TF_INTRO_EMPTYPROJECT"));
@@ -1260,8 +1243,7 @@ public class EditorController implements IEditor {
         String country = Locale.getDefault().getCountry().toUpperCase(Locale.ENGLISH);
 
         // Check if there's a translation for the full locale (lang + country)
-        if (HelpFrame.getHelpFileURL(language + "_" + country,
-                OConsts.HELP_INSTANT_START) != null) {
+        if (HelpFrame.getHelpFileURL(language + "_" + country, OConsts.HELP_INSTANT_START) != null) {
             return language + "_" + country;
         }
 
@@ -1272,7 +1254,7 @@ public class EditorController implements IEditor {
         // Default to English, if no translation exists
         return "en";
     }
-    
+
     /**
      * {@inheritDoc}
      */
@@ -1284,11 +1266,10 @@ public class EditorController implements IEditor {
     /**
      * {@inheritDoc}
      */
-    public void markActiveEntrySource(
-            final SourceTextEntry requiredActiveEntry, final List<Mark> marks,
+    public void markActiveEntrySource(final SourceTextEntry requiredActiveEntry, final List<Mark> marks,
             final String markerClassName) {
         UIThreadsUtil.mustBeSwingThread();
-        
+
         for (Mark m : marks) {
             if (m.entryPart != Mark.ENTRY_PART.SOURCE) {
                 throw new RuntimeException("Mark must be for source only");
@@ -1301,18 +1282,16 @@ public class EditorController implements IEditor {
         }
 
         int mi = markerController.getMarkerIndex(markerClassName);
-        markerController.setEntryMarks(displayedEntryIndex,
-                m_docSegList[displayedEntryIndex], marks, mi);
+        markerController.setEntryMarks(displayedEntryIndex, m_docSegList[displayedEntryIndex], marks, mi);
     }
-    
-    public void registerPopupMenuConstructors(int priority,
-            IPopupMenuConstructor constructor) {
+
+    public void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
         editor.registerPopupMenuConstructors(priority, constructor);
     }
 
     /**
-     * {@inheritdoc}
-     * Document is reloaded to immediately have the filter being effective.
+     * {@inheritdoc} Document is reloaded to immediately have the filter being
+     * effective.
      */
     public void addFilter(List<Integer> entryList) {
         this.entryFilterList = entryList;
@@ -1320,17 +1299,29 @@ public class EditorController implements IEditor {
         int curEntryNum = getCurrentEntryNumber();
         Document3 doc = editor.getOmDocument();
         IProject project = Core.getProject();
-        if (doc != null && project !=null && project.getProjectFiles()!=null) { //prevent nullpointererrors in loadDocument. Only load if there is a document.
-            loadDocument(); //rebuild entrylist
+        if (doc != null && project != null && project.getProjectFiles() != null) { // prevent
+                                                                                   // nullpointererrors
+                                                                                   // in
+                                                                                   // loadDocument.
+                                                                                   // Only
+                                                                                   // load
+                                                                                   // if
+                                                                                   // there
+                                                                                   // is
+                                                                                   // a
+                                                                                   // document.
+            loadDocument(); // rebuild entrylist
             if (isInFilter(curEntryNum)) {
                 gotoEntry(curEntryNum);
             } else {
-                //go to next (available) segment. But first, we need to reset the 
-                //displayedEntryIndex to the number where the current but filtered 
-                //entry could have been if it was not filtered.
-                for (int j=0; j<m_docSegList.length; j++) {
+                // go to next (available) segment. But first, we need to reset
+                // the
+                // displayedEntryIndex to the number where the current but
+                // filtered
+                // entry could have been if it was not filtered.
+                for (int j = 0; j < m_docSegList.length; j++) {
                     if (m_docSegList[j].segmentNumberInProject >= curEntryNum) { //
-                        displayedEntryIndex = j-1;
+                        displayedEntryIndex = j - 1;
                         break;
                     }
                 }
@@ -1340,17 +1331,19 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * {@inheritdoc}
-     * Document is reloaded if appropriate to immediately remove the filter;
+     * {@inheritdoc} Document is reloaded if appropriate to immediately remove
+     * the filter;
      */
     public void removeFilter() {
         this.entryFilterList = null;
         int curEntryNum = getCurrentEntryNumber();
         Document3 doc = editor.getOmDocument();
         IProject project = Core.getProject();
-        if (doc != null && project !=null)  { //prevent nullpointererrors in loadDocument. Only load if there is a document.
+        if (doc != null && project != null) { // prevent nullpointererrors in
+                                              // loadDocument. Only load if
+                                              // there is a document.
             List<FileInfo> files = project.getProjectFiles();
-            if (files!= null && !files.isEmpty()) {
+            if (files != null && !files.isEmpty()) {
                 loadDocument();
                 gotoEntry(curEntryNum);
             }
@@ -1359,12 +1352,16 @@ public class EditorController implements IEditor {
 
     /**
      * Returns if the given entry is part of the filtered entries.
-     * @param entry project-wide entry number
-     * @return true if entry belongs to the filtered entries, or if there is 
-     *         no filter in place, false otherwise.
+     * 
+     * @param entry
+     *            project-wide entry number
+     * @return true if entry belongs to the filtered entries, or if there is no
+     *         filter in place, false otherwise.
      */
     public boolean isInFilter(Integer entry) {
-        if (this.entryFilterList==null) return true;
-        else return this.entryFilterList.contains(entry);
+        if (this.entryFilterList == null)
+            return true;
+        else
+            return this.entryFilterList.contains(entry);
     }
 }

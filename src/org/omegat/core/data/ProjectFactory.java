@@ -49,7 +49,7 @@ public class ProjectFactory {
         RealProject p = new RealProject(newProps);
         p.createProject();
         Core.setProject(p);
-        Core.getAutoSave().enable();        
+        Core.getAutoSave().enable();
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.CREATE);
     }
 
@@ -58,7 +58,7 @@ public class ProjectFactory {
      * tms, source files etc.
      * 
      * @param props
-     *                properties for new project
+     *            properties for new project
      */
     public static void loadProject(ProjectProperties props) {
         Core.getAutoSave().disable();

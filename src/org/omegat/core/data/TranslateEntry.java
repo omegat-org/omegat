@@ -57,7 +57,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
 
         final String source = ParseEntry.stripSomeChars(origSource, spr);
-       
+
         StringBuffer res = new StringBuffer();
 
         if (m_config.isSentenceSegmentingEnabled()) {
@@ -65,14 +65,12 @@ public abstract class TranslateEntry implements ITranslateCallback {
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = m_config.getSourceLanguage();
             Language targetLang = m_config.getTargetLanguage();
-            List<String> segments = Segmenter.segment(sourceLang, source,
-                    spaces, brules);
+            List<String> segments = Segmenter.segment(sourceLang, source, spaces, brules);
             for (int i = 0; i < segments.size(); i++) {
                 String onesrc = segments.get(i);
                 segments.set(i, getSegmentTranslation(id, i, onesrc));
             }
-            res.append(Segmenter.glue(sourceLang, targetLang, segments, spaces,
-                    brules));
+            res.append(Segmenter.glue(sourceLang, targetLang, segments, spaces, brules));
         } else {
             res.append(getSegmentTranslation(id, 0, source));
         }
@@ -99,6 +97,5 @@ public abstract class TranslateEntry implements ITranslateCallback {
         return r;
     }
 
-    protected abstract String getSegmentTranslation(String id,
-            int segmentIndex, String segmentSource);
+    protected abstract String getSegmentTranslation(String id, int segmentIndex, String segmentSource);
 }

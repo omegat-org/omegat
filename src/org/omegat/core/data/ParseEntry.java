@@ -25,7 +25,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.data;
 
@@ -66,40 +66,38 @@ public abstract class ParseEntry implements IParseCallback {
      * @param translation
      *            translation of the source string, if format supports it
      * @param isFuzzy
-     *            flag for fuzzy translation. If a translation is fuzzy, it is 
-     *            not added to the projects TMX, but it is added to the 
-     *            generated 'reference' TMX, a special TMX that is used as 
-     *            extra reference during translation.
+     *            flag for fuzzy translation. If a translation is fuzzy, it is
+     *            not added to the projects TMX, but it is added to the
+     *            generated 'reference' TMX, a special TMX that is used as extra
+     *            reference during translation.
      * @param comment
      *            entry's comment, if format supports it
      * @param filter
      *            filter which produces entry
      */
-    public void addEntry(String id, String source, String translation,
-            boolean isFuzzy, String comment, IFilter filter) {
+    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+            IFilter filter) {
         if (StringUtil.isEmpty(source)) {
             // empty string - not need to save
             return;
         }
-        
+
         ParseEntryResult tmp = new ParseEntryResult();
 
         source = stripSomeChars(source, tmp);
         if (translation != null) {
             translation = stripSomeChars(translation, tmp);
         }
-       
+
         String segTranslation = isFuzzy ? null : translation;
-        
+
         if (m_config.isSentenceSegmentingEnabled()) {
             List<StringBuffer> spaces = new ArrayList<StringBuffer>();
             List<Rule> brules = new ArrayList<Rule>();
             Language sourceLang = m_config.getSourceLanguage();
-            List<String> segments = Segmenter.segment(sourceLang, source,
-                    spaces, brules);
+            List<String> segments = Segmenter.segment(sourceLang, source, spaces, brules);
             if (segments.size() == 1) {
-                addSegment(id, (short) 0, segments.get(0), segTranslation,
-                        comment);
+                addSegment(id, (short) 0, segments.get(0), segTranslation, comment);
             } else {
                 for (short i = 0; i < segments.size(); i++) {
                     String onesrc = segments.get(i);
@@ -109,7 +107,7 @@ public abstract class ParseEntry implements IParseCallback {
         } else {
             addSegment(id, (short) 0, source, segTranslation, comment);
         }
-        if (translation != null) {            
+        if (translation != null) {
             // Add systematically the TU as a legacy TMX
             String tmxSource;
             if (isFuzzy) {
@@ -122,14 +120,15 @@ public abstract class ParseEntry implements IParseCallback {
     }
 
     /**
-     * Adds the source and translation to the generated 'reference TMX', a 
+     * Adds the source and translation to the generated 'reference TMX', a
      * special TMX that is used as extra refrence during translation.
      */
     public abstract void addFileTMXEntry(String source, String translation);
 
     /**
-     * Adds a segment to the project. If a translation is given, it it added to 
+     * Adds a segment to the project. If a translation is given, it it added to
      * the projects TMX.
+     * 
      * @param id
      *            ID of entry, if format supports it
      * @param segmentIndex
@@ -137,12 +136,13 @@ public abstract class ParseEntry implements IParseCallback {
      * @param segmentSource
      *            Translatable source string
      * @param segmentTranslation
-     *            non fuzzy translation of the source string, if format supports it
+     *            non fuzzy translation of the source string, if format supports
+     *            it
      * @param comment
      *            entry's comment, if format supports it
      */
-    protected abstract void addSegment(String id, short segmentIndex,
-            String segmentSource, String segmentTranslation, String comment);
+    protected abstract void addSegment(String id, short segmentIndex, String segmentSource,
+            String segmentTranslation, String comment);
 
     /**
      * Strip some chars for represent string in UI.
@@ -167,16 +167,14 @@ public abstract class ParseEntry implements IParseCallback {
          */
         int len = r.length();
         int b = 0;
-        while (b < len
-                && (Character.isWhitespace(r.charAt(b)) || r.charAt(b) == '\u00A0')) {
+        while (b < len && (Character.isWhitespace(r.charAt(b)) || r.charAt(b) == '\u00A0')) {
             b++;
         }
         per.spacesAtBegin = b;
 
         int pos = len - 1;
         int e = 0;
-        while (pos >= b
-                && (Character.isWhitespace(r.charAt(pos)) || r.charAt(pos) == '\u00A0')) {
+        while (pos >= b && (Character.isWhitespace(r.charAt(pos)) || r.charAt(pos) == '\u00A0')) {
             pos--;
             e++;
         }

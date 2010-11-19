@@ -56,13 +56,10 @@ import org.omegat.util.OStrings;
 public class PoFilter extends AbstractFilter {
 
     protected static Pattern COMMENT_FUZZY = Pattern.compile("#, fuzzy");
-    protected static Pattern COMMENT_FUZZY_OTHER = Pattern
-            .compile("#,.* fuzzy.*");
+    protected static Pattern COMMENT_FUZZY_OTHER = Pattern.compile("#,.* fuzzy.*");
     protected static Pattern COMMENT_NOWRAP = Pattern.compile("#,.* no-wrap.*");
-    protected static Pattern MSG_ID = Pattern
-            .compile("msgid(_plural)?\\s+\"(.*)\"");
-    protected static Pattern MSG_STR = Pattern
-            .compile("msgstr(\\[[0-9]+\\])?\\s+\"(.*)\"");
+    protected static Pattern MSG_ID = Pattern.compile("msgid(_plural)?\\s+\"(.*)\"");
+    protected static Pattern MSG_STR = Pattern.compile("msgstr(\\[[0-9]+\\])?\\s+\"(.*)\"");
     protected static Pattern MSG_CTX = Pattern.compile("msgctxt\\s+\"(.*)\"");
     protected static Pattern MSG_OTHER = Pattern.compile("\"(.*)\"");
 
@@ -80,9 +77,7 @@ public class PoFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.po"), 
-                new Instance("*.pot") 
-        };
+        return new Instance[] { new Instance("*.po"), new Instance("*.pot") };
     }
 
     public boolean isSourceEncodingVariable() {
@@ -92,13 +87,13 @@ public class PoFilter extends AbstractFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     public String getFuzzyMark() {
         return "PO-fuzzy";
     }
 
-    public void processFile(File inFile, String inEncoding, File outFile,
-            String outEncoding) throws IOException, TranslationException {
+    public void processFile(File inFile, String inEncoding, File outFile, String outEncoding)
+            throws IOException, TranslationException {
         BufferedReader reader = createReader(inFile, inEncoding);
         try {
             BufferedWriter writer;
@@ -120,10 +115,9 @@ public class PoFilter extends AbstractFilter {
             reader.close();
         }
     }
-    
+
     @Override
-    protected void alignFile(BufferedReader sourceFile,
-            BufferedReader translatedFile) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
         // BOM (byte order mark) bugfix
         translatedFile.mark(1);
         int ch = translatedFile.read();
@@ -134,8 +128,7 @@ public class PoFilter extends AbstractFilter {
         processPoFile(translatedFile);
     }
 
-    public void processFile(BufferedReader in, BufferedWriter out)
-            throws IOException {
+    public void processFile(BufferedReader in, BufferedWriter out) throws IOException {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();
@@ -226,7 +219,7 @@ public class PoFilter extends AbstractFilter {
                 }
                 continue;
             }
-            
+
             if ((m = MSG_CTX.matcher(s)).matches()) {
                 currentMode = MODE.MSGCTX;
                 eol(s);
@@ -285,18 +278,15 @@ public class PoFilter extends AbstractFilter {
             translation = null;
         }
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, source, translation, fuzzy, null,
-                    this);
+            entryParseCallback.addEntry(null, source, translation, fuzzy, null, this);
         } else if (entryAlignCallback != null) {
-            entryAlignCallback.addTranslation(null, source, translation, fuzzy,
-                    null, this);
+            entryAlignCallback.addTranslation(null, source, translation, fuzzy, null, this);
         }
     }
 
     protected void alignHeader(String header) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, unescape(header), null, false,
-                    null, this);
+            entryParseCallback.addEntry(null, unescape(header), null, false, null, this);
         }
     }
 
@@ -341,12 +331,9 @@ public class PoFilter extends AbstractFilter {
         targets[1].setLength(0);
     }
 
-    protected static final Pattern R1 = Pattern
-            .compile("(?<!\\\\)((\\\\\\\\)*)\\\\\"");
-    protected static final Pattern R2 = Pattern
-            .compile("(?<!\\\\)((\\\\\\\\)*)\\\\n");
-    protected static final Pattern R3 = Pattern
-            .compile("(?<!\\\\)((\\\\\\\\)*)\\\\t");
+    protected static final Pattern R1 = Pattern.compile("(?<!\\\\)((\\\\\\\\)*)\\\\\"");
+    protected static final Pattern R2 = Pattern.compile("(?<!\\\\)((\\\\\\\\)*)\\\\n");
+    protected static final Pattern R3 = Pattern.compile("(?<!\\\\)((\\\\\\\\)*)\\\\t");
     protected static final Pattern R4 = Pattern.compile("^\\\\n");
 
     /**
@@ -378,8 +365,7 @@ public class PoFilter extends AbstractFilter {
         String entry = unescape(en.toString());
 
         // Do real translation
-        String translation = entryTranslateCallback
-                .getTranslation(null, entry);
+        String translation = entryTranslateCallback.getTranslation(null, entry);
 
         if (translation != null) {
             return "\"" + escape(translation) + "\"";

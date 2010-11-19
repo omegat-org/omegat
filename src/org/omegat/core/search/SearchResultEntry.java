@@ -20,29 +20,31 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.search;
 
-
 /**
  * Storage for a search result entry.
- *
+ * 
  * @author Antonio Vilei
  */
 public class SearchResultEntry {
 
     /**
      * Creates a new search result entry with properties set to given values.
-     * @param num Number of the corresponding entry within a project
-     * @param preamble Information about where this entry comes from
-     * @param src Source text of the corresponding entry within a project
-     * @param target Target text of the corresponding entry within a project
+     * 
+     * @param num
+     *            Number of the corresponding entry within a project
+     * @param preamble
+     *            Information about where this entry comes from
+     * @param src
+     *            Source text of the corresponding entry within a project
+     * @param target
+     *            Target text of the corresponding entry within a project
      */
-    public SearchResultEntry(int num, String preamble, String srcPrefix,
-            String src, String target, SearchMatch[] srcMatch,
-            SearchMatch[] targetMatch)
-    {
+    public SearchResultEntry(int num, String preamble, String srcPrefix, String src, String target,
+            SearchMatch[] srcMatch, SearchMatch[] targetMatch) {
         m_num = num;
         m_preamble = preamble;
         m_srcPrefix = srcPrefix;
@@ -53,32 +55,28 @@ public class SearchResultEntry {
     }
 
     /**
-     * Returns the number of the corresponding entry within a project.
-     * The returned value is > 0 if the entry belongs to one of the source
-     * files of the project; it is -1 if the entry doesn't belong to any of
-     * the source files (the entry is stored in the TM or we are searching
-     * in a given directory)
+     * Returns the number of the corresponding entry within a project. The
+     * returned value is > 0 if the entry belongs to one of the source files of
+     * the project; it is -1 if the entry doesn't belong to any of the source
+     * files (the entry is stored in the TM or we are searching in a given
+     * directory)
      */
-    public int getEntryNum()
-    {
+    public int getEntryNum() {
         return (m_num);
     }
 
     /** Returns information about where this entry comes from. */
-    public String getPreamble()
-    {
+    public String getPreamble() {
         return (m_preamble);
     }
 
     /** Returns the source text of the corresponding entry within a project. */
-    public String getSrcText()
-    {
+    public String getSrcText() {
         return (m_src);
     }
 
     /** Returns the target text of the corresponding entry within a project. */
-    public String getTranslation()
-    {
+    public String getTranslation() {
         return (m_target);
     }
 

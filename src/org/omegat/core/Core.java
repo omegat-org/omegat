@@ -52,15 +52,15 @@ import org.omegat.gui.tagvalidation.TagValidationTool;
 
 /**
  * Class which contains all components instances.
- *
+ * 
  * Note about threads synchronization: each component must have only local
  * synchronization. It mustn't synchronize around other components or some other
  * objects.
- *
+ * 
  * Components which works in Swing UI thread can have other synchronization
  * idea: it can not be synchronized to access to some data which changed only in
  * UI thread.
- *
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Wildrich Fourie
  */
@@ -77,11 +77,11 @@ public class Core {
     private static GlossaryTextArea glossary;
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
-    
+
     private static Map<String, String> cmdLineParams;
 
     private static final List<IMarker> markers = new ArrayList<IMarker>();
-    
+
     /** Get project instance. */
     public static IProject getProject() {
         return currentProject;
@@ -126,21 +126,20 @@ public class Core {
     }
 
     /** Get glossary instance. */
-    public static GlossaryTextArea getGlossary(){
+    public static GlossaryTextArea getGlossary() {
         return glossary;
     }
 
     /**
      * Initialize application components.
      */
-    public static void initializeGUI(final Map<String, String> params)
-            throws Exception {
+    public static void initializeGUI(final Map<String, String> params) throws Exception {
         cmdLineParams = params;
-        
+
         // 1. Initialize project
         currentProject = new NotLoadedProject();
 
-        // 2. Initialize application frame        
+        // 2. Initialize application frame
         MainWindow me = new MainWindow();
         mainWindow = me;
 
@@ -163,10 +162,9 @@ public class Core {
     /**
      * Initialize application components.
      */
-    public static void initializeConsole(final Map<String, String> params)
-            throws Exception {
+    public static void initializeConsole(final Map<String, String> params) throws Exception {
         cmdLineParams = params;
-        
+
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
 
@@ -184,13 +182,13 @@ public class Core {
 
     /**
      * Set project instance for unit tests.
-     *
+     * 
      * @param currentProject
      */
     protected static void setCurrentProject(IProject currentProject) {
         Core.currentProject = currentProject;
     }
-    
+
     /**
      * Register class for calculate marks.
      * 
@@ -200,11 +198,11 @@ public class Core {
     public static void registerMarker(IMarker marker) {
         markers.add(marker);
     }
-    
+
     public static List<IMarker> getMarkers() {
         return markers;
     }
-    
+
     public static Map<String, String> getParams() {
         return cmdLineParams;
     }

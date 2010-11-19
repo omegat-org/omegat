@@ -117,8 +117,7 @@ public interface IFilter {
      *            filter's configuration options
      * @return Does the filter support the file.
      */
-    boolean isFileSupported(File inFile, String inEncoding,
-            Map<String, String> config);
+    boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config);
 
     /**
      * Parse single file.
@@ -133,8 +132,8 @@ public interface IFilter {
      *            callback for parsed data
      * @throws Exception
      */
-    void parseFile(File inFile, String inEncoding, Map<String, String> config,
-            IParseCallback callback) throws Exception;
+    void parseFile(File inFile, String inEncoding, Map<String, String> config, IParseCallback callback)
+            throws Exception;
 
     /**
      * Create translated file.
@@ -155,9 +154,8 @@ public interface IFilter {
      *            callback for get translation
      * @throws Exception
      */
-    void translateFile(File inFile, String inEncoding, Language targetLang,
-            File outFile, String outEncoding, Map<String, String> config,
-            ITranslateCallback callback) throws Exception;
+    void translateFile(File inFile, String inEncoding, Language targetLang, File outFile, String outEncoding,
+            Map<String, String> config, ITranslateCallback callback) throws Exception;
 
     /**
      * Align source and translated files.
@@ -176,9 +174,8 @@ public interface IFilter {
      *            callback for store aligned data
      * @throws Exception
      */
-    void alignFile(File inFile, String inEncoding, File outFile,
-            String outEncoding, Map<String, String> config,
-            IAlignCallback callback) throws Exception;
+    void alignFile(File inFile, String inEncoding, File outFile, String outEncoding,
+            Map<String, String> config, IAlignCallback callback) throws Exception;
 
     boolean hasOptions();
 

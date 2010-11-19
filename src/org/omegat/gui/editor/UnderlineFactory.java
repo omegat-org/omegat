@@ -110,11 +110,9 @@ public class UnderlineFactory {
         }
     }
 
-    public abstract static class Underliner extends
-            LayeredHighlighter.LayerPainter {
+    public abstract static class Underliner extends LayeredHighlighter.LayerPainter {
 
-        public Shape paintLayer(Graphics g, int offs0, int offs1, Shape bounds,
-                JTextComponent c, View view) {
+        public Shape paintLayer(Graphics g, int offs0, int offs1, Shape bounds, JTextComponent c, View view) {
             Rectangle rect = null;
             if (offs0 == view.getStartOffset() && offs1 == view.getEndOffset()) {
                 if (bounds instanceof Rectangle)
@@ -123,11 +121,9 @@ public class UnderlineFactory {
                     rect = bounds.getBounds();
             } else {
                 try {
-                    Shape shape = view.modelToView(offs0,
-                            Position.Bias.Forward, offs1,
+                    Shape shape = view.modelToView(offs0, Position.Bias.Forward, offs1,
                             Position.Bias.Backward, bounds);
-                    rect = (shape instanceof Rectangle) ? (Rectangle) shape
-                            : shape.getBounds();
+                    rect = (shape instanceof Rectangle) ? (Rectangle) shape : shape.getBounds();
                 } catch (BadLocationException ex) {
                     Log.log(ex);
                     return null;
@@ -139,11 +135,9 @@ public class UnderlineFactory {
             return rect;
         }
 
-        abstract protected void paint(Graphics g, Rectangle rect,
-                JTextComponent c);
+        abstract protected void paint(Graphics g, Rectangle rect, JTextComponent c);
 
-        public void paint(Graphics g, int p0, int p1, Shape bounds,
-                JTextComponent c) {
+        public void paint(Graphics g, int p0, int p1, Shape bounds, JTextComponent c) {
         }
     }
 }

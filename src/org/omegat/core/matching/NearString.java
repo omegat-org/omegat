@@ -31,10 +31,8 @@ package org.omegat.core.matching;
  * @author Keith Godfrey
  */
 public class NearString {
-    public NearString(final String source, final String translation,
-            final int nearScore, final int nearScoreNoStem,
-            final int adjustedScore, final byte[] nearData,
-            final String projName) {
+    public NearString(final String source, final String translation, final int nearScore,
+            final int nearScoreNoStem, final int adjustedScore, final byte[] nearData, final String projName) {
         this.source = source;
         this.translation = translation;
         score = nearScore;

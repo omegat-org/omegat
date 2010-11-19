@@ -23,7 +23,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.search;
 
@@ -31,7 +31,7 @@ import org.omegat.util.OConsts;
 
 /**
  * Storage for what to search for (search text and options).
- *
+ * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers
@@ -43,10 +43,11 @@ public class SearchExpression {
 
     /**
      * Creates a new search expression based on a given search text.
-     * @param text The text to search for
+     * 
+     * @param text
+     *            The text to search for
      */
-    public SearchExpression(String text)
-    {
+    public SearchExpression(String text) {
         this.text = text;
 
         // set default search conditions
@@ -71,46 +72,50 @@ public class SearchExpression {
     }
 
     /**
-     * Creates a new search expression based on specified search text and options.
-     * @param text The text to search for
-     * @param rootDir The folder to search in
-     * @param recursive Allow searching in subfolders of rootDir
-     * @param exact Search for a substring, including wildcards (*?)
-     * @param keyword Search for keywords, including wildcards (*?)
-     * @param regex Search based on regular expressions
-     * @param caseSensitive Search case sensitive
-     * @param tm Search also in legacy and orphan TM strings
-     * @param allResults Include duplicate results
-     * @param searchSource Search in source text
-     * @param searchTarget Search in target text
-     * @param searchAuthor Search for tmx segments modified by author id/name
-     * @param author String to search for in TMX attribute modificationId
-     * @param searchDateAfter Search for translation segments modified after the given date
-     * @param dateAfter The date after which the modification date has to be
-     * @param searchDateBefore Search for translation segments modified before the given date
-     * @param dateBefore The date before which the modification date has to be
-     * @param The maximum number of results
+     * Creates a new search expression based on specified search text and
+     * options.
+     * 
+     * @param text
+     *            The text to search for
+     * @param rootDir
+     *            The folder to search in
+     * @param recursive
+     *            Allow searching in subfolders of rootDir
+     * @param exact
+     *            Search for a substring, including wildcards (*?)
+     * @param keyword
+     *            Search for keywords, including wildcards (*?)
+     * @param regex
+     *            Search based on regular expressions
+     * @param caseSensitive
+     *            Search case sensitive
+     * @param tm
+     *            Search also in legacy and orphan TM strings
+     * @param allResults
+     *            Include duplicate results
+     * @param searchSource
+     *            Search in source text
+     * @param searchTarget
+     *            Search in target text
+     * @param searchAuthor
+     *            Search for tmx segments modified by author id/name
+     * @param author
+     *            String to search for in TMX attribute modificationId
+     * @param searchDateAfter
+     *            Search for translation segments modified after the given date
+     * @param dateAfter
+     *            The date after which the modification date has to be
+     * @param searchDateBefore
+     *            Search for translation segments modified before the given date
+     * @param dateBefore
+     *            The date before which the modification date has to be
+     * @param The
+     *            maximum number of results
      */
-    public SearchExpression(String  text,
-                            String  rootDir,
-                            boolean recursive,
-                            boolean exact,
-                            boolean keyword,
-                            boolean regex,
-                            boolean caseSensitive,
-                            boolean tm,
-                            boolean allResults,
-                            boolean searchSource,
-                            boolean searchTarget,
-                            boolean searchAuthor,
-                            String  author,
-                            boolean searchDateAfter,
-                            long    dateAfter,
-                            boolean searchDateBefore,
-                            long    dateBefore,
-                            int     numberOfResults
-                            )
-    {
+    public SearchExpression(String text, String rootDir, boolean recursive, boolean exact, boolean keyword,
+            boolean regex, boolean caseSensitive, boolean tm, boolean allResults, boolean searchSource,
+            boolean searchTarget, boolean searchAuthor, String author, boolean searchDateAfter,
+            long dateAfter, boolean searchDateBefore, long dateBefore, int numberOfResults) {
         this.text = text;
         this.rootDir = rootDir;
         this.recursive = recursive;
@@ -131,8 +136,8 @@ public class SearchExpression {
         this.numberOfResults = numberOfResults;
     }
 
-    public String  text;
-    public String  rootDir;
+    public String text;
+    public String rootDir;
     public boolean recursive;
     public boolean exact;
     public boolean keyword;
@@ -143,10 +148,10 @@ public class SearchExpression {
     public boolean searchSource;
     public boolean searchTarget;
     public boolean searchAuthor;
-    public String  author;
+    public String author;
     public boolean searchDateAfter;
-    public long    dateAfter;
+    public long dateAfter;
     public boolean searchDateBefore;
-    public long    dateBefore;
-    public int     numberOfResults;
+    public long dateBefore;
+    public int numberOfResults;
 }

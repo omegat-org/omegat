@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2.hhc;
 
@@ -35,7 +35,6 @@ import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.util.OStrings;
-        
 
 /**
  * A filter to translate HHC and HHK files.
@@ -44,79 +43,63 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
-public class HHCFilter2 extends HTMLFilter2
-{
+public class HHCFilter2 extends HTMLFilter2 {
 
-    public void processFile(BufferedReader infile, BufferedWriter outfile) 
-            throws IOException, TranslationException
-    {
+    public void processFile(BufferedReader infile, BufferedWriter outfile) throws IOException,
+            TranslationException {
         StringBuffer all = null;
-        try
-        {
+        try {
             all = new StringBuffer();
             char cbuf[] = new char[1000];
             int len = -1;
-            while( (len=infile.read(cbuf))>0 )
-                all.append(cbuf, 0, len);                
-        }
-        catch( OutOfMemoryError e )
-        {
+            while ((len = infile.read(cbuf)) > 0)
+                all.append(cbuf, 0, len);
+        } catch (OutOfMemoryError e) {
             // out of memory?
             all = null;
             System.gc();
             throw new IOException(OStrings.getString("HHC__FILE_TOO_BIG"));
         }
-        
+
         Parser parser = new Parser();
-        try
-        {
+        try {
             parser.setInputHTML(all.toString());
             parser.visitAllNodesWith(new HHCFilterVisitor(this, outfile));
-        }
-        catch( ParserException pe )
-        {
+        } catch (ParserException pe) {
             System.out.println(pe);
         }
     }
-    
-    //////////////////////////////////////////////////////////////////////////
-    
-    public String getFileFormatName()
-    {
+
+    // ////////////////////////////////////////////////////////////////////////
+
+    public String getFileFormatName() {
         return OStrings.getString("HHC__FILTER_NAME");
     }
 
-    public Instance[] getDefaultInstances()
-    {
-        return new Instance[]
-        {
-            new Instance("*.hhc"),                                              
-            new Instance("*.hhk")                                               
-        };
+    public Instance[] getDefaultInstances() {
+        return new Instance[] { new Instance("*.hhc"), new Instance("*.hhk") };
     }
 
     /**
      * Returns the editing hint for HHC filter.
      * <p>
-     * In English, the hint is as follows:
-     * <br>
-     * Note: Source File Encoding setting affects only the HHC and HHK files 
-     * that have no encoding declaration inside. If a HHC or HHK file has an 
-     * encoding declaration, it will be used disregarding any value you set in 
+     * In English, the hint is as follows: <br>
+     * Note: Source File Encoding setting affects only the HHC and HHK files
+     * that have no encoding declaration inside. If a HHC or HHK file has an
+     * encoding declaration, it will be used disregarding any value you set in
      * this dialog.
      */
-    public String getHint() 
-    {
+    public String getHint() {
         return OStrings.getString("HHC_NOTE");
     }
 
     /**
      * Returns true to indicate that a filter has options.
+     * 
      * @return False, because HHC filter has no options.
      */
-    public boolean hasOptions()
-    {
+    public boolean hasOptions() {
         return false;
     }
-    
+
 }

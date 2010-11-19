@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2.html2;
 
@@ -47,19 +47,16 @@ import org.omegat.util.OStrings;
 /**
  * A filter to translate HTML and XHTML files.
  * <p>
- * Some useful discussion why HTML filter should behave like it does,
- * happened on a
- * <a href="http://sourceforge.net/support/tracker.php?aid=1364265">bug report</a>
- * devoted to compressing space.
- *
+ * Some useful discussion why HTML filter should behave like it does, happened
+ * on a <a href="http://sourceforge.net/support/tracker.php?aid=1364265">bug
+ * report</a> devoted to compressing space.
+ * 
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  */
-public class HTMLFilter2 extends AbstractFilter
-{
+public class HTMLFilter2 extends AbstractFilter {
     /** Creates a new instance of HTMLFilter2 */
-    public HTMLFilter2()
-    {
+    public HTMLFilter2() {
     }
 
     /** Stores the source encoding of HTML file. */
@@ -68,65 +65,60 @@ public class HTMLFilter2 extends AbstractFilter
     /** Stores the target encoding of HTML file. */
     private String targetEncoding;
 
-    /** A regular Expression Pattern to be matched to the strings to be translated.
-     * If there is a match, the string should not be translated
+    /**
+     * A regular Expression Pattern to be matched to the strings to be
+     * translated. If there is a match, the string should not be translated
      */
     private Pattern skipRegExpPattern;
 
-    /** A map of attribute-name and attribute value pairs that,
-     *  if it exist in a meta-tag, indicates that the meta-tag 
-     *  should not be translated
+    /**
+     * A map of attribute-name and attribute value pairs that, if it exist in a
+     * meta-tag, indicates that the meta-tag should not be translated
      */
     private HashMap<String, String> skipMetaAttributes;
 
     /**
-     * Customized version of creating input reader for HTML files,
-     * aware of encoding by using <code>EncodingAwareReader</code> class.
-     *
+     * Customized version of creating input reader for HTML files, aware of
+     * encoding by using <code>EncodingAwareReader</code> class.
+     * 
      * @see HTMLReader
      */
-    public BufferedReader createReader(File infile, String encoding)
-            throws UnsupportedEncodingException, IOException
-    {
+    public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException,
+            IOException {
         HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), encoding);
         sourceEncoding = hreader.getEncoding();
         return new BufferedReader(hreader);
     }
+
     /**
-     * Customized version of creating an output stream for HTML files,
-     * appending charset meta by using <code>HTMLWriter</code> class.
-     *
+     * Customized version of creating an output stream for HTML files, appending
+     * charset meta by using <code>HTMLWriter</code> class.
+     * 
      * @see HTMLWriter
      */
-    public BufferedWriter createWriter(File outfile, String encoding)
-            throws UnsupportedEncodingException, IOException
-    {
+    public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
+            IOException {
         HTMLWriter hwriter;
         HTMLOptions options = new HTMLOptions(processOptions);
-        if (encoding==null)
+        if (encoding == null)
             this.targetEncoding = sourceEncoding;
         else
             this.targetEncoding = encoding;
 
-        hwriter = new HTMLWriter(outfile.getAbsolutePath(),
-                this.targetEncoding, options);
+        hwriter = new HTMLWriter(outfile.getAbsolutePath(), this.targetEncoding, options);
         return new BufferedWriter(hwriter);
     }
 
-    public void processFile(BufferedReader infile, BufferedWriter outfile)
-            throws IOException, TranslationException
-    {
+    public void processFile(BufferedReader infile, BufferedWriter outfile) throws IOException,
+            TranslationException {
         StringBuffer all = null;
-        try
-        {
+        try {
             all = new StringBuffer();
             char cbuf[] = new char[1000];
             int len = -1;
-            while( (len=infile.read(cbuf))>0 )
+            while ((len = infile.read(cbuf)) > 0)
                 all.append(cbuf, 0, len);
-        }
-        catch( OutOfMemoryError e )
-        {
+        } catch (OutOfMemoryError e) {
             // out of memory?
             all = null;
             System.gc();
@@ -137,112 +129,89 @@ public class HTMLFilter2 extends AbstractFilter
 
         // Prepare matcher
         String skipRegExp = options.getSkipRegExp();
-        if (skipRegExp != null && skipRegExp.length()>0)
-        {
-            try
-            {
-        	this.skipRegExpPattern = Pattern.compile(skipRegExp, Pattern.CASE_INSENSITIVE);
-            }
-            catch (PatternSyntaxException e)
-            {
-        	Log.log(e);
+        if (skipRegExp != null && skipRegExp.length() > 0) {
+            try {
+                this.skipRegExpPattern = Pattern.compile(skipRegExp, Pattern.CASE_INSENSITIVE);
+            } catch (PatternSyntaxException e) {
+                Log.log(e);
             }
         }
 
-        //prepare set of attributes that indicate not to translate a meta-tag
+        // prepare set of attributes that indicate not to translate a meta-tag
         String skipMetaString = options.getSkipMeta();
         skipMetaAttributes = new HashMap<String, String>();
         String[] skipMetaAttributesStringarray = skipMetaString.split(",");
-        for (int i=0; i<skipMetaAttributesStringarray.length; i++) {
+        for (int i = 0; i < skipMetaAttributesStringarray.length; i++) {
             String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase();
             skipMetaAttributes.put(keyvalue, "");
         }
 
         Parser parser = new Parser();
-        try
-        {
+        try {
             parser.setInputHTML(all.toString());
             parser.visitAllNodesWith(new FilterVisitor(this, outfile, options));
-        }
-        catch( ParserException pe )
-        {
+        } catch (ParserException pe) {
             System.out.println(pe);
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////////////////
 
     /** Package-internal processEntry to give it to FilterVisitor */
-    String privateProcessEntry(String entry)
-    {
-         if (skipRegExpPattern != null)
-         {
-             if (skipRegExpPattern.matcher(entry).matches())
-             {
-//               System.out.println("Skipping \""+entry+"\"");
-                 return entry;
-             }
-             else
-             {
-//              System.out.println("Using: \""+entry+"\"");
+    String privateProcessEntry(String entry) {
+        if (skipRegExpPattern != null) {
+            if (skipRegExpPattern.matcher(entry).matches()) {
+                // System.out.println("Skipping \""+entry+"\"");
+                return entry;
+            } else {
+                // System.out.println("Using: \""+entry+"\"");
                 return super.processEntry(entry);
             }
         }
         return super.processEntry(entry);
     }
 
-    //////////////////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////////////////
 
-    public boolean isTargetEncodingVariable()
-    {
+    public boolean isTargetEncodingVariable() {
         return true;
     }
 
-    public boolean isSourceEncodingVariable()
-    {
+    public boolean isSourceEncodingVariable() {
         return true;
     }
 
-    public String getFileFormatName()
-    {
+    public String getFileFormatName() {
         return OStrings.getString("HTML__FILTER_NAME");
     }
 
-    public Instance[] getDefaultInstances()
-    {
-        return new Instance[]
-        {
-            new Instance("*.htm", null, "UTF-8"),                      
-            new Instance("*.html", null, "UTF-8"),                     
-            new Instance("*.xhtml", null, "UTF-8"),                     
-            new Instance("*.xht", null, "UTF-8")                     
-        };
+    public Instance[] getDefaultInstances() {
+        return new Instance[] { new Instance("*.htm", null, "UTF-8"), new Instance("*.html", null, "UTF-8"),
+                new Instance("*.xhtml", null, "UTF-8"), new Instance("*.xht", null, "UTF-8") };
     }
 
     /**
      * Returns the editing hint for HTML filter.
      * <p>
-     * In English, the hint is as follows:
-     * <br>
-     * Note: Source File Encoding setting affects only the HTML files that
-     * have no encoding declaration inside. If HTML file has the encoding
+     * In English, the hint is as follows: <br>
+     * Note: Source File Encoding setting affects only the HTML files that have
+     * no encoding declaration inside. If HTML file has the encoding
      * declaration, it will be used disregarding any value you set in this
      * dialog.
      */
-    public String getHint()
-    {
+    public String getHint() {
         return OStrings.getString("HTML_NOTE");
     }
 
     /**
      * Returns true to indicate that (X)HTML filter has options.
+     * 
      * @return True, because (X)HTML filter has options.
      */
-    public boolean hasOptions()
-    {
+    public boolean hasOptions() {
         return true;
     }
-    
+
     /**
      * (X)HTML Filter shows a <b>modal</b> dialog to edit its own options.
      * 
@@ -251,8 +220,7 @@ public class HTMLFilter2 extends AbstractFilter
      * @return Updated filter options if user confirmed the changes, and current
      *         options otherwise.
      */
-    public Map<String, String> changeOptions(Dialog parent,
-            Map<String, String> config) {
+    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
         try {
             EditOptionsDialog dialog = new EditOptionsDialog(parent, config);
             dialog.setVisible(true);
@@ -267,18 +235,17 @@ public class HTMLFilter2 extends AbstractFilter
             return null;
         }
     }
-    
+
     /**
      * Returns the encoding of the html writer (if already set)
+     * 
      * @return the target encoding
      */
-    public String getTargetEncoding()
-    {
+    public String getTargetEncoding() {
         return this.targetEncoding;
     }
 
     public boolean checkDoSkipMetaTag(String key, String value) {
-        return skipMetaAttributes.
-                containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+        return skipMetaAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
     }
 }

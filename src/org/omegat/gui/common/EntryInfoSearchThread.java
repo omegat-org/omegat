@@ -40,79 +40,78 @@ import org.omegat.core.data.SourceTextEntry;
  *            result type of found data
  */
 public abstract class EntryInfoSearchThread<T> extends Thread {
-	private final EntryInfoPane<T> pane;
+    private final EntryInfoPane<T> pane;
 
-	/**
-	 * Entry which processed currently.
-	 * 
-	 * If entry in pane was changed, it means user was moved to other entry, and
-	 * there is no sense to continue search.
-	 */
-	private final SourceTextEntry currentlyProcessedEntry;
+    /**
+     * Entry which processed currently.
+     * 
+     * If entry in pane was changed, it means user was moved to other entry, and
+     * there is no sense to continue search.
+     */
+    private final SourceTextEntry currentlyProcessedEntry;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param pane
-	 *            entry info pane
-	 * @param entry
-	 *            current entry
-	 */
-	public EntryInfoSearchThread(final EntryInfoPane<T> pane,
-			final SourceTextEntry entry) {
-		this.pane = pane;
-		this.currentlyProcessedEntry = entry;
+    /**
+     * Constructor.
+     * 
+     * @param pane
+     *            entry info pane
+     * @param entry
+     *            current entry
+     */
+    public EntryInfoSearchThread(final EntryInfoPane<T> pane, final SourceTextEntry entry) {
+        this.pane = pane;
+        this.currentlyProcessedEntry = entry;
 
-	}
+    }
 
-	/**
-	 * Check if current entry was changed. If user moved to other entry, there
-	 * is no sence to continue search.
-	 * 
-	 * @return true if current entry was changed
-	 */
-	protected boolean isEntryChanged() {
-		return currentlyProcessedEntry != pane.currentlyProcessedEntry;
-	}
+    /**
+     * Check if current entry was changed. If user moved to other entry, there
+     * is no sence to continue search.
+     * 
+     * @return true if current entry was changed
+     */
+    protected boolean isEntryChanged() {
+        return currentlyProcessedEntry != pane.currentlyProcessedEntry;
+    }
 
-	@Override
-	public void run() {
-		if (isEntryChanged()) {
-			return;
-		}
-		T result = null;
-		Exception error = null;
-		try {
-		   result = search();
-		} catch (Exception ex) {
-		   error = ex;  
-		}
-		if (isEntryChanged()) {
-			return;
-		}
-		
-		final T fresult = result;
-		final Exception ferror = error; 
-		SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				if (isEntryChanged()) {
-					return;
-				}
-				if (ferror != null) {
-				    pane.setError(ferror);
-				} else {
-				    pane.setFoundResult(currentlyProcessedEntry, fresult);
-				}
-			}
-		});
-	}
+    @Override
+    public void run() {
+        if (isEntryChanged()) {
+            return;
+        }
+        T result = null;
+        Exception error = null;
+        try {
+            result = search();
+        } catch (Exception ex) {
+            error = ex;
+        }
+        if (isEntryChanged()) {
+            return;
+        }
 
-	/**
-	 * Implementation-dependent method for search info.
-	 * 
-	 * If entry changed, method can return null.
-	 * 
-	 * @return result of search
-	 */
-	protected abstract T search() throws Exception;
+        final T fresult = result;
+        final Exception ferror = error;
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                if (isEntryChanged()) {
+                    return;
+                }
+                if (ferror != null) {
+                    pane.setError(ferror);
+                } else {
+                    pane.setFoundResult(currentlyProcessedEntry, fresult);
+                }
+            }
+        });
+    }
+
+    /**
+     * Implementation-dependent method for search info.
+     * 
+     * If entry changed, method can return null.
+     * 
+     * @return result of search
+     */
+    protected abstract T search() throws Exception;
 }

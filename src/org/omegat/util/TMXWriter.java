@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util;
 
@@ -47,15 +47,22 @@ public class TMXWriter {
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      * @author Maxym Mykhalchuk
-     * @param filename       The name of the file to create
-     * @param forceValidTMX  When true, OmegaT-tags are stripped from the segments.
-     * @param levelTwo    When true, the tmx is made compatible with level 2 (TMX version 1.4)
-     * @param m_config    Project configuration, to get the languages
-     * @param data        Data for save to TMX, a map of {source segments, translation}
+     * @param filename
+     *            The name of the file to create
+     * @param forceValidTMX
+     *            When true, OmegaT-tags are stripped from the segments.
+     * @param levelTwo
+     *            When true, the tmx is made compatible with level 2 (TMX
+     *            version 1.4)
+     * @param m_config
+     *            Project configuration, to get the languages
+     * @param data
+     *            Data for save to TMX, a map of {source segments, translation}
      * @throws IOException
      */
-    public static void buildTMXFile(final String filename, final boolean forceValidTMX, 
-            final boolean levelTwo, final ProjectProperties m_config, final Map<String,TransEntry> data) throws IOException {
+    public static void buildTMXFile(final String filename, final boolean forceValidTMX,
+            final boolean levelTwo, final ProjectProperties m_config, final Map<String, TransEntry> data)
+            throws IOException {
         // we got this far, so assume lang codes are proper
         String sourceLocale = m_config.getSourceLanguage().toString();
         String targetLocale = m_config.getTargetLanguage().toString();
@@ -66,33 +73,34 @@ public class TMXWriter {
             segmenting = TMXReader.SEG_PARAGRAPH;
 
         FileOutputStream fos = new FileOutputStream(filename);
-        OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); 
-        PrintWriter out = new PrintWriter(osw); // PW is easier to use than Buff.Writer
+        OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8");
+        PrintWriter out = new PrintWriter(osw); // PW is easier to use than
+                                                // Buff.Writer
 
         String version = OStrings.VERSION;
-        if (!OStrings.UPDATE.equals("0")) 
+        if (!OStrings.UPDATE.equals("0"))
             version = version + "_" + OStrings.UPDATE;
         // Write TMX header
-        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"); 
+        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
         if (levelTwo)
-            out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">"); 
+            out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">");
         else
-            out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">"); 
+            out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">");
         if (levelTwo)
-            out.println("<tmx version=\"1.4\">"); 
+            out.println("<tmx version=\"1.4\">");
         else
-            out.println("<tmx version=\"1.1\">"); 
-        out.println("  <header"); 
-        out.println("    creationtool=\"OmegaT\""); 
-        out.println("    creationtoolversion=\"" + version + "\""); 
-        out.println("    segtype=\"" + segmenting + "\""); 
-        out.println("    o-tmf=\"OmegaT TMX\""); 
-        out.println("    adminlang=\"EN-US\""); 
-        out.println("    srclang=\"" + sourceLocale + "\""); 
-        out.println("    datatype=\"plaintext\""); 
-        out.println("  >"); 
-        out.println("  </header>"); 
-        out.println("  <body>"); 
+            out.println("<tmx version=\"1.1\">");
+        out.println("  <header");
+        out.println("    creationtool=\"OmegaT\"");
+        out.println("    creationtoolversion=\"" + version + "\"");
+        out.println("    segtype=\"" + segmenting + "\"");
+        out.println("    o-tmf=\"OmegaT TMX\"");
+        out.println("    adminlang=\"EN-US\"");
+        out.println("    srclang=\"" + sourceLocale + "\"");
+        out.println("    datatype=\"plaintext\"");
+        out.println("  >");
+        out.println("  </header>");
+        out.println("  <body>");
 
         // Determine language attribute to use
         String langAttr = levelTwo ? "xml:lang" : "lang";
@@ -100,36 +108,38 @@ public class TMXWriter {
         // Write TUs
         String source = null;
         String target = null;
-        for(Map.Entry<String, TransEntry> en:data.entrySet()) {
+        for (Map.Entry<String, TransEntry> en : data.entrySet()) {
             TransEntry transEntry = en.getValue();
-            source = forceValidTMX ? StaticUtils.stripTags(en.getKey()) : 
-                en.getKey();
-            target = forceValidTMX ? 
-                StaticUtils.stripTags(transEntry.translation) : 
-                    transEntry.translation;
+            source = forceValidTMX ? StaticUtils.stripTags(en.getKey()) : en.getKey();
+            target = forceValidTMX ? StaticUtils.stripTags(transEntry.translation) : transEntry.translation;
             source = StaticUtils.makeValidXML(source);
             target = StaticUtils.makeValidXML(target);
-            // TO DO: This *possibly* converts occurrences in the actual text of &lt;fX&gt;
-            //        which it should not.
+            // TO DO: This *possibly* converts occurrences in the actual text of
+            // &lt;fX&gt;
+            // which it should not.
             if (levelTwo) {
                 source = makeLevelTwo(source);
                 target = makeLevelTwo(target);
             }
-            String changeIdPropertyString = (transEntry.changeId != null && !"".equals(transEntry.changeId) ? " changeid=\""+transEntry.changeId+"\"" : "");
-            String changeDatePropertyString = (transEntry.changeDate != 0 ? " changedate=\""+TMXDateParser.getTMXDate(transEntry.changeDate)+"\"" : "");
+            String changeIdPropertyString = (transEntry.changeId != null && !"".equals(transEntry.changeId) ? " changeid=\""
+                    + transEntry.changeId + "\""
+                    : "");
+            String changeDatePropertyString = (transEntry.changeDate != 0 ? " changedate=\""
+                    + TMXDateParser.getTMXDate(transEntry.changeDate) + "\"" : "");
             out.println("    <tu>");
             out.println("      <tuv " + langAttr + "=\"" + sourceLocale + "\">");
             out.println("        <seg>" + source + "</seg>");
             out.println("      </tuv>");
-            out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\""+changeDatePropertyString+changeIdPropertyString + ">");
+            out.println("      <tuv " + langAttr + "=\"" + targetLocale + "\"" + changeDatePropertyString
+                    + changeIdPropertyString + ">");
             out.println("        <seg>" + target + "</seg>");
             out.println("      </tuv>");
             out.println("    </tu>");
         }
 
         // Write TMX footer
-        out.println("  </body>"); 
-        out.println("</tmx>"); 
+        out.println("  </body>");
+        out.println("</tmx>");
 
         // Close output stream
         out.close();
@@ -146,7 +156,8 @@ public class TMXWriter {
         StringBuffer result = new StringBuffer(segment.length() * 2);
 
         // Find all single tags
-        //Matcher match = Pattern.compile("&lt;[a-zA-Z\-]+\\d+/&gt;").matcher(segment);
+        // Matcher match =
+        // Pattern.compile("&lt;[a-zA-Z\-]+\\d+/&gt;").matcher(segment);
         Matcher match = Pattern.compile("&lt;[\\S&&[^/\\d]]+(\\d+)/&gt;").matcher(segment);
         int previousMatchEnd = 0;
         while (match.find()) {
@@ -155,7 +166,12 @@ public class TMXWriter {
             String tagNumber = match.group(1);
 
             // Wrap the OmegaT tag in TMX tags in the result
-            result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
+            result.append(segment.substring(previousMatchEnd, match.start())); // text
+                                                                               // betw.
+                                                                               // prev.
+                                                                               // &
+                                                                               // cur.
+                                                                               // match
             result.append("<ph x='"); // TMX start tag + i attribute
             result.append(tagNumber); // OmegaT tag number used as x attribute
             result.append("'>");
@@ -166,9 +182,11 @@ public class TMXWriter {
             previousMatchEnd = match.end();
         }
 
-        // Append the text from the last match (single tag) to the end of the segment
+        // Append the text from the last match (single tag) to the end of the
+        // segment
         result.append(segment.substring(previousMatchEnd, segment.length()));
-        segment = result.toString(); // Store intermediate result back in segment
+        segment = result.toString(); // Store intermediate result back in
+                                     // segment
         result.setLength(0); // Clear result buffer
 
         // Find all start tags
@@ -184,10 +202,16 @@ public class TMXWriter {
             boolean paired = segment.indexOf(endTag) > -1;
 
             // Wrap the OmegaT tag in TMX tags in the result
-            result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
+            result.append(segment.substring(previousMatchEnd, match.start())); // text
+                                                                               // betw.
+                                                                               // prev.
+                                                                               // &
+                                                                               // cur.
+                                                                               // match
             if (paired) {
                 result.append("<bpt i='"); // TMX start tag + i attribute
-                result.append(tagNumber); // OmegaT tag number used as i attribute
+                result.append(tagNumber); // OmegaT tag number used as i
+                                          // attribute
                 result.append("'");
             } else {
                 result.append("<it pos='begin'"); // TMX start tag
@@ -202,9 +226,11 @@ public class TMXWriter {
             previousMatchEnd = match.end();
         }
 
-        // Append the text from the last match (start tag) to the end of the segment
+        // Append the text from the last match (start tag) to the end of the
+        // segment
         result.append(segment.substring(previousMatchEnd, segment.length()));
-        segment = result.toString(); // Store intermediate result back in segment
+        segment = result.toString(); // Store intermediate result back in
+                                     // segment
         result.setLength(0); // Clear result buffer
 
         // Find all end tags
@@ -220,8 +246,17 @@ public class TMXWriter {
             boolean paired = segment.indexOf(startTag) > -1;
 
             // Wrap the OmegaT tag in TMX tags in the result
-            result.append(segment.substring(previousMatchEnd, match.start())); // text betw. prev. & cur. match
-            result.append(paired ? "<ept i='" : "<it pos='end' x='"); // TMX start tag + i/x attribute
+            result.append(segment.substring(previousMatchEnd, match.start())); // text
+                                                                               // betw.
+                                                                               // prev.
+                                                                               // &
+                                                                               // cur.
+                                                                               // match
+            result.append(paired ? "<ept i='" : "<it pos='end' x='"); // TMX
+                                                                      // start
+                                                                      // tag +
+                                                                      // i/x
+                                                                      // attribute
             result.append(tagNumber); // OmegaT tag number used as i/x attribute
             result.append("'>");
             result.append(tag); // OmegaT tag
@@ -231,7 +266,8 @@ public class TMXWriter {
             previousMatchEnd = match.end();
         }
 
-        // Append the text from the last match (end tag) to the end of the segment
+        // Append the text from the last match (end tag) to the end of the
+        // segment
         result.append(segment.substring(previousMatchEnd, segment.length()));
 
         // Done, return result

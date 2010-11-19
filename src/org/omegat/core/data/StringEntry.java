@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.core.data;
 
@@ -34,58 +34,51 @@ package org.omegat.core.data;
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
-public class StringEntry
-{
+public class StringEntry {
     /** Creates a new string entry for a unique translatable string. */
-    public StringEntry(String srcText)
-    {
+    public StringEntry(String srcText) {
         m_srcText = srcText;
-        m_translation = "";                                                     
+        m_translation = "";
     }
-    
+
     /** Returns the source string */
-    public String getSrcText()
-    { 
-        return m_srcText;	
+    public String getSrcText() {
+        return m_srcText;
     }
 
     // these methods aren't sychronized - thought about doing so, but
-    //	as the translation is set by user action, any race condition
-    //	would be the same as user pressing 'enter' key a few milliseconds
-    //	before or after they actually did, making the condition trivial
+    // as the translation is set by user action, any race condition
+    // would be the same as user pressing 'enter' key a few milliseconds
+    // before or after they actually did, making the condition trivial
     // if more processing happens here later, readdress synchronization
-    //	issues
-    
+    // issues
+
     /**
      * Returns the translation of the StringEntry.
      */
-    public String getTranslation()
-    {
+    public String getTranslation() {
         return m_translation;
     }
-        
+
     /**
-     * Sets the translation of the StringEntry.
-     * If translation given is null or equal to the source, than
-     * the empty string is set as a translation to indicate that there's no translation.
+     * Sets the translation of the StringEntry. If translation given is null or
+     * equal to the source, than the empty string is set as a translation to
+     * indicate that there's no translation.
      */
-    public void setTranslation(String trans)
-    {
-        if( trans==null )
-            trans = "";                                                         
-        
+    public void setTranslation(String trans) {
+        if (trans == null)
+            trans = "";
+
         m_translation = trans;
     }
 
     /**
      * Returns whether the given string entry is already translated.
      */
-    public boolean isTranslated()
-    {
-        return m_translation!=null && m_translation.length()>0;
+    public boolean isTranslated() {
+        return m_translation != null && m_translation.length() > 0;
     }
-    
-    
+
     private String m_srcText;
     private String m_translation;
 }

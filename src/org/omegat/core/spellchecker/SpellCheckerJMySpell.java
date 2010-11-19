@@ -38,21 +38,19 @@ import org.dts.spell.dictionary.SpellDictionary;
  */
 public class SpellCheckerJMySpell implements ISpellCheckerProvider {
     /** Local logger. */
-    private static final Logger LOGGER = Logger
-            .getLogger(SpellCheckerJMySpell.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(SpellCheckerJMySpell.class.getName());
 
     private org.dts.spell.SpellChecker jmyspell;
 
-    public SpellCheckerJMySpell(String language, String dictionaryName,
-            String affixName) throws Exception {
+    public SpellCheckerJMySpell(String language, String dictionaryName, String affixName) throws Exception {
 
-        SpellDictionary dict = new OpenOfficeSpellDictionary(new File(
-                dictionaryName), new File(affixName), false);
+        SpellDictionary dict = new OpenOfficeSpellDictionary(new File(dictionaryName), new File(affixName),
+                false);
         jmyspell = new org.dts.spell.SpellChecker(dict);
         jmyspell.setCaseSensitive(false);
 
-        LOGGER.finer("Initialize SpellChecker by JMySpell for language '"
-                + language + "' dictionary " + dictionaryName);
+        LOGGER.finer("Initialize SpellChecker by JMySpell for language '" + language + "' dictionary "
+                + dictionaryName);
     }
 
     public void destroy() {

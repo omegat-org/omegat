@@ -20,41 +20,40 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2;
 
-
 /**
- * TranslationException is a checked exception that may be thrown
- * by filter while parsing/writing out the file.
+ * TranslationException is a checked exception that may be thrown by filter
+ * while parsing/writing out the file.
  * <p>
  * Note that a filter may also throw IOException in case of any I/O errors.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class TranslationException extends Exception
-{
+public class TranslationException extends Exception {
     /**
-     * Constructs an instance of <code>TranslationException</code> 
-     * with the specified detail message.
-     *
-     * @param msg the detail message.
+     * Constructs an instance of <code>TranslationException</code> with the
+     * specified detail message.
+     * 
+     * @param msg
+     *            the detail message.
      */
-    public TranslationException(String msg)
-    {
+    public TranslationException(String msg) {
         super(msg);
     }
-    
+
     /**
-     * Constructs an instance of <code>TranslationException</code> 
-     * with the specified detail message and cause.
-     *
-     * @param msg the detail message.
-     * @param cause cause the cause
+     * Constructs an instance of <code>TranslationException</code> with the
+     * specified detail message and cause.
+     * 
+     * @param msg
+     *            the detail message.
+     * @param cause
+     *            cause the cause
      */
-    public TranslationException(String msg, Throwable cause)
-    {
+    public TranslationException(String msg, Throwable cause) {
         super(msg, cause);
     }
 }

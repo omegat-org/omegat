@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml;
 
@@ -29,49 +29,42 @@ import org.omegat.util.StaticUtils;
 
 /**
  * Piece of text in XML.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class XMLText extends Text
-{
+public class XMLText extends Text {
     private boolean inCDATA;
+
     /** Whether this text is inside XDATA section. */
-    public boolean isInCDATA()
-    {
+    public boolean isInCDATA() {
         return inCDATA;
     }
-    
+
     /** Creates a piece of XML text. */
-    public XMLText(String text, boolean inCDATA)
-    {
+    public XMLText(String text, boolean inCDATA) {
         super(text);
         this.inCDATA = inCDATA;
     }
-    
+
     /**
      * Returns the text in its original form as it was in original document.
-     * E.g. for <code>Rock&Roll</code> should return 
-     * <code>Rock&amp;Roll</code>.
+     * E.g. for <code>Rock&Roll</code> should return <code>Rock&amp;Roll</code>.
      */
-    public String toOriginal() 
-    {
-        if (inCDATA)
-        {
+    public String toOriginal() {
+        if (inCDATA) {
             StringBuffer res = new StringBuffer();
-            res.append("<![CDATA[");                                            
+            res.append("<![CDATA[");
             res.append(getText());
-            res.append("]]>");                                                  
+            res.append("]]>");
             return res.toString();
-        }
-        else
+        } else
             return StaticUtils.makeValidXML(getText());
     }
 
     /**
      * Creates a new instance of XMLText class.
      */
-    public Text createInstance(String text) 
-    {
+    public Text createInstance(String text) {
         return new XMLText(text, inCDATA);
     }
 }

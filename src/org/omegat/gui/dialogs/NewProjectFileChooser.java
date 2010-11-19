@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.dialogs;
 
@@ -35,44 +35,34 @@ import org.omegat.util.gui.OmegaTFileChooser;
 
 /**
  * A chooser for project's directory for a newly created project.
- *
+ * 
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class NewProjectFileChooser extends OmegaTFileChooser
-{
-    public NewProjectFileChooser()
-    {
+public class NewProjectFileChooser extends OmegaTFileChooser {
+    public NewProjectFileChooser() {
         setMultiSelectionEnabled(false);
         setFileHidingEnabled(true);
 
         setDialogTitle(OStrings.getString("PP_SAVE_PROJECT_FILE"));
-        
+
         String curDir = Preferences.getPreference(Preferences.CURRENT_FOLDER);
-        if (curDir != null)
-        {
+        if (curDir != null) {
             File dir = new File(curDir);
-            if (dir.exists() && dir.isDirectory())
-            {
+            if (dir.exists() && dir.isDirectory()) {
                 setCurrentDirectory(dir);
             }
         }
     }
-    
-    public void approveSelection()
-    {
+
+    public void approveSelection() {
         // user hit 'open' button - redirect command to open project or
-        //  recurse into lower directory
-        if (getSelectedFile().exists())
-        {
+        // recurse into lower directory
+        if (getSelectedFile().exists()) {
             // must select non-existing name for project
-            JOptionPane.showMessageDialog(this,
-                OStrings.getString("NDC_SELECT_UNIQUE"),
-                OStrings.getString("NDC_SELECT_UNIQUE_TITLE"), 
-                JOptionPane.ERROR_MESSAGE); 
-        }
-        else
-        {
+            JOptionPane.showMessageDialog(this, OStrings.getString("NDC_SELECT_UNIQUE"),
+                    OStrings.getString("NDC_SELECT_UNIQUE_TITLE"), JOptionPane.ERROR_MESSAGE);
+        } else {
             // this is OK - continue
             super.approveSelection();
         }

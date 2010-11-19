@@ -20,35 +20,33 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3;
 
 /**
- * Element of the translatable entry.
- * Can be a tag or a piece of text.
- *
+ * Element of the translatable entry. Can be a tag or a piece of text.
+ * 
  * @author Maxym Mykhalchuk
  */
-public interface Element 
-{
+public interface Element {
     /**
-     * Returns shortcut string representation of the element. 
-     * E.g. for &lt;strong&gt; tag should return &lt;s3&gt;.
+     * Returns shortcut string representation of the element. E.g. for
+     * &lt;strong&gt; tag should return &lt;s3&gt;.
      */
     String toShortcut();
-    
+
     /**
-     * Returns long XML-encoded representation of the element for storing in TMX. 
-     * E.g. for &lt;strong&gt; tag should return 
-     * &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
+     * Returns long XML-encoded representation of the element for storing in
+     * TMX. E.g. for &lt;strong&gt; tag should return &lt;bpt
+     * i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
     String toTMX();
-    
+
     /**
      * Returns the element in its original form as it was in original document.
-     * E.g. for &lt;strong&gt; tag should return 
-     * &lt;bpt i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
+     * E.g. for &lt;strong&gt; tag should return &lt;bpt
+     * i="3"&gt;&amp;lt;strong&amp;gt;&lt;/bpt&gt;.
      */
     String toOriginal();
 }

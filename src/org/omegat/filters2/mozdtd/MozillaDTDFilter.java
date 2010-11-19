@@ -55,8 +55,7 @@ import org.omegat.util.StringUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class MozillaDTDFilter extends AbstractFilter {
-    protected static Pattern RE_ENTITY = Pattern
-            .compile("<\\!ENTITY\\s+(\\S+)\\s+\"(.+)\"\\s*>");
+    protected static Pattern RE_ENTITY = Pattern.compile("<\\!ENTITY\\s+(\\S+)\\s+\"(.+)\"\\s*>");
 
     protected Map<String, String> align;
 
@@ -81,20 +80,18 @@ public class MozillaDTDFilter extends AbstractFilter {
     @Override
     protected BufferedReader createReader(File inFile, String inEncoding)
             throws UnsupportedEncodingException, IOException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(
-                inFile), OConsts.UTF8));
+        return new BufferedReader(new InputStreamReader(new FileInputStream(inFile), OConsts.UTF8));
     }
 
     @Override
     protected BufferedWriter createWriter(File outFile, String outEncoding)
             throws UnsupportedEncodingException, IOException {
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
-                outFile), OConsts.UTF8));
+        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile), OConsts.UTF8));
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile)
-            throws IOException, TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException,
+            TranslationException {
         StringBuilder block = new StringBuilder();
         boolean isInBlock = false;
         int c;
@@ -103,7 +100,7 @@ public class MozillaDTDFilter extends AbstractFilter {
                 isInBlock = true;
             }
             if (isInBlock) {
-                block.append((char)c);
+                block.append((char) c);
             } else {
                 outFile.write(c);
             }
@@ -115,8 +112,7 @@ public class MozillaDTDFilter extends AbstractFilter {
         }
     }
 
-    protected void processBlock(String block, BufferedWriter out)
-            throws IOException {
+    protected void processBlock(String block, BufferedWriter out) throws IOException {
         Matcher m = RE_ENTITY.matcher(block);
         if (!m.matches()) {
             // not ENTITY declaration
@@ -139,8 +135,7 @@ public class MozillaDTDFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile,
-            BufferedReader translatedFile) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 
@@ -151,8 +146,7 @@ public class MozillaDTDFilter extends AbstractFilter {
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
             if (!StringUtil.isEmpty(tr)) {
-                entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
-                        tr, false, null, this);
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }
     }

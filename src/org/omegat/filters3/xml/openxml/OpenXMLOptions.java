@@ -55,7 +55,7 @@ import org.omegat.filters2.AbstractOptions;
  * <ul>
  * <li>[+] Tags Aggregation
  * </ul>
- *
+ * 
  * @author Didier Briel, Antonio Vilei
  */
 public class OpenXMLOptions extends AbstractOptions {
@@ -162,6 +162,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public void setTranslateFooters(boolean translateFooters) {
         setBoolean(OPTION_TRANSLATE_FOOTERS, translateFooters);
     }
+
     /**
      * Returns whether Diagrams should be translated.
      */
@@ -245,6 +246,7 @@ public class OpenXMLOptions extends AbstractOptions {
     public void setTranslateSlideLayouts(boolean translateSlideLayouts) {
         setBoolean(OPTION_TRANSLATE_SLIDE_LAYOUTS, translateSlideLayouts);
     }
+
     /**
      * Returns whether Charts should be translated.
      */

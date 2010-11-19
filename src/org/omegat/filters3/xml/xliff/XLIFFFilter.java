@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml.xliff;
 
@@ -31,17 +31,15 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for XLIFF files.
- *
+ * 
  * @author Didier Briel
  */
-public class XLIFFFilter extends XMLFilter
-{
-    
+public class XLIFFFilter extends XMLFilter {
+
     /**
      * Creates a new instance of DocBookFilter
      */
-    public XLIFFFilter()
-    {
+    public XLIFFFilter() {
         super(new XLIFFDialect());
     }
 
@@ -50,45 +48,38 @@ public class XLIFFFilter extends XMLFilter
      * 
      * @return File format name
      */
-    public String getFileFormatName()
-    {
+    public String getFileFormatName() {
         return OStrings.getString("XLIFF_FILTER_NAME");
     }
 
-
     /**
-     * The default list of filter instances that this filter class has.
-     * One filter class may have different filter instances, different
-     * by source file mask, encoding of the source file etc.
+     * The default list of filter instances that this filter class has. One
+     * filter class may have different filter instances, different by source
+     * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
      * 
      * @return Default filter instances
      */
-    public Instance[] getDefaultInstances()
-    {
-        return new Instance[] 
-        {
-            new Instance("*.xlf", null, null),
-            new Instance("*.sdlxliff", null, null),
-        };
+    public Instance[] getDefaultInstances() {
+        return new Instance[] { new Instance("*.xlf", null, null), new Instance("*.sdlxliff", null, null), };
     }
 
     /**
      * Either the encoding can be read, or it is UTF-8.
+     * 
      * @return <code>false</code>
      */
-    public boolean isSourceEncodingVariable()
-    {
+    public boolean isSourceEncodingVariable() {
         return false;
     }
-    
+
     /**
      * Yes, XLIFF may be written out in a variety of encodings.
+     * 
      * @return <code>true</code>
      */
-    public boolean isTargetEncodingVariable()
-    {
+    public boolean isTargetEncodingVariable() {
         return true;
     }
 }

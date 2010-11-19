@@ -72,9 +72,8 @@ public class EditorPopups {
             this.ec = ec;
         }
 
-        public void addItems(JPopupMenu menu, final JTextComponent comp,
-                int mousepos, boolean isInActiveEntry,
-                boolean isInActiveTranslation, SegmentBuilder sb) {
+        public void addItems(JPopupMenu menu, final JTextComponent comp, int mousepos,
+                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             if (!ec.getSettings().isAutoSpellChecking()) {
                 // spellchecker disabled
             }
@@ -88,16 +87,13 @@ public class EditorPopups {
                 final int wordStart = EditorUtils.getWordStart(comp, mousepos);
                 final int wordEnd = EditorUtils.getWordEnd(comp, mousepos);
 
-                final String word = comp
-                        .getText(wordStart, wordEnd - wordStart);
+                final String word = comp.getText(wordStart, wordEnd - wordStart);
 
-                final AbstractDocument xlDoc = (AbstractDocument) comp
-                        .getDocument();
+                final AbstractDocument xlDoc = (AbstractDocument) comp.getDocument();
 
                 if (!Core.getSpellChecker().isCorrect(word)) {
                     // get the suggestions and create a menu
-                    List<String> suggestions = Core.getSpellChecker().suggest(
-                            word);
+                    List<String> suggestions = Core.getSpellChecker().suggest(word);
 
                     // the suggestions
                     for (final String replacement : suggestions) {
@@ -108,8 +104,7 @@ public class EditorPopups {
                             public void actionPerformed(ActionEvent e) {
                                 try {
                                     int pos = comp.getCaretPosition();
-                                    xlDoc.replace(wordStart, wordEnd
-                                            - wordStart, replacement, null);
+                                    xlDoc.replace(wordStart, wordEnd - wordStart, replacement, null);
                                     comp.setCaretPosition(pos);
                                 } catch (BadLocationException exc) {
                                     Log.log(exc);
@@ -120,8 +115,7 @@ public class EditorPopups {
 
                     // what if no action is done?
                     if (suggestions.size() == 0) {
-                        JMenuItem item = menu.add(OStrings
-                                .getString("SC_NO_SUGGESTIONS"));
+                        JMenuItem item = menu.add(OStrings.getString("SC_NO_SUGGESTIONS"));
                         item.addActionListener(new ActionListener() {
                             public void actionPerformed(ActionEvent e) {
                                 // just hide the menu
@@ -132,8 +126,7 @@ public class EditorPopups {
                     menu.add(new JSeparator());
 
                     // let us ignore it
-                    JMenuItem item = menu.add(OStrings
-                            .getString("SC_IGNORE_ALL"));
+                    JMenuItem item = menu.add(OStrings.getString("SC_IGNORE_ALL"));
                     item.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             addIgnoreWord(word, wordStart, false);
@@ -163,8 +156,7 @@ public class EditorPopups {
          * @param add
          *            : true for add, false for ignore
          */
-        protected void addIgnoreWord(final String word, final int offset,
-                final boolean add) {
+        protected void addIgnoreWord(final String word, final int offset, final boolean add) {
             UIThreadsUtil.mustBeSwingThread();
 
             if (add) {
@@ -181,12 +173,10 @@ public class EditorPopups {
         /**
          * Creates the Cut, Copy and Paste menu items
          */
-        public void addItems(JPopupMenu menu, final JTextComponent comp,
-                int mousepos, boolean isInActiveEntry,
-                boolean isInActiveTranslation, SegmentBuilder sb) {
+        public void addItems(JPopupMenu menu, final JTextComponent comp, int mousepos,
+                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             final String selText = comp.getSelectedText();
-            final Clipboard omClipboard = Toolkit.getDefaultToolkit()
-                    .getSystemClipboard();
+            final Clipboard omClipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
             Transferable contents = omClipboard.getContents(this);
 
             boolean cutEnabled = false;
@@ -194,8 +184,7 @@ public class EditorPopups {
             boolean pasteEnabled = false;
 
             // Calc enabled/disabled
-            if (selText != null && comp.getSelectionStart() <= mousepos
-                    && mousepos <= comp.getSelectionEnd()) {
+            if (selText != null && comp.getSelectionStart() <= mousepos && mousepos <= comp.getSelectionEnd()) {
                 // only on selected text
                 if (isInActiveTranslation) {
                     // cut only in editable zone
@@ -221,8 +210,7 @@ public class EditorPopups {
             }
 
             // Copy
-            JMenuItem copyContextItem = menu
-                    .add(OStrings.getString("CCP_COPY"));
+            JMenuItem copyContextItem = menu.add(OStrings.getString("CCP_COPY"));
             if (copyEnabled) {
                 copyContextItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -234,8 +222,7 @@ public class EditorPopups {
             }
 
             // Paste
-            JMenuItem pasteContextItem = menu.add(OStrings
-                    .getString("CCP_PASTE"));
+            JMenuItem pasteContextItem = menu.add(OStrings.getString("CCP_PASTE"));
             if (pasteEnabled) {
                 pasteContextItem.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
@@ -261,15 +248,13 @@ public class EditorPopups {
          * creates a popup menu for inactive segments - with an item allowing to
          * go to the given segment.
          */
-        public void addItems(JPopupMenu menu, final JTextComponent comp,
-                final int mousepos, boolean isInActiveEntry,
-                boolean isInActiveTranslation, SegmentBuilder sb) {
+        public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos,
+                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
             if (isInActiveEntry) {
                 return;
             }
 
-            JMenuItem item = menu.add(OStrings
-                    .getString("MW_PROMPT_SEG_NR_TITLE"));
+            JMenuItem item = menu.add(OStrings.getString("MW_PROMPT_SEG_NR_TITLE"));
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     comp.setCaretPosition(mousepos);

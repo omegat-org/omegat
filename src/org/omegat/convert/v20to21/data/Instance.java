@@ -37,11 +37,10 @@ public class Instance {
      * filter itself. "In code" the <code>null</code> is used to represent
      * automatic encoding selection.
      */
-    public static String ENCODING_AUTO_HUMAN = OStrings
-            .getString("ENCODING_AUTO");
+    public static String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
 
     /** The original filename (with extension). */
-    public static final String TFP_FILENAME = "${filename}"; 
+    public static final String TFP_FILENAME = "${filename}";
 
     /**
      * The default output filename pattern.
@@ -75,8 +74,7 @@ public class Instance {
     }
 
     public void setSourceEncoding(String sourceEncoding) {
-        if (sourceEncoding == null
-                || sourceEncoding.equals(ENCODING_AUTO_HUMAN))
+        if (sourceEncoding == null || sourceEncoding.equals(ENCODING_AUTO_HUMAN))
             this.sourceEncoding = null;
         else
             this.sourceEncoding = sourceEncoding;
@@ -96,8 +94,7 @@ public class Instance {
     }
 
     public void setTargetEncoding(String targetEncoding) {
-        if (targetEncoding == null
-                || targetEncoding.equals(ENCODING_AUTO_HUMAN))
+        if (targetEncoding == null || targetEncoding.equals(ENCODING_AUTO_HUMAN))
             this.targetEncoding = null;
         else
             this.targetEncoding = targetEncoding;
@@ -113,8 +110,8 @@ public class Instance {
         this.targetFilenamePattern = targetFilenamePattern;
     }
 
-    private void init(String sourceFilenameMask, String sourceEncoding,
-            String targetEncoding, String targetFilenamePattern) {
+    private void init(String sourceFilenameMask, String sourceEncoding, String targetEncoding,
+            String targetFilenamePattern) {
         setSourceFilenameMask(sourceFilenameMask);
         setSourceEncoding(sourceEncoding);
         setTargetEncoding(targetEncoding);

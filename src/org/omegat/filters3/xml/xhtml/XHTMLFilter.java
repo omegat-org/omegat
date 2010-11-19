@@ -21,7 +21,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml.xhtml;
 
@@ -37,154 +37,133 @@ import org.omegat.util.OStrings;
 
 /**
  * Filter for XHTML files.
- *
+ * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
  */
-public class XHTMLFilter extends XMLFilter
-{
-    
+public class XHTMLFilter extends XMLFilter {
+
     /**
      * Creates a new instance of XHTMLFilter
      */
-    public XHTMLFilter()
-    {
+    public XHTMLFilter() {
         super(new XHTMLDialect());
         do_not_send_to_core = false;
     }
 
     /**
      * Human-readable name of the File Format this filter supports.
-     *
+     * 
      * @return File format name
      */
-    public String getFileFormatName()
-    {
+    public String getFileFormatName() {
         return OStrings.getString("XHTML_FILTER_NAME");
     }
-    
+
     /**
-     * The default list of filter instances that this filter class has.
-     * One filter class may have different filter instances, different
-     * by source file mask, encoding of the source file etc.
+     * The default list of filter instances that this filter class has. One
+     * filter class may have different filter instances, different by source
+     * file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
-     *
+     * 
      * @return Default filter instances
      */
-    public Instance[] getDefaultInstances()
-    {
-        return new Instance[]
-        {
-            new Instance("*.html", null, null),
-            new Instance("*.xhtml", null, null),
-            new Instance("*.xht", null, null),
-        };
+    public Instance[] getDefaultInstances() {
+        return new Instance[] { new Instance("*.html", null, null), new Instance("*.xhtml", null, null),
+                new Instance("*.xht", null, null), };
     }
 
     /**
      * Either the encoding can be read, or it is UTF-8.
+     * 
      * @return <code>false</code>
      */
-    public boolean isSourceEncodingVariable()
-    {
+    public boolean isSourceEncodingVariable() {
         return false;
     }
-    
+
     /**
      * Yes, XHTML may be written out in a variety of encodings.
+     * 
      * @return <code>true</code>
      */
-    public boolean isTargetEncodingVariable()
-    {
+    public boolean isTargetEncodingVariable() {
         return true;
     }
-    
+
     /**
-     * Whether we're now processing the XHTML file the first time,
-     * and thus we don't need to send translatable content to OmegaT core.
+     * Whether we're now processing the XHTML file the first time, and thus we
+     * don't need to send translatable content to OmegaT core.
      */
     private boolean do_not_send_to_core;
-    
+
     /** Checking whether it is a valid XHTML file. */
-    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config)
-    {
+    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config) {
         boolean result = super.isFileSupported(inFile, inEncoding, config);
-        if (result)
-        {
-            try
-            {
+        if (result) {
+            try {
                 do_not_send_to_core = true;
-                // Defining the actual dialect, because at this step 
+                // Defining the actual dialect, because at this step
                 // we have the options
                 XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
                 dialect.defineDialect(new XHTMLOptions(config));
                 super.processFile(inFile, inEncoding, null, null);
-            }
-            catch (Exception e)
-            {
-                Log.log("XHTML file "+inFile.getName()+" is not valid.");
+            } catch (Exception e) {
+                Log.log("XHTML file " + inFile.getName() + " is not valid.");
                 result = false;
-            }
-            finally
-            {
+            } finally {
                 do_not_send_to_core = false;
             }
         }
         return result;
     }
-    
+
     /**
      * Overrides superimplementation not to send translatable content on XHTML
-     * validity check, and don't translate items that match regular expression. */
-    public String translate(String entry)
-    {
+     * validity check, and don't translate items that match regular expression.
+     */
+    public String translate(String entry) {
         if (do_not_send_to_core)
             return entry;
         else {
-            Pattern skipRegExpPattern = 
-                    ((XHTMLDialect)this.getDialect()).getSkipRegExpPattern();
-            if (skipRegExpPattern != null) 
-            {
-                if (skipRegExpPattern.matcher(entry).matches()) 
-                {
+            Pattern skipRegExpPattern = ((XHTMLDialect) this.getDialect()).getSkipRegExpPattern();
+            if (skipRegExpPattern != null) {
+                if (skipRegExpPattern.matcher(entry).matches()) {
                     return entry;
                 }
             }
             return super.translate(entry);
         }
     }
-    
+
     /**
      * Returns true to indicate that the XHTML filter has options.
+     * 
      * @return True, because the XHTML filter has options.
      */
-    public boolean hasOptions()
-    {
+    public boolean hasOptions() {
         return true;
     }
-    
+
     /**
      * XHTML Filter shows a <b>modal</b> dialog to edit its own options.
      * 
-     * @param currentOptions Current options to edit.
-     * @return Updated filter options if user confirmed the changes, 
-     * and current options otherwise.
+     * @param currentOptions
+     *            Current options to edit.
+     * @return Updated filter options if user confirmed the changes, and current
+     *         options otherwise.
      */
-    public Map<String,String> changeOptions(Dialog parent, Map<String,String> currentOptions)
-    {
-        try
-        {
+    public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {
+        try {
             EditXOptionsDialog dialog = new EditXOptionsDialog(parent, currentOptions);
             dialog.setVisible(true);
-            if( EditXOptionsDialog.RET_OK==dialog.getReturnStatus() )
+            if (EditXOptionsDialog.RET_OK == dialog.getReturnStatus())
                 return dialog.getOptions().getOptionsMap();
             else
                 return null;
-        }
-        catch( Exception e )
-        {
+        } catch (Exception e) {
             Log.logErrorRB("HTML_EXC_EDIT_OPTIONS");
             Log.log(e);
             return null;

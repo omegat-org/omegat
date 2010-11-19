@@ -74,7 +74,7 @@ import org.openide.awt.Mnemonics;
  */
 public class MainWindowMenu implements ActionListener, IMainMenu {
     private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
-    
+
     /** MainWindow instance. */
     protected final MainWindow mainWindow;
 
@@ -90,7 +90,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
      * Code for dispatching events from components to event handlers.
      * 
      * @param evt
-     *                event info
+     *            event info
      */
     public void actionPerformed(ActionEvent evt) {
         // Item what perform event.
@@ -100,7 +100,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         String action = menuItem.getActionCommand();
 
         Log.logInfoRB("LOG_MENU_CLICK", action);
-        
+
         // Find method by item name.
         String methodName = action + "ActionPerformed";
         Method method = null;
@@ -199,23 +199,34 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
         viewMenu.add(viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
-        ButtonGroup viewModificationInfoMenuBG = new ButtonGroup(); 
-        viewModificationInfoMenu.add(viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem("MW_VIEW_MENU_MODIFICATION_INFO_NONE",viewModificationInfoMenuBG));
-        viewModificationInfoMenu.add(viewDisplayModificationInfoSelectedRadioButtonMenuItem = createRadioButtonMenuItem("MW_VIEW_MENU_MODIFICATION_INFO_SELECTED",viewModificationInfoMenuBG));
-        viewModificationInfoMenu.add(viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem("MW_VIEW_MENU_MODIFICATION_INFO_ALL",viewModificationInfoMenuBG));
+        ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
+        viewModificationInfoMenu
+                .add(viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem(
+                        "MW_VIEW_MENU_MODIFICATION_INFO_NONE", viewModificationInfoMenuBG));
+        viewModificationInfoMenu
+                .add(viewDisplayModificationInfoSelectedRadioButtonMenuItem = createRadioButtonMenuItem(
+                        "MW_VIEW_MENU_MODIFICATION_INFO_SELECTED", viewModificationInfoMenuBG));
+        viewModificationInfoMenu
+                .add(viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem(
+                        "MW_VIEW_MENU_MODIFICATION_INFO_ALL", viewModificationInfoMenuBG));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
-        toolsMenu.add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
-        toolsMenu.add(toolsShowStatisticsMatchesMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES"));
+        toolsMenu
+                .add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
+        toolsMenu
+                .add(toolsShowStatisticsMatchesMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_MATCHES"));
 
-        optionsMenu.add(optionsTabAdvanceCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_ADVANCE"));
+        optionsMenu
+                .add(optionsTabAdvanceCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_ADVANCE"));
         optionsMenu
                 .add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
         optionsMenu.add(optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE"));
 
         optionsMenu.add(optionsTransTipsMenu = createMenu("TF_OPTIONSMENU_TRANSTIPS"));
-        optionsTransTipsMenu.add(optionsTransTipsEnableMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_ENABLE"));
-        optionsTransTipsMenu.add(optionsTransTipsExactMatchMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_EXACTMATCH"));
+        optionsTransTipsMenu
+                .add(optionsTransTipsEnableMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_ENABLE"));
+        optionsTransTipsMenu
+                .add(optionsTransTipsExactMatchMenuItem = createCheckboxMenuItem("TF_OPTIONSMENU_TRANSTIPS_EXACTMATCH"));
         optionsMenu.add(new JSeparator());
         optionsMenu.add(optionsFontSelectionMenuItem = createMenuItem("TF_MENU_DISPLAY_FONT"));
         optionsMenu.add(optionsSetupFileFiltersMenuItem = createMenuItem("TF_MENU_DISPLAY_FILTERS"));
@@ -226,7 +237,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         optionsMenu.add(optionsTeamMenuItem = createMenuItem("MW_OPTIONSMENU_TEAM"));
         optionsMenu.add(optionsExtTMXMenuItem = createMenuItem("MW_OPTIONSMENU_EXT_TMX"));
         optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
-        
+
         optionsMenu.add(new JSeparator());
 
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
@@ -236,16 +247,17 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         MainWindowMenuShortcuts.setShortcuts(mainMenu);
 
         initMacSpecific();
-        
+
         CoreEvents.registerApplicationEventListener(new IApplicationEventListener() {
             public void onApplicationStartup() {
-                updateCheckboxesOnStart();        
+                updateCheckboxesOnStart();
                 onProjectStatusChanged(false);
             }
+
             public void onApplicationShutdown() {
             }
         });
-        
+
         CoreEvents.registerProjectChangeListener(new IProjectEventListener() {
             public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
                 if (Core.getProject().isProjectLoaded()) {
@@ -262,19 +274,31 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     /** Updates menu checkboxes from preferences on start */
     private void updateCheckboxesOnStart() {
         optionsTabAdvanceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isUseTabForAdvance());
-        optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
+        optionsAlwaysConfirmQuitCheckBoxMenuItem.setSelected(Preferences
+                .isPreference(Preferences.ALWAYS_CONFIRM_QUIT));
         optionsTransTipsEnableMenuItem.setSelected(Preferences.isPreference(Preferences.TRANSTIPS));
-        optionsTransTipsExactMatchMenuItem.setSelected(Preferences.isPreference(Preferences.TRANSTIPS_EXACT_SEARCH));
+        optionsTransTipsExactMatchMenuItem.setSelected(Preferences
+                .isPreference(Preferences.TRANSTIPS_EXACT_SEARCH));
 
-        viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkTranslated());
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
+        viewMarkTranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isMarkTranslated());
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isMarkUntranslated());
 
-        viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplaySegmentSources());
-        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkNonUniqueSegments());
+        viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isDisplaySegmentSources());
+        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isMarkNonUniqueSegments());
 
-        viewDisplayModificationInfoNoneRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
-        viewDisplayModificationInfoSelectedRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
-        viewDisplayModificationInfoAllRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
+        viewDisplayModificationInfoNoneRadioButtonMenuItem
+                .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor()
+                        .getSettings().getDisplayModificationInfo()));
+        viewDisplayModificationInfoSelectedRadioButtonMenuItem
+                .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(Core.getEditor()
+                        .getSettings().getDisplayModificationInfo()));
+        viewDisplayModificationInfoAllRadioButtonMenuItem
+                .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(Core.getEditor()
+                        .getSettings().getDisplayModificationInfo()));
     }
 
     /**
@@ -302,7 +326,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
      * Create menu instance and set title.
      * 
      * @param titleKey
-     *                title name key in resource bundle
+     *            title name key in resource bundle
      * @return menu instance
      */
     private JMenu createMenu(final String titleKey) {
@@ -315,7 +339,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
      * Create menu item instance and set title.
      * 
      * @param titleKey
-     *                title name key in resource bundle
+     *            title name key in resource bundle
      * @return menu item instance
      */
     private JMenuItem createMenuItem(final String titleKey) {
@@ -329,7 +353,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
      * Create menu item instance and set title.
      * 
      * @param titleKey
-     *                title name key in resource bundle
+     *            title name key in resource bundle
      * @return menu item instance
      */
     private JCheckBoxMenuItem createCheckboxMenuItem(final String titleKey) {
@@ -338,12 +362,12 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         result.addActionListener(this);
         return result;
     }
-    
+
     /**
      * Create menu item instance and set title.
      * 
      * @param titleKey
-     *                title name key in resource bundle
+     *            title name key in resource bundle
      * @return menu item instance
      */
     private JRadioButtonMenuItem createRadioButtonMenuItem(final String titleKey, ButtonGroup buttonGroup) {
@@ -375,7 +399,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
      * Enable or disable items depend of project open or close.
      * 
      * @param isProjectOpened
-     *                project open status: true if opened, false if closed
+     *            project open status: true if opened, false if closed
      */
     private void onProjectStatusChanged(final boolean isProjectOpened) {
         JMenuItem[] itemsToSwitchOff = new JMenuItem[] { projectNewMenuItem, projectOpenMenuItem };
@@ -384,16 +408,16 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
                 projectCompileMenuItem,
 
-                editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem, editTagPainterMenuItem,
-                editOverwriteSourceMenuItem, editOverwriteTranslationMenuItem, editRedoMenuItem,
-                editSelectFuzzy1MenuItem, editSelectFuzzy2MenuItem, editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem,
-                editSelectFuzzy5MenuItem, editUndoMenuItem, switchCaseSubMenu, editOverwriteMachineTranslationMenuItem,
+                editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem,
+                editTagPainterMenuItem, editOverwriteSourceMenuItem, editOverwriteTranslationMenuItem,
+                editRedoMenuItem, editSelectFuzzy1MenuItem, editSelectFuzzy2MenuItem,
+                editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem, editSelectFuzzy5MenuItem,
+                editUndoMenuItem, switchCaseSubMenu, editOverwriteMachineTranslationMenuItem,
 
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem,
 
-                viewFileListMenuItem, toolsValidateTagsMenuItem, 
-                toolsShowStatisticsStandardMenuItem,
+                viewFileListMenuItem, toolsValidateTagsMenuItem, toolsShowStatisticsStandardMenuItem,
                 toolsShowStatisticsMatchesMenuItem };
 
         for (JMenuItem item : itemsToSwitchOff) {
@@ -407,11 +431,11 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     public JMenu getMachineTranslationMenu() {
         return optionsMachineTranslateMenu;
     }
-    
+
     public JMenu getOptionsMenu() {
         return optionsMenu;
     }
-    
+
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
     JMenuItem editInsertSourceMenuItem;

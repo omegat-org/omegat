@@ -38,7 +38,7 @@ public class ResourcesUtil {
      * Load icon.
      * 
      * @param resourceName
-     *                resource name
+     *            resource name
      */
     public static ImageIcon getIcon(final String resourceName) {
         URL resourceURL = ResourcesUtil.class.getResource(resourceName);

@@ -48,6 +48,5 @@ public interface IMachineTranslation {
      *            text for translation
      * @return translated text, or null if translation impossible
      */
-    String getTranslation(Language sLang, Language tLang, String text)
-            throws Exception;
+    String getTranslation(Language sLang, Language tLang, String text) throws Exception;
 }

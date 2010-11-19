@@ -20,45 +20,40 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml;
 
 import org.omegat.filters3.Text;
 
 /**
- * Internal entity text in XML.
- * Like, for example, in <code>&lt;title&gt;&amp;brandFullName; Credits&lt;/title&gt;</code>.
- *
+ * Internal entity text in XML. Like, for example, in
+ * <code>&lt;title&gt;&amp;brandFullName; Credits&lt;/title&gt;</code>.
+ * 
  * @author Maxym Mykhalchuk
  */
-public class XMLEntityText extends Text
-{
+public class XMLEntityText extends Text {
     private Entity entity;
-    
+
     /** Creates a piece of XML text. */
-    public XMLEntityText(Entity entity)
-    {
+    public XMLEntityText(Entity entity) {
         super(entity.getValue());
         this.entity = entity;
     }
-    
+
     /**
      * Returns the text in its original form as it was in original document.
-     * E.g. for <code>Rock&Roll</code> should return 
-     * <code>Rock&amp;Roll</code>.
+     * E.g. for <code>Rock&Roll</code> should return <code>Rock&amp;Roll</code>.
      */
-    public String toOriginal() 
-    {
-        return "&"+entity.getName()+";";                                        
+    public String toOriginal() {
+        return "&" + entity.getName() + ";";
     }
 
     /**
-     * Creates a new instance of XMLText class.
-     * Because, well, translating internal entities is, hmm, too complex.
+     * Creates a new instance of XMLText class. Because, well, translating
+     * internal entities is, hmm, too complex.
      */
-    public Text createInstance(String text) 
-    {
+    public Text createInstance(String text) {
         return new XMLText(text, false);
     }
 }

@@ -41,8 +41,7 @@ import org.omegat.core.data.IProject;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SaveThread extends Thread implements IAutoSave {
-    private static final Logger LOGGER = Logger.getLogger(SaveThread.class
-            .getName());
+    private static final Logger LOGGER = Logger.getLogger(SaveThread.class.getName());
 
     private static final int SAVE_DURATION = 10 * 60 * 1000; // 10 minutes;
 
@@ -50,7 +49,7 @@ public class SaveThread extends Thread implements IAutoSave {
     private boolean enabled;
 
     public SaveThread() {
-        setName("Save thread"); 
+        setName("Save thread");
     }
 
     public synchronized void disable() {
@@ -81,10 +80,8 @@ public class SaveThread extends Thread implements IAutoSave {
                     LOGGER.fine("Start project save from SaveThread");
                     dataEngine.saveProject();
                     LOGGER.fine("Finish project save from SaveThread");
-                    Core.getMainWindow().showStatusMessageRB(
-                            "ST_PROJECT_AUTOSAVED",
-                            DateFormat.getTimeInstance(DateFormat.SHORT)
-                                    .format(new Date()));
+                    Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
+                            DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                 }
             }
         } catch (InterruptedException ex) {

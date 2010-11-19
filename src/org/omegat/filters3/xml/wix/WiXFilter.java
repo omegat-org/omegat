@@ -53,6 +53,7 @@ public class WiXFilter extends XMLFilter {
 
     /**
      * Either the encoding can be read, or it is UTF-8.
+     * 
      * @return <code>false</code>
      */
     @Override
@@ -62,6 +63,7 @@ public class WiXFilter extends XMLFilter {
 
     /**
      * Yes, Wix may be written out in a variety of encodings.
+     * 
      * @return <code>true</code>
      */
     @Override

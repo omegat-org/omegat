@@ -20,30 +20,35 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.gui.glossary;
 
-
 /**
  * An entry in the glossary.
- *
+ * 
  * @author Keith Godfrey
  */
-public class GlossaryEntry
-{
-	public GlossaryEntry(String src, String loc, String com)
-	{
-		m_src = src;
-		m_loc = loc;
-		m_com = com;
-	}
+public class GlossaryEntry {
+    public GlossaryEntry(String src, String loc, String com) {
+        m_src = src;
+        m_loc = loc;
+        m_com = com;
+    }
 
-	public String	getSrcText()	{ return m_src;		}
-	public String	getLocText()	{ return m_loc;		}
-	public String	getCommentText()	{ return m_com;		}
+    public String getSrcText() {
+        return m_src;
+    }
 
-	private String	m_src;
-	private String	m_loc;
-	private String	m_com;
+    public String getLocText() {
+        return m_loc;
+    }
+
+    public String getCommentText() {
+        return m_com;
+    }
+
+    private String m_src;
+    private String m_loc;
+    private String m_com;
 }

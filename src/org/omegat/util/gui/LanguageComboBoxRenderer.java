@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.util.gui;
 
@@ -34,21 +34,21 @@ import org.omegat.util.Language;
 
 /**
  * A class that renders a language combo box smartly.
- *
+ * 
  * @author Maxym Mykhalchuk
  */
-public class LanguageComboBoxRenderer extends BasicComboBoxRenderer
-{
-    public Component getListCellRendererComponent(
-            JList list,
-            Object value,            // value to display
-            int index,               // cell index
-            boolean isSelected,      // is the cell selected
-            boolean cellHasFocus)    // the list and the cell have the focus
+public class LanguageComboBoxRenderer extends BasicComboBoxRenderer {
+    public Component getListCellRendererComponent(JList list, Object value, // value
+                                                                            // to
+                                                                            // display
+            int index, // cell index
+            boolean isSelected, // is the cell selected
+            boolean cellHasFocus) // the list and the cell have the focus
     {
-        JLabel label = (JLabel)super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-        Language lang = (Language)value;
-        label.setText(lang + " - " + lang.getDisplayName()); 
+        JLabel label = (JLabel) super.getListCellRendererComponent(list, value, index, isSelected,
+                cellHasFocus);
+        Language lang = (Language) value;
+        label.setText(lang + " - " + lang.getDisplayName());
         return label;
     }
 }

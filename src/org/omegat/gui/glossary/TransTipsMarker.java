@@ -49,8 +49,7 @@ public class TransTipsMarker implements IMarker {
     public void reset() {
     }
 
-    public List<Mark> getMarksForEntry(String sourceText,
-            String translationText, boolean isActive) {
+    public List<Mark> getMarksForEntry(String sourceText, String translationText, boolean isActive) {
         return null;
     }
 }

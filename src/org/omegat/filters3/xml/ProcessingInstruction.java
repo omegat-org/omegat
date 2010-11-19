@@ -20,35 +20,33 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml;
 
-
 /**
- * A processing instruction in an XML file.
- * For example, <code>&lt;? here is the processing instruction ?&gt;</code>.
- *
+ * A processing instruction in an XML file. For example,
+ * <code>&lt;? here is the processing instruction ?&gt;</code>.
+ * 
  * @author Didier Briel
  */
-public class ProcessingInstruction extends XMLPseudoTag
-{
+public class ProcessingInstruction extends XMLPseudoTag {
     private String data;
     private String target;
-    
+
     /** Creates a new instance of ProcessingInstruction */
-    public ProcessingInstruction(String data, String target){
+    public ProcessingInstruction(String data, String target) {
         this.data = data;
         this.target = target;
     }
 
     /**
-     * Returns the processing instruction in its original form as it was in 
-     * the original document.
+     * Returns the processing instruction in its original form as it was in the
+     * original document.
      */
-    public String toOriginal(){
+    public String toOriginal() {
         if (target.length() > 0)
-            return "<?" + data + " " +target + "?>";
+            return "<?" + data + " " + target + "?>";
         else
             return "<?" + data + "?>";
     }

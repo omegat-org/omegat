@@ -46,8 +46,8 @@ public interface IParseCallback {
      * @param filter
      *            filter which produces entry
      */
-    void addEntry(String id, String source, String translation,
-            boolean isFuzzy, String comment, IFilter filter);
+    void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+            IFilter filter);
 
     /**
      * Add data to the TMX with name like source file name.

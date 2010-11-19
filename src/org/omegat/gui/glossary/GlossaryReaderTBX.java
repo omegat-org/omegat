@@ -64,8 +64,7 @@ public class GlossaryReaderTBX {
         try {
             TBX_CONTEXT = JAXBContext.newInstance(Martif.class);
         } catch (Exception ex) {
-            throw new ExceptionInInitializerError(OStrings
-                    .getString("STARTUP_JAXB_LINKAGE_ERROR"));
+            throw new ExceptionInInitializerError(OStrings.getString("STARTUP_JAXB_LINKAGE_ERROR"));
         }
     }
 
@@ -78,10 +77,8 @@ public class GlossaryReaderTBX {
     public static List<GlossaryEntry> read(final File file) throws Exception {
         Martif tbx = load(file);
 
-        String sLang = Core.getProject().getProjectProperties()
-                .getSourceLanguage().getLanguageCode();
-        String tLang = Core.getProject().getProjectProperties()
-                .getTargetLanguage().getLanguageCode();
+        String sLang = Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode();
+        String tLang = Core.getProject().getProjectProperties().getTargetLanguage().getLanguageCode();
 
         StringBuilder note = new StringBuilder();
         StringBuilder descTerm = new StringBuilder();
@@ -136,12 +133,11 @@ public class GlossaryReaderTBX {
 
         return result;
     }
-    
+
     /**
      * Add description or note into StringBuilder.
      */
-    protected static void appendDescOrNote(final List<?> list,
-            StringBuilder str) {
+    protected static void appendDescOrNote(final List<?> list, StringBuilder str) {
         for (Object o : list) {
             String line = null;
             if (o instanceof Descrip) {
@@ -149,8 +145,7 @@ public class GlossaryReaderTBX {
                 line = d.getType() + ": " + readContent(d.getContent());
             } else if (o instanceof DescripGrp) {
                 DescripGrp dg = (DescripGrp) o;
-                line = dg.getDescrip().getType() + ": "
-                        + readContent(dg.getDescrip().getContent());
+                line = dg.getDescrip().getType() + ": " + readContent(dg.getDescrip().getContent());
             } else if (o instanceof TermNote) {
                 TermNote tn = (TermNote) o;
                 line = readContent(tn.getContent());
@@ -160,9 +155,9 @@ public class GlossaryReaderTBX {
             }
         }
     }
-    
+
     protected static void appendLine(final StringBuilder str, String line) {
-        if (! (line.length() > 0)) // No need to append empty lines
+        if (!(line.length() > 0)) // No need to append empty lines
             return;
         if (str.length() > 0) {
             str.append('\n');
@@ -177,7 +172,7 @@ public class GlossaryReaderTBX {
         }
         return res.toString();
     }
-    
+
     /**
      * Load tbx file, but skip DTD resolving.
      */
@@ -200,8 +195,8 @@ public class GlossaryReaderTBX {
     }
 
     public static class NamespaceFilter extends XMLFilterImpl {
-        private static final InputSource EMPTY_INPUT_SOURCE = new InputSource(
-                new ByteArrayInputStream(new byte[0]));
+        private static final InputSource EMPTY_INPUT_SOURCE = new InputSource(new ByteArrayInputStream(
+                new byte[0]));
 
         public NamespaceFilter(XMLReader xmlReader) {
             super(xmlReader);

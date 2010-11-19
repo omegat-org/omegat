@@ -20,19 +20,17 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.convert.v20to21.data;
 
 import java.io.Serializable;
 
-
 /**
- * Options for OpenDoc filter.
- * Serializable to allow saving to / reading from configuration file.
+ * Options for OpenDoc filter. Serializable to allow saving to / reading from
+ * configuration file.
  * <p>
- * OpenDoc filter have the following options
- * ([+] means default on).
+ * OpenDoc filter have the following options ([+] means default on).
  * Translatable elements:
  * <ul>
  * <li>[+] Index entries
@@ -41,95 +39,86 @@ import java.io.Serializable;
  * <li>[+] Notes
  * <li>[+] Comments
  * </ul>
+ * 
  * @author Didier Briel
  */
-public class OpenDocOptions implements Serializable
-{    
-     
+public class OpenDocOptions implements Serializable {
+
     /** Hold value of properties. */
     private boolean translateIndexes = true;
     private boolean translateBookmarks = false;
     private boolean translateBookmarkRefs = true;
     private boolean translateNotes = true;
     private boolean translateComments = true;
-    
+
     /**
      * Returns whether Indexes should be translated.
      */
-    public boolean getTranslateIndexes()
-    {
+    public boolean getTranslateIndexes() {
         return this.translateIndexes;
     }
 
     /**
      * Sets whether Indexes be translated.
      */
-    public void setTranslateIndexes(boolean translateIndexes)
-    {
+    public void setTranslateIndexes(boolean translateIndexes) {
         this.translateIndexes = translateIndexes;
     }
-   
+
     /**
      * Returns whether Bookmarks should be translated.
      */
-    public boolean getTranslateBookmarks()
-    {
+    public boolean getTranslateBookmarks() {
         return this.translateBookmarks;
     }
 
     /**
      * Sets whether Bookmarks should be translated.
      */
-    public void setTranslateBookmarks(boolean translateBookmarks)
-    {
+    public void setTranslateBookmarks(boolean translateBookmarks) {
         this.translateBookmarks = translateBookmarks;
     }
- 
-        /**
+
+    /**
      * Returns whether Bookmark references should be translated.
      */
-    public boolean getTranslateBookmarkRefs()
-    {
+    public boolean getTranslateBookmarkRefs() {
         return this.translateBookmarkRefs;
     }
 
     /**
      * Sets whether Bookmarks references should be translated.
      */
-    public void setTranslateBookmarkRefs(boolean translateBookmarkRefs)
-    {
+    public void setTranslateBookmarkRefs(boolean translateBookmarkRefs) {
         this.translateBookmarkRefs = translateBookmarkRefs;
     }
-  
+
     /**
      * Returns whether Notes should be translated.
      */
-    public boolean getTranslateNotes()
-    {
+    public boolean getTranslateNotes() {
         return this.translateNotes;
     }
 
     /**
      * Sets whether Notes should be translated.
      */
-    public void setTranslateNotes(boolean translateNotes)
-    {
+    public void setTranslateNotes(boolean translateNotes) {
         this.translateNotes = translateNotes;
     }
+
     /**
      * Returns whether Comments should be translated.
      */
-    
-    public boolean getTranslateComments()
-    {
+
+    public boolean getTranslateComments() {
         return this.translateComments;
     }
 
     /**
      * Sets whether Comments should be translated.
      */
-    public void setTranslateComments(boolean translateComments)
-    {
+    public void setTranslateComments(boolean translateComments) {
         this.translateComments = translateComments;
     }
 

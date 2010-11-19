@@ -43,9 +43,8 @@ import org.omegat.util.Preferences;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TransTipsPopup implements IPopupMenuConstructor {
-    public void addItems(final JPopupMenu menu, JTextComponent comp,
-            final int mousepos, boolean isInActiveEntry,
-            boolean isInActiveTranslation, SegmentBuilder sb) {
+    public void addItems(final JPopupMenu menu, JTextComponent comp, final int mousepos,
+            boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
         if (!Preferences.isPreference(Preferences.TRANSTIPS)) {
             return;
         }
@@ -65,8 +64,7 @@ public class TransTipsPopup implements IPopupMenuConstructor {
         TransTips.Search callback = new TransTips.Search() {
             public void found(GlossaryEntry ge, int start, int end) {
                 // is inside found word ?
-                if (startSource + start <= mousepos
-                        && mousepos <= startSource + end) {
+                if (startSource + start <= mousepos && mousepos <= startSource + end) {
                     // Split the terms and remove the leading space.
                     String[] locs = ge.getLocText().split(",");
                     for (int l = 1; l < locs.length; l++) {

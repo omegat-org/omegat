@@ -137,8 +137,7 @@ public class HelpFrame extends JFrame {
                 dispose();
             }
         };
-        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-                escape, "ESCAPE");
+        getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(escape, "ESCAPE");
         getRootPane().getActionMap().put("ESCAPE", escapeAction);
         // END HP
 
@@ -174,8 +173,8 @@ public class HelpFrame extends JFrame {
         } else {
             path = filename;
         }
-        File f = new File(StaticUtils.installDir() + File.separator
-                + OConsts.HELP_DIR + File.separator + path);
+        File f = new File(StaticUtils.installDir() + File.separator + OConsts.HELP_DIR + File.separator
+                + path);
         try {
             if (f.exists()) {
                 return f.toURI().toURL();
@@ -188,8 +187,7 @@ public class HelpFrame extends JFrame {
         } else {
             path = filename;
         }
-        URL r = HelpFrame.class
-                .getResource('/' + OConsts.HELP_DIR + '/' + path);
+        URL r = HelpFrame.class.getResource('/' + OConsts.HELP_DIR + '/' + path);
 
         return r;
     }
@@ -226,13 +224,9 @@ public class HelpFrame extends JFrame {
             String txt = "<b>" + link + "</b>";
             StringBuffer buf = new StringBuffer();
             buf.append("<html><body><p>");
-            buf
-                    .append(StaticUtils.format(OStrings
-                            .getString("HF_ERROR_EXTLINK_TITLE"),
-                            new Object[] { txt }));
+            buf.append(StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_TITLE"), new Object[] { txt }));
             buf.append("<p>");
-            buf.append(StaticUtils.format(OStrings
-                    .getString("HF_ERROR_EXTLINK_MSG"),
+            buf.append(StaticUtils.format(OStrings.getString("HF_ERROR_EXTLINK_MSG"),
                     new Object[] { "<b>index.html</b>" }));
             buf.append("</body></html>");
 
@@ -248,8 +242,7 @@ public class HelpFrame extends JFrame {
                 }
                 displayURL(newPage);
             } catch (IOException e) {
-                String s = errorHaiku() + "<p>&nbsp;<p>"
-                        + OStrings.getString("HF_CANT_FIND_HELP") + link;
+                String s = errorHaiku() + "<p>&nbsp;<p>" + OStrings.getString("HF_CANT_FIND_HELP") + link;
 
                 m_helpPane.setText(s);
             }
@@ -266,8 +259,7 @@ public class HelpFrame extends JFrame {
             m_helpPane.setPage(url);
             m_filename = url;
         } catch (IOException e) {
-            String s = errorHaiku() + "<p>&nbsp;<p>"
-                    + OStrings.getString("HF_CANT_FIND_HELP") + url;
+            String s = errorHaiku() + "<p>&nbsp;<p>" + OStrings.getString("HF_CANT_FIND_HELP") + url;
 
             m_helpPane.setText(s);
         }
@@ -280,12 +272,9 @@ public class HelpFrame extends JFrame {
     }
 
     private void updateUIText() {
-        Mnemonics.setLocalizedText(m_closeButton, OStrings
-                .getString("BUTTON_CLOSE"));
-        Mnemonics.setLocalizedText(m_homeButton, OStrings
-                .getString("BUTTON_HOME"));
-        Mnemonics.setLocalizedText(m_backButton, OStrings
-                .getString("BUTTON_BACK"));
+        Mnemonics.setLocalizedText(m_closeButton, OStrings.getString("BUTTON_CLOSE"));
+        Mnemonics.setLocalizedText(m_homeButton, OStrings.getString("BUTTON_HOME"));
+        Mnemonics.setLocalizedText(m_backButton, OStrings.getString("BUTTON_BACK"));
         setTitle(OStrings.getString("HF_WINDOW_TITLE"));
     }
 
@@ -370,8 +359,7 @@ public class HelpFrame extends JFrame {
             int y = Integer.parseInt(dy);
             setLocation(x, y);
             String dw = Preferences.getPreference(Preferences.HELPWINDOW_WIDTH);
-            String dh = Preferences
-                    .getPreference(Preferences.HELPWINDOW_HEIGHT);
+            String dh = Preferences.getPreference(Preferences.HELPWINDOW_HEIGHT);
             int w = Integer.parseInt(dw);
             int h = Integer.parseInt(dh);
             setSize(w, h);
@@ -393,8 +381,7 @@ public class HelpFrame extends JFrame {
 
     public void processWindowEvent(WindowEvent w) {
         int evt = w.getID();
-        if (evt == WindowEvent.WINDOW_CLOSING
-                || evt == WindowEvent.WINDOW_CLOSED) {
+        if (evt == WindowEvent.WINDOW_CLOSING || evt == WindowEvent.WINDOW_CLOSED) {
             // save window size and position
             saveWindowLayout();
         }

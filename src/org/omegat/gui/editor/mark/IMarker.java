@@ -48,6 +48,5 @@ public interface IMarker {
      * 
      * Method will be called NOT in Swing thread.
      */
-    List<Mark> getMarksForEntry(String sourceText, String translationText,
-            boolean isActive) throws Exception;
+    List<Mark> getMarksForEntry(String sourceText, String translationText, boolean isActive) throws Exception;
 }

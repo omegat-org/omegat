@@ -22,7 +22,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters3.xml.docbook;
 
@@ -32,86 +32,34 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies DocBook XML Dialect.
- *
+ * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Fabian Mandelbaum
  */
-public class DocBookDialect extends DefaultXMLDialect
-{
-    public static final Pattern DOCBOOK_PUBLIC_DTD = 
-            Pattern.compile("-//OASIS//DTD DocBook.*");                         
-    public static final Pattern DB5_XMLNS = Pattern.compile(
-            "xmlns(:\\w+)?=\"http://docbook.org/ns/docbook\"");
+public class DocBookDialect extends DefaultXMLDialect {
+    public static final Pattern DOCBOOK_PUBLIC_DTD = Pattern.compile("-//OASIS//DTD DocBook.*");
+    public static final Pattern DB5_XMLNS = Pattern
+            .compile("xmlns(:\\w+)?=\"http://docbook.org/ns/docbook\"");
     private String nsString = null; // the value of the NS, if any
-    
-    public DocBookDialect()
-    {
-        defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, DOCBOOK_PUBLIC_DTD);                    
-        
-        defineParagraphTags(new String[]
-        {
-            "book",                                                             
-            "bookinfo",                                                         
-            "title",                                                            
-            "subtitle",                                                         
-            "authorgroup",                                                      
-            "author",                                                           
-            "firstname",                                                        
-            "surname",                                                          
-            "affiliation",                                                      
-            "orgname",                                                          
-            "address",                                                          
-            "email",                                                            
-            "edition",                                                          
-            "pubdate",                                                          
-            "copyright",                                                        
-            "year",                                                             
-            "holder",                                                           
-            "isbn",                                                             
-            "keywordset",                                                       
-            "keyword",                                                          
-            "preface",                                                          
-            "title",                                                            
-            "para",                                                             
-            "chapter",                                                          
-            "table",                                                            
-            "tgroup",                                                           
-            "thead",                                                            
-            "tbody",                                                            
-            "row",                                                              
-            "entry",                                                            
-            "revhistory",                                                       
-            "revision",                                                         
-            "revnumber",                                                        
-            "date",                                                             
-            "authorinitials",                                                   
-            "revremark",                                                        
-            "itemizedlist",                                                     
-            "listitem",                                                         
-            "member",                                                           
-        });
-        
-        defineOutOfTurnTags(new String[]
-        {
-            "indexterm",                                                        
-        });
 
-        definePreformatTags(new String[]
-        {
-            "screen",                                                           
-            "programlisting",                                                   
-        });
-        
-        defineTranslatableAttributes(new String[]
-        {        
-                "url",                                                          
-                "lang",                                                         
-                "xml:lang"                                                      
-        });                                                 
-        
+    public DocBookDialect() {
+        defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, DOCBOOK_PUBLIC_DTD);
+
+        defineParagraphTags(new String[] { "book", "bookinfo", "title", "subtitle", "authorgroup", "author",
+                "firstname", "surname", "affiliation", "orgname", "address", "email", "edition", "pubdate",
+                "copyright", "year", "holder", "isbn", "keywordset", "keyword", "preface", "title", "para",
+                "chapter", "table", "tgroup", "thead", "tbody", "row", "entry", "revhistory", "revision",
+                "revnumber", "date", "authorinitials", "revremark", "itemizedlist", "listitem", "member", });
+
+        defineOutOfTurnTags(new String[] { "indexterm", });
+
+        definePreformatTags(new String[] { "screen", "programlisting", });
+
+        defineTranslatableAttributes(new String[] { "url", "lang", "xml:lang" });
+
     }
-    
+
     // TODO: Can we can read db xml content here to try to determinate if
     // the root element has a NS declaration to be able to handle
     // namespaced-tags properly? We'd actually need to read only the

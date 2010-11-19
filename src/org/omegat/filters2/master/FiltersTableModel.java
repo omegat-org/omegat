@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters2.master;
 
@@ -35,12 +35,10 @@ import javax.swing.table.AbstractTableModel;
 import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
 
-
 /**
- * Wrapper around all the file filter classes.
- * Is a JavaBean, so that it's easy to write/read it to/from XML file
- * and provides a table model.
- *
+ * Wrapper around all the file filter classes. Is a JavaBean, so that it's easy
+ * to write/read it to/from XML file and provides a table model.
+ * 
  * @author Maxym Mykhalchuk
  */
 public class FiltersTableModel extends AbstractTableModel {
@@ -51,8 +49,7 @@ public class FiltersTableModel extends AbstractTableModel {
         filters = new ArrayList<Filter>();
         // add only exist filters
         for (Filter f : config.getFilter()) {
-            IFilter fi = FilterMaster.getInstance().getFilterInstance(
-                    f.getClassName());
+            IFilter fi = FilterMaster.getInstance().getFilterInstance(f.getClassName());
             if (fi != null) {
                 // filter exist
                 filters.add(f);
@@ -60,82 +57,68 @@ public class FiltersTableModel extends AbstractTableModel {
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////
-    //  TableModel implementation
-    //////////////////////////////////////////////////////////////////////////
+    // ////////////////////////////////////////////////////////////////////////
+    // TableModel implementation
+    // ////////////////////////////////////////////////////////////////////////
 
-    public int getColumnCount()
-    {
+    public int getColumnCount() {
         return 2;
     }
-    
-    public String getColumnName(int columnIndex)
-    {
-        switch( columnIndex )
-        {
-            case 0:
-                return OStrings.getString("FILTERS_FILE_FORMAT");
-            case 1:
-                return OStrings.getString("FILTERS_ON");
-        }
-        return null;
-    }
-    
-    public Class<?> getColumnClass(int columnIndex)
-    {
-        switch( columnIndex )
-        {
-            case 0:
-                return String.class;
-            case 1:
-                return Boolean.class;
+
+    public String getColumnName(int columnIndex) {
+        switch (columnIndex) {
+        case 0:
+            return OStrings.getString("FILTERS_FILE_FORMAT");
+        case 1:
+            return OStrings.getString("FILTERS_ON");
         }
         return null;
     }
 
-    public int getRowCount()
-    {
+    public Class<?> getColumnClass(int columnIndex) {
+        switch (columnIndex) {
+        case 0:
+            return String.class;
+        case 1:
+            return Boolean.class;
+        }
+        return null;
+    }
+
+    public int getRowCount() {
         return filters.size();
     }
 
-    public Object getValueAt(int rowIndex, int columnIndex)
-    {
+    public Object getValueAt(int rowIndex, int columnIndex) {
         Filter filter = filters.get(rowIndex);
-        switch( columnIndex )
-        {
-            case 0:
-                IFilter f = FilterMaster.getInstance().getFilterInstance(
-                        filter.getClassName());
-                return f.getFileFormatName();
-            case 1:
-                return new Boolean(filter.isEnabled());
+        switch (columnIndex) {
+        case 0:
+            IFilter f = FilterMaster.getInstance().getFilterInstance(filter.getClassName());
+            return f.getFileFormatName();
+        case 1:
+            return new Boolean(filter.isEnabled());
         }
         return null;
     }
-    
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex)
-    {
+
+    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
         Filter filter = filters.get(rowIndex);
-        switch( columnIndex )
-        {
-            case 1:
-                filter.setEnabled(((Boolean)aValue).booleanValue());
-                break;
-            default:
-                throw new IllegalArgumentException(
-                        OStrings.getString("FILTERS_ERROR_COLUMN_INDEX_NOT_1"));
+        switch (columnIndex) {
+        case 1:
+            filter.setEnabled(((Boolean) aValue).booleanValue());
+            break;
+        default:
+            throw new IllegalArgumentException(OStrings.getString("FILTERS_ERROR_COLUMN_INDEX_NOT_1"));
         }
     }
-    
-    public boolean isCellEditable(int rowIndex, int columnIndex)
-    {
-        switch( columnIndex )
-        {
-            case 0:
-                return false;
-            case 1:
-                return true;
+
+    public boolean isCellEditable(int rowIndex, int columnIndex) {
+        switch (columnIndex) {
+        case 0:
+            return false;
+        case 1:
+            return true;
         }
         return false;
-    }    
+    }
 }

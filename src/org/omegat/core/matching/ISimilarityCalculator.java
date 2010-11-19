@@ -37,9 +37,9 @@ public interface ISimilarityCalculator {
      * Compute similarity.
      * 
      * @param source
-     *                source segment
+     *            source segment
      * @param target
-     *                target segment
+     *            target segment
      * @return similarity
      */
     int compute(Token[] source, Token[] target);

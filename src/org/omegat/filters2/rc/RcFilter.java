@@ -49,16 +49,11 @@ import org.omegat.util.StringUtil;
  */
 public class RcFilter extends AbstractFilter {
 
-    protected static final Pattern RE_DIALOG = Pattern
-            .compile("(\\S+)\\s+DIALOG(EX)?\\s+.+");
-    protected static final Pattern RE_DIALOG_CAPTION = Pattern
-            .compile("CAPTION\\s+.+");
-    protected static final Pattern RE_MENU = Pattern
-            .compile("(\\S+)\\s+MENU(EX)?\\s*.*");
-    protected static final Pattern RE_MESSAGETABLE = Pattern
-            .compile("(\\S+)\\s+MESSAGETABLE\\s*.*");
-    protected static final Pattern RE_STRINGTABLE = Pattern
-            .compile("STRINGTABLE\\s*.*");
+    protected static final Pattern RE_DIALOG = Pattern.compile("(\\S+)\\s+DIALOG(EX)?\\s+.+");
+    protected static final Pattern RE_DIALOG_CAPTION = Pattern.compile("CAPTION\\s+.+");
+    protected static final Pattern RE_MENU = Pattern.compile("(\\S+)\\s+MENU(EX)?\\s*.*");
+    protected static final Pattern RE_MESSAGETABLE = Pattern.compile("(\\S+)\\s+MESSAGETABLE\\s*.*");
+    protected static final Pattern RE_STRINGTABLE = Pattern.compile("STRINGTABLE\\s*.*");
 
     enum PART {
         DIALOG, MENU, MESSAGETABLE, STRINGTABLE, OTHER, UNKNOWN
@@ -85,8 +80,8 @@ public class RcFilter extends AbstractFilter {
         return true;
     }
 
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile)
-            throws IOException, TranslationException {
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException,
+            TranslationException {
         PART cPart = PART.UNKNOWN;
         int cLevel = 0;
 
@@ -117,8 +112,7 @@ public class RcFilter extends AbstractFilter {
                 if (cLevel == 0) {
                     cPart = PART.UNKNOWN;
                 }
-            } else if (cLevel > 0 && cPart != PART.OTHER
-                    && cPart != PART.UNKNOWN) {
+            } else if (cLevel > 0 && cPart != PART.OTHER && cPart != PART.UNKNOWN) {
                 markForTranslation(s);
                 if (b >= 0 && e >= 0 && b < e && e > 0) {
                     id = parseId(cPart, s, b, e);
@@ -134,16 +128,15 @@ public class RcFilter extends AbstractFilter {
                 // extract source
                 String loc = s.substring(b + 1, e);
                 /*
-                 * Some software produce escaped quotes, but valid are only double quotes
+                 * Some software produce escaped quotes, but valid are only
+                 * double quotes
                  */
                 loc = loc.replace("\\\"", "\"").replace("\"\"", "\"");
                 if (entryParseCallback != null) {
-                    entryParseCallback.addEntry(blockId + "/" + id, loc, null,
-                            false, null, this);
+                    entryParseCallback.addEntry(blockId + "/" + id, loc, null, false, null, this);
                 } else if (entryTranslateCallback != null) {
                     // replace translation
-                    String trans = entryTranslateCallback.getTranslation(null,
-                            loc);
+                    String trans = entryTranslateCallback.getTranslation(null, loc);
                     trans = trans.replace("\"", "\"\"");
                     s = s.substring(0, b + 1) + trans + s.substring(e);
                 } else if (entryAlignCallback != null && id != null) {
@@ -156,8 +149,7 @@ public class RcFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile,
-            BufferedReader translatedFile) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 
@@ -168,8 +160,7 @@ public class RcFilter extends AbstractFilter {
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
             if (!StringUtil.isEmpty(tr)) {
-                entryAlignCallback.addTranslation(en.getKey(), en.getValue(),
-                        tr, false, null, this);
+                entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }
     }

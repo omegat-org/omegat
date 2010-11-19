@@ -24,7 +24,6 @@
 
 package org.omegat.util.gui;
 
-
 /**
  * Some utilities for display text tables with aligning.
  * 
@@ -41,8 +40,7 @@ public class TextUtil {
      *            table data
      * @return text
      */
-    public static String showTextTable(String[] columnHeaders,
-            String[][] table, boolean[] alignRight) {
+    public static String showTextTable(String[] columnHeaders, String[][] table, boolean[] alignRight) {
         StringBuilder out = new StringBuilder();
 
         // calculate max column size
@@ -79,8 +77,7 @@ public class TextUtil {
      * @param colSize
      *            field size
      */
-    public static void appendField(StringBuilder out, String data, int colSize,
-            boolean alignRight) {
+    public static void appendField(StringBuilder out, String data, int colSize, boolean alignRight) {
         if (!alignRight) {
             out.append(data);
         }

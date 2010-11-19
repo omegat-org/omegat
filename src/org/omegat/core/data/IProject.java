@@ -62,8 +62,7 @@ public interface IProject {
     /**
      * Create translated documents.
      */
-    void compileProject(String sourcePattern)
-            throws IOException, TranslationException;
+    void compileProject(String sourcePattern) throws IOException, TranslationException;
 
     /**
      * Get project properties.
@@ -83,7 +82,7 @@ public interface IProject {
      * Is project modified ?
      */
     boolean isProjectModified();
-    
+
     /**
      * Returns tokenizer for source language.
      */
@@ -103,17 +102,23 @@ public interface IProject {
     /**
      * Set translation for entry. Use when user has typed a new translation.
      * 
-     * @param entry entry
-     * @param trans translation
+     * @param entry
+     *            entry
+     * @param trans
+     *            translation
      */
     void setTranslation(SourceTextEntry entry, String trans);
 
     /**
-     * Set author and translation for entry. Use when user has typed a new translation.
+     * Set author and translation for entry. Use when user has typed a new
+     * translation.
      * 
-     * @param author author
-     * @param entry entry
-     * @param trans translation
+     * @param author
+     *            author
+     * @param entry
+     *            entry
+     * @param trans
+     *            translation
      */
     void setAuthorTranslation(String author, SourceTextEntry entry, String trans);
 
@@ -139,7 +144,7 @@ public interface IProject {
      * @return translation, or null if translation not exist
      */
     TransEntry getTranslation(SourceTextEntry ste);
-    
+
     /**
      * Get all translation memories from /tm/ folder.
      * 
@@ -162,7 +167,7 @@ public interface IProject {
 
     public static class FileInfo {
         public String filePath;
-        
+
         public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
     }
 }

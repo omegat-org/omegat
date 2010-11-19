@@ -44,10 +44,9 @@ import org.omegat.util.OConsts;
 public class GlossaryReaderCSV {
     /** Fields separator. Can be dependent of regional options. */
     protected static final char SEPARATOR = ',';
-    
+
     public static List<GlossaryEntry> read(final File file) throws IOException {
-        InputStreamReader reader = new InputStreamReader(new FileInputStream(
-                file), OConsts.UTF8);
+        InputStreamReader reader = new InputStreamReader(new FileInputStream(file), OConsts.UTF8);
 
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
         BufferedReader in = new BufferedReader(reader);

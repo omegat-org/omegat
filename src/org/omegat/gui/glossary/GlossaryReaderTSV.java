@@ -49,8 +49,8 @@ public class GlossaryReaderTSV {
         String fname_lower = file.getName().toLowerCase();
         if (fname_lower.endsWith(GlossaryManager.EXT_TSV_DEF)) {
             reader = new InputStreamReader(new FileInputStream(file));
-        } else if ( fname_lower.endsWith(GlossaryManager.EXT_TSV_UTF8) ||
-                    fname_lower.endsWith(GlossaryManager.EXT_TSV_TXT) ) {
+        } else if (fname_lower.endsWith(GlossaryManager.EXT_TSV_UTF8)
+                || fname_lower.endsWith(GlossaryManager.EXT_TSV_TXT)) {
             InputStream fis = new FileInputStream(file);
             reader = new InputStreamReader(fis, OConsts.UTF8);
         } else {

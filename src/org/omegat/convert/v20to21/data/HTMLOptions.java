@@ -21,18 +21,17 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.convert.v20to21.data;
 
 import java.io.Serializable;
 
 /**
- * Options for (X)HTML filter.
- * Serializable to allow saving to / reading from configuration file.
+ * Options for (X)HTML filter. Serializable to allow saving to / reading from
+ * configuration file.
  * <p>
- * HTML filter would have the following options
- * ([+] means default on).<br>
+ * HTML filter would have the following options ([+] means default on).<br>
  * Add or rewrite encoding declaration in HTML and XHTML files:
  * <ul>
  * <li>[] Always
@@ -51,18 +50,25 @@ import java.io.Serializable;
  * </ul>
  * Start a new paragraph on breaks (&lt;br&gt;) []<br>
  * Skip text matching regExp []<br>
- * Skip content of meta-tag when any of the given attibutename-value pairs is present in the tag
+ * Skip content of meta-tag when any of the given attibutename-value pairs is
+ * present in the tag
+ * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
  */
-public class HTMLOptions implements Serializable
-{
+public class HTMLOptions implements Serializable {
     /** (X)HTML filter should always add/rewrite encoding declaration. */
     public static final int REWRITE_ALWAYS = 1;
-    /** Default. (X)HTML filter should rewrite encoding declaration if HTML file has a header. */
+    /**
+     * Default. (X)HTML filter should rewrite encoding declaration if HTML file
+     * has a header.
+     */
     public static final int REWRITE_IFHEADER = 2;
-    /** (X)HTML filter should rewrite encoding declaration meta-tag if HTML file has one. */
+    /**
+     * (X)HTML filter should rewrite encoding declaration meta-tag if HTML file
+     * has one.
+     */
     public static final int REWRITE_IFMETA = 3;
     /** (X)HTML filter should never rewrite encoding declaration. */
     public static final int REWRITE_NEVER = 4;
@@ -71,22 +77,24 @@ public class HTMLOptions implements Serializable
     private int rewriteEncoding = REWRITE_IFHEADER;
 
     /**
-     * Returns whether and when (X)HTML filter adds/rewrites encoding declaration.
+     * Returns whether and when (X)HTML filter adds/rewrites encoding
+     * declaration.
+     * 
      * @return One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
-     *                  {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
+     *         {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
      */
-    public int getRewriteEncoding()
-    {
+    public int getRewriteEncoding() {
         return this.rewriteEncoding;
     }
 
     /**
      * Sets when (X)HTML filter should add/rewrite encoding declaration.
-     * @param rewriteEncoding One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
-     *                                  {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
+     * 
+     * @param rewriteEncoding
+     *            One of {@link #REWRITE_ALWAYS}, {@link #REWRITE_IFHEADER},
+     *            {@link #REWRITE_IFMETA}, {@link #REWRITE_NEVER}.
      */
-    public void setRewriteEncoding(int rewriteEncoding)
-    {
+    public void setRewriteEncoding(int rewriteEncoding) {
         this.rewriteEncoding = rewriteEncoding;
     }
 
@@ -100,156 +108,134 @@ public class HTMLOptions implements Serializable
     private boolean paragraphOnBr = false;
 
     private String skipRegExp = "";
-    private String skipMeta = "http-equiv=refresh," +
-                              "name=robots," +
-                              "name=revisit-after," +
-                              "http-equiv=expires," +
-                              "http-equiv=content-style-type," +
-                              "http-equiv=content-script-type";
+    private String skipMeta = "http-equiv=refresh," + "name=robots," + "name=revisit-after,"
+            + "http-equiv=expires," + "http-equiv=content-style-type," + "http-equiv=content-script-type";
 
     /**
      * Returns whether href attributes should be translated.
      */
-    public boolean getTranslateHref()
-    {
+    public boolean getTranslateHref() {
         return this.translateHref;
     }
 
     /**
      * Sets whether href attributes should be translated.
      */
-    public void setTranslateHref(boolean translateHref)
-    {
+    public void setTranslateHref(boolean translateHref) {
         this.translateHref = translateHref;
     }
 
     /**
      * Returns whether src attributes should be translated.
      */
-    public boolean getTranslateSrc()
-    {
+    public boolean getTranslateSrc() {
         return this.translateSrc;
     }
 
     /**
      * Sets whether src attributes should be translated.
      */
-    public void setTranslateSrc(boolean translateSrc)
-    {
+    public void setTranslateSrc(boolean translateSrc) {
         this.translateSrc = translateSrc;
     }
 
     /**
      * Returns whether lang attributes should be translated.
      */
-    public boolean getTranslateLang()
-    {
+    public boolean getTranslateLang() {
         return this.translateLang;
     }
 
     /**
      * Sets whether lang attributes should be translated.
      */
-    public void setTranslateLang(boolean translateLang)
-    {
+    public void setTranslateLang(boolean translateLang) {
         this.translateLang = translateLang;
     }
 
-   /**
+    /**
      * Returns whether hreflang attributes should be translated.
      */
-    public boolean getTranslateHreflang()
-    {
+    public boolean getTranslateHreflang() {
         return this.translateHreflang;
     }
 
     /**
      * Sets whether hreflang attributes should be translated.
      */
-    public void setTranslateHreflang(boolean translateHreflang)
-    {
+    public void setTranslateHreflang(boolean translateHreflang) {
         this.translateHreflang = translateHreflang;
     }
 
     /**
      * Sets whether value attributes should be translated.
      */
-    public void setTranslateValue(boolean translateValue)
-    {
+    public void setTranslateValue(boolean translateValue) {
         this.translateValue = translateValue;
     }
 
     /**
      * Returns whether value attributes should be translated.
      */
-    public boolean getTranslateValue()
-    {
+    public boolean getTranslateValue() {
         return this.translateValue;
     }
+
     /**
      * Sets whether button value attributes should be translated.
      */
-    public void setTranslateButtonValue(boolean translateButtonValue)
-    {
+    public void setTranslateButtonValue(boolean translateButtonValue) {
         this.translateButtonValue = translateButtonValue;
     }
 
     /**
      * Returns whether button value attributes should be translated.
      */
-    public boolean getTranslateButtonValue()
-    {
+    public boolean getTranslateButtonValue() {
         return this.translateButtonValue;
     }
 
-
-   /**
+    /**
      * Returns whether a new paragraph should be started on BR.
      */
-    public boolean getParagraphOnBr()
-    {
+    public boolean getParagraphOnBr() {
         return this.paragraphOnBr;
     }
 
     /**
      * Sets whether a new paragraph should be started on BR.
      */
-    public void setParagraphOnBr(boolean paragraphOnBr)
-    {
+    public void setParagraphOnBr(boolean paragraphOnBr) {
         this.paragraphOnBr = paragraphOnBr;
     }
 
     /**
      * Returns the regular expression that matches text not to be translated
      */
-    public String getSkipRegExp()
-    {
+    public String getSkipRegExp() {
         return this.skipRegExp;
     }
 
     /**
      * Sets the regular expression that matches text not to be translated
      */
-    public void setSkipRegExp(String skipRegExp)
-    {
+    public void setSkipRegExp(String skipRegExp) {
         this.skipRegExp = skipRegExp;
     }
 
     /**
-     * Returns the meta-tag attribute key-value pairs of which meta-tags 
-     * should not be translated
+     * Returns the meta-tag attribute key-value pairs of which meta-tags should
+     * not be translated
      */
-    public String getSkipMeta()
-    {
+    public String getSkipMeta() {
         return this.skipMeta;
     }
 
     /**
-     * Sets the meta-tag attribute key-value pairs of which meta-tags 
-     * should not be translated
+     * Sets the meta-tag attribute key-value pairs of which meta-tags should not
+     * be translated
      */
-    public void setSkipMeta(String skipMeta)
-    {
+    public void setSkipMeta(String skipMeta) {
         this.skipMeta = skipMeta;
     }
 

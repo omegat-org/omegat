@@ -88,15 +88,13 @@ public class EditorTextArea3 extends JEditorPane {
         addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent e) {
                 try {
-                    int start = EditorUtils.getWordStart(EditorTextArea3.this,
-                            e.getMark());
-                    int end = EditorUtils.getWordEnd(EditorTextArea3.this, e
-                            .getMark());
-					if (end - start <= 0) {
-						// word not defined
-						return;
-					}
-					String newWord = getText(start, end - start);
+                    int start = EditorUtils.getWordStart(EditorTextArea3.this, e.getMark());
+                    int end = EditorUtils.getWordEnd(EditorTextArea3.this, e.getMark());
+                    if (end - start <= 0) {
+                        // word not defined
+                        return;
+                    }
+                    String newWord = getText(start, end - start);
                     if (!newWord.equals(currentWord)) {
                         currentWord = newWord;
                         CoreEvents.fireEditorNewWord(newWord);
@@ -140,22 +138,18 @@ public class EditorTextArea3 extends JEditorPane {
                      * Copy constructors - for disable blocking in the procesing
                      * time.
                      */
-                    cons = popupConstructors
-                            .toArray(new PopupMenuConstructorInfo[popupConstructors
-                                    .size()]);
+                    cons = popupConstructors.toArray(new PopupMenuConstructorInfo[popupConstructors.size()]);
                 }
 
                 // where is the mouse
                 int mousepos = viewToModel(e.getPoint());
-                boolean isInActiveTranslation = mousepos >= getOmDocument()
-                        .getTranslationStart()
+                boolean isInActiveTranslation = mousepos >= getOmDocument().getTranslationStart()
                         && mousepos <= getOmDocument().getTranslationEnd();
                 boolean isInActiveEntry;
                 int ae = controller.displayedEntryIndex;
                 SegmentBuilder sb = controller.m_docSegList[ae];
                 if (sb.isActive()) {
-                    isInActiveEntry = mousepos >= sb.getStartPosition()
-                            && mousepos <= sb.getEndPosition();
+                    isInActiveEntry = mousepos >= sb.getStartPosition() && mousepos <= sb.getEndPosition();
                 } else {
                     isInActiveEntry = false;
                 }
@@ -163,16 +157,14 @@ public class EditorTextArea3 extends JEditorPane {
                 JPopupMenu popup = new JPopupMenu();
                 for (PopupMenuConstructorInfo c : cons) {
                     // call each constructor
-                    c.constructor.addItems(popup, EditorTextArea3.this,
-                            mousepos, isInActiveEntry, isInActiveTranslation,
-                            sb);
+                    c.constructor.addItems(popup, EditorTextArea3.this, mousepos, isInActiveEntry,
+                            isInActiveTranslation, sb);
                 }
 
                 DockingUI.removeUnusedMenuSeparators(popup);
 
                 if (popup.getComponentCount() > 0) {
-                    popup.show(EditorTextArea3.this, (int) e.getPoint().getX(),
-                            (int) e.getPoint().getY());
+                    popup.show(EditorTextArea3.this, (int) e.getPoint().getX(), (int) e.getPoint().getY());
                 }
             }
         }
@@ -181,18 +173,14 @@ public class EditorTextArea3 extends JEditorPane {
     /**
      * Add new constructor into list and sort full list by priority.
      */
-    protected void registerPopupMenuConstructors(int priority,
-            IPopupMenuConstructor constructor) {
+    protected void registerPopupMenuConstructors(int priority, IPopupMenuConstructor constructor) {
         synchronized (popupConstructors) {
-            popupConstructors.add(new PopupMenuConstructorInfo(priority,
-                    constructor));
-            Collections.sort(popupConstructors,
-                    new Comparator<PopupMenuConstructorInfo>() {
-                        public int compare(PopupMenuConstructorInfo o1,
-                                PopupMenuConstructorInfo o2) {
-                            return o1.priority - o2.priority;
-                        }
-                    });
+            popupConstructors.add(new PopupMenuConstructorInfo(priority, constructor));
+            Collections.sort(popupConstructors, new Comparator<PopupMenuConstructorInfo>() {
+                public int compare(PopupMenuConstructorInfo o1, PopupMenuConstructorInfo o2) {
+                    return o1.priority - o2.priority;
+                }
+            });
         }
     }
 
@@ -244,8 +232,7 @@ public class EditorTextArea3 extends JEditorPane {
             }
         } else if (isKey(e, KeyEvent.VK_ENTER, KeyEvent.SHIFT_MASK)) {
             // convert Shift+Enter event to straight enter key
-            KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(),
-                    e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
+            KeyEvent ke = new KeyEvent(e.getComponent(), e.getID(), e.getWhen(), 0, KeyEvent.VK_ENTER, '\n');
             super.processKeyEvent(ke);
             processed = true;
         } else if ((!mac && isKey(e, KeyEvent.VK_A, KeyEvent.CTRL_MASK))
@@ -254,8 +241,7 @@ public class EditorTextArea3 extends JEditorPane {
             setSelectionStart(doc.getTranslationStart());
             setSelectionEnd(doc.getTranslationEnd());
             processed = true;
-        } else if (isKey(e, KeyEvent.VK_O, KeyEvent.CTRL_MASK
-                | KeyEvent.SHIFT_MASK)) {
+        } else if (isKey(e, KeyEvent.VK_O, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK)) {
             // handle Ctrl+Shift+O - toggle orientation LTR-RTL
             controller.toggleOrientation();
             processed = true;
@@ -381,7 +367,7 @@ public class EditorTextArea3 extends JEditorPane {
             }
         }
     }
-    
+
     /**
      * Need to use own implementation, because standard method moves caret at
      * the end.
@@ -447,7 +433,7 @@ public class EditorTextArea3 extends JEditorPane {
         String st = super.getSelectedText();
         return st != null ? EditorUtils.removeDirectionChars(st) : null;
     }
-    
+
     @Override
     public String getToolTipText(MouseEvent event) {
         int pos = viewToModel(event.getPoint());
@@ -484,8 +470,7 @@ public class EditorTextArea3 extends JEditorPane {
         final int priority;
         final IPopupMenuConstructor constructor;
 
-        public PopupMenuConstructorInfo(int priority,
-                IPopupMenuConstructor constructor) {
+        public PopupMenuConstructorInfo(int priority, IPopupMenuConstructor constructor) {
             this.priority = priority;
             this.constructor = constructor;
         }

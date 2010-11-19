@@ -40,8 +40,7 @@ import org.openide.awt.Mnemonics;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public abstract class BaseTranslate implements IMachineTranslation,
-        ActionListener {
+public abstract class BaseTranslate implements IMachineTranslation, ActionListener {
     protected final JCheckBoxMenuItem menuItem;
 
     protected boolean enabled;
@@ -52,8 +51,7 @@ public abstract class BaseTranslate implements IMachineTranslation,
         menuItem.addActionListener(this);
         enabled = Preferences.isPreference(getPreferenceName());
         menuItem.setState(enabled);
-        Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(
-                menuItem);
+        Core.getMainWindow().getMainMenu().getMachineTranslationMenu().add(menuItem);
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -61,8 +59,7 @@ public abstract class BaseTranslate implements IMachineTranslation,
         Preferences.setPreference(getPreferenceName(), enabled);
     }
 
-    public String getTranslation(Language sLang, Language tLang, String text)
-            throws Exception {
+    public String getTranslation(Language sLang, Language tLang, String text) throws Exception {
         if (enabled) {
             return translate(sLang, tLang, text);
         } else {
@@ -72,6 +69,5 @@ public abstract class BaseTranslate implements IMachineTranslation,
 
     abstract protected String getPreferenceName();
 
-    abstract protected String translate(Language sLang, Language tLang,
-            String text) throws Exception;
+    abstract protected String translate(Language sLang, Language tLang, String text) throws Exception;
 }

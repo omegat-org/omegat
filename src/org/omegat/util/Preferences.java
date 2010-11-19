@@ -181,7 +181,13 @@ public class Preferences
     /**
      * display the segment sources
      */
-    public static final String DISPLAY_SEGMENT_SOURCES = "display_segment_sources";     
+    public static final String DISPLAY_SEGMENT_SOURCES = "display_segment_sources";
+    
+    /**
+     * mark unique segments
+     */
+    public static final String MARK_UNIQUE_SEGMENTS = "mark_unique_segments";
+    
     /**
      * display modification info (author and modification date)
      */

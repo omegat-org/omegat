@@ -465,6 +465,9 @@ public class MainWindowMenuHandler {
     public void viewDisplaySegmentSourceCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings().setDisplaySegmentSources(mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
     }
+    public void viewMarkUniqueSegmentsCheckBoxMenuItemActionPerformed() {
+        Core.getEditor().getSettings().setMarkUniqueSegments(mainWindow.menu.viewMarkUniqueSegmentsCheckBoxMenuItem.isSelected());
+    }
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
         Core.getEditor().getSettings().setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);
     }

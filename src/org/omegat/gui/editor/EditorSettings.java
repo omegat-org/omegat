@@ -43,6 +43,7 @@ public class EditorSettings {
     private boolean markTranslated;
     private boolean markUntranslated;
     private boolean displaySegmentSources;
+    private boolean markUniqueSegments;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
 
@@ -61,6 +62,8 @@ public class EditorSettings {
                 .isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences
                 .isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
+        markUniqueSegments = Preferences
+                .isPreference(Preferences.MARK_UNIQUE_SEGMENTS);
         displayModificationInfo = Preferences
                 .getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO, DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences
@@ -127,6 +130,10 @@ public class EditorSettings {
     public boolean isDisplaySegmentSources() {
         return displaySegmentSources;
     }
+    
+    public boolean isMarkUniqueSegments() {
+        return markUniqueSegments;
+    }
 
     public void setDisplaySegmentSources(boolean displaySegmentSources) {
         UIThreadsUtil.mustBeSwingThread();
@@ -136,6 +143,21 @@ public class EditorSettings {
         this.displaySegmentSources = displaySegmentSources;
         Preferences.setPreference(Preferences.DISPLAY_SEGMENT_SOURCES,
                 displaySegmentSources);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+    
+    public void setMarkUniqueSegments(boolean markUniqueSegments) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markUniqueSegments = markUniqueSegments;
+        Preferences.setPreference(Preferences.MARK_UNIQUE_SEGMENTS,
+                markUniqueSegments);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();

@@ -24,9 +24,9 @@
 
 package org.omegat.util;
 
-import java.io.Reader;
-import java.io.PushbackReader;
 import java.io.IOException;
+import java.io.PushbackReader;
+import java.io.Reader;
 
 /**
   * Reader class that preserves line breaks when using readLine(),

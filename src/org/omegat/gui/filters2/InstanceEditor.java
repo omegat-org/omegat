@@ -25,19 +25,20 @@
 package org.omegat.gui.filters2;
 
 import java.awt.Dialog;
-import java.awt.event.ActionEvent;     // HP
-import java.awt.event.KeyEvent;        // HP
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.util.Vector;
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComponent;         // HP
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.KeyStroke;          // HP
+import javax.swing.KeyStroke;
 import javax.swing.border.TitledBorder;
-import org.omegat.filters2.AbstractFilter;
 
+import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.OStrings;
 import org.openide.awt.Mnemonics;

@@ -28,6 +28,7 @@ package org.omegat.filters3;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.PatternConsts;
 

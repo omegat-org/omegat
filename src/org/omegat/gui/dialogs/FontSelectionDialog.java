@@ -25,18 +25,19 @@
 
 package org.omegat.gui.dialogs;
 
-import java.awt.event.ActionEvent;     // HP
-import java.awt.event.KeyEvent;        // HP
 import java.awt.Font;
 import java.awt.Frame;
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
-import javax.swing.JComponent;         // HP
-import javax.swing.KeyStroke;          // HP
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.JComponent;
+import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 
 /**
  * The dialog to change the font of OmegaT windows.

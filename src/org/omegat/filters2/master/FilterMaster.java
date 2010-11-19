@@ -32,8 +32,8 @@ package org.omegat.filters2.master;
 
 import gen.core.filters.Files;
 import gen.core.filters.Filter;
-import gen.core.filters.Filters;
 import gen.core.filters.Filter.Option;
+import gen.core.filters.Filters;
 
 import java.io.File;
 import java.io.IOException;

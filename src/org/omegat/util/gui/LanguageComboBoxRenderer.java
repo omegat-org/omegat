@@ -25,6 +25,7 @@
 package org.omegat.util.gui;
 
 import java.awt.Component;
+
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.plaf.basic.BasicComboBoxRenderer;

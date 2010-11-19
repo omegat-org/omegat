@@ -32,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.regex.Matcher;
+
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;

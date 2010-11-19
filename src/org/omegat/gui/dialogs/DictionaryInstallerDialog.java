@@ -25,21 +25,20 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.Cursor;
+import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.List;
 
+import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.DefaultListModel;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
-
-import java.awt.Cursor;
-import java.awt.event.ActionEvent;     // HP
-import java.awt.event.KeyEvent;        // HP
-import javax.swing.AbstractAction;     // HP
-import javax.swing.Action;             // HP
-import javax.swing.JComponent;         // HP
-import javax.swing.KeyStroke;          // HP
+import javax.swing.KeyStroke;
 
 import org.omegat.core.spellchecker.DictionaryManager;
 import org.omegat.util.OStrings;

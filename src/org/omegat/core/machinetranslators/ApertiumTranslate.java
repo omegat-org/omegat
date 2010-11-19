@@ -24,15 +24,14 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import java.net.URLEncoder;
-
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
-import org.omegat.util.StringUtil;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
 
 /**

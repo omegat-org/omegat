@@ -27,6 +27,7 @@
 package org.omegat.filters3.xml.helpandmanual;
 
 import java.util.regex.Pattern;
+
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**

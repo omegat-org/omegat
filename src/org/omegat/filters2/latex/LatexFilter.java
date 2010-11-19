@@ -31,12 +31,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.Writer;
-
 import java.util.Iterator;
-import java.util.ListIterator;
 import java.util.LinkedList;
-import java.util.regex.Pattern;
+import java.util.ListIterator;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;

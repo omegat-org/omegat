@@ -32,9 +32,9 @@ import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
 import org.omegat.core.Core;
-import org.omegat.core.search.Searcher;
 import org.omegat.core.search.SearchExpression;
 import org.omegat.core.search.SearchResultEntry;
+import org.omegat.core.search.Searcher;
 import org.omegat.filters2.TranslationException;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.util.Log;

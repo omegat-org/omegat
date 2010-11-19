@@ -37,7 +37,6 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
-import org.omegat.util.xml.XMLReader;
 
 /**
  * A reader for XML stream.

@@ -35,7 +35,6 @@ import java.io.Reader;
 import java.util.regex.Matcher;
 
 import org.omegat.util.OConsts;
-import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 
 

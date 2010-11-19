@@ -36,8 +36,8 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.regex.Matcher;
 
-import org.omegat.util.OConsts;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
 
 /**

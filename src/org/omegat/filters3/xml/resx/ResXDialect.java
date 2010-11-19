@@ -26,9 +26,9 @@
 
 package org.omegat.filters3.xml.resx;
 
-import org.omegat.filters3.xml.DefaultXMLDialect;
-import org.omegat.filters3.Attributes;
 import org.omegat.filters3.Attribute;
+import org.omegat.filters3.Attributes;
+import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the ResX XML Dialect.

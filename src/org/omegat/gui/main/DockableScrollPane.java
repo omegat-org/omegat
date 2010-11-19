@@ -24,11 +24,13 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Component;
+
+import javax.swing.JScrollPane;
+
 import com.vlsolutions.swing.docking.DockKey;
 import com.vlsolutions.swing.docking.Dockable;
 import com.vlsolutions.swing.docking.DockingConstants;
-import java.awt.Component;
-import javax.swing.JScrollPane;
 
 /**
  * Dockable ScrollPane for a docking library.

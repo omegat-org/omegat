@@ -24,9 +24,10 @@
 
 package org.omegat.util.xml;
 
-import org.omegat.util.OConsts;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.omegat.util.OConsts;
 
 /*
  * XML Block is either a tag (with optional attributes), or a string

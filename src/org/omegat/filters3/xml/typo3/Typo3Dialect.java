@@ -27,9 +27,10 @@
 package org.omegat.filters3.xml.typo3;
 
 import java.util.regex.Pattern;
-import org.omegat.filters3.xml.DefaultXMLDialect;
-import org.omegat.filters3.Attributes;
+
 import org.omegat.filters3.Attribute;
+import org.omegat.filters3.Attributes;
+import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
  * This class specifies the ResX XML Dialect.

@@ -24,11 +24,11 @@
 
 package org.omegat.filters2.master;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import gen.core.filters.Filter;
 import gen.core.filters.Filters;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.table.AbstractTableModel;
 

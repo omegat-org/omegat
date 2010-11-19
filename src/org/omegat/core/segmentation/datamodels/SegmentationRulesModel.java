@@ -28,6 +28,7 @@ import java.beans.ExceptionListener;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.PatternSyntaxException;
+
 import javax.swing.table.AbstractTableModel;
 
 import org.omegat.core.segmentation.Rule;

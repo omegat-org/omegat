@@ -1,10 +1,15 @@
 ----------------------------------------------------------------------
- OmegaT 2.2.0 update 5 
+ OmegaT 2.2.1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
-2.2.0 update 5 vs. 2.2.0 update 4
+2.2.1 vs. 2.2.0 update 4
+
+  Implemented requests:
+
+  - Visual identification of non-unique segments
+  http://sourceforge.net/support/tracker.php?aid=1869046
 
   Other enhancements:
 

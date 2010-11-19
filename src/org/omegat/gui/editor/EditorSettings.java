@@ -43,7 +43,7 @@ public class EditorSettings {
     private boolean markTranslated;
     private boolean markUntranslated;
     private boolean displaySegmentSources;
-    private boolean markUniqueSegments;
+    private boolean markNonUniqueSegments;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
 
@@ -62,8 +62,8 @@ public class EditorSettings {
                 .isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences
                 .isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
-        markUniqueSegments = Preferences
-                .isPreference(Preferences.MARK_UNIQUE_SEGMENTS);
+        markNonUniqueSegments = Preferences
+                .isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
         displayModificationInfo = Preferences
                 .getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO, DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences
@@ -131,8 +131,8 @@ public class EditorSettings {
         return displaySegmentSources;
     }
     
-    public boolean isMarkUniqueSegments() {
-        return markUniqueSegments;
+    public boolean isMarkNonUniqueSegments() {
+        return markNonUniqueSegments;
     }
 
     public void setDisplaySegmentSources(boolean displaySegmentSources) {
@@ -150,14 +150,14 @@ public class EditorSettings {
         }
     }
     
-    public void setMarkUniqueSegments(boolean markUniqueSegments) {
+    public void setMarkNonUniqueSegments(boolean markNonUniqueSegments) {
         UIThreadsUtil.mustBeSwingThread();
 
         parent.commitAndDeactivate();
 
-        this.markUniqueSegments = markUniqueSegments;
-        Preferences.setPreference(Preferences.MARK_UNIQUE_SEGMENTS,
-                markUniqueSegments);
+        this.markNonUniqueSegments = markNonUniqueSegments;
+        Preferences.setPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS,
+                markNonUniqueSegments);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();

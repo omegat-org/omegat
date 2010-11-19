@@ -197,7 +197,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewMenu.add(viewMarkTranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_TRANSLATED"));
         viewMenu.add(viewMarkUntranslatedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_DISPLAY_MARK_UNTRANSLATED"));
         viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
-        viewMenu.add(viewMarkUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_UNIQUE_SEGMENTS"));
+        viewMenu.add(viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup(); 
         viewModificationInfoMenu.add(viewDisplayModificationInfoNoneRadioButtonMenuItem = createRadioButtonMenuItem("MW_VIEW_MENU_MODIFICATION_INFO_NONE",viewModificationInfoMenuBG));
@@ -270,7 +270,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUntranslated());
 
         viewDisplaySegmentSourceCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isDisplaySegmentSources());
-        viewMarkUniqueSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkUniqueSegments());
+        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings().isMarkNonUniqueSegments());
 
         viewDisplayModificationInfoNoneRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
         viewDisplayModificationInfoSelectedRadioButtonMenuItem.setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(Core.getEditor().getSettings().getDisplayModificationInfo()));
@@ -476,7 +476,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem upperCaseMenuItem;
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
-    JCheckBoxMenuItem viewMarkUniqueSegmentsCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkNonUniqueSegmentsCheckBoxMenuItem;
     JMenu viewModificationInfoMenu;
     JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoSelectedRadioButtonMenuItem;

@@ -186,7 +186,7 @@ public class Preferences
     /**
      * mark unique segments
      */
-    public static final String MARK_UNIQUE_SEGMENTS = "mark_unique_segments";
+    public static final String MARK_NON_UNIQUE_SEGMENTS = "mark_non_unique_segments";
     
     /**
      * display modification info (author and modification date)

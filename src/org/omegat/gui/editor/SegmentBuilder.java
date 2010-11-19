@@ -249,6 +249,10 @@ public class SegmentBuilder {
             addModificationInfoPart(trans, ATTR_INFO);
         }
 
+        if (settings.isDisplaySegmentSources()) {
+            sourceText = ste.getSrcText();
+        }
+
         if (trans != null) {
             // translation exist
             translationText = trans.translation;

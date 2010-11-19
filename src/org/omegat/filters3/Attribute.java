@@ -70,6 +70,6 @@ public class Attribute
      */
     public String toString()
     {
-        return name+"=\""+value+"\"";                                           // NOI18N
+        return name+"=\""+value+"\"";                                           
     }
 }

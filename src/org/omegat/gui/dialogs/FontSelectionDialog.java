@@ -76,8 +76,8 @@ public class FontSelectionDialog extends javax.swing.JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
         // END HP
         
         initComponents();
@@ -118,7 +118,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
 
-        setTitle(OStrings.getString("TF_SELECT_FONTS_TITLE")); // NOI18N
+        setTitle(OStrings.getString("TF_SELECT_FONTS_TITLE")); 
         setModal(true);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -141,7 +141,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(fontComboBox, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(fontLabel, OStrings.getString("TF_SELECT_SOURCE_FONT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(fontLabel, OStrings.getString("TF_SELECT_SOURCE_FONT")); 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -163,7 +163,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
         gridBagConstraints.insets = new java.awt.Insets(5, 5, 5, 5);
         getContentPane().add(sizeSpinner, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(sizeLabel, OStrings.getString("TF_SELECT_FONTSIZE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(sizeLabel, OStrings.getString("TF_SELECT_FONTSIZE")); 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -175,9 +175,9 @@ public class FontSelectionDialog extends javax.swing.JDialog
         previewTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
         previewTextArea.setEditable(false);
         previewTextArea.setLineWrap(true);
-        previewTextArea.setText(OStrings.getString("TF_FONT_SAMPLE_TEXT")); // NOI18N
+        previewTextArea.setText(OStrings.getString("TF_FONT_SAMPLE_TEXT")); 
         previewTextArea.setWrapStyleWord(true);
-        previewTextArea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, OStrings.getString("TF_FONT_SAMPLE_TITLE"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, fontLabel.getFont())); // NOI18N
+        previewTextArea.setBorder(javax.swing.BorderFactory.createTitledBorder(null, OStrings.getString("TF_FONT_SAMPLE_TITLE"), javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, fontLabel.getFont())); 
         previewTextArea.setPreferredSize(new java.awt.Dimension(116, 100));
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -191,7 +191,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
 
         jPanel1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        org.openide.awt.Mnemonics.setLocalizedText(applyToProjectFilesCheckBox, OStrings.getString("TF_APPLY_TO_PROJECT_FILES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(applyToProjectFilesCheckBox, OStrings.getString("TF_APPLY_TO_PROJECT_FILES")); 
         applyToProjectFilesCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 applyToProjectFilesCheckBoxActionPerformed(evt);
@@ -207,7 +207,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
 
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -215,7 +215,7 @@ public class FontSelectionDialog extends javax.swing.JDialog
         });
         buttonPanel.add(okButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);

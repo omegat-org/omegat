@@ -41,7 +41,7 @@ public class Instance {
             .getString("ENCODING_AUTO");
 
     /** The original filename (with extension). */
-    public static final String TFP_FILENAME = "${filename}"; // NOI18N
+    public static final String TFP_FILENAME = "${filename}"; 
 
     /**
      * The default output filename pattern.

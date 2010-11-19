@@ -81,8 +81,8 @@ public class TextOptionsDialog extends javax.swing.JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
     }
     
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */

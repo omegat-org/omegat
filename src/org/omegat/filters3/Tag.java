@@ -117,31 +117,31 @@ public abstract class Tag implements Element
         switch(getType())
         {
             case TYPE_BEGIN:
-                tmxtag = "bpt";                                                 // NOI18N
+                tmxtag = "bpt";                                                 
                 break;
             case TYPE_END:
-                tmxtag = "ept";                                                 // NOI18N
+                tmxtag = "ept";                                                 
                 break;
             case TYPE_ALONE:
-                tmxtag = "ph";                                                  // NOI18N
+                tmxtag = "ph";                                                  
                 break;
             default:
-                throw new RuntimeException("Shouldn't hapen!");                 // NOI18N
+                throw new RuntimeException("Shouldn't hapen!");                 
         }
         
         StringBuffer buf = new StringBuffer();
         
-        buf.append("<");                                                        // NOI18N
+        buf.append("<");                                                        
         buf.append(tmxtag);
-        buf.append(" i=\"");                                                    // NOI18N
+        buf.append(" i=\"");                                                    
         buf.append(getIndex());
-        buf.append("\">");                                                      // NOI18N
+        buf.append("\">");                                                      
 
         buf.append(toPartialTMX());
         
-        buf.append("</");                                                       // NOI18N
+        buf.append("</");                                                       
         buf.append(tmxtag);
-        buf.append(">");                                                        // NOI18N
+        buf.append(">");                                                        
         
         return buf.toString();
     }
@@ -157,14 +157,14 @@ public abstract class Tag implements Element
     {
         StringBuffer buf = new StringBuffer();
         
-        buf.append("&amp;lt;");                                                 // NOI18N
+        buf.append("&amp;lt;");                                                 
         if (TYPE_END==getType())
-            buf.append("/");                                                    // NOI18N
+            buf.append("/");                                                    
         buf.append(getTag());
         buf.append(getAttributes().toString());
         if (TYPE_ALONE==getType())
-            buf.append("/");                                                    // NOI18N
-        buf.append("&amp;gt;");                                                 // NOI18N
+            buf.append("/");                                                    
+        buf.append("&amp;gt;");                                                 
         
         return buf.toString();
     }
@@ -177,14 +177,14 @@ public abstract class Tag implements Element
     {
         StringBuffer buf = new StringBuffer();
         
-        buf.append("<");                                                        // NOI18N
+        buf.append("<");                                                        
         if (TYPE_END==getType())
-            buf.append("/");                                                    // NOI18N
+            buf.append("/");                                                    
         buf.append(getShortcut());
         buf.append(getIndex());
         if (TYPE_ALONE==getType())
-            buf.append("/");                                                    // NOI18N
-        buf.append(">");                                                        // NOI18N
+            buf.append("/");                                                    
+        buf.append(">");                                                        
         
         return buf.toString();
     }

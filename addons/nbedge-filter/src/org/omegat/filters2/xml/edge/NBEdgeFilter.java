@@ -34,28 +34,28 @@ public class NBEdgeFilter extends XMLAbstractFilter
     /** Creates a new instance of NBEdgeFilter */
     public NBEdgeFilter()
     {
-        defineFormatTag("a", "a");	 // NOI18N
-        defineFormatTag("abbr", "abbr");	 // NOI18N
-        defineFormatTag("acronym", "acronym");	 // NOI18N
-        defineFormatTag("b", "b");	 // NOI18N
-        defineFormatTag("big", "big");	 // NOI18N
-        defineFormatTag("code", "code");	 // NOI18N
-        defineFormatTag("cite", "cite");	 // NOI18N
-        defineFormatTag("em", "em");	 // NOI18N
-        defineFormatTag("font", "f");	 // NOI18N
-        defineFormatTag("i", "i");	 // NOI18N
-        defineFormatTag("kbd", "k");	 // NOI18N
-        defineFormatTag("samp", "samp");	 // NOI18N
-        defineFormatTag("strike", "strike");	 // NOI18N
-        defineFormatTag("s", "s");	 // NOI18N
-        defineFormatTag("small", "small");	 // NOI18N
-        defineFormatTag("span", "span");	 // NOI18N
-        defineFormatTag("sub", "sub");	 // NOI18N
-        defineFormatTag("sup", "sup");	 // NOI18N
-        defineFormatTag("strong", "strong");	 // NOI18N
-        defineFormatTag("tt", "tt");	 // NOI18N
-        defineFormatTag("u", "u");	 // NOI18N
-        defineFormatTag("var", "var");	 // NOI18N
+        defineFormatTag("a", "a");	 
+        defineFormatTag("abbr", "abbr");	 
+        defineFormatTag("acronym", "acronym");	 
+        defineFormatTag("b", "b");	 
+        defineFormatTag("big", "big");	 
+        defineFormatTag("code", "code");	 
+        defineFormatTag("cite", "cite");	 
+        defineFormatTag("em", "em");	 
+        defineFormatTag("font", "f");	 
+        defineFormatTag("i", "i");	 
+        defineFormatTag("kbd", "k");	 
+        defineFormatTag("samp", "samp");	 
+        defineFormatTag("strike", "strike");	 
+        defineFormatTag("s", "s");	 
+        defineFormatTag("small", "small");	 
+        defineFormatTag("span", "span");	 
+        defineFormatTag("sub", "sub");	 
+        defineFormatTag("sup", "sup");	 
+        defineFormatTag("strong", "strong");	 
+        defineFormatTag("tt", "tt");	 
+        defineFormatTag("u", "u");	 
+        defineFormatTag("var", "var");	 
         
         setEntityFilter(new DefaultEntityFilter());
     }

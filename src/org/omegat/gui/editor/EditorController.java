@@ -611,8 +611,8 @@ public class EditorController implements IEditor {
         TransEntry te = Core.getProject().getTranslation(ste);
         String s2 = te != null ? te.translation : "";
 
-        FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT); // NOI18N
-        FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT); // NOI18N
+        FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT); 
+        FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT); 
     }
 
     /**

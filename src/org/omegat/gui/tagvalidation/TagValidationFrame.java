@@ -86,8 +86,8 @@ public class TagValidationFrame extends JFrame
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
 
         // Configure close button
         JButton closeButton = new JButton();
@@ -181,9 +181,9 @@ public class TagValidationFrame extends JFrame
     private String htmlize(String str)
     {
         String htmld = str;
-        htmld = htmld.replaceAll("\\<", "&lt;");                                // NOI18N
-        htmld = htmld.replaceAll("\\>", "&gt;");                                // NOI18N
-        htmld = htmld.replaceAll("\n", "<br>");                                 // NOI18N
+        htmld = htmld.replaceAll("\\<", "&lt;");                                
+        htmld = htmld.replaceAll("\\>", "&gt;");                                
+        htmld = htmld.replaceAll("\n", "<br>");                                 
         return htmld;
     }
                    
@@ -195,17 +195,17 @@ public class TagValidationFrame extends JFrame
         //show OmegaT tags in bold and color
         Matcher tagMatch = PatternConsts.OMEGAT_HTML_TAG.matcher(str);
         str = tagMatch.replaceAll(
-                "<font color=\"" + color + "\"><b>$1</b></font>");              // NOI18N
+                "<font color=\"" + color + "\"><b>$1</b></font>");              
         //show linefeed as symbol
         Matcher lfMatch = PatternConsts.HTML_BR.matcher(str);
         ///simulate unicode symbol for linefeed "\u240A", which is not displayed correctly.
         str = lfMatch.replaceAll(
-                "<font color=\"" + color + "\"><sup>L</sup>F<br></font>");      // NOI18N
+                "<font color=\"" + color + "\"><sup>L</sup>F<br></font>");      
         //show printf variables in bold and color (e.g. %s and %n\$s)
         if (printfPattern != null) {
             Matcher varMatch = PatternConsts.PRINTF_VARS.matcher(str);
             str = varMatch.replaceAll(
-                    "<font color=\"" + color + "\"><b>$0</b></font>");              // NOI18N
+                    "<font color=\"" + color + "\"><b>$0</b></font>");              
         }
         return str;
     }
@@ -226,50 +226,50 @@ public class TagValidationFrame extends JFrame
         }
         StringBuffer output = new StringBuffer();
         
-        output.append("<html>\n");                                              // NOI18N
-        output.append("<head>\n");                                              // NOI18N
-        output.append("<style>\n");                                             // NOI18N
-        output.append("<style type=\"text/css\">\n");                           // NOI18N
-        output.append("    <!--\n");                                            // NOI18N
-        output.append("    body {\n");                                          // NOI18N
-        output.append("            font-family: "+getFont().getName()+";\n");   // NOI18N
-        output.append("            font-size: "+getFont().getSize()+"pt;\n");   // NOI18N
-        output.append("    }\n");                                               // NOI18N
-        output.append("    -->\n");                                             // NOI18N
-        output.append("</style>\n");                                            // NOI18N
-        output.append("</head>\n");                                             // NOI18N
-        output.append("<body>\n");                                              // NOI18N
+        output.append("<html>\n");                                              
+        output.append("<head>\n");                                              
+        output.append("<style>\n");                                             
+        output.append("<style type=\"text/css\">\n");                           
+        output.append("    <!--\n");                                            
+        output.append("    body {\n");                                          
+        output.append("            font-family: "+getFont().getName()+";\n");   
+        output.append("            font-size: "+getFont().getSize()+"pt;\n");   
+        output.append("    }\n");                                               
+        output.append("    -->\n");                                             
+        output.append("</style>\n");                                            
+        output.append("</head>\n");                                             
+        output.append("<body>\n");                                              
         
-        output.append("<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>\n");         // NOI18N
+        output.append("<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>\n");         
         for (SourceTextEntry ste : stringList)
         {
             String src = ste.getSrcText();
             TransEntry trans = Core.getProject().getTranslation(ste);
             if (src.length() > 0 && trans != null) {
-                output.append("<tr>");                                          // NOI18N
-                output.append("<td>");                                          // NOI18N
-                output.append("<a href=");                                      // NOI18N
-                output.append("\"");                                            // NOI18N
+                output.append("<tr>");                                          
+                output.append("<td>");                                          
+                output.append("<a href=");                                      
+                output.append("\"");                                            
                 output.append(ste.entryNum());
-                output.append("\"");                                            // NOI18N
-                output.append(">");                                             // NOI18N
+                output.append("\"");                                            
+                output.append(">");                                             
                 output.append(ste.entryNum());
-                output.append("</a>");                                          // NOI18N
-                output.append("</td>");                                         // NOI18N
-                output.append("<td>");                                          // NOI18N
-                output.append(colorTags(htmlize(src), "blue", printfPattern));  // NOI18N
-                output.append("</td>");                                         // NOI18N
-                output.append("<td>");                                          // NOI18N
-                output.append(colorTags(htmlize(trans.translation), "blue", printfPattern));// NOI18N
-                output.append("</td>");                                         // NOI18N
-                output.append("</tr>\n");                                       // NOI18N
+                output.append("</a>");                                          
+                output.append("</td>");                                         
+                output.append("<td>");                                          
+                output.append(colorTags(htmlize(src), "blue", printfPattern));  
+                output.append("</td>");                                         
+                output.append("<td>");                                          
+                output.append(colorTags(htmlize(trans.translation), "blue", printfPattern));
+                output.append("</td>");                                         
+                output.append("</tr>\n");                                       
             }
         }
-        output.append("</table>\n");                                            // NOI18N
-        output.append("</body>\n");                                             // NOI18N
-        output.append("</html>\n");                                             // NOI18N
+        output.append("</table>\n");                                            
+        output.append("</body>\n");                                             
+        output.append("</html>\n");                                             
         
-        m_editorPane.setContentType("text/html");                               // NOI18N
+        m_editorPane.setContentType("text/html");                               
         m_editorPane.setText(output.toString());
     }
 

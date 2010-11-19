@@ -42,14 +42,14 @@ public class XMLBlock
 
 	private void reset()
 	{
-		m_text = "";	// NOI18N
+		m_text = "";	
 		m_isClose = false;
 		m_isStandalone = false;
 		m_isComment = false;
 		m_isTag = false;
 		m_typeChar = 0;
 		m_hasText = false;
-		m_shortcut = "";	// NOI18N
+		m_shortcut = "";	
 
 		if (m_attrList != null)
 			m_attrList.clear();
@@ -102,10 +102,10 @@ public class XMLBlock
 	
 	public String getShortcut()	
 	{
-		if (m_shortcut != null && !m_shortcut.equals(""))	// NOI18N
+		if (m_shortcut != null && !m_shortcut.equals(""))	
 		{
 			if (m_isClose)
-				return "/" + m_shortcut;	// NOI18N
+				return "/" + m_shortcut;	
 			else if (m_isComment)
 				return OConsts.XB_COMMENT_SHORTCUT;
 		}
@@ -160,41 +160,41 @@ public class XMLBlock
 		if (m_typeChar == '?')
 		{
 			// write < + [/ +] tagname + attributes + [/ +] >
-			String tag = "<?" + m_text;	// NOI18N
+			String tag = "<?" + m_text;	
 			if (m_attrList != null)
 			{
 				for (XMLAttribute attr : m_attrList)
 				{
 					// add attribute/value pair
-					tag += " " + attr.name + "=\"" + attr.value + "\"";	// NOI18N
+					tag += " " + attr.name + "=\"" + attr.value + "\"";	
 				}
 			}
 
-			tag += "?>";	// NOI18N
+			tag += "?>";	
 			return tag;
 		}
 		else if (m_typeChar == '!')
 		{
-			String tag = "<!";                                                  // NOI18N
-			if( m_text.equals("CDATA") )                                        // NOI18N
+			String tag = "<!";                                                  
+			if( m_text.equals("CDATA") )                                        
 			{
-                tag += "[";                                                     // NOI18N
+                tag += "[";                                                     
                 tag += m_text;
-                tag += "[";                                                     // NOI18N
+                tag += "[";                                                     
 			}
-            else if( m_text.equals("]]") )                                      // NOI18N
+            else if( m_text.equals("]]") )                                      
             {
-                tag = "]]>";                                                    // NOI18N
+                tag = "]]>";                                                    
             }
 			else if (m_isComment)
 			{
-				tag += "-- ";	// NOI18N
+				tag += "-- ";	
 				tag += m_text;
-				tag += " -->";	// NOI18N
+				tag += " -->";	
 			}
 			else
 			{
-				tag += m_text + " ";	// NOI18N
+				tag += m_text + " ";	
 				if (m_attrList != null)
 				{
 					if (m_attrList.size() > 0)
@@ -209,10 +209,10 @@ public class XMLBlock
 		else if (isTag())
 		{
 			// write < + [/ +] tagname + attributes + [/ +] >
-			String tag = "<";	// NOI18N
+			String tag = "<";	
 			if (m_isClose)
 			{
-				tag += '/';	// NOI18N
+				tag += '/';	
 			}
 			tag += m_text;
 			if (m_attrList != null)
@@ -220,14 +220,14 @@ public class XMLBlock
 				for (XMLAttribute attr : m_attrList)
 				{
 					// add attribute/value pair
-					tag += " " + attr.name + "=\"" + attr.value + "\"";	// NOI18N
+					tag += " " + attr.name + "=\"" + attr.value + "\"";	
 				}
 			}
 
 			if (m_isStandalone)
-				tag += " /";	// NOI18N
+				tag += " /";	
 
-			tag += '>';	// NOI18N
+			tag += '>';	
 
 			return tag;
 		}
@@ -240,7 +240,7 @@ public class XMLBlock
 		if (isTag())
 			return m_text;
 		else
-			return "";	// NOI18N
+			return "";	
 	}
 
 	public int numAttributes()	

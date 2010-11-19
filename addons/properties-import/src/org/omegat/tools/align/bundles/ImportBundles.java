@@ -278,7 +278,7 @@ public class ImportBundles extends JFrame implements UndoableEditListener
             {
                 public boolean accept(File f)
                 {
-                    return f.isDirectory() || f.getName().endsWith(".tmx");     // NOI18N
+                    return f.isDirectory() || f.getName().endsWith(".tmx");     
                 }
                 public String getDescription()
                 {
@@ -289,8 +289,8 @@ public class ImportBundles extends JFrame implements UndoableEditListener
             if( JFileChooser.APPROVE_OPTION == fch.showSaveDialog(this) )
             {
                 String file = fch.getSelectedFile().getAbsolutePath();
-                if( !file.endsWith(".tmx") )                                    // NOI18N
-                    file = file + ".tmx";                                       // NOI18N
+                if( !file.endsWith(".tmx") )                                    
+                    file = file + ".tmx";                                       
                 jEditLecacyFile.setText(file);
             }
 	}//GEN-LAST:event_jBtnBrowseLegacyFileActionPerformed
@@ -350,7 +350,7 @@ public class ImportBundles extends JFrame implements UndoableEditListener
         try
         {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            System.setProperty("apple.laf.useScreenMenuBar", "true");           // NOI18N
+            System.setProperty("apple.laf.useScreenMenuBar", "true");           
         }
         catch (Exception e)
         {

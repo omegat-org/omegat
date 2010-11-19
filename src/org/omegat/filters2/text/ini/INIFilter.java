@@ -66,8 +66,8 @@ public class INIFilter extends AbstractFilter
     {
         return new Instance[]
         {
-            new Instance("*.ini"),                                              // NOI18N
-            new Instance("*.lng"),                                              // NOI18N
+            new Instance("*.ini"),                                              
+            new Instance("*.lng"),                                              
         };
     }
     
@@ -99,8 +99,8 @@ public class INIFilter extends AbstractFilter
             if( trimmed.length()==0 || 
                     trimmed.charAt(0)=='#' || trimmed.charAt(0)==';' )
             {
-                //outfile.write(str+"\n");                          // NOI18N
-                outfile.write(str+lbpr.getLinebreak()); // fix for bug 1462566 // NOI18N
+                //outfile.write(str+"\n");                          
+                outfile.write(str+lbpr.getLinebreak()); // fix for bug 1462566 
                 continue;
             }
             
@@ -134,8 +134,8 @@ public class INIFilter extends AbstractFilter
                 String trans=processEntry(value);
                 outfile.write(trans);
                 
-                //outfile.write("\n");                                                // NOI18N
-                outfile.write(lbpr.getLinebreak()); // fix for bug 1462566            // NOI18N
+                //outfile.write("\n");                                                
+                outfile.write(lbpr.getLinebreak()); // fix for bug 1462566            
             }
         }
     }

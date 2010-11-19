@@ -55,7 +55,7 @@ public class WikiGet
     public static String joinString(String separator,String[] items) 
     {
         if (items.length < 1) 
-            return "";                                                          // NOI18N
+            return "";                                                          
         StringBuffer joined = new StringBuffer();
         for (int i=0; i<items.length; i++)	
         {
@@ -81,33 +81,33 @@ public class WikiGet
             String joined = null; // contains edited url
             String name = null; // contains a useful page name which we can use 
                                 // as our filename
-            if (remote_url.indexOf("index.php?title=") > 0)                     // NOI18N
+            if (remote_url.indexOf("index.php?title=") > 0)                     
             {
                 //We're directly calling the mediawiki index.php script
-                String[] splitted = remote_url.split("index.php\\?title=");     // NOI18N
+                String[] splitted = remote_url.split("index.php\\?title=");     
                 String s = splitted[splitted.length-1];
                 name = s;
-                s = s.replaceAll(" ", "_");                                     // NOI18N
+                s = s.replaceAll(" ", "_");                                     
                 //s=URLEncoder.encode(s, "UTF-8"); // breaks previously correctly encoded page names
                 splitted[splitted.length-1] = s;
-                joined = joinString("index.php?title=", splitted);              // NOI18N
-                joined = joined + "&action=raw";                                // NOI18N
+                joined = joinString("index.php?title=", splitted);              
+                joined = joined + "&action=raw";                                
             } 
             else 
             {
                 // assume script is behind  some sort 
                 // of url-rewriting
-                String[] splitted = remote_url.split("/");                      // NOI18N
+                String[] splitted = remote_url.split("/");                      
                 String s = splitted[splitted.length-1];
                 name = s;
-                s = s.replaceAll(" ", "_");                                     // NOI18N
+                s = s.replaceAll(" ", "_");                                     
                 //s=URLEncoder.encode(s, "UTF-8"); 
                 splitted[splitted.length-1] = s;
-                joined = joinString("/", splitted);                             // NOI18N
-                joined = joined + "?action=raw";                                // NOI18N
+                joined = joinString("/", splitted);                             
+                joined = joined + "?action=raw";                                
             }
             String page = getURL(joined);
-            saveUTF8(projectdir, name + ".UTF8", page);                         // NOI18N
+            saveUTF8(projectdir, name + ".UTF8", page);                         
         } 
         catch (Exception e) 
         { 
@@ -143,7 +143,7 @@ public class WikiGet
      */
     public static BufferedWriter UTF8WriterBuilder(OutputStream out) throws Exception 
     {
-        return new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));        // NOI18N
+        return new BufferedWriter(new OutputStreamWriter(out, "UTF-8"));        
     }	
 
 
@@ -159,7 +159,7 @@ public class WikiGet
         {
             // Page name can contain invalid characters, see [1878113]
             // Contributed by Anatoly Techtonik 
-            filename = filename.replaceAll("[\\\\/:\\*\\?\\\"\\|\\<\\>]","_");  // NOI18N
+            filename = filename.replaceAll("[\\\\/:\\*\\?\\\"\\|\\<\\>]","_");  
             File path = new File(dir,filename);
             FileOutputStream f = new FileOutputStream(path);
             BufferedWriter out = UTF8WriterBuilder(f);
@@ -187,7 +187,7 @@ public class WikiGet
             byte[] b = new byte[4096];  
             for (int n; (n = in.read(b)) != -1;) 
             {
-                page.append(new String(b, 0, n, "UTF-8"));                      // NOI18N
+                page.append(new String(b, 0, n, "UTF-8"));                      
             }
         } 
         catch (Exception e) 

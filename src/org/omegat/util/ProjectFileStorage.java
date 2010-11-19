@@ -56,21 +56,21 @@ public class ProjectFileStorage {
 
         XMLStreamReader m_reader = new XMLStreamReader();
         m_reader.killEmptyBlocks();
-        m_reader.setStream(inFile.getAbsolutePath(), "UTF-8"); // NOI18N
+        m_reader.setStream(inFile.getAbsolutePath(), "UTF-8"); 
 
         // verify valid project file
         XMLBlock blk;
         List<XMLBlock> lst;
 
         // advance to omegat tag
-        if (m_reader.advanceToTag("omegat") == null) // NOI18N
+        if (m_reader.advanceToTag("omegat") == null) 
             return result;
 
         // advance to project tag
-        if ((blk = m_reader.advanceToTag("project")) == null) // NOI18N
+        if ((blk = m_reader.advanceToTag("project")) == null) 
             return result;
 
-        String ver = blk.getAttribute("version"); // NOI18N
+        String ver = blk.getAttribute("version"); 
         if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION)) {
             throw new TranslationException(StaticUtils.format(OStrings
                     .getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"),
@@ -90,56 +90,56 @@ public class ProjectFileStorage {
             if (blk.isClose())
                 continue;
 
-            if (blk.getTagName().equals("target_dir")) // NOI18N
+            if (blk.getTagName().equals("target_dir")) 
             {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 result.setTargetRoot(computeAbsolutePath(m_root, blk.getText(),
                         OConsts.DEFAULT_TARGET));
-            } else if (blk.getTagName().equals("source_dir")) // NOI18N
+            } else if (blk.getTagName().equals("source_dir")) 
             {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 result.setSourceRoot(computeAbsolutePath(m_root, blk.getText(),
                         OConsts.DEFAULT_SOURCE));
-            } else if (blk.getTagName().equals("tm_dir")) // NOI18N
+            } else if (blk.getTagName().equals("tm_dir")) 
             {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 result.setTMRoot(computeAbsolutePath(m_root, blk.getText(),
                         OConsts.DEFAULT_TM));
-            } else if (blk.getTagName().equals("glossary_dir")) // NOI18N
+            } else if (blk.getTagName().equals("glossary_dir")) 
             {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 result.setGlossaryRoot(computeAbsolutePath(m_root, blk
                         .getText(), OConsts.DEFAULT_GLOSSARY));
-            } else if (blk.getTagName().equals("dictionary_dir")) // NOI18N
+            } else if (blk.getTagName().equals("dictionary_dir")) 
             {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 result.setDictRoot(computeAbsolutePath(m_root, blk
                         .getText(), OConsts.DEFAULT_DICT));
-            } else if (blk.getTagName().equals("source_lang")) // NOI18N
+            } else if (blk.getTagName().equals("source_lang")) 
             {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 if (blk != null)
                     result.setSourceLanguage(blk.getText());
-            } else if (blk.getTagName().equals("target_lang")) // NOI18N
+            } else if (blk.getTagName().equals("target_lang")) 
             {
                 if (++i >= lst.size())
                     break;
                 blk = lst.get(i);
                 if (blk != null)
                     result.setTargetLanguage(blk.getText());
-            } else if (blk.getTagName().equals("sentence_seg")) // NOI18N
+            } else if (blk.getTagName().equals("sentence_seg")) 
             {
                 if (++i >= lst.size())
                     break;
@@ -164,32 +164,32 @@ public class ProjectFileStorage {
 
         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(
                 new FileOutputStream(outFile), OConsts.UTF8));
-        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"); // NOI18N
-        out.write("<omegat>\n"); // NOI18N
-        out.write("  <project version=\"1.0\">\n"); // NOI18N
-        out.write("    <source_dir>" + // NOI18N
+        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n"); 
+        out.write("<omegat>\n"); 
+        out.write("  <project version=\"1.0\">\n"); 
+        out.write("    <source_dir>" + 
                 computeRelativePath(m_root, props.getSourceRoot(),
-                        OConsts.DEFAULT_SOURCE) + "</source_dir>\n"); // NOI18N
-        out.write("    <target_dir>" + // NOI18N
+                        OConsts.DEFAULT_SOURCE) + "</source_dir>\n"); 
+        out.write("    <target_dir>" + 
                 computeRelativePath(m_root, props.getTargetRoot(),
-                        OConsts.DEFAULT_TARGET) + "</target_dir>\n"); // NOI18N
-        out.write("    <tm_dir>" + // NOI18N
+                        OConsts.DEFAULT_TARGET) + "</target_dir>\n"); 
+        out.write("    <tm_dir>" + 
                 computeRelativePath(m_root, props.getTMRoot(),
-                        OConsts.DEFAULT_TM) + "</tm_dir>\n"); // NOI18N
-        out.write("    <glossary_dir>" + // NOI18N
+                        OConsts.DEFAULT_TM) + "</tm_dir>\n"); 
+        out.write("    <glossary_dir>" + 
                 computeRelativePath(m_root, props.getGlossaryRoot(),
-                        OConsts.DEFAULT_GLOSSARY) + "</glossary_dir>\n"); // NOI18N
-        out.write("    <dictionary_dir>" + // NOI18N
+                        OConsts.DEFAULT_GLOSSARY) + "</glossary_dir>\n"); 
+        out.write("    <dictionary_dir>" + 
                 computeRelativePath(m_root, props.getDictRoot(),
-                        OConsts.DEFAULT_DICT) + "</dictionary_dir>\n"); // NOI18N
+                        OConsts.DEFAULT_DICT) + "</dictionary_dir>\n"); 
         out.write("    <source_lang>" + props.getSourceLanguage()
-                + "</source_lang>\n"); // NOI18N
+                + "</source_lang>\n"); 
         out.write("    <target_lang>" + props.getTargetLanguage()
-                + "</target_lang>\n"); // NOI18N
+                + "</target_lang>\n"); 
         out.write("    <sentence_seg>" + props.isSentenceSegmentingEnabled()
-                + "</sentence_seg>\n"); // NOI18N
-        out.write("  </project>\n"); // NOI18N
-        out.write("</omegat>\n"); // NOI18N
+                + "</sentence_seg>\n"); 
+        out.write("  </project>\n"); 
+        out.write("</omegat>\n"); 
         out.close();
     }
 
@@ -276,7 +276,7 @@ public class ProjectFileStorage {
                     break;
                 } else {
                     root = root.getParentFile();
-                    prefix += File.separator + ".."; // NOI18N
+                    prefix += File.separator + ".."; 
                 }
             }
             return res.replace(File.separatorChar, '/');

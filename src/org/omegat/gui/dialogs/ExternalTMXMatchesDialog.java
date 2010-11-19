@@ -104,7 +104,7 @@ public class ExternalTMXMatchesDialog extends JDialog
         displayLevel2Tags = new javax.swing.JCheckBox();
         useSlash = new javax.swing.JCheckBox();
 
-        setTitle(OStrings.getString("EXT_TMX_TITLE")); // NOI18N
+        setTitle(OStrings.getString("EXT_TMX_TITLE")); 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -116,7 +116,7 @@ public class ExternalTMXMatchesDialog extends JDialog
         descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setText(OStrings.getString("EXT_TMX_DESCRIPTION")); // NOI18N
+        descriptionTextArea.setText(OStrings.getString("EXT_TMX_DESCRIPTION")); 
         descriptionTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -128,7 +128,7 @@ public class ExternalTMXMatchesDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(descriptionTextArea, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -142,7 +142,7 @@ public class ExternalTMXMatchesDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
         getContentPane().add(okButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -157,7 +157,7 @@ public class ExternalTMXMatchesDialog extends JDialog
         getContentPane().add(cancelButton, gridBagConstraints);
 
         displayLevel2Tags.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(displayLevel2Tags, OStrings.getString("EXT_TMX_SHOW_LEVEL2")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(displayLevel2Tags, OStrings.getString("EXT_TMX_SHOW_LEVEL2")); 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -169,7 +169,7 @@ public class ExternalTMXMatchesDialog extends JDialog
         getContentPane().add(displayLevel2Tags, gridBagConstraints);
 
         useSlash.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML")); 
         useSlash.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 useSlashActionPerformed(evt);

@@ -47,13 +47,13 @@ public class OpenDocXMLFilter extends XMLFilter
     {
         return new Instance[]
         {
-            new Instance("*.xml", OConsts.UTF8, OConsts.UTF8),                  // NOI18N
+            new Instance("*.xml", OConsts.UTF8, OConsts.UTF8),                  
         };
     }
 
     public String getFileFormatName()
     {
-        throw new RuntimeException("Not implemented!");                         // NOI18N
+        throw new RuntimeException("Not implemented!");                         
     }
     
 }

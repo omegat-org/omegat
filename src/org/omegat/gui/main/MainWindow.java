@@ -203,7 +203,7 @@ public class MainWindow extends JFrame implements IMainWindow {
         String s = OStrings.getDisplayVersion();
         if (Core.getProject().isProjectLoaded()) {
             s += " :: "
-                    + Core.getProject().getProjectProperties().getProjectName(); // NOI18N
+                    + Core.getProject().getProjectProperties().getProjectName(); 
         }
         setTitle(s);
     }
@@ -385,7 +385,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 statusLabel.setText(msg);
                 String fulltext = msg;
                 if (e != null)
-                    fulltext += "\n" + e.toString(); // NOI18N
+                    fulltext += "\n" + e.toString(); 
                 JOptionPane.showMessageDialog(MainWindow.this, fulltext,
                         OStrings.getString("TF_WARNING"),
                         JOptionPane.WARNING_MESSAGE);
@@ -411,7 +411,7 @@ public class MainWindow extends JFrame implements IMainWindow {
                 statusLabel.setText(msg);
                 String fulltext = msg;
                 if (ex != null)
-                    fulltext += "\n" + ex.toString(); // NOI18N
+                    fulltext += "\n" + ex.toString(); 
                 JOptionPane.showMessageDialog(MainWindow.this, fulltext,
                         OStrings.getString("TF_ERROR"),
                         JOptionPane.ERROR_MESSAGE);

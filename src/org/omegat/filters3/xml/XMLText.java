@@ -58,9 +58,9 @@ public class XMLText extends Text
         if (inCDATA)
         {
             StringBuffer res = new StringBuffer();
-            res.append("<![CDATA[");                                            // NOI18N
+            res.append("<![CDATA[");                                            
             res.append(getText());
-            res.append("]]>");                                                  // NOI18N
+            res.append("]]>");                                                  
             return res.toString();
         }
         else

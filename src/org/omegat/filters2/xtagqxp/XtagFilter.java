@@ -48,7 +48,7 @@ import org.omegat.util.OStrings;
 public class XtagFilter extends AbstractFilter
 {
 
-    protected static final String EOL = "\r\n";                                 // NOI18N
+    protected static final String EOL = "\r\n";                                 
     
     public String getFileFormatName()
     {
@@ -59,8 +59,8 @@ public class XtagFilter extends AbstractFilter
     {
         return new Instance[]
         {
-            new Instance("*.tag", "UTF-16LE", "UTF-16LE"),                      // NOI18N
-            new Instance("*.xtg", "UTF-16LE", "UTF-16LE"),                      // NOI18N
+            new Instance("*.tag", "UTF-16LE", "UTF-16LE"),                      
+            new Instance("*.xtg", "UTF-16LE", "UTF-16LE"),                      
         };
     }
 
@@ -108,11 +108,11 @@ public class XtagFilter extends AbstractFilter
         s = inFile.readLine();
         while (s != null) {
             // Translatable text
-            if (s.startsWith("@$:")){                                           // NOI18N
-                outFile.write("@$:");                                           // NOI18N
+            if (s.startsWith("@$:")){                                           
+                outFile.write("@$:");                                           
                 s = s.substring(3);
                 state = STATE_READ_TEXT;
-            } else if (s.startsWith("#boxname")){                               // NOI18N
+            } else if (s.startsWith("#boxname")){                               
                 state = STATE_WAIT_TEXT;
             }
             if (state == STATE_READ_TEXT){
@@ -176,7 +176,7 @@ public class XtagFilter extends AbstractFilter
      * @return the entry with OmegaT tags
      */
     private String convertToTags(String s) {
-        String changedString = "";                                              // NOI18N
+        String changedString = "";                                              
         final int STATE_NORMAL = 1;
         final int STATE_COLLECT_TAG = 2;
         

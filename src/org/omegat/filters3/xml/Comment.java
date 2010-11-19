@@ -46,6 +46,6 @@ public class Comment extends XMLPseudoTag
      */
     public String toOriginal()
     {
-        return "<!--"+comment+"-->";                                            // NOI18N
+        return "<!--"+comment+"-->";                                            
     }
 }

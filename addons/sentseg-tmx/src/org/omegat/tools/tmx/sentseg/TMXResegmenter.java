@@ -92,7 +92,7 @@ public class TMXResegmenter
         writeHeader(writer, srclang, tarlang);
         ssn = tmx.numSegments();
         if( sourceTMX.equals(targetTMX) )
-            LFileCopy.copy(sourceTMX, sourceTMX+".ori");                        // NOI18N
+            LFileCopy.copy(sourceTMX, sourceTMX+".ori");                        
         tsn = 0;
         msn = 0;
         for (int i=0; i<ssn; i++)

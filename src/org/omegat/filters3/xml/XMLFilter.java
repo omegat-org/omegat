@@ -71,7 +71,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
         //parserFactory.setValidating(false);
         try
         {
-            parserFactory.setFeature("http://xml.org/sax/features/validation", true);   // NOI18N
+            parserFactory.setFeature("http://xml.org/sax/features/validation", true);   
         } 
         catch (Exception e) {}
         this.dialect = dialect;
@@ -136,12 +136,12 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
         {
             BufferedReader inReader = createReader(inFile, inEncoding);
             InputSource source = new InputSource(inReader);
-            source.setSystemId("file:///"+                                      // NOI18N
+            source.setSystemId("file:///"+                                      
                     inFile.getCanonicalPath().replace(File.separatorChar, '/'));
             SAXParser parser = parserFactory.newSAXParser();
             Handler handler = new Handler(parser, this, dialect, inFile, inEncoding, outFile, outEncoding);
-            parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);     // NOI18N
-            parser.setProperty("http://xml.org/sax/properties/declaration-handler", handler); // NOI18N
+            parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);     
+            parser.setProperty("http://xml.org/sax/properties/declaration-handler", handler); 
             parser.parse(source, handler);
             inReader.close();
         }
@@ -158,7 +158,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator
     
     protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException, TranslationException
     {
-        throw new UnsupportedOperationException("XMLFilter.processFile(BufferedReader,BufferedWriter) should never be called!");  // NOI18N
+        throw new UnsupportedOperationException("XMLFilter.processFile(BufferedReader,BufferedWriter) should never be called!");  
     }
 
     /** 

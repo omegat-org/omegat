@@ -90,8 +90,8 @@ public class HHCFilter2 extends HTMLFilter2
     {
         return new Instance[]
         {
-            new Instance("*.hhc"),                                              // NOI18N
-            new Instance("*.hhk")                                               // NOI18N
+            new Instance("*.hhc"),                                              
+            new Instance("*.hhk")                                               
         };
     }
 

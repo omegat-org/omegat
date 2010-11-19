@@ -103,7 +103,7 @@ public class WordIterator extends BreakIterator
         String str = text.substring(curr, next);
 
         // grouping OmegaT tags
-        if (str.equals("<"))                                                    // NOI18N
+        if (str.equals("<"))                                                    
         {
             int next2 = breaker.next();
             if (DONE==next2)
@@ -119,7 +119,7 @@ public class WordIterator extends BreakIterator
             String str2 = text.substring(next, next2);
             String str3 = text.substring(next2, next3);
             
-            if (str2.equals("/"))                                               // NOI18N
+            if (str2.equals("/"))                                               
             {
                 // maybe closing tag
                 if (!PatternConsts.OMEGAT_TAG_ONLY.matcher(str3).matches())
@@ -139,7 +139,7 @@ public class WordIterator extends BreakIterator
                 }
                 // there're at least three maybe-words after "<"
                 String str4 = text.substring(next3, next4);
-                if (str4.equals(">"))                                           // NOI18N
+                if (str4.equals(">"))                                           
                     return next4; // yes, it's a standalone tag
                 else
                 {
@@ -158,7 +158,7 @@ public class WordIterator extends BreakIterator
                 return next;
             }
             
-            if (str3.equals("/"))                                               // NOI18N
+            if (str3.equals("/"))                                               
             {
                 // maybe standalone tag
                 int next4 = breaker.next();
@@ -170,7 +170,7 @@ public class WordIterator extends BreakIterator
                 }
                 // there're at least three maybe-words after "<"
                 String str4 = text.substring(next3, next4);
-                if (str4.equals(">"))                                           // NOI18N
+                if (str4.equals(">"))                                           
                     return next4; // yes, it's a standalone tag
                 else
                 {
@@ -181,7 +181,7 @@ public class WordIterator extends BreakIterator
                     return next;
                 }
             }
-            else if(str3.equals(">"))                                           // NOI18N
+            else if(str3.equals(">"))                                           
                 return next3;   // yes, it's an OmegaT tag
             {
                 // rewind back two times
@@ -190,7 +190,7 @@ public class WordIterator extends BreakIterator
                 return next;
             }
         }
-        else if (str.equals("&"))                                               // NOI18N
+        else if (str.equals("&"))                                               
         {
             // trying to see the mnemonic
             int next2 = breaker.next();
@@ -215,7 +215,7 @@ public class WordIterator extends BreakIterator
                 return next;
             
             String str2 = text.substring(next, next2);
-            if (str2.equals("&"))   // yes, it's there                          // NOI18N
+            if (str2.equals("&"))   // yes, it's there                          
             {
                 int next3 = breaker.next();
                 if (DONE==next3)
@@ -263,7 +263,7 @@ public class WordIterator extends BreakIterator
      */
     public int next(int n)
     {
-        throw new RuntimeException("Not Implemented");                          // NOI18N
+        throw new RuntimeException("Not Implemented");                          
     }
 
     /**
@@ -280,7 +280,7 @@ public class WordIterator extends BreakIterator
      */
     public int following(int offset)
     {
-        throw new RuntimeException("Not Implemented");                          // NOI18N
+        throw new RuntimeException("Not Implemented");                          
     }
 
     /**
@@ -292,7 +292,7 @@ public class WordIterator extends BreakIterator
      */
     public void setText(java.text.CharacterIterator newText)
     {
-        throw new RuntimeException("Not Implemented");                          // NOI18N
+        throw new RuntimeException("Not Implemented");                          
     }
     
     /**
@@ -303,7 +303,7 @@ public class WordIterator extends BreakIterator
      */
     public java.text.CharacterIterator getText()
     {
-        throw new RuntimeException("Not Implemented");                          // NOI18N
+        throw new RuntimeException("Not Implemented");                          
     }
 
     /**
@@ -315,7 +315,7 @@ public class WordIterator extends BreakIterator
      */
     public int previous()
     {
-        throw new RuntimeException("Not Implemented");                          // NOI18N
+        throw new RuntimeException("Not Implemented");                          
     }
 
     /**
@@ -327,7 +327,7 @@ public class WordIterator extends BreakIterator
      */
     public int last()
     {
-        throw new RuntimeException("Not Implemented");                          // NOI18N
+        throw new RuntimeException("Not Implemented");                          
     }
 
 }

@@ -56,9 +56,9 @@ public class OpenDocFilter extends AbstractFilter
     private static final Set<String> TRANSLATABLE = new HashSet<String>(
             Arrays.asList(new String[] 
     { 
-        "content.xml",                                                          // NOI18N
-        "styles.xml",                                                           // NOI18N
-        "meta.xml",                                                             // NOI18N
+        "content.xml",                                                          
+        "styles.xml",                                                           
+        "meta.xml",                                                             
     }));
     
     /** Creates a new instance of OpenDocFilter */
@@ -99,7 +99,7 @@ public class OpenDocFilter extends AbstractFilter
     /** Returns a temporary file for OpenOffice XML. A nasty hack, to say polite way. */
     private File tmp() throws IOException
     {
-        return File.createTempFile("ot-oo-", ".xml");                           // NOI18N
+        return File.createTempFile("ot-oo-", ".xml");                           
     }
     
     /**
@@ -135,7 +135,7 @@ public class OpenDocFilter extends AbstractFilter
                 catch (Exception e)
                 {
                     throw new TranslationException(e.getLocalizedMessage() +
-                            "\n" +                                              // NOI18N
+                            "\n" +                                              
                             OStrings.getString("OpenDoc_ERROR_IN_FILE")+inFile);
                 }
                 
@@ -181,10 +181,10 @@ public class OpenDocFilter extends AbstractFilter
     {
         return new Instance[] 
         {
-                new Instance("*.sx?"),                                          // NOI18N
-                new Instance("*.st?"),                                          // NOI18N
-                new Instance("*.od?"),                                          // NOI18N
-                new Instance("*.ot?"),                                          // NOI18N
+                new Instance("*.sx?"),                                          
+                new Instance("*.st?"),                                          
+                new Instance("*.od?"),                                          
+                new Instance("*.ot?"),                                          
         };
     }
 
@@ -203,7 +203,7 @@ public class OpenDocFilter extends AbstractFilter
     /** Not implemented. */
     protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException, TranslationException
     {
-        throw new IOException("Not Implemented!");                              // NOI18N
+        throw new IOException("Not Implemented!");                              
     }
     
     /**

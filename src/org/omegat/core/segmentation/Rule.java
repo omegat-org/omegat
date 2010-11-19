@@ -191,8 +191,8 @@ public class Rule implements Serializable
     /** Returns a string representation of the Rule for debugging purposes. */
     public String toString()
     {
-        return (isBreakRule() ? "Break " : "Exception ") +                      // NOI18N
-                "Before: " + getBeforebreak() +                                 // NOI18N
-                "After: " + getAfterbreak();                                    // NOI18N
+        return (isBreakRule() ? "Break " : "Exception ") +                      
+                "Before: " + getBeforebreak() +                                 
+                "After: " + getAfterbreak();                                    
     }
 }

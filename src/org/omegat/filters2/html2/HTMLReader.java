@@ -103,11 +103,11 @@ public class HTMLReader extends Reader
         int char2 = is.read();
         int char3 = is.read();
         if( char1==0xFE && char2==0xFF )
-            encoding = "UTF-16BE";                                                  // NOI18N
+            encoding = "UTF-16BE";                                                  
         if( char1==0xFF && char2==0xFE )
-            encoding = "UTF-16LE";                                                  // NOI18N
+            encoding = "UTF-16LE";                                                  
         if( char1==0xEF && char2==0xBB && char3==0xBF )
-            encoding = "UTF-8";                                                     // NOI18N
+            encoding = "UTF-8";                                                     
         
         is.reset();
         if( encoding!=null )

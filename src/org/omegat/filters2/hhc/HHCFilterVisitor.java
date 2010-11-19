@@ -56,11 +56,11 @@ class HHCFilterVisitor extends FilterVisitor
         if( isParagraphTag(tag) && text )
             endup();
 
-        if( "PARAM".equals(tag.getTagName()) &&                                 // NOI18N
-           "Name".equalsIgnoreCase(tag.getAttribute("name"))                    // NOI18N                 
+        if( "PARAM".equals(tag.getTagName()) &&                                 
+           "Name".equalsIgnoreCase(tag.getAttribute("name"))
            ) 
         {  
-           maybeTranslateAttribute(tag, "value");                               // NOI18N
+           maybeTranslateAttribute(tag, "value");                               
         }
         queuePrefix(tag);
     }
@@ -69,9 +69,9 @@ class HHCFilterVisitor extends FilterVisitor
     {
         String tagname = tag.getTagName();
         return
-                tagname.equals("HTML") ||                                       // NOI18N
-                tagname.equals("HEAD") ||                                       // NOI18N
-                tagname.equals("BODY");                                         // NOI18N
+                tagname.equals("HTML") ||                                       
+                tagname.equals("HEAD") ||                                       
+                tagname.equals("BODY");                                         
     }
   
 }

@@ -164,7 +164,7 @@ public final class Mnemonics extends Object {
         
         // OmegaT tweak
         // if we're running on non-MacOSX, we don't set any mnemonics
-		if( System.getProperty("os.name").toLowerCase().startsWith("mac os x") ) {   // NOI18N
+		if( System.getProperty("os.name").toLowerCase().startsWith("mac os x") ) {   
 			setMnemonic(item, 0);
         }
         else {
@@ -202,7 +202,7 @@ public final class Mnemonics extends Object {
         try {
             // associated should be a latin character, arabic digit 
             // or an integer (KeyEvent.VK_***)
-            String str=getBundle().getString("MNEMONIC_" + localeChar); // NOI18N
+            String str=getBundle().getString("MNEMONIC_" + localeChar); 
             if( str.length()==1 )
                 return str.charAt(0); 
             else
@@ -269,6 +269,6 @@ public final class Mnemonics extends Object {
      * Does no caching, it's simply an utility method.
      */
     private static ResourceBundle getBundle() {
-        return ResourceBundle.getBundle("org.openide.awt.Mnemonics"); // NOI18N
+        return ResourceBundle.getBundle("org.openide.awt.Mnemonics"); 
     }
 }

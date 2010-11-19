@@ -111,16 +111,16 @@ public abstract class OutOfTurnTag extends Tag
     {
         StringBuffer buf = new StringBuffer();
         
-        buf.append("&amp;lt;");                                                 // NOI18N
+        buf.append("&amp;lt;");                                                 
         buf.append(getTag());
         buf.append(getAttributes().toString());
-        buf.append("&amp;gt;");                                                 // NOI18N
+        buf.append("&amp;gt;");                                                 
         
         buf.append(StaticUtils.makeValidXML(getEntry().translationToOriginal()));
 
-        buf.append("&amp;lt;/");                                                // NOI18N
+        buf.append("&amp;lt;/");                                                
         buf.append(getTag());
-        buf.append("&amp;gt;");                                                 // NOI18N
+        buf.append("&amp;gt;");                                                 
         
         return buf.toString();
     }

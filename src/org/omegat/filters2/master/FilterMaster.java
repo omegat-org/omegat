@@ -82,10 +82,10 @@ public class FilterMaster {
     /** There was no version of file filters support (1.4.5 Beta 1 -- 1.6.0 RC12). */
     public static String INITIAL_VERSION = new String();
     /** File filters support of 1.6.0 RC12a: now upgrading the configuration. */
-    public static String OT160RC12a_VERSION = "1.6 RC12a";                      // NOI18N
-    public static String OT160FINAL_VERSION = "1.6.0";                          // NOI18N
-    public static String OT161_VERSION      = "1.6.1";                          // NOI18N
-    public static String OT170_VERSION      = "1.7.0";                          // NOI18N
+    public static String OT160RC12a_VERSION = "1.6 RC12a";                      
+    public static String OT160FINAL_VERSION = "1.6.0";                          
+    public static String OT161_VERSION      = "1.6.1";                          
+    public static String OT170_VERSION      = "1.7.0";                          
     /** Currently file filters support version. */
     public static String CURRENT_VERSION = "2.0";
 
@@ -202,7 +202,7 @@ public class FilterMaster {
         catch( Exception ioe )
         {
             ioe.printStackTrace();
-            throw new IOException(filename + "\n" + ioe);                       // NOI18N
+            throw new IOException(filename + "\n" + ioe);                       
         }
         return true;
     }
@@ -462,10 +462,10 @@ public class FilterMaster {
      */
     private boolean matchesMask(String filename, String mask)
     {
-        mask = mask.replaceAll("\\.", "\\\\.");                                   // NOI18N
-        mask = mask.replaceAll("\\*", ".*");                                    // NOI18N
-        mask = mask.replaceAll("\\?", ".");                                     // NOI18N
-        return filename.matches("(?iu)"+mask);                                  // NOI18N
+        mask = mask.replaceAll("\\.", "\\\\.");                                   
+        mask = mask.replaceAll("\\*", ".*");                                    
+        mask = mask.replaceAll("\\?", ".");                                     
+        return filename.matches("(?iu)"+mask);                                  
     }
     
     /**
@@ -530,7 +530,7 @@ public class FilterMaster {
         }
         
         String nameOnly = filename;
-        String extension = "";                                                  // NOI18N
+        String extension = "";                                                  
         if( dot>=0 )
         {
             nameOnly = filename.substring(0, dot);

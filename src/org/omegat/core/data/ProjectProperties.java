@@ -57,7 +57,7 @@ public class ProjectProperties
         if (!StringUtil.isEmpty(sourceLocale)) {
             setSourceLanguage(sourceLocale);
         } else {
-            setSourceLanguage("EN-US"); // NOI18N
+            setSourceLanguage("EN-US"); 
         }
 
         String targetLocale = Preferences
@@ -65,7 +65,7 @@ public class ProjectProperties
         if (!StringUtil.isEmpty(targetLocale)) {
             setTargetLanguage(targetLocale);
         } else {
-            setTargetLanguage("EN-GB"); // NOI18N
+            setTargetLanguage("EN-GB"); 
         }
     }
     

@@ -40,30 +40,30 @@ import org.omegat.util.OStrings;
 public final class LanguageCodes
 {
     // Language Codes
-    public static final String ENGLISH_CODE = "English";                       // NOI18N
-    public static final String JAPANESE_CODE = "Japanese";                     // NOI18N
-    public static final String RUSSIAN_CODE = "Russian";                       // NOI18N
-    public static final String GERMAN_CODE = "German";                         // NOI18N
-    public static final String CATALAN_CODE = "Catalan";                       // NOI18N
-    public static final String SPANISH_CODE = "Spanish";                       // NOI18N
+    public static final String ENGLISH_CODE = "English";                       
+    public static final String JAPANESE_CODE = "Japanese";                     
+    public static final String RUSSIAN_CODE = "Russian";                       
+    public static final String GERMAN_CODE = "German";                         
+    public static final String CATALAN_CODE = "Catalan";                       
+    public static final String SPANISH_CODE = "Spanish";                       
     public static final String POLISH_CODE = "Polish";
     public static final String DUTCH_CODE = "Dutch";
-    public static final String DEFAULT_CODE = "Default";                       // NOI18N
-    public static final String F_TEXT_CODE = "Text";                           // NOI18N
-    public static final String F_HTML_CODE = "HTML";                           // NOI18N
+    public static final String DEFAULT_CODE = "Default";                       
+    public static final String F_TEXT_CODE = "Text";                           
+    public static final String F_HTML_CODE = "HTML";                           
 
     // Language Keys from Resource Bundle
-    public static final String ENGLISH_KEY = "CORE_SRX_RULES_LANG_ENGLISH";    // NOI18N
-    public static final String JAPANESE_KEY = "CORE_SRX_RULES_LANG_JAPANESE";  // NOI18N
-    public static final String RUSSIAN_KEY = "CORE_SRX_RULES_LANG_RUSSIAN";    // NOI18N
-    public static final String GERMAN_KEY = "CORE_SRX_RULES_LANG_GERMAN";      // NOI18N
-    public static final String CATALAN_KEY = "CORE_SRX_RULES_LANG_CATALAN";    // NOI18N
-    public static final String SPANISH_KEY = "CORE_SRX_RULES_LANG_SPANISH";    // NOI18N
+    public static final String ENGLISH_KEY = "CORE_SRX_RULES_LANG_ENGLISH";    
+    public static final String JAPANESE_KEY = "CORE_SRX_RULES_LANG_JAPANESE";  
+    public static final String RUSSIAN_KEY = "CORE_SRX_RULES_LANG_RUSSIAN";    
+    public static final String GERMAN_KEY = "CORE_SRX_RULES_LANG_GERMAN";      
+    public static final String CATALAN_KEY = "CORE_SRX_RULES_LANG_CATALAN";    
+    public static final String SPANISH_KEY = "CORE_SRX_RULES_LANG_SPANISH";    
     public static final String POLISH_KEY = "CORE_SRX_RULES_LANG_POLISH";
     public static final String DUTCH_KEY = "CORE_SRX_RULES_LANG_DUTCH";
-    public static final String DEFAULT_KEY = "CORE_SRX_RULES_LANG_DEFAULT";    // NOI18N
-    public static final String F_TEXT_KEY = "CORE_SRX_RULES_FORMATTING_TEXT";  // NOI18N
-    public static final String F_HTML_KEY = "CORE_SRX_RULES_FORMATTING_HTML";  // NOI18N
+    public static final String DEFAULT_KEY = "CORE_SRX_RULES_LANG_DEFAULT";    
+    public static final String F_TEXT_KEY = "CORE_SRX_RULES_FORMATTING_TEXT";  
+    public static final String F_HTML_KEY = "CORE_SRX_RULES_FORMATTING_HTML";  
     
     /** A Map from language codes to language keys. */
     private static Map<String,String> codeKeyHash = new HashMap<String, String>();

@@ -212,10 +212,10 @@ public class HTMLFilter2 extends AbstractFilter
     {
         return new Instance[]
         {
-            new Instance("*.htm", null, "UTF-8"),                      // NOI18N
-            new Instance("*.html", null, "UTF-8"),                     // NOI18N
-            new Instance("*.xhtml", null, "UTF-8"),                     // NOI18N
-            new Instance("*.xht", null, "UTF-8")                     // NOI18N
+            new Instance("*.htm", null, "UTF-8"),                      
+            new Instance("*.html", null, "UTF-8"),                     
+            new Instance("*.xhtml", null, "UTF-8"),                     
+            new Instance("*.xht", null, "UTF-8")                     
         };
     }
 

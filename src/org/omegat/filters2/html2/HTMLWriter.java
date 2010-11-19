@@ -154,16 +154,16 @@ public class HTMLWriter extends Writer
                 boolean xhtml = false;
                 if( matcher_header.find() )
                 {
-                    XML_HEADER = "<?xml version=\"1.0\" encoding=\""+encoding+"\"?>";   // NOI18N
+                    XML_HEADER = "<?xml version=\"1.0\" encoding=\""+encoding+"\"?>";   
                     contents = matcher_header.replaceFirst(XML_HEADER);
                     xhtml = true;
                 }
 
-                HTML_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset="+encoding+"\""; // NOI18N
+                HTML_META = "<meta http-equiv=\"content-type\" content=\"text/html; charset="+encoding+"\""; 
                 if(xhtml)
-                    HTML_META+=" />";                                           // NOI18N
+                    HTML_META+=" />";                                           
                 else
-                    HTML_META+=">";                                             // NOI18N
+                    HTML_META+=">";                                             
                 Matcher matcher_enc = PatternConsts.HTML_ENCODING.matcher(contents);
                 if( matcher_enc.find() )
                     contents = matcher_enc.replaceFirst(HTML_META);
@@ -171,14 +171,14 @@ public class HTMLWriter extends Writer
                 {
                     Matcher matcher_head = PatternConsts.HTML_HEAD.matcher(contents);
                     if( matcher_head.find() )
-                        contents = matcher_head.replaceFirst("<head>\n    "+HTML_META); // NOI18N
+                        contents = matcher_head.replaceFirst("<head>\n    "+HTML_META); 
                     else if (options.getRewriteEncoding()!=HTMLOptions.REWRITE_MODE.IFHEADER)
                     {
                         Matcher matcher_html = PatternConsts.HTML_HTML.matcher(contents);
                         if( matcher_html.find() )
-                            contents = matcher_html.replaceFirst("<html>\n<head>\n    "+HTML_META+"\n</head>\n"); // NOI18N
+                            contents = matcher_html.replaceFirst("<html>\n<head>\n    "+HTML_META+"\n</head>\n"); 
                         else
-                            contents = "<html>\n<head>\n    "+HTML_META+"\n</head>\n"+contents;  // NOI18N
+                            contents = "<html>\n<head>\n    "+HTML_META+"\n</head>\n"+contents;  
                     }
                 }
             }

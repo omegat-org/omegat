@@ -100,12 +100,12 @@ public class Xtag implements Element
        else if (getShortcut().equals(">"))
            return ">";
        else    
-           buf.append("<");                                                     // NOI18N
+           buf.append("<");                                                     
            buf.append(getShortcut());
            buf.append(getIndex());
            // All Xtags are single tags
-           buf.append("/");                                                     // NOI18N
-           buf.append(">");                                                     // NOI18N
+           buf.append("/");                                                     
+           buf.append(">");                                                     
         
         return buf.toString();
     }
@@ -116,14 +116,14 @@ public class Xtag implements Element
      * &lt;strong&gt;.
      */
     public String toOriginal(){
-        return "<" + getTag() + ">";                                            // NOI18N
+        return "<" + getTag() + ">";                                            
     }
             
     /**
      * Not really implemented
      * @return an empty string
      */
-    public String toTMX() {                                                     // NOI18N
+    public String toTMX() {                                                     
         return "";
     }
 }

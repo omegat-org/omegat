@@ -133,7 +133,7 @@ public class MapRule implements Serializable
     /** Returns a string representation of the MapRule for debugging purposes. */
     public String toString()
     {
-        return getLanguage() + " (" + getPattern() + ") " +                     // NOI18N
+        return getLanguage() + " (" + getPattern() + ") " +                     
                 getRules().toString();
     }
 }

@@ -66,8 +66,8 @@ public class WorkflowOptionsDialog extends JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
         // END HP
         
         initComponents();
@@ -123,7 +123,7 @@ public class WorkflowOptionsDialog extends JDialog
         insertFuzzyCheckBox = new javax.swing.JCheckBox();
         exportCurrentSegment = new javax.swing.JCheckBox();
 
-        setTitle(OStrings.getString("GUI_TITLE_Workflow_Options")); // NOI18N
+        setTitle(OStrings.getString("GUI_TITLE_Workflow_Options")); 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -132,7 +132,7 @@ public class WorkflowOptionsDialog extends JDialog
         getContentPane().setLayout(new java.awt.GridBagLayout());
 
         similarityLabel.setLabelFor(similaritySpinner);
-        org.openide.awt.Mnemonics.setLocalizedText(similarityLabel, OStrings.getString("GUI_WORKFLOW_OPTION_Minimal_Similarity")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(similarityLabel, OStrings.getString("GUI_WORKFLOW_OPTION_Minimal_Similarity")); 
         similarityLabel.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -158,7 +158,7 @@ public class WorkflowOptionsDialog extends JDialog
         descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setText(OStrings.getString("GUI_WORKFLOW_DESCRIPTION")); // NOI18N
+        descriptionTextArea.setText(OStrings.getString("GUI_WORKFLOW_DESCRIPTION")); 
         descriptionTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -170,7 +170,7 @@ public class WorkflowOptionsDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(descriptionTextArea, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -184,7 +184,7 @@ public class WorkflowOptionsDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
         getContentPane().add(okButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -198,7 +198,7 @@ public class WorkflowOptionsDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
         getContentPane().add(cancelButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(allowTranslationEqualToSource, OStrings.getString("WF_OPTION_ALLOW_TRANS_EQ_TO_SRC")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(allowTranslationEqualToSource, OStrings.getString("WF_OPTION_ALLOW_TRANS_EQ_TO_SRC")); 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
@@ -211,7 +211,7 @@ public class WorkflowOptionsDialog extends JDialog
 
         ourButtonGroup.add(defaultRadio);
         defaultRadio.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(defaultRadio, OStrings.getString("WF_OPTION_INSERT_SOURCE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(defaultRadio, OStrings.getString("WF_OPTION_INSERT_SOURCE")); 
         defaultRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         defaultRadio.setMargin(new java.awt.Insets(0, 0, 0, 0));
         defaultRadio.addActionListener(new java.awt.event.ActionListener() {
@@ -229,7 +229,7 @@ public class WorkflowOptionsDialog extends JDialog
         getContentPane().add(defaultRadio, gridBagConstraints);
 
         ourButtonGroup.add(leaveEmptyRadio);
-        org.openide.awt.Mnemonics.setLocalizedText(leaveEmptyRadio, OStrings.getString("WF_OPTION_INSERT_NOTHTHING")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(leaveEmptyRadio, OStrings.getString("WF_OPTION_INSERT_NOTHTHING")); 
         leaveEmptyRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
         leaveEmptyRadio.setMargin(new java.awt.Insets(0, 0, 0, 0));
         leaveEmptyRadio.addActionListener(new java.awt.event.ActionListener() {
@@ -247,7 +247,7 @@ public class WorkflowOptionsDialog extends JDialog
         getContentPane().add(leaveEmptyRadio, gridBagConstraints);
 
         prefixLabel.setLabelFor(prefixText);
-        org.openide.awt.Mnemonics.setLocalizedText(prefixLabel, OStrings.getString("WF_OPTION_INSERT_FUZZY_PREFIX")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(prefixLabel, OStrings.getString("WF_OPTION_INSERT_FUZZY_PREFIX")); 
         prefixLabel.setEnabled(false);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -266,7 +266,7 @@ public class WorkflowOptionsDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(prefixText, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(insertFuzzyCheckBox, OStrings.getString("WF_OPTION_INSERT_FUZZY_MATCH")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(insertFuzzyCheckBox, OStrings.getString("WF_OPTION_INSERT_FUZZY_MATCH")); 
         insertFuzzyCheckBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 radiosActionPerformed(evt);
@@ -281,7 +281,7 @@ public class WorkflowOptionsDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
         getContentPane().add(insertFuzzyCheckBox, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(exportCurrentSegment, OStrings.getString("WF_OPTION_EXPORT__CURRENT_SEGMENT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(exportCurrentSegment, OStrings.getString("WF_OPTION_EXPORT__CURRENT_SEGMENT")); 
         exportCurrentSegment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportCurrentSegmentActionPerformed(evt);

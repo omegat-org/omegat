@@ -50,7 +50,7 @@ public class SaveThread extends Thread implements IAutoSave {
     private boolean enabled;
 
     public SaveThread() {
-        setName("Save thread"); // NOI18N
+        setName("Save thread"); 
     }
 
     public synchronized void disable() {

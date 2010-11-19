@@ -84,8 +84,8 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
         // END HP
         
         initComponents();

@@ -70,10 +70,10 @@ public class TextFilter extends AbstractFilter
     {
         return new Instance[] 
             { 
-                new Instance("*.txt"),                                          // NOI18N
-                new Instance("*.txt1", "ISO-8859-1", "ISO-8859-1"),             // NOI18N
-                new Instance("*.txt2", "ISO-8859-2", "ISO-8859-2"),             // NOI18N
-                new Instance("*.utf8", "UTF-8", "UTF-8")                        // NOI18N
+                new Instance("*.txt"),                                          
+                new Instance("*.txt1", "ISO-8859-1", "ISO-8859-1"),             
+                new Instance("*.txt2", "ISO-8859-2", "ISO-8859-2"),             
+                new Instance("*.utf8", "UTF-8", "UTF-8")                        
             };
     }
 
@@ -123,24 +123,24 @@ public class TextFilter extends AbstractFilter
             throws IOException
     {
         LinebreakPreservingReader lpin = new LinebreakPreservingReader(in);
-        String nontrans = "";                                                    // NOI18N
+        String nontrans = "";                                                    
         String s;
         while( (s=lpin.readLine())!=null )
         {
             if( s.trim().length()==0 )
             {
-                nontrans += s + lpin.getLinebreak();                                            // NOI18N
+                nontrans += s + lpin.getLinebreak();                                            
                 continue;
             }
             String srcText = s;
 
             out.write(nontrans);
-            nontrans = "";                                                        // NOI18N
+            nontrans = "";                                                        
 
             String translation = processEntry(srcText);
             out.write(translation);
 
-            nontrans += lpin.getLinebreak();                                                    // NOI18N
+            nontrans += lpin.getLinebreak();                                                    
         }
 
         if( nontrans.length()!=0 )
@@ -164,19 +164,19 @@ public class TextFilter extends AbstractFilter
 
                 out.write(processEntry(trans.toString()));
                 trans.setLength(0);
-                nontrans.append(lpin.getLinebreak());                                          // NOI18N
+                nontrans.append(lpin.getLinebreak());                                          
             }
             else
             {
                 if( s.trim().length()==0 && trans.length()==0 )
                 {
                     nontrans.append(s);
-                    nontrans.append(lpin.getLinebreak());                                      // NOI18N
+                    nontrans.append(lpin.getLinebreak());                                      
                 }
                 else
                 {
                     trans.append(s);
-                    trans.append(lpin.getLinebreak());                                         // NOI18N
+                    trans.append(lpin.getLinebreak());                                         
                 }
             }
         }

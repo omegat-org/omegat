@@ -69,19 +69,19 @@ public abstract class AbstractFilter implements IFilter {
     public static String ENCODING_AUTO_HUMAN = OStrings.getString("ENCODING_AUTO");
 
     /** The original filename (with extension). */
-    public static final String TFP_FILENAME = "${filename}";                    // NOI18N
+    public static final String TFP_FILENAME = "${filename}";                    
     /** The original filename without extension. */
-    public static final String TFP_NAMEONLY = "${nameOnly}";                    // NOI18N
+    public static final String TFP_NAMEONLY = "${nameOnly}";                    
     /** The original file extension. */
-    public static final String TFP_EXTENSION = "${extension}";                  // NOI18N
+    public static final String TFP_EXTENSION = "${extension}";                  
     /** "xx_YY", locale code */
-    public static final String TFP_TARGET_LOCALE = "${targetLocale}";           // NOI18N
+    public static final String TFP_TARGET_LOCALE = "${targetLocale}";           
     /** "XX-YY", the TMX/XML language code */
-    public static final String TFP_TARGET_LANGUAGE = "${targetLanguage}";       // NOI18N
+    public static final String TFP_TARGET_LANGUAGE = "${targetLanguage}";       
     /** language "XX" only */
-    public static final String TFP_TARGET_LANG_CODE = "${targetLanguageCode}";  // NOI18N
+    public static final String TFP_TARGET_LANG_CODE = "${targetLanguageCode}";  
     /** country "YY" only */
-    public static final String TFP_TARGET_COUNTRY_CODE = "${targetCoutryCode}"; // NOI18N
+    public static final String TFP_TARGET_COUNTRY_CODE = "${targetCoutryCode}"; 
     
     /** All target filename patterns. */
     public static final String[] TARGET_FILENAME_PATTERNS = new String[] 
@@ -240,7 +240,7 @@ public abstract class AbstractFilter implements IFilter {
      */
     public String getHint() 
     {
-        return "";                                                              // NOI18N
+        return "";                                                              
     }
     
     /**

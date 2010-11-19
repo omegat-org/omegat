@@ -53,7 +53,7 @@ import java.util.regex.Matcher;
  */
 public class Language
 {
-    private Locale locale = new Locale("");                                     // NOI18N
+    private Locale locale = new Locale("");                                     
     private String languageCode;
     private String countryCode;
     
@@ -75,9 +75,9 @@ public class Language
      */
     public Language(String str)
     {
-        this.languageCode = "";                                                 // NOI18N
-        this.countryCode = "";                                                  // NOI18N
-        this.locale = new Locale("");                                           // NOI18N
+        this.languageCode = "";                                                 
+        this.countryCode = "";                                                  
+        this.locale = new Locale("");                                           
         if( str!=null )
         {
             Matcher m = PatternConsts.LANG_AND_COUNTRY.matcher(str);
@@ -118,7 +118,7 @@ public class Language
     {
         String langstring = getLanguageCode();
         if( langstring.length()>0 && getCountryCode().length()>0 )
-            langstring += "-"+getCountryCode();                                 // NOI18N
+            langstring += "-"+getCountryCode();                                 
         return langstring;
     }
 
@@ -129,7 +129,7 @@ public class Language
     public String getLocaleCode()
     {
         if( locale==null )
-            return "";                                                          // NOI18N
+            return "";                                                          
         else
             return locale.toString();
     }
@@ -147,7 +147,7 @@ public class Language
     public String getLanguageCode()
     {
         if( this.languageCode==null )
-            return "";                                                          // NOI18N
+            return "";                                                          
         else
             return this.languageCode;
     }
@@ -158,7 +158,7 @@ public class Language
     public String getCountryCode()
     {
         if( this.countryCode==null )
-            return "";                                                          // NOI18N
+            return "";                                                          
         else
             return this.countryCode;
     }
@@ -177,420 +177,420 @@ public class Language
      */
     public static final Language[] LANGUAGES = new Language[]
     {
-        new Language("AA"),       // NOI18N  // AFAR
-//        new Language("AA-ET"),       // NOI18N  // AFAR (ETHIOPIA)
-        new Language("AA-DJ"),       // NOI18N  // AFAR (DJIBOUTI)
-        new Language("AA-ER"),       // NOI18N  // AFAR (ERITREA)
-        new Language("AB"),       // NOI18N  // ABKHAZIAN
-        new Language("AE"),       // NOI18N  // AVESTAN
-        new Language("AF"),       // NOI18N  // AFRIKAANS
-        new Language("AF-NA"),       // NOI18N  // AFRIKAANS (NAMIBIA)
-        new Language("AF-ZA"),       // NOI18N  // AFRIKAANS (SOUTH AFRICA)
-        new Language("AF-ZW"),       // NOI18N  // AFRIKAANS (ZIMBABWAE)
-        new Language("AK"),       // NOI18N  // AKAN
-        new Language("AM"),       // NOI18N  // AMHARIC
-        new Language("AN"),       // NOI18N  // ARAGONESE
-        new Language("AR"),       // NOI18N  // ARABIC
-        new Language("AR-AE"),       // NOI18N  // ARABIC (UNITED ARAB EMIRATES)
-        new Language("AR-BH"),       // NOI18N  // ARABIC (BAHRAIN)
-        new Language("AR-DZ"),       // NOI18N  // ARABIC (ALGERIA)
-        new Language("AR-EG"),       // NOI18N  // ARABIC (EGYPT)
-        new Language("AR-IQ"),       // NOI18N  // ARABIC (IRAQ)
-        new Language("AR-JO"),       // NOI18N  // ARABIC (JORDAN)
-        new Language("AR-KW"),       // NOI18N  // ARABIC (KUWAIT)
-        new Language("AR-LB"),       // NOI18N  // ARABIC (LEBANON)
-        new Language("AR-LY"),       // NOI18N  // ARABIC (LIBYA)
-        new Language("AR-MA"),       // NOI18N  // ARABIC (MOROCCO)
-        new Language("AR-OM"),       // NOI18N  // ARABIC (OMAN)
-        new Language("AR-QA"),       // NOI18N  // ARABIC (QATAR)
-        new Language("AR-SA"),       // NOI18N  // ARABIC (SAUDI ARABIA)
-        new Language("AR-SD"),       // NOI18N  // ARABIC (SUDAN)
-        new Language("AR-SY"),       // NOI18N  // ARABIC (SYRIA)
-        new Language("AR-TN"),       // NOI18N  // ARABIC (TUNISIA)
-        new Language("AR-US"),       // NOI18N  // ARABIC (UNITED STATES)
-        new Language("AR-YE"),       // NOI18N  // ARABIC (YEMEN)
+        new Language("AA"),         // AFAR
+//        new Language("AA-ET"),         // AFAR (ETHIOPIA)
+        new Language("AA-DJ"),         // AFAR (DJIBOUTI)
+        new Language("AA-ER"),         // AFAR (ERITREA)
+        new Language("AB"),         // ABKHAZIAN
+        new Language("AE"),         // AVESTAN
+        new Language("AF"),         // AFRIKAANS
+        new Language("AF-NA"),         // AFRIKAANS (NAMIBIA)
+        new Language("AF-ZA"),         // AFRIKAANS (SOUTH AFRICA)
+        new Language("AF-ZW"),         // AFRIKAANS (ZIMBABWAE)
+        new Language("AK"),         // AKAN
+        new Language("AM"),         // AMHARIC
+        new Language("AN"),         // ARAGONESE
+        new Language("AR"),         // ARABIC
+        new Language("AR-AE"),         // ARABIC (UNITED ARAB EMIRATES)
+        new Language("AR-BH"),         // ARABIC (BAHRAIN)
+        new Language("AR-DZ"),         // ARABIC (ALGERIA)
+        new Language("AR-EG"),         // ARABIC (EGYPT)
+        new Language("AR-IQ"),         // ARABIC (IRAQ)
+        new Language("AR-JO"),         // ARABIC (JORDAN)
+        new Language("AR-KW"),         // ARABIC (KUWAIT)
+        new Language("AR-LB"),         // ARABIC (LEBANON)
+        new Language("AR-LY"),         // ARABIC (LIBYA)
+        new Language("AR-MA"),         // ARABIC (MOROCCO)
+        new Language("AR-OM"),         // ARABIC (OMAN)
+        new Language("AR-QA"),         // ARABIC (QATAR)
+        new Language("AR-SA"),         // ARABIC (SAUDI ARABIA)
+        new Language("AR-SD"),         // ARABIC (SUDAN)
+        new Language("AR-SY"),         // ARABIC (SYRIA)
+        new Language("AR-TN"),         // ARABIC (TUNISIA)
+        new Language("AR-US"),         // ARABIC (UNITED STATES)
+        new Language("AR-YE"),         // ARABIC (YEMEN)
                 
-        new Language("AS"),       // NOI18N  // ASSAMESE
-        new Language("AV"),       // NOI18N  // AVARIC
-        new Language("AY"),       // NOI18N  // AYMARA
-        new Language("AZ"),       // NOI18N  // AZERBAIJANI
-//        new Language("AZ-AZ"),       // NOI18N  // AZERBAIJANI (AZERBAIJAN)
-        new Language("BA"),       // NOI18N  // BASHKIR
+        new Language("AS"),         // ASSAMESE
+        new Language("AV"),         // AVARIC
+        new Language("AY"),         // AYMARA
+        new Language("AZ"),         // AZERBAIJANI
+//        new Language("AZ-AZ"),         // AZERBAIJANI (AZERBAIJAN)
+        new Language("BA"),         // BASHKIR
                 
-        new Language("BE"),       // NOI18N  // BELARUSIAN
-//        new Language("BE-BY"),       // NOI18N  // BELARUSIAN (BELARUS)
-        new Language("BG"),       // NOI18N  // BULGARIAN
-//        new Language("BG-BG"),       // NOI18N  // BULGARIAN (BULGARIA)
+        new Language("BE"),         // BELARUSIAN
+//        new Language("BE-BY"),         // BELARUSIAN (BELARUS)
+        new Language("BG"),         // BULGARIAN
+//        new Language("BG-BG"),         // BULGARIAN (BULGARIA)
         
-        new Language("BH"),       // NOI18N  // BIHARI
-        new Language("BI"),       // NOI18N  // BISLAMA
-        new Language("BM"),       // NOI18N  // BAMBARA
-        new Language("BN"),       // NOI18N  // BENGALI
-        new Language("BO"),       // NOI18N  // TIBETAN
-        new Language("BR"),       // NOI18N  // BRETON
-        new Language("BS"),       // NOI18N  // BOSNIAN
-//       new Language("BS-BA"),       // NOI18N  // BOSNIAN (BOSNIA AND HERZEGOVINA)
+        new Language("BH"),         // BIHARI
+        new Language("BI"),         // BISLAMA
+        new Language("BM"),         // BAMBARA
+        new Language("BN"),         // BENGALI
+        new Language("BO"),         // TIBETAN
+        new Language("BR"),         // BRETON
+        new Language("BS"),         // BOSNIAN
+//       new Language("BS-BA"),         // BOSNIAN (BOSNIA AND HERZEGOVINA)
         
-        new Language("CA"),       // NOI18N  // CATALAN
-//        new Language("CA-ES"),       // NOI18N  // CATALAN (SPAIN)
+        new Language("CA"),         // CATALAN
+//        new Language("CA-ES"),         // CATALAN (SPAIN)
         
-        new Language("CE"),       // NOI18N  // CHECHEN 
-        new Language("CH"),       // NOI18N  // CHAMORRO
-        new Language("CO"),       // NOI18N  // CORSICAN
-        new Language("CR"),       // NOI18N  // CREE
+        new Language("CE"),         // CHECHEN 
+        new Language("CH"),         // CHAMORRO
+        new Language("CO"),         // CORSICAN
+        new Language("CR"),         // CREE
         
-        new Language("CS"),       // NOI18N  // CZECH
-//        new Language("CS-CZ"),       // NOI18N  // CZECH (CZECH REPUBLIC)
+        new Language("CS"),         // CZECH
+//        new Language("CS-CZ"),         // CZECH (CZECH REPUBLIC)
         
-        new Language("CU"),       // NOI18N  // CHURCH SLAVIC; OLD SLAVONIC; CHURCH SLAVONIC; OLD BULGARIAN; OLD CHURCH SLAVONIC
-        new Language("CV"),       // NOI18N  // CHUVASH
-        new Language("CY"),       // NOI18N  // WELSH
+        new Language("CU"),         // CHURCH SLAVIC; OLD SLAVONIC; CHURCH SLAVONIC; OLD BULGARIAN; OLD CHURCH SLAVONIC
+        new Language("CV"),         // CHUVASH
+        new Language("CY"),         // WELSH
         
-        new Language("DA"),       // NOI18N  // DANISH
-//        new Language("DA-DK"),       // NOI18N  // DANISH (DENMARK)
-        new Language("DE"),       // NOI18N  // GERMAN
-        new Language("DE-AT"),       // NOI18N  // GERMAN (AUSTRIA)
-        new Language("DE-CH"),       // NOI18N  // GERMAN (SWITZERLAND)
-        new Language("DE-DE"),       // NOI18N  // GERMAN (GERMANY)
-        new Language("DE-LU"),       // NOI18N  // GERMAN (LUXEMBOURG)
+        new Language("DA"),         // DANISH
+//        new Language("DA-DK"),         // DANISH (DENMARK)
+        new Language("DE"),         // GERMAN
+        new Language("DE-AT"),         // GERMAN (AUSTRIA)
+        new Language("DE-CH"),         // GERMAN (SWITZERLAND)
+        new Language("DE-DE"),         // GERMAN (GERMANY)
+        new Language("DE-LU"),         // GERMAN (LUXEMBOURG)
         
-        new Language("DV"),       // NOI18N  // DIVEHI
-        new Language("DZ"),       // NOI18N  // DZONGKHA
-//        new Language("DZ-BT"),       // NOI18N  // DZONGKHA (BHUTAN)
-        new Language("EE"),       // NOI18N  // EWE
+        new Language("DV"),         // DIVEHI
+        new Language("DZ"),         // DZONGKHA
+//        new Language("DZ-BT"),         // DZONGKHA (BHUTAN)
+        new Language("EE"),         // EWE
         
-        new Language("EL"),       // NOI18N  // GREEK
-//        new Language("EL-GR"),       // NOI18N  // GREEK (GREECE)
-        new Language("EN"),       // NOI18N  // ENGLISH
-        new Language("EN-AU"),       // NOI18N  // ENGLISH (AUSTRALIA)
-        new Language("EN-CA"),       // NOI18N  // ENGLISH (CANADA)
-        new Language("EN-GB"),       // NOI18N  // ENGLISH (UNITED KINGDOM)
-        new Language("EN-IE"),       // NOI18N  // ENGLISH (IRELAND)
-        new Language("EN-IN"),       // NOI18N  // ENGLISH (INDIA)
-        new Language("EN-NZ"),       // NOI18N  // ENGLISH (NEW ZEALAND)
-        new Language("EN-US"),       // NOI18N  // ENGLISH (UNITED STATES)
-        new Language("EN-ZA"),       // NOI18N  // ENGLISH (SOUTH AFRICA)
+        new Language("EL"),         // GREEK
+//        new Language("EL-GR"),         // GREEK (GREECE)
+        new Language("EN"),         // ENGLISH
+        new Language("EN-AU"),         // ENGLISH (AUSTRALIA)
+        new Language("EN-CA"),         // ENGLISH (CANADA)
+        new Language("EN-GB"),         // ENGLISH (UNITED KINGDOM)
+        new Language("EN-IE"),         // ENGLISH (IRELAND)
+        new Language("EN-IN"),         // ENGLISH (INDIA)
+        new Language("EN-NZ"),         // ENGLISH (NEW ZEALAND)
+        new Language("EN-US"),         // ENGLISH (UNITED STATES)
+        new Language("EN-ZA"),         // ENGLISH (SOUTH AFRICA)
         
-        new Language("EO"),       // NOI18N  // ESPERANTO
+        new Language("EO"),         // ESPERANTO
         
-        new Language("ES"),       // NOI18N  // SPANISH
-        new Language("ES-AR"),       // NOI18N  // SPANISH (ARGENTINA)
-        new Language("ES-BO"),       // NOI18N  // SPANISH (BOLIVIA)
-        new Language("ES-CL"),       // NOI18N  // SPANISH (CHILE)
-        new Language("ES-CO"),       // NOI18N  // SPANISH (COLOMBIA)
-        new Language("ES-CR"),       // NOI18N  // SPANISH (COSTA RICA)
-        new Language("ES-DO"),       // NOI18N  // SPANISH (DOMINICAN REPUBLIC)
-        new Language("ES-EC"),       // NOI18N  // SPANISH (ECUADOR)
-        new Language("ES-ES"),       // NOI18N  // SPANISH (SPAIN)
-        new Language("ES-GT"),       // NOI18N  // SPANISH (GUATEMALA)
-        new Language("ES-HN"),       // NOI18N  // SPANISH (HONDURAS)
-        new Language("ES-MX"),       // NOI18N  // SPANISH (MEXICO)
-        new Language("ES-NI"),       // NOI18N  // SPANISH (NICARAGUA)
-        new Language("ES-PA"),       // NOI18N  // SPANISH (PANAMA)
-        new Language("ES-PE"),       // NOI18N  // SPANISH (PERU)
-        new Language("ES-PR"),       // NOI18N  // SPANISH (PUERTO RICO)
-        new Language("ES-PY"),       // NOI18N  // SPANISH (PARAGUAY)
-        new Language("ES-SV"),       // NOI18N  // SPANISH (EL SALVADOR)
-        new Language("ES-US"),       // NOI18N  // SPANISH (UNITED STATES)
-        new Language("ES-UY"),       // NOI18N  // SPANISH (URUGUAY)
-        new Language("ES-VE"),       // NOI18N  // SPANISH (VENEZUELA)
+        new Language("ES"),         // SPANISH
+        new Language("ES-AR"),         // SPANISH (ARGENTINA)
+        new Language("ES-BO"),         // SPANISH (BOLIVIA)
+        new Language("ES-CL"),         // SPANISH (CHILE)
+        new Language("ES-CO"),         // SPANISH (COLOMBIA)
+        new Language("ES-CR"),         // SPANISH (COSTA RICA)
+        new Language("ES-DO"),         // SPANISH (DOMINICAN REPUBLIC)
+        new Language("ES-EC"),         // SPANISH (ECUADOR)
+        new Language("ES-ES"),         // SPANISH (SPAIN)
+        new Language("ES-GT"),         // SPANISH (GUATEMALA)
+        new Language("ES-HN"),         // SPANISH (HONDURAS)
+        new Language("ES-MX"),         // SPANISH (MEXICO)
+        new Language("ES-NI"),         // SPANISH (NICARAGUA)
+        new Language("ES-PA"),         // SPANISH (PANAMA)
+        new Language("ES-PE"),         // SPANISH (PERU)
+        new Language("ES-PR"),         // SPANISH (PUERTO RICO)
+        new Language("ES-PY"),         // SPANISH (PARAGUAY)
+        new Language("ES-SV"),         // SPANISH (EL SALVADOR)
+        new Language("ES-US"),         // SPANISH (UNITED STATES)
+        new Language("ES-UY"),         // SPANISH (URUGUAY)
+        new Language("ES-VE"),         // SPANISH (VENEZUELA)
 
-        new Language("ET"),       // NOI18N  // ESTONIAN
-//        new Language("ET-EE"),       // NOI18N  // ESTONIAN (ESTONIA)
+        new Language("ET"),         // ESTONIAN
+//        new Language("ET-EE"),         // ESTONIAN (ESTONIA)
         
-        new Language("EU"),       // NOI18N  // BASQUE
+        new Language("EU"),         // BASQUE
                 
-        new Language("FA"),       // NOI18N  // PERSIAN; FARSI
-        new Language("FA-AF"),       // NOI18N  // PERSIAN; FARSI (AFGANISTAN)
-        new Language("FA-IR"),       // NOI18N  // PERSIAN; FARSI (IRAN)
+        new Language("FA"),         // PERSIAN; FARSI
+        new Language("FA-AF"),         // PERSIAN; FARSI (AFGANISTAN)
+        new Language("FA-IR"),         // PERSIAN; FARSI (IRAN)
                 
-        new Language("FF"),       // NOI18N  // FULAH
+        new Language("FF"),         // FULAH
         
-        new Language("FI"),       // NOI18N  // FINNISH
-//        new Language("FI-FI"),       // NOI18N  // FINNISH (FINLAND)
+        new Language("FI"),         // FINNISH
+//        new Language("FI-FI"),         // FINNISH (FINLAND)
         
-        new Language("FJ"),       // NOI18N  // FIJIAN
-//        new Language("FJ-FJ"),       // NOI18N  // FIJIAN (FIJI)
-        new Language("FO"),       // NOI18N  // FAROESE
+        new Language("FJ"),         // FIJIAN
+//        new Language("FJ-FJ"),         // FIJIAN (FIJI)
+        new Language("FO"),         // FAROESE
         
-        new Language("FR"),       // NOI18N  // FRENCH
-        new Language("FR-BE"),       // NOI18N  // FRENCH (BELGIUM)
-        new Language("FR-CA"),       // NOI18N  // FRENCH (CANADA)
-        new Language("FR-CH"),       // NOI18N  // FRENCH (SWITZERLAND)
-        new Language("FR-FR"),       // NOI18N  // FRENCH (FRANCE)
-        new Language("FR-LU"),       // NOI18N  // FRENCH (LUXEMBOURG)
+        new Language("FR"),         // FRENCH
+        new Language("FR-BE"),         // FRENCH (BELGIUM)
+        new Language("FR-CA"),         // FRENCH (CANADA)
+        new Language("FR-CH"),         // FRENCH (SWITZERLAND)
+        new Language("FR-FR"),         // FRENCH (FRANCE)
+        new Language("FR-LU"),         // FRENCH (LUXEMBOURG)
         
-        new Language("FY"),       // NOI18N  // FRISIAN
+        new Language("FY"),         // FRISIAN
                 
-        new Language("GA"),       // NOI18N  // IRISH
-//        new Language("GA-IE"),       // NOI18N  // IRISH (IRELAND)
+        new Language("GA"),         // IRISH
+//        new Language("GA-IE"),         // IRISH (IRELAND)
                 
-        new Language("GD"),       // NOI18N  // GAELIC; SCOTTISH GAELIC
+        new Language("GD"),         // GAELIC; SCOTTISH GAELIC
                 
-        new Language("GL"),       // NOI18N  // GALLEGAN
-        new Language("GN"),       // NOI18N  // GUARANI
-        new Language("GU"),       // NOI18N  // GUJARATI
-        new Language("GV"),       // NOI18N  // MANX
-        new Language("HA"),       // NOI18N  // HAUSA
+        new Language("GL"),         // GALLEGAN
+        new Language("GN"),         // GUARANI
+        new Language("GU"),         // GUJARATI
+        new Language("GV"),         // MANX
+        new Language("HA"),         // HAUSA
         
-        new Language("HE"),       // NOI18N  // HEBREW
-//        new Language("HE-IL"),       // NOI18N  // HEBREW (ISRAEL)
+        new Language("HE"),         // HEBREW
+//        new Language("HE-IL"),         // HEBREW (ISRAEL)
                 
-        new Language("HI"),       // NOI18N  // HINDI
-//        new Language("HI-IN"),       // NOI18N  // HINDI (INDIA)
+        new Language("HI"),         // HINDI
+//        new Language("HI-IN"),         // HINDI (INDIA)
         
-        new Language("HO"),       // NOI18N  // HIRI MOTU
+        new Language("HO"),         // HIRI MOTU
         
-        new Language("HR"),       // NOI18N  // CROATIAN
-//        new Language("HR-HR"),       // NOI18N  // CROATIAN (CROATIA)
+        new Language("HR"),         // CROATIAN
+//        new Language("HR-HR"),         // CROATIAN (CROATIA)
         
-        new Language("HT"),       // NOI18N  // HAITIAN; HAITIAN CREOLE
-//        new Language("HT-HT"),       // NOI18N  // HAITIAN; HAITIAN CREOLE (HAITI)
+        new Language("HT"),         // HAITIAN; HAITIAN CREOLE
+//        new Language("HT-HT"),         // HAITIAN; HAITIAN CREOLE (HAITI)
         
-        new Language("HU"),       // NOI18N  // HUNGARIAN
-//        new Language("HU-HU"),       // NOI18N  // HUNGARIAN (HUNGARY)
+        new Language("HU"),         // HUNGARIAN
+//        new Language("HU-HU"),         // HUNGARIAN (HUNGARY)
         
-        new Language("HY"),       // NOI18N  // ARMENIAN
-//        new Language("HY-AM"),       // NOI18N  // ARMENIAN (ARMENIA)
+        new Language("HY"),         // ARMENIAN
+//        new Language("HY-AM"),         // ARMENIAN (ARMENIA)
 
-        new Language("HZ"),       // NOI18N  // HERERO
-        new Language("IA"),       // NOI18N  // INTERLINGUA; INTERNATIONAL AUXILIARY
-        new Language("ID"),       // NOI18N  // INDONESIAN
-//        new Language("ID-ID"),       // NOI18N  // INDONESIAN (INDONESIA)
-        new Language("IE"),       // NOI18N  // INTERLINGUE
-        new Language("IG"),       // NOI18N  // IGBO
-        new Language("II"),       // NOI18N  // SICHUAN YI
-        new Language("IK"),       // NOI18N  // INUPIAQ
-        new Language("IO"),       // NOI18N  // IDO
+        new Language("HZ"),         // HERERO
+        new Language("IA"),         // INTERLINGUA; INTERNATIONAL AUXILIARY
+        new Language("ID"),         // INDONESIAN
+//        new Language("ID-ID"),         // INDONESIAN (INDONESIA)
+        new Language("IE"),         // INTERLINGUE
+        new Language("IG"),         // IGBO
+        new Language("II"),         // SICHUAN YI
+        new Language("IK"),         // INUPIAQ
+        new Language("IO"),         // IDO
         
-        new Language("IS"),       // NOI18N  // ICELANDIC
-//        new Language("IS-IS"),       // NOI18N  // ICELANDIC (ICELAND)
+        new Language("IS"),         // ICELANDIC
+//        new Language("IS-IS"),         // ICELANDIC (ICELAND)
                 
-        new Language("IT"),       // NOI18N  // ITALIAN
-        new Language("IT-CH"),       // NOI18N  // ITALIAN (SWITZERLAND)
-        new Language("IT-IT"),       // NOI18N  // ITALIAN (ITALY)
+        new Language("IT"),         // ITALIAN
+        new Language("IT-CH"),         // ITALIAN (SWITZERLAND)
+        new Language("IT-IT"),         // ITALIAN (ITALY)
         
-        new Language("IU"),       // NOI18N  // INUKTITUT
+        new Language("IU"),         // INUKTITUT
         
-        new Language("JA"),       // NOI18N  // JAPANESE
-//        new Language("JA-JP"),       // NOI18N  // JAPANESE (JAPAN)
+        new Language("JA"),         // JAPANESE
+//        new Language("JA-JP"),         // JAPANESE (JAPAN)
     
-        new Language("JV"),       // NOI18N  // JAVANESE
+        new Language("JV"),         // JAVANESE
                 
-        new Language("KA"),       // NOI18N  // GEORGIAN
-//        new Language("KA-GE"),       // NOI18N  // GEORGIAN (GEORGIA)
+        new Language("KA"),         // GEORGIAN
+//        new Language("KA-GE"),         // GEORGIAN (GEORGIA)
                 
-        new Language("KG"),       // NOI18N  // KONGO
-        new Language("KI"),       // NOI18N  // KIKUYU; GIKUYU
-        new Language("KJ"),       // NOI18N  // KUANYAMA; KWANYAMA
+        new Language("KG"),         // KONGO
+        new Language("KI"),         // KIKUYU; GIKUYU
+        new Language("KJ"),         // KUANYAMA; KWANYAMA
                 
-        new Language("KK"),       // NOI18N  // KAZAKH
-//        new Language("KK-KZ"),       // NOI18N  // KAZAKH (KAZAKHSTAN)
+        new Language("KK"),         // KAZAKH
+//        new Language("KK-KZ"),         // KAZAKH (KAZAKHSTAN)
                 
-        new Language("KL"),       // NOI18N  // KALAALLISUT; GREENLANDIC
-        new Language("KM"),       // NOI18N  // KHMER
-//        new Language("KM-KH"),       // NOI18N  // KHMER (CAMBODIA)
-        new Language("KN"),       // NOI18N  // KANNADA
+        new Language("KL"),         // KALAALLISUT; GREENLANDIC
+        new Language("KM"),         // KHMER
+//        new Language("KM-KH"),         // KHMER (CAMBODIA)
+        new Language("KN"),         // KANNADA
         
-        new Language("KO"),       // NOI18N  // KOREAN
-//        new Language("KO-KR"),       // NOI18N  // KOREAN (SOUTH KOREA)
+        new Language("KO"),         // KOREAN
+//        new Language("KO-KR"),         // KOREAN (SOUTH KOREA)
         
-        new Language("KR"),       // NOI18N  // KANURI
-        new Language("KS"),       // NOI18N  // KASHMIRI
-        new Language("KU"),       // NOI18N  // KURDISH
-        new Language("KV"),       // NOI18N  // KOMI
-        new Language("KW"),       // NOI18N  // CORNISH
+        new Language("KR"),         // KANURI
+        new Language("KS"),         // KASHMIRI
+        new Language("KU"),         // KURDISH
+        new Language("KV"),         // KOMI
+        new Language("KW"),         // CORNISH
                 
-        new Language("KY"),       // NOI18N  // KIRGHIZ
-//        new Language("KY-KG"),       // NOI18N  // KIRGHIZ (KYRGYZSTAN)
+        new Language("KY"),         // KIRGHIZ
+//        new Language("KY-KG"),         // KIRGHIZ (KYRGYZSTAN)
                 
-        new Language("LA"),       // NOI18N  // LATIN
-        new Language("LB"),       // NOI18N  // LUXEMBOURGISH; LETZEBURGESCH
-//        new Language("LB-LU"),       // NOI18N  // LUXEMBOURGISH (LUXEMBOURG)
-        new Language("LG"),       // NOI18N  // GANDA
-        new Language("LI"),       // NOI18N  // LIMBURGAN; LIMBURGER; LIMBURGISH
-        new Language("LN"),       // NOI18N  // LINGALA
-        new Language("LO"),       // NOI18N  // LAO
-//        new Language("LO-LA"),       // NOI18N  // LAO (LAO)
+        new Language("LA"),         // LATIN
+        new Language("LB"),         // LUXEMBOURGISH; LETZEBURGESCH
+//        new Language("LB-LU"),         // LUXEMBOURGISH (LUXEMBOURG)
+        new Language("LG"),         // GANDA
+        new Language("LI"),         // LIMBURGAN; LIMBURGER; LIMBURGISH
+        new Language("LN"),         // LINGALA
+        new Language("LO"),         // LAO
+//        new Language("LO-LA"),         // LAO (LAO)
         
-        new Language("LT"),       // NOI18N  // LITHUANIAN
-//        new Language("LT-LT"),       // NOI18N  // LITHUANIAN (LITHUANIA)
+        new Language("LT"),         // LITHUANIAN
+//        new Language("LT-LT"),         // LITHUANIAN (LITHUANIA)
         
-        new Language("LU"),       // NOI18N  // LUBA-KATANGA
+        new Language("LU"),         // LUBA-KATANGA
         
-        new Language("LV"),       // NOI18N  // LATVIAN (LETTISH)
-//        new Language("LV-LV"),       // NOI18N  // LATVIAN (LETTISH) (LATVIA)
+        new Language("LV"),         // LATVIAN (LETTISH)
+//        new Language("LV-LV"),         // LATVIAN (LETTISH) (LATVIA)
         
-        new Language("MG"),       // NOI18N  // MALAGASY
-//        new Language("MG-MG"),       // NOI18N  // MALAGASY (MADAGASCAR)
-        new Language("MH"),       // NOI18N  // MARSHALLESE
-//        new Language("MH-MH"),       // NOI18N  // MARSHALLESE (MARSHALL ISLANDS)
-        new Language("MI"),       // NOI18N  // MAORI
+        new Language("MG"),         // MALAGASY
+//        new Language("MG-MG"),         // MALAGASY (MADAGASCAR)
+        new Language("MH"),         // MARSHALLESE
+//        new Language("MH-MH"),         // MARSHALLESE (MARSHALL ISLANDS)
+        new Language("MI"),         // MAORI
         
-        new Language("MK"),       // NOI18N  // MACEDONIAN
-//        new Language("MK-MK"),       // NOI18N  // MACEDONIAN (MACEDONIA)
+        new Language("MK"),         // MACEDONIAN
+//        new Language("MK-MK"),         // MACEDONIAN (MACEDONIA)
         
-        new Language("ML"),       // NOI18N  // MALAYALAM
+        new Language("ML"),         // MALAYALAM
                 
-        new Language("MN"),       // NOI18N  // MONGOLIAN
-//        new Language("MN-MN"),       // NOI18N  // MONGOLIAN (MONGOLIA)
+        new Language("MN"),         // MONGOLIAN
+//        new Language("MN-MN"),         // MONGOLIAN (MONGOLIA)
                 
-        new Language("MO"),       // NOI18N  // MOLDAVIAN
-//        new Language("MO-MD"),       // NOI18N  // MOLDAVIAN (MOLDOVA)
+        new Language("MO"),         // MOLDAVIAN
+//        new Language("MO-MD"),         // MOLDAVIAN (MOLDOVA)
                 
-        new Language("MR"),       // NOI18N  // MARATHI
-        new Language("MS"),       // NOI18N  // MALAY
-//        new Language("MS-MY"),       // NOI18N  // MALAY (MALAYSIA)
-        new Language("MT"),       // NOI18N  // MALTESE
-//        new Language("MT-MT"),       // NOI18N  // MALTESE (MALTA)
-        new Language("MY"),       // NOI18N  // BURMESE
-//        new Language("MY-MM"),       // NOI18N  // BURMESE (MYANMAR)
-        new Language("NA"),       // NOI18N  // NAURU
+        new Language("MR"),         // MARATHI
+        new Language("MS"),         // MALAY
+//        new Language("MS-MY"),         // MALAY (MALAYSIA)
+        new Language("MT"),         // MALTESE
+//        new Language("MT-MT"),         // MALTESE (MALTA)
+        new Language("MY"),         // BURMESE
+//        new Language("MY-MM"),         // BURMESE (MYANMAR)
+        new Language("NA"),         // NAURU
                 
-        new Language("NB"),       // NOI18N  // NORWEGIAN BOKM?L; BOKM?L, NORWEGIAN
-//        new Language("NB-NO"),       // NOI18N  // BOKM?L (NORWAY)
+        new Language("NB"),         // NORWEGIAN BOKM?L; BOKM?L, NORWEGIAN
+//        new Language("NB-NO"),         // BOKM?L (NORWAY)
                 
-        new Language("ND"),       // NOI18N  // NDEBELE, NORTH; NORTH NDEBELE
-        new Language("NE"),       // NOI18N  // NEPALI
-//        new Language("NE-NP"),       // NOI18N  // NEPALI (NEPAL)
-        new Language("NG"),       // NOI18N  // NDONGA
+        new Language("ND"),         // NDEBELE, NORTH; NORTH NDEBELE
+        new Language("NE"),         // NEPALI
+//        new Language("NE-NP"),         // NEPALI (NEPAL)
+        new Language("NG"),         // NDONGA
         
-        new Language("NL"),       // NOI18N  // DUTCH
-        new Language("NL-BE"),       // NOI18N  // DUTCH (BELGIUM)
-        new Language("NL-NL"),       // NOI18N  // DUTCH (NETHERLANDS)
+        new Language("NL"),         // DUTCH
+        new Language("NL-BE"),         // DUTCH (BELGIUM)
+        new Language("NL-NL"),         // DUTCH (NETHERLANDS)
         
-        new Language("NN"),       // NOI18N  // NORWEGIAN NYNORSK; NYNORSK, NORWEGIAN
-//        new Language("NN-NO"),       // NOI18N  // NYNORSK (NORWAY)
+        new Language("NN"),         // NORWEGIAN NYNORSK; NYNORSK, NORWEGIAN
+//        new Language("NN-NO"),         // NYNORSK (NORWAY)
         
-        new Language("NO"),       // NOI18N  // NORWEGIAN
-//        new Language("NO-NO"),       // NOI18N  // NORWEGIAN (NORWAY)
+        new Language("NO"),         // NORWEGIAN
+//        new Language("NO-NO"),         // NORWEGIAN (NORWAY)
         
-        new Language("NR"),       // NOI18N  // NDEBELE, SOUTH; SOUTH NDEBELE
-        new Language("NV"),       // NOI18N  // NAVAJO; NAVAHO
-        new Language("NY"),       // NOI18N  // CHICHEWA; CHEWA; NYANJA
-        new Language("OC"),       // NOI18N  // OCCITAN (POST 1500); PROVEN?AL
-        new Language("OJ"),       // NOI18N  // OJIBWA
-        new Language("OM"),       // NOI18N  // OROMO
-        new Language("OR"),       // NOI18N  // ORIYA
-        new Language("OS"),       // NOI18N  // OSSETIAN; OSSETIC
-        new Language("PA"),       // NOI18N  // PANJABI; PUNJABI
-        new Language("PA-IN"),       // NOI18N  // PANJABI; PUNJABI (INDIA)
-        new Language("PA-PK"),       // NOI18N  // PANJABI; PUNJABI (PAKISTAN)
-        new Language("PI"),       // NOI18N  // PALI
+        new Language("NR"),         // NDEBELE, SOUTH; SOUTH NDEBELE
+        new Language("NV"),         // NAVAJO; NAVAHO
+        new Language("NY"),         // CHICHEWA; CHEWA; NYANJA
+        new Language("OC"),         // OCCITAN (POST 1500); PROVEN?AL
+        new Language("OJ"),         // OJIBWA
+        new Language("OM"),         // OROMO
+        new Language("OR"),         // ORIYA
+        new Language("OS"),         // OSSETIAN; OSSETIC
+        new Language("PA"),         // PANJABI; PUNJABI
+        new Language("PA-IN"),         // PANJABI; PUNJABI (INDIA)
+        new Language("PA-PK"),         // PANJABI; PUNJABI (PAKISTAN)
+        new Language("PI"),         // PALI
         
-        new Language("PL"),       // NOI18N  // POLISH
-//        new Language("PL-PL"),       // NOI18N  // POLISH (POLAND)
+        new Language("PL"),         // POLISH
+//        new Language("PL-PL"),         // POLISH (POLAND)
         
-        new Language("PS"),       // NOI18N  // PUSHTO
+        new Language("PS"),         // PUSHTO
         
-        new Language("PT"),       // NOI18N  // PORTUGUESE
-        new Language("PT-BR"),       // NOI18N  // PORTUGUESE (BRAZIL)
-        new Language("PT-PT"),       // NOI18N  // PORTUGUESE (PORTUGAL)
+        new Language("PT"),         // PORTUGUESE
+        new Language("PT-BR"),         // PORTUGUESE (BRAZIL)
+        new Language("PT-PT"),         // PORTUGUESE (PORTUGAL)
         
-        new Language("QU"),       // NOI18N  // QUECHUA
-        new Language("RM"),       // NOI18N  // RAETO-ROMANCE
-        new Language("RN"),       // NOI18N  // RUNDI
+        new Language("QU"),         // QUECHUA
+        new Language("RM"),         // RAETO-ROMANCE
+        new Language("RN"),         // RUNDI
         
-        new Language("RO"),       // NOI18N  // ROMANIAN
-//        new Language("RO-RO"),       // NOI18N  // ROMANIAN (ROMANIA)
+        new Language("RO"),         // ROMANIAN
+//        new Language("RO-RO"),         // ROMANIAN (ROMANIA)
                 
-        new Language("RU"),       // NOI18N  // RUSSIAN
-        new Language("RU-BY"),       // NOI18N  // RUSSIAN (BELORUS)
-        new Language("RU-RU"),       // NOI18N  // RUSSIAN (RUSSIA)
+        new Language("RU"),         // RUSSIAN
+        new Language("RU-BY"),         // RUSSIAN (BELORUS)
+        new Language("RU-RU"),         // RUSSIAN (RUSSIA)
         
-        new Language("RW"),       // NOI18N  // KINYARWANDA
-        new Language("SA"),       // NOI18N  // SANSKRIT
-        new Language("SC"),       // NOI18N  // SARDINIAN
-        new Language("SD"),       // NOI18N  // SINDHI
-        new Language("SD-IN"),       // NOI18N  // SINDHI (INDIA)
-        new Language("SD-PK"),       // NOI18N  // SINDHI (PAKISTAN)
-        new Language("SE"),       // NOI18N  // NORTHERN SAMI
-        new Language("SG"),       // NOI18N  // SANGO
+        new Language("RW"),         // KINYARWANDA
+        new Language("SA"),         // SANSKRIT
+        new Language("SC"),         // SARDINIAN
+        new Language("SD"),         // SINDHI
+        new Language("SD-IN"),         // SINDHI (INDIA)
+        new Language("SD-PK"),         // SINDHI (PAKISTAN)
+        new Language("SE"),         // NORTHERN SAMI
+        new Language("SG"),         // SANGO
         
-        new Language("SH"),       // NOI18N  // SERBO-CROATIAN
-        new Language("SI"),       // NOI18N  // SINHALA; SINHALESE
+        new Language("SH"),         // SERBO-CROATIAN
+        new Language("SI"),         // SINHALA; SINHALESE
         
-        new Language("SK"),       // NOI18N  // SLOVAK
-//        new Language("SK-SK"),       // NOI18N  // SLOVAK (SLOVAKIA)
+        new Language("SK"),         // SLOVAK
+//        new Language("SK-SK"),         // SLOVAK (SLOVAKIA)
                 
-        new Language("SL"),       // NOI18N  // SLOVENIAN
-//        new Language("SL-SI"),       // NOI18N  // SLOVENIAN (SLOVENIA)
+        new Language("SL"),         // SLOVENIAN
+//        new Language("SL-SI"),         // SLOVENIAN (SLOVENIA)
         
-        new Language("SM"),       // NOI18N  // SAMOAN 
-        new Language("SM-AS"),       // NOI18N  // SAMOAN (AMERICAN SAMOA)
-        new Language("SM-WS"),       // NOI18N  // SAMOAN (SAMOA)
+        new Language("SM"),         // SAMOAN 
+        new Language("SM-AS"),         // SAMOAN (AMERICAN SAMOA)
+        new Language("SM-WS"),         // SAMOAN (SAMOA)
                 
-        new Language("SN"),       // NOI18N  // SHONA
-        new Language("SO"),       // NOI18N  // SOMALI
-//        new Language("SO-SO"),       // NOI18N  // SOMALI (SOMALIA)
+        new Language("SN"),         // SHONA
+        new Language("SO"),         // SOMALI
+//        new Language("SO-SO"),         // SOMALI (SOMALIA)
                 
-        new Language("SQ"),       // NOI18N  // ALBANIAN
-//        new Language("SQ-AL"),       // NOI18N  // ALBANIAN (ALBANIA)
+        new Language("SQ"),         // ALBANIAN
+//        new Language("SQ-AL"),         // ALBANIAN (ALBANIA)
                 
-        new Language("SR"),       // NOI18N  // SERBIAN
-//        new Language("SR-CS"),       // NOI18N  // SERBIAN (SERBIA AND MONTENEGRO)
+        new Language("SR"),         // SERBIAN
+//        new Language("SR-CS"),         // SERBIAN (SERBIA AND MONTENEGRO)
                 
-        new Language("SS"),       // NOI18N  // SWATI
-        new Language("ST"),       // NOI18N  // SOTHO, SOUTHERN 
-        new Language("SU"),       // NOI18N  // SUNDANESE 
+        new Language("SS"),         // SWATI
+        new Language("ST"),         // SOTHO, SOUTHERN 
+        new Language("SU"),         // SUNDANESE 
         
-        new Language("SV"),       // NOI18N  // SWEDISH
-//        new Language("SV-SE"),       // NOI18N  // SWEDISH (SWEDEN)
+        new Language("SV"),         // SWEDISH
+//        new Language("SV-SE"),         // SWEDISH (SWEDEN)
         
-        new Language("SW"),       // NOI18N  // SWAHILI
-        new Language("TA"),       // NOI18N  // TAMIL
-        new Language("TE"),       // NOI18N  // TELUGU
-        new Language("TG"),       // NOI18N  // TAJIK
-//        new Language("TG-TJ"),       // NOI18N  // TAJIK (TAJIKISTAN)
+        new Language("SW"),         // SWAHILI
+        new Language("TA"),         // TAMIL
+        new Language("TE"),         // TELUGU
+        new Language("TG"),         // TAJIK
+//        new Language("TG-TJ"),         // TAJIK (TAJIKISTAN)
         
-        new Language("TH"),       // NOI18N  // THAI
-//        new Language("TH-TH"),       // NOI18N  // THAI (THAILAND)
+        new Language("TH"),         // THAI
+//        new Language("TH-TH"),         // THAI (THAILAND)
         
-        new Language("TI"),       // NOI18N  // TIGRINYA
-        new Language("TK"),       // NOI18N  // TURKMEN
-//        new Language("TK-TM"),       // NOI18N  // TURKMEN (TURKMENISTAN)
-        new Language("TL"),       // NOI18N  // TAGALOG
-        new Language("TN"),       // NOI18N  // TSWANA
-        new Language("TO"),       // NOI18N  // TONGA
-//        new Language("TO-TO"),       // NOI18N  // TONGA (TONGA ISLANDS)
+        new Language("TI"),         // TIGRINYA
+        new Language("TK"),         // TURKMEN
+//        new Language("TK-TM"),         // TURKMEN (TURKMENISTAN)
+        new Language("TL"),         // TAGALOG
+        new Language("TN"),         // TSWANA
+        new Language("TO"),         // TONGA
+//        new Language("TO-TO"),         // TONGA (TONGA ISLANDS)
 
-        new Language("TR"),       // NOI18N  // TURKISH
-//        new Language("TR-TR"),       // NOI18N  // TURKISH (TURKEY)
+        new Language("TR"),         // TURKISH
+//        new Language("TR-TR"),         // TURKISH (TURKEY)
         
-        new Language("TS"),       // NOI18N  // TSONGA
+        new Language("TS"),         // TSONGA
                 
-        new Language("TT"),       // NOI18N  // TATAR 
+        new Language("TT"),         // TATAR 
                 
-        new Language("TW"),       // NOI18N  // TWI
-        new Language("TY"),       // NOI18N  // TAHITIAN
-        new Language("UG"),       // NOI18N  // UIGHUR; UYGHUR
+        new Language("TW"),         // TWI
+        new Language("TY"),         // TAHITIAN
+        new Language("UG"),         // UIGHUR; UYGHUR
         
-        new Language("UK"),       // NOI18N  // UKRAINIAN
-//        new Language("UK-UA"),       // NOI18N  // UKRAINIAN (UKRAINE)
+        new Language("UK"),         // UKRAINIAN
+//        new Language("UK-UA"),         // UKRAINIAN (UKRAINE)
         
-        new Language("UR"),       // NOI18N  // URDU
-        new Language("UR-IN"),       // NOI18N  // URDU (INDIA)
-        new Language("UR-PK"),       // NOI18N  // URDU (PAKISTAN)
+        new Language("UR"),         // URDU
+        new Language("UR-IN"),         // URDU (INDIA)
+        new Language("UR-PK"),         // URDU (PAKISTAN)
                 
-        new Language("UZ"),       // NOI18N  // UZBEK
-//        new Language("UZ-UZ"),       // NOI18N  // UZBEK (UZBEKISTAN)
-        new Language("VE"),       // NOI18N  // VENDA 
-        new Language("VI"),       // NOI18N  // VIETNAMESE
-//        new Language("VI-VN"),       // NOI18N  // VIETNAMESE (VIETNAM)
-        new Language("VO"),       // NOI18N  // VOLAPUK
-        new Language("WA"),       // NOI18N  // WALLOON
-        new Language("WO"),       // NOI18N  // WOLOF
-        new Language("XH"),       // NOI18N  // XHOSA
-        new Language("YI"),       // NOI18N  // YIDDISH
-        new Language("YO"),       // NOI18N  // YORUBA
-        new Language("ZA"),       // NOI18N  // ZHUANG; CHUANG
+        new Language("UZ"),         // UZBEK
+//        new Language("UZ-UZ"),         // UZBEK (UZBEKISTAN)
+        new Language("VE"),         // VENDA 
+        new Language("VI"),         // VIETNAMESE
+//        new Language("VI-VN"),         // VIETNAMESE (VIETNAM)
+        new Language("VO"),         // VOLAPUK
+        new Language("WA"),         // WALLOON
+        new Language("WO"),         // WOLOF
+        new Language("XH"),         // XHOSA
+        new Language("YI"),         // YIDDISH
+        new Language("YO"),         // YORUBA
+        new Language("ZA"),         // ZHUANG; CHUANG
         
-        new Language("ZH"),       // NOI18N  // CHINESE
-        new Language("ZH-CN"),       // NOI18N  // CHINESE SIMPLIFIED (CHINA)
-        new Language("ZH-HK"),       // NOI18N  // CHINESE (HONG KONG)
-        new Language("ZH-TW"),       // NOI18N  // CHINESE TRADITIONAL (TAIWAN)
+        new Language("ZH"),         // CHINESE
+        new Language("ZH-CN"),         // CHINESE SIMPLIFIED (CHINA)
+        new Language("ZH-HK"),         // CHINESE (HONG KONG)
+        new Language("ZH-TW"),         // CHINESE TRADITIONAL (TAIWAN)
         
-        new Language("ZU"),       // NOI18N  // ZULU
+        new Language("ZU"),         // ZULU
         
     };
 

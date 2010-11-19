@@ -62,7 +62,7 @@ public class OmegaTFileChooser extends JFileChooser
         {
             if( omegatIcon==null )
                 omegatIcon = new ImageIcon( getClass().getResource(
-                        "/org/omegat/gui/resources/OmegaT_small.gif") );        // NOI18N
+                        "/org/omegat/gui/resources/OmegaT_small.gif") );        
         }
         catch( Exception e )
         {
@@ -82,8 +82,8 @@ public class OmegaTFileChooser extends JFileChooser
                     createNewDir();
                 }
             };
-            getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(newDirKey, "NEW DIRECTORY"); // NOI18N
-            getActionMap().put("NEW DIRECTORY", newDirAction); // NOI18N
+            getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(newDirKey, "NEW DIRECTORY"); 
+            getActionMap().put("NEW DIRECTORY", newDirAction); 
         }*/
     }
 

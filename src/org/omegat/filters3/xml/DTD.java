@@ -75,29 +75,29 @@ public class DTD extends XMLPseudoTag
     public String toOriginal()
     {
         StringBuffer res = new StringBuffer();
-        res.append("<!DOCTYPE");                                                // NOI18N
-        res.append(" ");                                                        // NOI18N
+        res.append("<!DOCTYPE");                                                
+        res.append(" ");                                                        
         res.append(name);
-        res.append(" ");                                                        // NOI18N
-        res.append("PUBLIC");                                                   // NOI18N
-        res.append(" ");                                                        // NOI18N
-        res.append("\""+publicId+"\"");                                         // NOI18N
-        res.append(" ");                                                        // NOI18N
-        res.append("\""+systemId+"\"");                                         // NOI18N
+        res.append(" ");                                                        
+        res.append("PUBLIC");                                                   
+        res.append(" ");                                                        
+        res.append("\""+publicId+"\"");                                         
+        res.append(" ");                                                        
+        res.append("\""+systemId+"\"");                                         
 
         if (entities.size()>0)
         {
-            res.append("\n[\n");                                                // NOI18N
+            res.append("\n[\n");                                                
             for (Entity entity : entities)
             {
                 res.append(entity.toString());
-                res.append("\n");                                               // NOI18N
+                res.append("\n");                                               
             }
-            res.append("]");                                                    // NOI18N
+            res.append("]");                                                    
         }
         
-        res.append(">");                                                        // NOI18N
-        res.append("\n");                                                       // NOI18N
+        res.append(">");                                                        
+        res.append("\n");                                                       
         return res.toString();
     }
 

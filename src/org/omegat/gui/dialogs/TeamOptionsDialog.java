@@ -65,8 +65,8 @@ public class TeamOptionsDialog extends JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
         // END HP
         
         initComponents();
@@ -100,7 +100,7 @@ public class TeamOptionsDialog extends JDialog
         authorLabel = new javax.swing.JLabel();
         authorText = new javax.swing.JTextField();
 
-        setTitle(OStrings.getString("GUI_TITLE_Team_Options")); // NOI18N
+        setTitle(OStrings.getString("GUI_TITLE_Team_Options")); 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -112,7 +112,7 @@ public class TeamOptionsDialog extends JDialog
         descriptionTextArea.setEditable(false);
         descriptionTextArea.setFont(new JLabel().getFont());
         descriptionTextArea.setLineWrap(true);
-        descriptionTextArea.setText(OStrings.getString("GUI_TEAM_DESCRIPTION")); // NOI18N
+        descriptionTextArea.setText(OStrings.getString("GUI_TEAM_DESCRIPTION")); 
         descriptionTextArea.setWrapStyleWord(true);
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -124,7 +124,7 @@ public class TeamOptionsDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(descriptionTextArea, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -138,7 +138,7 @@ public class TeamOptionsDialog extends JDialog
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
         getContentPane().add(okButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -153,7 +153,7 @@ public class TeamOptionsDialog extends JDialog
         getContentPane().add(cancelButton, gridBagConstraints);
 
         authorLabel.setLabelFor(authorText);
-        org.openide.awt.Mnemonics.setLocalizedText(authorLabel, OStrings.getString("WF_OPTION_INSERT_AUTHOR_PREFIX")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(authorLabel, OStrings.getString("WF_OPTION_INSERT_AUTHOR_PREFIX")); 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 5;

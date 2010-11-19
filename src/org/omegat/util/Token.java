@@ -59,11 +59,11 @@ public class Token
         return hash;
     }
 
-    private static Pattern AMP = Pattern.compile("\\&");                        // NOI18N
+    private static Pattern AMP = Pattern.compile("\\&");                        
 
     private final String stripAmpersand(String s)
     {
-        return AMP.matcher(s).replaceAll("");                                   // NOI18N
+        return AMP.matcher(s).replaceAll("");                                   
     }
 
     /**
@@ -106,7 +106,7 @@ public class Token
 
     public final String toString()
     {
-        return hash+"@"+offset;                                                 // NOI18N
+        return hash+"@"+offset;                                                 
     }
 
     /**

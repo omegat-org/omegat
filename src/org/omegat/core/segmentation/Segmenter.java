@@ -174,7 +174,7 @@ public final class Segmenter
         return segments;
     }
     
-    private static Pattern DEFAULT_BEFOREBREAK_PATTERN = Pattern.compile(".", Pattern.DOTALL);  // NOI18N
+    private static Pattern DEFAULT_BEFOREBREAK_PATTERN = Pattern.compile(".", Pattern.DOTALL);  
     
     /**
      * Returns the places of possible breaks between sentences.
@@ -297,7 +297,7 @@ public final class Segmenter
     public static String glue(Language sourceLang, Language targetLang, List<String> sentences, List<StringBuffer> spaces, List<Rule> brules)
     {
         if( sentences.size()<=0 )
-            return "";                                                          // NOI18N
+            return "";                                                          
 	
         StringBuffer res = new StringBuffer();
         res.append(sentences.get(0));
@@ -319,7 +319,7 @@ public final class Segmenter
             }
             else if (CJK_LANGUAGES.contains(sourceLang.getLanguageCode().toUpperCase(Locale.ENGLISH)) && 
                     sp.length()==0)
-                sp.append(" ");                                                 // NOI18N
+                sp.append(" ");                                                 
 	    
             res.append(sp);
             res.append(sentences.get(i));
@@ -331,8 +331,8 @@ public final class Segmenter
     private static final Set<String> CJK_LANGUAGES = new HashSet<String>();
     static
     {
-        CJK_LANGUAGES.add("ZH");                                                // NOI18N
-        CJK_LANGUAGES.add("JA");                                                // NOI18N
-        CJK_LANGUAGES.add("KO");                                                // NOI18N
+        CJK_LANGUAGES.add("ZH");                                                
+        CJK_LANGUAGES.add("JA");                                                
+        CJK_LANGUAGES.add("KO");                                                
     }
 }

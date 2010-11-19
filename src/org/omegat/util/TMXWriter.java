@@ -66,33 +66,33 @@ public class TMXWriter {
             segmenting = TMXReader.SEG_PARAGRAPH;
 
         FileOutputStream fos = new FileOutputStream(filename);
-        OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); // NOI18N
+        OutputStreamWriter osw = new OutputStreamWriter(fos, "UTF-8"); 
         PrintWriter out = new PrintWriter(osw); // PW is easier to use than Buff.Writer
 
         String version = OStrings.VERSION;
-        if (!OStrings.UPDATE.equals("0")) // NOI18N
+        if (!OStrings.UPDATE.equals("0")) 
             version = version + "_" + OStrings.UPDATE;
         // Write TMX header
-        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"); // NOI18N
+        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>"); 
         if (levelTwo)
-            out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">"); // NOI18N
+            out.println("<!DOCTYPE tmx SYSTEM \"tmx14.dtd\">"); 
         else
-            out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">"); // NOI18N
+            out.println("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">"); 
         if (levelTwo)
-            out.println("<tmx version=\"1.4\">"); // NOI18N
+            out.println("<tmx version=\"1.4\">"); 
         else
-            out.println("<tmx version=\"1.1\">"); // NOI18N
-        out.println("  <header"); // NOI18N
-        out.println("    creationtool=\"OmegaT\""); // NOI18N
-        out.println("    creationtoolversion=\"" + version + "\""); // NOI18N
-        out.println("    segtype=\"" + segmenting + "\""); // NOI18N
-        out.println("    o-tmf=\"OmegaT TMX\""); // NOI18N
-        out.println("    adminlang=\"EN-US\""); // NOI18N
-        out.println("    srclang=\"" + sourceLocale + "\""); // NOI18N
-        out.println("    datatype=\"plaintext\""); // NOI18N
-        out.println("  >"); // NOI18N
-        out.println("  </header>"); // NOI18N
-        out.println("  <body>"); // NOI18N
+            out.println("<tmx version=\"1.1\">"); 
+        out.println("  <header"); 
+        out.println("    creationtool=\"OmegaT\""); 
+        out.println("    creationtoolversion=\"" + version + "\""); 
+        out.println("    segtype=\"" + segmenting + "\""); 
+        out.println("    o-tmf=\"OmegaT TMX\""); 
+        out.println("    adminlang=\"EN-US\""); 
+        out.println("    srclang=\"" + sourceLocale + "\""); 
+        out.println("    datatype=\"plaintext\""); 
+        out.println("  >"); 
+        out.println("  </header>"); 
+        out.println("  <body>"); 
 
         // Determine language attribute to use
         String langAttr = levelTwo ? "xml:lang" : "lang";
@@ -128,8 +128,8 @@ public class TMXWriter {
         }
 
         // Write TMX footer
-        out.println("  </body>"); // NOI18N
-        out.println("</tmx>"); // NOI18N
+        out.println("  </body>"); 
+        out.println("</tmx>"); 
 
         // Close output stream
         out.close();

@@ -210,7 +210,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         }
         else
             filename = inFile.getAbsolutePath();
-        throw new SAXException("\n"+StaticUtils.format(e.getMessage()+"\n" +       // NOI18N
+        throw new SAXException("\n"+StaticUtils.format(e.getMessage()+"\n" +       
                 OStrings.getString("XML_FATAL_ERROR"),
                 new Object[] {filename, new Integer(linenum)}));
     }
@@ -232,8 +232,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
         this.mainWriter = translator.createWriter(outFile, outEncoding);
     }
 
-    private static final String START_JARSCHEMA = "jar:";                       // NOI18N
-    private static final String START_FILESCHEMA = "file:";                     // NOI18N
+    private static final String START_JARSCHEMA = "jar:";                       
+    private static final String START_FILESCHEMA = "file:";                     
 
     //////////////////////////////////////////////////////////////////////////
     // Utility methods
@@ -374,7 +374,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
                         File extFile = new File(outFile.getParentFile(), localizeSystemId(systemId));
                         processedFiles.add(new File(inFile.getParent(), localizeSystemId(systemId)));
                         extWriter = translator.createWriter(extFile, outEncoding);
-                        extWriter.write("<?xml version=\"1.0\"?>\n");           // NOI18N
+                        extWriter.write("<?xml version=\"1.0\"?>\n");           
                     }
                 }
                 return entity;
@@ -820,7 +820,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler
     {
         try
         {
-            mainWriter.write("<?xml version=\"1.0\"?>\n");                      // NOI18N
+            mainWriter.write("<?xml version=\"1.0\"?>\n");                      
         }
         catch (IOException e)
         {

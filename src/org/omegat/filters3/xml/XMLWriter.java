@@ -70,9 +70,9 @@ public class XMLWriter extends Writer
         throws FileNotFoundException, UnsupportedEncodingException
     {
         if (encoding==null)
-            XML_HEADER = "<?xml version=\"1.0\"?>";                             // NOI18N
+            XML_HEADER = "<?xml version=\"1.0\"?>";                             
         else
-            XML_HEADER = "<?xml version=\"1.0\" encoding=\""+encoding+"\"?>";   // NOI18N
+            XML_HEADER = "<?xml version=\"1.0\" encoding=\""+encoding+"\"?>";   
         
         writer = new StringWriter();
         FileOutputStream fos = new FileOutputStream(file);
@@ -139,8 +139,8 @@ public class XMLWriter extends Writer
             }
             else
             {
-                Log.log("Shouldn't happen! " +                                  // NOI18N
-                        "XMLWriter: XML File does not contain XML header:\n" +  // NOI18N
+                Log.log("Shouldn't happen! " +                                  
+                        "XMLWriter: XML File does not contain XML header:\n" +  
                         buffer.substring(0, Math.min(buffer.length(), 80))); 
                 realWriter.write(XML_HEADER);
                 contents = buffer.toString();

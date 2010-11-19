@@ -47,7 +47,7 @@ import org.xml.sax.InputSource;
 public class XHTMLDialect extends DefaultXMLDialect
 {
     private static final Pattern XHTML_PUBLIC_DTD =
-            Pattern.compile("-//W3C//DTD XHTML.*");                             // NOI18N
+            Pattern.compile("-//W3C//DTD XHTML.*");                             
 
     public XHTMLDialect()
     {
@@ -55,10 +55,10 @@ public class XHTMLDialect extends DefaultXMLDialect
     }
 
     private static final Pattern PUBLIC_XHTML =
-            Pattern.compile("-//W3C//DTD\\s+XHTML.+");                          // NOI18N
+            Pattern.compile("-//W3C//DTD\\s+XHTML.+");                          
 
     private static final String DTD =
-            "/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd";               // NOI18N
+            "/org/omegat/filters3/xml/xhtml/res/xhtml2-flat.dtd";               
 
     private Boolean translateValue = false;
     private Boolean translateButtonValue = false;
@@ -95,56 +95,56 @@ public class XHTMLDialect extends DefaultXMLDialect
     {
         defineParagraphTags(new String[]
         {
-            "html", "head", "title", "body",                                    // NOI18N
-            "address", "blockquote", "center", "div",                           // NOI18N
-            "h1", "h2", "h3", "h4", "h5",                                       // NOI18N
-            "table", "th", "tr", "td",                                          // NOI18N
-            "p",                                                                // NOI18N
-            "ol", "ul", "li",                                                   // NOI18N
-            "dl", "dt", "dd",                                                   // NOI18N
-            "form", "textarea", "fieldset", "legend", "label",                  // NOI18N
-            "select", "option", "hr"                                            // NOI18N
+            "html", "head", "title", "body",                                    
+            "address", "blockquote", "center", "div",                           
+            "h1", "h2", "h3", "h4", "h5",                                       
+            "table", "th", "tr", "td",                                          
+            "p",                                                                
+            "ol", "ul", "li",                                                   
+            "dl", "dt", "dd",                                                   
+            "form", "textarea", "fieldset", "legend", "label",                  
+            "select", "option", "hr"                                            
         });
         // Optional paragraph on BR
         if (options.getParagraphOnBr())
-            defineParagraphTag("br");                                           // NOI18N
+            defineParagraphTag("br");                                           
 
-        defineShortcut("br", "br");                                             // NOI18N
+        defineShortcut("br", "br");                                             
 
         definePreformatTags(new String[]
         {
-            "textarea",                                                         // NOI18N
-            "pre",                                                              // NOI18N
+            "textarea",                                                         
+            "pre",                                                              
         });
 
         defineIntactTags(new String[]
         {
-            "style", "script", "object", "embed",                               // NOI18N
+            "style", "script", "object", "embed",                               
         });
 
         defineTranslatableAttributes(new String[]{
-            "abbr",                                                             // NOI18N
-            "alt",                                                              // NOI18N
-            "content",                                                          // NOI18N
-            "summary",                                                          // NOI18N
-            "title",                                                            // NOI18N
+            "abbr",                                                             
+            "alt",                                                              
+            "content",                                                          
+            "summary",                                                          
+            "title",                                                            
         });
 
         if (options.getTranslateHref())
-            defineTranslatableAttribute("href");                                // NOI18N
+            defineTranslatableAttribute("href");                                
         if (options.getTranslateSrc())
-            defineTranslatableTagAttribute("img", "src");                       // NOI18N
+            defineTranslatableTagAttribute("img", "src");                       
         if (options.getTranslateLang())
             defineTranslatableAttributes(new String[]{
-                "lang",                                                         // NOI18N
-                "xml:lang",                                                     // NOI18N
+                "lang",                                                         
+                "xml:lang",                                                     
             });
         if (options.getTranslateHreflang())
-            defineTranslatableAttribute("hreflang");                            // NOI18N
+            defineTranslatableAttribute("hreflang");                            
         if ( (this.translateValue = options.getTranslateValue())
            ||(this.translateButtonValue = options.getTranslateButtonValue())
            )
-            defineTranslatableTagAttribute("input", "value");                   // NOI18N
+            defineTranslatableTagAttribute("input", "value");                   
 
         //Prepare matcher
         String skipRegExp = options.getSkipRegExp();

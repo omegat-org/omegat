@@ -71,7 +71,7 @@ public class FolderScanner
                     String name = fullname.substring(0, fullname.lastIndexOf('.'));
                     String ext  = fullname.substring(fullname.lastIndexOf('.')+1);
                     
-                    return name.indexOf('_')<0 && ext.equalsIgnoreCase("properties");       // NOI18N
+                    return name.indexOf('_')<0 && ext.equalsIgnoreCase("properties");       
                 }
                 else
                     return false;

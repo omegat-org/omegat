@@ -48,14 +48,14 @@ public class XMLTag extends Tag
     {
         StringBuffer buf = new StringBuffer();
         
-        buf.append("<");                                                        // NOI18N
+        buf.append("<");                                                        
         if (TYPE_END == getType())
-            buf.append("/");                                                    // NOI18N
+            buf.append("/");                                                    
         buf.append(getTag());
         buf.append(getAttributes().toString());
         if (TYPE_ALONE == getType())
-            buf.append("/");                                                    // NOI18N
-        buf.append(">");                                                        // NOI18N
+            buf.append("/");                                                    
+        buf.append(">");                                                        
         
         return buf.toString();
     }

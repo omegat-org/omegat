@@ -59,16 +59,16 @@ public class XMLOutOfTurnTag extends OutOfTurnTag
     {
         StringBuffer buf = new StringBuffer();
         
-        buf.append("<");                                                        // NOI18N
+        buf.append("<");                                                        
         buf.append(getTag());
         buf.append(getAttributes().toString());
-        buf.append(">");                                                        // NOI18N
+        buf.append(">");                                                        
         
         buf.append(getEntry().translationToOriginal());
 
-        buf.append("</");                                                       // NOI18N
+        buf.append("</");                                                       
         buf.append(getTag());
-        buf.append(">");                                                        // NOI18N
+        buf.append(">");                                                        
         
         return buf.toString();
     }

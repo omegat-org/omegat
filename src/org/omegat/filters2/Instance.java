@@ -169,7 +169,7 @@ public class Instance implements Serializable
      */
     public Instance()
     {
-        init("*.*", null, null, AbstractFilter.TARGET_DEFAULT);  // NOI18N
+        init("*.*", null, null, AbstractFilter.TARGET_DEFAULT);  
     }
 
 }

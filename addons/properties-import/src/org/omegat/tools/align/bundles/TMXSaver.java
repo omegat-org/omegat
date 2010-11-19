@@ -58,40 +58,40 @@ public class TMXSaver
     {
         StringBuffer buffer = new StringBuffer();
         
-        buffer.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>   \n");       // NOI18N
-        buffer.append("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">          \n");       // NOI18N
-        buffer.append("<tmx version=\"1.1\">                        \n");       // NOI18N
-        buffer.append("  <header                                    \n");       // NOI18N
-        buffer.append("    creationtool=\"OTimp\"                   \n");       // NOI18N
-        buffer.append("    creationtoolversion=\"1.3\"              \n");       // NOI18N
-        buffer.append("    segtype=\"paragraph\"                    \n");       // NOI18N
-        buffer.append("    o-tmf=\"OmegaT TMX\"                     \n");       // NOI18N
-        buffer.append("    adminlang=\"EN-US\"                      \n");       // NOI18N
-        buffer.append("    srclang=\"EN-US\"                        \n");       // NOI18N
-        buffer.append("    datatype=\"plaintext\"                   \n");       // NOI18N
-        buffer.append("  >                                          \n");       // NOI18N
-        buffer.append("  </header>                                  \n");       // NOI18N
-        buffer.append("  <body>                                     \n");       // NOI18N
+        buffer.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>   \n");       
+        buffer.append("<!DOCTYPE tmx SYSTEM \"tmx11.dtd\">          \n");       
+        buffer.append("<tmx version=\"1.1\">                        \n");       
+        buffer.append("  <header                                    \n");       
+        buffer.append("    creationtool=\"OTimp\"                   \n");       
+        buffer.append("    creationtoolversion=\"1.3\"              \n");       
+        buffer.append("    segtype=\"paragraph\"                    \n");       
+        buffer.append("    o-tmf=\"OmegaT TMX\"                     \n");       
+        buffer.append("    adminlang=\"EN-US\"                      \n");       
+        buffer.append("    srclang=\"EN-US\"                        \n");       
+        buffer.append("    datatype=\"plaintext\"                   \n");       
+        buffer.append("  >                                          \n");       
+        buffer.append("  </header>                                  \n");       
+        buffer.append("  <body>                                     \n");       
         
         Object keys[] = map.keySet().toArray();
         for(int i=0; i<keys.length; i++)
         {
             String key = replaceSpecialChars((String) keys[i]);
             String value = replaceSpecialChars((String) map.get(keys[i]));
-            buffer.append("    <tu>                                 \n");       // NOI18N
-            buffer.append("      <tuv lang=\""+sourcelang+"\">      \n");       // NOI18N
-            buffer.append("        <seg>"+key+"</seg>               \n");       // NOI18N
-            buffer.append("      </tuv>                             \n");       // NOI18N
-            buffer.append("      <tuv lang=\""+targetlang+"\">      \n");       // NOI18N
-            buffer.append("        <seg>"+value+"</seg>             \n");       // NOI18N
-            buffer.append("      </tuv>                             \n");       // NOI18N
-            buffer.append("    </tu>                                \n");       // NOI18N
+            buffer.append("    <tu>                                 \n");       
+            buffer.append("      <tuv lang=\""+sourcelang+"\">      \n");       
+            buffer.append("        <seg>"+key+"</seg>               \n");       
+            buffer.append("      </tuv>                             \n");       
+            buffer.append("      <tuv lang=\""+targetlang+"\">      \n");       
+            buffer.append("        <seg>"+value+"</seg>             \n");       
+            buffer.append("      </tuv>                             \n");       
+            buffer.append("    </tu>                                \n");       
         }
         
-        buffer.append("  </body>                                   \n");        // NOI18N
-        buffer.append("</tmx>                                      \n");        // NOI18N
+        buffer.append("  </body>                                   \n");        
+        buffer.append("</tmx>                                      \n");        
         
-        Writer writer = new OutputStreamWriter(new FileOutputStream(tmxfile), "UTF-8");       // NOI18N
+        Writer writer = new OutputStreamWriter(new FileOutputStream(tmxfile), "UTF-8");       
         writer.write(buffer.toString());
         writer.close();
     }
@@ -99,10 +99,10 @@ public class TMXSaver
     public String replaceSpecialChars(String s)
     {
         String st = s;
-        st = st.replaceAll("&", "&amp;");                                       // NOI18N
-        st = st.replaceAll("<", "&lt;");                                        // NOI18N
-        st = st.replaceAll(">", "&gt;");                                        // NOI18N
-        st = st.replaceAll("\"", "&quot;");                                     // NOI18N
+        st = st.replaceAll("&", "&amp;");                                       
+        st = st.replaceAll("<", "&lt;");                                        
+        st = st.replaceAll(">", "&gt;");                                        
+        st = st.replaceAll("\"", "&quot;");                                     
         return st;
     }
 }

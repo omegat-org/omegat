@@ -49,7 +49,7 @@ public class SentSeg extends javax.swing.JFrame
         try
         {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            System.setProperty("apple.laf.useScreenMenuBar", "true");           // NOI18N
+            System.setProperty("apple.laf.useScreenMenuBar", "true");           
         }
         catch (Exception e)
         {
@@ -83,9 +83,9 @@ public class SentSeg extends javax.swing.JFrame
         {
             String tmx = tmxTextField.getText();
             String tmxl = tmx.toLowerCase();
-            if( tmxl.endsWith(".tmx") )                                         // NOI18N
+            if( tmxl.endsWith(".tmx") )                                         
                 tmx = tmx.substring(0, tmx.length()-4);
-            String saved = tmx + "_SentSeg.tmx";                                // NOI18N
+            String saved = tmx + "_SentSeg.tmx";                                
             saveTmxTextField.setText(saved);
             targetChanged = false;
         }

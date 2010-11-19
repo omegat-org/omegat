@@ -57,17 +57,17 @@ public class XMLIntactTag extends Tag
     {
         StringBuffer buf = new StringBuffer();
         
-        buf.append("<");                                                        // NOI18N
+        buf.append("<");                                                        
         buf.append(getTag());
         buf.append(getAttributes().toString());
-        buf.append(">");                                                        // NOI18N
+        buf.append(">");                                                        
         
         buf.append(intactContents.sourceToOriginal());
         
-        buf.append("<");                                                        // NOI18N
-        buf.append("/");                                                        // NOI18N
+        buf.append("<");                                                        
+        buf.append("/");                                                        
         buf.append(getTag());
-        buf.append(">");                                                        // NOI18N
+        buf.append(">");                                                        
         
         return buf.toString();
     }

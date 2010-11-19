@@ -114,24 +114,24 @@ public class Entity
     public String toString()
     {
         StringBuffer res = new StringBuffer();
-        res.append("<!ENTITY");                                                 // NOI18N
+        res.append("<!ENTITY");                                                 
         if (parameter)
-            res.append(" %");                                                   // NOI18N
-        res.append(" ");                                                        // NOI18N
+            res.append(" %");                                                   
+        res.append(" ");                                                        
         res.append(name);
         if (internal)
         {
             // <!ENTITY % name "value">
-            res.append(" \""+value+"\"");                                       // NOI18N
+            res.append(" \""+value+"\"");                                       
         }
         else
         {
             // <!ENTITY gloss SYSTEM "gloss.xml">
             if (publicId!=null)
-                res.append(" PUBLIC \""+publicId+"\"");                         // NOI18N
-            res.append(" SYSTEM \""+systemId+"\"");                             // NOI18N
+                res.append(" PUBLIC \""+publicId+"\"");                         
+            res.append(" SYSTEM \""+systemId+"\"");                             
         }
-        res.append(">");                                                        // NOI18N
+        res.append(">");                                                        
         return res.toString();
     }
 

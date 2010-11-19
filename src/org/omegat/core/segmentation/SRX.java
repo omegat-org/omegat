@@ -63,7 +63,7 @@ public class SRX implements Serializable, Cloneable
 {
     
     private static SRX srx = null;
-    private static final String CONF_SENTSEG = "segmentation.conf";             // NOI18N
+    private static final String CONF_SENTSEG = "segmentation.conf";             
     private static final File configFile=new File(
             StaticUtils.getConfigDir()+CONF_SENTSEG);
     
@@ -174,9 +174,9 @@ public class SRX implements Serializable, Cloneable
                 StringBuffer sb = new StringBuffer();
                 for(Exception ex : myel.getExceptionsList())
                 {
-                    sb.append("    ");                                          // NOI18N
+                    sb.append("    ");                                          
                     sb.append(ex);
-                    sb.append("\n");                                            // NOI18N
+                    sb.append("\n");                                            
                 }
                 Log.logErrorRB(
                     "CORE_SRX_EXC_LOADING_SEG_RULES",
@@ -294,7 +294,7 @@ public class SRX implements Serializable, Cloneable
         // and removing English/Text/HTML-specific rules from there
         if( OT160RC9_VERSION.equals(CURRENT_VERSION) )
         {
-            String DEF = "Default (English)";                                   // NOI18N
+            String DEF = "Default (English)";                                   
             for(int i=0; i<current.getMappingRules().size(); i++)
             {
                 MapRule maprule = current.getMappingRules().get(i);
@@ -359,7 +359,7 @@ public class SRX implements Serializable, Cloneable
     }
 
     // Patterns
-    private static final String DEFAULT_RULES_PATTERN = ".*";                   // NOI18N
+    private static final String DEFAULT_RULES_PATTERN = ".*";                   
     
     /**
      * Initializes default rules.
@@ -542,11 +542,11 @@ public class SRX implements Serializable, Cloneable
     // and possibly do something if required
     
     /** Initial version of segmentation support (1.4.6 beta 4 -- 1.6.0 RC7). */
-    public static String INITIAL_VERSION = "0.2";                               // NOI18N
+    public static String INITIAL_VERSION = "0.2";                               
     /** Segmentation support of 1.6.0 RC8 (a bit more rules added). */
-    public static String OT160RC8_VERSION = "0.2.1";                            // NOI18N
+    public static String OT160RC8_VERSION = "0.2.1";                            
     /** Segmentation support of 1.6.0 RC9 (rules separated). */
-    public static String OT160RC9_VERSION = "0.2.2";                            // NOI18N
+    public static String OT160RC9_VERSION = "0.2.2";                            
     /** Currently supported segmentation support version. */
     public static String CURRENT_VERSION = OT160RC9_VERSION;
     

@@ -64,8 +64,8 @@ public class InstanceEditor extends JDialog
         this.targetEncodingField.setEnabled(targetEncodingVariable);
         ((TitledBorder)tfnpPanel.getBorder()).setTitle(OStrings.getString("INSTANCEEDITOR_Target_Filename_Pattern"));
         
-        sourceFilenameMaskField.setText("*.*");                                 // NOI18N
-        targetFilenamePatternField.setText("${filename}");                      // NOI18N
+        sourceFilenameMaskField.setText("*.*");                                 
+        targetFilenamePatternField.setText("${filename}");                      
         
         if( hint!=null && hint.length()!=0 )
             hintTextArea.setText(hint);
@@ -83,8 +83,8 @@ public class InstanceEditor extends JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
         // END HP
         
         pack();

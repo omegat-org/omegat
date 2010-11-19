@@ -70,16 +70,16 @@ public class OStrings
             in.close();
         }
         catch (FileNotFoundException exception) {
-            System.err.println("Resource bundle file not found: " + filename); // NOI18N
+            System.err.println("Resource bundle file not found: " + filename); 
         }
         catch (IOException exception) {
-            System.err.println("Error while reading resource bundle file: " + filename); // NOI18N
+            System.err.println("Error while reading resource bundle file: " + filename); 
         }
 
         // Check if the resource bundle has been successfully
         // loaded, and if not, revert to the default
         if (!loaded) {
-            System.err.println("Reverting to resource bundle for the default locale"); // NOI18N
+            System.err.println("Reverting to resource bundle for the default locale"); 
             bundle = ResourceBundle.getBundle("org/omegat/Bundle");
         }
     }
@@ -90,8 +90,8 @@ public class OStrings
         return bundle.getString(key);
     }
 
-    private static String __VERSION_KEY = "version";                            // NOI18N
-    private static String __UPDATE_KEY  = "update";                             // NOI18N
+    private static String __VERSION_KEY = "version";                            
+    private static String __UPDATE_KEY  = "update";                             
 
     /** Just a version, e.g. "1.6" */
     public static final String VERSION =

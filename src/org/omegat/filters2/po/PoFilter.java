@@ -80,8 +80,8 @@ public class PoFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.po"), // NOI18N
-                new Instance("*.pot") // NOI18N
+        return new Instance[] { new Instance("*.po"), 
+                new Instance("*.pot") 
         };
     }
 

@@ -135,7 +135,7 @@ public class SegmentationRulesModel extends AbstractTableModel
     public int addRow()
     {
         int rows = rules.size();
-        rules.add(new Rule(false, "\\.", "\\s"));                               // NOI18N
+        rules.add(new Rule(false, "\\.", "\\s"));                               
         fireTableRowsInserted(rows, rows);
         return rows;
     }

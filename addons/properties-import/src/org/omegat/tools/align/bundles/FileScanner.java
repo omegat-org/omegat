@@ -50,7 +50,7 @@ public class FileScanner
     public void scan() throws IOException
     {
         String name = filename.substring(0, filename.lastIndexOf('.'));
-        String locfilename = name + '_' + locale + ".properties";       // NOI18N
+        String locfilename = name + '_' + locale + ".properties";       
         ResourceBundle parent = new PropertyResourceBundle(new FileInputStream(filename));
         ResourceBundle bundle;
         try

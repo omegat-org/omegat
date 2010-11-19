@@ -78,12 +78,12 @@ public class SegmentationCustomizer extends JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
         // END HP
     
         initComponents();
-        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background")); // NOI18N
+        hintTextArea.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background")); 
         
         getRootPane().setDefaultButton(okButton);
         
@@ -136,7 +136,7 @@ public class SegmentationCustomizer extends JDialog
         ListSelectionModel lsm = (ListSelectionModel)e.getSource();
         if( e.getSource()==mapTable.getSelectionModel() )
         {
-            mapErrorsLabel.setText("");                                         // NOI18N
+            mapErrorsLabel.setText("");                                         
             if (lsm.isSelectionEmpty())
             {
                 mapDeleteButton.setEnabled(false);
@@ -178,7 +178,7 @@ public class SegmentationCustomizer extends JDialog
         }
         else if( e.getSource()==ruleTable.getSelectionModel() )
         {
-            ruleErrorsLabel.setText("");                                         // NOI18N
+            ruleErrorsLabel.setText("");                                         
             if (lsm.isSelectionEmpty())
             {
                 ruleDeleteButton.setEnabled(false);

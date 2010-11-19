@@ -85,8 +85,8 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
     }
     
     
@@ -140,7 +140,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jLabel6 = new javax.swing.JLabel();
         aggregateTagsCB = new javax.swing.JCheckBox();
 
-        setTitle(OStrings.getString("OpenXML_FILTER_OPTIONS")); // NOI18N
+        setTitle(OStrings.getString("OpenXML_FILTER_OPTIONS")); 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -153,7 +153,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
         buttonPanel.add(jPanel2);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -161,7 +161,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         buttonPanel.add(okButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -174,15 +174,15 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.setMinimumSize(new java.awt.Dimension(167, 121));
         jPanel1.setLayout(new java.awt.GridLayout(0, 1));
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("OpenDoc_TRANSLATE_ELEMENTS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("OpenDoc_TRANSLATE_ELEMENTS")); 
         jPanel1.add(jLabel2);
 
         jLabel3.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("OpenXML_WORD")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel3, OStrings.getString("OpenXML_WORD")); 
         jPanel1.add(jLabel3);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateHiddenTextCB, OStrings.getString("OpenXML_TRANSLATE_HIDDEN_TEXT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateHiddenTextCB, OStrings.getString("OpenXML_TRANSLATE_HIDDEN_TEXT")); 
         translateHiddenTextCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateHiddenTextCBradiosActionPerformed(evt);
@@ -191,7 +191,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateHiddenTextCB);
 
         translateCommentsCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateCommentsCB, OStrings.getString("OpenXML_TRANSLATE_COMMENTS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateCommentsCB, OStrings.getString("OpenXML_TRANSLATE_COMMENTS")); 
         translateCommentsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateCommentsCBradiosActionPerformed(evt);
@@ -200,7 +200,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateCommentsCB);
 
         translateFootnotesCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateFootnotesCB, OStrings.getString("OpenXML_TRANSLATE_FOOTNOTES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateFootnotesCB, OStrings.getString("OpenXML_TRANSLATE_FOOTNOTES")); 
         translateFootnotesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateFootnotesCBradiosActionPerformed(evt);
@@ -209,7 +209,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateFootnotesCB);
 
         translateEndnotesCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateEndnotesCB, OStrings.getString("OpenXML_TRANSLATE_ENDNOTES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateEndnotesCB, OStrings.getString("OpenXML_TRANSLATE_ENDNOTES")); 
         translateEndnotesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateEndnotesCBradiosActionPerformed(evt);
@@ -218,7 +218,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateEndnotesCB);
 
         translateHeadersCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateHeadersCB, OStrings.getString("OpenXML_TRANSLATE_HEADERS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateHeadersCB, OStrings.getString("OpenXML_TRANSLATE_HEADERS")); 
         translateHeadersCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateHeadersCBradiosActionPerformed(evt);
@@ -227,7 +227,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateHeadersCB);
 
         translateFootersCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateFootersCB, OStrings.getString("OpenXML_TRANSLATE_FOOTERS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateFootersCB, OStrings.getString("OpenXML_TRANSLATE_FOOTERS")); 
         translateFootersCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateFootersCBradiosActionPerformed(evt);
@@ -237,11 +237,11 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
 
         jLabel4.setFont(new java.awt.Font("MS Sans Serif", 1, 11));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("OpenXML_EXCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel4, OStrings.getString("OpenXML_EXCEL")); 
         jPanel1.add(jLabel4);
 
         translateExcelCommentsCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateExcelCommentsCB, OStrings.getString("OpenXML_TRANSLATE_EXCEL_COMMENTS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateExcelCommentsCB, OStrings.getString("OpenXML_TRANSLATE_EXCEL_COMMENTS")); 
         translateExcelCommentsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateExcelCommentsCBradiosActionPerformed(evt);
@@ -249,7 +249,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateExcelCommentsCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateSheetNamesCB, OStrings.getString("OpenXML_TRANSLATE_EXCEL_SHEET_NAMES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateSheetNamesCB, OStrings.getString("OpenXML_TRANSLATE_EXCEL_SHEET_NAMES")); 
         translateSheetNamesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateSheetNamesCBradiosActionPerformed(evt);
@@ -257,13 +257,13 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateSheetNamesCB);
 
-        jLabel5.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, OStrings.getString("OpenXML_POWER_POINT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel5, OStrings.getString("OpenXML_POWER_POINT")); 
         jPanel1.add(jLabel5);
 
         translateSlideCommentsCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateSlideCommentsCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_COMMENTS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateSlideCommentsCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_COMMENTS")); 
         translateSlideCommentsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateSlideCommentsCBradiosActionPerformed(evt);
@@ -271,21 +271,21 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateSlideCommentsCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateSlideMastersCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_MASTERS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateSlideMastersCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_MASTERS")); 
         jPanel1.add(translateSlideMastersCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateSlideLayoutsCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LAYOUTS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateSlideLayoutsCB, OStrings.getString("OpenXML_TRANSLATE_SLIDE_LAYOUTS")); 
         jPanel1.add(translateSlideLayoutsCB);
 
-        jLabel7.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); // NOI18N
+        jLabel7.setFont(new java.awt.Font("MS Sans Serif", 1, 11)); 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, OStrings.getString("OpenXML_GLOBAL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel7, OStrings.getString("OpenXML_GLOBAL")); 
         jPanel1.add(jLabel7);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateChartsCB, OStrings.getString("OpenXML_TRANSLATE_CHARTS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateChartsCB, OStrings.getString("OpenXML_TRANSLATE_CHARTS")); 
         jPanel1.add(translateChartsCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateDiagramsCB, OStrings.getString("OpenXML_TRANSLATE_DIAGRAMS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateDiagramsCB, OStrings.getString("OpenXML_TRANSLATE_DIAGRAMS")); 
         translateDiagramsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateDiagramsCBradiosActionPerformed(evt);
@@ -293,7 +293,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateDiagramsCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateDrawingsCB, OStrings.getString("OpenXML_TRANSLATE_DRAWINGS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateDrawingsCB, OStrings.getString("OpenXML_TRANSLATE_DRAWINGS")); 
         translateDrawingsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateDrawingsCBradiosActionPerformed(evt);
@@ -305,10 +305,10 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog
         jLabel1.setEnabled(false);
         jPanel1.add(jLabel1);
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, OStrings.getString("OpenXML_GENERIC_OPTIONS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel6, OStrings.getString("OpenXML_GENERIC_OPTIONS")); 
         jPanel1.add(jLabel6);
 
-        org.openide.awt.Mnemonics.setLocalizedText(aggregateTagsCB, OStrings.getString("OpenXML_AGGREGATE_TAGS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(aggregateTagsCB, OStrings.getString("OpenXML_AGGREGATE_TAGS")); 
         aggregateTagsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aggregateTagsCBActionPerformed(evt);

@@ -47,7 +47,7 @@ public class LanguageComboBoxRenderer extends BasicComboBoxRenderer
     {
         JLabel label = (JLabel)super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
         Language lang = (Language)value;
-        label.setText(lang + " - " + lang.getDisplayName()); // NOI18N
+        label.setText(lang + " - " + lang.getDisplayName()); 
         return label;
     }
 }

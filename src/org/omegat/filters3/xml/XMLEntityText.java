@@ -50,7 +50,7 @@ public class XMLEntityText extends Text
      */
     public String toOriginal() 
     {
-        return "&"+entity.getName()+";";                                        // NOI18N
+        return "&"+entity.getName()+";";                                        
     }
 
     /**

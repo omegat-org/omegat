@@ -75,8 +75,8 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
     }
     
     
@@ -116,7 +116,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         translateLinksCB = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
 
-        setTitle(OStrings.getString("OpenDoc_FILTER_OPTIONS")); // NOI18N
+        setTitle(OStrings.getString("OpenDoc_FILTER_OPTIONS")); 
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -128,7 +128,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         buttonPanel.setMinimumSize(new java.awt.Dimension(143, 33));
         buttonPanel.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.RIGHT));
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -136,7 +136,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         });
         buttonPanel.add(okButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); 
         cancelButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cancelButtonActionPerformed(evt);
@@ -150,12 +150,12 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         jPanel1.setMinimumSize(new java.awt.Dimension(167, 121));
         jPanel1.setLayout(new java.awt.GridLayout(0, 1));
 
-        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, bundle.getString("OpenDoc_TRANSLATE_ELEMENTS")); // NOI18N
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("org/omegat/Bundle"); 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, bundle.getString("OpenDoc_TRANSLATE_ELEMENTS")); 
         jPanel1.add(jLabel2);
 
         translateIndexesCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateIndexesCB, bundle.getString("OpenDoc_TRANSLATE_INDEXES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateIndexesCB, bundle.getString("OpenDoc_TRANSLATE_INDEXES")); 
         translateIndexesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateIndexesCBradiosActionPerformed(evt);
@@ -163,7 +163,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translateIndexesCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateBookmarksCB, bundle.getString("OpenDoc_TRANSLATE_BOOKMARKS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateBookmarksCB, bundle.getString("OpenDoc_TRANSLATE_BOOKMARKS")); 
         translateBookmarksCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateBookmarksCBradiosActionPerformed(evt);
@@ -172,7 +172,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateBookmarksCB);
 
         translateBookmarkRefsCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateBookmarkRefsCB, bundle.getString("OpenDoc_TRANSLATE_BOOKMARKREFS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateBookmarkRefsCB, bundle.getString("OpenDoc_TRANSLATE_BOOKMARKREFS")); 
         translateBookmarkRefsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateBookmarkRefsCBradiosActionPerformed(evt);
@@ -181,7 +181,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateBookmarkRefsCB);
 
         translateNotesCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateNotesCB, bundle.getString("OpenDoc_TRANSLATE_NOTES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateNotesCB, bundle.getString("OpenDoc_TRANSLATE_NOTES")); 
         translateNotesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateNotesCBradiosActionPerformed(evt);
@@ -190,7 +190,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateNotesCB);
 
         translateCommentsCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translateCommentsCB, bundle.getString("OpenDoc_TRANSLATE_COMMENTS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateCommentsCB, bundle.getString("OpenDoc_TRANSLATE_COMMENTS")); 
         translateCommentsCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translateCommentsCBradiosActionPerformed(evt);
@@ -199,7 +199,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         jPanel1.add(translateCommentsCB);
 
         translatePresNotesCB.setSelected(true);
-        org.openide.awt.Mnemonics.setLocalizedText(translatePresNotesCB, bundle.getString("OpenDoc_TRANSLATE_PRES_NOTES")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translatePresNotesCB, bundle.getString("OpenDoc_TRANSLATE_PRES_NOTES")); 
         translatePresNotesCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 translatePresNotesCBradiosActionPerformed(evt);
@@ -207,7 +207,7 @@ public class EditOpenDocOptionsDialog extends javax.swing.JDialog
         });
         jPanel1.add(translatePresNotesCB);
 
-        org.openide.awt.Mnemonics.setLocalizedText(translateLinksCB, OStrings.getString("OpenDoc_TRANSLATE_LINKS")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(translateLinksCB, OStrings.getString("OpenDoc_TRANSLATE_LINKS")); 
         jPanel1.add(translateLinksCB);
 
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "                                                                       ");

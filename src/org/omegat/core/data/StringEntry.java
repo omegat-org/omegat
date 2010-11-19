@@ -40,7 +40,7 @@ public class StringEntry
     public StringEntry(String srcText)
     {
         m_srcText = srcText;
-        m_translation = "";                                                     // NOI18N
+        m_translation = "";                                                     
     }
     
     /** Returns the source string */
@@ -72,7 +72,7 @@ public class StringEntry
     public void setTranslation(String trans)
     {
         if( trans==null )
-            trans = "";                                                         // NOI18N
+            trans = "";                                                         
         
         m_translation = trans;
     }

@@ -66,8 +66,8 @@ public class AboutDialog extends JDialog
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).
-        put(escape, "ESCAPE");                                                  // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction);               // NOI18N
+        put(escape, "ESCAPE");                                                  
+        getRootPane().getActionMap().put("ESCAPE", escapeAction);               
         // END HP
 
         initComponents();
@@ -82,7 +82,7 @@ public class AboutDialog extends JDialog
         }
         Object[] args = {Runtime.getRuntime().totalMemory()/1024/1024, Runtime.getRuntime().freeMemory()/1024/1024, Runtime.getRuntime().maxMemory()/1024/1024};
         String memoryUsage = StaticUtils.format(OStrings.getString("MEMORY_USAGE"), args);
-        memoryusage.setText(memoryUsage); // NOI18N
+        memoryusage.setText(memoryUsage); 
 
         invalidate();
         pack();
@@ -111,7 +111,7 @@ public class AboutDialog extends JDialog
         versionLabel = new javax.swing.JLabel();
         abouttext = new javax.swing.JTextArea();
 
-        setTitle(OStrings.getString("ABOUTDIALOG_TITLE")); // NOI18N
+        setTitle(OStrings.getString("ABOUTDIALOG_TITLE")); 
         setModal(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -124,11 +124,11 @@ public class AboutDialog extends JDialog
         buttonPanel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         buttonPanel.setLayout(new java.awt.BorderLayout());
 
-        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("ABOUTDIALOG_COPYRIGHT")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(jLabel2, OStrings.getString("ABOUTDIALOG_COPYRIGHT")); 
         jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         buttonPanel.add(jLabel2, java.awt.BorderLayout.WEST);
 
-        org.openide.awt.Mnemonics.setLocalizedText(licenseButton, OStrings.getString("ABOUTDIALOG_LICENSE_BUTTON")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(licenseButton, OStrings.getString("ABOUTDIALOG_LICENSE_BUTTON")); 
         licenseButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 licenseButtonActionPerformed(evt);
@@ -136,7 +136,7 @@ public class AboutDialog extends JDialog
         });
         jPanel1.add(licenseButton);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); 
         okButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 okButtonActionPerformed(evt);
@@ -146,13 +146,13 @@ public class AboutDialog extends JDialog
 
         buttonPanel.add(jPanel1, java.awt.BorderLayout.EAST);
 
-        org.openide.awt.Mnemonics.setLocalizedText(memoryusage, OStrings.getString("MEMORY_USAGE")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(memoryusage, OStrings.getString("MEMORY_USAGE")); 
         buttonPanel.add(memoryusage, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(buttonPanel, java.awt.BorderLayout.SOUTH);
 
-        versionLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/omegat/gui/resources/OmegaT.gif"))); // NOI18N
-        org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION")); // NOI18N
+        versionLabel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/org/omegat/gui/resources/OmegaT.gif"))); 
+        org.openide.awt.Mnemonics.setLocalizedText(versionLabel, OStrings.getString("ABOUTDIALOG_VERSION")); 
         versionLabel.setBorder(javax.swing.BorderFactory.createEmptyBorder(5, 5, 5, 5));
         getContentPane().add(versionLabel, java.awt.BorderLayout.NORTH);
 
@@ -160,7 +160,7 @@ public class AboutDialog extends JDialog
         abouttext.setEditable(false);
         abouttext.setFont(versionLabel.getFont());
         abouttext.setLineWrap(true);
-        abouttext.setText(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS")); // NOI18N
+        abouttext.setText(OStrings.getString("ABOUTDIALOG_CONTRIBUTORS")); 
         abouttext.setWrapStyleWord(true);
         abouttext.setBorder(javax.swing.BorderFactory.createEmptyBorder(3, 3, 3, 3));
         getContentPane().add(abouttext, java.awt.BorderLayout.CENTER);

@@ -195,8 +195,8 @@ public class ProjectFrame extends JFrame {
             }
         };
         getRootPane().getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(
-                escape, "ESCAPE"); // NOI18N
-        getRootPane().getActionMap().put("ESCAPE", escapeAction); // NOI18N
+                escape, "ESCAPE"); 
+        getRootPane().getActionMap().put("ESCAPE", escapeAction); 
 
         Mnemonics.setLocalizedText(m_closeButton, OStrings
                 .getString("BUTTON_CLOSE"));
@@ -219,7 +219,7 @@ public class ProjectFrame extends JFrame {
         bbut.add(Box.createHorizontalGlue());
         bbut.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0));
         gbc.gridy = 6;
-        cp.add(bbut, gbc); // NOI18N
+        cp.add(bbut, gbc); 
 
         // Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         // setBounds((screenSize.width-600)/2, (screenSize.height-500)/2, 600,

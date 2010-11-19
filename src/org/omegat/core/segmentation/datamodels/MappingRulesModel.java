@@ -124,7 +124,7 @@ public class MappingRulesModel extends AbstractTableModel
         int rows = srx.getMappingRules().size();
         srx.getMappingRules().add(new MapRule(
                 OStrings.getString("SEG_NEW_LN_CO"),
-                "LN-CO",                                                        // NOI18N
+                "LN-CO",                                                        
                 new ArrayList<Rule>()));
         fireTableRowsInserted(rows, rows);
         return rows;

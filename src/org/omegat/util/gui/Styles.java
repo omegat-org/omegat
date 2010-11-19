@@ -42,7 +42,7 @@ public final class Styles {
     public static final Color COLOR_UNTRANSLATED = new Color(0xCC, 0xCC, 0xFF);
     public static final Color COLOR_TRANSLATED = new Color(255, 255, 153);
 
-    public static final Color COLOR_LIGHT_GRAY = new Color(0, 128, 0);
+    public static final Color COLOR_LIGHT_GRAY = new Color(128, 128, 128);
 
     /**
      * Construct required attributes set.

@@ -637,7 +637,7 @@ public class RealProject implements IProject
             }
         }
         
-        calculateEntriesCounts();
+        findNonUniqueSegments();
         
         Core.getMainWindow().showStatusMessageRB("CT_LOAD_SRC_COMPLETE");
         long en = System.currentTimeMillis();
@@ -645,26 +645,18 @@ public class RealProject implements IProject
     }
     
     /**
-     * It calculates counts of each entry in project.
+     * It finds non-unique segments in project.
      */
-    private void calculateEntriesCounts() {
-        Map<String, Integer> counts = new HashMap<String, Integer>(16384);
-        // first phrase - calculate
+    private void findNonUniqueSegments() {
+        Set<String> exists = new HashSet<String>(16384);
+
         for (FileInfo fi : projectFilesList) {
             for (int i = 0; i < fi.entries.size(); i++) {
-                String src = fi.entries.get(i).getSrcText();
-                Integer c = counts.get(src);
-                if (c == null) {
-                    c = 0;
+                SourceTextEntry ste=fi.entries.get(i);
+                ste.dublicate = exists.contains(ste.getSrcText());
+                if (!ste.dublicate) {
+                    exists.add(ste.getSrcText());
                 }
-                counts.put(src, c + 1);
-            }
-        }
-        // second phrase - store in entries
-        for (FileInfo fi : projectFilesList) {
-            for (int i = 0; i < fi.entries.size(); i++) {
-                SourceTextEntry se=fi.entries.get(i);
-                se.countInProject=counts.get(se.getSrcText());
             }
         }
     }

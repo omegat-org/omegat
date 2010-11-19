@@ -38,8 +38,8 @@ public class SourceTextEntry {
     /** Source entry text. */
     private String src;
     
-    /** Count of entry with the same source in project. */
-    int countInProject;
+    /** If entry with the same source already exist in project. */
+    boolean dublicate;
 
     /**
      * Creates a new source text entry.
@@ -68,9 +68,9 @@ public class SourceTextEntry {
         return m_entryNum;
     }
     
-    /** Returns the number of entries with same source text. */
-    public int getCountInProject() {
-        return countInProject;
+    /** If entry with the same source already exist in project. */
+    public boolean isDublicate() {
+        return dublicate;
     }
 
     /** Holds the number of this entry in a project. */

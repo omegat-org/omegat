@@ -25,7 +25,7 @@
 package org.omegat.gui.exttrans;
 
 /**
- * Class fro store machine translation result.
+ * Class to store machine translation result.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */

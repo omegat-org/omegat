@@ -15,7 +15,7 @@
       <ul>
         <li><a href="#TMX_files_locations_and_purpose">Locatie en doel</a></li>
 
-        <li><a href="#TMX_backup">TMX backup</a></li>
+        <li><a href="#TMX_backup">TMX back-up</a></li>
 
         <li><a href="#TMX_files_and_language">TMX en taal</a></li>
       </ul>
@@ -53,7 +53,7 @@
 
   <ul>
     <li>
-      <p>De map <em>/omegat/</em> bevat <em>project_save.tmx</em> en eventueel een aantal backups van TMX-bestanden.</p>
+      <p>De map <em>/omegat/</em> bevat <em>project_save.tmx</em> en eventueel een aantal back-ups van TMX-bestanden.</p>
 
       <p>Het bestand <em>project_save.tmx</em> bevat alle segmenten die zijn onthouden sinds u het project startte.</p>
     </li>
@@ -80,18 +80,18 @@
       </ul>
     </li>
 
-    <li>De map <em>/tm/</em> kan elk aantal TMX-bestanden bevatten. Zulke bestanden moeten correcte TMXbestanden zijn en kunnen ofwel alleen tekstuele informatie bevatten (niveau 1 TMX), OmegaT tekstuele en opmaakinformatie (omegat TMX) of TMX tekstuele en opmaakinformatie (niveau 2 TMX). De verschillen tussen hen zijn technisch van aard (zie hieronder voor de details), en als u een vertaalgeheugen uit een eerder project wilt gebruiken, zijn zij grotendeels uitwisselbaar, dat is zij zullen allemaal goed werken.
+    <li>De map <em>/tm/</em> kan elk aantal TMX-bestanden bevatten. Zulke bestanden moeten correcte TMX-bestanden zijn en kunnen ofwel alleen tekstuele informatie bevatten (niveau 1 TMX), OmegaT tekstuele en opmaakinformatie (omegat TMX) of TMX tekstuele en opmaakinformatie (niveau 2 TMX). De verschillen tussen hen zijn technisch van aard (zie hieronder voor de details), en als u een vertaalgeheugen uit een eerder project wilt gebruiken, zijn zij grotendeels uitwisselbaar, dat is zij zullen allemaal goed werken.
     </li>
   </ul>
-  <p>Optioneel kunt u OmegaT een aanvullend TMXbestand (OmegaT-stijl) laten maken, ergens waar u dat opgeeft, dat alle vertaalbare segmenten van het project bevat. Zie <a href="#pseudo_translate">pseudo-vertaald geheugen</a>.</p>
+  <p>Optioneel kunt u OmegaT een aanvullend TMX-bestand (OmegaT-stijl) laten maken, ergens waar u dat opgeeft, dat alle vertaalbare segmenten van het project bevat. Zie <a href="#pseudo_translate">pseudo-vertaald geheugen</a>.</p>
   
 
   <a name="TMX_backup" id="TMX_backup"></a>
-  <h3>TMX backup</h3>
+  <h3>TMX back-up</h3>
 
   <p>Bij het vertalen van uw bestanden slaat OmegaT al uw voortgang op in het vertaalgeheugen in de submap <em>/omegat</em> van het project.</p>
 
-  <p>OmegaT maakt ook, elke keer als een project wordt geopend of herladen, een backup van het vertaalgeheugen in <em>project_save.tmx.JAARMMDDUUMM.bak</em> in dezelfde submap. <em>JAAR</em> is 4-getallen jaar, <em>MM</em> is een maand, <em>DD</em> dag van de maand, <em>UU</em> en <em>MM</em> zijn uren en minuten van wanneer het vorige vertaalgeheugen werd opgeslagen.</p>
+  <p>OmegaT maakt ook, elke keer als een project wordt geopend of herladen, een back-up van het vertaalgeheugen in <em>project_save.tmx.JAARMMDDUUMM.bak</em> in dezelfde submap. <em>JAAR</em> is 4-getallen jaar, <em>MM</em> is een maand, <em>DD</em> dag van de maand, <em>UU</em> en <em>MM</em> zijn uren en minuten van wanneer het vorige vertaalgeheugen werd opgeslagen.</p>
 
   <p>Als u denkt dat u vertaalde gegevens kwijt bent, volg dan deze procedure:</p>
 
@@ -100,7 +100,7 @@
 
     <li>hernoem het huidige <em>project_save.tmx</em>-bestand naar iets dat u zult onthouden (zoals bijvoorbeeld <em>project_save.tmx.tijdelijk</em>)</li>
 
-    <li>selecteer de backup van het vertaalgeheugen dat meest waarschijnlijk de gegevens bevat die u nodig hebt</li>
+    <li>selecteer de back-up van het vertaalgeheugen dat meest waarschijnlijk de gegevens bevat die u nodig hebt</li>
 
     <li>hernoem het naar <em>project_save.tmx</em></li>
 
@@ -109,7 +109,7 @@
 
   <h3>TMX-bestanden en taal</h3>
 
-  <p>TMXbestanden bevatten <i>vertaaleenheden</i> die zijn gemaakt van een aantal equivalente segmenten in verschillende talen. Een vertaaleenheid bestaat uit ten minste twee <i>vertaaleenheid variaties</i> (tuv). Beide kunnen als bron of doel worden gebruikt.</p>
+  <p>TMX-bestanden bevatten <i>vertaaleenheden</i> die zijn gemaakt van een aantal equivalente segmenten in verschillende talen. Een vertaaleenheid bestaat uit ten minste twee <i>vertaaleenheid variaties</i> (tuv). Beide kunnen als bron of doel worden gebruikt.</p>
 
   <p>De instellingen in uw project zullen aangeven wat de bron- en wat de doeltaal is. OmegaT zal dus de <strong>tuv</strong> nemen die overeenkomt met de brontaalcode van het project en dat segment gebruiken als het bronsegment en het zal de <strong>tuv</strong> nemen die overeenkomt met de doeltaalcode van het project en dat segment gebruiken als het doelsegment. OmegaT herkent ze met behulp van de twee volgende standaardconventies:</p>
 
@@ -150,7 +150,7 @@
     <li>Als u een nieuw project begint voor hetzelfde onderwerp of voor dezelfde klant, navigeer naar de voorraadmap in het dialoogvenster <em>Project &gt; Eigenschappen &gt; Project bewerken</em> en selecteer het als de map voor het vertaalgeheugen.</li>
   </ul>
 
-  <p>Onthoud wel dat alle TMX-bestanden in de voorraadmap <em>/tm</em> worden geparsed tijdens het opstarten van het programma, dus als u daarin alle TMX-bestanden plaats die u tegenkomt zal dat OmegaT onnodig langzamer maken. U zou zelfs kunnen overwegen om die, welke strikt noodzakelijk zijn, uit te schakelen (bijvoorbeeld door ze in de submap <em>/tm</em> te laten staan, maar hun extensie te wijzigen), als hun inhoud eenmaal is geladen in de <em>project_save.tmx</em> van uw huidige project.</p>
+  <p>Onthoud wel dat alle TMX-bestanden in de voorraadmap <em>/tm</em> worden geparset tijdens het opstarten van het programma, dus als u daarin alle TMX-bestanden plaats die u tegenkomt zal dat OmegaT onnodig langzamer maken. U zou zelfs kunnen overwegen om die, welke strikt noodzakelijk zijn, uit te schakelen (bijvoorbeeld door ze in de submap <em>/tm</em> te laten staan, maar hun extensie te wijzigen), als hun inhoud eenmaal is geladen in de <em>project_save.tmx</em> van uw huidige project.</p>
 
   <p><a name="using_memories" id="using_memories"></a></p>
 

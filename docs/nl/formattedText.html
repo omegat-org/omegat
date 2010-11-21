@@ -85,7 +85,7 @@
   <p>Als echter de standaard segmentatieregels op dit segment worden toegepast (het standaard OmegaT-gedrag) krijgen we het volgende resultaat:</p>
   <pre>
  <strong>&lt;segment 1990&gt;</strong> <font color=
-"#FB0000">&lt;b0&gt;</font>Vóór: \. &lt;einde segment&gt;
+"#FB0000">&lt;b0&gt;</font>Vóór: \. <strong>&lt;einde segment&gt;</strong><br>
 <strong>&lt;segment 1991&gt;</strong> Na: \s<font color=
 "#FB0000">&lt;/b0&gt;</font><strong>&lt;einde segment&gt;</strong> <br>
 </pre>
@@ -250,7 +250,7 @@ echo printf(_("OmegaT is erg %s"),$var);</pre>
   <p>Volledige validatie ondersteunt deze indeling volledig, met uitzondering van de <code>WIDTHSPECIFIER</code>. In eenvoudige validatie wordt de volgende syntaxis gecontroleerd:</p>
   <pre>"%" [ARGUMENTSWAPSPECIFIER] [PRECISIONSPECIFIER] TYPESPECIFIER</pre>
 
-  <p>U kunt de volgorde van de aanduidingen wijzigen, maar dan moet u de ARGUMENTSWAPSPECIFIER toevoegen als die er nog niet staat. Dit betekent het toevoegen van een reeksnummer en een dollarteken na de <code>%</code>. Bijv. <code>"%s is een %s toepassing"</code> is gelijk aan <code>"%1$s is een %2$s toepassing"</code> die u kunt vertalen door <code>"a %2$s toepassing is %1$s"</code>.
+  <p>U kunt de volgorde van de aanduidingen wijzigen, maar dan moet u de ARGUMENTSWAPSPECIFIER toevoegen als die er nog niet staat. Dit betekent het toevoegen van een reeksnummer en een dollarteken na de <code>%</code>. Bijv. <code>"%s is een %s toepassing"</code> is gelijk aan <code>"%1$s is een %2$s toepassing"</code> die u kunt vertalen door <code>"een %2$s toepassing is %1$s"</code>.
   </p>
   <hr>
 

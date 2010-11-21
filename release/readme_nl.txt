@@ -12,8 +12,6 @@ Deze vertaling is het werk van Dick Groskamp, copyright© 2010
 
 ==============================================================================
   1.  Informatie over OmegaT
-  2.
-
 
 De meest recente informatie over OmegaT is te vinden op
       http://www.omegat.org/
@@ -79,7 +77,6 @@ De gebruikershandleiding zit in het pakket dat u zojuist heeft gedownload. U kun
 
 ==============================================================================
  3. Installeren van OmegaT
-  4.
 
 3.1 Algemeen
 OmegaT vereist dat een Java Runtime Environment (JRE) versie 
@@ -109,7 +106,6 @@ Mac-gebruikers: de JRE is al geïnstalleerd op Mac OS X.
 Linux op PowerPC-systemen: gebruikers moeten IBM's JRE downloaden omdat Sun geen JRE voor PPC-systemen levert. Download in dat geval vanaf:
 
     http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
-
 
 3.2 Installatie
 * Windows-gebruikers: Start eenvoudigweg het installatieprogramma. Het installatieprogramma kan snelkoppelingen maken om OmegaT te starten, als u dat wilt.
@@ -215,7 +211,7 @@ OmegaT gebruikt de volgende bibliotheken:
   MRJ Adapter 1.0.8 door Steve Roy (LGPL License)
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework 2.0.6d van VLSolutions (CeCILL-licentie)
+  VLDocking Framework 2.1.4 van VLSolutions (CeCILL-licentie)
   http://www.vlsolutions.com/en/products/docking/
 
   Hunspell van László Németh en anderen (LGPL-licentie)

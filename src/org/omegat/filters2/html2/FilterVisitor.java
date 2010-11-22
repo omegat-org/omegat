@@ -210,7 +210,7 @@ public class FilterVisitor extends NodeVisitor {
         String attr = tag.getAttribute(key);
         if (attr != null) {
             String trans = filter.privateProcessEntry(entitiesToChars(attr));
-            tag.setAttribute(key, trans);
+            tag.setAttribute(key, charsToEntities(trans));
         }
     }
 

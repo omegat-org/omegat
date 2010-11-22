@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.1
 ----------------------------------------------------------------------
-  4 Enhancements
-  1 Bugfix
+  5 Enhancements
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.2.1 vs. 2.2.0 update 4
 
@@ -10,6 +10,9 @@
 
   - Visual identification of non-unique segments
   http://sourceforge.net/support/tracker.php?aid=1869046
+
+  - Priority to Mark untranslated segments over Display source
+  http://sourceforge.net/support/tracker.php?aid=1811562
 
   Other enhancements:
 
@@ -20,6 +23,11 @@
   Bug fixes:
 
   - ResX filter: comments appeared as translatable text.
+
+  - HTML filter: When translating attributes, forbidden characters 
+(e.g., '&', '<') were not converted back to entities. This applied 
+also to the HTML Help Compiler Filter.
+
 
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 4 

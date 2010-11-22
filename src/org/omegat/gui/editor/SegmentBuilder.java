@@ -547,12 +547,15 @@ public class SegmentBuilder {
             }
         } else {
             if (isSource) {
-                if (transExist || settings.isDisplaySegmentSources()) {
-                    return Styles.createAttributeSet(fg, Styles.COLOR_GREEN, true, null);
+                Color b;
+                if (settings.isMarkUntranslated() && !transExist) {
+                    b = Styles.COLOR_UNTRANSLATED;
+                } else if (settings.isDisplaySegmentSources()) {
+                    b = Styles.COLOR_GREEN;
                 } else {
-                    Color b = settings.isMarkUntranslated() ? Styles.COLOR_UNTRANSLATED : null;
-                    return Styles.createAttributeSet(fg, b, null, null);
+                    b = null;
                 }
+                return Styles.createAttributeSet(fg, b, null, null);
             } else {
                 Color b = settings.isMarkTranslated() ? Styles.COLOR_TRANSLATED : null;
                 return Styles.createAttributeSet(fg, b, null, null);

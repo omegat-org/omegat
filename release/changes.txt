@@ -25,9 +25,9 @@
 
   - ResX filter: comments appeared as translatable text.
 
-  - HTML filter: When translating attributes, forbidden characters 
-(e.g., '&', '<') were not converted back to entities. This applied 
-also to the HTML Help Compiler Filter.
+  - HTML (including the HTML Help Compiler Filter) and XML filters: 
+When translating attributes, forbidden characters (e.g., '&', '<') were not 
+converted back to entities. 
 
 
 ----------------------------------------------------------------------

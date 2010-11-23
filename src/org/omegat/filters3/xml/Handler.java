@@ -411,7 +411,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
                         .getTranslatableTagAttributes().containsPair(tag, attr.getName()))
                         && dialect.validateTranslatableTagAttribute(tag, attr.getName(),
                                 xmltag.getAttributes())) {
-                    attr.setValue(translator.translate(attr.getValue()));
+                    attr.setValue(StaticUtils.makeValidXML(translator.translate(attr.getValue())));
                 }
             }
         }
@@ -712,6 +712,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     /** Receive notification of character data inside an element. */
+    @Override
     public void characters(char[] ch, int start, int length) throws SAXException {
         if (inDTD)
             return;

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,7 +27,6 @@ package org.omegat.filters3.xml;
 
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Attributes;
-import org.omegat.util.StaticUtils;
 
 /**
  * Static XML utility methods.
@@ -46,8 +46,8 @@ public final class XMLUtils {
             return res;
 
         for (int i = 0; i < attributes.getLength(); i++) {
-            String name = StaticUtils.makeValidXML(attributes.getQName(i));
-            String value = StaticUtils.makeValidXML(attributes.getValue(i));
+            String name = attributes.getQName(i);
+            String value = attributes.getValue(i);
             Attribute attr = new Attribute(name, value);
             res.add(attr);
         }

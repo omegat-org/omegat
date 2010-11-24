@@ -2,7 +2,7 @@
  OmegaT 2.2.1
 ----------------------------------------------------------------------
   7 Enhancements
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.2.1 vs. 2.2.0 update 4
 
@@ -31,8 +31,10 @@ or "Hidden attribute" in Word.
 
   - HTML (including the HTML Help Compiler Filter) and XML filters: 
 When translating attributes, forbidden characters (e.g., '&', '<') were not 
-converted back to entities. 
+converted back to entities in the target documents.
 
+  - XML filters: entities from attributes were not converted to 
+characters.
 
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 4 

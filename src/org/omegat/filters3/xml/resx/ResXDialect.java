@@ -66,7 +66,7 @@ public class ResXDialect extends DefaultXMLDialect {
                 if (oneAttribute.getName().equalsIgnoreCase("type")
                         || oneAttribute.getName().equalsIgnoreCase("mimetype")
                         || (oneAttribute.getName().equalsIgnoreCase("name") && (oneAttribute.getValue()
-                                .startsWith("&gt;") || oneAttribute.getValue().endsWith("FieldName"))))
+                                .startsWith(">") || oneAttribute.getValue().endsWith("FieldName"))))
                     return true;
             }
         }

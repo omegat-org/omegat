@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2009      Alex Buloichik
+               2009-2010 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -39,7 +39,7 @@ public class SourceTextEntry {
     private String src;
 
     /** If entry with the same source already exist in project. */
-    boolean dublicate;
+    boolean duplicate;
 
     /**
      * Creates a new source text entry.
@@ -69,8 +69,8 @@ public class SourceTextEntry {
     }
 
     /** If entry with the same source already exist in project. */
-    public boolean isDublicate() {
-        return dublicate;
+    public boolean isDuplicate() {
+        return duplicate;
     }
 
     /** Holds the number of this entry in a project. */

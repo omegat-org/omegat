@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2010 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,6 +51,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * editor.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class SegmentBuilder {
 
@@ -534,7 +536,7 @@ public class SegmentBuilder {
      */
     private AttributeSet attrs(boolean isSource) {
         Color fg;
-        if (settings.isMarkNonUniqueSegments() && ste.isDublicate()) {
+        if (settings.isMarkNonUniqueSegments() && ste.isDuplicate()) {
             fg = Styles.COLOR_LIGHT_GRAY;
         } else {
             fg = null;
@@ -555,7 +557,11 @@ public class SegmentBuilder {
                 } else {
                     b = null;
                 }
-                return Styles.createAttributeSet(fg, b, null, null);
+                if (Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD)) {
+                    return Styles.createAttributeSet(fg, b, true, null);
+                } else {
+                    return Styles.createAttributeSet(fg, b, null, null);
+                }
             } else {
                 Color b = settings.isMarkTranslated() ? Styles.COLOR_TRANSLATED : null;
                 return Styles.createAttributeSet(fg, b, null, null);

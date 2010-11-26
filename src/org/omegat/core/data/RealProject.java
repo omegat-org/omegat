@@ -597,17 +597,32 @@ public class RealProject implements IProject {
     }
 
     /**
-     * It finds non-unique segments in project.
+     * {@inheritDoc}
      */
-    private void findNonUniqueSegments() {
+    public void findNonUniqueSegments() {
         Set<String> exists = new HashSet<String>(16384);
+        Set<String> duplicate = new HashSet<String>(16384);
 
         for (FileInfo fi : projectFilesList) {
             for (int i = 0; i < fi.entries.size(); i++) {
                 SourceTextEntry ste = fi.entries.get(i);
-                ste.dublicate = exists.contains(ste.getSrcText());
-                if (!ste.dublicate) {
+                ste.duplicate = exists.contains(ste.getSrcText());
+                if (!ste.duplicate) {
                     exists.add(ste.getSrcText());
+                } else if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)){
+                    duplicate.add(ste.getSrcText());
+                }
+            }
+        }
+       
+        // If the first non-unique has to marked also
+        if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
+            for (FileInfo fi : projectFilesList) {
+                for (int i = 0; i < fi.entries.size(); i++) {
+                    SourceTextEntry ste = fi.entries.get(i);
+                    if (!ste.duplicate) {
+                        ste.duplicate = duplicate.contains(ste.getSrcText());
+                    }
                 }
             }
         }

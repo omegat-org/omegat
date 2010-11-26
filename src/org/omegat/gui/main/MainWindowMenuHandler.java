@@ -45,6 +45,7 @@ import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.TagValidationOptionsDialog;
 import org.omegat.gui.dialogs.TeamOptionsDialog;
+import org.omegat.gui.dialogs.ViewOptionsDialog;
 import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
@@ -659,6 +660,32 @@ public class MainWindowMenuHandler {
                     OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
             if (res == JOptionPane.YES_OPTION)
                 ProjectUICommands.projectReload();
+        }
+
+    }
+
+    /**
+     * Displays the view opions dialog to allow customizing the view options.
+     */
+    public void optionsViewOptionsMenuItemActionPerformed() {
+
+        ViewOptionsDialog viewOptions = new ViewOptionsDialog(mainWindow);
+        viewOptions.setVisible(true);
+
+        if (viewOptions.getReturnStatus() == ExternalTMXMatchesDialog.RET_OK
+                && Core.getProject().isProjectLoaded()) {
+          // Redisplay source segments and non-unique segments
+            Core.getEditor()
+                    .getSettings()
+                    .setDisplaySegmentSources(
+                            mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
+
+            Core.getProject().findNonUniqueSegments();
+            
+            Core.getEditor()
+                    .getSettings()
+                    .setMarkNonUniqueSegments(
+                            mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
         }
 
     }

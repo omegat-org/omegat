@@ -198,6 +198,11 @@ public class Preferences {
     /** External TMX options: Use / for stand-alone tags */
     public static final String EXT_TMX_USE_SLASH = "ext_tmx_use_slash";
 
+    /** View options: Show all sources in bold */
+    public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";
+    /** View options: Mark first non-unique */
+    public static final String VIEW_OPTION_UNIQUE_FIRST = "view_option_unique_first";
+
     /**
      * Version of file filters. Unfortunately cannot put it into filters itself
      * for backwards compatibility reasons.

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.1
 ----------------------------------------------------------------------
-  7 Enhancements
+  8 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.2.1 vs. 2.2.0 update 4
@@ -20,6 +20,7 @@
   - Basque localisation updated to 2.2.0 (UI, Readme, documentation)
   - Dutch localisation updated to 2.2.0 (UI, Readme, documentation)
   - Japanese localisation updated to 2.2.0 (UI)
+  - Belarusian localisation updated to 2.1.0 (UI)
 
   - The Open MXL Word option "Hidden Text" as been renamed to
 "Non-visible Instruction Text" to avoid confusion with the "Hidden effect"

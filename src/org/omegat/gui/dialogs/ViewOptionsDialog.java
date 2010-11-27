@@ -37,6 +37,7 @@ import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 
 /**
  * 
@@ -71,7 +72,7 @@ public class ViewOptionsDialog extends JDialog {
 
         // Initializing options
         String viewBold = Preferences.getPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
-        if (viewBold.isEmpty()) {
+        if (StringUtil.isEmpty(viewBold)) {
             viewBold = "true";
         }
         viewSourceAllBold.setSelected(Boolean.valueOf(viewBold).booleanValue());

@@ -120,4 +120,7 @@ public class NotLoadedProject implements IProject {
     public ITokenizer getTargetTokenizer() {
         return null;
     }
+
+    public void findNonUniqueSegments() {
+    }
 }

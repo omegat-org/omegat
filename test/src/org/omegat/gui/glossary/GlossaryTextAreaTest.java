@@ -85,6 +85,7 @@ public class GlossaryTextAreaTest extends TestCore {
 
     @Override
     protected void setUp() throws Exception {
+        super.setUp();
         TestCoreInitializer.initEditor(new IEditor() {
             public void activateEntry() {
             }

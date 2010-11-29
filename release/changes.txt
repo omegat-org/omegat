@@ -2,12 +2,21 @@
  OmegaT 2.2.1 update 1
 ----------------------------------------------------------------------
   1 Enhancement
+  1 Bugfix
 ----------------------------------------------------------------------
 2.2.1 update 1 vs. 2.2.1
 
   Other enhancements:
 
   - Japanese localisation updated to 2.2.1 (UI)
+
+  Bug fixes:
+
+  - When "Options > Display all source segments in bold" was checked
+untranslated segments appeared in bold if "View > Display Source Segments"
+wasn't checked. In addition, when both "View > Display Source Segments" and
+"View > Mark Untranslated Segments" were checked, the untranslated segments
+didn't appear in bold.
 
 ----------------------------------------------------------------------
  OmegaT 2.2.1

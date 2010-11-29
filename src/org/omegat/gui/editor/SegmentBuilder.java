@@ -550,6 +550,11 @@ public class SegmentBuilder {
         } else {
             if (isSource) {
                 Color b;
+                Boolean bold = false;
+                if ((settings.isDisplaySegmentSources()) &&
+                     Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD)) {
+                    bold = true;
+                }
                 if (settings.isMarkUntranslated() && !transExist) {
                     b = Styles.COLOR_UNTRANSLATED;
                 } else if (settings.isDisplaySegmentSources()) {
@@ -557,11 +562,7 @@ public class SegmentBuilder {
                 } else {
                     b = null;
                 }
-                if (Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD)) {
-                    return Styles.createAttributeSet(fg, b, true, null);
-                } else {
-                    return Styles.createAttributeSet(fg, b, null, null);
-                }
+                return Styles.createAttributeSet(fg, b, bold, null);
             } else {
                 Color b = settings.isMarkTranslated() ? Styles.COLOR_TRANSLATED : null;
                 return Styles.createAttributeSet(fg, b, null, null);

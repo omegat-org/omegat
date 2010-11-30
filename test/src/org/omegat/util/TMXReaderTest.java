@@ -23,12 +23,12 @@
  **************************************************************************/
 package org.omegat.util;
 
-import junit.framework.TestCase;
+import org.omegat.core.TestCore;
 
 /**
  * @author Alex Buloichik
  */
-public class TMXReaderTest extends TestCase {
+public class TMXReaderTest extends TestCore {
     public void testLeveL1() throws Exception {
         TMXReader rd = new TMXReader("UTF-8", new Language("en"), new Language(
                 "be"), false);

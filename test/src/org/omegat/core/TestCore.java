@@ -25,16 +25,18 @@
 package org.omegat.core;
 
 import java.awt.Font;
+import java.io.File;
 
 import javax.swing.JFrame;
+
+import junit.framework.TestCase;
 
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
+import org.omegat.util.RuntimePreferences;
 
 import com.vlsolutions.swing.docking.Dockable;
-
-import junit.framework.TestCase;
 
 /**
  * Core setup for unit tests.
@@ -43,12 +45,16 @@ import junit.framework.TestCase;
  */
 public abstract class TestCore extends TestCase {
     protected void setUp() throws Exception {
+        File configDir = new File(System.getProperty("java.io.tmpdir"), "OmegaT test config");
+        removeDir(configDir);
+
+        RuntimePreferences.setConfigDir(configDir.getAbsolutePath());
+
         Core.setMainWindow(new IMainWindow() {
             public void addDockable(Dockable pane) {
             }
 
-            public void displayErrorRB(Throwable ex, String errorKey,
-                    Object... params) {
+            public void displayErrorRB(Throwable ex, String errorKey, Object... params) {
             }
 
             public Font getApplicationFont() {
@@ -70,16 +76,31 @@ public abstract class TestCore extends TestCase {
 
             public void showStatusMessageRB(String messageKey, Object... params) {
             }
-            
+
             public void showErrorDialogRB(String message, Object[] args, String title) {
             }
 
             public void unlockUI() {
             }
+
             public IMainMenu getMainMenu() {
                 return null;
             }
         });
         Core.setCurrentProject(new NotLoadedProject());
+    }
+
+    protected static void removeDir(File dir) {
+        File[] fs = dir.listFiles();
+        if (fs != null) {
+            for (File f : fs) {
+                if (f.isDirectory()) {
+                    removeDir(f);
+                } else {
+                    f.delete();
+                }
+            }
+        }
+        dir.delete();
     }
 }

@@ -24,15 +24,11 @@
 
 package org.omegat.util;
 
-import junit.framework.*;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.List;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
+
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
 
 /**
  * Tests for (some) static utility methods.

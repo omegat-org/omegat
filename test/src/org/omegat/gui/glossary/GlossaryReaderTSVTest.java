@@ -26,12 +26,12 @@ package org.omegat.gui.glossary;
 import java.io.File;
 import java.util.List;
 
-import junit.framework.TestCase;
+import org.omegat.core.TestCore;
 
 /**
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
-public class GlossaryReaderTSVTest extends TestCase {
+public class GlossaryReaderTSVTest extends TestCore {
     public void testRead() throws Exception {
         List<GlossaryEntry> g = GlossaryReaderTSV.read(new File(
                 "test/data/glossaries/test.tab"));

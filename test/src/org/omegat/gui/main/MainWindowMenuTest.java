@@ -33,12 +33,12 @@ import java.util.Map;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
-import junit.framework.TestCase;
+import org.omegat.core.TestCore;
 
 /**
  * @author Alex Buloichik
  */
-public class MainWindowMenuTest extends TestCase {
+public class MainWindowMenuTest extends TestCore {
     /**
      * Check MainWindow for all menu items action handlers exist.
      * 

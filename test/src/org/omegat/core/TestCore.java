@@ -29,8 +29,7 @@ import java.io.File;
 
 import javax.swing.JFrame;
 
-import junit.framework.TestCase;
-
+import org.custommonkey.xmlunit.XMLTestCase;
 import org.omegat.core.data.NotLoadedProject;
 import org.omegat.gui.main.IMainMenu;
 import org.omegat.gui.main.IMainWindow;
@@ -43,7 +42,7 @@ import com.vlsolutions.swing.docking.Dockable;
  * 
  * @author Alexander_Buloichik
  */
-public abstract class TestCore extends TestCase {
+public abstract class TestCore extends XMLTestCase {
     protected void setUp() throws Exception {
         File configDir = new File(System.getProperty("java.io.tmpdir"), "OmegaT test config");
         removeDir(configDir);

@@ -32,7 +32,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.custommonkey.xmlunit.XMLTestCase;
+import org.omegat.core.TestCore;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
@@ -46,7 +46,7 @@ import org.xml.sax.InputSource;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
-public abstract class TestFilterBase extends XMLTestCase {
+public abstract class TestFilterBase extends TestCore {
     protected File outFile = new File(System.getProperty("java.io.tmpdir"),
             "OmegaT filter test - " + getClass().getSimpleName());
 

@@ -50,9 +50,9 @@ public class CreateGlossaryEntry extends JDialog {
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
 
-    /** Creates new form WorkflowOptionsDialog */
+    /** Creates new form CreateGlossaryEntry */
     public CreateGlossaryEntry(Frame parent) {
-        super(parent, true);
+        super(parent, false);
 
         // HP
         // Handle escape key to close the window

@@ -28,13 +28,17 @@ package org.omegat.gui.glossary;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.util.OConsts;
+import org.omegat.util.StringUtil;
 
 /**
  * Reader for tab separated glossaries.
@@ -89,5 +93,15 @@ public class GlossaryReaderTSV {
         }
 
         return result;
+    }
+
+    public static void append(final File file, GlossaryEntry newEntry) throws IOException {
+        Writer wr = new OutputStreamWriter(new FileOutputStream(file, true), OConsts.UTF8);
+        wr.append(newEntry.getSrcText()).append('\t').append(newEntry.getLocText());
+        if (!StringUtil.isEmpty(newEntry.getCommentText())) {
+            wr.append('\t').append(newEntry.getCommentText());
+        }
+        wr.append(System.getProperty("line.separator"));
+        wr.close();
     }
 }

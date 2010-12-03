@@ -103,7 +103,7 @@ public class CreateGlossaryEntry extends JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         commentText = new javax.swing.JTextArea();
 
-        setTitle(OStrings.getString("INSERT_GLOSSARY_TITLE")); // NOI18N
+        setTitle(OStrings.getString("CREATE_GLOSSARY_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -203,7 +203,7 @@ public class CreateGlossaryEntry extends JDialog {
         getContentPane().add(commentLabel, gridBagConstraints);
 
         commentText.setColumns(20);
-        commentText.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        commentText.setFont(new java.awt.Font("Tahoma", 0, 11));
         commentText.setRows(5);
         jScrollPane1.setViewportView(commentText);
 

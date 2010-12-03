@@ -37,7 +37,6 @@ import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 
 /**
  * 
@@ -79,6 +78,27 @@ public class CreateGlossaryEntry extends JDialog {
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
     public int getReturnStatus() {
         return returnStatus;
+    }
+
+    /**
+     * @return the source text component of the dialog
+     */
+    public javax.swing.JTextField getSourceText() {
+        return sourceText;
+    }
+
+    /**
+     * @return the target text component of the dialog
+     */
+    public javax.swing.JTextField getTargetText() {
+        return targetText;
+    }
+
+    /**
+     * @return the comment text component of the dialog
+     */
+    public javax.swing.JTextArea getCommentText() {
+        return commentText;
     }
 
     /**

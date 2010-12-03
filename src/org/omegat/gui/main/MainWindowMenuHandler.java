@@ -29,6 +29,9 @@
 
 package org.omegat.gui.main;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
+
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -40,6 +43,7 @@ import org.omegat.core.data.TransEntry;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
+import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
@@ -241,8 +245,7 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * replaces entire edited segment text with a the source text of a segment
-     * at cursor position
+     * replaces entire edited segment text with a the source text of a segment at cursor position
      */
     public void editOverwriteSourceMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded())
@@ -275,6 +278,32 @@ public class MainWindowMenuHandler {
         }
 
         FileUtil.writeScriptFile(selection, OConsts.SELECTION_EXPORT);
+    }
+
+    public void editCreateGlossaryEntryActionPerformed() {
+        if (!Core.getProject().isProjectLoaded())
+            return;
+
+        final CreateGlossaryEntry dialog = new CreateGlossaryEntry(Core.getMainWindow().getApplicationFrame());
+        dialog.setVisible(true);
+
+        dialog.addWindowFocusListener(new WindowFocusListener() {
+            public void windowGainedFocus(WindowEvent e) {
+                String sel = Core.getEditor().getSelectedText();
+                if (!StringUtil.isEmpty(sel)) {
+                    if (StringUtil.isEmpty(dialog.getSourceText().getText())) {
+                        dialog.getSourceText().setText(sel);
+                    } else if (StringUtil.isEmpty(dialog.getTargetText().getText())) {
+                        dialog.getTargetText().setText(sel);
+                    } else if (StringUtil.isEmpty(dialog.getCommentText().getText())) {
+                        dialog.getCommentText().setText(sel);
+                    }
+                }
+            }
+
+            public void windowLostFocus(WindowEvent e) {
+            }
+        });
     }
 
     public void editFindInProjectMenuItemActionPerformed() {
@@ -501,8 +530,7 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * Identify all the tags in the source text and automatically inserts them
-     * into the target text.
+     * Identify all the tags in the source text and automatically inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
 
@@ -543,8 +571,8 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * Displays the font dialog to allow selecting the font for source, target
-     * text (in main window) and for match and glossary windows.
+     * Displays the font dialog to allow selecting the font for source, target text (in main window) and for
+     * match and glossary windows.
      */
     public void optionsFontSelectionMenuItemActionPerformed() {
         FontSelectionDialog dlg = new FontSelectionDialog(Core.getMainWindow().getApplicationFrame(), Core
@@ -556,8 +584,7 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * Displays the filters setup dialog to allow customizing file filters in
-     * detail.
+     * Displays the filters setup dialog to allow customizing file filters in detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
         FiltersCustomizer dlg = new FiltersCustomizer(mainWindow);
@@ -578,8 +605,7 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * Displays the segmentation setup dialog to allow customizing the
-     * segmentation rules in detail.
+     * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
         SegmentationCustomizer segment_window = new SegmentationCustomizer(mainWindow);
@@ -621,32 +647,28 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * Displays the workflow setup dialog to allow customizing the diverse
-     * workflow options.
+     * Displays the workflow setup dialog to allow customizing the diverse workflow options.
      */
     public void optionsWorkflowMenuItemActionPerformed() {
         new WorkflowOptionsDialog(mainWindow).setVisible(true);
     }
 
     /**
-     * Displays the tag validation setup dialog to allow customizing the diverse
-     * tag validation options.
+     * Displays the tag validation setup dialog to allow customizing the diverse tag validation options.
      */
     public void optionsTagValidationMenuItemActionPerformed() {
         new TagValidationOptionsDialog(mainWindow).setVisible(true);
     }
 
     /**
-     * Displays the team options dialog to allow customizing the diverse team
-     * options.
+     * Displays the team options dialog to allow customizing the diverse team options.
      */
     public void optionsTeamMenuItemActionPerformed() {
         new TeamOptionsDialog(mainWindow).setVisible(true);
     }
 
     /**
-     * Displays the external TMX dialog to allow customizing the external TMX
-     * options.
+     * Displays the external TMX dialog to allow customizing the external TMX options.
      */
     public void optionsExtTMXMenuItemActionPerformed() {
 
@@ -674,14 +696,14 @@ public class MainWindowMenuHandler {
 
         if (viewOptions.getReturnStatus() == ExternalTMXMatchesDialog.RET_OK
                 && Core.getProject().isProjectLoaded()) {
-          // Redisplay source segments and non-unique segments
+            // Redisplay source segments and non-unique segments
             Core.getEditor()
                     .getSettings()
                     .setDisplaySegmentSources(
                             mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
 
             Core.getProject().findNonUniqueSegments();
-            
+
             Core.getEditor()
                     .getSettings()
                     .setMarkNonUniqueSegments(
@@ -691,8 +713,8 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * Restores defaults for all dockable parts. May be expanded in the future
-     * to reset the entire GUI to its defaults.
+     * Restores defaults for all dockable parts. May be expanded in the future to reset the entire GUI to its
+     * defaults.
      */
     public void optionsRestoreGUIMenuItemActionPerformed() {
         MainWindowUI.resetDesktopLayout(mainWindow);

@@ -50,7 +50,7 @@ public class ViewOptionsDialog extends JDialog {
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
 
-    /** Creates new form WorkflowOptionsDialog */
+    /** Creates new form ViewOptionsDialog */
     public ViewOptionsDialog(Frame parent) {
         super(parent, true);
 

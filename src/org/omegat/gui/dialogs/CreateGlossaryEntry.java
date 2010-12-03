@@ -111,7 +111,6 @@ public class CreateGlossaryEntry extends JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        ourButtonGroup = new javax.swing.ButtonGroup();
         sourceTermLabel = new javax.swing.JLabel();
         descriptionTextArea = new javax.swing.JTextArea();
         okButton = new javax.swing.JButton();
@@ -223,7 +222,7 @@ public class CreateGlossaryEntry extends JDialog {
         getContentPane().add(commentLabel, gridBagConstraints);
 
         commentText.setColumns(20);
-        commentText.setFont(new java.awt.Font("Tahoma", 0, 11));
+        commentText.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         commentText.setRows(5);
         jScrollPane1.setViewportView(commentText);
 
@@ -282,7 +281,6 @@ public class CreateGlossaryEntry extends JDialog {
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton okButton;
-    private javax.swing.ButtonGroup ourButtonGroup;
     private javax.swing.JLabel sourceTermLabel;
     private javax.swing.JTextField sourceText;
     private javax.swing.JLabel targetTermLabel;

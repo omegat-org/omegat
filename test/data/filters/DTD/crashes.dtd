@@ -1,0 +1,7 @@
+<!ENTITY noConfig.label             "This application has not been configured to display crash reports. The preference <code>breakpad.reportURL</code> must be set.">
+<!ENTITY crashes.title              "Poslana poročila o sesutjih"	>
+<!ENTITY id.heading                 "ID poročila"   >
+<!ENTITY date.heading               "Datum pošiljanja"
+>
+<!ENTITY noReports.label            "Nobeno poročilo o sesutju ni bilo poslano.">
+<!ENTITY clearAllReports.label      "Odstrani vsa poročila">

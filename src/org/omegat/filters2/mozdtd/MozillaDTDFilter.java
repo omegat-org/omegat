@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2010 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,6 +53,7 @@ import org.omegat.util.StringUtil;
  * http://msdn.microsoft.com/en-us/library/aa380599(VS.85).aspx
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class MozillaDTDFilter extends AbstractFilter {
     protected static Pattern RE_ENTITY = Pattern.compile("<\\!ENTITY\\s+(\\S+)\\s+\"(.+)\"\\s*>");
@@ -94,6 +95,7 @@ public class MozillaDTDFilter extends AbstractFilter {
             TranslationException {
         StringBuilder block = new StringBuilder();
         boolean isInBlock = false;
+        int previousChar = 0;
         int c;
         while ((c = inFile.read()) != -1) {
             if (c == '<' && !isInBlock) {
@@ -104,10 +106,13 @@ public class MozillaDTDFilter extends AbstractFilter {
             } else {
                 outFile.write(c);
             }
-            if (c == '>' && isInBlock) {
+            if (c == '>' && isInBlock && previousChar == '"') {
                 isInBlock = false;
                 processBlock(block.toString(), outFile);
                 block.setLength(0);
+            }
+            if (!Character.isWhitespace(c) ) { // In the regexp, there could be whitespace between " and >
+                previousChar = c;
             }
         }
     }

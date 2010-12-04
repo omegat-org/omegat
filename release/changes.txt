@@ -2,7 +2,7 @@
  OmegaT 2.2.1 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.2.1 update 1 vs. 2.2.1
 
@@ -11,6 +11,9 @@
   - Japanese localisation updated to 2.2.1 (UI)
 
   Bug fixes:
+
+  - Some content ignored in DTD files
+    http://sourceforge.net/support/tracker.php?aid=3088802
 
   - When "Options > Display all source segments in bold" was checked
 untranslated segments appeared in bold if "View > Display Source Segments"

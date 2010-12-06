@@ -32,7 +32,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.omegat.core.Core;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.Log;
 
@@ -129,14 +128,5 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
             }
         }
         return result;
-    }
-
-    /**
-     * Add new entry into project glossary(file glossary/projectname_glossary.txt).
-     */
-    public void addToProjectGlossary(GlossaryEntry newEntry) throws Exception {
-        ProjectProperties props = Core.getProject().getProjectProperties();
-        File out = new File(props.getGlossaryRoot(), props.getProjectName() + "_glossary.txt");
-        GlossaryReaderTSV.append(out, newEntry);
     }
 }

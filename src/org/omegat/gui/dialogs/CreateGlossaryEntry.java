@@ -102,10 +102,10 @@ public class CreateGlossaryEntry extends JDialog {
     }
 
     /**
-     * @return the description text component of the dialog
+     * @return the glossary file text component of the dialog
      */
-    public javax.swing.JTextArea getDescriptionTextArea() {
-        return descriptionTextArea;
+    public javax.swing.JTextArea getGlossaryFileText() {
+        return glossaryFileText;
     }
     
     /**
@@ -128,6 +128,7 @@ public class CreateGlossaryEntry extends JDialog {
         commentLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         commentText = new javax.swing.JTextArea();
+        glossaryFileText = new javax.swing.JTextArea();
 
         setTitle(OStrings.getString("CREATE_GLOSSARY_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -246,6 +247,22 @@ public class CreateGlossaryEntry extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(jScrollPane1, gridBagConstraints);
 
+        glossaryFileText.setBackground(javax.swing.UIManager.getDefaults().getColor("Label.background"));
+        glossaryFileText.setEditable(false);
+        glossaryFileText.setFont(new JLabel().getFont());
+        glossaryFileText.setLineWrap(true);
+        glossaryFileText.setText(OStrings.getString("CREATE_GLOSSARY_FILE")); // NOI18N
+        glossaryFileText.setWrapStyleWord(true);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(glossaryFileText, gridBagConstraints);
+
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         java.awt.Dimension dialogSize = getSize();
@@ -288,6 +305,7 @@ public class CreateGlossaryEntry extends JDialog {
     private javax.swing.JLabel commentLabel;
     private javax.swing.JTextArea commentText;
     private javax.swing.JTextArea descriptionTextArea;
+    private javax.swing.JTextArea glossaryFileText;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel sourceTermLabel;

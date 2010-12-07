@@ -294,9 +294,9 @@ public class MainWindowMenuHandler {
         final File out = new File(props.getGlossaryRoot(), props.getProjectName() + "_glossary.txt");
 
         final CreateGlossaryEntry dialog = new CreateGlossaryEntry(Core.getMainWindow().getApplicationFrame());
-        String txt = dialog.getDescriptionTextArea().getText();
+        String txt = dialog.getGlossaryFileText().getText();
         txt = MessageFormat.format(txt, out.getAbsolutePath());
-        dialog.getDescriptionTextArea().setText(txt);
+        dialog.getGlossaryFileText().setText(txt);
         dialog.setVisible(true);
 
         dialog.addWindowFocusListener(new WindowFocusListener() {

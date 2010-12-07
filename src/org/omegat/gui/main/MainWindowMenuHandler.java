@@ -323,7 +323,7 @@ public class MainWindowMenuHandler {
                     String src = dialog.getSourceText().getText();
                     String loc = dialog.getTargetText().getText();
                     String com = dialog.getCommentText().getText();
-                    if (!StringUtil.isEmpty(src) && StringUtil.isEmpty(loc)) {
+                    if (!StringUtil.isEmpty(src) && !StringUtil.isEmpty(loc)) {
                         try {
                             GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com));
                         } catch (Exception ex) {

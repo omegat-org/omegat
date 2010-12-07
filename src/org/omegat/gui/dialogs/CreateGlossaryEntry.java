@@ -120,8 +120,6 @@ public class CreateGlossaryEntry extends JDialog {
 
         sourceTermLabel = new javax.swing.JLabel();
         descriptionTextArea = new javax.swing.JTextArea();
-        okButton = new javax.swing.JButton();
-        cancelButton = new javax.swing.JButton();
         targetTermLabel = new javax.swing.JLabel();
         sourceText = new javax.swing.JTextField();
         targetText = new javax.swing.JTextField();
@@ -129,6 +127,9 @@ public class CreateGlossaryEntry extends JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         commentText = new javax.swing.JTextArea();
         glossaryFileText = new javax.swing.JTextArea();
+        jPanel1 = new javax.swing.JPanel();
+        okButton = new javax.swing.JButton();
+        cancelButton = new javax.swing.JButton();
 
         setTitle(OStrings.getString("CREATE_GLOSSARY_TITLE")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -163,34 +164,6 @@ public class CreateGlossaryEntry extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(descriptionTextArea, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
-        okButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                okButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(okButton, gridBagConstraints);
-
-        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        cancelButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelButtonActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
-        gridBagConstraints.weighty = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
-        getContentPane().add(cancelButton, gridBagConstraints);
-
         targetTermLabel.setLabelFor(sourceText);
         org.openide.awt.Mnemonics.setLocalizedText(targetTermLabel, OStrings.getString("CREATE_GLOSSARY_TARGET")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -203,6 +176,7 @@ public class CreateGlossaryEntry extends JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 4;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -212,6 +186,7 @@ public class CreateGlossaryEntry extends JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -239,6 +214,7 @@ public class CreateGlossaryEntry extends JDialog {
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 3;
         gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
         gridBagConstraints.ipadx = 50;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -262,6 +238,29 @@ public class CreateGlossaryEntry extends JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
         getContentPane().add(glossaryFileText, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(okButton, OStrings.getString("BUTTON_OK")); // NOI18N
+        okButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                okButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(okButton);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cancelButton, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        cancelButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelButtonActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cancelButton);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
+        getContentPane().add(jPanel1, gridBagConstraints);
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -306,6 +305,7 @@ public class CreateGlossaryEntry extends JDialog {
     private javax.swing.JTextArea commentText;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JTextArea glossaryFileText;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton okButton;
     private javax.swing.JLabel sourceTermLabel;

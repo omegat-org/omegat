@@ -29,25 +29,17 @@
 
 package org.omegat.gui.main;
 
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowFocusListener;
-import java.io.File;
-import java.text.MessageFormat;
-
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
-import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
@@ -58,8 +50,6 @@ import org.omegat.gui.dialogs.WorkflowOptionsDialog;
 import org.omegat.gui.editor.EditorSettings;
 import org.omegat.gui.editor.IEditor;
 import org.omegat.gui.filters2.FiltersCustomizer;
-import org.omegat.gui.glossary.GlossaryEntry;
-import org.omegat.gui.glossary.GlossaryReaderTSV;
 import org.omegat.gui.help.HelpFrame;
 import org.omegat.gui.search.SearchWindow;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
@@ -290,49 +280,7 @@ public class MainWindowMenuHandler {
         if (!Core.getProject().isProjectLoaded())
             return;
 
-        ProjectProperties props = Core.getProject().getProjectProperties();
-        final File out = new File(props.getGlossaryRoot(), props.getProjectName() + "_glossary.txt");
-
-        final CreateGlossaryEntry dialog = new CreateGlossaryEntry(Core.getMainWindow().getApplicationFrame());
-        String txt = dialog.getGlossaryFileText().getText();
-        txt = MessageFormat.format(txt, out.getAbsolutePath());
-        dialog.getGlossaryFileText().setText(txt);
-        dialog.setVisible(true);
-
-        dialog.addWindowFocusListener(new WindowFocusListener() {
-            public void windowLostFocus(WindowEvent e) {
-            }
-
-            public void windowGainedFocus(WindowEvent e) {
-                String sel = Core.getEditor().getSelectedText();
-                if (!StringUtil.isEmpty(sel)) {
-                    if (StringUtil.isEmpty(dialog.getSourceText().getText())) {
-                        dialog.getSourceText().setText(sel);
-                    } else if (StringUtil.isEmpty(dialog.getTargetText().getText())) {
-                        dialog.getTargetText().setText(sel);
-                    } else if (StringUtil.isEmpty(dialog.getCommentText().getText())) {
-                        dialog.getCommentText().setText(sel);
-                    }
-                }
-            }
-        });
-
-        dialog.addWindowListener(new WindowAdapter() {
-            public void windowClosed(WindowEvent e) {
-                if (dialog.getReturnStatus() == CreateGlossaryEntry.RET_OK) {
-                    String src = dialog.getSourceText().getText();
-                    String loc = dialog.getTargetText().getText();
-                    String com = dialog.getCommentText().getText();
-                    if (!StringUtil.isEmpty(src) && !StringUtil.isEmpty(loc)) {
-                        try {
-                            GlossaryReaderTSV.append(out, new GlossaryEntry(src, loc, com));
-                        } catch (Exception ex) {
-                            Log.log(ex);
-                        }
-                    }
-                }
-            }
-        });
+        Core.getGlossary().showCreateGlossaryEntryDialog();
     }
 
     public void editFindInProjectMenuItemActionPerformed() {

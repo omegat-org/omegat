@@ -8,7 +8,7 @@
 
   Other enhancements:
 
-  - Japanese localisation updated to 2.2.1 (UI)
+  - Japanese localisation updated to 2.2.1 update 1 (UI)
 
   Bug fixes:
 

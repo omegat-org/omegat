@@ -207,7 +207,8 @@ public class CreateGlossaryEntry extends JDialog {
         commentText.setColumns(20);
         commentText.setFont(sourceText.getFont());
         commentText.setLineWrap(true);
-        commentText.setRows(10);
+        commentText.setRows(5);
+        commentText.setWrapStyleWord(true);
         commentText.setMinimumSize(new java.awt.Dimension(104, 18));
         jScrollPane1.setViewportView(commentText);
 

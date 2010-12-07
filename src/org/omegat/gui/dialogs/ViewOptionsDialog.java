@@ -120,6 +120,7 @@ public class ViewOptionsDialog extends JDialog {
         gridBagConstraints.gridx = 2;
         gridBagConstraints.gridy = 8;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
+        gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
         getContentPane().add(okButton, gridBagConstraints);

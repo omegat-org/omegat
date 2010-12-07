@@ -230,7 +230,9 @@ public class CreateGlossaryEntry extends JDialog {
 
         commentText.setColumns(20);
         commentText.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        commentText.setRows(5);
+        commentText.setLineWrap(true);
+        commentText.setRows(10);
+        commentText.setMinimumSize(new java.awt.Dimension(104, 18));
         jScrollPane1.setViewportView(commentText);
 
         gridBagConstraints = new java.awt.GridBagConstraints();

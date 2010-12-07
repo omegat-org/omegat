@@ -276,7 +276,7 @@ public class MainWindowMenuHandler {
         FileUtil.writeScriptFile(selection, OConsts.SELECTION_EXPORT);
     }
 
-    public void editCreateGlossaryEntryActionPerformed() {
+    public void editCreateGlossaryEntryMenuItemActionPerformed() {
         if (!Core.getProject().isProjectLoaded())
             return;
 

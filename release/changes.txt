@@ -1,12 +1,17 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.1 update 1
 ----------------------------------------------------------------------
-  2 Enhancements
+  3 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.2.1 update 1 vs. 2.2.1
 
   Other enhancements:
+
+  Implemented requests:
+
+  - Glossary term creation interface
+  http://sourceforge.net/support/tracker.php?aid=3054189
 
   - Partial support for StarDict dictionaries with sametypesequence=x
 

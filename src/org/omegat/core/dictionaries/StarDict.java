@@ -46,8 +46,7 @@ import org.omegat.util.LFileCopy;
 /**
  * Dictionary implementation for StarDict format.
  * 
- * StarDict format described on
- * http://code.google.com/p/babiloo/wiki/StarDict_format
+ * StarDict format described on http://code.google.com/p/babiloo/wiki/StarDict_format
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
@@ -72,7 +71,7 @@ public class StarDict implements IDictionary {
             throw new Exception("Invalid version of dictionary: " + version);
         }
         contentType = header.get("sametypesequence");
-        if (!"g".equals(contentType) && !"m".equals(contentType)) {
+        if (!"g".equals(contentType) && !"m".equals(contentType) && !"x".equals(contentType)) {
             throw new Exception("Invalid type of dictionary: " + contentType);
         }
     }
@@ -116,10 +115,9 @@ public class StarDict implements IDictionary {
     }
 
     /**
-     * Add new article to dictionary map. If article for this words was already
-     * read, it create array with all articles instead one article, and add new
-     * article to this array. It required to support multiple translations for
-     * one word in dictionary.
+     * Add new article to dictionary map. If article for this words was already read, it create array with all
+     * articles instead one article, and add new article to this array. It required to support multiple
+     * translations for one word in dictionary.
      * 
      * @param key
      *            translated word

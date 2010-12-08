@@ -280,10 +280,10 @@ public class CreateGlossaryEntry extends JDialog {
                 okButton.doClick();
        } else if (evt.getKeyCode() == KeyEvent.VK_TAB) {
             if (evt.isShiftDown()) {
-                targetText.requestFocus(); // Is it Shift+Tab?
+                targetText.requestFocusInWindow(); // Is it Shift+Tab?
             } else {
                 evt.consume(); // Otherwise, the tab is entered in the component
-                okButton.requestFocus();
+                okButton.requestFocusInWindow();
             }
         }
     }//GEN-LAST:event_commentTextKeyPressed

@@ -210,6 +210,11 @@ public class CreateGlossaryEntry extends JDialog {
         commentText.setRows(5);
         commentText.setWrapStyleWord(true);
         commentText.setMinimumSize(new java.awt.Dimension(104, 18));
+        commentText.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                commentTextKeyPressed(evt);
+            }
+        });
         jScrollPane1.setViewportView(commentText);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -269,10 +274,20 @@ public class CreateGlossaryEntry extends JDialog {
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radiosActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_radiosActionPerformed
-    {// GEN-HEADEREND:event_radiosActionPerformed
-    }// GEN-LAST:event_radiosActionPerformed
-
+    private void commentTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_commentTextKeyPressed
+        // TODO add your handling code here:
+       if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                okButton.doClick();
+       } else if (evt.getKeyCode() == KeyEvent.VK_TAB) {
+            if (evt.isShiftDown()) {
+                targetText.requestFocus(); // Is it Shift+Tab?
+            } else {
+                evt.consume(); // Otherwise, the tab is entered in the component
+                okButton.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_commentTextKeyPressed
+ 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
 

@@ -305,10 +305,6 @@ public class CreateGlossaryEntry extends JDialog {
         doClose(RET_CANCEL);
     }// GEN-LAST:event_closeDialog
 
-    private void exportCurrentSegmentActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_exportCurrentSegmentActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_exportCurrentSegmentActionPerformed
-
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);

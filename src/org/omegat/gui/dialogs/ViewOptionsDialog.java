@@ -187,10 +187,6 @@ public class ViewOptionsDialog extends JDialog {
         doClose(RET_CANCEL);
     }// GEN-LAST:event_closeDialog
 
-    private void useSlashActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_useSlashActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_useSlashActionPerformed
-
     private void doClose(int retStatus) {
         returnStatus = retStatus;
         setVisible(false);

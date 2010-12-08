@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.1 update 1
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.2.1 update 1 vs. 2.2.1
@@ -16,6 +16,7 @@
   - Partial support for StarDict dictionaries with sametypesequence=x
 
   - Japanese localisation updated to 2.2.1 update 1 (UI)
+  - Italian localisation updated to 2.2.1 (UI, documentation)
 
   Bug fixes:
 

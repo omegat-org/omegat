@@ -166,11 +166,6 @@ public class ExternalTMXMatchesDialog extends JDialog {
 
         useSlash.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(useSlash, OStrings.getString("EXT_TMX_USE_XML")); // NOI18N
-        useSlash.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                useSlashActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 7;
@@ -205,10 +200,6 @@ public class ExternalTMXMatchesDialog extends JDialog {
     {
         doClose(RET_CANCEL);
     }// GEN-LAST:event_closeDialog
-
-    private void useSlashActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_useSlashActionPerformed
-        // TODO add your handling code here:
-    }// GEN-LAST:event_useSlashActionPerformed
 
     private void doClose(int retStatus) {
         returnStatus = retStatus;

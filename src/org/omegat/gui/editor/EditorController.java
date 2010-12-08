@@ -30,6 +30,7 @@ package org.omegat.gui.editor;
 
 import java.awt.Component;
 import java.awt.ComponentOrientation;
+import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -73,6 +74,10 @@ import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.UIThreadsUtil;
 
+import com.vlsolutions.swing.docking.DockingDesktop;
+import com.vlsolutions.swing.docking.event.DockableSelectionEvent;
+import com.vlsolutions.swing.docking.event.DockableSelectionListener;
+
 /**
  * Class for control all editor operations.
  * 
@@ -97,6 +102,8 @@ public class EditorController implements IEditor {
     /** Dockable pane for editor. */
     private final DockableScrollPane pane;
 
+    private boolean dockableSelected;
+
     /** Editor instance. */
     protected final EditorTextArea3 editor;
 
@@ -113,8 +120,7 @@ public class EditorController implements IEditor {
     /** Current displayed file. */
     protected int displayedFileIndex, previousDisplayedFileIndex;
     /**
-     * Current active segment in current file, if there are segments in file
-     * (can be fale if filter active!)
+     * Current active segment in current file, if there are segments in file (can be fale if filter active!)
      */
     protected int displayedEntryIndex;
 
@@ -148,6 +154,17 @@ public class EditorController implements IEditor {
         pane.setMinimumSize(new Dimension(100, 100));
 
         Core.getMainWindow().addDockable(pane);
+
+        Container c = pane;
+        while (c != null && !(c instanceof DockingDesktop)) {
+            c = c.getParent(); // find dockable desktop
+        }
+        DockingDesktop desktop = (DockingDesktop) c;
+        desktop.addDockableSelectionListener(new DockableSelectionListener() {
+            public void selectionChanged(DockableSelectionEvent dockableselectionevent) {
+                dockableSelected = pane == dockableselectionevent.getSelectedDockable();
+            }
+        });
 
         settings = new EditorSettings(this);
 
@@ -276,8 +293,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Decide what document orientation should be default for source/target
-     * languages.
+     * Decide what document orientation should be default for source/target languages.
      */
     private void setInitialOrientation() {
         String sourceLang = Core.getProject().getProjectProperties().getSourceLanguage().getLanguageCode();
@@ -393,9 +409,8 @@ public class EditorController implements IEditor {
     /**
      * Displays all segments in current document.
      * <p>
-     * Displays translation for each segment if it's available, otherwise
-     * displays source text. Also stores length of each displayed segment plus
-     * its starting offset.
+     * Displays translation for each segment if it's available, otherwise displays source text. Also stores
+     * length of each displayed segment plus its starting offset.
      */
     protected void loadDocument() {
         UIThreadsUtil.mustBeSwingThread();
@@ -460,11 +475,10 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Activates the current entry (if available) by displaying source text and
-     * embedding displayed text in markers.
+     * Activates the current entry (if available) by displaying source text and embedding displayed text in
+     * markers.
      * <p>
-     * Also moves document focus to current entry, and makes sure fuzzy info
-     * displayed if available.
+     * Also moves document focus to current entry, and makes sure fuzzy info displayed if available.
      */
     public void activateEntry() {
         UIThreadsUtil.mustBeSwingThread();
@@ -533,8 +547,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Called on the text changed in document. Required for recalculate marks
-     * for active segment.
+     * Called on the text changed in document. Required for recalculate marks for active segment.
      */
     void onTextChanged() {
         Document3 doc = editor.getOmDocument();
@@ -545,8 +558,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Display some segments before and after when user on the top or bottom of
-     * page.
+     * Display some segments before and after when user on the top or bottom of page.
      */
     private void scrollForDisplayNearestSegments(final int requiredPosition) {
         int lookNext, lookPrev;
@@ -601,8 +613,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Calculate statistic for file, request statistic for project and display
-     * in status bar.
+     * Calculate statistic for file, request statistic for project and display in status bar.
      */
     private void showStat() {
         IProject project = Core.getProject();
@@ -646,11 +657,11 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Commits the translation. Reads current entry text and commit it to memory
-     * if it's changed. Also clears out segment markers while we're at it.
+     * Commits the translation. Reads current entry text and commit it to memory if it's changed. Also clears
+     * out segment markers while we're at it.
      * <p>
-     * Since 1.6: Translation equal to source may be validated as OK translation
-     * if appropriate option is set in Workflow options dialog.
+     * Since 1.6: Translation equal to source may be validated as OK translation if appropriate option is set
+     * in Workflow options dialog.
      * <p>
      * All displayed segments with the same source text updated also.
      * 
@@ -718,8 +729,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Deactivate active translation without save. Required on project close
-     * postprocessing, for example.
+     * Deactivate active translation without save. Required on project close postprocessing, for example.
      */
     protected void deactivateWithoutCommit() {
         UIThreadsUtil.mustBeSwingThread();
@@ -965,8 +975,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Change case of the selected text or if none is selected, of the current
-     * word.
+     * Change case of the selected text or if none is selected, of the current word.
      * 
      * @param toWhat
      *            : lower, title, upper or cycle
@@ -1084,9 +1093,8 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * perform the case change. Lowercase becomes titlecase, titlecase becomes
-     * uppercase, uppercase becomes lowercase. if the text matches none of these
-     * categories, it is uppercased.
+     * perform the case change. Lowercase becomes titlecase, titlecase becomes uppercase, uppercase becomes
+     * lowercase. if the text matches none of these categories, it is uppercased.
      * 
      * @param input
      *            : the string to work on
@@ -1202,7 +1210,7 @@ public class EditorController implements IEditor {
     public String getSelectedText() {
         UIThreadsUtil.mustBeSwingThread();
 
-        return editor.getSelectedText();
+        return dockableSelected ? editor.getSelectedText() : null;
     }
 
     /** Loads Instant start article */
@@ -1228,12 +1236,10 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * Detects the language of the instant start guide (checks if present in
-     * default locale's language).
+     * Detects the language of the instant start guide (checks if present in default locale's language).
      * 
-     * If there is no instant start guide in the default locale's language, "en"
-     * (English) is returned, otherwise the acronym for the default locale's
-     * language.
+     * If there is no instant start guide in the default locale's language, "en" (English) is returned,
+     * otherwise the acronym for the default locale's language.
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
@@ -1290,8 +1296,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * {@inheritdoc} Document is reloaded to immediately have the filter being
-     * effective.
+     * {@inheritdoc} Document is reloaded to immediately have the filter being effective.
      */
     public void addFilter(List<Integer> entryList) {
         this.entryFilterList = entryList;
@@ -1331,8 +1336,7 @@ public class EditorController implements IEditor {
     }
 
     /**
-     * {@inheritdoc} Document is reloaded if appropriate to immediately remove
-     * the filter;
+     * {@inheritdoc} Document is reloaded if appropriate to immediately remove the filter;
      */
     public void removeFilter() {
         this.entryFilterList = null;
@@ -1355,8 +1359,8 @@ public class EditorController implements IEditor {
      * 
      * @param entry
      *            project-wide entry number
-     * @return true if entry belongs to the filtered entries, or if there is no
-     *         filter in place, false otherwise.
+     * @return true if entry belongs to the filtered entries, or if there is no filter in place, false
+     *         otherwise.
      */
     public boolean isInFilter(Integer entry) {
         if (this.entryFilterList == null)

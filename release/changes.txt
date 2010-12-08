@@ -1,12 +1,10 @@
 ----------------------------------------------------------------------
- OmegaT 2.2.1 update 1
+ OmegaT 2.2.2
 ----------------------------------------------------------------------
   4 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
-2.2.1 update 1 vs. 2.2.1
-
-  Other enhancements:
+2.2.2 vs. 2.2.1
 
   Implemented requests:
 
@@ -15,13 +13,29 @@
 
   - Partial support for StarDict dictionaries with sametypesequence=x
 
-  - Japanese localisation updated to 2.2.1 update 1 (UI)
+  Other enhancements:
+
+  - Japanese localisation updated to 2.2.2 (UI)
   - Italian localisation updated to 2.2.1 (UI, documentation)
 
   Bug fixes:
 
   - Some content ignored in DTD files
     http://sourceforge.net/support/tracker.php?aid=3088802
+
+----------------------------------------------------------------------
+ OmegaT 2.2.1 update 1
+----------------------------------------------------------------------
+  1 Enhancement
+  1 Bugfix
+----------------------------------------------------------------------
+2.2.1 update 1 vs. 2.2.1
+
+  Other enhancements:
+
+  - Japanese localisation updated to 2.2.1 (UI)
+
+  Bug fixes:
 
   - When "Options > Display all source segments in bold" was checked
 untranslated segments appeared in bold if "View > Display Source Segments"

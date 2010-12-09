@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.2
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   2 Bugfixes
 ----------------------------------------------------------------------
 2.2.2 vs. 2.2.1
@@ -17,6 +17,7 @@
 
   - Japanese localisation updated to 2.2.2 (UI)
   - Italian localisation updated to 2.2.1 (UI, documentation)
+  - Dutch localisation updated to 2.2.1 (UI)
 
   Bug fixes:
 

@@ -411,7 +411,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
                         .getTranslatableTagAttributes().containsPair(tag, attr.getName()))
                         && dialect.validateTranslatableTagAttribute(tag, attr.getName(),
                                 xmltag.getAttributes())) {
-                    attr.setValue(StaticUtils.makeValidXML(translator.translate(attr.getValue())));
+                    attr.setValue(StaticUtils.makeValidXML(
+                            translator.translate(StaticUtils.entitiesToCharacters(attr.getValue()))));
                 }
             }
         }

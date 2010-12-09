@@ -272,6 +272,26 @@ public class StaticUtils {
     }
 
     /**
+     * Converts XML entities to characters. 
+     */
+    public static String entitiesToCharacters(String text) {
+
+        if (text.indexOf("&amp;") >= 0) {
+            text = text.replaceAll("&amp;", "&");
+        }
+        if (text.indexOf("&gt;") >= 0) {
+            text = text.replaceAll("&gt;", ">");
+        }
+        if (text.indexOf("&lt;") >= 0) {
+            text = text.replaceAll("&lt;", "<");
+        }
+        if (text.indexOf("&quot;") >= 0) {
+            text = text.replaceAll("&quot;", "\"");
+        }
+        return text;
+    }
+
+    /**
      * Converts a stream of plaintext into valid XML. Output stream must convert
      * stream to UTF-8 when saving to disk.
      */

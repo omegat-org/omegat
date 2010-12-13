@@ -285,6 +285,10 @@ public class StaticUtils {
         if (text.indexOf("&quot;") >= 0) {
             text = text.replaceAll("&quot;", "\"");
         }
+       // If makeValidXML converts ' to apos;, the following lines should be uncommented
+        /* if (text.indexOf("&apos;") >= 0) {
+            text = text.replaceAll("&apos;", "'");
+        }*/
         if (text.indexOf("&amp;") >= 0) {
             text = text.replaceAll("&amp;", "&");
         }

@@ -276,9 +276,6 @@ public class StaticUtils {
      */
     public static String entitiesToCharacters(String text) {
 
-        if (text.indexOf("&amp;") >= 0) {
-            text = text.replaceAll("&amp;", "&");
-        }
         if (text.indexOf("&gt;") >= 0) {
             text = text.replaceAll("&gt;", ">");
         }
@@ -287,6 +284,9 @@ public class StaticUtils {
         }
         if (text.indexOf("&quot;") >= 0) {
             text = text.replaceAll("&quot;", "\"");
+        }
+        if (text.indexOf("&amp;") >= 0) {
+            text = text.replaceAll("&amp;", "&");
         }
         return text;
     }

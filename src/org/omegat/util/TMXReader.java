@@ -386,7 +386,7 @@ public class TMXReader extends org.xml.sax.helpers.DefaultHandler {
 
         if (isUpgradeSentSeg()) {
             List<String> srcSegments = Segmenter.segment(sourceLang, source, null, null);
-            List<String> tarSegments = Segmenter.segment(sourceLang, translation, null, null);
+            List<String> tarSegments = Segmenter.segment(targetLang, translation, null, null);
 
             int n = srcSegments.size();
             if (n == tarSegments.size()) {

@@ -66,18 +66,18 @@ public class OpenXMLFilter extends AbstractFilter {
      */
     private void defineDOCUMENTSOptions(Map<String, String> config) {
         /*
-         * Complete string when all options are enabled 
-         * Word
-         * "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)|(header\\d+\\.xml)
-         * |(footer\\d+\\.xml)"
-         *  Excel 
-         * "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" 
-         *  PowerPoint 
-         * "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|(notesSlide\\d+\\.xml)"
-         * Global
-         * "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
-         * Excel 
-         " "|(workbook\\.xml)"
+         Complete string when all options are enabled 
+         Word
+         "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)|(header\\d+\\.xml)
+         |(footer\\d+\\.xml)"
+         Excel 
+         "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" 
+         PowerPoint 
+         "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)|(notesSlide\\d+\\.xml)"
+         Global
+         "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)"
+         Excel 
+         "|(workbook\\.xml)"
          */
 
         DOCUMENTS = "(document\\.xml)";

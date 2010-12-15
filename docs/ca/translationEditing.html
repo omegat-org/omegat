@@ -15,22 +15,16 @@
     </li>
 
     <li>
-      <p><a href="#validation">Segments que no es poden modificar</a></p>
-    </li>
-  </ul>
-
-  <p>El camp d'edició es pot configurar per tal que es comporti de les maneres següents:</p>
-
-  <ul>
-    <li>
-      <p>S'insereixi automàticament la millor coincidència disponible</p>
+      <p><a href="#validation">Permet que la traducció sigui igual que el text de partida</a></p>
     </li>
 
     <li>
-      <p>Es considerin com a traduïts els segments idèntics a l'original</p>
+      <p><a href="#Export">Exporta el segment a fitxers de text</a></p>
     </li>
-  </ul>
-  <hr>
+  </ul><img alt="Diàleg Opcions de comportament de l'edició" src=
+  "images/EditingBehaviourOptions.png"><br>
+
+  <p>En aquest quadre de diàleg, que s'obre en seleccionar Opcions &gt; Comportament de l'edició..., l'usuari pot definir les accions que cal realitzar en activar un segment per primera vegada.</p>
 
   <h2><a name="auto_insert" id="auto_insert"></a>Inserció automàtica de coincidències</h2>
 
@@ -65,19 +59,21 @@
       </td>
 
       <td>
-        <p>L'OmegaT inserirà la traducció del segment més similar al segment de partida, sempre que superi el llindar de similitud que podeu definir.</p>
+        <p>L'OmegaT inserirà la traducció del segment més similar al segment de partida, sempre que superi el llindar de similitud que heu definit al diàleg (100% al cas anterior). Si es troba una coincidència, s'afegirà un prefix al segment d'arribada, especificat al camp de text Prefix ([parcial] a l'exemple anterior). Això facilita la cerca dels segments pretraduïts.</p>
       </td>
     </tr>
   </table>
   <hr>
 
-  <h2><a name="validation" id="validation"></a>Segments que no es poden modificar</h2>
+  <h2><a name="validation" id="validation"></a>Permet que la traducció sigui igual que el text de partida</h2>
 
   <p>És possible que els documents que us cal traduir continguin marques registrades o noms propis que cal deixar intactes als documents traduïts. Hi ha dues estratègies per als segments que contenen únicament text que cal deixar sense traduir.</p>
 
   <p>Podeu decidir no traduir aquests segments de cap manera; això farà que l'OmegaT els notifiqui com a segments no traduïts. Aquest és el valor per defecte.</p>
 
   <p>O bé, podeu escriure'n la traducció encara que sigui idèntica al text de partida, de manera que l'OmegaT recordarà que heu revisat el text i que heu decidit deixar el segment traduït igual que el de partida. Per poder fer-ho, aneu a <strong>Opcions → Comportament de l'edició...</strong> i activeu la casella de selecció <strong>Permet que la traducció sigui igual que el text de partida</strong>.</p>
+
+
   <hr>
 
   <table summary="format" style="width: 100%;" border="0" cellpadding=

@@ -49,29 +49,25 @@
   <p>Al diàleg de fitxer que obre l'OmegaT, un projecte de traducció es mostra com un fitxer amb una icona de l'OmegaT associada. Vist amb un navegador de fitxers, un projecte de traducció es veu igual que una carpeta normal i corrent.</p>
 
   <p><br></p><img src="images/OmegaT_projects_and_subdirectories.png" name=
-  "grafika3" alt="Projectes i subdirectoris de l'OmegaT" id="grafika3" align=
-  "left" border="1"><br clear="left">
+  "grafika3" alt="Projectes i subdirectoris de l'OmegaT" align="left" border="1"
+  id="grafika3"><br clear="left">
 
   <p><br>
   <br></p>
 
-  <p>Per obrir un projecte de traducció, simplement cal seleccionar l'element amb la icona de l'OmegaT. Un projecte de traducció <b>Exemple_Projecte</b> creat amb la configuració per defecte es crearà com a una subcarpeta nova amb l'estructura següent:</p>
+  <p>Per obrir un projecte de traducció, simplement cal seleccionar l'element amb la icona de l'OmegaT. Un projecte de traducció <b>Exemple_Projecte</b> creat amb la configuració per defecte es crearà com a una subcarpeta nova amb l'estructura següent:</p><img src=
+  "images/Omegatproject.png" name="grafika1" alt="Projecte de l'OmegaT" align="left"
+  border="0" id="grafika1"><br clear="left">
 
-  <p>&nbsp;</p><img src="images/Omegatproject.png" name="grafika1" alt=
-  "Projecte de l'OmegaT" id="grafika1" align="left" border="0"><br clear="left">
-  En iniciar un projecte nou, les subcarpetes dels diccionaris (<b>dictionary</b>) i dels glossaris (<b>glossary</b>) seran buides. Aquí s'hi col·loquen els glossaris i els diccionaris, si en teniu algun disponible per al projecte.
+  <p>Inicialment, totes les subcarpetes d'un projecte seran buides.</p>
 
   <h3>Omegat</h3>
 
   <dl>
-    <dt>La subcarpeta <b>omegat</b> contindrà com a mínim dos fitxers: el fitxer de memòria de traducció <em>project_save.tmx</em> (<a href=
-    "translationMemories.html">...</a>) i el fitxer d'estadístiques <em>project_stats.txt (<a href="userInterface.html#files">...</a>)</em>. El fitxer <em>project_save.tmx</em> és la memòria de traducció de treball per al projecte. Amb la funció de desament automàtic activada, s'actualitzarà automàticament en sortir de l'OmegaT. És la memòria de traducció que s'utilitzarà per crear els fitxers traduïts. En aquesta subcarpeta, posteriorment també s'hi aniran afegint una sèrie de fitxers TMX anomenats project_save.tmx.<i>&lt;data i hora</i>&gt;.bak (<a href=
+    <dt>La subcarpeta <b>omegat</b> segurament contindrà diversos fitxers; el més important de tots és el fitxer de memòria de traducció <em>project_save.tmx</em> (<a href="translationMemories.html">...</a>). El fitxer <em>project_save.tmx</em> és la memòria de traducció de treball per al projecte. Amb la funció de desament automàtic activada, s'actualitzarà automàticament en sortir de l'OmegaT. És la memòria de traducció que s'utilitzarà per crear els fitxers traduïts. En aquesta subcarpeta, posteriorment també s'hi aniran afegint una sèrie de fitxers TMX anomenats project_save.tmx.<i>&lt;data i hora</i>&gt;.bak (<a href=
     "translationMemories.html#TMX_backup">...</a>). Són còpies de seguretat de la memòria de traducció del projecte. Se'n crea una cada vegada que obriu un projecte, que reflecteix el contingut de la memòria abans que la sessió actual la modifiqui.</dt>
 
-    <dd>El fitxer <b>stats.txt</b> conté les estadístiques del projecte actual; es pot obrir en una aplicació de full de càlcul i conté informació de recompte de paraules i de segments. La informació és més detallada que la que es mostra a la finestra <em>Fitxers del projecte</em>.</dd>
-
-    <dd><br clear="left">
-    Els fitxers <strong>ignored_words.txt</strong> i <strong>learned_words.txt</strong> són fitxers reservats per al verificador ortogràfic en versions posteriors de l'OmegaT.</dd>
+    <dd>El fitxer <b>stats.txt</b> (<a href="userInterface.html#files">...</a>) conté les estadístiques del projecte actual; es pot obrir en una aplicació de full de càlcul i conté informació de recompte de paraules i de segments. La informació és més detallada que la que es mostra a la finestra <em>Fitxers del projecte</em>. Els fitxers <strong>ignored_words.txt</strong> i <strong>learned_words.txt</strong>, si existeixen, són fitxers que el verificador ortogràfic utilitzarà.</dd>
   </dl>
 
   <h3>Source</h3>
@@ -89,7 +85,7 @@
   <h3>Tm</h3>
 
   <dl>
-    <dd>En aquesta subcarpeta s'hi poden col·locar les memòries de traducció corresponents a traduccions anteriors. Cal que tinguin el format <b>tmx</b>. Utilitzeu les eines disponibles per tal de transformar-les des d'altres formats. Tingueu en compte que project_save.tmx és la memòria de traducció, que conté el text de partida i la corresponent traducció. No obstant, podeu utilitzar memòries de traducció antigues per tal de trobar els candidats més idonis per als segments sense traduir.</dd>
+    <dd>En aquesta subcarpeta s'hi poden col·locar les memòries de traducció corresponents a traduccions anteriors. Cal que tinguin el format <b>tmx</b>. Utilitzeu les eines disponibles per tal de transformar-les des d'altres formats. Tingueu en compte que project_save.tmx és la memòria de traducció, que conté el text de partida i la corresponent traducció. No obstant això, podeu utilitzar memòries de traducció antigues per tal de trobar els candidats més idonis per als segments sense traduir.</dd>
   </dl>
 
   <h3>omegat.project</h3>
@@ -110,139 +106,135 @@
 
   <p>Els fitxers de l'usuari es desen en una ubicació separada, per tal que qualsevol versió de l'OmegaT hi pugui accedir. La ubicació depèn de la plataforma que utilitzeu:</p>
 
-  <table summary="format" border="1" cellpadding="4" cellspacing="0"
-  width="100%">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "format">
     <col width="33*">
     <col width="223*">
 
-    <tbody>
-      <tr valign="top">
-        <td width="13%">
-          <p>Windows</p>
-        </td>
+    <tr valign="top">
+      <td width="13%">
+        <p>Windows</p>
+      </td>
 
-        <td width="87%">
-          <dl>
-            <dd><strong>2000 i XP: Documents and Settings\&lt;nom d'usuari&gt;\Application Data\OmegaT</strong></dd>
+      <td width="87%">
+        <dl>
+          <dd><strong>2000 i XP: Documents and Settings\&lt;nom d'usuari&gt;\Application Data\OmegaT</strong></dd>
 
-            <dd><strong>Vista: Users\&lt;nom d'usuari&gt;\AppData\Roaming\OmegaT</strong></dd>
+          <dd><strong>Vista: Users\&lt;nom d'usuari&gt;\AppData\Roaming\OmegaT</strong></dd>
 
-            <dd><strong>Altres: &lt;ubicació&gt;\OmegaT</strong> (&lt;ubicació&gt; és la ubicació de la carpeta «home» configurada per al Java).</dd>
-          </dl>
-        </td>
-      </tr>
+          <dd><strong>Altres: &lt;ubicació&gt;\OmegaT</strong> (&lt;ubicació&gt; és la ubicació de la carpeta «home» configurada per al Java).</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="13%">
-          <dl>
-            <dt>Linux/Solaris/FreeBSD</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>Linux/Solaris/FreeBSD</dt>
+        </dl>
+      </td>
 
-        <td width="87%">
-          <dl>
-            <dd><strong>&lt;directori de l'usuari&gt;/.omegat</strong> (.omegat és un directori; el punt del principi fa que no es mostri si no escriviu <code>ls -a</code> o una ordre equivalent).</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;directori de l'usuari&gt;/.omegat</strong> (.omegat és un directori; el punt del principi fa que no es mostri si no escriviu <code>ls -a</code> o una ordre equivalent).</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="13%">
-          <dl>
-            <dt>MacOSX</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>MacOSX</dt>
+        </dl>
+      </td>
 
-        <td width="87%">
-          <dl>
-            <dd><strong>&lt;directori de l'usuari&gt;/Library/Preferences/OmegaT</strong></dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;directori de l'usuari&gt;/Library/Preferences/OmegaT</strong></dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="13%">
-          <dl>
-            <dt>Altres</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="13%">
+        <dl>
+          <dt>Altres</dt>
+        </dl>
+      </td>
 
-        <td width="87%">
-          <dl>
-            <dd><strong>&lt;directori de l'usuari&gt;</strong></dd>
-          </dl>
-        </td>
-      </tr>
-    </tbody>
+      <td width="87%">
+        <dl>
+          <dd><strong>&lt;directori de l'usuari&gt;</strong></dd>
+        </dl>
+      </td>
+    </tr>
   </table>
 
   <h3><a name="user_list" id="user_list"></a>Llista dels fitxers de l'usuari<br></h3>
 
-  <table summary="format" border="1" cellpadding="4" cellspacing="0"
-  width="100%">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "format">
     <col width="27*">
     <col width="229*">
 
-    <tbody>
-      <tr valign="top">
-        <td width="11%">
-          <dl>
-            <dt>log.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>log.txt</dt>
+        </dl>
+      </td>
 
-        <td width="89%">
-          <dl>
-            <dd>En aquest fitxer s'hi registren els missatges d'error del Java mentre s'està executant l'OmegaT. Si creieu que l'OmegaT està funcionant incorrectament, és important que inclogueu aquest fitxer o la part rellevant en qualsevol <a href=
-            "website.html">informe d'error</a>.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="89%">
+        <dl>
+          <dd>En aquest fitxer s'hi registren els missatges d'error del Java mentre s'està executant l'OmegaT. Si creieu que l'OmegaT està funcionant incorrectament, és important que inclogueu aquest fitxer o la part rellevant en qualsevol <a href=
+          "website.html">informe d'error</a>.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="11%">
-          <dl>
-            <dt>omegat.prefs</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>omegat.prefs</dt>
+        </dl>
+      </td>
 
-        <td width="89%">
-          <dl>
-            <dd>Fitxer XML que conté la configuració de totes les opcions a les quals podeu accedir mitjançant la GUI, així com les dades de posició de la finestra.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="89%">
+        <dl>
+          <dd>Fitxer XML que conté la configuració de totes les opcions a les quals podeu accedir mitjançant la GUI, així com les dades de posició de la finestra.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="11%">
-          <dl>
-            <dt>filters.conf</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>filters.conf</dt>
+        </dl>
+      </td>
 
-        <td width="89%">
-          <dl>
-            <dd>Fitxer XML que conté totes les dades que s'han definit a les preferències dels <a href=
-            "fileFilters.html">filtres de fitxers</a>.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="89%">
+        <dl>
+          <dd>Fitxer XML que conté totes les dades que s'han definit a les preferències dels <a href=
+          "fileFilters.html">filtres de fitxers</a>.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="11%">
-          <dl>
-            <dt>segmentation.conf</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="11%">
+        <dl>
+          <dt>segmentation.conf</dt>
+        </dl>
+      </td>
 
-        <td width="89%">
-          <dl>
-            <dd>Fitxer XML que conté totes les dades que s'han definit a les preferències de la <a href=
-            "segmentation.html">segmentació per frases</a>.</dd>
-          </dl>
-        </td>
-      </tr>
-    </tbody>
+      <td width="89%">
+        <dl>
+          <dd>Fitxer XML que conté totes les dades que s'han definit a les preferències de la <a href=
+          "segmentation.html">segmentació per frases</a>.</dd>
+        </dl>
+      </td>
+    </tr>
   </table>
 
   <p><br>
@@ -254,176 +246,174 @@
   <p>L'OmegaT es distribueix com un paquet que podeu baixar des de SourceForge. En aquest capítol, es farà referència al <a href=
   "installingAndRunning.html#Other_systems">paquet independent de la plataforma</a> que conté l'aplicació en un format Java estàndard. Els altres paquets inclouen un paquet <code>.tar</code> per al Linux, un instal·lador per al Windows -amb un entorn d'execució de Java o sense-, un instal·lador per al MacOSX i un paquet amb el codi font per als desenvolupadors. Aquest paquet independent de la plataforma es pot utilitzar en <strong>qualsevol</strong> plataforma que tingui instal·lat un entorn d'execució de Java 1.5, que també inclou les plataformes per a les quals hi ha un paquet específic. El paquet independent de la plataforma es distribueix com un fitxer comprimit que, per instal·lar-lo, heu de descomprimir a la carpeta que vulgueu. Generalment, podeu descomprimir-lo fent doble clic al paquet que heu baixat. Un cop descomprimit, s'haurà creat una carpeta amb el següent contingut:</p>
 
-  <table summary="format" border="1" cellpadding="4" cellspacing="0"
-  width="100%">
+  <table width="100%" border="1" cellpadding="4" cellspacing="0" summary=
+  "format">
     <col width="19*">
     <col width="237*">
 
-    <tbody>
-      <tr valign="top">
-        <td width="8%">
-          <p><b>Fitxer/<br> subcarpeta</b></p>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <p><b>Fitxer/<br> subcarpeta</b></p>
+      </td>
 
-        <td width="92%">
-          <p><b>Contingut</b></p>
-        </td>
-      </tr>
+      <td width="92%">
+        <p><b>Contingut</b></p>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">/docs/</td>
+    <tr valign="top">
+      <td width="8%">/docs/</td>
 
-        <td width="92%">
-          <dl>
-            <dt>Conté tots els fitxers del manual d'usuari. Podeu obrir-los en un navegador web per accedir als enllaços externs.</dt>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dt>Conté tots els fitxers del manual d'usuari. Podeu obrir-los en un navegador web per accedir als enllaços externs.</dt>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>/images/</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>/images/</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Conté les icones i els gràfics del logotip.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>Conté les icones i els gràfics del logotip.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>/lib/</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>/lib/</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Conté els fitxers del Java. Són necessaris per tal que l'OmegaT funcioni correctament.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>Conté els fitxers del Java. Són necessaris per tal que l'OmegaT funcioni correctament.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>join.html</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>join.html</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Es tracta d'un fitxer HTML normal que, en obrir-lo amb el navegador web, us redirigirà al grup d'usuaris de l'OmegaT del Yahoo Groups. Tot i que no cal que us hi subscriviu, si ho feu podreu accedir a alguns serveis addicionals, com l'accés a alguns fitxers i a enquestes, i també podreu participar als debats relacionats amb l'OmegaT. L'arxiu de missatges del grup és públic i per consultar-lo no cal que us hi subscriviu.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>Es tracta d'un fitxer HTML normal que, en obrir-lo amb el navegador web, us redirigirà al grup d'usuaris de l'OmegaT del Yahoo Groups. Tot i que no cal que us hi subscriviu, si ho feu podreu accedir a alguns serveis addicionals, com l'accés a alguns fitxers i a enquestes, i també podreu participar als debats relacionats amb l'OmegaT. L'arxiu de missatges del grup és públic i per consultar-lo no cal que us hi subscriviu.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>changes.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>changes.txt</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Un fitxer que conté una llista detallada de les modificacions realitzades entre aquesta versió i les anteriors.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>Un fitxer que conté una llista detallada de les modificacions realitzades entre aquesta versió i les anteriors.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>license.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>license.txt</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>La Llicència Pública General GNU. Aquesta llicència us permet fer diverses coses amb l'OmegaT, incloses la modificació i la distribució. Si esteu interessat en modificar o distribuir l'OmegaT, llegiu detingudament aquest document i assegureu-vos que, abans de fer res, en coneixeu totes les implicacions. En cas de dubte, pregunteu als membres del projecte directament enviant-los un missatge de correu des de la pàgina de SourceForge o enviant un missatge de correu públic al grup d'usuaris.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>La Llicència Pública General GNU. Aquesta llicència us permet fer diverses coses amb l'OmegaT, incloses la modificació i la distribució. Si esteu interessat en modificar o distribuir l'OmegaT, llegiu detingudament aquest document i assegureu-vos que, abans de fer res, en coneixeu totes les implicacions. En cas de dubte, pregunteu als membres del projecte directament enviant-los un missatge de correu des de la pàgina de SourceForge o enviant un missatge de correu públic al grup d'usuaris.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>doc-license.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>doc-license.txt</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>La Llicència Pública General GNU. Aquesta llicència cobreix la documentació. Vegeu-ne la descripció més amunt.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>La Llicència Pública General GNU. Aquesta llicència cobreix la documentació. Vegeu-ne la descripció més amunt.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>readme.txt</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>readme.txt</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Aquest fitxer és molt important i cal que el llegiu abans d'iniciar l'OmegaT. Conté informació general sobre l'OmegaT, on podeu trobar més informació, com hi podeu contribuir, etc. Aquest fitxer s'ha traduït a diverses llengües.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>Aquest fitxer és molt important i cal que el llegiu abans d'iniciar l'OmegaT. Conté informació general sobre l'OmegaT, on podeu trobar més informació, com hi podeu contribuir, etc. Aquest fitxer s'ha traduït a diverses llengües.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>OmegaT</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Un fitxer de text que conté dues línies:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Aquest fitxer us pot ser útil si el convertiu en executable (<code>chmod +x OmegaT</code>) des de la <a href=
-            "installingAndRunning.html#command_line">línia d'ordres</a> i dins del directori <code>/OmegaT_2.0/</code>. A partir d'aquest moment, podreu iniciar l'OmegaT cridant aquest fitxer des de la línia d'ordres.</dd>
-          </dl>
-        </td>
-      </tr>
+      <td width="92%">
+        <dl>
+          <dd>Un fitxer de text que conté dues línies:<br> <code>#!/bin/bash</code><br> <code>java -jar OmegaT.jar $*</code><br> Aquest fitxer us pot ser útil si el convertiu en executable (<code>chmod +x OmegaT</code>) des de la <a href=
+          "installingAndRunning.html#command_line">línia d'ordres</a> i dins del directori <code>/OmegaT_2.0/</code>. A partir d'aquest moment, podreu iniciar l'OmegaT cridant aquest fitxer des de la línia d'ordres.</dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>OmegaT.bat</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT.bat</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dd>Un fitxer de lot que s'utilitza per executar l'OmegaT des de la <a href=
-            "installingAndRunning.html#command_line">línia d'ordres</a> del Windows. Conté la línia següent:</dd>
+      <td width="92%">
+        <dl>
+          <dd>Un fitxer de lot que s'utilitza per executar l'OmegaT des de la <a href=
+          "installingAndRunning.html#command_line">línia d'ordres</a> del Windows. Conté la línia següent:</dd>
 
-            <dd><code>java -jar OmegaT.jar %*</code></dd>
-          </dl>
-        </td>
-      </tr>
+          <dd><code>java -jar OmegaT.jar %*</code></dd>
+        </dl>
+      </td>
+    </tr>
 
-      <tr valign="top">
-        <td width="8%">
-          <dl>
-            <dt>OmegaT.jar</dt>
-          </dl>
-        </td>
+    <tr valign="top">
+      <td width="8%">
+        <dl>
+          <dt>OmegaT.jar</dt>
+        </dl>
+      </td>
 
-        <td width="92%">
-          <dl>
-            <dt>L'aplicació principal de l'OmegaT. Per executar l'OmegaT, o bé crideu aquest fitxer des de la línia d'ordres o executeu-lo des del gestor de fitxers (normalment, fent-hi doble clic).</dt>
-          </dl>
-        </td>
-      </tr>
-    </tbody>
+      <td width="92%">
+        <dl>
+          <dt>L'aplicació principal de l'OmegaT. Per executar l'OmegaT, o bé crideu aquest fitxer des de la línia d'ordres o executeu-lo des del gestor de fitxers (normalment, fent-hi doble clic).</dt>
+        </dl>
+      </td>
+    </tr>
   </table>
 
   <dl>
@@ -432,8 +422,8 @@
   </dl>
   <hr>
 
-  <table style="width: 100%;" summary="format" border="0" cellpadding=
-  "2" cellspacing="2">
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="format">
     <tbody>
       <tr>
         <td style="text-align: left;"><a href="legalNotices.html">Avisos legals</a></td>

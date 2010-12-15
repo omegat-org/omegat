@@ -1,4 +1,4 @@
-Aquesta traducció és obra de Jordi Serratosa Quintana, copyright© 2010.
+Aquesta traducció és obra de Jordi Serratosa Quintana, copyright © 2010.
 Han participat en la localització de l'OmegaT al català:
 Mikel Forcada Zubizarreta (versió 1.4)
 Jordi Serratosa Quintana (versió 1.6 a l'actual)
@@ -76,6 +76,7 @@ L'OmegaT admet els següents formats de fitxer de manera nativa:
   - Help & Manual
   - Recursos RC del Windows
   - Mozilla DTD
+  - DokuWiki
 
 L'OmegaT es pot personalitzar per tal d'admetre altres formats de fitxer.
 
@@ -114,8 +115,8 @@ Durant la instal·lació, en funció del sistema operatiu, és possible que es
 mostrin diversos avisos de seguretat. El certificat és autosignat per «Didier
 Briel».
 Els permisos que doneu a aquesta versió (possiblement s'hi faci referència com
-a un «accés no restringit a l'ordinador») són idèntics als permisos que doneu a
-la versió local, instal·lada mitjançant el procediment que es descriu més
+a un «accés no restringit a l'ordinador») són idèntics als permisos que doneu
+a la versió local, instal·lada mitjançant el procediment que es descriu més
 endavant: permeten l'accés al disc dur de l'ordinador. Cada vegada que executeu
 l'OmegaT.jnlp, es comprovarà si hi ha alguna actualització (si esteu en línia),
 si n'hi ha alguna s'instal·larà i, a continuació, s'iniciarà l'OmegaT.
@@ -215,7 +216,7 @@ desenvolupadors a:
 
 Per traduir la interfície d'usuari de l'OmegaT, el manual d'usuari o els
 documents relacionats, llegiu:
-     
+    
       http://www.omegat.org/en/translation-info.html
 
 I subscriviu-vos a la llista dels traductors:
@@ -234,13 +235,15 @@ Contribucions prèvies:
 
 Han participat en el codi:
   Zoltan Bartko
-  Didier Briel (cap de llançament de versions)
+  Volker Berlin
+  Didier Briel (cap de desenvolupament)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (desenvolupador principal)
   Sandra Jean Chua
-  Martin Fleurke 
+  Martin Fleurke
   Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Maxym Mykhalchuk
   Arno Peters
@@ -248,6 +251,7 @@ Han participat en el codi:
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Antonio Vilei
   Martin Wunderlich
 
 Altres contribucions:

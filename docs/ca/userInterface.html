@@ -411,7 +411,7 @@
   <p>A grans trets, el percentatge de coincidència (és a dir, la mesura de la diferència entre el segment de partida i les coincidències) es calcula a partir del nombre de paraules comunes del segment actiu i del segment coincident dividit entre el nombre total de paraules del segment més llarg dels dos. Si s'utilitza el connector d'analitzador lèxic (o «tokenizer» en anglès), primer les paraules d'ambdós segments es redueixen a llurs arrels. Si no s'utilitza, les paraules no es modifiquen i només s'ometen els signes de puntuació, les xifres i les etiquetes. Finalment, les diferències d'etiquetes, de xifres i de puntuació (que s'ometen als dos casos anteriors) es poden incloure al càlcul. El visualitzador de coincidències mostra les tres mesures d'aquesta manera:</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
   "font-style: italic;">% de coincidència, quan s'utilitza l'analitzador lèxic / % de coincidència per defecte de l'OmegaT / % de coincidència amb etiquetes, xifres i puntuació incloses</span>&gt;&nbsp;
 
-  <p>Al l'exemple anterior, les dues primeres mesures (60/60) són iguals, ja que no s'ha utilitzat cap analitzador lèxic. El tercer percentatge (72) inclou les diferències de puntuació, d'etiquetes i de xifres.</p>
+  <p>A l'exemple anterior, les dues primeres mesures (60/60) són iguals, ja que no s'ha utilitzat cap analitzador lèxic. El tercer percentatge (72) inclou les diferències de puntuació, d'etiquetes i de xifres.</p>
 
   <p>Si no es mostra cap nom de fitxer, vol dir que la coincidència s'ha trobat a la memòria de traducció per defecte del projecte. Els segments orfes (la coincidència número 4) són els segments de la memòria de traducció per defecte del projecte que no corresponen a cap segment dels fitxers de partida. Al cas anterior, s'ha editat la frase original, que ja s'havia traduït amb l'OmegaT.<br></p>
 
@@ -481,9 +481,9 @@
 
   <p>El conjunt de segments <strong>únics</strong> es calcula agafant tots els segments i eliminant-ne tots els duplicats que, per tal de considerar-se com a duplicats, han de coincidir exactament a nivell de majúscules i minúscules («Executa» i «executa» es consideren diferents).</p>
 
-  <p>Si mireu la diferència entre el «Nombre de segments» i el «Nombre de segments únics», podreu fer-vos una idea general de les repeticions que conté el text. No obstant, tingueu en compte que els nombres no indiquen la rellevància de les repeticions: és possible que es tracti de frases relativament llargues que es repeteixen diverses vegades (si teniu sort), o bé de paraules clau d'una taula (si no teniu tanta sort). El fitxer <code>project_stats.txt</code>, que es troba a la carpeta <code>/omegat</code> del projecte, conté informació de segments més detallada per fitxer.</p>
+  <p>Si mireu la diferència entre el «Nombre de segments» i el «Nombre de segments únics», podreu fer-vos una idea general de les repeticions que conté el text. No obstant això, tingueu en compte que els nombres no indiquen la rellevància de les repeticions: és possible que es tracti de frases relativament llargues que es repeteixen diverses vegades (si teniu sort), o bé de paraules clau d'una taula (si no teniu tanta sort). El fitxer <code>project_stats.txt</code>, que es troba a la carpeta <code>/omegat</code> del projecte, conté informació de segments més detallada per fitxer.</p>
 
-  <p>És possible modificar el nombre de segments/segments únics modificant les regles de segmentació. No obstant, cal que eviteu aquests tipus de modificacions una vegada que ja hàgiu començat a traduir el projecte. Vegeu l'apartat <a href=
+  <p>És possible modificar el nombre de segments/segments únics modificant les regles de segmentació. No obstant això, cal que eviteu aquests tipus de modificacions una vegada que ja hàgiu començat a traduir el projecte. Vegeu l'apartat <a href=
   "segmentation.html">Regles de segmentació</a> per obtenir més informació.</p>
 
   <h3><a name="adding_files" id="adding_files"></a>Com afegir fitxers al projecte</h3>

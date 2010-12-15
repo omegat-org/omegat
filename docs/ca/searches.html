@@ -8,20 +8,16 @@
 <body>
   <h2>Cerques</h2>
 
+  <p><a href="#searchwindow">Finestra de cerca</a></p>
+
   <ul>
-    <li>
-      <p><a href="#searchwindow">Finestra de cerca</a></p>
+      <li>
+        <a href="#calling">Com fer una cerca</a>
+      </li>
 
-      <ul>
-        <li>
-          <p><a href="#calling">Com fer una cerca</a></p>
-        </li>
-
-        <li>
-          <p><a href="#location">Ubicació de la cerca</a></p>
-        </li>
-      </ul>
-    </li>
+      <li>
+        <a href="#location">Ubicació de la cerca</a>
+      </li>
   </ul>
 
   <p><a href="#searchmethods">Mètodes de cerca</a></p>
@@ -31,11 +27,13 @@
   <p><a href="#usingregularexpressions">Ús d'expressions regulars</a></p>
 
   <p><a href="#display">Visualització dels resultats de la cerca</a></p>
+  
+  <p><a href="#filter">Filtratge de les entrades de l'editor pels resultats de la cerca</a></p>
   <hr>
 
   <h2><a name="searchwindow" id="searchwindow"></a>Finestra de cerca</h2><img src=
-  "images/TextSearch.png" name="graphics1" align="left" 
-  border="0" id="graphics1" alt="Finestra Cerca de text"><br clear="left">
+  "images/TextSearch.png" name="graphics1" align="left" width="659" height=
+  "446" border="0" id="graphics1" alt="Finestra Cerca de text"><br clear="left">
 
   <p><br>
   <br></p>
@@ -62,7 +60,7 @@
     </li>
   </ul>
 
-  <p>En cercar dins de fitxers, l'OmegaT restringirà la cerca als fitxers que tinguin un format compatible (vegeu l'apartat <a href="filesToTranslate.html">Formats de fitxer compatibles</a>). Per exemple, tot i que l'OmegaT pot treballar amb fitxers TMX sense cap problema, no els inclourà a la cerca.</p>
+  <p>En cercar dins de fitxers, l'OmegaT restringirà la cerca als fitxers que tinguin un format compatible (vegeu l'apartat <a href="filesToTranslate.html#formats">Formats de fitxer</a>). Per exemple, tot i que l'OmegaT pot treballar amb fitxers TMX sense cap problema, no els inclourà a la cerca.</p>
   <hr>
 
   <h2><a name="searchmethods" id="searchmethods"></a>Mètodes de cerca</h2>
@@ -167,6 +165,20 @@
   <p>Els segments es mostren en l'ordre en què apareixen al projecte. Si els segments estan traduïts, es mostra el text de partida a sobre i el text traduït a sota; en canvi, si els segments no s'han traduït, només es mostra el text de partida.</p>
 
   <p>Podeu fer doble clic en un segment per obrir-lo a la finestra de l'editor i fer-hi modificacions. Llavors, podeu tornar a la finestra de cerca i anar al següent segment trobat, per exemple, per comprovar-ne la terminologia i, si cal, corregir-la.</p>
+  <hr>
+
+  <h2><a name="filter" id="filter"></a>Filtratge de les entrades de l'editor pels resultats de la cerca</h2>
+
+  <p>Per facilitar la navegació pel conjunt dels resultats de la cerca, podeu aplicar la cerca a l'editor. Feu clic al botó «Filtra» de la part inferior per tal que a l'editor només es mostrin les entrades que coincideixen amb la cerca actual. Podeu utilitzar la navegació normal, per exemple, per anar al següent segment (no traduït) que coincideixi amb els criteris de cerca.</p>
+  <p>Notes:</p>
+  <ul><li>La cerca està limitada a 1000 elements; per tant, si cerqueu una frase molt comuna, l'editor només mostrarà les primeres 1000 entrades coincidents, i no totes les que coincideixen amb els criteris de cerca.</li>
+  <li>Si un fitxer no conte cap entrada coincident, es mostrarà buit.</li> 
+  <li>Si en una cerca s'eliminen els duplicats, és possible que no els vegeu a l'editor i us passin per alt.</li>
+  </ul>
+
+  <p>Per eliminar el filtre, feu clic al botó «Elimina el filtre» o torneu a carregar el projecte.
+  </p>
+
   <hr>
   <table summary= "format" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>

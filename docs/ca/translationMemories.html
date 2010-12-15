@@ -78,8 +78,9 @@
 
         <li>El fitxer <em>omegat</em> conté les etiquetes de format específiques de l'OmegaT, de manera que es pot utilitzar en altres projectes de l'OmegaT.</li>
       </ul>
+    </li>
 
-      </li><li>La carpeta de les memòries de traducció (per defecte, <em>/tm/</em>) pot contenir qualsevol nombre de fitxers TMX. Cal que aquests fitxers siguin fitxers TMX correctes, que poden contenir únicament informació textual (TMX de nivell 1), informació textual i de format de l'OmegaT (TMX de l'OmegaT) o bé informació textual i de format de TMX (TMX de nivell 2). Les diferències entre les dues són tècniques (vegeu-ne els detalls a continuació) i, si voleu utilitzar una memòria de traducció d'un projecte anterior, es poden intercanviar; és a dir, ambdues funcionaran correctament.
+    <li>La carpeta de les memòries de traducció (per defecte, <em>/tm/</em>) pot contenir qualsevol nombre de fitxers TMX. Cal que aquests fitxers siguin fitxers TMX correctes, que poden contenir únicament informació textual (TMX de nivell 1), informació textual i de format de l'OmegaT (TMX de l'OmegaT) o bé informació textual i de format de TMX (TMX de nivell 2). Les diferències entre les dues són tècniques (vegeu-ne els detalls a continuació) i, si voleu utilitzar una memòria de traducció d'un projecte anterior, es poden intercanviar; és a dir, ambdues funcionaran correctament.
     </li>
   </ul>
   <p>Opcionalment, podeu fer que l'OmegaT creï un fitxer TMX addicional (amb el format de l'OmegaT) que contingui tots els segments traduïbles del projecte. Vegeu l'apartat <a href="#pseudo_translate">Memòria pseudotraduïda</a>.</p>
@@ -158,7 +159,7 @@
   <h3><a name=
   "importing_files" id="importing_files"></a>Importació de fitxers</h3>
 
-  <p>L'OmegaT admet la importació de fitxers TMX versions 1.1-1.4b (tant de nivell 1 com de nivell 2). Això permet que l'OmegaT pugui llegir les memòries de traducció generades amb altres eines. No obstant, l'OmegaT no és <i>totalment</i> compatible amb els fitxers TMX de nivell 2 (que no només emmagatzemen la traducció, sinó també el format) i, per tant, és possible que la qualitat de les coincidències parcials sigui una mica més baixa quan s'importen fitxers TMX de nivell 2.</p>
+  <p>L'OmegaT admet la importació de fitxers TMX versions 1.1-1.4b (tant de nivell 1 com de nivell 2). Això permet que l'OmegaT pugui llegir les memòries de traducció generades amb altres eines. No obstant això, l'OmegaT no és <i>totalment</i> compatible amb els fitxers TMX de nivell 2 (que no només emmagatzemen la traducció, sinó també el format) i, per tant, és possible que la qualitat de les coincidències parcials sigui una mica més baixa quan s'importen fitxers TMX de nivell 2.</p>
 
   <h3><a name=
   "imported_files_handling" id="imported_files_handling"></a>Procés dels fitxers importats</h3>
@@ -176,7 +177,7 @@
   <a name="pseudo_translate" id="pseudo_translate"></a>
   <h2>Memòria pseudotraduïda</h2>
   <p>A vegades, és possible que vulgueu realitzar un processament previ dels segments o algun tipus de processament que l'OmegaT no ofereix. Per exemple, potser voleu crear una pseudotraducció amb finalitat de proves.</p>
-  <p>L'OmegaT permet crear un fitxer TMX addicional que conté tots els segments del projecte. En aquest fitxer TMX, la traducció pot ser: 
+  <p>L'OmegaT permet crear un fitxer TMX addicional que conté tots els segments del projecte. En aquest fitxer TMX, la traducció pot ser:</p>
   <ul><li>El segment traduït és igual al segment de partida (valor per defecte)</li>
   <li>El segment traduït és buit</li></ul>
   <p>El fitxer TMX pot tenir qualsevol nom que vulgueu, però s'afegirà l'extensió «.tmx» al nom si no l'especifiqueu.</p>

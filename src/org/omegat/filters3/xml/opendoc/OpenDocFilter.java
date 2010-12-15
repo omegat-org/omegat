@@ -40,6 +40,7 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.LFileCopy;
@@ -60,7 +61,7 @@ public class OpenDocFilter extends AbstractFilter {
     }
 
     /** Returns true if it's OpenDocument file. */
-    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config) {
+    public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
         try {
             ZipFile file = new ZipFile(inFile);
             Enumeration<? extends ZipEntry> entries = file.entries();
@@ -88,19 +89,18 @@ public class OpenDocFilter extends AbstractFilter {
     }
 
     /**
-     * Returns a temporary file for OpenOffice XML. A nasty hack, to say polite
-     * way.
+     * Returns a temporary file for OpenOffice XML. A nasty hack, to say polite way.
      */
     private File tmp() throws IOException {
         return File.createTempFile("ot-oo-", ".xml");
     }
 
     /**
-     * Processes a single OpenDocument file, which is actually a ZIP file
-     * consisting of many XML files, some of which should be translated.
+     * Processes a single OpenDocument file, which is actually a ZIP file consisting of many XML files, some
+     * of which should be translated.
      */
-    public void processFile(File inFile, String inEncoding, File outFile, String outEncoding)
-            throws IOException, TranslationException {
+    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
+            TranslationException {
         ZipFile zipfile = new ZipFile(inFile);
         ZipOutputStream zipout = null;
         if (outFile != null)
@@ -119,7 +119,7 @@ public class OpenDocFilter extends AbstractFilter {
                     tmpout = tmp();
 
                 try {
-                    createXMLFilter(processOptions).processFile(tmpin, null, tmpout, null);
+                    createXMLFilter(processOptions).processFile(tmpin, tmpout, fc);
                 } catch (Exception e) {
                     throw new TranslationException(e.getLocalizedMessage() + "\n"
                             + OStrings.getString("OpenDoc_ERROR_IN_FILE") + inFile);
@@ -192,8 +192,7 @@ public class OpenDocFilter extends AbstractFilter {
      * 
      * @param currentOptions
      *            Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current
-     *         options otherwise.
+     * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {
         try {

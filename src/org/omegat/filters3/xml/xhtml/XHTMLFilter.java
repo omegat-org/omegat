@@ -30,6 +30,7 @@ import java.io.File;
 import java.util.Map;
 import java.util.regex.Pattern;
 
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
@@ -62,9 +63,8 @@ public class XHTMLFilter extends XMLFilter {
     }
 
     /**
-     * The default list of filter instances that this filter class has. One
-     * filter class may have different filter instances, different by source
-     * file mask, encoding of the source file etc.
+     * The default list of filter instances that this filter class has. One filter class may have different
+     * filter instances, different by source file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
      * 
@@ -94,14 +94,14 @@ public class XHTMLFilter extends XMLFilter {
     }
 
     /**
-     * Whether we're now processing the XHTML file the first time, and thus we
-     * don't need to send translatable content to OmegaT core.
+     * Whether we're now processing the XHTML file the first time, and thus we don't need to send translatable
+     * content to OmegaT core.
      */
     private boolean do_not_send_to_core;
 
     /** Checking whether it is a valid XHTML file. */
-    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config) {
-        boolean result = super.isFileSupported(inFile, inEncoding, config);
+    public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
+        boolean result = super.isFileSupported(inFile, config, context);
         if (result) {
             try {
                 do_not_send_to_core = true;
@@ -109,7 +109,7 @@ public class XHTMLFilter extends XMLFilter {
                 // we have the options
                 XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
                 dialect.defineDialect(new XHTMLOptions(config));
-                super.processFile(inFile, inEncoding, null, null);
+                super.processFile(inFile, null, context);
             } catch (Exception e) {
                 Log.log("XHTML file " + inFile.getName() + " is not valid.");
                 result = false;
@@ -121,8 +121,8 @@ public class XHTMLFilter extends XMLFilter {
     }
 
     /**
-     * Overrides superimplementation not to send translatable content on XHTML
-     * validity check, and don't translate items that match regular expression.
+     * Overrides superimplementation not to send translatable content on XHTML validity check, and don't
+     * translate items that match regular expression.
      */
     public String translate(String entry) {
         if (do_not_send_to_core)
@@ -152,8 +152,7 @@ public class XHTMLFilter extends XMLFilter {
      * 
      * @param currentOptions
      *            Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current
-     *         options otherwise.
+     * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {
         try {

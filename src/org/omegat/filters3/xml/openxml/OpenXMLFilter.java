@@ -43,6 +43,7 @@ import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.LFileCopy;
@@ -66,13 +67,11 @@ public class OpenXMLFilter extends AbstractFilter {
     private void defineDOCUMENTSOptions(Map<String, String> config) {
         /*
          * // Complete string when all options are enabled // Word
-         * "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)"
-         * + "|(header\\d+\\.xml)|(footer\\d+\\.xml)" + // Excel
-         * "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" + // PowerPoint
-         * "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)"
-         * + "|(notesSlide\\d+\\.xml) // Global
-         * "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)" + // Excel
-         * "|(workbook\\.xml)"
+         * "(document\\.xml)|(comments\\.xml)|(footnotes\\.xml)|(endnotes\\.xml)" +
+         * "|(header\\d+\\.xml)|(footer\\d+\\.xml)" + // Excel "|(sharedStrings\\.xml)|(comments\\d+\\.xml)" +
+         * // PowerPoint "|(slide\\d+\\.xml)|(slideMaster\\d+\\.xml)| (slideLayout\\d+\\.xml)" +
+         * "|(notesSlide\\d+\\.xml) // Global "|(data\\d+\\.xml)|(chart\\d+\\.xml)|(drawing\\d+\\.xml)" + //
+         * Excel "|(workbook\\.xml)"
          */
 
         DOCUMENTS = "(document\\.xml)";
@@ -117,7 +116,7 @@ public class OpenXMLFilter extends AbstractFilter {
 
     /** Returns true if it's an Open XML file. */
     @Override
-    public boolean isFileSupported(File inFile, String inEncoding, Map<String, String> config) {
+    public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext fc) {
         try {
             defineDOCUMENTSOptions(config); // Define the documents to read
 
@@ -173,12 +172,12 @@ public class OpenXMLFilter extends AbstractFilter {
     }
 
     /**
-     * Processes a single OpenXML file, which is actually a ZIP file consisting
-     * of many XML files, some of which should be translated.
+     * Processes a single OpenXML file, which is actually a ZIP file consisting of many XML files, some of
+     * which should be translated.
      */
     @Override
-    public void processFile(File inFile, String inEncoding, File outFile, String outEncoding)
-            throws IOException, TranslationException {
+    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
+            TranslationException {
         defineDOCUMENTSOptions(processOptions); // Define the documents to read
 
         ZipFile zipfile = new ZipFile(inFile);
@@ -259,7 +258,7 @@ public class OpenXMLFilter extends AbstractFilter {
                     tmpout = tmp();
 
                 try {
-                    createXMLFilter().processFile(tmpin, null, tmpout, null);
+                    createXMLFilter().processFile(tmpin, tmpout, fc);
                 } catch (Exception e) {
                     e.printStackTrace();
                     throw new TranslationException(e.getLocalizedMessage() + "\n"
@@ -333,8 +332,7 @@ public class OpenXMLFilter extends AbstractFilter {
      * 
      * @param currentOptions
      *            Current options to edit.
-     * @return Updated filter options if user confirmed the changes, and current
-     *         options otherwise.
+     * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
     @Override
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {

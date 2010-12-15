@@ -35,6 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.OStrings;
@@ -42,8 +43,7 @@ import org.omegat.util.OStrings;
 /**
  * Filter to support po files (in various encodings).
  * 
- * Format described on
- * http://www.gnu.org/software/hello/manual/gettext/PO-Files.html
+ * Format described on http://www.gnu.org/software/hello/manual/gettext/PO-Files.html
  * 
  * Filter is not thread-safe !
  * 
@@ -92,14 +92,14 @@ public class PoFilter extends AbstractFilter {
         return "PO-fuzzy";
     }
 
-    public void processFile(File inFile, String inEncoding, File outFile, String outEncoding)
-            throws IOException, TranslationException {
-        BufferedReader reader = createReader(inFile, inEncoding);
+    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
+            TranslationException {
+        BufferedReader reader = createReader(inFile, fc.getInEncoding());
         try {
             BufferedWriter writer;
 
             if (outFile != null) {
-                writer = createWriter(outFile, outEncoding);
+                writer = createWriter(outFile, fc.getOutEncoding());
             } else {
                 writer = null;
             }
@@ -155,8 +155,7 @@ public class PoFilter extends AbstractFilter {
         String s;
         while ((s = in.readLine()) != null) {
             /*
-             * Removing the fuzzy markers, as it has no meanings after being
-             * processed by omegat
+             * Removing the fuzzy markers, as it has no meanings after being processed by omegat
              */
             if (COMMENT_FUZZY.matcher(s).matches()) {
                 fuzzy = true;
@@ -172,11 +171,9 @@ public class PoFilter extends AbstractFilter {
             if (COMMENT_NOWRAP.matcher(s).matches()) {
                 flushTranslation(currentMode);
                 /*
-                 * Read the no-wrap comment, indicating that the creator of the
-                 * po-file did not want long messages to be wrapped on multiple
-                 * lines. See 5.6.2 no-wrap of http://docs.oasis-open
-                 * .org/xliff/v1.2/xliff-profile-po/xliff
-                 * -profile-po-1.2-cd02.html for an example.
+                 * Read the no-wrap comment, indicating that the creator of the po-file did not want long
+                 * messages to be wrapped on multiple lines. See 5.6.2 no-wrap of http://docs.oasis-open
+                 * .org/xliff/v1.2/xliff-profile-po/xliff -profile-po-1.2-cd02.html for an example.
                  */
                 nowrap = true;
                 eol(s);
@@ -338,28 +335,25 @@ public class PoFilter extends AbstractFilter {
 
     /**
      * Private processEntry to do pre- and postprocessing.<br>
-     * The given entry is interpreted to a string (e.g. escaped quotes are
-     * unescaped, '\n' is translated into newline character, '\t' into tab
-     * character.) then translated and then returned as a PO-string-notation
-     * (e.g. double quotes escaped, newline characters represented as '\n' and
-     * surrounded by double quotes, possibly split up over multiple lines)<Br>
-     * Long translations are not split up over multiple lines as some PO editors
-     * do, but when there are newline characters in a translation, it is split
-     * up at the newline markers.<Br>
-     * If the nowrap parameter is true, a translation that exists of multiple
-     * lines starts with an empty string-line to left-align all lines. [With
-     * nowrap set to true, long lines are also never wrapped (except for at
-     * newline characters), but that was already not done without nowrap.] [
-     * 1869069 ] Escape support for PO
+     * The given entry is interpreted to a string (e.g. escaped quotes are unescaped, '\n' is translated into
+     * newline character, '\t' into tab character.) then translated and then returned as a PO-string-notation
+     * (e.g. double quotes escaped, newline characters represented as '\n' and surrounded by double quotes,
+     * possibly split up over multiple lines)<Br>
+     * Long translations are not split up over multiple lines as some PO editors do, but when there are
+     * newline characters in a translation, it is split up at the newline markers.<Br>
+     * If the nowrap parameter is true, a translation that exists of multiple lines starts with an empty
+     * string-line to left-align all lines. [With nowrap set to true, long lines are also never wrapped
+     * (except for at newline characters), but that was already not done without nowrap.] [ 1869069 ] Escape
+     * support for PO
      * 
      * @param entry
-     *            The entire source text, without it's surrounding double
-     *            quotes, but otherwise not-interpreted
+     *            The entire source text, without it's surrounding double quotes, but otherwise
+     *            not-interpreted
      * @param nowrap
-     *            gives indication if the translation should not be wrapped over
-     *            multiple lines and all lines be left-aligned.
-     * @return The translated entry, within double quotes on each line (thus
-     *         ready to be printed to target file immediately)
+     *            gives indication if the translation should not be wrapped over multiple lines and all lines
+     *            be left-aligned.
+     * @return The translated entry, within double quotes on each line (thus ready to be printed to target
+     *         file immediately)
      **/
     private String getTranslation(StringBuilder en) {
         String entry = unescape(en.toString());
@@ -416,17 +410,13 @@ public class PoFilter extends AbstractFilter {
         translation = translation.replace("\\\\r", "\\r");
 
         /*
-         * Normally, long lines are wrapped at 'output page width', which
-         * defaults to ?76?, and always at newlines. IF the no-wrap indicator is
-         * present, long lines should not be wrapped, except on newline
-         * characters, in which case the first line should be empty, so that the
-         * different lines are aligned the same. OmegaT < 2.0 has never wrapped
-         * any line, and it is quite useless when the po-file is not edited with
-         * a plain-text-editor. But it is simple to wrap at least at newline
-         * characters (which is necessary for the translation of the po-header
-         * anyway) We can also honor the no-wrap instruction at least by letting
-         * the first line of a multi-line translation not be on the same line as
-         * 'msgstr'.
+         * Normally, long lines are wrapped at 'output page width', which defaults to ?76?, and always at
+         * newlines. IF the no-wrap indicator is present, long lines should not be wrapped, except on newline
+         * characters, in which case the first line should be empty, so that the different lines are aligned
+         * the same. OmegaT < 2.0 has never wrapped any line, and it is quite useless when the po-file is not
+         * edited with a plain-text-editor. But it is simple to wrap at least at newline characters (which is
+         * necessary for the translation of the po-header anyway) We can also honor the no-wrap instruction at
+         * least by letting the first line of a multi-line translation not be on the same line as 'msgstr'.
          */
         // Interprets newline chars. 'blah<br>blah' becomes
         // 'blah\n"<br>"blah'

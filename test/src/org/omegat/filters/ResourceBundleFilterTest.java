@@ -41,15 +41,11 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     public void testAlign() throws Exception {
         final AlignResult ar = new AlignResult();
-        align(new ResourceBundleFilter(),
-                "resourceBundle/file-ResourceBundleFilter.properties",
-                "resourceBundle/file-ResourceBundleFilter_be.properties",
-                new IAlignCallback() {
-                    public void addTranslation(String id, String source,
-                            String translation, boolean isFuzzy,
+        align(new ResourceBundleFilter(), "resourceBundle/file-ResourceBundleFilter.properties",
+                "resourceBundle/file-ResourceBundleFilter_be.properties", new IAlignCallback() {
+                    public void addTranslation(String id, String source, String translation, boolean isFuzzy,
                             String comment, IFilter filter) {
-                        ar.found = id.equals("ID") && source.equals("Value")
-                                && translation.equals("test");
+                        ar.found = id.equals("ID") && source.equals("Value") && translation.equals("test");
                     }
                 });
         assertTrue(ar.found);

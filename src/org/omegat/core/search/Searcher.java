@@ -45,6 +45,7 @@ import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TransEntry;
 import org.omegat.core.data.TransMemory;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
@@ -52,8 +53,8 @@ import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
 /**
- * This class implements search functionality. It is non-reentrant: each
- * searcher instance must be used by a single thread.
+ * This class implements search functionality. It is non-reentrant: each searcher instance must be used by a
+ * single thread.
  * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
@@ -192,8 +193,7 @@ public class Searcher {
     }
 
     /**
-     * Queue found string. Removes duplicate segments (by Henry Pijffers) except
-     * if m_allResults = true
+     * Queue found string. Removes duplicate segments (by Henry Pijffers) except if m_allResults = true
      */
     private void foundString(int entryNum, String intro, String src, String target, SearchMatch[] srcMatches,
             SearchMatch[] targetMatches) {
@@ -333,7 +333,8 @@ public class Searcher {
             // don't bother to tell handler what we're looking for -
             // the search data is already known here (and the
             // handler is in the same thread, so info is not volatile)
-            fm.loadFile(filename, new SearchCallback(m_project.getProjectProperties()) {
+            fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), new SearchCallback(
+                    m_project.getProjectProperties()) {
                 protected void addSegment(String id, short segmentIndex, String segmentSource,
                         String segmentTranslation, String comment) {
                     searchText(segmentSource);
@@ -358,8 +359,7 @@ public class Searcher {
     // search algorithm
 
     /**
-     * Looks for an occurrence of the search string(s) in the supplied text
-     * string.
+     * Looks for an occurrence of the search string(s) in the supplied text string.
      * 
      * @param text
      *            The text string to search in
@@ -414,8 +414,7 @@ public class Searcher {
     }
 
     /**
-     * Looks for an occurrence of the author search string in the supplied text
-     * string.
+     * Looks for an occurrence of the author search string in the supplied text string.
      * 
      * @param author
      *            The text string to search in

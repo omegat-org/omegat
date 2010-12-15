@@ -59,6 +59,7 @@ import org.omegat.core.matching.Tokenizer;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
@@ -66,7 +67,6 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.FileUtil;
 import org.omegat.util.LFileCopy;
-import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -80,11 +80,11 @@ import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
- * Loaded project implementation. Only translation could be changed after
- * project will be loaded and set by Core.setProject.
+ * Loaded project implementation. Only translation could be changed after project will be loaded and set by
+ * Core.setProject.
  * 
- * All components can read all data directly without synchronization. All
- * synchronization implemented inside RealProject.
+ * All components can read all data directly without synchronization. All synchronization implemented inside
+ * RealProject.
  * 
  * @author Keith Godfrey
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -112,20 +112,20 @@ public class RealProject implements IProject {
     private final ITokenizer sourceTokenizer, targetTokenizer;
 
     /**
-     * Storage for all translation memories, which shouldn't be changed and
-     * saved, i.e. for /tm/*.tmx files, aligned data from source files.
+     * Storage for all translation memories, which shouldn't be changed and saved, i.e. for /tm/*.tmx files,
+     * aligned data from source files.
      */
     private final Map<String, List<TransMemory>> transMemories;
 
     /**
-     * Storage for orphaned segments. The key is the source text, the value the
-     * translation with additional properties.
+     * Storage for orphaned segments. The key is the source text, the value the translation with additional
+     * properties.
      */
     private final Map<String, TransEntry> orphanedSegments;
 
     /**
-     * Storage for translation for current project. The key is the source text,
-     * the value the translation with additional properties.
+     * Storage for translation for current project. The key is the source text, the value the translation with
+     * additional properties.
      */
     private final Map<String, TransEntry> translations;
 
@@ -133,9 +133,8 @@ public class RealProject implements IProject {
     private final List<FileInfo> projectFilesList;
 
     /**
-     * Create new project instance. It required to call {@link #createProject()
-     * createProject} or {@link #loadProject() loadProject} methods just after
-     * constructor before use project.
+     * Create new project instance. It required to call {@link #createProject() createProject} or
+     * {@link #loadProject() loadProject} methods just after constructor before use project.
      * 
      * @param props
      *            project properties
@@ -193,8 +192,7 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Load exist project in a "big" sense -- loads project's properties,
-     * glossaries, tms, source files etc.
+     * Load exist project in a "big" sense -- loads project's properties, glossaries, tms, source files etc.
      */
     public void loadProject() {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_LOAD_START"));
@@ -225,7 +223,7 @@ public class RealProject implements IProject {
 
             // build word count
             String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
-            String fn = getProjectProperties().getProjectInternal() + OConsts.STATS_FILENAME;
+            String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
             Statistics.writeStat(fn, stat);
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
@@ -283,8 +281,8 @@ public class RealProject implements IProject {
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
 
-            Language targetLang = getProjectProperties().getTargetLanguage();
-            fm.alignFile(srcRoot, midName, targetLang, translatedDir.getPath(), alignFilesCallback);
+            fm.alignFile(srcRoot, midName, translatedDir.getPath(), new FilterContext(props),
+                    alignFilesCallback);
         }
         return alignFilesCallback.data;
     }
@@ -304,8 +302,8 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Signals to the core thread that a project is being closed now, and if
-     * it's still being loaded, core thread shouldn't throw any error.
+     * Signals to the core thread that a project is being closed now, and if it's still being loaded, core
+     * thread shouldn't throw any error.
      */
     public void closeProject() {
         unlockProject();
@@ -344,8 +342,7 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Builds translated files corresponding to sourcePattern and creates fresh
-     * TM files.
+     * Builds translated files corresponding to sourcePattern and creates fresh TM files.
      * 
      * @param sourcePattern
      *            The regexp of files to create
@@ -408,15 +405,14 @@ public class RealProject implements IProject {
 
         TranslateFilesCallback translateFilesCallback = new TranslateFilesCallback();
 
-        Language targetLang = getProjectProperties().getTargetLanguage();
-
         for (String filename : fileList) {
             // shorten filename to that which is relative to src root
             String midName = filename.substring(srcRoot.length());
             Matcher fileMatch = FILE_PATTERN.matcher(midName);
             if (fileMatch.matches()) {
                 Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX", midName);
-                fm.translateFile(srcRoot, midName, targetLang, locRoot, translateFilesCallback);
+                fm.translateFile(srcRoot, midName, locRoot, new FilterContext(m_config),
+                        translateFilesCallback);
             }
         }
         Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
@@ -491,7 +487,7 @@ public class RealProject implements IProject {
 
         // update statistics
         String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
-        String fn = getProjectProperties().getProjectInternal() + OConsts.STATS_FILENAME;
+        String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
         Statistics.writeStat(fn, stat);
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
@@ -582,7 +578,7 @@ public class RealProject implements IProject {
 
             loadFilesCallback.setCurrentFile(fi);
 
-            boolean fileLoaded = fm.loadFile(filename, loadFilesCallback);
+            boolean fileLoaded = fm.loadFile(filename, new FilterContext(m_config), loadFilesCallback);
 
             if (fileLoaded && (fi.entries.size() > 0)) {
                 projectFilesList.add(fi);
@@ -609,12 +605,12 @@ public class RealProject implements IProject {
                 ste.duplicate = exists.contains(ste.getSrcText());
                 if (!ste.duplicate) {
                     exists.add(ste.getSrcText());
-                } else if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)){
+                } else if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
                     duplicate.add(ste.getSrcText());
                 }
             }
         }
-       
+
         // If the first non-unique has to marked also
         if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
             for (FileInfo fi : projectFilesList) {
@@ -651,19 +647,16 @@ public class RealProject implements IProject {
     }
 
     /**
-     * Loads TMX file. Either the one of the project with project's translation,
-     * or the legacy ones. IF the projects TMX is loaded, it is also backed up.
-     * The translations are added to either {@link translations} or to
-     * {@link orphanedSegments} for project TMX, or to a transMemory in
-     * {@link transMemories}.
+     * Loads TMX file. Either the one of the project with project's translation, or the legacy ones. IF the
+     * projects TMX is loaded, it is also backed up. The translations are added to either {@link translations}
+     * or to {@link orphanedSegments} for project TMX, or to a transMemory in {@link transMemories}.
      * 
      * @param fname
      *            The name of the TMX file
      * @param encoding
      *            The encoding of the tmx, usually "UTF-8"
      * @param isProject
-     *            Set to true when loading the projects TMX (e.g.
-     *            project_save.tmx)
+     *            Set to true when loading the projects TMX (e.g. project_save.tmx)
      */
     private void loadTMXFile(String fname, String encoding, boolean isProject) throws IOException {
         TMXReader tmx = new TMXReader(encoding, m_config.getSourceLanguage(), m_config.getTargetLanguage(),
@@ -938,8 +931,8 @@ public class RealProject implements IProject {
     private class LoadFilesCallback extends ParseEntry {
         private FileInfo fileInfo;
         /**
-         * a special 'reference' TMX that is used as extra refrence during
-         * translation. It is filled with fuzzy translations from source files.
+         * a special 'reference' TMX that is used as extra refrence during translation. It is filled with
+         * fuzzy translations from source files.
          */
         private List<TransMemory> tmForFile;
 

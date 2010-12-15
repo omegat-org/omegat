@@ -39,6 +39,7 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -47,9 +48,8 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /**
- * Abstract basis filter for XML format filters: OpenDocument, DocBook etc.
- * Ideally should allow creation of a new XML dialect filter by simply
- * specifying translatable tags and attributes.
+ * Abstract basis filter for XML format filters: OpenDocument, DocBook etc. Ideally should allow creation of a
+ * new XML dialect filter by simply specifying translatable tags and attributes.
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
@@ -86,8 +86,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * @param inFile
      *            The source file.
      * @param outEncoding
-     *            Encoding of the source file, if the filter supports it.
-     *            Otherwise null.
+     *            Encoding of the source file, if the filter supports it. Otherwise null.
      * @return The reader of the source file.
      * 
      * @throws UnsupportedEncodingException
@@ -103,14 +102,13 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /**
-     * Creates a writer of the translated file. Accepts <code>null</code> output
-     * file -- returns a writer to <code>/dev/null</code> in this case ;-)
+     * Creates a writer of the translated file. Accepts <code>null</code> output file -- returns a writer to
+     * <code>/dev/null</code> in this case ;-)
      * 
      * @param outFile
      *            The target file.
      * @param outEncoding
-     *            Encoding of the target file, if the filter supports it.
-     *            Otherwise null.
+     *            Encoding of the target file, if the filter supports it. Otherwise null.
      * @return The writer for the target file.
      * 
      * @throws UnsupportedEncodingException
@@ -130,14 +128,15 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /** Processes an XML file. */
-    public void processFile(File inFile, String inEncoding, File outFile, String outEncoding)
-            throws IOException, TranslationException {
+    public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
+            TranslationException {
         try {
-            BufferedReader inReader = createReader(inFile, inEncoding);
+            BufferedReader inReader = createReader(inFile, fc.getInEncoding());
             InputSource source = new InputSource(inReader);
             source.setSystemId("file:///" + inFile.getCanonicalPath().replace(File.separatorChar, '/'));
             SAXParser parser = parserFactory.newSAXParser();
-            Handler handler = new Handler(parser, this, dialect, inFile, inEncoding, outFile, outEncoding);
+            Handler handler = new Handler(parser, this, dialect, inFile, fc.getInEncoding(), outFile,
+                    fc.getOutEncoding());
             parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);
             parser.setProperty("http://xml.org/sax/properties/declaration-handler", handler);
             parser.parse(source, handler);
@@ -157,9 +156,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /**
-     * Whether source encoding can be varied by the user. If XML file has no
-     * encoding declaration, UTF-8 will be used, hence returns
-     * <code>false</code> by default.
+     * Whether source encoding can be varied by the user. If XML file has no encoding declaration, UTF-8 will
+     * be used, hence returns <code>false</code> by default.
      * 
      * @return <code>false</code>
      */
@@ -177,8 +175,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /**
-     * The method the Handler would call to pass translatable content to OmegaT
-     * core and receive translation.
+     * The method the Handler would call to pass translatable content to OmegaT core and receive translation.
      */
     public String translate(String entry) {
         return super.processEntry(entry);
@@ -186,9 +183,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
 
     /**
      * Returns whether the XML file is supported by the filter. <br>
-     * Reads {@link org.omegat.util.OConsts#READ_AHEAD_LIMIT} and tries to
-     * detect constrained text and match constraints defined in
-     * {@link XMLDialect} against them.
+     * Reads {@link org.omegat.util.OConsts#READ_AHEAD_LIMIT} and tries to detect constrained text and match
+     * constraints defined in {@link XMLDialect} against them.
      */
     public boolean isFileSupported(BufferedReader reader) {
         if (dialect.getConstraints() == null || dialect.getConstraints().size() == 0)

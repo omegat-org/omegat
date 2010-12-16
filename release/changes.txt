@@ -1,17 +1,22 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.2 update 2
 ----------------------------------------------------------------------
-  3 Enhancements
+  4 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.2.2 update 2 vs. 2.2.2 update 1
+
+
+  Implemented requests:
+
+  - Add a TTX filter
+  http://sourceforge.net/support/tracker.php?aid=1851513
 
   Other enhancements:
 
   - Belarusian localisation updated to 2.2.1 update 1 (UI)
   - Italian localisation updated to 2.2.2 update 1 (UI)
   - Catalan localisation updated to 2.2.2 update 1 (UI, Readme, documentation)
-
 
   Bug fix:
 

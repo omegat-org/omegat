@@ -595,7 +595,7 @@ public class RealProject implements IProject {
     /**
      * {@inheritDoc}
      */
-    public void findNonUniqueSegments() {
+    protected void findNonUniqueSegments() {
         Map<String, SourceTextEntry> exists = new HashMap<String, SourceTextEntry>(16384);
 
         for (FileInfo fi : projectFilesList) {

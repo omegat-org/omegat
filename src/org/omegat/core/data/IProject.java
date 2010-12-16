@@ -130,11 +130,6 @@ public interface IProject {
     StatisticsInfo getStatistics();
 
     /**
-     * Finds non-unique segments in project.
-     */
-    void findNonUniqueSegments();
-
-    /**
      * Get all translations for current project.
      * 
      * @return all translations map

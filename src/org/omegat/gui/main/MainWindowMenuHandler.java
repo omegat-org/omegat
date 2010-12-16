@@ -679,8 +679,6 @@ public class MainWindowMenuHandler {
                     .setDisplaySegmentSources(
                             mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
 
-            Core.getProject().findNonUniqueSegments();
-
             Core.getEditor()
                     .getSettings()
                     .setMarkNonUniqueSegments(

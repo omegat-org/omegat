@@ -535,11 +535,20 @@ public class SegmentBuilder {
      * Choose segment's attributes based on rules.
      */
     private AttributeSet attrs(boolean isSource) {
-        Color fg;
-        if (settings.isMarkNonUniqueSegments() && ste.isDuplicate()) {
-            fg = Styles.COLOR_LIGHT_GRAY;
-        } else {
-            fg = null;
+        Color fg = null;
+        if (settings.isMarkNonUniqueSegments()) {
+            switch (ste.getDuplicate()) {
+            case NONE:
+                break;
+            case FIRST:
+                if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
+                    fg = Styles.COLOR_LIGHT_GRAY;
+                }
+                break;
+            case NEXT:
+                fg = Styles.COLOR_LIGHT_GRAY;
+                break;
+            }
         }
         if (active) {
             if (isSource) {

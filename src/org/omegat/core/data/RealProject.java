@@ -596,29 +596,29 @@ public class RealProject implements IProject {
      * {@inheritDoc}
      */
     public void findNonUniqueSegments() {
-        Set<String> exists = new HashSet<String>(16384);
-        Set<String> duplicate = new HashSet<String>(16384);
+        Map<String, SourceTextEntry> exists = new HashMap<String, SourceTextEntry>(16384);
 
         for (FileInfo fi : projectFilesList) {
             for (int i = 0; i < fi.entries.size(); i++) {
                 SourceTextEntry ste = fi.entries.get(i);
-                ste.duplicate = exists.contains(ste.getSrcText());
-                if (!ste.duplicate) {
-                    exists.add(ste.getSrcText());
-                } else if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
-                    duplicate.add(ste.getSrcText());
-                }
-            }
-        }
+                SourceTextEntry prevSte = exists.get(ste.getSrcText());
 
-        // If the first non-unique has to marked also
-        if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
-            for (FileInfo fi : projectFilesList) {
-                for (int i = 0; i < fi.entries.size(); i++) {
-                    SourceTextEntry ste = fi.entries.get(i);
-                    if (!ste.duplicate) {
-                        ste.duplicate = duplicate.contains(ste.getSrcText());
+                if (prevSte == null) {
+                    // didn't processed the same entry yet
+                    ste.duplicate = SourceTextEntry.DUPLICATE.NONE;
+                } else {
+                    if (prevSte.duplicate == SourceTextEntry.DUPLICATE.NONE) {
+                        // already processed,but this is first duplicate
+                        prevSte.duplicate = SourceTextEntry.DUPLICATE.FIRST;
+                        ste.duplicate = SourceTextEntry.DUPLICATE.NEXT;
+                    } else {
+                        // already processed, and this is not first duplicate
+                        ste.duplicate = SourceTextEntry.DUPLICATE.NEXT;
                     }
+                }
+
+                if (prevSte == null) {
+                    exists.put(ste.getSrcText(), ste);
                 }
             }
         }

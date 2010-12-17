@@ -133,10 +133,10 @@ public class PatternConsts {
     /** Pattern that detects space-only regular expressions. */
     public static final Pattern SPACY_REGEX = Pattern.compile("((\\s|\\\\n|\\\\t|\\\\s)(\\+|\\*)?)+");
 
-    /** Pattern that detects language and country. */
+    /** Pattern that detects language and country, with an optionnal script in the middle. */
     public static final Pattern LANG_AND_COUNTRY = Pattern
-            .compile("([A-Za-z]{1,8})(?:(?:-|_)([A-Za-z0-9]{1,8}))?");
-
+            .compile("([A-Za-z]{1,8})(?:(?:-|_)(?:[A-Za-z]{4}(?:-|_))?([A-Za-z0-9]{1,8}))?");
+    
     /** Pattern for detecting remote dictionary file archives */
     public static final Pattern DICTIONARY_ZIP = Pattern.compile(
     // "\"([a-z]{1,8})(_([A-Z]{1,8})?)?\\.zip\"");

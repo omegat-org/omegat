@@ -1,13 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.2 update 2
 ----------------------------------------------------------------------
-  4 Enhancements
+  5 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.2.2 update 2 vs. 2.2.2 update 1
 
 
   Implemented requests:
+
+  - Accept script in language code for documents
+  http://sourceforge.net/support/tracker.php?aid=3139010
 
   - Add a TTX filter
   http://sourceforge.net/support/tracker.php?aid=1851513

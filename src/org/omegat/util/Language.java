@@ -4,8 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007 Didier Briel
- Portions copyright 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2007 Didier Briel, Zoltan Bartko
+               2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,6 +49,7 @@ import java.util.regex.Matcher;
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  */
 public class Language {
     private Locale locale = new Locale("");
@@ -67,7 +68,11 @@ public class Language {
      * Creates a new instance of Language, based on a string of a form "XX_YY"
      * or "XX-YY", where XX is a language code composed from 1-8 alpha (A-Za-z)
      * chars, and YY is a country ISO code composed from 1-8 alpha/digit
-     * (A-Za-z0-9) chars.
+     * (A-Za-z0-9) chars.<br>
+     * The form xx-xxxx-xx is also accepted, where "xxxx" is a 4 alpha characters script as defined in
+     * <a href="http://unicode.org/iso15924/iso15924-codes.html">ISO 15924</a>. E.g., sr-Latn-RS, 
+     * which represents Serbian ('sr') written using Latin script ('Latn') as used in Serbia ('RS').
+     * This form is described in <a href="http://www.rfc-editor.org/rfc/bcp/bcp47.tx">BCP47</a>.
      */
     public Language(String str) {
         this.languageCode = "";
@@ -96,6 +101,7 @@ public class Language {
     /**
      * Returns a string representation as an ISO language code (XX-YY).
      */
+    @Override
     public String toString() {
         return getLanguage();
     }
@@ -579,6 +585,7 @@ public class Language {
     /**
      * Indicates whether some other language is "equal to" this one.
      */
+    @Override
     public boolean equals(Object lang) {
         if (this == lang)
             return true;
@@ -594,6 +601,7 @@ public class Language {
      * Returns a hash code value for the language. Basically returns a hashcode
      * of the underlying Locale object.
      */
+    @Override
     public int hashCode() {
         return locale.hashCode();
     }

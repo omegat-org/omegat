@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -33,6 +34,7 @@ import java.util.List;
  * "http://www.oasis-open.org/docbook/xml/4.1.2/docbookx.dtd"&gt;</code>.
  * 
  * @author Maxym Mykhalchuk
+ * @author Didier Briel
  */
 public class DTD extends XMLPseudoTag {
     private String name;
@@ -73,12 +75,16 @@ public class DTD extends XMLPseudoTag {
         res.append("<!DOCTYPE");
         res.append(" ");
         res.append(name);
-        res.append(" ");
-        res.append("PUBLIC");
-        res.append(" ");
-        res.append("\"" + publicId + "\"");
-        res.append(" ");
-        res.append("\"" + systemId + "\"");
+        if (publicId!=null) {
+            res.append(" ");
+            res.append("PUBLIC");
+            res.append(" ");
+            res.append("\"" + publicId + "\"");
+        }
+        if (systemId!=null) {
+            res.append(" ");
+            res.append("\"" + systemId + "\"");
+        }
 
         if (entities.size() > 0) {
             res.append("\n[\n");

@@ -33,7 +33,7 @@ import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
- * This class specifies the ResX XML Dialect.
+ * This class specifies the Typo3 LocManager XML Dialect.
  * 
  * @author Didier Briel
  */

@@ -72,6 +72,9 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters3.xml.typo3.Typo3Filter
 OmegaT-Plugin: filter
 
+Name: org.omegat.filters3.xml.l10nmgr.L10nmgrFilter
+OmegaT-Plugin: filter
+
 Name: org.omegat.filters3.xml.svg.SvgFilter
 OmegaT-Plugin: filter
 

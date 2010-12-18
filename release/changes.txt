@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.3
 ----------------------------------------------------------------------
-  5 Enhancements
+  6 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.2.3 update vs. 2.2.2 update 1
@@ -16,6 +16,8 @@
   http://sourceforge.net/support/tracker.php?aid=1851513
 
   Other enhancements:
+
+  - Typo3 l10nmgr File Filter
 
   - Belarusian localisation updated to 2.2.1 update 1 (UI)
   - Italian localisation updated to 2.2.2 update 1 (UI)

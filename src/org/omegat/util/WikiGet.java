@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Kim Bruning
-               2010 Alex Buloichik
+               2010 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,6 +43,7 @@ import java.util.Map;
  * 
  * @author Kim Bruning
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class WikiGet {
     protected static final String CHARSET_MARK = "charset=";
@@ -211,6 +212,23 @@ public class WikiGet {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Content-Length", Integer.toString(pout.size()));
+            
+            // Added to pass through authenticated proxy
+            String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
+            if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
+                String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));
+                sun.misc.BASE64Decoder dec = new sun.misc.BASE64Decoder();
+                try {
+                    String pass = (new String(dec.decodeBuffer(encodedUser)));
+                    pass += ":" + new String(dec.decodeBuffer(encodedPassword));
+                    sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
+                    encodedPassword = enc.encode(pass.getBytes());
+                    conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
+                } catch (IOException ex) {
+                    Log.logErrorRB("LOG_DECODING_ERROR");
+                    Log.log(ex);
+                }
+             }
 
             conn.setDoInput(true);
             conn.setDoOutput(true);

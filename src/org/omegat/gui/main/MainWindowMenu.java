@@ -238,6 +238,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         optionsMenu.add(optionsTeamMenuItem = createMenuItem("MW_OPTIONSMENU_TEAM"));
         optionsMenu.add(optionsExtTMXMenuItem = createMenuItem("MW_OPTIONSMENU_EXT_TMX"));
         optionsMenu.add(optionsViewOptionsMenuItem = createMenuItem("MW_OPTIONSMENU_VIEW"));
+        optionsMenu.add(optionsViewOptionsMenuLoginItem = createMenuItem("MW_OPTIONSMENU_LOGIN"));
         optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
 
         optionsMenu.add(new JSeparator());
@@ -485,6 +486,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem optionsTeamMenuItem;
     JMenuItem optionsExtTMXMenuItem;
     JMenuItem optionsViewOptionsMenuItem;
+    JMenuItem optionsViewOptionsMenuLoginItem;
     JMenuItem projectCloseMenuItem;
     JMenuItem projectCompileMenuItem;
     JMenuItem projectEditMenuItem;

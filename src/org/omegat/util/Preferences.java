@@ -203,6 +203,11 @@ public class Preferences {
     /** View options: Mark first non-unique */
     public static final String VIEW_OPTION_UNIQUE_FIRST = "view_option_unique_first";
 
+    /** Proxy options: User name for proxy access */
+    public static final String PROXY_USER_NAME = "proxy_user_name";
+    /** Proxy options: Password for proxy  access */
+    public static final String PROXY_PASSWORD = "proxy_password";
+
     /**
      * Version of file filters. Unfortunately cannot put it into filters itself
      * for backwards compatibility reasons.

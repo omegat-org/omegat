@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.3
 ----------------------------------------------------------------------
-  7 Enhancements
+  8 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.2.3 update vs. 2.2.2 update 1
@@ -14,6 +14,9 @@
 
   - Add a TTX filter
   http://sourceforge.net/support/tracker.php?aid=1851513
+
+  - Proxy authentication for machine translation
+  http://sourceforge.net/support/tracker.php?aid=3132893
 
   Other enhancements:
 

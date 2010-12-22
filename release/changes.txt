@@ -26,7 +26,7 @@
   - Italian localisation updated to 2.2.2 update 1 (UI)
   - Catalan localisation updated to 2.2.2 update 1 (UI, Readme, documentation)
   - Dutch localisation updated to 2.2.2 (UI, documentation)
-  - Japanese localisation updated to 2.2.3
+  - Japanese localisation updated to 2.2.3 (UI)
 
   Bug fix:
 

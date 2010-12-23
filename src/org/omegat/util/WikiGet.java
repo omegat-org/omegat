@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Kim Bruning
-               2010 Alex Buloichik, Didier Briel
+               2010 Alex Buloichik, Didier Briel, Rashid Umarov
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -44,6 +44,7 @@ import java.util.Map;
  * @author Kim Bruning
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Rashid Umarov
  */
 public class WikiGet {
     protected static final String CHARSET_MARK = "charset=";

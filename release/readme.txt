@@ -234,6 +234,7 @@ Code has been contributed by
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
 

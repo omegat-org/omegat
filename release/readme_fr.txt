@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2010.
+﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2010.
 
 ==============================================================================
   OmegaT 2.0, fichier « Lisez-moi »
@@ -57,7 +57,7 @@ OmegaT prend en charge directement les formats de fichier suivants :
   - fichiers de documentation format DocBook
   - Fichiers Microsoft Open XML
   - Fichiers XLIFF Okapi monolingues
-  - QuarkXPress CopyFlowGold
+  - CopyFlowGold pour QuarkXPress
   - Fichiers de sous-titres (SRT)
   - ResX
   - Ressource Android
@@ -188,6 +188,7 @@ Contributions au code :
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
 

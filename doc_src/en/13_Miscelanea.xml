@@ -17,55 +17,62 @@
         <secondary>OmegaT console mode</secondary>
       </indexterm></title>
 
-    <para>The purpose of the console mode is to use
-    <application>OmegaT</application> as translation tool in a scripting
-    environment. When started in console mode, no GUI is loaded (so it will
-    work on any console) and the given project is automatically
-    translated.</para>
+    <note>
+      <para>Of interest for advanced users only!</para>
+    </note>
+
+    <para>The purpose of the console (i.e. command-line) mode is to permit the
+    use <application>of OmegaT</application> as translation tool in a
+    scripting environment. When launched in console mode, no GUI is loaded (
+    it will work therefore on any console) and the given project is
+    automatically translated. An example would be a software project, with GUI
+    localized in a number of languages. Using the console mode, one can make
+    the generation of localized interface a part of the build process.</para>
 
     <section id="console.mode.prerequisites">
       <title>Prerequisites</title>
 
-      <para>To run <application>OmegaT</application>, a valid
-      <application>OmegaT</application>-project must be present. The location
-      does not matter, since you have to add it to the command-line at startup
-      anyway.</para>
+      <para>To run OmegaT, a valid OmegaT project must be available. The
+      location is irrelevant, since it must be specified explicitly on the
+      command-line at launch..</para>
 
-      <para>If you need altered settings, the configuration files must be
-      present. This can be achieved in two ways:</para>
+      <para>If you need non-standard settings, the corresponding configuration
+      files (<literal>filters.conf</literal> and
+      <literal>segmentation.conf)</literal> must be present. This can be
+      achieved in two ways:</para>
 
       <itemizedlist>
         <listitem>
           <para>Run <application>OmegaT</application> normally (with the GUI)
           and set the settings. If you start <application>OmegaT</application>
-          in console mode, it will use the same settings.</para>
+          in console mode, it will use the settings you have set.</para>
         </listitem>
 
         <listitem>
-          <para>If you can't run <application>OmegaT</application> normally
-          (no graphical environment available): copy the settings files from
-          some other <application>OmegaT</application> installation on another
-          machine to a specific directory. The location does not matter, since
-          you can add it to the command-line at startup. The relevant files
-          are <literal>filters.conf</literal> and
-          <literal>segmentation.conf</literal> and can be found in the user
-          home directory (E.g. <literal>C:\Documents and
+          <para>If you are unable to run <application>OmegaT</application>
+          normally (no graphical environment available): copy the settings
+          files from some other <application>OmegaT</application> installation
+          on another machine to a specific directory. The location does not
+          matter, since you can add it to the command-line at launch (see
+          below). The relevant files <literal>filters.conf</literal> and
+          <literal>segmentation.conf</literal> can be found in the user home
+          directory (E.g. <literal>C:\Documents and
           Settings\%User%\<application>OmegaT</application></literal> under
-          windows, <literal>%user%/.omegat/</literal> under Linux)</para>
+          Windows, <literal>%user%/.omegat/</literal> under Linux)</para>
         </listitem>
       </itemizedlist>
     </section>
 
     <section id="starting.in.console.mode">
-      <title>Starting in console mode</title>
+      <title>Launching OmegaT in console mode</title>
 
-      <para>To start <application>OmegaT</application> in console mode, some
-      extra parameters have to be passed on startup. The most important is
+      <para>To launch OmegaT in console mode, additional parameters must be
+      specified at launch. The most important of these is
       <literal>&lt;project-dir&gt;</literal>, and
       optionally<literal>--config-dir=&lt;config-dir&gt;.
       </literal>Example:</para>
 
-      <para> <literal>$&gt; java -jar <application>OmegaT</application>.jar
+      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar
       /path/to/project \</literal></para>
 
       <para><literal> --config-dir=/path/to/config-files/ \</literal></para>
@@ -80,27 +87,26 @@
         <listitem>
           <para><literal>&lt;project-dir&gt;</literal> tells
           <application>OmegaT</application> where to find the project to
-          translate. If given, <application>OmegaT</application> starts in
-          console mode and will translate the given project.</para>
+          translate. If given, <application>OmegaT</application> launches in
+          console mode and translates the given project.</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>--config-dir=&lt;config-dir&gt;</literal> allows to
-          tell <application>OmegaT</application> in which directory the
-          configuration files are stored. If not given,
-          <application>OmegaT</application> reverts to default values
-          (<application>OmegaT</application> dir under user home, or if not
-          available: the current working directory).</para>
+          <para><literal>--config-dir=&lt;config-dir&gt;</literal> enables
+          OmegaT to be instructed in which folder the configuration files are
+          stored. If not specified, OmegaT reverts to default values (OmegaT
+          folder in the user home folder, or if not available: the current
+          working directory).</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
           <para><literal>--mode=console-translate </literal>
-          <application>OmegaT</application> starts in console mode and will
-          translate the given project</para>
+          <application>OmegaT</application> launches in console mode and
+          translates the given project</para>
         </listitem>
 
         <listitem>
@@ -114,10 +120,10 @@
     <section id="console.mode.extra.options">
       <title>Extra options</title>
 
-      <para>There is one extra command line parameter specific for the console
-      mode: <literal>--quiet. </literal>In quiet mode, less info is logged to
-      the screen. All messages that you would usually find in the status bar
-      are not shown.</para>
+      <para>One further command-line parameter exists specific to the console
+      mode: <literal>--quiet. </literal>In the quiet mode, less information is
+      logged to the screen. The messages that you would usually find in the
+      status bar are not shown. .</para>
 
       <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
       /path/to/project --quiet</literal></para>
@@ -135,7 +141,7 @@
 
     <para>OmegaT can align Java .properties in console mode. If you have the
     source and the target Properties files for the one and the same contents
-    in your language pair, this procedure will create a corresponding TMX file
+    in your language pair, this procedure will create a corresponding tmx file
     for these contents. Usage:</para>
 
     <para><literal>java -jar OmegaT.jar --mode=console-align /my-project-dir
@@ -143,7 +149,7 @@
 
     <para><filename>alignDir </filename>must contain a translation in the
     target language of the project. E.g., if the project is EN-&gt;FR,
-    alignDir must contain a bundle ending with _fr. The resulting TMX is
+    alignDir must contain a bundle ending with _fr. The resulting tmx is
     stored in the <literal>omegat </literal>folder under the name
     <filename>align.tmx</filename>.</para>
   </section>
@@ -155,7 +161,7 @@
         <secondary>Font settings</secondary>
       </indexterm></title>
 
-    <para>This dialog allows you to modify the font used by
+    <para>This dialog enables one to modify the font used by
     <application>OmegaT</application> in the following windows:</para>
 
     <itemizedlist>
@@ -196,23 +202,26 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Size:</emphasis> spin edit to change font
+        <para><emphasis role="bold">Size:</emphasis> edit to change font
         size</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Sample text: </emphasis>the field where
-        you can preview the selected font immediately</para>
+        <para><emphasis role="bold">Sample text:</emphasis> field for
+        immediate preview of the selected font </para>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">Warning! </emphasis>In some cases it make take
-    quite some time for <application>OmegaT</application> to update the
-    display after you have changed the font setting, especially when a big
-    file with many segments is open in the editor. Note also that some fonts
-    behave better for some language pairs than for others.</para>
+    <para><emphasis role="bold">Note: </emphasis>In some cases it make take
+    quite some time for OmegaT to update the display after the font setting
+    has been changed. This is especially the case when a large file containing
+    many segments is open in the editor, and/or slow hardware is used. Note
+    also that some fonts behave better for some language pairs than for
+    others. In particular, if you are translating between two languages with
+    different alphabets/writing systems (such as Russian and Japanese), select
+    a font that can be used for both.</para>
   </section>
 
   <section id="preventing.data.loss">
@@ -230,15 +239,15 @@
     <literal>project_save.tmx</literal> that resides in the project's
     <literal>/omegat </literal>subfolder.</para>
 
-    <para><application>OmegaT</application> also backs up the translation
-    memory to <literal>project_save.tmx.YEARMMDDHHNN.bak</literal> in the same
-    subfolder every time when a project is opened or reloaded. YEAR is 4-digit
-    year, MM is a month, DD day of the month, HH and NN are hours and minutes
-    when the previous translation memory was saved.</para>
+    <para>OmegaT also backs up the translation memory to
+    project_save.tmx.YEARMMDDHHNN.bak in the same subfolder each time a
+    project is opened or reloaded. YEAR is the 4-digit year, MM is the month,
+    DD the day of the month, and HH and NN are the hours and minutes when the
+    previous translation memory was saved. </para>
 
-    <para>If you think you have lost translation data follow this procedure to
-    restore the project to its most recently saved state, usually not older
-    than 10 minutes or so:</para>
+    <para>If you think that you have lost translation data follow this
+    procedure to restore the project to its most recently saved state, usually
+    not older than approximately 10 minutes or so:</para>
 
     <orderedlist>
       <listitem>
@@ -246,9 +255,8 @@
       </listitem>
 
       <listitem>
-        <para>rename the current <literal>project_save.tmx </literal>file to
-        something you will remember (like project_save.tmx.temporary for
-        example)</para>
+        <para>rename the current <filename>project_save.tmx </filename>file
+        (e.g. to <filename>project_save.tmx.temporary</filename>)</para>
       </listitem>
 
       <listitem>
@@ -257,7 +265,7 @@
       </listitem>
 
       <listitem>
-        <para>rename it to <literal>project_save.tmx</literal></para>
+        <para>rename it <literal>project_save.tmx</literal></para>
       </listitem>
 
       <listitem>
@@ -291,8 +299,8 @@
 
     <itemizedlist>
       <listitem>
-        <para>Get started with the aid of these Help texts. Should you run
-        into problems, post a message in the <ulink
+        <para>Use these Help texts to get started. Should you run into
+        problems, post a message in the <ulink
         url="http://tech.groups.yahoo.com/group/Omegat/"><application>OmegaT</application>
         user group</ulink>. Do not hesitate to post in the language you feel
         the most familiar with.</para>

@@ -47,15 +47,15 @@
 
     <itemizedlist>
       <listitem>
-        <para>Use untar (or equivalent (for instance<filename>
+        <para>Use untar utility (or its equivalent, for instance<filename>
         winrar</filename> in Windows) to extract its contents into the project
         folder "Dictionary". There should be three files, with extensions
         <emphasis>dz, idx </emphasis>and <emphasis>ifo</emphasis>.</para>
       </listitem>
     </itemizedlist>
 
-    <para>Note that additionally to "source-target" dictionaries you can, via
-    Dictionary, get access to information such as:</para>
+    <para>Note that in addition to "source-target" dictionaries you can, using
+    Dictionary, obtain access to information such as:</para>
 
     <itemizedlist>
       <listitem>
@@ -79,12 +79,6 @@
 
     <itemizedlist>
       <listitem>
-        <para>Longman Dictionary of Contemporary English</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
         <para><indexterm class="singular">
             <primary>Britannica</primary>
 
@@ -100,8 +94,8 @@
     </itemizedlist>
 
     <para>Some of the dictionaries have no strings attached - i.e. are "Free
-    to use", and some of them, like the selection above, are under the GPL
-    license. The following example shows Merriam Webster 10th dictionary "in
+    to use", and others, like the selection above, are under the GPL license.
+    The following example shows Merriam Webster 10th dictionary "in
     action":</para>
 
     <figure id="Dict.Merriam.Webster">
@@ -113,14 +107,11 @@
           <seealso>Dictionaries</seealso>
         </indexterm>Merriam Webster dictionary - use</title>
 
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/DictMerriamWebster.png" />
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="images/DictMerriamWebster.png" width = "40%"/>
-          </imageobject>
-        </mediaobject>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/DictMerriamWebster.png" />
+        </imageobject>
+      </mediaobject>
     </figure>
   </section>
 
@@ -133,8 +124,8 @@
 
     <itemizedlist>
       <listitem>
-        <para>Are your dict files in the folder (or in one of the subfolders
-        thereof), specified in your Project file? Check in <menuchoice>
+        <para>Check that your dict files are in the folder (or in a subfolder
+        below it)? Check in <menuchoice>
             <shortcut>
               <keycombo>
                 <keycap><indexterm class="singular">
@@ -157,9 +148,9 @@
     <itemizedlist>
       <listitem>
         <para>Does the folder contain three files of the same name, with
-        extensions ? If there's just one file with the expected name, then
-        check its extension. If it is <emphasis>tar.bz</emphasis>, then you
-        have forgotten to unpack (untar) it.</para>
+        extensions ? If only one file is present, check its extension. If it
+        is <emphasis>tar.bz</emphasis>, you have forgotten to unpack (untar)
+        it.</para>
       </listitem>
     </itemizedlist>
   </section>

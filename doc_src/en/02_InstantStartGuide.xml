@@ -7,45 +7,42 @@
   <section>
     <title>Start Using <application>OmegaT</application> in 5 Minutes!</title>
 
-    <para>This instant start guide covers only the very basics. Ideally, all
-    users should read the User Manual to familiarize themselves with
-    everything <application>OmegaT</application> has to offer. Shortcuts
-    described here use the "<keycombo>
+    <para>This instant start guide covers only the very basics of OmegaT.
+    Ideally, users should read the User Manual to familiarize themselves with
+    everything <application>OmegaT</application> has to offer. Note for Mac
+    users: shortcuts are described here as "<keycombo>
         <keycap>Ctrl</keycap>
 
         <keycap>key</keycap>
-      </keycombo>" convention but Mac users should read "<keycombo>
+      </keycombo>" but Mac users should instead use "<keycombo>
         <keycap>Cmd</keycap>
 
         <keycap>key</keycap>
-      </keycombo>" instead. The <keycap>"Cmd</keycap>" key either has a
-    "command" label or an apple mark on Apple keyboards.</para>
+      </keycombo>" The <keycap>"Cmd</keycap>" key either has a "command" label
+    or an apple mark on Apple keyboards.</para>
 
     <para>The <application>OmegaT</application> screen consists of one space
     with <link linkend="windows.you.will.use.frequently">five distinct
-    windows</link>.<indexterm class="singular">
+    panes</link>.<indexterm class="singular">
         <primary>Windows in OmegaT</primary>
-      </indexterm> Each of these can be resized using the mouse. On the left
+      </indexterm>. Each of these can be resized using the mouse. On the left
     is the Editor where you type your translation. On the top right is the
-    Match Viewer, where translation memory matches will be displayed. Below
-    this is the Glossary Viewer, where glossary matches will be
-    displayed.</para>
+    Match Viewer, where translation memory matches are displayed. Below this
+    is the Glossary Viewer, where glossary matches are displayed..</para>
 
-    <para>In the Editor window <application>OmegaT</application> presents the
+    <para>In the Editor pane <application>OmegaT</application> presents the
     source text 'segmented' into sentences (or paragraphs). You translate
     these segments one by one. As you pass from segment to segment your
-    translations are recorded in a translation memory. Once all the segments
-    have been translated (or before, if you request)
-    <application>OmegaT</application> will use the translation memory to
-    generate the translated document(s) in a “Target” folder.</para>
+    translations are recorded automatically in a translation memory. Once all
+    the segments have been translated (or before, if you request)
+    <application>OmegaT</application> uses the translation memory to generate
+    the translated document(s) in a “Target” folder.</para>
 
-    <para><application>OmegaT</application> organizes your translation work in
-    so-called translation projects. For each project
-    <application>OmegaT</application> will create a set of folders. These are
-    used to store the source documents to be translated, the glossaries you
-    may wish to use, and any translation memories you may want to use.
-    <application>OmegaT</application> also creates a “Target” folder which
-    will contain the final translated documents.</para>
+    <para>OmegaT organizes your translation work in translation “projects”.
+    For each project, OmegaT creates a set of folders. These are used to store
+    the source documents to be translated, and any glossaries and translation
+    memories you may wish to use. OmegaT also creates a “Target” folder, in
+    which OmegaT places the final translated documents.</para>
   </section>
 
   <section>
@@ -83,35 +80,34 @@
             <secondary>Project dialog window - figure</secondary>
           </indexterm>New project - dialog window</title>
 
-       <mediaobject>
-         <imageobject role="html">
+        <mediaobject>
+          <imageobject role="html">
             <imagedata fileref="images/NewProject.png" />
-         </imageobject>
-         <imageobject role="fo">
-              <imagedata fileref="images/NewProject.png" width = "40%"/>
-         </imageobject>
-       </mediaobject>
-
+          </imageobject>
+        </mediaobject>
       </figure>
 
-      <para>You can simply accept the location of the subfolders, but make
-      sure first that the source and translation language codes are correct.
-      Select the language code (2 letters) or language-and-region code (2 + 2
+      <para>You can simply accept the default locations of the subfolders, but
+      check that the source and translation language codes are correct. Select
+      the language code (2 letters) or language-and-region code (2 + 2
       letters) from the drop-down list, or type them in by hand (the language
       code can be 2 or 3 letters). Make a mental note of the location of the
-      Target subfolder (for your translated documents). If you want
-      <application>OmegaT</application> to segment by sentence instead of by
-      "paragraph", it's a good idea to double-check the Segmentation
-      Rules.</para>
+      Target subfolder (for your translated documents). If you prefer OmegaT
+      to segment by sentence instead of by "paragraph", it's a good idea to
+      read the chapter on Segmentation Rules<indexterm class="singular">
+          <primary>Segmentation</primary>
 
-      <para>When you click OK to accept the project set-up,
-      <application>OmegaT</application> will prompt you to select the source
-      documents for import. You can import individual files, or you can import
-      entire folder trees (with all files in all subfolders). If you've
-      accidentally imported the wrong documents, or too many documents, you
-      can simply remove them from the Source folder of your
-      <application>OmegaT</application> project (using your system's file
-      manager, for example).</para>
+          <secondary>Segmentation rules</secondary>
+        </indexterm>.</para>
+
+      <para>When you click OK to accept the project set-up, OmegaT prompts you
+      to select the source documents for import. You can import individual
+      files with<firstterm> Project &gt; Import Source Files</firstterm>, or
+      you can copy files or even entire folder trees (with all files in all
+      subfolders) manually into the Source folder of your OmegaT project
+      (using your system's file manager, for example). If you've accidentally
+      imported the wrong documents, or too many documents, you can simply
+      remove them again from the Source folder. .</para>
 
       <para>To check your list of files to be translated, consult the
       <emphasis role="bold">Project Files</emphasis> <indexterm
@@ -138,7 +134,7 @@
 
           <guimenuitem>Reload</guimenuitem>
         </menuchoice>.). <application>OmegaT</application> opens the first
-      file in the project list by default. Remember,
+      file in the project list by default. Bear in mind that
       <application>OmegaT</application> can only translate files in the
       formats below if they match the patterns defined in the file filters.
       Any other files will be ignored.<indexterm class="singular">
@@ -197,14 +193,14 @@
 
           <itemizedlist>
             <listitem>
-              <para>OpenOffice.org / OpenDocument (*.sx?, *.st?, *.od?,
-              *.ot?)</para>
+              <para>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
+              *.odp, *.otp)</para>
             </listitem>
           </itemizedlist>
 
           <itemizedlist>
             <listitem>
-              <para>Microsoft Open XML (*.doc?. *.xls?, *.ppt?)</para>
+              <para>Microsoft Open XML (*.docx. *.xlsx, *.pptx)</para>
             </listitem>
           </itemizedlist>
 
@@ -278,26 +274,31 @@
         </listitem>
       </itemizedlist>
 
-      <para> additionally to the text you need to translate tagged text files
-      contain invisible information in a form of tags. The tags must be
-      present also in the translation, even if they are invisible and not to
-      be translated, otherwise the text will not be shown the intended way, or
-      - in the worst case - will not be shown at all. </para>
+      <para>In addition to the text you wish to translate, tagged text files
+      contain formatting information made visible in OmegaT in the form of
+      “tags”. The tags must also be present also in the translated text, even
+      if the formatting does not need to be “translated”. If tags happen to be
+      missing or are misplaced, it may well happen, that the text will not be
+      shown as intended and the translation has be corrected - see the chapter
+      "Tag correction" below.</para>
     </section>
 
     <section id="translate.the.segments.one.by.one">
       <title>Translate the segments one by one</title>
 
       <para>Once you have defined the project and the files to be translated,
-      <application>OmegaT</application> will open the first source file in the
+      <application>OmegaT</application> opens the first source file in the
       Editor.</para>
 
       <para>The active segment is highlighted in green; a copy of the source
       text is displayed below it, in the “target field”. (At this point, all
       text outside the target field is protected and cannot be modified.) You
       must type your translation between the tags <literal>&lt;segment
-      0001&gt; </literal>and <literal>&lt;end segment&gt;,</literal>
-      overwriting the source text. Press <emphasis
+      0001&gt; </literal>and <literal>&lt;end segment&gt;</literal>. OmegaT
+      can be set up to copy automatically the source text into the target text
+      (see<emphasis> Options &gt; Editing Behaviour ..</emphasis>.), which can
+      be useful when parts of the source are to remain unchanged. In this case
+      you will overwrite the source text. Press <emphasis
       role="bold">"ENTER"</emphasis> to advance to the next segment.
       Note:</para>
 
@@ -322,16 +323,16 @@
 
         <listitem>
           <para>You can change the setup of the Editor pane (for instance to
-          show or not the source text, highlight the translated text etc) in
-          the Main menu entry View.</para>
+          show the source text or not, highlight the translated text etc) in
+          the Main menu under View.</para>
 
           <para>When you press <emphasis role="bold">"ENTER"</emphasis>,
           several things happen invisibly: <application>OmegaT</application>
           adds the segment pair (the source segment and its translation) to
-          the translation memory and also automatically translates any other
-          identical segments that it detects in the other project files. It
-          also scans the translation memory and glossary in search of matches
-          for the next untranslated segment.</para>
+          the internal translation memory . It also automatically translates
+          any other identical segments that it detects. It also scans the
+          translation memory and glossary in search of matches for the next
+          untranslated segment, which it then opens.</para>
         </listitem>
       </itemizedlist>
     </section>
@@ -354,21 +355,17 @@
         <figure>
           <title>Matches pane</title>
 
-    	  <mediaobject>
-		    <imageobject role="html">
-			   <imagedata fileref="images/MatchesPane.png" />
-		    </imageobject>
-		    <imageobject role="fo">
-			   <imagedata fileref="images/MatchesPane.png" width = "40%"/>
-		   </imageobject>
-		  </mediaobject>
-
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane.png" />
+            </imageobject>
+          </mediaobject>
         </figure>
 
         <para>If <application>OmegaT</application> finds any fuzzy matches
-        (30% or over) for the next segment in translation memories available,
-        it displays these in the Match Viewer. The first match is pre-selected
-        in the Match Viewer by default.</para>
+        (30% or over) for the next segment in the translation memories in the
+        project, it displays them in the Match Viewer. The first match is
+        pre-selected in the Match Viewer by default.</para>
 
         <itemizedlist>
           <listitem>
@@ -400,8 +397,8 @@
           </listitem>
         </itemizedlist>
 
-        <para>If several matches have been found and you prefer not to use the
-        pre-selected match:</para>
+        <para>If several matches have been found and you prefer to use a match
+        other than the pre-selected match:</para>
 
         <itemizedlist>
           <listitem>
@@ -444,8 +441,8 @@
             <secondary>Glossary, Dictionary matches</secondary>
           </indexterm></title>
 
-        <para>Matching terms in glossaries and dictionaries, that you may have
-        included in the project, will be displayed for reference in the
+        <para>Any matching terms in glossaries and dictionaries, that you may
+        have included in the project, will be displayed for reference in the
         glossary and dictionary panes.</para>
       </section>
 
@@ -463,21 +460,22 @@
             <keycap>Ctrl</keycap>
 
             <keycap>F</keycap>
-          </keycombo> to put it into the "Search for" box in the window, that
-        opens..</para>
+          </keycombo>: the word or phrase will be inserted automatically into
+        the "Search for" box in the window, that then opens.</para>
       </section>
 
       <section id="use.Google.Translate">
-        <title>Use Google Translate<indexterm class="singular">
+        <title>Use Machine Translation services<indexterm class="singular">
             <primary>Matches</primary>
 
             <secondary>Google Translate</secondary>
           </indexterm></title>
 
-        <para>In the Google Translate pane, if activated, you will
-        automatically get a suggestion for the translation of the current
-        segment. Press <emphasis>Ctrl+M </emphasis> to replace the target
-        segment with it.</para>
+        <para>In the Machine Translation pane, if any of the services is
+        activated (see <emphasis>Options &gt; Machine Translate</emphasis>),
+        you will automatically get a suggestion for the translation of the
+        current segment. Press <emphasis>Ctrl+M </emphasis> to replace the
+        target segment with it.</para>
       </section>
     </section>
 
@@ -569,14 +567,11 @@
             <primary>Segment, Source and Target - figure</primary>
           </indexterm>HTML segment</title>
 
-            <mediaobject>
-                <imageobject role="html">
-                  <imagedata fileref="images/tagged_segment.png" />
-                </imageobject>
-                <imageobject role="fo">
-                  <imagedata fileref="images/tagged_segment.png" width = "40%"/>
-                </imageobject>
-            </mediaobject>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/tagged_segment.png" />
+          </imageobject>
+        </mediaobject>
       </figure>
 
       <para>When <application>OmegaT</application> has created the translated
@@ -585,14 +580,11 @@
       <figure id="fig.tagged.segment.target">
         <title>Target HTML segment</title>
 
-            <mediaobject>
-              <imageobject role="html">
-                 <imagedata fileref="images/tagged_segment_target.png" />
-              </imageobject>
-              <imageobject role="fo">
-                <imagedata fileref="images/tagged_segment_target.png" width = "40%"/>
-              </imageobject>
-            </mediaobject>
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/tagged_segment_target.png" />
+          </imageobject>
+        </mediaobject>
       </figure>
     </section>
 
@@ -623,9 +615,8 @@
         </menuchoice> from the menu. A table will be displayed showing the
       segments where the source and target tags do not correspond. Click on
       the segment number. You will be taken automatically to the questionable
-      segment in the Editor, where you can correct the tagging. Hit <emphasis
-      role="bold">Enter </emphasis> to validate the corrected segment and
-      check the correction by pressing again <keycombo>
+      segment in the Editor, where you can correct the tagging. When you have
+      done the corrections, check the correction by pressing again <keycombo>
           <keycap>Ctrl</keycap>
 
           <keycap>T<indexterm class="singular">
@@ -635,13 +626,17 @@
 
               <seealso>Tagged text</seealso>
             </indexterm></keycap>
-        </keycombo>.</para>
+        </keycombo>. Note that Tag verifier may find an error in cases that
+      are correct - for instance when it was necessary to change the order of
+      tags involved to make a grammatically correct translation. See that as a
+      sign that the verifier prefers to err on the side of caution.</para>
 
       <para>In some cases tag errors may even prevent a document from opening.
-      You should therefore ensure that you have corrected any tag errors
-      before you create the translated files. Finally, you should always
-      double-check the final formatting by opening the translated document in
-      its associated viewer or editor.</para>
+      This is no reason for panic - you still have both the source file and
+      the translation available, you just need to make sure you have corrected
+      any tag errors before you create the translated files. Finally, you
+      should always double-check the final formatting by opening the
+      translated document in its associated viewer or editor.</para>
     </section>
   </section>
 </chapter>

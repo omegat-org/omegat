@@ -3,7 +3,7 @@
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <chapter id="ch10.glossaries">
   <title>Glossaries<indexterm class="singular">
-      <primary>Windows in OmegaT</primary>
+      <primary>Windows and panes in OmegaT</primary>
 
       <secondary>Glossary pane</secondary>
     </indexterm><indexterm class="singular">
@@ -14,7 +14,7 @@
   <application>OmegaT</application>.</para>
 
   <para>If an <application>OmegaT</application> project contains one or more
-  glossaries, any terms in the glossary which are also found in the active
+  glossaries, any terms in the glossary which are also found in the current
   segment will be automatically displayed in the Glossary viewer.</para>
 
   <section>
@@ -27,16 +27,13 @@
         <secondary>Glossary subfolder</secondary>
       </indexterm> <filename>/glossary </filename>folder after creating the
     project. <application>OmegaT</application> automatically detects glossary
-    files in this folder when a project is opened. Terms in the active segment
-    which <application>OmegaT</application> finds in the glossary file(s) are
-    displayed in the Glossary pane:</para>
+    files in this folder when a project is opened. Terms in the current
+    segment which <application>OmegaT</application> finds in the glossary
+    file(s) are displayed in the Glossary pane:</para>
 
     <mediaobject>
       <imageobject role="html">
         <imagedata fileref="images/Glossary_pane.png" />
-      </imageobject>
-      <imageobject role="fo">
-        <imagedata fileref="images/Glossary_pane.png" width = "40%"/>
       </imageobject>
     </mediaobject>
 
@@ -101,7 +98,7 @@
     <para>In the empty document, enter your glossary terms as follows: a
     source-language term, tab space, the target-language term , tab space, a
     comment or explanation for the item, and a Return. Tab space is the
-    tabulator key on the left hand side of the keyboard. If you do not want to
+    tabulator key on the left hand side of the keyboard. If you do not wish to
     add any comments, you can drop the second tab space. A "term" can be a
     single word or a whole phrase. On the second line, enter the second term
     and its translation.</para>
@@ -127,7 +124,7 @@
     space.</para>
 
     <para>When you are finished with the entries, save file as Unicode-encoded
-    file as follows: </para>
+    file as follows:</para>
 
     <itemizedlist>
       <listitem>
@@ -148,8 +145,7 @@
 
       <listitem>
         <para>make sure "<emphasis>Automatic file name extension</emphasis>"
-        and <emphasis>"Edit filter settings". </emphasis>are unchecked.
-        </para>
+        and <emphasis>"Edit filter settings". </emphasis>are unchecked.</para>
       </listitem>
     </itemizedlist>
 
@@ -157,12 +153,9 @@
       <imageobject role="html">
         <imagedata fileref="images/saveglossary.png" />
       </imageobject>
-      <imageobject role="fo">
-        <imagedata fileref="images/saveglossary.png" width = "40%"/>
-      </imageobject>
     </mediaobject>
 
-    <para>Confirm with OK. </para>
+    <para>Confirm with OK.</para>
 
     <para>After creating an <application>OmegaT</application> project, copy or
     move this file into the project's \glossary folder. If the project is
@@ -182,8 +175,8 @@
     and means to create a simple file with tab delimited entries, and they are
     all simpler, a lot of them much simpler, than the above suggestion. For
     instance, one can export the contents above as a <filename>CSV</filename>,
-    instead of a <filename>UTF8</filename> text file. fileNote, however, that
-    the above suggestion works for any target system, be it Windows, OS X or
+    instead of a <filename>UTF8</filename> text file. Note, however, that the
+    above suggestion works for any target system, be it Windows, OS X or
     Linux. Nothing speaks against using Notepad++ on Windows or GEdit on Linux
     for instance: any text editor, that is knowledgeable about UTF8 and that
     can show white space, so that you do not miss the required
@@ -203,8 +196,8 @@
       <listitem>
         <para>When you hit upon a new term, worth entering, enter the new
         term, its translation and any comments you may have (making sure, you
-        tabe between the fields) and save the file. The contents of the
-        glossary pane will be updated accordingly. </para>
+        press tab between the fields) and save the file. The contents of the
+        glossary pane will be updated accordingly.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -216,7 +209,7 @@
         <secondary>Trados MultiTerm</secondary>
       </indexterm>Using Trados Multiterm</title>
 
-    <para>Data exported fromTrados MultiTerm can be used as
+    <para>Data exported from Trados MultiTerm can be used as
     <application>OmegaT</application> glossaries without further modification,
     provided they are given the file extension <filename>.tab </filename>and
     the source and target term fields are the first two fields
@@ -282,7 +275,7 @@
 
           <itemizedlist>
             <listitem>
-              <para>there are no terms in the active segment which match any
+              <para>there are no terms in the current segment which match any
               terms in the glossary</para>
             </listitem>
           </itemizedlist>

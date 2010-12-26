@@ -6,107 +6,94 @@
       <primary>Spell checker</primary>
     </indexterm></title>
 
-  <para>To correct the spelling mistakes during the translation, the spell
-  checker can be installed and used to indicate words in the target text, that
-  need to be corrected. This should come as no surprise:
-  <application>OmegaT</application> uses the <ulink
-  url="http://hunspell.sourceforge.net/">Hunspell</ulink> spell checker, used
-  among others in OpenOffice.org, Firefox and Thunderbird. If you use any of
-  these programs, you may already have the essentials of the spell checker
-  installed and just need to get <application>OmegaT</application>
-  connected.</para>
+  <para>OmegaT has a built-in spelling checker based upon the spelling checker
+  used in OpenOffice.org, Firefox and Thunderbird. It is consequently able to
+  use the huge range of free spelling dictionaries available for these
+  applications.</para>
 
-  <para>Once the spell checker has been activated and the vocabulary for the
-  target language is available, the spell checker will monitor target
-  segments, that are being displayed in the editing pane. Questionable words
-  get underlined in wiggly red:</para>
+  <section>
+    <title>Installing spelling dictionaries</title>
 
-  <figure id="spellchecker.in.action">
-    <title><indexterm class="singular">
-        <primary>Spell checker</primary>
+    <para>Before the spellcheck function can be used, a suitable dictionary or
+    dictionaries (i.e. for your target language) must be installed. To
+    installing spelling dictionaries, follow this procedure:</para>
 
-        <secondary>Spell checker - figure</secondary>
-      </indexterm>Spellchecker in action</title>
+    <itemizedlist>
+      <listitem>
+        <para>In your file manager, create a new folder in a suitable location
+        in which to store spelling dictionaries.</para>
+      </listitem>
+    </itemizedlist>
 
-    <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/SpellcheckingText.png" />
-        </imageobject>
-        <imageobject role="fo">
-            <imagedata fileref="images/SpellcheckingText.png" width = "40%"/>
-        </imageobject>
-    </mediaobject>
-  </figure>
+    <itemizedlist>
+      <listitem>
+        <para>In OmegaT, select <guisubmenu><indexterm class="singular">
+            <primary>Menu Options</primary>
 
-  <para>Right clicking on a highlighted word (<emphasis>Artund</emphasis>
-  above) opens a drop-down menu, where the suggestions for the correction are
-  listed (Art und) . Additionally you can ask the spell checker to <emphasis
-  role="bold">ignore all</emphasis> the occurrences of the word or <emphasis
-  role="bold">add</emphasis> it <emphasis role="bold">to the
-  dictionary</emphasis>. Note that this is an online spell checker: if you
-  have to do a global spell check of texts you will have to browse through the
-  text yourself and watch for wiggly lines. The alternative is to spell check
-  the target files with an editor, in other words outside of
-  <application>OmegaT</application> so the changes you may make will not be in
-  the translation memory.</para>
+            <secondary>Spell checking..</secondary>
+          </indexterm></guisubmenu><guimenuitem>Options &gt; Spell
+        Checking</guimenuitem>, then click <guibutton>Choose
+        </guibutton>beside the Dictionary file folder field. Navigate to and
+        select the folder you created for dictionaries.</para>
+      </listitem>
+    </itemizedlist>
 
-  <section id="spellchecker.options">
-    <title>Spell checker options<indexterm class="singular">
-        <primary>Spell checker</primary>
+    <itemizedlist>
+      <listitem>
+        <para>Place the dictionary files you wish to use in this folder. There
+        are essentially two ways in which you can do this. You can either copy
+        files manually, i.e. from elsewhere on your system, using your file
+        manager; or you can use OmegaT's <emphasis
+        role="bold">"Install"</emphasis> function to provide a list of
+        available dictionaries to select from. Note that the "Install"
+        function requires the Internet connection. The selected languages will
+        then get installed and will eventually appear in your spell checker
+        setup window (this may take a while )</para>
+      </listitem>
+    </itemizedlist>
 
-        <secondary>Installing</secondary>
-      </indexterm></title>
-
-    <para>Clicking on <guisubmenu><indexterm class="singular">
-        <primary>Menu Options</primary>
-
-        <secondary>Spell checking...</secondary>
-      </indexterm>Options &gt; Spell checking...</guisubmenu> will open the
-    window below:</para>
+    <para>Copying the files manually is useful if you already have suitable
+    dictionary files on your system, for instance as part of your
+    OpenOffice.org or Thunderbird installation. The files you need have the
+    extensions <filename>.aff</filename> and<filename> .dic</filename>, and
+    you need both files in order for the dictionary in question to work. You
+    can use these file extensions to search your desktop for suitable
+    dictionaries. In the case below, no extra folder has been created and no
+    copying of files was necessary, as the OpenOffice dictionary folder is
+    used instead:</para>
 
     <figure id="spellchecker.setup">
       <title>Spellchecker setup</title>
 
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/SpellcheckerSetup2.png" /> 
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="images/SpellcheckerSetup2.png" width = "40%"/>
-          </imageobject>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckerSetup2.png" />
+        </imageobject>
       </mediaobject>
     </figure>
 
-    <para>The above example contains already the available vocabularies.
-    Initially it will be unpopulated as you need to specify where
-    <application>OmegaT</application> should look for the vocabularies. Click
-    on <emphasis role="bold">Choose...</emphasis> to open a dialog window,
-    where you can select a subfolder with existing OpenOffice.org or Mozilla
-    vocabularies. The simplest way find them is to look for files with an
-    extensions <emphasis>aff </emphasis>or <emphasis>dic</emphasis>.
-    <application>OmegaT</application> will recognize all valid dictionaries
-    available at that location and display them. If the dictionary you want to
-    use is already there and visible to <application>OmegaT</application>,
-    you're done.</para>
+    <para>Note that in the above case, you may lose the spelling dictionaries,
+    if the OpenOffice installation is removed from your system. Creating your
+    own folder and copying the files may be extra work, but possibly worth the
+    trouble.</para>
 
-    <para>If there's no dictionaries to be found, you can select an
-    appropriate place for them and then click <emphasis role="bold">Install
-    </emphasis>to let <application>OmegaT</application> look for available
-    vocabularies. Select the vocabularies that you need in the pop-up window
-    and then click <emphasis role="bold">install.</emphasis> The selected
-    languages will then get installed and will eventually appear in the spell
-    checker setup window (this may take a while ).</para>
+    <para>More recent OpenOffice.org spelling dictionaries are supplied as
+    "OpenOffice.org extensions", with the filename extension .oxt. These are
+    however zip archives: if you rename the file with the extension .zip, you
+    can extract the contents in a zip utility, and you will find the .aff and
+    .dic files that you need, which you can then place in the folder that you
+    created for them.</para>
 
-    <para>Please note that the installer depends on the Internet list of
-    dictionaries. In case it is out of date or does not include the desired
-    language, you will have to hunt for the vocabularies yourself. The
-    OpenOffice.org contains probably the largest vocabulary collection at
-    <ulink
+    <para>Please note that the application behind the<guilabel>
+    "Install"</guilabel> depends on the Internet list of dictionaries. In case
+    it is out of date or does not include the desired language, you will have
+    to look for appropriate vocabularies yourself. The OpenOffice.org contains
+    probably the largest vocabulary collection at <ulink
     url="http://extensions.services.openoffice.org/dictionary">OpenOffice.org
     Extensions site</ulink>. After the dictionary extension has been
     downloaded and installed, the corresponding<emphasis> aff </emphasis>and
     <emphasis>dic </emphasis>will become available. The same can be achieved
-    by adding a spell checker extension to the Firefox or Thunderbird; in this
+    by downloading a spell checker add-ons for Firefox or Thunderbird; in this
     case the spell checker files will be stored in your (Firefox or
     Thunderbird) profile.</para>
 
@@ -118,6 +105,40 @@
     <emphasis>aff </emphasis> and <emphasis>dic.</emphasis></para>
   </section>
 
+  <section>
+    <title>Using spelling dictionaries</title>
+
+    <para>There is no need to instruct OmegaT to use a particular spelling
+    dictionary; OmegaT will use the correct language dictionary based upon the
+    language codes of your project. Check however that the language codes are
+    exactly the same: an FR-FR dictionary will not work with an FR target
+    setting, for example. If necessary, edit the file names of the dictionary
+    or change your project's language settings.</para>
+
+    <para>To enable the spelling checker, select <guimenuitem>Options &gt;
+    Spell Checking</guimenuitem> and tick the <guilabel>Automatically check
+    the spelling of text </guilabel>checkbox (see above)</para>
+
+    <figure id="spellchecker.in.action">
+      <title><indexterm class="singular">
+          <primary>Spell checker</primary>
+
+          <secondary>Spell checker - figure</secondary>
+        </indexterm>Spellchecker in action</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckingText.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Right-clicking on an underlined word (Artund in the figure above)
+    opens a drop-down menu listing suggestions for the correction (Art und).
+    You can also instruct the spell checker to ignore all the occurrences of
+    the mis-spelled word, or add it to the dictionary.</para>
+  </section>
+
   <section id="hints">
     <title>Hints<indexterm class="singular">
         <primary>Spell checker</primary>
@@ -126,30 +147,32 @@
       </indexterm></title>
 
     <para>If the spell checker is not working, then make sure first that the
-    check box "Automatically check the spelling of text" in the spell checker
-    dialogue (<guisubmenu>Options &gt; Spellchecking...)</guisubmenu> has been
-    checked .</para>
+    check box <guilabel>"Automatically check the spelling of text"</guilabel>
+    in the spell checker dialog (<guisubmenu>Options &gt;
+    Spellchecking...)</guisubmenu> has been ticked.</para>
 
     <para>Check also that the target language code of your project against the
-    available vocabularies in the setup window. The spell checker determines
-    the language to use from the target language code: if the target language
-    is Brazilian Portuguese (PT_BR), the subfolder with vocabularies must
-    contain the two vocabulary files, called <emphasis>pt_br.aff</emphasis>
-    and<emphasis> pt_br.dic.</emphasis></para>
+    available vocabularies in the setup window. The spell checker uses the
+    target language code to determine the language to be used : if the target
+    language is Brazilian Portuguese (PT_BR), the subfolder with vocabularies
+    must contain the two vocabulary files, called
+    <emphasis>pt_br.aff</emphasis> and<emphasis> pt_br.dic.</emphasis></para>
 
     <para>In case you have a large body of text already translated, but then
     realize the target language code of the project does not match the spell
     checker's language code (you specified pt_BR as the language, but there's
     no pt_BR vocabularies, for instance) you can simply copy the two
-    corresponding files and rename them (from pt_PT.arr and pt_PT.dic to
-    pt._BR.arr and pt_BR.dic). Of course it is much wiser, to take a short
-    break and download the correct versions of the spell checker.</para>
+    corresponding files and rename them (e.g. from
+    <emphasis>pt_PT.arr</emphasis> and <emphasis>pt_PT.dic </emphasis>to
+    <emphasis>pt._BR.arr</emphasis> and <emphasis>pt_BR.dic</emphasis>). Of
+    course it is much wiser, to take a short break and download the correct
+    versions of the spell checker.</para>
 
-    <para>Note that <filename>Uninstall </filename>physically deletes the
-    highlighted vocabularies. If they are part of OpenOffice.org as in the
-    above case, they will disappear from that application too. If for whatever
+    <para>Note that <filename>Uninstall </filename>physically removes the
+    selected vocabularies. If they are part of OpenOffice.org, as in the above
+    case, they will disappear from that application too. If for whatever
     reason you have to do that now and again, it may make sense to copy the
-    files involved to a different folder, reserved just for
-    <application>OmegaT</application> purposes.</para>
+    files involved to a different folder, reserved just for <application>the
+    OmegaT</application> use.</para>
   </section>
 </chapter>

@@ -5,7 +5,7 @@
   <title>About <application>OmegaT - introduction</application></title>
 
   <section id="OmegaT-Highlists">
-    <title> OmegaT highlights</title>
+    <title>OmegaT highlights</title>
 
     <para><application>OmegaT</application> is a free multi platform Computer
     Aided Translation tool, with the following highlights:</para>
@@ -13,61 +13,58 @@
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Translation
-        memory:</emphasis><application> OmegaT</application> memorizes your
+        memory:</emphasis><application> </application>OmegaT memorizes your
         translations in a translation memory. At the same time it can use
         memories from previous translations for reference. Translation
         memories can be very useful for a translation with a number of
-        repetitions or reasonably similar segments of text.
-        <application>OmegaT</application> uses translation memories to
-        remember your previous translations and suggest to you the most
-        probable translations for the text you are working on</para>
+        repetitions or reasonably similar segments of text. OmegaT uses
+        translation memories to remember your previous translations and
+        suggest to you likely translations for the text you are working
+        on.</para>
 
-        <para>The translation memories can be very useful when a document,
-        that's been already translated, needs to be updated. Unchanged
-        sentences will remain as translated, and updated sentences will be
-        shown with an older version of the same sentence as the most probable
-        translation. Modifications to the original document will thus be
-        handled with greater ease. If you are using previously created
-        translation memories, for example given to you by translation agency
-        or your client, <application>OmegaT</application> will be able to use
-        them as a reference memories.</para>
+        <para>The translation memories can be very useful when a document that
+        has already been translated needs to be updated. Unchanged sentences
+        are automatically translated, updated sentences are shown with the
+        translation of the most similar older sentence. Modifications to the
+        original document are thus handled with greater ease. If you are
+        supplied with translation memories created previously, for example by
+        your translation agency or your client, OmegaT is able to use them as
+        a reference memories.</para>
 
-        <para><application>OmegaT</application> uses the standard TMX file
-        format to store and access translation memories, which guarantees that
-        you can exchange your translation material with other CAT
-        applications, supporting this file format.</para>
+        <para>OmegaT uses the standard tmx file format to store and access
+        translation memories, which guarantees that you can exchange your
+        translation material with other CAT applications supporting this file
+        format.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Terminology
-        management</emphasis>: Terminology management is important for
-        translation consistency. <application>OmegaT</application> uses
-        glossaries that contain translations of single words or small phrases,
-        a sort of simplified bilingual dictionary for a specific domain.
-        <application>OmegaT</application> displays the translation of those
-        words that happen to be present in the current segment for your
-        reference.</para>
+        management</emphasis>:Terminology management is important for
+        translation consistency. OmegaT uses glossaries containing
+        translations of single words or small phrases: a simplified bilingual
+        dictionary for a specific domain. For your reference, OmegaT displays
+        the translation of any words that happen to be present in the current
+        segment.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Translation process:</emphasis> Imagine
-        having to translate anything from a single file to a folder that
-        contains subfolders with a number of files in a variety of formats.
-        When you let <application>OmegaT</application> know that you need to
-        translate those files it will look for the included files it supports
-        according to the file filtering rules, recognize the textual parts in
-        them, split the biggest text groups according to the segmentation
-        rules and display the segments one by one so that you can proceed with
-        the translation. <application>OmegaT</application> will memorize your
-        translations and will propose you translation candidates for segments
-        similar to those recorded in memory. Once you want to see how the
-        files would look once translated, you can create the translated files
-        open them in the appropriate application and see what your translation
-        looks like.</para>
+        <para><emphasis role="bold">Translation process:</emphasis> imagine
+        having to translate something, from a single file to a folder
+        containing subfolders each with a number of files in a variety of
+        formats. When you let OmegaT know the files that you need to
+        translate, it looks for the files it is able to handle according to
+        the file filtering rules, recognizes the textual parts within them,
+        splits up the text groups according to the segmentation rules, and
+        displays the segments one by one so that you can proceed with the
+        translation. OmegaT memorizes your translations and proposes possible
+        translations from similar segments in the memory. When you wish to see
+        how the files look once translated, you can create the translated
+        files, open them in the appropriate application and view the
+        translation in the final format..</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -75,34 +72,36 @@
   <section id="OmegaT.chapters.summary">
     <title>Summary of chapters</title>
 
-    <para>This documentation should serve both as a learning help and as a
-    reference guide. Here a short summary of chapters and its contents.</para>
+    <para>This documentation is intended both as a tutorial and as a reference
+    guide. Here is a short summary of the chapters and their contents.
+    .</para>
 
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold"> Start Using OmegaT in 5
-        Minutes!</emphasis> this chapter is intended as a Instant Start Guide
-        for beginners and tyre kickers,showing the complete way from opening a
-        new translation project to the finished translation.</para>
+        Minutes!:</emphasis> this chapter is intended as an Instant Start
+        Guide for beginners and “tyre kickers”, showing the complete procedure
+        from opening a new translation project through to completing the
+        translation.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Installing OmegaT and running it:
-        </emphasis>this chapter will be useful when starting to use OmegaT. It
-        contains the specific instructions on how to install OmegaT and run it
-        for Windows, OS X, and Linux users.</para>
+        </emphasis>this chapter is useful when you first begin using OmegaT.
+        It contains the specific instructions on how to install OmegaT and run
+        it on Windows, Mac OS X and Linux.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">The user interface</emphasis>,and<emphasis
-        role="bold"> Main Menu and Keyboard Short-cuts</emphasis>: these two
-        chapters will be among often read, as they explain the user interface
-        of OmegaT and the functions available via the main menu and the
-        keyboard shortcuts. C</para>
+        role="bold"> Main Menu and Keyboard Shortcuts</emphasis>: these two
+        chapters are likely to be heavily consulted, since they explain the
+        user interface of OmegaT and the functions available via the main menu
+        and the keyboard shortcuts.</para>
       </listitem>
     </itemizedlist>
 
@@ -111,19 +110,19 @@
         <para><emphasis role="bold">Project properties</emphasis> and<emphasis
         role="bold"> <application>OmegaT</application> Files and
         Directories:</emphasis> a project in the context of OmegaT is the
-        piece of work OmegaT as a CAT tool can work on. In this chapter the
-        project properties, like the source and the target languages, are
-        described. The latter chapter describes different subfolders and files
-        in the translation project and their role, as well as other user and
-        application files, connected with OmegaT.</para>
+        piece of work that OmegaT as a CAT tool is able to handle. This
+        chapter describes the project properties, such as the source and the
+        target languages. The second of these chapters describes the various
+        subfolders and files in a translation project and their role, and also
+        other user and application files associated with OmegaT.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Editing field behaviour:</emphasis> a
-        short chapter, describing how the editing of the segment being
-        translated can be set up.</para>
+        short chapter describing how to set up the editing behaviour of the
+        segment being translated.</para>
       </listitem>
     </itemizedlist>
 
@@ -131,57 +130,58 @@
       <listitem>
         <para><emphasis role="bold">Working with plain text</emphasis> and
         <emphasis role="bold">Working with formatted text</emphasis>: these
-        two chapters explain some important points, as regards texts to be
-        translated, like the encoding set used - in the case of plain text
-        files - and the tag handling - in the case of formatted text.</para>
+        two chapters explain certain important points concerning texts to be
+        translated, such as the encoding set (in the case of plain text files)
+        and tag handling (in the case of formatted text).</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Translation memories: </emphasis> explains
-        the role of different subdirectories that contain translation memories
-        and provides information on some other important aspects connected
-        with translation memories.</para>
+        the role of the various subdirectories containing translation
+        memories, and provides information on other important aspects relating
+        to translation memories.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Segmentation</emphasis>: translation
-        memory tools work with textual units called segments. In OmegaT
-        segments can ntatin be either based on paragraphs - rarely used
-        option, retained mainly for historical reasons - or on a rule-based
-        segmentation. A number of rules is already available, however,
-        additional rules can be defined by the user, as described in this
-        chapter.</para>
+        <para><emphasis role="bold">Segmentation</emphasis>:translation memory
+        tools work with textual units called segments. In OmegaT, segments can
+        be based on paragraphs or on segmentation rules. Paragraph
+        segmentation is less frequently used, but can be useful in cases of
+        so-called "creative" texts, The rule-based segmentation is usually
+        synonymous with sentence-based segmentation. A number of rule sets are
+        provided and on top of them additional rules can be defined by the
+        user, as described in this chapter.</para>
       </listitem>
 
       <listitem>
         <para><emphasis role="bold">Searches</emphasis>: and<emphasis
         role="bold"> </emphasis><emphasis role="bold">Regular
         expressions</emphasis>: Searches in OmegaT can be as simple as
-        "<emphasis>list segments containing
-        <emphasis>memory</emphasis></emphasis><emphasis>". </emphasis> Or they
-        can be more involved, for instance, when proofreading the target text:
-        "<emphasis>list segments with target text containing two or more
-        consecutive spaces</emphasis>". In the second example the regular
-        expression ^s^s+ will find and list the offending segments. Regular
-        expressions are extensively used also for segmentation rules.</para>
+        "<emphasis>list segments containing </emphasis><emphasis>the word
+        'kangaroo' in the source". </emphasis> They can also be complex,
+        allowing for instance to search for segments in which the target text
+        contains two or more consecutive spaces. In the second example the
+        regular expression ^s^s+ will find and list the offending segments.
+        Regular expressions are also used extensively in the segmentation
+        rules.</para>
       </listitem>
 
       <listitem>
         <para><emphasis role="bold">Dictionaries, Glossaries</emphasis>,
         <emphasis role="bold">Machine translation</emphasis> and <emphasis
-        role="bold">Spellchecker:</emphasis> OmegaT allows extensive use of
-        dictionaries and glossaries. When online, different MT services, like
-        Google Translate can be used. If spell checking is activated, the
-        spelling mistakes are being recognized and can be corrected while
-        translating the texts. </para>
+        role="bold">Spellchecker:</emphasis> OmegaT enables extensive use to
+        be made of dictionaries and glossaries. If an Internet connection is
+        available, various MT services such as Google Translate can be
+        accessed from within OmegaT. If spell checking is activated, spelling
+        mistakes and typos are recognized and can be corrected during
+        translation.</para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Miscellanea</emphasis>: contains different
-        issues of interest, for instance how to avoid data loss and
-        similar.</para>
+        <para><emphasis role="bold">Miscellanea</emphasis>: deals with other
+        issues of interest, such as how to avoid losing data.</para>
       </listitem>
 
       <listitem>
@@ -191,7 +191,7 @@
         <itemizedlist>
           <listitem>
             <para><emphasis role="bold">OmegaT on the web:</emphasis>
-            information about on-line OmegaT sources</para>
+            information on on-line OmegaT resources</para>
           </listitem>
         </itemizedlist>
 
@@ -204,7 +204,7 @@
 
         <itemizedlist>
           <listitem>
-            <para>K<emphasis role="bold">eyboard shortcuts</emphasis>: the
+            <para><emphasis role="bold">Keyboard shortcuts</emphasis>: the
             list of shortcuts used in the editor</para>
           </listitem>
         </itemizedlist>
@@ -212,8 +212,6 @@
         <itemizedlist>
           <listitem>
             <para><emphasis role="bold">Legal notices</emphasis></para>
-
-            <para><emphasis role="bold"></emphasis></para>
           </listitem>
         </itemizedlist>
       </listitem>

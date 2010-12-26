@@ -11,11 +11,17 @@
     </indexterm></title>
 
   <para>The regular expressions (or regex for short) used in searches and
-  segmentation rules are those supported by Java. If you need more specific
-  information, please consult <ulink
-  url="http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">Java
+  segmentation rules are those supported by Java. Should you need more
+  specific information, consult the <ulink
+  url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Java
   Regex documentation</ulink>. See additional references and examples
   below.</para>
+
+  <note>
+    <para>This chapter is intended for advanced users, who need to define
+    their own variants of segmentation rules or devise a more complex and
+    powerful key search items.</para>
+  </note>
 
   <table>
     <title>Regex - Flags</title>
@@ -64,86 +70,77 @@
         </row>
 
         <row>
-          <entry><emphasis>\uhhhh</emphasis></entry>
+          <entry>\uhhhh</entry>
 
-          <entry>The character with hexadecimal value
-          <emphasis>0xhhhh</emphasis></entry>
+          <entry>The character with hexadecimal value 0xhhhh</entry>
         </row>
 
         <row>
-          <entry><emphasis>\t</emphasis></entry>
+          <entry>\t</entry>
 
-          <entry>The tab character (<emphasis>'\u0009'</emphasis>)</entry>
+          <entry>The tab character ('\u0009')</entry>
         </row>
 
         <row>
-          <entry><emphasis>\n</emphasis></entry>
+          <entry>\n</entry>
 
-          <entry>The newline (line feed) character
-          (<emphasis>'\u000A'</emphasis>)</entry>
+          <entry>The newline (line feed) character ('\u000A')</entry>
         </row>
 
         <row>
-          <entry><emphasis>\r</emphasis></entry>
+          <entry>\r</entry>
 
-          <entry>The carriage-return character
-          (<emphasis>'\u000D'</emphasis>)</entry>
+          <entry>The carriage-return character ('\u000D')</entry>
         </row>
 
         <row>
           <entry>\f</entry>
 
-          <entry>The form-feed character
-          (<emphasis>'\u000C'</emphasis>)</entry>
+          <entry>The form-feed character ('\u000C')</entry>
         </row>
 
         <row>
           <entry>\a</entry>
 
-          <entry>The alert (bell) character
-          (<emphasis>'\u0007'</emphasis>)</entry>
+          <entry>The alert (bell) character ('\u0007')</entry>
         </row>
 
         <row>
           <entry>\e</entry>
 
-          <entry>The escape character (<emphasis>'\u001B'</emphasis>)</entry>
+          <entry>The escape character ('\u001B')</entry>
         </row>
 
         <row>
-          <entry>\c<emphasis>x</emphasis></entry>
+          <entry>\cx</entry>
 
-          <entry>The control character corresponding to
-          <emphasis>x</emphasis></entry>
+          <entry>The control character corresponding to x</entry>
         </row>
 
         <row>
-          <entry>\0<emphasis>n</emphasis></entry>
+          <entry>\0n</entry>
 
-          <entry>The character with octal value 0<emphasis>n</emphasis> (0
-          &lt;= <emphasis>n</emphasis> &lt;= 7)</entry>
+          <entry>The character with octal value 0n (0 &lt;= n &lt;= 7)</entry>
         </row>
 
         <row>
-          <entry>\0<emphasis>nn</emphasis></entry>
+          <entry>\0nn</entry>
 
-          <entry>The character with octal value 0<emphasis>nn</emphasis> (0
-          &lt;= <emphasis>n</emphasis> &lt;= 7)</entry>
+          <entry>The character with octal value 0nn (0 &lt;= n &lt;=
+          7)</entry>
         </row>
 
         <row>
-          <entry>\0<emphasis>mnn</emphasis></entry>
+          <entry>\0mnn</entry>
 
-          <entry>The character with octal value 0<emphasis>mnn</emphasis> (0
-          &lt;= <emphasis>m</emphasis> &lt;= 3, 0 &lt;= <emphasis>n</emphasis>
-          &lt;= 7)</entry>
+          <entry>The character with octal value 0mnn (0 &lt;= m &lt;= 3, 0
+          &lt;= n &lt;= 7)</entry>
         </row>
 
         <row>
-          <entry>\x<emphasis>hh</emphasis></entry>
+          <entry>\xhh</entry>
 
-          <entry>The character with hexadecimal value
-          0x<emphasis>hh</emphasis></entry>
+          <entry>The character with hexadecimal value 0xhh</entry>
         </row>
       </tbody>
     </tgroup>
@@ -165,29 +162,27 @@
 
       <tbody>
         <row>
-          <entry><emphasis>\</emphasis></entry>
+          <entry>\</entry>
 
           <entry>Nothing, but quotes the following character. This is required
-          if you would like to enter of the meta characters
-          <emphasis>!$()*+.&lt;&gt;?[\]^{|}</emphasis> to match as
-          themselves.</entry>
+          if you would like to enter any of the meta characters
+          !$()*+.&lt;&gt;?[\]^{|} to match as themselves.</entry>
         </row>
 
         <row>
-          <entry><emphasis>\\</emphasis></entry>
+          <entry>\\</entry>
 
           <entry>For example, this is the backslash character</entry>
         </row>
 
         <row>
-          <entry><emphasis>\Q</emphasis></entry>
+          <entry>\Q</entry>
 
-          <entry>Nothing, but quotes all characters until
-          <emphasis>\E</emphasis></entry>
+          <entry>Nothing, but quotes all characters until \E</entry>
         </row>
 
         <row>
-          <entry><emphasis>\E</emphasis></entry>
+          <entry>\E</entry>
 
           <entry>Nothing, but ends quoting started by \Q</entry>
         </row>
@@ -211,36 +206,36 @@
 
       <tbody>
         <row>
-          <entry><emphasis>\p{InGreek}</emphasis></entry>
+          <entry>\p{InGreek}</entry>
 
           <entry>A character in the Greek block (simple <ulink
-          url="http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">
+          url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">
           block</ulink>)</entry>
         </row>
 
         <row>
-          <entry><emphasis>\p{Lu}</emphasis></entry>
+          <entry>\p{Lu}</entry>
 
           <entry>An uppercase letter (simple <ulink
-          url="http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html#ubc">
+          url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">
           category</ulink>)</entry>
         </row>
 
         <row>
-          <entry><emphasis>\p{Sc}</emphasis></entry>
+          <entry>\p{Sc}</entry>
 
           <entry>A currency symbol</entry>
         </row>
 
         <row>
-          <entry><emphasis>\P{InGreek}</emphasis></entry>
+          <entry>\P{InGreek}</entry>
 
           <entry>Any character except one in the Greek block
           (negation)</entry>
         </row>
 
         <row>
-          <entry><emphasis>[\p{L}&amp;&amp;[^\p{Lu}]]</emphasis></entry>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
 
           <entry>Any letter except an uppercase letter (subtraction)</entry>
         </row>
@@ -264,25 +259,21 @@
 
       <tbody>
         <row>
-          <entry><emphasis>[abc]</emphasis></entry>
+          <entry>[abc]</entry>
 
-          <entry><emphasis>a</emphasis>, <emphasis>b</emphasis>, or
-          <emphasis>c</emphasis> (simple class)</entry>
+          <entry>a, b, or c (simple class)</entry>
         </row>
 
         <row>
-          <entry><emphasis>[^abc]</emphasis></entry>
+          <entry>[^abc]</entry>
 
-          <entry>Any character except <emphasis>a</emphasis>,
-          <emphasis>b</emphasis>, or <emphasis>c</emphasis> (negation)</entry>
+          <entry>Any character except a, b, or c (negation)</entry>
         </row>
 
         <row>
-          <entry><emphasis>[a-zA-Z]</emphasis></entry>
+          <entry>[a-zA-Z]</entry>
 
-          <entry><emphasis>a</emphasis> through <emphasis>z</emphasis> or
-          <emphasis>A</emphasis> through <emphasis>Z</emphasis>, inclusive
-          (range)</entry>
+          <entry>a through z or A through Z, inclusive (range)</entry>
         </row>
       </tbody>
     </tgroup>
@@ -304,47 +295,45 @@
 
       <tbody>
         <row>
-          <entry><emphasis>.</emphasis></entry>
+          <entry>.</entry>
 
           <entry>Any character (except for line terminators)</entry>
         </row>
 
         <row>
-          <entry><emphasis>\d</emphasis></entry>
+          <entry>\d</entry>
 
-          <entry>A digit: <emphasis>[0-9]</emphasis></entry>
+          <entry>A digit: [0-9]</entry>
         </row>
 
         <row>
-          <entry><emphasis>\D</emphasis></entry>
+          <entry>\D</entry>
 
-          <entry>A non-digit: <emphasis>[^0-9]</emphasis></entry>
+          <entry>A non-digit: [^0-9]</entry>
         </row>
 
         <row>
-          <entry><emphasis>\s</emphasis></entry>
+          <entry>\s</entry>
 
-          <entry>A whitespace character: <emphasis>[
-          \t\n\x0B\f\r]</emphasis></entry>
+          <entry>A whitespace character: [ \t\n\x0B\f\r]</entry>
         </row>
 
         <row>
-          <entry><emphasis>\S</emphasis></entry>
+          <entry>\S</entry>
 
-          <entry>A non-whitespace character:
-          <emphasis>[^\s]</emphasis></entry>
+          <entry>A non-whitespace character: [^\s]</entry>
         </row>
 
         <row>
-          <entry><emphasis>\w</emphasis></entry>
+          <entry>\w</entry>
 
-          <entry>A word character: <emphasis>[a-zA-Z_0-9]</emphasis></entry>
+          <entry>A word character: [a-zA-Z_0-9]</entry>
         </row>
 
         <row>
-          <entry><emphasis>\W</emphasis></entry>
+          <entry>\W</entry>
 
-          <entry>A non-word character: <emphasis>[^\w]</emphasis></entry>
+          <entry>A non-word character: [^\w]</entry>
         </row>
       </tbody>
     </tgroup>
@@ -366,25 +355,25 @@
 
       <tbody>
         <row>
-          <entry><emphasis>^</emphasis></entry>
+          <entry>^</entry>
 
           <entry>The beginning of a line</entry>
         </row>
 
         <row>
-          <entry><emphasis>$</emphasis></entry>
+          <entry>$</entry>
 
           <entry>The end of a line</entry>
         </row>
 
         <row>
-          <entry><emphasis>\b</emphasis></entry>
+          <entry>\b</entry>
 
           <entry>A word boundary</entry>
         </row>
 
         <row>
-          <entry><emphasis>\B</emphasis></entry>
+          <entry>\B</entry>
 
           <entry>A non-word boundary</entry>
         </row>
@@ -396,20 +385,6 @@
      
 
     <title>Regex - Greedy quantifiers</title>
-
-     - will match as much as they can. For example, 
-
-    <emphasis>a+</emphasis>
-
-     will match 
-
-    <emphasis>aaa</emphasis>
-
-     in 
-
-    <emphasis>aaabbb)</emphasis>
-
-     
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100" />
@@ -446,24 +421,14 @@
      
   </table>
 
+  <note>
+    <para>greedy quantifiers will match as much as they can. For example,
+    <emphasis>a+?</emphasis> will match the aaa in
+    <emphasis>aaabbb</emphasis></para>
+  </note>
+
   <table>
-     
-
     <title>Regex - Reluctant (non-greedy) quantifiers</title>
-
-     - will match as little as they can. For example, 
-
-    <emphasis>a+?</emphasis>
-
-     will match the first 
-
-    <emphasis>a</emphasis>
-
-     in 
-
-    <emphasis>aaabbb</emphasis>
-
-     
 
     <tgroup align="left" cols="2" rowsep="1">
       <colspec align="left" colnum="1" colwidth="100" />
@@ -478,27 +443,31 @@
 
       <tbody>
         <row>
-          <entry>X<emphasis>??</emphasis></entry>
+          <entry>X??</entry>
 
           <entry>X, once or not at all</entry>
         </row>
 
         <row>
-          <entry>X<emphasis>*?</emphasis></entry>
+          <entry>X*?</entry>
 
           <entry>X, zero or more times</entry>
         </row>
 
         <row>
-          <entry>X<emphasis>+?</emphasis></entry>
+          <entry>X+?</entry>
 
           <entry>X, one or more times</entry>
         </row>
       </tbody>
     </tgroup>
-
-     
   </table>
+
+  <note>
+    <para>non-greedy quantifier will match as little as they can. For example,
+    <emphasis>a+?</emphasis> will match the first <emphasis>a</emphasis> in
+    <emphasis>aaabbb</emphasis> </para>
+  </note>
 
   <table>
     <title>Regex - Logical operators</title>
@@ -522,13 +491,13 @@
         </row>
 
         <row>
-          <entry>X<emphasis>|</emphasis>Y</entry>
+          <entry>X|Y</entry>
 
           <entry>Either X or Y</entry>
         </row>
 
         <row>
-          <entry><emphasis>(</emphasis>XY<emphasis>)</emphasis></entry>
+          <entry>(XY)</entry>
 
           <entry>XY as a single group</entry>
         </row>
@@ -547,32 +516,30 @@
         <secondary>Examples of use</secondary>
       </indexterm></title>
 
-    <para>There's a number of interactive tools available to develop and test
-    regular expressions. They all pretty much follow the same pattern (Example
-    from the Regular Expression Tester - see ref below): the regular
+    <para>A number of interactive tools are available to develop and test
+    regular expressions. They generally follow much the same pattern (Example
+    from the Regular Expression Tester – see ref below): the regular
     expression (top entry) analyzes the search text (Text box in the middle) ,
     yielding the hits, shown in the result Text box.</para>
 
     <figure id="regerx.tester">
       <title>Regex Tester</title>
 
-        <mediaobject>
-          <imageobject>
-            <imagedata fileref="images/RegexTester.png" />
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="images/RegexTester.png" width = "40%"/>
-          </imageobject>
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/RegexTester.png" />
+        </imageobject>
       </mediaobject>
     </figure>
+
     <para>See <ulink url="http://weitz.de/regex-coach/">The Regex
     Coach</ulink> for Windows,Linux, Mac, FreeBSD versions of a stand-alone
-    tool, that's pretty much identical to the above example.</para>
+    tool, that is much the same as the above example.</para>
 
-    <para>A nice collection of useful regex cases can be found in the
-    <application>OmegaT</application> itself (see <emphasis>Options &gt;
-    Segmentation</emphasis>). The following list includes expressions, you may
-    find useful when searching through the translation memory:</para>
+    <para>A nice collection of useful regex cases can be found in
+    <application>OmegaT</application> itself (see Options &gt; Segmentation).
+    The following list includes expressions you may find useful when searching
+    through the translation memory:</para>
 
     <table>
       <title>Regex - Examples of regular expressions in translations</title>
@@ -598,28 +565,29 @@
           <row>
             <entry>[\.,]\s*[\.,]+</entry>
 
-            <entry>commas and periods mix-up</entry>
+            <entry>comma or a period, followed by spaces and yet another comma
+            or period</entry>
           </row>
 
           <row>
             <entry>\. \s+$</entry>
 
-            <entry>extra blanks, following the period at the end of the
+            <entry>extra spaces after the period at the end of the
             line</entry>
           </row>
 
           <row>
             <entry>\s+a\s+[aeiou]</entry>
 
-            <entry>English: words, starting on vowels, should be preceded by
-            "an", not "a"</entry>
+            <entry>English: words, beginning on vowels, should generally be
+            preceded by "an", not "a"</entry>
           </row>
 
           <row>
             <entry>\s+an\s+[^aeiou]</entry>
 
-            <entry>English: the same check as above, but for consonants ("a",
-            not "an")</entry>
+            <entry>English: the same check as above, but concerning consonants
+            ("a", not "an")</entry>
           </row>
 
           <row>
@@ -631,8 +599,9 @@
           <row>
             <entry>\.[A-Z]</entry>
 
-            <entry>space missing between a period and the start of a new
-            sentence</entry>
+            <entry>Period, followed by an upper-case letter - possibly a space
+            is missing between the period and the start of a new
+            sentence?</entry>
           </row>
         </tbody>
       </tgroup>

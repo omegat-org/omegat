@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <chapter id="ch04.menu">
-  <title>Menu and Keyboard Short-cuts</title>
+  <title>Menu and Keyboard shortcuts</title>
 
   <section id="ch04.main.menu">
     <title><indexterm class="singular">
@@ -15,20 +15,19 @@
       <secondary>Main menu</secondary>
     </indexterm>
 
-    <para>All of <application>OmegaT</application>'s functionality is
-    available through the menu bar at the top of the Editor window. Most
-    functions are also available via keyboard short-cuts. Short-cuts are
-    activated by pressing <keycap>Ctrl</keycap> and a letter. Some short-cuts
-    involve other keys. For readability purposes, letters are written in
-    uppercase here. <keycap>Ctrl</keycap> is used on Windows, UNIX and
-    UNIX-like operating systems with keyboards featuring a
+    <para>All of OmegaT's functions are available through the menu bar at the
+    top of the Editor window. Most functions are also available via keyboard
+    shortcuts. Shortcuts are activated by pressing <keycap>Ctrl</keycap> and a
+    letter. Some shortcuts involve other keys. For readability purposes,
+    letters are written in uppercase here. . <keycap>Ctrl</keycap> is used on
+    Windows, UNIX and UNIX-like operating systems with keyboards featuring a
     <keycap>Ctrl</keycap> or <keycap>Control</keycap> key. Mac users should
-    read <keycombo>
+    instead use <keycombo>
         <keycap>cmd</keycap>
 
         <keycap>key</keycap>
-      </keycombo> instead. The cmd key either has a command label or an apple
-    mark on Apple keyboards.</para>
+      </keycombo> instead. The "Cmd" key either has a "command" label or an
+    apple mark on Apple keyboards.</para>
 
     <table colsep="1" id="table.main.menu">
       <title>Main Menu</title>
@@ -115,11 +114,11 @@
           <row>
             <entry><guimenuitem>Reload</guimenuitem></entry>
 
-            <entry><keycap>F5</keycap></entry>
+            <entry><guimenuitem>F5</guimenuitem></entry>
 
             <entry>Reloads the project to take external changes in source
-            files, legacy translation memories or glossaries into
-            account.</entry>
+            files, legacy translation memories, glossaries and project
+            settings into account.</entry>
           </row>
 
           <row>
@@ -145,10 +144,10 @@
                 <keycap>S</keycap>
               </keycombo></entry>
 
-            <entry>Saves the translation to project's translation memory.
-            <application>OmegaT</application> automatically saves the
-            translation every 10 minutes or when you close the project or quit
-            <application>OmegaT</application>.</entry>
+            <entry>Saves the internal translation memory from the memory onto
+            the hard disk. <application>OmegaT</application> automatically
+            saves the translation every 10 minutes and also when you close the
+            project or quit <application>OmegaT</application>.</entry>
           </row>
 
           <row>
@@ -162,8 +161,8 @@
               </keycombo></entry>
 
             <entry>Creates the target documents based on your translation of
-            documents' text. The documents will be located in the
-            <filename>target</filename> folder.</entry>
+            the documents' text. The created target documents are located in
+            the <filename>target</filename> folder.</entry>
           </row>
 
           <row>
@@ -189,7 +188,7 @@
                 <keycap>L</keycap>
               </keycombo></entry>
 
-            <entry>Closes or opens <ulink
+            <entry>Closes or opens the <ulink
             url="04_UserInterface.xml#Project_Files">Project files
             window</ulink> (depending whether it is opened or closed).</entry>
           </row>
@@ -205,8 +204,7 @@
 
             <entry>Saves the project and quits
             <application>OmegaT</application>. If you haven't yet saved the
-            project manually confirms whether you would really like to
-            quit.</entry>
+            project manually confirms whether you really wish to quit.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -220,9 +218,9 @@
         <secondary>Edit</secondary>
       </indexterm></title>
 
-    <para>Note: Items that one can find in most applications (copy/cut/paste)
-    are not displayed in this menu but are available with your system
-    short-cuts. For example:</para>
+    <para>Note: Items that are found in most applications (copy/cut/paste) are
+    not displayed in this menu, but are available using your system shortcuts.
+    For example:</para>
 
     <table colsep="1">
       <title>Copy/cut/paste shortcuts</title>
@@ -242,7 +240,7 @@
                 <keycap>C</keycap>
               </keycombo></entry>
 
-            <entry>Copies selected text to clipboard.</entry>
+            <entry>Copies the selected text to the clipboard.</entry>
           </row>
 
           <row>
@@ -254,8 +252,8 @@
                 <keycap>X</keycap>
               </keycombo></entry>
 
-            <entry>Copies selected text to clipboard and deletes selected
-            text.</entry>
+            <entry>Copies the selected text to the clipboard and deletes the
+            selected text.</entry>
           </row>
 
           <row>
@@ -267,7 +265,8 @@
                 <keycap>V</keycap>
               </keycombo></entry>
 
-            <entry>Pastes the text from clipboard at cursor.</entry>
+            <entry>Pastes the text from the clipboard at the cursor
+            position.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -293,9 +292,9 @@
                 <keycap>Z</keycap>
               </keycombo></entry>
 
-            <entry>Goes back to the status before the last editing action was
-            taken. Does not work once the modified segment has been
-            validated.</entry>
+            <entry>Restores the status before the last editing action was
+            taken. This command does not work once the modified segment has
+            been validated.</entry>
           </row>
 
           <row>
@@ -307,9 +306,9 @@
                 <keycap>Y</keycap>
               </keycombo></entry>
 
-            <entry>Goes back to the status before the last editing action was
-            cancelled. Does not work once the modified segment has been
-            validated.</entry>
+            <entry>Restores the status before the last editing action was
+            cancelled. This command does not work once the modified segment
+            has been validated.</entry>
           </row>
 
           <row>
@@ -321,7 +320,7 @@
                 <keycap>R</keycap>
               </keycombo></entry>
 
-            <entry>Overwrites the whole target segment with the currently
+            <entry>Replaces the whole target segment with the currently
             selected fuzzy match (by default the first match is
             selected).</entry>
           </row>
@@ -336,8 +335,8 @@
               </keycombo></entry>
 
             <entry>Inserts the currently selected fuzzy match at the cursor
-            position. This function will overwrite a portion of the target
-            segment if it is selected.</entry>
+            position. If part of the target segment has been selected, this
+            function overwrites the selected portion.</entry>
           </row>
 
           <row>
@@ -350,8 +349,9 @@
                 <keycap>M</keycap>
               </keycombo></entry>
 
-            <entry>Replaces the target segment with the Google Translate
-            translation. No action, if Google Translate not activated (see
+            <entry>Replaces the target segment with the translation, provided
+            by the selected Machine Translation service. No action is taken,
+            in case no Machine Translation service has been activated (see
             Menu &gt; Options below).</entry>
           </row>
 
@@ -366,8 +366,7 @@
                 <keycap>R</keycap>
               </keycombo></entry>
 
-            <entry>Overwrites the whole target segment with the
-            source.</entry>
+            <entry>Replaces the whole target segment with the source.</entry>
           </row>
 
           <row>
@@ -420,12 +419,13 @@
               </keycombo></entry>
 
             <entry>Exports the current selection to a text file for
-            processing. If there is no selection, the current source is
-            written to this file. When the user exits
-            <application>OmegaT</application>, this file is not emptied, to be
-            consistent with usual clipboard behaviour. The exported contents
-            is copied to the file <filename>selection.txt</filename> located
-            in the User's preference files folder (see <ulink
+            processing. If no text has been selected, the current source
+            segment is written to this file. When the user exits
+            <application>OmegaT</application>, this file is not emptied, in
+            order to be consistent with usual clipboard behaviour. The
+            exported contents are copied to the file
+            <filename>selection.txt</filename> located in the User's
+            preference files folder (see <ulink
             url="filesAndDirectories.xml#user">files and
             directories</ulink>)</entry>
           </row>
@@ -525,8 +525,8 @@
               </keycombo> or <guimenuitem>Enter</guimenuitem> or
             <guimenuitem>Tab</guimenuitem></entry>
 
-            <entry>Moves to the next segment. If current segment is the last
-            one in a file, moves to the first segment of the next
+            <entry>Moves to the next segment. If the current segment is the
+            last segment in a file, it moves to the first segment of the next
             file.</entry>
           </row>
 
@@ -547,9 +547,9 @@
                 <keycap>Tab</keycap>
               </keycombo></entry>
 
-            <entry>Moves to the previous segment. Moves to the last segment of
-            the previous file, if current segment is the first one one in a
-            file.</entry>
+            <entry>Moves to the previous segment. If the current segment is
+            the first one in a file, it moves to the last segment of the
+            previous file.</entry>
           </row>
 
           <row>
@@ -561,8 +561,25 @@
                 <keycap>J</keycap>
               </keycombo></entry>
 
-            <entry>The segment is opened on entering its segment
-            number.</entry>
+            <entry>The segment is opened when its segment number is
+            entered..</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Back in history...</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Shift</keycap>
+
+                <keycap>P</keycap>
+              </keycombo></entry>
+
+            <entry>With this command you can move backward one segment at a
+            time, to return later to the current segment using
+            <guimenuitem>Forward in history... </guimenuitem>command
+            below.</entry>
           </row>
 
           <row>
@@ -578,22 +595,8 @@
 
             <entry><application>OmegaT</application> remembers the segments
             executed. With this command you can step forward to the segment,
-            you have previously left by the "back in history" command.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Back in history...</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>Shift</keycap>
-
-                <keycap>P</keycap>
-              </keycombo></entry>
-
-            <entry>With this command you can move backward one or several
-            segments in time, to return later to the current segment.</entry>
+            you have previously left by the <guimenuitem>Back in
+            history</guimenuitem>,,, command.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -688,10 +691,10 @@
 
             <entry><guimenu>Ctrl+T</guimenu>: Checks for missing or displaced
             tags in formatted files. Will display a list of segments with tag
-            mistakes. The <ulink url="04_UserInterface.xml#Tag_Validation">Tag
-            validation window</ulink> section lists what you see there, and
-            <ulink url="07_FormattedText.xml">Working with formatted
-            texts</ulink> tells you why.</entry>
+            errors and possible inconsistencies. See <ulink
+            url="04_UserInterface.xml#Tag_Validation">Tag validation
+            window</ulink> and <ulink url="07_FormattedText.xml">Working with
+            formatted texts</ulink> for more information.</entry>
           </row>
 
           <row>
@@ -748,20 +751,20 @@
             <entry><guimenuitem>Machine Translate</guimenuitem></entry>
 
             <entry>Allows you to activate/deactivate the Machine Translation
-            tools offered.When active, <keycombo>
+            tools offered. When active, <keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>M</keycap>
               </keycombo> will insert the suggestion into the target part of
-            the active segment.</entry>
+            the current segment.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>TransTips</guimenuitem></entry>
 
             <entry>Allows you to activate/deactivate <emphasis>TransTips
-            </emphasis>feature and the option<emphasis> Exact Match
-            </emphasis>for it. With <emphasis>TransTips</emphasis> activated a
+            </emphasis>feature and set its option<emphasis> Exact
+            Match.</emphasis> With <emphasis>TransTips</emphasis> activated a
             right click on a highlighted word in the source will open a popup
             menu with the glossary entries for the word you clicked. You can
             then click on the preferred translation to insert it into the
@@ -774,23 +777,24 @@
           <row>
             <entry><guimenuitem>Font...</guimenuitem></entry>
 
-            <entry>Shows <ulink url="fontSettings.xml">Font settings</ulink>
-            dialogue to modify the text display font. Users of old computers
-            who feel window resizing is very slow can try changing the
-            font.</entry>
+            <entry>Shows the <ulink url="fontSettings.xml">Font
+            settings</ulink> dialogue to modify the text display font. Users
+            of old computers who feel window resizing is very slow can try
+            changing the font.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>File Filters...</guimenuitem></entry>
 
-            <entry>Displays <ulink url="fileFilters.xml">File filters</ulink>
-            dialogue to configure file handling and parsing.</entry>
+            <entry>Displays the <ulink url="fileFilters.xml">File
+            filters</ulink> dialogue to configure file handling and
+            parsing.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Segmentation...</guimenuitem></entry>
 
-            <entry>Opens <ulink url="segmentation.xml">Source
+            <entry>Opens the <ulink url="segmentation.xml">Source
             segmentation</ulink> dialogue to configure text
             segmentation.</entry>
           </row>
@@ -806,34 +810,33 @@
           <row>
             <entry><guimenuitem>Editing Behaviour...</guimenuitem></entry>
 
-            <entry>Displays <ulink url="translationEditing.xml">Translation
-            editing</ulink> dialogue to configure.</entry>
+            <entry>Displays the <ulink
+            url="translationEditing.xml">Translation editing</ulink> dialogue
+            to configure.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Tag Validation...</guimenuitem></entry>
 
-            <entry>Allows you to configure the Tag Validator options, as
-            regards the programming (%...) variables.</entry>
+            <entry>For programmers: Allows you to configure the Tag Validator
+            options to check programming (%...) variables also.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Team</guimenuitem></entry>
 
-            <entry>Allows you to enter your name or your ID, so that the
-            segments, translated by you, will carry your signature.</entry>
+            <entry>Enter your name here and it will be attached to all
+            segments translated by you.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Restore Main Window</guimenuitem></entry>
 
-            <entry>Restores the components of the main
-            <application>OmegaT</application> window to their default state.
-            Use this feature in case you have undocked, moved, or hidden one
-            or more components and you cannot get them back the way you want
-            them. Use it also if you have changed of
-            <application>OmegaT</application> version and you have problems
-            with windows not appearing anymore.</entry>
+            <entry>Restores the components of the main OmegaT window to their
+            default state. Use this feature when you have undocked, moved, or
+            hidden one or more components and you are unable to restore the
+            desired arrangement. It can also be used when panes do not appear
+            as expected following an OmegaT upgrade.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -857,8 +860,8 @@
           <row>
             <entry><guimenuitem>User Manual...</guimenuitem></entry>
 
-            <entry><keycap>F1:</keycap> Opens Help browser with this manual in
-            a separate window.</entry>
+            <entry><keycap>F1:</keycap> Opens Help browser displaying this
+            manual in a separate window.</entry>
           </row>
 
           <row>
@@ -873,22 +876,25 @@
   </section>
 
   <section id="keyboard.shortcuts">
-    <title>Keyboard Short-cuts<indexterm class="singular">
+    <title>Keyboard shortcuts<indexterm class="singular">
         <primary>Keyboard shortcuts</primary>
       </indexterm></title>
 
-    <para>The following short-cuts are available from the main window. When
-    another window is on the foreground, click on the main window to put it on
-    the foreground or press <keycap>esc</keycap> to close that window.</para>
+    <para>The following shortcuts are available from the main window. When
+    another window is on the foreground, click on the main window to bring it
+    to the foreground or press <keycap>Esc</keycap> to close the other
+    window.</para>
 
-    <para>Short-cuts are activated by pressing <keycap>Ctrl</keycap> and a
-    letter. Some short-cuts involve other keys. For readability purposes,
+    <para>Shortcuts are activated by pressing <keycap>Ctrl</keycap> and a
+    letter. Some shortcuts involve other keys. For readability purposes,
     letters are written in uppercase here.</para>
 
     <para>Ctrl is used on Windows, UNIX and UNIX-like operating systems with
     keyboards featuring a <keycap>Ctrl</keycap> / <keycap>Control
-    key</keycap>. Mac users should read cmd+key instead. The cmd key either
-    has a command label or an apple mark on Apple keyboards.</para>
+    key</keycap>. Mac users should instead use the
+    <guimenuitem>cmd+key.</guimenuitem> On Apple keyboards
+    <guimenuitem>cmd</guimenuitem> key either has a command label or an Apple
+    icon on it.</para>
 
     <itemizedlist>
       <listitem>
@@ -932,7 +938,7 @@
         </indexterm></title>
 
       <table colsep="1">
-        <title>Project management shorcuts</title>
+        <title>Project management shortcuts</title>
 
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
@@ -949,7 +955,7 @@
                   <keycap>O</keycap>
                 </keycombo></entry>
 
-              <entry>Displays a dialogue to locate an already existing
+              <entry>Displays a dialogue to locate an existing
               project.</entry>
             </row>
 
@@ -962,9 +968,9 @@
                   <keycap>S</keycap>
                 </keycombo></entry>
 
-              <entry>Saves the current work to the file project_save.TMX
-              located in the project's <filename>omegat</filename>
-              folder.</entry>
+              <entry>Saves the current work to the internal translation memory
+              (file project_save.tmx located in the project's
+              <filename>omegat</filename> folder).</entry>
             </row>
 
             <row>
@@ -991,7 +997,8 @@
                 </keycombo></entry>
 
               <entry>Creates the translated documents in the project's Target
-              folder</entry>
+              folder and creates translation memory files (level1, level2 and
+              omegat tmx files) in the project's root folder.</entry>
             </row>
 
             <row>
@@ -1003,8 +1010,8 @@
                   <keycap>E</keycap>
                 </keycombo></entry>
 
-              <entry>Displays the project's settings for eventual
-              modification</entry>
+              <entry>Displays the project's settings for modification, if
+              required.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1015,7 +1022,7 @@
       <title><indexterm class="singular">
           <primary>Keyboard shortcuts</primary>
 
-          <secondary>Editingt</secondary>
+          <secondary>Editing</secondary>
         </indexterm>Editing<indexterm class="singular">
           <primary>Keyboard shortcuts</primary>
 
@@ -1066,7 +1073,7 @@
                   <keycap>#N</keycap>
                 </keycombo></entry>
 
-              <entry>#N is a digit from 1 to 5. The short-cut selects the Nth
+              <entry>#N is a digit from 1 to 5. The shortcut selects the Nth
               match displayed in the match window (the first match is selected
               by default)</entry>
             </row>
@@ -1185,7 +1192,7 @@
 
           <tbody>
             <row>
-              <entry>Next untranslated segment</entry>
+              <entry>Next Untranslated Segment</entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -1198,7 +1205,7 @@
             </row>
 
             <row>
-              <entry>Next segment</entry>
+              <entry>Next Segment</entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -1210,7 +1217,7 @@
             </row>
 
             <row>
-              <entry>Previous segment</entry>
+              <entry>Previous Segment</entry>
 
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
@@ -1230,7 +1237,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Moves to the segment number provided.</entry>
+              <entry>Moves to the segment number entered.</entry>
             </row>
 
             <row>
@@ -1311,7 +1318,8 @@
                 </keycombo></entry>
 
               <entry>Exports the current selection or the current source, if
-              there's no selection</entry>
+              no text has been selected. The text is exported to a plain-text
+              file.</entry>
             </row>
 
             <row>
@@ -1329,7 +1337,7 @@
             <row>
               <entry>Help files</entry>
 
-              <entry><keycap>F1</keycap></entry>
+              <entry><guimenuitem>F1</guimenuitem></entry>
 
               <entry>Displays the <application>OmegaT</application> help files
               in a separate window</entry>

@@ -4,6 +4,7 @@
 <chapter id="ch04.project.properties">
   <title>Project properties<indexterm class="singular">
       <primary>Project</primary>
+
       <secondary>Properties</secondary>
     </indexterm></title>
 
@@ -12,7 +13,7 @@
   <section id="properties.dialog">
     <title>Properties dialog</title>
 
-    <para>The dialog <menuchoice>
+    <para>The <menuchoice>
         <shortcut>
           <keycombo>
             <keycap>Ctrl</keycap>
@@ -24,40 +25,51 @@
         <guimenu>Project</guimenu>
 
         <guimenuitem>Properties...</guimenuitem>
-      </menuchoice> is used to modify the project folders and languages. It
-    contains:</para>
+      </menuchoice> dialog is used to define and modify the project folders
+    and languages.</para>
+
+    <figure>
+      <title>Project properties window</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/NewProject.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>It contains:</para>
 
     <itemizedlist>
       <listitem>
-        <para>Area for setting project source and target languages with
+        <para>An area for setting project source and target languages with
         drop-down menus</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Segmentation settings flag</para>
+        <para>A segmentation settings flag</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Area for setting project folders</para>
+        <para>An area for setting project folders</para>
       </listitem>
     </itemizedlist>
 
     <para>All the fields are editable. You can either enter the languages by
-    hand or use the drop down menu. You can type names of folders that do not
-    exist yet, and <application>OmegaT</application> will create them for
-    you.</para>
+    hand or use the drop down menu. If you enter names of folders that do not
+    exist yet, <application>OmegaT</application> creates them for you.</para>
   </section>
 
   <section id="language.modification">
     <title>Modifying project properties</title>
 
-    <para>Note that changes to the project setup may have some unintended
-    consequencesm especially so, when made when the project is already on the
-    way.</para>
+    <para>Note that changes to the project setup may have some consequences,
+    especially, when the project is already on the way has already been
+    started.</para>
 
     <itemizedlist>
       <listitem>
@@ -68,9 +80,9 @@
             <secondary>Source and target languages</secondary>
           </indexterm></emphasis></para>
 
-        <para>You have to bear in mind that changing the languages may render
-        the currently used translation memories useless since their language
-        may not match new languages anymore.</para>
+        <para>Bear in mind that changing the languages may render the
+        currently used translation memories useless since their language pair
+        may not longer match the new languages.</para>
       </listitem>
 
       <listitem>
@@ -85,16 +97,16 @@
         are handled by <application>OmegaT</application>. They do not modify
         the segmentation of already existing translation memories.</para>
 
-        <para>If you change the segmentation settings, some already translated
-        segments may get split or merged. This will practically return them to
-        the "untranslated" status, as they will not match segments recorded in
-        the project memory anymore, even though the old and now not matching
+        <para>Changes made to the segmentation settings may cause some already
+        translated segments to be split or merged. This will effectively
+        return them to the "untranslated" status, as they will no longer match
+        segments recorded in the project memory, even though their original
         translation is still there.</para>
 
-        <para><application>OmegaT</application> may upgrade old translation
-        memories that did not use sentence segmentation, but not vice versa.
-        If you change your mind in the middle of the translation, the
-        project's translation memory will not be changed.</para>
+        <para>OmegaT may upgrade old translation memories that did not use
+        sentence segmentation, but not vice versa. If you decide
+        mid-translation to switch from sentence to paragraph translation, the
+        internal translation memory of the project will not be changed.</para>
       </listitem>
 
       <listitem>
@@ -105,11 +117,9 @@
             <secondary>Changing the folder structure</secondary>
           </indexterm></emphasis></para>
 
-        <para>In case you intend to modify project folders, remember that this
-        will not move the contained files from old folders to new ones. You
-        risk ending up in a situation neither you or
-        <application>OmegaT</application> know what the folders really mean,
-        and which of them are being used</para>
+        <para>In case you decide to modify project folders, keep in mind that
+        this will not move the contained files from old folders to the new
+        location .</para>
       </listitem>
 
       <listitem>
@@ -121,10 +131,11 @@
           </indexterm></emphasis></para>
 
         <para>It is possible to modify the project properties during a
-        translation session. However, the safest way is to consider all
-        settings as final once the translation has started - unless of course
-        you realize a major blunder has been made. See the section Preventing
-        data loss for ways and mean to protect your work.</para>
+        translation session. However, until you have some experience with
+        OmegaT, it is safest to consider all settings final once the
+        translation has started – unless of course you realize a major mistake
+        has been made. See the section Preventing data loss for ways and means
+        of protecting your work.</para>
       </listitem>
     </itemizedlist>
   </section>

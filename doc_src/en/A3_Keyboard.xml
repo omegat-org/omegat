@@ -4,10 +4,10 @@
 <appendix id="A3.keyboard">
   <title>Keyboard shortcuts in the editor</title>
 
-  <para>This short text describes key behaviour in the editor pane. Term
-  ""move to inside segment" means, that the caret moves to the start of
-  segment, if the previous position was before the segment, and to its end, if
-  the previous position was past the end of it.</para>
+  <para>This short text describes key behavior in the editor pane. Term ""Move
+  to inside segment" means, that the cursor moves to the beginning of the
+  segment if it was previously before the segment, and to the end of the
+  segment if it was previously beyond it. </para>
 
   <table>
     <title>Key behaviour in the editor</title>
@@ -29,7 +29,7 @@
         <row>
           <entry><emphasis role="bold">Left: </emphasis></entry>
 
-          <entry>one char left, but not further than the start of
+          <entry>one char left, but not further than the beginning of
           segment</entry>
         </row>
 
@@ -43,37 +43,39 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Left: </emphasis></entry>
 
-          <entry>one word left, but stay within the segment</entry>
+          <entry>one word left, but not further than the beginning of
+          segment</entry>
         </row>
 
         <row>
           <entry><emphasis role="bold">Ctrl+Right: </emphasis></entry>
 
-          <entry>one word right, but stay within the segment</entry>
+          <entry>one word right, but not further than the end of
+          segment</entry>
         </row>
 
         <row>
           <entry><emphasis role="bold">PgUp: </emphasis></entry>
 
-          <entry>move one page up</entry>
+          <entry>page up through the document</entry>
         </row>
 
         <row>
           <entry><emphasis role="bold">PgDn: </emphasis></entry>
 
-          <entry>move one page down</entry>
+          <entry>page down through the document</entry>
         </row>
 
         <row>
           <entry><emphasis role="bold">Home*</emphasis></entry>
 
-          <entry>move to the start of segment's line</entry>
+          <entry>move to the beginning of the line in the segment</entry>
         </row>
 
         <row>
           <entry><emphasis role="bold">End*</emphasis></entry>
 
-          <entry>move to the end of segment's line</entry>
+          <entry>move to the end of the line in the segment</entry>
         </row>
 
         <row>
@@ -105,13 +107,13 @@
         <row>
           <entry><emphasis role="bold">Backspace*</emphasis></entry>
 
-          <entry>remove char before caret</entry>
+          <entry>remove char before cursor</entry>
         </row>
 
         <row>
           <entry><emphasis role="bold">Delete*</emphasis></entry>
 
-          <entry>remove char after caret</entry>
+          <entry>remove char after cursor</entry>
         </row>
 
         <row>
@@ -131,7 +133,7 @@
         <row>
           <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
 
-          <entry>previous segment (Mac: <emphasis
+          <entry>open previous segment (Mac: <emphasis
           role="bold">Cmd+Enter</emphasis>)</entry>
         </row>
 
@@ -151,18 +153,18 @@
     </tgroup>
   </table>
 
-  <para>* These keys behave differently when the caret is outside the editable
-  segment:</para>
+  <para>* These keys behave differently when the cursor is outside the
+  editable segment::</para>
 
   <itemizedlist>
     <listitem>
-      <para><emphasis role="bold">Home: </emphasis> "jump to inside
-      segment"</para>
+      <para><emphasis role="bold">Home: </emphasis> cursor to the beginning of
+      the active segment</para>
     </listitem>
 
     <listitem>
-      <para><emphasis role="bold">End: </emphasis> "jump to inside
-      segment"</para>
+      <para><emphasis role="bold">End: </emphasis> cursor to the end of the
+      active segment</para>
     </listitem>
 
     <listitem>
@@ -179,17 +181,16 @@
     </listitem>
   </itemizedlist>
 
-  <para>"Shift" key doesn't exhibit any special behaviour per se - it just
-  adds the selection from the old to the new caret position. All keys move
-  caret the same way, when the "Shift" key is pressed, as they do without
-  it.</para>
+  <para>"Shift" key doesn't exhibit any special behaviour per se: when the
+  "Shift" key is pressed, all keys move the cursor the same way as they do it
+  otherwise.</para>
 
   <para>System-wide commands: Paste (<emphasis role="bold">Ctrl+V</emphasis>
   or <emphasis role="bold">Ctrl+Insert</emphasis>), Cut (<emphasis
-  role="bold">Ctrl+X</emphasis> or <emphasis
-  role="bold">Ctrl+Delete)</emphasis>, Insert match <emphasis
-  role="bold">(Ctrl+I</emphasis>) and Insert source (<emphasis
-  role="bold">Ctrl+Shift+I</emphasis>) act in principle on any selection,
-  including those bigger than the editable segment. In such a case the
-  selection will of course be pared down to segment boundaries.</para>
+  role="bold">Ctrl+X</emphasis> or <emphasis role="bold">Ctrl+C)</emphasis>,
+  Insert match <emphasis role="bold">(Ctrl+I</emphasis>) and Insert source
+  (<emphasis role="bold">Ctrl+Shift+I</emphasis>) act in principle on any
+  selection, including those that reach beyond the current segment. In such a
+  case the selection will of course be pared down to segment
+  boundaries.</para>
 </appendix>

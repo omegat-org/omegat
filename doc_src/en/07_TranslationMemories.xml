@@ -6,14 +6,14 @@
       <primary>Translation memories</primary>
     </indexterm></title>
 
-  <section id="OmegaT.and.TMX.files">
+  <section id="OmegaT.and.tmx.files">
     <title>Translation memories in OmegaT</title>
 
-    <section id="TMX.files.location.and.purpose">
-      <title>TMX folders - location and purpose</title>
+    <section id="tmx.files.location.and.purpose">
+      <title>tmx folders - location and purpose</title>
 
       <para><application>OmegaT</application> projects can have translation
-      memory files - i.e. files with extension TMX - in four different
+      memory files - i.e. files with the extension tmx - in four different
       places:</para>
 
       <variablelist>
@@ -27,12 +27,12 @@
             </indexterm>omegat folder</filename></term>
 
           <listitem>
-            <para>The <filename>omegat</filename> folder contains
-            <filename>project_save.TMX </filename>and eventually a number of
-            backup TMX files. The file <filename> project_save.TMX</filename>
-            contains all the segments that have been memorized since you
-            started the project. This file will always exist and its contents
-            will always sorted alphabetically by the source segment</para>
+            <para>The omegat folder contains the project_save.tmx and possibly
+            a number of backup TMX files. The <filename>project_save.tmx
+            </filename>file contains all the segments that have been recorded
+            in memory since you started the project. This file always exists
+            in the project. This file will always exist and its contents will
+            always be sorted alphabetically by the source segment</para>
           </listitem>
         </varlistentry>
 
@@ -44,10 +44,10 @@
             </indexterm>project main folder</term>
 
           <listitem>
-            <para>The project main folder will contain 3 TMX files,
-            <filename>project_name-omegat.TMX</filename>,
-            <filename>project_name-level1.TMX</filename> and
-            <filename>project_name-level2.TMX</filename> (project_name being
+            <para>The project main folder contains 3 tmx files,
+            <filename>project_name-omegat.tmx</filename>,
+            <filename>project_name-level1.tmx</filename> and
+            <filename>project_name-level2.tmx</filename> (project_name being
             the name of your project).</para>
 
             <itemizedlist>
@@ -58,9 +58,9 @@
 
               <listitem>
                 <para>The level2 file encapsulates
-                <application>OmegaT</application> specific tags in correct TMX
+                <application>OmegaT</application> specific tags in correct tmx
                 tags so that the file can be used with its formatting
-                information in a translation tool that supports TMX level 2
+                information in a translation tool that supports tmx level 2
                 memories, or <application>OmegaT</application> itself.</para>
               </listitem>
 
@@ -72,12 +72,13 @@
               </listitem>
             </itemizedlist>
 
-            <para>These files can be viewed as copies of the file
-            <filename>project_save.TMX</filename> . i.e. of the project's main
-            translation memory - with appropriately changed name, so that its
-            contents still remain identifiable, when used elsewhere, for
-            instance in the<filename> tm</filename> subfolder of some other
-            project (see below):</para>
+            <para>These files are copies of the file
+            <filename>project_save.tmx</filename> . i.e. of the project's main
+            translation memory - excluding the so-called orphan segments. They
+            carry appropriately changed names, so that its contents still
+            remain identifiable, when used elsewhere, for instance in
+            the<filename> tm</filename> subfolder of some other project (see
+            below):</para>
           </listitem>
         </varlistentry>
 
@@ -92,34 +93,32 @@
 
           <listitem>
             <para>The /tm/ folder can contain any number of ancillary
-            translation memories - i.e. TMX files. Such files must be correct
-            TMX files and can be created in any of the three varieties
-            indicated above. Note that other CAT tools can export (and import
-            as well) TMX files, usually in all three forms as well. The
-            differences between them are technical (see below for details),
-            and if you wish to use a translation memory from a past project,
-            they are largely interchangeable, i.e. they will all work equally
-            well.</para>
+            translation memories - i.e. tmx files. Such files can be created
+            in any of the three varieties indicated above. Note that other CAT
+            tools can export (and import as well) tmx files, usually in all
+            three forms as well. The best of course is to use OmegaT-specific
+            TMX files (see above), so that the inline formatting within the
+            segment is retained.</para>
 
             <para>The contents of translation memories in the tm subfolder
-            will be used to make suggestions for the text you will be
-            translating. Any text, already translated and stored in those
-            files, will - if similar enough to the text currently being
-            translated - appear among the fuzzy matches.</para>
+            serve to generate suggestions for the text(s) to be translated.
+            Any text, already translated and stored in those files, will
+            appear among the fuzzy matches, f it is sufficiently similar to
+            the text currently being translated.</para>
 
             <para>If the source segment in one of the ancillary TMs is
-            identical to the text being translated, OmegaT will act as defined
-            in the <menuchoice>
+            identical to the text being translated, OmegaT acts as defined in
+            the <menuchoice>
                 <guimenu>Options</guimenu>
 
                 <guimenuitem>Editing Behaviour...</guimenuitem>
               </menuchoice> dialogue window. For instance (if the default is
-            accepted) the translation from the ancillary TM will be taken and
-            prefixed with <emphasis>[fuzzy]</emphasis>, so that the translator
-            can later on browse through the translations and check if
-            segments, tagged this way, have been translated correctly (see
-            chapter <link linkend="ch06.translation.editing">Editing
-            behaviour</link>) <menuchoice>
+            accepted), the translation from the ancillary TM is accepted and
+            prefixed with<emphasis> [fuzzy]</emphasis>, so that the translator
+            can review the translations at a later stage and check whether the
+            segments tagged this way, have been translated correctly (see the
+            <link linkend="ch06.translation.editing">Editing behaviour</link>
+            chapter) <menuchoice>
                 <guimenu>.</guimenu>
               </menuchoice></para>
           </listitem>
@@ -139,42 +138,38 @@
             </indexterm></term>
 
           <listitem>
-            <para>The<emphasis> [fuzzy] </emphasis>convention above allows the
-            translator to keep the control over the contents of the central TM
-            (<filename>project_save.TMX</filename>) and separate chaff from
-            the wheat. This can, however, turn into a quite boring procedure,
-            if it is clear from the very start, that translations in a given
-            TM (or TMs) are all correct. Putting these TMs into the
-            <filename>tm/auto</filename> folder will effectively <emphasis
-            role="bold">pretranslate </emphasis>the source text: all the
-            segments in the source text, for which translations can be found
-            in those TMs, will land in the main TM of the project without any
-            user intervention.</para>
+            <para>If it is clear from the very start, that translations in a
+            given TM (or TMs) are all correct, one can put them into
+            the<emphasis role="bold"> tm/auto</emphasis> folder and avoid
+            confirming a lot of<emphasis> [fuzzy]</emphasis> cases. This will
+            effectively <emphasis role="bold">pretranslate </emphasis>the
+            source text: all the segments in the source text, for which
+            translations can be found in those "auto" TMs, will land in the
+            main TM of the project without any user intervention.</para>
           </listitem>
         </varlistentry>
       </variablelist>
 
-      <para>Optionally, you can let <application>OmegaT</application> make an
-      additional TMX file (<application>OmegaT</application>-style) anywhere
+      <para>Optionally, you can let <application>OmegaT</application> have an
+      additional tmx file (<application>OmegaT</application>-style) anywhere
       you specify, containing all translatable segments of the project. See
       pseudo-translated memory below.</para>
 
-      <para>Note that all the translation memories get loaded into the memory,
-      when the project is opened. The project translation memory gets stored
-      regularly as a back-up (see next chapter) and as the latest version of
-      <filename>project_save.TMX</filename>, when the project is closed or
-      loaded again. This means for instance that you do not need to exit a
-      project you are currently working on, if you decide to add another
-      ancillary TM to it: you just need to reload the project and the changes
-      you have made will be included.</para>
+      <para>Note that all the translation memories are loaded into memory when
+      the project is opened. Back-ups are produced regularly of the project
+      translation memory (see next chapter), and project_save.TMX is also
+      saved/updated when the project is closed or loaded again. This means for
+      instance that you do not need to exit a project you are currently
+      working on if you decide to add another ancillary TM to it: you simply
+      reload the project, and the changes you have made will be
+      included.</para>
 
-      <para>The places where different translation memories for a given
-      project can be found are user-defined (see Project dialog window in
-      <link linkend="Ch02.instant.start.guide">Instant start
-      guide)</link></para>
+      <para>The locations of the various different translation memories for a
+      given project are user-defined (see Project dialog window in <link
+      linkend="Ch02.instant.start.guide">Instant start guide)</link></para>
 
-      <para>This allows one to use different strategies, depending on the
-      situation, for instance:</para>
+      <para>Depending on the situation, different strategies are thus
+      possible, for instance:</para>
 
       <para><variablelist>
           <varlistentry>
@@ -183,7 +178,10 @@
             <listitem>
               <para>keep the project structure, and change source and target
               directories (Source = source/order1, target = target/order1
-              etc)</para>
+              etc). Note that you segments from order1, not present in order2
+              and other subsequent jobs, will be tagged as orphan segments;
+              however, they will still be useful for getting fuzzy
+              matches.</para>
             </listitem>
           </varlistentry>
         </variablelist><variablelist>
@@ -191,35 +189,42 @@
             <term>several translators working on the same project</term>
 
             <listitem>
-              <para>split the Source files into source/Person1, source/Person2
-              ... and allocate them accordingly</para>
+              <para>split the source files into source/Alice, source/Bob...
+              and allocate them to team members (Alice, Bob ...). They can
+              then create their own projects and, deliver their own<filename>
+              project_save.tmx,</filename> when finished or a given milestone
+              has been reached.</para>
 
-              <para>collect on a regular basis the project_save.TMX from them,
-              resolve possible conflicts as regards terminology and create a
-              new version of master TM, to be put in their <emphasis>tm/auto
-              </emphasis>subdirectory</para>
+              <para>The <filename>project_save.tmx</filename> files are then
+              collected and possible conflicts as regards terminology for
+              instance get resolved. A new version of the master TM is then
+              created, either to be put in team members' <emphasis>tm/auto
+              </emphasis>subdirectories or to replace their project_save.tmx
+              files.</para>
 
-              <para>you may allow these parallel projects use the same
-              subfolder for the target files. This way you can for instance
-              always check, if the target version will build correctly.</para>
+              <para>The team can use one and the same subfolder structure for
+              the target files. This allows them for instance to check at any
+              moment, if the target version for the complete project is still
+              OK.</para>
             </listitem>
           </varlistentry>
         </variablelist></para>
     </section>
 
-    <section id="TMX.backup">
-      <title>TMX backup<indexterm class="singular">
+    <section id="tmx.backup">
+      <title>tmx backup<indexterm class="singular">
           <primary>Translation memories</primary>
 
           <secondary>Backup</secondary>
         </indexterm></title>
 
-      <para>When you translate your files, <application>OmegaT</application>
-      stores all your progress in translation memory project_save.TMX in the
-      project's /omegat subdirectory.</para>
+      <para>As you translate your files, <application>OmegaT</application>
+      stores your work continually in translation the memory
+      <filename>project_save.tm</filename>x in the project's
+      /<filename>omegat</filename> subdirectory.</para>
 
       <para><application>OmegaT</application> also backups translation memory
-      to <filename>project_save.TMX.YEARMMDDHHNN.bak</filename> in the same
+      to <filename>project_save.tmx.YEARMMDDHHNN.bak</filename> in the same
       subfolder every time when a project is opened or reloaded. YEAR is
       4-digit year, MM is a month, DD day of the month, HH and NN are hours
       and minutes when the previous translation memory was saved.</para>
@@ -229,50 +234,47 @@
 
       <orderedlist>
         <listitem>
-          <para>close the project</para>
+          <para>Close the project</para>
         </listitem>
 
         <listitem>
-          <para>rename the current <filename>project_save.TMX</filename> file
-          to something you will remember (like
-          <filename>project_save.TMX.temporary</filename> for example)</para>
+          <para>Rename the current <filename>project_save.tmx</filename> file
+          ( e.g. to <filename>project_save.tmx.temporary</filename>)</para>
         </listitem>
 
         <listitem>
-          <para>select the backup translation memory that is the most likely
+          <para>Select the backup translation memory that is most likely -
+          e.g. the most recent one, or the last version from the day before)
           to contain the data you are looking for</para>
         </listitem>
 
         <listitem>
-          <para>copy it to <filename>project_save.TMX</filename></para>
+          <para>Copy it to <filename>project_save.tmx </filename></para>
         </listitem>
 
         <listitem>
-          <para>open the project</para>
+          <para>Open the project</para>
         </listitem>
       </orderedlist>
     </section>
 
-    <section id="TMX.files.and.language">
-      <title>TMX files and language<indexterm class="singular">
+    <section id="tmx.files.and.language">
+      <title>tmx files and language<indexterm class="singular">
           <primary>Translation memories</primary>
 
           <secondary>Language</secondary>
         </indexterm></title>
 
-      <para>TMX files contain translation units, made of a number of
-      equivalent segments in several languages. A translation unit is made of
+      <para>tmx files contain translation units, made of a number of
+      equivalent segments in several languages. A translation unit comprises
       at least two translation unit variations (tuv). Either can be used as
-      source or as target.</para>
+      the source or target.</para>
 
-      <para>The settings in your project will indicate which is the source
-      language and which is the target language.
-      <application>OmegaT</application> will thus take the tuv corresponding
-      to the project source language code and use that segment as the source
-      segment, and it will take the tuv corresponding to the project target
-      language code and use that segment as the target segment.
-      <application>OmegaT</application> recognizes them using the following
-      two standard conventions:</para>
+      <para>The settings in your project indicate which is the source and
+      which the target language. OmegaT thus takes the tuv segments
+      corresponding to the project's source and target language codes and uses
+      them as the source and target segments respectively. OmegaT recognizes
+      the language codes using the following two standard conventions :</para>
 
       <itemizedlist>
         <listitem>
@@ -280,13 +282,14 @@
         </listitem>
 
         <listitem>
-          <para>2-letter language code followed by the 2-letter country code
-          (e.g. EN-US - See Languages for a partial list of language and
-          country codes.</para>
+          <para>2- or 3-letter language code followed by the 2-letter country
+          code (e.g. EN-US - See <link linkend="A2.languages">Appendix B.
+          Languages - ISO 639.2 code list</link> for a partial list of
+          language and country codes).</para>
         </listitem>
       </itemizedlist>
 
-      <para>If the project language codes and the TMX language codes fully
+      <para>If the project language codes and the tmx language codes fully
       match, the segments are loaded in memory. If languages match but not the
       country, the segments still get loaded. If neither the language code not
       the country code match, the segments will be ignored.</para>
@@ -299,13 +302,12 @@
           <secondary>Orphan segments</secondary>
         </indexterm></title>
 
-      <para>The file <filename>project_save.TMX</filename> contains all the
+      <para>The file <filename>project_save.tmx</filename> contains all the
       segments that have been translated since you started the project. If you
-      modify the project segmentation for example, or delete files from the
-      source, it may happen that some matches<emphasis
-      role="bold"></emphasis>in the Match Viewer will appear as <emphasis
-      role="bold">Orphan strings.</emphasis>Such matches no longer refer to
-      segments existing in the source documents, but to segments translated
+      modify the project segmentation or delete files from the source, some
+      matches may appear as <emphasis role="bold">Orphan strings</emphasis> in
+      the Match Viewer: such matches refer to segments that do not exist any
+      more in the source documents, as they correspond to segments translated
       and recorded before the modifications has taken place.</para>
     </section>
   </section>
@@ -321,23 +323,23 @@
         <secondary>Reusing translation memories</secondary>
       </indexterm></title>
 
-    <para>Note that initially, that is when the project is created, the main
-    TM of the project, <filename>project_save.TMX</filename>. is empty. It
-    gets filled up by and by during the translation. To speed up this process
-    existing translations can be reused. After all, if a given sentence has
-    already been translated once, and translated correctly, there's no need to
-    try to improve on it. It could also be a question of a reference
-    translation: Multinational legislature, as , in the case of European
-    Community is a typical example of such a case.</para>
+    <para>Initially, that is when the project is created, the main TM of the
+    project, <filename>project_save.tmx</filename>. is empty. This TM
+    gradually becomes filled during the translation. To speed up this process,
+    existing translations can be reused. If a given sentence has already been
+    translated once, and translated correctly, there is no need for it to be
+    retranslated. Translation memories may also contain reference
+    translations: multinational legislation, such as that of the European
+    Community, is a typical example.</para>
 
     <para>When you create the target documents in an
     <application>OmegaT</application> project, the translation memory of the
     project is output in the form of three files in the root folder of your
     <application>OmegaT</application> project (see the above description). You
-    can regard these three TMX files (<filename>-omegat.TMX</filename>,
-    <filename>-level1.TMX</filename> and <filename>-level2.TMX</filename>) as
-    an "export translation memory", i.e. as an exportable bilingual summary of
-    your current project.</para>
+    can regard these three tmx files (<filename>-omegat.tmx</filename>,
+    <filename>-level1.tmx</filename> and <filename>-level2.tmx</filename>) as
+    an "export translation memory", i.e. as an export of your current
+    project's content in bilingual form.</para>
 
     <para>Should you wish to reuse a translation memory from a previous
     project (for example because the new project is similar to the previous
@@ -383,47 +385,45 @@
       </listitem>
     </itemizedlist>
 
-    <para>Note that all the TMX files in the <emphasis>/tm</emphasis>
-    repository get parsed during the startup of the program, so putting in all
-    the TMX files you can get your hands on will unnecessarily slow down
-    <application>OmegaT</application>. You may even consider eliminating those
-    that are strictly necessary (for example by leaving them in the<emphasis>
-    /tm</emphasis> subdirectory, but changing their extension), once their
-    contents have migrated to the <emphasis>project_save.TMX </emphasis>of
-    your current project.</para>
+    <para>When you begin a new project on the same subject or for the same
+    customer, navigate to the repository folder in the <guilabel>Project &gt;
+    Properties &gt; Edit Project</guilabel> dialog and select it as the
+    translation memory folder. Note that all the tmx files in the /tm
+    repository are parsed when the project is opened, so putting everything
+    you possibly can there, may slow OmegaT down unnecessarily. You may even
+    consider removing those that are not required any more, once you have used
+    their contents to fill up the <filename>project-save.tmx </filename>file.
+    .</para>
 
     <section>
       <title>Importing and exporting translation memories</title>
 
-      <para><application>OmegaT</application> supports importing TMX versions
-      1.1-1.4b (both level 1 and level 2). This enables the translation
-      memories produced by other tools to be read by
-      <application>OmegaT</application>. However,
-      <application>OmegaT</application> does not fully support imported level
-      2 TMX files (that store not only the translation, but also the
-      formatting), so the quality of fuzzy matches will be a bit lower when
-      importing level 2 TMX files.<application></application></para>
+      <para>OmegaT supports imported tmx versions 1.1-1.4b (both level 1 and
+      level 2). This enables the translation memories produced by other tools
+      to be read by OmegaT. However, OmegaT does not fully support imported
+      level 2 tmx files (these store not only the translation, but also the
+      formatting).Level 2 tmx files will still be imported and their textual
+      content can be seen in OmegaT, but the quality of fuzzy matches will be
+      somewhat lower.</para>
 
-      <para><application>OmegaT</application> follows very strict procedures
-      when loading translation memory files (TMX files). If an error is found
-      in such a file, <application>OmegaT</application> will indicate the
-      position within the incriminated file, where the error has
-      occurred..</para>
+      <para>OmegaT follows very strict procedures when loading translation
+      memory (tmx) files. If an error is found in such a file, OmegaT will
+      indicate the position within the defective file at which the error is
+      located.</para>
 
-      <para>Some tools are known to produce invalid TMX files in certain
-      conditions. If you want to use such files as reference translations in
-      <application>OmegaT</application>, they will need to be fixed in case
-      <application>OmegaT</application> reports an error. Fixes are trivial
-      operations and <application>OmegaT</application> will give you
-      indications in the related error message. You can ask the user group for
-      advice if you have problems.</para>
+      <para>Some tools are known to produce invalid tmx files under certain
+      conditions. If you wish to use such files as reference translations in
+      OmegaT, they must be repaired, or OmegaT will report an error and fail
+      to load them. Fixes are trivial operations, and OmegaT assists
+      troubleshooting with the related error message. You can ask the user
+      group for advice if you have problems.</para>
 
-      <para><application>OmegaT</application> exports TMX files version 1.4
-      (both level 1 and level 2). The level 2 export is not a standard level 2
-      but is close enough to it and will generate correct matches in TMX Level
-      2 supporting translation tools. If you only need textual information
-      (and not formatting information), use the level 1 file that
-      <application>OmegaT</application> has created.</para>
+      <para><application></application>OmegaT exports version 1.4 TMX files
+      (both level 1 and level 2). The level 2 export is not fully compliant
+      with the level 2 standard, but is sufficiently close and will generate
+      correct matches in other translation memory tools supporting TMX Level
+      2. If you only need textual information (and not formatting
+      information), use the level 1 file that OmegaT has created.</para>
     </section>
   </section>
 
@@ -434,12 +434,15 @@
         <secondary>Pseudotranslation</secondary>
       </indexterm></title>
 
-    <para>There might be a case in which you want to do pre-processing or
-    other processing of the segments than <application>OmegaT</application>
-    allows. For example you want to create a pseudo-translation for testing
-    purposes. <application>OmegaT</application> allows you to create an extra
-    TMX file that contains all segments of the project. The translation in
-    this TMX can be either</para>
+    <note>
+      <para>Of interest for advanced users only!</para>
+    </note>
+
+    <para>Before segments get translated, you may wish to pre-process them or
+    address them in some other way than that possible by OmegaT. For example,
+    if you wish to create a pseudo-translation for testing purposes, OmegaT
+    enables you to create an additional tmx file that containing all segments
+    of the project. The translation in this tmx can be either</para>
 
     <itemizedlist>
       <listitem>
@@ -453,22 +456,21 @@
       </listitem>
     </itemizedlist>
 
-    <para>The TMX file can get any name you specify, but the extension '.TMX'
-    is added if not given. The generation is activated with the following
-    command line parameters:</para>
+    <para>The tmx file can be given any name you specify. A pseudo-translated
+    memory can be generated with the following command line parameters:</para>
 
     <para><literal>java -jar omegat.jar --pseudotranslatetmx=&lt;filename&gt;
     [pseudotranslatetype=[equal|empty]]</literal></para>
 
     <para>Replace <literal>&lt;filename&gt;</literal> with the name of the
-    file you want to create, either absolute or relative to the working
+    file you wish to create, either absolute or relative to the working
     directory (the directory you start <application>OmegaT</application>
     from).The second argument <literal>--pseudotranslatetype</literal> is
     optional. Its value is either <literal>equal</literal> (default value, for
     source=target) or <literal>empty</literal> (target segment is empty) .You
-    can process the generated TMX with any tool you want. To reuse it in
-    <application>OmegaT</application>: rename it to <emphasis>project_save.TMX
-    </emphasis>and put it in the <literal>omegat</literal>-folder of your
+    can process the generated tmx with any tool you want. To reuse it in
+    <application>OmegaT</application>: rename it to <emphasis>project_save.tmx
+    </emphasis>and place it in the <literal>omegat</literal>-folder of your
     project.</para>
   </section>
 
@@ -479,18 +481,20 @@
         <secondary>Upgrading to sentence segmentation</secondary>
       </indexterm></title>
 
-    <para>Previous versions of <application>OmegaT</application> were capable
-    of segmenting source files into paragraphs only, and were inconsistent
-    when numbering formatting tags in HTML and Open Document files.
-    <application>OmegaT</application> 2.0 can detect and upgrade such TMX
-    files on the fly to increase fuzzy matching quality and leverage your
-    existing translation better -- so that you don't have to redo it.</para>
-
-    <para>A project's TMX will be upgraded only once, and will be written in
-    upgraded form, and legacy TMX files will be upgraded on the fly each time
-    the project is loaded. Note that some changes in file filters in
-    <application>OmegaT</application> 2.0 may lead to totally different
-    segmentation, thus in rare cases you will have to upgrade your translation
+    <para>Very early versions of <application>OmegaT</application> were
+    capable of segmenting source files into paragraphs only, and were
+    inconsistent when numbering formatting tags in HTML and Open Document
+    files. <application>OmegaT</application> 2.0 can detect and upgrade such
+    tmx files on the fly to increase fuzzy matching quality and leverage your
+    existing translation better, saving you the work of doing this
     manually.</para>
+
+    <para>A project's tmx will be upgraded only once, and will be written in
+    upgraded form into the <filename>project-save.tmx</filename>; legacy tmx
+    files will be upgraded on the fly each time the project is loaded. Note
+    that in some cases changes in file filters in
+    <application>OmegaT</application> 2.0 may lead to totally different
+    segmentation; as a result, you will have to upgrade your translation
+    manually in such rare cases.</para>
   </section>
 </chapter>

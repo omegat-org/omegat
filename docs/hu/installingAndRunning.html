@@ -70,7 +70,7 @@
 
       <tr>
         <td width="50%">
-          <h3><a href="#MacOSX_users">MacOSX-felhasználók</a></h3>
+          <h3><a href="#MacOSX_users">Mac OS X esetén</a></h3>
 
           <ul>
             <li>
@@ -289,19 +289,19 @@
 
   <p>Ha sikerült telepíteni az OmegaT-t, rákattinthat az <em>OmegaT.jar</em> állományra és közvetlenül futtathatja az alkalmazást vagy elindíthatja közvetlenül a parancssorból.</p>
 
-  <p>A legegyszerűbb módszer, ha magát az OmegaT.exe programot futtatja. Ez esetben a program az indítási paramétereket az <em>OmegaT.l4J.ini</em> állományból veszi, amely az exe-fájllal azonos könyvtárban található és kedvenc beállításainak megfelelően szerkeszthető. Az alábbi INI-állomány 1 Gb memóriát tart fenn, francia felhasználói nyelvet feltételez, országnak pedig Portugáliát tekinti:</p>
+  <p>A legegyszerűbb módszer, ha magát az OmegaT.exe programot futtatja. Ez esetben a program az indítási paramétereket az <em>OmegaT.l4J.ini</em> állományból veszi, amely az exe-fájllal azonos könyvtárban található és kedvenc beállításainak megfelelően szerkeszthető. Az alábbi INI-állomány 1 GB memóriát tart fenn, francia felhasználói nyelvet feltételez, országnak pedig Portugáliát tekinti:</p>
 
   <p><code># OmegaT.exe futásidejű konfiguráció<br> #<br> # Paraméter használatához törölje a '-' előtt lévő '#' jelet. <br> # Memória<br> -Xmx1024M<br> # Nyelv<br> -Duser.language=FR<br> # Ország<br> -Duser.country=PT<br> # Finomítás (csak Java 1.5 esetén)<br> #-Dswing.aatext=true<br> # Ezzel a beállítással egy proxy mögül érheti el az Internetet.<br> #-Dhttp.proxyHost=192.168.1.1<br> #-Dhttp.proxyPort=3128<br>
-
+  </code></p>
   <hr>
 
-  <h2><a name="MacOSX_users" id="MacOSX_users"></a>MacOSX-felhasználók</h2>
+  <h2><a name="MacOSX_users" id="MacOSX_users"></a>Mac OS X esetén</h2>
 
   <h3><a name="osx_which" id="osx_which"></a>Melyik csomagot töltsem le?</h3>
 
   <p>Az OmegaT 2.0 futtatásához Java 1.5 szükséges. A Mac OSX 10.4 (Tiger) felhasználóinak az OmegaT telepítése előtt ellenőrizni kell, hogy a Java legújabb változatát használják-e. Az Apple menüben a "Software Update..." menüpontból frissítse a Java verzióját.</p>
 
-  <p>Töltse le az Download <em>OmegaT_2.0.x_Mac.zip</em> csomagot.</p>
+  <p>Töltse le az <em>OmegaT_2.0.x_Mac.zip</em> csomagot.</p>
 
   <h3><a name="osx_install" id="osx_install"></a>Az OmegaT telepítése</h3>
 
@@ -325,9 +325,7 @@
 
   <p>At <em>OmegaT.app</em> csomagban bármely hely eléréséhez kattintson a jobb gombbal az <em>OmegaT.app</em>-ra és válassza ki a "Show Package Contents" elemet vagy a "cd"-vel menjen a parancssorból rá közvetlenül.</p>
 
-  <h4>Mac OSX segédprogramok</h4>
-
-  <p>Az <em>OmegaT.app</em> a Mac OSX által kínált Services segítségével érhető el. Ezzel az OmegaT-ben bárhol kiválaszthat egy szót és a Services segítségével ellenőrizheti a Services szótárprogramokkal Spotlight vagy Google alatt. A gyakori tevékenységek automatizálásához létrehozhatja a Servicest vagy írhat programkódokat az AppleScript vagy az Automator segítségével.</p>
+  <p>Az <em>OmegaT.app</em> a Mac OSX által kínált szolgáltatások segítségével érhető el. Ezzel az OmegaT-ben bárhol kiválaszthat egy szót és a Services segítségével ellenőrizheti a Services szótárprogramokkal Spotlight vagy Google alatt. A gyakori tevékenységek automatizálásához létrehozhatja a szolgáltatást, vagy írhat programkódokat az AppleScript vagy az Automator segítségével.</p>
   <hr>
 
   <h2><a name="Other_systems" id="Other_systems"></a>Egyéb rendszerek</h2>
@@ -346,7 +344,7 @@
         </td>
 
         <td width="70%">
-          <p>töltse le az <em>OmegaT_2.0.x_Without_JRE.zip</em> csomagot. This package can be used on any platform where a Java 1.5 compatible JRE is installed.</p>
+          <p>töltse le az <em>OmegaT_2.0.x_Without_JRE.zip</em> csomagot. Ezt a csomagot bármely Java 1.5 JRE futtatási környezettel felszerelt platformon használhatja.</p>
         </td>
       </tr>
 
@@ -398,7 +396,7 @@
 
   <h3>1. módszer: nyisson meg egy parancssor-ablakot.</h3>
 
-  <p>A parancssor-ablak másik elnevezése a "terminálablak". Windows esetén ennek "MS-DOS ablak" a neve, és a Start/Minden program/Kellékek/Parancssor menüpontból érhető el. Mac OSX alatt ennek megfelelője a Terminal nevű, Applications → Utilities alatt található alkalmazás.</p>
+  <p>A parancssor-ablak másik elnevezése a "terminálablak". Windows esetén ennek "MS-DOS ablak" a neve, és a Start/Minden program/Kellékek/Parancssor menüpontból érhető el. Mac OS X alatt ennek megfelelője a Terminal nevű, Applications → Utilities alatt található alkalmazás.</p>
 
   <p>Az OmegaT elindításához rendszerint két parancsot kell megadni. Ezek közül az első:</p>
 
@@ -411,7 +409,7 @@
 
     <dd><em>cd C:\Program Files\OmegaT</em></dd>
 
-    <dt>Mac OSX esetén</dt>
+    <dt>Mac OS X esetén</dt>
 
     <dd><em>cd &lt;OmegaT.app
     location&gt;/OmegaT.app/Contents/Resources/Java/</em></dd>
@@ -427,7 +425,7 @@
 
   <p>Ügyeljen a kis- és nagybetűk közötti különbségre!</p>
 
-  <p>Ennek a módszernek megvan az az előnye, hogy hibaszűrésre ad lehetőséget: ha hibe jelentkezik a program használata közben, a képernyőn megjelenik egy hibaüzenet, amely hasznos információkat tartalmazhat annak okára vonatkozóan.</p>
+  <p>Ennek a módszernek megvan az az előnye, hogy hibaszűrésre ad lehetőséget: ha hiba jelentkezik a program használata közben, a képernyőn megjelenik egy hibaüzenet, amely hasznos információkat tartalmazhat annak okára vonatkozóan.</p>
 
   <h3><a name="script" id="script"></a>2. módszer: a <em>.bat</em> parancsállomány módosítása</h3>
 
@@ -438,7 +436,7 @@
   <h3><a name="arguments" id="arguments"></a>Az indítási parancs argumentumai</h3>
 
   <p>Az alapvető parancsról szó volt fentebb. Ennek a parancsnak a módosítása "argumentumok" hozzáadásával történik. Ezek részletes leírását lásd a <a href="commandlineArguments.html">Parancssori argumentumok</a> alatt.
-  
+  </p>
   <hr>
 
   <h2><a name="source_build" id="source_build"></a>Az OmegaT létrehozása forráskód alapján</h2>
@@ -450,7 +448,7 @@
 
     <dd>Ez a csomag tartalmazza az adott változat forrásfájljait, amely bármely rendszeren használható, amelyen Java 1.5 JDK vagy azzal kompatibilis Java van telepítve. Emellett szüksége lesz az <em>ant</em> segédprogramra az OmegaT előállításához.</dd>
 
-    <dt>A verziók követésére az OmegaT a SubVersiont használja. A legfrissebb kód az SVN-szerverről érhető el:</dt>
+    <dt>A verziók követésére az OmegaT a Subversiont használja. A legfrissebb kód az SVN-szerverről érhető el:</dt>
 
     <dd><em>https://omegat.svn.sourceforge.net/svnroot/omegat/trunk</em></dd>
   </dl>
@@ -474,9 +472,9 @@
     <dt>A Java Web Start technológiájával (a Java 1.5 és későbbi változatainak része) Java alkalmazásokat futtathat a hálózaton egyetlen kattintással. A Java Web Start az alkalmazás legfrissebb változatát használja a megfelelő <a href="http://java.sun.com/j2se/desktopjava/jre/index.jsp" title=
     "A Java futtatási környezet (JRE)">Java futtatási környezettel (JRE)</a> együtt. Az OmegaT Java Web Starttal való első futtatásához írja be a böngészője címsorába a következő URL-t:</dt>
 
-    <dd><span style="font-style: italic;">&nbsp;&nbsp;&nbsp; http://omegat.sourceforge.net/webstart/OmegaT.jnlp</span><br> <br> Töltse le az <span style="font-style: italic;">OmegaT.jnlp</span> állományt és kattintson rá.&nbsp;Operációs rendszerétől függően a telepítés során megjelenhet néhány biztonsági figyelmeztetés. A tanúsítványon "Didier Briel" aláírása szerepel. A jelen változathoz megadott engedélyei (melyek lehetnek "korlátlan hozzáférés a számítógéphez") azonosak a helyi változathoz hozzárendelt engedélyeivel, vagyis a hozzáférés a számítógép merevlemezére vonatkozik. Ha később az <span style=
+    <dd><span style="font-style: italic;">&nbsp;&nbsp;&nbsp; http://omegat.sourceforge.net/webstart/OmegaT.jnlp</span><br> <br> Töltse le az <span style="font-style: italic;">OmegaT.jnlp</span> állományt és kattintson rá. Operációs rendszerétől függően a telepítés során megjelenhet néhány biztonsági figyelmeztetés. A tanúsítványon "Didier Briel" aláírása szerepel. A jelen változathoz megadott engedélyei (melyek lehetnek "korlátlan hozzáférés a számítógéphez") azonosak a helyi változathoz hozzárendelt engedélyeivel, vagyis a hozzáférés a számítógép merevlemezére vonatkozik. Ha később az <span style=
     "font-style: italic;">OmegaT.jnlp</span>-re kattint, a rendszer ellenőrzi a frissítéseket és telepíti őket, mielőtt elindítaná az OmegaT-t. Az első telepítés után internetes kapcsolat nélkül is használhatja az <span style=
-    "font-style: italic;">OmegaT.jnlp</span>-t. <span style="font-weight: bold;"><br> <br> Személyi jogok:</span> az OmegaT Java Web Start semmilyen adatot nem ment el a számítógépen kívüli környezetre. Az alkalmazás csak a számítógépen fut. Dokumentumai és fordítási memóriái számítógépén maradnak, az OmegaT projekt nem fér hozzá az Ön adataihoz.<br> <br> Ne feledje, hogy parancssorból való használathoz (l. fentebb) a szokásos telepítési módot kell használnia.</dd>
+    "font-style: italic;">OmegaT.jnlp</span>-t. <span style="font-weight: bold;"><br> <br> Személyiségi jogok:</span> az OmegaT Java Web Start semmilyen adatot nem ment el a számítógépen kívüli környezetre. Az alkalmazás csak a számítógépen fut. Dokumentumai és fordítási memóriái számítógépén maradnak, az OmegaT projekt nem fér hozzá az Ön adataihoz.<br> <br> Ne feledje, hogy parancssorból való használathoz (l. fentebb) a szokásos telepítési módot kell használnia.</dd>
   </dl>
 
   <dl>

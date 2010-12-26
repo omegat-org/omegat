@@ -1,4 +1,4 @@
-Ezt a fordítást [Fábricz Károly] készítette, copyright© [2010]. 
+Ezt a fordítást Fábricz Károly készítette, copyright© 2010. 
 
 ==============================================================================
   OmegaT 2.0, Olvass el!
@@ -66,8 +66,11 @@ Az OmegaT alaphelyzetben támogatja az alábbi típusú állományok fordítás�
   - ResX
   - Android forrásfájlok
   - LaTeX
+  - Typo3 LocManager
   A Súgó tartalma
   - Windows RC források
+  - Mozilla DTD
+  - DokuWiki
 
 Az OmegaT beállítható egyéb formájú állományok kezelésére is.
 
@@ -217,13 +220,15 @@ A fejlesztésben korábban közreműködtek:
 
 A kódírásban részt vevők
   Bartkó Zoltán
-  Didier Briel (változatokat jóváhagyó vezető)
+  Volker Berlin
+  Didier Briel (fejlesztési vezető)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (vezető fejlesztő)
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Makszim Mihalcsuk 
   Arno Peters
@@ -231,6 +236,7 @@ A kódírásban részt vevők
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Antonio Vilei
   Martin Wunderlich
 
 Egyéb hozzájárulók

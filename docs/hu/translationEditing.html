@@ -7,7 +7,7 @@
 </head>
 
 <body>
-  <h2>A szerkesztő mező működése</h2>
+  <h2>A szerkesztő mező használata</h2>
 
   <ul>
     <li>
@@ -15,22 +15,16 @@
     </li>
 
     <li>
-      <p><a href="#validation">Nem módosítható szövegegységek</a></p>
-    </li>
-  </ul>
-
-  <p>A szerkesztő mező viselkedését a következő módokon befolyásolhatja:</p>
-
-  <ul>
-    <li>
-      <p>A legvalószínűbb bizonytalan egyezés automatikus beszúrása</p>
+      <p><a href="#validation">A fordítás lehet azonos a forrással</a></p>
     </li>
 
     <li>
-      <p>A fordítás az eredetivel egyezőnek tekintendő</p>
+      <p><a href="#Export">A szövegegység exportálása szöveges állományokba</a></p>
     </li>
-  </ul>
-  <hr>
+  </ul><img alt="A Szerkesztési mód beállításai párbeszédablak" src=
+  "images/EditingBehaviourOptions.png"><br>
+
+  <p>Ebben a Beállítások → Szerkesztési mód... menüpontból elérhető párbeszédablakban állítható be az adott egység kezelésének mikéntje.</p>
 
   <h2><a name="auto_insert" id="auto_insert"></a>Egyezés automatikus beillesztése</h2>
 
@@ -45,13 +39,13 @@
       </td>
 
       <td>
-        <p>a szerkesztési mezőt automatikusan kitöltheti a forrásszöveggel. Ez különösen hasznos, ha a szövegben egy sor olyan szimbólum és tulajdonnév van, amelyet változatlanul szeretne megtartani.</p>
+        <p>a lefordítatlan szöveg helyére automatikusan betölti a forrásszöveget. Ez különösen hasznos, ha a szövegben egy sor olyan szimbólum és tulajdonnév van, amelyet változatlanul szeretne megtartani.</p>
       </td>
     </tr>
 
     <tr valign="top">
       <td>
-        <p><strong>Hagyja a szövegegységet üresen</strong></p>
+        <p><strong>Semmilyet</strong></p>
       </td>
 
       <td>
@@ -61,23 +55,27 @@
 
     <tr valign="top">
       <td>
-        <p><strong>A legvalószínűbb bizonytalan egyezés beszúrása</strong></p>
+        <p><strong>A legvalószínűbb bizonytalan egyezést</strong></p>
       </td>
 
       <td>
-        <p>Az OmegaT-vel beszúrathatja a fordítandó szöveghez leginkább hasonló szöveget, amennyiben az meghaladja azt a hasonlósági küszöbértéket, amelyet Ön beállított.</p>
+        <p>Az OmegaT beszúrja a fordítandó szöveghez leginkább hasonló szöveget, amennyiben az meghaladja azt a hasonlósági küszöbértéket, amelyet Ön a párbeszédablakban beállított (a fenti esetben 100%). Egyezés fellelése esetén a célnyelvi egység egy előtaggal egészül ki, melyet az Előtag mezőben adott meg (a fenti pédában a [bizonytalan]). Ennek alapján később könnyen előkeresheti az előre lefordított egységeket.</p>
       </td>
     </tr>
   </table>
   <hr>
 
-  <h2><a name="validation" id="validation"></a>Nem módosítható szövegegységek</h2>
+  <h2><a name="validation" id="validation"></a>A fordítás lehet azonos a forrással</h2>
 
   <p>A fordítandó dokumentumokban előfordulhatnak olyan kereskedelmi védjegyek, nevek és más tulajdonnevek, amelyek a fordításban változatlan formában maradnak. Az ilyen szövegegységekkel kapcsolatosan két stratégia alkalmazható.</p>
 
   <p>Dönthet úgy, hogy nem fordítja le őket, az OmegaT ezeket az egységeket lefordítatlanként jelöli meg. Ez az alapbeállítás.</p>
 
   <p>Az OmegaT-vel eltárolhatja a fordítást akkor is, ha az egyezik a forrásszöveggel, így viszont az OmegaT úgy értelmezi, hogy a szöveget lefordította, csak Ön úgy döntött, hogy az megegyezik a forrásszöveggel. Ehhez térjen át a <strong>Beállítások -&gt; Szerkesztési mód...</strong> pontra és jelölje be az <strong>A fordítás megegyezhet a a forrásszöveggel </strong> menüpontot.</p>
+
+  <h2><a name="Export" id="Export"></a>A szövegegység exportálása szöveges állományokba</h2>
+
+  <p>Dönthet úgy, hogy a lefordítatlan egységeket megtartja ebben a formában, és később visszatér hozzájuk. Ez esetben jelölje be az A fordítás megegyezhet a a forrásszöveggel négyzetet, így az OmegaT pedig az ilyen forrásszövegeket fordítás céljából külön állományba menti.</p>
   <hr>
 
   <table summary="csak formázás" style="width: 100%;" border="0" cellpadding=

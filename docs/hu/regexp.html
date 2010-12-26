@@ -2,7 +2,6 @@
 <head>
   <link rel="stylesheet" href="./OmegaT.css " type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
   <title>Reguláris kifejezések - OmegaT 2.0 felhasználói kézikönyv</title>
 </head>
 
@@ -137,7 +136,7 @@
         </td>
 
         <td width="877">
-          <p>A hexadecimális&nbsp;&nbsp;<code>0x</code><strong>hhhh</strong> karakter</p>
+          <p>A hexadecimális  <code>0x</code><strong>hhhh</strong> karakter</p>
         </td>
       </tr>
 
@@ -217,7 +216,7 @@
         </td>
 
         <td width="877">
-          <p>Az oktális <tt>0</tt><i>n</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7) értékű karakter</p>
+          <p>Az oktális <tt>0</tt><i>n</i> (0 <tt>&lt;=</tt> <i>n</i> <tt>&lt;=</tt> 7) értékű karakter</p>
         </td>
       </tr>
 
@@ -227,7 +226,7 @@
         </td>
 
         <td width="877">
-          <p>Az oktális <tt>0</tt><i>nn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7) értékű karakter</p>
+          <p>Az oktális <tt>0</tt><i>nn</i> (0 <tt>&lt;=</tt> <i>n</i> <tt>&lt;=</tt> 7) értékű karakter</p>
         </td>
       </tr>
 
@@ -237,7 +236,7 @@
         </td>
 
         <td width="877">
-          <p>Az oktális <tt>0</tt><i>mnn</i> (0&nbsp;<tt>&lt;=</tt>&nbsp;<i>m</i>&nbsp;<tt>&lt;=</tt>&nbsp;3, 0&nbsp;<tt>&lt;=</tt>&nbsp;<i>n</i>&nbsp;<tt>&lt;=</tt>&nbsp;7) értékű karakter</p>
+          <p>Az oktális <tt>0</tt><i>mnn</i> (0 <tt>&lt;=</tt> <i>m</i> <tt>&lt;=</tt> 3, 0 <tt>&lt;=</tt> <i>n</i> <tt>&lt;=</tt> 7) értékű karakter</p>
         </td>
       </tr>
 
@@ -247,7 +246,7 @@
         </td>
 
         <td width="877">
-          <p>A hexadecimális&nbsp;<tt>0x</tt><i>hh</i> értékű karakter</p>
+          <p>A hexadecimális <tt>0x</tt><i>hh</i> értékű karakter</p>
         </td>
       </tr>
 
@@ -659,9 +658,9 @@
 
   <h2><a name="References_and_examples_" id=
   "References_and_examples_"></a>Eszközök és példák a reguláris kifejezések használatához</h2><br>
-  Reguláris kifejezések kidolgozására és ellenőrzésére számos interaktív eszköz érhető el. Ezek mindegyike nagyjából hasonlóképpen működik (lásd az alábbi példát a FireFoxhoz való, reguláris kifejezések ellenőrzésére szolgáló segédprogram példája alapján): a reguláris kifejezés (felső bejegyzés) elemzi a keresés szövegét (középső szövegdoboz) , majd az eredményt tartalmazó szövegdobozban közli a találatokat.<br> <br> <img style="width: 726px; height: 524px;" alt=
+  Reguláris kifejezések kidolgozására és ellenőrzésére számos interaktív eszköz érhető el. Ezek mindegyike nagyjából hasonlóképpen működik (lásd az alábbi példát a FireFoxhoz való, reguláris kifejezések ellenőrzésére szolgáló segédprogram példája alapján): a reguláris kifejezés (felső bejegyzés) elemzi a keresés szövegét (középső szövegdoboz) , majd az eredményt tartalmazó szövegdobozban közli a találatokat.<br> <br> <img alt=
   "Segédprogram FireFoxhoz a reguláris kifejezések ellenőrzésére" src=
-  "images/RegexTester.png"><br> <br> Lásd a Windows,Linux, Mac, FreeBSD környezetben használatos önálló <a href="http://www.weitz.de/regex-coach/">Regex Coach</a>&nbsp;eszközt, amely alapvetően azonos a fenti példában látottal.<br> <br> Maga az OmegaT is komoly példatárat közöl a reguláris kifejezések használatát illetően (lásd: Beállítások &gt; <a href=
+  "images/RegexTester.png"><br> <br> Lásd a Windows,Linux, Mac, FreeBSD környezetben használatos önálló <a href="http://www.weitz.de/regex-coach/">Regex Coach</a> eszközt, amely alapvetően azonos a fenti példában látottal.<br> <br> Maga az OmegaT is komoly példatárat közöl a reguláris kifejezések használatát illetően (lásd: Beállítások &gt; <a href=
   "segmentation.html">Szövegdarabolás...</a>). Az alábbi felsorolásban olyan kifejezések láthatók, amelyek hasznosak lehetnek a fordítási memóriában való kereséshez:<br>
   <br>
 
@@ -681,7 +680,7 @@
       </tr>
 
       <tr>
-        <td>[?] \s</td>
+        <td>[\.,]\s*[\.,]+</td>
 
         <td>vesszők és pontok vegyesen</td>
       </tr>
@@ -695,7 +694,7 @@
       <tr>
         <td>\s+a\s+[aeiou]</td>
 
-        <td>&nbsp;angol esetén:&nbsp;magánhangzóval kezdődő szavak előtt "an" állhat az "a" helyett</td>
+        <td>&nbsp;angol esetén: magánhangzóval kezdődő szavak előtt "an" állhat az "a" helyett</td>
       </tr>
 
       <tr>

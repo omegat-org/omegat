@@ -362,25 +362,25 @@
   <table summary="" border="0" cellpadding="2" cellspacing="2">
     <tbody>
       <tr>
-        <td>31/34</td>
+        <td>266/282</td>
 
-        <td>szövegegységek száma -&nbsp; lefordított / összes, az adott állományt illetően</td>
+        <td>szövegegységek száma -  lefordított / összes, az adott állományt illetően</td>
       </tr>
 
       <tr>
-        <td>2530/2605</td>
+        <td>3402/3598</td>
 
-        <td>egyedi szövegegységek száma -&nbsp; lefordított / összes, az egész projektet illetően</td>
+        <td>egyedi szövegegységek száma -  lefordított / összes, az egész projektet illetően</td>
       </tr>
 
       <tr>
-        <td>3196</td>
+        <td>4671</td>
 
         <td>a szövegegységek száma a projektben (ismétlődésekkel együtt)</td>
       </tr>
 
       <tr>
-        <td>39/53</td>
+        <td>55/78</td>
 
         <td>szavak száma a forrásnyelvi és a célnyelvi szövegegységben&nbsp;</td>
       </tr>
@@ -397,13 +397,13 @@
 
   <p>További részletek: <a href="translationEditing.html">Fordítások szerkesztése</a>.</p>
 
-  <h3><a name="Match" id="Match"></a>A Bizonytalan egyezések ablak</h3>A Bizonytalan egyezések panelben <a href="translationMemories.html">a fordítási memóriák</a> alapján legvalószínűbbnek talált szövegegységek jelennek meg mind az éppen fordított projektre, mind a korábban készített vagy az ügyféltől, fordítóirodától kapott fordítási memóriákra támaszkodva.<br>
-  <img src="images/MatchesPane.png" name="grafika2" alt="Az OmegaT Bizonytalan egyezések panelje" id=
+  <h3><a name="Match" id="Match"></a>A Bizonytalan egyezések ablak</h3>A Bizonytalan egyezések ablakban <a href="translationMemories.html">a fordítási memóriák</a> alapján legvalószínűbbnek talált szövegegységek jelennek meg mind az éppen fordított projektre, mind a korábban készített vagy az ügyféltől, fordítóirodától kapott fordítási memóriákra támaszkodva.<br>
+  <img src="images/MatchesPane.png" name="grafika2" alt="Az OmegaT Bizonytalan egyezések ablaka" id=
   "grafika2" align="left" border="0"><br clear="left">
 
   <p><br></p>
 
-  <p>A következő szövegegységre való áttéréskor az első bizonytalan egyezést (a legjobb egyezési százalékot mutatót) a rendszer automatikusan választja ki. A kiválasztott bizonytalan egyezés <strong>vastagbetűsen</strong> jelenik meg, a fordítandó szövegből hiányzó elemek színe <strong><font color=
+  <p>A következő szövegegységre való áttéréskor az első bizonytalan egyezést (a legjobb egyezési százalékot mutatót) a rendszer automatikusan kiválasztja. A kiválasztott bizonytalan egyezés <strong>vastagbetűsen</strong> jelenik meg, a fordítandó szövegből hiányzó elemek színe <strong><font color=
   "#0000FF">kék</font></strong>, az őket körülvevő szavak színe <font color="#00FF00"><b>zöld</b></font>. Az egyezések közül <a href=
   "menu.html#shortcuts">kiválaszthat</a> egy másikat a <code>Ctrl+2</code>, <code>3</code>, <code>4</code> vagy az <code>5</code> lenyomásával. Ha nincs 5. egyezés, akkor természetesen a <code>Ctrl+5</code> lenyomása hatástalan lesz. A <strong>kiválasztott</strong> egyezés felhasználásához nyomja meg a <code><a href="menu.html#shortcuts">Ctrl+R</a></code>-t, ha a célnyelvi szöveget az egyezéssel kívánja felcserélni, illetve a <code><a href=
   "menu.html#shortcuts">Ctrl+I</a></code>-t, ha a kurzor helyére be kívánja szúrni az adott egyezést.</p>
@@ -424,7 +424,7 @@
 
   <p><br></p>
 
-  <p>A fenti példában a forrásnyelvi szövegegység az “<i>In most translation jobs it is considered important to have the translated document look similar to the original.</i>” volt, belőle két szó, a document és a translation szerepelt a szójegyzékfájlban. Az OmegaT támogatja több szóból álló kifejezések alapszintű használatát: ha egy kifejezés mindkét szava előfordul az adott szövegegységben, akkor megjeleníti a kifejezést.</p><br>
+  <p>A fenti példában a forrásnyelvi szövegegység a “<i>sCohorts, or site-wide groups, enable all members of a cohort to be enrolled in a course in one action, either manually or synchronised automatically.</i>” volt, belőle egyebek mellett a "cohorts", a "groups", az "enable" és az "action" fordítása szerepelt a szójegyzékfájlban. Az OmegaT támogatja több szóból álló kifejezések alapszintű használatát: ha egy kifejezés mindkét szava előfordul az adott szövegegységben, akkor megjeleníti a kifejezést.</p><br>
 
   <h3><a name="Dictionaries" id="Dictionaries"></a>Szótárak</h3>
 
@@ -485,7 +485,7 @@
   <p>A "Szövegegységek száma" és az "Egyedi szövegegységek száma" közötti különbség alapján nagyjából megállapítható a szövegbeli ismétlődések mennyisége. A számok azonban nem jelzik egyértelműen az ismétlődések relevanciáját: a szövegegység lehet viszonylag hosszú és többszörösen ismétlődő mondat (szerencsés eset!), vagy csak egyes szavak, amelyek egy táblázaton belül ismétlődnek (kevésbé szerencsés eset...). A <code>project_stats.txt</code>, amely az <code>/omegat</code> mappában található, részletesebb információkkal szolgál az állományonként előforduló szövegegységekről.</p>
 
   <p>A szövegegységek/egyedi szövegegységek száma a darabolási szabályok megváltoztatásával módosítható. Az ilyen módosítások azonban mindenképpen kerülendők, ha már nekilátott egy projekt fordításának. A további részleteket lásd <a href=
-  "segmentation.html">A szövegdarabolás szabályai</a>alatt.</p>
+  "segmentation.html">A szövegdarabolás szabályai</a> alatt.</p>
 
   <h3><a name="adding_files" id="adding_files"></a>Állományok felvétele a projektbe</h3>
 
@@ -535,7 +535,7 @@
   <p>A címkék vastag kék betűvel jelennek meg az eredeti és a lefordított tartalom könnyű egybevetése érdekében. Ha az ugrópontra kattint, a kurzor a szerkesztőben az adott szövegrészre ugrik.. Javítsa ki a hibát, ha szükséges, majd a <code><a href="menu.html#shortcuts">Ctrl+T</a></code> lenyomásával térjen vissza a címkeellenőrzés ablakához és javítsa ki a fennmaradó hibákat. Az első és a harmadik esetben a címkék hibásan alkotnak párt, a másodikban a kezdő címkéből hiányzik a &lt; jel.</p>
 
   <p>A fordításban a <a href="formattedText.html#intro">címke</a>hibák olyan <a href=
-  "formattedText.html#tag_operation">címkemanipulációk</a>, amelyek az eredeti szövegrészétől eltérő elrendezésű címkéket eredményeznek. Egyes címkeműveletek szükségszerűek és ártalmatlanok, míg mások gondot okoznak a lefordított dokumentum előállítása során. A címkék rendszerint az eredeti szöveg valamilyen formázását mutatják. <strong>Az eredeti szöveg egyszerűsítése</strong> számottevően csökkenti a címkék számát.</p>
+  "formattedText.html#tag_operation">címkemanipulációk</a>, amelyek az eredeti szövegrészétől eltérő elrendezésű címkéket eredményeznek. Egyes címkeműveletek szükségszerűek és ártalmatlanok, míg mások gondot okoznak a lefordított dokumentum előállítása során. A címkék rendszerint az eredeti szöveg valamilyen formázását mutatják. <strong>Az eredeti szöveg formázásának egyszerűsítése</strong> nagymértékben csökkenti a használandó címkék számát.</p>
 
   <h3>Súgó</h3>
 

@@ -88,7 +88,7 @@
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p><code>Új</code></p>
+          <p><code>Új...</code></p>
         </td>
 
         <td width="17%"></td>
@@ -100,7 +100,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td width="23%">
-          <p><code>Megnyitás</code></p>
+          <p><code>Megnyitás...</code></p>
         </td>
 
         <td width="17%">
@@ -126,13 +126,13 @@
 
       <tr bgcolor="#FFFFFF">
         <td width="23%">
-          <p><code>Importálás MediaWikiből...</code></p>
+          <p><code>Importálás mediawikiből...</code></p>
         </td>
 
         <td width="17%"></td>
 
         <td>
-          <p>A megadott URL alapján MediaWiki-oldalakat importál</p>
+          <p>A megadott URL alapján mediawiki-oldalakat importál</p>
         </td>
       </tr>
 
@@ -188,7 +188,7 @@
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p><code>Beállítások</code></p>
+          <p><code>Beállítások...</code></p>
         </td>
 
         <td width="17%">
@@ -286,69 +286,123 @@
 
       <tr bgcolor="#FFFFFF">
         <td colspan="3">
-          <p><strong>A Szerkesztés menü az alábbi funkciókat tartalmazza:</strong></p>
-        </td>
-      </tr>
+          <p>A <strong>Szerkesztés</strong> menü az alábbi gyorsbillentyűket tartalmazza:</p>
 
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Utolsó művelet visszavonása</code></p>
+      </td></tr><tr bgcolor="#DDDDDD">
+        <td>
+          <p>Utolsó művelet visszavonása</p>
         </td>
 
-        <td width="17%">
+        <td>
           <p><code>Ctrl+Z</code></p>
         </td>
 
         <td>
-          <p>Visszatér az előző szerkesztési lépés előtti állapothoz. A módosított szövegegység ellenőrzése után nem használható.</p>
+          <p>Az adott célnyelvi szövegegységen belül visszavonja az utolsó szerkesztési lépést.</p>
         </td>
       </tr>
 
       <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Utolsó művelet ismétlése</code></p>
+        <td>
+          <p>Utolsó művelet megismétlése</p>
         </td>
 
-        <td width="17%">
+        <td>
           <p><code>Ctrl+Y</code></p>
         </td>
 
         <td>
-          <p>Visszatér az előzőleg törölt szerkesztési lépés előtti állapothoz. A módosított szövegegység ellenőrzése után nem használható.</p>
+          <p>Az adott célnyelvi szövegegységen belül megismétli az utoljára visszavont szerkesztési lépéseket.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Csere az egyezésre</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+R</code></p>
+        <td>
+          <p>n. egyezés kiválasztása</p>
         </td>
 
         <td>
-          <p>Felülírja az egész célnyelvi szövegegységet a kiválasztott (alapesetben az első) bizonytalan egyezéssel.</p>
+          <p><code>Ctrl+n</code></p>
+        </td>
+
+        <td>
+          <p>Az n egy 1 és 5 közötti szám. Kiválasztja az n<sup></sup>. egyezést a Bizonytalan egyezések ablakból (alapbeállításban az első egyezést választja ki).</p>
         </td>
       </tr>
 
       <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Egyezés beszúrása</code></p>
+        <td>
+          <p>Csere az egyezésre</p>
         </td>
 
-        <td width="17%">
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a kiválasztott egyezést (alapbeállításban az első egyezést választja ki).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Egyezés beszúrása</p>
+        </td>
+
+        <td>
           <p><code>Ctrl+I</code></p>
         </td>
 
         <td>
-          <p>A kiválasztott bizonytalan egyezést beszúrja a kurzor helyére. Beszúráskor akkor sem írja felül a célnyelvi szöveget, ha azt kijelölte.</p>
+          <p>Az adott célnyelvi szövegegységbe a kurzor helyére beszúrja a kiválasztott egyezést (alapbeállításban az első egyezést választja ki).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Csere a forrásszövegre</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a forrásszöveg tartalmát.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Felülírás a forrással</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Az adott célnyelvi szövegegységbe a kurzor helyére beszúrja a forrásszöveg tartalmát.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Keresés a projektben...</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>A lenyíló párbeszédablakban keresést hajt végre a projektben.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p><code>Csere a &amp;gépi fordításra</code></p>
+          <p>Csere a gépi fordításra</p>
         </td>
 
         <td width="17%">
@@ -356,95 +410,7 @@
         </td>
 
         <td>
-          <p>Az adott célnyelvi szövegegység helyére beilleszti a Google Translate fordítását. Hatástalan, ha a Google Translate nincs bekapcsolva (lásd alább: Menü &gt; Beállítások).</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Csere a forrásszövegre</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+R</code></p>
-        </td>
-
-        <td>
-          <p>Felülírja a célnyelvi szövegegységet a forrásszöveggel.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Forrás beszúrása<br></code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+I</code></p>
-        </td>
-
-        <td>
-          <p>A kurzor helyére beszúrja a forrásszöveget.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>A kiválasztott rész exportálása</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+C</code></p>
-        </td>
-
-        <td>
-          <p>A kiválasztott szöveget további feldolgozás céljából szövegfájlba exportálja. Ha nincs kiválasztva szöveg, akkor az adott forrásszöveget írja ki ebbe az állományba. Amikor a felhasználó kilép az OmegaT-ből, a vágólap szokásos viselkedésének megfelelően az állomány tartalma megmarad. Az exportált tartalom a <span style=
-          "font-style: italic;">selection.txt</span> állományba kerül, amely a felhasználó kedvenc állományainak mappájában található (lásd az <a href=
-          "filesAndDirectories.html#user" target="_blank">állományok és könyvtárak</a> c. részt).&nbsp;</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Keresés a projektben...</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+F</code></p>
-        </td>
-
-        <td>
-          <p>Megnyit egy új <a href="userInterface.html#Search_Window">Szöveg keresése</a> ablakot.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Betűváltás...</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift + F3</code></p>
-
-          <p><code>(lásd a leírást)</code></p>
-        </td>
-
-        <td>
-          <p>A célnyelvi szövegben kijelölt szöveg betűit a kiválasztott érték szerintire alakítja (kisbetűs, nagybetűs vagy címszavas). A Shift+F3 ismételt megnyomásával választhat a három alternatíva közül. Ha nincs kiválasztva szöveg, akkor az OmegaT a kurzortól közvetlenül jobbra álló betűt tartalmazó szót választja ki.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>n. egyezés kiválasztása</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+n</code></p>
-        </td>
-
-        <td>
-          <p>(az n egy 1 és 5 közötti szám) - A szövegegység cseréjéhez vagy beszúrásához kiválasztja az n. bizonytalan egyezést a Bizonytalan egyezések ablakból. A <a href="userInterface.html#Match">Bizonytalan egyezések</a> fejezetből részletesen megismerkedhet a színkódolással.</p>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a Google Translate fordítását. Hatástalan, ha a Google Translate nincs bekapcsolva (lásd alább: Menü &gt; Beállítások &gt; Gépi fordítás &gt; Google Translate).</p>
         </td>
       </tr>
 
@@ -500,7 +466,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td width="23%">
-          <p><code>Szövegegység száma...</code></p>
+          <p><code>... számú szövegegységre</code></p>
         </td>
 
         <td width="17%">
@@ -508,13 +474,13 @@
         </td>
 
         <td>
-          <p>A szövegegység a száma beírásakor megnyílik.</p>
+          <p>Az adott sorszámú szövegegység a sorszám beírásakor megnyílik.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p><code>Előrelépés...</code></p>
+          <p><code>Előrelépés</code></p>
         </td>
 
         <td width="17%">
@@ -528,7 +494,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td width="23%">
-          <p><code>Visszalépés...</code></p>
+          <p><code>Visszalépés</code></p>
         </td>
 
         <td width="17%">
@@ -550,7 +516,7 @@
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p><code>Lefordított állományok megjelölése</code></p>
+          <p><code>Lefordított szövegegységek megjelölése</code></p>
         </td>
 
         <td width="17%"></td>
@@ -562,7 +528,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td width="23%">
-          <p><code>Lefordítandó állományok megjelölése</code></p>
+          <p><code>Lefordítandó szövegegységek megjelölése</code></p>
         </td>
 
         <td width="17%"></td>
@@ -602,7 +568,7 @@
         </td>
 
         <td>
-          <p>Formázott állományokban ellenőrzi a hiányzó vagy áthelyezett címkéket. Megjeleníti a címkehibát tartalmazó szövegegységeket. [?] A <a href=
+          <p>Formázott állományokban ellenőrzi a hiányzó vagy áthelyezett címkéket. Megjeleníti a címkehibát tartalmazó szövegegységeket. A <a href=
           "userInterface.html#tag_Validation">Módosított címkéket tartalmazó egységek</a> ablakban jelennek meg a szövegegységek, a <a href="formattedText.html">Formázott szövegek fordítása</a> részből pedig megtudhatja, mi a gond.</p>
         </td>
       </tr>
@@ -629,7 +595,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td width="23%">
-          <p><code>Kilépés csak megerősítés után</code></p>
+          <p><code>Kilépés mindig megerősítéssel</code></p>
         </td>
 
         <td width="17%"></td>
@@ -808,7 +774,7 @@
         </td>
 
         <td>
-          <p>A lenyíló párbeszédablakból kikereshető egy korábban létrehozott projekt</p>
+          <p>A lenyíló párbeszédablakból kikereshet egy korábban létrehozott projektet.</p>
         </td>
       </tr>
 
@@ -828,7 +794,7 @@
 
       <tr bgcolor="#DDDDDD">
         <td>
-          <p>Close Project</p>
+          <p>Projekt bezárása</p>
         </td>
 
         <td>
@@ -836,7 +802,7 @@
         </td>
 
         <td>
-          <p>Bezárja az aktuális projektet</p>
+          <p>Bezárja az aktuális projektet.</p>
         </td>
       </tr>
 
@@ -864,7 +830,7 @@
         </td>
 
         <td>
-          <p>Esetleges módosításhoz kijelzi a projekt beállításait</p>
+          <p>Esetleges módosításhoz kijelzi a projekt beállításait.</p>
         </td>
       </tr>
 
@@ -886,7 +852,7 @@
         </td>
 
         <td>
-          <p>Az adott célnyelvi szövegegységen belül visszavonja az utolsó szerkesztési lépést</p>
+          <p>Az adott célnyelvi szövegegységen belül visszavonja az utolsó szerkesztési lépést.</p>
         </td>
       </tr>
 
@@ -900,7 +866,7 @@
         </td>
 
         <td>
-          <p>Az adott célnyelvi szövegegységen belül megismétli az utoljára visszavont szerkesztési lépéseket</p>
+          <p>Az adott célnyelvi szövegegységen belül megismétli az utoljára visszavont szerkesztési lépéseket.</p>
         </td>
       </tr>
 
@@ -914,7 +880,7 @@
         </td>
 
         <td>
-          <p>Az n egy 1 és 5 közötti szám. Kiválasztja az n<sup></sup>. egyezést a Bizonytalan egyezések ablakból (alapbeállításban az első egyezést választja ki)</p>
+          <p>Az n egy 1 és 5 közötti szám. Kiválasztja az n<sup></sup>. egyezést a Bizonytalan egyezések ablakból (alapbeállításban az első egyezést választja ki).</p>
         </td>
       </tr>
 
@@ -928,7 +894,7 @@
         </td>
 
         <td>
-          <p>Az adott célnyelvi szövegegység helyére beilleszti a kiválasztott egyezést (alapbeállításban az első egyezést választja ki)</p>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a kiválasztott egyezést (alapbeállításban az első egyezést választja ki).</p>
         </td>
       </tr>
 
@@ -942,7 +908,7 @@
         </td>
 
         <td>
-          <p>Az adott célnyelvi szövegegységbe a kurzor helyére beszúrja a kiválasztott egyezést (alapbeállításban az első egyezést választja ki)</p>
+          <p>Az adott célnyelvi szövegegységbe a kurzor helyére beszúrja a kiválasztott egyezést (alapbeállításban az első egyezést választja ki).</p>
         </td>
       </tr>
 
@@ -956,7 +922,7 @@
         </td>
 
         <td>
-          <p>Az adott célnyelvi szövegegység helyére beilleszti a forrásszöveg tartalmát</p>
+          <p>Az adott célnyelvi szövegegység helyére beilleszti a forrásszöveg tartalmát.</p>
         </td>
       </tr>
 
@@ -970,7 +936,7 @@
         </td>
 
         <td>
-          <p>Az adott célnyelvi szövegegységbe a kurzor helyére beszúrja a forrásszöveg tartalmát</p>
+          <p>Az adott célnyelvi szövegegységbe a kurzor helyére beszúrja a forrásszöveg tartalmát.</p>
         </td>
       </tr>
 
@@ -984,13 +950,13 @@
         </td>
 
         <td>
-          <p>A lenyíló párbeszédablakban keresést hajthat végre a projektben</p>
+          <p>A lenyíló párbeszédablakban keresést hajt végre a projektben.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p>Csere a &amp;gépi fordításra</p>
+          <p>Csere a gépi fordításra</p>
         </td>
 
         <td width="17%">
@@ -1020,7 +986,7 @@
         </td>
 
         <td>
-          <p>A szerkesztési mezőt a projekt fordítási memóriájában még nem rögzített szövegegységhez viszi</p>
+          <p>A szerkesztési mezőt a projekt fordítási memóriájában még nem rögzített szövegegységhez viszi.</p>
         </td>
       </tr>
 
@@ -1054,7 +1020,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td>
-          <p>Szövegegység száma...</p>
+          <p>... számú szövegegységre</p>
         </td>
 
         <td>
@@ -1062,13 +1028,13 @@
         </td>
 
         <td>
-          <p>Áttér a megadott számú szövegegységre</p>
+          <p>Áttér a megadott számú szövegegységre.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
         <td>
-          <p>Visszalépés...</p>
+          <p>Visszalépés</p>
         </td>
 
         <td width="17%">
@@ -1082,7 +1048,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td>
-          <p>Előrelépés...</p>
+          <p>Előrelépés</p>
         </td>
 
         <td width="17%">
@@ -1112,7 +1078,7 @@
         </td>
 
         <td>
-          <p>Megjeleníti a projektállományok felsorolását</p>
+          <p>Megjeleníti a projektállományok felsorolását.</p>
         </td>
       </tr>
 
@@ -1134,7 +1100,7 @@
         </td>
 
         <td>
-          <p>Megnyitja a <a href="userInterface.html#tag_Validation">Módosított címkéket tartalmazó egységek</a> ablakot.</p>
+          <p>Megnyitja a <a href="userInterface.html#tag_Validation">Címkék ellenőrzése</a> ablakot.</p>
         </td>
       </tr>
 
@@ -1176,7 +1142,7 @@
         </td>
 
         <td>
-          <p>Külön ablakban jeleníti meg az OmegaT súgóállományait</p>
+          <p>Külön ablakban jeleníti meg az OmegaT súgóállományait.</p>
         </td>
       </tr>
     </tbody>

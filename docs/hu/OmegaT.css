@@ -36,3 +36,11 @@ table
     font-family: serif;
     border: 0;
     }
+    
+code
+    {
+    color: #000;
+    font-family: Courier New;
+    font-size: 12;
+    border: 0;
+    }

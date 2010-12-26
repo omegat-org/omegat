@@ -8,20 +8,16 @@
 <body>
   <h2>Keresési lehetőségek</h2>
 
+  <p><a href="#searchwindow">Keresőablak</a></p>
+
   <ul>
-    <li>
-      <p><a href="#searchwindow">Keresőablak</a></p>
+      <li>
+        <a href="#calling">Keresés elindítása</a>
+      </li>
 
-      <ul>
-        <li>
-          <p><a href="#calling">Keresés elindítása</a></p>
-        </li>
-
-        <li>
-          <p><a href="#location">A keresés helye</a></p>
-        </li>
-      </ul>
-    </li>
+      <li>
+        <a href="#location">A keresés helye</a>
+      </li>
   </ul>
 
   <p><a href="#searchmethods">Keresési módszerek</a></p>
@@ -31,10 +27,13 @@
   <p><a href="#usingregularexpressions">Keresés reguláris kifejezésekkel</a></p>
 
   <p><a href="#display">A keresés eredményének megjelenítése</a></p>
+  
+  <p><a href="#filter">A szerkesztőben lévő egységek szűrése a keresésnek megfelelően</a></p>
   <hr>
 
   <h2><a name="searchwindow" id="searchwindow"></a>Keresőablak</h2><img src=
-  "images/TextSearch.png" name="graphics1" align="left" border="0" id="graphics1" alt="Szövegkeresés ablaka"><br clear="left">
+  "images/TextSearch.png" name="graphics1" align="left" width="659" height=
+  "446" border="0" id="graphics1" alt="Szövegkeresés ablaka"><br clear="left">
 
   <p><br>
   <br></p>
@@ -61,7 +60,7 @@
     </li>
   </ul>
 
-  <p>Az OmegaT csakis azokban a fájlokban keres, amelyeket forrásszövegként kapott (lásd: <a href="filesToTranslate.html">Támogatott állományformátumok</a>). Például noha az OmegaT kezelni tudja a TMX-állományokat, a keresésből kihagyja azokat.</p>
+  <p>Az OmegaT csakis azokban a fájlokban keres, amelyeket forrásszövegként kapott (lásd: <a href="filesToTranslate.html#formats">Állományformátumok</a>). Például noha az OmegaT kezelni tudja a TMX-állományokat, a keresésből kihagyja azokat.</p>
   <hr>
 
   <h2><a name="searchmethods" id="searchmethods"></a>Keresési módszerek</h2>
@@ -166,6 +165,20 @@
   <p>A szövegegységek a projekten belüli előfordulásuk sorrendjében jelennek meg. A lefordított szövegegységek felül az eredeti szöveggel, alatta a fordítással jelennek meg, a még fordításra váró szövegek esetén pedig csak az eredeti forrásszöveg látszik.</p>
 
   <p>Ha a szövegegységre kattint, az megjelenik a szerkesztőben. Ezután visszatérhet a keresőablakba a következő egységhez és szükség esetén módosíthatja a terminológiát.</p>
+  <hr>
+
+  <h2><a name="filter" id="filter"></a>A szerkesztőben lévő egységek szűrése a keresésnek megfelelően</h2>
+
+  <p>A keresési eredmények közötti könnyebb tájékozódáshoz a keresést a szerkesztőre korlátozhatja. Az alul lévő Szűrő gombra kattintva a szerkesztőablakban csak az adott keresésnek megfelelő egyezések jelennek meg. Szokásos navigálással térhet át például a keresési feltételnek megfelelő következő (lefordítatlan) egységre.</p>
+  <p>Figyelem:</p>
+  <ul><li>a keresés korlátja 1000 előfordulás, ezért ha gyakran előforduló kifejezést keres, a szerkesztőben csak 1000 megfelelő egység jelenik meg, és nem az összes.</li>
+  <li>ha egy állományban nincsenek egyezések, akkor az üresnek mutatkozik.</li> 
+  <li>ha a keresés törli az ismétlődéseket, a szerkesztőből kimaradhatnak az ismétlődések.</li>
+  </ul>
+
+  <p>Szűrő eltávolításához használja a Szűrő eltávolítása gombot, vagy töltse be ismét a projektet.
+  </p>
+
   <hr>
   <table summary= "csak formázás" style="width: 100%;" border="0" cellpadding="2" cellspacing="2">
     <tbody>

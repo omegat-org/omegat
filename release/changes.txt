@@ -9,7 +9,7 @@
 
   Other enhancements:
 
-  - Hungarian localisation updated to 2.2.2 (UI, documentation, readme)
+  - Hungarian localisation updated to 2.2.3 (UI, documentation, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3

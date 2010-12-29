@@ -11,6 +11,11 @@
 
   - Hungarian localisation updated to 2.2.3 (UI, documentation, readme)
 
+  Bug fix:
+
+  - HTML cryptic error message "StringIndexOutOfBoundsException"
+  http://sourceforge.net/support/tracker.php?aid=1653822
+
 ----------------------------------------------------------------------
  OmegaT 2.2.3
 ----------------------------------------------------------------------

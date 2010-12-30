@@ -122,6 +122,9 @@ public class OpenDocDialect extends DefaultXMLDialect {
         if (options.getTranslateLinks()) {
             defineTranslatableAttribute("xlink:href");
         }
+        if (options.getTranslateSheetNames()) {
+            defineTranslatableTagAttribute("table:table", "table:name");
+        }
 
     }
 

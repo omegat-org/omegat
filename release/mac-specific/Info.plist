@@ -39,7 +39,7 @@
 			<string>$JAVAROOT/native/libhunspell.dylib</string>
 		</array>
 		<key>JVMVersion</key>
-		<string>1.5</string>
+		<string>1.5+</string>
 		<key>MainClass</key>
 		<string>org.omegat.Main</string>
 		<key>Properties</key>

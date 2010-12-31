@@ -2,7 +2,7 @@
  OmegaT 2.2.3 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  1 Bugfix
+  2 Bugfixes
 ----------------------------------------------------------------------
 2.2.3 update 1 vs. 2.2.3
 
@@ -19,6 +19,9 @@
 
   - HTML cryptic error message "StringIndexOutOfBoundsException"
   http://sourceforge.net/support/tracker.php?aid=1653822
+
+  - On a Mac having both Java 1.5 and 1.6, the Okapi file filter plugin
+prevented OmegaT to run
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3

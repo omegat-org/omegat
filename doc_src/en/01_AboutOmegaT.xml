@@ -41,7 +41,7 @@
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Terminology
-        management</emphasis>:Terminology management is important for
+        management</emphasis>: Terminology management is important for
         translation consistency. OmegaT uses glossaries containing
         translations of single words or small phrases: a simplified bilingual
         dictionary for a specific domain. For your reference, OmegaT displays

@@ -31,11 +31,19 @@
     segment which <application>OmegaT</application> finds in the glossary
     file(s) are displayed in the Glossary pane:</para>
 
-    <mediaobject>
-      <imageobject role="html">
-        <imagedata fileref="images/Glossary_pane.png" />
-      </imageobject>
-    </mediaobject>
+    <indexterm class="singular">
+      <primary>Glossary pane</primary>
+    </indexterm>
+
+    <figure>
+      <title>Glossary pane</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/Glossary_pane.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
 
     <para>The word before the = sign is the source term, and its translation
     is (or are) the words behind =. The vocabulary entry can have a comment
@@ -44,6 +52,27 @@
     inflected forms etc.). New terms can be added manually to the glossary
     file(s) during translation (for example in a text editor), but newly added
     terms will not be recognized until the project is reloaded.</para>
+
+    <para>The source term does not have to be a single-word item, as the next
+    example shows:</para>
+
+    <figure>
+      <title>multiple words entries in glossaries - example<indexterm
+          class="singular">
+          <primary>Glossary pane - multiple-words entries</primary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/MultiTerm_Glossary.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>The underlined item "new preview screenshot", consists of three
+    words and can be found in the glossary pane as "nov predogled posnetka
+    zaslona". Note that parts of the multi-term items ("preview" in the above
+    example</para>
   </section>
 
   <section>

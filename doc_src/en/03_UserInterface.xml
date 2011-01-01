@@ -279,11 +279,15 @@
         <secondary>Main window</secondary>
       </indexterm></title>
 
-    <mediaobject>
-      <imageobject>
-        <imagedata align="left" fileref="images/OmegaT_panes.png" width="80%" />
-      </imageobject>
-    </mediaobject>
+    <figure>
+      <title>OmegaT panes</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/OmegaT_panes.png" />
+        </imageobject>
+      </mediaobject>
+    </figure>
 
     <para>The main window consists of several panes, main menu and a status
     bar. You can change the position of any pane or even undock it to a
@@ -303,12 +307,8 @@
         <tbody>
           <row>
             <entry><inlinemediaobject>
-                <imageobject role="html">
-                  <imagedata fileref="images/Minimize.gif" />
-                </imageobject>
-
-                <imageobject role="fo">
-                  <imagedata fileref="images/Minimize.gif" width="40%" />
+                <imageobject>
+                  <imagedata fileref="images/Minimize.gif" width="60%" />
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -318,12 +318,8 @@
 
           <row>
             <entry><inlinemediaobject>
-                <imageobject role="html">
-                  <imagedata fileref="images/Maximize.gif" />
-                </imageobject>
-
-                <imageobject role="fo">
-                  <imagedata fileref="images/Maximize.gif" width="40%" />
+                <imageobject>
+                  <imagedata fileref="images/Maximize.gif" width="60%" />
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -332,12 +328,8 @@
 
           <row>
             <entry><inlinemediaobject>
-                <imageobject role="html">
-                  <imagedata fileref="images/undock.gif" />
-                </imageobject>
-
-                <imageobject role="fo">
-                  <imagedata fileref="images/undock.gif" width="40%" />
+                <imageobject>
+                  <imagedata fileref="images/undock.gif" width="60%" />
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -346,12 +338,8 @@
 
           <row>
             <entry><inlinemediaobject>
-                <imageobject role="html">
-                  <imagedata fileref="images/dock.gif" />
-                </imageobject>
-
-                <imageobject role="fo">
-                  <imagedata fileref="images/dock.gif" width="40%" />
+                <imageobject>
+                  <imagedata fileref="images/dock.gif" width="60%" />
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -449,10 +437,10 @@
             </indexterm>Matches pane</title>
 
           <mediaobject>
-            <imageobject>
-              <imagedata fileref="images/MatchesPane.png" />
-            </imageobject>
-          </mediaobject>
+		  <imageobject>
+            <imagedata fileref="images/MatchesPane.png" />
+          </imageobject>
+		  </mediaobject>
         </figure></para>
 
       <para>Match viewer shows the most similar segments from translation
@@ -530,10 +518,10 @@
             </indexterm>Glossary pane</title>
 
           <mediaobject>
-            <imageobject role="html">
-              <imagedata fileref="images/Glossary_pane.png" />
-            </imageobject>
-          </mediaobject>
+		  <imageobject>
+            <imagedata fileref="images/Glossary_pane.png" />
+          </imageobject>
+		  </mediaobject>
         </figure></para>
 
       <para>The source segment in the above example was “I<emphasis>n most
@@ -549,12 +537,12 @@
             <secondary>multi-word entry in the glossary - figure</secondary>
           </indexterm>multi-word entry in the glossary</title>
 
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/OmegaT_panes.png" width="80%" />
-          </imageobject>
-        </mediaobject>
-      </figure>
+          <mediaobject>
+		  <imageobject>
+          <imagedata fileref="images/OmegaT_panes.png" width="80%" />
+		  </imageobject>
+          </mediaobject>
+	  </figure>
 
       <para>If you have TransTip option activated <guimenuitem>Options →
       Transtip</guimenuitem>), you can rightclick on the highlighted word in
@@ -748,11 +736,11 @@
               <seealso>Tags</seealso>
             </indexterm>Tag validation window</title>
 
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata fileref="images/TagValidator.png" />
-            </imageobject>
-          </mediaobject>
+            <mediaobject>
+			<imageobject>
+            <imagedata fileref="images/TagValidator.png" />
+          </imageobject>
+		  </mediaobject>
         </figure></para>
 
       <para>The tags are highlighted in bold blue for easy comparison between
@@ -767,10 +755,10 @@
       correspond in order and number to the original segment. Some tag
       scenarios flagged in the tag validation window are necessary and are
       benign, others will cause problems when the translated document is
-      created. Tags generally represent some kind of formatting in the
-      original text. Simplifying the original text formatting in the source
-      file before commencing translation greatly contributes to reducing the
-      number of tags.</para>
+      created. Tags generally represent some kind of formatting in the original
+      text. Simplifying the original text formatting in the source file before
+      commencing translation greatly contributes to reducing the number of
+      tags.</para>
     </section>
 
     <section>

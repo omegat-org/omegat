@@ -89,11 +89,11 @@
       <figure id="OmegaT.projects.and.subdirectories">
         <title>OmegaT projects and subdirectories</title>
 
-        <mediaobject>
-          <imageobject role="html">
+          <mediaobject>
+		  <imageobject>
             <imagedata fileref="images/OmegaT_projects_and_subdirectories.png" />
           </imageobject>
-        </mediaobject>
+		  </mediaobject>
       </figure>
 
       <para>Selecting the item with the OmegaT icon is sufficient to open the

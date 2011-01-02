@@ -216,11 +216,11 @@
 
     <informaltable>
       <tgroup cols="4">
-        <colspec align="left" colnum="1" colwidth="200" />
+        <colspec align="left" colnum="1" colwidth="160" />
 
-        <colspec align="center" colnum="2" colwidth="60" />
+        <colspec align="center" colnum="2" colwidth="50" />
 
-        <colspec align="center" colnum="3" colwidth="60" />
+        <colspec align="center" colnum="3" colwidth="40" />
 
         <colspec align="left" colnum="4" colwidth="200" />
 

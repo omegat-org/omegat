@@ -18,21 +18,22 @@
 
       <variablelist>
         <varlistentry>
-          <term><filename><indexterm class="singular">
+          <term><indexterm class="singular">
               <primary>Translation memories</primary>
 
               <secondary>Subfolder omegat</secondary>
 
               <seealso>Project files</seealso>
-            </indexterm>omegat folder</filename></term>
+            </indexterm>omegat folder</term>
 
           <listitem>
             <para>The omegat folder contains the project_save.tmx and possibly
-            a number of backup TMX files. The <filename>project_save.tmx
-            </filename>file contains all the segments that have been recorded
-            in memory since you started the project. This file always exists
-            in the project. This file will always exist and its contents will
-            always be sorted alphabetically by the source segment</para>
+            a number of backup TMX files. The
+            <filename>project_save.tmx</filename>file contains all the
+            segments that have been recorded in memory since you started the
+            project. This file always exists in the project. This file will
+            always exist and its contents will always be sorted alphabetically
+            by the source segment.</para>
           </listitem>
         </varlistentry>
 
@@ -41,10 +42,10 @@
               <primary>Translation memories</primary>
 
               <secondary>Project main folder</secondary>
-            </indexterm>project main folder</term>
+            </indexterm>main project folder</term>
 
           <listitem>
-            <para>The project main folder contains 3 tmx files,
+            <para>The main project folder contains 3 tmx files,
             <filename>project_name-omegat.tmx</filename>,
             <filename>project_name-level1.tmx</filename> and
             <filename>project_name-level2.tmx</filename> (project_name being
@@ -74,11 +75,11 @@
 
             <para>These files are copies of the file
             <filename>project_save.tmx</filename> . i.e. of the project's main
-            translation memory - excluding the so-called orphan segments. They
+            translation memory, excluding the so-called orphan segments. They
             carry appropriately changed names, so that its contents still
             remain identifiable, when used elsewhere, for instance in
             the<filename> tm</filename> subfolder of some other project (see
-            below):</para>
+            below).</para>
           </listitem>
         </varlistentry>
 
@@ -171,44 +172,27 @@
       <para>Depending on the situation, different strategies are thus
       possible, for instance:</para>
 
-      <para><variablelist>
-          <varlistentry>
-            <term>several projects on the same subject</term>
+      <para><emphasis role="bold">several projects on the same subject:
+      </emphasis>keep the project structure, and change source and target
+      directories (Source = source/order1, target = target/order1 etc). Note
+      that you segments from order1, not present in order2 and other
+      subsequent jobs, will be tagged as orphan segments; however, they will
+      still be useful for getting fuzzy matches.</para>
 
-            <listitem>
-              <para>keep the project structure, and change source and target
-              directories (Source = source/order1, target = target/order1
-              etc). Note that you segments from order1, not present in order2
-              and other subsequent jobs, will be tagged as orphan segments;
-              however, they will still be useful for getting fuzzy
-              matches.</para>
-            </listitem>
-          </varlistentry>
-        </variablelist><variablelist>
-          <varlistentry>
-            <term>several translators working on the same project</term>
-
-            <listitem>
-              <para>split the source files into source/Alice, source/Bob...
-              and allocate them to team members (Alice, Bob ...). They can
-              then create their own projects and, deliver their own<filename>
-              project_save.tmx,</filename> when finished or a given milestone
-              has been reached.</para>
-
-              <para>The <filename>project_save.tmx</filename> files are then
-              collected and possible conflicts as regards terminology for
-              instance get resolved. A new version of the master TM is then
-              created, either to be put in team members' <emphasis>tm/auto
-              </emphasis>subdirectories or to replace their project_save.tmx
-              files.</para>
-
-              <para>The team can use one and the same subfolder structure for
-              the target files. This allows them for instance to check at any
-              moment, if the target version for the complete project is still
-              OK.</para>
-            </listitem>
-          </varlistentry>
-        </variablelist></para>
+      <para><emphasis role="bold">several translators working on the same
+      project:</emphasis> split the source files into source/Alice,
+      source/Bob... and allocate them to team members (Alice, Bob ...). They
+      can then create their own projects and, deliver their
+      own<filename>project_save.tmx,</filename> when finished or a given
+      milestone has been reached. The <filename>project_save.tmx</filename>
+      files are then collected and possible conflicts as regards terminology
+      for instance get resolved. A new version of the master TM is then
+      created, either to be put in team members'
+      <emphasis>tm/auto</emphasis>subdirectories or to replace their
+      project_save.tmx files. he team can use one and the same subfolder
+      structure for the target files. This allows them for instance to check
+      at any moment, if the target version for the complete project is still
+      OK</para>
     </section>
 
     <section id="tmx.backup">

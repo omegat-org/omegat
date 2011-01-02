@@ -19,7 +19,7 @@
     top of the Editor window. Most functions are also available via keyboard
     shortcuts. Shortcuts are activated by pressing <keycap>Ctrl</keycap> and a
     letter. Some shortcuts involve other keys. For readability purposes,
-    letters are written in uppercase here. . <keycap>Ctrl</keycap> is used on
+    letters are written in uppercase here. <keycap>Ctrl</keycap> is used on
     Windows, UNIX and UNIX-like operating systems with keyboards featuring a
     <keycap>Ctrl</keycap> or <keycap>Control</keycap> key. Mac users should
     instead use <keycombo>

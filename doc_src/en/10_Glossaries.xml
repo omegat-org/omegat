@@ -40,7 +40,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/Glossary_pane.png" />
+          <imagedata fileref="../../../OmegaT/doc_src/en/images/Glossary_pane.png" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -64,7 +64,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/MultiTerm_Glossary.png" />
+          <imagedata fileref="../../../OmegaT/doc_src/en/images/MultiTerm_Glossary.png" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -180,7 +180,7 @@
 
     <mediaobject>
       <imageobject role="html">
-        <imagedata fileref="images/saveglossary.png" />
+        <imagedata fileref="../../../OmegaT/doc_src/en/images/saveglossary.png" />
       </imageobject>
     </mediaobject>
 
@@ -256,81 +256,70 @@
         <secondary>Problems with glossaries</secondary>
       </indexterm>Common glossary problems</title>
 
-    <variablelist>
-      <varlistentry>
-        <term>Problem: No glossary terms are displayed - possible
-        causes:</term>
+    <para><emphasis role="bold">Problem: No glossary terms are displayed -
+    possible causes:</emphasis></para>
 
-        <listitem>
-          <itemizedlist>
-            <listitem>
-              <para>no glossary file in the "glossary" folder</para>
-            </listitem>
-          </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para>No glossary file found in the "glossary" folder.</para>
+      </listitem>
+    </itemizedlist>
 
-          <itemizedlist>
-            <listitem>
-              <para>glossary file is empty</para>
-            </listitem>
-          </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para>The glossary file is empty.</para>
+      </listitem>
+    </itemizedlist>
 
-          <itemizedlist>
-            <listitem>
-              <para>the items are not separated with a TAB character</para>
-            </listitem>
-          </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para>The items are not separated with a TAB character.</para>
+      </listitem>
+    </itemizedlist>
 
-          <itemizedlist>
-            <listitem>
-              <para>the glossary file does not have the correct extension
-              (.tab or .utf8)</para>
-            </listitem>
-          </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para>The glossary file does not have the correct extension (.tab or
+        .utf8).</para>
+      </listitem>
+    </itemizedlist>
 
-          <itemizedlist>
-            <listitem>
-              <para>there is no EXACT match between the glossary entry and the
-              source text in your document - for instance when the item is in
-              plural</para>
-            </listitem>
-          </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para>There is no EXACT match between the glossary entry and the
+        source text in your document - for instance when the item is in
+        plural.</para>
+      </listitem>
+    </itemizedlist>
 
-          <itemizedlist>
-            <listitem>
-              <para>the glossary file does not have the correct
-              encoding</para>
-            </listitem>
-          </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para>the glossary file does not have the correct encoding.</para>
+      </listitem>
+    </itemizedlist>
 
-          <itemizedlist>
-            <listitem>
-              <para>there are no terms in the current segment which match any
-              terms in the glossary</para>
-            </listitem>
-          </itemizedlist>
+    <itemizedlist>
+      <listitem>
+        <para>There are no terms in the current segment which match any terms
+        in the glossary.</para>
+      </listitem>
+    </itemizedlist>
 
-          <itemizedlist>
-            <listitem>
-              <para>one or more of the above problems may have been fixed, but
-              the project has not been reloaded.</para>
-            </listitem>
-          </itemizedlist>
-        </listitem>
-      </varlistentry>
+    <itemizedlist>
+      <listitem>
+        <para>One or more of the above problems may have been fixed, but the
+        project has not been reloaded.</para>
+      </listitem>
+    </itemizedlist>
 
-      <varlistentry>
-        <term>Problem: In the glossary pane, some characters are not displayed
-        properly (but the same characters are displayed properly in the
-        Editing pane). Possible causes:</term>
+    <para><emphasis role="bold">Problem: In the glossary pane, some characters
+    are not displayed properly</emphasis></para>
 
-        <listitem>
-          <itemizedlist>
-            <listitem>
-              <para>the extension and the file encoding do not match.</para>
-            </listitem>
-          </itemizedlist>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <itemizedlist>
+      <listitem>
+        <para>...but the same characters are displayed properly in the Editing
+        pane: the extension and the file encoding do not match.</para>
+      </listitem>
+    </itemizedlist>
   </section>
 </chapter>

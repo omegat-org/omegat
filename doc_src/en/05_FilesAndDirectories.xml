@@ -31,7 +31,7 @@
       <para>Application files: They are included in the package you download.
       Most of them are required in order for OmegaT to function properly. If
       for some reason such files are lost or corrupted, simply download and/or
-      reinstall OmegaT to restore them all. </para>
+      reinstall OmegaT to restore them all.</para>
     </listitem>
   </itemizedlist>
 
@@ -89,11 +89,11 @@
       <figure id="OmegaT.projects.and.subdirectories">
         <title>OmegaT projects and subdirectories</title>
 
-          <mediaobject>
-		  <imageobject>
+        <mediaobject>
+          <imageobject>
             <imagedata fileref="images/OmegaT_projects_and_subdirectories.png" />
           </imageobject>
-		  </mediaobject>
+        </mediaobject>
       </figure>
 
       <para>Selecting the item with the OmegaT icon is sufficient to open the
@@ -111,7 +111,7 @@
         </mediaobject>
       </figure>
 
-      <para>All the subdirectories will be empty initially. </para>
+      <para>All the subdirectories will be empty initially.</para>
     </section>
 
     <section id="folder.OmegaT">
@@ -128,7 +128,7 @@
       memory for the project. With the autosave function activated, it will be
       automatically updated when you quit. It is the translation memory used
       to create the translated files. A number of TMX files with names of the
-      form <emphasis role="bold">project_save.TMX.&lt;date and
+      form <emphasis role="bold">project_save.tmx.&lt;date and
       time&gt;.bak</emphasis> (...) are added progressively to this subfolder
       as the translation proceeds. They serve as a backup for the project TM.
       A new one is added each time you reopen a project, thus reflecting its
@@ -157,7 +157,7 @@
           <primary>Project files</primary>
 
           <secondary>ignore_word and learned_word</secondary>
-        </indexterm>gnore_words.txt </emphasis>and <emphasis
+        </indexterm>Ignore_words.txt </emphasis>and <emphasis
       role="bold">learned_word.txt </emphasis>files are used by the spell
       checker. Note that they are specific for a given project, so if you have
       already amassed words you wish the spell checker to ignore / accept, you
@@ -205,7 +205,7 @@
       reproduced here with the same folder hierarchy to reflect the current
       state of the translation. In practical terms, OmegaT merges the
       translation information saved in <emphasis
-      role="bold">/omegat/project_save.TMX</emphasis> with the source
+      role="bold">/omegat/project_save,tmx</emphasis> with the source
       documents to produce the target contents.</para>
     </section>
 
@@ -276,7 +276,14 @@
             </row>
 
             <row>
-              <entry>Windows Vista and 7</entry>
+              <entry>Windows 7</entry>
+
+              <entry><literal>Users\&lt;User
+              Name&gt;\AppData\<application>OmegaT</application></literal></entry>
+            </row>
+
+            <row>
+              <entry>Windows Vista</entry>
 
               <entry><literal>Users\&lt;User
               Name&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
@@ -308,7 +315,7 @@
             <row>
               <entry>Other</entry>
 
-              <entry><filename>User Home&gt;</filename></entry>
+              <entry><filename>&lt;User Home&gt;</filename></entry>
             </row>
           </tbody>
         </tgroup>
@@ -339,10 +346,11 @@
             <row>
               <entry>omegat.prefs</entry>
 
-              <entry>An xml file with all the GUI accessible option settings.</entry>
+              <entry>An xml file with all the GUI accessible option
+              settings.</entry>
             </row>
 
-             <row>
+            <row>
               <entry>uiLayout.xml</entry>
 
               <entry>An xml file with window position data.</entry>
@@ -357,6 +365,8 @@
 
             <row>
               <entry>segmentation.conf</entry>
+
+              <entry>An xml file containing segmentation rules.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -417,7 +427,7 @@
           <row>
             <entry>/lib/</entry>
 
-            <entry>contains Java files, necessary to the operation of
+            <entry>Contains Java files, necessary to the operation of
             <application>OmegaT</application>.</entry>
           </row>
 

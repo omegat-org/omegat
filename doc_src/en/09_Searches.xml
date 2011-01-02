@@ -18,14 +18,14 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/TextSearch.png" />
+          <imagedata fileref="images/TextSearch.png" width="100%" />
         </imageobject>
       </mediaobject>
     </figure>
 
     <note>
       <para>The above search finds all target segments where two or more white
-      spaces - \s\s+ - occur. </para>
+      spaces - \s\s+ - occur.</para>
     </note>
 
     <section>
@@ -50,7 +50,7 @@
         </keycombo>. The word or phrase is entered in the Search for box
       automatically in this case. You can have several Search windows open at
       the same time, but close them when no longer needed so that they do not
-      clutter your desktop. </para>
+      clutter your desktop.</para>
     </section>
 
     <section>

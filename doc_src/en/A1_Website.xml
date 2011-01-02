@@ -77,64 +77,55 @@
         <secondary>Contributing to OmegaT</secondary>
       </indexterm></title>
 
-    <variablelist>
-      <varlistentry>
-        <term>To contribute to <application>OmegaT</application></term>
+    <para>
+      <emphasis role="bold">To contribute to
+      <application>OmegaT</application>:</emphasis>
+    </para>
 
-        <listitem>
-          <para>first join the <ulink
-          url="http://groups.yahoo.com/group/OmegaT/">user group </ulink>(via
-          web or by sending an email to <ulink
-          url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>).
-          To get involved in the <application>OmegaT</application> development
-          effort you can join the developer group, via web or by sending an
-          email to <ulink
-          url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@list.sourceforge.net</ulink>
-          with "subscribe" as the subject line.</para>
-        </listitem>
-      </varlistentry>
+    <para>first join the <ulink
+    url="http://groups.yahoo.com/group/OmegaT/">user group</ulink> (via web or
+    by sending an email to <ulink
+    url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink>).
+    To get involved in the <application>OmegaT</application> development
+    effort you can join the developer group, via web or by sending an email to
+    <ulink
+    url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@list.sourceforge.net</ulink>
+    with "subscribe" as the subject line.</para>
 
-      <varlistentry>
-        <term>To translate <application>OmegaT</application>'s user interface,
-        user manual or other related documents</term>
+    <para>
+      <emphasis role="bold">To translate <application>OmegaT</application>'s
+      user interface, user manual or other related documents:</emphasis>
+    </para>
 
-        <listitem>
-          <para>first read <ulink
-          url="http://www.omegat.org/en/howtos/localizing_omegat.html">Localizing
-          and customizing <application>OmegaT</application></ulink> guide, and
-          join the <application>OmegaT</application> translators' group via
-          web or by sending an email to <ulink
-          url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink>
-          with subject "subscribe".</para>
+    <para>first read <ulink
+    url="http://www.omegat.org/en/howtos/localizing_omegat.html">Localizing
+    and customizing <application>OmegaT</application></ulink> guide, and join
+    the <application>OmegaT</application> translators' group via web or by
+    sending an email to <ulink
+    url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink>
+    with subject "subscribe".</para>
 
-          <indexterm class="singular">
-            <primary>OmegaT on the web</primary>
+    <indexterm class="singular">
+      <primary>OmegaT on the web</primary>
 
-            <secondary>Development, Localizing</secondary>
-          </indexterm>
-        </listitem>
-      </varlistentry>
+      <secondary>Development, Localizing</secondary>
+    </indexterm>
 
-      <varlistentry>
-        <term>To support OmegaT project financially<indexterm class="singular">
-            <primary>OmegaT on the web</primary>
+    <term>To support OmegaT project financially<indexterm class="singular">
+        <primary>OmegaT on the web</primary>
 
-            <secondary>Financial support</secondary>
-          </indexterm></term>
+        <secondary>Financial support</secondary>
+      </indexterm></term>
 
-        <listitem>
-          <para>If you want to donate to support continued development of
-          OmegaT, click on<ulink
-          url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99\ LL">
-          this link to OmegaT PayPal account</ulink>.</para>
+    <para>If you want to donate to support continued development of OmegaT,
+    click on<ulink
+    url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99\ LL">
+    this link to OmegaT PayPal account</ulink>.</para>
 
-          <indexterm class="singular">
-            <primary>OmegaT on the web</primary>
+    <indexterm class="singular">
+      <primary>OmegaT on the web</primary>
 
-            <secondary>Donating to OmegaT</secondary>
-          </indexterm>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+      <secondary>Donating to OmegaT</secondary>
+    </indexterm>
   </section>
 </appendix>

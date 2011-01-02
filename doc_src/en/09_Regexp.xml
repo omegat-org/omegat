@@ -382,8 +382,6 @@
   </table>
 
   <table>
-     
-
     <title>Regex - Greedy quantifiers</title>
 
     <tgroup align="left" cols="2" rowsep="1">
@@ -417,8 +415,6 @@
         </row>
       </tbody>
     </tgroup>
-
-     
   </table>
 
   <note>
@@ -466,7 +462,7 @@
   <note>
     <para>non-greedy quantifier will match as little as they can. For example,
     <emphasis>a+?</emphasis> will match the first <emphasis>a</emphasis> in
-    <emphasis>aaabbb</emphasis> </para>
+    <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>
@@ -527,7 +523,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/RegexTester.png" />
+          <imagedata fileref="images/RegexTester.png" width="100%" />
         </imageobject>
       </mediaobject>
     </figure>

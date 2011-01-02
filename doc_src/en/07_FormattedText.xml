@@ -26,79 +26,66 @@
         <primary>Tags</primary>
       </indexterm></title>
 
-    <variablelist>
-      <varlistentry>
-        <term><indexterm class="singular">
-            <primary>Tags</primary>
+    <para><application><indexterm class="singular">
+        <primary>Tags</primary>
 
-            <secondary>Naming</secondary>
-          </indexterm>Tag naming:</term>
+        <secondary>Naming</secondary>
+      </indexterm><emphasis role="bold">Tag
+    naming:</emphasis></application></para>
 
-        <listitem>
-          <para>The tags consist of one to three characters and a number.
-          Unique numbering allows tags, corresponding to each other, to be
-          grouped together and differentiate between tags, that have the same
-          shortcut character, but are in fact different. The shortcut
-          characters used try to reflect the underlying meaning of the tag
-          (e.g. b for bold, i for italics, etc.)</para>
-        </listitem>
-      </varlistentry>
+    <para><application>The tags consist of one to three characters and a
+    number. Unique numbering allows tags, corresponding to each other, to be
+    grouped together and differentiate between tags, that have the same
+    shortcut character, but are in fact different. The shortcut characters
+    used try to reflect the underlying meaning of the tag (e.g. b for bold, i
+    for italics, etc.)</application></para>
 
-      <varlistentry>
-        <term><indexterm class="singular">
-            <primary>Tags</primary>
+    <para><application><indexterm class="singular">
+        <primary>Tags</primary>
 
-            <secondary>Numbering</secondary>
-          </indexterm>Tag numbering:</term>
+        <secondary>Numbering</secondary>
+      </indexterm><emphasis role="bold">Tag
+    numbering:</emphasis></application></para>
 
-        <listitem>
-          <para>Tags are numbered incrementally by tag group. "Tag groups" in
-          this context are either a single tag (such as &lt;i0&gt; and
-          &lt;/i0&gt;). Within a segment, the first group (pair or singleton)
-          receives the number 0, the second the number 1 etc. The first
-          example below has 3 tag groups (a pair, a singleton, and then
-          another pair), the second example one group only (a pair).</para>
-        </listitem>
-      </varlistentry>
+    <para><application>Tags are numbered incrementally by tag group. "Tag
+    groups" in this context are either a single tag (such as &lt;i0&gt; and
+    &lt;/i0&gt;). Within a segment, the first group (pair or singleton)
+    receives the number 0, the second the number 1 etc. The first example
+    below has 3 tag groups (a pair, a singleton, and then another pair), the
+    second example one group only (a pair).</application></para>
 
-      <varlistentry>
-        <term><indexterm class="singular">
-            <primary>Tags</primary>
+    <para><application><indexterm class="singular">
+        <primary>Tags</primary>
 
-            <secondary>Pairs and singletons</secondary>
-          </indexterm>Pairs and singletons:</term>
+        <secondary>Pairs and singletons</secondary>
+      </indexterm><emphasis role="bold">Pairs and
+    singletons:</emphasis></application></para>
 
-        <listitem>
-          <para>Tags are always either singletons or paired. Single tags
-          indicate formatting information that does not affect the surrounding
-          text (an extra space or line break for example).</para>
+    <para><application>Tags are always either singletons or paired. Single
+    tags indicate formatting information that does not affect the surrounding
+    text (an extra space or line break for example).</application></para>
 
-          <para><literal> &lt;segment
-          2132&gt;&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
-          &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;end segment&gt;
-          </literal></para>
+    <para><application><literal> &lt;segment
+    2132&gt;&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+    &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;end segment&gt;
+    </literal></application></para>
 
-          <para>&lt;br1&gt; is a single tag and does not affect any
-          surrounding text. Paired tags usually indicate style information
-          that applies to the text between the opening tag and the closing tag
-          of a pair. The opening tag must always come before the corresponding
-          closing tag:</para>
+    <para><application>&lt;br1&gt; is a single tag and does not affect any
+    surrounding text. Paired tags usually indicate style information that
+    applies to the text between the opening tag and the closing tag of a pair.
+    &lt;b0&gt; and &lt;/b0&gt; below are paired and affect the text log.txt.
+    Note that the opening tag must always come before the corresponding
+    closing tag:</application></para>
 
-          <para>&lt;<literal>segment 3167&gt;Log file
-          (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and
-          errors.&lt;end segment&gt; </literal></para>
-
-          <para>&lt;b0&gt; and &lt;/b0&gt; are paired and affect the text
-          log.txt.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para><application>&lt;<literal>segment 3167&gt;Log file
+    (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and errors.&lt;end
+    segment&gt;</literal></application></para>
 
     <para><application>OmegaT</application> creates its tags before the
     process of sentence segmenting. Depending upon the segmenting rules, the
     pair of tags may get separated into two consecutive segments and the tag
-    validation will err on the side of caution and mark the two segments.
-    </para>
+    validation will err on the side of caution and mark the two
+    segments.</para>
   </section>
 
   <section id="tag.operations">
@@ -118,11 +105,12 @@
         <primary>Tags</primary>
 
         <secondary>Duplication</secondary>
-      </indexterm>Tag duplication: </emphasis>To duplicate tag groups, just
-    copy them in the position of your choice. Keep in mind that in a pair
-    group, the opening tag must come before the closing tag. The formatting
-    represented by the group you have duplicated will be applied to both
-    sections.</para>
+      </indexterm>Tag duplication: </emphasis></para>
+
+    <para>To duplicate tag groups, just copy them in the position of your
+    choice. Keep in mind that in a pair group, the opening tag must come
+    before the closing tag. The formatting represented by the group you have
+    duplicated will be applied to both sections.</para>
 
     <para>Example:</para>
 
@@ -139,12 +127,14 @@
         <primary>Tags</primary>
 
         <secondary>Group deletion</secondary>
-      </indexterm>Tag group deletion:</emphasis>o delete tag groups, just
-    remove them from the segment. Keep in mind that a pair group must have
-    both its opening and its closing tag deleted to ensure that all traces of
-    the formatting are properly erased, otherwise the translated file may
-    become corrupted. By deleting a tag group you will remove the related
-    formatting from the translated file.</para>
+      </indexterm>Tag group deletion:</emphasis></para>
+
+    <para>To delete tag groups, just remove them from the segment. Keep in
+    mind that a pair group must have both its opening and its closing tag
+    deleted to ensure that all traces of the formatting are properly erased,
+    otherwise the translated file may become corrupted. By deleting a tag
+    group you will remove the related formatting from the translated
+    file.</para>
 
     <para>Example:</para>
 
@@ -193,7 +183,7 @@
 
     <para>Overlapping is the result of bad manipulations of tag pairs and is
     guaranteed to result in formatting corruption and sometimes in the
-    translated file not opening at all. </para>
+    translated file not opening at all.</para>
 
     <para>Example:</para>
 
@@ -257,41 +247,29 @@
         <secondary>Hints</secondary>
       </indexterm></title>
 
-    <variablelist>
-      <varlistentry>
-        <term>Simplify the original text</term>
+    <para><emphasis role="bold">Simplify the original text</emphasis></para>
 
-        <listitem>
-          <para> Tags generally represent formatting of the original text of
-          some form. Simplifying the original formatting greatly contributes
-          to reducing the number of tags. Where circumstances permit, unifying
-          used fonts, font sizes, colors, etc. should be considered, as it
-          could simplify the translation and reduce the potential for tag
-          errors. Read the Tag operations section to see what can be done with
-          tags. Remember that if you find tags a problem in OmegaT and
-          formatting is not extremely relevant for the current translation,
-          removing tags may be the easiest way out of problems.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>Tags generally represent formatting of the original text of some
+    form. Simplifying the original formatting greatly contributes to reducing
+    the number of tags. Where circumstances permit, unifying used fonts, font
+    sizes, colors, etc. should be considered, as it could simplify the
+    translation and reduce the potential for tag errors. Read the Tag
+    operations section to see what can be done with tags. Remember that if you
+    find tags a problem in OmegaT and formatting is not extremely relevant for
+    the current translation, removing tags may be the easiest way out of
+    problems.</para>
 
-    <variablelist>
-      <varlistentry>
-        <term>Pay extra attention to tag pairs</term>
+    <para><emphasis role="bold">Pay extra attention to tag
+    pairs</emphasis></para>
 
-        <listitem>
-          <para>If you need to see tags in OmegaT but do not need to retain
-          most of the format in the translated document you are free not to
-          include tags in the translation. In this case pay extra attention to
-          tag pairs since deleting one side of the pair but forgetting to
-          delete the other is guaranteed to corrupt your document's
-          formatting. Since tags are included in the text itself, it is
-          possible to use segmentation rules to create segments with fewer
-          tags. This is an advanced feature and some experience is required in
-          order for it to be applied properly.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
+    <para>If you need to see tags in OmegaT but do not need to retain most of
+    the format in the translated document you are free not to include tags in
+    the translation. In this case pay extra attention to tag pairs since
+    deleting one side of the pair but forgetting to delete the other is
+    guaranteed to corrupt your document's formatting. Since tags are included
+    in the text itself, it is possible to use segmentation rules to create
+    segments with fewer tags. This is an advanced feature and some experience
+    is required in order for it to be applied properly.</para>
 
     <para>OmegaT is not yet able to detect mistakes in formatting fully
     automatically, so it will not prompt you if you make an error or change

@@ -40,13 +40,12 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Terminology
-        management</emphasis>: Terminology management is important for
-        translation consistency. OmegaT uses glossaries containing
-        translations of single words or small phrases: a simplified bilingual
-        dictionary for a specific domain. For your reference, OmegaT displays
-        the translation of any words that happen to be present in the current
-        segment.</para>
+        <para><emphasis role="bold">Terminology management</emphasis>:
+        Terminology management is important for translation consistency.
+        OmegaT uses glossaries containing translations of single words or
+        small phrases: a simplified bilingual dictionary for a specific
+        domain. For your reference, OmegaT displays the translation of any
+        words that happen to be present in the current segment.</para>
       </listitem>
     </itemizedlist>
 
@@ -155,16 +154,16 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Searches</emphasis>: and<emphasis
+        <para><emphasis role="bold">Searches</emphasis> and<emphasis
         role="bold"> </emphasis><emphasis role="bold">Regular
         expressions</emphasis>: Searches in OmegaT can be as simple as
         "<emphasis>list segments containing </emphasis><emphasis>the word
         'kangaroo' in the source". </emphasis> They can also be complex,
         allowing for instance to search for segments in which the target text
-        contains two or more consecutive spaces. In the second example the
-        regular expression ^s^s+ will find and list the offending segments.
-        Regular expressions are also used extensively in the segmentation
-        rules.</para>
+        contains two or more consecutive spaces. In this case the regular
+        expression ^s^s+ would be used to find and list the offending
+        segments. Regular expressions are also used extensively in the
+        segmentation rules.</para>
       </listitem>
 
       <listitem>

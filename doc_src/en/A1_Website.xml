@@ -111,11 +111,14 @@
       <secondary>Development, Localizing</secondary>
     </indexterm>
 
-    <term>To support OmegaT project financially<indexterm class="singular">
+    <para>
+      <emphasis role="bold">To support OmegaT project financially<indexterm class="singular">
         <primary>OmegaT on the web</primary>
 
         <secondary>Financial support</secondary>
-      </indexterm></term>
+      </indexterm>
+      </emphasis>
+    </para>
 
     <para>If you want to donate to support continued development of OmegaT,
     click on<ulink

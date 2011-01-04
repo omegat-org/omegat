@@ -27,11 +27,16 @@ package org.omegat.filters3.xml.xhtml;
 
 import java.awt.Dialog;
 import java.io.File;
+import java.io.IOException;
 import java.util.Map;
 import java.util.regex.Pattern;
 
 import org.omegat.filters2.FilterContext;
+import org.omegat.filters2.IAlignCallback;
+import org.omegat.filters2.IParseCallback;
+import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.Instance;
+import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -118,6 +123,27 @@ public class XHTMLFilter extends XMLFilter {
             }
         }
         return result;
+    }
+
+    public void parseFile(File inFile, Map<String, String> config, FilterContext fc, IParseCallback callback)
+            throws Exception {
+        XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
+        dialect.defineDialect(new XHTMLOptions(config));
+        super.parseFile(inFile, config, fc, callback);
+    }
+
+    public void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
+            ITranslateCallback callback) throws Exception {
+        XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
+        dialect.defineDialect(new XHTMLOptions(config));
+        super.translateFile(inFile, outFile, config, fc, callback);
+    }
+
+    public void alignFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
+            IAlignCallback callback) throws Exception {
+        XHTMLDialect dialect = (XHTMLDialect) this.getDialect();
+        dialect.defineDialect(new XHTMLOptions(config));
+        super.alignFile(inFile, outFile, config, fc, callback);
     }
 
     /**

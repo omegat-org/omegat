@@ -161,6 +161,10 @@
                 <filter token="TRANSLATION_NOTICE" value=""/>
             </filterset>
         </copy>
+        <mkdir dir="dist/plugins"/>
+        <copy todir="dist/plugins">
+            <fileset dir="release/plugins-specific"/>
+        </copy>
         <mkdir dir="dist/docs"/>
         <copy todir="dist/docs"> <!-- copy all files except English legalNotices.html -->
             <fileset dir="docs" excludes="en/legalNotices.html"/>

@@ -20,6 +20,7 @@ Source: "docs\*"; DestDir: "{app}\docs"; Flags: recursesubdirs
 Source: "images\*"; DestDir: "{app}\images"; Flags: recursesubdirs
 Source: "lib\*"; DestDir: "{app}\lib"; Flags: recursesubdirs
 Source: "native\*"; DestDir: "{app}\native"; Flags: recursesubdirs
+Source: "plugins\*"; DestDir: "{app}\plugins"; Flags: recursesubdirs
 Source: "OmegaT.exe"; DestDir: "{app}"
 Source: "OmegaT.l4J.ini"; DestDir: "{app}"; Flags: onlyifdoesntexist
 Source: "OmegaT.jar"; DestDir: "{app}"
@@ -52,6 +53,9 @@ Source: "readme*.txt"; DestDir: "{app}";
 Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"
 Source: "changes.txt"; DestDir: "{app}"; Flags: isreadme;
+
+[UninstallDelete]
+Type: filesandordirs; Name: "{app}\plugins\"
 
 [Tasks]
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked

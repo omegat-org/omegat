@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   3 Bugfixes
 ----------------------------------------------------------------------
 2.2.3 update 1 vs. 2.2.3
@@ -12,6 +12,9 @@
   http://sourceforge.net/support/tracker.php?aid=2804745
 
   Other enhancements:
+
+  - Windows installer: changes.txt can be read immediately after the 
+installation
 
   - Hungarian localisation updated to 2.2.3 (UI, documentation, readme)
 

@@ -52,7 +52,7 @@ Source: "readme_zh_TW.txt"; DestDir: "{app}"; Flags: isreadme; Languages: zh_TW
 Source: "readme*.txt"; DestDir: "{app}";
 Source: "join.html"; DestDir: "{app}"
 Source: "index.html"; DestDir: "{app}"
-Source: "changes.txt"; DestDir: "{app}"
+Source: "changes.txt"; DestDir: "{app}"; Flags: isreadme;
 
 [UninstallDelete]
 Type: filesandordirs; Name: "{app}\jre\launch4j-tmp"

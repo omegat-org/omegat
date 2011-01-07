@@ -2,7 +2,7 @@
  OmegaT 2.2.3 update 1
 ----------------------------------------------------------------------
   1 Enhancement
-  2 Bugfixes
+  3 Bugfixes
 ----------------------------------------------------------------------
 2.2.3 update 1 vs. 2.2.3
 
@@ -22,6 +22,9 @@
 
   - On a Mac having both Java 1.5 and 1.6, the Okapi file filter plugin
 prevented OmegaT to run
+
+  - Windows installer overwrites existing OmegaT.I4J.ini
+  http://sourceforge.net/support/tracker.php?aid=3152734
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3

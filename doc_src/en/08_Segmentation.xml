@@ -193,7 +193,7 @@
     dialog. An empty line will appear at the bottom of the upper table (you
     may have to scroll down to see it). Change the name of the rule set and
     the language pattern to the language concerned and its code (see <link
-    linkend="A2.Languages">Appendix B.1 for a list of language codes</link>).
+    linkend="A2.languages">Appendix B.1 for a list of language codes</link>).
     The syntax of the language pattern conforms to regular expression syntax.
     If your set of rules handles a language-country pair, we advise you to
     move it to the top using <emphasis role="bold">Move Up</emphasis>
@@ -202,7 +202,7 @@
     <para>Add the <emphasis role="bold">Before</emphasis> and<emphasis
     role="bold"> After</emphasis> patterns. To check their syntax and their
     applicability, it is advisable to use tools which allow you to see their
-    effect directly. See the chapter on <link linkend="???">Regular
+    effect directly. See the chapter on <link linkend="ch09.regexp">Regular
     expressions</link>. A good starting point are always the existing
     rules.</para>
   </section>

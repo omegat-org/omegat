@@ -898,7 +898,7 @@
         <filename>align.tmx</filename>.</para>
       </section>
 
-      <section id="pseudo.translated.memory">
+      <section id="inst.pseudo.translated.memory">
         <title>Pseudo-translated memory<indexterm class="singular">
             <primary>Translation memories</primary>
 

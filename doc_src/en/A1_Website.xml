@@ -77,10 +77,8 @@
         <secondary>Contributing to OmegaT</secondary>
       </indexterm></title>
 
-    <para>
-      <emphasis role="bold">To contribute to
-      <application>OmegaT</application>:</emphasis>
-    </para>
+    <para><emphasis role="bold">To contribute to
+    <application>OmegaT</application>:</emphasis></para>
 
     <para>first join the <ulink
     url="http://groups.yahoo.com/group/OmegaT/">user group</ulink> (via web or
@@ -92,10 +90,9 @@
     url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@list.sourceforge.net</ulink>
     with "subscribe" as the subject line.</para>
 
-    <para>
-      <emphasis role="bold">To translate <application>OmegaT</application>'s
-      user interface, user manual or other related documents:</emphasis>
-    </para>
+    <para><emphasis role="bold">To translate
+    <application>OmegaT</application>'s user interface, user manual or other
+    related documents:</emphasis></para>
 
     <para>first read <ulink
     url="http://www.omegat.org/en/howtos/localizing_omegat.html">Localizing
@@ -111,17 +108,14 @@
       <secondary>Development, Localizing</secondary>
     </indexterm>
 
-    <para>
-      <emphasis role="bold">To support OmegaT project financially<indexterm class="singular">
+    <para>To support OmegaT project financially<indexterm class="singular">
         <primary>OmegaT on the web</primary>
 
         <secondary>Financial support</secondary>
-      </indexterm>
-      </emphasis>
-    </para>
+      </indexterm></para>
 
-    <para>If you want to donate to support continued development of OmegaT,
-    click on<ulink
+    <para>If you want to donate to support continued development of OmegaT, it
+    will be much appreciated - click on<ulink
     url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99\ LL">
     this link to OmegaT PayPal account</ulink>.</para>
 

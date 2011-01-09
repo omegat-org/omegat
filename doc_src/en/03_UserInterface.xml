@@ -364,6 +364,57 @@
       </indexterm>Options → Restore the main window</guimenuitem> any time to
     return to the original layout.</para>
 
+    <para>The counters in the lower right corner keep track of the progress of
+    the translation (numbers in the left column refer to thge figurew
+    above):</para>
+
+    <table>
+      <title>Main Window - counters<indexterm class="singular">
+          <primary>Windows and panes in OmegaT</primary>
+
+          <secondary>Counters</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60" />
+
+        <tbody>
+          <row>
+            <entry>33/33</entry>
+
+            <entry>number of segments - translated vs total for the current
+            file</entry>
+          </row>
+
+          <row>
+            <entry>2780/2780</entry>
+
+            <entry>number of unique segments - translated vs total in the
+            project</entry>
+          </row>
+
+          <row>
+            <entry>3760</entry>
+
+            <entry>total number of segments (including repeats) in the
+            project</entry>
+          </row>
+
+          <row>
+            <entry>126/127</entry>
+
+            <entry>number of source and target characters in the current
+            segment</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>From the practical point of view, the most important pair of numbers
+    is the second pair: it tells, how much you have done so far, given the
+    total in the second number. The project in the example is evidently
+    finished, as all the unique segments have been translated. </para>
+
     <section id="editor.pane">
       <title>Editor pane<indexterm class="singular">
           <primary>Windows and panes in OmegaT</primary>
@@ -479,11 +530,10 @@
       is highlighted in bold, words that are missing in the segment you
       translate is colored blue and words adjacent to the missing parts green.
       In the above example the source segment is <emphasis
-      role="bold">Information about Java &amp;
-      <application>OmegaT</application></emphasis>. The top match is 75%,
-      because 1 out of 4 words – Information – does not match. The line with
-      the matching percentage also includes the name of the translation memory
-      <indexterm class="singular">
+      role="bold">Duration of exposure &lt;15 min</emphasis>. The top match is
+      60%, because 3 out of 5 words match. The line with the matching
+      percentage also includes the name of the translation memory <indexterm
+          class="singular">
           <primary>Translation memories</primary>
 
           <secondary>Matches</secondary>
@@ -495,6 +545,30 @@
           <secondary>Orphan segments</secondary>
         </indexterm> (the match #4) describe segments in the default project
       translation memory that have no corresponding source segment.</para>
+
+      <para>There's actually three match estimates available (60/60/54 in the
+      case of the top match above). They are defined as follows:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>match percentage when the tokenizer plugin is used (see
+          Appendix <link linkend="Ap5.using.tokenizers.inOmegaT">"Using
+          tokenizers in OmegaT"</link>)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>default OmegaT match - number of matched words - with numerals
+          and tags ignored - divided by the total counf of words</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>OmegaT match, including numbers, tags</para>
+        </listitem>
+      </itemizedlist>
     </section>
 
     <section>

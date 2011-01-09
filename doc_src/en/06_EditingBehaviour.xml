@@ -116,6 +116,21 @@
         <para>The content of the segment target text
         (<filename>target.txt</filename>).</para>
       </listitem>
+
+      <listitem>
+        <para>The text highlighted by the user, when
+        <keycap>Ctrl-Shift-C</keycap> is pressed or <guimenuitem>Edit &gt;
+        Export Selection</guimenuitem> is
+        selected<filename>(selection.txt)</filename></para>
+      </listitem>
     </itemizedlist>
+
+    <para>The content of the files is overwritten either when a new segment is
+    opened (source.txt and target.txt) or when a new selection is exported
+    (selection.txt). The files are unformatted plain-text files. The whole
+    process can be steered and controlled via Tck/Tcl-based scripting. See
+    <ulink url="http://www.omegat.org/en/howtos/text_export.html">Using the
+    OmegaT text export function</ulink> for specifics, examples and
+    suggestions. </para>
   </section>
 </chapter>

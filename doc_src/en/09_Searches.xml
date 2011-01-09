@@ -106,25 +106,28 @@
 
     <para>In both exact and keyword searches, the wild card search characters
     '*' and '?' can be used. To use wild cards, the regular expressions option
-    must not be selected, or these characters will be interpreted as special
-    regular expression characters.</para>
+    should not be selected, because '*' and '?' have special meaning in
+    regulars.</para>
 
     <itemizedlist>
       <listitem>
-        <para>'*' matches zero or more characters. The search term<literal>
-        'run*' </literal>for example would match <literal>'run', 'runs',
-        </literal>and <literal>'running'.</literal></para>
+        <para>'*' matches zero or more characters, from the current position
+        in a given word to its end. The search term<literal> 'run*'
+        </literal>for example would match words <literal>'run', 'runs',
+        </literal>and <literal>'running'. </literal></para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para>'?' matches any single character. For instance, <literal>'run?'
-        </literal>would match<literal> 'runs'</literal> and
-        '<literal>rung'</literal>, but not <literal>'run' </literal>or
+        </literal>would match<literal> the word 'runs'</literal> and
+        '<literal>runn'</literal> in the word
         '<literal>running'.</literal></para>
       </listitem>
     </itemizedlist>
+
+    <para>The matches will be displayed in bold blue. </para>
   </section>
 
   <section id="search.methoids">

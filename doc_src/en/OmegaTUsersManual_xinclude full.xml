@@ -20,7 +20,7 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FileFilters.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FilesAndDirectories.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FilesToTranslate.xml" />
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="06_TranslationEditing.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="06_EditingBehaviour.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_FormattedText.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_PlainText.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_TranslationMemories.xml" />
@@ -36,6 +36,6 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A2_Languages.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A3_Keyboard.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A4_LegalNotices.xml" />
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A5_Using_Lucene_tokenziers_in_OmegaT.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="A5_Using_tokenizers_in_OmegaT.xml" />
   <index></index>
 </book>

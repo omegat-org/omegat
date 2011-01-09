@@ -6,7 +6,7 @@
       <primary>Miscellanea</primary>
     </indexterm></title>
 
-  <section id="omegat.console.mode">
+  <section id="omegat.misc.console.mode">
     <title><application><indexterm class="singular">
         <primary>OmegaT console mode</primary>
 
@@ -29,7 +29,7 @@
     localized in a number of languages. Using the console mode, one can make
     the generation of localized interface a part of the build process.</para>
 
-    <section id="console.mode.prerequisites">
+    <section id="misc.console.mode.prerequisites">
       <title>Prerequisites</title>
 
       <para>To run OmegaT, a valid OmegaT project must be available. The
@@ -63,7 +63,7 @@
       </itemizedlist>
     </section>
 
-    <section id="starting.in.console.mode">
+    <section id="starting.in.misc.console.mode">
       <title>Launching OmegaT in console mode</title>
 
       <para>To launch OmegaT in console mode, additional parameters must be
@@ -117,7 +117,7 @@
       </itemizedlist>
     </section>
 
-    <section id="console.mode.extra.options">
+    <section id="misc.console.mode.extra.options">
       <title>Extra options</title>
 
       <para>One further command-line parameter exists specific to the console

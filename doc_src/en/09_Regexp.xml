@@ -523,7 +523,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="images/RegexTester.png" width="100%" />
+          <imagedata fileref="images/RegexTester.png" />
         </imageobject>
       </mediaobject>
     </figure>

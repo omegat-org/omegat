@@ -109,7 +109,7 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/DictMerriamWebster.png" width="100%" />
+          <imagedata fileref="images/DictMerriamWebster.png" />
         </imageobject>
       </mediaobject>
     </figure>

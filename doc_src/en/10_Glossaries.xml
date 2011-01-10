@@ -40,7 +40,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="../../../OmegaT/doc_src/en/images/Glossary_pane.png" />
+          <imagedata fileref="images/Glossary_pane.png" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -64,7 +64,7 @@
 
       <mediaobject>
         <imageobject>
-          <imagedata fileref="../../../OmegaT/doc_src/en/images/MultiTerm_Glossary.png" />
+          <imagedata fileref="images/MultiTerm_Glossary.png" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -180,7 +180,7 @@
 
     <mediaobject>
       <imageobject role="html">
-        <imagedata fileref="../../../OmegaT/doc_src/en/images/saveglossary.png" />
+        <imagedata fileref="images/saveglossary.png" />
       </imageobject>
     </mediaobject>
 

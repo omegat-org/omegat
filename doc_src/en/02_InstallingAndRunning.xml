@@ -25,7 +25,7 @@
 
         <listitem>
           <para><emphasis role="bold">No / I don't know:</emphasis> download
-          <emphasis>OmegaT_2.2.x_Linux.tar.gz.</emphasis></para>
+          <emphasis>OmegaT_2.2.x_Linux.tar.bz2.</emphasis></para>
 
           <para>This package is bundled with Oracle's Java Runtime
           Environment. This JRE will not interfere with other Java

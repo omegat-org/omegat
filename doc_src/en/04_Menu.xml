@@ -1337,7 +1337,7 @@
             <row>
               <entry>Help files</entry>
 
-              <entry><guibutton>F1</guibutton></entry>
+              <entry><keycap>F1</keycap></entry>
 
               <entry>Displays the <application>OmegaT</application> help files
               in a separate window</entry>

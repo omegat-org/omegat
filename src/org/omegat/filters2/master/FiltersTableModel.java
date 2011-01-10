@@ -29,6 +29,8 @@ import gen.core.filters.Filters;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.table.AbstractTableModel;
 
@@ -44,12 +46,15 @@ import org.omegat.util.OStrings;
 public class FiltersTableModel extends AbstractTableModel {
 
     private final List<Filter> filters;
+    
+    private final Map<String, String> filterNames = new TreeMap<String, String>();
 
     public FiltersTableModel(final Filters config) {
         filters = new ArrayList<Filter>();
         // add only exist filters
         for (Filter f : config.getFilter()) {
             IFilter fi = FilterMaster.getInstance().getFilterInstance(f.getClassName());
+            filterNames.put(f.getClassName(), fi.getFileFormatName());
             if (fi != null) {
                 // filter exist
                 filters.add(f);
@@ -93,8 +98,7 @@ public class FiltersTableModel extends AbstractTableModel {
         Filter filter = filters.get(rowIndex);
         switch (columnIndex) {
         case 0:
-            IFilter f = FilterMaster.getInstance().getFilterInstance(filter.getClassName());
-            return f.getFileFormatName();
+            return filterNames.get(filter.getClassName());
         case 1:
             return new Boolean(filter.isEnabled());
         }

@@ -101,8 +101,8 @@ public class FilterMaster {
     /** Filters config stored in XML file. */
     private Filters config;
 
-    /** Instances of all filter classes. */
-    private List<IFilter> filtersInstances;
+    /** Classes of all filters. */
+    private List<Class<IFilter>> filtersClasses;
 
     static {
         try {
@@ -116,15 +116,8 @@ public class FilterMaster {
      * Create a new FilterMaster.
      */
     private FilterMaster() {
-        filtersInstances = new ArrayList<IFilter>();
-        for (Class<?> c : PluginUtils.getFilterClasses()) {
-            try {
-                filtersInstances.add((IFilter) c.newInstance());
-            } catch (Exception ex) {
-                // error instantiate filter
-                Log.log(ex);
-            }
-        }
+        filtersClasses = new ArrayList<Class<IFilter>>();
+        filtersClasses.addAll((List)PluginUtils.getFilterClasses());
 
         loadConfig();
 
@@ -137,10 +130,10 @@ public class FilterMaster {
      * Adds new filters(which was not exist in config yet) into config.
      */
     private void addNewFiltersToConfig(final Filters conf) {
-        for (IFilter f : filtersInstances) {
+        for (Class<IFilter> fclass : filtersClasses) {
             boolean found = false;
             for (Filter fc : conf.getFilter()) {
-                if (f.getClass().getName().equals(fc.getClassName())) {
+                if (fclass.getName().equals(fc.getClassName())) {
                     // filter already exist in config
                     found = true;
                     break;
@@ -148,7 +141,7 @@ public class FilterMaster {
             }
             if (!found) {
                 // filter not found in config
-                conf.getFilter().add(getDefaultSettingsFromFilter(f.getClass().getName()));
+                conf.getFilter().add(getDefaultSettingsFromFilter(fclass.getName()));
             }
         }
     }
@@ -170,9 +163,13 @@ public class FilterMaster {
      * @return filter instance
      */
     public IFilter getFilterInstance(final String classname) {
-        for (IFilter f : filtersInstances) {
-            if (f.getClass().getName().equals(classname)) {
-                return f;
+        for (Class<IFilter> f : filtersClasses) {
+            if (f.getName().equals(classname)) {
+                try {
+                    return f.newInstance();
+                } catch (Exception ex) {
+                    Log.log(ex);
+                }
             }
         }
         return null;

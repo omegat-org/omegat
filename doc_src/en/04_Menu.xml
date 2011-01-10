@@ -114,7 +114,7 @@
           <row>
             <entry><guimenuitem>Reload</guimenuitem></entry>
 
-            <entry><guibutton>F5</guibutton></entry>
+            <entry><keycap>F5</keycap></entry>
 
             <entry>Reloads the project to take external changes in source
             files, legacy translation memories, glossaries and project

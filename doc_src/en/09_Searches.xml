@@ -18,7 +18,7 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/TextSearch.png" width="100%" />
+          <imagedata fileref="images/TextSearch.png" />
         </imageobject>
       </mediaobject>
     </figure>

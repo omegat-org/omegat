@@ -67,7 +67,7 @@
     list and click on <emphasis role="bold">Options</emphasis>. The available
     options are:</para>
 
-    <para><emphasis role="bold">Filters options</emphasis></para>
+    <para><emphasis role="bold">Text files</emphasis></para>
 
     <itemizedlist>
       <listitem>
@@ -143,53 +143,132 @@
       </listitem>
     </itemizedlist>
 
+    <itemizedlist>
+      <listitem>
+        <para>Presentation notes</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Links (URL)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Sheet names</para>
+      </listitem>
+    </itemizedlist>
+
     <para><emphasis role="bold">Microsoft Office Open XML
     files</emphasis></para>
 
     <para>In case the following elements are presented for translation, they
     will appear as separate segments.</para>
 
+    <para><emphasis role="bold">Word</emphasis></para>
+    
     <itemizedlist>
       <listitem>
-        <para>Hidden text (Word)</para>
+        <para>Non-visible Instruction Text</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Comments (Word, Excel)</para>
+        <para>Comments</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Footnotes (Word)</para>
+        <para>Footnotes</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Endnotes (Word)</para>
+        <para>Endnotes</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Header (Word)</para>
+        <para>Headers</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Footer (Word)</para>
+        <para>Footers</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Excel</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Comments</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Slide comments (PowerPoint)</para>
+        <para>Sheet Names</para>
       </listitem>
     </itemizedlist>
+
+    <para><emphasis role="bold">Power Point</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Slide Comments</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Slide Masters</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Slide Layouts</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Global</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Charts</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Diagrams</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Drawings</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Other Options</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Aggregate tags: </emphasis>If checked, tags without
+ translatable text between them will be aggregated into single tags.</para>
+      </listitem>
+    </itemizedlist>
+
+
   </section>
 
   <section id="edit.filter.dialog">

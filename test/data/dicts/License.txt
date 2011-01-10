@@ -1,0 +1,3 @@
+The latin-francais StarDict dictionary is based on Collatinus and is under the GPL license.
+
+Sources are available from http://www.collatinus.org/collatinus/

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Zoltan Bartko
-               2008 Didier Briel
+               2008-2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -144,7 +144,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         }
 
         // see if there is anything at all
-        uninstallButton.setSelected(!aList.isEmpty());
+        uninstallButton.setEnabled(!aList.isEmpty());
 
         languageList.setModel(languageListModel);
     }

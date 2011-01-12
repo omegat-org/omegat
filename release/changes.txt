@@ -2,7 +2,7 @@
  OmegaT 2.2.3 update 1
 ----------------------------------------------------------------------
   4 Enhancements
-  3 Bugfixes
+  4 Bugfixes
 ----------------------------------------------------------------------
 2.2.3 update 1 vs. 2.2.3
 
@@ -30,6 +30,10 @@ prevented OmegaT to run
 
   - Windows installer overwrites existing OmegaT.I4J.ini
   http://sourceforge.net/support/tracker.php?aid=3152734
+
+  - In the Spell Checking options, the uninstall button was selected
+(pressed) instead of being unabled when the list of dictionaries is 
+empty
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3

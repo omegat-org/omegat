@@ -189,7 +189,7 @@
     <!-- Builds a ZIP distribution -->    
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
-        <zip destfile="dist2/OmegaT_${distversion}.zip">
+        <zip destfile="dist2/OmegaT_${distversion}_Without_JRE.zip">
             <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>
             <zipfileset dir="dist" includes="OmegaT" filemode="755"/>
         </zip>

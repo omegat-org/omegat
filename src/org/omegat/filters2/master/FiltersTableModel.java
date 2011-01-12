@@ -54,10 +54,10 @@ public class FiltersTableModel extends AbstractTableModel {
         // add only exist filters
         for (Filter f : config.getFilter()) {
             IFilter fi = FilterMaster.getInstance().getFilterInstance(f.getClassName());
-            filterNames.put(f.getClassName(), fi.getFileFormatName());
             if (fi != null) {
                 // filter exist
                 filters.add(f);
+                filterNames.put(f.getClassName(), fi.getFileFormatName());
             }
         }
     }

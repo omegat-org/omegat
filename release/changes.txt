@@ -2,7 +2,7 @@
  OmegaT 2.2.3 update 1
 ----------------------------------------------------------------------
   4 Enhancements
-  4 Bugfixes
+  5 Bugfixes
 ----------------------------------------------------------------------
 2.2.3 update 1 vs. 2.2.3
 
@@ -34,6 +34,10 @@ prevented OmegaT to run
   - In the Spell Checking options, the uninstall button was selected
 (pressed) instead of being unabled when the list of dictionaries is 
 empty
+
+  - XHTML and OpenOffice.org filters: unchecking an option (e.g., 
+Translate href, Translate comments) only took effect after quitting
+and restarting OmegaT
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3

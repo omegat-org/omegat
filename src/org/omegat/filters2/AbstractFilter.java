@@ -4,8 +4,9 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2006 Martin Wunderlich
                2009 Alex Buloichik
- Portions Copyright (C) 2006 Martin Wunderlich
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -58,6 +59,7 @@ import org.omegat.util.OStrings;
  * @author Maxym Mykhalchuk
  * @author Martin Wunderlich
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public abstract class AbstractFilter implements IFilter {
 
@@ -80,7 +82,9 @@ public abstract class AbstractFilter implements IFilter {
     /** language "XX" only */
     public static final String TFP_TARGET_LANG_CODE = "${targetLanguageCode}";
     /** country "YY" only */
-    public static final String TFP_TARGET_COUNTRY_CODE = "${targetCoutryCode}";
+    public static final String TFP_TARGET_COUNTRY_CODE = "${targetCountryCode}";
+    /** Old spelling of the variable for country "YY" only */
+    public static final String TFP_TARGET_COUTRY_CODE = "${targetCoutryCode}";
 
     /** All target filename patterns. */
     public static final String[] TARGET_FILENAME_PATTERNS = new String[] { TFP_FILENAME, TFP_NAMEONLY,

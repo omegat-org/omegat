@@ -9,6 +9,8 @@
                2006-2007 Didier Briel
                2008 Martin Fleurke, Didier Briel
                2009 Didier Briel, Arno Peters, Alex Buloichik
+               2010 Alex Buloichik
+               2011 Alex Buloichik, Didier Briel
 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -465,7 +467,7 @@ public class FilterMaster {
      * <li><code>${targetLocale}</code> - target locale code (of a form "xx_YY")
      * <li><code>${targetLanguage}</code> - the target language and country code together (of a form "XX-YY")
      * <li><code>${targetLanguageCode}</code> - the target language only ("XX")
-     * <li><code>${targetCoutryCode}</code> - the target country only ("YY")
+     * <li><code>${targetCountryCode}</code> - the target country only ("YY")
      * </ul>
      * <p>
      * Most file filters will use default "<code>${filename}</code>, that leads to the name of translated file
@@ -522,6 +524,8 @@ public class FilterMaster {
         res = res.replace(AbstractFilter.TFP_TARGET_LANGUAGE, targetLang.getLanguage());
         res = res.replace(AbstractFilter.TFP_TARGET_LANG_CODE, targetLang.getLanguageCode());
         res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang.getCountryCode());
+        // Replace also old variable spelling
+        res = res.replace(AbstractFilter.TFP_TARGET_COUTRY_CODE, targetLang.getCountryCode());
 
         return res;
     }

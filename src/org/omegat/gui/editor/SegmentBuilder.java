@@ -447,9 +447,6 @@ public class SegmentBuilder {
         int prevOffset = offset;
         boolean rtl = controller.targetLangIsRTL;
 
-        insert(createSegmentMarkText(true), ATTR_SEGMENT_MARK);
-        insert(" ", null);
-
         if (hasRTL) {
             insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
         }
@@ -484,7 +481,7 @@ public class SegmentBuilder {
      * @return changed mark text
      */
     private String createSegmentMarkText(boolean startMark) {
-        String text = startMark ? OConsts.segmentStartString : OConsts.segmentEndString;
+        String text = OConsts.segmentStartString;
 
         boolean markIsRTL = localeIsRTL();
 

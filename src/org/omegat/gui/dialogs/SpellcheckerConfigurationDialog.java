@@ -363,6 +363,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
     private void directoryChooserButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_directoryChooserButtonActionPerformed
     // open a dialog box to choose the directory
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+        fileChooser.setDialogTitle(OStrings.getString("GUI_SPELLCHECKER_FILE_CHOOSER_TITLE"));
         int result = fileChooser.showOpenDialog(SpellcheckerConfigurationDialog.this);
         if (result == JFileChooser.APPROVE_OPTION) {
             // we should write the result into the directory text field

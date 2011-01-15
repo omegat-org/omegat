@@ -459,7 +459,6 @@ public class SegmentBuilder {
             insert("\u202c", null); // end of embedding
         }
 
-        insert(" ", null);
         insert(createSegmentMarkText(false), ATTR_SEGMENT_MARK);
 
         insert("\n", null);

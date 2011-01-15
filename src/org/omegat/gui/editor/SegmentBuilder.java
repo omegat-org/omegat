@@ -114,7 +114,8 @@ public class SegmentBuilder {
         this.ste = ste;
         this.segmentNumberInProject = segmentNumberInProject;
 
-        hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL;
+        hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL
+                || controller.currentOrientation != Document3.ORIENTATION.LTR;
     }
 
     /**

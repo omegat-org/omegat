@@ -1,10 +1,15 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 2
 ----------------------------------------------------------------------
-  1 Enhancement
+  2 Enhancements
   1 Bugfix
 ----------------------------------------------------------------------
 2.2.3 update 2 vs. 2.2.3 update 1
+
+  Implemented requests:
+
+  - Do not show "space" in empty segments
+  http://sourceforge.net/support/tracker.php?aid=2169106
 
   Bug fix:
 

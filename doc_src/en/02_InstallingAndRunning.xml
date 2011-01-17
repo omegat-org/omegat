@@ -248,6 +248,64 @@
 # Country 
 -Duser.country=CA </code></literallayout>
     </section>
+
+    <section>
+      <title>Upgrading OmegaT <indexterm class="singular">
+          <primary>Upgrading OmegaT</primary>
+
+          <secondary>Windows</secondary>
+        </indexterm></title>
+
+      <para><emphasis>This information applies only to the "Traditional"
+      Windows versions of OmegaT. It does not apply to the Web Start versions,
+      which are upgraded automatically, nor to cross-platform versions
+      installed on Windows.</emphasis></para>
+
+      <para>If you already have a version of OmegaT installed on your PC and
+      wish to upgrade to a more recent version, you have two options: </para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Install over the existing installation.
+          </emphasis>To do this, simply select the same installation folder as
+          the existing installation when installing the new version. The "old"
+          version of OmegaT will be overwritten, but any settings from it will
+          be retained. This includes preferences set from within OmegaT, any
+          changes you have made to your<filename> OmegaT.l4J.ini</filename>
+          file, and also your launch script (.bat file), if you are using
+          one.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>With this method, you may also download the "Windows without JRE"
+      version, since the new installation will use your existing JRE.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Install to a new folder. </emphasis>This
+          will enable you to keep both versions side-by-side, which you may
+          wish to do until you feel comfortable with the new version. This
+          method will also use preferences and settings you have made from
+          within OmegaT. In this case, however: </para>
+
+          <itemizedlist>
+            <listitem>
+              <para>If you have made changes to your<filename> OmegaT.l4J.ini
+              </filename>file and/or are using a .bat file, you must copy
+              these over. </para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>If your existing OmegaT installation is a "Windows with
+              JRE" version, the new version must also be a "Windows with JRE"
+              version. </para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </section>
   </section>
 
   <section id="MAC.OSX.users">

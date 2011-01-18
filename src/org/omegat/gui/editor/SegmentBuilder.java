@@ -31,6 +31,7 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.swing.SwingUtilities;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.Position;
@@ -460,7 +461,9 @@ public class SegmentBuilder {
             insert("\u202c", null); // end of embedding
         }
 
+        insert("<",ATTR_SEGMENT_MARK);
         insert(createSegmentMarkText(false), ATTR_SEGMENT_MARK);
+        insert(">",ATTR_SEGMENT_MARK);
 
         insert("\n", null);
 
@@ -483,8 +486,19 @@ public class SegmentBuilder {
     private String createSegmentMarkText(boolean startMark) {
         String text = OConsts.segmentStartString;
 
-        boolean markIsRTL = localeIsRTL();
-
+        boolean markIsRTL = false;
+        switch (controller.currentOrientation) {
+        case LTR:
+            markIsRTL = false;
+            break;
+        case RTL:
+            markIsRTL = true;
+            break;
+        case DIFFER:
+            markIsRTL = controller.targetLangIsRTL;
+            break;
+        }
+        
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
         if (text.indexOf("0000") >= 0) {
@@ -526,6 +540,18 @@ public class SegmentBuilder {
     void onActiveEntryChanged() {
         translationText = doc.extractTranslation();
         displayVersion++;
+
+        // fix attributes for edited text, for the removing bold on the active segment border
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    int start = doc.getTranslationStart();
+                    int end = doc.getTranslationEnd();
+                    doc.setCharacterAttributes(start, end - start, attrs(false), true);
+                } catch (Exception ex) {
+                }
+            }
+        });
     }
 
     /**

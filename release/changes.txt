@@ -19,6 +19,7 @@
 dialog (it was just "Open")
 
   - Dutch localisation updated to 2.2.3 (UI)
+  - Japanese localisation updated to 2.2.3 (UI)
 
   - In the File Filter options, one of the filename configuration
 variable was wrongly spelt: ${targetCoutryCode} instead of 

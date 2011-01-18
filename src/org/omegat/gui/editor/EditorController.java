@@ -341,6 +341,8 @@ public class EditorController implements IEditor {
      * Toggle component orientation: LTR, RTL, language dependent.
      */
     protected void toggleOrientation() {
+        commitAndDeactivate();
+        
         Document3.ORIENTATION newOrientation = currentOrientation;
         switch (currentOrientation) {
         case LTR:
@@ -359,8 +361,7 @@ public class EditorController implements IEditor {
         }
         LOGGER.info("Switch document orientation from " + currentOrientation + " to " + newOrientation);
         currentOrientation = newOrientation;
-        // editor.getOmDocument().setOrientation(currentOrientation);
-
+        
         applyOrientationToEditor();
 
         int activeSegment = displayedEntryIndex;

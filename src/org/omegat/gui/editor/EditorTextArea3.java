@@ -45,6 +45,7 @@ import javax.swing.text.BoxView;
 import javax.swing.text.ComponentView;
 import javax.swing.text.Element;
 import javax.swing.text.IconView;
+import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.ParagraphView;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
@@ -80,6 +81,15 @@ public class EditorTextArea3 extends JEditorPane {
         setEditorKit(new StyledEditorKit() {
             public ViewFactory getViewFactory() {
                 return factory3;
+            }
+
+            protected void createInputAttributes(Element element, MutableAttributeSet set) {
+                set.removeAttributes(set);
+                EditorController c = EditorTextArea3.this.controller;
+                try {
+                    c.m_docSegList[c.displayedEntryIndex].createInputAttributes(element, set);
+                } catch (Exception ex) {
+                }
             }
         });
 

@@ -31,9 +31,10 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Locale;
 
-import javax.swing.SwingUtilities;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.Element;
+import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
 
 import org.omegat.core.Core;
@@ -470,6 +471,10 @@ public class SegmentBuilder {
         setAttributes(prevOffset, offset, false);
     }
 
+    void createInputAttributes(Element element, MutableAttributeSet set) {
+        set.addAttributes(attrs(false));
+    }
+
     private void insert(String text, AttributeSet attrs) throws BadLocationException {
         doc.insertString(offset, text, attrs);
         offset += text.length();
@@ -540,18 +545,6 @@ public class SegmentBuilder {
     void onActiveEntryChanged() {
         translationText = doc.extractTranslation();
         displayVersion++;
-
-        // fix attributes for edited text, for the removing bold on the active segment border
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    int start = doc.getTranslationStart();
-                    int end = doc.getTranslationEnd();
-                    doc.setCharacterAttributes(start, end - start, attrs(false), true);
-                } catch (Exception ex) {
-                }
-            }
-        });
     }
 
     /**

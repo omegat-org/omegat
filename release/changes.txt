@@ -1,8 +1,9 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 2
 ----------------------------------------------------------------------
-  4 Enhancements
-  1 Bugfix
+   2 Enhancements
+   1 Bug fix
+   1 Localisation update
 ----------------------------------------------------------------------
 2.2.3 update 2 vs. 2.2.3 update 1
 
@@ -10,8 +11,6 @@
 
   - Do not show "space" in empty segments
   http://sourceforge.net/support/tracker.php?aid=2169106
-
-  Bug fix:
 
   Other enhancements:
 
@@ -21,20 +20,23 @@ segment
   - Give a specific title to the file chooser dialog in the Spellchecker
 dialog (it was just "Open")
 
-  - Dutch localisation updated to 2.2.3 (UI)
-  - Japanese localisation updated to 2.2.3 (UI)
+  Bug fixes:
 
   - In the File Filter options, one of the filename configuration
 variable was wrongly spelt: ${targetCoutryCode} instead of 
 ${targetCountryCode}. Configurations with the old variable name will
 still work.
 
+  Localisation updates:
+
+  - Dutch localisation updated to 2.2.3 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 1
 ----------------------------------------------------------------------
-  4 Enhancements
-  5 Bugfixes
+   3 Enhancements
+   5 Bug fixes
+   1 Localisation update
 ----------------------------------------------------------------------
 2.2.3 update 1 vs. 2.2.3
 
@@ -50,9 +52,7 @@ installation
 
   - Create the "plugins" folder during installation
 
-  - Hungarian localisation updated to 2.2.3 (UI, documentation, readme)
-
-  Bug fix:
+  Bug fixes:
 
   - HTML cryptic error message "StringIndexOutOfBoundsException"
   http://sourceforge.net/support/tracker.php?aid=1653822
@@ -71,11 +71,16 @@ empty
 Translate href, Translate comments) only took effect after quitting
 and restarting OmegaT
 
+  Localisation updates:
+
+  - Hungarian localisation updated to 2.2.3 (UI, documentation, readme)
+
 ----------------------------------------------------------------------
  OmegaT 2.2.3
 ----------------------------------------------------------------------
-  9 Enhancements
-  1 Bugfix
+   4 Enhancements
+   1 Bug fix
+   5 Localisation updates
 ----------------------------------------------------------------------
 2.2.3 vs. 2.2.2 update 1
 
@@ -95,22 +100,25 @@ and restarting OmegaT
 
   - Typo3 l10nmgr File Filter
 
+  Bug fixes:
+
+  - When a paragraph-based TMX was resegmented to sequence mode, the 
+source language rules were used to segment the target paragraph
+
+  Localisation updates:
+
   - Belarusian localisation updated to 2.2.1 update 1 (UI)
   - Italian localisation updated to 2.2.2 update 1 (UI)
   - Catalan localisation updated to 2.2.2 update 1 (UI, Readme, documentation)
   - Dutch localisation updated to 2.2.2 (UI, documentation)
   - Japanese localisation updated to 2.2.3 (UI)
 
-  Bug fix:
-
-  - When a paragraph-based TMX was resegmented to sequence mode, the 
-source language rules were used to segment the target paragraph
-
 ----------------------------------------------------------------------
  OmegaT 2.2.2 update 1
 ----------------------------------------------------------------------
-  0 Enhancement
-  1 Bugfix
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update   
 ----------------------------------------------------------------------
 2.2.2 update 1 vs. 2.2.2
 
@@ -122,8 +130,9 @@ to XML entities in the target document
 ----------------------------------------------------------------------
  OmegaT 2.2.2
 ----------------------------------------------------------------------
-  5 Enhancements
-  2 Bugfixes
+   2 Enhancements
+   2 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.2.2 vs. 2.2.1
 
@@ -134,7 +143,7 @@ to XML entities in the target document
 
   - Partial support for StarDict dictionaries with sametypesequence=x
 
-  Other enhancements:
+  Localisation updates:
 
   - Japanese localisation updated to 2.2.2 (UI)
   - Italian localisation updated to 2.2.1 (UI, documentation)
@@ -148,12 +157,13 @@ to XML entities in the target document
 ----------------------------------------------------------------------
  OmegaT 2.2.1 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
-  1 Bugfix
+   0 Enhancement
+   1 Bug fix
+   1 Localisation update
 ----------------------------------------------------------------------
 2.2.1 update 1 vs. 2.2.1
 
-  Other enhancements:
+  Localisation updates:
 
   - Japanese localisation updated to 2.2.1 (UI)
 
@@ -168,8 +178,9 @@ didn't appear in bold.
 ----------------------------------------------------------------------
  OmegaT 2.2.1
 ----------------------------------------------------------------------
-  9 Enhancements
-  3 Bugfixes
+   4 Enhancements
+   3 Bug fixes
+   5 Localisation updates
 ----------------------------------------------------------------------
 2.2.1 vs. 2.2.0 update 4
 
@@ -183,12 +194,6 @@ didn't appear in bold.
 
   Other enhancements:
 
-  - Italian localisation updated to 2.2.0 (UI, Readme, documentation)
-  - Basque localisation updated to 2.2.0 (UI, Readme, documentation)
-  - Dutch localisation updated to 2.2.0 (UI, Readme, documentation)
-  - Japanese localisation updated to 2.2.0 (UI)
-  - Belarusian localisation updated to 2.1.0 (UI)
-
   - The Open XML Word option "Hidden Text" as been renamed to
 "Non-visible Instruction Text" to avoid confusion with the "Hidden effect"
 or "Hidden attribute" in Word.
@@ -196,6 +201,14 @@ or "Hidden attribute" in Word.
   - When Display Source Segments is used, a new option (Options > View)
 allows to set whether all source segments are bold (as previously), or
 only the current one.
+
+  Localisation updates:
+
+  - Italian localisation updated to 2.2.0 (UI, Readme, documentation)
+  - Basque localisation updated to 2.2.0 (UI, Readme, documentation)
+  - Dutch localisation updated to 2.2.0 (UI, Readme, documentation)
+  - Japanese localisation updated to 2.2.0 (UI)
+  - Belarusian localisation updated to 2.1.0 (UI)
 
   Bug fixes:
 
@@ -211,18 +224,21 @@ characters.
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 4 
 ----------------------------------------------------------------------
-  3 Enhancements
-  2 Bugfixes
+   1 Enhancement
+   2 Bug fixes
+   2 Localisation updates 
 ----------------------------------------------------------------------
 2.2.0 update 4 vs. 2.2.0 update 3
 
   Other enhancements:
 
-  - Russian localisation updated to 2.2.0 (UI, Instant Start, Readme)
-  - Swedish localisation updated to 2.2.0 (UI, Instant Start, Readme)
-
   - The options of the Open XML filter have been reorganised because 
 some options (e.g., Diagrams) apply to all the documents.
+
+  Localisation updates:
+  
+  - Russian localisation updated to 2.2.0 (UI, Instant Start, Readme)
+  - Swedish localisation updated to 2.2.0 (UI, Instant Start, Readme)
 
   Bug fixes:
 
@@ -235,8 +251,9 @@ translation
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 3 
 ----------------------------------------------------------------------
-  5 Enhancements
-  0 Bugfix
+   3 Enhancements
+   0 Bug fix
+   2 Localisation update
 ----------------------------------------------------------------------
 2.2.0 update 3 vs. 2.2.0 update 2
 
@@ -247,25 +264,24 @@ translation
 
   Other enhancements:
 
-  - Polish localisation updated to 2.1.3 (UI, Instant Start, Readme, documentation)
-  - Brazilian Portuguese localisation updated to 2.2.0 (UI, Instant Start, Readme)
-
   - Hunspell updated to 1.2.12
 
   - The "HTML and XHTML files segmentation" segmentation rule has been renamed 
 to "HTML, XHTML and ODF segmentation"
 
+  Localisation updates:
+  
+  - Polish localisation updated to 2.1.3 (UI, Instant Start, Readme, documentation)
+  - Brazilian Portuguese localisation updated to 2.2.0 (UI, Instant Start, Readme)
+
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 2 
 ----------------------------------------------------------------------
-  1 Enhancement
-  2 Bugfixes
+   0 Enhancement
+   2 Bug fixes
+   1 Localisation update
 ----------------------------------------------------------------------
 2.2.0 update 2 vs. 2.2.0 update 1
-
-  Other enhancements:
-
-  - Italian localisation updated to 2.2.0 update 1 (UI, Instant Start, Readme, documentation)
 
   Bug fixes:
 
@@ -275,11 +291,16 @@ characters. This applied also to the HTML Help Compiler Filter.
   - MT using Google fails to give results in Traditional Chinese
   http://sourceforge.net/support/tracker.php?aid=3086757
 
+  Localisation updates:
+
+  - Italian localisation updated to 2.2.0 update 1 (UI, Instant Start, Readme, documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.2.0 update 1 
 ----------------------------------------------------------------------
-  4 Enhancements
-  1 Bugfix
+   1 Enhancement
+   1 Bug fix
+   3 Localisation updates
 ----------------------------------------------------------------------
 2.2.0 update 1 vs. 2.2.0
 
@@ -288,22 +309,23 @@ characters. This applied also to the HTML Help Compiler Filter.
   - Make the number of search results a parameter
   http://sourceforge.net/support/tracker.php?aid=3084009
 
-  Other enhancements:
-
-  - Galician localisation updated to 2.1.9 (UI, Instant Start, Readme)
-  - Italian localisation updated to 2.2.0 (UI, Instant Start, Readme)
-  - Japanese localisation updated to 2.2.0 (UI, Instant Start, Readme, 2.0.5 documentation)
-
   Bug fixes:
 
   - XML, wrong handling of comments and PI in translatable text
   http://sourceforge.net/support/tracker.php?aid=1662205
 
+  Localisation updates:
+
+  - Galician localisation updated to 2.1.9 (UI, Instant Start, Readme)
+  - Italian localisation updated to 2.2.0 (UI, Instant Start, Readme)
+  - Japanese localisation updated to 2.2.0 (UI, Instant Start, Readme, 2.0.5 documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.2.0 
 ----------------------------------------------------------------------
-  1 Enhancement
-  3 Bugfixes
+   1 Enhancement
+   3 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
 2.2.0 vs. 2.1.9
 
@@ -327,16 +349,11 @@ of unfiltered results
 ----------------------------------------------------------------------
  OmegaT 2.1.9
 ----------------------------------------------------------------------
-  3 Enhancements
-  4 Bugfixes
+   0 Enhancement
+   4 Bug fixes
+   3 Localisation updates
 ----------------------------------------------------------------------
 2.1.9 vs. 2.1.8 update 1
-
-  Other enhancements:
-
-  - Swedish localisation updated to 2.1.8 (UI, Readme)
-  - Italian localisation updated to 2.1.8 (UI, Readme, Instant Start)
-  - Dutch localisation updated to 2.1.8 (UI, Readme, Instant Start, documentation)
 
   Bug fixes:
 
@@ -350,11 +367,18 @@ of unfiltered results
   - Very slow editor with Java 1.6 on a Mac
   http://sourceforge.net/support/tracker.php?aid=3070076
 
+  Localisation updates:
+
+  - Swedish localisation updated to 2.1.8 (UI, Readme)
+  - Italian localisation updated to 2.1.8 (UI, Readme, Instant Start)
+  - Dutch localisation updated to 2.1.8 (UI, Readme, Instant Start, documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.1.8 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
-  1 Bugfix
+   1 Enhancement
+   1 Bug fix
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.8 update 1 vs. 2.1.8
 
@@ -369,8 +393,9 @@ of unfiltered results
 ----------------------------------------------------------------------
  OmegaT 2.1.8 
 ----------------------------------------------------------------------
-  3 Enhancements
-  0 Bugfix
+   1 Enhancement
+   0 Bug fix
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.1.8 vs. 2.1.7 update 3
 
@@ -379,7 +404,7 @@ of unfiltered results
   - Aggregate OpenXML tags
   http://sourceforge.net/support/tracker.php?aid=3036227
 
-  Other enhancements:
+  Localisation updates:
 
   - Italian localisation updated to 2.1.7 (UI, Readme, Instant Start)
   - Spanish localisation updated to 2.1.7 (UI, Readme, Instant Start, documentation)
@@ -387,8 +412,9 @@ of unfiltered results
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 3
 ----------------------------------------------------------------------
-  2 Enhancements
-  5 Bugfixes
+   2 Enhancements
+   5 Bug fixes
+   0 Localisation update  
 ----------------------------------------------------------------------
 2.1.7 update 3 vs. 2.1.7 update 2
 
@@ -424,14 +450,13 @@ translator.
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2
 ----------------------------------------------------------------------
-  2 Enhancements
-  1 Bugfix
+   1 Enhancement
+   1 Bug fix
+   1 Localisation update
 ----------------------------------------------------------------------
 2.1.7 update 2 vs. 2.1.7 update 1
 
   Other enhancements:
-
-  - Japanese localisation updated to 2.1.x (UI, Readme, Instant Start)
 
   - When a project is empty, the message mentions the documentation
 on supported file formats
@@ -440,11 +465,16 @@ on supported file formats
 
   - In some circumstances, the search results could be all highlighted
 
+  Localisation updates
+  
+  - Japanese localisation updated to 2.1.x (UI, Readme, Instant Start)
+
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 1
 ----------------------------------------------------------------------
-  3 Enhancements
-  2 Bugfixes
+   1 Enhancement
+   2 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.1.7 update 1 vs. 2.1.7
 
@@ -453,11 +483,6 @@ on supported file formats
   - Highlight search results
   http://sourceforge.net/support/tracker.php?aid=2956986
 
-  Other enhancements:
-
-  - Danish localisation updated to 2.1.x (UI, Readme, Instant Start)
-  - Czech localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
-  
   Bug fixes:
 
   - Some search options widgets do not set focus to Search field
@@ -466,11 +491,17 @@ on supported file formats
   - Search window - search items containing $ behave strangely
   http://sourceforge.net/support/tracker.php?aid=3021915
 
+  Localisation updates:
+
+  - Danish localisation updated to 2.1.x (UI, Readme, Instant Start)
+  - Czech localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.1.7
 ----------------------------------------------------------------------
-  8 Enhancements
-  2 Bugfixes
+   6 Enhancements
+   2 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.1.7 vs. 2.1.6
 
@@ -493,9 +524,6 @@ on supported file formats
 
   - Various enhancements in the manual
 
-  - Catalan localisation updated to 2.1.4 (UI, Readme, Instant Start, documentation)
-  - Hungarian localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
-
   Bug fixes:
 
   - Project Files list not sorted on some systems
@@ -504,11 +532,17 @@ on supported file formats
   - Cursor jumps to end of selection during Shift+left
   http://sourceforge.net/support/tracker.php?aid=3006297
 
+  Localisation updates:
+  
+  - Catalan localisation updated to 2.1.4 (UI, Readme, Instant Start, documentation)
+  - Hungarian localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.1.6
 ----------------------------------------------------------------------
-  2 Enhancements
-  2 Bugfixes
+   2 Enhancements
+   2 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.6 vs. 2.1.5 update 1
 
@@ -531,8 +565,9 @@ in some circumstances
 ----------------------------------------------------------------------
  OmegaT 2.1.5 update 1
 ----------------------------------------------------------------------
-  1 Enhancement
-  2 Bugfixes
+   1 Enhancement
+   2 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.5 update 1 vs. 2.1.5
 
@@ -551,8 +586,9 @@ in some circumstances
 ----------------------------------------------------------------------
  OmegaT 2.1.5
 ----------------------------------------------------------------------
-  3 Enhancements
-  1 Bugfix
+   3 Enhancements
+   1 Bug fix
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.5 vs. 2.1.4 update 1
 
@@ -577,8 +613,9 @@ For explanations, see Searches in the English documentation
 ----------------------------------------------------------------------
  OmegaT 2.1.4 update 1
 ----------------------------------------------------------------------
-  6 Enhancements
-  6 Bugfixes
+   6 Enhancements
+   6 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.4 update 1 vs. 2.1.4
 
@@ -625,8 +662,9 @@ codes were entered in lowercase
 ----------------------------------------------------------------------
  OmegaT 2.1.4 
 ----------------------------------------------------------------------
-  7 Enhancements
-  4 Bugfixes
+   7 Enhancements
+   4 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.4 vs. 2.1.3
 
@@ -671,8 +709,9 @@ recognised
 ----------------------------------------------------------------------
  OmegaT 2.1.3 
 ----------------------------------------------------------------------
-  6 Enhancements
-  4 Bugfixes
+   6 Enhancements
+   4 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.3 vs. 2.1.2
 
@@ -707,12 +746,12 @@ recognised
   - Missings paragraphs after an out of turn tag
   http://sourceforge.net/support/tracker.php?aid=2954272
 
-
 ----------------------------------------------------------------------
  OmegaT 2.1.2 
 ----------------------------------------------------------------------
- 15 Enhancements
-  4 Bugfixes
+  13 Enhancements
+   4 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.1.2 vs. 2.1.1
 
@@ -755,9 +794,6 @@ Ctrl+X, Ctrl+C and Ctrl+V.
 
   - Display the tokenizer used on startup in the console
 
-  - Catalan localisation updated to 2.1.1 (UI, Readme, Instant Start, documentation)
-  - New Swedish localisation (2.1.0) (UI, Readme, Instant Start)
-  
   Bug fixes:
 
   - When the project was reloaded after pressing OK in Project Properties,
@@ -773,11 +809,17 @@ set in Editing Behaviour, the previous segment was entered as translation.
   - In search: '?' would find 0 or 1 character, while search instructions 
 clearly state that it should find 1 character, which is now the case
 
+  Localisation updates:
+  
+  - Catalan localisation updated to 2.1.1 (UI, Readme, Instant Start, documentation)
+  - New Swedish localisation (2.1.0) (UI, Readme, Instant Start)
+
 ----------------------------------------------------------------------
  OmegaT 2.1.1
 ----------------------------------------------------------------------
-  8 Enhancements
-  6 Bugfixes
+   8 Enhancements
+   6 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.1 vs. 2.1.0
 
@@ -829,8 +871,9 @@ as a repetition in Match Statistics
 ----------------------------------------------------------------------
  OmegaT 2.1.0
 ----------------------------------------------------------------------
-  2 Enhancements
-  0 Bugfix
+   2 Enhancements
+   0 Bug fix
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.0 vs. 2.0.5
 
@@ -844,20 +887,21 @@ as a repetition in Match Statistics
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 4
-  1 Enhancement
-  0 Bugfix
+   0 Enhancement
+   0 Bug fix
+   1 Localisation update
 ----------------------------------------------------------------------
 2.0.5 update 4 vs. 2.0.5 update 3
 
-  Other enhancements:
+  Localisation updates:
   - New Galician localisation (UI, Readme, Instant Start)
   (backported from 2.1.4)
 
-
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 3
-  4 Enhancements
-  4 Bugfixes
+   2 Enhancements
+   4 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.0.5 update 3 vs. 2.0.5 update 2
 
@@ -868,11 +912,6 @@ as a repetition in Match Statistics
 
   - Define Uyghur as RTL
   http://sourceforge.net/support/tracker.php?aid=2970467
-
-  Other enhancements:
-  - Russian localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
-  - Simplified Chinese localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
-    (backported from 2.1.x)
 
   Bug Fixes:
 
@@ -886,14 +925,21 @@ as a repetition in Match Statistics
 
   - Various corrections in the manual
 
+  Localisation updates:
+  
+  - Russian localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
+  - Simplified Chinese localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
+    (backported from 2.1.x)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 2
-  7 Enhancements
-  0 Bugfix
+   0 Enhancement
+   0 Bug fix
+   7 Localisation updates
 ----------------------------------------------------------------------
 2.0.5 update 2 vs. 2.0.5 update 1
 
-  Other enhancements:
+  Localisation updates:
   - Basque localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
   - Welsh localisation updated to 2.0.5 (UI, Readme, Instant Start)
   - Catalan localisation updated to 2.0.5, backported from 2.1.1 (UI, Readme, Instant Start, documentation)
@@ -905,8 +951,9 @@ as a repetition in Match Statistics
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 1
 ----------------------------------------------------------------------
-  7 Enhancements
-  6 Bugfixes
+   5 Enhancements
+   6 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.0.5 update 1 vs. 2.0.5
 
@@ -917,9 +964,6 @@ as a repetition in Match Statistics
 
   Other enhancements:
 
-  - Turkish localisation updated to 2.0.5 (UI, Readme, Instant Start)
-  - Slovenian localisation updated to 2.0.5 (documentation)
-  
   - Change pseudo-translated TMX parameter and documentation
 
   - Hunspell for Linux 64-bit updated to 1.2.8
@@ -945,11 +989,17 @@ a space
   - Spanish exception rule error
   http://sourceforge.net/support/tracker.php?aid=2939781
 
+  Localisation updates:
+
+  - Turkish localisation updated to 2.0.5 (UI, Readme, Instant Start)
+  - Slovenian localisation updated to 2.0.5 (documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.5
 ----------------------------------------------------------------------
-  2 Enhancements
-  0 Bugfix
+   2 Enhancements
+   0 Bug fix
+   0 Localisation update
 ----------------------------------------------------------------------
 2.0.5 vs. 2.0.4 update 1
 
@@ -963,34 +1013,35 @@ a space
 ----------------------------------------------------------------------
  OmegaT 2.0.4 update 1
 ----------------------------------------------------------------------
-  3 Enhancements
-  1 Bugfix
+   1 Enhancement
+   1 Bug fix
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.0.4 update 1 vs. 2.0.4
-
 
   Implemented requests:
 
   - Read existing translations from source PO documents
   http://sourceforge.net/support/tracker.php?aid=2862687
 
-  Other enhancements:
-  - German localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
-  - Japanese localisation updated to 2.0.4 (UI, Instant Start)
-
   Bug Fixes:
 
   - PO: bad handling of already translated strings
   http://sourceforge.net/support/tracker.php?aid=1899440
 
+  Localisation updates:
+  
+  - German localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
+  - Japanese localisation updated to 2.0.4 (UI, Instant Start)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.4
 ----------------------------------------------------------------------
-  3 Enhancements
-  0 Bugfix
+   3 Enhancements
+   0 Bug fix
+   0 Localisation update
 ----------------------------------------------------------------------
 2.0.4 vs. 2.0.3 update 2
-
 
   Implemented requests:
 
@@ -1007,37 +1058,38 @@ a space
 ----------------------------------------------------------------------
  OmegaT 2.0.3 update 2
 ----------------------------------------------------------------------
-  4 Enhancements
-  2 Bugfixes
+   1 Enhancements
+   2 Bug fixes
+   3 Localisation updates
 ----------------------------------------------------------------------
 2.0.3 update 2 vs. 2.0.3 update 1
-
 
   Implemented requests:
 
   - Provide a Java Web Start version
   http://sourceforge.net/support/tracker.php?aid=1793300
 
-  Other enhancements:
-
-  - Belarusian localisation updated to 2.0.3 (UI)
-  - Dutch localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
-  - Catalan localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
-
   Bug Fixes:
 
   - A double click on the last segment was sending to the first one
   - OmegaT was only getting the first meaning in StarDict format
 
+  Localisation updates:
+
+  - Belarusian localisation updated to 2.0.3 (UI)
+  - Dutch localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
+  - Catalan localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.3 update 1
 ----------------------------------------------------------------------
-  3 Enhancements
-  0 Bugfix
+   0 Enhancement
+   0 Bug fix
+   3 Localisation updates
 ----------------------------------------------------------------------
 2.0.3 update 1 vs. 2.0.3
 
-  Other enhancements:
+  Localisation updates:
 
   - Japanese localisation updated to 2.0.3 (UI, Instant Start)
   - German localisation updated to 2.0.3 (UI, Instant Start, Readme)
@@ -1046,8 +1098,9 @@ a space
 ----------------------------------------------------------------------
  OmegaT 2.0.3
 ----------------------------------------------------------------------
-  5 Enhancements
-  1 Bugfix
+   4 Enhancements
+   1 Bug fix
+   1 Localisation update
 ----------------------------------------------------------------------
 2.0.3 vs. 2.0.2 update 1
 
@@ -1069,27 +1122,23 @@ the root of /glossary.
   - New index of documentations at the root of the /docs folder, identical
 to the one obtained in OmegaT.
 
-  - Dutch localisation updated to 2.0.2 (UI, Instant Start, Readme, Documentation)
-
   Bug Fixes:
 
   - "Unable to read project file!" after creating a new project
   http://sourceforge.net/support/tracker.php?aid=2796271
 
+  Localisation updates:
+  
+  - Dutch localisation updated to 2.0.2 (UI, Instant Start, Readme, Documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.2 update 1
 ----------------------------------------------------------------------
-2.0.2 update 1 vs. 2.0.2
-
-  2 Enhancements
-  2 Bugfixes
+   0 Enhancement
+   2 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
-2.0.2 update 1
-
-  Other enhancements:
-
-  - Slovenian localisation updated to 2.0.1 (UI, readme)
-  - Japanese localisation updated to 2.0.2 (UI, Instant Start)
+2.0.2 update 1 vs. 2.0.2
 
   Bug Fixes:
 
@@ -1098,15 +1147,19 @@ to the one obtained in OmegaT.
   - The Enter/Return key was creating a new line when Use TAB to Advance
 was checked
 
+  Localisation updates:
+
+  - Slovenian localisation updated to 2.0.1 (UI, readme)
+  - Japanese localisation updated to 2.0.2 (UI, Instant Start)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.2
 ----------------------------------------------------------------------
-2.0.2 vs. 2.0.1
-
-  10 Enhancements
-   9 Bugfixes
+   9 Enhancements
+   9 Bug fixes
+   1 Localisation update
 ----------------------------------------------------------------------
-2.0.2
+2.0.2 vs. 2.0.1
 
   Implemented requests:
 
@@ -1143,8 +1196,6 @@ which has now three states:
 
   - Update of some user interface texts for clarification purposes
 
-  - Spanish localisation updated to 2.0.1 (UI, readme, instant start)
-
   Bug Fixes:
 
   - Glossary: unclear display if combined entries contain a ","
@@ -1177,16 +1228,18 @@ of " +"
   - The SkipMeta option in the HTML and XHTML filters was not initialised to
 the default value
 
+  Localisation update:
+  
+  - Spanish localisation updated to 2.0.1 (UI, readme, instant start)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.1
 ----------------------------------------------------------------------
-2.0.1 vs. 2.0.0 update 1
-
-  9 Enhancements
-  1 Bugfix
-
+   8 Enhancements
+   1 Bug fix
+   1 Localisation update
 ----------------------------------------------------------------------
-2.0.1
+2.0.1 vs. 2.0.0 update 1
 
   Implemented requests:
 
@@ -1216,23 +1269,23 @@ and copied to the clipboard.
 
   - Ctrl+F uses the selection even outside the current target segment
 
-  - Slovenian localisation updated to 2.0 (readme)
-
   Bug Fixes:
 
   - Fix for detection of printf-variables with index specifier
   (for feature http://sourceforge.net/support/tracker.php?aid=2371713)
 
+  Localisation updates :
+  
+  - Slovenian localisation updated to 2.0 (readme)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.0 update 1 Changes
 ----------------------------------------------------------------------
-2.0.0 update 1 vs. 2.0.0
-
-  8 Enhancements
-  1 Bugfix
-
+   5 Enhancements
+   1 Bug fix
+   3 Localisation updates
 ----------------------------------------------------------------------
-2.0.0 update 1
+2.0.0 update 1 vs. 2.0.0
 
   Implemented requests:
   - Extra checks in TagValidator for PO linefeed
@@ -1264,27 +1317,26 @@ steps of matching:
 2 Without stemming
 3 Taking everything into account (tags, numbers, punctuation)
 
-  - Japanese localisation updated to 2.0 (UI)
-  - Basque localisation updated to 2.0 (UI)
-  - Slovenian localisation updated to 2.0 (UI)
-
   Bugs fixes:
 
   - Spellcheck EN-US: incorrect handling of hyphenated compounds
   http://sourceforge.net/support/tracker.php?aid=1815736
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
+  Localisation updates:
+  
+  - Japanese localisation updated to 2.0 (UI)
+  - Basque localisation updated to 2.0 (UI)
+  - Slovenian localisation updated to 2.0 (UI)
+
 ----------------------------------------------------------------------
  OmegaT 2.0.0 Changes
 ----------------------------------------------------------------------
-2.0.0 vs. 1.8.1
-
-
-  14 Enhancements
-  0  Bugfix
-
+  13 Enhancements
+   0  Bug fix
+   1 Localisation
 ----------------------------------------------------------------------
-2.0.0
+2.0.0 vs. 1.8.1
 
   Implemented requests:
 
@@ -1330,59 +1382,53 @@ can be applied or not with a new option in Options/Font.
 
   - OpenXML filter: New option to translate slide masters in PowerPoint documents
 
+  Localisation updates:
+  
   - French localisation updated to 2.0 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 7 Changes
 ----------------------------------------------------------------------
+   0 Enhancement
+   0 Bug fix
+   1 Localisation update
+----------------------------------------------------------------------
 1.8.1 update 7 vs. 1.8.1 update 6
 
-   1 Enhancement
-   0 Bugfix
-
-----------------------------------------------------------------------
-1.8.1 update 7
-
-  Other enhancements:
+  Localisation updates:
 
   - Spanish localisation updated to 1.8 (Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 6 Changes
 ----------------------------------------------------------------------
+   1 Enhancement
+   1 Bug fix
+   1 Localisation update 
+----------------------------------------------------------------------
 1.8.1 update 6 vs. 1.8.1 update 5
 
-   2 Enhancements
-   1 Bugfix
+  Other enhancements:
 
-----------------------------------------------------------------------
-1.8.1 update 6
+  - The Linux package (with JRE) is now compressed with bz2 instead of gz
 
   Bug fixes:
 
   - Windows: project's absolute paths are displayed with /
   http://sourceforge.net/support/tracker.php?aid=2826624
 
-  Other enhancements:
+  Localisation updates:
 
-  - The Linux package (with JRE) is now compressed with bz2 instead of gz
   - German localisation updated to 1.8 (UI, Instant Start, Readme, backported from 2.0.3)
 
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 5 Changes
 ----------------------------------------------------------------------
-1.8.1 update 5 vs. 1.8.1 update 4
-
-   2 Enhancements
-   2 Bugfixes
-
+   0 Enhancement
+   2 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
-1.8.1 update 5
-
-  Other enhancements:
-
-  - Russian documentation updated to 1.8 (UI, Instant Start, readme, documentation)
-  - Dutch localisation updated to 1.8 (Documentation)
+1.8.1 update 5 vs. 1.8.1 update 4
 
   Bug fixes:
 
@@ -1391,15 +1437,19 @@ can be applied or not with a new option in Options/Font.
 
   - XLIFF filter: the content of <seg-source> was visible
 
+  Localisation updates:
+
+  - Russian documentation updated to 1.8 (UI, Instant Start, readme, documentation)
+  - Dutch localisation updated to 1.8 (Documentation)
+
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 4 Changes
 ----------------------------------------------------------------------
-1.8.1 update 4 vs. 1.8.1 update 3
-
    0 Enhancement
-   4 Bugfixes
+   4 Bug fixes
+   0 Localisation
 ----------------------------------------------------------------------
-1.8.1 update 4
+1.8.1 update 4 vs. 1.8.1 update 3
 
   Bug fixes:
 
@@ -1420,8 +1470,9 @@ translatable content
 ----------------------------------------------------------------------
 1.8.1 update 3 vs. 1.8.1 update 2
 
-   4 Enhancements
-   3 Bugfixes
+   3 Enhancements
+   3 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
 1.8.1 update 3
 
@@ -1434,8 +1485,6 @@ translatable content
 
   Other enhancements:
 
-  - New Welsh localisation (UI, readme, instant start)
-  - czech localisation updated to 1.8 (UI, readme, instant start, documentation)
   - Hunspell for Mac and Linux-i386 is updated to 1.2.8
   - Hunspell for Windows is updated to 1.2.7
 
@@ -1450,22 +1499,24 @@ translatable content
   - Linux: Exception on reading omegat/learned_words.txt
   http://sourceforge.net/support/tracker.php?aid=2657589
 
+  Localisation updates:
+  
+  - New Welsh localisation (UI, readme, instant start)
+  - czech localisation updated to 1.8 (UI, readme, instant start, documentation)
+
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 2 Changes
 ----------------------------------------------------------------------
-1.8.1 update 2 vs. 1.8.1 update 1
-
    2 Enhancements
-   3 Bugfixes
+   3 Bug fixes
+   0 Localisation update   
 ----------------------------------------------------------------------
-1.8.1 update 2
+1.8.1 update 2 vs. 1.8.1 update 1
 
   Other enhancements:
 
   Windows: Various corrections and enhancements to OmegaT.exe (the OmegaT
 launcher), based on version 3.0.1 of Launch4J.
-
-  - Slovenian localisation updated to 1.8 (readme, instant start, documentation)
 
   Bug fixes:
 
@@ -1478,25 +1529,23 @@ launcher), based on version 3.0.1 of Launch4J.
   - Spellcheck: words added to dictionary lost after restart
   http://sourceforge.net/support/tracker.php?aid=1819355
 
+  Localisation updates:
+  
+  - Slovenian localisation updated to 1.8 (readme, instant start, documentation)
+
 ----------------------------------------------------------------------
  OmegaT 1.8.1 update 1 Changes
 ----------------------------------------------------------------------
-1.8.1 update 1 vs. 1.8.1
-
-   3 Enhancements
-   4 Bugfixes
+   1 Enhancement
+   4 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
-1.8.1 update 1
+1.8.1 update 1 vs. 1.8.1
 
   Implemented requests:
 
   - PO: transform \t to tabs and back
   http://sourceforge.net/support/tracker.php?aid=2120936
-
-  Other enhancements:
-
-  - Japanese localisation updated to 1.8 (UI)
-  - Slovenian localisation updated to 1.8 (UI)
 
   Bug fixes:
 
@@ -1511,13 +1560,19 @@ launcher), based on version 3.0.1 of Launch4J.
   The change might require to revalidate the translation for some existing
 segments
 
+  Localisation updates:
+
+  - Japanese localisation updated to 1.8 (UI)
+  - Slovenian localisation updated to 1.8 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 1.8.1 Changes
+----------------------------------------------------------------------
+   4 Enhancements
+   1 Bug fixe
+   4 Localisation updates
 ----------------------------------------------------------------------
 1.8.1 vs. 1.8.0 update 2
-
-   8 Enhancements
-   1 Bugfixe
-----------------------------------------------------------------------
-1.8.1
 
   Implemented requests:
 
@@ -1533,11 +1588,6 @@ segments
 
   - The xml:lang attribute can be translated with the HTML filter
 
-  - Slovak localisation updated to 1.8 (UI)
-  - Dutch localisation updated to 1.8 (UI, readme)
-  - Czech localisation updated to 1.8 (UI, readme)
-  - Serbo-Croatian localisation updated to 1.8 (UI, readme)
-
   Bug fixes:
 
   - Extra space in each segment in the German localization
@@ -1546,22 +1596,26 @@ segments
   - Vista: wrong location of configuration files
   http://sourceforge.net/support/tracker.php?aid=2200872
 
+  Localisation updates:
+  
+  - Slovak localisation updated to 1.8 (UI)
+  - Dutch localisation updated to 1.8 (UI, readme)
+  - Czech localisation updated to 1.8 (UI, readme)
+  - Serbo-Croatian localisation updated to 1.8 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 2 Changes
 ----------------------------------------------------------------------
-1.8.0 update 2 vs. 1.8.0 update 1
-
-   3 Enhancements
-   4 Bugfixes
+   2 Enhancements
+   4 Bug fixes
+   1 Localisation update
 ----------------------------------------------------------------------
-1.8.0 update 2
+1.8.0 update 2 vs. 1.8.0 update 1
 
   Other enhancements:
 
   - Spellchecking dialogs now have a title
   - Non-breaking spaces are trimmed from translatable text
-  - Catalan localisation updated to 1.8 (UI)
 
   Bug fixes:
 
@@ -1576,19 +1630,20 @@ segments
   - Non-ascii char badly handled in hunspell lib loading on OS-X
   http://sourceforge.net/support/tracker.php?aid=1862199
 
+  Localisation updates:
+  
+  - Catalan localisation updated to 1.8 (UI)
+
 ----------------------------------------------------------------------
  OmegaT 1.8.0 update 1 Changes
 ----------------------------------------------------------------------
+   0 Enhancement
+   0 Bug fix
+   0 Localisation updates
+----------------------------------------------------------------------
 1.8.0 update 1 vs. 1.8.0
 
-
-   3 Enhancements
-   0 Bugfix
-
-----------------------------------------------------------------------
-1.8.0 update 1
-
-  Other enhancements:
+  Localisation updates:
 
   - Albanian localisation updated to 1.8 (UI, readme)
   - Belarusian localisation updated to 1.8 (UI)
@@ -1597,15 +1652,11 @@ segments
 ----------------------------------------------------------------------
  OmegaT 1.8.0 Changes
 ----------------------------------------------------------------------
-
-1.8.0 vs. 1.7.3 update 4
-
-
-  15 Enhancements
-   3 Bugfixes
-
+  13 Enhancements
+   3 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
-1.8.0
+1.8.0 vs. 1.7.3 update 4
 
   Implemented requests:
 
@@ -1648,11 +1699,6 @@ segments
   - Indicate translation progress in status bar
   http://sourceforge.net/support/tracker.php?aid=1520599
 
-  Other enhancements:
-
-  - Belarusian UI updated to 1.7.+
-  - French UI updated to 1.8
-
   Bug fixes:
 
   - HTML filter loses html-encoded characters if not supported
@@ -1664,23 +1710,19 @@ segments
   - Mistake of segmentation after <PRE>
   http://sourceforge.net/support/tracker.php?aid=1827479
 
+  Localisation updates:
+
+  - Belarusian UI updated to 1.7.+
+  - French UI updated to 1.8
+
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 4 Changes
 ----------------------------------------------------------------------
-
-1.7.3 update 4 vs. 1.7.3 update 3
-
-
-  2 Enhancements
-  4 Bugfixes
-
+   0 Enhancement
+   4 Bug fixes
+   2 Localisation updates
 ----------------------------------------------------------------------
-1.7.3 update 4
-
-  Other enhancements:
-
-  - Slovak localisation updated to 1.7.3 (UI, readme, instant start, documentation)
-  - Czech localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+1.7.3 update 4 vs. 1.7.3 update 3
 
   Bug fixes:
 
@@ -1696,18 +1738,19 @@ localization
   - PO: Bad handling of double quotes after no-wrap
   http://sourceforge.net/support/tracker.php?aid=2021007
 
+  Other enhancements:
+
+  - Slovak localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Czech localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 3 Changes
 ----------------------------------------------------------------------
-
-1.7.3 update 3 vs. 1.7.3 update 2
-
-
-  2 Enhancements
-  4 Bugfixes
-
+   2 Enhancements
+   4 Bug fixes
+   0 Localisation update
 ----------------------------------------------------------------------
-1.7.3 update 3
+1.7.3 update 3 vs. 1.7.3 update 2
 
   Implemented requests:
 
@@ -1734,15 +1777,11 @@ when uninstalling the JRE version
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 2 Changes
 ----------------------------------------------------------------------
-
-1.7.3 update 2 vs. 1.7.3 update 1
-
-
-  4 Enhancements
-  3 Bugfixes
-
+   3 Enhancements
+   3 Bug fixes
+   1 Localisation update
 ----------------------------------------------------------------------
-1.7.3 update 2
+1.7.3 update 2 vs. 1.7.3 update 1
 
   Implemented requests:
 
@@ -1758,10 +1797,6 @@ when uninstalling the JRE version
   - Do not copy SVN/CVS folders from /source to /target
   http://sourceforge.net/support/tracker.php?aid=1774502
 
-  Other enhancements:
-
-  - New Arabic localisation (UI, readme, instant start)
-
   Bug fixes:
 
   - PO: Bad handling of plural messages on multiple lines
@@ -1772,34 +1807,24 @@ when uninstalling the JRE version
 
   - XHTML: xmlns="http://www.w3.org... in every tag
   http://sourceforge.net/support/tracker.php?aid=1926940
+  
+  Other enhancements:
+
+  - New Arabic localisation (UI, readme, instant start)
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 update 1 Changes
 ----------------------------------------------------------------------
-
-1.7.3 update 1 vs. 1.7.3
-
-
-  8 Enhancements
-  7 Bugfixes
-
+   1 Enhancement
+   7 Bug fixes
+   7 Localisation updates
 ----------------------------------------------------------------------
-1.7.3 update 1
+1.7.3 update 1 vs. 1.7.3
 
   Implemented requests:
 
   - Exceptions for EN.*: Fig., St., middle name.
   http://sourceforge.net/support/tracker.php?aid=1856354
-
-  Other enhancements:
-
-  - Serbo-Croatian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
-  - Slovenian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
-  - Russian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
-  - Basque localisation updated to 1.7.3 (UI, readme, instant start, documentation)
-  - Hungarian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
-  - Catalan localisation updated to 1.7.3 (UI, readme, instant start, documentation)
-  - Dutch localisation updated to 1.7.3 (UI, readme, instant start, documentation)
 
   Bug fixes:
 
@@ -1823,34 +1848,33 @@ when uninstalling the JRE version
 
   - Non-translatable strings displayed in OOo documents
   http://sourceforge.net/support/tracker.php?aid=1888097
+  
+  Localisation updates:
+
+  - Serbo-Croatian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Slovenian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Russian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Basque localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Hungarian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Catalan localisation updated to 1.7.3 (UI, readme, instant start, documentation)
+  - Dutch localisation updated to 1.7.3 (UI, readme, instant start, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 1.7.3 Changes
 ----------------------------------------------------------------------
-
-1.7.3 vs. 1.7.2
-
-
-  6 Enhancements
-  3 Bugfixes
-
+   1 Enhancement
+   3 Bug fixes
+   5 Localisation updates
 ----------------------------------------------------------------------
-1.7.3
-
+1.7.3 vs. 1.7.2
 
 Contains a revised manual, two new localisations (Danish, polish) and bug fixes
 
- Other enhancements:
+  Other enhancements:
 
- - Revised manual
+  - Revised manual
 
- - Danish 1.6.2 localisation + instant start
- - Polish 1.6.2 localisation + partial manual
- - Catalan localisation updated to 1.7.2
- - Belarusian UI updated to 1.7.2
- - French localisation updated to 1.7.3
-
- Bug fixes:
+  Bug fixes:
 
   - Properties: space before "=" shouldn't be part of the key
   http://sourceforge.net/support/tracker.php?aid=1812183
@@ -1861,23 +1885,26 @@ Contains a revised manual, two new localisations (Danish, polish) and bug fixes
   - Footnotes break segments in OOo 1.x documents
   http://sourceforge.net/support/tracker.php?aid=1812385
 
+  Localisation updates:
+  
+  - Danish 1.6.2 localisation + instant start
+  - Polish 1.6.2 localisation + partial manual
+  - Catalan localisation updated to 1.7.2
+  - Belarusian UI updated to 1.7.2
+  - French localisation updated to 1.7.3
+
 ----------------------------------------------------------------------
  OmegaT 1.7.2 Changes
 ----------------------------------------------------------------------
-
-1.7.2 vs. 1.7.1
-
-
-  11 Enhancements
-   7 Bugfixes
-
+   3 Enhancements
+   7 Bug fixes
+   8 Localisation updates
 ----------------------------------------------------------------------
-1.7.2
-
+1.7.2 vs. 1.7.1
 
 Contains three new localisations (Simplified Chinese, Traditional Chinese and Czech) and bug fixes
 
- Implemented requests:
+  Implemented requests:
 
   - Have a more complete ISO 639 list in the UI
   http://sourceforge.net/support/tracker.php?aid=1755240
@@ -1888,18 +1915,7 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
   - Current file highlighted in Project Files Window
   http://sourceforge.net/support/tracker.php?aid=1766670
 
- Other enhancements:
-
-  - Simplified Chinese UI localisation + manual translation
-  - French localisation updated to 1.7.1
-  - Basque localisation updated to 1.7.1
-  - Slovak localisation updated to 1.7.1
-  - Serbo-Croatian localisation updated to 1.7.1
-  - Traditional Chinese 1.6.2 localisation
-  - Dutch 1.6.2 localisation
-  - Czech UI localisation + manual translation
-
- Bug fixes:
+  Bug fixes:
 
   - Incorrect/unclear data in project_save.txt
   http://sourceforge.net/support/tracker.php?aid=1616247
@@ -1922,23 +1938,29 @@ Contains three new localisations (Simplified Chinese, Traditional Chinese and Cz
   - sh language is not expanded in the manual
   http://sourceforge.net/support/tracker.php?aid=1748552
 
+  Other enhancements:
+
+  - Simplified Chinese UI localisation + manual translation
+  - French localisation updated to 1.7.1
+  - Basque localisation updated to 1.7.1
+  - Slovak localisation updated to 1.7.1
+  - Serbo-Croatian localisation updated to 1.7.1
+  - Traditional Chinese 1.6.2 localisation
+  - Dutch 1.6.2 localisation
+  - Czech UI localisation + manual translation
 
 ----------------------------------------------------------------------
  OmegaT 1.7.1 Changes
 ----------------------------------------------------------------------
-
-1.7.1 vs. 1.6.1_04
-
-  25 Enhancements
-  19 Bugfixes
-
+  15 Enhancements
+  19 Bug fixes
+  10 Localisation updates
 ----------------------------------------------------------------------
-1.7.1
-
+1.7.1 vs. 1.6.1_04
 
 Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new features, and general improvements
 
- Implemented requests:
+  Implemented requests:
 
   - Jump to segment #
   http://sourceforge.net/support/tracker.php?aid=1086959
@@ -1982,28 +2004,7 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   - Import MediaWiki source page
   http://sourceforge.net/support/tracker.php?aid=1745384
 
-
  Other enhancements:
-
-  - German instant start tutorial
-
-  - Slovenian UI localisation + manual translation
-
-  - Basque UI localisation + manual translation
-
-  - Hungarian UI localisation + manual translation
-
-  - Turkish UI localisation + instant start tutorial
-
-  - Catalan UI localisation + manual translation
-
-  - Ukrainian UI localisation
-
-  - French UI localisation (update) + instant start tutorial
-
-  - Japanese UI localisation + manual translation
-
-  - Simplified Chinese UI localisation + manual translation
 
   - New logging API
 
@@ -2068,7 +2069,18 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   - Pasting with middle mouse button allowed anywhere in editor
   http://sourceforge.net/support/tracker.php?aid=1743100
 
-
+  Localisation updates:
+  
+  - German instant start tutorial
+  - Slovenian UI localisation + manual translation
+  - Basque UI localisation + manual translation
+  - Hungarian UI localisation + manual translation
+  - Turkish UI localisation + instant start tutorial
+  - Catalan UI localisation + manual translation
+  - Ukrainian UI localisation
+  - French UI localisation (update) + instant start tutorial
+  - Japanese UI localisation + manual translation
+  - Simplified Chinese UI localisation + manual translation
 
 ----------------------------------------------------------------------
 1.6.1_04
@@ -2271,7 +2283,7 @@ other CAT tools, and supports regular expression searches.
   - More search options with greater flexibility
   [No RFE submitted]
 
- Bugfixes:
+ Bug fixes:
 
   - Multiple instances of OmegaT and log file
   http://sourceforge.net/support/tracker.php?aid=1392639
@@ -2367,7 +2379,7 @@ fixes a few regressions of RC11 and RC12.
   - Exact OmegaT version in TMX
     http://sourceforge.net/support/tracker.php?aid=1436563
 
- Bugfixes:
+ Bug fixes:
 
   - [OpenDocument] Writer headers and footers not honored
     http://sourceforge.net/support/tracker.php?aid=1111950
@@ -2394,7 +2406,7 @@ fixes a few regressions of RC11 and RC12.
 1.6.0 RC11b
 Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 
- Bugfixes:
+ Bug fixes:
 
  - Glossary displays source=source
    http://sourceforge.net/support/tracker.php?aid=1516395
@@ -2419,7 +2431,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Separate match and glossary window
    http://sourceforge.net/support/tracker.php?aid=1374201
 
- Bugfixes:
+ Bug fixes:
 
  - HTML filter doesn't handle XHTML in full
    http://sourceforge.net/support/tracker.php?aid=1468685
@@ -2453,7 +2465,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Give total number of segments in Project Files window
    http://sourceforge.net/support/tracker.php?aid=1500874
 
- Bugfixes:
+ Bug fixes:
 
  - Problems with segments clickability (Java5+MacOSX-specific regression)
    http://sourceforge.net/support/tracker.php?aid=1436607
@@ -2499,7 +2511,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Separate language and formatting rules
    http://sourceforge.net/support/tracker.php?aid=1475486
 
- Bugfixes:
+ Bug fixes:
 
  - Problems with segments clickability (Java5+MacOSX-specific regression)
    http://sourceforge.net/support/tracker.php?aid=1436607
@@ -2542,7 +2554,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - keeping Cursor at middle of working window
    http://sourceforge.net/support/tracker.php?aid=1228857
 
- Bugfixes:
+ Bug fixes:
 
  - Problems with segments visibility (RC7 regression)
    http://sourceforge.net/support/tracker.php?aid=1436607
@@ -2576,7 +2588,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Save project's backup each reload (up to 10 backups)
    http://sourceforge.net/support/tracker.php?aid=1435288
 
- Bugfixes:
+ Bug fixes:
 
  - Performance issue with Huge files
    http://sourceforge.net/support/tracker.php?aid=1427669
@@ -2585,7 +2597,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
    http://sourceforge.net/support/tracker.php?aid=1422959
 
  - Structure of HTML not respected in output
-   (second iteration over a bugfix first appeared in 1.6.RC4)
+   (second iteration over a Bug fix first appeared in 1.6.RC4)
    http://sourceforge.net/support/tracker.php?aid=1364265
 
  - Do not add encoding declaration meta if HTML has no header
@@ -2619,7 +2631,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Language matching precision while importing TMX files
    http://sourceforge.net/support/tracker.php?aid=1416610
 
- Bugfixes:
+ Bug fixes:
 
  - Unicode path names problem
    http://sourceforge.net/support/tracker.php?aid=1391060
@@ -2656,7 +2668,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - log does not indicate if tmx is loaded.
    http://sourceforge.net/support/tracker.php?aid=1372226
 
- Bugfixes:
+ Bug fixes:
 
  - generic tmx compatibility issue
    http://sourceforge.net/support/tracker.php?aid=1365649
@@ -2707,7 +2719,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Access to segmentation rules
    http://sourceforge.net/support/tracker.php?aid=1367707
 
- Bugfixes:
+ Bug fixes:
 
  - HTML bug: Initial tags falsely skipped
    http://sourceforge.net/support/tracker.php?aid=1359915
@@ -2735,7 +2747,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Add Yes/No Warning before OmegaT quits
    http://sourceforge.net/support/tracker.php?aid=1302358
 
- Bugfixes:
+ Bug fixes:
 
  - sentence segmenting regexp and Japanese
    http://sourceforge.net/support/tracker.php?aid=1333721
@@ -2760,7 +2772,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Different enchancements for Editing Options
    http://sourceforge.net/support/tracker.php?aid=1337476
 
- Bugfixes:
+ Bug fixes:
 
  - Bug if Target Encoding is set to [auto] for (X)HTML
    http://sourceforge.net/support/tracker.php?aid=1350320
@@ -2812,7 +2824,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
  - Give use more key shorctuts!
    http://sourceforge.net/support/tracker.php?aid=1230230
 
- Bugfixes:
+ Bug fixes:
 
  - Tools/Validate tags shouldn't display a list of errors
    if no errors were found
@@ -2864,7 +2876,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.4.5.04
 -------------------------------
 
- Bugfixes:
+ Bug fixes:
 
  - Empty files are displayed in a file list window
    http://sourceforge.net/support/tracker.php?aid=1256026
@@ -2876,7 +2888,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.4.5.03
 -------------------------------
 
- Bugfixes:
+ Bug fixes:
 
  - HOME and END key issues:
      * While pressing the HOME key cursor moves to begining of a line
@@ -2891,7 +2903,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.4.5.02
 -------------------------------
 
- Bugfixes:
+ Bug fixes:
 
  - Regression: 1.4.5.01 Cannot create/open a project
    http://sourceforge.net/support/tracker.php?aid=1225510
@@ -2900,7 +2912,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.4.5.01
 -------------------------------
 
- Bugfixes:
+ Bug fixes:
 
  - Serious threading issue, preventing OmegaT from showing up...
    http://sourceforge.net/support/tracker.php?aid=1216514
@@ -2919,7 +2931,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.4.5
 -------------------------------
 
- Bugfixes:
+ Bug fixes:
 
  - Problem with glossary - OmT freezing
    http://sourceforge.net/support/tracker.php?aid=1211458
@@ -2932,7 +2944,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.4.5 Release Candidate 3
 -------------------------------
 
- Bugfixes:
+ Bug fixes:
 
  - Less than sign causes problems in HTML, XHTML and OpenOffice
    http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
@@ -3006,7 +3018,7 @@ Fixes two nasty regressions of RC11. Sorry for inadequate testing everyone.
 1.4.5 Beta3
 -------------------------------
 
-Bugfixes:
+Bug fixes:
 
 - Compiled OpenOffice files missing language-specific characters
   http://sf.net/tracker/index.php?func=detail&aid=1188723&group_id=68187&atid=520347
@@ -3017,15 +3029,15 @@ Bugfixes:
 Also some work on stabilizing the interface...
 
 Not yet in Beta3:
-      Finalize documentation and implement some minor Bugfixes / RFEs.
+      Finalize documentation and implement some minor Bug fixes / RFEs.
 
 
 1.4.5 Beta2
 -------------------------------
-Bugfixes:
+Bug fixes:
 
 - Less than sign causes problems in XHTML & OpenOffice
-  (similar to the bugfix in Beta1, but for XML-based filters)
+  (similar to the Bug fix in Beta1, but for XML-based filters)
   http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
 
 Enchancements:
@@ -3037,7 +3049,7 @@ Enchancements:
 
 1.4.5 Beta1
 -------------------------------
-Bugfixes:
+Bug fixes:
 
 - Less than sign causes problems in HTML
   http://sf.net/tracker/index.php?func=detail&aid=1176585&group_id=68187&atid=520347
@@ -3052,7 +3064,7 @@ Enchancements:
 
 1.4.4.02
 -------------------------------
-Bugfixes:
+Bug fixes:
 
 - Wrong handling of CDATA tags in XHTML
   http://sf.net/tracker/index.php?func=detail&aid=1109089&group_id=68187&atid=520347
@@ -3093,7 +3105,7 @@ Enchancements:
    is .utf8 - it's in UTF-8 encoding)
    itherwise the file is ignored
 
-Bugfixes:
+Bug fixes:
 
 - Too little fuzzy matches were found,
   especially in small projects
@@ -3116,7 +3128,7 @@ Bugfixes:
 
 1.4.3
 -------------------------------
-Bugfix release:
+Bug fix release:
 
 - Fixed Bad Segmentation of some files,
   as documented in: http://groups.yahoo.com/group/OmegaT/message/672

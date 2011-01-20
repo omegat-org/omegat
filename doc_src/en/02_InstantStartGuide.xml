@@ -18,7 +18,7 @@
         <keycap>Cmd</keycap>
 
         <keycap>key</keycap>
-      </keycombo>" The <keycap>"Cmd</keycap>" key either has a "command" label
+      </keycombo>" The "<keycap>Cmd</keycap>" key either has a "command" label
     or an apple mark on Apple keyboards.</para>
 
     <para>The <application>OmegaT</application> screen consists of one space

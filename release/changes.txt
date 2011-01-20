@@ -15,6 +15,9 @@
 
   Other enhancements:
 
+  - Remove start of segment marker, and move segment number at the end of
+segment
+
   - Give a specific title to the file chooser dialog in the Spellchecker
 dialog (it was just "Open")
 

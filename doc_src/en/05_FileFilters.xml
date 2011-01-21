@@ -434,7 +434,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetCoutryCode}</literal>– the target country
+          <para><literal>${targetCountryCode}</literal>– the target country
           only ("YY").</para>
         </listitem>
       </itemizedlist>

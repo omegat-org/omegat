@@ -29,11 +29,25 @@
     with the following awkward situation: instead of displaying the text,
     using the Japanese characters</para>
 
-    <graphic align="left" fileref="images/OmT_Japanese.png" />
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Japanese.png" />
+       </imageobject>
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Japanese.png"  width = "60%"/>
+       </imageobject>
+     </mediaobject>
 
     <para>the system will display it like this for instance:</para>
 
-    <graphic align="left" fileref="images/OmT_Cyrillic.png" />
+     <mediaobject>
+       <imageobject role="html">
+         <imagedata fileref="images/OmT_Cyrillic.png" />
+       </imageobject>
+       <imageobject role="fo">
+         <imagedata fileref="images/OmT_Cyrillic.png" width = "60%"/>
+       </imageobject>
+      </mediaobject>
 
     <para>The computer, running OmegaT, has Russian as the default language,
     and thus shows the characters in the Cyrillic alphabet and not in

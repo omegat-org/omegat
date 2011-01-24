@@ -39,9 +39,12 @@
       <title>Glossary pane</title>
 
       <mediaobject>
-        <imageobject>
+        <imageobject role="html">
           <imagedata fileref="images/Glossary_pane.png" />
         </imageobject>
+         <imageobject role="fo">
+           <imagedata fileref="images/Glossary_pane.png" width="60%" />
+         </imageobject>
       </mediaobject>
     </figure>
 
@@ -63,8 +66,11 @@
         </indexterm></title>
 
       <mediaobject>
-        <imageobject>
+        <imageobject role="html">
           <imagedata fileref="images/MultiTerm_Glossary.png" />
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary.png" width="40%" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -178,11 +184,18 @@
       </listitem>
     </itemizedlist>
 
-    <mediaobject>
-      <imageobject role="html">
-        <imagedata fileref="images/saveglossary.png" />
-      </imageobject>
-    </mediaobject>
+    <figure>
+      <title>Saving a glossary</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/saveglossary.png" />
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/saveglossary.png" width="60%" />
+          </imageobject>
+        </mediaobject>
+    </figure>
 
     <para>Confirm with OK.</para>
 

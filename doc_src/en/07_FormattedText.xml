@@ -226,6 +226,9 @@
         <imageobject role="html">
           <imagedata fileref="images/TagValidation.png" />
         </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/TagValidation.png" width="40%" />
+        </imageobject>
       </mediaobject>
     </figure>
 

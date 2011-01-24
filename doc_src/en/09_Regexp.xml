@@ -522,8 +522,11 @@
       <title>Regex Tester</title>
 
       <mediaobject>
-        <imageobject>
+        <imageobject role="html">
           <imagedata fileref="images/RegexTester.png" />
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%" />
         </imageobject>
       </mediaobject>
     </figure>

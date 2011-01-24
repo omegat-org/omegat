@@ -283,8 +283,11 @@
       <title>OmegaT panes</title>
 
       <mediaobject>
-        <imageobject>
+        <imageobject role="html">
           <imagedata fileref="images/OmegaT_panes.png" />
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes.png" width="80%" />
         </imageobject>
       </mediaobject>
     </figure>
@@ -307,8 +310,11 @@
         <tbody>
           <row>
             <entry><inlinemediaobject>
-                <imageobject>
+                <imageobject role="html">
                   <imagedata fileref="images/Minimize.gif" width="60%" />
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%" />
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -318,8 +324,11 @@
 
           <row>
             <entry><inlinemediaobject>
-                <imageobject>
+                <imageobject role="html">
                   <imagedata fileref="images/Maximize.gif" width="60%" />
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%" />
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -328,8 +337,11 @@
 
           <row>
             <entry><inlinemediaobject>
-                <imageobject>
+                <imageobject role="html">
                   <imagedata fileref="images/undock.gif" width="60%" />
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%" />
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -338,8 +350,11 @@
 
           <row>
             <entry><inlinemediaobject>
-                <imageobject>
+                <imageobject role="html">
                   <imagedata fileref="images/dock.gif" width="60%" />
+                </imageobject>
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%" />
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -488,8 +503,11 @@
             </indexterm>Matches pane</title>
 
           <mediaobject>
-            <imageobject>
+            <imageobject role="html">
               <imagedata fileref="images/MatchesPane.png" />
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane.png" width="80%" />
             </imageobject>
           </mediaobject>
         </figure></para>
@@ -592,8 +610,11 @@
             </indexterm>Glossary pane</title>
 
           <mediaobject>
-            <imageobject>
+            <imageobject role="html">
               <imagedata fileref="images/Glossary_pane.png" />
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="images/Glossary_pane.png" width="60%" />
             </imageobject>
           </mediaobject>
         </figure></para>
@@ -612,8 +633,11 @@
           </indexterm>multi-word entry in the glossary</title>
 
         <mediaobject>
-          <imageobject>
-            <imagedata fileref="images/MultiTerm_Glossary.png" width="" />
+          <imageobject role="html">
+            <imagedata fileref="images/MultiTerm_Glossary.png" />
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/MultiTerm_Glossary.png" width="80%" />
           </imageobject>
         </mediaobject>
       </figure>
@@ -811,8 +835,11 @@
             </indexterm>Tag validation window</title>
 
           <mediaobject>
-            <imageobject>
+            <imageobject role="html">
               <imagedata fileref="images/TagValidator.png" />
+            </imageobject>
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%" />
             </imageobject>
           </mediaobject>
         </figure></para>
@@ -887,8 +914,11 @@
         <screeninfo>match statistics</screeninfo>
 
         <mediaobject>
-          <imageobject>
+          <imageobject role="html">
             <imagedata fileref="images/MatchStatistics.png" />
+          </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/MatchStatistics.png" width="60%" />
           </imageobject>
         </mediaobject>
       </screenshot>

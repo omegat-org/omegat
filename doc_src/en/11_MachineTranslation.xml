@@ -63,6 +63,9 @@
         <imageobject role="html">
           <imagedata fileref="images/MobyDick.png" />
         </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/MobyDick.png" width="60%" />
+        </imageobject>
       </mediaobject>
     </figure>
 

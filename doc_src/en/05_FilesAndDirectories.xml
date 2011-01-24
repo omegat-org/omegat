@@ -153,11 +153,11 @@
       per file will not necessary be equal to the grand total of unique
       segments in the project.</para>
 
-      <para>The<emphasis role="bold"> i<indexterm class="singular">
+      <para>The<emphasis role="bold"> <indexterm class="singular">
           <primary>Project files</primary>
 
           <secondary>ignore_word and learned_word</secondary>
-        </indexterm>Ignore_words.txt </emphasis>and <emphasis
+        </indexterm>ignore_words.txt </emphasis>and <emphasis
       role="bold">learned_word.txt </emphasis>files are used by the spell
       checker. Note that they are specific for a given project, so if you have
       already amassed words you wish the spell checker to ignore / accept, you

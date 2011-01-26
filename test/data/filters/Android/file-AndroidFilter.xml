@@ -11,6 +11,8 @@
 	<!-- Just for additional comments. -->
 	<skip />
 
+    <string name="apo_test">T\'est</string>
+
 	<!-- Plural demo -->
 	<plurals name="Nminutes">
 		<!-- 1-minute -->

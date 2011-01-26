@@ -59,4 +59,13 @@ public class AndroidFilter extends XMLFilter {
     public boolean isTargetEncodingVariable() {
         return false;
     }
+
+    /**
+     * Filter-specific chars processing.
+     */
+    public String translate(String entry) {
+        String e = entry.replace("\\'", "'");
+        String r = super.translate(e);
+        return r.replace("'", "\\'");
+    }
 }

@@ -31,8 +31,9 @@ public class AndroidFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
         List<String> lines = parse(new AndroidFilter(),
                 "test/data/filters/Android/file-AndroidFilter.xml");
-        boolean c = lines.contains("MyApp");
-        assertTrue("'MyApp' not defined'", c);
+        assertTrue("'MyApp' not defined'", lines.contains("MyApp"));
+        
+        assertTrue("T'est not defined'", lines.contains("T'est"));
     }
 
     public void testTranslate() throws Exception {

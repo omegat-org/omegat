@@ -14,7 +14,7 @@ with a preceding \
 
   Localisation updates:
 
-  - Italian localisation updated to 2.2.3_2 (UI, manual)
+  - Italian localisation updated to 2.2.3 update 2 (UI, manual)
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 2

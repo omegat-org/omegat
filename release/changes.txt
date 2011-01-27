@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.2.3 update 3 vs. 2.2.3 update 2
 
@@ -11,6 +11,10 @@
 
   - Android filter: the aspostrophe (') character was not espaced properly
 with a preceding \
+
+  Localisation updates:
+
+  - Italian localisation updated to 2.2.3_2 (UI, manual)
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 2

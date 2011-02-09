@@ -8,7 +8,7 @@
 <h2>Glosáře / Vlastní slovníky</h2>
 <ul>
   <li>
-    <p><a href="#usage">Použití</a></p>
+    <p><a href="#usage">Používání</a></p>
   </li>
   <li>
     <p><a href="#fileformat">Formát souboru</a></p>
@@ -20,13 +20,13 @@
     <p><a href="#multiterm">Použití Trados Multiterm</a></p>
   </li>
   <li>
-    <p><a href="#commonglossaryproblems">Obecné problémy s glosářem</a></p>
+    <p><a href="#commonglossaryproblems">Obecné problémy glosáře</a></p>
   </li>
 </ul>
-<p>Glosáře představují takové soubory, které jsou pro použití v OmegaT tvořené a aktualizované ručně.</p>
-<p>Pokud projekt OmegaT obsahuje jeden či více glosářů, tak program automaticky zobrazí v okně <a href="userInterface.html#Glossary">Glosář</a> všechny termíny nalezené v aktivním segmentu.</p>
+<p>Glosáře představují soubory, které jsou pro použití v OmegaT tvořené a aktualizované ručně.</p>
+<p>Pokud projekt OmegaT obsahuje jeden či více glosář, jakékoliv termíny v glosáři, pokud jsou nalezené v aktivním segmentu, budou automaticky zobrazené v okně <a href="userInterface.html#Glossary">Glosář</a>.</p>
 <hr>
-<h2><a name="usage" id="usage"></a>Použití</h2>
+<h2><a name="usage" id="usage"></a>Používání</h2>
 <p>Dostupný glosář začněte používat tak, že jej po vytvoření projektu jednoduše umístíte do adresáře <span style="font-style: italic;">/glossary</span>. Když je projekt otevřený, OmegaT v tomto adresáři soubory glosáře automaticky detekuje. Výrazy aktivního segmentu, které OmegaT najde v souboru (souborech) glosáře, se zobrazují v okně Glosář:</p>
 <p><img src="images/Glossary_pane.png" name="graphics1"
  alt="Okno Glosář" id="graphics1"
@@ -36,7 +36,7 @@
 Slovo před znakem rovnítka (=) je termín zdrojového jazyka a jeho překlad (překlady) jsou za rovnítkem. K záznamu v glosáři můžete přidat komentář (např. „noun“ u druhé položky). Funkce glosáře nalezne jen takové výrazy, pokud se záznam v glosáři přesně shoduje se slovem v překládaném textu (např. nenalezne skloňované tvary atd.). Nové záznamy mohou být přidané do souboru / souborů glosáře v průběhu překladu manuálně (např. v textovém editoru), ale nově vložené pojmy budou rozpoznané až po novém načtení projektu.
 <hr>
 <h2><a name="fileformat" id="fileformat"></a>Formát souboru</h2>
-<p>Soubory glosáře představují jednoduché soubory v prostém textu a obsahují tři tabulátorem oddělené sloupce, ve kterých se nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace. Soubory glosáře mohou být buď ve výchozím kódování systému (a mít koncovku <code>.tab</code>) nebo v kódování UTF-8 (s koncovkou <code>.utf8</code>). Právě kvůli své univerzálnosti se upřednostňuje kódování Unicode (UTF-8).</p>
+<p>Soubory glosáře představují jednoduché soubory v prostém textu a obsahují tři tabulátorem oddělené sloupce, ve kterých se nachází zdrojový (první sloupec) a cílový (druhý sloupec) výraz. Třetí sloupec může být použit pro dodatečné informace. Soubory glosáře mohou být buď  ve výchozím kódování systému (a mít koncovku <code>.tab</code>) nebo v kódování UTF-8 (s koncovkou <code>.utf8</code>). Právě kvůli své univerzálnosti se upřednostňuje kódování Unicode (UTF-8).</p>
 <hr>
 <h2><a name="howtocreate" id="howtocreate"></a>Jak glosáře vytvořit</h2>
 Při dodržení následující metody není vytváření glosáře nikterak složité. Využijete k tomu OpenOffice.org Writer - pokud tento program dosud nemáte, tak si jej můžete stáhnout a nainstalovat balík OpenOffice.org. Spusťte OpenOffice.org a otevřete nový textový dokument nebo spusťte „OpenOffice.org Writer“.<br> <br> Do prázdného dokumentu vložte záznamy pro glosář: termín ze zdrojového jazyka, tabulátor, termín z cílového jazyka, tabulátor, komentář či bližší vysvětlení pro položku, na závěr Enter. Klávesa tabulátoru se nachází v levé části klávesnice. Pokud nechcete přidávat žádné komentáře, nemusíte druhý tabulátor vkládat. „Termínem“ se rozumí jak jednotlivé slovo, tak i celá fráze. Na druhý řádek vložte druhý termín a jeho překlad.<br> <br> Když jste dokončili vkládání termínů, budete mít dva „sloupce“ termínů: ve zdrojovém jazyce vlevo a jejich překlad v cílovém jazyce vpravo, a možná i třetí sloupec obsahující komentáře a vysvětlivky. Zobrazení symbolů pro tabulátor (v našem příkladě →) a Enter (¶) můžete zapnout kliknutím na ikonu ¶ v programu Writer na panelu Standarní. Zde je pro ukázku česko-německý glosář:<br>
@@ -47,15 +47,14 @@ Při dodržení následující metody není vytváření glosáře nikterak slo�
 <div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; kůň→Pferd→n, m Hengst f Stute n Fohlen¶</div>
 <br>
 NEPOUŽÍVEJTE v programu OpenOffice.org funkci „sloupce“ k vytvoření sloupců glosáře: pouze oddělte každý zdrojový termín a jeho překlad jedním tabulátorem.<br> <br> Když jste dokončili vkládání záznamů do glosáře, vyberte <span
- style="font-style: italic;">Soubor &gt; Uložit jako</span>. V okně „Umístění souboru“ vložte jméno souboru glosáře, s koncovkou „<span style="font-weight: bold;">.utf8</span>“ (např. „<span style="font-style: italic;">MujSlovnik.utf8</span>“).&nbsp;U „<span style="font-style: italic;">Typu souboru</span>“ označte „<span style="font-style: italic;">Text (.txt.)</span>“.&nbsp;Zrušte zaškrtnutí políčka „<span style="font-style: italic;">Automatická přípona názvu souboru</span>“ a aktivujte „<span style="font-style: italic;">Upravit nastavení filtru</span>“:<br> <br> <img alt="Uložit soubor jako zdroj dat pro glosář"
+ style="font-style: italic;">Soubor &gt; Uložit jako</span>. V okně „Umístění souboru“ vložte jméno souboru glosáře, s koncovkou „<span style="font-weight: bold;">.utf8</span>“ (např. „<span style="font-style: italic;">MujGlosar.utf8</span>“).&nbsp;U „<span style="font-style: italic;">Typu souboru</span>“ označte „<span style="font-style: italic;">Text (.txt.)</span>“.&nbsp;Zrušte zaškrtnutí políčka „<span style="font-style: italic;">Automatická přípona názvu souboru</span>“ a aktivujte „<span style="font-style: italic;">Upravit nastavení filtru</span>“:<br> <br> <img alt="Uložit soubor jako zdroj dat pro glosář"
  src="images/saveglossary.png"><br> <br> Potvrďte stiskem OK. Zobrazí se dialogové okno nabízející dvě možnosti:„<span
- style="font-style: italic;">Zachovat stávající formát</span>“ a „<span style="font-style: italic;">Uložit ve formátu ODF</span>“. Vyberte „<span style="font-style: italic;">Zachovat stávající formát</span>“ pro uložení souboru v textovém formátu. V dialogovém okně Volby pro ASCII filtr (vizte níže), vyberte kódování „<span style="font-style: italic;">Unicode (UTF-8)</span>“:<br> <br> <img style="width: 510px; height: 158px;"
- alt="Možnosti souborového filtru ASCII pro glosář"
+ style="font-style: italic;">Zachovat stávající formát</span>“ a „<span style="font-style: italic;">Uložit ve formátu ODF</span>“. Vyberte „<span style="font-style: italic;">Zachovat stávající formát</span>“ pro uložení souboru v textovém formátu. V dialogovém okně Volby pro ASCII filtr (vizte níže), vyberte kódování „<span style="font-style: italic;">Unicode (UTF-8)</span>“:<br> <br> <img alt="Možnosti souborového filtru ASCII pro glosář"
  src="./images/AsciiFilteroptions.png"><br> <br> Potvrďte tlačítkem OK.<br> <br> Po založení projektu OmegaT, zkopírujte nebo přesuňte tento soubor do adresáře projektu <span style="font-style: italic;">\glossary</span>. Pokud máte projekt již otevřen, tak po zkopírování souboru glosáře nechte projekt znovu načíst. V souboru glosáře můžete provádět změny i během práce na projektu. Program OmegaT kontroluje glosáře přibližně každou sekundu a změny se průběžně projeví, takže po úpravách a uložení souboru glosáře již není nutno znovu načítat celý projekt.<br> <br> Když je otevřený segment se zdrojovým textem, tak se v okně Glosář zobrazí jen ty záznamy pro vybrané položky ve zdrojovém segmentu, které se již nachází ve vašem glosáři (nebo ve více glosářích - můžete jich současně používat více, zároveň mohou být uloženy v různých podadresářích adresáře <i>glossary</i>).
 <h3><a name="multiterm" id="multiterm"></a>Použití Trados Multiterm</h3>
 <p>Glosáře vytvořené pomocí funkce textového exportu Trados Multiterm mohou být používány přímo bez další změny, s podmínkou, že se opatří příponou <code>.tab</code> a pole zdrojového (první sloupec) a cílového (druhý sloupec) pojmu představují první dvě pole. Když exportujete data použitím možnosti „Tab-delimited export“, budete muset smazat prvních 5 sloupců (Seq. Nr, Date created atd.) ještě před těmi dvěma položkami, která jsou pro nás podstatné.</p>
 <hr>
-<h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Obecné problémy s glosářem</h2>
+<h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Obecné problémy glosáře</h2>
 <dl>
   <dt><span style="font-weight: bold;">Problém:</span> Nezobrazují se žádné termíny z glosáře.</dt>
   <dd>Možné příčiny:</dd>

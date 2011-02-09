@@ -31,7 +31,7 @@
     </li>
 
     <li>
-      <p><a href="#Other">Ostatní</a></p>
+      <p><a href="#Other">Other</a></p>
     </li>
   </ul>
   <hr>
@@ -132,7 +132,7 @@
         <td width="17%"></td>
 
         <td>
-          <p>Importuje jednotky ze stránek MediaWiki založené na vloženém URL</p>
+          <p>Importuje jednotky ze stránek MediaWiki založené na vloženém URL.</p>
         </td>
       </tr>
 
@@ -144,7 +144,7 @@
         <td width="17%"><code>F5</code></td>
 
         <td>
-          <p>Znovu načte projekt, aby se zohlednily externí úpravy ve zdrojových souborech, starších překladových pamětech nebo slovnících.</p>
+          <p>Znovu načte projekt, aby se zohlednily externí úpravy ve zdrojových souborech, starších překladových pamětech nebo glosářích.</p>
         </td>
       </tr>
 
@@ -286,69 +286,123 @@
 
       <tr bgcolor="#FFFFFF">
         <td colspan="3">
-          <p><strong>Samo menu obsahuje následující položky:</strong></p>
-        </td>
-      </tr>
+          <p>Samo menu <strong>Upravit</strong> obsahuje následující položky:</p>
 
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Zpět</code></p>
+      </td></tr><tr bgcolor="#DDDDDD">
+        <td>
+          <p>Zpět</p>
         </td>
 
-        <td width="17%">
+        <td>
           <p><code>Ctrl+Z</code></p>
         </td>
 
         <td>
-          <p>Vrátí se zpět do stavu před posledním krokem editační činnosti. Nefunguje v případě, že byl upravovaný segment již potvrzen.</p>
+          <p>Zruší poslední akci editace v aktuálním segmentu.</p>
         </td>
       </tr>
 
       <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Obnovit</code></p>
+        <td>
+          <p>Obnovit</p>
         </td>
 
-        <td width="17%">
+        <td>
           <p><code>Ctrl+Y</code></p>
         </td>
 
         <td>
-          <p>Vrátí se zpět do stavu před zrušením posledního kroku editační činnosti. Nefunguje v případě, že byl upravovaný segment již potvrzen.</p>
+          <p>V aktuálním cílovém segmentu obnoví krok editace, který byl právě zrušen.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Přepsat nalezeným překladem</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+R</code></p>
+        <td>
+          <p>Označit přibližný překlad #N</p>
         </td>
 
         <td>
-          <p>Přepíše celý cílový segment s aktuálně vybraným přibližným překladem (když je v předvolbě označená první přibližná shoda).</p>
+          <p><code>Ctrl+#N</code></p>
+        </td>
+
+        <td>
+          <p>#N představuje číslici od 1 do 5. Vybere N<sup>-tý</sup> shodný výraz v okně shody (ve výchozím nastavení je vybraný první shodný výraz).</p>
         </td>
       </tr>
 
       <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Vložit nalezený překlad</code></p>
+        <td>
+          <p>Přepsat nalezeným překladem</p>
         </td>
 
-        <td width="17%">
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Přepíše obsah aktuálního cílového segmentu vybraným shodným výrazem (ve výchozím nastavení je vybraný první shodný výraz).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Vložit nalezený překlad</p>
+        </td>
+
+        <td>
           <p><code>Ctrl+I</code></p>
         </td>
 
         <td>
-          <p>Vloží aktuálně vybraný přibližný překlad na pozici kurzoru. Tato funkce přepíše tu část cílového segmentu, která je označená.</p>
+          <p>Vloží vybraný shodný výraz na pozici kurzoru v aktuálním cílovém segmentu (ve výchozím nastavení je vybraný první shodný výraz).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Přepsat zdrojem</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Přepíše obsah aktuálního cílového segmentu obsahem zdrojového textu.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Vložit zdroj</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Vloží obsah zdrojového textu na pozici kurzoru v aktuálním cílovém segmentu.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Hledat v projektu</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Zobrazí dialogové okno pro provedení hledání v projektu.</p>
         </td>
       </tr>
 
       <tr bgcolor="#DDDDDD">
         <td width="23%">
-          <p><code>Přepsat strojovým překladem</code></p>
+          <p>Přepsat strojovým překladem</p>
         </td>
 
         <td width="17%">
@@ -356,95 +410,7 @@
         </td>
 
         <td>
-          <p>Nahradí cílový segment překladem z Google překladač. Pokud není Google překladač aktivován, vložení překladu neproběhne (vizte v Hlavní nabídka &gt; možnosti níže).</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Přepsat zdrojem</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+R</code></p>
-        </td>
-
-        <td>
-          <p>Přepíše celý cílový segment zdrojem.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Vložit zdroj<br></code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+I</code></p>
-        </td>
-
-        <td>
-          <p>Vloží zdroj na pozici kurzoru.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Exportovat výběr</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift+Ctrl+C</code></p>
-        </td>
-
-        <td>
-          <p>Exportuje aktuální výběr do textového souboru k dalšímu zpracování. Když není nic vybráno, do souboru se zapíše aktuální zdroj. Po ukončení programu OmegaT tento soubor nebude smazán, podobně jak je tomu u běžného postupu se systémovou schránkou. Exportovaný obsah je zapsán do souboru <span style=
-          "font-style: italic;">selection.txt</span> umístěného v adresáři dle volby uživatele (vizte <a href=
-          "filesAndDirectories.html#user" target="_blank">soubory a adresáře</a>).&nbsp;</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Hledat v projektu</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+F</code></p>
-        </td>
-
-        <td>
-          <p>Otevře nové okno <a href="userInterface.html#Search_Window">Hledat</a>.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#FFFFFF">
-        <td width="23%">
-          <p><code>Přepnout velikost písma</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Shift + F3</code></p>
-
-          <p><code>(viz text)</code></p>
-        </td>
-
-        <td>
-          <p>Změní velikost písmen ve zvýrazněném textu v cílovém segmentu podle vybrané možnosti (malá písmena, VELKÁ PÍSMENA, Velká První Písmena). Pro výběr mezi těmito možnostmi použijte kombinaci Shift+F3. Když není vybrán žádný text, tak OmegaT vybere slovo jehož písmena jsou bezprostředně napravo od kurzoru.</p>
-        </td>
-      </tr>
-
-      <tr bgcolor="#DDDDDD">
-        <td width="23%">
-          <p><code>Označit přibližný překlad #N</code></p>
-        </td>
-
-        <td width="17%">
-          <p><code>Ctrl+#N</code></p>
-        </td>
-
-        <td>
-          <p>(#N představuje číslici 1 až 5) - Vybere N-tý přibližný překlad zobrazený v okně Přibližné překlady a přepíše nebo jej vloží do segmentu. Sekce <a href="userInterface.html#Match">Přibližné překlady</a> podrobně popisuje kódování barvy.</p>
+          <p>Nahradí cílový segment překladem zdroje z Google překladače. Pokud není Google překladač aktivován, vložení překladu neproběhne (vizte v Menu &gt; Možnosti &gt; Google překladač).</p>
         </td>
       </tr>
 
@@ -745,7 +711,7 @@
 
       <tr bgcolor="#FFFFFF">
         <td width="23%">
-          <p><code>O aplikaci...</code></p>
+          <p><code>O Aplikaci ...</code></p>
         </td>
 
         <td width="17%"></td>
@@ -784,7 +750,7 @@
     </li>
 
     <li>
-      <p><a href="#Other">Ostatní</a></p>
+      <p><a href="#Other">Other</a></p>
     </li>
   </ul>
 
@@ -822,7 +788,7 @@
         </td>
 
         <td>
-          <p>Uloží aktuální práci do souboru project_save.tmx umístěného v adresáři projektu /omegat/</p>
+          <p>Uloží aktuální práci do souboru project_save.tmx umístěného v adresáři projektu /omegat/.</p>
         </td>
       </tr>
 
@@ -836,7 +802,7 @@
         </td>
 
         <td>
-          <p>Zavře aktuální projekt</p>
+          <p>Zavře aktuální projekt.</p>
         </td>
       </tr>
 
@@ -864,7 +830,7 @@
         </td>
 
         <td>
-          <p>Zobrazí nastavení projektu pro případné změny</p>
+          <p>Zobrazí nastavení projektu pro případné změny.</p>
         </td>
       </tr>
 
@@ -914,7 +880,7 @@
         </td>
 
         <td>
-          <p>#N představuje číslici od 1 do 5. Vybere N<sup>-tý</sup> shodný výraz v okně shody (ve výchozím nastavení je vybraný první shodný výraz)</p>
+          <p>#N představuje číslici od 1 do 5. Vybere N<sup>-tý</sup> shodný výraz v okně shody (ve výchozím nastavení je vybraný první shodný výraz).</p>
         </td>
       </tr>
 
@@ -928,7 +894,7 @@
         </td>
 
         <td>
-          <p>Přepíše obsah aktuálního cílového segmentu vybraným shodným výrazem (ve výchozím nastavení je vybraný první shodný výraz)</p>
+          <p>Přepíše obsah aktuálního cílového segmentu vybraným shodným výrazem (ve výchozím nastavení je vybraný první shodný výraz).</p>
         </td>
       </tr>
 
@@ -942,7 +908,7 @@
         </td>
 
         <td>
-          <p>Vloží vybraný shodný výraz na pozici kurzoru v aktuálním cílovém segmentu (ve výchozím nastavení je vybraný první shodný výraz)</p>
+          <p>Vloží vybraný shodný výraz na pozici kurzoru v aktuálním cílovém segmentu (ve výchozím nastavení je vybraný první shodný výraz).</p>
         </td>
       </tr>
 
@@ -956,7 +922,7 @@
         </td>
 
         <td>
-          <p>Přepíše obsah aktuálního cílového segmentu obsahem zdrojového textu</p>
+          <p>Přepíše obsah aktuálního cílového segmentu obsahem zdrojového textu.</p>
         </td>
       </tr>
 
@@ -970,7 +936,7 @@
         </td>
 
         <td>
-          <p>Vloží obsah zdrojového textu na pozici kurzoru v aktuálním cílovém segmentu</p>
+          <p>Vloží obsah zdrojového textu na pozici kurzoru v aktuálním cílovém segmentu.</p>
         </td>
       </tr>
 
@@ -984,7 +950,7 @@
         </td>
 
         <td>
-          <p>Zobrazí dialogové okno pro provedení hledání v projektu</p>
+          <p>Zobrazí dialogové okno pro provedení hledání v projektu.</p>
         </td>
       </tr>
 
@@ -1020,7 +986,7 @@
         </td>
 
         <td>
-          <p>Přesune pole editace na následující segment, který není registrovaný v překladové paměti projektu</p>
+          <p>Přesune pole editace na následující segment, který není registrovaný v překladové paměti projektu.</p>
         </td>
       </tr>
 
@@ -1034,7 +1000,7 @@
         </td>
 
         <td>
-          <p>Přesune pole editace na následující segment</p>
+          <p>Přesune pole editace na následující segment.</p>
         </td>
       </tr>
 
@@ -1048,7 +1014,7 @@
         </td>
 
         <td>
-          <p>Přesune pole editace na předcházející segment</p>
+          <p>Přesune pole editace na předcházející segment.</p>
         </td>
       </tr>
 
@@ -1062,7 +1028,7 @@
         </td>
 
         <td>
-          <p>Přesune na číslo zadaného segmentu</p>
+          <p>Přesune na číslo zadaného segmentu.</p>
         </td>
       </tr>
 
@@ -1076,7 +1042,7 @@
         </td>
 
         <td>
-          <p>Přejde o jeden segment zpět v historii</p>
+          <p>Přejde o jeden segment zpět v historii.</p>
         </td>
       </tr>
 
@@ -1090,7 +1056,7 @@
         </td>
 
         <td>
-          <p>Přejde o jeden segment vpřed v historii</p>
+          <p>Přejde o jeden segment vpřed v historii.</p>
         </td>
       </tr>
 
@@ -1112,7 +1078,7 @@
         </td>
 
         <td>
-          <p>Zobrazí seznam Souborů projektu</p>
+          <p>Zobrazí seznam Souborů projektu.</p>
         </td>
       </tr>
 
@@ -1120,7 +1086,7 @@
         <td colspan="3">
           <hr>
 
-          <h3><a name="Other" id="Other"></a>Ostatní</h3>
+          <h3><a name="Other" id="Other"></a>Other</h3>
         </td>
       </tr>
 
@@ -1148,7 +1114,7 @@
         </td>
 
         <td>
-          <p>Exportuje aktuální výběr nebo když není nic vybráno, přesune aktuální zdroj</p>
+          <p>Exportuje aktuální výběr nebo když není nic vybráno, přesune aktuální zdroj.</p>
         </td>
       </tr>
 

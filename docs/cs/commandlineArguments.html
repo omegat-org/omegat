@@ -3,20 +3,20 @@
   <link rel="stylesheet" href=" " type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-  <title>Parametry příkazové řádky - OmegaT 2.1 Uživatelská příručka</title>
+  <title>Parametry příkazového řádku - OmegaT 2.1 Uživatelská příručka</title>
 </head>
 
 <body>
-  <h1>Parametry příkazové řádky</h1>
+  <h1>Parametry příkazového řádku</h1>
 
-  <p>Aplikaci OmegaT lze spouštět se speciálními parametry, které upravují chování programu nebo aplikaci přikazují, které akce se mají spustit při startu. Chcete-li přidat parametry, musíte napsat spouštěcí příkazy s včetně parametrů do příkazové řádky, nebo musíte pozměnit skript, který to za vás provede. Více informací o tom, jak spouštět aplikaci OmegaT naleznete v <a href="installingAndRunning.html">Instalace a spuštění</a>.
+  <p>Aplikaci OmegaT lze spouštět se speciálními parametry, které upravují chování programu nebo aplikaci přikazují, které akce se mají spustit při startu. Chcete-li přidat parametry, musíte napsat spouštěcí příkazy s včetně parametrů do příkazového řádku, nebo musíte pozměnit skript, který to za vás provede. Více informací o tom, jak spouštět aplikaci OmegaT naleznete v <a href="installingAndRunning.html">Instalace a spuštění</a>.
   
   </p>
   <h2>Parametry měnící chování programu</h2>
   
   <p>Parametry, které mění chování programu OmegaT jsou vlastně parametry pro Java virtual machine.<br> Jednotlivé parametry se přidávají za počáteční „<em>java</em>“ a před část „<em>-jar OmegaT.jar</em>“. Povšimněte si, že ve Windows budete měnit soubor <em>OmegaT.l4J.ini</em> a tak definovat své priority. Pod Mac OSX, budete za stejným účelem měnit soubor <em>Info.plist</em>, který je umístěn v <em>OmegaT.app/Contents/</em>.</p>
 
-  <p>Seznam možných parametrů je uveden níže. Po zadání <em>java</em> nebo <em>man java</em> do terminálového okna získáte více informací o parametrech - <em>man</em> je terminálový příkaz , který zobrazí manuál k danému příkazu. Váš systém může, ale taky nemusí, mít manuál pro příkaz <em>java</em> přímo ve vašem jazyce.</p>
+  <p>Seznam možných argumentů je uveden níže. Po zadání <em>java</em> nebo <em>man java</em> do terminálového okna získáte více informací o parametrech - <em>man</em> je terminálový příkaz, který zobrazí manuál k danému příkazu. Váš systém může, ale taky nemusí, mít manuál pro příkaz <em>java</em> přímo ve vašem jazyce.</p>
 
   <p><b>User interface language / Jazyk uživatelského rozhraní:&nbsp;</b><em>-Duser.language=XX</em></p>
 
@@ -26,7 +26,7 @@
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
         <td>
-          <p>Program běžně, tj. když se OmegaT spouští bez jakýchkoliv parametrů, nejprve detekuje jazyk uživatelova operačního systému. Pokud je uživatelské prostředí v tomto jazyce k dispozici, tak ho OmegaT použije. To znamená, že když je uživatelův operační systém v ruštině a OmegaT byla lokalizována do ruštiny, bude OmegaT zobrazena s ruským uživatelským prostředím, ruskými menu, atd. Pokud jazyk uživatelova systému není k dispozici, OmegaT použije výchozí angličtinu. Toto je standardní postup.<br> <br> Parametr „<em>-Duser.language=XX</em>“ způsobí, že OmegaT použije definovaný jazyk, a ne jazyk uživatelova operačního systému. Proměnná „XX“ v příkazu znamená dvouznakový kód požadovaného jazyka. Při spouštění OmegaT s francouzským prostředím (např. v ruském operačním systému) bude příkaz vypadat takto:</p>
+          <p>Běžně, tj. když se OmegaT spouští bez jakýchkoliv parametrů, program první detekuje jazyk uživatelova operačního systému. Pokud je uživatelské prostředí v tomto jazyce k dispozici, tak ho OmegaT použije. To znamená, že když je uživatelův operační systém v ruštině a OmegaT byla lokalizována do ruštiny, bude OmegaT zobrazena s ruským uživatelským prostředím, ruskými menu, atd. Pokud jazyk uživatelova systému není k dispozici, OmegaT použije jako výchozí jazyk angličtinu. Toto je tedy standardní postup.<br> <br> Parametr „<em>-Duser.language=XX</em>“ způsobí, že OmegaT použije definovaný jazyk, a ne jazyk uživatelova operačního systému. Proměnná „XX“ v příkazu znamená dvouznakový kód požadovaného jazyka. Pro spuštění OmegaT s francouzským prostředím (např. v ruském operačním systému) bude příkaz vypadat takto:</p>
 
           <p><em>java -Duser.language=fr -jar OmegaT.jar</em></p>
         </td>
@@ -42,13 +42,13 @@
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
         <td>
-          <p>Vedle jazyka můžete specifikovat i zemi, např. v případě čínštiny CN nebo TW. Správou verzi Stručného úvodního průvodce získáte příslušnou specifikací jak jazyka, tak i země. Toto je důležité dokonce i tehdy, když je k dispozici jen jedna varianta, např. pt_BR v případě portugalštiny v Brazílii.</p>
+          <p>Vedle jazyka můžete specifikovat i zemi, např. CN nebo TW v případě čínštiny. Abyste získali správou verzi Stručného úvodního průvodce, je nutno specifikovat jak jazyk, tak i zemi. Toto je důležité dokonce i tehdy, když je k dispozici jen jedna varianta, např. pt_BR v případě portugalštiny v Brazílii.</p>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <p><strong>Font antialiasing / Vyhlazování písem:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
+  <p><strong>Font antialiasing / Vyhlazování fontů:</strong><em>&nbsp;-Dswing.aatext=true</em></p>
 
   <table summary="just formatting">
     <tbody>
@@ -56,13 +56,13 @@
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
         <td>
-          <p>Tento parametr má za účinek vyhlazování fontů, tím zlepšíte jejich zobrazování.</p>
+          <p>Tento argument má za účinek vyhlazování fontů, tím zlepšíte jejich zobrazování.</p>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <p><strong>Vyhlazování fontů (Java 6 a novější):</strong><em>&nbsp;-</em><span style=
+  <p><strong>Vyhlazování fontů (Java 6 a novější) :</strong><em>&nbsp;-</em><span style=
   "font-style: italic;">Dawt.useSystemAAFontSettings=XX</span></p>
 
   <table summary="just formatting">
@@ -71,7 +71,7 @@
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
         <td>
-          <p>&nbsp;Možné hodnoty pro „XX“ jsou „false“, „on“, „gasp“ a „lcd“. Uživatelé Linuxu mohou pozorovat, že podle použitého fontu a velikosti volby „on“ nebo „lcd“ zlepší vzhled fontu.</p>
+          <p>&nbsp;Možné hodnoty pro „XX“ jsou „false“, „on“, „gasp“ a „lcd“. Uživatelé Linuxu mohou zjistit, že podle použitého fontu a velikosti volby „on“ nebo „lcd“ zlepší vzhled fontu.</p>
         </td>
       </tr>
     </tbody>
@@ -85,7 +85,7 @@
         <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
 
         <td>
-          <p>Tento příkaz přiřadí více paměti programu OmegaT. Výchozí hodnota je nastavena na 256 MB, takže asi bude nevýhodné nastavovat menší hodnotu. Proměnná „ZZ“ reprezentuje část paměti zadávanou v megabytech. Příkaz pro spouštění OmegaT s nastavením 1024 MB (1 gigabyte) paměti je tedy:</p>
+          <p>Tento příkaz přiřadí více paměti programu OmegaT. Výchozí nastavení je nastaveno na 256 MB, takže asi bude nevýhodné nastavovat menší hodnotu. Proměnná „ZZ“ reprezentuje část paměti zadávanou v megabytech. Příkaz pro spouštění OmegaT s nastavením 1024 MB (1 gigabyte) paměti je tedy:</p>
 
           <p><em>java -Xmx1024M -jar OmegaT.jar</em></p>
         </td>
@@ -114,7 +114,7 @@
   
   <h2>Parametry akcí</h2>
   
-  <p>Následující příkazy zprostředkovávají aplikaci OmegaT, co má dělat. Musí být umístěny ZA  část „<em>-jar OmegaT.jar</em>“. Musíte přidat parametry do spouštěcího skriptu / spouštěče (zástupce) nebo je napsat do příkazové řádky. Nelze je přidávat do konfiguračního souboru jako parametry měnící chování programu.</p>
+  <p>Následující příkazy zprostředkovávají aplikaci OmegaT, co má dělat. Musí být umístěny ZA část „<em>-jar OmegaT.jar</em>“. Musíte přidat parametry do spouštěcího skriptu / spouštěče (zástupce) nebo je napsat do příkazového řádku. Nelze je přidávat do konfiguračního souboru jako parametry měnící chování programu.</p>
   
   <table style="width: 80%;" cellpadding="2" cellspacing="2" summary=
   "just formatting">
@@ -124,7 +124,7 @@
         <p><code>&lt;project-dir&gt;</code></p></td>
 
         <td style="text-align: left;" valign="top">
-          <p>říká programu OmegaT, aby při startu načetl zadaný projekt. Např. <code>/home/uzivatel/omegat_projecty/mujProjekt</code> nebo <code>"C:\Lokalizacni projekty\mujProjekt"</code>.</p>
+          <p>říká programu OmegaT, aby při startu načetl zadaný projekt. Např. <code>/home/uzivatel/omegat_projecty/mujProjekt</code> nebo <code>„C:\Lokalizacni projekty\mujProjekt“</code>.</p>
         </td>
       </tr>
 
@@ -133,7 +133,7 @@
         <p><code>--config-dir=&lt;config-dir&gt;</code></p></td>
 
         <td style="text-align: left;" valign="top">
-          <p>&nbsp;umožňuje sdělit aplikaci ve kterém adresáři jsou uloženy konfigurační soubory. Když není zadáno, OmegaT se vrátí k výchozím hodnotám (adresář OmegaT dir ve složce home uživatele, nebo když není dostupné: adresář, ve kterém se právě pracuje).</p>
+          <p>&nbsp;umožňuje sdělit aplikaci, ve kterém adresáři jsou uloženy konfigurační soubory. Když není zadáno, OmegaT s vrátí k výchozím hodnotám (adresář OmegaT dir ve složce home uživatele, nebo když není dostupné: adresář, ve kterém se právě pracuje).</p>
         </td>
       </tr>
 
@@ -200,7 +200,7 @@
         <p><code>--quiet</code></p></td>
 
         <td style="text-align: left;" valign="top">
-          <p>&nbsp;Platí pouze v režimu konzole. V režimu ‚quiet‘ (‚ticho‘) se na obrazovce zobrazuje méně informací. Všechna hlášení, která byste obvykle nalezli ve stavové liště se nebudou zobrazovat.</p>
+          <p>&nbsp;Platí pouze v režimu konzole. V „quiet“ („tichém“) režimu se na obrazovce zobrazuje méně informací. Všechna hlášení, která byste obvykle nalezli ve stavové liště se nebudou zobrazovat.</p>
 
           <p>Parametr je nepovinný a ve výchozím nastavení se hlášení budou zobrazovat na obrazovce.</p>
         </td>

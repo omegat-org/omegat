@@ -1,4 +1,4 @@
-﻿Tento překlad vypracoval [Josef Molnár], copyright© [2010].
+Tento překlad vypracoval [Josef Molnár], copyright© [2011].
 
 ==============================================================================
   OmegaT 2.0, soubor Read Me / Čti mě
@@ -17,8 +17,8 @@
 Nejaktuálnější informace o aplikaci OmegaT naleznete na adrese:
       http://www.omegat.org/
 
-Uživatelská podpora v rámci uživatelské skupiny na Yahoo (vícejazyčně), zde je možno prohledávat archívy i bez registrace:
-        
+Uživatelská podpora, v rámci uživatelské skupiny na Yahoo! (vícejazyčně), je zde možno prohledávat archívy i bez registrace:
+     http://groups.yahoo.com/group/OmegaT/
 
 Požadavky a návrhy na zlepšení (anglicky), na stránce SourceForge:
      http://sourceforge.net/tracker/?group_id=68187&atid=520350
@@ -43,15 +43,15 @@ Hlavní znaky programu:
   - podpora glosářů, tj. vlastních slovníků (kontrola terminologie) 
   - podpora průběžné kontroly pravopisu na základě OpenSource
   - podpora slovníků StarDict
-  - podpora služby strojového překladu Google Translate
+  - podpora služby strojového překladu Google Translate (Google překladač)
   - jasná a ucelená dokumentace a návod k programu
   - lokalizace do spousty jazyků.
 
 OmegaT bez problémů zvládá zpracovat následující formáty:
   - prostý text
   - HTML a XHTML
-  - HTML Help Compiler
-  - OpenDocument/OpenOffice.org
+  - soubory HTML Help Compiler
+  - soubory OpenDocument/OpenOffice.org
   - lokalizační balíčky Java resource bundles (.properties)
   - soubory INI (soubory obsahující páry key=value (klíč=hodnota) v libovolném kódování)
   - soubory PO
@@ -61,12 +61,13 @@ OmegaT bez problémů zvládá zpracovat následující formáty:
   - QuarkXPress CopyFlowGold
   - soubory titulků (SRT)
   - ResX
-  - Android resource
+  Soubory Android Resource
   - LaTeX
   - Typo3 LocManager
-  - Help & Manual
+  - Soubory Nápovědy & Příručky
   - zdroje Windows RC
   - Mozilla DTD
+  - DokuWiki
 
 Aplikaci OmegaT lze stejně dobře přizpůsobit i jiným formátům.
 
@@ -79,7 +80,7 @@ Uživatelská příručka je v balíčku, který jste právě stáhli, po spušt
 ==============================================================================
  3. Instalace programu OmegaT
 
-3.1 3.1 Obecné informace
+3.1 Obecné informace
 Ke spuštění vyžaduje OmegaT ve vašem systému nainstalované prostředí Java Runtime Environment (JRE) verzi 1.5 nebo vyšší. OmegaT je v současnosti nabízena ve standardním provedení již s JRE, aby se uživatelům ušetřily potíže s výběrem, získáním a instalací vhodného prostředí. 
 
 Jestliže Javu již máte, nejjednodušší způsob instalace aktuální verze programu OmegaT je použití Java Web Start. 
@@ -89,7 +90,7 @@ V takovém případě stačí stáhnout následující soubor a spustit jej:
 
 Při prvním spuštění bude nainstalováno nejen prostředí přesně pro váš počítač ale také samotná aplikace. Při dalším spuštění již nemusíte být online.
 
-V závislosti na operačním systému se může objevit několik bezpečnostních výstrah. Certifikát podepsal  „Didier Briel“ (self-signed). 
+V závislosti na operačním systému se může objevit několik bezpečnostních výstrah. Certifikát podepsal „Didier Briel“ (self-signed). 
 Práva, která udělíte této verzi (která lze nazývat jako „neomezený přístup k počítači“) jsou identická s právy, která jste přidělili lokální verzi při její instalaci, což znamená: tato práva povolí přístup na hard disk počítače. Při pozdějším spuštění souboru OmegaT.jnlp dojde ke kontrole verze, pokud tedy jste online, a když bude nalezena novější verze, tak ji nainstaluje a aplikaci OmegaT spustí. 
 
 Jiné způsoby stahování a instalace programu OmegaT si ukážeme později. 
@@ -109,11 +110,11 @@ protože Sun neposkytuje JRE pro systémy PPC. V tomto případě stahujte z adr
     http://www-128. ibm.com/developerworks/java/jdk/linux/download.html 
 
 
-3.2 3.2 Instalace
+3.2 Instalace
 * uživatelé Windows: Jednoduše spusťte instalátor. Pokud budete chtít, instalátor může vytvořit zástupce pro spouštění programu OmegaT.
 * Ostatní uživatelé: Pro instalaci programu OmegaT vytvořte odpovídající adresář pro program OmegaT (např. v Linuxu /usr/local/lib). Zkopírujte archív OmegaT zip nebo tar.gz do tohoto adresáře a zde jej také rozbalte.
 
-3.3 3.3 Spuštění programu OmegaT
+3.3 Spuštění programu OmegaT
 Program OmegaT lze spouštět několika způsoby.
 
 * uživatelé Windows: dvojitým kliknutím na soubor OmegaT.exe. Pokud ve vašem Správci souborů vidíte soubor OmegaT a ne OmegaT.exe (Průzkumník Windows), změňte nastavení tak, aby byly zobrazovány přípony souborů.
@@ -133,8 +134,7 @@ Pokud je Java instalována na úrovni systému, nemusíte vkládat úplnou cestu
 
 * uživatelé Linuxu KDE: program OmegaT můžete přidat do svých menu následovně:
 
-Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New 
-Submenu.
+Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New Submenu.
 
 Jakmile označíte vhodnou nabídku, přidejte položku podnabídky prostřednictvím File - New 
 Submenu a File - New Item. Jako název nové položky vložte OmegaT.
@@ -176,13 +176,15 @@ Mezi dřívější přispěvatele patří:
 
 Do kódu přispěli
   Zoltan Bartko
-  Didier Briel (správa vydávání nových verzí)
+  Volker Berlin
+  Didier Briel (správce vývoje / development manager)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (vedoucí vývojář)
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Ibai Lakunza Velasco
   Fabián Mandelbaum
   Maxym Mykhalchuk 
   Arno Peters
@@ -190,13 +192,15 @@ Do kódu přispěli
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Rashid Umarov  
+  Antonio Vilei
   Martin Wunderlich
 
-Other contributions by
+Ostatní přispěvatelé
   Sabine Cretella
   Dmitri Gabinski
-  Jean-Christophe Helary (správa lokalizace)
-  Vito Smolej (správa dokumentace)
+  Jean-Christophe Helary (správce lokalizace)
+  Vito Smolej (správce dokumentace)
   Samuel Murray
   Marc Prior 
   a mnoho, mnoho dalších velmi užitečných lidí
@@ -242,7 +246,7 @@ Každé dobré hlášení o chybě potřebuje přesně tři věci.
 Můžete přidat kopie souborů, části logu, snímky obrazovky, prostě cokoliv, o čem si myslíte, že pomůže vývojářům nalézt a opravit vámi hlášenou chybu.
 
 Archívy uživatelské skupiny můžete prohlížet na adrese:
-        
+     http://groups.yahoo.com/group/OmegaT/
 
 Prohlížet stránku hlášení o chybách a v případě potřeby přidat nové hlášení můžete zde:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347

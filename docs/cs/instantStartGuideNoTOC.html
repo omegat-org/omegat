@@ -15,11 +15,11 @@
 
   <h2>Krátce o tom, jak OmegaT pracuje</h2>
 
-  <p>Okno aplikace OmegaT se skládá z jednoho velkého okna se třemi různými podokny. Velikost každého z těchto oken může být změněná za použití myši. Vlevo je Editor, sem vpisujete svůj překlad. Napravo nahoře je okno Přibližných překladů, kde se zobrazují nalezené položky z překladové paměti. Pod ním je okno Glosáře, zde se zobrazují nalezené záznamy ze slovníku.</p>
+  <p>Okno aplikace OmegaT se skládá z jednoho velkého okna se třemi různými podokny. Velikost každého z těchto oken může být změněná za použití myši. Vlevo je Editor, sem vpisujete svůj překlad. Napravo nahoře je podokno Přibližných překladů, kde se zobrazují nalezené položky z překladové paměti. Pod ním je okno Glosáře, zde se zobrazují nalezené záznamy ze glosáře, čili vlastního slovníku.</p>
 
   <p>V okně Editor zobrazuje OmegaT zdrojový text ‚segmentovaný‘ do vět (nebo odstavců). Tyto segmenty překládáte jednotlivě jeden za druhým. Když přecházíte od segmentu k segmentu, vaše překlady se zaznamenávají do překladové paměti. Jakmile jsou všechny segmenty přeloženy (nebo dle potřeby i dříve) OmegaT použije překladovou paměť pro vygenerování přeloženého dokumentu (přeložených dokumentů) do složky „Target“, tj. do cílové složky.</p>
 
-  <p>OmegaT organizuje vaši překladatelskou práci v tzv. překladových projektech. Pro každý projekt vytvoří OmegaT sadu adresářů. Ty se používají pro uložení zdrojových dokumentů určených na překlad, slovníků, které můžete chtít použít, a jakýchkoliv překladových pamětí, které byste chtěli použít. OmegaT také vytvoří složku „Target“ (Cíl), která obsahuje výsledné přeložené dokumenty.</p>
+  <p>OmegaT organizuje vaši překladatelskou práci v tzv. překladových projektech. Pro každý projekt vytvoří OmegaT sadu adresářů. Ty se používají pro uložení zdrojových dokumentů určených na překlad, také k ukládání glosářů, které můžete chtít použít, a jakýchkoliv překladových pamětí, které byste chtěli použít. OmegaT také vytvoří složku „Target“ (Cíl), která obsahuje výsledné přeložené dokumenty.</p>
   <hr>
   <a name="translate" id="translate"></a>
 
@@ -84,7 +84,7 @@
     <li>Pokud chcete raději překládat do prázdného cílového pole, nastavte tuto volbu <strong>Možnosti → Nastavení editace ...</strong>.</li>
 
     <li>
-      <p>Můžete změnit nastavení okna Editoru (například aby zobrazoval či skryl zdrojový text, zvýraznit přeložený text atd.) v položce <span style="font-weight: bold;">Zobrazit</span> v nabídce Hlavního okna.</p>
+      <p>Můžete změnit nastavení podokna Editoru (například aby zobrazoval či skryl zdrojový text, zvýraznit přeložený text atd.) v položce <span style="font-weight: bold;">Zobrazit</span> v nabídce Hlavního okna.</p>
     </li>
   </ul>
 
@@ -94,24 +94,24 @@
 
   <h3>Shodné položky z překladové paměti</h3>
 
-  <p>Když OmegaT najde v překladové paměti nějaké přibližné překlady (30% nebo výše) pro následující segment, zobrazí je v okně Přibližné překlady. Podle výchozího nastavení je v okně Přibližné překlady vybraná první shoda.</p><img src=
+  <p>Když OmegaT najde v překladové paměti nějaké přibližné překlady (30% nebo výše) pro následující segment, zobrazí je v podokně Přibližné překlady. Podle výchozího nastavení je v podokně Přibližné překlady vybraná první shoda.</p><img src=
   "images/MatchesPane.png" name="graphics4" alt="Okno Přibližné překlady" id="graphics4"
   style="border: 0px solid ;"><br clear="left">
 
   <p><br></p>
 
-  <p>Pro vložení shodné položky překladové paměti z okna Přibližných překladů do vašeho cílového pole, můžete použít klávesové zkratky:</p>
+  <p>Pro vložení shodné položky překladové paměti z podokna Přibližných překladů do vašeho cílového pole, můžete použít klávesové zkratky:</p>
 
   <ul>
     <li>Stiskněte <code>Ctrl+I</code> pro vložení vybrané shodné položky na aktuální pozici kurzoru, nebo ...</li>
 
-    <li>Stiskněte <code>Ctrl+R</code> pro přepsání celého segmentu vybranou položkou. </li>
+    <li>Stiskněte <code>Ctrl+R</code> pro přepsání celého segmentu vybranou položkou.</li>
   </ul>
 
   <p>Pokud bylo nalezeno několik shodných položek a nechcete použít tu vybranou:</p>
 
   <ul>
-    <li>Vyberte v okně Přibližných překladů shodnou položku, kterou chcete: <code>Ctrl+2</code> pro druhou zobrazenou shodnou položku, <code>Ctrl+3</code> pro třetí shodnou položku, atd.</li>
+    <li>Vyberte v podokně Přibližných překladů shodnou položku, kterou chcete: <code>Ctrl+2</code> pro druhou zobrazenou shodnou položku, <code>Ctrl+3</code> pro třetí shodnou položku, atd.</li>
 
     <li>Pak stiskněte zkratky <code>Ctrl+I</code> nebo <code>Ctrl+R</code> ve funkci, jak již bylo popsáno výše.</li>
   </ul>
@@ -128,7 +128,7 @@
 
   <h3>Použití Google překladač</h3>
 
-  <p>V okně Google překladač, pokud jej máte aktivováno, se budou automaticky zobrazovat návrhy pro překlad právě aktivního segmentu. Překlad vložíte do cílového segmentu pomocí <code>Ctrl+M</code>.<br></p>
+  <p>V okně Google překladač, pokud jej máte aktivováno, se budou automaticky zobrazovat návrhy pro překlad právě aktivního segmentu. Stiskem <code>Ctrl+M</code> nahradíte současný obsah cílového segmentu.<br></p>
 
   <p><a name="create_trans" id="create_trans"></a></p>
 
@@ -147,7 +147,7 @@
   <p>V těchto krocích jsme zvýraznili tagy tak, aby byli viditelnější, ale v OmegaT zvýrazněné nebudou. Tagy HTML, zvýrazněny <font color="blue">modře</font>, OmegaT ignoruje, protože kompletně obemykají segment. Tagy, níže zvýrazněné <font color=
   "green">zeleně</font> musí OmegaT zpracovávat, protože tyto se nacházejí uvnitř segmentu. Zde je příklad segmentu v HTML:</p>
 
-  <p><code><font color="blue">&lt;p&gt;</font>Iné písmo zobrazenia môže byť vybraté cez dialógové okno <font color="green">&lt;b&gt;</font>Písmo zobrazenia<font color=
+  <p><code><font color="blue">&lt;p&gt;</font>Jiné písmo pro zobrazení textu může být vybrané přes dialogové okno<font color="green">&lt;b&gt;</font>Písmo<font color=
   "green">&lt;/b&gt;</font>. Otevřete jej přes <font color=
   "green">&lt;i&gt;</font>Možnosti<font color="green">&lt;/i&gt;</font> →<font color="green">&lt;i&gt;</font>Písmo...<font color=
   "green">&lt;/i&gt;</font>. Font a velikost písma mohou být změněny z dialogového okna.<font color="blue">&lt;/p&gt;</font></code></p>
@@ -163,7 +163,7 @@
 
   <h3>Ověření tagů</h3>
 
-  <p>OmegaT nedetekuje automaticky chybné značkování/tagování v přeloženém dokumentu. Proto před tím, než dodáte cílový dokument vašemu klientovi, měli byste zkontrolovat, zda vaše tagy neobsahují chyby.</p>
+  <p>OmegaT nedetekuje automaticky chybné značkování / tagování v přeloženém dokumentu. Proto před tím, než dodáte cílový dokument vašemu klientovi, měli byste zkontrolovat, zda vaše tagy neobsahují chyby.</p>
 
   <p>Vyberte z menu <strong>Nástroje → Ověření tagů</strong>. Zobrazí se tabulka znázorňující, kde se zdrojové a cílové tagy neshodují. Klikněte na číslo segmentu. V Editoru budete automaticky přemístěni na sporný segment, kde můžete tagování opravit. Stiskněte <code>Enter</code> pro potvrzení opraveného segmentu a zkontrolujte správnost opětovným stiskem <code>Ctrl+T</code>.</p>
 

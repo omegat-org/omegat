@@ -38,11 +38,11 @@
 
               <ul>
                 <li>
-                  <p><a href="#Editor">Okno Editoru</a></p>
+                  <p><a href="#Editor">Podokno Editoru</a></p>
                 </li>
 
                 <li>
-                  <p><a href="#Match">Okno Přibližné překlady</a></p>
+                  <p><a href="#Match">Podokno Přibližné překlady</a></p>
                 </li>
 
                 <li>
@@ -102,7 +102,7 @@
                 </li>
 
                 <li>
-                  <p><a href="#search">Okno Hledat</a></p>
+                  <p><a href="Hledat">Okno Hledat</a></p>
 
                   <ul>
                     <li>
@@ -157,7 +157,7 @@
 
       <tr>
         <td width="24%">
-          <p>--- Okno Editoru</p>
+          <p>--- Podokno Editoru</p>
         </td>
 
         <td width="83%">
@@ -167,7 +167,7 @@
 
       <tr>
         <td width="24%">
-          <p>--- Okno Přibližné překlady</p>
+          <p>--- Podokno Přibližné překlady</p>
         </td>
 
         <td width="83%">
@@ -387,7 +387,7 @@
     </tbody>
   </table><br>
 
-  <h3><a name="Editor" id="Editor"></a>Okno Editoru</h3>
+  <h3><a name="Editor" id="Editor"></a>Podokno Editoru</h3>
 
   <p>Sem budete vpisovat a editovat zde překlad. Podokno editoru zobrazuje text částečně přeloženého dokumentu, tzn. text, který je už přeložený je také jako přeložený zobrazen, a text, který ještě není přeložený se zobrazuje v původním jazyce.  Zobrazený text je rozdělený do segmentů, a překladatel může přecházet dokumentem na kterýkoliv segment a editovat jej. Ve výše uvedeném příkladě nejsou přeložené segmenty zvýrazněny jediným možným způsobem; uživatel si může nastavit zvýrazňování podle svých představ - například označit je žlutě (vizte menu <a href="menu.html">Zobrazit).</a></p>
 
@@ -397,7 +397,7 @@
 
   <p>Více podrobností najdete v části <a href="translationEditing.html">Editace překladu</a>.</p>
 
-  <h3><a name="Match" id="Match"></a>Okno Přibližné překlady</h3>Okno shodných výrazů ukazuje nejvíce podobné segmenty z <a href="translationMemories.html">překladových pamětí</a>, jednak z překladové paměti projektu vytvořeného během překládání vašeho projektu, za další i ze starších překladových pamětí, které importuje z vašich předchozích prací, nebo je můžete získat od vašeho klienta či překladatelské agentury.<br>
+  <h3><a name="Match" id="Match"></a>Podokno Přibližné překlady</h3>Podokno přibližných překladů ukazuje nejvíce podobné segmenty z <a href="translationMemories.html">překladových pamětí</a>, jednak z překladové paměti projektu vytvořeného během překládání vašeho projektu, za další i ze starších překladových pamětí, které importuje z vašich předchozích prací, nebo je můžete získat od vašeho klienta či překladatelské agentury.<br>
   <img src="images/MatchesPane.png" name="grafika2" alt="Podokno Přibližné překlady" id=
   "grafika2" align="left" border="0"><br clear="left">
 
@@ -408,7 +408,7 @@
   "menu.html#shortcuts">vybrat</a> další překlad stiskem <code>Ctrl+2</code>, <code>3</code>, <code>4</code> nebo <code>5</code>. Nicméně pokud není dostupný návrh č. 5, stiskem <code>Ctrl+5</code> ničeho nedocílíte. Pro použití <strong>vybraného</strong> shodného výrazu ve vašem překladu, stiskněte <code><a href="menu.html#shortcuts">Ctrl+R</a></code> pro nahrazení cílového pole nalezeným výrazem, nebo stiskněte <code><a href=
   "menu.html#shortcuts">Ctrl+I</a></code> pro jeho vložení na pozici kurzoru.</p>
 
-  <p>Míra shody - tj. míra rozdílnosti mezi zdrojovým segmentem a kandidáty na překlad - je zhruba vypočítávána z počtu společných slov v nalezeném a původním segmentu, děleno počtem slov v tom delším. V případě, že používáte plugin tokenizeru, budou slova nejdřív převedena na své kořeny. Eventuálně, slova zůstanou ve svém původním tvaru, a jen interpunkce, čísla a tagy budou ignorovány. A konečně, rozdíly mezi tagy, čísly a interpunkcí - které se v prvních dvou případech nebraly v úvahu - mohou být začleněny do výpočtu. Okno Přibližné překlady může zobrazit tři hodnoty takto:</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
+  <p>Míra shody - tj. míra rozdílnosti mezi zdrojovým segmentem a kandidáty na překlad - je zhruba vypočítávána z počtu společných slov v nalezeném a původním segmentu, děleno počtem slov v tom delším. V případě, že používáte plugin tokenizeru, budou slova nejdřív převedena na své kořeny. Eventuálně, slova zůstanou ve svém původním tvaru, a jen interpunkce, čísla a tagy budou ignorovány. A konečně, rozdíly mezi tagy, čísly a interpunkcí - které se v prvních dvou případech nebraly v úvahu - mohou být začleněny do výpočtu. Podokno Přibližné překlady může zobrazit tři hodnoty takto:</p>&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &lt;<span style=
   "font-style: italic;">% shoda za použití tokenizeru / % shoda podle výchozího nastavení aplikace OmegaT / % shoda se zahrnutím tagů, čísle a interpunkce</span>&gt;&nbsp;
 
   <p>Ve výše uvedeném příkladu, první dva údaje (46/46) jsou si rovny, protože nebylo použito tokenizeru. Třetí procento (39) je nižší, protože jsou tam rozdíly mezi interpunkcí a tagy.</p>
@@ -534,7 +534,7 @@
   <p>Tagy jsou zvýrazněné tučným modrým písmem a lze snadno srovnat původní obsah s obsahem přeloženým. Klikněte na odkaz pro přejití na segment v Editoru. Pokud je to nutné, opravte chybu a stiskněte <code><a href="menu.html#shortcuts">Ctrl+T</a></code> pro návrat k oknu Ověření tagů a tak můžete opravit případné další chyby. V prvním a třetím případě v uvedeném příkladě jsou tagy spárovány chybně, a ve druhém případě chybí v otevíracím tagu znaménko &lt;.</p>
 
   <p>Chyby <a href="formattedText.html#intro">tagů</a> vyvstávají při <a href=
-  "formattedText.html#tag_operation">manipulaci s tagy</a> během překladu, které nereflektují stejný pořádek a počet tagů, po vzoru původního segmentu. Některé změny tagů jsou nutné a neškodné, oproti tomu některé zapříčiní problémy při vytváření přeložených dokumentů. Tagy všeobecně představují nějaký druh formátování v původním textu. <strong>Zjednodušení formátování původního textu</strong> přispívá ve velké míře ke snížení počtu tagů.</p>
+  "formattedText.html#tag_operation">manipulaci s tagy</a> během překladu, které nereflektují stejný pořádek a počet tagů, po vzoru původního segmentu. Některé změny tagů jsou nutné a neškodné, oproti tomu některé zapříčiní problémy při vytváření přeložených dokumentů. Tagy všeobecně představují nějaký druh formátování v původním textu. <strong>Zjednodušení formátování původního textu</strong> ve velké míře přispívá ke snížení počtu tagů.</p>
 
   <h3>Prohlížeč Nápovědy</h3>
 

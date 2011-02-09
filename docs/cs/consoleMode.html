@@ -3,11 +3,11 @@
   <link rel="stylesheet" href=" " type="text/css">
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 
-  <title>Režim příkazové řádky - OmegaT 2.1 Uživatelská příručka</title>
+  <title>Režim příkazového řádku - OmegaT 2.1 Uživatelská příručka</title>
 </head>
 
 <body>
-  <h1>OmegaT Režim příkazové řádky</h1>
+  <h1>OmegaT Režim příkazového řádku</h1>
 
   <ul>
     <li>
@@ -15,34 +15,34 @@
     </li>
 
     <li>
-      <p><a href="#start">Spouštění aplikace v režimu příkazové řádky</a></p>
+      <p><a href="#start">Spouštění aplikace v režimu příkazového řádku</a></p>
     </li>
 
   </ul>
   <p>&nbsp;</p>
 
-  <p>Důvod proč využívat příkazovou řádku (konzoli) je použití aplikace OmegaT jako překladatelský nástroj ve skriptovacím prostředí. Když aplikaci spustíte v příkazové řádce, nenahraje se žádné grafické prostředí (takže je možné pracovat v jakémkoliv typu příkazové řádky). V závislosti na provozním módu, je daný projekt automaticky přeložen nebo je vytvořena pseudo-překladová paměť.</p>
+  <p>Důvod proč využívat příkazový řádek (konzoli) je použití aplikace OmegaT jako překladatelský nástroj ve skriptovacím prostředí. Když aplikaci spustíte v příkazovém řádku, nenahraje se žádné grafické prostředí (takže je možné pracovat v jakémkoliv typu příkazovém řádku). V závislosti na provozním módu, je daný projekt automaticky přeložen nebo je vytvořena pseudo-překladová paměť.</p>
   <hr>
 
   <h3><a name="prerequisites" id="prerequisites"></a>Co budeme potřebovat</h3>
 
-  <p>Aby šlo spustit aplikaci OmegaT, musíme mít platný projekt OmegaT. Umístění není důležité, protože se tento údaj stejně musí zadat v příkazu při startu.</p>
+  <p>Aby šlo spustit aplikaci OmegaT, musíme mít platný projekt OmegaT. Umístění není důležité, protože se tento údaj stejně musí zadat v příkazovém řádku při startu.</p>
 
-  <p>Jestli budete chtít změnit nastavení, musíte mít konfigurační soubory. Toho lze dosáhnout dvěma způsoby:</p>
+  <p>Pokud budete chtít změnit nastavení, musíte mít konfigurační soubory. Toho lze dosáhnout dvěma způsoby:</p>
 
   <ol>
-    <li>Spusťte aplikaci běžným způsobem (přes grafické prostředí) a zvolte vhodné nastavení. Když OmegaT běží v příkazové řádce, tak bude použito stejné nastavení. Když nejde aplikaci OmegaT spustit běžným způsobem (není dostupné žádné grafické prostředí):</li>
+    <li>Spusťte aplikaci běžným způsobem (přes grafické uživatelské prostředí / GUI) a zvolte vhodné nastavení. Když OmegaT běží v režimu příkazového řádku, tak bude použito stejné nastavení. Když nejde OmegaT spustit běžným způsobem (není dostupné žádné grafické prostředí):</li>
 
-    <li>zkopírujte do patřičného adresáře soubory nastavení z jiné instalace aplikace OmegaT na jiném počítači. Umístění není důležité, protože se tento údaj může zadat v příkazu při startu. Důležité soubory jsou filters.conf a segmentation.conf a můžete je najít v adresáři home daného uživatele (např. C:\Dokumenty a nastavení\%Uživatel%\OmegaT ve Windows, %uživatel%/.omegat/ v Linuxu)</li>
+    <li>Zkopírujte do patřičného adresáře soubory nastavení z jiné instalace aplikace OmegaT na jiném počítači. Umístění není důležité, protože se tento údaj může zadat v příkazovém řádku při startu. Důležité soubory jsou filters.conf a segmentation.conf a můžete je najít v adresáři home daného uživatele (např. C:\Dokumenty a nastavení\%Uživatel%\OmegaT ve Windows, %uživatel%/.omegat/ v Linuxu)</li>
   </ol><br>
 
-  <h3><a name="start" id="start"></a>Spouštění aplikace v režimu příkazové řádky</h3>
+  <h3><a name="start" id="start"></a>Spouštění aplikace v režimu příkazového řádku</h3>
 
-  <p>Pokud chcete aplikaci OmegaT spouštět v konzoli, musíte při startu nastavit pár extra parametrů. Povinné jsou <code>&lt;project-dir&gt;</code> a <code>--mode=&lt;mode&gt;</code>.</p>
+  <p>Pro spuštění aplikace OmegaT v režimu příkazového řádku musíte při startu nastavit pár parametrů navíc. Povinné jsou <code>&lt;project-dir&gt;</code> a <code>--mode=&lt;mode&gt;</code>.</p>
 
-  <p>Další parametry musí (nebo mohou) být dostupné v závislosti na režimu. Více informací najdete v části <a href="commandlineArguments.html">Parametry příkazové řádky</a></p>
+  <p>Další parametry musí (nebo mohou) být dostupné v závislosti na režimu. Více informací najdete v části <a href="commandlineArguments.html">Parametry příkazového řádku</a></p>
 
-  <p>Příklad překladového projektu:<br> <code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate</code><br> Příklad překladového projektu pro jeden soubor:<br> <code>$&gt;java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-translate --source-pattern=test\.html</code><br> Příklad pro vytvoření pseudo-překladové paměti:<br> <code>java -jar OmegaT.jar /path/to/project --config-dir=/path/to/config-files/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code></p>
+  <p>Příklad překladového projektu:<br> <code>$&gt; java -jar OmegaT.jar /cesta/k/projektu --config-dir=/cesta/ke/konfiguračním-souborům/ --mode=console-translate</code><br> Příklad překladového projektu pro jeden soubor:<br> <code>$&gt;java -jar OmegaT.jar /cesta/k/projektu --config-dir=/cesta/ke/kkonfiguracnim-souborum/ --mode=console-translate --source-pattern=test\.html</code><br> Příklad pro vytvoření pseudo-překladové paměti:<br> <code>java -jar OmegaT.jar /cesta/k/projektu --config-dir=/cesta/ke/kkonfiguracnim-souborum/ --mode=console-createpseudotranslatetmx --pseudotranslatetmx=allsegments.tmx --pseudotranslatetype=equal</code></p>
 
   <hr>
 

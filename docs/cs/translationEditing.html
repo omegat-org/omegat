@@ -15,22 +15,16 @@
     </li>
 
     <li>
-      <p><a href="#validation">Segmenty, které se nepřekládají</a></p>
-    </li>
-  </ul>
-
-  <p>Chování pole editace můžeme nastavovat následujícími způsoby:</p>
-
-  <ul>
-    <li>
-      <p>Automaticky vložit nejpřibližnější dostupný překlad</p>
+      <p><a href="#validation">Povolit překlad rovnající se zdroji</a></p>
     </li>
 
     <li>
-      <p>Segmenty rovnající se originálu považovat za přeložené</p>
+      <p><a href="#Export">Exportovat segment do textového souboru</a></p>
     </li>
-  </ul>
-  <hr>
+  </ul><img alt="Dialogové okno Nastavení editace" src=
+  "images/EditingBehaviourOptions.png"><br>
+
+  <p>Toto dialogové okno, které je dostupné přes Možnsti &gt; Nastavení editace..., dovoluje uživateli určit, jak bude daný segment rozpoznán a zpracován.</p>
 
   <h2><a name="auto_insert" id="auto_insert"></a>Automatické vložení přibližného překladu</h2>
 
@@ -65,19 +59,23 @@
       </td>
 
       <td>
-        <p>OmegaT vloží překlad řetězce, který nejlépe odpovídá aktuálnímu zdroji, ovšem tedy pokud je v tomto případě nastaven práh výše zmíněné podobnosti.</p>
+        <p>OmegaT vloží překlad řetězce, který nejlépe odpovídá aktuálnímu zdroji, ovšem jen tedy, pokud je podobnost nad prahem výše zmíněné podobnosti, která se nastavuje v tomto dialogovém okně (100% ve výše zmíněném případě). Pokud byla nalezena shoda, do cílového segmentu se doplní tzv. prefix, čili předponu, která je specifikována v okně Předpona (v příkladě nahoře je [fuzzy] - [přibližně]). Tato skutečnost ulehčuje pozdější hledání předpřeložených segmentů.</p>
       </td>
     </tr>
   </table>
   <hr>
 
-  <h2><a name="validation" id="validation"></a>Segmenty, které se nepřekládají</h2>
+  <h2><a name="validation" id="validation"></a>Povolit překlad rovnající se zdroji</h2>
 
   <p>Překládané dokumenty, mohou obsahovat obchodní značky, názvy nebo jiná vlastní jména, která v přeložených dokumentech musí zůstat stejná. Existují dva postupy pro segmenty, které obsahují jen takový neměnitelný text.</p>
 
   <p>Můžete se rozhodnout takovéto segmenty nepřekládat - program OmegaT bude tedy tyto segmenty označovat jako nepřeložené. Toto odpovídá výchozímu nastavení.</p>
 
   <p>Jiná možnost je, že vložíte překlad i když se rovná zdrojovému textu, takže OmegaT si bude pamatovat, že jste si text prohlédli a rozhodli jste se ho přeložit jako stejný text.  Aby to tak fungovalo, přejděte na <strong>Možnosti → Nastavení editace...</strong> a zaškrtněte políčko <strong>Povolit překlad rovnající se zdroji</strong>.</p>
+
+  <h2><a name="Export" id="Export"></a>Exportovat segment do textového souboru</h2>
+
+  <p>Možná upřednostníte možnost nechat segmenty nepřeložené tak jak jsou a vrátit se k nim později. V tomto případě můžete aktivovat zaškrtávací políčko Povolit překlad rovnající se zdroji a OmegaT uloží takové zdrojové segmenty do souboru k pozdějšímu překladu.</p>
   <hr>
 
   <table summary="just formatting" style="width: 100%;" border="0" cellpadding=

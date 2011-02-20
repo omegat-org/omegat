@@ -1,4 +1,4 @@
-Esta tradução foi feita por [Thelma L Sabim], copyright© [2009].
+This translation is the work of Thelma L Sabim, copyright© 2011.
 
 ==============================================================================
   OmegaT 2.0, arquivo Leia-me
@@ -37,7 +37,7 @@ Os principais recursos do OmegaT são
   - flexibilidade de segmentação de frases (usando um método como SRX)
   - busca no projeto e nas memórias de tradução de referência
   - pesquisa de arquivos nos formatos suportados em qualquer pasta 
-  - apresenta correspondência parcial de frases
+  - apresenta correspondência parcial
   - processamento inteligente de projetos, inclusive hierarquias complexas de diretórios
   - suporte para glossários (verificação de terminologia) 
   - suporte para corretores ortográficos do OpenSource à medida que surgirem
@@ -56,25 +56,25 @@ OmegaT trabalha diretamente com os seguintes tipos de arquivos:
   - arquivos PO
   - formato de arquivo de documentação DocBook
   - arquivos Microsoft OpenXML 
-  - arquivos XLIFF monolingue do Okapi
+  - arquivos XLIFF monolíngue do Okapi
   - QuarkXPress CopyFlowGold
-  - Arquivos legendas (SRT)
+  - arquivos legendas (SRT)
   - ResX
-  - recurso Android
+  - recursos Android
   - LaTeX
   - Typo3 LocManager
-  - Ajuda e Manual
-  - Recursos RC Windows
+  - Help & Manual
+  - recursos Windows RC
   - Mozilla DTD
   - DokuWiki
 
 O OmegaT pode ser adaptado para ser compatível com outros formatos de arquivo.
 
-O OmegaT analisará automaticamente até mesmo as hierarquias mais complexas de pastas fonte para acessar todos os formatos de arquivos suportados e produzirá uma pasta destino exatamente com a mesma estrutura, inclusive cópias de arquivos em formatos para os quais não oferece suporte.
+OmegaT analisará automaticamente até mesmo as hierarquias mais complexas de pastas fonte para acessar todos os formatos de arquivos suportados e produzirá uma pasta destino exatamente com a mesma estrutura, inclusive cópias de arquivos em formatos para os quais não oferece suporte.
 
-Para acessar as instruções básicas, inicie o OmegaT e leia o tutorial de Início Rápido.
+Para acessar as instruções básicas, inicie o OmegaT e leia o tutorial do Início Rápido.
 
-O manual do usuário está no pacote de arquivos que você acabou de baixar; ele está disponível no menu [Ajuda], após iniciar o OmegaT.
+O manual do usuário está no pacote de arquivos que você acabou de baixar; ele pode ser acessado no menu [Ajuda], após iniciar o OmegaT.
 
 ==============================================================================
  3. Instalação do OmegaT
@@ -88,21 +88,21 @@ Para isso, baixe e rode o seguinte arquivo:
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
 
-Na primeira vez que rodar, ele instalará o ambiente correto para seu computador e o aplicativo. Para outras chamadas do programa não é preciso estar on-line.
+Ele instalará o ambiente correto para seu computador e o aplicativo na primeira rodada. Para outras chamadas do programa não é preciso estar on-line.
 
 Durante a instalação, dependendo do seu sistema operacional, você pode receber diversos avisos de segurança. O certificado de autenticidade e segurança tem a assinatura do "Didier Briel". 
-As permissões que você dá a esta versão (que podem ser mencionadas como um "acesso irrestrito ao computador") são idênticas às permissões que você dá à versão local, instaladas por um procedimento descrito posteriormente: elas permitem acesso ao disco rígido do computador. Se você estiver on-line e clicar em OmegaT.jnlp 
+As permissões que você dá a esta versão (que podem ser mencionada como um "acesso irrestrito ao computador") são idênticas às permissões dadas à versão local, instaladas por um procedimento descrito posteriormente: elas permitem acesso ao disco rígido do computador. Se você estiver on-line e clicar em OmegaT.jnlp 
 o programa verificará se há atualizações. Se houver, instale-as e depois inicie o OmegaT. 
 
 Veja a seguir as formas e meios alternativos para baixar e instalar o OmegaT. 
 
-Usuário Windows e Linux: se você tiver certeza de que seu computador já tem a versão apropriada do JRE, instale o OmegaT sem o JRE (o nome da versão sem Java indica "Without_JRE"). 
-Se tiver dúvidas, recomendamos usar a versão "standard", 
+Usuário do Windows e Linux: se você tiver certeza de que seu computador já tem a versão apropriada do JRE, instale o OmegaT sem o JRE (o nome da versão sem Java indica "Without_JRE"). 
+Se tiver dúvidas, recomendamos que use a versão "standard", 
 ou seja, com JRE. Este procedimento é seguro, mesmo se o JRE já estiver instalado no seu computador; esta versão não causará nenhuma interferência no sistema.
 
-Usuário Linux: note que o OmegaT não funciona com as implementações Java gratuitas/código-aberto que estão incluídas em muitas distribuições do Linux (por exemplo, Ubuntu), pois elas podem estar desatualizadas ou incompletas. Use o link acima para baixar e instalar o Java Runtime Environment (JRE) da Sun, ou baixe e instale o pacote OmegaT com o JRE (o pacote .tar.gz marcado "Linux").
+Usuário do Linux: note que o OmegaT não funciona com as implementações Java gratuitas/código-aberto que estão incluídas em muitas distribuições do Linux (por exemplo, Ubuntu), pois elas podem estar desatualizadas ou incompletas. Use o link acima para baixar e instalar o Java Runtime Environment (JRE) da Sun, ou baixe e instale o pacote OmegaT com o JRE (o pacote .tar.gz marcado "Linux").
 
-Usuário Mac: o JRE já está instalado no Mac OS X.
+Usuário do Mac: o JRE já está instalado no Mac OS X.
 
 O Linux em sistemas PowerPC: os usuários precisarão baixar o JRE da IBM, pois a Sun não oferece um JRE para sistemas PPC. Neste caso, baixe o JRE do:
 
@@ -110,15 +110,16 @@ O Linux em sistemas PowerPC: os usuários precisarão baixar o JRE da IBM, pois 
 
 
 3.2 Instalação
-* Usuário Windows: é só rodar o programa de instalação. Se quiser, o programa de instalação cria atalhos para iniciar o OmegaT.
- * Outros: para instalar o OmegaT, basta criar uma pasta para o OmegaT
+* Usuário do Windows: é só rodar o programa de instalação. Se quiser, o programa de instalação cria atalhos para iniciar o OmegaT.
+* Outros: para instalar o OmegaT, basta criar uma pasta para o OmegaT
 (p.ex., /usr/local/lib no Linux). Copie o arquivo compactado OmegaT ou tar.gz
 para esta pasta e faça a descompactação.
 
 3.3 Como rodar o OmegaT
 O OmegaT pode ser acessado de várias maneiras.
 
-* Usuário Windows: abrir o arquivo OmegaT.exe com um clique duplo. Se o Gerenciador de Arquivos (Windows Explorer) exibir o arquivo OmegaT mas não o arquivo OmegaT.exe, modifique as configurações para exibir as extensões dos arquivos.
+* Usuário do Windows: abrir o arquivo OmegaT.exe com um clique duplo. Se o Gerenciador de Arquivos (Windows Explorer) exibir o arquivo OmegaT mas não o arquivo OmegaT.exe, 
+modifique as configurações para que as extensões dos arquivos sejam exibidas.
 
 * Dê um clique duplo no arquivo OmegaT.jar. Isto funcionará somente se o tipo de arquivo .jar
 estiver associado com o Java no seu sistema.
@@ -132,23 +133,24 @@ cd <pasta que contém o arquivo OmegaT.jar>
 (O arquivo Java executável é o arquivo java no Linux e o java.exe no Windows.
 Se o Java for instalado no sistema, não é necessário digitar o caminho completo.)
 
-* Usuário Windows: o programa de instalação pode criar atalhos no menu iniciar, na área de trabalho e na área de acesso rápido. Você também pode arrastar o arquivo OmegaT.exe para o menu Iniciar, para a área de trabalho ou para a de acesso rápido para fazer um link dali.
+* Usuário do Windows: o programa de instalação pode criar atalhos no menu Iniciar, na área de trabalho e na área de acesso rápido. Você também pode arrastar o arquivo OmegaT.exe para o menu Iniciar, para a área de trabalho ou para a de acesso rápido para fazer um link dali.
 
-* Usuário Linux KDE: o OmegaT pode ser adicionado nos menus da seguinte maneira:
+* Usuário do Linux KDE: o OmegaT pode ser adicionado nos menus da seguinte maneira:
 
-Centro de Controle - Desktop - Panels - Menus - Editar Menu K - Arquivo - Novo item/Novo submenu.
+Centro de Controle - Desktop - Panels - Menus - Edit K Menu - File - New Item/New 
+Submenu.
 
-Depois de selecionar um menu, acrescente um submenu/item com Arquivo - Submenu e Arquivo - Novo Item. Digite OmegaT como o nome do novo item.
+Depois de selecionar um menu, acrescente um submenu/item com File - New Submenu (Arquivo, Submenu) e File - New Item (Arquivo - Novo Item). Digite OmegaT como o nome do novo item.
 
-No campo "Comando", use o botão de navegação para localizar e selecionar o script que inicia o OmegaT. 
+No campo 'Command', use o botão de navegação para localizar e selecionar o script que inicia o OmegaT. 
 
-Clique no ícone (à direita dos campos Nome/Descrição/Comentário) Outros ícones - Navegar, e acesse a subpasta /imagens na pasta do OmegaT. Selecione o ícone OmegaT.png.
+Clique no ícone (à direita dos campos Name/Description/Comment) Other Icons - Browse (Outros Ícones - Navegar), e acesse a subpasta /imagens na pasta do OmegaT. Selecione o ícone OmegaT.png.
 
-Finalmente, grave as modificações com Arquivo - Salvar.
+Finalmente, grave as modificações com File - Save (Arquivo - Salvar).
 
-* Usuário Linux GNOME: o OmegaT pode ser adicionado ao seu painel (a barra no topo da tela) conforme segue:
+* Usuário do Linux GNOME: o OmegaT pode ser adicionado ao seu painel (a barra no topo da tela) conforme segue:
 
-Clique com o botão direito do mouse no painel - Adicionar Novo Chamador. Digite "OmegaT" no campo "Nome"; no campo "Comando", use o botão de navegação para localizar o script para iniciar o OmegaT. Selecione e confirme com OK.
+Clique com o botão direito do mouse no painel - Add New Launcher (Adicionar Novo Chamador). Digite 'OmegaT' no campo 'Name'; no campo 'Command', use o botão de navegação para localizar o script para iniciar o OmegaT. Selecione e confirme com OK.
 
 ==============================================================================
  4. Como participar no projeto OmegaT
@@ -177,9 +179,9 @@ Contribuidores anteriores:
 O código é uma contribuição de
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (gerente de divulgação de versões)
+  Didier Briel (gerente de desenvolvimento)
   Kim Bruning
-  Alex Buloichik
+  Alex Buloichik (desenvolvedor líder)
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie
@@ -192,6 +194,7 @@ O código é uma contribuição de
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
 
@@ -225,14 +228,14 @@ OmegaT usa as seguintes bibliotecas:
 
   Jmyspell 2.1.4 (Licença LGPL)
 
-  JAXB 2.1.7 (GPLv2 + classpath exception)
+  JAXB 2.1.7 (GPLv2 + exceção classpath)
 
 ==============================================================================
  5.  Você tem problemas com o OmegaT? Precisa de ajuda?
 
-Antes de relatar um erro, verifique com atenção a documentação. O que você vê pode ser que seja uma característica do OmegaT que acabou de descobrir. Se verificar o arquivo de registro do OmegaT e lá encontrar palavras como "Erro", "Aviso", "Exceção" ou "morreu inesperadamente", então realmente você descobriu um problema (o log.txt está localizado na pasta de preferências do usuário; consulte o manual para sua língua).
+Antes de relatar um erro, verifique com atenção a documentação. O que você vê pode ser que seja uma característica do OmegaT que acabou de descobrir. Se verificar o arquivo de registro do OmegaT e lá encontrar palavras como "Erro", "Aviso", "Exceção" ou "morreu inesperadamente", então realmente você descobriu um problema (o log.txt está localizado na pasta de preferências do usuário; consulte o manual para sua localização).
 
-A próxima coisa que você deve fazer é confirmar o que encontrou com outros usuários, para ter certeza de que o problema ainda não foi relatado. Você também pode verificar a página de relatório de 'bugs' no site da SourceForge. Envie um relatório de erro somente quando tiver certeza de que é o primeiro a encontrar uma seqüência de evento reproduzível que causou algum problema.
+A próxima coisa que você deve fazer é perguntar para outros usuários sobre o que encontrou, para ter certeza de que o problema ainda não foi relatado. Você também pode verificar a página de relatório de 'bugs' no site da SourceForge. Envie um relatório de erro somente quando tiver certeza de que é o primeiro a encontrar uma sequência de evento reproduzível que causou algum problema.
 
 O relatório de 'bugs' deve conter três informações.
   - Passos para reproduzir,
@@ -247,7 +250,7 @@ Para fazer uma busca nos arquivos do grupo de usuários, acesse:
 Para ver a página de relatório de erros e enviar um relatório sobre um problema novo, se necessário, acesse:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
-Para fazer o acompanhamento do relatório enviado, faça seu registro como usuário na Source Forge.
+Para fazer o acompanhamento do relatório enviado, faça seu registro como usuário na SourceForge.
 
 ==============================================================================
 6.   Detalhes da versão

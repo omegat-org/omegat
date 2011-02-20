@@ -16,7 +16,7 @@ with a preceding \
 
   - Italian localisation updated to 2.2.3 update 2 (UI, manual)
   - Czech localisation updated to 2.2.3 update 2 (UI, documentation, readme)
-  - Brazilian Portuguese  localisation updated to 2.2.3_2 (UI, tutorial, readme)
+  - Brazilian Portuguese  localisation updated to 2.2.3 update 2 (UI, Instant Start, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 2

@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007-2009 Didier Briel
+               2007-2010 Didier Briel
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -48,6 +48,8 @@ public class XLIFFDialect extends DefaultXMLDialect {
 
     }
 
+
+
     /**
      * In the XLIFF filter, the tag &lt;mrk&gt; is a preformat tag when the
      * attribute "mtype" contains "seg".
@@ -69,6 +71,36 @@ public class XLIFFDialect extends DefaultXMLDialect {
                 if (oneAttribute.getName().equalsIgnoreCase("mtype")
                         && oneAttribute.getValue().equalsIgnoreCase("seg"))
                     return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * In the XLKIFF filter, content shouldn't be translated if translate="no"
+     * http://docs.oasis-open.org/xliff/v1.2/os/xliff-core.html#translate
+     * @param tag
+     *            An XML tag
+     * @param atts
+     *            The attributes associated with the tag
+     * @return <code>false</code> if the content of this tag should be
+     *         translated, <code>true</code> otherwise
+     */
+    @Override
+    public Boolean validateIntactTag(String tag, Attributes atts) {
+        if (!tag.equalsIgnoreCase("group") &&     // Translate can only appear in these tags
+            !tag.equalsIgnoreCase("trans-unit") &&
+            !tag.equalsIgnoreCase("bin-unit")) {
+            return false;
+        }
+
+        if (atts != null) {
+            for (int i = 0; i < atts.size(); i++) {
+                Attribute oneAttribute = atts.get(i);
+                if ( oneAttribute.getName().equalsIgnoreCase("translate") &&
+                        oneAttribute.getValue().equalsIgnoreCase("no")) {
+                    return true;
+                }
             }
         }
         return false;

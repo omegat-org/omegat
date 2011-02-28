@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2009-2010 Didier Briel
+               2009-2011 Didier Briel
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -66,7 +66,7 @@ public class ResXDialect extends DefaultXMLDialect {
                 if (oneAttribute.getName().equalsIgnoreCase("type")
                         || oneAttribute.getName().equalsIgnoreCase("mimetype")
                         || (oneAttribute.getName().equalsIgnoreCase("name") && (oneAttribute.getValue()
-                                .startsWith(">") || oneAttribute.getValue().endsWith("FieldName"))))
+                                .startsWith("&gt;") || oneAttribute.getValue().endsWith("FieldName"))))
                     return true;
             }
         }

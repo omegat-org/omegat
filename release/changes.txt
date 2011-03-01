@@ -2,7 +2,7 @@
  OmegaT 2.2.3 update 3
 ----------------------------------------------------------------------
    0 Enhancement
-   3 Bug fixes
+   4 Bug fixes
    3 Localisation updates
 ----------------------------------------------------------------------
 2.2.3 update 3 vs. 2.2.3 update 2
@@ -15,6 +15,9 @@ with a preceding \
   - XLIFF filter: untranslatable text (translate="no") appeared in the Editor
   
   - ResX filter: some untranslatable text appeared in the Editor
+
+  - XML: preserve spaces
+  http://sourceforge.net/support/tracker.php?aid=1650342
   
   Localisation updates:
 

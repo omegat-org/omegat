@@ -7,6 +7,7 @@
                2008 Martin Fleurke, Alex Buloichik, Didier Briel
                2009 Didier Briel
                2010 Antonio Vilei
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,6 +50,7 @@ import org.omegat.filters3.Entry;
 import org.omegat.filters3.Tag;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
@@ -115,6 +117,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     Stack<String> preformatTagName = new Stack<String>();
     /** Name of the current variable translatable tag */
     Stack<String> translatableTagName = new Stack<String>();
+    /** Status of the xml:space="preserve" flag */
+    private boolean spacePreserve = false;
 
     /** Now we collect out-of-turn entry. */
     private boolean collectingOutOfTurnText() {
@@ -128,6 +132,14 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
 
     private boolean isTranslatableTag() {
         return !translatableTagName.empty();
+    }
+
+    private boolean isSpacePreservingTag() {
+        return spacePreserve;
+    }
+    
+    private void resetSpacePreservingTag() {
+        spacePreserve = false;
     }
 
     /**
@@ -367,6 +379,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     private void queueText(String s) {
+        // TODO: ideally, xml:space=preserved would be handled at this level, but that would suppose
+        // knowing here whether we're inside a preformatted tag, etc.
         if (internalEntityStarted != null && s.equals(internalEntityStarted.getValue()))
             currEntry().add(new XMLEntityText(internalEntityStarted));
         else {
@@ -391,6 +405,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         Tag xmltag;
         XMLIntactTag intacttag = null;
         setTranslatableTag(tag, XMLUtils.convertAttributes(attributes));
+        setSpacePreservingTag(XMLUtils.convertAttributes(attributes));
         if (!collectingIntactText() && isIntactTag(tag, XMLUtils.convertAttributes(attributes))) {
             intacttag = new XMLIntactTag(tag, getShortcut(tag), attributes);
             xmltag = intacttag;
@@ -491,8 +506,12 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         String src = currEntry().sourceToShortcut(tagsAggregation);
         Element lead = currEntry().get(0);
         String translation = src;
-        if ((lead instanceof Tag) && isPreformattingTag(((Tag) lead).getTag(), ((Tag) lead).getAttributes())
-                && isTranslatableTag()) {
+        if ((lead instanceof Tag)
+             && (isPreformattingTag(((Tag) lead).getTag(), ((Tag) lead).getAttributes()) 
+                 || isSpacePreservingTag())
+             && isTranslatableTag()
+             && !StringUtil.isEmpty(src)) {
+            resetSpacePreservingTag();
             translation = translator.translate(src);
         } else {
             String compressed = StaticUtils.compressSpaces(src);
@@ -581,7 +600,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             return true;
         else
             return dialect.validatePreformatTag(tag, atts);
-    }
+        }
 
     /**
      * Returns whether the tag surrounds preformatted block of text. It is
@@ -653,6 +672,19 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             translatableTagName.pop(); // Remove it
     }
 
+    /**
+     * If the space-preserving flag is not set, and the attributes say it is one, set it
+     *
+     * @param atts
+     *            The attributes of the current tag
+     */
+    private void setSpacePreservingTag(org.omegat.filters3.Attributes atts) {
+
+        if (isSpacePreservingSet(atts)) {
+            spacePreserve = true;
+        }
+    }
+
     private boolean isClosingTagRequired() {
         return dialect.getClosingTagRequired();
     }
@@ -672,6 +704,26 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             return dialect.getShortcuts().get(tag);
         else
             return null;
+    }
+
+    /**
+     * Checks whether the xml:space="preserve" attribute is present
+     * @param currentAttributes The current Attributes
+     * @return true or false
+     */
+    private boolean isSpacePreservingSet(org.omegat.filters3.Attributes currentAttributes) {
+
+        boolean preserve = false;
+
+        for (int i = 0; i < currentAttributes.size(); i++) {
+            Attribute oneAttribute = currentAttributes.get(i);
+            if ((oneAttribute.getName().equalsIgnoreCase("xml:space")
+                 && oneAttribute.getValue().equalsIgnoreCase("preserve"))) {
+                preserve = true;
+            }
+        }
+
+        return preserve;
     }
 
     // ////////////////////////////////////////////////////////////////////////

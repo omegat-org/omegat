@@ -21,7 +21,7 @@ with a preceding \
   
   Localisation updates:
 
-  - Italian localisation updated to 2.2.3 update 2 (UI, manual)
+  - Italian localisation updated to 2.2.3 update 2 (UI, documentation)
   - Czech localisation updated to 2.2.3 update 2 (UI, documentation, readme)
   - Brazilian Portuguese  localisation updated to 2.2.3 update 2 (UI, Instant Start, readme)
 

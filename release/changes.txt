@@ -9,7 +9,7 @@
 
   Bug fixes:
 
-  - Android filter: the aspostrophe (') character was not escaped properly
+  - Android filter: the apostrophe (') character was not escaped properly
 with a preceding \
 
   - XLIFF filter: untranslatable text (translate="no") appeared in the Editor

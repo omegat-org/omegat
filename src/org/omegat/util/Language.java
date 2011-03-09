@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel, Zoltan Bartko
-               2010 Didier Briel
+               2010-2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -117,13 +117,24 @@ public class Language {
     }
 
     /**
-     * Returns a string representation as an Java locale (xx_YY).
+     * Returns a string representation as a Java locale (xx_YY).
      */
     public String getLocaleCode() {
         if (locale == null)
             return "";
-        else
-            return locale.toString();
+        else { 
+            // Patch Java locale, to return correct locales instead of obsolete codes
+            String returnString = locale.toString();
+            if (returnString.substring(0, 2).equalsIgnoreCase("in")) {
+                returnString = "id" + returnString.substring(2);
+            } else if (returnString.substring(0, 2).equalsIgnoreCase("iw")) {
+                returnString = "he" + returnString.substring(2);
+            } else if (returnString.substring(0, 2).equalsIgnoreCase("ji")) {
+                returnString = "yi" + returnString.substring(2);
+            } 
+            return returnString;
+        }
+            
     }
 
     /**

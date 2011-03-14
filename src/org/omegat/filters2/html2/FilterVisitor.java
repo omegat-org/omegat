@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
-               2010 Didier Briel
+               2010-2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -991,9 +991,20 @@ public class FilterVisitor extends NodeVisitor {
                 res.append("&amp;");
                 break;
             case '>':
-                res.append("&gt;");
+                // If it's the end of a processing instruction
+                if ((i > 0) && str.substring(i-1, i).contentEquals("?")) {
+                   res.append(">"); 
+                } else {
+                    res.append("&gt;");
+                }
                 break;
             case '<':
+                int qMarkPos = str.indexOf('?', i);
+                // If it's the beginning of a processing instruction
+                if (qMarkPos == i+1) {
+                    res.append("<");
+                    break;
+                }
                 int gtpos = str.indexOf('>', i);
                 if (gtpos >= 0) {
                     String maybeShortcut = str.substring(i, gtpos + 1);

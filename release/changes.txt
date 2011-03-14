@@ -2,12 +2,15 @@
  OmegaT 2.2.3 update 4
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.2.3 update 4 vs. 2.2.3 update 3
 
   Bug fixes:
+
+  - HTML filter: PHP tags are transformed into HTML entities
+  http://sourceforge.net/support/tracker.php?aid=3175744
 
   - For three languages, the internal locale was corresponding to an 
 bsolete locale, which meant the spell checker wasn't finding the correct

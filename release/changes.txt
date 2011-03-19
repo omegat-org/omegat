@@ -13,7 +13,7 @@
   http://sourceforge.net/support/tracker.php?aid=3175744
 
   - For three languages, the internal locale was corresponding to an 
-bsolete locale, which meant the spell checker wasn't finding the correct
+obsolete locale, which meant the spell checker wasn't finding the correct
 dictionary. The affected locales were "id", which was changed to "in", 
 "he", changed to "iw" and "yi" changed to "ji".
 

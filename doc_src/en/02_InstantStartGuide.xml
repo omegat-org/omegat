@@ -42,7 +42,7 @@
     “Target” folder.</para>
 
     <para>OmegaT organizes your translation work in translation “projects”.
-    For each project, OmegaT creates a set of folderswhich, in turn, are used
+    For each project, OmegaT creates a set of folders which, in turn, are used
     to store the source documents to be translated as well as any glossaries
     and translation memories you may wish to use. OmegaT also creates a
     “Target” folder, in which OmegaT places the final translated

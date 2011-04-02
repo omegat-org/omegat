@@ -12,7 +12,7 @@
       </indexterm></title>
 
     <section id="which.package.to.download.Linux">
-      <title>Which package to download?</title>
+      <title>Downloading the right package</title>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
       1.5 JRE?</para>
@@ -35,7 +35,7 @@
     </section>
 
     <section id="OmegaT.installation.Linux">
-      <title><application>OmegaT</application> installation</title>
+      <title><application>Installing OmegaT</application> </title>
 
       <para>Unpack/untar the downloaded file. This will create an omegat/
       folder in the working folder in which you will find all the files needed
@@ -63,16 +63,16 @@
           <listitem>
             <para>Press <emphasis role="bold"> <keysym>Alt+F2</keysym>
             </emphasis> to show KRunner. Type
-            <emphasis>kmenuedit+enter</emphasis> to run command. The
-            KMenuEditor appears. In KMenuEditor: <emphasis>File -&gt; New
-            Item.</emphasis></para>
+            <emphasis>kmenuedit+enter</emphasis> to run the command. The
+            KMenuEditor appears. In KMenuEditor select <emphasis>File -&gt;
+            New Item.</emphasis></para>
           </listitem>
 
           <listitem>
             <para>Then, after selecting a suitable menu, add a submenu/item
             with <emphasis>File - New</emphasis> Submenu and <emphasis>File -
             New Item</emphasis>. Enter <application>OmegaT</application> as
-            the name of the new item</para>
+            the name of the new item.</para>
           </listitem>
 
           <listitem>
@@ -165,8 +165,8 @@
       </indexterm></title>
 
     <section>
-      <title id="which.package.to.download.windows">Which package to
-      download?</title>
+      <title id="which.package.to.download.windows">Downloading the rightr
+      package</title>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
       1.5 JRE?</para>
@@ -189,7 +189,7 @@
     </section>
 
     <section id="OmegaT.installation.Windows">
-      <title><application>OmegaT</application> installation</title>
+      <title><application>Installing OmegaT</application></title>
 
       <para>To install <application>OmegaT</application>, double-click on the
       program you have downloaded, and follow the instructions</para>
@@ -262,7 +262,7 @@
       installed on Windows.</emphasis></para>
 
       <para>If you already have a version of OmegaT installed on your PC and
-      wish to upgrade to a more recent version, you have two options: </para>
+      wish to upgrade to a more recent version, you have two options:</para>
 
       <itemizedlist>
         <listitem>
@@ -286,13 +286,13 @@
           will enable you to keep both versions side-by-side, which you may
           wish to do until you feel comfortable with the new version. This
           method will also use preferences and settings you have made from
-          within OmegaT. In this case, however: </para>
+          within OmegaT. In this case, however:</para>
 
           <itemizedlist>
             <listitem>
               <para>If you have made changes to your<filename> OmegaT.l4J.ini
               </filename>file and/or are using a .bat file, you must copy
-              these over. </para>
+              these over.</para>
             </listitem>
           </itemizedlist>
 
@@ -300,7 +300,7 @@
             <listitem>
               <para>If your existing OmegaT installation is a "Windows with
               JRE" version, the new version must also be a "Windows with JRE"
-              version. </para>
+              version.</para>
             </listitem>
           </itemizedlist>
         </listitem>
@@ -320,7 +320,7 @@
       </indexterm></title>
 
     <section id="which.package.to.download.OSX">
-      <title>Which package to download?</title>
+      <title>Dowloading the right package</title>
 
       <para><application>OmegaT</application> 2.2 requires Java 1.5 to run.
       Use "Software Update..." from the Apple menu to update your Java
@@ -330,7 +330,7 @@
     </section>
 
     <section id="OmegaT.installation.OSX">
-      <title><application>OmegaT</application> installation</title>
+      <title><application>Installing OmegaT </application></title>
 
       <para>Double click on <emphasis>OmegaT_2.2.x_Mac.zip</emphasis> to
       unpack it. This creates a folder called <emphasis>
@@ -353,7 +353,7 @@
         </indexterm></title>
 
       <para>Drag and drop
-      <emphasis><application>OmegaT</application>.app</emphasis> on the
+      <emphasis><application>OmegaT</application>.app</emphasis> onto the
       Dock.</para>
     </section>
 
@@ -379,7 +379,7 @@
       selecting your text editor of choice. You can also "cd" there directly
       from the command line and open
       <application><emphasis>Info.plist</emphasis> in a command line editor
-      like emacs or vi</application>.<emphasis>. <indexterm class="singular">
+      like emacs or vi</application>.<emphasis> <indexterm class="singular">
           <primary>OS X</primary>
 
           <secondary>Customizing OmegaT</secondary>
@@ -404,7 +404,7 @@
       <emphasis><application>OmegaT</application>.app</emphasis>, double-click
       the file <emphasis>JavaApplicationStub</emphasis> located in
       <emphasis><application>OmegaT</application>.app/
-      Contents/MacOS/</emphasis>..</para>
+      Contents/MacOS/</emphasis>.</para>
 
       <para><emphasis><application> </application></emphasis>Use
       <emphasis><application>OmegaT</application>.jar</emphasis> file located
@@ -418,10 +418,10 @@
       <title>Mac OS X goodies</title>
 
       <para><emphasis><application>OmegaT</application>.app</emphasis> can be
-      accessed from the Services Mac OS X offers. You can thus select a word
-      anywhere in <application>OmegaT</application> and use the Services to
-      check this word, for instance in Spotlight or in Google. You can also
-      use AppleScript or Automator to create Services or scripts that will
+      accessed from the Mac OS X Services. You can thus select a word anywhere
+      in <application>OmegaT</application> and use Services to check this
+      word, for instance in Spotlight or in Google. You can also use
+      AppleScript or Automator to create Services or scripts that will
       automate frequent actions</para>
     </section>
   </section>
@@ -437,8 +437,8 @@
     Linux x64/PowerPC, Windows x64</para>
 
     <section>
-      <title id="which.package.to.download.other">Which package to
-      download?</title>
+      <title id="which.package.to.download.other">Downloading the right
+      package</title>
 
       <para><application>OmegaT</application> is available bundled with a
       Oracle Java JRE for Linux (Intel x86) and Windows platforms. Users of
@@ -483,7 +483,7 @@
     </section>
 
     <section id="OmegaT.installation.other">
-      <title><application>OmegaT</application> installation<indexterm
+      <title><application>Installing OmegaT</application><indexterm
           class="singular">
           <primary>Installing OmegaT</primary>
 
@@ -501,7 +501,8 @@
       <title>Installing convenient shortcuts</title>
 
       <para>Follow your system's instructions to install
-      <application>OmegaT</application> shortcuts in convenient places.</para>
+      <application>OmegaT</application> shortcuts in convenient places of your
+      choosing.</para>
     </section>
 
     <section id="running.OmegaT.other">
@@ -518,7 +519,7 @@
       directly. Methods differ depending on the distribution. Make sure that
       your <emphasis>PATH</emphasis> settings are correct and that
       <emphasis>.jar </emphasis> files are properly associated with a Java
-      launcher Check "Command line launching" below for more
+      launcher. Check "Command line launching" below for more
       information.</para>
     </section>
   </section>
@@ -543,18 +544,19 @@
     <application>OmegaT</application>.jnlp</emphasis> and then click on it.
     During the installation, depending on your operating system, you may
     receive several security warnings. The permissions you give to this
-    version (which might be mentioned as an "unrestricted access to the
-    computer") are identical to permissions you give to the local version,
-    i.e., they allow an access to the hard drive of the computer. Subsequent
-    clicks on <emphasis><application>OmegaT</application>.jnlp</emphasis> will
-    check for any upgrades, install them, if there's any, and then start
-    <application>OmegaT</application>. After the initial installation you can
-    of course use <emphasis><application>OmegaT</application>.jnlp</emphasis>
-    also when you are offline.</para>
+    version (which may appear as "unrestricted access to the computer") are
+    identical to the permissions you give to the local version, i.e., they
+    allow access to the hard drive of the computer. Subsequent clicks on
+    <emphasis><application>OmegaT</application>.jnlp</emphasis> will check for
+    any upgrades, install them, if there are any, and then start
+    <application>OmegaT</application>. After the initial installation you can,
+    of course, also use
+    <emphasis><application>OmegaT</application>.jnlp</emphasis> also when you
+    are offline.</para>
 
     <para><emphasis role="bold">Privacy</emphasis>:
     <application>OmegaT</application> Java Web Start does not save any of your
-    information outside the computer on which you are running it. The
+    information beyond the computer on which you are running it. The
     application runs on your machine only. Your documents and translation
     memories remain on your computer, and the
     <application>OmegaT</application> project will have no access to your work
@@ -565,7 +567,7 @@
   </section>
 
   <section>
-    <title>Starting OmegaT from the command Line<indexterm class="singular">
+    <title>Starting OmegaT from the command line<indexterm class="singular">
         <primary>Running OmegaT</primary>
 
         <secondary>Command line launching</secondary>
@@ -578,9 +580,9 @@
     <application>OmegaT</application> using the command line.</para>
 
     <section id="method1.opening.commandline.window">
-      <title>Method 1: opening a command-line window</title>
+      <title>Method 1: opening a command line window</title>
 
-      <para>A command-line window is also referred to as a "terminal window".
+      <para>A command line window is also referred to as a "terminal window".
       On Windows it is called an "MS-DOS window" and is available from the
       Start Menu, inside Programs, through the "MS-DOS" item. The Mac OS X
       equivalent is the application Terminal located in Applications →
@@ -627,7 +629,7 @@
       <para>This method has a particular benefit of being suitable for
       debugging: if an error occurs during use of the program, an error
       message is output in the terminal window which may contain useful
-      information on the cause</para>
+      information on the cause of the error.</para>
     </section>
 
     <section id="method2.changing.the.launch.script">
@@ -655,8 +657,8 @@
       <para>The basic command has already been mentioned above. Changes to
       this command involve the addition of "arguments" to it. Arguments are
       added after the initial <emphasis>"java"</emphasis>, and before the
-      <emphasis>"-jar <application>OmegaT</application>.jar"</emphasis> part.
-      Note that in Windows you can change the
+      <emphasis>"-jar <application>OmegaT</application>.jar"</emphasis> . Note
+      that in Windows you can change the
       <emphasis><application>OmegaT</application>.l4J.ini</emphasis> file to
       reflect your preferences. On Mac OS X, you can change the
       <emphasis>Info.plist</emphasis> located in
@@ -679,7 +681,7 @@
               <secondary>Launch script arguments</secondary>
 
               <tertiary>User.language</tertiary>
-            </indexterm>Normally, i.e. when <application>OmegaT</application>
+            </indexterm> Normally, i.e. when <application>OmegaT</application>
           is launched without any arguments, the program first detects the
           language of the user's operating system. If a user interface in this
           language is available, <application>OmegaT</application> uses it.
@@ -688,7 +690,7 @@
           <application>OmegaT</application> is displayed with a Russian user
           interface, Russian menus, etc. If the language of the user's system
           is not available, <application>OmegaT</application> defaults to
-          English. This is the standard behaviour.</para>
+          English. This is the standard behavior.</para>
 
           <para>The <emphasis>"-Duser.language=XX"</emphasis> argument causes
           <application>OmegaT</application> to use the language specified
@@ -716,7 +718,7 @@
               <tertiary>User.country</tertiary>
             </indexterm>Besides the language, you can also specify the
           country, for example CN or TW in case of the Chinese language. To
-          display the Instant start guide in the desired language, you need to
+          display the instant start guide in the desired language, you need to
           specify both the language and the country. This is necessary even if
           there's only one combination available, like pt_BR in case of
           Portuguese / Brazil.</para>
@@ -742,7 +744,7 @@
         <listitem>
           <para><emphasis role="bold">Memory assignment</emphasis></para>
 
-          <para><emphasis role="bold">-XmxZZM</emphasis><indexterm
+          <para><emphasis role="bold">-XmxZZM </emphasis><indexterm
               class="singular">
               <primary>Running OmegaT</primary>
 
@@ -786,7 +788,7 @@
               <secondary>Launch script arguments</secondary>
 
               <tertiary>Proxy server - Port Number</tertiary>
-            </indexterm>the port number, your system uses to access the proxy
+            </indexterm>the port number your system uses to access the proxy
           server.</para>
         </listitem>
       </itemizedlist>
@@ -821,7 +823,7 @@
           </indexterm></title>
 
         <para>The purpose of the console mode is to use
-        <application>OmegaT</application> as translation tool in a scripting
+        <application>OmegaT</application> as a translation tool in a scripting
         environment. When started in console mode, no GUI is loaded (so it
         will work on any console) and the given project is automatically
         translated.</para>
@@ -831,8 +833,8 @@
 
           <para>To run <application>OmegaT</application>, a valid
           <application>OmegaT</application> project must be present. The
-          location does not matter, since you have to add it to the
-          command-line at the start-up anyway.</para>
+          location does not matter, since you have to add it to the command
+          line at the start-up anyway.</para>
 
           <para>If you need altered settings, the configuration files must be
           available This can be achieved in two ways:</para>
@@ -840,7 +842,7 @@
           <itemizedlist>
             <listitem>
               <para>Run <application>OmegaT</application> normally (with the
-              GUI) and set the settings. If you start
+              GUI) and specify the settings. If you start
               <application>OmegaT</application> in console mode, it will use
               the same settings.</para>
             </listitem>
@@ -850,8 +852,8 @@
               normally (no graphical environment available): copy the settings
               files from some other <application>OmegaT</application>
               installation on another machine to a specific directory. The
-              location does not matter, since you can add it to the
-              command-line at startup. The relevant files are
+              location does not matter, since you can add it to the command
+              line at startup. The relevant files are
               <literal>filters.conf</literal> and
               <literal>segmentation.conf</literal> and can be found in the
               user home directory (E.g. <literal>C:\Documents and
@@ -866,7 +868,7 @@
           <title>Starting in console mode</title>
 
           <para>To start <application>OmegaT</application> in console mode,
-          some extra parameters have to be passed on startup. The most
+          some extra parameters have to be passed to it on startup. The most
           important is <literal>&lt;project-dir&gt;</literal>, and
           optionally<literal>--config-dir=&lt;config-dir&gt;.
           </literal>Example:</para>
@@ -894,12 +896,12 @@
 
           <itemizedlist>
             <listitem>
-              <para><literal>--config-dir=&lt;config-dir&gt;</literal> allows
-              to tell <application>OmegaT</application> in which directory the
+              <para><literal>--config-dir=&lt;config-dir&gt;</literal> tells
+              <application>OmegaT</application> in which directory the
               configuration files are stored. If not given,
               <application>OmegaT</application> reverts to default values
               (<application>OmegaT</application> dir under user home, or if
-              not available: the current working directory).</para>
+              not available, the current working directory).</para>
             </listitem>
           </itemizedlist>
 
@@ -911,7 +913,7 @@
             </listitem>
 
             <listitem>
-              <para>--source-pattern={regexp} The files to be translated can
+              <para>--source-pattern={regexp} the files to be translated can
               be specified this way. Example for the regular expression:
               <filename>test\.html</filename></para>
             </listitem>
@@ -921,10 +923,10 @@
         <section id="console.mode.extra.options">
           <title>Extra options</title>
 
-          <para>There is one extra command line parameter specific for the
-          console mode: <literal>--quiet. </literal>In quiet mode, less info
-          is logged to the screen. All messages that you would usually find in
-          the status bar are not shown.</para>
+          <para>There is one extra command line parameter specific to console
+          mode: <literal>--quiet. </literal>In quiet mode, less info is logged
+          to the screen. All messages that you would usually find in the
+          status bar are not shown.</para>
 
           <para>Usage: <literal>java -jar
           <application>OmegaT</application>.jar /path/to/project
@@ -942,7 +944,7 @@
           </indexterm></title>
 
         <para>OmegaT can align Java .properties in console mode. If you have
-        the source and the target Properties files for the one and the same
+        the source and target properties files for the one and the same
         contents in your language pair, this procedure will create a
         corresponding tmx file for these contents. Usage:</para>
 
@@ -950,8 +952,8 @@
         /my-project-dir --alignDir=/translatedFiles/ </literal></para>
 
         <para><filename>alignDir </filename>must contain a translation in the
-        target language of the project. E.g., if the project is EN-&gt;FR,
-        alignDir must contain a bundle ending with _fr. The resulting tmx is
+        target language of the project. (e.g., if the project is EN-&gt;FR,
+        alignDir must contain a bundle ending with _fr). The resulting tmx is
         stored in the <literal>omegat </literal>folder under the name
         <filename>align.tmx</filename>.</para>
       </section>
@@ -963,10 +965,10 @@
             <secondary>Pseudotranslation</secondary>
           </indexterm></title>
 
-        <para>There might be a case in which you wish to do pre-processing or
-        other processing of the segments than
-        <application>OmegaT</application> allows. For example you wish to
-        create a pseudo-translation for testing purposes.
+        <para>There may be instances where you would like to do pre-processing
+        or some other processing of segments that
+        <application>OmegaT</application> does not offer. For example you may
+        wish to create a pseudo-translation for testing purposes.
         <application>OmegaT</application> allows you to create an extra tmx
         file that contains all segments of the project. The translation in
         this tmx can be either</para>
@@ -983,8 +985,8 @@
           </listitem>
         </itemizedlist>
 
-        <para>The tmx file can get any name you specify, but the extension
-        '.tmx' is added if not given. The generation is activated with the
+        <para>The tmx file can have any name you specify, but the extension
+        '.tmx' is added if not given. File generation is activated with the
         following command line parameters:</para>
 
         <para><literal>java -jar omegat.jar
@@ -994,7 +996,7 @@
         <para>Replace <literal>&lt;filename&gt;</literal> with the name of the
         file you wish to create, either absolute or relative to the working
         directory (the directory you start <application>OmegaT</application>
-        from).The second argument <literal>--pseudotranslatetype</literal> is
+        from). The second argument <literal>--pseudotranslatetype</literal> is
         optional. Its value is either <literal>equal</literal> (default value,
         for source=target) or <literal>empty</literal> (target segment is
         empty) .You can process the generated tmx with any tool you wish. To
@@ -1013,13 +1015,13 @@
         <secondary>Building OmegaT from source</secondary>
       </indexterm></title>
 
-    <para>Note that you need ant program
+    <para>Note that you will need the ant program
     (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) to build your
     own version of OmegaT. Unpack the
     <emphasis>OmegaT_2.2.x_Source.zip</emphasis> file and enter the
     OmegaT_2.2.x_Source directory or enter the <emphasis>./omegat/</emphasis>
-    directory of the SVN checked out code. Check that a build.xml file is
-    present in that folder. Then, on the command line, type:</para>
+    directory of the SVN checked out code. Please make sure that a build.xml
+    file is present in that folder. Then, on the command line, type:</para>
 
     <para><literal>$ ant jar release</literal></para>
 

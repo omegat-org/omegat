@@ -42,9 +42,10 @@
         <imageobject role="html">
           <imagedata fileref="images/Glossary_pane.png" />
         </imageobject>
-         <imageobject role="fo">
-           <imagedata fileref="images/Glossary_pane.png" width="60%" />
-         </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/Glossary_pane.png" width="60%" />
+        </imageobject>
       </mediaobject>
     </figure>
 
@@ -69,6 +70,7 @@
         <imageobject role="html">
           <imagedata fileref="images/MultiTerm_Glossary.png" />
         </imageobject>
+
         <imageobject role="fo">
           <imagedata fileref="images/MultiTerm_Glossary.png" width="40%" />
         </imageobject>
@@ -78,7 +80,7 @@
     <para>The underlined item "new preview screenshot", consists of three
     words and can be found in the glossary pane as "nov predogled posnetka
     zaslona". Note that parts of the multi-term items ("preview" in the above
-    example</para>
+    example iz also recognized by itself as "predogled").</para>
   </section>
 
   <section>
@@ -187,14 +189,15 @@
     <figure>
       <title>Saving a glossary</title>
 
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/saveglossary.png" />
-          </imageobject>
-          <imageobject role="fo">
-            <imagedata fileref="images/saveglossary.png" width="60%" />
-          </imageobject>
-        </mediaobject>
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/saveglossary.png" />
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/saveglossary.png" width="60%" />
+        </imageobject>
+      </mediaobject>
     </figure>
 
     <para>Confirm with OK.</para>

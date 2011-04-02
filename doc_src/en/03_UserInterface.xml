@@ -286,6 +286,7 @@
         <imageobject role="html">
           <imagedata fileref="images/OmegaT_panes.png" />
         </imageobject>
+
         <imageobject role="fo">
           <imagedata fileref="images/OmegaT_panes.png" width="80%" />
         </imageobject>
@@ -313,6 +314,7 @@
                 <imageobject role="html">
                   <imagedata fileref="images/Minimize.gif" width="60%" />
                 </imageobject>
+
                 <imageobject role="fo">
                   <imagedata fileref="images/Minimize.gif" width="40%" />
                 </imageobject>
@@ -327,6 +329,7 @@
                 <imageobject role="html">
                   <imagedata fileref="images/Maximize.gif" width="60%" />
                 </imageobject>
+
                 <imageobject role="fo">
                   <imagedata fileref="images/Maximize.gif" width="40%" />
                 </imageobject>
@@ -340,6 +343,7 @@
                 <imageobject role="html">
                   <imagedata fileref="images/undock.gif" width="60%" />
                 </imageobject>
+
                 <imageobject role="fo">
                   <imagedata fileref="images/undock.gif" width="40%" />
                 </imageobject>
@@ -353,6 +357,7 @@
                 <imageobject role="html">
                   <imagedata fileref="images/dock.gif" width="60%" />
                 </imageobject>
+
                 <imageobject role="fo">
                   <imagedata fileref="images/dock.gif" width="40%" />
                 </imageobject>
@@ -428,7 +433,7 @@
     <para>From the practical point of view, the most important pair of numbers
     is the second pair: it tells, how much you have done so far, given the
     total in the second number. The project in the example is evidently
-    finished, as all the unique segments have been translated. </para>
+    finished, as all the unique segments have been translated.</para>
 
     <section id="editor.pane">
       <title>Editor pane<indexterm class="singular">
@@ -506,6 +511,7 @@
             <imageobject role="html">
               <imagedata fileref="images/MatchesPane.png" />
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/MatchesPane.png" width="80%" />
             </imageobject>
@@ -613,6 +619,7 @@
             <imageobject role="html">
               <imagedata fileref="images/Glossary_pane.png" />
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/Glossary_pane.png" width="60%" />
             </imageobject>
@@ -636,6 +643,7 @@
           <imageobject role="html">
             <imagedata fileref="images/MultiTerm_Glossary.png" />
           </imageobject>
+
           <imageobject role="fo">
             <imagedata fileref="images/MultiTerm_Glossary.png" width="80%" />
           </imageobject>
@@ -713,22 +721,23 @@
           <primary>Shortcuts</primary>
 
           <secondary>Ctrl+L - Project files list</secondary>
-        </indexterm></guimenuitem> to open <keycap>Esc</keycap>. To close it.
-      Project Files Window displays the following information:</para>
+        </indexterm></guimenuitem> to open and <keycap>Esc</keycap> to close
+      it. Project Files Window displays the following information:</para>
 
       <itemizedlist>
         <listitem>
           <para>the list of all the translatable files in the project. These
           are the files present in the Source files folder in a format that
           OmegaT is able to handle. Clicking on any file will open it for
-          translation</para>
+          translation. </para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
           <para>the file currently available in the Editor pane is highlighted
-          with a blue background</para>
+          with a blue background. Pressing <keycap>Enter</keycap> will move
+          the Editor pane to the top of the file selected</para>
         </listitem>
       </itemizedlist>
 
@@ -741,14 +750,9 @@
 
       <itemizedlist>
         <listitem>
-          <para>the number of unique segments in the whole project</para>
-        </listitem>
-      </itemizedlist>
-
-      <itemizedlist>
-        <listitem>
-          <para>the number of unique segments already translated. It is
-          updated each time you translate a segment</para>
+          <para>the total number of segments, the number of unique segments in
+          the whole project, and the number of unique segments already
+          translated are shown at the bottom. </para>
         </listitem>
       </itemizedlist>
 
@@ -838,6 +842,7 @@
             <imageobject role="html">
               <imagedata fileref="images/TagValidator.png" />
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/TagValidator.png" width="60%" />
             </imageobject>
@@ -917,6 +922,7 @@
           <imageobject role="html">
             <imagedata fileref="images/MatchStatistics.png" />
           </imageobject>
+
           <imageobject role="fo">
             <imagedata fileref="images/MatchStatistics.png" width="60%" />
           </imageobject>

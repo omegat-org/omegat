@@ -713,6 +713,10 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
      */
     private boolean isSpacePreservingSet(org.omegat.filters3.Attributes currentAttributes) {
 
+        if (dialect.getForceSpacePreserving()) {
+            return true;
+        }
+        
         boolean preserve = false;
 
         for (int i = 0; i < currentAttributes.size(); i++) {

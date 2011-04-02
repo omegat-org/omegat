@@ -5,6 +5,7 @@
 
  Copyright (C) 2007-2010 Didier Briel
                2010 Antonio Vilei
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -54,6 +55,7 @@ import org.omegat.filters2.AbstractOptions;
  * Other options:
  * <ul>
  * <li>[+] Tags Aggregation
+ * <li>[+] Preserve space for all tags
  * </ul>
  * 
  * @author Didier Briel, Antonio Vilei
@@ -74,6 +76,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_CHARTS = "translateCharts";
     private static final String OPTION_TRANSLATE_DRAWINGS = "translateDrawings";
     private static final String OPTION_AGGREGATE_TAGS = "aggregateTags";
+    private static final String OPTION_PRESERVE_SPACES = "preserveSpaces";
 
     public OpenXMLOptions(Map<String, String> options) {
         super(options);
@@ -289,4 +292,19 @@ public class OpenXMLOptions extends AbstractOptions {
         setBoolean(OPTION_AGGREGATE_TAGS, aggregateTags);
     }
 
+    /**
+     * Returns whether spaces should be preserved for all tags
+     * @return the state of OPTION_PRESERVE_SPACES
+     */
+    public boolean getSpacePreserving() {
+        return getBoolean(OPTION_PRESERVE_SPACES, true);
+    }
+
+    /**
+     * Sets whether spaces should be preserved for all tags
+     * @param onOff The option for space preserving
+     */
+    public void setSpacePreserving(boolean onOff) {
+        setBoolean(OPTION_PRESERVE_SPACES, onOff);
+    }
 }

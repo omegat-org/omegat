@@ -7,6 +7,7 @@
                2008 Martin Fleurke
                2009 Didier Briel
                2010 Antonio Vilei
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -246,4 +247,16 @@ public interface XMLDialect {
      * Gives the value of tagsAggregationEnabled.
      */
     Boolean getTagsAggregationEnabled();
+
+    /**
+     * Gives the value of forceSpacePreserving;
+     * @return whether forceSpacePreserving is set.
+     */
+    Boolean getForceSpacePreserving();
+
+    /**
+     * Set forceSpacePreserving.
+     */
+    void setForceSpacePreserving(boolean onOff);
+
 }

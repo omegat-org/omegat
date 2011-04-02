@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
                2010 Antonio Vilei
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -72,6 +73,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         translateChartsCB.setSelected(options.getTranslateCharts());
         translateDrawingsCB.setSelected(options.getTranslateDrawings());
         aggregateTagsCB.setSelected(options.getAggregateTags());
+        preserveSpacesCB.setSelected(options.getSpacePreserving());
 
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -134,6 +136,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         aggregateTagsCB = new javax.swing.JCheckBox();
+        preserveSpacesCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("OpenXML_FILTER_OPTIONS")); // NOI18N
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -311,6 +314,14 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         });
         jPanel1.add(aggregateTagsCB);
 
+        org.openide.awt.Mnemonics.setLocalizedText(preserveSpacesCB, OStrings.getString("OpenXML_PRESERVE_SPACES")); // NOI18N
+        preserveSpacesCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                preserveSpacesCBActionPerformed(evt);
+            }
+        });
+        jPanel1.add(preserveSpacesCB);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -318,6 +329,10 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         java.awt.Dimension dialogSize = getSize();
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void preserveSpacesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preserveSpacesCBActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_preserveSpacesCBActionPerformed
 
     private void translateExcelCommentsCBradiosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_translateExcelCommentsCBradiosActionPerformed
     // TODO add your handling code here:
@@ -367,6 +382,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         options.setTranslateCharts(translateChartsCB.isSelected());
         options.setTranslateDrawings(translateDrawingsCB.isSelected());
         options.setAggregateTags(aggregateTagsCB.isSelected());
+        options.setSpacePreserving(preserveSpacesCB.isSelected());
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
@@ -418,6 +434,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton okButton;
+    private javax.swing.JCheckBox preserveSpacesCB;
     private javax.swing.JCheckBox translateChartsCB;
     private javax.swing.JCheckBox translateCommentsCB;
     private javax.swing.JCheckBox translateDiagramsCB;

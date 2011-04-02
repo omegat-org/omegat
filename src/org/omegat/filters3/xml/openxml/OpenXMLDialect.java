@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2010 Didier Briel
                2010 Antonio Vilei
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -76,5 +77,8 @@ public class OpenXMLDialect extends DefaultXMLDialect {
          * only as a temporary hack, until we improve the OpenXML filter.
          */
         setTagsAggregationEnabled(aggregationEnabled);
+
+        // If defined in the options, set space preserving for all tags
+        setForceSpacePreserving(options.getSpacePreserving());
     }
 }

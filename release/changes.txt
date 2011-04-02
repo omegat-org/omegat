@@ -1,4 +1,20 @@
 ----------------------------------------------------------------------
+ OmegaT 2.2.4
+----------------------------------------------------------------------
+   1 Enhancement
+   0 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.2.4 vs. 2.2.3 update 4
+
+  Other enhancements:
+
+  - In the MS Open XML filter, a new option allows to preserve white space 
+(e.g., spaces and newlines) in all tags, even if it is not set technically 
+in the document. As it corresponds to the most usual situation (e.g., 
+preserving spaces in Excel tags), the option is on by default.
+
+----------------------------------------------------------------------
  OmegaT 2.2.3 update 4
 ----------------------------------------------------------------------
    0 Enhancement

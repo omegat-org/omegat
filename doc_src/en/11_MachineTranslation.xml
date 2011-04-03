@@ -40,15 +40,16 @@
     languages, from Albanian to Yiddish, including of course all the major
     languages.</para>
 
-    <para>The quality of the translation of course depends on one side on the
-    reservoir of target-language texts and the availability of their bilingual
-    versions, on the other hand on the quality of the models built. It is
-    pretty much certain that while the quality may be insufficient in some
-    cases, it will definitely get better with time and not worse.</para>
+    <para>The quality of the translation, of course, depends on one side on
+    the reservoir of target-language texts and the availability of their
+    bilingual versions, on the other hand on the quality of the models built.
+    It is pretty much certain that while the quality may be insufficient in
+    some cases, it will definitely get better with time and not worse.</para>
   </section>
 
   <section>
-    <title><application>OmegaT</application> user and Google Translate</title>
+    <title><application>OmegaT</application> users and Google
+    Translate</title>
 
     <para>The <application>OmegaT</application> user is not forced to use
     Google Translate. If used, neither the user's decision to accept the
@@ -63,6 +64,7 @@
         <imageobject role="html">
           <imagedata fileref="images/MobyDick.png" />
         </imageobject>
+
         <imageobject role="fo">
           <imagedata fileref="images/MobyDick.png" width="60%" />
         </imageobject>
@@ -71,10 +73,10 @@
 
     <para>The Spanish translation is better than the Slovenian. Note
     <emphasis>interesar</emphasis> and<emphasis> navegar</emphasis> in
-    Spanish, translating the verbs interest and sail correctly. In the
-    Slovenian version both words have been translated as nouns. It is actually
-    quite probable, that the Spanish translation is based at least partially
-    on the actual translation of the book.</para>
+    Spanish, are correctly translated as the verbs interest and sail
+    respectively. In the Slovenian version both words have been translated as
+    nouns. It is actually quite probable that the Spanish translation is based
+    at least partially on the actual translation of the book.</para>
 
     <para>Once you have activated the service, a suggestion for the
     translation will appear in the Google Translate pane every time a new
@@ -100,7 +102,7 @@
     menu entry in Options.</para>
 
     <para>Note that nothing but your source segment is sent to the MT service.
-    On-line version of Google Translate allows the user to correct the
+    The online version of Google Translate allows the user to correct the
     suggestion and send the corrected segment in. This feature, however, is
     not implemented in OmegaT.</para>
   </section>
@@ -174,7 +176,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Are you online? You need to be online to be able to use a MT
+        <para>Are you online? You need to be online to be able to use an MT
         tool.</para>
       </listitem>
     </itemizedlist>

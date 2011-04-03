@@ -4,13 +4,13 @@
 <appendix id="A3.keyboard">
   <title>Keyboard shortcuts in the editor</title>
 
-  <para>This short text describes key behavior in the editor pane. Term ""Move
-  to inside segment" means, that the cursor moves to the beginning of the
-  segment if it was previously before the segment, and to the end of the
-  segment if it was previously beyond it. </para>
+  <para>This short text describes key behavior in the editor pane. The term
+  ""Move to inside segment" means, that the cursor moves to the beginning of
+  the segment if it was previously before the segment, and to the end of the
+  segment if it was previously after it.</para>
 
   <table>
-    <title>Key behaviour in the editor</title>
+    <title>Key behavior in the editor</title>
 
     <tgroup cols="2">
       <colspec align="left" colnum="1" colwidth="90" />
@@ -154,7 +154,7 @@
   </table>
 
   <para>* These keys behave differently when the cursor is outside the
-  editable segment::</para>
+  editable segment:</para>
 
   <itemizedlist>
     <listitem>
@@ -181,16 +181,16 @@
     </listitem>
   </itemizedlist>
 
-  <para>"Shift" key doesn't exhibit any special behaviour per se: when the
-  "Shift" key is pressed, all keys move the cursor the same way as they do it
-  otherwise.</para>
+  <para>The "Shift" key doesn't exhibit any special behavior per se: when the
+  "Shift" key is pressed, all keys move the cursor in their usual
+  manner.</para>
 
   <para>System-wide commands: Paste (<emphasis role="bold">Ctrl+V</emphasis>
   or <emphasis role="bold">Ctrl+Insert</emphasis>), Cut (<emphasis
   role="bold">Ctrl+X</emphasis> or <emphasis role="bold">Ctrl+C)</emphasis>,
   Insert match <emphasis role="bold">(Ctrl+I</emphasis>) and Insert source
   (<emphasis role="bold">Ctrl+Shift+I</emphasis>) act in principle on any
-  selection, including those that reach beyond the current segment. In such a
+  selection, including those that extend beyond the current segment. In such a
   case the selection will of course be pared down to segment
   boundaries.</para>
 </appendix>

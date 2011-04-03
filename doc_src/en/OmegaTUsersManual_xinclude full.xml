@@ -20,7 +20,7 @@
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FileFilters.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FilesAndDirectories.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="05_FilesToTranslate.xml" />
-  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="06_EditingBehaviour.xml" />
+  <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="06_EditingBehavior.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_FormattedText.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_PlainText.xml" />
   <xi:include xmlns:xi="http://www.w3.org/2001/XInclude" href="07_TranslationMemories.xml" />

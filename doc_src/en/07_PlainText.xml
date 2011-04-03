@@ -19,35 +19,36 @@
         <secondary>Default encoding</secondary>
       </indexterm></title>
 
-    <para>Plain text files - in most cases files with a
-    <filename>txt</filename> extension - contain just textual information and
-    offer no clearly defined way to inform the computer which language they
-    contain. Most that OmegaT can do in such a case, is assume that the text
-    is written in the same language the computer itself uses This is no
-    problem with files, encoded in Unicode, that is using 16bit character
-    encoding set. If the text is encoded in 8 bits, however, one can be faced
-    with the following awkward situation: instead of displaying the text,
-    using the Japanese characters</para>
+    <para>Plain text files - in most cases files with a txt extension -
+    contain just textual information and offer no clearly defined way to
+    inform the computer which language they contain. The most that OmegaT can
+    do in such a case, is to assume that the text is written in the same
+    language the computer itself uses. This is no problem for files encoded in
+    Unicode using a 16 bit character encoding set. If the text is encoded in 8
+    bits, however, one can be faced with the following awkward situation:
+    instead of displaying the text, for Japanese characters...</para>
 
     <mediaobject>
       <imageobject role="html">
         <imagedata fileref="images/OmT_Japanese.png" />
-       </imageobject>
+      </imageobject>
+
       <imageobject role="fo">
-        <imagedata fileref="images/OmT_Japanese.png"  width = "60%"/>
-       </imageobject>
-     </mediaobject>
+        <imagedata fileref="images/OmT_Japanese.png" width="60%" />
+      </imageobject>
+    </mediaobject>
 
-    <para>the system will display it like this for instance:</para>
+    <para>...the system will display it like this for instance:</para>
 
-     <mediaobject>
-       <imageobject role="html">
-         <imagedata fileref="images/OmT_Cyrillic.png" />
-       </imageobject>
-       <imageobject role="fo">
-         <imagedata fileref="images/OmT_Cyrillic.png" width = "60%"/>
-       </imageobject>
-      </mediaobject>
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/OmT_Cyrillic.png" />
+      </imageobject>
+
+      <imageobject role="fo">
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%" />
+      </imageobject>
+    </mediaobject>
 
     <para>The computer, running OmegaT, has Russian as the default language,
     and thus shows the characters in the Cyrillic alphabet and not in
@@ -72,12 +73,12 @@
 
         <listitem>
           <para>open your source file in a text editor that correctly
-          interprets its encoding and save the file in the "<emphasis
+          interprets its encoding and save the file in "<emphasis
           role="bold">UTF-8"</emphasis> encoding. Change the file extension
           from <literal>.txt </literal>to
           <literal>.utf8.</literal><application>OmegaT</application> will
           automatically interpret the file as a UTF-8 file. This is the most
-          common-sense alternative, sparing you problems on the long
+          common-sense alternative, sparing you problems in the long
           run.</para>
         </listitem>
       </varlistentry>
@@ -88,7 +89,7 @@
         <term>Specify the encoding for your plain text files</term>
 
         <listitem>
-          <para>- i.e. files with <filename>.txt </filename>extension - : in
+          <para>- i.e. files with a <filename>.txt </filename>extension - : in
           the <emphasis role="bold">Text files </emphasis>section of the file
           filters dialog, change the <emphasis role="bold">Source File
           Encoding </emphasis>from &lt;auto&gt; to the encoding that
@@ -171,7 +172,7 @@
     extension<literal> .txt</literal> to <literal>.txt2 </literal>and
     <application>OmegaT</application> will interpret its contents correctly.
     And of course, if you wish to be on the safe side, consider converting
-    this kind of files to Unicode, i.e. to the <literal>.utf8 </literal>file
+    this kind of file to Unicode, i.e. to the <literal>.utf8 </literal>file
     format.</para>
   </section>
 </chapter>

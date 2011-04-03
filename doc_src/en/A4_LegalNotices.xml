@@ -17,17 +17,17 @@
 
     <para>The documentation distributed with <application>OmegaT</application>
     2.2 includes the User Manual and the readme.txt document. The
-    documentation, except for the <emphasis role="bold">Instant Start
-    Guide</emphasis> appendix, is Copyright ©2011 Vito Smolej. The Instant
-    Start Guide appendix is Copyright ©2005-2011 Samuel Murray.</para>
+    documentation is Copyright ©2011 Vito Smolej. The Instant Start Guide is a
+    further development of the Instant Start Guide by Samuel Murray, Copyright
+    ©2005-2008.</para>
 
     <para><emphasis role="bold">Distribution and
     modifications</emphasis></para>
 
     <para>The documentation is a free document; you can redistribute it and/or
     modify it under the terms of the GNU General Public License as published
-    by the Free Software Foundation; either version 2 of the License, or (at
-    your option) any later version.</para>
+    by the Free Software Foundation; either version 2 of the License, or (if
+    you prefer) any later version.</para>
 
     <para><emphasis role="bold">Warranty</emphasis></para>
 
@@ -38,7 +38,7 @@
   </section>
 
   <section id="legal.ntices.for.application">
-    <title>For the Application<indexterm class="singular">
+    <title>For the application<indexterm class="singular">
         <primary>Legal notices</primary>
 
         <secondary>For the application</secondary>
@@ -57,10 +57,10 @@
     modifications</emphasis></para>
 
     <para><emphasis role="bold">O</emphasis><emphasis role="bold">megaT
-    2.2</emphasis> is free software; you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by the
-    Free Software Foundation; either version 2 of the License, or (at your
-    option) any later version.</para>
+    2.2</emphasis> is free software; you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by the Free
+    Software Foundation; either version 2 of the License, or (if you prefer)
+    any later version.</para>
 
     <para><emphasis role="bold">Warranty</emphasis></para>
 

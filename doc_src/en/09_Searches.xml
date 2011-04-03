@@ -20,6 +20,7 @@
         <imageobject role="html">
           <imagedata fileref="images/TextSearch.png" />
         </imageobject>
+
         <imageobject role="ro">
           <imagedata fileref="images/TextSearch.png" width="40%" />
         </imageobject>
@@ -32,14 +33,14 @@
     </note>
 
     <section>
-      <title>Calling up a search<indexterm class="singular">
+      <title>Searching<indexterm class="singular">
           <primary>Shortcuts</primary>
 
           <secondary>Ctrl+F - Search</secondary>
         </indexterm></title>
 
       <para><application>OmegaT</application> provides a powerful range of
-      search functions. Call up the Search window with <keycombo>
+      search functions. Open the Search window with <keycombo>
           <keycap>Ctrl</keycap>
 
           <keycap>F</keycap>
@@ -51,8 +52,8 @@
 
           <keycap>F</keycap>
         </keycombo>. The word or phrase is entered in the Search for box
-      automatically in this case. You can have several Search windows open at
-      the same time, but close them when no longer needed so that they do not
+      automatically. You can have several Search windows open at the same
+      time, but close them when they are no longer needed so that they do not
       clutter your desktop.</para>
     </section>
 
@@ -60,8 +61,8 @@
       <title>Search location</title>
 
       <para>Searches are performed by default in both the source and target
-      sections of the project, but you can configure your search to select in
-      the source or the target text only. You may search in</para>
+      sections of the project, but you can limit your search to just the
+      source or the target text . You may search in</para>
 
       <itemizedlist>
         <listitem>
@@ -83,14 +84,13 @@
         </listitem>
       </itemizedlist>
 
-      <para>When searching through files (as opposed to translation
-      memories),<application>OmegaT</application> restricts the search to
-      files in source file formats (See <ulink
-      url="05_FilesToTranslate.xml">Files to translate -&gt; File
-      Formats</ulink>). Consequently, although OmegaT is quite able to
-      handle<filename> tmx</filename> files, it does not include them in the
-      Search files search. If you turn on <emphasis role="bold"><indexterm
-          class="singular">
+      <para>When searching through files (as opposed to translation memories),
+      <application>OmegaT</application> restricts the search to files in
+      source file formats (See <ulink url="05_FilesToTranslate.xml">Files to
+      translate -&gt; File Formats</ulink>). Consequently, although OmegaT is
+      quite able to handle<filename> tmx</filename> files, it does not include
+      them in the Search files search. If you turn on <emphasis
+      role="bold"><indexterm class="singular">
           <primary>Searches</primary>
 
           <secondary>Advanced Options</secondary>
@@ -109,8 +109,8 @@
 
     <para>In both exact and keyword searches, the wild card search characters
     '*' and '?' can be used. To use wild cards, the regular expressions option
-    should not be selected, because '*' and '?' have special meaning in
-    regulars.</para>
+    should not be selected, as '*' and '?' have special meaning in regular
+    expressions.</para>
 
     <itemizedlist>
       <listitem>
@@ -130,7 +130,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>The matches will be displayed in bold blue. </para>
+    <para>The matches will be displayed in bold blue.</para>
   </section>
 
   <section id="search.methoids">
@@ -148,11 +148,11 @@
         <term>exact search</term>
 
         <listitem>
-          <para>Search for segments containing the string you specified. An
-          exact search looks for a phrase, i.e. if several words are entered,
-          they are found only if they occur in exactly the same sequence.
+          <para>Search for segments containing the exact string you specified.
+          An exact search looks for a phrase, i.e. if several words are
+          entered, they are found only if they occur in exactly that sequence.
           Searching for <literal>open file</literal> will thus find all
-          occurences of the string <emphasis><literal>open
+          occurrences of the string <emphasis><literal>open
           file</literal></emphasis>, but not <emphasis><literal>file
           opened</literal></emphasis> or <emphasis><literal>open input
           file</literal>.</emphasis></para>
@@ -170,7 +170,7 @@
           similar to a search "with all of the words" in an Internet search
           engine such as Google (AND logic). Using keyword search with
           <emphasis><literal>open file</literal></emphasis> will thus find all
-          occurences of the string <emphasis><literal>open
+          occurrences of the string <emphasis><literal>open
           file</literal>,</emphasis> as well as <emphasis><literal>file
           opened</literal>, <literal>open input file</literal>, <literal>file
           may not be safe to open</literal></emphasis><literal>,
@@ -185,8 +185,8 @@
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">case sensitive</emphasis>: the search will
-        be performed for the exact string specified; capitalization must be
-        exactly as specified.</para>
+        be performed for the exact string specified; i.e. capitalization is
+        observed.</para>
       </listitem>
 
       <listitem>
@@ -211,7 +211,7 @@
     <title>Search results display</title>
 
     <para>Pressing the search button after entering a string in the search
-    field displays all the segments in the project that include the searched
+    field displays all the segments in the project that include the entered
     string. As <application>OmegaT</application> handles identical segments as
     one single entity, only the first unique segment is shown.</para>
 
@@ -222,6 +222,6 @@
 
     <para>Clicking on a segment opens it in the Editor for modifications. You
     can then switch back to the Search window for the next segment found, for
-    instance to check and if necessary correct the terminology.</para>
+    instance to check and, if necessary, correct the terminology.</para>
   </section>
 </chapter>

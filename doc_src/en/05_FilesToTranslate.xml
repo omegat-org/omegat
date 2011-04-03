@@ -17,10 +17,10 @@
 
     <para><application>You can use OmegaT</application> to translate files in
     a number of file formats. There are basically two types of file formats,
-    the plain text and the formatted text formats.</para>
+    plain text and formatted text.</para>
 
     <section>
-      <title>Plain-text files<indexterm class="singular">
+      <title>Plain text files<indexterm class="singular">
           <primary>Target files</primary>
 
           <secondary>Plain text files</secondary>
@@ -78,7 +78,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>DTD files (*,DTD)</para>
+          <para>DTD files (*.DTD)</para>
         </listitem>
 
         <listitem>
@@ -88,9 +88,9 @@
 
       <para>Other plain text file types can be handled by
       <application>OmegaT</application> by associating their file extension to
-      a supported file type (for example, .pod files could be associated to
-      the ASCII text filter) and by pre-processing them with specific
-      segmentation rules.</para>
+      a supported file type (for example, .pod files can be associated to the
+      ASCII text filter) and by pre-processing them with specific segmentation
+      rules.</para>
     </section>
 
     <section>
@@ -132,11 +132,11 @@
       <para><itemizedlist>
           <listitem>
             <para>OpenOffice.org / OpenDocument (*.ods, *.ots, *.odt, *.ott,
-            *m *.odp, *.otp)</para>
+            *.odp, *.otp)</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>Microsoft Office Open XML (*.docx. *.dotx. *.xlsx, *.xltx,
+            <para>Microsoft Office Open XML (*.docx, *.dotx, *.xlsx, *.xltx,
             *.pptx)</para>
           </listitem>
         </itemizedlist><itemizedlist>
@@ -208,7 +208,7 @@
         <secondary>Other file formats</secondary>
       </indexterm></title>
 
-    <para>Other plain-text or formatted text file formats suitable for
+    <para>Other plain text or formatted text file formats suitable for
     processing in OmegaT may also exist.</para>
 
     <para><indexterm class="singular">
@@ -217,13 +217,13 @@
         <secondary>File conversion tools</secondary>
       </indexterm>External tools can be used to convert files to supported
     formats. The translated files will then need to be converted back to the
-    original format. For example, if you do not have an outdated Microsoft
-    Word version, that does not handle ODT format, here's a round trip for
-    Word files with the DOC extension:</para>
+    original format. For example, if you have an outdated Microsoft Word
+    version, that does not handle the ODT format, here's a round trip for Word
+    files with the DOC extension:</para>
 
     <itemizedlist>
       <listitem>
-        <para>import the file into the OpenOffice writer </para>
+        <para>import the file into OpenOffice writer</para>
       </listitem>
     </itemizedlist>
 
@@ -272,7 +272,7 @@
       </indexterm></title>
 
     <para>Justification of source and target segments depends upon the project
-    languages. By default, left justification is used for Left-To- Right (LTR)
+    languages. By default, left justification is used for Left-To-Right (LTR)
     languages and right justification for Right-To-Left (RTL) languages. You
     can toggle between different display modes by pressing <keycombo>
         <keycap>Shift</keycap>
@@ -322,13 +322,16 @@
     all three panes (Editor, Fuzzy Matches and Glossary) by clicking on the
     pane and toggling the display mode. It can also be used in all the input
     fields found in <application>OmegaT</application> - in the search window,
-    for segmentation rules etc. Mac OS X users, note: use <keycombo>
+    for segmentation rules etc. </para>
+
+    <para>Mac OS X users, note: use <keycombo>
         <keycap>Shift</keycap>
 
         <keycap>Ctrl</keycap>
 
         <keycap>O</keycap>
-      </keycombo> shortcut and not cmd+Ctrl+O.</para>
+      </keycombo> shortcut and <emphasis role="bold">not
+    </emphasis>cmd+Ctrl+O.</para>
 
     <section>
       <title>Mixing RTL and LTR strings in segments<indexterm class="singular">
@@ -367,7 +370,7 @@
           <secondary>OmegaT tags in RTL languages</secondary>
         </indexterm></title>
 
-      <para>As written above, OmegaT tags are LTR strings. When translating
+      <para>As stated above, OmegaT tags are LTR strings. When translating
       between RTL and LTR languages, correctly reading the tags from the
       source and entering them properly in the target may require the
       translator to toggle between LTR and RTL modes numerous times.</para>
@@ -378,7 +381,7 @@
       in Hints for tags management. Frequently validate tags (see Tag
       validation) and produce translated documents (see below and Menu) at
       regular intervals to make it easier to catch any problems that arise. A
-      hint: translating a plain-text version of the text and adding the
+      hint: translating a plain text version of the text and adding the
       necessary style in the relevant application at a later stage may turn
       out to be less hassle..</para>
     </section>

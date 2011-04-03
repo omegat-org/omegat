@@ -2,21 +2,21 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <chapter id="ch06.translation.editing">
-  <title>Editing behaviour<indexterm class="singular">
+  <title>Editing behavior<indexterm class="singular">
       <primary>Menu options</primary>
 
-      <secondary>Editing behaviour...</secondary>
+      <secondary>Editing behavior...</secondary>
     </indexterm></title>
 
   <para>The dialog in <menuchoice>
       <guimenu>Options</guimenu>
 
-      <guimenuitem>Editing Behaviour...</guimenuitem>
+      <guimenuitem>Editing Behavior...</guimenuitem>
     </menuchoice> enables the user to select, how the current segment in the
   editing field is to be initialized and handled:</para>
 
-  <figure id="editing.behaviour.options">
-    <title>Editing behaviour options</title>
+  <figure id="editing.behavior.options">
+    <title>Editing behavior options</title>
 
     <mediaobject>
       <imageobject role="html">
@@ -33,10 +33,10 @@
     <para>You translate your files by moving from segment to segment, editing
     each current segment in turn. When moving between segments, you may wish
     to populate the editing field with an existing translation in the fuzzy
-    match pane or with the source text. In Options <menuchoice>
+    match pane or with the source text. In <menuchoice>
         <guimenu>Options</guimenu>
 
-        <guimenuitem>Editing Behaviour...</guimenuitem>
+        <guimenuitem>Editing Behavior...</guimenuitem>
       </menuchoice> <application>OmegaT</application> offers you the following
     alternatives:</para>
 
@@ -45,7 +45,7 @@
         <term>The source text</term>
 
         <listitem>
-          <para>you can have the source text inserted automatically into the
+          <para>You can have the source text inserted automatically into the
           editing field. This is useful for texts containing many trade marks
           or other proper nouns you which must be left unchanged.</para>
         </listitem>
@@ -88,10 +88,10 @@
     then report these segments as not translated. This is the default. The
     alternative is to enter a translation that is identical to the source
     text. OmegaT is able to recognize that you have done this. To make this
-    possible, go to select <menuchoice>
+    possible, go to <menuchoice>
         <guimenu>Options</guimenu>
 
-        <guimenuitem>Editing Behaviour...</guimenuitem>
+        <guimenuitem>Editing Behavior...</guimenuitem>
       </menuchoice> and check the box <emphasis role="bold">Allow translation
     to be equal to source</emphasis>.</para>
   </section>
@@ -102,7 +102,7 @@
       </indexterm></title>
 
     <para>The text export function exports data from within the current
-    <application>OmegaT</application> project to plain-text files. The data
+    <application>OmegaT</application> project to plain text files. The data
     are exported when the segment is opened. The files appear in the /script
     subfolder in the OmegaT user files folder, and include:</para>
 
@@ -127,10 +127,10 @@
 
     <para>The content of the files is overwritten either when a new segment is
     opened (source.txt and target.txt) or when a new selection is exported
-    (selection.txt). The files are unformatted plain-text files. The whole
+    (selection.txt). The files are unformatted plain text files. The whole
     process can be steered and controlled via Tck/Tcl-based scripting. See
     <ulink url="http://www.omegat.org/en/howtos/text_export.html">Using the
     OmegaT text export function</ulink> for specifics, examples and
-    suggestions. </para>
+    suggestions.</para>
   </section>
 </chapter>

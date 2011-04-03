@@ -9,8 +9,8 @@
 
   <itemizedlist>
     <listitem>
-      <para>Translation project files: they constitute a translation project.
-      Loosing them may affect the project's integrity and your ability to
+      <para>Translation project files: These constitute a translation project.
+      Losing them may affect the project's integrity and your ability to
       complete a job. Project files are the most important files in
       <application>OmegaT</application>. They are the files you deal with on a
       daily basis while translating.</para>
@@ -22,16 +22,16 @@
       <para>User settings files: These are created when OmegaT's behavior is
       modified by user preference settings. Losing them usually results in
       OmegaT reverting to its "factory settings". This can sometimes cause a
-      little trouble when you are in the middle of a translation. .</para>
+      little trouble when you are in the middle of a translation.</para>
     </listitem>
   </itemizedlist>
 
   <itemizedlist>
     <listitem>
-      <para>Application files: They are included in the package you download.
+      <para>Application files: These are included in the package you download.
       Most of them are required in order for OmegaT to function properly. If
-      for some reason such files are lost or corrupted, simply download and/or
-      reinstall OmegaT to restore them all.</para>
+      for some reason these files are lost or corrupted, simply download
+      and/or reinstall OmegaT to restore them all.</para>
     </listitem>
   </itemizedlist>
 
@@ -50,27 +50,16 @@
 
       <para>When you create a translation project, OmegaT automatically
       creates a list of folders that will later serve as files repositories,
-      and also a number of files that are used to set certain project
-      preferences and to hold the project translation memory. By default, a
-      translation project's folders are all grouped under the main project
-      folder. Alternate locations for some of the folders can be chosen at
-      project creation or during the translation. It is therefore possible to
-      select existing folders or create folders in locations that reflect your
-      work flow and project management habits. To change the location of
-      folders after a project has been created, open Project # Properties...
-      <menuchoice>
-          <shortcut>
-            <keycombo>
-              <keycap>Ctrl</keycap>
-
-              <keycap>E</keycap>
-            </keycombo>
-          </shortcut>
-
-          <guimenu>Project</guimenu>
-
-          <guimenuitem>Properties...</guimenuitem>
-        </menuchoice> and make the necessary changes.</para>
+      and a number of files that are used to set certain project preferences
+      and to hold the project translation memory. By default, a translation
+      project's folders are all grouped under the main project folder.
+      Alternate locations for some of the folders can be chosen at project
+      creation or during the translation. It is therefore possible to select
+      existing folders or create folders in locations that reflect your work
+      flow and project management habits. To change the location of folders
+      after a project has been created, open <guimenuitem>Project &gt;
+      Properties...</guimenuitem> in the menu or with
+      <guibutton>Ctrl+E</guibutton> and make the necessary changes.</para>
     </section>
 
     <section id="translation.project.files.list">
@@ -80,11 +69,11 @@
           <secondary>List</secondary>
         </indexterm>Translation project files list</title>
 
-      <para>In a file dialog opened by <application>OmegaT</application>, a
-      translation project will look like a file with an
-      <application>OmegaT</application> icon associated to it. From within a
-      file manager, however, a translation project is just like any other
-      folder.</para>
+      <para>When you open a file dialog opened by
+      <application>OmegaT</application>, a translation project will look like
+      a file with an <application>OmegaT</application> icon associated with
+      it. From within a file manager, however, a translation project looks and
+      acts just like any other folder.</para>
 
       <figure id="OmegaT.projects.and.subdirectories">
         <title>OmegaT projects and subdirectories</title>
@@ -96,8 +85,8 @@
         </mediaobject>
       </figure>
 
-      <para>Selecting the item with the OmegaT icon is sufficient to open the
-      project. A translation project <emphasis
+      <para>Double clicking the item with the OmegaT icon is sufficient to
+      open the project. A translation project <emphasis
       role="bold">Example_Project</emphasis> created with the default settings
       will be created as a new subfolder with the following structure:</para>
 
@@ -111,7 +100,7 @@
         </mediaobject>
       </figure>
 
-      <para>All the subdirectories will be empty initially.</para>
+      <para>All the subdirectories will be initially empty.</para>
     </section>
 
     <section id="folder.OmegaT">
@@ -121,18 +110,19 @@
           <secondary>Subfolder omegat</secondary>
         </indexterm></title>
 
-      <para>The <emphasis role="bold">omegat</emphasis> subfolder contains one
-      and possibly several other files. The most important file is the
-      translation memory file, <emphasis role="bold">project_save.tmx
+      <para>The <emphasis role="bold">omegat</emphasis> subfolder contains at
+      least one and possibly several other files. The most important file is
+      the translation memory file, <emphasis role="bold">project_save.tmx
       </emphasis>(...). The project_save.tmx file is the working translation
       memory for the project. With the autosave function activated, it will be
       automatically updated when you quit. It is the translation memory used
       to create the translated files. A number of TMX files with names of the
       form <emphasis role="bold">project_save.tmx.&lt;date and
       time&gt;.bak</emphasis> (...) are added progressively to this subfolder
-      as the translation proceeds. They serve as a backup for the project TM.
-      A new one is added each time you reopen a project, thus reflecting its
-      contents before the current session has changed it.</para>
+      as the translation progresses. They serve as a backup for the project
+      TM. A new one of theses is added each time you reopen a project, thus
+      reflecting its contents before the current session has changed
+      them</para>
 
       <para>The project <indexterm class="singular">
           <primary>Project files</primary>
@@ -141,10 +131,10 @@
         </indexterm><emphasis role="bold">stats.txt</emphasis> file (...)
       contains the statistics of the current project and can be opened in a
       spreadsheet application to display segment and word count information.
-      The file contains for each file the number of segments - Total and
-      Remaining - the number of Unique segments per file, the number of Unique
-      words and the number of Unique Characters with / without spaces per
-      file,</para>
+      The file contains the number of segments for each file to be translated
+      - Total and Remaining - the number of Unique segments per file, the
+      number of Unique words and the number of Unique Characters with /
+      without spaces per file,</para>
 
       <para>Note that Unique segments per file provides the number of unique
       segments in a given file that do not appear anywhere else in the
@@ -157,7 +147,7 @@
           <primary>Project files</primary>
 
           <secondary>ignore_word and learned_word</secondary>
-        </indexterm>ignore_words.txt </emphasis>and <emphasis
+        </indexterm>Ignore_words.txt </emphasis>and <emphasis
       role="bold">learned_word.txt </emphasis>files are used by the spell
       checker. Note that they are specific for a given project, so if you have
       already amassed words you wish the spell checker to ignore / accept, you
@@ -172,13 +162,13 @@
           <secondary>Source subfolder</secondary>
         </indexterm></title>
 
-      <para>The source subfolder is the location for the files to be
-      translated. You can specify a new subfolder and add the files to it
-      later. Note that the structure of the source subfolder may take any form
-      you like. If the files to be translated are parts of a tree structure
-      (as in a website), you need only specify the top-level subfolder and
-      OmegaT will maintain the entire contents, while keeping the tree
-      structure intact.</para>
+      <para>The source subfolder is the location for project files that need
+      to be translated. You can specify a new subfolder and add the files to
+      it later. Note that the structure of the source subfolder may take any
+      form you like. If the files to be translated are parts of a tree
+      structure (as in a website), you need only specify the top-level
+      subfolder and OmegaT will maintain the entire contents, while keeping
+      the tree structure intact.</para>
     </section>
 
     <section id="folder.target">
@@ -202,9 +192,9 @@
           <guimenuitem>Create Translated Documents</guimenuitem>
         </menuchoice> is selected, all the files within the
       <filename>source</filename> directory, whether translated or not, are
-      reproduced here with the same folder hierarchy to reflect the current
-      state of the translation. In practical terms, OmegaT merges the
-      translation information saved in <emphasis
+      reproduced in the target directory with the same folder hierarchy to
+      reflect the current state of the translation. In practical terms, OmegaT
+      merges the translation information saved in <emphasis
       role="bold">/omegat/project_save,tmx</emphasis> with the source
       documents to produce the target contents.</para>
     </section>
@@ -217,7 +207,7 @@
         </indexterm></title>
 
       <para><application>OmegaT</application> automatically creates this file
-      when the project is created. It contains the project parameters. The
+      when the project is created and contains the project parameters. The
       parameters included in this file can be modified from the Project
       properties window.</para>
 
@@ -236,8 +226,8 @@
       <para>These files contain the source and target segments corresponding
       to the contents of the <filename>source</filename> folder at the time of
       their creation (usually when the translated files have been created).
-      They are the exported translation memories that you can use in future
-      projects.</para>
+      They constitute the exported translation memories that you can use in
+      future projects.</para>
     </section>
   </section>
 
@@ -294,7 +284,7 @@
 
               <entry><literal>&lt;Something&gt;\<application>OmegaT</application></literal>
               (&lt;Something&gt; corresponds to the location of the "home"
-              folder as determined by Java.)</entry>
+              folder as determined by Java)</entry>
             </row>
 
             <row>
@@ -302,7 +292,7 @@
 
               <entry><literal>&lt;User Home&gt;/.omegat </literal>(.omegat is
               a directory, the dot preceding its name makes it invisible
-              unless you type ls -a or an equivalent command.)</entry>
+              unless you type ls -a or an equivalent command)</entry>
             </row>
 
             <row>
@@ -340,33 +330,33 @@
               <entry>This file records Java error messages while
               <application>OmegaT</application> is running. Should OmegaT
               appear to be behaving erratically, it is important to include
-              this file or the relevant part in any bug report.</entry>
+              this file or the relevant part in any bug report</entry>
             </row>
 
             <row>
               <entry>omegat.prefs</entry>
 
               <entry>An xml file with all the GUI accessible option
-              settings.</entry>
+              settings</entry>
             </row>
 
             <row>
               <entry>uiLayout.xml</entry>
 
-              <entry>An xml file with window position data.</entry>
+              <entry>An xml file with window position data</entry>
             </row>
 
             <row>
               <entry>filters.conf</entry>
 
-              <entry>An xml file with all the data set by the file filters
-              preferences.</entry>
+              <entry>An xml file with all the data set by the file filter
+              preferences</entry>
             </row>
 
             <row>
               <entry>segmentation.conf</entry>
 
-              <entry>An xml file containing segmentation rules.</entry>
+              <entry>An xml file containing segmentation rules</entry>
             </row>
           </tbody>
         </tgroup>
@@ -389,7 +379,7 @@
     SourceForge. This chapter will consider the platform-independent package
     that contains the application in a standard Java form. Other packages
     include a Linux .tar package, a Windows installer – with or without a Java
-    Runtime Environment–, a MacOSX installer, and a source code package for
+    Runtime Environment –, a MacOSX installer, and a source code package for
     developers. The platform-independent package can be used on any platform
     with a working Java 1.5 runtime environment, including the platforms for
     which a specific package also exists. The platform-independent package is
@@ -414,7 +404,7 @@
             <entry>/docs/</entry>
 
             <entry>All the user manual files can be found in this folder. You
-            can open them in an Internet browser to obtain access to external
+            can open them in An Internet browser to obtain access to external
             links.</entry>
           </row>
 

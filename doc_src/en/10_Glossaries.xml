@@ -50,7 +50,7 @@
     </figure>
 
     <para>The word before the = sign is the source term, and its translation
-    is (or are) the words behind =. The vocabulary entry can have a comment
+    is (or are) the words after =. The vocabulary entry can have a comment
     added (see "transitive verb" for the second item). The glossary function
     only finds exact matches with the glossary entry (e.g. does not find
     inflected forms etc.). New terms can be added manually to the glossary
@@ -77,10 +77,11 @@
       </mediaobject>
     </figure>
 
-    <para>The underlined item "new preview screenshot", consists of three
+    <para>The underlined item "new preview screen shot", consists of three
     words and can be found in the glossary pane as "nov predogled posnetka
     zaslona". Note that parts of the multi-term items ("preview" in the above
-    example iz also recognized by itself as "predogled").</para>
+    example is also recognized on its own as "predogled") are recognized as
+    well, but ranked lower.</para>
   </section>
 
   <section>
@@ -96,22 +97,22 @@
         <seealso>Glossaries</seealso>
       </indexterm></title>
 
-    <para>Glossary files are simply plain text files containing three-column,
+    <para>Glossary files are simple plain text files containing three-column,
     tab-delimited lists with the source and target terms in the first and
     second columns respectively. The third column can be used for additional
     information. Glossary files can be either in system default encoding (and
     indicated by the extension .tab) or in UTF-8 (the extension .utf8). The
-    Unicode encoding (UTF8) is to be preferred for obvious reasons.</para>
+    Unicode encoding (UTF8) is preferred for obvious reasons.</para>
 
-    <para>Also supported is the CSV format. The format is the same as the tab
-    separated one: source term, target term, comment Fields are separated by a
+    <para>Also supported is the CSV format. This format is the same as the tab
+    separated one: source term, target term. Comment fields are separated by a
     comma ','. Strings can be enclosed by quotes ", which allows having a
     comma inside a string:</para>
 
     <para><literal>"This is a source term, which contains a comma",c'est un
     terme cible,this is a comment</literal></para>
 
-    <para>Additional to the plain text format, TBX format is also supported.
+    <para>In addition to the plain text format, TBX format is also supported.
     TBX - Term Base eXchange (TBX) is the open, XML-based standard for
     exchanging structured terminological data that has been approved as an
     international standard by LISA and ISO. If you have an existing
@@ -145,8 +146,8 @@
     target-language terms on the right, and possibly a third column,
     containing you comments and explanations, The tab space (→ in the example
     below) and Enter (¶ ) characters can be made visible by clicking on the ¶
-    icon in the Writer's Standard writer bar. Here's a few lines of an English
-    -German glossary)</para>
+    icon in the Writer's Standard writer bar. Here are a few lines of an
+    English -German glossary)</para>
 
     <para><literal> word →Wort→das (-/e/s, Wörter/-e)</literal></para>
 
@@ -160,8 +161,8 @@
     just separate each source and target-language term pair with a single tab
     space.</para>
 
-    <para>When you are finished with the entries, save file as Unicode-encoded
-    file as follows:</para>
+    <para>When you are finished with the entries, save the file as
+    Unicode-encoded file as follows:</para>
 
     <itemizedlist>
       <listitem>
@@ -182,7 +183,7 @@
 
       <listitem>
         <para>make sure "<emphasis>Automatic file name extension</emphasis>"
-        and <emphasis>"Edit filter settings". </emphasis>are unchecked.</para>
+        and <emphasis>"Edit filter settings" </emphasis>are unchecked.</para>
       </listitem>
     </itemizedlist>
 
@@ -202,13 +203,13 @@
 
     <para>Confirm with OK.</para>
 
-    <para>After creating an <application>OmegaT</application> project, copy or
-    move this file into the project's \glossary folder. If the project is
-    already open, reload it after copying the glossary file. You can make
-    changes to a glossary file whilst it is being used in project. Glossary
-    changes are being detected approximately once every second and
-    modifications loaded transparently in the background, so there's no need
-    to reload the project after saving the new glossary file.</para>
+    <para>After creating an OmegaT project, copy or move this file into the
+    project's \glossary folder. If the project is already open, reload it
+    after copying the glossary file into the project. You can make changes to
+    a glossary file while it is being used in a project. Glossary changes are
+    detected approximately once every second and modifications load
+    transparently in the background, so there's no need to reload the project
+    after saving the new glossary file.</para>
 
     <para>When a segment containing a source-text term is opened, the glossary
     pane will display glossary entries for those items in the source segment
@@ -216,33 +217,34 @@
     one available, and they can be stored in subfolders of <emphasis>glossary
     </emphasis>as well).</para>
 
-    <para><emphasis role="bold">Note: </emphasis>Of course there's other ways
-    and means to create a simple file with tab delimited entries, and they are
-    all simpler, a lot of them much simpler, than the above suggestion. For
-    instance, one can export the contents above as a <filename>CSV</filename>,
-    instead of a <filename>UTF8</filename> text file. Note, however, that the
-    above suggestion works for any target system, be it Windows, OS X or
-    Linux. Nothing speaks against using Notepad++ on Windows or GEdit on Linux
-    for instance: any text editor, that is knowledgeable about UTF8 and that
-    can show white space, so that you do not miss the required
-    <keycap>TAB</keycap> characters can be used.</para>
+    <para><emphasis role="bold">Note: </emphasis>Of course there are other
+    ways and means to create a simple file with tab delimited entries, and
+    they are all simpler, a lot of them much simpler, than the above
+    suggestion. For instance, one can export the contents above as a
+    <filename>CSV</filename>, instead of a <filename>UTF8</filename> text
+    file. Note, however, that the above suggestion works for any target
+    system, be it Windows, OS X or Linux. Nothing speaks against using
+    Notepad++ on Windows or GEdit on Linux for instance: any text editor, that
+    can handle UTF8 and that can show white space (so that you do not miss the
+    required <keycap>TAB</keycap> characters) can be used.</para>
 
-    <para>The contents of glossary files are kept in the memory and get
-    loaded, when the project gets opened or reloaded. Updating of a glossary
-    file is thus rather simple:</para>
+    <para>The contents of glossary files are kept in memory and are loaded
+    when the project is opened or reloaded. Updating a glossary file is thus
+    rather simple:</para>
 
     <itemizedlist>
       <listitem>
-        <para>keep the file opened in your selected editor</para>
+        <para>keep the file open in your selected editor</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>When you hit upon a new term, worth entering, enter the new
-        term, its translation and any comments you may have (making sure, you
-        press tab between the fields) and save the file. The contents of the
-        glossary pane will be updated accordingly.</para>
+        <para>When you come across a new term that you would like to add to
+        your glossary, enter the new term, its translation and any comments
+        you may have (ensuring you press tab between the fields) and save the
+        file. The contents of the glossary pane will be updated
+        accordingly.</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -262,7 +264,7 @@
 
     <para>If you export using the system option "Tab-delimited export", you
     will need to delete the first 5 columns (Seq. Nr, Date created etc). The
-    newer versions of MultiTerm support export in TBX format..</para>
+    newer versions of MultiTerm support exporting to TBX format..</para>
   </section>
 
   <section>
@@ -303,8 +305,7 @@
     <itemizedlist>
       <listitem>
         <para>There is no EXACT match between the glossary entry and the
-        source text in your document - for instance when the item is in
-        plural.</para>
+        source text in your document - for instance plurals.</para>
       </listitem>
     </itemizedlist>
 

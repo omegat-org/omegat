@@ -6,7 +6,7 @@
 
   <para>Translation memory tools work with textual units called segments.
   <application>OmegaT</application> has two ways to segment a text: by
-  paragraph or by sentence segmentation (also referred to as “rules-based
+  paragraph or by sentence segmentation (also referred to as “rule-based
   segmentation”). In order to select the type of segmentation, select
   <menuchoice>
       <guimenu><indexterm class="singular">
@@ -21,9 +21,8 @@
   highly creative or stylistic translations in which the translator may wish
   to change the order of entire sentences; for the majority of projects,
   however, sentence segmentation is a choice to be preferred, since it
-  delivers better matches from previous translations.. If sentence
-  segmentation has been selected, you can setup the rules by selecting
-  <menuchoice>
+  delivers better matches from previous translations. If sentence segmentation
+  has been selected, you can setup the rules by selecting <menuchoice>
       <guimenu><indexterm class="singular">
           <primary>Menu Project</primary>
 
@@ -40,12 +39,12 @@
   productivity by tuning the segmentation rules to the text to be
   translated.</para>
 
-  <para><emphasis role="bold">Warning: </emphasis>as the text will segment
-  differently after filter options have been changed, so you may have to start
-  translating from scratch, and at the same time the previous valid segments
-  in the project translation memory will turn into orphan segments. If you
-  change segmentation options when a project is open, you must reload the
-  project in order for the changes to take effect.</para>
+  <para><emphasis role="bold">Warning: </emphasis>because the text will
+  segment differently after filter options have been changed, so you may have
+  to start translating from scratch. At the same time the previous valid
+  segments in the project translation memory will turn into orphan segments.
+  If you change segmentation options when a project is open, you must reload
+  the project in order for the changes to take effect.</para>
 
   <para><application>OmegaT</application> uses the following sequence of
   steps:</para>
@@ -65,7 +64,7 @@
 
         <para>For example, text files may be segmented on line breaks, empty
         lines, or not be segmented at all. Files containing formatting
-        (OpenOffice.org documents, HTML documents, etc.) are segmented on
+        (OpenOffice.org documents, HTML documents, etc.) are segmented on the
         block-level (paragraph) tags. Translatable object attributes in XHTML
         or HTML files can be extracted as separate segments.</para>
       </listitem>
@@ -96,15 +95,15 @@
     <para>The process of segmenting can be pictured as follows: the cursor
     moves along the text, one character at a time. At each cursor position
     rules, consisting of a <emphasis role="bold">Before </emphasis>and
-    <emphasis role="bold">After </emphasis>Pattern, are applied in their given
-    order to see if any among the<emphasis role="bold"> Before</emphasis>
-    patterns applies for the text on the left and the corresponding <emphasis
-    role="bold">After</emphasis> pattern to the text on the right of the
-    cursor. If the rule matches, either the cursor moves on without inserting
-    a segment break (for a exception rule) or a new segment break is created
-    at the current cursor position (for the break rule).</para>
+    <emphasis role="bold">After </emphasis>pattern, are applied in their given
+    order to see if any of the<emphasis role="bold"> Before</emphasis>
+    patterns are valid for the text on the left and the corresponding
+    <emphasis role="bold">After</emphasis> pattern for the text on the right
+    of the cursor. If the rule matches, either the cursor moves on without
+    inserting a segment break (for an exception rule) or a new segment break
+    is created at the current cursor position (for the break rule).</para>
 
-    <para>The two types of rules behave like follows:</para>
+    <para>The two types of rules behave as follows:</para>
 
     <variablelist>
       <varlistentry>
@@ -119,7 +118,7 @@
         <listitem>
           <para>Separates the source text into segments. For example,
           "<emphasis>Did it make sense? I was not sure</emphasis>." should be
-          split in two segments. For this to happen, there should be a break
+          split into two segments. For this to happen, there should be a break
           rule for "?", when followed by spaces and a capitalized word. To
           define a rule as a break rule, tick the Break/Exception check
           box.</para>
@@ -155,20 +154,20 @@
   </section>
 
   <section id="rules.priority">
-    <title>Rules priority<indexterm class="singular">
+    <title>Rule priority<indexterm class="singular">
         <primary>Segmentation</primary>
 
         <secondary>Rules priority</secondary>
       </indexterm></title>
 
-    <para>All the segmentation rule sets with a matching language pattern are
-    active and being applied in the given order of priority, so rules for
+    <para>All segmentation rule sets for a matching language pattern are
+    active and are applied in the given order of priority, so rules for
     specific language should be higher than default ones. For example, rules
     for Canadian French (FR-CA) should be set higher than rules for French
-    (FR.*), and higher than Default (.*) ones. Then while translating from
+    (FR.*), and higher than Default (.*) ones. Thus, when translating from
     Canadian French the rules for Canadian French - if any - will be applied
-    first, followed by the rules for French and followed lastly by Default
-    rules. </para>
+    first, followed by the rules for French and lastly, by the Default
+    rules.</para>
   </section>
 
   <section id="creating.new.rule">
@@ -185,8 +184,8 @@
     the addition of a recognized abbreviation, can be advantageous.</para>
 
     <para>In order to edit or expand an existing set of rules, simply click on
-    it in the top table. The rules of the set appears in the bottom half of
-    the window.</para>
+    it in the top table. The rules for that set will appear in the bottom half
+    of the window.</para>
 
     <para>In order to create an empty set of rules for a new language pattern
     click <emphasis role="bold">Add </emphasis>in the upper half of the
@@ -196,14 +195,14 @@
     linkend="A2.languages">Appendix B.1 for a list of language codes</link>).
     The syntax of the language pattern conforms to regular expression syntax.
     If your set of rules handles a language-country pair, we advise you to
-    move it to the top using <emphasis role="bold">Move Up</emphasis>
+    move it to the top using the <emphasis role="bold">Move Up</emphasis>
     button.</para>
 
     <para>Add the <emphasis role="bold">Before</emphasis> and<emphasis
     role="bold"> After</emphasis> patterns. To check their syntax and their
     applicability, it is advisable to use tools which allow you to see their
     effect directly. See the chapter on <link linkend="ch09.regexp">Regular
-    expressions</link>. A good starting point are always the existing
+    expressions</link>. A good starting point will always be the existing
     rules.</para>
   </section>
 
@@ -212,7 +211,7 @@
         <primary>Segmentation</primary>
 
         <secondary>Examples</secondary>
-      </indexterm>Few simple examples</title>
+      </indexterm>A few simple examples</title>
 
     <informaltable>
       <tgroup cols="4">
@@ -246,7 +245,7 @@
             <entry align="center">\s</entry>
 
             <entry>"\." means the character "." "\s" means any white space
-            character ((space, tab, new page etc.) </entry>
+            character ((space, tab, new page etc.)</entry>
           </row>
 
           <row>

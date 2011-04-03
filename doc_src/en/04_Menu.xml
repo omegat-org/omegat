@@ -27,7 +27,7 @@
 
         <keycap>key</keycap>
       </keycombo> instead. The "Cmd" key either has a "command" label or an
-    apple mark on Apple keyboards.</para>
+    apple symbol on Apple keyboards.</para>
 
     <table colsep="1" id="table.main.menu">
       <title>Main Menu</title>
@@ -144,15 +144,14 @@
                 <keycap>S</keycap>
               </keycombo></entry>
 
-            <entry>Saves the internal translation memory from the memory onto
-            the hard disk. <application>OmegaT</application> automatically
-            saves the translation every 10 minutes and also when you close the
-            project or quit <application>OmegaT</application>.</entry>
+            <entry>Saves the internal translation memory to the hard disk.
+            OmegaT automatically saves translations every 10 minutes as well
+            as when you close the project or quit OmegaT.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Create translated
-            Documents</guimenuitem></entry>
+            documents</guimenuitem></entry>
 
             <entry><keycombo>
                 <keycap>Ctrl</keycap>
@@ -190,7 +189,8 @@
 
             <entry>Closes or opens the <ulink
             url="04_UserInterface.xml#Project_Files">Project files
-            window</ulink> (depending whether it is opened or closed).</entry>
+            window</ulink> (depending on whether it is open or
+            closed).</entry>
           </row>
 
           <row>
@@ -204,7 +204,8 @@
 
             <entry>Saves the project and quits
             <application>OmegaT</application>. If you haven't yet saved the
-            project manually confirms whether you really wish to quit.</entry>
+            project, this manually confirms whether you really wish to
+            quit.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -351,8 +352,8 @@
 
             <entry>Replaces the target segment with the translation, provided
             by the selected Machine Translation service. No action is taken,
-            in case no Machine Translation service has been activated (see
-            Menu &gt; Options below).</entry>
+            if no Machine Translation service has been activated (see Menu
+            &gt; Options below).</entry>
           </row>
 
           <row>
@@ -403,7 +404,7 @@
             regardless of whether they are already there or not. Texts,
             bracketed by tags, are replaced by spaces:.
             <literal>&lt;f0&gt;&lt;f1&gt;This is
-            text&lt;/f0&gt;&lt;/f1&gt;</literal> thus be copied as
+            text&lt;/f0&gt;&lt;/f1&gt;</literal> thus will be copied as
             <literal>&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
           </row>
 
@@ -422,10 +423,9 @@
             processing. If no text has been selected, the current source
             segment is written to this file. When the user exits
             <application>OmegaT</application>, this file is not emptied, in
-            order to be consistent with usual clipboard behaviour. The
-            exported contents are copied to the file
-            <filename>selection.txt</filename> located in the User's
-            preference files folder (see <ulink
+            order to be consistent with usual clipboard behavior. The exported
+            contents are copied to the file <filename>selection.txt</filename>
+            located in the User's preference files folder (see <ulink
             url="filesAndDirectories.xml#user">files and
             directories</ulink>)</entry>
           </row>
@@ -477,7 +477,7 @@
             <entry>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
             displayed in the match viewer to replace or insert it to the
             segment. The <ulink url="04_UserInterface.xml#Fuzzy_Matches">Fuzzy
-            matches</ulink> section describes the colour coding in
+            matches</ulink> section describes the color coding in
             detail.</entry>
           </row>
         </tbody>
@@ -596,7 +596,7 @@
             <entry><application>OmegaT</application> remembers the segments
             executed. With this command you can step forward to the segment,
             you have previously left by the <guimenuitem>Back in
-            history</guimenuitem>,,, command.</entry>
+            history</guimenuitem>...command.</entry>
           </row>
         </tbody>
       </tgroup>
@@ -737,13 +737,13 @@
             <entry>Sets segment validation key to
             <guimenuitem>Tab</guimenuitem> instead of the default
             <guimenuitem>Enter</guimenuitem>. This option is useful for some
-            of Chinese, Japanese or Korean character input systems.</entry>
+            Chinese, Japanese or Korean character input systems.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Always Confirm Quit</guimenuitem></entry>
 
-            <entry>The program will always check with you before closing
+            <entry>The program will see confirmation before closing
             down.</entry>
           </row>
 
@@ -770,8 +770,8 @@
             then click on the preferred translation to insert it into the
             target segment at the current position. With
             <emphasis>TransTips/Exact Match </emphasis> checked, only complete
-            words will be checked, otherwise also parts of words will be
-            matched as well.</entry>
+            words will be checked, otherwise parts of words will be matched as
+            well.</entry>
           </row>
 
           <row>
@@ -802,24 +802,24 @@
           <row>
             <entry><guimenuitem>Spell checking...</guimenuitem></entry>
 
-            <entry>Displays the <ulink url="spellchecker.xml">Spellchecker
+            <entry>Displays the <ulink url="spellchecker.xml">Spell checker
             setup</ulink> window to install, configure and activate the spell
             checker.</entry>
           </row>
 
           <row>
-            <entry><guimenuitem>Editing Behaviour...</guimenuitem></entry>
+            <entry><guimenuitem>Editing Behavior...</guimenuitem></entry>
 
             <entry>Displays the <ulink
-            url="translationEditing.xml">Translation editing</ulink> dialogue
-            to configure.</entry>
+            url="translationEditing.xml">Translation editing</ulink> dialog to
+            configure.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Tag Validation...</guimenuitem></entry>
 
             <entry>For programmers: Allows you to configure the Tag Validator
-            options to check programming (%...) variables also.</entry>
+            options to also check programming (%...) variables.</entry>
           </row>
 
           <row>
@@ -892,7 +892,7 @@
     <para>Ctrl is used on Windows, UNIX and UNIX-like operating systems with
     keyboards featuring a <keycap>Ctrl</keycap> / <keycap>Control
     key</keycap>. Mac users should instead use the
-    <guimenuitem>cmd+key.</guimenuitem> On Apple keyboards
+    <guimenuitem>cmd+key.</guimenuitem> On Apple keyboards the
     <guimenuitem>cmd</guimenuitem> key either has a command label or an Apple
     icon on it.</para>
 
@@ -1047,7 +1047,7 @@
                   <keycap>Z</keycap>
                 </keycombo></entry>
 
-              <entry>Undoes the last editing actions, in the current target
+              <entry>Undoes the last editing actions in the current target
               segment</entry>
             </row>
 
@@ -1060,7 +1060,7 @@
                   <keycap>Y</keycap>
                 </keycombo></entry>
 
-              <entry>Redoes the last editing actions, in the current target
+              <entry>Redoes the last editing actions in the current target
               segment</entry>
             </row>
 
@@ -1168,7 +1168,7 @@
 
               <entry>Replaces the target segment with the machine translation
               of the source. No action, if machine tools are deactivated (see
-              Menu &gt; Options &gt; Machine Translate).</entry>
+              Menu &gt; Options &gt; Machine Translate)</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1201,7 +1201,7 @@
                 </keycombo></entry>
 
               <entry>Moves the editing field to the next segment that is not
-              registered in the project's translation memory.</entry>
+              registered in the project's translation memory</entry>
             </row>
 
             <row>
@@ -1225,7 +1225,7 @@
                   <keycap>P</keycap>
                 </keycombo></entry>
 
-              <entry>Moves the editing field to the previous segment.</entry>
+              <entry>Moves the editing field to the previous segment</entry>
             </row>
 
             <row>
@@ -1237,7 +1237,7 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Moves to the segment number entered.</entry>
+              <entry>Moves to the segment number entered</entry>
             </row>
 
             <row>
@@ -1249,7 +1249,7 @@
                   <keycap>Shift+P</keycap>
                 </keycombo></entry>
 
-              <entry>Moves one segment back in history.</entry>
+              <entry>Moves one segment back in history</entry>
             </row>
 
             <row>
@@ -1261,7 +1261,7 @@
                   <keycap>Shift+N</keycap>
                 </keycombo></entry>
 
-              <entry>Moves one segment forward in history.</entry>
+              <entry>Moves one segment forward in history</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1318,7 +1318,7 @@
                 </keycombo></entry>
 
               <entry>Exports the current selection or the current source, if
-              no text has been selected. The text is exported to a plain-text
+              no text has been selected. The text is exported to a plain text
               file.</entry>
             </row>
 

@@ -68,8 +68,7 @@
     <title>Modifying project properties</title>
 
     <para>Note that changes to the project setup may have some consequences,
-    especially, when the project is already on the way has already been
-    started.</para>
+    especially, when the project has already been started.</para>
 
     <itemizedlist>
       <listitem>
@@ -119,7 +118,7 @@
 
         <para>In case you decide to modify project folders, keep in mind that
         this will not move the contained files from old folders to the new
-        location .</para>
+        location.</para>
       </listitem>
 
       <listitem>

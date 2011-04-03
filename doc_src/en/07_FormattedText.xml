@@ -19,7 +19,7 @@
   the time of writing) is presented as tags in OmegaT. Normally tags are
   ignored when considering the similarity between different texts for matching
   purposes. Tags reproduced in the translated segment will be present in the
-  translated document. .</para>
+  translated document.</para>
 
   <section id="formatting.tags">
     <title>Formatting tags<indexterm class="singular">
@@ -34,8 +34,8 @@
     naming:</emphasis></application></para>
 
     <para><application>The tags consist of one to three characters and a
-    number. Unique numbering allows tags, corresponding to each other, to be
-    grouped together and differentiate between tags, that have the same
+    number. Unique numbering allows tags, corresponding to each other to be
+    grouped together and differentiates between tags, that have the same
     shortcut character, but are in fact different. The shortcut characters
     used try to reflect the underlying meaning of the tag (e.g. b for bold, i
     for italics, etc.)</application></para>
@@ -48,22 +48,22 @@
     numbering:</emphasis></application></para>
 
     <para><application>Tags are numbered incrementally by tag group. "Tag
-    groups" in this context are either a single tag (such as &lt;i0&gt; and
-    &lt;/i0&gt;). Within a segment, the first group (pair or singleton)
-    receives the number 0, the second the number 1 etc. The first example
-    below has 3 tag groups (a pair, a singleton, and then another pair), the
-    second example one group only (a pair).</application></para>
+    groups" in this context are a single tag (such as &lt;i0&gt; and
+    &lt;/i0&gt;). Within a segment, the first group (pair or single) receives
+    the number 0, the second the number 1 etc. The first example below has 3
+    tag groups (a pair, a single, and then another pair), the second example
+    has one group only (a pair).</application></para>
 
     <para><application><indexterm class="singular">
         <primary>Tags</primary>
 
-        <secondary>Pairs and singletons</secondary>
+        <secondary>Pairs and singles</secondary>
       </indexterm><emphasis role="bold">Pairs and
-    singletons:</emphasis></application></para>
+    singles:</emphasis></application></para>
 
-    <para><application>Tags are always either singletons or paired. Single
-    tags indicate formatting information that does not affect the surrounding
-    text (an extra space or line break for example).</application></para>
+    <para><application>Tags are always either singles or paired. Single tags
+    indicate formatting information that does not affect the surrounding text
+    (an extra space or line break for example).</application></para>
 
     <para><application><literal> &lt;segment
     2132&gt;&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
@@ -226,6 +226,7 @@
         <imageobject role="html">
           <imagedata fileref="images/TagValidation.png" />
         </imageobject>
+
         <imageobject role="fo">
           <imagedata fileref="images/TagValidation.png" width="40%" />
         </imageobject>
@@ -240,7 +241,7 @@
     to correct other errors. Tag errors are tag sequences in the translation
     in which the same tag order and number as in the original segment is not
     reproduced. Some tag manipulations are necessary and are benign, others
-    will cause problems when the translated document is created. .</para>
+    will cause problems when the translated document is created.</para>
   </section>
 
   <section id="hints.for.tag.management">
@@ -252,11 +253,11 @@
 
     <para><emphasis role="bold">Simplify the original text</emphasis></para>
 
-    <para>Tags generally represent formatting of the original text of some
-    form. Simplifying the original formatting greatly contributes to reducing
+    <para>Tags generally represent formatting in some form of the original
+    text. Simplifying the original formatting greatly contributes to reducing
     the number of tags. Where circumstances permit, unifying used fonts, font
     sizes, colors, etc. should be considered, as it could simplify the
-    translation and reduce the potential for tag errors. Read the Tag
+    translation and reduce the potential for tag errors. Read the tag
     operations section to see what can be done with tags. Remember that if you
     find tags a problem in OmegaT and formatting is not extremely relevant for
     the current translation, removing tags may be the easiest way out of
@@ -266,8 +267,8 @@
     pairs</emphasis></para>
 
     <para>If you need to see tags in OmegaT but do not need to retain most of
-    the format in the translated document you are free not to include tags in
-    the translation. In this case pay extra attention to tag pairs since
+    the formatting in the translated document you are free not to include tags
+    in the translation. In this case pay extra attention to tag pairs since
     deleting one side of the pair but forgetting to delete the other is
     guaranteed to corrupt your document's formatting. Since tags are included
     in the text itself, it is possible to use segmentation rules to create
@@ -277,7 +278,7 @@
     <para>OmegaT is not yet able to detect mistakes in formatting fully
     automatically, so it will not prompt you if you make an error or change
     formatting to fit your target language better. Sometimes, however, your
-    translated file may look strange, and –in the worst case – may even refuse
-    to open.</para>
+    translated file may look strange, and – in the worst case – may even
+    refuse to open.</para>
   </section>
 </chapter>

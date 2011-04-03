@@ -174,7 +174,7 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.2.x_Windows_without_JRE.exe</emphasis>. .</para>
+          <emphasis>OmegaT_2.2.x_Windows_without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
@@ -576,7 +576,7 @@
     <para>Normally, it is not necessary to start
     <application>OmegaT</application> from the command line. However, the
     command-line alternative allows the user to control and modify the
-    program's behaviour. There are two ways of launching
+    program's behavior. There are two ways of launching
     <application>OmegaT</application> using the command line.</para>
 
     <section id="method1.opening.commandline.window">

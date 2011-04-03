@@ -2,7 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <chapter id="ch13.Misc">
-  <title>Miscelaneous subjects<indexterm class="singular">
+  <title>Miscellaneous subjects<indexterm class="singular">
       <primary>Miscellanea</primary>
     </indexterm></title>
 
@@ -21,13 +21,13 @@
       <para>Of interest for advanced users only!</para>
     </note>
 
-    <para>The purpose of the console (i.e. command-line) mode is to permit the
+    <para>The purpose of the console (i.e. command line) mode is to permit the
     use <application>of OmegaT</application> as translation tool in a
     scripting environment. When launched in console mode, no GUI is loaded (
     it will work therefore on any console) and the given project is
     automatically translated. An example would be a software project, with GUI
     localized in a number of languages. Using the console mode, one can make
-    the generation of localized interface a part of the build process.</para>
+    generating a localized interface a part of the build process.</para>
 
     <section id="misc.console.mode.prerequisites">
       <title>Prerequisites</title>
@@ -45,7 +45,7 @@
         <listitem>
           <para>Run <application>OmegaT</application> normally (with the GUI)
           and set the settings. If you start <application>OmegaT</application>
-          in console mode, it will use the settings you have set.</para>
+          in console mode, it will use the settings you configured.</para>
         </listitem>
 
         <listitem>
@@ -53,7 +53,7 @@
           normally (no graphical environment available): copy the settings
           files from some other <application>OmegaT</application> installation
           on another machine to a specific directory. The location does not
-          matter, since you can add it to the command-line at launch (see
+          matter, since you can add it to the command line at launch (see
           below). The relevant files <literal>filters.conf</literal> and
           <literal>segmentation.conf</literal> can be found in the user home
           directory (E.g. <literal>C:\Documents and
@@ -86,8 +86,8 @@
       <itemizedlist>
         <listitem>
           <para><literal>&lt;project-dir&gt;</literal> tells
-          <application>OmegaT</application> where to find the project to
-          translate. If given, <application>OmegaT</application> launches in
+          <application>OmegaT</application> where to find the project to be
+          translated. If given, <application>OmegaT</application> launches in
           console mode and translates the given project.</para>
         </listitem>
       </itemizedlist>
@@ -96,9 +96,9 @@
         <listitem>
           <para><literal>--config-dir=&lt;config-dir&gt;</literal> enables
           OmegaT to be instructed in which folder the configuration files are
-          stored. If not specified, OmegaT reverts to default values (OmegaT
-          folder in the user home folder, or if not available: the current
-          working directory).</para>
+          stored. If not specified, OmegaT reverts to default values (the
+          OmegaT folder in the user home folder, or if not available: the
+          current working directory).</para>
         </listitem>
       </itemizedlist>
 
@@ -111,7 +111,7 @@
 
         <listitem>
           <para>--source-pattern={regexp} The files to be translated can be
-          specified this way. Example for the regular expression:
+          specified this way. Here is an example of the regular expression:
           <filename>test\.html</filename></para>
         </listitem>
       </itemizedlist>
@@ -120,10 +120,10 @@
     <section id="misc.console.mode.extra.options">
       <title>Extra options</title>
 
-      <para>One further command-line parameter exists specific to the console
-      mode: <literal>--quiet. </literal>In the quiet mode, less information is
+      <para>One further command line parameter exists specific to the console
+      mode: <literal>--quiet. </literal>In quiet mode, less information is
       logged to the screen. The messages that you would usually find in the
-      status bar are not shown. .</para>
+      status bar are not shown.</para>
 
       <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
       /path/to/project --quiet</literal></para>
@@ -140,8 +140,8 @@
       </indexterm></title>
 
     <para>OmegaT can align Java .properties in console mode. If you have the
-    source and the target Properties files for the one and the same contents
-    in your language pair, this procedure will create a corresponding tmx file
+    source and the target Properties files for one and the same contents in
+    your language pair, this procedure will create a corresponding tmx file
     for these contents. Usage:</para>
 
     <para><literal>java -jar OmegaT.jar --mode=console-align /my-project-dir
@@ -161,7 +161,7 @@
         <secondary>Font settings</secondary>
       </indexterm></title>
 
-    <para>This dialog enables one to modify the font used by
+    <para>In this dialog one can define the font used by
     <application>OmegaT</application> in the following windows:</para>
 
     <itemizedlist>
@@ -183,7 +183,7 @@
       </listitem>
     </itemizedlist>
 
-    <para>The dialog can be called up via the <indexterm class="singular">
+    <para>The dialog can be accessed via the <indexterm class="singular">
         <primary>Menu Options</primary>
 
         <secondary>Font...</secondary>
@@ -210,11 +210,11 @@
     <itemizedlist>
       <listitem>
         <para><emphasis role="bold">Sample text:</emphasis> field for
-        immediate preview of the selected font </para>
+        immediate preview of the selected font</para>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">Note: </emphasis>In some cases it make take
+    <para><emphasis role="bold">Note: </emphasis>In some cases it may take
     quite some time for OmegaT to update the display after the font setting
     has been changed. This is especially the case when a large file containing
     many segments is open in the editor, and/or slow hardware is used. Note
@@ -235,7 +235,7 @@
     you should take precautions against data loss when using
     <application>OmegaT</application>, just as with any other application.
     When you translate your files, <application>OmegaT</application> stores
-    all your progress in translation memory
+    all your progress in the translation memory
     <literal>project_save.tmx</literal> that resides in the project's
     <literal>/omegat </literal>subfolder.</para>
 
@@ -243,11 +243,11 @@
     project_save.tmx.YEARMMDDHHNN.bak in the same subfolder each time a
     project is opened or reloaded. YEAR is the 4-digit year, MM is the month,
     DD the day of the month, and HH and NN are the hours and minutes when the
-    previous translation memory was saved. </para>
+    previous translation memory was saved.</para>
 
-    <para>If you think that you have lost translation data follow this
-    procedure to restore the project to its most recently saved state, usually
-    not older than approximately 10 minutes or so:</para>
+    <para>If you believe that you have lost translation data, you can use the
+    following procedure to restore the project to its most recently saved
+    state, usually not older than approximately 10 minutes or so:</para>
 
     <orderedlist>
       <listitem>
@@ -290,8 +290,8 @@
 
       <listitem>
         <para>Take particular care when making changes to the files
-        in<literal> /source </literal>whilst in the middle of a project. If
-        the source file is modified after you have begun translating,
+        in<literal> /source </literal>while in the middle of a project. If the
+        source file is modified after you have begun translating,
         <application>OmegaT</application> may be unable to find a segment that
         you have already translated.</para>
       </listitem>

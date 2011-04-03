@@ -21,7 +21,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Search for the required language combination -for instance on
+        <para>Search for the required language combination - for instance on
         the <ulink url="http://stardict.sourceforge.net/index.php"><indexterm
             class="singular">
             <primary>FreeDict</primary>
@@ -55,7 +55,7 @@
     </itemizedlist>
 
     <para>Note that in addition to "source-target" dictionaries you can, using
-    Dictionary, obtain access to information such as:</para>
+    the Dictionary feature, obtain access to information such as:</para>
 
     <itemizedlist>
       <listitem>
@@ -111,6 +111,7 @@
         <imageobject role="html">
           <imagedata fileref="images/DictMerriamWebster.png" />
         </imageobject>
+
         <imageobject role="fo">
           <imagedata fileref="images/DictMerriamWebster.png" width="60%" />
         </imageobject>
@@ -128,7 +129,7 @@
     <itemizedlist>
       <listitem>
         <para>Check that your dict files are in the folder (or in a subfolder
-        below it)? Check in <menuchoice>
+        below it). Check in <menuchoice>
             <shortcut>
               <keycombo>
                 <keycap><indexterm class="singular">

@@ -19,7 +19,7 @@
 
   <note>
     <para>This chapter is intended for advanced users, who need to define
-    their own variants of segmentation rules or devise a more complex and
+    their own variants of segmentation rules or devise more complex and
     powerful key search items.</para>
   </note>
 
@@ -460,9 +460,9 @@
   </table>
 
   <note>
-    <para>non-greedy quantifier will match as little as they can. For example,
-    <emphasis>a+?</emphasis> will match the first <emphasis>a</emphasis> in
-    <emphasis>aaabbb</emphasis></para>
+    <para>non-greedy quantifiers will match as little as they can. For
+    example, <emphasis>a+?</emphasis> will match the first
+    <emphasis>a</emphasis> in <emphasis>aaabbb</emphasis></para>
   </note>
 
   <table>
@@ -513,8 +513,8 @@
       </indexterm></title>
 
     <para>A number of interactive tools are available to develop and test
-    regular expressions. They generally follow much the same pattern (Example
-    from the Regular Expression Tester – see ref below): the regular
+    regular expressions. They generally follow much the same pattern (for an
+    example from the Regular Expression Tester see below): the regular
     expression (top entry) analyzes the search text (Text box in the middle) ,
     yielding the hits, shown in the result Text box.</para>
 
@@ -525,6 +525,7 @@
         <imageobject role="html">
           <imagedata fileref="images/RegexTester.png" />
         </imageobject>
+
         <imageobject role="fo">
           <imagedata fileref="images/RegexTester.png" width="80%" />
         </imageobject>
@@ -532,8 +533,8 @@
     </figure>
 
     <para>See <ulink url="http://weitz.de/regex-coach/">The Regex
-    Coach</ulink> for Windows,Linux, Mac, FreeBSD versions of a stand-alone
-    tool, that is much the same as the above example.</para>
+    Coach</ulink> for Windows,Linux, FreeBSD versions of a stand-alone tool.
+    This is much the same as the above example.</para>
 
     <para>A nice collection of useful regex cases can be found in
     <application>OmegaT</application> itself (see Options &gt; Segmentation).
@@ -578,7 +579,7 @@
           <row>
             <entry>\s+a\s+[aeiou]</entry>
 
-            <entry>English: words, beginning on vowels, should generally be
+            <entry>English: words, beginning with vowels, should generally be
             preceded by "an", not "a"</entry>
           </row>
 

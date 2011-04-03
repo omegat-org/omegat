@@ -23,7 +23,7 @@
   <itemizedlist>
     <listitem>
       <para>Automating modifications of the translated document file names by
-      replacing translatable Contents with its translation.</para>
+      replacing translatable contents with its translation.</para>
     </listitem>
   </itemizedlist>
 
@@ -42,7 +42,7 @@
         <secondary>Dialog</secondary>
       </indexterm></title>
 
-    <para>The dialog lists available file filters. Should you wish not to use
+    <para>This dialog lists available file filters. Should you wish not to use
     OmegaT to translate files of a certain type, you can turn off the
     corresponding filter by unticking the check box beside its name. OmegaT
     will then omit the appropriate files while loading projects, and will copy
@@ -55,7 +55,7 @@
   </section>
 
   <section id="filters.options">
-    <title>Filters options<indexterm class="singular">
+    <title>Filter options<indexterm class="singular">
         <primary>File filters</primary>
 
         <secondary>Options</secondary>
@@ -84,7 +84,7 @@
       <listitem>
         <para><emphasis>Encoding declaration:
         </emphasis><application>OmegaT</application> may add or rewrite the
-        file's encoding declaration upon the encoding selected for the target
+        file's encoding declaration to the encoding selected for the target
         file.</para>
       </listitem>
     </itemizedlist>
@@ -164,11 +164,11 @@
     <para><emphasis role="bold">Microsoft Office Open XML
     files</emphasis></para>
 
-    <para>In case the following elements are presented for translation, they
-    will appear as separate segments.</para>
+    <para>If the following elements are presented for translation, they will
+    appear as separate segments.</para>
 
     <para><emphasis role="bold">Word</emphasis></para>
-    
+
     <itemizedlist>
       <listitem>
         <para>Non-visible Instruction Text</para>
@@ -264,19 +264,18 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Aggregate tags: </emphasis>If checked, tags without
- translatable text between them will be aggregated into single tags.</para>
+        translatable text between them will be aggregated into single
+        tags.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><emphasis>Preserve spaces for all tags: </emphasis>If checked,
-"white space" (i.e., spaces and newlines) will be preserved, even if not set 
-technically in the document.</para>
+        "white space" (i.e., spaces and newlines) will be preserved, even if
+        not set technically in the document.</para>
       </listitem>
     </itemizedlist>
-
-
   </section>
 
   <section id="edit.filter.dialog">
@@ -288,7 +287,7 @@ technically in the document.</para>
 
     <para>This dialog enables you to set up the source filename patterns of
     files to be processed by the filter, customize the filenames of translated
-    files, and select which encodings it should use for loading the file and
+    files, and select which encodings should be used for loading the file and
     saving its translated counterpart. To modify a file filter pattern, either
     modify the fields directly or click <emphasis role="bold">Edit.</emphasis>
     To add a new file filter pattern, click <emphasis
@@ -315,14 +314,14 @@ technically in the document.</para>
       the filename. For example, the pattern <literal>*.xhtml
       </literal>matches any file with the <literal>.xhtml</literal> extension.
       If the appropriate filter is found, the file is assigned to it for
-      processing. For example, by default, XHTML filter is used for processing
-      files with the .xhtml extension. You can change or add filename patterns
-      for files to be handled by each file. Source filename patterns use wild
-      card characters similar to those used in <emphasis role="bold">Searches.
-      </emphasis>The '*' character matches zero or more characters. The '?'
-      character matches exactly one character. All the other characters
-      represent themselves. For example, if you wish the text filter to handle
-      readme files (<literal>readme, read.me</literal>, and
+      processing. For example, by default, XHTML filters are used for
+      processing files with the .xhtml extension. You can change or add
+      filename patterns for files to be handled by each file. Source filename
+      patterns use wild card characters similar to those used in <emphasis
+      role="bold">Searches. </emphasis>The '*' character matches zero or more
+      characters. The '?' character matches exactly one character. All other
+      characters represent themselves. For example, if you wish the text
+      filter to handle readme files (<literal>readme, read.me</literal>, and
       <literal>readme.txt</literal>) you should use the pattern
       <literal>read*</literal>.</para>
     </section>

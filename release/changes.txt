@@ -3,9 +3,13 @@
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.2.4 vs. 2.2.3 update 4
+
+  Localisation updates:
+
+  - Brazilian Portuguese localisation updated to 2.2.3 update 2 (UI, manual)
 
   Other enhancements:
 
@@ -58,7 +62,7 @@ with a preceding \
 
   - Italian localisation updated to 2.2.3 update 2 (UI, documentation)
   - Czech localisation updated to 2.2.3 update 2 (UI, documentation, readme)
-  - Brazilian Portuguese  localisation updated to 2.2.3 update 2 (UI, Instant Start, readme)
+  - Brazilian Portuguese localisation updated to 2.2.3 update 2 (UI, Instant Start, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 2

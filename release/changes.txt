@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
-   2 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.2.4 vs. 2.2.3 update 4
 
@@ -16,7 +16,6 @@ preserving spaces in Excel tags), the option is on by default.
 
   Localisation updates:
 
-  - Japanese localisation updated to 2.2.4 (UI)
   - Brazilian Portuguese localisation updated to 2.2.3 update 2 (UI, documentation)
 
 ----------------------------------------------------------------------

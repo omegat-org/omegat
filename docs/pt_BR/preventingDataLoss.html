@@ -1,30 +1,57 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Evitar perda de dados - OmegaT 1.6.1 Manual do Usuário</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Evitar perda de dados - Manual do Usuário, OmegaT 2.0 </title>
 </head>
+
 <body>
+  <h2>Evitar perda de dados</h2>
 
-<h1>Evitar perda de dados</h1>
+  <p>OmegaT é um aplicativo estável. Entretanto, o usuário deve tomar as precauções contra perda de dados ao usar o OmegaT, como faz com qualquer outro aplicativo. Quando você traduz, o OmegaT guarda o seu trabalho na memória de tradução <code>project_save.tmx</code> localizada na subpasta <code>/omegat</code> do projeto.</p>
 
-<p>OmegaT é um aplicativo resistente. Entretanto, o usuário deve tomar as precauções contra perda de dados ao usar o OmegaT, como faz com qualquer outro aplicativo.</p>
+  <p>Também faz backup da memória de tradução no <code>project_save.tmx.AAAAMMDDHHMM.bak</code> na mesma subpasta, cada vez que um projeto é aberto e recarregado. <code>AAAA</code> são os 4 dígitos do ano, <code>MM</code> indica o mês, <code>DD</code> o dia do mês, <code>HH</code> e <code>MM</code> são horas e minutos quando a versão anterior da memória foi gravada.</p>
 
-<p>Quando você traduz, o OmegaT guarda todos os seus arquivos na memória de tradução no subdiretório <code>/omegat</code>. Também faz backup da memória de tradução no <code>project_save.tmx.AAAAMMDDHHMM.bak</code> no mesmo subdiretório, cada vez que um projeto é aberto e recarregado. <code>AAAA</code> são os 4 dígitos do ano, <code>MM</code> indica o mês, <code>DD</code> o dia do mês, <code>HH</code> e <code>MM</code> são horas e minutos quando a versão anterior da memória foi gravada.</p>
+  <p>Se você achar que perdeu o material traduzido, siga o procedimento abaixo que irá restaurar o projeto à versão mais recente que foi gravada, em muitos casos há 10 minutos das modificações mais recentes:</p>
 
-<p>Para evitar desastres:</p>
+  <ol>
+    <li>Feche o projeto</li>
 
-<ul>
-   <li>Faça regularmente cópias do arquivo <code>/omegat/project_save.tmx</code> para mídia externa, como CD ou DVD.</li>
+    <li>Mude o nome do <code>project_save.tmx</code> atual para algo fácil de lembrar (como <code>project_save.tmx.anterior</code> por exemplo)</li>
 
-   <li>Até se familiarizar com o OmegaT, crie os arquivos traduzidos em intervalos regulares e verifique que contenham a última versão da sua tradução.</li>
+    <li>Selecione a memória de tradução de backup onde podem estar os dados que você perdeu</li>
 
-   <li>Recomendamos prestar atenção especial ao fazer quaisquer modificações nos arquivos no <code>/source</code> enquanto estiver no meio de um projeto. Se o arquivo fonte for modificado após o início da tradução, o OmegaT pode não localizar um segmento que já foi traduzido.</li>
+    <li>Mude o nome para <code>project_save.tmx</code></li>
 
-   <li>Com esses textos de ajuda fica fácil começar a usar o programa. Se tiver problemas, envie uma mensagem para o <a href="http://groups.yahoo.com/group/omegat" >grupo de usuários OmegaT</a>. As mensagens podem ser enviadas no idioma que você se sentir mais à vontade.</li>
-</ul>
+    <li>Abra o projeto</li>
+  </ol>
 
-<hr>
-<p><a href="legalNotices.html" title="Avisos legais">Avisos legais</a></p>
+  <p>Para evitar a perda de dados importantes:</p>
 
+  <ul>
+    <li>Faça regularmente cópias do arquivo <code>/omegat/project_save.tmx</code> para mídia externa, como CD ou DVD.</li>
+
+    <li>Até se familiarizar com o OmegaT, crie os arquivos traduzidos em intervalos regulares e verifique que contenham a última versão da sua tradução.</li>
+
+    <li>Recomendamos prestar atenção especial ao fazer quaisquer modificações nos arquivos na pasta <code>/source</code> enquanto estiver no meio de um projeto. Se o arquivo fonte for modificado após o início da tradução, o OmegaT pode não localizar um segmento que já foi traduzido.</li>
+
+    <li>Com os textos de ajuda fica fácil começar a usar o programa. Se tiver problemas, envie uma mensagem para o <a href=
+    "http://groups.yahoo.com/group/omegat">grupo de usuários OmegaT</a>. As mensagens podem ser enviadas no idioma que você se sentir mais à vontade.</li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legais</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

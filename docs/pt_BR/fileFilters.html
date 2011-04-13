@@ -1,121 +1,207 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Filtros de arquivos - OmegaT 1.6.1 Manual do Usuário</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Filtros de arquivos - Manual do Usuário, OmegaT 2.0</title>
 </head>
+
 <body>
+  <h1>Filtros de arquivos</h1>
+  <hr>
 
-<h1>Filtros de arquivos</h1>
+  <ul>
+    <li>
+      <p><a href="#filter_dialog">Caixa de diálogo 'Filtros de arquivos'</a></p>
 
-<h2>Índice</h2></div>
-
-<ul type="none">
-   <li>1. <a href="#Introdução">Introdução</a>
-
-      <ul type="none">
-         <li>1.1. <a href="#File_types">Tipos de arquivos</a></li>
-         <li>1.2. <a href="#File_encodings">Codificações de arquivos</a></li>
-         <li>1.3. <a href="#Renaming_Translated_Files">Renomear arquivos traduzidos</a></li>
+      <ul>
+        <li>
+          <p><a href="#filter_options">Opções de filtros</a></p>
+        </li>
       </ul>
-   </li>
+    </li>
 
-   <li>2. <a href="#File_Filters_Setup">Definir filtros de arquivos</a>
+    <li>
+      <p><a href="#edit_dialog">Caixa de diálogo 'Editar filtro'</a></p>
 
-      <ul type="none">
-         <li><a href="#File_Filters_Dialog">Caixa de diálogo 'Filtros de arquivos'</a></li>
-         <li><a href="#Edit_Filter_Dialog">Caixa de diálogo 'Editar filtro'</a></li>
-         <li><a href="#Add.2FEdit_Pattern_Dialog">Caixa de diálogo 'Adicionar/editar padrão'</a></li>
+      <ul>
+        <li>
+          <p><a href="#source_file_name">Tipo de arquivo fonte, padrão do nome de arquivo</a>.</p>
+        </li>
+
+        <li>
+          <p><a href="#encoding">Codificação dos arquivos fonte e traduzido</a></p>
+        </li>
+
+        <li>
+          <p><a href="#target_file_name">Nome de arquivo traduzido</a></p>
+        </li>
       </ul>
-   </li>
-</ul>
+    </li>
+  </ul>
 
-<a name="Introduction"></a>
-<h2>Introdução</h2>
+  <p>OmegaT apresenta filtros com grandes recursos de customização, assim você pode configurar a maioria dos detalhes do seu funcionamento. Os filtros de arquivos são partes do código e podem:</p>
 
-<p>OmegaT apresenta filtros com grandes recursos de customização, assim você pode configurar a maioria dos detalhes do seu funcionamento.</p>
+  <ul>
+    <li>
+      <p>Ler o documento em alguns formatos específicos de arquivo. Por exemplo, arquivos de texto simples.</p>
+    </li>
 
-<p>Os filtros de arquivos são partes do código e podem:</p>
+    <li>
+      <p>Extrair o conteúdo a ser traduzido do arquivo.</p>
+    </li>
 
-<ul>
-   <li>Ler o documento em alguns formatos específicos de arquivo. Por exemplo, arquivos de texto simples.</li>
-   <li>Extrair o conteúdo a ser traduzido do arquivo.</li>
-   <li>Automatizar modificações dos nomes dos arquivos traduzidos substituindo os conteúdos traduzíveis com sua respectiva tradução.</li>
-</ul>
+    <li>
+      <p>Automatizar modificações dos nomes dos arquivos traduzidos substituindo os conteúdos traduzíveis com sua respectiva tradução.</p>
+    </li>
+  </ul>
 
-<a name="File_types"></a>
-<h3>Tipos de arquivos</h3>
+  <p>A maioria dos usuários parece satisfeita com as opções padrão de filtros de arquivos. Se você não estiver, selecione o menu <strong>Opções -&gt; Filtros de arquivos...</strong> para abrir a caixa de diálogo principal. <strong>Alerta!</strong> Mudar as opções de filtros com um projeto aberto pode resultar na perda de dados. Se você modificar as opções de filtros com um projeto aberto, terá que recarregar o projeto para que as modificações sejam efetivadas.</p>
 
-<p>Quando o OmegaT encontra um arquivo no seu diretório fonte, ele tenta selecionar o filtro usando a extensão do arquivo. Mais precisamente, o OmegaT tenta corresponder os padrões do nome do arquivo fonte de cada filtro com o nome do arquivo. For example, o padrão <code>*.xhtml</code> será comparado a qualquer arquivo com a extensão <code>.xhtml</code>. Se for encontrado o filtro apropriado, ele é fornecido ao arquivo para processamento. Por exemplo, por predefinição o filtro XHTML será usado para processar arquivos com a extensão <code>.xhtml</code>. O usuário pode alterar ou acrescentar padrões de nome de arquivo para cada arquivo que o filtro processará.</p>
+  <h3><a name="filter_dialog" id="filter_dialog"></a>Caixa de diálogo 'Filtros de arquivos'</h3>
 
-<a name="File_encodings"></a>
-<h3>Codificações de arquivos</h3>
+  <p>Esta caixa relaciona todos os filtros de arquivos disponíveis. Se não quiser usar o OmegaT para traduzir arquivos de determinado tipo, desative o filtro retirando a marca de seleção que está perto do tipo de arquivo. O OmegaT então omitirá tais arquivos ao carregar os projetos e irá apenas copiá-los, sem nenhuma intervenção, quando criar os documentos traduzidos. Depois, se quiser usar o filtro de novo, basta marcar a caixa de seleção correspondente. Clique em <strong>Restaurar predefinições</strong> para restaurar os filtros às configurações predefinidas. Para editar os arquivos e a codificação que o filtro processará, selecione o filtro na lista e clique em <strong>Editar</strong>.</p>
 
-<p>Os arquivos de texto simples e HTML podem ser armazenados em diversas formas de codificação. Embora os arquivos HTML possam conter uma diretiva meta de codificação que o OmegaT usará para ler o arquivo, não há uma forma definida para fazer tal especificação nos arquivos de texto. Para os arquivos de texto e HTML que não tenham uma declaração de codificação, o OmegaT usará a codificação que o usuário definir para uma determinada extensão. Por exemplo, por predefinição os arquivos <code>.txt</code> serão carregados usando a codificação padrão do sistema operacional. A codificação fonte pode ser modificada para cada padrão de nome de arquivo fonte diferente.</p>
+  <h3><a name="filter_options" id="filter_options"></a>Opções de filtros</h3>
 
-<p>Os aquivos HTML e de texto simples podem também ser processados sem nenhuma codificação. Por exemplo, se você traduz do francês para o japonês, pode definir um filtro para usar uma das codificações destino de japonês, ou usar a codificação UTF-8, UTF-16 ou UTF-32 Unicode. Está predefinido que a codificação do arquivo é gravada na mesma codificação usada ao carregar os arquivos de texto, e UTF-8 para arquivos HTML. Observe que o filtro HTML acrescenta uma declaração de codificação ao arquivo destino, portanto o navegador exibirá a declaração e não exibirá nenhum caractere difícil de manusear.</p>
+  <p>Cinco filtros (Arquivos de texto, arquivos XHTML, arquivos HTML e XHTML, arquivos OpenDocument/OpenOffice.org e arquivos Microsoft Open XML) possuem uma ou mais opções específicas. Para modificar as opções, selecione o filtro na lista e clique em <strong>Opções</strong>. As opções disponíveis são:</p>
 
-<a name="Renaming_Translated_Files"></a>
-<h3>Renomear arquivos traduzidos</h3>
+  <h4>Arquivos de texto</h4>
 
-<p>Se você quiser, poderá renomear automaticamente os arquivos que traduz, por exemplo, acrescentando o código de idioma após o nome do arquivo. Isto também pode ser feito em uma caixa de diálogo de filtros de arquivos usando o padrão de nome de arquivo destino.</p>
+  <ul>
+    <li>
+      <p><i>Segmentação de parágrafos por quebras de linha, linhas vazias ou nunca:</i> se as regras de segmentação por frases estiverem ativadas, o texto será segmentado de acordo com as regras disponíveis.</p>
+    </li>
+  </ul>
 
-<a name="File_Filters_Setup"></a>
-<h2>Definir filtros de arquivos</h2>
+  <h4>Arquivos HTML e arquivos HTML e XHTML</h4>
 
-<p>A maioria dos usuários parece satisfeita com as opções padrão de filtros de arquivos. Se você não estiver, selecione o menu  <strong>Opções -&gt; Filtros de arquivos...</strong> para abrir a caixa de diálogo principal. Observe que as opções de filtros somente devem ser modificadas quando não houver um projeto aberto, pois elas afetam a maneira como os arquivos traduzidos são criados.</p>
+  <ul>
+    <li>
+      <p><i>Acrescentar ou regravar a declaração de codificação:</i> o OmegaT pode acrescentar ou regravar o enunciado de codificação do arquivo com base na codificação selecionada do arquivo destino.</p>
+    </li>
 
-<a name="File_Filters_Dialog"></a>
-<h3>Caixa de diálogo 'Filtros de arquivos'</h3>
+    <li>
+      <p><i>Tradução dos atributos:</i> os atributos selecionados aparecerão como segmentos na janela Editor.</p>
+    </li>
 
-<p>Esta caixa relaciona todos os filtros de arquivos disponíveis.</p>
+    <li>
+      <p><i>Iniciar um novo parágrafo:</i> a tag &lt;br&gt; do HTML criará um parágrafo para fins de segmentação.</p>
+    </li>
 
-<p>Se não quiser usar o OmegaT para traduzir arquivos de determinado tipo, desative o filtro retirando a marca de seleção que está perto do tipo de arquivo. O OmegaT então omitirá tais arquivos ao carregar os projetos e irá apenas copiá-los, sem nenhuma intervenção, quando criar os documentos destino. Depois, se quiser usar o filtro de novo, basta marcar a caixa de seleção correspondente.</p>
+    <li>
+      <p><i>Pular texto que corresponde à expressão regular:</i> o texto correspondendo à expressão regular será pulado.</p>
+    </li>
+  </ul>
 
-<p>Se cometer algum erro na configuração, clique em <strong>Padrões</strong> para reverter a configuração dos filtros de arquivos ao padrão que estava funcionando antes.</p>
+  <h4>Arquivos OpenDocument/OpenOffice.org</h4>
 
-<p>Para editar os arquivos e a codificação que o filtro processará, selecione o filtro na lista e clique em <strong>Editar</strong>.</p>
+  <p>Os seguintes elementos podem ou não ser traduzidos. Se traduzidos, eles aparecerão como segmentos separados.</p>
 
-<a name="Edit_Filter_Dialog"></a>
-<h3>Caixa de diálogo 'Editar filtro'</h3>
+  <ul>
+    <li><i>Entradas de índice</i></li>
 
-<p>Na caixa de diálogo o usuário pode definir os padrões de nome de arquivos que o filtro processará, personalizar os nomes dos arquivos traduzidos e selecionar a codificação a ser usada para carregar o arquivo e gravar sua versão traduzida.</p>
+    <li><i>Marcadores</i></li>
 
-<p>Os padrões de nome de arquivos fonte usam as regras de máscara de arquivo do DOS. O símbolo <code>*</code> pode substituir qualquer quantidade de quaisquer símbolos, <code>?</code> substitui qualquer símbolo único e os demais símbolos têm seus significados originais. Por exemplo, se quiser que o filtro de texto processe os arquivos leiame  (<code>leiame</code>, <code>leia.me</code> e <code>leiame.txt</code>) use o padrão <code>leia*</code>.</p>
+    <li><i>Referências de marcadores</i></li>
 
-<p>Os campos de codificação fonte e destino usam caixas combinadas com todas as combinações suportadas incluídas. Observe que nem todos os filtros permitem a seleção de codificação porque eles trabalham em um formato de arquivo com apenas uma codificação possível. Definir a codificação para  "&lt;auto&gt;" para aqueles formatos de arquivo que lhe permitem escolher a codificação significa que o OmegaT tomará esta decisão. Aqui está como ele fará isto:</p>
+    <li><i>Notas</i></li>
 
-<ul>
-   <li>O OmegaT tenta adivinhar a codificação de arquivo fonte dos arquivos HTML/XHTML.</li>
-   <li>E usará a codificação padrão do sistema operacional para os arquivos de texto.</li>
-</ul>
+    <li><i>Comentários</i></li>
+  </ul>
 
-<p>O padrão de nome de arquivo destino usa uma sintaxe especial, portanto se você quiser editar este campo, será melhor clicar em <strong>Editar...</strong> para acessar a caixa de diálogo 'Editar padrão'.</p>
+  <h4>Arquivos Microsoft Open XML</h4>
 
-<p>Se quiser que o filtro processe arquivos que correspondam a mais um padrão de nome de arquivo fonte, clique em <strong>Adicionar...</strong> para acessar a caixa de diálogo 'Adicionar padrão'.</p>
+  <p>Os seguintes elementos podem ou não ser traduzidos. Se traduzidos, eles aparecerão como segmentos separados.</p>
 
-<p>Se quiser voltar à configuração padrão do filtro, clique em  <strong>Padrões</strong>.</p>
+  <ul>
+    <li><i>Texto oculto (Word)</i></li>
 
-<a name="Add.2FEdit_Pattern_Dialog"></a>
-<h3>Caixa de diálogo 'Adicionar/editar padrão'</h3>
+    <li><i>Comentários (Word, Excel)</i></li>
 
-<p>A mesma caixa de diálogo aparece quer você queira adicionar ou editar um padrão específico. A única novidade aqui é um editor de padrão especial de nome de arquivo destino; todos os outros campos foram descritos acima.</p>
+    <li><i>Notas de rodapé (Word)</i></li>
 
-<p>A seção do padrão de nome de arquivo destino permite-lhe compor o nome do arquivo traduzido de diferentes partes.</p>
+    <li><i>Notas de fim (Word)</i></li>
 
-<ul>
-   <li>Padrão é <code>${nomedearquivo}</code> -- nome completo do arquivo fonte com extensão, portanto o nome do arquivo traduzido é o mesmo que o nome do arquivo fonte.</li>
-   <li><code>${nomeApenas}</code> permite-lhe inserir apenas o nome do arquivo fonte sem a extensão.</li>
-   <li><code>${extensão}</code> -- a extensão do arquivo fonte.</li>
-   <li><code>${destinoLocal}</code> - o código do local destino (em forma de  "xx_YY").</li>
-   <li><code>${destinoIdioma}</code> - o idioma destino e o código de país juntos (em forma de "XX-YY").</li>
-   <li><code>${destinoCódigoIdioma}</code> - apenas o idioma destino ("XX").</li>
-   <li><code>${destinoCódigoPaís}</code> - apenas o código do país destino ("YY").</li>
-</ul>
+    <li><i>Cabeçalho (Word)</i></li>
 
-<p>Podemos facilmente acrescentar mais variáveis se você solicitar e informar qual é sua variável preferida. Basta vir para o <a href="http://groups.yahoo.com/group/OmegaT/">nosso grupo de usuários</a>.</p>
+    <li><i>Rodapé (Word)</i></li>
 
-<hr>
-<p><a href="legalNotices.html" title="Avisos legais">Avisos legais</a></p>
+    <li><i>Comentários em slide (PowerPoint)</i></li>
 
+    <li><i>Slide mestre (PowerPoint)</i></li>
+  </ul>
+
+  <h3><a name="edit_dialog" id="edit_dialog"></a>Caixa de diálogo 'Editar filtro'</h3>
+
+  <p>Na caixa de diálogo o usuário pode definir os tipos de arquivos fontes que o filtro processará, personalizar os nomes dos arquivos traduzidos e selecionar a codificação a ser usada para carregar o arquivo e gravar sua versão traduzida. Para modificar um padrão de filtro de arquivo, modifique os campos diretamente ou clique em <strong>Editar</strong>. Para acrescentar um novo padrão de filtro de arquivo, clique em <strong>Adicionar</strong>. A mesma caixa de diálogo é usada para acrescentar um padrão ou editar um padrão específico. A caixa é útil porque inclui um editor especial de tipo de arquivo destino onde dá para personalizar os nomes dos arquivos de saída.</p>
+
+  <h3><a name="source_file_name" id="source_file_name"></a>Tipo de arquivo fonte, padrão do nome de arquivo</h3>
+
+  <p>Quando o OmegaT encontra um arquivo na sua pasta 'source, ele tenta selecionar o filtro usando a extensão do arquivo. Mais precisamente, o OmegaT tenta corresponder os tipos de arquivo fonte de cada filtro com o nome do arquivo. Por exemplo, o padrão<code>*.xhtml</code> será comparado a qualquer arquivo com a extensão <code>.xhtml</code>. Se for encontrado o filtro apropriado, ele é fornecido ao arquivo para processamento. Por exemplo, por predefinição o filtro XHTML será usado para processar arquivos com a extensão <code>.xhtml</code>. O usuário pode alterar ou acrescentar tipos de arquivo para cada arquivo que o filtro processará. Os tipos de arquivo fonte usam curingas iguais aos usados nas <strong>Buscas</strong>. O caractere '<strong>*</strong>' corresponde a zero ou mais caracteres. O caractere '<strong>?</strong>' corresponde exatamente a um caractere. Todos os outros caracteres correspondem a eles mesmos. Por exemplo, se quiser que o filtro de texto processe os arquivos leiame (<code>leiame</code>, <code>leia.me</code> e <code>leiame.txt</code>) use o padrão <code>leia*</code>.</p>
+
+  <h3><a name="encoding" id="encoding"></a>Codificação dos arquivos fonte e traduzido</h3>
+
+  <p>Apenas uma quantidade limitada de formatos de arquivos requer codificação obrigatória. Os formatos de arquivos que não especificam sua própria codificação usarão aquela que for definida para a extensão correspondente aos seus nomes. Por exemplo, por predefinição os arquivos <code>.txt</code> serão carregados usando a codificação padrão do sistema operacional. A codificação fonte pode ser modificada para cada tipo de arquivo fonte diferente. Tais arquivos podem também ser processados sem nenhuma codificação. Está predefinido que a codificação do arquivo traduzido é a mesma que a do arquivo fonte. Os campos de codificação fonte e destino usam caixas combinadas com todas as combinações suportadas incluídas. <strong>&lt;auto&gt;</strong> deixa a opção de codificação para o OmegaT. Aqui está como ele faz isto:</p>
+
+  <ul>
+    <li>
+      <p style="margin-bottom: 0cm;">OmegaT encontra a codificação do arquivo fonte usando sua declaração de codificação, se houver (arquivos HTML, arquivos baseados em XML).</p>
+    </li>
+
+    <li>
+      <p style="margin-bottom: 0cm;">O OmegaT está configurado para usar uma codificação obrigatória para alguns formatos de arquivo (propriedades Java, etc.)</p>
+    </li>
+
+    <li>
+      <p>E usa a codificação padrão do sistema operacional para os arquivos de texto.</p>
+    </li>
+  </ul>
+
+  <h3><a name="target_file_name" id="target_file_name"></a>Nome de arquivo traduzido</h3>
+
+  <p>Se você quiser, poderá renomear automaticamente os arquivos que traduz, por exemplo, acrescentando o código de idioma após o nome do arquivo. O tipo de arquivo traduzido usa uma sintaxe especial, portanto se quiser editar este campo, clique em <strong>Editar...</strong> para acessar a caixa de diálogo 'Editar padrão'. Se quiser voltar à configuração padrão do filtro, clique em <strong>Restaurar predefinições</strong>. Também é possível modificar o nome diretamente no campo de tipo de arquivo traduzido, na caixa de diálogo dos filtros de arquivos. A caixa 'Editar padrão' contém as seguintes opções:</p>
+
+  <ul>
+    <li>
+      <p>Padrão é <code>${filename}</code> -- nome completo do arquivo fonte com extensão, portanto o nome do arquivo traduzido é o mesmo que o nome do arquivo fonte.</p>
+    </li>
+
+    <li>
+      <p><code>${nomeOnly}</code> permite-lhe inserir apenas o nome do arquivo fonte sem extensão.</p>
+    </li>
+
+    <li>
+      <p><code>${extension}</code> -- a extensão do arquivo fonte.</p>
+    </li>
+
+    <li>
+      <p><code>${targetLocale}</code> - o código do local destino (em forma de  "xx_YY").</p>
+    </li>
+
+    <li>
+      <p><code>${targetLanguage}</code> - o idioma destino e o código de país juntos (em forma de "XX-YY").</p>
+    </li>
+
+    <li>
+      <p><code>${targetLanguageCode}</code> - apenas o idioma destino ("XX").</p>
+    </li>
+
+    <li>
+      <p><code>${targetCountryCode}</code> - apenas o código do país destino ("YY").</p>
+    </li>
+  </ul>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legais</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

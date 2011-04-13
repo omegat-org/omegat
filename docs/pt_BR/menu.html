@@ -1,179 +1,1165 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Menu principal - OmegaT 1.6.1 Manual do Usuário</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Menus e atalhos de teclado para o OmegaT  - Manual do Usuário, OmegaT 2.0 </title>
 </head>
+
 <body>
+  <h2>Menu principal e atalhos de teclado</h2>
 
-<h1>Menu principal</h1>
+  <h3><a href="#menu">Menu principal</a></h3>
 
-<p>Todas as funções do OmegaT estão disponíveis na barra de menus na parte superior da janela Editor. Muitas funções também estão disponíveis via <a href="keyboardShortcuts.html">atalhos de teclado</a>.</p>
+  <h3><a href="#shortcuts">Atalhos de teclado</a></h3>
 
-<p>Os atalhos com <strong><code>Ctrl</code></strong> relacionados são para Windows, UNIX e sistemas operacionais semelhantes ao UNIX com telcados que tenham uma tecla <strong><code>Ctrl</code></strong> ou <strong><code>Control</code></strong>. Os usuários de Mac OS X devem usar a tecla Apple &lt;i9&gt; .</p>
+  <ul>
+    <li>
+      <p><a href="#Project_management">Gerência do projeto</a></p>
+    </li>
 
-<h2>Índice</h2>
-<ul type="none">
-   <li>1. <a href="#Project_Menu">Menu Projeto</a></li>
-   <li>2. <a href="#Edit_Menu">Menu Editar</a></li>
-   <li>3. <a href="#Go_to_Menu">Menu Ir para</a></li>
-   <li>4. <a href="#Tools_Menu">Menu Ferramentas</a></li>
-   <li>5. <a href="#Options_Menu">Menu Opções</a></li>
-   <li>6. <a href="#Help_Menu">Menu Ajuda</a></li>
-</ul>
+    <li>
+      <p><a href="#Editing">Edição</a></p>
+    </li>
 
-<a name="Project_Menu"></a>
-<h4>Menu Projeto</h4>
+    <li>
+      <p><a href="#Moving_around">Movimentação</a></p>
+    </li>
 
-<p>
-<dl>
-   <dt>Novo</dt>
-   <dd>Cria e abre um projeto novo. A caixa de diálogo para criar um projeto é a mesma que para <a href="projectProperties.html">editar o projeto</a>.</dd>
+    <li>
+      <p><a href="#Reference_windows">Janelas de referência</a></p>
+    </li>
 
-   <dt>Abrir <code>&lt;Ctrl+O&gt;</code></dt>
-   <dd>Abre um projeto anteriormente criado.</dd>
+    <li>
+      <p><a href="#Other">Outro</a></p>
+    </li>
+  </ul>
+  <hr>
 
-   <dt>Importar arquivos fonte...</dt>
-   <dd>Copia os arquivos selecionados para o diretório <code>/source</code> e recarrega o projeto com os novos arquivos.</dd>
+  <h2><a name="menu" id="menu"></a>Menu principal</h2>
 
-   <dt>Recarregar</dt>
-   <dd>Recarrega o projeto para aceitar modificações externas nos arquivos fonte, nas memórias de tradução existentes e glossários.</dd>
+  <p>Todas as funções do OmegaT estão disponíveis na barra de menus na parte superior da janela Editor. Muitas funções também estão disponíveis via <a href=
+  "#shortcuts">atalhos de teclado</a>. Para ativar os atalhos, pressione <strong>Ctrl</strong> e uma letra. Alguns atalhos requerem o uso de outras teclas. Para facilitar a leitura, as letras são escritas aqui em maiúsculas. <strong>Ctrl</strong> é usado no Windows, UNIX e sistemas operacionais semelhantes ao UNIX com os teclados que tenham uma tecla <strong>Ctrl</strong> / <strong>Control</strong>. Para os usuários do Mac, o comando é <strong>cmd+tecla</strong>. A tecla <strong>cmd</strong> está identificada como <strong>comando</strong> ou a marca da <strong>maçã</strong> nos teclados Apple.</p>
 
-   <dt>Fechar</dt>
-   <dd>Grava a tradução e fecha o projeto.</dd>
+  <table summary="just formatting" border="1" cellpadding="3" cellspacing="0"
+  width="500">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p align="center"><a href="#ProjectMenu">Projeto</a></p>
+        </td>
 
-   <dt>Salvar <code>&lt;Ctrl+S&gt;</code></dt>
-   <dd>Grava a tradução na memória do projeto. O OmegaT grava automaticamente a tradução a cada 10 minutos ou quando você fechar o projeto ou sair do programa.</dd>
+        <td>
+          <p align="center"><a href="#EditMenu">Editar</a></p>
+        </td>
 
-   <dt>Criar documentos traduzidos</dt>
-   <dd>Cria os documentos destino com base no texto que você traduziu. Os documentos serão criados no diretório <code>/target</code>.</dd>
+        <td>
+          <p align="center"><a href="#GoToMenu">Ir para</a></p>
+        </td>
 
-   <dt>Propriedades <code>&lt;Ctrl+E&gt;</code></dt>
-   <dd>Exibe a caixa de diálogo <a href="projectProperties.html">Propriedades do projeto</a> para editar idiomas do projeto e localização das pastas.</dd>
+        <td>
+          <p align="center"><a href="#ViewMenu">Exibir</a></p>
+        </td>
 
-   <dt>Arquivos do projeto... <code>&lt;Ctrl+L&gt;</code></dt>
-   <dd>Fecha e abre a <a href="userInterface.html#Project_Files">janela Arquivos do projeto</a> (dependendo se ela estiver aberta ou fechada).</dd>
+        <td>
+          <p align="center"><a href="#ToolsMenu">Ferramentas</a></p>
+        </td>
 
-   <dt>Sair <code>&lt;Ctrl+Q&gt;</code></dt>
-   <dd>Grava o projeto e sai do OmegaT. Se você ainda não gravou o projeto manualmente, confirma se você quer realmente sair.</dd>
-</dl>
-</p>
+        <td>
+          <p align="center"><a href="#OptionsMenu">Opções</a></p>
+        </td>
 
-<a name="Edit_Menu"></a>
-<h4>Menu Editar</h4>
+        <td>
+          <p align="center"><a href="#HelpMenu">Ajuda</a></p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-<p>Os itens geralmente encontrados na maioria dos aplicativos (copiar/recortar/colar) não são exibidos neste menu, mas estão disponíveis com os atalhos do seu sistema. Por exemplo, no Windows:</p>
+  <table summary="just formatting" border="0" cellpadding="5" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
 
-<p>
-<dl>
-   <dt>Copiar <code>&lt;Ctrl+C&gt;</code></dt>
-   <dd>Copia o texto selecionado para a área de transferência.</dd>
+          <h3><a name="ProjectMenu" id="ProjectMenu"></a>Projeto</h3>
+        </td>
+      </tr>
 
-   <dt>Recortar <code>&lt;Ctrl+X&gt;</code></dt>
-   <dd>Copia o texto selecionado para a área de transferência e apaga o texto selecionado.</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Novo</code></p>
+        </td>
 
-   <dt>Colar <code>&lt;Ctrl+V&gt;</code></dt>
-   <dd>Passa o texto da área de transferência para a posição onde está o cursor.</dd>
-</dl>
-</p>
+        <td width="17%"></td>
 
-<p>O menu contém as seguintes opções:</p>
+        <td>
+          <p>Cria e abre um projeto novo. A caixa de diálogo para criar um projeto é a mesma que para <a href="projectProperties.html">editar o projeto</a>.</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>Desfazer última ação <code>&lt;Ctrl+Z&gt;</code></dt>
-   <dd>Retorna ao estado antes da última ação de edição. Não funciona se o segmento modificado foi validado.</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Abrir</code></p>
+        </td>
 
-   <dt>Refazer última ação <code>&lt;Ctrl+Y&gt;</code></dt>
-   <dd>Retorna ao estado antes da última ação de edição ter sido cancelada. Não funciona se o segmento modificado foi validado.</dd>
+        <td width="17%">
+          <p><code>Ctrl+O</code></p>
+        </td>
 
-   <dt>Sobrescrever tradução <code>&lt;Ctrl+R&gt;</code></dt>
-   <dd>Substitui todo o segmento destino com a correspondência imperfeita selecionada (a primeira está selecionada por predefinição).</dd>
+        <td>
+          <p>Abre um projeto anteriormente criado.</p>
+        </td>
+      </tr>
 
-   <dt>Inserir tradução <code>&lt;Ctrl+I&gt;</code></dt>
-   <dd>Insere na posição onde está o cursor a correspondência imperfeita selecionada. Esta função nunca sobrescreverá uma parte do segmento destino, mesmo se ela estiver selecionada.</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Importar arquivos fonte...</code></p>
+        </td>
 
-   <dt>Sobrescrever texto fonte <code>&lt;Shift+Ctrl+R&gt;</code></dt>
-   <dd>Substitui todo o segmento destino com o texto fonte.</dd>
+        <td width="17%"></td>
 
-   <dt>Inserir texto fonte <code>&lt;Shift+Ctrl+I&gt;</code></dt>
-   <dd>Insere o texto fonte na posição onde está o cursor.</dd>
+        <td>
+          <p>Copia os arquivos selecionados para o diretório <code>/source</code> e recarrega o projeto com os novos arquivos.</p>
+        </td>
+      </tr>
 
-   <dt>Buscar no projeto... <code>&lt;Ctrl+F&gt;</code></dt>
-   <dd>Abre uma nova <a href="userInterface.html#Search_Window">janela de busca</a>.</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Importar do MediaWiki...</code></p>
+        </td>
 
-   <dt>Selecionar correspondência imperfeita #N <code>&lt;Ctrl+N&gt;</code> (N é de 1 a 5)</dt>
-   <dd>Seleciona o número da correspondência imperfeita exibida no visualizador de correspondências para substituir ou inserir no segmento. A seção <a href="userInterface.html#Fuzzy_Matches">Correspondências imperfeitas</a> descreve em detalhes a codificação por cores.</dd>
-</dl>
-</p>
+        <td width="17%"></td>
 
-<a name="Go_to_Menu"></a>
-<h4>Menu Ir para</h4>
+        <td>
+          <p>Importa unidades das páginas do MediaWiki, com base no URL digitado</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>Próximo segmento não traduzido <code>&lt;Ctrl+U&gt;</code></dt>
-   <dd>Avança para o próximo segmento que não tem equivalente na memória da tradução.</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Recarregar</code></p>
+        </td>
 
-   <dt>Próximo segmento <code>&lt;Ctrl+N&gt;</code>, <code>&lt;Enter&gt;</code> / <code>&lt;Tab&gt;</code>
-   </dt>
-   <dd>Avança para o próximo segmento. Se o segmento aberto for o último em um arquivo, avança para o primeiro segmento do próximo arquivo do projeto.</dd>
+        <td width="17%"><code>F5</code></td>
 
-   <dt>Segmento anterior <code>&lt;Ctrl+P&gt;</code>, <code>&lt;Ctrl+Enter&gt;</code> / <code>&lt;Ctrl+Tab&gt;</code>
-   </dt>
-   <dd>Volta para o segmento anterior. Volta para o último segmento do arquivo anterior, se o segmento aberto for o último em um arquivo.</dd>
-</dl>
-</p>
+        <td>
+          <p>Recarrega o projeto para aceitar modificações externas nos arquivos fonte, nas memórias de tradução existentes e nos glossários.</p>
+        </td>
+      </tr>
 
-<a name="Tools_Menu"></a>
-<h4>Menu Ferramentas</h4>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Fechar</code></p>
+        </td>
 
-<p>
-<dl>
-   <dt>Validar tags <code>&lt;Ctrl+T&gt;</code></dt>
-   <dd>Verifica se faltam tags ou se elas estão posicionadas erradas nos arquivos formatados. Exibirá uma lista de segmentos com problemas de tags. A seção sobre a <a href="userInterface.html#Tag_Validation">janela Validar tag</a> relaciona o que você vê lá e <a href="formattedText.html">Trabalhar com texto formatado</a> explica porque.</dd>
-</dl>
-</p>
+        <td width="17%"><code>Ctrl+Shift+W</code></td>
 
-<a name="Options_Menu"></a>
-<h4>Menu Opções</h4>
+        <td>
+          <p>Grava a tradução e fecha o projeto.</p>
+        </td>
+      </tr>
 
-<p>
-<dl>
-   <dt>Usar TAB para avançar</dt>
-   <dd>Define a tecla de validação de segmentos para <code>&lt;Tab&gt;</code> em vez da tecla predefinida <code>&lt;Enter&gt;</code>. Esta opção é útil para alguns sistemas de entrada de caracteres chineses, japoneses e coreanos.</dd>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Salvar</code></p>
+        </td>
 
-   <dt>Fonte...</dt>
-   <dd>Exibe a caixa de diálogo <a href="fontSettings.html">Definições de fontes</a> para modificar a fonte de visualização do texto. Os usuários de computadores antigos devem modificar a fonte antes de abrir um projeto ou serão prejudicados com baixo desempenho. O processo pode ser muito mais difícil para a combinação G4 + Mac OS X + Japonês.</dd>
+        <td width="17%">
+          <p><code>Ctrl+S</code></p>
+        </td>
 
-   <dt>Filtros de arquivos...</dt>
-   <dd>Exibe a caixa de diálogo <a href="fileFilters.html">Filtros de arquivos</a> para confirgurar o processamento e análise de arquivos.</dd>
+        <td>
+          <p>Grava a tradução na memória do projeto. O OmegaT grava automaticamente a tradução a cada 10 minutos ou quando você fechar o projeto ou sair do programa.</p>
+        </td>
+      </tr>
 
-   <dt>Segmentação...</dt>
-   <dd>Abre a caixa de diálogo <a href="segmentation.html">Segmentação do texto fonte</a> para configurar a segmentação do texto.</dd>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Criar documentos traduzidos</code></p>
+        </td>
 
-   <dt>Modo de trabalho...</dt>
-   <dd>Exibe a caixa de diálogo <a href="translationEditing.html">Tradução e revisão</a> para configurar o conteúdo do campo destino para os segmentos ainda não traduzidos.</dd>
+        <td width="17%"><code>Ctrl+D</code></td>
 
-   <dt>Restaurar janela principal</dt>
-   <dd>Restaura os componentes (editor, visualizador de correspondência e de glossário) da janela principal do OmegaT à configuração padrão. Use este recurso caso tenha desencaixado, movido ou ocultado um ou mais componentes e não pode recuperá-los de outra forma.</dd>
-</dl>
-</p>
+        <td>
+          <p>Cria os documentos destino com base no texto que você traduziu. Os documentos serão criados na pasta <code>/target</code>.</p>
+        </td>
+      </tr>
 
-<a name="Help_Menu"></a>
-<h4>Menu Ajuda</h4>
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Propriedades</code></p>
+        </td>
 
-<p>
-<dl>
-   <dt>Manual do Usuário... <code>&lt;F1&gt;</code></dt>
-   <dd>Abre o <a href="userInterface.html#Help_Browser">navegador da Ajuda</a> com este manual em uma janela separada.</dd>
+        <td width="17%">
+          <p><code>Ctrl+E</code></p>
+        </td>
 
-   <dt>Sobre...</dt>
-   <dd>Exibe as informações sobre copyright, créditos e licença.</dd>
-</dl>
-</p>
+        <td>
+          <p>Exibe a caixa de diálogo <a href="projectProperties.html">Propriedades do projeto</a> para modificar as línguas do projeto e o local das pastas.</p>
+        </td>
+      </tr>
 
-<hr>
-<p><a href="legalNotices.html" title="Avisos legais">Avisos legais</a></p>
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Arquivos do projeto...</code></p>
+        </td>
 
+        <td width="17%">
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Fecha e abre a <a href="userInterface.html#Project_Files">janela Arquivos do projeto</a> (dependendo se ela estiver aberta ou fechada).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Sair</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Q</code></p>
+        </td>
+
+        <td>
+          <p>Grava o projeto e sai do OmegaT. Se você ainda não gravou o projeto manualmente, confirma se você quer realmente sair.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="EditMenu" id="EditMenu"></a>Editar</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>Nota: os itens geralmente encontrados na maioria dos aplicativos (copiar/recortar/colar) não são exibidos neste menu, mas estão disponíveis com os atalhos do seu sistema. Por exemplo:</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Copiar</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Copia o texto selecionado para a área de transferência.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Recortar</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+X</code></p>
+        </td>
+
+        <td>
+          <p>Copia o texto selecionado para a área de transferência e apaga o texto selecionado.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Colar</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+V</code></p>
+        </td>
+
+        <td>
+          <p>Passa o texto da área de transferência para a posição onde está o cursor.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <p>O menu <strong>Editar</strong> contém as seguintes opções:</p>
+
+      </td></tr><tr bgcolor="#DDDDDD">
+        <td>
+          <p>Desfazer última ação</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Desfaz as últimas ações de edição no segmento destino aberto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Refazer última ação</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Refaz as ações de edição que acabaram de ser desfeitas no segmento destino aberto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Selecionar correspondência No.</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+No.</code></p>
+        </td>
+
+        <td>
+          <p>No. é um dígito de 1 a 5. O atalho seleciona a correspondência N<sup>o</sup> mostrada na janela de correspondências (por predefinição, a primeira está selecionada)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Substituir com correspondência</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Substitui o conteúdo do segmento destino aberto com a correspondência selecionada (por predefinição, a primeira está selecionada)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Inserir correspondência</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Insere no segmento aberto e na posição onde está o cursor a correspondência selecionada (a primeira está selecionada por predefinição)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Substituir com texto fonte</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Substitui o conteúdo do segmento destino aberto com o texto fonte</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Inserir texto fonte</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Insere o texto fonte no segmento destino aberto, na posição onde está o cursor</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Buscar no projeto</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Exibe uma caixa de diálogo para fazer pesquisas no projeto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>Substituir com tradução automática</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Substitui o conteúdo do segmento destino com o texto do Google Tradutor Para isso acontecer, o Google Tradutor deve estar ativado (ver Menu &gt; Opções &gt;Google Tradutor).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="GoToMenu" id="GoToMenu"></a>Ir para</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Próximo segmento não traduzido</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Avança para o próximo segmento que não tem equivalente na memória da tradução.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Próximo segmento</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+N</code> ou <code>Enter</code> ou <code>Tab</code></p>
+        </td>
+
+        <td>
+          <p>Avança para o próximo segmento. Se o segmento aberto for o último em um arquivo, avança para o primeiro segmento do próximo arquivo do projeto.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Segmento anterior</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+P</code> ou <code>Ctrl+Enter</code> ou <code>Ctrl+Tab</code></p>
+        </td>
+
+        <td>
+          <p>Volta para o segmento anterior. Volta para o último segmento do arquivo anterior, se o segmento aberto for o último em um arquivo.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Segmento número...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>O segmento abre ao se digitar seu número</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Avançar pelos segmentos...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>OmegaT lembra os segmentos executados. Com este comando você pode avançar pelos segmentos anteriormente marcados no comando "voltar pelos segmentos".&nbsp;</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Voltar pelos segmentos...</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Com este comando você pode retroceder para um ou vários segmentos no tempo, para voltar mais tarde para o segmento atual.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ViewMenu" id="ViewMenu"></a>Exibir</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Marcar segmentos traduzidos</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Se selecionada, esta opção marcará com amarelo os segmentos traduzidos.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Marcar segmentos não traduzidos</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Se selecionada, os segmentos não traduzidos serão marcados em violeta.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Mostrar segmentos fonte</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Se selecionada, os segmentos fonte serão mostrados e marcados em verde. Se não for selecionada, os segmentos fonte não serão mostrados.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="ToolsMenu" id="ToolsMenu"></a>Ferramentas</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Verificar tags</code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Verifica se faltam tags ou se elas estão posicionadas erradas nos arquivos formatados. Exibirá uma lista de segmentos com problemas de tags. A  janela <a href=
+          "userInterface.html#tag_Validation">Verificação de tags</a> relaciona o que você verá lá e  <a href="formattedText.html">Trabalhar com textos formatados</a> explica porque.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="OptionsMenu" id="OptionsMenu"></a>Opções</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Usar TAB para avançar</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Define a tecla de validação de segmentos para <code>Tab</code> em vez da tecla predefinida <code>Enter</code>. Esta opção é útil para alguns sistemas de entrada de caracteres chineses, japoneses e coreanos.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Sempre confirmar saída</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Antes de encerrar, o programa sempre confirmará com o usuário.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td><code>Google Tradutor</code></td>
+
+        <td></td>
+
+        <td>
+          <p><a href="GoogleTranslate.html">Google Tradutor</a> ativado/não ativado. Quando ativado, o controle <code>Ctrl+M</code> irá inserir a sugestão do Google Tadutor no segmento destino aberto. A sugestão, mostrada no painel Google Tradutor, pode ser revisada antes da inserção</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Fonte...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Exibe a caixa de diálogo <a href="fontSettings.html">Definições de fontes</a> para modificar a fonte de visualização do texto. Recomenda-se aos usuários de computadores antigos, com redimensionamento lento da janela, que mudem a fonte.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Filtros de arquivos...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Exibe a caixa de diálogo <a href="fileFilters.html">Filtros de arquivos</a> para configurar o processamento e análise de arquivos.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Segmentação...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Abre a caixa de diálogo <a href="segmentation.html">Segmentação do texto fonte</a> para configurar a segmentação do texto.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Verificador ortográfico...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Abre a janela <a href="spellchecker.html">Configuração do verificador ortográfico</a> para instalar, configurar e ativar o verificador.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Modo de trabalho...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Mostra a caixa de diálogo <a href="translationEditing.html">Editar modo de trabalho</a> com as configurações para o campo destino</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Restaurar janela principal</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Restaura os componentes (editor, visualizador de correspondência, de glossário e dicionário e o painel do Google Tradutor) da janela principal do OmegaT à configuração padrão. Use este recurso caso tenha desencaixado, movido ou ocultado um ou mais componentes e não pode recuperá-los de outra forma. Use-o também se você tiver mudado de versão do OmegaT e tiver problemas com janelas não aparecem mais.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="HelpMenu" id="HelpMenu"></a>Ajuda</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p><code>Manual do Usuário... </code></p>
+        </td>
+
+        <td width="17%">
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Abre o <a href="userInterface.html#Help_Browser">navegador da Ajuda</a> com este manual em uma janela separada.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td width="23%">
+          <p><code>Sobre...</code></p>
+        </td>
+
+        <td width="17%"></td>
+
+        <td>
+          <p>Exibe as informações sobre copyright, créditos e licença.</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <h2><a name="shortcuts" id="shortcuts"></a>Atalhos de teclado</h2>
+
+  <p>Os seguintes atalhos estão disponíveis na janela principal. Quando uma outra janela estiver na frente, clique na janela principal para colocá-la em primeiro plano ou pressione <code><strong>Esc</strong></code> para fechar aquela janela.</p>
+
+  <p>Para ativar os atalhos, pressione <code><strong>Ctrl</strong></code> e uma letra. Alguns atalhos requerem o uso de outras teclas. Para facilitar a leitura, as letras são escritas aqui em maiúsculas.</p>
+
+  <p><strong><code>Ctrl</code></strong> é usado no Windows, UNIX e sistemas operacionais semelhantes ao UNIX com os teclados que tenham uma tecla <strong><code>Ctrl</code></strong> / <code><strong>Control</strong></code>. Para os usuários do Mac, o comando é <code><strong>cmd+tecla</strong></code>. A tecla <code><strong>cmd</strong></code> está identificada como <code><strong>comando</strong></code> ou a marca da <strong>maçã</strong> nos teclados Apple.</p>
+
+  <ul>
+    <li>
+      <p><a href="#Project_management">Gerência do projeto</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Editing">Edição</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Moving_around">Movimentação</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Reference_windows">Janelas de referência</a></p>
+    </li>
+
+    <li>
+      <p><a href="#Other">Outro</a></p>
+    </li>
+  </ul>
+
+  <table summary="just formatting" border="0" cellpadding="3" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Project_management" id="Project_management"></a>Gerência do projeto</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Abrir projeto</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+O</code></p>
+        </td>
+
+        <td>
+          <p>Exibe uma caixa de diálogo para localizar um projeto existente</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Salvar</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+S</code></p>
+        </td>
+
+        <td>
+          <p>Grava o trabalho atual no arquivo project_save.tmx localizado na pasta /omegat/ do projeto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Fechar projeto</p>
+        </td>
+
+        <td>
+          <p><code>Shift+Ctrl+W</code></p>
+        </td>
+
+        <td>
+          <p>Fecha o projeto atual</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Criar documentos traduzidos</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+D</code></p>
+        </td>
+
+        <td>
+          <p>Cria os documentos traduzidos na pasta 'target' do projeto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Propriedades do projeto</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+E</code></p>
+        </td>
+
+        <td>
+          <p>Exibe as definições do projeto para modificação eventual</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Editing" id="Editing"></a>Edição</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Desfazer última ação</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Z</code></p>
+        </td>
+
+        <td>
+          <p>Desfaz as últimas ações de edição no segmento destino aberto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Refazer última ação</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Y</code></p>
+        </td>
+
+        <td>
+          <p>Refaz as ações de edição que acabaram de ser desfeitas no segmento destino aberto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Selecionar correspondência No.</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+No.</code></p>
+        </td>
+
+        <td>
+          <p>No. é um dígito de 1 a 5. O atalho seleciona a correspondência N<sup>o</sup> mostrada na janela de correspondências (por predefinição, a primeira está selecionada)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Substituir com correspondência</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+R</code></p>
+        </td>
+
+        <td>
+          <p>Substitui o conteúdo do segmento destino aberto com a correspondência selecionada (por predefinição, a primeira está selecionada)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Inserir correspondência</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+I</code></p>
+        </td>
+
+        <td>
+          <p>Insere no segmento aberto e na posição onde está o cursor a correspondência selecionada (a primeira está selecionada por predefinição)</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Substituir com texto fonte</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+R</code></p>
+        </td>
+
+        <td>
+          <p>Substitui o conteúdo do segmento destino aberto com o texto fonte</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Inserir texto fonte</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+Shift+I</code></p>
+        </td>
+
+        <td>
+          <p>Insere o texto fonte no segmento destino aberto, na posição onde está o cursor</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Buscar no projeto</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F</code></p>
+        </td>
+
+        <td>
+          <p>Exibe uma caixa de diálogo para fazer pesquisas no projeto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td width="23%">
+          <p>Substituir com tradução automática</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+M</code></p>
+        </td>
+
+        <td>
+          <p>Substitui o conteúdo do segmento destino com o texto do Google Tradutor Para isso acontecer, o Google Tradutor deve estar ativado (ver Menu &gt; Opções &gt;Google Tradutor).</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Moving_around" id="Moving_around"></a>Movimentação</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Próximo segmento não traduzido</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+U</code></p>
+        </td>
+
+        <td>
+          <p>Move o campo de edição para o próximo segmento que não está registrado na memória de tradução do projeto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Próximo segmento</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+N<br> Enter ou Return&nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Move o campo de edição para o próximo segmento</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Segmento anterior</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+P</code></p>
+        </td>
+
+        <td>
+          <p>Moves o campo de edição para o segmento anterior</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Segmento número...</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+J</code></p>
+        </td>
+
+        <td>
+          <p>Move o cursor para o número do segmento fornecido</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Voltar pelos segmentos...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+P</code></p>
+        </td>
+
+        <td>
+          <p>Volta um segmento no histórico dos segmentos.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Avançar pelos segmentos...</p>
+        </td>
+
+        <td width="17%">
+          <p><code>Ctrl+Shift+N</code></p>
+        </td>
+
+        <td>
+          <p>Avança um segmento no histórico dos segmentos.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Reference_windows" id="Reference_windows"></a>Janelas de referência</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Relação de arquivos do projeto</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+L</code></p>
+        </td>
+
+        <td>
+          <p>Exibe a relação dos arquivos do projeto</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td colspan="3">
+          <hr>
+
+          <h3><a name="Other" id="Other"></a>Outro</h3>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Verificar tags</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+T</code></p>
+        </td>
+
+        <td>
+          <p>Abre a janela <a href="userInterface.html#tag_Validation">Verificação de tags</a></p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Exportar seleção</p>
+        </td>
+
+        <td>
+          <p><code>Shift+</code><code>Ctrl+C</code></p>
+        </td>
+
+        <td>
+          <p>Exporta a seleção atual ou o texto fonte atual, se não houver nada selecionado.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#DDDDDD">
+        <td>
+          <p>Buscar no projeto&nbsp;&nbsp; &nbsp;</p>
+        </td>
+
+        <td>
+          <p><code>Ctrl+F&nbsp;&nbsp; &nbsp;</code></p>
+        </td>
+
+        <td>
+          <p>Abre uma nova janela de busca.</p>
+        </td>
+      </tr>
+
+      <tr bgcolor="#FFFFFF">
+        <td>
+          <p>Arquivos de Ajuda</p>
+        </td>
+
+        <td>
+          <p><code>F1</code></p>
+        </td>
+
+        <td>
+          <p>Exibe os arquivos de ajuda do OmegaT em uma janela separada</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
+
+  <table style="width: 100%;" summary="just formatting" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legais</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

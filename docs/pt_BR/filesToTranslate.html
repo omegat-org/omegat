@@ -1,83 +1,282 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Arquivos para traduzir - OmegaT 1.6.1 Manual do Usuário</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Arquivos para traduzir - Manual do Usuário, OmegaT 2.0 </title>
 </head>
+
 <body>
+  <h1>Arquivos para traduzir</h1>
 
-<h1>Arquivos para traduzir</h1>
+  <p><a href="#RTLbidi">Línguas da direita para esquerda</a></p>
 
-<p>Com o OmegaT você pode traduzir diretamente diversos formatos de arquivo. Existem basicamente dois tipos de formato de arquivo. Os formatos de <strong>texto simples</strong> e os formatos de <strong>texto formatado</strong>.</p>
+  <ul>
+    <li>
+      <p><a href="#RTL_Changing_direction">Modificar a direção do texto de entrada/exibição</a></p>
+    </li>
 
-<h2>Índice</h2>
+    <li>
+      <p><a href="#RTL_mixing">Combinação de sequências de texto EPD (esquerda para direita) e DPE (direita para esquerda) nos segmentos</a></p>
+    </li>
 
-<ul type="none">
-   <li>1. <a href="#Plain_text_files">Arquivos de texto simples</a></li>
-   <li>2. <a href="#Formatted_text_files">Arquivos de texto formatado</a></li>
-   <li>3. <a href="#File_formats_specifics">Especificações de formatos de arquivos</a></li>
-   <li>4. <a href="#Other_file_formats">Outros formatos de arquivos</a></li>
-</ul>
+    <li>
+      <p><a href="#RTL_tags">Tags do OmegaT nos segmentos DPE</a></p>
+    </li>
 
-<a name="Plain_text_files"></a>
-<h3>Arquivos de texto simples</h3>
+    <li>
+      <p><a href="#RTL_CreatingTranslatedDocuments">Criação de documentos DPE</a></p>
+    </li>
+  </ul>
 
-<p>Os arquivos de texto simples contêm apenas texto, portanto sua tradução é um processo simples de inserção do texto no idioma destino.</p>
+  <p><a href="#formats">Formatos de arquivos</a></p>
 
-<p>Atualmente, o OmegaT é compatível com os seguintes formatos de texto simples:</p>
+  <ul>
+    <li>
+      <p><a href="#plaintext">Arquivos de texto simples</a></p>
+    </li>
 
-<ul>
-   <li>Texto em ASCII (.txt, etc.)</li>
-   <li>Texto codificado</li>
-   <li>Pacotes de recursos Java (.properties)</li>
-   <li>Arquivos PO (.po)</li>
-   <li>Arquivos INI (key=value) (.ini)</li>
-</ul>
+    <li>
+      <p><a href="#tagged">Arquivos de texto formatado</a></p>
+    </li>
 
-<p>Tais arquivos não são considerados como contendo mais formato do que "espaço em branco" para fins de alinhamento/tabulação.</p>
+    <li>
+      <p><a href="#specifics">Especificações de formatos de arquivos</a></p>
+    </li>
 
-<p>Eles são via de regra modidficados em editores de texto e geralmente não é possível de manter as informações de formato como fonte/cor/margem, etc.</p>
+    <li>
+      <p><a href="#others">Outros formatos de arquivos</a></p>
 
-<a name="Formatted_text_files"></a>
-<h3>Arquivos de texto formatado</h3>
+      <ul>
+        <li>
+          <p><a href="#ooo">OpenOffice.org</a></p>
+        </li>
 
-<p>Os arquivos de texto formatado contêm texto bem como informações de tipo de fonte, tamanho, cor, etc. Eles são geralmente criados em processadores de texto ou editores de home page.</p>
+        <li>
+          <p><a href="#okapi">Okapi framework</a></p>
+        </li>
 
-<p>Atualmente, o OmegaT é compatível com os seguintes formatos de texto formatado:</p>
+        <li>
+          <p><a href="#tt">Translate Toolkit</a></p>
+        </li>
 
-<ul>
-   <li>Arquivos OpenOffice.org</li>
-   <li>Arquivos OpenDocument</li>
-   <li>Arquivos (X)HTML</li>
-   <li>Arquivos Compilador de Ajuda HTML (HCC)</li>
-   <li>Arquivos DocBook</li>
-</ul>
+        <li>
+          <p><a href="#po4a">po4a</a></p>
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <hr>
 
-<p>Tais formatos de arquivos são criados de forma que mantenham as informações de formatação. Tais informações de formatação podem ser simples como <strong>isto está em negrito</strong> ou tão complexo como dados em tabelas com diferentes tamanho de fontes, cor, posições, etc.</p>
+  <h2><a name="RTLbidi" id="RTLbidi"></a>Línguas da Direita para Esquerda (DPE)</h2>A justificação dos segmentos fonte e destino depende das línguas do projeto. Por predefinição, o texto de línguas EPD é justificado à esquerda e o das línguas DPE à direita. <a name="RTL_Changing_direction" id="RTL_Changing_direction"></a>Para alternar entre os modos de exibição diferentes, pressione Ctrl+Shift+O (esta é a letra "O" e não o número 0). O Shift+Ctrl+O tem três modos:
 
-<p>Na maioria dos trabalhos de tradução é considerado importante que o documento traduzido pareça similar ao original. O OmegaT permite-lhe fazer isso através da marcação dos caracteres/palavras que tenham uma formatação especial com tags fáceis de serem manipuladas.</p>
+  <ul>
+    <li>justificação padrão (i.e. língua)</li>
 
-<p>Simplificar a formatação do texto original reduz bastante a quantidade de tags. Se possível, deve-se levar em conta unificar as fontes usadas, os tamanhos e cores, etc., para simplificar a tradução e reduzir o número de possíveis erros de tags.</p>
+    <li>justificação à esquerda</li>
 
-<a name="File_formats_specifics"></a>
-<h3>Especificações de formatos de arquivos</h3>
+    <li>justificação à direita</li>
+  </ul>O modo DPE no OmegaT não tem nenhuma influência no modo de exibição dos documentos traduzidos criados no OmegaT. O modo de exibição dos documentos traduzidos deve ser modificado nos programas que você usará para exibir ou modificar os documentos (consulte o manual desses programas para detalhes). No OmegaT, o Ctrl+Shift+O faz com que a entrada de texto e sua exibição seja da DPE. Esta função pode ser usada separadamente para os três painéis (Editor, Correspondências parciais e Glossário); basta clicar no painel e alternar o modo de exibição. Também pode ser usada em todos os campos de entrada no OmegaT (janela de busca, regras de segmentação, etc.) <b>Obs.:</b> o Mac OSX usa o mesmo atalho (e não  Cmd+Shift+O) .
 
-<p>A maioria dos formatos de arquivos acima está sujeita a processamentos específicos.</p>
+  <h3><a name="RTL_mixing" id="RTL_mixing"></a>Combinação de sequências de texto EPD (esquerda para direita) e DPE (direita para esquerda) nos segmentos</h3>Quando o texto é escrito da direita para a esquerda, o modo de visualização padrão (esquerda para direita) pode ser usado. Em muitos casos, entretanto, é necessário incluir texto EPD em textos DPE. Por exemplo, nas tags do OmegaT, os nomes dos produtos que devem permanecer na língua fonte, espaços reservados em arquivos de localização e números em texto. Em casos como esses é necessário alternar para o modo DPE para que o texto (na verdade bidirecional) seja exibido da direita para a esquerda. Note que quando o OmegaT está no modo DPE, tanto o texto fonte como o texto destino são exibidos neste modo. Isto significa que se a língua fonte é da EPD e a língua destino é da DPE, ou vice-versa, pode ser necessário alternar entre esses dois modos para visualizar o texto nos seus respectivos modos de escrita.
 
-<p>Consulte <a href="fileFormats.html" title="Formatos de arquivos compatíveis">Formato de arquivos compatíveis</a> e <a href="fileFilters.html" title="Filtros de arquivos">Filtros de arquivos</a> para informações específicas relacionadas ao processamento de todos os formatos acima citados.</p>
+  <h3><a name="RTL_tags" id="RTL_tags"></a>Tags do OmegaT nos segmentos DPE</h3>
 
-<a name="Other_file_formats"></a>
-<h3>Outros formatos de arquivos</h3>
+  <p>Conforme mencionado acima, as tags do OmegaT são sequências da esquerda para a direita. Quando o tradutor trabalhar com línguas da DPE e EPD, para ler as tags do segmento fonte e digitá-las corretamente no segmento destino, será necessário alternar entre os modos EPD e DPE várias vezes.</p>
 
-<p>Outros formatos de texto simples ou formatado podem ser processados no OmegaT</p>
+  <p>Se o documento permitir, é recomendado que o tradutor retire as informações de estilo do documento original, dessa forma aparecerá apenas algumas tags na interface do OmegaT. Siga as dicas para lidar com as tags. Verifique as tags (ver <a href=
+  "userInterface.html#tag_validation">Verificação de tags)</a> e gere documentos traduzidos (ver acima e <a href="menu.html">Menu</a>) em intervalos regulares para facilitar a identificação de algum problema que surja. É possível traduzir uma versão de texto simples e depois acrescentar o estilo necessário usando o programa relevante.</p>
 
-<p>Em termos gerais, diversos formatos de texto simples (inclusive LaTeX, etc.) podem ser traduzidos no OmegaT através da conversão para o formato PO.</p>
+  <h3><a name="RTL_CreatingTranslatedDocuments" id=
+  "RTL_CreatingTranslatedDocuments"></a>Criação de documentos DPE</h3>
 
-<p>Igualmente, diversos formatos de texto formatado (inclusive arquivos do Microsoft Office) podem ser traduzidos no OmegaT através de conversão para o formato Open Document.</p>
+  <p>Quando o documento traduzido for criado, ele exibirá a mesma direção do texto que o documento original. Se o texto é da esquerda para a direita, o documento traduzido deve ser modificado manualmente no programa onde será visualizado para ter o texto da direita para a esquerda. Cada formato de saída tem maneiras específicas de lidar com exibição da direita para a esquerda; consulte o manual dos programas.</p>
 
-<p>Para obter mais informações, consulte <a href="fileFormats.html" title="Formatos de arquivos compatíveis">Formatos de arquivos compatíveis</a>.</p>
+  <p>Para evitar modificar os parâmetros de exibição dos arquivos destino cada vez que os arquivos são abertos, é possível modificar os parâmetros de exibição do arquivo fonte para que eles sejam usados pelos arquivos destinos. Tais modificações podem ser feitas em arquivos do OpenOffice.org, por exemplo.</p>
+  <hr>
 
-<hr>
-<p><a href="legalNotices.html" title="Avisos legais">Avisos legais</a></p>
+  <h2><a name="formats" id="formats"></a>Formatos de arquivos</h2>
 
+  <p>Com o OmegaT você pode traduzir diversos formatos de arquivo. Basicamente há dois tipos de formatos, o <strong>texto simples</strong> e o <strong>texto formatado</strong>.</p>
+
+  <h3><a name="plaintext" id="plaintext"></a>Arquivos de texto simples</h3>
+
+  <p>Os arquivos de texto simples contêm apenas texto, portanto sua tradução é um processo simples de inserção do texto. Há diversos <a href="plainText.html">métodos</a> para codificar os arquivos de forma que seus conteúdos não apareçam truncados quando abertos no OmegaT. Tais arquivos não contêm nenhuma informação de formatação além do "espaço em branco" usado para alinhar texto, indicar parágrafos ou inserir quebra de páginas. Eles não podem conter / reter informações sobre a cor, tipo de fonte, etc. do texto. Atualmente, o OmegaT é compatível com os seguintes formatos de texto simples:</p>
+
+  <ul>
+    <li>
+      <p>ASCII text (.txt, etc.)</p>
+    </li>
+
+    <li>
+      <p>Texto codificado</p>
+    </li>
+
+    <li>
+      <p>Pacotes de recursos Java (.properties)</p>
+    </li>
+
+    <li>
+      <p>Arquivos PO (.po)</p>
+    </li>
+
+    <li>
+      <p>Arquivos INI (key=value) (.ini)</p>
+    </li>
+  </ul>
+
+  <p>Outros tipos de arquivos de texto simples podem ser processados pelo OmegaT <a href=
+  "fileFilters.html">associando</a> sua extensão de arquivo com um tipo de arquivo compatível (por exemplo, os arquivos <code>.pod</code> podem ser associados ao filtro de texto ASCII) e serem pré-processados com regras de <a href=
+  "segmentation.html">segmentação</a> específica.</p>
+
+  <h3><a name="tagged" id="tagged"></a>Arquivos de texto formatado</h3>
+
+  <p>Os arquivos de texto formatado contêm texto bem como informações do tipo de fonte, tamanho, cor, etc. Eles são geralmente criados em processadores de texto ou editores de texto html. Tais formatos de arquivos são criados de forma que mantenham as informações de formatação. Tais informações de formatação podem ser simples como <strong>isto está em negrito</strong> ou tão complexas como dados em tabelas com diferentes tamanho de fontes, cor, posições, etc. Na maioria dos trabalhos de tradução é considerado importante que o documento traduzido pareça similar ao original. O OmegaT permite-lhe fazer isso através da marcação dos caracteres/palavras que tenham uma formatação especial com <a href="formattedText.html">tags</a> fáceis de serem manipuladas. Simplificar a formatação do texto original reduz bastante a quantidade de tags. Se possível, deve-se procurar unificar as fontes usadas, os tamanhos e cores, etc., para simplificar a tradução e reduzir a possibilidade de criar <a href=
+  "userInterface.html#tag_validation">erros de tags</a>. <a name="specifics" id="specifics"></a> Cada tipo de arquivo é tratado de forma diferente no OmegaT. Para especificar um funcionamento específico do OmegaT, use <a href="fileFilters.html">filtros de arquivo</a>. Atualmente, o OmegaT é compatível com os seguintes formatos de texto formatado:</p>
+
+  <ul>
+    <li>
+      <p>OpenOffice.org</p>
+    </li>
+
+    <li>
+      <p>OpenDocument</p>
+    </li>
+
+    <li>
+      <p>Microsoft Open XML</p>
+    </li>
+
+    <li>
+      <p>(X)HTML</p>
+    </li>
+
+    <li>
+      <p>Compilador de Ajuda HTML</p>
+    </li>
+
+    <li>
+      <p>DocBook</p>
+    </li>
+
+    <li>
+      <p>Arquivos XLIFF monolíngue do Okapi</p>
+    </li>
+
+    <li>
+      <p>CopyFlow Gold para QuarkXPress</p>
+    </li>
+
+    <li>
+      <p>Arquivos legendas (SRT)</p>
+    </li>
+
+    <li>
+      <p>ResX</p>
+    </li>
+
+    <li>
+      <p>Recursos Android</p>
+    </li>
+
+    <li>
+      <p>LaTeX</p>
+    </li>
+
+    <li>
+      <p>Typo3 LocManager</p>
+    </li>
+
+    <li>
+      <p>Help &amp; Manual</p>
+    </li>
+
+    <li>
+      <p>Windows Resources (RC)</p>
+    </li>
+
+    <li>
+      <p>Arquivos Mozilla DTD</p>
+    </li>
+
+  </ul>
+
+  <p>Outros tipos de arquivos de texto simples podem ser processados pelo OmegaT <a href=
+  "fileFilters.html">associando</a> sua extensão de arquivo com um tipo de arquivo compatível e serem pré-processados com regras de <a href=
+  "segmentation.html">segmentação</a> específica.</p>
+
+  <h3><a name="others" id="others"></a>Outros formatos de arquivos</h3>
+
+  <p>Outros formatos de texto simples ou formatado também podem ser processados no OmegaT</p>
+
+  <p>Podem ser usadas ferramentas externas para fazer a conversão dos arquivos para os formatos compatíveis. Lembre-se de que os arquivos traduzidos precisarão ser convertidos de novo ao formato original. Dessa forma, diversos formatos de texto simples (inclusive LaTex, etc.) podem ser traduzidos no OmegaT fazendo a conversão para o formato PO. Igualmente, diversos formatos de texto formatado (inclusive arquivos do Microsoft Office) podem ser traduzidos no OmegaT através de conversão para o formato Open Document.</p>
+
+  <p>A qualidade do arquivo traduzido dependerá da qualidade da conversão. Faça um teste de todas as opções antes de proceder com as conversões. As ferramentas gratuitas para conversão incluem:</p>
+
+  <p><br></p>
+
+  <table width="100%" border="0" cellpadding="4" cellspacing="0" summary=
+  "just formatting">
+    <col width="50*">
+    <col width="206*">
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="ooo" id="ooo"></a>OpenOffice.org<a href=
+        "http://www.openoffice.org/"><br> Página oficial do OpenOffice.org</a></p>
+      </td>
+
+      <td width="81%">
+        <p>O OmegaT não é compatível diretamente com os formatos do Microsoft Office, ou seja, Word, Excel e Power Point. Entretanto, o OpenOffice.org (e variantes) pode ser usado para converter tais formados para OpenDocument, que são compatíveis com o OmegaT.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="okapi" id="okapi"></a>Okapi framework<a href=
+        "http://okapi.sourceforge.net/Release/Tikal/ReadMe_ForMono.htm"><br> Okapi for Mono</a>, <a href=
+        "http://okapi.sourceforge.net/Release/Shared/Help/tutorial_02.htm">tutorial</a></p>
+      </td>
+
+      <td width="81%">
+        <p>O utilitário de extração de texto do Okapi Framework tem uma opção para criar uma árvore de pastas para iniciar um projeto no OmegaT. É possível também criar um arquivo XLIFF específico para o OmegaT. A implementação Java do Okapi Framework está disponível em <a href="http://okapi.opentag.com/">Okapi.opentag.com</a>.<br>
+        </p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="tt" id="tt"></a>Translate Toolkit<br> <a href="http://translate.sourceforge.net/wiki/toolkit/index">Página oficial do Translate Toolkit</a></p>
+      </td>
+
+      <td width="81%">
+        <p>O Translate Toolkit, um conjunto de ferramentas em python, oferece aos usuários diversos conversores para e de Portable Object, inclusive arquivos Mozilla .properties e dtd, arquivos CSV, arquivos Qt .ts, arquivos XLIFF. O kit inclui diversas ferramentas para processar tais arquivos antes e depois de serem traduzidos no OmegaT.</p>
+      </td>
+    </tr>
+
+    <tr valign="top">
+      <td width="19%">
+        <p><a name="po4a" id="po4a"></a>po4a<br> <a href="http://po4a.alioth.debian.org/">Página oficial do po4a</a></p>
+      </td>
+
+      <td width="81%">
+        <p>po4a é uma ferramenta perl do Debian. Pode converter formatos de arquivos tais como LaTeX, TeX, POD, etc. de e para Portable Object.</p>
+      </td>
+    </tr>
+  </table>
+  <hr>
+
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2"
+  summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legais</a></td>
+
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
+
+        <td style="text-align: right;"><a href="xindex.html">Índice</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

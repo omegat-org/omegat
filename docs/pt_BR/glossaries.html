@@ -1,29 +1,92 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Glossários - OmegaT 1.6.1 Manual do Usuário</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Glossários - Manual do Usuário, OmegaT 2.0</title>
 </head>
 <body>
-
-<h1>Glossários</h1>
-
-<p>A função do glossário é automática. Par usar um glossário existente, basta colocá-lo no diretório <code>/glossário</code> após criar o projeto. Quando um projeto for aberto, o OmegaT detecta automaticamente os arquivos de glossário neste diretório. Os termos no segmento aberto que o OmegaT encontrar no(s) arquivo(s) de glossário serão exibidos na janela Glossário.</p>
-
-<p>A função de glossário somente encontra as correspondências exatas com a entrada constante do glossário (isto é, as formas não flexionadas, etc.).</p>
-
-<p>Durante a tradução, pode-se adicionar manualmente novos termos no(s) arquivo(s) de glossário (por exemplo, com um editor de texto), mas os termos recém-adicionados não serão reconhecidos até que o projeto seja recarregado.</p>
-
-<a name="File_Format"></a>
-<h2>Formato de arquivo</h2>
-
-<p>Os arquivos de glossário são apenas arquivos de texto simples contendo três colunas delimitadas por tabulação; elas relacionam os termos fonte e destino na primeira e segunda coluna, respectivamente. A terceira coluna pode ser usada para informações extras.</p>
-
-<p>Os arquivos de glossário podem ser usados na codificação padrão do sistema (neste caso, os arquivos devem ter a extensão <code>.tab</code>) ou em UTF-8 (neste caso, devem ter a extensão <code>.utf8</code>).</p>
-
-<p>Por exemplo, os glossários criados com a função de exportar texto do Trados Multiterm podem ser usados como glossários no OmegaT sem nenhuma modificação, desde que tenham a extensão de arquivo <code>.tab</code> e os campos dos termos fonte e destino sejam os dois primeiros campos, respectivamente.</p>
-
+<h2>Glossários</h2>
+<ul>
+  <li>
+    <p><a href="#usage">Uso</a></p>
+  </li>
+  <li>
+    <p><a href="#fileformat">Formato de arquivo</a></p>
+  </li>
+  <li>
+    <p><a href="#howtocreate">Como criar glossários</a></p>
+  </li>
+  <li>
+    <p><a href="#multiterm">Usando Trados Multiterm</a></p>
+  </li>
+  <li>
+    <p><a href="#commonglossaryproblems">Problemas comuns com glossário</a></p>
+  </li>
+</ul>
+<p>Os glossários são arquivos que são criados e atualizados manualmente para uso no OmegaT.</p>
+<p>Se um projeto OmegaT contém um ou mais glossários, quaisquer termos do glossário que também sejam encontrados no segmento ativo serão automaticamente exibidos no <a href="userInterface.html#Glossary">visualizador de glossário</a>.</p>
 <hr>
-<p><a href="legalNotices.html" title="Avisos legais">Avisos legais</a></p>
+<h2><a name="usage" id="usage"></a>Uso</h2>
+<p>Para usar um glossário existente, basta colocá-lo na pasta <span style="font-style: italic;">/glossary</span> após a criação do projeto. Quando um projeto for aberto, o OmegaT detecta automaticamente arquivos de glossário nesta pasta. Os termos no segmento aberto que o OmegaT encontrar no(s) arquivo(s) de glossário serão exibidos no painel Glossário.</p>
+<p><img src="images/Glossary_pane.png" name="graphics1"
+ alt="Painel Glossário" id="graphics1"
+ style="border: 0px"><br>
+</p>
+<br>
+A palavra antes do sinal = é o termo fonte, e sua tradução é (ou são) as palavras após o sinal =. Pode-se acrescentar um comentário em um termo digitado no glossário (ver "verbo transitivo" para o segundo item). A função do glossário é encontrar apenas correspondências exatas com os termos do glossário (por exemplo, não encontra formas flexionadas, etc.) Durante a tradução, pode-se adicionar manualmente novos termos no(s) arquivo(s) de glossário (por exemplo, com um editor de texto), mas os termos recém-adicionados não serão reconhecidos até que o projeto seja recarregado.
+<hr>
+<h2><a name="fileformat" id="fileformat"></a>Formato de arquivo</h2>
+<p>Os arquivos de glossário são apenas arquivos de texto simples contendo três colunas delimitadas por tabulação; elas relacionam os termos fonte e destino na primeira e segunda coluna, respectivamente. A terceira coluna pode ser usada para informações extras. Os arquivos de glossário podem estar na codificação padrão do sistema (e indicados pela extensão <code>.tab</code>) ou no formato UTF-8 (a extensão <code>.utf8</code>). A codificação Unicode (UTF8) é a preferida por razões óbvias.</p>
+<hr>
+<h2><a name="howtocreate" id="howtocreate"></a>Como criar glossários</h2>
+O método aqui é infalível, quando seguido com atenção. Para isso, você precisa do Writer do OpenOffice.org, portanto, se ainda não o baixou - agora é hora de baixar e instalar o OpenOffice.org. Rode o OpenOffice.org e abra um novo documento de texto ou abra o Writer diretamente.<br> <br> No documento em branco, digite seu glossário da seguinte forma: um termo da língua fonte, um espaço com o tabulador, um termo da língua destino, um espaço com o tabulador, um comentário ou explicação para o item e um retorno (tecla Enter). A tecla de tabulação está no lado esquerdo do teclado. Se você não quiser adicionar comentários, pode omitir o segundo espaço com a tecla Tab. Um "termo" pode ser uma única palavra ou uma frase inteira. Na segunda linha, insira o segundo termo e a sua tradução.<br>  <br> Quando terminar de digitar os termos, você terá duas "colunas" de termos, uma na língua fonte à esquerda e outra na língua destino à direita, e possivelmente uma terceira coluna, contendo seus comentários e explicações. Os caracteres do espaço de tabulação ( → no exemplo abaixo) e do Enter (¶) podem ser visualizados com um clique no ícone ¶ na barra padrão do Writer. Aqui estão algumas linhas de um glossário de Português-Alemão:<br> 
+<br>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; palavra→Wort→das (-/e/s, Wörter/-e)¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; casa pequena→Häuschen→das, (pl&nbsp;Häuschen)¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; cão→Hund→m, f Hündin&nbsp;¶</div>
+<div style="font-family: Courier New,Courier,monospace;">&nbsp;&nbsp;&nbsp; cavalo→Pferd→n, m Hengst f Stute n Fohlen¶</div>
+<br>
+NÃO use a função "colunas" do OpenOffice.org para criar colunas: basta separar cada par de termos (fonte e destino) com um espaço de tabulação.<br> <br> Quando terminar de inserir os termos, clique em <span
+ style="font-style: italic;">Arquivo &gt; Salvar como</span>. Na caixa "Local do arquivo" digite um nome para o glossário, seguido pela extensão  "<span style="font-weight: bold;">.utf8</span>" (p.ex. "<span style="font-style: italic;">MeuGlossario.utf8</span>").&nbsp;No campo "<span style="font-style: italic;">Filtro</span>", selecione "<span style="font-style: italic;">Text Encoded (.txt.)</span>".&nbsp; Desmarque a caixa "<span style="font-style: italic;">Extensão automática do nome de arquivo</span>" e marque "<span style="font-style: italic;">Editar as configurações do filtro</span>":<br> <br> <img alt="caixa de diálogo 'gravar arquivo' para o glossário"
+ src="images/saveglossary.png"><br> <br> Clique em OK para confirmar. Uma caixa de diálogo aparece com duas opções:&nbsp; "<span
+ style="font-style: italic;">Manter o formato atual</span> e&nbsp; "<span style="font-style: italic;">Salvar em formato ODF</span>". Selecione "<span style="font-style: italic;">Manter o formato atual</span>" para gravar no formato de arquivo de texto codificado. Na caixa de diálogo Opções de Filtro ASCII (ver abaixo), selecione "<span style="font-style: italic;">Unicode (UTF-8)</span>" no conjunto de caracteres.<br> <br> <img alt="opções de filtro de arquivo ascii para glossário"
+ src="./images/AsciiFilteroptions.png"><br> <br> Clique em OK para confirmar.<br> <br> Depois de criar um projeto OmegaT, copie ou mova este arquivo para a pasta <span style="font-style: italic;">\glossary</span>  do projeto. Se o projeto já estiver aberto, é preciso recarregá-lo após copiar o arquivo de glossário. Se quiser, você pode fazer alterações em um arquivo de glossário enquanto ele está sendo usado no projeto. As mudanças no glossário são detectadas aproximadamente uma vez a cada segundo e as modificações são carregadas de forma transparente no background; portanto, não há necessidade de recarregar o projeto após gravar um novo arquivo de glossário.<br> <br> Quando um segmento fonte é aberto, se o glossário tiver termos que correspondam aos do segmento aberto, o painel do glossário mostrará tais entradas (você pode ter mais de um glossário disponível, e eles podem ser armazenados em subpastas do <i>glossary</i>).
+<h3><a name="multiterm" id="multiterm"></a>Usando Trados Multiterm</h3>
+<p>Os glossários criados com a função de exportação do Trados Multiterm, por exemplo, podem ser usados como glossários no OmegaT sem modificação adicional, desde que tenham a extensão de arquivo <code>.tab</code>  e os campos dos termos de origem e destino sejam os dois primeiros campos, respectivamente. Se você exportar utilizando a opção "Tab-delimited export", terá que apagar as 5 primeiras colunas (Seq. Nr, Date created, etc.) antes dos dois itens que interessam.</p>
+<hr>
+<h2><a name="commonglossaryproblems" id="commonglossaryproblems"></a>Problemas comuns com glossário</h2>
+<dl>
+  <dt><span style="font-weight: bold;">Problema:</span> os termos do glossário não são mostrados.</dt>
+  <dd>Possíveis causas:</dd>
+</dl>
+<ul>
+  <li>não há nenhum arquivo na pasta "glossary"</li>
+  <li>o arquivo de glossário está vazio</li>
+  <li>os itens não são separados por um caractere TAB</li>
+  <li>o arquivo de glossário não tem a extensão correta (.tab ou. utf8)</li>
+  <li>Não há uma correspondência EXATA entre a entrada do glossário e o texto fonte do seu documento - por exemplo, quando a palavra está no plural</li>
+  <li>o arquivo de glossário não tem a codificação correta</li>
+  <li>não há termos no segmento ativo que combinem com qualquer dos termos do glossário</li>
+  <li>um ou mais dos problemas acima podem ter sido corrigidos, mas o projeto não foi recarregado.</li>
+</ul>
+<dl>
+  <dt><span style="font-weight: bold;">Problema:</span> no painel de glossário, alguns caracteres não são mostrados corretamente (mas os mesmos caracteres são exibidos corretamente no painel de edição).</dt>
+  <dd>Possíveis causas:</dd>
+</dl>
+<ul>
+  <li>a extensão e a codificação do arquivo não correspondem.</li>
+</ul>
+  <hr>
+  <table style="width: 100%;" border="0" cellpadding="2" cellspacing="2" summary="just formatting">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legais</a> </td>
+        <td style="text-align: center;"><a href="index.html">Home</a>
+        </td>
+        <td style="text-align: right;"><a href="xindex.html">Índice</a> </td>
+      </tr>
+    </tbody>
+  </table>
 
 </body>
 </html>

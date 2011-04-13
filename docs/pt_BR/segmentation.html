@@ -1,201 +1,228 @@
 <html>
 <head>
-   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-   <title>Segmentação do texto fonte - OmegaT 1.6.1 Manual do Usuário</title>
+  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+  <title>Segmentação do texto fonte - Manual do Usuário, OmegaT 2.0 </title>
 </head>
+
 <body>
+  <h2>Segmentação do texto fonte</h2>
 
-<h1>Segmentação do texto fonte</h1>
+  <ul>
+    <li>
+      <p><a href="#structure">Segmentação baseada na estrutura do texto</a></p>
+    </li>
 
-<h2>Índice</h2></div>
-
-<ul type="none">
-   <li>1. <a href="#Segmentation_Basics">Introdução à segmentação</a></li>
-
-   <li>2. <a href="#Sentence_Segmentation">Segmentação de sentenças</a>
+    <li>
+      <p><a href="#sentence">Segmentação por sentenças</a></p>
 
       <ul>
-         <li>2.1. <a href="#About_Rules">Sobre as regras</a></li>
+        <li>
+          <p><a href="#about">Regras de Segmentação</a></p>
+        </li>
 
-         <li>2.2. <a href="#Rules_Setup">Definição das regras</a>
+        <li>
+          <p><a href="#setup">Definição das regras</a></p>
 
-            <ul>
-               <li>2.2.1. <a href="#Sets_of_Rules">Conjunto de regras</a></li>
-               <li>2.2.2. <a href="#Simple_examples">Exemplos simples</a></li>
-            </ul>
-         </li>
+          <ul>
+            <li>
+              <p><a href="#priority">Prioridade</a></p>
+            </li>
 
-         <li>2.3. <a href="#Regular_Expressions_to_use_in_segmentation_rules">Expressões regulares para usar nas regras de segmentação</a>
+            <li>
+              <p><a href="#creation">Criação de regras</a></p>
+            </li>
 
-            <ul>
-               <li>2.3.1. <a href="#Short_summary_of_regular-expression_constructs">Resumo de elaborações de expressões regulares</a></li>
-            </ul>
-         </li>
+            <li>
+              <p><a href="#break">Quebra/exceção</a></p>
+            </li>
+
+            <li>
+              <p><a href="#examples">Alguns exemplos simples</a></p>
+            </li>
+          </ul>
+        </li>
       </ul>
-   </li>
-</ul>
+    </li>
 
-<a name="Segmentation_Basics"></a>
-<h2>Introdução à segmentação</h2>
+    <li>
+      <p><a href="regexp.html">Construção de expressão regular</a></p>
+    </li>
+  </ul>
 
-<p>As ferramentas da memória de tradução trabalham com unidades de texto chamadas segmentos. Existem várias maneiras de segmentar um texto.</p>
+  <p>As ferramentas de memória de tradução trabalham com unidades de texto chamadas segmentos. O OmegaT tem duas maneiras de segmentar um texto: segmentação por parágrafo e por sentença. Para selecionar o tipo de segmentação, clique em <strong>Projeto → Propriedades...</strong> no menu principal e use a caixa de diálogo disponível. Note que a segmentação por parágrafo não é muito usada e na maioria dos projetos a segmentação por sentença é a opção preferida. Se escolher segmentação por sentença, você pode definir as regras; basta clicar em  <strong>Opções → Segmentação...</strong> no menu principal.</p>
 
-<p>O OmegaT analisa primeiro o texto pela segmentação de nível de estrutura Durante este processo somente a estrutura do arquivo fonte é usada para produzir segmentos. Por exemplo, os arquivos podem ser segmentados nas quebras de linha, nas linhas vazias ou não serem segmentados no nível de estrutura. Os arquivos com formatação (documentos OpenOffice.org, OpenDocument, XHTML e HTML) são segmentados nas tags de nível de bloco (ou seja, parágrafos).</p>
+  <p>Note que uma boa parte do desenvolvimento foi gasto na criação de regras de segmentação confiável, por isso na maioria dos casos, você não precisará se envolver criando suas regras próprias de segmentação. Por outro lado, esta funcionalidade pode ser muito útil em casos especiais, possibilitando-lhe traduzir o que precisa ser traduzido sem correr o perigo de mudar o que deve permanecer inalterado.</p>
 
-<p>Atributos de objeto traduzíveis (em arquivos  XHTML ou HTML) são também extraídos para segmentos separados.</p>
+  <p><strong>Alerta!</strong> Mudar as opções de filtros com um projeto aberto pode resultar na perda de dados. Se você modificar as opções de segmentação com um projeto aberto, terá que recarregar o projeto para que as modificações sejam efetivadas.</p>
+  <hr>
 
-<p>OmegaT também pode segmentar por sentenças. A segmentação de sentenças ocorre após a segmentação de nível de estrutura. Os segmentos criados durante os dois processos não podem ser modificados (divididos ou combinados) durante a tradução. Esta é uma limitação do OmegaT que nós reconhecemos.</p>
+  <h2><a name="structure" id="structure"></a>Segmentação baseada na estrutura do texto</h2>
 
-<p>Se você não estiver contente com a segmentação, terá que modificar o arquivo externamente e/ou modificar as regras de segmentação. Depois disso, terá que recarregar o projeto para que suas modificações sejam consideradas pelo programa.</p>
+  <p>O OmegaT analisa primeiro o texto pela segmentação usando o nível de estrutura. Durante este processo somente a estrutura do arquivo fonte é usada para produzir segmentos.</p>
 
-<a name="Sentence_Segmentation"></a>
-<h2>Segmentação de sentenças</h2>
+  <p>Por exemplo, os <a href="fileFilters.html#filter_options">arquivos de texto</a> podem ser segmentados nas quebras de linha, nas linhas vazias ou não serem segmentados. Os arquivos com formatação (documentos OpenOffice.org, HTML, etc.) são segmentados nas tags de nível de bloco (ou seja, parágrafos). Os <a href=
+  "fileFilters.html#filter_options">atributos</a> de objeto traduzíveis em arquivos  XHTML ou HTML podem ser extraídos como segmentos separados.</p>
+  <hr>
 
-<p>Após o OmegaT segmentar o arquivo fonte em unidades lógicas -- os arquivos geralmente formatados em parágrafos -- ele segmentará esses parágrafos em sentenças, caso você não tenha desativado a opção de segmentação de sentença. De modo geral, o OmegaT segmenta os blocos lógicos do arquivo fonte conforme o que você determinar. Entretanto, o ajuste <strong>predefinido</strong> do OmegaT é segmentar em frases, o que chamaremos de segmentação de <strong>sentença</strong>.</p>
+  <h2><a name="sentence" id="sentence"></a>Segmentação por sentenças</h2>
 
-<p>A Segmentação de Sentença foi elaborada considerando o padrão <a href="http://www.lisa.org/standards/srx/">SRX (Segmentation Rules eXchange)&lt;/a&gt;, ou seja, Troca de Regras de Segmentação,  embora no momento o OmegaT não seja compatível com todos os recursos SRX, nem pode importar/exportar as regras definidas no formato SRX. Porém, se você sabe como o SRX funciona, já sabe como o OmegaT funciona, pois eles são mais ou menos o mesmo.</p>
+  <p>Após segmentar o arquivo fonte em unidades lógicas, o OmegaT segmentará esses blocos em sentenças.</p>
 
-<a name="About_Rules"></a>
-<h3>Sobre as regras</h3>
+  <h3><a name="about" id="about"></a>Regras de Segmentação</h3>
 
-<p>Existem dois tipos possíveis de regras</p>
+  <p>O processo de segmentação pode ser ilustrado da seguinte forma: imagine o cursor passando pelo texto, um caractere de cada vez. Para cada posição do cursor, é usada uma regra em uma determinada sequência para verificar se o padrão <strong>Antes</strong> se aplica ao texto que está à esquerda do cursor e o padrão <strong>Depois</strong> ao texto que está à direita do cursor. Se a regra corresponder, o programa interrompe a verificação das regras (exceto a regra de exceção) ou cria um novo segmento (para a regra de quebra).</p>
 
-<ul>
-   <li>As regras de quebra dividem o texto em segmentos.</li>
-   <li>As regras de exceção especificam a parte do texto que não deve ser separada das outras.</li>
-</ul>
+  <p>A segmentação por sentença foi implementada baseada no padrão <a href="http://www.lisa.org/standards/srx/">Segmentation Rules eXchange (SRX)</a>  - note que nem todos os recursos SRX são suportados. E não é possível importar/exportar regras definidas no formato SRX. Porém, se você sabe como o SRX funciona, saberá como o OmegaT processa a segmentação.</p>
 
-<p>Exemplo de regra de quebra: <i>"Isto fazia sentido? Eu não tinha certeza."</i> pode ser segmentada em duas sentenças depois do  "<code>?</code>". Deve haver uma regra de quebra para o  "<code>?</code>".</p>
+  <p>Existem dois tipos de regras:</p>
 
-<p>Exemplo de regra de exceção: <i>"Quem tem medo da Sra. Woolf?"</i> não pode ser segmentada após o  "<code>.</code>". Deve haver uma regra de exceção para  "<code>Sra.</code>".</p>
+  <ul>
+    <li>
+      <p><strong>Regras de quebra</strong> separam o texto fonte em segmentos. Por exemplo, <i>"Isto fez sentido? Eu não tinha certeza." </i>deve ser separado em dois segmentos e para isso deve haver uma regra de quebra para "<code>?</code>".</p>
+    </li>
 
-<p>As regras de quebra predefinidas devem ser suficientes para a maioria dos idiomas europeus e japonês, mas recomendamos definir mais regras de exceção para o idioma que você traduz, pois é impossível predefinir todas as exceções possíveis para todos os idiomas possíveis.</p>
+    <li>
+      <p><strong>Regras de exceção</strong> especificam que partes do texto NÃO devem ser separadas. Apesar do ponto de abreviatura, <i>"Sra. Dumont "</i> não deve ser separada em dois segmentos, portanto uma regra de exceção deve ser criada para Sra. (bem como para Sr. e Srta. e Dr. e prof. e etc.), seguida por um ponto.</p>
+    </li>
+  </ul>
 
-<a name="Rules_Setup"></a>
-<h3>Definição das regras</h3>
+  <p>As regras de quebra predefinidas devem ser suficientes para a maioria das línguas europeias e para o japonês. Dada a flexibilidade desse recurso, você pode definir mais regras de excepção para a língua que está traduzindo, e obter segmentos mais significativo e coerente.</p>
 
-<p>Para definir as regras, selecione <strong>Opções &gt; Segmentação...</strong> no menu principal. Observe que se você modificar as opções de segmentação quando um projeto estiver aberto, terá que recarregar o projeto para que as modificações sejam efetivadas.</p>
+  <h3><a name="setup" id="setup"></a>Definição das regras</h3>
 
-<a name="Sets_of_Rules"></a>
-<h4>Conjunto de regras</h4>
+  <h3><a name="priority" id="priority"></a>Prioridade</h3>
 
-<p>Todos os conjuntos de regras de segmentação com um padrão de idioma correspondente são aplicados na ordem de prioridade estabelecida, portanto as regras para um idioma específico devem ter maior prioridade do que aquelas predefinidas.</p>
+  <p>Todos os conjuntos de regras de segmentação com um padrão de língua correspondente são aplicados na ordem de prioridade estabelecida, portanto as regras para uma língua específica devem ter maior prioridade do que aquelas predefinidas. Por exemplo, as regras para francês canadense (FR-CA) devem ter prioridade às regras para o francês (FR.*), bem como àquelas definidas como padrão (.*). Assim, ao traduzir para o francês canadense, seu projeto usará as regras definidas para esta língua, depois as regras para o francês e as regras padrão, seguindo a ordem correta.</p>
 
-<p>Por exemplo, as regras para francês canadense (FR-CA) devem ter prioridade às regras para o francês (FR.*), e a outros idiomas definidos como padrão (.*). Assim, ao traduzir para o francês canadense, seu projeto usará as regras definidas para este idioma, depois as regras para o francês e as regras do idioma padrão, seguindo a ordem correta.</p>
+  <h3><a name="creation" id="creation"></a>Criação de regras</h3>
 
-<p>Para criar um conjunto vazio de regras, clique em <strong>Adicionar</strong> na metade superior da caixa de diálogo. Será exibida uma linha vazia na parte inferior de uma tabela. Mude o nome do conjunto de regras e o padrão do idioma. A sintaxe do padrão do idioma se ajusta à sintaxe de expressões regulares. Veja acima a seção <a href="#Short_summary_of_regular-expression_constructs"> Resumo de elaborações de expressões regulares</a>.</p>
+  <p>Para editar ou expandir um conjunto de regras existentes, basta clicar nas regras na tabela superior. As regras serão mostradas na janela inferior.</p>
 
-<p>Se o seu conjunto de regras processa um par de idioma-país, recomendamos que o coloque no topo da lista usando o botão <strong>Mover para cima</strong>.</p>
+  <p>Para criar um conjunto de regras para uma nova língua, clique em <strong>Adicionar</strong> na metade superior da caixa de diálogo. Na parte de baixo da tabela será acrescentada uma linha <font color="black" face=
+  "Times New Roman" size="3"><span style="font-size: 12pt; color: black;" lang=
+  "EN-US">(faça a rolagem para tela para ver a nova linha)</span></font>. Mude o nome do conjunto de regras e o padrão da língua. A sintaxe do padrão da língua segue a sintaxe das <a href="regexp.html">expressões regulares</a>. Se o seu conjunto de regras processa um par de língua, recomendamos que o coloque no topo da lista usando o botão <strong>Mover para cima</strong>.&nbsp;</p>
 
-<p>Para editar um conjunto de regras, basta clicar nele na tabela; as regras aparecerão na parte inferior da janela.</p>
+  <h3><a name="break" id="break"></a>Quebra/exceção</h3>
 
-<p>A caixa de seleção 'Quebra/exceção' determina se é uma regra de quebra (caixa selecionada) ou uma regra de exceção (caixa não selecionada). Duas expressões regulares Antes e Depois especificam o que deve vir antes e depois de uma posição, de forma a indicar se é uma regra de exceção ou uma regra de quebra.</p>
+  <p>A caixa de seleção 'Quebra/exceção' determina se é uma regra de quebra (caixa selecionada) ou uma regra de exceção (caixa não selecionada). Duas expressões regulares Antes e Depois especificam o que deve vir antes e depois de uma posição, de forma a indicar se é uma regra de exceção ou uma regra de quebra.</p>
 
-<p>O processo de segmentação pode ser simplificado conforme segue. Imagine um cursor movendo-se no espaço logo após o primeiro caractere até antes do último caractere do texto do segmento. Para cada posição do cursor, consideramos cada regra em uma determinada ordem e tentamos aplicar ao padrão <strong>Antes</strong> para todo o texto que está à esquerda do cursor e o padrão <strong>Depois</strong> para o texto que está à direita de forma que encostem no cursor.</p>
+  <h3><a name="examples" id="examples"></a>Alguns exemplos simples</h3>
 
-<p>Para as regras que funcionam, se forem de exceção nada faremos senão parar de examinar mais regras; se forem regras de quebra, o texto à esquerda será considerado um segmento separado, isto válido para qualquer posição de cursor no texto.</p>
+  <table summary="just formatting" border="0" cellpadding="4" cellspacing="0">
+    <tbody>
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p><strong>Intenção</strong></p>
+        </td>
 
-<a name="Simple_examples"></a>
-<h4>Exemplos simples</h4>
+        <td>
+          <p><strong>Antes</strong></p>
+        </td>
 
-<p>
-<dl>
-   <dt><strong>Objetivo:</strong> definir uma segmentação após um ponto ('<code>.</code>') e antes de um espaço</dt>
-   <dd>Antes: <code>\.</code> Depois: <code>\s</code> <br> <strong>Observação:</strong> "<code>\.</code>" significa o caractere "<code>.</code>" <br> "<code>\s</code>" significa qualquer caractere de espaçamento em branco</dd>
+        <td>
+          <p><strong>Depois</strong></p>
+        </td>
 
-   <dt><strong>Objetivo:</strong> não segmentar após "<code>Mr.<c/code>"</dt>
-   <dd>Antes: <code>Mr\.</code> Depois: <code>\s</code> <br> <strong>Observação:</strong> não esqueça de deixar a caixa de seleção <strong>desmarcada</strong>
-   </dd>
+        <td width="52%">
+          <p><strong>Observação:</strong></p>
+        </td>
+      </tr>
 
-   <dt><strong>Meta:</strong> definir uma segmentação após "。" (ponto usado no japonês)</dt>
-   <dd>Antes: 。 Depois: (vazio) <br> <strong>Observação:</strong> você pode deixar um campo vazio</dd>
-</dl>
-</p>
+      <tr>
+        <td width="26%">
+          <p>definir uma segmentação após um ponto ('<code>.</code>') e antes de um espaço</p>
+        </td>
 
-<a name="Regular_Expressions_to_use_in_segmentation_rules"></a>
-<h3>Expressões regulares para usar nas regras de segmentação</h3>
+        <td>
+          <p><code>\.</code></p>
+        </td>
 
-<p>As próprias regras de segmentação são representadas com o uso de expressões regulares. Isto permite o máximo em flexibilidade na hora de definir as regras e estar de conformidade com o SRX.</p>
+        <td>
+          <p><code>\s</code></p>
+        </td>
 
-<a name="Short_summary_of_regular-expression_constructs"></a>
-<h4>Resumo de elaborações de expressões regulares</h4>
+        <td width="52%">
+          <p>"<code>\.</code>" significa o caractere "<code>.</code>" "<code>\s</code>" significa qualquer caractere de espaçamento em branco</p>
+        </td>
+      </tr>
 
-<p>Essas não são as únicas elaborações que podem ser usadas nas regras de segmentação do OmegaT; são apenas as mais usadas. O OmegaT é compatível com todos os recursos de expressões regulares, conforme descrito no padrão <a href="http://www.lisa.org/standards/srx/">SRX</a>.</p>
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p>não segmentar após Dr.</p>
+        </td>
 
-<table border="0" width="80%" cellpadding="1" cellspacing="0" summary="Elaborações de expressões regulares e o que elas correspondem">
-    <tr bgcolor="#DDEEFF"><th width="10%" align="left" id="construct">Elaborar&nbsp;</th><th align="left">Correspondências</th></tr>
+        <td>
+          <p><code>Dr\.</code></p>
+        </td>
 
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="flags">Flags</th></tr>
-    <tr><td><tt>(?i)</tt></td><td>Ativa correspondências que ignoram maiúsculas e minúsculas (o padrão predefinido faz a distinção entre maiúsculas e minúsculas).</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr><th align="left" colspan="2" id="characters">Caracteres</th></tr>
-    <tr><td><strong>x</strong></td><td>O caractere <strong>x</strong>, exceto o seguinte...</td></tr>
+        <td>
+          <p><code>\s</code></p>
+        </td>
 
-    <tr><td><tt>\u</tt><strong>hhhh</strong></td><td>O caractere com valor hexadecimal&nbsp;<tt>0x</tt><strong>hhhh</strong></td></tr>
-    <tr><td><tt>\t</tt></td><td>O caractere de tabulação (<tt>'\u0009'</tt>)</td></tr>
-    <tr><td><tt>\n</tt></td><td>O caractere de nova linha (alimentação de linha)  (<tt>'\u000A'</tt>)</td></tr>
+        <td width="52%">
+          <p>É uma regra de exceção, portanto a caixa de seleção da regra deve ser desmarcada</p>
+        </td>
+      </tr>
 
-    <tr><td><tt>\r</tt></td><td>O caractere de retornar ao início da linha (<tt>'\u000D'</tt>)</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="quot">Escapar</th></tr>
-    <tr><td><tt>\</tt></td><td>Nada, mas escapa o caractere seguinte. Isto é necessário se você quiser inserir quaisquer metacaracteres <code>!$()*+.&lt;&gt;?[\]^{|}</code> para corresponder a eles mesmos.</td></tr>
+      <tr>
+        <td width="26%">
+          <p>definir um segmento após "。" (ponto em japonês)</p>
+        </td>
 
-    <tr><td><tt>\\</tt></td><td>Por exemplo, este é um caractere de barra invertida</td></tr>
-    <tr><td><tt>\Q</tt></td><td>Nada, mas escapa todos os caracteres até <tt>\E</tt></td></tr>
-    <tr><td><tt>\E</tt></td><td>Nada, mas finaliza o escape iniciado pelo <tt>\Q</tt></td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="classes">Classes de caracteres</th></tr>
+        <td>
+          <p><span lang="zxx"><code>。</code></span></p>
+        </td>
 
-    <tr><td><tt>[abc]</tt></td><td><tt>a</tt>, <tt>b</tt>, ou <tt>c</tt> (classe simples)</td></tr>
-    <tr><td><tt>[^abc]</tt></td><td>Qualquer caractere exceto <tt>a</tt>, <tt>b</tt>, ou <tt>c</tt> (negação)</td></tr>
+        <td></td>
 
-    <tr><td><tt>[a-zA-Z]</tt></td><td><tt>a</tt> até <tt>z</tt> ou <tt>A</tt> até <tt>Z</tt>, inclusive (intervalo)</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="predef">Classes de caracteres predefinidas</th></tr>
+        <td width="52%">
+          <p>Note que <i>após</i> está vazio</p>
+        </td>
+      </tr>
 
-    <tr><td><tt>.</tt></td><td>Qualquer caractere (exceto para terminadores de linha)</td></tr>
-    <tr><td><tt>\d</tt></td><td>Um dígito: <tt>[0-9]</tt></td></tr>
-    <tr><td><tt>\D</tt></td><td>Um caractere que não seja dígito: <tt>[^0-9]</tt></td></tr>
-    <tr><td><tt>\s</tt></td><td>Um caractere de espaçamento: <tt>[ \t\n\x0B\f\r]</tt></td></tr>
+      <tr bgcolor="#DDDDDD">
+        <td width="26%">
+          <p>não segmentar após Sr. e Sra. </p>
+        </td>
 
-    <tr><td><tt>\S</tt></td><td>Um caractere que não seja de espaçamento: <tt>[^\s]</tt></td></tr>
-    <tr><td><tt>\w</tt></td><td>Um caractere de palavra: <tt>[a-zA-Z_0-9]</tt></td></tr>
-    <tr><td><tt>\W</tt></td><td>Um caractere que não seja de palavra: <tt>[^\w]</tt></td></tr>
-    <tr><th>&nbsp;</th></tr>
+        <td>
+          <p><code>Sr??a??\.</code></p>
+        </td>
 
-    <tr align="left"><th colspan="2" id="bounds">Correspondentes de limite (borda)</th></tr>
-    <tr><td><tt>^</tt></td><td>O início de uma linha</td></tr>
-    <tr><td><tt>$</tt></td><td>O final de uma linha</td></tr>
-    <tr><td><tt>\b</tt></td><td>Limite de uma palavra</td></tr>
-    <tr><td><tt>\B</tt></td><td>Limite que não seja de palavra</td></tr>
+        <td>
+          <p><code>\s</code></p>
+        </td>
 
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="greedy">Quantificadores vorazes (gulosos ou possessivos)</th></tr>
-    <tr><td colspan="2">Eles farão o maior número de correspondências possíveis. Por exemplo, <code>a+</code> corresponderá  a <code>aaa</code> em <code>aaabbb</code></td></tr>
-    <tr><td><strong>X</strong><tt>?</tt></td><td><strong>X</strong>, uma ou nenhuma</td></tr>
+        <td width="52%">
+          <p>regra de exceção - ver o uso de ? em expressões regulares (identificador não-guloso)</p>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <hr>
 
-    <tr><td><strong>X</strong><tt>*</tt></td><td><strong>X</strong>, zero ou mais vezes</td></tr>
-    <tr><td><strong>X</strong><tt>+</tt></td><td><strong>X</strong>, uma ou mais vezes</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="reluc">Quantificadores relutantes (não-vorazes)</th></tr>
+  <h2><a name="regex" id="regex"></a>Construir expressões regulares</h2>
 
-    <tr><td colspan="2">Eles farão o menor número possível de correspondências. Por exemplo, <code>a+?</code> corresponderá o primeiro <code>a</code> em <code>aaabbb</code></td></tr>
-    <tr><td><strong>X</strong><tt>??</tt></td><td><strong>X</strong>, uma ou nenhuma</td></tr>
-    <tr><td><strong>X</strong><tt>*?</tt></td><td><strong>X</strong>, zero ou mais vezes</td></tr>
+  <p>As expressões regulares usadas em segmentação são aquelas suportadas pelo Java. Um resumo está disponível no anexo <a href="regexp.html">Construir expressões regulares</a>. Se precisar de informações específicas, consulte  <a href=
+  "http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html">http://java.sun.com/j2se/1.5/docs/api/java/util/regex/Pattern.html</a>.</p>
 
-    <tr><td><strong>X</strong><tt>+?</tt></td><td><strong>X</strong>, uma ou mais vezes</td></tr>
-    <tr><th>&nbsp;</th></tr>
-    <tr align="left"><th colspan="2" id="logical">Operadores lógicos</th></tr>
-    <tr><td><strong>XY</strong></td><td><strong>X</strong> seguido por <strong>Y</strong></td></tr>
+  <p>Na Internet há tutoriais simples, como por exemplo <a href=
+  "http://www.regular-expressions.info/quickstart.html">http://www.regular-expressions.info/quickstart.html</a>.</p>
+  <hr>
 
-    <tr><td><strong>X</strong><tt>|</tt><strong>Y</strong></td><td>Ou <strong>X</strong> ou <strong>Y</strong></td></tr>
-    <tr><td><tt>(</tt><strong>XY</strong><tt>)</tt></td><td><strong>XY</strong> como um grupo único</td></tr>
+  <table summary="just formatting" style="width: 100%;" border="0" cellpadding=
+  "2" cellspacing="2">
+    <tbody>
+      <tr>
+        <td style="text-align: left;"><a href="legalNotices.html">Avisos legais</a></td>
 
-</table>
+        <td style="text-align: center;"><a href="index.html">Home</a></td>
 
-<hr>
-<p><a href="legalNotices.html" title="Avisos legais">Avisos legais</a></p>
-
+        <td style="text-align: right;"><a href="xindex.html">Índice</a></td>
+      </tr>
+    </tbody>
+  </table>
 </body>
 </html>

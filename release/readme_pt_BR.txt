@@ -103,7 +103,7 @@ Usuário do Mac: o JRE já está instalado no Mac OS X.
 
 O Linux em sistemas PowerPC: os usuários precisarão baixar o JRE da IBM, pois a Sun não oferece um JRE para sistemas PPC. Neste caso, baixe o JRE do:
 
-    [fuzzy]http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
+    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
 
 
 3.2 Instalação

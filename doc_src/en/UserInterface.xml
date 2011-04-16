@@ -575,9 +575,7 @@
 
       <itemizedlist>
         <listitem>
-          <para>match percentage when the tokenizer plugin is used (see
-          Appendix <link linkend="Ap5.using.tokenizers.inOmegaT">"Using
-          tokenizers in OmegaT"</link>)</para>
+          <para>match percentage when the tokenizer plugin is used</para>
         </listitem>
       </itemizedlist>
 

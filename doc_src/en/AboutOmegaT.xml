@@ -77,20 +77,20 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold"> Start Using OmegaT in 5
-        Minutes!:</emphasis> this chapter is intended as an Instant Start
-        Guide for beginners and “tyre kickers”, showing the complete procedure
-        from opening a new translation project through to completing the
-        translation.</para>
+        <para><emphasis role="bold"> Instant start guide:</emphasis> this
+        chapter is intended as an Instant Start Guide for beginners and “tyre
+        kickers”, showing the complete procedure from opening a new
+        translation project through to completing the translation.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Installing OmegaT and running it:
+        <para><emphasis role="bold">Installing and running OmegaT:
         </emphasis>this chapter is useful when you first begin using OmegaT.
         It contains the specific instructions on how to install OmegaT and run
-        it on Windows, Mac OS X and Linux.</para>
+        it on Windows, Mac OS X and Linux. For advanced users, the chapter
+        describes the command line mode and its possibilities.</para>
       </listitem>
     </itemizedlist>
 

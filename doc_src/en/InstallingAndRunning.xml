@@ -2,160 +2,7 @@
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <chapter id="Ch02.installing.and.running">
-  <title>Installing <application>OmegaT</application></title>
-
-  <section id="Linux.Intel.users">
-    <title>Linux (Intel) Users<indexterm class="singular">
-        <primary>Installing OmegaT</primary>
-
-        <secondary>Linux</secondary>
-      </indexterm></title>
-
-    <section id="which.package.to.download.Linux">
-      <title>Downloading the right package</title>
-
-      <para>Do you have a Java implementation compatible with Oracle's Java
-      1.5 JRE?</para>
-
-      <itemizedlist>
-        <listitem>
-          <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.2.x_Without_JRE.zip</emphasis>.</para>
-        </listitem>
-
-        <listitem>
-          <para><emphasis role="bold">No / I don't know:</emphasis> download
-          <emphasis>OmegaT_2.2.x_Linux.tar.bz2.</emphasis></para>
-
-          <para>This package is bundled with Oracle's Java Runtime
-          Environment. This JRE will not interfere with other Java
-          implementations that may already be installed on your system.</para>
-        </listitem>
-      </itemizedlist>
-    </section>
-
-    <section id="OmegaT.installation.Linux">
-      <title><application>Installing OmegaT</application> </title>
-
-      <para>Unpack/untar the downloaded file. This will create an omegat/
-      folder in the working folder in which you will find all the files needed
-      to run <application>OmegaT</application>. To untar the
-      <emphasis>.tar.gz</emphasis> file:</para>
-
-      <para><emphasis>$ tar xf downloaded_file.tar.gz</emphasis></para>
-    </section>
-
-    <section id="adding.OmegaT.to.your.menus.or.panels">
-      <title>Adding <application>OmegaT</application> to your menus (KDE) or
-      panels (Gnome)</title>
-
-      <section id="KDE.users">
-        <title>KDE 4 Users<indexterm class="singular">
-            <primary>Customizing OmegaT</primary>
-
-            <secondary>KDE 4</secondary>
-          </indexterm></title>
-
-        <para>You can add <application>OmegaT</application> to your menus as
-        follows:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>Press <emphasis role="bold"> <keysym>Alt+F2</keysym>
-            </emphasis> to show KRunner. Type
-            <emphasis>kmenuedit+enter</emphasis> to run the command. The
-            KMenuEditor appears. In KMenuEditor select <emphasis>File -&gt;
-            New Item.</emphasis></para>
-          </listitem>
-
-          <listitem>
-            <para>Then, after selecting a suitable menu, add a submenu/item
-            with <emphasis>File - New</emphasis> Submenu and <emphasis>File -
-            New Item</emphasis>. Enter <application>OmegaT</application> as
-            the name of the new item.</para>
-          </listitem>
-
-          <listitem>
-            <para>In the "Command" field, use the navigation button to find
-            your <application>OmegaT</application> launch script (the file
-            named <application>OmegaT</application> in the unpacked folder),
-            and select it.</para>
-          </listitem>
-
-          <listitem>
-            <para>Click on the icon button (to the right of the
-            Name/Description/Comment fields)</para>
-          </listitem>
-
-          <listitem>
-            <para>Other Icons - Browse, and navigate to the /images subfolder
-            in the <application>OmegaT</application> application folder.
-            Select the <application>OmegaT</application>.png icon.</para>
-          </listitem>
-
-          <listitem>
-            <para>Finally, save the changes with <emphasis>File -
-            Save.</emphasis></para>
-          </listitem>
-        </itemizedlist>
-      </section>
-
-      <section id="GNOME.users">
-        <title>GNOME Users<indexterm class="singular">
-            <primary>Customizing OmegaT</primary>
-
-            <secondary>GNOME</secondary>
-          </indexterm></title>
-
-        <para>You can add <application>OmegaT</application> to your menus as
-        follows:</para>
-
-        <itemizedlist>
-          <listitem>
-            <para>Right-click on the panel - <emphasis>Add New
-            Launcher.</emphasis></para>
-          </listitem>
-
-          <listitem>
-            <para>Enter "<application>OmegaT</application>" in the "Name"
-            field; in the "Command" field, use the navigation button to find
-            your <application>OmegaT</application> launch script (the file
-            named <application>OmegaT</application> in the unpacked folder).
-            Select it and confirm with OK.</para>
-          </listitem>
-
-          <listitem>
-            <para>Click on the icon button, then hit
-            <emphasis>Browse...</emphasis> and navigate to the /images
-            subfolder in the <application>OmegaT</application> application
-            folder. Select the
-            <emphasis><application>OmegaT</application>.png</emphasis> icon.
-            GNOME may fail to display the icon files in the available formats
-            and initially appear to expect an SVG file, but if the folder is
-            selected, the files should appear and
-            <application>OmegaT</application>.png can be selected.</para>
-          </listitem>
-        </itemizedlist>
-      </section>
-    </section>
-
-    <section id="running.OmegaT.Linux">
-      <title>Running <application>OmegaT<indexterm class="singular">
-          <primary>Running OmegaT</primary>
-
-          <secondary>Linux</secondary>
-        </indexterm></application></title>
-
-      <para>You can launch OmegaT from the command line with a script that
-      includes start-up options or you can click on
-      <emphasis><application>OmegaT</application>.jar</emphasis> to launch it
-      directly. Methods differ depending on the distribution. Make sure that
-      your <emphasis>PATH </emphasis>settings are correct and that
-      .<emphasis>jar</emphasis> files are properly associated with a Java
-      launcher. Check "Command line launching" below for more
-      information.</para>
-    </section>
-  </section>
+  <title>Installing and running <application>OmegaT</application></title>
 
   <section>
     <title id="Windows.users">Windows Users<indexterm class="singular">
@@ -165,7 +12,7 @@
       </indexterm></title>
 
     <section>
-      <title id="which.package.to.download.windows">Downloading the rightr
+      <title id="which.package.to.download.windows">Downloading the
       package</title>
 
       <para>Do you have a Java implementation compatible with Oracle's Java
@@ -308,6 +155,159 @@
     </section>
   </section>
 
+  <section id="Linux.Intel.users">
+    <title>Linux (Intel) Users<indexterm class="singular">
+        <primary>Installing OmegaT</primary>
+
+        <secondary>Linux</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.Linux">
+      <title>Downloading the right package</title>
+
+      <para>Do you have a Java implementation compatible with Oracle's Java
+      1.5 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Yes: </emphasis>download
+          <emphasis>OmegaT_2.2.x_Without_JRE.zip</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">No / I don't know:</emphasis> download
+          <emphasis>OmegaT_2.2.x_Linux.tar.bz2.</emphasis></para>
+
+          <para>This package is bundled with Oracle's Java Runtime
+          Environment. This JRE will not interfere with other Java
+          implementations that may already be installed on your system.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Linux">
+      <title><application>Installing OmegaT</application></title>
+
+      <para>Unpack/untar the downloaded file. This will create an omegat/
+      folder in the working folder in which you will find all the files needed
+      to run <application>OmegaT</application>. To untar the
+      <emphasis>.tar.gz</emphasis> file:</para>
+
+      <para><emphasis>$ tar xf downloaded_file.tar.gz</emphasis></para>
+    </section>
+
+    <section id="adding.OmegaT.to.your.menus.or.panels">
+      <title>Adding <application>OmegaT</application> to your menus (KDE) or
+      panels (Gnome)</title>
+
+      <section id="KDE.users">
+        <title>KDE 4 Users<indexterm class="singular">
+            <primary>Customizing OmegaT</primary>
+
+            <secondary>KDE 4</secondary>
+          </indexterm></title>
+
+        <para>You can add <application>OmegaT</application> to your menus as
+        follows:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Press <emphasis role="bold"> <keysym>Alt+F2</keysym>
+            </emphasis> to show KRunner. Type
+            <emphasis>kmenuedit+enter</emphasis> to run the command. The
+            KMenuEditor appears. In KMenuEditor select <emphasis>File -&gt;
+            New Item.</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para>Then, after selecting a suitable menu, add a submenu/item
+            with <emphasis>File - New</emphasis> Submenu and <emphasis>File -
+            New Item</emphasis>. Enter <application>OmegaT</application> as
+            the name of the new item.</para>
+          </listitem>
+
+          <listitem>
+            <para>In the "Command" field, use the navigation button to find
+            your <application>OmegaT</application> launch script (the file
+            named <application>OmegaT</application> in the unpacked folder),
+            and select it.</para>
+          </listitem>
+
+          <listitem>
+            <para>Click on the icon button (to the right of the
+            Name/Description/Comment fields)</para>
+          </listitem>
+
+          <listitem>
+            <para>Other Icons - Browse, and navigate to the /images subfolder
+            in the <application>OmegaT</application> application folder.
+            Select the <application>OmegaT</application>.png icon.</para>
+          </listitem>
+
+          <listitem>
+            <para>Finally, save the changes with <emphasis>File -
+            Save.</emphasis></para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="GNOME.users">
+        <title>GNOME Users<indexterm class="singular">
+            <primary>Customizing OmegaT</primary>
+
+            <secondary>GNOME</secondary>
+          </indexterm></title>
+
+        <para>You can add <application>OmegaT</application> to your menus as
+        follows:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Right-click on the panel - <emphasis>Add New
+            Launcher.</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para>Enter "<application>OmegaT</application>" in the "Name"
+            field; in the "Command" field, use the navigation button to find
+            your <application>OmegaT</application> launch script (the file
+            named <application>OmegaT</application> in the unpacked folder).
+            Select it and confirm with OK.</para>
+          </listitem>
+
+          <listitem>
+            <para>Click on the icon button, then hit
+            <emphasis>Browse...</emphasis> and navigate to the /images
+            subfolder in the <application>OmegaT</application> application
+            folder. Select the
+            <emphasis><application>OmegaT</application>.png</emphasis> icon.
+            GNOME may fail to display the icon files in the available formats
+            and initially appear to expect an SVG file, but if the folder is
+            selected, the files should appear and
+            <application>OmegaT</application>.png can be selected.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+
+    <section id="running.OmegaT.Linux">
+      <title>Running <application>OmegaT<indexterm class="singular">
+          <primary>Running OmegaT</primary>
+
+          <secondary>Linux</secondary>
+        </indexterm></application></title>
+
+      <para>You can launch OmegaT from the command line with a script that
+      includes start-up options or you can click on
+      <emphasis><application>OmegaT</application>.jar</emphasis> to launch it
+      directly. Methods differ depending on the distribution. Make sure that
+      your <emphasis>PATH </emphasis>settings are correct and that
+      .<emphasis>jar</emphasis> files are properly associated with a Java
+      launcher. Check "Command line launching" below for more
+      information.</para>
+    </section>
+  </section>
+
   <section id="MAC.OSX.users">
     <title>Mac OS X Users<indexterm class="singular">
         <primary>OS X</primary>
@@ -320,7 +320,7 @@
       </indexterm></title>
 
     <section id="which.package.to.download.OSX">
-      <title>Dowloading the right package</title>
+      <title>Dowloading the package</title>
 
       <para><application>OmegaT</application> 2.2 requires Java 1.5 to run.
       Use "Software Update..." from the Apple menu to update your Java
@@ -580,7 +580,7 @@
     <application>OmegaT</application> using the command line.</para>
 
     <section id="method1.opening.commandline.window">
-      <title>Method 1: opening a command line window</title>
+      <title>Opening a command line window</title>
 
       <para>A command line window is also referred to as a "terminal window".
       On Windows it is called an "MS-DOS window" and is available from the
@@ -626,25 +626,19 @@
       if you enter <emphasis>omegat</emphasis> instead of <emphasis>OmegaT
       </emphasis>!</para>
 
-      <para>This method has a particular benefit of being suitable for
-      debugging: if an error occurs during use of the program, an error
-      message is output in the terminal window which may contain useful
+      <para>This method has a particular benefit of being suitable for finding
+      causes of problems: if an error occurs during use of the program, an
+      error message is output in the terminal window which may contain useful
       information on the cause of the error.</para>
-    </section>
 
-    <section id="method2.changing.the.launch.script">
-      <title>Method 2: changing the .bat file/start-up script</title>
-
-      <para>Method 1 is a somewhat impractical way of launching a program
+      <para>The above method somewhat impractical way of launching a program
       routinely. For this reason, the two commands described above are
       contained in a file (a "script", also called a ".bat file" on Windows
       systems).</para>
 
       <para>When this file is executed, the commands within it are
       automatically carried out. Consequently, to make changes to the launch
-      command, it is sufficient to modify the file. When
-      <application>OmegaT</application> is launched from the file, the new
-      commands are then executed.</para>
+      command, it is sufficient to modify the file.</para>
     </section>
 
     <section id="launch.command.arguments">
@@ -804,205 +798,193 @@
     </section>
 
     <section id="omegat.command.arguments">
-      <title>OmegaT command arguments<indexterm class="singular">
+      <title>OmegaT in the command line mode<indexterm class="singular">
           <primary>Running OmegaT</primary>
 
-          <secondary>Launch script arguments</secondary>
+          <secondary>Command line mode</secondary>
         </indexterm></title>
 
-      <section id="omegat.console.mode">
-        <title><application><indexterm class="singular">
-            <primary>OmegaT console mode</primary>
+      <para>The purpose of the console mode is to use OmegaT as a translation
+      tool in a scripting environment. When started in console mode, no GUI is
+      loaded (so it will work on any console) and the given project is
+      automatically processed as requested.</para>
 
-            <seealso>Miscellanea</seealso>
-          </indexterm>OmegaT</application> Console Mode<indexterm
-            class="singular">
-            <primary>Miscellanea</primary>
+      <section id="console.mode.prerequisites">
+        <title>Prerequisites</title>
 
-            <secondary>OmegaT console mode</secondary>
-          </indexterm></title>
+        <para>To run <application>OmegaT</application> in the command line
+        mode, a valid <application>OmegaT</application> project must be
+        present. The location does not matter, since you have to add it to the
+        command line at the start-up anyway.</para>
 
-        <para>The purpose of the console mode is to use
-        <application>OmegaT</application> as a translation tool in a scripting
-        environment. When started in console mode, no GUI is loaded (so it
-        will work on any console) and the given project is automatically
-        translated.</para>
-
-        <section id="console.mode.prerequisites">
-          <title>Prerequisites</title>
-
-          <para>To run <application>OmegaT</application>, a valid
-          <application>OmegaT</application> project must be present. The
-          location does not matter, since you have to add it to the command
-          line at the start-up anyway.</para>
-
-          <para>If you need altered settings, the configuration files must be
-          available This can be achieved in two ways:</para>
-
-          <itemizedlist>
-            <listitem>
-              <para>Run <application>OmegaT</application> normally (with the
-              GUI) and specify the settings. If you start
-              <application>OmegaT</application> in console mode, it will use
-              the same settings.</para>
-            </listitem>
-
-            <listitem>
-              <para>If you can't run <application>OmegaT</application>
-              normally (no graphical environment available): copy the settings
-              files from some other <application>OmegaT</application>
-              installation on another machine to a specific directory. The
-              location does not matter, since you can add it to the command
-              line at startup. The relevant files are
-              <literal>filters.conf</literal> and
-              <literal>segmentation.conf</literal> and can be found in the
-              user home directory (E.g. <literal>C:\Documents and
-              Settings\%User%\<application>OmegaT</application></literal>
-              under windows, <literal>%user%/.omegat/</literal> under
-              Linux)</para>
-            </listitem>
-          </itemizedlist>
-        </section>
-
-        <section id="starting.in.console.mode">
-          <title>Starting in console mode</title>
-
-          <para>To start <application>OmegaT</application> in console mode,
-          some extra parameters have to be passed to it on startup. The most
-          important is <literal>&lt;project-dir&gt;</literal>, and
-          optionally<literal>--config-dir=&lt;config-dir&gt;.
-          </literal>Example:</para>
-
-          <para><literal>$&gt; java -jar <application>OmegaT</application>.jar
-          /path/to/project \</literal></para>
-
-          <para><literal> --config-dir=/path/to/config-files/
-          \</literal></para>
-
-          <para><literal> --mode=console-translate \</literal></para>
-
-          <para><literal> --source-pattern={regexp}</literal></para>
-
-          <para><emphasis role="bold">Explanation:</emphasis></para>
-
-          <itemizedlist>
-            <listitem>
-              <para><literal>&lt;project-dir&gt;</literal> tells
-              <application>OmegaT</application> where to find the project to
-              translate. If given, <application>OmegaT</application> starts in
-              console mode and will translate the given project.</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para><literal>--config-dir=&lt;config-dir&gt;</literal> tells
-              <application>OmegaT</application> in which directory the
-              configuration files are stored. If not given,
-              <application>OmegaT</application> reverts to default values
-              (<application>OmegaT</application> dir under user home, or if
-              not available, the current working directory).</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para><literal>--mode=console-translate </literal>
-              <application>OmegaT</application> starts in console mode and
-              will translate the given project</para>
-            </listitem>
-
-            <listitem>
-              <para>--source-pattern={regexp} the files to be translated can
-              be specified this way. Example for the regular expression:
-              <filename>test\.html</filename></para>
-            </listitem>
-          </itemizedlist>
-        </section>
-
-        <section id="console.mode.extra.options">
-          <title>Extra options</title>
-
-          <para>There is one extra command line parameter specific to console
-          mode: <literal>--quiet. </literal>In quiet mode, less info is logged
-          to the screen. All messages that you would usually find in the
-          status bar are not shown.</para>
-
-          <para>Usage: <literal>java -jar
-          <application>OmegaT</application>.jar /path/to/project
-          --quiet</literal></para>
-        </section>
-      </section>
-
-      <section>
-        <title>Automatic Java Properties Aligner<indexterm class="singular">
-            <primary>Miscellanea</primary>
-
-            <secondary>Automatic aligner for Java properties</secondary>
-
-            <seealso>Miscelanea</seealso>
-          </indexterm></title>
-
-        <para>OmegaT can align Java .properties in console mode. If you have
-        the source and target properties files for the one and the same
-        contents in your language pair, this procedure will create a
-        corresponding tmx file for these contents. Usage:</para>
-
-        <para><literal>java -jar OmegaT.jar --mode=console-align
-        /my-project-dir --alignDir=/translatedFiles/ </literal></para>
-
-        <para><filename>alignDir </filename>must contain a translation in the
-        target language of the project. (e.g., if the project is EN-&gt;FR,
-        alignDir must contain a bundle ending with _fr). The resulting tmx is
-        stored in the <literal>omegat </literal>folder under the name
-        <filename>align.tmx</filename>.</para>
-      </section>
-
-      <section id="inst.pseudo.translated.memory">
-        <title>Pseudo-translated memory<indexterm class="singular">
-            <primary>Translation memories</primary>
-
-            <secondary>Pseudotranslation</secondary>
-          </indexterm></title>
-
-        <para>There may be instances where you would like to do pre-processing
-        or some other processing of segments that
-        <application>OmegaT</application> does not offer. For example you may
-        wish to create a pseudo-translation for testing purposes.
-        <application>OmegaT</application> allows you to create an extra tmx
-        file that contains all segments of the project. The translation in
-        this tmx can be either</para>
+        <para>If you need altered settings, the configuration files must be
+        available This can be achieved in two ways:</para>
 
         <itemizedlist>
           <listitem>
-            <para>translation equals source (default)</para>
+            <para>Run <application>OmegaT</application> normally (with the
+            GUI) and specify the settings. If you start
+            <application>OmegaT</application> in console mode, it will use the
+            same settings.</para>
+          </listitem>
+
+          <listitem>
+            <para>If you can't run <application>OmegaT</application> normally
+            (no graphical environment available): copy the settings files from
+            some other <application>OmegaT</application> installation on
+            another machine to a specific directory. The location does not
+            matter, since you can add it to the command line at startup. The
+            relevant files are <literal>filters.conf</literal> and
+            <literal>segmentation.conf</literal> and can be found in the user
+            home directory (e.g. <literal>C:\Documents and
+            Settings\%User%\<application>OmegaT</application></literal> under
+            windows, <literal>%user%/.omegat/</literal> under Linux)</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="starting.in.console.mode">
+        <title>Starting in console mode</title>
+
+        <para>To start <application>OmegaT</application> in console mode, some
+        extra parameters have to be passed to it on startup. The most
+        important is <literal>&lt;project-dir&gt;</literal>, and
+        optionally<literal> --config-dir=&lt;config-dir&gt;.
+        </literal>Example:</para>
+
+        <para><literal>java -jar <application>OmegaT</application>.jar
+        /path/to/project \</literal></para>
+
+        <para><literal> --config-dir=/path/to/config-files/ \</literal></para>
+
+        <para><literal>
+        --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
+
+        <para><literal> --source-pattern={regexp}</literal></para>
+
+        <para>Note that all parameters start with a double - character.</para>
+
+        <para><emphasis role="bold">Explanation:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>&lt;project-dir&gt;</literal> tells
+            <application>OmegaT</application> where to find the project to
+            translate. If given, <application>OmegaT</application> starts in
+            console mode and will translate the given project.</para>
           </listitem>
         </itemizedlist>
 
         <itemizedlist>
           <listitem>
-            <para>translation segment is empty</para>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal> tells
+            <application>OmegaT</application> in which directory the
+            configuration files are stored. If not given,
+            <application>OmegaT</application> reverts to default values
+            (<application>OmegaT</application> dir under user home, or if not
+            available, the current working directory). Note double -
+            character</para>
           </listitem>
         </itemizedlist>
 
-        <para>The tmx file can have any name you specify, but the extension
-        '.tmx' is added if not given. File generation is activated with the
-        following command line parameters:</para>
+        <itemizedlist>
+          <listitem>
+            <para><emphasis><literal>--mode</literal>=...-</emphasis>
+            <application>OmegaT</application> starts in console mode to
+            perform one of the following services automatically</para>
 
-        <para><literal>java -jar omegat.jar
-        --pseudotranslatetmx=&lt;filename&gt;
-        [pseudotranslatetype=[equal|empty]]</literal></para>
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
 
-        <para>Replace <literal>&lt;filename&gt;</literal> with the name of the
-        file you wish to create, either absolute or relative to the working
-        directory (the directory you start <application>OmegaT</application>
-        from). The second argument <literal>--pseudotranslatetype</literal> is
-        optional. Its value is either <literal>equal</literal> (default value,
-        for source=target) or <literal>empty</literal> (target segment is
-        empty) .You can process the generated tmx with any tool you wish. To
-        reuse it in <application>OmegaT</application>: rename it to
-        <emphasis>project_save.tmx </emphasis>and put it in the
-        <literal>omegat</literal>-folder of your project.</para>
+                <para>In this mode, OmegaT will attempt to translate the files
+                in /source/ with the available translation memories. This is
+                useful to run OmegaT on a server with TMX files automatically
+                fed to a project.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-createpseudotranslatetmx</literal></para>
+
+                <para>In this mode, OmegaT will create a TMX for the whole
+                project. Additional parameter allows the user to decide about
+                the values for target entries:</para>
+
+                <para>--pseudotranslatetype=[equal|empty]</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-align</literal></para>
+
+                <para>In this mode, OmegaT will align the Java properties
+                found in the<literal> /source/ </literal>folder of the project
+                to the Java properties found at the specified location. The
+                resulting TMX is stored in the <filename>/omegat/</filename>
+                folder under the name <filename>align.tmx</filename>.</para>
+
+                <para>Additional parameter is required in this case,
+                specifying the location of the target data:</para>
+
+                <para><literal>--alignDir={location of translated
+                files}</literal></para>
+
+                <para><filename>alignDir</filename>must contain a translation
+                in the target language of the project. (e.g., if the project
+                is EN-&gt;FR, alignDir must contain a bundle ending with _fr).
+                The resulting tmx is stored in the
+                <literal>omegat</literal>folder under the name
+                <filename>align.tmx</filename>.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--source-pattern={regexp} </literal></para>
+
+            <para>When mode has been used, this option will specify the files
+            to be processed automatically.. If the parameter is not specified,
+            all files will be processed. Here's few typical examples tro limit
+            your choice:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>All HTML files will be translated - not that the period
+                in the usual *.html has to be escaped (\.) as specified by the
+                rules for regular expressions</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Only the file test.html at the root of the source
+                directory will be translated. If there are other files named
+                test.html in other directories, they will be ignored.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Only the file test.html in the directory dir-10 will be
+                processed. Again note that the backslash is escaped as
+                well.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="console.mode.extra.options">
+        <title>Quiet option</title>
+
+        <para>There is one extra command line parameter specific to console
+        mode: <literal>--quiet. </literal>In the quiet mode, less info is
+        logged to the screen. The messages you would usually find in the
+        status bar are not displayed.</para>
+
+        <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
+        /path/to/project --quiet</literal></para>
       </section>
     </section>
   </section>

@@ -3,10 +3,13 @@
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <book lang="en">
   <bookinfo>
-    <pubdate><?dbtimestamp 16. April 2011?></pubdate>
+    <pubdate><?dbtimestamp?></pubdate>
 
-    <authorinitials>Vito Smolej, Unterschleissheim, 16. april
-    2011</authorinitials>
+    <authorinitials>vs</authorinitials>
+        <author><firstname>Vito</firstname>
+<surname>Smolej</surname>
+    </author>
+
   </bookinfo>
 
   <xi:include href="AboutOmegaT.xml"

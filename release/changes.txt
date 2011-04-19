@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.2.4 vs. 2.2.3 update 4
 
@@ -17,6 +17,7 @@ preserving spaces in Excel tags), the option is on by default.
   Localisation updates:
 
   - Brazilian Portuguese localisation updated to 2.2.3 update 2 (UI, documentation)
+  - Dutch localisation updated to 2.2.4 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.2.3 update 4

@@ -64,8 +64,6 @@ public class MainWindowMenuTest extends TestCore {
                 Method m = MainWindowMenuHandler.class.getMethod(actionMethodName);
                 assertNotNull("Action method not defined for " + f.getName(), m);
                 assertNotNull(existsMethods.remove(actionMethodName));
-            } else {
-                System.out.println("Action not need for " + f);
             }
         }
         assertTrue("menu items not found", count > 30);

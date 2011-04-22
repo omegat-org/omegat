@@ -47,7 +47,7 @@ public class EntryMarks {
         this.builder = builder;
         this.entryVersion = entryVersion;
         this.isActive = builder.isActive();
-        this.sourceText = builder.getSourceText();
+        this.sourceText = builder.getSourceTextEntry().getSrcText();
         this.translationText = builder.getTranslationText();
     }
 }

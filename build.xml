@@ -347,24 +347,5 @@
 			</classpath>
 		</java>
 	</target>
-
-  <target name="tests" depends="compile,compile-test">
-    <junit haltonerror="true" haltonfailure="true">
-			<classpath>
-				<fileset dir="lib" includes="**/*.jar" />
-				<fileset dir="lib-mnemonics/dist" includes="**/*.jar" />
-				<fileset dir="test/lib" includes="**/*.jar" />
-				<pathelement path="build/classes" />
-				<pathelement path="build/test/classes" />
-			</classpath>
-			<batchtest>
-				<fileset dir="test/src">
-          <exclude name="**/TestCore*.java"/>
-          <exclude name="**/TestFilterBase.java"/>
-        </fileset>
-				<formatter type="plain" usefile="false" />
-			</batchtest>
-		</junit>
-  </target>
 	
 </project>

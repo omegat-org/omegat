@@ -1,4 +1,5 @@
 if %1.==. exit /b
+call classpath
 
 cd %1
 md pdf

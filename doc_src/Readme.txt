@@ -34,12 +34,6 @@ C:\Program Files\fop-0.95
 Corresponding path:
 path=C:\Program Files\fop-0.95;C:\Program Files\libxml2-2.6.27.win32\bin
 
-saxon6-5-5.zip must be installed where a classpath can find it, usually in Program Files.
-C:\Program Files\saxon6-5-5
-
-Corresponding classpath:
-classpath=C:\Program Files\saxon6-5-5\saxon.jar;C:\Program Files\saxon6-5-5\saxon-xml-apis.jar
-
 ***Usage***
 
 All the scripts require the language folder as argument.
@@ -50,9 +44,12 @@ E.g.: html en
 
 Xincludes.bat: Creates the complete DocBook documentation (index.xml) by including the various chapters
 
+classpath.bat: Sets the classpath for Saxon
+
 fo.bat: Creates the intermediate fo format used to create a PDF in /language/pdf
 
 HTML.bat: Calls Xincludes and then creates the HTML documentation in language/html
 
 PDF.bat: Calls Xincludes and fo and then creates the PDF documentation in language/html
 
+Javahelp.bat (not yet operationnal): Calls Xincludes and then creates the Javahelp documentation in language/javahelp

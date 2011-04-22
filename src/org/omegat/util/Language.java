@@ -125,6 +125,8 @@ public class Language {
         else { 
             // Patch Java locale, to return correct locales instead of obsolete codes
             String returnString = locale.toString();
+            if (returnString.length()<2)
+                return returnString; // We cannot test a locale of less than 2 characters
             if (returnString.substring(0, 2).equalsIgnoreCase("in")) {
                 returnString = "id" + returnString.substring(2);
             } else if (returnString.substring(0, 2).equalsIgnoreCase("iw")) {

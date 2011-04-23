@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.2.4
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    0 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -13,6 +13,9 @@
 (e.g., spaces and newlines) in all tags, even if it is not set technically 
 in the document. As it corresponds to the most usual situation (e.g., 
 preserving spaces in Excel tags), the option is on by default.
+
+  - New version of the JNA library (used to launch Hunspell), compatible 
+with Windows 64-bit
 
   Localisation updates:
 

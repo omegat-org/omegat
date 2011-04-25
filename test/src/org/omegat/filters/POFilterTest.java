@@ -27,6 +27,7 @@ package org.omegat.filters;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.po.PoFilter;
 
 public class POFilterTest extends TestFilterBase {
@@ -34,19 +35,30 @@ public class POFilterTest extends TestFilterBase {
         Map<String, String> data = new TreeMap<String, String>();
         Map<String, String> tmx = new TreeMap<String, String>();
 
-        parse2(new PoFilter(), "test/data/filters/po/file-POFilter-be.po",
-                data, tmx);
+        parse2(new PoFilter(), "test/data/filters/po/file-POFilter-be.po", data, tmx);
 
         assertEquals(data.get("non-fuzzy"), "non-fuzzy translation");
         assertEquals(tmx.get("[PO-fuzzy] fuzzy"), "fuzzy translation");
-        assertEquals(tmx.get("[PO-fuzzy] Delete Account"),
-                "Supprimer le compte");
-        assertEquals(tmx.get("[PO-fuzzy] Delete Accounts"),
-                "Supprimer des comptes");
+        assertEquals(tmx.get("[PO-fuzzy] Delete Account"), "Supprimer le compte");
+        assertEquals(tmx.get("[PO-fuzzy] Delete Accounts"), "Supprimer des comptes");
+    }
+
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/po/file-POFilter-multiple.po";
+        IProject.FileInfo fi = loadSourceFiles(new PoFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("source1", null, "some context", null, null, null);
+        checkMulti("source2", null, "", null, null, null);
+        checkMulti("source3", null, "", null, null, null);
+        checkMulti("source1", null, "", null, null, null);
+        checkMulti("source1", null, "other context", null, null, null);
+        checkMultiEnd();
     }
 
     public void testTranslate() throws Exception {
         // translateText(new PoFilter(),
         // "test/data/filters/po/file-POFilter-be.po");
     }
+
 }

@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
 
@@ -28,6 +28,8 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
+import org.junit.Test;
+import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.openxml.OpenXMLFilter;
 
 public class OpenXMLFilterTest extends TestFilterBase {
@@ -43,8 +45,19 @@ public class OpenXMLFilterTest extends TestFilterBase {
         translate(new OpenXMLFilter(), in.getPath());
 
         for (String f : new String[] { "word/document.xml" }) {
-            compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f), new URL("jar:file:"
-                    + outFile.getAbsolutePath() + "!/" + f));
+            compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f),
+                    new URL("jar:file:" + outFile.getAbsolutePath() + "!/" + f));
         }
+    }
+
+    @Test
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/openXML/file-OpenXMLFilter.docx";
+        IProject.FileInfo fi = loadSourceFiles(new OpenXMLFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("This is first line.", null, null, "", "This is second line.", null);
+        checkMulti("This is second line.", null, null, "This is first line.", "", null);
+        checkMultiEnd();
     }
 }

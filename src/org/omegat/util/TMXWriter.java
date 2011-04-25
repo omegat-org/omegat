@@ -35,7 +35,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.core.data.ProjectProperties;
-import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.TMXEntry;
 
 /**
  * Class that store TMX (Translation Memory Exchange) files.
@@ -61,7 +61,7 @@ public class TMXWriter {
      * @throws IOException
      */
     public static void buildTMXFile(final String filename, final boolean forceValidTMX,
-            final boolean levelTwo, final ProjectProperties m_config, final Map<String, TransEntry> data)
+            final boolean levelTwo, final ProjectProperties m_config, final Map<String, TMXEntry> data)
             throws IOException {
         // we got this far, so assume lang codes are proper
         String sourceLocale = m_config.getSourceLanguage().toString();
@@ -108,8 +108,8 @@ public class TMXWriter {
         // Write TUs
         String source = null;
         String target = null;
-        for (Map.Entry<String, TransEntry> en : data.entrySet()) {
-            TransEntry transEntry = en.getValue();
+        for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
+            TMXEntry transEntry = en.getValue();
             source = forceValidTMX ? StaticUtils.stripTags(en.getKey()) : en.getKey();
             target = forceValidTMX ? StaticUtils.stripTags(transEntry.translation) : transEntry.translation;
             source = StaticUtils.makeValidXML(source);
@@ -121,8 +121,8 @@ public class TMXWriter {
                 source = makeLevelTwo(source);
                 target = makeLevelTwo(target);
             }
-            String changeIdPropertyString = (transEntry.changeId != null && !"".equals(transEntry.changeId) ? " changeid=\""
-                    + transEntry.changeId + "\""
+            String changeIdPropertyString = (transEntry.changer != null && !"".equals(transEntry.changer) ? " changeid=\""
+                    + transEntry.changer + "\""
                     : "");
             String changeDatePropertyString = (transEntry.changeDate != 0 ? " changedate=\""
                     + TMXDateParser.getTMXDate(transEntry.changeDate) + "\"" : "");

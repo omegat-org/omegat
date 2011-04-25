@@ -53,6 +53,10 @@ public class XHTMLFilter extends XMLFilter {
         do_not_send_to_core = false;
     }
 
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
+    
     /**
      * Human-readable name of the File Format this filter supports.
      * 

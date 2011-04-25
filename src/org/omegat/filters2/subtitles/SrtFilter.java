@@ -123,10 +123,15 @@ public class SrtFilter extends AbstractFilter {
         if (align != null) {
             align.put(key, text.toString());
         }
-
-        String tr = processEntry(text.toString()).replace("\n", EOL);
-        out.write(tr);
-        out.write(EOL);
+        
+        if (entryParseCallback != null) {
+            entryParseCallback.addEntry(key, text.toString(), null, false, null, null, this);
+        } else {
+            String tr = entryTranslateCallback.getTranslation(key, text.toString(), null);
+            out.write(tr.replace("\n", EOL));
+            out.write(EOL);
+        }
+        
         key = null;
         text.setLength(0);
     }

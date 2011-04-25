@@ -75,4 +75,8 @@ public class L10nmgrFilter extends XMLFilter {
         return true;
     }
 
+    @Override
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 }

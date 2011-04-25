@@ -205,6 +205,11 @@ public interface IEditor {
      *         Must be called only from UI thread.
      */
     String getSelectedText();
+    
+    /**
+     * Set default/alternate translation for current entry. 
+     */
+    void setAlternateTranslationForCurrentEntry(boolean alternate);
 
     /**
      * All plugins can call this method for mark something in active entry.

@@ -64,6 +64,11 @@ public class XtagFilter extends AbstractFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
+    
+    @Override
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 
     public void processFile(BufferedReader in, BufferedWriter out) throws IOException, TranslationException {
         // BOM (byte order mark) bugfix

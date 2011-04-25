@@ -134,6 +134,9 @@ public class GlossaryTextAreaTest extends TestCore {
             public void insertText(String text) {
             }
 
+            public void setAlternateTranslationForCurrentEntry(boolean alternate) {
+            }
+
             public void markActiveEntrySource(
                     SourceTextEntry requiredActiveEntry, List<Mark> marks,
                     String markerClassName) {

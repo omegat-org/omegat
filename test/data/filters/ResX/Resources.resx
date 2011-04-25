@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
@@ -61,6 +61,10 @@
   <data name="InfoExperimentStoppingMessage" xml:space="preserve">
     <value>This is a text displayed in the UI.</value>
     <comment>This is a comment. It should not be displayed to the translator.</comment>
+  </data>
+  <data name="InfoExperimentStoppingMessage2" xml:space="preserve">
+    <value>One more text</value>
+    <comment>Second comment</comment>
   </data>
   <data name="CloseButtonDisabled" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Controls\Resources\button-action_close_disable.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>

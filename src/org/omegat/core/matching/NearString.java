@@ -25,14 +25,17 @@
 
 package org.omegat.core.matching;
 
+import org.omegat.core.data.EntryKey;
+
 /**
  * Class to hold a single fuzzy match.
  * 
  * @author Keith Godfrey
  */
 public class NearString {
-    public NearString(final String source, final String translation, final int nearScore,
+    public NearString(final EntryKey key, final String source, final String translation, final int nearScore,
             final int nearScoreNoStem, final int adjustedScore, final byte[] nearData, final String projName) {
+        this.key = key;
         this.source = source;
         this.translation = translation;
         score = nearScore;
@@ -43,6 +46,7 @@ public class NearString {
             proj = projName;
     }
 
+    public EntryKey key;
     public String source;
     public String translation;
 

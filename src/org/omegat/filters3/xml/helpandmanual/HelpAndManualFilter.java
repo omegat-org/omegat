@@ -82,4 +82,9 @@ public class HelpAndManualFilter extends XMLFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
+    
+    @Override
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 }

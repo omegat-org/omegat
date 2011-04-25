@@ -1,0 +1,216 @@
+<!-- TMX (Translation Memory eXchange)
+
+Known as "-//LISA OSCAR:1998//DTD for Translation Memory eXchange//EN"
+Use in TMX: <!DOCTYPE tmx SYSTEM "tmx11.dtd">
+
+An SGML application conforming to:
+- International Standard ISO 8879 Standard Generalized Markup Language, 
+- XML (Extensible Markup Language), W3C Recommendation
+
+All TMX element and attribute names must be in lowercase.
+
+-->
+
+<!-- ======================================================================
+
+modifications Apr-23-1999 by YS (from Boston meeting action items)
+   - Added "block" to the list of segtypes allowed
+
+modifications Aug-12-1998 by JH
+   - Update to Final TMX 1.1 version
+
+modifications Jun-12-1998 by JH
+   - added entities amp, gt, lt, quot and apos for backwards compatibility
+     with SGML tools.   
+
+modifications Jun-11-1998 by YS (from Granada meeting action items)
+   - srclang is now mandatory in <header>
+   - added creationtoolversion attribute
+   - replaced <bm>/<em>/<ph>/<be>/<ee> by <bsf>/<esf>/<it>/<bpt>/<ept>
+   - added pos and assoc attributes to <it> 
+
+modifications Apr-10-1998 by YS
+   - changed n attribute in <be>, <ee>, <bm>, <em> and <ph> to i and x
+   - removed the match attribute from <tu>
+   - made various sgml syntax corrections
+
+modifications Apr-07-1998 by JH
+   - changed the attribute for <tu> from id to tuid
+
+modifications Mar-31-1998 by JH changed:
+   - changed match attribute to NUMBER
+   - note: we still get a warning from nsgmls: NUMBER or NUMBERS declared value
+
+modifications Mar-25-1998 by YS (from Salt-Lake City meeting action items)
+   - added the "-//" for non-registered DTD name
+   - added note about lowercase requirement
+   - added base attribute to <ude>
+   - removed the <meta> element
+   - renamed name attribute of <prop> by type
+   - added <be>, <ee>, <bm>, <em> and <ph> elements (Content)
+   - add the match attribute to <tu>
+
+modifications Nov-25-1997 by YS
+   - synchronized <TU> and <TUV> for CREATIONTOOL and DATATYPE
+
+modifications Nov-24-1997 by YS
+   - corrected CODESET into O-ENCODING for the <NOTE> element
+
+modifications Nov-22-1997 by YS (from San-Diego meeting action items)
+   - added <BODY>, <UDE> and <MAP/> element
+   - replaced NMTOKEN by CDATA for all NAME attributes
+   - renamed xxxUSER attributes into xxxID
+   - removed DIRECTIONS attribute
+   - renamed ORIGINAL into SRCLANG
+   - renamed CODESET into O-ENCODING
+   - added O-TMF attribute for <HEADER>
+   - added SEGTYPE attribute for <HEADER> and <TU>
+   - added ADMINLANG attribute in <HEADER>
+
+modifications Sep-16-1997 by YS
+   - replaced "" by #implied for user-type and id attributes
+
+modifications Sep-12-1997 by AKM
+   - added delimiters between content constituents of tu and tuv
+   - removed parens around "EMPTY" in definition of meta
+
+======================================================================= -->
+<!ENTITY  lt   "&#38;#60;" >
+<!ENTITY  amp  "&#38;#38;" >
+<!ENTITY  gt   "&#62;" >
+<!ENTITY  apos "&#39;" >
+<!ENTITY  quot "&#34;" >
+
+<!ENTITY % segtypes    "block|paragraph|sentence|phrase" >
+
+
+<!--     ELEM                CONTENT                -->
+<!--     ATTR       
+         NAME                TYPE           DEFAULT -->
+
+
+<!-- Base Document Element -->
+   <!ELEMENT tmx             (header, body) > 
+   <!ATTLIST tmx
+         version             CDATA          #REQUIRED >
+
+<!-- Header -->
+   <!ELEMENT header          (note|prop|ude)* >
+   <!ATTLIST header
+         creationtool        CDATA          #REQUIRED
+         creationtoolversion CDATA          #REQUIRED
+         segtype             (%segtypes;)   #REQUIRED
+         o-tmf               CDATA          #REQUIRED
+         adminlang           CDATA          #REQUIRED
+         srclang             CDATA          #REQUIRED
+         datatype            CDATA          #REQUIRED
+         o-encoding          CDATA          #IMPLIED
+         creationdate        CDATA          #IMPLIED
+         creationid          CDATA          #IMPLIED
+         changedate          CDATA          #IMPLIED
+         changeid            CDATA          #IMPLIED >
+
+<!-- Body -->
+   <!ELEMENT body            (tu*) >
+   <!-- No attributes            -->
+
+<!-- Note -->
+   <!ELEMENT note            (#PCDATA) >
+   <!ATTLIST note
+         o-encoding          CDATA          #IMPLIED 
+         lang                CDATA          #IMPLIED >
+
+
+<!-- User-defined Encoding -->
+   <!ELEMENT ude             (map+) >
+   <!ATTLIST ude
+         name                CDATA          #REQUIRED
+         base                CDATA          #IMPLIED >
+<!-- Note: the base attribute is required if one or more <map>
+     elements in the <ude> contain a code attribute. -->
+
+<!-- Character mapping -->
+   <!ELEMENT map             EMPTY >
+   <!ATTLIST map
+         unicode             CDATA          #REQUIRED
+         code                CDATA          #IMPLIED
+         ent                 CDATA          #IMPLIED
+         subst               CDATA          #IMPLIED >
+
+<!-- Property -->
+   <!ELEMENT prop            (#PCDATA) >
+   <!ATTLIST prop
+         type                CDATA          #REQUIRED 
+         lang                CDATA          #IMPLIED
+         o-encoding          CDATA          #IMPLIED >    
+
+<!-- Translation Unit -->
+   <!ELEMENT tu              ((note|prop)*, tuv+) >
+   <!ATTLIST tu
+         tuid                CDATA          #IMPLIED
+         o-encoding          CDATA          #IMPLIED
+         datatype            CDATA          #IMPLIED
+         usagecount          CDATA          #IMPLIED
+         lastusagedate       CDATA          #IMPLIED
+         creationtool        CDATA          #IMPLIED
+         creationtoolversion CDATA          #IMPLIED
+         creationdate        CDATA          #IMPLIED
+         creationid          CDATA          #IMPLIED
+         changedate          CDATA          #IMPLIED
+         segtype             (%segtypes;)   #IMPLIED
+         changeid            CDATA          #IMPLIED
+         o-tmf               CDATA          #IMPLIED
+         srclang             CDATA          #IMPLIED >
+
+<!-- Translation Unit Variant -->
+   <!ELEMENT tuv             ((note|prop)*, seg) >
+   <!ATTLIST tuv
+         lang                CDATA          #REQUIRED
+         o-encoding          CDATA          #IMPLIED
+         datatype            CDATA          #IMPLIED
+         usagecount          CDATA          #IMPLIED
+         lastusagedate       CDATA          #IMPLIED
+         creationtool        CDATA          #IMPLIED
+         creationtoolversion CDATA          #IMPLIED
+         creationdate        CDATA          #IMPLIED
+         creationid          CDATA          #IMPLIED
+         changedate          CDATA          #IMPLIED
+         o-tmf               CDATA          #IMPLIED
+         changeid            CDATA          #IMPLIED >
+
+<!-- Text -->
+   <!ELEMENT seg             (#PCDATA|bpt|ept|ph|ut|it|sub)* >
+
+
+<!-- Content Markup ================================================== -->
+
+   <!ELEMENT bpt             (#PCDATA|sub)* >
+   <!ATTLIST bpt
+          i                  CDATA          #REQUIRED
+          x                  CDATA          #IMPLIED
+          type               CDATA          #IMPLIED >
+
+   <!ELEMENT ept             (#PCDATA|sub)* >
+   <!ATTLIST ept
+          i                  CDATA          #REQUIRED >
+
+   <!ELEMENT sub             (#PCDATA|bpt|ept|it|ph|ut)* >
+
+   <!ELEMENT it              (#PCDATA|sub)* >
+   <!ATTLIST it
+          pos                (begin|end)    #REQUIRED
+          x                  CDATA          #IMPLIED
+          type               CDATA          #IMPLIED >
+
+   <!ELEMENT ph              (#PCDATA|sub)* >
+   <!ATTLIST ph
+          assoc              CDATA          #IMPLIED
+          x                  CDATA          #IMPLIED
+          type               CDATA          #IMPLIED >
+
+   <!ELEMENT ut              (#PCDATA) >
+   <!ATTLIST ut
+          x                  CDATA          #IMPLIED >
+
+
+<!-- End -->

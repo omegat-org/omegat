@@ -30,6 +30,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
+import org.xml.sax.Attributes;
+
 /**
  * The interface to specify the method a Handler can use to translate text.
  * 
@@ -77,4 +79,32 @@ interface Translator {
      */
     BufferedWriter createWriter(File outFile, String outEncoding) throws UnsupportedEncodingException,
             IOException;
+
+    /**
+     * Start tag translation.
+     * 
+     * @param path
+     *            path in the XML
+     * @param atts
+     *            attributes
+     */
+    void tagStart(String path, Attributes atts);
+
+    /**
+     * Finish tag translation.
+     * 
+     * @param path
+     *            path in the XML
+     */
+    void tagEnd(String path);
+
+    /**
+     * Process comment.
+     */
+    void comment(String comment);
+
+    /**
+     * Process text.
+     */
+    void text(String text);
 }

@@ -87,6 +87,11 @@ public class Typo3Filter extends XMLFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
+    
+    @Override
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 
     /**
      * Returns whether the file is supported by the filter, by checking root

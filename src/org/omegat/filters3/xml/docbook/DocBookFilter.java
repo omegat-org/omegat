@@ -101,6 +101,10 @@ public class DocBookFilter extends XMLFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
+    
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 
     /**
      * Returns whether the file is supported by the filter, by checking DB4

@@ -20,12 +20,14 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
 
 import java.util.List;
 
+import org.junit.Test;
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.html2.HTMLFilter2;
 
 public class HTMLFilter2Test extends TestFilterBase {
@@ -38,5 +40,16 @@ public class HTMLFilter2Test extends TestFilterBase {
 
     public void testTranslate() throws Exception {
         translateText(new HTMLFilter2(), "test/data/filters/html/file-HTMLFilter2.html");
+    }
+
+    @Test
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/html/file-HTMLFilter2.html";
+        IProject.FileInfo fi = loadSourceFiles(new HTMLFilter2(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("This is first line.", null, null, "", "This is second line.", null);
+        checkMulti("This is second line.", null, null, "This is first line.", "", null);
+        checkMultiEnd();
     }
 }

@@ -68,6 +68,7 @@ public class PoFilter extends AbstractFilter {
     };
 
     private StringBuilder[] sources, targets;
+    private String path;
     private boolean nowrap, fuzzy;
 
     private BufferedWriter out;
@@ -151,6 +152,7 @@ public class PoFilter extends AbstractFilter {
         targets = new StringBuilder[2];
         targets[0] = new StringBuilder();
         targets[1] = new StringBuilder();
+        path = "";
 
         String s;
         while ((s = in.readLine()) != null) {
@@ -219,6 +221,7 @@ public class PoFilter extends AbstractFilter {
 
             if ((m = MSG_CTX.matcher(s)).matches()) {
                 currentMode = MODE.MSGCTX;
+                path = m.group(1);
                 eol(s);
 
                 continue;
@@ -275,7 +278,7 @@ public class PoFilter extends AbstractFilter {
             translation = null;
         }
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, source, translation, fuzzy, null, this);
+            entryParseCallback.addEntry(null, source, translation, fuzzy, null, path, this);
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(null, source, translation, fuzzy, null, this);
         }
@@ -283,7 +286,7 @@ public class PoFilter extends AbstractFilter {
 
     protected void alignHeader(String header) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, unescape(header), null, false, null, this);
+            entryParseCallback.addEntry(null, unescape(header), null, false, null, path, this);
         }
     }
 
@@ -326,6 +329,7 @@ public class PoFilter extends AbstractFilter {
         sources[1].setLength(0);
         targets[0].setLength(0);
         targets[1].setLength(0);
+        path = "";
     }
 
     protected static final Pattern R1 = Pattern.compile("(?<!\\\\)((\\\\\\\\)*)\\\\\"");
@@ -359,7 +363,7 @@ public class PoFilter extends AbstractFilter {
         String entry = unescape(en.toString());
 
         // Do real translation
-        String translation = entryTranslateCallback.getTranslation(null, entry);
+        String translation = entryTranslateCallback.getTranslation(null, entry, path);
 
         if (translation != null) {
             return "\"" + escape(translation) + "\"";

@@ -80,6 +80,9 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     private BufferedWriter mainWriter;
     /** Current writer for an external included file. */
     private BufferedWriter extWriter = null;
+    
+    /** Current path in XML. */
+    private final Stack<String> currentTagPath = new Stack<String>();
 
     /**
      * Returns current writer we should write into. If we're in main file,
@@ -379,6 +382,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     private void queueText(String s) {
+        translator.text(s);
+        
         // TODO: ideally, xml:space=preserved would be handled at this level, but that would suppose
         // knowing here whether we're inside a preformatted tag, etc.
         if (internalEntityStarted != null && s.equals(internalEntityStarted.getValue()))
@@ -446,6 +451,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     private void queueComment(String comment) {
+        translator.comment(comment);
+        
         currEntry().add(new Comment(comment));
     }
 
@@ -459,6 +466,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
 
     /** Is called when the tag is started. */
     private void start(String tag, Attributes attributes) throws SAXException, TranslationException {
+        translatorTagStart(tag, attributes);
+        
         if (isOutOfTurnTag(tag)) {
             XMLOutOfTurnTag ootTag = new XMLOutOfTurnTag(tag, getShortcut(tag), attributes);
             currEntry().add(ootTag);
@@ -490,6 +499,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
                 translateAndFlush();
             removeTranslatableTag();
         }
+        
+        translatorTagEnd(tag);
     }
 
     /**
@@ -672,6 +683,25 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
             translatableTagName.pop(); // Remove it
     }
 
+    private void translatorTagStart(String tag, Attributes atts) {
+        currentTagPath.push(tag);
+        translator.tagStart(constructCurrentPath(), atts);
+    }
+
+    private void translatorTagEnd(String tag) {
+        translator.tagEnd(constructCurrentPath());
+        while (!currentTagPath.pop().equals(tag)) {
+        }
+    }
+
+    private String constructCurrentPath() {
+        StringBuilder path = new StringBuilder(256);
+        for (String t : currentTagPath) {
+            path.append('/').append(t);
+        }
+        return path.toString();
+    }
+    
     /**
      * If the space-preserving flag is not set, and the attributes say it is one, set it
      *

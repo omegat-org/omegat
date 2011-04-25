@@ -44,6 +44,7 @@ import org.omegat.filters2.TranslationException;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
+import org.xml.sax.Attributes;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
@@ -237,5 +238,17 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
         } catch (Exception e) {
             return false;
         }
+    }
+    
+    public void tagStart(String path, Attributes atts) {
+    }
+    
+    public void tagEnd(String path) {
+    }
+
+    public void comment(String comment) {
+    }
+
+    public void text(String text) {
     }
 }

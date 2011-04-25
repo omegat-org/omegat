@@ -1,0 +1,18 @@
+#Some comment
+msgctxt "some context"
+msgid "source1"
+msgstr "trans1"
+
+#, fuzzy
+msgid "source2"
+msgstr "trans2"
+
+msgid "source3"
+msgstr ""
+
+msgid "source1"
+msgstr "trans11"
+
+msgctxt "other context"
+msgid "source1"
+msgstr "trans12"

@@ -49,7 +49,7 @@ public class Attributes {
     public Attribute get(int index) {
         return list.get(index);
     }
-
+    
     /**
      * Returns a string representation of the list of attributes. '
      * name1="value1" name2="value2" ...'

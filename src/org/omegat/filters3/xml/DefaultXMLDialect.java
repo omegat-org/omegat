@@ -408,7 +408,6 @@ public class DefaultXMLDialect implements XMLDialect {
     public Boolean getTagsAggregationEnabled() {
         return tagsAggregationEnabled;
     }
-
     private boolean forceSpacePreserving = false;
 
     /**

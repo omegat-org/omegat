@@ -77,6 +77,9 @@ public class HTMLFilter2 extends AbstractFilter {
      */
     private HashMap<String, String> skipMetaAttributes;
 
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
     /**
      * Customized version of creating input reader for HTML files, aware of
      * encoding by using <code>EncodingAwareReader</code> class.

@@ -20,5 +20,38 @@
         <seg>betuv</seg>
       </tuv>
     </tu>
+    <tu>
+      <tuv lang="en">
+        <seg>lang1z</seg>
+      </tuv>
+      <tuv lang="en-US">
+        <seg>lang1</seg>
+      </tuv>
+      <tuv lang="be">
+        <seg>tr1</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en">
+        <seg>lang2</seg>
+      </tuv>
+      <tuv lang="es">
+        <seg>lang2z</seg>
+      </tuv>
+      <tuv lang="be">
+        <seg>tr2</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv lang="en-GB">
+        <seg>lang3</seg>
+      </tuv>
+      <tuv lang="es">
+        <seg>lang3z</seg>
+      </tuv>
+      <tuv lang="be">
+        <seg>tr3</seg>
+      </tuv>
+    </tu>
   </body>
 </tmx>

@@ -31,9 +31,11 @@ import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -82,6 +84,28 @@ public class FileUtil {
         } catch (Exception e) {
             // we don't care
         }
+    }
+    
+    /**
+     * Returns backup file name.
+     * 
+     * @param f
+     *            input file
+     * @return backup file
+     */
+    public static File getBackupFile(File f) {
+        long fileMillis = f.lastModified();
+        String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
+        return new File(f.getPath() + "." + str + ".bak");
+    }
+
+    /**
+     * Create file backup with datetime suffix.
+     */
+    public static void backupFile(File f) throws IOException {
+        long fileMillis = f.lastModified();
+        String str=new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
+        LFileCopy.copy(f, new File(f.getPath() + "." + str + ".bak"));
     }
 
     /**

@@ -48,7 +48,7 @@ import javax.swing.KeyStroke;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.gui.HListener;
 import org.omegat.gui.main.MainWindow;
@@ -225,7 +225,7 @@ public class TagValidationFrame extends JFrame {
         output.append("<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>\n");
         for (SourceTextEntry ste : stringList) {
             String src = ste.getSrcText();
-            TransEntry trans = Core.getProject().getTranslation(ste);
+            TMXEntry trans = Core.getProject().getTranslation(ste);
             if (src.length() > 0 && trans != null) {
                 output.append("<tr>");
                 output.append("<td>");

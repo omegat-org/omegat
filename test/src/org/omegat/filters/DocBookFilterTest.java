@@ -26,25 +26,33 @@ package org.omegat.filters;
 
 import java.util.List;
 
+import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.docbook.DocBookFilter;
 
 public class DocBookFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
-        List<String> lines = parse(new DocBookFilter(),
-                "test/data/filters/docBook/file-DocBookFilter.xml");
-        boolean c=lines.contains("My String");
+        List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter.xml");
+        boolean c = lines.contains("My String");
         assertTrue("'My String' not defined'", c);
     }
 
     public void testTranslate() throws Exception {
-        translateText(new DocBookFilter(),
-                "test/data/filters/docBook/file-DocBookFilter.xml");
+        translateText(new DocBookFilter(), "test/data/filters/docBook/file-DocBookFilter.xml");
     }
 
     public void testParseIntroLinux() throws Exception {
-        List<String> lines = parse(new DocBookFilter(),
-                "test/data/filters/docBook/Intro-Linux/abook.xml");
-        assertTrue("Message not exist, i.e. entities not loaded", lines
-                .contains("Why should I use an editor?"));
+        List<String> lines = parse(new DocBookFilter(), "test/data/filters/docBook/Intro-Linux/abook.xml");
+        assertTrue("Message not exist, i.e. entities not loaded",
+                lines.contains("Why should I use an editor?"));
+    }
+
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/docBook/Intro-Linux/abook.xml";
+        IProject.FileInfo fi = loadSourceFiles(new DocBookFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("Introduction to Linux", null, null, "", "A Hands on Guide", null);
+        checkMulti("A Hands on Guide", null, null, "Introduction to Linux", "Machtelt", null);
+        checkMulti("Machtelt", null, null, "A Hands on Guide", "Garrels", null);
     }
 }

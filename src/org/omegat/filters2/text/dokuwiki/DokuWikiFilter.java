@@ -64,6 +64,10 @@ public class DokuWikiFilter extends AbstractFilter {
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.txt", "UTF-8", "UTF-8"), };
     }
+    
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 
     @Override
     protected boolean isFileSupported(BufferedReader reader) {

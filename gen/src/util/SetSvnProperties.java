@@ -93,6 +93,26 @@ public class SetSvnProperties {
                 set("text/plain");
             } else if (filename.endsWith(".xlf")) {
                 set("text/xml");
+            } else if (filename.endsWith(".tmx")) {
+                set("text/xml", "native");
+            } else if (filename.endsWith(".wxl")) {
+                set("text/xml", "native");
+            } else if (filename.endsWith(".svg")) {
+                set("text/xml", "native");
+            } else if (filename.endsWith(".resx")) {
+                set("text/xml", "native");
+            } else if (filename.endsWith(".rc")) {
+                set("text/plain", "native");
+            } else if (filename.endsWith(".dtd")) {
+                set("text/plain", "native");
+            } else if (filename.endsWith(".tex")) {
+                set("text/plain", "native");
+            } else if (filename.endsWith(".dz")) {
+                set("application/gzip");
+            } else if (filename.endsWith(".idx")) {
+                set("application/octet-stream");
+            } else if (filename.endsWith(".ifo")) {
+                set("text/plain", "native");
             } else {
                 System.out.println("unknown: " + filename);
             }

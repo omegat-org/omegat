@@ -44,6 +44,10 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class HHCFilter2 extends HTMLFilter2 {
+    
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 
     public void processFile(BufferedReader infile, BufferedWriter outfile) throws IOException,
             TranslationException {

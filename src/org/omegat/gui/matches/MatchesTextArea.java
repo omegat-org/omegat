@@ -41,9 +41,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
-import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
@@ -51,6 +52,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.Token;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -184,7 +186,7 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements 
                         Preferences.BEST_MATCH_EXPLANATORY_TEXT, OStrings.getString("WF_DEFAULT_PREFIX"))
                         + thebest.translation;
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
-                TransEntry te = Core.getProject().getTranslation(currentEntry);
+                TMXEntry te = Core.getProject().getTranslation(currentEntry);
                 if (te == null) {
                     Core.getEditor().replaceEditText(translation);
                 }
@@ -308,29 +310,40 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements 
         popup.addSeparator();
 
         final NearString ns = matches.get(clickedItem);
-        String project = ns.proj;
+        String proj = ns.proj;
 
         item = popup.add(OStrings.getString("MATCHES_GO_TO_SEGMENT_SOURCE"));
 
-        if (project == null || project.equals("")) {
+        if (StringUtil.isEmpty(proj)) {
+            final IProject project = Core.getProject();
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     /*
-                     * Goto segment with contains matched source. Since it
-                     * enough rarely executed code, it will be better to find
-                     * this segment each time, instead use additional memory
-                     * storage.
+                     * Goto segment with contains matched source. Since it enough rarely executed code, it
+                     * will be better to find this segment each time, instead use additional memory storage.
                      */
                     List<SourceTextEntry> entries = Core.getProject().getAllEntries();
-                    int entryNum = 0;
                     for (int i = 0; i < entries.size(); i++) {
-                        if (entries.get(i).getSrcText().equals(ns.source)) {
-                            // found entry with the same source
-                            entryNum = i;
-                            break;
+                        SourceTextEntry ste = entries.get(i);
+                        if (!ste.getSrcText().equals(ns.source)) {
+                            // source text not equals - there is no sence to checking this entry
+                            continue;
                         }
+                        if (ns.key != null) {
+                            // multiple translation
+                            if (!ste.getKey().equals(ns.key)) {
+                                continue;
+                            }
+                        } else {
+                            // default translation - multiple shoun't exist for this entry
+                            TMXEntry multTrans = project.getMultipleTranslation(entries.get(i));
+                            if (multTrans != null) {
+                                continue;
+                            }
+                        }
+                        Core.getEditor().gotoEntry(i + 1);
+                        break;
                     }
-                    Core.getEditor().gotoEntry(entryNum + 1);
                 }
             });
         } else {

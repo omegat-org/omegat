@@ -236,9 +236,7 @@ public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
             Token[] tokenList = tok.tokenizeWords(src, ITokenizer.StemmingMode.NONE);
             Set<String> words = new TreeSet<String>();
             for (Token tok : tokenList) {
-                if (isEntryChanged()) {
-                    return null;
-                }
+                checkEntryChanged();
                 String w = src.substring(tok.getOffset(), tok.getOffset() + tok.getLength());
 
                 words.add(w);

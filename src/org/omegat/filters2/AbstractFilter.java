@@ -5,8 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Martin Wunderlich
-               2009 Alex Buloichik
-               2011 Didier Briel
+               2011 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -367,8 +366,8 @@ public abstract class AbstractFilter implements IFilter {
         }
     }
 
-    public void parseFile(File inFile, Map<String, String> config, FilterContext fc, IParseCallback callback)
-            throws Exception {
+    public final void parseFile(File inFile, Map<String, String> config, FilterContext fc,
+            IParseCallback callback) throws Exception {
         entryParseCallback = callback;
         entryTranslateCallback = null;
         entryAlignCallback = null;
@@ -376,13 +375,17 @@ public abstract class AbstractFilter implements IFilter {
 
         try {
             processFile(inFile, null, fc);
+            if (requirePrevNextFields()) {
+                // parsing - need to link prev/next
+                entryParseCallback.linkPrevNextSegments();
+            }
         } finally {
             entryParseCallback = null;
             processOptions = null;
         }
     }
 
-    public void alignFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
+    public final void alignFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
             IAlignCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = null;
@@ -411,15 +414,29 @@ public abstract class AbstractFilter implements IFilter {
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
     }
 
-    public void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
-            ITranslateCallback callback) throws Exception {
+    /**
+     * Method can be overrided for return true. It means what two-pass parsing and translating will be
+     * processed and prev/next segments will be linked.
+     */
+    protected boolean requirePrevNextFields() {
+        return false;
+    }
+
+    public final void translateFile(File inFile, File outFile, Map<String, String> config, FilterContext fc,
+       ITranslateCallback callback) throws Exception {
         entryParseCallback = null;
         entryTranslateCallback = callback;
         entryAlignCallback = null;
         processOptions = config;
 
         try {
+            entryTranslateCallback.setPass(1);
             processFile(inFile, outFile, fc);
+            if (requirePrevNextFields()) {
+                entryTranslateCallback.linkPrevNextSegments();
+                entryTranslateCallback.setPass(2);
+                processFile(inFile, outFile, fc);
+            }
         } finally {
             entryTranslateCallback = null;
             processOptions = null;
@@ -439,10 +456,10 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected final String processEntry(String entry) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, entry, null, false, null, this);
+            entryParseCallback.addEntry(null, entry, null, false, null, null, this);
             return entry;
         } else {
-            return entryTranslateCallback.getTranslation(null, entry);
+            return entryTranslateCallback.getTranslation(null, entry, null);
         }
     }
 

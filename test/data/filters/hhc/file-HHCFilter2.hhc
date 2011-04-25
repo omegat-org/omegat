@@ -1,20 +1,20 @@
 <!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML//EN">
 <HTML>
 <HEAD><!-- Sitemap 1.0 -->
-<meta name="GENERATOR" content="Microsoft HTML Help Workshop 4.1">
+<meta name="GENERATOR" content="A generator">
 
 </HEAD><BODY>
 <UL>
         <LI> <OBJECT type="text/sitemap">
-                <param name="Name" value="Introduction to GraphEdit">
-                <param name="Local" value="graphedit_help.htm">
+                <param name="Name" value="Introduction to software X">
+                <param name="Local" value="software_x.htm">
                 </OBJECT>
         </LI><LI> <OBJECT type="text/sitemap">
-                <param name="Name" value="Building Filter Graphs">
+                <param name="Name" value="Building Graphs">
              </OBJECT>
         <UL>
              <LI> <OBJECT type="text/sitemap">
-                     <param name="Name" value="Build a File Playback Graph">
+                     <param name="Name" value="Build a File Graph">
                      <param name="Local" value="build_graph.htm">
                   </OBJECT>
         </LI></UL>

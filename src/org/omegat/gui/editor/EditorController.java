@@ -34,6 +34,8 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -55,7 +57,7 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
@@ -508,9 +510,8 @@ public class EditorController implements IEditor {
         editor.cancelUndo();
 
         history.insertNew(m_docSegList[displayedEntryIndex].segmentNumberInProject);
-        // update history menu items
-        mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
-        mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
+        
+        setMenuEnabled();
 
         showStat();
 
@@ -532,6 +533,14 @@ public class EditorController implements IEditor {
 
         // fire event about new segment activated
         CoreEvents.fireEntryActivated(ste);
+    }
+    
+    private void setMenuEnabled() {
+        // update history menu items
+        mw.menu.gotoHistoryBackMenuItem.setEnabled(history.hasPrev());
+        mw.menu.gotoHistoryForwardMenuItem.setEnabled(history.hasNext());
+        mw.menu.editMultipleDefault.setEnabled(!m_docSegList[displayedEntryIndex].isDefaultTranslation());
+        mw.menu.editMultipleAlternate.setEnabled(m_docSegList[displayedEntryIndex].isDefaultTranslation());
     }
 
     /**
@@ -606,7 +615,7 @@ public class EditorController implements IEditor {
      */
     private void exportCurrentSegment(final SourceTextEntry ste) {
         String s1 = ste.getSrcText();
-        TransEntry te = Core.getProject().getTranslation(ste);
+        TMXEntry te = Core.getProject().getTranslation(ste);
         String s2 = te != null ? te.translation : "";
 
         FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT);
@@ -691,18 +700,19 @@ public class EditorController implements IEditor {
 
         if (newTrans != null) {
             // segment was active
-            SourceTextEntry entry = m_docSegList[displayedEntryIndex].ste;
+            SegmentBuilder sb = m_docSegList[displayedEntryIndex];
+            SourceTextEntry entry = sb.ste;
 
-            TransEntry oldTE = Core.getProject().getTranslation(entry);
+            TMXEntry oldTE = Core.getProject().getTranslation(entry);
             String old_translation = oldTE != null ? oldTE.translation : "";
 
             // update memory
             if (newTrans.equals(entry.getSrcText())
                     && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
-                Core.getProject().setTranslation(entry, "");
+                Core.getProject().setTranslation(entry, "", sb.isDefaultTranslation());
                 newTrans = "";
             } else {
-                Core.getProject().setTranslation(entry, newTrans);
+                Core.getProject().setTranslation(entry, newTrans, sb.isDefaultTranslation());
             }
 
             m_docSegList[displayedEntryIndex].createSegmentElement(false);
@@ -1368,5 +1378,20 @@ public class EditorController implements IEditor {
             return true;
         else
             return this.entryFilterList.contains(entry);
+    }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public void setAlternateTranslationForCurrentEntry(boolean alternate) {
+        SegmentBuilder sb = m_docSegList[displayedEntryIndex];
+
+        if (!alternate) {
+            Core.getProject().setTranslation(sb.getSourceTextEntry(), "", false);
+            sb.setDefaultTranslation(true);
+        } else {
+            sb.setDefaultTranslation(false);
+        }
+        setMenuEnabled();
     }
 }

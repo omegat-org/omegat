@@ -34,17 +34,15 @@ import java.io.RandomAccessFile;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.text.Collator;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.logging.Logger;
@@ -65,8 +63,8 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.FileUtil;
-import org.omegat.util.LFileCopy;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -75,8 +73,6 @@ import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.TMXReader;
-import org.omegat.util.TMXWriter;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -97,7 +93,7 @@ public class RealProject implements IProject {
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
 
-    private final ProjectProperties m_config;
+    protected final ProjectProperties m_config;
 
     private FileChannel lockChannel;
     private FileLock lock;
@@ -105,32 +101,27 @@ public class RealProject implements IProject {
     private boolean m_modifiedFlag;
 
     /** List of all segments in project. */
-    private List<SourceTextEntry> allProjectEntries;
+    private List<SourceTextEntry> allProjectEntries = new ArrayList<SourceTextEntry>(4096);
 
     private final StatisticsInfo hotStat = new StatisticsInfo();
 
     private final ITokenizer sourceTokenizer, targetTokenizer;
 
+    private DirectoryMonitor tmMonitor;
+
     /**
      * Storage for all translation memories, which shouldn't be changed and saved, i.e. for /tm/*.tmx files,
      * aligned data from source files.
+     * 
+     * This map recreated each time when files changed. So, you can free use it without thinking about
+     * synchronization.
      */
-    private final Map<String, List<TransMemory>> transMemories;
+    private Map<String, ExternalTMX> transMemories = new TreeMap<String, ExternalTMX>();
 
-    /**
-     * Storage for orphaned segments. The key is the source text, the value the translation with additional
-     * properties.
-     */
-    private final Map<String, TransEntry> orphanedSegments;
-
-    /**
-     * Storage for translation for current project. The key is the source text, the value the translation with
-     * additional properties.
-     */
-    private final Map<String, TransEntry> translations;
+    private ProjectTMX projectTMX;
 
     /** Segments count in project files. */
-    private final List<FileInfo> projectFilesList;
+    private final List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
 
     /**
      * Create new project instance. It required to call {@link #createProject() createProject} or
@@ -142,19 +133,13 @@ public class RealProject implements IProject {
      *            true if project need to be created
      */
     public RealProject(final ProjectProperties props) {
-        allProjectEntries = new ArrayList<SourceTextEntry>(4096);
-        transMemories = new TreeMap<String, List<TransMemory>>();
-        orphanedSegments = new HashMap<String, TransEntry>();
-        translations = new HashMap<String, TransEntry>();
-        projectFilesList = new ArrayList<FileInfo>();
-
         m_config = props;
 
         sourceTokenizer = createTokenizer(true);
         targetTokenizer = createTokenizer(false);
     }
 
-    public void saveProjectProperties() throws IOException {
+    public void saveProjectProperties() throws Exception {
         unlockProject();
         ProjectFileStorage.writeProjectFile(m_config);
         lockProject();
@@ -181,9 +166,11 @@ public class RealProject implements IProject {
             createDirectory(m_config.getTargetRoot(), "target");
 
             saveProjectProperties();
+            
+            loadTM();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
-        } catch (IOException e) {
+        } catch (Exception e) {
             // trouble in tinsletown...
             Log.logErrorRB(e, "CT_ERROR_CREATING_PROJECT");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_CREATING_PROJECT");
@@ -208,18 +195,18 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
-            loadSourceFiles();
+            // sets for collect exist entries for check orphaned
+            Set<String> existSource = new HashSet<String>();
+            Set<EntryKey> existKeys = new HashSet<EntryKey>();
 
-            loadTranslations();
+            loadSourceFiles(existSource, existKeys);
 
-            // load in translation database files
-            try {
-                loadTM();
-            } catch (IOException e) {
-                Log.logErrorRB(e, "TF_TM_LOAD_ERROR");
-                Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR");
-                // allow project load to resume
-            }
+            loadTranslations(existSource, existKeys);
+
+            existSource = null;
+            existKeys = null;
+
+            loadTM();
 
             // build word count
             String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
@@ -244,9 +231,9 @@ public class RealProject implements IProject {
             // but since we didn't, do a bit of cleaning up now, otherwise
             // we can't even inform the user about our slacking off.
             allProjectEntries.clear();
+            projectFilesList.clear();
             transMemories.clear();
-            translations.clear();
-            orphanedSegments.clear();
+            projectTMX = null;
 
             // Well, that cleared up some, GC to the rescue!
             System.gc();
@@ -266,7 +253,7 @@ public class RealProject implements IProject {
     /**
      * Align project.
      */
-    public Map<String, TransEntry> align(final ProjectProperties props, final File translatedDir)
+    public Map<String, TMXEntry> align(final ProjectProperties props, final File translatedDir)
             throws Exception {
         FilterMaster fm = FilterMaster.getInstance();
 
@@ -306,6 +293,7 @@ public class RealProject implements IProject {
      * thread shouldn't throw any error.
      */
     public void closeProject() {
+        tmMonitor.fin();
         unlockProject();
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
     }
@@ -363,18 +351,19 @@ public class RealProject implements IProject {
             // build TMX with OmegaT tags
             String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
                     + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, false, false, m_config, translations);
+
+            projectTMX.save(new File(fname), false, false);
 
             // build TMX level 1 compliant file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
                     + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, true, false, m_config, translations);
+            projectTMX.save(new File(fname), true, false);
 
             // build three-quarter-assed TMX level 2 file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
                     + OConsts.TMX_EXTENSION;
-            TMXWriter.buildTMXFile(fname, false, true, m_config, translations);
-        } catch (IOException e) {
+            projectTMX.save(new File(fname), false, true);
+        } catch (Exception e) {
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
             throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
@@ -411,8 +400,10 @@ public class RealProject implements IProject {
             Matcher fileMatch = FILE_PATTERN.matcher(midName);
             if (fileMatch.matches()) {
                 Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX", midName);
+                translateFilesCallback.setCurrentFileName(midName);
                 fm.translateFile(srcRoot, midName, locRoot, new FilterContext(m_config),
                         translateFilesCallback);
+                translateFilesCallback.fileFinished();
             }
         }
         Core.getMainWindow().showStatusMessageRB("CT_COMPILE_DONE_MX");
@@ -424,15 +415,11 @@ public class RealProject implements IProject {
 
     /** Saves the translation memory and preferences */
     public void saveProject() {
-        if (isProjectModified()) {
-            forceSave(false);
-        } else {
+        if (!isProjectModified()) {
             LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_NONEED"));
+            return;
         }
-    }
 
-    /** Does actually save the Project's TMX file and preferences. */
-    private void forceSave(boolean corruptionDanger) {
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -441,48 +428,39 @@ public class RealProject implements IProject {
         Preferences.save();
 
         String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-        if (corruptionDanger) {
-            s += OConsts.STATUS_RECOVER_EXTENSION;
-        } else {
-            // rename existing project file in case a fatal error
-            // is encountered during the write procedure - that way
-            // everything won't be lost
-            File backup = new File(s + OConsts.BACKUP_EXTENSION);
-            File orig = new File(s);
-            if (orig.exists())
-                orig.renameTo(backup);
-        }
+
+        // rename existing project file in case a fatal error
+        // is encountered during the write procedure - that way
+        // everything won't be lost
+        File backup = FileUtil.getBackupFile(new File(s));
+        File orig = new File(s);
+        File newFile = new File(s + OConsts.NEWFILE_EXTENSION);
 
         try {
             saveProjectProperties();
 
-            Map<String, TransEntry> data = new TreeMap<String, TransEntry>();
-            data.putAll(translations);
-            // Write orphan strings.
-            data.putAll(orphanedSegments);
+            projectTMX.save(newFile, false, false);
 
-            TMXWriter.buildTMXFile(s, false, false, m_config, data);
+            if (backup.exists()) {
+                if (!backup.delete()) {
+                    throw new IOException("Error delete backup file");
+                }
+            }
+
+            if (orig.exists()) {
+                if (!orig.renameTo(backup)) {
+                    throw new IOException("Error rename old file to backup");
+                }
+            }
+
+            if (!newFile.renameTo(orig)) {
+                throw new IOException("Error rename new file to tmx");
+            }
+
             m_modifiedFlag = false;
-        } catch (IOException e) {
+        } catch (Exception e) {
             Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
-
-            // try to rename backup file to original name
-            if (!corruptionDanger) {
-                s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-                File backup = new File(s + OConsts.BACKUP_EXTENSION);
-                File orig = new File(s);
-                if (backup.exists())
-                    backup.renameTo(orig);
-            }
-        }
-
-        // if successful, delete backup file
-        if (!m_modifiedFlag && !corruptionDanger) {
-            s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-            File backup = new File(s + OConsts.BACKUP_EXTENSION);
-            if (backup.exists())
-                backup.delete();
         }
 
         // update statistics
@@ -521,29 +499,31 @@ public class RealProject implements IProject {
     // protected functions
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
-    private void loadTranslations() {
+    private void loadTranslations(final Set<String> existSource, final Set<EntryKey> existKeys)
+            throws Exception {
+
         final File tmxFile = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
-        try {
-            if (!tmxFile.exists()) {
-                Log.logErrorRB("CT_ERROR_CANNOT_FIND_TMX", tmxFile.getAbsolutePath());
-                // nothing to do here
-                return;
+
+        ProjectTMX.CheckOrphanedCallback cb = new ProjectTMX.CheckOrphanedCallback() {
+            public boolean existSourceInProject(String src) {
+                return existSource.contains(src);
             }
-        } catch (SecurityException se) {
-            // file probably exists, but something's wrong
-            Log.logErrorRB(se, "CT_ERROR_ACCESS_PROJECT_FILE");
-            Core.getMainWindow().displayErrorRB(se, "CT_ERROR_ACCESS_PROJECT_FILE");
-            return;
-        }
+
+            public boolean existEntryInProject(EntryKey key) {
+                return existKeys.contains(key);
+            }
+        };
 
         try {
-            // recover existing translations
-            // since the source files may have changed since the last time
-            // they were loaded, load each string then look for it's
-            // owner
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
-            loadTMXFile(tmxFile.getAbsolutePath(), "UTF-8", true);
-        } catch (IOException e) {
+
+            projectTMX = new ProjectTMX(m_config, tmxFile, cb);
+            if (tmxFile.exists()) {
+                // RFE 1001918 - backing up project's TMX upon successful read
+                FileUtil.backupFile(tmxFile);
+                FileUtil.removeOldBackups(tmxFile);
+            }
+        } catch (Exception e) {
             Log.logErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
         }
@@ -555,7 +535,8 @@ public class RealProject implements IProject {
      * @param projectRoot
      *            project root dir
      */
-    private void loadSourceFiles() throws IOException, InterruptedIOException, TranslationException {
+    private void loadSourceFiles(final Set<String> existSource, final Set<EntryKey> existKeys)
+            throws IOException, InterruptedIOException, TranslationException {
         long st = System.currentTimeMillis();
         FilterMaster fm = FilterMaster.getInstance();
 
@@ -571,7 +552,7 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);
 
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback();
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys);
 
             FileInfo fi = new FileInfo();
             fi.filePath = filepath;
@@ -579,6 +560,8 @@ public class RealProject implements IProject {
             loadFilesCallback.setCurrentFile(fi);
 
             boolean fileLoaded = fm.loadFile(filename, new FilterContext(m_config), loadFilesCallback);
+
+            loadFilesCallback.fileFinished();
 
             if (fileLoaded && (fi.entries.size() > 0)) {
                 projectFilesList.add(fi);
@@ -624,159 +607,35 @@ public class RealProject implements IProject {
         }
     }
 
-    /** Locates and loads external TMX files with legacy translations. */
-    private void loadTM() throws IOException {
-
-        List<String> tmFileList = new ArrayList<String>();
-        File tmRoot = new File(m_config.getTMRoot());
-        StaticUtils.buildFileList(tmFileList, tmRoot, true);
-
-        for (String file : tmFileList) {
-            String fname = file;
-            int lastdot = fname.lastIndexOf('.');
-            if (lastdot < 0)
-                lastdot = fname.length();
-            String ext = fname.substring(lastdot);
-
-            if (ext.equalsIgnoreCase(OConsts.TMX_EXTENSION)) {
-                loadTMXFile(fname, "UTF-8", false);
-            } else if (ext.equalsIgnoreCase(OConsts.TMW_EXTENSION)) {
-                loadTMXFile(fname, "ISO-8859-1", false);
-            }
-        }
-    }
-
     /**
-     * Loads TMX file. Either the one of the project with project's translation, or the legacy ones. IF the
-     * projects TMX is loaded, it is also backed up. The translations are added to either {@link translations}
-     * or to {@link orphanedSegments} for project TMX, or to a transMemory in {@link transMemories}.
-     * 
-     * @param fname
-     *            The name of the TMX file
-     * @param encoding
-     *            The encoding of the tmx, usually "UTF-8"
-     * @param isProject
-     *            Set to true when loading the projects TMX (e.g. project_save.tmx)
+     * Locates and loads external TMX files with legacy translations. Uses directory monitor for check file
+     * updates.
      */
-    private void loadTMXFile(String fname, String encoding, boolean isProject) throws IOException {
-        TMXReader tmx = new TMXReader(encoding, m_config.getSourceLanguage(), m_config.getTargetLanguage(),
-                m_config.isSentenceSegmentingEnabled());
-
-        // Fix for bug 1583560 - force kill causes project_save.tmx destruction
-        // Copy TMX file to temp file, so we can read the temp file,
-        // and then it doesn't matter if it gets destroyed when doing force
-        // kills
-        LFileCopy.copy(fname, fname + ".tmp");
-
-        // Load the TMX from the temp file
-        tmx.loadFile(fname + ".tmp", isProject);
-
-        // Delete the temp file
-        new File(fname + ".tmp").delete();
-
-        int num = tmx.numSegments();
-        List<StringEntry> strEntryList = new ArrayList<StringEntry>(num);
-
-        // RFE 1001918 - backing up project's TMX upon successful read
-        if (isProject) {
-            File tmxFile = new File(fname);
-            long fileMillis = tmxFile.lastModified();
-            if (fileMillis == 0L) // IO Error
-                fileMillis = new Date().getTime();
-            LFileCopy.copy(fname, fname + "." + millisToDateTime(fileMillis) + ".bak");
-
-            FileUtil.removeOldBackups(tmxFile);
-        }
-
-        // TM for store entries, if not a project_save.tmx
-        List<TransMemory> currentTM = null;
-
-        // Define whether translations from this TM are applied aumatically
-        boolean isAuto = false;
-
-        // If a legacy TM, creating one
-        // and adding to the list of legacy TMs
-        if (!isProject) {
-            String fn = new File(fname).getName();
-            String path = new File(fname).getParent();
-            if (!path.endsWith(File.separator))
-                path += File.separator;
-
-            if (!path.equals(m_config.getTMRoot())) {
-                // We're in a subdirectory,
-                // so we add it in front of the TM name.
-                String tmDir = path.substring(m_config.getTMRoot().length());
-                if (tmDir.startsWith("auto" + File.separator))
-                    isAuto = true;
-                if (!tmDir.endsWith(File.separator))
-                    tmDir += File.separator;
-                fn = tmDir + fn;
-            }
-            currentTM = transMemories.get(fn);
-            if (currentTM == null) {
-                // create new TM hash for this file
-                currentTM = new ArrayList<TransMemory>(num);
-                transMemories.put(fn, currentTM);
-            }
-        }
-
-        Set<String> exist = null;
-        if (isProject || isAuto) {
-            // create list of all exist sources
-            exist = new HashSet<String>(allProjectEntries.size() / 2);
-            for (SourceTextEntry ste : allProjectEntries) {
-                exist.add(ste.getSrcText());
-            }
-        }
-
-        for (int i = 0; i < num; i++) {
-            String src = tmx.getSourceSegment(i);
-            String trans = tmx.getTargetSegment(i);
-            if (StringUtil.isEmpty(trans)) {
-                continue;
-            }
-
-            if (isProject || isAuto) {
-                String changeId = tmx.getTargetChangeId(i);
-                long changeDate = tmx.getTargetChangeDate(i);
-                if (exist.contains(src)) {
-                    /* Entry found in source files - translation. */
-                    boolean isNewTrans = false;
-                    if (isAuto) {
-                        if (translations.get(src) == null)
-                            isNewTrans = true;
-                        else {
-                            String existTrans = translations.get(src).translation;
-                            if (StringUtil.isEmpty(existTrans))
-                                isNewTrans = true;
-                        }
-                    }
-                    // We don't want to override an existing translation
-                    if (isProject || isNewTrans)
-                        translations.put(src, new TransEntry(trans, changeId, changeDate));
-                } else if (isProject) {
-                    /* Entry not found in source files - translation. */
-                    orphanedSegments.put(src, new TransEntry(trans, changeId, changeDate));
+    private void loadTM() throws IOException {
+        File tmRoot = new File(m_config.getTMRoot());
+        tmMonitor = new DirectoryMonitor(tmRoot, new DirectoryMonitor.Callback() {
+            public void fileChanged(File file) {
+                if (!file.getName().endsWith(".tmx")) {
+                    // not a TMX file
+                    return;
                 }
+                // create new translation memories map
+                Map<String, ExternalTMX> newTransMemories = new TreeMap<String, ExternalTMX>(transMemories);
+                if (file.exists()) {
+                    try {
+                        ExternalTMX newTMX = new ExternalTMX(m_config, file);
+                        newTransMemories.put(file.getPath(), newTMX);
+                    } catch (Exception e) {
+                        Log.logErrorRB(e, "TF_TM_LOAD_ERROR");
+                        Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR");
+                    }
+                } else {
+                    newTransMemories.remove(file.getPath());
+                }
+                transMemories = newTransMemories;
             }
-            if (!isProject) {
-                // not in a project - remember this as a translation
-                // memory string and add it to near list
-                StringEntry se = new StringEntry(src);
-                se.setTranslation(trans); // external TMXes don't count
-                strEntryList.add(se);
-
-                /*
-                 * Not project file - just TM from /tm/.
-                 */
-                currentTM.add(new TransMemory(src, trans));
-            }
-        }
-    }
-
-    /** Formats date (in milliseconds) to YYYYMMDDHHMM form. */
-    private static String millisToDateTime(final long millis) {
-        return new SimpleDateFormat("yyyyMMddHHmm").format(new Date());
+        });
+        tmMonitor.start();
     }
 
     /**
@@ -785,16 +644,21 @@ public class RealProject implements IProject {
     public List<SourceTextEntry> getAllEntries() {
         return allProjectEntries;
     }
-
-    /**
-     * {@inheritDoc}
-     */
-    public Set<Entry<String, TransEntry>> getTranslationsSet() {
-        return Collections.unmodifiableSet(translations.entrySet());
+    
+    public TMXEntry getTranslation(SourceTextEntry ste) {
+        TMXEntry r = projectTMX.getMultipleTranslation(ste.getKey());
+        if (r == null) {
+            r = projectTMX.getDefaultTranslation(ste.getSrcText());
+        }
+        return r;
     }
 
-    public TransEntry getTranslation(SourceTextEntry ste) {
-        return translations.get(ste.getSrcText());
+    public TMXEntry getDefaultTranslation(SourceTextEntry ste) {
+        return projectTMX.getDefaultTranslation(ste.getSrcText());
+    }
+
+    public TMXEntry getMultipleTranslation(SourceTextEntry ste) {
+        return projectTMX.getMultipleTranslation(ste.getKey());
     }
 
     /**
@@ -814,28 +678,31 @@ public class RealProject implements IProject {
     /**
      * {@inheritDoc}
      */
-    public void setAuthorTranslation(String author, SourceTextEntry entry, String trans) {
-        TransEntry prevTrEntry = translations.get(entry.getSrcText());
+    public void setTranslation(final SourceTextEntry entry, final String trans, boolean isDefault) {
+        String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+                System.getProperty("user.name"));
 
-        if (StringUtil.isEmpty(author)) {
-            throw new IllegalArgumentException("Illegal author argument.");
-        }
+        TMXEntry prevTrEntry = isDefault ? projectTMX.getDefaultTranslation(entry.getSrcText()) : projectTMX
+                .getMultipleTranslation(entry.getKey());
 
         // don't change anything if nothing has changed
         if (prevTrEntry == null) {
-            if ("".equals(trans))
+            if ("".equals(trans)) {
                 return;
+            }
         } else {
-            if (trans.equals(prevTrEntry.translation))
+            if (trans.equals(prevTrEntry.translation)) {
                 return;
+            }
         }
 
         m_modifiedFlag = true;
 
         if (StringUtil.isEmpty(trans)) {
-            translations.remove(entry.getSrcText());
+            projectTMX.setTranslation(entry, null, isDefault);
         } else {
-            translations.put(entry.getSrcText(), new TransEntry(trans, author, System.currentTimeMillis()));
+            TMXEntry te = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis());
+            projectTMX.setTranslation(entry, te, isDefault);
         }
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation : null;
 
@@ -847,22 +714,52 @@ public class RealProject implements IProject {
         hotStat.numberofTranslatedSegments += diff;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public void setTranslation(final SourceTextEntry entry, String trans) {
-        String changeId = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
-                System.getProperty("user.name"));
+    public Collection<TMXEntry> getAllTranslations() {
+        List<TMXEntry> r = new ArrayList<TMXEntry>();
 
-        setAuthorTranslation(changeId, entry, trans);
+        r.addAll(projectTMX.translationDefault.values());
+        r.addAll(projectTMX.translationMultiple.values());
+
+        return r;
     }
 
-    public Map<String, List<TransMemory>> getTransMemories() {
+    public Collection<TMXEntry> getAllOrphanedTranslations() {
+        List<TMXEntry> r = new ArrayList<TMXEntry>();
+
+        r.addAll(projectTMX.orphanedDefault.values());
+        r.addAll(projectTMX.orphanedMultiple.values());
+
+        return r;
+    }
+    
+    public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
+        if (projectTMX.translationDefault != null) {
+            for (Map.Entry<String, TMXEntry> en : projectTMX.translationDefault.entrySet()) {
+                it.iterate(en.getKey(), en.getValue());
+            }
+        }
+    }
+
+    public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
+        for (Map.Entry<EntryKey, TMXEntry> en : projectTMX.translationMultiple.entrySet()) {
+            it.iterate(en.getKey(), en.getValue());
+        }
+    }
+
+    public void iterateByOrphanedDefaultTranslations(DefaultTranslationsIterator it) {
+        for (Map.Entry<String, TMXEntry> en : projectTMX.orphanedDefault.entrySet()) {
+            it.iterate(en.getKey(), en.getValue());
+        }
+    }
+
+    public void iterateByOrphanedMultipleTranslations(MultipleTranslationsIterator it) {
+        for (Map.Entry<EntryKey, TMXEntry> en : projectTMX.orphanedMultiple.entrySet()) {
+            it.iterate(en.getKey(), en.getValue());
+        }
+    }
+
+    public Map<String, ExternalTMX> getTransMemories() {
         return transMemories;
-    }
-
-    public Map<String, TransEntry> getOrphanedSegments() {
-        return orphanedSegments;
     }
 
     /**
@@ -928,67 +825,97 @@ public class RealProject implements IProject {
         return Collections.unmodifiableList(projectFilesList);
     }
 
-    private class LoadFilesCallback extends ParseEntry {
+    protected class LoadFilesCallback extends ParseEntry {
         private FileInfo fileInfo;
-        /**
-         * a special 'reference' TMX that is used as extra refrence during translation. It is filled with
-         * fuzzy translations from source files.
-         */
-        private List<TransMemory> tmForFile;
 
-        public LoadFilesCallback() {
+        private final Set<String> existSource;
+        private final Set<EntryKey> existKeys;
+
+        private List<TMXEntry> fileTMXentries;
+
+        public LoadFilesCallback(final Set<String> existSource, final Set<EntryKey> existKeys) {
             super(m_config);
+            this.existSource = existSource;
+            this.existKeys = existKeys;
         }
 
-        protected void setCurrentFile(FileInfo fi) {
+        public void setCurrentFile(FileInfo fi) {
             fileInfo = fi;
-            tmForFile = null;
+            fileTMXentries = new ArrayList<TMXEntry>();
+            super.setCurrentFile(fi);
+        }
+
+        public void fileFinished() {
+            super.fileFinished();
+
+            if (fileTMXentries.size() > 0) {
+                ExternalTMX tmx = new ExternalTMX(fileInfo.filePath, fileTMXentries);
+                transMemories.put(tmx.getName(), tmx);
+            }
+
+            fileTMXentries = null;
+            fileInfo = null;
         }
 
         /**
          * {@inheritDoc}
          */
         protected void addSegment(String id, short segmentIndex, String segmentSource,
-                String segmentTranslation, String comment) {
+                String segmentTranslation, String comment, String prevSegment, String nextSegment, String path) {
             // if the source string is empty, don't add it to TM
-            if (segmentSource.length() == 0 || segmentSource.trim().length() == 0)
+            if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
                 return;
-            if (!StringUtil.isEmpty(segmentTranslation)) {
-                translations.put(segmentSource, new TransEntry(segmentTranslation));
             }
-            SourceTextEntry srcTextEntry = new SourceTextEntry(segmentSource, allProjectEntries.size() + 1);
+
+            EntryKey ek = new EntryKey(fileInfo.filePath, segmentSource, id, prevSegment, nextSegment, path);
+
+//            if (!StringUtil.isEmpty(segmentTranslation)) {
+//                // TODO add to temp map, then put to real
+//                projectTMX.putFromSourceFile(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0));
+//            }
+            SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, comment);
             allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);
+
+            existSource.add(segmentSource);
+            existKeys.add(srcTextEntry.getKey());
         }
 
         public void addFileTMXEntry(String source, String translation) {
             if (StringUtil.isEmpty(translation)) {
                 return;
             }
-            if (tmForFile == null) {
-                tmForFile = new ArrayList<TransMemory>();
-                transMemories.put(fileInfo.filePath, tmForFile);
-            }
-            tmForFile.add(new TransMemory(source, translation));
+            fileTMXentries.add(new TMXEntry(source, translation, null, 0));
         }
     };
 
     private class TranslateFilesCallback extends TranslateEntry {
+        private String currentFile;
+
         public TranslateFilesCallback() {
             super(m_config);
         }
 
-        protected String getSegmentTranslation(String id, int segmentIndex, String segmentSource) {
-            TransEntry tr = translations.get(segmentSource);
+        protected void setCurrentFileName(String fn) {
+            currentFile = fn;
+        }
+
+        protected String getSegmentTranslation(String id, int segmentIndex, String segmentSource,
+                String prevSegment, String nextSegment, String path) {
+            EntryKey ek = new EntryKey(currentFile, segmentSource, id, prevSegment, nextSegment, path);
+            TMXEntry tr = projectTMX.getMultipleTranslation(ek);
+            if (tr == null) {
+                tr = projectTMX.getDefaultTranslation(ek.sourceText);
+            }
             return tr != null ? tr.translation : segmentSource;
         }
     };
 
     static class AlignFilesCallback implements IAlignCallback {
-        Map<String, TransEntry> data = new HashMap<String, TransEntry>();
+        Map<String, TMXEntry> data = new HashMap<String, TMXEntry>();
 
         public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                String comment, IFilter filter) {
+                String path, IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
                 String sourceS = ParseEntry.stripSomeChars(source, spr);
@@ -997,7 +924,7 @@ public class RealProject implements IProject {
                     transS = "[" + filter.getFuzzyMark() + "] " + transS;
                 }
 
-                data.put(sourceS, new TransEntry(transS));
+                data.put(sourceS, new TMXEntry(sourceS, transS, null, 0));
             }
         }
     }

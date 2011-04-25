@@ -25,6 +25,7 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Label;
@@ -44,6 +45,7 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -188,6 +190,15 @@ public class ProjectPropertiesDialog extends JDialog {
 
         centerBox.add(localesBox);
 
+        // multiple translations
+        centerBox.add(Box.createVerticalStrut(5));
+        JPanel multBox = new JPanel(new BorderLayout());
+        multBox.setBorder(new EtchedBorder());
+        final JCheckBox m_allowDefaultsCheckBox = new JCheckBox();
+        Mnemonics.setLocalizedText(m_allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
+        multBox.add(m_allowDefaultsCheckBox);
+        centerBox.add(multBox, BorderLayout.WEST);
+
         // directories
         centerBox.add(Box.createVerticalStrut(5));
 
@@ -281,7 +292,8 @@ public class ProjectPropertiesDialog extends JDialog {
         m_okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doOK(m_sourceLocaleField, m_targetLocaleField, m_sentenceSegmentingCheckBox, m_srcRootField,
-                        m_locRootField, m_glosRootField, m_tmRootField, m_dictRootField);
+                        m_locRootField, m_glosRootField, m_tmRootField, m_dictRootField,
+                        m_allowDefaultsCheckBox);
             }
         });
 
@@ -346,6 +358,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
         m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
         m_sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
+        m_allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
 
         switch (dialogType) {
         case RESOLVE_DIRS:
@@ -536,8 +549,9 @@ public class ProjectPropertiesDialog extends JDialog {
 
     private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
-            JTextField m_glosRootField, JTextField m_tmRootField, JTextField m_dictRootField) {
-        if (!ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
+            JTextField m_glosRootField, JTextField m_tmRootField, JTextField m_dictRootField,
+            JCheckBox m_allowDefaultsCheckBox) {
+   if (!ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE")
@@ -560,6 +574,8 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
 
         projectProperties.setSentenceSegmentingEnabled(m_sentenceSegmentingCheckBox.isSelected());
+        
+        projectProperties.setSupportDefaultTranslations(m_allowDefaultsCheckBox.isSelected());
 
         projectProperties.setSourceRoot(m_srcRootField.getText());
         if (!projectProperties.getSourceRoot().endsWith(File.separator))

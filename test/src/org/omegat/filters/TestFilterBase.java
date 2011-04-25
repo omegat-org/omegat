@@ -28,11 +28,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
+import org.omegat.core.Core;
 import org.omegat.core.TestCore;
+import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.IProject;
+import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.RealProject;
+import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -54,17 +62,26 @@ public abstract class TestFilterBase extends TestCore {
     protected File outFile = new File(System.getProperty("java.io.tmpdir"), "OmegaT filter test - "
             + getClass().getSimpleName());
 
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        Core.initializeConsole(new TreeMap<String, String>());
+    }
+
     protected List<String> parse(AbstractFilter filter, String filename) throws Exception {
         final List<String> result = new ArrayList<String>();
 
         filter.parseFile(new File(filename), new TreeMap<String, String>(), context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, IFilter filter) {
+                    String comment, String path, IFilter filter) {
                 if (source.length() > 0)
                     result.add(source);
             }
 
             public void addFileTMXEntry(String source, String translation) {
+            }
+
+            public void linkPrevNextSegments() {
             }
         });
 
@@ -77,12 +94,15 @@ public abstract class TestFilterBase extends TestCore {
 
         filter.parseFile(new File(filename), options, context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, IFilter filter) {
+                    String comment, String path, IFilter filter) {
                 if (source.length() > 0)
                     result.add(source);
             }
 
             public void addFileTMXEntry(String source, String translation) {
+            }
+
+            public void linkPrevNextSegments() {
             }
         });
 
@@ -94,7 +114,7 @@ public abstract class TestFilterBase extends TestCore {
 
         filter.parseFile(new File(filename), new TreeMap<String, String>(), context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
-                    String comment, IFilter filter) {
+                    String comment, String path, IFilter filter) {
                 String segTranslation = isFuzzy ? null : translation;
                 result.put(source, segTranslation);
                 if (translation != null) {
@@ -107,14 +127,53 @@ public abstract class TestFilterBase extends TestCore {
             public void addFileTMXEntry(String source, String translation) {
                 legacyTMX.put(source, translation);
             }
+
+            public void linkPrevNextSegments() {
+            }
         });
+    }
+
+    protected List<ParsedEntry> parse3(AbstractFilter filter, String filename, Map<String, String> options)
+            throws Exception {
+        final List<ParsedEntry> result = new ArrayList<ParsedEntry>();
+
+        filter.parseFile(new File(filename), options, context, new IParseCallback() {
+            public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                    String comment, String path, IFilter filter) {
+                if (source.length() == 0) {
+                    return;
+                }
+                ParsedEntry e = new ParsedEntry();
+                e.id = id;
+                e.source = source;
+                e.translation = translation;
+                e.isFuzzy = isFuzzy;
+                e.comment = comment;
+                e.path = path;
+                result.add(e);
+            }
+
+            public void addFileTMXEntry(String source, String translation) {
+            }
+
+            public void linkPrevNextSegments() {
+            }
+        });
+
+        return result;
     }
 
     protected void translate(AbstractFilter filter, String filename) throws Exception {
         filter.translateFile(new File(filename), outFile, new TreeMap<String, String>(), context,
                 new ITranslateCallback() {
-                    public String getTranslation(String id, String source) {
+                    public String getTranslation(String id, String source, String path) {
                         return source;
+                    }
+
+                    public void linkPrevNextSegments() {
+                    }
+
+                    public void setPass(int pass) {
                     }
                 });
     }
@@ -156,5 +215,86 @@ public abstract class TestFilterBase extends TestCore {
 
     protected void compareXML(URL f1, URL f2) throws Exception {
         assertXMLEqual(new InputSource(f1.toExternalForm()), new InputSource(f2.toExternalForm()));
+    }
+
+    protected static class ParsedEntry {
+        String id;
+        String source;
+        String translation;
+        boolean isFuzzy;
+        String comment;
+        String path;
+    }
+
+    protected IProject.FileInfo loadSourceFiles(IFilter filter, String file) throws Exception {
+        ProjectPropertiesTest props = new ProjectPropertiesTest();
+        RealProjectTest p = new RealProjectTest(props);
+        return p.loadSourceFiles(filter, file);
+    }
+
+    protected IProject.FileInfo fi;
+    protected int fiCount;
+
+    protected void checkMultiStart(IProject.FileInfo fi, String file) {
+        this.fi = fi;
+        fiCount = 0;
+        for (SourceTextEntry ste : fi.entries) {
+            assertEquals(file, ste.getKey().file);
+            assertEquals(ste.getSrcText(), ste.getKey().sourceText);
+        }
+    }
+
+    protected void checkMultiEnd() {
+        assertEquals(fiCount, fi.entries.size());
+    }
+
+    protected void checkMulti(String sourceText, String id, String path, String prev, String next,
+            String comment) {
+        assertEquals(new EntryKey(fi.filePath, sourceText, id, prev, next, path), fi.entries.get(fiCount)
+                .getKey());
+        assertEquals(comment, fi.entries.get(fiCount).getComment());
+        fiCount++;
+    }
+
+    protected void skipMulti() {
+        fiCount++;
+    }
+
+    /**
+     * ProjectProperties successor for create project without directory.
+     */
+    protected static class ProjectPropertiesTest extends ProjectProperties {
+
+    }
+
+    /**
+     * RealProject successor for load file testing only.
+     */
+    protected static class RealProjectTest extends RealProject {
+        protected FilterContext context = new FilterContext(new Language("en"), new Language("be"), false);
+
+        public RealProjectTest(ProjectProperties props) {
+            super(props);
+        }
+
+        public FileInfo loadSourceFiles(IFilter filter, String file) throws Exception {
+            Core.setProject(this);
+
+            Set<String> existSource = new HashSet<String>();
+            Set<EntryKey> existKeys = new HashSet<EntryKey>();
+
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys);
+
+            FileInfo fi = new FileInfo();
+            fi.filePath = file;
+
+            loadFilesCallback.setCurrentFile(fi);
+
+            filter.parseFile(new File(file), new TreeMap<String, String>(), context, loadFilesCallback);
+
+            loadFilesCallback.fileFinished();
+
+            return fi;
+        }
     }
 }

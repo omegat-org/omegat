@@ -29,6 +29,7 @@ package org.omegat.filters3.xml.wix;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
+import org.xml.sax.Attributes;
 
 /**
  * Filter for WiX resources.
@@ -36,6 +37,7 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class WiXFilter extends XMLFilter {
+    private String id;
 
     public WiXFilter() {
         super(new WiXDialect());
@@ -69,5 +71,20 @@ public class WiXFilter extends XMLFilter {
     @Override
     public boolean isTargetEncodingVariable() {
         return true;
+    }
+
+    @Override
+    public void tagStart(String path, Attributes atts) {
+        id = atts.getValue("Id");
+    }
+
+    @Override
+    public String translate(String entry) {
+        if (entryParseCallback != null) {
+            entryParseCallback.addEntry(id, entry, null, false, null, null, this);
+            return entry;
+        } else {
+            return entryTranslateCallback.getTranslation(id, entry, null);
+        }
     }
 }

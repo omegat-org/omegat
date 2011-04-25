@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2011 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -22,27 +22,28 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.gui.multtrans;
+
+import org.omegat.core.data.EntryKey;
+import org.omegat.core.data.TMXEntry;
 
 /**
- * represents a translation memory element stored in memory
+ * Class for store found multiple translations.
  * 
- * @author Keith Godfrey
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class TransMemory {
-    public TransMemory(String src, String tar, String f) {
-        source = src;
-        target = tar;
-        file = f;
+public class MultipleTransFoundEntry {
+    String sourceText;
+    EntryKey key;
+    TMXEntry entry;
+
+    public MultipleTransFoundEntry(String sourceText, TMXEntry entry) {
+        this.sourceText = sourceText;
+        this.entry = entry;
     }
 
-    public TransMemory(String src, String tar) {
-        this.source = src;
-        this.target = tar;
+    public MultipleTransFoundEntry(EntryKey key, TMXEntry entry) {
+        this.key = key;
+        this.entry = entry;
     }
-
-    public String source;
-    public String target;
-    /** @deprecated */
-    public String file;
 }

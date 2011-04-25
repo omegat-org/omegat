@@ -133,10 +133,10 @@ public class RcFilter extends AbstractFilter {
                  */
                 loc = loc.replace("\\\"", "\"").replace("\"\"", "\"");
                 if (entryParseCallback != null) {
-                    entryParseCallback.addEntry(blockId + "/" + id, loc, null, false, null, this);
+                    entryParseCallback.addEntry(blockId + "/" + id, loc, null, false, null, null, this);
                 } else if (entryTranslateCallback != null) {
                     // replace translation
-                    String trans = entryTranslateCallback.getTranslation(null, loc);
+                    String trans = entryTranslateCallback.getTranslation(null, loc, null);
                     trans = trans.replace("\"", "\"\"");
                     s = s.substring(0, b + 1) + trans + s.substring(e);
                 } else if (entryAlignCallback != null && id != null) {

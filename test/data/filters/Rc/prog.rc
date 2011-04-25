@@ -1,0 +1,23 @@
+#pragma code_page(65001)
+#include <resources.h>
+
+103 MENUEX
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+{
+  POPUP "&File", 512, MFT_STRING, MFS_ENABLED, 0
+  {
+    MENUITEM "&Import...", 601, MFT_STRING, MFS_ENABLED
+    MENUITEM "&Export...", 602, MFT_STRING, MFS_ENABLED
+    MENUITEM "", -1, MFT_SEPARATOR, MFS_ENABLED
+    MENUITEM "Exit", 603, MFT_STRING, MFS_ENABLED
+  }
+}
+
+STRINGTABLE
+LANGUAGE LANG_ENGLISH, SUBLANG_ENGLISH_US
+{
+  61,  "Error Import"
+  62,  "Error Output"
+  63,  "Exiting..."
+}
+

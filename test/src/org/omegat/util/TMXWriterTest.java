@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+ Copyright (C) 2010 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -21,45 +21,32 @@
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
+package org.omegat.util;
 
-package org.omegat.core.data;
+import java.io.File;
 
-import java.util.List;
+import org.custommonkey.xmlunit.XMLUnit;
+import org.omegat.core.data.TMXEntry;
+import org.omegat.filters.TestFilterBase;
 
 /**
- * Represents a legacy Translation Memory file. These files generally reside in
- * /tm subfolder of the project folder.
- * 
- * @author Maxym Mykhalchuk
+ * @author Alex Buloichik
  */
-public class LegacyTM {
+public class TMXWriterTest extends TestFilterBase {
+    public void testLeveL1() throws Exception {
+        TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false, true,
+                false);
+        wr.writeEntry("source", "target", new TMXEntry(null, null, null, 0), null);
+        wr.close();
 
-    /** name of TMX file */
-    private String tmxname;
-    /** list of StringEntry objects of the TM */
-    private List<StringEntry> tmstrings;
-
-    /**
-     * Creates a new instance of Legacy Translation Memory
-     * 
-     * @param tmxname
-     *            name of TMX file
-     * @param tmstrings
-     *            list of StringEntry objects of the TM
-     */
-    public LegacyTM(String tmxname, List<StringEntry> tmstrings) {
-        this.tmxname = tmxname;
-        this.tmstrings = tmstrings;
+        XMLUnit.setControlEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
+        XMLUnit.setTestEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
+        XMLUnit.setIgnoreWhitespace(true);
+        try {
+            compareXML(outFile, new File("test/data/tmx/test-save-tmx14.tmx"));
+        } finally {
+            XMLUnit.setControlEntityResolver(null);
+            XMLUnit.setTestEntityResolver(null);
+        }
     }
-
-    /** Returns the name of this legacy TMX file */
-    public String getName() {
-        return tmxname;
-    }
-
-    /** Returns the list of StringEntry-es of this Translation Memory */
-    public List<StringEntry> getStrings() {
-        return tmstrings;
-    }
-
 }

@@ -25,19 +25,16 @@
 
 package org.omegat.core.data;
 
-import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.statistics.StatisticsInfo;
-import org.omegat.filters2.TranslationException;
 
 /**
- * Interface for access to loaded project. Each loaded project will be new
- * instance of IProject.
+ * Interface for access to loaded project. Each loaded project will be new instance of IProject.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
@@ -47,7 +44,7 @@ public interface IProject {
     /**
      * Save project properties only.
      */
-    void saveProjectProperties() throws IOException;
+    void saveProjectProperties() throws Exception;
 
     /**
      * Save project.
@@ -62,7 +59,7 @@ public interface IProject {
     /**
      * Create translated documents.
      */
-    void compileProject(String sourcePattern) throws IOException, TranslationException;
+    void compileProject(String sourcePattern) throws Exception;
 
     /**
      * Get project properties.
@@ -94,8 +91,7 @@ public interface IProject {
     ITokenizer getTargetTokenizer();
 
     /**
-     * Get all source segments. It's unmodifiable list, so, there is no need
-     * synchronization to read it.
+     * Get all source segments. It's unmodifiable list, so, there is no need synchronization to read it.
      */
     List<SourceTextEntry> getAllEntries();
 
@@ -106,21 +102,10 @@ public interface IProject {
      *            entry
      * @param trans
      *            translation
+     * @param isDefault
+     *            true if default translation should be changed
      */
-    void setTranslation(SourceTextEntry entry, String trans);
-
-    /**
-     * Set author and translation for entry. Use when user has typed a new
-     * translation.
-     * 
-     * @param author
-     *            author
-     * @param entry
-     *            entry
-     * @param trans
-     *            translation
-     */
-    void setAuthorTranslation(String author, SourceTextEntry entry, String trans);
+    void setTranslation(SourceTextEntry entry, String trans, boolean isDefault);
 
     /**
      * Get statistics for project.
@@ -130,38 +115,76 @@ public interface IProject {
     StatisticsInfo getStatistics();
 
     /**
-     * Get all translations for current project.
-     * 
-     * @return all translations map
-     */
-    Set<Map.Entry<String, TransEntry>> getTranslationsSet();
-
-    /**
-     * Get translation for specified entry.
+     * Get translation for specified entry. It looks first for multiple, then for default.
      * 
      * @param ste
      *            source entry
      * @return translation, or null if translation not exist
      */
-    TransEntry getTranslation(SourceTextEntry ste);
+    TMXEntry getTranslation(SourceTextEntry ste);
+
+    /**
+     * Get default translation for specified entry.
+     * 
+     * @param ste
+     *            source entry
+     * @return translation, or null if translation not exist
+     */
+    TMXEntry getDefaultTranslation(SourceTextEntry ste);
+    
+    /**
+     * Get multiple translation for specified entry.
+     * 
+     * @param ste
+     *            source entry
+     * @return translation, or null if translation not exist
+     */
+    TMXEntry getMultipleTranslation(SourceTextEntry ste);
+
+    /**
+     * Get all translations for current project.
+     * 
+     * @return all translations map
+     */
+    Collection<TMXEntry> getAllTranslations();
+
+    /**
+     * Get orphaned translations.
+     * 
+     * @return orphaned translations
+     */
+    Collection<TMXEntry> getAllOrphanedTranslations();
+    
+    /**
+     * Iterate by all default translations in project.
+     */
+    void iterateByDefaultTranslations(DefaultTranslationsIterator it);
+
+    /**
+     * Iterate by all multiple translations in project.
+     */
+    void iterateByMultipleTranslations(MultipleTranslationsIterator it);
+
+    /**
+     * Iterate by all orphaned default translations in project.
+     */
+    void iterateByOrphanedDefaultTranslations(DefaultTranslationsIterator it);
+
+    /**
+     * Iterate by all orphaned multiple translations in project.
+     */
+    void iterateByOrphanedMultipleTranslations(MultipleTranslationsIterator it);
 
     /**
      * Get all translation memories from /tm/ folder.
      * 
      * @return translation memories
      */
-    Map<String, List<TransMemory>> getTransMemories();
+    Map<String, ExternalTMX> getTransMemories();
 
     /**
-     * Get orphaned segments.
-     * 
-     * @return orphaned segments
-     */
-    Map<String, TransEntry> getOrphanedSegments();
-
-    /**
-     * Get info about each source file in project. It's unmodifiable list, so,
-     * there is no need synchronization to read it.
+     * Get info about each source file in project. It's unmodifiable list, so, there is no need
+     * synchronization to read it.
      */
     List<FileInfo> getProjectFiles();
 
@@ -169,5 +192,13 @@ public interface IProject {
         public String filePath;
 
         public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
+    }
+
+    public interface DefaultTranslationsIterator {
+        void iterate(String source, TMXEntry trans);
+    }
+
+    public interface MultipleTranslationsIterator {
+        void iterate(EntryKey source, TMXEntry trans);
     }
 }

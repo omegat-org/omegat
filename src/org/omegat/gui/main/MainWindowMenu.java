@@ -107,7 +107,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         try {
             method = mainWindowMenuHandler.getClass().getMethod(methodName);
         } catch (NoSuchMethodException ex) {
-            throw new IncompatibleClassChangeError("Error invoke method handler for main menu");
+            throw new IncompatibleClassChangeError(
+                    "Error invoke method handler for main menu: there is no method " + methodName);
         }
 
         // Call ...MenuItemActionPerformed method.
@@ -180,6 +181,9 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         editMenu.add(editSelectFuzzy3MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_3"));
         editMenu.add(editSelectFuzzy4MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_4"));
         editMenu.add(editSelectFuzzy5MenuItem = createMenuItem("TF_MENU_EDIT_COMPARE_5"));
+        editMenu.add(new JSeparator());
+        editMenu.add(editMultipleDefault = createMenuItem("MULT_MENU_DEFAULT"));
+        editMenu.add(editMultipleAlternate = createMenuItem("MULT_MENU_MULTIPLE"));
 
         switchCaseSubMenu.add(lowerCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_LOWER"));
         switchCaseSubMenu.add(upperCaseMenuItem = createMenuItem("TF_EDIT_MENU_SWITCH_CASE_TO_UPPER"));
@@ -416,6 +420,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                 editRedoMenuItem, editSelectFuzzy1MenuItem, editSelectFuzzy2MenuItem,
                 editSelectFuzzy3MenuItem, editSelectFuzzy4MenuItem, editSelectFuzzy5MenuItem,
                 editUndoMenuItem, switchCaseSubMenu, editOverwriteMachineTranslationMenuItem,
+                editMultipleDefault, editMultipleAlternate,
 
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem,
@@ -453,6 +458,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem editSelectFuzzy3MenuItem;
     JMenuItem editSelectFuzzy4MenuItem;
     JMenuItem editSelectFuzzy5MenuItem;
+    public JMenuItem editMultipleDefault;
+    public JMenuItem editMultipleAlternate;
     JMenuItem editUndoMenuItem;
     JMenuItem editTagPainterMenuItem;
     JMenuItem editExportSelectionMenuItem;

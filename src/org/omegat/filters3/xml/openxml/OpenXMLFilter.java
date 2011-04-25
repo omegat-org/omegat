@@ -116,8 +116,8 @@ public class OpenXMLFilter extends AbstractFilter {
         TRANSLATABLE = Pattern.compile(DOCUMENTS);
     }
 
-    /** Creates a new instance of OpenXMLFilter */
-    public OpenXMLFilter() {
+    protected boolean requirePrevNextFields() {
+        return true;
     }
 
     /** Returns true if it's an Open XML file. */

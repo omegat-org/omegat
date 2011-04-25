@@ -35,8 +35,11 @@ package org.omegat.core.data;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class SourceTextEntry {
-    /** Source entry text. */
-    private String src;
+    /** Storage for full entry's identifiers, including source text. */
+    private EntryKey key;
+
+    /** Comment in source file. */
+    private String comment;
 
     public enum DUPLICATE {
         /** There is no entries with the same source. */
@@ -50,24 +53,43 @@ public class SourceTextEntry {
     /** If entry with the same source already exist in project. */
     DUPLICATE duplicate;
 
+    /** Holds the number of this entry in a project. */
+    private int m_entryNum;
+
     /**
      * Creates a new source text entry.
      * 
+     * @param file
+     *            Source file name
+     * @param id
+     *            ID in source file
      * @param str
      *            unique StringEntry that holds source and translation of this entry.
      * @param entryNum
      *            the number of this entry in a project.
      */
-    public SourceTextEntry(String src, int entryNum) {
+    public SourceTextEntry(EntryKey key, int entryNum, String comment) {
+        this.key = key;
         m_entryNum = entryNum;
-        this.src = src;
+        this.comment = comment;
+    }
+
+    public EntryKey getKey() {
+        return key;
     }
 
     /**
      * Returns the source text (shortcut for <code>getStrEntry().getSrcText()</code>).
      */
     public String getSrcText() {
-        return src;
+        return key.sourceText;
+    }
+
+    /**
+     * Returns comment of entry if exist in source document.
+     */
+    public String getComment() {
+        return comment;
     }
 
     /** Returns the number of this entry in a project. */
@@ -79,8 +101,4 @@ public class SourceTextEntry {
     public DUPLICATE getDuplicate() {
         return duplicate;
     }
-
-    /** Holds the number of this entry in a project. */
-    private int m_entryNum;
-
 }

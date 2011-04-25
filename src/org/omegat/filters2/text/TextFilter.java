@@ -76,6 +76,10 @@ public class TextFilter extends AbstractFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
+    
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 
     public void processFile(BufferedReader in, BufferedWriter out) throws IOException {
         // BOM (byte order mark) bugfix

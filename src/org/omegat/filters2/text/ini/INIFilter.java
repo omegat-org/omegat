@@ -81,7 +81,7 @@ public class INIFilter extends AbstractFilter {
                                                                                 // bug
                                                                                 // 1462566
         String str;
-        String group = "";
+        String group = null;
 
         while ((str = lbpr.readLine()) != null) {
             String trimmed = str.trim();
@@ -95,7 +95,7 @@ public class INIFilter extends AbstractFilter {
 
             if (trimmed.startsWith("[") && trimmed.endsWith("]")) {
                 // group name
-                group = trimmed;
+                group = trimmed.substring(1, trimmed.length() - 1);
             }
 
             // key=value pairs
@@ -112,15 +112,17 @@ public class INIFilter extends AbstractFilter {
             // writing out everything before = (and = itself)
             outfile.write(str.substring(0, equalsPos + 1));
 
+            String key = (group != null ? group + '/' : "") + str.substring(0, equalsPos).trim();
             String value = str.substring(equalsPos + 1);
 
             value = leftTrim(value);
 
             if (entryAlignCallback != null) {
-                String key = str.substring(0, equalsPos).trim();
-                align.put(group + '.' + key, value);
-            } else {
-                String trans = processEntry(value);
+                align.put(key, value);
+            } else if (entryParseCallback != null) {
+                entryParseCallback.addEntry(key, value, null, false, null, null, this);
+            } else if (entryTranslateCallback != null) {
+                String trans = entryTranslateCallback.getTranslation(key, value, null);
                 outfile.write(trans);
 
                 // outfile.write("\n");

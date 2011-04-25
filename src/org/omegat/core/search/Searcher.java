@@ -39,12 +39,12 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TransEntry;
-import org.omegat.core.data.TransMemory;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
@@ -228,7 +228,7 @@ public class Searcher {
             // get the source and translation of the next entry
             SourceTextEntry ste = dataEngine.getAllEntries().get(i);
             String srcText = ste.getSrcText();
-            TransEntry te = m_project.getTranslation(ste);
+            TMXEntry te = m_project.getTranslation(ste);
             String locText = te != null ? te.translation : "";
 
             checkEntry(srcText, locText, te, i, null);
@@ -241,16 +241,13 @@ public class Searcher {
         if (m_tmSearch) {
             // search in orphaned
             String file = OStrings.getString("CT_ORPHAN_STRINGS");
-            for (Map.Entry<String, TransEntry> en : m_project.getOrphanedSegments().entrySet()) {
+            for (TMXEntry en : m_project.getAllOrphanedTranslations()) {
                 // stop searching if the max. nr of hits has been reached
                 if (m_numFinds >= m_maxResults) {
                     break;
                 }
 
-                String srcText = en.getKey();
-                TransEntry te = en.getValue();
-
-                checkEntry(srcText, te.translation, te, -1, file);
+                checkEntry(en.source, en.translation, en, -1, file);
                 if (stopCallback.isStopped()) {
                     return;
                 }
@@ -259,16 +256,16 @@ public class Searcher {
             // They are not available in external TM, so skip the search in
             // that case.
             if (!m_searchAuthor && !m_searchDateAfter && !m_searchDateBefore) {
-                for (Map.Entry<String, List<TransMemory>> tmEn : m_project.getTransMemories().entrySet()) {
+                for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     file = tmEn.getKey();
-                    for (TransMemory tm : tmEn.getValue()) {
+                    for (TMXEntry tm : tmEn.getValue().getEntries()) {
                         // stop searching if the max. nr of hits has been
                         // reached
                         if (m_numFinds >= m_maxResults) {
                             break;
                         }
 
-                        checkEntry(tm.source, tm.target, null, -1, file);
+                        checkEntry(tm.source, tm.translation, null, -1, file);
                         if (stopCallback.isStopped()) {
                             return;
                         }
@@ -292,7 +289,7 @@ public class Searcher {
      * @param intro
      *            file
      */
-    protected void checkEntry(String srcText, String locText, TransEntry entry, int entryNum, String intro) {
+    protected void checkEntry(String srcText, String locText, TMXEntry entry, int entryNum, String intro) {
         SearchMatch[] srcMatches = null;
         if (m_searchSource) {
             if (searchString(srcText)) {
@@ -336,7 +333,8 @@ public class Searcher {
             fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), new SearchCallback(
                     m_project.getProjectProperties()) {
                 protected void addSegment(String id, short segmentIndex, String segmentSource,
-                        String segmentTranslation, String comment) {
+                        String segmentTranslation, String comment, String prevSegment, String nextSegment,
+                        String path) {
                     searchText(segmentSource);
                 }
 
@@ -421,10 +419,10 @@ public class Searcher {
      * 
      * @return True if the text string contains the search string
      */
-    private boolean searchAuthor(TransEntry te) {
+    private boolean searchAuthor(TMXEntry te) {
         if (te == null || m_author == null)
             return false;
-        String author = te.changeId;
+        String author = te.changer;
         if (author == null)
             return false;
 

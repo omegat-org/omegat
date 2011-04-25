@@ -36,7 +36,7 @@ import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
@@ -266,7 +266,7 @@ public class MainWindowMenuHandler {
         String selection = Core.getEditor().getSelectedText();
         if (selection == null) {
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            TransEntry te = Core.getProject().getTranslation(ste);
+            TMXEntry te = Core.getProject().getTranslation(ste);
             if (te != null) {
                 selection = te.translation;
             } else {
@@ -320,6 +320,14 @@ public class MainWindowMenuHandler {
     /** Set active match to #5. */
     public void editSelectFuzzy5MenuItemActionPerformed() {
         Core.getMatcher().setActiveMatch(4);
+    }
+
+    public void editMultipleDefaultActionPerformed() {
+        Core.getEditor().setAlternateTranslationForCurrentEntry(false);
+    }
+    
+    public void editMultipleAlternateActionPerformed() {
+        Core.getEditor().setAlternateTranslationForCurrentEntry(true);
     }
 
     public void cycleSwitchCaseMenuItemActionPerformed() {

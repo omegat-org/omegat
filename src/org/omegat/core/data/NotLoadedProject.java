@@ -25,10 +25,9 @@
 package org.omegat.core.data;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.statistics.StatisticsInfo;
@@ -58,15 +57,39 @@ public class NotLoadedProject implements IProject {
         return null;
     }
 
-    public List<LegacyTM> getMemory() {
+    public TMXEntry getTranslation(SourceTextEntry ste) {
         return null;
     }
 
-    public TransEntry getTranslation(SourceTextEntry ste) {
+    public TMXEntry getDefaultTranslation(SourceTextEntry ste) {
         return null;
     }
 
-    public Set<Entry<String, TransEntry>> getTranslationsSet() {
+    public TMXEntry getMultipleTranslation(SourceTextEntry ste) {
+        return null;
+    }
+
+    public Collection<TMXEntry> getAllTranslations() {
+        return null;
+    }
+
+    public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
+    }
+
+    public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
+    }
+
+    public void iterateByOrphanedDefaultTranslations(DefaultTranslationsIterator it) {
+    }
+
+    public void iterateByOrphanedMultipleTranslations(MultipleTranslationsIterator it) {
+    }
+
+    public Collection<TMXEntry> getAllOrphanedTranslations() {
+        return null;
+    }
+
+    public Map<String, ExternalTMX> getTransMemories() {
         return null;
     }
 
@@ -79,14 +102,6 @@ public class NotLoadedProject implements IProject {
     }
 
     public StatisticsInfo getStatistics() {
-        return null;
-    }
-
-    public Map<String, TransEntry> getOrphanedSegments() {
-        return null;
-    }
-
-    public Map<String, List<TransMemory>> getTransMemories() {
         return null;
     }
 
@@ -107,10 +122,7 @@ public class NotLoadedProject implements IProject {
     public void saveProjectProperties() throws IOException {
     }
 
-    public void setAuthorTranslation(String author, SourceTextEntry entry, String trans) {
-    }
-
-    public void setTranslation(SourceTextEntry entry, String trans) {
+    public void setTranslation(SourceTextEntry entry, String trans, boolean isDefault) {
     }
 
     public ITokenizer getSourceTokenizer() {

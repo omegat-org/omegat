@@ -37,8 +37,8 @@ import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 
 /**
- * The class that sentences the paragraphs into sentences and glues translated
- * sentences together to form a paragraph.
+ * The class that sentences the paragraphs into sentences and glues translated sentences together to form a
+ * paragraph.
  * 
  * 
  * @author Maxym Mykhalchuk
@@ -51,14 +51,11 @@ public final class Segmenter {
     /**
      * Segments the paragraph to sentences according to currently setup rules.
      * <p>
-     * Bugfix for <a
-     * href="http://sourceforge.net/support/tracker.php?aid=1288742">issue
-     * 1288742</a>: Sentences are returned without spaces in the beginning and
-     * at the end of a sentence.
+     * Bugfix for <a href="http://sourceforge.net/support/tracker.php?aid=1288742">issue 1288742</a>:
+     * Sentences are returned without spaces in the beginning and at the end of a sentence.
      * <p>
-     * An additional list with space information is returned to be able to glue
-     * translation together with the same spaces between them as in original
-     * paragraph.
+     * An additional list with space information is returned to be able to glue translation together with the
+     * same spaces between them as in original paragraph.
      * 
      * @param paragraph
      *            the paragraph text
@@ -103,13 +100,11 @@ public final class Segmenter {
     }
 
     /**
-     * Returns pre-sentences (sentences with spaces between), computed by
-     * breaking paragraph into chunks of text. Also returns the list with
-     * "the reasons" why the breaks were made, i.e. the list of break rules that
-     * contributed to each of the breaks made.
+     * Returns pre-sentences (sentences with spaces between), computed by breaking paragraph into chunks of
+     * text. Also returns the list with "the reasons" why the breaks were made, i.e. the list of break rules
+     * that contributed to each of the breaks made.
      * <p>
-     * If glued back together, these strings form the same paragraph text as
-     * this function was fed.
+     * If glued back together, these strings form the same paragraph text as this function was fed.
      * 
      * @param paragraph
      *            the paragraph text
@@ -224,8 +219,7 @@ public final class Segmenter {
         }
 
         /**
-         * Other BreakPosition is "equal to" this one iff it has the same
-         * position.
+         * Other BreakPosition is "equal to" this one iff it has the same position.
          */
         public boolean equals(Object obj) {
             if (obj == null)
@@ -245,12 +239,10 @@ public final class Segmenter {
         /**
          * Compares this break position with another.
          * 
-         * @return a negative integer if its position is less than the
-         *         another's, zero if they are equal, or a positive integer as
-         *         its position is greater than the another's.
+         * @return a negative integer if its position is less than the another's, zero if they are equal, or a
+         *         positive integer as its position is greater than the another's.
          * @throws ClassCastException
-         *             if the specified object's type prevents it from being
-         *             compared to this Object.
+         *             if the specified object's type prevents it from being compared to this Object.
          */
         public int compareTo(BreakPosition that) {
             return this.position - that.position;
@@ -260,16 +252,14 @@ public final class Segmenter {
     /**
      * Glues the sentences back to paragraph.
      * <p>
-     * As sentences are returned by {@link #segment(String, List)} without
-     * spaces before and after them, this method adds spaces if needed:
+     * As sentences are returned by {@link #segment(String, List)} without spaces before and after them, this
+     * method adds spaces if needed:
      * <ul>
      * <li>For translation to Japanese does <b>not</b> add any spaces. <br>
-     * A special exceptions are the Break SRX rules that break on space, i.e.
-     * before and after patterns consist of spaces (they get trimmed to an empty
-     * string). For such rules all the spaces are added
+     * A special exceptions are the Break SRX rules that break on space, i.e. before and after patterns
+     * consist of spaces (they get trimmed to an empty string). For such rules all the spaces are added
      * <li>For translation from Japanese adds one space
-     * <li>For all other language combinations adds those spaces as were in the
-     * paragraph before.
+     * <li>For all other language combinations adds those spaces as were in the paragraph before.
      * </ul>
      * 
      * @param sentences
@@ -308,6 +298,27 @@ public final class Segmenter {
             res.append(sentences.get(i));
         }
         return res.toString();
+    }
+
+    /**
+     * Segment source and target entries from TMX when counts are equals.
+     */
+    public static void segmentEntries(boolean needResegment, Language sourceLang, String sourceEntry,
+            Language targetLang, String targetEntry, List<String> sourceSegments, List<String> targetSegments) {
+        if (needResegment) {
+            List<String> srcSegments = Segmenter.segment(sourceLang, sourceEntry, null, null);
+            List<String> tarSegments = Segmenter.segment(targetLang, targetEntry, null, null);
+
+            if (srcSegments.size() == tarSegments.size()) {
+                sourceSegments.addAll(srcSegments);
+                targetSegments.addAll(tarSegments);
+                return;
+            }
+        }
+        // not need to resegment, or segments counts not equals
+        sourceSegments.add(sourceEntry);
+        targetSegments.add(targetEntry);
+
     }
 
     /** CJK languages. */

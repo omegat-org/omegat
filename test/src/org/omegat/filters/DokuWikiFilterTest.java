@@ -30,6 +30,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import org.junit.Test;
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.dokuwiki.DokuWikiFilter;
 
 public class DokuWikiFilterTest extends TestFilterBase {
@@ -69,4 +70,13 @@ public class DokuWikiFilterTest extends TestFilterBase {
                 new TreeMap<String, String>(), context));
     }
 
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/dokuwiki/dokuwiki.txt";
+        IProject.FileInfo fi = loadSourceFiles(new DokuWikiFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("Header", null, null, "", "This is a flow text.", null);
+        checkMulti("This is a flow text.", null, null, "Header", "multiple spaces in text", null);
+        checkMulti("multiple spaces in text", null, null, "This is a flow text.", "* asterisk * asterisk", null);
+    }
 }

@@ -24,6 +24,7 @@
 
 package org.omegat.filters;
 
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.text.bundles.ResourceBundleFilter;
@@ -44,7 +45,7 @@ public class ResourceBundleFilterTest extends TestFilterBase {
         align(new ResourceBundleFilter(), "resourceBundle/file-ResourceBundleFilter.properties",
                 "resourceBundle/file-ResourceBundleFilter_be.properties", new IAlignCallback() {
                     public void addTranslation(String id, String source, String translation, boolean isFuzzy,
-                            String comment, IFilter filter) {
+                            String path, IFilter filter) {
                         ar.found = id.equals("ID") && source.equals("Value") && translation.equals("test");
                     }
                 });
@@ -53,5 +54,16 @@ public class ResourceBundleFilterTest extends TestFilterBase {
 
     public static class AlignResult {
         boolean found = false;
+    }
+
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/resourceBundle/file-ResourceBundleFilter.properties";
+        IProject.FileInfo fi = loadSourceFiles(new ResourceBundleFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("Value", "ID", null, null, null, null);
+        checkMulti("Value2", "ID2", null, null, null, null);
+        checkMulti("Value3", "ID3", null, null, null, null);
+        checkMultiEnd();
     }
 }

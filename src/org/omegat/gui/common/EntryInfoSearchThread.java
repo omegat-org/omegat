@@ -70,8 +70,17 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
      * 
      * @return true if current entry was changed
      */
-    protected boolean isEntryChanged() {
+    private boolean isEntryChanged() {
         return currentlyProcessedEntry != pane.currentlyProcessedEntry;
+    }
+    
+    /**
+     * Throws exception if entry changed for stop processing.
+     */
+    protected void checkEntryChanged() throws EntryChangedException {
+        if (isEntryChanged()) {
+            throw new EntryChangedException();
+        }
     }
 
     @Override
@@ -83,6 +92,9 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
         Exception error = null;
         try {
             result = search();
+        } catch (EntryChangedException ex) {
+            // entry changed - there is no sence to display results
+            return;
         } catch (Exception ex) {
             error = ex;
         }
@@ -113,5 +125,12 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
      * 
      * @return result of search
      */
-    protected abstract T search() throws Exception;
+    protected abstract T search() throws EntryChangedException, Exception;
+
+    /**
+     * Any search can generate this exception for stop searching if entry changed. All callers must catch it
+     * and just skip.
+     */
+    public static class EntryChangedException extends RuntimeException {
+    }
 }

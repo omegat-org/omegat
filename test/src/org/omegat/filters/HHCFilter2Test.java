@@ -20,10 +20,11 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
 
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.hhc.HHCFilter2;
 
 public class HHCFilter2Test extends TestFilterBase {
@@ -37,5 +38,17 @@ public class HHCFilter2Test extends TestFilterBase {
         translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2.hhc");
         translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2-Contents file.hhc");
         translateText(new HHCFilter2(), "test/data/filters/hhc/file-HHCFilter2-Index file.hhk");
+    }
+
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/hhc/file-HHCFilter2.hhc";
+        IProject.FileInfo fi = loadSourceFiles(new HHCFilter2(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("Introduction to GraphEdit", null, null, "", "Building Filter Graphs", null);
+        checkMulti("Building Filter Graphs", null, null, "Introduction to GraphEdit",
+                "Build a File Playback Graph", null);
+        checkMulti("Build a File Playback Graph", null, null, "Building Filter Graphs", "", null);
+        checkMultiEnd();
     }
 }

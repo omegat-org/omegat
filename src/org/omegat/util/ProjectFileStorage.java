@@ -26,17 +26,17 @@
 
 package org.omegat.util;
 
-import java.io.BufferedWriter;
+import gen.core.project.Omegat;
+import gen.core.project.Project;
+
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
 
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.filters2.TranslationException;
-import org.omegat.util.xml.XMLBlock;
-import org.omegat.util.xml.XMLStreamReader;
 
 /**
  * Class that reads and saves project definition file.
@@ -48,90 +48,49 @@ import org.omegat.util.xml.XMLStreamReader;
  */
 public class ProjectFileStorage {
 
-    public static ProjectProperties loadProjectProperties(File projectDir) throws IOException,
-            TranslationException {
+    static private final JAXBContext CONTEXT;
+    static {
+        try {
+            CONTEXT = JAXBContext.newInstance(Omegat.class);
+        } catch (Exception ex) {
+            throw new ExceptionInInitializerError(ex);
+        }
+    }
+
+    public static ProjectProperties loadProjectProperties(File projectDir) throws Exception {
         ProjectProperties result = new ProjectProperties(projectDir);
 
         File inFile = new File(projectDir, OConsts.FILE_PROJECT);
 
-        XMLStreamReader m_reader = new XMLStreamReader();
-        m_reader.killEmptyBlocks();
-        m_reader.setStream(inFile.getAbsolutePath(), "UTF-8");
+        Omegat om = (Omegat) CONTEXT.createUnmarshaller().unmarshal(inFile);
 
-        // verify valid project file
-        XMLBlock blk;
-        List<XMLBlock> lst;
-
-        // advance to omegat tag
-        if (m_reader.advanceToTag("omegat") == null)
-            return result;
-
-        // advance to project tag
-        if ((blk = m_reader.advanceToTag("project")) == null)
-            return result;
-
-        String ver = blk.getAttribute("version");
-        if (ver != null && !ver.equals(OConsts.PROJ_CUR_VERSION)) {
-            throw new TranslationException(StaticUtils.format(
-                    OStrings.getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), new Object[] { ver }));
+        if (!OConsts.PROJ_CUR_VERSION.equals(om.getProject().getVersion())) {
+            throw new TranslationException(StaticUtils.format(OStrings
+                    .getString("PFR_ERROR_UNSUPPORTED_PROJECT_VERSION"), new Object[] { om.getProject()
+                    .getVersion() }));
         }
 
         // if folder is in default locations, name stored as __DEFAULT__
         String m_root = inFile.getParentFile().getAbsolutePath() + File.separator;
 
-        lst = m_reader.closeBlock(blk);
-        if (lst == null)
-            return result;
+        result.setTargetRoot(computeAbsolutePath(m_root, om.getProject().getTargetDir(),
+                OConsts.DEFAULT_TARGET));
+        result.setSourceRoot(computeAbsolutePath(m_root, om.getProject().getSourceDir(),
+                OConsts.DEFAULT_SOURCE));
+        result.setTMRoot(computeAbsolutePath(m_root, om.getProject().getTmDir(), OConsts.DEFAULT_TM));
+        result.setGlossaryRoot(computeAbsolutePath(m_root, om.getProject().getGlossaryDir(),
+                OConsts.DEFAULT_GLOSSARY));
+        result.setDictRoot(computeAbsolutePath(m_root, om.getProject().getDictionaryDir(),
+                OConsts.DEFAULT_DICT));
 
-        for (int i = 0; i < lst.size(); i++) {
-            blk = lst.get(i);
-            if (blk.isClose())
-                continue;
+        result.setSourceLanguage(om.getProject().getSourceLang());
+        result.setTargetLanguage(om.getProject().getTargetLang());
 
-            if (blk.getTagName().equals("target_dir")) {
-                if (++i >= lst.size())
-                    break;
-                blk = lst.get(i);
-                result.setTargetRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_TARGET));
-            } else if (blk.getTagName().equals("source_dir")) {
-                if (++i >= lst.size())
-                    break;
-                blk = lst.get(i);
-                result.setSourceRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_SOURCE));
-            } else if (blk.getTagName().equals("tm_dir")) {
-                if (++i >= lst.size())
-                    break;
-                blk = lst.get(i);
-                result.setTMRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_TM));
-            } else if (blk.getTagName().equals("glossary_dir")) {
-                if (++i >= lst.size())
-                    break;
-                blk = lst.get(i);
-                result.setGlossaryRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_GLOSSARY));
-            } else if (blk.getTagName().equals("dictionary_dir")) {
-                if (++i >= lst.size())
-                    break;
-                blk = lst.get(i);
-                result.setDictRoot(computeAbsolutePath(m_root, blk.getText(), OConsts.DEFAULT_DICT));
-            } else if (blk.getTagName().equals("source_lang")) {
-                if (++i >= lst.size())
-                    break;
-                blk = lst.get(i);
-                if (blk != null)
-                    result.setSourceLanguage(blk.getText());
-            } else if (blk.getTagName().equals("target_lang")) {
-                if (++i >= lst.size())
-                    break;
-                blk = lst.get(i);
-                if (blk != null)
-                    result.setTargetLanguage(blk.getText());
-            } else if (blk.getTagName().equals("sentence_seg")) {
-                if (++i >= lst.size())
-                    break;
-                blk = lst.get(i);
-                if (blk != null)
-                    result.setSentenceSegmentingEnabled(Boolean.parseBoolean(blk.getText()));
-            }
+        if (om.getProject().isSentenceSeg() != null) {
+            result.setSentenceSegmentingEnabled(om.getProject().isSentenceSeg());
+        }
+        if (om.getProject().isSupportDefaultTranslations() != null) {
+            result.setSupportDefaultTranslations(om.getProject().isSupportDefaultTranslations());
         }
 
         return result;
@@ -140,46 +99,40 @@ public class ProjectFileStorage {
     /**
      * Saves project file to disk.
      */
-    public static void writeProjectFile(ProjectProperties props) throws IOException {
+    public static void writeProjectFile(ProjectProperties props) throws Exception {
         File outFile = new File(props.getProjectRoot(), OConsts.FILE_PROJECT);
         String m_root = outFile.getParentFile().getAbsolutePath() + File.separator;
 
-        BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outFile),
-                OConsts.UTF8));
-        out.write("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
-        out.write("<omegat>\n");
-        out.write("  <project version=\"1.0\">\n");
-        out.write("    <source_dir>"
-                + computeRelativePath(m_root, props.getSourceRoot(), OConsts.DEFAULT_SOURCE)
-                + "</source_dir>\n");
-        out.write("    <target_dir>"
-                + computeRelativePath(m_root, props.getTargetRoot(), OConsts.DEFAULT_TARGET)
-                + "</target_dir>\n");
-        out.write("    <tm_dir>" + computeRelativePath(m_root, props.getTMRoot(), OConsts.DEFAULT_TM)
-                + "</tm_dir>\n");
-        out.write("    <glossary_dir>"
-                + computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY)
-                + "</glossary_dir>\n");
-        out.write("    <dictionary_dir>"
-                + computeRelativePath(m_root, props.getDictRoot(), OConsts.DEFAULT_DICT)
-                + "</dictionary_dir>\n");
-        out.write("    <source_lang>" + props.getSourceLanguage() + "</source_lang>\n");
-        out.write("    <target_lang>" + props.getTargetLanguage() + "</target_lang>\n");
-        out.write("    <sentence_seg>" + props.isSentenceSegmentingEnabled() + "</sentence_seg>\n");
-        out.write("  </project>\n");
-        out.write("</omegat>\n");
-        out.close();
+        Omegat om = new Omegat();
+        om.setProject(new Project());
+        om.getProject().setVersion(OConsts.PROJ_CUR_VERSION);
+
+        om.getProject().setSourceDir(
+                computeRelativePath(m_root, props.getSourceRoot(), OConsts.DEFAULT_SOURCE));
+        om.getProject().setTargetDir(
+                computeRelativePath(m_root, props.getTargetRoot(), OConsts.DEFAULT_TARGET));
+        om.getProject().setTmDir(computeRelativePath(m_root, props.getTMRoot(), OConsts.DEFAULT_TM));
+        om.getProject().setGlossaryDir(
+                computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY));
+        om.getProject().setDictionaryDir(
+                computeRelativePath(m_root, props.getDictRoot(), OConsts.DEFAULT_DICT));
+        om.getProject().setSourceLang(props.getSourceLanguage().toString());
+        om.getProject().setTargetLang(props.getTargetLanguage().toString());
+        om.getProject().setSentenceSeg(props.isSentenceSegmentingEnabled());
+        om.getProject().setSupportDefaultTranslations(props.isSupportDefaultTranslations());
+
+        Marshaller m = CONTEXT.createMarshaller();
+        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        m.marshal(om, outFile);
     }
 
     /**
-     * Returns absolute path for any project's folder. Since 1.6.0 supports
-     * relative paths (RFE 1111956).
+     * Returns absolute path for any project's folder. Since 1.6.0 supports relative paths (RFE 1111956).
      * 
      * @param relativePath
      *            relative path from project file.
      * @param defaultName
-     *            default name for such a project's folder, if relativePath is
-     *            "__DEFAULT__".
+     *            default name for such a project's folder, if relativePath is "__DEFAULT__".
      */
     private static String computeAbsolutePath(String m_root, String relativePath, String defaultName) {
         if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath))
@@ -217,8 +170,8 @@ public class ProjectFileStorage {
     }
 
     /**
-     * Returns relative path for any project's folder. If absolutePath has
-     * default location, returns "__DEFAULT__".
+     * Returns relative path for any project's folder. If absolutePath has default location, returns
+     * "__DEFAULT__".
      * 
      * @param absolutePath
      *            absolute path to project folder.

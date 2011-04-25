@@ -20,11 +20,18 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
 
+import java.io.File;
+import java.util.TreeMap;
+
+import org.junit.Test;
+import org.omegat.core.data.IProject;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters3.xml.xhtml.XHTMLFilter;
+import org.omegat.util.Language;
 
 public class XHTMLFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
@@ -32,6 +39,22 @@ public class XHTMLFilterTest extends TestFilterBase {
     }
 
     public void testTranslate() throws Exception {
-        //translateXML(new XHTMLFilter(), "test/data/filters/xhtml/file-XHTMLFilter.html");
+        // translateXML(new XHTMLFilter(), "test/data/filters/xhtml/file-XHTMLFilter.html");
+    }
+
+    @Test
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/xhtml/file-XHTMLFilter.html";
+        XHTMLFilter filter = new XHTMLFilter();
+        filter.isFileSupported(new File(f), new TreeMap<String, String>(), new FilterContext(new Language(
+                "en"), new Language("be"), false));
+        IProject.FileInfo fi = loadSourceFiles(filter, f);
+
+        checkMultiStart(fi, f);
+        checkMulti("en", null, null, "", "en", null);
+        checkMulti("en", null, null, "en", "XHTML 1.0 Example", null);
+        checkMulti("XHTML 1.0 Example", null, null, "en", "Extensible HyperText Markup Language", null);
+        checkMulti("Extensible HyperText Markup Language", null, null, "XHTML 1.0 Example",
+                "http://www.w3.org/Icons/valid-xhtml10", null);
     }
 }

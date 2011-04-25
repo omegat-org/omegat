@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
 
@@ -29,43 +29,57 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.junit.Test;
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.TextFilter;
 
 public class TextFilterTest extends TestFilterBase {
     @Test
     public void testTextFilterParsing() throws Exception {
-	List<String> entries = parse(new TextFilter(), "test/data/filters/text/text1.txt");
-	assertEquals("First entry\r\n", entries.get(0));
+        List<String> entries = parse(new TextFilter(), "test/data/filters/text/text1.txt");
+        assertEquals("First entry\r\n", entries.get(0));
     }
+
     public void testTranslate() throws Exception {
-	translateText(new TextFilter(), "test/data/filters/text/text1.txt");
+        translateText(new TextFilter(), "test/data/filters/text/text1.txt");
     }
 
     @Test
     public void testParseNeverBreak() throws Exception {
-	checkFile(TextFilter.SEGMENT_NEVER, 1, 1);
+        checkFile(TextFilter.SEGMENT_NEVER, 1, 1);
     }
 
     @Test
     public void testParseEmptyLinesBreak() throws Exception {
-	checkFile(TextFilter.SEGMENT_EMPTYLINES, 3, 1);
+        checkFile(TextFilter.SEGMENT_EMPTYLINES, 3, 1);
     }
 
     @Test
     public void testParseLinesBreak() throws Exception {
-	checkFile(TextFilter.SEGMENT_BREAKS, 3, 3);
+        checkFile(TextFilter.SEGMENT_BREAKS, 3, 3);
     }
 
     protected void checkFile(String segValue, int count1, int count2) throws Exception {
-        Map<String,String> options = new TreeMap<String, String>();
+        Map<String, String> options = new TreeMap<String, String>();
         options.put(TextFilter.OPTION_SEGMENT_ON, segValue);
 
         TextFilter filter = new TextFilter();
 
-	List<String> entries = parse(filter, "test/data/filters/text/file-TextFilter.txt", options);
-	assertEquals(count1, entries.size());
+        List<String> entries = parse(filter, "test/data/filters/text/file-TextFilter.txt", options);
+        assertEquals(count1, entries.size());
 
-	entries = parse(filter, "test/data/filters/text/file-TextFilter-noemptylines.txt", options);
-	assertEquals(count2, entries.size());
+        entries = parse(filter, "test/data/filters/text/file-TextFilter-noemptylines.txt", options);
+        assertEquals(count2, entries.size());
+    }
+
+    @Test
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/text/file-TextFilter-multiple.txt";
+        IProject.FileInfo fi = loadSourceFiles(new TextFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("line1", null, null, "", "line2", null);
+        checkMulti("line2", null, null, "line1", "line3", null);
+        checkMulti("line3", null, null, "line2", "", null);
+        checkMultiEnd();
     }
 }

@@ -41,11 +41,11 @@ public interface IAlignCallback {
      *            translated text
      * @param isFuzzy
      *            true if translation is fuzzy
-     * @param comment
-     *            comment for entry, if format supports it
+     * @param path
+     *            path
      * @param filter
      *            filter which produces entry
      */
-    void addTranslation(String id, String source, String translation, boolean isFuzzy, String comment,
+    void addTranslation(String id, String source, String translation, boolean isFuzzy, String path,
             IFilter filter);
 }

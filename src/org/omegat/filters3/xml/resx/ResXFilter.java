@@ -28,6 +28,8 @@ package org.omegat.filters3.xml.resx;
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
+import org.omegat.util.StringUtil;
+import org.xml.sax.Attributes;
 
 /**
  * Filter for ResX files.
@@ -35,6 +37,11 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  */
 public class ResXFilter extends XMLFilter {
+
+    private String id = "";
+    private String entryText;
+    private String comment;
+    private String text;
 
     /**
      * Creates a new instance of ResXFilter
@@ -53,9 +60,8 @@ public class ResXFilter extends XMLFilter {
     }
 
     /**
-     * The default list of filter instances that this filter class has. One
-     * filter class may have different filter instances, different by source
-     * file mask, encoding of the source file etc.
+     * The default list of filter instances that this filter class has. One filter class may have different
+     * filter instances, different by source file mask, encoding of the source file etc.
      * <p>
      * Note that the user may change the instances freely.
      * 
@@ -81,5 +87,40 @@ public class ResXFilter extends XMLFilter {
      */
     public boolean isTargetEncodingVariable() {
         return true;
+    }
+
+    @Override
+    public void tagStart(String path, Attributes atts) {
+        if ("/root/data".equals(path)) {
+            id = StringUtil.nvl(atts.getValue("name"), "");
+            comment = null;
+        }
+    }
+
+    @Override
+    public void tagEnd(String path) {
+        if ("/root/data/comment".equals(path)) {
+            comment = text;
+        } else if ("/root/data".equals(path)) {
+            entryParseCallback.addEntry(id, entryText, null, false, comment, null, this);
+            id = null;
+            entryText = null;
+            comment = null;
+        }
+    }
+
+    @Override
+    public void text(String text) {
+        this.text = text;
+    }
+
+    @Override
+    public String translate(String entry) {
+        if (entryParseCallback != null) {
+            entryText = entry;
+            return entry;
+        } else {
+            return entryTranslateCallback.getTranslation(id, entry, null);
+        }
     }
 }

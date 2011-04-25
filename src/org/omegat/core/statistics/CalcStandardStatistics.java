@@ -38,7 +38,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.OConsts;
@@ -131,7 +131,7 @@ public class CalcStandardStatistics extends LongProcessThread {
             } else {
                 uniqueSegment.put(src, count + 1);
             }
-            TransEntry tr = project.getTranslation(ste);
+            TMXEntry tr = project.getTranslation(ste);
             if (tr != null) {
                 translated.add(src);
             }
@@ -176,7 +176,7 @@ public class CalcStandardStatistics extends LongProcessThread {
                 total.charsWithSpaces += chars;
 
                 // add to remaining
-                TransEntry tr = project.getTranslation(ste);
+                TMXEntry tr = project.getTranslation(ste);
                 if (tr == null) {
                     remaining.segments++;
                     remaining.words += words;

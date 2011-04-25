@@ -87,9 +87,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         List<GlossaryEntry> entries = manager.getGlossaryEntries();
         if (entries != null) {
             for (GlossaryEntry glosEntry : entries) {
-                if (isEntryChanged()) {
-                    return null;
-                }
+                checkEntryChanged();
 
                 // computer glossary entry tokens
                 String glosStr = glosEntry.getSrcText();

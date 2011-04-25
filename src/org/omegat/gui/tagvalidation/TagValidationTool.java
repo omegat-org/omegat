@@ -37,7 +37,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.data.TransEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
@@ -103,7 +103,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
     private List<SourceTextEntry> listInvalidTags() {
         int j;
         String s;
-        TransEntry te;
+        TMXEntry te;
         List<String> srcTags = new ArrayList<String>(32);
         List<String> locTags = new ArrayList<String>(32);
         List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);

@@ -20,7 +20,7 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
 
@@ -28,7 +28,10 @@ import java.io.File;
 import java.net.URL;
 import java.util.List;
 
+import org.junit.Test;
+import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.opendoc.OpenDocFilter;
+import org.omegat.filters3.xml.openxml.OpenXMLFilter;
 
 public class OpenDocFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
@@ -43,8 +46,19 @@ public class OpenDocFilterTest extends TestFilterBase {
         translate(new OpenDocFilter(), in.getPath());
 
         for (String f : new String[] { "content.xml", "styles.xml", "meta.xml" }) {
-            compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f), new URL("jar:file:"
-                    + outFile.getAbsolutePath() + "!/" + f));
+            compareXML(new URL("jar:file:" + in.getAbsolutePath() + "!/" + f),
+                    new URL("jar:file:" + outFile.getAbsolutePath() + "!/" + f));
         }
+    }
+
+    @Test
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/openDoc/file-OpenDocFilter.odt";
+        IProject.FileInfo fi = loadSourceFiles(new OpenDocFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("This is first line.", null, null, "", "This is second line.", null);
+        checkMulti("This is second line.", null, null, "This is first line.", "", null);
+        checkMultiEnd();
     }
 }

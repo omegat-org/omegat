@@ -20,18 +20,30 @@
  You should have received a copy of the GNU General Public License
  along with this program; if not, write to the Free Software
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
-**************************************************************************/
+ **************************************************************************/
 
 package org.omegat.filters;
 
+import org.omegat.core.data.IProject;
 import org.omegat.filters2.text.ini.INIFilter;
 
 public class INIFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
-	parse(new INIFilter(), "test/data/filters/ini/file-INIFilter.ini");
+        parse(new INIFilter(), "test/data/filters/ini/file-INIFilter.ini");
     }
 
     public void testTranslate() throws Exception {
-	translateText(new INIFilter(), "test/data/filters/ini/file-INIFilter.ini");
+        translateText(new INIFilter(), "test/data/filters/ini/file-INIFilter.ini");
+    }
+
+    public void testLoad() throws Exception {
+        String f = "test/data/filters/ini/file-INIFilter.ini";
+        IProject.FileInfo fi = loadSourceFiles(new INIFilter(), f);
+
+        checkMultiStart(fi, f);
+        checkMulti("Value", "nsID", null, null, null, null);
+        checkMulti("Value", "Section/ID", null, null, null, null);
+        checkMulti("Value2", "Section/ID2", null, null, null, null);
+        checkMultiEnd();
     }
 }

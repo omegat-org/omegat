@@ -67,6 +67,11 @@ public class LatexFilter extends AbstractFilter {
     public boolean isTargetEncodingVariable() {
         return true;
     }
+    
+    @Override
+    protected boolean requirePrevNextFields() {
+        return true;
+    }
 
     public void processFile(BufferedReader in, BufferedWriter out) throws IOException {
         // BOM (byte order mark) bugfix

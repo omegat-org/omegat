@@ -43,10 +43,12 @@ public interface IParseCallback {
      *            true if translation is fuzzy
      * @param comment
      *            comment for entry, if format supports it
+     * @param path
+     *            path of segment
      * @param filter
      *            filter which produces entry
      */
-    void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+    void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
             IFilter filter);
 
     /**
@@ -58,4 +60,10 @@ public interface IParseCallback {
      *            translation
      */
     void addFileTMXEntry(String source, String translation);
+
+    /**
+     * This method can be called from any filter on the end of file processing. It links prev/next segments
+     * for multiple translations.
+     */
+    void linkPrevNextSegments();
 }

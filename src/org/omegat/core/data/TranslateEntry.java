@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2009 Alex Buloichik
+ Copyright (C) 2011 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,20 +31,49 @@ import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.Language;
+import org.omegat.util.StringUtil;
 
 /**
  * Base class for entry translation.
+ * 
+ * This class collects all segments which should be translated, for ability to link prev/next segments for the
+ * seconds pass.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public abstract class TranslateEntry implements ITranslateCallback {
 
     private final ProjectProperties m_config;
+    
+    private int pass;
+    
+    /** Collected segments. */
+    private List<TranslateEntryQueueItem> translateQueue = new ArrayList<TranslateEntryQueueItem>();
+    
+    /**
+     * Index of currently processed segment. It required for multiple translation for use right segment.
+     */
+    private int currentlyProcessedSegment;
 
     public TranslateEntry(final ProjectProperties m_config) {
         this.m_config = m_config;
     }
 
+    /**
+     * Set current pass number, i.e. 1 or 2.
+     */
+    public void setPass(int pass) {
+        this.pass = pass;
+        currentlyProcessedSegment = 0;
+    }
+    
+    protected void fileFinished() {
+        if (currentlyProcessedSegment != translateQueue.size()) {
+            throw new RuntimeException("Invalid two-pass processing: number of segments are not equals");
+        }
+        translateQueue.clear();
+    }
+    
     /**
      * Get translation for specified entry to write output file.
      * 
@@ -53,7 +82,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
      * @param source
      *            source text
      */
-    public String getTranslation(final String id, final String origSource) {
+    public String getTranslation(final String id, final String origSource, final String path) {
         ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
 
         final String source = ParseEntry.stripSomeChars(origSource, spr);
@@ -68,11 +97,11 @@ public abstract class TranslateEntry implements ITranslateCallback {
             List<String> segments = Segmenter.segment(sourceLang, source, spaces, brules);
             for (int i = 0; i < segments.size(); i++) {
                 String onesrc = segments.get(i);
-                segments.set(i, getSegmentTranslation(id, i, onesrc));
+                segments.set(i, internalGetSegmentTranslation(id, i, onesrc, path));
             }
             res.append(Segmenter.glue(sourceLang, targetLang, segments, spaces, brules));
         } else {
-            res.append(getSegmentTranslation(id, 0, source));
+            res.append(internalGetSegmentTranslation(id, 0, source, path));
         }
 
         // replacing all occurrences of LF (\n) by either single CR (\r) or CRLF
@@ -97,5 +126,71 @@ public abstract class TranslateEntry implements ITranslateCallback {
         return r;
     }
 
-    protected abstract String getSegmentTranslation(String id, int segmentIndex, String segmentSource);
+    /**
+     * {@inheritDoc}
+     */
+    public void linkPrevNextSegments() {
+        for (int i = 0; i < translateQueue.size(); i++) {
+            TranslateEntryQueueItem item = translateQueue.get(i);
+            try {
+                item.prevSegment = translateQueue.get(i - 1).segmentSource;
+            } catch (IndexOutOfBoundsException ex) {
+                // first entry - previous will be empty
+                item.prevSegment = "";
+            }
+            try {
+                item.nextSegment = translateQueue.get(i + 1).segmentSource;
+            } catch (IndexOutOfBoundsException ex) {
+                // last entry - next will be empty
+                item.nextSegment = "";
+            }
+        }
+    }
+    
+    /**
+     * This method calls real method for empty prev/next on the first pass, then with real prev/next on the
+     * second pass.
+     * 
+     * @param id
+     * @param segmentIndex
+     * @param segmentSource
+     * @return
+     */
+    private String internalGetSegmentTranslation(String id, int segmentIndex, String segmentSource, String path) {
+        TranslateEntryQueueItem item;
+        switch (pass) {
+        case 1:
+            item = new TranslateEntryQueueItem();
+            item.id = id;
+            item.segmentIndex = segmentIndex;
+            item.segmentSource = segmentSource;
+            translateQueue.add(item);
+            currentlyProcessedSegment++;
+            return getSegmentTranslation(id, segmentIndex, segmentSource, null, null, path);
+        case 2:
+            item = translateQueue.get(currentlyProcessedSegment);
+            if (!StringUtil.equalsWithNulls(id, item.id) || segmentIndex != item.segmentIndex
+                    || !StringUtil.equalsWithNulls(segmentSource, item.segmentSource)) {
+                throw new RuntimeException("Invalid two-pass processing: not equals fields");
+            }
+            currentlyProcessedSegment++;
+            return getSegmentTranslation(id, segmentIndex, segmentSource, item.prevSegment, item.nextSegment, path);
+        default:
+            throw new RuntimeException("Invalid pass number: " + pass);
+        }
+    }
+    
+    protected abstract String getSegmentTranslation(String id, int segmentIndex, String segmentSource,
+            String prevSegment, String nextSegment, String path);
+    
+    /**
+     * Storage for cached segments.
+     */
+    protected static class TranslateEntryQueueItem {
+        String id;
+        int segmentIndex;
+        String segmentSource;
+        String prevSegment;
+        String nextSegment;
+    }
 }

@@ -356,10 +356,10 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     protected String process(String key, String value) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(key, value, null, false, null, this);
+            entryParseCallback.addEntry(key, value, null, false, null, null, this);
             return value;
         } else if (entryTranslateCallback != null) {
-            return entryTranslateCallback.getTranslation(key, value);
+            return entryTranslateCallback.getTranslation(key, value, null);
         } else if (entryAlignCallback != null) {
             align.put(key, value);
         }

@@ -56,8 +56,8 @@ public class OpenDocFilter extends AbstractFilter {
     private static final Set<String> TRANSLATABLE = new HashSet<String>(Arrays.asList(new String[] {
             "content.xml", "styles.xml", "meta.xml", }));
 
-    /** Creates a new instance of OpenDocFilter */
-    public OpenDocFilter() {
+    protected boolean requirePrevNextFields() {
+        return true;
     }
 
     /** Returns true if it's OpenDocument file. */

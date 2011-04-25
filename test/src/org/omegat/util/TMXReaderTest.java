@@ -23,6 +23,13 @@
  **************************************************************************/
 package org.omegat.util;
 
+import gen.core.tmx14.Tu;
+import gen.core.tmx14.Tuv;
+
+import java.io.File;
+import java.util.Map;
+import java.util.TreeMap;
+
 import org.omegat.core.TestCore;
 
 /**
@@ -30,20 +37,27 @@ import org.omegat.core.TestCore;
  */
 public class TMXReaderTest extends TestCore {
     public void testLeveL1() throws Exception {
-        TMXReader rd = new TMXReader("UTF-8", new Language("en"), new Language(
-                "be"), false);
-        rd.loadFile("test/data/tmx/test-level1.tmx", false);
-        assertEquals(1, rd.numSegments());
-        assertEquals("entuv", rd.getSourceSegment(0));
-        assertEquals("betuv", rd.getTargetSegment(0));
+        final Map<String, String> tr = new TreeMap<String, String>();
+        TMXReader2.readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"), new Language(
+                "be"), false, false, new TMXReader2.LoadCallback() {
+            public void onTu(Tu tu, Tuv tuvSource, Tuv tuvTarget, boolean isParagraphSegtype) {
+                tr.put(tuvSource.getSeg(), tuvTarget.getSeg());
+            }
+        });
+        assertEquals("betuv", tr.get("entuv"));
+        assertEquals("tr1", tr.get("lang1"));
+        assertEquals("tr2", tr.get("lang2"));
+        assertEquals("tr3", tr.get("lang3"));
     }
 
     public void testLeveL2() throws Exception {
-        TMXReader rd = new TMXReader("UTF-8", new Language("en"), new Language(
-                "be"), false);
-        rd.loadFile("test/data/tmx/test-level2.tmx", false);
-        assertEquals(1, rd.numSegments());
-        assertEquals("entuv", rd.getSourceSegment(0));
-        assertEquals("betuv", rd.getTargetSegment(0));
+        final Map<String, String> tr = new TreeMap<String, String>();
+        TMXReader2.readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"), new Language(
+                "be"), false, false, new TMXReader2.LoadCallback() {
+            public void onTu(Tu tu, Tuv tuvSource, Tuv tuvTarget, boolean isParagraphSegtype) {
+                tr.put(tuvSource.getSeg(), tuvTarget.getSeg());
+            }
+        });
+        assertEquals("betuv", tr.get("entuv"));
     }
 }

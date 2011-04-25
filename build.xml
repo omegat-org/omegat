@@ -86,11 +86,11 @@
         </copy>
         <copy todir="${l10n.min.dir}/source">
             <fileset dir="." 
-                    includes="docs/en/instantStartGuideNoTOC.html 
-                    docs/en/images/NewProject.png
-                    docs/en/images/tagged_segment.png
-                    docs/en/images/tagged_segment_target.png
-                    docs/en/images/MatchesPane.png
+                    includes="doc_src/en/InstantStartGuide.xml 
+                    doc_src/en/images/NewProject.png
+                    doc_src/en/images/tagged_segment.png
+                    doc_src/en/images/tagged_segment_target.png
+                    doc_src/en/images/MatchesPane.png
                     src/**/Bundle.properties"/>
         </copy>
         <copy file="release/readme.txt"
@@ -112,10 +112,12 @@
         <copy todir="${l10n.max.dir}">
             <fileset dir="${l10n.project.dir}"/>
         </copy>
-        <copy todir="${l10n.max.dir}/source"> <!-- Copy all files except legalNotices.html -->
+        <copy todir="${l10n.max.dir}/source"> 
             <fileset dir="."
-                    includes="docs/en/** src/**/Bundle.properties"
-                    excludes="docs/en/legalNotices.html"/>
+                    includes="doc_src/en/** src/**/Bundle.properties"
+                    excludes="doc_src/en/index.xml
+                    doc_src/en/html/**
+                    doc_src/en/pdf/**"/>
         </copy>
         <copy file="release/readme.txt"
               tofile="${l10n.max.dir}/source/readme.utf8"
@@ -124,16 +126,6 @@
             <filterset begintoken="@@" endtoken="@@">
                 <filter token="TRANSLATION_NOTICE"
                         value="This translation is the work of [insert your name], copyright© [insert year]."/>
-            </filterset>
-        </copy>
-        <copy todir="${l10n.max.dir}/source"
-              encoding="UTF-8"
-              outputencoding="UTF-8">
-            <fileset dir="." 
-                     includes="docs/en/legalNotices.html"/>
-            <filterset begintoken="@@" endtoken="@@">
-                <filter token="TRANSLATION_NOTICE"
-                        value="&lt;p&gt;This translation is the work of [insert your name], copyright© [insert year].&lt;/p&gt;"/>
             </filterset>
         </copy>
         <zip destfile="dist2/${l10n.max}.zip" 

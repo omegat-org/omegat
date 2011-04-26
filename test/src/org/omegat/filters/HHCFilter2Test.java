@@ -45,10 +45,10 @@ public class HHCFilter2Test extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(new HHCFilter2(), f);
 
         checkMultiStart(fi, f);
-        checkMulti("Introduction to GraphEdit", null, null, "", "Building Filter Graphs", null);
-        checkMulti("Building Filter Graphs", null, null, "Introduction to GraphEdit",
-                "Build a File Playback Graph", null);
-        checkMulti("Build a File Playback Graph", null, null, "Building Filter Graphs", "", null);
+        checkMulti("Introduction to software X", null, null, "", "Building Graphs", null);
+        checkMulti("Building Graphs", null, null, "Introduction to software X",
+                "Build a File Graph", null);
+        checkMulti("Build a File Graph", null, null, "Building Graphs", "", null);
         checkMultiEnd();
     }
 }

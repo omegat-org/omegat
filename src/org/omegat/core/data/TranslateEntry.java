@@ -66,7 +66,11 @@ public abstract class TranslateEntry implements ITranslateCallback {
         this.pass = pass;
         currentlyProcessedSegment = 0;
     }
-    
+
+    protected void fileStarted() {
+        currentlyProcessedSegment = 0;
+    }
+
     protected void fileFinished() {
         if (currentlyProcessedSegment != translateQueue.size()) {
             throw new RuntimeException("Invalid two-pass processing: number of segments are not equals");

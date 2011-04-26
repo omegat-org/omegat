@@ -400,7 +400,7 @@ public class RealProject implements IProject {
             Matcher fileMatch = FILE_PATTERN.matcher(midName);
             if (fileMatch.matches()) {
                 Core.getMainWindow().showStatusMessageRB("CT_COMPILE_FILE_MX", midName);
-                translateFilesCallback.setCurrentFileName(midName);
+                translateFilesCallback.fileStarted(midName);
                 fm.translateFile(srcRoot, midName, locRoot, new FilterContext(m_config),
                         translateFilesCallback);
                 translateFilesCallback.fileFinished();
@@ -896,8 +896,9 @@ public class RealProject implements IProject {
             super(m_config);
         }
 
-        protected void setCurrentFileName(String fn) {
+        protected void fileStarted(String fn) {
             currentFile = fn;
+            super.fileStarted();
         }
 
         protected String getSegmentTranslation(String id, int segmentIndex, String segmentSource,

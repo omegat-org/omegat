@@ -258,7 +258,7 @@
 
           <tbody>
             <row>
-              <entry>Windows 2000 and XP:</entry>
+              <entry>Windows 2000 and XP</entry>
 
               <entry><literal>Documents and Settings\&lt;User
               Name&gt;\Application
@@ -266,14 +266,7 @@
             </row>
 
             <row>
-              <entry>Windows 7</entry>
-
-              <entry><literal>Users\&lt;User
-              Name&gt;\AppData\<application>OmegaT</application></literal></entry>
-            </row>
-
-            <row>
-              <entry>Windows Vista</entry>
+              <entry>Windows Vista and 7</entry>
 
               <entry><literal>Users\&lt;User
               Name&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
@@ -347,7 +340,7 @@
             </row>
 
             <row>
-              <entry>filters.conf</entry>
+              <entry>filters.xml</entry>
 
               <entry>An xml file with all the data set by the file filter
               preferences</entry>

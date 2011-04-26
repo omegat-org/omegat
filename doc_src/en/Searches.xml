@@ -21,8 +21,8 @@
           <imagedata fileref="images/TextSearch.png" />
         </imageobject>
 
-        <imageobject role="ro">
-          <imagedata fileref="images/TextSearch.png" width="40%" />
+        <imageobject role="fo">
+          <imagedata fileref="images/TextSearch.png" width="95%" />
         </imageobject>
       </mediaobject>
     </figure>

@@ -1,0 +1,28 @@
+<project name="OmegaT documentation" default="PDF">
+  
+    <property name="fop.home" value="C:\Program Files\fop-0.95" />
+   
+    <taskdef name="fop" 
+             classname="org.apache.fop.tools.anttasks.Fop">
+      <classpath>
+        <fileset dir="${fop.home}/lib">
+          <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${fop.home}/build">
+          <include name="fop.jar"/>
+          <include name="fop-hyph.jar" />
+        </fileset>
+      </classpath>
+    </taskdef>
+
+    <target name="PDF">
+        <fop format="application/pdf" 
+             fofile="${language}/PDF/OmegaT_documentation.fo"
+             outfile="${language}/PDF/OmegaT_documentation.PDF" 
+             basedir="${language}/"
+             userconfig="fop.xconf"
+             force="true" />
+    </target>
+
+</project>
+

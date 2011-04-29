@@ -410,8 +410,6 @@ public class PoFilter extends AbstractFilter {
         translation = translation.replace("\\", "\\\\");
         // Adds escapes to quotes. ( " becomes \" )
         translation = translation.replace("\"", "\\\"");
-        // AB: restore \r
-        translation = translation.replace("\\\\r", "\\r");
 
         /*
          * Normally, long lines are wrapped at 'output page width', which defaults to ?76?, and always at

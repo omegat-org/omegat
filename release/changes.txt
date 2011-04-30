@@ -7,7 +7,13 @@
 ----------------------------------------------------------------------
 2.5.0 vs. 2.3.0
 
-  - Add multiple translations support
+  Implemented requests:
+
+  - Multiple translation support
+  http://sourceforge.net/support/tracker.php?aid=1922026
+
+  Other enhancements:
+
   - Changes in TM/ are detected automatically every second. The
 modified TMX are reloaded in memory transparently, without having to
 reload the project.

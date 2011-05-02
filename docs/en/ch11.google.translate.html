@@ -1,0 +1,59 @@
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+   <title>Chapter&nbsp;19.&nbsp;Machine Translation</title><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title=""><link rel="up" href="index.html" title=""><link rel="prev" href="ch10.glossaries.html" title="Chapter&nbsp;18.&nbsp;Glossaries"><link rel="next" href="ch12.spellchecker.html" title="Chapter&nbsp;20.&nbsp;Spell checker"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;19.&nbsp;Machine Translation</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch10.glossaries.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch12.spellchecker.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;19.&nbsp;Machine Translation"><div class="titlepage"><div><div><h2 class="title"><a name="ch11.google.translate"></a>Chapter&nbsp;19.&nbsp;Machine Translation<a class="indexterm" name="d0e7713"></a></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch11.google.translate.html#d0e7716">1. Introduction</a></span></dt><dt><span class="section"><a href="ch11.google.translate.html#introduction">2. Google Translate</a></span></dt><dt><span class="section"><a href="ch11.google.translate.html#d0e7746">3. <span class="application">OmegaT</span> users and Google
+    Translate</a></span></dt><dt><span class="section"><a href="ch11.google.translate.html#d0e7798">4. Belazar</a></span></dt><dt><span class="section"><a href="ch11.google.translate.html#d0e7810">5. Apertium</a></span></dt><dt><span class="section"><a href="ch11.google.translate.html#Google.Translate.troubleshooting">6. Machine translation - trouble shooting</a></span></dt></dl></div><div class="section" title="1.&nbsp;Introduction"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7716"></a>1.&nbsp;Introduction<a class="indexterm" name="d0e7719"></a></h2></div></div></div><p>As opposed to user-generated translation memories (as in the case of
+    <span class="application">OmegaT</span>) Machine translation (MT) tools use
+    rule-based linguistic tools to create a translation of the source segment
+    without the need for a translation memory. Statistical learning
+    techniques, based on source and target texts, are used to build a
+    translation model. Machine translation services have been achieving good
+    and steadfastly improving results in research evaluations.</p><p>To activate any of the Machine Translation services, go to
+    <span class="guimenuitem">Options &gt; Machine Translate ... </span> and
+    activate the service desired. Note that they are all web-based: you will
+    have to be on-line if you want to use them.</p></div><div class="section" title="2.&nbsp;Google Translate"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="introduction"></a>2.&nbsp;Google Translate<a class="indexterm" name="d0e7737"></a></h2></div></div></div><p>Google Translate is the service offered by Google, for translating
+    sentences, web sites and complete texts between an ever-growing number of
+    languages. At the time of writing the list includes more than 50
+    languages, from Albanian to Yiddish, including of course all the major
+    languages.</p><p>The quality of the translation, of course, depends on one side on
+    the reservoir of target-language texts and the availability of their
+    bilingual versions, on the other hand on the quality of the models built.
+    It is pretty much certain that while the quality may be insufficient in
+    some cases, it will definitely get better with time and not worse.</p></div><div class="section" title="3.&nbsp;OmegaT users and Google Translate"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7746"></a>3.&nbsp;<span class="application">OmegaT</span> users and Google
+    Translate</h2></div></div></div><p>The <span class="application">OmegaT</span> user is not forced to use
+    Google Translate. If used, neither the user's decision to accept the
+    translation nor the final translation are made available to Google. The
+    following window shows an example of a) the English source b) Spanish and
+    c) Slovenian Google Translate translation.</p><div class="figure"><a name="moby.dick"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Google Translate - example</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/MobyDick.png" alt="Google Translate - example"></div></div></div><br class="figure-break"><p>The Spanish translation is better than the Slovenian. Note
+    <span class="emphasis"><em>interesar</em></span> and<span class="emphasis"><em> navegar</em></span> in
+    Spanish, are correctly translated as the verbs interest and sail
+    respectively. In the Slovenian version both words have been translated as
+    nouns. It is actually quite probable that the Spanish translation is based
+    at least partially on the actual translation of the book.</p><p>Once you have activated the service, a suggestion for the
+    translation will appear in the Google Translate pane every time a new
+    source segment is opened. If you find the suggestion acceptable, press
+    <span class="keycap"><strong><a class="indexterm" name="d0e7776"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> to replace the target part of the opened segment with the
+    suggestion. In the above segment, for instance, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> would replace the Spanish version with the Slovenian
+    suggestion.</p><p>If you do not wish <span class="application">OmegaT</span> to send your
+    source segments to Google to get translated, untick the Google Translate
+    menu entry in Options.</p><p>Note that nothing but your source segment is sent to the MT service.
+    The online version of Google Translate allows the user to correct the
+    suggestion and send the corrected segment in. This feature, however, is
+    not implemented in OmegaT.</p></div><div class="section" title="4.&nbsp;Belazar"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7798"></a>4.&nbsp;Belazar<a class="indexterm" name="d0e7801"></a></h2></div></div></div><p><a class="ulink" href="http://belsoft.tut.by/belazar/" target="_top">Belazar</a> is a
+    Machine language translation tool for the Russian-Belarusian language
+    pair.</p></div><div class="section" title="5.&nbsp;Apertium"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7810"></a>5.&nbsp;Apertium<a class="indexterm" name="d0e7813"></a></h2></div></div></div><p><a class="ulink" href="???" target="_top">Apertium</a> is a free/open-source machine
+    translation platform, initially aimed at related-language pairs,like CA,
+    ES, GA, PT, OC and FR but recently expanded to deal with more divergent
+    language pairs (such as English-Catalan). Check the web site for the
+    latest list of implemented language pairs.</p><p>The platform provides</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>a language-independent machine translation engine</p></li><li class="listitem"><p>tools to manage the linguistic data necessary to build a machine
+        translation system for a given language pair and</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>linguistic data for a growing number of language pairs</p></li></ul></div><p>Apertium uses a shallow-transfer machine translation engine which
+    processes the input text in stages, as in an assembly line: de-formatting,
+    morphological analysis, part-of-speech disambiguation, shallow structural
+    transfer, lexical transfer, morphological generation, and
+    re-formatting.</p><p>It is possible to use Apertium to build machine translation systems
+    for a variety of language pairs; to that end, Apertium uses simple
+    XML-based standard formats to encode the linguistic data needed (either by
+    hand or by converting existing data), which are compiled using the
+    provided tools into the high-speed formats used by the engine.</p></div><div class="section" title="6.&nbsp;Machine translation - trouble shooting"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6.&nbsp;Machine translation - trouble shooting<a class="indexterm" name="d0e7842"></a></h2></div></div></div><p>If there's nothing appearing in the Google Translate pane, then
+    check the following:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Are you online? You need to be online to be able to use an MT
+        tool.</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>What is the language pair you need? Check if the selected
+        service offers it.</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch10.glossaries.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch12.spellchecker.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Glossaries&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Spell checker</td></tr></table></div></body></html>

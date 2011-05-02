@@ -64,3 +64,5 @@ PDF.bat: Calls Xincludes and fo and then creates with ant the PDF documentation 
 Javahelp.bat (not yet operationnal): Calls Xincludes and then creates the Javahelp documentation in language/javahelp
 
 build.xml: Creates the PDF in language/pdf
+
+docbook-utf8.xsl: Allows to issue the Instant Start Guide in UTF-8. The path of DocBook must be set in this file (e.g., file:///c:\dbk\html\docbook.xsl)

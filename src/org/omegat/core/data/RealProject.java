@@ -352,17 +352,17 @@ public class RealProject implements IProject {
             String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
                     + OConsts.TMX_EXTENSION;
 
-            projectTMX.save(new File(fname), false, false);
+            projectTMX.save(new File(fname), false, false, false);
 
             // build TMX level 1 compliant file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
                     + OConsts.TMX_EXTENSION;
-            projectTMX.save(new File(fname), true, false);
+            projectTMX.save(new File(fname), true, false, false);
 
             // build three-quarter-assed TMX level 2 file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
                     + OConsts.TMX_EXTENSION;
-            projectTMX.save(new File(fname), false, true);
+            projectTMX.save(new File(fname), false, true, false);
         } catch (Exception e) {
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
@@ -439,7 +439,7 @@ public class RealProject implements IProject {
         try {
             saveProjectProperties();
 
-            projectTMX.save(newFile, false, false);
+            projectTMX.save(newFile, false, false, true);
 
             if (backup.exists()) {
                 if (!backup.delete()) {

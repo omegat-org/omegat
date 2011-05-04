@@ -94,7 +94,8 @@ public class ProjectTMX {
                         .isSentenceSegmentingEnabled()));
     }
 
-    public void save(File outFile, final boolean forceValidTMX, final boolean levelTwo) throws Exception {
+    public void save(File outFile, final boolean forceValidTMX, final boolean levelTwo,
+            final boolean useOrphaned) throws Exception {
         ProjectProperties props = Core.getProject().getProjectProperties();
 
         TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
@@ -105,11 +106,15 @@ public class ProjectTMX {
             if (translationDefault != null) {
                 defaults.putAll(translationDefault);
             }
-            defaults.putAll(orphanedDefault);
+            if (useOrphaned) {
+                defaults.putAll(orphanedDefault);
+            }
 
             Map<EntryKey, TMXEntry> alternatives = new TreeMap<EntryKey, TMXEntry>();
             alternatives.putAll(translationMultiple);
-            alternatives.putAll(orphanedMultiple);
+            if (useOrphaned) {
+                alternatives.putAll(orphanedMultiple);
+            }
 
             wr.writeComment("Default translations");
             for (Map.Entry<String, TMXEntry> en : new TreeMap<String, TMXEntry>(defaults).entrySet()) {

@@ -146,6 +146,7 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
+        <copy file="${language}/OmegaT.css" tofile="../docs/${language}/OmegaT.css" />
      </target>
      
      <target name="html" depends="chunk,instant-start">

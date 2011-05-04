@@ -1,36 +1,170 @@
-<html><head>
+<html>
+   <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>Chapter&nbsp;10.&nbsp;Editing behavior</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title=""><link rel="up" href="index.html" title=""><link rel="prev" href="ch05.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Files to translate"><link rel="next" href="ch07.formatted.text.html" title="Chapter&nbsp;11.&nbsp;Working with formatted text"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Editing behavior</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05.files.to.translate.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch07.formatted.text.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;10.&nbsp;Editing behavior"><div class="titlepage"><div><div><h2 class="title"><a name="ch06.translation.editing"></a>Chapter&nbsp;10.&nbsp;Editing behavior<a class="indexterm" name="d0e5399"></a></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch06.translation.editing.html#automatic.match.insertion">1. Automatic match insertion</a></span></dt><dt><span class="section"><a href="ch06.translation.editing.html#allow.translation.equal.to.source">2. Allow the translation to be equal to source</a></span></dt><dt><span class="section"><a href="ch06.translation.editing.html#export.segment.to.text.files">3. Export the segment to text files</a></span></dt></dl></div><p>The dialog in <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> enables the user to select, how the current segment in the
-  editing field is to be initialized and handled:</p><div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Figure&nbsp;10.1.&nbsp;Editing behavior options</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/EditingBehaviourOptions.png" alt="Editing behavior options"></div></div></div><br class="figure-break"><div class="section" title="1.&nbsp;Automatic match insertion"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="automatic.match.insertion"></a>1.&nbsp;Automatic match insertion<a class="indexterm" name="d0e5421"></a></h2></div></div></div><p>You translate your files by moving from segment to segment, editing
-    each current segment in turn. When moving between segments, you may wish
-    to populate the editing field with an existing translation in the fuzzy
-    match pane or with the source text. In <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> <span class="application">OmegaT</span> offers you the following
-    alternatives:</p><div class="variablelist"><dl><dt><span class="term">The source text</span></dt><dd><p>You can have the source text inserted automatically into the
-          editing field. This is useful for texts containing many trade marks
-          or other proper nouns you which must be left unchanged.</p></dd><dt><span class="term">Leave the segment empty</span></dt><dd><p>OmegaT leaves the editing field blank. This option allows you
-          to enter the translation without the need to remove the source text,
-          thus saving you two keystrokes (<span class="bold"><strong>Ctrl+A
-          </strong></span>and <span class="bold"><strong>Del)</strong></span></p></dd><dt><span class="term">Insert the best fuzzy match</span></dt><dd><p>OmegaT inserts the translation of the string most similar to
-          the current source, if it is above the similarity threshold that you
-          have selected in this dialog.</p></dd></dl></div></div><div class="section" title="2.&nbsp;Allow the translation to be equal to source"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="allow.translation.equal.to.source"></a>2.&nbsp;Allow the translation to be equal to source<a class="indexterm" name="d0e5462"></a></h2></div></div></div><p>Documents for translation may contain trade marks, names or other
-    proper nouns that will be the same in translated documents. There are two
-    strategies for segments that contain only such invariable text.</p><p>You can decide not to translate such segments at all. OmegaT will
-    then report these segments as not translated. This is the default. The
-    alternative is to enter a translation that is identical to the source
-    text. OmegaT is able to recognize that you have done this. To make this
-    possible, go to <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> and check the box <span class="bold"><strong>Allow translation
-    to be equal to source</strong></span>.</p></div><div class="section" title="3.&nbsp;Export the segment to text files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="export.segment.to.text.files"></a>3.&nbsp;Export the segment to text files<a class="indexterm" name="d0e5481"></a></h2></div></div></div><p>The text export function exports data from within the current
-    <span class="application">OmegaT</span> project to plain text files. The data
-    are exported when the segment is opened. The files appear in the /script
-    subfolder in the OmegaT user files folder, and include:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>The content of the segment source text
-        (<code class="filename">source.txt</code>).</p></li><li class="listitem"><p>The content of the segment target text
-        (<code class="filename">target.txt</code>).</p></li><li class="listitem"><p>The text highlighted by the user, when
-        <span class="keycap"><strong>Ctrl-Shift-C</strong></span> is pressed or <span class="guimenuitem">Edit &gt;
-        Export Selection</span> is
-        selected<code class="filename">(selection.txt)</code></p></li></ul></div><p>The content of the files is overwritten either when a new segment is
-    opened (source.txt and target.txt) or when a new selection is exported
-    (selection.txt). The files are unformatted plain text files. The whole
-    process can be steered and controlled via Tck/Tcl-based scripting. See
-    <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Using the
-    OmegaT text export function</a> for specifics, examples and
-    suggestions.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05.files.to.translate.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch07.formatted.text.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Files to translate&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Working with formatted text</td></tr></table></div></body></html>
+   
+      <title>Chapter&nbsp;10.&nbsp;Editing behavior</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="home" href="index.html" title="">
+      <link rel="up" href="index.html" title="">
+      <link rel="prev" href="ch05.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Files to translate">
+      <link rel="next" href="ch07.formatted.text.html" title="Chapter&nbsp;11.&nbsp;Working with formatted text">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Editing behavior</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="ch05.files.to.translate.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch07.formatted.text.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;10.&nbsp;Editing behavior">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="ch06.translation.editing"></a>Chapter&nbsp;10.&nbsp;Editing behavior<a class="indexterm" name="d0e5397"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="ch06.translation.editing.html#automatic.match.insertion">1. Automatic match insertion</a></span></dt>
+               <dt><span class="section"><a href="ch06.translation.editing.html#allow.translation.equal.to.source">2. Allow the translation to be equal to source</a></span></dt>
+               <dt><span class="section"><a href="ch06.translation.editing.html#export.segment.to.text.files">3. Export the segment to text files</a></span></dt>
+            </dl>
+         </div>
+         <p>The dialog in <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> enables the user to select, how the current segment in the
+              editing field is to be initialized and handled:
+         </p>
+         <div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Figure&nbsp;10.1.&nbsp;Editing behavior options</b></p>
+            <div class="figure-contents">
+               <div class="mediaobject"><img src="images/EditingBehaviourOptions.png" alt="Editing behavior options"></div>
+            </div>
+         </div><br class="figure-break"><div class="section" title="1.&nbsp;Automatic match insertion">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="automatic.match.insertion"></a>1.&nbsp;Automatic match insertion<a class="indexterm" name="d0e5419"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>You translate your files by moving from segment to segment, editing
+                   each current segment in turn. When moving between segments, you may wish
+                   to populate the editing field with an existing translation in the fuzzy
+                   match pane or with the source text. In <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> <span class="application">OmegaT</span> offers you the following
+                   alternatives:
+            </p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">The source text</span></dt>
+                  <dd>
+                     <p>You can have the source text inserted automatically into the
+                                  editing field. This is useful for texts containing many trade marks
+                                  or other proper nouns you which must be left unchanged.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Leave the segment empty</span></dt>
+                  <dd>
+                     <p>OmegaT leaves the editing field blank. This option allows you
+                                  to enter the translation without the need to remove the source text,
+                                  thus saving you two keystrokes (<span class="bold"><strong>Ctrl+A
+                                        </strong></span>and <span class="bold"><strong>Del)</strong></span></p>
+                  </dd>
+                  <dt><span class="term">Insert the best fuzzy match</span></dt>
+                  <dd>
+                     <p>OmegaT inserts the translation of the string most similar to
+                                  the current source, if it is above the similarity threshold that you
+                                  have selected in this dialog.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section" title="2.&nbsp;Allow the translation to be equal to source">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="allow.translation.equal.to.source"></a>2.&nbsp;Allow the translation to be equal to source<a class="indexterm" name="d0e5460"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Documents for translation may contain trade marks, names or other
+                   proper nouns that will be the same in translated documents. There are two
+                   strategies for segments that contain only such invariable text.
+            </p>
+            <p>You can decide not to translate such segments at all. OmegaT will
+                   then report these segments as not translated. This is the default. The
+                   alternative is to enter a translation that is identical to the source
+                   text. OmegaT is able to recognize that you have done this. To make this
+                   possible, go to <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> and check the box <span class="bold"><strong>Allow translation
+                         to be equal to source</strong></span>.
+            </p>
+         </div>
+         <div class="section" title="3.&nbsp;Export the segment to text files">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="export.segment.to.text.files"></a>3.&nbsp;Export the segment to text files<a class="indexterm" name="d0e5479"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>The text export function exports data from within the current
+                   <span class="application">OmegaT</span> project to plain text files. The data
+                   are exported when the segment is opened. The files appear in the /script
+                   subfolder in the OmegaT user files folder, and include:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>The content of the segment source text
+                                (<code class="filename">source.txt</code>).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>The content of the segment target text
+                                (<code class="filename">target.txt</code>).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>The text highlighted by the user, when
+                                <span class="keycap"><strong>Ctrl-Shift-C</strong></span> is pressed or <span class="guimenuitem">Edit &gt;
+                                   Export Selection</span> is
+                                selected<code class="filename">(selection.txt)</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>The content of the files is overwritten either when a new segment is
+                   opened (source.txt and target.txt) or when a new selection is exported
+                   (selection.txt). The files are unformatted plain text files. The whole
+                   process can be steered and controlled via Tck/Tcl-based scripting. See
+                   <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Using the
+                      OmegaT text export function</a> for specifics, examples and
+                   suggestions.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="ch05.files.to.translate.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch07.formatted.text.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Files to translate&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Working with formatted text</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

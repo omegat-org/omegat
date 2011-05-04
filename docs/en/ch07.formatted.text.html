@@ -1,107 +1,279 @@
-<html><head>
+<html>
+   <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>Chapter&nbsp;11.&nbsp;Working with formatted text</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title=""><link rel="up" href="index.html" title=""><link rel="prev" href="ch06.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Editing behavior"><link rel="next" href="ch07.plain.text.html" title="Chapter&nbsp;12.&nbsp;Working with plain text"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Working with formatted text</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch06.translation.editing.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch07.plain.text.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;11.&nbsp;Working with formatted text"><div class="titlepage"><div><div><h2 class="title"><a name="ch07.formatted.text"></a>Chapter&nbsp;11.&nbsp;Working with formatted text<a class="indexterm" name="d0e5521"></a><a class="indexterm" name="d0e5526"></a></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch07.formatted.text.html#formatting.tags">1. Formatting tags</a></span></dt><dt><span class="section"><a href="ch07.formatted.text.html#tag.operations">2. Tag operations</a></span></dt><dt><span class="section"><a href="ch07.formatted.text.html#tag.group.nesting">3. Tag group nesting</a></span></dt><dt><span class="section"><a href="ch07.formatted.text.html#tag.group.overlapping">4. Tag group overlapping</a></span></dt><dt><span class="section"><a href="ch07.formatted.text.html#tag.group.validation">5. Tag group validation</a></span></dt><dt><span class="section"><a href="ch07.formatted.text.html#hints.for.tag.management">6. Hints for tags management</a></span></dt></dl></div><p>Formatting information present in the source file usually needs to be
-  reproduced in the target file. The in-line formatting information made
-  possible by the supported formats (in particular DocBook, HTML, XHTML, Open
-  Document (OpenOffice.org) and Office Open XML (MS Office 2007 and later) at
-  the time of writing) is presented as tags in OmegaT. Normally tags are
-  ignored when considering the similarity between different texts for matching
-  purposes. Tags reproduced in the translated segment will be present in the
-  translated document.</p><div class="section" title="1.&nbsp;Formatting tags"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5536"></a></h2></div></div></div><p><span class="application"><a class="indexterm" name="d0e5541"></a><span class="bold"><strong>Tag
-    naming:</strong></span></span></p><p><span class="application">The tags consist of one to three characters and a
-    number. Unique numbering allows tags, corresponding to each other to be
-    grouped together and differentiates between tags, that have the same
-    shortcut character, but are in fact different. The shortcut characters
-    used try to reflect the underlying meaning of the tag (e.g. b for bold, i
-    for italics, etc.)</span></p><p><span class="application"><a class="indexterm" name="d0e5553"></a><span class="bold"><strong>Tag
-    numbering:</strong></span></span></p><p><span class="application">Tags are numbered incrementally by tag group. "Tag
-    groups" in this context are a single tag (such as &lt;i0&gt; and
-    &lt;/i0&gt;). Within a segment, the first group (pair or single) receives
-    the number 0, the second the number 1 etc. The first example below has 3
-    tag groups (a pair, a single, and then another pair), the second example
-    has one group only (a pair).</span></p><p><span class="application"><a class="indexterm" name="d0e5565"></a><span class="bold"><strong>Pairs and
-    singles:</strong></span></span></p><p><span class="application">Tags are always either singles or paired. Single tags
-    indicate formatting information that does not affect the surrounding text
-    (an extra space or line break for example).</span></p><p><span class="application"><code class="literal"> &lt;segment
-    2132&gt;&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
-    &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;end segment&gt;
-    </code></span></p><p><span class="application">&lt;br1&gt; is a single tag and does not affect any
-    surrounding text. Paired tags usually indicate style information that
-    applies to the text between the opening tag and the closing tag of a pair.
-    &lt;b0&gt; and &lt;/b0&gt; below are paired and affect the text log.txt.
-    Note that the opening tag must always come before the corresponding
-    closing tag:</span></p><p><span class="application">&lt;<code class="literal">segment 3167&gt;Log file
-    (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and errors.&lt;end
-    segment&gt;</code></span></p><p><span class="application">OmegaT</span> creates its tags before the
-    process of sentence segmenting. Depending upon the segmenting rules, the
-    pair of tags may get separated into two consecutive segments and the tag
-    validation will err on the side of caution and mark the two
-    segments.</p></div><div class="section" title="2.&nbsp;Tag operations"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e5594"></a></h2></div></div></div><p>Care must be exercised with tags. If they are accidentally changed,
-    the formatting of the final file may be corrupted. The basic rule is that
-    the sequence of tags must be preserved in the same order. However, it is
-    possible, if certain rules are strictly followed, to deviate from this
-    basic rule.</p><p><span class="bold"><strong><a class="indexterm" name="d0e5603"></a>Tag duplication: </strong></span></p><p>To duplicate tag groups, just copy them in the position of your
-    choice. Keep in mind that in a pair group, the opening tag must come
-    before the closing tag. The formatting represented by the group you have
-    duplicated will be applied to both sections.</p><p>Example:</p><p><code class="literal"> &lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
-    is going to be duplicated here.&lt;end segment&gt; </code></p><p>After duplication:</p><p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
-    has been &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;end segment&gt;
-    </code></p><p><span class="bold"><strong><a class="indexterm" name="d0e5623"></a>Tag group deletion:</strong></span></p><p>To delete tag groups, just remove them from the segment. Keep in
-    mind that a pair group must have both its opening and its closing tag
-    deleted to ensure that all traces of the formatting are properly erased,
-    otherwise the translated file may become corrupted. By deleting a tag
-    group you will remove the related formatting from the translated
-    file.</p><p>Example:</p><p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt; is
-    going to be deleted.&lt;end segment&gt; </code></p><p>After deletion:</p><p><code class="literal">&lt;segment 0001&gt;This formatting has been
-    deleted.&lt;end segment&gt; </code></p></div><div class="section" title="3.&nbsp;Tag group nesting"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e5644"></a></h2></div></div></div><p>Modifying tag group order may result in the nesting of a tag group
-    within another tag group. This is acceptable, provided the enclosing group
-    totally encloses the enclosed group. In other words, when moving paired
-    tags, ensure that both the opening and the closing tag are both either
-    inside or outside other tag pairs, or the translated file may be corrupted
-    and fail to open.</p><p>Example:</p><p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
-    &lt;b1&gt;one&lt;/b1&gt; is going to be nested inside formatting
-    zero.&lt;end segment&gt; </code></p><p>After nesting:</p><p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting
-    &lt;b1&gt;one&lt;/b1&gt;&lt;/b0&gt; has been nested inside formatting
-    zero.&lt;end segment </code></p></div><div class="section" title="4.&nbsp;Tag group overlapping"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e5664"></a></h2></div></div></div><p>Overlapping is the result of bad manipulations of tag pairs and is
-    guaranteed to result in formatting corruption and sometimes in the
-    translated file not opening at all.</p><p>Example:</p><p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
-    &lt;b1&gt;one&lt;/b1&gt; is going to be messed up.&lt;end segment&gt;
-    </code></p><p>After a bad manipulation:</p><p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting
-    &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is very messed up now.&lt;end
-    segment&gt; </code></p></div><div class="section" title="5.&nbsp;Tag group validation"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;Tag group validation<a class="indexterm" name="d0e5684"></a></h2></div></div></div><p>The validate tags function detects changes to tag sequences (whether
-    deliberate or accidental), and shows the affected segments. Launching this
-    function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5693"></a></span> - opens a window containing all segments in
-    the file containing suspected broken or bad tags in the translation.
-    Repairing the tags and recreating the target documents is easy with the
-    validate tags function. The window that opens when
-    <span class="guimenuitem">Ctrl+T</span> is pressed features a 3-column table
-    with a link to the segment, the original segment and the target
-    segment</p><div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;11.1.&nbsp;Tag validation entry</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/TagValidation.png" alt="Tag validation entry"></div></div></div><br class="figure-break"><p>The tags are highlighted in bold blue for easy comparison between
-    the original and the translated contents. Click on the link to activate
-    the segment in the Editor. Correct the error if necessary (in the case
-    above it is the missing &lt;i2&gt;&lt;/i2&gt; pair) and press
-    <span class="guimenuitem">Ctrl+T</span> to return to the tag validation window
-    to correct other errors. Tag errors are tag sequences in the translation
-    in which the same tag order and number as in the original segment is not
-    reproduced. Some tag manipulations are necessary and are benign, others
-    will cause problems when the translated document is created.</p></div><div class="section" title="6.&nbsp;Hints for tags management"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;Hints for tags management<a class="indexterm" name="d0e5718"></a></h2></div></div></div><p><span class="bold"><strong>Simplify the original text</strong></span></p><p>Tags generally represent formatting in some form of the original
-    text. Simplifying the original formatting greatly contributes to reducing
-    the number of tags. Where circumstances permit, unifying used fonts, font
-    sizes, colors, etc. should be considered, as it could simplify the
-    translation and reduce the potential for tag errors. Read the tag
-    operations section to see what can be done with tags. Remember that if you
-    find tags a problem in OmegaT and formatting is not extremely relevant for
-    the current translation, removing tags may be the easiest way out of
-    problems.</p><p><span class="bold"><strong>Pay extra attention to tag
-    pairs</strong></span></p><p>If you need to see tags in OmegaT but do not need to retain most of
-    the formatting in the translated document you are free not to include tags
-    in the translation. In this case pay extra attention to tag pairs since
-    deleting one side of the pair but forgetting to delete the other is
-    guaranteed to corrupt your document's formatting. Since tags are included
-    in the text itself, it is possible to use segmentation rules to create
-    segments with fewer tags. This is an advanced feature and some experience
-    is required in order for it to be applied properly.</p><p>OmegaT is not yet able to detect mistakes in formatting fully
-    automatically, so it will not prompt you if you make an error or change
-    formatting to fit your target language better. Sometimes, however, your
-    translated file may look strange, and – in the worst case – may even
-    refuse to open.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch06.translation.editing.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch07.plain.text.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Editing behavior&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Working with plain text</td></tr></table></div></body></html>
+   
+      <title>Chapter&nbsp;11.&nbsp;Working with formatted text</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="home" href="index.html" title="">
+      <link rel="up" href="index.html" title="">
+      <link rel="prev" href="ch06.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Editing behavior">
+      <link rel="next" href="ch07.plain.text.html" title="Chapter&nbsp;12.&nbsp;Working with plain text">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Working with formatted text</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="ch06.translation.editing.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch07.plain.text.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;11.&nbsp;Working with formatted text">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="ch07.formatted.text"></a>Chapter&nbsp;11.&nbsp;Working with formatted text<a class="indexterm" name="d0e5519"></a><a class="indexterm" name="d0e5524"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="ch07.formatted.text.html#formatting.tags">1. Formatting tags</a></span></dt>
+               <dt><span class="section"><a href="ch07.formatted.text.html#tag.operations">2. Tag operations</a></span></dt>
+               <dt><span class="section"><a href="ch07.formatted.text.html#tag.group.nesting">3. Tag group nesting</a></span></dt>
+               <dt><span class="section"><a href="ch07.formatted.text.html#tag.group.overlapping">4. Tag group overlapping</a></span></dt>
+               <dt><span class="section"><a href="ch07.formatted.text.html#tag.group.validation">5. Tag group validation</a></span></dt>
+               <dt><span class="section"><a href="ch07.formatted.text.html#hints.for.tag.management">6. Hints for tags management</a></span></dt>
+            </dl>
+         </div>
+         <p>Formatting information present in the source file usually needs to be
+            reproduced in the target file. The in-line formatting information made
+            possible by the supported formats (in particular DocBook, HTML, XHTML, Open
+            Document (OpenOffice.org) and Office Open XML (MS Office 2007 and later) at
+              the time of writing) is presented as tags in OmegaT. Normally tags are
+              ignored when considering the similarity between different texts for matching
+              purposes. Tags reproduced in the translated segment will be present in the
+              translated document.
+         </p>
+         <div class="section" title="1.&nbsp;Formatting tags">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5534"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application"><a class="indexterm" name="d0e5539"></a><span class="bold"><strong>Tag
+                            naming:</strong></span></span></p>
+            <p><span class="application">The tags consist of one to three characters and a
+                      number. Unique numbering allows tags, corresponding to each other to be
+                      grouped together and differentiates between tags, that have the same
+                      shortcut character, but are in fact different. The shortcut characters
+                      used try to reflect the underlying meaning of the tag (e.g. b for bold, i
+                      for italics, etc.)</span></p>
+            <p><span class="application"><a class="indexterm" name="d0e5551"></a><span class="bold"><strong>Tag
+                            numbering:</strong></span></span></p>
+            <p><span class="application">Tags are numbered incrementally by tag group. "Tag
+                      groups" in this context are a single tag (such as &lt;i0&gt; and
+                      &lt;/i0&gt;). Within a segment, the first group (pair or single) receives
+                      the number 0, the second the number 1 etc. The first example below has 3
+                      tag groups (a pair, a single, and then another pair), the second example
+                      has one group only (a pair).</span></p>
+            <p><span class="application"><a class="indexterm" name="d0e5563"></a><span class="bold"><strong>Pairs and
+                            singles:</strong></span></span></p>
+            <p><span class="application">Tags are always either singles or paired. Single tags
+                      indicate formatting information that does not affect the surrounding text
+                      (an extra space or line break for example).</span></p>
+            <p><span class="application"><code class="literal"> &lt;segment
+                         2132&gt;&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+                         &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;end segment&gt;
+                         </code></span></p>
+            <p><span class="application">&lt;br1&gt; is a single tag and does not affect any
+                      surrounding text. Paired tags usually indicate style information that
+                      applies to the text between the opening tag and the closing tag of a pair.
+                      &lt;b0&gt; and &lt;/b0&gt; below are paired and affect the text log.txt.
+                      Note that the opening tag must always come before the corresponding
+                      closing tag:</span></p>
+            <p><span class="application">&lt;<code class="literal">segment 3167&gt;Log file
+                         (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and errors.&lt;end
+                         segment&gt;</code></span></p>
+            <p><span class="application">OmegaT</span> creates its tags before the
+                   process of sentence segmenting. Depending upon the segmenting rules, the
+                   pair of tags may get separated into two consecutive segments and the tag
+                   validation will err on the side of caution and mark the two
+                   segments.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Tag operations">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e5592"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Care must be exercised with tags. If they are accidentally changed,
+                   the formatting of the final file may be corrupted. The basic rule is that
+                   the sequence of tags must be preserved in the same order. However, it is
+                   possible, if certain rules are strictly followed, to deviate from this
+                   basic rule.
+            </p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5601"></a>Tag duplication: </strong></span></p>
+            <p>To duplicate tag groups, just copy them in the position of your
+                   choice. Keep in mind that in a pair group, the opening tag must come
+                   before the closing tag. The formatting represented by the group you have
+                   duplicated will be applied to both sections.
+            </p>
+            <p>Example:</p>
+            <p><code class="literal"> &lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
+                      is going to be duplicated here.&lt;end segment&gt; </code></p>
+            <p>After duplication:</p>
+            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
+                      has been &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;end segment&gt;
+                      </code></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5621"></a>Tag group deletion:</strong></span></p>
+            <p>To delete tag groups, just remove them from the segment. Keep in
+                   mind that a pair group must have both its opening and its closing tag
+                   deleted to ensure that all traces of the formatting are properly erased,
+                   otherwise the translated file may become corrupted. By deleting a tag
+                   group you will remove the related formatting from the translated
+                   file.
+            </p>
+            <p>Example:</p>
+            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt; is
+                      going to be deleted.&lt;end segment&gt; </code></p>
+            <p>After deletion:</p>
+            <p><code class="literal">&lt;segment 0001&gt;This formatting has been
+                      deleted.&lt;end segment&gt; </code></p>
+         </div>
+         <div class="section" title="3.&nbsp;Tag group nesting">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e5642"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Modifying tag group order may result in the nesting of a tag group
+                   within another tag group. This is acceptable, provided the enclosing group
+                   totally encloses the enclosed group. In other words, when moving paired
+                   tags, ensure that both the opening and the closing tag are both either
+                   inside or outside other tag pairs, or the translated file may be corrupted
+                   and fail to open.
+            </p>
+            <p>Example:</p>
+            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
+                      &lt;b1&gt;one&lt;/b1&gt; is going to be nested inside formatting
+                      zero.&lt;end segment&gt; </code></p>
+            <p>After nesting:</p>
+            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting
+                      &lt;b1&gt;one&lt;/b1&gt;&lt;/b0&gt; has been nested inside formatting
+                      zero.&lt;end segment </code></p>
+         </div>
+         <div class="section" title="4.&nbsp;Tag group overlapping">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e5662"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Overlapping is the result of bad manipulations of tag pairs and is
+                   guaranteed to result in formatting corruption and sometimes in the
+                   translated file not opening at all.
+            </p>
+            <p>Example:</p>
+            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
+                      &lt;b1&gt;one&lt;/b1&gt; is going to be messed up.&lt;end segment&gt;
+                      </code></p>
+            <p>After a bad manipulation:</p>
+            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting
+                      &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is very messed up now.&lt;end
+                      segment&gt; </code></p>
+         </div>
+         <div class="section" title="5.&nbsp;Tag group validation">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;Tag group validation<a class="indexterm" name="d0e5682"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>The validate tags function detects changes to tag sequences (whether
+                   deliberate or accidental), and shows the affected segments. Launching this
+                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5691"></a></span> - opens a window containing all segments in
+                   the file containing suspected broken or bad tags in the translation.
+                   Repairing the tags and recreating the target documents is easy with the
+                   validate tags function. The window that opens when
+                   <span class="guimenuitem">Ctrl+T</span> is pressed features a 3-column table
+                   with a link to the segment, the original segment and the target
+                   segment
+            </p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;11.1.&nbsp;Tag validation entry</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TagValidation.png" alt="Tag validation entry"></div>
+               </div>
+            </div><br class="figure-break"><p>The tags are highlighted in bold blue for easy comparison between
+                   the original and the translated contents. Click on the link to activate
+                   the segment in the Editor. Correct the error if necessary (in the case
+                   above it is the missing &lt;i2&gt;&lt;/i2&gt; pair) and press
+                   <span class="guimenuitem">Ctrl+T</span> to return to the tag validation window
+                   to correct other errors. Tag errors are tag sequences in the translation
+                   in which the same tag order and number as in the original segment is not
+                   reproduced. Some tag manipulations are necessary and are benign, others
+                   will cause problems when the translated document is created.
+            </p>
+         </div>
+         <div class="section" title="6.&nbsp;Hints for tags management">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;Hints for tags management<a class="indexterm" name="d0e5716"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Simplify the original text</strong></span></p>
+            <p>Tags generally represent formatting in some form of the original
+                   text. Simplifying the original formatting greatly contributes to reducing
+                   the number of tags. Where circumstances permit, unifying used fonts, font
+                   sizes, colors, etc. should be considered, as it could simplify the
+                   translation and reduce the potential for tag errors. Read the tag
+                   operations section to see what can be done with tags. Remember that if you
+                   find tags a problem in OmegaT and formatting is not extremely relevant for
+                   the current translation, removing tags may be the easiest way out of
+                   problems.
+            </p>
+            <p><span class="bold"><strong>Pay extra attention to tag
+                         pairs</strong></span></p>
+            <p>If you need to see tags in OmegaT but do not need to retain most of
+                   the formatting in the translated document you are free not to include tags
+                   in the translation. In this case pay extra attention to tag pairs since
+                   deleting one side of the pair but forgetting to delete the other is
+                   guaranteed to corrupt your document's formatting. Since tags are included
+                   in the text itself, it is possible to use segmentation rules to create
+                   segments with fewer tags. This is an advanced feature and some experience
+                   is required in order for it to be applied properly.
+            </p>
+            <p>OmegaT is not yet able to detect mistakes in formatting fully
+                   automatically, so it will not prompt you if you make an error or change
+                   formatting to fit your target language better. Sometimes, however, your
+                   translated file may look strange, and – in the worst case – may even
+                   refuse to open.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="ch06.translation.editing.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch07.plain.text.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Editing behavior&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Working with plain text</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

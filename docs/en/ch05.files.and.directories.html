@@ -1,136 +1,534 @@
-<html><head>
+<html>
+   <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>Chapter&nbsp;8.&nbsp;OmegaT Files and Directories</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title=""><link rel="up" href="index.html" title=""><link rel="prev" href="ch05.file.filters.html" title="Chapter&nbsp;7.&nbsp;File Filters"><link rel="next" href="ch05.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Files to translate"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span> Files and Directories</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch05.file.filters.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch05.files.to.translate.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;8.&nbsp;OmegaT Files and Directories"><div class="titlepage"><div><div><h2 class="title"><a name="ch05.files.and.directories"></a>Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span> Files and Directories</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch05.files.and.directories.html#translation.project.files">1. Translation project files</a></span></dt><dd><dl><dt><span class="section"><a href="ch05.files.and.directories.html#translation.project.files.location">1.1. Translation project files location</a></span></dt><dt><span class="section"><a href="ch05.files.and.directories.html#translation.project.files.list">1.2. Translation project files list</a></span></dt><dt><span class="section"><a href="ch05.files.and.directories.html#folder.OmegaT">1.3. Omegat</a></span></dt><dt><span class="section"><a href="ch05.files.and.directories.html#folder.source">1.4. Source files</a></span></dt><dt><span class="section"><a href="ch05.files.and.directories.html#folder.target">1.5. Target files</a></span></dt><dt><span class="section"><a href="ch05.files.and.directories.html#file.omegat.project">1.6. omegat.project</a></span></dt></dl></dd><dt><span class="section"><a href="ch05.files.and.directories.html#user.files">2. User files</a></span></dt><dd><dl><dt><span class="section"><a href="ch05.files.and.directories.html#d0e4816">2.1. User files location </a></span></dt><dt><span class="section"><a href="ch05.files.and.directories.html#user.files.list">2.2. User files list</a></span></dt></dl></dd><dt><span class="section"><a href="ch05.files.and.directories.html#application.files">3. Application files</a></span></dt></dl></div><p><span class="application">OmegaT</span> works with three types of
-  files.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Translation project files: These constitute a translation project.
-      Losing them may affect the project's integrity and your ability to
-      complete a job. Project files are the most important files in
-      <span class="application">OmegaT</span>. They are the files you deal with on a
-      daily basis while translating.</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>User settings files: These are created when OmegaT's behavior is
-      modified by user preference settings. Losing them usually results in
-      OmegaT reverting to its "factory settings". This can sometimes cause a
-      little trouble when you are in the middle of a translation.</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Application files: These are included in the package you download.
-      Most of them are required in order for OmegaT to function properly. If
-      for some reason these files are lost or corrupted, simply download
-      and/or reinstall OmegaT to restore them all.</p></li></ul></div><div class="section" title="1.&nbsp;Translation project files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="translation.project.files"></a>1.&nbsp;Translation project files</h2></div></div></div><p>An <span class="application">OmegaT</span> translation project consists of
-    a number of files and directories.</p><div class="section" title="1.1.&nbsp;Translation project files location"><div class="titlepage"><div><div><h3 class="title"><a name="translation.project.files.location"></a>1.1.&nbsp;<a class="indexterm" name="d0e4642"></a>Translation project files location</h3></div></div></div><p>When you create a translation project, OmegaT automatically
-      creates a list of folders that will later serve as files repositories,
-      and a number of files that are used to set certain project preferences
-      and to hold the project translation memory. By default, a translation
-      project's folders are all grouped under the main project folder.
-      Alternate locations for some of the folders can be chosen at project
-      creation or during the translation. It is therefore possible to select
-      existing folders or create folders in locations that reflect your work
-      flow and project management habits. To change the location of folders
-      after a project has been created, open <span class="guimenuitem">Project &gt;
-      Properties...</span> in the menu or with
-      <span class="guibutton">Ctrl+E</span> and make the necessary changes.</p></div><div class="section" title="1.2.&nbsp;Translation project files list"><div class="titlepage"><div><div><h3 class="title"><a name="translation.project.files.list"></a>1.2.&nbsp;<a class="indexterm" name="d0e4658"></a>Translation project files list</h3></div></div></div><p>When you open a file dialog opened by
-      <span class="application">OmegaT</span>, a translation project will look like
-      a file with an <span class="application">OmegaT</span> icon associated with
-      it. From within a file manager, however, a translation project looks and
-      acts just like any other folder.</p><div class="figure"><a name="OmegaT.projects.and.subdirectories"></a><p class="title"><b>Figure&nbsp;8.1.&nbsp;OmegaT projects and subdirectories</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/OmegaT_projects_and_subdirectories.png" alt="OmegaT projects and subdirectories"></div></div></div><br class="figure-break"><p>Double clicking the item with the OmegaT icon is sufficient to
-      open the project. A translation project <span class="bold"><strong>Example_Project</strong></span> created with the default settings
-      will be created as a new subfolder with the following structure:</p><div class="figure"><a name="OmegaT.project"></a><p class="title"><b>Figure&nbsp;8.2.&nbsp;OmegaT project</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/Omegatproject.png" alt="OmegaT project"></div></div></div><br class="figure-break"><p>All the subdirectories will be initially empty.</p></div><div class="section" title="1.3.&nbsp;Omegat"><div class="titlepage"><div><div><h3 class="title"><a name="folder.OmegaT"></a>1.3.&nbsp;Omegat<a class="indexterm" name="d0e4694"></a></h3></div></div></div><p>The <span class="bold"><strong>omegat</strong></span> subfolder contains at
-      least one and possibly several other files. The most important file is
-      the translation memory file, <span class="bold"><strong>project_save.tmx
-      </strong></span>(...). The project_save.tmx file is the working translation
-      memory for the project. With the autosave function activated, it will be
-      automatically updated when you quit. It is the translation memory used
-      to create the translated files. A number of TMX files with names of the
-      form <span class="bold"><strong>project_save.tmx.&lt;date and
-      time&gt;.bak</strong></span> (...) are added progressively to this subfolder
-      as the translation progresses. They serve as a backup for the project
-      TM. A new one of theses is added each time you reopen a project, thus
-      reflecting its contents before the current session has changed
-      them</p><p>The project <a class="indexterm" name="d0e4712"></a><span class="bold"><strong>stats.txt</strong></span> file (...)
-      contains the statistics of the current project and can be opened in a
-      spreadsheet application to display segment and word count information.
-      The file contains the number of segments for each file to be translated
-      - Total and Remaining - the number of Unique segments per file, the
-      number of Unique words and the number of Unique Characters with /
-      without spaces per file,</p><p>Note that Unique segments per file provides the number of unique
-      segments in a given file that do not appear anywhere else in the
-      project. The unique words or characters per file have a similar
-      definition. Note that in a multi-file project the sum of unique segments
-      per file will not necessary be equal to the grand total of unique
-      segments in the project.</p><p>The<span class="bold"><strong> <a class="indexterm" name="d0e4726"></a>Ignore_words.txt </strong></span>and <span class="bold"><strong>learned_word.txt </strong></span>files are used by the spell
-      checker. Note that they are specific for a given project, so if you have
-      already amassed words you wish the spell checker to ignore / accept, you
-      just need to copy the corresponding two files into the<code class="filename"> omegat
-      </code>subfolder of your current project.</p></div><div class="section" title="1.4.&nbsp;Source files"><div class="titlepage"><div><div><h3 class="title"><a name="folder.source"></a>1.4.&nbsp;Source files<a class="indexterm" name="d0e4742"></a></h3></div></div></div><p>The source subfolder is the location for project files that need
-      to be translated. You can specify a new subfolder and add the files to
-      it later. Note that the structure of the source subfolder may take any
-      form you like. If the files to be translated are parts of a tree
-      structure (as in a website), you need only specify the top-level
-      subfolder and OmegaT will maintain the entire contents, while keeping
-      the tree structure intact.</p></div><div class="section" title="1.5.&nbsp;Target files"><div class="titlepage"><div><div><h3 class="title"><a name="folder.target"></a>1.5.&nbsp;Target files<a class="indexterm" name="d0e4752"></a></h3></div></div></div><p>When <span class="guimenu">Project</span> → <span class="guimenuitem">Create Translated Documents</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>) is selected, all the files within the
-      <code class="filename">source</code> directory, whether translated or not, are
-      reproduced in the target directory with the same folder hierarchy to
-      reflect the current state of the translation. In practical terms, OmegaT
-      merges the translation information saved in <span class="bold"><strong>/omegat/project_save,tmx</strong></span> with the source
-      documents to produce the target contents.</p></div><div class="section" title="1.6.&nbsp;omegat.project"><div class="titlepage"><div><div><h3 class="title"><a name="file.omegat.project"></a>1.6.&nbsp;omegat.project<a class="indexterm" name="d0e4780"></a></h3></div></div></div><p><span class="application">OmegaT</span> automatically creates this file
-      when the project is created and contains the project parameters. The
-      parameters included in this file can be modified from the Project
-      properties window.</p><p><code class="filename">project_name-omegat.tmx (...)</code></p><p><code class="filename">project_name-level1.tmx</code></p><p><code class="filename">project_name-level2.tmx</code></p><a class="indexterm" name="d0e4798"></a><p>These files contain the source and target segments corresponding
-      to the contents of the <code class="filename">source</code> folder at the time of
-      their creation (usually when the translated files have been created).
-      They constitute the exported translation memories that you can use in
-      future projects.</p></div></div><div class="section" title="2.&nbsp;User files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="user.files"></a>2.&nbsp;User files<a class="indexterm" name="d0e4811"></a></h2></div></div></div><div class="section" title="2.1.&nbsp;User files location"><div class="titlepage"><div><div><h3 class="title"><a name="d0e4816"></a>2.1.&nbsp;User files location <a class="indexterm" name="d0e4819"></a></h3></div></div></div><p>User files are stored in a separate location where they can be
-      accessed by any version of <span class="application">OmegaT</span>. The
-      location depends upon the platform you use:</p><div class="informaltable"><table border="1"><colgroup><col width="100" align="left"><col></colgroup><tbody><tr><td align="left">Windows 2000 and XP</td><td align="left"><code class="literal">Documents and Settings\&lt;User
-              Name&gt;\Application
-              Data\<span class="application">OmegaT</span></code></td></tr><tr><td align="left">Windows Vista and 7</td><td align="left"><code class="literal">Users\&lt;User
-              Name&gt;\AppData\Roaming\<span class="application">OmegaT</span></code></td></tr><tr><td align="left">Windows other</td><td align="left"><code class="literal">&lt;Something&gt;\<span class="application">OmegaT</span></code>
-              (&lt;Something&gt; corresponds to the location of the "home"
-              folder as determined by Java)</td></tr><tr><td align="left">Linux/Solaris/FreeBSD</td><td align="left"><code class="literal">&lt;User Home&gt;/.omegat </code>(.omegat is
-              a directory, the dot preceding its name makes it invisible
-              unless you type ls -a or an equivalent command)</td></tr><tr><td align="left">MAC OSX</td><td align="left"><code class="filename">&lt;User
-              Home&gt;/Library/Preferences/<span class="application">OmegaT</span></code></td></tr><tr><td align="left">Other</td><td align="left"><code class="filename">&lt;User Home&gt;</code></td></tr></tbody></table></div></div><div class="section" title="2.2.&nbsp;User files list"><div class="titlepage"><div><div><h3 class="title"><a name="user.files.list"></a>2.2.&nbsp;User files list<a class="indexterm" name="d0e4884"></a></h3></div></div></div><div class="informaltable"><table border="1"><colgroup><col width="100" align="left"><col></colgroup><tbody><tr><td align="left">logs/OmegaT.log</td><td align="left">This file records Java error messages while
-              <span class="application">OmegaT</span> is running. Should OmegaT
-              appear to be behaving erratically, it is important to include
-              this file or the relevant part in any bug report</td></tr><tr><td align="left">omegat.prefs</td><td align="left">An xml file with all the GUI accessible option
-              settings</td></tr><tr><td align="left">uiLayout.xml</td><td align="left">An xml file with window position data</td></tr><tr><td align="left">filters.xml</td><td align="left">An xml file with all the data set by the file filter
-              preferences</td></tr><tr><td align="left">segmentation.conf</td><td align="left">An xml file containing segmentation rules</td></tr></tbody></table></div></div></div><div class="section" title="3.&nbsp;Application files"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="application.files"></a>3.&nbsp;<a class="indexterm" name="d0e4923"></a>Application files<a class="indexterm" name="d0e4929"></a></h2></div></div></div><p>OmegaT is supplied as a package that can be downloaded from
-    SourceForge. This chapter will consider the platform-independent package
-    that contains the application in a standard Java form. Other packages
-    include a Linux .tar package, a Windows installer – with or without a Java
-    Runtime Environment –, a MacOSX installer, and a source code package for
-    developers. The platform-independent package can be used on any platform
-    with a working Java 1.5 runtime environment, including the platforms for
-    which a specific package also exists. The platform-independent package is
-    supplied as a compressed file (zip or tar archive) that you must extract
-    to the folder of your choice for installation. The file can usually be
-    extracted by double-clicking on the downloaded package. Once the archive
-    has been extracted, a folder containing the following contents is
-    created:</p><div class="informaltable"><table border="1"><colgroup><col width="100" align="left"><col></colgroup><tbody><tr><td align="left"><span class="bold"><strong>File/ subfolder</strong></span></td><td align="left"><span class="bold"><strong>Contents</strong></span></td></tr><tr><td align="left">/docs/</td><td align="left">All the user manual files can be found in this folder. You
-            can open them in An Internet browser to obtain access to external
-            links.</td></tr><tr><td align="left">/images/</td><td align="left">Icons and logo graphics are included here.</td></tr><tr><td align="left">/lib/</td><td align="left">Contains Java files, necessary to the operation of
-            <span class="application">OmegaT</span>.</td></tr><tr><td align="left">join.html</td><td align="left">This is an ordinary html file that, when opened in your
-            Internet browser, directs you to the OmegaT user group hosted on
-            Yahoo Groups. Joining is not necessary, but will provide you with
-            access to additional services, such as files, questionnaires, and
-            the opportunity to take part in OmegaT-related discussions. The
-            group archives are public and can be viewed without subscription
-            to the group.</td></tr><tr><td align="left"><code class="filename">changes.txt</code></td><td align="left">A relatively detailed list of modifications between this
-            version and the preceding versions.</td></tr><tr><td align="left"><code class="filename">license.txt</code></td><td align="left">The GNU GENERAL PUBLIC LICENSE. This license allows you to
-            do certain things with <span class="application">OmegaT</span>,
-            including modifying and distributing it. If you are interested in
-            modifying or distributing <span class="application">OmegaT</span>, read
-            this document carefully and ensure you understand its implications
-            before doing anything. If in doubt, don't hesitate to ask project
-            members directly either by sending them an e-mail from the
-            SourceForge page or by sending a public mail to the user
-            group.</td></tr><tr><td align="left"><code class="filename">doc-license.txt</code></td><td align="left">The GNU GENERAL PUBLIC LICENSE. This license covers the
-            documentation. See above.</td></tr><tr><td align="left"><code class="filename">readme.txt</code></td><td align="left">This file is very important and you should make sure you
-            read it before launching OmegaT. It includes general information
-            on OmegaT, where to find more information, how to contribute, etc.
-            It has been translated into a number of languages.</td></tr><tr><td align="left"><span class="application">OmegaT</span></td><td align="left">A text file containing two lines:</td></tr><tr><td align="left">&nbsp;</td><td align="left"><code class="literal">#!/bin/bash java</code></td></tr><tr><td align="left">&nbsp;</td><td align="left"><code class="literal">java -jar
-            <span class="application">OmegaT</span>.jar $*</code></td></tr><tr><td align="left">&nbsp;</td><td align="left">Linux and OSX users may find this file useful. Make it
-            executable (chmod +x OmegaT) from the command line after making
-            sure you are in the /OmegaT_2.3/ directory. You will then be able
-            to launch OmegaT by executing this file from the command
-            line</td></tr><tr><td align="left"><span class="application">OmegaT</span>.bat</td><td align="left">A batch file, used to launch
-            <span class="application">OmegaT</span> from the Windows command line.
-            It contains just the following line:</td></tr><tr><td align="left">&nbsp;</td><td align="left"><code class="literal">java -jar <span class="application">OmegaT</span>.jar
-            %*</code></td></tr><tr><td align="left"><span class="application">OmegaT</span>.jar</td><td align="left">The main OmegaT application. To launch OmegaT, you must
-            launch this file either from the command line or from your file
-            manager, usually by double-clicking it.</td></tr></tbody></table></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch05.file.filters.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch05.files.to.translate.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;7.&nbsp;File Filters&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;9.&nbsp;Files to translate</td></tr></table></div></body></html>
+   
+      <title>Chapter&nbsp;8.&nbsp;OmegaT Files and Directories</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="home" href="index.html" title="">
+      <link rel="up" href="index.html" title="">
+      <link rel="prev" href="ch05.file.filters.html" title="Chapter&nbsp;7.&nbsp;File Filters">
+      <link rel="next" href="ch05.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Files to translate">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span> Files and Directories
+               </th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="ch05.file.filters.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch05.files.to.translate.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;8.&nbsp;OmegaT Files and Directories">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="ch05.files.and.directories"></a>Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span> Files and Directories
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="ch05.files.and.directories.html#translation.project.files">1. Translation project files</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="ch05.files.and.directories.html#translation.project.files.location">1.1. Translation project files location</a></span></dt>
+                     <dt><span class="section"><a href="ch05.files.and.directories.html#translation.project.files.list">1.2. Translation project files list</a></span></dt>
+                     <dt><span class="section"><a href="ch05.files.and.directories.html#folder.OmegaT">1.3. Omegat</a></span></dt>
+                     <dt><span class="section"><a href="ch05.files.and.directories.html#folder.source">1.4. Source files</a></span></dt>
+                     <dt><span class="section"><a href="ch05.files.and.directories.html#folder.target">1.5. Target files</a></span></dt>
+                     <dt><span class="section"><a href="ch05.files.and.directories.html#file.omegat.project">1.6. omegat.project</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="ch05.files.and.directories.html#user.files">2. User files</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="ch05.files.and.directories.html#d0e4814">2.1. User files location </a></span></dt>
+                     <dt><span class="section"><a href="ch05.files.and.directories.html#user.files.list">2.2. User files list</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="ch05.files.and.directories.html#application.files">3. Application files</a></span></dt>
+            </dl>
+         </div>
+         <p><span class="application">OmegaT</span> works with three types of
+              files.
+         </p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc">
+               <li class="listitem">
+                  <p>Translation project files: These constitute a translation project.
+                           Losing them may affect the project's integrity and your ability to
+                           complete a job. Project files are the most important files in
+                           <span class="application">OmegaT</span>. They are the files you deal with on a
+                           daily basis while translating.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc">
+               <li class="listitem">
+                  <p>User settings files: These are created when OmegaT's behavior is
+                           modified by user preference settings. Losing them usually results in
+                           OmegaT reverting to its "factory settings". This can sometimes cause a
+                           little trouble when you are in the middle of a translation.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc">
+               <li class="listitem">
+                  <p>Application files: These are included in the package you download.
+                           Most of them are required in order for OmegaT to function properly. If
+                           for some reason these files are lost or corrupted, simply download
+                           and/or reinstall OmegaT to restore them all.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <div class="section" title="1.&nbsp;Translation project files">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="translation.project.files"></a>1.&nbsp;Translation project files
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>An <span class="application">OmegaT</span> translation project consists of
+                   a number of files and directories.
+            </p>
+            <div class="section" title="1.1.&nbsp;Translation project files location">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="translation.project.files.location"></a>1.1.&nbsp;<a class="indexterm" name="d0e4640"></a>Translation project files location
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>When you create a translation project, OmegaT automatically
+                        creates a list of folders that will later serve as files repositories,
+                        and a number of files that are used to set certain project preferences
+                        and to hold the project translation memory. By default, a translation
+                        project's folders are all grouped under the main project folder.
+                        Alternate locations for some of the folders can be chosen at project
+                        creation or during the translation. It is therefore possible to select
+                        existing folders or create folders in locations that reflect your work
+                        flow and project management habits. To change the location of folders
+                        after a project has been created, open <span class="guimenuitem">Project &gt;
+                           Properties...</span> in the menu or with
+                        <span class="guibutton">Ctrl+E</span> and make the necessary changes.
+               </p>
+            </div>
+            <div class="section" title="1.2.&nbsp;Translation project files list">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="translation.project.files.list"></a>1.2.&nbsp;<a class="indexterm" name="d0e4656"></a>Translation project files list
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>When you open a file dialog opened by
+                        <span class="application">OmegaT</span>, a translation project will look like
+                        a file with an <span class="application">OmegaT</span> icon associated with
+                        it. From within a file manager, however, a translation project looks and
+                        acts just like any other folder.
+               </p>
+               <div class="figure"><a name="OmegaT.projects.and.subdirectories"></a><p class="title"><b>Figure&nbsp;8.1.&nbsp;OmegaT projects and subdirectories</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/OmegaT_projects_and_subdirectories.png" alt="OmegaT projects and subdirectories"></div>
+                  </div>
+               </div><br class="figure-break"><p>Double clicking the item with the OmegaT icon is sufficient to
+                        open the project. A translation project <span class="bold"><strong>Example_Project</strong></span> created with the default settings
+                        will be created as a new subfolder with the following structure:
+               </p>
+               <div class="figure"><a name="OmegaT.project"></a><p class="title"><b>Figure&nbsp;8.2.&nbsp;OmegaT project</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/Omegatproject.png" alt="OmegaT project"></div>
+                  </div>
+               </div><br class="figure-break"><p>All the subdirectories will be initially empty.</p>
+            </div>
+            <div class="section" title="1.3.&nbsp;Omegat">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.OmegaT"></a>1.3.&nbsp;Omegat<a class="indexterm" name="d0e4692"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>The <span class="bold"><strong>omegat</strong></span> subfolder contains at
+                        least one and possibly several other files. The most important file is
+                        the translation memory file, <span class="bold"><strong>project_save.tmx
+                              </strong></span>(...). The project_save.tmx file is the working translation
+                        memory for the project. With the autosave function activated, it will be
+                        automatically updated when you quit. It is the translation memory used
+                        to create the translated files. A number of TMX files with names of the
+                        form <span class="bold"><strong>project_save.tmx.&lt;date and
+                              time&gt;.bak</strong></span> (...) are added progressively to this subfolder
+                        as the translation progresses. They serve as a backup for the project
+                        TM. A new one of theses is added each time you reopen a project, thus
+                        reflecting its contents before the current session has changed
+                        them
+               </p>
+               <p>The project <a class="indexterm" name="d0e4710"></a><span class="bold"><strong>stats.txt</strong></span> file (...)
+                        contains the statistics of the current project and can be opened in a
+                        spreadsheet application to display segment and word count information.
+                        The file contains the number of segments for each file to be translated
+                        - Total and Remaining - the number of Unique segments per file, the
+                        number of Unique words and the number of Unique Characters with /
+                        without spaces per file,
+               </p>
+               <p>Note that Unique segments per file provides the number of unique
+                        segments in a given file that do not appear anywhere else in the
+                        project. The unique words or characters per file have a similar
+                        definition. Note that in a multi-file project the sum of unique segments
+                        per file will not necessary be equal to the grand total of unique
+                        segments in the project.
+               </p>
+               <p>The<span class="bold"><strong> <a class="indexterm" name="d0e4724"></a>Ignore_words.txt </strong></span>and <span class="bold"><strong>learned_word.txt </strong></span>files are used by the spell
+                        checker. Note that they are specific for a given project, so if you have
+                        already amassed words you wish the spell checker to ignore / accept, you
+                        just need to copy the corresponding two files into the<code class="filename"> omegat
+                           </code>subfolder of your current project.
+               </p>
+            </div>
+            <div class="section" title="1.4.&nbsp;Source files">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.source"></a>1.4.&nbsp;Source files<a class="indexterm" name="d0e4740"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>The source subfolder is the location for project files that need
+                        to be translated. You can specify a new subfolder and add the files to
+                        it later. Note that the structure of the source subfolder may take any
+                        form you like. If the files to be translated are parts of a tree
+                        structure (as in a website), you need only specify the top-level
+                        subfolder and OmegaT will maintain the entire contents, while keeping
+                        the tree structure intact.
+               </p>
+            </div>
+            <div class="section" title="1.5.&nbsp;Target files">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="folder.target"></a>1.5.&nbsp;Target files<a class="indexterm" name="d0e4750"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>When <span class="guimenu">Project</span> → <span class="guimenuitem">Create Translated Documents</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>) is selected, all the files within the
+                        <code class="filename">source</code> directory, whether translated or not, are
+                        reproduced in the target directory with the same folder hierarchy to
+                        reflect the current state of the translation. In practical terms, OmegaT
+                        merges the translation information saved in <span class="bold"><strong>/omegat/project_save,tmx</strong></span> with the source
+                        documents to produce the target contents.
+               </p>
+            </div>
+            <div class="section" title="1.6.&nbsp;omegat.project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="file.omegat.project"></a>1.6.&nbsp;omegat.project<a class="indexterm" name="d0e4778"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> automatically creates this file
+                        when the project is created and contains the project parameters. The
+                        parameters included in this file can be modified from the Project
+                        properties window.
+               </p>
+               <p><code class="filename">project_name-omegat.tmx (...)</code></p>
+               <p><code class="filename">project_name-level1.tmx</code></p>
+               <p><code class="filename">project_name-level2.tmx</code></p><a class="indexterm" name="d0e4796"></a><p>These files contain the source and target segments corresponding
+                        to the contents of the <code class="filename">source</code> folder at the time of
+                        their creation (usually when the translated files have been created).
+                        They constitute the exported translation memories that you can use in
+                        future projects.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="2.&nbsp;User files">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="user.files"></a>2.&nbsp;User files<a class="indexterm" name="d0e4809"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section" title="2.1.&nbsp;User files location">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e4814"></a>2.1.&nbsp;User files location <a class="indexterm" name="d0e4817"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>User files are stored in a separate location where they can be
+                        accessed by any version of <span class="application">OmegaT</span>. The
+                        location depends upon the platform you use:
+               </p>
+               <div class="informaltable">
+                  <table border="1">
+                     <colgroup>
+                        <col width="100" align="left">
+                        <col>
+                     </colgroup>
+                     <tbody>
+                        <tr>
+                           <td align="left">Windows 2000 and XP</td>
+                           <td align="left"><code class="literal">Documents and Settings\&lt;User
+                                               Name&gt;\Application
+                                               Data\<span class="application">OmegaT</span></code></td>
+                        </tr>
+                        <tr>
+                           <td align="left">Windows Vista and 7</td>
+                           <td align="left"><code class="literal">Users\&lt;User
+                                               Name&gt;\AppData\Roaming\<span class="application">OmegaT</span></code></td>
+                        </tr>
+                        <tr>
+                           <td align="left">Windows other</td>
+                           <td align="left"><code class="literal">&lt;Something&gt;\<span class="application">OmegaT</span></code>
+                                            (&lt;Something&gt; corresponds to the location of the "home"
+                                            folder as determined by Java)
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">Linux/Solaris/FreeBSD</td>
+                           <td align="left"><code class="literal">&lt;User Home&gt;/.omegat </code>(.omegat is
+                                            a directory, the dot preceding its name makes it invisible
+                                            unless you type ls -a or an equivalent command)
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">MAC OSX</td>
+                           <td align="left"><code class="filename">&lt;User
+                                               Home&gt;/Library/Preferences/<span class="application">OmegaT</span></code></td>
+                        </tr>
+                        <tr>
+                           <td align="left">Other</td>
+                           <td align="left"><code class="filename">&lt;User Home&gt;</code></td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+            <div class="section" title="2.2.&nbsp;User files list">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="user.files.list"></a>2.2.&nbsp;User files list<a class="indexterm" name="d0e4882"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="informaltable">
+                  <table border="1">
+                     <colgroup>
+                        <col width="100" align="left">
+                        <col>
+                     </colgroup>
+                     <tbody>
+                        <tr>
+                           <td align="left">logs/OmegaT.log</td>
+                           <td align="left">This file records Java error messages while
+                                            <span class="application">OmegaT</span> is running. Should OmegaT
+                                            appear to be behaving erratically, it is important to include
+                                            this file or the relevant part in any bug report
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">omegat.prefs</td>
+                           <td align="left">An xml file with all the GUI accessible option
+                                            settings
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">uiLayout.xml</td>
+                           <td align="left">An xml file with window position data</td>
+                        </tr>
+                        <tr>
+                           <td align="left">filters.xml</td>
+                           <td align="left">An xml file with all the data set by the file filter
+                                            preferences
+                           </td>
+                        </tr>
+                        <tr>
+                           <td align="left">segmentation.conf</td>
+                           <td align="left">An xml file containing segmentation rules</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+         <div class="section" title="3.&nbsp;Application files">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="application.files"></a>3.&nbsp;<a class="indexterm" name="d0e4921"></a>Application files<a class="indexterm" name="d0e4927"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT is supplied as a package that can be downloaded from
+                   SourceForge. This chapter will consider the platform-independent package
+                   that contains the application in a standard Java form. Other packages
+                   include a Linux .tar package, a Windows installer – with or without a Java
+                   Runtime Environment –, a MacOSX installer, and a source code package for
+                   developers. The platform-independent package can be used on any platform
+                   with a working Java 1.5 runtime environment, including the platforms for
+                   which a specific package also exists. The platform-independent package is
+                   supplied as a compressed file (zip or tar archive) that you must extract
+                   to the folder of your choice for installation. The file can usually be
+                   extracted by double-clicking on the downloaded package. Once the archive
+                   has been extracted, a folder containing the following contents is
+                   created:
+            </p>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <tbody>
+                     <tr>
+                        <td align="left"><span class="bold"><strong>File/ subfolder</strong></span></td>
+                        <td align="left"><span class="bold"><strong>Contents</strong></span></td>
+                     </tr>
+                     <tr>
+                        <td align="left">/docs/</td>
+                        <td align="left">All the user manual files can be found in this folder. You
+                                       can open them in An Internet browser to obtain access to external
+                                       links.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">/images/</td>
+                        <td align="left">Icons and logo graphics are included here.</td>
+                     </tr>
+                     <tr>
+                        <td align="left">/lib/</td>
+                        <td align="left">Contains Java files, necessary to the operation of
+                                       <span class="application">OmegaT</span>.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">join.html</td>
+                        <td align="left">This is an ordinary html file that, when opened in your
+                                       Internet browser, directs you to the OmegaT user group hosted on
+                                       Yahoo Groups. Joining is not necessary, but will provide you with
+                                       access to additional services, such as files, questionnaires, and
+                                       the opportunity to take part in OmegaT-related discussions. The
+                                       group archives are public and can be viewed without subscription
+                                       to the group.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">changes.txt</code></td>
+                        <td align="left">A relatively detailed list of modifications between this
+                                       version and the preceding versions.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">license.txt</code></td>
+                        <td align="left">The GNU GENERAL PUBLIC LICENSE. This license allows you to
+                                       do certain things with <span class="application">OmegaT</span>,
+                                       including modifying and distributing it. If you are interested in
+                                       modifying or distributing <span class="application">OmegaT</span>, read
+                                       this document carefully and ensure you understand its implications
+                                       before doing anything. If in doubt, don't hesitate to ask project
+                                       members directly either by sending them an e-mail from the
+                                       SourceForge page or by sending a public mail to the user
+                                       group.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">doc-license.txt</code></td>
+                        <td align="left">The GNU GENERAL PUBLIC LICENSE. This license covers the
+                                       documentation. See above.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><code class="filename">readme.txt</code></td>
+                        <td align="left">This file is very important and you should make sure you
+                                       read it before launching OmegaT. It includes general information
+                                       on OmegaT, where to find more information, how to contribute, etc.
+                                       It has been translated into a number of languages.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="application">OmegaT</span></td>
+                        <td align="left">A text file containing two lines:</td>
+                     </tr>
+                     <tr>
+                        <td align="left">&nbsp;</td>
+                        <td align="left"><code class="literal">#!/bin/bash java</code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">&nbsp;</td>
+                        <td align="left"><code class="literal">java -jar
+                                          <span class="application">OmegaT</span>.jar $*</code></td>
+                     </tr>
+                     <tr>
+                        <td align="left">&nbsp;</td>
+                        <td align="left">Linux and OSX users may find this file useful. Make it
+                                       executable (chmod +x OmegaT) from the command line after making
+                                       sure you are in the /OmegaT_2.3/ directory. You will then be able
+                                       to launch OmegaT by executing this file from the command
+                                       line
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="application">OmegaT</span>.bat
+                        </td>
+                        <td align="left">A batch file, used to launch
+                                       <span class="application">OmegaT</span> from the Windows command line.
+                                       It contains just the following line:
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">&nbsp;</td>
+                        <td align="left"><code class="literal">java -jar <span class="application">OmegaT</span>.jar
+                                          %*</code></td>
+                     </tr>
+                     <tr>
+                        <td align="left"><span class="application">OmegaT</span>.jar
+                        </td>
+                        <td align="left">The main OmegaT application. To launch OmegaT, you must
+                                       launch this file either from the command line or from your file
+                                       manager, usually by double-clicking it.
+                        </td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="ch05.file.filters.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch05.files.to.translate.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;7.&nbsp;File Filters&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;9.&nbsp;Files to translate</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,147 +1,597 @@
-<html><head>
+<html>
+   <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>Chapter&nbsp;2.&nbsp;Instant Start Guide</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title=""><link rel="up" href="index.html" title=""><link rel="prev" href="Ch01.about.OmegaT.html" title="Chapter&nbsp;1.&nbsp;About OmegaT - introduction"><link rel="next" href="Ch02.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;Installing and running OmegaT"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;2.&nbsp;Instant Start Guide</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="Ch01.about.OmegaT.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="Ch02.installing.and.running.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;2.&nbsp;Instant Start Guide"><div class="titlepage"><div><div><h2 class="title"><a name="Ch02.instant.start.guide"></a>Chapter&nbsp;2.&nbsp;Instant Start Guide</h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e178">1. Start Using <span class="application">OmegaT</span> in 5 Minutes!</a></span></dt><dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e220">2. Translating with <span class="application">OmegaT</span></a></span></dt><dd><dl><dt><span class="section"><a href="Ch02.instant.start.guide.html#create.and.open.new.project">2.1. Creating and opening a new project</a></span></dt><dt><span class="section"><a href="Ch02.instant.start.guide.html#translate.the.segments.one.by.one">2.2. Translating segments one by one</a></span></dt><dt><span class="section"><a href="Ch02.instant.start.guide.html#use.matches.in.TMs.dictionaries.and.glossaries">2.3. Using matches in the translation memories, dictionaries and
-      glossaries</a></span></dt><dt><span class="section"><a href="Ch02.instant.start.guide.html#create.translated.documents">2.4. Creating translated documents</a></span></dt></dl></dd><dt><span class="section"><a href="Ch02.instant.start.guide.html#how.to.handle.tagged.text">3. Handling tagged text</a></span></dt><dd><dl><dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e670">3.1. An example...</a></span></dt><dt><span class="section"><a href="Ch02.instant.start.guide.html#tag.verification">3.2. Tag verification</a></span></dt></dl></dd></dl></div><div class="section" title="1.&nbsp;Start Using OmegaT in 5 Minutes!"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e178"></a>1.&nbsp;Start Using <span class="application">OmegaT</span> in 5 Minutes!</h2></div></div></div><p>This instant start guide covers only the very basics of OmegaT.
-    Ideally, users should read the User Manual to familiarize themselves with
-    everything <span class="application">OmegaT</span> has to offer. Note for Mac
-    users: shortcuts are described here as "<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>key</strong></span>" but Mac users should instead use "<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>key</strong></span>". The "<span class="keycap"><strong>Cmd</strong></span>" key either has a "command"
-    label or an apple symbol on Apple keyboards.</p><p>The <span class="application">OmegaT</span> screen consists of one
-    workspace with five distinct panes<a class="indexterm" name="d0e209"></a> Each of these can be resized using the mouse. On the left
-    is the Editor where you type your translation. On the top right is the
-    Match Viewer, where translation memory matches are displayed. Below this
-    is the Glossary Viewer, where glossary matches are displayed. Two
-    additional tabs at the bottom of the window open the Dictionary and
-    Machine Translation panes. (Note: you can of course rearrange the panes to
-    your own liking - the above description applies to your OmegaT after
-    installation).</p><p>In the Editor pane OmegaT presents the source text 'segmented' into
-    either sentences or paragraphs. These are then translated, one by one. As
-    you progress from segment to segment, your translations are recorded
-    automatically in a translation memory. Once all the segments have been
-    translated (or before, if you request) <span class="application">OmegaT</span>
-    uses the translation memory to generate the translated document(s) in a
-    “Target” folder.</p><p>OmegaT organizes your translation work in translation “projects”.
-    For each project, OmegaT creates a set of folderswhich, in turn, are used
-    to store the source documents to be translated as well as any glossaries
-    and translation memories you may wish to use. OmegaT also creates a
-    “Target” folder, in which OmegaT places the final translated
-    documents.</p></div><div class="section" title="2.&nbsp;Translating with OmegaT"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e220"></a>2.&nbsp;Translating with <span class="application">OmegaT</span></h2></div></div></div><div class="section" title="2.1.&nbsp;Creating and opening a new project"><div class="titlepage"><div><div><h3 class="title"><a name="create.and.open.new.project"></a>2.1.&nbsp;Creating and opening a new project<a class="indexterm" name="d0e228"></a></h3></div></div></div><p>Select <span class="guimenu">Project</span> → <span class="guimenuitem">New...</span><a class="indexterm" name="d0e240"></a> from the menu.</p><p>Navigate to the folder where you wish to save the project files,
-      and type in a name for the translation project. This name will be used
-      for the main project folder; all the project files will be stored in
-      this folder or its subfolders.</p><p><span class="application">OmegaT</span> will prompt you to confirm or
-      change the project folders to be created, using the dialog below:</p><div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figure&nbsp;2.1.&nbsp;<a class="indexterm" name="d0e254"></a>New project - dialog window</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/NewProject.png" alt="ProjectProject dialog window - figureNew project - dialog window"></div></div></div><br class="figure-break"><p>You can simply accept the default locations of the subfolders, but
-      be sure to check that the source language and target language codes are
-      correct. Select the language code (2 letters) or language-and-region
-      code (2 + 2 letters) from the drop-down list, or type them in by hand
-      (the language code can be 2 to 3 letters). Make a mental note of the
-      location of the Target subfolder (for your translated documents). If you
-      prefer OmegaT to segment by sentence instead of by "paragraph", please
-      read the chapter on Segmentation Rules.<a class="indexterm" name="d0e265"></a>.</p><p>When you click OK to accept the project set-up, OmegaT prompts you
-      to select the source documents for import. You can import individual
-      files with<em class="firstterm"> Project &gt; Import Source Files</em>, or
-      you can copy files or even entire folder trees (with all files in all
-      subfolders) manually into the Source folder of your OmegaT project
-      (using your system's file manager, for example). If you've accidentally
-      imported the wrong documents, or too many documents, you can simply
-      remove them again from the Source folder.</p><p>To check your list of files to be translated, consult the
-      <span class="bold"><strong>Project Files</strong></span> <a class="indexterm" name="d0e281"></a>window (Menu: <span class="guimenu">Project</span> → <span class="guimenuitem">Project Files...</span>,<a class="indexterm" name="d0e293"></a> if it does not open automatically). If you had to change
-      the Contents of the Source folder, remember to reload the project first
-      (Menu: <span class="guimenu">Project</span> → <span class="guimenuitem">Reload</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>).). <span class="application">OmegaT</span> opens the first
-      file in the project list by default. Bear in mind that
-      <span class="application">OmegaT</span> can only translate files in the
-      formats below if they match the patterns defined in the file filters.
-      Any other files will be ignored.<a class="indexterm" name="d0e314"></a></p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong> Plain text file formats<a class="indexterm" name="d0e324"></a></strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>ASCII text (.txt, etc.)</p></li><li class="listitem"><p>Encoded text (*.UTF8)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>Java resource bundles (*.properties)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>PO files (*.po)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>INI (key=value) files (*.ini)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>DTD files (*,DTD)</p></li><li class="listitem"><p>DocuWiki files (*.txt)</p></li></ul></div></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>Tagged text file formats<a class="indexterm" name="d0e360"></a></strong></span></p><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
-              *.odp, *.otp)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>Microsoft Open XML (*.docx. *.xlsx, *.pptx)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>(X)HTML (*.html, *.xhtml,*.xht)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>HTML Help Compiler (*.hhc, *.hhk)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>DocBook (*.xml)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>monolingual XLIFF (*.xlf, *.sdlxliff)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>QuarkXPress CopyFlowGold (*.tag, *.xtg)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>SubRip title files (*.srt)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>ResX files (*.resx)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>Android resource (*.xml)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>LaTex (*.tex, *.latex)</p></li><li class="listitem"><p>Help (*.xml) and Manual (*.hmxp) files</p></li><li class="listitem"><p>Typo3 LocManager (*.xml)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="circle"><li class="listitem"><p>WiX Localization (*.wxl)</p></li></ul></div></li></ul></div><p>In addition to the text you wish to translate, tagged text files
-      contain formatting information made visible in OmegaT in the form of
-      “tags”. The tags must also be present in the translated text, even if
-      the formatting does not need to be “translated”. If tags happen to be
-      missing or are misplaced, the text may not be shown as intended and the
-      translation will have to be corrected - see the chapter "Tag correction"
-      below.</p></div><div class="section" title="2.2.&nbsp;Translating segments one by one"><div class="titlepage"><div><div><h3 class="title"><a name="translate.the.segments.one.by.one"></a>2.2.&nbsp;Translating segments one by one</h3></div></div></div><p>Once you have defined the project and the files to be translated,
-      <span class="application">OmegaT</span> opens the first source file in the
-      Editor.</p><p>The active segment is highlighted in green; a copy of the source
-      text is displayed just below this in the “target field”. (At this point,
-      all text outside the target field is protected and cannot be modified.)
-      You must type your translation between the tags &lt;<code class="literal">segment
-      0001&gt;</code> and <code class="literal">&lt;end segment&gt;</code>. OmegaT
-      can be set up to automatically copy the source text into the target text
-      (see<span class="emphasis"><em> Options &gt; Editing Behavior ...</em></span>), which can
-      be useful when parts of the source text are to remain unchanged. In such
-      cases you will overwrite the source text. Press <span class="bold"><strong>"ENTER"</strong></span> to advance to the next segment.
-      Note:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>To move to any other part of the text, whether above or below,
-          double-click on the sentence or paragraph you wish to open.</p></li><li class="listitem"><p>If you prefer to translate into an empty target field, set
-          this option in <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...<a class="indexterm" name="d0e455"></a></span></p></li><li class="listitem"><p>You can change the setup of the Editor pane (for instance to
-          show the source text or not, highlight the translated text etc) in
-          the Main menu under View.</p><p>When you press <span class="bold"><strong>"ENTER"</strong></span>,
-          several things happen invisibly: <span class="application">OmegaT</span>
-          adds the segment pair (the source segment and its translation) to
-          the internal translation memory . It also automatically translates
-          any other identical segments that it detects. Additionally it scans
-          the translation memory and glossary in search of matches for the
-          next untranslated segment, which it then opens.</p></li></ul></div></div><div class="section" title="2.3.&nbsp;Using matches in the translation memories, dictionaries and glossaries"><div class="titlepage"><div><div><h3 class="title"><a name="use.matches.in.TMs.dictionaries.and.glossaries"></a>2.3.&nbsp;Using matches in the translation memories, dictionaries and
-      glossaries</h3></div></div></div><div class="section" title="2.3.1.&nbsp;Translation memory matches"><div class="titlepage"><div><div><h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Translation memory matches<a class="indexterm" name="d0e477"></a><a class="indexterm" name="d0e482"></a></h4></div></div></div><div class="figure"><a name="d0e487"></a><p class="title"><b>Figure&nbsp;2.2.&nbsp;Matches pane</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/MatchesPane.png" alt="Matches pane"></div></div></div><br class="figure-break"><p>If <span class="application">OmegaT</span> finds any fuzzy matches
-        (30% or over) for the next segment in the translation memories in the
-        project, it displays them in the Match Viewer. The first match is
-        pre-selected in the Match Viewer by default.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e509"></a> to insert the pre-selected match at the cursor
-            position, or...</p></li><li class="listitem"><p>Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R<a class="indexterm" name="d0e523"></a><a class="indexterm" name="d0e528"></a></strong></span> to overwrite the entire segment with the
-            pre-selected match.</p></li></ul></div><p>If several matches have been found and you prefer to use a match
-        other than the pre-selected match:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Select the match you prefer in the Match Viewer: <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>2</strong></span> for the second match displayed, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>3</strong></span> for the third match, etc.</p></li><li class="listitem"><p>Then use the <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> shortcuts as above.</p></li></ul></div><p>You can tell OmegaT to insert any first match above a specified
-        percentage into the target field automatically. Set this option using
-        <span class="guimenu">Options</span></p></div><div class="section" title="2.3.2.&nbsp;Glossary and Dictionary matches"><div class="titlepage"><div><div><h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;Glossary and Dictionary matches<a class="indexterm" name="d0e573"></a></h4></div></div></div><p>Any matching terms in glossaries and dictionaries, that you may
-        have included in the project will be displayed for reference in the
-        glossary and dictionary panes.</p></div><div class="section" title="2.3.3.&nbsp;Use searches"><div class="titlepage"><div><div><h4 class="title"><a name="use.searches"></a>2.3.3.&nbsp;Use searches</h4></div></div></div><p><span class="application">OmegaT</span> provides a powerful range of
-        search functions. Call up the Search window with <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> and type in the word or phrase you wish to search for in
-        the "Search for" box. Alternatively, select a word or phrase anywhere
-        in the Editor pane and press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>: the selected word or phrase will be inserted
-        automatically into the "Search for" box in the window, that then
-        opens.</p></div><div class="section" title="2.3.4.&nbsp;Use Machine Translation services"><div class="titlepage"><div><div><h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Use Machine Translation services<a class="indexterm" name="d0e602"></a></h4></div></div></div><p>In the Machine Translation pane, if any of the services is
-        activated (see <span class="emphasis"><em>Options &gt; Machine Translate</em></span>),
-        you will receive an automatic suggestion for the translation of the
-        current segment. Press <span class="emphasis"><em>Ctrl+M </em></span> to replace the
-        target segment with this suggestion.</p></div></div><div class="section" title="2.4.&nbsp;Creating translated documents"><div class="titlepage"><div><div><h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Creating translated documents<a class="indexterm" name="d0e618"></a></h3></div></div></div><p>When you have translated all the segments (or earlier if you
-      wish), <span class="application">OmegaT</span> will create the target
-      document(s) using the translations stored in the translation memory. To
-      do this, select <span class="guimenu">Project</span> → <span class="guimenuitem">Create Translated Documents</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e639"></a> <a class="indexterm" name="d0e645"></a>from the menu. <span class="application">OmegaT</span> will
-      build translated versions of all the translatable documents in the
-      Source folder of the project, whether or not they have been fully
-      translated. The wholly or partially translated files will be saved to
-      the project's Target folder. To finalize your translation, open the
-      target files in their associated applications (browser, word
-      processor...) to check the content and formatting of your translation.
-      You can then return to <span class="application">OmegaT</span> to make any
-      necessary corrections; do not forget to recreating the translated
-      documents.</p></div></div><div class="section" title="3.&nbsp;Handling tagged text"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Handling tagged text<a class="indexterm" name="d0e660"></a></h2></div></div></div><p><span class="application">OmegaT</span> ensures that the formatting of the
-    source documents (bold, italic etc.) is not lost by marking it with
-    special tags. <span class="application">OmegaT</span> tags are composed of one
-    or more letters followed by one or more digit, using the "/" character for
-    closure (for example: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;
-    etc.). You must handle these tags with care and make sure they are
-    included in the target segments in a proper fashion (see tag
-    operations).</p><div class="section" title="3.1.&nbsp;An example..."><div class="titlepage"><div><div><h3 class="title"><a name="d0e670"></a>3.1.&nbsp;An example...<a class="indexterm" name="d0e673"></a></h3></div></div></div><p>In these examples we've highlighted the tags to make them easier
-      to see, but in <span class="application">OmegaT</span> they will not be
-      highlighted. The HTML tags, highlighted in blue, will be ignored by
-      <span class="application">OmegaT</span> as they fully enclose the segment. The
-      tags highlighted below in green, however, have to be handled by
-      <span class="application">OmegaT</span> because they are within the segment.
-      Here is an example of a segment in HTML:</p><p><code class="literal">&lt;p&gt;A different display font can be selected via
-      the&lt;b&gt;Display Font&lt;/b&gt;dialog. Open it via
-      the&lt;i&gt;Settings&lt;/i&gt; →&lt;i&gt;Display Font...&lt;/i&gt;menu
-      item. The font type and size can be changed from the
-      dialog.&lt;/p&gt;</code></p><p>Here is how <span class="application">OmegaT</span> will display this,
-      with the translation in Afrikaans:</p><div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;2.3.&nbsp;Source <a class="indexterm" name="d0e700"></a>HTML segment</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/tagged_segment.png" alt="Source Segment, Source and Target - figureHTML segment"></div></div></div><br class="figure-break"><p>When <span class="application">OmegaT</span> has created the translated
-      document, the HTML will look like this:</p><div class="figure"><a name="fig.tagged.segment.target"></a><p class="title"><b>Figure&nbsp;2.4.&nbsp;Target HTML segment</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/tagged_segment_target.png" alt="Target HTML segment"></div></div></div><br class="figure-break"></div><div class="section" title="3.2.&nbsp;Tag verification"><div class="titlepage"><div><div><h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Tag verification<a class="indexterm" name="d0e725"></a><a class="indexterm" name="d0e730"></a></h3></div></div></div><p><span class="application">OmegaT</span> doesn't automatically detect
-      faulty tagging in the translated document. Therefore before you deliver
-      the document to your client, you should always check your tags for
-      errors. Select <span class="guimenu">Tools</span> → <span class="guimenuitem">Validate Tags...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>) from the menu. A table will be displayed showing the
-      segments where the source and target tags do not correspond. Click on
-      the segment number. You will be taken automatically to the questionable
-      segment in the Editor, where you can correct the tagging. When you have
-      carried out the corrections, check these by pressing <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e754"></a></strong></span> again. NNote that the tag verifier may find an error in
-      cases where the tags are correct - for instance when it was necessary to
-      change the order of tags involved in making a grammatically correct
-      translation. Please regard this as a sign that the verifier prefers to
-      err on the side of caution.</p><p>In some cases tag errors may even prevent a document from opening.
-      This is no reason to panic - you still have both the source file and the
-      translation available, you just need to make sure you have corrected any
-      tag errors before you create the translated files. Finally, you should
-      always doublecheck the final formatting by opening the translated
-      document in its associated viewer or editor.</p></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="Ch01.about.OmegaT.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="Ch02.installing.and.running.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;About <span class="application">OmegaT - introduction</span>&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;Installing and running <span class="application">OmegaT</span></td></tr></table></div></body></html>
+   
+      <title>Chapter&nbsp;2.&nbsp;Instant Start Guide</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="home" href="index.html" title="">
+      <link rel="up" href="index.html" title="">
+      <link rel="prev" href="Ch01.about.OmegaT.html" title="Chapter&nbsp;1.&nbsp;About OmegaT - introduction">
+      <link rel="next" href="Ch02.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;Installing and running OmegaT">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;2.&nbsp;Instant Start Guide</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="Ch01.about.OmegaT.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="Ch02.installing.and.running.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;2.&nbsp;Instant Start Guide">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="Ch02.instant.start.guide"></a>Chapter&nbsp;2.&nbsp;Instant Start Guide
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e178">1. Start Using <span class="application">OmegaT</span> in 5 Minutes!</a></span></dt>
+               <dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e220">2. Translating with <span class="application">OmegaT</span></a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#create.and.open.new.project">2.1. Creating and opening a new project</a></span></dt>
+                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#translate.the.segments.one.by.one">2.2. Translating segments one by one</a></span></dt>
+                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#use.matches.in.TMs.dictionaries.and.glossaries">2.3. Using matches in the translation memories, dictionaries and
+                                    glossaries</a></span></dt>
+                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#create.translated.documents">2.4. Creating translated documents</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="Ch02.instant.start.guide.html#how.to.handle.tagged.text">3. Handling tagged text</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e668">3.1. An example...</a></span></dt>
+                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#tag.verification">3.2. Tag verification</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Start Using OmegaT in 5 Minutes!">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e178"></a>1.&nbsp;Start Using <span class="application">OmegaT</span> in 5 Minutes!
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>This instant start guide covers only the very basics of OmegaT.
+                   Ideally, users should read the User Manual to familiarize themselves with
+                   everything <span class="application">OmegaT</span> has to offer. Note for Mac
+                   users: shortcuts are described here as "<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>key</strong></span>" but Mac users should instead use "<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>key</strong></span>". The "<span class="keycap"><strong>Cmd</strong></span>" key either has a "command"
+                   label or an apple symbol on Apple keyboards.
+            </p>
+            <p>The <span class="application">OmegaT</span> screen consists of one
+                   workspace with five distinct panes<a class="indexterm" name="d0e209"></a>. Each of these can be resized using the mouse. On the left
+                   is the Editor where you type your translation. On the top right is the
+                   Match Viewer, where translation memory matches are displayed. Below this
+                   is the Glossary Viewer, where glossary matches are displayed. Two
+                   additional tabs at the bottom of the window open the Dictionary and
+                   Machine Translation panes. (Note: you can of course rearrange the panes to
+                   your own liking - the above description applies to your OmegaT after
+                   installation).
+            </p>
+            <p>In the Editor pane OmegaT presents the source text 'segmented' into
+                   either sentences or paragraphs. These are then translated, one by one. As
+                   you progress from segment to segment, your translations are recorded
+                   automatically in a translation memory. Once all the segments have been
+                   translated (or before, if you request) <span class="application">OmegaT</span>
+                   uses the translation memory to generate the translated document(s) in a
+                   “Target” folder.
+            </p>
+            <p>OmegaT organizes your translation work in translation “projects”.
+                   For each project, OmegaT creates a set of folders which, in turn, are used
+                   to store the source documents to be translated as well as any glossaries
+                   and translation memories you may wish to use. OmegaT also creates a
+                   “Target” folder, in which OmegaT places the final translated
+                   documents.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Translating with OmegaT">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e220"></a>2.&nbsp;Translating with <span class="application">OmegaT</span></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section" title="2.1.&nbsp;Creating and opening a new project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="create.and.open.new.project"></a>2.1.&nbsp;Creating and opening a new project<a class="indexterm" name="d0e228"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Select <span class="guimenu">Project</span> → <span class="guimenuitem">New...</span><a class="indexterm" name="d0e240"></a> from the menu.
+               </p>
+               <p>Navigate to the folder where you wish to save the project files,
+                        and type in a name for the translation project. This name will be used
+                        for the main project folder; all the project files will be stored in
+                        this folder or its subfolders.
+               </p>
+               <p><span class="application">OmegaT</span> will prompt you to confirm or
+                        change the project folders to be created, using the dialog below:
+               </p>
+               <div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figure&nbsp;2.1.&nbsp;<a class="indexterm" name="d0e254"></a>New project - dialog window</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/NewProject.png" alt="ProjectProject dialog window - figureNew project - dialog window"></div>
+                  </div>
+               </div><br class="figure-break"><p>You can simply accept the default locations of the subfolders, but
+                        be sure to check that the source language and target language codes are
+                        correct. Select the language code (2 letters) or language-and-region
+                        code (2 + 2 letters) from the drop-down list, or type them in by hand
+                        (the language code can be 2 to 3 letters). Make a mental note of the
+                        location of the Target subfolder (for your translated documents). If you
+                        prefer OmegaT to segment by sentence instead of by "paragraph", please
+                        read the chapter on Segmentation Rules<a class="indexterm" name="d0e265"></a>.
+               </p>
+               <p>When you click OK to accept the project set-up, OmegaT prompts you
+                        to select the source documents for import. You can import individual
+                        files with<em class="firstterm"> Project &gt; Import Source Files</em>, or
+                        you can copy files or even entire folder trees (with all files in all
+                        subfolders) manually into the Source folder of your OmegaT project
+                        (using your system's file manager, for example). If you've accidentally
+                        imported the wrong documents, or too many documents, you can simply
+                        remove them again from the Source folder.
+               </p>
+               <p>To check your list of files to be translated, consult the
+                        <span class="bold"><strong>Project Files</strong></span> <a class="indexterm" name="d0e281"></a>window (Menu: <span class="guimenu">Project</span> → <span class="guimenuitem">Project Files...</span>,<a class="indexterm" name="d0e293"></a> if it does not open automatically). If you had to change
+                        the Contents of the Source folder, remember to reload the project first
+                        (Menu: <span class="guimenu">Project</span> → <span class="guimenuitem">Reload</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>)). <span class="application">OmegaT</span> opens the first
+                        file in the project list by default. Bear in mind that
+                        <span class="application">OmegaT</span> can only translate files in the
+                        formats below if they match the patterns defined in the file filters.
+                        Any other files will be ignored.<a class="indexterm" name="d0e314"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><span class="bold"><strong> Plain text file formats<a class="indexterm" name="d0e324"></a></strong></span></p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>ASCII text (.txt, etc.)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Encoded text (*.UTF8)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Java resource bundles (*.properties)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>PO files (*.po)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>INI (key=value) files (*.ini)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>DTD files (*.DTD)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>DocuWiki files (*.txt)</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Tagged text file formats<a class="indexterm" name="d0e360"></a></strong></span></p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
+                                                  *.odp, *.otp)
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Microsoft Open XML (*.docx. *.xlsx, *.pptx)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>(X)HTML (*.html, *.xhtml,*.xht)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>HTML Help Compiler (*.hhc, *.hhk)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>DocBook (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>monolingual XLIFF (*.xlf, *.sdlxliff)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>SubRip title files (*.srt)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>ResX files (*.resx)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Android resource (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>LaTex (*.tex, *.latex)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Help (*.xml) and Manual (*.hmxp) files</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Typo3 LocManager (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>WiX Localization (*.wxl)</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <p>In addition to the text you wish to translate, tagged text files
+                        contain formatting information made visible in OmegaT in the form of
+                        “tags”. The tags must also be present in the translated text, even if
+                        the formatting does not need to be “translated”. If tags happen to be
+                        missing or are misplaced, the text may not be shown as intended and the
+                        translation will have to be corrected - see the chapter "Tag verification"
+                        below.
+               </p>
+            </div>
+            <div class="section" title="2.2.&nbsp;Translating segments one by one">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="translate.the.segments.one.by.one"></a>2.2.&nbsp;Translating segments one by one
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Once you have defined the project and the files to be translated,
+                        <span class="application">OmegaT</span> opens the first source file in the
+                        Editor.
+               </p>
+               <p>The active segment is highlighted in green; a copy of the source
+                        text is displayed just below this in the “target field”. (At this point,
+                        all text outside the target field is protected and cannot be modified.)
+                        You must type your translation prior the tag &lt;<code class="literal">segment
+                           0001&gt;</code>. OmegaT
+                        can be set up to automatically copy the source text into the target text
+                        (see <span class="emphasis"><em>Options &gt; Editing Behaviour...</em></span>), which can
+                        be useful when parts of the source text are to remain unchanged. In such
+                        cases you will overwrite the source text. Press <span class="bold"><strong>"ENTER"</strong></span> to advance to the next segment.
+                        Note:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>To move to any other part of the text, whether above or below,
+                                     double-click on the sentence or paragraph you wish to open.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>If you prefer to translate into an empty target field, set
+                                     this option in <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behaviour...<a class="indexterm" name="d0e452"></a></span></p>
+                     </li>
+                     <li class="listitem">
+                        <p>You can change the setup of the Editor pane (for instance to
+                                     show the source text or not, highlight the translated text etc) in
+                                     the Main menu under View.
+                        </p>
+                        <p>When you press <span class="bold"><strong>"ENTER"</strong></span>,
+                                     several things happen invisibly: <span class="application">OmegaT</span>
+                                     adds the segment pair (the source segment and its translation) to
+                                     the internal translation memory . It also automatically translates
+                                     any other identical segments that it detects. Additionally it scans
+                                     the translation memory and glossary in search of matches for the
+                                     next untranslated segment, which it then opens.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section" title="2.3.&nbsp;Using matches in the translation memories, dictionaries and glossaries">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="use.matches.in.TMs.dictionaries.and.glossaries"></a>2.3.&nbsp;Using matches in the translation memories, dictionaries and
+                                 glossaries
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="section" title="2.3.1.&nbsp;Translation memory matches">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Translation memory matches<a class="indexterm" name="d0e474"></a><a class="indexterm" name="d0e479"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="figure"><a name="d0e484"></a><p class="title"><b>Figure&nbsp;2.2.&nbsp;Matches pane</b></p>
+                     <div class="figure-contents">
+                        <div class="mediaobject"><img src="images/MatchesPane.png" alt="Matches pane"></div>
+                     </div>
+                  </div><br class="figure-break"><p>If <span class="application">OmegaT</span> finds any fuzzy matches
+                             (30% or over) for the next segment in the translation memories in the
+                             project, it displays them in the Match Viewer. The first match is
+                             pre-selected in the Match Viewer by default.
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                           <p>Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e506"></a> to insert the pre-selected match at the cursor
+                                          position, or...
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> <a class="indexterm" name="d0e521"></a><a class="indexterm" name="d0e526"></a>
+                                            to overwrite the entire segment with the
+                                          pre-selected match.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>If several matches have been found and you prefer to use a match
+                             other than the pre-selected match:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                           <p>Select the match you prefer in the Match Viewer: <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>2</strong></span> for the second match displayed, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>3</strong></span> for the third match, etc.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Then use the <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> shortcuts as above.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>You can tell OmegaT to insert any first match above a specified
+                             percentage into the target field automatically. Set this option using
+                             <span class="guimenu">Options</span></p>
+               </div>
+               <div class="section" title="2.3.2.&nbsp;Glossary and Dictionary matches">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;Glossary and Dictionary matches<a class="indexterm" name="d0e571"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Any matching terms in glossaries and dictionaries, that you may
+                             have included in the project will be displayed for reference in the
+                             glossary and dictionary panes.
+                  </p>
+               </div>
+               <div class="section" title="2.3.3.&nbsp;Use searches">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="use.searches"></a>2.3.3.&nbsp;Use searches
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p><span class="application">OmegaT</span> provides a powerful range of
+                             search functions. Call up the Search window with <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> and type in the word or phrase you wish to search for in
+                             the "Search for" box. Alternatively, select a word or phrase anywhere
+                             in the Editor pane and press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>: the selected word or phrase will be inserted
+                             automatically into the "Search for" box in the window, that then
+                             opens.
+                  </p>
+               </div>
+               <div class="section" title="2.3.4.&nbsp;Use Machine Translation services">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Use Machine Translation services<a class="indexterm" name="d0e600"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>In the Machine Translation pane, if any of the services is
+                             activated (see <span class="emphasis"><em>Options &gt; Machine Translate</em></span>),
+                             you will receive an automatic suggestion for the translation of the
+                             current segment. Press <span class="emphasis"><em>Ctrl+M </em></span> to replace the
+                             target segment with this suggestion.
+                  </p>
+               </div>
+            </div>
+            <div class="section" title="2.4.&nbsp;Creating translated documents">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Creating translated documents<a class="indexterm" name="d0e616"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>When you have translated all the segments (or earlier if you
+                        wish), <span class="application">OmegaT</span> will create the target
+                        document(s) using the translations stored in the translation memory. To
+                        do this, select <span class="guimenu">Project</span> → <span class="guimenuitem">Create Translated Documents</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e637"></a> <a class="indexterm" name="d0e643"></a>from the menu. <span class="application">OmegaT</span> will
+                        build translated versions of all the translatable documents in the
+                        Source folder of the project, whether or not they have been fully
+                        translated. The wholly or partially translated files will be saved to
+                        the project's Target folder. To finalize your translation, open the
+                        target files in their associated applications (browser, word
+                        processor...) to check the content and formatting of your translation.
+                        You can then return to <span class="application">OmegaT</span> to make any
+                        necessary corrections; do not forget to recreating the translated
+                        documents.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="3.&nbsp;Handling tagged text">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Handling tagged text<a class="indexterm" name="d0e658"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> ensures that the formatting of the
+                   source documents (bold, italic etc.) is not lost by marking it with
+                   special tags. <span class="application">OmegaT</span> tags are composed of one
+                   or more letters followed by one or more digit, using the "/" character for
+                   closure (for example: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;
+                   etc.). You must handle these tags with care and make sure they are
+                   included in the target segments in a proper fashion (see tag
+                   operations).
+            </p>
+            <div class="section" title="3.1.&nbsp;An example...">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e668"></a>3.1.&nbsp;An example...<a class="indexterm" name="d0e671"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In these examples we've highlighted the tags to make them easier
+                        to see, but in <span class="application">OmegaT</span> they will not be
+                        highlighted. The HTML tags, highlighted in blue, will be ignored by
+                        <span class="application">OmegaT</span> as they fully enclose the segment. The
+                        tags highlighted below in green, however, have to be handled by
+                        <span class="application">OmegaT</span> because they are within the segment.
+                        Here is an example of a segment in HTML:
+               </p>
+               <p><code class="literal">&lt;p&gt;A different display font can be selected via
+                           the&lt;b&gt;Display Font&lt;/b&gt;dialog. Open it via
+                           the&lt;i&gt;Options&lt;/i&gt; →&lt;i&gt;Display Font...&lt;/i&gt;menu
+                           item. The font type and size can be changed from the
+                           dialog.&lt;/p&gt;</code></p>
+               <p>Here is how <span class="application">OmegaT</span> will display this,
+                        with the translation in Afrikaans:
+               </p>
+               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;2.3.&nbsp;Source <a class="indexterm" name="d0e698"></a>HTML segment</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/tagged_segment.png" alt="Source Segment, Source and Target - figureHTML segment"></div>
+                  </div>
+               </div><br class="figure-break"><p>When <span class="application">OmegaT</span> has created the translated
+                        document, the HTML will look like this:
+               </p>
+               <div class="figure"><a name="fig.tagged.segment.target"></a><p class="title"><b>Figure&nbsp;2.4.&nbsp;Target HTML segment</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/tagged_segment_target.png" alt="Target HTML segment"></div>
+                  </div>
+               </div><br class="figure-break"></div>
+            <div class="section" title="3.2.&nbsp;Tag verification">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Tag verification<a class="indexterm" name="d0e723"></a><a class="indexterm" name="d0e728"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> doesn't automatically detect
+                        faulty tagging in the translated document. Therefore before you deliver
+                        the document to your client, you should always check your tags for
+                        errors. Select <span class="guimenu">Tools</span> → <span class="guimenuitem">Validate Tags...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>) from the menu. A table will be displayed showing the
+                        segments where the source and target tags do not correspond. Click on
+                        the segment number. You will be taken automatically to the questionable
+                        segment in the Editor, where you can correct the tagging. When you have
+                        carried out the corrections, check these by pressing <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e752"></a></strong></span> again. Note that the tag verifier may find an error in
+                        cases where the tags are correct - for instance when it was necessary to
+                        change the order of tags involved in making a grammatically correct
+                        translation. Please regard this as a sign that the verifier prefers to
+                        err on the side of caution.
+               </p>
+               <p>In some cases tag errors may even prevent a document from opening.
+                        This is no reason to panic - you still have both the source file and the
+                        translation available, you just need to make sure you have corrected any
+                        tag errors before you create the translated files. Finally, you should
+                        always doublecheck the final formatting by opening the translated
+                        document in its associated viewer or editor.
+               </p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="Ch01.about.OmegaT.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="Ch02.installing.and.running.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;About <span class="application">OmegaT - introduction</span>&nbsp;
+               </td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;Installing and running <span class="application">OmegaT</span></td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

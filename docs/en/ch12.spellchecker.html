@@ -1,81 +1,226 @@
-<html><head>
+<html>
+   <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>Chapter&nbsp;20.&nbsp;Spell checker</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title=""><link rel="up" href="index.html" title=""><link rel="prev" href="ch11.google.translate.html" title="Chapter&nbsp;19.&nbsp;Machine Translation"><link rel="next" href="ch13.Misc.html" title="Chapter&nbsp;21.&nbsp;Miscellaneous subjects"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;20.&nbsp;Spell checker</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch11.google.translate.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch13.Misc.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;20.&nbsp;Spell checker"><div class="titlepage"><div><div><h2 class="title"><a name="ch12.spellchecker"></a>Chapter&nbsp;20.&nbsp;Spell checker<a class="indexterm" name="d0e7860"></a></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch12.spellchecker.html#d0e7865">1. Installing spelling dictionaries</a></span></dt><dt><span class="section"><a href="ch12.spellchecker.html#d0e7936">2. Using spelling dictionaries</a></span></dt><dt><span class="section"><a href="ch12.spellchecker.html#hints">3. Hints</a></span></dt></dl></div><p>OmegaT has a built-in spell checker based on the spelling checker used
-  in OpenOffice.org, Firefox and Thunderbird. It is consequently able to use
-  the huge range of free spelling dictionaries available for these
-  applications.</p><div class="section" title="1.&nbsp;Installing spelling dictionaries"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7865"></a>1.&nbsp;Installing spelling dictionaries</h2></div></div></div><p>Before the spell check function can be used, a suitable dictionary
-    or dictionaries (i.e. for your target language) must be installed. To
-    install spelling dictionaries, follow this procedure:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In your file manager, create a new folder in a suitable location
-        in which to store spelling dictionaries.</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>In OmegaT, select <span class="guisubmenu"><a class="indexterm" name="d0e7879"></a></span><span class="guimenuitem">Options &gt; Spell
-        Checking</span>, then click <span class="guibutton">Choose
-        </span>beside the Dictionary file folder field. Navigate to and
-        select the folder you created for dictionaries.</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>Place the dictionary files you wish to use in this folder. There
-        are essentially two ways in which you can do this. You can either copy
-        files manually, i.e. from elsewhere on your system, using your file
-        manager; or you can use OmegaT's <span class="bold"><strong>"Install"</strong></span> function to provide a list of
-        available dictionaries to select from. Note that the "Install"
-        function requires an Internet connection. The selected languages will
-        then be installed and will eventually appear in your spell checker
-        setup window (this may take a while).</p></li></ul></div><p>Copying the files manually is useful if you already have suitable
-    dictionary files on your system, for instance as part of your
-    OpenOffice.org or Thunderbird installation. The files you need will have
-    the extensions <code class="filename">.aff</code> and<code class="filename"> .dic</code>,
-    and you need both files in order for the dictionary in question to work.
-    You can use these file extensions to search your desktop for suitable
-    dictionaries. In the case below, no extra folder has been created and no
-    copying of files was necessary, as the OpenOffice dictionary folder is
-    used instead:</p><div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;20.1.&nbsp;Spell checker setup</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/SpellcheckerSetup2.png" alt="Spell checker setup"></div></div></div><br class="figure-break"><p>Note that in the above case, you may lose the spelling dictionaries,
-    if the OpenOffice installation is removed from your system. Creating your
-    own folder and copying the files may be extra work, but possibly worth the
-    trouble.</p><p>More recent OpenOffice.org spelling dictionaries are supplied as
-    "OpenOffice.org extensions", with the filename extension .oxt. These are
-    however zip archives: if you rename the file with the extension .zip, you
-    can extract the contents in a zip utility, and you will find the .aff and
-    .dic files that you need, which you can then place in the folder that you
-    created for them.</p><p>Please note that the application behind the<span class="guilabel">
-    "Install"</span> depends on the Internet list of dictionaries. If it
-    is out of date or does not include the desired language, you will have to
-    look for appropriate vocabularies yourself. OpenOffice.org contains
-    probably the largest vocabulary collection at the<a class="ulink" href="http://extensions.services.openoffice.org/dictionary" target="_top">OpenOffice.org
-    Extensions site</a>. After the dictionary extension has been
-    downloaded and installed, the corresponding<span class="emphasis"><em> aff </em></span>and
-    <span class="emphasis"><em>dic </em></span>will become available. The same can be achieved
-    by downloading a spell checker add-ons for Firefox or Thunderbird; in this
-    case the spell checker files will be stored in your (Firefox or
-    Thunderbird) profile.</p><p>Make sure the language code of your target files corresponds to the
-    dictionary's language code: an FR-FR dictionary will not work with an FR
-    target setting. You need to change the setting to FR-FR to have the spell
-    checker recognize the correct dictionary for your target. Look for files
-    with the name, indicating the language used and having extensions
-    <span class="emphasis"><em>aff </em></span> and <span class="emphasis"><em>dic.</em></span></p></div><div class="section" title="2.&nbsp;Using spelling dictionaries"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="d0e7936"></a>2.&nbsp;Using spelling dictionaries</h2></div></div></div><p>There is no need to instruct OmegaT to use a particular spelling
-    dictionary; OmegaT will use the correct language dictionary based upon the
-    language codes of your project. Check however that the language codes are
-    exactly the same: an FR-FR dictionary will not work with an FR target
-    setting, for example. If necessary, edit the file names of the dictionary
-    or change your project's language settings.</p><p>To enable the spell checker, select <span class="guimenuitem">Options &gt; Spell
-    Checking</span> and tick the <span class="guilabel">Automatically check the
-    spelling of text </span>checkbox (see above)</p><div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;20.2.&nbsp;<a class="indexterm" name="d0e7951"></a>Spellchecker in action</b></p><div class="figure-contents"><div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Spell checkerSpell checker - figureSpellchecker in action"></div></div></div><br class="figure-break"><p>Right-clicking on an underlined word (Artund in the figure above)
-    opens a drop-down menu listing suggestions for the correction (Art und).
-    You can also instruct the spell checker to ignore all the occurrences of
-    the mis-spelled word, or add it to the dictionary.</p></div><div class="section" title="3.&nbsp;Hints"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Hints<a class="indexterm" name="d0e7965"></a></h2></div></div></div><p>If the spell checker is not working, then make sure first that the
-    check box <span class="guilabel">"Automatically check the spelling of text"</span>
-    in the spell checker dialog (<span class="guisubmenu">Options &gt; Spell
-    checking...)</span> has been ticked.</p><p>Also check that the target language code of your project against the
-    available vocabularies in the setup window. The spell checker uses the
-    target language code to determine the language to be used : if the target
-    language is Brazilian Portuguese (PT_BR), the subfolder with vocabularies
-    must contain the two vocabulary files, called
-    <span class="emphasis"><em>pt_br.aff</em></span> and<span class="emphasis"><em> pt_br.dic.</em></span></p><p>If you have already translated a large body of text, and then
-    realize the target language code of the project does not match the spell
-    checker's language code (you specified pt_BR as the language, but there
-    are no pt_BR vocabularies, for instance) you can simply copy the two
-    corresponding files and rename them (e.g. from
-    <span class="emphasis"><em>pt_PT.arr</em></span> and <span class="emphasis"><em>pt_PT.dic </em></span>to
-    <span class="emphasis"><em>pt._BR.arr</em></span> and <span class="emphasis"><em>pt_BR.dic</em></span>). Of
-    course it is much wiser, to take a short break and download the correct
-    versions of the spell checker.</p><p>Note that <code class="filename">Uninstall </code>physically removes the
-    selected vocabularies. If they are part of OpenOffice.org, as in the above
-    case, they will disappear from that application, too. If, for whatever
-    reason, you need to do this from time to time, it may make sense to copy
-    the files involved to a different folder, reserved just for use by
-    OmegaT..</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch11.google.translate.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch13.Misc.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;19.&nbsp;Machine Translation&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;21.&nbsp;Miscellaneous subjects</td></tr></table></div></body></html>
+   
+      <title>Chapter&nbsp;20.&nbsp;Spell checker</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="home" href="index.html" title="">
+      <link rel="up" href="index.html" title="">
+      <link rel="prev" href="ch11.google.translate.html" title="Chapter&nbsp;19.&nbsp;Machine Translation">
+      <link rel="next" href="ch13.Misc.html" title="Chapter&nbsp;21.&nbsp;Miscellaneous subjects">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;20.&nbsp;Spell checker</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="ch11.google.translate.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch13.Misc.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;20.&nbsp;Spell checker">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="ch12.spellchecker"></a>Chapter&nbsp;20.&nbsp;Spell checker<a class="indexterm" name="d0e7858"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="ch12.spellchecker.html#d0e7863">1. Installing spelling dictionaries</a></span></dt>
+               <dt><span class="section"><a href="ch12.spellchecker.html#d0e7934">2. Using spelling dictionaries</a></span></dt>
+               <dt><span class="section"><a href="ch12.spellchecker.html#hints">3. Hints</a></span></dt>
+            </dl>
+         </div>
+         <p>OmegaT has a built-in spell checker based on the spelling checker used
+              in OpenOffice.org, Firefox and Thunderbird. It is consequently able to use
+              the huge range of free spelling dictionaries available for these
+              applications.
+         </p>
+         <div class="section" title="1.&nbsp;Installing spelling dictionaries">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7863"></a>1.&nbsp;Installing spelling dictionaries
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Before the spell check function can be used, a suitable dictionary
+                   or dictionaries (i.e. for your target language) must be installed. To
+                   install spelling dictionaries, follow this procedure:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>In your file manager, create a new folder in a suitable location
+                                in which to store spelling dictionaries.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>In OmegaT, select <span class="guisubmenu"><a class="indexterm" name="d0e7877"></a></span><span class="guimenuitem">Options &gt; Spell
+                                   Checking</span>, then click <span class="guibutton">Choose
+                                   </span>beside the Dictionary file folder field. Navigate to and
+                                select the folder you created for dictionaries.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Place the dictionary files you wish to use in this folder. There
+                                are essentially two ways in which you can do this. You can either copy
+                                files manually, i.e. from elsewhere on your system, using your file
+                                manager; or you can use OmegaT's <span class="bold"><strong>"Install"</strong></span> function to provide a list of
+                                available dictionaries to select from. Note that the "Install"
+                                function requires an Internet connection. The selected languages will
+                                then be installed and will eventually appear in your spell checker
+                                setup window (this may take a while).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Copying the files manually is useful if you already have suitable
+                   dictionary files on your system, for instance as part of your
+                   OpenOffice.org or Thunderbird installation. The files you need will have
+                   the extensions <code class="filename">.aff</code> and<code class="filename"> .dic</code>,
+                   and you need both files in order for the dictionary in question to work.
+                   You can use these file extensions to search your desktop for suitable
+                   dictionaries. In the case below, no extra folder has been created and no
+                   copying of files was necessary, as the OpenOffice dictionary folder is
+                   used instead:
+            </p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;20.1.&nbsp;Spell checker setup</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckerSetup2.png" alt="Spell checker setup"></div>
+               </div>
+            </div><br class="figure-break"><p>Note that in the above case, you may lose the spelling dictionaries,
+                   if the OpenOffice installation is removed from your system. Creating your
+                   own folder and copying the files may be extra work, but possibly worth the
+                   trouble.
+            </p>
+            <p>More recent OpenOffice.org spelling dictionaries are supplied as
+                   "OpenOffice.org extensions", with the filename extension .oxt. These are
+                   however zip archives: if you rename the file with the extension .zip, you
+                   can extract the contents in a zip utility, and you will find the .aff and
+                   .dic files that you need, which you can then place in the folder that you
+                   created for them.
+            </p>
+            <p>Please note that the application behind the<span class="guilabel">
+                      "Install"</span> depends on the Internet list of dictionaries. If it
+                   is out of date or does not include the desired language, you will have to
+                   look for appropriate vocabularies yourself. OpenOffice.org contains
+                   probably the largest vocabulary collection at the<a class="ulink" href="http://extensions.services.openoffice.org/dictionary" target="_top">OpenOffice.org
+                      Extensions site</a>. After the dictionary extension has been
+                   downloaded and installed, the corresponding<span class="emphasis"><em> aff </em></span>and
+                   <span class="emphasis"><em>dic </em></span>will become available. The same can be achieved
+                   by downloading a spell checker add-ons for Firefox or Thunderbird; in this
+                   case the spell checker files will be stored in your (Firefox or
+                   Thunderbird) profile.
+            </p>
+            <p>Make sure the language code of your target files corresponds to the
+                   dictionary's language code: an FR-FR dictionary will not work with an FR
+                   target setting. You need to change the setting to FR-FR to have the spell
+                   checker recognize the correct dictionary for your target. Look for files
+                   with the name, indicating the language used and having extensions
+                   <span class="emphasis"><em>aff </em></span> and <span class="emphasis"><em>dic.</em></span></p>
+         </div>
+         <div class="section" title="2.&nbsp;Using spelling dictionaries">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7934"></a>2.&nbsp;Using spelling dictionaries
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>There is no need to instruct OmegaT to use a particular spelling
+                   dictionary; OmegaT will use the correct language dictionary based upon the
+                   language codes of your project. Check however that the language codes are
+                   exactly the same: an FR-FR dictionary will not work with an FR target
+                   setting, for example. If necessary, edit the file names of the dictionary
+                   or change your project's language settings.
+            </p>
+            <p>To enable the spell checker, select <span class="guimenuitem">Options &gt; Spell
+                      Checking</span> and tick the <span class="guilabel">Automatically check the
+                      spelling of text </span>checkbox (see above)
+            </p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;20.2.&nbsp;<a class="indexterm" name="d0e7949"></a>Spellchecker in action</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Spell checkerSpell checker - figureSpellchecker in action"></div>
+               </div>
+            </div><br class="figure-break"><p>Right-clicking on an underlined word (Artund in the figure above)
+                   opens a drop-down menu listing suggestions for the correction (Art und).
+                   You can also instruct the spell checker to ignore all the occurrences of
+                   the mis-spelled word, or add it to the dictionary.
+            </p>
+         </div>
+         <div class="section" title="3.&nbsp;Hints">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Hints<a class="indexterm" name="d0e7963"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>If the spell checker is not working, then make sure first that the
+                   check box <span class="guilabel">"Automatically check the spelling of text"</span>
+                   in the spell checker dialog (<span class="guisubmenu">Options &gt; Spell
+                      checking...)</span> has been ticked.
+            </p>
+            <p>Also check that the target language code of your project against the
+                   available vocabularies in the setup window. The spell checker uses the
+                   target language code to determine the language to be used : if the target
+                   language is Brazilian Portuguese (PT_BR), the subfolder with vocabularies
+                   must contain the two vocabulary files, called
+                   <span class="emphasis"><em>pt_br.aff</em></span> and<span class="emphasis"><em> pt_br.dic.</em></span></p>
+            <p>If you have already translated a large body of text, and then
+                   realize the target language code of the project does not match the spell
+                   checker's language code (you specified pt_BR as the language, but there
+                   are no pt_BR vocabularies, for instance) you can simply copy the two
+                   corresponding files and rename them (e.g. from
+                   <span class="emphasis"><em>pt_PT.arr</em></span> and <span class="emphasis"><em>pt_PT.dic </em></span>to
+                   <span class="emphasis"><em>pt._BR.arr</em></span> and <span class="emphasis"><em>pt_BR.dic</em></span>). Of
+                   course it is much wiser, to take a short break and download the correct
+                   versions of the spell checker.
+            </p>
+            <p>Note that <code class="filename">Uninstall </code>physically removes the
+                   selected vocabularies. If they are part of OpenOffice.org, as in the above
+                   case, they will disappear from that application, too. If, for whatever
+                   reason, you need to do this from time to time, it may make sense to copy
+                   the files involved to a different folder, reserved just for use by
+                   OmegaT..
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="ch11.google.translate.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch13.Misc.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;19.&nbsp;Machine Translation&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;21.&nbsp;Miscellaneous subjects</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

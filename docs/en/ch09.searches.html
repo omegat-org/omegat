@@ -1,69 +1,282 @@
-<html><head>
+<html>
+   <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-   <title>Chapter&nbsp;16.&nbsp;Searches</title><link rel="stylesheet" href="OmegaT.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="index.html" title=""><link rel="up" href="index.html" title=""><link rel="prev" href="ch09.regexp.html" title="Chapter&nbsp;15.&nbsp;Regular expressions"><link rel="next" href="ch10.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dictionaries"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&nbsp;16.&nbsp;Searches</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ch09.regexp.html">Prev</a>&nbsp;</td><th width="60%" align="center">&nbsp;</th><td width="20%" align="right">&nbsp;<a accesskey="n" href="ch10.dictionaries.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter&nbsp;16.&nbsp;Searches"><div class="titlepage"><div><div><h2 class="title"><a name="ch09.searches"></a>Chapter&nbsp;16.&nbsp;Searches<a class="indexterm" name="d0e7080"></a></h2></div></div></div><div class="toc"><dl><dt><span class="section"><a href="ch09.searches.html#search.window">1. Search window</a></span></dt><dd><dl><dt><span class="section"><a href="ch09.searches.html#d0e7102">1.1. Searching</a></span></dt><dt><span class="section"><a href="ch09.searches.html#d0e7126">1.2. Search location</a></span></dt></dl></dd><dt><span class="section"><a href="ch09.searches.html#using.wild.cards">2. Using wild cards</a></span></dt><dt><span class="section"><a href="ch09.searches.html#search.methoids">3. Search methods</a></span></dt><dt><span class="section"><a href="ch09.searches.html#search.result.display">4. Search results display</a></span></dt></dl></div><div class="section" title="1.&nbsp;Search window"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Search window</h2></div></div></div><div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;16.1.&nbsp;Text search Window<a class="indexterm" name="d0e7089"></a></b></p><div class="figure-contents"><div class="mediaobject"><img src="images/TextSearch.png" alt="Text search WindowSearch windowExample"></div></div></div><br class="figure-break"><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>The above search finds all target segments where two or more white
-      spaces - \s\s+ - occur.</p></div><div class="section" title="1.1.&nbsp;Searching"><div class="titlepage"><div><div><h3 class="title"><a name="d0e7102"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e7105"></a></h3></div></div></div><p><span class="application">OmegaT</span> provides a powerful range of
-      search functions. Open the Search window with <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> and enter the word or phrase you wish to search for in the
-      Search for box. Alternatively, in the Editor window, select a word or
-      phrase in the editing field (target text of the current segment) and hit
-      <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. The word or phrase is entered in the Search for box
-      automatically. You can have several Search windows open at the same
-      time, but close them when they are no longer needed so that they do not
-      clutter your desktop.</p></div><div class="section" title="1.2.&nbsp;Search location"><div class="titlepage"><div><div><h3 class="title"><a name="d0e7126"></a>1.2.&nbsp;Search location</h3></div></div></div><p>Searches are performed by default in both the source and target
-      sections of the project, but you can limit your search to just the
-      source or the target text . You may search in</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>the project only (default setting)</p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>both the project and the reference translation memories in
-          /tm/ (check <span class="emphasis"><em>Search TMs)</em></span></p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>a single file or a folder containing a set of files (check
-          <span class="emphasis"><em>Search files)</em></span></p></li></ul></div><p>When searching through files (as opposed to translation memories),
-      <span class="application">OmegaT</span> restricts the search to files in
-      source file formats (See <a class="ulink" href="05_FilesToTranslate.xml" target="_top">Files to
-      translate -&gt; File Formats</a>). Consequently, although OmegaT is
-      quite able to handle<code class="filename"> tmx</code> files, it does not include
-      them in the Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7159"></a>Advanced Options</strong></span>, you can combine the search
-      with the name of the author of the translation and time of the last
-      change made.</p></div></div><div class="section" title="2.&nbsp;Using wild cards"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7169"></a></h2></div></div></div><p>In both exact and keyword searches, the wild card search characters
-    '*' and '?' can be used. To use wild cards, the regular expressions option
-    should not be selected, as '*' and '?' have special meaning in regular
-    expressions.</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>'*' matches zero or more characters, from the current position
-        in a given word to its end. The search term<code class="literal"> 'run*'
-        </code>for example would match words <code class="literal">'run', 'runs',
-        </code>and <code class="literal">'running'. </code></p></li></ul></div><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p>'?' matches any single character. For instance, <code class="literal">'run?'
-        </code>would match<code class="literal"> the word 'runs'</code> and
-        '<code class="literal">runn'</code> in the word
-        '<code class="literal">running'.</code></p></li></ul></div><p>The matches will be displayed in bold blue.</p></div><div class="section" title="3.&nbsp;Search methods"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods<a class="indexterm" name="d0e7208"></a></h2></div></div></div><p>Select the method using the radio buttons. You can choose between
-    two methods to search:</p><div class="variablelist"><dl><dt><span class="term">exact search</span></dt><dd><p>Search for segments containing the exact string you specified.
-          An exact search looks for a phrase, i.e. if several words are
-          entered, they are found only if they occur in exactly that sequence.
-          Searching for <code class="literal">open file</code> will thus find all
-          occurrences of the string <span class="emphasis"><em><code class="literal">open
-          file</code></em></span>, but not <span class="emphasis"><em><code class="literal">file
-          opened</code></em></span> or <span class="emphasis"><em><code class="literal">open input
-          file</code>.</em></span></p></dd><dt><span class="term">keyword search</span></dt><dd><p>Search for segments containing all keywords you specified, in
-          any order. Select keyword search to search for any number of
-          individual full words, in any order. OmegaT displays a list of all
-          segments containing all of the words specified. Keyword searches are
-          similar to a search "with all of the words" in an Internet search
-          engine such as Google (AND logic). Using keyword search with
-          <span class="emphasis"><em><code class="literal">open file</code></em></span> will thus find all
-          occurrences of the string <span class="emphasis"><em><code class="literal">open
-          file</code>,</em></span> as well as <span class="emphasis"><em><code class="literal">file
-          opened</code>, <code class="literal">open input file</code>, <code class="literal">file
-          may not be safe to open</code></em></span><code class="literal">,
-          etc.</code></p></dd></dl></div><p>For either of these two methods you can select the following three
-    options:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem"><p><span class="bold"><strong>case sensitive</strong></span>: the search will
-        be performed for the exact string specified; i.e. capitalization is
-        observed.</p></li><li class="listitem"><p><span class="bold"><strong>regular expressions:</strong></span> The search
-        string will be treated as a regular expression. A regular expression
-        search is a powerful way to look for instances of a string. It is
-        similar to a wild card search, but allows far more flexibility. The
-        regular expressions used in searches are those supported by Java. See
-        more in the chapter on <a class="link" href="ch09.regexp.html" title="Chapter&nbsp;15.&nbsp;Regular expressions">Regular
-        Expressions</a>.</p></li><li class="listitem"><p><span class="bold"><strong>search TMs</strong></span>: translation
-        memories in the <code class="filename">tm</code> folder are included in the
-        search.</p></li></ul></div></div><div class="section" title="4.&nbsp;Search results display"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="search.result.display"></a>4.&nbsp;Search results display</h2></div></div></div><p>Pressing the search button after entering a string in the search
-    field displays all the segments in the project that include the entered
-    string. As <span class="application">OmegaT</span> handles identical segments as
-    one single entity, only the first unique segment is shown.</p><p>The segments are displayed in order of appearance in the project.
-    Translated segments are displayed with the original text at the top and
-    the translated text at the bottom, untranslated segments are displayed as
-    the source only.</p><p>Clicking on a segment opens it in the Editor for modifications. You
-    can then switch back to the Search window for the next segment found, for
-    instance to check and, if necessary, correct the terminology.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="ch09.regexp.html">Prev</a>&nbsp;</td><td width="20%" align="center">&nbsp;</td><td width="40%" align="right">&nbsp;<a accesskey="n" href="ch10.dictionaries.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&nbsp;15.&nbsp;Regular expressions&nbsp;</td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;17.&nbsp;Dictionaries</td></tr></table></div></body></html>
+   
+      <title>Chapter&nbsp;16.&nbsp;Searches</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="home" href="index.html" title="">
+      <link rel="up" href="index.html" title="">
+      <link rel="prev" href="ch09.regexp.html" title="Chapter&nbsp;15.&nbsp;Regular expressions">
+      <link rel="next" href="ch10.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dictionaries">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;16.&nbsp;Searches</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="ch09.regexp.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch10.dictionaries.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;16.&nbsp;Searches">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="ch09.searches"></a>Chapter&nbsp;16.&nbsp;Searches<a class="indexterm" name="d0e7078"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="ch09.searches.html#search.window">1. Search window</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="ch09.searches.html#d0e7100">1.1. Searching</a></span></dt>
+                     <dt><span class="section"><a href="ch09.searches.html#d0e7124">1.2. Search location</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="ch09.searches.html#using.wild.cards">2. Using wild cards</a></span></dt>
+               <dt><span class="section"><a href="ch09.searches.html#search.methoids">3. Search methods</a></span></dt>
+               <dt><span class="section"><a href="ch09.searches.html#search.result.display">4. Search results display</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Search window">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1.&nbsp;Search window
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;16.1.&nbsp;Text search Window<a class="indexterm" name="d0e7087"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TextSearch.png" alt="Text search WindowSearch windowExample"></div>
+               </div>
+            </div><br class="figure-break"><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Note</h3>
+               <p>The above search finds all target segments where two or more white
+                        spaces - \s\s+ - occur.
+               </p>
+            </div>
+            <div class="section" title="1.1.&nbsp;Searching">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7100"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e7103"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> provides a powerful range of
+                        search functions. Open the Search window with <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> and enter the word or phrase you wish to search for in the
+                        Search for box. Alternatively, in the Editor window, select a word or
+                        phrase in the editing field (target text of the current segment) and hit
+                        <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. The word or phrase is entered in the Search for box
+                        automatically. You can have several Search windows open at the same
+                        time, but close them when they are no longer needed so that they do not
+                        clutter your desktop.
+               </p>
+            </div>
+            <div class="section" title="1.2.&nbsp;Search location">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7124"></a>1.2.&nbsp;Search location
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Searches are performed by default in both the source and target
+                        sections of the project, but you can limit your search to just the
+                        source or the target text . You may search in
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>the project only (default setting)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>both the project and the reference translation memories in
+                                     /tm/ (check <span class="emphasis"><em>Search TMs)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>a single file or a folder containing a set of files (check
+                                     <span class="emphasis"><em>Search files)</em></span></p>
+                     </li>
+                  </ul>
+               </div>
+               <p>When searching through files (as opposed to translation memories),
+                        <span class="application">OmegaT</span> restricts the search to files in
+                        source file formats (See <a class="ulink" href="05_FilesToTranslate.xml" target="_top">Files to
+                           translate -&gt; File Formats</a>). Consequently, although OmegaT is
+                        quite able to handle<code class="filename"> tmx</code> files, it does not include
+                        them in the Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7157"></a>Advanced Options</strong></span>, you can combine the search
+                        with the name of the author of the translation and time of the last
+                        change made.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="2.&nbsp;Using wild cards">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7167"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In both exact and keyword searches, the wild card search characters
+                   '*' and '?' can be used. To use wild cards, the regular expressions option
+                   should not be selected, as '*' and '?' have special meaning in regular
+                   expressions.
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>'*' matches zero or more characters, from the current position
+                                in a given word to its end. The search term<code class="literal"> 'run*'
+                                   </code>for example would match words <code class="literal">'run', 'runs',
+                                   </code>and <code class="literal">'running'. </code></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>'?' matches any single character. For instance, <code class="literal">'run?'
+                                   </code>would match<code class="literal"> the word 'runs'</code> and
+                                '<code class="literal">runn'</code> in the word
+                                '<code class="literal">running'.</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>The matches will be displayed in bold blue.</p>
+         </div>
+         <div class="section" title="3.&nbsp;Search methods">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods<a class="indexterm" name="d0e7206"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Select the method using the radio buttons. You can choose between
+                   two methods to search:
+            </p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">exact search</span></dt>
+                  <dd>
+                     <p>Search for segments containing the exact string you specified.
+                                  An exact search looks for a phrase, i.e. if several words are
+                                  entered, they are found only if they occur in exactly that sequence.
+                                  Searching for <code class="literal">open file</code> will thus find all
+                                  occurrences of the string <span class="emphasis"><em><code class="literal">open
+                                           file</code></em></span>, but not <span class="emphasis"><em><code class="literal">file
+                                           opened</code></em></span> or <span class="emphasis"><em><code class="literal">open input
+                                           file</code>.</em></span></p>
+                  </dd>
+                  <dt><span class="term">keyword search</span></dt>
+                  <dd>
+                     <p>Search for segments containing all keywords you specified, in
+                                  any order. Select keyword search to search for any number of
+                                  individual full words, in any order. OmegaT displays a list of all
+                                  segments containing all of the words specified. Keyword searches are
+                                  similar to a search "with all of the words" in an Internet search
+                                  engine such as Google (AND logic). Using keyword search with
+                                  <span class="emphasis"><em><code class="literal">open file</code></em></span> will thus find all
+                                  occurrences of the string <span class="emphasis"><em><code class="literal">open
+                                           file</code>,</em></span> as well as <span class="emphasis"><em><code class="literal">file
+                                           opened</code>, <code class="literal">open input file</code>, <code class="literal">file
+                                           may not be safe to open</code></em></span><code class="literal">,
+                                     etc.</code></p>
+                  </dd>
+               </dl>
+            </div>
+            <p>For either of these two methods you can select the following three
+                   options:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>case sensitive</strong></span>: the search will
+                                be performed for the exact string specified; i.e. capitalization is
+                                observed.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>regular expressions:</strong></span> The search
+                                string will be treated as a regular expression. A regular expression
+                                search is a powerful way to look for instances of a string. It is
+                                similar to a wild card search, but allows far more flexibility. The
+                                regular expressions used in searches are those supported by Java. See
+                                more in the chapter on <a class="link" href="ch09.regexp.html" title="Chapter&nbsp;15.&nbsp;Regular expressions">Regular
+                                   Expressions</a>.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>search TMs</strong></span>: translation
+                                memories in the <code class="filename">tm</code> folder are included in the
+                                search.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="4.&nbsp;Search results display">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.result.display"></a>4.&nbsp;Search results display
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Pressing the search button after entering a string in the search
+                   field displays all the segments in the project that include the entered
+                   string. As <span class="application">OmegaT</span> handles identical segments as
+                   one single entity, only the first unique segment is shown.
+            </p>
+            <p>The segments are displayed in order of appearance in the project.
+                   Translated segments are displayed with the original text at the top and
+                   the translated text at the bottom, untranslated segments are displayed as
+                   the source only.
+            </p>
+            <p>Clicking on a segment opens it in the Editor for modifications. You
+                   can then switch back to the Search window for the next segment found, for
+                   instance to check and, if necessary, correct the terminology.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="ch09.regexp.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch10.dictionaries.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;15.&nbsp;Regular expressions&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;17.&nbsp;Dictionaries</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

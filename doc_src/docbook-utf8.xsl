@@ -7,6 +7,6 @@
 <xsl:import href="file:///c:\dbk\html\docbook.xsl"/> 
 <xsl:output method="html"
             encoding="UTF-8"
-            indent="no"
+            indent="yes"
             saxon:character-representation="native;decimal"/>
 </xsl:stylesheet>

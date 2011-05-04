@@ -1,21 +1,87 @@
-<project name="OmegaT documentation" default="PDF">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+/**************************************************************************
+ OmegaT - Java based Computer Assisted Translation (CAT) tool
+ Copyright (C) 2011 Didier Briel
+ 
+               Home page: http://www.omegat.org/
+               Support center: http://groups.yahoo.com/group/OmegaT/
+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 2 of the License, or
+ (at your option) any later version.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**************************************************************************/
+-->
+<project name="OmegaT documentation" default="all">
   
     <property name="fop.home" value="C:\Program Files\fop-0.95" />
+    <property name="dbk" value="c:\dbk" />
+    <property name="saxon" value="C:\Program Files\saxon6-5-5\saxon.jar" />
    
+    <target name="include">
+        <exec executable="xmllint"
+              dir="." >
+            <arg value="--xinclude" />
+            <arg value="-o" />
+            <arg value="${language}/index.xml" />
+            <arg value="${language}/OmegaTUsersManual_xinclude full.xml" />
+        </exec>
+    </target>
+
+    <target name="fo" depends="include">
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+            <arg value="-o" />
+            <arg value="${language}/pdf/OmegaT_documentation.fo" />
+            <arg value="${language}/index.xml" />
+            <arg value="${dbk}/fo/docbook.xsl" />
+            <arg value="paper.type=A4" />
+            <arg value="page.margin.inner=&quot;18mm&quot;" />
+            <arg value="page.margin.outer=&quot;12mm&quot;" />
+            <arg value="page.margin.top=&quot;8mm&quot;" />
+            <arg value="page.margin.bottom=&quot;8mm&quot;" />
+            <arg value="generate.toc=book toc,title,figure,table" />       
+            <arg value="chapter.autolabel=1" />
+            <arg value="section.autolabel=1" />
+            <arg value="toc.max.depth=2" />
+            <arg value="indent=&quot;no&quot;" />
+            <arg value="fop.extension=1" />
+            <arg value="insert.olink.pdf.frag=1" />
+            <classpath>
+                <pathelement location="${saxon}"/>
+                <pathelement path="${saxon}"/>
+            </classpath>
+        </java>
+    </target>
+    
     <taskdef name="fop" 
              classname="org.apache.fop.tools.anttasks.Fop">
-      <classpath>
-        <fileset dir="${fop.home}/lib">
-          <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${fop.home}/build">
-          <include name="fop.jar"/>
-          <include name="fop-hyph.jar" />
-        </fileset>
-      </classpath>
+        <classpath>
+            <fileset dir="${fop.home}/lib">
+                <include name="*.jar"/>
+            </fileset>
+            <fileset dir="${fop.home}/build">
+                <include name="fop.jar"/>
+                <include name="fop-hyph.jar" />
+             </fileset>
+        </classpath>
     </taskdef>
 
-    <target name="PDF">
+    <target name="pdf" depends="fo">
         <fop format="application/pdf" 
              fofile="${language}/PDF/OmegaT_documentation.fo"
              outfile="${language}/PDF/OmegaT_documentation.PDF" 
@@ -24,5 +90,99 @@
              force="true" />
     </target>
 
+    <target name="chunk" depends="include">
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+            <arg value="${language}/index.xml" />
+            <arg value="${dbk}/html/chunk.xsl" />
+            <arg value="use.id.as.filename=1" />
+            <arg value="base.dir=../docs/${language}/" />
+            <arg value="chunk.section.depth=0" />
+            <arg value="chunk.first.sections=0" />
+            <arg value="chunker.output.encoding=UTF-8" />
+            <arg value="chunker.output.indent=yes" />
+            <arg value="use.extensions=1" />
+            <arg value="chapter.autolabel=1" />
+            <arg value="section.autolabel=1" />
+            <arg value="tablecolumns.extension=0" />
+            <arg value="toc.max.depth=2" />
+            <arg value="generate.toc=book toc,title,figure,table chapter toc appendix toc" />
+            <arg value="generate.index=1" />
+            <arg value="html.stylesheet=OmegaT.css" />
+            <arg value="saxon.character.representation=native;decimal"/>
+            <classpath>
+                <pathelement location="${saxon}" />
+                <pathelement path="${saxon}" />
+            </classpath>
+        </java>
+    </target>
+     
+    <target name="instant-start">
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+            <arg value="-o" />
+            <arg value="../docs/${language}/instantStartGuideNoTOC.html" />
+            <arg value="${language}/InstantStartGuide.xml" />
+            <arg value="docbook-utf8.xsl" />
+            <arg value="base.dir=../docs/${language}/" />
+            <arg value="chunk.section.depth=0" />
+            <arg value="chunk.first.sections=0" />
+            <arg value="use.extensions=1" />
+            <arg value="chapter.autolabel=0" />
+            <arg value="section.autolabel=1" />
+            <arg value="tablecolumns.extension=0" />
+            <arg value="toc.max.depth=0" />
+            <arg value="generate.toc=0" />
+            <arg value="generate.index=0" />
+            <arg value="html.stylesheet=OmegaT.css" />  
+            <classpath>
+                <pathelement location="${saxon}" />
+                <pathelement path="${saxon}" />
+            </classpath>
+        </java>
+     </target>
+     
+     <target name="html" depends="chunk,instant-start">
+         <copy todir="../docs/${language}/images">
+             <fileset dir="${language}/images" />
+         </copy>
+     </target>
+        
+     
+    <target name="javahelp" depends="include"> <!-- Not yet operationnal -->
+        <java dir="."
+              fork="true"
+              failonerror="true"
+              maxmemory="128m"
+              classname="com.icl.saxon.StyleSheet" >
+             <arg value="${language}/index.xml" />
+             <arg value="${dbk}/javahelp/javahelp.xsl" />
+             <arg value="use.id.as.filename=1" />
+             <arg value="base.dir=${language}/javahelp/" />
+             <arg value="use.extensions=1" />
+             <arg value="chapter.autolabel=1" />
+             <arg value="section.autolabel=1" />
+             <arg value="tablecolumns.extension=0" />
+             <arg value="toc.max.depth=2" />
+             <arg value="generate.toc=book toc,title,figure,table chapter toc appendix toc" />
+             <arg value="generate.index=1" />
+             <classpath>
+                 <pathelement location="${saxon}" />
+                 <pathelement path="${saxon}" />
+             </classpath>
+        </java>
+         <copy todir="${language}/javahelp/images">
+             <fileset dir="${language}/images" />
+         </copy>
+     </target>
+
+    <target name="all" depends="pdf,html" />
+    
 </project>
 

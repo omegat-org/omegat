@@ -37,32 +37,33 @@ path=C:\Program Files\libxml2-2.7.7.win32\bin;C:\Program Files\apache-ant\bin
 fop-0.95 can be installed anywhere, usually in Program Files.
 C:\Program Files\fop-0.95
 
-The location of fop-0.95 must be set in build.xml, in the fop.home property.
-<property name="fop.home" value="C:\Program Files\fop-0.95" />
+The location of fop-0.95, dbk and Saxon must be set in build.xml, in the corresponding properties:
+    <property name="fop.home" value="C:\Program Files\fop-0.95" />
+    <property name="dbk" value="c:\dbk" />
+    <property name="saxon" value="C:\Program Files\saxon6-5-5\saxon.jar" />
+
+The location of dbk must also be set in docbook-utf8.xsl:
+<xsl:import href="file:///c:\dbk\html\docbook.xsl"/> 
 
 ***Usage***
 
 All the scripts require the language folder as argument.
 
 E.g.: 
-html en
-PDF en
+Building everything except Javahelp:
 ant -Dlanguage=en
+
+Building HTML
+ant -Dlanguage=en html
+
+Building PDF
+ant -Dlanguage=en pdf
+
+Building Javahelp
+ant -Dlanguage=en javahelp
 
 ***Scripts***
 
-Xincludes.bat: Creates the complete DocBook documentation (index.xml) by including the various chapters
+build.xml: Main script.
 
-classpath.bat: Sets the classpath for Saxon
-
-fo.bat: Creates the intermediate fo format used to create a PDF in /language/pdf
-
-HTML.bat: Calls Xincludes and then creates the HTML documentation in language/html
-
-PDF.bat: Calls Xincludes and fo and then creates with ant the PDF documentation in language/pdf
-
-Javahelp.bat (not yet operationnal): Calls Xincludes and then creates the Javahelp documentation in language/javahelp
-
-build.xml: Creates the PDF in language/pdf
-
-docbook-utf8.xsl: Allows to issue the Instant Start Guide in UTF-8. The path of DocBook must be set in this file (e.g., file:///c:\dbk\html\docbook.xsl)
+docbook-utf8.xsl: Allows to issue the Instant Start Guide in UTF-8.

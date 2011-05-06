@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.segmentation.Segmenter;
+import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 
@@ -55,7 +56,8 @@ public class ExternalTMX {
         entries = new ArrayList<TMXEntry>();
 
         TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
-            public void onTu(Tu tu, Tuv tuvSource, Tuv tuvTarget, boolean isParagraphSegtype) {
+            public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
+                    boolean isParagraphSegtype) {
                 String changer = StringUtil.nvl(tuvTarget.getChangeid(), tuvTarget.getCreationid(),
                         tu.getChangeid(), tu.getCreationid());
                 String dt = StringUtil.nvl(tuvTarget.getChangedate(), tuvTarget.getCreationdate(),
@@ -64,8 +66,8 @@ public class ExternalTMX {
                 List<String> sources = new ArrayList<String>();
                 List<String> targets = new ArrayList<String>();
                 Segmenter.segmentEntries(props.isSentenceSegmentingEnabled() && isParagraphSegtype,
-                        props.getSourceLanguage(), tuvSource.getSeg(), props.getTargetLanguage(),
-                        tuvTarget.getSeg(), sources, targets);
+                        props.getSourceLanguage(), sourceText, props.getTargetLanguage(), targetText,
+                        sources, targets);
 
                 for (int i = 0; i < sources.size(); i++) {
                     TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer,
@@ -76,7 +78,9 @@ public class ExternalTMX {
         };
 
         TMXReader2.readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), false, loader);
+                props.isSentenceSegmentingEnabled(),
+                Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2),
+                Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH), loader);
     }
 
     public String getName() {

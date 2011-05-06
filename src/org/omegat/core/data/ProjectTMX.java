@@ -84,14 +84,9 @@ public class ProjectTMX {
             return;
         }
 
-        TMXReader2.readTMX(
-                file,
-                props.getSourceLanguage(),
-                props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(),
-                false,
-                new Loader(callback, props.getSourceLanguage(), props.getTargetLanguage(), props
-                        .isSentenceSegmentingEnabled()));
+        TMXReader2.readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(), props
+                .isSentenceSegmentingEnabled(), false, false, new Loader(callback, props.getSourceLanguage(),
+                props.getTargetLanguage(), props.isSentenceSegmentingEnabled()));
     }
 
     public void save(File outFile, final boolean forceValidTMX, final boolean levelTwo,
@@ -189,7 +184,8 @@ public class ProjectTMX {
             this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
         }
 
-        public void onTu(Tu tu, Tuv tuvSource, Tuv tuvTarget, boolean isParagraphSegtype) {
+        public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
+                boolean isParagraphSegtype) {
             String changer = StringUtil.nvl(tuvTarget.getChangeid(), tuvTarget.getCreationid(),
                     tu.getChangeid(), tu.getCreationid());
             String dt = StringUtil.nvl(tuvTarget.getChangedate(), tuvTarget.getCreationdate(),
@@ -197,19 +193,19 @@ public class ProjectTMX {
 
             List<String> sources = new ArrayList<String>();
             List<String> targets = new ArrayList<String>();
-            Segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
-                    tuvSource.getSeg(), targetLang, tuvTarget.getSeg(), sources, targets);
+            Segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang, sourceText,
+                    targetLang, targetText, sources, targets);
 
             for (int i = 0; i < sources.size(); i++) {
                 TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer,
                         TMXReader2.parseISO8601date(dt));
-                EntryKey key = createKeyByProps(tuvSource.getSeg(), tu);
+                EntryKey key = createKeyByProps(sourceText, tu);
                 if (key.file == null) {
                     // default translation
-                    if (translationDefault != null && callback.existSourceInProject(tuvSource.getSeg())) {
-                        translationDefault.put(tuvSource.getSeg(), te);
+                    if (translationDefault != null && callback.existSourceInProject(sourceText)) {
+                        translationDefault.put(sourceText, te);
                     } else {
-                        orphanedDefault.put(tuvSource.getSeg(), te);
+                        orphanedDefault.put(sourceText, te);
                     }
                 } else {
                     // multiple translation
@@ -233,15 +229,15 @@ public class ProjectTMX {
             if (tu.getNoteOrProp().get(i) instanceof Prop) {
                 Prop p = (Prop) tu.getNoteOrProp().get(i);
                 if (PROP_FILE.equals(p.getType())) {
-                    file = p.getvalue();
+                    file = p.getContent();
                 } else if (PROP_ID.equals(p.getType())) {
-                    id = p.getvalue();
+                    id = p.getContent();
                 } else if (PROP_PREV.equals(p.getType())) {
-                    prev = p.getvalue();
+                    prev = p.getContent();
                 } else if (PROP_NEXT.equals(p.getType())) {
-                    next = p.getvalue();
+                    next = p.getContent();
                 } else if (PROP_PATH.equals(p.getType())) {
-                    path = p.getvalue();
+                    path = p.getContent();
                 }
             }
         }

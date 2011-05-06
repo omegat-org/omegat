@@ -23,10 +23,16 @@
  **************************************************************************/
 package org.omegat.util;
 
+import gen.core.tmx14.Bpt;
+import gen.core.tmx14.Ept;
 import gen.core.tmx14.Header;
+import gen.core.tmx14.Hi;
+import gen.core.tmx14.It;
+import gen.core.tmx14.Ph;
 import gen.core.tmx14.Tmx;
 import gen.core.tmx14.Tu;
 import gen.core.tmx14.Tuv;
+import gen.core.tmx14.Ut;
 
 import java.io.BufferedInputStream;
 import java.io.File;
@@ -35,8 +41,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TimeZone;
+import java.util.TreeMap;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
@@ -50,6 +59,9 @@ import org.xml.sax.XMLReader;
 /**
  * Helper for read TMX files, using JAXB.
  * 
+ * TODO: make TMX Compliance Verification as described on
+ * http://www.lisa.org/fileadmin/standards/tmx1.4/comp.htm and http://www.lisa.org/tmx/specification.html.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TMXReader2 {
@@ -62,6 +74,8 @@ public class TMXReader2 {
     public static final String SEG_PARAGRAPH = "paragraph";
     /** Segment Type attribute value: "sentence" */
     public static final String SEG_SENTENCE = "sentence";
+    /** Creation Tool attribute value of OmegaT TMXs: "OmegaT" */
+    public static final String CT_OMEGAT = "OmegaT";
 
     static {
         try {
@@ -82,7 +96,8 @@ public class TMXReader2 {
      * Read TMX file.
      */
     public static void readTMX(File file, final Language sourceLanguage, final Language targetLanguage,
-            boolean isSegmentingEnabled, boolean isProjectTMX, final LoadCallback callback) throws Exception {
+            boolean isSegmentingEnabled, final boolean extTmxLevel2, final boolean useSlash,
+            final LoadCallback callback) throws Exception {
         Unmarshaller un = CONTEXT.createUnmarshaller();
 
         // create a new XML parser
@@ -96,6 +111,9 @@ public class TMXReader2 {
         // install the callback on all PurchaseOrders instances
         un.setListener(new Unmarshaller.Listener() {
             boolean isParagraphSegtype = true;
+            boolean isOmegaT = false;
+            StringBuilder sb = new StringBuilder();
+            StringBuilder tb = new StringBuilder();
 
             public void beforeUnmarshal(Object target, Object parent) {
             }
@@ -106,11 +124,24 @@ public class TMXReader2 {
                     Tuv s = getTuv(tu, sourceLanguage);
                     Tuv t = getTuv(tu, targetLanguage);
                     if (s != null && t != null) {
-                        callback.onTu(tu, s, t, isParagraphSegtype);
+                        sb.setLength(0);
+                        tb.setLength(0);
+                        if (isOmegaT) {
+                            collectSegOmegaT(sb, s.getSeg().getContent());
+                            collectSegOmegaT(tb, t.getSeg().getContent());
+                        } else if (extTmxLevel2) {
+                            collectSegExtLevel2(sb, s.getSeg().getContent(), useSlash);
+                            collectSegExtLevel2(tb, t.getSeg().getContent(), useSlash);
+                        } else {
+                            collectSegExtLevel1(sb, s.getSeg().getContent());
+                            collectSegExtLevel1(tb, t.getSeg().getContent());
+                        }
+                        callback.onEntry(tu, s, t, sb.toString(), tb.toString(), isParagraphSegtype);
                     }
                 } else if (target instanceof Header) {
                     Header h = (Header) target;
                     isParagraphSegtype = SEG_PARAGRAPH.equals(h.getSegtype());
+                    isOmegaT = CT_OMEGAT.equals(h.getCreationtool());
                 }
             }
         });
@@ -121,6 +152,134 @@ public class TMXReader2 {
         } finally {
             in.close();
         }
+    }
+
+    protected static void collectSegOmegaT(StringBuilder str, List<Object> content) {
+        for (Object c : content) {
+            if (c instanceof String) {
+                str.append(c);
+            } else if (c instanceof Ph) {
+                collectSegOmegaT(str, ((Ph) c).getContent());
+            } else if (c instanceof Hi) {
+                collectSegOmegaT(str, ((Hi) c).getContent());
+            } else if (c instanceof It) {
+                collectSegOmegaT(str, ((It) c).getContent());
+            } else if (c instanceof Ut) {
+                collectSegOmegaT(str, ((Ut) c).getContent());
+            } else if (c instanceof Bpt) {
+                collectSegOmegaT(str, ((Bpt) c).getContent());
+            } else if (c instanceof Ept) {
+                collectSegOmegaT(str, ((Ept) c).getContent());
+            } else {
+                throw new RuntimeException("Unknown class in TMX content: " + c.getClass());
+            }
+        }
+    }
+
+    protected static void collectSegExtLevel1(StringBuilder str, List<Object> content) {
+        for (Object c : content) {
+            if (c instanceof String) {
+                str.append(c);
+            }
+        }
+    }
+
+    protected static void collectSegExtLevel2(StringBuilder str, List<Object> content, boolean useSlash) {
+        int tagNumber = 0;
+
+        // map of 'i' attributes to tag numbers
+        Map<String, Integer> pairTags = new TreeMap<String, Integer>();
+
+        for (Object c : content) {
+            if (c instanceof String) {
+                str.append(c);
+            } else {
+                Integer tagEnd = null;
+                List<Object> co = null;
+                if (c instanceof Ph) {
+                    co = ((Ph) c).getContent();
+                } else if (c instanceof Hi) {
+                    co = ((Hi) c).getContent();
+                } else if (c instanceof It) {
+                    co = ((It) c).getContent();
+                } else if (c instanceof Ut) {
+                    co = ((Ut) c).getContent();
+                } else if (c instanceof Bpt) {
+                    String i = ((Bpt) c).getI();
+                    pairTags.put(i, tagNumber);
+                    co = ((Bpt) c).getContent();
+                } else if (c instanceof Ept) {
+                    String i = ((Ept) c).getI();
+                    tagEnd = pairTags.get(i);
+                    co = ((Ept) c).getContent();
+                }
+                if (co == null) {
+                    throw new RuntimeException("Unknown class in TMX content: " + c.getClass());
+                }
+                str.append('<');
+                char tagName = getFirstLetter(co);
+                if (c instanceof Bpt) {
+                    str.append(tagName);
+                    str.append(Integer.toString(tagNumber));
+                    tagNumber++;
+                } else if (c instanceof Ept) {
+                    str.append('/');
+                    str.append(tagName);
+                    if (tagEnd != null) {
+                        str.append(Integer.toString(tagEnd));
+                    } else {
+                        str.append(Integer.toString(tagNumber));
+                        tagNumber++;
+                    }
+                } else {
+                    str.append(tagName);
+                    str.append(Integer.toString(tagNumber));
+                    tagNumber++;
+                    if (useSlash) {
+                        str.append('/');
+                    }
+                }
+                str.append('>');
+            }
+        }
+    }
+
+    protected static char getFirstLetter(List<Object> content) {
+        for (Object c : content) {
+            char f = 0;
+            if (c instanceof String) {
+                String s = (String) c;
+                for (int i = 0; i < s.length(); i++) {
+                    if (Character.isLetter(s.charAt(i))) {
+                        f = Character.toLowerCase(s.charAt(i));
+                        break;
+                    }
+                }
+            } else {
+                List<Object> co = null;
+                if (c instanceof Ph) {
+                    co = ((Ph) c).getContent();
+                } else if (c instanceof Hi) {
+                    co = ((Hi) c).getContent();
+                } else if (c instanceof It) {
+                    co = ((It) c).getContent();
+                } else if (c instanceof Ut) {
+                    co = ((Ut) c).getContent();
+                } else if (c instanceof Bpt) {
+                    co = ((Bpt) c).getContent();
+                } else if (c instanceof Ept) {
+                    co = ((Ept) c).getContent();
+                }
+                if (co == null) {
+                    throw new RuntimeException("Unknown class in TMX content: " + c.getClass());
+                }
+                f = getFirstLetter(co);
+            }
+            if (f != 0) {
+                return f;
+            }
+        }
+        return 'f';
     }
 
     /**
@@ -191,10 +350,11 @@ public class TMXReader2 {
      * Callback for receive data from TMX.
      */
     public interface LoadCallback {
-        void onTu(Tu tu, Tuv tuvSource, Tuv tuvTarget, boolean isParagraphSegtype);
+        void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
+                boolean isParagraphSegtype);
     }
 
-    protected static final EntityResolver TMX_DTD_RESOLVER = new EntityResolver() {
+    public static final EntityResolver TMX_DTD_RESOLVER = new EntityResolver() {
         public InputSource resolveEntity(String publicId, String systemId) throws SAXException, IOException {
             if (systemId.endsWith("tmx11.dtd")) {
                 return new InputSource(TMXReader2.class.getResourceAsStream("/schemas/tmx11.dtd"));

@@ -24,8 +24,13 @@
  **************************************************************************/
 package org.omegat.util;
 
+import gen.core.tmx14.Bpt;
+import gen.core.tmx14.Ept;
 import gen.core.tmx14.Header;
+import gen.core.tmx14.It;
+import gen.core.tmx14.Ph;
 import gen.core.tmx14.Prop;
+import gen.core.tmx14.Seg;
 import gen.core.tmx14.Tu;
 import gen.core.tmx14.Tuv;
 
@@ -37,7 +42,9 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.regex.Matcher;
@@ -139,18 +146,21 @@ public class TMXWriter2 {
         tu.getTuv().add(s);
         tu.getTuv().add(t);
 
+        source = StaticUtils.fixChars(source);
+        translation = StaticUtils.fixChars(translation);
+
         if (forceValidTMX) {
             source = StaticUtils.stripTags(source);
             translation = StaticUtils.stripTags(translation);
         }
 
         if (levelTwo) {
-            source = makeLevelTwo(source);
-            translation = makeLevelTwo(translation);
+            s.setSeg(makeLevelTwo(source));
+            t.setSeg(makeLevelTwo(translation));
+        } else {
+            s.setSeg(makeLevelOne(source));
+            t.setSeg(makeLevelOne(translation));
         }
-
-        s.setSeg(source);
-        t.setSeg(translation);
 
         if (!StringUtil.isEmpty(entry.changer)) {
             t.setChangeid(entry.changer);
@@ -176,7 +186,7 @@ public class TMXWriter2 {
                 }
                 Prop p = new Prop();
                 p.setType(propValues[i]);
-                p.setvalue(propValues[i + 1]);
+                p.setContent(propValues[i + 1]);
                 tu.getNoteOrProp().add(p);
             }
         }
@@ -206,11 +216,156 @@ public class TMXWriter2 {
     }
 
     /**
+     * Create simple segment.
+     */
+    private static Seg makeLevelOne(String segment) {
+        Seg s = new Seg();
+        s.getContent().add(segment);
+        return s;
+    }
+
+    protected static final Pattern TAGS_START = Pattern.compile("<[\\S&&[^/\\d]]+(\\d+)>");
+    protected static final Pattern TAGS_ANY = Pattern.compile("<(/?)[\\S&&[^/\\d]]+(\\d+)(/?)>");
+
+    /**
+     * Split to subtags.
+     */
+    private static Seg makeLevelTwo(final String segmentText) {
+        Seg result = new Seg();
+        result.getContent().add(segmentText);
+
+        // Find paired tags first
+        for (int i = 0; i < result.getContent().size(); i++) {
+            if (result.getContent().get(i) instanceof String) {
+                List<Object> replace = replacePairedTags((String) result.getContent().get(i));
+                if (replace != null) {
+                    result.getContent().remove(i);
+                    result.getContent().addAll(i, replace);
+                }
+            }
+        }
+        // Then find all other tags
+        for (int i = 0; i < result.getContent().size(); i++) {
+            if (result.getContent().get(i) instanceof String) {
+                List<Object> replace = replaceAnyTags((String) result.getContent().get(i));
+                if (replace != null) {
+                    result.getContent().remove(i);
+                    result.getContent().addAll(i, replace);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    /**
+     * This method finds pair tags and wrap they by <bpt> and <ept> tags.
+     * 
+     * @param s
+     *            source string
+     * @return list of elements for replace or null if don't need to replace
+     */
+    private static List<Object> replacePairedTags(String s) {
+        Matcher m = TAGS_START.matcher(s);
+        if (m.find()) {
+            // get the OmegaT tag and tag number
+            String tag = m.group();
+            String tagNumber = m.group(1);
+            // Check if the corresponding end tag is in this segment too
+            String endTag = "</" + tag.substring(1);
+            int endTagPos = s.indexOf(endTag);
+            boolean paired = endTagPos > m.start();
+            if (paired) {
+                List<Object> res = new ArrayList<Object>();
+                res.add(s.substring(0, m.start()));// Text before start tag
+
+                Bpt bpt = new Bpt();
+                bpt.setI(tagNumber);
+                bpt.setX(tagNumber);
+                bpt.getContent().add(tag);
+                res.add(bpt);
+
+                res.add(s.substring(m.start() + tag.length(), endTagPos));// Text inside tags
+
+                Ept ept = new Ept();
+                ept.setI(tagNumber);
+                ept.getContent().add(endTag);
+                res.add(ept);
+
+                res.add(s.substring(endTagPos + endTag.length()));// Text after end tag
+                return res;
+            }
+        }
+        return null;
+    }
+
+    enum TAG_TYPE {
+        SINGLE, START, END
+    };
+
+    /**
+     * This method finds any non-paired or sigle tags and wrap they by <ph> and <it> tags.
+     * 
+     * @param s
+     *            source string
+     * @return list of elements for replace or null if don't need to replace
+     */
+    private static List<Object> replaceAnyTags(String s) {
+
+        Matcher m = TAGS_ANY.matcher(s);
+        if (m.find()) {
+            // get the OmegaT tag and tag number
+            String tag = m.group();
+            String tagNumber = m.group(2);
+            TAG_TYPE tagType;
+            if (m.group(3).length() > 0) {
+                tagType = TAG_TYPE.SINGLE;
+            } else if (m.group(1).length() > 0) {
+                tagType = TAG_TYPE.END;
+            } else {
+                tagType = TAG_TYPE.START;
+            }
+
+            List<Object> res = new ArrayList<Object>();
+            res.add(s.substring(0, m.start()));// Text before tag
+
+            switch (tagType) {
+            case SINGLE:
+                Ph ph = new Ph();
+                ph.setX(tagNumber);
+                ph.getContent().add(tag);
+                res.add(ph);
+                break;
+            case START:
+                It itbeg = new It();
+                itbeg.setPos("begin");
+                itbeg.setX(tagNumber);
+                itbeg.getContent().add(tag);
+                res.add(itbeg);
+                break;
+            case END:
+                It itend = new It();
+                itend.setPos("end");
+                itend.setX(tagNumber);
+                itend.getContent().add(tag);
+                res.add(itend);
+                break;
+            default:
+                throw new RuntimeException("Unknow tag type");
+            }
+
+            res.add(s.substring(m.end()));// Text after tag
+            return res;
+        }
+        return null;
+    }
+
+    /**
      * Creates three-quarted-assed TMX level 2 segments from OmegaT internal segments
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
-    private static String makeLevelTwo(String segment) {
+    private static String makeLevelTwoOld(String segment) {
         // Create a storage buffer for the result
         StringBuffer result = new StringBuffer(segment.length() * 2);
 

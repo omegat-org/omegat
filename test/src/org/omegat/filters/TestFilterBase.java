@@ -34,6 +34,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.xpath.XPathConstants;
+import javax.xml.xpath.XPathExpression;
+import javax.xml.xpath.XPathFactory;
+
 import org.omegat.core.Core;
 import org.omegat.core.TestCore;
 import org.omegat.core.data.EntryKey;
@@ -49,6 +55,9 @@ import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
+import org.omegat.util.TMXReader2;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
 import org.xml.sax.InputSource;
 
 /**
@@ -59,13 +68,15 @@ import org.xml.sax.InputSource;
 public abstract class TestFilterBase extends TestCore {
     protected FilterContext context = new FilterContext(new Language("en"), new Language("be"), false);
 
-    protected File outFile = new File(System.getProperty("java.io.tmpdir"), "OmegaT filter test - "
-            + getClass().getSimpleName());
+    protected File outFile;
 
     protected void setUp() throws Exception {
         super.setUp();
 
         Core.initializeConsole(new TreeMap<String, String>());
+
+        outFile = new File("build/testdata/OmegaT_test-" + getClass().getName() + "-" + getName());
+        outFile.getParentFile().mkdirs();
     }
 
     protected List<String> parse(AbstractFilter filter, String filename) throws Exception {
@@ -207,6 +218,39 @@ public abstract class TestFilterBase extends TestCore {
         for (int i = 0; i < d1.size(); i++) {
             assertEquals(a1[i], a2[i]);
         }
+    }
+
+    /**
+     * Remove version and toolname, then compare.
+     */
+    protected void compareTMX(File f1, File f2) throws Exception {
+        XPathExpression exprVersion = XPathFactory.newInstance().newXPath()
+                .compile("/tmx/header/@creationtoolversion");
+        XPathExpression exprTool = XPathFactory.newInstance().newXPath().compile("/tmx/header/@creationtool");
+
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setNamespaceAware(true);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        builder.setEntityResolver(TMXReader2.TMX_DTD_RESOLVER);
+
+        Document doc1 = builder.parse(f1);
+        Document doc2 = builder.parse(f2);
+
+        Node n;
+
+        n = (Node) exprVersion.evaluate(doc1, XPathConstants.NODE);
+        n.setNodeValue("");
+
+        n = (Node) exprVersion.evaluate(doc2, XPathConstants.NODE);
+        n.setNodeValue("");
+
+        n = (Node) exprTool.evaluate(doc1, XPathConstants.NODE);
+        n.setNodeValue("");
+
+        n = (Node) exprTool.evaluate(doc2, XPathConstants.NODE);
+        n.setNodeValue("");
+
+        assertXMLEqual(doc1, doc2);
     }
 
     protected void compareXML(File f1, File f2) throws Exception {

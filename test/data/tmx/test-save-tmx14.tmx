@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE tmx SYSTEM "tmx14.dtd">
 <tmx version="1.4">
-<header  datatype="plaintext" srclang="en-US" adminlang="EN-US" o-tmf="OmegaT TMX" segtype="paragraph" creationtoolversion="2.5.0" creationtool="OmegaT"/>
+<header  datatype="plaintext" srclang="en-US" adminlang="EN-US" o-tmf="OmegaT TMX" segtype="paragraph" creationtoolversion="test" creationtool="test"/>
   <body>
     <tu>
         <tuv xml:lang="en-US">
@@ -11,5 +11,31 @@
             <seg>target</seg>
         </tuv>
     </tu>
+    
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>1<ph x='1'>&lt;a1/&gt;</ph>2</seg>
+      </tuv>
+      <tuv xml:lang="be-BY">
+        <seg>zz</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>3<bpt i='1' x='1'>&lt;a1&gt;</bpt>4<ept i='1'>&lt;/a1&gt;</ept>5</seg>
+      </tuv>
+      <tuv xml:lang="be-BY">
+        <seg>zz</seg>
+      </tuv>
+    </tu>
+    <tu>
+      <tuv xml:lang="en-US">
+        <seg>6<it pos='begin' x='1'>&lt;a1&gt;</it>7</seg>
+      </tuv>
+      <tuv xml:lang="be-BY">
+        <seg>zz</seg>
+      </tuv>
+    </tu>
+    
   </body>
 </tmx>

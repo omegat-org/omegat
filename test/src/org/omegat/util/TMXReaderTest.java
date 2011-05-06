@@ -36,12 +36,16 @@ import org.omegat.core.TestCore;
  * @author Alex Buloichik
  */
 public class TMXReaderTest extends TestCore {
+    protected File outFile = new File(System.getProperty("java.io.tmpdir"), "OmegaT test - "
+            + getClass().getSimpleName());
+
     public void testLeveL1() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         TMXReader2.readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"), new Language(
-                "be"), false, false, new TMXReader2.LoadCallback() {
-            public void onTu(Tu tu, Tuv tuvSource, Tuv tuvTarget, boolean isParagraphSegtype) {
-                tr.put(tuvSource.getSeg(), tuvTarget.getSeg());
+                "be"), false, false, false, new TMXReader2.LoadCallback() {
+            public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
+                    boolean isParagraphSegtype) {
+                tr.put(sourceText, targetText);
             }
         });
         assertEquals("betuv", tr.get("entuv"));
@@ -53,9 +57,10 @@ public class TMXReaderTest extends TestCore {
     public void testLeveL2() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
         TMXReader2.readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"), new Language(
-                "be"), false, false, new TMXReader2.LoadCallback() {
-            public void onTu(Tu tu, Tuv tuvSource, Tuv tuvTarget, boolean isParagraphSegtype) {
-                tr.put(tuvSource.getSeg(), tuvTarget.getSeg());
+                "be"), false, false, false, new TMXReader2.LoadCallback() {
+            public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
+                    boolean isParagraphSegtype) {
+                tr.put(sourceText, targetText);
             }
         });
         assertEquals("betuv", tr.get("entuv"));

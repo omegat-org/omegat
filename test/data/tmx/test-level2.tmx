@@ -20,5 +20,15 @@
         <seg>betuv</seg>
       </tuv>
     </tu>
+    
+    <tu>
+      <tuv xml:lang="en">
+        <seg>First part <ph x="1">internal</ph> end.</seg>
+      </tuv>
+      <tuv xml:lang="be">
+        <seg>First <ph x="1">{\test internal /&gt;}</ph> tr.</seg>
+      </tuv>
+    </tu>
+    
   </body>
 </tmx>

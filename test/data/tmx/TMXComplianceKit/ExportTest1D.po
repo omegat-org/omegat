@@ -1,0 +1,13 @@
+msgid "id100"
+msgstr "Text with 3 spaces [   ] and 2 [  ]"
+
+msgid "id101"
+msgstr "Text with 1 tab [	] and 2 [		]"
+
+msgid "id102"
+msgstr "<=lt, >=gt, &=amp, {=obrace, }=cbrace"
+
+msgid "103"
+msgstr "é=eacute,  =nbsp, ¤=curr, ÿ=yumlaut, ©=copy, §=para"
+
+

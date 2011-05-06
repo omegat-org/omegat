@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<!-- Some comments -->
+<tmx version="1.4">
+
+  <!-- Some comments -->
+ <header creationtool="myTool" creationtoolversion="v10" 
+  segtype="block" o-tmf="Text" adminlang="en-us" srclang="en-us" 
+  datatype="html" o-encoding="iso-8859-1" 
+  creationdate="20020523T091200Z" creationid="ys" 
+  changedate="20020523T091200Z" changeid="ys">
+  <!-- Some comments -->
+  <ude name="MacRoman" base="Macintosh">
+   <map unicode="#xF8FF" code="#xF0" ent="AppleLogo" subst="[Apple]"/>
+  </ude>
+  <!-- Some comments -->
+  <note o-encoding="iso-8859-1" xml:lang="en-us">Text of header note 1</note>
+  <!-- Some comments -->
+  <note o-encoding="iso-8859-1" xml:lang="en-us">Text of header note 2</note>
+  <!-- A line of comments -->
+  <prop type="myPropeType" o-encoding="iso-8859-1" xml:lang="en-us">Data</prop>
+ </header>
+ <!-- Some comments testing the parser... > -> -!> -->
+
+ <body>
+  <!-- Some comments -->
+
+  <tu tuid="tu001" o-encoding="iso-8859-1" datatype="plaintext" usagecount="100" 
+   lastusagedate="20020523T091200Z" creationtool="myTool" creationtoolversion="v10" 
+   creationdate="20020523T091200Z" creationid="ys" 
+   changedate="20020523T091200Z" segtype="block" changeid="ys" 
+   o-tmf="myTM" srclang="en-us">
+   <!-- Some comments -->
+   <note o-encoding="iso-8859-1" xml:lang="en-us">Text of tu note 1</note>
+   <!-- Some comments -->
+   <note o-encoding="iso-8859-1" xml:lang="en-us">Text of tu note 2</note>
+   <!-- Some comments -->
+   <prop type="myPropeType" o-encoding="iso-8859-1" xml:lang="en-us">Data</prop>
+
+   <tuv xml:lang="en-us" o-encoding="iso-8859-1" datatype="plaintext" usagecount="100"
+    lastusagedate="20020523T091200Z" creationtool="myTool" creationtoolversion="v10"
+    creationdate="20020523T091200Z" creationid="ys"
+    changedate="20020523T091200Z" o-tmf="myTM" changeid="ys">
+    <note o-encoding="iso-8859-1" xml:lang="en-us">Text of tuv en note 1</note>
+    <note o-encoding="iso-8859-1" xml:lang="en-us">Text of tuv en note 1</note>
+    <prop type="myPropeType" o-encoding="iso-8859-1" xml:lang="en-us">Data</prop>
+    <seg>Text of the segment.</seg>
+   </tuv>
+
+   <tuv xml:lang="fr" o-encoding="iso-8859-1" datatype="plaintext" usagecount="100" 
+    lastusagedate="20020523T091200Z" creationtool="myTool" creationtoolversion="v10" 
+    creationdate="20020523T091200Z" creationid="ys"
+    changedate="20020523T091200Z" o-tmf="myTM" changeid="ys">
+    <prop type="myPropeType" o-encoding="iso-8859-1" xml:lang="en-us">Data</prop>
+    <note o-encoding="iso-8859-1" xml:lang="en-us">Text of tuv fr note 1</note>
+    <prop type="myPropeType" o-encoding="iso-8859-1" xml:lang="en-us">Data</prop>
+    <note o-encoding="iso-8859-1" xml:lang="en-us">Text of tuv fr note 1</note>
+    <seg>Texte du segment.</seg>
+   </tuv>
+
+   <tuv xml:lang="en-gb" o-encoding="iso-8859-1" datatype="plaintext" usagecount="100" 
+    lastusagedate="20020523T091200Z" creationtool="myTool" creationtoolversion="v10" 
+    creationdate="20020523T091200Z" creationid="ys"
+    changedate="20020523T091200Z" o-tmf="myTM" changeid="ys">
+    <prop type="myPropeType" o-encoding="iso-8859-1" xml:lang="en-us">Data</prop>
+    <note o-encoding="iso-8859-1" xml:lang="en-us">Text of tuv fr note 1</note>
+    <prop type="myPropeType" o-encoding="iso-8859-1" xml:lang="en-us">Data</prop>
+    <note o-encoding="iso-8859-1" xml:lang="en-us">Text of tuv fr note 1</note>
+    <seg>Text of the segment.</seg>
+   </tuv>
+
+  </tu>
+
+ </body>
+ <!-- Some comments -->
+</tmx>
+<!-- Some comments -->

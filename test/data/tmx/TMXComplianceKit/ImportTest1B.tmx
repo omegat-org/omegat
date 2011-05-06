@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header 
+creationtoolversion = "1.0.0" 
+datatype = 'plaintext' 
+segtype="sentence" adminlang="en-us" srclang="en-us" o-tmf="abc" creationtool="XYZTool">
+ </header>
+ <body   >
+  <tu
+>
+   <tuv		xml:lang='eN-uS'><seg>Text of the segment</seg></tuv>
+   <tuv     xml:lang= 				
+"fR-Ca">
+	<seg>Texte du segment</seg>
+</tuv>
+  </tu>
+ </body>
+</tmx>

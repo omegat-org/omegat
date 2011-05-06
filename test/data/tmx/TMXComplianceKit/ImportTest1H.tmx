@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="us-ascii"?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="plaintext" segtype="sentence" adminlang="en-us" srclang="en-us" o-tmf="abc" creationtool="XYZTool">
+ </header>
+ <body>
+  <tu>
+   <tuv xml:lang="en-us"><seg>&#xe0;=agrave, &#xe9;=eacute, &#xe6;=aelig</seg></tuv>
+   <tuv xml:lang="en-gb"><seg>&#xe0;=agrave, &#xe9;=eacute, &#xe6;=aelig</seg></tuv>
+  </tu>
+  <tu>
+   <tuv xml:lang="en-us"><seg>&#xff;=U+00FF, &#x2122;=U+2122, &#x2019;=U+2019</seg></tuv>
+   <tuv xml:lang="en-gb"><seg>&#xff;=U+00FF, &#x2122;=U+2122, &#x2019;=U+2019</seg></tuv>
+  </tu>
+  <tu>
+   <tuv xml:lang="en-us"><seg>&#x201c;=U+201C, &#x2013;=U+2013, &#xa4;=U+00A4</seg></tuv>
+   <tuv xml:lang="en-gb"><seg>&#x201c;=U+201C, &#x2013;=U+2013, &#xa4;=U+00A4</seg></tuv>
+  </tu>
+ </body>
+</tmx>

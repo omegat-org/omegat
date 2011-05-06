@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="html" segtype="sentence" adminlang="EN-US" srclang="EN-US" o-tmf="abc" creationtool="XYZTool" >
+ </header>
+ <body>
+  <tu>
+   <tuv xml:lang="en-us"><seg>&lt;=lt, >=gt, &amp;=amp, '=apos, "=quot, {=obrace, }=cbrace</seg></tuv>
+   <tuv xml:lang="fr-ca"><seg>&lt;=lt, >=gt, &amp;=amp, '=apos, "=quot, {=obrace, }=cbrace</seg></tuv>
+  </tu>
+  <tu>
+   <tuv xml:lang="en-us"><seg>é=eacute,  =nbsp, ¤=curr, ÿ=yumlaut, ©=copy, §=para</seg></tuv>
+   <tuv xml:lang="fr-ca"><seg>é=eacute,  =nbsp, ¤=curr, ÿ=yumlaut, ©=copy, §=para</seg></tuv>
+  </tu>
+ </body>
+</tmx>

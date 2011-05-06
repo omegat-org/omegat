@@ -1,0 +1,40 @@
+﻿<?xml version="1.0"?>
+<xliff version="1.0">
+ <file original="none" source-language="EN-US" target-language="FR-CA"
+  tool="none" datatype="plaintext">
+  <header>
+   <skl><external-file uid="none" href="none"/></skl>
+  </header>
+  <body>
+   <trans-unit id="1" resname="id100">
+    <source xml:lang="EN-US">Text with 3 spaces [   ] and 2 [  ]</source>
+    <target xml:lang="FR-CA">Text with 3 spaces [   ] and 2 [  ]</target>
+    <alt-trans>
+     <target xml:lang="FR-CA">Texte avec 3 espaces [   ] et 2 [  ]</target>
+    </alt-trans>
+   </trans-unit>
+   <trans-unit id="2" resname="id101">
+    <source xml:lang="EN-US">Text with 1 tab [	] and 2 [		]</source>
+    <target xml:lang="FR-CA">Text with 1 tab [	] and 2 [		]</target>
+    <alt-trans>
+     <target xml:lang="FR-CA">Texte avec 1 tab [	] et 2 [		]</target>
+    </alt-trans>
+   </trans-unit>
+   <trans-unit id="3" resname="id102">
+    <source xml:lang="EN-US">&lt;=lt, >=gt, &amp;=amp, {=obrace, }=cbrace</source>
+    <target xml:lang="FR-CA">&lt;=lt, >=gt, &amp;=amp, {=obrace, }=cbrace</target>
+    <alt-trans>
+     <target xml:lang="FR-CA">&lt;=lt, >=gt, &amp;=amp, {=obrace, }=cbrace</target>
+    </alt-trans>
+   </trans-unit>
+   <trans-unit id="4" resname="id103">
+    <source xml:lang="EN-US">é=eacute,  =nbsp, ¤=curr, ÿ=yumlaut, ©=copy, §=para</source>
+    <target xml:lang="FR-CA">é=eacute,  =nbsp, ¤=curr, ÿ=yumlaut, ©=copy, §=para</target>
+    <alt-trans>
+     <target xml:lang="FR-CA">é=eacute,  =nbsp, ¤=curr, ÿ=yumlaut, ©=copy, §=para</target>
+    </alt-trans>
+   </trans-unit>
+  </body>
+ </file>
+</xliff>
+

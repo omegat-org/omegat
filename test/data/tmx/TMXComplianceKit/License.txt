@@ -1,0 +1,1 @@
+All the files in this folder were previously part of the Lisa TMX Compliance Kit (http://www.lisa.org/tmx/TMXComplianceKit.zip). Thanks to special permission by Yves Savourel, they are now relased as public domain.

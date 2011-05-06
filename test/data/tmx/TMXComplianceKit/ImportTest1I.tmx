@@ -1,0 +1,12 @@
+<?xml version="1.0" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="plaintext" segtype="sentence" adminlang="en-us" srclang="en-us" o-tmf="abc" creationtool="XYZTool">
+ </header>
+ <body>
+  <tu>
+   <tuv xml:lang="en-us"><seg>English segment with [&#x20; &#x20; ]</seg></tuv>
+   <tuv xml:lang="ja-jp"><seg>Japanese segment with [&#x3000;&#x3000;]</seg></tuv>
+  </tu>
+ </body>
+</tmx>

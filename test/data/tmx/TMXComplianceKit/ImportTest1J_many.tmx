@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="plaintext" segtype="sentence" adminlang="en" srclang="es-es" o-tmf="abc" creationtool="XYZTool">
+ </header>
+ <!-- For import with source=en-us and target=en-gb, only first and second entries
+      should be imported -->
+ <body>
+  <tu srclang="en-us">
+   <tuv xml:lang="en-us"><seg>First entry in US English</seg></tuv>
+   <tuv xml:lang="en-gb"><seg>First entry in UK English</seg></tuv>
+  </tu>
+  <tu srclang="en-us">
+   <tuv xml:lang="en-gb"><seg>Second entry in UK English</seg></tuv>
+   <tuv xml:lang="en-us"><seg>Second entry in US English</seg></tuv>
+  </tu>
+  <tu>
+   <tuv xml:lang="es-es"><seg>[not to import] Third entry in Spanish</seg></tuv>
+   <tuv xml:lang="en-us"><seg>[not to import] Third entry in US English</seg></tuv>
+  </tu>
+ </body>
+</tmx>

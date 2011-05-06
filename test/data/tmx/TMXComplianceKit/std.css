@@ -1,0 +1,18 @@
+body                     { margin: 30; }
+h1                       { padding-top: 0in; color: navy; }
+h2                       { color: navy; margin-top: 35; }
+h3                       { color: navy; }
+h4                       { color: navy; }
+h5                       { color: navy; }
+pre                      { background-color: #ffffee; padding: 10; border: solid 1px; whitespace: pre }
+
+p.main                   { font-weight: bold; padding-top: 10; margin-top: 40; border-top: solid 1px; }
+p.desc                   { }
+p.itemhead               { margin-bottom: -15; }
+p.item                   { margin-left: 40 }
+
+div.section h1.title     { padding-top: 0in; color: navy; }
+div.article h1.title     { padding-top: 0.75in; color: navy; }
+div.references dt        { margin-top: 10; }
+
+/* OASIS purple: #523184; } */

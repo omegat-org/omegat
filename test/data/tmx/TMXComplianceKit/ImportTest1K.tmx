@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="plaintext" segtype="sentence" adminlang="en-us" srclang="en-us" o-tmf="abc" creationtool="XYZTool">
+ </header>
+ <body>
+  <tu srclang='de-de'>
+   <tuv xml:lang="de-de"><seg>First Entry - German</seg></tuv>
+   <tuv xml:lang="en-gb"><seg>First Entry - UK English</seg></tuv>
+  </tu>
+  <tu srclang='fr-ca'>
+   <tuv xml:lang="en-gb"><seg>Second Entry - UK English</seg></tuv>
+   <tuv xml:lang="fr-ca"><seg>Second Entry - French Canadian</seg></tuv>
+  </tu>
+ </body>
+</tmx>

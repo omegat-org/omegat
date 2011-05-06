@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<!DOCTYPE tmx SYSTEM "tmx14.dtd">
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="plaintext" segtype="sentence" adminlang="en-us" srclang="en-us" o-tmf="abc" creationtool="XYZTool">
+ </header>
+ <body>
+  <tu>
+   <tuv xml:lang="en-us"><seg>First entry in US English</seg></tuv>
+   <tuv xml:lang="en-gb"><seg>First entry in UK English</seg></tuv>
+   <tuv xml:lang="ja-jp"><seg>First entry in Japanese</seg></tuv>
+   <tuv xml:lang="fr-ca"><seg>First entry in French Canadian</seg></tuv>
+   <tuv xml:lang="es-es"><seg>First entry in Spanish</seg></tuv>
+  </tu>
+  <tu>
+   <tuv xml:lang="ja-jp"><seg>Second entry in Japanese</seg></tuv>
+   <tuv xml:lang="en-us"><seg>Second entry in US English</seg></tuv>
+   <tuv xml:lang="fr-ca"><seg>Second entry in French Canadian</seg></tuv>
+   <tuv xml:lang="en-gb"><seg>Second entry in UK English</seg></tuv>
+   <tuv xml:lang="es-es"><seg>Second entry in Spanish</seg></tuv>
+  </tu>
+  <tu>
+   <tuv xml:lang="fr-ca"><seg>Third entry in French Canadian</seg></tuv>
+   <tuv xml:lang="ja-jp"><seg>Third entry in Japanese</seg></tuv>
+   <tuv xml:lang="es-es"><seg>Third entry in Spanish</seg></tuv>
+   <tuv xml:lang="en-us"><seg>Third entry in US English</seg></tuv>
+   <tuv xml:lang="en-gb"><seg>Third entry in UK English</seg></tuv>
+  </tu>
+ </body>
+</tmx>

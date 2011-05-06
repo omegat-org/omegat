@@ -1,0 +1,56 @@
+﻿<?xml version="1.0"?>
+<tmx version="1.4">
+ <header creationtoolversion="1.0.0" datatype="html" segtype="sentence" adminlang="en-us" srclang="en-us" o-tmf="abc" creationtool="XYZTool" >
+ </header>
+ <body>
+  <tu tuid="1">
+   <tuv xml:lang="en-us">
+    <seg>The big <bpt i="1" x="1">&lt;b></bpt>black<ept i="1">&lt;/b></ept> <bpt i="2" x="2">&lt;u></bpt>cat<ept i="2">&lt;/u></ept> sleeps.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Le gros <bpt i="2" x="2">&lt;u></bpt>chat<ept i="2">&lt;/u></ept> <bpt i="1" x="1">&lt;b></bpt>noir<ept i="1">&lt;/b></ept> dors.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="2">
+   <tuv xml:lang="en-us">
+    <seg>The <bpt i="1" x="1">&lt;u></bpt><bpt i="2" x="2">&lt;b></bpt>big<ept i="2">&lt;/b></ept> <bpt i="3" x="3">&lt;i></bpt>black<ept i="3">&lt;/i></ept><ept i="1">&lt;/u></ept> cat sleeps.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Le <bpt i="1" x="1">&lt;u></bpt><bpt i="2" x="2">&lt;b></bpt>gros<ept i="2">&lt;/b></ept> chat <bpt i="3" x="3">&lt;i></bpt>noir<ept i="3">&lt;/i></ept><ept i="1">&lt;/u></ept> dors.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="3">
+   <tuv xml:lang="en-us">
+    <seg>Test for special characters = <bpt i="1" x="1">&lt;b></bpt>&lt;<ept i="1">&lt;/b></ept>=lt, <bpt i="2" x="2">&lt;b></bpt>&gt;<ept i="2">&lt;/b></ept>=gt, <bpt i="3" x="3">&lt;b></bpt>&amp;<ept i="3">&lt;/b></ept>=amp, <bpt i="4" x="4">&lt;b></bpt>&quot;<ept i="4">&lt;/b></ept>=quot.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Test pour caractères spéciaux = <bpt i="1" x="1">&lt;b></bpt>&lt;<ept i="1">&lt;/b></ept>=lt, <bpt i="2" x="2">&lt;b></bpt>&gt;<ept i="2">&lt;/b></ept>=gt, <bpt i="3" x="3">&lt;b></bpt>&amp;<ept i="3">&lt;/b></ept>=amp, <bpt i="4" x="4">&lt;b></bpt>&quot;<ept i="4">&lt;/b></ept>=quot.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="4">
+   <tuv xml:lang="en-us">
+    <seg>Nested formatting = <bpt i="1" x="1">&lt;b></bpt><bpt i="2" x="2">&lt;i></bpt><bpt i="3" x="3">&lt;u></bpt>Bold+Italic+Underlined<ept i="3">&lt;/u></ept>, Bold+Italic<ept i="2">&lt;/i></ept>, Bold<ept i="1">&lt;/b></ept>.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Format en gigogne = <bpt i="1" x="1">&lt;b></bpt><bpt i="2" x="2">&lt;i></bpt><bpt i="3" x="3">&lt;u></bpt>gras+italique+souligné<ept i="3">&lt;/u></ept>, gras+italique<ept i="2">&lt;/i></ept>, gras<ept i="1">&lt;/b></ept>.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="5">
+   <tuv xml:lang="en-us">
+    <seg>Sentence <it pos="begin" x="1">&lt;b></it>one.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Phrase <it pos="begin" x="1">&lt;b></it>1.</seg>
+   </tuv>
+  </tu>
+  <tu tuid="6">
+   <tuv xml:lang="en-us">
+    <seg>And<it pos="end" x="1">&lt;/b></it> two.</seg>
+   </tuv>
+   <tuv xml:lang="fr-ca">
+    <seg>Et<it pos="end" x="1">&lt;/b></it> 2.</seg>
+   </tuv>
+  </tu>
+ </body>
+</tmx>
+

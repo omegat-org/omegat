@@ -1,0 +1,8 @@
+STRINGTABLE
+BEGIN
+	100 "Texte avec 3 espaces [   ] et 2 [  ]"
+	101 "Texte avec 1 tab [	] et 2 [		]"
+	102 "<=lt, >=gt, &=amp, {=obrace, }=cbrace"
+	103 "é=eacute,  =nbsp, ¤=curr, ÿ=yumlaut, ©=copy, §=para"
+END
+

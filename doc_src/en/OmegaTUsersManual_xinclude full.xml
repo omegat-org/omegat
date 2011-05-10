@@ -3,12 +3,18 @@
 "file:///C:/docbook-xml-4.5/docbookx.dtd">
 <book lang="en">
   <bookinfo>
-    <pubdate><?dbtimestamp?></pubdate>
+    <title>OmegaT - User's Guide</title>
 
     <authorinitials>vs</authorinitials>
         <author><firstname>Vito</firstname>
 <surname>Smolej</surname>
     </author>
+
+    <pubdate><?dbtimestamp?></pubdate>
+
+    <abstract>
+      <para>This document is the official user's guide to OmegaT, the free Computer Aided Translation tool. It also contains installation instructions.</para>
+    </abstract>
 
   </bookinfo>
 

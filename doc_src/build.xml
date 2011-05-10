@@ -147,13 +147,13 @@
             </classpath>
         </java>
         <copy file="${language}/OmegaT.css" tofile="../docs/${language}/OmegaT.css" />
-     </target>
-     
-     <target name="html" depends="chunk,instant-start">
-         <copy todir="../docs/${language}/images">
+        <copy todir="../docs/${language}/images">
              <fileset dir="${language}/images" />
-         </copy>
-     </target>
+        </copy>
+    </target>
+     
+    <target name="html" depends="chunk,instant-start">
+    </target>
         
      
     <target name="javahelp" depends="include"> <!-- Not yet operationnal -->

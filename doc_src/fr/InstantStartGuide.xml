@@ -324,7 +324,7 @@
       <para>Voici comment <application>OmegaT</application> affiche ce segment, avec la traduction en afrikaans :</para>
 
       <figure id="fig.tagged.segment.source">
-        <title>Sgement HTML source <indexterm class="singular">
+        <title>Segment HTML source <indexterm class="singular">
             <primary>Segment, source et cible – image</primary>
           </indexterm></title>
 
@@ -342,7 +342,7 @@
       <para>Le texte HTML du document traduit créé par <application>OmegaT</application> sera comme ceci :</para>
 
       <figure id="fig.tagged.segment.target">
-        <title>Sgement HTML cible</title>
+        <title>Segment HTML cible</title>
 
         <mediaobject>
           <imageobject role="html">

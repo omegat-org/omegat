@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Wildrich Fourie, Alex Buloichik
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +27,8 @@ package org.omegat.gui.glossary;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -41,6 +44,7 @@ import org.omegat.util.Preferences;
  * 
  * @author W. Fourie
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class TransTipsPopup implements IPopupMenuConstructor {
     public void addItems(final JPopupMenu menu, JTextComponent comp, final int mousepos,
@@ -66,7 +70,7 @@ public class TransTipsPopup implements IPopupMenuConstructor {
                 // is inside found word ?
                 if (startSource + start <= mousepos && mousepos <= startSource + end) {
                     // Split the terms and remove the leading space.
-                    String[] locs = ge.getLocText().split(",");
+                    String[] locs = parseLine(ge.getLocText());
                     for (int l = 1; l < locs.length; l++) {
                         locs[l] = locs[l].trim();
                     }
@@ -88,4 +92,51 @@ public class TransTipsPopup implements IPopupMenuConstructor {
             TransTips.search(sb.getSourceText(), ge, callback);
         }
     }
+
+    /**
+     * Separator for glossary entries
+     */
+    protected static final char SEPARATOR = ',';
+
+    /**
+     * Parse the glossary entries
+     * @param line A line containing the multiple terms
+     * @return An array with the multiple terms
+     */
+    private static String[] parseLine(String line) {
+        List<String> result = new ArrayList<String>();
+        StringBuilder term = new StringBuilder();
+        boolean fopened = false; // Field opened by "
+        for (int i = 0; i < line.length(); i++) {
+            char c = line.charAt(i);
+            switch (c) {
+            case '"':
+                if (term.toString().trim().length() == 0 && !fopened) {
+                    // First " in field
+                    fopened = true;
+                } else if (fopened) {
+                    // Last " in field
+                    fopened = false;
+                } else {
+                    term.append(c);
+                }
+                break;
+            case SEPARATOR:
+                if (fopened) {
+                    term.append(c);
+                } else {
+                    result.add(term.toString());
+                    term.setLength(0);
+                }
+                break;
+            default:
+                term.append(c);
+                break;
+            }
+        }
+        result.add(term.toString());
+        return result.toArray(new String[result.size()]);
+    }
+
+
 }

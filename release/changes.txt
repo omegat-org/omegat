@@ -22,11 +22,10 @@ reload the project.
 
   - Dutch localisation updated to 2.5 (UI)
 
-----------------------------------------------------------------------
  OmegaT 2.3.0
  ----------------------------------------------------------------------
    2 Enhancements
-   1 Bug fix
+   2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 vs. 2.2.3 update 4
@@ -45,6 +44,9 @@ with Windows 64-bit
 
   - PO filter mangles \\r strings
   http://sourceforge.net/support/tracker.php?aid=3292553
+
+  - Wrong TransTip when target term contains comma
+  http://sourceforge.net/support/tracker.php?aid=2970681
 
   Localisation updates:
 

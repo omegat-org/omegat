@@ -32,8 +32,8 @@ import java.util.TreeMap;
 import java.util.logging.Logger;
 
 /**
- * Class for monitor directory content changes. It just looks directory every x
- * seconds and run callback if some files changed.
+ * Class for monitor directory content changes. It just looks directory every x seconds and run callback if
+ * some files changed.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
@@ -79,45 +79,55 @@ public class DirectoryMonitor extends Thread {
         setPriority(MIN_PRIORITY);
 
         while (!stopped) {
-            // find deleted or changed files
-            for (String fn : new ArrayList<String>(existFiles.keySet())) {
-                if (stopped)
-                    return;
-                File f = new File(fn);
-                if (!f.exists()) {
-                    // file removed
-                    LOGGER.finer("File '" + f + "' removed");
-                    existFiles.remove(fn);
-                    callback.fileChanged(f);
-                } else {
-                    FileInfo fi = new FileInfo(f);
-                    if (!fi.equals(existFiles.get(fn))) {
-                        // file changed
-                        LOGGER.finer("File '" + f + "' changed");
-                        existFiles.put(fn, fi);
-                        callback.fileChanged(f);
-                    }
-                }
-            }
-
-            // find new files
-            List<File> foundFiles = new ArrayList<File>();
-            readDir(dir, foundFiles);
-            for (File f : foundFiles) {
-                if (stopped)
-                    return;
-                String fn = f.getPath();
-                if (!existFiles.keySet().contains(fn)) {
-                    // file added
-                    LOGGER.finer("File '" + f + "' added");
-                    existFiles.put(fn, new FileInfo(f));
-                    callback.fileChanged(f);
-                }
-            }
+            checkChanges();
             try {
                 Thread.sleep(LOOKUP_PERIOD);
             } catch (InterruptedException ex) {
                 stopped = true;
+            }
+        }
+    }
+
+    /**
+     * Proces changes in directory. This method can be called before thread start for load all files from
+     * directory immediately.
+     * 
+     * DON'T EXECUTE IT WHEN THREAD STARTED ! Because working with map not synchronized.
+     */
+    public void checkChanges() {
+        // find deleted or changed files
+        for (String fn : new ArrayList<String>(existFiles.keySet())) {
+            if (stopped)
+                return;
+            File f = new File(fn);
+            if (!f.exists()) {
+                // file removed
+                LOGGER.finer("File '" + f + "' removed");
+                existFiles.remove(fn);
+                callback.fileChanged(f);
+            } else {
+                FileInfo fi = new FileInfo(f);
+                if (!fi.equals(existFiles.get(fn))) {
+                    // file changed
+                    LOGGER.finer("File '" + f + "' changed");
+                    existFiles.put(fn, fi);
+                    callback.fileChanged(f);
+                }
+            }
+        }
+
+        // find new files
+        List<File> foundFiles = new ArrayList<File>();
+        readDir(dir, foundFiles);
+        for (File f : foundFiles) {
+            if (stopped)
+                return;
+            String fn = f.getPath();
+            if (!existFiles.keySet().contains(fn)) {
+                // file added
+                LOGGER.finer("File '" + f + "' added");
+                existFiles.put(fn, new FileInfo(f));
+                callback.fileChanged(f);
             }
         }
     }

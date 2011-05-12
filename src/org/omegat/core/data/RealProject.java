@@ -635,6 +635,7 @@ public class RealProject implements IProject {
                 transMemories = newTransMemories;
             }
         });
+        tmMonitor.checkChanges();
         tmMonitor.start();
     }
 

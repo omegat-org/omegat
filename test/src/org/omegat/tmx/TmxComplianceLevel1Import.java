@@ -25,18 +25,13 @@
 package org.omegat.tmx;
 
 import java.io.File;
-import java.util.Map;
 import java.util.TreeMap;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
+import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.ProjectTMX;
-import org.omegat.core.data.TMXEntry;
-import org.omegat.filters2.FilterContext;
-import org.omegat.filters2.ITranslateCallback;
-import org.omegat.filters2.text.TextFilter;
+import org.omegat.tmx.TmxComplianceBase.TestProjectProperties;
 
 /**
  * TMX Compliance tests as described on http://www.lisa.org/tmx/comp.htm
@@ -53,30 +48,92 @@ public class TmxComplianceLevel1Import extends TmxComplianceBase {
      */
     @Test
     public void testImport1A() throws Exception {
+        translateTextUsingTmx("ImportTest1A.txt", "UTF-8", "ImportTest1A.tmx", "ImportTest1A_fr-ca.txt",
+                "UTF-8", "EN-US", "FR-CA");
+    }
+
+    /**
+     * Test Import1B - XML Syntax.
+     */
+    @Test
+    public void testImport1B() throws Exception {
+        translateTextUsingTmx("ImportTest1B.txt", "UTF-8", "ImportTest1B.tmx", "ImportTest1B_fr-ca.txt",
+                "UTF-8", "EN-US", "FR-CA");
+    }
+
+    /**
+     * Test Import1C - Multiple Languages
+     */
+    @Test
+    public void testImport1C() throws Exception {
+        translateTextUsingTmx("ImportTest1C.txt", "UTF-8", "ImportTest1C.tmx", "ImportTest1C_fr-ca.txt",
+                "UTF-8", "EN-US", "FR-CA");
+    }
+
+    /**
+     * Test Import1D - UTF-8 with BOM
+     */
+    @Test
+    public void testImport1D() throws Exception {
+        translateTextUsingTmx("ImportTest1D.txt", "UTF-8", "ImportTest1D.tmx", "ImportTest1D_en-gb.txt",
+                "UTF-8", "EN-US", "EN-GB");
+    }
+
+    /**
+     * Test Import1E - UTF-8 without BOM
+     */
+    @Test
+    public void testImport1E() throws Exception {
+        translateTextUsingTmx("ImportTest1E.txt", "UTF-8", "ImportTest1E.tmx", "ImportTest1E_en-gb.txt",
+                "UTF-8", "EN-US", "EN-GB");
+    }
+
+    /**
+     * Test Import1F - UTF-16 LE
+     */
+    @Test
+    public void testImport1F() throws Exception {
+        translateTextUsingTmx("ImportTest1F.txt", "UTF-8", "ImportTest1F.tmx", "ImportTest1F_en-gb.txt",
+                "UTF-8", "EN-US", "EN-GB");
+    }
+
+    /**
+     * Test Import1F - UTF-16 BE
+     */
+    @Test
+    public void testImport1G() throws Exception {
+        translateTextUsingTmx("ImportTest1G.txt", "UTF-8", "ImportTest1G.tmx", "ImportTest1G_en-gb.txt",
+                "UTF-8", "EN-US", "EN-GB");
+    }
+
+    /**
+     * Test Import1H - ASCII
+     */
+    @Test
+    public void testImport1H() throws Exception {
+        translateTextUsingTmx("ImportTest1H.txt", "UTF-8", "ImportTest1H.tmx", "ImportTest1H_en-gb.txt",
+                "UTF-8", "EN-US", "EN-GB");
+    }
+
+    /**
+     * Test Import1I - Internal Asian White Spaces
+     */
+    @Test
+    public void testImport1I() throws Exception {
+        translateTextUsingTmx("ImportTest1I.txt", "UTF-8", "ImportTest1I.tmx", "ImportTest1I_ja-jp.txt",
+                "UTF-16LE", "EN-US", "JA-JP");
+    }
+
+    /**
+     * Test Import1J - Language Selection
+     */
+    @Test
+    public void testImport1J() throws Exception {
         ProjectProperties props = new TestProjectProperties();
+        props.setSourceLanguage("EN-US");
+        props.setTargetLanguage("EN-GB");
         final ProjectTMX tmx = new ProjectTMX(props, new File(
-                "test/data/tmx/TMXComplianceKit/ImportTest1A.tmx"), orphanedCallback);
-
-        TextFilter f = new TextFilter();
-        Map<String, String> c = new TreeMap<String, String>();
-        c.put(TextFilter.OPTION_SEGMENT_ON, TextFilter.SEGMENT_BREAKS);
-        FilterContext fc = new FilterContext(props);
-        ITranslateCallback cb = new ITranslateCallback() {
-            public void setPass(int pass) {
-            }
-
-            public void linkPrevNextSegments() {
-            }
-
-            public String getTranslation(String id, String source, String path) {
-                TMXEntry e = tmx.getDefaultTranslation(source);
-                Assert.assertNotNull(e);
-                return e.translation;
-            }
-        };
-        f.translateFile(new File("test/data/tmx/TMXComplianceKit/ImportTest1A.txt"), new File(
-                "test/data/tmx/TMXComplianceKit/ImportTest1A.txt.out"), c, fc, cb);
-        compareBinary(new File("test/data/tmx/TMXComplianceKit/ImportTest1A_fr-ca.txt"), new File(
-                "test/data/tmx/TMXComplianceKit/ImportTest1A.txt.out"));
+                "test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), orphanedCallback);
+        tmx.save(props, outFile, false, false, false);
     }
 }

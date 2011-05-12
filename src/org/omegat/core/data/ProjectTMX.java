@@ -34,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import org.omegat.core.Core;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
 import org.omegat.util.StringUtil;
@@ -89,10 +88,8 @@ public class ProjectTMX {
                 props.getTargetLanguage(), props.isSentenceSegmentingEnabled()));
     }
 
-    public void save(File outFile, final boolean forceValidTMX, final boolean levelTwo,
-            final boolean useOrphaned) throws Exception {
-        ProjectProperties props = Core.getProject().getProjectProperties();
-
+    public void save(ProjectProperties props, File outFile, final boolean forceValidTMX,
+            final boolean levelTwo, final boolean useOrphaned) throws Exception {
         TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
         try {

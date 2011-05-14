@@ -188,6 +188,9 @@
           <listitem>
             <para>WiX Localization (*.wxl)</para>
           </listitem>
+          <listitem>
+            <para>Iceni Infix (*.xml)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>Other formatted text file types may also be handled by OmegaT by

@@ -1,4 +1,4 @@
-﻿Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2010.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2011.
 
 ==============================================================================
   OmegaT 2.0, fichier « Lisez-moi »
@@ -67,6 +67,8 @@ OmegaT prend en charge directement les formats de fichier suivants :
   - Ressources Windows RC
   - DTD Mozilla
   - DokuWiki
+  - Wix  
+  - Infix
 
 Il est également possible de personnaliser OmegaT pour accepter d'autres formats.
 

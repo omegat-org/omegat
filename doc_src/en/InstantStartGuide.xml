@@ -274,6 +274,11 @@
             <listitem>
               <para>WiX Localization (*.wxl)</para>
             </listitem>
+
+            <listitem>
+              <para>Iceni Infix (*.xml)</para>
+            </listitem>
+
           </itemizedlist>
         </listitem>
       </itemizedlist>

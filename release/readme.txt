@@ -71,6 +71,8 @@ OmegaT supports the following file formats out of the box:
   - Windows RC resources
   - Mozilla DTD
   - DokuWiki
+  - Wix  
+  - Infix
 
 OmegaT can be customized to support other file formats as well.
 

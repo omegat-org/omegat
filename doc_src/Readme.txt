@@ -13,18 +13,29 @@ The creation of the documentation requires a number of tools:
 - Saxon 6-5-5
 - Ant 1.7.1 or above
 
-For efficiency reason, the path to the DTD in the DocBook files (e.g., AboutOmegaT.xml) has been changed to a local path (file:/// instead of a http:// reference). Depending on the actual configuration, it might be changed to a standard reference ("http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd") or to another local reference.
+For efficiency reason, the path to the DTD in the DocBook files (e.g., AboutOmegaT.xml) has been changed to a local path (../../../docbook-xml-4.5/docbookx.dtd instead of an http:// reference). Depending on the actual configuration, it might be changed to a standard reference ("http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd") or to another local reference.
 
 The instructions below give an example of installation under Windows.
 
-dbk and docbook-xml-4.5 must be installed at the root of c:\
+dbk must be installed at the root of c:\
 
 c:\dbk\common
 c:\dbk\docsrc
 etc.
 
-c:\docbook-xml-4.5\ent
-c:\docbook-xml-4.5\calstblx.dtd
+Docbook-xml-4.5 must be installed at the same level as your OmegaT development folder.
+
+So, if you have 
+
+c:\dev\omegat-trunk
+c:\dev\omegat-trunk\src
+c:\dev\omegat-trunk\doc_src
+etc.
+
+you would have
+
+c:\dev\docbook-xml-4.5\ent
+c:\dev\docbook-xml-4.5\calstblx.dtd
 etc.
 
 libxml2-2.7.7 and apache-ant must be installed where a path can find them, usually in Program Files.

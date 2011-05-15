@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
-"file:///C:/docbook-xml-4.5/docbookx.dtd">
+"../../../docbook-xml-4.5/docbookx.dtd">
 <appendix id="Ap5.using.tokenizers.inOmegaT">
   <title>Using tokenizers in OmegaT</title>
 

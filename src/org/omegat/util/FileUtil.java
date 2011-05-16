@@ -50,8 +50,8 @@ public class FileUtil {
     /**
      * Removes old backups so that only 10 last are there.
      * 
-     * TODO: should be changed for new file saving behavior, i.e. steps for save
-     * some data in file(*.xml, for example) should be:
+     * TODO: should be changed for new file saving behavior, i.e. steps for save some data in file(*.xml, for
+     * example) should be:
      * 
      * 1. Save data into '*.new' file
      * 
@@ -59,8 +59,7 @@ public class FileUtil {
      * 
      * 3. Rename '*.new' into '*.xml'
      * 
-     * It will allow to do not break exist files if some error will be produced
-     * in the save process.
+     * It will allow to do not break exist files if some error will be produced in the save process.
      */
     public static void removeOldBackups(final File originalFile) {
         try {
@@ -85,7 +84,7 @@ public class FileUtil {
             // we don't care
         }
     }
-    
+
     /**
      * Returns backup file name.
      * 
@@ -104,7 +103,7 @@ public class FileUtil {
      */
     public static void backupFile(File f) throws IOException {
         long fileMillis = f.lastModified();
-        String str=new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
+        String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
         LFileCopy.copy(f, new File(f.getPath() + "." + str + ".bak"));
     }
 
@@ -175,5 +174,23 @@ public class FileUtil {
                 }
             }
         }
+    }
+
+    /**
+     * Compute relative path of file.
+     * 
+     * @param rootDir
+     *            root directory
+     * @param filePath
+     *            file path
+     * @return
+     */
+    public static String computeRelativePath(File rootDir, File file) throws IOException {
+        String rootAbs = rootDir.getAbsolutePath().replace('\\', '/') + '/';
+        String fileAbs = file.getAbsolutePath().replace('\\', '/');
+        if (!fileAbs.startsWith(rootAbs)) {
+            throw new IOException("File is not under root dir");
+        }
+        return fileAbs.substring(rootAbs.length());
     }
 }

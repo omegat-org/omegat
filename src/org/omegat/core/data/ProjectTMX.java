@@ -54,16 +54,30 @@ public class ProjectTMX {
 
     /**
      * Storage for translation for current project. Will be null if default translation disabled.
+     * 
+     * It must be used with synchronization around ProjectTMX.
      */
     final Map<String, TMXEntry> translationDefault;
 
+    /**
+     * Storage for alternative translations for current project.
+     * 
+     * It must be used with synchronization around ProjectTMX.
+     */
     final Map<EntryKey, TMXEntry> translationMultiple;
 
     /**
      * Storage for orphaned segments.
+     * 
+     * It must be used with synchronization around ProjectTMX.
      */
     final Map<String, TMXEntry> orphanedDefault;
 
+    /**
+     * Storage for orphaned alternative translations for current project.
+     * 
+     * It must be used with synchronization around ProjectTMX.
+     */
     final Map<EntryKey, TMXEntry> orphanedMultiple;
 
     public ProjectTMX(ProjectProperties props, File file, CheckOrphanedCallback callback) throws Exception {
@@ -94,18 +108,20 @@ public class ProjectTMX {
                 props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
         try {
             Map<String, TMXEntry> defaults = new TreeMap<String, TMXEntry>();
-
-            if (translationDefault != null) {
-                defaults.putAll(translationDefault);
-            }
-            if (useOrphaned) {
-                defaults.putAll(orphanedDefault);
-            }
-
             Map<EntryKey, TMXEntry> alternatives = new TreeMap<EntryKey, TMXEntry>();
-            alternatives.putAll(translationMultiple);
-            if (useOrphaned) {
-                alternatives.putAll(orphanedMultiple);
+
+            synchronized (this) {
+                if (translationDefault != null) {
+                    defaults.putAll(translationDefault);
+                }
+                if (useOrphaned) {
+                    defaults.putAll(orphanedDefault);
+                }
+
+                alternatives.putAll(translationMultiple);
+                if (useOrphaned) {
+                    alternatives.putAll(orphanedMultiple);
+                }
             }
 
             wr.writeComment("Default translations");
@@ -129,14 +145,18 @@ public class ProjectTMX {
      * Get default translation or null if not exist.
      */
     public TMXEntry getDefaultTranslation(String source) {
-        return translationDefault != null ? translationDefault.get(source) : null;
+        synchronized (this) {
+            return translationDefault != null ? translationDefault.get(source) : null;
+        }
     }
 
     /**
      * Get multiple translation or null if not exist.
      */
     public TMXEntry getMultipleTranslation(EntryKey ek) {
-        return translationMultiple.get(ek);
+        synchronized (this) {
+            return translationMultiple.get(ek);
+        }
     }
 
     /**
@@ -144,17 +164,19 @@ public class ProjectTMX {
      */
     public void setTranslation(SourceTextEntry ste, TMXEntry te, boolean isDefault) {
         // TODO review default
-        if (te == null) {
-            if (isDefault) {
-                translationDefault.remove(ste.getKey().sourceText);
+        synchronized (this) {
+            if (te == null) {
+                if (isDefault) {
+                    translationDefault.remove(ste.getKey().sourceText);
+                } else {
+                    translationMultiple.remove(ste.getKey());
+                }
             } else {
-                translationMultiple.remove(ste.getKey());
-            }
-        } else {
-            if (isDefault) {
-                translationDefault.put(ste.getKey().sourceText, te);
-            } else {
-                translationMultiple.put(ste.getKey(), te);
+                if (isDefault) {
+                    translationDefault.put(ste.getKey().sourceText, te);
+                } else {
+                    translationMultiple.put(ste.getKey(), te);
+                }
             }
         }
     }
@@ -164,7 +186,9 @@ public class ProjectTMX {
      */
     void putFromSourceFile(EntryKey key, TMXEntry te) {
         // TODO review default
-        translationMultiple.put(key, te);
+        synchronized (this) {
+            translationMultiple.put(key, te);
+        }
     }
 
     private class Loader implements TMXReader2.LoadCallback {
@@ -193,23 +217,25 @@ public class ProjectTMX {
             Segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang, sourceText,
                     targetLang, targetText, sources, targets);
 
-            for (int i = 0; i < sources.size(); i++) {
-                TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer,
-                        TMXReader2.parseISO8601date(dt));
-                EntryKey key = createKeyByProps(sourceText, tu);
-                if (key.file == null) {
-                    // default translation
-                    if (translationDefault != null && callback.existSourceInProject(sourceText)) {
-                        translationDefault.put(sourceText, te);
+            synchronized (this) {
+                for (int i = 0; i < sources.size(); i++) {
+                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer,
+                            TMXReader2.parseISO8601date(dt));
+                    EntryKey key = createKeyByProps(sourceText, tu);
+                    if (key.file == null) {
+                        // default translation
+                        if (translationDefault != null && callback.existSourceInProject(sourceText)) {
+                            translationDefault.put(sourceText, te);
+                        } else {
+                            orphanedDefault.put(sourceText, te);
+                        }
                     } else {
-                        orphanedDefault.put(sourceText, te);
-                    }
-                } else {
-                    // multiple translation
-                    if (callback.existEntryInProject(key)) {
-                        translationMultiple.put(key, te);
-                    } else {
-                        orphanedMultiple.put(key, te);
+                        // multiple translation
+                        if (callback.existEntryInProject(key)) {
+                            translationMultiple.put(key, te);
+                        } else {
+                            orphanedMultiple.put(key, te);
+                        }
                     }
                 }
             }

@@ -93,6 +93,8 @@ public class RealProject implements IProject {
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
 
+    protected static final String AUTO_TMX_DIR = "auto/";
+
     protected final ProjectProperties m_config;
 
     private FileChannel lockChannel;
@@ -166,7 +168,7 @@ public class RealProject implements IProject {
             createDirectory(m_config.getTargetRoot(), "target");
 
             saveProjectProperties();
-            
+
             loadTM();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
@@ -612,7 +614,7 @@ public class RealProject implements IProject {
      * updates.
      */
     private void loadTM() throws IOException {
-        File tmRoot = new File(m_config.getTMRoot());
+        final File tmRoot = new File(m_config.getTMRoot());
         tmMonitor = new DirectoryMonitor(tmRoot, new DirectoryMonitor.Callback() {
             public void fileChanged(File file) {
                 if (!file.getName().endsWith(".tmx")) {
@@ -625,6 +627,10 @@ public class RealProject implements IProject {
                     try {
                         ExternalTMX newTMX = new ExternalTMX(m_config, file);
                         newTransMemories.put(file.getPath(), newTMX);
+
+                        if (FileUtil.computeRelativePath(tmRoot, file).startsWith(AUTO_TMX_DIR)) {
+                            appendFromAutoTMX(newTMX);
+                        }
                     } catch (Exception e) {
                         Log.logErrorRB(e, "TF_TM_LOAD_ERROR");
                         Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR");
@@ -640,12 +646,33 @@ public class RealProject implements IProject {
     }
 
     /**
+     * Append new translation from auto TMX.
+     */
+    private void appendFromAutoTMX(ExternalTMX tmx) {
+        Set<String> existSources = new HashSet<String>(allProjectEntries.size());
+        for (SourceTextEntry ste : allProjectEntries) {
+            existSources.add(ste.getSrcText());
+        }
+        synchronized (projectTMX) {
+            for (TMXEntry e : tmx.getEntries()) {
+                if (existSources.contains(e.source)) {
+                    // source exist
+                    if (!projectTMX.translationDefault.containsKey(e.source)) {
+                        // translation not exist
+                        projectTMX.translationDefault.put(e.source, e);
+                    }
+                }
+            }
+        }
+    }
+
+    /**
      * {@inheritDoc}
      */
     public List<SourceTextEntry> getAllEntries() {
         return allProjectEntries;
     }
-    
+
     public TMXEntry getTranslation(SourceTextEntry ste) {
         TMXEntry r = projectTMX.getMultipleTranslation(ste.getKey());
         if (r == null) {
@@ -718,8 +745,10 @@ public class RealProject implements IProject {
     public Collection<TMXEntry> getAllTranslations() {
         List<TMXEntry> r = new ArrayList<TMXEntry>();
 
-        r.addAll(projectTMX.translationDefault.values());
-        r.addAll(projectTMX.translationMultiple.values());
+        synchronized (projectTMX) {
+            r.addAll(projectTMX.translationDefault.values());
+            r.addAll(projectTMX.translationMultiple.values());
+        }
 
         return r;
     }
@@ -727,34 +756,57 @@ public class RealProject implements IProject {
     public Collection<TMXEntry> getAllOrphanedTranslations() {
         List<TMXEntry> r = new ArrayList<TMXEntry>();
 
-        r.addAll(projectTMX.orphanedDefault.values());
-        r.addAll(projectTMX.orphanedMultiple.values());
+        synchronized (projectTMX) {
+            r.addAll(projectTMX.orphanedDefault.values());
+            r.addAll(projectTMX.orphanedMultiple.values());
+        }
 
         return r;
     }
-    
+
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
         if (projectTMX.translationDefault != null) {
-            for (Map.Entry<String, TMXEntry> en : projectTMX.translationDefault.entrySet()) {
-                it.iterate(en.getKey(), en.getValue());
-            }
+            return;
+        }
+        Map.Entry<String, TMXEntry>[] entries;
+        synchronized (projectTMX) {
+            Set<Map.Entry<String, TMXEntry>> set = projectTMX.translationDefault.entrySet();
+            entries = set.toArray(new Map.Entry[set.size()]);
+        }
+        for (Map.Entry<String, TMXEntry> en : entries) {
+            it.iterate(en.getKey(), en.getValue());
         }
     }
 
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
-        for (Map.Entry<EntryKey, TMXEntry> en : projectTMX.translationMultiple.entrySet()) {
+        Map.Entry<EntryKey, TMXEntry>[] entries;
+        synchronized (projectTMX) {
+            Set<Map.Entry<EntryKey, TMXEntry>> set = projectTMX.translationMultiple.entrySet();
+            entries = set.toArray(new Map.Entry[set.size()]);
+        }
+        for (Map.Entry<EntryKey, TMXEntry> en : entries) {
             it.iterate(en.getKey(), en.getValue());
         }
     }
 
     public void iterateByOrphanedDefaultTranslations(DefaultTranslationsIterator it) {
-        for (Map.Entry<String, TMXEntry> en : projectTMX.orphanedDefault.entrySet()) {
+        Map.Entry<String, TMXEntry>[] entries;
+        synchronized (projectTMX) {
+            Set<Map.Entry<String, TMXEntry>> set = projectTMX.orphanedDefault.entrySet();
+            entries = set.toArray(new Map.Entry[set.size()]);
+        }
+        for (Map.Entry<String, TMXEntry> en : entries) {
             it.iterate(en.getKey(), en.getValue());
         }
     }
 
     public void iterateByOrphanedMultipleTranslations(MultipleTranslationsIterator it) {
-        for (Map.Entry<EntryKey, TMXEntry> en : projectTMX.orphanedMultiple.entrySet()) {
+        Map.Entry<EntryKey, TMXEntry>[] entries;
+        synchronized (projectTMX) {
+            Set<Map.Entry<EntryKey, TMXEntry>> set = projectTMX.orphanedMultiple.entrySet();
+            entries = set.toArray(new Map.Entry[set.size()]);
+        }
+        for (Map.Entry<EntryKey, TMXEntry> en : entries) {
             it.iterate(en.getKey(), en.getValue());
         }
     }
@@ -870,10 +922,10 @@ public class RealProject implements IProject {
 
             EntryKey ek = new EntryKey(fileInfo.filePath, segmentSource, id, prevSegment, nextSegment, path);
 
-//            if (!StringUtil.isEmpty(segmentTranslation)) {
-//                // TODO add to temp map, then put to real
-//                projectTMX.putFromSourceFile(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0));
-//            }
+            // if (!StringUtil.isEmpty(segmentTranslation)) {
+            // // TODO add to temp map, then put to real
+            // projectTMX.putFromSourceFile(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0));
+            // }
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, comment);
             allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);

@@ -35,10 +35,12 @@ import gen.core.tmx14.Tuv;
 import gen.core.tmx14.Ut;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -146,11 +148,23 @@ public class TMXReader2 {
             }
         });
 
-        InputStream in = new BufferedInputStream(new FileInputStream(file));
-        try {
-            reader.parse(new InputSource(in));
-        } finally {
-            in.close();
+        if (file.getName().endsWith(OConsts.TMW_EXTENSION)) {
+            // WordFast
+            BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(file),
+                    "ISO-8859-1"));
+            try {
+                reader.parse(new InputSource(rd));
+            } finally {
+                rd.close();
+            }
+        } else {
+            // TMX
+            InputStream in = new BufferedInputStream(new FileInputStream(file));
+            try {
+                reader.parse(new InputSource(in));
+            } finally {
+                in.close();
+            }
         }
     }
 

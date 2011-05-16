@@ -617,7 +617,8 @@ public class RealProject implements IProject {
         final File tmRoot = new File(m_config.getTMRoot());
         tmMonitor = new DirectoryMonitor(tmRoot, new DirectoryMonitor.Callback() {
             public void fileChanged(File file) {
-                if (!file.getName().endsWith(".tmx")) {
+                if (!file.getName().endsWith(OConsts.TMX_EXTENSION)
+                        && !file.getName().endsWith(OConsts.TMW_EXTENSION)) {
                     // not a TMX file
                     return;
                 }

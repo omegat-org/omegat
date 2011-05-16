@@ -42,3 +42,5 @@ Complete JAXB sources are available from https://jaxb.dev.java.net/2.1.7/
 swing-worker-1.2.jar is distributed under the GNU Lesser General Public License  
 version 2.1.
 Sources are available in OmegaT sources, in the directory lib/sources
+
+sjsxp-1.0.2.jar is available under CDDL v1.0 and GPL v2

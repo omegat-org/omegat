@@ -42,6 +42,7 @@
 				<jar href="activation.jar" />
 				<jar href="jaxb-api.jar" />
 				<jar href="jaxb-impl.jar" />
+				<jar href="sjsxp-1.0.2.jar" />
                 <jar href="jsr173_1.0_api.jar" />
                 <jar href="swing-worker-1.2.jar" />
 			</resources>

@@ -18,5 +18,6 @@
 	<classpathentry kind="lib" path="lib/jsr173_1.0_api.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/vldocking_2.1.4.jar"/>
 	<classpathentry kind="lib" path="lib/swing-worker-1.2.jar" sourcepath="lib/sources/swing-worker-src-1.2.zip"/>
+	<classpathentry kind="lib" path="lib/sjsxp-1.0.2.jar"/>
 	<classpathentry kind="output" path="classes"/>
 </classpath>

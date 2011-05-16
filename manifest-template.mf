@@ -3,7 +3,7 @@ Main-Class: org.omegat.Main
 License: GNU Public License version 2 or later
 Specification-Version: 1
 Implementation-Version: @version@
-Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar lib/vldocking_2.1.4.jar lib/jna.jar lib/swing-layout-1.0.jar lib/jmyspell-core-1.0.0-beta-2.jar lib/activation.jar lib/jaxb-api.jar lib/jaxb-impl.jar lib/jsr173_1.0_api.jar lib/swing-worker-1.2.jar
+Class-Path: lib/lib-mnemonics.jar lib/htmlparser.jar lib/MRJAdapter.jar lib/vldocking_2.1.4.jar lib/jna.jar lib/swing-layout-1.0.jar lib/jmyspell-core-1.0.0-beta-2.jar lib/activation.jar lib/jaxb-api.jar lib/jaxb-impl.jar lib/jsr173_1.0_api.jar lib/swing-worker-1.2.jar lib/sjsxp-1.0.2.jar
 OmegaT-Plugin: true
 
 Name: org.omegat.filters3.xml.android.AndroidFilter

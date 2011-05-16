@@ -53,8 +53,6 @@ public class OConsts {
     public static final String LEVEL1_TMX = "-level1";
     public static final String LEVEL2_TMX = "-level2";
 
-    public static final String TMW_EXTENSION = ".wf"; // for wordfast
-
     // help
     public static final String HELP_HOME = "index.html";
     public static final String HELP_INSTANT_START = "instantStartGuideNoTOC.html";

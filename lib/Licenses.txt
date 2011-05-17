@@ -43,4 +43,6 @@ swing-worker-1.2.jar is distributed under the GNU Lesser General Public License
 version 2.1.
 Sources are available in OmegaT sources, in the directory lib/sources
 
-sjsxp-1.0.2.jar is available under CDDL v1.0 and GPL v2
+sjsxp-1.0.2.jar is distributed under under the 
+Common Development and Distribution License (CDDL) v1.0 / GPLv2 dual license
+Sources are available in OmegaT sources, in the directory lib/sources

@@ -23,17 +23,6 @@
  **************************************************************************/
 package org.omegat.util;
 
-import gen.core.tmx14.Bpt;
-import gen.core.tmx14.Ept;
-import gen.core.tmx14.Header;
-import gen.core.tmx14.Hi;
-import gen.core.tmx14.It;
-import gen.core.tmx14.Ph;
-import gen.core.tmx14.Tmx;
-import gen.core.tmx14.Tu;
-import gen.core.tmx14.Tuv;
-import gen.core.tmx14.Ut;
-
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -41,32 +30,35 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.TreeMap;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
-import javax.xml.parsers.SAXParserFactory;
+import javax.xml.namespace.QName;
+import javax.xml.stream.XMLEventReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.events.Attribute;
+import javax.xml.stream.events.Characters;
+import javax.xml.stream.events.EndElement;
+import javax.xml.stream.events.StartElement;
+import javax.xml.stream.events.XMLEvent;
 
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.XMLReader;
 
 /**
- * Helper for read TMX files, using JAXB.
- * 
- * TODO: make TMX Compliance Verification as described on
- * http://www.lisa.org/fileadmin/standards/tmx1.4/comp.htm and http://www.lisa.org/tmx/specification.html.
+ * Helper for read TMX files, using StAX.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class TMXReader2 {
 
-    static final JAXBContext CONTEXT;
+    static final XMLInputFactory FACTORY;
 
     private static final SimpleDateFormat DATE_FORMAT1, DATE_FORMAT2, DATE_FORMAT_OUT;
 
@@ -77,12 +69,11 @@ public class TMXReader2 {
     /** Creation Tool attribute value of OmegaT TMXs: "OmegaT" */
     public static final String CT_OMEGAT = "OmegaT";
 
+    private XMLEventReader xml;
+
     static {
-        try {
-            CONTEXT = JAXBContext.newInstance(Tmx.class);
-        } catch (Exception ex) {
-            throw new ExceptionInInitializerError(ex);
-        }
+        FACTORY = XMLInputFactory.newInstance();
+        FACTORY.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
 
         DATE_FORMAT1 = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
         DATE_FORMAT1.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -92,216 +83,311 @@ public class TMXReader2 {
         DATE_FORMAT_OUT.setTimeZone(TimeZone.getTimeZone("UTC"));
     }
 
+    private boolean isParagraphSegtype = true;
+    private boolean isOmegaT = false;
+    private boolean extTmxLevel2;
+    private boolean useSlash;
+
+    private ParsedTu currentTu = new ParsedTu();
+    private ParsedTuv origTuv = new ParsedTuv();
+    private ParsedTuv targetTuv = new ParsedTuv();
+
+    private List<Tuv> currentTuTuvs = new ArrayList<Tuv>();
+
+    StringBuilder propContent = new StringBuilder();
+    StringBuilder segContent = new StringBuilder();
+    StringBuilder segInlineTag = new StringBuilder();
+    // map of 'i' attributes to tag numbers
+    Map<String, Integer> pairTags = new TreeMap<String, Integer>();
+
     /**
      * Read TMX file.
      */
-    public static void readTMX(File file, final Language sourceLanguage, final Language targetLanguage,
-            boolean isSegmentingEnabled, final boolean extTmxLevel2, final boolean useSlash,
-            final LoadCallback callback) throws Exception {
-        Unmarshaller un = CONTEXT.createUnmarshaller();
-
-        // create a new XML parser
-        SAXParserFactory factory = SAXParserFactory.newInstance();
-        factory.setNamespaceAware(true);
-        XMLReader reader = factory.newSAXParser().getXMLReader();
-        reader.setContentHandler(un.getUnmarshallerHandler());
-
-        reader.setEntityResolver(TMX_DTD_RESOLVER);
-
-        // install the callback on all PurchaseOrders instances
-        un.setListener(new Unmarshaller.Listener() {
-            boolean isParagraphSegtype = true;
-            boolean isOmegaT = false;
-            StringBuilder sb = new StringBuilder();
-            StringBuilder tb = new StringBuilder();
-
-            public void beforeUnmarshal(Object target, Object parent) {
-            }
-
-            public void afterUnmarshal(Object target, Object parent) {
-                if (target instanceof Tu) {
-                    Tu tu = (Tu) target;
-                    Tuv s = getTuv(tu, sourceLanguage);
-                    Tuv t = getTuv(tu, targetLanguage);
-                    if (s != null && t != null) {
-                        sb.setLength(0);
-                        tb.setLength(0);
-                        if (isOmegaT) {
-                            collectSegOmegaT(sb, s.getSeg().getContent());
-                            collectSegOmegaT(tb, t.getSeg().getContent());
-                        } else if (extTmxLevel2) {
-                            collectSegExtLevel2(sb, s.getSeg().getContent(), useSlash);
-                            collectSegExtLevel2(tb, t.getSeg().getContent(), useSlash);
-                        } else {
-                            collectSegExtLevel1(sb, s.getSeg().getContent());
-                            collectSegExtLevel1(tb, t.getSeg().getContent());
-                        }
-                        callback.onEntry(tu, s, t, sb.toString(), tb.toString(), isParagraphSegtype);
-                    }
-                } else if (target instanceof Header) {
-                    Header h = (Header) target;
-                    isParagraphSegtype = SEG_PARAGRAPH.equals(h.getSegtype());
-                    isOmegaT = CT_OMEGAT.equals(h.getCreationtool());
-                }
-            }
-        });
+    public void readTMX(File file, final Language sourceLanguage, final Language targetLanguage,
+            boolean isSegmentingEnabled, final boolean forceOmegaTMX, final boolean extTmxLevel2,
+            final boolean useSlash, final LoadCallback callback) throws Exception {
+        this.extTmxLevel2 = extTmxLevel2;
+        this.useSlash = useSlash;
 
         InputStream in = new BufferedInputStream(new FileInputStream(file));
+        xml = FACTORY.createXMLEventReader(in);
         try {
-            reader.parse(new InputSource(in));
+            while (xml.hasNext()) {
+                XMLEvent e = xml.nextEvent();
+                switch (e.getEventType()) {
+                case XMLEvent.START_ELEMENT:
+                    StartElement eStart = (StartElement) e;
+                    if ("tu".equals(eStart.getName().getLocalPart())) {
+                        parseTu(eStart);
+                        if (fillTuv(origTuv, sourceLanguage) && fillTuv(targetTuv, targetLanguage)) {
+                            callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype);
+                        }
+                    } else if ("header".equals(eStart.getName().getLocalPart())) {
+                        parseHeader(eStart);
+                    }
+                    break;
+                }
+            }
         } finally {
+            xml.close();
             in.close();
         }
     }
 
-    protected static void collectSegOmegaT(StringBuilder str, List<Object> content) {
-        for (Object c : content) {
-            if (c instanceof String) {
-                str.append(c);
-            } else if (c instanceof Ph) {
-                collectSegOmegaT(str, ((Ph) c).getContent());
-            } else if (c instanceof Hi) {
-                collectSegOmegaT(str, ((Hi) c).getContent());
-            } else if (c instanceof It) {
-                collectSegOmegaT(str, ((It) c).getContent());
-            } else if (c instanceof Ut) {
-                collectSegOmegaT(str, ((Ut) c).getContent());
-            } else if (c instanceof Bpt) {
-                collectSegOmegaT(str, ((Bpt) c).getContent());
-            } else if (c instanceof Ept) {
-                collectSegOmegaT(str, ((Ept) c).getContent());
-            } else {
-                throw new RuntimeException("Unknown class in TMX content: " + c.getClass());
+    protected void parseHeader(StartElement element) {
+        isParagraphSegtype = SEG_PARAGRAPH
+                .equals(element.getAttributeByName(new QName("segtype")).getValue());
+        isOmegaT = CT_OMEGAT.equals(element.getAttributeByName(new QName("creationtool")).getValue());
+    }
+
+    protected void parseTu(StartElement element) throws Exception {
+        currentTu.changeid = getAttributeValue(element, "changeid");
+        currentTu.changedate = parseISO8601date(getAttributeValue(element, "changedate"));
+        currentTu.creationid = getAttributeValue(element, "creationid");
+        currentTu.creationdate = parseISO8601date(getAttributeValue(element, "creationdate"));
+
+        currentTu.clear();
+        currentTuTuvs.clear();
+
+        while (true) {
+            XMLEvent e = xml.nextEvent();
+            switch (e.getEventType()) {
+            case XMLEvent.START_ELEMENT:
+                StartElement eStart = (StartElement) e;
+                if ("tuv".equals(eStart.getName().getLocalPart())) {
+                    currentTuTuvs.add(parseTuv(eStart));
+                } else if ("prop".equals(eStart.getName().getLocalPart())) {
+                    parseProp(eStart);
+                }
+                break;
+            case XMLEvent.END_ELEMENT:
+                EndElement eEnd = (EndElement) e;
+                if ("tu".equals(eEnd.getName().getLocalPart())) {
+                    return;
+                }
+                break;
             }
         }
     }
 
-    protected static void collectSegExtLevel1(StringBuilder str, List<Object> content) {
-        for (Object c : content) {
-            if (c instanceof String) {
-                str.append(c);
+    protected Tuv parseTuv(StartElement element) throws Exception {
+        Tuv tuv = new Tuv();
+
+        tuv.changeid = getAttributeValue(element, "changeid");
+        tuv.changedate = getAttributeValue(element, "changedate");
+        tuv.creationid = getAttributeValue(element, "creationid");
+        tuv.creationdate = getAttributeValue(element, "creationdate");
+
+        // find 'lang' or 'xml:lang' attribute
+        for (Iterator<Attribute> it = element.getAttributes(); it.hasNext();) {
+            Attribute a = it.next();
+            if ("lang".equals(a.getName().getLocalPart())) {
+                tuv.lang = a.getValue();
+                break;
             }
         }
-    }
 
-    protected static void collectSegExtLevel2(StringBuilder str, List<Object> content, boolean useSlash) {
-        int tagNumber = 0;
-
-        // map of 'i' attributes to tag numbers
-        Map<String, Integer> pairTags = new TreeMap<String, Integer>();
-
-        for (Object c : content) {
-            if (c instanceof String) {
-                str.append(c);
-            } else {
-                Integer tagEnd = null;
-                List<Object> co = null;
-                if (c instanceof Ph) {
-                    co = ((Ph) c).getContent();
-                } else if (c instanceof Hi) {
-                    co = ((Hi) c).getContent();
-                } else if (c instanceof It) {
-                    co = ((It) c).getContent();
-                } else if (c instanceof Ut) {
-                    co = ((Ut) c).getContent();
-                } else if (c instanceof Bpt) {
-                    String i = ((Bpt) c).getI();
-                    pairTags.put(i, tagNumber);
-                    co = ((Bpt) c).getContent();
-                } else if (c instanceof Ept) {
-                    String i = ((Ept) c).getI();
-                    tagEnd = pairTags.get(i);
-                    co = ((Ept) c).getContent();
-                }
-                if (co == null) {
-                    throw new RuntimeException("Unknown class in TMX content: " + c.getClass());
-                }
-                str.append('<');
-                char tagName = getFirstLetter(co);
-                if (c instanceof Bpt) {
-                    str.append(tagName);
-                    str.append(Integer.toString(tagNumber));
-                    tagNumber++;
-                } else if (c instanceof Ept) {
-                    str.append('/');
-                    str.append(tagName);
-                    if (tagEnd != null) {
-                        str.append(Integer.toString(tagEnd));
+        while (true) {
+            XMLEvent e = xml.nextEvent();
+            switch (e.getEventType()) {
+            case XMLEvent.START_ELEMENT:
+                StartElement eStart = (StartElement) e;
+                if ("seg".equals(eStart.getName().getLocalPart())) {
+                    if (isOmegaT) {
+                        parseSegOmegaT();
+                    } else if (extTmxLevel2) {
+                        parseSegExtLevel2();
                     } else {
-                        str.append(Integer.toString(tagNumber));
-                        tagNumber++;
+                        parseSegExtLevel1();
                     }
-                } else {
-                    str.append(tagName);
-                    str.append(Integer.toString(tagNumber));
-                    tagNumber++;
-                    if (useSlash) {
-                        str.append('/');
-                    }
+                    tuv.seg = segContent.toString();
                 }
-                str.append('>');
+                break;
+            case XMLEvent.END_ELEMENT:
+                EndElement eEnd = (EndElement) e;
+                if ("tuv".equals(eEnd.getName().getLocalPart())) {
+                    return tuv;
+                }
+                break;
             }
         }
     }
 
-    protected static char getFirstLetter(List<Object> content) {
-        for (Object c : content) {
-            char f = 0;
-            if (c instanceof String) {
-                String s = (String) c;
-                for (int i = 0; i < s.length(); i++) {
-                    if (Character.isLetter(s.charAt(i))) {
-                        f = Character.toLowerCase(s.charAt(i));
-                        break;
-                    }
+    protected void parseProp(StartElement element) throws Exception {
+        String propType = element.getAttributeByName(new QName("type")).getValue();
+        propContent.setLength(0);
+
+        while (true) {
+            XMLEvent e = xml.nextEvent();
+            switch (e.getEventType()) {
+            case XMLEvent.END_ELEMENT:
+                EndElement eEnd = (EndElement) e;
+                if ("prop".equals(eEnd.getName().getLocalPart())) {
+                    currentTu.props.put(propType, propContent.toString());
+                    return;
                 }
-            } else {
-                List<Object> co = null;
-                if (c instanceof Ph) {
-                    co = ((Ph) c).getContent();
-                } else if (c instanceof Hi) {
-                    co = ((Hi) c).getContent();
-                } else if (c instanceof It) {
-                    co = ((It) c).getContent();
-                } else if (c instanceof Ut) {
-                    co = ((Ut) c).getContent();
-                } else if (c instanceof Bpt) {
-                    co = ((Bpt) c).getContent();
-                } else if (c instanceof Ept) {
-                    co = ((Ept) c).getContent();
-                }
-                if (co == null) {
-                    throw new RuntimeException("Unknown class in TMX content: " + c.getClass());
-                }
-                f = getFirstLetter(co);
-            }
-            if (f != 0) {
-                return f;
+                break;
+            case XMLEvent.CHARACTERS:
+                Characters c = (Characters) e;
+                propContent.append(c.getData());
+                break;
             }
         }
-        return 'f';
     }
 
     /**
-     * Returns Tuv from Tu for specific language.
+     * OmegaT TMX - just read full text.
+     */
+    protected void parseSegOmegaT() throws Exception {
+        segContent.setLength(0);
+
+        while (true) {
+            XMLEvent e = xml.nextEvent();
+            switch (e.getEventType()) {
+            case XMLEvent.END_ELEMENT:
+                EndElement eEnd = (EndElement) e;
+                if ("seg".equals(eEnd.getName().getLocalPart())) {
+                    return;
+                }
+                break;
+            case XMLEvent.CHARACTERS:
+                Characters c = (Characters) e;
+                segContent.append(c.getData());
+                break;
+            }
+        }
+    }
+
+    /**
+     * External TMX - level 1. Skip text inside inline tags.
+     */
+    protected void parseSegExtLevel1() throws Exception {
+        segContent.setLength(0);
+
+        int inlineLevel = 0;
+
+        while (true) {
+            XMLEvent e = xml.nextEvent();
+            switch (e.getEventType()) {
+            case XMLEvent.START_ELEMENT:
+                inlineLevel++;
+                break;
+            case XMLEvent.END_ELEMENT:
+                inlineLevel--;
+                EndElement eEnd = (EndElement) e;
+                if ("seg".equals(eEnd.getName().getLocalPart())) {
+                    return;
+                }
+                break;
+            case XMLEvent.CHARACTERS:
+                if (inlineLevel == 0) {
+                    Characters c = (Characters) e;
+                    segContent.append(c.getData());
+                }
+                break;
+            }
+        }
+    }
+
+    /**
+     * External TMX - level 2. Replace all tags into shortcuts.
+     */
+    protected void parseSegExtLevel2() throws Exception {
+        segContent.setLength(0);
+        segInlineTag.setLength(0);
+        pairTags.clear();
+
+        int tagNumber = 0;
+        int inlineLevel = 0;
+        String currentI = null;
+
+        while (true) {
+            XMLEvent e = xml.nextEvent();
+            switch (e.getEventType()) {
+            case XMLEvent.START_ELEMENT:
+                inlineLevel++;
+                StartElement eStart = (StartElement) e;
+                segInlineTag.setLength(0);
+                if ("bpt".equals(eStart.getName().getLocalPart())) {
+                    currentI = eStart.getAttributeByName(new QName("i")).getValue();
+                    pairTags.put(currentI, tagNumber);
+                    tagNumber++;
+                } else if ("ept".equals(eStart.getName().getLocalPart())) {
+                    currentI = eStart.getAttributeByName(new QName("i")).getValue();
+                } else {
+                    currentI = null;
+                }
+                break;
+            case XMLEvent.END_ELEMENT:
+                inlineLevel--;
+                EndElement eEnd = (EndElement) e;
+                char tagName = getFirstLetter(segInlineTag);
+                if ("seg".equals(eEnd.getName().getLocalPart())) {
+                    return;
+                } else if ("bpt".equals(eEnd.getName().getLocalPart())) {
+                    segContent.append('<');
+                    segContent.append(tagName);
+                    int pairedTagNumber = pairTags.get(currentI);
+                    segContent.append(Integer.toString(pairedTagNumber));
+                    segContent.append('>');
+                } else if ("ept".equals(eEnd.getName().getLocalPart())) {
+                    segContent.append("</");
+                    segContent.append(tagName);
+                    int pairedTagNumber = pairTags.get(currentI);
+                    segContent.append(Integer.toString(pairedTagNumber));
+                    segContent.append('>');
+                } else {
+                    segContent.append('<');
+                    segContent.append(tagName);
+                    segContent.append(Integer.toString(tagNumber));
+                    if (useSlash) {
+                        segContent.append('/');
+                    }
+                    segContent.append('>');
+                }
+                break;
+            case XMLEvent.CHARACTERS:
+                Characters c = (Characters) e;
+                if (inlineLevel == 0) {
+                    segContent.append(c.getData());
+                } else {
+                    segInlineTag.append(c.getData());
+                }
+                break;
+            }
+        }
+    }
+
+    protected static char getFirstLetter(StringBuilder s) {
+        char f = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            if (Character.isLetter(s.charAt(i))) {
+                f = Character.toLowerCase(s.charAt(i));
+                break;
+            }
+        }
+
+        return f != 0 ? f : 'f';
+    }
+
+    /**
+     * Fill ParsedTuv from list of Tuv for specific language.
      * 
      * Language choosed by:<br>
      * - with the same language+country<br>
      * - if not exist, then with the same language but without country<br>
      * - if not exist, then with the same language with whatever country<br>
      */
-    private static Tuv getTuv(Tu tu, Language lang) {
+    private boolean fillTuv(ParsedTuv parsedTuv, Language lang) {
         String langLanguage = lang.getLanguageCode();
         String langCountry = lang.getCountryCode();
         Tuv tuvLC = null; // Tuv with the same language+country
         Tuv tuvL = null; // Tuv with the same language only, without country
         Tuv tuvLW = null; // Tuv with the same language+whatever country
-        for (int i = 0; i < tu.getTuv().size(); i++) {
-            Tuv tuv = tu.getTuv().get(i);
-            String tuvLang = tuv.getXmlLang();
-            if (tuvLang == null) {
-                tuvLang = tuv.getLang();
-            }
+        for (int i = 0; i < currentTuTuvs.size(); i++) {
+            Tuv tuv = currentTuTuvs.get(i);
+            String tuvLang = tuv.lang;
             if (!langLanguage.regionMatches(true, 0, tuvLang, 0, 2)) {
                 // language not equals - there is no sense to processing
                 continue;
@@ -317,13 +403,20 @@ public class TMXReader2 {
                 tuvLW = tuv;
             }
         }
+        Tuv bestTuv;
         if (tuvLC != null) {
-            return tuvLC;
+            bestTuv = tuvLC;
+        } else if (tuvL != null) {
+            bestTuv = tuvL;
+        } else {
+            bestTuv = tuvLW;
         }
-        if (tuvL != null) {
-            return tuvL;
+        if (bestTuv != null) {
+            parsedTuv.fillFrom(bestTuv);
+            return true;
+        } else {
+            return false;
         }
-        return tuvLW;
     }
 
     public static long parseISO8601date(String str) {
@@ -346,12 +439,57 @@ public class TMXReader2 {
         return 0;
     }
 
+    private static String getAttributeValue(StartElement e, String attrName) {
+        Attribute a = e.getAttributeByName(new QName(attrName));
+        return a != null ? a.getValue() : null;
+    }
+
     /**
      * Callback for receive data from TMX.
      */
     public interface LoadCallback {
-        void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
-                boolean isParagraphSegtype);
+        void onEntry(ParsedTu tu, ParsedTuv tuvSource, ParsedTuv tuvTarget, boolean isParagraphSegtype);
+    }
+
+    public static class ParsedTu {
+        public String changeid;
+        public long changedate;
+        public String creationid;
+        public long creationdate;
+        public Map<String, String> props = new TreeMap<String, String>();
+
+        void clear() {
+            changeid = null;
+            changedate = 0;
+            creationid = null;
+            creationdate = 0;
+            props.clear();
+        }
+    }
+
+    public static class ParsedTuv {
+        public String changeid;
+        public long changedate;
+        public String creationid;
+        public long creationdate;
+        public String text;
+
+        void fillFrom(Tuv tuv) {
+            changeid = tuv.changeid;
+            changedate = parseISO8601date(tuv.changedate);
+            creationid = tuv.creationid;
+            creationdate = parseISO8601date(tuv.creationdate);
+            text = tuv.seg.toString();
+        }
+    }
+
+    public static class Tuv {
+        String lang;
+        String changeid;
+        String changedate;
+        String creationid;
+        String creationdate;
+        String seg;
     }
 
     public static final EntityResolver TMX_DTD_RESOLVER = new EntityResolver() {

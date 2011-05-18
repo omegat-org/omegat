@@ -23,10 +23,6 @@
  **************************************************************************/
 package org.omegat.core.data;
 
-import gen.core.tmx14.Prop;
-import gen.core.tmx14.Tu;
-import gen.core.tmx14.Tuv;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -97,9 +93,16 @@ public class ProjectTMX {
             return;
         }
 
-        TMXReader2.readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(), props
-                .isSentenceSegmentingEnabled(), false, false, new Loader(callback, props.getSourceLanguage(),
-                props.getTargetLanguage(), props.isSentenceSegmentingEnabled()));
+        new TMXReader2().readTMX(
+                file,
+                props.getSourceLanguage(),
+                props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(),
+                false,
+                true,
+                false,
+                new Loader(callback, props.getSourceLanguage(), props.getTargetLanguage(), props
+                        .isSentenceSegmentingEnabled()));
     }
 
     public void save(ProjectProperties props, File outFile, final boolean forceValidTMX,
@@ -124,12 +127,12 @@ public class ProjectTMX {
                 }
             }
 
-            wr.writeComment("Default translations");
+            wr.writeComment(" Default translations ");
             for (Map.Entry<String, TMXEntry> en : new TreeMap<String, TMXEntry>(defaults).entrySet()) {
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), null);
             }
 
-            wr.writeComment("Alternative translations");
+            wr.writeComment(" Alternative translations ");
             for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<EntryKey, TMXEntry>(alternatives).entrySet()) {
                 EntryKey k = en.getKey();
                 wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), new String[] {
@@ -205,29 +208,28 @@ public class ProjectTMX {
             this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
         }
 
-        public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
-                boolean isParagraphSegtype) {
-            String changer = StringUtil.nvl(tuvTarget.getChangeid(), tuvTarget.getCreationid(),
-                    tu.getChangeid(), tu.getCreationid());
-            String dt = StringUtil.nvl(tuvTarget.getChangedate(), tuvTarget.getCreationdate(),
-                    tu.getChangedate(), tu.getCreationdate());
+        public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+            String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
+                    tu.creationid);
+            long dt = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
+                    tu.creationdate);
 
             List<String> sources = new ArrayList<String>();
             List<String> targets = new ArrayList<String>();
-            Segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang, sourceText,
-                    targetLang, targetText, sources, targets);
+            Segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
+                    tuvSource.text, targetLang, tuvTarget.text, sources, targets);
 
             synchronized (this) {
                 for (int i = 0; i < sources.size(); i++) {
-                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer,
-                            TMXReader2.parseISO8601date(dt));
-                    EntryKey key = createKeyByProps(sourceText, tu);
+                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt);
+                    EntryKey key = createKeyByProps(tuvSource.text, tu.props);
                     if (key.file == null) {
                         // default translation
-                        if (translationDefault != null && callback.existSourceInProject(sourceText)) {
-                            translationDefault.put(sourceText, te);
+                        if (translationDefault != null && callback.existSourceInProject(tuvSource.text)) {
+                            translationDefault.put(tuvSource.text, te);
                         } else {
-                            orphanedDefault.put(sourceText, te);
+                            orphanedDefault.put(tuvSource.text, te);
                         }
                     } else {
                         // multiple translation
@@ -242,29 +244,9 @@ public class ProjectTMX {
         }
     };
 
-    private EntryKey createKeyByProps(String src, Tu tu) {
-        String file = null;
-        String id = null;
-        String prev = null;
-        String next = null;
-        String path = null;
-        for (int i = 0; i < tu.getNoteOrProp().size(); i++) {
-            if (tu.getNoteOrProp().get(i) instanceof Prop) {
-                Prop p = (Prop) tu.getNoteOrProp().get(i);
-                if (PROP_FILE.equals(p.getType())) {
-                    file = p.getContent();
-                } else if (PROP_ID.equals(p.getType())) {
-                    id = p.getContent();
-                } else if (PROP_PREV.equals(p.getType())) {
-                    prev = p.getContent();
-                } else if (PROP_NEXT.equals(p.getType())) {
-                    next = p.getContent();
-                } else if (PROP_PATH.equals(p.getType())) {
-                    path = p.getContent();
-                }
-            }
-        }
-        return new EntryKey(file, src, id, prev, next, path);
+    private EntryKey createKeyByProps(String src, Map<String, String> props) {
+        return new EntryKey(props.get(PROP_FILE), src, props.get(PROP_ID), props.get(PROP_PREV),
+                props.get(PROP_NEXT), props.get(PROP_PATH));
     }
 
     public interface CheckOrphanedCallback {

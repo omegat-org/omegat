@@ -164,11 +164,11 @@ public class TMXWriterTest extends TestFilterBase {
 
     private void load(final List<String> sources, boolean extLevel2, boolean useSlash) throws Exception {
         sources.clear();
-        TMXReader2.readTMX(outFile, new Language("en-US"), new Language("be-BY"), false, extLevel2, useSlash,
-                new TMXReader2.LoadCallback() {
-                    public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText,
-                            String targetText, boolean isParagraphSegtype) {
-                        sources.add(sourceText);
+        new TMXReader2().readTMX(outFile, new Language("en-US"), new Language("be-BY"), false, false,
+                extLevel2, useSlash, new TMXReader2.LoadCallback() {
+                    public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                        sources.add(tuvSource.text);
                     }
                 });
     }

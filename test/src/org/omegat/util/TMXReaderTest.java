@@ -23,9 +23,6 @@
  **************************************************************************/
 package org.omegat.util;
 
-import gen.core.tmx14.Tu;
-import gen.core.tmx14.Tuv;
-
 import java.io.File;
 import java.util.Map;
 import java.util.TreeMap;
@@ -41,13 +38,13 @@ public class TMXReaderTest extends TestCore {
 
     public void testLeveL1() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
-        TMXReader2.readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"), new Language(
-                "be"), false, false, false, new TMXReader2.LoadCallback() {
-            public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
-                    boolean isParagraphSegtype) {
-                tr.put(sourceText, targetText);
-            }
-        });
+        new TMXReader2().readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"),
+                new Language("be"), false, false, false, false, new TMXReader2.LoadCallback() {
+                    public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                        tr.put(tuvSource.text, tuvTarget.text);
+                    }
+                });
         assertEquals("betuv", tr.get("entuv"));
         assertEquals("tr1", tr.get("lang1"));
         assertEquals("tr2", tr.get("lang2"));
@@ -56,13 +53,13 @@ public class TMXReaderTest extends TestCore {
 
     public void testLeveL2() throws Exception {
         final Map<String, String> tr = new TreeMap<String, String>();
-        TMXReader2.readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"), new Language(
-                "be"), false, false, false, new TMXReader2.LoadCallback() {
-            public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
-                    boolean isParagraphSegtype) {
-                tr.put(sourceText, targetText);
-            }
-        });
+        new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"),
+                new Language("be"), false, false, false, false, new TMXReader2.LoadCallback() {
+                    public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                            TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                        tr.put(tuvSource.text, tuvTarget.text);
+                    }
+                });
         assertEquals("betuv", tr.get("entuv"));
     }
 }

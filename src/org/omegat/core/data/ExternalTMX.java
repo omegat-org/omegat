@@ -23,9 +23,6 @@
  **************************************************************************/
 package org.omegat.core.data;
 
-import gen.core.tmx14.Tu;
-import gen.core.tmx14.Tuv;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,29 +53,28 @@ public class ExternalTMX {
         entries = new ArrayList<TMXEntry>();
 
         TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
-            public void onEntry(Tu tu, Tuv tuvSource, Tuv tuvTarget, String sourceText, String targetText,
-                    boolean isParagraphSegtype) {
-                String changer = StringUtil.nvl(tuvTarget.getChangeid(), tuvTarget.getCreationid(),
-                        tu.getChangeid(), tu.getCreationid());
-                String dt = StringUtil.nvl(tuvTarget.getChangedate(), tuvTarget.getCreationdate(),
-                        tu.getChangedate(), tu.getCreationdate());
+            public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                    TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+                String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
+                        tu.creationid);
+                long dt = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
+                        tu.creationdate);
 
                 List<String> sources = new ArrayList<String>();
                 List<String> targets = new ArrayList<String>();
                 Segmenter.segmentEntries(props.isSentenceSegmentingEnabled() && isParagraphSegtype,
-                        props.getSourceLanguage(), sourceText, props.getTargetLanguage(), targetText,
+                        props.getSourceLanguage(), tuvSource.text, props.getTargetLanguage(), tuvTarget.text,
                         sources, targets);
 
                 for (int i = 0; i < sources.size(); i++) {
-                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer,
-                            TMXReader2.parseISO8601date(dt));
+                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt);
                     entries.add(te);
                 }
             }
         };
 
-        TMXReader2.readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(),
+        new TMXReader2().readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(),
+                props.isSentenceSegmentingEnabled(), false,
                 Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2),
                 Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH), loader);
     }

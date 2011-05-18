@@ -93,6 +93,18 @@ public class StringUtil {
     }
 
     /**
+     * Returns first non-zero object from list, or zero if all values is null.
+     */
+    public static long nvlLong(long... values) {
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] != 0) {
+                return values[i];
+            }
+        }
+        return 0;
+    }
+
+    /**
      * Compare two values, which could be null.
      */
     public static <T> boolean equalsWithNulls(T v1, T v2) {
@@ -119,7 +131,7 @@ public class StringUtil {
             return v1.compareTo(v2);
         }
     }
-    
+
     /**
      * Extracts first N chars from string.
      */

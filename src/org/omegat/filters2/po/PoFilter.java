@@ -7,6 +7,7 @@
                2006 Thomas Huriaux
                2008 Martin Fleurke
                2009 Alex Buloichik
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,10 +28,12 @@
 
 package org.omegat.filters2.po;
 
+import java.awt.Dialog;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,6 +42,7 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.OStrings;
+import org.omegat.util.Log;
 
 /**
  * Filter to support po files (in various encodings).
@@ -52,8 +56,16 @@ import org.omegat.util.OStrings;
  * @author Thomas Huriaux
  * @author Martin Fleurke
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class PoFilter extends AbstractFilter {
+
+    public static final String OPTION_ALLOW_BLANK = "disallowBlank";
+
+    /**
+     * If true, non-translated segments will contain the source text in ms
+     */
+    public static boolean allowBlank = false;
 
     protected static Pattern COMMENT_FUZZY = Pattern.compile("#, fuzzy");
     protected static Pattern COMMENT_FUZZY_OTHER = Pattern.compile("#,.* fuzzy.*");
@@ -89,12 +101,22 @@ public class PoFilter extends AbstractFilter {
         return true;
     }
 
+    @Override
     public String getFuzzyMark() {
         return "PO-fuzzy";
     }
 
+    @Override
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
+
+        String disallowBlankStr = processOptions.get(OPTION_ALLOW_BLANK);
+        if ((disallowBlankStr == null) || (disallowBlankStr.equalsIgnoreCase("true"))) {
+            allowBlank = true;
+        } else {
+            allowBlank = false;
+        }
+
         BufferedReader reader = createReader(inFile, fc.getInEncoding());
         try {
             BufferedWriter writer;
@@ -230,7 +252,7 @@ public class PoFilter extends AbstractFilter {
             if ((m = MSG_OTHER.matcher(s)).matches()) {
                 String text = m.group(1);
                 if (currentMode == null) {
-                    throw new IOException("Invalid file format");
+                    throw new IOException(OStrings.getString("POFILTER_INVALID_FORMAT"));
                 }
                 switch (currentMode) {
                 case MSGID:
@@ -298,7 +320,8 @@ public class PoFilter extends AbstractFilter {
             } else {
                 // header
                 if (out != null) {
-                    out.write("msgstr " + getTranslation(targets[0]) + "\n");
+                    // Header is always written
+                    out.write("msgstr " + getTranslation(targets[0], false) + "\n");
                 } else {
                     alignHeader(targets[0].toString());
                 }
@@ -309,15 +332,15 @@ public class PoFilter extends AbstractFilter {
             if (sources[1].length() == 0) {
                 // non-plurals
                 if (out != null) {
-                    out.write("msgstr " + getTranslation(sources[0]) + "\n");
+                    out.write("msgstr " + getTranslation(sources[0], allowBlank) + "\n");
                 } else {
                     align(0);
                 }
             } else {
                 // plurals
                 if (out != null) {
-                    out.write("msgstr[0] " + getTranslation(sources[0]) + "\n");
-                    out.write("msgstr[1] " + getTranslation(sources[1]) + "\n");
+                    out.write("msgstr[0] " + getTranslation(sources[0], allowBlank) + "\n");
+                    out.write("msgstr[1] " + getTranslation(sources[1], allowBlank) + "\n");
                 } else {
                     align(0);
                     align(1);
@@ -350,25 +373,27 @@ public class PoFilter extends AbstractFilter {
      * (except for at newline characters), but that was already not done without nowrap.] [ 1869069 ] Escape
      * support for PO
      * 
-     * @param entry
-     *            The entire source text, without it's surrounding double quotes, but otherwise
-     *            not-interpreted
-     * @param nowrap
-     *            gives indication if the translation should not be wrapped over multiple lines and all lines
-     *            be left-aligned.
+     * @param en
+     *            The entire source text
+     * @param allowNull
+     *            Allow to output a blank translation in msgstr
      * @return The translated entry, within double quotes on each line (thus ready to be printed to target
      *         file immediately)
      **/
-    private String getTranslation(StringBuilder en) {
+    private String getTranslation(StringBuilder en, boolean allowNull) {
         String entry = unescape(en.toString());
 
         // Do real translation
         String translation = entryTranslateCallback.getTranslation(null, entry, path);
 
+        if (translation == null && !allowNull) { // We write the source in translation
+            translation = entry;
+        }
+
         if (translation != null) {
             return "\"" + escape(translation) + "\"";
         } else {
-            return "\"" + escape(entry) + "\"";
+            return "\"\"";
         }
     }
 
@@ -437,5 +462,31 @@ public class PoFilter extends AbstractFilter {
         translation = translation.replace("\t", "\\t");
 
         return translation;
+    }
+
+    @Override
+    public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
+        try {
+            PoOptionsDialog dialog = new PoOptionsDialog(parent, config);
+            dialog.setVisible(true);
+            if (PoOptionsDialog.RET_OK == dialog.getReturnStatus())
+                return dialog.getOptions();
+            else
+                return null;
+        } catch (Exception e) {
+            Log.log(OStrings.getString("POFILTER_EXCEPTION"));
+            Log.log(e);
+            return null;
+        }
+    }
+
+    /**
+     * Returns true to indicate that Text filter has options.
+     * 
+     * @return True, because the PO filter has options.
+     */
+    @Override
+    public boolean hasOptions() {
+        return true;
     }
 }

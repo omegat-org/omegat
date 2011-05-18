@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0
 ----------------------------------------------------------------------
-   3 Enhancements
+   2 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -24,11 +24,16 @@ reload the project.
 
  OmegaT 2.3.0
  ----------------------------------------------------------------------
-   2 Enhancements
+   4 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 vs. 2.2.3 update 4
+
+  Implemented requests:
+
+  - Allow blank translations in PO files
+  http://sourceforge.net/support/tracker.php?aid=2974663
 
   Other enhancements:
 

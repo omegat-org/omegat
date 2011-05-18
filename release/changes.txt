@@ -24,7 +24,7 @@ reload the project.
 
  OmegaT 2.3.0
  ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    2 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -46,6 +46,8 @@ preserving spaces in Excel tags), the option is on by default.
 with Windows 64-bit
 
   - New Iceni Infix file filter
+
+  - Partial support for StarDict dictionaries with sametypesequence=h
 
   Bug fixes:
 

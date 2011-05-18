@@ -71,7 +71,10 @@ public class StarDict implements IDictionary {
             throw new Exception("Invalid version of dictionary: " + version);
         }
         contentType = header.get("sametypesequence");
-        if (!"g".equals(contentType) && !"m".equals(contentType) && !"x".equals(contentType)) {
+        if (!"g".equals(contentType) && 
+            !"m".equals(contentType) && 
+            !"x".equals(contentType) &&
+            !"h".equals(contentType)) {
             throw new Exception("Invalid type of dictionary: " + contentType);
         }
     }

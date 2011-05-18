@@ -135,9 +135,8 @@ public class TMXReader2 {
     }
 
     protected void parseHeader(StartElement element) {
-        isParagraphSegtype = SEG_PARAGRAPH
-                .equals(element.getAttributeByName(new QName("segtype")).getValue());
-        isOmegaT = CT_OMEGAT.equals(element.getAttributeByName(new QName("creationtool")).getValue());
+        isParagraphSegtype = SEG_PARAGRAPH.equals(getAttributeValue(element, "segtype"));
+        isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
     }
 
     protected void parseTu(StartElement element) throws Exception {
@@ -214,7 +213,7 @@ public class TMXReader2 {
     }
 
     protected void parseProp(StartElement element) throws Exception {
-        String propType = element.getAttributeByName(new QName("type")).getValue();
+        String propType = getAttributeValue(element, "type");
         propContent.setLength(0);
 
         while (true) {
@@ -300,6 +299,7 @@ public class TMXReader2 {
         int tagNumber = 0;
         int inlineLevel = 0;
         String currentI = null;
+        String currentPos = null;
 
         while (true) {
             XMLEvent e = xml.nextEvent();
@@ -309,11 +309,13 @@ public class TMXReader2 {
                 StartElement eStart = (StartElement) e;
                 segInlineTag.setLength(0);
                 if ("bpt".equals(eStart.getName().getLocalPart())) {
-                    currentI = eStart.getAttributeByName(new QName("i")).getValue();
+                    currentI = getAttributeValue(eStart, "i");
                     pairTags.put(currentI, tagNumber);
                     tagNumber++;
                 } else if ("ept".equals(eStart.getName().getLocalPart())) {
-                    currentI = eStart.getAttributeByName(new QName("i")).getValue();
+                    currentI = getAttributeValue(eStart, "i");
+                } else if ("it".equals(eStart.getName().getLocalPart())) {
+                    currentPos = getAttributeValue(eStart, "pos");
                 } else {
                     currentI = null;
                 }
@@ -321,30 +323,40 @@ public class TMXReader2 {
             case XMLEvent.END_ELEMENT:
                 inlineLevel--;
                 EndElement eEnd = (EndElement) e;
-                char tagName = getFirstLetter(segInlineTag);
                 if ("seg".equals(eEnd.getName().getLocalPart())) {
                     return;
-                } else if ("bpt".equals(eEnd.getName().getLocalPart())) {
-                    segContent.append('<');
-                    segContent.append(tagName);
-                    int pairedTagNumber = pairTags.get(currentI);
-                    segContent.append(Integer.toString(pairedTagNumber));
-                    segContent.append('>');
-                } else if ("ept".equals(eEnd.getName().getLocalPart())) {
-                    segContent.append("</");
-                    segContent.append(tagName);
-                    int pairedTagNumber = pairTags.get(currentI);
-                    segContent.append(Integer.toString(pairedTagNumber));
-                    segContent.append('>');
-                } else {
-                    segContent.append('<');
-                    segContent.append(tagName);
-                    segContent.append(Integer.toString(tagNumber));
-                    if (useSlash) {
-                        segContent.append('/');
-                    }
-                    segContent.append('>');
                 }
+                boolean slashBefore = false;
+                boolean slashAfter = false;
+                char tagName = getFirstLetter(segInlineTag);
+                int tagN;
+                if ("bpt".equals(eEnd.getName().getLocalPart())) {
+                    tagN = pairTags.get(currentI);
+                } else if ("ept".equals(eEnd.getName().getLocalPart())) {
+                    slashBefore = true;
+                    tagN = pairTags.get(currentI);
+                } else if ("it".equals(eEnd.getName().getLocalPart())) {
+                    tagN = tagNumber;
+                    if ("end".equals(currentPos)) {
+                        slashBefore = true;
+                    }
+                } else {
+                    tagN = tagNumber;
+                    if (useSlash) {
+                        slashAfter = true;
+                    }
+                }
+
+                segContent.append('<');
+                if (slashBefore) {
+                    segContent.append('/');
+                }
+                segContent.append(tagName);
+                segContent.append(Integer.toString(tagN));
+                if (slashAfter) {
+                    segContent.append('/');
+                }
+                segContent.append('>');
                 break;
             case XMLEvent.CHARACTERS:
                 Characters c = (Characters) e;

@@ -132,7 +132,7 @@ public class MozillaDTDFilter extends AbstractFilter {
             // replace translation
             String trans = entryTranslateCallback.getTranslation(null, text, null);
             out.write(block.substring(0, m.start(2)));
-            out.write(trans);
+            out.write(trans != null ? trans : text);
             out.write(block.substring(m.end(2)));
         } else if (entryAlignCallback != null && id != null) {
             align.put(id, text);

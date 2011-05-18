@@ -137,6 +137,9 @@ public class RcFilter extends AbstractFilter {
                 } else if (entryTranslateCallback != null) {
                     // replace translation
                     String trans = entryTranslateCallback.getTranslation(null, loc, null);
+                    if (trans == null) {
+                        trans = loc;
+                    }
                     trans = trans.replace("\"", "\"\"");
                     s = s.substring(0, b + 1) + trans + s.substring(e);
                 } else if (entryAlignCallback != null && id != null) {

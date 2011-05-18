@@ -368,7 +368,7 @@ public class PoFilter extends AbstractFilter {
         if (translation != null) {
             return "\"" + escape(translation) + "\"";
         } else {
-            return "\"\"";
+            return "\"" + escape(entry) + "\"";
         }
     }
 

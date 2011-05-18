@@ -961,7 +961,7 @@ public class RealProject implements IProject {
             if (tr == null) {
                 tr = projectTMX.getDefaultTranslation(ek.sourceText);
             }
-            return tr != null ? tr.translation : segmentSource;
+            return tr != null ? tr.translation : null;
         }
     };
 

@@ -53,7 +53,7 @@ public interface ITranslateCallback {
      *            source entry text
      * @param path
      *            path of segment
-     * @return translation or source if translation not exist
+     * @return translation or null if translation not exist
      */
     String getTranslation(String id, String source, String path);
 }

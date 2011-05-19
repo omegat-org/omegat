@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Wildrich Fourie, Alex Buloichik, Didier Briel
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -90,12 +91,17 @@ public class TransTips {
             return;
         }
 
-        // Search for the word.
-        // Since we're comparing with lower case,
-        // the source text has to be in lower case too.
-        String content = sourceText.toLowerCase();
+        String content = sourceText;
 
-        word = word.toLowerCase();
+        if (!word.equals(word.toUpperCase())) { // The glossary word is not in full uppercase
+            // We're comparing with lower case,
+            // and the source text has to be in lower case too.
+            content = sourceText.toLowerCase();
+            word = word.toLowerCase();
+        } // Otherwise, if the glossary word is in full uppercase,
+          // we only apply transtips to source words that are in full uppercase too
+
+
         int lastIndex = 0;
         int wordSize = word.length();
 

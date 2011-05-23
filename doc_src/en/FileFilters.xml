@@ -77,6 +77,19 @@
       </listitem>
     </itemizedlist>
 
+    <para><emphasis role="bold">PO files</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Allow blank translations in the target file:</emphasis> 
+        If on, when a PO segment (which may be a whole paragraph) is not 
+        translated, the translation will be empty in the target file. 
+        Technically, <code>msgstr</code> will be empty. As it is the standard 
+        behavior for PO files, it is on by default. If the option is off, 
+        the source text will be copied to the target segment.</para>
+      </listitem>
+    </itemizedlist>
+
     <para><emphasis role="bold">HTML files and HTML and XHTML
     Files</emphasis></para>
 

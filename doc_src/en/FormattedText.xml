@@ -228,7 +228,7 @@
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/TagValidation.png" width="40%" />
+          <imagedata fileref="images/TagValidation.png" width="90%" />
         </imageobject>
       </mediaobject>
     </figure>

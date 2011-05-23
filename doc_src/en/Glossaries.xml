@@ -72,7 +72,7 @@
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/MultiTerm_Glossary.png" width="40%" />
+          <imagedata fileref="images/MultiTerm_Glossary.png" width="80%" />
         </imageobject>
       </mediaobject>
     </figure>

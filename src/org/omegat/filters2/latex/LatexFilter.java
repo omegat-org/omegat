@@ -7,6 +7,7 @@
                2006 Thomas Huriaux
                2008 Martin Fleurke
                2009 Arno Peters
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,6 +50,7 @@ import org.omegat.util.OStrings;
  * @author Thomas Huriaux
  * @author Martin Fleurke
  * @author Arno Peters
+ * @author Didier Briel
  */
 public class LatexFilter extends AbstractFilter {
 
@@ -131,6 +133,7 @@ public class LatexFilter extends AbstractFilter {
     private void processLatexFile(BufferedReader in, Writer out) throws IOException {
         StringBuffer par = new StringBuffer();
         String s;
+        StringBuffer comment = new StringBuffer();
 
         LinkedList<String> commands = new LinkedList<String>();
 
@@ -187,7 +190,6 @@ public class LatexFilter extends AbstractFilter {
                     }
                 } else if (cat == 14) {
                     /* parse comment */
-                    StringBuffer comment = new StringBuffer();
                     comment.append(cidx);
                     idx++;
                     while (idx < c.length) {
@@ -195,8 +197,6 @@ public class LatexFilter extends AbstractFilter {
                         comment.append(commentc);
                         idx++;
                     }
-                    // state = "N";
-                    // out.write("\n");
                 } else {
                     state = "M";
                     par.append(cidx);
@@ -208,11 +208,18 @@ public class LatexFilter extends AbstractFilter {
             /* at the end of the line */
             if (state.equals("N")) {
                 /* \par */
-                out.write(processParagraph(commands, par.toString()));
-                out.write("\n\n");
-                par.setLength(0);
+                if (par.length() > 0) {
+                    out.write(processParagraph(commands, par.toString()));
+                    out.write("\n\n");
+                    par.setLength(0);
+                }
                 // System.out.println(commands);
                 commands.clear();
+                if (comment.length() > 0) { // If there is a comment, write it
+                     out.write(comment.toString());
+                     out.write("\n");
+                     comment.setLength(0);
+                }
             } else if (state.equals("M")) {
                 par.append(" ");
             }

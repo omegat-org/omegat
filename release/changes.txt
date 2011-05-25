@@ -22,10 +22,11 @@ reload the project.
 
   - Dutch localisation updated to 2.5 (UI)
 
+----------------------------------------------------------------------
  OmegaT 2.3.0
  ----------------------------------------------------------------------
    6 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 vs. 2.2.3 update 4
@@ -59,6 +60,9 @@ with Windows 64-bit
 
   - Wrong TransTip when target term contains comma
   http://sourceforge.net/support/tracker.php?aid=2970681
+
+  - LaTeX filter: comments are removed from target documents
+  http://sourceforge.net/support/tracker.php?aid=3297471
 
   Localisation updates:
 

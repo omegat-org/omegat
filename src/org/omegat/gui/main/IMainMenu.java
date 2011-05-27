@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,9 +31,12 @@ import javax.swing.JMenu;
  * Main menu interface.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public interface IMainMenu {
     JMenu getMachineTranslationMenu();
 
     JMenu getOptionsMenu();
+
+    JMenu getToolsMenu();
 }

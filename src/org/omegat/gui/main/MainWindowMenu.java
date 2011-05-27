@@ -9,6 +9,7 @@
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -442,6 +443,10 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
 
     public JMenu getOptionsMenu() {
         return optionsMenu;
+    }
+
+    public JMenu getToolsMenu() {
+        return toolsMenu;
     }
 
     JMenuItem cycleSwitchCaseMenuItem;

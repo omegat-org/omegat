@@ -53,6 +53,8 @@ with Windows 64-bit
 
   - Partial support for StarDict dictionaries with sametypesequence=h
 
+  - New Flash XML export file filter
+
   Bug fixes:
 
   - PO filter mangles \\r strings

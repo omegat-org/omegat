@@ -279,6 +279,10 @@
               <para>Iceni Infix (*.xml)</para>
             </listitem>
 
+            <listitem>
+              <para>Flash XML export (*.xml)</para>
+            </listitem>
+
           </itemizedlist>
         </listitem>
       </itemizedlist>

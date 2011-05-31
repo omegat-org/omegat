@@ -69,6 +69,7 @@ OmegaT prend en charge directement les formats de fichier suivants :
   - DokuWiki
   - Wix  
   - Infix
+  - Export XML Flash
 
 Il est également possible de personnaliser OmegaT pour accepter d'autres formats.
 

@@ -191,6 +191,9 @@
           <listitem>
             <para>Iceni Infix (*.xml)</para>
           </listitem>
+          <listitem>
+            <para>Flash XML export (*.xml)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>Other formatted text file types may also be handled by OmegaT by

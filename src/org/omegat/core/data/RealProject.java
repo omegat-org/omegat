@@ -878,8 +878,30 @@ public class RealProject implements IProject {
         return Collections.unmodifiableList(projectFilesList);
     }
 
+    /**
+     * This method converts directory separators into unix-style. It required to have the same filenames in
+     * the alternative translation in Windows and Unix boxes.
+     * 
+     * Also it can use --alternate-filename-from and --alternate-filename-to command line parameters for
+     * change filename in entry key. It allows to have many versions of one file in one project.
+     * 
+     * @param filename
+     *            filesystem's filename
+     * @return normalized filename
+     */
+    protected String patchFileNameForEntryKey(String filename) {
+        String f = Core.getParams().get("alternate-filename-from");
+        String t = Core.getParams().get("alternate-filename-to");
+        String fn = filename.replace('\\', '/');
+        if (f != null && t != null) {
+            fn = fn.replaceAll(f, t);
+        }
+        return fn;
+    }
+
     protected class LoadFilesCallback extends ParseEntry {
         private FileInfo fileInfo;
+        private String entryKeyFilename;
 
         private final Set<String> existSource;
         private final Set<EntryKey> existKeys;
@@ -896,6 +918,7 @@ public class RealProject implements IProject {
             fileInfo = fi;
             fileTMXentries = new ArrayList<TMXEntry>();
             super.setCurrentFile(fi);
+            entryKeyFilename = patchFileNameForEntryKey(fileInfo.filePath);
         }
 
         public void fileFinished() {
@@ -920,7 +943,7 @@ public class RealProject implements IProject {
                 return;
             }
 
-            EntryKey ek = new EntryKey(fileInfo.filePath, segmentSource, id, prevSegment, nextSegment, path);
+            EntryKey ek = new EntryKey(entryKeyFilename, segmentSource, id, prevSegment, nextSegment, path);
 
             // if (!StringUtil.isEmpty(segmentTranslation)) {
             // // TODO add to temp map, then put to real
@@ -950,7 +973,7 @@ public class RealProject implements IProject {
         }
 
         protected void fileStarted(String fn) {
-            currentFile = fn;
+            currentFile = patchFileNameForEntryKey(fn);
             super.fileStarted();
         }
 

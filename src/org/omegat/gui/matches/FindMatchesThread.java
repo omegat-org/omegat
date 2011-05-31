@@ -164,7 +164,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         project.iterateByOrphanedMultipleTranslations(new MultipleTranslationsIterator() {
             public void iterate(EntryKey source, TMXEntry trans) {
                 checkEntryChanged();
-                if (source.equals(processedEntry.getSrcText())) {
+                if (source.sourceText.equals(processedEntry.getSrcText())) {
                     // skip original==original entry comparison
                     return;
                 }

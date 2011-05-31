@@ -27,6 +27,7 @@ package org.omegat.gui.common;
 import javax.swing.SwingUtilities;
 
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.util.Log;
 
 /**
  * Base class for search info about current entry in the separate thread.
@@ -97,6 +98,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
             return;
         } catch (Exception ex) {
             error = ex;
+            Log.log(ex);
         }
         if (isEntryChanged()) {
             return;

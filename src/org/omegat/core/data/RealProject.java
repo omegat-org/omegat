@@ -765,7 +765,7 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
-        if (projectTMX.translationDefault != null) {
+        if (projectTMX.translationDefault == null) {
             return;
         }
         Map.Entry<String, TMXEntry>[] entries;

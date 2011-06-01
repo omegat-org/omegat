@@ -136,7 +136,7 @@ public class RcFilter extends AbstractFilter {
                     entryParseCallback.addEntry(blockId + "/" + id, loc, null, false, null, null, this);
                 } else if (entryTranslateCallback != null) {
                     // replace translation
-                    String trans = entryTranslateCallback.getTranslation(null, loc, null);
+                    String trans = entryTranslateCallback.getTranslation(blockId + "/" + id, loc, null);
                     if (trans == null) {
                         trans = loc;
                     }

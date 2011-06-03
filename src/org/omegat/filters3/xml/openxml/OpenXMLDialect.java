@@ -69,6 +69,10 @@ public class OpenXMLDialect extends DefaultXMLDialect {
 
         defineTranslatableTagAttribute("sheet", "name"); // Excel
 
+        if (options.getTranslateWordArt()) {
+            defineTranslatableTagAttribute("v:textpath", "string"); // WordArt
+        }
+
         boolean aggregationEnabled = options.getAggregateTags();
         /*
          * The current OpenXML filter finds too many tags, usually causing what

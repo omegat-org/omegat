@@ -72,6 +72,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         translateSlideLayoutsCB.setSelected(options.getTranslateSlideLayouts());
         translateChartsCB.setSelected(options.getTranslateCharts());
         translateDrawingsCB.setSelected(options.getTranslateDrawings());
+        translateWordArtCB.setSelected(options.getTranslateWordArt());
         aggregateTagsCB.setSelected(options.getAggregateTags());
         preserveSpacesCB.setSelected(options.getSpacePreserving());
 
@@ -133,6 +134,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         translateChartsCB = new javax.swing.JCheckBox();
         translateDiagramsCB = new javax.swing.JCheckBox();
         translateDrawingsCB = new javax.swing.JCheckBox();
+        translateWordArtCB = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         aggregateTagsCB = new javax.swing.JCheckBox();
@@ -299,6 +301,14 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         });
         jPanel1.add(translateDrawingsCB);
 
+        org.openide.awt.Mnemonics.setLocalizedText(translateWordArtCB, OStrings.getString("OpenXML_TRANSLATE_WORDART")); // NOI18N
+        translateWordArtCB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                translateWordArtCBradiosActionPerformed(evt);
+            }
+        });
+        jPanel1.add(translateWordArtCB);
+
         org.openide.awt.Mnemonics.setLocalizedText(jLabel1, "                                                                 ");
         jLabel1.setEnabled(false);
         jPanel1.add(jLabel1);
@@ -333,6 +343,10 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
     private void preserveSpacesCBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_preserveSpacesCBActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_preserveSpacesCBActionPerformed
+
+    private void translateWordArtCBradiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_translateWordArtCBradiosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_translateWordArtCBradiosActionPerformed
 
     private void translateExcelCommentsCBradiosActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_translateExcelCommentsCBradiosActionPerformed
     // TODO add your handling code here:
@@ -381,6 +395,7 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
         options.setTranslateSlideLayouts(translateSlideLayoutsCB.isSelected());
         options.setTranslateCharts(translateChartsCB.isSelected());
         options.setTranslateDrawings(translateDrawingsCB.isSelected());
+        options.setTranslateWordArt(translateWordArtCB.isSelected());
         options.setAggregateTags(aggregateTagsCB.isSelected());
         options.setSpacePreserving(preserveSpacesCB.isSelected());
         doClose(RET_OK);
@@ -449,5 +464,6 @@ public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox translateSlideCommentsCB;
     private javax.swing.JCheckBox translateSlideLayoutsCB;
     private javax.swing.JCheckBox translateSlideMastersCB;
+    private javax.swing.JCheckBox translateWordArtCB;
     // End of variables declaration//GEN-END:variables
 }

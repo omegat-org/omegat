@@ -51,6 +51,7 @@ import org.omegat.filters2.AbstractOptions;
  * <li>[] Charts (Global)
  * <li>[] Diagrams (Global)
  * <li>[] Drawings (Global)
+ * <li>[] WordArt (Global)
  * </ul>
  * Other options:
  * <ul>
@@ -75,6 +76,7 @@ public class OpenXMLOptions extends AbstractOptions {
     private static final String OPTION_TRANSLATE_SLIDE_LAYOUTS = "translateSlideLayouts";
     private static final String OPTION_TRANSLATE_CHARTS = "translateCharts";
     private static final String OPTION_TRANSLATE_DRAWINGS = "translateDrawings";
+    private static final String OPTION_TRANSLATE_WORDART = "translateWordArt";
     private static final String OPTION_AGGREGATE_TAGS = "aggregateTags";
     private static final String OPTION_PRESERVE_SPACES = "preserveSpaces";
 
@@ -276,6 +278,20 @@ public class OpenXMLOptions extends AbstractOptions {
      */
     public void setTranslateDrawings(boolean translateDrawings) {
         setBoolean(OPTION_TRANSLATE_DRAWINGS, translateDrawings);
+    }
+
+    /**
+     * Returns whether Word art should be translated.
+     */
+    public boolean getTranslateWordArt() {
+        return getBoolean(OPTION_TRANSLATE_WORDART, false);
+    }
+
+    /**
+     * Sets whether Word art should be translated.
+     */
+    public void setTranslateWordArt(boolean translateWordArt) {
+        setBoolean(OPTION_TRANSLATE_WORDART, translateWordArt);
     }
 
     /**

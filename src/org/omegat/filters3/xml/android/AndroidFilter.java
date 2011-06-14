@@ -101,6 +101,9 @@ public class AndroidFilter extends XMLFilter {
             r = e;
         } else if (entryTranslateCallback != null) {
             r = entryTranslateCallback.getTranslation(id, e, null);
+            if (r == null) {
+                r = e;
+            }
         }
         return r.replace("'", "\\'");
     }

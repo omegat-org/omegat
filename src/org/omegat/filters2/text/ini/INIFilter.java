@@ -123,6 +123,9 @@ public class INIFilter extends AbstractFilter {
                 entryParseCallback.addEntry(key, value, null, false, null, null, this);
             } else if (entryTranslateCallback != null) {
                 String trans = entryTranslateCallback.getTranslation(key, value, null);
+                if (trans == null) {
+                    trans = value;
+                }
                 outfile.write(trans);
 
                 // outfile.write("\n");

@@ -128,6 +128,9 @@ public class SrtFilter extends AbstractFilter {
             entryParseCallback.addEntry(key, text.toString(), null, false, null, null, this);
         } else {
             String tr = entryTranslateCallback.getTranslation(key, text.toString(), null);
+            if (tr == null) {
+                tr = text.toString();
+            }
             out.write(tr.replace("\n", EOL));
             out.write(EOL);
         }

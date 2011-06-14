@@ -120,7 +120,8 @@ public class ResXFilter extends XMLFilter {
             entryText = entry;
             return entry;
         } else {
-            return entryTranslateCallback.getTranslation(id, entry, null);
+            String trans = entryTranslateCallback.getTranslation(id, entry, null);
+            return trans != null ? trans : entry;
         }
     }
 }

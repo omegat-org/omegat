@@ -178,6 +178,11 @@ public class PoFilter extends AbstractFilter {
 
         String s;
         while ((s = in.readLine()) != null) {
+
+            // We trim trailing spaces, otherwise the regexps could fail, thus making some segments
+            // invisible to OmegaT
+            s = s.trim();
+
             /*
              * Removing the fuzzy markers, as it has no meanings after being processed by omegat
              */

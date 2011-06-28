@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007-2010 Didier Briel
+               2007-2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -62,7 +62,9 @@ public class XLIFFFilter extends XMLFilter {
      * @return Default filter instances
      */
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.xlf", null, null), new Instance("*.sdlxliff", null, null), };
+        return new Instance[] { new Instance("*.xlf", null, null), 
+                                new Instance("*.xliff", null, null),
+                                new Instance("*.sdlxliff", null, null), };
     }
 
     /**

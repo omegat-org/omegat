@@ -5,6 +5,7 @@
  OmegaT - Java based Computer Assisted Translation (CAT) tool
  Copyright (C) 2000-2007 Keith Godfrey and Maxym Mykhalchuk
                2008-2010 Alex Buloichik, Didier Briel  
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -3647,8 +3648,8 @@
     </rule>
     <rule break="yes">
      <!--numbered headers break rule 
-         contributed by Jean-Christophe Helary -->
-     <beforebreak>^\s*[\p{Nd}\.]+\s*</beforebreak>
+         based on an idea by Jean-Christophe Helary -->
+     <beforebreak>^\s*\p{Nd}+[\p{Nd}\.\)\]]+[\s]</beforebreak>
      <afterbreak>\p{Lu}</afterbreak>
     </rule>
     <rule break="yes">

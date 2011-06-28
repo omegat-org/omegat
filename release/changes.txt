@@ -26,7 +26,7 @@ reload the project.
  OmegaT 2.3.0
  ----------------------------------------------------------------------
    9 Enhancements
-   4 Bug fixes
+   5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 vs. 2.2.3 update 4
@@ -43,7 +43,7 @@ reload the project.
   http://sourceforge.net/support/tracker.php?aid=3311077
 
   - Add .xliff extension to the XLIFF filter
-  http://sourceforge.net/support/tracker.php?aid=3311077
+  http://sourceforge.net/support/tracker.php?aid=3339675
 
   Other enhancements:
 
@@ -71,6 +71,9 @@ with Windows 64-bit
 
   - LaTeX filter: comments are removed from target documents
   http://sourceforge.net/support/tracker.php?aid=3297471
+
+  - Overeager numbered header segmentation rule
+  http://sourceforge.net/support/tracker.php?aid=3308282
 
   - PO filter: when a segment had trailing spaces, it was not visible for 
 translation in OmegaT

@@ -3649,7 +3649,7 @@
     <rule break="yes">
      <!--numbered headers break rule 
          based on an idea by Jean-Christophe Helary -->
-     <beforebreak>^\s*\p{Nd}+[\p{Nd}\.\)\]]+[\s]</beforebreak>
+     <beforebreak>^\s*\p{Nd}+[\p{Nd}\.\)\]]+\s+</beforebreak>
      <afterbreak>\p{Lu}</afterbreak>
     </rule>
     <rule break="yes">

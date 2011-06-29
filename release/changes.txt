@@ -26,7 +26,7 @@ reload the project.
  OmegaT 2.3.0
  ----------------------------------------------------------------------
    9 Enhancements
-   5 Bug fixes
+   6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 vs. 2.2.3 update 4
@@ -77,6 +77,8 @@ with Windows 64-bit
 
   - PO filter: when a segment had trailing spaces, it was not visible for 
 translation in OmegaT
+
+  - XLIFF filter: in some cases, some extra tags could appear
 
   Localisation updates:
 

@@ -592,8 +592,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         else {
             org.omegat.filters3.Attributes atts = null;
             if (tag.equals(paragraphTagName.lastElement())) {
-                paragraphTagName.peek();
-                atts = paragraphTagAttributes.peek(); // Restore attributes
+                paragraphTagName.pop();
+                atts = paragraphTagAttributes.pop(); // Restore attributes
             }
             return dialect.validateParagraphTag(tag, atts);
         }
@@ -628,8 +628,8 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
         else {
             org.omegat.filters3.Attributes atts = null;
             if (tag.equals(preformatTagName.lastElement())) {
-                preformatTagName.peek();
-                atts = preformatTagAttributes.peek(); // Restore attributes
+                preformatTagName.pop();
+                atts = preformatTagAttributes.pop(); // Restore attributes
             }
             return dialect.validatePreformatTag(tag, atts);
         }

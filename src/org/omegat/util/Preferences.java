@@ -7,6 +7,7 @@
                2007 Zoltan Bartko
                2008-2009 Didier Briel
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
+               2011 John Moran
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,6 +54,7 @@ import org.omegat.util.xml.XMLStreamReader;
  * @author Didier Briel
  * @author Wildrich Fourie
  * @author Antonio Vilei
+ * @author John Moran
  */
 public class Preferences {
     /** OmegaT-wide Preferences Filename */
@@ -250,6 +252,30 @@ public class Preferences {
         }
         return v;
     }
+    
+	/**
+	 * Returns true if the preference is in OmegaT's preferences
+	 * file.
+	 * <p>
+	 * If the key is not found return false
+	 * 
+	 * @param key
+	 *            key of the key to look up, usually OConsts.PREF_...
+	 * @return true if preferences exists
+	 */
+	public static boolean existsPreference(String key) {
+		boolean exists = false;
+		if (key == null)
+			exists = false;
+		if (!m_loaded)
+			doLoad();
+		Integer i = m_preferenceMap.get(key);
+		if (i != null) {
+			exists = true;
+		}		
+		return exists;
+	}
+    
 
     /**
      * Returns the boolean defaultValue of some preference.
@@ -284,6 +310,19 @@ public class Preferences {
             val = defaultValue;
             setPreference(key, defaultValue);
         }
+        return val;
+    }
+    
+    /**
+     * Returns the value of some preference out of OmegaT's preferences file, if
+     * it exists.
+     * <p>
+     * @param key
+     *            name of the key to look up, usually OConsts.PREF_...
+     * @return preference value as a string
+     */
+    public static String getPreferenceDefaultAllowEmptyString(String key) {
+        String val = getPreference(key);
         return val;
     }
 
@@ -414,12 +453,13 @@ public class Preferences {
 
                 pref = blk.getTagName();
                 blk = lst.get(++i);
-                if (blk.isTag()) {
-                    // parse error - keep trying
-                    continue;
-                }
-                val = blk.getText();
-                if (pref != null && !pref.equals("") && val != null) {
+		if (blk.isClose()) {
+		    //allow empty string as a preference value
+                    val = "";
+		} else {
+                    val = blk.getText();
+		}
+                if (pref != null && val != null) {
                     // valid match - record these
                     m_preferenceMap.put(pref, m_valList.size());
                     m_nameList.add(pref);
@@ -462,8 +502,6 @@ public class Preferences {
         for (int i = 0; i < m_nameList.size(); i++) {
             String name = m_nameList.get(i);
             String val = StaticUtils.makeValidXML(m_valList.get(i));
-            if (val.equals(""))
-                continue; // don't write blank preferences
             out.write("    <" + name + ">");
             out.write(val);
             out.write("</" + name + ">\n");

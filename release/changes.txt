@@ -25,7 +25,7 @@ reload the project.
 ----------------------------------------------------------------------
  OmegaT 2.3.0
  ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    6 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -44,6 +44,9 @@ reload the project.
 
   - Add .xliff extension to the XLIFF filter
   http://sourceforge.net/support/tracker.php?aid=3339675
+
+  - Enable no prefix for fuzzy matches
+  http://sourceforge.net/support/tracker.php?aid=1616157
 
   Other enhancements:
 

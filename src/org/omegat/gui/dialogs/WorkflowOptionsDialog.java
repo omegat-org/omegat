@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel
+               2011 John Moran
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -43,6 +44,7 @@ import org.omegat.util.Preferences;
  * 
  * @author Maxym Mykhalchuk
  * @author Didier Briel
+ * @author John Moran
  */
 public class WorkflowOptionsDialog extends JDialog {
     /** A return status code - returned if Cancel button has been pressed */
@@ -81,8 +83,12 @@ public class WorkflowOptionsDialog extends JDialog {
                         Preferences.BEST_MATCH_MINIMAL_SIMILARITY_DEFAULT)));
         similaritySpinner.setEnabled(insertFuzzyCheckBox.isSelected());
         prefixLabel.setEnabled(insertFuzzyCheckBox.isSelected());
-        prefixText.setText(Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT,
-                OStrings.getString("WF_DEFAULT_PREFIX")));
+        if (!Preferences.existsPreference(Preferences.BEST_MATCH_EXPLANATORY_TEXT)) {
+            prefixText.setText(OStrings.getString("WF_DEFAULT_PREFIX"));
+        } else {
+            prefixText.setText(Preferences.getPreferenceDefaultAllowEmptyString(
+                                         Preferences.BEST_MATCH_EXPLANATORY_TEXT));
+        }
         prefixText.setEnabled(insertFuzzyCheckBox.isSelected());
 
         allowTranslationEqualToSource.setSelected(Preferences

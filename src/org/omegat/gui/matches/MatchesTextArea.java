@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Zoltan Bartko
+               2011 John Moran
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -63,6 +64,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Zoltan Bartko
+ * @author John Moran
  */
 public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements IMatcher {
 
@@ -182,9 +184,17 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements 
             // </HP-experiment>
             NearString thebest = matches.get(0);
             if (thebest.score >= percentage) {
-                String translation = Preferences.getPreferenceDefault(
-                        Preferences.BEST_MATCH_EXPLANATORY_TEXT, OStrings.getString("WF_DEFAULT_PREFIX"))
-                        + thebest.translation;
+            	String translation = null;
+
+		if (Preferences.getPreferenceDefaultAllowEmptyString(
+		        Preferences.BEST_MATCH_EXPLANATORY_TEXT).equals("")) {
+			translation = thebest.translation;
+                } else {
+                    translation = Preferences.getPreferenceDefault(
+			    Preferences.BEST_MATCH_EXPLANATORY_TEXT,
+			    OStrings.getString("WF_DEFAULT_PREFIX"))
+			    + thebest.translation;
+		}
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
                 TMXEntry te = Core.getProject().getTranslation(currentEntry);
                 if (te == null) {

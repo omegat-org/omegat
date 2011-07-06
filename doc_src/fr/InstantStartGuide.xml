@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "file:///C:/docbook-xml-4.5/docbookx.dtd">
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="Ch02.instant.start.guide">
   <title>Tutoriel de prise en main</title>
 
@@ -179,6 +179,15 @@
             <listitem>
               <para>WiX Localization (.wxl)</para>
             </listitem>
+
+            <listitem>
+              <para>Iceni Infix (.xml)</para>
+            </listitem>
+
+            <listitem>
+              <para>Exportation Flash XML (.xml)</para>
+            </listitem>
+
           </itemizedlist>
         </listitem>
       </itemizedlist>
@@ -191,7 +200,7 @@
 
       <para>Une fois le projet et les fichiers à traduire définis, <application>OmegaT</application> ouvre le premier fichier source dans le volet d'édition.</para>
 
-      <para>Le segment actif est surligné en vert et une copie du texte est affichée en dessous, dans la « ligne d'édition ». Les zones extérieures à cette ligne d'édition sont protégées et ne peuvent pas être modifiées. Vous devez remplacer le texte source par votre traduction et taper votre texte avant la balise <literal>&lt;segment 000X&gt;</literal>. OmegaT peut être paramétré pour copier automatiquement le texte source dans le texte cible (voir<emphasis> Options &gt; Ligne d'édition...</emphasis>), une fonction pouvant s'avérer pratique dans les situations où le texte source doit être conservé dans la traduction. Ces opérations remplacent le texte dans la ligne d'édition par la traduction. Appuyez sur la touche <emphasis role="bold">« Entrée »</emphasis> pour passer au segment suivant. Remarques :</para>
+      <para>Le segment actif est surligné en vert et une copie du texte est affichée en dessous, dans la « ligne d'édition ». Les zones extérieures à cette ligne d'édition sont protégées et ne peuvent pas être modifiées. Vous devez remplacer le texte source par votre traduction et taper votre texte avant la balise <literal>&lt;segment 0001&gt;</literal>. OmegaT peut être paramétré pour copier automatiquement le texte source dans le texte cible (voir<emphasis> Options &gt; Ligne d'édition...</emphasis>), une fonction pouvant s'avérer pratique dans les situations où le texte source doit être conservé dans la traduction. Ces opérations remplacent le texte dans la ligne d'édition par la traduction. Appuyez sur la touche <emphasis role="bold">« Entrée »</emphasis> pour passer au segment suivant. Remarques :</para>
 
       <itemizedlist>
         <listitem>
@@ -247,10 +256,10 @@
 
           <listitem>
             <para>Appuyez sur <keycombo> <keycap>Ctrl</keycap> <keycap>R</keycap> </keycombo><indexterm class="singular">
-                <primary>Raccourcis clavier</primary> <secondary>Ctrl+R – Remplacer par la correspondance</secondary>
-              </indexterm><indexterm class="singular">
-                <secondary>Remplacer le texte</secondary>
-              </indexterm> pour remplacer le contenu de la ligne d'édition par la correspondance présélectionnée.</para>
+                    <primary>Raccourcis clavier</primary> <secondary>Ctrl+R – Remplacer par la correspondance</secondary>
+                  </indexterm><indexterm class="singular">
+                    <secondary>Remplacer le texte</secondary>
+                  </indexterm> pour remplacer le contenu de la ligne d'édition par la correspondance présélectionnée.</para>
           </listitem>
         </itemizedlist>
 
@@ -317,7 +326,7 @@
           <primary>Texte balisé</primary> <secondary>Exemple</secondary>
         </indexterm></title>
 
-      <para>Dans cet exemple, les balises sont mises en évidence pour les distinguer clairement du texte – cela ne sera pas le cas dans <application>OmegaT</application>. Les balises HTML (en bleu) sont ignorées par <application>OmegaT</application> parce qu'elles encadrent complètement le segment. Les balises en vert doivent être gérées par <application>OmegaT</application> parce qu'elles se trouvent à l'intérieur du segment. Exemple de segment de fichier HTML :</para>
+      <para>Cet exemple présente les balises mises en évidence pour les distinguer clairement du texte. Cela ne sera pas le cas dans OmegaT. Les balises HTML (en bleu) sont ignorées par <application>OmegaT</application> parce qu'elles encadrent complètement le segment. Les balises en vert doivent être gérées par <application>OmegaT</application> parce qu'elles se trouvent à l'intérieur du segment. Exemple de segment de fichier HTML :</para>
 
       <para><literal>&lt;p&gt;Une autre police d'affichage peut être sélectionnée dans la boîte de dialogue &lt;b&gt;Police d'affichage&lt;/b&gt;. Ouvrez-la via l'entrée de menu &lt;i&gt;Options&lt;/i&gt; → &lt;i&gt;Police...&lt;/i&gt; Le type et la taille de police peuvent être modifiés dans la boîte de dialogue.&lt;/p&gt;</literal></para>
 

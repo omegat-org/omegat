@@ -7,8 +7,8 @@
       <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
-      <link rel="prev" href="Ch01.about.OmegaT.html" title="Chapter&nbsp;1.&nbsp;About OmegaT - introduction">
-      <link rel="next" href="Ch02.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;Installing and running OmegaT">
+      <link rel="prev" href="chapter.about.OmegaT.html" title="Chapter&nbsp;1.&nbsp;About OmegaT - introduction">
+      <link rel="next" href="chapter.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;Installing and running OmegaT">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -17,10 +17,10 @@
                <th colspan="3" align="center">Chapter&nbsp;2.&nbsp;Instant Start Guide</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="Ch01.about.OmegaT.html">Prev</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.about.OmegaT.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="Ch02.installing.and.running.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.installing.and.running.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,29 +29,29 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="Ch02.instant.start.guide"></a>Chapter&nbsp;2.&nbsp;Instant Start Guide
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Chapter&nbsp;2.&nbsp;Instant Start Guide
                   </h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
-               <dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e183">1. Start Using <span class="application">OmegaT</span> in 5 Minutes!</a></span></dt>
-               <dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e225">2. Translating with <span class="application">OmegaT</span></a></span></dt>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e183">1. Start Using <span class="application">OmegaT</span> in 5 Minutes!</a></span></dt>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e225">2. Translating with <span class="application">OmegaT</span></a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#create.and.open.new.project">2.1. Creating and opening a new project</a></span></dt>
-                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#translate.the.segments.one.by.one">2.2. Translating segments one by one</a></span></dt>
-                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#use.matches.in.TMs.dictionaries.and.glossaries">2.3. Using matches in the translation memories, dictionaries and
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#create.and.open.new.project">2.1. Creating and opening a new project</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#translate.the.segments.one.by.one">2.2. Translating segments one by one</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#use.matches.in.TMs.dictionaries.and.glossaries">2.3. Using matches in the translation memories, dictionaries and
                                     glossaries</a></span></dt>
-                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#create.translated.documents">2.4. Creating translated documents</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#create.translated.documents">2.4. Creating translated documents</a></span></dt>
                   </dl>
                </dd>
-               <dt><span class="section"><a href="Ch02.instant.start.guide.html#how.to.handle.tagged.text">3. Handling tagged text</a></span></dt>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#how.to.handle.tagged.text">3. Handling tagged text</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#d0e676">3.1. An example...</a></span></dt>
-                     <dt><span class="section"><a href="Ch02.instant.start.guide.html#tag.verification">3.2. Tag verification</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e679">3.1. An example...</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#tag.verification">3.2. Tag verification</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -245,7 +245,7 @@
                         <div class="itemizedlist">
                            <ul class="itemizedlist" type="circle">
                               <li class="listitem">
-                                 <p>monolingual XLIFF (*.xlf, *.sdlxliff)</p>
+                                 <p>monolingual XLIFF (*.xlf, *.xliff, *.sdlxliff)</p>
                               </li>
                            </ul>
                         </div>
@@ -298,6 +298,9 @@
                               <li class="listitem">
                                  <p>Iceni Infix (*.xml)</p>
                               </li>
+                              <li class="listitem">
+                                 <p>Flash XML export (*.xml)</p>
+                              </li>
                            </ul>
                         </div>
                      </li>
@@ -328,7 +331,7 @@
                <p>The active segment is highlighted in green; a copy of the source
                         text is displayed just below this in the “target field”. (At this point,
                         all text outside the target field is protected and cannot be modified.)
-                        You must type your translation prior the tag &lt;<code class="literal">segment
+                        You must type your translation before the tag &lt;<code class="literal">segment
                            0001&gt;</code>. OmegaT
                         can be set up to automatically copy the source text into the target text
                         (see <span class="emphasis"><em>Options &gt; Editing Behaviour...</em></span>), which can
@@ -345,7 +348,7 @@
                      </li>
                      <li class="listitem">
                         <p>If you prefer to translate into an empty target field, set
-                                     this option in <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behaviour...<a class="indexterm" name="d0e460"></a></span></p>
+                                     this option in <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behaviour...<a class="indexterm" name="d0e463"></a></span></p>
                      </li>
                      <li class="listitem">
                         <p>You can change the setup of the Editor pane (for instance to
@@ -378,11 +381,11 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Translation memory matches<a class="indexterm" name="d0e482"></a><a class="indexterm" name="d0e487"></a></h4>
+                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Translation memory matches<a class="indexterm" name="d0e485"></a><a class="indexterm" name="d0e490"></a></h4>
                         </div>
                      </div>
                   </div>
-                  <div class="figure"><a name="d0e492"></a><p class="title"><b>Figure&nbsp;2.2.&nbsp;Matches pane</b></p>
+                  <div class="figure"><a name="d0e495"></a><p class="title"><b>Figure&nbsp;2.2.&nbsp;Matches pane</b></p>
                      <div class="figure-contents">
                         <div class="mediaobject"><img src="images/MatchesPane.png" alt="Matches pane"></div>
                      </div>
@@ -394,12 +397,12 @@
                   <div class="itemizedlist">
                      <ul class="itemizedlist" type="disc">
                         <li class="listitem">
-                           <p>Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e514"></a> to insert the pre-selected match at the cursor
+                           <p>Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e517"></a> to insert the pre-selected match at the cursor
                                           position, or...
                            </p>
                         </li>
                         <li class="listitem">
-                           <p>Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> <a class="indexterm" name="d0e529"></a><a class="indexterm" name="d0e534"></a>
+                           <p>Press <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> <a class="indexterm" name="d0e532"></a><a class="indexterm" name="d0e537"></a>
                                             to overwrite the entire segment with the
                                           pre-selected match.
                            </p>
@@ -429,7 +432,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;Glossary and Dictionary matches<a class="indexterm" name="d0e579"></a></h4>
+                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;Glossary and Dictionary matches<a class="indexterm" name="d0e582"></a></h4>
                         </div>
                      </div>
                   </div>
@@ -459,7 +462,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Use Machine Translation services<a class="indexterm" name="d0e608"></a></h4>
+                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Use Machine Translation services<a class="indexterm" name="d0e611"></a></h4>
                         </div>
                      </div>
                   </div>
@@ -475,14 +478,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Creating translated documents<a class="indexterm" name="d0e624"></a></h3>
+                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Creating translated documents<a class="indexterm" name="d0e627"></a></h3>
                      </div>
                   </div>
                </div>
                <p>When you have translated all the segments (or earlier if you
                         wish), <span class="application">OmegaT</span> will create the target
                         document(s) using the translations stored in the translation memory. To
-                        do this, select <span class="guimenu">Project</span> → <span class="guimenuitem">Create Translated Documents</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e645"></a> <a class="indexterm" name="d0e651"></a>from the menu. <span class="application">OmegaT</span> will
+                        do this, select <span class="guimenu">Project</span> → <span class="guimenuitem">Create Translated Documents</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e648"></a> <a class="indexterm" name="d0e654"></a>from the menu. <span class="application">OmegaT</span> will
                         build translated versions of all the translatable documents in the
                         Source folder of the project, whether or not they have been fully
                         translated. The wholly or partially translated files will be saved to
@@ -499,7 +502,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Handling tagged text<a class="indexterm" name="d0e666"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Handling tagged text<a class="indexterm" name="d0e669"></a></h2>
                   </div>
                </div>
             </div>
@@ -516,7 +519,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e676"></a>3.1.&nbsp;An example...<a class="indexterm" name="d0e679"></a></h3>
+                        <h3 class="title"><a name="d0e679"></a>3.1.&nbsp;An example...<a class="indexterm" name="d0e682"></a></h3>
                      </div>
                   </div>
                </div>
@@ -529,14 +532,14 @@
                         Here is an example of a segment in HTML:
                </p>
                <p><code class="literal">&lt;p&gt;A different display font can be selected via
-                           the&lt;b&gt;Display Font&lt;/b&gt;dialog. Open it via
-                           the&lt;i&gt;Options&lt;/i&gt; →&lt;i&gt;Display Font...&lt;/i&gt;menu
+                           the &lt;b&gt;Display Font&lt;/b&gt;dialog. Open it via
+                           the &lt;i&gt;Options&lt;/i&gt; →&lt;i&gt;Display Font...&lt;/i&gt; menu
                            item. The font type and size can be changed from the
                            dialog.&lt;/p&gt;</code></p>
                <p>Here is how <span class="application">OmegaT</span> will display this,
                         with the translation in Afrikaans:
                </p>
-               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;2.3.&nbsp;Source <a class="indexterm" name="d0e706"></a>HTML segment</b></p>
+               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;2.3.&nbsp;Source <a class="indexterm" name="d0e709"></a>HTML segment</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/tagged_segment.png" alt="Source Segment, Source and Target - figureHTML segment"></div>
                   </div>
@@ -552,7 +555,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Tag verification<a class="indexterm" name="d0e731"></a><a class="indexterm" name="d0e736"></a></h3>
+                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Tag verification<a class="indexterm" name="d0e734"></a><a class="indexterm" name="d0e739"></a></h3>
                      </div>
                   </div>
                </div>
@@ -563,7 +566,7 @@
                         segments where the source and target tags do not correspond. Click on
                         the segment number. You will be taken automatically to the questionable
                         segment in the Editor, where you can correct the tagging. When you have
-                        carried out the corrections, check these by pressing <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e760"></a></strong></span> again. Note that the tag verifier may find an error in
+                        carried out the corrections, check these by pressing <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e763"></a></strong></span> again. Note that the tag verifier may find an error in
                         cases where the tags are correct - for instance when it was necessary to
                         change the order of tags involved in making a grammatically correct
                         translation. Please regard this as a sign that the verifier prefers to
@@ -583,10 +586,10 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="Ch01.about.OmegaT.html">Prev</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.about.OmegaT.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="Ch02.installing.and.running.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.installing.and.running.html">Next</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;About <span class="application">OmegaT - introduction</span>&nbsp;

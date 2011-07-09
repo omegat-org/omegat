@@ -2,45 +2,45 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Chapter&nbsp;11.&nbsp;Working with formatted text</title>
+      <title>Chapter&nbsp;12.&nbsp;Working with formatted text</title>
       <link rel="stylesheet" href="OmegaT.css" type="text/css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
-      <link rel="prev" href="ch06.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Editing behavior">
-      <link rel="next" href="ch07.plain.text.html" title="Chapter&nbsp;12.&nbsp;Working with plain text">
+      <link rel="prev" href="chapter.font.html" title="Chapter&nbsp;11.&nbsp;Font settings">
+      <link rel="next" href="chapter.plain.text.html" title="Chapter&nbsp;13.&nbsp;Working with plain text">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Working with formatted text</th>
+               <th colspan="3" align="center">Chapter&nbsp;12.&nbsp;Working with formatted text</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="ch06.translation.editing.html">Prev</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.font.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch07.plain.text.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
             </tr>
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;11.&nbsp;Working with formatted text">
+      <div class="chapter" title="Chapter&nbsp;12.&nbsp;Working with formatted text">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="ch07.formatted.text"></a>Chapter&nbsp;11.&nbsp;Working with formatted text<a class="indexterm" name="d0e5530"></a><a class="indexterm" name="d0e5535"></a></h2>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Working with formatted text<a class="indexterm" name="d0e5607"></a><a class="indexterm" name="d0e5612"></a></h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
-               <dt><span class="section"><a href="ch07.formatted.text.html#formatting.tags">1. Formatting tags</a></span></dt>
-               <dt><span class="section"><a href="ch07.formatted.text.html#tag.operations">2. Tag operations</a></span></dt>
-               <dt><span class="section"><a href="ch07.formatted.text.html#tag.group.nesting">3. Tag group nesting</a></span></dt>
-               <dt><span class="section"><a href="ch07.formatted.text.html#tag.group.overlapping">4. Tag group overlapping</a></span></dt>
-               <dt><span class="section"><a href="ch07.formatted.text.html#tag.group.validation">5. Tag group validation</a></span></dt>
-               <dt><span class="section"><a href="ch07.formatted.text.html#hints.for.tag.management">6. Hints for tags management</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Formatting tags</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Tag operations</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Tag group nesting</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Tag group overlapping</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">5. Tag group validation</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">6. Hints for tags management</a></span></dt>
             </dl>
          </div>
          <p>Formatting information present in the source file usually needs to be
@@ -56,44 +56,47 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5545"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5622"></a></h2>
                   </div>
                </div>
             </div>
-            <p><span class="application"><a class="indexterm" name="d0e5550"></a><span class="bold"><strong>Tag
-                            naming:</strong></span></span></p>
-            <p><span class="application">The tags consist of one to three characters and a
-                      number. Unique numbering allows tags, corresponding to each other to be
-                      grouped together and differentiates between tags, that have the same
-                      shortcut character, but are in fact different. The shortcut characters
-                      used try to reflect the underlying meaning of the tag (e.g. b for bold, i
-                      for italics, etc.)</span></p>
-            <p><span class="application"><a class="indexterm" name="d0e5562"></a><span class="bold"><strong>Tag
-                            numbering:</strong></span></span></p>
-            <p><span class="application">Tags are numbered incrementally by tag group. "Tag
-                      groups" in this context are a single tag (such as &lt;i0&gt; and
-                      &lt;/i0&gt;). Within a segment, the first group (pair or single) receives
-                      the number 0, the second the number 1 etc. The first example below has 3
-                      tag groups (a pair, a single, and then another pair), the second example
-                      has one group only (a pair).</span></p>
-            <p><span class="application"><a class="indexterm" name="d0e5574"></a><span class="bold"><strong>Pairs and
-                            singles:</strong></span></span></p>
-            <p><span class="application">Tags are always either singles or paired. Single tags
-                      indicate formatting information that does not affect the surrounding text
-                      (an extra space or line break for example).</span></p>
-            <p><span class="application"><code class="literal"> &lt;segment
-                         2132&gt;&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
-                         &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;end segment&gt;
-                         </code></span></p>
-            <p><span class="application">&lt;br1&gt; is a single tag and does not affect any
-                      surrounding text. Paired tags usually indicate style information that
-                      applies to the text between the opening tag and the closing tag of a pair.
-                      &lt;b0&gt; and &lt;/b0&gt; below are paired and affect the text log.txt.
-                      Note that the opening tag must always come before the corresponding
-                      closing tag:</span></p>
-            <p><span class="application">&lt;<code class="literal">segment 3167&gt;Log file
-                         (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and errors.&lt;end
-                         segment&gt;</code></span></p>
+            <p><a class="indexterm" name="d0e5626"></a><span class="bold"><strong>Tag
+                         naming:</strong></span></p>
+            <p>The tags consist of one to three characters and a
+                   number. Unique numbering allows tags, corresponding to each other to be
+                   grouped together and differentiates between tags, that have the same
+                   shortcut character, but are in fact different. The shortcut characters
+                   used try to reflect the underlying meaning of the tag (e.g. b for bold, i
+                   for italics, etc.)
+            </p>
+            <p><a class="indexterm" name="d0e5636"></a><span class="bold"><strong>Tag
+                         numbering:</strong></span></p>
+            <p>Tags are numbered incrementally by tag group. "Tag
+                   groups" in this context are a single tag (such as &lt;i0&gt; and
+                   &lt;/i0&gt;). Within a segment, the first group (pair or single) receives
+                   the number 0, the second the number 1 etc. The first example below has 3
+                   tag groups (a pair, a single, and then another pair), the second example
+                   has one group only (a pair).
+            </p>
+            <p><a class="indexterm" name="d0e5646"></a><span class="bold"><strong>Pairs and
+                         singles:</strong></span></p>
+            <p>Tags are always either singles or paired. Single tags
+                   indicate formatting information that does not affect the surrounding text
+                   (an extra space or line break for example).
+            </p>
+            <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+                      &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segment 2132&gt;
+                      </code></p>
+            <p>&lt;br1&gt; is a single tag and does not affect any
+                   surrounding text. Paired tags usually indicate style information that
+                   applies to the text between the opening tag and the closing tag of a pair.
+                   &lt;b0&gt; and &lt;/b0&gt; below are paired and affect the text log.txt.
+                   Note that the opening tag must always come before the corresponding
+                   closing tag:
+            </p>
+            <p>&lt;<code class="literal">Log file
+                      (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and 
+                      errors.&lt;segment 3167&gt;</code></p>
             <p><span class="application">OmegaT</span> creates its tags before the
                    process of sentence segmenting. Depending upon the segmenting rules, the
                    pair of tags may get separated into two consecutive segments and the tag
@@ -105,7 +108,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e5603"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e5671"></a></h2>
                   </div>
                </div>
             </div>
@@ -115,20 +118,20 @@
                    possible, if certain rules are strictly followed, to deviate from this
                    basic rule.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5612"></a>Tag duplication: </strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5680"></a>Tag duplication: </strong></span></p>
             <p>To duplicate tag groups, just copy them in the position of your
                    choice. Keep in mind that in a pair group, the opening tag must come
                    before the closing tag. The formatting represented by the group you have
                    duplicated will be applied to both sections.
             </p>
             <p>Example:</p>
-            <p><code class="literal"> &lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
-                      is going to be duplicated here.&lt;end segment&gt; </code></p>
+            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt;
+                      is going to be duplicated here.&lt;segment 0001&gt; </code></p>
             <p>After duplication:</p>
-            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
-                      has been &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;end segment&gt;
+            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt;
+                      has been &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;segment 0001&gt;
                       </code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5632"></a>Tag group deletion:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5700"></a>Tag group deletion:</strong></span></p>
             <p>To delete tag groups, just remove them from the segment. Keep in
                    mind that a pair group must have both its opening and its closing tag
                    deleted to ensure that all traces of the formatting are properly erased,
@@ -137,17 +140,17 @@
                    file.
             </p>
             <p>Example:</p>
-            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt; is
-                      going to be deleted.&lt;end segment&gt; </code></p>
+            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt; is
+                      going to be deleted.&lt;segment 0001&gt; </code></p>
             <p>After deletion:</p>
-            <p><code class="literal">&lt;segment 0001&gt;This formatting has been
-                      deleted.&lt;end segment&gt; </code></p>
+            <p><code class="literal">This formatting has been
+                      deleted.&lt;segment 0001&gt; </code></p>
          </div>
          <div class="section" title="3.&nbsp;Tag group nesting">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e5653"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e5721"></a></h2>
                   </div>
                </div>
             </div>
@@ -159,19 +162,19 @@
                    and fail to open.
             </p>
             <p>Example:</p>
-            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
+            <p><code class="literal">&lt;b0&gt;Formatting&lt;/b0&gt;
                       &lt;b1&gt;one&lt;/b1&gt; is going to be nested inside formatting
-                      zero.&lt;end segment&gt; </code></p>
+                      zero.&lt;segment 0001&gt; </code></p>
             <p>After nesting:</p>
-            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting
+            <p><code class="literal">&lt;b0&gt;Formatting
                       &lt;b1&gt;one&lt;/b1&gt;&lt;/b0&gt; has been nested inside formatting
-                      zero.&lt;end segment </code></p>
+                      zero.&lt;segment 0001&gt;</code></p>
          </div>
          <div class="section" title="4.&nbsp;Tag group overlapping">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e5673"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e5741"></a></h2>
                   </div>
                </div>
             </div>
@@ -180,25 +183,25 @@
                    translated file not opening at all.
             </p>
             <p>Example:</p>
-            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
-                      &lt;b1&gt;one&lt;/b1&gt; is going to be messed up.&lt;end segment&gt;
+            <p><code class="literal">&lt;b0&gt;Formatting&lt;/b0&gt;
+                      &lt;b1&gt;one&lt;/b1&gt; is going to be messed up.&lt;segment 0001&gt;
                       </code></p>
             <p>After a bad manipulation:</p>
-            <p><code class="literal">&lt;segment 0001&gt;&lt;b0&gt;Formatting
+            <p><code class="literal">&lt;b0&gt;Formatting
                       &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is very messed up now.&lt;end
-                      segment&gt; </code></p>
+                      segment 0001&gt;</code></p>
          </div>
          <div class="section" title="5.&nbsp;Tag group validation">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;Tag group validation<a class="indexterm" name="d0e5693"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;Tag group validation<a class="indexterm" name="d0e5761"></a></h2>
                   </div>
                </div>
             </div>
             <p>The validate tags function detects changes to tag sequences (whether
                    deliberate or accidental), and shows the affected segments. Launching this
-                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5702"></a></span> - opens a window containing all segments in
+                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5770"></a></span> - opens a window containing all segments in
                    the file containing suspected broken or bad tags in the translation.
                    Repairing the tags and recreating the target documents is easy with the
                    validate tags function. The window that opens when
@@ -206,7 +209,7 @@
                    with a link to the segment, the original segment and the target
                    segment
             </p>
-            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;11.1.&nbsp;Tag validation entry</b></p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Tag validation entry</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/TagValidation.png" alt="Tag validation entry"></div>
                </div>
@@ -225,7 +228,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;Hints for tags management<a class="indexterm" name="d0e5727"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;Hints for tags management<a class="indexterm" name="d0e5795"></a></h2>
                   </div>
                </div>
             </div>
@@ -263,15 +266,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="ch06.translation.editing.html">Prev</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.font.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch07.plain.text.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Editing behavior&nbsp;</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;Font settings&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Working with plain text</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;Working with plain text</td>
             </tr>
          </table>
       </div>

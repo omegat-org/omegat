@@ -7,8 +7,8 @@
       <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
-      <link rel="prev" href="ch04.project.properties.html" title="Chapter&nbsp;6.&nbsp;Project properties">
-      <link rel="next" href="ch05.files.and.directories.html" title="Chapter&nbsp;8.&nbsp;OmegaT Files and Directories">
+      <link rel="prev" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Project properties">
+      <link rel="next" href="chapter.files.and.directories.html" title="Chapter&nbsp;8.&nbsp;OmegaT Files and Directories">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -17,10 +17,10 @@
                <th colspan="3" align="center">Chapter&nbsp;7.&nbsp;File Filters</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="ch04.project.properties.html">Prev</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="ch05.files.and.directories.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,21 +29,21 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="ch05.file.filters"></a>Chapter&nbsp;7.&nbsp;File Filters
+                  <h2 class="title"><a name="chapter.file.filters"></a>Chapter&nbsp;7.&nbsp;File Filters
                   </h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
-               <dt><span class="section"><a href="ch05.file.filters.html#file.filters.dialog">1. File filters dialog</a></span></dt>
-               <dt><span class="section"><a href="ch05.file.filters.html#filters.options">2. Filter options</a></span></dt>
-               <dt><span class="section"><a href="ch05.file.filters.html#edit.filter.dialog">3. Edit filter dialog</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#file.filters.dialog">1. File filters dialog</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#filters.options">2. Filter options</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#edit.filter.dialog">3. Edit filter dialog</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="ch05.file.filters.html#source.filetype.and.filename.pattern">3.1. Source file type, filename pattern</a></span></dt>
-                     <dt><span class="section"><a href="ch05.file.filters.html#source.and.target.files.encoding">3.2. Source and Target file encoding</a></span></dt>
-                     <dt><span class="section"><a href="ch05.file.filters.html#target.name">3.3. Target filename</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.filetype.and.filename.pattern">3.1. Source file type, filename pattern</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.and.target.files.encoding">3.2. Source and Target file encoding</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#target.name">3.3. Target filename</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -87,7 +87,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4280"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4277"></a></h2>
                   </div>
                </div>
             </div>
@@ -104,7 +104,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4295"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4292"></a></h2>
                   </div>
                </div>
             </div>
@@ -121,6 +121,20 @@
                      <p><span class="emphasis"><em>Paragraph segmentation on line breaks, empty lines or
                                       never:</em></span> if sentence segmentation rules are active, the text
                                 will further be segmented according to the rules available.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>PO files</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Allow blank translations in the target file:</em></span> 
+                                If on, when a PO segment (which may be a whole paragraph) is not 
+                                translated, the translation will be empty in the target file. 
+                                Technically, <code class="code">msgstr</code> will be empty. As it is the standard 
+                                behavior for PO files, it is on by default. If the option is off, 
+                                the source text will be copied to the target segment.
                      </p>
                   </li>
                </ul>
@@ -330,6 +344,13 @@
                   </li>
                </ul>
             </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>WordArt</p>
+                  </li>
+               </ul>
+            </div>
             <p><span class="bold"><strong>Other Options</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
@@ -356,7 +377,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4469"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4482"></a></h2>
                   </div>
                </div>
             </div>
@@ -374,7 +395,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4484"></a>Source file type, filename pattern<a class="indexterm" name="d0e4490"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4497"></a>Source file type, filename pattern<a class="indexterm" name="d0e4503"></a></h3>
                      </div>
                   </div>
                </div>
@@ -403,7 +424,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4518"></a><a class="indexterm" name="d0e4523"></a><a class="indexterm" name="d0e4528"></a><p>Only a limited number of file formats specify a mandatory
+               </div><a class="indexterm" name="d0e4531"></a><a class="indexterm" name="d0e4536"></a><a class="indexterm" name="d0e4541"></a><p>Only a limited number of file formats specify a mandatory
                         encoding. File formats that do not specify their encoding will use the
                         encoding you set up for the extension that matches their name. For
                         example, by default<code class="literal"> .txt </code>files will be loaded using
@@ -448,14 +469,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4558"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4571"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Sometimes you may wish to rename the files you translate
                         automatically, for example adding a language code after the file name.
                         The target filename pattern uses a special syntax, so if you wish to
-                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4568"></a>Edit Pattern Dialog. If you wish to revert to default
+                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4581"></a>Edit Pattern Dialog. If you wish to revert to default
                         configuration of the filter, click <span class="bold"><strong>Defaults.</strong></span> You may also modify the name directly
                         in the target filename pattern field of the file filters dialog. The
                         Edit Pattern Dialog offers the following options:
@@ -522,10 +543,10 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="ch04.project.properties.html">Prev</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="ch05.files.and.directories.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Next</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Chapter&nbsp;6.&nbsp;Project properties&nbsp;</td>

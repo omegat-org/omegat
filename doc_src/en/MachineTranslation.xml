@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch11.google.translate">
+<chapter id="chapter.machine.translate">
   <title>Machine Translation<indexterm class="singular">
       <primary>Machine Translation</primary>
     </indexterm></title>
@@ -22,7 +22,7 @@
     and steadfastly improving results in research evaluations.</para>
 
     <para>To activate any of the Machine Translation services, go to
-    <guimenuitem>Options &gt; Machine Translate ... </guimenuitem> and
+    <guimenuitem>Options &gt; Machine Translate ...</guimenuitem> and
     activate the service desired. Note that they are all web-based: you will
     have to be on-line if you want to use them.</para>
   </section>
@@ -126,8 +126,8 @@
         <secondary>Apertium</secondary>
       </indexterm></title>
 
-    <para><ulink url="???">Apertium</ulink> is a free/open-source machine
-    translation platform, initially aimed at related-language pairs,like CA,
+    <para><ulink url="http://www.apertium.org/">Apertium</ulink> is a free/open-source machine
+    translation platform, initially aimed at related-language pairs, like CA,
     ES, GA, PT, OC and FR but recently expanded to deal with more divergent
     language pairs (such as English-Catalan). Check the web site for the
     latest list of implemented language pairs.</para>

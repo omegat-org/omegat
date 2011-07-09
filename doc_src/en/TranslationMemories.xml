@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch07.translation.memories">
+<chapter id="chapter.translation.memories">
   <title>Translation memories<indexterm class="singular">
       <primary>Translation memories</primary>
     </indexterm></title>
@@ -117,7 +117,7 @@
             prefixed with<emphasis> [fuzzy]</emphasis>, so that the translator
             can review the translations at a later stage and check whether the
             segments tagged this way, have been translated correctly (see the
-            <link linkend="ch06.translation.editing">Editing behavior</link>
+            <link linkend="chapter.translation.editing">Editing behavior</link>
             chapter) <menuchoice>
                 <guimenu>.</guimenu>
               </menuchoice></para>
@@ -166,7 +166,7 @@
 
       <para>The locations of the various different translation memories for a
       given project are user-defined (see Project dialog window in <link
-      linkend="Ch02.instant.start.guide">Instant start guide)</link></para>
+      linkend="chapter.instant.start.guide">Instant start guide)</link></para>
 
       <para>Depending on the situation, different strategies are thus
       possible, for instance:</para>
@@ -265,8 +265,7 @@
 
         <listitem>
           <para>2- or 3-letter language code followed by the 2-letter country
-          code (e.g. EN-US - See <link linkend="A2.languages">Appendix B.
-          Languages - ISO 639.2 code list</link> for a partial list of
+          code (e.g. EN-US - See <xref linkend="appendix.languages"/> for a partial list of
           language and country codes).</para>
         </listitem>
       </itemizedlist>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch05.files.and.directories">
+<chapter id="chapter.files.and.directories">
   <title><application>OmegaT</application> Files and Directories</title>
 
   <para><application>OmegaT</application> works with three types of
@@ -147,12 +147,12 @@
           <primary>Project files</primary>
 
           <secondary>ignore_word and learned_word</secondary>
-        </indexterm>Ignore_words.txt </emphasis>and <emphasis
-      role="bold">learned_word.txt </emphasis>files are used by the spell
+        </indexterm>Ignore_words.txt</emphasis> and <emphasis
+      role="bold">learned_word.txt</emphasis>files are used by the spell
       checker. Note that they are specific for a given project, so if you have
       already amassed words you wish the spell checker to ignore / accept, you
-      just need to copy the corresponding two files into the<filename> omegat
-      </filename>subfolder of your current project.</para>
+      just need to copy the corresponding two files into the 
+      <filename>omegat</filename>subfolder of your current project.</para>
     </section>
 
     <section id="folder.source">

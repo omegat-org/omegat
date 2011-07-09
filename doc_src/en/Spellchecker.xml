@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch12.spellchecker">
+<chapter id="chapter.spellchecker">
   <title>Spell checker<indexterm class="singular">
       <primary>Spell checker</primary>
     </indexterm></title>
@@ -55,7 +55,7 @@
     <para>Copying the files manually is useful if you already have suitable
     dictionary files on your system, for instance as part of your
     OpenOffice.org or Thunderbird installation. The files you need will have
-    the extensions <filename>.aff</filename> and<filename> .dic</filename>,
+    the extensions <filename>.aff</filename> and <filename>.dic</filename>,
     and you need both files in order for the dictionary in question to work.
     You can use these file extensions to search your desktop for suitable
     dictionaries. In the case below, no extra folder has been created and no
@@ -88,11 +88,11 @@
     "Install"</guilabel> depends on the Internet list of dictionaries. If it
     is out of date or does not include the desired language, you will have to
     look for appropriate vocabularies yourself. OpenOffice.org contains
-    probably the largest vocabulary collection at the<ulink
+    probably the largest vocabulary collection at the <ulink
     url="http://extensions.services.openoffice.org/dictionary">OpenOffice.org
     Extensions site</ulink>. After the dictionary extension has been
-    downloaded and installed, the corresponding<emphasis> aff </emphasis>and
-    <emphasis>dic </emphasis>will become available. The same can be achieved
+    downloaded and installed, the corresponding <emphasis>aff</emphasis> and
+    <emphasis>dic</emphasis> will become available. The same can be achieved
     by downloading a spell checker add-ons for Firefox or Thunderbird; in this
     case the spell checker files will be stored in your (Firefox or
     Thunderbird) profile.</para>
@@ -102,7 +102,7 @@
     target setting. You need to change the setting to FR-FR to have the spell
     checker recognize the correct dictionary for your target. Look for files
     with the name, indicating the language used and having extensions
-    <emphasis>aff </emphasis> and <emphasis>dic.</emphasis></para>
+    <emphasis>aff</emphasis> and <emphasis>dic.</emphasis></para>
   </section>
 
   <section>
@@ -117,7 +117,7 @@
 
     <para>To enable the spell checker, select <guimenuitem>Options &gt; Spell
     Checking</guimenuitem> and tick the <guilabel>Automatically check the
-    spelling of text </guilabel>checkbox (see above)</para>
+    spelling of text</guilabel> checkbox (see above)</para>
 
     <figure id="spellchecker.in.action">
       <title><indexterm class="singular">
@@ -156,23 +156,23 @@
     target language code to determine the language to be used : if the target
     language is Brazilian Portuguese (PT_BR), the subfolder with vocabularies
     must contain the two vocabulary files, called
-    <emphasis>pt_br.aff</emphasis> and<emphasis> pt_br.dic.</emphasis></para>
+    <emphasis>pt_br.aff</emphasis> and <emphasis>pt_br.dic</emphasis>.</para>
 
     <para>If you have already translated a large body of text, and then
     realize the target language code of the project does not match the spell
     checker's language code (you specified pt_BR as the language, but there
     are no pt_BR vocabularies, for instance) you can simply copy the two
     corresponding files and rename them (e.g. from
-    <emphasis>pt_PT.arr</emphasis> and <emphasis>pt_PT.dic </emphasis>to
+    <emphasis>pt_PT.arr</emphasis> and <emphasis>pt_PT.dic</emphasis> to
     <emphasis>pt._BR.arr</emphasis> and <emphasis>pt_BR.dic</emphasis>). Of
     course it is much wiser, to take a short break and download the correct
     versions of the spell checker.</para>
 
-    <para>Note that <filename>Uninstall </filename>physically removes the
+    <para>Note that <filename>Uninstall</filename> physically removes the
     selected vocabularies. If they are part of OpenOffice.org, as in the above
     case, they will disappear from that application, too. If, for whatever
     reason, you need to do this from time to time, it may make sense to copy
     the files involved to a different folder, reserved just for use by
-    OmegaT..</para>
+    OmegaT.</para>
   </section>
 </chapter>

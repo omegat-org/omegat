@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch05.file.filters">
+<chapter id="chapter.file.filters">
   <title>File Filters</title>
 
   <para>OmegaT features highly customizable filters, enabling you to configure

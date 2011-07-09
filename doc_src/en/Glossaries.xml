@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch10.glossaries">
+<chapter id="chapter.glossaries">
   <title>Glossaries<indexterm class="singular">
       <primary>Windows and panes in OmegaT</primary>
 
@@ -25,7 +25,7 @@
         <primary>Project files</primary>
 
         <secondary>Glossary subfolder</secondary>
-      </indexterm> <filename>/glossary </filename>folder after creating the
+      </indexterm> <filename>/glossary</filename> folder after creating the
     project. <application>OmegaT</application> automatically detects glossary
     files in this folder when a project is opened. Terms in the current
     segment which <application>OmegaT</application> finds in the glossary
@@ -145,17 +145,17 @@
     "columns" of terms, source-language terms on the left and their
     target-language terms on the right, and possibly a third column,
     containing you comments and explanations, The tab space (→ in the example
-    below) and Enter (¶ ) characters can be made visible by clicking on the ¶
+    below) and Enter (¶) characters can be made visible by clicking on the ¶
     icon in the Writer's Standard writer bar. Here are a few lines of an
     English -German glossary)</para>
 
-    <para><literal> word →Wort→das (-/e/s, Wörter/-e)</literal></para>
+    <para><literal>word →Wort→das (-/e/s, Wörter/-e)¶</literal></para>
 
-    <para><literal> small house→Häuschen→das, (pl Häuschen)¶</literal></para>
+    <para><literal>small house→Häuschen→das, (pl Häuschen)¶</literal></para>
 
-    <para><literal> dog →Hund→m, f Hündin ¶</literal></para>
+    <para><literal>dog →Hund→m, f Hündin ¶</literal></para>
 
-    <para><literal> horse→Pferd→n, m Hengst f Stute n Fohlen</literal>¶</para>
+    <para><literal>horse→Pferd→n, m Hengst f Stute n Fohlen¶</literal></para>
 
     <para>Do NOT use OpenOffice.org's "columns" function to create columns:
     just separate each source and target-language term pair with a single tab
@@ -166,7 +166,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Select<literal> File &gt; Save As</literal></para>
+        <para>Select <literal>File &gt; Save As</literal></para>
       </listitem>
 
       <listitem>
@@ -183,7 +183,7 @@
 
       <listitem>
         <para>make sure "<emphasis>Automatic file name extension</emphasis>"
-        and <emphasis>"Edit filter settings" </emphasis>are unchecked.</para>
+        and <emphasis>"Edit filter settings"</emphasis> are unchecked.</para>
       </listitem>
     </itemizedlist>
 
@@ -258,7 +258,7 @@
 
     <para>Data exported from Trados MultiTerm can be used as
     <application>OmegaT</application> glossaries without further modification,
-    provided they are given the file extension <filename>.tab </filename>and
+    provided they are given the file extension <filename>.tab</filename> and
     the source and target term fields are the first two fields
     respectively.</para>
 

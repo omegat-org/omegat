@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch09.searches">
+<chapter id="chapter.searches">
   <title>Searches<indexterm class="singular">
       <primary>Searches</primary>
     </indexterm></title>
@@ -86,8 +86,8 @@
 
       <para>When searching through files (as opposed to translation memories),
       <application>OmegaT</application> restricts the search to files in
-      source file formats (See <ulink url="05_FilesToTranslate.xml">Files to
-      translate -&gt; File Formats</ulink>). Consequently, although OmegaT is
+      source file formats (See <link linkend="chapter.files.to.translate">Files to
+      translate -&gt; File Formats</link>). Consequently, although OmegaT is
       quite able to handle<filename> tmx</filename> files, it does not include
       them in the Search files search. If you turn on <emphasis
       role="bold"><indexterm class="singular">
@@ -115,18 +115,18 @@
     <itemizedlist>
       <listitem>
         <para>'*' matches zero or more characters, from the current position
-        in a given word to its end. The search term<literal> 'run*'
-        </literal>for example would match words <literal>'run', 'runs',
-        </literal>and <literal>'running'. </literal></para>
+        in a given word to its end. The search term<literal>'run*'</literal>
+        for example would match words <literal>'run'</literal>, 
+        <literal>'runs'</literal> and <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para>'?' matches any single character. For instance, <literal>'run?'
-        </literal>would match<literal> the word 'runs'</literal> and
-        '<literal>runn'</literal> in the word
-        '<literal>running'.</literal></para>
+        </literal>would match the word <literal>'runs'</literal> and
+        <literal>'runn'</literal> in the word
+        <literal>'running'.</literal></para>
       </listitem>
     </itemizedlist>
 
@@ -155,7 +155,7 @@
           occurrences of the string <emphasis><literal>open
           file</literal></emphasis>, but not <emphasis><literal>file
           opened</literal></emphasis> or <emphasis><literal>open input
-          file</literal>.</emphasis></para>
+          file</literal></emphasis>.</para>
         </listitem>
       </varlistentry>
 
@@ -173,8 +173,8 @@
           occurrences of the string <emphasis><literal>open
           file</literal>,</emphasis> as well as <emphasis><literal>file
           opened</literal>, <literal>open input file</literal>, <literal>file
-          may not be safe to open</literal></emphasis><literal>,
-          etc.</literal></para>
+          may not be safe to open</literal></emphasis>,
+          etc.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -195,7 +195,7 @@
         search is a powerful way to look for instances of a string. It is
         similar to a wild card search, but allows far more flexibility. The
         regular expressions used in searches are those supported by Java. See
-        more in the chapter on <link linkend="ch09.regexp">Regular
+        more in the chapter on <link linkend="chapter.regexp">Regular
         Expressions</link>.</para>
       </listitem>
 

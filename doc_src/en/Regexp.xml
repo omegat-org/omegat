@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch09.regexp">
+<chapter id="chapter.regexp">
   <title>Regular expressions<indexterm class="singular">
       <primary>Regular expressions</primary>
 

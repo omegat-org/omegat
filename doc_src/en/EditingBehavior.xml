@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch06.translation.editing">
+<chapter id="chapter.translation.editing">
   <title>Editing behavior<indexterm class="singular">
       <primary>Menu options</primary>
 
@@ -121,7 +121,7 @@
         <para>The text highlighted by the user, when
         <keycap>Ctrl-Shift-C</keycap> is pressed or <guimenuitem>Edit &gt;
         Export Selection</guimenuitem> is
-        selected<filename>(selection.txt)</filename></para>
+        selected (<filename>selection.txt</filename>).</para>
       </listitem>
     </itemizedlist>
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="Ch02.instant.start.guide">
+<chapter id="chapter.instant.start.guide">
   <title>Tutoriel de prise en main</title>
 
   <section>
@@ -133,7 +133,7 @@
 
           <itemizedlist>
             <listitem>
-              <para>XLIFF monolingue (.xlf, .sdlxliff)</para>
+              <para>XLIFF monolingue (.xlf, .xliff, .sdlxliff)</para>
             </listitem>
           </itemizedlist>
 

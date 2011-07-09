@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch07.plain.text">
+<chapter id="chapter.plain.text">
   <title>Working with plain text<indexterm class="singular">
       <primary>Source files</primary>
 
@@ -73,10 +73,10 @@
 
         <listitem>
           <para>open your source file in a text editor that correctly
-          interprets its encoding and save the file in "<emphasis
-          role="bold">UTF-8"</emphasis> encoding. Change the file extension
-          from <literal>.txt </literal>to
-          <literal>.utf8.</literal><application>OmegaT</application> will
+          interprets its encoding and save the file in <emphasis
+          role="bold">"UTF-8"</emphasis> encoding. Change the file extension
+          from <literal>.txt</literal> to
+          <literal>.utf8.</literal> <application>OmegaT</application> will
           automatically interpret the file as a UTF-8 file. This is the most
           common-sense alternative, sparing you problems in the long
           run.</para>
@@ -92,8 +92,8 @@
           <para>- i.e. files with a <filename>.txt </filename>extension - : in
           the <emphasis role="bold">Text files </emphasis>section of the file
           filters dialog, change the <emphasis role="bold">Source File
-          Encoding </emphasis>from &lt;auto&gt; to the encoding that
-          corresponds to your source<filename> .txt</filename> file, for
+          Encoding</emphasis> from &lt;auto&gt; to the encoding that
+          corresponds to your source <filename>.txt</filename> file, for
           instance to .jp for the above example.</para>
         </listitem>
       </varlistentry>
@@ -104,8 +104,8 @@
         <term>Change the extensions of your plain text source files</term>
 
         <listitem>
-          <para>for instance from <filename>.txt </filename>to <filename>.jp
-          </filename>for Japanese plain texts: in the <emphasis
+          <para>for instance from <filename>.txt</filename> to 
+          <filename>.jp</filename> for Japanese plain texts: in the <emphasis
           role="bold">Text files</emphasis> section of the file filters
           dialog, add new <emphasis role="bold">Source Filename
           Pattern</emphasis> (<filename>*.jp</filename> for this example) and
@@ -129,7 +129,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><literal>.txt1 </literal>files are files in ISO-8859-1, covering
+        <para><literal>.txt1</literal> files are files in ISO-8859-1, covering
         most <emphasis role="bold">Western Europe</emphasis>
         languages.<indexterm class="singular">
             <primary>Default encoding</primary>

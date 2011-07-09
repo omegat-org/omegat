@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch13.Misc">
+<chapter id="chapter.misc">
   <title>Miscellaneous subjects<indexterm class="singular">
       <primary>Miscellanea</primary>
     </indexterm></title>
@@ -290,7 +290,7 @@
 
       <listitem>
         <para>Take particular care when making changes to the files
-        in<literal> /source </literal>while in the middle of a project. If the
+        in <literal>/source </literal>while in the middle of a project. If the
         source file is modified after you have begun translating,
         <application>OmegaT</application> may be unable to find a segment that
         you have already translated.</para>

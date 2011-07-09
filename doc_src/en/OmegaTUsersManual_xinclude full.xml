@@ -47,6 +47,9 @@
   <xi:include href="EditingBehavior.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude" />
 
+  <xi:include href="Font.xml"
+              xmlns:xi="http://www.w3.org/2001/XInclude" />            
+
   <xi:include href="FormattedText.xml"
               xmlns:xi="http://www.w3.org/2001/XInclude" />
 

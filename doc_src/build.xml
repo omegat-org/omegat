@@ -61,6 +61,8 @@
             <arg value="indent=&quot;no&quot;" />
             <arg value="fop.extension=1" />
             <arg value="insert.olink.pdf.frag=1" />
+            <!-- The DejaVu fonts must be available in the system -->
+            <arg value="body.font.family=DejaVu Sans" />
             <classpath>
                 <pathelement location="${saxon}"/>
                 <pathelement path="${saxon}"/>

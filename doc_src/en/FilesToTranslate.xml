@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch05.files.to.translate">
+<chapter id="chapter.files.to.translate">
   <title>Files to translate</title>
 
   <section id="file.formats">
@@ -82,7 +82,7 @@
         </listitem>
 
         <listitem>
-          <para>DocuWiki files (*,txt)</para>
+          <para>DocuWiki files (*.txt)</para>
         </listitem>
       </itemizedlist>
 
@@ -153,7 +153,7 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>XLIFF (*.xlf, *.sdlxliff) - monolingual, i.e. one language
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - monolingual, i.e. one language
             combination possible for a given project</para>
           </listitem>
         </itemizedlist><itemizedlist>
@@ -260,7 +260,7 @@
     <para>The quality of formatting of the translated file will depend on the
     quality of the round-trip conversion. Before proceeding with such
     conversions, be sure to test all options. Check the <ulink
-    url="???">OmegaT home page</ulink> for an up-to-date listing of auxiliary
+    url="http://www.omegat.org">OmegaT home page</ulink> for an up-to-date listing of auxiliary
     translation tools.</para>
   </section>
 

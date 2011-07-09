@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch08.segmentation">
+<chapter id="chapter.segmentation">
   <title>Source segmentation</title>
 
   <para>Translation memory tools work with textual units called segments.
@@ -10,7 +10,7 @@
   segmentation”). In order to select the type of segmentation, select
   <menuchoice>
       <guimenu><indexterm class="singular">
-          <primary>Menu Project</primary>
+          <primary>Project</primary>
 
           <secondary>Properties</secondary>
         </indexterm>Project</guimenu>
@@ -24,7 +24,7 @@
   delivers better matches from previous translations. If sentence segmentation
   has been selected, you can setup the rules by selecting <menuchoice>
       <guimenu><indexterm class="singular">
-          <primary>Menu Project</primary>
+          <primary>Project</primary>
 
           <secondary>Options</secondary>
         </indexterm>Options</guimenu>
@@ -191,8 +191,8 @@
     click <emphasis role="bold">Add </emphasis>in the upper half of the
     dialog. An empty line will appear at the bottom of the upper table (you
     may have to scroll down to see it). Change the name of the rule set and
-    the language pattern to the language concerned and its code (see <link
-    linkend="A2.languages">Appendix B.1 for a list of language codes</link>).
+    the language pattern to the language concerned and its code (see <xref
+    linkend="appendix.languages"/> for a list of language codes).
     The syntax of the language pattern conforms to regular expression syntax.
     If your set of rules handles a language-country pair, we advise you to
     move it to the top using the <emphasis role="bold">Move Up</emphasis>
@@ -201,7 +201,7 @@
     <para>Add the <emphasis role="bold">Before</emphasis> and<emphasis
     role="bold"> After</emphasis> patterns. To check their syntax and their
     applicability, it is advisable to use tools which allow you to see their
-    effect directly. See the chapter on <link linkend="ch09.regexp">Regular
+    effect directly. See the chapter on <link linkend="chapter.regexp">Regular
     expressions</link>. A good starting point will always be the existing
     rules.</para>
   </section>

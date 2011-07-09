@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="A1.website">
+<appendix id="appendix.website">
   <title><application><indexterm class="singular">
       <primary>OmegaT on the web</primary>
     </indexterm>OmegaT</application> on the web</title>
@@ -58,9 +58,9 @@
     url="http://www.joelonsoftware.com/articles/fog0000000029.html">Painless
     Bug Tracking</ulink> article by Joel Spolsky.</para>
 
-    <para>You should add copies of files, portions of the log (see <ulink
-    url="ch05.files.and.directories"><application>OmegaT</application> Files
-    and Directories &gt; User files</ulink> location), screen shots, and
+    <para>You should add copies of files, portions of the log (see <link
+    linkend="chapter.files.and.directories"><application>OmegaT</application> Files
+    and Directories &gt; User files</link> location), screen shots, and
     anything else that you think will help the developers to find and fix your
     bug. Note that bug reports and requests for enhancements are publicly
     visible, so you should not add any sensitive files. If you wish to keep

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="A3.keyboard">
+<appendix id="appendix.keyboard">
   <title>Keyboard shortcuts in the editor</title>
 
   <para>This short text describes key behavior in the editor pane. The term
-  ""Move to inside segment" means, that the cursor moves to the beginning of
+  "Move to inside segment" means, that the cursor moves to the beginning of
   the segment if it was previously before the segment, and to the end of the
   segment if it was previously after it.</para>
 

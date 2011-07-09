@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch07.formatted.text">
+<chapter id="chapter.formatted.text">
   <title>Working with formatted text<indexterm class="singular">
       <primary>Target files</primary>
 
@@ -26,60 +26,59 @@
         <primary>Tags</primary>
       </indexterm></title>
 
-    <para><application><indexterm class="singular">
+    <para><indexterm class="singular">
         <primary>Tags</primary>
 
         <secondary>Naming</secondary>
       </indexterm><emphasis role="bold">Tag
-    naming:</emphasis></application></para>
+    naming:</emphasis></para>
 
-    <para><application>The tags consist of one to three characters and a
+    <para>The tags consist of one to three characters and a
     number. Unique numbering allows tags, corresponding to each other to be
     grouped together and differentiates between tags, that have the same
     shortcut character, but are in fact different. The shortcut characters
     used try to reflect the underlying meaning of the tag (e.g. b for bold, i
-    for italics, etc.)</application></para>
+    for italics, etc.)</para>
 
-    <para><application><indexterm class="singular">
+    <para><indexterm class="singular">
         <primary>Tags</primary>
 
         <secondary>Numbering</secondary>
       </indexterm><emphasis role="bold">Tag
-    numbering:</emphasis></application></para>
+    numbering:</emphasis></para>
 
-    <para><application>Tags are numbered incrementally by tag group. "Tag
+    <para>Tags are numbered incrementally by tag group. "Tag
     groups" in this context are a single tag (such as &lt;i0&gt; and
     &lt;/i0&gt;). Within a segment, the first group (pair or single) receives
     the number 0, the second the number 1 etc. The first example below has 3
     tag groups (a pair, a single, and then another pair), the second example
-    has one group only (a pair).</application></para>
+    has one group only (a pair).</para>
 
-    <para><application><indexterm class="singular">
+    <para><indexterm class="singular">
         <primary>Tags</primary>
 
         <secondary>Pairs and singles</secondary>
       </indexterm><emphasis role="bold">Pairs and
-    singles:</emphasis></application></para>
+    singles:</emphasis></para>
 
-    <para><application>Tags are always either singles or paired. Single tags
+    <para>Tags are always either singles or paired. Single tags
     indicate formatting information that does not affect the surrounding text
-    (an extra space or line break for example).</application></para>
+    (an extra space or line break for example).</para>
 
-    <para><application><literal> &lt;segment
-    2132&gt;&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
-    &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;end segment&gt;
-    </literal></application></para>
+    <para><literal>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
+    &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segment 2132&gt;
+    </literal></para>
 
-    <para><application>&lt;br1&gt; is a single tag and does not affect any
+    <para>&lt;br1&gt; is a single tag and does not affect any
     surrounding text. Paired tags usually indicate style information that
     applies to the text between the opening tag and the closing tag of a pair.
     &lt;b0&gt; and &lt;/b0&gt; below are paired and affect the text log.txt.
     Note that the opening tag must always come before the corresponding
-    closing tag:</application></para>
+    closing tag:</para>
 
-    <para><application>&lt;<literal>segment 3167&gt;Log file
-    (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and errors.&lt;end
-    segment&gt;</literal></application></para>
+    <para>&lt;<literal>Log file
+    (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and 
+    errors.&lt;segment 3167&gt;</literal></para>
 
     <para><application>OmegaT</application> creates its tags before the
     process of sentence segmenting. Depending upon the segmenting rules, the
@@ -114,13 +113,13 @@
 
     <para>Example:</para>
 
-    <para><literal> &lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
-    is going to be duplicated here.&lt;end segment&gt; </literal></para>
+    <para><literal>&lt;b0&gt;This formatting&lt;/b0&gt;
+    is going to be duplicated here.&lt;segment 0001&gt; </literal></para>
 
     <para>After duplication:</para>
 
-    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt;
-    has been &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;end segment&gt;
+    <para><literal>&lt;b0&gt;This formatting&lt;/b0&gt;
+    has been &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;segment 0001&gt;
     </literal></para>
 
     <para><emphasis role="bold"><indexterm class="singular">
@@ -138,13 +137,13 @@
 
     <para>Example:</para>
 
-    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;This formatting&lt;/b0&gt; is
-    going to be deleted.&lt;end segment&gt; </literal></para>
+    <para><literal>&lt;b0&gt;This formatting&lt;/b0&gt; is
+    going to be deleted.&lt;segment 0001&gt; </literal></para>
 
     <para>After deletion:</para>
 
-    <para><literal>&lt;segment 0001&gt;This formatting has been
-    deleted.&lt;end segment&gt; </literal></para>
+    <para><literal>This formatting has been
+    deleted.&lt;segment 0001&gt; </literal></para>
   </section>
 
   <section id="tag.group.nesting">
@@ -163,15 +162,15 @@
 
     <para>Example:</para>
 
-    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
+    <para><literal>&lt;b0&gt;Formatting&lt;/b0&gt;
     &lt;b1&gt;one&lt;/b1&gt; is going to be nested inside formatting
-    zero.&lt;end segment&gt; </literal></para>
+    zero.&lt;segment 0001&gt; </literal></para>
 
     <para>After nesting:</para>
 
-    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;Formatting
+    <para><literal>&lt;b0&gt;Formatting
     &lt;b1&gt;one&lt;/b1&gt;&lt;/b0&gt; has been nested inside formatting
-    zero.&lt;end segment </literal></para>
+    zero.&lt;segment 0001&gt;</literal></para>
   </section>
 
   <section id="tag.group.overlapping">
@@ -187,15 +186,15 @@
 
     <para>Example:</para>
 
-    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;Formatting&lt;/b0&gt;
-    &lt;b1&gt;one&lt;/b1&gt; is going to be messed up.&lt;end segment&gt;
+    <para><literal>&lt;b0&gt;Formatting&lt;/b0&gt;
+    &lt;b1&gt;one&lt;/b1&gt; is going to be messed up.&lt;segment 0001&gt;
     </literal></para>
 
     <para>After a bad manipulation:</para>
 
-    <para><literal>&lt;segment 0001&gt;&lt;b0&gt;Formatting
+    <para><literal>&lt;b0&gt;Formatting
     &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is very messed up now.&lt;end
-    segment&gt; </literal></para>
+    segment 0001&gt;</literal></para>
   </section>
 
   <section id="tag.group.validation">

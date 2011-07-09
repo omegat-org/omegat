@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch04.project.properties">
+<chapter id="chapter.project.properties">
   <title>Project properties<indexterm class="singular">
       <primary>Project</primary>
 

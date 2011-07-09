@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<chapter id="ch04.menu">
+<chapter id="chapter.menu">
   <title>Menu and Keyboard shortcuts</title>
 
   <section id="ch04.main.menu">
@@ -67,7 +67,7 @@
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
-        <colspec align="left" colnum="2" colwidth="70" />
+        <colspec align="left" colnum="2" colwidth="80" />
 
         <tbody>
           <row>
@@ -76,8 +76,8 @@
             <entry></entry>
 
             <entry>Creates and opens a new project. The dialog to create a
-            project is the same as to <ulink
-            url="06_ProjectProperties.xml">edit the project</ulink>.</entry>
+            project is the same as to edit the project.
+            See <xref linkend="chapter.project.properties"/></entry>
           </row>
 
           <row>
@@ -173,8 +173,8 @@
                 <keycap>E</keycap>
               </keycombo></entry>
 
-            <entry>Displays <ulink url="06_ProjectProperties.xml">Project
-            properties</ulink> dialog to edit project languages and folder
+            <entry>Displays <link linkend="chapter.project.properties">Project
+            properties</link> dialog to edit project languages and folder
             locations.</entry>
           </row>
 
@@ -187,9 +187,9 @@
                 <keycap>L</keycap>
               </keycombo></entry>
 
-            <entry>Closes or opens the <ulink
-            url="04_UserInterface.xml#Project_Files">Project files
-            window</ulink> (depending on whether it is open or
+            <entry>Closes or opens the <link
+            linkend="section.project.files">Project files
+            window</link> (depending on whether it is open or
             closed).</entry>
           </row>
 
@@ -229,7 +229,7 @@
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
-        <colspec align="left" colnum="2" colwidth="70" />
+        <colspec align="left" colnum="2" colwidth="80" />
 
         <tbody>
           <row>
@@ -281,7 +281,7 @@
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
-        <colspec align="left" colnum="2" colwidth="70" />
+        <colspec align="left" colnum="2" colwidth="80" />
 
         <tbody>
           <row>
@@ -425,9 +425,8 @@
             <application>OmegaT</application>, this file is not emptied, in
             order to be consistent with usual clipboard behavior. The exported
             contents are copied to the file <filename>selection.txt</filename>
-            located in the User's preference files folder (see <ulink
-            url="filesAndDirectories.xml#user">files and
-            directories</ulink>)</entry>
+            located in the User's preference files folder (see <xref
+            linkend="chapter.files.and.directories"/>).</entry>
           </row>
 
           <row>
@@ -439,9 +438,9 @@
                 <keycap>F</keycap>
               </keycombo></entry>
 
-            <entry>Opens a new <ulink
-            url="04_UserInterface.xml#Search_Window">Search
-            window</ulink>.</entry>
+            <entry>Opens a new <link
+            linkend="section.search.window">Search
+            window</link>.</entry>
           </row>
 
           <row>
@@ -476,8 +475,7 @@
 
             <entry>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
             displayed in the match viewer to replace or insert it to the
-            segment. The <ulink url="04_UserInterface.xml#Fuzzy_Matches">Fuzzy
-            matches</ulink> section describes the color coding in
+            segment. The <xref linkend="match.viewer"/> describes the color coding in
             detail.</entry>
           </row>
         </tbody>
@@ -498,7 +496,7 @@
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
-        <colspec align="left" colnum="2" colwidth="70" />
+        <colspec align="left" colnum="2" colwidth="80" />
 
         <tbody>
           <row>
@@ -522,8 +520,8 @@
                 <keycap>Ctrl</keycap>
 
                 <keycap>N</keycap>
-              </keycombo> or <guimenuitem>Enter</guimenuitem> or
-            <guimenuitem>Tab</guimenuitem></entry>
+              </keycombo> or <keycap>Enter</keycap> or
+            <keycap>Tab</keycap></entry>
 
             <entry>Moves to the next segment. If the current segment is the
             last segment in a file, it moves to the first segment of the next
@@ -691,10 +689,9 @@
 
             <entry><guimenu>Ctrl+T</guimenu>: Checks for missing or displaced
             tags in formatted files. Will display a list of segments with tag
-            errors and possible inconsistencies. See <ulink
-            url="04_UserInterface.xml#Tag_Validation">Tag validation
-            window</ulink> and <ulink url="07_FormattedText.xml">Working with
-            formatted texts</ulink> for more information.</entry>
+            errors and possible inconsistencies. See <link
+            linkend="section.tag.validation">Tag Validation</link> and 
+            <xref linkend="chapter.formatted.text"/>.</entry>
           </row>
 
           <row>
@@ -777,41 +774,40 @@
           <row>
             <entry><guimenuitem>Font...</guimenuitem></entry>
 
-            <entry>Shows the <ulink url="fontSettings.xml">Font
-            settings</ulink> dialogue to modify the text display font. Users
+            <entry>Shows the dialogue to modify the text display font. Users
             of old computers who feel window resizing is very slow can try
-            changing the font.</entry>
+            changing the font. See <xref linkend="chapter.font"/>.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>File Filters...</guimenuitem></entry>
 
-            <entry>Displays the <ulink url="fileFilters.xml">File
-            filters</ulink> dialogue to configure file handling and
+            <entry>Displays the <link linkend="chapter.file.filters">File
+            filters</link> dialogue to configure file handling and
             parsing.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Segmentation...</guimenuitem></entry>
 
-            <entry>Opens the <ulink url="segmentation.xml">Source
-            segmentation</ulink> dialogue to configure text
+            <entry>Opens the <link linkend="chapter.segmentation">Source
+            segmentation</link> dialogue to configure text
             segmentation.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Spell checking...</guimenuitem></entry>
 
-            <entry>Displays the <ulink url="spellchecker.xml">Spell checker
-            setup</ulink> window to install, configure and activate the spell
+            <entry>Displays the <link linkend="chapter.spellchecker">Spell checker
+            setup</link> window to install, configure and activate the spell
             checker.</entry>
           </row>
 
           <row>
             <entry><guimenuitem>Editing Behavior...</guimenuitem></entry>
 
-            <entry>Displays the <ulink
-            url="translationEditing.xml">Translation editing</ulink> dialog to
+            <entry>Displays the <link
+            linkend="chapter.translation.editing">Translation editing</link> dialog to
             configure.</entry>
           </row>
 
@@ -943,7 +939,7 @@
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
-          <colspec align="left" colnum="2" colwidth="70" />
+          <colspec align="left" colnum="2" colwidth="80" />
 
           <tbody>
             <row>
@@ -1035,7 +1031,7 @@
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
-          <colspec align="left" colnum="2" colwidth="70" />
+          <colspec align="left" colnum="2" colwidth="80" />
 
           <tbody>
             <row>
@@ -1188,7 +1184,7 @@
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
-          <colspec align="left" colnum="2" colwidth="70" />
+          <colspec align="left" colnum="2" colwidth="80" />
 
           <tbody>
             <row>
@@ -1210,8 +1206,8 @@
               <entry><keycombo>
                   <keycap>Ctrl</keycap>
 
-                  <keycap>N, Enter</keycap>
-                </keycombo> or <guimenuitem>Return</guimenuitem></entry>
+                  <keycap>N</keycap></keycombo>, <keycap>Enter</keycap>
+                 or <keycap>Return</keycap></entry>
 
               <entry>Moves the editing field to the next segment.</entry>
             </row>
@@ -1281,7 +1277,7 @@
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
-          <colspec align="left" colnum="2" colwidth="70" />
+          <colspec align="left" colnum="2" colwidth="80" />
 
           <tbody>
             <row>

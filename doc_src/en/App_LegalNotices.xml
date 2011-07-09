@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="A4.legal.notices">
+<appendix id="appendix.legal.notices">
   <title><indexterm class="singular">
       <primary>Legal notices</primary>
     </indexterm>Legal notices</title>

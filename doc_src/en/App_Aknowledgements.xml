@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix>
+<appendix id="appendix.acknowledgements">
   <title>Acknowledgements</title>
 
   <section>
@@ -51,7 +51,8 @@
       <listitem>
         <para>Last but not least: my thanks to all the contributors to the
         OmegaT documentation tracker (<ulink
-        url="???">http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617</ulink>)
+        url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617"
+        >OmegaT documentation tracker</ulink>)
         for all the inconsistencies found in the previous versions of the
         documentation. Keep up your good work!</para>
       </listitem>

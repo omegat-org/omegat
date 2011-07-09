@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="Ap5.using.tokenizers.inOmegaT">
+<appendix id="appendix.using.tokenizers.inOmegaT">
   <title>Using tokenizers in OmegaT</title>
 
   <section>
@@ -49,7 +49,7 @@
     <para>A tokenizer package adapted from the Lucene project is distributed
     as an OmegaT plug-in at
     http://sourceforge.net/projects/omegat-plugins/files/. Download the most
-    recent files (OmegaT-LanguageTool_0.1-2.1.zip at the time of this
+    recent files (OmegaT-tokenizers_0.4_2-2.1.zip at the time of this
     writing).</para>
 
     <para>To install the tokenizer, create a folder with the name "plugins" in

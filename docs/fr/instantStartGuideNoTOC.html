@@ -11,7 +11,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="Ch02.instant.start.guide"></a>Tutoriel de prise en main
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Tutoriel de prise en main
                   </h2>
                </div>
             </div>
@@ -177,7 +177,7 @@
                         <div class="itemizedlist">
                            <ul class="itemizedlist" type="circle">
                               <li class="listitem">
-                                 <p>XLIFF monolingue (.xlf, .sdlxliff)</p>
+                                 <p>XLIFF monolingue (.xlf, .xliff, .sdlxliff)</p>
                               </li>
                            </ul>
                         </div>
@@ -227,6 +227,12 @@
                               <li class="listitem">
                                  <p>WiX Localization (.wxl)</p>
                               </li>
+                              <li class="listitem">
+                                 <p>Iceni Infix (.xml)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Exportation Flash XML (.xml)</p>
+                              </li>
                            </ul>
                         </div>
                      </li>
@@ -252,7 +258,7 @@
                </p>
                <p>Le segment actif est surligné en vert et une copie du texte est affichée en dessous, dans la «&nbsp;ligne d'édition&nbsp;». Les zones
                   extérieures à cette ligne d'édition sont protégées et ne peuvent pas être modifiées. Vous devez remplacer le texte source
-                  par votre traduction et taper votre texte avant la balise <code class="literal">&lt;segment 000X&gt;</code>. OmegaT peut être paramétré pour copier automatiquement le texte source dans le texte cible (voir<span class="emphasis"><em> Options &gt; Ligne d'édition...</em></span>), une fonction pouvant s'avérer pratique dans les situations où le texte source doit être conservé dans la traduction. Ces
+                  par votre traduction et taper votre texte avant la balise <code class="literal">&lt;segment 0001&gt;</code>. OmegaT peut être paramétré pour copier automatiquement le texte source dans le texte cible (voir<span class="emphasis"><em> Options &gt; Ligne d'édition...</em></span>), une fonction pouvant s'avérer pratique dans les situations où le texte source doit être conservé dans la traduction. Ces
                   opérations remplacent le texte dans la ligne d'édition par la traduction. Appuyez sur la touche <span class="bold"><strong>«&nbsp;Entrée&nbsp;»</strong></span> pour passer au segment suivant. Remarques :
                </p>
                <div class="itemizedlist">
@@ -262,7 +268,7 @@
                      </li>
                      <li class="listitem">
                         <p>Si vous préférez qu'OmegaT n'insère pas automatiquement le contenu non-traduit dans la ligne d'édition, modifiez cette option
-                           via <span class="guimenu">Options</span> → <span class="guimenuitem">Ligne d'édition...<a class="indexterm" name="d0e277"></a></span></p>
+                           via <span class="guimenu">Options</span> → <span class="guimenuitem">Ligne d'édition...<a class="indexterm" name="d0e283"></a></span></p>
                      </li>
                      <li class="listitem">
                         <p>Vous pouvez modifier la configuration du volet d'édition (par exemple pour afficher ou non le texte source, pour mettre en
@@ -289,11 +295,11 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Correspondances des mémoires de traduction<a class="indexterm" name="d0e299"></a><a class="indexterm" name="d0e304"></a></h4>
+                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Correspondances des mémoires de traduction<a class="indexterm" name="d0e305"></a><a class="indexterm" name="d0e310"></a></h4>
                         </div>
                      </div>
                   </div>
-                  <div class="figure"><a name="d0e309"></a><p class="title"><b>Figure&nbsp;2.&nbsp;Volet des correspondances</b></p>
+                  <div class="figure"><a name="d0e315"></a><p class="title"><b>Figure&nbsp;2.&nbsp;Volet des correspondances</b></p>
                      <div class="figure-contents">
                         <div class="mediaobject"><img src="images/MatchesPane.png" alt="Volet des correspondances"></div>
                      </div>
@@ -303,11 +309,11 @@
                   <div class="itemizedlist">
                      <ul class="itemizedlist" type="disc">
                         <li class="listitem">
-                           <p>Appuyez sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e330"></a> pour insérer la correspondance présélectionnée à la position du curseur.
+                           <p>Appuyez sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e336"></a> pour insérer la correspondance présélectionnée à la position du curseur.
                            </p>
                         </li>
                         <li class="listitem">
-                           <p>Appuyez sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span><a class="indexterm" name="d0e344"></a><a class="indexterm" name="d0e349"></a> pour remplacer le contenu de la ligne d'édition par la correspondance présélectionnée.
+                           <p>Appuyez sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span><a class="indexterm" name="d0e350"></a><a class="indexterm" name="d0e355"></a> pour remplacer le contenu de la ligne d'édition par la correspondance présélectionnée.
                            </p>
                         </li>
                      </ul>
@@ -335,7 +341,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;Correspondances des glossaires et des dictionnaires<a class="indexterm" name="d0e395"></a></h4>
+                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;Correspondances des glossaires et des dictionnaires<a class="indexterm" name="d0e401"></a></h4>
                         </div>
                      </div>
                   </div>
@@ -360,7 +366,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Utilisation des services de traduction automatique<a class="indexterm" name="d0e424"></a></h4>
+                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Utilisation des services de traduction automatique<a class="indexterm" name="d0e430"></a></h4>
                         </div>
                      </div>
                   </div>
@@ -373,12 +379,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Création des documents traduits<a class="indexterm" name="d0e440"></a></h3>
+                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Création des documents traduits<a class="indexterm" name="d0e446"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Une fois tous les segments traduits (ou bien en cours de traduction, comme vous le souhaitez), <span class="application">OmegaT</span> utilise la mémoire de traduction pour créer les documents traduits dans le dossier «&nbsp;target&nbsp;». Pour ce faire, sélectionnez
-                  <span class="guimenu">Projet</span> → <span class="guimenuitem">Créer les documents traduits</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e461"></a> <a class="indexterm" name="d0e467"></a>à partir du menu. Quel que soit l'état d'avancement de la traduction, <span class="application">OmegaT</span> crée les versions traduites des fichiers du dossier «&nbsp;source&nbsp;» du projet. Les fichiers traduits (entièrement ou partiellement)
+                  <span class="guimenu">Projet</span> → <span class="guimenuitem">Créer les documents traduits</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e467"></a> <a class="indexterm" name="d0e473"></a>à partir du menu. Quel que soit l'état d'avancement de la traduction, <span class="application">OmegaT</span> crée les versions traduites des fichiers du dossier «&nbsp;source&nbsp;» du projet. Les fichiers traduits (entièrement ou partiellement)
                   sont sauvegardés dans le dossier «&nbsp;target&nbsp;» spécifié dans les propriétés du projet. Pour finaliser la traduction, ouvrez les
                   fichiers cible dans l'application qui leur est associée (navigateur, traitement de texte...) pour vérifier le contenu de la
                   traduction ainsi que son formatage. Vous pouvez revenir à <span class="application">OmegaT</span> pour y faire les corrections nécessaires sans oublier de recréer les documents traduits pour tenir compte de ces modifications.
@@ -389,7 +395,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Gestion des textes balisés<a class="indexterm" name="d0e482"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Gestion des textes balisés<a class="indexterm" name="d0e488"></a></h2>
                   </div>
                </div>
             </div>
@@ -402,18 +408,18 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e492"></a>3.1.&nbsp;Exemple<a class="indexterm" name="d0e495"></a></h3>
+                        <h3 class="title"><a name="d0e498"></a>3.1.&nbsp;Exemple<a class="indexterm" name="d0e501"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>Dans cet exemple, les balises sont mises en évidence pour les distinguer clairement du texte – cela ne sera pas le cas dans
-                  <span class="application">OmegaT</span>. Les balises HTML (en bleu) sont ignorées par <span class="application">OmegaT</span> parce qu'elles encadrent complètement le segment. Les balises en vert doivent être gérées par <span class="application">OmegaT</span> parce qu'elles se trouvent à l'intérieur du segment. Exemple de segment de fichier HTML :
+               <p>Cet exemple présente les balises mises en évidence pour les distinguer clairement du texte. Cela ne sera pas le cas dans OmegaT.
+                  Les balises HTML (en bleu) sont ignorées par <span class="application">OmegaT</span> parce qu'elles encadrent complètement le segment. Les balises en vert doivent être gérées par <span class="application">OmegaT</span> parce qu'elles se trouvent à l'intérieur du segment. Exemple de segment de fichier HTML :
                </p>
                <p><code class="literal">&lt;p&gt;Une autre police d'affichage peut être sélectionnée dans la boîte de dialogue &lt;b&gt;Police d'affichage&lt;/b&gt;. Ouvrez-la via
                      l'entrée de menu &lt;i&gt;Options&lt;/i&gt; → &lt;i&gt;Police...&lt;/i&gt; Le type et la taille de police peuvent être modifiés dans la boîte de dialogue.&lt;/p&gt;</code></p>
                <p>Voici comment <span class="application">OmegaT</span> affiche ce segment, avec la traduction en afrikaans :
                </p>
-               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;3.&nbsp;Segment HTML source <a class="indexterm" name="d0e522"></a></b></p>
+               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;3.&nbsp;Segment HTML source <a class="indexterm" name="d0e525"></a></b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/tagged_segment.png" alt="Segment HTML source Segment, source et cible – image"></div>
                   </div>
@@ -428,14 +434,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Validation des balises<a class="indexterm" name="d0e546"></a><a class="indexterm" name="d0e551"></a></h3>
+                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Validation des balises<a class="indexterm" name="d0e549"></a><a class="indexterm" name="d0e554"></a></h3>
                      </div>
                   </div>
                </div>
                <p><span class="application">OmegaT</span> ne détecte pas automatiquement les erreurs de balises dans un fichier traduit. Avant de livrer les documents traduits, pensez
                   à vérifier que ceux-ci ne contiennent pas d'erreurs de balises. Pour ceci, sélectionnez <span class="guimenu">Outils</span> → <span class="guimenuitem">Valider les balises</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>) à partir du menu. Vous obtenez une table contenant les segments où les balises source ne correspondent pas aux balises cible.
                   Cliquez sur le numéro du segment. OmegaT vous renvoie automatiquement au segment en question dans le volet d'édition pour
-                  vous permettre de corriger les balises. Après avoir effectué les corrections, appuyez de nouveau sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e575"></a></strong></span> pour une dernière vérification. Notez que le vérificateur de balises pourra indiquer une erreur dans les cas où les balises,
+                  vous permettre de corriger les balises. Après avoir effectué les corrections, appuyez de nouveau sur <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e578"></a></strong></span> pour une dernière vérification. Notez que le vérificateur de balises pourra indiquer une erreur dans les cas où les balises,
                   certes correctement présentes dans la traduction, auront dû être déplacées pour des raisons grammaticales ou syntaxiques.
                   Il s'agit ici d'une simple mesure de précaution.
                </p>

@@ -33,7 +33,7 @@ reload the project.
 
   Localisation updates:  
 
-  - Dutch localisation updated to 2.3 (UI)
+  - Dutch localisation updated to 2.3, backported from 2.5 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.3.0

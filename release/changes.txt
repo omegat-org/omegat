@@ -27,13 +27,14 @@ reload the project.
 ----------------------------------------------------------------------
    0 Enhancement
    0 Bug fix
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 vs. 2.3.0 update 1
 
   Localisation updates:  
 
   - Dutch localisation updated to 2.3, backported from 2.5 (UI)
+  - Hungarian localisation updated to 2.3 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.3.0

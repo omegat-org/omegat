@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "/opt/local/var/macports/software/docbook-xml-4.5/4.5_0/opt/local/share/xml/docbook/4.5/docbookx.dtd">
+<chapter id="chapter.instant.start.guide">
+  <title>Útmutató az azonnali kezdéshez</title>
+
+  <section>
+    <title>Vegye használatba az <application>OmegaT</application>-t 5 percen belül!</title>
+
+    <para>Ez az azonnali kezdéshez való útmutató csak az OmegaT alapjait ismerteti. Ideális esetben a felhasználóknak ajánlatos alaposan megismerkedni a felhasználói kézikönyvvel, mert megtudhatják belőle mindazt, amit az <application>OmegaT</application> számukra tartogat. Megjegyzés Mac-felhasználóknak: az itt leírt gyorsbillentyűk a &quot;<keycombo> <keycap>Ctrl</keycap> <keycap>billentyű</keycap> </keycombo>kombinációval érhetők el, Mac esetén viszont a &quot;<keycombo> <keycap>Cmd</keycap> <keycap>billentyű</keycap> </keycombo>&quot; használandó. A &quot;<keycap>Cmd</keycap>&quot; billentyűn az Apple billentyűzetén a &quot;command&quot; felirat vagy az &quot;alma&quot;-jel látható.</para>
+
+    <para>Az <application>OmegaT</application> képernyőjén megjelenő munkaterület öt ablakra van felosztva<indexterm class="singular">
+        <primary>Az OmegaT ablakai</primary>
+      </indexterm>. Ezek mindegyikét átméretezheti az egérrel. Balra található a szerkesztő, ahol begépeli a fordítást. Jobbra fent látható a Bizonytalan egyezések ablak, ahol a fordítási memóriában fellelt részleges egyezések jelennek meg. Ez alatt található a Szójegyzék ablak, benne pedig a szójegyzékben fellelt egyezések. Az ablak alján látható két gombbal a Szótár és a Gépi fordítás ablak érhető el. (Megjegyzés: az ablakokat természetesen tetszése szerint átszabhatja. A fenti leírás az OmegaT telepítés utáni megjelenésére vonatkozik).</para>
+
+    <para>A Szerkesztő ablakban az OmegaT a forrásszöveget jeleníti meg mondatokra (vagy bekezdésekre)  'darabolva'.. Ezeket a szövegrészeket fogja egymás után lefordítani. A szövegben előrehaladva a lefordított részek automatikusan egy fordítási memóriába kerülnek. Ha minden szövegegységet lefordított (vagy ha úgy kívánja, akár munka közben) az <application>OmegaT</application>  a fordítási memória segítségével a “target” [célnyelvi] mappában előállítja a lefordított dokumentumo(ka)t.</para>
+
+    <para>Az OmegaT a fordításokat fordítási &quot;projektekben&quot; tárolja. Az OmegaT minden egyes projekthez létrehoz egy sor mappát és ezekben tárolja a lefordítandó forrásszövegeket, valamint az esetleg használni kívánt szójegyzékeket és fordítási memóriákat. Az OmegaT létrehoz egy “target” [célnyelvi] mappát is, ebbe kerülnek a végleges lefordított dokumentumok.</para>
+  </section>
+
+  <section>
+    <title>Fordítás az <application>OmegaT</application> segítségével</title>
+
+    <section id="create.and.open.new.project">
+      <title>Új projekt létrehozása és megnyitása<indexterm class="singular">
+          <primary>Projekt</primary> <secondary>létrehozása / megnyitása</secondary>
+        </indexterm></title>
+
+      <para>A menüből válassza ki a <menuchoice> <guimenu>Projekt</guimenu> <guimenuitem>Új...</guimenuitem> </menuchoice><indexterm class="singular">
+          <primary>Projektmenü</primary> <secondary>Új...</secondary>
+        </indexterm> pontot.</para>
+
+      <para>Térjen át arra a mappára, amelybe a projekt állományait menteni kívánja, majd adjon meg egy nevet a fordítási projektnek. A projekt fő mappája ezt a nevet fogja használni: minden projektfájl ebbe a mappába vagy annak almappáiba kerül majd.</para>
+
+      <para>Az <application>OmegaT</application> a létrehozandó projektmappák megerősítésére vagy módosítására az alábbi párbeszédablakot használja:</para>
+
+      <figure id="New.project.dialog.window">
+        <title><indexterm class="singular">
+            <primary>Projekt</primary> <secondary>Projekt párbeszédablak - ábra</secondary>
+          </indexterm>új projekt párbeszédablaka</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/NewProject.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Elfogadhatja az almappák felkínált helyét, de előtte ellenőrizze, hogy a forrásnyelvi és a célnyelvi kódok helyesek-e. A lenyíló listából válassza ki a nyelvi kódot (2 betűs) vagy a nyelvi- és régiókódot (2 + 2 betűs), vagy írja be őket (a a nyelvi kód 2 vagy 3 betűs lehet). Jegyezze meg a 'target' célmappa helyét (ahová a lefordított szövegek kerülnek majd). Ha &quot;bekezdésenkénti&quot; szövegdarabolás helyett mondatonkéntit szeretne használni, olvassa el a szövegdarabolási szabályokról szóló fejezetet.</para>
+
+      <para>Amikor a projekt beállításait a Rendben gombra kattintva jóváhagyja, az OmegaT felszólítja az importálandó forrásdokumentumok kiválasztására. Importálhat akár egyetlen állományt, de importálhat egész könyvtárakat (az alkönyvtáraikban lévő összes állománnyal együtt). Erre a célra használhat egy fájlkezelő alkalmazást is. Ha véletlenül rossz vagy túl sok dokumentumot importált, törölje őket a projekt 'source' [forrásnyelvi] mappájából.</para>
+
+      <para>A fordítandó állományok ellenőrzéséhez térjen át a <emphasis role="bold">Projektállományok</emphasis>  <indexterm class="singular">
+          <primary>Projektállományok</primary> <secondary>Forrásállományok</secondary>
+        </indexterm>ablakra (Menü:  <menuchoice> <guimenu>Projekt </guimenu> <guimenuitem> Projektállományok...</guimenuitem> </menuchoice>,<indexterm class="singular">
+          <primary>Projektmenü</primary> <secondary>Projektállományok...</secondary>
+        </indexterm> ha a mappa nem nyílik ki automatikusan).. Ha módosította a 'source' forrásmappa tartalmát, előbb ne feledje újból betölteni a projektet (Menü: <menuchoice> <shortcut> <keycap>F5</keycap> </shortcut> <guimenu>Projekt </guimenu> <guimenuitem> Újratöltés</guimenuitem> </menuchoice>). Az <application>OmegaT</application> alaphelyzetben a projektben felsorolt állományok közül az elsőt nyitja meg. Az <application>OmegaT</application> csak az alábbi formátumú állományok fordítását támogatja, amennyiben azok megfelelnek az állományszűrők között megadott mintáknak. Minden egyéb állományt figyelmen kívül hagy.<indexterm class="singular">
+          <primary>Forrásállományok</primary> <secondary>Állományformátumok</secondary>
+        </indexterm></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Egyszerű szöveges állományok<indexterm class="singular">
+              <primary>Állományformátumok</primary> <secondary>egyszerű szöveges állományok</secondary>
+            </indexterm></emphasis><itemizedlist>
+              <listitem>
+                <para>ASCII-szöveg (.txt stb.)</para>
+              </listitem>
+
+              <listitem>
+                <para>Kódolt szöveg (*.UTF8)</para>
+              </listitem>
+            </itemizedlist><itemizedlist>
+              <listitem>
+                <para>Java nyelvi forrásszövegek (*.properties)</para>
+              </listitem>
+            </itemizedlist><itemizedlist>
+              <listitem>
+                <para>PO-állományok (*.po)</para>
+              </listitem>
+            </itemizedlist><itemizedlist>
+              <listitem>
+                <para>INI (kulcs=érték) állományok (*.ini)</para>
+              </listitem>
+            </itemizedlist><itemizedlist>
+              <listitem>
+                <para>DTD-állományok (*.DTD)</para>
+              </listitem>
+
+              <listitem>
+                <para>DocuWiki-állományok (*.txt)</para>
+              </listitem>
+            </itemizedlist></para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Címkékkel ellátott szöveges állományok<indexterm class="singular">
+              <primary>Állományformátumok</primary> <secondary>formázott</secondary>
+            </indexterm></emphasis></para>
+
+          <itemizedlist>
+            <listitem>
+              <para>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
+              *.odp, *.otp)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>Microsoft Open XML (*.docx. *.xlsx, *.pptx)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>HTML Help Compiler (*.hhc, *.hhk)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>DocBook (*.xml)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>egynyelvű XLIFF (*.xlf, *.xliff, *.sdlxliff)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>SubRip feliratok (*.srt)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>ResX-állományok (*.resx)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>Android forrásfájlok (*.xml)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>LaTex (*.tex, *.latex)</para>
+            </listitem>
+
+            <listitem>
+              <para>Súgóállományok (*.xml) és kézikönyvek (*.hmxp)</para>
+            </listitem>
+
+            <listitem>
+              <para>Typo3 LocManager (*.xml)</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>WiX honosítási állományok (*.wxl)</para>
+            </listitem>
+
+            <listitem>
+              <para>Iceni Infix (*.xml)</para>
+            </listitem>
+
+            <listitem>
+              <para>Flash XML export (*.xml)</para>
+            </listitem>
+
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+
+      <para>A lefordítandó szövegen túl a címkékkel ellátott szöveges állományok formázási információkat tartalmaznak, melyeket az OmegaT “címkék” formájában rejt el. A címkéknek a célnyelvi szövegben is szerepelni kell, még akkor is, ha a formázás nem “fordítandó”. Hiányzó vagy rossz helyre kerülő címkék esetén a a fordítást utólag javítani kell - lásd alább: &quot;Címkék ellenőrzése&quot;.</para>
+    </section>
+
+    <section id="translate.the.segments.one.by.one">
+      <title>Szövegegységek fordítása egyesével</title>
+
+      <para>Ha meghatározta a projektet és a fordítandó állományokat, az <application>OmegaT</application> a szerkesztőben megnyitja az első forrásszöveget.</para>
+
+      <para>Az aktuális szövegegység zöld színnel kiemelve látható; alatta a célnyelvi mezőben megismétlődik a forrásszöveg. (Ekkor a célnyelvi mezőn kívüli összes szöveg zárolva van és nem módosítható.) A fordítást a forrásszöveg felülírásával az &lt;<literal>0001. egység&gt;</literal> elé kell beírnia. Az OmegaT-t beállíthatja úgy, hogy a forrásszöveg automatikusan a célnyelvi szövegbe kerüljön (lásd: <emphasis>Beállítások &gt; Szerkesztési mód...</emphasis>), ami hasznos lehet, ha a forrásszöveg egyes részei változatlanul megmaradnak. Ilyen esetekben a feladat a forrásszöveg felülírása. A következő szövegegységre az &quot;<emphasis role="bold">ENTER</emphasis>&quot; lenyomásával térhet át. Megjegyzés:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Bármely, akár feljebb, akár lejjebb lévő szövegrészre áttérhet, ha kétszer rákattint a megnyitni kívánt mondatra vagy bekezdésre.</para>
+        </listitem>
+
+        <listitem>
+          <para>Ha inkább üres célnyelvi mezőbe szeretné beírni a fordítást, módosítsa ennek megfelelően a <menuchoice> <guimenu>Beállítások </guimenu> <guimenuitem>Szerkesztési mód...<indexterm class="singular">
+                  <primary>Beállítások menü</primary> <secondary>Szerkesztési mód...</secondary>
+                </indexterm></guimenuitem> </menuchoice> menüpontot.</para>
+        </listitem>
+
+        <listitem>
+          <para>A főmenü Nézet menüpontjából módosíthatja a szerkesztőablak beállításait (pl. azt, hogy látsszon-e a forrásnyelvi szöveg, kiemeleten jelenjen-e meg a lefordított szöveg stb.).</para>
+
+          <para>Az <emphasis role="bold">ENTER</emphasis> megnyomásakor több dolog történik a háttérben: az <application>OmegaT</application> a szövegegységpárt (a forrást és annak fordítását) hozzáadja a belső fordítási memóriához. Emellett automatikusan lefordítja az összes ezzel egyező, de más projektfájlokban fellelt szöveget is. Továbbmenve, végignézi a fordítási memóriát és a szójegyzéket, nincs-e bennük egyezés a következő lefordítatlan szövegegységgel, melyet azután meg is nyit.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="use.matches.in.TMs.dictionaries.and.glossaries">
+      <title>A fordítási memória, a szójegyzékek és a szótárak egyezéseinek felhasználása</title>
+
+      <section id="translation.memory.matches">
+        <title>Egyezések a fordítási memóriában<indexterm class="singular">
+            <primary>Fordítási memóriák</primary> <secondary>Bizonytalan egyezések</secondary>
+          </indexterm><indexterm class="singular">
+            <primary>Fordítási memóriák</primary> <secondary>Egyezések</secondary>
+          </indexterm></title>
+
+        <figure>
+          <title>Az egyezések panelje</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure>
+
+        <para>Ha az <application>OmegaT</application> a fordítási memóriában  a következő szövegegységhez bizonytalan (30% vagy azt meghaladó mértékű) egyezéseket talál, akkor megjeleníti azokat a Bizonytalan egyezések ablakban. Alaphelyzetben a Bizonytalan egyezések ablakból az első egyezést választja ki.</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>A <keycombo> <keycap>Ctrl</keycap> <keycap>I</keycap> </keycombo><indexterm class="singular">
+                <primary>Billentyűparancsok</primary> <secondary>Ctrl+I - Szöveg beszúrása</secondary>
+              </indexterm> lenyomásával a kiválasztott egyezést beszúrja a kurzor helyére, illetve...</para>
+          </listitem>
+
+          <listitem>
+            <para>A <keycombo> <keycap>Ctrl</keycap> <keycap>R</keycap> </keycombo> <indexterm class="singular">
+                    <primary>Billentyűparancsok</primary> <secondary>Ctrl+R - Szöveg cseréje</secondary>
+                  </indexterm><indexterm class="singular">
+                    <secondary>Szöveg cseréje</secondary>
+                  </indexterm> lenyomásával a kiválasztott egyezéssel felülírja a teljes szövegegységet..</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Ha több egyezés is előfordul, de nem az előre kiválasztottat kívánja használni:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Válassza ki a kívánt egyezést a Bizonytalan egyezések ablakból: <keycombo> <keycap>Ctrl</keycap> <keycap>2</keycap> </keycombo> a másodikként megjelenített egyezés, <keycombo> <keycap>Ctrl</keycap> <keycap>3</keycap> </keycombo> a harmadik egyezés kiválasztásához stb.</para>
+          </listitem>
+
+          <listitem>
+            <para>Ezután használhatja a <keycombo> <keycap>Ctrl</keycap> <keycap>I</keycap> </keycombo> vagy a <keycombo> <keycap>Ctrl</keycap> <keycap>R</keycap> </keycombo> billentyűparancsot a fent leírtak szerint..</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>Arra is utasíthatja az OmegaT-t, hogy bármely megadott százalék fölötti egyezést automatikusan szúrjon be a célnyelvi mezőbe. Ezt a lehetőséget a <menuchoice> <guimenu>Beállítások</guimenu> </menuchoice> menüben állíthatja be.</para>
+      </section>
+
+      <section id="glossary.and.dictionary.matches">
+        <title>A szójegyzékben a szótárban előforduló egyezések<indexterm class="singular">
+            <primary>Egyezések</primary> <secondary>Szójegyzék és szótár egyezései</secondary>
+          </indexterm></title>
+
+        <para>A projektbe felvett szójegyzékekben és szótárakban fellelhető egyezéseket tájékozódás céljából a Szójegyzék és a Szótár ablak jeleníti meg..</para>
+      </section>
+
+      <section id="use.searches">
+        <title>Keresések</title>
+
+        <para>Az <application>OmegaT</application> kiterjedt keresési lehetőségeket biztosít. Hívja elő a Szöveg keresése ablakot a <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> -fel és a Keresendő: mezőbe írja be a kikeresendő szót vagy kifejezést. Másik megoldásként kijelölheti a Szerkesztő ablakban a keresendő szót vagy kifejezést, majd használja a <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> billentyűparancsot.</para>
+      </section>
+
+      <section id="use.Google.Translate">
+        <title>Gépi fordítás használata<indexterm class="singular">
+            <primary>Egyezések</primary> <secondary>Gépi fordítás</secondary>
+          </indexterm></title>
+
+        <para>Bekapcsolt szolgáltatás esetén (lásd: <emphasis>Beállítások&gt; Gépi fordítás</emphasis>) a Gépi fordítás ablakban automatikusan megjelennek az adott szövegegység lefordításához kapcsolódó javaslatok. A <emphasis>Ctrl+M </emphasis> lenyomásakor a javasolt egyezéssel felülírja a célnyelvi szövegegységet.</para>
+      </section>
+    </section>
+
+    <section id="create.translated.documents">
+      <title>Lefordított állományok előállítása<indexterm class="singular">
+          <primary>Projektállományok</primary> <secondary>Célnyelvi állományok</secondary>
+        </indexterm></title>
+
+      <para>Ha minden szövegegységet lefordított (vagy akár már előtte), az <application>OmegaT</application> a fordítási memóriában tárolt fordítások alapján frissíti a célnyelvi dokumentumo(ka)t. Ehhez a menüből válassza ki a  <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Projekt</guimenu> <guimenuitem>Lefordított állományok előállítása</guimenuitem> </menuchoice><indexterm class="singular">
+          <primary>Billentyőparancsok</primary> <secondary>Ctrl+D - Lefordított állományok előállítása</secondary>
+        </indexterm> <indexterm class="singular">
+          <primary>Projektmenü</primary> <secondary> Lefordított állományok előállítása</secondary>
+        </indexterm> pontot. Az <application>OmegaT</application> előállítja a projekt forrásmappájában lévő összes állomány fordítását, akár teljesen elkészültek, akár nem. A teljesen vagy részben kész állományokat a projekt célmappájába (target) menti. A fordítás befejezéséhez nyissa meg a célnyelvi szövegeket a velük használatos alkalmazásban (böngészőben, szövegszerkesztőben...), majd ellenőrizze a fordítás tartalmát és szerkesztését. Ezután visszatérhet az <application>OmegaT</application>-hez és elvégezheti a szükséges javításokat; ne feledkezzen meg a lefordított szövegek újbóli előállításáról.</para>
+    </section>
+  </section>
+
+  <section id="how.to.handle.tagged.text">
+    <title>Címkét tartalmazó szöveg kezelése<indexterm class="singular">
+        <primary>Címkét tartalmazó szöveg</primary>
+      </indexterm></title>
+
+    <para>Az <application>OmegaT</application> speciális címkék használatával gondoskodik arról, hogy a forrásszövegek formázása (vastag, dőlt stb.) megőrződjék. Az <application>OmegaT</application> címkéi egy vagy több betűből és egy vagy több azt követő számjegyből, valamint a címkét lezáró &quot;/&quot; karakterből állnak (például: &lt;f0&gt;,  &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;). Ezekre ügyelnie kell és a célnyelvi szövegbe a megfelelő helyre kell őket beszúrnia (lásd a címkeműveletekről szóló részt).</para>
+
+    <section>
+      <title>Egy példa...<indexterm class="singular">
+          <primary>Címkét tartalmazó szöveg</primary> <secondary>Példa</secondary>
+        </indexterm></title>
+
+      <para>Ezekben a példákban a címkék ki vannak emelve a könnyebbség kedvéért, de az <application>OmegaT</application>-ben nem kiemelten jelennek meg. A kék HTML-címkéket az <application>OmegaT</application> figyelmen kívül hagyja, mivel ezek teljesen körbeveszik az adott egységet..  Az alább zöld színnel kiemelt címkéket az <application>OmegaT</application>-nek kezelnie kell, mert azok az egységen belül helyezkednek el. Íme egy példa egy HTML-állományban szereplő címkére:</para>
+
+      <para><literal>&lt;p&gt;Egy másik megjelenítési betűtípust választhat a &lt;b&gt;Betű...&lt;/b&gt; párbeszédablakból. Megnyitása a&lt;i&gt;Beállítások  → Betű...&lt;/i&gt; menüpontból történik. A párbeszédablakban beállíthatja a betű típusát és méretét.&lt;/p&gt;</literal></para>
+
+      <para>Ezt az <application>OmegaT</application> az alábbi módon jeleníti meg afrikaans fordítás esetén:</para>
+
+      <figure id="fig.tagged.segment.source">
+        <title>Forrásnyelvi szövegegység <indexterm class="singular">
+            <primary>Szövegegység, forrásnyelvi és célnyelvi - ábra</primary>
+          </indexterm>HTML-ben</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/tagged_segment.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/tagged_segment.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Amikor az <application>OmegaT</application> előállítja a fordítást, a HTML ekként néz ki:</para>
+
+      <figure id="fig.tagged.segment.target">
+        <title>Célnyelvi szövegegység HTML-ben</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/tagged_segment_target.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/tagged_segment_target.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+    </section>
+
+    <section id="tag.verification">
+      <title>Címkék ellenőrzése<indexterm class="singular">
+          <primary>Címkét tartalmazó szöveg</primary> <secondary>Címkék ellenőrzése</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>Címkék ellenőrzése</primary>
+        </indexterm></title>
+
+      <para>Az <application>OmegaT</application> automatikusan nem szűri ki a lefordított dokumentumban lévő hibás címkéket. Ezért a szöveg leadása előtt a fordítónak kell ellenőrizni a címkék helyességét. Válassza ki a menüből az <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo> </shortcut> <guimenu>Eszközök</guimenu> <guimenuitem>Címkék ellenőrzése...</guimenuitem> </menuchoice> pontot. Ekkor egy táblázat jelenik meg, amelyben látható, hol nem egyeznek a forrásnyelvi és a célnyelvi címkék. Kattintson a szövegegység számára. Ennek hatására automatikusan a szerkesztőben a hibás szövegegységhez kerül, ahol kijavíthatja a hibás címkét. A javítások elvégzése után ellenőrizze ismét a <keycombo> <keycap>Ctrl</keycap> <keycap>T<indexterm class="singular">
+              <primary>Billentyűparancsok</primary> <secondary>Ctrl+T - Címkék ellenőrzése</secondary> <seealso>Címkét tartalmazó szöveg</seealso>
+            </indexterm></keycap> </keycombo> lenyomásával. Ne feledje, hogy a címkeellenőrző hibát találhat helyes címkék esetén is - például amikor a nyelvtani alak helyessége érdekében a címkék sorrendje megváltozik. Ez esetben a hibát vegye óvatosságból kiadott figyelmeztetésnek.</para>
+
+      <para>Egyes esetekben címkehiba miatt nem lehet a dokumentumot megnyitni. Aggodalomra semmi ok: a forrásszöveg és a célnyelvi szöveg nem veszett el. Javítsa ki a hibás címkéket, mielőtt előállítja a lefordított állományokat. Végezetül nyissa meg a böngészőben vagy a szerkesztőben a lefordított szöveget és ellenőrizze a végső formázást.</para>
+    </section>
+  </section>
+</chapter>

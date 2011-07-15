@@ -15,7 +15,7 @@ The creation of the documentation requires a number of tools:
 
 For efficiency reason, the path to the DTD in the DocBook files (e.g., AboutOmegaT.xml) has been changed to a local path (../../../docbook-xml-4.5/docbookx.dtd instead of an http:// reference). Depending on the actual configuration, it might be changed to a standard reference ("http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd") or to another local reference.
 
-The instructions below give an example of installation under Windows.
+***Windows***
 
 dbk must be installed at the root of c:\
 
@@ -54,13 +54,49 @@ The location of fop-0.95, dbk and Saxon must be set in build.xml, in the corresp
     <property name="saxon" value="C:\Program Files\saxon6-5-5\saxon.jar" />
 
 The location of dbk must also be set in docbook-utf8.xsl:
-<xsl:import href="file:///c:\dbk\html\docbook.xsl"/> 
+<xsl:import href="file:///c:\dbk\html\docbook.xsl"/>
+
+***Mac OSX***
+
+All the dependencies can be installed through Macports except for Saxon 6-5-5
+
+Macports:
+http://www.macports.org/
+
+Saxon 6-5-5
+https://sourceforge.net/projects/saxon/files/saxon6/6.5.5/
+Unzip the downloaded package and put it in your prefered location. The example below uses the /Applications/ folder.
+
+If you use Macports, the build.xml settings are:
+
+    <property name="fop.home" value="/opt/local/share/java/fop/1.0" />
+    <property name="dbk" value="/opt/local/share/xsl/docbook-xsl" />
+    <property name="saxon" value="/Applications/saxon6-5-5/saxon.jar" />
+
+and the docbook-utf8.xsl settings are:
+
+    <xsl:import href="file:///opt/local/share/xsl/docbook-xsl/html/docbook.xsl"/>
+
+The DocBook 4.5 DTD is located here:
+/opt/local/var/macports/software/docbook-xml-4.5/4.5_0/opt/local/share/xml/docbook/4.5/
+
+Copy the /4.5/ folder to the folder that is three folders "higher" than the DocBook documentation source files in your folder tree and rename it /docbook-xml-4.5/.
+
+So, if you have your DocBook documentation source files in:
+/path/to/omegat/branches/release-2-3/doc_src/hu/
+
+The /docbook-xml-4.5/ folder should be copied inside /branches/:
+/path/to/omegat/branches/docbook-xml-4.5/
+
 
 ***Usage***
 
 All the scripts require the language folder as argument.
 
 E.g.: 
+Building Instant Start only
+ant -Dlanguage=en instant-start
+
 Building everything except Javahelp:
 ant -Dlanguage=en
 

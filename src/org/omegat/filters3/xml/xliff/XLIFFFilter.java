@@ -72,6 +72,7 @@ public class XLIFFFilter extends XMLFilter {
      * 
      * @return <code>false</code>
      */
+    @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
@@ -81,6 +82,7 @@ public class XLIFFFilter extends XMLFilter {
      * 
      * @return <code>true</code>
      */
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }

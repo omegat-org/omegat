@@ -37,7 +37,7 @@ import org.omegat.util.OStrings;
 public class XLIFFFilter extends XMLFilter {
 
     /**
-     * Creates a new instance of DocBookFilter
+     * Creates a new instance of XLIFFFilter
      */
     public XLIFFFilter() {
         super(new XLIFFDialect());

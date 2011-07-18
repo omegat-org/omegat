@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -109,6 +110,10 @@ public class MozillaDTDFilter extends AbstractFilter {
             if (c == '>' && isInBlock && previousChar == '"') {
                 isInBlock = false;
                 processBlock(block.toString(), outFile);
+                block.setLength(0);
+            } else if ((c == '>' && isInBlock && previousChar == '-')) { // This was a comment
+                isInBlock = false;
+                outFile.write(block.toString());
                 block.setLength(0);
             }
             if (!Character.isWhitespace(c) ) { // In the regexp, there could be whitespace between " and >

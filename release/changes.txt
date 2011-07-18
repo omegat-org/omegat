@@ -26,10 +26,15 @@ reload the project.
  OmegaT 2.3.0 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   1 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 vs. 2.3.0 update 1
+
+  Bug fixes:
+
+  - Mozilla DTD handler is skipping segments
+  http://sourceforge.net/support/tracker.php?aid=3369466
 
   Localisation updates:  
 

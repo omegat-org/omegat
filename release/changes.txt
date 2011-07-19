@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
   - Changes in TM/ are detected automatically every second. The
 modified TMX are reloaded in memory transparently, without having to
 reload the project.
+
+  - Wordfast TXML filter. Only target segments are read, so it
+it is mostly useful for files where source = target.
 
   Localisation updates:
 

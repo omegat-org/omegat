@@ -21,12 +21,12 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.3.x_Windows_without_JRE.exe</emphasis>.</para>
+          <emphasis>OmegaT_2.5.x_Windows_without_JRE.exe</emphasis>.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">No / I don't know:</emphasis>
-          download<emphasis> OmegaT_2.3.x_Windows.exe.</emphasis></para>
+          download<emphasis> OmegaT_2.5.x_Windows.exe.</emphasis></para>
 
           <para>This package is bundled with Oracle's Java Runtime
           Environment. This JRE will not interfere with other Java
@@ -171,12 +171,12 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.3.x_Without_JRE.zip</emphasis>.</para>
+          <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
         </listitem>
 
         <listitem>
           <para><emphasis role="bold">No / I don't know:</emphasis> download
-          <emphasis>OmegaT_2.3.x_Linux.tar.bz2.</emphasis></para>
+          <emphasis>OmegaT_2.5.x_Linux.tar.bz2.</emphasis></para>
 
           <para>This package is bundled with Oracle's Java Runtime
           Environment. This JRE will not interfere with other Java
@@ -322,23 +322,23 @@
     <section id="which.package.to.download.OSX">
       <title>Dowloading the package</title>
 
-      <para><application>OmegaT</application> 2.3 requires Java 1.5 to run.
+      <para><application>OmegaT</application> 2.5 requires Java 1.5 to run.
       Use "Software Update..." from the Apple menu to update your Java
       version.</para>
 
-      <para>Download <emphasis>OmegaT_2.3.x_Mac.zip.</emphasis></para>
+      <para>Download <emphasis>OmegaT_2.5.x_Mac.zip.</emphasis></para>
     </section>
 
     <section id="OmegaT.installation.OSX">
       <title><application>Installing OmegaT </application></title>
 
-      <para>Double click on <emphasis>OmegaT_2.3.x_Mac.zip</emphasis> to
+      <para>Double click on <emphasis>OmegaT_2.5.x_Mac.zip</emphasis> to
       unpack it. This creates a folder called <emphasis>
       <application>OmegaT</application> </emphasis>. The folder contains 2
       files: index.html and
       <emphasis><application>OmegaT</application>.app.</emphasis> Copy the
       folder to a suitable folder (e.g. Applications). Once you have done
-      this, you can delete the <emphasis>OmegaT_2.3.x_Mac.zip</emphasis> file,
+      this, you can delete the <emphasis>OmegaT_2.5.x_Mac.zip</emphasis> file,
       it is no longer needed.</para>
     </section>
 
@@ -452,7 +452,7 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.3.x_Windows_without_JRE.</emphasis>zip This
+          <emphasis>OmegaT_2.5.x_Windows_without_JRE.</emphasis>zip This
           package can be used on any platform where a Java 1.5 JRE compatible
           JRE is installed.</para>
         </listitem>
@@ -467,7 +467,7 @@
         <listitem>
           <para><emphasis role="bold">No:</emphasis> obtain a Java JRE for
           your system (see below) and download
-          <emphasis>OmegaT_2.3.x_Without_JRE.zip</emphasis>.</para>
+          <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
 
           <para>Oracle provides JREs for Solaris SPARC/x86 (Java 1.5) and for
           Linux x64, Solaris x64, Windows x64 (Java 1.5) at <ulink
@@ -491,8 +491,8 @@
         </indexterm></title>
 
       <para>To install <application>OmegaT</application>, simply unpack the
-      <emphasis role="bold">OmegaT_2.3.x_Without_JRE.zip</emphasis> file. This
-      creates an <emphasis>./OmegaT_2.3.x_Without_JRE/</emphasis> directory in
+      <emphasis role="bold">OmegaT_2.5.x_Without_JRE.zip</emphasis> file. This
+      creates an <emphasis>./OmegaT_2.5.x_Without_JRE/</emphasis> directory in
       the working folder with all the files necessary to run
       <application>OmegaT</application>.</para>
     </section>
@@ -1000,8 +1000,8 @@
     <para>Note that you will need the ant program
     (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) to build your
     own version of OmegaT. Unpack the
-    <emphasis>OmegaT_2.3.x_Source.zip</emphasis> file and enter the
-    OmegaT_2.3.x_Source directory or enter the <emphasis>./omegat/</emphasis>
+    <emphasis>OmegaT_2.5.x_Source.zip</emphasis> file and enter the
+    OmegaT_2.5.x_Source directory or enter the <emphasis>./omegat/</emphasis>
     directory of the SVN checked out code. Please make sure that a build.xml
     file is present in that folder. Then, on the command line, type:</para>
 

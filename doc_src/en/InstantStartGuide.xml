@@ -283,6 +283,10 @@
               <para>Flash XML export (*.xml)</para>
             </listitem>
 
+          <listitem>
+            <para>Wordfast TXML (*.txml)</para>
+          </listitem>
+
           </itemizedlist>
         </listitem>
       </itemizedlist>

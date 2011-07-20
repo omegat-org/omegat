@@ -74,6 +74,7 @@ OmegaT supports the following file formats out of the box:
   - Wix  
   - Infix
   - Flash XML export
+  - Wordfast TXML
 
 OmegaT can be customized to support other file formats as well.
 

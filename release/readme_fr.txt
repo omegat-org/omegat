@@ -188,6 +188,7 @@ Contributions au code :
   Maxym Mykhalchuk 
   Arno Peters
   Henry Pijffers 
+  Briac Pilpré
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband

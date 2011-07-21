@@ -170,6 +170,10 @@ public abstract class ParseEntry implements IParseCallback {
      */
     private void internalAddSegment(String id, short segmentIndex, String segmentSource,
             String segmentTranslation, String comment, String path) {
+        if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
+            // skip empty segments
+            return;
+        }
         ParseEntryQueueItem item = new ParseEntryQueueItem();
         item.id = id;
         item.segmentIndex = segmentIndex;

@@ -175,6 +175,11 @@ public abstract class TranslateEntry implements ITranslateCallback {
      * @return
      */
     private String internalGetSegmentTranslation(String id, int segmentIndex, String segmentSource, String path) {
+        if (segmentSource.length() == 0 || segmentSource.trim().length() == 0) {
+            // empty segment
+            return segmentSource;
+        }
+
         TranslateEntryQueueItem item;
         switch (pass) {
         case 1:

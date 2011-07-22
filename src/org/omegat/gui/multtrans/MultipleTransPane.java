@@ -80,6 +80,7 @@ public class MultipleTransPane extends EntryInfoPane<List<MultipleTransFoundEntr
                     miDefault.addActionListener(new ActionListener() {
                         public void actionPerformed(ActionEvent e) {
                             Core.getEditor().setAlternateTranslationForCurrentEntry(false);
+                            Core.getEditor().commitAndLeave();
                         }
                     });
                     miMultiple.addActionListener(new ActionListener() {
@@ -163,7 +164,9 @@ public class MultipleTransPane extends EntryInfoPane<List<MultipleTransFoundEntr
             item = popup.add(OStrings.getString("MULT_POPUP_DEFAULT"));
             item.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    // TODO: set current entry as default translation
+                    Core.getEditor().replaceEditText(de.entry.entry.translation);
+                    Core.getEditor().setAlternateTranslationForCurrentEntry(false);
+                    Core.getEditor().commitAndLeave();
                 }
             });
         }

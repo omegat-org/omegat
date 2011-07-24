@@ -30,9 +30,9 @@ it is mostly useful for files where source = target.
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   2 Localisation updates
+   3 Localisation updates
 ----------------------------------------------------------------------
-2.3.0 vs. 2.3.0 update 1
+2.3.0 update 1 vs. 2.3.0 
 
   Bug fixes:
 
@@ -43,6 +43,7 @@ it is mostly useful for files where source = target.
 
   - Dutch localisation updated to 2.3, backported from 2.5 (UI)
   - Hungarian localisation updated to 2.3 (UI, Instant Start)
+  - Italian localisation updated to 2.3 (UI, Instant Start, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.3.0

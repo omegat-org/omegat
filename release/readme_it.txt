@@ -1,4 +1,4 @@
-Questa traduzione è frutto del lavoro di Valter Mura e della revisione di Tonia Santoro, copyright© 2010.
+Questa traduzione è frutto del lavoro di Valter Mura, copyright© 2011.
 
 ==============================================================================
   File Leggimi di OmegaT 2.0
@@ -38,7 +38,7 @@ Le caratteristiche principali di OmegaT sono:
   - segmentazione flessibile della frase (grazie all'uso di un metodo di tipo SRX)
   - ricerche nel progetto e nelle memorie di traduzione di riferimento
   - ricerche dei file nei formati supportati in qualsiasi cartella 
-  - corrispondenze parziali (fuzzy)
+  - concordanze parziali (fuzzy)
   - semplice gestione dei progetti che prevedono strutture di cartelle complesse
   - supporto dei glossari (ricerca terminologica) 
   - supporto dei correttori ortografici open source "al volo"
@@ -68,6 +68,9 @@ OmegaT è in grado di riconoscere immediatamente i seguenti formati di file form
   - risorse RC di Windows
   - Mozilla DTD
   - DokuWiki
+  - Wix  
+  - Infix
+  - esportazione Flash XML
 
 OmegaT può essere personalizzato per gestire anche altri tipi di formati di file.
 
@@ -188,6 +191,7 @@ Contributi al codice:
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
 

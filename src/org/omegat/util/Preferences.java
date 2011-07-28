@@ -7,7 +7,7 @@
                2007 Zoltan Bartko
                2008-2009 Didier Briel
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
-               2011 John Moran
+               2011 John Moran, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -159,6 +159,9 @@ public class Preferences {
     public static final String BEST_MATCH_EXPLANATORY_TEXT = "wf_explanatoryText";
     /** Workflow Option: Export current segment */
     public static final String EXPORT_CURRENT_SEGMENT = "wf_exportCurrentSegment";
+    /** Workflow Option: Go To Next Untranslated Segment stops when there is at least one
+    alternative translation */
+    public static final String STOP_ON_ALTERNATIVE_TRANSLATION="wf_stopOnAlternativeTranslation";
 
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";

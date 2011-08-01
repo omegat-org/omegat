@@ -101,6 +101,13 @@ public class MultipleTransPane extends EntryInfoPane<List<MultipleTransFoundEntr
 
         entries.clear();
         String o = "";
+        
+        // Check case if current segment has default translation and there are no alternative translations.
+        if (data.size() == 1 && data.get(0).key == null) {
+            setText(o);
+            return;
+        }
+        
         for (MultipleTransFoundEntry e : data) {
             DisplayedEntry de = new DisplayedEntry();
             de.entry = e;

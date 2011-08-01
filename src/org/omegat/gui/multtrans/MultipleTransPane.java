@@ -126,6 +126,22 @@ public class MultipleTransPane extends EntryInfoPane<List<MultipleTransFoundEntr
 
         setText(o);
     }
+    
+    @Override
+    protected void onProjectOpen() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        entries.clear();
+        setText("");
+    }
+
+    @Override
+    protected void onProjectClose() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        entries.clear();
+        setText("");
+    }
 
     @Override
     protected void startSearchThread(SourceTextEntry newEntry) {

@@ -165,6 +165,31 @@ public abstract class ParseEntry implements IParseCallback {
         }
     }
 
+     /**
+     * This method is called by filters to add new entry in OmegaT after read it
+     * from source file.
+     * Old call without path, for compatibility
+     * @param id
+     *            ID of entry, if format supports it
+     * @param source
+     *            Translatable source string
+     * @param translation
+     *            translation of the source string, if format supports it
+     * @param isFuzzy
+     *            flag for fuzzy translation. If a translation is fuzzy, it is
+     *            not added to the projects TMX, but it is added to the
+     *            generated 'reference' TMX, a special TMX that is used as extra
+     *            reference during translation.
+     * @param comment
+     *            entry's comment, if format supports it
+     * @param filter
+     *            filter which produces entry
+     */
+    public void addEntry(String id, String source, String translation, boolean isFuzzy, String comment,
+            IFilter filter) {
+        addEntry(id, source, translation, isFuzzy, comment, null, filter);
+    }
+
     /**
      * Add segment to queue because we possible need to link prev/next segments.
      */

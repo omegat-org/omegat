@@ -50,6 +50,11 @@ public interface IParseCallback {
      */
     void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, String path,
             IFilter filter);
+    /**
+     * Old call without path, for compatibility 
+     */
+    void addEntry(String id, String source, String translation, boolean isFuzzy, String comment, 
+            IFilter filter);
 
     /**
      * Add data to the TMX with name like source file name.

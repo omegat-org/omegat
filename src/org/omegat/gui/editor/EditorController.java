@@ -34,8 +34,6 @@ import java.awt.Container;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -56,6 +54,7 @@ import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.IProject.FileInfo;
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IEntryEventListener;
@@ -871,7 +870,6 @@ public class EditorController implements IEditor {
         SourceTextEntry ste;
         int startFileIndex = displayedFileIndex;
         int startEntryIndex = displayedEntryIndex;
-        boolean looped = false;
         do {
             displayedEntryIndex++;
             if (displayedEntryIndex >= m_docSegList.length) {
@@ -880,23 +878,31 @@ public class EditorController implements IEditor {
                 displayedEntryIndex = 0;
                 if (displayedFileIndex >= files.size()) {
                     displayedFileIndex = 0;
-                    looped = true;
                 }
                 loadDocument(); // to get proper EntryIndex when filter active
             }
             ste = getCurrentEntry();
-        } while ((ste == null // filtered file has no entries
-                || Core.getProject().getTranslation(ste) != null // entry is
-                                                                 // translated
-                )
-                && (!looped || !(displayedFileIndex == startFileIndex && displayedEntryIndex <= startEntryIndex) // and
-                                                                                                                 // we
-                                                                                                                 // have
-                                                                                                                 // not
-                                                                                                                 // had
-                                                                                                                 // all
-                                                                                                                 // entries
-                ));
+
+            if (ste == null) {
+                break;// filtered file has no entries
+            }
+            if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
+                break; // not found
+            }
+            if (Core.getProject().getTranslation(ste) == null) {
+                break;// non-translated
+            }
+            if (true/* TODO: option check */) {
+                // when there is at least one alternative translation, then we can consider that segment is
+                // not translated
+                HasMultipleTranslations checker = new HasMultipleTranslations(ste.getSrcText());
+                Core.getProject().iterateByMultipleTranslations(checker);
+                if (checker.found) {
+                    // stop - alternative translation exist
+                    break;
+                }
+            }
+        } while (true);
 
         activateEntry();
 
@@ -1393,5 +1399,29 @@ public class EditorController implements IEditor {
             sb.setDefaultTranslation(false);
         }
         setMenuEnabled();
+    }
+    
+    /**
+     * Class for checking if alternative translation exist.
+     */
+    protected static class HasMultipleTranslations implements IProject.MultipleTranslationsIterator {
+        final String sourceEntryText;
+        IProject project;
+        boolean found;
+
+        public HasMultipleTranslations(String sourceEntryText) {
+            this.sourceEntryText = sourceEntryText;
+            project = Core.getProject();
+        }
+
+        @Override
+        public void iterate(EntryKey source, TMXEntry trans) {
+            if (found) {
+                return;
+            }
+            if (sourceEntryText.equals(source.sourceText)) {
+                found = true;
+            }
+        }
     }
 }

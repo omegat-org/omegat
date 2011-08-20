@@ -86,7 +86,7 @@
     <target name="pdf" depends="fo">
         <fop format="application/pdf" 
              fofile="${language}/PDF/OmegaT_documentation.fo"
-             outfile="${language}/PDF/OmegaT_documentation.PDF" 
+             outfile="${language}/PDF/OmegaT_documentation_${language}.PDF" 
              basedir="${language}/"
              userconfig="fop.xconf"
              force="true" />

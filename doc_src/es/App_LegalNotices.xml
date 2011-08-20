@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.legal.notices">
+  <title><indexterm class="singular">
+      <primary>Aviso Legal</primary>
+    </indexterm>Aviso Legal</title>
+
+  <section id="legal.notices.for.documentation">
+    <title>Para la documentación<indexterm class="singular">
+        <primary>Aviso legal</primary><secondary> Para la documentación</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Derechos de Autor (Copyright)</emphasis></para>
+
+    <para>La documentación distribuida con <application>OmegaT</application> 2.3 incluye el Manual de usuario y el documento readme.txt. La documentación tiene Copyright ©2011 Smolej Vito. El capítulo Guía de inicio rápido tiene Derechos de Autor ©2005-2008 de Samuel Murray.</para>
+
+    <para><emphasis role="bold">Distribución y modificaciones</emphasis></para>
+
+    <para>La documentación es un documento libre, lo puedes redistribuir y/o modificar bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, versión 2 de la Licencia, o (si lo prefieres) cualquier versión posterior.</para>
+
+    <para><emphasis role="bold">Garantía</emphasis></para>
+
+    <para>La documentación se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA, incluso sin la garantía implícita de COMERCIALIZACIÓN o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Ve la GNU General Public License para más detalles.</para>
+  </section>
+
+  <section id="legal.ntices.for.application">
+    <title>Para la aplicación<indexterm class="singular">
+        <primary>Aviso legal</primary><secondary>Para la aplicación</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">Derechos de Autor (Copyright)</emphasis></para>
+
+    <para><emphasis role="bold"><application>OmegaT</application> 2.3</emphasis> Copyright © 2000-2011 Keith Godfrey, Mykhalchuk Maxym, Bartko Zoltan, Didier Briel, Bruning Kim, Buloichik Alex, Sandra Jean Chua, Fleurke Martin, Huriaux Thomas, Mandelbaum Fabián, Peters Arno, Pijffers Henry, Saboga Tiago, Sawula Andrzej, Benjamin Siband, Rashid Umarov, vilei Antonio y Martin Wunderlich.</para>
+
+    <para><emphasis role="bold">Distribución y modificaciones</emphasis></para>
+
+    <para><emphasis role="bold">O</emphasis><emphasis role="bold">megaT 2.3</emphasis> es software libre, lo puedes redistribuir y/o modificar bajo los términos de la Licencia Pública General GNU publicada por la Free Software Foundation, versión 2 de la Licencia, o (si lo prefieres) cualquier versión posterior.</para>
+
+    <para><emphasis role="bold">Garantía</emphasis></para>
+
+    <para><emphasis role="bold"><application>OmegaT</application> 2.3 </emphasis>se distribuye con la esperanza de que sea útil, pero SIN NINGUNA GARANTÍA, incluso sin la garantía implícita de COMERCIALIZACIÓN o IDONEIDAD PARA UN PROPÓSITO PARTICULAR. Consulta la GNU General Public License para más detalles.</para>
+  </section>
+</appendix>

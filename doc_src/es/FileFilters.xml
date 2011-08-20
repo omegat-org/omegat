@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.file.filters">
+  <title>Filtros de archivo</title>
+
+  <para>OmegaT dispone de filtros altamente personalizables, lo cual te permiten configurar numerosos aspectos. Los filtros son piezas de código capaces de:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Leer el documento en algún formato de archivo específico. Por ejemplo, archivos de texto sin formato.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Extraer el contenido traducible del archivo.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Automatizando las modificaciones de los nombres de archivo de documentos traducidos, sustituyendo el contenido traducible con su traducción correspondiente.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>La mayoría de los usuarios encontrarán que las opciones predeterminadas de los filtros de archivo son suficientes. Si este no es tu caso, abre la ventana principal, selecciona <emphasis role="bold">Opciones → Filtros de archivo...</emphasis> desde el menú principal.</para>
+
+  <para><emphasis role="bold">¡Precaución!</emphasis> En caso de que cambiar las opciones de los filtros, mientras está abierto un proyecto, volverá a cargar el proyecto a fin de que los cambios surtan efecto.</para>
+
+  <section id="file.filters.dialog">
+    <title>Diálogo filtros de archivo<indexterm class="singular">
+        <primary>Diálogo</primary> <secondary>Filtros de archivo</secondary>
+      </indexterm></title>
+
+    <para>Este diálogo lista los filtros de archivo disponibles. Si no deseas utilizar OmegaT para traducir archivos de un determinado tipo, puedes desactivar el filtro correspondiente desmarcando la casilla de verificación al lado de su nombre. OmegaT entonces omitirá los archivos adecuados durante la carga de los proyectos, y los copiará sin modificación al momento de crear los documentos finales. Cuando desees utilizar de nuevo el filtro, sólo debes marcar la casilla de verificación. Haz clic en <emphasis role="bold">Restaurar predefinidos</emphasis> para restablecer los filtros de archivo a la configuración predeterminada. Para modificar qué archivos y en qué codificación serán procesados por el filtro, selecciona el filtro de la lista y haz clic en <emphasis role="bold">Editar</emphasis>.</para>
+  </section>
+
+  <section id="filters.options">
+    <title>Opciones de filtro<indexterm class="singular">
+        <primary>Filtros de archivo</primary> <secondary>Opciones</secondary>
+      </indexterm></title>
+
+    <para>Cinco filtros (archivos de texto, XHTML, HTML y XHTML, OpenDocument/OpenOffice.org y archivos de Microsoft Open XML) tienen una o más opciones específicas. Para modificar las opciones, selecciona el filtro de la lista y haz clic en <emphasis role="bold">Opciones</emphasis>. Las opciones disponibles son:</para>
+
+    <para><emphasis role="bold">Archivos de Texto</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Segmentar párrafos en saltos de línea, líneas en blanco o nunca:</emphasis> si activas las reglas de segmentación por frases, el texto deberá segmentarse de nuevo de acuerdo a las reglas disponibles.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Archivos PO</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Permitir traducciones en blanco en el archivo de destino:</emphasis> Si lo activas, cuando un segmento PO (el cual puede ser un párrafo completo) no se ha traducido, la traducción estará vacía en el archivo final. Técnicamente, <code>msgstr</code> estará vacío. Como este es el comportamiento estándar para los archivos PO, está activado por omisión. Si la opción está desactivada, el texto fuente se copiará en el segmento destino.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Archivos HTML y XHTML</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Declaración de codificación:</emphasis> <application>OmegaT</application> puede agregar o reescribir la declaración de codificación seleccionada para el archivo basándose en la codificación del archivo destino.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Atributos de traducción:</emphasis> Los atributos seleccionados aparecerán como segmentos en la ventana del Editor.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Párrafo en &lt;br&gt;:</emphasis> La etiqueta &lt;br&gt; de HTML constituye un párrafo para fines de segmentación.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Saltar texto coincidente con expresiones regulares:</emphasis> Saltará el texto coincidente con la expresión regular.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Archivos OpenDocument/OpenOffice.org</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Entradas de Índice</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Marcadores</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Referencias a marcadores</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Notas</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Comentarios</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Presentación de notas</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Enlaces (URL)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Nombres de hojas</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Archivos Microsoft Office Open XML</emphasis></para>
+
+    <para>Si se presentan los siguientes elementos para su traducción, aparecerán como segmentos separados.</para>
+
+    <para><emphasis role="bold">Word</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Instrucciones de texto ocultas</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Comentarios</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Notas al pie</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Notas finales</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Encabezados</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Pies de página</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Excel</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Comentarios</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Nombres de hojas</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Power Point</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Comentarios de diapositiva</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Diapositiva maestra</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Apariencia de diapositiva</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Global</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Gráficas</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Diagramas</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Dibujos</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>WordArt</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Otras opciones</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Etiquetas agregadas:</emphasis> Si la marcas, las etiquetas sin texto traducible entre ellas se agregarán en las etiquetas individuales.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Preservar los espacios de todas las etiquetas:</emphasis> Si lo seleccionas, los &quot;espacios en blanco&quot; (es decir, los espacios y saltos de línea) se mantendrán, incluso si técnicamente no lo estableces en el documento.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="edit.filter.dialog">
+    <title>Diálogo filtros de archivo<indexterm class="singular">
+        <primary>Filtros de archivo</primary> <secondary>Edición</secondary>
+      </indexterm></title>
+
+    <para>Este cuadro de diálogo te permite configurar los patrones de los nombres de archivo fuente de los archivos a procesar por el filtro, personalizar el nombre de los archivos traducidos, y seleccionar las codificaciones que se deben utilizar para cargar el archivo y guardar su homólogo traducido. Para modificar un patrón del filtro de archivo, o bien modificar los campos de forma directa o haz clic en <emphasis role="bold">Editar</emphasis>. Para agregar un patrón de filtro de archivos, haz clic <emphasis role="bold">Añadir</emphasis>. Se utiliza el mismo cuadro de diálogo para añadir o editar un patrón particular. El diálogo es útil, ya que incluye un editor de patrones especial para el nombre de archivo destino con el cual podrás personalizar los nombres de los archivos finales.</para>
+
+    <section id="source.filetype.and.filename.pattern">
+      <title><indexterm class="singular">
+          <primary>Archivos fuente</primary> <secondary>Tipo de archivo, patrón del nombre de archivo</secondary>
+        </indexterm>Tipo de archivo fuente, patrón del nombre de archivo<indexterm class="singular">
+          <primary>Filtros de archivo</primary> <secondary>Tipo de archivo fuente, nombre de archivo</secondary>
+        </indexterm></title>
+
+      <para>Cuando OmegaT encuentra un archivo en tu carpeta fuente, trata de seleccionar el filtro basándose en la extensión del archivo. Más exacto, OmegaT intenta hacer coincidir los patrones de cada filtro de nombre de archivo fuente contra el nombre de archivo. Por ejemplo, el patrón <literal>*.xhtml</literal> coincide con cualquier archivo con la extensión <literal>.xhtml</literal>. Si se encuentra el filtro adecuado, se asigna el archivo para su procesamiento. Por ejemplo, de manera predeterminada, los filtros XHTML se utilizan para procesar los archivos con la extensión .xhtml. Puedes cambiar o agregar patrones de nombres de archivo para manejar cada archivo. Los patrones de los nombres de archivo fuente utilizan caracteres  comodín similares a los utilizados en las <emphasis role="bold">Búsquedas. </emphasis> El carácter '*' coincide con cero o más caracteres. El carácter '?' coincide exactamente con un único carácter. Todos los demás caracteres se representan a si mismos. Por ejemplo, si deseas que el filtro de texto maneje los archivos (<literal>leeme, lee.me</literal>, y <literal>leeme.txt</literal>), debes usar el patrón <literal>lee*</literal>.</para>
+    </section>
+
+    <section id="source.and.target.files.encoding">
+      <title>Codificación de archivos fuente y destino</title>
+
+      <indexterm class="singular">
+        <primary>Archivos fuente</primary> <secondary>Codificación</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Archivos destino</primary> <secondary>Codificación</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Filtros de archivo</primary> <secondary>Codificación fuente y destino</secondary>
+      </indexterm>
+
+      <para>Sólo un limitado número de formatos de archivo especifica una codificación obligatoria. Los formatos de archivo que no especifican su codificación, utilizan la codificación que hayas configurado para la extensión que coincide con su nombre. Por ejemplo, de manera predeterminada los archivos <literal>.txt</literal> se cargan usando la codificación predeterminada de tu sistema operativo. Puedes cambiar la codificación fuente para cada diferente patrón de nombre de archivo fuente. Estos archivos también se pueden escribir en cualquier otra codificación. De manera predeterminada, la codificación del archivo traducido es la misma que la codificación del archivo fuente. Los campos de codificación fuente y destino utilizan cuadros combinados que incluyen todas las codificaciones compatibles. &lt;auto&gt; deja la elección de codificación a <application>OmegaT</application>. Así es como trabaja:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>OmegaT identifica la codificación del archivo fuente usando la declaración de codificación, si está presente (archivos HTML, archivos basados ​​en XML)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>OmegaT es instruido para utilizar una codificación obligatoria para determinados formatos de archivo (propiedades Java, etc.)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><application>OmegaT</application> utiliza la codificación predeterminada del sistema operativo para los archivos de texto.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="target.name">
+      <title>Nombre de archivo destino<indexterm class="singular">
+          <primary>Archivos destino</primary> <secondary>Nombres de archivo</secondary>
+        </indexterm></title>
+
+      <para>A veces posiblemente desees cambiar automáticamente el nombre de los archivos a traducir, por ejemplo, añadiendo un código de idioma después del nombre de archivo. El patrón de nombre de archivo destino utiliza una sintaxis especial, para que, si deseas editar este campo, debes hacer clic en <emphasis role="bold">Editar...</emphasis> y usar el cuadro de diálogo <indexterm class="singular">
+          <primary>Diálogo</primary> <secondary>Filtros de archivo</secondary>
+        </indexterm>Editar patrón. Si deseas volver a la configuración predeterminada del filtro, haz clic en <emphasis role="bold">Restaurar predefinidos</emphasis>. También puedes modificar el nombre directamente en el campo del patrón de nombre de archivo destino del cuadro de diálogo Filtros de archivo. El cuadro de diálogo Editar patrón te ofrece las siguientes opciones:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>De manera predeterminada es <literal>${filename}</literal>- Nombre completo del archivo original con extensión: en este caso el nombre del archivo traducido es el mismo que el del archivo fuente.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${nameonly}</literal>- Te permite insertar sólo el nombre del archivo fuente sin la extensión.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetlocale}</literal>- Código regional del destino (en forma de &quot;xx_YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguage}</literal>- El idioma de destino y el código de país en conjunto (en forma de &quot;XX-YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguageCode}</literal>- Únicamente el idioma de destino (&quot;XX&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetCountryCode}</literal>– Únicamente el país de destino (&quot;YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+</chapter>

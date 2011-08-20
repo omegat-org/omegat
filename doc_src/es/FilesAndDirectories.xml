@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.and.directories">
+  <title>Archivos y directorios de <application>OmegaT</application></title>
+
+  <para><application>OmegaT</application> trabaja con tres tipos de archivos.</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Archivos del proyecto de traducción: Estos constituyen un proyecto de traducción. Perderlos puede afectar la integridad del proyecto y tu capacidad para completar un trabajo. Los archivos del proyecto son los archivos más importantes en <application>OmegaT</application>. Son los archivos con que tratas día a día mientras traduces.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Archivos de configuración del usuario: Estos se crean cuando modificas el comportamiento de OmegaT configurando las preferencias del usuario. La pérdida de ellos por lo general resulta en que OmegaT volverá a su &quot;configuración de fábrica&quot;. Esto a veces puede causar un poco de dificultad cuando se está en mitad de una traducción.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Archivos de la aplicación: Incluidos en el paquete que descargaste. La mayoría de ellos son necesarios para que OmegaT funcione correctamente. Si por alguna razón pierdes o se dañan estos archivos, simplemente descarga y/o vuelve a instalar OmegaT para restaurarlos.</para>
+    </listitem>
+  </itemizedlist>
+
+  <section id="translation.project.files">
+    <title>Archivos del proyecto de traducción</title>
+
+    <para>Un proyecto de traducción <application>OmegaT</application> consiste de una serie de directorios y archivos.</para>
+
+    <section id="translation.project.files.location">
+      <title><indexterm class="singular">
+          <primary>Archivos del proyecto</primary><secondary>Ubicación</secondary>
+        </indexterm>Ubicación de los archivos del proyecto de traducción</title>
+
+      <para>Cuando creas un proyecto de traducción, OmegaT automáticamente crea una lista de directorios que más tarde servirá como repositorio de los archivos, y una serie de archivos que se utilizan para definir ciertas preferencias del proyecto y para mantener la memoria de traducción del proyecto. De manera predeterminada, los directorios de un proyecto de traducción están agrupados bajo el directorio principal del proyecto. Puedes elegir ubicaciones alternas para algunos de los directorios al crear el proyecto o durante la traducción. Por tanto, es posible seleccionar directorios existentes o crear directorios en los lugares que reflejen tu flujo de trabajo y hábitos de gestión de proyectos. Para cambiar la ubicación de los directorios después de haber creado un proyecto, abre el menú <guimenuitem>Proyecto → Propiedades...</guimenuitem> o con <guibutton>Ctrl+E</guibutton> y haz los cambios necesarios.</para>
+    </section>
+
+    <section id="translation.project.files.list">
+      <title><indexterm class="singular">
+          <primary>Archivos del proyecto</primary> <secondary>Lista</secondary>
+        </indexterm>Lista de archivos del proyecto de traducción</title>
+
+      <para>Cuando <application>OmegaT</application> abre el cuadro de diálogo para abrir un proyecto, un directorio de proyecto de traducción se verá como un archivo con un icono de <application>OmegaT</application> asociado a él. Desde el administrador de archivos, sin embargo, el directorio de un proyecto de traducción se ve y actúa como cualquier otro directorio.</para>
+
+      <figure id="OmegaT.projects.and.subdirectories">
+        <title>Proyectos OmegaT y subdirectorios</title>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/OmegaT_projects_and_subdirectories.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Para abrir el proyecto de traducción es suficiente hacer doble clic en el elemento con el icono de OmegaT. Un proyecto de traducción <emphasis role="bold">Proyecto_de_Ejemplo</emphasis> creado con la configuración predeterminada, se creará como un nuevo subdirectorio con la siguiente estructura:</para>
+
+      <figure id="OmegaT.project">
+        <title>Proyecto OmegaT</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Omegatproject.png"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Todos los subdirectorios inicialmente estarán vacíos.</para>
+    </section>
+
+    <section id="folder.OmegaT">
+      <title>OmegaT <indexterm class="singular">
+          <primary>Archivos del proyecto</primary><secondary>Subdirectorio omegat</secondary>
+        </indexterm></title>
+
+      <para>El subdirectorio <emphasis role="bold">omegat</emphasis> contiene por lo menos un &quot;project_save.tmx&quot;, y posiblemente muchos otros archivos. El archivo más importante es el archivo de memoria de traducción, <emphasis role="bold">project_save.tmx</emphasis>(...). El archivo &quot;project_save.tmx&quot; es la memoria de traducción con que trabaja el proyecto. Con la función de guardado automático activada, este se actualizará automáticamente al salir. La memoria de traducción se utiliza para crear los archivos traducidos. Una serie de archivos TMX con nombres de la forma <emphasis role="bold">project_save.tmx.&lt;fecha y hora&gt;.bak</emphasis>(...) serán añadidos progresivamente a este subdirectorio conforme avanza la traducción. Sirven como una copia de seguridad de la MT para el proyecto. Cada vez que vuelves a abrir un proyecto se crea una, lo cual refleja su contenido hasta antes de los cambios realizados en la sesión actual.</para>
+
+      <para>El archivo del proyecto <indexterm class="singular">
+          <primary>Archivos del proyecto</primary> <secondary>Archivo de estadísticas</secondary>
+        </indexterm><emphasis role="bold">stats.txt</emphasis>(...) contiene las estadísticas del proyecto actual y se puede abrir en una aplicación de hoja de cálculo para mostrar información de segmentos y número de palabras. El archivo contiene el número de segmentos para cada archivo que se está traduciendo - Total y Restante - el número de segmentos únicos del archivo, el número de palabras únicas y el número de caracteres únicos con/sin espacios por archivo.</para>
+
+      <para>Ten en cuenta que los segmentos únicos del archivo proporcionan el número de segmentos únicos en un determinado archivo que no aparecen en ninguna otra parte del proyecto. Las palabras o caracteres únicos por archivo tiene una definición similar. Ten en cuenta que en un proyecto de varios archivos la suma de segmentos únicos por archivo no necesariamente es igual a la suma total de segmentos únicos en el proyecto.</para>
+
+      <para>Los archivos <emphasis role="bold"><indexterm class="singular">
+          <primary>Archivos del proyecto</primary> <secondary>palabra_ignorada y palabra_aprendida</secondary>
+        </indexterm>ignore_words.txt</emphasis> y <emphasis role="bold">learned_word.txt</emphasis> son utilizados por el corrector ortográfico. Ten en cuenta que son específicos para un determinado proyecto, por lo que si ya haz acumulado muchas palabras desearás que el corrector ortográfico las ignore/acepte, sólo tienes que copiar los dos archivos correspondientes en el subdirectorio <filename>omegat</filename> de tu proyecto actual.</para>
+    </section>
+
+    <section id="folder.source">
+      <title>Archivos fuente<indexterm class="singular">
+          <primary>Archivos del proyecto</primary> <secondary>Subdirectorio fuente</secondary>
+        </indexterm></title>
+
+      <para>El subdirectorio fuente es el lugar dónde están los archivos del proyecto que se necesita traducir. Puedes especificar un nuevo subdirectorio y agregar archivos allí más tarde. Ten en cuenta que la estructura del subdirectorio fuente puede tomar cualquier forma que quieras. Si los archivos a traducir son parte de una estructura de árbol (tal como en un sitio web), sólo tienes que especificar el subdirectorio de nivel superior y OmegaT mantendrá todo el contenido, conservando intacta la estructura de árbol.</para>
+    </section>
+
+    <section id="folder.target">
+      <title>Archivos destino<indexterm class="singular">
+          <primary>Archivos del proyecto</primary> <secondary>Subdirectorio destino</secondary>
+        </indexterm></title>
+
+      <para>Cuando <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>D</keycap> </keycombo> </shortcut> <guimenu>Proyecto</guimenu> <guimenuitem>Crear documentos traducidos</guimenuitem></menuchoice> está seleccionada, todos los archivos dentro del directorio <filename>fuente</filename>, ya sea traducidos o no, se reproducen en el directorio destino con la misma jerarquía de directorios reflejando el estado actual de la traducción. En términos prácticos, OmegaT combina la información guardada en la traducción <emphasis role="bold">/OmegaT/project_save.tmx</emphasis> con los documentos fuente para producir el contenido destino.</para>
+    </section>
+
+    <section id="file.omegat.project">
+      <title>omegat.project<indexterm class="singular">
+          <primary>Archivos del proyecto</primary> <secondary>Archivo omegat.project</secondary>
+        </indexterm></title>
+
+      <para><application>OmegaT</application> automáticamente crea este archivo cuando creas el proyecto puesto que este contiene los parámetros del proyecto. Los parámetros incluidos en este archivo, se pueden modificar desde la ventana Editar proyecto.</para>
+
+      <para><filename>nombre_proyecto-omegat.tmx (...)</filename></para>
+
+      <para><filename>nombre_proyecto-level1.tmx</filename></para>
+
+      <para><filename>nombre_proyecto-level2.tmx</filename></para>
+
+      <indexterm class="singular">
+        <primary>Archivos del proyecto</primary> <secondary>Archivos nombre_proyecto....tmx</secondary>
+      </indexterm>
+
+      <para>Estos archivos contienen tanto los segmentos fuente como su traducción correspondiente al contenido del directorio <filename>fuente</filename> al momento de su creación (por lo general cuando se crean los archivos traducidos). Estos constituyen las memorias de traducción exportadas que puedes utilizar en futuros proyectos.</para>
+    </section>
+  </section>
+
+  <section id="user.files">
+    <title>Archivos de usuario<indexterm class="singular">
+        <primary>Archivos del proyecto</primary> <secondary>Archivos de usuario</secondary>
+      </indexterm></title>
+
+    <section>
+      <title id="user.files.location">Ubicación de los archivos del usuario<indexterm class="singular">
+          <primary>Archivos del proyecto</primary> <secondary>Archivos de usuario</secondary> <tertiary>Ubicación</tertiary>
+        </indexterm></title>
+
+      <para>Los archivos de usuario se almacenan en un lugar separado donde los pueda acceder cualquier versión de <application>OmegaT</application>. La ubicación depende de la plataforma que utilices:</para>
+
+      <informaltable>
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Windows 2000 y XP</entry>
+
+              <entry><literal>Documents and Settings\&lt;Nombre usuario&gt;\Application Data\<application>OmegaT</application></literal></entry>
+            </row>
+
+            <row>
+              <entry>Windows Vista y 7</entry>
+
+              <entry><literal>Users\&lt;Nombre usuario&gt;\AppData\Roaming\<application>OmegaT</application></literal></entry>
+            </row>
+
+            <row>
+              <entry>Otros Windows</entry>
+
+              <entry><literal>&lt;AlgunaUbicación&gt;\<application>OmegaT</application></literal> (&lt;AlgunaUbicación&gt; corresponde a la ubicación de directorio &quot;home&quot; tal cómo lo determina Java)</entry>
+            </row>
+
+            <row>
+              <entry>Linux/Solaris/FreeBSD</entry>
+
+              <entry><literal>&lt;Home del usuario&gt;/.omegat</literal> (.omegat es un directorio, el punto que precede al nombre indica que es invisible, a menos que escribas &quot;ls -a&quot; o alguna orden equivalente.)</entry>
+            </row>
+
+            <row>
+              <entry>MAC OSX</entry>
+
+              <entry><filename>&lt;Home del usuario&gt;/Library/Preferences/<application>OmegaT</application></filename></entry>
+            </row>
+
+            <row>
+              <entry>Otro</entry>
+
+              <entry><filename>&lt;Home del Usuario&gt;</filename></entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+
+    <section id="user.files.list">
+      <title>Lista de archivos del usuario<indexterm class="singular">
+          <primary>Archivos del proyecto</primary> <secondary>Lista de archivos del usuarios</secondary>
+        </indexterm></title>
+
+      <informaltable>
+        <tgroup align="left" cols="2" rowsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>logs/OmegaT.log</entry>
+
+              <entry>Este archivo registra los mensajes de error de Java mientras se está ejecutando <application>OmegaT</application>. Cuando pienses que el comportamiento de OmegaT es errático, es importante incluir este archivo o la parte correspondiente en cualquier informe de fallo.</entry>
+            </row>
+
+            <row>
+              <entry>omegat.prefs</entry>
+
+              <entry>Un archivo XML con todos los ajustes accesibles de la interfaz gráfica del usuario</entry>
+            </row>
+
+            <row>
+              <entry>uiLayout.xml</entry>
+
+              <entry>Un archivo XML con los datos de posición de la ventana</entry>
+            </row>
+
+            <row>
+              <entry>filters.xml</entry>
+
+              <entry>Un archivo XML con todos los datos establecidos por las preferencias del filtro de archivos</entry>
+            </row>
+
+            <row>
+              <entry>segmentation.conf</entry>
+
+              <entry>Un archivo XML que contiene reglas de segmentación</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </informaltable>
+    </section>
+  </section>
+
+  <section id="application.files">
+    <title><indexterm class="singular">
+        <primary>Archivos del proyecto</primary> <secondary>Directorios 'Application'</secondary>
+      </indexterm>Archivos de la aplicación<indexterm class="singular">
+        <primary>Archivos del proyecto</primary> <secondary>Archivos de la aplicación</secondary>
+      </indexterm></title>
+
+    <para>OmegaT se suministra como un paquete que puedes descargar desde SourceForge. En este capítulo se considera que el paquete independiente de la plataforma contiene la aplicación en formato estándar de Java. Otros paquetes incluyen un paquete .tar de Linux, un instalador de Windows - Con o sin un Java Runtime Environment - un instalador de MacOSX, y un paquete de código fuente para los desarrolladores. El paquete independiente de la plataforma se puede utilizar en cualquier plataforma con un entorno de ejecución Java 1.5 instalado, incluyendo las plataformas para las que exista un paquete específico. El paquete independiente de la plataforma se presenta como un archivo comprimido que es necesario descomprimir en el directorio de tu elección para instalarlo. El archivo, generalmente, se puede extraer haciendo doble clic sobre el paquete descargado. Una vez extraído el archivo, se crea un directorio con el siguiente contenido:</para>
+
+    <informaltable>
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><emphasis role="bold">Archivo/ subdirectorio</emphasis></entry>
+
+            <entry><emphasis role="bold">Conteniendo</emphasis></entry>
+          </row>
+
+          <row>
+            <entry>/docs/</entry>
+
+            <entry>Todos los archivos del manual de usuario se encuentran en este directorio. Los puedes abrir en un navegador de Internet para acceder a los enlaces externos.</entry>
+          </row>
+
+          <row>
+            <entry>/images/</entry>
+
+            <entry>Aquí se incluyen iconos y gráficos del logo.</entry>
+          </row>
+
+          <row>
+            <entry>/lib/</entry>
+
+            <entry>Contiene los archivos Java, necesarios para la operación de <application>OmegaT</application>.</entry>
+          </row>
+
+          <row>
+            <entry>join.html</entry>
+
+            <entry>Este es un archivo HTML normal el cual una vez que lo abras en tu navegador de Internet, te dirigirá al grupo de usuarios de OmegaT alojado en Yahoo Groups. No es necesario participar, pero te dará acceso a algunos servicios adicionales como el acceso a algunos archivos y encuestas irregulares, además de proporcionarte la capacidad para participar en discusiones relacionadas con OmegaT. Los archivos del grupo son públicos y no se requiere suscribirse al grupo para consultarlos.</entry>
+          </row>
+
+          <row>
+            <entry><filename>changes.txt</filename></entry>
+
+            <entry>Una lista de modificaciones relativamente detallada entre esta versión y las versiones anteriores.</entry>
+          </row>
+
+          <row>
+            <entry><filename>license.txt</filename></entry>
+
+            <entry>La GNU GENERAL PUBLIC LICENSE. Esta licencia te permite hacer ciertas cosas con <application>OmegaT</application>, incluyendo su modificación y distribución. Si estás interesado en modificar o distribuir <application>OmegaT</application>, dale un buen vistazo a este documento y asegúrate de que estás consciente de todas sus consecuencias antes de actuar. En caso de duda, no vaciles en preguntar a los miembros del proyecto directamente o bien enviando un mensaje de correo desde la página de SourceForge o enviando un correo público al grupo de usuarios.</entry>
+          </row>
+
+          <row>
+            <entry><filename>doc-license.txt</filename></entry>
+
+            <entry>La GNU GENERAL PUBLIC LICENSE. Esta licencia cubre la documentación. Ve más arriba.</entry>
+          </row>
+
+          <row>
+            <entry><filename>readme_es.txt</filename></entry>
+
+            <entry>Este archivo es muy importante y debes asegurarte de leerlo antes de lanzar OmegaT. Incluye información general sobre OmegaT, donde puedes encontrar más información sobre cómo contribuir, etc. Se ha traducido a varios idiomas.</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"><application>OmegaT</application></entry>
+
+            <entry rowsep="0">Un archivo de texto que contiene dos líneas:</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"/>
+
+            <entry rowsep="0"><literal>#!/bin/bash java</literal></entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"/>
+
+            <entry rowsep="0"><literal>java -jar
+            <application>OmegaT</application>.jar $*</literal></entry>
+          </row>
+
+          <row>
+            <entry/>
+
+            <entry>Los usuarios de Linux y OSX pueden encontrar útil este archivo. Hazlo ejecutable (chmod +x OmegaT) desde la línea de ordenes después de asegurarte de que estás en el directorio /OmegaT_2.3/. A continuación, podrás lanzar OmegaT ejecutando este archivo desde la línea de ordenes</entry>
+          </row>
+
+          <row>
+            <entry rowsep="0"><application>OmegaT</application>.bat</entry>
+
+            <entry rowsep="0">Un archivo de proceso por lotes, utilizado para lanzar <application>OmegaT</application> desde la línea de ordenes de Windows. Sólo contiene la siguiente línea:</entry>
+          </row>
+
+          <row>
+            <entry/>
+
+            <entry><literal>java -jar <application>OmegaT</application>.jar
+            %*</literal></entry>
+          </row>
+
+          <row>
+            <entry><application>OmegaT</application>.jar</entry>
+
+            <entry>La aplicación principal de OmegaT. Para iniciar OmegaT, debes lanzar este archivo desde la línea de ordenes o desde el gestor de archivos, generalmente haciendo doble clic.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

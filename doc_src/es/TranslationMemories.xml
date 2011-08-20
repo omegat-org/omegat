@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.memories">
+  <title>Memorias de Traducción<indexterm class="singular">
+      <primary>Memorias de Traducción</primary>
+    </indexterm></title>
+
+  <section id="OmegaT.and.tmx.files">
+    <title>Memorias de traducción en OmegaT</title>
+
+    <section id="tmx.files.location.and.purpose">
+      <title>directorios tmx - ubicación y propósito</title>
+
+      <para>Los proyectos <application>OmegaT</application> pueden tener los archivos de memoria de traducción - es decir, archivos con la extensión tmx - en cuatro diferentes lugares:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Memorias de traducción</primary> <secondary>Subdirectorio omegat</secondary> <seealso>Archivos del proyecto</seealso>
+            </indexterm>Directorio omegat</term>
+
+          <listitem>
+            <para>El directorio omegat contiene el project_save.tmx y, posiblemente, una serie de archivos de copias de seguridad TMX. El archivo <filename>project_save.tmx</filename> contiene todos los segmentos que se han grabado en la memoria desde que empezó el proyecto. Este archivo existe siempre en el proyecto. Su contenido siempre se ordenará alfabéticamente por el segmento fuente.</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Memorias de traducción</primary> <secondary>Directorio principal del proyecto</secondary>
+            </indexterm>Directorio principal del proyecto</term>
+
+          <listitem>
+            <para>El directorio principal del proyecto contiene tres archivos TMX, <filename>nombre_proyecto-omegat.tmx</filename>, <filename>nombre_proyecto-level1.tmx</filename> y <filename>nombre_proyecto-level2.tmx</filename> (donde nombre_proyecto es el nombre del proyecto).</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>El archivo level1 sólo contiene información textual.</para>
+              </listitem>
+
+              <listitem>
+                <para>El archivo de nivel 2 encapsula etiquetas específicas de <application>OmegaT</application> en etiquetas tmx correctas para que el archivo se pueda utilizar con su información de formato en una herramienta de traducción compatible con memorias tmx nivel 2, u <application>OmegaT</application> en sí mismo.</para>
+              </listitem>
+
+              <listitem>
+                <para>El archivo <application>OmegaT</application> incluye etiquetas de formato específicas de <application>OmegaT</application> para que el archivo se pueda utilizar en otros proyectos <application>OmegaT</application></para>
+              </listitem>
+            </itemizedlist>
+
+            <para>Estos archivos son copias del archivo <filename>project_save.tmx</filename>. es decir, de la memoria de traducción principal del proyecto, excluyendo los así llamados segmentos huérfanos. Llevan el nombre cambiado correctamente, de modo que su contenido sigue siendo identificable, cuando se utiliza en otros lugares, por ejemplo en el subdirectorio <filename>tm</filename> de algún otro proyecto (ve más adelante).</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Directorio <filename><indexterm class="singular">
+              <primary>Memorias de traducción</primary> <secondary>Subdirectorio tm</secondary> <seealso>Archivos del proyecto</seealso>
+            </indexterm>tm</filename></term>
+
+          <listitem>
+            <para>El directorio /tm/ puede contener cualquier número de memorias de traducción auxiliares - es decir, archivos TMX. Tales archivos se pueden crear en cualquiera de las tres variedades indicadas anteriormente. Ten en cuenta que otras herramientas TAO pueden exportar (también y importar) archivos TMX, por lo general en las tres formas. Lo mejor, por supuesto, es usar archivos TMX específico de OmegaT (ve arriba), para que se mantenga el formato en línea en el segmento.</para>
+
+            <para>El contenido de las memorias de traducción en el subdirectorio tm sirve para generar sugerencias para el texto a traducir. Cualquier texto, ya traducido y almacenado en estos archivos, aparece entre las coincidencias parciales, si es lo suficientemente similar al texto que se está traduciendo.</para>
+
+            <para>Si el segmento fuente en una de las memorias auxiliares es idéntico al texto traducido, OmegaT actúa cómo se ha definido en la ventana del diálogo <menuchoice><guimenu>Opciones</guimenu> → <guimenuitem>Comportamiento del campo de edición...</guimenuitem></menuchoice>. Por ejemplo (si aceptas el predeterminado), la traducción de la MT auxiliar es aceptada y prefijada con <emphasis>[parcial]</emphasis>, por lo tanto el traductor puede revisar las traducciones en una etapa posterior y comprobar si los segmentos marcados de esta manera, se han traducido correctamente (consulta el capítulo <link linkend="chapter.translation.editing">Comportamiento del campo de edición</link>) <menuchoice><guimenu>.</guimenu></menuchoice></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Memorias de traducción</primary> <secondary>Subdirectorio tm/auto</secondary> <seealso>Archivos del proyecto</seealso>
+            </indexterm>directorio tm/auto<indexterm class="singular">
+              <primary>Proyecto</primary> <secondary>Pretraducción</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Si está claro desde el principio, que las traducciones en una determinada MT (o MsT) son correctas, las puedes poner en el directorio <emphasis role="bold">tm/auto</emphasis> y evitar la confirmación de una gran cantidad de casos <emphasis>[parcial]</emphasis>. Esto efectivamente <emphasis role="bold">pretraduce</emphasis> el texto fuente: todos los segmentos en el texto original, por lo tanto las traducciones que se puedan encontrar en estas memorias de traducción &quot;auto&quot;, aterrizarán en la MT principal del proyecto sin la intervención del usuario.</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>Si lo deseas, puedes permitir a <application>OmegaT</application> que tenga un archivo tmx adicional (estilo <application>OmegaT</application>) en cualquier lugar que especifiques, que contenga todos los segmentos traducibles del proyecto. Ve memorias de pseudotraducción más adelante.</para>
+
+      <para>Ten en cuenta que todas las memorias de traducción se cargan en memoria cuando abres el proyecto. Las copias de seguridad de la memoria de traducción del proyecto se producen con regularidad  (consulta el capítulo siguiente), y también se guarda/actualiza project_save.tmx cuando cierras o recargas el proyecto. Esto significa por ejemplo que no es necesario salir de un proyecto en el que estás trabajando si decides añadir otra MT auxiliar al mismo: sólo tienes que recargar el proyecto, y los cambios que hayas hecho serán incluidos.</para>
+
+      <para>Las ubicaciones de las diversas memorias de traducción para un determinado proyecto están definidas por el usuario (consulta la ventana de diálogo en <link linkend="chapter.instant.start.guide">Guía de inicio rápido)</link></para>
+
+      <para>Dependiendo de la situación, hay diferentes estrategias por lo tanto es posible, por ejemplo:</para>
+
+      <para><emphasis role="bold">varios proyectos sobre el mismo tema: </emphasis>mantener la estructura del proyecto, y cambiar directorios fuente y destino (fuente = fuente/orden1, destino = destino/orden1 etc.) Ten en cuenta que los segmentos del orden1, que no estén presentes en orden2 y otros trabajos posteriores, serán marcados como segmentos huérfanos, sin embargo, seguirán siendo útiles para obtener coincidencias parciales.</para>
+
+      <para><emphasis role="bold">varios traductores trabajan en el mismo proyecto:</emphasis> dividiendo los archivos fuente en fuente/Alicia, fuente/Bob... y asignarlos a los miembros del equipo (Alicia, Bob...). Ellos pueden crear sus propios proyectos y, entregar su propio <filename>project_save.tmx,</filename> cuando hayan terminado o cuando se haya alcanzado un hito dado. Entonces se recogen los archivos <filename>project_save.tmx</filename> y se resuelven los posibles conflictos en cuanto a terminología, por ejemplo. Se crea una nueva versión de la MT principal, ya sea para ponerla en los subdirectorios <emphasis>tm/auto</emphasis> de los miembros del equipo o para reemplazar sus archivos project_save.tmx. El equipo también puede utilizar la misma estructura de directorios para los archivos destino. Esto les permite, por ejemplo, revisar en cualquier momento, si todavía está bien la versión destino para todo el proyecto</para>
+    </section>
+
+    <section id="tmx.backup">
+      <title>Copia de seguridad tmx<indexterm class="singular">
+          <primary>Memorias de traducción</primary> <secondary>Copia de seguridad</secondary>
+        </indexterm></title>
+
+      <para>A medida que traduces tus archivos, <application>OmegaT</application> almacena tu trabajo continuamente en <filename>project_save.tmx</filename> en el subdirectorio /<filename>omegat</filename> del proyecto.</para>
+
+      <para><application>OmegaT</application> también crea copias de seguridad de la memoria de traducción en <filename>project_save.tmx.AÑOMESDÍAHORAMIN.bak</filename> en el mismo subdirectorio cada vez que abres o recargas el proyecto. AÑO son los 4 dígitos del año, MES es un mes, DÍA el día del mes, y HORA son las horas y MIN los minutos, de cuando se salvó la memoria de traducción anterior.</para>
+
+      <para>Si crees que haz perdido los datos de traducción, sigue el siguiente procedimiento:</para>
+
+      <orderedlist>
+        <listitem>
+          <para>Cierra el proyecto</para>
+        </listitem>
+
+        <listitem>
+          <para>Cambia el nombre al archivo <filename>project_save.tmx</filename> actual (por ejemplo, <filename>project_save.tmx.temporal</filename>)</para>
+        </listitem>
+
+        <listitem>
+          <para>Selecciona la copia de seguridad de la memoria de traducción que sea más probable contenga los datos que buscas (por ejemplo, la más reciente o la última versión desde el día anterior)</para>
+        </listitem>
+
+        <listitem>
+          <para>Cópiala a <filename>project_save.tmx</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>Abre el proyecto</para>
+        </listitem>
+      </orderedlist>
+    </section>
+
+    <section id="tmx.files.and.language">
+      <title>Archivos tmx y el idioma<indexterm class="singular">
+          <primary>Memorias de traducción</primary> <secondary>Idioma</secondary>
+        </indexterm></title>
+
+      <para>Los archivos tmx contienen unidades de traducción, hechas de una serie de segmentos equivalentes en varios idiomas. Una unidad de traducción comprende al menos dos variaciones de la unidad de traducción (tuv por translation unit variations). O bien se puede utilizar como fuente o destino.</para>
+
+      <para>Los ajustes en el proyecto indican cual es la fuente y cual el idioma destino. OmegaT toma en consideración los códigos de idioma fuente y destino correspondientes a los segmentos tuv del proyecto y los utiliza como el original y su traducción, respectivamente. OmegaT reconoce los códigos de idioma usando las siguientes dos normas:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>2 letras (por ejemplo, JA para japonés), o</para>
+        </listitem>
+
+        <listitem>
+          <para>2 - o 3 letras en el código de idioma seguidas del código del país de 2 letras (por ejemplo, EN-US - Consulta <xref linkend="appendix.languages"/> para una lista parcial de los códigos  de idioma y país).</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Si los códigos de idioma del proyecto y los códigos de idioma del tmx coinciden completamente, los segmentos se cargan en memoria. Si los idiomas coinciden, pero no el país, los segmentos aún se cargan. Si ni el código de idioma coincide ni el código de país, los segmentos serán ignorados.</para>
+    </section>
+
+    <section>
+      <title>Segmentos huérfanos<indexterm class="singular">
+          <primary>Memorias de traducción</primary> <secondary>Segmentos huérfanos</secondary>
+        </indexterm></title>
+
+      <para>El archivo <filename>project_save.tmx</filename> contiene todos los segmentos que haz traducido desde que empezaste el proyecto. Si modificas la segmentación del proyecto o borras los archivos fuente, algunas coincidencias pueden aparecer como <emphasis role="bold">cadenas huérfanas</emphasis> en el visor de coincidencias: estas coincidencias se refieren a los segmentos que ya no existen más en los documentos fuente, ya que corresponden a segmentos traducidos y registrados antes de llevar a cabo la modificación.</para>
+    </section>
+  </section>
+
+  <section id="using.translation.memories.from.previous.projects">
+    <title>Reutilizando memorias de traducción<indexterm class="singular">
+        <primary>Memorias de traducción</primary> <secondary>Importando y exportando</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Memorias de traducción</primary> <secondary>Reutilizando memorias de traducción</secondary>
+      </indexterm></title>
+
+    <para>En un principio, cuando creas el proyecto, la MT principal del proyecto, <filename>project_save.tmx</filename> está vacía. Esta MT se llena gradualmente durante la traducción. Para acelerar este proceso, puedes reutilizar traducciones existentes. Si una frase dada ya se tradujo una vez, y está traducida correctamente, no hay necesidad de volverla a traducir. Las memorias de traducción también pueden contener traducciones de referencia: legislación multinacional, como la de la Comunidad Europea, es un ejemplo típico.</para>
+
+    <para>Al crear los documentos traducidos en un proyecto <application>OmegaT</application>, la memoria de traducción del proyecto se emitirá en forma de tres archivos en el directorio raíz de tu proyecto <application>OmegaT</application> (consulta la descripción anterior). Puedes considerar que estos tres archivos TMX (<filename>-omegat.tmx</filename>, <filename>-level1.tmx</filename> y <filename>-level2.tmx</filename>) como una &quot;memoria de traducción de exportación&quot;, es decir, como producto de exportación del contenido de tu proyecto actual en forma bilingüe.</para>
+
+    <para>Si deseas volver a utilizar una memoria de traducción de un proyecto anterior (por ejemplo, porque el nuevo proyecto es similar al proyecto anterior, o utiliza una terminología que podrías haber usado antes), puedes utilizar estas memorias de traducción como &quot;memorias de traducción de entrada&quot;, es decir, para importarlas a tu nuevo proyecto. En este caso, coloca las memorias de traducción que deseas utilizar en el directorio <emphasis>\tm</emphasis> o <emphasis>\tm\auto</emphasis> de tu nuevo proyecto: en el primer caso obtendrás sugerencias en el visor de coincidencias parciales de estas memorias de traducción, y en el último caso puedes utilizar las memorias de traducción para pretraducir el texto original.</para>
+
+    <para>De manera predeterminada, el directorio \tm está por debajo del directorio raíz del proyecto (por ejemplo ...<emphasis>\MiProyecto\tm</emphasis>), pero puedes elegir un directorio diferente en el cuadro de diálogo Propiedades del proyecto si lo deseas. Esto es útil si utilizas frecuentemente memorias de traducción producidas en el pasado, por ejemplo, porque están en el mismo tema o son para el mismo cliente. En este caso, un procedimiento útil sería:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Crea un directorio (un &quot;directorio repositorio&quot;) en una ubicación conveniente en tu disco duro para las memorias de traducción para un cliente o tema particular.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Cada vez que termines un proyecto, copia uno de los tres archivos &quot;exportables&quot; de la memoria de traducción del proyecto al directorio del repositorio.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Cuando comiences un nuevo proyecto sobre el mismo tema o para el mismo cliente, navega al directorio del repositorio desde el cuadro de diálogo <guimenuitem>Propiedades del Proyecto → Editar Proyecto</guimenuitem> y selecciónalo como el directorio de memorias de traducción.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Cuando comiences un nuevo proyecto sobre el mismo tema o para el mismo cliente, navega al directorio del repositorio en el diálogo <guilabel>Proyecto → Propiedades → Editar Proyecto</guilabel>  y selecciónalo como el directorio de memorias de traducción. Ten en cuenta que todos los archivos TMX en el repositorio/tm se analizan cuando abres el proyecto, por lo que poner todo lo que puedas allí, puede retrasar innecesariamente a OmegaT. Incluso, puedes considerar eliminar aquellos que no sean necesarios más, una vez que haz utilizado su contenido para llenar el archivo <filename>project_save.tmx</filename>.</para>
+
+    <section>
+      <title>Importando y exportando memorias de traducción</title>
+
+      <para>OmegaT es compatible con tmx importadas versiones 1.1-1.4b (en ambos niveles 1 y 2). Esto permite que OmegaT pueda leer las memorias de traducción producidas por otras herramientas. Sin embargo, OmegaT no es totalmente compatible con archivos tmx importados de nivel 2 (estos no sólo almacenan la traducción, sino también el formato). Puedes importar archivos TMX Nivel 2 y su contenido textual se puede ver en OmegaT, pero la calidad de las coincidencias parciales será algo menor.</para>
+
+      <para>OmegaT sigue procedimientos muy estrictos cuando carga archivos de memorias de traducción (TMX). Si se encuentra un error en un archivo, OmegaT indicará la posición dentro del archivo defectuoso en que se encuentra el error.</para>
+
+      <para>Algunas herramientas son conocidas por producir archivos TMX válidos bajo ciertas condiciones. Si deseas utilizar este tipo de archivos como traducciones de referencia en OmegaT, los debes reparar, u OmegaT informará de un error y no los cargará. Los parches son operaciones triviales y OmegaT te ayuda a solucionar los problemas con mensajes de error relacionados. Puedes preguntar en el grupo de usuarios para pedir ayuda si tienes problemas.</para>
+
+      <para><application/>OmegaT exporta archivos TMX versión 1.4 (tanto en nivel 1 cómo nivel 2). La exportación en nivel 2 no es totalmente compatible con el nivel 2 estándar, pero está lo suficientemente cerca y generará coincidencias correctas en otras herramientas compatibles con memorias de traducción TMX nivel 2. Si sólo necesitas información textual (y no información de formato), utiliza el archivo nivel 1 que OmegaT ha creado.</para>
+    </section>
+  </section>
+
+  <section id="pseudo.translated.memory">
+    <title>Memoria pseudotraducida<indexterm class="singular">
+        <primary>Memorias de traducción</primary> <secondary>Pseudotraducción</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>¡De interés sólo para usuarios avanzados!</para>
+    </note>
+
+    <para>Antes de traducir los segmentos, posiblemente desees preprocesarlos o dirigirlos de alguna otra manera posible con OmegaT. Por ejemplo, si deseas crear una pseudotraducción para propósitos de prueba, OmegaT te permite crear un archivo TMX adicional que contiene todos los segmentos del proyecto. La traducción en este tmx puede ser</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>una traducción igual al original (predeterminada)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>con los segmentos de traducción vacíos</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Puedes dar cualquier nombre que especifiques al archivo TMX. Puedes generar una memoria de pseudotraducción con los parámetros de línea de ordenes:</para>
+
+    <para><literal>java -jar omegat.jar --pseudotranslatetmx=&lt;nombrearchivo&gt; [pseudotranslatetype=[equal|empty]]</literal></para>
+
+    <para>Sustituye <literal>&lt;nombrearchivo&gt;</literal> con el nombre del archivo que deseas crear, ya sea absoluto o relativo al directorio de trabajo (el directorio dónde iniciaste <application>OmegaT</application>). El segundo argumento <literal>--pseudotranslatetype</literal> es opcional. Su valor es <literal>igual</literal> (valor predeterminado, para fuente=destino) o <literal>vacío</literal> (segmento destino está vacío). Puedes procesar la tmx generada con cualquier herramienta que desees. Para reutilizarla en <application>OmegaT</application> cámbiale el nombre a <emphasis>project_save.tmx</emphasis> y colócala en el directorio <literal>omegat</literal> de tu proyecto.</para>
+  </section>
+
+  <section id="upgrading.translation.memories">
+    <title>Actualizando memorias de traducción<indexterm class="singular">
+        <primary>Memorias de traducción</primary><secondary>Actualizando a segmentación de frases</secondary>
+      </indexterm></title>
+
+    <para>Versiones muy tempranas de <application>OmegaT</application> fueron capaces de segmentar archivos fuente en párrafos únicamente y eran inconsistentes numerando las etiquetas en formato HTML y archivos &quot;Open Document&quot;. <application>OmegaT</application> 2.3 puede detectar y actualizar al vuelo dichos archivos TMX para aumentar la calidad de coincidencias parciales y aprovechar tu mejor traducción existente, lo cual te ahorra el trabajo de hacerlo manualmente.</para>
+
+    <para>Un proyecto TMX se actualizará una sola vez, y será escrito en forma de actualización y los archivos TMX heredados se actualizarán al vuelo cada vez que cargues el proyecto. Ten en cuenta que en algunos casos, los cambios en los filtros de archivo en <application>OmegaT</application> 2.3 pueden conducir a una segmentación totalmente diferente, y como resultado, tendrás que actualizar manualmente tu traducción en tales casos excepcionales.</para>
+  </section>
+</chapter>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Atajos de teclado en el editor</title>
+
+  <para>Este breve texto describe el comportamiento clave en el panel del editor. El término &quot;Mover en el segmento&quot; significa que el cursor se mueve al comienzo del segmento si previamente se entró al segmento, y al final del segmento, si está antes de él.</para>
+
+  <table>
+    <title>Comportamiento clave en el editor</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1" colwidth="90"/>
+
+      <colspec align="left" colnum="2" colwidth="300"/>
+
+      <thead>
+        <row>
+          <entry align="left">Combinación de teclas</entry>
+
+          <entry align="left">Acción</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Izquierda:</emphasis></entry>
+
+          <entry>un carácter a la izquierda, pero no más allá del principio del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Derecha:</emphasis></entry>
+
+          <entry>un carácter a la derecha, pero no más allá del final del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Izquierda:</emphasis></entry>
+
+          <entry>una palabra a la izquierda, pero no más allá del principio del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Derecha:</emphasis></entry>
+
+          <entry>una palabra a la derecha, pero no más allá del final del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">RePág:</emphasis></entry>
+
+          <entry>una página hacia arriba en el documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">AvPág:</emphasis></entry>
+
+          <entry>una página hacia abajo en el documento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Inicio*</emphasis></entry>
+
+          <entry>va al principio de la línea en el segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Fin*</emphasis></entry>
+
+          <entry>va al final de la línea en el segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Inicio</emphasis></entry>
+
+          <entry>va al principio del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Fin</emphasis></entry>
+
+          <entry>va al final del segmento</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+RePág</emphasis></entry>
+
+          <entry>va al principio del documento (Mac: <emphasis role="bold">Cmd+RePág</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+AvPág</emphasis></entry>
+
+          <entry>va a la final del documento (Mac: <emphasis role="bold">Cmd+AvPág</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Retroceso*</emphasis></entry>
+
+          <entry>elimina caracteres antes del cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Supr*</emphasis></entry>
+
+          <entry>elimina caracteres después del cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Retroceso</emphasis></entry>
+
+          <entry>elimina caracteres hasta el comienzo de la palabra actual (Mac: <emphasis role="bold">Alt+Retroceso</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Supr</emphasis></entry>
+
+          <entry>elimina caracteres hasta el comienzo de la siguiente palabra (Mac: <emphasis role="bold">Alt+Supr</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Intro</emphasis></entry>
+
+          <entry>abre un segmento anterior (Mac: <emphasis role="bold">Cmd+Intro</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>selecciona el segmento completo (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Cambio+O</emphasis></entry>
+
+          <entry>intercambia RTL-LTR</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Estas teclas se comportan de manera diferente cuando el cursor se encuentra fuera del segmento editable:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Inicio: </emphasis> nueve el cursor al comienzo del segmento activo</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Fin: </emphasis> mueve el cursor hasta el final del segmento activo</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Retroceso: </emphasis>nada</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Supr: </emphasis>nada</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Cualquier tecla de carácter,</emphasis> si haces clic fuera del segmento editable, se tendrá en cuenta.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>La tecla &quot;Cambio&quot; no presenta ningún comportamiento especial en sí misma: cuando la tecla &quot;Cambio&quot; se pulsa todas las teclas mueven el cursor en su forma habitual.</para>
+
+  <para>Todo el sistema de ordenes: Pegar (<emphasis role="bold">Ctrl+V</emphasis> o <emphasis role="bold">Ctrl+Insertar</emphasis>), Cortar (<emphasis role="bold">Ctrl+X</emphasis> o <emphasis role="bold">Ctrl+C)</emphasis>, insertar coincidencia <emphasis role="bold">(Ctrl+I</emphasis>) e insertar fuente (<emphasis role="bold">Ctrl+Mayúsculas+I</emphasis>) actúan, en principio, en cualquier selección, incluidas las que se extienden más allá del segmento actual. En tal caso, la selección, por supuesto, se reduce a los límites del segmento.</para>
+</appendix>

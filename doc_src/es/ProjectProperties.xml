@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>Propiedades del Proyecto<indexterm class="singular">
+      <primary>Proyecto</primary> <secondary>Propiedades</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>Cuadro de diálogo propiedades</title>
+
+    <para>El diálogo <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap>+<keycap>E</keycap> </keycombo> </shortcut><guimenu>Proyecto</guimenu> <guimenuitem>Propiedades...</guimenuitem></menuchoice> se utiliza para definir y modificar los directorios del proyecto y los idiomas.</para>
+
+    <figure>
+      <title>Ventana Propiedades del proyecto</title>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/NewProject.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Contiene:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Un área para configurar el idiomas de origen y destino del proyecto con menús desplegables</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Un indicador para configurar la segmentación</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Un área para configurar los directorios del proyecto</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Todos los campos son editables. Puedes introducir los idiomas a mano o usar el menú desplegable. Si ingresas nombres de directorios inexistentes, <application>OmegaT</application> los creará por ti.</para>
+  </section>
+
+  <section id="language.modification">
+    <title>Modificando las propiedades del proyecto</title>
+
+    <para>Ten en cuenta que los cambios en la configuración de un proyecto pueden tener algunas consecuencias, sobre todo, cuando ya se ha iniciado el proyecto.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Cambiando el idioma fuente o destino:<indexterm class="singular">
+            <primary>Proyecto</primary> <secondary>Idiomas fuente y destino</secondary>
+          </indexterm></emphasis></para>
+
+        <para>Ten en cuenta que al cambiar los idiomas puede inutilizar las memorias de traducción utilizadas actualmente, ya que su par de idiomas ya no pueden coincidir con los nuevos idiomas.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Modificaciones de segmentación:<indexterm class="singular">
+            <primary>Proyecto</primary> <secondary>Modificando la segmentación</secondary>
+          </indexterm></emphasis></para>
+
+        <para>La configuración de segmentación sólo se refiere a la forma en que los archivos fuente son manejados por <application>OmegaT</application>. Esto no modifica la segmentación de las memorias de traducción existentes.</para>
+
+        <para>Los cambios realizados en la configuración de segmentación pueden provocar la división o fusión de algunos segmentos ya traducidos. Esto efectivamente los regresa al estado &quot;original&quot;, puesto que ya no coinciden con los segmentos grabados en la memoria del proyecto, a pesar de que tu traducción original todavía está allí.</para>
+
+        <para>OmegaT puede actualizar memorias de traducción antiguas que no usan la segmentación de frases, pero no al revés. Si decides en medio de la traducción cambiar la traducción de frase a párrafo, no se modificará la memoria de traducción interna del proyecto.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Cambiando la estructura de directorios:<indexterm class="singular">
+            <primary>Proyecto</primary> <secondary>Cambiando la estructura de directorios</secondary>
+          </indexterm></emphasis></para>
+
+        <para>En caso de que decidas modificar los directorios del proyecto, ten en cuenta que esto no va a mover los archivos contenidos en los directorios antiguos a la nueva ubicación.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Modificando las propiedades del proyecto durante la sesión:<indexterm class="singular">
+            <primary>Proyecto</primary> <secondary>Modificando durante la sesión</secondary>
+          </indexterm></emphasis></para>
+
+        <para>Es posible modificar las propiedades del proyecto durante una sesión de traducción. Sin embargo, hasta que tengas algo de experiencia con OmegaT, lo más seguro es tener en cuenta como definitivos todos los ajustes una vez que haz comenzado la traducción - a menos que, por supuesto, te des cuenta de haber cometido un grave error. Consulta la sección Previniendo la pérdida de datos para los medios de proteger tu trabajo.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

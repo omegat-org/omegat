@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.regexp">
+  <title>Expresiones regulares<indexterm class="singular">
+      <primary>Expresiones regulares</primary> <seealso>Segmentación</seealso> <seealso>Búsqueda</seealso>
+    </indexterm></title>
+
+  <para>Las expresiones regulares (o regex para abreviar) utilizadas en las búsquedas y reglas de segmentación son compatibles con Java. Si necesitas información más específica, consulta la <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html">Documentación Regex de Java</ulink>. Ve las referencias adicionales y los siguientes ejemplos.</para>
+
+  <note>
+    <para>Este capítulo está destinado a usuarios avanzados, que tienen que definir sus propias variantes de las reglas de segmentación o idear más complejas y potentes búsquedas de elementos clave.</para>
+  </note>
+
+  <table>
+    <title>Regex - Indicadores</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>(?i)</entry>
+
+          <entry>Habilita la coincidencia de mayúsculas y minúsculas (de manera predeterminada, el patrón distingue entre mayúsculas y minúsculas).</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Carácter</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>x</entry>
+
+          <entry>El carácter x, excepto los siguientes...</entry>
+        </row>
+
+        <row>
+          <entry>\uhhhh</entry>
+
+          <entry>El carácter con valor hexadecimal 0xhhhh</entry>
+        </row>
+
+        <row>
+          <entry>\t</entry>
+
+          <entry>El carácter de tabulador ('\u0009')</entry>
+        </row>
+
+        <row>
+          <entry>\n</entry>
+
+          <entry>El carácter de nueva línea (salto de línea) ('\u000A')</entry>
+        </row>
+
+        <row>
+          <entry>\r</entry>
+
+          <entry>El carácter de retorno de carro ('\u000D')</entry>
+        </row>
+
+        <row>
+          <entry>\f</entry>
+
+          <entry>El carácter de alimentación de hoja ('\u000C')</entry>
+        </row>
+
+        <row>
+          <entry>\a</entry>
+
+          <entry>El carácter de alerta (campana) ('\u0007')</entry>
+        </row>
+
+        <row>
+          <entry>\e</entry>
+
+          <entry>El carácter de escape ('\u001B')</entry>
+        </row>
+
+        <row>
+          <entry>\cx</entry>
+
+          <entry>El carácter de control correspondiente a x</entry>
+        </row>
+
+        <row>
+          <entry>\0n</entry>
+
+          <entry>El carácter octal con valor 0n (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0nn</entry>
+
+          <entry>El carácter octal con valor 0nn (0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\0mnn</entry>
+
+          <entry>El carácter octal con valor de 0mnn (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</entry>
+        </row>
+
+        <row>
+          <entry>\xhh</entry>
+
+          <entry>El carácter hexadecimal con valor 0xhh</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Citado</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\</entry>
+
+          <entry>Nada, pero cita el siguiente carácter. Esto es necesario si quieres ingresar cualquiera de los caracteres meta !$()*+.&lt;&gt;?[\]^{} para que coincidan con ellos mismos.</entry>
+        </row>
+
+        <row>
+          <entry>\\</entry>
+
+          <entry>Por ejemplo, este es el carácter de barra invertida</entry>
+        </row>
+
+        <row>
+          <entry>\Q</entry>
+
+          <entry>Nada, sino que cita todos los caracteres hasta \E</entry>
+        </row>
+
+        <row>
+          <entry>\E</entry>
+
+          <entry>Nada, pero termina el citando iniciado por \Q</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Clases para bloques Unicode y categorías</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>\p{InGreek}</entry>
+
+          <entry>Un carácter en el bloque griego (simple <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">bloque</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Lu}</entry>
+
+          <entry>Una letra mayúscula (simple <ulink url="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc">categoría</ulink>)</entry>
+        </row>
+
+        <row>
+          <entry>\p{Sc}</entry>
+
+          <entry>Un símbolo de moneda</entry>
+        </row>
+
+        <row>
+          <entry>\P{InGreek}</entry>
+
+          <entry>Cualquier carácter excepto uno en el bloque Griego (negación)</entry>
+        </row>
+
+        <row>
+          <entry>[\p{L}&amp;&amp;[^\p{Lu}]]</entry>
+
+          <entry>Cualquier letra excepto una letra en mayúscula (sustracción)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Clases de caracteres</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>[abc]</entry>
+
+          <entry>a, b o c (clase simple)</entry>
+        </row>
+
+        <row>
+          <entry>[^abc]</entry>
+
+          <entry>Cualquier carácter excepto a, b o c (negación)</entry>
+        </row>
+
+        <row>
+          <entry>[a-zA-Z]</entry>
+
+          <entry>desde la a hasta la z o desde la A hasta la Z, ambas inclusive (rango)</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Clases predefinidas de caracteres</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>.</entry>
+
+          <entry>Cualquier carácter (excepto los terminadores de línea)</entry>
+        </row>
+
+        <row>
+          <entry>\d</entry>
+
+          <entry>Un dígito: [0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\D</entry>
+
+          <entry>Un no dígito: [^0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\s</entry>
+
+          <entry>Un espacio en blanco: [ \t\n\x0B\f\r]</entry>
+        </row>
+
+        <row>
+          <entry>\S</entry>
+
+          <entry>Un carácter distinto al espacio en blanco: [^\s]</entry>
+        </row>
+
+        <row>
+          <entry>\w</entry>
+
+          <entry>Un carácter constituyente de palabra: [a-zA-Z_0-9]</entry>
+        </row>
+
+        <row>
+          <entry>\W</entry>
+
+          <entry>Un carácter no constituyente de palabra: [^\w]</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Límites de coincidencia</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>^</entry>
+
+          <entry>Al comienzo de una línea</entry>
+        </row>
+
+        <row>
+          <entry>$</entry>
+
+          <entry>Al final de una línea</entry>
+        </row>
+
+        <row>
+          <entry>\b</entry>
+
+          <entry>En los límites de una palabra</entry>
+        </row>
+
+        <row>
+          <entry>\B</entry>
+
+          <entry>En los límites de un carácter no constituyente de palabra</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <table>
+    <title>Regex - Cuantificadores codiciosos</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X<emphasis>?</emphasis></entry>
+
+          <entry>X, una vez o ninguna en absoluto</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>*</emphasis></entry>
+
+          <entry>X, cero o más veces</entry>
+        </row>
+
+        <row>
+          <entry>X<emphasis>+</emphasis></entry>
+
+          <entry>X, una o más veces</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>cuantificadores codiciosos coinciden tanto como les sea posible. Por ejemplo, <emphasis>a+?</emphasis> coincidirá con aaa en <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Regex - Cuantificadores reacios (tímidos)</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>X??</entry>
+
+          <entry>X, una vez o ninguna en absoluto</entry>
+        </row>
+
+        <row>
+          <entry>X*?</entry>
+
+          <entry>X, cero o más veces</entry>
+        </row>
+
+        <row>
+          <entry>X+?</entry>
+
+          <entry>X, una o más veces</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <note>
+    <para>los cuantificadores tímidos coincide tan poco como les sea posible. Por ejemplo, <emphasis>a+?</emphasis> coincidirá con la primera <emphasis>a</emphasis> en <emphasis>aaabbb</emphasis></para>
+  </note>
+
+  <table>
+    <title>Regex - Operadores lógicos</title>
+
+    <tgroup align="left" cols="2" rowsep="1">
+      <colspec align="left" colnum="1" colwidth="100"/>
+
+      <thead>
+        <row>
+          <entry align="left">La construcción</entry>
+
+          <entry align="left">... coincide con el siguiente</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry>XY</entry>
+
+          <entry>X seguida por Y</entry>
+        </row>
+
+        <row>
+          <entry>X|Y</entry>
+
+          <entry>O bien X o bien Y</entry>
+        </row>
+
+        <row>
+          <entry>(XY)</entry>
+
+          <entry>XY como un solo grupo</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <section id="regex.tools.and.examples.of.use">
+    <title><indexterm class="singular">
+        <primary>Expresiones regulares</primary> <secondary>Herramientas</secondary>
+      </indexterm>Herramienta Regex y ejemplos de uso<indexterm class="singular">
+        <primary>Expresiones regulares</primary> <secondary>Ejemplos de uso</secondary>
+      </indexterm></title>
+
+    <para>Una serie de herramientas interactivas disponibles para desarrollar y probar expresiones regulares. Por lo general, siguen el mismo patrón (por ejemplo desde el Probador de expresiones regulares ve más abajo): la expresión regular (entrada superior), analiza el texto de búsqueda (cuadro de texto en el centro), produciendo los elementos, mostrados en el cuadro de texto resultado.</para>
+
+    <figure id="regerx.tester">
+      <title>Probador Regex</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/RegexTester.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/RegexTester.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Ve <ulink url="http://weitz.de/regex-coach/">El entrenador Regex</ulink> en versiones para Windows, Linux, FreeBSD de una herramienta independiente. Esta es similar al ejemplo anterior.</para>
+
+    <para>Puedes encontrar una buena colección de útiles casos de expresiones regulares en <application>OmegaT</application> sí (ves Opciones → Segmentación). La siguiente lista incluye expresiones que te pueden ser útiles cuando buscas a través de la memoria de traducción:</para>
+
+    <table>
+      <title>Regex - Ejemplos de expresiones regulares en traducciones</title>
+
+      <tgroup align="left" cols="2" rowsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <thead>
+          <row>
+            <entry>Expresión regular</entry>
+
+            <entry>Busca lo siguiente:</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>(\b\w+\b)\s\1\b</entry>
+
+            <entry>palabras dobles</entry>
+          </row>
+
+          <row>
+            <entry>[\.,]\s*[\.,]+</entry>
+
+            <entry>coma o un punto, seguido por espacios y otra coma o punto</entry>
+          </row>
+
+          <row>
+            <entry>\. \s+$</entry>
+
+            <entry>espacios en blanco extra después del punto al final de la línea</entry>
+          </row>
+
+          <row>
+            <entry>\s+a\s+[aeiou]</entry>
+
+            <entry>Inglés: las palabras, que empiezan con vocales, generalmente deben estar precedidas por &quot;an&quot;, no &quot;a&quot;</entry>
+          </row>
+
+          <row>
+            <entry>\s+an\s+[^aeiou]</entry>
+
+            <entry>Inglés: la misma comprobación que la anterior, pero sobre las consonantes (&quot;a&quot;, no &quot;an&quot;)</entry>
+          </row>
+
+          <row>
+            <entry>\s\s+</entry>
+
+            <entry>más de un espacio</entry>
+          </row>
+
+          <row>
+            <entry>\.[A-Z]</entry>
+
+            <entry>Un punto, seguido por una letra mayúscula, posiblemente, un espacio omitido entre el punto y el comienzo de una nueva frase.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+</chapter>

@@ -1,0 +1,157 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;13.&nbsp;Trabajando con Texto sin Formato</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Trabajando con texto con formato">
+      <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;14.&nbsp;Memorias de Traducción">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;13.&nbsp;Trabajando con Texto sin Formato</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.formatted.text.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;13.&nbsp;Trabajando con Texto sin Formato">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.plain.text"></a>Chapter&nbsp;13.&nbsp;Trabajando con Texto sin Formato<a class="indexterm" name="d0e5827"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. Codificación predeterminada</a></span></dt>
+               <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. La solución <span class="application">OmegaT</span></a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Codificación predeterminada">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1.&nbsp;Codificación predeterminada<a class="indexterm" name="d0e5835"></a><a class="indexterm" name="d0e5840"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Archivos de texto sin formato - en la mayoría de los casos los archivos con extensión txt - contienen información sólo de
+               texto y no ofrecen una alternativa claramente definida para informar al ordenador el lenguaje que contienen. Lo más que OmegaT
+               puede hacer en este caso, es asumir que el texto está escrito en el mismo idioma que utiliza el propio equipo. Esto no es
+               problema para los archivos codificados en Unicode utilizando un conjunto de caracteres en codificación de 16 bits. Si el texto
+               está codificado en 8 bits, sin embargo, puedes estar ante la siguiente situación incómoda: en lugar de mostrar el texto, para
+               los caracteres Japoneses...
+            </p>
+            <div class="mediaobject"><img src="images/OmT_Japanese.png"></div>
+            <p>...El sistema lo mostrará así por ejemplo:</p>
+            <div class="mediaobject"><img src="images/OmT_Cyrillic.png"></div>
+            <p>El equipo, corriendo OmegaT, tiene el Ruso como idioma predeterminado, y por lo tanto muestra los caracteres en el alfabeto
+               Cirílico, y no en Kanji.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;La solución OmegaT">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="OmegaT.solution"></a>2.&nbsp;La solución <span class="application">OmegaT</span><a class="indexterm" name="d0e5866"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Básicamente, hay tres formas de abordar este problema en <span class="application">OmegaT</span>. Todas ellas implican la aplicación de filtros de archivo en el menú <span class="bold"><strong>Opciones</strong></span>.
+            </p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Cambiar la codificación de tus archivos a Unicode</span></dt>
+                  <dd>
+                     <p>abre tu archivo fuente en un editor de texto que interprete correctamente su codificación y guarda el archivo en codificación
+                        <span class="bold"><strong>"UTF-8"</strong></span>. Cambia la extensión del archivo de <code class="literal">.txt</code> a <code class="literal">.utf8.</code> <span class="application">OmegaT</span> automáticamente debe interpretar el archivo como UTF-8. Esta es la alternativa con más sentido común, puesto que nos evita
+                        problemas a largo plazo.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Especifica la codificación de tus archivos de texto plano</span></dt>
+                  <dd>
+                     <p>- es decir, archivos con extensión <code class="filename">.txt</code> - : en la sección <span class="bold"><strong>Archivos de texto</strong></span> del cuadro de diálogo Filtros de archivo, cambia la <span class="bold"><strong>Codificación de archivos fuente</strong></span> de &lt;auto&gt; a la codificación que corresponde a tu archivo fuente <code class="filename">.txt</code>, por ejemplo, a .jp para el caso anterior.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Cambia las extensiones de los archivos fuente de texto sin formato</span></dt>
+                  <dd>
+                     <p>por ejemplo, de <code class="filename">.txt</code> a <code class="filename">.jp</code> para los archivos de texto plano Japoneses: en la sección <span class="bold"><strong>Archivos de texto</strong></span> del cuadro de diálogo Filtros de archivo, añade un nuevo <span class="bold"><strong>Patrón de nombre de archivo</strong></span> (<code class="filename">*.jp</code> para este ejemplo) y selecciona los parámetros adecuados para la codificación de los archivos fuente y destino
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p><span class="application">OmegaT</span> de manera predeterminada tiene la siguiente lista disponible para hacer facilitarte hacer frente a algunos archivos de texto
+               plano:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>archivos <code class="literal">.txt</code> automáticamente a ( &lt;auto&gt; ) interpretados por <span class="application">OmegaT</span> como codificados en la codificación predeterminada del equipo.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="literal">.txt1</code> son archivos en ISO-8859-1, que cubren la mayoría de los idiomas de <span class="bold"><strong>Europa Occidental</strong></span>.<a class="indexterm" name="d0e5962"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="literal">.txt2</code> son archivos en ISO-8859-2, que cubren la mayoría de los idiomas de <span class="bold"><strong>Europa Central y Oriental</strong></span><a class="indexterm" name="d0e5975"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="literal">.utf8</code> estos archivos son interpretados por <span class="application">OmegaT</span> como codificado en UTF-8 (una codificación que abarca casi todos los idiomas del mundo).<a class="indexterm" name="d0e5989"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <p>Lo puedes comprobar tú mismo seleccionando el elemento <span class="bold"><strong>Filtros de archivo</strong></span> en el menú <span class="bold"><strong>Opciones</strong></span>. Por ejemplo, cuando tienes un archivo de texto en idioma Checo (muy probablemente escrito en el código <span class="bold"><strong>ISO-8859-2</strong></span>) sólo tienes que cambiar la extensión<code class="literal">.txt</code> a <code class="literal">.txt2</code> y <span class="application">OmegaT</span> interpretará su contenido correctamente. Y, por supuesto, si deseas estar en el lado seguro, ten en cuenta la conversión
+               de este tipo de archivo a Unicode, es decir, al formato de archivo <code class="literal">.utf8</code>.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.formatted.text.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;12.&nbsp;Trabajando con texto con formato&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;14.&nbsp;Memorias de Traducción</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

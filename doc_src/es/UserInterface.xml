@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>La interfaz de usuario</title>
+
+  <section id="user.interface.items">
+    <title>Elementos de la interfaz de usuario</title>
+
+    <section id="windows.you.will.use.frequently">
+      <title>Ventanas utilizadas frecuentemente<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary>
+        </indexterm></title>
+
+      <variablelist>
+        <varlistentry>
+          <term><application>OmegaT</application> Ventana principal</term>
+
+          <listitem>
+            <para>contiene el menú principal, la barra de estado y varios paneles:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>Editor - donde escribes y editas la traducción</para>
+              </listitem>
+
+              <listitem>
+                <para>Visor de coincidencias - muestra los segmentos más similares desde las memorias de traducción</para>
+              </listitem>
+
+              <listitem>
+                <para>Visor del glosario - muestra la terminología</para>
+              </listitem>
+
+              <listitem>
+                <para>Visor del diccionario - muestra información proporcionada por los diccionarios</para>
+              </listitem>
+
+              <listitem>
+                <para>Traducción automática - muestra la traducción proporcionada por servicios de traducción automática, como Google Translate</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Atajos</primary> <secondary>Ctrl+L - Ventana de Archivos del proyecto</secondary>
+            </indexterm>Ventana archivos del proyecto</term>
+
+          <listitem>
+            <para>La lista de los archivos traducibles (se abre con <keycombo><keycap>Ctrl</keycap>+<keycap>L</keycap></keycombo>, y se cierra con <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Atajos</primary> <secondary>Ctrl+F - Ventana de búsqueda</secondary>
+            </indexterm>Ventana de búsqueda</term>
+
+          <listitem>
+            <para>Se utiliza para buscar segmentos específicos en el proyecto (se abre con <keycombo><keycap>Ctrl</keycap>+<keycap>F</keycap></keycombo>, se cierra con <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+
+    <section id="windows.you.may.use.now.and.then">
+      <title>Utilizadas con menos frecuencia</title>
+
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Atajos</primary> <secondary>Ctrl+T - ventana de validación de etiquetas</secondary>
+            </indexterm>Ventana de validación de etiquetas</term>
+
+          <listitem>
+            <para>Se utiliza para comprobar los errores de etiqueta en las traducciones (se abre con <keycombo><keycap>Ctrl</keycap>+<keycap>T</keycap></keycombo> se cierra con <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Atajos</primary> <secondary>F1 - Ayuda</secondary>
+            </indexterm>Navegador de ayuda</term>
+
+          <listitem>
+            <para>Se usa para leer el manual del usuario (se abre con 
+<keycap>F1</keycap>, se cierra con <keycap>Esc)</keycap></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Ventana de estadísticas de coincidencias</term>
+
+          <listitem>
+            <para>Se utiliza para abrir la ventana con las estadísticas del proyecto, selecciona <menuchoice><guimenu><indexterm class="singular">
+                    <primary>Menú Herramientas</primary> <secondary>Estadísticas de coincidencias</secondary>
+                  </indexterm>Herramientas</guimenu> → <guimenuitem>Estadísticas de coincidencias.</guimenuitem></menuchoice></para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+
+    <section id="dialogs.to.change.settings">
+      <title>Diálogo Configuración del proyecto<indexterm class="singular">
+          <primary>Proyecto</primary> <secondary>Propiedades</secondary>
+        </indexterm></title>
+
+      <para>Los cuadros de diálogo de abajo se utilizan para cambiar la configuración del proyecto OmegaT. Cada opción se describe en detalle en una sección aparte, la siguiente información resume su uso y la forma en que se invoca:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Atajos</primary> <secondary>Ctrl+E - Propiedades del proyecto</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Menú Proyecto</primary> <secondary>Propiedades</secondary>
+            </indexterm>Propiedades del proyecto</term>
+
+          <listitem>
+            <para>Se utiliza para modificar los directorios e idiomas del proyecto, (se accede a través de <menuchoice><shortcut><keycombo><keycap>Ctrl</keycap>+<keycap>E</keycap></keycombo></shortcut> <guimenu>Proyecto</guimenu> → <guimenuitem>Propiedades...</guimenuitem></menuchoice>, se cierra con <keycap>Esc)</keycap></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Configuración del proyecto</primary> <secondary>Tipo de letra</secondary>
+            </indexterm>Tipo de letra<indexterm class="singular">
+              <primary>Menú Opciones</primary> <secondary>Tipo de letra</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Se utiliza para modificar el tipo de letra <application>utilizado por OmegaT</application> para mostrar la fuente, la traducción, las coincidencias y los términos del glosario, (se accede a través de <menuchoice><guimenu>Opciones</guimenu> → <guimenuitem>Tipo de letra...</guimenuitem></menuchoice>, se cierra con <keycap>Esc</keycap><keycap>)</keycap></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Configuración del proyecto</primary> <secondary>Filtros de archivo</secondary>
+            </indexterm>Filtros de archivo<indexterm class="singular">
+              <primary>Menú Opciones</primary> <secondary>Filtros de archivo</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Se utiliza para ajustar el manejo de los formatos de archivo (se accede a través de <menuchoice><guimenu>Opciones</guimenu> → <guimenuitem>Filtros de archivo...</guimenuitem></menuchoice>, se cierra con <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Configuración del proyecto</primary> <secondary>Segmentación</secondary>
+            </indexterm>Segmentación<indexterm class="singular">
+              <primary>Menú Opciones</primary> <secondary>Segmentación</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Se utiliza para cambiar la forma en que se divide tu texto en oraciones (se accede a través de <menuchoice><guimenu>Opciones</guimenu> → <guimenuitem>Segmentación</guimenuitem></menuchoice>, se cierra con <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Configuración del proyecto</primary> <secondary>Comportamiento del campo de edición</secondary>
+            </indexterm>Comportamiento del campo de edición<indexterm class="singular">
+              <primary>Menú Opciones</primary> <secondary>Comportamiento del campo de edición</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Se utiliza para cambiar la forma en que <application>OmegaT</application> se comporta cuando iteras entre los segmentos (se accede a través de <menuchoice><guimenu>Opciones</guimenu> → <guimenuitem>Comportamiento del campo de edición...</guimenuitem></menuchoice>, se cierra con <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title><application>OmegaT</application> Ventana principal<indexterm class="singular">
+        <primary>Ventanas y paneles en OmegaT</primary> <secondary>Ventana principal</secondary> <tertiary>- figura</tertiary>
+      </indexterm><indexterm class="singular">
+        <primary>Ventanas y paneles en OmegaT</primary> <secondary>Ventana principal</secondary>
+      </indexterm></title>
+
+    <figure>
+      <title>Paneles de OmegaT</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>La ventana principal consta de varios paneles, el menú principal y una barra de estado. Puedes cambiar la posición de cualquier panel o incluso lo puedes desacoplar a una ventana independiente, haz clic y arrastra el panel por su nombre. Dependiendo del estado del panel, pueden aparecer distintos signos en la esquina superior derecha:</para>
+
+    <table>
+      <title>Elementos gráficos del panel<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Elementos gráficos del panel</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>minimiza el panel, de modo tal que sólo aparece su nombre en la parte inferior de la ventana.</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>maximizar panel</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>desacopla el panel de la ventana principal.</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>pone de nuevo en el panel en la ventana principal.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Puedes solapar los paneles si lo deseas. Cuando haces esto los paneles muestran una pestaña en la parte superior. Los separadores entre paneles se pueden arrastrar para reajustar el tamaño de los mismos. En caso de perder la pista de los cambios en la interfaz de usuario, puedes utilizar <guimenuitem><indexterm class="singular">
+        <primary>Ventanas de OmegaT</primary> <seealso>Ventanas y paneles en OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Ventanas de OmegaT</primary><secondary>Restableciendo la configuración de fábrica</secondary>
+      </indexterm>Opciones → Restaurar ventana principal</guimenuitem> en cualquier momento para volver al diseño original.</para>
+
+    <para>Los contadores en la esquina inferior derecha mantienen el seguimiento del progreso de la traducción (los números en la columna de la izquierda se refieren a la figura anterior):</para>
+
+    <table>
+      <title>Ventana principal - contadores<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Contadores</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60"/>
+
+        <tbody>
+          <row>
+            <entry>33/33</entry>
+
+            <entry>número de segmentos - traducidos contra total del archivo actual</entry>
+          </row>
+
+          <row>
+            <entry>2780/2780</entry>
+
+            <entry>número de segmentos únicos - traducidos contra total en el proyecto</entry>
+          </row>
+
+          <row>
+            <entry>3760</entry>
+
+            <entry>Número total de segmentos (incluyendo repetidos) en el proyecto</entry>
+          </row>
+
+          <row>
+            <entry>126/127</entry>
+
+            <entry>número de caracteres fuente y destino en el segmento actual</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Desde un punto de vista práctico, la pareja más importante de los números es el segundo par: este dice, cuánto hemos hecho hasta ahora, en relación con el total o segundo número. El proyecto en el ejemplo, evidentemente ya lo haz terminado, ya que se han traducido todos los segmentos únicos.</para>
+
+    <section id="editor.pane">
+      <title>Panel de edición<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Panel de edición</secondary>
+        </indexterm></title>
+
+      <para>Aquí es donde puedes escribir y editar la traducción. El panel de edición muestra el texto parcialmente traducido del documento: el texto traducido se muestra en la traducción, mientras que el texto no traducido se muestra en el idioma original. El texto mostrado se divide en segmentos y te puedes desplazar por el documento haciendo doble clic en cualquier segmento para abrirlo y editarlo. En el caso anterior, los segmentos ya traducidos se muestran en amarillo, pero puedes cambiar esto para adaptarse a tus preferencias (consulta <xref linkend="submenu.View"/>).</para>
+
+      <para>Uno de los segmentos de arriba es el segmento actual. Es el segmento que se muestra en dos partes. La parte superior está en el idioma fuente, en negrita con fondo de color verde, la parte inferior es el campo de edición, terminado con un marcador: <indexterm class="singular">
+          <primary>Marcador de segmento</primary>
+        </indexterm>el marcador es <literal>&lt;segmento nnnn&gt;</literal> donde nnnn es el número del segmento en el proyecto. Usa la parte superior como referencia y reemplaza o modifica el contenido del campo de edición con la traducción.</para>
+
+      <para>Dependiendo del comportamiento de edición preferido, el campo de edición para el segmento sin traducir posiblemente esté vacío, contiene el texto fuente, o contienen la traducción de la cadena más similar a la que estás traduciendo. Cuando te mueves a otro segmento, la traducción será validada y almacenada. Si deseas que la traducción sea la misma que la original, simplemente haz que el campo de edición se vacíe quitando todo el texto (selecciona todo con <keycap>Ctrl+A</keycap> y elimínalo con <keycap>Del</keycap>). OmegaT es capaz de almacenar las traducciones que son idénticas a la fuente. Esto es útil para documentos que contienen marcas, nombres u otros nombres propios, o partes de un tercer idioma que no requiere traducción. Consulta <emphasis>Opciones de comportamiento del campo de edición</emphasis> para más detalles.</para>
+
+      <para>Si haces clic con el botón derecho sobre el panel de edición, se abre un menú, ofreciendo <emphasis role="bold">cortar, copiar, pegar</emphasis> (es decir, las mismas funciones que <keycombo><keycap>Ctrl</keycap>+<keycap>X</keycap></keycombo>, <keycombo><keycap>Ctrl</keycap>+<keycap>C</keycap></keycombo> y <keycombo><keycap>Ctrl</keycap>+<keycap>V</keycap></keycombo>) y las funciones para <emphasis role="bold">Ir al segmento</emphasis>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>Visor de coincidencias</title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Coincidencias</primary> <secondary>Panel de coincidencias parciales - figura</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Ventanas y paneles en OmegaT</primary> <secondary>Panel de coincidencias parciales - figura</secondary>
+            </indexterm>Panel de coincidencias</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>El visor muestra las coincidencias parciales más similares con los segmentos desde las memorias de traducción, tanto de la memoria de traducción interna del proyecto creada en tiempo real a medida que traduces tu proyecto y las memorias de traducción auxiliares que hayas importado de tus trabajos anteriores, o hayas recibido de tu cliente o agencia de traducción.</para>
+
+      <para>Cuando te mueves al siguiente segmento, la primer coincidencia parcial (la que tiene el mejor porcentaje de similitud) se selecciona automáticamente. Puedes seleccionar una coincidencia diferente pulsando <guimenuitem>Ctrl+2, 3, 4 ó 5</guimenuitem>.<indexterm>
+          <primary>Atajos</primary> <secondary>Ctrl+N - Selecciona la coincidencia</secondary>
+        </indexterm> Por supuesto, al pulsar <keycombo><keycap>Ctrl</keycap>+<keycap>5</keycap></keycombo> no tendrá ningún efecto, si no hay ninguna coincidencia #5. Para utilizar la coincidencia seleccionada en la traducción, usa <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Atajos</primary> <secondary>Ctrl+R - Reemplaza el texto</secondary>
+        </indexterm> para reemplazar el campo destino con la coincidencia o usa <guimenuitem>Ctrl+I<indexterm class="singular">
+          <primary>Atajos</primary> <secondary>Ctrl+I - Inserta el texto</secondary>
+        </indexterm></guimenuitem> para insertarla en la posición del cursor.</para>
+
+      <para>El porcentaje de coincidencia es aproximadamente equivalente al número de palabras comunes en la coincidencia y el segmento correspondiente dividido entre el número de palabras en el más largo de los dos. La coincidencia parcial seleccionada se resalta en negrita, las palabras que faltan en el segmento que se está traduciendo son de color azul y las palabras junto a las partes que faltan de color verde. En el ejemplo anterior, el segmento fuente es <emphasis role="bold">Duración de exposición &lt;15 min</emphasis>. La coincidencia es superior al 60%, ya que coinciden 3 de cada 5 palabras. La línea con el porcentaje de coincidencia también incluye el nombre de la memoria de traducción <indexterm class="singular">
+          <primary>Memorias de traducción</primary> <secondary>Coincidencias</secondary>
+        </indexterm> que contiene la coincidencia. Si no muestra ningún nombre de archivo, la fuente es la memoria de traducción interna del proyecto. Segmentos huérfanos<indexterm class="singular">
+          <primary>Memorias de traducción</primary> <secondary>Segmentos huérfanos</secondary>
+        </indexterm> (la coincidencia #4) describe los segmentos de la memoria de traducción predeterminada del proyectos que no tiene ningún segmento fuente correspondiente.</para>
+
+      <para>En realidad, hay tres estimaciones de coincidencia disponibles (60/60/54 en el caso de la parte superior de la coincidencia anterior). Estas se definen como sigue:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>porcentaje de coincidencia cuando se utiliza el complemento segmentador</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Coincidencia predeterminada de OmegaT - número de palabras coincidentes - omitiendo números y etiquetas - dividido entre el número total de palabras</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Coincidencia OmegaT, incluyendo números y etiquetas</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section>
+      <title>Glosario<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Panel glosario</secondary>
+        </indexterm></title>
+
+      <para>El panel del Glosario te permite acceder a tu propia colección de expresiones y términos técnicos que hayas acumulado en los archivos de glosario. Este muestra la traducción de términos que se encuentran en el segmento actual, pero sólo para fines de referencia: no hay ninguna característica para la inserción de la traducción o sustitución del término con estas.</para>
+
+      <para><figure id="glossary.pane">
+          <title><indexterm class="singular">
+              <primary>Glosarios</primary> <secondary>Ventana de glosario - figura</secondary>
+            </indexterm>Panel glosario</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Glossary_pane.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/Glossary_pane.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>El segmento fuente en el ejemplo anterior fue &quot;E<emphasis>n la mayoría de los trabajos de traducción se considera importante contar con que la traducción del documento tiene un aspecto similar al original</emphasis>.&quot;, y dos palabras en el mismo, documento y traducción se encontraron en el archivo de glosario. <application>OmegaT</application> también es compatible con términos multipalabras:</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Glosarios</primary> <secondary>entradas multipalabra en el glosario - figura</secondary>
+          </indexterm>entrada multipalabra en el glosario</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/MultiTerm_Glossary.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/MultiTerm_Glossary.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Si tienes activada la opción Consejos de traducción <guimenuitem>Opciones → Consejos de traducción</guimenuitem>), puedes hacer clic con el botón derecho sobre la palabra destacada en el segmento fuente para abrir un menú desplegable con las traducciones alternativas, como las ofrecidas por el glosario. Al seleccionar una de ellas se inserta en la posición actual en el segmento destino. También puedes destacar tu alternativa preferida en el panel de glosario e insertarla en el destino haciendo clic con el botón derecho en la selección.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>Visor del diccionario<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Panel diccionario</secondary>
+        </indexterm></title>
+
+      <para>Los diccionarios son el equivalente electrónico de los diccionarios impresos como Merriam Webster, Duden, Larousse, etc., que puedas tener en tu escritorio.</para>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Traducción automática<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Traducción automática</secondary>
+        </indexterm></title>
+
+      <para>El panel de traducción automática, al abrirse, contiene las sugerencias de las herramientas de traducción automática para el segmento actual. Presiona las teclas <keysym>Ctrl+M</keysym> para sustituir la traducción del segmento actual con la traducción sugerida.</para>
+    </section>
+
+    <section>
+      <title id="main.menu">Menú principal</title>
+
+      <para>El menú principal te permite acceder a todas las funciones de <application>OmegaT</application>. Consulta el apéndice <emphasis>Menú Principal</emphasis> para una descripción completa de todos los menús y sus elementos. Las funciones utilizadas frecuentemente son accesibles con atajos del teclado, así que una vez que te acostumbres a ellos, ya no tendrás que navegar por los menús mientras traduces.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Barra de estado</title>
+
+      <para>La barra de estado muestra el flujo de trabajo relacionado a los mensajes en la parte inferior de la ventana principal. Esta barra ofrece retroalimentación al usuario en las operaciones específicas que están en curso. También muestra el número de coincidencias parciales y del glosario para el segmento actual.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Otras ventanas</title>
+
+    <section id="section.project.files">
+      <title>Archivos del proyecto<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Archivos del proyecto</secondary>
+        </indexterm></title>
+
+      <para>La ventana de Archivos del proyecto lista los archivos del proyecto y muestra información del proyecto. Esta se muestra automáticamente cuando cargas un proyecto OmegaT. Usa <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Atajos</primary> <secondary>Ctrl+L - Lista de archivos del proyecto</secondary>
+        </indexterm></guimenuitem> para abrirla y <keycap>Esc</keycap> para cerrarla. La ventana de Archivos del proyecto muestra la siguiente información:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>la lista de todos los archivos traducibles en el proyecto. Estos son los archivos que se encuentran en el directorio de archivos fuente en un formato que OmegaT es capaz de reconocer. Al hacer clic en algún archivo este se abrirá para su traducción.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>el archivo disponible actualmente en el panel de edición está resaltado con un fondo azul. Al presionar la tecla <keycap>Entrar</keycap> te llevará al panel de edición colocándote en la parte superior del archivo seleccionado</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>al lado del nombre del archivo muestra el número de segmentos de cada archivo</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>el número total de segmentos, el número de segmentos únicos en todo el proyecto, y el número de segmentos únicos ya traducidos se muestran en la parte inferior</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>El conjunto de segmentos <emphasis role="bold">únicos</emphasis> se calcula tomando todos los segmentos y eliminando todos los segmentos duplicados. (La definición de &quot;único&quot; es sensible a mayúsculas y minúsculas: &quot;Ejecutar&quot; y &quot;ejecutar&quot; son tratados como si fueran diferentes)</para>
+
+      <para>La diferencia entre el &quot;Número de segmentos&quot; y &quot;Número de segmentos únicos&quot; proporciona una idea aproximada del número de repeticiones en el texto. Ten en cuenta sin embargo, que los números no indican la relevancia de las repeticiones: que podrían significar declaraciones relativamente largas repetidas varias veces (en cuyo caso eres afortunado) o puede describir una tabla de palabras clave (no tan afortunado). El archivo <filename>project_stats.txt</filename> que se encuentra en el directorio omegat del proyecto contiene información por segmentos más detallada, desglosada por archivo.</para>
+
+      <para>Modificar las reglas de segmentación puede tener el efecto de modificar el número de segmentos/segmentos únicos. Esto, sin embargo, en general, lo debes evitar una vez que haz comenzado a traducir el proyecto. Ve el capítulo <emphasis>Reglas de segmentación</emphasis> para más información.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Archivos fuente</primary> <secondary>Añadiendo archivos al proyecto</secondary>
+        </indexterm>Añadiendo archivos al proyecto:</emphasis> Puedes agregar archivos fuente al proyecto haciendo clic en &quot;<guimenuitem>Importar archivos fuente...&quot;</guimenuitem> Esto copia los archivos seleccionados al directorio <filename>fuente</filename> y vuelve a cargar el proyecto para importar los archivos nuevos. También puedes agregar archivos fuente desde páginas de Internet, escritas en MediaWiki, haciendo clic en <guimenuitem>&quot;Importar archivos desde MediaWiki&quot;</guimenuitem> y proporcionando la dirección correspondiente.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>Ventana de búsqueda<indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Panel de búsqueda</secondary>
+        </indexterm></title>
+
+      <para>Puedes utilizar la ventana de búsqueda para encontrar segmentos específicos en un proyecto. También puedes tener varias ventanas de búsqueda abiertas al mismo tiempo. Para abrir una ventana de búsqueda, utiliza <keycombo><keycap>Ctrl</keycap>+<keycap>F</keycap></keycombo> en la ventana principal. La ventana de búsqueda se compone de un campo de texto para la cadena de búsqueda o palabras clave, indicadores y botones de radio para crear la cadena de búsqueda y un área de pantalla que contiene los resultados de la búsqueda. Consulta el capítulo <emphasis><link linkend="chapter.user.interface">Búsquedas</link></emphasis> para obtener más información acerca de la ventana de búsqueda.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Validación de etiquetas<indexterm class="singular">
+          <primary>Validando etiquetas</primary> <seealso>Atajos, Etiquetas</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Ventanas y paneles en OmegaT</primary> <secondary>Validación de etiquetas</secondary> <seealso>Etiquetas</seealso>
+        </indexterm></title>
+
+      <para>La ventana de validación de etiquetas detecta y muestra los errores e inconsistencias en las etiquetas de la traducción. Abre la ventana con <guimenuitem>Ctrl+T. </guimenuitem>La ventana cuenta con una tabla de 3 columnas, con un enlace al segmento, su fuente y el contenido destino:</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Validando etiquetas</primary> <secondary>Ventana - figura</secondary> <seealso>Etiquetas</seealso>
+            </indexterm>Ventana de validación de etiquetas</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Las etiquetas están resaltadas en negrita azul para facilitar la comparación entre el original y el contenido traducido. Haz clic en el enlace para saltar al segmento en el panel de edición. Corrige el error, si es necesario y pulsa <guimenuitem>Ctrl+T</guimenuitem> para volver a la ventana de validación de etiquetas para corregir otros errores. En el primer y tercer caso anterior las etiquetas se emparejan incorrectamente, y en el segundo caso se omitió el signo &lt; en la etiqueta inicial.</para>
+
+      <para>Los errores de etiqueta son casos en que las etiquetas en la traducción no corresponden en orden y número con el segmento original. Algunos escenarios señalados de etiquetas en la ventana de validación de etiquetas son necesarios y son benignos, otros causan problemas cuando se crea el documento traducido. Las etiquetas, generalmente representan algún tipo de formato en el texto original. Simplificar el formato del texto original en el archivo fuente antes de comenzar la traducción contribuye en gran medida a reducir el número de etiquetas.</para>
+    </section>
+
+    <section>
+      <title>Estadísticas de coincidencias<indexterm class="singular">
+          <primary>Estadísticas de coincidencias</primary> <seealso>Menú Herramientas</seealso>
+        </indexterm></title>
+
+      <para>Las estadísticas se acceden a través de <guimenuitem>Herramientas → Estadísticas.</guimenuitem> La evaluación hace uso intensivo de la CPU y puede llevar mucho tiempo, por lo que se muestra una barra de progreso durante el cálculo. En cuanto a las categorías se refiere, se utiliza el estándar de facto de la clasificación de coincidencias en los siguientes grupos:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Coincidencia exacta</para>
+        </listitem>
+
+        <listitem>
+          <para>95%-100%</para>
+        </listitem>
+
+        <listitem>
+          <para>85%-94%</para>
+        </listitem>
+
+        <listitem>
+          <para>75%-84%</para>
+        </listitem>
+
+        <listitem>
+          <para>50%-74%</para>
+        </listitem>
+
+        <listitem>
+          <para>Ninguna coincidencia</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>El número de palabras contadas es idéntico a los números, provistos en la ventana Archivos del proyecto, y se basa estrictamente en el método contable de OmegaT, con algunas diferencias en la terminología para explicar los diferentes conceptos. Esta información se calcula por segmentos, palabras y caracteres (sin y con espacios). Ten en cuenta que los totales son una buena (o tan-bueno-como-pueden-ser) aproximación del trabajo involucrado en el proyecto y por lo tanto puede servir como base para tus cálculos de costos y precios.</para>
+
+      <screenshot>
+        <screeninfo>Estadísticas de coincidencias</screeninfo>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/MatchStatistics.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/MatchStatistics.png" width="60%"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <para>Los espacios entre los segmentos no se tienen en cuenta en la última columna. Las repeticiones están para segmentos idénticos presentes varias veces en el texto. El primer segmento y su contenido será clasificado como &quot;sin coincidencia&quot;, y el resto como una repetición del primero. Si la traducción de varios segmentos fuente idénticos ya existe en la memoria de traducción del proyecto, estos segmentos, junto con otros, ya se han traducido segmentos únicos, serán clasificados como una &quot;coincidencia exacta&quot;. El número de segmentos únicos, si es necesario, se proporciona en la ventana de estadísticas estándar, independientemente de si se han traducidos o no.</para>
+
+      <para>El resto de las categorías (50-100%) consiste en segmentos sin traducir, con una coincidencia parcial. Las coincidencias parciales pueden venir del directorio <filename>/tm</filename> también - y no sólo de la memoria de traducción interna de <filename>/ OmegaT,</filename> como es el caso de las repeticiones y coincidencias exactas. La única diferencia con las coincidencias de la memoria de traducción <filename>project_save</filename> es que las MT externas no pueden dar coincidencias exactas, sólo 100%. Si no deseas utilizar memorias de traducción externas para contar, o bien una tendrás vaciar el directorio /tm o cambiar (temporalmente) la configuración del proyecto para que el valor de /tm apunte a una ubicación diferente.</para>
+
+      <para>Las estadísticas de coincidencias están separadas por tabuladores y puedes usar <guimenuitem>Ctrl+A<indexterm class="singular">
+          <primary>Atajos</primary> <secondary>Ctrl+A - Seleccionar todo</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C<indexterm class="singular">
+          <primary>Atajos</primary> <secondary>Ctrl+C - copiar texto</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Atajos</primary> <secondary>Ctrl+V - Pegar texto</secondary>
+        </indexterm></guimenuitem> copiar/pegar, por ejemplo en una hoja de cálculo o en tu aplicación de contabilidad de costos. Una vez calculados, los datos también están disponibles en <filename>omegat/project_stats_match.txt.</filename> Ten en cuenta que el archivo se marca con la hora, como el cálculo (al contrario de las estadísticas estándar) no es instantáneo y por lo tanto rápidamente se puede volver obsoleto.</para>
+    </section>
+
+    <section>
+      <title>Navegador de ayuda<indexterm class="singular">
+          <primary>Menú Ayuda</primary> <secondary>Navegador de Ayuda</secondary>
+        </indexterm></title>
+
+      <para>El navegador de ayuda (el cual muestra este manual) se puede abrir pulsando <keycap><indexterm class="singular">
+          <primary>Atajos</primary> <secondary>F1 - Ayuda</secondary>
+        </indexterm>F1</keycap> o desplazándote hasta <guimenuitem><indexterm class="singular">
+          <primary>Menú Ayuda</primary> <secondary>Manual de usuario...</secondary>
+        </indexterm>Ayuda → Manual de usuario...</guimenuitem> en el menú principal. En la ventana, el manual muestra dos botones: Volver y Contenido. El manual de usuario es un documento HTML con enlaces a los diferentes capítulos. Al hacer clic en un enlace como lo harías en un navegador web trae la página deseada al frente.</para>
+
+      <para>El manual de usuario se encuentra en el subdirectorio docs en la carpeta de instalación de OmegaT, por lo que puedes, por ejemplo, ver la documentación en Español abriendo el archivo <filename>docs/es/index.html</filename> en tu navegador. Al abrir el manual de usuario de este modo también te permite seguir los enlaces externos, puesto que el navegador de ayuda integrado no acepta los enlaces externos a Internet.</para>
+    </section>
+  </section>
+</chapter>

@@ -1,0 +1,180 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;21.&nbsp;El Corrector Ortográfico</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.machine.translate.html" title="Chapter&nbsp;20.&nbsp;Traducción automática">
+      <link rel="next" href="chapter.misc.html" title="Chapter&nbsp;22.&nbsp;Temas diversos">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;21.&nbsp;El Corrector Ortográfico</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.machine.translate.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.misc.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;21.&nbsp;El Corrector Ortográfico">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.spellchecker"></a>Chapter&nbsp;21.&nbsp;El Corrector Ortográfico<a class="indexterm" name="d0e7954"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e7959">1. Instalando diccionarios ortográficos</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#d0e8030">2. Usando diccionarios ortográficos</a></span></dt>
+               <dt><span class="section"><a href="chapter.spellchecker.html#hints">3. Consejos</a></span></dt>
+            </dl>
+         </div>
+         <p>OmegaT ha incorporado un corrector ortográfico basado en el corrector ortográfico utilizado en OpenOffice.org, Firefox y Thunderbird.
+            En consecuencia, es capaz de utilizar la amplia gama de diccionarios ortográficos libres, disponibles para estas aplicaciones.
+         </p>
+         <div class="section" title="1.&nbsp;Instalando diccionarios ortográficos">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7959"></a>1.&nbsp;Instalando diccionarios ortográficos
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Antes de poder utilizar la función de corrección ortográfica, un diccionario o diccionarios adecuados (es decir, de tu idioma
+               destino) deben estar instalados. Para instalar diccionarios ortográficos, sigue este procedimiento:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>En el administrador de archivos, crea un nuevo directorio en un lugar adecuado en el cual almacenar los diccionarios ortográficos.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>En OmegaT, selecciona <span class="guisubmenu"><a class="indexterm" name="d0e7973"></a></span><span class="guimenuitem">Opciones → Corrector ortográfico</span>, a continuación, haz clic en <span class="guibutton">Seleccionar</span> junto al campo directorio de archivos de diccionario. Navega y selecciona el directorio creado para los diccionarios.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Coloca los archivos del diccionario que desees utilizar en ese directorio. Fundamentalmente, hay dos maneras en que lo puedes
+                        hacer. Puedes copiar los archivos manualmente, es decir, de otra parte del sistema, usando tu gestor de archivos, o puedes
+                        utilizar la función <span class="bold"><strong>"Instalar"</strong></span> de  OmegaT la cual te proporciona una lista de diccionarios disponibles para elegir. Ten en cuenta que la opción "Instalar"
+                        requiere una conexión a Internet. Los idiomas seleccionados serán instalados y, finalmente, aparecerán en la ventana de configuración
+                        del corrector ortográfico (esto puede tardar un rato).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Copiar los archivos manualmente es útil si ya tienes los archivos de diccionario adecuados en tu sistema, por ejemplo, como
+               parte de tu instalación de OpenOffice.org o Thunderbird. Los archivos que necesitas tienen las extensiones <code class="filename">.aff</code> y <code class="filename">.dic</code>, y necesitas dos archivos para que trabaje el diccionario en cuestión. Puedes utilizar estas extensiones de archivo para
+               buscar en tu escritorio los diccionarios adecuados. En el siguiente caso, no se ha ningún directorio adicional y no se han
+               copiado los archivos necesarios, puesto que en su lugar utilizamos el directorio diccionario de OpenOffice:
+            </p>
+            <div class="figure"><a name="spellchecker.setup"></a><p class="title"><b>Figure&nbsp;21.1.&nbsp;Configurando el corrector ortográfico</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckerSetup2.png" alt="Configurando el corrector ortográfico"></div>
+               </div>
+            </div><br class="figure-break"><p>Ten en cuenta que en el caso anterior, es posible que pierdas los diccionarios ortográficos, si remueves de tu sistema la
+               instalación de OpenOffice. Crear tu propio directorio y copiar esos archivos puede ser un trabajo extra, pero, posiblemente,
+               valga la pena.
+            </p>
+            <p>Los diccionarios ortográficos más recientes de OpenOffice.org se suministran como "extensiones de OpenOffice.org", con la
+               extensión .oxt. Estos, sin embargo son archivos .zip, si les cambias el nombre a los archivos con la extensión zip, puedes
+               extraer el contenido con una utilidad de compresión, y debes encontrar los archivos .aff y .dic que necesitas, los cuales
+               podrás colocar en el directorio que creaste para ellos.
+            </p>
+            <p>Ten en cuenta que la aplicación detrás de <span class="guilabel">"Instalar"</span> depende de la lista de diccionarios de Internet. Si no están actualizados o si no incluye el idioma que deseas, tendrás que
+               buscar vocabularios adecuados a tú mismo. OpenOffice.org contiene probablemente la mayor colección de vocabularios en el sitio
+               de <a class="ulink" href="http://extensions.services.openoffice.org/dictionary" target="_top">extensiones de OpenOffice.org</a>. Tras descargar e instalar la extensión del diccionario, los <span class="emphasis"><em>aff</em></span> y <span class="emphasis"><em>dic</em></span> correspondientes estarán disponibles. Puedes lograr lo mismo descargando un corrector ortográfico para Firefox o Thunderbird,
+               en este caso los archivos del corrector ortográfico se almacenarán en tu perfil (de Firefox o Thunderbird).
+            </p>
+            <p>Asegúrate de que el código de idioma de los archivos destino corresponde al código de idioma del diccionario: un diccionario
+               FR-FR no funcionará con un destino configurado cómo FR. Es necesario cambiar la configuración a FR-FR para que el corrector
+               ortográfico reconozca el diccionario correcto para tu destino. Busca los archivos con el nombre, que indica el idioma utilizado
+               y las extensiones <span class="emphasis"><em>aff</em></span> y <span class="emphasis"><em>dic.</em></span></p>
+         </div>
+         <div class="section" title="2.&nbsp;Usando diccionarios ortográficos">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8030"></a>2.&nbsp;Usando diccionarios ortográficos
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>No hay necesidad de instruir a OmegaT para utilizar un diccionario ortográfico particular; OmegaT utilizará el diccionario
+               del idioma correcto basándose en los códigos de idioma de tu proyecto. Sin embargo, comprueba  que los códigos de idioma son
+               exactamente los mismos: un diccionario FR-FR no funcionará con un destino configurado cómo FR, por ejemplo. Si es necesario,
+               modifica los nombres de archivo de los diccionarios o cambia el idioma configurado en tu proyecto.
+            </p>
+            <p>Para habilitar el corrector ortográfico, selecciona <span class="guimenuitem">Opciones → Corrector ortográfico</span> y marca la casilla de verificación <span class="guilabel">Comprobar la ortografía automáticamente</span> (ver arriba)
+            </p>
+            <div class="figure"><a name="spellchecker.in.action"></a><p class="title"><b>Figure&nbsp;21.2.&nbsp;<a class="indexterm" name="d0e8045"></a>Corrector ortográfico en acción</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/SpellcheckingText.png" alt="Corrector ortográficoCorrector ortográfico - figuraCorrector ortográfico en acción"></div>
+               </div>
+            </div><br class="figure-break"><p>Haz clic con el botón derecho sobre una palabra subrayada (Artund en la figura anterior), esto abrirá una lista de sugerencias
+               del menú desplegable para la corrección (Art und). También puedes indicar el corrector ortográfico que ignore todas las apariciones
+               de la palabra mal escrita, o agregarla al diccionario.
+            </p>
+         </div>
+         <div class="section" title="3.&nbsp;Consejos">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints"></a>3.&nbsp;Consejos<a class="indexterm" name="d0e8059"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Si el corrector ortográfico no funciona, entonces, primero asegúrate de que la casilla de verificación <span class="guilabel">"Comprobar la ortografía automáticamente"</span> en el diálogo del corrector ortográfico (<span class="guisubmenu">Opciones → Corrector ortográfico...)</span> está marcada.
+            </p>
+            <p>También puedes ver el código de idioma destino de tu proyecto contra los vocabularios disponibles en la ventana de configuración.
+               El corrector ortográfico utiliza el código de idioma destino para determinar el idioma que se utilizará: si el idioma de destino
+               es Portugués de Brasil (pt_BR), buscará en el subdirectorio un vocabulario que contenga los dos archivos del vocabulario,
+               llamados <span class="emphasis"><em>pt_br.aff</em></span> y <span class="emphasis"><em>pt_br.dic</em></span>.
+            </p>
+            <p>Si ya haz traducido una gran cantidad de texto, y te das cuenta que el código de idioma destino del proyecto no coincide con
+               el código de idioma del corrector ortográfico (especificaste pt_BR como el idioma, pero no hay vocabularios pt_BR, por ejemplo),
+               sólo tienes que copiar los dos archivos correspondientes y cambiarles el nombre (por ejemplo, <span class="emphasis"><em>pt_PT.arr</em></span> y <span class="emphasis"><em>pt_PT.dic</em></span> a <span class="emphasis"><em>pt._BR.arr</em></span> y <span class="emphasis"><em>pt_BR.dic</em></span>). Por supuesto, es mucho más sensato, tomar un breve descanso y descargar la versión correcta del corrector ortográfico.
+            </p>
+            <p>Ten en cuenta que <code class="filename">Desinstalar</code> elimina físicamente el vocabulario seleccionado. Si son parte de OpenOffice.org, como en el caso anterior, estos van a desaparecer
+               de esta aplicación, también. Si, por cualquier razón, necesitas hacerlo de vez en cuando, posiblemente tenga sentido copiar
+               los archivos que intervienen en un directorio distinto, reservada sólo para que lo use OmegaT.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.machine.translate.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.misc.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;20.&nbsp;Traducción automática&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;22.&nbsp;Temas diversos</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

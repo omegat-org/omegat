@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.font">
+  <title>Configurando el tipo de letra</title>
+  
+  <section id="section.font.settings">
+    <title>Configurando el tipo de letra</title>
+    <indexterm class="singular">
+      <primary>Configurando el tipo de letra</primary>
+    </indexterm>
+    
+    <para>En este diálogo puedes definir el tipo de letra utilizada por OmegaT en las siguientes ventanas:</para>
+    
+    <itemizedlist>
+      <listitem>
+        <para>La ventana principal de OmegaT (excepto el visor del Diccionario)</para>
+      </listitem>
+      <listitem>
+        <para>Ventana de búsqueda</para>
+      </listitem>
+      <listitem>
+        <para>Ventana de validación de etiquetas</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Puedes acceder al cuadro de diálogo a través del menú Opciones de la aplicación. El cuadro de diálogo contiene: <menuchoice><guimenu>Opciones</guimenu> <guimenuitem>Tipo de letra...</guimenuitem></menuchoice>
+    <indexterm class="singular">
+      <primary>Menú Opciones</primary> <secondary>Tipo de letra...</secondary>
+    </indexterm>
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <formalpara>
+	  <title>Tipo de letra</title>
+	  <para>Despliega una de los tipos de letra disponibles en tu máquina para seleccionar.</para>
+	</formalpara>
+      </listitem>
+      <listitem>
+        <formalpara>
+	  <title>Tamaño</title>
+	  <para>Modifícalo para cambiar el tamaño del tipo de letra.</para>
+	</formalpara>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <formalpara>
+	  <title>Texto de ejemplo</title>
+	  <para>Vista previa inmediata del tipo de letra seleccionado.</para>
+	</formalpara>
+      </listitem>
+    </itemizedlist>
+
+    <formalpara>
+      <title>Nota</title>
+      <para>La actualización de la pantalla puede tomar más tiempo si el número de segmentos mostrado es importante. Además, algunos tipos de letra pueden tener una mejor cobertura en tu par de idiomas.</para>
+    </formalpara>
+  </section>
+</chapter>

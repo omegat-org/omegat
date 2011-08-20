@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>Comportamiento del campo de edición<indexterm class="singular">
+      <primary>Menú opciones</primary> <secondary>Comportamiento del campo de edición...</secondary>
+    </indexterm></title>
+
+  <para>El cuadro de diálogo en <menuchoice><guimenu>Opciones</guimenu> <guimenuitem>Comportamiento del campo de edición...</guimenuitem></menuchoice> permite al usuario seleccionar, cómo se inicia y manipula el segmento actual en el campo de edición:</para>
+
+  <figure id="editing.behavior.options">
+    <title>Opciones de comportamiento del campo de edición</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <section id="automatic.match.insertion">
+    <title>Insertar coincidencias automáticamente<indexterm class="singular">
+        <primary>Insertar coincidencias automáticamente</primary>
+      </indexterm></title>
+
+    <para>Traduces tus archivos pasando de un segmento a otro, editando cada segmento en turno. Cuando te mueves entre los segmentos, posiblemente desees llenar el campo de edición con una traducción ya existente en el panel de coincidencias parciales o con el texto original. En <menuchoice><guimenu>Opciones</guimenu> <guimenuitem>Comportamiento del campo de edición...</guimenuitem></menuchoice> <application>OmegaT</application> te ofrece las siguientes alternativas:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>El texto original</term>
+
+        <listitem>
+          <para>Puedes insertar automáticamente el texto original en el campo de edición. Esto es útil para los textos que contiene muchas marcas comerciales u otros nombres propios que se deben dejar sin cambios.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Dejar el segmento vacío</term>
+
+        <listitem>
+          <para>OmegaT deja en blanco el campo de edición. Esta opción te permite introducir la traducción, sin la necesidad de eliminar el texto original, lo cual te ahorra dos pulsaciones de teclas (<emphasis role="bold">Ctrl+A</emphasis> y <emphasis role="bold">Del)</emphasis></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Insertar la coincidencia parcial más parecida</term>
+
+        <listitem>
+          <para>OmegaT inserta la traducción de la cadena más parecida al texto original actual, si está por encima del umbral de similitud seleccionado en este cuadro de diálogo.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="allow.translation.equal.to.source">
+    <title>Permite que la traducción sea igual al original<indexterm class="singular">
+        <primary>Traducción igual a fuente</primary>
+      </indexterm></title>
+
+    <para>Documentos por traducir pueden contener nombres de marcas u otros nombres propios que serán los mismos en los documentos traducidos. Hay dos estrategias para segmentos que únicamente contienen tal texto invariable.</para>
+
+    <para>Puedes decidir no traducir estos segmentos en absoluto. En tal caso, OmegaT reportará estos segmentos como no traducidos. Este es el predeterminado. La alternativa es que al introducir una traducción que es idéntica al texto original. OmegaT sea capaz de reconocer que se ha hecho a propósito. Para hacer esto posible, ve a <menuchoice><guimenu>Opciones</guimenu> <guimenuitem>Comportamiento del campo de edición...</guimenuitem></menuchoice> y marca la casilla <emphasis role="bold">Permitir traducciones idénticas al original</emphasis>.</para>
+  </section>
+
+  <section id="export.segment.to.text.files">
+    <title>Exporta el segmento a un archivo de texto<indexterm class="singular">
+        <primary>Exportar el segmento actual</primary>
+      </indexterm></title>
+
+    <para>La función exportar texto exporta los datos desde el proyecto <application>OmegaT</application> actual a archivos de texto plano. Los datos se exportan cuando se abre el segmento. Los archivos aparecen en el subdirectorio &quot;/script&quot; en el directorio de los archivos de usuario de OmegaT, e incluyen:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>El contenido del texto original del segmento (<filename>source.txt</filename>).</para>
+      </listitem>
+
+      <listitem>
+        <para>El contenido del texto destino del segmento (<filename>target.txt</filename>).</para>
+      </listitem>
+
+      <listitem>
+        <para>El texto seleccionado por el usuario, cuando se presiona <keycap>Ctrl-Cambio-C</keycap> o en el menú <guimenuitem>Editar → Exportar selección</guimenuitem> está seleccionado (<filename>selection.txt</filename>).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>El contenido de los archivos se sobrescribe cuando ya sea que se abra un nuevo segmento (source.txt y target.txt) o cuando se exporta una nueva selección (selection.txt). Los archivos son archivos de texto sin formato. Puedes controlar y dirigir todo el proceso a través de los guiones basados en Tck/Tcl. Ve <ulink url="http://www.omegat.org/en/howtos/text_export.html">Utilizando la función para exportar texto de OmegaT</ulink> para información específica, ejemplos y sugerencias.</para>
+  </section>
+</chapter>

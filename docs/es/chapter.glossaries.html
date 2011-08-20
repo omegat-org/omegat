@@ -1,0 +1,312 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;19.&nbsp;Glosarios</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.dictionaries.html" title="Chapter&nbsp;18.&nbsp;Diccionarios">
+      <link rel="next" href="chapter.machine.translate.html" title="Chapter&nbsp;20.&nbsp;Traducción automática">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;19.&nbsp;Glosarios</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;19.&nbsp;Glosarios">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glosarios<a class="indexterm" name="d0e7546"></a><a class="indexterm" name="d0e7551"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7564">1. Utilización</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7611">2. Formato del archivo</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7635">3. Cómo crear glosarios</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7733">4. Usando Trados Multiterm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7751">5. Problemas comunes con glosarios</a></span></dt>
+            </dl>
+         </div>
+         <p>Los glosarios son archivos creados y actualizados manualmente para usarlos en <span class="application">OmegaT</span>.
+         </p>
+         <p>Si un proyecto <span class="application">OmegaT</span> contiene uno o varios glosarios, cualquiera de los términos del glosario que también se encuentren en el segmento actual
+            se mostrarán automáticamente en el visor del Glosario.
+         </p>
+         <div class="section" title="1.&nbsp;Utilización">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7564"></a>1.&nbsp;Utilización
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Para utilizar un glosario existente, basta con colocarlo en el directorio <a class="indexterm" name="d0e7569"></a><code class="filename">/glosario</code> después de crear el proyecto. <span class="application">OmegaT</span> detecta automáticamente los archivos de glosario de esta carpeta al abrir un proyecto. Los términos en el segmento actual
+               que <span class="application">OmegaT</span> encuentre en el/los archivo(s) de glosario(s) se muestran en el panel Glosario:
+            </p><a class="indexterm" name="d0e7583"></a><div class="figure"><a name="d0e7586"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Panel glosario</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/Glossary_pane.png" alt="Panel glosario"></div>
+               </div>
+            </div><br class="figure-break"><p>La palabra antes del signo = es el término fuente, y su traducción es (o son) las palabras después del signo =. La entrada
+               del vocabulario puede tener un comentario añadido (ve el "verbo transitivo" para el segundo elemento). La función glosario
+               sólo encuentra coincidencias exactas con las palabras clave en la entrada (por ejemplo, no encuentra formas con inflexión,
+               etc.) Puedes agregar manualmente nuevos términos al archivo del glosario durante la traducción (por ejemplo en un editor de
+               texto), pero los términos recién agregados no serán reconocidos hasta que se vuelva a cargar el proyecto.
+            </p>
+            <p>El término fuente no tiene que ser un elemento de una sola palabra, como muestra el siguiente ejemplo:</p>
+            <div class="figure"><a name="d0e7598"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;entrada de múltiples palabras en los glosarios - ejemplo<a class="indexterm" name="d0e7601"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary.png" alt="entrada de múltiples palabras en los glosarios - ejemploPanel Glosario - entrada de múltiples palabras"></div>
+               </div>
+            </div><br class="figure-break"><p>El elemento subrayado "new preview screen shot", se compone de cuatro palabras y lo puedes encontrar en el panel del glosario
+               como "nov predogled posnetka zaslona". Ten en cuenta que partes de los elementos multitérmino ("preview" en el ejemplo anterior
+               también se reconocen en sí mismos como "predogled") se reconocen también, pero en un rango menor.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Formato del archivo">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7611"></a>2.&nbsp;<a class="indexterm" name="d0e7613"></a>Formato del archivo<a class="indexterm" name="d0e7619"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Los archivos de Glosario son simples archivos de texto plano que contienen tres columnas, con listas delimitadas por tabulaciones
+               con los términos fuente y destino en la primera y segunda columnas, respectivamente. La tercer columna, la puedes utilizar
+               para información adicional. Los archivos de glosario se pueden codificar bien por medio del sistema de archivos predeterminado
+               (y se indica mediante la extensión .tab) o en UTF-8 (extensión .utf8). Es preferible la codificación Unicode (UTF-8) por obvias
+               razones.
+            </p>
+            <p>También es compatible con el formato CSV. Este formato es el mismo que el separado por una tabulación: término fuente, término
+               destino. Los campos de comentario están separados por una coma ','. Las cadenas se pueden encerrar entre comillas dobles ",
+               lo cual permite tener una comilla simple dentro de una cadena:
+            </p>
+            <p><code class="literal">"Este es un término fuente, que contiene una comilla, c'est un terme cible", esto es un comentario</code></p>
+            <p>Además de texto sin formato, también es compatible con el formato TBX. TBX - Term Base eXchange (TBX) es el estándar libre
+               basado en XML para el intercambio estructurado de datos terminológicos que ha sido aprobado como un estándar internacional
+               por LISA e ISO. Si tienes un sistema de manipulación de terminología - MultiTerm por ejemplo - es muy posible que ofrezca
+               la exportación de datos terminológicos a través del formato TBX.
+            </p>
+         </div>
+         <div class="section" title="3.&nbsp;Cómo crear glosarios">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7635"></a>3.&nbsp;Cómo crear glosarios<a class="indexterm" name="d0e7638"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Este método es infalible, cuando se sigue de una manera razonablemente cuidadosa. Necesitas el Writer de OpenOffice.org para
+               ello, por lo que ― si no lo haz hecho ― descarga e instala OpenOffice.org. Lanza OpenOffice.org y abre un nuevo documento
+               de texto o lanza "OpenOffice.org Writer".
+            </p>
+            <p>En un documento vacío, escribe los términos del glosario de la siguiente manera: un término en el idioma fuente, una tabulación,
+               el término del idioma destino, una tabulación, un comentario o explicación para el elemento, y un salto de línea. La tabulación
+               es la tecla tabuladora en la parte izquierda del teclado. Si no deseas añadir algún comentario, puedes descartar la segunda
+               tabulación. Un "término" puede ser una sola palabra o una frase completa. En la segunda línea, introduce el segundo término
+               y su traducción.
+            </p>
+            <p>Cuando hayas terminado de introducir los términos, tendrás dos "columnas" con los términos, eb idioma origen y los términos
+               a la izquierda y sus términos en el idioma destino a la derecha, y posiblemente una tercera columna, que contiene comentarios
+               y explicaciones, los caracteres de tabulación (→ en el siguiente ejemplo) y el salto de línea (¶) se pueden visualizar haciendo
+               clic en el icono ¶ en la barra estándar de Writer. Aquí hay unas cuantas líneas de un glosario Inglés -Alemán)
+            </p>
+            <p><code class="literal">word →Wort→das (-/e/s, Wörter/-e)¶</code></p>
+            <p><code class="literal">small house→Häuschen→das, (pl Häuschen)¶</code></p>
+            <p><code class="literal">dog →Hund→m, f Hündin ¶</code></p>
+            <p><code class="literal">horse→Pferd→n, m Hengst f Stute n Fohlen¶</code></p>
+            <p>NO utilices la función "columnas" de OpenOffice.org para crear columnas: simplemente separa cada término fuente y destino
+               en el par de idiomas con una única tabulación.
+            </p>
+            <p>Cuando hayas terminado, guarda el archivo con codificación de archivo Unicode de la siguiente manera:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Selecciona <code class="literal">Archivo → Guardar como</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>En el cuadro <span class="emphasis"><em>"Ubicación de archivo"</em></span>, escribe el nombre de archivo del glosario.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Para el "Tipo", selecciona "<span class="emphasis"><em>Texto codificado (.txt.)</em></span>"
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>asegúrate de que no estén marcadas las casillas "<span class="emphasis"><em>Extensión de archivo automática</em></span>" y "<span class="emphasis"><em>Editar configuración de filtros</em></span>".
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="figure"><a name="d0e7693"></a><p class="title"><b>Figure&nbsp;19.3.&nbsp;Guardando un glosario</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/saveglossary.png" alt="Guardando un glosario"></div>
+               </div>
+            </div><br class="figure-break"><p>Confirma con Guardar.</p>
+            <p>Después de crear un proyecto OmegaT, copia o mueve el archivo al directorio \glosario del proyecto. Si el proyecto ya está
+               abierto, vuelve a cargarlo después de copiar el archivo de glosario en el proyecto. Puedes hacer cambios a un archivo de glosario
+               mientras que lo estás utilizando en un proyecto. Los cambios al glosario se detectan aproximadamente una vez cada segundo
+               y las modificaciones se cargan de forma transparente detrás del escenario, por lo tanto no hay que volver a cargar el proyecto
+               después de guardar el nuevo archivo del glosario.
+            </p>
+            <p>Cuando un segmento que contiene un término en el texto fuente se añade al panel del glosario mostrando las entradas del glosario
+               para aquellos elementos en el segmento fuente que se puedan encontrar en el glosario (o glosarios - puedes tener más de uno
+               disponible, y también los puedes almacenar en subdirectorios del <span class="emphasis"><em>glosario</em></span>).
+            </p>
+            <p><span class="bold"><strong>Nota: </strong></span>Por supuesto que hay otras formas y medios para crear un archivo sencillo con entradas delimitadas por tabuladores, y todas
+               ellas son simples, muchas de ellas mucho más simples que la sugerida anteriormente. Por ejemplo, puedes exportar el contenido
+               anterior desde un <code class="filename">CSV</code>, en lugar de un archivo de texto <code class="filename">UTF8</code>. Sin embargo, ten en cuanta que la sugerencia anterior funciona para cualquier sistema operativo, ya sea Windows, OS X o
+               Linux. Nada habla en contra de usar Notepad++ en Windows o Gedit en Linux, por ejemplo: cualquier editor de texto, que pueda
+               manejar UTF-8 y que pueda mostrar un espacio en blanco (para que no se pierdan los caracteres <span class="keycap"><strong>TAB</strong></span> necesarios) se puede utilizar.
+            </p>
+            <p>El contenido de los archivos de glosario se mantiene en memoria y se cargan cuando se abre o recarga el proyecto. La actualización
+               de un archivo de glosario por lo tanto es bastante simple:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>mantén el archivo abierto en el editor seleccionado</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Cuando te encuentras con un nuevo término que desea añadir a tu glosario, introduce el nuevo término, su traducción y cualquier
+                        comentario que pueda tener (asegurándote que pulsas la tecla de tabulación entre los campos) y guarda el archivo. El contenido
+                        del panel del glosario se actualizará consecuentemente.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="4.&nbsp;Usando Trados Multiterm">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7733"></a>4.&nbsp;<a class="indexterm" name="d0e7735"></a>Usando Trados Multiterm
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Los datos exportados de Trados MultiTerm se pueden utilizar como glosarios <span class="application">OmegaT</span> sin ninguna otra modificación, siempre y cuando les des la extensión de archivo <code class="filename">.tab</code> y los campos origen y destino son los dos primeros campos respectivamente.
+            </p>
+            <p>Si exportas con la opción de sistema "Tab-delimited export", tendrás que eliminar las primeras 5 columnas (Seq. Nr, Fecha
+               de creación, etc.). Las versiones más recientes de MultiTerm apoyan la exportación al formato TBX..
+            </p>
+         </div>
+         <div class="section" title="5.&nbsp;Problemas comunes con glosarios">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7751"></a>5.&nbsp;<a class="indexterm" name="d0e7753"></a>Problemas comunes con glosarios
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Problema: No se muestran términos del glosario - posibles causas:</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>No existe el archivo glosario en el directorio "Glosario".</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>El archivo de glosario está vacío.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Los elementos no están separados con un carácter de tabulación.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>El archivo de glosario no tiene la extensión correcta (.tab o .utf8).</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>No hay coincidencia EXACTA entre la entrada en el glosario y el texto original en el documento - por ejemplo, plurales.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>el archivo de glosario no tiene la codificación correcta.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>No hay términos en el segmento actual que coincidan con los términos en el glosario.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Uno o más de los problemas anteriores se pueden haber corregido, pero no se ha recargado el proyecto.</p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Problema: En el panel de glosario, algunos caracteres no se muestran correctamente</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>...pero los mismos caracteres se muestran correctamente en el panel de edición: la extensión y la codificación del archivo
+                        no coinciden.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.dictionaries.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.machine.translate.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;18.&nbsp;Diccionarios&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;20.&nbsp;Traducción automática</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

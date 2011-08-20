@@ -1,0 +1,225 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;12.&nbsp;Trabajando con texto con formato</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.font.html" title="Chapter&nbsp;11.&nbsp;Configurando el tipo de letra">
+      <link rel="next" href="chapter.plain.text.html" title="Chapter&nbsp;13.&nbsp;Trabajando con Texto sin Formato">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;12.&nbsp;Trabajando con texto con formato</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.font.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;12.&nbsp;Trabajando con texto con formato">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Trabajando con texto con formato<a class="indexterm" name="d0e5620"></a><a class="indexterm" name="d0e5625"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.formatted.text.html#formatting.tags">1. Etiquetas de formato</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Operaciones con etiquetas</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Anidando grupos de etiquetas</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Superponiendo grupos de etiquetas</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">5. Validando etiquetas agrupadas</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">6. Consejos para gestionar etiquetas</a></span></dt>
+            </dl>
+         </div>
+         <p>La información de formato presente en el archivo fuente, generalmente se tiene que reproducir en el archivo destino. La información
+            de formato en línea posibilita los formatos compatibles (en particular DocBook, HTML, XHTML, Open Document (OpenOffice.org)
+            y Office Open XML (MS Office 2007 y posteriores) al momento de escribir esto) se presenta como etiquetas en OmegaT. Normalmente
+            se omiten las etiquetas al considerar la similitud entre los diferentes textos para emparejamiento. Las etiquetas reproducidas
+            en el segmento traducido estarán presentes en el documento final.
+         </p>
+         <div class="section" title="1.&nbsp;Etiquetas de formato">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Etiquetas de formato<a class="indexterm" name="d0e5635"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="indexterm" name="d0e5639"></a><span class="bold"><strong>Denominación de etiquetas:</strong></span></p>
+            <p>Las etiquetas constan de entre uno a tres caracteres y un número. La numeración permite etiquetas únicas, correspondientes
+               a los demás que se agrupan y se diferencian entre las etiquetas, que tienen el mismo carácter, pero en realidad son diferentes.
+               Los caracteres utilizados tratan de reflejar el significado abreviado de la etiqueta subyacente (por ejemplo, b para negrita
+               (o bold), I para cursiva (o itálica), etc.)
+            </p>
+            <p><a class="indexterm" name="d0e5649"></a><span class="bold"><strong>Numeración de etiquetas:</strong></span></p>
+            <p>Las etiquetas son numeradas progresivamente por el grupo de etiquetas. Los "grupos de etiquetas" en este contexto son una
+               sola etiqueta (por ejemplo, &lt;i0&gt; y &lt;/i0&gt;). Dentro de un segmento, el primer grupo (pareja o individual) recibe el número 0,
+               el segundo el número 1, etc. El primer ejemplo tiene 3 grupos de etiquetas (un par, una individual, y luego otro par), el
+               segundo ejemplo tiene un único grupo (un par).
+            </p>
+            <p><a class="indexterm" name="d0e5659"></a><span class="bold"><strong>Parejas e individuales:</strong></span></p>
+            <p>Las etiquetas siempre son: bien individuales o parejas. Las etiquetas individuales indican información de formato que no afecta
+               al texto que la rodea (un espacio o salto de línea, por ejemplo).
+            </p>
+            <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Intro&gt;&lt;/b2&gt;&lt;segmento 2132&gt;</code></p>
+            <p>&lt;br1&gt; es una etiqueta individual y no afecta a ningún texto que la rodea. Etiquetas en parejas por lo general indican información
+               de estilo que se aplica al texto entre la etiqueta de apertura y la etiqueta de cierre de un par. &lt;b0&gt; y &lt;/b0&gt; abajo, están
+               emparejadas y afectan al texto log.txt. Ten en cuenta que la etiqueta de apertura siempre debe venir antes de la etiqueta
+               de cierre correspondiente:
+            </p>
+            <p><code class="literal">Archivo de registro (&lt;b0&gt;log.txt&lt;/b0&gt;) para rastrear operaciones y errores. &lt;segmento 3167&gt;</code></p>
+            <p><span class="application">OmegaT</span> crea sus etiquetas antes del proceso de segmentación de frases. Dependiendo de las reglas de segmentación, el par de etiquetas
+               puede separarse en dos segmentos consecutivos y la validación de etiquetas debe errar en el lado de la precaución y marcar
+               los dos segmentos.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Operaciones con etiquetas">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Operaciones con etiquetas<a class="indexterm" name="d0e5683"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Debes tener cuidado con las etiquetas. Si las cambias accidentalmente, puedes dañar el formato del archivo final. La regla
+               básica es que la secuencia de las etiquetas se debe conservar en el mismo orden. Sin embargo, es posible, si sigues estrictamente
+               ciertas reglas, apartarte de esta regla básica.
+            </p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5692"></a>Duplicando etiquetas:</strong></span></p>
+            <p>Para duplicar grupos de etiquetas, sólo tienes que copiarlas en la posición de tu elección. Ten en cuenta que en un grupo
+               de pares, la etiqueta de apertura debe venir antes de la etiqueta de cierre. El formato representado por el grupo al que se
+               han duplicado se aplicará a ambas secciones.
+            </p>
+            <p>Ejemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Este formato&lt;/b0&gt; se va a duplicar aquí.&lt;segmento 0001&gt;</code></p>
+            <p>Después de duplicarlo:</p>
+            <p><code class="literal">&lt;b0&gt;Este formato&lt;/b0&gt; ha sido &lt;b0&gt;duplicado aquí&lt;/b0&gt;.&lt;segmento 0001&gt;</code></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5712"></a>Eliminando grupo de etiquetas:</strong></span></p>
+            <p>Para eliminar grupos de etiquetas, sólo tienes que quitarlas del segmento. Ten en cuenta que un grupo de pares debe tener
+               sus etiquetas de apertura y cierre para asegurarte de que eliminas todos los vestigios del formato correctamente, de lo contrario
+               el archivo traducido puede resultar dañado. Al eliminar un grupo de etiquetas, eliminarás el formato del archivo traducido
+               relacionado.
+            </p>
+            <p>Ejemplo:</p>
+            <p><code class="literal">&lt;b0&gt;Este formato&lt;/b0&gt; de va a eliminar.&lt;segmento 0001&gt;</code></p>
+            <p>Después de eliminarlo:</p>
+            <p><code class="literal">Este formato se ha borrado.&lt;segmento 0001&gt;</code></p>
+         </div>
+         <div class="section" title="3.&nbsp;Anidando grupos de etiquetas">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Anidando grupos de etiquetas<a class="indexterm" name="d0e5733"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Modificar un grupo etiquetas puede dar lugar a la anidación de un grupo de etiquetas dentro de otro grupo. Esto es aceptable,
+               siempre y cuando el grupo anidado rodee al grupo encerrado. En otras palabras, al mover parejas de etiquetas, asegúrate de
+               que tanto la etiqueta de apertura cómo la etiqueta de cierre se mueven a la vez, ya sea dentro o fuera de parejas de etiquetas,
+               o puedes dañar el archivo traducido y no se podrá abrir.
+            </p>
+            <p>Ejemplo:</p>
+            <p><code class="literal">El &lt;b0&gt;formato&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; se va a anidar dentro del formato cero.&lt;segmento 0001&gt;</code></p>
+            <p>Después de anidarlo:</p>
+            <p><code class="literal">El &lt;b0&gt;formato &lt;b1&gt;uno&lt;/b1&gt;&lt;/b0&gt; se ha anidado en el formato cero.&lt;segmento 0001&gt;</code></p>
+         </div>
+         <div class="section" title="4.&nbsp;Superponiendo grupos de etiquetas">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Superponiendo grupos de etiquetas<a class="indexterm" name="d0e5753"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>La superposición es el resultado de manipulación incorrecta de las parejas de etiquetas y garantiza producir daños en el formato
+               y, a veces en la no apertura del archivo traducido.
+            </p>
+            <p>Ejemplo:</p>
+            <p><code class="literal">El &lt;b0&gt;formato&lt;/b0&gt; &lt;b1&gt;uno&lt;/b1&gt; va a estar en mal estado.&lt;segmento 0001&gt;</code></p>
+            <p>Después de una mala manipulación:</p>
+            <p><code class="literal">El &lt;b0&gt;formato &lt;b1&gt;uno&lt;/b0&gt;&lt;/b1&gt; está en muy mal estado ahora.&lt;segmento 0001&gt;</code></p>
+         </div>
+         <div class="section" title="5.&nbsp;Validando etiquetas agrupadas">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;Validando etiquetas agrupadas<a class="indexterm" name="d0e5773"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>La función de validación de etiquetas detecta cambios en las secuencias de etiquetas (ya sea deliberados o accidentales),
+               y muestra los segmentos afectados. Al lanzar esta función - <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5782"></a></span> - se abre una ventana que contiene todos los segmentos en que se sospecha contengan etiquetas rotas o en mal estado en el
+               archivo de la traducción. Reparar las etiquetas y recrear los documentos destino es fácil con la función de validación de
+               etiquetas. La ventana que se abre cuando pulsas <span class="guimenuitem">Ctrl+T</span> contiene una tabla de 3 columnas con un enlace a ese segmento, el segmento original y el segmento destino
+            </p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Entrada de validación de etiqueta</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TagValidation.png" alt="Entrada de validación de etiqueta"></div>
+               </div>
+            </div><br class="figure-break"><p>Las etiquetas están resaltadas en negrita azul para facilitar la comparación entre el contenido original y el traducido. Haz
+               clic en el enlace para activar el segmento en el editor. Corrige el error, si es necesario (en el caso anterior es que falta
+               la pareja &lt;i2&gt;&lt;/i2&gt;) y pulsa <span class="guimenuitem">Ctrl+T</span> para volver a la ventana de validación de etiquetas para corregir otros errores. Los errores de etiqueta son secuencias de
+               etiquetas en la traducción en las que el orden de la misma etiqueta y el número como en el segmento original no se reproducen.
+               Algunas manipulaciones de etiqueta son necesarias y son benignas, otras causan problemas cuando se crea el documento traducido.
+            </p>
+         </div>
+         <div class="section" title="6.&nbsp;Consejos para gestionar etiquetas">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;Consejos para gestionar etiquetas<a class="indexterm" name="d0e5807"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="bold"><strong>Simplifica el texto original</strong></span></p>
+            <p>Las etiquetas por lo general representan cómo formatear de alguna forma el texto original. Al simplificar el formato original
+               contribuye en gran medida a reducir el número de etiquetas. Cuando las circunstancias lo permitan, debes considerar unificar
+               los tipos de letra, tamaños, colores, etc. utilizados, ya que podría facilitar la traducción y potencialmente reducir los
+               errores de etiquetas. Lea la sección de las operaciones de etiquetas para ver qué puedes hacer con las etiquetas. Recuerda
+               que si encuentras un problema en las etiquetas OmegaT y el formato no es muy relevante para la traducción real, la eliminación
+               de las etiquetas puede ser la forma más fácil de eludir problemas.
+            </p>
+            <p><span class="bold"><strong>Presta especial atención a las parejas de etiquetas</strong></span></p>
+            <p>Si necesitas ver las etiquetas en OmegaT pero no es necesario conservar la mayor parte del formato del documento traducido
+               estás  en libertad de no incluir etiquetas en la traducción. En este caso, presta especial atención a las parejas de etiquetas
+               desde la eliminación de un lado de la pareja pero no olvides borrar la otra o estás garantizando corromper el formato del
+               documento. Dado que las etiquetas se incluyen en el texto mismo, es posible utilizar las reglas de segmentación para crear
+               segmentos con menor número de etiquetas. Esta es una característica avanzada y requiere un poco de experiencia para aplicarla
+               correctamente.
+            </p>
+            <p>OmegaT aún no es capaz de detectar errores en el formato de forma totalmente automática, por lo tanto no se te preguntará
+               si cometes un error o cambias el formato para adaptarse mejor a tu idioma destino. A veces, sin embargo, el archivo traducido
+               puede parecer extraño, y - en el peor de los casos - incluso se niega a abrirlo.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.font.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;Configurando el tipo de letra&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;Trabajando con Texto sin Formato</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

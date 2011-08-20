@@ -1,0 +1,149 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;10.&nbsp;Comportamiento del campo de edición</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="up" href="index.html" title="OmegaT - Guía de usuario">
+      <link rel="prev" href="chapter.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Archivos a traducir">
+      <link rel="next" href="chapter.font.html" title="Chapter&nbsp;11.&nbsp;Configurando el tipo de letra">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;10.&nbsp;Comportamiento del campo de edición</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.font.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;10.&nbsp;Comportamiento del campo de edición">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Comportamiento del campo de edición<a class="indexterm" name="d0e5437"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.translation.editing.html#automatic.match.insertion">1. Insertar coincidencias automáticamente</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.editing.html#allow.translation.equal.to.source">2. Permite que la traducción sea igual al original</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.editing.html#export.segment.to.text.files">3. Exporta el segmento a un archivo de texto</a></span></dt>
+            </dl>
+         </div>
+         <p>El cuadro de diálogo en <span class="guimenu">Opciones</span> → <span class="guimenuitem">Comportamiento del campo de edición...</span> permite al usuario seleccionar, cómo se inicia y manipula el segmento actual en el campo de edición:
+         </p>
+         <div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Figure&nbsp;10.1.&nbsp;Opciones de comportamiento del campo de edición</b></p>
+            <div class="figure-contents">
+               <div class="mediaobject"><img src="images/EditingBehaviourOptions.png" alt="Opciones de comportamiento del campo de edición"></div>
+            </div>
+         </div><br class="figure-break"><div class="section" title="1.&nbsp;Insertar coincidencias automáticamente">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="automatic.match.insertion"></a>1.&nbsp;Insertar coincidencias automáticamente<a class="indexterm" name="d0e5459"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Traduces tus archivos pasando de un segmento a otro, editando cada segmento en turno. Cuando te mueves entre los segmentos,
+               posiblemente desees llenar el campo de edición con una traducción ya existente en el panel de coincidencias parciales o con
+               el texto original. En <span class="guimenu">Opciones</span> → <span class="guimenuitem">Comportamiento del campo de edición...</span> <span class="application">OmegaT</span> te ofrece las siguientes alternativas:
+            </p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">El texto original</span></dt>
+                  <dd>
+                     <p>Puedes insertar automáticamente el texto original en el campo de edición. Esto es útil para los textos que contiene muchas
+                        marcas comerciales u otros nombres propios que se deben dejar sin cambios.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Dejar el segmento vacío</span></dt>
+                  <dd>
+                     <p>OmegaT deja en blanco el campo de edición. Esta opción te permite introducir la traducción, sin la necesidad de eliminar el
+                        texto original, lo cual te ahorra dos pulsaciones de teclas (<span class="bold"><strong>Ctrl+A</strong></span> y <span class="bold"><strong>Del)</strong></span></p>
+                  </dd>
+                  <dt><span class="term">Insertar la coincidencia parcial más parecida</span></dt>
+                  <dd>
+                     <p>OmegaT inserta la traducción de la cadena más parecida al texto original actual, si está por encima del umbral de similitud
+                        seleccionado en este cuadro de diálogo.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section" title="2.&nbsp;Permite que la traducción sea igual al original">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="allow.translation.equal.to.source"></a>2.&nbsp;Permite que la traducción sea igual al original<a class="indexterm" name="d0e5500"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Documentos por traducir pueden contener nombres de marcas u otros nombres propios que serán los mismos en los documentos traducidos.
+               Hay dos estrategias para segmentos que únicamente contienen tal texto invariable.
+            </p>
+            <p>Puedes decidir no traducir estos segmentos en absoluto. En tal caso, OmegaT reportará estos segmentos como no traducidos.
+               Este es el predeterminado. La alternativa es que al introducir una traducción que es idéntica al texto original. OmegaT sea
+               capaz de reconocer que se ha hecho a propósito. Para hacer esto posible, ve a <span class="guimenu">Opciones</span> → <span class="guimenuitem">Comportamiento del campo de edición...</span> y marca la casilla <span class="bold"><strong>Permitir traducciones idénticas al original</strong></span>.
+            </p>
+         </div>
+         <div class="section" title="3.&nbsp;Exporta el segmento a un archivo de texto">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="export.segment.to.text.files"></a>3.&nbsp;Exporta el segmento a un archivo de texto<a class="indexterm" name="d0e5519"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>La función exportar texto exporta los datos desde el proyecto <span class="application">OmegaT</span> actual a archivos de texto plano. Los datos se exportan cuando se abre el segmento. Los archivos aparecen en el subdirectorio
+               "/script" en el directorio de los archivos de usuario de OmegaT, e incluyen:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>El contenido del texto original del segmento (<code class="filename">source.txt</code>).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>El contenido del texto destino del segmento (<code class="filename">target.txt</code>).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>El texto seleccionado por el usuario, cuando se presiona <span class="keycap"><strong>Ctrl-Cambio-C</strong></span> o en el menú <span class="guimenuitem">Editar → Exportar selección</span> está seleccionado (<code class="filename">selection.txt</code>).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>El contenido de los archivos se sobrescribe cuando ya sea que se abra un nuevo segmento (source.txt y target.txt) o cuando
+               se exporta una nueva selección (selection.txt). Los archivos son archivos de texto sin formato. Puedes controlar y dirigir
+               todo el proceso a través de los guiones basados en Tck/Tcl. Ve <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Utilizando la función para exportar texto de OmegaT</a> para información específica, ejemplos y sugerencias.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.font.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Archivos a traducir&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Configurando el tipo de letra</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.using.tokenizers.inOmegaT">
+  <title>Utilizando simbolizadores en OmegaT</title>
+
+  <section>
+    <title>Introducción</title>
+
+    <note>
+      <para>Este tema es para usuarios avanzados</para>
+    </note>
+
+    <para>Los simbolizadores (o lematizadores) mejoran la calidad de las coincidencias reconociendo palabras flexionadas en la fuente y los datos de la memoria de traducción. También mejoran la adecuación del glosario.</para>
+
+    <para>Un lematizador de Inglés, por ejemplo, debe identificar la cadena &quot;cats&quot; (y, posiblemente, &quot;catlike&quot;, &quot;catty&quot;, etc.) como basadas en la raíz &quot;cat&quot;, y &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; como basada en &quot;stem&quot;. Un algoritmo de división reduce las palabras &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot; y &quot;fisher&quot; a la raíz de la palabra, &quot;fish&quot;. Esto es especialmente útil en el caso de idiomas que utilizan formas pre y sufijas para las mismas palabras. Tomemos prestado un ejemplo de Eslovenia, aquí &quot;good&quot; en todas las posibles formas gramaticalmente correctas:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singular, masculine, feminine, neutral</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše . - comparative, nominative, masculine, feminine, neutral, resp. Forma plural del adjetivo</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlative, plural, genitive for M,F,N</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>Installation and command line use</title>
+
+    <para>Un paquete segmentador adaptado del proyecto Lucene se distribuye como un complemento de OmegaT en http://sourceforge.net/projects/omegat-plugins/files/. Descarga los archivos más recientes (OmegaT-tokenizers_0.4_2-2.1.zip al momento de escribir este documento).</para>
+
+    <para>Para instalar el segmentador, crea un directorio con el nombre de &quot;plugins&quot; en el directorio donde se encuentra OmegaT.jar y descomprime los archivos anteriores en dicho directorio.</para>
+
+    <para>Para ejecutar OmegaT con el segmentador debes especificar que segmentador utilizará para el idioma origen y cual segmentador utilizará para el idioma destino. La sintaxis es la siguiente:</para>
+
+    <para><literal>java -jar OmegaT.jar --ITokenizer=[nombre segmentador idioma origen] --ITokenizerTarget=[nombre segmentador idioma destino]</literal></para>
+
+    <para>Los nombres del segmentador están en el archivo &quot;Readme.txt&quot; distribuidos con los archivos del segmentador. Por ejemplo, si deseas utilizar el &quot;Lucene CJK tokenizer&quot; en la fuente y el &quot;Lucene Frech tokenizer&quot; en el destino, la orden se verá así:</para>
+
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
+  </section>
+
+  <section>
+    <title>Específico para Mac OSX</title>
+
+    <para>Si deseas utilizar el segmentador con el paquete OmegaT.app de Mac OSX, la instalación del segmentador descrita anteriormente también aplica (haz clic con el botón derecho en OmegaT.app para encontrar la ubicación de OmegaT.jar), pero tendrás que especificar los nombres del segmentador en el <filename>info.plist</filename> el cual contiene las opciones de lanzamiento de Java. Sigue las instrucciones anteriores para acceder al archivo <filename>info.plist</filename> y haz las modificaciones pertinentes para que se vea de la siguiente manera para el ejemplo que acabamos de dar:</para>
+
+    <literallayout><code>
+&lt;key&gt;VMOptions&lt;/key&gt;
+&lt;string&gt;-Xmx1024M&lt;/string&gt;
+
+&lt;key&gt;Arguments&lt;/key&gt;
+&lt;array&gt;
+  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
+&lt;/array&gt;</code></literallayout>
+  </section>
+
+  <section>
+    <title>Resolución de problemas</title>
+
+    <para>Para asegurarte de que se está utilizando el segmentador, abre un proyecto y verifica la información del registro desde la consola. Con el ejemplo anterior, debe ser similar a lo siguiente:</para>
+
+    <literallayout><code>
+84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
+84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
+</code></literallayout>
+
+    <para>Los números de la izquierda probablemente sean diferentes en tu sistema para asegurarte de que los nombres de los segmentadores de origen y destino, especificados en las opciones de arranque, corresponden con lo que el registro está mostrando. Si los segmentadores no arrancaron bien, el registro tendrá el siguiente aspecto:</para>
+
+    <literallayout><code>
+12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
+12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
+</code></literallayout>
+
+    <para>Con el paquete OmegaT.app de Mac OSX, tendrás que hacer doble clic en el <literal>JavaApplicationStub</literal> ubicado en /OmegaT.app/Contents/MacOS/ (ve más arriba para acceder a él) para lanzar OmegaT desde la consola y acceder inmediatamente al registro.</para>
+  </section>
+</appendix>

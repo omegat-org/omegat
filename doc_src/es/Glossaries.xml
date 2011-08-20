@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>Glosarios<indexterm class="singular">
+      <primary>Ventanas y paneles en OmegaT</primary> <secondary>Panel glosario</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>Glosarios</primary>
+    </indexterm></title>
+
+  <para>Los glosarios son archivos creados y actualizados manualmente para usarlos en <application>OmegaT</application>.</para>
+
+  <para>Si un proyecto <application>OmegaT</application> contiene uno o varios glosarios, cualquiera de los términos del glosario que también se encuentren en el segmento actual se mostrarán automáticamente en el visor del Glosario.</para>
+
+  <section>
+    <title>Utilización</title>
+
+    <para>Para utilizar un glosario existente, basta con colocarlo en el directorio <indexterm class="singular">
+        <primary>Archivos del proyecto</primary> <secondary>Subdirectorio glosario</secondary>
+      </indexterm><filename>/glosario</filename> después de crear el proyecto. <application>OmegaT</application> detecta automáticamente los archivos de glosario de esta carpeta al abrir un proyecto. Los términos en el segmento actual que <application>OmegaT</application> encuentre en el/los archivo(s) de glosario(s) se muestran en el panel Glosario:</para>
+
+    <indexterm class="singular">
+      <primary>Panel glosario</primary>
+    </indexterm>
+
+    <figure>
+      <title>Panel glosario</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Glossary_pane.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/Glossary_pane.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>La palabra antes del signo = es el término fuente, y su traducción es (o son) las palabras después del signo =. La entrada del vocabulario puede tener un comentario añadido (ve el &quot;verbo transitivo&quot; para el segundo elemento). La función glosario sólo encuentra coincidencias exactas con las palabras clave en la entrada (por ejemplo, no encuentra formas con inflexión, etc.) Puedes agregar manualmente nuevos términos al archivo del glosario durante la traducción (por ejemplo en un editor de texto), pero los términos recién agregados no serán reconocidos hasta que se vuelva a cargar el proyecto.</para>
+
+    <para>El término fuente no tiene que ser un elemento de una sola palabra, como muestra el siguiente ejemplo:</para>
+
+    <figure>
+      <title>entrada de múltiples palabras en los glosarios - ejemplo<indexterm class="singular">
+          <primary>Panel Glosario - entrada de múltiples palabras</primary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>El elemento subrayado &quot;new preview screen shot&quot;, se compone de cuatro palabras y lo puedes encontrar en el panel del glosario como &quot;nov predogled posnetka zaslona&quot;. Ten en cuenta que partes de los elementos multitérmino (&quot;preview&quot; en el ejemplo anterior también se reconocen en sí mismos como &quot;predogled&quot;) se reconocen también, pero en un rango menor.</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Formato del archivo</secondary>
+      </indexterm>Formato del archivo<indexterm class="singular">
+        <primary>Archivos del proyecto</primary> <secondary>Archivos del usuario</secondary> <seealso>Glosarios</seealso>
+      </indexterm></title>
+
+    <para>Los archivos de Glosario son simples archivos de texto plano que contienen tres columnas, con listas delimitadas por tabulaciones con los términos fuente y destino en la primera y segunda columnas, respectivamente. La tercer columna, la puedes utilizar para información adicional. Los archivos de glosario se pueden codificar bien por medio del sistema de archivos predeterminado (y se indica mediante la extensión .tab) o en UTF-8 (extensión .utf8). Es preferible la codificación Unicode (UTF-8) por obvias razones.</para>
+
+    <para>También es compatible con el formato CSV. Este formato es el mismo que el separado por una tabulación: término fuente, término destino. Los campos de comentario están separados por una coma ','. Las cadenas se pueden encerrar entre comillas dobles &quot;, lo cual permite tener una comilla simple dentro de una cadena:</para>
+
+    <para><literal>&quot;Este es un término fuente, que contiene una comilla, c'est un terme cible&quot;, esto es un comentario</literal></para>
+
+    <para>Además de texto sin formato, también es compatible con el formato TBX. TBX - Term Base eXchange (TBX) es el estándar libre basado en XML para el intercambio estructurado de datos terminológicos que ha sido aprobado como un estándar internacional por LISA e ISO. Si tienes un sistema de manipulación de terminología - MultiTerm por ejemplo - es muy posible que ofrezca la exportación de datos terminológicos a través del formato TBX.</para>
+  </section>
+
+  <section>
+    <title>Cómo crear glosarios<indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Creando un glosario</secondary>
+      </indexterm></title>
+
+    <para>Este método es infalible, cuando se sigue de una manera razonablemente cuidadosa. Necesitas el Writer de OpenOffice.org para ello, por lo que ― si no lo haz hecho ― descarga e instala OpenOffice.org. Lanza OpenOffice.org y abre un nuevo documento de texto o lanza &quot;OpenOffice.org Writer&quot;.</para>
+
+    <para>En un documento vacío, escribe los términos del glosario de la siguiente manera: un término en el idioma fuente, una tabulación, el término del idioma destino, una tabulación, un comentario o explicación para el elemento, y un salto de línea. La tabulación es la tecla tabuladora en la parte izquierda del teclado. Si no deseas añadir algún comentario, puedes descartar la segunda tabulación. Un &quot;término&quot; puede ser una sola palabra o una frase completa. En la segunda línea, introduce el segundo término y su traducción.</para>
+
+    <para>Cuando hayas terminado de introducir los términos, tendrás dos &quot;columnas&quot; con los términos, eb idioma origen y los términos a la izquierda y sus términos en el idioma destino a la derecha, y posiblemente una tercera columna, que contiene comentarios y explicaciones, los caracteres de tabulación (→ en el siguiente ejemplo) y el salto de línea (¶) se pueden visualizar haciendo clic en el icono ¶ en la barra estándar de Writer. Aquí hay unas cuantas líneas de un glosario Inglés -Alemán)</para>
+
+    <para><literal>word →Wort→das (-/e/s, Wörter/-e)¶</literal></para>
+
+    <para><literal>small house→Häuschen→das, (pl Häuschen)¶</literal></para>
+
+    <para><literal>dog →Hund→m, f Hündin ¶</literal></para>
+
+    <para><literal>horse→Pferd→n, m Hengst f Stute n Fohlen¶</literal></para>
+
+    <para>NO utilices la función &quot;columnas&quot; de OpenOffice.org para crear columnas: simplemente separa cada término fuente y destino en el par de idiomas con una única tabulación.</para>
+
+    <para>Cuando hayas terminado, guarda el archivo con codificación de archivo Unicode de la siguiente manera:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Selecciona <literal>Archivo → Guardar como</literal></para>
+      </listitem>
+
+      <listitem>
+        <para>En el cuadro <emphasis>&quot;Ubicación de archivo&quot;</emphasis>, escribe el nombre de archivo del glosario.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Para el &quot;Tipo&quot;, selecciona &quot;<emphasis>Texto codificado (.txt.)</emphasis>&quot;</para>
+      </listitem>
+
+      <listitem>
+        <para>asegúrate de que no estén marcadas las casillas &quot;<emphasis>Extensión de archivo automática</emphasis>&quot; y &quot;<emphasis>Editar configuración de filtros</emphasis>&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <figure>
+      <title>Guardando un glosario</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/saveglossary.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/saveglossary.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Confirma con Guardar.</para>
+
+    <para>Después de crear un proyecto OmegaT, copia o mueve el archivo al directorio \glosario del proyecto. Si el proyecto ya está abierto, vuelve a cargarlo después de copiar el archivo de glosario en el proyecto. Puedes hacer cambios a un archivo de glosario mientras que lo estás utilizando en un proyecto. Los cambios al glosario se detectan aproximadamente una vez cada segundo y las modificaciones se cargan de forma transparente detrás del escenario, por lo tanto no hay que volver a cargar el proyecto después de guardar el nuevo archivo del glosario.</para>
+
+    <para>Cuando un segmento que contiene un término en el texto fuente se añade al panel del glosario mostrando las entradas del glosario para aquellos elementos en el segmento fuente que se puedan encontrar en el glosario (o glosarios - puedes tener más de uno disponible, y también los puedes almacenar en subdirectorios del <emphasis>glosario</emphasis>).</para>
+
+    <para><emphasis role="bold">Nota: </emphasis>Por supuesto que hay otras formas y medios para crear un archivo sencillo con entradas delimitadas por tabuladores, y todas ellas son simples, muchas de ellas mucho más simples que la sugerida anteriormente. Por ejemplo, puedes exportar el contenido anterior desde un <filename>CSV</filename>, en lugar de un archivo de texto <filename>UTF8</filename>. Sin embargo, ten en cuanta que la sugerencia anterior funciona para cualquier sistema operativo, ya sea Windows, OS X o Linux. Nada habla en contra de usar Notepad++ en Windows o Gedit en Linux, por ejemplo: cualquier editor de texto, que pueda manejar UTF-8 y que pueda mostrar un espacio en blanco (para que no se pierdan los caracteres <keycap>TAB</keycap> necesarios) se puede utilizar.</para>
+
+    <para>El contenido de los archivos de glosario se mantiene en memoria y se cargan cuando se abre o recarga el proyecto. La actualización de un archivo de glosario por lo tanto es bastante simple:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>mantén el archivo abierto en el editor seleccionado</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Cuando te encuentras con un nuevo término que desea añadir a tu glosario, introduce el nuevo término, su traducción y cualquier comentario que pueda tener (asegurándote que pulsas la tecla de tabulación entre los campos) y guarda el archivo. El contenido del panel del glosario se actualizará consecuentemente.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>Usando Trados Multiterm</title>
+
+    <para>Los datos exportados de Trados MultiTerm se pueden utilizar como glosarios <application>OmegaT</application> sin ninguna otra modificación, siempre y cuando les des la extensión de archivo <filename>.tab</filename> y los campos origen y destino son los dos primeros campos respectivamente.</para>
+
+    <para>Si exportas con la opción de sistema &quot;Tab-delimited export&quot;, tendrás que eliminar las primeras 5 columnas (Seq. Nr, Fecha de creación, etc.). Las versiones más recientes de MultiTerm apoyan la exportación al formato TBX..</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>Glosarios</primary> <secondary>Problemas con glosarios</secondary>
+      </indexterm>Problemas comunes con glosarios</title>
+
+    <para><emphasis role="bold">Problema: No se muestran términos del glosario - posibles causas:</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>No existe el archivo glosario en el directorio &quot;Glosario&quot;.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>El archivo de glosario está vacío.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Los elementos no están separados con un carácter de tabulación.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>El archivo de glosario no tiene la extensión correcta (.tab o .utf8).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>No hay coincidencia EXACTA entre la entrada en el glosario y el texto original en el documento - por ejemplo, plurales.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>el archivo de glosario no tiene la codificación correcta.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>No hay términos en el segmento actual que coincidan con los términos en el glosario.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Uno o más de los problemas anteriores se pueden haber corregido, pero no se ha recargado el proyecto.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Problema: En el panel de glosario, algunos caracteres no se muestran correctamente</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>...pero los mismos caracteres se muestran correctamente en el panel de edición: la extensión y la codificación del archivo no coinciden.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

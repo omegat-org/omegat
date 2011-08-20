@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.machine.translate">
+  <title>Traducción automática<indexterm class="singular">
+      <primary>Traducción automática</primary>
+    </indexterm></title>
+
+  <section>
+    <title>Introducción<indexterm class="singular">
+        <primary>Traducción automática</primary> <secondary>Introducción</secondary>
+      </indexterm></title>
+
+    <para>A diferencia de las memorias de traducción generadas por los usuarios (como en el caso de <application>OmegaT</application>) La traducción automática (TA) utiliza herramientas basadas en reglas, herramientas lingüísticas para crear una traducción del segmento fuente sin necesidad de una memoria de traducción. Las técnicas de aprendizaje estadístico, basado en el textos fuente y destino, se utilizan para construir un modelo de traducción. Servicios de traducción automática han sido el logro de buenos resultados y mejoran la firmeza en la evaluación de la investigación.</para>
+
+    <para>Para activar cualquiera de los servicios de traducción automática, ve a <guimenuitem>Opciones → Traducción automática...</guimenuitem> y activa el servicio deseado. Ten en cuenta que todos ellos están basados ​​en la red: tendrás que estar en línea si desea utilizarlos.</para>
+  </section>
+
+  <section id="introduction">
+    <title>Google Translate<indexterm class="singular">
+        <primary>Traducción automática</primary><secondary>Traductor de Google</secondary>
+      </indexterm></title>
+
+    <para>Google Translate es el servicio ofrecido por Google, para traducir frases, páginas web y textos completos entre un número cada vez mayor de idiomas. Al momento de escribir la lista incluye más de 50 idiomas, desde el Albanés hasta el Yiddish, incluyendo por supuesto a todos los principales idiomas.</para>
+
+    <para>La calidad de la traducción, por supuesto, depende por un lado, en el depósito de los textos del idioma destino y la disponibilidad de sus versiones bilingües, por otro lado en la calidad de los modelos construidos. Es casi seguro que mientras que la calidad puede ser insuficiente en algunos casos, sin duda va a mejorar con el tiempo y no a empeorar.</para>
+  </section>
+
+  <section>
+    <title>Usuarios  de <application>OmegaT</application> y Google Translate</title>
+
+    <para>El usuario de <application>OmegaT</application> no está obligado a utilizar Google Translate. Si lo utiliza, ni la decisión del usuario a aceptar la traducción ni la traducción final se ponen a disposición de Google. La siguiente ventana muestra un ejemplo de traducción Google Translate
+ a) la fuente en Inglés
+ b) Español y
+ c) Esloveno.</para>
+
+    <figure id="moby.dick">
+      <title>Google Translate - ejemplo</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MobyDick.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MobyDick.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>La traducción al Español es mejor que la Eslovena. Nota <emphasis>interesar</emphasis> y <emphasis>navegar</emphasis> en español, se traducen correctamente como los verbos interés y navegar, respectivamente. En la versión Eslovena ambas palabras se han traducido como sustantivos. En realidad, es muy probable que la traducción al español se basa, por lo menos parcialmente,  en la propia traducción del libro.</para>
+
+    <para>Una vez que hayas activado el servicio, aparecerá una sugerencia para la traducción en el panel de Google Translate cada vez que se abre un segmento fuente. Si encuentras aceptable la sugerencia, pulsa <keycombo><keycap><indexterm class="singular">
+            <primary>Atajos</primary> <secondary>Ctrl+M - Traducción automática</secondary>
+          </indexterm>Ctrl</keycap>+<keycap>M</keycap></keycombo> para reemplazar la parte del segmento destino con la sugerencia. En el segmento anterior, por ejemplo, <keycombo><keycap>Ctrl</keycap>+<keycap>M</keycap></keycombo> sustituirá la versión en español con la sugerencia Eslovena.</para>
+
+    <para>Si no deseas que <application>OmegaT</application> envíe los segmentos fuente a Google para obtener su traducción, desmarca la entrada de Google Translate en el menú Opciones.</para>
+
+    <para>Ten en cuenta que nada más que tu segmento fuente se envía al servicio de TA. La versión en línea de Google Translate permite al usuario corregir la propuesta y enviar el segmento de corregido de regreso Esta característica, sin embargo, no se ha implementado en OmegaT.</para>
+  </section>
+
+  <section>
+    <title>Belazar<indexterm class="singular">
+        <primary>Traducción automática</primary> <secondary>Belazar</secondary>
+      </indexterm></title>
+
+    <para><ulink url="http://belsoft.tut.by/belazar/">Belazar</ulink> es una herramienta de traducción de idioma automática para el par de idiomas Ruso-Bielorruso.</para>
+  </section>
+
+  <section>
+    <title>Apertium<indexterm class="singular">
+        <primary>Traducción automática</primary> <secondary>Apertium</secondary>
+      </indexterm></title>
+
+    <para><ulink url="http://www.apertium.org/">Apertium</ulink> es una plataforma de traducción automática libre/de código abierto, inicialmente dirigida a pares de idiomas relacionados, como CA, ES, GA, PT, OC y FR, pero se ha ampliado recientemente para hacer frente a más parejas de idiomas divergentes (como Inglés-Catalán). Visita el sitio web para ver la última lista de pares de idiomas implementados.</para>
+
+    <para>La plataforma proporciona</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>un motor de traducción de idiomas independiente de la máquina</para>
+      </listitem>
+
+      <listitem>
+        <para>herramientas para gestionar los datos lingüísticos necesarios para construir un sistema de traducción automática para un par de idiomas dado</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>datos lingüísticos para un número creciente de pares de idiomas</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Apertium usa un motor de traducción automática de transferencia superficial que procesa el texto introducido en etapas, como en una cadena de montaje: deformatea, realiza un análisis morfológico, que forma parte de la desambiguación del discurso, transferencia estructural superficial, transferencia léxica, generación morfológica, y reformateo.</para>
+
+    <para>Es posible usar Apertium para construir sistemas de traducción automática para una variedad de combinaciones de idiomas, para lo cual, Apertium usa simples formatos basados ​​en XML para codificar los datos lingüísticos necesarios (ya sea a mano o mediante la conversión de los datos existentes), que se compilan utilizando las herramientas provistas en los formatos de alta velocidad utilizados por el motor.</para>
+  </section>
+
+  <section id="Google.Translate.troubleshooting">
+    <title>Traducción automática - resolución de problemas<indexterm class="singular">
+        <primary>Traducción automática</primary> <secondary>Solucionando problemas</secondary>
+      </indexterm></title>
+
+    <para>Si no aparece nada en el panel de Google Translate, comprueba lo siguiente:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>¿Estás en línea? Es necesario estar conectado a Internet para poder utilizar una herramienta de TA.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>¿Cuál es el par de idiomas que necesitas? Comprueba si el servicio seleccionado los ofrece.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.misc">
+  <title>Temas diversos<indexterm class="singular">
+      <primary>Miscelánea</primary>
+    </indexterm></title>
+
+  <section id="omegat.misc.console.mode">
+    <title><application><indexterm class="singular">
+        <primary>OmegaT en modo consola</primary> <seealso>Miscelánea</seealso>
+      </indexterm>OmegaT</application> Modo consola<indexterm class="singular">
+        <primary>Miscelánea</primary> <secondary>OmegaT en modo consola</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>¡De interés sólo para usuarios avanzados!</para>
+    </note>
+
+    <para>El propósito del modo consola (es decir, la línea de ordenes) es el de permitir el uso de <application>OmegaT</application> como herramienta de traducción en un entorno de programación. Cuando se lanza en modo de consola, no se carga la interfaz gráfica de usuario (funcionará por lo tanto, en cualquier consola) y automáticamente traduce el proyecto dado. Un ejemplo podría ser un proyecto de software, con interfaz gráfica de usuario localizada en varios idiomas. Usando el modo consola, puedes generar una interfaz localizada en una parte del proceso de construcción.</para>
+
+    <section id="misc.console.mode.prerequisites">
+      <title>Requisitos previos</title>
+
+      <para>Para ejecutar OmegaT, debe estar disponible un proyecto OmegaT válido. La ubicación es irrelevante, puesto que se debe especificar explícitamente en la línea de ordenes en el lanzamiento..</para>
+
+      <para>Si necesitas configuraciones no estándar, los archivos de configuración correspondientes (<literal>filters.conf</literal> y <literal>segmentation.conf)</literal> deben estar presentes. Esto se puede conseguir de dos maneras:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Ejecuta <application>OmegaT</application> normalmente (con la interfaz gráfica de usuario) y establece la configuración. Si arrancas <application>OmegaT</application> en modo consola, este utilizará los ajustes que hayas configurado.</para>
+        </listitem>
+
+        <listitem>
+          <para>Si no puedes ejecutar <application>OmegaT</application> normalmente (si no está disponible un entorno gráfico): copia los archivos de configuración de alguna otra instalación de <application>OmegaT</application> en otra máquina a un directorio específico. La ubicación no importa, ya que la puedes añadir en la línea de ordenes en el lanzamiento (ve más abajo). Los archivos importantes <literal>filters.conf</literal> y <literal>segmentation.conf</literal> se pueden encontrar en el directorio hogar del usuario (Por ejemplo, <literal>C:\Documents and Settings\%usuario%\<application>OmegaT</application></literal> bajo Windows, <literal>%usuario%/.Omegat/</literal> en Linux)</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="starting.in.misc.console.mode">
+      <title>Lanzando OmegaT en modo consola</title>
+
+      <para>Para iniciar OmegaT en modo consola, los parámetros adicionales se deben especificar en el lanzamiento. El más importante de ellos es <literal>&lt;project-dir&gt;</literal> y, opcionalmente, <literal>--config-dir=&lt;directorio-de-configuración&gt; . </literal>Ejemplo:</para>
+
+      <para><literal>$&gt; java -jar <application>OmegaT</application>.jar /ruta/al/proyecto \</literal></para>
+
+      <para><literal>--config-dir=/ruta/a/los/archivos-de-configuración/ \</literal></para>
+
+      <para><literal> --mode=console-translate \</literal></para>
+
+      <para><literal> --source-pattern={regexp}</literal></para>
+
+      <para><emphasis role="bold">Explicación:</emphasis></para>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>&lt;project-dir&gt;</literal> le dice a <application>OmegaT</application> dónde se encuentra el proyecto a traducir. Si se da, <application>OmegaT</application> se inicia en modo consola y traduce el proyecto.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--config-dir=&lt;directorio-de-configuración&gt;</literal> instruye a OmegaT sobre en cual directorio están los archivos de configuración. Si no se especifica, OmegaT vuelve a los valores predeterminados (el directorio de OmegaT en el hogar del usuario, si o no están disponibles: el directorio de trabajo actual).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>--mode=console-translate </literal> <application>OmegaT</application> se inicia en modo consola y traduce el proyecto.</para>
+        </listitem>
+
+        <listitem>
+          <para>--source-pattern={regexp} Puedes especificar de esta manera los archivos a traducir. He aquí un ejemplo de la expresión regular: <filename>prueba\.html</filename></para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="misc.console.mode.extra.options">
+      <title>Opciones adicionales</title>
+
+      <para>Uno de los parámetros existes más específicos de la línea de ordenes en el modo de consola: <literal>--quiet. </literal>En el modo silencioso, se registra menos información en pantalla. Los mensajes que normalmente se encuentran en la barra de estado no se muestran.</para>
+
+      <para>Uso: <literal>java -jar <application>OmegaT</application>.jar /ruta/al/proyecto --quiet</literal></para>
+    </section>
+  </section>
+
+  <section>
+    <title>Alineador automático de propiedades Java<indexterm class="singular">
+        <primary>Miscelánea</primary> <secondary>Alineador automático para las propiedades de Java</secondary> <seealso>Miscelánea</seealso>
+      </indexterm></title>
+
+    <para>OmegaT puede alinear .propeties de Java en modo consola. Si tienes los archivos de propiedades fuente y destino para uno y el mismo contenido en su idioma par, este procedimiento creará un archivo TMX correspondiente a este contenido. Uso:</para>
+
+    <para><literal>java -jar OmegaT.jar --mode=console-align /dir-de-mi-proyecto --alignDir=/archivosTraducidos/</literal></para>
+
+    <para><filename>alignDir</filename> debe contener una traducción en el idioma destino del proyecto. Por ejemplo, si el proyecto es EN→FR, alignDir debe contener un paquete que termina con _fr. El tmx resultante se almacena en el directorio <literal>omegat</literal> bajo el nombre <filename>align.tmx</filename>.</para>
+  </section>
+
+  <section id="font.settings">
+    <title>Configurando el tipo de letra<indexterm class="singular">
+        <primary>Miscelánea</primary> <secondary>Configuración del tipo de letra</secondary>
+      </indexterm></title>
+
+    <para>En este diálogo puedes definir el tipo de letra utilizado por <application>OmegaT</application> en las siguientes ventanas:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ventana principal de <application>OmegaT</application> (Editor, Visor de coincidencias, Visor de glosario)</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ventana de búsqueda</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Ventana de validación de etiquetas</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Puedes acceder al cuadro de diálogo a través de <indexterm class="singular">
+        <primary>Menú Opciones</primary> <secondary>Tipo de letra...</secondary>
+      </indexterm><menuchoice><guimenu>Opciones</guimenu> → <guimenuitem>Tipo de letra...</guimenuitem></menuchoice> en el menú principal. El cuadro de diálogo contiene:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Tipo de letra:</emphasis> hay un desplegable para seleccionar uno de los tipos de letra disponibles en tu máquina</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Tamaño:</emphasis> modifícalo para cambiar el tamaño de la letra</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Texto de ejemplo:</emphasis> campo para visualizar inmediatamente el tipo de letra seleccionado</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Nota: </emphasis>En algunos casos, puede tomar bastante tiempo para que OmegaT actualice la pantalla después de cambiar la configuración del tipo de letra. Este es especialmente el caso cuando un archivo grande que contiene muchos segmentos se abre en el editor, y/o el equipo utilizado es lento. También ten en cuenta que algunos tipos de letra se comportan mejor en algunos pares de idiomas que en otros. En particular, si estás traduciendo entre dos idiomas con alfabetos/sistemas de escritura distintos (como el Ruso y Japonés), selecciona un tipo de letra que se pueda utilizar en ambos.</para>
+  </section>
+
+  <section id="preventing.data.loss">
+    <title>Previniendo la pérdida de datos<indexterm class="singular">
+        <primary>Miscelánea</primary> <secondary>Previniendo la pérdida de datos</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> es una aplicación robusta. Sin embargo, debes tomar precauciones para evitar la pérdida de datos cuando utilizas <application>OmegaT</application>, al igual que con cualquier otra aplicación. Al traducir tus archivos, <application>OmegaT</application> almacena todos los avances en la memoria de traducción <literal>project_save.tmx</literal> que reside en el directorio <literal>/omegat</literal> del proyecto.</para>
+
+    <para>OmegaT también respalda la memoria de traducción en project_save.tmx.AÑOMESDIAHHNN.bak en el mismo subdirectorio cada vez que se abre o recarga un proyecto. Año es el año de 4 dígitos, MES es el mes, DÍA el día del mes, y HH y NN son las horas y minutos en que se salvó la memoria de traducción anterior.</para>
+
+    <para>Si usted crees que haz perdido los datos de traducción, puedes utilizar el siguiente procedimiento para restaurar el proyecto a su estado grabado más reciente, por lo general no más de aproximadamente 10 minutos más o menos:</para>
+
+    <orderedlist>
+      <listitem>
+        <para>cierra el proyecto</para>
+      </listitem>
+
+      <listitem>
+        <para>cambiar el nombre del archivo <filename>project_save.tmx </filename> actual (por ejemplo, a <filename>project_save.tmx.temporal</filename>)</para>
+      </listitem>
+
+      <listitem>
+        <para>selecciona la copia de seguridad de la memoria de traducción que sea la más probable que contenga los datos que estás buscando</para>
+      </listitem>
+
+      <listitem>
+        <para>cámbiale el nombre a <literal>project_save.tmx</literal></para>
+      </listitem>
+
+      <listitem>
+        <para>abre el proyecto</para>
+      </listitem>
+    </orderedlist>
+
+    <para>Para evitar perder datos importantes:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Haz copias regulares de los archivos /omegat/project_save.tmx a medios de copia de seguridad, tales como CD o DVD.</para>
+      </listitem>
+
+      <listitem>
+        <para>Hasta que te familiarices con <application>OmegaT</application>, crea archivos traducidos a intervalos regulares y comprueba que el archivo traducido contiene la última versión de tu traducción.</para>
+      </listitem>
+
+      <listitem>
+        <para>Ten especial cuidado cuando haces cambios a los archivos <literal>/fuente</literal> mientras que en el medio de un proyecto. Si se ha modificado el archivo después de haber empezado a traducir, <application>OmegaT</application> puede ser incapaz de encontrar un segmento que ya hayas traducido.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Utiliza estos textos de ayuda para empezar. En caso de que algún problema, envía un mensaje al grupos de usuarios de <ulink url="http://tech.groups.yahoo.com/group/Omegat/"><application>OmegaT</application></ulink>. No dudes en publicar en el idioma con el que te sientas más familiarizado.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

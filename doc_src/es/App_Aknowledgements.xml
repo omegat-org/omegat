@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE appendix PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.acknowledgements">
+  <title>Agradecimientos</title>
+
+  <section>
+    <title>¡Gracias a todos!</title>
+
+    <para>Las inconsistencias, omisiones y errores sencillos que puedas encontrar en la versión actual, son todos míos. Este manual, sin embargo, no sería posible sin la ayuda y apoyo de gran cantidad de personas. Agradezco explícitamente a:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Mark Prior: corrigiendo mi primer proyecto fue un acto de amor por OmegaT y al idioma Inglés.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Didier Briel: no podría haberlo hecho sin la paciente y persistente ayuda de Didier con complejidades DocBook. Por no hablar de su cuidado y diligencia, manteniendo intactos y en buen estado los repositorios.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Will Helton: su lectura final del proyecto me ha ahorrado un montón de vergüenza. Uno sólo puede preguntarse, cuántos adverbios y preposiciones faltarían sin su inestimable ayuda.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Jean-Cristophe Hillary: un agradecimiento especial a JC por su concisa descripción sobre la ejecución de OmegaT y los parámetros de la línea de ordenes.</para>
+      </listitem>
+
+      <listitem>
+        <para>Samuel Murray: su &quot;¡Empieza a utilizar OmegaT en 5 minutos!&quot;, que sirvió hace algún tiempo como punto de partida para el capítulo &quot;Guía de inicio rápido&quot; , merece una mención honorífica aquí.</para>
+      </listitem>
+
+      <listitem>
+        <para>Por último, pero no menos importante: mi agradecimiento a todos los colaboradores del rastreador de la documentación OmegaT (<ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617">OmegaT documentation tracker</ulink>) por todas las inconsistencias encontradas en las versiones anteriores de la documentación. ¡Continúen su buen trabajo!</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</appendix>

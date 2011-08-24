@@ -892,7 +892,7 @@ public class EditorController implements IEditor {
             if (Core.getProject().getTranslation(ste) == null) {
                 break;// non-translated
             }
-            if (true/* TODO: option check */) {
+            if (Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION)) {
                 // when there is at least one alternative translation, then we can consider that segment is
                 // not translated
                 HasMultipleTranslations checker = new HasMultipleTranslations(ste.getSrcText());

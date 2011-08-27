@@ -121,7 +121,7 @@
       number of tag errors. Each file type is handled differently in OmegaT.
       Specific behavior can be set up in the file filters. At the time of
       writing, OmegaT supports the following formatted text formats:
-      formats:<indexterm class="singular">
+      <indexterm class="singular">
           <primary>File formats</primary>
 
           <secondary>formatted</secondary>
@@ -153,8 +153,8 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - monolingual, i.e. one language
-            combination possible for a given project</para>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - monolingual, i.e. one
+            language combination possible for a given project</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -188,9 +188,11 @@
           <listitem>
             <para>WiX Localization (*.wxl)</para>
           </listitem>
+
           <listitem>
             <para>Iceni Infix (*.xml)</para>
           </listitem>
+
           <listitem>
             <para>Flash XML export (*.xml)</para>
           </listitem>
@@ -232,7 +234,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>import the file into OpenOffice writer</para>
+        <para>import the file into OpenOffice.org writer</para>
       </listitem>
     </itemizedlist>
 
@@ -250,7 +252,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>load the target file in OpenOffice Writer</para>
+        <para>load the target file in OpenOffice.org writer</para>
       </listitem>
     </itemizedlist>
 
@@ -263,8 +265,8 @@
     <para>The quality of formatting of the translated file will depend on the
     quality of the round-trip conversion. Before proceeding with such
     conversions, be sure to test all options. Check the <ulink
-    url="http://www.omegat.org">OmegaT home page</ulink> for an up-to-date listing of auxiliary
-    translation tools.</para>
+    url="http://www.omegat.org">OmegaT home page</ulink> for an up-to-date
+    listing of auxiliary translation tools.</para>
   </section>
 
   <section id="right.to.left.languages">
@@ -331,7 +333,7 @@
     all three panes (Editor, Fuzzy Matches and Glossary) by clicking on the
     pane and toggling the display mode. It can also be used in all the input
     fields found in <application>OmegaT</application> - in the search window,
-    for segmentation rules etc. </para>
+    for segmentation rules etc.</para>
 
     <para>Mac OS X users, note: use <keycombo>
         <keycap>Shift</keycap>
@@ -354,7 +356,7 @@
         </indexterm><indexterm class="singular">
           <primary>Source files</primary>
 
-          <secondary>Mixing RTL and LTR string</secondary>
+          <secondary>Mixing RTL and LTR strings</secondary>
         </indexterm></title>
 
       <para>When writing purely RTL text, the default (LTR) view may be used.
@@ -392,7 +394,7 @@
       regular intervals to make it easier to catch any problems that arise. A
       hint: translating a plain text version of the text and adding the
       necessary style in the relevant application at a later stage may turn
-      out to be less hassle..</para>
+      out to be less hassle.</para>
     </section>
 
     <section>

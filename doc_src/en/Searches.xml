@@ -62,7 +62,7 @@
 
       <para>Searches are performed by default in both the source and target
       sections of the project, but you can limit your search to just the
-      source or the target text . You may search in</para>
+      source or the target text. You may search in</para>
 
       <itemizedlist>
         <listitem>
@@ -86,8 +86,7 @@
 
       <para>When searching through files (as opposed to translation memories),
       <application>OmegaT</application> restricts the search to files in
-      source file formats (See <link linkend="chapter.files.to.translate">Files to
-      translate -&gt; File Formats</link>). Consequently, although OmegaT is
+      source file formats. Consequently, although OmegaT is
       quite able to handle<filename> tmx</filename> files, it does not include
       them in the Search files search. If you turn on <emphasis
       role="bold"><indexterm class="singular">
@@ -195,8 +194,8 @@
         search is a powerful way to look for instances of a string. It is
         similar to a wild card search, but allows far more flexibility. The
         regular expressions used in searches are those supported by Java. See
-        more in the chapter on <link linkend="chapter.regexp">Regular
-        Expressions</link>.</para>
+        more in the chapter on regular
+        Expressions.</para>
       </listitem>
 
       <listitem>

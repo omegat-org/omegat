@@ -79,7 +79,7 @@
     at least partially on the actual translation of the book.</para>
 
     <para>Once you have activated the service, a suggestion for the
-    translation will appear in the Google Translate pane every time a new
+    translation will appear in the Machine Translate pane every time a new
     source segment is opened. If you find the suggestion acceptable, press
     <keycombo>
         <keycap><indexterm class="singular">
@@ -171,7 +171,7 @@
         <secondary>Troubleshooting</secondary>
       </indexterm></title>
 
-    <para>If there's nothing appearing in the Google Translate pane, then
+    <para>If there's nothing appearing in the Machine Translate pane, then
     check the following:</para>
 
     <itemizedlist>

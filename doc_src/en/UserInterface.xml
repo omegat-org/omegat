@@ -125,7 +125,7 @@
                     <primary>Menu Tools</primary>
 
                     <secondary>Match statistics</secondary>
-                  </indexterm>Tool</guimenu>
+                  </indexterm>Tools</guimenu>
 
                 <guimenuitem>Match statistics.</guimenuitem>
               </menuchoice></para>
@@ -143,7 +143,7 @@
 
       <para>The dialogs below are used to change OmegaT project settings. Each
       is described in detail in a separate section; the information below
-      summarizes their use and how they are invoked::</para>
+      summarizes their use and how they are invoked:</para>
 
       <variablelist>
         <varlistentry>
@@ -534,7 +534,7 @@
           <keycap>Ctrl</keycap>
 
           <keycap>5</keycap>
-        </keycombo> will have no effect, if there is no match #5.To use the
+        </keycombo> will have no effect, if there is no match #5. To use the
       selected match in your translation, use
       <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
           <primary>Shortcuts</primary>

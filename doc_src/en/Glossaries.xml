@@ -77,7 +77,7 @@
       </mediaobject>
     </figure>
 
-    <para>The underlined item "new preview screen shot", consists of three
+    <para>The underlined item "new preview screenshot", consists of three
     words and can be found in the glossary pane as "nov predogled posnetka
     zaslona". Note that parts of the multi-term items ("preview" in the above
     example is also recognized on its own as "predogled") are recognized as
@@ -109,14 +109,14 @@
     comma ','. Strings can be enclosed by quotes ", which allows having a
     comma inside a string:</para>
 
-    <para><literal>"This is a source term, which contains a comma",c'est un
-    terme cible,this is a comment</literal></para>
+    <para><literal>"This is a source term, which contains a comma","c'est un
+    terme, qui contient une virgule" </literal></para>
 
     <para>In addition to the plain text format, TBX format is also supported.
     TBX - Term Base eXchange (TBX) is the open, XML-based standard for
     exchanging structured terminological data that has been approved as an
     international standard by LISA and ISO. If you have an existing
-    terminology handling system - MultiTerm for example - It is quite possible
+    terminology handling system - MultiTerm for example - it is quite possible
     it offers the export of terminology data via TBX format.</para>
   </section>
 
@@ -182,7 +182,7 @@
       </listitem>
 
       <listitem>
-        <para>make sure "<emphasis>Automatic file name extension</emphasis>"
+        <para>Make sure "<emphasis>Automatic file name extension</emphasis>"
         and <emphasis>"Edit filter settings"</emphasis> are unchecked.</para>
       </listitem>
     </itemizedlist>
@@ -264,7 +264,7 @@
 
     <para>If you export using the system option "Tab-delimited export", you
     will need to delete the first 5 columns (Seq. Nr, Date created etc). The
-    newer versions of MultiTerm support exporting to TBX format..</para>
+    newer versions of MultiTerm support exporting to TBX format.</para>
   </section>
 
   <section>
@@ -311,7 +311,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>the glossary file does not have the correct encoding.</para>
+        <para>The glossary file does not have the correct encoding.</para>
       </listitem>
     </itemizedlist>
 

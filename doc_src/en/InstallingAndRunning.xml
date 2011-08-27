@@ -320,7 +320,7 @@
       </indexterm></title>
 
     <section id="which.package.to.download.OSX">
-      <title>Dowloading the package</title>
+      <title>Downloading the package</title>
 
       <para><application>OmegaT</application> 2.5 requires Java 1.5 to run.
       Use "Software Update..." from the Apple menu to update your Java
@@ -452,7 +452,7 @@
       <itemizedlist>
         <listitem>
           <para><emphasis role="bold">Yes: </emphasis>download
-          <emphasis>OmegaT_2.5.x_Windows_without_JRE.</emphasis>zip This
+          <emphasis>OmegaT_2.5.x_Windows_without_JRE.</emphasis>zip. This
           package can be used on any platform where a Java 1.5 JRE compatible
           JRE is installed.</para>
         </listitem>
@@ -651,7 +651,7 @@
       <para>The basic command has already been mentioned above. Changes to
       this command involve the addition of "arguments" to it. Arguments are
       added after the initial <emphasis>"java"</emphasis>, and before the
-      <emphasis>"-jar <application>OmegaT</application>.jar"</emphasis> . Note
+      <emphasis>"-jar <application>OmegaT</application>.jar"</emphasis>. Note
       that in Windows you can change the
       <emphasis><application>OmegaT</application>.l4J.ini</emphasis> file to
       reflect your preferences. On Mac OS X, you can change the
@@ -710,7 +710,7 @@
               <secondary>Launch script arguments</secondary>
 
               <tertiary>User.country</tertiary>
-            </indexterm>Besides the language, you can also specify the
+            </indexterm> Besides the language, you can also specify the
           country, for example CN or TW in case of the Chinese language. To
           display the instant start guide in the desired language, you need to
           specify both the language and the country. This is necessary even if
@@ -731,7 +731,7 @@
               <secondary>Launch script arguments</secondary>
 
               <tertiary>Font antialiasing</tertiary>
-            </indexterm></emphasis>This argument effects anti-aliasing of the
+            </indexterm></emphasis> This argument effects anti-aliasing of the
           fonts, thereby improving their appearance.</para>
         </listitem>
 
@@ -766,9 +766,9 @@
 
               <secondary>Launch script arguments</secondary>
 
-              <tertiary>Proxy server IOP address</tertiary>
-            </indexterm></emphasis> the IP address of your proxy server, if
-          your system uses as proxy</para>
+              <tertiary>Proxy server IP address</tertiary>
+            </indexterm></emphasis> The IP address of your proxy server, if
+          your system uses a proxy.</para>
         </listitem>
 
         <listitem>
@@ -782,7 +782,7 @@
               <secondary>Launch script arguments</secondary>
 
               <tertiary>Proxy server - Port Number</tertiary>
-            </indexterm>the port number your system uses to access the proxy
+            </indexterm> The port number your system uses to access the proxy
           server.</para>
         </listitem>
       </itemizedlist>
@@ -818,7 +818,7 @@
         command line at the start-up anyway.</para>
 
         <para>If you need altered settings, the configuration files must be
-        available This can be achieved in two ways:</para>
+        available. This can be achieved in two ways:</para>
 
         <itemizedlist>
           <listitem>
@@ -838,7 +838,7 @@
             <literal>segmentation.conf</literal> and can be found in the user
             home directory (e.g. <literal>C:\Documents and
             Settings\%User%\<application>OmegaT</application></literal> under
-            windows, <literal>%user%/.omegat/</literal> under Linux)</para>
+            Windows, <literal>%user%/.omegat/</literal> under Linux)</para>
           </listitem>
         </itemizedlist>
       </section>
@@ -928,9 +928,9 @@
                 <para><literal>--alignDir={location of translated
                 files}</literal></para>
 
-                <para><filename>alignDir</filename>must contain a translation
-                in the target language of the project. (e.g., if the project
-                is EN-&gt;FR, alignDir must contain a bundle ending with _fr).
+                <para><filename>alignDir</filename> must contain a translation
+                in the target language of the project. For instance, if the project
+                is EN-&gt;FR, alignDir must contain a bundle ending with _fr.
                 The resulting tmx is stored in the
                 <literal>omegat</literal>folder under the name
                 <filename>align.tmx</filename>.</para>
@@ -943,21 +943,20 @@
 
             <para>When mode has been used, this option will specify the files
             to be processed automatically.. If the parameter is not specified,
-            all files will be processed. Here's few typical examples tro limit
+            all files will be processed. Here's few typical examples to limit
             your choice:</para>
 
             <itemizedlist>
               <listitem>
                 <para><emphasis><literal>.*\.html</literal></emphasis></para>
 
-                <para>All HTML files will be translated - not that the period
+                <para>All HTML files will be translated - note that the period
                 in the usual *.html has to be escaped (\.) as specified by the
                 rules for regular expressions</para>
               </listitem>
 
               <listitem>
                 <para><literal>test\.html</literal></para>
-
                 <para>Only the file test.html at the root of the source
                 directory will be translated. If there are other files named
                 test.html in other directories, they will be ignored.</para>

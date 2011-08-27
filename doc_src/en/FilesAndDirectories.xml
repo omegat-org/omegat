@@ -120,9 +120,9 @@
       form <emphasis role="bold">project_save.tmx.&lt;date and
       time&gt;.bak</emphasis> (...) are added progressively to this subfolder
       as the translation progresses. They serve as a backup for the project
-      TM. A new one of theses is added each time you reopen a project, thus
+      TM. A new one is created each time you reopen a project, thus
       reflecting its contents before the current session has changed
-      them</para>
+      them.</para>
 
       <para>The project <indexterm class="singular">
           <primary>Project files</primary>
@@ -134,7 +134,7 @@
       The file contains the number of segments for each file to be translated
       - Total and Remaining - the number of Unique segments per file, the
       number of Unique words and the number of Unique Characters with /
-      without spaces per file,</para>
+      without spaces per file.</para>
 
       <para>Note that Unique segments per file provides the number of unique
       segments in a given file that do not appear anywhere else in the

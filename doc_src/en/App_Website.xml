@@ -58,9 +58,7 @@
     url="http://www.joelonsoftware.com/articles/fog0000000029.html">Painless
     Bug Tracking</ulink> article by Joel Spolsky.</para>
 
-    <para>You should add copies of files, portions of the log (see <link
-    linkend="chapter.files.and.directories"><application>OmegaT</application> Files
-    and Directories &gt; User files</link> location), screen shots, and
+    <para>You should add copies of files, portions of the log, screenshots, and
     anything else that you think will help the developers to find and fix your
     bug. Note that bug reports and requests for enhancements are publicly
     visible, so you should not add any sensitive files. If you wish to keep
@@ -87,7 +85,7 @@
     To get involved in the <application>OmegaT</application> development
     effort you can join the developer group, via the web or by sending an
     email to <ulink
-    url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@list.sourceforge.net</ulink>
+    url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink>
     with "subscribe" as the subject line.</para>
 
     <para><emphasis role="bold">To translate

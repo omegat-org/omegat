@@ -59,7 +59,7 @@
     and you need both files in order for the dictionary in question to work.
     You can use these file extensions to search your desktop for suitable
     dictionaries. In the case below, no extra folder has been created and no
-    copying of files was necessary, as the OpenOffice dictionary folder is
+    copying of files was necessary, as the OpenOffice.org dictionary folder is
     used instead:</para>
 
     <figure id="spellchecker.setup">
@@ -73,7 +73,7 @@
     </figure>
 
     <para>Note that in the above case, you may lose the spelling dictionaries,
-    if the OpenOffice installation is removed from your system. Creating your
+    if the OpenOffice.org installation is removed from your system. Creating your
     own folder and copying the files may be extra work, but possibly worth the
     trouble.</para>
 
@@ -117,7 +117,7 @@
 
     <para>To enable the spell checker, select <guimenuitem>Options &gt; Spell
     Checking</guimenuitem> and tick the <guilabel>Automatically check the
-    spelling of text</guilabel> checkbox (see above)</para>
+    spelling of text</guilabel> checkbox (see above).</para>
 
     <figure id="spellchecker.in.action">
       <title><indexterm class="singular">

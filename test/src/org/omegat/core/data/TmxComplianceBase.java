@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -101,7 +102,7 @@ public abstract class TmxComplianceBase extends TestCase {
             String inCharset, String fileTMX, String fileTextOut, String outCharset, ProjectProperties props)
             throws Exception {
         final ProjectTMX tmx = new ProjectTMX(props, new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
-                orphanedCallback);
+                orphanedCallback, new HashMap<EntryKey, TMXEntry>());
 
         FilterContext fc = new FilterContext(props);
         fc.setInEncoding(inCharset);

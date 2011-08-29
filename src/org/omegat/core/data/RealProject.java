@@ -201,9 +201,10 @@ public class RealProject implements IProject {
             Set<String> existSource = new HashSet<String>();
             Set<EntryKey> existKeys = new HashSet<EntryKey>();
 
-            loadSourceFiles(existSource, existKeys);
+            Map<EntryKey, TMXEntry> sourceTranslations = new HashMap<EntryKey, TMXEntry>();
+            loadSourceFiles(existSource, existKeys, sourceTranslations);
 
-            loadTranslations(existSource, existKeys);
+            loadTranslations(existSource, existKeys, sourceTranslations);
 
             existSource = null;
             existKeys = null;
@@ -501,8 +502,8 @@ public class RealProject implements IProject {
     // protected functions
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
-    private void loadTranslations(final Set<String> existSource, final Set<EntryKey> existKeys)
-            throws Exception {
+    private void loadTranslations(final Set<String> existSource, final Set<EntryKey> existKeys,
+            final Map<EntryKey, TMXEntry> sourceTranslations) throws Exception {
 
         final File tmxFile = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
 
@@ -519,7 +520,7 @@ public class RealProject implements IProject {
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
 
-            projectTMX = new ProjectTMX(m_config, tmxFile, cb);
+            projectTMX = new ProjectTMX(m_config, tmxFile, cb, sourceTranslations);
             if (tmxFile.exists()) {
                 // RFE 1001918 - backing up project's TMX upon successful read
                 FileUtil.backupFile(tmxFile);
@@ -537,8 +538,9 @@ public class RealProject implements IProject {
      * @param projectRoot
      *            project root dir
      */
-    private void loadSourceFiles(final Set<String> existSource, final Set<EntryKey> existKeys)
-            throws IOException, InterruptedIOException, TranslationException {
+    private void loadSourceFiles(final Set<String> existSource, final Set<EntryKey> existKeys,
+            final Map<EntryKey, TMXEntry> sourceTranslations) throws IOException, InterruptedIOException,
+            TranslationException {
         long st = System.currentTimeMillis();
         FilterMaster fm = FilterMaster.getInstance();
 
@@ -554,7 +556,8 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_FILE_MX", filepath);
 
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys);
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
+                    sourceTranslations);
 
             FileInfo fi = new FileInfo();
             fi.filePath = filepath;
@@ -905,13 +908,16 @@ public class RealProject implements IProject {
 
         private final Set<String> existSource;
         private final Set<EntryKey> existKeys;
+        private final Map<EntryKey, TMXEntry> sourceTranslations;
 
         private List<TMXEntry> fileTMXentries;
-
-        public LoadFilesCallback(final Set<String> existSource, final Set<EntryKey> existKeys) {
+        
+        public LoadFilesCallback(final Set<String> existSource, final Set<EntryKey> existKeys,
+                final Map<EntryKey, TMXEntry> sourceTranslations) {
             super(m_config);
             this.existSource = existSource;
             this.existKeys = existKeys;
+            this.sourceTranslations = sourceTranslations;
         }
 
         public void setCurrentFile(FileInfo fi) {
@@ -945,10 +951,10 @@ public class RealProject implements IProject {
 
             EntryKey ek = new EntryKey(entryKeyFilename, segmentSource, id, prevSegment, nextSegment, path);
 
-            // if (!StringUtil.isEmpty(segmentTranslation)) {
-            // // TODO add to temp map, then put to real
-            // projectTMX.putFromSourceFile(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0));
-            // }
+            if (!StringUtil.isEmpty(segmentTranslation)) {
+                // projectTMX doesn't exist yet, so we have to store in temp map
+                sourceTranslations.put(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0));
+            }
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, comment);
             allProjectEntries.add(srcTextEntry);
             fileInfo.entries.add(srcTextEntry);

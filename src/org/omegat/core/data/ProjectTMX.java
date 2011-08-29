@@ -76,8 +76,10 @@ public class ProjectTMX {
      */
     final Map<EntryKey, TMXEntry> orphanedMultiple;
 
-    public ProjectTMX(ProjectProperties props, File file, CheckOrphanedCallback callback) throws Exception {
+    public ProjectTMX(ProjectProperties props, File file, CheckOrphanedCallback callback,
+            Map<EntryKey, TMXEntry> sourceTranslations) throws Exception {
         translationMultiple = new HashMap<EntryKey, TMXEntry>();
+        translationMultiple.putAll(sourceTranslations);
         orphanedMultiple = new HashMap<EntryKey, TMXEntry>();
         orphanedDefault = new HashMap<String, TMXEntry>();
         if (props.isSupportDefaultTranslations()) {
@@ -166,7 +168,6 @@ public class ProjectTMX {
      * Set new translation.
      */
     public void setTranslation(SourceTextEntry ste, TMXEntry te, boolean isDefault) {
-        // TODO review default
         synchronized (this) {
             if (te == null) {
                 if (isDefault) {
@@ -181,16 +182,6 @@ public class ProjectTMX {
                     translationMultiple.put(ste.getKey(), te);
                 }
             }
-        }
-    }
-
-    /**
-     * Store translation from source file.
-     */
-    void putFromSourceFile(EntryKey key, TMXEntry te) {
-        // TODO review default
-        synchronized (this) {
-            translationMultiple.put(key, te);
         }
     }
 

@@ -28,6 +28,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -47,6 +48,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
@@ -84,6 +86,10 @@ public abstract class TestFilterBase extends TestCore {
 
         filter.parseFile(new File(filename), new TreeMap<String, String>(), context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                    String comment, IFilter filter) {
+                addEntry(id, source, translation, isFuzzy, comment, null, filter);
+            }
+            public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, String path, IFilter filter) {
                 if (source.length() > 0)
                     result.add(source);
@@ -105,6 +111,10 @@ public abstract class TestFilterBase extends TestCore {
 
         filter.parseFile(new File(filename), options, context, new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                    String comment, IFilter filter) {
+                addEntry(id, source, translation, isFuzzy, comment, null, filter);
+            }
+            public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, String path, IFilter filter) {
                 if (source.length() > 0)
                     result.add(source);
@@ -124,6 +134,10 @@ public abstract class TestFilterBase extends TestCore {
             final Map<String, String> result, final Map<String, String> legacyTMX) throws Exception {
 
         filter.parseFile(new File(filename), new TreeMap<String, String>(), context, new IParseCallback() {
+            public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                    String comment, IFilter filter) {
+                addEntry(id, source, translation, isFuzzy, comment, null, filter);
+            }
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, String path, IFilter filter) {
                 String segTranslation = isFuzzy ? null : translation;
@@ -149,6 +163,10 @@ public abstract class TestFilterBase extends TestCore {
         final List<ParsedEntry> result = new ArrayList<ParsedEntry>();
 
         filter.parseFile(new File(filename), options, context, new IParseCallback() {
+            public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                    String comment, IFilter filter) {
+                addEntry(id, source, translation, isFuzzy, comment, null, filter);
+            }
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, String path, IFilter filter) {
                 if (source.length() == 0) {
@@ -327,7 +345,8 @@ public abstract class TestFilterBase extends TestCore {
             Set<String> existSource = new HashSet<String>();
             Set<EntryKey> existKeys = new HashSet<EntryKey>();
 
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys);
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
+                    new HashMap<EntryKey, TMXEntry>());
 
             FileInfo fi = new FileInfo();
             fi.filePath = file;

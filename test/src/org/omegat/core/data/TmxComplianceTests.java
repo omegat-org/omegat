@@ -25,6 +25,7 @@
 package org.omegat.core.data;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 import org.junit.Test;
@@ -128,7 +129,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     public void testImport1J() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
         final ProjectTMX tmx = new ProjectTMX(props, new File(
-                "test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), orphanedCallback);
+                "test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), orphanedCallback,
+                new HashMap<EntryKey, TMXEntry>());
         tmx.save(props, outFile, false, false, false);
         // TODO validate via TMXCheck
     }
@@ -140,7 +142,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     public void testImport1K() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
         final ProjectTMX tmx = new ProjectTMX(props, new File(
-                "test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"), orphanedCallback);
+                "test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"), orphanedCallback,
+                new HashMap<EntryKey, TMXEntry>());
         // TODO assertEquals(0, tmx.translationDefault.size());
     }
 

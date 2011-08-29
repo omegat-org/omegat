@@ -108,6 +108,6 @@ public class EditorUtils {
      * @return string without direction chars
      */
     public static String removeDirectionChars(String text) {
-        return text.replaceAll("[\u202A|\u202B|\u202C]", "");
+        return text.replaceAll("[\u202A\u202B\u202C]", "");
     }
 }

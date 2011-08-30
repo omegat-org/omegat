@@ -1414,7 +1414,6 @@ public class EditorController implements IEditor {
             project = Core.getProject();
         }
 
-        @Override
         public void iterate(EntryKey source, TMXEntry trans) {
             if (found) {
                 return;

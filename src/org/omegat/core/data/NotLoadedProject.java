@@ -24,6 +24,8 @@
 
 package org.omegat.core.data;
 
+import gen.core.filters.Filters;
+
 import java.io.IOException;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +34,7 @@ import java.util.Map;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.TranslationException;
+import org.omegat.filters2.master.FilterMaster;
 
 /**
  * Project implementation when project not really loaded.
@@ -134,5 +137,13 @@ public class NotLoadedProject implements IProject {
     }
 
     public void findNonUniqueSegments() {
+    }
+
+    public FilterMaster getFilterMaster() {
+        return null;
+    }
+
+    public void setConfig(Filters filters) {
+        
     }
 }

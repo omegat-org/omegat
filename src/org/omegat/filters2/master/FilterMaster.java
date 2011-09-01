@@ -98,7 +98,7 @@ public class FilterMaster {
     private static FilterMaster master = null;
 
     /** Config file. */
-    private File configFile = new File(StaticUtils.getConfigDir() + FILE_FILTERS);
+    private File configFile;
 
     /** Filters config stored in XML file. */
     private Filters config;
@@ -117,10 +117,11 @@ public class FilterMaster {
     /**
      * Create a new FilterMaster.
      */
-    private FilterMaster() {
+    private FilterMaster(File configFile) {
         filtersClasses = new ArrayList<Class<IFilter>>();
         filtersClasses.addAll((List)PluginUtils.getFilterClasses());
-
+        this.configFile = configFile;
+        
         loadConfig();
 
         addNewFiltersToConfig(config);
@@ -149,12 +150,34 @@ public class FilterMaster {
     }
 
     /**
-     * Returns the only instance of this class.
+     * Returns the FilterMaster for the non-project-specific file filters.
+     * 
+     * @see IProject.getFilterMaster() for the project specific FilterMaster (if available)
      */
     public static FilterMaster getInstance() {
-        if (master == null)
-            master = new FilterMaster();
+        if (master == null) {
+            File configFile = new File(StaticUtils.getConfigDir() + FILE_FILTERS);
+            master = new FilterMaster(configFile);
+        }
         return master;
+    }
+    /**
+     * Returns a instance of this class for storage of project specific settings. 
+     * A settings-file is generated if it does not exist yet.
+     * @param projectDir the project directory for storage of the settings file.
+     */
+    public static FilterMaster getProjectInstance(String projectDir) {
+        //
+        File configFile = new File(projectDir + FILE_FILTERS);
+        return new FilterMaster(configFile);
+    }
+    /**
+     * Does a config file already exists for the project at the given location?
+     * @param projectDir the project directory where settings file is stored
+     */
+    public static boolean projectConfigFileExists(String projectDir) {
+        File configFile = new File(projectDir + FILE_FILTERS);
+        return configFile.exists();
     }
 
     /**
@@ -401,7 +424,7 @@ public class FilterMaster {
      * <code>setupDefaultFilters</code>.
      */
     public void loadConfig() {
-        if (!configFile.exists()) {
+        if (!this.configFile.exists()) {
             config = new Filters();
             return;
         }
@@ -422,13 +445,22 @@ public class FilterMaster {
         try {
             Marshaller m = CONFIG_CTX.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(config, configFile);
+            m.marshal(config, this.configFile);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");
             Log.log(e);
             JOptionPane.showMessageDialog(null,
                     OStrings.getString("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG") + "\n" + e,
                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    /**
+     * Deletes the config file. Use when removing project specific file filters 
+     * (i.e. this FilterMaster is project-specific) 
+     */
+    public void deleteConfig() {
+        if (this.configFile.exists()) {
+            this.configFile.delete();
         }
     }
 

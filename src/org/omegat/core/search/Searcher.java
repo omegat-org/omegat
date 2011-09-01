@@ -321,7 +321,10 @@ public class Searcher {
             m_searchDir += File.separator;
         StaticUtils.buildFileList(fileList, new File(m_searchDir), m_searchRecursive);
 
-        FilterMaster fm = FilterMaster.getInstance();
+        FilterMaster fm = m_project.getFilterMaster();
+        if (fm == null) {
+            fm = FilterMaster.getInstance();
+        }
 
         for (String filename : fileList) {
             // determine actual file name w/ no root path info

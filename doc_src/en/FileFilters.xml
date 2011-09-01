@@ -29,7 +29,10 @@
 
   <para>Most users will find the default file filter options sufficient. If
   this is not the case, open the main dialog by selecting<emphasis
-  role="bold"> Options → File Filters...</emphasis> from the main menu.</para>
+  role="bold"> Options → File Filters...</emphasis> from the main menu. You can
+  also enable project-specific file filters, which will only be used on the
+  current project, by selecting<emphasis
+  role="bold"> Project → Options → File Filters...</emphasis></para>
 
   <para><emphasis role="bold">Warning!</emphasis> Should you change filter
   options whilst a project is open, you must reload the project in order for
@@ -81,11 +84,11 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Allow blank translations in the target file:</emphasis> 
-        If on, when a PO segment (which may be a whole paragraph) is not 
-        translated, the translation will be empty in the target file. 
-        Technically, <code>msgstr</code> will be empty. As it is the standard 
-        behavior for PO files, it is on by default. If the option is off, 
+        <para><emphasis>Allow blank translations in the target file:</emphasis>
+        If on, when a PO segment (which may be a whole paragraph) is not
+        translated, the translation will be empty in the target file.
+        Technically, <code>msgstr</code> will be empty. As it is the standard
+        behavior for PO files, it is on by default. If the option is off,
         the source text will be copied to the target segment.</para>
       </listitem>
     </itemizedlist>

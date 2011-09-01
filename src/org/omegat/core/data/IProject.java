@@ -25,6 +25,8 @@
 
 package org.omegat.core.data;
 
+import gen.core.filters.Filters;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +34,7 @@ import java.util.Map;
 
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.filters2.master.FilterMaster;
 
 /**
  * Interface for access to loaded project. Each loaded project will be new instance of IProject.
@@ -201,4 +204,9 @@ public interface IProject {
     public interface MultipleTranslationsIterator {
         void iterate(EntryKey source, TMXEntry trans);
     }
+    
+    public FilterMaster getFilterMaster();
+
+    public void setConfig(Filters filters);
+
 }

@@ -26,6 +26,7 @@ package org.omegat.gui.main;
 
 import java.io.File;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -35,6 +36,7 @@ import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
+import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -171,13 +173,7 @@ public class ProjectUICommands {
     }
 
     public static void projectReload() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        Core.getEditor().commitAndDeactivate();
+        performProjectMenuItemPreConditions();
 
         final ProjectProperties props = Core.getProject().getProjectProperties();
 
@@ -211,14 +207,7 @@ public class ProjectUICommands {
     }
 
     public static void projectSave() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        // commit the current entry first
-        Core.getEditor().commitAndLeave();
+        performProjectMenuItemPreConditions();
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
@@ -243,13 +232,7 @@ public class ProjectUICommands {
     }
 
     public static void projectClose() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        Core.getEditor().commitAndLeave();
+        performProjectMenuItemPreConditions();
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
@@ -277,13 +260,7 @@ public class ProjectUICommands {
     }
 
     public static void projectEditProperties() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        Core.getEditor().commitAndLeave();
+        performProjectMenuItemPreConditions();
 
         // displaying the dialog to change paths and other properties
         ProjectPropertiesDialog prj = new ProjectPropertiesDialog(Core.getProject().getProjectProperties(),
@@ -325,16 +302,27 @@ public class ProjectUICommands {
             }
         }.execute();
     }
+    
+    public static void projectEditFileFilterOptions() {
+        performProjectMenuItemPreConditions();
+
+        JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
+        FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true);
+        dlg.setVisible(true);
+        if (dlg.result != null) {
+            // saving config
+            Core.getProject().setConfig(dlg.result);
+
+            // asking to reload a project
+            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
+                    OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
+            if (res == JOptionPane.YES_OPTION)
+                ProjectUICommands.projectReload();
+        }
+    }
 
     public static void projectCompile() {
-        UIThreadsUtil.mustBeSwingThread();
-
-        if (!Core.getProject().isProjectLoaded()) {
-            return;
-        }
-
-        // commit the current entry first
-        Core.getEditor().commitAndLeave();
+        performProjectMenuItemPreConditions();
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
@@ -352,5 +340,15 @@ public class ProjectUICommands {
                 }
             }
         }.execute();
+    }
+    private static void performProjectMenuItemPreConditions() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (!Core.getProject().isProjectLoaded()) {
+            return;
+        }
+
+        // commit the current entry first
+        Core.getEditor().commitAndLeave();
     }
 }

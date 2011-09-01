@@ -27,6 +27,8 @@
 
 package org.omegat.core.data;
 
+import gen.core.filters.Filters;
+
 import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -110,6 +112,10 @@ public class RealProject implements IProject {
     private final ITokenizer sourceTokenizer, targetTokenizer;
 
     private DirectoryMonitor tmMonitor;
+    /**
+     * If project uses project-specific file filters, the filterMaster is set, containing the file filter settings
+     */
+    private FilterMaster filterMaster;
 
     /**
      * Storage for all translation memories, which shouldn't be changed and saved, i.e. for /tm/*.tmx files,
@@ -201,6 +207,11 @@ public class RealProject implements IProject {
             Set<String> existSource = new HashSet<String>();
             Set<EntryKey> existKeys = new HashSet<EntryKey>();
 
+            //set project specific file filters if they exist
+            if (FilterMaster.projectConfigFileExists(m_config.getProjectRoot())) {
+                this.filterMaster = FilterMaster.getProjectInstance(m_config.getProjectRoot());
+            }
+
             Map<EntryKey, TMXEntry> sourceTranslations = new HashMap<EntryKey, TMXEntry>();
             loadSourceFiles(existSource, existKeys, sourceTranslations);
 
@@ -258,7 +269,7 @@ public class RealProject implements IProject {
      */
     public Map<String, TMXEntry> align(final ProjectProperties props, final File translatedDir)
             throws Exception {
-        FilterMaster fm = FilterMaster.getInstance();
+        FilterMaster fm = getActiveFilterMaster();
 
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
@@ -390,7 +401,7 @@ public class RealProject implements IProject {
         }
 
         // build translated files
-        FilterMaster fm = FilterMaster.getInstance();
+        FilterMaster fm = getActiveFilterMaster();
 
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
@@ -542,7 +553,7 @@ public class RealProject implements IProject {
             final Map<EntryKey, TMXEntry> sourceTranslations) throws IOException, InterruptedIOException,
             TranslationException {
         long st = System.currentTimeMillis();
-        FilterMaster fm = FilterMaster.getInstance();
+        FilterMaster fm = getActiveFilterMaster();
 
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
@@ -1019,5 +1030,43 @@ public class RealProject implements IProject {
             localCollator.setStrength(Collator.PRIMARY);
             return localCollator.compare(o1, o2);
         }
+    }
+    /**
+     * returns project FilterMaster if it exists, else returns null (this means: not using project-specific filters!)
+     */
+    public FilterMaster getFilterMaster() {
+        return this.filterMaster;
+    }
+
+    /**
+     * Sets the filter config to the project, or removes it. Creates or deletes config file if necessary and (dis)associates FilterMaster to project. Use this to create project specific file filters. 
+     * 
+     * @param filters the filters config. When null, project specific config is removed.
+     */
+    public void setConfig(Filters filters) {
+        if (filters == null) {
+            if (this.filterMaster != null) {
+                this.filterMaster.deleteConfig();
+                this.filterMaster = null;
+            }
+            return;
+        }
+        if (this.filterMaster == null) {
+            this.filterMaster = FilterMaster.getProjectInstance(this.getProjectProperties().getProjectRoot());
+        }
+        this.filterMaster.setConfig(filters);
+        this.filterMaster.saveConfig();
+    }
+    
+    /**
+     * Returns the filtermaster to use: the projects filter master (if it is set), else the default filtermaster
+     * @return the filtermaster to use
+     */
+    private FilterMaster getActiveFilterMaster() {
+        //get project specific file filters if they exist, else get normal filters
+        if (this.filterMaster == null) {
+            return FilterMaster.getInstance();
+        }
+        return this.filterMaster;
     }
 }

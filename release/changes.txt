@@ -24,6 +24,8 @@ reload the project.
   - Wordfast TXML filter. Only target segments are read, so it
 it is mostly useful for files where source = target.
 
+  - project-specific file filters
+
   Localisation updates:
 
   - Dutch localisation updated to 2.5 (UI)
@@ -42,7 +44,7 @@ it is mostly useful for files where source = target.
   - Pipe-sign | missing from fields when copy-pasting
   http://sourceforge.net/support/tracker.php?aid=3395795
 
-  Localisation updates:  
+  Localisation updates:
   - Spanish localisation updated to 2.3 (UI, documentation, readme)
 
 ----------------------------------------------------------------------
@@ -52,14 +54,14 @@ it is mostly useful for files where source = target.
    1 Bug fix
    3 Localisation updates
 ----------------------------------------------------------------------
-2.3.0 update 1 vs. 2.3.0 
+2.3.0 update 1 vs. 2.3.0
 
   Bug fixes:
 
   - Mozilla DTD handler is skipping segments
   http://sourceforge.net/support/tracker.php?aid=3369466
 
-  Localisation updates:  
+  Localisation updates:
 
   - Dutch localisation updated to 2.3, backported from 2.5 (UI)
   - Hungarian localisation updated to 2.3 (UI, Instant Start)
@@ -93,12 +95,12 @@ it is mostly useful for files where source = target.
 
   Other enhancements:
 
-  - In the MS Open XML filter, a new option allows to preserve white space 
-(e.g., spaces and newlines) in all tags, even if it is not set technically 
-in the document. As it corresponds to the most usual situation (e.g., 
+  - In the MS Open XML filter, a new option allows to preserve white space
+(e.g., spaces and newlines) in all tags, even if it is not set technically
+in the document. As it corresponds to the most usual situation (e.g.,
 preserving spaces in Excel tags), the option is on by default.
 
-  - New version of the JNA library (used to launch Hunspell), compatible 
+  - New version of the JNA library (used to launch Hunspell), compatible
 with Windows 64-bit
 
   - New Iceni Infix file filter
@@ -121,7 +123,7 @@ with Windows 64-bit
   - Overeager numbered header segmentation rule
   http://sourceforge.net/support/tracker.php?aid=3308282
 
-  - PO filter: when a segment had trailing spaces, it was not visible for 
+  - PO filter: when a segment had trailing spaces, it was not visible for
 translation in OmegaT
 
   - XLIFF filter: in some cases, some extra tags could appear
@@ -145,9 +147,9 @@ translation in OmegaT
   - HTML filter: PHP tags are transformed into HTML entities
   http://sourceforge.net/support/tracker.php?aid=3175744
 
-  - For three languages, the internal locale was corresponding to an 
+  - For three languages, the internal locale was corresponding to an
 obsolete locale, which meant the spell checker wasn't finding the correct
-dictionary. The affected locales were "id", which was changed to "in", 
+dictionary. The affected locales were "id", which was changed to "in",
 "he", changed to "iw" and "yi" changed to "ji".
 
 ----------------------------------------------------------------------
@@ -165,12 +167,12 @@ dictionary. The affected locales were "id", which was changed to "in",
 with a preceding \
 
   - XLIFF filter: untranslatable text (translate="no") appeared in the Editor
-  
+
   - ResX filter: some untranslatable text appeared in the Editor
 
   - XML: preserve spaces
   http://sourceforge.net/support/tracker.php?aid=1650342
-  
+
   Localisation updates:
 
   - Italian localisation updated to 2.2.3 update 2 (UI, documentation)
@@ -202,7 +204,7 @@ dialog (it was just "Open")
   Bug fixes:
 
   - In the File Filter options, one of the filename configuration
-variable was wrongly spelt: ${targetCoutryCode} instead of 
+variable was wrongly spelt: ${targetCoutryCode} instead of
 ${targetCountryCode}. Configurations with the old variable name will
 still work.
 
@@ -226,7 +228,7 @@ still work.
 
   Other enhancements:
 
-  - Windows installer: changes.txt can be read immediately after the 
+  - Windows installer: changes.txt can be read immediately after the
 installation
 
   - Create the "plugins" folder during installation
@@ -243,10 +245,10 @@ prevented OmegaT to run
   http://sourceforge.net/support/tracker.php?aid=3152734
 
   - In the Spell Checking options, the uninstall button was selected
-(pressed) instead of being unabled when the list of dictionaries is 
+(pressed) instead of being unabled when the list of dictionaries is
 empty
 
-  - XHTML and OpenOffice.org filters: unchecking an option (e.g., 
+  - XHTML and OpenOffice.org filters: unchecking an option (e.g.,
 Translate href, Translate comments) only took effect after quitting
 and restarting OmegaT
 
@@ -281,7 +283,7 @@ and restarting OmegaT
 
   Bug fixes:
 
-  - When a paragraph-based TMX was resegmented to sequence mode, the 
+  - When a paragraph-based TMX was resegmented to sequence mode, the
 source language rules were used to segment the target paragraph
 
   Localisation updates:
@@ -297,7 +299,7 @@ source language rules were used to segment the target paragraph
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update   
+   0 Localisation update
 ----------------------------------------------------------------------
 2.2.2 update 1 vs. 2.2.2
 
@@ -393,29 +395,29 @@ only the current one.
 
   - ResX filter: comments appeared as translatable text.
 
-  - HTML (including the HTML Help Compiler Filter) and XML filters: 
-When translating attributes, forbidden characters (e.g., '&', '<') were not 
+  - HTML (including the HTML Help Compiler Filter) and XML filters:
+When translating attributes, forbidden characters (e.g., '&', '<') were not
 converted back to entities in the target documents.
 
-  - XML filters: entities from attributes were not converted to 
+  - XML filters: entities from attributes were not converted to
 characters.
 
 ----------------------------------------------------------------------
- OmegaT 2.2.0 update 4 
+ OmegaT 2.2.0 update 4
 ----------------------------------------------------------------------
    1 Enhancement
    2 Bug fixes
-   2 Localisation updates 
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.2.0 update 4 vs. 2.2.0 update 3
 
   Other enhancements:
 
-  - The options of the Open XML filter have been reorganised because 
+  - The options of the Open XML filter have been reorganised because
 some options (e.g., Diagrams) apply to all the documents.
 
   Localisation updates:
-  
+
   - Russian localisation updated to 2.2.0 (UI, Instant Start, Readme)
   - Swedish localisation updated to 2.2.0 (UI, Instant Start, Readme)
 
@@ -424,11 +426,11 @@ some options (e.g., Diagrams) apply to all the documents.
   - OpenXML Excel: some parts are not available for translation
     http://sourceforge.net/support/tracker.php?aid=2885433
 
-  - Open XML filter: The comments in Excel sheets didn't appear for 
+  - Open XML filter: The comments in Excel sheets didn't appear for
 translation
 
 ----------------------------------------------------------------------
- OmegaT 2.2.0 update 3 
+ OmegaT 2.2.0 update 3
 ----------------------------------------------------------------------
    3 Enhancements
    0 Bug fix
@@ -445,16 +447,16 @@ translation
 
   - Hunspell updated to 1.2.12
 
-  - The "HTML and XHTML files segmentation" segmentation rule has been renamed 
+  - The "HTML and XHTML files segmentation" segmentation rule has been renamed
 to "HTML, XHTML and ODF segmentation"
 
   Localisation updates:
-  
+
   - Polish localisation updated to 2.1.3 (UI, Instant Start, Readme, documentation)
   - Brazilian Portuguese localisation updated to 2.2.0 (UI, Instant Start, Readme)
 
 ----------------------------------------------------------------------
- OmegaT 2.2.0 update 2 
+ OmegaT 2.2.0 update 2
 ----------------------------------------------------------------------
    0 Enhancement
    2 Bug fixes
@@ -464,7 +466,7 @@ to "HTML, XHTML and ODF segmentation"
 
   Bug fixes:
 
-  - HTML filter: Entities from attributes were not converted to 
+  - HTML filter: Entities from attributes were not converted to
 characters. This applied also to the HTML Help Compiler Filter.
 
   - MT using Google fails to give results in Traditional Chinese
@@ -475,7 +477,7 @@ characters. This applied also to the HTML Help Compiler Filter.
   - Italian localisation updated to 2.2.0 update 1 (UI, Instant Start, Readme, documentation)
 
 ----------------------------------------------------------------------
- OmegaT 2.2.0 update 1 
+ OmegaT 2.2.0 update 1
 ----------------------------------------------------------------------
    1 Enhancement
    1 Bug fix
@@ -500,7 +502,7 @@ characters. This applied also to the HTML Help Compiler Filter.
   - Japanese localisation updated to 2.2.0 (UI, Instant Start, Readme, 2.0.5 documentation)
 
 ----------------------------------------------------------------------
- OmegaT 2.2.0 
+ OmegaT 2.2.0
 ----------------------------------------------------------------------
    1 Enhancement
    3 Bug fixes
@@ -515,14 +517,14 @@ characters. This applied also to the HTML Help Compiler Filter.
 
   Bug fixes:
 
-  - With some fonts, "squares" were displayed in the Editor around 
+  - With some fonts, "squares" were displayed in the Editor around
 segment markers
 
   - When the files in /source were changed, it was sometime not possible
 to reload the project
 
-  - When a search filter was used (e.g., "Display all results" unchecked, 
-Author), the number of search results returned was limited to the number 
+  - When a search filter was used (e.g., "Display all results" unchecked,
+Author), the number of search results returned was limited to the number
 of unfiltered results
 
 ----------------------------------------------------------------------
@@ -570,7 +572,7 @@ of unfiltered results
   - Some advanced search parameters were not working properly
 
 ----------------------------------------------------------------------
- OmegaT 2.1.8 
+ OmegaT 2.1.8
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
@@ -593,7 +595,7 @@ of unfiltered results
 ----------------------------------------------------------------------
    2 Enhancements
    5 Bug fixes
-   0 Localisation update  
+   0 Localisation update
 ----------------------------------------------------------------------
 2.1.7 update 3 vs. 2.1.7 update 2
 
@@ -603,8 +605,8 @@ of unfiltered results
   http://sourceforge.net/support/tracker.php?aid=2988953
 
   Other enhancements:
-  
-  - OpenXML filter: new options to translate diagrams (Word) and 
+
+  - OpenXML filter: new options to translate diagrams (Word) and
 charts (PowerPoint)
 
   Bug fixes:
@@ -615,9 +617,9 @@ The issue was not totally corrected in update 2
   - Superfluous debug message (visible in the console and in the log),
 e.g., 15082: Info: DEBUG: class=java.lang.Integer val=24, has been removed
 
-  - OpenXML filter: for some Word shapes, the text presented to the 
+  - OpenXML filter: for some Word shapes, the text presented to the
 translator was not the text visible in Word 2007/2010, but only the "fallback"
-text for backward compatibility. As a result, the text appeared untranslated 
+text for backward compatibility. As a result, the text appeared untranslated
 in the target document. Now both text are presented to the
 translator.
 
@@ -625,7 +627,7 @@ translator.
 
   - Webstart jnidispatch error on Windows 64-bit
   http://sourceforge.net/support/tracker.php?aid=3024102
-  
+
 ----------------------------------------------------------------------
  OmegaT 2.1.7 update 2
 ----------------------------------------------------------------------
@@ -645,7 +647,7 @@ on supported file formats
   - In some circumstances, the search results could be all highlighted
 
   Localisation updates
-  
+
   - Japanese localisation updated to 2.1.x (UI, Readme, Instant Start)
 
 ----------------------------------------------------------------------
@@ -712,7 +714,7 @@ on supported file formats
   http://sourceforge.net/support/tracker.php?aid=3006297
 
   Localisation updates:
-  
+
   - Catalan localisation updated to 2.1.4 (UI, Readme, Instant Start, documentation)
   - Hungarian localisation updated to 2.1.x (UI, Readme, Instant Start, documentation)
 
@@ -736,7 +738,7 @@ on supported file formats
 
   Bug fixes:
 
-  - Calling the Project Files window (Ctrl+L) could generate an error 
+  - Calling the Project Files window (Ctrl+L) could generate an error
 in some circumstances
 
   - Some files were not closed when translating in console mode
@@ -782,7 +784,7 @@ in some circumstances
   Other enhancements:
 
   - Filter search results in the Editor
-For explanations, see Searches in the English documentation 
+For explanations, see Searches in the English documentation
 
   Bug fixes:
 
@@ -827,7 +829,7 @@ If it is not specified, the source tokenizer will be used.
   - Exception when project was reloaded after some project properties
 changes
 
-  - Specific segmentation processing was not working when CJK language 
+  - Specific segmentation processing was not working when CJK language
 codes were entered in lowercase
 
   - TBX terms with country code (e.g., de-AT) were ignored
@@ -839,7 +841,7 @@ codes were entered in lowercase
   http://sourceforge.net/support/tracker.php?aid=2946389
 
 ----------------------------------------------------------------------
- OmegaT 2.1.4 
+ OmegaT 2.1.4
 ----------------------------------------------------------------------
    7 Enhancements
    4 Bug fixes
@@ -860,7 +862,7 @@ codes were entered in lowercase
 
   - Add LanguageTool support
   http://sourceforge.net/support/tracker.php?aid=2950346
-(Requires LangageTool plugin from 
+(Requires LangageTool plugin from
 http://sourceforge.net/projects/omegat-plugins)
 
    Other enhancements:
@@ -882,11 +884,11 @@ http://sourceforge.net/projects/omegat-plugins)
   - OpenXML options enabled only after restarting OmegaT
   http://sourceforge.net/support/tracker.php?aid=2959514
 
-  - Windows RC filter: some files (in "Pascal notation") were not 
+  - Windows RC filter: some files (in "Pascal notation") were not
 recognised
 
 ----------------------------------------------------------------------
- OmegaT 2.1.3 
+ OmegaT 2.1.3
 ----------------------------------------------------------------------
    6 Enhancements
    4 Bug fixes
@@ -903,14 +905,14 @@ recognised
   http://sourceforge.net/support/tracker.php?aid=1848169
 
   Other enhancements:
-  
+
   - Windows Resources (RC) file filter
 
   - Add support for multiple translation engines
 
-  - POST method is used for Google Translate, to allow longer segments 
+  - POST method is used for Google Translate, to allow longer segments
 (still limited at 5000 characters)
-  
+
   - Add support for Belazar (http://belsoft.tut.by/belazar/)
 
   Bug fixes:
@@ -926,7 +928,7 @@ recognised
   http://sourceforge.net/support/tracker.php?aid=2954272
 
 ----------------------------------------------------------------------
- OmegaT 2.1.2 
+ OmegaT 2.1.2
 ----------------------------------------------------------------------
   13 Enhancements
    4 Bug fixes
@@ -952,7 +954,7 @@ recognised
   http://sourceforge.net/support/tracker.php?aid=2935633
 
   Other enhancements:
-  
+
   - The About dialog displays memory usage
 
   - When there are several 100% matches, and one of them is a real
@@ -962,7 +964,7 @@ exact match, it is ordered first
 
   - Support for Lingvo DSL dictionaries
 
-  - It is now possible to search for Author (changeid) and date of change 
+  - It is now possible to search for Author (changeid) and date of change
 (changedate)
 
   - It is possible to select to display no change information, only for the
@@ -985,11 +987,11 @@ set in Editing Behaviour, the previous segment was entered as translation.
   - Same accelerator for "Tab", "Team" and "Tag Validation"
   http://sourceforge.net/support/tracker.php?aid=2929351
 
-  - In search: '?' would find 0 or 1 character, while search instructions 
+  - In search: '?' would find 0 or 1 character, while search instructions
 clearly state that it should find 1 character, which is now the case
 
   Localisation updates:
-  
+
   - Catalan localisation updated to 2.1.1 (UI, Readme, Instant Start, documentation)
   - New Swedish localisation (2.1.0) (UI, Readme, Instant Start)
 
@@ -1033,7 +1035,7 @@ clearly state that it should find 1 character, which is now the case
   - Number of unique segments always 0 in standard statistics
   http://sourceforge.net/support/tracker.php?aid=2879866
 
-  - Non-tag is marked as tag error 
+  - Non-tag is marked as tag error
   http://sourceforge.net/support/tracker.php?aid=2890624
 
   - When there were fuzzy matches for a given segment, it wasn't counted
@@ -1062,7 +1064,7 @@ as a repetition in Match Statistics
   http://sourceforge.net/support/tracker.php?aid=2876216
 
   - Display Statistics in a window
-  http://sourceforge.net/support/tracker.php?aid=2876217 
+  http://sourceforge.net/support/tracker.php?aid=2876217
 
 ----------------------------------------------------------------------
  OmegaT 2.0.5 update 4
@@ -1096,8 +1098,8 @@ as a repetition in Match Statistics
 
   - Webstart for linux amd64 doesn't work
   http://sourceforge.net/support/tracker.php?aid=2953631
- 
-  - $ Dollar sign in filenames gives error 
+
+  - $ Dollar sign in filenames gives error
   http://sourceforge.net/support/tracker.php?aid=2982509
 
   - References to Java 1.4 removed in OmegaT.l4J.ini
@@ -1105,7 +1107,7 @@ as a repetition in Match Statistics
   - Various corrections in the manual
 
   Localisation updates:
-  
+
   - Russian localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
   - Simplified Chinese localisation updated to 2.0.5 (UI, Readme, Instant Start, documentation)
     (backported from 2.1.x)
@@ -1149,7 +1151,7 @@ as a repetition in Match Statistics
 
   - Images are included in the minimal localisation pack
 
-  - <wp:align> and <w:drawing> tags are hidden in the OpenXML filter 
+  - <wp:align> and <w:drawing> tags are hidden in the OpenXML filter
 
   Bug Fixes:
 
@@ -1209,7 +1211,7 @@ a space
   http://sourceforge.net/support/tracker.php?aid=1899440
 
   Localisation updates:
-  
+
   - German localisation updated to 2.0.3 (UI, Readme, Instant Start, Documentation)
   - Japanese localisation updated to 2.0.4 (UI, Instant Start)
 
@@ -1307,7 +1309,7 @@ to the one obtained in OmegaT.
   http://sourceforge.net/support/tracker.php?aid=2796271
 
   Localisation updates:
-  
+
   - Dutch localisation updated to 2.0.2 (UI, Instant Start, Readme, Documentation)
 
 ----------------------------------------------------------------------
@@ -1408,7 +1410,7 @@ of " +"
 the default value
 
   Localisation update:
-  
+
   - Spanish localisation updated to 2.0.1 (UI, readme, instant start)
 
 ----------------------------------------------------------------------
@@ -1454,7 +1456,7 @@ and copied to the clipboard.
   (for feature http://sourceforge.net/support/tracker.php?aid=2371713)
 
   Localisation updates :
-  
+
   - Slovenian localisation updated to 2.0 (readme)
 
 ----------------------------------------------------------------------
@@ -1503,7 +1505,7 @@ steps of matching:
   (Requires tokenizers from http://sourceforge.net/projects/omegat-plugins)
 
   Localisation updates:
-  
+
   - Japanese localisation updated to 2.0 (UI)
   - Basque localisation updated to 2.0 (UI)
   - Slovenian localisation updated to 2.0 (UI)
@@ -1562,7 +1564,7 @@ can be applied or not with a new option in Options/Font.
   - OpenXML filter: New option to translate slide masters in PowerPoint documents
 
   Localisation updates:
-  
+
   - French localisation updated to 2.0 (UI)
 
 ----------------------------------------------------------------------
@@ -1583,7 +1585,7 @@ can be applied or not with a new option in Options/Font.
 ----------------------------------------------------------------------
    1 Enhancement
    1 Bug fix
-   1 Localisation update 
+   1 Localisation update
 ----------------------------------------------------------------------
 1.8.1 update 6 vs. 1.8.1 update 5
 
@@ -1679,7 +1681,7 @@ translatable content
   http://sourceforge.net/support/tracker.php?aid=2657589
 
   Localisation updates:
-  
+
   - New Welsh localisation (UI, readme, instant start)
   - czech localisation updated to 1.8 (UI, readme, instant start, documentation)
 
@@ -1688,7 +1690,7 @@ translatable content
 ----------------------------------------------------------------------
    2 Enhancements
    3 Bug fixes
-   0 Localisation update   
+   0 Localisation update
 ----------------------------------------------------------------------
 1.8.1 update 2 vs. 1.8.1 update 1
 
@@ -1709,7 +1711,7 @@ launcher), based on version 3.0.1 of Launch4J.
   http://sourceforge.net/support/tracker.php?aid=1819355
 
   Localisation updates:
-  
+
   - Slovenian localisation updated to 1.8 (readme, instant start, documentation)
 
 ----------------------------------------------------------------------
@@ -1776,7 +1778,7 @@ segments
   http://sourceforge.net/support/tracker.php?aid=2200872
 
   Localisation updates:
-  
+
   - Slovak localisation updated to 1.8 (UI)
   - Dutch localisation updated to 1.8 (UI, readme)
   - Czech localisation updated to 1.8 (UI, readme)
@@ -1810,7 +1812,7 @@ segments
   http://sourceforge.net/support/tracker.php?aid=1862199
 
   Localisation updates:
-  
+
   - Catalan localisation updated to 1.8 (UI)
 
 ----------------------------------------------------------------------
@@ -1986,7 +1988,7 @@ when uninstalling the JRE version
 
   - XHTML: xmlns="http://www.w3.org... in every tag
   http://sourceforge.net/support/tracker.php?aid=1926940
-  
+
   Other enhancements:
 
   - New Arabic localisation (UI, readme, instant start)
@@ -2027,7 +2029,7 @@ when uninstalling the JRE version
 
   - Non-translatable strings displayed in OOo documents
   http://sourceforge.net/support/tracker.php?aid=1888097
-  
+
   Localisation updates:
 
   - Serbo-Croatian localisation updated to 1.7.3 (UI, readme, instant start, documentation)
@@ -2065,7 +2067,7 @@ Contains a revised manual, two new localisations (Danish, polish) and bug fixes
   http://sourceforge.net/support/tracker.php?aid=1812385
 
   Localisation updates:
-  
+
   - Danish 1.6.2 localisation + instant start
   - Polish 1.6.2 localisation + partial manual
   - Catalan localisation updated to 1.7.2
@@ -2249,7 +2251,7 @@ Contains two new filters (XLIFF and Office 2007 XML), many bug fixes, new featur
   http://sourceforge.net/support/tracker.php?aid=1743100
 
   Localisation updates:
-  
+
   - German instant start tutorial
   - Slovenian UI localisation + manual translation
   - Basque UI localisation + manual translation

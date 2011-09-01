@@ -143,6 +143,10 @@ public class MainWindowMenuHandler {
         ProjectUICommands.projectEditProperties();
     }
 
+    public void filtersMenuItemActionPerformed() {
+        ProjectUICommands.projectEditFileFilterOptions();
+    }
+
     public void viewFileListMenuItemActionPerformed() {
         if (mainWindow.m_projWin == null) {
             mainWindow.menu.viewFileListMenuItem.setSelected(false);
@@ -573,14 +577,18 @@ public class MainWindowMenuHandler {
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        FiltersCustomizer dlg = new FiltersCustomizer(mainWindow);
+        FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, false);
         dlg.setVisible(true);
         if (dlg.result != null) {
             // saving config
             FilterMaster.getInstance().setConfig(dlg.result);
             FilterMaster.getInstance().saveConfig();
 
-            if (Core.getProject().isProjectLoaded()) {
+            if (Core.getProject().isProjectLoaded() ) {
+                if (Core.getProject().getFilterMaster() != null) {
+                    //project specific filters are in place. No need to reload project when non-project-specific filters are changed
+                    return;
+                }
                 // asking to reload a project
                 int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
                         OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);

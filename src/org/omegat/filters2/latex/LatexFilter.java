@@ -40,6 +40,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
+import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 
 /**
@@ -412,18 +413,25 @@ public class LatexFilter extends AbstractFilter {
             StringBuffer sb = new StringBuffer();
             String find = "\\" + command;
 
-            Pattern p = Pattern.compile(find);
-            Matcher m = p.matcher(par);
-            while (m.find()) {
-                String replace = "<u" + String.valueOf(counter) + ">";
-                String[] subst = { reHarden(m.group(0)), reHarden(replace) };
-                substituted.addFirst(subst);
-                m.appendReplacement(sb, replace);
-                counter++;
-            }
-            m.appendTail(sb);
+            try {
+                Pattern p = Pattern.compile(find);
+                Matcher m = p.matcher(par);
+                while (m.find()) {
+                    String replace = "<u" + String.valueOf(counter) + ">";
+                    String[] subst = { reHarden(m.group(0)), reHarden(replace) };
+                    substituted.addFirst(subst);
+                    m.appendReplacement(sb, replace);
+                    counter++;
+                }
+                m.appendTail(sb);
 
-            par = sb.toString();
+                par = sb.toString();
+             } catch (java.util.regex.PatternSyntaxException e) {
+               //TODO: understand the exceptions
+               Log.log("LaTeX PatternSyntaxException: " + e.getMessage());
+               Log.log(command);
+            }
+
         }
         return par;
     }

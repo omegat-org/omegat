@@ -41,7 +41,7 @@ import org.omegat.util.WikiGet;
 public class ApertiumTranslate extends BaseTranslate {
     protected static String GT_URL = "http://api.apertium.org/json/translate?q=";
     // Specific OmegaT key
-    protected static String GT_URL2 = "&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
+    protected static String GT_URL2 = "&markUnknown=no&langpair=#sourceLang#|#targetLang#&key=bwuxb5jS+VwSJ8mLz1qMfmMrDGA";
     protected static String MARK_BEG = "{\"translatedText\":\"";
     protected static String MARK_END = "\"}";
     protected static Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");

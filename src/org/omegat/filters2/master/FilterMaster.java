@@ -164,19 +164,19 @@ public class FilterMaster {
     /**
      * Returns a instance of this class for storage of project specific settings. 
      * A settings-file is generated if it does not exist yet.
-     * @param projectDir the project directory for storage of the settings file.
+     * @param configDir the directory for storage of the project settings file.
      */
-    public static FilterMaster getProjectInstance(String projectDir) {
+    public static FilterMaster getProjectInstance(String configDir) {
         //
-        File configFile = new File(projectDir + FILE_FILTERS);
+        File configFile = new File(configDir + FILE_FILTERS);
         return new FilterMaster(configFile);
     }
     /**
      * Does a config file already exists for the project at the given location?
-     * @param projectDir the project directory where settings file is stored
+     * @param configDir the directory where project settings file is stored
      */
-    public static boolean projectConfigFileExists(String projectDir) {
-        File configFile = new File(projectDir + FILE_FILTERS);
+    public static boolean projectConfigFileExists(String configDir) {
+        File configFile = new File(configDir + FILE_FILTERS);
         return configFile.exists();
     }
 

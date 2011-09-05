@@ -208,8 +208,8 @@ public class RealProject implements IProject {
             Set<EntryKey> existKeys = new HashSet<EntryKey>();
 
             //set project specific file filters if they exist
-            if (FilterMaster.projectConfigFileExists(m_config.getProjectRoot())) {
-                this.filterMaster = FilterMaster.getProjectInstance(m_config.getProjectRoot());
+            if (FilterMaster.projectConfigFileExists(m_config.getProjectInternal())) {
+                this.filterMaster = FilterMaster.getProjectInstance(m_config.getProjectInternal());
             }
 
             Map<EntryKey, TMXEntry> sourceTranslations = new HashMap<EntryKey, TMXEntry>();
@@ -1052,7 +1052,7 @@ public class RealProject implements IProject {
             return;
         }
         if (this.filterMaster == null) {
-            this.filterMaster = FilterMaster.getProjectInstance(this.getProjectProperties().getProjectRoot());
+            this.filterMaster = FilterMaster.getProjectInstance(this.getProjectProperties().getProjectInternal());
         }
         this.filterMaster.setConfig(filters);
         this.filterMaster.saveConfig();

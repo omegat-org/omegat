@@ -105,6 +105,7 @@ public class Searcher {
         m_allResults = expression.allResults;
         m_searchSource = expression.searchSource;
         m_searchTarget = expression.searchTarget;
+        m_searchNotes = expression.searchNotes;
         m_searchAuthor = expression.searchAuthor;
         m_searchDateAfter = expression.searchDateAfter;
         m_searchDateBefore = expression.searchDateBefore;
@@ -283,7 +284,7 @@ public class Searcher {
      * @param locText
      *            translation text
      * @param entry
-     *            entry
+     *            entry. Null for external tmx entries (so we can only search for source and translation in external tmx)
      * @param entryNum
      *            entry number
      * @param intro
@@ -302,9 +303,15 @@ public class Searcher {
                 targetMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             }
         }
+        SearchMatch[] noteMatches = null;
+        if (m_searchNotes) {
+            if (entry != null && searchString(entry.note)) {
+                noteMatches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
+            }
+        }
 
-        // if the search expression is satified, report the hit
-        if ((srcMatches != null || targetMatches != null)
+        // if the search expression is satisfied, report the hit
+        if ((srcMatches != null || targetMatches != null || noteMatches != null)
                 && (!m_searchAuthor || entry != null && searchAuthor(entry))
                 && (!m_searchDateBefore || entry != null && entry.changeDate != 0
                         && entry.changeDate < m_dateBefore)
@@ -471,6 +478,7 @@ public class Searcher {
     private boolean m_allResults;
     private boolean m_searchSource;
     private boolean m_searchTarget;
+    private boolean m_searchNotes;
     private boolean m_searchAuthor;
     private boolean m_searchDateAfter;
     private boolean m_searchDateBefore;

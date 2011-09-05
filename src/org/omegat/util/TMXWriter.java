@@ -108,12 +108,17 @@ public class TMXWriter {
         // Write TUs
         String source = null;
         String target = null;
+        String note = null;
         for (Map.Entry<String, TMXEntry> en : data.entrySet()) {
             TMXEntry transEntry = en.getValue();
             source = forceValidTMX ? StaticUtils.stripTags(en.getKey()) : en.getKey();
             target = forceValidTMX ? StaticUtils.stripTags(transEntry.translation) : transEntry.translation;
             source = StaticUtils.makeValidXML(source);
             target = StaticUtils.makeValidXML(target);
+            if (note != null) {
+                note = forceValidTMX ? StaticUtils.stripTags(transEntry.note) : transEntry.note;
+                note = StaticUtils.makeValidXML(note);
+            }
             // TO DO: This *possibly* converts occurrences in the actual text of
             // &lt;fX&gt;
             // which it should not.
@@ -134,6 +139,9 @@ public class TMXWriter {
                     + changeIdPropertyString + ">");
             out.println("        <seg>" + target + "</seg>");
             out.println("      </tuv>");
+            if (note != null) {
+                out.println("      <note>" + note + "</note>");
+            }
             out.println("    </tu>");
         }
 

@@ -67,7 +67,7 @@ public class ExternalTMX {
                         sources, targets);
 
                 for (int i = 0; i < sources.size(); i++) {
-                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt);
+                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt, tu.note);
                     entries.add(te);
                 }
             }

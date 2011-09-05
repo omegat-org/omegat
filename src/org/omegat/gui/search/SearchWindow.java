@@ -138,6 +138,7 @@ public class SearchWindow extends JFrame {
         m_caseCB = new JCheckBox();
         m_searchSourceCB = new JCheckBox();
         m_searchTargetCB = new JCheckBox();
+        m_searchNotesCB = new JCheckBox();
         m_tmSearchCB = new JCheckBox();
         m_allResultsCB = new JCheckBox();
 
@@ -148,6 +149,8 @@ public class SearchWindow extends JFrame {
         bOB.add(m_searchSourceCB);
         bOB.add(Box.createHorizontalStrut(H_MARGIN));
         bOB.add(m_searchTargetCB);
+        bOB.add(Box.createHorizontalStrut(H_MARGIN));
+        bOB.add(m_searchNotesCB);
         bOB.add(Box.createHorizontalStrut(H_MARGIN));
         bOB.add(m_tmSearchCB);
         bOB.add(Box.createHorizontalStrut(H_MARGIN));
@@ -431,6 +434,13 @@ public class SearchWindow extends JFrame {
                 m_searchField.requestFocus();
             }
         });
+        
+        m_searchNotesCB.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                // move focus to search edit field
+                m_searchField.requestFocus();
+            }
+        });
 
         m_tmSearchCB.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -551,6 +561,11 @@ public class SearchWindow extends JFrame {
         if (StringUtil.isEmpty(searchTarget))
             searchTarget = "true";
         m_searchTargetCB.setSelected(Boolean.valueOf(searchTarget).booleanValue());
+        
+        String searchNotes = Preferences.getPreference(Preferences.SEARCHWINDOW_SEARCH_NOTES);
+        if (StringUtil.isEmpty(searchNotes))
+            searchNotes = "true";
+        m_searchNotesCB.setSelected(Boolean.valueOf(searchNotes).booleanValue());
 
         // TM search
         String tmSearch = Preferences.getPreference(Preferences.SEARCHWINDOW_TM_SEARCH);
@@ -600,6 +615,8 @@ public class SearchWindow extends JFrame {
                 Boolean.toString(m_searchSourceCB.isSelected()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_TARGET,
                 Boolean.toString(m_searchTargetCB.isSelected()));
+        Preferences.setPreference(Preferences.SEARCHWINDOW_SEARCH_NOTES,
+                Boolean.toString(m_searchNotesCB.isSelected()));
         Preferences.setPreference(Preferences.SEARCHWINDOW_TM_SEARCH, Boolean.toString(m_tmSearch)); // don't
                                                                                                      // use
                                                                                                      // radio
@@ -765,7 +782,7 @@ public class SearchWindow extends JFrame {
         m_thread = new SearchThread(this, m_searchField.getText(), root, m_recursiveCB.isSelected(),
                 m_exactSearchRB.isSelected(), m_keywordSearchRB.isSelected(), m_regexpSearchRB.isSelected(),
                 m_caseCB.isSelected(), m_tmSearchCB.isSelected(), m_allResultsCB.isSelected(),
-                m_searchSourceCB.isSelected(), m_searchTargetCB.isSelected(), m_authorCB.isSelected(),
+                m_searchSourceCB.isSelected(), m_searchTargetCB.isSelected(), m_searchNotesCB.isSelected(), m_authorCB.isSelected(),
                 m_authorField.getText(), m_dateFromCB.isSelected(), m_dateFromModel.getDate().getTime(),
                 m_dateToCB.isSelected(), m_dateToModel.getDate().getTime(),
                 ((Integer) m_numberOfResults.getValue()));
@@ -919,6 +936,7 @@ public class SearchWindow extends JFrame {
 
         Mnemonics.setLocalizedText(m_searchSourceCB, OStrings.getString("SW_SEARCH_SOURCE"));
         Mnemonics.setLocalizedText(m_searchTargetCB, OStrings.getString("SW_SEARCH_TARGET"));
+        Mnemonics.setLocalizedText(m_searchNotesCB, OStrings.getString("SW_SEARCH_NOTES"));
 
         Mnemonics.setLocalizedText(m_advancedButton, OStrings.getString("SW_ADVANCED_OPTIONS"));
         Mnemonics.setLocalizedText(m_authorCB, OStrings.getString("SW_AUTHOR"));
@@ -1046,6 +1064,7 @@ public class SearchWindow extends JFrame {
 
     private JCheckBox m_searchSourceCB;
     private JCheckBox m_searchTargetCB;
+    private JCheckBox m_searchNotesCB;
 
     private boolean m_advancedVisible;
 

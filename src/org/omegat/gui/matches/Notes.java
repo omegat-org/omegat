@@ -22,25 +22,16 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  **************************************************************************/
 
-package org.omegat.core.data;
+package org.omegat.gui.notes;
 
 /**
- * Storage for TMX entry.
+ * Class to store notes. Currently only TU-level notes are supported.
  * 
- * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
  */
-public class TMXEntry {
-    public final String source;
-    public final String translation;
-    public final String changer;
-    public final long changeDate;
-    public final String note;
-
-    public TMXEntry(String source, String translation, String changer, long changeDate, String note) {
-        this.source = source;
-        this.translation = translation;
-        this.changer = changer;
-        this.changeDate = changeDate;
-        this.note = note;
-    }
+public class Notes {
+    /**
+     * The note regarding the TU as a whole.
+     */
+    protected String tu;
 }

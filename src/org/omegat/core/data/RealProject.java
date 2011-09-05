@@ -720,32 +720,41 @@ public class RealProject implements IProject {
     /**
      * {@inheritDoc}
      */
-    public void setTranslation(final SourceTextEntry entry, final String trans, boolean isDefault) {
+    public void setTranslation(final SourceTextEntry entry, final String trans, String note, boolean isDefault) {
         String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                 System.getProperty("user.name"));
 
         TMXEntry prevTrEntry = isDefault ? projectTMX.getDefaultTranslation(entry.getSrcText()) : projectTMX
                 .getMultipleTranslation(entry.getKey());
+        
+        if ( note == null ) {
+            //note could not be fetched from notes pane, because another sourcetextentry was already loaded
+            //keep old note:
+            if (prevTrEntry != null) {
+                note = prevTrEntry.note;
+            }
+        }
 
         // don't change anything if nothing has changed
         if (prevTrEntry == null) {
-            if ("".equals(trans)) {
+            if ("".equals(trans) && "".equals(note)) {
                 return;
             }
         } else {
-            if (trans.equals(prevTrEntry.translation)) {
+            if ( (trans.equals(prevTrEntry.translation))
+               && 
+                 (note == "" && prevTrEntry.note == null || note.equals(prevTrEntry.note))
+               )
+            {
                 return;
             }
         }
 
         m_modifiedFlag = true;
 
-        if (StringUtil.isEmpty(trans)) {
-            projectTMX.setTranslation(entry, null, isDefault);
-        } else {
-            TMXEntry te = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis());
-            projectTMX.setTranslation(entry, te, isDefault);
-        }
+        TMXEntry te = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis(), note);
+        projectTMX.setTranslation(entry, te, isDefault);
+
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation : null;
 
         /**
@@ -964,7 +973,7 @@ public class RealProject implements IProject {
 
             if (!StringUtil.isEmpty(segmentTranslation)) {
                 // projectTMX doesn't exist yet, so we have to store in temp map
-                sourceTranslations.put(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0));
+                sourceTranslations.put(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0, null));
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, comment);
             allProjectEntries.add(srcTextEntry);
@@ -978,7 +987,7 @@ public class RealProject implements IProject {
             if (StringUtil.isEmpty(translation)) {
                 return;
             }
-            fileTMXentries.add(new TMXEntry(source, translation, null, 0));
+            fileTMXentries.add(new TMXEntry(source, translation, null, 0, null));
         }
     };
 
@@ -1018,7 +1027,7 @@ public class RealProject implements IProject {
                     transS = "[" + filter.getFuzzyMark() + "] " + transS;
                 }
 
-                data.put(sourceS, new TMXEntry(sourceS, transS, null, 0));
+                data.put(sourceS, new TMXEntry(sourceS, transS, null, 0, null));
             }
         }
     }

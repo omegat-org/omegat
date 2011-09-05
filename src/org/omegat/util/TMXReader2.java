@@ -95,6 +95,7 @@ public class TMXReader2 {
     private List<Tuv> currentTuTuvs = new ArrayList<Tuv>();
 
     StringBuilder propContent = new StringBuilder();
+    StringBuilder noteContent = new StringBuilder();
     StringBuilder segContent = new StringBuilder();
     StringBuilder segInlineTag = new StringBuilder();
     // map of 'i' attributes to tag numbers
@@ -157,6 +158,8 @@ public class TMXReader2 {
                     currentTuTuvs.add(parseTuv(eStart));
                 } else if ("prop".equals(eStart.getName().getLocalPart())) {
                     parseProp(eStart);
+                } else if ("note".equals(eStart.getName().getLocalPart())) {
+                    parseNote(eStart);
                 }
                 break;
             case XMLEvent.END_ELEMENT:
@@ -207,6 +210,27 @@ public class TMXReader2 {
                 if ("tuv".equals(eEnd.getName().getLocalPart())) {
                     return tuv;
                 }
+                break;
+            }
+        }
+    }
+    
+    protected void parseNote(StartElement element) throws Exception {
+        noteContent.setLength(0);
+
+        while (true) {
+            XMLEvent e = xml.nextEvent();
+            switch (e.getEventType()) {
+            case XMLEvent.END_ELEMENT:
+                EndElement eEnd = (EndElement) e;
+                if ("note".equals(eEnd.getName().getLocalPart())) {
+                    currentTu.note=noteContent.toString();
+                    return;
+                }
+                break;
+            case XMLEvent.CHARACTERS:
+                Characters c = (Characters) e;
+                noteContent.append(c.getData());
                 break;
             }
         }
@@ -468,6 +492,7 @@ public class TMXReader2 {
         public long changedate;
         public String creationid;
         public long creationdate;
+        public String note;
         public Map<String, String> props = new TreeMap<String, String>();
 
         void clear() {

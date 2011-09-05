@@ -26,9 +26,13 @@
 			<RelativePosition x="0.6" y="0.7" w="0.4" h="0.3" />
 		</Dockable>
 		<Dockable>
-            <Key dockName="MULTIPLE_TRANS" />
-            <RelativePosition x="0.6" y="0.7" w="0.4" h="0.3" />
-        </Dockable>
+			<Key dockName="MULTIPLE_TRANS" />
+			<RelativePosition x="0.6" y="0.7" w="0.4" h="0.3" />
+		</Dockable>
+		<Dockable>
+			<Key dockName="NOTES" />
+			<RelativePosition x="0.6" y="0.7" w="0.4" h="0.3" />
+		</Dockable>
 	</Border>
 
 	<TabGroups></TabGroups>

@@ -213,7 +213,7 @@ public class ProjectTMX {
 
             synchronized (this) {
                 for (int i = 0; i < sources.size(); i++) {
-                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt);
+                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt, tu.note);
                     EntryKey key = createKeyByProps(tuvSource.text, tu.props);
                     if (key.file == null) {
                         // default translation

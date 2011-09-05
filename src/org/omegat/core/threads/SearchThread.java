@@ -98,13 +98,13 @@ public class SearchThread extends Thread implements Searcher.ISearchCheckStop {
      */
     public SearchThread(SearchWindow window, String text, String rootDir, boolean recursive, boolean exact,
             boolean keyword, boolean regex, boolean caseSensitive, boolean tm, boolean allResults,
-            boolean searchSource, boolean searchTarget, boolean searchAuthor, String author,
+            boolean searchSource, boolean searchTarget, boolean searchNotes, boolean searchAuthor, String author,
             boolean searchDateAfter, long dateAfter, boolean searchDateBefore, long dateBefore,
             int numberOfResults) {
         m_window = window;
 
         m_searchExpression = new SearchExpression(text, rootDir, recursive, exact, keyword, regex,
-                caseSensitive, tm, allResults, searchSource, searchTarget, searchAuthor, author,
+                caseSensitive, tm, allResults, searchSource, searchTarget, searchNotes, searchAuthor, author,
                 searchDateAfter, dateAfter, searchDateBefore, dateBefore, numberOfResults);
     }
 

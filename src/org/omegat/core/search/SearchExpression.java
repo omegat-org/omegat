@@ -61,6 +61,7 @@ public class SearchExpression {
         this.allResults = false;
         this.searchSource = true;
         this.searchTarget = true;
+        this.searchNotes = true;
         this.searchAuthor = false;
         this.author = "";
         this.searchDateAfter = false;
@@ -97,6 +98,8 @@ public class SearchExpression {
      *            Search in source text
      * @param searchTarget
      *            Search in target text
+     * @param searchNotes
+     *            Search in notes
      * @param searchAuthor
      *            Search for tmx segments modified by author id/name
      * @param author
@@ -114,7 +117,7 @@ public class SearchExpression {
      */
     public SearchExpression(String text, String rootDir, boolean recursive, boolean exact, boolean keyword,
             boolean regex, boolean caseSensitive, boolean tm, boolean allResults, boolean searchSource,
-            boolean searchTarget, boolean searchAuthor, String author, boolean searchDateAfter,
+            boolean searchTarget, boolean searchNotes, boolean searchAuthor, String author, boolean searchDateAfter,
             long dateAfter, boolean searchDateBefore, long dateBefore, int numberOfResults) {
         this.text = text;
         this.rootDir = rootDir;
@@ -127,6 +130,7 @@ public class SearchExpression {
         this.allResults = allResults;
         this.searchSource = searchSource;
         this.searchTarget = searchTarget;
+        this.searchNotes = searchNotes;
         this.searchAuthor = searchAuthor;
         this.author = author;
         this.searchDateAfter = searchDateAfter;
@@ -147,6 +151,7 @@ public class SearchExpression {
     public boolean allResults;
     public boolean searchSource;
     public boolean searchTarget;
+    public boolean searchNotes;
     public boolean searchAuthor;
     public String author;
     public boolean searchDateAfter;

@@ -48,6 +48,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.multtrans.MultipleTransPane;
+import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
 
@@ -79,6 +80,7 @@ public class Core {
     private static MachineTranslateTextArea machineTranslatePane;
     private static DictionariesTextArea dictionaries;
     private static MultipleTransPane multiple;
+    private static NotesTextArea notes;
 
     private static Map<String, String> cmdLineParams;
 
@@ -131,6 +133,11 @@ public class Core {
     public static GlossaryTextArea getGlossary() {
         return glossary;
     }
+    
+    /** Get notes instance. */
+    public static NotesTextArea getNotes() {
+        return notes;
+    }
 
     /**
      * Initialize application components.
@@ -150,6 +157,7 @@ public class Core {
         tagValidation = new TagValidationTool(me);
         matcher = new MatchesTextArea(me);
         glossary = new GlossaryTextArea();
+        notes = new NotesTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea();
         dictionaries = new DictionariesTextArea();
         spellChecker = new SpellChecker();

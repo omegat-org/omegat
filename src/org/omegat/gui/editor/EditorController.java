@@ -704,14 +704,17 @@ public class EditorController implements IEditor {
 
             TMXEntry oldTE = Core.getProject().getTranslation(entry);
             String old_translation = oldTE != null ? oldTE.translation : "";
+            
+            String note = Core.getNotes().getText(entry);
+            Core.getNotes().clear();
 
             // update memory
             if (newTrans.equals(entry.getSrcText())
                     && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
-                Core.getProject().setTranslation(entry, "", sb.isDefaultTranslation());
+                Core.getProject().setTranslation(entry, "", note, sb.isDefaultTranslation());
                 newTrans = "";
             } else {
-                Core.getProject().setTranslation(entry, newTrans, sb.isDefaultTranslation());
+                Core.getProject().setTranslation(entry, newTrans, note, sb.isDefaultTranslation());
             }
 
             m_docSegList[displayedEntryIndex].createSegmentElement(false);
@@ -1393,7 +1396,8 @@ public class EditorController implements IEditor {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
 
         if (!alternate) {
-            Core.getProject().setTranslation(sb.getSourceTextEntry(), "", false);
+            SourceTextEntry ste = sb.getSourceTextEntry();
+            Core.getProject().setTranslation(ste, "", Core.getNotes().getText(ste), false);
             sb.setDefaultTranslation(true);
         } else {
             sb.setDefaultTranslation(false);

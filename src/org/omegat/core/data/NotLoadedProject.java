@@ -125,7 +125,7 @@ public class NotLoadedProject implements IProject {
     public void saveProjectProperties() throws IOException {
     }
 
-    public void setTranslation(SourceTextEntry entry, String trans, boolean isDefault) {
+    public void setTranslation(SourceTextEntry entry, String trans, String note, boolean isDefault) {
     }
 
     public ITokenizer getSourceTokenizer() {

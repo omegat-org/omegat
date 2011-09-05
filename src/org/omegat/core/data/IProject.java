@@ -108,7 +108,7 @@ public interface IProject {
      * @param isDefault
      *            true if default translation should be changed
      */
-    void setTranslation(SourceTextEntry entry, String trans, boolean isDefault);
+    void setTranslation(SourceTextEntry entry, String trans, String note, boolean isDefault);
 
     /**
      * Get statistics for project.

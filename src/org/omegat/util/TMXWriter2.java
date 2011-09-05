@@ -163,6 +163,19 @@ public class TMXWriter2 {
                 xml.writeCharacters("\n");
             }
         }
+        
+        // add note
+        if (entry.note != null && !entry.note.equals("")) {
+            String note = StaticUtils.fixChars(entry.note);
+            if (forceValidTMX) {
+                note = StaticUtils.stripTags(note);
+            }
+            xml.writeCharacters("      ");
+            xml.writeStartElement("note");
+            xml.writeCharacters(note);
+            xml.writeEndElement(); // prop
+            xml.writeCharacters("\n");
+        }
 
         source = StaticUtils.fixChars(source);
         translation = StaticUtils.fixChars(translation);

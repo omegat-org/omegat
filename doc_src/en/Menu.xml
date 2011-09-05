@@ -67,7 +67,7 @@
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
-        <colspec align="left" colnum="2" colwidth="80" />
+        <colspec align="left" colnum="2" colwidth="100" />
 
         <tbody>
           <row>
@@ -237,7 +237,7 @@
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
-        <colspec align="left" colnum="2" colwidth="80" />
+        <colspec align="left" colnum="2" colwidth="100" />
 
         <tbody>
           <row>
@@ -289,7 +289,7 @@
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
-        <colspec align="left" colnum="2" colwidth="80" />
+        <colspec align="left" colnum="2" colwidth="100" />
 
         <tbody>
           <row>
@@ -504,7 +504,7 @@
       <tgroup cols="3" colsep="1">
         <colspec align="left" colnum="1" colwidth="100" />
 
-        <colspec align="left" colnum="2" colwidth="80" />
+        <colspec align="left" colnum="2" colwidth="100" />
 
         <tbody>
           <row>
@@ -947,7 +947,7 @@
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
-          <colspec align="left" colnum="2" colwidth="80" />
+          <colspec align="left" colnum="2" colwidth="100" />
 
           <tbody>
             <row>
@@ -1039,7 +1039,7 @@
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
-          <colspec align="left" colnum="2" colwidth="80" />
+          <colspec align="left" colnum="2" colwidth="100" />
 
           <tbody>
             <row>
@@ -1192,7 +1192,7 @@
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
-          <colspec align="left" colnum="2" colwidth="80" />
+          <colspec align="left" colnum="2" colwidth="100" />
 
           <tbody>
             <row>
@@ -1285,7 +1285,7 @@
         <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100" />
 
-          <colspec align="left" colnum="2" colwidth="80" />
+          <colspec align="left" colnum="2" colwidth="100" />
 
           <tbody>
             <row>

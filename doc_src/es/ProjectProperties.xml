@@ -16,8 +16,11 @@
       <title>Ventana Propiedades del proyecto</title>
 
       <mediaobject>
-        <imageobject>
+        <imageobject role="html">
           <imagedata fileref="images/NewProject.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject.png" width="80%" />
         </imageobject>
       </mediaobject>
     </figure>

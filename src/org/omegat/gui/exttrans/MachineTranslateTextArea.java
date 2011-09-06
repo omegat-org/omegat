@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.gui.common.EntryInfoPane;
@@ -111,8 +112,13 @@ public class MachineTranslateTextArea extends EntryInfoPane<MachineTranslationIn
 
         @Override
         protected MachineTranslationInfo search() throws Exception {
-            Language source = Core.getProject().getProjectProperties().getSourceLanguage();
-            Language target = Core.getProject().getProjectProperties().getTargetLanguage();
+            Language source=null;
+            Language target=null;
+            ProjectProperties pp = Core.getProject().getProjectProperties();
+            if (pp != null){
+                 source = pp.getSourceLanguage();
+                 target = pp.getTargetLanguage();
+             }
             if (source == null || target == null) {
                 return null;
             }

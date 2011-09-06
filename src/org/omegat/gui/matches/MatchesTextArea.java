@@ -46,6 +46,7 @@ import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringData;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.NearString;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
@@ -225,7 +226,11 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements 
 
         NearString match = matches.get(activeMatch);
         // List tokens = match.str.getSrcTokenList();
-        Token[] tokens = Core.getProject().getSourceTokenizer().tokenizeAllExactly(match.source);
+        ITokenizer tokenizer = Core.getProject().getSourceTokenizer();
+        if (tokenizer == null) {
+            return;
+        }
+        Token[] tokens = tokenizer.tokenizeAllExactly(match.source);
         // fix for bug 1586397
         byte[] attributes = match.attr;
         for (int i = 0; i < tokens.length; i++) {

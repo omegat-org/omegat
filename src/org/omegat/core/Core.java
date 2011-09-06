@@ -166,8 +166,6 @@ public class Core {
         SaveThread th = new SaveThread();
         saveThread = th;
         th.start();
-
-        SRX.getSRX();
     }
 
     /**
@@ -178,8 +176,6 @@ public class Core {
 
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
-
-        SRX.getSRX();
     }
 
     /**

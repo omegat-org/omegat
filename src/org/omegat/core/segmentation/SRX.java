@@ -61,7 +61,7 @@ public class SRX implements Serializable, Cloneable {
 
     private static SRX srx = null;
     private static final String CONF_SENTSEG = "segmentation.conf";
-    private static final File configFile = new File(StaticUtils.getConfigDir() + CONF_SENTSEG);
+    private File configFile;
 
     /** Context for JAXB rules processing. */
     protected static final JAXBContext SRX_JAXB_CONTEXT;
@@ -90,7 +90,9 @@ public class SRX implements Serializable, Cloneable {
      */
     public static SRX getSRX() {
         if (srx == null) {
-            srx = load();
+            File configFile = new File(StaticUtils.getConfigDir() + CONF_SENTSEG);
+            srx = load(configFile);
+            srx.configFile = configFile;
         }
         return srx;
     }
@@ -99,15 +101,19 @@ public class SRX implements Serializable, Cloneable {
      * Reloads SRX rules from disk.
      */
     public static void reload() {
-        srx = load();
+        File configFile = new File(StaticUtils.getConfigDir() + CONF_SENTSEG);
+        srx = load(configFile);
+        srx.configFile = configFile;
     }
 
     /**
      * Initializes SRX rules to defaults.
      */
-    public static void init() {
-        srx = new SRX();
-        srx.initDefaults();
+    public void init() {
+        this.mappingRules = new ArrayList<MapRule>();
+        this.includeEndingTags=true;
+        this.segmentSubflows=true;
+        initDefaults();
     }
 
     /**
@@ -119,12 +125,32 @@ public class SRX implements Serializable, Cloneable {
     }
 
     /**
+     * Returns an instance for project-specific settings. If the project 
+     * specific config file exits, those settings are read. If not, then the 
+     * normal settings are read for initialization.
+     *  
+     * @param configDir
+     * @return
+     */
+    public static SRX getProjectSRX(String configDir) {
+        File configFile = new File(configDir + CONF_SENTSEG);
+        SRX srx;
+        if (configFile.exists()) {
+            srx = load(configFile);
+        } else {
+            srx = load(new File(StaticUtils.getConfigDir() + CONF_SENTSEG));
+        }
+        srx.configFile = configFile;
+        return srx;
+    }
+
+    /**
      * Saves segmentation rules.
      */
     public void save() {
         try {
             setVersion(CURRENT_VERSION);
-            XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(configFile));
+            XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(this.configFile));
             xmlenc.writeObject(this);
             xmlenc.close();
         } catch (IOException ioe) {
@@ -135,6 +161,17 @@ public class SRX implements Serializable, Cloneable {
                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    /**
+     * Deletes the config file. Use when removing project specific segmentation rules 
+     * (i.e. this SRX is project-specific) 
+     */
+    public void deleteConfig() {
+        if (this.configFile.exists()) {
+            this.configFile.delete();
+        }
+    }
+
 
     /**
      * Loads segmentation rules from an XML file. If there's an error loading a
@@ -144,7 +181,7 @@ public class SRX implements Serializable, Cloneable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    private static SRX load() {
+    private static SRX load(File configFile) {
         SRX res;
         try {
 
@@ -185,8 +222,18 @@ public class SRX implements Serializable, Cloneable {
         }
         return res;
     }
+    
+    /**
+     * Does a config file already exists for the project at the given location?
+     * @param configDir the project directory for storage of settings file
+     */
+    public static boolean projectConfigFileExists(String configDir) {
+        File configFile = new File(configDir + CONF_SENTSEG);
+        return configFile.exists();
+    }
 
-    /** Merges two sets of segmnetation rules together. */
+
+    /** Merges two sets of segmentation rules together. */
     private static SRX merge(SRX current, SRX defaults) {
         current = upgrade(current, defaults);
 
@@ -354,11 +401,11 @@ public class SRX implements Serializable, Cloneable {
     /**
      * Finds the rules for a certain language.
      * <p>
-     * Usually (if the user didn't skrew up the setup) there're a default
+     * Usually (if the user didn't screw up the setup) there're a default
      * segmentation rules, so it's a good idea to rely on this method always
      * returning at least some rules.
      * <p>
-     * Or in case of a completely screwd setup -- an empty list without any
+     * Or in case of a completely screwed setup -- an empty list without any
      * rules.
      */
     public List<Rule> lookupRulesForLanguage(Language srclang) {

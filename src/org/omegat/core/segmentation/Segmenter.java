@@ -33,6 +33,8 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.omegat.core.Core;
+import org.omegat.core.data.IProject;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
 
@@ -44,6 +46,8 @@ import org.omegat.util.PatternConsts;
  * @author Maxym Mykhalchuk
  */
 public final class Segmenter {
+    
+    public static SRX srx;
     /** private to disallow creation */
     private Segmenter() {
     }
@@ -112,7 +116,7 @@ public final class Segmenter {
      *            list to store rules that account to breaks
      */
     private static List<String> breakParagraph(Language lang, String paragraph, List<Rule> brules) {
-        List<Rule> rules = SRX.getSRX().lookupRulesForLanguage(lang);
+        List<Rule> rules = Segmenter.srx.lookupRulesForLanguage(lang);
         if (brules == null)
             brules = new ArrayList<Rule>();
 

@@ -33,6 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.omegat.core.matching.ITokenizer;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.filters2.master.FilterMaster;
 
@@ -204,9 +205,30 @@ public interface IProject {
     public interface MultipleTranslationsIterator {
         void iterate(EntryKey source, TMXEntry trans);
     }
-    
+
+    /**
+     * Returns the project specific FilterMaster, if it exists.
+     */
     public FilterMaster getFilterMaster();
 
+    /**
+     * Sets new file filter configuration for the project
+     */
     public void setConfig(Filters filters);
+
+    /**
+     * Returns project specific segmentation rules if they exist.
+     */
+    public SRX getSRX();
+    
+    /**
+     * Sets new project specific segmentation rules.
+     */
+    public void setSRX(SRX srx);
+
+    /**
+     * Returns the directory where segmentation rules should be stored.
+     */
+    public String getSegmentationConfigDir();
 
 }

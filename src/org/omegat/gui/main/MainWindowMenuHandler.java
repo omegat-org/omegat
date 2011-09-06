@@ -143,10 +143,6 @@ public class MainWindowMenuHandler {
         ProjectUICommands.projectEditProperties();
     }
 
-    public void filtersMenuItemActionPerformed() {
-        ProjectUICommands.projectEditFileFilterOptions();
-    }
-
     public void viewFileListMenuItemActionPerformed() {
         if (mainWindow.m_projWin == null) {
             mainWindow.menu.viewFileListMenuItem.setSelected(false);
@@ -602,11 +598,11 @@ public class MainWindowMenuHandler {
      * Displays the segmentation setup dialog to allow customizing the segmentation rules in detail.
      */
     public void optionsSentsegMenuItemActionPerformed() {
-        SegmentationCustomizer segment_window = new SegmentationCustomizer(mainWindow);
+        SegmentationCustomizer segment_window = new SegmentationCustomizer(mainWindow, false, null);
         segment_window.setVisible(true);
 
         if (segment_window.getReturnStatus() == SegmentationCustomizer.RET_OK
-                && Core.getProject().isProjectLoaded()) {
+                && Core.getProject().isProjectLoaded() && Core.getProject().getSRX()==null) {
             // asking to reload a project
             int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
                     OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);

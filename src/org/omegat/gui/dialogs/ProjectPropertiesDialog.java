@@ -37,15 +37,16 @@ import java.io.File;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -55,6 +56,7 @@ import javax.swing.border.EtchedBorder;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
@@ -140,7 +142,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
         // source and target languages
         Box localesBox = Box.createVerticalBox();
-        localesBox.setBorder(new EtchedBorder());
+        localesBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), OStrings.getString("PP_LANGUAGES") ));
 
         JLabel m_sourceLocaleLabel = new JLabel();
         Mnemonics.setLocalizedText(m_sourceLocaleLabel, OStrings.getString("PP_SRC_LANG"));
@@ -174,6 +176,14 @@ public class ProjectPropertiesDialog extends JDialog {
         m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
         localesBox.add(m_targetLocaleField);
 
+        centerBox.add(localesBox);
+
+        // options
+        centerBox.add(Box.createVerticalStrut(5));
+        Box optionsBox = Box.createVerticalBox();
+        optionsBox.setBorder(new EtchedBorder());
+        optionsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), OStrings.getString("PP_OPTIONS") ));
+        
         // sentence-segmenting
         final JCheckBox m_sentenceSegmentingCheckBox = new JCheckBox();
         Mnemonics
@@ -186,24 +196,33 @@ public class ProjectPropertiesDialog extends JDialog {
         bSent.add(m_sentenceSegmentingCheckBox);
         bSent.add(Box.createHorizontalGlue());
         bSent.add(m_sentenceSegmentingButton);
-        localesBox.add(bSent);
+        optionsBox.add(bSent);
+        
+        //File Filters
+        JButton m_fileFiltersButton = new JButton();
+        Mnemonics.setLocalizedText(m_fileFiltersButton, OStrings.getString("WM_PROJECTMENU_FILEFILTERS"));
 
-        centerBox.add(localesBox);
+        Box bFF = Box.createHorizontalBox();
+        bFF.add(Box.createHorizontalGlue());
+        bFF.add(m_fileFiltersButton);
+        optionsBox.add(bFF);
 
-        // multiple translations
-        centerBox.add(Box.createVerticalStrut(5));
-        JPanel multBox = new JPanel(new BorderLayout());
-        multBox.setBorder(new EtchedBorder());
+        //multiple translations
         final JCheckBox m_allowDefaultsCheckBox = new JCheckBox();
         Mnemonics.setLocalizedText(m_allowDefaultsCheckBox, OStrings.getString("PP_ALLOW_DEFAULTS"));
-        multBox.add(m_allowDefaultsCheckBox);
-        centerBox.add(multBox, BorderLayout.WEST);
+        Box bMT = Box.createHorizontalBox();
+        bMT.setBorder(emptyBorder);
+        bMT.add(m_allowDefaultsCheckBox);
+        bMT.add(Box.createHorizontalGlue());
+        optionsBox.add(bMT);
+
+        centerBox.add(optionsBox, BorderLayout.WEST);
 
         // directories
         centerBox.add(Box.createVerticalStrut(5));
 
         Box dirsBox = Box.createVerticalBox();
-        dirsBox.setBorder(new EtchedBorder());
+        dirsBox.setBorder(BorderFactory.createTitledBorder(BorderFactory.createEtchedBorder(), OStrings.getString("PP_DIRECTORIES") ));
 
         JLabel m_srcRootLabel = new JLabel();
         Mnemonics.setLocalizedText(m_srcRootLabel, OStrings.getString("PP_SRC_ROOT"));
@@ -336,7 +355,24 @@ public class ProjectPropertiesDialog extends JDialog {
         final JDialog self = this;
         m_sentenceSegmentingButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new SegmentationCustomizer(self).setVisible(true);
+                SegmentationCustomizer segmentationCustomizer = new SegmentationCustomizer(self, true, Core.getProject().getSegmentationConfigDir());
+                segmentationCustomizer.setVisible(true);
+                if (segmentationCustomizer.getReturnStatus()==SegmentationCustomizer.RET_OK) {
+                    Core.getProject().setSRX(segmentationCustomizer.getSRX());
+                }
+            }
+        });
+        
+        m_fileFiltersButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
+                FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true);
+                dlg.setVisible(true);
+                if (dlg.result != null) {
+                    // saving config
+                    Core.getProject().setConfig(dlg.result);
+                }
+
             }
         });
 

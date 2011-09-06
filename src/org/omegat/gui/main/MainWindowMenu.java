@@ -148,11 +148,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         projectMenu.add(projectCompileMenuItem = createMenuItem("TF_MENU_FILE_COMPILE"));
         projectMenu.add(new JSeparator());
         projectMenu.add(projectEditMenuItem = createMenuItem("MW_PROJECTMENU_EDIT"));
-        projectMenu.add(projectOptionsSubMenu = createMenu("MW_PROJECTMENU_OPTIONS"));
         projectMenu.add(viewFileListMenuItem = createMenuItem("TF_MENU_FILE_PROJWIN"));
         projectExitMenuItem = createMenuItem("TF_MENU_FILE_QUIT");
-
-        projectOptionsSubMenu.add(filtersMenuItem = createMenuItem("WM_PROJECTMENU_FILEFILTERS"));
 
         // all except MacOSX
         if (!StaticUtils.onMacOSX()) {
@@ -417,7 +414,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
 
         JMenuItem[] itemsToSwitchOn = new JMenuItem[] { projectImportMenuItem, projectWikiImportMenuItem,
                 projectReloadMenuItem, projectCloseMenuItem, projectSaveMenuItem, projectEditMenuItem,
-                projectOptionsSubMenu, projectCompileMenuItem,
+                projectCompileMenuItem,
 
                 editMenu, editFindInProjectMenuItem, editInsertSourceMenuItem, editInsertTranslationMenuItem,
                 editTagPainterMenuItem, editOverwriteSourceMenuItem, editOverwriteTranslationMenuItem,
@@ -472,7 +469,6 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem editTagPainterMenuItem;
     JMenuItem editExportSelectionMenuItem;
     JMenuItem editCreateGlossaryEntryMenuItem;
-    JMenuItem filtersMenuItem;
     public JMenuItem gotoHistoryBackMenuItem;
     public JMenuItem gotoHistoryForwardMenuItem;
     JMenu gotoMenu;
@@ -511,7 +507,6 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenu projectMenu;
     JMenuItem projectNewMenuItem;
     JMenuItem projectOpenMenuItem;
-    JMenu projectOptionsSubMenu;
     JMenuItem projectReloadMenuItem;
     JMenuItem projectSaveMenuItem;
     JMenuItem projectWikiImportMenuItem;

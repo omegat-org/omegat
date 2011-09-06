@@ -302,24 +302,6 @@ public class ProjectUICommands {
             }
         }.execute();
     }
-    
-    public static void projectEditFileFilterOptions() {
-        performProjectMenuItemPreConditions();
-
-        JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
-        FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true);
-        dlg.setVisible(true);
-        if (dlg.result != null) {
-            // saving config
-            Core.getProject().setConfig(dlg.result);
-
-            // asking to reload a project
-            int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
-                    OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
-            if (res == JOptionPane.YES_OPTION)
-                ProjectUICommands.projectReload();
-        }
-    }
 
     public static void projectCompile() {
         performProjectMenuItemPreConditions();

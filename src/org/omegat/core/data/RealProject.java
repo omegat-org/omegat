@@ -56,6 +56,8 @@ import org.omegat.core.CoreEvents;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
@@ -116,6 +118,10 @@ public class RealProject implements IProject {
      * If project uses project-specific file filters, the filterMaster is set, containing the file filter settings
      */
     private FilterMaster filterMaster;
+    /**
+     * If project uses project-specific segmentation rules, the srx is set;
+     */
+    private SRX srx;
 
     /**
      * Storage for all translation memories, which shouldn't be changed and saved, i.e. for /tm/*.tmx files,
@@ -210,6 +216,14 @@ public class RealProject implements IProject {
             //set project specific file filters if they exist
             if (FilterMaster.projectConfigFileExists(m_config.getProjectInternal())) {
                 this.filterMaster = FilterMaster.getProjectInstance(m_config.getProjectInternal());
+            }
+            
+            //set project specific segmentation rules if they exist
+            if (SRX.projectConfigFileExists(m_config.getProjectInternal())) {
+                this.srx = SRX.getProjectSRX(m_config.getProjectInternal());
+                Segmenter.srx = this.srx;
+            } else {
+                Segmenter.srx = SRX.getSRX();
             }
 
             Map<EntryKey, TMXEntry> sourceTranslations = new HashMap<EntryKey, TMXEntry>();
@@ -1077,5 +1091,25 @@ public class RealProject implements IProject {
             return FilterMaster.getInstance();
         }
         return this.filterMaster;
+    }
+
+    public SRX getSRX() {
+        return this.srx;
+    }
+    
+    public void setSRX(SRX srx) {
+        if (srx == null) {
+            if (this.srx != null) {
+                this.srx.deleteConfig();
+            }
+            Segmenter.srx = SRX.getSRX();
+        } else {
+            Segmenter.srx = srx;
+        }
+        this.srx = srx;
+    }
+    
+    public String getSegmentationConfigDir() {
+        return this.m_config.getProjectInternal();
     }
 }

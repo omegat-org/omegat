@@ -113,6 +113,7 @@ public class NotesTextArea extends EntryInfoPane<Notes> implements FocusListener
     @Override
     protected void onProjectClose() {
         clear();
+        this.setText(explanation);
     }
 
 
@@ -120,7 +121,7 @@ public class NotesTextArea extends EntryInfoPane<Notes> implements FocusListener
     public void clear() {
         UIThreadsUtil.mustBeSwingThread();
         synchronized (this) {
-            this.setText(this.explanation);
+            this.setText("");
             this.setEditable(false);
             this.ste = null;
         }

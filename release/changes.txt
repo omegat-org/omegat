@@ -21,7 +21,7 @@
   - Project-specific file filters
   http://sourceforge.net/support/tracker.php?aid=3404303
   
-  - Project specific segmentation rules
+  - Project-specific segmentation rules
   http://sourceforge.net/support/tracker.php?aid=3405056
 
   Other enhancements:

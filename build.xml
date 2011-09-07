@@ -309,6 +309,24 @@
     <!-- Builds all OmegaT products -->
     <target name="all" depends="l10n-pack,src,jar,zip,win,linux,mac" />
 
+    <target name="checksums" description="Compute the checksum for files"><!--depends="l10n-pack,src,jar,zip,win,linux,mac"--> 
+        <mkdir dir="dist2/checksums"/>
+
+        <!-- Adjust the fileset according to what is needed to be checksumed -->
+        <fileset dir="dist2" id="checksum_source">
+            <include name="*.zip"/>            
+            <include name="*.exe"/>
+        </fileset>
+
+        <checksum todir="dist2/checksums" algorithm="SHA-512">
+          <fileset refid="checksum_source"/>
+        </checksum>
+        <checksum todir="dist2/checksums" algorithm="MD5">
+          <fileset refid="checksum_source"/>
+        </checksum>
+    </target>
+
+
 	<target name="gen">
 		<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
 			<classpath>

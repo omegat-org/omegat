@@ -27,8 +27,6 @@
 package org.omegat.gui.notes;
 
 import java.awt.Dimension;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -45,7 +43,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Martin Fleurke
  */
-public class NotesTextArea extends EntryInfoPane<Notes> implements FocusListener {
+public class NotesTextArea extends EntryInfoPane<Notes> {
 
     private static final long serialVersionUID = 1L;
 
@@ -56,8 +54,6 @@ public class NotesTextArea extends EntryInfoPane<Notes> implements FocusListener
     /** Creates new Notes Text Area Pane */
     public NotesTextArea(MainWindow mw) {
         super(true);
-
-        this.addFocusListener(this);
 
         String title = OStrings.getString("GUI_NOTESWINDOW_SUBWINDOWTITLE_Notes");
         mw.addDockable(new DockableScrollPane("NOTES", title, this, true));
@@ -127,14 +123,6 @@ public class NotesTextArea extends EntryInfoPane<Notes> implements FocusListener
         }
     }
 
-    public void focusGained(FocusEvent e) {
-        //do nothing special
-    }
-
-    public void focusLost(FocusEvent e) {
-        //do nothing special
-    }
-    
     public String getText(SourceTextEntry ste) {
         synchronized (this) {
             if (this.ste != null && ste.equals(this.ste)) {

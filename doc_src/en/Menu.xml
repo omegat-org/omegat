@@ -179,14 +179,6 @@
           </row>
 
           <row>
-            <entry><guimenuitem>Options</guimenuitem></entry>
-
-            <entry>File filters: Displays the <link linkend="chapter.file.filters">File
-            filters</link> dialogue to configure project-specific file handling
-            and parsing.</entry>
-          </row>
-
-          <row>
             <entry><guimenuitem>Project Files...</guimenuitem></entry>
 
             <entry><keycombo>
@@ -698,7 +690,7 @@
             <entry><guimenu>Ctrl+T</guimenu>: Checks for missing or displaced
             tags in formatted files. Will display a list of segments with tag
             errors and possible inconsistencies. See <link
-            linkend="section.tag.validation">Tag Validation</link> and
+            linkend="section.tag.validation">Tag Validation</link> and 
             <xref linkend="chapter.formatted.text"/>.</entry>
           </row>
 

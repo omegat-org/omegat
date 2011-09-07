@@ -742,7 +742,7 @@ public class RealProject implements IProject {
                 .getMultipleTranslation(entry.getKey());
         
         if ( note == null ) {
-            //note could not be fetched from notes pane, because another sourcetextentry was already loaded
+            //note could not be fetched from notes pane, because another sourcetextentry was already loaded, or no ste was loaded yet (on project refresh)
             //keep old note:
             if (prevTrEntry != null) {
                 note = prevTrEntry.note;
@@ -757,7 +757,7 @@ public class RealProject implements IProject {
         } else {
             if ( (trans.equals(prevTrEntry.translation))
                && 
-                 (note == "" && prevTrEntry.note == null || note.equals(prevTrEntry.note))
+                 ( (note == null || note == "") && prevTrEntry.note == null || (note != null && note.equals(prevTrEntry.note)))
                )
             {
                 return;

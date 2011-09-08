@@ -70,6 +70,9 @@ public class PoFilter extends AbstractFilter {
     protected static Pattern COMMENT_FUZZY = Pattern.compile("#, fuzzy");
     protected static Pattern COMMENT_FUZZY_OTHER = Pattern.compile("#,.* fuzzy.*");
     protected static Pattern COMMENT_NOWRAP = Pattern.compile("#,.* no-wrap.*");
+    protected static Pattern COMMENT_TRANSLATOR = Pattern.compile("# (.*)");
+    protected static Pattern COMMENT_EXTRACTED = Pattern.compile("#\\. (.*)");
+    protected static Pattern COMMENT_REFERENCE = Pattern.compile("#: (.*)");
     protected static Pattern MSG_ID = Pattern.compile("msgid(_plural)?\\s+\"(.*)\"");
     protected static Pattern MSG_STR = Pattern.compile("msgstr(\\[[0-9]+\\])?\\s+\"(.*)\"");
     protected static Pattern MSG_CTX = Pattern.compile("msgctxt\\s+\"(.*)\"");
@@ -80,6 +83,7 @@ public class PoFilter extends AbstractFilter {
     };
 
     private StringBuilder[] sources, targets;
+    private StringBuilder translatorComments, extractedComments, references;
     private String path;
     private boolean nowrap, fuzzy;
 
@@ -174,6 +178,9 @@ public class PoFilter extends AbstractFilter {
         targets = new StringBuilder[2];
         targets[0] = new StringBuilder();
         targets[1] = new StringBuilder();
+        translatorComments = new StringBuilder();
+        extractedComments = new StringBuilder();
+        references = new StringBuilder();
         path = "";
 
         String s;
@@ -254,6 +261,28 @@ public class PoFilter extends AbstractFilter {
                 continue;
             }
 
+            if ((m = COMMENT_REFERENCE.matcher(s)).matches()) {
+                references.append(m.group(1));
+                references.append("\n");
+                eol(s);
+
+                continue;
+            }
+            if ((m = COMMENT_EXTRACTED.matcher(s)).matches()) {
+                extractedComments.append(m.group(1));
+                extractedComments.append("\n");
+                eol(s);
+
+                continue;
+            }
+            if ((m = COMMENT_TRANSLATOR.matcher(s)).matches()) {
+                translatorComments.append(m.group(1));
+                translatorComments.append("\n");
+                eol(s);
+
+                continue;
+            }
+
             if ((m = MSG_OTHER.matcher(s)).matches()) {
                 String text = m.group(1);
                 if (currentMode == null) {
@@ -297,15 +326,25 @@ public class PoFilter extends AbstractFilter {
     protected void align(int pair) {
         String s = unescape(sources[pair].toString());
         String t = unescape(targets[pair].toString());
-        align(s, t);
+        String c = "";
+        if (translatorComments.length() > 0) {
+            c += OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + ":\n" + unescape(translatorComments.toString() + "\n"); 
+        }
+        if (extractedComments.length() > 0) {
+            c += OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + ":\n" + unescape(extractedComments.toString() + "\n"); 
+        }
+        if (references.length() > 0) {
+            c += OStrings.getString("POFILTER_REFERENCES") + ":\n" + unescape(references.toString() + "\n"); 
+        }
+        align(s, t, c);
     }
 
-    protected void align(String source, String translation) {
+    protected void align(String source, String translation, String comments) {
         if (translation.length() == 0) {
             translation = null;
         }
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, source, translation, fuzzy, null, path, this);
+            entryParseCallback.addEntry(null, source, translation, fuzzy, comments, path, this);
         } else if (entryAlignCallback != null) {
             entryAlignCallback.addTranslation(null, source, translation, fuzzy, null, this);
         }
@@ -358,6 +397,9 @@ public class PoFilter extends AbstractFilter {
         targets[0].setLength(0);
         targets[1].setLength(0);
         path = "";
+        translatorComments.setLength(0);
+        extractedComments.setLength(0);
+        references.setLength(0);
     }
 
     protected static final Pattern R1 = Pattern.compile("(?<!\\\\)((\\\\\\\\)*)\\\\\"");

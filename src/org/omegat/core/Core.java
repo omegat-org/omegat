@@ -31,11 +31,11 @@ import java.util.Map;
 
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.NotLoadedProject;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
+import org.omegat.gui.comments.CommentsTextArea;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
 import org.omegat.gui.editor.IEditor;
@@ -78,9 +78,13 @@ public class Core {
 
     private static GlossaryTextArea glossary;
     private static MachineTranslateTextArea machineTranslatePane;
+    @SuppressWarnings("unused")
     private static DictionariesTextArea dictionaries;
+    @SuppressWarnings("unused")
     private static MultipleTransPane multiple;
     private static NotesTextArea notes;
+    @SuppressWarnings("unused")
+    private static CommentsTextArea comments;
 
     private static Map<String, String> cmdLineParams;
 
@@ -152,12 +156,13 @@ public class Core {
         MainWindow me = new MainWindow();
         mainWindow = me;
 
-        // 3. Initialize other components
+        // 3. Initialize other components. They add themselves to the main window.
         editor = new EditorController(me);
         tagValidation = new TagValidationTool(me);
         matcher = new MatchesTextArea(me);
         glossary = new GlossaryTextArea();
         notes = new NotesTextArea(me);
+        comments = new CommentsTextArea(me);
         machineTranslatePane = new MachineTranslateTextArea();
         dictionaries = new DictionariesTextArea();
         spellChecker = new SpellChecker();

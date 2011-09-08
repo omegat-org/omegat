@@ -163,17 +163,17 @@ public class HTMLFilter2 extends AbstractFilter {
     // ////////////////////////////////////////////////////////////////////////
 
     /** Package-internal processEntry to give it to FilterVisitor */
-    String privateProcessEntry(String entry) {
+    String privateProcessEntry(String entry, String comment) {
         if (skipRegExpPattern != null) {
             if (skipRegExpPattern.matcher(entry).matches()) {
                 // System.out.println("Skipping \""+entry+"\"");
                 return entry;
             } else {
                 // System.out.println("Using: \""+entry+"\"");
-                return super.processEntry(entry);
+                return super.processEntry(entry, comment);
             }
         }
-        return super.processEntry(entry);
+        return super.processEntry(entry, comment);
     }
 
     // ////////////////////////////////////////////////////////////////////////

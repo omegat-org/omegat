@@ -41,6 +41,7 @@ import org.htmlparser.Remark;
 import org.htmlparser.Tag;
 import org.htmlparser.Text;
 import org.htmlparser.visitors.NodeVisitor;
+import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.StaticUtils;
 
@@ -209,7 +210,8 @@ public class FilterVisitor extends NodeVisitor {
     protected void maybeTranslateAttribute(Tag tag, String key) {
         String attr = tag.getAttribute(key);
         if (attr != null) {
-            String trans = filter.privateProcessEntry(entitiesToChars(attr));
+            String comment = OStrings.getString("HTMLFILTER_TAG") + ": " + tag.getTagName() + " " + OStrings.getString("HTMLFILTER_ATTRIBUTE") + ": "+ key;
+            String trans = filter.privateProcessEntry(entitiesToChars(attr), comment);
             tag.setAttribute(key, charsToEntities(trans));
         }
     }
@@ -497,7 +499,7 @@ public class FilterVisitor extends NodeVisitor {
         }
 
         // getting the translation
-        String translation = filter.privateProcessEntry(compressed);
+        String translation = filter.privateProcessEntry(compressed, "");
 
         // writing out uncompressed
         if (compressed.equals(translation))

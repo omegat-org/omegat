@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
   
   - View/edit notes on translation units (restore main window to see notes pane)
   http://sourceforge.net/support/tracker.php?aid=3404301
+  
+  - View comments in source files (restore main window to see comments pane)
+  http://sourceforge.net/support/tracker.php?aid=3406286
   
   - Project-specific file filters
   http://sourceforge.net/support/tracker.php?aid=3404303

@@ -455,8 +455,23 @@ public abstract class AbstractFilter implements IFilter {
      * @return Translation of the source string. If there's no translation, returns the source string itself.
      */
     protected final String processEntry(String entry) {
+        return processEntry(entry, null);
+    }
+    /**
+     * Call this method to:
+     * <ul>
+     * <li>Instruct OmegaT what source strings are translatable.
+     * <li>Get the translation of each source string.
+     * </ul>
+     * 
+     * @param entry
+     *            Translatable source string
+     * @param comment comment on the source string in the source file (if available)
+     * @return Translation of the source string. If there's no translation, returns the source string itself.
+     */
+    protected final String processEntry(String entry, String comment) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(null, entry, null, false, null, null, this);
+            entryParseCallback.addEntry(null, entry, null, false, comment, null, this);
             return entry;
         } else {
             String translation = entryTranslateCallback.getTranslation(null, entry, null);

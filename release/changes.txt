@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -26,6 +26,9 @@
   
   - Project-specific segmentation rules
   http://sourceforge.net/support/tracker.php?aid=3405056
+
+  - "Loader" plugin type to load additional GUI components
+  http://sourceforge.net/support/tracker.php?aid=3393897
 
   Other enhancements:
 

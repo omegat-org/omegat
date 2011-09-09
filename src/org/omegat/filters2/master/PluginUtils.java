@@ -52,7 +52,7 @@ import org.omegat.util.StaticUtils;
 public final class PluginUtils {
 
     enum PLUGIN_TYPE {
-        FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, UNKNOWN
+        FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, UNKNOWN
     };
 
     /** Private constructor to disallow creation */
@@ -116,6 +116,15 @@ public final class PluginUtils {
         } catch (Exception ex) {
             Log.log(ex);
         }
+        
+        // run base plugins
+        for (Class<?> pl : basePluginClasses) {
+            try {
+                pl.newInstance();
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
     }
 
     public static List<Class<?>> getFilterClasses() {
@@ -141,6 +150,8 @@ public final class PluginUtils {
     protected static List<Class<?>> markerClasses = new ArrayList<Class<?>>();
 
     protected static List<Class<?>> machineTranslationClasses = new ArrayList<Class<?>>();
+
+    protected static List<Class<?>> basePluginClasses = new ArrayList<Class<?>>();
 
     /**
      * Parse one manifest file.
@@ -187,6 +198,9 @@ public final class PluginUtils {
                 break;
             case MACHINETRANSLATOR:
                 machineTranslationClasses.add(classLoader.loadClass(key));
+                break;
+            case BASE:
+                basePluginClasses.add(classLoader.loadClass(key));
                 break;
             default:
                 Log.logErrorRB("PLUGIN_UNKNOWN", key);

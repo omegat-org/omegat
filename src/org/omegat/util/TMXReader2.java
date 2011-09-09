@@ -353,7 +353,7 @@ public class TMXReader2 {
                 boolean slashBefore = false;
                 boolean slashAfter = false;
                 char tagName = getFirstLetter(segInlineTag);
-                int tagN;
+                Integer tagN;
                 if ("bpt".equals(eEnd.getName().getLocalPart())) {
                     tagN = pairTags.get(currentI);
                 } else if ("ept".equals(eEnd.getName().getLocalPart())) {
@@ -368,6 +368,23 @@ public class TMXReader2 {
                     tagN = tagNumber;
                     if (useSlash) {
                         slashAfter = true;
+                    }
+                }
+                if (tagN == null) {
+                    // check error of TMX reading
+                    Log.logErrorRB("TMX_ERROR_READING_LEVEL2", e.getLocation().getLineNumber(), e
+                            .getLocation().getColumnNumber());
+                    segContent.setLength(0);
+                    // wait for end seg
+                    while (true) {
+                        XMLEvent ev = xml.nextEvent();
+                        switch (ev.getEventType()) {
+                        case XMLEvent.END_ELEMENT:
+                            EndElement evEnd = (EndElement) ev;
+                            if ("seg".equals(evEnd.getName().getLocalPart())) {
+                                return;
+                            }
+                        }
                     }
                 }
 

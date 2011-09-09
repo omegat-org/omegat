@@ -518,6 +518,7 @@ public class TMXReader2 {
             creationid = null;
             creationdate = 0;
             props.clear();
+            note = null;
         }
     }
 

@@ -751,10 +751,12 @@ public class RealProject implements IProject {
 
         // don't change anything if nothing has changed
         if (prevTrEntry == null) {
+            //previously no translation, and currently empty translation and note:
             if ("".equals(trans) && "".equals(note)) {
                 return;
             }
         } else {
+            //previous translation is equal to current translation and (previous note empty and current note empty or previous note equal to current note)
             if ( (trans.equals(prevTrEntry.translation))
                && 
                  ( (note == null || note == "") && prevTrEntry.note == null || (note != null && note.equals(prevTrEntry.note)))
@@ -766,7 +768,12 @@ public class RealProject implements IProject {
 
         m_modifiedFlag = true;
 
-        TMXEntry te = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis(), note);
+        TMXEntry te;
+        if (StringUtil.isEmpty(trans)) {
+            te = new TMXEntry(entry.getSrcText(), null, null, 0, (StringUtil.isEmpty(note) ? null : note));
+        } else {
+            te = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis(), (StringUtil.isEmpty(note) ? null : note));
+        }
         projectTMX.setTranslation(entry, te, isDefault);
 
         String prevTranslation = prevTrEntry != null ? prevTrEntry.translation : null;

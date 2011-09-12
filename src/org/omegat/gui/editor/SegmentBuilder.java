@@ -169,7 +169,7 @@ public class SegmentBuilder {
                                 .isSupportDefaultTranslations();
                     }
                 }
-                transExist = trans != null;
+                transExist = trans != null && trans.translation != null;
 
                 int beginOffset = offset;
                 if (isActive) {
@@ -224,8 +224,12 @@ public class SegmentBuilder {
             posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
 
             if (trans != null) {
-                // translation exist
-                translationText = trans.translation;
+                if (trans.translation!=null) {
+                    //translation exist
+                    translationText = trans.translation;
+                } else {
+                    translationText = "";
+                }
             } else if (!Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
                 // need to insert source text on empty translation
                 translationText = ste.getSrcText();
@@ -275,7 +279,7 @@ public class SegmentBuilder {
             sourceText = ste.getSrcText();
         }
 
-        if (trans != null) {
+        if (trans != null && trans.translation != null) {
             // translation exist
             translationText = trans.translation;
         } else {
@@ -426,7 +430,7 @@ public class SegmentBuilder {
      * @throws BadLocationException
      */
     private void addModificationInfoPart(TMXEntry trans, AttributeSet attrs) throws BadLocationException {
-        if (trans == null)
+        if (trans == null || trans.translation == null)
             return;
 
         String author = (trans.changer == null ? OStrings.getString("TF_CUR_SEGMENT_UNKNOWN_AUTHOR")

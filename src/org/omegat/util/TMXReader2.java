@@ -120,8 +120,12 @@ public class TMXReader2 {
                     StartElement eStart = (StartElement) e;
                     if ("tu".equals(eStart.getName().getLocalPart())) {
                         parseTu(eStart);
-                        if (fillTuv(origTuv, sourceLanguage) && fillTuv(targetTuv, targetLanguage)) {
-                            callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype);
+                        if (fillTuv(origTuv, sourceLanguage)) {
+                            if (fillTuv(targetTuv, targetLanguage)) {
+                                callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype);
+                            } else {
+                                callback.onEntry(currentTu, origTuv, null, isParagraphSegtype);
+                            }
                         }
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
                         parseHeader(eStart);

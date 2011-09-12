@@ -201,15 +201,22 @@ public class ProjectTMX {
 
         public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                 TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-            String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
+            String changer=null;
+            long dt=0;
+            String translation=null;
+
+            if (tuvTarget != null) {
+                changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                     tu.creationid);
-            long dt = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
+                dt = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,
                     tu.creationdate);
+                translation = tuvTarget.text;
+            }
 
             List<String> sources = new ArrayList<String>();
             List<String> targets = new ArrayList<String>();
             Segmenter.segmentEntries(sentenceSegmentingEnabled && isParagraphSegtype, sourceLang,
-                    tuvSource.text, targetLang, tuvTarget.text, sources, targets);
+                    tuvSource.text, targetLang, translation, sources, targets);
 
             synchronized (this) {
                 for (int i = 0; i < sources.size(); i++) {

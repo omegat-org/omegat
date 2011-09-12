@@ -173,19 +173,15 @@ public class TMXWriter2 {
             xml.writeCharacters("      ");
             xml.writeStartElement("note");
             xml.writeCharacters(note);
-            xml.writeEndElement(); // prop
+            xml.writeEndElement(); // note
             xml.writeCharacters("\n");
         }
 
+        // write source segment
         source = StaticUtils.fixChars(source);
-        translation = StaticUtils.fixChars(translation);
-
         if (forceValidTMX) {
             source = StaticUtils.stripTags(source);
-            translation = StaticUtils.stripTags(translation);
         }
-
-        // write source segment
         xml.writeCharacters("      ");
         xml.writeStartElement("tuv");
         if (levelTwo) {
@@ -205,30 +201,37 @@ public class TMXWriter2 {
         xml.writeCharacters("\n");
 
         // write target segment
-        xml.writeCharacters("      ");
-        xml.writeStartElement("tuv");
-        if (levelTwo) {
-            xml.writeAttribute("xml", "", "lang", langTar);
-        } else {
-            xml.writeAttribute("lang", langTar);
-        }
-        if (!StringUtil.isEmpty(entry.changer)) {
-            xml.writeAttribute("changeid", entry.changer);
-        }
-        if (entry.changeDate > 0) {
-            xml.writeAttribute("changedate", tmxDateFormat.format(new Date(entry.changeDate)));
-        }
-        xml.writeCharacters("\n");
+        if (translation != null) {
+            translation = StaticUtils.fixChars(translation);
+            if (forceValidTMX) {
+                translation = StaticUtils.stripTags(translation);
+            }
 
-        if (levelTwo) {
-            writeLevelTwo(translation);
-        } else {
-            writeLevelOne(translation);
+            xml.writeCharacters("      ");
+            xml.writeStartElement("tuv");
+            if (levelTwo) {
+                xml.writeAttribute("xml", "", "lang", langTar);
+            } else {
+                xml.writeAttribute("lang", langTar);
+            }
+            if (!StringUtil.isEmpty(entry.changer)) {
+                xml.writeAttribute("changeid", entry.changer);
+            }
+            if (entry.changeDate > 0) {
+                xml.writeAttribute("changedate", tmxDateFormat.format(new Date(entry.changeDate)));
+            }
+            xml.writeCharacters("\n");
+
+            if (levelTwo) {
+                writeLevelTwo(translation);
+            } else {
+                writeLevelOne(translation);
+            }
+            xml.writeCharacters("\n");
+            xml.writeCharacters("      ");
+            xml.writeEndElement(); // tuv
+            xml.writeCharacters("\n");
         }
-        xml.writeCharacters("\n");
-        xml.writeCharacters("      ");
-        xml.writeEndElement(); // tuv
-        xml.writeCharacters("\n");
 
         xml.writeCharacters("    ");
         xml.writeEndElement(); // tu

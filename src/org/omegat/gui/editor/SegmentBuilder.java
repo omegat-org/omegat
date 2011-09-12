@@ -223,13 +223,9 @@ public class SegmentBuilder {
             addInactiveSegPart(true, sourceText, attrs(true));
             posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
 
-            if (trans != null) {
-                if (trans.translation!=null) {
-                    //translation exist
-                    translationText = trans.translation;
-                } else {
-                    translationText = "";
-                }
+            if (trans != null && trans.translation!=null) {
+                //translation exist
+                translationText = trans.translation;
             } else if (!Preferences.isPreference(Preferences.DONT_INSERT_SOURCE_TEXT)) {
                 // need to insert source text on empty translation
                 translationText = ste.getSrcText();

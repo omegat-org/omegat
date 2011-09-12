@@ -31,6 +31,7 @@ import java.util.regex.Pattern;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.WikiGet;
 
@@ -46,6 +47,8 @@ public class ApertiumTranslate extends BaseTranslate {
     protected static String MARK_END = "\"}";
     protected static Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
     protected static Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
+    protected static Pattern RE_DETAILS = Pattern.compile("\"responseDetails\":\"([^\"]+)");
+    protected static Pattern RE_STATUS = Pattern.compile("\"responseStatus\":([0-9]+)");
 
     @Override
     protected String getPreferenceName() {
@@ -117,6 +120,20 @@ public class ApertiumTranslate extends BaseTranslate {
 
         int beg = v.indexOf(MARK_BEG) + MARK_BEG.length();
         int end = v.indexOf(MARK_END, beg);
+        if (end < 0) {
+            //no translation found. e.g. {"responseData":{"translatedText":null},"responseDetails":"Not supported pair","responseStatus":451}
+            Matcher m = RE_DETAILS.matcher(v);
+            if (!m.find()) {
+                return "";
+            }
+            String details = m.group(1);
+            String code = "";
+            m = RE_STATUS.matcher(v);
+            if (m.find()) {
+                code = m.group(1);
+            }
+            return StaticUtils.format(OStrings.getString("APERTIUM_ERROR"), code, details);
+        }
         String tr = v.substring(beg, end - 2); // Remove \n
         return tr;
     }

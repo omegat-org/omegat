@@ -112,6 +112,7 @@ public class MultipleTransPane extends EntryInfoPane<List<MultipleTransFoundEntr
             DisplayedEntry de = new DisplayedEntry();
             de.entry = e;
             de.start = o.length();
+            if (e.entry.translation == null) continue;
             if (e.key != null) {
                 o += e.entry.translation + '\n';
                 o += "<" + e.key.file;

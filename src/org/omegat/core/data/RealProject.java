@@ -660,8 +660,9 @@ public class RealProject implements IProject {
                             appendFromAutoTMX(newTMX);
                         }
                     } catch (Exception e) {
-                        Log.logErrorRB(e, "TF_TM_LOAD_ERROR");
-                        Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR");
+                        String filename = file.getPath();
+                        Log.logErrorRB(e, "TF_TM_LOAD_ERROR", filename);
+                        Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR", filename);
                     }
                 } else {
                     newTransMemories.remove(file.getPath());

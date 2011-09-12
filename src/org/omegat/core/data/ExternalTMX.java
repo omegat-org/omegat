@@ -55,6 +55,10 @@ public class ExternalTMX {
         TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
             public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                     TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
+
+                if (tuvTarget == null) 
+                    return;
+
                 String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                         tu.creationid);
                 long dt = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,

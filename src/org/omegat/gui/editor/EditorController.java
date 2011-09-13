@@ -586,6 +586,14 @@ public class EditorController implements IEditor {
 
         final int p = lookPrev;
         final int n = lookNext;
+        //scroll a little up and down and then back, in separate thread, else 
+        // gui is not updated!
+        // It can happen that this method is called multiple time in short 
+        // period E.g. on project reload, the first entry is activated, and 
+        // then the last active segment. In between the file can be changed. 
+        // When the first thread starts scrolling (for go to first 
+        // segment), the scrolling could be done for the wrong document, 
+        // possibly causing IllegalArgumentExceptions. They can be ignored.
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 try {
@@ -596,7 +604,11 @@ public class EditorController implements IEditor {
                                 editor.setCaretPosition(p);
                                 SwingUtilities.invokeLater(new Runnable() {
                                     public void run() {
-                                        editor.setCaretPosition(requiredPosition);
+                                        try {
+                                            editor.setCaretPosition(requiredPosition);
+                                        } catch (IllegalArgumentException iae) {
+                                            //ignore; document has changed in the mean time.
+                                        }
                                     }
                                 });
                             } catch (IllegalArgumentException iae) {

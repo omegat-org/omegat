@@ -760,7 +760,7 @@ public class RealProject implements IProject {
             //previous translation is equal to current translation and (previous note empty and current note empty or previous note equal to current note)
             if ( (trans.equals(prevTrEntry.translation))
                && 
-                 ( (note == null || note == "") && prevTrEntry.note == null || (note != null && note.equals(prevTrEntry.note)))
+                 ( (note == null || note.equals("")) && prevTrEntry.note == null || (note != null && note.equals(prevTrEntry.note)))
                )
             {
                 return;

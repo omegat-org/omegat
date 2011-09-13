@@ -249,6 +249,11 @@ public class SpellChecker implements ISpellChecker {
      * Otherwise false.
      */
     public boolean isCorrect(String word) {
+        //check if spellchecker is already initialized. If not, skip checking
+        //to prevent nullPointerErrors.
+        if (checker==null) 
+            return true;
+
         // check in cache first
         synchronized (this) {
             if (incorrectWordsCache.contains(word)) {

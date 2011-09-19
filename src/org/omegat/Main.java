@@ -315,7 +315,7 @@ public class Main {
                 Log.log(e);
                 throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
             }
-
+            p.closeProject();
             System.out.println("Finished");
         } catch (Exception e) {
             System.err.println("An error has occured: " + e.toString());

@@ -469,6 +469,17 @@ public class RealProject implements IProject {
 
             projectTMX.save(m_config, newFile, false, false, true);
 
+            /*
+             * Backup behavior: steps for save some data in file should be:
+             * 
+             * 1. Save data into '*.new' file
+             * 
+             * 2. Rename exist '*.xml' into '*.xml...bak'
+             * 
+             * 3. Rename '*.new' into '*.xml'
+             * 
+             * It will allow to do not break exist files if some error will be produced in the save process.
+             */
             if (backup.exists()) {
                 if (!backup.delete()) {
                     throw new IOException("Error delete backup file");
@@ -490,6 +501,8 @@ public class RealProject implements IProject {
             Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
         }
+        
+        FileUtil.removeOldBackups(orig);
 
         // update statistics
         String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
@@ -546,11 +559,6 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
 
             projectTMX = new ProjectTMX(m_config, tmxFile, cb, sourceTranslations);
-            if (tmxFile.exists()) {
-                // RFE 1001918 - backing up project's TMX upon successful read
-                FileUtil.backupFile(tmxFile);
-                FileUtil.removeOldBackups(tmxFile);
-            }
         } catch (Exception e) {
             Log.logErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");

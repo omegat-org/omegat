@@ -45,7 +45,7 @@ import java.util.List;
  * @author Didier Briel
  */
 public class FileUtil {
-    private static final int MAX_BACKUPS = 10;
+    private static final int MAX_BACKUPS = 11;
 
     /**
      * Removes old backups so that only 10 last are there.
@@ -75,16 +75,12 @@ public class FileUtil {
     }
 
     /**
-     * Returns backup file name.
-     * 
-     * @param f
-     *            input file
-     * @return backup file
+     * Create file backup with datetime suffix.
      */
-    public static File getBackupFile(File f) {
+    public static void backupFile(File f) throws IOException {
         long fileMillis = f.lastModified();
         String str = new SimpleDateFormat("yyyyMMddHHmm").format(new Date(fileMillis));
-        return new File(f.getPath() + "." + str + ".bak");
+        LFileCopy.copy(f, new File(f.getPath() + "." + str + ".bak"));
     }
 
     /**

@@ -460,7 +460,7 @@ public class RealProject implements IProject {
         // rename existing project file in case a fatal error
         // is encountered during the write procedure - that way
         // everything won't be lost
-        File backup = FileUtil.getBackupFile(new File(s));
+        File backup = new File(s + ".bak");
         File orig = new File(s);
         File newFile = new File(s + OConsts.NEWFILE_EXTENSION);
 
@@ -502,8 +502,6 @@ public class RealProject implements IProject {
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
         }
         
-        FileUtil.removeOldBackups(orig);
-
         // update statistics
         String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
         String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
@@ -559,6 +557,11 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
 
             projectTMX = new ProjectTMX(m_config, tmxFile, cb, sourceTranslations);
+            if (tmxFile.exists()) {
+                // RFE 1001918 - backing up project's TMX upon successful read
+                FileUtil.backupFile(tmxFile);
+                FileUtil.removeOldBackups(tmxFile);
+            }
         } catch (Exception e) {
             Log.logErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");

@@ -56,4 +56,10 @@ public interface ITranslateCallback {
      * @return translation or null if translation not exist
      */
     String getTranslation(String id, String source, String path);
+
+    /**
+     * Old call without path, for compatibility
+     */
+    String getTranslation(String id, String source);
+
 }

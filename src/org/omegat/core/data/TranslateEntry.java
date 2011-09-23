@@ -145,6 +145,19 @@ public abstract class TranslateEntry implements ITranslateCallback {
     }
 
     /**
+     * Get translation for specified entry to write output file.
+     * Old call without path, for compatibility
+     *
+     * @param entry
+     *            entry ID
+     * @param source
+     *            source text
+     */
+    public String getTranslation(final String id, final String origSource) {
+        return getTranslation(id, origSource, null);
+    }
+
+    /**
      * {@inheritDoc}
      */
     public void linkPrevNextSegments() {

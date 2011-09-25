@@ -906,19 +906,24 @@
               <listitem>
                 <para><literal>--mode=console-createpseudotranslatetmx</literal></para>
 
-                <para>In this mode, OmegaT will create a TMX for the whole
-                project. Additional parameter allows the user to decide about
-                the values for target entries:</para>
+                <para>In this mode OmegaT will create a TMX for the whole
+                project, based on the source files only. You specify the TMX
+                file to be created with </para>
 
-                <para>--pseudotranslatetype=[equal|empty]</para>
+                <para><literal>--pseudotranslatetmx=allsegments.tmx
+                --pseudotranslatetype=[equal|empty]</literal></para>
+
+                <para>The argument <emphasis>pseudotranslatetype</emphasis>
+                specifies, whether the target segments are to be equal to the
+                source, or left empty.</para>
               </listitem>
 
               <listitem>
                 <para><literal>--mode=console-align</literal></para>
 
                 <para>In this mode, OmegaT will align the Java properties
-                found in the<literal> /source/ </literal>folder of the project
-                to the Java properties found at the specified location. The
+                files found in the<literal> /source/ </literal>folder of the
+                project to the contents found at the specified location. The
                 resulting TMX is stored in the <filename>/omegat/</filename>
                 folder under the name <filename>align.tmx</filename>.</para>
 
@@ -929,10 +934,10 @@
                 files}</literal></para>
 
                 <para><filename>alignDir</filename> must contain a translation
-                in the target language of the project. For instance, if the project
-                is EN-&gt;FR, alignDir must contain a bundle ending with _fr.
-                The resulting tmx is stored in the
-                <literal>omegat</literal>folder under the name
+                in the target language of the project. For instance, if the
+                project is EN-&gt;FR, alignDir must contain a bundle ending
+                with _fr. The resulting tmx is stored in the
+                <literal>omegat</literal> folder under the name
                 <filename>align.tmx</filename>.</para>
               </listitem>
             </itemizedlist>
@@ -957,6 +962,7 @@
 
               <listitem>
                 <para><literal>test\.html</literal></para>
+
                 <para>Only the file test.html at the root of the source
                 directory will be translated. If there are other files named
                 test.html in other directories, they will be ignored.</para>

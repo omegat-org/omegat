@@ -76,7 +76,8 @@
       <listitem>
         <para><emphasis>Paragraph segmentation on line breaks, empty lines or
         never:</emphasis> if sentence segmentation rules are active, the text
-        will further be segmented according to the rules available.</para>
+        will further be segmented according to the option selected
+        here.</para>
       </listitem>
     </itemizedlist>
 
@@ -84,37 +85,29 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Allow blank translations in the target file:</emphasis>
-        If on, when a PO segment (which may be a whole paragraph) is not
-        translated, the translation will be empty in the target file.
-        Technically, <code>msgstr</code> will be empty. As it is the standard
-        behavior for PO files, it is on by default. If the option is off,
-        the source text will be copied to the target segment.</para>
+        <para><emphasis>Allow blank translations in the target
+        file:</emphasis> If on, when a PO segment (which may be a whole
+        paragraph) is not translated, the translation will be empty in the
+        target file. Technically, <code>msgstr</code> will be empty. As this
+        is the standard behavior for PO files, it is on by default. If the
+        option is off, the source text will be copied to the target
+        segment.</para>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">HTML files and HTML and XHTML
-    Files</emphasis></para>
+    <para><emphasis role="bold">XHTML Files</emphasis></para>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Encoding declaration:
-        </emphasis><application>OmegaT</application> may add or rewrite the
-        file's encoding declaration to the encoding selected for the target
-        file.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para><emphasis>Attributes translation: </emphasis>The selected
-        attributes will appear as segments in the Editor window.</para>
+        <para><emphasis>Translate the following attributes</emphasis>: the
+        selected attributes will appear as segments in the Editor
+        window.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Paragraph on &lt;br&gt;:</emphasis> The &lt;br&gt;
+        <para><emphasis>Start a new paragraph on:</emphasis> the &lt;br&gt;
         HTML tag will constitute a paragraph for segmentation purposes.</para>
       </listitem>
     </itemizedlist>
@@ -126,176 +119,134 @@
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">OpenDocument/OpenOffice.org
-    files</emphasis></para>
-
     <itemizedlist>
       <listitem>
-        <para>Index entries</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Bookmarks</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Bookmark references</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Notes</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Comments</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Presentation notes</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Links (URL)</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>Sheet names</para>
+        <para>Do not translate the content attribute of meta-tags ... : the
+        attribute key-value pairs, separated by commas, will be left
+        untranslated</para>
       </listitem>
     </itemizedlist>
 
     <para><emphasis role="bold">Microsoft Office Open XML
     files</emphasis></para>
 
-    <para>If the following elements are presented for translation, they will
-    appear as separate segments.</para>
-
-    <para><emphasis role="bold">Word</emphasis></para>
+    <para>You can select which elements are to be translated. They will appear
+    as separate segments in the translation.</para>
 
     <itemizedlist>
       <listitem>
-        <para>Non-visible Instruction Text</para>
+        <para><emphasis role="bold">Word:</emphasis><emphasis>
+        <emphasis><emphasis>Non-visible Instruction Text, Comments, Footnotes,
+        Endnotes, Footers</emphasis></emphasis></emphasis></para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Comments</para>
+        <para><emphasis role="bold">Excel: </emphasis><emphasis>Comments,
+        Sheet names</emphasis></para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Footnotes</para>
+        <para><emphasis role="bold">Power Point</emphasis><emphasis>: Slide
+        Comments, Slide Masters, Slide Layouts</emphasis></para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Endnotes</para>
+        <para><emphasis role="bold">Global:</emphasis> <emphasis>Charts,
+        Daigrams, Drawings, Wordart</emphasis></para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Headers</para>
+        <para><emphasis role="bold">Other Options: </emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Aggregate tags:</emphasis> If checked, tags
+            without translatable text between them will be aggregated into
+            single tags.</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis>Preserve spaces for all tags:</emphasis> if
+            checked, "white space" (i.e., spaces and newlines) will be
+            preserved, even if not set technically in the document</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">HTML and XHTML files</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Add or rewrite encoding declaration in HTML and XHTML
+        files</para>
+
+        <para><emphasis>Always (default), Only if (X)HTML file has a header,
+        Only if (X)HTML file has an encoding declaration, Never
+        </emphasis></para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Footers</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis role="bold">Excel</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Comments</para>
+        <para><emphasis>Translate the following attributes</emphasis>: the
+        selected attributes will appear as segments in the Editor
+        window.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Sheet Names</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis role="bold">Power Point</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Slide Comments</para>
+        <para><emphasis>Start a new paragraph on:</emphasis> the &lt;br&gt;
+        HTML tag will constitute a paragraph for segmentation purposes.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Slide Masters</para>
+        <para><emphasis>Skip text matching regular expression: </emphasis>The
+        text, matching the regular expression, will be skipped.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Slide Layouts</para>
+        <para>Do not translate the content attribute of meta-tags ... : the
+        attribute key-value pairs, separated by commas, will be left
+        untranslated</para>
       </listitem>
     </itemizedlist>
 
-    <para><emphasis role="bold">Global</emphasis></para>
+    <para><emphasis role="bold">Text files</emphasis></para>
 
     <itemizedlist>
       <listitem>
-        <para>Charts</para>
+        <para><emphasis>Paragraph segmentation on line breaks, empty lines or
+        never:</emphasis> if sentence segmentation rules are active, the text
+        will further be segmented according to the option selected
+        here.</para>
       </listitem>
     </itemizedlist>
 
-    <itemizedlist>
-      <listitem>
-        <para>Diagrams</para>
-      </listitem>
-    </itemizedlist>
+    <para><emphasis role="bold">OpenDocument/OpenOffice.org
+    files</emphasis></para>
 
     <itemizedlist>
       <listitem>
-        <para>Drawings</para>
-      </listitem>
-    </itemizedlist>
+        <para>You can select which of the following items are to be
+        translated: </para>
 
-    <itemizedlist>
-      <listitem>
-        <para>WordArt</para>
-      </listitem>
-    </itemizedlist>
-
-    <para><emphasis role="bold">Other Options</emphasis></para>
-
-    <itemizedlist>
-      <listitem>
-        <para><emphasis>Aggregate tags: </emphasis>If checked, tags without
-        translatable text between them will be aggregated into single
-        tags.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para><emphasis>Preserve spaces for all tags: </emphasis>If checked,
-        "white space" (i.e., spaces and newlines) will be preserved, even if
-        not set technically in the document.</para>
+        <para><emphasis>Index entries, Bookmarks, Bookmark references, Notes,
+        Comments, Presentation notes, Links (URL), Sheet
+        names</emphasis></para>
       </listitem>
     </itemizedlist>
   </section>

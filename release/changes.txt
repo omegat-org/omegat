@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -32,12 +32,18 @@
 
   Other enhancements:
 
-  - Changes in TM/ are detected automatically every second. The
+  - Changes in /tm are detected automatically every second. The
 modified TMX are reloaded in memory transparently, without having to
-reload the project.
+reload the project. (To apply automatic translation from the auto folder,
+reloading the project is still necessary.)
 
   - Wordfast TXML filter. Only target segments are read, so it
 it is mostly useful for files where source = target.
+
+  - The timestamp of the 10 backup files is now the time of the last 
+save of project_save.tmx, instead of the time when the backup occurs. 
+A new backup (project_save.tmx.bak) is also done each time the project
+is saved.
 
   Localisation updates:
 

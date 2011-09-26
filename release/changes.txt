@@ -60,7 +60,8 @@ is saved.
 
   Other enhancements:
 
-  - Apertium : remove '*' before unknown words (including tags)
+  - Apertium : remove '*' before unknown words and do not translate
+tags
   
   Bug fixes:
 

@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>Capítulo 12. Trabajando con texto con formato<a class="indexterm" name="d0e5620"></a><a class="indexterm" name="d0e5625"></a></h2>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Capítulo 12. Trabajando con texto con formato<a class="indexterm" name="d0e5624"></a><a class="indexterm" name="d0e5629"></a></h2>
                </div>
             </div>
          </div>
@@ -53,23 +53,23 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Etiquetas de formato<a class="indexterm" name="d0e5635"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1. Etiquetas de formato<a class="indexterm" name="d0e5639"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e5639"></a><span class="bold"><strong>Denominación de etiquetas:</strong></span></p>
+            <p><a class="indexterm" name="d0e5643"></a><span class="bold"><strong>Denominación de etiquetas:</strong></span></p>
             <p>Las etiquetas constan de entre uno a tres caracteres y un número. La numeración permite etiquetas únicas, correspondientes
                a los demás que se agrupan y se diferencian entre las etiquetas, que tienen el mismo carácter, pero en realidad son diferentes.
                Los caracteres utilizados tratan de reflejar el significado abreviado de la etiqueta subyacente (por ejemplo, b para negrita
                (o bold), I para cursiva (o itálica), etc.)
             </p>
-            <p><a class="indexterm" name="d0e5649"></a><span class="bold"><strong>Numeración de etiquetas:</strong></span></p>
+            <p><a class="indexterm" name="d0e5653"></a><span class="bold"><strong>Numeración de etiquetas:</strong></span></p>
             <p>Las etiquetas son numeradas progresivamente por el grupo de etiquetas. Los "grupos de etiquetas" en este contexto son una
                sola etiqueta (por ejemplo, &lt;i0&gt; y &lt;/i0&gt;). Dentro de un segmento, el primer grupo (pareja o individual) recibe el número 0,
                el segundo el número 1, etc. El primer ejemplo tiene 3 grupos de etiquetas (un par, una individual, y luego otro par), el
                segundo ejemplo tiene un único grupo (un par).
             </p>
-            <p><a class="indexterm" name="d0e5659"></a><span class="bold"><strong>Parejas e individuales:</strong></span></p>
+            <p><a class="indexterm" name="d0e5663"></a><span class="bold"><strong>Parejas e individuales:</strong></span></p>
             <p>Las etiquetas siempre son: bien individuales o parejas. Las etiquetas individuales indican información de formato que no afecta
                al texto que la rodea (un espacio o salto de línea, por ejemplo).
             </p>
@@ -89,7 +89,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Operaciones con etiquetas<a class="indexterm" name="d0e5683"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2. Operaciones con etiquetas<a class="indexterm" name="d0e5687"></a></h2>
                   </div>
                </div>
             </div>
@@ -97,7 +97,7 @@
                básica es que la secuencia de las etiquetas se debe conservar en el mismo orden. Sin embargo, es posible, si sigues estrictamente
                ciertas reglas, apartarte de esta regla básica.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5692"></a>Duplicando etiquetas:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5696"></a>Duplicando etiquetas:</strong></span></p>
             <p>Para duplicar grupos de etiquetas, sólo tienes que copiarlas en la posición de tu elección. Ten en cuenta que en un grupo
                de pares, la etiqueta de apertura debe venir antes de la etiqueta de cierre. El formato representado por el grupo al que se
                han duplicado se aplicará a ambas secciones.
@@ -106,7 +106,7 @@
             <p><code class="literal">&lt;b0&gt;Este formato&lt;/b0&gt; se va a duplicar aquí.&lt;segmento 0001&gt;</code></p>
             <p>Después de duplicarlo:</p>
             <p><code class="literal">&lt;b0&gt;Este formato&lt;/b0&gt; ha sido &lt;b0&gt;duplicado aquí&lt;/b0&gt;.&lt;segmento 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5712"></a>Eliminando grupo de etiquetas:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5716"></a>Eliminando grupo de etiquetas:</strong></span></p>
             <p>Para eliminar grupos de etiquetas, sólo tienes que quitarlas del segmento. Ten en cuenta que un grupo de pares debe tener
                sus etiquetas de apertura y cierre para asegurarte de que eliminas todos los vestigios del formato correctamente, de lo contrario
                el archivo traducido puede resultar dañado. Al eliminar un grupo de etiquetas, eliminarás el formato del archivo traducido
@@ -121,7 +121,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Anidando grupos de etiquetas<a class="indexterm" name="d0e5733"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3. Anidando grupos de etiquetas<a class="indexterm" name="d0e5737"></a></h2>
                   </div>
                </div>
             </div>
@@ -139,7 +139,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Superponiendo grupos de etiquetas<a class="indexterm" name="d0e5753"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4. Superponiendo grupos de etiquetas<a class="indexterm" name="d0e5757"></a></h2>
                   </div>
                </div>
             </div>
@@ -155,12 +155,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5. Validando etiquetas agrupadas<a class="indexterm" name="d0e5773"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5. Validando etiquetas agrupadas<a class="indexterm" name="d0e5777"></a></h2>
                   </div>
                </div>
             </div>
             <p>La función de validación de etiquetas detecta cambios en las secuencias de etiquetas (ya sea deliberados o accidentales),
-               y muestra los segmentos afectados. Al lanzar esta función - <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5782"></a></span> - se abre una ventana que contiene todos los segmentos en que se sospecha contengan etiquetas rotas o en mal estado en el
+               y muestra los segmentos afectados. Al lanzar esta función - <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5786"></a></span> - se abre una ventana que contiene todos los segmentos en que se sospecha contengan etiquetas rotas o en mal estado en el
                archivo de la traducción. Reparar las etiquetas y recrear los documentos destino es fácil con la función de validación de
                etiquetas. La ventana que se abre cuando pulsas <span class="guimenuitem">Ctrl+T</span> contiene una tabla de 3 columnas con un enlace a ese segmento, el segmento original y el segmento destino
             </p>
@@ -179,7 +179,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6. Consejos para gestionar etiquetas<a class="indexterm" name="d0e5807"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6. Consejos para gestionar etiquetas<a class="indexterm" name="d0e5811"></a></h2>
                   </div>
                </div>
             </div>

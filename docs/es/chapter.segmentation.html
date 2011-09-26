@@ -43,11 +43,11 @@
             </dl>
          </div>
          <p>La herramienta de memoria de traducción trabaja con unidades textuales denominadas segmentos. <span class="application">OmegaT</span> tiene dos maneras de segmentar un texto: en párrafos o segmentación de frases (también conocida como "segmentación basada
-            en reglas"). Con el fin de seleccionar el tipo de segmentación, selecciona <span class="guimenu"><a class="indexterm" name="d0e6455"></a>Proyecto</span> → <span class="guimenuitem">Propiedades...</span> desde el menú principal y marca o desmarca la casilla de verificación prevista. La segmentación de párrafo es ventajosa en
+            en reglas"). Con el fin de seleccionar el tipo de segmentación, selecciona <span class="guimenu"><a class="indexterm" name="d0e6459"></a>Proyecto</span> → <span class="guimenuitem">Propiedades...</span> desde el menú principal y marca o desmarca la casilla de verificación prevista. La segmentación de párrafo es ventajosa en
             algunos casos, tal como en traducciones altamente creativas o de estilo en el que el traductor puede desear cambiar el orden
             de frases enteras, para la mayoría de los proyectos, sin embargo, la segmentación de frases es una opción preferible, ya que
             ofrece una mejor coincidencia con traducciones anteriores. Si elegiste la segmentación por frases, puedes configurar las reglas
-            seleccionando <span class="guimenu"><a class="indexterm" name="d0e6467"></a>Opciones</span> → <span class="guimenuitem">Segmentación...</span> desde el menú principal.
+            seleccionando <span class="guimenu"><a class="indexterm" name="d0e6471"></a>Opciones</span> → <span class="guimenuitem">Segmentación...</span> desde el menú principal.
          </p>
          <p>Las reglas de segmentación fiables ya están disponibles en muchos idiomas, por lo que probablemente no tendrás que involucrarte
             en la escritura de tus propias reglas de segmentación. Por otro lado esta funcionalidad puede ser muy útil en casos especiales,
@@ -62,7 +62,7 @@
          </p>
          <div class="variablelist">
             <dl>
-               <dt><span class="term"><a class="indexterm" name="d0e6490"></a>Estructura del nivel de segmentación</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6494"></a>Estructura del nivel de segmentación</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> primero analiza el texto para estructurar la segmentación de nivel superior. Durante este proceso, sólo estructura el archivo
                      fuente que se utiliza para producir segmentos.
@@ -72,7 +72,7 @@
                      de bloque (párrafo). Atributos de objeto traducibles en XHTML o HTML se pueden extraer como segmentos separados.
                   </p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e6505"></a>Segmentación a nivel de frase</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e6509"></a>Segmentación a nivel de frase</span></dt>
                <dd>
                   <p>Después de segmentar el archivo fuente en unidades estructurales, <span class="application">OmegaT</span> segmentará más los bloques en frases.
                   </p>
@@ -83,7 +83,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1. Reglas de segmentación<a class="indexterm" name="d0e6520"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1. Reglas de segmentación<a class="indexterm" name="d0e6524"></a></h2>
                   </div>
                </div>
             </div>
@@ -94,7 +94,7 @@
             <p>Los dos tipos de reglas se comportan de la siguiente manera:</p>
             <div class="variablelist">
                <dl>
-                  <dt><span class="term"><a class="indexterm" name="d0e6544"></a>Regla de ruptura</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6548"></a>Regla de ruptura</span></dt>
                   <dd>
                      <p>Separa el texto fuente en segmentos. Por ejemplo, "<span class="emphasis"><em>Did it make sense? I was not sure</em></span>." debería dividirse en dos segmentos. Para que esto ocurra, debe haber una regla para romper "?", cuando está seguida por
                         espacios y una palabra que comienza con mayúscula. Para definir una regla como una regla de ruptura, marca la casilla de verificación
@@ -105,7 +105,7 @@
             </div>
             <div class="variablelist">
                <dl>
-                  <dt><span class="term"><a class="indexterm" name="d0e6561"></a>Regla de excepción</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e6565"></a>Regla de excepción</span></dt>
                   <dd>
                      <p>especificar qué partes del texto no se deben separar. A pesar del punto, <span class="emphasis"><em>"Mrs. Dalloway"</em></span> no se debe dividir en dos segmentos, por tanto debes establecer una regla de excepción para "Mrs" (y para "Mr", "Dr", "prof",
                         etc.), seguida de un punto. Para definir una regla como una regla de excepción, desmarca la casilla de verificación Ruptura/Excepción.
@@ -122,7 +122,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2. Prioridad de regla<a class="indexterm" name="d0e6580"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2. Prioridad de regla<a class="indexterm" name="d0e6584"></a></h2>
                   </div>
                </div>
             </div>
@@ -137,7 +137,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3. Creando una nueva regla<a class="indexterm" name="d0e6590"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3. Creando una nueva regla<a class="indexterm" name="d0e6594"></a></h2>
                   </div>
                </div>
             </div>
@@ -163,7 +163,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4. <a class="indexterm" name="d0e6624"></a>Algunos ejemplos sencillos
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4. <a class="indexterm" name="d0e6628"></a>Algunos ejemplos sencillos
                      </h2>
                   </div>
                </div>
@@ -171,10 +171,10 @@
             <div class="informaltable">
                <table border="1">
                   <colgroup>
-                     <col width="160" align="left">
-                     <col width="50" align="center">
-                     <col width="40" align="center">
-                     <col width="200" align="left">
+                     <col width="150" align="left">
+                     <col width="60" align="center">
+                     <col width="60" align="center">
+                     <col width="190" align="left">
                   </colgroup>
                   <thead>
                      <tr>

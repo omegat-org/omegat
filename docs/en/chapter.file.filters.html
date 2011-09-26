@@ -77,7 +77,9 @@
             </ul>
          </div>
          <p>Most users will find the default file filter options sufficient. If
-              this is not the case, open the main dialog by selecting<span class="bold"><strong> Options → File Filters...</strong></span> from the main menu.
+              this is not the case, open the main dialog by selecting<span class="bold"><strong> Options → File Filters...</strong></span> from the main menu. You can
+              also enable project-specific file filters, which will only be used on the
+              current project, by selecting the <span class="bold"><strong>File Filters...</strong></span> option in Project Properties.
          </p>
          <p><span class="bold"><strong>Warning!</strong></span> Should you change filter
               options whilst a project is open, you must reload the project in order for
@@ -87,7 +89,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4278"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4306"></a></h2>
                   </div>
                </div>
             </div>
@@ -104,7 +106,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4293"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4321"></a></h2>
                   </div>
                </div>
             </div>
@@ -120,7 +122,8 @@
                   <li class="listitem">
                      <p><span class="emphasis"><em>Paragraph segmentation on line breaks, empty lines or
                                       never:</em></span> if sentence segmentation rules are active, the text
-                                will further be segmented according to the rules available.
+                                will further be segmented according to the option selected
+                                here.
                      </p>
                   </li>
                </ul>
@@ -129,34 +132,24 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Allow blank translations in the target file:</em></span> 
-                                If on, when a PO segment (which may be a whole paragraph) is not 
-                                translated, the translation will be empty in the target file. 
-                                Technically, <code class="code">msgstr</code> will be empty. As it is the standard 
-                                behavior for PO files, it is on by default. If the option is off, 
-                                the source text will be copied to the target segment.
+                     <p><span class="emphasis"><em>Allow blank translations in the target
+                                      file:</em></span> If on, when a PO segment (which may be a whole
+                                paragraph) is not translated, the translation will be empty in the
+                                target file. Technically, <code class="code">msgstr</code> will be empty. As this
+                                is the standard behavior for PO files, it is on by default. If the
+                                option is off, the source text will be copied to the target
+                                segment.
                      </p>
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>HTML files and HTML and XHTML
-                         Files</strong></span></p>
+            <p><span class="bold"><strong>XHTML Files</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Encoding declaration:
-                                      </em></span><span class="application">OmegaT</span> may add or rewrite the
-                                file's encoding declaration to the encoding selected for the target
-                                file.
-                     </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p><span class="emphasis"><em>Attributes translation: </em></span>The selected
-                                attributes will appear as segments in the Editor window.
+                     <p><span class="emphasis"><em>Translate the following attributes</em></span>: the
+                                selected attributes will appear as segments in the Editor
+                                window.
                      </p>
                   </li>
                </ul>
@@ -164,7 +157,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Paragraph on &lt;br&gt;:</em></span> The &lt;br&gt;
+                     <p><span class="emphasis"><em>Start a new paragraph on:</em></span> the &lt;br&gt;
                                 HTML tag will constitute a paragraph for segmentation purposes.
                      </p>
                   </li>
@@ -179,185 +172,96 @@
                   </li>
                </ul>
             </div>
-            <p><span class="bold"><strong>OpenDocument/OpenOffice.org
-                         files</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Index entries</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Bookmarks</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Bookmark references</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Notes</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Comments</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Presentation notes</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Links (URL)</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Sheet names</p>
+                     <p>Do not translate the content attribute of meta-tags ... : the
+                                attribute key-value pairs, separated by commas, will be left
+                                untranslated
+                     </p>
                   </li>
                </ul>
             </div>
             <p><span class="bold"><strong>Microsoft Office Open XML
                          files</strong></span></p>
-            <p>If the following elements are presented for translation, they will
-                   appear as separate segments.
+            <p>You can select which elements are to be translated. They will appear
+                   as separate segments in the translation.
             </p>
-            <p><span class="bold"><strong>Word</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Non-visible Instruction Text</p>
+                     <p><span class="bold"><strong>Word:</strong></span><span class="emphasis"><em>
+                                      <span class="emphasis"><em><span class="emphasis"><em>Non-visible Instruction Text, Comments, Footnotes,
+                                                  Endnotes, Footers</em></span></em></span></em></span></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Comments</p>
+                     <p><span class="bold"><strong>Excel: </strong></span><span class="emphasis"><em>Comments,
+                                      Sheet names</em></span></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Footnotes</p>
+                     <p><span class="bold"><strong>Power Point</strong></span><span class="emphasis"><em>: Slide
+                                      Comments, Slide Masters, Slide Layouts</em></span></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Endnotes</p>
+                     <p><span class="bold"><strong>Global:</strong></span> <span class="emphasis"><em>Charts,
+                                      Daigrams, Drawings, Wordart</em></span></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Headers</p>
+                     <p><span class="bold"><strong>Other Options: </strong></span></p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" type="circle">
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>Aggregate tags:</em></span> If checked, tags
+                                             without translatable text between them will be aggregated into
+                                             single tags.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>Preserve spaces for all tags:</em></span> if
+                                             checked, "white space" (i.e., spaces and newlines) will be
+                                             preserved, even if not set technically in the document
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>HTML and XHTML files</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Add or rewrite encoding declaration in HTML and XHTML
+                                files
+                     </p>
+                     <p><span class="emphasis"><em>Always (default), Only if (X)HTML file has a header,
+                                      Only if (X)HTML file has an encoding declaration, Never
+                                      </em></span></p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Footers</p>
-                  </li>
-               </ul>
-            </div>
-            <p><span class="bold"><strong>Excel</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Comments</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Sheet Names</p>
-                  </li>
-               </ul>
-            </div>
-            <p><span class="bold"><strong>Power Point</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Slide Comments</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Slide Masters</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Slide Layouts</p>
-                  </li>
-               </ul>
-            </div>
-            <p><span class="bold"><strong>Global</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Charts</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Diagrams</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Drawings</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>WordArt</p>
-                  </li>
-               </ul>
-            </div>
-            <p><span class="bold"><strong>Other Options</strong></span></p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p><span class="emphasis"><em>Aggregate tags: </em></span>If checked, tags without
-                                translatable text between them will be aggregated into single
-                                tags.
+                     <p><span class="emphasis"><em>Translate the following attributes</em></span>: the
+                                selected attributes will appear as segments in the Editor
+                                window.
                      </p>
                   </li>
                </ul>
@@ -365,10 +269,54 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Preserve spaces for all tags: </em></span>If checked,
-                                "white space" (i.e., spaces and newlines) will be preserved, even if
-                                not set technically in the document.
+                     <p><span class="emphasis"><em>Start a new paragraph on:</em></span> the &lt;br&gt;
+                                HTML tag will constitute a paragraph for segmentation purposes.
                      </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Skip text matching regular expression: </em></span>The
+                                text, matching the regular expression, will be skipped.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Do not translate the content attribute of meta-tags ... : the
+                                attribute key-value pairs, separated by commas, will be left
+                                untranslated
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Text files</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Paragraph segmentation on line breaks, empty lines or
+                                      never:</em></span> if sentence segmentation rules are active, the text
+                                will further be segmented according to the option selected
+                                here.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>OpenDocument/OpenOffice.org
+                         files</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>You can select which of the following items are to be
+                                translated: 
+                     </p>
+                     <p><span class="emphasis"><em>Index entries, Bookmarks, Bookmark references, Notes,
+                                      Comments, Presentation notes, Links (URL), Sheet
+                                      names</em></span></p>
                   </li>
                </ul>
             </div>
@@ -377,7 +325,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4483"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4484"></a></h2>
                   </div>
                </div>
             </div>
@@ -395,7 +343,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4498"></a>Source file type, filename pattern<a class="indexterm" name="d0e4504"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4499"></a>Source file type, filename pattern<a class="indexterm" name="d0e4505"></a></h3>
                      </div>
                   </div>
                </div>
@@ -424,7 +372,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4532"></a><a class="indexterm" name="d0e4537"></a><a class="indexterm" name="d0e4542"></a><p>Only a limited number of file formats specify a mandatory
+               </div><a class="indexterm" name="d0e4533"></a><a class="indexterm" name="d0e4538"></a><a class="indexterm" name="d0e4543"></a><p>Only a limited number of file formats specify a mandatory
                         encoding. File formats that do not specify their encoding will use the
                         encoding you set up for the extension that matches their name. For
                         example, by default<code class="literal"> .txt </code>files will be loaded using
@@ -469,14 +417,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4572"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4573"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Sometimes you may wish to rename the files you translate
                         automatically, for example adding a language code after the file name.
                         The target filename pattern uses a special syntax, so if you wish to
-                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4582"></a>Edit Pattern Dialog. If you wish to revert to default
+                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4583"></a>Edit Pattern Dialog. If you wish to revert to default
                         configuration of the filter, click <span class="bold"><strong>Defaults.</strong></span> You may also modify the name directly
                         in the target filename pattern field of the file filters dialog. The
                         Edit Pattern Dialog offers the following options:

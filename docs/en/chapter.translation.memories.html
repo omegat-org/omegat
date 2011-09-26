@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;14.&nbsp;Translation memories<a class="indexterm" name="d0e6010"></a></h2>
+                  <h2 class="title"><a name="chapter.translation.memories"></a>Chapter&nbsp;14.&nbsp;Translation memories<a class="indexterm" name="d0e6014"></a></h2>
                </div>
             </div>
          </div>
@@ -41,13 +41,13 @@
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. tmx folders - location and purpose</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. tmx backup</a></span></dt>
                      <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. tmx files and language</a></span></dt>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6262">1.4. Orphan segments</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6275">1.4. Orphan segments</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Reusing translation memories</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6349">2.1. Importing and exporting translation memories</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6359">2.1. Importing and exporting translation memories</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">3. Pseudo-translated memory</a></span></dt>
@@ -78,17 +78,17 @@
                </p>
                <div class="variablelist">
                   <dl>
-                     <dt><span class="term"><a class="indexterm" name="d0e6026"></a>omegat folder</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6030"></a>omegat folder</span></dt>
                      <dd>
-                        <p>The omegat folder contains the project_save.tmx and possibly
+                        <p>The omegat folder contains the <code class="filename">project_save.tmx</code> and possibly
                                        a number of backup TMX files. The
-                                       <code class="filename">project_save.tmx</code>file contains all the
+                                       <code class="filename">project_save.tmx</code> file contains all the
                                        segments that have been recorded in memory since you started the
                                        project. This file always exists in the project. Its contents will
                                        always be sorted alphabetically by the source segment.
                         </p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6042"></a>main project folder</span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6049"></a>main project folder</span></dt>
                      <dd>
                         <p>The main project folder contains 3 tmx files,
                                        <code class="filename">project_name-omegat.tmx</code>,
@@ -121,7 +121,7 @@
                            </ul>
                         </div>
                         <p>These files are copies of the file
-                                       <code class="filename">project_save.tmx</code> . i.e. of the project's main
+                                       <code class="filename">project_save.tmx</code>, i.e. of the project's main
                                        translation memory, excluding the so-called orphan segments. They
                                        carry appropriately changed names, so that its contents still
                                        remain identifiable, when used elsewhere, for instance in
@@ -129,7 +129,7 @@
                                        below).
                         </p>
                      </dd>
-                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6096"></a>tm</code> folder</span></dt>
+                     <dt><span class="term"><code class="filename"><a class="indexterm" name="d0e6103"></a>tm</code> folder</span></dt>
                      <dd>
                         <p>The /tm/ folder can contain any number of ancillary
                                        translation memories - i.e. tmx files. Such files can be created
@@ -155,7 +155,7 @@
                                        <a class="link" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Editing behavior">Editing behavior</a>
                                        chapter) <span class="guimenu">.</span></p>
                      </dd>
-                     <dt><span class="term"><a class="indexterm" name="d0e6129"></a>tm/auto folder<a class="indexterm" name="d0e6137"></a></span></dt>
+                     <dt><span class="term"><a class="indexterm" name="d0e6136"></a>tm/auto folder<a class="indexterm" name="d0e6144"></a></span></dt>
                      <dd>
                         <p>If it is clear from the very start, that translations in a
                                        given TM (or TMs) are all correct, one can put them into
@@ -176,7 +176,7 @@
                </p>
                <p>Note that all the translation memories are loaded into memory when
                         the project is opened. Back-ups are produced regularly of the project
-                        translation memory (see next chapter), and project_save.tmx is also
+                        translation memory (see next chapter), and <code class="filename">project_save.tmx</code> is also
                         saved/updated when the project is closed or loaded again. This means for
                         instance that you do not need to exit a project you are currently
                         working on if you decide to add another ancillary TM to it: you simply
@@ -199,13 +199,13 @@
                               project:</strong></span> split the source files into source/Alice,
                         source/Bob... and allocate them to team members (Alice, Bob ...). They
                         can then create their own projects and, deliver their
-                        own<code class="filename">project_save.tmx,</code> when finished or when a given
+                        own <code class="filename">project_save.tmx</code>, when finished or when a given
                         milestone has been reached. The <code class="filename">project_save.tmx</code>
                         files are then collected and possible conflicts as regards terminology
                         for instance get resolved. A new version of the master TM is then
                         created, either to be put in team members'
                         <span class="emphasis"><em>tm/auto</em></span>subdirectories or to replace their
-                        project_save.tmx files. The team can also use the same subfolder
+                        <code class="filename">project_save.tmx</code> files. The team can also use the same subfolder
                         structure for the target files. This allows them for instance to check
                         at any moment, whether the target version for the complete project is
                         still OK
@@ -215,12 +215,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;tmx backup<a class="indexterm" name="d0e6190"></a></h3>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2.&nbsp;tmx backup<a class="indexterm" name="d0e6203"></a></h3>
                      </div>
                   </div>
                </div>
                <p>As you translate your files, <span class="application">OmegaT</span>
-                        stores your work continually in <code class="filename">project_save.tm</code>x in
+                        stores your work continually in <code class="filename">project_save.tmx</code> in
                         the project's /<code class="filename">omegat</code> subdirectory.
                </p>
                <p><span class="application">OmegaT</span> also backups translation memory
@@ -249,7 +249,7 @@
                         </p>
                      </li>
                      <li class="listitem">
-                        <p>Copy it to <code class="filename">project_save.tmx </code></p>
+                        <p>Copy it to <code class="filename">project_save.tmx</code></p>
                      </li>
                      <li class="listitem">
                         <p>Open the project</p>
@@ -261,7 +261,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx files and language<a class="indexterm" name="d0e6242"></a></h3>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3.&nbsp;tmx files and language<a class="indexterm" name="d0e6255"></a></h3>
                      </div>
                   </div>
                </div>
@@ -303,7 +303,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6262"></a>1.4.&nbsp;Orphan segments<a class="indexterm" name="d0e6265"></a></h3>
+                        <h3 class="title"><a name="d0e6275"></a>1.4.&nbsp;Orphan segments<a class="indexterm" name="d0e6278"></a></h3>
                      </div>
                   </div>
                </div>
@@ -321,7 +321,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusing translation memories<a class="indexterm" name="d0e6281"></a><a class="indexterm" name="d0e6286"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2.&nbsp;Reusing translation memories<a class="indexterm" name="d0e6294"></a><a class="indexterm" name="d0e6299"></a></h2>
                   </div>
                </div>
             </div>
@@ -393,12 +393,9 @@
                   </li>
                </ul>
             </div>
-            <p>When you begin a new project on the same subject or for the same
-                   customer, navigate to the repository folder in the <span class="guilabel">Project &gt;
-                      Properties &gt; Edit Project</span> dialog and select it as the
-                   translation memory folder. Note that all the tmx files in the /tm
-                   repository are parsed when the project is opened, so putting everything
-                   you possibly can there, may slow OmegaT down unnecessarily. You may even
+            <p>Note that all the tmx files in the /tm
+                   repository are parsed when the project is opened, so putting all different TMs you may have
+                   on hand into this folder may unnecessarily slow OmegaT down. You may even
                    consider removing those that are not required any more, once you have used
                    their contents to fill up the <code class="filename">project-save.tmx
                       </code>file.
@@ -407,7 +404,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6349"></a>2.1.&nbsp;Importing and exporting translation memories
+                        <h3 class="title"><a name="d0e6359"></a>2.1.&nbsp;Importing and exporting translation memories
                         </h3>
                      </div>
                   </div>
@@ -445,7 +442,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>3.&nbsp;Pseudo-translated memory<a class="indexterm" name="d0e6364"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>3.&nbsp;Pseudo-translated memory<a class="indexterm" name="d0e6374"></a></h2>
                   </div>
                </div>
             </div>
@@ -481,12 +478,12 @@
             <p>Replace <code class="literal">&lt;filename&gt;</code> with the name of the
                    file you wish to create, either absolute or relative to the working
                    directory (the directory you start <span class="application">OmegaT</span>
-                   from).The second argument <code class="literal">--pseudotranslatetype</code> is
+                   from). The second argument <code class="literal">--pseudotranslatetype</code> is
                    optional. Its value is either <code class="literal">equal</code> (default value, for
-                   source=target) or <code class="literal">empty</code> (target segment is empty) .You
+                   source=target) or <code class="literal">empty</code> (target segment is empty). You
                    can process the generated tmx with any tool you want. To reuse it in
                    <span class="application">OmegaT</span> rename it to <span class="emphasis"><em>project_save.tmx
-                         </em></span>and place it in the <code class="literal">omegat</code>-folder of your
+                         </em></span> and place it in the <code class="literal">omegat</code>-folder of your
                    project.
             </p>
          </div>
@@ -494,7 +491,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>4.&nbsp;Upgrading translation memories<a class="indexterm" name="d0e6416"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>4.&nbsp;Upgrading translation memories<a class="indexterm" name="d0e6426"></a></h2>
                   </div>
                </div>
             </div>

@@ -42,6 +42,9 @@
           <imageobject role="html">
             <imagedata fileref="images/NewProject.png"/>
           </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/NewProject.png" width="80%"/>
+          </imageobject>
         </mediaobject>
       </figure>
 
@@ -378,10 +381,9 @@
 
       <para><application>OmegaT</application> ne détecte pas automatiquement les erreurs de balises dans un fichier traduit. Avant de livrer les documents traduits, pensez à vérifier que ceux-ci ne contiennent pas d'erreurs de balises. Pour ceci, sélectionnez <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo> </shortcut> <guimenu>Outils</guimenu>  <guimenuitem>Valider les balises</guimenuitem> </menuchoice> à partir du menu. Vous obtenez une table contenant les segments où les balises source ne correspondent pas aux balises cible. Cliquez sur le numéro du segment. OmegaT vous renvoie automatiquement au segment en question dans le volet d'édition pour vous permettre de corriger les balises. Après avoir effectué les corrections, appuyez de nouveau sur <keycombo> <keycap>Ctrl</keycap> <keycap>T<indexterm class="singular">
               <primary>Raccourcis clavier</primary> <secondary>Ctrl+T – valider les balises</secondary> <seealso>Texte balisé</seealso>
-
             </indexterm></keycap> </keycombo> pour une dernière vérification. Notez que le vérificateur de balises pourra indiquer une erreur dans les cas où les balises, certes correctement présentes dans la traduction, auront dû être déplacées pour des raisons grammaticales ou syntaxiques. Il s'agit ici d'une simple mesure de précaution.</para>
 
-      <para>Des erreurs de balises peuvent empêcher que l'ouverture du fichier. Ceci ne signifie en aucun cas que votre travail est perdu ou que le projet est endommagé – il est simplement recommandé de s'assurer que les erreurs de balises sont corrigées avant de créer les fichiers traduits. Enfin, il est conseillé d'ouvrir le document traduit dans l'application associée pour en vérifier la mise en forme.</para>
+      <para>Des erreurs de balises peuvent empêcher l'ouverture du fichier. Ceci ne signifie en aucun cas que votre travail est perdu ou que le projet est endommagé – il est simplement recommandé de s'assurer que les erreurs de balises sont corrigées avant de créer les fichiers traduits. Enfin, il est conseillé d'ouvrir le document traduit dans l'application associée pour en vérifier la mise en forme.</para>
     </section>
   </section>
 </chapter>

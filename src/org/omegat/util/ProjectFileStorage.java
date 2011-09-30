@@ -135,6 +135,10 @@ public class ProjectFileStorage {
      *            default name for such a project's folder, if relativePath is "__DEFAULT__".
      */
     private static String computeAbsolutePath(String m_root, String relativePath, String defaultName) {
+        if (relativePath == null) {
+            // Not exist in project file ? Use default.
+            return m_root + defaultName + File.separator;
+        }
         if (OConsts.DEFAULT_FOLDER_MARKER.equals(relativePath))
             return m_root + defaultName + File.separator;
         else {

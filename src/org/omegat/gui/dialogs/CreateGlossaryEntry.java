@@ -277,6 +277,7 @@ public class CreateGlossaryEntry extends JDialog {
     private void commentTextKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_commentTextKeyPressed
         // TODO add your handling code here:
        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+                evt.consume();
                 okButton.doClick();
        } else if (evt.getKeyCode() == KeyEvent.VK_TAB) {
             if (evt.isShiftDown()) {

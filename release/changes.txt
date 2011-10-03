@@ -2,10 +2,15 @@
  OmegaT 2.5.0 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 1 vs. 2.5.0 
+
+  Bug fixes:
+
+  - Null pointer exception in a project without <dictionary_dir>
+  http://sourceforge.net/support/tracker.php?aid=3414549
 
   Localisation updates:
 

@@ -2,7 +2,7 @@
  OmegaT 2.5.0 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 1 vs. 2.5.0 
@@ -11,6 +11,9 @@
 
   - Null pointer exception in a project without <dictionary_dir>
   http://sourceforge.net/support/tracker.php?aid=3414549
+
+  - Wrong handling of the Enter key in the comment field of a 
+glossary entry
 
   Localisation updates:
 

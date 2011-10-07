@@ -71,6 +71,20 @@ is saved.
   - Dutch localisation updated to 2.5 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 2.3.0 update 3
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.3.0 update 3 vs. 2.3.0 update 2
+
+  Bug fixes:
+
+  - Open XML filter: <rPh> tags (phonetic pronunciation) were not 
+hidden in OmegaT
+
+----------------------------------------------------------------------
  OmegaT 2.3.0 update 2
 ----------------------------------------------------------------------
    1 Enhancement

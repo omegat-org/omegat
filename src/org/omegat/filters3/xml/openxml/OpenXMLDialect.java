@@ -57,7 +57,7 @@ public class OpenXMLDialect extends DefaultXMLDialect {
 
         defineIntactTags(new String[] {
                 // Excel
-                "authors",
+                "authors", "rPh",
                 // PowerPoint
                 "p:attrName", "a:tableStyleId",
                 // Charts

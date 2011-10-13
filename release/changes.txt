@@ -2,7 +2,7 @@
  OmegaT 2.5.0 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 1 vs. 2.5.0 
@@ -14,6 +14,9 @@
 
   - Wrong handling of the Enter key in the comment field of a 
 glossary entry
+
+  - Strange behaviour of the Editor for segments with empty 
+translations in TMX
 
   Localisation updates:
 

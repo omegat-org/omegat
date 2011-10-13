@@ -222,7 +222,7 @@ public class ProjectTMX {
                 for (int i = 0; i < sources.size(); i++) {
                     String segmentSource = sources.get(i);
                     String segmentTranslation = targets.get(i);
-                    if (segmentTranslation.length() == 0) {
+                    if (segmentTranslation !=null && segmentTranslation.length() == 0) {
                         // TODO review with noes implementation
                         segmentTranslation = null;
                     }

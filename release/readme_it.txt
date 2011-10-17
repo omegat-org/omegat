@@ -71,6 +71,7 @@ OmegaT è in grado di riconoscere immediatamente i seguenti formati di file form
   - Wix  
   - Infix
   - esportazione Flash XML
+  - Wordfast TXML
 
 OmegaT può essere personalizzato per gestire anche altri tipi di formati di file.
 
@@ -188,6 +189,7 @@ Contributi al codice:
   Maxym Mykhalchuk 
   Arno Peters
   Henry Pijffers 
+  Briac Pilpré
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband

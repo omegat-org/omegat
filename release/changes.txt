@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    0 Enhancement
    3 Bug fixes
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.5.0 update 1 vs. 2.5.0 
 
@@ -21,6 +21,7 @@ translations in TMX
   Localisation updates:
 
   - Dutch localisation updated to 2.5.0 (UI)
+  - Italian localisation updated to 2.5.0 (UI, Instant Start, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0

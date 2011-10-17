@@ -42,6 +42,9 @@
           <imageobject role="html">
             <imagedata fileref="images/NewProject.png"/>
           </imageobject>
+          <imageobject role="fo">
+            <imagedata fileref="images/NewProject.png" width="80%"/>
+          </imageobject>
         </mediaobject>
       </figure>
 
@@ -108,7 +111,7 @@
 
           <itemizedlist>
             <listitem>
-              <para>Microsoft Open XML (*.docx. *.xlsx, *.pptx)</para>
+              <para>Microsoft Open XML (*.docx, *.xlsx, *.pptx)</para>
             </listitem>
           </itemizedlist>
 
@@ -186,6 +189,10 @@
             <listitem>
               <para>esportazione Flash XML (*.xml)</para>
             </listitem>
+
+          <listitem>
+            <para>Wordfast TXML (*.txml)</para>
+          </listitem>
 
           </itemizedlist>
         </listitem>

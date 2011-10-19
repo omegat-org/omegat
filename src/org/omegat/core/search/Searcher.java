@@ -45,6 +45,7 @@ import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
@@ -93,7 +94,6 @@ public class Searcher {
 
         m_searchResults = new ArrayList<SearchResultEntry>();
         m_numFinds = 0;
-        m_curFileName = "";
 
         m_entrySet = null; // HP
 
@@ -333,33 +333,49 @@ public class Searcher {
             fm = FilterMaster.getInstance();
         }
 
+        SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
+        
         for (String filename : fileList) {
+            FileInfo fi = new FileInfo();
             // determine actual file name w/ no root path info
-            m_curFileName = filename.substring(m_searchDir.length());
+            fi.filePath = filename.substring(m_searchDir.length());
 
-            // don't bother to tell handler what we're looking for -
-            // the search data is already known here (and the
-            // handler is in the same thread, so info is not volatile)
-            fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), new SearchCallback(
-                    m_project.getProjectProperties()) {
-                protected void addSegment(String id, short segmentIndex, String segmentSource,
-                        String segmentTranslation, String comment, String prevSegment, String nextSegment,
-                        String path) {
-                    searchText(segmentSource);
-                }
-
-                public void addFileTMXEntry(String source, String translation) {
-                }
-            });
+            searchCallback.setCurrentFile(fi);
+            fm.loadFile(filename, new FilterContext(m_project.getProjectProperties()), searchCallback);
+            searchCallback.fileFinished();
+            
             if (stopCallback.isStopped()) {
                 return;
             }
         }
     }
 
-    protected abstract class SearchCallback extends ParseEntry implements IParseCallback {
+    protected class SearchCallback extends ParseEntry implements IParseCallback {
+        private String filename;
+
         public SearchCallback(ProjectProperties config) {
             super(config);
+        }
+
+        @Override
+        public void setCurrentFile(FileInfo fi) {
+            super.setCurrentFile(fi);
+            filename = fi.filePath;
+        }
+
+        @Override
+        protected void fileFinished() {
+            super.fileFinished();
+        }
+
+        @Override
+        protected void addSegment(String id, short segmentIndex, String segmentSource,
+                String segmentTranslation, String comment, String prevSegment, String nextSegment, String path) {
+            searchText(segmentSource, filename);
+        }
+
+        @Override
+        public void addFileTMXEntry(String source, String translation) {
         }
     }
 
@@ -449,7 +465,7 @@ public class Searcher {
     // ///////////////////////////////////////////////////////////////
     // interface used by FileHandlers
 
-    public void searchText(String seg) {
+    public void searchText(String seg, String filename) {
         // don't look further if the max. nr of hits has been reached
         if (m_numFinds >= m_maxResults)
             return;
@@ -461,7 +477,7 @@ public class Searcher {
         if (searchString(seg)) {
             SearchMatch[] matches = foundMatches.toArray(new SearchMatch[foundMatches.size()]);
             // found a match - do something about it
-            foundString(-1, m_curFileName, seg, null, matches, null);
+            foundString(-1, filename, seg, null, matches, null);
         }
     }
 
@@ -473,7 +489,6 @@ public class Searcher {
     private IProject m_project;
     private String m_searchDir;
     private boolean m_searchRecursive;
-    private String m_curFileName;
     private boolean m_tmSearch;
     private boolean m_allResults;
     private boolean m_searchSource;

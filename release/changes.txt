@@ -2,7 +2,7 @@
  OmegaT 2.5.0 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   3 Bug fixes
+   4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.5.0 update 1 vs. 2.5.0 
@@ -17,6 +17,9 @@ glossary entry
 
   - Strange behaviour of the Editor for segments with empty 
 translations in TMX
+
+  - Search function doesn't work when searching files
+  http://sourceforge.net/support/tracker.php?aid=3419536
 
   Localisation updates:
 

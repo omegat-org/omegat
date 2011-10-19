@@ -77,11 +77,16 @@ is saved.
 ----------------------------------------------------------------------
  OmegaT 2.3.0 update 3
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 2.3.0 update 3 vs. 2.3.0 update 2
+
+  Implemented requests:
+
+  - Google Translate API v2
+  http://sourceforge.net/support/tracker.php?aid=3426058
 
   Bug fixes:
 

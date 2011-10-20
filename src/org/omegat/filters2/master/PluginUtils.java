@@ -41,7 +41,9 @@ import java.util.jar.Manifest;
 
 import org.omegat.util.FileUtil;
 import org.omegat.util.Log;
+import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.VersionNumber;
 
 /**
  * Static utilities for OmegaT filter plugins.
@@ -94,7 +96,7 @@ public final class PluginUtils {
                     // found main manifest - not in development mode
                     foundMain = true;
                 }
-                loadFromManifest(m, cls);
+                loadFromManifest(m, cls, false);
             }
             if (!foundMain) {
                 // development mode - load main manifest template
@@ -110,7 +112,7 @@ public final class PluginUtils {
                     } finally {
                         in.close();
                     }
-                    loadFromManifest(m, cls);
+                    loadFromManifest(m, cls, true);
                 }
             }
         } catch (Exception ex) {
@@ -160,10 +162,12 @@ public final class PluginUtils {
      *            manifest
      * @param classLoader
      *            classloader
+     * @param devMode
+     *            development mode - version checking for '@version@'
      * @throws ClassNotFoundException
      */
-    protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader)
-            throws ClassNotFoundException {
+    protected static void loadFromManifest(final Manifest m, final ClassLoader classLoader,
+            final boolean devMode) throws ClassNotFoundException {
         if (m.getMainAttributes().getValue("OmegaT-Plugin") == null) {
             return;
         }
@@ -172,9 +176,14 @@ public final class PluginUtils {
         for (String key : entries.keySet()) {
             Attributes attrs = (Attributes) entries.get(key);
             String sType = attrs.getValue("OmegaT-Plugin");
-            if ("true".equals(attrs.getValue("OmegaT-Tokenizer"))) {
-                // TODO remove after release new tokenizers
-                sType = "tokenizer";
+            String sVersion = attrs.getValue("OmegaT-Version");
+            if (devMode && "@version@-@version@".equals(sVersion)) {
+                // development mode hack for '@version@-@version@'
+                sVersion = OStrings.VERSION + "-" + OStrings.VERSION;
+            }
+            if (!isVersionAllowed(sVersion, OStrings.VERSION)) {
+                Log.logInfoRB("PLUGIN_WRONG_VERSION", key, OStrings.VERSION, sVersion);
+                continue;
             }
             if (sType == null) {
                 // WebStart signing section, or other section
@@ -206,5 +215,38 @@ public final class PluginUtils {
                 Log.logErrorRB("PLUGIN_UNKNOWN", key);
             }
         }
+    }
+    
+    /**
+     * This method checks if required version is between min and max version.
+     * 
+     * @param minMaxVersion
+     *            min and max version in format '1.1.1-2.2.2'
+     * @param requiredVersion
+     *            required version
+     * @return true if required version between min and max(inclusive)
+     */
+    protected static boolean isVersionAllowed(String minMaxVersion, String requiredVersion) {
+        if (minMaxVersion == null) {
+            return true;
+            // TODO : allow after all plugins will be fixed
+            //return false;
+        }
+        String[] vv = minMaxVersion.split("-");
+        if (vv.length != 2) {
+            // invalid format
+            Log.log(new IllegalArgumentException("Wrong min/max version definition: " + minMaxVersion));
+            return false;
+        }
+        VersionNumber min, max, cur;
+        try {
+            min = new VersionNumber(vv[0]);
+            max = new VersionNumber(vv[1]);
+            cur = new VersionNumber(requiredVersion);
+        } catch (IllegalArgumentException ex) {
+            Log.log(ex);
+            return false;
+        }
+        return min.compareTo(cur) <= 0 && max.compareTo(cur) >= 0;
     }
 }

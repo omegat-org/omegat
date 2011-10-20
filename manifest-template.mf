@@ -8,103 +8,135 @@ OmegaT-Plugin: true
 
 Name: org.omegat.filters3.xml.android.AndroidFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.text.TextFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.latex.LatexFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.po.PoFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.rc.RcFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.mozdtd.MozillaDTDFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.text.bundles.ResourceBundleFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.xhtml.XHTMLFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.helpandmanual.HelpAndManualFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.html2.HTMLFilter2
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.hhc.HHCFilter2
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.text.ini.INIFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.text.dokuwiki.DokuWikiFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.docbook.DocBookFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.opendoc.OpenDocFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.openxml.OpenXMLFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.xliff.XLIFFFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.subtitles.SrtFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters2.xtagqxp.XtagFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.resx.ResXFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.wix.WiXFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.typo3.Typo3Filter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.l10nmgr.L10nmgrFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.svg.SvgFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.infix.InfixFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.flash.FlashFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.filters3.xml.txml.TXMLFilter
 OmegaT-Plugin: filter
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.core.matching.Tokenizer
 OmegaT-Plugin: tokenizer
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.gui.glossary.TransTipsMarker
 OmegaT-Plugin: Marker
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.core.spellchecker.SpellCheckerMarker
 OmegaT-Plugin: Marker
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.core.machinetranslators.GoogleTranslate
 OmegaT-Plugin: MachineTranslator
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.core.machinetranslators.Google2Translate
 OmegaT-Plugin: MachineTranslator
 
 Name: org.omegat.core.machinetranslators.BelazarTranslate
 OmegaT-Plugin: MachineTranslator
+OmegaT-Version: @version@-@version@
 
 Name: org.omegat.core.machinetranslators.ApertiumTranslate
 OmegaT-Plugin: MachineTranslator
-
+OmegaT-Version: @version@-@version@

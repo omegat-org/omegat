@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -48,6 +49,7 @@ import org.omegat.util.OConsts;
  * Class for load dictionaries.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Didier Briel
  */
 public class DictionariesManager implements DirectoryMonitor.Callback {
     protected DirectoryMonitor monitor;
@@ -183,13 +185,13 @@ public class DictionariesManager implements DirectoryMonitor.Callback {
                     }
                     Object data = di.info.get(word);
                     if (data == null) {
-                        word = word.toLowerCase();
+                        String lowerCaseWord = word.toLowerCase();
                         synchronized (ignoreWords) {
-                            if (ignoreWords.contains(word)) {
+                            if (ignoreWords.contains(lowerCaseWord)) {
                                 continue;
                             }
                         }
-                        data = di.info.get(word);
+                        data = di.info.get(lowerCaseWord);
                     }
                     if (data != null) {
                         if (data.getClass().isArray()) {

@@ -36,7 +36,8 @@
 			<string>$JAVAROOT/lib/jaxb-api.jar</string>
 			<string>$JAVAROOT/lib/jaxb-impl.jar</string>
 			<string>$JAVAROOT/lib/jsr173_1.0_api.jar</string>
-			<string>$JAVAROOT/native/libhunspell.dylib</string>
+			<string>$JAVAROOT/native/libhunspell-macos64.dylib</string>
+			<string>$JAVAROOT/native/libhunspell-macos32.dylib</string>
 		</array>
 		<key>JVMVersion</key>
 		<string>1.5+</string>

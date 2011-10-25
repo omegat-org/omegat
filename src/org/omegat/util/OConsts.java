@@ -98,9 +98,6 @@ public class OConsts {
     /** The name of the file with the correct (learned) words: one word per line */
     public static final String LEARNED_WORD_LIST_FILE_NAME = "learned_words.txt";
 
-    /** The name of the spell checking library */
-    public static final String SPELLCHECKER_LIBRARY_NAME = "hunspell";
-
     /** the native library directory */
     public static final String NATIVE_LIBRARY_DIR = "native";
 

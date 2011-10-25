@@ -49,6 +49,15 @@ import com.sun.jna.ptr.PointerByReference;
 /**
  * Spell check implementation for use Hunspell.
  * 
+ * System.mapLibraryName() converts base library name into platform-specific by adding prefix and suffix. It
+ * doesn't care about path in library name, i.e. it just converts "/tmp/hunspell" into "lib/tmp/hunspell.so".
+ * 
+ * Linux : "hunspell-os64" -> "libhunspell-os64.so"
+ * 
+ * MacOS : "hunspell-os64" -> "libhunspell-os64.jnilib"
+ * 
+ * Windows : "hunspell-os64" -> "hunspell-os64.dll"
+ * 
  * @author Zoltan Bartko (bartkozoltan at bartkozoltan dot com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
@@ -66,18 +75,23 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
     private String encoding;
 
     /**
-     * Initialize the library for the given project. Loads the lists of ignored
-     * and learned words for the project
+     * Initialize hunspell native library.
      */
     public SpellCheckerHunspell(String language, String dictionaryName, String affixName) throws Exception {
         if (hunspell == null) {
+            String baseHunspellLib = getBaseHunspellLibraryName();
+            if (baseHunspellLib == null) {
+                // system not detected
+                throw new ExceptionInInitializerError("System not recognized: os.name="
+                        + System.getProperty("os.name") + " os.arch=" + System.getProperty("os.arch"));
+            }
             String libraryPath;
             if (Platform.isWebStart()) {
-                libraryPath = Native.getWebStartLibraryPath(OConsts.SPELLCHECKER_LIBRARY_NAME)
-                        + File.separator + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
+                libraryPath = Native.getWebStartLibraryPath(baseHunspellLib) + File.separator
+                        + mapLibraryName(baseHunspellLib);
             } else {
                 libraryPath = StaticUtils.installDir() + File.separator + OConsts.NATIVE_LIBRARY_DIR
-                        + File.separator + mapLibraryName(OConsts.SPELLCHECKER_LIBRARY_NAME);
+                        + File.separator + mapLibraryName(baseHunspellLib);
             }
 
             hunspell = (Hunspell) Native.loadLibrary(libraryPath, Hunspell.class);
@@ -99,7 +113,7 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
     public boolean isCorrect(String word) {
         boolean isCorrect = false;
         try {
-            if (0 != hunspell.Hunspell_spell(pHunspell, prepareString(word))) {
+            if (0 != hunspell.Hunspell_spell(pHunspell, prepareString(word, encoding))) {
                 isCorrect = true;
             }
         } catch (UnsupportedEncodingException ex) {
@@ -116,7 +130,7 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
         int total = 0;
         try {
             // try some wrong word
-            total = hunspell.Hunspell_suggest(pHunspell, strings, prepareString(word));
+            total = hunspell.Hunspell_suggest(pHunspell, strings, prepareString(word, encoding));
         } catch (UnsupportedEncodingException ex) {
             Log.log("Unsupported encoding " + encoding);
         }
@@ -159,15 +173,14 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
 
     public void learnWord(String word) {
         try {
-            addWord(pHunspell, prepareString(word));
+            addWord(pHunspell, prepareString(word, encoding));
         } catch (UnsupportedEncodingException ex) {
             Log.log("Unsupported encoding " + encoding);
         }
     }
 
     /**
-     * If Hunspell_add is not supported, whether this has already be recorded in
-     * the log
+     * If Hunspell_add is not supported, whether this has already be recorded in the log
      */
     private boolean addNotSupportedLogged = false;
 
@@ -177,9 +190,8 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
     private boolean addToHunspell = true;
 
     /**
-     * Try to use Hunspell_add to add a word to the dictionnary. If that fails,
-     * try to use Hunspell_put_word (old Hunspell librairies). If that fails
-     * too, set hunspell to null
+     * Try to use Hunspell_add to add a word to the dictionnary. If that fails, try to use Hunspell_put_word
+     * (old Hunspell librairies). If that fails too, set hunspell to null
      * 
      * @param pHunspell
      *            Pointer to the Hunspell class
@@ -206,41 +218,55 @@ public class SpellCheckerHunspell implements ISpellCheckerProvider {
     }
 
     /**
-     * convert the string a byte array in the encoding of the dictionary and add
-     * a terminating NUL to the end.
+     * convert the string a byte array in the encoding of the dictionary and add a terminating NUL to the end.
      */
-    protected byte[] prepareString(String word) throws UnsupportedEncodingException {
+    protected static byte[] prepareString(String word, String encoding) throws UnsupportedEncodingException {
         return (word + "\u0000").getBytes(encoding);
     }
 
     /**
-     * amended version of System.mapLibraryName(). shamelessly stolen from JNA
-     * (https://jna.dev.java.net)
+     * It returns base hunspell library name depends of system.
      */
-    private static String mapLibraryName(String libName) {
+    protected static String getBaseHunspellLibraryName() {
+        switch (Platform.getOsType()) {
+        case LINUX64:
+            return "hunspell-linux64";
+        case MAC64:
+            return "hunspell-macos64";
+        case WIN64:
+            return "hunspell-win64";
+        case LINUX32:
+            return "hunspell-linux32";
+        case MAC32:
+            return "hunspell-macos32";
+        case WIN32:
+            return "hunspell-win32";
+        default:
+            return null;
+        }
+    }
 
-        if (Platform.isMac()) {
-            if (libName.matches("lib.*\\.(dylib|jnilib)$")) {
-                return libName;
-            }
-            String name = System.mapLibraryName(libName);
+    /**
+     * Get hunspell dynamic library base name by platform.
+     * 
+     * We have to working with base name, because getWebStartLibraryPath() requires base name, not real
+     * library filename.
+     */
+    protected static String mapLibraryName(String libName) {
+        String result = System.mapLibraryName(libName);
+
+        switch (Platform.getOsType()) {
+        case MAC64:
+        case MAC32:
             // On MacOSX, System.mapLibraryName() returns the .jnilib extension
             // (the suffix for JNI libraries); ordinarily shared libraries have
             // a .dylib suffix
-            if (name.endsWith(".jnilib")) {
-                return name.substring(0, name.lastIndexOf(".jnilib")) + ".dylib";
+            if (result.endsWith(".jnilib")) {
+                result = result.substring(0, result.lastIndexOf(".jnilib")) + ".dylib";
             }
-            return name;
-        } else if (Platform.isLinux()) {
-            //
-            // A specific version was requested - use as is for search
-            //
-            if (libName.matches("lib.*\\.so\\.[0-9]+$")) {
-                return libName;
-            }
-            libName = libName + "-" + System.getProperty("os.arch");
+            break;
         }
 
-        return System.mapLibraryName(libName);
+        return result;
     }
 }

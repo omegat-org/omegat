@@ -46,21 +46,24 @@
                 <jar href="jsr173_1.0_api.jar" />
                 <jar href="swing-worker-1.2.jar" />
 			</resources>
-			<resources os="Windows">
-				<nativelib href="hunspell-win.jar" />
-			</resources>
-			<resources os="Linux" arch="x86">
-				<nativelib href="hunspell-lin-i386.jar" />
-			</resources>
-			<resources os="Linux" arch="i386">
-				<nativelib href="hunspell-lin-i386.jar" />
-			</resources>
-			<resources os="Linux" arch="amd64">
-				<nativelib href="hunspell-lin-amd64.jar" />
-			</resources>
-			<resources os="MacOS">
-				<nativelib href="hunspell-mac.jar" />
-			</resources>
+            <resources os="Linux" arch="amd64">
+                <nativelib href="hunspell-linux64.jar" />
+            </resources>
+            <resources os="Linux" arch="i386">
+                <nativelib href="hunspell-linux32.jar" />
+            </resources>
+            <resources os="MacOS" arch="x86_64">
+                <nativelib href="hunspell-macos64.jar" />
+            </resources>
+            <resources os="MacOS" arch="i386">
+                <nativelib href="hunspell-macos32.jar" />
+            </resources>
+            <resources os="Windows" arch="amd64">
+                <nativelib href="hunspell-win64.jar" />
+            </resources>
+            <resources os="Windows" arch="x86">
+                <nativelib href="hunspell-win32.jar" />
+            </resources>
 		</j2se>
 	</resources>
 	<resources>
@@ -78,21 +81,24 @@
 				<jar href="vldocking_2.1.4.jar" />
                 <jar href="swing-worker-1.2.jar" />
 			</resources>
-			<resources os="Windows">
-				<nativelib href="hunspell-win.jar" />
-			</resources>
-			<resources os="Linux" arch="x86">
-				<nativelib href="hunspell-lin-i386.jar" />
-			</resources>
-			<resources os="Linux" arch="i386">
-				<nativelib href="hunspell-lin-i386.jar" />
-			</resources>
-			<resources os="Linux" arch="amd64">
-				<nativelib href="hunspell-lin-amd64.jar" />
-			</resources>
-			<resources os="MacOS">
-				<nativelib href="hunspell-mac.jar" />
-			</resources>
+            <resources os="Linux" arch="amd64">
+                <nativelib href="hunspell-linux64.jar" />
+            </resources>
+            <resources os="Linux" arch="i386">
+                <nativelib href="hunspell-linux32.jar" />
+            </resources>
+            <resources os="MacOS" arch="x86_64">
+                <nativelib href="hunspell-macos64.jar" />
+            </resources>
+            <resources os="MacOS" arch="i386">
+                <nativelib href="hunspell-macos32.jar" />
+            </resources>
+            <resources os="Windows" arch="amd64">
+                <nativelib href="hunspell-win64.jar" />
+            </resources>
+            <resources os="Windows" arch="x86">
+                <nativelib href="hunspell-win32.jar" />
+            </resources>
 		</j2se>
 	</resources>
 	<application-desc main-class="org.omegat.Main" />

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
+               2011 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -25,56 +26,50 @@
 package org.omegat.util;
 
 /**
- * A class to retrieve some platform information. Shamelessly stolen from JNA
- * (https://jna.dev.java.net)
+ * A class to retrieve some platform information.
  * 
  * @author: Zoltan Bartko bartkozoltan@bartkozoltan.com
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public final class Platform {
-    private static final int UNSPECIFIED = -1;
-    private static final int MAC = 0;
-    private static final int LINUX = 1;
-    private static final int WINDOWS = 2;
-    private static final int SOLARIS = 3;
-    private static final int osType;
+    public enum OsType {
+        // os.arch=amd64, os.name=Linux, os.version=3.0.0-12-generic
+        LINUX64,
+        // os.arch=i386, os.name=Linux, os.version=3.0.0-12-generic
+        LINUX32,
+        // os.arch=x86_64, os.name=Mac OS X, os.version=10.6.8
+        MAC64,
+        // os.arch=i386, os.name=Mac OS X, os.version=10.6.8
+        MAC32,
+        // os.arch=amd64, os.name=Windows 7, os.version=6.1
+        WIN64,
+        // os.arch=x86, os.name=Windows 7, os.version=6.1
+        WIN32,
+        // unknown system
+        OTHER
+    }
+
+    private static OsType osType = OsType.OTHER;
 
     static {
         String osName = System.getProperty("os.name");
-        if (osName.startsWith("Linux")) {
-            osType = LINUX;
-        } else if (osName.startsWith("Mac")) {
-            osType = MAC;
-        } else if (osName.startsWith("Windows")) {
-            osType = WINDOWS;
-        } else if (osName.startsWith("Solaris") || osName.startsWith("SunOS")) {
-            osType = SOLARIS;
-        } else {
-            osType = UNSPECIFIED;
+        String osArch = System.getProperty("os.arch");
+        if (osName != null && osArch != null) {
+            if (osName.startsWith("Linux")) {
+                osType = osArch.contains("64") ? OsType.LINUX64 : OsType.LINUX32;
+            } else if (osName.startsWith("Mac")) {
+                osType = osArch.contains("64") ? OsType.MAC64 : OsType.MAC32;
+            } else if (osName.startsWith("Windows")) {
+                osType = osArch.contains("64") ? OsType.WIN64 : OsType.WIN32;
+            }
         }
     }
 
     private Platform() {
     }
 
-    public static final boolean isMac() {
-        return osType == MAC;
-    }
-
-    public static final boolean isLinux() {
-        return osType == LINUX;
-    }
-
-    public static final boolean isWindows() {
-        return osType == WINDOWS;
-    }
-
-    public static final boolean isSolaris() {
-        return osType == SOLARIS;
-    }
-
-    public static final boolean isX11() {
-        // TODO: check FS or do some other X11-specific test
-        return !Platform.isWindows() && !Platform.isMac();
+    public static OsType getOsType() {
+        return osType;
     }
 
     public static final boolean isWebStart() {

@@ -55,7 +55,7 @@ public class TMXWriter2 {
 
     private final String langSrc, langTar;
     private final boolean levelTwo;
-    private boolean forceValidTMX;
+    private final boolean forceValidTMX;
 
     /**
      * DateFormat with format YYYYMMDDThhmmssZ able to display a date in UTC time.
@@ -82,6 +82,7 @@ public class TMXWriter2 {
     public TMXWriter2(File file, final Language sourceLanguage, final Language targetLanguage,
             boolean sentenceSegmentingEnabled, boolean levelTwo, boolean forceValidTMX) throws Exception {
         this.levelTwo = levelTwo;
+        this.forceValidTMX = forceValidTMX;
 
         out = new BufferedOutputStream(new FileOutputStream(file));
         xml = FACTORY.createXMLStreamWriter(out, OConsts.UTF8);

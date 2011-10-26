@@ -1,6 +1,20 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 1
 ----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.0 update 2 vs. 2.5.0 update 1
+
+  Bug fixes:
+
+  - The "level1" export TMX contained OmegaT tags instead of containing
+no tags at all
+
+----------------------------------------------------------------------
+ OmegaT 2.5.0 update 1
+----------------------------------------------------------------------
    1 Enhancement
    4 Bug fixes
    2 Localisation updates

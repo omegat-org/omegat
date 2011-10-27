@@ -186,6 +186,11 @@ public class Preferences {
     public static final String SPELLCHECKER_DICTIONARY_DIRECTORY = "spellcheker_dir";
 
     /**
+     * The location of the scripts
+     */
+    public static final String SCRIPTS_DIRECTORY = "scripts_dir";
+    
+    /**
      * display the segment sources
      */
     public static final String DISPLAY_SEGMENT_SOURCES = "display_segment_sources";

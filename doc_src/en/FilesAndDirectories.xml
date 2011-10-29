@@ -146,9 +146,9 @@
       <para>The<emphasis role="bold"> <indexterm class="singular">
           <primary>Project files</primary>
 
-          <secondary>ignore_word and learned_word</secondary>
-        </indexterm>Ignore_words.txt</emphasis> and <emphasis
-      role="bold">learned_word.txt</emphasis>files are used by the spell
+          <secondary>ignored_words and learned_words</secondary>
+        </indexterm>ignored_words.txt</emphasis> and <emphasis
+      role="bold">learned_words.txt</emphasis>files are used by the spell
       checker. Note that they are specific for a given project, so if you have
       already amassed words you wish the spell checker to ignore / accept, you
       just need to copy the corresponding two files into the 

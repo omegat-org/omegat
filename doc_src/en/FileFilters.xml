@@ -323,7 +323,7 @@
       <para>Only a limited number of file formats specify a mandatory
       encoding. File formats that do not specify their encoding will use the
       encoding you set up for the extension that matches their name. For
-      example, by default<literal> .txt </literal>files will be loaded using
+      example, by default <literal>.txt</literal> files will be loaded using
       the default encoding of your operating system. You may change the source
       encoding for each different source filename pattern. Such files may also
       be written out in any encoding. By default, the translated file encoding

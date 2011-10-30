@@ -73,9 +73,9 @@
     </figure>
 
     <para>Note that in the above case, you may lose the spelling dictionaries,
-    if the OpenOffice.org installation is removed from your system. Creating your
-    own folder and copying the files may be extra work, but possibly worth the
-    trouble.</para>
+    if the OpenOffice.org installation is removed from your system. Creating
+    your own folder and copying the files may be extra work, but possibly
+    worth the trouble.</para>
 
     <para>More recent OpenOffice.org spelling dictionaries are supplied as
     "OpenOffice.org extensions", with the filename extension .oxt. These are
@@ -85,10 +85,11 @@
     created for them.</para>
 
     <para>Please note that the application behind the<guilabel>
-    "Install"</guilabel> depends on the Internet list of dictionaries. If it
-    is out of date or does not include the desired language, you will have to
-    look for appropriate vocabularies yourself. OpenOffice.org contains
-    probably the largest vocabulary collection at the <ulink
+    "Install..."</guilabel> button depends on the Internet list of
+    dictionaries. If it is out of date or does not include the desired
+    language, you will have to look for appropriate vocabularies yourself.
+    OpenOffice.org contains probably the largest vocabulary collection at the
+    <ulink
     url="http://extensions.services.openoffice.org/dictionary">OpenOffice.org
     Extensions site</ulink>. After the dictionary extension has been
     downloaded and installed, the corresponding <emphasis>aff</emphasis> and
@@ -130,6 +131,7 @@
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckingText.png" />
         </imageobject>
+
         <imageobject role="fo">
           <imagedata fileref="images/SpellcheckingText.png" width="80%" />
         </imageobject>

@@ -2,7 +2,7 @@
  OmegaT 2.5.0 update 1
 ----------------------------------------------------------------------
    0 Enhancement
-   1 Bug fix
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 2 vs. 2.5.0 update 1
@@ -11,6 +11,9 @@
 
   - The "level1" export TMX contained OmegaT tags instead of containing
 no tags at all
+
+  - ResX filter no longer working since revision 3508
+  http://sourceforge.net/support/tracker.php?aid=3430364
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 1

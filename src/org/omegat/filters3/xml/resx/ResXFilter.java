@@ -102,7 +102,9 @@ public class ResXFilter extends XMLFilter {
         if ("/root/data/comment".equals(path)) {
             comment = text;
         } else if ("/root/data".equals(path)) {
-            entryParseCallback.addEntry(id, entryText, null, false, comment, null, this);
+            if (entryParseCallback != null) {
+                entryParseCallback.addEntry(id, entryText, null, false, comment, null, this);
+            }
             id = null;
             entryText = null;
             comment = null;

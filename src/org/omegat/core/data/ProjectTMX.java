@@ -201,9 +201,13 @@ public class ProjectTMX {
 
         public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                 TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-            String changer=null;
-            long dt=0;
-            String translation=null;
+            if (tuvSource == null) {
+                // source Tuv not found
+                return;
+            }
+            String changer = null;
+            long dt = 0;
+            String translation = null;
 
             if (tuvTarget != null) {
                 changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,

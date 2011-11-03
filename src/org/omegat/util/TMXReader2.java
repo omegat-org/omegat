@@ -88,12 +88,9 @@ public class TMXReader2 {
     private boolean extTmxLevel2;
     private boolean useSlash;
 
-    private ParsedTu currentTu = new ParsedTu();
-    private ParsedTuv origTuv = new ParsedTuv();
-    private ParsedTuv targetTuv = new ParsedTuv();
+    ParsedTu currentTu = new ParsedTu();
 
-    private List<Tuv> currentTuTuvs = new ArrayList<Tuv>();
-
+    // buffers for parse texts
     StringBuilder propContent = new StringBuilder();
     StringBuilder noteContent = new StringBuilder();
     StringBuilder segContent = new StringBuilder();
@@ -120,13 +117,9 @@ public class TMXReader2 {
                     StartElement eStart = (StartElement) e;
                     if ("tu".equals(eStart.getName().getLocalPart())) {
                         parseTu(eStart);
-                        if (fillTuv(origTuv, sourceLanguage)) {
-                            if (fillTuv(targetTuv, targetLanguage)) {
-                                callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype);
-                            } else {
-                                callback.onEntry(currentTu, origTuv, null, isParagraphSegtype);
-                            }
-                        }
+                        ParsedTuv origTuv = getTuvByLang(sourceLanguage);
+                        ParsedTuv targetTuv = getTuvByLang(targetLanguage);
+                        callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype);
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
                         parseHeader(eStart);
                     }
@@ -151,7 +144,6 @@ public class TMXReader2 {
         currentTu.creationdate = parseISO8601date(getAttributeValue(element, "creationdate"));
 
         currentTu.clear();
-        currentTuTuvs.clear();
 
         while (true) {
             XMLEvent e = xml.nextEvent();
@@ -159,7 +151,7 @@ public class TMXReader2 {
             case XMLEvent.START_ELEMENT:
                 StartElement eStart = (StartElement) e;
                 if ("tuv".equals(eStart.getName().getLocalPart())) {
-                    currentTuTuvs.add(parseTuv(eStart));
+                    parseTuv(eStart);
                 } else if ("prop".equals(eStart.getName().getLocalPart())) {
                     parseProp(eStart);
                 } else if ("note".equals(eStart.getName().getLocalPart())) {
@@ -176,13 +168,14 @@ public class TMXReader2 {
         }
     }
 
-    protected Tuv parseTuv(StartElement element) throws Exception {
-        Tuv tuv = new Tuv();
+    protected void parseTuv(StartElement element) throws Exception {
+        ParsedTuv tuv = new ParsedTuv();
+        currentTu.tuvs.add(tuv);
 
         tuv.changeid = getAttributeValue(element, "changeid");
-        tuv.changedate = getAttributeValue(element, "changedate");
+        tuv.changedate = parseISO8601date(getAttributeValue(element, "changedate"));
         tuv.creationid = getAttributeValue(element, "creationid");
-        tuv.creationdate = getAttributeValue(element, "creationdate");
+        tuv.creationdate = parseISO8601date(getAttributeValue(element, "creationdate"));
 
         // find 'lang' or 'xml:lang' attribute
         for (Iterator<Attribute> it = element.getAttributes(); it.hasNext();) {
@@ -206,13 +199,13 @@ public class TMXReader2 {
                     } else {
                         parseSegExtLevel1();
                     }
-                    tuv.seg = segContent.toString();
+                    tuv.text = segContent.toString();
                 }
                 break;
             case XMLEvent.END_ELEMENT:
                 EndElement eEnd = (EndElement) e;
                 if ("tuv".equals(eEnd.getName().getLocalPart())) {
-                    return tuv;
+                    return;
                 }
                 break;
             }
@@ -429,21 +422,21 @@ public class TMXReader2 {
     }
 
     /**
-     * Fill ParsedTuv from list of Tuv for specific language.
+     * Get ParsedTuv from list of Tuv for specific language.
      * 
      * Language choosed by:<br>
      * - with the same language+country<br>
      * - if not exist, then with the same language but without country<br>
      * - if not exist, then with the same language with whatever country<br>
      */
-    private boolean fillTuv(ParsedTuv parsedTuv, Language lang) {
+    protected ParsedTuv getTuvByLang(Language lang) {
         String langLanguage = lang.getLanguageCode();
         String langCountry = lang.getCountryCode();
-        Tuv tuvLC = null; // Tuv with the same language+country
-        Tuv tuvL = null; // Tuv with the same language only, without country
-        Tuv tuvLW = null; // Tuv with the same language+whatever country
-        for (int i = 0; i < currentTuTuvs.size(); i++) {
-            Tuv tuv = currentTuTuvs.get(i);
+        ParsedTuv tuvLC = null; // Tuv with the same language+country
+        ParsedTuv tuvL = null; // Tuv with the same language only, without country
+        ParsedTuv tuvLW = null; // Tuv with the same language+whatever country
+        for (int i = 0; i < currentTu.tuvs.size(); i++) {
+            ParsedTuv tuv = currentTu.tuvs.get(i);
             String tuvLang = tuv.lang;
             if (!langLanguage.regionMatches(true, 0, tuvLang, 0, 2)) {
                 // language not equals - there is no sense to processing
@@ -460,7 +453,7 @@ public class TMXReader2 {
                 tuvLW = tuv;
             }
         }
-        Tuv bestTuv;
+        ParsedTuv bestTuv;
         if (tuvLC != null) {
             bestTuv = tuvLC;
         } else if (tuvL != null) {
@@ -468,12 +461,7 @@ public class TMXReader2 {
         } else {
             bestTuv = tuvLW;
         }
-        if (bestTuv != null) {
-            parsedTuv.fillFrom(bestTuv);
-            return true;
-        } else {
-            return false;
-        }
+        return bestTuv;
     }
 
     public static long parseISO8601date(String str) {
@@ -515,6 +503,7 @@ public class TMXReader2 {
         public long creationdate;
         public String note;
         public Map<String, String> props = new TreeMap<String, String>();
+        public List<ParsedTuv> tuvs = new ArrayList<ParsedTuv>();
 
         void clear() {
             changeid = null;
@@ -522,33 +511,18 @@ public class TMXReader2 {
             creationid = null;
             creationdate = 0;
             props.clear();
+            tuvs.clear();
             note = null;
         }
     }
 
     public static class ParsedTuv {
+        public String lang;
         public String changeid;
         public long changedate;
         public String creationid;
         public long creationdate;
         public String text;
-
-        void fillFrom(Tuv tuv) {
-            changeid = tuv.changeid;
-            changedate = parseISO8601date(tuv.changedate);
-            creationid = tuv.creationid;
-            creationdate = parseISO8601date(tuv.creationdate);
-            text = tuv.seg.toString();
-        }
-    }
-
-    public static class Tuv {
-        String lang;
-        String changeid;
-        String changedate;
-        String creationid;
-        String creationdate;
-        String seg;
     }
 
     public static final EntityResolver TMX_DTD_RESOLVER = new EntityResolver() {

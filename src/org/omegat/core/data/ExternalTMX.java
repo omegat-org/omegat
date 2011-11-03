@@ -55,10 +55,25 @@ public class ExternalTMX {
         TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
             public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                     TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-
-                if (tuvTarget == null) 
+                if (tuvSource == null) {
                     return;
+                }
 
+                if (tuvTarget != null) {
+                    // add only target Tuv
+                    addTuv(tu, tuvSource, tuvTarget, isParagraphSegtype);
+                } else {
+                    // add all non-source Tuv
+                    for (int i = 0; i < tu.tuvs.size(); i++) {
+                        if (tu.tuvs.get(i) != tuvSource) {
+                            addTuv(tu, tuvSource, tu.tuvs.get(i), isParagraphSegtype);
+                        }
+                    }
+                }
+            }
+
+            private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                    TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                 String changer = StringUtil.nvl(tuvTarget.changeid, tuvTarget.creationid, tu.changeid,
                         tu.creationid);
                 long dt = StringUtil.nvlLong(tuvTarget.changedate, tuvTarget.creationdate, tu.changedate,

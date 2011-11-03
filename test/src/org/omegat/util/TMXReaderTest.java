@@ -73,4 +73,40 @@ public class TMXReaderTest extends TestCore {
                     }
                 });
     }
+    
+    public void testGetTuvByLang() {
+        TMXReader2.ParsedTuv tuvBE = new TMXReader2.ParsedTuv();
+        tuvBE.lang = "be";
+
+        TMXReader2.ParsedTuv tuvFR = new TMXReader2.ParsedTuv();
+        tuvFR.lang = "FR";
+        
+        TMXReader2.ParsedTuv tuvFRCA = new TMXReader2.ParsedTuv();
+        tuvFRCA.lang = "FR-CA";
+
+        TMXReader2.ParsedTuv tuvFRFR = new TMXReader2.ParsedTuv();
+        tuvFRFR.lang = "FR-FR";
+
+        TMXReader2.ParsedTuv tuvENGB = new TMXReader2.ParsedTuv();
+        tuvENGB.lang = "EN-GB";
+
+        TMXReader2 tmx = new TMXReader2();
+        tmx.currentTu.tuvs.add(tuvBE);
+        tmx.currentTu.tuvs.add(tuvFR);
+        tmx.currentTu.tuvs.add(tuvFRCA);
+        tmx.currentTu.tuvs.add(tuvFRFR);
+        tmx.currentTu.tuvs.add(tuvENGB);
+
+        assertEquals(tmx.getTuvByLang(new Language("BE")), tuvBE);
+        assertEquals(tmx.getTuvByLang(new Language("BE-NN")), tuvBE);
+
+        assertNotNull(tmx.getTuvByLang(new Language("FR")));
+        assertEquals(tmx.getTuvByLang(new Language("FR-CA")), tuvFRCA);
+        assertEquals(tmx.getTuvByLang(new Language("FR-NN")), tuvFR);
+
+        assertEquals(tmx.getTuvByLang(new Language("EN")), tuvENGB);
+        assertEquals(tmx.getTuvByLang(new Language("EN-CA")), tuvENGB);
+        
+        assertNull(tmx.getTuvByLang(new Language("ZZ")));
+    }
 }

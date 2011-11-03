@@ -41,6 +41,8 @@ import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
@@ -56,6 +58,7 @@ public class EditorPopups {
         ec.registerPopupMenuConstructors(10, new DefaultPopup());
         ec.registerPopupMenuConstructors(20, new SpellCheckerPopup(ec));
         ec.registerPopupMenuConstructors(30, new GoToSegmentPopup(ec));
+        ec.registerPopupMenuConstructors(40, new EmptyNoneTranslationPopup(ec));
     }
 
     /**
@@ -261,6 +264,49 @@ public class EditorPopups {
                     ec.goToSegmentAtLocation(comp.getCaretPosition());
                 }
             });
+        }
+    }
+
+    public static class EmptyNoneTranslationPopup implements IPopupMenuConstructor {
+        protected final EditorController ec;
+
+        public EmptyNoneTranslationPopup(EditorController ec) {
+            this.ec = ec;
+        }
+
+        /**
+         * creates a popup menu for remove translation or set empty translation
+         */
+        public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos,
+                boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
+            if (!isInActiveEntry) {
+                return;
+            }
+
+            JMenuItem itemEmpty = menu.add("Set empty trans");
+            itemEmpty.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    setTranslation("");
+                }
+            });
+            JMenuItem itemRemove = menu.add("Remove trans");
+            itemRemove.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    setTranslation(null);
+                }
+            });
+        }
+
+        protected void setTranslation(String v) {
+            SourceTextEntry ste = Core.getEditor().getCurrentEntry();
+            if (ste == null) {
+                return;
+            }
+            TMXEntry prevTrans = Core.getProject().getTranslationInfo(ste);
+            Core.getProject().setTranslation(ste, v, Core.getNotes().getNoteText(),
+                    prevTrans.defaultTranslation);
+            Core.getEditor().replaceEditText("");
+            Core.getEditor().commitAndLeave();
         }
     }
 }

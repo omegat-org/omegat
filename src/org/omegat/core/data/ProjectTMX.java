@@ -222,10 +222,6 @@ public class ProjectTMX {
                 for (int i = 0; i < sources.size(); i++) {
                     String segmentSource = sources.get(i);
                     String segmentTranslation = targets.get(i);
-                    if (segmentTranslation !=null && segmentTranslation.length() == 0) {
-                        // TODO review with noes implementation
-                        segmentTranslation = null;
-                    }
                     EntryKey key = createKeyByProps(tuvSource.text, tu.props);
                     boolean defaultTranslation = key.file == null;
                     TMXEntry te = new TMXEntry(segmentSource, segmentTranslation, changer, dt, tu.note,

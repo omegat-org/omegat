@@ -45,6 +45,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
@@ -271,6 +272,9 @@ public class SegmentBuilder {
         if (trans.isTranslated()) {
             // translation exist
             translationText = trans.translation;
+            if (StringUtil.isEmpty(translationText)) {
+                translationText = "<EMPTY>";
+            }
         } else {
             if (sourceText == null) {
                 // translation not exist, but source display disabled also -

@@ -715,35 +715,34 @@ public class EditorController implements IEditor {
             // segment was active
             SegmentBuilder sb = m_docSegList[displayedEntryIndex];
             SourceTextEntry entry = sb.ste;
-
+            
             TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
-            String old_translation = oldTE.isTranslated() ? oldTE.translation : "";
+            
+            if (oldTE.translation == null && StringUtil.isEmpty(newTrans)) {
+                // there was no translation, nothing changed
+                newTrans = null;
+            }
             
             String note = Core.getNotes().getNoteText();
 
             // update memory
-            if (newTrans.equals(entry.getSrcText())
+            if (entry.getSrcText().equals(newTrans)
                     && !Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC)) {
-                Core.getProject().setTranslation(entry, "", note, sb.isDefaultTranslation());
-                newTrans = "";
-            } else {
-                Core.getProject().setTranslation(entry, newTrans, note, sb.isDefaultTranslation());
+                newTrans = null;
             }
+            Core.getProject().setTranslation(entry, newTrans, note, sb.isDefaultTranslation());
 
             m_docSegList[displayedEntryIndex].createSegmentElement(false);
 
-            if (!newTrans.equals(old_translation)) {
-                // find all identical strings and redraw them
-
-                for (int i = 0; i < m_docSegList.length; i++) {
-                    if (i == displayedEntryIndex) {
-                        // commited entry, skip
-                        continue;
-                    }
-                    if (m_docSegList[i].ste.getSrcText().equals(entry.getSrcText())) {
-                        // the same source text - need to update
-                        m_docSegList[i].createSegmentElement(false);
-                    }
+            // find all identical sources and redraw them
+            for (int i = 0; i < m_docSegList.length; i++) {
+                if (i == displayedEntryIndex) {
+                    // current entry, skip
+                    continue;
+                }
+                if (m_docSegList[i].ste.getSrcText().equals(entry.getSrcText())) {
+                    // the same source text - need to update
+                    m_docSegList[i].createSegmentElement(false);
                 }
             }
         }

@@ -1410,10 +1410,14 @@ public class EditorController implements IEditor {
         SegmentBuilder sb = m_docSegList[displayedEntryIndex];
 
         if (!alternate) {
+            // remove alternative translation from project
             SourceTextEntry ste = sb.getSourceTextEntry();
-            Core.getProject().setTranslation(ste, "", Core.getNotes().getNoteText(), false);
+            Core.getProject().setTranslation(ste, null, null, false);
+
+            // switch to default translation
             sb.setDefaultTranslation(true);
         } else {
+            // switch to alternative translation
             sb.setDefaultTranslation(false);
         }
         setMenuEnabled();

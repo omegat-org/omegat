@@ -750,50 +750,42 @@ public class RealProject implements IProject {
         TMXEntry prevTrEntry = isDefault ? projectTMX.getDefaultTranslation(entry.getSrcText()) : projectTMX
                 .getMultipleTranslation(entry.getKey());
 
-        if (note == null) {
-            // note could not be fetched from notes pane, because another sourcetextentry was already loaded,
-            // or no ste was loaded yet (on project refresh)
-            // keep old note:
-            if (prevTrEntry != null) {
-                note = prevTrEntry.note;
-            }
-        }
-
-        // don't change anything if nothing has changed
         if (prevTrEntry == null) {
-            // previously no translation, and currently empty translation and note:
-            if ("".equals(trans) && "".equals(note)) {
+            // there was no translation yet
+            prevTrEntry = EMPTY_TRANSLATION;
+        }
+        
+        TMXEntry newTrEntry;
+        if (StringUtil.equalsWithNulls(prevTrEntry.translation, trans)) {
+            // translation not changed
+            if (StringUtil.nvl(prevTrEntry.note, "").equals(StringUtil.nvl(note, ""))) {
+                // note was not changed also
                 return;
             }
+            // only note was changed
+            newTrEntry = new TMXEntry(prevTrEntry.source, prevTrEntry.translation, prevTrEntry.changer,
+                    prevTrEntry.changeDate, (StringUtil.isEmpty(note) ? null : note),
+                    prevTrEntry.defaultTranslation);
         } else {
-            // previous translation is equal to current translation and (previous note empty and current note
-            // empty or previous note equal to current note)
-            if ((trans.equals(prevTrEntry.translation))
-                    && ((note == null || note.equals("")) && prevTrEntry.note == null || (note != null && note
-                            .equals(prevTrEntry.note)))) {
-                return;
+            // translation was changed
+            if (trans == null && StringUtil.isEmpty(note)) {
+                // no translation, no note
+                newTrEntry = null;
+            } else {
+                newTrEntry = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis(),
+                        (StringUtil.isEmpty(note) ? null : note), isDefault);
             }
         }
 
         m_modifiedFlag = true;
 
-        TMXEntry te;
-        if (StringUtil.isEmpty(trans)) {
-            te = new TMXEntry(entry.getSrcText(), null, null, 0, (StringUtil.isEmpty(note) ? null : note),
-                    isDefault);
-        } else {
-            te = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis(),
-                    (StringUtil.isEmpty(note) ? null : note), isDefault);
-        }
-        projectTMX.setTranslation(entry, te, isDefault);
-
-        String prevTranslation = prevTrEntry != null ? prevTrEntry.translation : null;
+        projectTMX.setTranslation(entry, newTrEntry, isDefault);
 
         /**
          * Calculate how to statistics should be changed.
          */
-        int diff = StringUtil.isEmpty(prevTranslation) ? 0 : -1;
-        diff += StringUtil.isEmpty(trans) ? 0 : +1;
+        int diff = prevTrEntry.translation == null ? 0 : -1;
+        diff += trans == null ? 0 : +1;
         hotStat.numberofTranslatedSegments += diff;
     }
 

@@ -104,7 +104,7 @@ public interface IProject {
      * @param entry
      *            entry
      * @param trans
-     *            translation
+     *            translation. Null for remove translation, empty string for empty transation.
      * @param isDefault
      *            true if default translation should be changed
      */

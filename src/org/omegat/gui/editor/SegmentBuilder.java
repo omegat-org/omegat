@@ -158,11 +158,9 @@ public class SegmentBuilder {
                 }
 
                 TMXEntry trans = Core.getProject().getTranslationInfo(ste);
-                if (trans.isTranslated()) {
-                    defaultTranslation = trans.defaultTranslation;
-                } else {
-                    defaultTranslation = Core.getProject().getProjectProperties()
-                            .isSupportDefaultTranslations();
+                defaultTranslation = trans.defaultTranslation;
+                if (!Core.getProject().getProjectProperties().isSupportDefaultTranslations()) {
+                    defaultTranslation = false;
                 }
                 transExist = trans.isTranslated();
 

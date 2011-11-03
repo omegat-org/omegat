@@ -626,8 +626,8 @@ public class EditorController implements IEditor {
      */
     private void exportCurrentSegment(final SourceTextEntry ste) {
         String s1 = ste.getSrcText();
-        TMXEntry te = Core.getProject().getTranslation(ste);
-        String s2 = te != null ? te.translation : "";
+        TMXEntry te = Core.getProject().getTranslationInfo(ste);
+        String s2 = te.isTranslated() ? te.translation : "";
 
         FileUtil.writeScriptFile(s1, OConsts.SOURCE_EXPORT);
         FileUtil.writeScriptFile(s2, OConsts.TARGET_EXPORT);
@@ -641,7 +641,7 @@ public class EditorController implements IEditor {
         IProject.FileInfo fi = project.getProjectFiles().get(displayedFileIndex);
         int translatedInFile = 0;
         for (SourceTextEntry ste : fi.entries) {
-            if (project.getTranslation(ste) != null) {
+            if (project.getTranslationInfo(ste).isTranslated()) {
                 translatedInFile++;
             }
         }
@@ -714,8 +714,8 @@ public class EditorController implements IEditor {
             SegmentBuilder sb = m_docSegList[displayedEntryIndex];
             SourceTextEntry entry = sb.ste;
 
-            TMXEntry oldTE = Core.getProject().getTranslation(entry);
-            String old_translation = oldTE != null ? oldTE.translation : "";
+            TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
+            String old_translation = oldTE.isTranslated() ? oldTE.translation : "";
             
             String note = Core.getNotes().getText(entry);
             Core.getNotes().clear();
@@ -904,7 +904,7 @@ public class EditorController implements IEditor {
             if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
                 break; // not found
             }
-            if (Core.getProject().getTranslation(ste) == null) {
+            if (!Core.getProject().getTranslationInfo(ste).isTranslated()) {
                 break;// non-translated
             }
             if (Preferences.isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION)) {

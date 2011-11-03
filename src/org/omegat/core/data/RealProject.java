@@ -136,6 +136,9 @@ public class RealProject implements IProject {
     /** Segments count in project files. */
     private final List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
 
+    /** This instance returned if translation not exist. */
+    private static final TMXEntry EMPTY_TRANSLATION = new TMXEntry("", null, null, 0, null, true);
+
     /**
      * Create new project instance. It required to call {@link #createProject() createProject} or
      * {@link #loadProject() loadProject} methods just after constructor before use project.
@@ -212,12 +215,12 @@ public class RealProject implements IProject {
             Set<String> existSource = new HashSet<String>();
             Set<EntryKey> existKeys = new HashSet<EntryKey>();
 
-            //set project specific file filters if they exist
+            // set project specific file filters if they exist
             if (FilterMaster.projectConfigFileExists(m_config.getProjectInternal())) {
                 this.filterMaster = FilterMaster.getProjectInstance(m_config.getProjectInternal());
             }
-            
-            //set project specific segmentation rules if they exist
+
+            // set project specific segmentation rules if they exist
             if (SRX.projectConfigFileExists(m_config.getProjectInternal())) {
                 this.srx = SRX.getProjectSRX(m_config.getProjectInternal());
                 Segmenter.srx = this.srx;
@@ -500,7 +503,7 @@ public class RealProject implements IProject {
             Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
             Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
         }
-        
+
         // update statistics
         String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
         String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
@@ -712,20 +715,15 @@ public class RealProject implements IProject {
         return allProjectEntries;
     }
 
-    public TMXEntry getTranslation(SourceTextEntry ste) {
+    public TMXEntry getTranslationInfo(SourceTextEntry ste) {
         TMXEntry r = projectTMX.getMultipleTranslation(ste.getKey());
         if (r == null) {
             r = projectTMX.getDefaultTranslation(ste.getSrcText());
         }
+        if (r == null) {
+            r = EMPTY_TRANSLATION;
+        }
         return r;
-    }
-
-    public TMXEntry getDefaultTranslation(SourceTextEntry ste) {
-        return projectTMX.getDefaultTranslation(ste.getSrcText());
-    }
-
-    public TMXEntry getMultipleTranslation(SourceTextEntry ste) {
-        return projectTMX.getMultipleTranslation(ste.getKey());
     }
 
     /**
@@ -751,10 +749,11 @@ public class RealProject implements IProject {
 
         TMXEntry prevTrEntry = isDefault ? projectTMX.getDefaultTranslation(entry.getSrcText()) : projectTMX
                 .getMultipleTranslation(entry.getKey());
-        
-        if ( note == null ) {
-            //note could not be fetched from notes pane, because another sourcetextentry was already loaded, or no ste was loaded yet (on project refresh)
-            //keep old note:
+
+        if (note == null) {
+            // note could not be fetched from notes pane, because another sourcetextentry was already loaded,
+            // or no ste was loaded yet (on project refresh)
+            // keep old note:
             if (prevTrEntry != null) {
                 note = prevTrEntry.note;
             }
@@ -762,17 +761,16 @@ public class RealProject implements IProject {
 
         // don't change anything if nothing has changed
         if (prevTrEntry == null) {
-            //previously no translation, and currently empty translation and note:
+            // previously no translation, and currently empty translation and note:
             if ("".equals(trans) && "".equals(note)) {
                 return;
             }
         } else {
-            //previous translation is equal to current translation and (previous note empty and current note empty or previous note equal to current note)
-            if ( (trans.equals(prevTrEntry.translation))
-               && 
-                 ( (note == null || note.equals("")) && prevTrEntry.note == null || (note != null && note.equals(prevTrEntry.note)))
-               )
-            {
+            // previous translation is equal to current translation and (previous note empty and current note
+            // empty or previous note equal to current note)
+            if ((trans.equals(prevTrEntry.translation))
+                    && ((note == null || note.equals("")) && prevTrEntry.note == null || (note != null && note
+                            .equals(prevTrEntry.note)))) {
                 return;
             }
         }
@@ -781,9 +779,11 @@ public class RealProject implements IProject {
 
         TMXEntry te;
         if (StringUtil.isEmpty(trans)) {
-            te = new TMXEntry(entry.getSrcText(), null, null, 0, (StringUtil.isEmpty(note) ? null : note));
+            te = new TMXEntry(entry.getSrcText(), null, null, 0, (StringUtil.isEmpty(note) ? null : note),
+                    isDefault);
         } else {
-            te = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis(), (StringUtil.isEmpty(note) ? null : note));
+            te = new TMXEntry(entry.getSrcText(), trans, author, System.currentTimeMillis(),
+                    (StringUtil.isEmpty(note) ? null : note), isDefault);
         }
         projectTMX.setTranslation(entry, te, isDefault);
 
@@ -941,7 +941,7 @@ public class RealProject implements IProject {
         private final Map<EntryKey, TMXEntry> sourceTranslations;
 
         private List<TMXEntry> fileTMXentries;
-        
+
         public LoadFilesCallback(final Set<String> existSource, final Set<EntryKey> existKeys,
                 final Map<EntryKey, TMXEntry> sourceTranslations) {
             super(m_config);
@@ -983,7 +983,8 @@ public class RealProject implements IProject {
 
             if (!StringUtil.isEmpty(segmentTranslation)) {
                 // projectTMX doesn't exist yet, so we have to store in temp map
-                sourceTranslations.put(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0, null));
+                sourceTranslations.put(ek, new TMXEntry(segmentSource, segmentTranslation, null, 0, null,
+                        false));
             }
             SourceTextEntry srcTextEntry = new SourceTextEntry(ek, allProjectEntries.size() + 1, comment);
             allProjectEntries.add(srcTextEntry);
@@ -997,7 +998,7 @@ public class RealProject implements IProject {
             if (StringUtil.isEmpty(translation)) {
                 return;
             }
-            fileTMXentries.add(new TMXEntry(source, translation, null, 0, null));
+            fileTMXentries.add(new TMXEntry(source, translation, null, 0, null, true));
         }
     };
 
@@ -1037,7 +1038,7 @@ public class RealProject implements IProject {
                     transS = "[" + filter.getFuzzyMark() + "] " + transS;
                 }
 
-                data.put(sourceS, new TMXEntry(sourceS, transS, null, 0, null));
+                data.put(sourceS, new TMXEntry(sourceS, transS, null, 0, null, true));
             }
         }
     }
@@ -1050,17 +1051,21 @@ public class RealProject implements IProject {
             return localCollator.compare(o1, o2);
         }
     }
+
     /**
-     * returns project FilterMaster if it exists, else returns null (this means: not using project-specific filters!)
+     * returns project FilterMaster if it exists, else returns null (this means: not using project-specific
+     * filters!)
      */
     public FilterMaster getFilterMaster() {
         return this.filterMaster;
     }
 
     /**
-     * Sets the filter config to the project, or removes it. Creates or deletes config file if necessary and (dis)associates FilterMaster to project. Use this to create project specific file filters. 
+     * Sets the filter config to the project, or removes it. Creates or deletes config file if necessary and
+     * (dis)associates FilterMaster to project. Use this to create project specific file filters.
      * 
-     * @param filters the filters config. When null, project specific config is removed.
+     * @param filters
+     *            the filters config. When null, project specific config is removed.
      */
     public void setConfig(Filters filters) {
         if (filters == null) {
@@ -1071,18 +1076,21 @@ public class RealProject implements IProject {
             return;
         }
         if (this.filterMaster == null) {
-            this.filterMaster = FilterMaster.getProjectInstance(this.getProjectProperties().getProjectInternal());
+            this.filterMaster = FilterMaster.getProjectInstance(this.getProjectProperties()
+                    .getProjectInternal());
         }
         this.filterMaster.setConfig(filters);
         this.filterMaster.saveConfig();
     }
-    
+
     /**
-     * Returns the filtermaster to use: the projects filter master (if it is set), else the default filtermaster
+     * Returns the filtermaster to use: the projects filter master (if it is set), else the default
+     * filtermaster
+     * 
      * @return the filtermaster to use
      */
     private FilterMaster getActiveFilterMaster() {
-        //get project specific file filters if they exist, else get normal filters
+        // get project specific file filters if they exist, else get normal filters
         if (this.filterMaster == null) {
             return FilterMaster.getInstance();
         }
@@ -1092,7 +1100,7 @@ public class RealProject implements IProject {
     public SRX getSRX() {
         return this.srx;
     }
-    
+
     public void setSRX(SRX srx) {
         if (srx == null) {
             if (this.srx != null) {
@@ -1104,7 +1112,7 @@ public class RealProject implements IProject {
         }
         this.srx = srx;
     }
-    
+
     public String getSegmentationConfigDir() {
         return this.m_config.getProjectInternal();
     }

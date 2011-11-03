@@ -266,8 +266,8 @@ public class MainWindowMenuHandler {
         String selection = Core.getEditor().getSelectedText();
         if (selection == null) {
             SourceTextEntry ste = Core.getEditor().getCurrentEntry();
-            TMXEntry te = Core.getProject().getTranslation(ste);
-            if (te != null) {
+            TMXEntry te = Core.getProject().getTranslationInfo(ste);
+            if (te.isTranslated()) {
                 selection = te.translation;
             } else {
                 selection = ste.getSrcText();

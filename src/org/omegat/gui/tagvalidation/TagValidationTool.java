@@ -120,12 +120,12 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         for (FileInfo fi : Core.getProject().getProjectFiles()) {
             for (SourceTextEntry ste : fi.entries) {
                 s = ste.getSrcText();
-                te = Core.getProject().getTranslation(ste);
+                te = Core.getProject().getTranslationInfo(ste);
 
                 // if there's no translation, skip the string
                 // bugfix for
                 // http://sourceforge.net/support/tracker.php?aid=1209839
-                if (te == null || te.translation == null) {
+                if (!te.isTranslated()) {
                     continue;
                 }
 

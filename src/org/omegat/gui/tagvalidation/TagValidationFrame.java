@@ -225,8 +225,8 @@ public class TagValidationFrame extends JFrame {
         output.append("<table BORDER COLS=3 WIDTH=\"100%\" NOSAVE>\n");
         for (SourceTextEntry ste : stringList) {
             String src = ste.getSrcText();
-            TMXEntry trans = Core.getProject().getTranslation(ste);
-            if (src.length() > 0 && trans != null) {
+            TMXEntry trans = Core.getProject().getTranslationInfo(ste);
+            if (src.length() > 0 && trans.isTranslated()) {
                 output.append("<tr>");
                 output.append("<td>");
                 output.append("<a href=");

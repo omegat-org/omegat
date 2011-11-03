@@ -81,7 +81,7 @@ public class Statistics {
 
         boolean isFirst = alreadyProcessed.add(ste.getSrcText());
 
-        if (Core.getProject().getTranslation(ste) != null) {
+        if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
             // segment has translation - should be calculated as
             // "Exact matched"
             return PERCENT_EXACT_MATCH;
@@ -106,8 +106,8 @@ public class Statistics {
                 // source entry
                 continue;
             }
-            TMXEntry te = Core.getProject().getTranslation(cand);
-            if (te == null) {
+            TMXEntry te = Core.getProject().getTranslationInfo(cand);
+            if (!te.isTranslated()) {
                 // target without translation - skip
                 continue;
             }

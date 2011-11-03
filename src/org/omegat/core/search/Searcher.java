@@ -230,8 +230,8 @@ public class Searcher {
             // get the source and translation of the next entry
             SourceTextEntry ste = dataEngine.getAllEntries().get(i);
             String srcText = ste.getSrcText();
-            TMXEntry te = m_project.getTranslation(ste);
-            String locText = te != null ? te.translation : "";
+            TMXEntry te = m_project.getTranslationInfo(ste);
+            String locText = te.isTranslated() ? te.translation : "";
 
             checkEntry(srcText, locText, te, i, null);
             if (stopCallback.isStopped()) {

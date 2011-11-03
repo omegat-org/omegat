@@ -299,10 +299,10 @@ public class Main {
             for (SourceTextEntry ste : entries) {
                 switch (pseudoTranslateType) {
                 case EQUAL:
-                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), ste.getSrcText(), null, 0, null));
+                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), ste.getSrcText(), null, 0, null, true));
                     break;
                 case EMPTY:
-                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), "", null, 0, null));
+                    data.put(ste.getSrcText(), new TMXEntry(ste.getSrcText(), "", null, 0, null, true));
                     break;
                 }
             }

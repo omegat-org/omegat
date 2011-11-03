@@ -197,8 +197,8 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements 
 			    + thebest.translation;
 		}
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
-                TMXEntry te = Core.getProject().getTranslation(currentEntry);
-                if (te == null) {
+                TMXEntry te = Core.getProject().getTranslationInfo(currentEntry);
+                if (te.isTranslated()) {
                     Core.getEditor().replaceEditText(translation);
                 }
             }
@@ -350,9 +350,10 @@ public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements 
                                 continue;
                             }
                         } else {
-                            // default translation - multiple shoun't exist for this entry
-                            TMXEntry multTrans = project.getMultipleTranslation(entries.get(i));
-                            if (multTrans != null) {
+                            // default translation - multiple shouldn't exist for this entry
+                            TMXEntry trans = project.getTranslationInfo(entries.get(i));
+                            if (!trans.isTranslated() || trans.defaultTranslation) {
+                                // we need exist alternative translation
                                 continue;
                             }
                         }

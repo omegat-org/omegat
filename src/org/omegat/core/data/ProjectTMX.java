@@ -226,9 +226,11 @@ public class ProjectTMX {
                         // TODO review with noes implementation
                         segmentTranslation = null;
                     }
-                    TMXEntry te = new TMXEntry(segmentSource, segmentTranslation, changer, dt, tu.note);
                     EntryKey key = createKeyByProps(tuvSource.text, tu.props);
-                    if (key.file == null) {
+                    boolean defaultTranslation = key.file == null;
+                    TMXEntry te = new TMXEntry(segmentSource, segmentTranslation, changer, dt, tu.note,
+                            defaultTranslation);
+                    if (defaultTranslation) {
                         // default translation
                         if (translationDefault != null && callback.existSourceInProject(tuvSource.text)) {
                             translationDefault.put(tuvSource.text, te);

@@ -118,32 +118,17 @@ public interface IProject {
     StatisticsInfo getStatistics();
 
     /**
-     * Get translation for specified entry. It looks first for multiple, then for default.
+     * Get translation info for specified entry. It looks first for multiple, then for default. This method
+     * ALWAYS returns TMXEntry, because note can exist even for non-translated segment. Use
+     * TMXEntry.isTranslated() for check if translation text really exist. Translation can be checked for
+     * default/alternative by the TMXEntry.defaultTranslation.
      * 
      * @param ste
      *            source entry
-     * @return translation, or null if translation not exist
+     * @return translation
      */
-    TMXEntry getTranslation(SourceTextEntry ste);
+    TMXEntry getTranslationInfo(SourceTextEntry ste);
 
-    /**
-     * Get default translation for specified entry.
-     * 
-     * @param ste
-     *            source entry
-     * @return translation, or null if translation not exist
-     */
-    TMXEntry getDefaultTranslation(SourceTextEntry ste);
-    
-    /**
-     * Get multiple translation for specified entry.
-     * 
-     * @param ste
-     *            source entry
-     * @return translation, or null if translation not exist
-     */
-    TMXEntry getMultipleTranslation(SourceTextEntry ste);
-    
     /**
      * Iterate by all default translations in project.
      */

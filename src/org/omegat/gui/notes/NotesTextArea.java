@@ -75,8 +75,8 @@ public class NotesTextArea extends EntryInfoPane<Notes> {
             //Lets keep it simple.
             IProject project = Core.getProject();
             Notes notes = new Notes();
-            TMXEntry tmxEntry = project.getTranslation(newEntry);
-            if (tmxEntry == null) {
+            TMXEntry tmxEntry = project.getTranslationInfo(newEntry);
+            if (!tmxEntry.isTranslated()) {
                 setFoundResult(newEntry, notes);
             } else {
                 notes.tu = tmxEntry.note;

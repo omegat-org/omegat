@@ -131,8 +131,8 @@ public class CalcStandardStatistics extends LongProcessThread {
             } else {
                 uniqueSegment.put(src, count + 1);
             }
-            TMXEntry tr = project.getTranslation(ste);
-            if (tr != null) {
+            TMXEntry tr = project.getTranslationInfo(ste);
+            if (tr.isTranslated()) {
                 translated.add(src);
             }
         }
@@ -176,8 +176,8 @@ public class CalcStandardStatistics extends LongProcessThread {
                 total.charsWithSpaces += chars;
 
                 // add to remaining
-                TMXEntry tr = project.getTranslation(ste);
-                if (tr == null) {
+                TMXEntry tr = project.getTranslationInfo(ste);
+                if (!tr.isTranslated()) {
                     remaining.segments++;
                     remaining.words += words;
                     remaining.charsWithoutSpaces += charsNoSpaces;
@@ -199,7 +199,7 @@ public class CalcStandardStatistics extends LongProcessThread {
                     numbers.unique.charsWithoutSpaces += charsNoSpaces;
                     numbers.unique.charsWithSpaces += chars;
 
-                    if (tr == null) {
+                    if (!tr.isTranslated()) {
                         numbers.remainingUnique.segments++;
                         numbers.remainingUnique.words += words;
                         numbers.remainingUnique.charsWithoutSpaces += charsNoSpaces;
@@ -207,7 +207,7 @@ public class CalcStandardStatistics extends LongProcessThread {
                     }
                 }
 
-                if (tr == null) {
+                if (!tr.isTranslated()) {
                     numbers.remaining.segments++;
                     numbers.remaining.words += words;
                     numbers.remaining.charsWithoutSpaces += charsNoSpaces;

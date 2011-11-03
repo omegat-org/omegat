@@ -35,12 +35,19 @@ public class TMXEntry {
     public final String changer;
     public final long changeDate;
     public final String note;
+    public final boolean defaultTranslation;
 
-    public TMXEntry(String source, String translation, String changer, long changeDate, String note) {
+    public TMXEntry(String source, String translation, String changer, long changeDate, String note,
+            boolean defaultTranslation) {
         this.source = source;
         this.translation = translation;
         this.changer = changer;
         this.changeDate = changeDate;
         this.note = note;
+        this.defaultTranslation = defaultTranslation;
+    }
+
+    public boolean isTranslated() {
+        return translation != null;
     }
 }

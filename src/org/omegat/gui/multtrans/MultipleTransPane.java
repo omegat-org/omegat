@@ -219,8 +219,9 @@ public class MultipleTransPane extends EntryInfoPane<List<MultipleTransFoundEntr
                             continue;
                         }
                         // default translation - multiple shouldn't exist for this entry
-                        TMXEntry multTrans = project.getMultipleTranslation(ste);
-                        if (multTrans != null) {
+                        TMXEntry trans = project.getTranslationInfo(ste);
+                        if (!trans.isTranslated() || trans.defaultTranslation) {
+                            // we need exist alternative translation
                             continue;
                         }
                     } else {

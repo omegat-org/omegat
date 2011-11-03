@@ -60,15 +60,7 @@ public class NotLoadedProject implements IProject {
         return null;
     }
 
-    public TMXEntry getTranslation(SourceTextEntry ste) {
-        return null;
-    }
-
-    public TMXEntry getDefaultTranslation(SourceTextEntry ste) {
-        return null;
-    }
-
-    public TMXEntry getMultipleTranslation(SourceTextEntry ste) {
+    public TMXEntry getTranslationInfo(SourceTextEntry ste) {
         return null;
     }
 

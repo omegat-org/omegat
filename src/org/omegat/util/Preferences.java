@@ -190,6 +190,18 @@ public class Preferences {
      */
     public static final String SCRIPTS_DIRECTORY = "scripts_dir";
     
+    /** Quick script names */
+    public static final String SCRIPTS_QUICK_1 = "scripts_quick_1";
+    public static final String SCRIPTS_QUICK_2 = "scripts_quick_2";
+    public static final String SCRIPTS_QUICK_3 = "scripts_quick_3";
+    public static final String SCRIPTS_QUICK_4 = "scripts_quick_4";
+    public static final String SCRIPTS_QUICK_5 = "scripts_quick_5";
+    public static final String SCRIPTS_QUICK_6 = "scripts_quick_6";
+    public static final String SCRIPTS_QUICK_7 = "scripts_quick_7";
+    public static final String SCRIPTS_QUICK_8 = "scripts_quick_8";
+    public static final String SCRIPTS_QUICK_9 = "scripts_quick_9";
+    public static final String SCRIPTS_QUICK_0 = "scripts_quick_0";
+
     /**
      * display the segment sources
      */

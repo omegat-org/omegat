@@ -48,7 +48,7 @@ import org.omegat.core.data.StringData;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.NearString;
-import org.omegat.gui.common.EntryInfoPane;
+import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Log;
@@ -67,7 +67,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Zoltan Bartko
  * @author John Moran
  */
-public class MatchesTextArea extends EntryInfoPane<List<NearString>> implements IMatcher {
+public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> implements IMatcher {
 
     private final List<NearString> matches = new ArrayList<NearString>();
 

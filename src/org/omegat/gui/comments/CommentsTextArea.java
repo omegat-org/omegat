@@ -27,7 +27,10 @@
 package org.omegat.gui.comments;
 
 import java.awt.Dimension;
+
+import org.omegat.core.CoreEvents;
 import org.omegat.core.data.SourceTextEntry;
+import org.omegat.core.events.IEntryEventListener;
 import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.gui.main.MainWindow;
@@ -39,11 +42,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Martin Fleurke
  */
-public class CommentsTextArea extends EntryInfoPane<Comments> {
+public class CommentsTextArea extends EntryInfoPane<Comments> implements IEntryEventListener {
 
-    private static final long serialVersionUID = 1L;
-
-    String explanation;
+    private static final String EXPLANATION = OStrings.getString("GUI_COMMENTSWINDOW_explanation");
 
     /** Creates new Comments Text Area Pane */
     public CommentsTextArea(MainWindow mw) {
@@ -52,28 +53,21 @@ public class CommentsTextArea extends EntryInfoPane<Comments> {
         String title = OStrings.getString("GUI_COMMENTSWINDOW_SUBWINDOWTITLE_Comments");
         mw.addDockable(new DockableScrollPane("COMMENTS", title, this, true));
 
-        this.explanation =  OStrings.getString("GUI_COMMENTSWINDOW_explanation");
-
         setEditable(false);
-        this.setText(this.explanation);
+        this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
+
+        CoreEvents.registerEntryEventListener(this);
     }
 
-    @Override
-    protected void startSearchThread(SourceTextEntry newEntry) {
-        //We don't want to start a search thread, because noting is searched. 
-        //The comment is just fetched! 
-        //Lets keep it simple.
-        setFoundResult(newEntry, new Comments(newEntry.getComment()));
-    }
-
-    /**
-     * Sets the comment to show in the pane. 
-     */
-    @Override
-    protected void setFoundResult(final SourceTextEntry se, Comments comments) {
+    public void onEntryActivated(SourceTextEntry newEntry) {
         UIThreadsUtil.mustBeSwingThread();
-        this.setText(comments.comments);
+
+        String comment = newEntry.getComment();
+        this.setText(comment != null ? comment : "");
+    }
+
+    public void onNewFile(String activeFileName) {
     }
 
     @Override
@@ -84,14 +78,13 @@ public class CommentsTextArea extends EntryInfoPane<Comments> {
     @Override
     protected void onProjectClose() {
         clear();
-        this.setText(explanation);
+        this.setText(EXPLANATION);
     }
-
 
     /** Clears up the pane. */
     public void clear() {
         UIThreadsUtil.mustBeSwingThread();
+
         this.setText("");
     }
-
 }

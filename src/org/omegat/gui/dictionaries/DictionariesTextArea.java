@@ -50,8 +50,8 @@ import org.omegat.core.dictionaries.DictionariesManager;
 import org.omegat.core.dictionaries.DictionaryEntry;
 import org.omegat.core.events.IEditorEventListener;
 import org.omegat.core.matching.ITokenizer;
-import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.common.EntryInfoSearchThread;
+import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
@@ -63,7 +63,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
-public class DictionariesTextArea extends EntryInfoPane<List<DictionaryEntry>> {
+public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEntry>> {
 
     protected final DictionariesManager manager = new DictionariesManager(this);
 

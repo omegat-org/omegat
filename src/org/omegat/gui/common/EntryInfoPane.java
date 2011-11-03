@@ -30,22 +30,20 @@ import javax.swing.JTextPane;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.SourceTextEntry;
-import org.omegat.core.events.IEntryEventListener;
 import org.omegat.core.events.IFontChangedEventListener;
 import org.omegat.core.events.IProjectEventListener;
 
 /**
- * Base class for show information about currently selected entry. It can be
- * used for glossaries, dictionaries and other panes.
+ * Base class for show information about currently selected entry. It can be used for glossaries, dictionaries
+ * and other panes.
+ * 
+ * If you need long search operation, use EntryInfoThreadPane instead.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @param <T>
  *            result type of found data
  */
-public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEventListener,
-        IEntryEventListener {
-    SourceTextEntry currentlyProcessedEntry;
+public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEventListener {
 
     public EntryInfoPane(final boolean useApplicationFont) {
         if (useApplicationFont) {
@@ -57,18 +55,15 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
             });
         }
         CoreEvents.registerProjectChangeListener(this);
-        CoreEvents.registerEntryEventListener(this);
     }
 
     public void onProjectChanged(PROJECT_CHANGE_TYPE eventType) {
         switch (eventType) {
         case CREATE:
         case LOAD:
-            currentlyProcessedEntry = null;
             onProjectOpen();
             break;
         case CLOSE:
-            currentlyProcessedEntry = null;
             onProjectClose();
             break;
         }
@@ -78,40 +73,5 @@ public abstract class EntryInfoPane<T> extends JTextPane implements IProjectEven
     }
 
     protected void onProjectClose() {
-    }
-
-    public void onNewFile(String activeFileName) {
-        currentlyProcessedEntry = null;
-    }
-
-    public void onEntryActivated(SourceTextEntry newEntry) {
-        currentlyProcessedEntry = newEntry;
-        startSearchThread(newEntry);
-    }
-
-    /**
-     * Each implementation should start own EntryInfoSearchThread thread.
-     * 
-     * @param newEntry
-     *            new entry for find
-     */
-    protected abstract void startSearchThread(final SourceTextEntry newEntry);
-
-    /**
-     * Callback from search thread.
-     * 
-     * @param processedEntry
-     *            entry which produce data
-     * @param data
-     *            found data
-     */
-    protected abstract void setFoundResult(SourceTextEntry processedEntry, T data);
-
-    /**
-     * Callback from search thread if error occured.
-     * 
-     * @param ex
-     */
-    protected void setError(Exception ex) {
     }
 }

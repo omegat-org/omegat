@@ -42,7 +42,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.StringEntry;
-import org.omegat.gui.common.EntryInfoPane;
+import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.dialogs.CreateGlossaryEntry;
 import org.omegat.gui.editor.mark.Mark;
 import org.omegat.gui.main.DockableScrollPane;
@@ -61,7 +61,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Wildrich Fourie
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class GlossaryTextArea extends EntryInfoPane<List<GlossaryEntry>> {
+public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
     /** Glossary manager instance. */
     protected final GlossaryManager manager = new GlossaryManager(this);
 

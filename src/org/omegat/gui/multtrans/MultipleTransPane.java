@@ -41,7 +41,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.gui.common.EntryInfoPane;
+import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.editor.IPopupMenuConstructor;
 import org.omegat.gui.editor.SegmentBuilder;
 import org.omegat.gui.main.DockableScrollPane;
@@ -54,7 +54,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
-public class MultipleTransPane extends EntryInfoPane<List<MultipleTransFoundEntry>> {
+public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFoundEntry>> {
     private List<DisplayedEntry> entries = new ArrayList<DisplayedEntry>();
 
     public MultipleTransPane() {

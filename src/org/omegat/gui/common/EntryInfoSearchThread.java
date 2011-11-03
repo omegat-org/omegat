@@ -41,7 +41,7 @@ import org.omegat.util.Log;
  *            result type of found data
  */
 public abstract class EntryInfoSearchThread<T> extends Thread {
-    private final EntryInfoPane<T> pane;
+    private final EntryInfoThreadPane<T> pane;
 
     /**
      * Entry which processed currently.
@@ -59,7 +59,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
      * @param entry
      *            current entry
      */
-    public EntryInfoSearchThread(final EntryInfoPane<T> pane, final SourceTextEntry entry) {
+    public EntryInfoSearchThread(final EntryInfoThreadPane<T> pane, final SourceTextEntry entry) {
         this.pane = pane;
         this.currentlyProcessedEntry = entry;
 

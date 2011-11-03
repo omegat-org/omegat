@@ -31,8 +31,8 @@ import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.filters2.master.PluginUtils;
-import org.omegat.gui.common.EntryInfoPane;
 import org.omegat.gui.common.EntryInfoSearchThread;
+import org.omegat.gui.common.EntryInfoThreadPane;
 import org.omegat.gui.main.DockableScrollPane;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
@@ -44,7 +44,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
-public class MachineTranslateTextArea extends EntryInfoPane<MachineTranslationInfo> {
+public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo> {
     protected final IMachineTranslation[] translators;
 
     protected String displayed;

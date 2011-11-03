@@ -39,6 +39,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ParseEntry;
@@ -241,24 +242,45 @@ public class Searcher {
         // search the TM, if requested
         if (m_tmSearch) {
             // search in orphaned
-            String file = OStrings.getString("CT_ORPHAN_STRINGS");
-            for (TMXEntry en : m_project.getAllOrphanedTranslations()) {
-                // stop searching if the max. nr of hits has been reached
-                if (m_numFinds >= m_maxResults) {
-                    break;
-                }
+            
+            m_project.iterateByOrphanedDefaultTranslations(new IProject.DefaultTranslationsIterator() {
+                final String file = OStrings.getString("CT_ORPHAN_STRINGS");
 
-                checkEntry(en.source, en.translation, en, -1, file);
-                if (stopCallback.isStopped()) {
-                    return;
+                public void iterate(String source, TMXEntry en) {
+                    // stop searching if the max. nr of hits has been reached
+                    if (m_numFinds >= m_maxResults) {
+                        return;
+                    }
+                    if (stopCallback.isStopped()) {
+                        return;
+                    }
+
+                    checkEntry(en.source, en.translation, en, -1, file);
                 }
-            }
+            });
+
+            m_project.iterateByOrphanedMultipleTranslations(new IProject.MultipleTranslationsIterator() {
+                final String file = OStrings.getString("CT_ORPHAN_STRINGS");
+
+                public void iterate(EntryKey source, TMXEntry en) {
+                    // stop searching if the max. nr of hits has been reached
+                    if (m_numFinds >= m_maxResults) {
+                        return;
+                    }
+                    if (stopCallback.isStopped()) {
+                        return;
+                    }
+
+                    checkEntry(en.source, en.translation, en, -1, file);
+                }
+            });
+
             // Search TM entries, unless we search for date or author.
             // They are not available in external TM, so skip the search in
             // that case.
             if (!m_searchAuthor && !m_searchDateAfter && !m_searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
-                    file = tmEn.getKey();
+                    final String fileTM = tmEn.getKey();
                     for (TMXEntry tm : tmEn.getValue().getEntries()) {
                         // stop searching if the max. nr of hits has been
                         // reached
@@ -266,7 +288,7 @@ public class Searcher {
                             break;
                         }
 
-                        checkEntry(tm.source, tm.translation, null, -1, file);
+                        checkEntry(tm.source, tm.translation, null, -1, fileTM);
                         if (stopCallback.isStopped()) {
                             return;
                         }

@@ -37,7 +37,6 @@ import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -796,28 +795,6 @@ public class RealProject implements IProject {
         int diff = StringUtil.isEmpty(prevTranslation) ? 0 : -1;
         diff += StringUtil.isEmpty(trans) ? 0 : +1;
         hotStat.numberofTranslatedSegments += diff;
-    }
-
-    public Collection<TMXEntry> getAllTranslations() {
-        List<TMXEntry> r = new ArrayList<TMXEntry>();
-
-        synchronized (projectTMX) {
-            r.addAll(projectTMX.translationDefault.values());
-            r.addAll(projectTMX.translationMultiple.values());
-        }
-
-        return r;
-    }
-
-    public Collection<TMXEntry> getAllOrphanedTranslations() {
-        List<TMXEntry> r = new ArrayList<TMXEntry>();
-
-        synchronized (projectTMX) {
-            r.addAll(projectTMX.orphanedDefault.values());
-            r.addAll(projectTMX.orphanedMultiple.values());
-        }
-
-        return r;
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {

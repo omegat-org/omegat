@@ -36,7 +36,9 @@ import java.util.Map;
 import java.util.Set;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
+import org.omegat.core.data.IProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.matching.FuzzyMatcher;
@@ -93,8 +95,8 @@ public class Statistics {
         /*
          * Not translated, not already processed. Then find fuzzy matches.
          */
-        Token[] strTokensStem = tokenizeExactlyWithCache(tokensCache, ste.getSrcText());
-        int maxSimilarity = 0; // not matched - 0% yet
+        final Token[] strTokensStem = tokenizeExactlyWithCache(tokensCache, ste.getSrcText());
+        final IntStorage maxSimilarity = new IntStorage(0); // not matched - 0% yet
 
         /* Travel by project entries. */
         // 'for(int i;;)' much faster than 'for(:)'
@@ -111,15 +113,25 @@ public class Statistics {
             }
             Token[] candTokens = tokenizeExactlyWithCache(tokensCache, cand.getSrcText());
             int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
-            maxSimilarity = Math.max(maxSimilarity, newSimilarity);
+            maxSimilarity.value = Math.max(maxSimilarity.value, newSimilarity);
         }
 
-        /* Travel by orphaned. */
-        for (TMXEntry en : Core.getProject().getAllOrphanedTranslations()) {
-            Token[] candTokens = tokenizeExactlyWithCache(tokensCache, en.source);
-            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
-            maxSimilarity = Math.max(maxSimilarity, newSimilarity);
-        }
+        /* Travel by default orphaned. */
+        Core.getProject().iterateByOrphanedDefaultTranslations(new IProject.DefaultTranslationsIterator() {
+            public void iterate(String source, TMXEntry en) {
+                Token[] candTokens = tokenizeExactlyWithCache(tokensCache, en.source);
+                int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
+                maxSimilarity.value = Math.max(maxSimilarity.value, newSimilarity);
+            }
+        });
+        /* Travel by alternative orphaned. */
+        Core.getProject().iterateByOrphanedMultipleTranslations(new IProject.MultipleTranslationsIterator() {
+            public void iterate(EntryKey source, TMXEntry en) {
+                Token[] candTokens = tokenizeExactlyWithCache(tokensCache, en.source);
+                int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
+                maxSimilarity.value = Math.max(maxSimilarity.value, newSimilarity);
+            }
+        });
 
         /* Travel by TMs. */
         for (ExternalTMX tmFile : Core.getProject().getTransMemories().values()) {
@@ -128,11 +140,11 @@ public class Statistics {
                 Token[] candTokens = tokenizeExactlyWithCache(tokensCache, tm.source);
                 int newSimilarity = FuzzyMatcher
                         .calcSimilarity(distanceCalculator, strTokensStem, candTokens);
-                maxSimilarity = Math.max(maxSimilarity, newSimilarity);
+                maxSimilarity.value = Math.max(maxSimilarity.value, newSimilarity);
             }
         }
 
-        return maxSimilarity;
+        return maxSimilarity.value;
     }
 
     /**
@@ -210,6 +222,18 @@ public class Statistics {
             }
         } catch (Exception ex) {
             Log.log(ex);
+        }
+    }
+
+    /**
+     * We need this placeholder because we can't access to non-final variable from inner class. It's required
+     * for iterators.
+     */
+    public static class IntStorage {
+        int value;
+
+        public IntStorage(int v) {
+            value = v;
         }
     }
 }

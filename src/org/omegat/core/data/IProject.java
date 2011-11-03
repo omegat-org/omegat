@@ -28,7 +28,6 @@ package org.omegat.core.data;
 import gen.core.filters.Filters;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -144,20 +143,6 @@ public interface IProject {
      * @return translation, or null if translation not exist
      */
     TMXEntry getMultipleTranslation(SourceTextEntry ste);
-
-    /**
-     * Get all translations for current project.
-     * 
-     * @return all translations map
-     */
-    Collection<TMXEntry> getAllTranslations();
-
-    /**
-     * Get orphaned translations.
-     * 
-     * @return orphaned translations
-     */
-    Collection<TMXEntry> getAllOrphanedTranslations();
     
     /**
      * Iterate by all default translations in project.

@@ -27,7 +27,6 @@ package org.omegat.core.data;
 import gen.core.filters.Filters;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -73,10 +72,6 @@ public class NotLoadedProject implements IProject {
         return null;
     }
 
-    public Collection<TMXEntry> getAllTranslations() {
-        return null;
-    }
-
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
     }
 
@@ -87,10 +82,6 @@ public class NotLoadedProject implements IProject {
     }
 
     public void iterateByOrphanedMultipleTranslations(MultipleTranslationsIterator it) {
-    }
-
-    public Collection<TMXEntry> getAllOrphanedTranslations() {
-        return null;
     }
 
     public Map<String, ExternalTMX> getTransMemories() {

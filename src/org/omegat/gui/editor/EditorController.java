@@ -502,6 +502,8 @@ public class EditorController implements IEditor {
         markerController.resetEntryMarks(displayedEntryIndex);
 
         m_docSegList[displayedEntryIndex].createSegmentElement(true);
+        
+        Core.getNotes().setNoteText(Core.getProject().getTranslationInfo(ste).note);
 
         // then add new marks
         markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
@@ -717,8 +719,7 @@ public class EditorController implements IEditor {
             TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
             String old_translation = oldTE.isTranslated() ? oldTE.translation : "";
             
-            String note = Core.getNotes().getText(entry);
-            Core.getNotes().clear();
+            String note = Core.getNotes().getNoteText();
 
             // update memory
             if (newTrans.equals(entry.getSrcText())
@@ -746,6 +747,7 @@ public class EditorController implements IEditor {
                 }
             }
         }
+        Core.getNotes().clear();
 
         // then add new marks
         markerController.process(displayedEntryIndex, m_docSegList[displayedEntryIndex]);
@@ -1409,7 +1411,7 @@ public class EditorController implements IEditor {
 
         if (!alternate) {
             SourceTextEntry ste = sb.getSourceTextEntry();
-            Core.getProject().setTranslation(ste, "", Core.getNotes().getText(ste), false);
+            Core.getProject().setTranslation(ste, "", Core.getNotes().getNoteText(), false);
             sb.setDefaultTranslation(true);
         } else {
             sb.setDefaultTranslation(false);

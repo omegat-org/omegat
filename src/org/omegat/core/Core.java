@@ -48,6 +48,7 @@ import org.omegat.gui.main.MainWindow;
 import org.omegat.gui.matches.IMatcher;
 import org.omegat.gui.matches.MatchesTextArea;
 import org.omegat.gui.multtrans.MultipleTransPane;
+import org.omegat.gui.notes.INotes;
 import org.omegat.gui.notes.NotesTextArea;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.gui.tagvalidation.TagValidationTool;
@@ -82,7 +83,7 @@ public class Core {
     private static DictionariesTextArea dictionaries;
     @SuppressWarnings("unused")
     private static MultipleTransPane multiple;
-    private static NotesTextArea notes;
+    private static INotes notes;
     @SuppressWarnings("unused")
     private static CommentsTextArea comments;
 
@@ -139,7 +140,7 @@ public class Core {
     }
     
     /** Get notes instance. */
-    public static NotesTextArea getNotes() {
+    public static INotes getNotes() {
         return notes;
     }
 

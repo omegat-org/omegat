@@ -52,7 +52,7 @@ import org.omegat.util.StaticUtils;
 public final class PluginUtils {
 
     enum PLUGIN_TYPE {
-        FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, UNKNOWN
+        FILTER, TOKENIZER, MARKER, MACHINETRANSLATOR, BASE, GLOSSARY, UNKNOWN
     };
 
     /** Private constructor to disallow creation */
@@ -143,6 +143,10 @@ public final class PluginUtils {
         return machineTranslationClasses;
     }
 
+    public static List<Class<?>> getGlossaryClasses() {
+        return glossaryClasses;
+    }
+
     protected static List<Class<?>> filterClasses = new ArrayList<Class<?>>();
 
     protected static List<Class<?>> tokenizerClasses = new ArrayList<Class<?>>();
@@ -150,6 +154,8 @@ public final class PluginUtils {
     protected static List<Class<?>> markerClasses = new ArrayList<Class<?>>();
 
     protected static List<Class<?>> machineTranslationClasses = new ArrayList<Class<?>>();
+
+    protected static List<Class<?>> glossaryClasses = new ArrayList<Class<?>>();
 
     protected static List<Class<?>> basePluginClasses = new ArrayList<Class<?>>();
 
@@ -201,6 +207,9 @@ public final class PluginUtils {
                 break;
             case BASE:
                 basePluginClasses.add(classLoader.loadClass(key));
+                break;
+            case GLOSSARY:
+                glossaryClasses.add(classLoader.loadClass(key));
                 break;
             default:
                 Log.logErrorRB("PLUGIN_UNKNOWN", key);

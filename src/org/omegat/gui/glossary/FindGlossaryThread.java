@@ -84,7 +84,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
         // computer source entry tokens
         Token[] strTokens = tok.tokenizeWords(src, ITokenizer.StemmingMode.GLOSSARY);
 
-        List<GlossaryEntry> entries = manager.getGlossaryEntries();
+        List<GlossaryEntry> entries = manager.getGlossaryEntries(src);
         if (entries != null) {
             for (GlossaryEntry glosEntry : entries) {
                 checkEntryChanged();

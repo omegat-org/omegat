@@ -227,6 +227,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         optionsMenu
                 .add(optionsAlwaysConfirmQuitCheckBoxMenuItem = createCheckboxMenuItem("MW_OPTIONSMENU_ALWAYS_CONFIRM_QUIT"));
         optionsMenu.add(optionsMachineTranslateMenu = createMenu("TF_OPTIONSMENU_MACHINETRANSLATE"));
+        optionsMenu.add(optionsGlossaryMenu = createMenu("TF_OPTIONSMENU_GLOSSARY"));
 
         optionsMenu.add(optionsTransTipsMenu = createMenu("TF_OPTIONSMENU_TRANSTIPS"));
         optionsTransTipsMenu
@@ -449,6 +450,10 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         return toolsMenu;
     }
 
+    public JMenu getGlossaryMenu() {
+        return optionsGlossaryMenu;
+    }
+
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
     JMenuItem editInsertSourceMenuItem;
@@ -490,6 +495,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem optionsSpellCheckMenuItem;
     JCheckBoxMenuItem optionsTabAdvanceCheckBoxMenuItem;
     JMenu optionsMachineTranslateMenu;
+    JMenu optionsGlossaryMenu;
     JMenu optionsTransTipsMenu;
     JCheckBoxMenuItem optionsTransTipsEnableMenuItem;
     JCheckBoxMenuItem optionsTransTipsExactMatchMenuItem;

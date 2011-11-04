@@ -32,7 +32,10 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.omegat.core.Core;
+import org.omegat.core.glossaries.IGlossary;
+import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.DirectoryMonitor;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 
 /**
@@ -56,8 +59,20 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
     private final GlossaryTextArea pane;
     private final Map<String, List<GlossaryEntry>> glossaries = new TreeMap<String, List<GlossaryEntry>>();
 
+    protected final IGlossary[] externalGlossaries;
+
     public GlossaryManager(final GlossaryTextArea pane) {
         this.pane = pane;
+
+        List<IGlossary> gl = new ArrayList<IGlossary>();
+        for (Class<?> glc : PluginUtils.getGlossaryClasses()) {
+            try {
+                gl.add((IGlossary) glc.newInstance());
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
+        externalGlossaries = gl.toArray(new IGlossary[gl.size()]);
     }
 
     public void start() {
@@ -119,14 +134,32 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      * Get glossary entries.
      * 
      * @return all entries
+     * @param src
      */
-    public List<GlossaryEntry> getGlossaryEntries() {
+    public List<GlossaryEntry> getGlossaryEntries(String src) {
         List<GlossaryEntry> result = new ArrayList<GlossaryEntry>();
         synchronized (this) {
             for (List<GlossaryEntry> en : glossaries.values()) {
                 result.addAll(en);
             }
         }
+
+        addExternalGlossaryEntries(result, src);
+
         return result;
+    }
+
+    private void addExternalGlossaryEntries(List<GlossaryEntry> result, String src) {
+
+        Language source = Core.getProject().getProjectProperties().getSourceLanguage();
+        Language target = Core.getProject().getProjectProperties().getTargetLanguage();
+
+        for (IGlossary gl : externalGlossaries) {
+            try {
+                result.addAll(gl.search(source, target, src));
+            } catch (Exception ex) {
+                Log.log(ex);
+            }
+        }
     }
 }

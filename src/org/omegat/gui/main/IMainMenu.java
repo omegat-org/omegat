@@ -39,4 +39,7 @@ public interface IMainMenu {
     JMenu getOptionsMenu();
 
     JMenu getToolsMenu();
+
+    JMenu getGlossaryMenu();
+
 }

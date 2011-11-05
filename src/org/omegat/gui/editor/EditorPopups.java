@@ -5,7 +5,7 @@
 
  Copyright (C) 2009 Didier Briel
                2010 Wildrich Fourie
-               2010 Alex Buloichik
+               2011 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -52,6 +52,8 @@ import org.omegat.util.gui.UIThreadsUtil;
  * Some standard editor poups.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Wildrich Fourie
+ * @author Didier Briel
  */
 public class EditorPopups {
     public static void init(EditorController ec) {
@@ -275,7 +277,7 @@ public class EditorPopups {
         }
 
         /**
-         * creates a popup menu for remove translation or set empty translation
+         * creates a popup menu to remove translation or set empty translation
          */
         public void addItems(JPopupMenu menu, final JTextComponent comp, final int mousepos,
                 boolean isInActiveEntry, boolean isInActiveTranslation, SegmentBuilder sb) {
@@ -283,18 +285,19 @@ public class EditorPopups {
                 return;
             }
 
-            JMenuItem itemEmpty = menu.add("Set empty trans");
+            JMenuItem itemEmpty = menu.add(OStrings.getString("TRANS_POP_EMPTY_TRANSLATION"));
             itemEmpty.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     setTranslation("");
                 }
             });
-            JMenuItem itemRemove = menu.add("Remove trans");
+            JMenuItem itemRemove = menu.add(OStrings.getString("TRANS_POP_REMOVE_TRANSLATION"));
             itemRemove.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     setTranslation(null);
                 }
             });
+            menu.addSeparator();
         }
 
         protected void setTranslation(String v) {

@@ -273,7 +273,7 @@ public class SegmentBuilder {
             // translation exist
             translationText = trans.translation;
             if (StringUtil.isEmpty(translationText)) {
-                translationText = "<EMPTY>";
+                translationText = OStrings.getString("EMPTY_TRANSLATION");
             }
         } else {
             if (sourceText == null) {

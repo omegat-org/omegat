@@ -1,4 +1,25 @@
 ----------------------------------------------------------------------
+ OmegaT 2.5.0 update 3
+----------------------------------------------------------------------
+   1 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.0 update 3 vs. 2.5.0 update 2
+
+  Other enhancements:
+
+  - Empty translations are now allowed. They are displayed as <EMPTY>
+in the Editor. To create one, right-click in a segment, and select
+"Set empty translation". The same popup menu also allows to Delete an
+existing translation. It has the same effect as emptying the target 
+segment, and then pressing Enter.
+
+  Bug fixes:
+
+  - Fuzzy match were inserted even if the segment was already translated
+
+----------------------------------------------------------------------
  OmegaT 2.5.0 update 2
 ----------------------------------------------------------------------
    0 Enhancement

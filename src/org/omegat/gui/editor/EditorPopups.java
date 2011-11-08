@@ -289,12 +289,14 @@ public class EditorPopups {
             itemEmpty.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     setTranslation("");
+                    Core.getEditor().replaceEditText("");
                 }
             });
             JMenuItem itemRemove = menu.add(OStrings.getString("TRANS_POP_REMOVE_TRANSLATION"));
             itemRemove.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     setTranslation(null);
+                    Core.getEditor().replaceEditText("");
                 }
             });
             menu.addSeparator();

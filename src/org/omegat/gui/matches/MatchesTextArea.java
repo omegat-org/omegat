@@ -185,20 +185,18 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             // </HP-experiment>
             NearString thebest = matches.get(0);
             if (thebest.score >= percentage) {
-            	String translation = null;
+                String translation = null;
 
-		if (Preferences.getPreferenceDefaultAllowEmptyString(
-		        Preferences.BEST_MATCH_EXPLANATORY_TEXT).equals("")) {
-			translation = thebest.translation;
+                if (Preferences.getPreferenceDefaultAllowEmptyString(Preferences.BEST_MATCH_EXPLANATORY_TEXT)
+                        .equals("")) {
+                    translation = thebest.translation;
                 } else {
-                    translation = Preferences.getPreferenceDefault(
-			    Preferences.BEST_MATCH_EXPLANATORY_TEXT,
-			    OStrings.getString("WF_DEFAULT_PREFIX"))
-			    + thebest.translation;
-		}
+                    translation = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT,
+                            OStrings.getString("WF_DEFAULT_PREFIX")) + thebest.translation;
+                }
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
                 TMXEntry te = Core.getProject().getTranslationInfo(currentEntry);
-                if (te.isTranslated()) {
+                if (!te.isTranslated()) {
                     Core.getEditor().replaceEditText(translation);
                 }
             }

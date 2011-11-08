@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,10 @@ in the Editor. To create one, right-click in a segment, and select
 "Set empty translation". The same popup menu also allows to Delete an
 existing translation. It has the same effect as emptying the target 
 segment, and then pressing Enter.
+
+  - Five scripts from the Scripting plugin can now be displayed and 
+launched directly under the Scripting menu entry. Requires version
+0.3-2.5.0_03 of the scripting plugin.
 
   Bug fixes:
 

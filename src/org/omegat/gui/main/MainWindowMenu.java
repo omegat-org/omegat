@@ -252,6 +252,9 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         helpMenu.add(helpContentsMenuItem = createMenuItem("TF_MENU_HELP_CONTENTS"));
         helpMenu.add(helpAboutMenuItem = createMenuItem("TF_MENU_HELP_ABOUT"));
 
+        // Grayed out if there is no glossary plugins. Plugin can enable it.
+        optionsGlossaryMenu.setEnabled(false);
+        
         setActionCommands();
         MainWindowMenuShortcuts.setShortcuts(mainMenu);
 

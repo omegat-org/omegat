@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -18,6 +18,8 @@ segment, and then pressing Enter.
   - Five scripts from the Scripting plugin can now be displayed and 
 launched directly under the Scripting menu entry. Requires version
 0.3-2.5.0_03 of the scripting plugin.
+
+  - It is now possible to create glossary plugins
 
   Bug fixes:
 

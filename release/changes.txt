@@ -23,6 +23,9 @@ launched directly under the Scripting menu entry. Requires version
 
   Bug fixes:
 
+  - Translations from non-target-language are not loaded
+  http://sourceforge.net/support/tracker.php?aid=3414344
+
   - Fuzzy match were inserted even if the segment was already translated
 
 ----------------------------------------------------------------------

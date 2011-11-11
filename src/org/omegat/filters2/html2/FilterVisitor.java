@@ -211,7 +211,7 @@ public class FilterVisitor extends NodeVisitor {
     protected void maybeTranslateAttribute(Tag tag, String key) {
         String attr = tag.getAttribute(key);
         if (attr != null) {
-            String comment = OStrings.getString("HTMLFILTER_TAG") + ": " + tag.getTagName() + " " + OStrings.getString("HTMLFILTER_ATTRIBUTE") + ": "+ key;
+            String comment = OStrings.getString("HTMLFILTER_TAG") + " " + tag.getTagName() + " " + OStrings.getString("HTMLFILTER_ATTRIBUTE") + " " + key;
             String trans = filter.privateProcessEntry(entitiesToChars(attr), comment);
             tag.setAttribute(key, charsToEntities(trans));
         }

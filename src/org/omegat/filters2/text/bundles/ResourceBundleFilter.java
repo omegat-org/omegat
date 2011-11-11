@@ -356,7 +356,7 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     protected String process(String key, String value) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(key, value, null, false, OStrings.getString("RESOURCEBUNDLE_key")+": "+key, null, this);
+            entryParseCallback.addEntry(key, value, null, false, OStrings.getString("RESOURCEBUNDLE_KEY")+" "+key, null, this);
             return value;
         } else if (entryTranslateCallback != null) {
             String trans = entryTranslateCallback.getTranslation(key, value, null);

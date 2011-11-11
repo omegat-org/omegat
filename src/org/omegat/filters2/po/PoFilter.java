@@ -328,13 +328,13 @@ public class PoFilter extends AbstractFilter {
         String t = unescape(targets[pair].toString());
         String c = "";
         if (translatorComments.length() > 0) {
-            c += OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + ":\n" + unescape(translatorComments.toString() + "\n"); 
+            c += OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n" + unescape(translatorComments.toString() + "\n"); 
         }
         if (extractedComments.length() > 0) {
-            c += OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + ":\n" + unescape(extractedComments.toString() + "\n"); 
+            c += OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + "\n" + unescape(extractedComments.toString() + "\n"); 
         }
         if (references.length() > 0) {
-            c += OStrings.getString("POFILTER_REFERENCES") + ":\n" + unescape(references.toString() + "\n"); 
+            c += OStrings.getString("POFILTER_REFERENCES") + "\n" + unescape(references.toString() + "\n"); 
         }
         align(s, t, c);
     }

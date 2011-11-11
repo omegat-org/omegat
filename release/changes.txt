@@ -1,11 +1,16 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 3 vs. 2.5.0 update 2
+
+  Implemented requests:
+
+  - TMX: match other languages if no project target language
+  http://sourceforge.net/support/tracker.php?aid=2700699
 
   Other enhancements:
 

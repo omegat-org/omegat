@@ -24,6 +24,7 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -93,8 +94,13 @@ public class ApertiumTranslate extends BaseTranslate {
 
         String url2 = GT_URL2.replace("#sourceLang#", sourceLang).replace("#targetLang#", targetLang);
         String url = GT_URL + URLEncoder.encode(trText, "UTF-8") + url2;
+        String v;
+        try {
+            v = WikiGet.getURL(url);
+        } catch (IOException e) {
+            return e.getLocalizedMessage();
+        }
 
-        String v = WikiGet.getURL(url);
         while (true) {
             Matcher m = RE_UNICODE.matcher(v);
             if (!m.find()) {

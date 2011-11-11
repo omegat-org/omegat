@@ -25,6 +25,7 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.io.IOException;
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -78,7 +79,12 @@ public class Google2Translate extends BaseTranslate {
         queryString.append("&target=" +  targetLang);
         queryString.append("&q=" + URLEncoder.encode(trText, "utf-8"));
         
-        String v = WikiGet.getURL(GT_URL + "?" + queryString.toString());
+        String v;
+        try {
+            v = WikiGet.getURL(GT_URL + "?" + queryString.toString());
+        } catch (IOException e) {
+            return e.getLocalizedMessage();
+        }
 
         while (true) {
             Matcher m = RE_UNICODE.matcher(v);

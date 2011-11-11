@@ -170,19 +170,20 @@ public class WikiGet {
      * 
      * @param target
      *            String representation of well-formed URL.
+     * @throws IOException 
      */
-    public static String getURL(String target) {
+    public static String getURL(String target) throws IOException {
         StringBuffer page = new StringBuffer();
-        try {
+//        try {
             URL url = new URL(target);
             InputStream in = url.openStream();
             byte[] b = new byte[4096];
             for (int n; (n = in.read(b)) != -1;) {
                 page.append(new String(b, 0, n, "UTF-8"));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         return page.toString();
     }
 

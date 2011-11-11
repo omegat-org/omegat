@@ -33,6 +33,7 @@ import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.WikiGet;
 
 /**
@@ -49,6 +50,8 @@ public class GoogleTranslate extends BaseTranslate {
     protected static final String MARK_END = "\"}";
     protected static final Pattern RE_UNICODE = Pattern.compile("\\\\u([0-9A-Fa-f]{4})");
     protected static final Pattern RE_HTML = Pattern.compile("&#([0-9]+);");
+    protected static Pattern RE_DETAILS = Pattern.compile("\"responseDetails\":\\s*\"([^\"]+)");
+    protected static Pattern RE_STATUS = Pattern.compile("\"responseStatus\":\\s*([0-9]+)");
 
     @Override
     protected String getPreferenceName() {
@@ -101,6 +104,21 @@ public class GoogleTranslate extends BaseTranslate {
 
         int beg = v.indexOf(MARK_BEG) + MARK_BEG.length();
         int end = v.indexOf(MARK_END, beg);
+        if (end < 0) {
+            //no translated text returned :(
+            //e.g. {"responseData": null, "responseDetails": "Suspected Terms of Service Abuse. Please see http://code.google.com/apis/errors", "responseStatus": 403}
+            Matcher m = RE_DETAILS.matcher(v);
+            if (!m.find()) {
+                return "";
+            }
+            String details = m.group(1);
+            String code = "";
+            m = RE_STATUS.matcher(v);
+            if (m.find()) {
+                code = m.group(1);
+            }
+            return StaticUtils.format(OStrings.getString("GOOGLE_ERROR"), code, details);
+        }
         String tr = v.substring(beg, end);
 
         // Attempt to clean spaces added by GT

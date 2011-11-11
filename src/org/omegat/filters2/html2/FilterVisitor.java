@@ -164,6 +164,7 @@ public class FilterVisitor extends NodeVisitor {
                 maybeTranslateAttribute(tag, "lang");
                 maybeTranslateAttribute(tag, "xml:lang");
             }
+            maybeTranslateAttribute(tag, "label");
             if ("IMG".equals(tag.getTagName()) && options.getTranslateSrc())
                 maybeTranslateAttribute(tag, "src");
             maybeTranslateAttribute(tag, "summary");

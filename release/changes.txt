@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - TMX: match other languages if no project target language
   http://sourceforge.net/support/tracker.php?aid=2700699
+  
+  - HTML filter: translate label attribute of OPTION/OPTGROUP/MENU tag
+  http://sourceforge.net/support/tracker.php?aid=3436499
 
   Other enhancements:
 

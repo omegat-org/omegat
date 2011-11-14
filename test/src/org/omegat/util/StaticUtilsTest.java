@@ -65,7 +65,7 @@ public class StaticUtilsTest extends TestCase
     {
         // TODO add your test code below by replacing the default call to fail.
         String str = "Tag <test> case <b0>one</b0>.";
-        ArrayList tagList = new ArrayList();
+        ArrayList<String> tagList = new ArrayList<String>();
         StaticUtils.buildTagList(str, tagList);
         if (tagList.size()!=2 ||
                 (! tagList.get(0).toString().equals("b0")) ||

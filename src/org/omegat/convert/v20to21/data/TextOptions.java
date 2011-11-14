@@ -43,6 +43,10 @@ import java.io.Serializable;
  */
 public class TextOptions implements Serializable {
     /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
+    /**
      * Text filter should segmentOn text into paragraphs on line breaks.
      */
     public static final int SEGMENT_BREAKS = 1;

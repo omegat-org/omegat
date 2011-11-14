@@ -47,6 +47,10 @@ import java.io.Serializable;
  */
 public class OpenXMLOptions implements Serializable {
 
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /** Hold value of properties. */
     private boolean translateHiddenText = false;
     private boolean translateComments = true;

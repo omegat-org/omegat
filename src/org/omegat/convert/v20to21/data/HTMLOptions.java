@@ -58,6 +58,10 @@ import java.io.Serializable;
  * @author Martin Fleurke
  */
 public class HTMLOptions implements Serializable {
+    /**
+     * 
+     */
+    private static final long serialVersionUID = 1L;
     /** (X)HTML filter should always add/rewrite encoding declaration. */
     public static final int REWRITE_ALWAYS = 1;
     /**

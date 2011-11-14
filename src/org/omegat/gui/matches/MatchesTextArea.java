@@ -350,7 +350,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                         } else {
                             // default translation - multiple shouldn't exist for this entry
                             TMXEntry trans = project.getTranslationInfo(entries.get(i));
-                            if (!trans.isTranslated() || trans.defaultTranslation) {
+                            if (!trans.isTranslated() || !trans.defaultTranslation) {
                                 // we need exist alternative translation
                                 continue;
                             }

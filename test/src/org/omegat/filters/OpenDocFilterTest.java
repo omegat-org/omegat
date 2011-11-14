@@ -31,7 +31,6 @@ import java.util.List;
 import org.junit.Test;
 import org.omegat.core.data.IProject;
 import org.omegat.filters3.xml.opendoc.OpenDocFilter;
-import org.omegat.filters3.xml.openxml.OpenXMLFilter;
 
 public class OpenDocFilterTest extends TestFilterBase {
     public void testParse() throws Exception {

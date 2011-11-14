@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.TestCore;
-import org.omegat.gui.main.MainWindow;
 import org.omegat.util.Language;
 
 /**
@@ -43,8 +42,8 @@ public class SegmenterTest extends TestCore
      */
     public void testSegment()
     {
-        List spaces = new ArrayList();
-        List segments = Segmenter.segment(new Language("en"),"<br7>\n\n<br5>\n\nother", spaces, new ArrayList());
+        List<StringBuffer> spaces = new ArrayList<StringBuffer>();
+        List<String> segments = Segmenter.segment(new Language("en"),"<br7>\n\n<br5>\n\nother", spaces, new ArrayList<Rule>());
         if(segments.size()!=3 || !segments.get(0).toString().equals("<br7>") || 
                 !segments.get(1).toString().equals("<br5>") ||
                 !segments.get(2).toString().equals("other"))
@@ -56,11 +55,10 @@ public class SegmenterTest extends TestCore
      */
     public void testGlue()
     {
-        MainWindow mw = new MainWindow();
-        List spaces = new ArrayList();
-        List brules = new ArrayList();
+        List<StringBuffer> spaces = new ArrayList<StringBuffer>();
+        List<Rule> brules = new ArrayList<Rule>();
         String oldString = "<br7>\n\n<br5>\n\nother";
-        List segments = Segmenter.segment(new Language("en"),oldString, spaces, brules);
+        List<String> segments = Segmenter.segment(new Language("en"),oldString, spaces, brules);
         String newString = Segmenter.glue(new Language("en"),new Language("fr"),segments, spaces, brules);
         if(!newString.equals(oldString))
             fail("Glue failed.");

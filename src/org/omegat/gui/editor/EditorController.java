@@ -8,6 +8,7 @@
                2007 Zoltan Bartko
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel
+               2011 Alex Buloichik, Martin Fleurke, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -94,6 +95,7 @@ import com.vlsolutions.swing.docking.event.DockableSelectionListener;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Martin Fleurke
  */
 public class EditorController implements IEditor {
 
@@ -718,8 +720,10 @@ public class EditorController implements IEditor {
             
             TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
             
-            if (oldTE.translation == null && StringUtil.isEmpty(newTrans)) {
-                // there was no translation, nothing changed
+            if ((oldTE.translation == null && StringUtil.isEmpty(newTrans)) ||
+                (StringUtil.isEmpty(newTrans))) {
+                // There was no translation, nothing changed, or the user enter an empty translation, which
+                // means removing the translation (but not necessary the TU, since there could be a note).
                 newTrans = null;
             }
             

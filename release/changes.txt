@@ -2,7 +2,7 @@
  OmegaT 2.5.0 update 3
 ----------------------------------------------------------------------
    5 Enhancements
-   3 Bug fixes
+   4 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 3 vs. 2.5.0 update 2
@@ -37,6 +37,9 @@ launched directly under the Scripting menu entry. Requires version
   http://sourceforge.net/support/tracker.php?aid=3414344
 
   - Fuzzy match were inserted even if the segment was already translated
+
+  - Entering an empty target segment was creating an empty translation
+instead of removing the translation
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 2

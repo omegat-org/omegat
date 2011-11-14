@@ -232,6 +232,7 @@ Code has been contributed by
   Thomas Huriaux
   Ibai Lakunza Velasco
   Fabián Mandelbaum
+  John Moran
   Maxym Mykhalchuk 
   Arno Peters
   Henry Pijffers 

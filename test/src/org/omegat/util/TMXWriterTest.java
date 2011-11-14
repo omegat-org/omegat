@@ -23,9 +23,6 @@
  **************************************************************************/
 package org.omegat.util;
 
-import gen.core.tmx14.Tu;
-import gen.core.tmx14.Tuv;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,7 +45,6 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.filters.TestFilterBase;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
-import org.xml.sax.InputSource;
 
 /**
  * @author Alex Buloichik

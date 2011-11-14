@@ -199,6 +199,10 @@ public abstract class TestFilterBase extends TestCore {
                         return source;
                     }
 
+                    public String getTranslation(String id, String source) {
+                        return source;
+                    }
+
                     public void linkPrevNextSegments() {
                     }
 

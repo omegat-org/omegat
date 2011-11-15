@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    5 Enhancements
    4 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 3 vs. 2.5.0 update 2
 
@@ -40,6 +40,10 @@ launched directly under the Scripting menu entry. Requires version
 
   - Entering an empty target segment was creating an empty translation
 instead of removing the translation
+
+  Localisation updates:
+
+  - Italian localisation updated to 2.5.0 update 2 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 2

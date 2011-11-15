@@ -126,25 +126,34 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+              <Group type="102" attributes="0">
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="contentLabel" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="directoryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="dictionaryUrlLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="languageScrollPane" pref="349" max="32767" attributes="2"/>
-                              <Component id="directoryTextField" alignment="1" pref="349" max="32767" attributes="2"/>
+                              <Component id="contentLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="directoryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="languageScrollPane" pref="349" max="32767" attributes="2"/>
+                                      <Component id="directoryTextField" alignment="1" pref="349" max="32767" attributes="2"/>
+                                  </Group>
+                                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                      <Component id="directoryChooserButton" max="32767" attributes="1"/>
+                                      <Component id="installButton" alignment="1" max="32767" attributes="1"/>
+                                      <Component id="uninstallButton" alignment="1" max="32767" attributes="1"/>
+                                  </Group>
+                              </Group>
                           </Group>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="directoryChooserButton" max="32767" attributes="1"/>
-                              <Component id="installButton" alignment="1" max="32767" attributes="1"/>
-                              <Component id="uninstallButton" alignment="1" max="32767" attributes="1"/>
-                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="dictionaryUrlTextField" pref="440" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -169,6 +178,10 @@
                       </Group>
                       <Component id="languageScrollPane" pref="123" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="dictionaryUrlLabel" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="dictionaryUrlTextField" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -219,6 +232,18 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="directoryChooserButtonActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JLabel" name="dictionaryUrlLabel">
+          <Properties>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="GUI_SPELLCHECKER_URL_LABEL" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JTextField" name="dictionaryUrlTextField">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="jTextField1"/>
+          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="installButton">
           <Properties>

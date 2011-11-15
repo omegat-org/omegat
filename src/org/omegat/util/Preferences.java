@@ -186,6 +186,11 @@ public class Preferences {
     public static final String SPELLCHECKER_DICTIONARY_DIRECTORY = "spellcheker_dir";
 
     /**
+     * URL of the dictionary repository
+     */
+    public static final String SPELLCHECKER_DICTIONARY_URL = "dictionary_url";
+
+    /**
      * The location of the scripts
      */
     public static final String SCRIPTS_DIRECTORY = "scripts_dir";

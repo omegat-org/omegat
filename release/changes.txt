@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
   
   - HTML filter: translate label attribute of OPTION/OPTGROUP/MENU tag
   http://sourceforge.net/support/tracker.php?aid=3436499
+
+  Make the location of spelling dictionaries configurable
+  http://sourceforge.net/support/tracker.php?aid=3434091
 
   Other enhancements:
 

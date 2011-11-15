@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Zoltan Bartko 
-               2009 Didier Briel
+               2009-2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,6 +35,7 @@ import java.util.regex.Matcher;
 
 import org.omegat.util.OConsts;
 import org.omegat.util.PatternConsts;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 
 /**
@@ -207,7 +208,8 @@ public class DictionaryManager {
         List<String> result = new ArrayList<String>();
 
         // download the file
-        String htmlfile = StaticUtils.downloadFileToString(OConsts.REMOTE_SC_DICTIONARY_LIST_LOCATION);
+        String htmlfile = StaticUtils.downloadFileToString
+                (Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));
 
         // build a list of available language codes
         Matcher matcher = PatternConsts.DICTIONARY_ZIP.matcher(htmlfile);
@@ -233,7 +235,8 @@ public class DictionaryManager {
      */
     public void installRemoteDictionary(String langCode) throws MalformedURLException, IOException {
         // download the package in question to the disk to a temporary location
-        String from = OConsts.REMOTE_SC_DICTIONARY_LIST_LOCATION + "/" + langCode + ".zip";
+        String from = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL) +
+                      "/" + langCode + ".zip";
 
         // TODO: replace this with something meaningful
         File tempFile = File.createTempFile(langCode, ".zip");

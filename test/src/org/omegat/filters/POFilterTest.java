@@ -29,6 +29,7 @@ import java.util.TreeMap;
 
 import org.omegat.core.data.IProject;
 import org.omegat.filters2.po.PoFilter;
+import org.omegat.util.OStrings;
 
 public class POFilterTest extends TestFilterBase {
     public void testParse() throws Exception {
@@ -47,8 +48,12 @@ public class POFilterTest extends TestFilterBase {
         String f = "test/data/filters/po/file-POFilter-multiple.po";
         IProject.FileInfo fi = loadSourceFiles(new PoFilter(), f);
 
+        String comment = OStrings.getString("POFILTER_TRANSLATOR_COMMENTS") + "\n" + "A valid comment\nAnother valid comment\n\n" 
+        + OStrings.getString("POFILTER_EXTRACTED_COMMENTS") + "\n" + "Some extracted comments\nMore extracted comments\n\n"
+        + OStrings.getString("POFILTER_REFERENCES") + "\n" + "/my/source/file\n/my/source/file2\n\n"; 
+
         checkMultiStart(fi, f);
-        checkMulti("source1", null, "some context", null, null, null);
+        checkMulti("source1", null, "some context", null, null, comment);
         checkMulti("source2", null, "", null, null, null);
         checkMulti("source3", null, "", null, null, null);
         checkMulti("source1", null, "", null, null, null);

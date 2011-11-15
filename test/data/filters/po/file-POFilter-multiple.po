@@ -1,4 +1,10 @@
-#Some comment
+#Some invalid comment
+# A valid comment
+# Another valid comment
+#. Some extracted comments
+#. More extracted comments
+#: /my/source/file
+#: /my/source/file2
 msgctxt "some context"
 msgid "source1"
 msgstr "trans1"
@@ -7,6 +13,7 @@ msgstr "trans1"
 msgid "source2"
 msgstr "trans2"
 
+#Some Invalid comment
 msgid "source3"
 msgstr ""
 

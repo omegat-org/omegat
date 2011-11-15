@@ -336,6 +336,9 @@ public class PoFilter extends AbstractFilter {
         if (references.length() > 0) {
             c += OStrings.getString("POFILTER_REFERENCES") + "\n" + unescape(references.toString() + "\n"); 
         }
+        if (c.length()==0) {
+            c = null;
+        }
         align(s, t, c);
     }
 

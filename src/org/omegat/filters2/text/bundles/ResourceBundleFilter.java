@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Alex Buloichik
+               2011 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +52,7 @@ import org.omegat.util.StringUtil;
  * @author Maxym Mykhalchuk
  * @author Keith Godfrey
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
  */
 public class ResourceBundleFilter extends AbstractFilter {
 
@@ -78,6 +80,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      * <p>
      * NOTE: resource bundles use always ISO-8859-1 encoding.
      */
+    @Override
     public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException,
             IOException {
         return new BufferedReader(new InputStreamReader(new FileInputStream(infile), "ISO-8859-1"));
@@ -92,6 +95,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      * original one. e.g. "Bundle.properties" -> Russian =
      * "Bundle_ru.properties"
      */
+    @Override
     public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
             IOException {
         // resource bundles use ASCII encoding
@@ -107,10 +111,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      * or non-key-value-breaking :-) equals).
      * <ul>
      */
-    protected String getNextLine(LinebreakPreservingReader reader) throws IOException // fix
-                                                                                      // for
-                                                                                      // bug
-                                                                                      // 1462566
+    protected String getNextLine(LinebreakPreservingReader reader) throws IOException // fix for bug 1462566
     {
         String ascii = reader.readLine();
         if (ascii == null)
@@ -231,10 +232,7 @@ public class ResourceBundleFilter extends AbstractFilter {
      * Doing the processing of the file...
      */
     public void processFile(BufferedReader reader, BufferedWriter outfile) throws IOException {
-        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix
-                                                                                // for
-                                                                                // bug
-                                                                                // 1462566
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         boolean noi18n = false;
         while ((str = getNextLine(lbpr)) != null) {
@@ -356,7 +354,8 @@ public class ResourceBundleFilter extends AbstractFilter {
 
     protected String process(String key, String value) {
         if (entryParseCallback != null) {
-            entryParseCallback.addEntry(key, value, null, false, OStrings.getString("RESOURCEBUNDLE_KEY")+" "+key, null, this);
+            entryParseCallback.addEntry(key, value, null, false, 
+                    OStrings.getString("RESOURCEBUNDLE_KEY") + " " + key, null, this);
             return value;
         } else if (entryTranslateCallback != null) {
             String trans = entryTranslateCallback.getTranslation(key, value, null);
@@ -367,6 +366,7 @@ public class ResourceBundleFilter extends AbstractFilter {
         return value;
     }
 
+    @Override
     protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();

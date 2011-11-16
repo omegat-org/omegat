@@ -4,6 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2009-2010 Alex Buloichik
+               2011 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -42,6 +44,8 @@ import org.omegat.util.StringUtil;
  * i18n of software.
  * 
  * @author Maxym Mykhalchuk
+ * @author Alex Buloichik
+ * @author Didier Briel
  */
 public class INIFilter extends AbstractFilter {
     protected Map<String, String> align;
@@ -76,10 +80,7 @@ public class INIFilter extends AbstractFilter {
      * Doing the processing of the file...
      */
     public void processFile(BufferedReader reader, BufferedWriter outfile) throws IOException {
-        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix
-                                                                                // for
-                                                                                // bug
-                                                                                // 1462566
+        LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         String group = null;
 
@@ -120,7 +121,8 @@ public class INIFilter extends AbstractFilter {
             if (entryAlignCallback != null) {
                 align.put(key, value);
             } else if (entryParseCallback != null) {
-                entryParseCallback.addEntry(key, value, null, false, null, null, this);
+                entryParseCallback.addEntry(key, value, null, false,
+                    OStrings.getString("RESOURCEBUNDLE_KEY") + " " + key, null, this);
             } else if (entryTranslateCallback != null) {
                 String trans = entryTranslateCallback.getTranslation(key, value, null);
                 if (trans == null) {

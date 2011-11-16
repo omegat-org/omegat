@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -33,6 +33,8 @@ launched directly under the Scripting menu entry. Requires version
   - Better error reporting for Google translation
 
   - It is now possible to create glossary plugins
+
+  - Key=value filter: the key is displayed in the comment pane
 
   Bug fixes:
 

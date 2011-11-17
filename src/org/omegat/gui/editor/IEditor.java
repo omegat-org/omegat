@@ -157,7 +157,7 @@ public interface IEditor {
 
     /**
      * Defines the current translation as empty.
-     * This is reset after each going out of a segment/
+     * This is reset after each going out of a segment.
      */
     void setEmptyTranslation(boolean flag);
 

@@ -3,7 +3,8 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2008 Alex Buloichik
+ Copyright (C) 2008-2010 Alex Buloichik
+               2011 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,6 +36,7 @@ import org.omegat.gui.editor.mark.Mark;
  * Almost all methods must be called from UI thread.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public interface IEditor {
     enum CHANGE_CASE_TO {
@@ -152,6 +154,12 @@ public interface IEditor {
      * Must be called only from UI thread.
      */
     void replaceEditText(String text);
+
+    /**
+     * Defines the current translation as empty.
+     * This is reset after each going out of a segment/
+     */
+    void setEmptyTranslation(boolean flag);
 
     /**
      * Inserts text at the cursor position.

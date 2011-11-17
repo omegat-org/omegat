@@ -143,6 +143,8 @@ public class EditorController implements IEditor {
 
     private List<Integer> entryFilterList;
 
+    private boolean emptyTranslation = false;
+
     public EditorController(final MainWindow mainWindow) {
         this.mw = mainWindow;
 
@@ -664,7 +666,7 @@ public class EditorController implements IEditor {
 
         int segmentAtLocation = getSegmentIndexAtLocation(location);
         if (displayedEntryIndex != segmentAtLocation) {
-            commitAndDeactivate();
+            doChangeSegmentActions();
             displayedEntryIndex = segmentAtLocation;
             activateEntry();
         }
@@ -720,10 +722,16 @@ public class EditorController implements IEditor {
             
             TMXEntry oldTE = Core.getProject().getTranslationInfo(entry);
             
+            if (StringUtil.isEmpty(oldTE.translation) && StringUtil.isEmpty(newTrans)) {
+                // It's an empty translation which should remain empty
+                setEmptyTranslation(true);
+            }
+
             if ((oldTE.translation == null && StringUtil.isEmpty(newTrans)) ||
-                (StringUtil.isEmpty(newTrans))) {
-                // There was no translation, nothing changed, or the user enter an empty translation, which
-                // means removing the translation (but not necessary the TU, since there could be a note).
+                (StringUtil.isEmpty(newTrans) && !isEmptyTransation())) {
+                // There was no translation, nothing changed, or the user enters an empty translation, which
+                // means removing the translation (but not necessary the TU, since there could be a note),
+                // unless it's an empty translation.
                 newTrans = null;
             }
             
@@ -792,7 +800,7 @@ public class EditorController implements IEditor {
         Cursor oldCursor = this.editor.getCursor();
         this.editor.setCursor(hourglassCursor);
 
-        commitAndDeactivate();
+        doChangeSegmentActions();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
@@ -835,7 +843,7 @@ public class EditorController implements IEditor {
         Cursor oldCursor = this.editor.getCursor();
         this.editor.setCursor(hourglassCursor);
 
-        commitAndDeactivate();
+        doChangeSegmentActions();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
@@ -884,7 +892,7 @@ public class EditorController implements IEditor {
         this.editor.setCursor(hourglassCursor);
 
         // save the current entry
-        commitAndDeactivate();
+        doChangeSegmentActions();
 
         List<FileInfo> files = Core.getProject().getProjectFiles();
         SourceTextEntry ste;
@@ -951,7 +959,7 @@ public class EditorController implements IEditor {
             return;
         }
 
-        commitAndDeactivate();
+        doChangeSegmentActions();
 
         displayedFileIndex = fileIndex;
         displayedEntryIndex = 0;
@@ -976,7 +984,7 @@ public class EditorController implements IEditor {
         Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
         Cursor oldCursor = this.editor.getCursor();
         this.editor.setCursor(hourglassCursor);
-        commitAndDeactivate();
+        doChangeSegmentActions();
 
         if (entryNum == 0) {
             // it was empty project, need to display first entry
@@ -1425,7 +1433,30 @@ public class EditorController implements IEditor {
         }
         setMenuEnabled();
     }
-    
+
+    /*
+     * {@inheritDoc}
+     */
+    public void setEmptyTranslation(boolean flag) {
+        emptyTranslation = flag;
+    }
+
+    /*
+     * Return whether the current translation is empty or not.
+     * Used to distinguish between a null and an empty translation.
+     */
+    private boolean isEmptyTransation() {
+        return emptyTranslation;
+    }
+
+    /*
+     * Do the necessary actions before changing segment.
+     */
+    private void doChangeSegmentActions() {
+        commitAndDeactivate();
+        // Reset the empty translation status
+        setEmptyTranslation(false);
+    }
     /**
      * Class for checking if alternative translation exist.
      */

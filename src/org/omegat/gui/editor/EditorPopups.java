@@ -288,6 +288,7 @@ public class EditorPopups {
             JMenuItem itemEmpty = menu.add(OStrings.getString("TRANS_POP_EMPTY_TRANSLATION"));
             itemEmpty.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    Core.getEditor().setEmptyTranslation(true);
                     setTranslation("");
                     Core.getEditor().replaceEditText("");
                 }

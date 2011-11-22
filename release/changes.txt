@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 4 vs. 2.5.0 update 3
 
@@ -13,7 +13,7 @@
 
   Localisation updates:
 
-  - Dutch localisation updated to 2.5.0 update 2 (UI, readme, manual)
+  - Dutch localisation updated to 2.5.0 update 3 (UI, readme, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3

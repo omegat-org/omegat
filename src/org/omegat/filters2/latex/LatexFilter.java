@@ -234,7 +234,7 @@ public class LatexFilter extends AbstractFilter {
 
     private String substituteUnicode(String par) {
         par = par.replaceAll("\\\\\\\\", "<br0>");
-        par = par.replaceAll("\\{?\\\\ss\\}?", "ß");
+        par = par.replaceAll("\\{?\\\\ss\\}?", "\u00df");
         par = par.replaceAll("\\{?\\\\glqq\\}?(\\{\\})?", "\u301f");
         par = par.replaceAll("\\{?\\\\grqq\\}?(\\{\\})?", "\u301d");
         par = par.replaceAll("\\{?\\\\glq\\}?(\\{\\})?", "\u201a");

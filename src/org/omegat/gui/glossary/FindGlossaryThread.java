@@ -214,8 +214,8 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
                 }
             }
 
-            // �� Sort items with same locTxt
-            // �����������������������������������
+            // == Sort items with same locTxt
+            // ==============================
             List<GlossaryEntry> sortList = new LinkedList<GlossaryEntry>();
             if (srcList.size() > 1) {
                 for (int k = 0; k < srcList.size(); k++) {
@@ -241,7 +241,7 @@ public class FindGlossaryThread extends EntryInfoSearchThread<List<GlossaryEntry
             } else {
                 sortList = srcList;
             }
-            // ������������������������������������������������������������������
+            // ==================================================================
 
             // == Now put the sortedList together
             // ===============================

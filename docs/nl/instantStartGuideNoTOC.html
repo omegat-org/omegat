@@ -1,176 +1,455 @@
 <html>
-<head>
-  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-  <title>Gids Snel starten - OmegaT 2.0 Gebruikershandleiding</title>
-</head>
-
-<body>
-  <h2>OmegaT gebruiken in 5 minuten!<br> - gids Snel starten</h2>
-
-  <p>Deze gids Snel starten behandelt slechts de basisonderwerpen. Ideaal gesproken zouden alle gebruikers de gebruikershandleiding moeten lezen om zichzelf alles eigen te maken wat OmegaT te bieden heeft. De hier beschreven sneltoetsen gebruiken de regel met betrekking tot de "ctrl+toets" maar gebruikers van een Mac zouden daar "cmd+toets" moeten lezen. De "cmd"-toets heeft ofwel een label "command" of een Apple-merkteken op Apple-toetsenborden.</p>
-  <hr>
-  <a name="summary" id="summary"></a>
-
-  <h2>Kort, hoe OmegaT werkt</h2>
-
-  <p>Het OmegaT-scherm bestaat uit één ruimte met drie afzonderlijke vensters. Van elk van deze vensters kunnen de afmetingen met de muis gewijzigd worden. Links staat het venster Bewerken waar u uw vertalingen in typt. Rechtsboven staat het venster Overeenkomsten, waar de overeenkomsten uit het vertaalgeheugen worden weergegeven. Daaronder staat het venster Woordenlijst, waar de overeenkomsten uit de woordenlijst worden weergegeven.</p>
-
-  <p>In het venster Bewerken presenteert OmegaT de brontekst 'gesegmenteerd' in zinnen (of alinea's). U vertaalt deze segmenten één voor één. Als u van segment naar segment gaat worden uw vertalingen opgenomen in een vertaalgeheugen. Als alle segmenten vertaald zijn (of eerder als u dat wilt) zal OmegaT het vertaalgeheugen gebruiken om de vertaalde documenten te maken in de map “Target”.</p>
-
-  <p>OmegaT beheert uw vertaalwerk in zogenaamde vertaalprojecten. Voor elk project zal OmegaT een verzameling mappen maken. Deze worden gebruikt om de brondocumenten die moeten worden vertaald, de woordenlijsten die u misschien wilt gebruiken en alle vertaalgeheugens die u misschien wilt gebruiken, op te slaan. OmegaT maakt ook een map “Target” die de voltooide vertaalde documenten zal bevatten.</p>
-  <hr>
-  <a name="translate" id="translate"></a>
-
-  <h2>Hoe te vertalen met OmegaT</h2><a name="create" id="create"></a>
-
-  <h3>Maak en open een nieuw project</h3>
-
-  <p>Selecteer <strong>Project → Nieuw...</strong> uit het menu.</p>
-
-  <p>Navigeer naar de map waar u de projectbestanden wilt opslaan en typ een naam in voor het vertaalproject. Deze naam zal worden gebruikt voor de hoofdmap van het project; alle projectbestanden worden opgeslagen in deze map of de submappen daarvan.</p>
-
-  <p>OmegaT zal u vragen om de te maken projectmappen te bevestigen of te wijzigen, met behulp van onderstaand dialoogvenster:</p>
-
-  <p align="center"><img src="images/NewProject.png" name="graphics1" alt=
-  "venster Project instellen" id="graphics1" align="bottom" border="0"></p>
-
-  <p>U kunt eenvoudigweg de locatie van de submappen accepteren, maar overtuig u er van dat de codes voor de brontaal en taal voor de vertaling correct zijn. Selecteer de taalcode (2 letters) of taal-en-landcode (2 + 2 letters) uit de keuzelijst of typ ze met de hand in (de taalcode kan 2- of 3-cijferig zijn). Maak een mentale notitie van de locatie van de submap Target (voor uw vertaalde documenten). Als u wilt dat OmegaT segmenteert per zin in plaats van per "alinea", is het een goed idee om de segmentatieregels nog eens te controleren.</p>
-
-  <p>Als u op OK klikt om de instellingen van het project te accepteren, zal OmegaT u vragen om de brondocumenten te selecteren om die te importeren. U kunt individuele bestanden importeren of u kunt hele mappenstructuren importeren (met alle bestanden in alle submappen). Als u per ongeluk de verkeerde documenten heeft geïmporteerd of teveel documenten, kunt u ze eenvoudigweg verwijderen uit de map Source van uw OmegaT-project (bijvoorbeeld met behulp van bestandsbeheer van uw systeem).</p>
-
-  <p>Kijk in het venster <strong>Projectbestanden</strong> om uw lijst met bestanden te controleren die vertaald moeten worden (Menu: <strong>Project → Projectbestanden...</strong>, als het niet automatisch opent). Als u de inhoud van de map Source heeft moeten veranderen, vergeet dan niet om het project eerst opnieuw te laden (Menu: <strong>Project → Herladen</strong>). OmegaT opent standaard het eerste bestand van de projectlijst. Onthoud dat OmegaT alleen bestanden kan vertalen in de onderstaande formaten als zij overeenkomen met de patronen die zijn gedefinieerd in de bestandsfilters. Alle andere bestanden zullen worden genegeerd.</p>
-
-  <ul>
-    <li>OpenDocument / OpenOffice.org</li>
-
-    <li>Platte tekst</li>
-
-    <li>.po</li>
-
-    <li>bundle.properties Java</li>
-
-    <li>XHTML, HTML</li>
-
-    <li>HTML Help Compiler</li>
-
-    <li>INI ('sleutel=waarde' formaat)</li>
-
-    <li>DocBook</li>
-
-    <li>Microsoft Open XML</li>
-
-    <li>Okapi ééntalige XLIFF</li>
-
-    <li>QuarkXPress CopyFlowGold</li>
-
-    <li>Bestanden voor ondertiteling (SRT)</li>
-
-    <li>ResX</li>
-
-    <li>Androidbronnen</li>
-
-    <li>LaTeX</li>
-  </ul><a name="segments" id="segments"></a>
-
-  <h3>Vertaal de segmenten één voor één</h3>
-
-  <p>Als u eenmaal het project en de bestanden die u wilt vertalen heeft gedefinieerd, zal OmegaT het eerste bronbestand openen in het venster Bewerken. Het eerste segment wordt groen geaccentueerd; een kopie van de brontekst wordt eronder weergegeven in het “doelveld”. (Op dit punt is alle tekst buiten het doelveld beveiligd en kan niet worden gewijzigd.) U moet uw vertaling typen tussen de tags <code>&lt;segment 0001&gt;</code> en <code>&lt;einde segment&gt;</code>, waarbij u de brontekst overschrijft. Druk op de toets "<strong>ENTER</strong>" om door te gaan naar het volgende segment. Opmerking:</p>
-
-  <ul>
-    <li>Als u naar een ander deel van de tekst wilt gaan, of dat nu naar boven of naar beneden is, dubbelklik dan op de zin of alinea die u wilt openen.</li>
-
-    <li>Als u liever vertaalt in een leeg doelveld stelt u die optie in onder <strong>Opties → Bewerken (gedrag)...</strong>.</li>
-
-    <li>
-      <p>In het item <span style="font-weight: bold;">Weergave</span> van het hoofdmenu kunt u de instellingen van het venster Bewerken wijzigen (bijvoorbeeld om de brontekst wel of niet te tonen, de vertaalde tekst te accentueren etc).</p>
-    </li>
-  </ul>
-
-  <p>Als u op "<strong>ENTER</strong>" drukt gebeuren er verschillende onzichtbare dingen: OmegaT voegt het segmentenpaar (het bronsegment en de vertaling daarvan) toe aan het vertaalgeheugen en vertaalt ook automatisch alle andere identieke segmenten die het in de andere projectbestanden ontdekt. Het kijkt ook in het vertaalgeheugen en woordenlijst naar overeenkomsten voor het volgende niet-vertaalde segment.`</p><a name="tm" id="tm"></a>
-
-  <h3>Overeenkomsten in het vertaalgeheugen en in woordenlijsten en woordenboeken gebruiken</h3><a name="tm_matches" id="tm_matches"></a>
-
-  <h3>Overeenkomsten in het vertaalgeheugen</h3>
-
-  <p>Als OmegaT een fuzzy overeenkomst (30% of meer) voor het volgende segment in het vertaalgeheugen vindt, geeft het dit weer in het venster Overeenkomsten. In het venster Overeenkomsten wordt standaard de eerste overeenkomst geselecteerd.</p><img src=
-  "images/MatchesPane.png" name="graphics4" alt="venster Overeenkomsten" id="graphics4"
-  style="border: 0px solid ;"><br clear="left">
-
-  <p><br></p>
-
-  <p>U kunt de sneltoetsen van het toetsenbord gebruiken om de overeenkomsten uit het vertaalgeheugen vanuit het venster Overeenkomsten in uw doelveld in te voegen:</p>
-
-  <ul>
-    <li>Druk op <code>Ctrl+I</code> om de geselecteerde overeenkomst op de cursorpositie in te voegen of...</li>
-
-    <li>Druk op <code>Ctrl+R</code> om het gehele segment te overschrijven met de geselecteerde overeenkomst.</li>
-  </ul>
-
-  <p>Als er meerdere overeenkomsten zijn gevonden en u wilt niet de geselecteerde overeenkomst gebruiken:</p>
-
-  <ul>
-    <li>Selecteer de overeenkomst die u wilt gebruiken in het venster Overeenkomsten: <code>Ctrl+2</code> voor de weergegeven tweede overeenkomst, <code>Ctrl+3</code> voor de derde overeenkomst, etc.</li>
-
-    <li>Gebruik dan de sneltoetsen <code>Ctrl+I</code> of <code>Ctrl+R</code> zoals hierboven.</li>
-  </ul>
-
-  <p>(U kunt OmegaT vertellen dat elke eerste overeenkomst boven een bepaald percentage van overeenkomst automatisch in het doelveld moet worden ingevoegd als het segment opent. Stel deze optie in met behulp van <strong>Opties → Bewerken (gedrag)...</strong>)</p><a name="gloss_matches" id="gloss_matches"></a>
-
-  <h3>Overeenkomsten in woordenlijsten en woordenboeken</h3>
-
-  <p>Overeenkomende termen in woordenlijsten en woordenboeken, die u hebt opgenomen in het project, zullen als verwijzing worden weergegeven in de vensters Woordenlijst en Woordenboek.</p><a name="searches" id="searches"></a>
-
-  <h3>Zoeken gebruiken</h3>
-
-  <p>OmegaT verschaft een groot scala aan zoekfuncties. Roep het venster Zoeken op met <code>Ctrl+F</code> en voer het woord of de frase waarnaar u wilt zoeken in het vak "Zoeken naar" in. Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <code>Ctrl+F</code>. Het woord of de frase wordt in dit geval automatisch ingevoegd in het vak "Zoeken naar".</p>
-
-  <h3>Google Translate gebruiken</h3>
-
-  <p>In het venster Google Translate zult u automatisch een suggestie krijgen voor de vertaling van het huidige segment. Druk op <code>Ctrl+M</code> en het zal de huidige inhoud van het doelsegment vervangen.<br></p>
-
-  <p><a name="create_trans" id="create_trans"></a></p>
-
-  <h3>Vertaalde documenten maken</h3>
-
-  <p>Als u alle segmenten heeft vertaald (of eerder als u dat wilt), zal OmegaT de doeldocumenten bijwerken met behulp van de opgeslagen vertalingen in het vertaalgeheugen. Selecteer <strong>Project → Vertaalde documenten maken</strong> uit het menu om dat te doen. OmegaT zal vertaalde versies van alle vertaalbare documenten in de map Source van het project maken, ongeacht of zij wel of niet volledig vertaald zijn. De geheel of gedeeltelijk vertaalde bestanden zullen worden opgeslagen in de map Target van het project. Open de doelbestanden met hun gekoppelde toepassing (browser, tekstverwerkingsprogramma...) om de inhoud en opmaak van uw vertaling te controleren om uw vertaalwerk te voltooien. U kunt dan terugkeren naar OmegaT om de nodige correcties te maken; vergeet niet om de vertaalde documenten opnieuw te maken.</p>
-  <hr>
-  <a name="tags" id="tags"></a>
-
-  <h2>Hoe getagde tekst te behandelen</h2>
-
-  <p>OmegaT zorgt er voor dat de opmaak van de brondocumenten (vet, cursief etc.) niet verloren gaat door het te markeren met speciale tags. OmegaT-tags zijn samengesteld uit één of meer letters, gevolgd door één of meer cijfer en met  het "/"-teken om af te sluiten (bijvoorbeeld: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; etc.). U moet deze tags met zorg behandelen en er voor zorgen dat zij op de juiste wijze zijn opgenomen in de doelsegmenten (zie <em>Tag-bewerkingen</em>).</p><a name="example" id="example"></a>
-
-  <h3>Een voorbeeld...</h3>
-
-  <p>In deze voorbeelden hebben we de tags geaccentueerd om ze gemakkelijker te laten zien, maar in OmegaT zullen ze niet geaccentueerd zijn. De HTML-tags, geaccentueerd in <font color="blue">blauw,</font> zullen door OmegaT worden genegeerd als zij het segment volledig omsluiten. De tags, hieronder geaccentueerd in <font color=
-  "green">groen</font> moeten door OmegaT worden afgehandeld omdat zij binnen het segment staan. Hier is een voorbeeld van een segment in HTML:</p>
-
-  <p><code><font color="blue">&lt;p&gt;</font>Een ander lettertype voor weergave kan worden geselecteerd via het dialoogvenster<font color="green">&lt;b&gt;</font>Lettertype weergeven<font color=
-  "green">&lt;/b&gt;</font>. Open het via het menu-item <font color=
-  "green">&lt;i&gt;</font>Instellingen<font color="green">&lt;/i&gt;</font> →<font color="green">&lt;i&gt;</font>Lettertype weergeven...<font color=
-  "green">&lt;/i&gt;</font>. Het lettertype en de afmetingen kunnen worden gewijzigd in het dialoogvenster.<font color="blue">&lt;/p&gt;</font></code></p>
-
-  <p>Hier ziet u hoe OmegaT het zal weergeven, met de vertaling in Afrikaans:</p><br>
-
-  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
-
-  <p>Als OmegaT het vertaalde document heeft gemaakt, zal de HTML er zo uitzien:</p>
-
-  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
-  "tag_verif" id="tag_verif"></a>
-
-  <h3>Tag-verificatie</h3>
-
-  <p>OmegaT detecteert niet automatisch foutieve tags in het vertaalde document. Voordat u het document aflevert aan uw cliënt, moet u daarom eerst de tags controleren op fouten.</p>
-
-  <p>Selecteer <strong>Extra → Tags valideren</strong> uit het menu. Een tabel zal worden weergegeven waarin de segmenten worden getoond waarvan de bron- en doeltags niet overeenkomen. Klik op het segmentnummer. U wordt automatisch naar het verdachte segment gebracht in het venster Bewerken waar u de tags kunt corrigeren. Druk op <code>Enter</code> om het gecorrigeerde segment te valideren en controleer de correctie door opnieuw op <code>Ctrl-T</code> te drukken.</p>
-
-  <p>In sommige gevallen kunnen tagfouten er voor zorgen dat het document niet geopend kan worden. U moet u er dan ook van overtuigen dat u alle tagfouten heeft gecorrigeerd voordat u de vertaalde documenten maakt. Tenslotte moet u de uiteindelijke opmaak altijd controleren door het document te openen in de gekoppelde viewer of bewerkingsprogramma.</p>
-
-  <p>In sommige programmeertalen (bijv. PHP, C) worden speciale tags gebruikt als tijdelijke aanduidingen in tekenreeksen die in combinatie met de functie printf worden gebruikt. OmegaT kan deze tags detecteren en valideren als u dat inschakelt. Selecteer <strong>Opties→ Tagvalidatie...</strong> uit het menu. U kunt kiezen uit eenvoudige of volledige validatie. In eenvoudige validatie worden alleen eenvoudige varianten van de mogelijke waarden van de tijdelijke aanduidingen gebruikt: Dit is handig als de broncode niet de meer expressieve en complexe tijdelijke aanduidingen bevat en u een groot aantal valse positieven zou krijgen.</p>
-
-  <hr>
-</body>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>gids Snel starten</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="chapter" title="gids Snel starten">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>gids Snel starten
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="section" title="1.&nbsp;OmegaT gebruiken in 5 minuten!">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4"></a>1.&nbsp;<span class="application">OmegaT</span> gebruiken in 5 minuten!
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Deze gids Snel starten behandelt slechts de basisonderwerpen van OmegaT. Ideaal gesproken zouden alle gebruikers de gebruikershandleiding
+               moeten lezen om zichzelf alles eigen te maken wat <span class="application">OmegaT</span> te bieden heeft. Opmerking voor Mac-gebruikers: sneltoetsen worden hier beschreven als "<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>toets</strong></span>" maar gebruikers van een Mac zouden "<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>toets</strong></span>" moeten gebruiken. De "<span class="keycap"><strong>Cmd</strong></span>"-toets heeft ofwel een label "command" of een Apple-merkteken op Apple-toetsenborden.
+            </p>
+            <p>Het <span class="application">OmegaT</span>-scherm bestaat uit één werkruimte met vijf afzonderlijke vensters<a class="indexterm" name="d0e36"></a>. Van elk van deze vensters kunnen de afmetingen met de muis gewijzigd worden. Links staat het venster Bewerken waar u uw
+               vertalingen in typt. Rechtsboven staat het venster Overeenkomsten, waar de overeenkomsten uit het vertaalgeheugen worden weergegeven.
+               Daaronder staat het venster Woordenlijst, waar de overeenkomsten uit de woordenlijst worden weergegeven. Twee aanvullende
+               tabs aan de onderzijde van het venster openen de vensters Woordenboek en Machinevertaling. (Opmerking: u kunt natuurlijk de
+               vensters herschikken naar uw eigen wensen - bovenstaande beschrijving is van toepassing op OmegaT direct na de installatie).
+            </p>
+            <p>In het venster Bewerken presenteert OmegaT de brontekst 'gesegmenteerd' in ofwel zinnen of alinea's. Deze worden dan vertaald,
+               één voor één. Als u verder gaat van segment naar segment worden uw vertalingen automatisch opgenomen in een vertaalgeheugen.
+               Als alle segmenten vertaald zijn (of eerder als u dat wilt) zal <span class="application">OmegaT</span> het vertaalgeheugen gebruiken om het/de vertaalde document(en) te maken in de map “Target”.
+            </p>
+            <p>OmegaT beheert uw vertaalwerk in vertaal"projecten". Voor elk project maakt OmegaT een verzameling mappen die, op hun beurt,
+               worden gebruikt om de brondocumenten op te slaan die moeten worden vertaald en ook woordenlijsten en vertaalgeheugens die
+               zou willen gebruiken. OmegaT maakt ook een map “Target” waarin OmegaT de voltooide vertaalde documenten zal plaatsen.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Vertalen met OmegaT">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e47"></a>2.&nbsp;Vertalen met <span class="application">OmegaT</span></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section" title="2.1.&nbsp;Maken en openen van een nieuw project">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="create.and.open.new.project"></a>2.1.&nbsp;Maken en openen van een nieuw project<a class="indexterm" name="d0e55"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Selecteer <span class="guimenu">Project</span> → <span class="guimenuitem">Nieuw...</span><a class="indexterm" name="d0e67"></a> uit het menu.
+               </p>
+               <p>Navigeer naar de map waar u de projectbestanden wilt opslaan en typ een naam in voor het vertaalproject. Deze naam zal worden
+                  gebruikt voor de hoofdmap van het project; alle projectbestanden worden opgeslagen in deze map of de submappen daarvan.
+               </p>
+               <p><span class="application">OmegaT</span> zal u vragen om de te maken projectmappen te bevestigen of te wijzigen, met behulp van onderstaand dialoogvenster:
+               </p>
+               <div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figure&nbsp;1.&nbsp;<a class="indexterm" name="d0e81"></a>Nieuw project - dialoogvenster</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/NewProject.png" alt="Projectdialoogvenster Project - afbeeldingNieuw project - dialoogvenster"></div>
+                  </div>
+               </div><br class="figure-break"><p>U kunt eenvoudigweg de locaties van de submappen accepteren, maar controleer eerst dat de codes voor de brontaal en taal voor
+                  de vertaling correct zijn. Selecteer de taalcode (2 letters) of taal-en-landcode (2 + 2 letters) uit de keuzelijst of typ
+                  ze met de hand in (de taalcode kan 2- of 3-cijferig zijn). Maak een mentale notitie van de locatie van de submap Target (voor
+                  uw vertaalde documenten). Als u wilt dat OmegaT segmenteert per zin in plaats van per "alinea", lees dan het hoofdstuk over
+                  Segmentatieregels<a class="indexterm" name="d0e94"></a>.
+               </p>
+               <p>Als u op OK klikt om de instellingen van het project te accepteren, zal OmegaT u vragen om de brondocumenten te selecteren
+                  om die te importeren. U kunt individuele bestanden importeren met<em class="firstterm"> Project &gt; Bronbestanden importeren</em>, of u kunt hele mappenstructuren (met alle bestanden in alle submappen) handmatig importeren in de map Source van uw OmegaTproject
+                  (bijvoorbeeld met behulp van de bestandsbeheerder van uw systeem). Als u per ongeluk de verkeerde documenten heeft geïmporteerd
+                  of teveel documenten, kunt u ze eenvoudigweg verwijderen uit de map Source.
+               </p>
+               <p>Kijk in het <a class="indexterm" name="d0e107"></a>venster <span class="bold"><strong>Projectbestanden</strong></span> om uw lijst met bestanden te controleren die vertaald moeten worden (Menu: <span class="guimenu">Project</span> → <span class="guimenuitem">Projectbestanden...</span>,<a class="indexterm" name="d0e122"></a> als het niet automatisch opent). Als u de inhoud van de map Source heeft moeten veranderen, vergeet dan niet om het project
+                  eerst opnieuw te laden (Menu: <span class="guimenu">Project</span> → <span class="guimenuitem">Herladen</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>)). <span class="application">OmegaT</span> opent standaard het eerste bestand van de projectlijst. Onthoud dat <span class="application">OmegaT</span> alleen bestanden kan vertalen in de onderstaande formaten als zij overeenkomen met de patronen die zijn gedefinieerd in de
+                  bestandsfilters. Alle andere bestanden zullen worden genegeerd.<a class="indexterm" name="d0e143"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Platte tekst-bestandsformaten<a class="indexterm" name="d0e153"></a></strong></span></p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>ASCII tekst (.txt, etc.)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Gecodeerde tekst (*.UTF8)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Java bronbundels (*.properties)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>PO-bestanden (*.po)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>INI (sleutel=waarde) bestanden (*.ini)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>DTD-bestanden (*.DTD)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>DocuWiki-bestanden (*.txt)</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Getagde tekst bestandsformaten<a class="indexterm" name="d0e189"></a></strong></span></p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
+                                    *.odp, *.otp)
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Microsoft Open XML (*.docx, *.xlsx, *.pptx)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>(X)HTML (*.html, *.xhtml,*.xht)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>HTML Help Compiler (*.hhc, *.hhk)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>DocBook (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>ééntalige XLIFF (*.xlf, *.xliff, *.sdlxliff)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>SubRip titelbestanden (*.srt)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>ResX-bestanden (*.resx)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Android-bronbestanden (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>LaTex (*.tex, *.latex)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Help- (*.xml) en Manual- (*.hmxp) bestanden</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Typo3 LocManager (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>WiX Localization (*.wxl)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Iceni Infix (*.xml)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Flash XML exporteren (*.xml)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Wordfast TXML (*.txml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <p>In aanvulling op de tekst die u wilt vertalen, bevatten getagde tekstbestanden informatie over de opmaak die in OmegaT zichtbaar
+                  wordt gemaakt in de vorm van “tags”. De tags moeten ook aanwezig zijn in de vertaalde tekst, zelfs als de opmaak niet "vertaald"
+                  behoeft te worden. Als tags blijken te ontbreken of verkeerd geplaatst zijn, zou de tekst misschien niet worden weergegeven
+                  zoals bedoeld en de vertaling zal daarom gecorrigeerd moeten worden - zie het hoofdstuk "Tagverificatie" hieronder.
+               </p>
+            </div>
+            <div class="section" title="2.2.&nbsp;Vertalen van segmenten één voor één">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="translate.the.segments.one.by.one"></a>2.2.&nbsp;Vertalen van segmenten één voor één
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Als u eenmaal het project en de bestanden die u wilt vertalen heeft gedefinieerd, zal <span class="application">OmegaT</span> het eerste bronbestand openen in het venster Bewerken.
+               </p>
+               <p>Het actieve segment wordt groen geaccentueerd; een kopie van de brontekst wordt er net onder weergegeven in het “doelveld”.
+                  (Op dit punt is alle tekst buiten het doelveld beveiligd en kan niet worden gewijzigd.) U moet uw vertaling typen vóór de
+                  tag &lt;<code class="literal">segment 0001&gt;</code>. OmegaT kan worden ingesteld om automatisch de brontekst naar de doeltekst te kopiëren (zie <span class="emphasis"><em>Opties &gt; Bewerken (gedrag)...</em></span>), wat handig kan zijn als delen van de brontekst niet gewijzigd moeten worden. In zulke gevallen zult u de brontekst overschrijven.
+                  Druk op de toets <span class="bold"><strong>"ENTER"</strong></span> om door te gaan naar het volgende segment. Opmerking:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Als u naar een ander deel van de tekst wilt gaan, of dat nu naar boven of naar beneden is, dubbelklik dan op de zin of alinea
+                           die u wilt openen.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Als u liever vertaalt in een leeg doelveld stelt u die optie in onder <span class="guimenu">Opties</span> → <span class="guimenuitem">Bewerken (gedrag)...<a class="indexterm" name="d0e290"></a></span>.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>In het item Weergave van het hoofdmenu kunt u de instellingen van het venster Bewerken wijzigen (bijvoorbeeld om de brontekst
+                           wel of niet te tonen, de vertaalde tekst te accentueren etc).
+                        </p>
+                        <p>Als u op <span class="bold"><strong>"ENTER"</strong></span> drukt gebeuren er verschillende onzichtbare dingen: <span class="application">OmegaT</span> voegt het paar van segmenten (het bronsegment en de vertaling daarvan) toe aan het interne vertaalgeheugen. Het vertaalt
+                           ook automatisch alle andere identieke segmenten die het detecteert. In aanvulling daarop kijkt het ook in het vertaalgeheugen
+                           en woordenlijst naar overeenkomsten voor het volgende niet-vertaalde segment, welk segment het vervolgens opent.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section" title="2.3.&nbsp;Overeenkomsten in het vertaalgeheugen en in woordenboeken en woordenlijsten gebruiken">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="use.matches.in.TMs.dictionaries.and.glossaries"></a>2.3.&nbsp;Overeenkomsten in het vertaalgeheugen en in woordenboeken en woordenlijsten gebruiken
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="section" title="2.3.1.&nbsp;Overeenkomsten in het vertaalgeheugen">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Overeenkomsten in het vertaalgeheugen<a class="indexterm" name="d0e313"></a><a class="indexterm" name="d0e318"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="figure"><a name="d0e323"></a><p class="title"><b>Figure&nbsp;2.&nbsp;venster Overeenkomsten</b></p>
+                     <div class="figure-contents">
+                        <div class="mediaobject"><img src="images/MatchesPane.png" alt="venster Overeenkomsten"></div>
+                     </div>
+                  </div><br class="figure-break"><p>Als <span class="application">OmegaT</span> een fuzzy overeenkomst (30% of meer) voor het volgende segment in het vertaalgeheugen vindt, geeft het dit weer in het venster
+                     Overeenkomsten. In het venster Overeenkomsten wordt standaard de eerste overeenkomst geselecteerd.
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                           <p>Druk op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e345"></a> om de vooraf geselecteerde overeenkomst op de cursorpositie in te voegen, of...
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Druk op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> <a class="indexterm" name="d0e360"></a><a class="indexterm" name="d0e365"></a> om het gehele segment te overschrijven met de geselecteerde overeenkomst.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>Als er meerdere overeenkomsten zijn gevonden en u wilt niet de vooraf geselecteerde overeenkomst gebruiken:</p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                           <p>Selecteer de overeenkomst die u wilt gebruiken in het venster Overeenkomsten: <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>2</strong></span> voor de weergegeven tweede overeenkomst, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>3</strong></span> voor de derde overeenkomst, etc.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Gebruik dan de sneltoetsen <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span> of <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> zoals hierboven.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>U kunt OmegaT vertellen dat elke eerste overeenkomst boven een bepaald percentage van overeenkomst automatisch in het doelveld
+                     moet worden ingevoegd. Stel deze optie in met behulp van <span class="guimenu">Opties</span></p>
+               </div>
+               <div class="section" title="2.3.2.&nbsp;Overeenkomsten in woordenlijsten en woordenboeken">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;Overeenkomsten in woordenlijsten en woordenboeken<a class="indexterm" name="d0e410"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Overeenkomende termen in woordenlijsten en woordenboeken, die u zou kunnen hebben opgenomen in het project, zullen als verwijzing
+                     worden weergegeven in de vensters Woordenlijst en Woordenboek.
+                  </p>
+               </div>
+               <div class="section" title="2.3.3.&nbsp;Zoeken gebruiken">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="use.searches"></a>2.3.3.&nbsp;Zoeken gebruiken
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p><span class="application">OmegaT</span> verschaft een groot scala aan zoekfuncties. Roep het venster Zoeken op met <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> en voer het woord of de frase waarnaar u wilt zoeken in het vak "Zoeken naar" in. Als alternatief: selecteer een woord of
+                     frase ergens in het bewerkingsveld en druk op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>: het geselecteerde woord of frase zal automatisch worden ingevoerd in het vak "Zoeken naar" in het venster dat dan opent.
+                  </p>
+               </div>
+               <div class="section" title="2.3.4.&nbsp;Services voor machinevertaling gebruiken">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Services voor machinevertaling gebruiken<a class="indexterm" name="d0e439"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>In het venster Machinevertaling, indien een van de services is geactiveerd (zie <span class="emphasis"><em>Opties &gt; Machinevertaling</em></span>), zult u een automatische suggestie ontvangen voor de vertaling van het huidige segment. Druk op <span class="emphasis"><em>Ctrl+M </em></span> om het doelsegment te vervangen door deze suggestie.
+                  </p>
+               </div>
+            </div>
+            <div class="section" title="2.4.&nbsp;Vertaalde documenten maken">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Vertaalde documenten maken<a class="indexterm" name="d0e455"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Als u alle segmenten heeft vertaald (of eerder als u dat wilt), zal <span class="application">OmegaT</span> de doeldocumenten maken met behulp van de opgeslagen vertalingen in het vertaalgeheugen. Selecteer <span class="guimenu">Project</span> → <span class="guimenuitem">Vertaalde documenten maken</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e476"></a> <a class="indexterm" name="d0e482"></a>uit het menu om dat te doen. <span class="application">OmegaT</span> zal vertaalde versies van alle vertaalbare documenten in de map Source van het project maken, ongeacht of zij wel of niet
+                  volledig vertaald zijn. De geheel of gedeeltelijk vertaalde bestanden zullen worden opgeslagen in de map Target van het project.
+                  Open de doelbestanden met hun gekoppelde toepassing (browser, tekstverwerkingsprogramma...) om de inhoud en opmaak van uw
+                  vertaling te controleren om uw vertaalwerk te voltooien. U kunt dan terugkeren naar <span class="application">OmegaT</span> om de nodige correcties te maken; vergeet niet om de vertaalde documenten opnieuw te maken.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="3.&nbsp;Afhandelen van getagde tekst">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Afhandelen van getagde tekst<a class="indexterm" name="d0e497"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> zorgt er voor dat de opmaak van de brondocumenten (vet, cursief etc.) niet verloren gaat door het te markeren met speciale
+               tags. Tags van <span class="application">OmegaT</span> zijn samengesteld uit één of meer letters, gevolgd door één of meer cijfer en met  het "/"-teken om af te sluiten (bijvoorbeeld:
+               &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt; etc.). U moet deze tags met zorg behandelen en er voor zorgen dat zij op de juiste wijze zijn opgenomen
+               in de doelsegmenten.(zie Tag-bewerkingen).
+            </p>
+            <div class="section" title="3.1.&nbsp;Een voorbeeld...">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e507"></a>3.1.&nbsp;Een voorbeeld...<a class="indexterm" name="d0e510"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>In deze voorbeelden hebben we de tags geaccentueerd om ze gemakkelijker te laten zien, maar in <span class="application">OmegaT</span> zullen ze niet geaccentueerd zijn. De HTML-tags, geaccentueerd in blauw, zullen door <span class="application">OmegaT</span> worden genegeerd als zij het segment volledig omsluiten. De tags, hieronder geaccentueerd in groen moeten door <span class="application">OmegaT</span> worden afgehandeld omdat zij binnen het segment staan. Hier is een voorbeeld van een segment in HTML:
+               </p>
+               <p><code class="literal">&lt;p&gt;Een ander lettertype voor weergave kan worden geselecteerd via het dialoogvenster &lt;b&gt;Lettertype weergeven&lt;/b&gt;. Open het
+                     via het menu-item &lt;i&gt;Opties&lt;/i&gt; →&lt;i&gt;Lettertype weergeven...&lt;/i&gt;. Het lettertype en de afmetingen kunnen worden gewijzigd in
+                     het dialoogvenster.&lt;/p&gt;</code></p>
+               <p>Hier ziet u hoe <span class="application">OmegaT</span> dit zal weergeven, met de vertaling in het Afrikaans:
+               </p>
+               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;3.&nbsp;Bron <a class="indexterm" name="d0e537"></a>HTMLsegment</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/tagged_segment.png" alt="Bron Segment, bron en doel - afbeeldingHTMLsegment"></div>
+                  </div>
+               </div><br class="figure-break"><p>Als <span class="application">OmegaT</span> het vertaalde document heeft gemaakt, zal de HTML er zo uitzien:
+               </p>
+               <div class="figure"><a name="fig.tagged.segment.target"></a><p class="title"><b>Figure&nbsp;4.&nbsp;Doel HTMLsegment</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/tagged_segment_target.png" alt="Doel HTMLsegment"></div>
+                  </div>
+               </div><br class="figure-break"></div>
+            <div class="section" title="3.2.&nbsp;Tagverificatie">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Tagverificatie<a class="indexterm" name="d0e562"></a><a class="indexterm" name="d0e567"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> detecteert niet automatisch foutieve tags in het vertaalde document. Voordat u dan ook het document aflevert aan uw cliënt,
+                  zou u daarom eerst de tags moeten controleren op fouten. Selecteer <span class="guimenu">Extra</span> → <span class="guimenuitem">Tags valideren...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>) uit het menu. Een tabel zal worden weergegeven waarin de segmenten worden getoond waarvan de bron- en doeltags niet overeenkomen.
+                  Klik op het nummer van het segment. U wordt automatisch naar het verdachte segment in het venster Bewerken gebracht waar u
+                  de tags kunt corrigeren. Wanner u de correcties hebt uitgevoerd, controleer die dan door opnieuw op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e591"></a></strong></span> te drukken. Onthoud dat bij het verifiëren van de tags een fout kan worden gevonden voor gevallen waarin de tags correct
+                  zijn - bijvoorbeeld indien het nodig was om de volgorde van de betrokken tags te wijzigen om een grammaticaal juiste vertaling
+                  te kunnen maken. Beschouw dit als een teken dat de verificatie bij wijze van waarschuwing liever een fout aangeeft.
+               </p>
+               <p>In sommige gevallen kunnen tagfouten er voor zorgen dat het document niet geopend kan worden. Dit is geen reden voor paniek
+                  - u hebt nog steeds het bronbestand en de vertaling beschikbaar, u dient er alleen voor te zorgen dat u eventueel aanwezige
+                  tagfouten hebt gecorrigeerd voordat u de vertaalde documenten maakt. Tenslotte moet u de uiteindelijke opmaak altijd controleren
+                  door het document te openen in de gekoppelde viewer of bewerkingsprogramma.
+               </p>
+            </div>
+         </div>
+      </div>
+   </body>
 </html>

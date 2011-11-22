@@ -11,6 +11,10 @@
   
   - Entering empty translations wasn't working
 
+  Localisation updates:
+
+  - Dutch localisation updated to 2.5.0 update 2 (UI, readme, manual)
+
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3
 ----------------------------------------------------------------------

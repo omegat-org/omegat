@@ -13,7 +13,7 @@
 
   Localisation updates:
 
-  - Dutch localisation updated to 2.5.0 update 3 (UI, readme, Instant Start)
+  - Dutch localisation updated to 2.5.0 update 3 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3

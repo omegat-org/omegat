@@ -6,7 +6,7 @@ All the files in this directory and below are under the terms of the GNU General
 
 The creation of the documentation requires a number of tools:
 
-- DocBook XSL Stylesheets 1.75.2 (“dbk”)
+- DocBook XSL Stylesheets 1.75.2 ("dbk")
 - DocBook XML 4.5
 - fop 0.95
 - libxml2 2-2.7.7

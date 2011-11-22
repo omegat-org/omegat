@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.file.filters">
+  <title>Bestandsfilters</title>
+
+  <para>OmegaT omvat zeer aanpasbare filters die u in staat stellen verschillende aspecten in te stellen. Bestandsfilters zijn gedeelten van code die in staat zijn om:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para>Het document in enkele specifieke bestandsformaten te lezen. Bijvoorbeeld platte tekst-bestanden.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>De te vertalen inhoud uit het bestand te halen.</para>
+    </listitem>
+  </itemizedlist>
+
+  <itemizedlist>
+    <listitem>
+      <para>Automatische wijzigingen in de vertaalde bestandsnamen van de documenten te maken door de te vertalen inhoud te vervangen door de vertaling.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>De meeste gebruikers zullen tevreden zijn met de standaard ingestelde opties. Als u dat niet bent opent u het hoofd dialoogvenster door in het hoofdmenu<emphasis role="bold"> Opties → Bestandsfilters...</emphasis> te selecteren. U kunt ook project-specifieke bestandsfilters inschakelen, die alleen zullen worden gebruikt voor het huidige project, door de optie <emphasis role="bold">Bestandsfilters...</emphasis> in Project → Eigenschappen te selecteren.</para>
+
+  <para><emphasis role="bold">Waarschuwing!</emphasis> Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect hebben.</para>
+
+  <section id="file.filters.dialog">
+    <title>dialoogvenster Bestandsfilters<indexterm class="singular">
+        <secondary>dialoogvenster</secondary> <primary>Bestandsfilters</primary>
+      </indexterm></title>
+
+    <para>Dit dialoogvenster toont de beschikbare bestandsfilters. Als u OmegaT niet wilt gebruiken om bestanden van een bepaald type te vertalen, kunt u het betreffende filter uitschakelen door het keuzevak naast de naam niet te selecteren. OmegaT zal dan de betreffende bestanden weglaten bij het laden van projecten en zal ze ongewijzigd kopiëren bij het maken van de doeldocumenten. Als u het filter opnieuw wilt gebruiken, selecteer dan het keuzevak. Klik op <emphasis role="bold">Standaardinstellingen</emphasis> om de bestandsfilters terug te zetten naar de standaard instellingen. Selecteer het filter uit de lijst en klik op <emphasis role="bold">Bewerken</emphasis> om aan te geven welke bestanden in welke coderingen het filter moet verwerken.</para>
+  </section>
+
+  <section id="filters.options">
+    <title>Filteropties<indexterm class="singular">
+        <primary>Bestandsfilters</primary> <secondary>Opties</secondary>
+      </indexterm></title>
+
+    <para>Vijf filters (Tekstbestanden, XHTML-bestanden, HTML- en XHTML-bestanden, OpenDocument/OpenOffice.org-bestanden en Microsoft Open XML-bestanden) hebben één of meer specifieke opties. Selecteer, om de opties aan te passen, het filter uit de lijst en klik op <emphasis role="bold">Opties</emphasis>. De beschikbare opties zijn:</para>
+
+    <para><emphasis role="bold">Tekstbestanden</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Alineasegmentatie bij regeleinden, lege regels of nooit:</emphasis> als regels voor zinsegmentatie actief zijn, zal de tekst verder gesegmenteerd worden op grond van de hier geselecteerde optie.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">PO-bestanden</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Sta blanco vertalingen in het bronbestand toe:</emphasis> Indien ingeschakeld zal, wanneer een PO-segment (wat een gehele alinea kan zijn) niet is vertaald, de vertaling leeg zijn in het doelbestand. Technisch gezien zal <code>msgstr</code> leeg zijn. Het staat standaard aan, omdat dit het standaard gedrag is voor PO-bestanden. Indien de optie is uitgeschakeld, zal de brontekst worden gekopieerd naar het doelsegment.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">XHTML-bestanden</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Vertaal de volgende attributen:</emphasis> De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Start een nieuwe alinea bij:</emphasis> De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan:</emphasis> De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Vertaal het attribuut 'content' van metatags niet: ... : de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Microsoft Office Open XML-bestanden</emphasis></para>
+
+    <para>U kunt selecteren welke elementen vertaald moeten worden. Zij zullen als afzonderlijke segmenten in de vertaling verschijnen.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Word:</emphasis><emphasis> <emphasis><emphasis>Niet-zichtbare tekst met instructies, Notities, Voetnoten, Eindnoten, Voetteksten</emphasis></emphasis></emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Excel: </emphasis><emphasis>Notities, Werkbladnamen</emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Powerpoint</emphasis><emphasis>: Dianotities, Diamodellen, Dia-lay-outs</emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Globaal:</emphasis> <emphasis>Diagrammen, Tekeningen, Wordart</emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Andere opties:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis>Hoeveelheid tags:</emphasis> Indien geselecteerd zullen tags, zonder vertaalbare tekst er tussen, worden samengevoegd tot enkele tags.</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis>Spaties voor alle tags behouden:</emphasis> Indien geselecteerd zal &quot;witruimte&quot; (d.i. spaties en newlines) worden behouden, zelfs als dat niet technisch is ingesteld in het document.</para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">HTML- en XHTML-bestanden</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</para>
+
+        <para><emphasis>Altijd (standaard), Alleen als (X)HTML-bestand een kop heeft, Alleen als (X)HTML-bestand een codering-declaratie heeft, Nooit</emphasis></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Vertaal de volgende attributen:</emphasis> De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Start een nieuwe alinea bij:</emphasis> De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan: </emphasis>De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Vertaal het attribuut 'content' van metatags niet: ... : de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">Tekstbestanden</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis>Alineasegmentatie bij regeleinden, lege regels of nooit:</emphasis> als regels voor zinsegmentatie actief zijn, zal de tekst verder gesegmenteerd worden op grond van de hier geselecteerde optie.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">OpenDocument/OpenOffice.org bestanden</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>U kunt selecteren welke van de volgende elementen vertaald moeten worden.</para>
+
+        <para><emphasis>Indexitems, Bladwijzers, Verwijzingen naar bladwijzers, Notities, Opmerkingen, Notities in presentaties, Koppelingen (URL), Werkbladnamen</emphasis></para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="edit.filter.dialog">
+    <title>dialoogvenster Filter bewerken<indexterm class="singular">
+        <primary>Bestandsfilters</primary> <secondary>Bewerken</secondary>
+      </indexterm></title>
+
+    <para>Het dialoogvenster stelt u in staat om de patronen van de bronbestandsnaam te bewerken van de bestanden die het filter zal verwerken, de bestandsnamen van vertaalde bestanden aan te passen en te selecteren welke coderingen het zal gebruiken bij het laden van het bestand en zijn vertaalde tegenhanger. Pas de velden direct aan of klik op <emphasis role="bold">Bewerken</emphasis> om een patroon voor het bestandsfilter aan te passen. Klik op <emphasis role="bold">Toevoegen</emphasis> om een nieuw patroon voor een bestandsfilter toe te voegen. Hetzelfde dialoogvenster wordt gebruikt om een patroon toe te voegen of een bepaald patroon te bewerken. Het dialoogvenster is handig omdat het een speciale bewerker voor het patroon van de doelbestandsnaam heeft waarmee u de namen van de te maken bestanden aan kunt passen.</para>
+
+    <section id="source.filetype.and.filename.pattern">
+      <title><indexterm class="singular">
+          <primary>Bronbestanden</primary> <secondary>Bestandstype, patroon bestandsnaam</secondary>
+        </indexterm>Type bronbestand, patroon voor bestandsnaam<indexterm class="singular">
+          <primary>Bronbestanden</primary> <secondary>Bestandstype bron, bestandsnaam</secondary>
+        </indexterm></title>
+
+      <para>Als OmegaT een bestand tegenkomt in zijn bronmap, probeert dat het filter te selecteren gebaseerd op de extensie van het bestand. Meer precies: OmegaT probeert of van elk filter het patroon van de bestandsnaam overeenkomt met de bestandsnaam. Het <literal>*.xhtml</literal>-patroon zal bijvoorbeeld overeenkomen met elk bestand met de extensie <literal>.xhtml</literal>. Als het juiste filter is gevonden wordt dat voor verdere verwerking toegepast op het betreffende bestand. Standaard zal bijvoorbeeld het XHTML-filter worden gebruikt bij het verwerken van bestanden met de extensie .xhtml. U kunt bestandsnaam-patronen toevoegen of wijzigen voor bestanden die door elk filter worden afgehandeld. Patronen voor bronbestandsnamen gebruiken jokertekens die overeenkomen met die in <emphasis role="bold">Zoeken. </emphasis>Het teken '*' komt overeen met nul of meer tekens. Het teken '?' komt overeen met exact één teken. Alle andere tekens vertegenwoordigen zichzelf. Als u bijvoorbeeld wilt dat het tekstfilter readme-bestanden (<literal>readme, read.me</literal> en <literal>readme.txt</literal>) afhandelt, zou u het patroon <literal>read*</literal> moeten gebruiken.</para>
+    </section>
+
+    <section id="source.and.target.files.encoding">
+      <title>Coderen van bron- en doelbestanden</title>
+
+      <indexterm class="singular">
+        <primary>Bronbestanden</primary> <secondary>coderen</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Doelbestanden</primary> <secondary>coderen</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Bestandsfilters</primary> <secondary>coderen bron, doel</secondary>
+      </indexterm>
+
+      <para>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld<literal> .txt</literal>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend bronbestandsnaam-patroon wijzigen. Zulke bestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het vertaalde bestand dezelfde codering als de codering van het bronbestand. Velden voor bron- en doelcodering gebruiken combinatievakken waarin alle ondersteunde coderingen zijn opgenomen. &lt;auto&gt; laat de keuze van de codering aan <application>OmegaT</application> over. Zo werkt het:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>OmegaT identificeert de codering van het bronbestand door de declaratie van de codering te gebruiken, indien aanwezig (HTML-bestanden, op XML gebaseerde bestanden).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>OmegaT is geïnstrueerd om een voorgeschreven codering te gebruiken voor bepaalde bestandsformaten ( Java-properties etc)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><application>OmegaT</application> gebruikt de standaard codering van het besturingssysteem voor tekstbestanden.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="target.name">
+      <title>Doelbestandsnaam<indexterm class="singular">
+          <primary>Doelbestanden</primary> <secondary>bestandsnamen</secondary>
+        </indexterm></title>
+
+      <para>Soms wilt u misschien de bestanden die u vertaalde automatisch hernoemen, bijvoorbeeld door een taalcode achter de bestandsnaam te zetten. Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, moet u op <emphasis role="bold">Bewerken...</emphasis> klikken en het dialoogvenster <indexterm class="singular">
+          <secondary>dialoogvenster</secondary> <primary>Bestandsfilters</primary>
+        </indexterm>Patroon bewerken gebruiken. Klik op <emphasis role="bold">Standaardinstellingen</emphasis> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor het patroon van het doelbestand of het dialoogvenster Bestandsfilters. Het dialoogvenster Patroon bewerken biedt de volgende opties:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Standaard is <literal>${filename}</literal> - volledige bestandsnaam van het bronbestand met extensie: in dit geval is de naam van het vertaalde bestand hetzelfde als dat van het bronbestand.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${nameOnly}</literal> - laat u alleen de naam van het bronbestand invoegen zonder de extensie.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLocale}</literal> - locale-code voor doel (in de vorm &quot;xx_YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguage}</literal> - de doeltaal en landcode samen (in de vorm &quot;XX-YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetLanguageCode}</literal> - alleen de doeltaal (&quot;XX&quot;).</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><literal>${targetCoutryCode}</literal> - alleen de doel-landcode (&quot;YY&quot;).</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+</chapter>

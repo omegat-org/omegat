@@ -1,0 +1,155 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 13. Werken met platte tekst</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.formatted.text.html" title="Hoofdstuk 12. Werken met opgemaakte tekst">
+      <link rel="next" href="chapter.translation.memories.html" title="Hoofdstuk 14. Vertaalgeheugens">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 13. Werken met platte tekst</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.formatted.text.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 13. Werken met platte tekst">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.plain.text"></a>Hoofdstuk 13. Werken met platte tekst<a class="indexterm" name="d0e5824"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.plain.text.html#default.encoding">1. Standaard codering</a></span></dt>
+               <dt><span class="section"><a href="chapter.plain.text.html#OmegaT.solution">2. De <span class="application">OmegaT</span>-oplossing</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Standaard codering">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="default.encoding"></a>1. Standaard codering<a class="indexterm" name="d0e5832"></a><a class="indexterm" name="d0e5837"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>'Platte-tekst'-bestanden - meestal met de extensie .txt - bevatten slechts tekstuele informatie en bieden geen helder gedefinieerde
+               manier om de computer te vertellen welke taal zij bevatten. Het beste dat OmegaT in zo'n geval kan doen, is er van uitgaan
+               dat de tekst is geschreven in de taal die de computer zelf gebruikt. Dit is geen probleem voor bestanden die zijn gecodeerd
+               in Unicode met behulp van een 16-bit tekenset voor codering. Al de tekst echter werd gecodeerd in 8-bit, kan men worden geconfronteerd
+               met de volgende vervelende situatie: in plaats van de tekst weer te geven voor Japanse tekens...
+            </p>
+            <div class="mediaobject"><img src="images/OmT_Japanese.png"></div>
+            <p>...zal het systeem het bijvoorbeeld als volgt weergeven:</p>
+            <div class="mediaobject"><img src="images/OmT_Cyrillic.png"></div>
+            <p>De computer waarop OmegaT wordt uitgevoerd heeft Russisch als de standaard taal en dus worden de tekens in het Cyrillisch
+               alfabet weergegeven en niet in Kanji.
+            </p>
+         </div>
+         <div class="section" title="2. De OmegaT-oplossing">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="OmegaT.solution"></a>2. De <span class="application">OmegaT</span>-oplossing<a class="indexterm" name="d0e5864"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Er bestaan in principe drie manieren om dit op te lossen in <span class="application">OmegaT</span>. Zij behelzen allemaal het gebruik van de bestandsfilters in het menu <span class="bold"><strong>Opties</strong></span>.
+            </p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Wijzig de codering van uw bestanden naar Unicode</span></dt>
+                  <dd>
+                     <p>open uw bronbestand in een tekstverwerker die zijn codering juist interpreteert en sla het bestand op met de codering <span class="bold"><strong>"UTF-8"</strong></span>. Wijzig de bestandsextensie van <code class="literal">.txt</code> naar <code class="literal">.utf8</code>. <span class="application">OmegaT</span> zal het bestand automatisch interpreteren als een UTF8-bestand. Dit is de beste algemene alternatief, het bespaart u problemen
+                        op de langere termijn.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Specificeer de codering voor uw 'platte tekst'-bestanden</span></dt>
+                  <dd>
+                     <p>- d.i. bestanden met de extensie <code class="filename">.txt</code> - :&nbsp;wijzig, in de sectie <span class="bold"><strong>Tekstbestanden</strong></span> van het dialoogvenster Bestandsfilters, de <span class="bold"><strong>Codering van bronbestand</strong></span> van &lt;auto&gt; naar de codering die overeenkomt met uw bron <code class="filename">.txt</code>-bestand, bijvoorbeeld .jp voor het bovenstaande voorbeeld.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Wijzig de extensies van uw 'platte tekst'-bestanden</span></dt>
+                  <dd>
+                     <p>bijvoorbeeld van <code class="filename">.txt</code> naar <code class="filename">.jp</code> voor Japanse platte teksten:&nbsp;voeg, in de sectie <span class="bold"><strong>Tekstbestanden</strong></span> van het dialoogvenster Bestandsfilters, een nieuw <span class="bold"><strong>Patroon voor bronbestanden</strong></span> toe (<code class="filename">*.jp</code> voor dit voorbeeld)&nbsp;en selecteer de toepasselijke parameters voor de bron- en doelcodering.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p><span class="application">OmegaT</span> heeft standaard het volgende lijstje beschikbaar om het voor u eenvoudiger te maken om sommige 'platte tekst'-bestanden te
+               behandelen.
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="literal">.txt</code>-bestanden worden automatisch (&lt;auto&gt;) door <span class="application">OmegaT</span> geïnterpreteerd als zijnde gecodeerd in de standaard codering van de computer.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="literal">.txt1</code>-bestanden zijn bestanden in ISO-8859-1, geschikt voor de meeste <span class="bold"><strong>West-Europese</strong></span> talen.<a class="indexterm" name="d0e5959"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="literal">.txt2</code>-bestanden zijn bestanden in ISO-8859-2, die de meeste <span class="bold"><strong>Centraal- en Oost-Europese</strong></span> talen ondervangt)<a class="indexterm" name="d0e5973"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="literal">.utf8</code> bestanden worden door <span class="application">OmegaT</span> geïnterpreteerd als zijnde gecodeerd in UTF-8 (een codering die bijna alle talen in de wereld ondervangt).<a class="indexterm" name="d0e5987"></a></p>
+                  </li>
+               </ul>
+            </div>
+            <p>U kunt dat zelf controleren door het item <span class="bold"><strong>Bestandsfilters</strong></span> te selecteren in het menu <span class="bold"><strong>Opties</strong></span>. Als u bijvoorbeeld een Tsjechisch tekstbestand (zeer waarschijnlijk geschreven in de code <span class="bold"><strong>ISO-8859-2</strong></span>) hebt, hoeft u alleen maar de extensie te wijzigen van <code class="literal">.txt</code> naar <code class="literal">.txt2</code> en <span class="application">OmegaT</span> zal de inhoud juist interpreteren. Indien u echter op zeker wilt spelen kunt u overwegen om dit soort bestanden te converteren
+               naar Unicode, d.i. naar de bestandsindeling <code class="literal">.utf8</code>.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.formatted.text.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 12. Werken met opgemaakte tekst&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 14. Vertaalgeheugens</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

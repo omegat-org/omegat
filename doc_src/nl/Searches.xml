@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.searches">
+  <title>Zoeken<indexterm class="singular">
+      <primary>Zoeken</primary>
+    </indexterm></title>
+
+  <section id="search.window">
+    <title>venster Zoeken</title>
+
+    <figure id="text.search.window">
+      <title>venster Tekst zoeken<indexterm class="singular">
+          <primary>venster Zoeken</primary> <secondary>voorbeeld</secondary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TextSearch.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TextSearch.png" width="95%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <note>
+      <para>De bovenstaande zoekactie vindt alle doelsegmenten waarin twee of meer witruimten - \s\s+ - voorkomen.</para>
+    </note>
+
+    <section>
+      <title>Zoeken<indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+F - Zoeken</secondary>
+        </indexterm></title>
+
+      <para><application>OmegaT</application> verschaft een groot scala aan zoekfuncties. Open het venster Zoeken met <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> en voer het woord of de frase waarnaar u wilt zoeken in het vak &quot;Zoeken naar&quot; in. Als alternatief: selecteer een woord of frase ergens in het bewerkingsveld en druk op <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>. Het woord of de frase wordt automatisch ingevoegd in het vak &quot;Zoeken naar&quot;. U kunt verschillende vensters Zoeken tegelijkertijd geopend hebben, maar sluit ze als u ze niet langer nodig hebt zodat zij uw bureaublad niet vol zetten.</para>
+    </section>
+
+    <section>
+      <title>Zoeklocatie</title>
+
+      <para>Zoekacties worden standaard uitgevoerd in zowel de bron- als de doelgedeelten van het project, maar u kunt uw zoekactie beperken tot de bron- of het de doeltekst. U kunt zoeken in</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>alleen het project (standaardinstelling)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>zowel het project en in de vertaalgeheugens waarnaar wordt verwezen in /tm/ (kies <emphasis>Zoeken in TM's</emphasis>)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>één enkel bestand of een map die een aantal bestanden bevat (kies <emphasis>Bestanden zoeken</emphasis>)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Bij het zoeken in bestanden (in tegenstelling tot in vertaalgeheugens) zal <application>OmegaT</application> zich beperken tot de bestanden in de indelingen van bronbestanden. Als consequentie daarvan zal OmegaT, hoewel het in staat is om<filename> tmx</filename>-bestanden te behandelen, die niet opnemen bij zoekacties met Zoeken in bestanden. Indien u <emphasis role="bold"><indexterm class="singular">
+          <primary>Zoeken</primary> <secondary>gevorderde opties</secondary>
+        </indexterm>Gevorderde opties</emphasis> inschakelt, kunt u de zoekactie combineren met de naam van de auteur van de vertaling en het tijdstip waarop de laatste wijziging is gemaakt.</para>
+    </section>
+  </section>
+
+  <section id="using.wild.cards">
+    <title>Jokertekens gebruiken<indexterm class="singular">
+        <primary>Zoeken</primary> <secondary>Jokertekens gebruiken</secondary>
+      </indexterm></title>
+
+    <para>In zowel exact zoeken als zoeken naar sleutelwoorden kunnen de jokertekens '*' en '?' worden gebruikt. Zorg ervoor dat de optie reguliere uitdrukkingen niet is geselecteerd om jokertekens te gebruiken, omdat '*' en '?' een speciale betekenis hebben in reguliere uitdrukkingen.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>'*' komt overeen met nul of meer tekens, vanaf de huidige positie in een opgegeven woord tot het einde ervan. De zoekterm '<literal>run*</literal>' zal bijvoorbeeld overeenkomen met '<literal>run</literal>', '<literal>runs</literal>' en '<literal>running</literal>'.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>'?' komt overeen met exact één teken. '<literal>run?</literal>' zal bijvoorbeeld overeenkomen met '<literal>runs</literal>' en '<literal>runn</literal>' in het woord '<literal>running</literal>'.</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>De overeenkomsten zullen in vet blauw worden weergegeven.</para>
+  </section>
+
+  <section id="search.methoids">
+    <title>Zoeken methodes<indexterm class="singular">
+        <primary>Zoeken</primary> <secondary>methoden</secondary>
+      </indexterm></title>
+
+    <para>Selecteer de methode met behulp van de optieknoppen. U kunt kiezen uit twee methodes om te zoeken:</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>Exact zoeken</term>
+
+        <listitem>
+          <para>Zoekt naar segmenten die de exacte tekenreeks bevatten die u heeft opgegeven. Exact zoeken zoekt naar een frase, d.i. als er meerdere woorden zijn ingevoerd, zullen zij slechts worden gevonden als zij in exact dezelfde volgorde voorkomen. Zoeken naar <literal>geopend bestand</literal> zal dus alle entiteiten van de tekenreeks <emphasis><literal>geopend bestand</literal></emphasis> vinden, maar niet <emphasis><literal>bestand geopend</literal></emphasis> of <emphasis><literal>geopend invoerbestand</literal></emphasis>.</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>Sleutelwoorden zoeken</term>
+
+        <listitem>
+          <para>Zoekt naar segmenten die alle sleutelwoorden bevatten die u heeft opgegeven, in willekeurige volgorde. Selecteer Sleutelwoorden zoeken om te zoeken naar een willekeurig aantal individuele woorden, in willekeurige volgorde. OmegaT zal een lijst weergeven waarin alle segmenten staan waarin alle gespecificeerde woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties &quot;met alle woorden&quot; in een internetzoekmachine zoals Google (logische EN). Zoeken met sleutelwoorden naar <emphasis><literal>geopend bestand</literal></emphasis> zal dus alle entiteiten van de tekenreeks <emphasis><literal>open file</literal></emphasis> vinden, en ook <emphasis><literal>bestand geopend</literal>, <literal>geopend invoer bestand</literal>, <literal>bestand kan gevaarlijk zijn als geopend</literal></emphasis>, etc..</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>Voor elk van deze twee methoden kunt u de volgende drie opties kiezen:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">hoofdletter gevoelig</emphasis>: het zoeken zal worden uitgevoerd voor de exact opgegeven tekenreeks, d.i. met hoofdletters wordt rekening gehouden.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">reguliere uitdrukkingen:</emphasis> de tekenreeks zal worden behandeld als een reguliere uitdrukking. Een zoekactie met reguliere uitdrukkingen is een krachtig middel om te zoeken naar tekenreeksen. Het komt overeen met zoeken met jokertekens, maar is veel meer flexibel. De reguliere uitdrukkingen die worden gebruikt in zoekacties zijn die welke worden ondersteund door Java. Zie verder het hoofdstuk over Reguliere uitdrukkingen.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">zoeken in TM's</emphasis>: vertaalgeheugens in de map <filename>tm</filename> worden opgenomen in de zoekactie.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="search.result.display">
+    <title>Zoekresultaten weergeven</title>
+
+    <para>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project, die de gezochte tekenreeks bevatten, worden weergegeven. Omdat <application>OmegaT</application> identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond.</para>
+
+    <para>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten worden weergegeven met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten worden alleen als bron weergegeven.</para>
+
+    <para>Klikken op een segment opent het in het venster Bewerken om het aan te kunnen passen. Daarna kunt u teruggaan naar het venster Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, de terminologie aan te passen.</para>
+  </section>
+</chapter>

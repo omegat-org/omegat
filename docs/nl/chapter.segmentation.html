@@ -1,0 +1,237 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 15. Bronsegmentatie</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.translation.memories.html" title="Hoofdstuk 14. Vertaalgeheugens">
+      <link rel="next" href="chapter.regexp.html" title="Hoofdstuk 16. Reguliere uitdrukkingen">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 15. Bronsegmentatie</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 15. Bronsegmentatie">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.segmentation"></a>Hoofdstuk 15. Bronsegmentatie
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. Segmentatieregels</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. Prioriteit van regels</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. Een nieuwe regel maken</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. Een paar eenvoudige voorbeelden</a></span></dt>
+            </dl>
+         </div>
+         <p>Programma's met vertaalgeheugens werken met teksteenheden die segmenten worden genoemd. <span class="application">OmegaT</span> heeft 2 manieren om een tekst te segmenteren: alineasegmentatie en zinsegmentatie (waarnaar ook wel wordt verwezen als “op
+            regels gebaseerde-segmentatie”). Selecteer <span class="guimenu"><a class="indexterm" name="d0e6462"></a>Project</span> → <span class="guimenuitem">eigenschappen...</span> uit het hoofdmenu en selecteer het aanwezig keuzevak, of niet, om het type segmentatie te kiezen. Alinea-segmentatie heeft
+            in bepaalde gevallen voordelen, zoals bij bijzonder creatieve of stilistische vertalingen waarin de vertaler de volgorde van
+            gehele zinnen zou willen wijzigen; voor het merendeel van de projecten is echter zin- segmentatie de keuze die wordt geprefereerd,
+            omdat het betere overeenkomsten oplevert vanuit eerdere vertalingen. Als zinsegmentatie is geselecteerd kunt u de regels instellen
+            door <span class="guimenu"><a class="indexterm" name="d0e6473"></a>Opties</span> → <span class="guimenuitem">Segmentatie...</span>te selecteren uit het hoofdmenu.
+         </p>
+         <p>Betrouwbare segmentatieregels zijn al beschikbaar voor veel talen, dus is het onwaarschijnlijk dat het voor u nodig is om
+            uw eigen segmentatieregels te schrijven. Aan de andere kant kan deze functionaliteit in speciale gevallen bijzonder handig
+            zijn, waarbij u uw productiviteit kunt verhogen door de segmentatieregels af te stemmen op de tekst die vertaald moet worden.
+         </p>
+         <p><span class="bold"><strong>Waarschuwing: </strong></span>omdat de tekst afwijkend zal segmenteren nadat filteropties zijn gewijzigd, zult u misschien geheel opnieuw moeten beginnen
+            met vertalen. Tegelijkertijd zullen de eerder gevalideerde segmenten in het vertaalgeheugen van het project worden omgezet
+            naar wezen-segmenten. Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de
+            wijzigingen effect hebben.
+         </p>
+         <p><span class="application">OmegaT</span> gebruikt de volgende reeks stappen:
+         </p>
+         <div class="variablelist">
+            <dl>
+               <dt><span class="term"><a class="indexterm" name="d0e6495"></a>Segmentatie op niveau van de structuur</span></dt>
+               <dd>
+                  <p><span class="application">OmegaT</span> parst eerst de tekst voor segmentatie op niveau van de structuur. Gedurende dit proces wordt alleen de structuur van het
+                     brondocument gebruikt om segmenten te maken.
+                  </p>
+                  <p>Tekstbestanden kunnen bijvoorbeeld gesegmenteerd worden op regeleinden, lege regels of helemaal niet gesegmenteerd worden.
+                     Bestanden die opmaak bevatten (OpenOffice.org-documenten, HTML-documenten, etc.) worden gesegmenteerd op het blokniveau (alinea)tags.
+                     Vertaalbare object-attributen in XHTML of HTML-bestanden kunnen als afzonderlijke segmenten worden geëxtraheerd.
+                  </p>
+               </dd>
+               <dt><span class="term"><a class="indexterm" name="d0e6510"></a>Segmentatie op niveau van de zin</span></dt>
+               <dd>
+                  <p>Nadat het bronbestand in structurele eenheden is gesegmenteerd, zal <span class="application">OmegaT</span> deze blokken verder segmenteren in zinnen.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="section" title="1. Segmentatieregels">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1. Segmentatieregels<a class="indexterm" name="d0e6525"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Het proces van segmentering kan als volgt worden voorgesteld: de cursor verplaatst zich langs de tekst, één teken per keer.
+               Voor elke cursorpositie wordt elke regel, bestaande uit een <span class="bold"><strong>Voor- </strong></span>en <span class="bold"><strong>Na </strong></span>-patroon, in de opgegeven volgorde toegepast en probeert of een van de<span class="bold"><strong> Voor</strong></span>-patronen geldig is voor alle tekst die links van de cursor staat en het overeenkomende <span class="bold"><strong>Na</strong></span>-patroon op de tekst rechts van de cursor. Als de regel overeenkomt gaat de cursor ofwel door zonder een einde voor het segment
+               in te voegen (voor de uitzonderingsregel) of er wordt een nieuw einde voor het segment ingevoegd op de cursorpositie (voor
+               de afbreekregels).
+            </p>
+            <p>De twee typen regels gedragen zich als volgt:</p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term"><a class="indexterm" name="d0e6549"></a>Afbreekregel</span></dt>
+                  <dd>
+                     <p>Verdeelt de brontekst in segmenten. Voorbeeld: "<span class="emphasis"><em>Begrijpt u dat? Ik was er niet zeker van.</em></span>" zou moeten worden gescheiden in twee segmenten.  Wat betekent dat er een afbreekregel zou moeten zijn voor "?", indien die
+                        wordt gevolgd door spaties en een woord met een hoofdletter. Selecteer het keuzevak Afbreken/Uitzondering om een regel te
+                        definiëren als een Afbreekregel.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term"><a class="indexterm" name="d0e6566"></a>Uitzonderingsregel</span></dt>
+                  <dd>
+                     <p>specificeer welke gedeelten van de tekst NIET zouden moeten worden gescheiden. Niettegenstaande de punt zou <span class="emphasis"><em>"Mrs. Dalloway "</em></span> niet moeten worden gesplitst in twee segmenten, dus zou een uitzonderingsregel gemaakt moeten worden voor Mrs (en voor Mr,
+                        voor Dr, voor prof etc), gevolgd door een punt. Selecteer NIET het keuzevak Afbreken/Uitzondering om een regel te definiëren
+                        als een Uitzonderingsregel.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>De voorgedefinieerde afbreekregels zouden voldoende moeten zijn voor de meeste Europese talen en Japans. Gelet op de flexibiliteit
+               kunt u overwegen om meer uitzonderingsregels te definiëren voor de taal waaruit u vertaald om u meer betekenisvolle en samenhangende
+               segmenten te geven.
+            </p>
+         </div>
+         <div class="section" title="2. Prioriteit van regels">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2. Prioriteit van regels<a class="indexterm" name="d0e6585"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Alle segmentatieregels die zijn ingesteld voor een overeenkomend taalpatroon zijn actief en worden toegepast in de opgegeven
+               volgorde van prioriteit, dus regels voor een specifieke taal zouden hoger moeten staan dan de standaardregels. Regels voor
+               Canadees Frans (FR-CA) zouden bijvoorbeeld hoger moeten staan dan de regels voor Frans (FR.*) en hoger dan de standaardregels
+               (.*). Dus, bij het vertalen vanuit Canadees Frans worden de regels voor Canadees Frans - indien aanwezig - eerst worden toegepast,
+               gevolgd door de regels voor Frans en tenslotte de standaard regels.
+            </p>
+         </div>
+         <div class="section" title="3. Een nieuwe regel maken">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3. Een nieuwe regel maken<a class="indexterm" name="d0e6595"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Grote wijzigingen aan de segmentatieregels zouden in het algemeen moeten wordne vermeden, speciaal na het voltooien van een
+               eerste gang, maar kleinere wijzigingen, zoals het toevoegen van een herkende afkorting, kan voordelen bieden.
+            </p>
+            <p>Klik eenvoudigweg op een verzameling van regels in de bovenste tabel om die te bewerken of uit te breiden. De regels voor
+               die verzameling zullen in het onderste gedeelte van het venster verschijnen.
+            </p>
+            <p>Klik op <span class="bold"><strong>Toevoegen</strong></span> in het bovenste gedeelte van het dialoogvenster, om een lege verzameling van regels te maken voor een nieuw taalpatroon.
+               Een lege regel zal aan de onderzijde van de bovenste tabel verschijnen (u moet misschien naar beneden scrollen om die te zien).
+               Wijzig de naam van de regelverzameling en het taalpatroon naar die van de betrokken taal en de code daarvan (zie <a class="xref" href="appendix.languages.html" title="Bijlage B. Talen - ISO 639 codelijst">Bijlage&nbsp;B, <i>Talen - ISO 639 codelijst
+                       
+                       
+                       </i></a> voor een lijst van taalcodes). De syntaxis van het taalpatroon komt overeen met de syntaxis voor reguliere uitdrukkingen.
+               Als uw regelverzameling een taal/land-paar betreft raden wij u aan om het naar boven te verplaatsen met de knop <span class="bold"><strong>Naar boven</strong></span>.
+            </p>
+            <p>Voeg de patronen <span class="bold"><strong>Voor</strong></span> en<span class="bold"><strong> Na</strong></span> toe. Het wordt aangeraden om programma's te gebruiken die het mogelijk maken de effecten direct te zien om de syntaxis en
+               de toepasbaarheid te controleren. Zie het hoofdstuk over <a class="link" href="chapter.regexp.html" title="Hoofdstuk 16. Reguliere uitdrukkingen">Reguliere uitdrukkingen</a>. Een goed startpunt zullen altijd de bestaande regels zijn.
+            </p>
+         </div>
+         <div class="section" title="4. Een paar eenvoudige voorbeelden">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4. <a class="indexterm" name="d0e6629"></a>Een paar eenvoudige voorbeelden
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col width="150" align="left">
+                     <col width="60" align="center">
+                     <col width="60" align="center">
+                     <col width="190" align="left">
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">Bedoeling</th>
+                        <th align="center">Vóór</th>
+                        <th align="center">Na</th>
+                        <th align="left">Opmerking</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">Stel een segment in na een punt ('.') en vóór een spatie</td>
+                        <td align="center">\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">"\." betekent het teken "." "\s" betekent elk teken voor witruimte ((spatie, tab, nieuw pagina etc.)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">Niet segmenteren na Mr.</td>
+                        <td align="center">Mr\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Dit is een uitzonderingsregel, dus het keuzevak voor de regel moet niet zijn geselecteerd</td>
+                     </tr>
+                     <tr>
+                        <td align="left">Stel een segment in na "。" (Japanse punt)</td>
+                        <td align="center">。</td>
+                        <td align="center">&nbsp;</td>
+                        <td align="left">Let er op dat <code class="literal">Na</code> leeg is
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">Niet segmenteren na M. Mr. Mrs. en Ms.</td>
+                        <td align="center">Mr??s??\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">Uitzonderingsregel - zie het gebruik van ? in reguliere uitdrukkingen</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 14. Vertaalgeheugens&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 16. Reguliere uitdrukkingen</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

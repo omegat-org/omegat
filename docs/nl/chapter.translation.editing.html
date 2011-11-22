@@ -1,0 +1,150 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 10. Bewerken (gedrag)</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.files.to.translate.html" title="Hoofdstuk 9. Te vertalen bestanden">
+      <link rel="next" href="chapter.font.html" title="Hoofdstuk 11. Lettertype-instellingen">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 10. Bewerken (gedrag)</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.font.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 10. Bewerken (gedrag)">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.translation.editing"></a>Hoofdstuk 10. Bewerken (gedrag)<a class="indexterm" name="d0e5432"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.translation.editing.html#automatic.match.insertion">1. Automatisch invoegen van overeenkomst</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.editing.html#allow.translation.equal.to.source">2. Vertaling mag gelijk zijn aan brontekst</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.editing.html#export.segment.to.text.files">3. Segment naar tekstbestanden exporteren</a></span></dt>
+            </dl>
+         </div>
+         <p>Het dialoogvenster in <span class="guimenu">Opties</span> → <span class="guimenuitem">Bewerken (gedrag)...</span> laat de gebruiker bepalen hoe het huidige segment wordt geïnitialiseerd en afgehandeld.
+         </p>
+         <div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Afbeelding 10.1. Bewerken (gedrag) opties</b></p>
+            <div class="figure-contents">
+               <div class="mediaobject"><img src="images/EditingBehaviourOptions.png" alt="Bewerken (gedrag) opties"></div>
+            </div>
+         </div><br class="figure-break"><div class="section" title="1. Automatisch invoegen van overeenkomst">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="automatic.match.insertion"></a>1. Automatisch invoegen van overeenkomst<a class="indexterm" name="d0e5454"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>U vertaalt uw bestanden door van segment naar segment te gaan, waarbij elk segment op zijn beurt wordt bewerkt. Bij het verplaatsen
+               tussen segmenten kunt u bepalen of het bewerkingsveld moet worden gevuld met een bestaande vertaling uit het venster Overeenkomsten
+               of met de brontekst. In <span class="guimenu">Opties</span> → <span class="guimenuitem">Bewerken (gedrag)...</span> biedt <span class="application">OmegaT</span> u de volgende alternatieven:
+            </p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">De brontekst</span></dt>
+                  <dd>
+                     <p>U kunt de brontekst automatisch ingevoegd hebben in het bewerkingsveld. Dit is handig als teksten veel handelsnamen en andere
+                        woorden met hoofdletters bevat die intact gelaten moeten worden.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Segment leeg laten</span></dt>
+                  <dd>
+                     <p>OmegaT laat het bewerkingsveld leeg. Deze optie stelt u in staat om de vertaling in te voeren zonder de brontekst te hoeven
+                        verwijderen, hetgeen u een aantal toetsaanslagen scheelt (<span class="bold"><strong>Ctrl+A </strong></span>en <span class="bold"><strong>Del</strong></span>).
+                     </p>
+                  </dd>
+                  <dt><span class="term">Beste overeenkomst invoegen</span></dt>
+                  <dd>
+                     <p>OmegaT voegt de vertaling van de tekenreeks in die het meeste lijkt op de huidige bron, indien die boven de drempel van het
+                        percentage van overeenkomst komt dat in het dialoogvenster is ingesteld.
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+         </div>
+         <div class="section" title="2. Vertaling mag gelijk zijn aan brontekst">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="allow.translation.equal.to.source"></a>2. Vertaling mag gelijk zijn aan brontekst<a class="indexterm" name="d0e5496"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Te vertalen documenten kunnen handelsnamen, namen of andere woorden met hoofdletters bevatten die hetzelfde moeten blijven
+               in vertaalde documenten. Er zijn twee strategieën voor segmenten die slechts zulke onveranderlijke tekst bevatten.
+            </p>
+            <p>U zou kunnen besluiten om zulke segmenten niet te vertalen. OmegaT zal deze segmenten dan aanmerken als niet-vertaald. Dit
+               is de standaard. Het alternatief is om een vertaling in te voeren die identiek is aan de brontekst. OmegaT is in staat om
+               te herkennen dat u dit gedaan hebt. Ga naar <span class="guimenu">Opties</span> → <span class="guimenuitem">Bewerken (gedrag)...</span> en selecteer het vak <span class="bold"><strong>Vertaling mag gelijk zijn aan brontekst</strong></span>, om dit mogelijk te maken.
+            </p>
+         </div>
+         <div class="section" title="3. Segment naar tekstbestanden exporteren">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="export.segment.to.text.files"></a>3. Segment naar tekstbestanden exporteren<a class="indexterm" name="d0e5515"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>De functie Tekst exporteren exporteert gegevens vanuit het huidige <span class="application">OmegaT</span>project naar platte tekst-bestanden. De gegevens worden geëxporteerd als het segment wordt geopend. De bestanden verschijnen
+               in de submap /script in de map met gebruikersbestanden van OmegaT, en bevatten:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>De inhoud van de brontekst van het segment (<code class="filename">source.txt</code>).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>De inhoud van de brontekst van het segment (<code class="filename">target.txt</code>).
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>De tekst die door de gebruiker werd geaccentueerd, als <span class="keycap"><strong>Ctrl-Shift-C</strong></span> werd ingedrukt of als <span class="guimenuitem">Bewerken &gt; Selectie exporteren</span> is geselecteerd (<code class="filename">selection.txt</code>).
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>De inhoud van de bestanden wordt overschreven als een nieuw segment wordt geopend (source.txt en target.txt) of als een nieuwe
+               selectie wordt geëxporteerd (selection.txt). De bestanden zijn niet-opgemaakte platte tekst-bestanden. Het gehele proces kan
+               worden gestuurd en beheerd via op Tck/Tcl-gebaseerde scripts. Bekijk <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">De functie Tekst exporteren in OmegaT gebruiken</a> voor specificaties, voorbeelden en suggesties.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.font.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 9. Te vertalen bestanden&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 11. Lettertype-instellingen</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>Sneltoetsen voor het toetsenbord voor het bewerken</title>
+
+  <para>Deze korte tekst beschrijft het gedrag van de toetsen in het bewerkingsvenster. De term &quot;Verplaats naar binnen het segment&quot; betekent dat de cursor verplaatst naar het begin van het segment als het eerder vóór het segment stond en naar het einde van het segment als het er eerder achter stond.</para>
+
+  <table>
+    <title>Gedrag van de toets bij bewerken</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1" colwidth="90"/>
+
+      <colspec align="left" colnum="2" colwidth="300"/>
+
+      <thead>
+        <row>
+          <entry align="left">Toetscombinatie</entry>
+
+          <entry align="left">Actie</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Links:</emphasis></entry>
+
+          <entry>één teken naar links, maar niet verder dan het begin van het segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Rechts:</emphasis></entry>
+
+          <entry>één teken naar rechts, maar niet verder dan het einde van het segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Links:</emphasis></entry>
+
+          <entry>één woord naar links, maar niet verder dan het begin van het segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Rechts:</emphasis></entry>
+
+          <entry>één woord naar rechts, maar niet verder dan het einde van het segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgUp: </emphasis></entry>
+
+          <entry>pagina omhoog door het document</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgDn: </emphasis></entry>
+
+          <entry>pagina naar beneden door het document</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Home*</emphasis></entry>
+
+          <entry>verplaats naar het begin van de regel in het segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">End*</emphasis></entry>
+
+          <entry>verplaats naar het einde van de regel in het segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>verplaats naar het begin van het segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+End</emphasis></entry>
+
+          <entry>verplaats naar het einde van het segment</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
+
+          <entry>verplaats naar het begin van het document (Mac: <emphasis role="bold">Cmd+PgUp</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
+
+          <entry>verplaats naar het einde van het document (Mac: <emphasis role="bold">Cmd+PgDn</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Backspace*</emphasis></entry>
+
+          <entry>verwijder het teken vóór de cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Delete*</emphasis></entry>
+
+          <entry>verwijder het teken na de cursor</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Backspace</emphasis></entry>
+
+          <entry>verwijder de tekens tot aan het begin van het huidige woord (Mac: <emphasis role="bold">Alt+Backspace</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Delete</emphasis></entry>
+
+          <entry>verwijder de tekens tot aan het begin van het volgende woord (Mac: <emphasis role="bold">Alt+Delete</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
+
+          <entry>open het vorige segment (Mac: <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>selecteer het complete segment (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>schakelen RTL-LTR</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* Deze toetsen gedragen zich anders als de cursor buiten het bewerkbare segment staat:</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Home: </emphasis> cursor naar het begin van het actieve segment</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">End: </emphasis> cursor naar het einde van het actieve segment</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Backspace: </emphasis>niets</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Delete: </emphasis>niets</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Toets van elk teken,</emphasis> indien geklikt buiten het bewerkbare segment, zal worden genegeerd.</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>De toets &quot;Shift&quot; omvat niet per definitie enig speciaal gedrag: indien de &quot;Shift&quot;-toets is ingedrukt verplaatsen alle toetsen de cursor op de hun gewone manier.</para>
+
+  <para>Systeembrede opdrachten: Plakken (<emphasis role="bold">Ctrl+V</emphasis> of <emphasis role="bold">Ctrl+Insert</emphasis>), Knippen (<emphasis role="bold">Ctrl+X</emphasis> of <emphasis role="bold">Ctrl+C)</emphasis>, Overeenkomst invoegen <emphasis role="bold">(Ctrl+I</emphasis>) en Bron invoegen (<emphasis role="bold">Ctrl+Shift+I</emphasis>) acteren in principe op elke selectie, inclusief die welke zich uitstrekken tot buiten het huidige segment. In een dergelijk geval zal de selectie natuurlijk worden beperkt tot de grenzen van het segment.</para>
+</appendix>

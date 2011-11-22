@@ -1,0 +1,620 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.user.interface">
+  <title>De gebruikersinterface</title>
+
+  <section id="user.interface.items">
+    <title>Items in de gebruikersinterface</title>
+
+    <section id="windows.you.will.use.frequently">
+      <title>Veel gebruikte vensters<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary>
+        </indexterm></title>
+
+      <variablelist>
+        <varlistentry>
+          <term><application>OmegaT</application> hoofdvenster</term>
+
+          <listitem>
+            <para>bevat het hoofdmenu, statusbalk en verschillende vensters:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>Bewerken - waar u uw vertaling typt en bewerkt</para>
+              </listitem>
+
+              <listitem>
+                <para>Overeenkomsten - geeft de meest overeenkomende segmenten vanuit vertaalgeheugens weer</para>
+              </listitem>
+
+              <listitem>
+                <para>Woordenlijst - geeft terminologie weer</para>
+              </listitem>
+
+              <listitem>
+                <para>Woordenboek - geeft informatie weer die verschaft wordt door woordenboeken</para>
+              </listitem>
+
+              <listitem>
+                <para>Machinevertaling - geeft de vertaling weer zoals die wordt verschaft door services voor machinevertaling zolas Google Translate</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Sneltoetsen</primary> <secondary>Ctrl+L - venster Projectbestanden</secondary>
+            </indexterm>venster Projectbestanden</term>
+
+          <listitem>
+            <para>De lijst van uw te vertalen bestanden (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>L</keycap> </keycombo>, sluiten met <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Sneltoetsen</primary> <secondary>Ctrl+F - venster Zoeken</secondary>
+            </indexterm>venster Zoeken</term>
+
+          <listitem>
+            <para>Gebruikt om te zoeken naar specifieke segmenten in het project (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo>, sluiten met <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+
+    <section id="windows.you.may.use.now.and.then">
+      <title>Minder frequent gebruikt</title>
+
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Sneltoetsen</primary> <secondary>Ctrl+T - venster Tags valideren</secondary>
+            </indexterm>venster Tags valideren</term>
+
+          <listitem>
+            <para>Gebruikt om te controleren of er tagfouten in vertalingen staan (openen met <keycombo> <keycap>Ctrl</keycap> <keycap>T</keycap> </keycombo> sluiten met <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Sneltoetsen</primary> <secondary>F1 - Help</secondary>
+            </indexterm>Help-browser</term>
+
+          <listitem>
+            <para>gebruikt om de gebruikershandleiding te lezen (openen met <keycap>F1</keycap>, sluiten met <keycap>Esc)</keycap></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>venster Statistieken voor overeenkomsten</term>
+
+          <listitem>
+            <para>Gebruikt om het venster te openen met statistieken van het project, selecteer <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>menu Extra</primary> <secondary>Statistieken voor overeenkomsten</secondary>
+                  </indexterm>Extra</guimenu> <guimenuitem>Statistieken voor overeenkomsten.</guimenuitem> </menuchoice></para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+
+    <section id="dialogs.to.change.settings">
+      <title>dialoogvenster Projectinstellingen<indexterm class="singular">
+          <primary>Project</primary> <secondary>Projectinstellingen</secondary>
+        </indexterm></title>
+
+      <para>De dialoogvensters hieronder worden gebruikt om de projectinstellingen voor OmegaT project te wijzigen. Elk wordt in detail beschreven in een afzonderlijk gedeelte; de informatie hieronder somt hun gebruik op en hoe zij worden geactiveerd:</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Sneltoetsen</primary> <secondary>Ctrl+E - Projecteigenschappen</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>menu Project</primary> <secondary>Eigenschappen</secondary>
+            </indexterm>Projecteigenschappen</term>
+
+          <listitem>
+            <para>Gebruikt om de projectmappen en talen aan te passen, (openen met <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Project</guimenu><guimenuitem>eigenschappen...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc)</keycap></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Projectinstellingen</primary> <secondary>lettertype</secondary>
+            </indexterm>Lettertype<indexterm class="singular">
+              <primary>menu Opties</primary> <secondary>lettertype</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Gebruikt om het lettertype aan te passen <application>dat door OmegaT wordt gebruikt</application> voor het weergeven van bron, vertaling, overeenkomsten en de termen uit de woordenlijst, (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Lettertype...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap><keycap>)</keycap></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Projectinstellingen</primary> <secondary>bestandsfilters</secondary>
+            </indexterm>Bestandsfilters<indexterm class="singular">
+              <primary>menu Opties</primary> <secondary>bestandsfilters</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Gebruikt om de afhandeling van ondersteunde bestandsformaten aan te passen (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bestandsfilters...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Projectinstellingen</primary> <secondary>segmentatie</secondary>
+            </indexterm>Segmentatie<indexterm class="singular">
+              <primary>menu Opties</primary> <secondary>Segmentatie</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Gebruikt om de manier waarop uw tekst wordt opgedeeld in zinnen te wijzigen (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Segmentatie</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>Projectinstellingen</primary> <secondary>bewerken (gedrag)</secondary>
+            </indexterm>Bewerken (gedrag)<indexterm class="singular">
+              <primary>menu Opties</primary> <secondary>bewerken (gedrag)</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>Gebruikt om te wijzigen hoe <application>OmegaT</application> zich gedraagt bij het doorlopen van de segmenten, (openen met <menuchoice> <guimenu>Opties</guimenu> <guimenuitem>Bewerken (gedrag)...</guimenuitem> </menuchoice>, sluiten met <keycap>Esc</keycap>)</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+    </section>
+  </section>
+
+  <section id="OmegaT.main.window">
+    <title><application>OmegaT</application> hoofdvenster<indexterm class="singular">
+        <primary>Vensters in OmegaT</primary> <secondary>hoofdvenster</secondary> <tertiary>- afbeelding</tertiary>
+      </indexterm><indexterm class="singular">
+        <primary>Vensters in OmegaT</primary> <secondary>hoofdvenster</secondary>
+      </indexterm></title>
+
+    <figure>
+      <title>OmegaT-vensters</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/OmegaT_panes.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/OmegaT_panes.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Het hoofdvenster bestaat uit verschillende vensters, het hoofdmenu en een statusbalk. U kunt de positie van elk venster wijzigen of het zelfs losmaken en er een zelfstandig venster van maken door het venster te slepen aan zijn naam. Afhankelijk van de status van het venster kunnen verschillende tekens verschijnen in de rechterbovenhoek ervan.</para>
+
+    <table>
+      <title>pictogrammen voor vensters<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>pictogrammen voor vensters</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60"/>
+
+        <tbody>
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>minimaliseert het venster zodat alleen de naam wordt weergegeven aan de onderzijde van het venster.</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>maximaliseert het venster.</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/undock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/undock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>maakt het venster los van het hoofdvenster.</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
+                  <imagedata fileref="images/dock.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/dock.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>zet het venster weer vast in het hoofdvenster.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>U kunt de vensters elkaar laten overlappen als u dat wilt. Als dat gedaan wordt zullen de vensters aan de bovenzijde een tab weergeven. De scheidingen tussen de vensters kunnen worden gesleept om de afmetingen van vensters te wijzigen. Indien u niet meer weet welke wijzigingen u aan de gebruikersinterface heeft aangebracht, kunt u op elk moment <guimenuitem><indexterm class="singular">
+        <primary>Vensters van OmegaT</primary> <seealso>vensters in OmegaT</seealso>
+      </indexterm> <indexterm class="singular">
+        <primary>Vensters van OmegaT</primary> <secondary>terugzetten naar fabrieksinstellingen</secondary>
+      </indexterm>Opties → Hoofdvenster herstellen</guimenuitem> gebruiken om terug te keren naar de originele lay-out.</para>
+
+    <para>De tellers in de rechter benedenhoek houden de voortgang van de vertaling bij (getallen in de linkerkolom verwijzen naar de afbeelding hierboven):</para>
+
+    <table>
+      <title>Hoofdvenster - tellers<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>tellers</secondary>
+        </indexterm></title>
+
+      <tgroup cols="2">
+        <colspec align="left" colnum="1" colwidth="60"/>
+
+        <tbody>
+          <row>
+            <entry>33/33</entry>
+
+            <entry>aantal segmenten - vertaald / totaal van huidig bestand</entry>
+          </row>
+
+          <row>
+            <entry>2780/2780</entry>
+
+            <entry>aantal unieke segmenten - vertaald / totaal in het project</entry>
+          </row>
+
+          <row>
+            <entry>3760</entry>
+
+            <entry>totaal aantal segmenten (inclusief herhalingen) in het project</entry>
+          </row>
+
+          <row>
+            <entry>126/127</entry>
+
+            <entry>aantal tekens in het bron- en in het doelsegment</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Vanuit praktisch oogpunt is het meest belangrijkste paar het tweede paar getallen: het vertelt hoeveel u tot op dit moment hebt gedaan, in relatie tot het totaal van het tweede getal. Het project in het voorbeeld is zeker voltooid, omdat alle unieke segmenten zijn vertaald.</para>
+
+    <section id="editor.pane">
+      <title>venster Bewerken<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>venster Bewerken</secondary>
+        </indexterm></title>
+
+      <para>Hier typt en bewerkt u uw vertaling. Het venster Bewerken geeft de tekst van het gedeeltelijk vertaalde document weer: de tekst die al vertaald is wordt vertaald weergegeven en de tekst die nog niet vertaald is wordt weergegeven in de originele taal. De weergegeven tekst is gesplitst in segmenten en u kunt door het document scrollen en op een willekeurig segment dubbelklikken om het te bewerken. In het bovenstaande geval zijn de reeds vertaalde segmenten weergegeven in geel, maar u kunt de instelling wijzigen om aan uw voorkeuren te voldoen (zie <xref linkend="submenu.View"/>).</para>
+
+      <para>Eén van de bovenstaande segmenten is het huidige segment. Het is het segment dat wordt weergegeven in twee gedeelten. Het bovenste gedeelte is weergegeven in de brontaal, in vette tekens met een groene achtergrondkleur, het onderste gedeelte is het bewerkingsveld, gescheiden door een markering: <indexterm class="singular">
+          <primary>Segment markering</primary>
+        </indexterm>de markering is <literal>&lt;segment nnnn&gt;</literal> waarbij nnnn het getal is van het segment in het project. Gebruik het bovenste gedeelte als een verwijzing en vervang of pas de inhoud van het bewerkingsveld aan door/met uw vertaling.</para>
+
+      <para>Afhankelijk van het gedrag van uw voorkeur tijdens het bewerken kan het bewerkingsveld voor het niet-vertaalde segment leeg zijn, de brontekst bevatten of de vertaling bevatten van de tekenreeks die het meeste lijkt op die welke u gaat vertalen. Als u verder gaat naar een ander segment wordt de vertaling gevalideerd en opgeslagen. Als u wilt dat het segment niet vertaald wordt, maakt u eenvoudigweg het bewerkingsveld leeg door alle tekst te verwijderen (selecteer alles met <keycap>Ctrl+A</keycap> en verwijder het met <keycap>Del</keycap>). OmegaT is in staat om vertalingen op te slaan die identiek aan de bron zijn. Het is handig voor documenten die handelsmerken, (bedrijfs-)namen of andere woorden met hoofdletters bevatten of delen in een derde taal die niet vertaald behoeven te worden. Zie <emphasis>Vertaling bewerken</emphasis> voor meer details.</para>
+
+      <para>Als u met rechts klikt op het venster bewerken opent een pop-upmenu waarin<emphasis role="bold"> Knippen, Kopiëren, Plakken</emphasis> (d.i. dezelfde functies als <keycombo> <keycap>Ctrl</keycap> <keycap>X</keycap> </keycombo>, <keycombo> <keycap>Ctrl</keycap> <keycap>C</keycap> </keycombo> en <keycombo> <keycap>Ctrl</keycap> <keycap>V</keycap> </keycombo>) en de functies <emphasis role="bold">Ga naar segment</emphasis>.</para>
+    </section>
+
+    <section id="match.viewer">
+      <title>venster Overeenkomsten</title>
+
+      <para><figure id="matches.pane">
+          <title><indexterm class="singular">
+              <primary>Overeenkomsten</primary> <secondary>venster Overeenkomsten - afbeelding</secondary>
+            </indexterm><indexterm class="singular">
+              <primary>Vensters in OmegaT</primary> <secondary>venster Overeenkomsten - afbeelding</secondary>
+            </indexterm>venster Overeenkomsten</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/MatchesPane.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchesPane.png" width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Het venster Overeenkomsten toont de meest overeenkomende segmenten uit de vertaalgeheugens, zowel uit het interne vertaalgeheugen dat werd gemaakt terwijl u uw project vertaalde als uit aanvullende vertaalgeheugens die u importeerde uit eerder werk of die u heeft gekregen van uw cliënt of vertaalbureau.</para>
+
+      <para>Als u doorgaat naar het volgende segment wordt de eerste overeenkomst (die met het hoogste percentage van overeenkomst) automatisch geselecteerd. U kunt een andere overeenkomst selecteren door te drukken op <guimenuitem>Ctrl+2, 3, 4 of 5</guimenuitem>.<indexterm>
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+N - Selecteren van de overeenkomst</secondary>
+        </indexterm> Uiteraard zal het drukken op <keycombo> <keycap>Ctrl</keycap> <keycap>5</keycap> </keycombo> geen effect hebben als er geen overeenkomst #5 is. Gebruik <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+R - Tekst vervangen</secondary>
+        </indexterm> om het doelveld te vervangen door die overeenkomst of <guimenuitem>Ctrl+I <indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+I - Tekst invoegen</secondary>
+        </indexterm></guimenuitem> om die in te voegen op de cursorpositie, om de geselecteerde overeenkomst in uw vertaling te gebruiken.</para>
+
+      <para>Het percentage voor de overeenkomst is ruwweg het equivalent van het aantal meest voorkomende woorden in het vergeleken en het overeenkomende segment, gedeeld door het aantal woorden in de langste van de twee. De geselecteerde overeenkomst zal worden geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen blauw gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is het bronsegment <emphasis role="bold">Duration of exposure &lt;15 min</emphasis>. De hoogste overeenkomst is 60%, omdat 3 van de 5 woorden overeenkomen. De regel met het percentage van overeenkomst bevat ook de naam van het vertaalgeheugen <indexterm class="singular">
+          <primary>Vertaalgeheugens</primary> <secondary>overeenkomsten</secondary>
+        </indexterm> dat de overeenkomst bevat. Indien er geen naam vermeld is, is de bron het interne vertaalgeheugen van het project. Wezen-segmenten<indexterm class="singular">
+          <primary>Vertaalgeheugens</primary> <secondary>wezen-segmenten</secondary>
+        </indexterm> (de overeenkomst #4) beschrijven segmenten in het standaard vertaalgeheugen van het project die geen overeenkomend bronsegment hebben.</para>
+
+      <para>Er zijn feitelijk drie berekende overeenkomsten beschikbaar (60/60/54 in het geval van de hoogste overeenkomst hierboven). Zij worden als volgt gedefinieerd:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>percentage van overeenkomst als de plugin tokenizer wordt gebruikt</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>standaard overeenkomst OmegaT - aantal overeenkomende woorden - getallen en tags worden genegeerd - gedeeld door het totale aantal woorden</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>overeenkomst OmegaT, inclusief getallen en tags</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section>
+      <title>Woordenlijst<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>venster Woordenlijst</secondary>
+        </indexterm></title>
+
+      <para>Het venster Woordenlijst maakt het u mogelijk om uw eigen collectie uitdrukkingen en speciale terminologie, die u heeft verzameld in uw bestanden voor de woordenlijst, te gebruiken. Het toont de vertalingen van termen die zijn gevonden in het huidige segment, maar het wordt slechts getoond voor als verwijzing: er bestaat geen mogelijkheid om de vertaling in te voegen of de term door deze te vervangen.</para>
+
+      <para><figure id="glossary.pane">
+          <title><indexterm class="singular">
+              <primary>Woordenlijsten</primary> <secondary>venster Woordenlijst - afbeelding</secondary>
+            </indexterm>venster Woordenlijst</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/Glossary_pane.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/Glossary_pane.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>Het bronsegment in het bovenstaande voorbeeld was “I<emphasis>n most translation jobs it is considered important to have the translated document look similar to the original.</emphasis>”, en ten minste twee woorden daarin, document en translation werden gevonden in het bestand van de woordenlijst. <application>OmegaT</application> ondersteunt ook termen met meerdere woorden:</para>
+
+      <figure id="multiword.pane">
+        <title><indexterm class="singular">
+            <primary>Woordenlijsten</primary> <secondary>item met meerdere woorden in de woordenlijst - afbeelding</secondary>
+          </indexterm>item met meerdere woorden in de woordenlijst</title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/MultiTerm_Glossary.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/MultiTerm_Glossary.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
+
+      <para>Als u de optie TransTips hebt geactiveerd <guimenuitem>Opties → Transtips</guimenuitem>), kunt u met rechts klikken op het geaccentueerde woord om een keuzelijst te openen met de alternatieve vertalingen, zoals die worden aangeboden door uw woordenlijst. Selecteren van een er van zal het invoegen op de huidige positie in het doelsegment. U kunt ook uw geprefereerde alternatief accentueren in het venster Woordenlijst en het invoegen in het doel door met rechts op de selectie te klikken.</para>
+    </section>
+
+    <section id="dictionaries">
+      <title>venster Woordenboek<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>venster Woordenboek</secondary>
+        </indexterm></title>
+
+      <para>Woordenboeken zijn de elektronische versies van gedrukte woordenboeken zoals MerriamWebster, Duden, Larousse etc., die u op uw bureau zou hebben kunnen staan.</para>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Machinevertaling<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>Machinevertaling</secondary>
+        </indexterm></title>
+
+      <para>Het venster Machinevertaling, indien geopend, bevat de suggesties van programma's voor machinevertaling voor het huidige segment. Druk op <keysym>Ctrl+M </keysym>om de vertaling van het huidige segment te vervangen door de voorgestelde vertaling.</para>
+    </section>
+
+    <section>
+      <title id="main.menu">Hoofdmenu</title>
+
+      <para>Het hoofdmenu geeft toegang tot alle functies van <application>OmegaT</application>. Zie de appendix <emphasis>Hoofdmenu</emphasis> voor een volledige beschrijving van alle menu's en menu-items. De meestgebruikte functies zijn te benaderen met sneltoetsen voor het toetsenbord, dus als u daar eenmaal aan gewend bent, zal er geen reden meer zijn om door de menu's te bladeren tijdens het vertalen.</para>
+    </section>
+
+    <section id="status.bar">
+      <title>Statusbalk</title>
+
+      <para>De statusbalk geeft berichten met betrekking tot de werkzaamheden weer aan de onderzijde van het hoofdvenster. Deze balk geeft de gebruiker berichten met terugkoppeling over specifieke bewerkingen die worden uitgevoerd. Het geeft ook het aantal overeenkomsten en overeenkomsten in de woordenlijst aan voor het huidige segment.</para>
+    </section>
+  </section>
+
+  <section id="other.windows">
+    <title>Andere vensters</title>
+
+    <section id="section.project.files">
+      <title>Projectbestanden<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>Projectbestanden</secondary>
+        </indexterm></title>
+
+      <para>Het venster Projectbestanden somt de projectbestanden op en geeft andere informatie over het project weer. Het wordt automatisch weergegeven als OmegaT een project laadt. Gebruik <guimenuitem>Ctrl+L<indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+L - lijst projectbestanden</secondary>
+        </indexterm></guimenuitem> om het te openen en <keycap>Esc</keycap> om het te sluiten. Het venster Projectbestanden geeft de volgende informatie weer:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>de lijst met alle vertaalbare bestanden in het project. Dit zijn de bestanden die aanwezig zijn in de map met bronbestanden in een formaat dat OmegaT kan afhandelen. Klikken op een bestand zal het openen voor vertaling</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>het bestand dat momenteel beschikbaar is in het venster Bewerken is geaccentueerd met een blauwe achtergrond. Drukken op <keycap>Enter</keycap> zal het venster Bewerken verplaatsen naar het begin van het geselecteerde bestand</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>het aantal segmenten in elk bestand wordt naast de naam van het bestand weergegeven</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>het totale aantal segmenten, het aantal unieke segmenten in het gehele project en het aantal reeds vertaalde unieke segmenten worden weergegeven aan de onderzijde</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>De verzameling <emphasis role="bold">Unieke </emphasis>segmenten wordt berekend door alle segmenten te nemen en daaruit de duplicaten te verwijderen. (De definitie van “uniek” is gevoelig voor hoofdletters: &quot;Run&quot; en &quot;run&quot; worden als verschillend behandeld)</para>
+
+      <para>Het verschil tussen &quot;Aantal segmenten&quot; en &quot;Aantal unieke segmenten&quot; geeft een ruwe benadering van het aantal herhalingen in een tekst. Merk echter op dat de aantallen niet  vertellen hoe relevant de herhalingen zijn: zij zouden kunnen betekenen dat relatief lange zinnen een aantal keren worden herhaald (in welk geval u gul hebt) of het zou een tabel met sleutelwoorden kunnen beschrijven (niet zo gelukkig). Het bestand <filename>project_stats.txt</filename> dat is geplaatst in de map omegat van uw project bevat meer gedetailleerde informatie over elk segment per bestand.</para>
+
+      <para>Aanpassen van de segmentatieregels kan effect hebben op het aanpassen van het aantal segmenten/unieke segmenten. Zoiets zou echter in het algemeen moeten worden vermeden nadat u eenmaal met de vertaling van het project bent begonnen. Zie het hoofdstuk <emphasis>Segmentatieregels</emphasis> voor meer informatie.</para>
+
+      <para><emphasis role="bold"><indexterm class="singular">
+          <primary>Bronbestanden</primary> <secondary>bestanden toevoegen aan het project</secondary>
+        </indexterm>bestanden toevoegen aan het project: </emphasis>U kunt bronbestanden toevoegen aan het project door te klikken op de knop &quot;<guimenuitem>Bronbestanden importeren...&quot;</guimenuitem>. Dit kopieert de geselecteerde bestanden naar de map <filename>/source</filename> en herlaadt het project om de nieuwe bestanden te importeren. U kunt ook bronbestanden toevoegen vanaf internetpagina's, geschreven in MediaWiki, door te klikken op de knop<guimenuitem> &quot;Importeren vanuit MediaWiki&quot;</guimenuitem> en de corresponderende URL op te geven.</para>
+    </section>
+
+    <section id="section.search.window">
+      <title>venster Zoeken<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>venster Zoeken</secondary>
+        </indexterm></title>
+
+      <para>U kunt het venster Zoeken gebruiken om specifieke segmenten in het project te vinden. U kunt meerdere vensters tegelijkertijd geopend hebben. Gebruik <keycombo> <keycap>Ctrl</keycap> <keycap>F</keycap> </keycombo> in het hoofdvenster om een nieuw venster te openen. Het venster Zoeken bestaat uit een tekstvak voor tekenreeksen of sleutelwoorden om te zoeken, vlaggen en keuzeknoppen voor het instellen van het zoek- en weergavegebied dat de resultaten van de zoekactie bevat. Zie het hoofdstuk<emphasis> <link linkend="chapter.user.interface">Zoeken</link> </emphasis>voor meer informatie over het zoekvenster.</para>
+    </section>
+
+    <section id="section.tag.validation">
+      <title>Tags valideren<indexterm class="singular">
+          <primary>Tags valideren</primary> <seealso>sneltoetsen, tags</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>tags valideren</secondary> <seealso>tags</seealso>
+        </indexterm></title>
+
+      <para>Het venster Tags valideren detecteert de tagfouten en niet-consistente vertalingen in de vertaling en somt ze op. Open het venster met <guimenuitem>Ctrl+T. </guimenuitem>Het venster heeft een kolom met 3 tabellen met een koppeling naar het segment en de inhoud van diens bron en doel:</para>
+
+      <para><figure id="tag.validator.window">
+          <title><indexterm class="singular">
+              <primary>Tags valideren</primary> <secondary>venster - afbeelding</secondary> <seealso>tags</seealso>
+            </indexterm>venster Tags valideren</title>
+
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/TagValidator.png"/>
+            </imageobject>
+
+            <imageobject role="fo">
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
+
+      <para>De tags worden vet blauw geaccentueerd voor eenvoudige vergelijking tussen de originele en de vertaalde inhoud. Klik op de koppeling om naar het segment in het venster Bewerken te springen. Verbeter, indien nodig, de fout en druk op <guimenuitem>Ctrl+T</guimenuitem> om terug te keren naar het venster Tags valideren om andere fouten te corrigeren. In het eerste en derde geval hierboven waren tags niet correct gepaard en in het tweede geval ontbreekt bij de openingstag het &lt;-teken.</para>
+
+      <para>Tagfouten zijn gevallen waarin de tags in de vertaling niet overeenkomen in volgorde en aantal in vergelijking met het originele segment. Sommige scenario's met betrekking tot tags die worden gevlagd in het venster Tag valideren zijn noodzakelijk en zijn goedaardig, terwijl andere problemen zullen veroorzaken als het vertaalde document wordt gemaakt. Tags vertegenwoordigen meestal enige vorm van opmaak in de originele tekst. Vereenvoudigen van de opmaak van de originele tekst in het bronbestand voordat de vertaling wordt begonnen draagt enorm bij aan het verminderen van het aantal tags.</para>
+    </section>
+
+    <section>
+      <title>Statistieken voor overeenkomsten<indexterm class="singular">
+          <primary>Statistieken voor overeenkomsten</primary> <seealso>menu Extra</seealso>
+        </indexterm></title>
+
+      <para>Statistieken kunnen worden bereikt via<guimenuitem>Extra/Statistieken voor overeenkomsten
+.</guimenuitem> De evaluatie is nogal intensief voor de CPU en kan nogal wat tijd vergen, dus wordt een voortgangsbalk weergegeven tijdens de berekening. Met betrekking tot categorieën worden de de facto industriestandaard voor classificatie van overeenkomsten in de volgende groepen gebruikt:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>Exacte overeenkomst</para>
+        </listitem>
+
+        <listitem>
+          <para>95%-100%</para>
+        </listitem>
+
+        <listitem>
+          <para>85%-94%</para>
+        </listitem>
+
+        <listitem>
+          <para>75%-84%</para>
+        </listitem>
+
+        <listitem>
+          <para>50%-74%</para>
+        </listitem>
+
+        <listitem>
+          <para>Geen overeenkomst:</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>De tellingen van de woorden zijn identiek aan de aantallen verschaft in het venster Projectbestanden en zijn strikt gebaseerd op de methode van tellen in OmegaT, met een paar verschillen in terminologie om rekening te houden met verschillen in ontwerp. Deze informatie wordt berekend voor segmenten, woorden en voor tekens (zonder en inclusief spaties). Onthoud dat deze totalen een goede (of zo-goed-als-maar-kan-zijn) benadering zijn van het betrokken werk in het project en dus kan dienen als een basis voor uw berekeningen van kosten en prijzen.</para>
+
+      <screenshot>
+        <screeninfo>statistieken voor overeenkomsten</screeninfo>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/MatchStatistics.png"/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/MatchStatistics.png" width="60%"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot>
+
+      <para>Met spaties tussen segmenten wordt geen rekening gehouden in de laatste kolom. Herhalingen staan voor identieke segmenten die meerdere malen aanwezig zijn in de tekst. Het eerste segment en de inhoud daarvan zullen worden geclassificeerd als &quot;geen overeenkomst&quot;, en de rest van hen als een herhaling van de eerste. Als de vertaling voor verschillende identieke bronsegmenten al bestaat in het vertaalgeheugen van het project, zullen deze segmenten, samen met andere, reeds vertaalde unieke segmenten, worden geclassificeerd als een &quot;Exacte overeenkomst&quot;. Het aantal unieke segmenten die, indien nodig, worden verschaft in het standaard venster met statistieken, ongeacht of zij zijn vertaald of niet.</para>
+
+      <para>De rest van de categorieën (50-100%) behelst niet-vertaalde segmenten met een fuzzy overeenkomst. Fuzzy overeenkomsten kunnen ook vanuit de map <filename>/tm</filename> komen - en niet alleen vanuit het interne vertaalgeheugen in <filename>/omegaT,</filename> zoals het geval is voor herhalingen en exacte overeenkomsten. Het enige verschil met overeenkomsten vanuit het vertaalgeheugen <filename>project_save</filename> is dat externe TM's geen exacte overeenkomsten kunnen geven, alleen 100%. Indien men geen externe TM's wil gebruiken voor het tellen, moet men de map /tm leeg maken of de instelling van het project wijzigen (tijdelijk) zodat de waarde voor /tm naar een andere locatie verwijst.</para>
+
+      <para>De overeenkomsten voor statistieken zijn tab-gescheiden en u kunt <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+A - alles selecteren</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+C - tekst kopiëren</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+V - tekst plakken</secondary>
+        </indexterm></guimenuitem> gebruiken om ze te kopiëren/plakken, bijvoorbeeld in een werkblad of in uw toepassing voor kostenberekening. Eenmaal berekend zijn de gegevens ook beschikbaar in <filename>omegat/project_stats_match.txt.</filename> Onthoud dat het bestand voorzien is van een tijdstempel, omdat de berekening (in tegenstelling tot de standaard statistieken) is niet onmiddellijk wordt uitgevoerd en dus snel niet meer van toepassing is.</para>
+    </section>
+
+    <section>
+      <title>Help-browser<indexterm class="singular">
+          <primary>menu Help</primary> <secondary>Help-browser</secondary>
+        </indexterm></title>
+
+      <para>De Help-browser (die deze handleiding weergeeft) kan worden opgeroepen door op <keycap><indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>F1 - Help</secondary>
+        </indexterm>F1</keycap> te drukken of door te navigeren naar <guimenuitem><indexterm class="singular">
+          <primary>menu Help</primary> <secondary>Gebruikershandleiding...</secondary>
+        </indexterm>Help → Gebruikershandleiding...</guimenuitem> in het hoofdmenu. In het venster worden de handleiding en twee knoppen weergegeven: Terug en Inhoud. De gebruikershandleiding is een HTML-document met koppelingen naar de verschillende hoofdstukken. Klikken op een koppeling, zoals u in een webbrowser zou doen, brengt de gewenste pagina op de voorgrond.</para>
+
+      <para>De gebruikershandleiding is geplaatst in de submap docs onder de installatiemap van OmegaT, dus u kunt bijvoorbeeld de Engelse documentatie bekijken door het bestand <filename>docs/en/index.html</filename> in uw browser te openen. Openen van de gebruikershandleiding op deze manier stelt u ook in staat om externe koppelingen te volgen, omdat de ingebouwde help-browser geen externe koppelingen naar internet accepteert.</para>
+    </section>
+  </section>
+</chapter>

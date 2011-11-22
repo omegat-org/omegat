@@ -1,0 +1,428 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 7. Bestandsfilters</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.project.properties.html" title="Hoofdstuk 6. Projecteigenschappen">
+      <link rel="next" href="chapter.files.and.directories.html" title="Hoofdstuk 8. OmegaT bestanden en mappen">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 7. Bestandsfilters</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.project.properties.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 7. Bestandsfilters">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.file.filters"></a>Hoofdstuk 7. Bestandsfilters
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.file.filters.html#file.filters.dialog">1. dialoogvenster Bestandsfilters</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#filters.options">2. Filteropties</a></span></dt>
+               <dt><span class="section"><a href="chapter.file.filters.html#edit.filter.dialog">3. dialoogvenster Filter bewerken</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.filetype.and.filename.pattern">3.1. Type bronbestand, patroon voor bestandsnaam</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#source.and.target.files.encoding">3.2. Coderen van bron- en doelbestanden</a></span></dt>
+                     <dt><span class="section"><a href="chapter.file.filters.html#target.name">3.3. Doelbestandsnaam</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <p>OmegaT omvat zeer aanpasbare filters die u in staat stellen verschillende aspecten in te stellen. Bestandsfilters zijn gedeelten
+            van code die in staat zijn om:
+         </p>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc">
+               <li class="listitem">
+                  <p>Het document in enkele specifieke bestandsformaten te lezen. Bijvoorbeeld platte tekst-bestanden.</p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc">
+               <li class="listitem">
+                  <p>De te vertalen inhoud uit het bestand te halen.</p>
+               </li>
+            </ul>
+         </div>
+         <div class="itemizedlist">
+            <ul class="itemizedlist" type="disc">
+               <li class="listitem">
+                  <p>Automatische wijzigingen in de vertaalde bestandsnamen van de documenten te maken door de te vertalen inhoud te vervangen
+                     door de vertaling.
+                  </p>
+               </li>
+            </ul>
+         </div>
+         <p>De meeste gebruikers zullen tevreden zijn met de standaard ingestelde opties. Als u dat niet bent opent u het hoofd dialoogvenster
+            door in het hoofdmenu<span class="bold"><strong> Opties → Bestandsfilters...</strong></span> te selecteren. U kunt ook project-specifieke bestandsfilters inschakelen, die alleen zullen worden gebruikt voor het huidige
+            project, door de optie <span class="bold"><strong>Bestandsfilters...</strong></span> in Project → Eigenschappen te selecteren.
+         </p>
+         <p><span class="bold"><strong>Waarschuwing!</strong></span> Als u de segmentatie-opties wijzigt als een project geopend is moet u het project herladen vóórdat de wijzigingen effect
+            hebben.
+         </p>
+         <div class="section" title="1. dialoogvenster Bestandsfilters">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1. dialoogvenster Bestandsfilters<a class="indexterm" name="d0e4308"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Dit dialoogvenster toont de beschikbare bestandsfilters. Als u OmegaT niet wilt gebruiken om bestanden van een bepaald type
+               te vertalen, kunt u het betreffende filter uitschakelen door het keuzevak naast de naam niet te selecteren. OmegaT zal dan
+               de betreffende bestanden weglaten bij het laden van projecten en zal ze ongewijzigd kopiëren bij het maken van de doeldocumenten.
+               Als u het filter opnieuw wilt gebruiken, selecteer dan het keuzevak. Klik op <span class="bold"><strong>Standaardinstellingen</strong></span> om de bestandsfilters terug te zetten naar de standaard instellingen. Selecteer het filter uit de lijst en klik op <span class="bold"><strong>Bewerken</strong></span> om aan te geven welke bestanden in welke coderingen het filter moet verwerken.
+            </p>
+         </div>
+         <div class="section" title="2. Filteropties">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2. Filteropties<a class="indexterm" name="d0e4324"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Vijf filters (Tekstbestanden, XHTML-bestanden, HTML- en XHTML-bestanden, OpenDocument/OpenOffice.org-bestanden en Microsoft
+               Open XML-bestanden) hebben één of meer specifieke opties. Selecteer, om de opties aan te passen, het filter uit de lijst en
+               klik op <span class="bold"><strong>Opties</strong></span>. De beschikbare opties zijn:
+            </p>
+            <p><span class="bold"><strong>Tekstbestanden</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Alineasegmentatie bij regeleinden, lege regels of nooit:</em></span> als regels voor zinsegmentatie actief zijn, zal de tekst verder gesegmenteerd worden op grond van de hier geselecteerde optie.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>PO-bestanden</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Sta blanco vertalingen in het bronbestand toe:</em></span> Indien ingeschakeld zal, wanneer een PO-segment (wat een gehele alinea kan zijn) niet is vertaald, de vertaling leeg zijn
+                        in het doelbestand. Technisch gezien zal <code class="code">msgstr</code> leeg zijn. Het staat standaard aan, omdat dit het standaard gedrag is voor PO-bestanden. Indien de optie is uitgeschakeld,
+                        zal de brontekst worden gekopieerd naar het doelsegment.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>XHTML-bestanden</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Vertaal de volgende attributen:</em></span> De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Start een nieuwe alinea bij:</em></span> De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Tekst die overeenkomt met reguliere uitdrukking overslaan:</em></span> De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Vertaal het attribuut 'content' van metatags niet: ... : de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's,
+                        zullen niet vertaald worden
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Microsoft Office Open XML-bestanden</strong></span></p>
+            <p>U kunt selecteren welke elementen vertaald moeten worden. Zij zullen als afzonderlijke segmenten in de vertaling verschijnen.</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Word:</strong></span><span class="emphasis"><em> <span class="emphasis"><em><span class="emphasis"><em>Niet-zichtbare tekst met instructies, Notities, Voetnoten, Eindnoten, Voetteksten</em></span></em></span></em></span></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Excel: </strong></span><span class="emphasis"><em>Notities, Werkbladnamen</em></span></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Powerpoint</strong></span><span class="emphasis"><em>: Dianotities, Diamodellen, Dia-lay-outs</em></span></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Globaal:</strong></span> <span class="emphasis"><em>Diagrammen, Tekeningen, Wordart</em></span></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Andere opties:</strong></span></p>
+                     <div class="itemizedlist">
+                        <ul class="itemizedlist" type="circle">
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>Hoeveelheid tags:</em></span> Indien geselecteerd zullen tags, zonder vertaalbare tekst er tussen, worden samengevoegd tot enkele tags.
+                              </p>
+                           </li>
+                           <li class="listitem">
+                              <p><span class="emphasis"><em>Spaties voor alle tags behouden:</em></span> Indien geselecteerd zal "witruimte" (d.i. spaties en newlines) worden behouden, zelfs als dat niet technisch is ingesteld
+                                 in het document.
+                              </p>
+                           </li>
+                        </ul>
+                     </div>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>HTML- en XHTML-bestanden</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</p>
+                     <p><span class="emphasis"><em>Altijd (standaard), Alleen als (X)HTML-bestand een kop heeft, Alleen als (X)HTML-bestand een codering-declaratie heeft, Nooit</em></span></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Vertaal de volgende attributen:</em></span> De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Start een nieuwe alinea bij:</em></span> De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Tekst die overeenkomt met reguliere uitdrukking overslaan: </em></span>De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Vertaal het attribuut 'content' van metatags niet: ... : de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's,
+                        zullen niet vertaald worden
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Tekstbestanden</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="emphasis"><em>Alineasegmentatie bij regeleinden, lege regels of nooit:</em></span> als regels voor zinsegmentatie actief zijn, zal de tekst verder gesegmenteerd worden op grond van de hier geselecteerde optie.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>OpenDocument/OpenOffice.org bestanden</strong></span></p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>U kunt selecteren welke van de volgende elementen vertaald moeten worden.</p>
+                     <p><span class="emphasis"><em>Indexitems, Bladwijzers, Verwijzingen naar bladwijzers, Notities, Opmerkingen, Notities in presentaties, Koppelingen (URL),
+                              Werkbladnamen</em></span></p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="3. dialoogvenster Filter bewerken">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3. dialoogvenster Filter bewerken<a class="indexterm" name="d0e4487"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Het dialoogvenster stelt u in staat om de patronen van de bronbestandsnaam te bewerken van de bestanden die het filter zal
+               verwerken, de bestandsnamen van vertaalde bestanden aan te passen en te selecteren welke coderingen het zal gebruiken bij
+               het laden van het bestand en zijn vertaalde tegenhanger. Pas de velden direct aan of klik op <span class="bold"><strong>Bewerken</strong></span> om een patroon voor het bestandsfilter aan te passen. Klik op <span class="bold"><strong>Toevoegen</strong></span> om een nieuw patroon voor een bestandsfilter toe te voegen. Hetzelfde dialoogvenster wordt gebruikt om een patroon toe te
+               voegen of een bepaald patroon te bewerken. Het dialoogvenster is handig omdat het een speciale bewerker voor het patroon van
+               de doelbestandsnaam heeft waarmee u de namen van de te maken bestanden aan kunt passen.
+            </p>
+            <div class="section" title="3.1. Type bronbestand, patroon voor bestandsnaam">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1. <a class="indexterm" name="d0e4502"></a>Type bronbestand, patroon voor bestandsnaam<a class="indexterm" name="d0e4508"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Als OmegaT een bestand tegenkomt in zijn bronmap, probeert dat het filter te selecteren gebaseerd op de extensie van het bestand.
+                  Meer precies: OmegaT probeert of van elk filter het patroon van de bestandsnaam overeenkomt met de bestandsnaam. Het <code class="literal">*.xhtml</code>-patroon zal bijvoorbeeld overeenkomen met elk bestand met de extensie <code class="literal">.xhtml</code>. Als het juiste filter is gevonden wordt dat voor verdere verwerking toegepast op het betreffende bestand. Standaard zal
+                  bijvoorbeeld het XHTML-filter worden gebruikt bij het verwerken van bestanden met de extensie .xhtml. U kunt bestandsnaam-patronen
+                  toevoegen of wijzigen voor bestanden die door elk filter worden afgehandeld. Patronen voor bronbestandsnamen gebruiken jokertekens
+                  die overeenkomen met die in <span class="bold"><strong>Zoeken. </strong></span>Het teken '*' komt overeen met nul of meer tekens. Het teken '?' komt overeen met exact één teken. Alle andere tekens vertegenwoordigen
+                  zichzelf. Als u bijvoorbeeld wilt dat het tekstfilter readme-bestanden (<code class="literal">readme, read.me</code> en <code class="literal">readme.txt</code>) afhandelt, zou u het patroon <code class="literal">read*</code> moeten gebruiken.
+               </p>
+            </div>
+            <div class="section" title="3.2. Coderen van bron- en doelbestanden">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="source.and.target.files.encoding"></a>3.2. Coderen van bron- en doelbestanden
+                        </h3>
+                     </div>
+                  </div>
+               </div><a class="indexterm" name="d0e4536"></a><a class="indexterm" name="d0e4541"></a><a class="indexterm" name="d0e4546"></a><p>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet
+                  specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld<code class="literal"> .txt</code>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend
+                  bronbestandsnaam-patroon wijzigen. Zulke bestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het
+                  vertaalde bestand dezelfde codering als de codering van het bronbestand. Velden voor bron- en doelcodering gebruiken combinatievakken
+                  waarin alle ondersteunde coderingen zijn opgenomen. &lt;auto&gt; laat de keuze van de codering aan <span class="application">OmegaT</span> over. Zo werkt het:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>OmegaT identificeert de codering van het bronbestand door de declaratie van de codering te gebruiken, indien aanwezig (HTML-bestanden,
+                           op XML gebaseerde bestanden).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>OmegaT is geïnstrueerd om een voorgeschreven codering te gebruiken voor bepaalde bestandsformaten ( Java-properties etc)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><span class="application">OmegaT</span> gebruikt de standaard codering van het besturingssysteem voor tekstbestanden.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section" title="3.3. Doelbestandsnaam">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="target.name"></a>3.3. Doelbestandsnaam<a class="indexterm" name="d0e4576"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Soms wilt u misschien de bestanden die u vertaalde automatisch hernoemen, bijvoorbeeld door een taalcode achter de bestandsnaam
+                  te zetten. Doelbestandsnaam-patronen gebruiken een speciale syntaxis, dus als u dit veld zou willen bewerken, moet u op <span class="bold"><strong>Bewerken...</strong></span> klikken en het dialoogvenster <a class="indexterm" name="d0e4586"></a>Patroon bewerken gebruiken. Klik op <span class="bold"><strong>Standaardinstellingen</strong></span> als u terug wilt keren naar de standaard configuratie van het filter. U kunt de naam ook direct aanpassen in het veld voor
+                  het patroon van het doelbestand of het dialoogvenster Bestandsfilters. Het dialoogvenster Patroon bewerken biedt de volgende
+                  opties:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Standaard is <code class="literal">${filename}</code> - volledige bestandsnaam van het bronbestand met extensie: in dit geval is de naam van het vertaalde bestand hetzelfde als
+                           dat van het bronbestand.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">${nameOnly}</code> - laat u alleen de naam van het bronbestand invoegen zonder de extensie.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLocale}</code> - locale-code voor doel (in de vorm "xx_YY").
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguage}</code> - de doeltaal en landcode samen (in de vorm "XX-YY").
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">${targetLanguageCode}</code> - alleen de doeltaal ("XX").
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">${targetCoutryCode}</code> - alleen de doel-landcode ("YY").
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.project.properties.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.files.and.directories.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 6. Projecteigenschappen&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 8. <span class="application">OmegaT</span> bestanden en mappen
+               </td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

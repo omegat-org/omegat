@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>Projecteigenschappen<indexterm class="singular">
+      <primary>Project</primary><secondary>eigenschappen</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>dialoogvenster Eigenschappen</title>
+
+    <para>Het dialoogvenster <menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Project</guimenu> <guimenuitem>eigenschappen...</guimenuitem> </menuchoice> wordt gebruikt om de projectmappen en talen te definiëren en aan te passen.</para>
+
+    <figure>
+      <title>venster Projecteigenschappen</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>Het bevat:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Een gebied om de bron- en doeltalen van het project met keuzelijsten in te stellen</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Een vlag voor de instellingen van de segmentatie</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Een gebied voor het instellen van de projectmappen</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>Alle velden zijn te bewerken. U kunt de talen handmatig instellen of het menu met de keuzelijst gebruiken. Indien u namen voor mappen invoert die nog niet bestaan, zal <application>OmegaT</application> ze voor u maken.</para>
+  </section>
+
+  <section id="language.modification">
+    <title>Projecteigenschappen aanpassen</title>
+
+    <para>Onthoud dat wijzigen van de instellingen voor het project consequenties kan hebben, in het bijzonder als het project al is opgestart.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Wijzigen van bron- en doeltalen:<indexterm class="singular">
+            <primary>Project</primary> <secondary>Bron- en doeltalen</secondary>
+          </indexterm></emphasis></para>
+
+        <para>Onthoud goed dat het wijzigen van de talen er voor kan zorgen dat het de huidige gebruikte vertaalgeheugens onbruikbaar kan maken omdat hun taal niet meer overeenkomt met de nieuwe talen.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Aanpassen van segmentatie:<indexterm class="singular">
+            <primary>Project</primary> <secondary>Segmentatie aanpassen</secondary>
+          </indexterm></emphasis></para>
+
+        <para>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <application>OmegaT</application> worden afgehandeld. Zij passen niet de segmentatie van de reeds bestaande vertaalgeheugens aan.</para>
+
+        <para>Wijzigingen aan de instellingen voor segmentatie kunnen er voor zorgen dat sommige reeds vertaalde segmenten opgedeeld of samengevoegd worden. Zij zullen dan effectief terugkeren naar de status &quot;niet vertaald&quot; omdat zij niet overeenkomen met de opgenomen segmenten in het projectgeheugen, zelfs als de originele vertaling daar nog steeds in staat.</para>
+
+        <para>OmegaT kan oude vertaalgeheugens bijwerken die geen gebruik maakten van zin-segmentatie, maar niet andersom. Indien u gedurende de vertaling besluit om te schakelen van zin- naar alinea-vertaling, zal het interne vertaalgeheugen van het project niet worden gewijzigd.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Wijzigen van de mappenstructuur:<indexterm class="singular">
+            <primary>Project</primary> <secondary>Wijzigen van de mappenstructuur</secondary>
+          </indexterm></emphasis></para>
+
+        <para>Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden uit oude mappen naar de nieuwe worden verplaatst.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Aanpassen van projecteigenschappen tijdens de sessie<indexterm class="singular">
+            <primary>Project</primary> <secondary>Aanpassen tijdens de sessie</secondary>
+          </indexterm></emphasis></para>
+
+        <para>Het is mogelijk om de projecteigenschappen gedurende een vertaalsessie aan te passen. De veiligste manier is echter om, totdat u wat meer ervaring hebt met OmegaT, alle instellingen als vast te beschouwen als de vertaling eenmaal is begonnen - tenzij u zich natuurlijk realiseert dat er een grote vergissing is gemaakt. Zie het gedeelte Gegevensverlies voorkomen voor manieren om uw werk te beveiligen.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

@@ -1,0 +1,152 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 6. Projecteigenschappen</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.menu.html" title="Hoofdstuk 5. Sneltoetsen voor menu en het toetsenbord">
+      <link rel="next" href="chapter.file.filters.html" title="Hoofdstuk 7. Bestandsfilters">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 6. Projecteigenschappen</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.menu.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 6. Projecteigenschappen">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.project.properties"></a>Hoofdstuk 6. Projecteigenschappen<a class="indexterm" name="d0e4169"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. dialoogvenster Eigenschappen</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#language.modification">2. Projecteigenschappen aanpassen</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section" title="1. dialoogvenster Eigenschappen">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1. dialoogvenster Eigenschappen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Het dialoogvenster <span class="guimenu">Project</span> → <span class="guimenuitem">eigenschappen...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) wordt gebruikt om de projectmappen en talen te definiëren en aan te passen.
+            </p>
+            <div class="figure"><a name="d0e4192"></a><p class="title"><b>Afbeelding 6.1. venster Projecteigenschappen</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/NewProject.png" alt="venster Projecteigenschappen"></div>
+               </div>
+            </div><br class="figure-break"><p>Het bevat:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Een gebied om de bron- en doeltalen van het project met keuzelijsten in te stellen</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Een vlag voor de instellingen van de segmentatie</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Een gebied voor het instellen van de projectmappen</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Alle velden zijn te bewerken. U kunt de talen handmatig instellen of het menu met de keuzelijst gebruiken. Indien u namen
+               voor mappen invoert die nog niet bestaan, zal <span class="application">OmegaT</span> ze voor u maken.
+            </p>
+         </div>
+         <div class="section" title="2. Projecteigenschappen aanpassen">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="language.modification"></a>2. Projecteigenschappen aanpassen
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Onthoud dat wijzigen van de instellingen voor het project consequenties kan hebben, in het bijzonder als het project al is
+               opgestart.
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Wijzigen van bron- en doeltalen:<a class="indexterm" name="d0e4229"></a></strong></span></p>
+                     <p>Onthoud goed dat het wijzigen van de talen er voor kan zorgen dat het de huidige gebruikte vertaalgeheugens onbruikbaar kan
+                        maken omdat hun taal niet meer overeenkomt met de nieuwe talen.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Aanpassen van segmentatie:<a class="indexterm" name="d0e4240"></a></strong></span></p>
+                     <p>De instellingen voor segmentatie hebben alleen betrekking op de manier waarop de bronbestanden door <span class="application">OmegaT</span> worden afgehandeld. Zij passen niet de segmentatie van de reeds bestaande vertaalgeheugens aan.
+                     </p>
+                     <p>Wijzigingen aan de instellingen voor segmentatie kunnen er voor zorgen dat sommige reeds vertaalde segmenten opgedeeld of
+                        samengevoegd worden. Zij zullen dan effectief terugkeren naar de status "niet vertaald" omdat zij niet overeenkomen met de
+                        opgenomen segmenten in het projectgeheugen, zelfs als de originele vertaling daar nog steeds in staat.
+                     </p>
+                     <p>OmegaT kan oude vertaalgeheugens bijwerken die geen gebruik maakten van zin-segmentatie, maar niet andersom. Indien u gedurende
+                        de vertaling besluit om te schakelen van zin- naar alinea-vertaling, zal het interne vertaalgeheugen van het project niet
+                        worden gewijzigd.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Wijzigen van de mappenstructuur:<a class="indexterm" name="d0e4258"></a></strong></span></p>
+                     <p>Voor het geval u van plan bent de projectmappen aan te passen, onthoudt dan dat daarmee niet de bestanden uit oude mappen
+                        naar de nieuwe worden verplaatst.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Aanpassen van projecteigenschappen tijdens de sessie<a class="indexterm" name="d0e4269"></a></strong></span></p>
+                     <p>Het is mogelijk om de projecteigenschappen gedurende een vertaalsessie aan te passen. De veiligste manier is echter om, totdat
+                        u wat meer ervaring hebt met OmegaT, alle instellingen als vast te beschouwen als de vertaling eenmaal is begonnen - tenzij
+                        u zich natuurlijk realiseert dat er een grote vergissing is gemaakt. Zie het gedeelte Gegevensverlies voorkomen voor manieren
+                        om uw werk te beveiligen.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.menu.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 5. Sneltoetsen voor menu en het toetsenbord&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 7. Bestandsfilters</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

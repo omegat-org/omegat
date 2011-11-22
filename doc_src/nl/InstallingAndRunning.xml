@@ -1,0 +1,602 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.installing.and.running">
+  <title>Installeren en uitvoeren van <application>OmegaT</application></title>
+
+  <section>
+    <title id="Windows.users">Windows-gebruikers<indexterm class="singular">
+        <primary>Installeren van OmegaT</primary> <secondary>Windows</secondary>
+      </indexterm></title>
+
+    <section>
+      <title id="which.package.to.download.windows">Downloaden van het pakket</title>
+
+      <para>Heeft u een Java-implementatie die compatibel is met Oracle's Java 1.5 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Ja: </emphasis>download <emphasis>OmegaT_2.5.x_Windows_without_JRE.exe</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Nee / Ik weet het niet:</emphasis> download<emphasis> OmegaT_2.5.x_Windows.exe.</emphasis></para>
+
+          <para>Dit pakket is gebundeld met Oracle's  Java Runtime Environment. Deze JRE zal geen problemen veroorzaken met andere Java-implementaties die misschien al op uw systeem geïnstalleerd zijn.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Windows">
+      <title><application>Installeren van OmegaT</application></title>
+
+      <para>Dubbelklik op het programma dat u hebt gedownload en volg de instructies om <application>OmegaT</application> te installeren. </para>
+    </section>
+
+    <section id="adding.OmegaT.to.the.start.menu.or.desktop">
+      <title><application>OmegaT</application> toevoegen aan het menu Start of bureaublad<indexterm class="singular">
+          <primary>OmegaT aanpassen</primary> <secondary>Windows</secondary>
+        </indexterm></title>
+
+      <para>Gedurende de installatie zal het programma u vragen of u een map in het menu <emphasis>Start</emphasis> wilt maken en of u een snelkoppeling op het bureaublad en in het systeemvak wilt maken.</para>
+
+      <para>U kunt daarna nog steeds een snelkoppeling maken door <emphasis><application>OmegaT</application>.exe</emphasis> naar het bureaublad of menu Start te slepen om het van daaruit te koppelen.</para>
+    </section>
+
+    <section id="running.OmegaT.Windows">
+      <title><application>OmegaT<indexterm class="singular">
+          <primary>OmegaT uitvoeren</primary> <secondary>Windows</secondary>
+        </indexterm></application> uitvoeren</title>
+
+      <para>Als <application>OmegaT</application> eenmaal is geïnstalleerd, kunt u klikken op <emphasis><application>OmegaT</application>.jar</emphasis> om het direct te starten, of u kunt het direct vanaf de opdrachtregel starten.</para>
+
+      <para>De eenvoudigste manier om OmegaT te starten is echter om het programma<emphasis> <application>OmegaT</application>.exe</emphasis> uit te voeren. <indexterm class="singular">
+          <primary>OmegaT uitvoeren</primary> <secondary>Windows</secondary> <tertiary>INI-bestand</tertiary>
+        </indexterm>De opties voor het opstarten van het programma zullen in dit geval worden gelezen uit het <emphasis><application>OmegaT</application>.l4J.ini-</emphasis>bestand, dat zich bevindt in dezelfde map als het exe-bestand en wat u kunt bewerken om uw instellingen weer te geven. Het volgende voorbeeld voor het INI-bestand reserveert 1GB aan geheugen, zal Frans als taal van de gebruiker instellen en Portugal als het land:</para>
+
+      <literallayout><code># OmegaT.exe runtime configuration
+# To use a parameter, remove the '#' before the '-'
+# Memory 
+-Xmx1024M 
+# Language 
+-Duser.language=FR
+# Country 
+-Duser.country=CA </code></literallayout>
+    </section>
+
+    <section>
+      <title>Upgraden van OmegaT<indexterm class="singular">
+          <primary>Upgraden van OmegaT</primary> <secondary>Windows</secondary>
+        </indexterm></title>
+
+      <para><emphasis>Deze informatie is alleen van toepassing op de &quot;traditionele&quot; Windows-versies van OmegaT. Het is niet van toepassing op de Web Start-versies, die automatisch worden geüpgraded, noch op de versies voor meerdere platformen die zijn geïnstalleerd op Windows.</emphasis></para>
+
+      <para>Als u al een versie van OmegaT hebt geïnstalleerd op uw PC en wilt upgraden naar een meer recente versie, heeft u twee opties:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Installeren over de bestaande installatie heen. </emphasis>Selecteer eenvoudigweg dezelfde installatiemap als de bestaande installatie bij het installeren van de nieuw versie om dit te doen. De &quot;oude&quot; versie van OmegaT zal worden overschreven, maar alle instellingen ervan zullen worden behouden. Dit omvat ook de voorkeuren die zijn ingesteld binnen OmegaT, alle wijzigingen die u hebt gemaakt aan uw<filename> OmegaT.l4J.ini</filename>-bestand, en ook uw script om op te starten (.bat-bestand), als u er een gebruikt.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Met deze methode kunt u ook de versie &quot;Windows without JRE&quot; downloaden, omdat de nieuwe installatie uw bestaande JRE zal gebruiken.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Installeren in een nieuwe map. </emphasis>Hiermee zult u beide versies naast elkaar hebben staan, wat u zou kunnen doen totdat u zich op uw gemak voelt met de nieuwe versie. Deze methode zal ook de voorkeuren en instellingen gebruiken die u hebt gemaakt binnen OmegaT. In dit geval echter:</para>
+
+          <itemizedlist>
+            <listitem>
+              <para>Als u wijzigingen hebt gemaakt in uw<filename> OmegaT.l4J.ini</filename>-bestand en/of een .bat-bestand gebruikt, moet u die kopiëren naar de nieuwe installatie.</para>
+            </listitem>
+          </itemizedlist>
+
+          <itemizedlist>
+            <listitem>
+              <para>Als uw bestaande installatie van OmegaT  een &quot;Windows with JRE&quot;-versie is, moet de nieuwe versie ook een &quot;Windows with JRE&quot;-versie zijn.</para>
+            </listitem>
+          </itemizedlist>
+        </listitem>
+      </itemizedlist>
+    </section>
+  </section>
+
+  <section id="Linux.Intel.users">
+    <title>Linux (Intel)-gebruikers<indexterm class="singular">
+        <primary>Installeren van OmegaT</primary> <secondary>Linux</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.Linux">
+      <title>Downloaden van het juiste pakket</title>
+
+      <para>Heeft u een Java-implementatie die compatibel is met Oracle's Java 1.5 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Ja: </emphasis>download <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Nee / Ik weet het niet:</emphasis> download <emphasis>OmegaT_2.5.x_Linux.tar.bz2.</emphasis></para>
+
+          <para>Dit pakket is gebundeld met Oracle's  Java Runtime Environment. Deze JRE zal geen problemen veroorzaken met andere Java-implementaties die misschien al op uw systeem geïnstalleerd zijn.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.Linux">
+      <title><application>Installeren van OmegaT</application></title>
+
+      <para>Uitpakken/untarren van het gedownloade bestand. Dit zal een map omegat/ maken in de werkmap waarin u alle nodige bestanden vindt om <application>OmegaT</application> uit te voeren. Uitpakken van het <emphasis>.tar.gz</emphasis> bestand:</para>
+
+      <para><emphasis>$ tar xf downloaded_file.tar.gz</emphasis></para>
+    </section>
+
+    <section id="adding.OmegaT.to.your.menus.or.panels">
+      <title><application>OmegaT</application> toevoegen aan uw menu's (KDE) of panelen (Gnome)</title>
+
+      <section id="KDE.users">
+        <title>KDE 4-gebruikers<indexterm class="singular">
+            <primary>OmegaT aanpassen</primary> <secondary>KDE 4</secondary>
+          </indexterm></title>
+
+        <para>U kunt <application>OmegaT</application> als volgt aan uw menu's toevoegen:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Druk op <emphasis role="bold"> <keysym>Alt+F2</keysym> </emphasis> om KRunner weer te geven. Typ <emphasis>kmenuedit+enter</emphasis> om de opdracht uit te voeren. De KMenuEditor verschijnt. Selecteer in KMenuEditor  <emphasis>Bestand -&gt; Nieuw item.</emphasis></para>
+          </listitem>
+
+          <listitem>
+            <para>Dan, na het selecteren van een passend menu, voeg een submenu/item toe met <emphasis>Bestand - Nieuw submenu</emphasis> en <emphasis>Bestand - Nieuw item</emphasis>. Voer <application>OmegaT</application> in als de naam van het nieuwe item.</para>
+          </listitem>
+
+          <listitem>
+            <para>Gebruik, in het veld &quot;Commando&quot;, de navigatieknop om uw <application>OmegaT</application> startscript te vinden (het bestand genaamd <application>OmegaT</application> in de uitgepakte map) en selecteer dat.</para>
+          </listitem>
+
+          <listitem>
+            <para>Klik op de pictogramknop (rechts van de velden Naam/Beschrijving/Commentaar)</para>
+          </listitem>
+
+          <listitem>
+            <para>Andere pictogrammen - Bladeren en navigeer naar de submap /images in de <application>OmegaT</application>-toepassingsmap. Selecteer het pictogram <application>OmegaT</application>.png.</para>
+          </listitem>
+
+          <listitem>
+            <para>Sla tenslotte de wijzigingen op met <emphasis>Bestand - Opslaan</emphasis>.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="GNOME.users">
+        <title>Gnome-gebruikers<indexterm class="singular">
+            <primary>OmegaT aanpassen</primary> <secondary>GNOME</secondary>
+          </indexterm></title>
+
+        <para>U kunt <application>OmegaT</application> als volgt aan uw menu's toevoegen:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Klik met rechts op het paneel - <emphasis>Nieuwe starter</emphasis>.</para>
+          </listitem>
+
+          <listitem>
+            <para>Voer &quot;<application>OmegaT</application>&quot; in in het veld &quot;Naam&quot;; gebruik, in het veld &quot;Commando&quot;, de navigatieknop om uw startscript voor <application>OmegaT</application> te vinden (het bestand genaamd <application>OmegaT</application> in de uitgepakte map). Selecteer dat en bevestig met OK.</para>
+          </listitem>
+
+          <listitem>
+            <para>Klik op de pictogramknop, en druk dan op <emphasis>Bladeren...</emphasis> en navigeer naar de submap /images in de toepassingenmap <application>OmegaT</application>. Selecteer het pictogram <emphasis><application>OmegaT</application>.png</emphasis>. GNOME kan weigeren om de pictogrambestanden weer te geven in de beschikbare indelingen en in het begin een SVGbestand verwachten, maar als de map wordt geselecteerd, zouden de bestanden moeten verschijnen en kan <application>OmegaT</application>.png worden geselecteerd.</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+    </section>
+
+    <section id="running.OmegaT.Linux">
+      <title><application>OmegaT<indexterm class="singular">
+          <primary>OmegaT uitvoeren</primary> <secondary>Linux</secondary>
+        </indexterm></application> uitvoeren</title>
+
+      <para>U kunt OmegaT opstarten vanaf de opdrachtregel met een script dat de opties voor opstarten bevat of u kunt klikken op <emphasis><application>OmegaT</application>.jar</emphasis> om het direct op te starten. Methoden verschillen, afhankelijk van de distributie. Zorg ervoor dat de instellingen van uw <emphasis>PATH</emphasis> juist zijn en dat <emphasis>.jar</emphasis>-bestanden juist zijn gekoppeld aan een Java-starter. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
+    </section>
+  </section>
+
+  <section id="MAC.OSX.users">
+    <title>Mac OS X-gebruikers<indexterm class="singular">
+        <primary>OS X</primary> <secondary>Installeren van OmegaT</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>Installeren van OmegaT</primary> <secondary>OS X</secondary>
+      </indexterm></title>
+
+    <section id="which.package.to.download.OSX">
+      <title>Downloaden van het pakket</title>
+
+      <para><application>OmegaT</application> 2.5 vereist Java 1.5 om te kunnen worden uitgevoerd. Gebruik &quot;Software Update...&quot; uit het menu Apple om uw versie van Java bij te werken.</para>
+
+      <para>Download <emphasis>OmegaT_2.5.x_Mac.zip</emphasis>.</para>
+    </section>
+
+    <section id="OmegaT.installation.OSX">
+      <title><application>Installeren van OmegaT</application></title>
+
+      <para>Dubbelklik op <emphasis>OmegaT_2.5.x_Mac.zip</emphasis> om het uit te pakken. Dit zal een map maken die<emphasis> <application>OmegaT</application> </emphasis>heet. De map bevat 2 bestanden: index.html en <emphasis><application>OmegaT</application>.app.</emphasis> Kopieer de map naar een toepasselijke map (bijv. Toepassingen). Als u dit gedaan heeft kunt u het bestand <emphasis>OmegaT_2.5.x_Mac.zip</emphasis> verwijderen, het is niet langer nodig.</para>
+    </section>
+
+    <section id="adding.OmegaT.to.the.dock">
+      <title><application>OmegaT</application> toevoegen aan het dock<indexterm class="singular">
+          <primary>OS X</primary> <secondary>OmegaT toevoegen aan het dock</secondary> <seealso>OmegaT aanpassen</seealso>
+        </indexterm></title>
+
+      <para>Sleep en zet <emphasis><application>OmegaT</application>.app</emphasis> op het Dock neer.</para>
+    </section>
+
+    <section id="running.OmegaT.OSX">
+      <title><application>OmegaT<indexterm class="singular">
+          <primary>OS X</primary> <secondary>OmegaT uitvoeren</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>OmegaT uitvoeren</primary> <secondary>OS X</secondary>
+        </indexterm></application> uitvoeren</title>
+
+      <para>Dubbelklik op<emphasis> <application>OmegaT</application>.app</emphasis> of klik op zijn locatie in het dock</para>
+
+      <para>Klik met rechts op <emphasis><application>OmegaT</application>.app</emphasis> en selecteer &quot;Pakketinhoud weergeven&quot; om toegang te krijgen tot <application><emphasis>Info.plist</emphasis></application>, en open het bestand door er met rechts op te klikken en selecteer uw tekstverwerker van uw keuze. U kunt ook met &quot;cd&quot; daar rechtstreeks naartoe gaan vanaf de opdrachtregel en <application><emphasis>Info.plist</emphasis> openen in een verwerker voor de opdrachtregel zoals emacs of vi</application>.<emphasis> <indexterm class="singular">
+          <primary>OS X</primary> <secondary>OmegaT aanpassen</secondary> <tertiary>Startparameters</tertiary>
+        </indexterm><indexterm class="singular">
+          <primary>OS X</primary> <secondary>OmegaT aanpassen</secondary>
+        </indexterm></emphasis></para>
+
+      <para>U kunt het gedeelte <emphasis>Properties</emphasis> en ook het gedeelte <emphasis>VMOptions</emphasis> aanpassen.</para>
+
+      <para>Indien u waarden wilt toevoegen aan <emphasis>VMOptions</emphasis>, plaatst u er een spatie tussen. Bijvoorbeeld: <filename>-Xmx1024M -Duser.language=ja</filename> zal <application>OmegaT</application> opstarten met 1024MB aan geheugen en de gebruikersinterface in het Japans.</para>
+
+      <para>Als u meerdere instanties van <emphasis><application>OmegaT</application>.app</emphasis> moet uitvoeren, gebruik dan in plaats daarvan het bestand <emphasis>JavaApplicationStub</emphasis> dat zich bevind in <emphasis><application>OmegaT</application>.app/ Contents/MacOS/</emphasis>.</para>
+
+      <para><emphasis><application> </application></emphasis>Gebruik het bestand <emphasis><application>OmegaT</application>.jar</emphasis> dat zich bevindt in <emphasis><application>OmegaT</application>.app/Contents/Resources/Java/</emphasis> om <application>OmegaT</application> vanaf de opdrachtregel te starten. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
+    </section>
+
+    <section id="Mac.OSX.goodies">
+      <title>Mac OS X goede dingen</title>
+
+      <para><emphasis><application>OmegaT</application>.app</emphasis> kan worden bereikt vanuit Mac OS X Services. U kunt dus ergens in <application>OmegaT</application> een woord selecteren en de Services gebruiken om het te controleren, bijvoorbeeld in Spotlight of in Google. U kunt ook AppleScript of Automator gebruiken om Services of scripts te maken die acties die veel voorkomen te automatiseren.</para>
+    </section>
+  </section>
+
+  <section id="other.systems">
+    <title>Andere systemen<indexterm class="singular">
+        <primary>Installeren van OmegaT</primary> <secondary>Andere systemen</secondary>
+      </indexterm></title>
+
+    <para>Deze informatie is van toepassing op systemen zoals Solaris SPARC/x86/x64, Linux x64/PowerPC, Windows x64</para>
+
+    <section>
+      <title id="which.package.to.download.other">Downloaden van het juiste pakket</title>
+
+      <para><application>OmegaT</application> is beschikbaar, gebundeld met een Oracle Java JRE voor Linux (Intel x86)- en Windows-platformen. Gebruikers van andere platformen (Linux PowerPC, Linux x64, Solaris SPARC/x86/x64, Windows x64 etc) moeten een werkende compatibele Java JRE op hun systeem hebben om <application>OmegaT</application> te kunnen gebruiken.</para>
+
+      <para>Heeft u een Java-implementatie die compatibel is met Oracle's Java 1.5 JRE?</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Ja: </emphasis>download <emphasis>OmegaT_2.5.x_Windows_without_JRE.zip</emphasis>. Dit pakket kan worden gebruikt op elk platform waar een Java 1.5 JRE compatibele JRE is geïnstalleerd.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Ik weet het niet:</emphasis> open een terminal en type &quot;java -version&quot;. Als een &quot;command not found&quot; of soortgelijk bericht wordt teruggegeven, is het waarschijnlijk dat Java niet is geïnstalleerd op uw systeem.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Nee:</emphasis> Zorg voor een Java JRE voor uw systeem (zie hieronder) en download <emphasis>OmegaT_2.5.x_Without_JRE.zip</emphasis>.</para>
+
+          <para>Oracle levert JRE's voor Solaris SPARC/x86 (Java 1.5) en voor Linux x64, Solaris x64, Windows x64 (Java 1.5) op <ulink url="http://www.oracle.com/technetwork/java/archive-139210.html">http://www.oracle.com/technetwork/java/archive-139210.html</ulink>.</para>
+
+          <para>IBM levert JRE's voor Linux PowerPC op <ulink url="http://www.ibm.com/developerworks/java/jdk/linux/download.html">http://www.ibm.com/developerworks/java/jdk/linux/download.htm</ulink></para>
+
+          <para>Volg de installatie-instructies voor het pakket dat u nodig hebt.</para>
+        </listitem>
+      </itemizedlist>
+    </section>
+
+    <section id="OmegaT.installation.other">
+      <title><application>Installeren van OmegaT</application><indexterm class="singular">
+          <primary>Installeren van OmegaT</primary> <secondary>Andere systemen</secondary>
+        </indexterm></title>
+
+      <para>Pak eenvoudigweg het bestand <emphasis role="bold">OmegaT_2.5.x_Without_JRE.zip</emphasis> uit om <application>OmegaT</application> te installeren. Dit maakt een map <emphasis>./OmegaT_2.5.x_Without_JRE/</emphasis> in de werkmap waarin u alle benodigde bestanden zult vinden om <application>OmegaT</application> uit te voeren.</para>
+    </section>
+
+    <section id="installing.convenient.shortcuts">
+      <title>Installeren van handige sneltoetsen</title>
+
+      <para>Volg de instructies voor uw systeem om sneltoetsen voor <application>OmegaT</application> op handige plaatsen te installeren.</para>
+    </section>
+
+    <section id="running.OmegaT.other">
+      <title><application>OmegaT<indexterm class="singular">
+          <primary>OmegaT uitvoeren</primary> <secondary>Andere systemen</secondary>
+        </indexterm></application> uitvoeren</title>
+
+      <para>Als <application>OmegaT</application> eenmaal is geïnstalleerd, kunt u het direct vanaf de opdrachtregel starten, u kunt een script maken dat de startparameters voor de opdrachtregel bevat of u kunt op <emphasis><application>OmegaT</application>.jar</emphasis> klikken om het direct uit te voeren. Methoden verschillen, afhankelijk van de distributie. Zorg ervoor dat de instellingen van uw <emphasis>PATH</emphasis> juist zijn en dat <emphasis>.jar</emphasis>-bestanden juist zijn gekoppeld aan een Java-starter. Bekijk &quot;Starten vanaf de opdrachtregel&quot; hieronder voor meer informatie.</para>
+    </section>
+  </section>
+
+  <section id="using.Java.Web.Start">
+    <title>Java Web Start gebruiken<indexterm class="singular">
+        <primary>OmegaT uitvoeren</primary> <secondary>Java Web Start gebruiken</secondary>
+      </indexterm></title>
+
+    <para>Java Web Start-technologie (onderdeel van Java 1.5 en hoger) kan worden gebruikt om met één enkele klik zelfstandige Java softwaretoepassingen uit te voeren over het netwerk. Java Web Start zorgt er voor dat de meest recente versie van de toepassing zal worden uitgevoerd, evenals de juiste versie van de Java Runtime Environment (JRE). Laad de volgende URL in uw browser om OmegaT voor de eerste keer te starten met Java Web Start:</para>
+
+    <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
+
+    <para>Download het bestand<emphasis> <application>OmegaT</application>.jnlp</emphasis> en klik er dan op. Gedurende de installatie, afhankelijk van uw besturingssysteem, zou u verschillende beveiligingswaarschuwingen kunnen ontvangen. De rechten die u aan deze versie geeft (welke kunnen lijken op &quot;onbeperkte toegang tot de computer&quot;) zijn identiek aan de rechten die u geeft voor de locale versie, d.i. zij geven toegang tot de harde schijf van de computer. Opvolgende klikken op <emphasis><application>OmegaT</application>.jnlp</emphasis> zal leiden tot het controleren op upgrades, ze installeren als ze er zijn, en dan <application>OmegaT</application> starten. Na de initiële installatie kunt u natuurlijk <emphasis><application>OmegaT</application>.jnlp</emphasis> ook gebruiken als u offline bent.</para>
+
+    <para><emphasis role="bold">Privacy</emphasis>: <application>OmegaT</application> Java Web Start slaat geen informatie van u op buiten de computer waarop het wordt uitgevoerd. De toepassing wordt slechts uitgevoerd op uw machine. Uw documenten en vertaalgeheugens blijven op uw computer, en het <application>OmegaT</application>project zal geen toegang hebben tot uw werk of informatie.</para>
+
+    <para>Merk op dat als u argumenten voor het opstarten wilt gebruiken (zie boven), u de normale installatie moet gebruiken.</para>
+  </section>
+
+  <section>
+    <title>OmegaT starten vanaf de opdrachtregel<indexterm class="singular">
+        <primary>OmegaT uitvoeren</primary> <secondary>Starten vanaf de opdrachtregel</secondary>
+      </indexterm></title>
+
+    <para>Normaal gesproken is het niet nodig om <application>OmegaT</application> te starten vanaf de opdrachtregel. Het alternatief van de opdrachtregel stelt echter de gebruiker in staat om het gedrag van het programma te beheren en aan te passen. Er zijn twee manieren om <application>OmegaT</application> te starten met behulp van de opdrachtregel.</para>
+
+    <section id="method1.opening.commandline.window">
+      <title>Openen van een venster voor de opdrachtregel</title>
+
+      <para>Een venster voor de opdrachtregel wordt ook wel een &quot;terminalvenster&quot; genoemd. Op Windows wordt het een &quot;MS-DOSvenster&quot; genoemd en is het beschikbaar via het menu Start, in Alle programma's → Bureau-accessoires, via het item &quot;Opdrachtprompt&quot;. Het equivalent voor Mac OS X is de toepassing Terminal die zich bevind in Programma's → Hulpprogramma's.</para>
+
+      <para>U moet normaal gesproken twee opdrachten typen om <application>OmegaT</application> te starten. De eerste hiervan is:</para>
+
+      <para><emphasis> <literal>cd {map}</literal> </emphasis></para>
+
+      <para>waar <emphasis>{map}</emphasis> de naam is van de map, met het complete pad, waarin uw <application>OmegaT</application>-programma - specifiek het bestand <emphasis><application>OmegaT</application>.jar</emphasis> - is geplaatst. In de praktijk zal deze opdracht er ongeveer zo uitzien:</para>
+
+      <para>Op Windows</para>
+
+      <para><emphasis> <literal>cd C:\Program
+      Files\<application>OmegaT</application></literal> </emphasis></para>
+
+      <para>Op Mac OS X</para>
+
+      <para><literal> <literal>cd &lt;locatie <application>OmegaT</application>.app&gt;/<application>OmegaT</application>.app/Contents/Resources/Java/</literal>
+      </literal></para>
+
+      <para>Op Linux</para>
+
+      <para><literal>cd /usr/local/omegat</literal></para>
+
+      <para>Deze opdracht wijzigt de map naar de map die het uitvoerbare <application>OmegaT</application>-bestand bevat. De tweede opdracht is de opdracht die <application>OmegaT</application> echt start. In zijn meest basale vorm is deze opdracht:</para>
+
+      <para><literal>java -jar
+      <application>OmegaT</application>.jar</literal></para>
+
+      <para>Let op de hoofdletters - het programma zal niet starten als u invoert <emphasis>omegat</emphasis> in plaats van <emphasis>OmegaT </emphasis>!</para>
+
+      <para>Deze methode heeft het bijzondere voordeel dat het geschikt is om oorzaken voor problemen op te sporen: als een fout optreedt gedurende het gebruiken van het programma wordt een foutbericht weergegeven in het terminalvenster dat bruikbare informatie kan bevatten over de oorzaak.</para>
+
+      <para>De bovenstaande methode is een niet zo praktische manier om een programma routinematig te starten. Om deze reden zijn de twee hierboven beschreven opdrachten opgenomen in een bestand (een &quot;script&quot;, ook wel een &quot;.bat-bestand&quot; genoemd op Windows-systemen).</para>
+
+      <para>Als dit bestand wordt uitgevoerd worden de daarin opgenomen opdrachten automatisch uitgevoerd. Derhalve is het voldoende om dit bestand aan te passen om wijzigingen aan te brengen in de startopdracht.</para>
+    </section>
+
+    <section id="launch.command.arguments">
+      <title>Argumenten voor de startopdracht<indexterm class="singular">
+          <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary>
+        </indexterm></title>
+
+      <para>De basisopdracht is hierboven al genoemd. Wijzigingen voor deze opdracht behelzen het daaraan toevoegen van &quot;argumenten&quot;. Argumenten worden toegevoegd ná het initiële <emphasis>&quot;java&quot;</emphasis> en vóór het gedeelte <emphasis>&quot;-jar <application>OmegaT</application>.jar&quot;</emphasis>. Onthoud dat u in Windows het bestand <emphasis><application>OmegaT</application>.l4J.ini</emphasis> kunt wijzigen om uw voorkeuren weer te geven. Op Mac OSX kunt u <emphasis>Info.plist</emphasis> wijzigen, dat zich bevindt in <emphasis><application>OmegaT</application>.app/Contents/</emphasis>, om hetzelfde te doen.</para>
+
+      <para>Een lijst van mogelijke argumenten wordt hieronder weergegeven. Gevorderde gebruikers kunnen meer informatie over de argumenten vinden door <emphasis>man java</emphasis> in het terminalvenster te typen.</para>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Taal van de gebruikersinterface</emphasis></para>
+
+          <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>User.language</tertiary>
+            </indexterm> Normaal gesproken, d.i. als <application>OmegaT</application> wordt gestart zonder enig argument, detecteert het programma eerst de taal van het besturingssysteem van de gebruiker. Als een gebruikersinterface in deze taal beschikbaar is gebruikt <application>OmegaT</application> die. Dus, als het besturingssysteem van de gebruiker Russisch is en <application>OmegaT</application> is vertaald in het Russisch, wordt <application>OmegaT</application> weergegeven met een Russische gebruikersinterface, Russische menu's, etc. Als de taal van het besturingssysteem van de gebruiker niet beschikbaar is gebruikt <application>OmegaT</application> standaard Engels. Dit is het standaard gedrag.</para>
+
+          <para>Het argument <emphasis>&quot;-Duser.language=XX&quot;</emphasis> zorgt ervoor dat <application>OmegaT</application> de gespecificeerde taal gebruikt, in plaats van de taal van het besturingssysteem van de gebruiker. &quot;XX&quot; in de opdracht staat voor de code van twee letters van de gewenste taal. De opdracht, om <application>OmegaT</application> te starten met een Franse interface (bijvoorbeeld op een Russisch besturingssysteem), zou daarom zijn:</para>
+
+          <para><literal>java -Duser.language=fr -jar
+          <application>OmegaT</application>.jar</literal></para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Instellen land gebruiker</emphasis></para>
+
+          <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm class="singular">
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>User.country</tertiary>
+            </indexterm> Naast de taal kunt u ook het land specificeren, bijvoorbeeld CN of TW in geval van de Chinese taal. U moet zowel de taal als het land specificeren om de gids Snel starten in de gewenste taal weer te geven. Dit is zelfs nodig als er slechts één combinatie beschikbaar is, zoals pt_BR in geval van Portugees / Braziliaans.</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Antialiasing lettertype</emphasis> - (alleen Java 1.5)</para>
+
+          <para><emphasis role="bold">-Dswing.aatext=true<indexterm class="singular">
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Antialiasing lettertype</tertiary>
+            </indexterm></emphasis> Dit argument beïnvloedt de anti-aliasing van de lettertypen, waarbij hun weergave wordt verbeterd.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Toewijzen van geheugen</emphasis></para>
+
+          <para><emphasis role="bold">-XmxZZM </emphasis><indexterm class="singular">
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Toewijzen van geheugen</tertiary>
+            </indexterm>Deze opdracht wijst meer geheugen toe aan <application>OmegaT</application>. Standaard wordt 256 Mb toegewezen, dus er is geen voordeel te behalen door minder dan dit getal toe te wijzen. &quot;ZZ&quot; staat voor de toegewezen geheugenruimte in megabytes. De opdracht om <application>OmegaT</application> te starten met toewijzing van 1024 Mb (1 gigabyte) aan geheugen luidt dan ook:</para>
+
+          <para><literal>java -Xmx1024M -jar
+          <application>OmegaT</application>.jar</literal></para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Proxy host IP-adres</emphasis></para>
+
+          <para><emphasis role="bold"><emphasis role="bold">-Dhttp.proxyHost=nnn.nnn.nnn.nnn</emphasis> <indexterm class="singular">
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Proxyserver IP-adres</tertiary>
+            </indexterm></emphasis> Het IP-adres van uw proxyserver, als uw systeem een proxy gebruikt</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Proxyserver poortnummer</emphasis></para>
+
+          <para><emphasis role="bold">Dhttp.proxyPort=NNNN</emphasis> <indexterm class="singular">
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Proxyserver - Poortnummer</tertiary>
+            </indexterm>Het poortnummer dat uw systeem gebruikt om toegang te krijgen tot de proxyserver.</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Argumenten mogen worden gecombineerd: Voor het starten van <application>OmegaT</application> met alle hierboven genoemde voorbeelden zou de opdracht zijn:</para>
+
+      <para><literal>java -Dswing.aatext=true -Duser.language=pt
+      -Duser.country=BR -Xmx1024M <application>-DDhttp.proxyHost=192.168.1.1
+      -Dhttp.proxyport<emphasis role="bold">=</emphasis>3128 -jar
+      -OmegaT</application>.jar</literal></para>
+    </section>
+
+    <section id="omegat.command.arguments">
+      <title>OmegaT in de modus Opdrachtregel<indexterm class="singular">
+          <primary>OmegaT uitvoeren</primary> <secondary>modus Opdrachtregel</secondary>
+        </indexterm></title>
+
+      <para>Het doel van de console-modus is om OmegaT als vertaalgereedschap te gebruiken in een script-omgeving. Indien wordt begonnen in de console-modus, wordt geen GUI geladen (dus het zal werken op elke console) en het opgegeven project wordt automatisch verwerkt zoals verzocht.</para>
+
+      <section id="console.mode.prerequisites">
+        <title>Vooraf vereist</title>
+
+        <para>Een geldig <application>OmegaT</application>-project moet aanwezig zijn om <application>OmegaT</application> uit te kunnen voeren in de modus Opdrachtregel. De locatie maakt niet uit omdat het bij de start toch al moet worden ingevuld in de opdrachtregel.</para>
+
+        <para>Indien u gewijzigde instellingen nodig hebt, moeten de configuratiebestanden beschikbaar zijn. Dat kan op twee manieren worden bereikt:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>Voer <application>OmegaT</application> normaal uit (met de GUI) en maak de instellingen. Indien u <application>OmegaT</application> in console-modus start, zal het dezelfde instellingen gebruiken.</para>
+          </listitem>
+
+          <listitem>
+            <para>Indien u <application>OmegaT</application> niet normaal kunt uitvoeren (geen grafische omgeving beschikbaar): kopieer de instellingen vanaf een andere installatie van <application>OmegaT</application> op een andere machine naar een bepaalde map. De locatie maakt niet uit, omdat u die toch in kunt vullen in de opdrachtregel bij het starten. De relevante bestanden zijn <literal>filters.conf</literal> en <literal>segmentation.conf</literal> en kunnen worden gevonden in de startmap van de gebruiker (bijv. <literal>C:\Documents and Settings\%User%\<application>OmegaT</application></literal> onder Windows, <literal>%user%/.omegat/</literal> onder Linux).</para>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="starting.in.console.mode">
+        <title>Beginnen in console-modus</title>
+
+        <para>Enkele extra parameters moeten bij het starten worden opgegeven om <application>OmegaT</application> in console-modus te starten. De meest belangrijke is <literal>&lt;project-dir&gt;</literal>, en optioneel<literal> --config-dir=&lt;config-dir&gt;. </literal>Voorbeeld:</para>
+
+        <para><literal>java -jar <application>OmegaT</application>.jar /pad/naar/project \</literal></para>
+
+        <para><literal>--config-dir=/pad/naar/config-bestanden/ \</literal></para>
+
+        <para><literal>
+        --mode=console-translate|console-createpseudotranslatetmx|console-align</literal></para>
+
+        <para><literal>--source-pattern={reguliere uitdrukking}</literal></para>
+
+        <para>Merk op dat alle parameters beginnen met een dubbel &quot;-&quot;-teken.</para>
+
+        <para><emphasis role="bold">Uitleg:</emphasis></para>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>&lt;project-dir&gt;</literal> vertelt <application>OmegaT</application> waar het project kan worden gevonden dat moet worden vertaald. Indien opgegeven start <application>OmegaT</application> in de console-modus en zal het opgegeven project gaan vertalen.</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><literal>--config-dir=&lt;config-dir&gt;</literal> vertelt <application>OmegaT</application> in welke map de configuratiebestanden zijn opgeslagen. Indien niet opgegeven gaat <application>OmegaT</application> terug naar de standaard waarden (<application>OmegaT</application>-dir onder beginmap van de gebruiker, of indien niet beschikbaar: de huidige werkmap). Onthoud het dubbele &quot;-&quot;-teken</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis><literal>--mode</literal>=...-</emphasis> <application>OmegaT</application> begint in de console-modus om één van de volgende services automatisch uit te voeren</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><emphasis><literal>--mode=console-translate</literal></emphasis></emphasis></para>
+
+                <para>In deze modus zal OmegaT proberen om de bestanden in /source/ te vertalen met de beschikbare vertaalgeheugens. Dit is handig om OmegaT uit te voeren op een server waarmee TMX-bestanden automatisch worden toegevoegd aan het project.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-createpseudotranslatetmx</literal></para>
+
+                <para>In deze modus zal OmegaT een TMX voor het gehele project maken, alleen gebaseerd op de bronbestanden. U specificeert dat het TMX/bestand moet worden gemaakt met</para>
+
+                <para><literal>--pseudotranslatetmx=allsegments.tmx
+                --pseudotranslatetype=[equal|empty]</literal></para>
+
+                <para>Het argument <emphasis>pseudotranslatetype</emphasis> specificeert, of de doelsegmenten gelijk moeten zijn aan de bron of leeg moeten worden gelaten.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>--mode=console-align</literal></para>
+
+                <para>In deze modus zal OmegaT het bestand met de Java-eigenschappen die zijn gevonden in de map<literal> /source/ </literal> van het project vergelijken met de inhoud op de opgegeven locatie. De resulterende TMX wordt opgeslagen in de map <filename>/omegat/</filename> onder de naam <filename>align.tmx</filename>.</para>
+
+                <para>Een aanvullende parameter, die de locatie van de doelgegevens specificeert, is in dit geval vereist:</para>
+
+                <para><literal>--alignDir={locatie van vertaalde bestanden}</literal></para>
+
+                <para><filename>alignDir</filename> moet een vertaling bevatten in de doeltaal van het project. Als, bijvoorbeeld, het project EN-&gt;FR is, moet alignDir een bundle bevatten die eindigt op _fr. De resulterende TMX wordt opgeslagen in de map <literal>omegat</literal> onder de naam <filename>align.tmx</filename>.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--source-pattern={reguliere uitdrukking}</literal></para>
+
+            <para>Als deze modus werd gebruikt, zal deze optie de bestanden specificeren die automatisch moeten worden verwerkt. Als de parameter niet is gespecificeerd, zullen alle bestanden worden verwerkt. Hier zijn een paar typische voorbeelden om uw keuze te beperken:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>Alle HTML-bestanden zullen worden vertaald - merk op dat de punt in het gebruikelijke *.html moet worden vooraf gegaan door een backslash (\.) zoals gespecificeerd door de regels voor reguliere uitdrukkingen</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Alleen het bestand test.html aan het begin van de map source zal worden vertaald. Indien er andere bestanden, genaamd test.html, in andere mappen staan, worden die genegeerd.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Alleen het bestand test.html in de map dir-10 zal worden verwerkt. Merk opnieuw op dat ook de backslash moet worden voorafgegaan door een backslash.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
+        </itemizedlist>
+      </section>
+
+      <section id="console.mode.extra.options">
+        <title>optie Quiet</title>
+
+        <para>Er is één extra parameter voor de opdrachtregel, specifiek voor de console-modus: <literal>--quiet. </literal>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
+
+        <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --quiet</literal></para>
+      </section>
+    </section>
+  </section>
+
+  <section id="building.OmegaT.from.source">
+    <title><application>OmegaT</application> bouwen vanuit de bron<indexterm class="singular">
+        <primary>OmegaT uitvoeren</primary> <secondary>OmegaT bouwen vanuit de bron</secondary>
+      </indexterm></title>
+
+    <para>Onthoud dat u ook het programma ant (<emphasis>http://ant.apache.org/bindownload.cgi</emphasis>) nodig hebt om uw eigen versie van OmegaT te bouwen. Pak het bestand <emphasis>OmegaT_2.5.x_Source.zip</emphasis> uit en geef de map OmegaT_2.5.x_Source op of voer de map <emphasis>./omegat/</emphasis> in voor de checkout-code van SVN. Controleer of een bestand build.xml in die map aanwezig is. Typ dan op de opdrachtregel:</para>
+
+    <para><literal>$ ant jar release</literal></para>
+
+    <para>Dit zal een volledige distributie van <application>OmegaT</application> maken in de map ./dist/, waarin u alle benodigde bestanden zult vinden om <application>OmegaT</application> uit te voeren.</para>
+  </section>
+</chapter>

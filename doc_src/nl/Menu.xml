@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menu">
+  <title>Sneltoetsen voor menu en het toetsenbord</title>
+
+  <section id="ch04.main.menu">
+    <title><indexterm class="singular">
+        <primary>Hoofdmenu</primary>
+      </indexterm>Hoofdmenu</title>
+
+    <indexterm class="singular">
+      <primary>Sneltoetsen</primary> <secondary>Hoofdmenu</secondary>
+    </indexterm>
+
+    <para>Alle functionaliteiten van OmegaT zijn beschikbaar via de menubalk boven het venster Bewerken. De meeste functies zijn ook beschikbaar via sneltoetsen voor het toetsenbord. Sneltoetsen worden geactiveerd door te drukken op <keycap>Ctrl</keycap> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters. <keycap>Ctrl</keycap> wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap>- of <keycap>Control</keycap>-toets. Mac-gebruikers moeten in plaats daarvan de <keycombo> <keycap>cmd</keycap><keycap>-toets</keycap> </keycombo> gebruiken. De &quot;Cmd&quot;-toets heeft ofwel een label &quot;command&quot; of een Apple-merkteken op toetsenborden van Apple.</para>
+
+    <table colsep="1" id="table.main.menu">
+      <title>Hoofdmenu</title>
+
+      <tgroup cols="7" colsep="1">
+        <tbody>
+          <row>
+            <entry><guimenuitem>Project</guimenuitem></entry>
+
+            <entry><guimenuitem>Bewerken</guimenuitem></entry>
+
+            <entry><guimenuitem>Ga naar</guimenuitem></entry>
+
+            <entry><guimenuitem>Weergave</guimenuitem></entry>
+
+            <entry><guimenuitem>Extra</guimenuitem></entry>
+
+            <entry><guimenuitem>Opties</guimenuitem></entry>
+
+            <entry><guimenuitem>Help</guimenuitem></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.Project">
+    <title>Project<indexterm class="singular">
+        <primary>Hoofdmenu</primary> <secondary>Project</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>menu Project</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <colspec align="left" colnum="2" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Nieuw</guimenuitem></entry>
+
+            <entry/>
+
+            <entry>Maakt en opent een nieuw project. Het dialoogvenster om een project te maken is hetzelfde als voor het bewerken van het project. Zie<xref linkend="chapter.project.properties"/></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Openen</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>O</keycap>
+              </keycombo></entry>
+
+            <entry>Opent een eerder gemaakt project.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Bronbestanden importeren...</guimenuitem></entry>
+
+            <entry/>
+
+            <entry>Kopieert de geselecteerde bestanden naar de map <filename>/source</filename> en herlaadt het project om de nieuwe bestanden te laden.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Importeren vanuit MediaWiki...</guimenuitem></entry>
+
+            <entry/>
+
+            <entry>Importeert eenheden vanaf pagina's van MediaWiki, gebaseerd op de ingevoerde URL.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Herladen</guimenuitem></entry>
+
+            <entry><keycap>F5</keycap></entry>
+
+            <entry>Herlaadt het project om externe wijzigingen in bronbestanden, gebruikte vertaalgeheugens, woordenlijsten en instellingen voor het project te verwerken.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Sluiten</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Shift</keycap>
+
+                <keycap>W</keycap>
+              </keycombo></entry>
+
+            <entry>Slaat de vertaling op en sluit het project.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Opslaan</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>S</keycap>
+              </keycombo></entry>
+
+            <entry>Slaat het interne vertaalgeheugen op de harde schijf op. OmegaT slaat automatisch elke 10 minuten de vertaalgeheugens op en ook als u het project sluit of OmegaT afsluit.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Vertaalde documenten maken</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>D</keycap>
+              </keycombo></entry>
+
+            <entry>Maakt de doeldocumenten op basis van uw vertaling van de tekst in de documenten. De gemaakte doeldocumenten zijn geplaatst in de map <filename>/target</filename>.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Eigenschappen...</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>E</keycap>
+              </keycombo></entry>
+
+            <entry>Geeft het dialoogvenster <link linkend="chapter.project.properties">Projecteigenschappen</link> weer om de projecttalen en maplocaties te kunnen bewerken.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Projectbestanden...</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>L</keycap>
+              </keycombo></entry>
+
+            <entry>Sluit of opent het venster <link linkend="section.project.files">Projectbestanden</link> (afhankelijk van het feit of het geopend of gesloten is).</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Afsluiten</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Q</keycap>
+              </keycombo></entry>
+
+            <entry>Slaat het project op en sluit <application>OmegaT</application> af. Als u het project nog niet hebt opgeslagen wordt hier handmatig bevestiging gevraagd of u werkelijk af wilt sluiten.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section>
+    <title>Bewerken<indexterm class="singular">
+        <primary>Hoofdmenu</primary> <secondary>Bewerken</secondary>
+      </indexterm></title>
+
+    <para>Opmerking: Items die in de meeste toepassingen aanwezig zijn (kopiëren/knippen/plakken) worden in dit menu niet weergegeven maar zijn beschikbaar met de sneltoetsen van uw systeem. Bijvoorbeeld:</para>
+
+    <table colsep="1">
+      <title>Sneltoetsen kopiëren/knippen/plakken</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <colspec align="left" colnum="2" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Kopiëren</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>C</keycap>
+              </keycombo></entry>
+
+            <entry>Kopieert de geselecteerde tekst naar het klembord.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Knippen</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>X</keycap>
+              </keycombo></entry>
+
+            <entry>Kopieert de geselecteerde tekst naar het klembord en verwijdert de geselecteerde tekst.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Plakken</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>V</keycap>
+              </keycombo></entry>
+
+            <entry>Plakt de tekst van het klembord op de cursorpositie.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>Het menu Bewerken zelf bevat de volgende sneltoetsen:</para>
+
+    <table colsep="1">
+      <title>menu Bewerken</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <colspec align="left" colnum="2" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Laatste actie ongedaan maken</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Z</keycap>
+              </keycombo></entry>
+
+            <entry>Herstelt de status naar vóórdat de laatste actie werd uitgevoerd. Deze opdracht werkt niet als het gewijzigde segment al is gevalideerd.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Laatste actie opnieuw</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Y</keycap>
+              </keycombo></entry>
+
+            <entry>Herstelt de status naar vóórdat de laatste actie werd geannuleerd. Deze opdracht werkt niet als het gewijzigde segment al is gevalideerd.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Vervangen door overeenkomst</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>R</keycap>
+              </keycombo></entry>
+
+            <entry>Vervangt het gehele doelsegment door de huidige geselecteerde overeenkomst (de eerste overeenkomst is standaard geselecteerd)</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Overeenkomst invoegen</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>I</keycap>
+              </keycombo></entry>
+
+            <entry>Voegt de huidige geselecteerde overeenkomst in op de cursorpositie. Indien een gedeelte van het doelsegment is geselecteerd, overschrijft deze functie het geselecteerde gedeelte.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Vervangen door machinevertaling</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>M</keycap>
+              </keycombo></entry>
+
+            <entry>Vervangt het doelsegment door de vertaling die wordt verschaft door de service van de machinevertaling. Geen actie wordt ondernomen indien er geen service voor machinevertaling is geactiveerd (zie Menu &gt; Opties hieronder).</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Vervangen door bron</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Shift</keycap>
+
+                <keycap>Ctrl</keycap>
+
+                <keycap>R</keycap>
+              </keycombo></entry>
+
+            <entry>Vervangt het huidige doelsegment door de brontekst.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Bron invoegen</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Shift</keycap>
+
+                <keycap>Ctrl</keycap>
+
+                <keycap>I</keycap>
+              </keycombo></entry>
+
+            <entry>Voegt de brontekst in op de cursorpositie.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Brontags invoegen</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Shift</keycap>
+
+                <keycap>Ctrl</keycap>
+
+                <keycap>T</keycap>
+              </keycombo></entry>
+
+            <entry><indexterm class="singular">
+                <primary>Tags</primary> <secondary>Brontags invoegen</secondary>
+              </indexterm>Voegt de brontags in op de cursorpositie. Alle tags in de brontekst zullen worden ingevoegd in het huidige segment, ongeacht of ze daar al staan of niet. Tekst, omsloten door tags, wordt vervangen door spaties: <literal>&lt;f0&gt;&lt;f1&gt;Dit is tekst&lt;/f0&gt;&lt;/f1&gt;</literal> dus zal worden gekopieerd als <literal>&lt;f0&gt;&lt;f1&gt;één_spatie&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Selectie exporteren</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Shift</keycap>
+
+                <keycap>Ctrl</keycap>
+
+                <keycap>C</keycap>
+              </keycombo></entry>
+
+            <entry>Exporteert de huidige selectie naar een tekstbestand voor verwerking. Indien geen tekst is geselecteerd, wordt het huidige bronsegment naar dit bestand geschreven. Wanneer de gebruiker <application>OmegaT</application> afsluit, wordt dit bestand niet geleegd, om consistent te zijn aan het gebruikelijke gedrag van het klembord. De geëxporteerde inhoud wordt gekopieerd naar het bestand <filename>selection.txt</filename> dat is geplaatst in de voorkeursmap van de gebruiker (zie <xref linkend="chapter.files.and.directories"/>).</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Zoeken in project...</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>F</keycap>
+              </keycombo></entry>
+
+            <entry>Opent een nieuw <link linkend="section.search.window">venster Zoeken</link>.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Schakel Hoofd-/kleine letters naar...</guimenuitem></entry>
+
+            <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo> (zie tekst)</entry>
+
+            <entry>Wijzigt hoofd-/kleine letters van de geaccentueerde tekst in het doelsegment naar de geselecteerde optie (Kleine letters, Hoofdletters of Alle woorden hoofdletters). Gebruik Shift+F3 <indexterm>
+                <primary>Sneltoetsen</primary> <secondary>Shift+F3 - Selectie Hoofd-/kleine letters</secondary>
+              </indexterm>om tussen de drie keuzes te schakelen. Indien geen tekst is geselecteerd, selecteert <application>OmegaT</application> het woord dat de letter bevat direct rechts naast de cursor.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Overeenkomst #N selecteren</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>#N</keycap>
+              </keycombo></entry>
+
+            <entry>(#N is een getal van 1 tot en met 5) - Selecteert de Ne overeenkomst die is weergegeven in het venster Overeenkomsten om het segment te vervangen of het daar in te voegen. De <xref linkend="match.viewer"/> beschrijft de codering van de kleuren in detail.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.GoTo">
+    <title>Ga naar<indexterm class="singular">
+        <primary>Hoofdmenu</primary> <secondary>Ga naar</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>menu Ga naar</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <colspec align="left" colnum="2" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Volgende niet-vertaalde segment</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>U</keycap>
+              </keycombo></entry>
+
+            <entry>Verplaatst naar het volgende segment dat geen equivalent heeft in het vertaalgeheugen.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Volgende segment</guimenuitem></entry>
+
+            <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> of <keycap>Enter</keycap> of <keycap>Tab</keycap></entry>
+
+            <entry>Verplaatst naar het volgende segment. Als het huidige segment het laatste in een bestand is, verplaatst het naar het eerste segment van het volgende bestand.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Vorige segment</guimenuitem></entry>
+
+            <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> of <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> of <keycombo> <keycap>Ctrl</keycap> <keycap>Tab</keycap> </keycombo></entry>
+
+            <entry>Verplaatst naar het vorige segment. Als het huidige segment het eerste in een bestand is, verplaatst het naar het laatste segment van het vorige bestand.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Segmentnummer...</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>J</keycap>
+              </keycombo></entry>
+
+            <entry>Het segment wordt geopend  als zijn segmentnummer wordt ingevoerd.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Terug in geschiedenis...</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Shift</keycap>
+
+                <keycap>P</keycap>
+              </keycombo></entry>
+
+            <entry>Met deze opdracht kunt u één segment terug in de tijd gaan, om later terug te keren naar het huidige segment met behulp van de opdracht <guimenuitem>Verder in geschiedenis... </guimenuitem>hieronder.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Verder in geschiedenis...</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Shift</keycap>
+
+                <keycap>N</keycap>
+              </keycombo></entry>
+
+            <entry><application>OmegaT</application> onthoudt de verwerkte segmenten. Met deze opdracht kunt u vooruit naar het segment dat u eerder verliet met de opdracht <guimenuitem>Terug in geschiedenis</guimenuitem>...</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.View">
+    <title>Weergave<indexterm class="singular">
+        <primary>Hoofdmenu</primary> <secondary>Weergave</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>menu Weergave</title>
+
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Vertaalde segmenten markeren</guimenuitem></entry>
+
+            <entry>Indien aangevinkt, zullen de vertaalde segmenten in geel worden geaccentueerd.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Niet-vertaalde segmenten markeren</guimenuitem></entry>
+
+            <entry>Indien aangevinkt, zullen de niet-vertaalde segmenten in paars worden geaccentueerd.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Bronsegmenten weergeven</guimenuitem></entry>
+
+            <entry>Indien aangevinkt, zullen de bronsegmenten in groen worden geaccentueerd. Indien niet aangevinkt, zullen de bronsegmenten niet worden weergegeven.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Info over wijzigingen</guimenuitem></entry>
+
+            <entry>Instellen van de optie Info over wijzigingen op <emphasis>Selectie weergeven</emphasis> zal datum en tijd en de auteur weergeven van de laatste wijziging aan het huidige segment. Het instellen op <emphasis> Alles weergeven </emphasis>geeft deze informatie weer voor alle segmenten en <emphasis>Niets weergeven</emphasis> schakelt deze optie uit.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.Tools">
+    <title>Extra<indexterm class="singular">
+        <primary>Hoofdmenu</primary> <secondary>Extra</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>menu Extra</title>
+
+      <indexterm class="singular">
+        <primary>Overeenkomsten</primary> <secondary>Statistieken voor overeenkomsten</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Project</primary> <secondary>Statistieken voor overeenkomsten</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>Project</primary> <secondary>Statistieken</secondary>
+      </indexterm>
+
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Tags valideren</guimenuitem></entry>
+
+            <entry><guimenu>Ctrl+T</guimenu>: Controleert op ontbrekende of misplaatste tags in opgemaakte bestanden. Zal een lijst weergeven waarin de segmenten met tagfouten en mogelijke onvolkomenheden staan. Zie <link linkend="section.tag.validation">Tagvalidatie</link> en <xref linkend="chapter.formatted.text"/>.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Statistieken</guimenuitem></entry>
+
+            <entry>Opent een nieuw venster en geeft de statistieken voor het project weer, d.i. de totalen voor het project en de totalen voor elk bestand in het project.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Statistieken voor overeenkomsten</guimenuitem></entry>
+
+            <entry>Geeft de Statistieken voor overeenkomsten weer voor het project: het aantal herhalingen, exacte overeenkomsten, overeenkomsten en geen overeenkomsten, voor segmenten, woorden en in tekens.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.Options">
+    <title><indexterm class="singular">
+        <primary>Hoofdmenu</primary> <secondary>Opties</secondary>
+      </indexterm>Opties</title>
+
+    <table colsep="1">
+      <title>menu Opties</title>
+
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Tab gebruiken om door te gaan</guimenuitem></entry>
+
+            <entry>Stelt de toets voor het valideren van het segment in op <guimenuitem>Tab</guimenuitem> in plaats van de standaardtoets <guimenuitem>Enter</guimenuitem>. Deze optie is handig voor sommige invoersystemen voor Chinese, Japanse of Koreaanse tekens.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Afsluiten altijd bevestigen</guimenuitem></entry>
+
+            <entry>Het programma zal u altijd om bevestiging vragen om af te sluiten.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Machinevertaling</guimenuitem></entry>
+
+            <entry>Stelt u in staat om de aangeboden programma's voor machinevertaling te activeren/deactiveren. Indien actief, zal <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> de suggestie in het doelgedeelte van het huidige segment invoegen.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>TransTips</guimenuitem></entry>
+
+            <entry>Stelt u in staat de mogelijkheid <emphasis>TransTips </emphasis>te activeren/deactiveren en stelt de optie er van in op<emphasis> Exacte overeenkomst.</emphasis> Met de geactiveerde <emphasis>TransTips</emphasis> zal een klik met rechts op een geaccentueerd woord in de brion een pop-upmenu openen met de items van de woordenlijst voor het woord waarop u hebt geklikt. U kunt dan op de geprefereerde vertaling klikken om die in te voegen in het doelsegment op de huidige positie. Met <emphasis>TransTips/Exacte overeenkomst </emphasis> ingeschakeld, zullen alleen volledige woorden worden gecontroleerd, anders zullen ook gedeelten van woorden overeenkomen.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Lettertype...</guimenuitem></entry>
+
+            <entry>Toont het dialoogvenster om het lettertype voor de weergave van de tekst aan te passen. Gebruikers van oudere computers die het aanpassen van de venstergrootte heel traag vinden kunnen proberen om het lettertype te wijzigen. Zie <xref linkend="chapter.font"/>.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Bestandsfilters...</guimenuitem></entry>
+
+            <entry>Geeft het dialoogvenster <link linkend="chapter.file.filters">Bestandsfilters</link> weer om de bestandsafhandeling en het parsen te configureren.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Segmentatie...</guimenuitem></entry>
+
+            <entry>Opent het venster <link linkend="chapter.segmentation">Segmentatie-instellingen</link> om de segmentatie van de tekst te configureren.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Spellingscontrole...</guimenuitem></entry>
+
+            <entry>Geeft het venster <link linkend="chapter.spellchecker">Spellingscontrole instellen</link> weer om de spellingscontrole te installeren, te configureren en te activeren.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Bewerken (gedrag)...</guimenuitem></entry>
+
+            <entry>Geeft het dialoogvenster <link linkend="chapter.translation.editing">Vertaling bewerken</link> weer om te configureren.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Tags valideren...</guimenuitem></entry>
+
+            <entry>Voor programmeurs: Stelt u in staat om de opties voor Tags valideren te configureren en ook variabelen in het programma (%...)  te controleren.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Team...</guimenuitem></entry>
+
+            <entry>Voer hier uw naam in en die zal worden gekoppeld aan alle door u vertaalde segmenten.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Weergave...</guimenuitem></entry>
+
+            <entry>Bevat de optie om alle bronsegmenten in vet weer te geven en het eerste niet-unieke segment te markeren.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Inloggen Proxy...</guimenuitem></entry>
+
+            <entry>Voer u gebruikersnaam en uw wachtwoord in, als u een proxy gebruikt om toegang te krijgen tot uw projecten.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Hoofdvenster herstellen</guimenuitem></entry>
+
+            <entry>Herstelt de componenten van het hoofdvenster van OmegaT naar hun standaard status. Gebruik deze mogelijkheid in de gevallen dat u één of meer componenten heeft losgemaakt, verplaatst of verborgen en u ze niet terug kan krijgen op de manier die u wilt. Het kan ook worden gebruikt als vensters er niet uitzien zoals u verwachtte na een upgrade van OmegaT.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.Help">
+    <title>Help<indexterm class="singular">
+        <primary>Hoofdmenu</primary> <secondary>Help</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>menu Help</title>
+
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>Gebruikershandleiding...</guimenuitem></entry>
+
+            <entry><keycap>F1:</keycap> Opent de Help-browser met deze handleiding in een afzonderlijk venster.</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>Over...</guimenuitem></entry>
+
+            <entry>Geeft auteursrechten, dankwoorden en licentie-informatie weer.</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="keyboard.shortcuts">
+    <title>Toetsenbord sneltoetsen<indexterm class="singular">
+        <primary>Toetsenbord sneltoetsen</primary>
+      </indexterm></title>
+
+    <para>De volgende sneltoetsen zijn beschikbaar in het hoofdvenster. Als een ander venster op de voorgrond staat, klik dan op het hoofdvenster om het weer op de voorgrond te plaatsen of druk op <keycap>Esc</keycap> om dat venster te sluiten.</para>
+
+    <para>Sneltoetsen worden geactiveerd door te drukken op <keycap>Ctrl</keycap> en een letter. Sommige sneltoetsen gebruiken ook andere toetsen. Voor de leesbaarheid worden letters hier geschreven als hoofdletters.</para>
+
+    <para>Ctrl wordt gebruikt op Windows, UNIX en UNIX-achtige besturingssystemen die een toetsenbord hebben met de <keycap>Ctrl</keycap> / <keycap>Control</keycap>-toets. Mac-gebrukers zouden in plaats daarvan de <guimenuitem>cmd+toets</guimenuitem> moeten gebruiken. Op toetsenborden van Apple heeft de <guimenuitem>cmd</guimenuitem>-toets een label &quot;command&quot; of een Apple-merkteken er op.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Projectbeheer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Bewerken</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Verplaatsen</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Verwijzingsvensters</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Andere</para>
+      </listitem>
+    </itemizedlist>
+
+    <section>
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>Toetsenbord sneltoetsen</primary> <secondary>Project</secondary>
+        </indexterm>Projectbeheer<indexterm class="singular">
+          <primary>Project</primary> <secondary>Sneltoetsen voor projectbeheer</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Sneltoetsen voor projectbeheer</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Project openen</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>Geeft een dialoogvenster weer om een reeds bestaand project te zoeken.</entry>
+            </row>
+
+            <row>
+              <entry>Opslaan</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>Slaat het huidige werk op in het interne vertaalgeheugen (bestand project_save.tmx dat staat in de map <filename>omegat</filename> van het project).</entry>
+            </row>
+
+            <row>
+              <entry>Project sluiten</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>Sluit het huidige project.</entry>
+            </row>
+
+            <row>
+              <entry>Vertaalde documenten maken</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>Maakt de vertaalde documenten in de map Target van het project en maakt de bestanden voor het vertaalgeheugen (level1, level2 en omegat tmx-bestanden) in de hoofdmap van het project.</entry>
+            </row>
+
+            <row>
+              <entry>Projecteigenschappen</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>Geeft de instellingen voor het project weer om die aan te passen, indien gewenst.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.editing">
+      <title><indexterm class="singular">
+          <primary>Toetsenbord sneltoetsen</primary> <secondary>Bewerken</secondary>
+        </indexterm>Bewerken<indexterm class="singular">
+          <primary>Toetsenbord sneltoetsen</primary> <secondary>Ga naar</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>Sneltoetsen Bewerken</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Laatste actie ongedaan maken</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>Maakt de laatste actie in het huidige doelsegment ongedaan</entry>
+            </row>
+
+            <row>
+              <entry>Laatste actie opnieuw</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>Voert opnieuw de laatste bewerking uit die zojuist in het huidige doelsegment ongedaan werd gemaakt</entry>
+            </row>
+
+            <row>
+              <entry>Overeenkomst #N selecteren</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>#N</keycap>
+                </keycombo></entry>
+
+              <entry>#N is een getal van 1 tot en met 5. De sneltoets selecteert de Ne overeenkomst die wordt weergegeven in het venster Overeenkomsten (de eerste overeenkomst wordt standaard geselecteerd)</entry>
+            </row>
+
+            <row>
+              <entry>Vervangen door overeenkomst</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>Vervangt de inhoud van het huidige doelsegment door de geselecteerde overeenkomst (de eerste overeenkomst wordt standaard geselecteerd)</entry>
+            </row>
+
+            <row>
+              <entry>Overeenkomst invoegen</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>Voegt de geselecteerde overeenkomst in op de cursorpositie in het huidige doelsegment (de eerste overeenkomst wordt standaard geselecteerd)</entry>
+            </row>
+
+            <row>
+              <entry>Vervangen door bron</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+R</keycap>
+                </keycombo></entry>
+
+              <entry>Vervangt de inhoud van het huidige doelsegment door de inhoud van de brontekst</entry>
+            </row>
+
+            <row>
+              <entry>Bron invoegen</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+I</keycap>
+                </keycombo></entry>
+
+              <entry>Voegt de inhoud van de brontekst in op de cursorpositie in het huidige doelsegment</entry>
+            </row>
+
+            <row>
+              <entry>Brontags invoegen</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+T</keycap>
+                </keycombo></entry>
+
+              <entry>Voegt de brontags in op de cursorpositie in het huidige doelsegment.</entry>
+            </row>
+
+            <row>
+              <entry>Zoeken in project</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Geeft een dialoogvenster weer waarmee zoekacties kunnen worden uitgevoerd binnen het project</entry>
+            </row>
+
+            <row>
+              <entry>Vervangen door machinevertaling</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>Vervangt het doelsegment door de machinevertaling van de bron. Geen actie indien machinevertaling is gedeactiveerd (zie Menu &gt; Opties &gt; Machinevertaling).</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.moving.around">
+      <title><indexterm class="singular">
+          <primary>Toetsenbord sneltoetsen</primary> <secondary>Ga naar</secondary>
+        </indexterm>Verplaatsen</title>
+
+      <table colsep="1">
+        <title>Sneltoetsen Verplaatsen</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Volgende niet-vertaalde segment</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>Verplaatst het bewerkingsveld naar het volgende segment dat nog niet geregistreerd is in het vertaalgeheugen van het project</entry>
+            </row>
+
+            <row>
+              <entry>Volgende segment</entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>, <keycap>Enter</keycap> of <keycap>Return</keycap></entry>
+
+              <entry>Verplaatst het bewerkingsveld naar het volgende segment</entry>
+            </row>
+
+            <row>
+              <entry>Vorige segment</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>Verplaatst het bewerkingsveld naar het vorige segment</entry>
+            </row>
+
+            <row>
+              <entry>Segmentnummer...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>Verplaatst naar het ingevoerde segmentnummer</entry>
+            </row>
+
+            <row>
+              <entry>Terug in geschiedenis...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+P</keycap>
+                </keycombo></entry>
+
+              <entry>Verplaats één segment terug in de geschiedenis.</entry>
+            </row>
+
+            <row>
+              <entry>Verder in geschiedenis...</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+N</keycap>
+                </keycombo></entry>
+
+              <entry>Verplaatst één segment naar voren in de geschiedenis.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>Toetsenbord sneltoetsen</primary> <secondary>Andere</secondary>
+        </indexterm>Andere</title>
+
+      <table colsep="1">
+        <title>Diverse sneltoetsen</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>Lijst projectbestanden</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Geeft de lijst met projectbestanden weer</entry>
+            </row>
+
+            <row>
+              <entry>Tags valideren</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>Opent het venster Tags valideren.</entry>
+            </row>
+
+            <row>
+              <entry>Selectie exporteren</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl+C</keycap>
+                </keycombo></entry>
+
+              <entry>Exporteert de huidige selectie of de huidige bron, als er geen tekst is geselecteerd. De tekst wordt geëxporteerd naar een bestand met platte tekst.</entry>
+            </row>
+
+            <row>
+              <entry>Zoeken in project</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>Opent een nieuw venster Zoeken.</entry>
+            </row>
+
+            <row>
+              <entry>Helpbestanden</entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry>Geeft de <application>OmegaT</application> helpbestanden weer in een afzonderlijk venster</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</chapter>

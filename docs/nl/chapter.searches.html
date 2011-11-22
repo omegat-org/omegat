@@ -1,0 +1,239 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 17. Zoeken</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.regexp.html" title="Hoofdstuk 16. Reguliere uitdrukkingen">
+      <link rel="next" href="chapter.dictionaries.html" title="Hoofdstuk 18. Woordenboeken">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 17. Zoeken</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.regexp.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 17. Zoeken">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.searches"></a>Hoofdstuk 17. Zoeken<a class="indexterm" name="d0e7172"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.searches.html#search.window">1. venster Zoeken</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7194">1.1. Zoeken</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7218">1.2. Zoeklocatie</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Jokertekens gebruiken</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Zoeken methodes</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Zoekresultaten weergeven</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. venster Zoeken">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.window"></a>1. venster Zoeken
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Afbeelding 17.1. venster Tekst zoeken<a class="indexterm" name="d0e7181"></a></b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/TextSearch.png" alt="venster Tekst zoekenvenster Zoekenvoorbeeld"></div>
+               </div>
+            </div><br class="figure-break"><div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Opmerking</h3>
+               <p>De bovenstaande zoekactie vindt alle doelsegmenten waarin twee of meer witruimten - \s\s+ - voorkomen.</p>
+            </div>
+            <div class="section" title="1.1. Zoeken">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7194"></a>1.1. Zoeken<a class="indexterm" name="d0e7197"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT</span> verschaft een groot scala aan zoekfuncties. Open het venster Zoeken met <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> en voer het woord of de frase waarnaar u wilt zoeken in het vak "Zoeken naar" in. Als alternatief: selecteer een woord of
+                  frase ergens in het bewerkingsveld en druk op <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>. Het woord of de frase wordt automatisch ingevoegd in het vak "Zoeken naar". U kunt verschillende vensters Zoeken tegelijkertijd
+                  geopend hebben, maar sluit ze als u ze niet langer nodig hebt zodat zij uw bureaublad niet vol zetten.
+               </p>
+            </div>
+            <div class="section" title="1.2. Zoeklocatie">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e7218"></a>1.2. Zoeklocatie
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Zoekacties worden standaard uitgevoerd in zowel de bron- als de doelgedeelten van het project, maar u kunt uw zoekactie beperken
+                  tot de bron- of het de doeltekst. U kunt zoeken in
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>alleen het project (standaardinstelling)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>zowel het project en in de vertaalgeheugens waarnaar wordt verwezen in /tm/ (kies <span class="emphasis"><em>Zoeken in TM's</em></span>)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>één enkel bestand of een map die een aantal bestanden bevat (kies <span class="emphasis"><em>Bestanden zoeken</em></span>)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Bij het zoeken in bestanden (in tegenstelling tot in vertaalgeheugens) zal <span class="application">OmegaT</span> zich beperken tot de bestanden in de indelingen van bronbestanden. Als consequentie daarvan zal OmegaT, hoewel het in staat
+                  is om<code class="filename"> tmx</code>-bestanden te behandelen, die niet opnemen bij zoekacties met Zoeken in bestanden. Indien u <span class="bold"><strong><a class="indexterm" name="d0e7250"></a>Gevorderde opties</strong></span> inschakelt, kunt u de zoekactie combineren met de naam van de auteur van de vertaling en het tijdstip waarop de laatste wijziging
+                  is gemaakt.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="2. Jokertekens gebruiken">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2. Jokertekens gebruiken<a class="indexterm" name="d0e7260"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In zowel exact zoeken als zoeken naar sleutelwoorden kunnen de jokertekens '*' en '?' worden gebruikt. Zorg ervoor dat de
+               optie reguliere uitdrukkingen niet is geselecteerd om jokertekens te gebruiken, omdat '*' en '?' een speciale betekenis hebben
+               in reguliere uitdrukkingen.
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>'*' komt overeen met nul of meer tekens, vanaf de huidige positie in een opgegeven woord tot het einde ervan. De zoekterm
+                        '<code class="literal">run*</code>' zal bijvoorbeeld overeenkomen met '<code class="literal">run</code>', '<code class="literal">runs</code>' en '<code class="literal">running</code>'.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>'?' komt overeen met exact één teken. '<code class="literal">run?</code>' zal bijvoorbeeld overeenkomen met '<code class="literal">runs</code>' en '<code class="literal">runn</code>' in het woord '<code class="literal">running</code>'.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>De overeenkomsten zullen in vet blauw worden weergegeven.</p>
+         </div>
+         <div class="section" title="3. Zoeken methodes">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3. Zoeken methodes<a class="indexterm" name="d0e7304"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Selecteer de methode met behulp van de optieknoppen. U kunt kiezen uit twee methodes om te zoeken:</p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term">Exact zoeken</span></dt>
+                  <dd>
+                     <p>Zoekt naar segmenten die de exacte tekenreeks bevatten die u heeft opgegeven. Exact zoeken zoekt naar een frase, d.i. als
+                        er meerdere woorden zijn ingevoerd, zullen zij slechts worden gevonden als zij in exact dezelfde volgorde voorkomen. Zoeken
+                        naar <code class="literal">geopend bestand</code> zal dus alle entiteiten van de tekenreeks <span class="emphasis"><em><code class="literal">geopend bestand</code></em></span> vinden, maar niet <span class="emphasis"><em><code class="literal">bestand geopend</code></em></span> of <span class="emphasis"><em><code class="literal">geopend invoerbestand</code></em></span>.
+                     </p>
+                  </dd>
+                  <dt><span class="term">Sleutelwoorden zoeken</span></dt>
+                  <dd>
+                     <p>Zoekt naar segmenten die alle sleutelwoorden bevatten die u heeft opgegeven, in willekeurige volgorde. Selecteer Sleutelwoorden
+                        zoeken om te zoeken naar een willekeurig aantal individuele woorden, in willekeurige volgorde. OmegaT zal een lijst weergeven
+                        waarin alle segmenten staan waarin alle gespecificeerde woorden voorkomen. Zoeken met sleutelwoord is hetzelfde als zoekacties
+                        "met alle woorden" in een internetzoekmachine zoals Google (logische EN). Zoeken met sleutelwoorden naar <span class="emphasis"><em><code class="literal">geopend bestand</code></em></span> zal dus alle entiteiten van de tekenreeks <span class="emphasis"><em><code class="literal">open file</code></em></span> vinden, en ook <span class="emphasis"><em><code class="literal">bestand geopend</code>, <code class="literal">geopend invoer bestand</code>, <code class="literal">bestand kan gevaarlijk zijn als geopend</code></em></span>, etc..
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>Voor elk van deze twee methoden kunt u de volgende drie opties kiezen:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>hoofdletter gevoelig</strong></span>: het zoeken zal worden uitgevoerd voor de exact opgegeven tekenreeks, d.i. met hoofdletters wordt rekening gehouden.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>reguliere uitdrukkingen:</strong></span> de tekenreeks zal worden behandeld als een reguliere uitdrukking. Een zoekactie met reguliere uitdrukkingen is een krachtig
+                        middel om te zoeken naar tekenreeksen. Het komt overeen met zoeken met jokertekens, maar is veel meer flexibel. De reguliere
+                        uitdrukkingen die worden gebruikt in zoekacties zijn die welke worden ondersteund door Java. Zie verder het hoofdstuk over
+                        Reguliere uitdrukkingen.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>zoeken in TM's</strong></span>: vertaalgeheugens in de map <code class="filename">tm</code> worden opgenomen in de zoekactie.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="4. Zoekresultaten weergeven">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="search.result.display"></a>4. Zoekresultaten weergeven
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Door op de knop Zoeken te drukken na het invoeren van een tekenreeks in het zoekveld zullen alle segmenten in het project,
+               die de gezochte tekenreeks bevatten, worden weergegeven. Omdat <span class="application">OmegaT</span> identieke segmenten behandelt als één entiteit wordt alleen het eerste unieke segment getoond.
+            </p>
+            <p>De segmenten worden weergegeven in de volgorde waarin zij in het project voorkomen. Vertaalde segmenten worden weergegeven
+               met de originele tekst boven en de vertaalde tekst eronder, niet-vertaalde segmenten worden alleen als bron weergegeven.
+            </p>
+            <p>Klikken op een segment opent het in het venster Bewerken om het aan te kunnen passen. Daarna kunt u teruggaan naar het venster
+               Zoeken en naar het volgende gevonden segment gaan, bijvoorbeeld om het te controleren en, indien nodig, de terminologie aan
+               te passen.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.regexp.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 16. Reguliere uitdrukkingen&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 18. Woordenboeken</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

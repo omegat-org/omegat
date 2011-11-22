@@ -1,0 +1,502 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 16. Reguliere uitdrukkingen</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.segmentation.html" title="Hoofdstuk 15. Bronsegmentatie">
+      <link rel="next" href="chapter.searches.html" title="Hoofdstuk 17. Zoeken">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 16. Reguliere uitdrukkingen</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 16. Reguliere uitdrukkingen">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.regexp"></a>Hoofdstuk 16. Reguliere uitdrukkingen<a class="indexterm" name="d0e6693"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.regexp.html#regex.tools.and.examples.of.use">1. Regex-programma's en voorbeelden van gebruik</a></span></dt>
+            </dl>
+         </div>
+         <p>De reguliere uitdrukkingen (of afgekort regex) die worden gebruikt in zoekacties en segmentatieregels zijn die welke worden
+            ondersteund door Java. Als u meer specifieke informatie nodig heeft raadpleeg dan <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html" target="_top">documentatie voor Java Regex</a>. Bekijk de aanvullende verwijzingen en voorbeelden hieronder.
+         </p>
+         <div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Opmerking</h3>
+            <p>Dit hoofdstuk is bedoeld voor gevorderde gebruikers, die hun eigen varianten van segmentatieregels moeten kunnen definiëren
+               of meer complexe en krachtigere zoeksleutels moeten kunnen opdelen.
+            </p>
+         </div>
+         <div class="table"><a name="d0e6708"></a><p class="title"><b>Tabel 16.1. Regex - Vlaggen</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Vlaggen" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">(?i)</td>
+                        <td align="left">Schakelt overeenkomen van hoofd-/kleine letters in (standaard is het patroon hoofdletter-gevoelig).</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6725"></a><p class="title"><b>Tabel 16.2. Regex - Teken</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Teken" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">x</td>
+                        <td align="left">Het teken x, met uitzondering van het volgende...</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\uhhhh</td>
+                        <td align="left">Het teken met de hexadecimale waarde&nbsp;0xhhhh</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\t</td>
+                        <td align="left">Het Tab-teken ('\u0009')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\n</td>
+                        <td align="left">Het teken voor een nieuwe regel (line feed) ('\u000A')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\r</td>
+                        <td align="left">Het teken voor een carriage-return ('\u000D')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\f</td>
+                        <td align="left">Het teken voor form-feed ('\u000C')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\a</td>
+                        <td align="left">Het waarschuwingsteken (bel) ('\u0007')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\e</td>
+                        <td align="left">Het escape-teken ('\u001B')</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\cx</td>
+                        <td align="left">Het besturingsteken dat overeenkomt met x</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0n</td>
+                        <td align="left">Het teken met de octale waarde 0n (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0nn</td>
+                        <td align="left">Het teken met de octale waarde 0nn (0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\0mnn</td>
+                        <td align="left">Het teken met de octale waarde (0 &lt;= m &lt;= 3, 0 &lt;= n &lt;= 7)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\xhh</td>
+                        <td align="left">Het teken met de hexadecimale waarde 0xhh</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6802"></a><p class="title"><b>Tabel 16.3. Regex - Aanhalingen</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Aanhalingen" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\</td>
+                        <td align="left">Niets, maar quote het volgende teken. Dit is vereist als u een van de metatekens !$()*+.&lt;&gt;?[\]^{|} zou willen invoeren om
+                           overeen te komen als hetzelfde teken.
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\\</td>
+                        <td align="left">Dit is bijvoorbeeld het teken voor een backslash</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\Q</td>
+                        <td align="left">Niets, maar quote alle tekens tot \E</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\E</td>
+                        <td align="left">Niets, maar beëindigt quoten dat werd gestart door \Q</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6834"></a><p class="title"><b>Tabel 16.4. Regex - Klassen voor Unicode-blokken en categorieën</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Klassen voor Unicode-blokken en categorieën" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">\p{InGreek}</td>
+                        <td align="left">Een teken in het Griekse blok (eenvoudig <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> blok</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Lu}</td>
+                        <td align="left">Een hoofdletter (eenvoudige <a class="ulink" href="http://download.oracle.com/javase/1.5.0/docs/api/java/util/regex/Pattern.html#ubc" target="_top"> categorie</a>)
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">\p{Sc}</td>
+                        <td align="left">Een valutasymbool</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\P{InGreek}</td>
+                        <td align="left">Elk teken met uitzondering van die in het Griekse blok (negatie)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[\p{L}&amp;&amp;[^\p{Lu}]]</td>
+                        <td align="left">Elke letter met uitzondering van hoofdletters (subtractie)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6877"></a><p class="title"><b>Tabel 16.5. Regex - Tekenklassen</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Tekenklassen" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">[abc]</td>
+                        <td align="left">a, b, of c (eenvoudige klasse)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[^abc]</td>
+                        <td align="left">Elk teken met uitzondering van a, b, of c (negatie)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">[a-zA-Z]</td>
+                        <td align="left">a tot en met z of A tot en met Z inclusief (bereik)</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6904"></a><p class="title"><b>Tabel 16.6. Regex - Voorgedefinieerde tekenklassen</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Voorgedefinieerde tekenklassen" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">.</td>
+                        <td align="left">Elk teken (met uitzondering van regeleinden)</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\d</td>
+                        <td align="left">Een getal: [0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\D</td>
+                        <td align="left">Geen getal: [^0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\s</td>
+                        <td align="left">Een teken voor witruimte: [ \t\n\x0B\f\r]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\S</td>
+                        <td align="left">Een teken niet zijnde witruimte: [^\s]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\w</td>
+                        <td align="left">Een woordteken: [a-zA-Z_0-9]</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\W</td>
+                        <td align="left">Een teken voor geen-woord: [^\w]</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6951"></a><p class="title"><b>Tabel 16.7. Regex - Overeenkomsten voor begrenzingen</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Overeenkomsten voor begrenzingen" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">^</td>
+                        <td align="left">Het begin van een regel</td>
+                     </tr>
+                     <tr>
+                        <td align="left">$</td>
+                        <td align="left">Het einde van een regel</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\b</td>
+                        <td align="left">Een woordgrens</td>
+                     </tr>
+                     <tr>
+                        <td align="left">\B</td>
+                        <td align="left">Grens voor geen-woord</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="table"><a name="d0e6983"></a><p class="title"><b>Tabel 16.8. Regex - Gulzige parameters</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Gulzige parameters" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>?</em></span></td>
+                        <td align="left">X, één maal of helemaal niet</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>*</em></span></td>
+                        <td align="left">X, nul of meer keren</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X<span class="emphasis"><em>+</em></span></td>
+                        <td align="left">X, één of meer keren</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Opmerking</h3>
+            <p>Gulzige parameters zullen overeenkomen met zoveel als voor hen mogelijk is. Bijvoorbeeld: <span class="emphasis"><em>a+?</em></span> zal overeenkomen met de aaa in <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e7024"></a><p class="title"><b>Tabel 16.9. Regex - Weigerachtige (niet-gulzige) parameters</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Weigerachtige (niet-gulzige) parameters" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">X??</td>
+                        <td align="left">X, één maal of helemaal niet</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X*?</td>
+                        <td align="left">X, nul of meer keren</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X+?</td>
+                        <td align="left">X, één of meer keren</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+            <h3 class="title">Opmerking</h3>
+            <p>Weigerachtige (niet-gulzige) parameters zullen overeenkomen met zo weinig als voor hen mogelijk is. <span class="emphasis"><em>a+?</em></span> zal bijvoorbeeld overeen komen met de eerste <span class="emphasis"><em>a</em></span> in <span class="emphasis"><em>aaabbb</em></span></p>
+         </div>
+         <div class="table"><a name="d0e7062"></a><p class="title"><b>Tabel 16.10. Regex - Logische operatoren</b></p>
+            <div class="table-contents">
+               <table summary="Regex - Logische operatoren" border="1">
+                  <colgroup>
+                     <col width="100" align="left">
+                     <col>
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">De constructie...</th>
+                        <th align="left">...komt overeen met het volgende</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">XY</td>
+                        <td align="left">X gevolgd door Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">X|Y</td>
+                        <td align="left">Of X óf Y</td>
+                     </tr>
+                     <tr>
+                        <td align="left">(XY)</td>
+                        <td align="left">XY als een enkele groep</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div><br class="table-break"><div class="section" title="1. Regex-programma's en voorbeelden van gebruik">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="regex.tools.and.examples.of.use"></a>1. <a class="indexterm" name="d0e7091"></a>Regex-programma's en voorbeelden van gebruik<a class="indexterm" name="d0e7097"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Er zijn een aantal interactieve programma's beschikbaar om reguliere uitdrukkingen te ontwikkelen en te testen. Zij volgen
+               in het algemeen allemaal hetzelfde patroon (zie hieronder voor een voorbeeld van de Regular Expression Tester): de reguliere
+               uitdrukking (bovenste item) analyseert de zoektekst (tekstvak in het midden), wat de hits oplevert, weergegeven in het tekstvak
+               met het resultaat.
+            </p>
+            <div class="figure"><a name="regerx.tester"></a><p class="title"><b>Afbeelding 16.1. Regex Tester</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/RegexTester.png" alt="Regex Tester"></div>
+               </div>
+            </div><br class="figure-break"><p>Zie <a class="ulink" href="http://weitz.de/regex-coach/" target="_top">The Regex Coach</a>&nbsp;voor Windows, Linux, Mac, FreeBSD versies van een zelfstandig programma. Dat is vrijwel identiek aan het bovenstaande voorbeeld.
+            </p>
+            <p>Een fijne collectie van handige gevallen van reguliere uitdrukkingen kan worden gevonden in <span class="application">OmegaT</span> zelf (zie Opties &gt; Segmentatie). De volgende lijst bevat uitdrukkingen die u misschien handig vindt bij het doorzoeken van
+               het vertaalgeheugen:
+            </p>
+            <div class="table"><a name="d0e7122"></a><p class="title"><b>Tabel 16.11. Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen</b></p>
+               <div class="table-contents">
+                  <table summary="Regex - Voorbeelden van reguliere uitdrukkingen in vertalingen" border="1">
+                     <colgroup>
+                        <col width="100" align="left">
+                        <col>
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Reguliere uitdrukking</th>
+                           <th align="left">Vindt het volgende:</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">(\b\w+\b)\s\1\b</td>
+                           <td align="left">dubbele woorden</td>
+                        </tr>
+                        <tr>
+                           <td align="left">[\.,]\s*[\.,]+</td>
+                           <td align="left">komma of een punt, gevolgd door spaties en weer een andere komma of punt</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\. \s+$</td>
+                           <td align="left">extra spaties na de punt aan het einde van de regel</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+a\s+[aeiou]</td>
+                           <td align="left">Engels:&nbsp; woorden, beginnend met een klinker, zouden moeten worden voorafgegaan door "an", niet "a"</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s+an\s+[^aeiou]</td>
+                           <td align="left">Engels: dezelfde controle als hierboven, maar met betrekking tot medeklinkers ("a", niet "an")</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\s\s+</td>
+                           <td align="left">meer dan één spatie</td>
+                        </tr>
+                        <tr>
+                           <td align="left">\.[A-Z]</td>
+                           <td align="left">Punt, gevolgd door een hoofdletter - mogelijk ontbreekt er een spatie tussen de punt en het begin van een nieuwe regel?</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.searches.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 15. Bronsegmentatie&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 17. Zoeken</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

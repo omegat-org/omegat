@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.about.OmegaT">
+  <title>Over <application>OmegaT</application> - introductie</title>
+
+  <section id="OmegaT-Highlists">
+    <title>OmegaT pluspunten</title>
+
+    <para><application>OmegaT</application> is een vrij, multiplatform Computer Aided Translation programma met de volgende pluspunten.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Vertaalgeheugen:</emphasis><application> </application>OmegaT slaat uw vertalingen op in een vertaalgeheugen. Tegelijkertijd kan het vertaalgeheugens van eerdere vertalingen als verwijzingen gebruiken. Vertaalgeheugens kunnen zeer handig zijn bij het vertalen van veel voorkomende herhalingen of tekstsegmenten die redelijk met elkaar overeen komen. OmegaT gebruikt vertaalgeheugens om uw eerdere vertalingen op te slaan en toont u dan de meest waarschijnlijke vertalingen voor de tekst waaraan u momenteel werkt.</para>
+
+        <para>Deze vertaalgeheugens kunnen zeer handig zijn als een, reeds vertaald, document moet worden bijgewerkt. Ongewijzigde zinnen worden automatisch vertaald, terwijl bijgewerkte zinnen worden getoond met de vertaling van de meest gelijkende oudere versie van dezelfde zin. Wijzigingen in het originele document worden dus gemakkelijker afgehandeld. Als u eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld geleverd door uw vertaalbureau of uw cliënt, is OmegaT in staat om ze te gebruiken als referentie-geheugens.</para>
+
+        <para>OmegaT gebruikt de standaard bestandsindeling TMX om vertaalgeheugens op te slaan en om daar toegang toe te krijgen, hetgeen garandeert dat u uw vertalingsmateriaal kunt uitwisselen met andere CAT-toepassingen die deze bestandsindeling ondersteunen.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Terminologiebeheer</emphasis>: Terminologiebeheer is belangrijk voor consistentie in de vertalingen. OmegaT gebruikt woordenlijsten die vertalingen van woorden of korte frasen bevatten, een soort vereenvoudigd tweetalig woordenboek op een bepaald terrein. Voor uw verwijzing toont OmegaT de vertaling van woorden als die aanwezig zijn in het segment dat op dit moment de focus heeft.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Proces van vertalingen:</emphasis> Veronderstel dat u iets moet vertalen, van één enkel bestand tot een map die submappen bevat met meerdere bestanden in verschillende indelingen. Als u OmegaT laat weten welke bestanden u moet vertalen, zal het kijken naar de  bestanden die het begrijpt, gebaseerd op regels voor bestandsfiltering, de tekstdelen daarin herkennen, de tekstgroepen opsplitsen op basis van segmentatieregels, en de segmenten één voor één tonen zodat u door kunt gaan met de vertaling. OmegaT slaat uw vertalingen op en stelt mogelijke vertalingen voor vanuit overeenkomende segmenten in eerdere vertaalgeheugens. Als u klaar bent om het uiteindelijke product te bekijken, kunt u de vertaalde bestanden exporteren, ze openen in het gewenste programma en zien hoe de vertaling er in de uiteindelijke indeling uitziet.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section id="OmegaT.chapters.summary">
+    <title>Overzicht van hoofdstukken</title>
+
+    <para>Deze documentatie is zowel bedoeld als handleiding als als gids met verwijzingen. Hier is een kort overzicht van de hoofdstukken en hun inhoud.</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">gids Snel starten:</emphasis> dit hoofdstuk is bedoeld als een gids Snel starten voor beginners en “ongeduldige types”, die de complete procedure weergeeft vanaf het openen van een nieuw project voor vertalingen tot en met het voltooien van die vertaling.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Installeren en uitvoeren van OmegaT: </emphasis>dit hoofdstuk is handig als u voor het eerst begint met het werken met OmegaT. Het bevat de specifieke instructies over hoe OmegaT te installeren en het uit te voeren op Windows, Mac OS X en Linux. Voor gevorderde gebruikers beschrijft dit hoofdstuk de opdrachten voor de modus met de opdrachtregel en de mogelijkheden daarvan.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">De gebruikersinterface</emphasis>,<emphasis role="bold">Hoofdmenu en Sneltoetsen voor het toetsenbord</emphasis>: deze twee hoofdstukken zullen waarschijnlijk veelvuldig geraadpleegd worden, omdat zij de gebruikersinterface van OmegaT uitleggen en de via het hoofdmenu en de sneltoetsen voor het toetsenbord beschikbare functies.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Projecteigenschappen</emphasis>, <emphasis role="bold"><application>OmegaT</application> bestanden en mappen:</emphasis> een project in de context van OmegaT is het gedeelte werk dat OmegaT in staat is als CAT-gereedschap af te handelen. Dit hoofdstuk beschrijft de projecteigenschappen, zoals de bron- en doeltalen. Het tweede hoofdstuk beschrijft de verschillende submappen en bestanden in een vertaalproject en hun rol als ook andere gebruikers- en toepassingsbestanden die zijn geassocieerd met OmegaT.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Gedrag bewerkingsveld:</emphasis> een kort hoofdstuk dat beschrijft hoe het gedrag met betrekking tot bewerking van het segment dat wordt vertaald wordt ingesteld.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Werken met platte tekst</emphasis> en <emphasis role="bold">Werken met opgemaakte tekst</emphasis>: deze twee hoofdstukken beschrijven bepaalde belangrijke punten met betrekking tot te vertalen teksten, zoals de codering (in het geval van &quot;platte tekst&quot;-bestanden) en de afhandeling van tags (in het geval van opgemaakte tekst).</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">Vertaalgeheugens: </emphasis> beschrijft de rol van de verschillende submappen die vertaalgeheugens bevatten, en verschaft informatie over andere belangrijke aspecten met betrekking tot vertaalgeheugens.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Segmentatie</emphasis>: programma's met vertaalgeheugens werken met teksteenheden die segmenten worden genoemd. In OmegaT kunnen segmenten worden gebaseerd op alinea's of op segmentatieregels. Segmentatie op basis van alinea's wordt minder frequent gebruikt, maar kan handig zijn in het geval van zogenaamde &quot;creatieve&quot; teksten. De op regels gebaseerde segmentatie is gewoonlijk synoniem aan de op zinnen gebaseerde segmentatie. Een aantal verzamelingen van regels worden meegeleverd, terwijl aanvullende regels door de gebruiker kunnen worden gedefinieerd, zoals beschreven in dit hoofdstuk.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Zoeken</emphasis> en<emphasis role="bold"> </emphasis><emphasis role="bold">Reguliere uitdrukkingen</emphasis>: Zoeken in OmegaT kan zo eenvoudig zijn als &quot;<emphasis>som de segmenten op die </emphasis><emphasis>het woord 'kangoeroe' in de bron bevatten&quot;. </emphasis> Zij mogen ook complex zijn, om het bijvoorbeeld mogelijk te maken te zoeken naar segmenten waarin de doeltekst twee of meer opeenvolgende spaties bevat. In dat geval zou de reguliere uitdrukking ^s^s+ worden gebruikt te zoeken en de betrokken segmenten op te sommen. Reguliere uitdrukkingen worden ook uitgebreid in de segmentatieregels gebruikt.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Woordenboeken, Woordenlijsten</emphasis>, <emphasis role="bold">Machinevertaling</emphasis> en <emphasis role="bold">Spellingscontrole:</emphasis> in OmegaT kunnen woordenboeken en woordenlijsten worden uitgebreid. Als een internetverbinding beschikbaar is, kunnen diverse services voor machinevertaling  zoals Google Translate worden gebruikt vanuit OmegaT. Indien spellingscontrole is geactiveerd, worden spelfouten en typefouten herkend en kunnen die gecorrigeerd worden tijdens de vertaling.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Diversen</emphasis>: behandelt andere interessante punten zoals het vermijden van het verliezen van gegevens.</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Appendices</emphasis> bevat de volgende informatie</para>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">OmegaT op het web:</emphasis> informatie met betrekking tot on-line bronnen voor OmegaT</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Talen:</emphasis> bevat de ISO-lijst van talen en taalcodes</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Sneltoetsen toetsenbord</emphasis>: de lijst met sneltoetsen die worden gebruikt bij het bewerken</para>
+          </listitem>
+        </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para><emphasis role="bold">Auteursrechten</emphasis></para>
+          </listitem>
+        </itemizedlist>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">Index sleutelwoorden:</emphasis> een uitgebreide index van sleutelwoorden wordt verschaft om de lezer te helpen de relevante informatie te vinden.</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

@@ -1,0 +1,324 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 22. Diverse onderwerpen</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.spellchecker.html" title="Hoofdstuk 21. Spellingscontrole">
+      <link rel="next" href="appendix.website.html" title="Bijlage A. OmegaT op het web">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 22. Diverse onderwerpen</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 22. Diverse onderwerpen">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.misc"></a>Hoofdstuk 22. Diverse onderwerpen<a class="indexterm" name="d0e8101"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.misc.html#omegat.misc.console.mode">1. OmegaT modus Console</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.prerequisites">1.1. Vooraf vereist</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#starting.in.misc.console.mode">1.2. OmegaT opstarten in modus console</a></span></dt>
+                     <dt><span class="section"><a href="chapter.misc.html#misc.console.mode.extra.options">1.3. Extra opties</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.misc.html#d0e8249">2. Automatisch vergelijken van Java-eigenschappen</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#font.settings">3. Lettertype-instellingen</a></span></dt>
+               <dt><span class="section"><a href="chapter.misc.html#preventing.data.loss">4. Gegevensverlies voorkomen</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. OmegaT modus Console">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="omegat.misc.console.mode"></a>1. <span class="application"><a class="indexterm" name="d0e8107"></a>OmegaT</span> modus Console<a class="indexterm" name="d0e8114"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Opmerking</h3>
+               <p>Alleen van belang voor gevorderde gebruikers!</p>
+            </div>
+            <p>Het doel van de modus console (d.i. de opdrachtregel) is om het gebruiken <span class="application">van OmegaT</span> als vertaalprogramma in een scriptomgeving mogelijk te maken. Indien gestart in de modus console, wordt geen GUI geladen
+               (het zal daarom op elke console werken) en het opgegeven project wordt automatisch vertaald. Een voorbeeld zou een softwareproject
+               zijn, waarvan de GUI is gelocaliseerd in een aantal talen. Door gebruik te maken van de modus console kan men het maken van
+               een gelocaliseerde interface deel van het bouwproces laten zijn.
+            </p>
+            <div class="section" title="1.1. Vooraf vereist">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.prerequisites"></a>1.1. Vooraf vereist
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Een geldig project in OmegaT moet aanwezig zijn om OmegaT uit te kunnen voeren. De locatie maakt niet uit omdat het bij de
+                  start toch al moet worden ingevuld in de opdrachtregel.
+               </p>
+               <p>Indien u geen standaard instellingen wilt gebruiken, moeten de configuratiebestanden (<code class="literal">filters.conf</code> en <code class="literal">segmentation.conf)</code> aanwezig zijn. Dat kan op twee manieren worden bereikt:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Voer <span class="application">OmegaT</span> normaal uit (met de GUI) en maak de instellingen. Indien u <span class="application">OmegaT</span> in console-modus start, zal het de instellingen gebruiken die u hebt geconfigureerd.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Indien u <span class="application">OmegaT</span> niet normaal kunt uitvoeren (geen grafische omgeving beschikbaar): kopieer de instellingen vanaf een andere installatie van
+                           <span class="application">OmegaT</span> op een andere machine naar een bepaalde map. De locatie maakt niet uit, omdat u die toch in kunt vullen in de opdrachtregel
+                           bij het starten (zie hieronder). De relevante bestanden zijn <code class="literal">filters.conf</code> en <code class="literal">segmentation.conf</code> en kunnen worden gevonden in de startmap van de gebruiker (Bijv. <code class="literal">C:\Documents and Settings\%User%\<span class="application">OmegaT</span></code> onder Windows, <code class="literal">%user%/.omegat/</code> onder Linux)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section" title="1.2. OmegaT opstarten in modus console">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="starting.in.misc.console.mode"></a>1.2. OmegaT opstarten in modus console
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Enkele extra parameters moeten bij het starten worden opgegeven om OmegaT in modus console te starten. De meest belangrijke
+                  is <code class="literal">&lt;project-dir&gt;</code>, en optioneel<code class="literal"> --config-dir=&lt;config-dir&gt;. </code>Voorbeeld:
+               </p>
+               <p><code class="literal">$&gt;java -jar <span class="application">OmegaT</span>.jar /pad/naar/project \</code></p>
+               <p><code class="literal">--config-dir=/pad/naar/config-bestanden/ \</code></p>
+               <p><code class="literal"> --mode=console-translate \</code></p>
+               <p><code class="literal">--source-pattern={reguliere uitdrukking}</code></p>
+               <p><span class="bold"><strong>Uitleg:</strong></span></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">&lt;project-dir&gt;</code> vertelt <span class="application">OmegaT</span> waar het project kan worden gevonden dat moet worden vertaald. Indien opgegeven start <span class="application">OmegaT</span> in de modus console en zal het opgegeven project gaan vertalen.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">--config-dir=&lt;config-dir&gt;</code> maakt het mogelijk OmegaT te instrueren in welke map de configuratiebestanden zijn opgeslagen. Indien niet opgegeven gaat
+                           OmegaT terug naar de standaard waarden (de map OmegaT onder de startmap van de gebruiker, of indien niet beschikbaar: de huidige
+                           werkmap).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><code class="literal">--mode=console-translate </code> <span class="application">OmegaT</span> start in de modus console en vertaalt het opgegeven project
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>--source-pattern={reguliere uitdrukking} De bestanden die moeten worden vertaald kunnen op deze manier worden gespecificeerd.
+                           Hier is een voorbeeld van de reguliere uitdrukking: <code class="filename">test\.html</code></p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section" title="1.3. Extra opties">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="misc.console.mode.extra.options"></a>1.3. Extra opties
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Er bestaat nog één extra parameter voor de opdrachtregel, specifiek voor de modus  console: <code class="literal">--quiet. </code>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de
+                  statusbalk worden niet weergegeven.
+               </p>
+               <p>Gebruik: <code class="literal">java -jar <span class="application">OmegaT</span>.jar /pad/naar/project --quiet</code></p>
+            </div>
+         </div>
+         <div class="section" title="2. Automatisch vergelijken van Java-eigenschappen">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e8249"></a>2. Automatisch vergelijken van Java-eigenschappen<a class="indexterm" name="d0e8252"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>OmegaT kan Java .properties vergelijken in modus console. Indien u de Properties-bestanden voor bron en doel voor één en dezelfde
+               inhoud in uw taalpaar hebt, zal deze procedure een overeenkomend tmx-bestand maken voor deze inhoud. Gebruik: 
+            </p>
+            <p><code class="literal">java -jar OmegaT.jar --mode=console-align /my-project-dir
+                      --alignDir=/translatedFiles/ </code></p>
+            <p><code class="filename">alignDir</code> moet een vertaling bevatten in de doeltaal van het project. (bijvoorbeeld: als het project EN-&gt;FR is, moet alignDir een bundle
+               bevatten die eindigt op _fr). De resulterende TMX wordt opgeslagen in de map <code class="literal">omegat</code> onder de naam <code class="filename">align.tmx</code>.
+            </p>
+         </div>
+         <div class="section" title="3. Lettertype-instellingen">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="font.settings"></a>3. Lettertype-instellingen<a class="indexterm" name="d0e8277"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In dit dialoogvenster kan het lettertype worden gedefinieerd dat door <span class="application">OmegaT</span> in de volgende vensters wordt gebruikt:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="application">OmegaT</span> hoofdvenster (Bewerken, venster Overeenkomsten, venster Woordenlijst)
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>venster Zoeken</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>venster Tags valideren</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Het dialoogvenster kan worden aangeroepen door het item in het hoofdmenu  <a class="indexterm" name="d0e8303"></a><span class="guimenu">Opties</span> → <span class="guimenuitem">Lettertype...</span>. Het dialoogvenster bevat:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Lettertype:</strong></span> keuzelijst om één van de beschikbare lettertypen op uw machine te selecteren
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Grootte:</strong></span> bewerken om de grootte van het lettertype te wijzigen
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>Voorbeeldtekst:</strong></span> veld voor direct voorbeeld van het geselecteerde lettertype
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p><span class="bold"><strong>Opmerking: </strong></span>In sommige gevallen kan het behoorlijk wat tijd vergen voordat OmegaT de weergave heeft bijgewerkt nadat de lettertype-instelling
+               werd gewijzigd. In het bijzonder wanneer een groot bestand met veel segmenten in de bewerker is geopend en/of trage hardware
+               wordt gebruikt. Merk ook op dat sommige lettertypen zich beter lenen voor bepaalde taalparen dan andere. In het bijzonder,
+               als u vertaalt tussen twee talen met verschillende alfabet/schrijfsystemen (zoals Russisch en Japans), selecteer een lettertype
+               dat voor beide gebruikt kan worden.
+            </p>
+         </div>
+         <div class="section" title="4. Gegevensverlies voorkomen">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="preventing.data.loss"></a>4. Gegevensverlies voorkomen<a class="indexterm" name="d0e8339"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT</span> is een robuuste toepassing. U zou echter toch voorzorgen moeten nemen tegen gegevensverlies als u <span class="application">OmegaT</span> gebruikt, net als met elke andere toepassing. Bij het vertalen van uw bestanden slaat <span class="application">OmegaT</span> al uw voortgang op in het vertaalgeheugen <code class="literal">project_save.tmx</code> in de submap <code class="literal">/omegat</code> van het project.
+            </p>
+            <p>OmegaT slaat ook, elke keer als een project wordt geopend of herladen, een kopie van het vertaalgeheugen op in project_save.tmx.JAARMMDDUUMM.bak
+               in dezelfde submap. JAAR is 4-getallen jaar, MM is de maand, DD de dag van de maand, en UU en MM zijn de uren en minuten van
+               wanneer het vorige vertaalgeheugen werd opgeslagen.
+            </p>
+            <p>Als u denkt dat u vertaalde gegevens kwijt bent, kunt u de volgende procedure gebruiken om het project te herstellen naar
+               de meest recent opgeslagen status, in de meeste gevallen niet ouder dan ongeveer 10 minuten:
+            </p>
+            <div class="orderedlist">
+               <ol class="orderedlist" type="1">
+                  <li class="listitem">
+                     <p>sluit het project</p>
+                  </li>
+                  <li class="listitem">
+                     <p>hernoem het huidige <code class="filename">project_save.tmx</code>-bestand naar iets dat u zult onthouden (zoals bijvoorbeeld <code class="filename">project_save.tmx.tijdelijk</code>)
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>selecteer de back-up van het vertaalgeheugen dat meest waarschijnlijk de gegevens bevat die u nodig hebt</p>
+                  </li>
+                  <li class="listitem">
+                     <p>hernoem dat naar <code class="literal">project_save.tmx</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p>open het project</p>
+                  </li>
+               </ol>
+            </div>
+            <p>Voorkomen van verlies van belangrijke gegevens:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Maak regelmatig kopieën van het bestand /omegat/project_save.tmx naar back-upmedia, zoals CD of DVD.</p>
+                  </li>
+                  <li class="listitem">
+                     <p>Maak met regelmatige tussenpozen de vertaalde bestanden en controleer of dat vertaalde bestand de laatste versie van uw vertaling
+                        bevat, totdat u zich <span class="application">OmegaT</span> eigen hebt gemaakt.
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p>Wees in het bijzonder voorzichtig met het maken van wijzigingen in de bestanden in <code class="literal">/source</code> terwijl u midden in een project zit. Als het bronbestand wordt gewijzigd nadat u de vertaling bent begonnen, kan het zijn
+                        dat <span class="application">OmegaT</span> een segment dat u al vertaald had niet meer kan vinden.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Gebruik om te beginnen deze Helpteksten. Als u tegen problemen aanloopt, post dan een bericht in de <a class="ulink" href="http://tech.groups.yahoo.com/group/Omegat/" target="_top"><span class="application">OmegaT</span>-gebruikersgroep</a>. Maak er geen probleem van om in uw eigen taal te posten.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.spellchecker.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.website.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 21. Spellingscontrole&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Bijlage A. OmegaT op het web</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

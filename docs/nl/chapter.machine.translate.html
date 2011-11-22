@@ -1,0 +1,208 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 20. Machinevertaling</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.glossaries.html" title="Hoofdstuk 19. Woordenlijsten">
+      <link rel="next" href="chapter.spellchecker.html" title="Hoofdstuk 21. Spellingscontrole">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 20. Machinevertaling</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.glossaries.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 20. Machinevertaling">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.machine.translate"></a>Hoofdstuk 20. Machinevertaling<a class="indexterm" name="d0e7803"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7806">1. Introductie</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#introduction">2. Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7836">3. <span class="application">OmegaT</span>-gebruikers en Google Translate</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7888">4. Belazar</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#d0e7900">5. Apertium</a></span></dt>
+               <dt><span class="section"><a href="chapter.machine.translate.html#Google.Translate.troubleshooting">6. Machinevertaling - probleemoplossing</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Introductie">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7806"></a>1. Introductie<a class="indexterm" name="d0e7809"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Tegengesteld aan de door de gebruiker gegenereerde vertaalgeheugens (zoals in het geval van <span class="application">OmegaT</span>) gebruiken programma's voor machinevertaling (MT) op regels gebaseerde linguïstische programma's om een vertaling van de
+               bron te maken zonder dat een vertaalgeheugen nodig is. Statistische leertechnieken, gebaseerd op bron- en doelteksten, worden
+               gebruikt om een vertaalmodel te bouwen. Services voor machinevertalingen hebben goed en steeds betere resultaten behaald in
+               research evaluaties.
+            </p>
+            <p>Ga naar <span class="guimenuitem">Opties &gt; Machinevertaling...</span> en activeer de gewenste service om een van de services voor machinevertaling te activeren. Onthoud dat zij allemaal op het
+               web gebaseerd zijn: u zult online moeten zijn als u ze wilt gebruiken.
+            </p>
+         </div>
+         <div class="section" title="2. Google Translate">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="introduction"></a>2. Google Translate<a class="indexterm" name="d0e7827"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Google Translate is de service, die wordt aangeboden door Google, om zinnen, websites en complete teksten te vertalen tussen
+               een nog steeds groeiend aantal talen. Op het moment van schrijven bevat de lijst meer dan 50 talen, van Albanees tot Jiddisch,
+               inclusief natuurlijk alle grote talen.
+            </p>
+            <p>De kwaliteit van de vertaling is aan de ene kant natuurlijk afhankelijk van het reservoir aan teksten in de doeltaal en de
+               beschikbaarheid van hun meertalige versies, aan de andere kant ook van de kwaliteit van de gebouwde modellen. Het is haast
+               wel zeker dat, hoewel de kwaliteit in sommige gevallen onvoldoende kan zijn, het uiteindelijk mettertijd beter zal worden
+               en niet slechter.
+            </p>
+         </div>
+         <div class="section" title="3. OmegaT-gebruikers en Google Translate">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7836"></a>3. <span class="application">OmegaT</span>-gebruikers en Google Translate
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>De gebruiker van <span class="application">OmegaT</span> is niet gedwongen om Google Translate te gebruiken. Indien het wordt gebruikt zal de beslissing van de gebruiker om de vertaling
+               te accepteren, noch de uiteindelijke vertaling beschikbaar worden gemaakt voor Google. Het volgende venster geeft een voorbeeld
+               weer van a) de Engelse bron b) Spaanse en c) Sloveense vertaling in Google Translate.
+            </p>
+            <div class="figure"><a name="moby.dick"></a><p class="title"><b>Afbeelding 20.1. Google Translate - voorbeeld</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/MobyDick.png" alt="Google Translate - voorbeeld"></div>
+               </div>
+            </div><br class="figure-break"><p>De Spaanse vertaling is beter dan de Sloveense. Merk op dat <span class="emphasis"><em>interesar</em></span> en<span class="emphasis"><em> navegar</em></span> in het Spaans correct zijn vertaald als respectievelijk de werkwoorden interest en sail. In de Sloveense versie worden beide
+               woorden vertaald als zelfstandige naamwoorden. Het is eigenlijk zeer waarschijnlijk dat de Spaanse vertaling, ten minste gedeeltelijk,
+               is gebaseerd op de actuele vertaling van het boek.
+            </p>
+            <p>Vanaf het moment dat de service is geactiveerd zal er een suggestie voor de vertaling verschijnen in het venster Machinevertaling
+               voor elk nieuw bronsegment dat wordt geopend. Indien u de suggestie acceptabel vindt, druk op <span class="keycap"><strong><a class="indexterm" name="d0e7866"></a>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> om het doelgedeelte van het geopende segment te vervangen. In het segment hierboven, bijvoorbeeld, zou <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> de Spaanse versie overschrijven met de Sloveense suggestie.
+            </p>
+            <p>Indien u niet wilt dat <span class="application">OmegaT</span> uw bronsegmenten verstuurt naar Google om te worden vertaald, verwijdert u het vinkje vóór het menuitem Google Translate
+               in Opties.
+            </p>
+            <p>Onthoud dat er niets anders dan het bronsegment wordt verzonden naar de service van de machinevertaling. De online versie
+               van Google Translate maakt het de gebruiker mogelijk om de suggestie te corrigeren en het gecorrigeerde segment in te sturen.
+               Deze mogelijkheid is echter niet geïmplementeerd in OmegaT.
+            </p>
+         </div>
+         <div class="section" title="4. Belazar">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7888"></a>4. Belazar<a class="indexterm" name="d0e7891"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="ulink" href="http://belsoft.tut.by/belazar/" target="_top">Belazar</a> is een programma voor machinevertaling voor een Russisch - Wit-Russisch taalpaar.
+            </p>
+         </div>
+         <div class="section" title="5. Apertium">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e7900"></a>5. Apertium<a class="indexterm" name="d0e7903"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><a class="ulink" href="http://www.apertium.org/" target="_top">Apertium</a> is een gratis/open-bron platform voor machinevertaling, initieel gericht op gerelateerde taalparen, zoals CA, ES, GA, PT,
+               OC en FR maar recent uitgebreid om ook minder gangbare taalparen (zoals Engels-Catalaans) te behandelen. Controleer op de
+               website voor de laatste lijst van geïmplementeerde taalparen.
+            </p>
+            <p>Het platform levert</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>een taal-onafhankelijk programma voor machinevertaling</p>
+                  </li>
+                  <li class="listitem">
+                     <p>om de linguïstische gegevens te beheren die nodig zijn om een systeem voor machinevertaling te bouwen voor een bepaald taalpaar
+                        en
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>linguïstische gegevens voor een groeiend aantal taalparen</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Apertium gebruikt een oppervlakkig overdrachtprogramma voor machinevertaling die de invoer in gedeelten verwerkt, zoals in
+               een lopende band: opmaak verwijderen, morfologische analyses, doorverwijzen van spraakgedeelten, oppervlakkige structurele
+               overdracht, lexicografische overdracht, morfologische generatie, en opnieuw opmaken.
+            </p>
+            <p>Het is mogelijk om Apertium te gebruiken om systemen voor machinevertalingen te bouwen voor een variëteit aan taalparen; voor
+               dat doel gebruikt Apertium eenvoudige op XML gebaseerde standaard formaten om de benodigde linguïstische gegevens te coderen
+               (ofwel met de hand of door het converteren van bestaande gegevens), die zijn gecompileerd met behulp van de verschafte programma's
+               in de formaten voor hoge snelheid zoals die gebruikt worden door het programma.
+            </p>
+         </div>
+         <div class="section" title="6. Machinevertaling - probleemoplossing">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="Google.Translate.troubleshooting"></a>6. Machinevertaling - probleemoplossing<a class="indexterm" name="d0e7932"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Indien er niets verschijnt in het venster Machinevertaling, controleer dan het volgende:</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Bent u online? U moet online zijn om een programma voor machinevertaling te kunnen gebruiken.</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Wat is het taalpaar dat u nodig hebt? Controleer of de geselecteerde service het aanbiedt.</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.glossaries.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.spellchecker.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 19. Woordenlijsten&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 21. Spellingscontrole</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

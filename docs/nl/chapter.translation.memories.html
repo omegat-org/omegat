@@ -1,0 +1,399 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hoofdstuk 14. Vertaalgeheugens</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="up" href="index.html" title="OmegaT - Gebruikershandleiding">
+      <link rel="prev" href="chapter.plain.text.html" title="Hoofdstuk 13. Werken met platte tekst">
+      <link rel="next" href="chapter.segmentation.html" title="Hoofdstuk 15. Bronsegmentatie">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Hoofdstuk 14. Vertaalgeheugens</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">Terug</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.segmentation.html">Volgende</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Hoofdstuk 14. Vertaalgeheugens">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.translation.memories"></a>Hoofdstuk 14. Vertaalgeheugens<a class="indexterm" name="d0e6018"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.translation.memories.html#OmegaT.and.tmx.files">1. Vertaalgeheugens in OmegaT</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.location.and.purpose">1.1. mappen tmx - locatie en doel</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#tmx.backup">1.2. TMX back-up</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#tmx.files.and.language">1.3. TMX-bestanden en taal</a></span></dt>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6280">1.4. Wezen-segmenten</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.translation.memories.html#using.translation.memories.from.previous.projects">2. Vertaalgeheugens opnieuw gebruiken</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.translation.memories.html#d0e6364">2.1. Importeren en exporteren van vertaalgeheugens</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.translation.memories.html#pseudo.translated.memory">3. Pseudo-vertaald geheugen</a></span></dt>
+               <dt><span class="section"><a href="chapter.translation.memories.html#upgrading.translation.memories">4. Vertaalgeheugens bijwerken</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1. Vertaalgeheugens in OmegaT">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="OmegaT.and.tmx.files"></a>1. Vertaalgeheugens in OmegaT
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section" title="1.1. mappen tmx - locatie en doel">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tmx.files.location.and.purpose"></a>1.1. mappen tmx - locatie en doel
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Projecten van <span class="application">OmegaT</span> kunnen bestanden voor vertaalgeheugens bevatten - dit zijn bestanden met de extensie tmx - op vier verschillende plaatsen:
+               </p>
+               <div class="variablelist">
+                  <dl>
+                     <dt><span class="term"><a class="indexterm" name="d0e6035"></a>map omegat</span></dt>
+                     <dd>
+                        <p>De map omegat bevat <code class="filename">project_save.tmx</code> en mogelijk een aantal back-ups van TMX-bestanden. Het bestand <code class="filename">project_save.tmx</code> bevat alle segmenten die in het geheugen zijn opgenomen sinds u het project startte. Dit bestand bestaat altijd in een project.
+                           De inhoud ervan zal altijd alfabetisch worden gesorteerd op het bronsegment.
+                        </p>
+                     </dd>
+                     <dt><span class="term"><a class="indexterm" name="d0e6054"></a>hoofdmap project</span></dt>
+                     <dd>
+                        <p>De hoofdmap van het project bevat 3 tmx-bestanden, <code class="filename">project_naam-omegat.tmx</code>, <code class="filename">project_naam-level1.tmx</code> en <code class="filename">project_naam-level2.tmx</code> (waarin project_naam de naam is van uw project).
+                        </p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="disc">
+                              <li class="listitem">
+                                 <p>Het bestand level1 bevat alleen tekstuele informatie.</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Het bestand level2 kapselt specifieke tags van <span class="application">OmegaT</span> in binnen correcte TMX-tags zodat het bestand met zijn opmaakinformatie kan worden gebruikt in een vertaalprogramma dat TMX
+                                    niveau 2-geheugens ondersteund of <span class="application">OmegaT</span> zelf.
+                                 </p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Het bestand <span class="application">OmegaT</span> is inclusief <span class="application">OmegaT</span> specifieke opmaaktags zodat het bestand kan worden gebruikt in andere <span class="application">OmegaT</span>-projecten
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>Deze bestanden zijn kopieën van het bestand <code class="filename">project_save.tmx</code>, d.i. van het belangrijkste vertaalgeheugen van het project, exclusief de zogenaamde wezen-segmenten. Zij dragen toepasselijk
+                           gewijzigde namen, zodat de inhoud ervan steeds kan worden geïdentificeerd, indien elders gebruikt, bijvoorbeeld in de submap<code class="filename"> tm</code> van een ander project (zie hieronder).
+                        </p>
+                     </dd>
+                     <dt><span class="term">map <code class="filename"><a class="indexterm" name="d0e6109"></a>tm</code></span></dt>
+                     <dd>
+                        <p>De map /tm/ kan een willekeurig aantal aanvullende vertaalgeheugens bevatten - d.i. tmx-bestanden. Zulke bestanden kunnen
+                           worden gemaakt in elk van de drie hierboven aangegeven variëteiten. Onthoud dat andere CAT-programma's tmx-bestanden kunnen
+                           exporteren (en ook importeren), gewoonlijk in alle drie vormen. Het beste is natuurlijk om OmegaT-specifieke TMX-bestanden
+                           te gebruiken (zie hierboven), zodat de in-regelige opmaak binnen het segment wordt behouden.
+                        </p>
+                        <p>De inhoud van vertaalgeheugens in de submap tm dienen om suggesties te genereren voor de tekst(en) om te worden vertaald.
+                           Elke tekst, reeds vertaald en opgeslagen in deze bestanden, zal tussen de overeenkomsten verschijnen, indien het voldoende
+                           overeenkomt met de tekst die momenteel wordt vertaald.
+                        </p>
+                        <p>Indien het bronsegment in één van de aanvullende TM's identiek is aan de tekst die wordt vertaald, gedraagt OmegaT zich zoals
+                           gedefinieerd is in het dialoogvenster  <span class="guimenu">Opties</span> → <span class="guimenuitem">Bewerken (gedrag)...</span>. Bijvoorbeeld (als de standaard is geaccepteerd) zal de vertaling vanuit de aanvullende TM worden geaccepteerd en worden
+                           vooraf gegaan door<span class="emphasis"><em> [fuzzy]</em></span>, zodat de vertaler de vertalingen op een later tijdstip kan nakijken en controleren of segmenten die op deze manier zijn
+                           getagd, juist zijn vertaald (zie het hoofdstuk <a class="link" href="chapter.translation.editing.html" title="Hoofdstuk 10. Bewerken (gedrag)">Bewerken (gedrag)</a>) <span class="guimenu">.</span></p>
+                     </dd>
+                     <dt><span class="term"><a class="indexterm" name="d0e6141"></a>map tm/auto<a class="indexterm" name="d0e6149"></a></span></dt>
+                     <dd>
+                        <p>Als het vanaf het begin duidelijk is dat de vertalingen in een bepaald TM (of TM's) allemaal juist zijn, kan één van hen in
+                           de map<span class="bold"><strong> tm/auto</strong></span> worden geplaatst en heel veel van de gevallen van bevestiging met<span class="emphasis"><em> [fuzzy]</em></span> worden voorkomen. Dit zal de brontekst effectief <span class="bold"><strong>vooraf vertalen </strong></span>: alle segmenten in de brontekst, waarvoor vertalingen kunnen worden gevonden in deze "auto"-TM's, zullen zonder interventie
+                           van de gebruiker belanden in de belangrijkste TM van het project.
+                        </p>
+                     </dd>
+                  </dl>
+               </div>
+               <p>Optioneel kunt u <span class="application">OmegaT</span> een aanvullend tmx-bestand laten hebben (<span class="application">OmegaT</span>-opmaak) waar u dat maar wilt, dat alle te vertaalbare segmenten van het project bevat. Zie pseudo-vertaald geheugen hieronder.
+               </p>
+               <p>Onthoud dat alle vertaalgeheugens in het geheugen worden geladen bij het openen van het project. Back-ups worden regelmatig
+                  van het vertaalgeheugen van het project gemaakt (zie het volgende hoofdstuk) en <code class="filename">project_save.tmx</code> wordt ook opgeslagen/bijgewerkt als het project wordt gesloten of opnieuw geladen. Dit betekent bijvoorbeeld dat u het project
+                  waarin u momenteel werkt niet behoeft te verlaten als u besluit om er een andere aanvullende TM aan toe te voegen: u kunt
+                  eenvoudigweg het project opnieuw laden, en de wijzigingen die u hebt gemaakt zullen daarin worden opgenomen.
+               </p>
+               <p>De locaties van de verschillende vertaalgeheugens voor een bepaald project zijn door de gebruiker gedefinieerd (zie dialoogvenster
+                  Project in <a class="link" href="chapter.instant.start.guide.html" title="Hoofdstuk 2. gids Snel starten">gids Snel starten)</a></p>
+               <p>Afhankelijk van de situatie zijn dus verschillende strategieën mogelijk, bijvoorbeeld:</p>
+               <p><span class="bold"><strong>diverse projecten over hetzelfde onderwerp: </strong></span>behoud de projectstructuur en wijzig mappen voor bron en doel (Bron = bron/volgorde1, doel = doel/volgorde1 etc). Onthoud
+                  dat u segmenten uit volgorde1, die niet aanwezig zijn in volgorde2 en andere opvolgende taken, zullen worden getagd als wezen-segmenten;
+                  echter, zij zullen nog steeds handig zijn om overeenkomsten te verkrijgen.
+               </p>
+               <p><span class="bold"><strong>verschillende vertalers werken aan hetzelfde project:</strong></span> splits de bronbestanden in bron/Alice, bron/Bob... en geef ze uit aan de leden van het team (Alice, Bob ...). Zij kunnen
+                  dan hun eigen projecten maken en hun eigen <code class="filename">project_save.tmx,</code> inleveren indien voltooid of wanneer een bepaalde mijlpaal is bereikt. De bestanden <code class="filename">project_save.tmx</code> worden dan verzameld en mogelijke conflicten met betrekking tot bijvoorbeeld terminologie worden opgelost. Een nieuwe versie
+                  van de hoofd-TM wordt dan gemaakt, ofwel om in de submappen <span class="emphasis"><em>tm/auto</em></span> van de teamleden te worden geplaatst of om hun bestanden <code class="filename">project_save.tmx</code> in hun projecten te vervangen. Het team kan ook dezelfde structuur voor de submappen gebruiken voor de doelbestanden. Dit
+                  maakt het voor hen bijvoorbeeld mogelijk om op elk moment te controleren, of de doelversie voor het gehele project nog steeds
+                  OK is.
+               </p>
+            </div>
+            <div class="section" title="1.2. TMX back-up">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tmx.backup"></a>1.2. TMX back-up<a class="indexterm" name="d0e6208"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Tijdens het vertalen van uw bestanden slaat <span class="application">OmegaT</span> uw werk op in <code class="filename">project_save.tmx</code> in de submap /<code class="filename">omegat</code> van het project.
+               </p>
+               <p><span class="application">OmegaT</span> maakt ook, elke keer als een project wordt geopend of herladen, een back-up van het vertaalgeheugen in <code class="filename">project_save.tmx.JAARMMDDUUMM.bak</code> in dezelfde submap. JAAR is 4-getallen jaar, MM is een maand, DD dag van de maand, UU en MM zijn uren en minuten van wanneer
+                  het vorige vertaalgeheugen werd opgeslagen.
+               </p>
+               <p>Als u denkt dat u vertaalde gegevens kwijt bent, volg dan de volgende procedure:</p>
+               <div class="orderedlist">
+                  <ol class="orderedlist" type="1">
+                     <li class="listitem">
+                        <p>Sluit het project</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Hernoem het huidige <code class="filename">project_save.tmx</code>-bestand naar iets dat u zult onthouden (zoals bijvoorbeeld <code class="filename">project_save.tmx.tijdelijk</code>)
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Selecteer de back-up van het vertaalgeheugen dat meest waarschijnlijk (bijv. de meest recente of de laatste versie van de
+                           dag ervoor) de gegevens bevat die u nodig hebt
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Kopieer het als <code class="filename">project_save.tmx</code></p>
+                     </li>
+                     <li class="listitem">
+                        <p>Open het project</p>
+                     </li>
+                  </ol>
+               </div>
+            </div>
+            <div class="section" title="1.3. TMX-bestanden en taal">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tmx.files.and.language"></a>1.3. TMX-bestanden en taal<a class="indexterm" name="d0e6260"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>TMX-bestanden bevatten vertaaleenheden die zijn gemaakt van een aantal equivalente segmenten in verschillende talen. Een vertaaleenheid
+                  bestaat uit ten minste twee variaties van een vertaaleenheid  (tuv). Beide kunnen als bron of doel worden gebruikt.
+               </p>
+               <p>De instellingen in uw project geven aan wat de bron- en wat de doeltaal is. OmegaT neemt dus de tuv-segmenten die overeenkomen
+                  met de taalcodes van de bron en het doel in het project en gebruiken ze respectievelijk als de bron- en doelsegmenten. OmegaT
+                  herkent de taalcodes met behulp van de twee volgende standaard conventies:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>2 letters (bijv. JA voor Japans), of</p>
+                     </li>
+                     <li class="listitem">
+                        <p>2- of 3-letter taalcode gevolgd door de 2-letter landcode (bijv. EN-US - Zie <a class="xref" href="appendix.languages.html" title="Bijlage B. Talen - ISO 639 codelijst">Bijlage&nbsp;B, <i>Talen - ISO 639 codelijst
+                                   
+                                   
+                                   </i></a> voor een gedeeltelijke lijst van taal- en landcodes).
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <p>Als de taalcodes en de TMX-taalcodes voor het project volledig overeenkomen worden de segmenten in het geheugen geladen. Als
+                  de taal overeenkomt, maar niet de landcode worden de segmenten toch geladen. Als de taalcode, noch de landcode overeenkomen
+                  zullen de segmenten worden genegeerd.
+               </p>
+            </div>
+            <div class="section" title="1.4. Wezen-segmenten">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6280"></a>1.4. Wezen-segmenten<a class="indexterm" name="d0e6283"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Het bestand <code class="filename">project_save.tmx</code> bevat alle segmenten die zijn vertaald sinds u het project startte. Als u de segmentatie van het project aanpast of bestanden
+                  uit de bron verwijdert, zullen sommige overeenkomsten in het venster Overeenkomsten kunnen verschijnen als <span class="bold"><strong>wezen-tekenreeksen</strong></span>: zulke overeenkomsten verwijzen niet langer naar segmenten die voorkomen in de brondocumenten, omdat zij overeenkomen met
+                  segmenten die werden vertaald en opgenomen vóór de aanpassingen plaats vonden.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="2. Vertaalgeheugens opnieuw gebruiken">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="using.translation.memories.from.previous.projects"></a>2. Vertaalgeheugens opnieuw gebruiken<a class="indexterm" name="d0e6299"></a><a class="indexterm" name="d0e6304"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>In het begin, dat is als het project wordt gemaakt, is de hoofd-TM van het project, <code class="filename">project_save.tmx</code>, leeg. Deze TM wordt gedurende de vertaling gevuld. Bestaande vertalingen kunnen worden gebruikt om dit proces te versnellen.
+               Indien een bepaalde zin al eens is vertaald, en juist is vertaald, bestaat er geen reden om die opnieuw te gaan vertalen.
+               Vertaalgeheugens kunnen ook vertaalgeheugens als verwijzingen bevatten: meertalige wetgeving, zoals van de Europese Gemeenschap
+               is daarvan een typisch voorbeeld.
+            </p>
+            <p>Wanneer u de doeldocumenten maakt in een project van  <span class="application">OmegaT</span>, wordt het vertaalgeheugen van het project uitgevoerd in de vorm van drie bestanden in de hoofdmap van uw project van <span class="application">OmegaT</span> (zie de bovenstaande beschrijving). U kunt deze drie TMX-bestanden, (-<code class="filename">omegat.tmx</code>", "<code class="filename">-level1.tmx</code>" en "<code class="filename">-level2.tmx</code>"), beschouwen als een "exporteerbaar vertaalgeheugen", dat is: een export van de inhoud van uw huidige project in tweetalige
+               vorm.
+            </p>
+            <p>Indien u een vertaalgeheugen uit een vorig project zou willen gebruiken (bijvoorbeeld omdat het nieuwe project overeenkomt
+               met het eerdere project, of terminologie gebruikt die eerder gebruikt is), kunt u deze vertaalgeheugens gebruiken als "invoer
+               vertaalgeheugens", dat is: om in uw nieuwe project te importeren. In dit geval plaats u de vertaalgeheugens die u wilt gebruiken
+               in de mappen <span class="emphasis"><em>\tm</em></span> of <span class="emphasis"><em>\tm</em></span>\auto van uw nieuwe project: in het eerste geval zult u hits van deze vertaalgeheugens in het venster Overeenkomsten krijgen
+               en in het laatste geval zullen deze TM's worden gebruikt om uw brontekst vooraf te vertalen.
+            </p>
+            <p>Standaard staat de map \tm onder de hoofdmap van het project (bijvoorbeeld ...<span class="emphasis"><em>\MijnProject\tm</em></span>), maar u kunt een andere map kiezen in het dialoogvenster Projecteigenschappen als u dat wilt. Dit is handig als u regelmatig
+               eerder gemaakte vertaalgeheugens gebruikt, bijvoorbeeld omdat zij over hetzelfde onderwerp gaan of voor dezelfde klant zijn.
+               In dit geval zou een handige procedure zijn:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Maak een map (een "voorraadmap") op een handige locatie op uw harde schijf voor de vertaalgeheugens voor een bepaalde klant
+                        of onderwerp.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Elke keer als u een project voltooid, kopieert u één van de drie "exporteerbare" bestanden van vertaalgeheugens vanuit de
+                        map van het project naar de voorraadmap.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Als u een nieuw project begint voor hetzelfde onderwerp of voor dezelfde klant, navigeer naar de voorraadmap in het dialoogvenster
+                        <span class="guimenuitem">Project &gt; Eigenschappen &gt; Project bewerken</span> en selecteer het als de map voor het vertaalgeheugen.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>Onthoud wel dat alle TMX-bestanden in de voorraadmap /tm worden geparset als het project wordt geopend, dus door daarin alle
+               verschillende vertaalgeheugens die u voorhanden hebt te plaatsen, kan OmegaT onnodig langzamer maken. U zou zelfs kunnen overwegen
+               om die, welke u niet meer nodig hebt, te verwijderen, als u eenmaal hun inhoud hebt gebruikt om het bestand <code class="filename">project-save.tmx </code>te vullen.
+            </p>
+            <div class="section" title="2.1. Importeren en exporteren van vertaalgeheugens">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6364"></a>2.1. Importeren en exporteren van vertaalgeheugens
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>OmegaT ondersteunt geïmporteerde tmx-versies 1.1-1.4b (zowel niveau 1 als niveau 2). Dit maakt het mogelijk dat vertaalgeheugens
+                  die zijn gemaakt door andere programma's kunnen worden gelezen door OmegaT. OmegaT ondersteunt echter niet volledig geïmporteerde
+                  TMX-bestanden van niveau 2 (die niet alleen de vertaling opslaan, maar ook de opmaak). TMX-bestanden van niveau 2 kunnen nog
+                  steeds worden geïmporteerd en hun tekstuele inhoud kan worden bekeken in OmegaT, maar de kwaliteit van de overeenkomsten zal
+                  wat lager zijn.
+               </p>
+               <p>OmegaT volgt zeer strikte procedures bij het laden van bestanden van vertaalgeheugens (TMX-bestanden). Als een fout in een
+                  dergelijk bestand wordt gevonden zal OmegaT de positie aangeven binnen het defecte bestand waarin de fout zich bevindt.
+               </p>
+               <p>Sommige programma's staan er om bekend dat zij onder bepaalde omstandigheden ongeldige TMX-bestanden maken. Als u dergelijke
+                  bestanden als verwijzingen voor vertalingen in OmegaT wilt gebruiken, moeten zij worden gerepareerd  of OmegaT zal een fout
+                  rapporteren en het weigeren te laden. Reparaties zijn kleine bewerkingen en OmegaT assisteert bij het oplossen van problemen
+                  met het gerelateerde foutbericht. U kunt advies aan de gebruikersgroep vragen als u problemen ondervindt.
+               </p>
+               <p><span class="application"></span>OmegaT exporteert versie 1.4 TMX-bestanden (zowel niveau 1 en niveau 2). De export van niveau 2 komt niet volledig overeen
+                  met de standaard van niveau 2 maar is goed genoeg en zal correcte overeenkomsten genereren in andere programma's met vertaalgeheugens
+                  die TMX niveau 2 ondersteunen. Als u alleen tekstuele informatie wilt (en geen opmaakinformatie) gebruik dan het bestand van
+                  niveau 1 dat OmegaT heeft gemaakt.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="3. Pseudo-vertaald geheugen">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="pseudo.translated.memory"></a>3. Pseudo-vertaald geheugen<a class="indexterm" name="d0e6379"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="note" title="Opmerking" style="margin-left: 0.5in; margin-right: 0.5in;">
+               <h3 class="title">Opmerking</h3>
+               <p>Alleen van belang voor gevorderde gebruikers!</p>
+            </div>
+            <p>Voordat segmenten worden vertaald wilt u ze misschien vooraf verwerken of op een andere manier behandelen dan met OmegaT mogelijk
+               is. Als u bijvoorbeeld een pseudo-vertaling wilt maken om te testen, maakt OmegaT het u mogelijk om een aanvullend TMX-bestand
+               te maken file dat alle segmenten van het project bevat. De vertaling in die tmx kan zijn
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>vertaling komt overeen met bron (standaard)</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>vertaalde segment is leeg</p>
+                  </li>
+               </ul>
+            </div>
+            <p>Het TMX-bestand mag elke naam hebben die u op wil geven. Een pseudo-vertaald geheugen kan worden gegenereerd met de volgende
+               parameters voor de opdrachtregel:
+            </p>
+            <p><code class="literal">java -jar omegat.jar --pseudotranslatetmx=&lt;bestandsnaam&gt; [pseudotranslatetype=[equal|empty]]</code></p>
+            <p>Vervang <code class="literal">&lt;bestandsnaam&gt;</code> door de naam van het bestand dat u wilt maken, ofwel absoluut of relatief naar de werkmap (de map van waaruit u <span class="application">OmegaT</span> start). Het tweede argument <code class="literal">--pseudotranslatetype</code> is optioneel. De waarde ervan is ofwel <code class="literal">equal</code> (standaard waarde, voor bron=doel) of <code class="literal">empty</code> (doelsegment is leeg). U kunt de gemaakte tmx verwerken met elk programma dat u wilt. Hernoem het naar <span class="emphasis"><em>project_save.tmx </em></span>en plaats het in de map <code class="literal">omegat</code> van uw project om het opnieuw in <span class="application">OmegaT</span> te gebruiken.
+            </p>
+         </div>
+         <div class="section" title="4. Vertaalgeheugens bijwerken">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="upgrading.translation.memories"></a>4. Vertaalgeheugens bijwerken<a class="indexterm" name="d0e6431"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>Hele vroege versies van <span class="application">OmegaT</span> waren slechts in staat bronbestanden in alinea's te segmenteren en nummerden de opmaaktags in HTML- en Open Document-bestanden
+               niet consistent. <span class="application">OmegaT</span> 2.5 kan dergelijke TMX-bestanden herkennen en direct bijwerken om de kwaliteit van de fuzzy overeenkomsten te vergroten en
+               uw vertaling op peil te brengen, zodat u dat werk niet handmatig hoeft te doen.
+            </p>
+            <p>De TMX van een project wordt maar één keer bijgewerkt en zal in de bijgewerkte vorm worden weggeschreven in <code class="filename">project-save.tmx</code>; eerder gemaakte TMX-bestanden worden, elke keer als het project wordt geladen, direct bijgewerkt. Wees er attent op dat
+               sommige wijzigingen in bestandsfilters in <span class="application">OmegaT</span> 2.5 zouden kunnen leiden tot totaal afwijkende segmentatie; als resultaat daarvan moet u in zulke zeer uitzonderlijke gevallen
+               uw vertaling handmatig bijwerken.
+            </p>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">Terug</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.segmentation.html">Volgende</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Hoofdstuk 13. Werken met platte tekst&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Begin</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Hoofdstuk 15. Bronsegmentatie</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

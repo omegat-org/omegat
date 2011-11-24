@@ -1,19 +1,28 @@
 ----------------------------------------------------------------------
+ OmegaT 2.5.0 update 5
+----------------------------------------------------------------------
+   0 Enhancement
+   0 Bug fix
+   1 Localisation update
+----------------------------------------------------------------------
+2.5.0 update 5 vs. 2.5.0 update 4
+
+  Localisation updates:
+
+  - Dutch localisation updated to 2.5.0 update 3 (UI, readme, documentation)
+
+----------------------------------------------------------------------
  OmegaT 2.5.0 update 4
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   1 Localisation update
+   0 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 4 vs. 2.5.0 update 3
 
   Bug fixes:
   
   - Entering empty translations wasn't working
-
-  Localisation updates:
-
-  - Dutch localisation updated to 2.5.0 update 3 (UI, readme, documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 3

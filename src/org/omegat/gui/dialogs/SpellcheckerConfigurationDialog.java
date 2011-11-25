@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 Zoltan Bartko
@@ -25,6 +25,7 @@
 
 package org.omegat.gui.dialogs;
 
+import java.awt.Cursor;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
@@ -383,13 +384,20 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 
         Preferences
                 .setPreference(Preferences.SPELLCHECKER_DICTIONARY_URL, dictionaryUrlTextField.getText());
+
+        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = getCursor();
+        setCursor(hourglassCursor);
+
         DictionaryInstallerDialog installerDialog;
         try {
             installerDialog = new DictionaryInstallerDialog(this, dicMan);
+            setCursor(oldCursor);
             installerDialog.setVisible(true);
             updateLanguageList();
         } catch (IOException ex) {
-            JOptionPane.showMessageDialog(this, ex.toString(), "error", JOptionPane.ERROR_MESSAGE);
+        	setCursor(oldCursor);
+            JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
     }// GEN-LAST:event_installButtonActionPerformed
 

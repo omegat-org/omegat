@@ -2,10 +2,17 @@
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 5 vs. 2.5.0 update 4
+
+  Bug fixes:
+
+  - GPL license has an outdated FSF address
+  http://sourceforge.net/support/tracker.php?aid=3440748
+
+  - Android filter: non-translatable text was not ignored
 
   Localisation updates:
 

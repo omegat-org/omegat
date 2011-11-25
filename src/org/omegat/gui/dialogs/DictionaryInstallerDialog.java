@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2007 - Zoltan Bartko - bartkozoltan@bartkozoltan.com
@@ -45,7 +45,7 @@ import org.omegat.util.OStrings;
 
 /**
  * The spellchecker dictionary installer.
- * 
+ *
  * @author bartkoz
  * @author Didier Briel
  */
@@ -83,6 +83,7 @@ public class DictionaryInstallerDialog extends JDialog {
 
         UiInitComponents();
 
+        //Connect with remote URL to get list of dictionaries.
         List<String> list = dicMan.getInstallableDictionaryNameList();
 
         listModel = new DefaultListModel();
@@ -226,7 +227,6 @@ public class DictionaryInstallerDialog extends JDialog {
     }// GEN-LAST:event_closeButtonActionPerformed
 
     private void UiInitComponents() {
-        infoTextArea.setText(OStrings.getString("GUI_DICTIONARY_INSTALLER_TEXT_WAIT"));
         installButton.setEnabled(false);
         dictionaryList.setEnabled(false);
     }

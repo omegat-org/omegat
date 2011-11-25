@@ -174,6 +174,9 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void removeFilter() {
             }
+
+            public void setEmptyTranslation(boolean flag) {
+            }
         });
     }
 }

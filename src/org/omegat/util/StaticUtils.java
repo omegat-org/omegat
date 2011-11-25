@@ -1,10 +1,10 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
-               2007 Didier Briel, Zoltan Bartko, Alex Buloichik 
+               2007 Didier Briel, Zoltan Bartko, Alex Buloichik
                2008 - 2010 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -47,7 +47,7 @@ import java.util.regex.Pattern;
 
 /**
  * Static functions taken from CommandThread to reduce file size.
- * 
+ *
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
@@ -126,7 +126,7 @@ public class StaticUtils {
      * Lists all OmegaT-style tags within the supplied string. Everything that
      * looks like <code>&lt;xx0&gt;</code>, <code>&lt;yy1/&gt;</code> or
      * <code>&lt;/zz2&gt;</code> is considered to probably be a tag.
-     * 
+     *
      * @return a string containing the tags with &lt; and &gt; around, and with
      *         a space between tags if there is text between them.
      */
@@ -236,7 +236,7 @@ public class StaticUtils {
 
     /**
      * Tests whether a directory has to be used
-     * 
+     *
      * @return <code>true</code> or <code>false</code>
      */
     private static boolean isProperDirectory(File file) {
@@ -272,7 +272,7 @@ public class StaticUtils {
     }
 
     /**
-     * Converts XML entities to characters. 
+     * Converts XML entities to characters.
      */
     public static String entitiesToCharacters(String text) {
 
@@ -333,7 +333,7 @@ public class StaticUtils {
 
     /**
      * Extracts an element of a class path.
-     * 
+     *
      * @param fullcp
      *            the classpath
      * @param posInsideElement
@@ -405,16 +405,16 @@ public class StaticUtils {
      * If any problems occur while the location of the configuration directory
      * is being determined, an empty string will be returned, resulting in the
      * current working directory being used.
-     * 
+     *
      * Windows XP : <Documents and Settings>\<User name>\Application Data\OmegaT
      * Windows Vista : User\<User name>\AppData\Roaming Linux: <User
      * Home>/.omegat Solaris/SunOS: <User Home>/.omegat FreeBSD: <User
      * Home>/.omegat Mac OS X: <User Home>/Library/Preferences/OmegaT Other:
      * User home directory
-     * 
+     *
      * @return The full path of the directory containing the OmegaT
      *         configuration files, including trailing path separator.
-     * 
+     *
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String getConfigDir() {
@@ -653,15 +653,15 @@ public class StaticUtils {
     /**
      * Escapes the passed string for use in regex matching, so special regex
      * characters are interpreted as normal characters during regex searches.
-     * 
+     *
      * This is done by prepending a backslash before each occurrence of the
      * following characters: \^.*+[]{}()&|-:=?!<>
-     * 
+     *
      * @param text
      *            The text to escape
-     * 
+     *
      * @return The escaped text
-     * 
+     *
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String escapeNonRegex(String text) {
@@ -671,22 +671,22 @@ public class StaticUtils {
     /**
      * Escapes the passed string for use in regex matching, so special regex
      * characters are interpreted as normal characters during regex searches.
-     * 
+     *
      * This is done by prepending a backslash before each occurrence of the
      * following characters: \^.+[]{}()&|-:=!<>
-     * 
+     *
      * If the parameter escapeWildcards is true, asterisks (*) and questions
      * marks (?) will also be escaped. If false, these will be converted to
      * regex tokens (* ->
-     * 
+     *
      * @param text
      *            The text to escape
      * @param escapeWildcards
      *            If true, asterisks and question marks are also escaped. If
      *            false, these are converted to there regex equivalents.
-     * 
+     *
      * @return The escaped text
-     * 
+     *
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String escapeNonRegex(String text, boolean escapeWildcards) {
@@ -732,19 +732,19 @@ public class StaticUtils {
 
     /**
      * Formats UI strings.
-     * 
+     *
      * Note: This is only a first attempt at putting right what goes wrong in
      * MessageFormat. Currently it only duplicates single quotes, but it doesn't
      * even test if the string contains parameters (numbers in curly braces),
      * and it doesn't allow for string containg already escaped quotes.
-     * 
+     *
      * @param str
      *            The string to format
      * @param arguments
      *            Arguments to use in formatting the string
-     * 
+     *
      * @return The formatted string
-     * 
+     *
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
     public static String format(String str, Object... arguments) {
@@ -763,6 +763,8 @@ public class StaticUtils {
 
         URL url = new URL(urlString);
         urlConn = url.openConnection();
+        //don't wait forever. 10 seconds should be enough.
+        urlConn.setConnectTimeout(10000);
         in = urlConn.getInputStream();
 
         ByteArrayOutputStream out = new ByteArrayOutputStream();
@@ -856,7 +858,7 @@ public class StaticUtils {
     /**
      * Replace invalid XML chars by spaces. See supported chars at
      * http://www.w3.org/TR/2006/REC-xml-20060816/#charsets.
-     * 
+     *
      * @param str
      *            input stream
      * @return result stream

@@ -25,6 +25,10 @@
 
 package org.omegat.filters3.xml.android;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.omegat.filters2.Instance;
 import org.omegat.filters3.xml.XMLFilter;
 import org.omegat.util.OStrings;
@@ -36,6 +40,9 @@ import org.xml.sax.Attributes;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class AndroidFilter extends XMLFilter {
+
+    static Set<String> NAMED_TAGS = new HashSet<String>(Arrays.asList(new String[] { "/resources/string",
+            "/resources/color", "/resources/array", "/resources/string-array", "/resources/integer-array" }));
 
     private String id, idPlurals = "", comment, idComment;
 
@@ -65,7 +72,7 @@ public class AndroidFilter extends XMLFilter {
 
     public void tagStart(String path, Attributes atts) {
         if (atts != null) {
-            if ("/resources/string".equals(path)) {
+            if (NAMED_TAGS.contains(path)) {
                 id = atts.getValue("name");
                 idComment = comment;
             } else if ("/resources/plurals".equals(path)) {

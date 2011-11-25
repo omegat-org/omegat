@@ -27,6 +27,8 @@ package org.omegat.filters3.xml.android;
 
 import java.util.regex.Pattern;
 
+import org.omegat.filters3.Attribute;
+import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -40,5 +42,18 @@ public class AndroidDialect extends DefaultXMLDialect {
     public AndroidDialect() {
         defineConstraint(CONSTRAINT_ROOT, ROOT_PATTERN);
         defineParagraphTags(new String[] { "string", "item" });
+    }
+
+    @Override
+    public Boolean validateIntactTag(String tag, Attributes atts) {
+        if (atts != null) {
+            for (int i = 0; i < atts.size(); i++) {
+                Attribute oneAttribute = atts.get(i);
+                if (oneAttribute.getName().equalsIgnoreCase("translatable")) {
+                    return "false".equalsIgnoreCase(oneAttribute.getValue());
+                }
+            }
+        }
+        return false;
     }
 }

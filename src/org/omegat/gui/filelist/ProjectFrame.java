@@ -288,7 +288,7 @@ public class ProjectFrame extends JFrame {
         tableFiles.addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+                if (e.getKeyCode() == KeyEvent.VK_ENTER) {
                     gotoFile(tableFiles.getSelectedRow());
                     e.consume();
                 }

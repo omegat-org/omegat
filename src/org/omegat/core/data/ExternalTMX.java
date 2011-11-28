@@ -53,10 +53,10 @@ public class ExternalTMX {
         entries = new ArrayList<TMXEntry>();
 
         TMXReader2.LoadCallback loader = new TMXReader2.LoadCallback() {
-            public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+            public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                     TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                 if (tuvSource == null) {
-                    return;
+                    return false;
                 }
 
                 if (tuvTarget != null) {
@@ -70,6 +70,7 @@ public class ExternalTMX {
                         }
                     }
                 }
+                return true;
             }
 
             private void addTuv(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,

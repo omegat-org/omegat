@@ -162,9 +162,10 @@ public class TMXWriterTest extends TestFilterBase {
         sources.clear();
         new TMXReader2().readTMX(outFile, new Language("en-US"), new Language("be-BY"), false, false,
                 extLevel2, useSlash, new TMXReader2.LoadCallback() {
-                    public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         sources.add(tuvSource.text);
+                        return true;
                     }
                 });
     }

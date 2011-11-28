@@ -40,9 +40,10 @@ public class TMXReaderTest extends TestCore {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-level1.tmx"), new Language("en-US"),
                 new Language("be"), false, false, false, false, new TMXReader2.LoadCallback() {
-                    public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
+                        return true;
                     }
                 });
         assertEquals("betuv", tr.get("entuv"));
@@ -55,9 +56,10 @@ public class TMXReaderTest extends TestCore {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/test-level2.tmx"), new Language("en-US"),
                 new Language("be"), false, false, false, false, new TMXReader2.LoadCallback() {
-                    public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
+                        return true;
                     }
                 });
         assertEquals("betuv", tr.get("entuv"));
@@ -67,9 +69,10 @@ public class TMXReaderTest extends TestCore {
         final Map<String, String> tr = new TreeMap<String, String>();
         new TMXReader2().readTMX(new File("test/data/tmx/invalid.tmx"), new Language("en"),
                 new Language("be"), false, false, true, false, new TMXReader2.LoadCallback() {
-                    public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+                    public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
                         tr.put(tuvSource.text, tuvTarget.text);
+                        return true;
                     }
                 });
     }

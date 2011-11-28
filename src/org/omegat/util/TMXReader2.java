@@ -39,17 +39,22 @@ import java.util.TimeZone;
 import java.util.TreeMap;
 
 import javax.xml.namespace.QName;
+import javax.xml.stream.Location;
 import javax.xml.stream.XMLEventReader;
 import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLReporter;
+import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.events.Attribute;
 import javax.xml.stream.events.Characters;
 import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
+import org.omegat.core.Core;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
+import org.xml.sax.SAXParseException;
 
 /**
  * Helper for read TMX files, using StAX.
@@ -74,6 +79,16 @@ public class TMXReader2 {
     static {
         FACTORY = XMLInputFactory.newInstance();
         FACTORY.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
+        FACTORY.setXMLReporter(new XMLReporter() {
+            public void report(String message, String error_type, Object info, Location location)
+                    throws XMLStreamException {
+                Log.logWarningRB(
+                        "TMXR_WARNING_WHILE_PARSING",
+                        new Object[] { String.valueOf(location.getLineNumber()),
+                                String.valueOf(location.getColumnNumber()) });
+                Log.log(message + ": " + info);
+            }
+        });
 
         DATE_FORMAT1 = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
         DATE_FORMAT1.setTimeZone(TimeZone.getTimeZone("UTC"));
@@ -107,6 +122,11 @@ public class TMXReader2 {
         this.extTmxLevel2 = extTmxLevel2;
         this.useSlash = useSlash;
 
+        // log the parsing attempt
+        Log.logRB("TMXR_INFO_READING_FILE", new Object[] { file.getAbsolutePath() });
+
+        boolean allFound = true;
+
         InputStream in = new BufferedInputStream(new FileInputStream(file));
         xml = FACTORY.createXMLEventReader(in);
         try {
@@ -119,22 +139,51 @@ public class TMXReader2 {
                         parseTu(eStart);
                         ParsedTuv origTuv = getTuvByLang(sourceLanguage);
                         ParsedTuv targetTuv = getTuvByLang(targetLanguage);
-                        callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype);
+                        allFound &= callback.onEntry(currentTu, origTuv, targetTuv, isParagraphSegtype);
                     } else if ("header".equals(eStart.getName().getLocalPart())) {
-                        parseHeader(eStart);
+                        parseHeader(eStart, sourceLanguage);
                     }
                     break;
                 }
             }
+        } catch (SAXParseException ex) {
+            Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
+            Core.getMainWindow().displayErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(),
+                    ex.getColumnNumber());
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(), Log.getLogLocation());
+            Core.getMainWindow().displayErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(),
+                    Log.getLogLocation());
         } finally {
             xml.close();
             in.close();
         }
+
+        if (!allFound) {
+            Log.logWarningRB("TMXR_WARNING_SOURCE_NOT_FOUND");
+        }
+        Log.logRB("TMXR_INFO_READING_COMPLETE");
+        Log.log("");
     }
 
-    protected void parseHeader(StartElement element) {
+    protected void parseHeader(StartElement element, final Language sourceLanguage) {
         isParagraphSegtype = SEG_PARAGRAPH.equals(getAttributeValue(element, "segtype"));
         isOmegaT = CT_OMEGAT.equals(getAttributeValue(element, "creationtool"));
+        
+        // log some details
+        Log.logRB("TMXR_INFO_CREATION_TOOL", new Object[] { getAttributeValue(element, "creationtool") });
+        Log.logRB("TMXR_INFO_CREATION_TOOL_VERSION",
+                new Object[] { getAttributeValue(element, "creationtoolversion") });
+        Log.logRB("TMXR_INFO_SEG_TYPE", new Object[] { getAttributeValue(element, "segtype") });
+        Log.logRB("TMXR_INFO_SOURCE_LANG", new Object[] { getAttributeValue(element, "tmxSourceLanguage") });
+
+        // give a warning if the TMX source language is
+        // different from the project source language
+        String tmxSourceLanguage = getAttributeValue(element, "srclang");
+        if (!tmxSourceLanguage.equalsIgnoreCase(sourceLanguage.getLanguage())) {
+            Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", new Object[] { tmxSourceLanguage,
+                    sourceLanguage });
+        }
     }
 
     protected void parseTu(StartElement element) throws Exception {
@@ -493,7 +542,10 @@ public class TMXReader2 {
      * Callback for receive data from TMX.
      */
     public interface LoadCallback {
-        void onEntry(ParsedTu tu, ParsedTuv tuvSource, ParsedTuv tuvTarget, boolean isParagraphSegtype);
+        /**
+         * @return true if TU contains required source and target info
+         */
+        boolean onEntry(ParsedTu tu, ParsedTuv tuvSource, ParsedTuv tuvTarget, boolean isParagraphSegtype);
     }
 
     public static class ParsedTu {

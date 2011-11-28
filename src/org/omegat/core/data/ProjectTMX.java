@@ -199,11 +199,11 @@ public class ProjectTMX {
             this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
         }
 
-        public void onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
+        public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                 TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
             if (tuvSource == null) {
                 // source Tuv not found
-                return;
+                return false;
             }
             String changer = null;
             long dt = 0;
@@ -247,6 +247,7 @@ public class ProjectTMX {
                     }
                 }
             }
+            return true;
         }
     };
 

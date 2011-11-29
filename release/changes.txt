@@ -2,7 +2,7 @@
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.0 update 5 vs. 2.5.0 update 4
@@ -13,6 +13,8 @@
   http://sourceforge.net/support/tracker.php?aid=3440748
 
   - Android filter: non-translatable text was not ignored
+
+  - Log messages on TMX loading were missing
 
   Localisation updates:
 

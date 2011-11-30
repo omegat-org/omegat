@@ -45,6 +45,9 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters2.text.dokuwiki.DokuWikiFilter
 OmegaT-Plugin: filter
 
+Name: org.omegat.filters2.text.magento.MagentoFilter
+OmegaT-Plugin: filter
+
 Name: org.omegat.filters3.xml.docbook.DocBookFilter
 OmegaT-Plugin: filter
 

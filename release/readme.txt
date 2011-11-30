@@ -243,6 +243,7 @@ Code has been contributed by
   Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
+  Michael Zakharov
 
 Other contributions by
   Sabine Cretella

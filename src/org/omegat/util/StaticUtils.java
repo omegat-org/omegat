@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik
-               2008 - 2010 Didier Briel
+               2008 - 2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -491,7 +491,8 @@ public class StaticUtils {
         }
         // Check for UNIX varieties
         // Solaris is generally detected as SunOS
-        else if (os.equals("Linux") || os.equals("SunOS") || os.equals("Solaris") || os.equals("FreeBSD")) {
+        else if (os.equals("Linux") || os.equals("SunOS") || os.equals("Solaris") || os.equals("FreeBSD") ||
+                 os.equals("NetBSD") || os.equals("DragonFly")) {
             // set the config dir to the user's home dir + "/.omegat/", so it's
             // hidden
             m_configDir = home + UNIX_CONFIG_DIR;

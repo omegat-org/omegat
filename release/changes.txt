@@ -194,7 +194,7 @@ is saved.
  OmegaT 2.3.0 update 4
 ----------------------------------------------------------------------
    0 Enhancement
-   2 Bug fixes
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.3.0 update 4 vs. 2.3.0 update 3
@@ -206,6 +206,13 @@ is saved.
 
   - When several dictionaries were used, words written in uppercase in 
 the dictionaries could fail to be recognised
+
+  - NetBSD and DragonFky not recognized as UNIX
+  http://sourceforge.net/support/tracker.php?aid=3451034
+
+  Localisation updates:  
+  - Slovenian localisation updated to 2.3 (UI)
+  - Dutch localisation updated to 2.3 (backported from 2.5.0 update 3) (documentation)
 
 ----------------------------------------------------------------------
  OmegaT 2.3.0 update 3

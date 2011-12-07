@@ -99,9 +99,6 @@ OmegaT-Plugin: Marker
 Name: org.omegat.core.spellchecker.SpellCheckerMarker
 OmegaT-Plugin: Marker
 
-Name: org.omegat.core.machinetranslators.GoogleTranslate
-OmegaT-Plugin: MachineTranslator
-
 Name: org.omegat.core.machinetranslators.Google2Translate
 OmegaT-Plugin: MachineTranslator
 

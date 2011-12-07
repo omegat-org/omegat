@@ -193,11 +193,17 @@ is saved.
 ----------------------------------------------------------------------
  OmegaT 2.3.0 update 4
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.3.0 update 4 vs. 2.3.0 update 3
+
+  Other enhancements:
+
+  - As the Google Translate API v1 has been shutt off (see 
+http://code.google.com/apis/language/translate/v1/getting_started.html), 
+the corresponding menu entry has been removed
 
   Bug fixes:
 

@@ -50,11 +50,9 @@ import javax.xml.stream.events.EndElement;
 import javax.xml.stream.events.StartElement;
 import javax.xml.stream.events.XMLEvent;
 
-import org.omegat.core.Core;
 import org.xml.sax.EntityResolver;
 import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
-import org.xml.sax.SAXParseException;
 
 /**
  * Helper for read TMX files, using StAX.
@@ -146,14 +144,6 @@ public class TMXReader2 {
                     break;
                 }
             }
-        } catch (SAXParseException ex) {
-            Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
-            Core.getMainWindow().displayErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(),
-                    ex.getColumnNumber());
-        } catch (Exception ex) {
-            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(), Log.getLogLocation());
-            Core.getMainWindow().displayErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", file.getAbsolutePath(),
-                    Log.getLogLocation());
         } finally {
             xml.close();
             in.close();
@@ -175,7 +165,7 @@ public class TMXReader2 {
         Log.logRB("TMXR_INFO_CREATION_TOOL_VERSION",
                 new Object[] { getAttributeValue(element, "creationtoolversion") });
         Log.logRB("TMXR_INFO_SEG_TYPE", new Object[] { getAttributeValue(element, "segtype") });
-        Log.logRB("TMXR_INFO_SOURCE_LANG", new Object[] { getAttributeValue(element, "tmxSourceLanguage") });
+        Log.logRB("TMXR_INFO_SOURCE_LANG", new Object[] { getAttributeValue(element, "srclang") });
 
         // give a warning if the TMX source language is
         // different from the project source language

@@ -77,6 +77,7 @@ import org.omegat.util.RuntimePreferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.UIThreadsUtil;
+import org.xml.sax.SAXParseException;
 
 /**
  * Loaded project implementation. Only translation could be changed after project will be loaded and set by
@@ -564,9 +565,13 @@ public class RealProject implements IProject {
                 FileUtil.backupFile(tmxFile);
                 FileUtil.removeOldBackups(tmxFile);
             }
-        } catch (Exception e) {
-            Log.logErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
-            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_LOADING_PROJECT_FILE");
+        } catch (SAXParseException ex) {
+            Log.logErrorRB(ex, "TMXR_FATAL_ERROR_WHILE_PARSING", ex.getLineNumber(), ex.getColumnNumber());
+            throw ex;
+        } catch (Exception ex) {
+            Log.logErrorRB(ex, "TMXR_EXCEPTION_WHILE_PARSING", tmxFile.getAbsolutePath(),
+                    Log.getLogLocation());
+            throw ex;
         }
     }
 

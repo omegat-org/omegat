@@ -48,7 +48,8 @@ public class ExternalTMX {
         this.entries = entries;
     }
 
-    public ExternalTMX(final ProjectProperties props, final File file) throws Exception {
+    public ExternalTMX(final ProjectProperties props, final File file, final boolean extTmxLevel2,
+            final boolean useSlash) throws Exception {
         this.name = file.getName();
         entries = new ArrayList<TMXEntry>();
 
@@ -94,9 +95,7 @@ public class ExternalTMX {
         };
 
         new TMXReader2().readTMX(file, props.getSourceLanguage(), props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(), false,
-                Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2),
-                Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH), loader);
+                props.isSentenceSegmentingEnabled(), false, extTmxLevel2, useSlash, loader);
     }
 
     public String getName() {

@@ -77,6 +77,7 @@ public class TMXReader2 {
     private boolean isOmegaT = false;
     private boolean extTmxLevel2;
     private boolean useSlash;
+    private boolean isSegmentingEnabled;
     
     private int errorsCount, warningsCount;
 
@@ -121,6 +122,7 @@ public class TMXReader2 {
             final boolean useSlash, final LoadCallback callback) throws Exception {
         this.extTmxLevel2 = extTmxLevel2;
         this.useSlash = useSlash;
+        this.isSegmentingEnabled = isSegmentingEnabled;
 
         // log the parsing attempt
         Log.logRB("TMXR_INFO_READING_FILE", new Object[] { file.getAbsolutePath() });
@@ -177,6 +179,11 @@ public class TMXReader2 {
         if (!tmxSourceLanguage.equalsIgnoreCase(sourceLanguage.getLanguage())) {
             Log.logWarningRB("TMXR_WARNING_INCORRECT_SOURCE_LANG", new Object[] { tmxSourceLanguage,
                     sourceLanguage });
+        }
+
+        // give a warning that TMX file will be upgraded to sentence segmentation
+        if (isSegmentingEnabled && isParagraphSegtype) {
+            Log.logWarningRB("TMXR_WARNING_UPGRADE_SENTSEG");
         }
     }
 

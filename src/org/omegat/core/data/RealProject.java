@@ -671,7 +671,9 @@ public class RealProject implements IProject {
                 Map<String, ExternalTMX> newTransMemories = new TreeMap<String, ExternalTMX>(transMemories);
                 if (file.exists()) {
                     try {
-                        ExternalTMX newTMX = new ExternalTMX(m_config, file);
+                        ExternalTMX newTMX = new ExternalTMX(m_config, file,
+                                Preferences.isPreference(Preferences.EXT_TMX_SHOW_LEVEL2),
+                                Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH));
                         newTransMemories.put(file.getPath(), newTMX);
 
                         if (FileUtil.computeRelativePath(tmRoot, file).startsWith(AUTO_TMX_DIR)) {

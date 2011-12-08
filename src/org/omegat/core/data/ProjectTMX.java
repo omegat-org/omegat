@@ -226,16 +226,16 @@ public class ProjectTMX {
                 for (int i = 0; i < sources.size(); i++) {
                     String segmentSource = sources.get(i);
                     String segmentTranslation = targets.get(i);
-                    EntryKey key = createKeyByProps(tuvSource.text, tu.props);
+                    EntryKey key = createKeyByProps(segmentSource, tu.props);
                     boolean defaultTranslation = key.file == null;
                     TMXEntry te = new TMXEntry(segmentSource, segmentTranslation, changer, dt, tu.note,
                             defaultTranslation);
                     if (defaultTranslation) {
                         // default translation
-                        if (translationDefault != null && callback.existSourceInProject(tuvSource.text)) {
-                            translationDefault.put(tuvSource.text, te);
+                        if (translationDefault != null && callback.existSourceInProject(segmentSource)) {
+                            translationDefault.put(segmentSource, te);
                         } else {
-                            orphanedDefault.put(tuvSource.text, te);
+                            orphanedDefault.put(segmentSource, te);
                         }
                     } else {
                         // multiple translation

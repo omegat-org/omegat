@@ -61,9 +61,8 @@ import org.xml.sax.SAXException;
  */
 public class TMXReader2 {
 
-    static final XMLInputFactory FACTORY;
-
-    private static final SimpleDateFormat DATE_FORMAT1, DATE_FORMAT2, DATE_FORMAT_OUT;
+    private final XMLInputFactory factory;
+    private final SimpleDateFormat dateFormat1, dateFormat2, dateFormatOut;
 
     /** Segment Type attribute value: "paragraph" */
     public static final String SEG_PARAGRAPH = "paragraph";
@@ -74,32 +73,12 @@ public class TMXReader2 {
 
     private XMLEventReader xml;
 
-    static {
-        FACTORY = XMLInputFactory.newInstance();
-        FACTORY.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
-        FACTORY.setXMLReporter(new XMLReporter() {
-            public void report(String message, String error_type, Object info, Location location)
-                    throws XMLStreamException {
-                Log.logWarningRB(
-                        "TMXR_WARNING_WHILE_PARSING",
-                        new Object[] { String.valueOf(location.getLineNumber()),
-                                String.valueOf(location.getColumnNumber()) });
-                Log.log(message + ": " + info);
-            }
-        });
-
-        DATE_FORMAT1 = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        DATE_FORMAT1.setTimeZone(TimeZone.getTimeZone("UTC"));
-        DATE_FORMAT2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
-        DATE_FORMAT2.setTimeZone(TimeZone.getTimeZone("UTC"));
-        DATE_FORMAT_OUT = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
-        DATE_FORMAT_OUT.setTimeZone(TimeZone.getTimeZone("UTC"));
-    }
-
     private boolean isParagraphSegtype = true;
     private boolean isOmegaT = false;
     private boolean extTmxLevel2;
     private boolean useSlash;
+    
+    private int errorsCount, warningsCount;
 
     ParsedTu currentTu = new ParsedTu();
 
@@ -110,6 +89,29 @@ public class TMXReader2 {
     StringBuilder segInlineTag = new StringBuilder();
     // map of 'i' attributes to tag numbers
     Map<String, Integer> pairTags = new TreeMap<String, Integer>();
+
+    public TMXReader2() {
+        factory = XMLInputFactory.newInstance();
+        factory.setProperty(XMLInputFactory.IS_NAMESPACE_AWARE, false);
+        factory.setXMLReporter(new XMLReporter() {
+            public void report(String message, String error_type, Object info, Location location)
+                    throws XMLStreamException {
+                Log.logWarningRB(
+                        "TMXR_WARNING_WHILE_PARSING",
+                        new Object[] { String.valueOf(location.getLineNumber()),
+                                String.valueOf(location.getColumnNumber()) });
+                Log.log(message + ": " + info);
+                warningsCount++;
+            }
+        });
+        
+        dateFormat1 = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
+        dateFormat1.setTimeZone(TimeZone.getTimeZone("UTC"));
+        dateFormat2 = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.ENGLISH);
+        dateFormat2.setTimeZone(TimeZone.getTimeZone("UTC"));
+        dateFormatOut = new SimpleDateFormat("yyyyMMdd'T'HHmmss'Z'", Locale.ENGLISH);
+        dateFormatOut.setTimeZone(TimeZone.getTimeZone("UTC"));
+    }
 
     /**
      * Read TMX file.
@@ -125,8 +127,9 @@ public class TMXReader2 {
 
         boolean allFound = true;
 
+        
         InputStream in = new BufferedInputStream(new FileInputStream(file));
-        xml = FACTORY.createXMLEventReader(in);
+        xml = factory.createXMLEventReader(in);
         try {
             while (xml.hasNext()) {
                 XMLEvent e = xml.nextEvent();
@@ -151,6 +154,7 @@ public class TMXReader2 {
 
         if (!allFound) {
             Log.logWarningRB("TMXR_WARNING_SOURCE_NOT_FOUND");
+            warningsCount++;
         }
         Log.logRB("TMXR_INFO_READING_COMPLETE");
         Log.log("");
@@ -410,6 +414,7 @@ public class TMXReader2 {
                     // check error of TMX reading
                     Log.logErrorRB("TMX_ERROR_READING_LEVEL2", e.getLocation().getLineNumber(), e
                             .getLocation().getColumnNumber());
+                    errorsCount++;
                     segContent.setLength(0);
                     // wait for end seg
                     while (true) {
@@ -503,20 +508,16 @@ public class TMXReader2 {
         return bestTuv;
     }
 
-    public static long parseISO8601date(String str) {
+    public long parseISO8601date(String str) {
         if (str == null) {
             return 0;
         }
         try {
-            synchronized (DATE_FORMAT1) {
-                return DATE_FORMAT1.parse(str).getTime();
-            }
+            return dateFormat1.parse(str).getTime();
         } catch (ParseException ex) {
         }
         try {
-            synchronized (DATE_FORMAT2) {
-                return DATE_FORMAT2.parse(str).getTime();
-            }
+            return dateFormat2.parse(str).getTime();
         } catch (ParseException ex) {
         }
 

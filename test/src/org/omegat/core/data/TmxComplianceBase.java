@@ -36,6 +36,8 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 
 import org.junit.Before;
+import org.omegat.core.segmentation.SRX;
+import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.ITranslateCallback;
@@ -54,6 +56,8 @@ public abstract class TmxComplianceBase extends TestCase {
     public void setUp() throws Exception {
         outFile = new File("build/testdata/OmegaT_test-" + getClass().getName() + "-" + getName());
         outFile.getParentFile().mkdirs();
+        
+        Segmenter.srx = SRX.getSRX();
     }
 
     protected void compareTexts(File f1, String charset1, File f2, String charset2) throws Exception {
@@ -89,20 +93,24 @@ public abstract class TmxComplianceBase extends TestCase {
     }
 
     protected void translateTextUsingTmx(String fileTextIn, String inCharset, String fileTMX,
-            String fileTextOut, String outCharset, String sourceLang, String targetLang) throws Exception {
+            String fileTextOut, String outCharset, String sourceLang, String targetLang,
+            Map<String, TMXEntry> tmxPatch) throws Exception {
         TextFilter f = new TextFilter();
         Map<String, String> c = new TreeMap<String, String>();
         c.put(TextFilter.OPTION_SEGMENT_ON, TextFilter.SEGMENT_BREAKS);
 
         ProjectProperties props = new TestProjectProperties(sourceLang, targetLang);
-        translateUsingTmx(f, c, fileTextIn, inCharset, fileTMX, fileTextOut, outCharset, props);
+        translateUsingTmx(f, c, fileTextIn, inCharset, fileTMX, fileTextOut, outCharset, props, tmxPatch);
     }
 
     protected void translateUsingTmx(IFilter filter, Map<String, String> config, String fileTextIn,
-            String inCharset, String fileTMX, String fileTextOut, String outCharset, ProjectProperties props)
-            throws Exception {
+            String inCharset, String fileTMX, String fileTextOut, String outCharset, ProjectProperties props,
+            Map<String, TMXEntry> tmxPatch) throws Exception {
         final ProjectTMX tmx = new ProjectTMX(props, new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
                 orphanedCallback, new HashMap<EntryKey, TMXEntry>());
+        if (tmxPatch != null) {
+            tmx.translationDefault.putAll(tmxPatch);
+        }
 
         FilterContext fc = new FilterContext(props);
         fc.setInEncoding(inCharset);

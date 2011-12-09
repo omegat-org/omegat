@@ -26,10 +26,12 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 
 import org.junit.Test;
 import org.omegat.filters2.html2.HTMLFilter2;
+import org.omegat.filters2.html2.HTMLOptions;
 
 /**
  * TMX Compliance tests as described on http://www.lisa.org/tmx/comp.htm
@@ -37,6 +39,10 @@ import org.omegat.filters2.html2.HTMLFilter2;
  * The Level 1 Compliance verifies mostly TMX structure, white spaces handling
  * and how the application deals with non-ASCII characters and special characters
  * in XML such as '<', or '&', XML syntax, encodings, and so forth.
+ * 
+ * The Level 2 compliance verifies mostly how the application deals with content 
+ * markup. To qualify for Level 2 compliance, the application must also qualify 
+ * for Level 1 compliance.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -47,7 +53,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1A() throws Exception {
         translateTextUsingTmx("ImportTest1A.txt", "UTF-8", "ImportTest1A.tmx", "ImportTest1A_fr-ca.txt",
-                "UTF-8", "EN-US", "FR-CA");
+                "UTF-8", "EN-US", "FR-CA", null);
     }
 
     /**
@@ -56,7 +62,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1B() throws Exception {
         translateTextUsingTmx("ImportTest1B.txt", "UTF-8", "ImportTest1B.tmx", "ImportTest1B_fr-ca.txt",
-                "UTF-8", "EN-US", "FR-CA");
+                "UTF-8", "EN-US", "FR-CA", null);
     }
 
     /**
@@ -65,7 +71,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1C() throws Exception {
         translateTextUsingTmx("ImportTest1C.txt", "UTF-8", "ImportTest1C.tmx", "ImportTest1C_fr-ca.txt",
-                "UTF-8", "EN-US", "FR-CA");
+                "UTF-8", "EN-US", "FR-CA", null);
     }
 
     /**
@@ -74,7 +80,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1D() throws Exception {
         translateTextUsingTmx("ImportTest1D.txt", "UTF-8", "ImportTest1D.tmx", "ImportTest1D_en-gb.txt",
-                "UTF-8", "EN-US", "EN-GB");
+                "UTF-8", "EN-US", "EN-GB", null);
     }
 
     /**
@@ -83,7 +89,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1E() throws Exception {
         translateTextUsingTmx("ImportTest1E.txt", "UTF-8", "ImportTest1E.tmx", "ImportTest1E_en-gb.txt",
-                "UTF-8", "EN-US", "EN-GB");
+                "UTF-8", "EN-US", "EN-GB", null);
     }
 
     /**
@@ -92,7 +98,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1F() throws Exception {
         translateTextUsingTmx("ImportTest1F.txt", "UTF-8", "ImportTest1F.tmx", "ImportTest1F_en-gb.txt",
-                "UTF-8", "EN-US", "EN-GB");
+                "UTF-8", "EN-US", "EN-GB", null);
     }
 
     /**
@@ -101,7 +107,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1G() throws Exception {
         translateTextUsingTmx("ImportTest1G.txt", "UTF-8", "ImportTest1G.tmx", "ImportTest1G_en-gb.txt",
-                "UTF-8", "EN-US", "EN-GB");
+                "UTF-8", "EN-US", "EN-GB", null);
     }
 
     /**
@@ -110,7 +116,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1H() throws Exception {
         translateTextUsingTmx("ImportTest1H.txt", "UTF-8", "ImportTest1H.tmx", "ImportTest1H_en-gb.txt",
-                "UTF-8", "EN-US", "EN-GB");
+                "UTF-8", "EN-US", "EN-GB", null);
     }
 
     /**
@@ -119,7 +125,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1I() throws Exception {
         translateTextUsingTmx("ImportTest1I.txt", "UTF-8", "ImportTest1I.tmx", "ImportTest1I_ja-jp.txt",
-                "UTF-16LE", "EN-US", "JA-JP");
+                "UTF-16LE", "EN-US", "JA-JP", null);
     }
 
     /**
@@ -196,14 +202,23 @@ public class TmxComplianceTests extends TmxComplianceBase {
     }
 
     /**
-     * Test Import2A - Content Markup Syntax in HTML
+     * Test Import2A - Content Markup Syntax in HTML.
+     * 
+     * TEST CHANGED FROM TMX COMPLIANCE PACK BECAUSE WE HAVE OTHER SEGMENTATION SETTINGS, i.e. "Picture: <img
+     * src="img.png"/>" should be processed as one segment by TMX compliance tests, but it's not a one segment
+     * by OmegaT segmentation. Since it out of scope of testing, we patch tmx for runtime-only.
      */
     @Test
     public void testImport2A() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
         props.setSentenceSegmentingEnabled(true);
-        translateUsingTmx(new HTMLFilter2(), new TreeMap<String, String>(), "ImportTest2A.htm", "UTF-8",
-                "ImportTest2A.tmx", "ImportTest2A_fr-ca.htm", "UTF-8", props);
+        Map<String, String> config = new TreeMap<String, String>();
+        config.put(HTMLOptions.OPTION_TRANSLATE_SRC, "false");
+
+        Map<String, TMXEntry> fix = new TreeMap<String, TMXEntry>();
+        fix.put("Picture:", new TMXEntry("Picture:", "Image:", null, 0, null, true));
+        translateUsingTmx(new HTMLFilter2(), config, "ImportTest2A.htm", "UTF-8", "ImportTest2A.tmx",
+                "ImportTest2A_fr-ca.htm", "UTF-8", props, fix);
     }
 
     /**

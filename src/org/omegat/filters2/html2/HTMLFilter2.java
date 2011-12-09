@@ -163,7 +163,7 @@ public class HTMLFilter2 extends AbstractFilter {
     // ////////////////////////////////////////////////////////////////////////
 
     /** Package-internal processEntry to give it to FilterVisitor */
-    String privateProcessEntry(String entry, String comment) {
+    public String privateProcessEntry(String entry, String comment) {
         if (skipRegExpPattern != null) {
             if (skipRegExpPattern.matcher(entry).matches()) {
                 // System.out.println("Skipping \""+entry+"\"");

@@ -2,7 +2,7 @@
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
    1 Enhancement
-   3 Bug fixes
+   4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.5.0 update 5 vs. 2.5.0 update 4
@@ -19,6 +19,9 @@
   - Android filter: non-translatable text was not ignored
 
   - Log messages on TMX loading were missing
+
+  - In the HHC filter, the comment pane contained Tag: PARAM Attribute: value
+for all segments
 
   Localisation updates:
 

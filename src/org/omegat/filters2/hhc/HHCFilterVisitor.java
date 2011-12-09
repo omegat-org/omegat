@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
- Copyright (C) 2006 by Didier Briel
+ Copyright (C) 2006-2011 by Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -64,4 +64,21 @@ class HHCFilterVisitor extends FilterVisitor {
         return tagname.equals("HTML") || tagname.equals("HEAD") || tagname.equals("BODY");
     }
 
+    /**
+     * If the attribute of the tag is not empty, it translates it as a separate
+     * segment.
+     *
+     * @param tag
+     *            the tag object
+     * @param key
+     *            the name of the attribute
+     */
+    @Override
+    protected void maybeTranslateAttribute(Tag tag, String key) {
+        String attr = tag.getAttribute(key);
+        if (attr != null) {
+            String trans = filter.privateProcessEntry(entitiesToChars(attr), null);
+            tag.setAttribute(key, charsToEntities(trans));
+        }
+    }
 }

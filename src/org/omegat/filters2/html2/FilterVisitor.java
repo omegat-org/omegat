@@ -55,7 +55,7 @@ import org.omegat.util.StaticUtils;
  * @author Martin Fleurke
  */
 public class FilterVisitor extends NodeVisitor {
-    private HTMLFilter2 filter;
+    protected HTMLFilter2 filter;
     private BufferedWriter writer;
     private HTMLOptions options;
 
@@ -848,7 +848,7 @@ public class FilterVisitor extends NodeVisitor {
             { "diams", new Integer(9830) }, };
 
     /** Converts HTML entities to normal characters */
-    private String entitiesToChars(String str) {
+    protected String entitiesToChars(String str) {
         int strlen = str.length();
         StringBuffer res = new StringBuffer(strlen);
         for (int i = 0; i < strlen; i++) {
@@ -981,7 +981,7 @@ public class FilterVisitor extends NodeVisitor {
      * Converts characters that must be converted (&lt; &gt; &amp; '&nbsp;'
      * (nbsp)) into HTML entities
      */
-    private String charsToEntities(String str) {
+    protected String charsToEntities(String str) {
         int strlen = str.length();
         StringBuffer res = new StringBuffer(strlen * 5);
         for (int i = 0; i < strlen; i++) {

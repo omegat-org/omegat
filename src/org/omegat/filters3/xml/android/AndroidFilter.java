@@ -40,6 +40,7 @@ import org.xml.sax.Attributes;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class AndroidFilter extends XMLFilter {
+    static final String DO_NOT_TRANSLATE = "Do not translate.";
 
     static Set<String> NAMED_TAGS = new HashSet<String>(Arrays.asList(new String[] { "/resources/string",
             "/resources/color", "/resources/array", "/resources/string-array", "/resources/integer-array" }));
@@ -101,6 +102,14 @@ public class AndroidFilter extends XMLFilter {
      * Filter-specific chars processing.
      */
     public String translate(String entry) {
+        /**
+         * Android sources has some entries without translatable="false" but with this comment. Yes, it's
+         * dirty hack, but there is no other way.
+         */
+        if (idComment != null && idComment.contains(DO_NOT_TRANSLATE)) {
+            return entry;
+        }
+
         String e = entry.replace("\\'", "'");
         String r = null;
         if (entryParseCallback != null) {

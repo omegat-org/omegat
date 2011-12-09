@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancement
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -10,6 +10,8 @@
   Other enhancements:
 
   - Magento CE locale CVS file filter
+
+  - Android filter: the key is displayed in the comment pane
 
   Bug fixes:
 

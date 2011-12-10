@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Zoltan Bartko
-               2011 John Moran
+               2011 Martin Fleurke, Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +41,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * This is a pane that displays comments on source texts.
  * 
  * @author Martin Fleurke
+ * @author Alex Buloichik
  */
 public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements IEntryEventListener {
 

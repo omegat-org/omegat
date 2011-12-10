@@ -42,11 +42,9 @@ public class INIFilterTest extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(new INIFilter(), f);
 
         checkMultiStart(fi, f);
-        checkMulti("Value", "nsID", null, null, null, OStrings.getString("RESOURCEBUNDLE_KEY") + " nsID");
-        checkMulti("Value", "Section/ID", null, null, null, OStrings.getString("RESOURCEBUNDLE_KEY")
-                + " Section/ID");
-        checkMulti("Value2", "Section/ID2", null, null, null, OStrings.getString("RESOURCEBUNDLE_KEY")
-                + " Section/ID2");
+        checkMulti("Value", "nsID", null, null, null, null);
+        checkMulti("Value", "Section/ID", null, null, null, null);
+        checkMulti("Value2", "Section/ID2", null, null, null, null);
         checkMultiEnd();
     }
 }

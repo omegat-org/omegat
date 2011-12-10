@@ -42,7 +42,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Martin Fleurke
  */
-public class CommentsTextArea extends EntryInfoPane<Comments> implements IEntryEventListener {
+public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements IEntryEventListener {
 
     private static final String EXPLANATION = OStrings.getString("GUI_COMMENTSWINDOW_explanation");
 
@@ -63,8 +63,27 @@ public class CommentsTextArea extends EntryInfoPane<Comments> implements IEntryE
     public void onEntryActivated(SourceTextEntry newEntry) {
         UIThreadsUtil.mustBeSwingThread();
 
-        String comment = newEntry.getComment();
-        this.setText(comment != null ? comment : "");
+        StringBuilder text = new StringBuilder(1024);
+        if (newEntry.getKey().id != null) {
+            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_ID"));
+            text.append(' ');
+            text.append(newEntry.getKey().id);
+            text.append('\n');
+        }
+        if (newEntry.getKey().path != null) {
+            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Path"));
+            text.append(' ');
+            text.append(newEntry.getKey().path);
+            text.append('\n');
+        }
+        if (newEntry.getComment() != null) {
+            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Comment"));
+            text.append('\n');
+            text.append(newEntry.getComment());
+            text.append('\n');
+        }
+        this.setText(text.toString());
+        this.setCaretPosition(0);
     }
 
     public void onNewFile(String activeFileName) {

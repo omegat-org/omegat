@@ -113,13 +113,7 @@ public class AndroidFilter extends XMLFilter {
         String e = entry.replace("\\'", "'");
         String r = null;
         if (entryParseCallback != null) {
-            String comment;
-            if (idComment != null) {
-                comment = idComment + "\n" + OStrings.getString("Android_FILTER_KEY_PREFIX") + ' ' + id;
-            } else {
-                comment = OStrings.getString("Android_FILTER_KEY_PREFIX") + ' ' + id;
-            }
-            entryParseCallback.addEntry(id, e, null, false, comment, null, this);
+            entryParseCallback.addEntry(id, e, null, false, idComment, null, this);
             r = e;
         } else if (entryTranslateCallback != null) {
             r = entryTranslateCallback.getTranslation(id, e, null);

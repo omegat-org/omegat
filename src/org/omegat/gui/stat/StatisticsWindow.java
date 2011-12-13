@@ -117,7 +117,7 @@ public class StatisticsWindow extends JDialog {
             }
         });
 
-        setSize(400, 300);
+        setSize(800, 400);
         DockingUI.displayCentered(this);
     }
 

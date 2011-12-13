@@ -186,6 +186,12 @@
                 <para>DocuWiki files (*.txt)</para>
               </listitem>
             </itemizedlist></para>
+
+              <listitem>
+                <para>Magento CE Locale CSV (*.csv)</para>
+              </listitem>
+            </itemizedlist></para>
+
         </listitem>
       </itemizedlist>
 

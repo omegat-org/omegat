@@ -86,6 +86,11 @@
         </listitem>
       </itemizedlist>
 
+        <listitem>
+          <para>Magento CE Locale CSV files (*.csv)</para>
+        </listitem>
+      </itemizedlist>
+
       <para>Other plain text file types can be handled by
       <application>OmegaT</application> by associating their file extension to
       a supported file type (for example, .pod files can be associated to the
@@ -199,6 +204,10 @@
           <listitem>
             <para>Wordfast TXML (*.txml)</para>
           </listitem>
+          <listitem>
+            <para>Camtasia for Windows (*.camproj)</para>
+          </listitem>
+
         </itemizedlist></para>
 
       <para>Other formatted text file types may also be handled by OmegaT by

@@ -71,6 +71,7 @@ OmegaT prend en charge directement les formats de fichier suivants :
   - Infix
   - Export XML Flash
   - TXML Wordfast
+  - Magento CE Locale CSV
   - Camtasia pour Windows
 
 Il est également possible de personnaliser OmegaT pour accepter d'autres formats.

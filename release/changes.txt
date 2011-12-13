@@ -1,11 +1,17 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
-   3 Enhancement
+   4 Enhancements
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.5.0 update 5 vs. 2.5.0 update 4
+
+
+  Implemented requests:
+
+  - Filter for Camtasia Studio for Windows
+  http://sourceforge.net/support/tracker.php?aid=3457285
 
   Other enhancements:
 

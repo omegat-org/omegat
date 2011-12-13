@@ -71,6 +71,7 @@ OmegaT prend en charge directement les formats de fichier suivants :
   - Infix
   - Export XML Flash
   - TXML Wordfast
+  - Camtasia pour Windows
 
 Il est également possible de personnaliser OmegaT pour accepter d'autres formats.
 
@@ -184,6 +185,7 @@ Contributions au code :
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Guido Leenders
   Ibai Lakunza Velasco
   Fabián Mandelbaum
   John Moran

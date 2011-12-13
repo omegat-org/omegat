@@ -290,6 +290,10 @@
             <para>Wordfast TXML (*.txml)</para>
           </listitem>
 
+          <listitem>
+            <para>Camtasia for Windows (*.camproj)</para>
+          </listitem>
+
           </itemizedlist>
         </listitem>
       </itemizedlist>

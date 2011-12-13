@@ -33,6 +33,9 @@ OmegaT-Plugin: filter
 Name: org.omegat.filters3.xml.helpandmanual.HelpAndManualFilter
 OmegaT-Plugin: filter
 
+Name: org.omegat.filters3.xml.camtasiawindows.CamtasiaWindowsFilter
+OmegaT-Plugin: filter
+
 Name: org.omegat.filters2.html2.HTMLFilter2
 OmegaT-Plugin: filter
 

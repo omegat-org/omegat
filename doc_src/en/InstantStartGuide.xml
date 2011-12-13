@@ -177,7 +177,8 @@
               <listitem>
                 <para>INI (key=value) files (*.ini)</para>
               </listitem>
-            </itemizedlist><itemizedlist>
+            </itemizedlist>
+            <itemizedlist>
               <listitem>
                 <para>DTD files (*.DTD)</para>
               </listitem>
@@ -187,10 +188,17 @@
               </listitem>
             </itemizedlist></para>
 
+    		<itemizedlist>
+			  <listitem>
+				<para>SubRip title files (*.srt)</para>
+			  </listitem>
+			</itemizedlist>
+
+            <itemizedlist>
               <listitem>
                 <para>Magento CE Locale CSV (*.csv)</para>
               </listitem>
-            </itemizedlist></para>
+            </itemizedlist>
 
         </listitem>
       </itemizedlist>
@@ -244,12 +252,6 @@
           <itemizedlist>
             <listitem>
               <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
-              <para>SubRip title files (*.srt)</para>
             </listitem>
           </itemizedlist>
 

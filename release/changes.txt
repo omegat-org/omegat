@@ -11,7 +11,15 @@
 
   - Magento CE locale CVS file filter
 
-  - Android filter: the key is displayed in the comment pane
+  - The key is now displayed in the comment pane for all ID-based filters:
+Android Resources
+Java Resource Bundles
+Key=Value Files
+Mozilla DTD
+ResX
+SubRip Subtitles
+Windows Resource
+WiX
 
   Bug fixes:
 

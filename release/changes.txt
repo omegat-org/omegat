@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
-   2 Enhancement
+   3 Enhancement
    4 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@ ResX
 SubRip Subtitles
 Windows Resource
 WiX
+
+  - Use a larger default size for the statistics dialog (800x400 instead of
+400x300)
 
   Bug fixes:
 

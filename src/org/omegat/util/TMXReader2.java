@@ -410,6 +410,10 @@ public class TMXReader2 {
                     tagN = tagNumber;
                     if ("end".equals(currentPos)) {
                         slashBefore = true;
+                    } else {
+                        if (useSlash) {
+                            slashAfter = true;
+                        }
                     }
                 } else {
                     tagN = tagNumber;

@@ -364,4 +364,59 @@ public abstract class TestFilterBase extends TestCore {
             return fi;
         }
     }
+
+    protected List<AlignedEntry> al;
+    protected int alCount;
+
+    protected void checkAlignStart(TestAlignCallback calback) {
+        this.al = calback.entries;
+        alCount = 0;
+    }
+
+    protected void checkAlignEnd() {
+        assertEquals(alCount, al.size());
+    }
+
+    protected void checkAlign(String id, String source, String translation, String path) {
+        AlignedEntry en = al.get(alCount);
+        assertEquals(id, en.id);
+        assertEquals(source, en.source);
+        assertEquals(translation, en.translation);
+        assertEquals(path, en.path);
+        alCount++;
+    }
+    
+    protected void checkAlignById(String id, String source, String translation, String path) {
+        for(AlignedEntry en:al) {
+            if (id.equals(en.id)) {
+                assertEquals(source, en.source);
+                assertEquals(translation, en.translation);
+                assertEquals(path, en.path);
+                alCount++;
+                return;
+            }
+        }
+        fail();
+    }
+
+    protected static class TestAlignCallback implements IAlignCallback {
+        public List<AlignedEntry> entries = new ArrayList<AlignedEntry>();
+
+        public void addTranslation(String id, String source, String translation, boolean isFuzzy,
+                String path, IFilter filter) {
+            AlignedEntry en = new AlignedEntry();
+            en.id = id;
+            en.source = source;
+            en.translation = translation;
+            en.path = path;
+            entries.add(en);
+        }
+    }
+
+    protected static class AlignedEntry {
+        public String id;
+        public String source;
+        public String translation;
+        public String path;
+    }
 }

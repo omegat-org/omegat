@@ -38,4 +38,19 @@ public class RcFilterTest extends TestFilterBase {
         checkMulti("&File", "103/512", null, null, null, null);
         checkMulti("&Import...", "103/601", null, null, null, null);
     }
+
+    @Test
+    public void testAlign() throws Exception {
+        TestAlignCallback callback = new TestAlignCallback();
+        align(new RcFilter(), "Rc/prog.rc", "Rc/prog_be.rc", callback);
+        checkAlignStart(callback);
+        checkAlignById("103/512", "&File", "&Файл", null);
+        checkAlignById("103/601", "&Import...", "&Імпартаваць...", null);
+        checkAlignById("103/602", "&Export...", "&Экспартаваць...", null);
+        checkAlignById("103/603", "Exit", "Выйсьці", null);
+        checkAlignById("/61", "Error Import", "Памылка імпарту", null);
+        checkAlignById("/62", "Error Output", "Памылка вываду", null);
+        checkAlignById("/63", "Exiting...", "Выйсьце...", null);
+        checkAlignEnd();
+    }
 }

@@ -198,7 +198,7 @@ public class RcFilter extends AbstractFilter {
             return w.length > 1 ? w[1].trim() : null;
         case MESSAGETABLE:
         case STRINGTABLE:
-            w = line.split(",");
+            w = line.substring(0, b).split(",");
             return w[0].trim();
         }
         return null;

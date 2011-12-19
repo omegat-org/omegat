@@ -2,7 +2,7 @@
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
    4 Enhancements
-   4 Bug fixes
+   5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
 2.5.0 update 5 vs. 2.5.0 update 4
@@ -41,6 +41,9 @@ WiX
 
   - In the HHC filter, the comment pane contained Tag: PARAM Attribute: value
 for all segments
+
+  - For external TMXs, the parameter "Use XML for standalone tags" was not 
+working for all tags
 
   Localisation updates:
 

@@ -26,15 +26,19 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.junit.Test;
 import org.omegat.filters2.html2.HTMLFilter2;
 import org.omegat.filters2.html2.HTMLOptions;
+import org.omegat.filters2.po.PoFilter;
+import org.omegat.filters2.rc.RcFilter;
+import org.omegat.filters2.text.bundles.ResourceBundleFilter;
 
 /**
- * TMX Compliance tests as described on http://www.lisa.org/tmx/comp.htm
+ * TMX Compliance tests as described on http://www.localization.org/fileadmin/standards/tmx1.4/comp.htm
  * 
  * The Level 1 Compliance verifies mostly TMX structure, white spaces handling
  * and how the application deals with non-ASCII characters and special characters
@@ -166,7 +170,17 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport1A() throws Exception {
-        // TODO
+        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1A.tmx");
+        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1A.rc");
+        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1A_fr.rc");
+
+        ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
+
+        RcFilter filter = new RcFilter();
+
+        align(filter, sourceFile, "windows-1252", translatedFile, "windows-1252", props);
+
+        compareTMX(tmxFile, outFile, 6);
     }
 
     /**
@@ -174,7 +188,27 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport1B() throws Exception {
-        // TODO
+        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1B.tmx");
+        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1B.htm");
+        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1B_fr.htm");
+
+        ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
+
+        List<String> sources = loadTexts(new HTMLFilter2(), sourceFile, null, props);
+        List<String> translations = loadTexts(new HTMLFilter2(), translatedFile, null, props);
+
+        assertEquals(sources.size(), translations.size());
+
+        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback, new TreeMap<EntryKey, TMXEntry>());
+
+        for (int i = 0; i < sources.size(); i++) {
+            tmx.translationDefault.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i),
+                    null, 0, null, true));
+        }
+
+        tmx.save(props, outFile, false, false, true);
+
+        compareTMX(tmxFile, outFile, 6);
     }
 
     /**
@@ -182,7 +216,15 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport1C() throws Exception {
-        // TODO
+        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1C.tmx");
+        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1C.properties");
+        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1C_fr.properties");
+
+        ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
+
+        align(new ResourceBundleFilter(), sourceFile, null, translatedFile, null, props);
+
+        compareTMX(tmxFile, outFile, 6);
     }
 
     /**
@@ -190,7 +232,15 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport1D() throws Exception {
-        // TODO
+        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D.tmx");
+        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D.po");
+        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest1D_fr.po");
+
+        ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
+
+        align(new PoFilter(), sourceFile, "iso-8859-1", translatedFile, "iso-8859-1", props);
+
+        compareTMX(tmxFile, outFile, 6);
     }
 
     /**
@@ -242,6 +292,14 @@ public class TmxComplianceTests extends TmxComplianceBase {
      */
     @Test
     public void testExport2A() throws Exception {
-        // TODO
+        File tmxFile = new File("test/data/tmx/TMXComplianceKit/ExportTest2A.tmx");
+        File sourceFile = new File("test/data/tmx/TMXComplianceKit/ExportTest2A.htm");
+        File translatedFile = new File("test/data/tmx/TMXComplianceKit/ExportTest2A_fr.htm");
+
+        ProjectProperties props = new TestProjectProperties("EN-US", "FR-CA");
+
+        align(new HTMLFilter2(), sourceFile, null, translatedFile, null, props);
+
+        compareTMX(tmxFile, outFile, 6);
     }
 }

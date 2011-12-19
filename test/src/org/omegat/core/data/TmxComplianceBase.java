@@ -27,10 +27,17 @@ package org.omegat.core.data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
@@ -40,23 +47,31 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IFilter;
+import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.filters2.text.TextFilter;
 
 /**
- * TMX Compliance tests as described on http://www.lisa.org/tmx/comp.htm
+ * Base methods for TMX compliance tests.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public abstract class TmxComplianceBase extends TestCase {
 
+    static Pattern RE_SEG = Pattern.compile("(<seg>.+</seg>)");
+
     protected File outFile;
 
     @Before
     public void setUp() throws Exception {
-        outFile = new File("build/testdata/OmegaT_test-" + getClass().getName() + "-" + getName());
+        outFile = new File("build/testdata/" + getClass().getSimpleName() + "-" + getName() + ".out");
         outFile.getParentFile().mkdirs();
-        
+        if (outFile.exists()) {
+            if (!outFile.delete()) {
+                throw new IOException("Can't remove " + outFile.getAbsolutePath());
+            }
+        }
+
         Segmenter.srx = SRX.getSRX();
     }
 
@@ -128,6 +143,80 @@ public abstract class TmxComplianceBase extends TestCase {
                 cb);
         compareTexts(new File("test/data/tmx/TMXComplianceKit/" + fileTextOut), outCharset, outFile,
                 outCharset);
+    }
+
+    protected List<String> loadTexts(IFilter filter, File sourceFile, String inCharset,
+            ProjectProperties props) throws Exception {
+
+        FilterContext fc = new FilterContext(props);
+        fc.setInEncoding(inCharset);
+
+        final List<String> result = new ArrayList<String>();
+
+        IParseCallback callback = new IParseCallback() {
+            public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                    String comment, IFilter filter) {
+                result.add(source);
+            }
+
+            public void addEntry(String id, String source, String translation, boolean isFuzzy,
+                    String comment, String path, IFilter filter) {
+            }
+
+            public void addFileTMXEntry(String source, String translation) {
+            }
+
+            public void linkPrevNextSegments() {
+            }
+        };
+        filter.parseFile(sourceFile, new TreeMap<String,String>(), fc, callback);
+
+        return result;
+    }
+
+    protected void align(IFilter filter, File sourceFile, String inCharset, File translatedFile,
+            String outCharset, ProjectProperties props) throws Exception {
+
+        FilterContext fc = new FilterContext(props);
+        fc.setInEncoding(inCharset);
+        fc.setOutEncoding(outCharset);
+
+        RealProject.AlignFilesCallback callback = new RealProject.AlignFilesCallback();
+
+        filter.alignFile(sourceFile, translatedFile, null, fc, callback);
+
+        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback, new TreeMap<EntryKey, TMXEntry>());
+
+        for (Map.Entry<String, TMXEntry> en : callback.data.entrySet()) {
+            tmx.translationDefault.put(en.getKey(), en.getValue());
+        }
+
+        tmx.save(props, outFile, false, false, true);
+    }
+
+    protected Set<String> readTmxSegments(File tmx) throws Exception {
+        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(tmx), "UTF-8"));
+        String s;
+        Set<String> entries = new HashSet<String>();
+        while ((s = rd.readLine()) != null) {
+            Matcher m = RE_SEG.matcher(s);
+            if (m.find()) {
+                entries.add(m.group(1));
+            }
+        }
+        rd.close();
+        return entries;
+    }
+
+    protected void compareTMX(File orig, File created, int segmentsCount) throws Exception {
+        Set<String> tmxOrig = readTmxSegments(orig);
+        Set<String> tmxCreated = readTmxSegments(created);
+        Assert.assertEquals(segmentsCount, tmxCreated.size());
+        Assert.assertEquals(tmxOrig.size(), tmxCreated.size());
+        for (String o : tmxOrig) {
+            o = o.replace(">", "&gt;"); // TMX from compliance kit contains '>'
+            Assert.assertTrue(o, tmxCreated.contains(o));
+        }
     }
 
     protected ProjectTMX.CheckOrphanedCallback orphanedCallback = new ProjectTMX.CheckOrphanedCallback() {

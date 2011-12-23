@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
+               2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,6 +29,7 @@ import gen.core.tbx.Descrip;
 import gen.core.tbx.DescripGrp;
 import gen.core.tbx.LangSet;
 import gen.core.tbx.Martif;
+import gen.core.tbx.Note;
 import gen.core.tbx.Ntig;
 import gen.core.tbx.TermEntry;
 import gen.core.tbx.TermNote;
@@ -149,6 +151,9 @@ public class GlossaryReaderTBX {
             } else if (o instanceof TermNote) {
                 TermNote tn = (TermNote) o;
                 line = readContent(tn.getContent());
+            } else if (o instanceof Note) {
+                Note n = (Note) o;
+                line = readContent(n.getContent());
             }
             if (line != null) {
                 appendLine(str, line);

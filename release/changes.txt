@@ -33,6 +33,9 @@ WiX
   - Use a larger default size for the statistics dialog (800x400 instead of
 400x300)
 
+  - When reading external TMXs, the <hi> tag is skipped, as it cannot correspond
+to a tag of a source document
+
   Bug fixes:
 
   - GPL license has an outdated FSF address

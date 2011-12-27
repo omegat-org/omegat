@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007-2010 Didier Briel
+               2007-2011 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -163,8 +163,11 @@ public class OpenXMLFilter extends AbstractFilter {
      * Receives a filename with a path Returns a string without the path
      */
     private String removePath(String fileName) {
-        if (fileName.lastIndexOf('/') >= 0)
+        if (fileName.lastIndexOf('/') >= 0) {
             fileName = fileName.substring(fileName.lastIndexOf('/') + 1);
+        }  else if (fileName.lastIndexOf('\\') >= 0) { // Some weird files may use a backslash
+            fileName = fileName.substring(fileName.lastIndexOf('\\') + 1);
+        }
         return fileName;
     }
 

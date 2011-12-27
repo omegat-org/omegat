@@ -246,7 +246,7 @@ the corresponding menu entry has been removed
   - When several dictionaries were used, words written in uppercase in 
 the dictionaries could fail to be recognised
 
-  - NetBSD and DragonFky not recognized as UNIX
+  - NetBSD and DragonFly not recognized as UNIX
   http://sourceforge.net/support/tracker.php?aid=3451034
 
   - Some Open XML files could not be loaded, because they used

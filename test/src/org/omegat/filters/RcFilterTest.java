@@ -42,6 +42,8 @@ public class RcFilterTest extends TestFilterBase {
     @Test
     public void testAlign() throws Exception {
         TestAlignCallback callback = new TestAlignCallback();
+        context.setInEncoding("UTF-8");
+        context.setOutEncoding("UTF-8");
         align(new RcFilter(), "Rc/prog.rc", "Rc/prog_be.rc", callback);
         checkAlignStart(callback);
         checkAlignById("103/512", "&File", "&Файл", null);

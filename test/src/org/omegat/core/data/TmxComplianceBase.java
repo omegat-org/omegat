@@ -31,17 +31,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+import org.custommonkey.xmlunit.XMLUnit;
 import org.junit.Before;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
@@ -76,38 +77,39 @@ public abstract class TmxComplianceBase extends TestCase {
     }
 
     protected void compareTexts(File f1, String charset1, File f2, String charset2) throws Exception {
-        BufferedReader rd1 = new BufferedReader(new InputStreamReader(new FileInputStream(f1), charset1));
-        BufferedReader rd2 = new BufferedReader(new InputStreamReader(new FileInputStream(f2), charset2));
+        List<String> lines1 = readTextFile(f1, charset1);
+        List<String> lines2 = readTextFile(f2, charset2);
+
+        Assert.assertEquals(lines1.size(), lines2.size());
+        for (int i = 0; i < lines1.size(); i++) {
+            Assert.assertEquals(lines1.get(i), lines2.get(i));
+        }
+    }
+
+    protected List<String> readTextFile(File f, String charset) throws Exception {
+        BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(f), charset));
 
         int ch;
 
         // BOM (byte order mark) bugfix
-        rd1.mark(1);
-        ch = rd1.read();
+        rd.mark(1);
+        ch = rd.read();
         if (ch != 0xFEFF) {
-            rd1.reset();
-        }
-        rd2.mark(1);
-        ch = rd2.read();
-        if (ch != 0xFEFF) {
-            rd2.reset();
+            rd.reset();
         }
 
-        String s1;
-        while ((s1 = rd1.readLine()) != null) {
-            String s2 = rd2.readLine();
-            Assert.assertNotNull(s2);
-            if (!s1.equals(s2)) {
-                Assert.assertEquals(s1, s2);
-            }
+        List<String> result = new ArrayList<String>();
+        String s;
+        while ((s = rd.readLine()) != null) {
+            result.add(s);
         }
-        Assert.assertNull(rd2.readLine());
 
-        rd1.close();
-        rd2.close();
+        rd.close();
+
+        return result;
     }
 
-    protected void translateTextUsingTmx(String fileTextIn, String inCharset, String fileTMX,
+    protected void translateAndCheckTextUsingTmx(String fileTextIn, String inCharset, String fileTMX,
             String fileTextOut, String outCharset, String sourceLang, String targetLang,
             Map<String, TMXEntry> tmxPatch) throws Exception {
         TextFilter f = new TextFilter();
@@ -115,11 +117,13 @@ public abstract class TmxComplianceBase extends TestCase {
         c.put(TextFilter.OPTION_SEGMENT_ON, TextFilter.SEGMENT_BREAKS);
 
         ProjectProperties props = new TestProjectProperties(sourceLang, targetLang);
-        translateUsingTmx(f, c, fileTextIn, inCharset, fileTMX, fileTextOut, outCharset, props, tmxPatch);
+        translateUsingTmx(f, c, fileTextIn, inCharset, fileTMX, outCharset, props, tmxPatch);
+        compareTexts(new File("test/data/tmx/TMXComplianceKit/" + fileTextOut), outCharset, outFile,
+                outCharset);
     }
 
     protected void translateUsingTmx(IFilter filter, Map<String, String> config, String fileTextIn,
-            String inCharset, String fileTMX, String fileTextOut, String outCharset, ProjectProperties props,
+            String inCharset, String fileTMX, String outCharset, ProjectProperties props,
             Map<String, TMXEntry> tmxPatch) throws Exception {
         final ProjectTMX tmx = new ProjectTMX(props, new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
                 orphanedCallback, new HashMap<EntryKey, TMXEntry>());
@@ -141,26 +145,21 @@ public abstract class TmxComplianceBase extends TestCase {
         };
         filter.translateFile(new File("test/data/tmx/TMXComplianceKit/" + fileTextIn), outFile, config, fc,
                 cb);
-        compareTexts(new File("test/data/tmx/TMXComplianceKit/" + fileTextOut), outCharset, outFile,
-                outCharset);
     }
 
-    protected List<String> loadTexts(IFilter filter, File sourceFile, String inCharset,
-            ProjectProperties props) throws Exception {
-
-        FilterContext fc = new FilterContext(props);
-        fc.setInEncoding(inCharset);
+    protected List<String> loadTexts(final IFilter filter, final File sourceFile, final String inCharset,
+            final FilterContext context, final Map<String, String> config) throws Exception {
 
         final List<String> result = new ArrayList<String>();
 
         IParseCallback callback = new IParseCallback() {
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, IFilter filter) {
-                result.add(source);
             }
 
             public void addEntry(String id, String source, String translation, boolean isFuzzy,
                     String comment, String path, IFilter filter) {
+                result.addAll(Segmenter.segment(context.getSourceLang(), source, null, null));
             }
 
             public void addFileTMXEntry(String source, String translation) {
@@ -169,7 +168,7 @@ public abstract class TmxComplianceBase extends TestCase {
             public void linkPrevNextSegments() {
             }
         };
-        filter.parseFile(sourceFile, new TreeMap<String,String>(), fc, callback);
+        filter.parseFile(sourceFile, config, context, callback);
 
         return result;
     }
@@ -197,7 +196,7 @@ public abstract class TmxComplianceBase extends TestCase {
     protected Set<String> readTmxSegments(File tmx) throws Exception {
         BufferedReader rd = new BufferedReader(new InputStreamReader(new FileInputStream(tmx), "UTF-8"));
         String s;
-        Set<String> entries = new HashSet<String>();
+        Set<String> entries = new TreeSet<String>();
         while ((s = rd.readLine()) != null) {
             Matcher m = RE_SEG.matcher(s);
             if (m.find()) {
@@ -213,9 +212,11 @@ public abstract class TmxComplianceBase extends TestCase {
         Set<String> tmxCreated = readTmxSegments(created);
         Assert.assertEquals(segmentsCount, tmxCreated.size());
         Assert.assertEquals(tmxOrig.size(), tmxCreated.size());
-        for (String o : tmxOrig) {
-            o = o.replace(">", "&gt;"); // TMX from compliance kit contains '>'
-            Assert.assertTrue(o, tmxCreated.contains(o));
+
+        List<String> listOrig = new ArrayList<String>(tmxOrig);
+        List<String> listCreated = new ArrayList<String>(tmxCreated);
+        for (int i = 0; i < listOrig.size(); i++) {
+            XMLUnit.compareXML(listOrig.get(i), listCreated.get(i));
         }
     }
 

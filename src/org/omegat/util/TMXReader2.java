@@ -376,8 +376,12 @@ public class TMXReader2 {
             XMLEvent e = xml.nextEvent();
             switch (e.getEventType()) {
             case XMLEvent.START_ELEMENT:
+                StartElement eStart = e.asStartElement();
+                if ("hi".equals(eStart.getName().getLocalPart())) {
+                    // tag should be skipped
+                    break;
+                }
                 inlineLevel++;
-                StartElement eStart = (StartElement) e;
                 segInlineTag.setLength(0);
                 if ("bpt".equals(eStart.getName().getLocalPart())) {
                     currentI = getAttributeValue(eStart, "i");
@@ -392,8 +396,12 @@ public class TMXReader2 {
                 }
                 break;
             case XMLEvent.END_ELEMENT:
+                EndElement eEnd = e.asEndElement();
+                if ("hi".equals(eEnd.getName().getLocalPart())) {
+                    // tag should be skipped
+                    break;
+                }
                 inlineLevel--;
-                EndElement eEnd = (EndElement) e;
                 if ("seg".equals(eEnd.getName().getLocalPart())) {
                     return;
                 }

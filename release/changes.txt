@@ -224,6 +224,20 @@ is saved.
   - Dutch localisation updated to 2.5 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 2.3.0 update 5
+----------------------------------------------------------------------
+   1 Enhancement
+   0 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.3.0 update 5 vs. 2.3.0 update 4
+
+  Other enhancements:
+
+  - Change of the Google Translate API from GET to POST, to allow
+sending 5000 instead of 2000 characters requests
+
+----------------------------------------------------------------------
  OmegaT 2.3.0 update 4
 ----------------------------------------------------------------------
    1 Enhancement

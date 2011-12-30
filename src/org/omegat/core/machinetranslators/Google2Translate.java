@@ -82,7 +82,12 @@ public class Google2Translate extends BaseTranslate {
         Map<String, String> headers = new TreeMap<String, String>();
         headers.put("X-HTTP-Method-Override", "GET");
 
-        String v = WikiGet.post(GT_URL, params, headers);
+        String v; 
+        try {
+			v = WikiGet.post(GT_URL, params, headers);
+	    } catch (IOException e) {
+            return e.getLocalizedMessage();
+        }
 
         while (true) {
             Matcher m = RE_UNICODE.matcher(v);

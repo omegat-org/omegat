@@ -5,6 +5,7 @@
 
  Copyright (C) 2007 Kim Bruning
                2010 Alex Buloichik, Didier Briel, Rashid Umarov
+               2011 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -184,15 +185,25 @@ public class WikiGet {
     }
 
     /**
+     * Method call without additional headers for possible calls from plugins.
+     */
+    public static String post(String address, Map<String, String> params) throws IOException {
+        return post(address, params, null);
+    }
+
+    /**
      * Post data to the remote URL.
      * 
      * @param address
      *            address to post
      * @param params
      *            parameters
+     * @param additionalHeaders
+     *            additional headers for request, can be null
      * @return sever output
      */
-    public static String post(String address, Map<String, String> params) throws IOException {
+    public static String post(String address, Map<String, String> params,
+            Map<String, String> additionalHeaders) throws IOException {
         URL url = new URL(address);
 
         ByteArrayOutputStream pout = new ByteArrayOutputStream();
@@ -210,7 +221,12 @@ public class WikiGet {
             conn.setRequestMethod("POST");
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");
             conn.setRequestProperty("Content-Length", Integer.toString(pout.size()));
-            
+            if (additionalHeaders != null) {
+                for (Map.Entry<String, String> en : additionalHeaders.entrySet()) {
+                    conn.setRequestProperty(en.getKey(), en.getValue());
+                }
+            }
+
             // Added to pass through authenticated proxy
             String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
             if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user

@@ -75,9 +75,10 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Paragraph segmentation on line breaks, empty lines or
-        never:</emphasis> if sentence segmentation rules are active, the text
-        will further be segmented according to the option selected
-        here.</para>
+        never:</emphasis></para>
+
+        <para>if sentence segmentation rules are active, the text will further
+        be segmented according to the option selected here.</para>
       </listitem>
     </itemizedlist>
 
@@ -86,12 +87,14 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Allow blank translations in the target
-        file:</emphasis> If on, when a PO segment (which may be a whole
-        paragraph) is not translated, the translation will be empty in the
-        target file. Technically, <code>msgstr</code> will be empty. As this
-        is the standard behavior for PO files, it is on by default. If the
-        option is off, the source text will be copied to the target
-        segment.</para>
+        file</emphasis>:</para>
+
+        <para>If on, when a PO segment (which may be a whole paragraph) is not
+        translated, the translation will be empty in the target file.
+        Technically speaking, the <code>msgstr</code> segment in the PO target
+        file, if created, will be left empty. As this is the standard behavior
+        for PO files, it is on by default. If the option is off, the source
+        text will be copied to the target segment.</para>
       </listitem>
     </itemizedlist>
 
@@ -99,7 +102,7 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Translate the following attributes</emphasis>: the
+        <para><emphasis>Translate the following attributes </emphasis>- the
         selected attributes will appear as segments in the Editor
         window.</para>
       </listitem>
@@ -107,23 +110,23 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Start a new paragraph on:</emphasis> the &lt;br&gt;
+        <para><emphasis>Start a new paragraph on: the &lt;br&gt;</emphasis>
         HTML tag will constitute a paragraph for segmentation purposes.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Skip text matching regular expression: </emphasis>The
+        <para><emphasis>Skip text matching regular expression</emphasis>: the
         text matching the regular expression will be skipped.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Do not translate the content attribute of meta-tags ... : the
-        attribute key-value pairs, separated by commas, will be left
-        untranslated</para>
+        <para><emphasis>Do not translate the content attribute of meta-tags
+        ... :</emphasis> the attribute key-value pairs, separated by commas,
+        will be left untranslated</para>
       </listitem>
     </itemizedlist>
 
@@ -135,30 +138,29 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Word:</emphasis><emphasis>
-        <emphasis><emphasis>Non-visible Instruction Text, Comments, Footnotes,
-        Endnotes, Footers</emphasis></emphasis></emphasis></para>
+        <para><emphasis role="bold">Word:</emphasis> non-visible instruction
+        text, comments, footnotes, endnotes, footers</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Excel: </emphasis><emphasis>Comments,
-        Sheet names</emphasis></para>
+        <para><emphasis role="bold">Excel: </emphasis>comments, sheet
+        names</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Power Point</emphasis><emphasis>: Slide
-        Comments, Slide Masters, Slide Layouts</emphasis></para>
+        <para><emphasis role="bold">Power Point</emphasis>: slide comments,
+        slide masters, slide layouts</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Global:</emphasis> <emphasis>Charts,
-        Diagrams, Drawings, Wordart</emphasis></para>
+        <para><emphasis role="bold">Global:</emphasis> charts, diagrams,
+        drawings, WordArt</para>
       </listitem>
     </itemizedlist>
 
@@ -168,13 +170,13 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis>Aggregate tags:</emphasis> If checked, tags
+            <para><emphasis>Aggregate tags</emphasis>: if checked, tags
             without translatable text between them will be aggregated into
             single tags.</para>
           </listitem>
 
           <listitem>
-            <para><emphasis>Preserve spaces for all tags:</emphasis> if
+            <para><emphasis>Preserve spaces for all tags</emphasis>: if
             checked, "white space" (i.e., spaces and newlines) will be
             preserved, even if not set technically in the document</para>
           </listitem>
@@ -186,12 +188,9 @@
 
     <itemizedlist>
       <listitem>
-        <para>Add or rewrite encoding declaration in HTML and XHTML
-        files</para>
-
-        <para><emphasis>Always (default), Only if (X)HTML file has a header,
-        Only if (X)HTML file has an encoding declaration, Never
-        </emphasis></para>
+        <para><emphasis>Add or rewrite encoding declaration in HTML and XHTML
+        files</emphasis>: Always (default), Only if (X)HTML file has a header,
+        Only if (X)HTML file has an encoding declaration, Never</para>
       </listitem>
     </itemizedlist>
 
@@ -205,23 +204,23 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Start a new paragraph on:</emphasis> the &lt;br&gt;
+        <para><emphasis>Start a new paragraph on</emphasis>: the &lt;br&gt;
         HTML tag will constitute a paragraph for segmentation purposes.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Skip text matching regular expression: </emphasis>The
+        <para><emphasis>Skip text matching regular expression</emphasis>: The
         text, matching the regular expression, will be skipped.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Do not translate the content attribute of meta-tags ... : the
-        attribute key-value pairs, separated by commas, will be left
-        untranslated</para>
+        <para><emphasis>Do not translate the content attribute of
+        meta-tags</emphasis> ... : the attribute key-value pairs, separated by
+        commas, will be left untranslated</para>
       </listitem>
     </itemizedlist>
 
@@ -230,9 +229,10 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Paragraph segmentation on line breaks, empty lines or
-        never:</emphasis> if sentence segmentation rules are active, the text
-        will further be segmented according to the option selected
-        here.</para>
+        never</emphasis>:</para>
+
+        <para>if sentence segmentation rules are active, the text will further
+        be segmented according to the option selected here.</para>
       </listitem>
     </itemizedlist>
 
@@ -242,11 +242,10 @@
     <itemizedlist>
       <listitem>
         <para>You can select which of the following items are to be
-        translated: </para>
+        translated:</para>
 
-        <para><emphasis>Index entries, Bookmarks, Bookmark references, Notes,
-        Comments, Presentation notes, Links (URL), Sheet
-        names</emphasis></para>
+        <para>index entries, bookmarks, bookmark references, notes, comments,
+        presentation notes, links (URL), sheet names</para>
       </listitem>
     </itemizedlist>
   </section>

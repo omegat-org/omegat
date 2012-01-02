@@ -775,7 +775,7 @@
           <para><emphasis role="bold">Proxy Server Port
           Number</emphasis></para>
 
-          <para><emphasis role="bold">Dhttp.proxyPort=NNNN</emphasis>
+          <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis>
           <indexterm class="singular">
               <primary>Running OmegaT</primary>
 
@@ -784,6 +784,22 @@
               <tertiary>Proxy server - Port Number</tertiary>
             </indexterm> The port number your system uses to access the proxy
           server.</para>
+        </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Google Translate V2 </emphasis></para>
+
+          <para><emphasis
+          role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678
+          </emphasis><emphasis role="bold"><indexterm class="singular">
+              <primary>Running OmegaT</primary>
+
+              <secondary>Launch script arguments</secondary>
+
+              <tertiary>Google Translate V2</tertiary>
+            </indexterm></emphasis> If you have signed up for the Google
+          Translate services, enter your private Google API key here. Note
+          that the key is 38 characters long. </para>
         </listitem>
       </itemizedlist>
 
@@ -908,7 +924,7 @@
 
                 <para>In this mode OmegaT will create a TMX for the whole
                 project, based on the source files only. You specify the TMX
-                file to be created with </para>
+                file to be created with</para>
 
                 <para><literal>--pseudotranslatetmx=allsegments.tmx
                 --pseudotranslatetype=[equal|empty]</literal></para>

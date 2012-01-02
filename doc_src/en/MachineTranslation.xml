@@ -22,9 +22,9 @@
     and steadfastly improving results in research evaluations.</para>
 
     <para>To activate any of the Machine Translation services, go to
-    <guimenuitem>Options &gt; Machine Translate ...</guimenuitem> and
-    activate the service desired. Note that they are all web-based: you will
-    have to be on-line if you want to use them.</para>
+    <guimenuitem>Options &gt; Machine Translate ...</guimenuitem> and activate
+    the service desired. Note that they are all web-based: you will have to be
+    on-line if you want to use them.</para>
   </section>
 
   <section id="introduction">
@@ -34,14 +34,27 @@
         <secondary>Google Translate</secondary>
       </indexterm></title>
 
-    <para>Google Translate is the service offered by Google, for translating
-    sentences, web sites and complete texts between an ever-growing number of
-    languages. At the time of writing the list includes more than 50
-    languages, from Albanian to Yiddish, including of course all the major
-    languages.</para>
+    <para>Google Translate is a payable service offered by Google, for
+    translating sentences, web sites and complete texts between an
+    ever-growing number of languages. At the time of writing the list includes
+    more than 50 languages, from Albanian to Yiddish, including of course all
+    the major languages. The current version of the service is based on usage,
+    with the price of 20 USD per million characters at the time of writing.
+    <emphasis role="bold"></emphasis></para>
 
-    <para>The quality of the translation, of course, depends on one side on
-    the reservoir of target-language texts and the availability of their
+    <para><emphasis role="bold">Important: </emphasis>Google Translate API v2
+    requires billing information for all accounts before you can start using
+    the service (see <ulink
+    url="http://code.google.com/intl/en-US/apis/language/translate/v2/pricing.html">Pricing
+    and Terms of Service</ulink> for more). To identify youself as a valid
+    user for the Google services, you use your private unique key sent to you
+    by Google, when you have registered for the service. See chapter <link
+    linkend="chapter.installing.and.running">Installing and Running</link>,
+    section Launch command arguments, for details on how to add this key to
+    the OmegaT environment.</para>
+
+    <para>The quality of the Google Translate translation depends on one side
+    on the reservoir of target-language texts and the availability of their
     bilingual versions, on the other hand on the quality of the models built.
     It is pretty much certain that while the quality may be insufficient in
     some cases, it will definitely get better with time and not worse.</para>
@@ -126,11 +139,12 @@
         <secondary>Apertium</secondary>
       </indexterm></title>
 
-    <para><ulink url="http://www.apertium.org/">Apertium</ulink> is a free/open-source machine
-    translation platform, initially aimed at related-language pairs, like CA,
-    ES, GA, PT, OC and FR but recently expanded to deal with more divergent
-    language pairs (such as English-Catalan). Check the web site for the
-    latest list of implemented language pairs.</para>
+    <para><ulink url="http://www.apertium.org/">Apertium</ulink> is a
+    free/open-source machine translation platform, initially aimed at
+    related-language pairs, like CA, ES, GA, PT, OC and FR but recently
+    expanded to deal with more divergent language pairs (such as
+    English-Catalan). Check the web site for the latest list of implemented
+    language pairs.</para>
 
     <para>The platform provides</para>
 
@@ -185,6 +199,21 @@
       <listitem>
         <para>What is the language pair you need? Check if the selected
         service offers it.</para>
+      </listitem>
+
+      <listitem>
+        <para>Google Translate does not work: check Options &gt; Machine
+        Translate: the Google Translate service is labelled Google Translate
+        V2. The older version of the service, labelled "Google Translate" and
+        available in outdated OmegaT versions, is deprecated and does not work
+        anymore.</para>
+      </listitem>
+
+      <listitem>
+        <para>"Google Translate returned HTTP response code: 403 ...": check
+        that the 38-characters key, entered in the pinfo.list file, is
+        correct. Check that <ulink url="???">Translate API service </ulink>has
+        been activated.</para>
       </listitem>
     </itemizedlist>
   </section>

@@ -68,7 +68,10 @@
         <listitem>
           <para>OmegaT inserts the translation of the string most similar to
           the current source, if it is above the similarity threshold that you
-          have selected in this dialog.</para>
+          have selected in this dialog. The prefix (per default empty) can be
+          used to tag translations, done via fuzzy matches. If you add a
+          prefix (for instance [fuzzy]), you can trace those translations
+          later to see they are correct.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -120,8 +123,8 @@
       <listitem>
         <para>The text highlighted by the user, when
         <keycap>Ctrl-Shift-C</keycap> is pressed or <guimenuitem>Edit &gt;
-        Export Selection</guimenuitem> is
-        selected (<filename>selection.txt</filename>).</para>
+        Export Selection</guimenuitem> is selected
+        (<filename>selection.txt</filename>).</para>
       </listitem>
     </itemizedlist>
 

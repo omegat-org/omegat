@@ -25,6 +25,7 @@
 
 package org.omegat.core.machinetranslators;
 
+import java.io.IOException;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;

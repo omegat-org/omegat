@@ -112,12 +112,28 @@
     <para><literal>"This is a source term, which contains a comma","c'est un
     terme, qui contient une virgule" </literal></para>
 
-    <para>In addition to the plain text format, TBX format is also supported.
-    TBX - Term Base eXchange (TBX) is the open, XML-based standard for
-    exchanging structured terminological data that has been approved as an
-    international standard by LISA and ISO. If you have an existing
-    terminology handling system - MultiTerm for example - it is quite possible
-    it offers the export of terminology data via TBX format.</para>
+    <para>In addition to the plain text format, TBX format <indexterm
+        class="singular">
+        <primary>Glossaries</primary>
+
+        <secondary>TBX format</secondary>
+      </indexterm> is also supported. TBX - Term Base eXchange - is the open,
+    XML-based standard for exchanging structured terminological data, TBX has
+    been approved as an international standard by LISA<indexterm
+        class="singular">
+        <primary>LISA - </primary>
+
+        <secondary>File format</secondary>
+      </indexterm> and ISO. If you have an existing terminology handling
+    system - MultiTerm for example - it is quite possible it offers the export
+    of terminology data via TBX format. <ulink
+    url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft
+    Terminology Collection</ulink> <indexterm class="singular">
+        <primary>Glossaries</primary>
+
+        <secondary>Microsoft Terminology collection</secondary>
+      </indexterm> can be downloaded in nearly 100 languages and can serve as
+    a cornerstone IT glossary.</para>
   </section>
 
   <section>

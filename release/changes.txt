@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -36,7 +36,10 @@ WiX
   - When reading external TMXs, the <hi> tag is skipped, as it cannot correspond
 to a tag of a source document
 
-  - The "out of memory" message now refers to the manual.
+  - The "out of memory" message now refers to the manual
+
+  - Instead of using Java's default memory allocation, the Windows and Linux 
+startup scripts now use 512 MB
 
   Bug fixes:
 

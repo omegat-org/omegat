@@ -1,2 +1,2 @@
-java -jar OmegaT.jar %*
+java -jar -Xmx512M OmegaT.jar %*
 

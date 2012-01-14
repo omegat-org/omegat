@@ -305,6 +305,7 @@ public class EditorTextArea3 extends JEditorPane {
                 // there is no Alt,Ctrl,Cmd keys, i.e. it's char
                 if (e.getKeyCode() != KeyEvent.VK_SHIFT) {
                     // it's not a single 'shift' press
+                    // fix caret position prior to inserting character
                     checkAndFixCaret();
                 }
             }
@@ -316,13 +317,18 @@ public class EditorTextArea3 extends JEditorPane {
         // some after-processing catches
         if (!processed && e.getKeyChar() != 0) {
             switch (e.getKeyCode()) {
-            case KeyEvent.VK_HOME:
-            case KeyEvent.VK_END:
-            case KeyEvent.VK_LEFT:
-            case KeyEvent.VK_RIGHT:
-            case KeyEvent.VK_UP:
-            case KeyEvent.VK_DOWN:
-                checkAndFixCaret();
+                //if caret is moved over existing chars, check and fix caret position
+                case KeyEvent.VK_HOME:
+                case KeyEvent.VK_END:
+                case KeyEvent.VK_LEFT:
+                case KeyEvent.VK_RIGHT:
+                case KeyEvent.VK_UP:
+                case KeyEvent.VK_DOWN:
+                case KeyEvent.VK_KP_LEFT:
+                case KeyEvent.VK_KP_RIGHT:
+                case KeyEvent.VK_KP_UP:
+                case KeyEvent.VK_KP_DOWN:
+                    checkAndFixCaret();
             }
         }
     }

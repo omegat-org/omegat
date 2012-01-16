@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    5 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -15,6 +15,9 @@
 
   - TBX entry/concept level note
   http://sourceforge.net/support/tracker.php?aid=3454401
+
+  - Load comment from TBX even without target language
+  http://sourceforge.net/support/tracker.php?aid=3472408
 
   Other enhancements:
 

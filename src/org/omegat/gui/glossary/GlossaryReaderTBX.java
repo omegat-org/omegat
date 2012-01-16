@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
-               2011 Didier Briel
+               2011 Didier Briel, Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -59,6 +59,7 @@ import org.xml.sax.helpers.XMLFilterImpl;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  * @author Didier Briel
+ * @author Guido Leenders
  */
 public class GlossaryReaderTBX {
     protected static final JAXBContext TBX_CONTEXT;
@@ -125,8 +126,13 @@ public class GlossaryReaderTBX {
             appendLine(comment, descTig.toString());
             appendLine(comment, note.toString());
             for (String s : sTerms) {
+                boolean addedForLang = false;
                 for (String t : tTerms) {
                     result.add(new GlossaryEntry(s, t, comment.toString()));
+                    addedForLang = true;
+                }
+                if (!addedForLang) { // An entry is created just to get the definition
+                    result.add(new GlossaryEntry(s, "", comment.toString()));
                 }
             }
             sTerms.clear();

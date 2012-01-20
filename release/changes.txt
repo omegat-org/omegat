@@ -232,6 +232,20 @@ is saved.
   - Dutch localisation updated to 2.5 (UI)
 
 ----------------------------------------------------------------------
+ OmegaT 2.3.0 update 6
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.3.0 update 6 vs. 2.3.0 update 5
+
+  Bug fixes:
+
+  - Non working remote dictionary location
+  http://sourceforge.net/support/tracker.php?aid=3476639
+
+----------------------------------------------------------------------
  OmegaT 2.3.0 update 5
 ----------------------------------------------------------------------
    1 Enhancement

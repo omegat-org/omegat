@@ -1,4 +1,42 @@
 ----------------------------------------------------------------------
+ OmegaT 2.5.0 update 6
+----------------------------------------------------------------------
+   5 Enhancements
+   1 Bug fixes
+   2 Localisation updates
+----------------------------------------------------------------------
+2.5.0 update 6 vs. 2.5.0 update 5
+
+
+  Implemented requests:
+  
+  Tag validation improvements: 
+      - allow marking and checking of text-to-remove
+      http://sourceforge.net/support/tracker.php?aid=3477099
+      - custom tag validation
+      http://sourceforge.net/support/tracker.php?aid=1599334
+      - validate Java MessageFormat pattern tags ({0} etc.).
+      http://sourceforge.net/support/tracker.php?aid=3477045
+      - insert tags inserts all relevant tags (custom, java, printf), not only OmegaT-tags
+      - render tags in different color in editor
+      http://sourceforge.net/support/tracker.php?aid=2120329
+
+  Other enhancements:
+  
+  Bug fixes:
+  
+  - Non working remote dictionary location
+  http://sourceforge.net/support/tracker.php?aid=3476639
+  
+  Localisation updates:
+
+  - Dutch localisation updated to 2.5.0 update 5 (UI, readme, documentation)
+
+  - Italian localisation updated to 2.5.0 update 5 (UI, Instant Start, readme)
+  
+
+
+----------------------------------------------------------------------
  OmegaT 2.5.0 update 5
 ----------------------------------------------------------------------
    9 Enhancements
@@ -61,9 +99,9 @@ working for all tags
 
   Localisation updates:
 
-  - Dutch localisation updated to 2.5.0 update 5 (UI, readme, documentation)
+  - Dutch localisation updated to 2.5.0 update 3 (UI, readme, documentation)
 
-  - Italian localisation updated to 2.5.0 update 5 (UI, Instant Start, readme)
+  - Italian localisation updated to 2.5.0 update 3 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 4

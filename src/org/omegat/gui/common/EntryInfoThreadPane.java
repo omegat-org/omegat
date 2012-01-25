@@ -36,6 +36,7 @@ import org.omegat.core.events.IEntryEventListener;
  * @param <T>
  *            result type of found data
  */
+@SuppressWarnings("serial")
 public abstract class EntryInfoThreadPane<T> extends EntryInfoPane<T> implements IEntryEventListener {
 
     SourceTextEntry currentlyProcessedEntry;

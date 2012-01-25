@@ -57,6 +57,7 @@ import org.omegat.util.StaticUtils;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class SegmentationCustomizer extends JDialog implements ListSelectionListener {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;

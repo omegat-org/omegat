@@ -133,6 +133,7 @@ public abstract class EntryInfoSearchThread<T> extends Thread {
      * Any search can generate this exception for stop searching if entry changed. All callers must catch it
      * and just skip.
      */
+    @SuppressWarnings("serial")
     public static class EntryChangedException extends RuntimeException {
     }
 }

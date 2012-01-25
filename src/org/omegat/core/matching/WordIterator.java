@@ -119,8 +119,8 @@ public class WordIterator extends BreakIterator {
                 // maybe closing tag
                 if (!PatternConsts.OMEGAT_TAG_ONLY.matcher(str3).matches()) {
                     // rewind back two times
-                    int prev = breaker.previous();
-                    prev = breaker.previous();
+                    breaker.previous();
+                    breaker.previous();
                     return next;
                 }
 
@@ -136,15 +136,15 @@ public class WordIterator extends BreakIterator {
                     return next4; // yes, it's a standalone tag
                 else {
                     // rewind back three times
-                    int prev = breaker.previous();
-                    prev = breaker.previous();
-                    prev = breaker.previous();
+                    breaker.previous();
+                    breaker.previous();
+                    breaker.previous();
                     return next;
                 }
             } else if (!PatternConsts.OMEGAT_TAG_ONLY.matcher(str2).matches()) {
                 // rewind back two times
-                int prev = breaker.previous();
-                prev = breaker.previous();
+                breaker.previous();
+                breaker.previous();
                 return next;
             }
 
@@ -162,17 +162,17 @@ public class WordIterator extends BreakIterator {
                     return next4; // yes, it's a standalone tag
                 else {
                     // rewind back three times
-                    int prev = breaker.previous();
-                    prev = breaker.previous();
-                    prev = breaker.previous();
+                    breaker.previous();
+                    breaker.previous();
+                    breaker.previous();
                     return next;
                 }
             } else if (str3.equals(">"))
                 return next3; // yes, it's an OmegaT tag
             {
                 // rewind back two times
-                int prev = breaker.previous();
-                prev = breaker.previous();
+                breaker.previous();
+                breaker.previous();
                 return next;
             }
         } else if (str.equals("&")) {
@@ -186,7 +186,7 @@ public class WordIterator extends BreakIterator {
                 return next2;
             else {
                 // rewind back once
-                int prev = breaker.previous();
+                breaker.previous();
                 return next;
             }
         } else if (Character.isLetterOrDigit(str.charAt(0))) {
@@ -211,13 +211,13 @@ public class WordIterator extends BreakIterator {
                     return next3; // oh yes
                 else { // oh no
                     // rewind back two times
-                    int prev = breaker.previous();
-                    prev = breaker.previous();
+                    breaker.previous();
+                    breaker.previous();
                     return next;
                 }
             } else {
                 // rewind back once
-                int prev = breaker.previous();
+                breaker.previous();
                 return next;
             }
         } else

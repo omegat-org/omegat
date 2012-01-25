@@ -61,6 +61,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Wildrich Fourie
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
     /** Glossary manager instance. */
     protected final GlossaryManager manager = new GlossaryManager(this);

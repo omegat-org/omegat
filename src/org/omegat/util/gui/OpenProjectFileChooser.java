@@ -33,6 +33,7 @@ import java.io.File;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class OpenProjectFileChooser extends OmegaTFileChooser {
 
     public OpenProjectFileChooser() {

@@ -46,6 +46,7 @@ import org.omegat.util.Preferences;
  * @author Didier Briel
  * @author John Moran
  */
+@SuppressWarnings("serial")
 public class WorkflowOptionsDialog extends JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;

@@ -55,6 +55,7 @@ import org.omegat.util.gui.DockingUI;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class StatisticsWindow extends JDialog {
 
     public static enum STAT_TYPE {

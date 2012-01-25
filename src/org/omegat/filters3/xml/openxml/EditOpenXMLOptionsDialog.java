@@ -46,6 +46,7 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  * @author Antonio Vilei
  */
+@SuppressWarnings("serial")
 public class EditOpenXMLOptionsDialog extends javax.swing.JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;

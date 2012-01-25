@@ -44,6 +44,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo> {
     protected final IMachineTranslation[] translators;
 

@@ -43,6 +43,7 @@ import org.omegat.util.StaticUtils;
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  */
+@SuppressWarnings("serial")
 public class AboutDialog extends JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;

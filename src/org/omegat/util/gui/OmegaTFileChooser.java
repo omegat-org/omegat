@@ -41,6 +41,7 @@ import org.omegat.util.Preferences;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class OmegaTFileChooser extends JFileChooser {
 
     /**

@@ -33,6 +33,7 @@ import org.omegat.core.segmentation.SRX;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class SRXOptionsModel extends JToggleButton.ToggleButtonModel {
     protected SRX srx;
 

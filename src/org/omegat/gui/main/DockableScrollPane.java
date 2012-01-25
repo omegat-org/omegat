@@ -37,6 +37,7 @@ import com.vlsolutions.swing.docking.DockingConstants;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class DockableScrollPane extends JScrollPane implements Dockable {
     DockKey dockKey;
 

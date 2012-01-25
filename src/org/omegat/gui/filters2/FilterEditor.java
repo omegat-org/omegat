@@ -61,6 +61,7 @@ import org.omegat.util.StringUtil;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class FilterEditor extends JDialog implements ListSelectionListener {
 
     private Filter filter;

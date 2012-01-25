@@ -49,6 +49,7 @@ import org.openide.awt.Mnemonics;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class InstanceEditor extends JDialog {
 
     /** A return status code - returned if Cancel button has been pressed */

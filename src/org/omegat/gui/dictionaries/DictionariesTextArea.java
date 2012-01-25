@@ -63,6 +63,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
+@SuppressWarnings("serial")
 public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEntry>> {
 
     protected final DictionariesManager manager = new DictionariesManager(this);

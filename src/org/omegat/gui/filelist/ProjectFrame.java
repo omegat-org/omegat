@@ -105,6 +105,7 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
+@SuppressWarnings("serial")
 public class ProjectFrame extends JFrame {
 
     private static final Color COLOR_STANDARD_FG = Color.BLACK;

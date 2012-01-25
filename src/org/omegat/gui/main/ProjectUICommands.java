@@ -26,7 +26,6 @@ package org.omegat.gui.main;
 
 import java.io.File;
 
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -36,7 +35,6 @@ import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
-import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;

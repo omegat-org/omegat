@@ -54,6 +54,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
+@SuppressWarnings("serial")
 public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFoundEntry>> {
     private List<DisplayedEntry> entries = new ArrayList<DisplayedEntry>();
 

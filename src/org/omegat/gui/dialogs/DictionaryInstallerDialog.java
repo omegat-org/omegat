@@ -49,6 +49,7 @@ import org.omegat.util.OStrings;
  * @author bartkoz
  * @author Didier Briel
  */
+@SuppressWarnings("serial")
 public class DictionaryInstallerDialog extends JDialog {
 
     /**

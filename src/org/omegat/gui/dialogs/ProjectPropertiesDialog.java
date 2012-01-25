@@ -81,6 +81,7 @@ import org.openide.awt.Mnemonics;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
     private ProjectProperties projectProperties;
 

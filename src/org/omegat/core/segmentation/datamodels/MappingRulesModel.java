@@ -41,6 +41,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class MappingRulesModel extends AbstractTableModel {
     private SRX srx;
 

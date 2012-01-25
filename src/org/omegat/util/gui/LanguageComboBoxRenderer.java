@@ -37,6 +37,7 @@ import org.omegat.util.Language;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class LanguageComboBoxRenderer extends BasicComboBoxRenderer {
     public Component getListCellRendererComponent(JList list, Object value, // value
                                                                             // to

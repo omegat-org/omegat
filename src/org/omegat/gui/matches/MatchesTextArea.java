@@ -67,6 +67,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Zoltan Bartko
  * @author John Moran
  */
+@SuppressWarnings("serial")
 public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> implements IMatcher {
 
     private final List<NearString> matches = new ArrayList<NearString>();

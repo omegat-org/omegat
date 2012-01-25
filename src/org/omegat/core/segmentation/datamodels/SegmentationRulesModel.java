@@ -39,6 +39,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class SegmentationRulesModel extends AbstractTableModel {
     private List<Rule> rules;
 

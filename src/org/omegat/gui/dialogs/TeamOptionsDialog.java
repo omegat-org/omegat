@@ -43,6 +43,7 @@ import org.omegat.util.Preferences;
  * 
  * @author Martin Fleurke
  */
+@SuppressWarnings("serial")
 public class TeamOptionsDialog extends JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;

@@ -93,6 +93,7 @@ import org.openide.awt.Mnemonics;
  * @author Martin Fleurke
  * @author Antonio Vilei
  */
+@SuppressWarnings("serial")
 public class SearchWindow extends JFrame {
     // public SearchWindow(MainWindow par, SearchThread th, String startText)
     public SearchWindow(MainWindow par, String startText) {

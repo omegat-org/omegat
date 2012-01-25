@@ -69,6 +69,7 @@ import org.openide.awt.Mnemonics;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class HelpFrame extends JFrame {
     /*
      * The Singleton design pattern allows us to have just one instance of the

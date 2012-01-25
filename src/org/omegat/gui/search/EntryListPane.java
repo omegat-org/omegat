@@ -59,6 +59,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  */
+@SuppressWarnings("serial")
 class EntryListPane extends JTextPane {
     protected static final AttributeSet FOUND_MARK = Styles.createAttributeSet(Color.BLUE, null, true, null);
     protected static final int MARKS_PER_REQUEST = 100;

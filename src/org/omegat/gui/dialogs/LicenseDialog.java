@@ -40,6 +40,7 @@ import org.openide.awt.Mnemonics;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class LicenseDialog extends javax.swing.JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;

@@ -45,6 +45,7 @@ import org.omegat.util.StaticUtils;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
+@SuppressWarnings("serial")
 public class FontSelectionDialog extends javax.swing.JDialog {
     /**
      * A return status code - returned if Cancel button has been pressed or User

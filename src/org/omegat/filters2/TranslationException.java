@@ -32,6 +32,7 @@ package org.omegat.filters2;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class TranslationException extends Exception {
     /**
      * Constructs an instance of <code>TranslationException</code> with the

@@ -43,6 +43,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Martin Fleurke
  * @author Alex Buloichik
  */
+@SuppressWarnings("serial")
 public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements IEntryEventListener {
 
     private static final String EXPLANATION = OStrings.getString("GUI_COMMENTSWINDOW_explanation");

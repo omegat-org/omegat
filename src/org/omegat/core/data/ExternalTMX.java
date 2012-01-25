@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.core.segmentation.Segmenter;
-import org.omegat.util.Preferences;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 

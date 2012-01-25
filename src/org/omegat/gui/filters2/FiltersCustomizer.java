@@ -57,6 +57,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class FiltersCustomizer extends JDialog implements ListSelectionListener {
     private Filters config;
     public Filters result;

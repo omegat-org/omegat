@@ -44,6 +44,7 @@ import org.omegat.util.Preferences;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  */
+@SuppressWarnings("serial")
 public class ExternalTMXMatchesDialog extends JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;

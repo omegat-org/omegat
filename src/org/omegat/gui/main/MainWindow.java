@@ -82,6 +82,7 @@ import com.vlsolutions.swing.docking.FloatingDialog;
  * @author Andrzej Sawula
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class MainWindow extends JFrame implements IMainWindow {
     public final MainWindowMenu menu;
 

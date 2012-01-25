@@ -43,6 +43,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class FiltersTableModel extends AbstractTableModel {
 
     private final List<Filter> filters;

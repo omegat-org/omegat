@@ -29,7 +29,6 @@
 package org.omegat.util;
 
 import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * Constant patterns, used in different other classes.

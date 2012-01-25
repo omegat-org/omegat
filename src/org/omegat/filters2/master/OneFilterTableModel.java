@@ -38,6 +38,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Maxym Mykhalchuk
  */
+@SuppressWarnings("serial")
 public class OneFilterTableModel extends AbstractTableModel {
 
     private final Filter filter;

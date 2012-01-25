@@ -43,12 +43,13 @@ public final class Styles {
     public static final Color COLOR_TRANSLATED = new Color(255, 255, 153);
 
     public static final Color COLOR_LIGHT_GRAY = new Color(128, 128, 128);
+    public static final Color COLOR_PLACEHOLDER = new Color(150, 150, 150);
 
     /**
      * Construct required attributes set.
      * 
      * Since we need many attributes combinations, it's not good idea to have
-     * variable to each attributes set. There is no sence to store created
+     * variable to each attributes set. There is no sense to store created
      * attributes in the cache, because calculate hash for cache require about
      * 2-3 time more than just create attributes set from scratch.
      * 

@@ -56,6 +56,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Martin Fleurke
  */
 public class SegmentBuilder {
 
@@ -405,7 +406,7 @@ public class SegmentBuilder {
         if (hasRTL) {
             insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
         }
-        insertText(text, isSource);
+        insertTextWithTags(text, isSource);
         if (hasRTL) {
             insert("\u202c", null); // end of embedding
         }
@@ -472,7 +473,7 @@ public class SegmentBuilder {
         }
 
         activeTranslationBeginOffset = offset;
-        insertText(text, isSource);
+        insertTextWithTags(text, isSource);
         activeTranslationEndOffset = offset;
 
         if (hasRTL) {
@@ -490,7 +491,7 @@ public class SegmentBuilder {
     }
 
     void createInputAttributes(Element element, MutableAttributeSet set) {
-        set.addAttributes(attrs(false));
+        set.addAttributes(attrs(false, false));
     }
 
     private void insert(String text, AttributeSet attrs) throws BadLocationException {
@@ -566,14 +567,39 @@ public class SegmentBuilder {
     }
 
     /**
-     * Choose segment's attributes based on rules.
+     * Choose segment part attributes based on rules.
+     * @param isSource is it a source segment or a target segment
+     * @param isPlaceholder is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
+     * @return the attributes to format the text
      */
-    public AttributeSet attrs(boolean isSource) {
-        return settings.getAttributeSet(isSource, ste.getDuplicate(), active, transExist);
+    public AttributeSet attrs(boolean isSource, boolean isPlaceholder) {
+        return settings.getAttributeSet(isSource, isPlaceholder, ste.getDuplicate(), active, transExist);
     }
 
-    private void insertText(String text, boolean isSource) throws BadLocationException {
-        AttributeSet normal = attrs(isSource);
+    /**
+     * Inserts the texts and formats the text
+     * @param text source or translation text
+     * @param isSource true if it is a source text, false if it is a translation
+     * @throws BadLocationException
+     */
+    private void insertTextWithTags(String text, boolean isSource) throws BadLocationException {
+        AttributeSet normal = attrs(isSource, false);
+        int start = offset;
+        int end = start + text.length();
         insert(text, normal);
+        formatText(text, start, end, isSource);
+    }
+
+    public void formatText(String text, int start, int end, boolean isSource) {
+
+        AttributeSet attrNormal = attrs(isSource, false);
+        doc.setCharacterAttributes(start, end-start, attrNormal, true);
+
+        AttributeSet attrPlaceholder = attrs(isSource, true);
+        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+        Matcher placeholderMatch = placeholderPattern.matcher(text);
+        while (placeholderMatch.find()) {
+            doc.setCharacterAttributes(start+placeholderMatch.start(), placeholderMatch.end()-placeholderMatch.start(), attrPlaceholder, true);
+        }
     }
 }

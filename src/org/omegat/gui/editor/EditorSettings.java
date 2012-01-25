@@ -40,6 +40,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * Editor behavior control settings.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
  */
 public class EditorSettings {
     private final EditorController parent;
@@ -215,12 +216,14 @@ public class EditorSettings {
     /**
      * Choose segment's attributes based on rules.
      * @param isSource is it a source segment or a target segment
+     * @param isPlaceholder is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
      * @param duplicate is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT. See sourceTextEntryste.getDuplicate()
      * @param active is it an active segment?
      * @param translationExists does a translation already exist
      * @return proper AttributeSet to use on displaying the segment.
      */
-    public AttributeSet getAttributeSet(boolean isSource, DUPLICATE duplicate, boolean active, boolean translationExists) {
+    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, DUPLICATE duplicate, boolean active, boolean translationExists) {
+        //determine foreground color
         Color fg = null;
         if (isMarkNonUniqueSegments()) {
             switch (duplicate) {
@@ -236,7 +239,9 @@ public class EditorSettings {
                 break;
             }
         }
-
+        if (isPlaceholder) fg = Styles.COLOR_PLACEHOLDER;
+        
+        //determine background color
         Color bg = null;
         if (active) {
             if (isSource) {
@@ -254,12 +259,15 @@ public class EditorSettings {
             }
         }
 
+        //determine bold
         Boolean bold = false;
         if (isSource) {
             if (active || viewSourceBold && isDisplaySegmentSources()) {
                 bold = true;
             }
         }
+
+        //determine italic
         Boolean italic = false;
 
         return Styles.createAttributeSet(fg, bg, bold, italic);

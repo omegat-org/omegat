@@ -456,6 +456,7 @@ public class EditorController implements IEditor {
         doc.addUndoableEditListener(editor.undoManager);
 
         doc.addDocumentListener(new DocumentListener() {
+            //we cannot edit the document here, only other stuff.
             public void changedUpdate(DocumentEvent e) {
                 showLengthMessage();
                 onTextChanged();

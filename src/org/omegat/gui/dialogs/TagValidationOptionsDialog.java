@@ -37,6 +37,7 @@ import javax.swing.JLabel;
 import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 
 /**
@@ -44,6 +45,7 @@ import org.omegat.util.Preferences;
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
  */
+@SuppressWarnings("serial")
 public class TagValidationOptionsDialog extends JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
@@ -226,7 +228,7 @@ public class TagValidationOptionsDialog extends JDialog {
         Preferences.setPreference(Preferences.DONT_CHECK_PRINTF_TAGS, noCheckRadio.isSelected());
         Preferences.setPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS, simpleCheckRadio.isSelected());
         Preferences.setPreference(Preferences.CHECK_ALL_PRINTF_TAGS, fullCheckRadio.isSelected());
-
+        PatternConsts.updatePlaceholderPattern();
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 

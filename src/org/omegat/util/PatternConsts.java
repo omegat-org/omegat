@@ -39,6 +39,10 @@ import java.util.regex.Pattern;
  * @author Martin Fleurke
  */
 public class PatternConsts {
+
+    private static final String RE_OMEGAT_TAG = "<\\/?[a-zA-Z]+[0-9]+\\/?>";
+    private static final String RE_PRINTF_VARS = "%([1-9]+\\$)?([+-])?('.)?(-)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
+    private static final String RE_SIMPLE_PRINTF_VARS = "%([1-9]+\\$)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     /**
      * Compiled pattern to extract the encoding from XML file, if any. Found
      * encoding is stored in group #1.
@@ -96,7 +100,7 @@ public class PatternConsts {
      * Pattern that matches omegat-specific tags (with leading &lt; and trailing
      * &gt; in any place of a string).
      */
-    public static final Pattern OMEGAT_TAG = Pattern.compile("<\\/?[a-zA-Z]+[0-9]+\\/?>");
+    public static final Pattern OMEGAT_TAG = Pattern.compile(RE_OMEGAT_TAG);
 
     /**
      * Pattern that matches omegat-specific tags (with leading &lt; and trailing
@@ -168,8 +172,7 @@ public class PatternConsts {
      * <code>echo printf(gettext("%s is very %s"), "OmegaT", "great");</code>
      */
     public static final Pattern PRINTF_VARS = Pattern
-            .compile("%([1-9]+\\$)?([+-])?('.)?(-)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]",
-                    Pattern.CASE_INSENSITIVE);
+            .compile(RE_PRINTF_VARS);
     /**
      * Pattern for detecting the placeholders in a printf-function string. It
      * detects only simple placeholders, without SIGN-, PADDING-, ALIGNMENT- and
@@ -177,7 +180,29 @@ public class PatternConsts {
      * 
      * @see PRINTF_VARS
      */
-    public static final Pattern SIMPLE_PRINTF_VARS = Pattern.compile(
-            "%([1-9]+\\$)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]", Pattern.CASE_INSENSITIVE);
+    public static final Pattern SIMPLE_PRINTF_VARS = Pattern.compile(RE_SIMPLE_PRINTF_VARS);
 
+    /**
+     * Pattern for detecting OmegaT-tags and other placeholders (extended sprintf-variant) in texts
+     */
+    public static final Pattern SIMPLE_PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_PRINTF_VARS);
+    
+    private static Pattern PLACEHOLDERS;
+    
+    public static Pattern getPlaceholderPattern() {
+        if (PLACEHOLDERS == null) {
+            if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
+                PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_PRINTF_VARS);
+            } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
+                PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_SIMPLE_PRINTF_VARS);
+            } else {
+                PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG);
+            }
+        }
+        return PLACEHOLDERS;
+    }
+    
+    public static void updatePlaceholderPattern() {
+        PLACEHOLDERS = null;
+    }
 }

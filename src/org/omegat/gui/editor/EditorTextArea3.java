@@ -65,6 +65,7 @@ import org.omegat.util.gui.DockingUI;
  * @author Didier Briel
  * @author Wildrich Fourie
  */
+@SuppressWarnings("serial")
 public class EditorTextArea3 extends JEditorPane {
 
     /** Undo Manager to store edits */
@@ -200,8 +201,14 @@ public class EditorTextArea3 extends JEditorPane {
      */
     @Override
     protected void processKeyEvent(KeyEvent e) {
-        if (e.getID() != KeyEvent.KEY_PRESSED) {
-            // key released
+        int keyEvent = e.getID();
+        if (keyEvent == KeyEvent.KEY_RELEASED) {
+            // key released. Only now the translation start/end positions have been updated according to keydown events
+            reformatTranslation();
+            super.processKeyEvent(e);
+            return;
+        } else if (keyEvent == KeyEvent.KEY_TYPED) {
+            //key typed
             super.processKeyEvent(e);
             return;
         }
@@ -310,9 +317,8 @@ public class EditorTextArea3 extends JEditorPane {
                 }
             }
             super.processKeyEvent(e);
+            //note that the translation start/end position are not updated yet. This has been updated when then keyreleased event occurs. 
         }
-
-        controller.showLengthMessage();
 
         // some after-processing catches
         if (!processed && e.getKeyChar() != 0) {
@@ -328,10 +334,34 @@ public class EditorTextArea3 extends JEditorPane {
                 case KeyEvent.VK_KP_RIGHT:
                 case KeyEvent.VK_KP_UP:
                 case KeyEvent.VK_KP_DOWN:
-                    checkAndFixCaret();
+                    checkAndFixCaret(); //works only in after-processing if translation length (start and end position) has not changed, because start and end position are not updated yet.
             }
         }
     }
+
+    /**
+     * Formats placeholders in translation
+     */
+    private void reformatTranslation() {
+        Document3 doc = getOmDocument();
+        String trans = doc.extractTranslation();
+
+        if (trans != null) {
+            //prevent the formatting to become an undoable thing, by removing the undomanager temporary
+            getOmDocument().removeUndoableEditListener(undoManager);
+
+            int start = doc.getTranslationStart();
+            int end = doc.getTranslationEnd();
+
+            int ae = controller.displayedEntryIndex;
+            SegmentBuilder sb = controller.m_docSegList[ae];
+            sb.formatText(trans, start, end, false);
+
+            //enable undo manager again.
+            getOmDocument().addUndoableEditListener(undoManager);
+        }
+    }
+
 
     /**
      * Checks whether the selection & caret is inside editable text, and changes
@@ -350,16 +380,7 @@ public class EditorTextArea3 extends JEditorPane {
         // int pos = m_editor.getCaretPosition();
         int spos = getSelectionStart();
         int epos = getSelectionEnd();
-        /*
-         * int start = m_segmentStartOffset + m_sourceDisplayLength +
-         * OConsts.segmentStartStringFull.length();
-         */
         int start = doc.getTranslationStart();
-        // -1 for space before tag, -2 for newlines
-        /*
-         * int end = editor.getTextLength() - m_segmentEndInset -
-         * OConsts.segmentEndStringFull.length();
-         */
         int end = doc.getTranslationEnd();
 
         if (spos != epos) {

@@ -52,6 +52,7 @@ import org.omegat.util.Preferences;
  * @author Zoltan Bartko
  * @author Didier Briel
  */
+@SuppressWarnings("serial")
 public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 
     private final JFileChooser fileChooser = new JFileChooser();
@@ -120,7 +121,11 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         directoryTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_DIRECTORY));
         updateLanguageList();
 
-        if (Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL).equalsIgnoreCase("")) {
+        String dictionaryUrl = Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL);
+        if ("".equalsIgnoreCase(dictionaryUrl) ||
+            //string below was default prior to 2.5.0 update 5, but is not working. Override with new default.
+            "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/dictionaries/".equalsIgnoreCase(dictionaryUrl)
+           ) {
                dictionaryUrlTextField.setText(OConsts.REMOTE_SC_DICTIONARY_LIST_LOCATION);
         } else {
             dictionaryUrlTextField.setText(Preferences.getPreference(Preferences.SPELLCHECKER_DICTIONARY_URL));

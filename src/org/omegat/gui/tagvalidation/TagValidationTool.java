@@ -26,6 +26,7 @@
 package org.omegat.gui.tagvalidation;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -109,7 +110,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         List<SourceTextEntry> suspects = new ArrayList<SourceTextEntry>(16);
 
         // programming language validation: pattern to detect printf variables
-        // (%s and %n\$s)
+        // (%s and %n$s)
         Pattern printfPattern = null;
         if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
             printfPattern = PatternConsts.PRINTF_VARS;
@@ -139,15 +140,15 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                 }
 
                 if (printfPattern != null) {
-                    // printf variables should be equal.
-                    // we check this by adding the string "index+type specifier"
-                    // of every
-                    // found variable to a set.
+                    // printf variables should be equal in number, 
+                    // but order can change
+                    // (and with that also notation: e.g. from '%s' to '%1$s') 
+                    // We check this by adding the string "index+type specifier"
+                    // of every found variable to a set.
                     // If the sets of the source and target are not equal, then
-                    // there is
-                    // a problem: either missing or extra variables, or the
-                    // type specifier
-                    // has changed for the variable at the given index.
+                    // there is a problem: either missing or extra variables, 
+                    // or the type specifier has changed for the variable at the 
+                    // given index.
                     HashSet<String> printfSourceSet = new HashSet<String>();
                     Matcher printfMatcher = printfPattern.matcher(s);
                     int index = 1;
@@ -210,7 +211,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                         continue;
                     }
                 }
-                // OmegaT tags check:
+                // OmegaT tags check: order and number should be equal
                 srcTags.clear();
                 locTags.clear();
                 // extract tags from src and loc string
@@ -237,42 +238,62 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     if (added) continue;
                 }
 
-                // Java MessageFormat pattern checks:
+                // Java MessageFormat pattern checks: order can change, number should be equal.
                 if (javaMessageFormatPattern != null) {
-                    HashSet<String> javaMessageFormatSourceSet = new HashSet<String>();
+                    srcTags.clear();
+                    locTags.clear();
                     Matcher javaMessageFormatMatcher = javaMessageFormatPattern.matcher(s);
                     while (javaMessageFormatMatcher.find()) {
-                        javaMessageFormatSourceSet.add(javaMessageFormatMatcher.group(0));
+                        srcTags.add(javaMessageFormatMatcher.group(0));
                     }
-                    HashSet<String> javaMessageFormatTargetSet = new HashSet<String>();
                     javaMessageFormatMatcher = javaMessageFormatPattern.matcher(te.translation);
                     while (javaMessageFormatMatcher.find()) {
-                        javaMessageFormatTargetSet.add(javaMessageFormatMatcher.group(0));
+                        locTags.add(javaMessageFormatMatcher.group(0));
                     }
-                    if (!javaMessageFormatSourceSet.equals(javaMessageFormatTargetSet)) {
+                    Collections.sort(srcTags);
+                    Collections.sort(locTags);
+                    if (!srcTags.equals(locTags)) {
                         suspects.add(ste);
                         continue;
                     }
                 }
-                // custom pattern checks:
+
+                // custom pattern checks: order and number should be equal
                 if (customTagPattern != null) {
-                    HashSet<String> customTagPatternSourceSet = new HashSet<String>();
+                    srcTags.clear();
+                    locTags.clear();
+                    // extract tags from src and loc string
                     Matcher customTagPatternMatcher = customTagPattern.matcher(s);
                     while (customTagPatternMatcher.find()) {
-                        customTagPatternSourceSet.add(customTagPatternMatcher.group(0));
+                        srcTags.add(customTagPatternMatcher.group(0));
                     }
-                    HashSet<String> customTagPatternTargetSet = new HashSet<String>();
                     customTagPatternMatcher = customTagPattern.matcher(te.translation);
                     while (customTagPatternMatcher.find()) {
-                        customTagPatternTargetSet.add(customTagPatternMatcher.group(0));
+                        locTags.add(customTagPatternMatcher.group(0));
                     }
-                    if (!customTagPatternSourceSet.equals(customTagPatternTargetSet)) {
+                    // make sure lists match
+                    // for now, insist on exact match
+                    if (srcTags.size() != locTags.size()) {
                         suspects.add(ste);
                         continue;
+                    } else {
+                        boolean added = false;
+                        // compare one by one
+                        for (j = 0; j < srcTags.size(); j++) {
+                            s = srcTags.get(j);
+                            String t = locTags.get(j);
+                            if (!s.equals(t)) {
+                                suspects.add(ste);
+                                added = true;
+                                break;
+                            }
+                        }
+                        if (added) continue;
                     }
-                }
-            }
-        }
+                }//end custom pattern != null
+
+            } //end loop over entries
+        } //end loop over files
         return suspects;
     }
 }

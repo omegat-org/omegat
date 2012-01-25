@@ -211,13 +211,24 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                         continue;
                     }
                 }
-                // OmegaT tags check: order and number should be equal
+                // OmegaT tags and custom tags check: order and number should be equal
                 srcTags.clear();
                 locTags.clear();
                 // extract tags from src and loc string
                 StaticUtils.buildTagList(s, srcTags);
                 StaticUtils.buildTagList(te.translation, locTags);
-
+                // custom pattern checks: order and number should be equal
+                if (customTagPattern != null) {
+                    // extract tags from src and loc string
+                    Matcher customTagPatternMatcher = customTagPattern.matcher(s);
+                    while (customTagPatternMatcher.find()) {
+                        srcTags.add(customTagPatternMatcher.group(0));
+                    }
+                    customTagPatternMatcher = customTagPattern.matcher(te.translation);
+                    while (customTagPatternMatcher.find()) {
+                        locTags.add(customTagPatternMatcher.group(0));
+                    }
+                }
                 // make sure lists match
                 // for now, insist on exact match
                 if (srcTags.size() != locTags.size()) {
@@ -257,40 +268,6 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                         continue;
                     }
                 }
-
-                // custom pattern checks: order and number should be equal
-                if (customTagPattern != null) {
-                    srcTags.clear();
-                    locTags.clear();
-                    // extract tags from src and loc string
-                    Matcher customTagPatternMatcher = customTagPattern.matcher(s);
-                    while (customTagPatternMatcher.find()) {
-                        srcTags.add(customTagPatternMatcher.group(0));
-                    }
-                    customTagPatternMatcher = customTagPattern.matcher(te.translation);
-                    while (customTagPatternMatcher.find()) {
-                        locTags.add(customTagPatternMatcher.group(0));
-                    }
-                    // make sure lists match
-                    // for now, insist on exact match
-                    if (srcTags.size() != locTags.size()) {
-                        suspects.add(ste);
-                        continue;
-                    } else {
-                        boolean added = false;
-                        // compare one by one
-                        for (j = 0; j < srcTags.size(); j++) {
-                            s = srcTags.get(j);
-                            String t = locTags.get(j);
-                            if (!s.equals(t)) {
-                                suspects.add(ste);
-                                added = true;
-                                break;
-                            }
-                        }
-                        if (added) continue;
-                    }
-                }//end custom pattern != null
 
             } //end loop over entries
         } //end loop over files

@@ -61,9 +61,9 @@ working for all tags
 
   Localisation updates:
 
-  - Dutch localisation updated to 2.5.0 update 3 (UI, readme, documentation)
+  - Dutch localisation updated to 2.5.0 update 5 (UI, readme, documentation)
 
-  - Italian localisation updated to 2.5.0 update 3 (UI)
+  - Italian localisation updated to 2.5.0 update 5 (UI, Instant Start, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 4

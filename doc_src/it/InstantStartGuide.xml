@@ -84,7 +84,8 @@
               <listitem>
                 <para>INI (codice=valore) files (*.ini)</para>
               </listitem>
-            </itemizedlist><itemizedlist>
+            </itemizedlist>
+            <itemizedlist>
               <listitem>
                 <para>file DTD (*.DTD)</para>
               </listitem>
@@ -93,6 +94,19 @@
                 <para>file DocuWiki (*.txt)</para>
               </listitem>
             </itemizedlist></para>
+
+    		<itemizedlist>
+			  <listitem>
+				<para>file di titoli SubRip (*.srt)</para>
+			  </listitem>
+			</itemizedlist>
+
+            <itemizedlist>
+              <listitem>
+                <para>CSV locale Magento CE (*.csv)</para>
+              </listitem>
+            </itemizedlist>
+
         </listitem>
       </itemizedlist>
 
@@ -147,12 +161,6 @@
 
           <itemizedlist>
             <listitem>
-              <para>file di titoli SubRip (*.srt)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
               <para>file ResX (*.resx)</para>
             </listitem>
           </itemizedlist>
@@ -192,6 +200,10 @@
 
           <listitem>
             <para>Wordfast TXML (*.txml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Camtasia per Windows (*.camproj)</para>
           </listitem>
 
           </itemizedlist>

@@ -184,8 +184,20 @@ public class PatternConsts {
      */
     public static final Pattern SIMPLE_PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_PRINTF_VARS);
 
+    /**
+     * combined pattern for all placeholder tags
+     */
     private static Pattern PLACEHOLDERS;
+    /**
+     * pattern for text that should be removed from translation. Can be null!
+     */
+    private static Pattern REMOVE;
 
+    /**
+     * Returns the placeholder pattern (OmegaT tags, printf tags, java MessageFomat tags, custom tags, combined according to user configuration)
+     * @return the pattern
+     * @see updatePlaceholderPattern
+     */
     public static Pattern getPlaceholderPattern() {
         if (PLACEHOLDERS == null) {
             String regexp = RE_OMEGAT_TAG;
@@ -207,7 +219,27 @@ public class PatternConsts {
         return PLACEHOLDERS;
     }
 
+    /**
+     * Resets the placeholder pattern. Use it when the user has changed tagvalidation configuration.
+     */
     public static void updatePlaceholderPattern() {
         PLACEHOLDERS = null;
+    }
+
+    public static Pattern getRemovePattern() {
+        if (REMOVE == null) {
+            String removeRegExp = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_REMOVE_PATTERN);
+            if (!"".equalsIgnoreCase(removeRegExp)) {
+                REMOVE = Pattern.compile(removeRegExp);
+            }
+        }
+        return REMOVE;
+    }
+
+    /**
+     * Resets the remove pattern. Use it when the user has changed tagvalidation configuration.
+     */
+    public static void updateRemovePattern() {
+        REMOVE = null;
     }
 }

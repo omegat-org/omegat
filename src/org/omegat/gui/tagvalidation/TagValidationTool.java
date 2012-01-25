@@ -126,6 +126,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         if (!"".equalsIgnoreCase(customRegExp)) {
             customTagPattern = Pattern.compile(customRegExp);
         }
+        Pattern RemovePattern = PatternConsts.getRemovePattern();
 
         for (FileInfo fi : Core.getProject().getProjectFiles()) {
             for (SourceTextEntry ste : fi.entries) {
@@ -264,6 +265,15 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     Collections.sort(srcTags);
                     Collections.sort(locTags);
                     if (!srcTags.equals(locTags)) {
+                        suspects.add(ste);
+                        continue;
+                    }
+                }
+
+                //check translation for stuff that should have been removed.
+                if (RemovePattern != null) {
+                    Matcher removeMatcher = RemovePattern.matcher(te.translation);
+                    if (removeMatcher.find()) {
                         suspects.add(ste);
                         continue;
                     }

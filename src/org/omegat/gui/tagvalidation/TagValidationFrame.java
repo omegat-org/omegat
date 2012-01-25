@@ -178,8 +178,26 @@ public class TagValidationFrame extends JFrame {
      * Replace tags with &lt;font
      * color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt;
      */
-    private String colorTags(String str, String color, Pattern placeholderPattern) {
-        // show OmegaT tags in bold and color
+    private String colorTags(String str, String color, Pattern placeholderPattern, Pattern removePattern) {
+        // show OmegaT tags in bold and color, and to-remove text also
+        String htmlResult = formatRemoveTagsAndPlaceholders(str, color, placeholderPattern, removePattern);
+
+        // show linefeed as symbol
+        Matcher lfMatch = PatternConsts.HTML_BR.matcher(htmlResult);
+        // /simulate unicode symbol for linefeed "\u240A", which is not
+        // displayed correctly.
+        htmlResult = lfMatch.replaceAll("<font color=\"" + color + "\"><sup>L</sup>F<br></font>");
+        return htmlResult;
+    }
+    
+    /**
+     * Formats plain text as html with placeholders in color 
+     * @param str the text to format
+     * @param color the color to use
+     * @param placeholderPattern the pattern to decide what is a placeholder
+     * @return html text
+     */
+    private String formatPlaceholders(String str, String color, Pattern placeholderPattern) {
         Matcher placeholderMatcher = placeholderPattern.matcher(str);
         String htmlResult="";
         int pos=0;
@@ -189,13 +207,32 @@ public class TagValidationFrame extends JFrame {
             pos = placeholderMatcher.end(); 
         }
         htmlResult += htmlize(str.substring(pos));
-
-        // show linefeed as symbol
-        Matcher lfMatch = PatternConsts.HTML_BR.matcher(htmlResult);
-        // /simulate unicode symbol for linefeed "\u240A", which is not
-        // displayed correctly.
-        htmlResult = lfMatch.replaceAll("<font color=\"" + color + "\"><sup>L</sup>F<br></font>");
         return htmlResult;
+    }
+
+    /**
+     * Formats plain text as html with placeholders and to-remove text in color 
+     * @param str the text to format
+     * @param color the color to use for placeholders
+     * @param placeholderPattern the pattern to decide what is a placeholder
+     * @param removePattern the pattern to decide what text had to be removed.
+     * @return html text
+     */
+    private String formatRemoveTagsAndPlaceholders(String str, String color, Pattern placeholderPattern, Pattern removePattern) {
+        if (removePattern != null) {
+            Matcher removeMatcher = removePattern.matcher(str);
+            String htmlResult="";
+            int pos=0;
+            while (removeMatcher.find()) {
+                htmlResult += formatPlaceholders(str.substring(pos, removeMatcher.start()), color, placeholderPattern);
+                htmlResult += "<font color=\"red\"><b>"+htmlize(removeMatcher.group(0))+"</b></font>";
+                pos = removeMatcher.end();
+            }
+            htmlResult += formatPlaceholders(str.substring(pos), color, placeholderPattern);
+            return htmlResult;
+        } else {
+            return formatPlaceholders(str, color, placeholderPattern);
+        }
     }
 
     public void displayStringList(List<SourceTextEntry> stringList) {
@@ -205,6 +242,7 @@ public class TagValidationFrame extends JFrame {
 
     private void update() {
         Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+        Pattern removePattern = PatternConsts.getRemovePattern();
 
         StringBuffer output = new StringBuffer();
 
@@ -238,10 +276,10 @@ public class TagValidationFrame extends JFrame {
                 output.append("</a>");
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(src, "blue", placeholderPattern));
+                output.append(colorTags(src, "blue", placeholderPattern, null));
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(trans.translation, "blue", placeholderPattern));
+                output.append(colorTags(trans.translation, "blue", placeholderPattern, removePattern));
                 output.append("</td>");
                 output.append("</tr>\n");
             }

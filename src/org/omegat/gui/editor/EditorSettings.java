@@ -255,12 +255,13 @@ public class EditorSettings {
      * Choose segment's attributes based on rules.
      * @param isSource is it a source segment or a target segment
      * @param isPlaceholder is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
+     * @param isremovetext is it text that should be removed from translation?
      * @param duplicate is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT. See sourceTextEntryste.getDuplicate()
      * @param active is it an active segment?
      * @param translationExists does a translation already exist
      * @return proper AttributeSet to use on displaying the segment.
      */
-    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, DUPLICATE duplicate, boolean active, boolean translationExists) {
+    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate, boolean active, boolean translationExists) {
         //determine foreground color
         Color fg = null;
         if (markNonUniqueSegments) {
@@ -278,6 +279,9 @@ public class EditorSettings {
             }
         }
         if (isPlaceholder) fg = Styles.COLOR_PLACEHOLDER;
+        if (isRemoveText && !isSource) {
+            fg = Styles.COLOR_REMOVETEXT_TARGET;
+        }
         
         //determine background color
         Color bg = null;
@@ -307,6 +311,9 @@ public class EditorSettings {
 
         //determine italic
         Boolean italic = false;
+        if (isRemoveText && isSource) {
+            italic = true;
+        }
 
         return Styles.createAttributeSet(fg, bg, bold, italic);
     }

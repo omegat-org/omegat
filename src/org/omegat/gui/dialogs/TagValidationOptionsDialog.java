@@ -82,6 +82,7 @@ public class TagValidationOptionsDialog extends JDialog {
         fullCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_ALL_PRINTF_TAGS));
         javaPatternCheckBox.setSelected(Preferences.isPreference(Preferences.CHECK_JAVA_PATTERN_TAGS));
         customPatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN));
+        removePatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_REMOVE_PATTERN));
 
         invalidate();
         pack();
@@ -112,6 +113,8 @@ public class TagValidationOptionsDialog extends JDialog {
         javaPatternCheckBox = new javax.swing.JCheckBox();
         jLabelCustomPattern = new javax.swing.JLabel();
         customPatternRegExpTF = new javax.swing.JTextField();
+        jLabelRemovePattern = new javax.swing.JLabel();
+        removePatternRegExpTF = new javax.swing.JTextField();
 
         setTitle(OStrings.getString("GUI_TITLE_TagValidation_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -145,7 +148,7 @@ public class TagValidationOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 2;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.weighty = 1.0;
@@ -160,7 +163,7 @@ public class TagValidationOptionsDialog extends JDialog {
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 3;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 9;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.SOUTHEAST;
         gridBagConstraints.weighty = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
@@ -229,6 +232,26 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.weightx = 1.0;
         gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
         getContentPane().add(customPatternRegExpTF, gridBagConstraints);
+        
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelRemovePattern, OStrings.getString("TV_OPTION_REMOVEPATTERN")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(jLabelRemovePattern, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 8;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        getContentPane().add(removePatternRegExpTF, gridBagConstraints);
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -257,13 +280,15 @@ public class TagValidationOptionsDialog extends JDialog {
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
-        Preferences.setPreference(Preferences.DONT_CHECK_PRINTF_TAGS, noCheckRadio.isSelected());
-        Preferences.setPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS, simpleCheckRadio.isSelected());
-        Preferences.setPreference(Preferences.CHECK_ALL_PRINTF_TAGS, fullCheckRadio.isSelected());
-        Preferences.setPreference(Preferences.CHECK_JAVA_PATTERN_TAGS, javaPatternCheckBox.isSelected());
-        Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, customPatternRegExpTF.getText());
-        if (checkRegExp(customPatternRegExpTF)) {
+        if (checkRegExp(customPatternRegExpTF) && checkRegExp(removePatternRegExpTF)) {
+            Preferences.setPreference(Preferences.DONT_CHECK_PRINTF_TAGS, noCheckRadio.isSelected());
+            Preferences.setPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS, simpleCheckRadio.isSelected());
+            Preferences.setPreference(Preferences.CHECK_ALL_PRINTF_TAGS, fullCheckRadio.isSelected());
+            Preferences.setPreference(Preferences.CHECK_JAVA_PATTERN_TAGS, javaPatternCheckBox.isSelected());
+            Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, customPatternRegExpTF.getText());
+            Preferences.setPreference(Preferences.CHECK_REMOVE_PATTERN, removePatternRegExpTF.getText());
             PatternConsts.updatePlaceholderPattern();
+            PatternConsts.updateRemovePattern();
             doClose(RET_OK);
         }
     }// GEN-LAST:event_okButtonActionPerformed
@@ -296,6 +321,8 @@ public class TagValidationOptionsDialog extends JDialog {
     private javax.swing.JCheckBox javaPatternCheckBox;
     private javax.swing.JLabel jLabelCustomPattern;
     private javax.swing.JTextField customPatternRegExpTF;
+    private javax.swing.JLabel jLabelRemovePattern;
+    private javax.swing.JTextField removePatternRegExpTF;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;

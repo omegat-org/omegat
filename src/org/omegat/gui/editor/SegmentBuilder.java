@@ -491,7 +491,7 @@ public class SegmentBuilder {
     }
 
     void createInputAttributes(Element element, MutableAttributeSet set) {
-        set.addAttributes(attrs(false, false));
+        set.addAttributes(attrs(false, false, false));
     }
 
     private void insert(String text, AttributeSet attrs) throws BadLocationException {
@@ -570,10 +570,11 @@ public class SegmentBuilder {
      * Choose segment part attributes based on rules.
      * @param isSource is it a source segment or a target segment
      * @param isPlaceholder is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
+     * @param isRemoveText is it text that should be removed in the translation?
      * @return the attributes to format the text
      */
-    public AttributeSet attrs(boolean isSource, boolean isPlaceholder) {
-        return settings.getAttributeSet(isSource, isPlaceholder, ste.getDuplicate(), active, transExist);
+    public AttributeSet attrs(boolean isSource, boolean isPlaceholder, boolean isRemoveText) {
+        return settings.getAttributeSet(isSource, isPlaceholder, isRemoveText, ste.getDuplicate(), active, transExist);
     }
 
     /**
@@ -583,7 +584,7 @@ public class SegmentBuilder {
      * @throws BadLocationException
      */
     private void insertTextWithTags(String text, boolean isSource) throws BadLocationException {
-        AttributeSet normal = attrs(isSource, false);
+        AttributeSet normal = attrs(isSource, false, false);
         int start = offset;
         int end = start + text.length();
         insert(text, normal);
@@ -591,15 +592,22 @@ public class SegmentBuilder {
     }
 
     public void formatText(String text, int start, int end, boolean isSource) {
-
-        AttributeSet attrNormal = attrs(isSource, false);
+        //first remove any formatting
+        AttributeSet attrNormal = attrs(isSource, false, false);
         doc.setCharacterAttributes(start, end-start, attrNormal, true);
-
-        AttributeSet attrPlaceholder = attrs(isSource, true);
+        //format placeholders
+        AttributeSet attrPlaceholder = attrs(isSource, true, false);
         Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
         Matcher placeholderMatch = placeholderPattern.matcher(text);
         while (placeholderMatch.find()) {
             doc.setCharacterAttributes(start+placeholderMatch.start(), placeholderMatch.end()-placeholderMatch.start(), attrPlaceholder, true);
+        }
+        //format text-to-remove
+        AttributeSet attrRemove = attrs(isSource, false, true);
+        Pattern removePattern = PatternConsts.getRemovePattern();
+        Matcher removeMatcher = removePattern.matcher(text);
+        while (removeMatcher.find()) {
+            doc.setCharacterAttributes(start+removeMatcher.start(), removeMatcher.end()-removeMatcher.start(), attrRemove, true);
         }
     }
 }

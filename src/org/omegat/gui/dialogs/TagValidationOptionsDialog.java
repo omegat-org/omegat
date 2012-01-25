@@ -162,13 +162,6 @@ public class TagValidationOptionsDialog extends JDialog {
         ourButtonGroup.add(noCheckRadio);
         noCheckRadio.setSelected(true);
         org.openide.awt.Mnemonics.setLocalizedText(noCheckRadio, OStrings.getString("TV_OPTION_NO_CHECK")); // NOI18N
-        noCheckRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        noCheckRadio.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        noCheckRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radiosActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 1;
@@ -180,13 +173,6 @@ public class TagValidationOptionsDialog extends JDialog {
 
         ourButtonGroup.add(simpleCheckRadio);
         org.openide.awt.Mnemonics.setLocalizedText(simpleCheckRadio, OStrings.getString("TV_OPTION_SIMPLE_CHECK")); // NOI18N
-        simpleCheckRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        simpleCheckRadio.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        simpleCheckRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radiosActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 2;
@@ -198,13 +184,6 @@ public class TagValidationOptionsDialog extends JDialog {
 
         ourButtonGroup.add(fullCheckRadio);
         org.openide.awt.Mnemonics.setLocalizedText(fullCheckRadio, OStrings.getString("TV_OPTION_FULL_CHECK")); // NOI18N
-        fullCheckRadio.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        fullCheckRadio.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        fullCheckRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radiosActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 3;
@@ -215,13 +194,6 @@ public class TagValidationOptionsDialog extends JDialog {
         getContentPane().add(fullCheckRadio, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(javaPatternCheckBox, OStrings.getString("TV_OPTION_JAVA_PATTERN")); // NOI18N
-        javaPatternCheckBox.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 0, 0));
-        javaPatternCheckBox.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        javaPatternCheckBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                javaCheckBoxActionPerformed(evt);
-            }
-        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -237,15 +209,6 @@ public class TagValidationOptionsDialog extends JDialog {
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void radiosActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_radiosActionPerformed
-    {// GEN-HEADEREND:event_radiosActionPerformed
-
-    }// GEN-LAST:event_radiosActionPerformed
-    
-    private void javaCheckBoxActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_javaCheckBoxActionPerformed
-    {// GEN-HEADEREND:event_javaCheckBoxActionPerformed
-
-    }// GEN-LAST:event_javaCheckBoxActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {

@@ -24,11 +24,16 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Color;
 import java.awt.event.KeyEvent;
 
+import javax.swing.text.AttributeSet;
+
 import org.omegat.core.Core;
+import org.omegat.core.data.SourceTextEntry.DUPLICATE;
 import org.omegat.core.spellchecker.SpellCheckerMarker;
 import org.omegat.util.Preferences;
+import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -46,6 +51,7 @@ public class EditorSettings {
     private boolean markNonUniqueSegments;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
+    private boolean viewSourceBold;
 
     public static String DISPLAY_MODIFICATION_INFO_NONE = "none";
     public static String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
@@ -62,6 +68,7 @@ public class EditorSettings {
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
+        viewSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
     }
 
     public char getAdvancerChar() {
@@ -203,5 +210,72 @@ public class EditorSettings {
             parent.activateEntry();
             parent.remarkOneMarker(SpellCheckerMarker.class.getName());
         }
+    }
+    
+    /**
+     * Choose segment's attributes based on rules.
+     * @param isSource is it a source segment or a target segment
+     * @param duplicate is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT. See sourceTextEntryste.getDuplicate()
+     * @param active is it an active segment?
+     * @param translationExists does a translation already exist
+     * @return proper AttributeSet to use on displaying the segment.
+     */
+    public AttributeSet getAttributeSet(boolean isSource, DUPLICATE duplicate, boolean active, boolean translationExists) {
+        Color fg = null;
+        if (isMarkNonUniqueSegments()) {
+            switch (duplicate) {
+            case NONE:
+                break;
+            case FIRST:
+                if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
+                    fg = Styles.COLOR_LIGHT_GRAY;
+                }
+                break;
+            case NEXT:
+                fg = Styles.COLOR_LIGHT_GRAY;
+                break;
+            }
+        }
+
+        Color bg = null;
+        if (active) {
+            if (isSource) {
+                bg = Styles.COLOR_GREEN;
+            }
+        } else {
+            if (isSource) {
+                if (isMarkUntranslated() && !translationExists) {
+                    bg = Styles.COLOR_UNTRANSLATED;
+                } else if (isDisplaySegmentSources()) {
+                    bg = Styles.COLOR_GREEN;
+                }
+            } else if (isMarkTranslated()) {
+                bg = Styles.COLOR_TRANSLATED;
+            }
+        }
+
+        Boolean bold = false;
+        if (isSource) {
+            if (active || viewSourceBold && isDisplaySegmentSources()) {
+                bold = true;
+            }
+        }
+        Boolean italic = false;
+
+        return Styles.createAttributeSet(fg, bg, bold, italic);
+    }
+    /**
+     * Returns font attributes for the modification info line.
+     * @return
+     */
+    public AttributeSet getModificationInfoAttributeSet() {
+        return Styles.createAttributeSet(null, null, null, true);
+    }
+    /**
+     * Returns font attributes for the segment marker.
+     * @return
+     */
+    public AttributeSet getSegmentMarkerAttributeSet() {
+        return Styles.createAttributeSet(null, null, true, false);
     }
 }

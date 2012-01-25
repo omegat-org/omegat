@@ -25,11 +25,12 @@
 
 package org.omegat.gui.editor;
 
-import java.awt.Color;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
@@ -43,10 +44,10 @@ import org.omegat.core.data.TMXEntry;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
-import org.omegat.util.gui.Styles;
 import org.omegat.util.gui.UIThreadsUtil;
 
 /**
@@ -59,9 +60,6 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class SegmentBuilder {
 
     /** Attributes for show text. */
-    protected static final AttributeSet ATTR_SEGMENT_MARK = Styles
-            .createAttributeSet(null, null, true, false);
-    protected static final AttributeSet ATTR_INFO = Styles.createAttributeSet(null, null, null, true);
     public static final String SEGMENT_MARK_ATTRIBUTE = "SEGMENT_MARK_ATTRIBUTE";
     public static final String SEGMENT_SPELL_CHECK = "SEGMENT_SPELL_CHECK";
     private static final DecimalFormat NUMBER_FORMAT = new DecimalFormat("0000");
@@ -91,7 +89,9 @@ public class SegmentBuilder {
     private final Document3 doc;
     private final EditorController controller;
     private final EditorSettings settings;
-
+    /**
+     * Offset of first c.q. last character in active source text
+     */
     protected int activeTranslationBeginOffset, activeTranslationEndOffset;
 
     /** Boundary of full entry display. */
@@ -102,6 +102,7 @@ public class SegmentBuilder {
     /** Translation start position - for marks. */
     protected Position posTranslationBeg;
 
+    /** current offset in document to insert new stuff*/
     protected int offset;
 
     /**
@@ -202,19 +203,19 @@ public class SegmentBuilder {
     }
 
     /**
-     * Create method for active segment.
+     * Create active segment for given entry
      */
     private void createActiveSegmentElement(TMXEntry trans) throws BadLocationException {
         try {
             if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())
                     || EditorSettings.DISPLAY_MODIFICATION_INFO_SELECTED.equals(settings
                             .getDisplayModificationInfo())) {
-                addModificationInfoPart(trans, ATTR_INFO);
+                addModificationInfoPart(trans);
             }
 
             int prevOffset = offset;
             sourceText = ste.getSrcText();
-            addInactiveSegPart(true, sourceText, attrs(true));
+            addInactiveSegPart(true, sourceText);
             posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
 
             if (trans.isTranslated()) {
@@ -228,7 +229,7 @@ public class SegmentBuilder {
                 translationText = "";
             }
 
-            addActiveSegPart(translationText, attrs(false));
+            addActiveSegPart(translationText, false);
             posTranslationBeg = null;
 
             doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset - 1);
@@ -256,10 +257,12 @@ public class SegmentBuilder {
 
     /**
      * Create method for inactive segment.
+     * @param trans TMX entry with translation
+     * @throws BadLocationException
      */
     private void createInactiveSegmentElement(TMXEntry trans) throws BadLocationException {
         if (EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(settings.getDisplayModificationInfo())) {
-            addModificationInfoPart(trans, ATTR_INFO);
+            addModificationInfoPart(trans);
         }
 
         sourceText = null;
@@ -285,7 +288,7 @@ public class SegmentBuilder {
 
         if (sourceText != null) {
             int prevOffset = offset;
-            addInactiveSegPart(true, sourceText, attrs(true));
+            addInactiveSegPart(true, sourceText);
             posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
         } else {
             posSourceBeg = null;
@@ -293,7 +296,7 @@ public class SegmentBuilder {
 
         if (translationText != null) {
             int prevOffset = offset;
-            addInactiveSegPart(false, translationText, attrs(false));
+            addInactiveSegPart(false, translationText);
             posTranslationBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
         } else {
             posTranslationBeg = null;
@@ -364,7 +367,7 @@ public class SegmentBuilder {
      * @param isSource
      *            is source segment part
      */
-    private void setAttributes(int begin, int end, boolean isSource) {
+    private void setAlignment(int begin, int end, boolean isSource) {
         boolean rtl = false;
         switch (controller.currentOrientation) {
         case LTR:
@@ -390,26 +393,24 @@ public class SegmentBuilder {
     /**
      * Add inactive segment part, without segment begin/end marks.
      * 
-     * @param isSource
+     * @param isSource is text the source text (true) or translation text (false)
      * @param text
      *            segment part text
-     * @param attrs
-     *            attributes
      * @throws BadLocationException
      */
-    private void addInactiveSegPart(boolean isSource, String text, AttributeSet attrs)
+    private void addInactiveSegPart(boolean isSource, String text)
             throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = isSource ? controller.sourceLangIsRTL : controller.targetLangIsRTL;
         if (hasRTL) {
             insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
         }
-        insert(text, attrs);
+        insertText(text, isSource);
         if (hasRTL) {
             insert("\u202c", null); // end of embedding
         }
         insert("\n", null);
-        setAttributes(prevOffset, offset, isSource);
+        setAlignment(prevOffset, offset, isSource);
     }
 
     /**
@@ -418,11 +419,9 @@ public class SegmentBuilder {
      * 
      * @param trans
      *            The translation entry (can be null)
-     * @param attrs
-     *            Font attributes
      * @throws BadLocationException
      */
-    private void addModificationInfoPart(TMXEntry trans, AttributeSet attrs) throws BadLocationException {
+    private void addModificationInfoPart(TMXEntry trans) throws BadLocationException {
         if (!trans.isTranslated())
             return;
 
@@ -447,12 +446,13 @@ public class SegmentBuilder {
         if (hasRTL) {
             insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
         }
+        AttributeSet attrs = settings.getModificationInfoAttributeSet();
         insert(text, attrs);
         if (hasRTL) {
             insert("\u202c", null); // end of embedding
         }
         insert("\n", null);
-        setAttributes(prevOffset, offset, false);
+        setAlignment(prevOffset, offset, false);
     }
 
     /**
@@ -460,11 +460,10 @@ public class SegmentBuilder {
      * 
      * @param text
      *            segment part text
-     * @param attrs
-     *            attributes
+     * @param isSource is text the source text (true) or translation text (false)
      * @throws BadLocationException
      */
-    private void addActiveSegPart(String text, AttributeSet attrs) throws BadLocationException {
+    private void addActiveSegPart(String text, boolean isSource) throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = controller.targetLangIsRTL;
 
@@ -473,20 +472,21 @@ public class SegmentBuilder {
         }
 
         activeTranslationBeginOffset = offset;
-        insert(text, attrs);
+        insertText(text, isSource);
         activeTranslationEndOffset = offset;
 
         if (hasRTL) {
             insert("\u202c", null); // end of embedding
         }
 
-        insert("<",ATTR_SEGMENT_MARK);
-        insert(createSegmentMarkText(false), ATTR_SEGMENT_MARK);
-        insert(">",ATTR_SEGMENT_MARK);
+        AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
+        insert("<",attrSegmentMark);
+        insert(createSegmentMarkText(false), attrSegmentMark);
+        insert(">",attrSegmentMark);
 
         insert("\n", null);
 
-        setAttributes(prevOffset, offset, false);
+        setAlignment(prevOffset, offset, false);
     }
 
     void createInputAttributes(Element element, MutableAttributeSet set) {
@@ -568,48 +568,12 @@ public class SegmentBuilder {
     /**
      * Choose segment's attributes based on rules.
      */
-    private AttributeSet attrs(boolean isSource) {
-        Color fg = null;
-        if (settings.isMarkNonUniqueSegments()) {
-            switch (ste.getDuplicate()) {
-            case NONE:
-                break;
-            case FIRST:
-                if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
-                    fg = Styles.COLOR_LIGHT_GRAY;
-                }
-                break;
-            case NEXT:
-                fg = Styles.COLOR_LIGHT_GRAY;
-                break;
-            }
-        }
-        if (active) {
-            if (isSource) {
-                return Styles.createAttributeSet(fg, Styles.COLOR_GREEN, true, null);
-            } else {
-                return Styles.createAttributeSet(fg, null, null, null);
-            }
-        } else {
-            if (isSource) {
-                Color b;
-                Boolean bold = false;
-                if ((settings.isDisplaySegmentSources()) &&
-                     Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD)) {
-                    bold = true;
-                }
-                if (settings.isMarkUntranslated() && !transExist) {
-                    b = Styles.COLOR_UNTRANSLATED;
-                } else if (settings.isDisplaySegmentSources()) {
-                    b = Styles.COLOR_GREEN;
-                } else {
-                    b = null;
-                }
-                return Styles.createAttributeSet(fg, b, bold, null);
-            } else {
-                Color b = settings.isMarkTranslated() ? Styles.COLOR_TRANSLATED : null;
-                return Styles.createAttributeSet(fg, b, null, null);
-            }
-        }
+    public AttributeSet attrs(boolean isSource) {
+        return settings.getAttributeSet(isSource, ste.getDuplicate(), active, transExist);
+    }
+
+    private void insertText(String text, boolean isSource) throws BadLocationException {
+        AttributeSet normal = attrs(isSource);
+        insert(text, normal);
     }
 }

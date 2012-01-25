@@ -188,7 +188,7 @@ public class TagValidationFrame extends JFrame {
         str = lfMatch.replaceAll("<font color=\"" + color + "\"><sup>L</sup>F<br></font>");
         // show printf variables in bold and color (e.g. %s and %n\$s)
         if (printfPattern != null) {
-            Matcher varMatch = PatternConsts.PRINTF_VARS.matcher(str);
+            Matcher varMatch = printfPattern.matcher(str);
             str = varMatch.replaceAll("<font color=\"" + color + "\"><b>$0</b></font>");
         }
         return str;

@@ -191,23 +191,23 @@ public class PatternConsts {
     public static final Pattern SIMPLE_PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_PRINTF_VARS);
 
     private static Pattern PLACEHOLDERS;
-    
+
     public static Pattern getPlaceholderPattern() {
         if (PLACEHOLDERS == null) {
+            String regexp = RE_OMEGAT_TAG;
             if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
-                PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_PRINTF_VARS);
+                regexp += "|"+RE_PRINTF_VARS;
             } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
-                PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_SIMPLE_PRINTF_VARS);
-            } else {
-                PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG);
+                regexp += "|"+RE_SIMPLE_PRINTF_VARS;
             }
             if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
-                PLACEHOLDERS = Pattern.compile(PLACEHOLDERS+"|"+RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS);
+                regexp += "|"+RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
             }
+            PLACEHOLDERS = Pattern.compile(regexp);
         }
         return PLACEHOLDERS;
     }
-    
+
     public static void updatePlaceholderPattern() {
         PLACEHOLDERS = null;
     }

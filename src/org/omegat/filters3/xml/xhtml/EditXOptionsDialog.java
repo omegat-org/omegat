@@ -30,10 +30,14 @@ import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
@@ -45,6 +49,7 @@ import org.omegat.util.OStrings;
  * @author Didier Briel
  * @author Martin Fleurke
  */
+@SuppressWarnings("serial")
 public class EditXOptionsDialog extends javax.swing.JDialog {
     /** A return status code - returned if Cancel button has been pressed */
     public static final int RET_CANCEL = 0;
@@ -99,7 +104,6 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed"
     // desc=" Generated Code ">//GEN-BEGIN:initComponents
     private void initComponents() {
-        buttonGroup1 = new javax.swing.ButtonGroup();
         buttonPanel = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -296,8 +300,30 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
     private void skipMetaTFActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
+    /**
+     * Checks text value of JTextField if it is a valid regular expression. If not, focus is set to the text field and an alert is shown.
+     * @param textfield the text field with the regular expression
+     * @return true if regular expression is valid, false otherwise
+     */
+    private boolean checkRegExp(JTextField textfield) {
+        try {
+            Pattern.compile(textfield.getText());
+        } catch (PatternSyntaxException e) {
+            textfield.setCaretPosition(e.getIndex());
+            JOptionPane.showMessageDialog(this,
+                    e.getLocalizedMessage(), OStrings.getString("HTML_ERROR_CUSTOMREGEXP_TITLE"),
+                    JOptionPane.ERROR_MESSAGE);
+            textfield.grabFocus();
+            return false;
+        }
+        return true;
+    }
+
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
+        if (!checkRegExp(skipRegExpTF)) {
+            return;
+        }
         options.setTranslateHref(translateHrefCB.isSelected());
         options.setTranslateSrc(translateSrcCB.isSelected());
         options.setTranslateLang(translateLangCB.isSelected());
@@ -329,7 +355,6 @@ public class EditXOptionsDialog extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JLabel jLabel2;

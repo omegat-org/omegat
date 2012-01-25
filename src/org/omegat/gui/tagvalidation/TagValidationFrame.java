@@ -178,31 +178,24 @@ public class TagValidationFrame extends JFrame {
      * Replace tags with &lt;font
      * color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt;
      */
-    private String colorTags(String str, String color, Pattern printfPattern, Pattern javaMessageFormatPattern, Pattern customTagPattern) {
+    private String colorTags(String str, String color, Pattern placeholderPattern) {
         // show OmegaT tags in bold and color
-        Matcher tagMatch = PatternConsts.OMEGAT_HTML_TAG.matcher(str);
-        str = tagMatch.replaceAll("<font color=\"" + color + "\"><b>$1</b></font>");
+        Matcher placeholderMatcher = placeholderPattern.matcher(str);
+        String htmlResult="";
+        int pos=0;
+        while (placeholderMatcher.find()) {
+            htmlResult += htmlize(str.substring(pos, placeholderMatcher.start()));
+            htmlResult += "<font color=\"" + color + "\"><b>"+htmlize(placeholderMatcher.group(0))+"</b></font>";
+            pos = placeholderMatcher.end(); 
+        }
+        htmlResult += htmlize(str.substring(pos));
+
         // show linefeed as symbol
-        Matcher lfMatch = PatternConsts.HTML_BR.matcher(str);
+        Matcher lfMatch = PatternConsts.HTML_BR.matcher(htmlResult);
         // /simulate unicode symbol for linefeed "\u240A", which is not
         // displayed correctly.
-        str = lfMatch.replaceAll("<font color=\"" + color + "\"><sup>L</sup>F<br></font>");
-        // show printf variables in bold and color (e.g. %s and %n\$s)
-        if (printfPattern != null) {
-            Matcher varMatch = printfPattern.matcher(str);
-            str = varMatch.replaceAll("<font color=\"" + color + "\"><b>$0</b></font>");
-        }
-        // show java MessageFormat pattern variables in bold and color (e.g. {0})
-        if (javaMessageFormatPattern != null) {
-            Matcher varMatch = javaMessageFormatPattern.matcher(str);
-            str = varMatch.replaceAll("<font color=\"" + color + "\"><b>$0</b></font>");
-        }
-        // show custom pattern in bold and color (e.g. {0})
-        if (customTagPattern != null) {
-            Matcher varMatch = customTagPattern.matcher(str);
-            str = varMatch.replaceAll("<font color=\"" + color + "\"><b>$0</b></font>");
-        }
-        return str;
+        htmlResult = lfMatch.replaceAll("<font color=\"" + color + "\"><sup>L</sup>F<br></font>");
+        return htmlResult;
     }
 
     public void displayStringList(List<SourceTextEntry> stringList) {
@@ -211,21 +204,7 @@ public class TagValidationFrame extends JFrame {
     }
 
     private void update() {
-        Pattern printfPattern = null;
-        if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_ALL_PRINTF_TAGS))) {
-            printfPattern = PatternConsts.PRINTF_VARS;
-        } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
-            printfPattern = PatternConsts.SIMPLE_PRINTF_VARS;
-        }
-        Pattern javaMessageFormatPattern = null;
-        if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
-            javaMessageFormatPattern = PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
-        }
-        Pattern customTagPattern = null;
-        String customRegExp = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN);
-        if (!"".equalsIgnoreCase(customRegExp)) {
-            customTagPattern = Pattern.compile(customRegExp);
-        }
+        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
 
         StringBuffer output = new StringBuffer();
 
@@ -259,10 +238,10 @@ public class TagValidationFrame extends JFrame {
                 output.append("</a>");
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(htmlize(src), "blue", printfPattern, javaMessageFormatPattern, customTagPattern));
+                output.append(colorTags(src, "blue", placeholderPattern));
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(htmlize(trans.translation), "blue", printfPattern, javaMessageFormatPattern, customTagPattern));
+                output.append(colorTags(trans.translation, "blue", placeholderPattern));
                 output.append("</td>");
                 output.append("</tr>\n");
             }

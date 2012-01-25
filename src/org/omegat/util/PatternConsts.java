@@ -129,13 +129,6 @@ public class PatternConsts {
      */
     public static final Pattern OMEGAT_TAG_DECOMPILE = Pattern.compile("<(\\/?)([a-zA-Z]+)([0-9]+)(\\/?)>");
 
-    /**
-     * Pattern that matches OmegaT-specific tags in the HTML form i.e, with
-     * &amp;lt; instead of &lt; and &amp;gt instead of &gt;. The pattern is also
-     * a capturing group.
-     */
-    public static final Pattern OMEGAT_HTML_TAG = Pattern.compile("(&lt;\\/?[a-zA-Z]+[0-9]+\\/?&gt;)");
-
     /** Pattern that detects space-only regular expressions. */
     public static final Pattern SPACY_REGEX = Pattern.compile("((\\s|\\\\n|\\\\t|\\\\s)(\\+|\\*)?)+");
 

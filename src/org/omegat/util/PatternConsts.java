@@ -43,6 +43,7 @@ public class PatternConsts {
     private static final String RE_OMEGAT_TAG = "<\\/?[a-zA-Z]+[0-9]+\\/?>";
     private static final String RE_PRINTF_VARS = "%([1-9]+\\$)?([+-])?('.)?(-)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
     private static final String RE_SIMPLE_PRINTF_VARS = "%([1-9]+\\$)?([0-9]*)(\\.[0-9]*)?[bcdeEfFgGinopsuxX%]";
+    private static final String RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS = "\\{([0-9])+\\}";
     /**
      * Compiled pattern to extract the encoding from XML file, if any. Found
      * encoding is stored in group #1.
@@ -182,11 +183,13 @@ public class PatternConsts {
      */
     public static final Pattern SIMPLE_PRINTF_VARS = Pattern.compile(RE_SIMPLE_PRINTF_VARS);
 
+    public static final Pattern SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS = Pattern.compile(RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS);
+
     /**
      * Pattern for detecting OmegaT-tags and other placeholders (extended sprintf-variant) in texts
      */
     public static final Pattern SIMPLE_PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_PRINTF_VARS);
-    
+
     private static Pattern PLACEHOLDERS;
     
     public static Pattern getPlaceholderPattern() {
@@ -197,6 +200,9 @@ public class PatternConsts {
                 PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG+"|"+RE_SIMPLE_PRINTF_VARS);
             } else {
                 PLACEHOLDERS = Pattern.compile(RE_OMEGAT_TAG);
+            }
+            if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
+                PLACEHOLDERS = Pattern.compile(PLACEHOLDERS+"|"+RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS);
             }
         }
         return PLACEHOLDERS;

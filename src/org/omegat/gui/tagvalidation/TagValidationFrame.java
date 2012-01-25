@@ -65,6 +65,7 @@ import org.openide.awt.Mnemonics;
  * @author Didier Briel
  * @author Martin Fleurke
  */
+@SuppressWarnings("serial")
 public class TagValidationFrame extends JFrame {
     public TagValidationFrame(MainWindow parent) {
         setTitle(OStrings.getString("TF_NOTICE_BAD_TAGS"));
@@ -177,7 +178,7 @@ public class TagValidationFrame extends JFrame {
      * Replace tags with &lt;font
      * color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt;
      */
-    private String colorTags(String str, String color, Pattern printfPattern) {
+    private String colorTags(String str, String color, Pattern printfPattern, Pattern javaMessageFormatPattern) {
         // show OmegaT tags in bold and color
         Matcher tagMatch = PatternConsts.OMEGAT_HTML_TAG.matcher(str);
         str = tagMatch.replaceAll("<font color=\"" + color + "\"><b>$1</b></font>");
@@ -189,6 +190,11 @@ public class TagValidationFrame extends JFrame {
         // show printf variables in bold and color (e.g. %s and %n\$s)
         if (printfPattern != null) {
             Matcher varMatch = printfPattern.matcher(str);
+            str = varMatch.replaceAll("<font color=\"" + color + "\"><b>$0</b></font>");
+        }
+        // show java MessageFormat pattern variables in bold and color (e.g. {0})
+        if (javaMessageFormatPattern != null) {
+            Matcher varMatch = javaMessageFormatPattern.matcher(str);
             str = varMatch.replaceAll("<font color=\"" + color + "\"><b>$0</b></font>");
         }
         return str;
@@ -206,6 +212,11 @@ public class TagValidationFrame extends JFrame {
         } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
             printfPattern = PatternConsts.SIMPLE_PRINTF_VARS;
         }
+        Pattern javaMessageFormatPattern = null;
+        if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
+            javaMessageFormatPattern = PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
+        }
+        
         StringBuffer output = new StringBuffer();
 
         output.append("<html>\n");
@@ -238,10 +249,10 @@ public class TagValidationFrame extends JFrame {
                 output.append("</a>");
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(htmlize(src), "blue", printfPattern));
+                output.append(colorTags(htmlize(src), "blue", printfPattern, javaMessageFormatPattern));
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(htmlize(trans.translation), "blue", printfPattern));
+                output.append(colorTags(htmlize(trans.translation), "blue", printfPattern, javaMessageFormatPattern));
                 output.append("</td>");
                 output.append("</tr>\n");
             }

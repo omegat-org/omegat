@@ -116,6 +116,10 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         } else if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS))) {
             printfPattern = PatternConsts.SIMPLE_PRINTF_VARS;
         }
+        Pattern javaMessageFormatPattern = null;
+        if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
+            javaMessageFormatPattern = PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
+        }
 
         for (FileInfo fi : Core.getProject().getProjectFiles()) {
             for (SourceTextEntry ste : fi.entries) {
@@ -131,13 +135,13 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
 
                 if (printfPattern != null) {
                     // printf variables should be equal.
-                    // we check this by adding the string "index+typespecifier"
+                    // we check this by adding the string "index+type specifier"
                     // of every
                     // found variable to a set.
                     // If the sets of the source and target are not equal, then
                     // there is
                     // a problem: either missing or extra variables, or the
-                    // typespecifier
+                    // type specifier
                     // has changed for the variable at the given index.
                     HashSet<String> printfSourceSet = new HashSet<String>();
                     Matcher printfMatcher = printfPattern.matcher(s);
@@ -202,28 +206,49 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     }
                 }
                 // OmegaT tags check:
+                srcTags.clear();
+                locTags.clear();
                 // extract tags from src and loc string
                 StaticUtils.buildTagList(s, srcTags);
                 StaticUtils.buildTagList(te.translation, locTags);
 
                 // make sure lists match
                 // for now, insist on exact match
-                if (srcTags.size() != locTags.size())
+                if (srcTags.size() != locTags.size()) {
                     suspects.add(ste);
-                else {
+                    continue;
+                } else {
+                    boolean added = false;
                     // compare one by one
                     for (j = 0; j < srcTags.size(); j++) {
                         s = srcTags.get(j);
                         String t = locTags.get(j);
                         if (!s.equals(t)) {
                             suspects.add(ste);
+                            added = true;
                             break;
                         }
                     }
+                    if (added) continue;
                 }
 
-                srcTags.clear();
-                locTags.clear();
+                // Java MessageFormat pattern checks:
+                if (javaMessageFormatPattern != null) {
+                    HashSet<String> javaMessageFormatSourceSet = new HashSet<String>();
+                    Matcher javaMessageFormatMatcher = javaMessageFormatPattern.matcher(s);
+                    while (javaMessageFormatMatcher.find()) {
+                        javaMessageFormatSourceSet.add(javaMessageFormatMatcher.group(0));
+                    }
+                    HashSet<String> javaMessageFormatTargetSet = new HashSet<String>();
+                    javaMessageFormatMatcher = javaMessageFormatPattern.matcher(te.translation);
+                    while (javaMessageFormatMatcher.find()) {
+                        javaMessageFormatTargetSet.add(javaMessageFormatMatcher.group(0));
+                    }
+                    if (!javaMessageFormatSourceSet.equals(javaMessageFormatTargetSet)) {
+                        suspects.add(ste);
+                        continue;
+                    }
+                }
             }
         }
         return suspects;

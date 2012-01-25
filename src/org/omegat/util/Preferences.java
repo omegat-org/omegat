@@ -171,6 +171,8 @@ public class Preferences {
     public static final String CHECK_SIMPLE_PRINTF_TAGS = "tagValidation_simpleCheck";
     /** Tag Validation Option: check all printf-tags */
     public static final String CHECK_ALL_PRINTF_TAGS = "tagValidation_elaborateCheck";
+    /** Tag Validation Option: check simple java MessageFormat pattern tags */
+    public static final String CHECK_JAVA_PATTERN_TAGS = "tagValidation_javaMessageFormatSimplePatternCheck";
 
     /** Team option: author ID */
     public static final String TEAM_AUTHOR = "team_Author";

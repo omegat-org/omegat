@@ -516,15 +516,15 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * Identify all the tags in the source text and automatically inserts them into the target text.
+     * Identify all the placeholders in the source text and automatically inserts them into the target text.
      */
     public void editTagPainterMenuItemActionPerformed() {
 
         String sourceText = Core.getEditor().getCurrentEntry().getSrcText();
-        String tagString = StaticUtils.buildPaintTagList(sourceText);
+        String placeholderString = StaticUtils.buildPaintPlaceholderList(sourceText);
 
-        if (!tagString.equals("")) {
-            Core.getEditor().insertText(tagString);
+        if (!placeholderString.equals("")) {
+            Core.getEditor().insertText(placeholderString);
         }
     }
 

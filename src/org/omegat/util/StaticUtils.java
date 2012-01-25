@@ -93,77 +93,34 @@ public class StaticUtils {
      * OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
      */
     public static void buildTagList(String str, List<String> tagList) {
-        // The code is nearly the same as in listShortTags in Entry.java
-        final int STATE_NORMAL = 1;
-        final int STATE_COLLECT_TAG = 2;
-
-        String tag = "";
-        char c;
-
-        int state = STATE_NORMAL;
-
-        // extract tags from source string
-        for (int j = 0; j < str.length(); j++) {
-            c = str.charAt(j);
-            if (c == '<') // Possible start of a tag
-            {
-                tag = "";
-                state = STATE_COLLECT_TAG;
-            } else if (c == '>') // Possible end of a tag
-            {
-                // checking if the tag looks like OmegaT tag,
-                // not 100% correct, but is the best what I can think of now
-                if (PatternConsts.OMEGAT_TAG_ONLY.matcher(tag).matches())
-                    tagList.add(tag);
-                state = STATE_NORMAL;
-                tag = "";
-            } else if (state == STATE_COLLECT_TAG)
-                tag += c;
+        Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
+        Matcher placeholderMatcher = placeholderPattern.matcher(str);
+        while (placeholderMatcher.find()) {
+            tagList.add(placeholderMatcher.group(0));
         }
     }
 
     /**
-     * Lists all OmegaT-style tags within the supplied string. Everything that
+     * Lists all OmegaT-style tags and other placeholders within the supplied string. Everything that
      * looks like <code>&lt;xx0&gt;</code>, <code>&lt;yy1/&gt;</code> or
-     * <code>&lt;/zz2&gt;</code> is considered to probably be a tag.
+     * <code>&lt;/zz2&gt;</code>, or other placeholder (according to tag-validation options) is considered to probably be a tag.
      *
-     * @return a string containing the tags with &lt; and &gt; around, and with
+     * @return a string containing the tags, and with
      *         a space between tags if there is text between them.
      */
-    public static String buildPaintTagList(String str) {
-        // The code is nearly the same as in listShortTags in Entry.java
-        final int STATE_NORMAL = 1;
-        final int STATE_COLLECT_TAG = 2;
-        boolean somethingBetween = false;
-
-        int state = STATE_NORMAL;
-
+    public static String buildPaintPlaceholderList(String str) {
         String res = "";
-        StringBuffer tag = new StringBuffer(str.length());
-        for (int i = 0; i < str.length(); i++) {
-            char c = str.charAt(i);
-            if (c == '<') // Possible start of a tag
-            {
-                tag.setLength(0);
-                tag.append(c);
-                state = STATE_COLLECT_TAG;
-            } else if (c == '>') // Possible end of a tag
-            {
-                // checking if the tag looks like OmegaT tag,
-                // not 100% correct, but is the best what I can think of now
-                tag.append(c);
-                if (PatternConsts.OMEGAT_TAG.matcher(tag).matches()) {
-                    if (somethingBetween) // There was text between the tags
-                        res += " ";
-                    res += tag.toString();
-                    tag.setLength(0);
-                    state = STATE_NORMAL;
-                    somethingBetween = false;
-                }
-            } else if (state == STATE_COLLECT_TAG)
-                tag.append(c);
-            else if (!StringUtil.isEmpty(res))
-                somethingBetween = true;
+
+        Pattern placeholderPattern = PatternConsts.getPlaceholderPattern();
+        Matcher placeholderMatcher = placeholderPattern.matcher(str);
+        int last=0;
+        while (placeholderMatcher.find()) {
+            int rs = placeholderMatcher.start();
+            if (rs != last) {
+                res += " ";
+            }
+            res += placeholderMatcher.group(0);
+            last = placeholderMatcher.end();
         }
         return res;
     }

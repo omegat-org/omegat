@@ -33,15 +33,14 @@ import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Element;
 import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
-import javax.swing.text.Style;
 import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
 
 /**
  * We need to redefine some standard document behavior.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
+@SuppressWarnings("serial")
 public class Document3 extends DefaultStyledDocument {
     enum ORIENTATION {
         /** Both segments is left aligned. */
@@ -65,9 +64,6 @@ public class Document3 extends DefaultStyledDocument {
 
     public Document3(final EditorController controller) {
         this.controller = controller;
-        StyleContext styles = (StyleContext) getAttributeContext();
-        Style def = styles.getStyle(StyleContext.DEFAULT_STYLE);
-        def.addAttribute("FONT_ATTRIBUTE_KEY", new Font("Arial", 0, 18));
     }
 
     /**

@@ -53,6 +53,7 @@ public class EditorSettings {
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
+    private boolean markFirstNonUnique;
 
     public static String DISPLAY_MODIFICATION_INFO_NONE = "none";
     public static String DISPLAY_MODIFICATION_INFO_SELECTED = "selected";
@@ -61,6 +62,7 @@ public class EditorSettings {
     protected EditorSettings(final EditorController parent) {
         this.parent = parent;
 
+        //options from menu 'view'
         useTabForAdvance = Preferences.isPreference(Preferences.USE_TAB_TO_ADVANCE);
         markTranslated = Preferences.isPreference(Preferences.MARK_TRANSLATED_SEGMENTS);
         markUntranslated = Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
@@ -69,7 +71,10 @@ public class EditorSettings {
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
+
+        //options from menu options->view
         viewSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
+        markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
     }
 
     public char getAdvancerChar() {
@@ -214,6 +219,39 @@ public class EditorSettings {
     }
     
     /**
+     * repaint segments in editor according to new view options. Use when options change to make them effective immediately.
+     */
+    public void updateViewPreferences() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        //update variables
+        viewSourceBold = Preferences.isPreference(Preferences.VIEW_OPTION_SOURCE_ALL_BOLD);
+        markFirstNonUnique = Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+    /**
+     * repaint segments in editor according to new view tag validation options. Use when options change to make them effective immediately.
+     */
+    public void updateTagValidationPreferences() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        //nothing special to do: tags/placeholders are determined by segment builder and info is passed as argument to getattributeSet.
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+    
+    /**
      * Choose segment's attributes based on rules.
      * @param isSource is it a source segment or a target segment
      * @param isPlaceholder is it for a placeholder (OmegaT tag or sprintf-variable etc.) or regular text inside the segment?
@@ -225,12 +263,12 @@ public class EditorSettings {
     public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, DUPLICATE duplicate, boolean active, boolean translationExists) {
         //determine foreground color
         Color fg = null;
-        if (isMarkNonUniqueSegments()) {
+        if (markNonUniqueSegments) {
             switch (duplicate) {
             case NONE:
                 break;
             case FIRST:
-                if (Preferences.isPreference(Preferences.VIEW_OPTION_UNIQUE_FIRST)) {
+                if (markFirstNonUnique) {
                     fg = Styles.COLOR_LIGHT_GRAY;
                 }
                 break;
@@ -249,12 +287,12 @@ public class EditorSettings {
             }
         } else {
             if (isSource) {
-                if (isMarkUntranslated() && !translationExists) {
+                if (markUntranslated && !translationExists) {
                     bg = Styles.COLOR_UNTRANSLATED;
                 } else if (isDisplaySegmentSources()) {
                     bg = Styles.COLOR_GREEN;
                 }
-            } else if (isMarkTranslated()) {
+            } else if (markTranslated) {
                 bg = Styles.COLOR_TRANSLATED;
             }
         }

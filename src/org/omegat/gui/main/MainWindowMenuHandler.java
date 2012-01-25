@@ -647,7 +647,15 @@ public class MainWindowMenuHandler {
      * Displays the tag validation setup dialog to allow customizing the diverse tag validation options.
      */
     public void optionsTagValidationMenuItemActionPerformed() {
-        new TagValidationOptionsDialog(mainWindow).setVisible(true);
+        TagValidationOptionsDialog tagValidationOptionsDialog = new TagValidationOptionsDialog(mainWindow);
+        tagValidationOptionsDialog.setVisible(true);
+        
+        if (tagValidationOptionsDialog.getReturnStatus() == TagValidationOptionsDialog.RET_OK
+                && Core.getProject().isProjectLoaded()) {
+            // Redisplay according to new view settings
+            Core.getEditor().getSettings().updateTagValidationPreferences();
+        }
+        
     }
 
     /**
@@ -677,25 +685,17 @@ public class MainWindowMenuHandler {
     }
 
     /**
-     * Displays the view opions dialog to allow customizing the view options.
+     * Displays the view options dialog to allow customizing the view options.
      */
     public void optionsViewOptionsMenuItemActionPerformed() {
 
         ViewOptionsDialog viewOptions = new ViewOptionsDialog(mainWindow);
         viewOptions.setVisible(true);
 
-        if (viewOptions.getReturnStatus() == ExternalTMXMatchesDialog.RET_OK
+        if (viewOptions.getReturnStatus() == ViewOptionsDialog.RET_OK
                 && Core.getProject().isProjectLoaded()) {
-            // Redisplay source segments and non-unique segments
-            Core.getEditor()
-                    .getSettings()
-                    .setDisplaySegmentSources(
-                            mainWindow.menu.viewDisplaySegmentSourceCheckBoxMenuItem.isSelected());
-
-            Core.getEditor()
-                    .getSettings()
-                    .setMarkNonUniqueSegments(
-                            mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
+            // Redisplay according to new view settings
+            Core.getEditor().getSettings().updateViewPreferences();
         }
 
     }

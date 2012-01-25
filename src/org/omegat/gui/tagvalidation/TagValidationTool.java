@@ -120,6 +120,11 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
             javaMessageFormatPattern = PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
         }
+        Pattern customTagPattern = null;
+        String customRegExp = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN);
+        if (!"".equalsIgnoreCase(customRegExp)) {
+            customTagPattern = Pattern.compile(customRegExp);
+        }
 
         for (FileInfo fi : Core.getProject().getProjectFiles()) {
             for (SourceTextEntry ste : fi.entries) {
@@ -245,6 +250,23 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                         javaMessageFormatTargetSet.add(javaMessageFormatMatcher.group(0));
                     }
                     if (!javaMessageFormatSourceSet.equals(javaMessageFormatTargetSet)) {
+                        suspects.add(ste);
+                        continue;
+                    }
+                }
+                // custom pattern checks:
+                if (customTagPattern != null) {
+                    HashSet<String> customTagPatternSourceSet = new HashSet<String>();
+                    Matcher customTagPatternMatcher = customTagPattern.matcher(s);
+                    while (customTagPatternMatcher.find()) {
+                        customTagPatternSourceSet.add(customTagPatternMatcher.group(0));
+                    }
+                    HashSet<String> customTagPatternTargetSet = new HashSet<String>();
+                    customTagPatternMatcher = customTagPattern.matcher(te.translation);
+                    while (customTagPatternMatcher.find()) {
+                        customTagPatternTargetSet.add(customTagPatternMatcher.group(0));
+                    }
+                    if (!customTagPatternSourceSet.equals(customTagPatternTargetSet)) {
                         suspects.add(ste);
                         continue;
                     }

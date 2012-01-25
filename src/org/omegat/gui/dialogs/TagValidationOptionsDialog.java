@@ -28,12 +28,16 @@ package org.omegat.gui.dialogs;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 import javax.swing.KeyStroke;
 
 import org.omegat.util.OStrings;
@@ -77,6 +81,7 @@ public class TagValidationOptionsDialog extends JDialog {
         simpleCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS));
         fullCheckRadio.setSelected(Preferences.isPreference(Preferences.CHECK_ALL_PRINTF_TAGS));
         javaPatternCheckBox.setSelected(Preferences.isPreference(Preferences.CHECK_JAVA_PATTERN_TAGS));
+        customPatternRegExpTF.setText(Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN));
 
         invalidate();
         pack();
@@ -105,6 +110,8 @@ public class TagValidationOptionsDialog extends JDialog {
         simpleCheckRadio = new javax.swing.JRadioButton();
         fullCheckRadio = new javax.swing.JRadioButton();
         javaPatternCheckBox = new javax.swing.JCheckBox();
+        jLabelCustomPattern = new javax.swing.JLabel();
+        customPatternRegExpTF = new javax.swing.JTextField();
 
         setTitle(OStrings.getString("GUI_TITLE_TagValidation_Options")); // NOI18N
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -168,7 +175,7 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
         getContentPane().add(noCheckRadio, gridBagConstraints);
 
         ourButtonGroup.add(simpleCheckRadio);
@@ -179,7 +186,7 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 0, 4);
         getContentPane().add(simpleCheckRadio, gridBagConstraints);
 
         ourButtonGroup.add(fullCheckRadio);
@@ -190,7 +197,7 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.weightx = 1.0;
-        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        gridBagConstraints.insets = new java.awt.Insets(0, 6, 4, 4);
         getContentPane().add(fullCheckRadio, gridBagConstraints);
 
         org.openide.awt.Mnemonics.setLocalizedText(javaPatternCheckBox, OStrings.getString("TV_OPTION_JAVA_PATTERN")); // NOI18N
@@ -203,12 +210,50 @@ public class TagValidationOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
         getContentPane().add(javaPatternCheckBox, gridBagConstraints);
 
+        org.openide.awt.Mnemonics.setLocalizedText(jLabelCustomPattern, OStrings.getString("TV_OPTION_CUSTOMPATTERN")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 5;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 0, 4);
+        getContentPane().add(jLabelCustomPattern, gridBagConstraints);
+
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = 4;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 6, 4, 4);
+        getContentPane().add(customPatternRegExpTF, gridBagConstraints);
+
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         java.awt.Dimension dialogSize = getSize();
         setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Checks text value of JTextField if it is a valid regular expression. If not, focus is set to the text field and an alert is shown.
+     * @param textfield the textfield with the regular expression
+     * @return true if regular expression is valid, false otherwise
+     */
+    private boolean checkRegExp(JTextField textfield) {
+        try {
+            Pattern.compile(textfield.getText());
+        } catch (PatternSyntaxException e) {
+            textfield.setCaretPosition(e.getIndex());
+            JOptionPane.showMessageDialog(this,
+                    e.getLocalizedMessage(), OStrings.getString("TV_OPTION_ERROR_CUSTOMREGEXP_TITLE"),
+                    JOptionPane.ERROR_MESSAGE);
+            textfield.grabFocus();
+            return false;
+        }
+        return true;
+    }
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
@@ -216,8 +261,11 @@ public class TagValidationOptionsDialog extends JDialog {
         Preferences.setPreference(Preferences.CHECK_SIMPLE_PRINTF_TAGS, simpleCheckRadio.isSelected());
         Preferences.setPreference(Preferences.CHECK_ALL_PRINTF_TAGS, fullCheckRadio.isSelected());
         Preferences.setPreference(Preferences.CHECK_JAVA_PATTERN_TAGS, javaPatternCheckBox.isSelected());
-        PatternConsts.updatePlaceholderPattern();
-        doClose(RET_OK);
+        Preferences.setPreference(Preferences.CHECK_CUSTOM_PATTERN, customPatternRegExpTF.getText());
+        if (checkRegExp(customPatternRegExpTF)) {
+            PatternConsts.updatePlaceholderPattern();
+            doClose(RET_OK);
+        }
     }// GEN-LAST:event_okButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cancelButtonActionPerformed
@@ -246,6 +294,8 @@ public class TagValidationOptionsDialog extends JDialog {
     private javax.swing.ButtonGroup ourButtonGroup;
     private javax.swing.JRadioButton simpleCheckRadio;
     private javax.swing.JCheckBox javaPatternCheckBox;
+    private javax.swing.JLabel jLabelCustomPattern;
+    private javax.swing.JTextField customPatternRegExpTF;
     // End of variables declaration//GEN-END:variables
 
     private int returnStatus = RET_CANCEL;

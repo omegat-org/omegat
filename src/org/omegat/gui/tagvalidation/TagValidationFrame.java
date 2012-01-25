@@ -178,7 +178,7 @@ public class TagValidationFrame extends JFrame {
      * Replace tags with &lt;font
      * color="color"&gt;&lt;b&gt;&lt;tag&gt;&lt;/b&gt;&lt;/font&gt;
      */
-    private String colorTags(String str, String color, Pattern printfPattern, Pattern javaMessageFormatPattern) {
+    private String colorTags(String str, String color, Pattern printfPattern, Pattern javaMessageFormatPattern, Pattern customTagPattern) {
         // show OmegaT tags in bold and color
         Matcher tagMatch = PatternConsts.OMEGAT_HTML_TAG.matcher(str);
         str = tagMatch.replaceAll("<font color=\"" + color + "\"><b>$1</b></font>");
@@ -195,6 +195,11 @@ public class TagValidationFrame extends JFrame {
         // show java MessageFormat pattern variables in bold and color (e.g. {0})
         if (javaMessageFormatPattern != null) {
             Matcher varMatch = javaMessageFormatPattern.matcher(str);
+            str = varMatch.replaceAll("<font color=\"" + color + "\"><b>$0</b></font>");
+        }
+        // show custom pattern in bold and color (e.g. {0})
+        if (customTagPattern != null) {
+            Matcher varMatch = customTagPattern.matcher(str);
             str = varMatch.replaceAll("<font color=\"" + color + "\"><b>$0</b></font>");
         }
         return str;
@@ -216,7 +221,12 @@ public class TagValidationFrame extends JFrame {
         if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
             javaMessageFormatPattern = PatternConsts.SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
         }
-        
+        Pattern customTagPattern = null;
+        String customRegExp = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN);
+        if (!"".equalsIgnoreCase(customRegExp)) {
+            customTagPattern = Pattern.compile(customRegExp);
+        }
+
         StringBuffer output = new StringBuffer();
 
         output.append("<html>\n");
@@ -249,10 +259,10 @@ public class TagValidationFrame extends JFrame {
                 output.append("</a>");
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(htmlize(src), "blue", printfPattern, javaMessageFormatPattern));
+                output.append(colorTags(htmlize(src), "blue", printfPattern, javaMessageFormatPattern, customTagPattern));
                 output.append("</td>");
                 output.append("<td>");
-                output.append(colorTags(htmlize(trans.translation), "blue", printfPattern, javaMessageFormatPattern));
+                output.append(colorTags(htmlize(trans.translation), "blue", printfPattern, javaMessageFormatPattern, customTagPattern));
                 output.append("</td>");
                 output.append("</tr>\n");
             }

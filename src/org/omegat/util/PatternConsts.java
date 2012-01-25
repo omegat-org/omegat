@@ -29,6 +29,7 @@
 package org.omegat.util;
 
 import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 /**
  * Constant patterns, used in different other classes.
@@ -202,6 +203,11 @@ public class PatternConsts {
             }
             if ("true".equalsIgnoreCase(Preferences.getPreference(Preferences.CHECK_JAVA_PATTERN_TAGS))) {
                 regexp += "|"+RE_SIMPLE_JAVA_MESSAGEFORMAT_PATTERN_VARS;
+            }
+            //assume: customRegExp has already been validated.
+            String customRegExp = Preferences.getPreferenceDefaultAllowEmptyString(Preferences.CHECK_CUSTOM_PATTERN);
+            if (!"".equalsIgnoreCase(customRegExp)) {
+                regexp += "|"+customRegExp;
             }
             PLACEHOLDERS = Pattern.compile(regexp);
         }

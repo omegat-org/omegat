@@ -5,8 +5,8 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel, Zoltan Bartko
-               2010 Didier Briel
-               2011 Didier Briel, Guido Leenders
+               2010-2011 Didier Briel
+               2012 Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

@@ -10,7 +10,8 @@
                2008 Martin Fleurke, Didier Briel
                2009 Didier Briel, Arno Peters, Alex Buloichik
                2010 Alex Buloichik
-               2011 Alex Buloichik, Didier Briel, Guido Leenders
+               2011 Alex Buloichik, Didier Briel
+               2012 Guido Leenders
 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/

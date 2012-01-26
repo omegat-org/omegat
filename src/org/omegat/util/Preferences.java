@@ -486,12 +486,12 @@ public class Preferences {
 
                 pref = blk.getTagName();
                 blk = lst.get(++i);
-		if (blk.isClose()) {
-		    //allow empty string as a preference value
+                if (blk.isClose()) {
+                //allow empty string as a preference value
                     val = "";
-		} else {
+                } else {
                     val = blk.getText();
-		}
+                }
                 if (pref != null && val != null) {
                     // valid match - record these
                     m_preferenceMap.put(pref, m_valList.size());

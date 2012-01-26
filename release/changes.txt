@@ -10,18 +10,22 @@
 
   Implemented requests:
   
-  Tag validation improvements: 
-      - allow marking and checking of text-to-remove
-      http://sourceforge.net/support/tracker.php?aid=3477099
-      - custom tag validation
-      http://sourceforge.net/support/tracker.php?aid=1599334
-      - validate Java MessageFormat pattern tags ({0} etc.).
-      http://sourceforge.net/support/tracker.php?aid=3477045
-      - insert tags inserts all relevant tags (custom, java, printf), not only OmegaT-tags
-      - render tags in different color in editor
-      http://sourceforge.net/support/tracker.php?aid=2120329
+  - Add patterns for text that should be removed and validate
+  http://sourceforge.net/support/tracker.php?aid=3477099
+
+  - User-defined tags
+  http://sourceforge.net/support/tracker.php?aid=1599334
+
+  - Validate Java MessageFormat pattern tags ({0} etc.)
+  http://sourceforge.net/support/tracker.php?aid=3477045
+
+  - Render tags in different color in editor
+  http://sourceforge.net/support/tracker.php?aid=2120329
 
   Other enhancements:
+
+  - Insert Source Tags inserts all relevant tags (custom, java, printf), 
+not only OmegaT-tags
   
   Bug fixes:
   

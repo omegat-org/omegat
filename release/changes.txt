@@ -26,7 +26,7 @@
   http://sourceforge.net/support/tracker.php?aid=3346155
 
   - targetLocale for use with DotNetNuke ResX
-  http://sourceforge.net/support/tracker.php?aid=3346155
+  http://sourceforge.net/support/tracker.php?aid=3330974
 
   Other enhancements:
 

@@ -605,9 +605,11 @@ public class SegmentBuilder {
         //format text-to-remove
         AttributeSet attrRemove = attrs(isSource, false, true);
         Pattern removePattern = PatternConsts.getRemovePattern();
-        Matcher removeMatcher = removePattern.matcher(text);
-        while (removeMatcher.find()) {
-            doc.setCharacterAttributes(start+removeMatcher.start(), removeMatcher.end()-removeMatcher.start(), attrRemove, true);
+        if (removePattern != null) {
+            Matcher removeMatcher = removePattern.matcher(text);
+            while (removeMatcher.find()) {
+                doc.setCharacterAttributes(start+removeMatcher.start(), removeMatcher.end()-removeMatcher.start(), attrRemove, true);
+            }
         }
     }
 }

@@ -1,11 +1,11 @@
 ----------------------------------------------------------------------
- OmegaT 2.5.0 update 6
+ OmegaT 2.5.1
 ----------------------------------------------------------------------
-   5 Enhancements
+   7 Enhancements
    1 Bug fixes
    2 Localisation updates
 ----------------------------------------------------------------------
-2.5.0 update 6 vs. 2.5.0 update 5
+2.5.1 vs. 2.5.0 update 5
 
 
   Implemented requests:
@@ -21,6 +21,12 @@
 
   - Render tags in different color in editor
   http://sourceforge.net/support/tracker.php?aid=2120329
+
+  - Add "date" & "time" to translated file name pattern
+  http://sourceforge.net/support/tracker.php?aid=3346155
+
+  - targetLocale for use with DotNetNuke ResX
+  http://sourceforge.net/support/tracker.php?aid=3346155
 
   Other enhancements:
 

@@ -5,7 +5,8 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel, Zoltan Bartko
-               2010-2011 Didier Briel
+               2010 Didier Briel
+               2011 Didier Briel, Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,6 +51,7 @@ import java.util.regex.Matcher;
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
+ * @author Guido Leenders
  */
 public class Language {
     private Locale locale = new Locale("");
@@ -137,6 +139,13 @@ public class Language {
             return returnString;
         }
             
+    }
+
+    /**
+     * Returns a string representation as a Microsoft locale (xx-yy).
+     */
+    public String getLocaleLCID() {
+        return getLocaleCode().toLowerCase().replace("_", "-");
     }
 
     /**

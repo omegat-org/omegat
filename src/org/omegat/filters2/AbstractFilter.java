@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2006 Martin Wunderlich
-               2011 Alex Buloichik, Didier Briel
+               2011 Alex Buloichik, Didier Briel, Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -59,6 +59,7 @@ import org.omegat.util.OStrings;
  * @author Martin Wunderlich
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Guido Leenders
  */
 public abstract class AbstractFilter implements IFilter {
 
@@ -84,11 +85,76 @@ public abstract class AbstractFilter implements IFilter {
     public static final String TFP_TARGET_COUNTRY_CODE = "${targetCountryCode}";
     /** Old spelling of the variable for country "YY" only */
     public static final String TFP_TARGET_COUTRY_CODE = "${targetCoutryCode}";
+    /** System time at generation time in various patterns. */
+    public static final String TFP_TIMESTAMP_LA = "${timestamp-a}";
+    public static final String TFP_TIMESTAMP_LD = "${timestamp-d}";
+    public static final String TFP_TIMESTAMP_LDD = "${timestamp-dd}";
+    public static final String TFP_TIMESTAMP_LH = "${timestamp-h}";
+    public static final String TFP_TIMESTAMP_LHH = "${timestamp-hh}";
+    public static final String TFP_TIMESTAMP_LM = "${timestamp-m}";
+    public static final String TFP_TIMESTAMP_LMM = "${timestamp-mm}";
+    public static final String TFP_TIMESTAMP_LS = "${timestamp-s}";
+    public static final String TFP_TIMESTAMP_LSS = "${timestamp-ss}";
+    public static final String TFP_TIMESTAMP_LYYYY = "${timestamp-yyyy}";
+    public static final String TFP_TIMESTAMP_UD = "${timestamp-D}";
+    public static final String TFP_TIMESTAMP_UEEE = "${timestamp-EEE}";
+    public static final String TFP_TIMESTAMP_UEEEE = "${timestamp-EEEE}";
+    public static final String TFP_TIMESTAMP_UH = "${timestamp-H}";
+    public static final String TFP_TIMESTAMP_UHH = "${timestamp-HH}";
+    public static final String TFP_TIMESTAMP_UM = "${timestamp-M}";
+    public static final String TFP_TIMESTAMP_UMM = "${timestamp-MM}";
+    public static final String TFP_TIMESTAMP_UMMM = "${timestamp-MMM}";
+    /** Workstation properties. */
+    public static final String TFP_SYSTEM_OS_NAME = "${system-os-name}";
+    public static final String TFP_SYSTEM_OS_VERSION = "${system-os-version}";
+    public static final String TFP_SYSTEM_OS_ARCH = "${system-os-arch}";
+    public static final String TFP_SYSTEM_USER_NAME = "${system-user-name}";
+    public static final String TFP_SYSTEM_HOST_NAME = "${system-host-name}";
+    /** File properties. */
+    public static final String TFP_FILE_SOURCE_ENCODING = "${file-source-encoding}";
+    public static final String TFP_FILE_TARGET_ENCODING = "${file-target-encoding}";
+    public static final String TFP_FILE_FILTER_NAME = "${file-filter-name}";
+    /** Microsoft. */
+    public static final String TFP_TARGET_LOCALE_LCID = "${targetLocaleLCID}";
+    
 
     /** All target filename patterns. */
-    public static final String[] TARGET_FILENAME_PATTERNS = new String[] { TFP_FILENAME, TFP_NAMEONLY,
-            TFP_EXTENSION, TFP_TARGET_LOCALE, TFP_TARGET_LANGUAGE, TFP_TARGET_LANG_CODE,
-            TFP_TARGET_COUNTRY_CODE };
+    public static final String[] TARGET_FILENAME_PATTERNS = new String[] { 
+                TFP_FILENAME,
+                TFP_NAMEONLY,
+                TFP_EXTENSION,
+                TFP_TARGET_LOCALE,
+                TFP_TARGET_LOCALE_LCID,
+                TFP_TARGET_LANGUAGE,
+                TFP_TARGET_LANG_CODE,
+                TFP_TARGET_COUNTRY_CODE,
+                TFP_TIMESTAMP_LA,
+                TFP_TIMESTAMP_LD,
+                TFP_TIMESTAMP_LDD,
+                TFP_TIMESTAMP_LH,
+                TFP_TIMESTAMP_LHH,
+                TFP_TIMESTAMP_LM,
+                TFP_TIMESTAMP_LMM,
+                TFP_TIMESTAMP_LS,
+                TFP_TIMESTAMP_LSS,
+                TFP_TIMESTAMP_LYYYY,
+                TFP_TIMESTAMP_UD,
+                TFP_TIMESTAMP_UEEE,
+                TFP_TIMESTAMP_UEEEE,
+                TFP_TIMESTAMP_UH,
+                TFP_TIMESTAMP_UHH,
+                TFP_TIMESTAMP_UM,
+                TFP_TIMESTAMP_UMM,
+                TFP_TIMESTAMP_UMMM,
+                TFP_SYSTEM_OS_NAME,
+                TFP_SYSTEM_OS_VERSION,
+                TFP_SYSTEM_OS_ARCH,
+                TFP_SYSTEM_USER_NAME,
+                TFP_SYSTEM_HOST_NAME,
+                TFP_FILE_SOURCE_ENCODING,
+                TFP_FILE_TARGET_ENCODING,
+                TFP_FILE_FILTER_NAME
+        };
 
     /** Callback for parse. */
     protected IParseCallback entryParseCallback;

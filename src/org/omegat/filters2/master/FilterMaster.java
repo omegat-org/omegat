@@ -10,7 +10,7 @@
                2008 Martin Fleurke, Didier Briel
                2009 Didier Briel, Arno Peters, Alex Buloichik
                2010 Alex Buloichik
-               2011 Alex Buloichik, Didier Briel
+               2011 Alex Buloichik, Didier Briel, Guido Leenders
 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -40,7 +40,9 @@ import gen.core.filters.Filters;
 import java.io.File;
 import java.io.IOException;
 import java.nio.charset.Charset;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -75,6 +77,7 @@ import org.omegat.util.StaticUtils;
  * @author Martin Fleurke
  * @author Arno Peters
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Guido Leenders
  */
 public class FilterMaster {
     /** name of the filter configuration file */
@@ -268,7 +271,9 @@ public class FilterMaster {
                 + path
                 + File.separator
                 + constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), name,
-                        lookup.outFilesInfo.getTargetFilenamePattern(), fc.getTargetLang()));
+                        lookup.outFilesInfo.getTargetFilenamePattern(), fc.getTargetLang(),
+                        lookup.outFilesInfo.getSourceEncoding(), lookup.outFilesInfo.getTargetEncoding(),
+                        lookup.filterObject.getFileFormatName()));
 
         fc.setInEncoding(lookup.outFilesInfo.getSourceEncoding());
         fc.setOutEncoding(lookup.outFilesInfo.getTargetEncoding());
@@ -301,7 +306,9 @@ public class FilterMaster {
                 + path
                 + File.separator
                 + constructTargetFilename(lookup.outFilesInfo.getSourceFilenameMask(), name,
-                        lookup.outFilesInfo.getTargetFilenamePattern(), fc.getTargetLang()));
+                        lookup.outFilesInfo.getTargetFilenamePattern(), fc.getTargetLang(),
+                        lookup.outFilesInfo.getSourceEncoding(), lookup.outFilesInfo.getTargetEncoding(),
+                        lookup.filterObject.getFileFormatName()));
 
         if (!outFile.exists()) {
             // out file not exist - skip
@@ -485,6 +492,18 @@ public class FilterMaster {
     }
 
     /**
+     * Return current system time in the specified date format.
+     *
+     * @param dateFormat
+     *            Date format for java.text.SimpleDateFormat.
+     */
+    public static String now(String dateFormat) {
+        Calendar cal = Calendar.getInstance();
+        SimpleDateFormat sdf = new SimpleDateFormat(dateFormat);
+        return sdf.format(cal.getTime());
+    }
+
+    /**
      * Construct a target filename according to pattern from a file's name. Filename should be "name.ext",
      * without path.
      * <p>
@@ -524,7 +543,7 @@ public class FilterMaster {
      * @return The changed filename
      */
     private String constructTargetFilename(String sourceMask, String filename, String pattern,
-            Language targetLang) {
+            Language targetLang, String sourceEncoding, String targetEncoding, String filterFormatName) {
         int lastStarPos = sourceMask.lastIndexOf('*');
         int dot = 0;
         if (lastStarPos >= 0) {
@@ -558,7 +577,59 @@ public class FilterMaster {
         res = res.replace(AbstractFilter.TFP_TARGET_COUNTRY_CODE, targetLang.getCountryCode());
         // Replace also old variable spelling
         res = res.replace(AbstractFilter.TFP_TARGET_COUTRY_CODE, targetLang.getCountryCode());
-
+        res = res.replace(AbstractFilter.TFP_TARGET_LOCALE_LCID, targetLang.getLocaleLCID());
+        //
+        // System generation time
+        //
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LA, now("a"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LD, now("d"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LDD, now("dd"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LH, now("h"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LHH, now("hh"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LM, now("m"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LMM, now("mm"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LS, now("s"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LSS, now("ss"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_LYYYY, now("yyyy"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_UD, now("D"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_UEEE, now("EEE"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_UEEEE, now("EEEE"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_UH, now("H"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_UHH, now("HH"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_UM, now("M"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_UMM, now("MM"));
+        res = res.replace(AbstractFilter.TFP_TIMESTAMP_UMMM, now("MMM"));
+        //
+        // Workstation properties
+        //
+        res = res.replace(AbstractFilter.TFP_SYSTEM_OS_NAME, System.getProperty("os.name"));
+        res = res.replace(AbstractFilter.TFP_SYSTEM_OS_VERSION, System.getProperty("os.arch"));
+        res = res.replace(AbstractFilter.TFP_SYSTEM_OS_ARCH, System.getProperty("os.version"));
+        res = res.replace(AbstractFilter.TFP_SYSTEM_USER_NAME, System.getProperty("user.name"));
+        String hostName = null;
+        try {
+            hostName = java.net.InetAddress.getLocalHost().getHostName();
+        } catch (java.net.UnknownHostException uhe) {
+            hostName = "";
+        }
+        res = res.replace(AbstractFilter.TFP_SYSTEM_HOST_NAME, hostName);
+        //
+        // File properties.
+        //
+        String sourceEncodingText = "auto";
+        if (sourceEncoding != null) {
+            sourceEncodingText = sourceEncoding;
+        }
+        res = res.replace(AbstractFilter.TFP_FILE_SOURCE_ENCODING, sourceEncodingText);
+        //
+        String targetEncodingText = "auto";
+        if (targetEncoding != null) {
+            targetEncodingText = targetEncoding;
+        }
+        res = res.replace(AbstractFilter.TFP_FILE_TARGET_ENCODING, targetEncodingText);
+        //
+        res = res.replace(AbstractFilter.TFP_FILE_FILTER_NAME, filterFormatName);
+        //
         return res;
     }
 

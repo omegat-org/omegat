@@ -132,6 +132,7 @@ public class CamtasiaWindowsDialect extends DefaultXMLDialect {
             "Image_Object",
             "IndentLevel",
             "KeepAspectRatio",
+            "Line",
             "MaxCaptionLength",
             "NoiseFilterInfo",
             "Opacity",

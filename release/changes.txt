@@ -2,7 +2,7 @@
  OmegaT 2.5.1
 ----------------------------------------------------------------------
    8 Enhancements
-   0 Bug fix
+   1 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
 2.5.1 vs. 2.5.0 update 5
@@ -36,6 +36,11 @@
   - Insert Source Tags inserts all relevant tags (custom, java, printf), 
 not only OmegaT-tags
   
+  Bug fixes:
+
+  - Camtasia filter: <Line> is incorrectly added as src segment
+  http://sourceforge.net/support/tracker.php?aid=3481602
+
   Localisation updates:
 
   - Dutch localisation updated to 2.5.0 update 5 (UI, readme, documentation)

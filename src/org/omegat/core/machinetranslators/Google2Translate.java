@@ -72,6 +72,10 @@ public class Google2Translate extends BaseTranslate {
             targetLang = "ZH-TW"; // Google doesn't recognize ZH-HK
 
         String googleKey = System.getProperty("google.api.key");
+        
+        if (googleKey == null) {
+            return OStrings.getString("GOOGLE_API_KEY_NOTFOUND");
+        }
 
         Map<String, String> params = new TreeMap<String, String>();
 

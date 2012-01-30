@@ -4,11 +4,12 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2005-06 Henry Pijffers
-           (C) 2006 Martin Wunderlich
-           (C) 2006-2007 Didier Briel
-           (C) 2008 Martin Fleurke
-           (C) 2011 Alex Buloichik
+               2005-2006 Henry Pijffers
+               2006 Martin Wunderlich
+               2006-2007 Didier Briel
+               2008 Martin Fleurke
+               2011 Alex Buloichik
+               2012 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -38,6 +39,8 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.util.Language;
+import org.omegat.util.PatternConsts;
+import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -134,7 +137,7 @@ public abstract class ParseEntry implements IParseCallback {
         if (translation != null) {
             translation = stripSomeChars(translation, tmp);
         }
-
+  
         String segTranslation = isFuzzy ? null : translation;
 
         if (m_config.isSentenceSegmentingEnabled()) {
@@ -289,6 +292,10 @@ public abstract class ParseEntry implements IParseCallback {
         if (per.cr)
             r = r.replace("\r", "\n");
 
+        if(Preferences.getPreference(Preferences.REMOVE_TAGS).equals("true")) {
+            r = PatternConsts.OMEGAT_TAG.matcher(r).replaceAll("");
+        }
+        
         r = StaticUtils.fixChars(r);
 
         return r;

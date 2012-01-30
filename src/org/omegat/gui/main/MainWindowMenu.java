@@ -10,6 +10,7 @@
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
                2011 Didier Briel
+               2012 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -217,6 +218,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                         "MW_VIEW_MENU_MODIFICATION_INFO_ALL", viewModificationInfoMenuBG));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
+        toolsMenu.add(toolsRemoveTagsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_TOOLS_HIDETAGS"));
         toolsMenu
                 .add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
         toolsMenu
@@ -311,6 +313,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewDisplayModificationInfoAllRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(Core.getEditor()
                         .getSettings().getDisplayModificationInfo()));
+        
+        toolsRemoveTagsCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.REMOVE_TAGS));
     }
 
     /**
@@ -430,7 +434,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem,
 
-                viewFileListMenuItem, toolsValidateTagsMenuItem, toolsShowStatisticsStandardMenuItem,
+                viewFileListMenuItem, toolsValidateTagsMenuItem, toolsRemoveTagsCheckBoxMenuItem, toolsShowStatisticsStandardMenuItem,
                 toolsShowStatisticsMatchesMenuItem };
 
         for (JMenuItem item : itemsToSwitchOff) {
@@ -523,6 +527,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem titleCaseMenuItem;
     JMenu toolsMenu;
     JMenuItem toolsValidateTagsMenuItem;
+    JCheckBoxMenuItem toolsRemoveTagsCheckBoxMenuItem;
     JMenuItem toolsShowStatisticsStandardMenuItem;
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem upperCaseMenuItem;

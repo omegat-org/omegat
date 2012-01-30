@@ -8,6 +8,7 @@
                2008-2009 Didier Briel
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
                2011 John Moran, Didier Briel
+               2012 Martin Fleurke, Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -54,6 +55,7 @@ import org.omegat.util.xml.XMLStreamReader;
  * @author Didier Briel
  * @author Wildrich Fourie
  * @author Antonio Vilei
+ * @author Martin Fleurke
  * @author John Moran
  */
 public class Preferences {
@@ -177,6 +179,9 @@ public class Preferences {
     public static final String CHECK_CUSTOM_PATTERN = "tagValidation_customPattern";
     /** Tag Validation Option: check target for text that should have been removed according to regexp.*/
     public static final String CHECK_REMOVE_PATTERN = "tagValidation_removePattern";
+
+     /** Remove Tags Option */
+    public static final String REMOVE_TAGS = "remove_tags_option";
 
     /** Team option: author ID */
     public static final String TEAM_AUTHOR = "team_Author";

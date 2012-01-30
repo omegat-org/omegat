@@ -1,8 +1,8 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.1
 ----------------------------------------------------------------------
-   7 Enhancements
-   1 Bug fixes
+   8 Enhancements
+   0 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
 2.5.1 vs. 2.5.0 update 5
@@ -28,23 +28,18 @@
   - targetLocale for use with DotNetNuke ResX
   http://sourceforge.net/support/tracker.php?aid=3330974
 
+  - Remove all tags
+  http://sourceforge.net/support/tracker.php?aid=3481683
+
   Other enhancements:
 
   - Insert Source Tags inserts all relevant tags (custom, java, printf), 
 not only OmegaT-tags
   
-  Bug fixes:
-  
-  - Non working remote dictionary location
-  http://sourceforge.net/support/tracker.php?aid=3476639
-  
   Localisation updates:
 
   - Dutch localisation updated to 2.5.0 update 5 (UI, readme, documentation)
-
   - Italian localisation updated to 2.5.0 update 5 (UI, Instant Start, readme)
-  
-
 
 ----------------------------------------------------------------------
  OmegaT 2.5.0 update 5
@@ -110,7 +105,6 @@ working for all tags
   Localisation updates:
 
   - Dutch localisation updated to 2.5.0 update 3 (UI, readme, documentation)
-
   - Italian localisation updated to 2.5.0 update 3 (UI)
 
 ----------------------------------------------------------------------

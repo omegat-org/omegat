@@ -49,11 +49,13 @@ import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.ProjectFileStorage;
 import org.omegat.util.RuntimePreferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXWriter;
 
@@ -233,7 +235,7 @@ public class Main {
         Log.log("Console mode");
         Log.log("");
 
-        System.out.println("Initializing");
+        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         try {
             Core.initializeConsole(params);
         } catch (Throwable ex) {
@@ -242,7 +244,9 @@ public class Main {
         try {
             RealProject p = selectProjectConsoleMode(true);
 
-            System.out.println("Translating Project");
+            validateTagsConsoleMode();
+
+            System.out.println(OStrings.getString("CONSOLE_TRANSLATING"));
 
             String sourceMask = params.get("source-pattern");
             if (sourceMask != null)
@@ -251,10 +255,40 @@ public class Main {
                 p.compileProject(".*");
 
             p.closeProject();
-            System.out.println("Finished");
+            System.out.println(OStrings.getString("CONSOLE_FINISHED"));
         } catch (Exception e) {
             System.err.println("An error has occured: " + e.toString());
             System.exit(1);
+        }
+    }
+    
+    /**
+     * Validates tags according to command line specs:
+     * --tag-validation=[abort|warn]
+     * 
+     * On abort, the program is aborted when tag validation finds errors. 
+     * On warn the errors are printed but the program continues.
+     * In all other cases no tag validation is done.
+     */
+    private static void validateTagsConsoleMode() {
+        String tagValidation = params.get("tag-validation");
+
+        if ("block".equalsIgnoreCase(tagValidation)) {
+            System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
+            ITagValidation aTagValidation = Core.getTagValidation();
+            if (!aTagValidation.validateTags()) {
+                System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
+                System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_ABORT"));
+                System.exit(1);
+            }
+        } else if ("warn".equalsIgnoreCase(tagValidation)) {
+            System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
+            ITagValidation aTagValidation = Core.getTagValidation();
+            if (!aTagValidation.validateTags()) {
+                System.out.println(OStrings.getString("CONSOLE_TAGVALIDATION_FAIL"));
+            }
+        } else {
+            //do not validate tags = default
         }
     }
 
@@ -265,7 +299,7 @@ public class Main {
         Log.log("Console mode");
         Log.log("");
 
-        System.out.println("Initializing");
+        System.out.println(OStrings.getString("CONSOLE_INITIALIZING"));
         try {
             Core.initializeConsole(params);
         } catch (Throwable ex) {
@@ -274,7 +308,9 @@ public class Main {
         try {
             RealProject p = selectProjectConsoleMode(true);
 
-            System.out.println("Create pseudo-translate TMX");
+            validateTagsConsoleMode();
+
+            System.out.println(OStrings.getString("CONSOLE_CREATE_PSEUDOTMX"));
 
             ProjectProperties m_config = p.getProjectProperties();
             List<SourceTextEntry> entries = p.getAllEntries();
@@ -316,7 +352,7 @@ public class Main {
                 throw new IOException(OStrings.getString("CT_ERROR_CREATING_TMX") + "\n" + e.getMessage());
             }
             p.closeProject();
-            System.out.println("Finished");
+            System.out.println(OStrings.getString("CONSOLE_FINISHED"));
         } catch (Exception e) {
             System.err.println("An error has occured: " + e.toString());
             System.exit(1);
@@ -328,17 +364,17 @@ public class Main {
         Log.log("");
 
         if (projectLocation == null) {
-            System.out.println("Project location not defined");
+            System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));
             System.exit(1);
         }
 
         String dir = params.get("alignDir");
         if (dir == null) {
-            System.out.println("Translated files location not defined");
+            System.out.println(OStrings.getString("CONSOLE_TRANSLATED_FILES_LOC_UNDEFINED"));
             System.exit(1);
         }
 
-        System.out.println("Initializing");
+        System.out.println(OStrings.getString("INITIALIZING"));
         try {
             Core.initializeConsole(params);
         } catch (Throwable ex) {
@@ -347,7 +383,9 @@ public class Main {
         try {
             RealProject p = selectProjectConsoleMode(false);
 
-            System.out.println("Align project against " + dir);
+            validateTagsConsoleMode();
+
+            System.out.println(StaticUtils.format(OStrings.getString("CONSOLE_ALIGN_AGAINST"), dir));
 
             Map<String, TMXEntry> data = p.align(p.getProjectProperties(), new File(dir));
 
@@ -355,7 +393,7 @@ public class Main {
 
             TMXWriter.buildTMXFile(tmxFile, false, false, p.getProjectProperties(), data);
 
-            System.out.println("Finished");
+            System.out.println(OStrings.getString("FINISHED"));
         } catch (Exception e) {
             System.err.println("An error has occured: " + e.toString());
             System.exit(1);
@@ -372,14 +410,14 @@ public class Main {
      * @return the project.
      */
     private static RealProject selectProjectConsoleMode(boolean loadProject) {
-        System.out.println("Loading Project");
+        System.out.println(OStrings.getString("CONSOLE_LOADING_PROJECT"));
 
         // check if project okay
         ProjectProperties projectProperties = null;
         try {
             projectProperties = ProjectFileStorage.loadProjectProperties(projectLocation);
             if (!projectProperties.verifyProject()) {
-                System.out.println("The project cannot be verified");
+                System.out.println(OStrings.getString("CONSOLE_PROJECT_NOT_VERIFIED"));
                 System.exit(1);
             }
         } catch (Exception ex) {

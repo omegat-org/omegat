@@ -31,7 +31,8 @@ package org.omegat.gui.tagvalidation;
  */
 public interface ITagValidation {
     /**
-     * Calls IDataEngine for get invalid tags list and show they.
+     * Get invalid tags list and show them.
+     * @return true when all tags are valid, false otherwise
      */
-    void validateTags();
+    boolean validateTags();
 }

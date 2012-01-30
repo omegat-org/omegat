@@ -179,7 +179,7 @@ public class Core {
      */
     public static void initializeConsole(final Map<String, String> params) throws Exception {
         cmdLineParams = params;
-
+        tagValidation = new TagValidationTool();
         currentProject = new NotLoadedProject();
         mainWindow = new ConsoleWindow();
     }

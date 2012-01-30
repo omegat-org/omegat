@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.1
 ----------------------------------------------------------------------
-   8 Enhancements
+   9 Enhancements
    1 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -9,7 +9,10 @@
 
 
   Implemented requests:
-  
+
+  - Validate tags in console mode
+  http://sourceforge.net/support/tracker.php?aid=3426212
+
   - Add patterns for text that should be removed and validate
   http://sourceforge.net/support/tracker.php?aid=3477099
 

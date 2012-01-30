@@ -117,16 +117,31 @@
       </itemizedlist>
     </section>
 
-    <section id="misc.console.mode.extra.options">
-      <title>Extra options</title>
+    <section id="misc.console.mode.option.quiet">
+      <title>Quiet option</title>
 
-      <para>One further command line parameter exists specific to the console
-      mode: <literal>--quiet. </literal>In quiet mode, less information is
-      logged to the screen. The messages that you would usually find in the
-      status bar are not shown.</para>
+      <para>An extra command line parameter specific to console
+      mode: <literal>--quiet.</literal> In the quiet mode, less info is
+      logged to the screen. The messages you would usually find in the
+      status bar are not displayed.</para>
 
       <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
-      /path/to/project --quiet</literal></para>
+      /path/to/project --mode=console-translate --quiet</literal></para>
+    </section>
+
+    <section id="misc.console.mode.option.validatetags">
+      <title>Tag validation option</title>
+
+      <para>Another extra command line parameter specific to console
+      mode: <literal>--tag-validation=[block|warn].</literal> When this 
+      parameter is added, tag validation is done prior to translation/aligning.
+      If the value is <literal>block</literal>, then on tag errors the errors
+      are printed and the program stops. If the value is <literal>warn</literal>
+      then the errors are printed but OmegaT continues.
+      </para>
+
+      <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
+      /path/to/project --mode=console-translate --tag-validation=block</literal></para>
     </section>
   </section>
 

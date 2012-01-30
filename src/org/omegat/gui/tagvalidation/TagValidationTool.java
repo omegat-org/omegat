@@ -61,8 +61,20 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
         CoreEvents.registerProjectChangeListener(this);
     }
 
-    public void validateTags() {
+    public TagValidationTool() {
+        CoreEvents.registerProjectChangeListener(this);
+    }
+
+    public boolean validateTags() {
         List<SourceTextEntry> suspects = listInvalidTags();
+        if (mainWindow != null) {
+            return showTagResultsInGui(suspects);
+        } else {
+            return showTagResultsInConsole(suspects);
+        }
+    }
+
+    private boolean showTagResultsInGui(List<SourceTextEntry> suspects) {
         if (suspects.size() > 0) {
             // create a tag validation window if necessary
             if (m_tagWin == null) {
@@ -76,6 +88,7 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             // display list of suspect strings
             m_tagWin.setVisible(true);
             m_tagWin.displayStringList(suspects);
+            return false;
         } else {
             // close tag validation window if present
             if (m_tagWin != null)
@@ -85,6 +98,24 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
             JOptionPane.showMessageDialog(Core.getMainWindow().getApplicationFrame(),
                     OStrings.getString("TF_NOTICE_OK_TAGS"), OStrings.getString("TF_NOTICE_TITLE_TAGS"),
                     JOptionPane.INFORMATION_MESSAGE);
+            return true;
+        }
+    }
+    
+    private boolean showTagResultsInConsole(List<SourceTextEntry> suspects) {
+        if (suspects.size() > 0) {
+            for (SourceTextEntry ste : suspects) {
+                String src = ste.getSrcText();
+                TMXEntry trans = Core.getProject().getTranslationInfo(ste);
+                if (src.length() > 0 && trans.isTranslated()) {
+                    System.out.println(ste.entryNum());
+                    System.out.println(src);
+                    System.out.println(trans.translation);
+                }
+            }
+            return false;
+        } else {
+            return true;
         }
     }
 

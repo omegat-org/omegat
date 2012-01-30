@@ -133,15 +133,15 @@
       <title>Tag validation option</title>
 
       <para>Another extra command line parameter specific to console
-      mode: <literal>--tag-validation=[block|warn].</literal> When this 
+      mode: <literal>--tag-validation=[abort|warn].</literal> When this 
       parameter is added, tag validation is done prior to translation/aligning.
-      If the value is <literal>block</literal>, then on tag errors the errors
+      If the value is <literal>abort</literal>, then on tag errors the errors
       are printed and the program stops. If the value is <literal>warn</literal>
       then the errors are printed but OmegaT continues.
       </para>
 
       <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
-      /path/to/project --mode=console-translate --tag-validation=block</literal></para>
+      /path/to/project --mode=console-translate --tag-validation=abort</literal></para>
     </section>
   </section>
 

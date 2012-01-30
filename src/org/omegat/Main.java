@@ -273,7 +273,7 @@ public class Main {
     private static void validateTagsConsoleMode() {
         String tagValidation = params.get("tag-validation");
 
-        if ("block".equalsIgnoreCase(tagValidation)) {
+        if ("abort".equalsIgnoreCase(tagValidation)) {
             System.out.println(OStrings.getString("CONSOLE_VALIDATING_TAGS"));
             ITagValidation aTagValidation = Core.getTagValidation();
             if (!aTagValidation.validateTags()) {

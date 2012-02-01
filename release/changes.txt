@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.1
 ----------------------------------------------------------------------
-   9 Enhancements
+  10 Enhancements
    1 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
@@ -33,6 +33,9 @@
 
   - Remove all tags
   http://sourceforge.net/support/tracker.php?aid=3481683
+
+  - Create /tm/auto folder in new project
+  http://sourceforge.net/support/tracker.php?aid=3368416
 
   Other enhancements:
 

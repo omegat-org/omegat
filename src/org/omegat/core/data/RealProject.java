@@ -7,6 +7,7 @@
                2007 Zoltan Bartko
                2008 Alex Buloichik
                2009-2010 Didier Briel
+               2012 Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -92,12 +93,11 @@ import org.xml.sax.SAXParseException;
  * @author Bartko Zoltan (bartkozoltan@bartkozoltan.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Guido Leenders
  */
 public class RealProject implements IProject {
     /** Local logger. */
     private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
-
-    protected static final String AUTO_TMX_DIR = "auto/";
 
     protected final ProjectProperties m_config;
 
@@ -179,6 +179,7 @@ public class RealProject implements IProject {
             createDirectory(m_config.getSourceRoot(), "src");
             createDirectory(m_config.getGlossaryRoot(), "glos");
             createDirectory(m_config.getTMRoot(), "tm");
+            createDirectory(m_config.getTMAutoRoot(), "tm");
             createDirectory(m_config.getDictRoot(), "dictionary");
             createDirectory(m_config.getTargetRoot(), "target");
 
@@ -676,7 +677,11 @@ public class RealProject implements IProject {
                                 Preferences.isPreference(Preferences.EXT_TMX_USE_SLASH));
                         newTransMemories.put(file.getPath(), newTMX);
 
-                        if (FileUtil.computeRelativePath(tmRoot, file).startsWith(AUTO_TMX_DIR)) {
+                        //
+                        // Please note the use of "/". FileUtil.computeRelativePath rewrites all other
+                        // directory separators into "/".
+                        //
+                        if (FileUtil.computeRelativePath(tmRoot, file).startsWith(OConsts.AUTO_TM + "/")) {
                             appendFromAutoTMX(newTMX);
                         }
                     } catch (Exception e) {

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
+               2012 Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -36,6 +37,7 @@ import org.omegat.util.StringUtil;
  * 
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
+ * @author Guido Leenders
  */
 public class ProjectProperties {
 
@@ -53,6 +55,7 @@ public class ProjectProperties {
         setTargetRoot(projectRoot + OConsts.DEFAULT_TARGET + File.separator);
         setGlossaryRoot(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator);
         setTMRoot(projectRoot + OConsts.DEFAULT_TM + File.separator);
+        setTMAutoRoot(tmRoot + OConsts.AUTO_TM + File.separator);
         setDictRoot(projectRoot + OConsts.DEFAULT_DICT + File.separator);
 
         setSentenceSegmentingEnabled(true);
@@ -101,6 +104,16 @@ public class ProjectProperties {
     /** Sets The Translation Memory (TMX) Files Directory */
     public void setTMRoot(String tmRoot) {
         this.tmRoot = tmRoot;
+    }
+
+    /** Returns The Translation Memory (TMX) Files Directory for automatically applied files. */
+    public String getTMAutoRoot() {
+        return tmAutoRoot;
+    }
+
+    /** Sets The Translation Memory (TMX) Files Directory for automatically applied files. */
+    public void setTMAutoRoot(String tmAutoRoot) {
+        this.tmAutoRoot = tmAutoRoot;
     }
 
     /** Returns The Dictionaries Files Directory */
@@ -273,6 +286,7 @@ public class ProjectProperties {
     private String targetRoot;
     private String glossaryRoot;
     private String tmRoot;
+    private String tmAutoRoot;
     private String dictRoot;
 
     private Language sourceLanguage;

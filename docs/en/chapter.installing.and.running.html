@@ -1092,18 +1092,38 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="console.mode.extra.options"></a>6.3.3.&nbsp;Quiet option
+                           <h4 class="title"><a name="console.mode.option.quiet"></a>6.3.3.&nbsp;Quiet option
                            </h4>
                         </div>
                      </div>
                   </div>
-                  <p>There is one extra command line parameter specific to console
-                             mode: <code class="literal">--quiet. </code>In the quiet mode, less info is
+                  <p>An extra command line parameter specific to console
+                             mode: <code class="literal">--quiet.</code> In the quiet mode, less info is
                              logged to the screen. The messages you would usually find in the
                              status bar are not displayed.
                   </p>
                   <p>Usage: <code class="literal">java -jar <span class="application">OmegaT</span>.jar
-                                /path/to/project --quiet</code></p>
+                                /path/to/project --mode=console-translate --quiet</code></p>
+               </div>
+               <div class="section" title="6.3.4.&nbsp;Tag validation option">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="console.mode.option.validatetags"></a>6.3.4.&nbsp;Tag validation option
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Another extra command line parameter specific to console
+                             mode: <code class="literal">--tag-validation=[abort|warn].</code> When this 
+                             parameter is added, tag validation is done prior to translation/aligning.
+                             If the value is <code class="literal">abort</code>, then on tag errors the errors
+                             are printed and the program stops. If the value is <code class="literal">warn</code>
+                             then the errors are printed but OmegaT continues.
+                             
+                  </p>
+                  <p>Usage: <code class="literal">java -jar <span class="application">OmegaT</span>.jar
+                                /path/to/project --mode=console-translate --tag-validation=abort</code></p>
                </div>
             </div>
          </div>
@@ -1111,7 +1131,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Building <span class="application">OmegaT</span> From Source<a class="indexterm" name="d0e2011"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Building <span class="application">OmegaT</span> From Source<a class="indexterm" name="d0e2032"></a></h2>
                   </div>
                </div>
             </div>

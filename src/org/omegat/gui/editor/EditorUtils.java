@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -32,6 +33,7 @@ import javax.swing.text.Utilities;
  * Some utilities methods.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Didier Briel
  */
 public class EditorUtils {
     /**
@@ -44,7 +46,8 @@ public class EditorUtils {
     public static boolean isRTL(final String language) {
         return "ar".equalsIgnoreCase(language) || "iw".equalsIgnoreCase(language)
                 || "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
-                || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language);
+                || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
+                || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
     }
 
     /**

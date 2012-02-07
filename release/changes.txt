@@ -7,7 +7,6 @@
 ----------------------------------------------------------------------
 2.5.1 vs. 2.5.0 update 5
 
-
   Implemented requests:
 
   - Validate tags in console mode
@@ -60,7 +59,6 @@ not only OmegaT-tags
    2 Localisation updates
 ----------------------------------------------------------------------
 2.5.0 update 5 vs. 2.5.0 update 4
-
 
   Implemented requests:
 
@@ -283,6 +281,20 @@ is saved.
   Localisation updates:
 
   - Dutch localisation updated to 2.5 (UI)
+
+----------------------------------------------------------------------
+ OmegaT 2.3.0 update 7
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.3.0 update 7 vs. 2.3.0 update 6
+
+  Bug fixes:
+
+  - Yiddish (language code "YI" or "JI") was not declared as a right 
+to left language
 
 ----------------------------------------------------------------------
  OmegaT 2.3.0 update 6

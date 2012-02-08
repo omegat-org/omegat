@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2012 Guido Leenders
+               2012 Guido Leenders, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -29,7 +29,9 @@ import java.io.File;
 
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -38,6 +40,7 @@ import org.omegat.util.StringUtil;
  * @author Keith Godfrey
  * @author Maxym Mykhalchuk
  * @author Guido Leenders
+ * @author Didier Briel
  */
 public class ProjectProperties {
 
@@ -219,26 +222,58 @@ public class ProjectProperties {
         this.supportDefaultTranslations = supportDefaultTranslations;
     }
 
+    public boolean isProjectValid() {
+        boolean returnValue;
+        try {
+            verifyProject();
+            returnValue = true;
+        } catch (ProjectException ex) {
+            returnValue = false;
+        }
+        return returnValue;
+    }
+    
     /**
-     * @return true if project OK, false if some directories are missing
+     * Verify project and print any problems.
      */
-    public boolean verifyProject() {
-        // now see if these directories are where they're suposed to be
-        File src = new File(getSourceRoot());
-        File loc = new File(getTargetRoot());
-        File gls = new File(getGlossaryRoot());
-        File tmx = new File(getTMRoot());
+    public void verifyProject() throws ProjectException {
+        //
+        // Now check whether these directories are where they're suposed to be.
+        //
+        String srcDir = getSourceRoot();
+        File src = new File(srcDir);
+        if (!src.exists()) {
+            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_SOURCE_FOLDER"), srcDir));
+        }
+        //
+        String tgtDir = getTargetRoot();
+        File tgt = new File(tgtDir);
+        if (!tgt.exists()) {
+            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_TARGET_FOLDER"), tgtDir));
+        }
+        //
+        String glsDir = getGlossaryRoot();
+        File gls = new File(glsDir);
+        if (!gls.exists()) {
+            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_GLOSSARY_FOLDER"), glsDir));
+        }
+        //
+        String tmxDir = getTMRoot();
+        File tmx = new File(tmxDir);
+        if (!tmx.exists()) {
+            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_TM_FOLDER"), tmxDir));
+        }
+        
+        // Dictionary folder is always created automatically when it does not exist, for ascending
+        // compatibility reasons.
+        // There is no exception handling when a failure occurs during folder creation.
+        //
         File dict = new File(getDictRoot());
         if (!dict.exists()) {
             if (getDictRoot().equals(projectRoot + OConsts.DEFAULT_DICT + File.separator)) {
                 dict.mkdirs();
             }
         }
-
-        if (src.exists() && loc.exists() && gls.exists() && tmx.exists())
-            return true;
-
-        return false;
     }
 
     /**

@@ -132,7 +132,7 @@ public class ProjectUICommands {
         }
 
         boolean needToSaveProperties = false;
-        while (!props.verifyProject()) {
+        while (!props.isProjectValid()) {
             needToSaveProperties = true;
             // something wrong with the project - display open dialog
             // to fix it

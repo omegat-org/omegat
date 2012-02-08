@@ -43,6 +43,7 @@ import javax.swing.UIManager;
 import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.data.ProjectException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
@@ -416,10 +417,7 @@ public class Main {
         ProjectProperties projectProperties = null;
         try {
             projectProperties = ProjectFileStorage.loadProjectProperties(projectLocation);
-            if (!projectProperties.verifyProject()) {
-                System.out.println(OStrings.getString("CONSOLE_PROJECT_NOT_VERIFIED"));
-                System.exit(1);
-            }
+            projectProperties.verifyProject();
         } catch (Exception ex) {
             Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
             System.out.println(OStrings.getString("PP_ERROR_UNABLE_TO_READ_PROJECT_FILE"));

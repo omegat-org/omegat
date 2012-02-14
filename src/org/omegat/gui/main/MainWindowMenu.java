@@ -10,7 +10,7 @@
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
                2011 Didier Briel
-               2012 Wildrich Fourie
+               2012 Wildrich Fourie, Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -197,6 +197,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         gotoMenu.add(gotoNextSegmentMenuItem = createMenuItem("TF_MENU_EDIT_NEXT"));
         gotoMenu.add(gotoPreviousSegmentMenuItem = createMenuItem("TF_MENU_EDIT_PREV"));
         gotoMenu.add(gotoSegmentMenuItem = createMenuItem("TF_MENU_EDIT_GOTO"));
+        gotoMenu.add(gotoNextNoteMenuItem = createMenuItem("TF_MENU_EDIT_NEXT_NOTE"));
+        gotoMenu.add(gotoPreviousNoteMenuItem = createMenuItem("TF_MENU_EDIT_PREV_NOTE"));
         gotoMenu.add(new JSeparator());
         gotoMenu.add(gotoHistoryForwardMenuItem = createMenuItem("TF_MENU_GOTO_FORWARD_IN_HISTORY"));
         gotoMenu.add(gotoHistoryBackMenuItem = createMenuItem("TF_MENU_GOTO_BACK_IN_HISTORY"));
@@ -432,7 +434,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                 editMultipleDefault, editMultipleAlternate,
 
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
-                gotoSegmentMenuItem,
+                gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem,
 
                 viewFileListMenuItem, toolsValidateTagsMenuItem, toolsRemoveTagsCheckBoxMenuItem, toolsShowStatisticsStandardMenuItem,
                 toolsShowStatisticsMatchesMenuItem };
@@ -488,6 +490,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem gotoNextUntranslatedMenuItem;
     JMenuItem gotoPreviousSegmentMenuItem;
     JMenuItem gotoSegmentMenuItem;
+    JMenuItem gotoNextNoteMenuItem;
+    JMenuItem gotoPreviousNoteMenuItem;
     JMenuItem helpAboutMenuItem;
     JMenuItem helpContentsMenuItem;
     JMenu helpMenu;

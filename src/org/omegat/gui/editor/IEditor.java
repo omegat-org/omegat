@@ -5,6 +5,7 @@
 
  Copyright (C) 2008-2010 Alex Buloichik
                2011 Alex Buloichik, Didier Briel
+               2012 Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -37,6 +38,7 @@ import org.omegat.gui.editor.mark.Mark;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Guido Leenders
  */
 public interface IEditor {
     enum CHANGE_CASE_TO {
@@ -106,6 +108,20 @@ public interface IEditor {
      * Must be called only from UI thread.
      */
     void prevEntry();
+
+    /**
+     * Move to next entry with a note.
+     * 
+     * Must be called only from UI thread.
+     */
+    void nextEntryWithNote();
+
+    /**
+     * Move to previous entry with a note.
+     * 
+     * Must be called only from UI thread.
+     */
+    void prevEntryWithNote();
 
     /**
      * Move to next untranslated entry.

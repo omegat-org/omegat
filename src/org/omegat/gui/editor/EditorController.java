@@ -9,6 +9,7 @@
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel
                2011 Alex Buloichik, Martin Fleurke, Didier Briel
+               2012 Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -96,6 +97,7 @@ import com.vlsolutions.swing.docking.event.DockableSelectionListener;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Guido Leenders
  */
 public class EditorController implements IEditor {
 
@@ -930,6 +932,111 @@ public class EditorController implements IEditor {
                     // stop - alternative translation exist
                     break;
                 }
+            }
+        } while (true);
+
+        activateEntry();
+
+        this.editor.setCursor(oldCursor);
+    }
+
+    /**
+     * Finds the next entry with a non-empty note.
+     */
+    public void nextEntryWithNote() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        // Check if a document is loaded.
+        if (Core.getProject().isProjectLoaded() == false)
+            return;
+
+        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = this.editor.getCursor();
+        this.editor.setCursor(hourglassCursor);
+
+        // Save the current entry.
+        doChangeSegmentActions();
+
+        List<FileInfo> files = Core.getProject().getProjectFiles();
+        SourceTextEntry ste;
+        int startFileIndex = displayedFileIndex;
+        int startEntryIndex = displayedEntryIndex;
+        do {
+            // Navigate to next entry in the order: segment -> project file -> project.
+            displayedEntryIndex++;
+            if (displayedEntryIndex >= m_docSegList.length) {
+                // File finished - need new.
+                displayedFileIndex++;
+                displayedEntryIndex = 0;
+                if (displayedFileIndex >= files.size()) {
+                    displayedFileIndex = 0;
+                }
+                // To get proper EntryIndex when filter active.
+                loadDocument(); 
+            }
+            ste = getCurrentEntry();
+
+            if (ste == null) {
+                // Filtered file has no entries.
+                break;
+            }
+            if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
+                // Found no segment with a note. Cursor remains at starting position.
+                break; 
+            }
+            if (Core.getProject().getTranslationInfo(ste).hasNote()) {
+                // Non-translated.
+                break;
+            }
+        } while (true);
+
+        activateEntry();
+
+        this.editor.setCursor(oldCursor);
+    }
+
+    /**
+     * Finds the previous entry with a non-empty note.
+     */
+    public void prevEntryWithNote() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        // Check if a document is loaded.
+        if (!Core.getProject().isProjectLoaded())
+            return;
+
+        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = this.editor.getCursor();
+        this.editor.setCursor(hourglassCursor);
+
+        // Save the current entry.
+        doChangeSegmentActions();
+
+        SourceTextEntry ste;
+        int startFileIndex = displayedFileIndex;
+        int startEntryIndex = displayedEntryIndex;
+        do {
+            displayedEntryIndex--;
+            if (displayedEntryIndex < 0) {
+                displayedFileIndex--;
+                if (displayedFileIndex < 0) {
+                    displayedFileIndex = 0;
+                }
+                loadDocument();
+                displayedEntryIndex = m_docSegList.length - 1;
+            }
+            ste = getCurrentEntry();
+            if (ste == null) {
+                // Filtered file has no entries.
+                break;
+            }
+            if (displayedFileIndex == startFileIndex && displayedEntryIndex == startEntryIndex) {
+                // Found no segment with a note. Cursor remains at starting position.
+                break; 
+            }
+            if (Core.getProject().getTranslationInfo(ste).hasNote()) {
+                // Non-translated.
+                break;
             }
         } while (true);
 

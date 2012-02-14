@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2012 Guido Leenders
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,6 +29,7 @@ package org.omegat.core.data;
  * Storage for TMX entry.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Guido Leenders
  */
 public class TMXEntry {
     public final String source;
@@ -49,5 +51,9 @@ public class TMXEntry {
 
     public boolean isTranslated() {
         return translation != null;
+    }
+    
+    public boolean hasNote() {
+        return note != null;
     }
 }

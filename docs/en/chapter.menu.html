@@ -3,8 +3,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
       <title>Chapter&nbsp;5.&nbsp;Menu and Keyboard shortcuts</title>
-      <link rel="stylesheet" href="OmegaT.css" type="text/css">
-      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
       <link rel="prev" href="chapter.user.interface.html" title="Chapter&nbsp;4.&nbsp;The user interface">
@@ -37,22 +37,27 @@
          <div class="toc">
             <dl>
                <dt><span class="section"><a href="chapter.menu.html#ch04.main.menu">1. Main Menu</a></span></dt>
-               <dt><span class="section"><a href="chapter.menu.html#submenu.Project">2. Project</a></span></dt>
-               <dt><span class="section"><a href="chapter.menu.html#d0e3163">3. Edit</a></span></dt>
-               <dt><span class="section"><a href="chapter.menu.html#submenu.GoTo">4. Go to</a></span></dt>
-               <dt><span class="section"><a href="chapter.menu.html#submenu.View">5. View</a></span></dt>
-               <dt><span class="section"><a href="chapter.menu.html#submenu.Tools">6. Tools</a></span></dt>
-               <dt><span class="section"><a href="chapter.menu.html#submenu.Options">7. Options</a></span></dt>
-               <dt><span class="section"><a href="chapter.menu.html#submenu.Help">8. Help</a></span></dt>
-               <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">9. Keyboard shortcuts</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e3842">9.1. Project management</a></span></dt>
-                     <dt><span class="section"><a href="chapter.menu.html#keyboard.editing">9.2. Editing</a></span></dt>
-                     <dt><span class="section"><a href="chapter.menu.html#keyboard.moving.around">9.3. Moving around</a></span></dt>
-                     <dt><span class="section"><a href="chapter.menu.html#keyboard.other">9.4. Other</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#submenu.Project">1.1. Project</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#submenu.Edit">1.2. Edit</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#submenu.GoTo">1.3. Go to</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#submenu.View">1.4. View</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#submenu.Tools">1.5. Tools</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#submenu.Options">1.6. Options</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#submenu.Help">1.7. Help</a></span></dt>
                   </dl>
                </dd>
+               <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">2. Keyboard shortcuts</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e3959">2.1. Project management</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#keyboard.editing">2.2. Editing</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#keyboard.moving.around">2.3. Moving around</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#keyboard.other">2.4. Other</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.menu.html#ch04.shortcuts.customization">3. Shortcuts customization</a></span></dt>
             </dl>
          </div>
          <div class="section" title="1.&nbsp;Main Menu">
@@ -70,616 +75,679 @@
                    letters are written in uppercase here. <span class="keycap"><strong>Ctrl</strong></span> is used on
                    Windows, UNIX and UNIX-like operating systems with keyboards featuring a
                    <span class="keycap"><strong>Ctrl</strong></span> or <span class="keycap"><strong>Control</strong></span> key. Mac users should
-                   instead use <span class="keycap"><strong>cmd</strong></span>+<span class="keycap"><strong>key</strong></span> instead. The "Cmd" key either has a "command" label or an
+                   instead use <span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>key</strong></span> instead. The "Cmd" key either has a "command" label or an
                    apple symbol on Apple keyboards.
+            </p>
+            <p>New menu items can appear depending on the plugins that you
+                   use.
             </p>
             <div class="table"><a name="table.main.menu"></a><p class="title"><b>Table&nbsp;5.1.&nbsp;Main Menu</b></p>
                <div class="table-contents">
                   <table summary="Main Menu" border="1">
                      <colgroup>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
+                        <col width="130" align="left">
+                        <col width="130" align="left">
+                        <col width="130" align="left">
+                        <col width="130" align="left">
+                        <col width="130" align="left">
+                        <col width="130" align="left">
+                        <col width="130" align="left">
                      </colgroup>
                      <tbody>
                         <tr>
-                           <td><span class="guimenuitem">Project</span></td>
-                           <td><span class="guimenuitem">Edit</span></td>
-                           <td><span class="guimenuitem">Go to</span></td>
-                           <td><span class="guimenuitem">View</span></td>
-                           <td><span class="guimenuitem">Tools</span></td>
-                           <td><span class="guimenuitem">Options</span></td>
-                           <td><span class="guimenuitem">Help</span></td>
+                           <td align="left"><a class="link" href="chapter.menu.html#project.menu.table" title="Table&nbsp;5.2.&nbsp;Project menu"><span class="guimenuitem">Project</span></a></td>
+                           <td align="left"><a class="link" href="chapter.menu.html#edit.menu.table" title="Table&nbsp;5.4.&nbsp;Edit menu"><span class="guimenuitem">Edit</span></a></td>
+                           <td align="left"><a class="link" href="chapter.menu.html#goto.menu.table" title="Table&nbsp;5.5.&nbsp;Go To menu"><span class="guimenuitem">Go
+                                                to</span></a></td>
+                           <td align="left"><a class="link" href="chapter.menu.html#view.menu.table" title="Table&nbsp;5.6.&nbsp;View menu"><span class="guimenuitem">View</span></a></td>
+                           <td align="left"><a class="link" href="chapter.menu.html#tools.menu.table" title="Table&nbsp;5.7.&nbsp;Tools menu"><span class="guimenuitem">Tools</span></a></td>
+                           <td align="left"><a class="link" href="chapter.menu.html#options.menu.table" title="Table&nbsp;5.8.&nbsp;Options menu"><span class="guimenuitem">Options</span></a></td>
+                           <td align="left"><a class="link" href="chapter.menu.html#help.menu.table" title="Table&nbsp;5.9.&nbsp;Help menu"><span class="guimenuitem">Help</span></a></td>
                         </tr>
                      </tbody>
                   </table>
                </div>
-            </div><br class="table-break"></div>
-         <div class="section" title="2.&nbsp;Project">
-            <div class="titlepage">
-               <div>
+            </div><br class="table-break"><div class="section" title="1.1.&nbsp;Project">
+               <div class="titlepage">
                   <div>
-                     <h2 class="title" style="clear: both"><a name="submenu.Project"></a>2.&nbsp;Project<a class="indexterm" name="d0e3019"></a></h2>
+                     <div>
+                        <h3 class="title"><a name="submenu.Project"></a>1.1.&nbsp;Project<a class="indexterm" name="d0e3035"></a></h3>
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="table"><a name="d0e3024"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Project menu</b></p>
-               <div class="table-contents">
-                  <table summary="Project menu" border="1">
-                     <colgroup>
-                        <col width="100" align="left">
-                        <col width="100" align="left">
-                        <col>
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">New</span></td>
-                           <td align="left">&nbsp;</td>
-                           <td>Creates and opens a new project. The dialog to create a
-                                          project is the same as to edit the project. See <a class="xref" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Project properties">Chapter&nbsp;6, <i>Project properties</i></a></td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Open</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span></td>
-                           <td>Opens a previously created project.</td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Import Source Files...</span></td>
-                           <td align="left">&nbsp;</td>
-                           <td>Copies the selected files to the
-                                          <code class="filename">source</code> folder and reloads the project to load
-                                          the new files.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Import From MediaWiki...</span></td>
-                           <td align="left">&nbsp;</td>
-                           <td>Imports units from MediaWiki pages, based on the URL
-                                          entered.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Reload</span></td>
-                           <td align="left"><span class="keycap"><strong>F5</strong></span></td>
-                           <td>Reloads the project to take external changes in source
-                                          files, legacy translation memories, glossaries and project
-                                          settings into account.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Close</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>W</strong></span></td>
-                           <td>Saves the translation and closes the project.</td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Save</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>S</strong></span></td>
-                           <td>Saves the internal translation memory to the hard disk.
-                                          OmegaT automatically saves translations every 10 minutes as well
-                                          as when you close the project or quit OmegaT.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Create translated
-                                             documents</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></td>
-                           <td>Creates the target documents based on your translation of
-                                          the documents' text. The created target documents are located in
-                                          the <code class="filename">target</code> folder.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Properties...</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></td>
-                           <td>Displays <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Project properties">Project
-                                             properties</a> dialog to edit project languages and folder
-                                          locations.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Project Files...</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>L</strong></span></td>
-                           <td>Closes or opens the <a class="link" href="chapter.user.interface.html#section.project.files" title="3.1.&nbsp;Project files">Project files window</a>
-                                          (depending on whether it is open or closed).
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Quit</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Q</strong></span></td>
-                           <td>Saves the project and quits
-                                          <span class="application">OmegaT</span>. If you haven't yet saved the
-                                          project, this manually confirms whether you really wish to
-                                          quit.
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div><br class="table-break"></div>
-         <div class="section" title="3.&nbsp;Edit">
-            <div class="titlepage">
-               <div>
+               <div class="table"><a name="project.menu.table"></a><p class="title"><b>Table&nbsp;5.2.&nbsp;Project menu</b></p>
+                  <div class="table-contents">
+                     <table summary="Project menu" border="1">
+                        <colgroup>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">New</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Creates and opens a new project. The dialog to create a
+                                               project is the same as to edit the project. See <a class="xref" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Project properties">Chapter&nbsp;6, <i>Project properties</i></a></td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Open</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span></td>
+                              <td align="left">Opens a previously created project.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Import Source Files...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Copies the selected files to the
+                                               <code class="filename">source</code> folder and reloads the project to
+                                               load the new files.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Import From
+                                                  MediaWiki...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Imports units from MediaWiki pages, based on the URL
+                                               entered.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Reload</span></td>
+                              <td align="left"><span class="keycap"><strong>F5</strong></span></td>
+                              <td align="left">Reloads the project to take external changes in source
+                                               files, legacy translation memories, glossaries and project
+                                               settings into account.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Close</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>W</strong></span></td>
+                              <td align="left">Saves the translation and closes the project.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Save</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>S</strong></span></td>
+                              <td align="left">Saves the internal translation memory to the hard disk.
+                                               OmegaT automatically saves translations every 10 minutes as well
+                                               as when you close the project or quit OmegaT.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Create translated
+                                                  documents</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></td>
+                              <td align="left">Creates the target documents based on your translation of
+                                               the documents' text. The created target documents are located in
+                                               the <code class="filename">target</code> folder.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Properties...</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></td>
+                              <td align="left">Displays <a class="link" href="chapter.project.properties.html" title="Chapter&nbsp;6.&nbsp;Project properties">Project properties</a>
+                                               dialog to edit project languages and folder locations.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Project Files...</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>L</strong></span></td>
+                              <td align="left">Closes or opens the <a class="link" href="chapter.user.interface.html#section.project.files" title="3.1.&nbsp;Project files">Project files window</a>
+                                               (depending on whether it is open or closed).
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Quit</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Q</strong></span></td>
+                              <td align="left">Saves the project and quits
+                                               <span class="application">OmegaT</span>. If you haven't yet saved the
+                                               project, this manually confirms whether you really wish to
+                                               quit.
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div><br class="table-break"></div>
+            <div class="section" title="1.2.&nbsp;Edit">
+               <div class="titlepage">
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e3163"></a>3.&nbsp;Edit<a class="indexterm" name="d0e3166"></a></h2>
+                     <div>
+                        <h3 class="title"><a name="submenu.Edit"></a>1.2.&nbsp;Edit<a class="indexterm" name="d0e3183"></a></h3>
+                     </div>
                   </div>
                </div>
-            </div>
-            <p>Note: Items that are found in most applications (copy/cut/paste) are
-                   not displayed in this menu, but are available using your system shortcuts.
-                   For example:
-            </p>
-            <div class="table"><a name="d0e3173"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Copy/cut/paste shortcuts</b></p>
-               <div class="table-contents">
-                  <table summary="Copy/cut/paste shortcuts" border="1">
-                     <colgroup>
-                        <col width="100" align="left">
-                        <col width="100" align="left">
-                        <col>
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Copy</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span></td>
-                           <td>Copies the selected text to the clipboard.</td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Cut</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>X</strong></span></td>
-                           <td>Copies the selected text to the clipboard and deletes the
-                                          selected text.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Paste</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>V</strong></span></td>
-                           <td>Pastes the text from the clipboard at the cursor
-                                          position.
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div><br class="table-break"><p>The Edit menu itself contains the following items:</p>
-            <div class="table"><a name="d0e3218"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Edit menu</b></p>
-               <div class="table-contents">
-                  <table summary="Edit menu" border="1">
-                     <colgroup>
-                        <col width="100" align="left">
-                        <col width="100" align="left">
-                        <col>
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Undo Last Action</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Z</strong></span></td>
-                           <td>Restores the status before the last editing action was
-                                          taken. This command does not work once the modified segment has
-                                          been validated.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Redo Last Action</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Y</strong></span></td>
-                           <td>Restores the status before the last editing action was
-                                          cancelled. This command does not work once the modified segment
-                                          has been validated.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Replace With Match</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
-                           <td>Replaces the whole target segment with the currently
-                                          selected fuzzy match (by default the first match is
-                                          selected).
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Insert Match</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
-                           <td>Inserts the currently selected fuzzy match at the cursor
-                                          position. If part of the target segment has been selected, this
-                                          function overwrites the selected portion.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Replace with Machine
-                                             Translation</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span></td>
-                           <td>Replaces the target segment with the translation, provided
-                                          by the selected Machine Translation service. No action is taken,
-                                          if no Machine Translation service has been activated (see Menu
-                                          &gt; Options below).
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Replace With Source</span></td>
-                           <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
-                           <td>Replaces the whole target segment with the source.</td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Insert Source</span></td>
-                           <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
-                           <td>Inserts the source at the cursor position.</td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Insert Source Tags</span></td>
-                           <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
-                           <td><a class="indexterm" name="d0e3326"></a>Inserts the source tags at the cursor position. All
-                                          tags in the source will be inserted into the current segment,
-                                          regardless of whether they are already there or not. Texts,
-                                          bracketed by tags, are replaced by spaces:.
-                                          <code class="literal">&lt;f0&gt;&lt;f1&gt;This is
-                                             text&lt;/f0&gt;&lt;/f1&gt;</code> thus will be copied as
-                                          <code class="literal">&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</code></td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Export Selection</span></td>
-                           <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span></td>
-                           <td>Exports the current selection to a text file for
-                                          processing. If no text has been selected, the current source
-                                          segment is written to this file. When the user exits
-                                          <span class="application">OmegaT</span>, this file is not emptied, in
-                                          order to be consistent with usual clipboard behavior. The exported
-                                          contents are copied to the file <code class="filename">selection.txt</code>
-                                          located in the User's preference files folder (see <a class="xref" href="chapter.files.and.directories.html" title="Chapter&nbsp;8.&nbsp;OmegaT Files and Directories">Chapter&nbsp;8, <i><span class="application">OmegaT</span> Files and Directories</i></a>).
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Search Project...</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span></td>
-                           <td>Opens a new <a class="link" href="chapter.user.interface.html#section.search.window" title="3.2.&nbsp;Search window">Search
-                                             window</a>.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Switch case to...</span></td>
-                           <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>F3</strong></span> (see text)
-                           </td>
-                           <td>Changes the case of the highlighted text in the target
-                                          segment to the selected option (Lower case, Upper case or Title
-                                          case). Use Shift+F3 <a class="indexterm" name="d0e3387"></a>to cycle through the three alternatives. If no text
-                                          is selected, <span class="application">OmegaT</span> selects the word
-                                          that contains the letter immediately to the right of the
-                                          cursor.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Select Fuzzy Match #N</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>#N</strong></span></td>
-                           <td>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
-                                          displayed in the match viewer to replace or insert it to the
-                                          segment. The <a class="xref" href="chapter.user.interface.html#match.viewer" title="2.2.&nbsp;Match viewer">Section&nbsp;2.2, “Match viewer”</a> describes the color
-                                          coding in detail.
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div><br class="table-break"></div>
-         <div class="section" title="4.&nbsp;Go to">
-            <div class="titlepage">
-               <div>
+               <p>Note: Items that are found in most applications (copy/cut/paste)
+                        are not displayed in this menu, but are available using your system
+                        shortcuts. For example:
+               </p>
+               <div class="table"><a name="d0e3190"></a><p class="title"><b>Table&nbsp;5.3.&nbsp;Copy/cut/paste shortcuts</b></p>
+                  <div class="table-contents">
+                     <table summary="Copy/cut/paste shortcuts" border="1">
+                        <colgroup>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Copy</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span></td>
+                              <td align="left">Copies the selected text to the clipboard.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Cut</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>X</strong></span></td>
+                              <td align="left">Copies the selected text to the clipboard and deletes the
+                                               selected text.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Paste</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>V</strong></span></td>
+                              <td align="left">Pastes the text from the clipboard at the cursor
+                                               position.
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div><br class="table-break"><p>The Edit menu itself contains the following items:</p>
+               <div class="table"><a name="edit.menu.table"></a><p class="title"><b>Table&nbsp;5.4.&nbsp;Edit menu</b></p>
+                  <div class="table-contents">
+                     <table summary="Edit menu" border="1">
+                        <colgroup>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Undo Last Action</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Z</strong></span></td>
+                              <td align="left">Restores the status before the last editing action was
+                                               taken. This command does not work once the modified segment has
+                                               been validated.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Redo Last Action</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Y</strong></span></td>
+                              <td align="left">Restores the status before the last editing action was
+                                               cancelled. This command does not work once the modified segment
+                                               has been validated.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Replace With Match</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
+                              <td align="left">Replaces the whole target segment with the currently
+                                               selected fuzzy match (by default the first match is
+                                               selected).
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Insert Match</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
+                              <td align="left">Inserts the currently selected fuzzy match at the cursor
+                                               position. If part of the target segment has been selected, this
+                                               function overwrites the selected portion.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Replace with Machine
+                                                  Translation</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span></td>
+                              <td align="left">Replaces the target segment with the translation,
+                                               provided by the selected Machine Translation service. No action
+                                               is taken, if no Machine Translation service has been activated
+                                               (see <span class="guimenu">Options</span> below).
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Replace With Source</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
+                              <td align="left">Replaces the whole target segment with the
+                                               source.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Insert Source</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
+                              <td align="left">Inserts the source at the cursor position.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Insert Source Tags</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
+                              <td align="left"><a class="indexterm" name="d0e3349"></a>Inserts the source tags at the cursor position.
+                                               All tags in the source will be inserted into the current
+                                               segment, regardless of whether they are already there or not.
+                                               Texts, bracketed by tags, are replaced by spaces:.
+                                               <code class="literal">&lt;f0&gt;&lt;f1&gt;This is
+                                                  text&lt;/f0&gt;&lt;/f1&gt;</code> thus will be copied as
+                                               <code class="literal">&lt;f0&gt;&lt;f1&gt;&nbsp;&lt;/f0&gt;&lt;/f1&gt;</code></td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Export Selection</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span></td>
+                              <td align="left">Exports the current selection to a text file for
+                                               processing. If no text has been selected, the current source
+                                               segment is written to this file. When the user exits
+                                               <span class="application">OmegaT</span>, this file is not emptied, in
+                                               order to be consistent with usual clipboard behavior. The
+                                               exported contents are copied to the file
+                                               <code class="filename">selection.txt</code> located in the User's
+                                               preference files folder (see <a class="xref" href="chapter.files.and.directories.html" title="Chapter&nbsp;8.&nbsp;OmegaT Files and Directories">Chapter&nbsp;8, <i><span class="application">OmegaT</span> Files and Directories</i></a>).
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Create Glossary Entry</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>G</strong></span></td>
+                              <td align="left">Opens a new <a class="link" href="chapter.glossaries.html" title="Chapter&nbsp;19.&nbsp;Glossaries">Glossary
+                                                  entry window</a>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Search Project...</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span></td>
+                              <td align="left">Opens a new <a class="link" href="chapter.user.interface.html#section.search.window" title="3.2.&nbsp;Search window">Search
+                                                  window</a>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenu">Switch case to</span> → <span class="guimenuitem">Lower Case / Upper Case / Title
+                                                      Case</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>F3</strong></span></td>
+                              <td align="left">Changes the case of the highlighted text in the target
+                                               segment to the selected option (Lower case, Upper case or Title
+                                               case). Use Shift+F3 <a class="indexterm" name="d0e3429"></a>to cycle through the three alternatives. If no
+                                               text is selected, <span class="application">OmegaT</span> selects the
+                                               word that contains the letter immediately to the right of the
+                                               cursor.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Select Fuzzy Match #N</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>#N</strong></span></td>
+                              <td align="left">(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
+                                               displayed in the match viewer to replace or insert it to the
+                                               segment. The <a class="xref" href="chapter.user.interface.html#match.viewer" title="2.2.&nbsp;Match viewer">Section&nbsp;2.2, “Match viewer”</a> describes the color
+                                               coding in detail.
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div><br class="table-break"></div>
+            <div class="section" title="1.3.&nbsp;Go to">
+               <div class="titlepage">
                   <div>
-                     <h2 class="title" style="clear: both"><a name="submenu.GoTo"></a>4.&nbsp;Go to<a class="indexterm" name="d0e3413"></a></h2>
+                     <div>
+                        <h3 class="title"><a name="submenu.GoTo"></a>1.3.&nbsp;Go to<a class="indexterm" name="d0e3455"></a></h3>
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="table"><a name="d0e3418"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Go To menu</b></p>
-               <div class="table-contents">
-                  <table summary="Go To menu" border="1">
-                     <colgroup>
-                        <col width="100" align="left">
-                        <col width="100" align="left">
-                        <col>
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Next Untranslated
-                                             Segment</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>U</strong></span></td>
-                           <td>Moves to the next segment that has no equivalent in the
-                                          translation memory.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Next Segment</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span> or <span class="keycap"><strong>Enter</strong></span> or
-                                          <span class="keycap"><strong>Tab</strong></span></td>
-                           <td>Moves to the next segment. If the current segment is the
-                                          last segment in a file, it moves to the first segment of the next
-                                          file.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Previous Segment</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Enter</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Tab</strong></span></td>
-                           <td>Moves to the previous segment. If the current segment is
-                                          the first one in a file, it moves to the last segment of the
-                                          previous file.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Segment number...</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>J</strong></span></td>
-                           <td>The segment is opened when its segment number is
-                                          entered..
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Back in history...</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>P</strong></span></td>
-                           <td>With this command you can move backward one segment at a
-                                          time, to return later to the current segment using
-                                          <span class="guimenuitem">Forward in history... </span>command
-                                          below.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Forward in history...</span></td>
-                           <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>N</strong></span></td>
-                           <td><span class="application">OmegaT</span> remembers the segments
-                                          executed. With this command you can step forward to the segment,
-                                          you have previously left by the <span class="guimenuitem">Back in
-                                             history</span>...command.
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div><br class="table-break"></div>
-         <div class="section" title="5.&nbsp;View">
-            <div class="titlepage">
-               <div>
+               <div class="table"><a name="goto.menu.table"></a><p class="title"><b>Table&nbsp;5.5.&nbsp;Go To menu</b></p>
+                  <div class="table-contents">
+                     <table summary="Go To menu" border="1">
+                        <colgroup>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Next Untranslated
+                                                  Segment</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>U</strong></span></td>
+                              <td align="left">Moves to the next segment that has no equivalent in the
+                                               translation memory.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Next Segment</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span> or <span class="keycap"><strong>Enter</strong></span> (or
+                                               <span class="keycap"><strong>Tab</strong></span>)
+                              </td>
+                              <td align="left">Moves to the next segment. If the current segment is the
+                                               last segment in a file, it moves to the first segment of the
+                                               next file. <span class="keycap"><strong>Tab</strong></span> can be set to move to the next
+                                               segment by using <span class="guimenu">Options</span> → <span class="guimenuitem">Use Tab to Advance</span>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Previous Segment</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Enter</strong></span> (or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Tab</strong></span>)
+                              </td>
+                              <td align="left">Moves to the previous segment. If the current segment is
+                                               the first one in a file, it moves to the last segment of the
+                                               previous file. <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Tab</strong></span> can be set to move to the previous segment by
+                                               using <span class="guimenu">Options</span> → <span class="guimenuitem">Use Tab to Advance</span>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Segment number...</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>J</strong></span></td>
+                              <td align="left">Jumps to the entered segment number.</td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Forward in history</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span></td>
+                              <td align="left"><span class="application">OmegaT</span> remembers the visited
+                                               segments. With this command you can step forward in the project
+                                               history.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Back in history</span></td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span></td>
+                              <td align="left"><span class="application">OmegaT</span> remembers the visited
+                                               segments. With this command you can step back in the project
+                                               history.
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div><br class="table-break"></div>
+            <div class="section" title="1.4.&nbsp;View">
+               <div class="titlepage">
                   <div>
-                     <h2 class="title" style="clear: both"><a name="submenu.View"></a>5.&nbsp;View<a class="indexterm" name="d0e3530"></a></h2>
+                     <div>
+                        <h3 class="title"><a name="submenu.View"></a>1.4.&nbsp;View<a class="indexterm" name="d0e3592"></a></h3>
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="table"><a name="d0e3535"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;View menu</b></p>
-               <div class="table-contents">
-                  <table summary="View menu" border="1">
-                     <colgroup>
-                        <col width="100" align="left">
-                        <col>
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Mark Translated Segments</span></td>
-                           <td>If checked, the translated segments will be marked in
-                                          yellow.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Mark Untranslated
-                                             Segments</span></td>
-                           <td>If checked, the untranslated segments will be marked in
-                                          violet.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Display Source Segments</span></td>
-                           <td>If checked, source segments will be shown and marked in
-                                          green. If not checked, source segments will not be shown.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Display Modification</span></td>
-                           <td>Setting the Display Modification option to
-                                          <span class="emphasis"><em>Selected</em></span> will display the time and the author
-                                          of the last change for the current segment. Setting it
-                                          to<span class="emphasis"><em> All </em></span>shows this information for all
-                                          segments and <span class="emphasis"><em>None</em></span> turns this option
-                                          off.
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div><br class="table-break"></div>
-         <div class="section" title="6.&nbsp;Tools">
-            <div class="titlepage">
-               <div>
+               <div class="table"><a name="view.menu.table"></a><p class="title"><b>Table&nbsp;5.6.&nbsp;View menu</b></p>
+                  <div class="table-contents">
+                     <table summary="View menu" border="1">
+                        <colgroup>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Mark Translated
+                                                  Segments</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">If checked, translated segments will display the
+                                               translated text marked with a yellow background.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Mark Untranslated
+                                                  Segments</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">If checked, untranslated segments will display the source
+                                               text marked with a violet background.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Display Source
+                                                  Segments</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">If checked, all segments will display the source text
+                                               marked with a green background. If untranslated segments are
+                                               also marked, only translated segments will display the source
+                                               that way.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Mark Non-Unique
+                                                  Segments</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">If checked, non-unique segments will be marked in a light
+                                               gray font.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenu">Modification Info</span> → <span class="guimenuitem">Display None / Display All / Display
+                                                      Selected</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Setting the Modification Info option to <span class="emphasis"><em>Display
+                                                     Selected</em></span> will display the time and the author of the
+                                               last change for the current segment. Setting it to<span class="emphasis"><em>
+                                                     Display All </em></span>shows this information for all segments
+                                               and <span class="emphasis"><em>None</em></span> turns this option off.
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div><br class="table-break"></div>
+            <div class="section" title="1.5.&nbsp;Tools">
+               <div class="titlepage">
                   <div>
-                     <h2 class="title" style="clear: both"><a name="submenu.Tools"></a>6.&nbsp;Tools<a class="indexterm" name="d0e3577"></a></h2>
+                     <div>
+                        <h3 class="title"><a name="submenu.Tools"></a>1.5.&nbsp;Tools<a class="indexterm" name="d0e3656"></a></h3>
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="table"><a name="d0e3582"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Tools menu</b></p>
-               <div class="table-contents"><a class="indexterm" name="d0e3585"></a><a class="indexterm" name="d0e3590"></a><a class="indexterm" name="d0e3595"></a><table summary="Tools menu" border="1">
-                     <colgroup>
-                        <col width="100" align="left">
-                        <col>
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Validate Tags</span></td>
-                           <td><span class="guimenu">Ctrl+T</span>: Checks for missing or displaced
-                                          tags in formatted files. Will display a list of segments with tag
-                                          errors and possible inconsistencies. See <a class="link" href="chapter.user.interface.html#section.tag.validation" title="3.3.&nbsp;Tag validation">Tag Validation</a> and <a class="xref" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Working with formatted text">Chapter&nbsp;12, <i>Working with formatted text</i></a>.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Statistics</span></td>
-                           <td>Opens a new window and displays the project statistics,
-                                          i.e. the project totals and totals for every file in the
-                                          project.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Match Statistics</span></td>
-                           <td>Displays the Match Statistics for the project: the number
-                                          of repetitions, exact matches, fuzzy matches and no-matches, for
-                                          segments, words and in characters.
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div><br class="table-break"></div>
-         <div class="section" title="7.&nbsp;Options">
-            <div class="titlepage">
-               <div>
+               <div class="table"><a name="tools.menu.table"></a><p class="title"><b>Table&nbsp;5.7.&nbsp;Tools menu</b></p>
+                  <div class="table-contents"><a class="indexterm" name="d0e3664"></a><a class="indexterm" name="d0e3669"></a><a class="indexterm" name="d0e3674"></a><table summary="Tools menu" border="1">
+                        <colgroup>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Validate Tags</span></td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
+                              <td align="left">Checks for missing or displaced tags in formatted files.
+                                               Will display a list of segments with tag errors and possible
+                                               inconsistencies. See <a class="link" href="chapter.user.interface.html#section.tag.validation" title="3.3.&nbsp;Tag validation">Tag
+                                                  Validation</a> and <a class="xref" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Working with formatted text">Chapter&nbsp;12, <i>Working with formatted text</i></a>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Remove Tags</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">When enabled, all the formatting tags are removed from
+                                               the source segments.<a class="link" href="chapter.user.interface.html#section.tag.validation" title="3.3.&nbsp;Tag validation">Tag
+                                                  Validation</a> and <a class="xref" href="chapter.formatted.text.html" title="Chapter&nbsp;12.&nbsp;Working with formatted text">Chapter&nbsp;12, <i>Working with formatted text</i></a>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Statistics</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Opens a new window and displays the project statistics,
+                                               i.e. the project totals and totals for every file in the
+                                               project.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Match Statistics</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Displays the Match Statistics for the project: the number
+                                               of repetitions, exact matches, fuzzy matches and no-matches, for
+                                               segments, words and in characters.
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div><br class="table-break"></div>
+            <div class="section" title="1.6.&nbsp;Options">
+               <div class="titlepage">
                   <div>
-                     <h2 class="title" style="clear: both"><a name="submenu.Options"></a>7.&nbsp;<a class="indexterm" name="d0e3630"></a>Options
-                     </h2>
+                     <div>
+                        <h3 class="title"><a name="submenu.Options"></a>1.6.&nbsp;<a class="indexterm" name="d0e3729"></a>Options
+                        </h3>
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="table"><a name="d0e3636"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Options menu</b></p>
-               <div class="table-contents">
-                  <table summary="Options menu" border="1">
-                     <colgroup>
-                        <col width="100" align="left">
-                        <col>
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Use TAB To Advance</span></td>
-                           <td>Sets segment validation key to
-                                          <span class="guimenuitem">Tab</span> instead of the default
-                                          <span class="guimenuitem">Enter</span>. This option is useful for some
-                                          Chinese, Japanese or Korean character input systems.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Always Confirm Quit</span></td>
-                           <td>The program will see confirmation before closing
-                                          down.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Machine Translate</span></td>
-                           <td>Allows you to activate/deactivate the Machine Translation
-                                          tools offered. When active, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> will insert the suggestion into the target part of
-                                          the current segment.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">TransTips</span></td>
-                           <td>Allows you to activate/deactivate <span class="emphasis"><em>TransTips
-                                                </em></span>feature and set its option<span class="emphasis"><em> Exact
-                                                Match.</em></span> With <span class="emphasis"><em>TransTips</em></span> activated a
-                                          right click on a highlighted word in the source will open a popup
-                                          menu with the glossary entries for the word you clicked. You can
-                                          then click on the preferred translation to insert it into the
-                                          target segment at the current position. With
-                                          <span class="emphasis"><em>TransTips/Exact Match </em></span> checked, only complete
-                                          words will be checked, otherwise parts of words will be matched as
-                                          well.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Font...</span></td>
-                           <td>Shows the dialogue to modify the text display font. Users
-                                          of old computers who feel window resizing is very slow can try
-                                          changing the font. See <a class="xref" href="chapter.font.html" title="Chapter&nbsp;11.&nbsp;Font settings">Chapter&nbsp;11, <i>Font settings</i></a>.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">File Filters...</span></td>
-                           <td>Displays the <a class="link" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;File Filters">File
-                                             filters</a> dialogue to configure file handling and
-                                          parsing.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Segmentation...</span></td>
-                           <td>Opens the <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;15.&nbsp;Source segmentation">Source
-                                             segmentation</a> dialogue to configure text
-                                          segmentation.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Spell checking...</span></td>
-                           <td>Displays the <a class="link" href="chapter.spellchecker.html" title="Chapter&nbsp;21.&nbsp;Spell checker">Spell
-                                             checker setup</a> window to install, configure and activate the
-                                          spell checker.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Editing Behavior...</span></td>
-                           <td>Displays the <a class="link" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Editing behavior">Translation editing</a>
-                                          dialog to configure.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Tag Validation...</span></td>
-                           <td>For programmers: Allows you to configure the Tag Validator
-                                          options to also check programming (%...) variables.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Team...</span></td>
-                           <td>Enter your name here and it will be attached to all
-                                          segments translated by you.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">View...</span></td>
-                           <td>Contains the option to have all source segments in bold and
-                                          to mark the first non-unique segment.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Proxy login...</span></td>
-                           <td>Enter your user name and your password, if you use a proxy
-                                          to access your projects.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">Restore Main Window</span></td>
-                           <td>Restores the components of the main OmegaT window to their
-                                          default state. Use this feature when you have undocked, moved, or
-                                          hidden one or more components and you are unable to restore the
-                                          desired arrangement. It can also be used when panes do not appear
-                                          as expected following an OmegaT upgrade.
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div><br class="table-break"></div>
-         <div class="section" title="8.&nbsp;Help">
-            <div class="titlepage">
-               <div>
+               <div class="table"><a name="options.menu.table"></a><p class="title"><b>Table&nbsp;5.8.&nbsp;Options menu</b></p>
+                  <div class="table-contents">
+                     <table summary="Options menu" border="1">
+                        <colgroup>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Use TAB To Advance</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Sets segment validation key to
+                                               <span class="guimenuitem">Tab</span> instead of the default
+                                               <span class="guimenuitem">Enter</span>. This option is useful for some
+                                               Chinese, Japanese or Korean character input systems.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Always Confirm Quit</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">The program will see confirmation before closing
+                                               down.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Machine Translate</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Allows you to activate/deactivate the Machine Translation
+                                               tools offered. When active, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span> will insert the suggestion into the target part of
+                                               the current segment.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">TransTips</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Allows you to activate/deactivate <span class="emphasis"><em>TransTips
+                                                     </em></span>feature and set its option<span class="emphasis"><em> Exact
+                                                     Match.</em></span> With <span class="emphasis"><em>TransTips</em></span> activated
+                                               a right click on a highlighted word in the source will open a
+                                               popup menu with the glossary entries for the word you clicked.
+                                               You can then click on the preferred translation to insert it
+                                               into the target segment at the current position. With
+                                               <span class="emphasis"><em>TransTips/Exact Match </em></span> checked, only
+                                               complete words will be checked, otherwise parts of words will be
+                                               matched as well.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Font...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Shows the dialogue to modify the text display font. Users
+                                               of old computers who feel window resizing is very slow can try
+                                               changing the font. See <a class="xref" href="chapter.font.html" title="Chapter&nbsp;11.&nbsp;Font settings">Chapter&nbsp;11, <i>Font settings</i></a>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">File Filters...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Displays the <a class="link" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;File Filters">File
+                                                  filters</a> dialogue to configure file handling and
+                                               parsing.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Segmentation...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Opens the <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;15.&nbsp;Source segmentation">Source
+                                                  segmentation</a> dialogue to configure text
+                                               segmentation.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Spell checking...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Displays the <a class="link" href="chapter.spellchecker.html" title="Chapter&nbsp;21.&nbsp;Spell checker">Spell
+                                                  checker setup</a> window to install, configure and activate
+                                               the spell checker.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Editing Behavior...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Displays the <a class="link" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Editing behavior">Translation editing</a>
+                                               dialog to configure.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Tag Validation...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">For programmers: Allows you to configure the Tag
+                                               Validator options to also check programming (%...)
+                                               variables.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Team...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Enter your name here and it will be attached to all
+                                               segments translated by you.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">View...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Contains the option to have all source segments in bold
+                                               and to mark the first non-unique segment.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Proxy login...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Enter your user name and your password, if you use a
+                                               proxy to access your projects.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">Restore Main Window</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Restores the components of the main OmegaT window to
+                                               their default state. Use this feature when you have undocked,
+                                               moved, or hidden one or more components and you are unable to
+                                               restore the desired arrangement. It can also be used when panes
+                                               do not appear as expected following an OmegaT upgrade.
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div><br class="table-break"></div>
+            <div class="section" title="1.7.&nbsp;Help">
+               <div class="titlepage">
                   <div>
-                     <h2 class="title" style="clear: both"><a name="submenu.Help"></a>8.&nbsp;Help<a class="indexterm" name="d0e3767"></a></h2>
+                     <div>
+                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e3880"></a></h3>
+                     </div>
                   </div>
                </div>
-            </div>
-            <div class="table"><a name="d0e3772"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
-               <div class="table-contents">
-                  <table summary="Help menu" border="1">
-                     <colgroup>
-                        <col width="100" align="left">
-                        <col>
-                     </colgroup>
-                     <tbody>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">User Manual...</span></td>
-                           <td><span class="keycap"><strong>F1:</strong></span> Opens Help browser displaying this
-                                          manual in a separate window.
-                           </td>
-                        </tr>
-                        <tr>
-                           <td align="left"><span class="guimenuitem">About...</span></td>
-                           <td>Displays copyright, credits and license
-                                          information.
-                           </td>
-                        </tr>
-                     </tbody>
-                  </table>
-               </div>
-            </div><br class="table-break"></div>
-         <div class="section" title="9.&nbsp;Keyboard shortcuts">
+               <div class="table"><a name="help.menu.table"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
+                  <div class="table-contents">
+                     <table summary="Help menu" border="1">
+                        <colgroup>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
+                        </colgroup>
+                        <tbody>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">User Manual...</span></td>
+                              <td align="left"><span class="keycap"><strong>F1</strong></span></td>
+                              <td align="left">Opens Help browser displaying this manual in a separate
+                                               window.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left"><span class="guimenuitem">About...</span></td>
+                              <td align="left">&nbsp;</td>
+                              <td align="left">Displays copyright, credits and license
+                                               information.
+                              </td>
+                           </tr>
+                        </tbody>
+                     </table>
+                  </div>
+               </div><br class="table-break"></div>
+         </div>
+         <div class="section" title="2.&nbsp;Keyboard shortcuts">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>9.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e3795"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e3912"></a></h2>
                   </div>
                </div>
             </div>
@@ -695,8 +763,8 @@
             <p>Ctrl is used on Windows, UNIX and UNIX-like operating systems with
                    keyboards featuring a <span class="keycap"><strong>Ctrl</strong></span> / <span class="keycap"><strong>Control
                          key</strong></span>. Mac users should instead use the
-                   <span class="guimenuitem">cmd+key.</span> On Apple keyboards the
-                   <span class="guimenuitem">cmd</span> key either has a command label or an Apple
+                   <span class="guimenuitem">Cmd+key.</span> On Apple keyboards the
+                   <span class="guimenuitem">Cmd</span> key either has a command label or an Apple
                    icon on it.
             </p>
             <div class="itemizedlist">
@@ -734,34 +802,46 @@
                   </li>
                </ul>
             </div>
-            <div class="section" title="9.1.&nbsp;Project management">
+            <div class="section" title="2.1.&nbsp;Project management">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3842"></a>9.1.&nbsp;<a class="indexterm" name="d0e3844"></a>Project management<a class="indexterm" name="d0e3850"></a></h3>
+                        <h3 class="title"><a name="d0e3959"></a>2.1.&nbsp;<a class="indexterm" name="d0e3961"></a>Project management<a class="indexterm" name="d0e3967"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3855"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
+               <div class="table"><a name="d0e3972"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Project management shortcuts" border="1">
                         <colgroup>
-                           <col width="100" align="left">
-                           <col width="100" align="left">
-                           <col>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
                         </colgroup>
                         <tbody>
                            <tr>
                               <td align="left">Open project</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span></td>
-                              <td>Displays a dialogue to locate an existing
+                              <td align="left">Displays a dialogue to locate an existing
                                                project.
                               </td>
                            </tr>
                            <tr>
+                              <td align="left">Reload</td>
+                              <td align="left"><span class="keycap"><strong>F5</strong></span></td>
+                              <td align="left">Reload the current projet to take project settings
+                                               modifications into account.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left">Project files listing</td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>L</strong></span></td>
+                              <td align="left">Displays the Project files listing</td>
+                           </tr>
+                           <tr>
                               <td align="left">Save</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>S</strong></span></td>
-                              <td>Saves the current work to the internal translation memory
+                              <td align="left">Saves the current work to the internal translation memory
                                                (file project_save.tmx located in the project's
                                                <code class="filename">omegat</code> folder).
                               </td>
@@ -769,12 +849,12 @@
                            <tr>
                               <td align="left">Close Project</td>
                               <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>W</strong></span></td>
-                              <td>Closes the current project.</td>
+                              <td align="left">Closes the current project.</td>
                            </tr>
                            <tr>
                               <td align="left">Create Translated Documents</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></td>
-                              <td>Creates the translated documents in the project's Target
+                              <td align="left">Creates the translated documents in the project's Target
                                                folder and creates translation memory files (level1, level2 and
                                                omegat tmx files) in the project's root folder.
                               </td>
@@ -782,7 +862,7 @@
                            <tr>
                               <td align="left">Project properties</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></td>
-                              <td>Displays the project's settings for modification, if
+                              <td align="left">Displays the project's settings for modification, if
                                                required.
                               </td>
                            </tr>
@@ -790,41 +870,41 @@
                      </table>
                   </div>
                </div><br class="table-break"></div>
-            <div class="section" title="9.2.&nbsp;Editing">
+            <div class="section" title="2.2.&nbsp;Editing">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.editing"></a>9.2.&nbsp;<a class="indexterm" name="d0e3924"></a>Editing<a class="indexterm" name="d0e3930"></a></h3>
+                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e4061"></a>Editing<a class="indexterm" name="d0e4067"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3935"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
+               <div class="table"><a name="d0e4072"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Editing shortcuts" border="1">
                         <colgroup>
-                           <col width="100" align="left">
-                           <col width="100" align="left">
-                           <col>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
                         </colgroup>
                         <tbody>
                            <tr>
                               <td align="left">Undo last action</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Z</strong></span></td>
-                              <td>Undoes the last editing actions in the current target
+                              <td align="left">Undoes the last editing actions in the current target
                                                segment
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Redo last action</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Y</strong></span></td>
-                              <td>Redoes the last editing actions in the current target
+                              <td align="left">Redoes the last editing actions in the current target
                                                segment
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Select match #N</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>#N</strong></span></td>
-                              <td>#N is a digit from 1 to 5. The shortcut selects the Nth
+                              <td align="left">#N is a digit from 1 to 5. The shortcut selects the Nth
                                                match displayed in the match window (the first match is selected
                                                by default)
                               </td>
@@ -832,145 +912,157 @@
                            <tr>
                               <td align="left">Replace with match</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
-                              <td>Replaces the current target segment contents with the
+                              <td align="left">Replaces the current target segment contents with the
                                                selected match (the first match is selected by default)
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Insert match</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
-                              <td>Inserts the selected match at the cursor position in the
+                              <td align="left">Inserts the selected match at the cursor position in the
                                                current target segment (the first match is inserted by
                                                default)
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Replace with source</td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift+R</strong></span></td>
-                              <td>Replaces the current target segment contents with the
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span></td>
+                              <td align="left">Replaces the current target segment contents with the
                                                source text contents
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Insert source</td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift+I</strong></span></td>
-                              <td>Inserts the source text contents into the target segment
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span></td>
+                              <td align="left">Inserts the source text contents into the target segment
                                                at the cursor position
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Insert Source Tags</td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift+T</strong></span></td>
-                              <td>Inserts the source tags into the target segment at the
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
+                              <td align="left">Inserts the source tags into the target segment at the
                                                cursor position
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Search project</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span></td>
-                              <td>Displays a dialogue to conduct searches in the
+                              <td align="left">Displays a dialogue to conduct searches in the
                                                project
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Replace with Machine Translation</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>M</strong></span></td>
-                              <td>Replaces the target segment with the machine translation
+                              <td align="left">Replaces the target segment with the machine translation
                                                of the source. No action, if machine tools are deactivated (see
-                                               Menu &gt; Options &gt; Machine Translate)
+                                               <span class="guimenu">Options</span> → <span class="guimenuitem">Machine Translate</span>)
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left">Create Glossary Entry</td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>G</strong></span></td>
+                              <td align="left">Opens a new <a class="link" href="chapter.glossaries.html" title="Chapter&nbsp;19.&nbsp;Glossaries">Glossary
+                                                  entry window</a>.
+                              </td>
+                           </tr>
+                           <tr>
+                              <td align="left">Switch Case</td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>F3</strong></span></td>
+                              <td align="left">Changes the case of the highlighted text in the target
+                                               segment to the selected option (Lower case, Upper case or Title
+                                               case). If no text is selected, <span class="application">OmegaT</span>
+                                               selects the word that contains the letter immediately to the
+                                               right of the cursor.
                               </td>
                            </tr>
                         </tbody>
                      </table>
                   </div>
                </div><br class="table-break"></div>
-            <div class="section" title="9.3.&nbsp;Moving around">
+            <div class="section" title="2.3.&nbsp;Moving around">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.moving.around"></a>9.3.&nbsp;<a class="indexterm" name="d0e4054"></a>Moving around
+                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e4234"></a>Moving around
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4060"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
+               <div class="table"><a name="d0e4240"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Moving around shortcuts" border="1">
                         <colgroup>
-                           <col width="100" align="left">
-                           <col width="100" align="left">
-                           <col>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
                         </colgroup>
                         <tbody>
                            <tr>
                               <td align="left">Next Untranslated Segment</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>U</strong></span></td>
-                              <td>Moves the editing field to the next segment that is not
+                              <td align="left">Moves the editing field to the next segment that is not
                                                registered in the project's translation memory
                               </td>
                            </tr>
                            <tr>
                               <td align="left">Next Segment</td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span>, <span class="keycap"><strong>Enter</strong></span> or
-                                               <span class="keycap"><strong>Return</strong></span></td>
-                              <td>Moves the editing field to the next segment.</td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span>, <span class="keycap"><strong>Enter</strong></span>, <span class="keycap"><strong>Return</strong></span>
+                                               or <span class="keycap"><strong>Tab</strong></span></td>
+                              <td align="left">Moves the editing field to the next segment</td>
                            </tr>
                            <tr>
                               <td align="left">Previous Segment</td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span></td>
-                              <td>Moves the editing field to the previous segment</td>
+                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span>, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Enter</strong></span>, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Return</strong></span> or <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Tab</strong></span></td>
+                              <td align="left">Moves the editing field to the previous segment</td>
                            </tr>
                            <tr>
                               <td align="left">Segment number...</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>J</strong></span></td>
-                              <td>Moves to the segment number entered</td>
+                              <td align="left">Moves to the segment number entered</td>
                            </tr>
                            <tr>
                               <td align="left">Back in history...</td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift+P</strong></span></td>
-                              <td>Moves one segment back in history</td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>P</strong></span></td>
+                              <td align="left">Moves one segment back in history</td>
                            </tr>
                            <tr>
                               <td align="left">Forward in history...</td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>Shift+N</strong></span></td>
-                              <td>Moves one segment forward in history</td>
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>N</strong></span></td>
+                              <td align="left">Moves one segment forward in history</td>
                            </tr>
                         </tbody>
                      </table>
                   </div>
                </div><br class="table-break"></div>
-            <div class="section" title="9.4.&nbsp;Other">
+            <div class="section" title="2.4.&nbsp;Other">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.other"></a>9.4.&nbsp;<a class="indexterm" name="d0e4141"></a>Other
+                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e4347"></a>Other
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e4147"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
+               <div class="table"><a name="d0e4353"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Various shortcuts" border="1">
                         <colgroup>
-                           <col width="100" align="left">
-                           <col width="100" align="left">
-                           <col>
+                           <col width="150" align="left">
+                           <col width="120" align="left">
+                           <col width="630" align="left">
                         </colgroup>
                         <tbody>
                            <tr>
-                              <td align="left">Project files listing</td>
-                              <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>L</strong></span></td>
-                              <td>Displays the Project files listing</td>
-                           </tr>
-                           <tr>
                               <td align="left">Validate Tags</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
-                              <td>Opens the Tag validation window.</td>
+                              <td align="left">Opens the Tag validation window.</td>
                            </tr>
                            <tr>
                               <td align="left">Export Selection</td>
-                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl+C</strong></span></td>
-                              <td>Exports the current selection or the current source, if
+                              <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>C</strong></span></td>
+                              <td align="left">Exports the current selection or the current source, if
                                                no text has been selected. The text is exported to a plain text
                                                file.
                               </td>
@@ -978,12 +1070,12 @@
                            <tr>
                               <td align="left">Search Project</td>
                               <td align="left"><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span></td>
-                              <td>Opens a new Search window.</td>
+                              <td align="left">Opens a new Search window.</td>
                            </tr>
                            <tr>
                               <td align="left">Help files</td>
                               <td align="left"><span class="keycap"><strong>F1</strong></span></td>
-                              <td>Displays the <span class="application">OmegaT</span> help files
+                              <td align="left">Displays the <span class="application">OmegaT</span> help files
                                                in a separate window
                               </td>
                            </tr>
@@ -991,6 +1083,503 @@
                      </table>
                   </div>
                </div><br class="table-break"></div>
+         </div>
+         <div class="section" title="3.&nbsp;Shortcuts customization">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>3.&nbsp;<a class="indexterm" name="d0e4409"></a>Shortcuts customization
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Most of the items that appear in the main menu can have a new
+                   shortcut assigned. Only the most commonly used menu items are assigned a
+                   shortcut by default. You can change the already assigned shortcuts and add
+                   new shortcuts by putting a shortcut definition file in your OmegaT
+                   preferences folder (see <a class="link" href="chapter.files.and.directories.html#user.files.location">User files
+                      location</a>).
+            </p>
+            <p>The shortcut definition file must be named
+                   <code class="filename">MainMenuShortcuts.properties</code> and must contain at most
+                   one shortcut definition per line. Empty lines are accepted and comment
+                   lines should start with "//". Anything after the "//" will be
+                   ignored.
+            </p>
+            <p>Once the <code class="filename">MainMenuShortcuts.properties</code> file is
+                   modified, <span class="application">OmegaT</span> must be relaunched to take the
+                   new shortcuts into account.
+            </p>
+            <p>The shortcut definition syntax is the following: <code class="code">&lt;menu item
+                      code&gt;=&lt;shortcut&gt;</code>, where <span class="emphasis"><em>&lt;menu item
+                         code&gt;</em></span> is a code taken from the <a class="link" href="chapter.menu.html#menu.item.codes" title="Table&nbsp;5.14.&nbsp;Menu Item Codes">Menu Item Codes</a> table and
+                   <span class="emphasis"><em>&lt;shortcut&gt;</em></span> is a combination of pressed keys
+                   specified by the user<sup>[<a name="d0e4447" href="#ftn.d0e4447" class="footnote">1</a>]</sup>.
+            </p>
+            <p>&lt;shortcut&gt; must be of the following form:<code class="code">0 or more
+                      &lt;modifier&gt; followed by 0 or 1 &lt;event&gt; followed by 1
+                      &lt;key&gt;</code>, where:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="code">&lt;modifier&gt;</code> can be:
+                                  <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>,
+                                  <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><sup>[<a name="d0e4475" href="#ftn.d0e4475" class="footnote">2</a>]</sup>, <span class="emphasis"><em>alt</em></span>,
+                                  <span class="emphasis"><em>altGraph</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">&lt;event&gt;</code> can be: <span class="emphasis"><em>typed</em></span>,
+                                  <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p>and <code class="code">&lt;key&gt;</code> can be any key available on your
+                                  keyboard<sup>[<a name="d0e4509" href="#ftn.d0e4509" class="footnote">3</a>]</sup>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>For exemple, in the default OmegaT shortcuts<sup>[<a name="d0e4517" href="#ftn.d0e4517" class="footnote">4</a>]</sup>, one can find:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">editCreateGlossaryEntryMenuItem=ctrl shift G</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>The first is the shortcut for <span class="guimenuitem">Open
+                      Project</span>, the second for <span class="guimenuitem">Create Glossary
+                      Entry</span>.
+            </p>
+            <p>If you want to use <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> to open a project, modify your
+                   <code class="filename">MainMenuShortcuts.properties</code> so that it looks like
+                   this:<code class="code"> projectOpenMenuItem=shift ctrl O</code>.
+            </p>
+            <p>If you are on a Mac and you want to add a <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> shortcut to <span class="guimenu">Tools</span> → <span class="guimenuitem">Statistics</span>, add the following line to your
+                   <code class="filename">MainMenuShortcuts.properties</code>:<code class="code">
+                      toolsShowStatisticsStandardMenuItem=shift meta S</code>, then save the
+                   file and relaunch <span class="application">OmegaT</span>. Your new shortcuts
+                   should now appear next to the modified menu items. If they do not conflict
+                   with system shortcuts, they should be available from within OmegaT.
+            </p>
+            <div class="table"><a name="menu.item.codes"></a><p class="title"><b>Table&nbsp;5.14.&nbsp;Menu Item Codes</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e4588"></a><table summary="Menu Item Codes" border="1">
+                     <colgroup>
+                        <col width="300" align="left" class="1">
+                        <col width="150" align="left" class="2">
+                        <col width="450" align="right" class="3">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Menu Item</th>
+                           <th align="left">Default shortcut</th>
+                           <th align="right">Menu Item Code</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td colspan="3" align="center">Project Menu</td>
+                        </tr>
+                        <tr>
+                           <td align="left">New</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">projectNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Open</td>
+                           <td align="left">Ctrl+O</td>
+                           <td align="right">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Import Source Files...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">projectImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Import From MediaWiki...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">projectWikiImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Reload</td>
+                           <td align="left">F5</td>
+                           <td align="right">projectReloadMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Close</td>
+                           <td align="left">Ctrl+Shift+W</td>
+                           <td align="right">projectCloseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Save</td>
+                           <td align="left">Ctrl+S</td>
+                           <td align="right">projectSaveMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Create translated documents</td>
+                           <td align="left">Ctrl+D</td>
+                           <td align="right">projectCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Properties...</td>
+                           <td align="left">Ctrl+E</td>
+                           <td align="right">projectEditMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Project Files...</td>
+                           <td align="left">Ctrl+L</td>
+                           <td align="right">viewFileListMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Quit</td>
+                           <td align="left">Ctrl+Q</td>
+                           <td align="right">projectExitMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td colspan="3" align="center">Edit Menu</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Undo Last Action</td>
+                           <td align="left">Ctrl+Z</td>
+                           <td align="right">editUndoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Redo Last Action</td>
+                           <td align="left">Ctrl+Y</td>
+                           <td align="right">editRedoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Replace With Match</td>
+                           <td align="left">Ctrl+R</td>
+                           <td align="right">editOverwriteTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Insert Match</td>
+                           <td align="left">Ctrl+I</td>
+                           <td align="right">editInsertTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Replace with Machine Translation</td>
+                           <td align="left">Ctrl+M</td>
+                           <td align="right">editOverwriteMachineTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Replace With Source</td>
+                           <td align="left">Shift+Ctrl+R</td>
+                           <td align="right">editOverwriteSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Insert Source</td>
+                           <td align="left">Shift+Ctrl+I</td>
+                           <td align="right">editInsertSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Insert Source Tags</td>
+                           <td align="left">Shift+Ctrl+T</td>
+                           <td align="right">editTagPainterMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Export Selection</td>
+                           <td align="left">Shift+Ctrl+C</td>
+                           <td align="right">editExportSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Create Glossary Entry</td>
+                           <td align="left">Shift+Ctrl+G</td>
+                           <td align="right">editCreateGlossaryEntryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Search Project...</td>
+                           <td align="left">Ctrl+F</td>
+                           <td align="right">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 1</td>
+                           <td align="left">Ctrl+1</td>
+                           <td align="right">editSelectFuzzy1MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 2</td>
+                           <td align="left">Ctrl+2</td>
+                           <td align="right">editSelectFuzzy2MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 3</td>
+                           <td align="left">Ctrl+3</td>
+                           <td align="right">editSelectFuzzy3MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 4</td>
+                           <td align="left">Ctrl+4</td>
+                           <td align="right">editSelectFuzzy4MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 5</td>
+                           <td align="left">Ctrl+5</td>
+                           <td align="right">editSelectFuzzy5MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Use as Default Translation</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">editMultipleDefault</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Create Alternative Translation</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">editMultipleAlternate</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lower Case</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">lowerCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Upper Case</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">upperCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Title Case</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">titleCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Switch case to...</td>
+                           <td align="left">Shift+F3</td>
+                           <td align="right">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td colspan="3" align="center">Go To Menu</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Next Untranslated Segment</td>
+                           <td align="left">Ctrl+U</td>
+                           <td align="right">gotoNextUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Next Segment</td>
+                           <td align="left">Ctrl+N or Enter or Tab</td>
+                           <td align="right">gotoNextSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Previous Segment</td>
+                           <td align="left">Ctrl+P or Ctrl+Enter or Ctrl+Tab</td>
+                           <td align="right">gotoPreviousSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Segment number...</td>
+                           <td align="left">Ctrl+J</td>
+                           <td align="right">gotoSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Next Note</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">gotoNextNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Previous Note</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">gotoPreviousNoteMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Back in history</td>
+                           <td align="left">Ctrl+Shift+P</td>
+                           <td align="right">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Forward in history</td>
+                           <td align="left">Ctrl+Shift+N</td>
+                           <td align="right">gotoHistoryBackMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td colspan="3" align="center">View Menu</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mark Translated Segments</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">viewMarkTranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mark Untranslated Segments</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">viewMarkUntranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Display Source Segments</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">viewDisplaySegmentSourceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mark Non-Unique Segments</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Modification Info/Display None</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Modification Info/Display Selected</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Modification Info/Display All</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td colspan="3" align="center">Tools Menu</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Validate Tags</td>
+                           <td align="left">Ctrl +T</td>
+                           <td align="right">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Remove Tags</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">toolsRemoveTagsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Statistics</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">toolsShowStatisticsStandardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Match Statistics</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td colspan="3" align="center">Options Menu</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Use TAB To Advance</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsTabAdvanceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Always Confirm Quit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsAlwaysConfirmQuitCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Machine Translate</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Enable Transtips</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsTransTipsEnableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Exact Match</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsTransTipsExactMatchMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Font...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsFontSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">File Filters...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsSetupFileFiltersMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Segmentation...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsSentsegMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Spell checking...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsSpellCheckMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Editing Behavior...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsWorkflowMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tag Validation...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsTagValidationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Team...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsTeamMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">External TMXs...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsExtTMXMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">View...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsViewOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Proxy login...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsViewOptionsMenuLoginItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Restore Main Window</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">optionsRestoreGUIMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td colspan="3" align="center">Help Menu</td>
+                        </tr>
+                        <tr>
+                           <td align="left">User Manual...</td>
+                           <td align="left">F1</td>
+                           <td align="right">helpContentsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">About...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="right">helpAboutMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="footnotes"><br><hr width="100" align="left">
+            <div class="footnote">
+               <p><sup>[<a id="ftn.d0e4447" href="#d0e4447" class="para">1</a>] </sup>The full syntax for keystrokes (shortcuts) is defined in the
+                          following Java 1.6 documentation from Oracle (bottom of page): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java
+                             1.6 keystrokes shortcuts</a></p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a id="ftn.d0e4475" href="#d0e4475" class="para">2</a>] </sup>On the Mac, the modifier <span class="emphasis"><em>meta</em></span> must be
+                                used to specify the <span class="emphasis"><em>command</em></span> key.
+               </p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a id="ftn.d0e4509" href="#d0e4509" class="para">3</a>] </sup>The possible keyevents (keys) are listed in the following
+                                Java 1.6 documentation from Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java
+                                   1.6 keyEvents description</a></p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a id="ftn.d0e4517" href="#d0e4517" class="para">4</a>] </sup>The default OmegaT shortcuts are available from Sourceforge:
+                          <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default
+                             OmegaT Shortcuts</a></p>
+               <p>The default OmegaT shortcuts for the Mac are also available from
+                          Sourceforge, they all use "meta" instead of "ctrl": <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Default
+                             OmegaT Shortcuts for the Mac</a></p>
+            </div>
          </div>
       </div>
       <div class="navfooter">

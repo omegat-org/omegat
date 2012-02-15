@@ -23,864 +23,1026 @@
     Windows, UNIX and UNIX-like operating systems with keyboards featuring a
     <keycap>Ctrl</keycap> or <keycap>Control</keycap> key. Mac users should
     instead use <keycombo>
-        <keycap>cmd</keycap>
+        <keycap>Cmd</keycap>
 
         <keycap>key</keycap>
       </keycombo> instead. The "Cmd" key either has a "command" label or an
     apple symbol on Apple keyboards.</para>
 
+    <para>New menu items can appear depending on the plugins that you
+    use.</para>
+
     <table colsep="1" id="table.main.menu">
       <title>Main Menu</title>
 
-      <tgroup cols="7" colsep="1">
-        <tbody>
-          <row>
-            <entry><guimenuitem>Project</guimenuitem></entry>
+      <tgroup cols="7" colsep="1" role="800">
+        <colspec align="left" colnum="1" colwidth="130"/>
 
-            <entry><guimenuitem>Edit</guimenuitem></entry>
+        <colspec align="left" colnum="2" colwidth="130"/>
 
-            <entry><guimenuitem>Go to</guimenuitem></entry>
+        <colspec align="left" colnum="3" colwidth="130"/>
 
-            <entry><guimenuitem>View</guimenuitem></entry>
+        <colspec align="left" colnum="4" colwidth="130"/>
 
-            <entry><guimenuitem>Tools</guimenuitem></entry>
+        <colspec align="left" colnum="5" colwidth="130"/>
 
-            <entry><guimenuitem>Options</guimenuitem></entry>
+        <colspec align="left" colnum="6" colwidth="130"/>
 
-            <entry><guimenuitem>Help</guimenuitem></entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
-
-  <section id="submenu.Project">
-    <title>Project<indexterm class="singular">
-        <primary>Main menu</primary>
-
-        <secondary>Project</secondary>
-      </indexterm></title>
-
-    <table colsep="1">
-      <title>Project menu</title>
-
-      <tgroup cols="3" colsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
-
-        <colspec align="left" colnum="2" colwidth="100" />
+        <colspec align="left" colnum="7" colwidth="130"/>
 
         <tbody>
           <row>
-            <entry><guimenuitem>New</guimenuitem></entry>
+            <entry><link
+            linkend="project.menu.table"><guimenuitem>Project</guimenuitem></link></entry>
 
-            <entry></entry>
+            <entry><link
+            linkend="edit.menu.table"><guimenuitem>Edit</guimenuitem></link></entry>
 
-            <entry>Creates and opens a new project. The dialog to create a
-            project is the same as to edit the project. See <xref
-            linkend="chapter.project.properties" /></entry>
-          </row>
+            <entry><link linkend="goto.menu.table"><guimenuitem>Go
+            to</guimenuitem></link></entry>
 
-          <row>
-            <entry><guimenuitem>Open</guimenuitem></entry>
+            <entry><link
+            linkend="view.menu.table"><guimenuitem>View</guimenuitem></link></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+            <entry><link
+            linkend="tools.menu.table"><guimenuitem>Tools</guimenuitem></link></entry>
 
-                <keycap>O</keycap>
-              </keycombo></entry>
+            <entry><link
+            linkend="options.menu.table"><guimenuitem>Options</guimenuitem></link></entry>
 
-            <entry>Opens a previously created project.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Import Source Files...</guimenuitem></entry>
-
-            <entry></entry>
-
-            <entry>Copies the selected files to the
-            <filename>source</filename> folder and reloads the project to load
-            the new files.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Import From MediaWiki...</guimenuitem></entry>
-
-            <entry></entry>
-
-            <entry>Imports units from MediaWiki pages, based on the URL
-            entered.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Reload</guimenuitem></entry>
-
-            <entry><keycap>F5</keycap></entry>
-
-            <entry>Reloads the project to take external changes in source
-            files, legacy translation memories, glossaries and project
-            settings into account.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Close</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>Shift</keycap>
-
-                <keycap>W</keycap>
-              </keycombo></entry>
-
-            <entry>Saves the translation and closes the project.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Save</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>S</keycap>
-              </keycombo></entry>
-
-            <entry>Saves the internal translation memory to the hard disk.
-            OmegaT automatically saves translations every 10 minutes as well
-            as when you close the project or quit OmegaT.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Create translated
-            documents</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>D</keycap>
-              </keycombo></entry>
-
-            <entry>Creates the target documents based on your translation of
-            the documents' text. The created target documents are located in
-            the <filename>target</filename> folder.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Properties...</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>E</keycap>
-              </keycombo></entry>
-
-            <entry>Displays <link linkend="chapter.project.properties">Project
-            properties</link> dialog to edit project languages and folder
-            locations.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Project Files...</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>L</keycap>
-              </keycombo></entry>
-
-            <entry>Closes or opens the <link
-            linkend="section.project.files">Project files window</link>
-            (depending on whether it is open or closed).</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Quit</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>Q</keycap>
-              </keycombo></entry>
-
-            <entry>Saves the project and quits
-            <application>OmegaT</application>. If you haven't yet saved the
-            project, this manually confirms whether you really wish to
-            quit.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
-
-  <section>
-    <title>Edit<indexterm class="singular">
-        <primary>Main menu</primary>
-
-        <secondary>Edit</secondary>
-      </indexterm></title>
-
-    <para>Note: Items that are found in most applications (copy/cut/paste) are
-    not displayed in this menu, but are available using your system shortcuts.
-    For example:</para>
-
-    <table colsep="1">
-      <title>Copy/cut/paste shortcuts</title>
-
-      <tgroup cols="3" colsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
-
-        <colspec align="left" colnum="2" colwidth="100" />
-
-        <tbody>
-          <row>
-            <entry><guimenuitem>Copy</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>C</keycap>
-              </keycombo></entry>
-
-            <entry>Copies the selected text to the clipboard.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Cut</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>X</keycap>
-              </keycombo></entry>
-
-            <entry>Copies the selected text to the clipboard and deletes the
-            selected text.</entry>
-          </row>
-
-          <row>
-            <entry><guimenuitem>Paste</guimenuitem></entry>
-
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
-
-                <keycap>V</keycap>
-              </keycombo></entry>
-
-            <entry>Pastes the text from the clipboard at the cursor
-            position.</entry>
+            <entry><link
+            linkend="help.menu.table"><guimenuitem>Help</guimenuitem></link></entry>
           </row>
         </tbody>
       </tgroup>
     </table>
 
-    <para>The Edit menu itself contains the following items:</para>
+    <section id="submenu.Project">
+      <title>Project<indexterm class="singular">
+          <primary>Main menu</primary>
 
-    <table colsep="1">
-      <title>Edit menu</title>
+          <secondary>Project</secondary>
+        </indexterm></title>
 
-      <tgroup cols="3" colsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
+      <table colsep="1" id="project.menu.table">
+        <title>Project menu</title>
 
-        <colspec align="left" colnum="2" colwidth="100" />
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
 
-        <tbody>
-          <row>
-            <entry><guimenuitem>Undo Last Action</guimenuitem></entry>
+          <colspec align="left" colnum="2" colwidth="120"/>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+          <colspec align="left" colnum="3" colwidth="630"/>
 
-                <keycap>Z</keycap>
-              </keycombo></entry>
+          <tbody>
+            <row>
+              <entry><guimenuitem>New</guimenuitem></entry>
 
-            <entry>Restores the status before the last editing action was
-            taken. This command does not work once the modified segment has
-            been validated.</entry>
-          </row>
+              <entry/>
 
-          <row>
-            <entry><guimenuitem>Redo Last Action</guimenuitem></entry>
+              <entry>Creates and opens a new project. The dialog to create a
+              project is the same as to edit the project. See <xref
+              linkend="chapter.project.properties"/></entry>
+            </row>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+            <row>
+              <entry><guimenuitem>Open</guimenuitem></entry>
 
-                <keycap>Y</keycap>
-              </keycombo></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-            <entry>Restores the status before the last editing action was
-            cancelled. This command does not work once the modified segment
-            has been validated.</entry>
-          </row>
+                  <keycap>O</keycap>
+                </keycombo></entry>
 
-          <row>
-            <entry><guimenuitem>Replace With Match</guimenuitem></entry>
+              <entry>Opens a previously created project.</entry>
+            </row>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+            <row>
+              <entry><guimenuitem>Import Source Files...</guimenuitem></entry>
 
-                <keycap>R</keycap>
-              </keycombo></entry>
+              <entry/>
 
-            <entry>Replaces the whole target segment with the currently
-            selected fuzzy match (by default the first match is
-            selected).</entry>
-          </row>
+              <entry>Copies the selected files to the
+              <filename>source</filename> folder and reloads the project to
+              load the new files.</entry>
+            </row>
 
-          <row>
-            <entry><guimenuitem>Insert Match</guimenuitem></entry>
+            <row>
+              <entry><guimenuitem>Import From
+              MediaWiki...</guimenuitem></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+              <entry/>
 
-                <keycap>I</keycap>
-              </keycombo></entry>
+              <entry>Imports units from MediaWiki pages, based on the URL
+              entered.</entry>
+            </row>
 
-            <entry>Inserts the currently selected fuzzy match at the cursor
-            position. If part of the target segment has been selected, this
-            function overwrites the selected portion.</entry>
-          </row>
+            <row>
+              <entry><guimenuitem>Reload</guimenuitem></entry>
 
-          <row>
-            <entry><guimenuitem>Replace with Machine
-            Translation</guimenuitem></entry>
+              <entry><keycap>F5</keycap></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+              <entry>Reloads the project to take external changes in source
+              files, legacy translation memories, glossaries and project
+              settings into account.</entry>
+            </row>
 
-                <keycap>M</keycap>
-              </keycombo></entry>
+            <row>
+              <entry><guimenuitem>Close</guimenuitem></entry>
 
-            <entry>Replaces the target segment with the translation, provided
-            by the selected Machine Translation service. No action is taken,
-            if no Machine Translation service has been activated (see Menu
-            &gt; Options below).</entry>
-          </row>
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
 
-          <row>
-            <entry><guimenuitem>Replace With Source</guimenuitem></entry>
+                  <keycap>Ctrl</keycap>
 
-            <entry><keycombo>
-                <keycap>Shift</keycap>
+                  <keycap>W</keycap>
+                </keycombo></entry>
 
-                <keycap>Ctrl</keycap>
+              <entry>Saves the translation and closes the project.</entry>
+            </row>
 
-                <keycap>R</keycap>
-              </keycombo></entry>
+            <row>
+              <entry><guimenuitem>Save</guimenuitem></entry>
 
-            <entry>Replaces the whole target segment with the source.</entry>
-          </row>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-          <row>
-            <entry><guimenuitem>Insert Source</guimenuitem></entry>
+                  <keycap>S</keycap>
+                </keycombo></entry>
 
-            <entry><keycombo>
-                <keycap>Shift</keycap>
+              <entry>Saves the internal translation memory to the hard disk.
+              OmegaT automatically saves translations every 10 minutes as well
+              as when you close the project or quit OmegaT.</entry>
+            </row>
 
-                <keycap>Ctrl</keycap>
+            <row>
+              <entry><guimenuitem>Create translated
+              documents</guimenuitem></entry>
 
-                <keycap>I</keycap>
-              </keycombo></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-            <entry>Inserts the source at the cursor position.</entry>
-          </row>
+                  <keycap>D</keycap>
+                </keycombo></entry>
 
-          <row>
-            <entry><guimenuitem>Insert Source Tags</guimenuitem></entry>
+              <entry>Creates the target documents based on your translation of
+              the documents' text. The created target documents are located in
+              the <filename>target</filename> folder.</entry>
+            </row>
 
-            <entry><keycombo>
-                <keycap>Shift</keycap>
+            <row>
+              <entry><guimenuitem>Properties...</guimenuitem></entry>
 
-                <keycap>Ctrl</keycap>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-                <keycap>T</keycap>
-              </keycombo></entry>
+                  <keycap>E</keycap>
+                </keycombo></entry>
 
-            <entry><indexterm class="singular">
-                <primary>Tags</primary>
+              <entry>Displays <link
+              linkend="chapter.project.properties">Project properties</link>
+              dialog to edit project languages and folder locations.</entry>
+            </row>
 
-                <secondary>Inserting source tags</secondary>
-              </indexterm>Inserts the source tags at the cursor position. All
-            tags in the source will be inserted into the current segment,
-            regardless of whether they are already there or not. Texts,
-            bracketed by tags, are replaced by spaces:.
-            <literal>&lt;f0&gt;&lt;f1&gt;This is
-            text&lt;/f0&gt;&lt;/f1&gt;</literal> thus will be copied as
-            <literal>&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
-          </row>
+            <row>
+              <entry><guimenuitem>Project Files...</guimenuitem></entry>
 
-          <row>
-            <entry><guimenuitem>Export Selection</guimenuitem></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-            <entry><keycombo>
-                <keycap>Shift</keycap>
+                  <keycap>L</keycap>
+                </keycombo></entry>
 
-                <keycap>Ctrl</keycap>
+              <entry>Closes or opens the <link
+              linkend="section.project.files">Project files window</link>
+              (depending on whether it is open or closed).</entry>
+            </row>
 
-                <keycap>C</keycap>
-              </keycombo></entry>
+            <row>
+              <entry><guimenuitem>Quit</guimenuitem></entry>
 
-            <entry>Exports the current selection to a text file for
-            processing. If no text has been selected, the current source
-            segment is written to this file. When the user exits
-            <application>OmegaT</application>, this file is not emptied, in
-            order to be consistent with usual clipboard behavior. The exported
-            contents are copied to the file <filename>selection.txt</filename>
-            located in the User's preference files folder (see <xref
-            linkend="chapter.files.and.directories" />).</entry>
-          </row>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-          <row>
-            <entry><guimenuitem>Search Project...</guimenuitem></entry>
+                  <keycap>Q</keycap>
+                </keycombo></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+              <entry>Saves the project and quits
+              <application>OmegaT</application>. If you haven't yet saved the
+              project, this manually confirms whether you really wish to
+              quit.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
 
-                <keycap>F</keycap>
-              </keycombo></entry>
+    <section id="submenu.Edit">
+      <title>Edit<indexterm class="singular">
+          <primary>Main menu</primary>
 
-            <entry>Opens a new <link linkend="section.search.window">Search
-            window</link>.</entry>
-          </row>
+          <secondary>Edit</secondary>
+        </indexterm></title>
 
-          <row>
-            <entry><guimenuitem>Switch case to...</guimenuitem></entry>
+      <para>Note: Items that are found in most applications (copy/cut/paste)
+      are not displayed in this menu, but are available using your system
+      shortcuts. For example:</para>
 
-            <entry><keycombo>
-                <keycap>Shift</keycap>
+      <table colsep="1">
+        <title>Copy/cut/paste shortcuts</title>
 
-                <keycap>F3</keycap>
-              </keycombo> (see text)</entry>
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
 
-            <entry>Changes the case of the highlighted text in the target
-            segment to the selected option (Lower case, Upper case or Title
-            case). Use Shift+F3 <indexterm>
-                <primary>Shortcuts</primary>
+          <colspec align="left" colnum="2" colwidth="120"/>
 
-                <secondary>Shift+F3 - Case selection</secondary>
-              </indexterm>to cycle through the three alternatives. If no text
-            is selected, <application>OmegaT</application> selects the word
-            that contains the letter immediately to the right of the
-            cursor.</entry>
-          </row>
+          <colspec align="left" colnum="3" colwidth="630"/>
 
-          <row>
-            <entry><guimenuitem>Select Fuzzy Match #N</guimenuitem></entry>
+          <tbody>
+            <row>
+              <entry><guimenuitem>Copy</guimenuitem></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-                <keycap>#N</keycap>
-              </keycombo></entry>
+                  <keycap>C</keycap>
+                </keycombo></entry>
 
-            <entry>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
-            displayed in the match viewer to replace or insert it to the
-            segment. The <xref linkend="match.viewer" /> describes the color
-            coding in detail.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
+              <entry>Copies the selected text to the clipboard.</entry>
+            </row>
 
-  <section id="submenu.GoTo">
-    <title>Go to<indexterm class="singular">
-        <primary>Main menu</primary>
+            <row>
+              <entry><guimenuitem>Cut</guimenuitem></entry>
 
-        <secondary>Goto</secondary>
-      </indexterm></title>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-    <table colsep="1">
-      <title>Go To menu</title>
+                  <keycap>X</keycap>
+                </keycombo></entry>
 
-      <tgroup cols="3" colsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
+              <entry>Copies the selected text to the clipboard and deletes the
+              selected text.</entry>
+            </row>
 
-        <colspec align="left" colnum="2" colwidth="100" />
+            <row>
+              <entry><guimenuitem>Paste</guimenuitem></entry>
 
-        <tbody>
-          <row>
-            <entry><guimenuitem>Next Untranslated
-            Segment</guimenuitem></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+                  <keycap>V</keycap>
+                </keycombo></entry>
 
-                <keycap>U</keycap>
-              </keycombo></entry>
+              <entry>Pastes the text from the clipboard at the cursor
+              position.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
 
-            <entry>Moves to the next segment that has no equivalent in the
-            translation memory.</entry>
-          </row>
+      <para>The Edit menu itself contains the following items:</para>
 
-          <row>
-            <entry><guimenuitem>Next Segment</guimenuitem></entry>
+      <table colsep="1" id="edit.menu.table">
+        <title>Edit menu</title>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
 
-                <keycap>N</keycap>
-              </keycombo> or <keycap>Enter</keycap> or
-            <keycap>Tab</keycap></entry>
+          <colspec align="left" colnum="2" colwidth="120"/>
 
-            <entry>Moves to the next segment. If the current segment is the
-            last segment in a file, it moves to the first segment of the next
-            file.</entry>
-          </row>
+          <colspec align="left" colnum="3" colwidth="630"/>
 
-          <row>
-            <entry><guimenuitem>Previous Segment</guimenuitem></entry>
+          <tbody>
+            <row>
+              <entry><guimenuitem>Undo Last Action</guimenuitem></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-                <keycap>P</keycap>
-              </keycombo> or <keycombo>
-                <keycap>Ctrl</keycap>
+                  <keycap>Z</keycap>
+                </keycombo></entry>
 
-                <keycap>Enter</keycap>
-              </keycombo> or <keycombo>
-                <keycap>Ctrl</keycap>
+              <entry>Restores the status before the last editing action was
+              taken. This command does not work once the modified segment has
+              been validated.</entry>
+            </row>
 
-                <keycap>Tab</keycap>
-              </keycombo></entry>
+            <row>
+              <entry><guimenuitem>Redo Last Action</guimenuitem></entry>
 
-            <entry>Moves to the previous segment. If the current segment is
-            the first one in a file, it moves to the last segment of the
-            previous file.</entry>
-          </row>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-          <row>
-            <entry><guimenuitem>Segment number...</guimenuitem></entry>
+                  <keycap>Y</keycap>
+                </keycombo></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+              <entry>Restores the status before the last editing action was
+              cancelled. This command does not work once the modified segment
+              has been validated.</entry>
+            </row>
 
-                <keycap>J</keycap>
-              </keycombo></entry>
+            <row>
+              <entry><guimenuitem>Replace With Match</guimenuitem></entry>
 
-            <entry>The segment is opened when its segment number is
-            entered..</entry>
-          </row>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-          <row>
-            <entry><guimenuitem>Back in history...</guimenuitem></entry>
+                  <keycap>R</keycap>
+                </keycombo></entry>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+              <entry>Replaces the whole target segment with the currently
+              selected fuzzy match (by default the first match is
+              selected).</entry>
+            </row>
 
-                <keycap>Shift</keycap>
+            <row>
+              <entry><guimenuitem>Insert Match</guimenuitem></entry>
 
-                <keycap>P</keycap>
-              </keycombo></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-            <entry>With this command you can move backward one segment at a
-            time, to return later to the current segment using
-            <guimenuitem>Forward in history... </guimenuitem>command
-            below.</entry>
-          </row>
+                  <keycap>I</keycap>
+                </keycombo></entry>
 
-          <row>
-            <entry><guimenuitem>Forward in history...</guimenuitem></entry>
+              <entry>Inserts the currently selected fuzzy match at the cursor
+              position. If part of the target segment has been selected, this
+              function overwrites the selected portion.</entry>
+            </row>
 
-            <entry><keycombo>
-                <keycap>Ctrl</keycap>
+            <row>
+              <entry><guimenuitem>Replace with Machine
+              Translation</guimenuitem></entry>
 
-                <keycap>Shift</keycap>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-                <keycap>N</keycap>
-              </keycombo></entry>
+                  <keycap>M</keycap>
+                </keycombo></entry>
 
-            <entry><application>OmegaT</application> remembers the segments
-            executed. With this command you can step forward to the segment,
-            you have previously left by the <guimenuitem>Back in
-            history</guimenuitem>...command.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
+              <entry>Replaces the target segment with the translation,
+              provided by the selected Machine Translation service. No action
+              is taken, if no Machine Translation service has been activated
+              (see <menuchoice>
+                  <guimenu>Options</guimenu>
+                </menuchoice> below).</entry>
+            </row>
 
-  <section id="submenu.View">
-    <title>View<indexterm class="singular">
-        <primary>Main menu</primary>
+            <row>
+              <entry><guimenuitem>Replace With Source</guimenuitem></entry>
 
-        <secondary>View</secondary>
-      </indexterm></title>
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
 
-    <table colsep="1">
-      <title>View menu</title>
+                  <keycap>Ctrl</keycap>
 
-      <tgroup cols="2" colsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
+                  <keycap>R</keycap>
+                </keycombo></entry>
 
-        <tbody>
-          <row>
-            <entry><guimenuitem>Mark Translated Segments</guimenuitem></entry>
+              <entry>Replaces the whole target segment with the
+              source.</entry>
+            </row>
 
-            <entry>If checked, the translated segments will be marked in
-            yellow.</entry>
-          </row>
+            <row>
+              <entry><guimenuitem>Insert Source</guimenuitem></entry>
 
-          <row>
-            <entry><guimenuitem>Mark Untranslated
-            Segments</guimenuitem></entry>
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
 
-            <entry>If checked, the untranslated segments will be marked in
-            violet.</entry>
-          </row>
+                  <keycap>Ctrl</keycap>
 
-          <row>
-            <entry><guimenuitem>Display Source Segments</guimenuitem></entry>
+                  <keycap>I</keycap>
+                </keycombo></entry>
 
-            <entry>If checked, source segments will be shown and marked in
-            green. If not checked, source segments will not be shown.</entry>
-          </row>
+              <entry>Inserts the source at the cursor position.</entry>
+            </row>
 
-          <row>
-            <entry><guimenuitem>Display Modification</guimenuitem></entry>
+            <row>
+              <entry><guimenuitem>Insert Source Tags</guimenuitem></entry>
 
-            <entry>Setting the Display Modification option to
-            <emphasis>Selected</emphasis> will display the time and the author
-            of the last change for the current segment. Setting it
-            to<emphasis> All </emphasis>shows this information for all
-            segments and <emphasis>None</emphasis> turns this option
-            off.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
 
-  <section id="submenu.Tools">
-    <title>Tools<indexterm class="singular">
-        <primary>Main menu</primary>
+                  <keycap>Ctrl</keycap>
 
-        <secondary>Tools</secondary>
-      </indexterm></title>
+                  <keycap>T</keycap>
+                </keycombo></entry>
 
-    <table colsep="1">
-      <title>Tools menu</title>
+              <entry><indexterm class="singular">
+                  <primary>Tags</primary>
 
-      <indexterm class="singular">
-        <primary>Matches</primary>
+                  <secondary>Inserting source tags</secondary>
+                </indexterm>Inserts the source tags at the cursor position.
+              All tags in the source will be inserted into the current
+              segment, regardless of whether they are already there or not.
+              Texts, bracketed by tags, are replaced by spaces:.
+              <literal>&lt;f0&gt;&lt;f1&gt;This is
+              text&lt;/f0&gt;&lt;/f1&gt;</literal> thus will be copied as
+              <literal>&lt;f0&gt;&lt;f1&gt; &lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+            </row>
 
-        <secondary>Matches statistics</secondary>
-      </indexterm>
+            <row>
+              <entry><guimenuitem>Export Selection</guimenuitem></entry>
 
-      <indexterm class="singular">
-        <primary>Project</primary>
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
 
-        <secondary>Match statistics</secondary>
-      </indexterm>
+                  <keycap>Ctrl</keycap>
 
-      <indexterm class="singular">
-        <primary>Project</primary>
+                  <keycap>C</keycap>
+                </keycombo></entry>
 
-        <secondary>Statistics</secondary>
-      </indexterm>
+              <entry>Exports the current selection to a text file for
+              processing. If no text has been selected, the current source
+              segment is written to this file. When the user exits
+              <application>OmegaT</application>, this file is not emptied, in
+              order to be consistent with usual clipboard behavior. The
+              exported contents are copied to the file
+              <filename>selection.txt</filename> located in the User's
+              preference files folder (see <xref
+              linkend="chapter.files.and.directories"/>).</entry>
+            </row>
 
-      <tgroup cols="2" colsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
+            <row>
+              <entry><guimenuitem>Create Glossary Entry</guimenuitem></entry>
 
-        <tbody>
-          <row>
-            <entry><guimenuitem>Validate Tags</guimenuitem></entry>
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
 
-            <entry><guimenu>Ctrl+T</guimenu>: Checks for missing or displaced
-            tags in formatted files. Will display a list of segments with tag
-            errors and possible inconsistencies. See <link
-            linkend="section.tag.validation">Tag Validation</link> and <xref
-            linkend="chapter.formatted.text" />.</entry>
-          </row>
+                  <keycap>Ctrl</keycap>
 
-          <row>
-            <entry><guimenuitem>Statistics</guimenuitem></entry>
+                  <keycap>G</keycap>
+                </keycombo></entry>
 
-            <entry>Opens a new window and displays the project statistics,
-            i.e. the project totals and totals for every file in the
-            project.</entry>
-          </row>
+              <entry>Opens a new <link linkend="chapter.glossaries">Glossary
+              entry window</link>.</entry>
+            </row>
 
-          <row>
-            <entry><guimenuitem>Match Statistics</guimenuitem></entry>
+            <row>
+              <entry><guimenuitem>Search Project...</guimenuitem></entry>
 
-            <entry>Displays the Match Statistics for the project: the number
-            of repetitions, exact matches, fuzzy matches and no-matches, for
-            segments, words and in characters.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-  <section id="submenu.Options">
-    <title><indexterm class="singular">
-        <primary>Main menu</primary>
+                  <keycap>F</keycap>
+                </keycombo></entry>
 
-        <secondary>Options</secondary>
-      </indexterm>Options</title>
+              <entry>Opens a new <link linkend="section.search.window">Search
+              window</link>.</entry>
+            </row>
 
-    <table colsep="1">
-      <title>Options menu</title>
+            <row>
+              <entry><menuchoice>
+                  <guimenu>Switch case to</guimenu>
 
-      <tgroup cols="2" colsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
+                  <guimenuitem>Lower Case / Upper Case / Title
+                  Case</guimenuitem>
+                </menuchoice></entry>
 
-        <tbody>
-          <row>
-            <entry><guimenuitem>Use TAB To Advance</guimenuitem></entry>
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
 
-            <entry>Sets segment validation key to
-            <guimenuitem>Tab</guimenuitem> instead of the default
-            <guimenuitem>Enter</guimenuitem>. This option is useful for some
-            Chinese, Japanese or Korean character input systems.</entry>
-          </row>
+                  <keycap>F3</keycap>
+                </keycombo></entry>
 
-          <row>
-            <entry><guimenuitem>Always Confirm Quit</guimenuitem></entry>
+              <entry>Changes the case of the highlighted text in the target
+              segment to the selected option (Lower case, Upper case or Title
+              case). Use Shift+F3 <indexterm>
+                  <primary>Shortcuts</primary>
 
-            <entry>The program will see confirmation before closing
-            down.</entry>
-          </row>
+                  <secondary>Shift+F3 - Case selection</secondary>
+                </indexterm>to cycle through the three alternatives. If no
+              text is selected, <application>OmegaT</application> selects the
+              word that contains the letter immediately to the right of the
+              cursor.</entry>
+            </row>
 
-          <row>
-            <entry><guimenuitem>Machine Translate</guimenuitem></entry>
+            <row>
+              <entry><guimenuitem>Select Fuzzy Match #N</guimenuitem></entry>
 
-            <entry>Allows you to activate/deactivate the Machine Translation
-            tools offered. When active, <keycombo>
-                <keycap>Ctrl</keycap>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-                <keycap>M</keycap>
-              </keycombo> will insert the suggestion into the target part of
-            the current segment.</entry>
-          </row>
+                  <keycap>#N</keycap>
+                </keycombo></entry>
 
-          <row>
-            <entry><guimenuitem>TransTips</guimenuitem></entry>
+              <entry>(#N is a digit from 1 to 5) - Selects the Nth fuzzy match
+              displayed in the match viewer to replace or insert it to the
+              segment. The <xref linkend="match.viewer"/> describes the color
+              coding in detail.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
 
-            <entry>Allows you to activate/deactivate <emphasis>TransTips
-            </emphasis>feature and set its option<emphasis> Exact
-            Match.</emphasis> With <emphasis>TransTips</emphasis> activated a
-            right click on a highlighted word in the source will open a popup
-            menu with the glossary entries for the word you clicked. You can
-            then click on the preferred translation to insert it into the
-            target segment at the current position. With
-            <emphasis>TransTips/Exact Match </emphasis> checked, only complete
-            words will be checked, otherwise parts of words will be matched as
-            well.</entry>
-          </row>
+    <section id="submenu.GoTo">
+      <title>Go to<indexterm class="singular">
+          <primary>Main menu</primary>
 
-          <row>
-            <entry><guimenuitem>Font...</guimenuitem></entry>
+          <secondary>Goto</secondary>
+        </indexterm></title>
 
-            <entry>Shows the dialogue to modify the text display font. Users
-            of old computers who feel window resizing is very slow can try
-            changing the font. See <xref linkend="chapter.font" />.</entry>
-          </row>
+      <table colsep="1" id="goto.menu.table">
+        <title>Go To menu</title>
 
-          <row>
-            <entry><guimenuitem>File Filters...</guimenuitem></entry>
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
 
-            <entry>Displays the <link linkend="chapter.file.filters">File
-            filters</link> dialogue to configure file handling and
-            parsing.</entry>
-          </row>
+          <colspec align="left" colnum="2" colwidth="120"/>
 
-          <row>
-            <entry><guimenuitem>Segmentation...</guimenuitem></entry>
+          <colspec align="left" colnum="3" colwidth="630"/>
 
-            <entry>Opens the <link linkend="chapter.segmentation">Source
-            segmentation</link> dialogue to configure text
-            segmentation.</entry>
-          </row>
+          <tbody>
+            <row>
+              <entry><guimenuitem>Next Untranslated
+              Segment</guimenuitem></entry>
 
-          <row>
-            <entry><guimenuitem>Spell checking...</guimenuitem></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-            <entry>Displays the <link linkend="chapter.spellchecker">Spell
-            checker setup</link> window to install, configure and activate the
-            spell checker.</entry>
-          </row>
+                  <keycap>U</keycap>
+                </keycombo></entry>
 
-          <row>
-            <entry><guimenuitem>Editing Behavior...</guimenuitem></entry>
+              <entry>Moves to the next segment that has no equivalent in the
+              translation memory.</entry>
+            </row>
 
-            <entry>Displays the <link
-            linkend="chapter.translation.editing">Translation editing</link>
-            dialog to configure.</entry>
-          </row>
+            <row>
+              <entry><guimenuitem>Next Segment</guimenuitem></entry>
 
-          <row>
-            <entry><guimenuitem>Tag Validation...</guimenuitem></entry>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-            <entry>For programmers: Allows you to configure the Tag Validator
-            options to also check programming (%...) variables.</entry>
-          </row>
+                  <keycap>N</keycap>
+                </keycombo> or <keycap>Enter</keycap> (or
+              <keycap>Tab</keycap>)</entry>
 
-          <row>
-            <entry><guimenuitem>Team...</guimenuitem></entry>
+              <entry>Moves to the next segment. If the current segment is the
+              last segment in a file, it moves to the first segment of the
+              next file. <keycap>Tab</keycap> can be set to move to the next
+              segment by using <menuchoice>
+                  <guimenu>Options</guimenu>
 
-            <entry>Enter your name here and it will be attached to all
-            segments translated by you.</entry>
-          </row>
+                  <guimenuitem>Use Tab to Advance</guimenuitem>
+                </menuchoice>.</entry>
+            </row>
 
-          <row>
-            <entry><guimenuitem>View...</guimenuitem></entry>
+            <row>
+              <entry><guimenuitem>Previous Segment</guimenuitem></entry>
 
-            <entry>Contains the option to have all source segments in bold and
-            to mark the first non-unique segment.</entry>
-          </row>
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-          <row>
-            <entry><guimenuitem>Proxy login...</guimenuitem></entry>
+                  <keycap>P</keycap>
+                </keycombo> or <keycombo>
+                  <keycap>Ctrl</keycap>
 
-            <entry>Enter your user name and your password, if you use a proxy
-            to access your projects.</entry>
-          </row>
+                  <keycap>Enter</keycap>
+                </keycombo> (or <keycombo>
+                  <keycap>Ctrl</keycap>
 
-          <row>
-            <entry><guimenuitem>Restore Main Window</guimenuitem></entry>
+                  <keycap>Tab</keycap>
+                </keycombo>)</entry>
 
-            <entry>Restores the components of the main OmegaT window to their
-            default state. Use this feature when you have undocked, moved, or
-            hidden one or more components and you are unable to restore the
-            desired arrangement. It can also be used when panes do not appear
-            as expected following an OmegaT upgrade.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
-  </section>
+              <entry>Moves to the previous segment. If the current segment is
+              the first one in a file, it moves to the last segment of the
+              previous file. <keycombo>
+                  <keycap>Ctrl</keycap>
 
-  <section id="submenu.Help">
-    <title>Help<indexterm class="singular">
-        <primary>Main menu</primary>
+                  <keycap>Tab</keycap>
+                </keycombo> can be set to move to the previous segment by
+              using <menuchoice>
+                  <guimenu>Options</guimenu>
 
-        <secondary>Help</secondary>
-      </indexterm></title>
+                  <guimenuitem>Use Tab to Advance</guimenuitem>
+                </menuchoice>.</entry>
+            </row>
 
-    <table colsep="1">
-      <title>Help menu</title>
+            <row>
+              <entry><guimenuitem>Segment number...</guimenuitem></entry>
 
-      <tgroup cols="2" colsep="1">
-        <colspec align="left" colnum="1" colwidth="100" />
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
 
-        <tbody>
-          <row>
-            <entry><guimenuitem>User Manual...</guimenuitem></entry>
+                  <keycap>J</keycap>
+                </keycombo></entry>
 
-            <entry><keycap>F1:</keycap> Opens Help browser displaying this
-            manual in a separate window.</entry>
-          </row>
+              <entry>Jumps to the entered segment number.</entry>
+            </row>
 
-          <row>
-            <entry><guimenuitem>About...</guimenuitem></entry>
+            <row>
+              <entry><guimenuitem>Forward in history</guimenuitem></entry>
 
-            <entry>Displays copyright, credits and license
-            information.</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry><application>OmegaT</application> remembers the visited
+              segments. With this command you can step forward in the project
+              history.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Back in history</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry><application>OmegaT</application> remembers the visited
+              segments. With this command you can step back in the project
+              history.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.View">
+      <title>View<indexterm class="singular">
+          <primary>Main menu</primary>
+
+          <secondary>View</secondary>
+        </indexterm></title>
+
+      <table colsep="1" id="view.menu.table">
+        <title>View menu</title>
+
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
+
+          <colspec align="left" colnum="2" colwidth="120"/>
+
+          <colspec align="left" colnum="3" colwidth="630"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Mark Translated
+              Segments</guimenuitem></entry>
+
+              <entry> </entry>
+
+              <entry>If checked, translated segments will display the
+              translated text marked with a yellow background.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Mark Untranslated
+              Segments</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>If checked, untranslated segments will display the source
+              text marked with a violet background.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Display Source
+              Segments</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>If checked, all segments will display the source text
+              marked with a green background. If untranslated segments are
+              also marked, only translated segments will display the source
+              that way.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Mark Non-Unique
+              Segments</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>If checked, non-unique segments will be marked in a light
+              gray font.</entry>
+            </row>
+
+            <row>
+              <entry><menuchoice>
+                  <guimenu>Modification Info</guimenu>
+
+                  <guimenuitem>Display None / Display All / Display
+                  Selected</guimenuitem>
+                </menuchoice></entry>
+
+              <entry/>
+
+              <entry>Setting the Modification Info option to <emphasis>Display
+              Selected</emphasis> will display the time and the author of the
+              last change for the current segment. Setting it to<emphasis>
+              Display All </emphasis>shows this information for all segments
+              and <emphasis>None</emphasis> turns this option off.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Tools">
+      <title>Tools<indexterm class="singular">
+          <primary>Main menu</primary>
+
+          <secondary>Tools</secondary>
+        </indexterm></title>
+
+      <table colsep="1" id="tools.menu.table">
+        <title>Tools menu</title>
+
+        <indexterm class="singular">
+          <primary>Matches</primary>
+
+          <secondary>Matches statistics</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Project</primary>
+
+          <secondary>Match statistics</secondary>
+        </indexterm>
+
+        <indexterm class="singular">
+          <primary>Project</primary>
+
+          <secondary>Statistics</secondary>
+        </indexterm>
+
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
+
+          <colspec align="left" colnum="2" colwidth="120"/>
+
+          <colspec align="left" colnum="3" colwidth="630"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Validate Tags</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>Checks for missing or displaced tags in formatted files.
+              Will display a list of segments with tag errors and possible
+              inconsistencies. See <link linkend="section.tag.validation">Tag
+              Validation</link> and <xref
+              linkend="chapter.formatted.text"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Remove Tags</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>When enabled, all the formatting tags are removed from
+              the source segments.<link linkend="section.tag.validation">Tag
+              Validation</link> and <xref
+              linkend="chapter.formatted.text"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Statistics</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Opens a new window and displays the project statistics,
+              i.e. the project totals and totals for every file in the
+              project.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Match Statistics</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Displays the Match Statistics for the project: the number
+              of repetitions, exact matches, fuzzy matches and no-matches, for
+              segments, words and in characters.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Options">
+      <title><indexterm class="singular">
+          <secondary>Options</secondary>
+        </indexterm>Options</title>
+
+      <table colsep="1" id="options.menu.table">
+        <title>Options menu</title>
+
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
+
+          <colspec align="left" colnum="2" colwidth="120"/>
+
+          <colspec align="left" colnum="3" colwidth="630"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>Use TAB To Advance</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Sets segment validation key to
+              <guimenuitem>Tab</guimenuitem> instead of the default
+              <guimenuitem>Enter</guimenuitem>. This option is useful for some
+              Chinese, Japanese or Korean character input systems.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Always Confirm Quit</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>The program will see confirmation before closing
+              down.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Machine Translate</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Allows you to activate/deactivate the Machine Translation
+              tools offered. When active, <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo> will insert the suggestion into the target part of
+              the current segment.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>TransTips</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Allows you to activate/deactivate <emphasis>TransTips
+              </emphasis>feature and set its option<emphasis> Exact
+              Match.</emphasis> With <emphasis>TransTips</emphasis> activated
+              a right click on a highlighted word in the source will open a
+              popup menu with the glossary entries for the word you clicked.
+              You can then click on the preferred translation to insert it
+              into the target segment at the current position. With
+              <emphasis>TransTips/Exact Match </emphasis> checked, only
+              complete words will be checked, otherwise parts of words will be
+              matched as well.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Font...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Shows the dialogue to modify the text display font. Users
+              of old computers who feel window resizing is very slow can try
+              changing the font. See <xref linkend="chapter.font"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>File Filters...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Displays the <link linkend="chapter.file.filters">File
+              filters</link> dialogue to configure file handling and
+              parsing.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Segmentation...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Opens the <link linkend="chapter.segmentation">Source
+              segmentation</link> dialogue to configure text
+              segmentation.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Spell checking...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Displays the <link linkend="chapter.spellchecker">Spell
+              checker setup</link> window to install, configure and activate
+              the spell checker.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Editing Behavior...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Displays the <link
+              linkend="chapter.translation.editing">Translation editing</link>
+              dialog to configure.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Tag Validation...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>For programmers: Allows you to configure the Tag
+              Validator options to also check programming (%...)
+              variables.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Team...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Enter your name here and it will be attached to all
+              segments translated by you.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>View...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Contains the option to have all source segments in bold
+              and to mark the first non-unique segment.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Proxy login...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Enter your user name and your password, if you use a
+              proxy to access your projects.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Restore Main Window</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Restores the components of the main OmegaT window to
+              their default state. Use this feature when you have undocked,
+              moved, or hidden one or more components and you are unable to
+              restore the desired arrangement. It can also be used when panes
+              do not appear as expected following an OmegaT upgrade.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="submenu.Help">
+      <title>Help<indexterm class="singular">
+          <primary>Main menu</primary>
+
+          <secondary>Help</secondary>
+        </indexterm></title>
+
+      <table colsep="1" id="help.menu.table">
+        <title>Help menu</title>
+
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
+
+          <colspec align="left" colnum="2" colwidth="120"/>
+
+          <colspec align="left" colnum="3" colwidth="630"/>
+
+          <tbody>
+            <row>
+              <entry><guimenuitem>User Manual...</guimenuitem></entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry>Opens Help browser displaying this manual in a separate
+              window.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>About...</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>Displays copyright, credits and license
+              information.</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
   </section>
 
   <section id="keyboard.shortcuts">
@@ -900,8 +1062,8 @@
     <para>Ctrl is used on Windows, UNIX and UNIX-like operating systems with
     keyboards featuring a <keycap>Ctrl</keycap> / <keycap>Control
     key</keycap>. Mac users should instead use the
-    <guimenuitem>cmd+key.</guimenuitem> On Apple keyboards the
-    <guimenuitem>cmd</guimenuitem> key either has a command label or an Apple
+    <guimenuitem>Cmd+key.</guimenuitem> On Apple keyboards the
+    <guimenuitem>Cmd</guimenuitem> key either has a command label or an Apple
     icon on it.</para>
 
     <itemizedlist>
@@ -948,10 +1110,12 @@
       <table colsep="1">
         <title>Project management shortcuts</title>
 
-        <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100" />
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
 
-          <colspec align="left" colnum="2" colwidth="100" />
+          <colspec align="left" colnum="2" colwidth="120"/>
+
+          <colspec align="left" colnum="3" colwidth="630"/>
 
           <tbody>
             <row>
@@ -965,6 +1129,27 @@
 
               <entry>Displays a dialogue to locate an existing
               project.</entry>
+            </row>
+
+            <row>
+              <entry>Reload</entry>
+
+              <entry><keycap>F5</keycap></entry>
+
+              <entry>Reload the current projet to take project settings
+              modifications into account.</entry>
+            </row>
+
+            <row>
+              <entry>Project files listing</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Displays the Project files listing</entry>
             </row>
 
             <row>
@@ -1040,10 +1225,12 @@
       <table colsep="1">
         <title>Editing shortcuts</title>
 
-        <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100" />
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
 
-          <colspec align="left" colnum="2" colwidth="100" />
+          <colspec align="left" colnum="2" colwidth="120"/>
+
+          <colspec align="left" colnum="3" colwidth="630"/>
 
           <tbody>
             <row>
@@ -1117,9 +1304,11 @@
               <entry>Replace with source</entry>
 
               <entry><keycombo>
+                  <keycap>Shift</keycap>
+
                   <keycap>Ctrl</keycap>
 
-                  <keycap>Shift+R</keycap>
+                  <keycap>R</keycap>
                 </keycombo></entry>
 
               <entry>Replaces the current target segment contents with the
@@ -1130,9 +1319,11 @@
               <entry>Insert source</entry>
 
               <entry><keycombo>
+                  <keycap>Shift</keycap>
+
                   <keycap>Ctrl</keycap>
 
-                  <keycap>Shift+I</keycap>
+                  <keycap>I</keycap>
                 </keycombo></entry>
 
               <entry>Inserts the source text contents into the target segment
@@ -1143,9 +1334,11 @@
               <entry>Insert Source Tags</entry>
 
               <entry><keycombo>
+                  <keycap>Shift</keycap>
+
                   <keycap>Ctrl</keycap>
 
-                  <keycap>Shift+T</keycap>
+                  <keycap>T</keycap>
                 </keycombo></entry>
 
               <entry>Inserts the source tags into the target segment at the
@@ -1176,7 +1369,42 @@
 
               <entry>Replaces the target segment with the machine translation
               of the source. No action, if machine tools are deactivated (see
-              Menu &gt; Options &gt; Machine Translate)</entry>
+              <menuchoice>
+                  <guimenu>Options</guimenu>
+
+                  <guimenuitem>Machine Translate</guimenuitem>
+                </menuchoice>)</entry>
+            </row>
+
+            <row>
+              <entry>Create Glossary Entry</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>G</keycap>
+                </keycombo></entry>
+
+              <entry>Opens a new <link linkend="chapter.glossaries">Glossary
+              entry window</link>.</entry>
+            </row>
+
+            <row>
+              <entry>Switch Case</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>F3</keycap>
+                </keycombo></entry>
+
+              <entry>Changes the case of the highlighted text in the target
+              segment to the selected option (Lower case, Upper case or Title
+              case). If no text is selected, <application>OmegaT</application>
+              selects the word that contains the letter immediately to the
+              right of the cursor.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1193,10 +1421,12 @@
       <table colsep="1">
         <title>Moving around shortcuts</title>
 
-        <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100" />
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
 
-          <colspec align="left" colnum="2" colwidth="100" />
+          <colspec align="left" colnum="2" colwidth="120"/>
+
+          <colspec align="left" colnum="3" colwidth="630"/>
 
           <tbody>
             <row>
@@ -1219,10 +1449,10 @@
                   <keycap>Ctrl</keycap>
 
                   <keycap>N</keycap>
-                </keycombo>, <keycap>Enter</keycap> or
-              <keycap>Return</keycap></entry>
+                </keycombo>, <keycap>Enter</keycap>, <keycap>Return</keycap>
+              or <keycap>Tab</keycap></entry>
 
-              <entry>Moves the editing field to the next segment.</entry>
+              <entry>Moves the editing field to the next segment</entry>
             </row>
 
             <row>
@@ -1232,6 +1462,18 @@
                   <keycap>Ctrl</keycap>
 
                   <keycap>P</keycap>
+                </keycombo>, <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Enter</keycap>
+                </keycombo>, <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Return</keycap>
+                </keycombo> or <keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Tab</keycap>
                 </keycombo></entry>
 
               <entry>Moves the editing field to the previous segment</entry>
@@ -1253,9 +1495,11 @@
               <entry>Back in history...</entry>
 
               <entry><keycombo>
+                  <keycap>Shift</keycap>
+
                   <keycap>Ctrl</keycap>
 
-                  <keycap>Shift+P</keycap>
+                  <keycap>P</keycap>
                 </keycombo></entry>
 
               <entry>Moves one segment back in history</entry>
@@ -1265,9 +1509,11 @@
               <entry>Forward in history...</entry>
 
               <entry><keycombo>
+                  <keycap>Shift</keycap>
+
                   <keycap>Ctrl</keycap>
 
-                  <keycap>Shift+N</keycap>
+                  <keycap>N</keycap>
                 </keycombo></entry>
 
               <entry>Moves one segment forward in history</entry>
@@ -1287,24 +1533,14 @@
       <table colsep="1">
         <title>Various shortcuts</title>
 
-        <tgroup cols="3" colsep="1">
-          <colspec align="left" colnum="1" colwidth="100" />
+        <tgroup cols="3" colsep="1" role="800">
+          <colspec align="left" colnum="1" colwidth="150"/>
 
-          <colspec align="left" colnum="2" colwidth="100" />
+          <colspec align="left" colnum="2" colwidth="120"/>
+
+          <colspec align="left" colnum="3" colwidth="630"/>
 
           <tbody>
-            <row>
-              <entry>Project files listing</entry>
-
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>L</keycap>
-                </keycombo></entry>
-
-              <entry>Displays the Project files listing</entry>
-            </row>
-
             <row>
               <entry>Validate Tags</entry>
 
@@ -1323,7 +1559,9 @@
               <entry><keycombo>
                   <keycap>Shift</keycap>
 
-                  <keycap>Ctrl+C</keycap>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
                 </keycombo></entry>
 
               <entry>Exports the current selection or the current source, if
@@ -1355,5 +1593,742 @@
         </tgroup>
       </table>
     </section>
+  </section>
+
+  <section id="ch04.shortcuts.customization">
+    <title><indexterm class="singular">
+        <primary>Shortcuts</primary>
+
+        <secondary>Customization</secondary>
+      </indexterm>Shortcuts customization</title>
+
+    <para>Most of the items that appear in the main menu can have a new
+    shortcut assigned. Only the most commonly used menu items are assigned a
+    shortcut by default. You can change the already assigned shortcuts and add
+    new shortcuts by putting a shortcut definition file in your OmegaT
+    preferences folder (see <link linkend="user.files.location">User files
+    location</link>).</para>
+
+    <para>The shortcut definition file must be named
+    <filename>MainMenuShortcuts.properties</filename> and must contain at most
+    one shortcut definition per line. Empty lines are accepted and comment
+    lines should start with "//". Anything after the "//" will be
+    ignored.</para>
+
+    <para>Once the <filename>MainMenuShortcuts.properties</filename> file is
+    modified, <application>OmegaT</application> must be relaunched to take the
+    new shortcuts into account.</para>
+
+    <para>The shortcut definition syntax is the following: <code>&lt;menu item
+    code&gt;=&lt;shortcut&gt;</code>, where <emphasis>&lt;menu item
+    code&gt;</emphasis> is a code taken from the <link
+    linkend="menu.item.codes">Menu Item Codes</link> table and
+    <emphasis>&lt;shortcut&gt;</emphasis> is a combination of pressed keys
+    specified by the user<footnote>
+        <para>The full syntax for keystrokes (shortcuts) is defined in the
+        following Java 1.6 documentation from Oracle (bottom of page): <ulink
+        url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java
+        1.6 keystrokes shortcuts</ulink></para>
+      </footnote>.</para>
+
+    <para>&lt;shortcut&gt; must be of the following form:<code>0 or more
+    &lt;modifier&gt; followed by 0 or 1 &lt;event&gt; followed by 1
+    &lt;key&gt;</code>, where:<itemizedlist>
+        <listitem>
+          <para><code>&lt;modifier&gt;</code> can be:
+          <emphasis>shift</emphasis>, <emphasis>control</emphasis>,
+          <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
+              <para>On the Mac, the modifier <emphasis>meta</emphasis> must be
+              used to specify the <emphasis>command</emphasis> key.</para>
+            </footnote>, <emphasis>alt</emphasis>,
+          <emphasis>altGraph</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para><code>&lt;event&gt;</code> can be: <emphasis>typed</emphasis>,
+          <emphasis>pressed</emphasis>, <emphasis>released</emphasis></para>
+        </listitem>
+
+        <listitem>
+          <para>and <code>&lt;key&gt;</code> can be any key available on your
+          keyboard<footnote>
+              <para>The possible keyevents (keys) are listed in the following
+              Java 1.6 documentation from Oracle: <ulink
+              url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java
+              1.6 keyEvents description</ulink></para>
+            </footnote>.</para>
+        </listitem>
+      </itemizedlist></para>
+
+    <para>For exemple, in the default OmegaT shortcuts<footnote>
+        <para>The default OmegaT shortcuts are available from Sourceforge:
+        <ulink
+        url="http://omegat.svn.sourceforge.net/viewvc/omegat/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
+        OmegaT Shortcuts</ulink></para>
+
+        <para>The default OmegaT shortcuts for the Mac are also available from
+        Sourceforge, they all use "meta" instead of "ctrl": <ulink
+        url="http://omegat.svn.sourceforge.net/viewvc/omegat/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
+        OmegaT Shortcuts for the Mac</ulink></para>
+      </footnote>, one can find:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><code>projectOpenMenuItem=ctrl O</code></para>
+      </listitem>
+
+      <listitem>
+        <para><code>editCreateGlossaryEntryMenuItem=ctrl shift G</code></para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The first is the shortcut for <guimenuitem>Open
+    Project</guimenuitem>, the second for <guimenuitem>Create Glossary
+    Entry</guimenuitem>.</para>
+
+    <para>If you want to use <keycombo>
+        <keycap>Shift</keycap>
+
+        <keycap>Ctrl</keycap>
+
+        <keycap>O</keycap>
+      </keycombo> to open a project, modify your
+    <filename>MainMenuShortcuts.properties</filename> so that it looks like
+    this:<code> projectOpenMenuItem=shift ctrl O</code>.</para>
+
+    <para>If you are on a Mac and you want to add a <keycombo>
+        <keycap>Shift</keycap>
+
+        <keycap>Command</keycap>
+
+        <keycap>S</keycap>
+      </keycombo> shortcut to <menuchoice>
+        <guimenu>Tools</guimenu>
+
+        <guimenuitem>Statistics</guimenuitem>
+      </menuchoice>, add the following line to your
+    <filename>MainMenuShortcuts.properties</filename>:<code>
+    toolsShowStatisticsStandardMenuItem=shift meta S</code>, then save the
+    file and relaunch <application>OmegaT</application>. Your new shortcuts
+    should now appear next to the modified menu items. If they do not conflict
+    with system shortcuts, they should be available from within OmegaT.</para>
+
+    <table id="menu.item.codes">
+      <title>Menu Item Codes</title>
+
+      <indexterm class="singular">
+        <primary>Shortcuts</primary>
+
+        <secondary>Customization</secondary>
+      </indexterm>
+
+      <tgroup cold="3" cols="3" colsep="1" role="800">
+        <colspec align="left" colname="1" colnum="1" colwidth="300"/>
+
+        <colspec align="left" colname="2" colnum="2" colwidth="150"/>
+
+        <colspec align="right" colname="3" colnum="3" colwidth="450"/>
+
+        <thead>
+          <row>
+            <entry>Menu Item</entry>
+
+            <entry>Default shortcut</entry>
+
+            <entry>Menu Item Code</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry align="center" nameend="3" namest="1">Project Menu</entry>
+          </row>
+
+          <row>
+            <entry>New</entry>
+
+            <entry/>
+
+            <entry>projectNewMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Open</entry>
+
+            <entry>Ctrl+O</entry>
+
+            <entry>projectOpenMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Import Source Files...</entry>
+
+            <entry/>
+
+            <entry>projectImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Import From MediaWiki...</entry>
+
+            <entry/>
+
+            <entry>projectWikiImportMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Reload</entry>
+
+            <entry>F5</entry>
+
+            <entry>projectReloadMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Close</entry>
+
+            <entry>Ctrl+Shift+W</entry>
+
+            <entry>projectCloseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Save</entry>
+
+            <entry>Ctrl+S</entry>
+
+            <entry>projectSaveMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Create translated documents</entry>
+
+            <entry>Ctrl+D</entry>
+
+            <entry>projectCompileMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Properties...</entry>
+
+            <entry>Ctrl+E</entry>
+
+            <entry>projectEditMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Project Files...</entry>
+
+            <entry>Ctrl+L</entry>
+
+            <entry>viewFileListMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Quit</entry>
+
+            <entry>Ctrl+Q</entry>
+
+            <entry>projectExitMenuItem</entry>
+          </row>
+
+          <row>
+            <entry align="center" nameend="3" namest="1">Edit Menu</entry>
+          </row>
+
+          <row>
+            <entry>Undo Last Action</entry>
+
+            <entry>Ctrl+Z</entry>
+
+            <entry>editUndoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Redo Last Action</entry>
+
+            <entry>Ctrl+Y</entry>
+
+            <entry>editRedoMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Replace With Match</entry>
+
+            <entry>Ctrl+R</entry>
+
+            <entry>editOverwriteTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Insert Match</entry>
+
+            <entry>Ctrl+I</entry>
+
+            <entry>editInsertTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Replace with Machine Translation</entry>
+
+            <entry>Ctrl+M</entry>
+
+            <entry>editOverwriteMachineTranslationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Replace With Source</entry>
+
+            <entry>Shift+Ctrl+R</entry>
+
+            <entry>editOverwriteSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Insert Source</entry>
+
+            <entry>Shift+Ctrl+I</entry>
+
+            <entry>editInsertSourceMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Insert Source Tags</entry>
+
+            <entry>Shift+Ctrl+T</entry>
+
+            <entry>editTagPainterMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Export Selection</entry>
+
+            <entry>Shift+Ctrl+C</entry>
+
+            <entry>editExportSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Create Glossary Entry</entry>
+
+            <entry>Shift+Ctrl+G</entry>
+
+            <entry>editCreateGlossaryEntryMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Search Project...</entry>
+
+            <entry>Ctrl+F</entry>
+
+            <entry>editFindInProjectMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Select Fuzzy Match 1</entry>
+
+            <entry>Ctrl+1</entry>
+
+            <entry>editSelectFuzzy1MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Select Fuzzy Match 2</entry>
+
+            <entry>Ctrl+2</entry>
+
+            <entry>editSelectFuzzy2MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Select Fuzzy Match 3</entry>
+
+            <entry>Ctrl+3</entry>
+
+            <entry>editSelectFuzzy3MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Select Fuzzy Match 4</entry>
+
+            <entry>Ctrl+4</entry>
+
+            <entry>editSelectFuzzy4MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Select Fuzzy Match 5</entry>
+
+            <entry>Ctrl+5</entry>
+
+            <entry>editSelectFuzzy5MenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Use as Default Translation</entry>
+
+            <entry/>
+
+            <entry>editMultipleDefault</entry>
+          </row>
+
+          <row>
+            <entry>Create Alternative Translation</entry>
+
+            <entry/>
+
+            <entry>editMultipleAlternate</entry>
+          </row>
+
+          <row>
+            <entry>Lower Case</entry>
+
+            <entry/>
+
+            <entry>lowerCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Upper Case</entry>
+
+            <entry/>
+
+            <entry>upperCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Title Case</entry>
+
+            <entry/>
+
+            <entry>titleCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Switch case to...</entry>
+
+            <entry>Shift+F3</entry>
+
+            <entry>cycleSwitchCaseMenuItem</entry>
+          </row>
+
+          <row>
+            <entry align="center" nameend="3" namest="1">Go To Menu</entry>
+          </row>
+
+          <row>
+            <entry>Next Untranslated Segment</entry>
+
+            <entry>Ctrl+U</entry>
+
+            <entry>gotoNextUntranslatedMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Next Segment</entry>
+
+            <entry>Ctrl+N or Enter or Tab</entry>
+
+            <entry>gotoNextSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Previous Segment</entry>
+
+            <entry>Ctrl+P or Ctrl+Enter or Ctrl+Tab</entry>
+
+            <entry>gotoPreviousSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Segment number...</entry>
+
+            <entry>Ctrl+J</entry>
+
+            <entry>gotoSegmentMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Next Note</entry>
+
+            <entry/>
+
+            <entry>gotoNextNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Previous Note</entry>
+
+            <entry/>
+
+            <entry>gotoPreviousNoteMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Back in history</entry>
+
+            <entry>Ctrl+Shift+P</entry>
+
+            <entry>gotoHistoryForwardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Forward in history</entry>
+
+            <entry>Ctrl+Shift+N</entry>
+
+            <entry>gotoHistoryBackMenuItem</entry>
+          </row>
+
+          <row>
+            <entry align="center" nameend="3" namest="1">View Menu</entry>
+          </row>
+
+          <row>
+            <entry>Mark Translated Segments</entry>
+
+            <entry/>
+
+            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Mark Untranslated Segments</entry>
+
+            <entry/>
+
+            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Display Source Segments</entry>
+
+            <entry/>
+
+            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Mark Non-Unique Segments</entry>
+
+            <entry/>
+
+            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Modification Info/Display None</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Modification Info/Display Selected</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Modification Info/Display All</entry>
+
+            <entry/>
+
+            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
+          </row>
+
+          <row>
+            <entry align="center" nameend="3" namest="1">Tools Menu</entry>
+          </row>
+
+          <row>
+            <entry>Validate Tags</entry>
+
+            <entry>Ctrl +T</entry>
+
+            <entry>toolsValidateTagsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Remove Tags</entry>
+
+            <entry/>
+
+            <entry>toolsRemoveTagsCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Statistics</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsStandardMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Match Statistics</entry>
+
+            <entry/>
+
+            <entry>toolsShowStatisticsMatchesMenuItem</entry>
+          </row>
+
+          <row>
+            <entry align="center" nameend="3" namest="1">Options Menu</entry>
+          </row>
+
+          <row>
+            <entry>Use TAB To Advance</entry>
+
+            <entry/>
+
+            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Always Confirm Quit</entry>
+
+            <entry/>
+
+            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Machine Translate</entry>
+
+            <entry/>
+
+            <entry/>
+          </row>
+
+          <row>
+            <entry>TransTips/Enable Transtips</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsEnableMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>TransTips/Exact Match</entry>
+
+            <entry/>
+
+            <entry>optionsTransTipsExactMatchMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Font...</entry>
+
+            <entry/>
+
+            <entry>optionsFontSelectionMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>File Filters...</entry>
+
+            <entry/>
+
+            <entry>optionsSetupFileFiltersMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Segmentation...</entry>
+
+            <entry/>
+
+            <entry>optionsSentsegMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Spell checking...</entry>
+
+            <entry/>
+
+            <entry>optionsSpellCheckMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Editing Behavior...</entry>
+
+            <entry/>
+
+            <entry>optionsWorkflowMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Tag Validation...</entry>
+
+            <entry/>
+
+            <entry>optionsTagValidationMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Team...</entry>
+
+            <entry/>
+
+            <entry>optionsTeamMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>External TMXs...</entry>
+
+            <entry/>
+
+            <entry>optionsExtTMXMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>View...</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>Proxy login...</entry>
+
+            <entry/>
+
+            <entry>optionsViewOptionsMenuLoginItem</entry>
+          </row>
+
+          <row>
+            <entry>Restore Main Window</entry>
+
+            <entry/>
+
+            <entry>optionsRestoreGUIMenuItem</entry>
+          </row>
+
+          <row>
+            <entry align="center" nameend="3" namest="1">Help Menu</entry>
+          </row>
+
+          <row>
+            <entry>User Manual...</entry>
+
+            <entry>F1</entry>
+
+            <entry>helpContentsMenuItem</entry>
+          </row>
+
+          <row>
+            <entry>About...</entry>
+
+            <entry/>
+
+            <entry>helpAboutMenuItem</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
   </section>
 </chapter>

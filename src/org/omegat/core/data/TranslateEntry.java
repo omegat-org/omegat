@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Alex Buloichik
+               2012 Wildrich Fourie
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,6 +32,8 @@ import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.Language;
+import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
 /**
@@ -40,6 +43,7 @@ import org.omegat.util.StringUtil;
  * seconds pass.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Wildrich Fourie
  */
 public abstract class TranslateEntry implements ITranslateCallback {
 
@@ -89,8 +93,15 @@ public abstract class TranslateEntry implements ITranslateCallback {
     public String getTranslation(final String id, final String origSource, final String path) {
         ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
 
+        // fix for bug 3487497; 
+        // Fetch removed tags if the options 
+        // has been enabled.
+        String tags = null;
+        if(Preferences.getPreference(Preferences.REMOVE_TAGS).equalsIgnoreCase("true"))
+            tags = StaticUtils.buildPaintPlaceholderList(origSource);
+        
         final String source = ParseEntry.stripSomeChars(origSource, spr);
-
+        
         StringBuffer res = new StringBuffer();
 
         if (m_config.isSentenceSegmentingEnabled()) {
@@ -121,12 +132,19 @@ public abstract class TranslateEntry implements ITranslateCallback {
             }
             res.append(tr);
         }
-
+        
         // replacing all occurrences of LF (\n) by either single CR (\r) or CRLF
         // (\r\n)
         // this is a reversal of the process at the beginning of this method
         // fix for bug 1462566
         String r = res.toString();
+        
+        // fix for bug 3487497; 
+        // explicitly add the removed tags at 
+        // the end of the translated string.
+        if(tags != null)
+            r += tags;
+        
         if (spr.crlf) {
             r = r.replace("\n", "\r\n");
         } else if (spr.cr) {
@@ -140,7 +158,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         if (spr.spacesAtEnd > 0) {
             r = r + origSource.substring(origSource.length() - spr.spacesAtEnd);
         }
-
+        
         return r;
     }
 

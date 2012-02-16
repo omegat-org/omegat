@@ -292,7 +292,7 @@ public abstract class ParseEntry implements IParseCallback {
         if (per.cr)
             r = r.replace("\r", "\n");
 
-        if(Preferences.getPreference(Preferences.REMOVE_TAGS).equals("true")) {
+        if(Preferences.getPreference(Preferences.REMOVE_TAGS).equalsIgnoreCase("true")) {
             r = PatternConsts.OMEGAT_TAG.matcher(r).replaceAll("");
         }
         

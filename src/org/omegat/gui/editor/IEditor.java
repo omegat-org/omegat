@@ -5,7 +5,7 @@
 
  Copyright (C) 2008-2010 Alex Buloichik
                2011 Alex Buloichik, Didier Briel
-               2012 Guido Leenders
+               2012 Guido Leenders, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -52,6 +52,8 @@ public interface IEditor {
         CYCLE,
     }
 
+    int CURSOR_ON_START_OF_ENTRY = -1;
+    int CURSOR_ON_END_OF_ENTRY = -2;
     /**
      * Get current file name which opened in editor.
      * 
@@ -75,10 +77,19 @@ public interface IEditor {
 
     /**
      * Activate entry for edit.
+     *
+     * Must be called only from UI thread.
+     *
+     * Will position cursor at the start of segment
+     */
+    void activateEntry();
+
+    /**
+     * Activate entry for edit.
      * 
      * Must be called only from UI thread.
      */
-    void activateEntry();
+    void activateEntry(int preferredPosition);
 
     /**
      * Commits the translation and deactivate entry. Translation will be saved.

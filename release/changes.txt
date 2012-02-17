@@ -2,7 +2,7 @@
  OmegaT 2.5.1 update 1
 ----------------------------------------------------------------------
    2 Enhancements
-   1 Bug fix
+   2 Bug fixes
    0 Localisation updates
 ----------------------------------------------------------------------
 2.5.1 update 1 vs. 2.5.1 
@@ -19,6 +19,9 @@
 
   - Remove Tags can create a corrupted target document
   http://sourceforge.net/support/tracker.php?aid=3487497
+
+  - After "save" the cursor goes to the head of the segment
+  http://sourceforge.net/support/tracker.php?aid=1643198
 
 ----------------------------------------------------------------------
  OmegaT 2.5.1

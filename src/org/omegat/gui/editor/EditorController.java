@@ -9,7 +9,7 @@
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel
                2011 Alex Buloichik, Martin Fleurke, Didier Briel
-               2012 Guido Leenders
+               2012 Guido Leenders, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -483,13 +483,20 @@ public class EditorController implements IEditor {
         editor.repaint();
     }
 
+    /*
+     * Activates the current entry and puts the cursor at the start of segment
+     */
+    public void activateEntry() {
+        activateEntry(CURSOR_ON_START_OF_ENTRY);
+    }
+
     /**
      * Activates the current entry (if available) by displaying source text and embedding displayed text in
      * markers.
      * <p>
      * Also moves document focus to current entry, and makes sure fuzzy info displayed if available.
      */
-    public void activateEntry() {
+    public void activateEntry(int preferredPosition) {
         UIThreadsUtil.mustBeSwingThread();
 
         SourceTextEntry ste = getCurrentEntry();
@@ -530,7 +537,23 @@ public class EditorController implements IEditor {
         }
 
         scrollForDisplayNearestSegments(editor.getOmDocument().getTranslationStart());
-
+        int te = editor.getOmDocument().getTranslationEnd();
+        int ts = editor.getOmDocument().getTranslationStart();
+        int newPosition;
+        //
+        // Navigate to entry as requested.
+        //
+        if (preferredPosition == CURSOR_ON_START_OF_ENTRY) {
+            newPosition = ts;
+        } else if (preferredPosition == CURSOR_ON_END_OF_ENTRY) {
+            newPosition = te;
+        } else if (preferredPosition >= ts && preferredPosition <= te) {
+            newPosition = preferredPosition;
+        } else {
+            // Default is start.
+            newPosition = ts;
+        }
+        scrollForDisplayNearestSegments(newPosition);
         // check if file was changed
         if (previousDisplayedFileIndex != displayedFileIndex) {
             previousDisplayedFileIndex = displayedFileIndex;
@@ -789,8 +812,14 @@ public class EditorController implements IEditor {
      * {@inheritDoc}
      */
     public void commitAndLeave() {
+    //
+    // Memorize current position of cursor.
+    // After deactivating and activating with shrinking and expanding text, we might
+    // be able to position the current at this position again.
+    //
+        int currentPosition = editor.getCaretPosition();
         commitAndDeactivate();
-        activateEntry();
+        activateEntry(currentPosition);
     }
 
     public void nextEntry() {

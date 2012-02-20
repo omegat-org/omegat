@@ -181,7 +181,7 @@ public class PoFilter extends AbstractFilter {
         translatorComments = new StringBuilder();
         extractedComments = new StringBuilder();
         references = new StringBuilder();
-        path = "";
+        path = null;
 
         String s;
         while ((s = in.readLine()) != null) {
@@ -399,7 +399,7 @@ public class PoFilter extends AbstractFilter {
         sources[1].setLength(0);
         targets[0].setLength(0);
         targets[1].setLength(0);
-        path = "";
+        path = null;
         translatorComments.setLength(0);
         extractedComments.setLength(0);
         references.setLength(0);

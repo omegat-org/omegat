@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.glossaries">
+  <title>词汇表<indexterm class="singular">
+      <primary>OmegaT 窗口和窗格</primary> <secondary>词汇表窗格</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>词汇表</primary>
+    </indexterm></title>
+
+  <para>词汇表是用于 OmegaT 的文件，它由用户手工创建和更新。</para>
+
+  <para>如果某个 <application>OmegaT</application> 项目包含一个或多个词汇表文件，当前片段中出现的任何术语将自动显示在词汇表查看器中。</para>
+
+  <section>
+    <title>用法</title>
+
+    <para>要使用现有的词汇表，只需在创建项目后将它放到 <filename>/glossary</filename> 目录下。在打开项目时，<application>OmegaT</application> 自动检测该目录下的词汇表文件。从词汇表中找到当前片段中的术语后，<application>OmegaT</application> 将会在词汇表窗格将它们显示出来。</para>
+
+    <indexterm class="singular">
+      <primary>词汇表窗格</primary>
+    </indexterm>
+
+    <figure>
+      <title>词汇表窗格</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Glossary_pane.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/Glossary_pane.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>等号之前的单词是源术语，其翻译在等号（＝）之后。词条可以有附加的注释（参阅“及物动词”了解第二项）。词汇表功能只能找到与词汇表条目精确匹配的词汇（也就是说不会找到变化的词形）。在翻译过程中可以手动向词汇表中增加术语（比如在文本编辑器中），但是只有在重新导入项目后才能识别新增的术语。</para>
+
+    <para>源术语可以不是一个单词，例如：</para>
+
+    <figure>
+      <title>词汇表中的多单词条目——示例<indexterm class="singular">
+          <primary>Glossary pane——多单词条目</primary>
+        </indexterm></title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/MultiTerm_Glossary.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/MultiTerm_Glossary.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>加下划线的项 &quot;new preview screenshot&quot; 由三个单词组成，在词汇表窗格中可以看到翻译为 &quot;nov predogled posnetka zaslona&quot;。注意，还能识别多术语项中的部分（比如上面例子中的 &quot;preview&quot;，也显示了它的翻译 &quot;predogled&quot;），但优先级较低。</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>词汇表</primary> <secondary>文件格式</secondary>
+      </indexterm>文件格式<indexterm class="singular">
+        <primary>项目文件</primary> <secondary>用户文件</secondary> <seealso>词汇表</seealso>
+      </indexterm></title>
+
+    <para>词汇表文件是简单的纯文本文件，包含了以制表符分隔的三列列表，其中第一和第二列分别对应源词汇和目标术语。第三列用来保存附加信息。词汇表文件可以使用系统缺省的编码方式（以扩展名 .tab 表示），或者 UTF-8（扩展名 .utf8）。出于显而易见的理由，Unicode 编码 (UTF8) 是首选。</para>
+
+    <para>还支持 CSV 格式。该格式和 TAB 分隔的相同：源术语，目标术语。注释字段使用逗号 ',' 分隔开来。字符串需要括在引号 &quot; 里面，这样可以在字符串中使用逗号：</para>
+
+    <para><literal>&quot;This is a source term, which contains a comma&quot;,&quot;c'est un
+    terme, qui contient une virgule&quot; </literal></para>
+
+    <para>除了纯文本，还支持 TBX 格式<indexterm class="singular">
+        <primary>词汇表</primary> <secondary>TBX 格式</secondary>
+      </indexterm>。TBX（Term Base eXchange）是用于交换结构化术语数据的开放的基于 XML 标准，已经被 LISA<indexterm class="singular">
+        <primary>LISA - </primary> <secondary>文件格式</secondary>
+      </indexterm> 和 ISO 批准为国际标准。如果您已经有术语管理系统（例如 MultiTerm），那么它很可能提供了导出 TBX 格式术语数据的功能。<ulink url="http://www.microsoft.com/Language/en-US/Terminology.aspx">微软术语集</ulink> <indexterm class="singular">
+        <primary>词汇表</primary> <secondary>微软术语集</secondary>
+      </indexterm>可以下载将近 100 种语言的术语，它可以作为 IT 词汇表的基础。</para>
+  </section>
+
+  <section>
+    <title>如何创建词汇表<indexterm class="singular">
+        <primary>词汇表</primary> <secondary>创建词汇表</secondary>
+      </indexterm></title>
+
+    <para>如果遵循合理的谨慎态度，下面的方法是万无一失的。您需要 OpenOffice.org Writer 来完成操作，因此如果您没有该软件，请下载并安装 OpenOffice.org 。启动 OpenOffice.org 并打开一个新的文本文档或启动 &quot;OpenOffice.org Writer&quot;。</para>
+
+    <para>在空文档中按照下列方式录入术语：术语原文，TAB间隔，术语的目标语言的翻译，TAB间隔，该词条的注释或解释，回车符。TAB间隔是键盘左边的跳格键。如果不想输入注释，可以省去第二个 TAB 间隔。&quot;术语&quot;可以是一个单词或一条短语。在第二行，输入第二条术语及其翻译。</para>
+
+    <para>在完成术语录入工作后，您将有两“列”术语，左边的术语原文，其目标语言的翻译在右边，可能还会有包括注释和解释的第三列，在 Writer 软件的标准书写条点击 ¶ 图标可以让 TAB 间隔（下例中的 → ）和回车符 (¶ ) 变得可见。下面是几行英语－德语词汇表：</para>
+
+    <para><literal>word →Wort→das (-/e/s, Wörter/-e)¶</literal></para>
+
+    <para><literal>small house→Häuschen→das, (pl Häuschen)¶</literal></para>
+
+    <para><literal>dog →Hund→m, f Hündin ¶</literal></para>
+
+    <para><literal>horse→Pferd→n, m Hengst f Stute n Fohlen¶</literal></para>
+
+    <para>请勿使用 OpenOffice.org 的 &quot;列&quot; 功能创建术语表的列：仅需在原文－目标语言术语对之间使用一个 TAB 间隔。</para>
+
+    <para>在完成词条的录入后，把文件保存为 Unicode 编码，例如：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>选择<literal>File &gt;另存为</literal></para>
+      </listitem>
+
+      <listitem>
+        <para>在<emphasis>“文件位置”</emphasis>框中输入词汇表文件的名称。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>在“过滤器中”选择“<emphasis>Text Encoded (.txt.)</emphasis>”</para>
+      </listitem>
+
+      <listitem>
+        <para>确保未选中“<emphasis>自动文件名扩展</emphasis>”和<emphasis>“编辑过滤器设置”</emphasis>。</para>
+      </listitem>
+    </itemizedlist>
+
+    <figure>
+      <title>保存词汇表</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/saveglossary.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/saveglossary.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>点击“确定”确认。</para>
+
+    <para>创建 OmegaT 项目之后，将该文件复制或移动到项目的 \glossary 目录中。如果项目已经打开，复制词汇文件后重新加载项目。可以对正被项目使用的词汇表文件进行修改。词汇表修改大约每秒钟就会被检测一次，且修改会在后台透明地被加载，因此在保存新词汇表文件之后无需重新加载项目文件。</para>
+
+    <para>当包含了源文本术语的片段被打开后，词汇表窗格将显示出源片段中可在词汇表中找到的词条（或者多个词条——可以有多个词汇表保存在 glossary 的子目录中）。</para>
+
+    <para><emphasis role="bold">请注意：</emphasis>还有其他创建含 TAB 分隔条目的简单文件的方法，并且许多比上面建议做法更简单。例如，有种方法是导出上面的内容为 <filename>CSV</filename> 来代替 <filename>UTF8</filename> 文本文件。需要提示的一点是上面的建议适用于任意系统，包括 Windows、OS X 或 Linux。例如没人会反对在 Windows 上使用 Notepad++ 或在 Linux 上使用 GEdit：可以使用任何能处理 UTF8 和显示空格（这样就不会遗漏必须的 <keycap>TAB</keycap> 字符）的文本编辑器。</para>
+
+    <para>词汇表文件的内容会存放到内存中，在打开或重新载入项目时加载它们。因此更新词汇表文件非常简单：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>让文件在您喜欢的编辑器中保持打开状态</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>当遇到想要添加到词汇表中的新术语时，输入新的术语及其翻译和注释（确保在字段间使用了 TAB）并保存文件。因此词汇表窗格的内容将会被更新。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>词汇表</primary> <secondary>Trados MultiTerm</secondary>
+      </indexterm>使用 Multiterm</title>
+
+    <para>在 Trados MultiTerm 导出的数据可以不加修改地用作 <application>OmegaT</application> 词汇表，只需以 <filename>.tab</filename>为扩展名，并让对应的源词汇和目标术语分别为头两个字段。</para>
+
+    <para>如果使用 &quot;Tab-delimited export&quot; 系统选项导出，您必须删除头 5 列（包括编号, 创建日期等等）。新版本的 MultiTerm 支持导出为 TBX 格式。</para>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>词汇表</primary> <secondary>词汇表相关问题</secondary>
+      </indexterm>常见词汇表问题</title>
+
+    <para><emphasis role="bold">问题：未显示词汇表术语——可能的解决方法：</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>&quot;glossary&quot; 目录中没有找到词汇表文件。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>词汇表文件为空。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>词条的各项间未使用 TAB 字符分隔。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>术语表文件未使用正确的扩展名（.tab 或 .utf8）。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>词汇表词条和文档中的原文未完全匹配－－例如该词条是复数形式。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>词汇表文件没有采用正确的编码。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>当前片段中没有任何术语与词汇表中的术语相匹配。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>上述一个或多个问题已经被修正，但项目还没有被重新载入。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para><emphasis role="bold">问题：在词汇表窗格中某些字符显示不正确。</emphasis></para>
+
+    <itemizedlist>
+      <listitem>
+        <para>……但在编辑窗格中能正确显示这些字符：扩展名与文件编码方式不匹配。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

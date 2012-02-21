@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.files.to.translate">
+  <title>待译文件</title>
+
+  <section id="file.formats">
+    <title>文件格式<indexterm class="singular">
+        <primary>源文件</primary> <secondary>文件格式</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>目标文件</primary> <secondary>文件格式</secondary>
+      </indexterm></title>
+
+    <para><application>您可以使用 OmegaT</application> 翻译一些文件格式。最基本的文件类型有两种，纯文本和格式化文本格式。</para>
+
+    <section>
+      <title>纯文本文件<indexterm class="singular">
+          <primary>目标文件</primary> <secondary>纯文本文件</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>源文件</primary> <secondary>纯文本文件</secondary>
+        </indexterm></title>
+
+      <para>纯文本文件中只含有文本，因为对它们的翻译工作就像输入翻译一样简单。有多种方法可以指定文件的编码，以确保 <application>OmegaT</application> 打开它们时不会显示乱码。这样的文本除了用于对齐文本、标示段落或插入页面的“空白”之外没有任何格式化信息。它们无法包含或保留关于文本的颜色、字体等的信息。目前，<application>OmegaT</application> 支持以下纯文本格式：<indexterm class="singular">
+          <primary>文件格式</primary> <secondary>无格式</secondary> <seealso>源文件</seealso>
+        </indexterm></para>
+
+      <itemizedlist>
+        <listitem>
+          <para>ASCII 文本（.txt 等）</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>编码文本（*.UTF8）</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>Java 资源文件（*.properties）</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>PO 文件（*.po）</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>INI (key=value) 文件（*.ini）</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
+        <listitem>
+          <para>DTD 文件（*.DTD）</para>
+        </listitem>
+
+        <listitem>
+          <para>DocuWiki 文件（*.txt）</para>
+        </listitem>
+      </itemizedlist>
+
+        <itemizedlist>
+          <listitem>
+            <para>SubRip 标题文件 (*.srt)</para>
+          </listitem>
+        </itemizedlist>
+        
+       <itemizedlist>
+        <listitem>
+          <para>Magento CE Locale CSV 文件 (*.csv)</para>
+        </listitem>
+      </itemizedlist>
+
+      <para><application>OmegaT</application> 可以处理的其它的纯文本文件可以通过将其文件扩展名关联到所支持的文件类型（比方说，.pod 文件可以关联到 ASCII 文本过滤器）并使用特定的分割 规则来进行预处理。</para>
+    </section>
+
+    <section>
+      <title>格式化文本文件<indexterm class="singular">
+          <primary>目标文件</primary> <secondary>格式化文本文件</secondary> <seealso>标记文本</seealso>
+        </indexterm><indexterm class="singular">
+          <primary>源文件</primary> <secondary>格式化文本文件</secondary>
+        </indexterm></title>
+
+      <para>格式化文本文件除了包含文本之外，还包括字体类型、大小、颜色等信息。它们通常由文字处理器和 HTML 编辑器创建。这些文件格式是设计用来保持格式信息的。这些格式信息可能就像 “这是粗体”一样简单，也可能是包含了不同的字体大小、颜色和位置等信息的表格数据一样复杂。在大多数翻译工作中，在译文中保留原文的格式信息是很重要的。通过使用易于维护的 TAG 来标记拥有特殊格式的字符或单词，OmegaT 让您能够做到这一点。对源文本格式的简化很大程度上有助于减少标签的数量。如果有可能应该考虑在文档中使用统一的字体、字体大小、颜色等，以此简化翻译工作和减少可能的标签错误。每种文件格式在 OmegaT 中的处理方式都不同。可在文件过滤器设置特定的动作。在写此文档时，OmegaT 支持以下格式化的文本格式：<indexterm class="singular">
+          <primary>文件格式</primary> <secondary>格式化</secondary> <seealso>源文件</seealso>
+        </indexterm></para>
+
+      <para><itemizedlist>
+          <listitem>
+            <para>OpenOffice.org / OpenDocument (*.ods, *.ots, *.odt, *.ott,
+            *.odp, *.otp)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Microsoft Office Open XML (*.docx, *.dotx, *.xlsx, *.xltx,
+            *.pptx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>(X)HTML (*.html, *.xhtml,*.xht)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>HTML Help Compiler (*.hhc, *.hhk)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>DocBook (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - 单语的，即对于指定项目只有一种可能的语言组合</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>QuarkXPress CopyFlowGold (*.tag, *.xtg)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>ResX 文件 (*.resx)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>Android 资源 (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>LaTex (*.tex, *.latex)</para>
+          </listitem>
+
+          <listitem>
+            <para>Help (*.xml) 和 Manual (*.hmxp) 文件</para>
+          </listitem>
+
+          <listitem>
+            <para>Typo3 LocManager (*.xml)</para>
+          </listitem>
+        </itemizedlist><itemizedlist>
+          <listitem>
+            <para>WiX Localization (*.wxl)</para>
+          </listitem>
+
+          <listitem>
+            <para>Iceni Infix (*.xml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Flash XML export (*.xml)</para>
+          </listitem>
+          <listitem>
+            <para>Wordfast TXML (*.txml)</para>
+          </listitem>
+          <listitem>
+            <para>Camtasia for Windows (*.camproj)</para>
+          </listitem>
+
+        </itemizedlist></para>
+
+      <para>其它的格式化文本文件可以通过将其文件扩展名关联到所支持的文件类型（假设相应的分割规则可以正确分割它们）来让 OmegaT 进行处理。</para>
+    </section>
+  </section>
+
+  <section id="other.file.formats">
+    <title>其它文件格式<indexterm class="singular">
+        <primary>目标文件</primary> <secondary>其他文件格式</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>源文件</primary> <secondary>其他文件格式</secondary>
+      </indexterm></title>
+
+    <para>还存在适合 OmegaT 处理的其他纯文本或格式化文本文件。</para>
+
+    <para><indexterm class="singular">
+        <primary>目标文件</primary> <secondary>文件转换工具</secondary>
+      </indexterm>可使用外部工具将文件转换成所支持的格式。译后文件需要被转换回最初的格式。例如，如果您使用无法处理 ODT 格式的过时 Microsoft Word 版本，对于 DOC 格式则需要进行下面这样的来回转换：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>将文件导入到 OpenOffice.org writer</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>以 ODT 格式保存文件</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>对它进行翻译并创建目标 ODT 文件</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>在 OpenOffice.org writer 中加载目标文件</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>保存该文件为 DOC 格式</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>译后文档中格式信息的质量将取决于来回转换的质量。在进行类似的转换前，必须确保测试过所有选项。请参阅 <ulink url="http://www.omegat.org">OmegaT 主页</ulink>了解最新的辅助转换工具列表。</para>
+  </section>
+
+  <section id="right.to.left.languages">
+    <title>自右向左语言<indexterm class="singular">
+        <primary>自右向左语言</primary>
+      </indexterm><indexterm class="singular">
+        <primary>目标文件</primary> <secondary>自右向左语言</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>源文件</primary> <secondary>自右向左语言</secondary>
+      </indexterm></title>
+
+    <para>原文和译文的区分取决于项目的语言设置。默认情况下，LTR 语言使用左对齐而 RTL 语言使用右对齐。通过按下 <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>（字母 O 而不是数字 0）来切换不同的显示模式。<keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo>切换有三种状态：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>默认对齐方式，这由语言决定的</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>左对齐</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>右对齐</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>在 <application>OmegaT</application> 中使用  RTL 模式对于 <application>OmegaT</application> 中创建的已译文档的显示模式没有任何影响。已译文档的显示模式必须在常用于显示或编辑它们的应用程序（例如 Microsoft Word）中进行修改（查阅相关手册了解详细信息）。使用 <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> 将使得 <application>OmegaT</application> 中文本的输入和显示模式都改变了。通过点击窗格并切换显示模式，该方法也可单独适用于所有三个窗格（编辑器、模糊匹配和词汇表）。它还使用于在 <application>OmegaT</application> 中的所有输入字段（搜索窗口、片段分割规则等）。</para>
+
+    <para>对于 Mac OS X 用户，请注意：使用 <keycombo> <keycap>Shift</keycap> <keycap>Ctrl</keycap> <keycap>O</keycap> </keycombo> 快捷键而 <emphasis role="bold">不是</emphasis>cmd+Ctrl+O.</para>
+
+    <section>
+      <title>在片段中混合自右向左和自左向右字符串<indexterm class="singular">
+          <primary>自右向左语言</primary> <secondary>混合 RTL 和 LTR 字符串</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>目标文件</primary> <secondary>混合 RTL 和 LTR 字符串</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>源文件</primary> <secondary>混合 RTL 和 LTR 字符串</secondary>
+        </indexterm></title>
+
+      <para>在编写纯自右向左文本时，将使用缺省的（自左向右）视图。然而在许多情况下，必须在自右向左文本中嵌入自左向右文本。例如，在 OmegaT 标签中，必须在自左向右源文件中保留产品名称、在本地化文件中保留占位符以及在文本中保留数字。在像这样的情况下，必须转换为自右向左模式，以正确显示自右向左（实际是双向）文本。应当注意，当 OmegaT 处于自右向左模式，源和目标都以自右向左模式显示。这意味着如果源语言是自左向右，而目标语言是自右向左，或者反过来，就可能必须在自右向左和自左向右模式之间来回切换，以轻松地在相应的模式下查看源文件和输入译文。</para>
+    </section>
+
+    <section>
+      <title>自右向左片段中的 <application>OmegaT</application> 标签<indexterm class="singular">
+          <primary>自右向左语言</primary> <secondary>自右向左语言中的 OmegaT 标签</secondary>
+        </indexterm></title>
+
+      <para>如上所述，OmegaT 标签是自左向右字符串。如需在自右向左和自左向右之间进行翻译工作，为从源文件中正确读取标签以及在目标中正确输入，有可能需要在自左向右和自右向左模式之间来回切换多次。</para>
+
+      <para>如果允许，极力倡导翻译人员将原始文档的风格信息删除，以确保在 OmegaT 中尽可能少地显示标签。按照提示中提供的线索进行标签管理. 经常验证标签（见标签验证）和每隔固定时间制作已译文档（见下文及菜单）可以更加轻松地发现导致的问题。提示：先翻译文本的纯文本版本，稍后再通过相应程序添加必须的风格被证明是更少争议的。</para>
+    </section>
+
+    <section>
+      <title>创建已译自右向左文档<indexterm class="singular">
+          <primary>自右向左语言</primary> <secondary>创建 RTL 目标文件</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>自右向左语言</primary> <secondary>目标文件</secondary>
+        </indexterm><indexterm class="singular">
+          <primary>自右向左语言</primary> <secondary>创建 RTL 目标文本</secondary>
+        </indexterm></title>
+
+      <para>在创建已译文档时，其显示方向将与源文本相同。如果源文档是自左向右的，目标文档的显示方向可以在其查看程序中手动修改为自右向左。每个输出方式都有特定方法来处理自右向左显示，可查阅相关应用程序手册了解更多细节。</para>
+
+      <para>为避免每次打开目标文件时都要改变其显示参数，可能修改源文件的显示参数以确保这些参数被目标文件所继承。举例来说，这样的修改对 OpenOffice.org 文件是可行的。</para>
+    </section>
+  </section>
+</chapter>

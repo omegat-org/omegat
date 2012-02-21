@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.using.tokenizers.inOmegaT">
+  <title>在 OmegaT 中使用分解器（tokenizer）</title>
+
+  <section>
+    <title>介绍</title>
+
+    <note>
+      <para>这个主题是为高级用户准备的</para>
+    </note>
+
+    <para>分解器（或 stemmer，词干分析器）提高了识别源和翻译记忆数据中的词形变化的匹配质量。同时也提高了词汇表的匹配度。</para>
+
+    <para>英语中的词干分析器，例如能识别字符串 &quot;cats&quot;（以及 &quot;catlike&quot;, &quot;catty&quot; 等）的词根是 &quot;cat&quot;，而 &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; 的词根是 &quot;stem&quot;。词干分析算法能还原单词 &quot;fishing&quot;、&quot;fished&quot;、&quot;fish&quot; 以及 &quot;fisher&quot; 为相应的词根 &quot;fish&quot;。这对通过词根加上前缀和后缀形式组成单词的语言特别有用。看看斯洛文尼亚语的一个例子，这些是 &quot;good&quot; 的所有正确的语法形式：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>lep, lepa, lepo - singular, masculine, feminine, neutral</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>lepši, lepša, lepše . - comparative, nominative, masculine,
+        feminine, neutral, resp. Plural form of the adjective</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>najlepših - superlative, plural, genitive for M,F,N</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+
+  <section>
+    <title>安装和命令行使用</title>
+
+    <para>改写自 Lucene 项目的一个分解器安装包作为 OmegaT 的插件发布在 http://sourceforge.net/projects/omegat-plugins/files/。下载最近的文件（在编写此文档时为 OmegaT-tokenizers_0.4_2-2.1.zip）。</para>
+
+    <para>要安装分解器，请在 OmegaT.jar 文件所在目录创建名为 &quot;plugins&quot; 的文件夹并解压上述文件到其中。</para>
+
+    <para>要让分解器随 OmegaT 启动，您需要向分解器指明您要在分解器中使用的源语言和目标语言。语法形式如下：</para>
+
+    <para><literal>java -jar OmegaT.jar --ITokenizer=[source language
+    tokenizer name] --ITokenizerTarget=[target language tokenizer
+    name]</literal></para>
+
+    <para>分解器名称在随分解器一起发布的 Readme.txt 文件中。例如，如果要在源中使用 Lucene CJK 分解器，在目标中使用 Lucene French 分解器，那么命令应该像这样：</para>
+
+    <para><literal>java -jar OmegaT.jar
+    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
+    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
+  </section>
+
+  <section>
+    <title>Mac OSX 特殊点</title>
+
+    <para>如果想随 Mac OSX OmegaT.app 包使用分解器，同样按上述方法安装分解器（右键点击在 OmegaT.jar 所在目录的 OmegaT.app 进行安装），不过您需要在包含 Java 运行选项的 <filename>info.plist </filename>文件中指定分解器的名称。请参照上面的说明来找到 <filename>info.plist</filename> 文件进行编辑，让它就像下面所给出的例子那样：</para>
+
+    <literallayout><code>
+&lt;key&gt;VMOptions&lt;/key&gt;
+&lt;string&gt;-Xmx1024M&lt;/string&gt;
+
+&lt;key&gt;Arguments&lt;/key&gt;
+&lt;array&gt;
+  &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
+&lt;/array&gt;</code></literallayout>
+  </section>
+
+  <section>
+    <title>故障排除</title>
+
+    <para>要判断是否使用了分解器，请在打开项目后检查控制台中的日志信息。在上面的例子中，它看起来像这样。</para>
+
+    <literallayout><code>
+84528: Info: Source tokenizer: org.omegat.plugins.tokenizer.LuceneCJKTokenizer 
+84528: Info: Target tokenizer: org.omegat.plugins.tokenizer.LuceneFrenchTokenizer 
+</code></literallayout>
+
+    <para>左边的数字很可能与您系统上的不同，确保启动选项中指定的源和目标分解器的名称与日志中显示的一致。如果无法正确运行分解器，那么日志看起来会像这样：</para>
+
+    <literallayout><code>
+12719: Info: Source tokenizer: org.omegat.core.matching.Tokenizer 
+12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
+</code></literallayout>
+
+    <para>对于 Mac OSX OmegaT.app 包，您需要双击 /OmegaT.app/Contents/MacOS/ 中的 <literal>JavaApplicationStub</literal>（参阅上面找到访问的方法）来从命令行启动 OmegaT 并立即访问日志。</para>
+  </section>
+</appendix>

@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.memories">
+  <title>翻译记忆<indexterm class="singular">
+      <primary>翻译记忆</primary>
+    </indexterm></title>
+
+  <section id="OmegaT.and.tmx.files">
+    <title>OmegaT 中的翻译记忆</title>
+
+    <section id="tmx.files.location.and.purpose">
+      <title>tmx 文件夹 - 位置及用途</title>
+
+      <para><application>OmegaT</application> 项目含有在四个不同位置的翻译记忆文件，即扩展名为 tmx 的文件：</para>
+
+      <variablelist>
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>翻译记忆</primary> <secondary>omegat 子目录</secondary> <seealso>项目文件</seealso>
+            </indexterm>omegat 文件夹</term>
+
+          <listitem>
+            <para>omegat 文件夹包含 <filename>project_save.tmx</filename> 文件，以及一些备份的 TMX 文件。<filename>project_save.tmx</filename> 文件包含了自项目开始以来所有被保存的片段。项目中总是存在此文件。其内容总是根据源片段的字母进行排序。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>翻译记忆</primary> <secondary>项目主文件夹</secondary>
+            </indexterm>项目主文件夹</term>
+
+          <listitem>
+            <para>项目主文件夹中包含 3 个 tmx 文件：<filename>project_name-omegat.tmx</filename>，<filename>project_name-level1.tmx</filename> 以及 <filename>project_name-level2.tmx</filename>（project_name 是项目的名称）。</para>
+
+            <itemizedlist>
+              <listitem>
+                <para>level1 文件仅包含文本信息。</para>
+              </listitem>
+
+              <listitem>
+                <para>level2 文件以适当的 TMX 标签封装了 <application>OmegaT</application> 的特殊标签，因此它可以在支持第 2 级 TMX 的翻译工具中使用其中的格式信息，包括 <application>OmegaT</application> 本身。</para>
+              </listitem>
+
+              <listitem>
+                <para><application>OmegaT</application> 文件包含了 <application>OmegaT</application> 特殊的格式标签，因此该文件可用于其他 <application>OmegaT</application> 项目。</para>
+              </listitem>
+            </itemizedlist>
+
+            <para>这些文件是 <filename>project_save.tmx</filename>文件的副本，即不包括被称为孤立片段的主翻译记忆。它们使用适当但稍变化的名称，这样在其他地方使用时容易识别其中包含的内容，例如在其中项目的 <filename> tm</filename> 子文件夹（请参阅下面）。</para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><filename><indexterm class="singular">
+              <primary>翻译记忆</primary> <secondary>tm 子目录</secondary> <seealso>项目文件</seealso>
+            </indexterm>tm</filename> 目录</term>
+
+          <listitem>
+            <para>/tm/ 可包含任何数量的辅助翻译记忆，即 TMX 文件。这样的文件可创建为上面提示的三种形式。注意：其他 CAT 也能导出（以及导入）TMX 文件，一般也有三种形式。最好的来源是使用 OmegaT 特定的 TMX 文件（请参阅上面），这样可以保持片段中的内联格式。</para>
+
+            <para>在 tm 子目录中翻译记忆的内容是为要翻译文本提供建议。这些文件中已经保存并翻译的任何文本，当它们与正在翻译的文本十分相似时，将出现在模糊匹配窗格中。</para>
+
+            <para>如果某个辅助 TM 中的某个源片段与待译的文本完全相同，OmegaT 会进行在<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为……</guimenuitem> </menuchoice>对话框中设置的操作。例如（使用缺省设置），在辅助 TM 中的译文被接受并加上前缀<emphasis> [模糊]</emphasis>，这样译员随后可以通过这个标记检查译文是否正确翻译（请参阅<link linkend="chapter.translation.editing">编辑行为</link>章节）<menuchoice> <guimenu>。</guimenu> </menuchoice></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term><indexterm class="singular">
+              <primary>翻译记忆</primary> <secondary>tm/auto 子目录</secondary> <seealso>项目文件</seealso>
+            </indexterm>tm/auto 目录<indexterm class="singular">
+              <primary>项目</primary> <secondary>预翻译</secondary>
+            </indexterm></term>
+
+          <listitem>
+            <para>如果在提供的 TM 中的译文完全可靠的话，那么可以把它们放到 <emphasis role="bold"> tm/auto</emphasis> 目录以避免需要对大量的 <emphasis> [模糊]</emphasis>进行确认。这样能更有效地<emphasis role="bold">预翻译</emphasis>源文本：在源文本中其翻译可以在那些“自动”TM 中找到的所有片段，将会自动加载到项目的主 TM 中。</para>
+          </listitem>
+        </varlistentry>
+      </variablelist>
+
+      <para>或者，您可以让 <application>OmegaT</application> 制作一份附加的 TMX 文件（OmegaT 风格）到您指定的地方，包含了项目所有的可译片段。请参阅下面的伪翻译记忆。</para>
+
+      <para>注意：打开项目时会把所有的翻译记忆加载到内存中。对项目翻译记忆的备份会定期进行（请参阅下一章），同时在打开或关闭项目时也会保存/更新 <filename>project_save.tmx</filename>。这里的意思是，例如如果您想添加一个辅助 TM 到当前正在工作的项目时，无需退出项目：只要简单地重新载入项目，所做的更改就会生效。</para>
+
+      <para>对于指定的项目，多种不同翻译记忆的位置是由用户定义的（请参阅<link linkend="chapter.instant.start.guide">快速入门指南</link>中的项目对话框窗口）。</para>
+
+      <para>根据不同的情况可采取不同的策略，例如：</para>
+
+      <para><emphasis role="bold">在相同主题中保存多个项目：</emphasis>保留项目结构，同时改变源和目标目录（Source = source/order1，target = target/order1 等）。需要注意到来自 order1 的片段，而不是 order2 或其他系列的任务，会被标记为孤立片段；不过这样仍可用来获取模糊匹配。</para>
+
+      <para><emphasis role="bold">多个译员工作于相同项目：</emphasis>把源文件分成 source/Alice, source/Bob 等，同时把它们分配给项目成员 (Alice, Bob ...)。随后他们可创建自己的项目，当结束或到达阶段性目标时实现他们自己的 <filename>project_save.tmx</filename>。然后收集 <filename>project_save.tmx</filename>，并解决可能存在的用词冲突。 之后创建新的主 TM，或者放到项目成员的 <emphasis>tm/auto</emphasis>子目录或替换他们的 <filename>project_save.tmx</filename> 文件。该团队还可以使用相同的子目录结构来保存目标文件。这样允许他们，例如在任何时刻进行检查整个项目的目标版本是否已经完成。</para>
+    </section>
+
+    <section id="tmx.backup">
+      <title>TMX 备份<indexterm class="singular">
+          <primary>翻译记忆</primary> <secondary>备份</secondary>
+        </indexterm></title>
+
+      <para>进行翻译时，<application>OmegaT</application> 会持续在项目 /<filename>omegat</filename> 子目录的 <filename>project_save.tmx</filename> 文件中保存您的工作。</para>
+
+      <para><application>OmegaT</application> 还会在每次项目被打开或重新载入时备份翻译记忆到同一子目录的 <filename>project_save.tmx.YEARMMDDHHNN.bak</filename>。YEAR 是 4 位数的年份；MM 是月份；DD 是日期；HH 和 NN 是前一份翻译记忆保存时的小时和分钟。</para>
+
+      <para>如果您认为丢失了翻译数据，可执行下列步骤：</para>
+
+      <orderedlist>
+        <listitem>
+          <para>关闭项目</para>
+        </listitem>
+
+        <listitem>
+          <para>重命名当前的 <filename>project_save.tmx</filename> 文件（例如改名为 <filename>project_save.tmx.temporary</filename>）</para>
+        </listitem>
+
+        <listitem>
+          <para>选择最有可能包含所需数据的翻译记忆备份（例如最近的那个或从某个日子的最后版本）</para>
+        </listitem>
+
+        <listitem>
+          <para>复制并更名为 <filename>project_save.tmx</filename></para>
+        </listitem>
+
+        <listitem>
+          <para>打开项目</para>
+        </listitem>
+      </orderedlist>
+    </section>
+
+    <section id="tmx.files.and.language">
+      <title>tmx 文件和语种<indexterm class="singular">
+          <primary>翻译记忆</primary> <secondary>语种</secondary>
+        </indexterm></title>
+
+      <para>tmx 文件包含的翻译单元由一定数量不同语言的等同片段组成。一个翻译单元至少由两个翻译单元变体 (tuv) 组成。每个都可以当作源或者目标使用。</para>
+
+      <para>项目的设置将指出哪个是源语言，哪个是目标语言。因此 OmegaT 与项目的源和目标语言代码对应的 tuv 片段，并把它们分别用作源和目标片段。OmegaT 使用下面两个标准约定来识别语言代码：</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>2 字母（例如对于 Japanese 为 JA），或者</para>
+        </listitem>
+
+        <listitem>
+          <para>2 或 3 个字母的语言代码后跟着 2 个字母的国家代码（例如 EN-US - 请参阅<xref linkend="appendix.languages"/>了解部分的语言和国家代码）。</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>如果项目语言代码和 TMX 语言代码完全匹配，片段将会导入内存中。如果语言匹配但国家不匹配，仍会导入片段。如果语言代码和国家代码都不符合，片段将被忽略。</para>
+    </section>
+
+    <section>
+      <title>孤立片段<indexterm class="singular">
+          <primary>翻译记忆</primary> <secondary>孤立片段</secondary>
+        </indexterm></title>
+
+      <para><filename>project_save.tmx</filename> 文件包含了自项目开始以来已翻译的所有片段。如果您修改了项目的分割规则或从源中删除了文件，那么在匹配查看器中可能出现<emphasis role="bold">孤立字符串</emphasis>。这样的匹配指向源文档中不存在的片段，而是指向修改发生前的片段记录。</para>
+    </section>
+  </section>
+
+  <section id="using.translation.memories.from.previous.projects">
+    <title>重用翻译记忆<indexterm class="singular">
+        <primary>翻译记忆</primary> <secondary>导入和导出</secondary>
+      </indexterm><indexterm class="singular">
+        <primary>翻译记忆</primary> <secondary>重用翻译记忆</secondary>
+      </indexterm></title>
+
+    <para>在创建项目时，项目的主 TM <filename>project_save.tmx</filename> 是空的。该 TM 文件会在翻译时逐步进行填充。要加快这个过程，可重用现有的翻译。如果指定的片段已翻译过一次且翻译正确，则无需再次翻译它们。翻译记忆还可以包含参考翻译：多国法律，例如欧共体的法律是个实际的例子。</para>
+
+    <para>在 OmegaT 项目中创建目标文档时，项目的翻译记忆将会在根目录中输出三份文件（查阅之前的表述）。可将这三份 TMX 文件（<filename>-omegat.tmx</filename>，<filename>-level1.tmx</filename> 和 <filename>-level2.tmx</filename>）视为一份“导出的翻译记忆”，即当前项目的可导出双语形式。</para>
+
+    <para>如果希望复用之前某个项目的翻译记忆（例如新的项目与之前的项目非常相似，或者使用了之前可能用到的术语），您可以将这些用法记忆用作“输入翻译记忆”，也就是说导入您的新项目。在此情况下，可将这些译法记忆文件放置在新项目的 <emphasis>\tm</emphasis> 或 <emphasis>\tm</emphasis>\auto 目录下：以前您将在模糊匹配查看器中获取来自这些翻译记忆的提示，现在开始将使用这些翻译记忆预翻译您的源文本。</para>
+
+    <para>默认情况下，\tm 文件夹位于项目的根文件夹中（例如： ...&lt;e1&gt;\MyProject\tm)&lt;/e1&gt;，但如果您想的话也可以在项目属性对话框中选择不同的文件夹。如果您频繁使用过去创建的翻译记忆，这将非常有用，比方说因为您一直在同一领域或为同一客户服务。在此情况下，有益的过程可能包括如下步骤：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>在硬盘上某个习惯的位置创建一个文件夹（“仓库文件夹”）以保存某个客户或者主题的翻译记忆。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>每当完成一个项目，将该三份“导出”翻译记忆从项目的根文件夹复制到仓库文件夹。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>当您为同一主题或者客户启动一个新项目时，在<guimenuitem>项目 &gt; 属性 &gt; 编辑项目</guimenuitem>对话框找到该仓库文件夹，将其选中为翻译记忆文件夹。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>注意在程序启动时，/tm 仓库中的所有 TMX 文件将会被解析，因此将手头所有的 TMX 文件导入将会不必要地减慢 OmegaT 的运行。每当翻译记忆文件的内容已经转到 <filename>project-save.tmx </filename>文件的时候，您可能要考虑移除那些不再需要的文件。</para>
+
+    <section>
+      <title>导入和导出翻译记忆</title>
+
+      <para>OmegaT 支持导入 tmx 的 1.1-1.4b 版本（包括级别 1 和级别 2）。这样就可以在 OmegaT 中使用其他工具创建的翻译记忆。然而，OmegaT 不完全支持导入级别 2 tmx 文件（同时保存了译文和格式）。支持导入级别 2 tmx 文件并在 OmegaT 中看到它们的文本信息，但模糊匹配的质量会有所下降。</para>
+
+      <para>OmegaT在加载翻译记忆文件（TMX 文件）时遵循非常严格的过程。如果在文件中发现了错误，则 OmegaT 将提示问题文件中发现错误的位置。</para>
+
+      <para>已知有些工具在某些情况下会产生非法的TMX文件。如果您想在 OmegaT 中使用这样的文件作为参考翻译，您必须对它们进行修补，否则 OmegaT 会加载失败并报告错误。修补是琐碎的操作，OmegaT 将会在相关的错误信息中给您一些提示。如果遇到麻烦，可以向用户组垂询。</para>
+
+      <para><application/>OmegaT 导出 1.4 版本的 TMX 文件（包括级别 1 和级别 2）。导出的级别 2 不是标准的级别 2，但是足以在支持 TMX 级别 2 的翻译工具中产生正确的匹配。如果您只需要文本信息（而不是格式信息），可以使用 OmegaT 创建的级别 1 文件。</para>
+    </section>
+  </section>
+
+  <section id="pseudo.translated.memory">
+    <title>伪翻译记忆<indexterm class="singular">
+        <primary>翻译记忆</primary> <secondary>伪翻译</secondary>
+      </indexterm></title>
+
+    <note>
+      <para>这些内容为感兴趣的高级用户准备的！</para>
+    </note>
+
+    <para>在翻译片段之前，您可能想以不同于 OmegaT 的其他方式预处理它们。例如，如果想创建伪翻译进行测试，OmegaT 能为您创建包含项目所有片段的附加 TMX 文件。该翻译记忆中的译文可以是：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>和原文相同的译文（默认）</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>译文片段为空</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>翻译记忆文件的名称可以任意指定。通过下列命令行参数可生成伪翻译记忆：</para>
+
+    <para><literal>java -jar omegat.jar --pseudotranslatetmx=&lt;filename&gt;
+    [pseudotranslatetype=[equal|empty]]</literal></para>
+
+    <para>把其中的 &lt;I0&gt;&lt;filename&gt;&lt;/I0&gt; 替换为想创建的文件名，可以是绝对的也可以相对于工作目录（启动 <application>OmegaT</application> 的目录）。第二个参数 <literal>--pseudotranslatetype</literal> 是可选的。它的值可以是 <literal>equal</literal>（默认值，此时 source=target）或 <literal>empty</literal>（目标片段为空）。可以使用任何工具处理生成的 tmx 文件。要在 <application>OmegaT</application> 重用这个文件，请把它更名为 <emphasis>project_save.tmx </emphasis> 并放置到项目的 <literal>omegat</literal> 文件夹。</para>
+  </section>
+
+  <section id="upgrading.translation.memories">
+    <title>更新翻译记忆<indexterm class="singular">
+        <primary>翻译记忆</primary> <secondary>更新句子分割规则</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> 的早期版本只能将源文本按照段落切割成片段，而且对HTML和开放文档文件的格式标签编号时会出现前后不一致。<application>OmegaT</application> 2.5 可以实时检测并更新这样的 TMX 文件，以此提高模糊匹配的质量、提高现有翻译的水平，节省您手动完成此操作的时间。</para>
+
+    <para>项目的 TMX 只会更新一次，且会以更新过的格式写入 <filename>project-save.tmx</filename>，而每次项目被载入时都会对所继承的TMX文件进行更新。注意：在 <application>OmegaT</application> 2.5 中对文件过滤器的一些修改可能会导致完全不同的片段分割，因此在少数情况下您必须手动更新译文。</para>
+  </section>
+</chapter>

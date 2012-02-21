@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.translation.editing">
+  <title>编辑行为<indexterm class="singular">
+      <primary>菜单选项</primary> <secondary>编辑行为……</secondary>
+    </indexterm></title>
+
+  <para>在<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为……</guimenuitem> </menuchoice>打开的对话框中，用户可以选择如何初始化和处理编辑区域的当前片段：</para>
+
+  <figure id="editing.behavior.options">
+    <title>编辑行为选项</title>
+
+    <mediaobject>
+      <imageobject role="html">
+        <imagedata fileref="images/EditingBehaviourOptions.png"/>
+      </imageobject>
+    </mediaobject>
+  </figure>
+
+  <section id="automatic.match.insertion">
+    <title>自动匹配插入<indexterm class="singular">
+        <primary>自动匹配插入</primary>
+      </indexterm></title>
+
+    <para>随着对当前片段的编辑，您从文件的一个片段翻译到另一个片段。在片段之间移动时，您可能希望用现存的译文或源文本来填充正在编辑的区域。在<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为……</guimenuitem> </menuchoice>菜单中，<application>OmegaT</application> 为您提供了以下选项：</para>
+
+    <variablelist>
+      <varlistentry>
+        <term>源文本</term>
+
+        <listitem>
+          <para>可以将源文本自动插入编辑区域中。此方式在处理包含许多必须保持原样的商标和专有名词的文本非常有用。</para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>保持片段为空</term>
+
+        <listitem>
+          <para>OmegaT 把编辑字段留空。该选项允许您直接输入翻译而不用删除源文本，因此节省了一对按键时间（<emphasis role="bold">Ctrl+A </emphasis>和 <emphasis role="bold">Del）</emphasis></para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry>
+        <term>插入最佳模糊匹配</term>
+
+        <listitem>
+          <para>OmegaT 将插入与当前源文本最相似译文字符串，前提是相似度高于在此对话框中设置的阈值。此时可以使用前缀对通过模糊匹配的译文加上标记。如果您加上了前缀（例如[模糊]），之后您可以找到这些译文并检查是否正确。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </section>
+
+  <section id="allow.translation.equal.to.source">
+    <title>允许译文和原文相同<indexterm class="singular">
+        <primary>允许译文和原文相同</primary>
+      </indexterm></title>
+
+    <para>要翻译的文档也许包括了一些必须保持原封不动的商标、姓名或其他专有名词。对于只包含不可变文本的片段可以采取两种策略。</para>
+
+    <para>您可以决定完全不翻译这样的片段。OmegaT 将这些片段报告为未译。这是缺省的情况。另一种方法是输入与原文相同的译文。OmegaT 可以识别出您已经翻译过了。为了做到这一点，前往<menuchoice> <guimenu>选项</guimenu> <guimenuitem>编辑行为……</guimenuitem> </menuchoice> 并选上多选框 <emphasis role="bold">允许译文和原文相同</emphasis>.</para>
+  </section>
+
+  <section id="export.segment.to.text.files">
+    <title>将片段导出到文本文件<indexterm class="singular">
+        <primary>导出当前片段</primary>
+      </indexterm></title>
+
+    <para>文本导出功能会把当前 <application>OmegaT</application> 项目的内容导出到纯文本文件。打开一个片段时它的内容会被导出。导出的内容会被保存到 OmegaT 用户文件目录的 /script 子文件夹，并且：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>当前片段原文内容（<filename>source.txt</filename>）。</para>
+      </listitem>
+
+      <listitem>
+        <para>当前片段译文内容（<filename>target.txt</filename>）。</para>
+      </listitem>
+
+      <listitem>
+        <para>用户选择的文本，在按下了 <keycap>Ctrl-Shift-C</keycap> 或选择了<guimenuitem>编辑 &gt; 导出选中部分</guimenuitem> 的时候（<filename>selection.txt</filename>）。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>打开新片段时（source.txt 和 target.txt）或导出新的选中部分（selection.txt），文件的原内容会被覆盖。这些文件是无格式的纯文本文件。整个过程可以通过基于 Tck/Tcl 的脚本操纵控制。请参阅<ulink url="http://www.omegat.org/en/howtos/text_export.html">使用 OmegaT 文本导出功能</ulink> 了解细节、示例和建议。</para>
+  </section>
+</chapter>

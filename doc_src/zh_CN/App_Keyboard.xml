@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.keyboard">
+  <title>编辑器中的键盘快捷键</title>
+
+  <para>此简短的文本描述了编辑窗格中的按键行为。在这里“移动到片段内”是指，如果光标原来在此片段前面则移动到片段的开始处，如果在片段后面则移动到片段的末尾。</para>
+
+  <table>
+    <title>编辑器中的按键行为</title>
+
+    <tgroup cols="2">
+      <colspec align="left" colnum="1" colwidth="90"/>
+
+      <colspec align="left" colnum="2" colwidth="300"/>
+
+      <thead>
+        <row>
+          <entry align="left">组合键</entry>
+
+          <entry align="left">动作</entry>
+        </row>
+      </thead>
+
+      <tbody>
+        <row>
+          <entry><emphasis role="bold">Left: </emphasis></entry>
+
+          <entry>移到一个字符左边，但不超过片段的开始处</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Right: </emphasis></entry>
+
+          <entry>移到一个字符右边，但不超过片段的末尾</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Left: </emphasis></entry>
+
+          <entry>移到一个单词左边，但不超过片段的开始处</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Right: </emphasis></entry>
+
+          <entry>移到一个单词右边，但不超过片段的末尾</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgUp: </emphasis></entry>
+
+          <entry>在文档中向上翻页</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">PgDn: </emphasis></entry>
+
+          <entry>在文档中向下翻页</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Home*</emphasis></entry>
+
+          <entry>移到当前片段中当前行的开始处</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">End*</emphasis></entry>
+
+          <entry>移到当前片段中当前行的末尾</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Home</emphasis></entry>
+
+          <entry>移到当前片段的开始处</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+End</emphasis></entry>
+
+          <entry>移到当前片段的末尾</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgUp</emphasis></entry>
+
+          <entry>移到当前文档的开始处 (Mac: <emphasis role="bold">Cmd+PgUp</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+PgDn</emphasis></entry>
+
+          <entry>移到当前文档的末尾 (Mac: <emphasis role="bold">Cmd+PgDn</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Backspace*</emphasis></entry>
+
+          <entry>移除光标前字符</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Delete*</emphasis></entry>
+
+          <entry>移除光标后字符</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Backspace</emphasis></entry>
+
+          <entry>移除从当前位置到当前单词开始处的字符 (Mac: <emphasis role="bold">Alt+Backspace</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Delete</emphasis></entry>
+
+          <entry>移除从当前位置到下一个单词开始处的字符 (Mac: <emphasis role="bold">Alt+Delete</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Enter</emphasis></entry>
+
+          <entry>打开上一个片段 (Mac: <emphasis role="bold">Cmd+Enter</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+A</emphasis></entry>
+
+          <entry>全选当前片段 (Mac: <emphasis role="bold">Cmd+A</emphasis>)</entry>
+        </row>
+
+        <row>
+          <entry><emphasis role="bold">Ctrl+Shift+O</emphasis></entry>
+
+          <entry>RTL-LTR 开关</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </table>
+
+  <para>* 当光标在可编辑片段外面时这些按键的行为会不相同：</para>
+
+  <itemizedlist>
+    <listitem>
+      <para><emphasis role="bold">Home: </emphasis> 将光标移到活动片段的开始处</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">End: </emphasis> 将光标移到活动片段的末尾</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Backspace: </emphasis>不起作用</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">Delete: </emphasis>不起作用</para>
+    </listitem>
+
+    <listitem>
+      <para><emphasis role="bold">任意字符键</emphasis> 在可编辑片段外面被按下时都会被忽略。</para>
+    </listitem>
+  </itemizedlist>
+
+  <para>&quot;Shift&quot; 键不会表现出特殊的行为：在按下 &quot;Shift&quot; 时使用上面快捷键也会以相同的方式移动。</para>
+
+  <para>系统范围的命令：粘贴（<emphasis role="bold">Ctrl+V</emphasis> 或 <emphasis role="bold">Ctrl+Insert</emphasis>），剪切（<emphasis role="bold">Ctrl+X</emphasis> 或 <emphasis role="bold">Ctrl+C）</emphasis>，插入匹配 <emphasis role="bold">（Ctrl+I</emphasis>）和插入源（<emphasis role="bold">Ctrl+Shift+I</emphasis>）原则上可以用于任何选区，包括超出当前片段的那些。此时选区会被分割到片段边界。</para>
+</appendix>

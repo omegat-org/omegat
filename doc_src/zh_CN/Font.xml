@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.font">
+  <title>字体设置</title>
+  
+  <section id="section.font.settings">
+    <title>字体设置</title>
+    <indexterm class="singular">
+      <primary>字体设置</primary>
+    </indexterm>
+    
+    <para>在该对话框中可以修改下列 OmegaT 窗口所使用的字体。</para>
+    
+    <itemizedlist>
+      <listitem>
+        <para>OmegaT 主窗口（不包括词典查看器）</para>
+      </listitem>
+      <listitem>
+        <para>搜索窗口</para>
+      </listitem>
+      <listitem>
+        <para>标签验证窗口</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>通过应用程序菜单项可以打开该对话框。该对话框包括：<menuchoice> <guimenu>选项</guimenu> <guimenuitem>字体……</guimenuitem> </menuchoice>
+    <indexterm class="singular">
+      <primary>菜单选项</primary> <secondary>字体……</secondary>
+    </indexterm>
+    </para>
+
+    <itemizedlist>
+      <listitem>
+        <formalpara>
+	  <title>字体</title>
+	  <para>拉下菜单来选择计算机上的可用字体。</para>
+	</formalpara>
+      </listitem>
+      <listitem>
+        <formalpara>
+	  <title>大小</title>
+	  <para>改变字体大小。</para>
+	</formalpara>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <formalpara>
+	  <title>示例文本</title>
+	  <para>即时预览选择的字体。</para>
+	</formalpara>
+      </listitem>
+    </itemizedlist>
+
+    <formalpara>
+      <title>注意</title>
+      <para>当已显示片段的数目比较多时，更新显示可能需要较多时间。此外，某些字体</para>
+    </formalpara>
+  </section>
+</chapter>

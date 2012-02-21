@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.formatted.text">
+  <title>处理格式化文本<indexterm class="singular">
+      <primary>目标文件</primary> <secondary>格式化文本</secondary>
+    </indexterm><indexterm class="singular">
+      <primary>源文件</primary> <secondary>格式化文本</secondary>
+    </indexterm></title>
+
+  <para>在源文件中表示的格式化信息通常需要在目标文中重新创建。在 OmegaT 中，由所支持格式（尤其是在写入 DocBook、HTML、XHTML、开放文档（OpenOffice.org）和 Office 开放 XML（MS Office 2007 及更高版本）的时候）产生的内部格式化信息以标签的形式出现。一般情况下，为匹配目的而比较不同文本的相似性时将忽略标签。在已译片段中重新创建的标签将会出现在译后文档中。</para>
+
+  <section id="formatting.tags">
+    <title>格式化标签<indexterm class="singular">
+        <primary>标签</primary>
+      </indexterm></title>
+
+    <para><indexterm class="singular">
+        <primary>标记</primary> <secondary>命名</secondary>
+      </indexterm><emphasis role="bold">标签的命名：</emphasis></para>
+
+    <para>标签由一到三个字符和一个数字组成。唯一的编号允许我们将彼此相对应的标签组织在一起，不同的标签允许有相同的快捷字符，但实际上并不一样。使用的快捷字符尝试反映标签所代表的格式含义（例如 b 表示粗体，i 表示斜体）。</para>
+
+    <para><indexterm class="singular">
+        <primary>标签</primary> <secondary>编号</secondary>
+      </indexterm><emphasis role="bold">标签的编号：</emphasis></para>
+
+    <para>标签以标签组自增长方式进行编号。在这里“标签组”是单个标签（例如 &lt;i0&gt; 和 &lt;/i0&gt;）。在片段中，第一个组（成对或单个的）获得编号 0，第二个编号为 1，以此类推。下面的第一个例子中有3个标签组（一组成对的，一组单个，另一组成对的），第二个例子中只有一组（成对的）。</para>
+
+    <para><indexterm class="singular">
+        <primary>标签</primary> <secondary>成对的和单个的</secondary>
+      </indexterm><emphasis role="bold">成对的和单个的：</emphasis></para>
+
+    <para>标签不是单个的就是成对的。单个标签指的是对周边文本没有影响的格式化信息（例如：额外的空格或者行终止）。</para>
+
+    <para><literal>&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;片段 2132&gt;</literal></para>
+
+    <para>&lt;br1&gt;是单个标签，对周围的文本不产生任何影响。成对标签通常指对开标签和闭标签之间的文本使用格式信息的标签对。下面的 &lt;b0&gt; 和 &lt;/b0&gt; 是成对的且影响文本 log.txt。请注意开标签总是出现在闭标签的前面：</para>
+
+    <para>&lt;<literal>Log file (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and errors.&lt;片段 3167&gt;</literal></para>
+
+    <para><application>OmegaT</application> 在分割句子之前就进行标签创建工作。根据分割规则，标签对可能会被分成两部分并出现在两个连续的片段，而标签检验会检查到这两处的部分标签并提示这两个片段出现错误。</para>
+  </section>
+
+  <section id="tag.operations">
+    <title>标签操作<indexterm class="singular">
+        <primary>标签</primary> <secondary>操作</secondary>
+      </indexterm></title>
+
+    <para>对于标签的操作必须谨慎。如果它们被意外地改变，最终的文件格式也许会被破坏。基本的做法是标签序列必须保持相同的顺序。然而，在可能的情况下，如果必须严格遵循某些规则，则不必拘泥于这个基本做法。</para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>标签</primary> <secondary>复制</secondary>
+      </indexterm>标签的复制：</emphasis></para>
+
+    <para>要复制标签组，只需将它们复制到您选择的位置。但请记住：成对的标签组中，开标签必须出现在闭标签之前。您复制的标签组所代表的格式将会应用到原标签和复制标签的两个部分。</para>
+
+    <para>例如：</para>
+
+    <para><literal>&lt;b0&gt;此格式&lt;/b0&gt;即将被复制到此处。&lt;片段 0001&gt;</literal></para>
+
+    <para>复制后：</para>
+
+    <para><literal>&lt;b0&gt;此格式&lt;/b0&gt;已经被&lt;b0&gt;复制到此处&lt;/b0&gt;。&lt;片段 0001&gt;</literal></para>
+
+    <para><emphasis role="bold"><indexterm class="singular">
+        <primary>标签</primary> <secondary>组删除</secondary>
+      </indexterm>标签组删除：</emphasis></para>
+
+    <para>要删除标签组，仅需将它们从片段中移除。请记住：必须同时删去一个标签组的开标签和闭标签，以确保它们所进行的格式化操作被完全清除，否则译后文件可能遭破坏而无法打开。删除一个标签组的同时，您将会从已译文件中删除相关的格式。</para>
+
+    <para>例如：</para>
+
+    <para><literal>&lt;b0&gt;此格式&lt;/b0&gt;即将被删除。&lt;片段 0001&gt;</literal></para>
+
+    <para>删除后：</para>
+
+    <para><literal>此格式已经被删除。&lt;片段 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.nesting">
+    <title>标签组嵌套<indexterm class="singular">
+        <primary>标签</primary> <secondary>组嵌套</secondary>
+      </indexterm></title>
+
+    <para>对标签组的顺序进行修改也许会导致一个标签组嵌套在另一个标签组中。当封闭的组完全将另一个封闭组封装在里面时，这是可行的。换句话说，在移动成对标签时请确保开标签和闭标签同时被移动到其他标签对的内部或外部，否则译后文件可能遭破坏而无法打开。</para>
+
+    <para>例如：</para>
+
+    <para><literal>&lt;b0&gt;格式&lt;/b0&gt;&lt;b1&gt;一&lt;/b1&gt;即将嵌套到格式零的内部。&lt;片段 0001&gt;</literal></para>
+
+    <para>嵌套后：</para>
+
+    <para><literal>&lt;b0&gt;格式&lt;b1&gt;一&lt;/b1&gt;&lt;/b0&gt;已经嵌套到格式零的内部。&lt;片段 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.overlapping">
+    <title>标签组重叠<indexterm class="singular">
+        <primary>标签</primary> <secondary>组重叠</secondary>
+      </indexterm></title>
+
+    <para>对标签对的错误维护将会导致重叠，也肯定会导致格式破坏以及某些情况下根本无法打开已译文件。</para>
+
+    <para>例如：</para>
+
+    <para><literal>&lt;b0&gt;格式&lt;/b0&gt;&lt;b1&gt;一&lt;/b1&gt;即将被弄乱。&lt;片段 0001&gt;</literal></para>
+
+    <para>错误维护后：</para>
+
+    <para><literal>&lt;b0&gt;格式&lt;b1&gt;一&lt;/b0&gt;&lt;/b1&gt;现在变乱了。&lt;片段结束 0001&gt;</literal></para>
+  </section>
+
+  <section id="tag.group.validation">
+    <title>标签组检验<indexterm class="singular">
+        <primary>标签</primary> <secondary>组检验</secondary>
+      </indexterm></title>
+
+    <para>验证标签功能检测发生变化的标签序列（无论是有意的还是无意的），并显示受影响的片段。通过按下 <guimenuitem>Ctrl+T</guimenuitem> 组合键可调用该功能，它将打开一个窗口，显示文件的译文中所有可能包含断裂或错误的标签的片段。通过标签检验功能可以轻松地修正标签和重新创建目标文档。按 <guimenuitem>Ctrl+T</guimenuitem> 打开的窗口显示了一个三列表格，其中列出了指向该片段、原文片段和译文片段的链接：</para>
+
+    <figure id="tag.validation">
+      <title>标签检验条目</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/TagValidation.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/TagValidation.png" width="90%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>标签用加粗蓝色突出显示，以便于对源内容和译后内容进行比较。点击链接可在编辑器中激活该片段。如果必要的话（在上面的情况中是丢失了 &lt;i2&gt;&lt;/i2&gt; 标签对），修正错误然后按 <guimenuitem>Ctrl+T</guimenuitem> 键返回标签验证窗口以修正其它错误。标签错误指的是译文中的标签序列没有完全按照源片段中的标签顺序和数量复制。某些标签操作是必要的和良性的，但有些在创建已译文档时会导致问题。</para>
+  </section>
+
+  <section id="hints.for.tag.management">
+    <title>标签管理的几点提示<indexterm class="singular">
+        <primary>标签</primary> <secondary>提示</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">简化源文本</emphasis></para>
+
+    <para>标签通常代表了原始文本中的某种格式。对源文本格式的简化很大程度上有助于减少标签的数量。如果有可能，应该尽可能考虑使用统一的字体、字体大小、颜色等，以此简化翻译工作和减少可能的标签错误。查阅标签操作部分了解可以对标签做哪些处理。记住：如果标签问题困扰着您，而格式又不是当前翻译工作最至关紧要的事情的话，删除标签将会是解决问题的最简单途径。</para>
+
+    <para><emphasis role="bold">对标签对应特别小心</emphasis></para>
+
+    <para>如果需要在 OmegaT 中看到标签，但是却不需要在已译文档中保留绝大多数格式的话，可以不向译文中添加任何标签。在这种情况下，要对标签对格外小心，因为删除成对标签中的一个而忘记了删除另一个的话，肯定将破坏文档格式。因为标签包含在文本自身里面，因此可以使用片段规则来创建包含更含更少标签的片段。这是一种高级功能，如果想正确使用必须具备一些经验。</para>
+
+    <para>OmegaT 目前还无法自动检测格式错误，因此如果犯了错误或者改变格式以更好适应您使用的目标语言时，它不会对您作任何提示。然而有时，这些错误会导致译出的文件看起来不正常，在最坏的情况中甚至可能无法打开。</para>
+  </section>
+</chapter>

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.segmentation">
+  <title>源片段</title>
+
+  <para>翻译记忆工具的使用以叫做片段的文本为单位。<application>OmegaT</application> 使用两种方式对文本进行片段分割：段落分割或句子分割（也被称为“基于分割的规则”）。要选择分割类型，请从主菜单选择<menuchoice> <guimenu><indexterm class="singular">
+          <primary>项目</primary> <secondary>属性</secondary>
+        </indexterm>项目</guimenu> <guimenuitem>属性……</guimenuitem> </menuchoice>，然后选用选中或取消选中相应的复选框。在某些情况中使用段落分割是有好处的，例如在与创造性和文学性高度相关的翻译中，译员可能需要改变整个段落的顺序；然而，对于大多数项目，应优先选择句子分割，因为这样可以与以前的翻译实现更好的匹配。如果选用了句子分割，可通过从主菜单选择<menuchoice> <guimenu><indexterm class="singular">
+          <primary>项目</primary> <secondary>选项</secondary>
+        </indexterm>选项</guimenu> <guimenuitem>片段分割……</guimenuitem> </menuchoice>以设置规则。</para>
+
+  <para>许多语言中已经包含了可靠的分割规则，所以很可能您不需要自己编写分割规则。另一方面，该功能在特殊情况下可能非常有用，您可以针对需要翻译的文本设置分割规则来提高生产力。</para>
+
+  <para><emphasis role="bold">警告：</emphasis>由于在改变过滤器选项后将对文本进行不同的分割，所以您可能需要从原文开始进行翻译。同时，在项目翻译记忆中原来有效的片段将变成孤立片段。如果您在项目打开的时候改变分割规则选项，您必须重新载入项目以使改变生效。</para>
+
+  <para><application>OmegaT</application> 使用下列步骤：</para>
+
+  <variablelist>
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>片段分割</primary> <secondary>源层分割</secondary>
+        </indexterm>结构层片段分割</term>
+
+      <listitem>
+        <para><application>OmegaT</application> 首先将文本分割成结构级别的片段。在这个过程中，只有源文本的结构被用于创建片段。</para>
+
+        <para>例如：文本文件可能会在行终止、空行进行片段分割或根本进行分割。格式化文件（OpenOffice.org 文档、HTML 文档等等）在块级别（段落）标签处进行分割。XHTML 或 HTML 文件的可翻译对象属性可以被提取为独立的片段。</para>
+      </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term><indexterm class="singular">
+          <primary>片段分割</primary> <secondary>句子层分割</secondary>
+        </indexterm>句子层分割</term>
+
+      <listitem>
+        <para>在将源文件分割为结构单元之后， <application>OmegaT</application> 将进一步把这些块分割为语句。</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <section id="segmentation.rules">
+    <title>片段分割规则<indexterm class="singular">
+        <primary>片段分割</primary> <secondary>规则</secondary>
+      </indexterm></title>
+
+    <para>片段分割过程可描绘如下：光标沿着文本移动，每次一个字符。在每个光标位置，由 <emphasis role="bold">之前</emphasis>和<emphasis role="bold">之后</emphasis>的模式组成的规则以指定的顺序应用，即对左边的文本使用<emphasis role="bold">之前</emphasis>模式同时对光标右边的文本使用 <emphasis role="bold">之后</emphasis> 模式。如果规则匹配，光标继续移动而不进行分割（对于例外规则）或者创建一个新片段（为中断规则）。</para>
+
+    <para>两种类型的规则表现如下：</para>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>片段分割</primary> <secondary>规则</secondary> <tertiary>中断规则</tertiary>
+          </indexterm>中断规则</term>
+
+        <listitem>
+          <para>将源文本分割为片段。例如，&quot;<emphasis>Did it make sense?I was not sure</emphasis>.&quot; 应该分割成两个句子。要实现这样的目的，应该在 &quot;?&quot; 后跟着空格和大写字符时进行中断的规则。要定义一个中断规则，请选中中断/例外复选框。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term><indexterm class="singular">
+            <primary>片段分割</primary> <secondary>规则</secondary> <tertiary>例外规则</tertiary>
+          </indexterm>例外规则</term>
+
+        <listitem>
+          <para>指定哪部分文本不应该被分开。不考虑句点的话， <emphasis>&quot;Mrs. Dalloway &quot;</emphasis> 不应被分割成两个片段，因此应该为后面跟着句点的 Mrs (以及 Mr 和 Dr 、prof 等等) 创建例外规则。要定义例外规则，请取消选中中断/例外复选框。</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <para>对于绝大多数欧洲语言和日语来说，预定义的中断规则已经够用了。从灵活性的角度看，您可能考虑为要翻译的语种定义更多的例外规则，以获取语意更完整也更连贯的片段。</para>
+  </section>
+
+  <section id="rules.priority">
+    <title>规则的优先级<indexterm class="singular">
+        <primary>片段分割</primary> <secondary>规则优先级</secondary>
+      </indexterm></title>
+
+    <para>为匹配的语言模式定义的所有片段分割规则会按照规定的优先级别得到应用，因此为特定语言定义的规则优先级会比缺省规则要高。例如，为加拿大法语 (FR-CA) 创建的规则优先级应该比为法语 (FR.*) 创建规则的优先级要高，也比缺省规则(.*) 要高。因此，在翻译加拿大法语时，会首先应用加拿大法语规则（如果存在的话），接着是法语规则，最后为默认规则。</para>
+  </section>
+
+  <section id="creating.new.rule">
+    <title>创建新规则<indexterm class="singular">
+        <primary>片段分割</primary> <secondary>创建新规则</secondary> <seealso>正则表达式</seealso>
+      </indexterm></title>
+
+    <para>一般应避免对分割规则进行大幅调整，尤其在开始翻译后，但进行细微修正，例如加上识别的缩略语，可能会有好处。</para>
+
+    <para>要编辑或扩展现有规则集合，仅需在上面的表格中打开它。规则集合将出现在窗口的下半部分。</para>
+
+    <para>要为某新语种模式创建空的规则集合，在对话框的上半部分点击<emphasis role="bold">新增</emphasis>。上方表格的底部将出现一条空行（您可能需要向下滚动才能看到它）。修改规则集的名称和语言模式到相关的语言及其代码（请参阅<xref linkend="appendix.languages"/>语言代码列表）。语言模式的语法遵循正则表达式的语法规则。如果您设置了规则集来处理语言——国家对，我们建议您使用<emphasis role="bold">上移</emphasis>按钮将它移到顶部。</para>
+
+    <para>添加<emphasis role="bold">之前</emphasis>和<emphasis role="bold">之后</emphasis>模式。要检查它们的语法和适用性，建议使用工具来直接查看效果。请参阅<link linkend="chapter.regexp">正则表达式</link>章节。了解现有的规则总是个很好的起点。</para>
+  </section>
+
+  <section id="few.simple.examples">
+    <title><indexterm class="singular">
+        <primary>片段分割</primary> <secondary>示例</secondary>
+      </indexterm>一些简单的例子</title>
+
+    <informaltable>
+      <tgroup cols="4">
+        <colspec align="left" colnum="1" colwidth="150"/>
+
+        <colspec align="center" colnum="2" colwidth="60"/>
+
+        <colspec align="center" colnum="3" colwidth="60"/>
+
+        <colspec align="left" colnum="4" colwidth="190"/>
+
+        <thead>
+          <row>
+            <entry>意图</entry>
+
+            <entry align="center">之前</entry>
+
+            <entry align="center">之后</entry>
+
+            <entry>注意</entry>
+          </row>
+        </thead>
+
+        <tbody>
+          <row>
+            <entry>在句点 ('.') 后且空格前进行分割。</entry>
+
+            <entry align="center">\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>&quot;\.&quot; 表示字符 &quot;.&quot; &quot;\s&quot; 表示任何空白字符（空格，tab，新页符等）。</entry>
+          </row>
+
+          <row>
+            <entry>不要在 Mr. 后进行分割</entry>
+
+            <entry align="center">Mr\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>这是一条例外规则，因此必须将规则复选框设为未选中。</entry>
+          </row>
+
+          <row>
+            <entry>在 &quot;。&quot;（日文句点）后进行分割。</entry>
+
+            <entry align="center">。</entry>
+
+            <entry align="center"/>
+
+            <entry>注意<literal>之后</literal>规则是空的</entry>
+          </row>
+
+          <row>
+            <entry>不要对 M. Mr. Mrs. 和 Ms. 之后的内容进行分割</entry>
+
+            <entry align="center">Mr??s??\.</entry>
+
+            <entry align="center">\s</entry>
+
+            <entry>例外规则 - ?在正则表达式中的使用</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </informaltable>
+  </section>
+</chapter>

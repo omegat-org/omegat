@@ -1,0 +1,1123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.menu">
+  <title>菜单和键盘快捷键</title>
+
+  <section id="ch04.main.menu">
+    <title><indexterm class="singular">
+        <primary>主菜单</primary>
+      </indexterm>主菜单</title>
+
+    <indexterm class="singular">
+      <primary>快捷键</primary> <secondary>主菜单</secondary>
+    </indexterm>
+
+    <para>OmegaT 的所有功能均可通过编辑器窗口顶部的菜单栏来调用。多数功能也可以通过 &lt;a0&gt;键盘快捷方式&lt;/a0&gt;调用。快捷键通过按 <keycap>Ctrl</keycap> 和字母键来激活。某些快捷键还包含其他按键。为了增强可读性，本手册中这些字母以大写形式出现。<keycap>Ctrl</keycap> 在 Windows 系统中使用， UNIX 和类 UNIX 操作系统使用 <keycap>Ctrl</keycap> 或 <keycap>Control</keycap> 键。Mac 用户应该使用 <keycombo> <keycap>cmd</keycap> <keycap>key</keycap> </keycombo> 来代替它。&quot;Cmd&quot; 键就是在苹果键盘上印有 &quot;command&quot; 或“苹果”符号的那个键。</para>
+
+    <table colsep="1" id="table.main.menu">
+      <title>主菜单</title>
+
+      <tgroup cols="7" colsep="1">
+        <tbody>
+          <row>
+            <entry><guimenuitem>项目</guimenuitem></entry>
+
+            <entry><guimenuitem>编辑</guimenuitem></entry>
+
+            <entry><guimenuitem>前往</guimenuitem></entry>
+
+            <entry><guimenuitem>查看</guimenuitem></entry>
+
+            <entry><guimenuitem>工具</guimenuitem></entry>
+
+            <entry><guimenuitem>选项</guimenuitem></entry>
+
+            <entry><guimenuitem>帮助</guimenuitem></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.Project">
+    <title>项目<indexterm class="singular">
+        <primary>主菜单</primary> <secondary>项目</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>项目菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <colspec align="left" colnum="2" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>新建</guimenuitem></entry>
+
+            <entry/>
+
+            <entry>创建并打开一个新项目。创建项目的对话框与编辑项目属性的相同。请参阅<xref linkend="chapter.project.properties"/></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>打开</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>O</keycap>
+              </keycombo></entry>
+
+            <entry>打开之前创建的项目。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>导入源文件……</guimenuitem></entry>
+
+            <entry/>
+
+            <entry>将选中的文件复制到<filename>源</filename>目录，并重新加载项目以载入新文件。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>从 MediaWiki 导入……</guimenuitem></entry>
+
+            <entry/>
+
+            <entry>根据输入的 URL 从 MediaWiki 页面导入单元。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>重新载入</guimenuitem></entry>
+
+            <entry><keycap>F5</keycap></entry>
+
+            <entry>重新载入项目以使源文件的外部修改生效，并保留之前的翻译记忆、术语表内容和项目设置。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>关闭</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Shift</keycap>
+
+                <keycap>W</keycap>
+              </keycombo></entry>
+
+            <entry>保存翻译并关闭项目。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>保存</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>S</keycap>
+              </keycombo></entry>
+
+            <entry>将内部的翻译记忆保存到硬盘。OmegaT 每十分钟保存一次翻译，且在关闭项目或退出前自动保存。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>创建已译文档</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>D</keycap>
+              </keycombo></entry>
+
+            <entry>根据您对文档文本的翻译创建目标文档。创建的目标文档放置在<filename>目标</filename>文件夹中。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>属性……</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>E</keycap>
+              </keycombo></entry>
+
+            <entry>显示<link linkend="chapter.project.properties">项目属性</link>对话框以便编辑项目语言和文件夹位置。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>项目文件……</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>L</keycap>
+              </keycombo></entry>
+
+            <entry>关闭或打开<link linkend="section.project.files">项目文件窗口</link>（取决于它处于打开或关闭状态）。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>退出</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Q</keycap>
+              </keycombo></entry>
+
+            <entry>保存项目并退出 <application>OmegaT</application>。如果您未手动保存项目，系统将会让您确认是否真要要退出。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section>
+    <title>编辑<indexterm class="singular">
+        <primary>主菜单</primary> <secondary>编辑</secondary>
+      </indexterm></title>
+
+    <para>注意：在多数程序中可以找到的（复制/剪切/粘贴）条目没有出现在这个菜单中，但是您可以通过系统快捷键使用。例如：</para>
+
+    <table colsep="1">
+      <title>复制/剪切/粘贴快捷键</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <colspec align="left" colnum="2" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>复制</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>C</keycap>
+              </keycombo></entry>
+
+            <entry>复制选中的文本到剪贴板。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>剪切</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>X</keycap>
+              </keycombo></entry>
+
+            <entry>将选中的文本复制到剪贴板并删除选中文本。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>粘贴</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>V</keycap>
+              </keycombo></entry>
+
+            <entry>将剪贴板中的文本粘贴到光标位置。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+
+    <para>该菜单本身包括下列条目：</para>
+
+    <table colsep="1">
+      <title>编辑菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <colspec align="left" colnum="2" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>取消上一个动作</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Z</keycap>
+              </keycombo></entry>
+
+            <entry>恢复上一个编辑动作发生之前的状态。一旦所修改的片段生效，该操作将会失效。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>重做上一个动作</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Y</keycap>
+              </keycombo></entry>
+
+            <entry>恢复上一个编辑动作取消之前的状态。一旦所修改的片段生效，该操作将会失效。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>用匹配替代</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>R</keycap>
+              </keycombo></entry>
+
+            <entry>使用当前选中的模糊匹配覆盖整个目标片段（默认选中第1个匹配）。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>插入匹配</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>I</keycap>
+              </keycombo></entry>
+
+            <entry>将当前选中的模糊匹配插入到光标位置。如果已选中了目标片段的某个部分，则此功能会覆盖那部分。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>使用机器翻译替代</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>M</keycap>
+              </keycombo></entry>
+
+            <entry>使用选择的机器翻译服务提供的译文取代目标片段。如果未激活机器翻译服务（参阅下面的 菜单 &gt; 选项），将不会有任何动作。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>用源文本替代</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Shift</keycap>
+
+                <keycap>Ctrl</keycap>
+
+                <keycap>R</keycap>
+              </keycombo></entry>
+
+            <entry>使用源片段覆盖整个目标片段。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>插入源文本</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Shift</keycap>
+
+                <keycap>Ctrl</keycap>
+
+                <keycap>I</keycap>
+              </keycombo></entry>
+
+            <entry>在光标位置插入源段落内容。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>插入源标签</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Shift</keycap>
+
+                <keycap>Ctrl</keycap>
+
+                <keycap>T</keycap>
+              </keycombo></entry>
+
+            <entry><indexterm class="singular">
+                <primary>标签</primary> <secondary>插入源标签</secondary>
+              </indexterm>在光标位置插入源标签。原文中的所有标签都将被插入到当前片段，不论它们当前是否存在。标签内的文本被替换为空格：<literal>&lt;f0&gt;&lt;f1&gt;This is text&lt;/f0&gt;&lt;/f1&gt;</literal> thus will be copied as <literal>&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>导出选中部分</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Shift</keycap>
+
+                <keycap>Ctrl</keycap>
+
+                <keycap>C</keycap>
+              </keycombo></entry>
+
+            <entry>将当前选中内容导出至文本文件进行处理。如果未选中文本，将导出当前的源片段至该文件。当用户退出 <application>OmegaT</application> 时，为了与通常的剪贴板行为一致，该文件不会清空。导出的内容被复制到位于用户首选项文件文件夹（请参阅<xref linkend="chapter.files.and.directories"/>）的 <filename>selection.txt</filename> 文件中。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>在项目中搜索……</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>F</keycap>
+              </keycombo></entry>
+
+            <entry>打开新<link linkend="section.search.window">搜索窗口</link>。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>切换大小写状态为……</guimenuitem></entry>
+
+            <entry><keycombo> <keycap>Shift</keycap> <keycap>F3</keycap> </keycombo>（查阅文本）</entry>
+
+            <entry>将目标片段中突出显示的文本之大小写状态修改为选定选项（小写、 大写或首字符大写）。可使用 Shift+F3 <indexterm>
+                <primary>快捷键</primary> <secondary>Shift+F3 - 大小写选择</secondary>
+              </indexterm>在三种选择之间循环切换。如果未选中文本， <application>OmegaT</application> 将选中包含了紧挨着光标右边字母的单词。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>选择第 #N 号模糊匹配</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>#N</keycap>
+              </keycombo></entry>
+
+            <entry>(#N 为 1 至 5 之间的数字) - 选择在匹配查看器中列出的第 N 个模糊匹配项，并将其替代或插入该段中。<xref linkend="match.viewer"/> 描述了关于颜色代码的细节。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.GoTo">
+    <title>前往<indexterm class="singular">
+        <primary>主菜单</primary> <secondary>前往</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>前往菜单</title>
+
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <colspec align="left" colnum="2" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>下一未译片段</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>U</keycap>
+              </keycombo></entry>
+
+            <entry>移动到翻译记忆中无相同内容的下一个片段。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>下一片段</guimenuitem></entry>
+
+            <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo> 或 <keycap>Enter</keycap> or <keycap>Tab</keycap></entry>
+
+            <entry>移动到下一片段。如果当前片段是文件中的最后一个片段，将移动到下个文件的第一个片段。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>前一片段</guimenuitem></entry>
+
+            <entry><keycombo> <keycap>Ctrl</keycap> <keycap>P</keycap> </keycombo> 或 <keycombo> <keycap>Ctrl</keycap> <keycap>Enter</keycap> </keycombo> 或 <keycombo> <keycap>Ctrl</keycap> <keycap>Tab</keycap> </keycombo></entry>
+
+            <entry>移动到前一片段。如果当前片段是文件中的第一个片段，将移动到前个文件的最后一个片段。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>片段序号……</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>J</keycap>
+              </keycombo></entry>
+
+            <entry>通过输入片段序号打开片段。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>在编辑历史中回退……</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Shift</keycap>
+
+                <keycap>P</keycap>
+              </keycombo></entry>
+
+            <entry>通过该命令一次可以返回一个片段，在稍后可使用下面的<guimenuitem>在编辑历史中前进……</guimenuitem>命令返回当前片段。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>在编辑历史中前进……</guimenuitem></entry>
+
+            <entry><keycombo>
+                <keycap>Ctrl</keycap>
+
+                <keycap>Shift</keycap>
+
+                <keycap>N</keycap>
+              </keycombo></entry>
+
+            <entry><application>OmegaT</application> 会记住执行过的片段。使用该命令可以前进到某片段，即您使用<guimenuitem>在编辑历史中回退……</guimenuitem>命令之前所处片段。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.View">
+    <title>查看<indexterm class="singular">
+        <primary>主菜单</primary> <secondary>查看</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>查看菜单</title>
+
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>标记已译片段</guimenuitem></entry>
+
+            <entry>如果选上该选项，已译片段将会标记为黄色。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>标记未译片段</guimenuitem></entry>
+
+            <entry>如果选上该选项，未译片段将会标记为紫色。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>显示源片段</guimenuitem></entry>
+
+            <entry>如果选上该选项，将会显示源片段并标记为绿色。如果未选上，将不会显示源片段。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>显示修改信息</guimenuitem></entry>
+
+            <entry>设置显示修改信息选项来<emphasis>选择</emphasis>是否显示上次修改当前片段的时间和作者。可设置为<emphasis>所有</emphasis>来显示所有片段的这些信息或<emphasis>不显示</emphasis>来关闭该选项。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.Tools">
+    <title>工具<indexterm class="singular">
+        <primary>主菜单</primary> <secondary>工具</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>工具菜单</title>
+
+      <indexterm class="singular">
+        <primary>匹配</primary> <secondary>匹配统计</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>项目</primary> <secondary>匹配统计</secondary>
+      </indexterm>
+
+      <indexterm class="singular">
+        <primary>项目</primary> <secondary>统计</secondary>
+      </indexterm>
+
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>检验标签</guimenuitem></entry>
+
+            <entry><guimenu>Ctrl+T</guimenu>：检查格式化文件中的丢失或者错误放置的标签。将会显示一份含有错误和可能不一致标签的片段清单。请参阅<link linkend="section.tag.validation">检验标签</link>和<xref linkend="chapter.formatted.text"/>。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>统计(&amp;S)</guimenuitem></entry>
+
+            <entry>打开新的窗口并在其中显示项目的统计数据，即整个项目和项目中每个文件的统计数据。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>匹配统计(&amp;M)</guimenuitem></entry>
+
+            <entry>显示当前项目的匹配统计：对于片段、单词和字符的重复、精确匹配、模糊匹配和无匹配的数目。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.Options">
+    <title><indexterm class="singular">
+        <primary>主菜单</primary> <secondary>选项</secondary>
+      </indexterm>选项</title>
+
+    <table colsep="1">
+      <title>选项菜单</title>
+
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>使用 Tab 前进</guimenuitem></entry>
+
+            <entry>设置片段检验键为 <guimenuitem>Tab</guimenuitem> 代替默认的 <guimenuitem>Enter</guimenuitem>。该选项对于一些中文、日文、韩文字符输入系统非常有用。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>退出前总是确认</guimenuitem></entry>
+
+            <entry>程序在关闭前必须得到确认。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>机器翻译</guimenuitem></entry>
+
+            <entry>允许您激活/取消激活程序提供的机器翻译工具。激活后，使用 <keycombo> <keycap>Ctrl</keycap> <keycap>M</keycap> </keycombo> 可将翻译建议插入到当前片段的目标部分。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>翻译提示</guimenuitem></entry>
+
+            <entry>可以让您激活/取消激活<emphasis>翻译提示</emphasis>功能，并设置<emphasis>精确匹配</emphasis>选项。<emphasis>翻译提示</emphasis>激活了在原文中突出显示的单词上的右键菜单功能，这样在此单词上点击时将出现含有词汇表条目的弹出菜单。接着可以点击喜欢的翻译来将其插入目标片段的当前位置。选中<emphasis>翻译提示/精确匹配</emphasis>时只检查完整的单词，否则也会匹配部分单词。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>字体……</guimenuitem></entry>
+
+            <entry>显示对话框来以修改文本显示字体。感觉窗口尺寸变化非常缓慢的旧款计算机的用户可以尝试改变字体。请参阅<xref linkend="chapter.font"/>。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>文件过滤器……</guimenuitem></entry>
+
+            <entry>显示<link linkend="chapter.file.filters">文件过滤器</link>对话框来设置文件的分析和处理。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>分割规则……</guimenuitem></entry>
+
+            <entry>打开<link linkend="chapter.segmentation">源片段分割设置</link>对话框来配置文本片段分割设置。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>拼写检查……</guimenuitem></entry>
+
+            <entry>显示<link linkend="chapter.spellchecker">拼写检查工具设置</link>窗口以安装、配置和激活拼写检查器。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>编辑行为……</guimenuitem></entry>
+
+            <entry>显示<link linkend="chapter.translation.editing">翻译编辑</link>对话框以进行配置。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>标签验证……</guimenuitem></entry>
+
+            <entry>对于程序员：您可以配置标签验证器选项以同时检查程序 (%...) 变量。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>团队……</guimenuitem></entry>
+
+            <entry>在这里输入您的名字，它将被附加到您翻译的所有片段中。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>查看……</guimenuitem></entry>
+
+            <entry>包含了粗体显示所有源片段和标记首个非独特片段的选项。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>登录代理服务器……</guimenuitem></entry>
+
+            <entry>如果使用代理访问您的项目，请输入用户名和密码。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>恢复主窗口</guimenuitem></entry>
+
+            <entry>将 OmegaT 窗口的组件恢复到缺省状态。在对一个或多个组件进行了分离、移动、隐藏操作之后，无法对它们进行还原时可以使用这个功能。它还可用于在更新 OmegaT 后不正确显示窗格时。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="submenu.Help">
+    <title>帮助<indexterm class="singular">
+        <primary>主菜单</primary> <secondary>帮助</secondary>
+      </indexterm></title>
+
+    <table colsep="1">
+      <title>帮助菜单</title>
+
+      <tgroup cols="2" colsep="1">
+        <colspec align="left" colnum="1" colwidth="100"/>
+
+        <tbody>
+          <row>
+            <entry><guimenuitem>用户手册……</guimenuitem></entry>
+
+            <entry><keycap>F1：</keycap>在独立的窗口中使用帮助浏览器打开本手册。</entry>
+          </row>
+
+          <row>
+            <entry><guimenuitem>关于……</guimenuitem></entry>
+
+            <entry>显示版权、制作人员和授权信息。</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
+  </section>
+
+  <section id="keyboard.shortcuts">
+    <title>键盘快捷键<indexterm class="singular">
+        <primary>键盘快捷键</primary>
+      </indexterm></title>
+
+    <para>在主窗口中可以使用以下快捷方式。当其他窗口挡在前面时，点击主窗口使它位于前方，或者按 <keycap>Esc</keycap> 键关闭当前窗口。</para>
+
+    <para>快捷键通过按 <keycap>Ctrl</keycap> 和字母键来激活。某些快捷键还包含其他按键。为了增强可读性，本手册中这些字母以大写形式出现。</para>
+
+    <para>Ctrl 键在 Windows 系统中使用，UNIX 和类 UNIX 操作系统使用 <keycap>Ctrl</keycap> / <keycap>Control 键</keycap>。Mac 应该转为使用 <guimenuitem>cmd+key。</guimenuitem><guimenuitem>Cmd</guimenuitem> 键就是在苹果键盘上印有 &quot;command&quot; 或“苹果”符号的那个键。</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>项目管理</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>编辑</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>来回移动</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>参考窗口</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>其它</para>
+      </listitem>
+    </itemizedlist>
+
+    <section>
+      <title id="keyboard.project.management"><indexterm class="singular">
+          <primary>键盘快捷键</primary> <secondary>项目</secondary>
+        </indexterm>项目管理<indexterm class="singular">
+          <primary>项目</primary> <secondary>项目管理快捷键</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>项目管理快捷键</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>打开项目</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>O</keycap>
+                </keycombo></entry>
+
+              <entry>打开对话框以打开一个现有的项目。</entry>
+            </row>
+
+            <row>
+              <entry>保存</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>S</keycap>
+                </keycombo></entry>
+
+              <entry>将当前的工作保存到位于项目的 <filename>omegat</filename> 目录下的 project_save.tmx 文件中。</entry>
+            </row>
+
+            <row>
+              <entry>关闭项目</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>W</keycap>
+                </keycombo></entry>
+
+              <entry>关闭当前项目。</entry>
+            </row>
+
+            <row>
+              <entry>创建已译文档</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>D</keycap>
+                </keycombo></entry>
+
+              <entry>在项目的目标文件夹创建已译文档，同时在项目的根目录中创建翻译记忆文件（(level1，level2 和 omegat tmx 文件）。</entry>
+            </row>
+
+            <row>
+              <entry>项目属性</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>E</keycap>
+                </keycombo></entry>
+
+              <entry>显示项目设置并进行可能的修改。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.editing">
+      <title><indexterm class="singular">
+          <primary>键盘快捷键</primary> <secondary>编辑</secondary>
+        </indexterm>编辑<indexterm class="singular">
+          <primary>键盘快捷键</primary> <secondary>前往</secondary>
+        </indexterm></title>
+
+      <table colsep="1">
+        <title>编辑快捷键</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>取消上一个动作</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Z</keycap>
+                </keycombo></entry>
+
+              <entry>取消当前目标片段中的上一个编辑动作</entry>
+            </row>
+
+            <row>
+              <entry>重做上一个动作</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Y</keycap>
+                </keycombo></entry>
+
+              <entry>重做当前目标片段中的上一个编辑动作</entry>
+            </row>
+
+            <row>
+              <entry>选择第 #N 号匹配</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>#N</keycap>
+                </keycombo></entry>
+
+              <entry>#N 为 1 至 5 之间的数字. 选中匹配窗口中显示的第 N 个匹配内容（缺省情况下选中第一个匹配）</entry>
+            </row>
+
+            <row>
+              <entry>用匹配替代</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>R</keycap>
+                </keycombo></entry>
+
+              <entry>使用选中的匹配替换当前目标段内容（缺省情况下选中第一个匹配）</entry>
+            </row>
+
+            <row>
+              <entry>插入匹配</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>I</keycap>
+                </keycombo></entry>
+
+              <entry>向当前的片段的光标位置插入选中的匹配（缺省情况下插入第一个匹配）</entry>
+            </row>
+
+            <row>
+              <entry>用源文本替代</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+R</keycap>
+                </keycombo></entry>
+
+              <entry>用源文本内容替换当前的目标片段。</entry>
+            </row>
+
+            <row>
+              <entry>插入源文本</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+I</keycap>
+                </keycombo></entry>
+
+              <entry>在目标片段的当前位置插入源文本内容</entry>
+            </row>
+
+            <row>
+              <entry>插入源标签</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+T</keycap>
+                </keycombo></entry>
+
+              <entry>在目标片段的当前位置插入源标签</entry>
+            </row>
+
+            <row>
+              <entry>在项目中搜索……</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>显示一个对话框了引导在项目中的搜索</entry>
+            </row>
+
+            <row>
+              <entry>使用机器翻译替代</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>M</keycap>
+                </keycombo></entry>
+
+              <entry>使用原文的机器翻译的译文取代目标片段。如果未激活机器翻译服务（参阅下面的 菜单 &gt; 选项 &gt; 机器翻译），将不会有任何动作。</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.moving.around">
+      <title><indexterm class="singular">
+          <primary>键盘快捷键</primary> <secondary>前往</secondary>
+        </indexterm>来回移动</title>
+
+      <table colsep="1">
+        <title>来回移动快捷键</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>下一未译片段</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>U</keycap>
+                </keycombo></entry>
+
+              <entry>将编辑字段转到项目翻译记忆中未登记的下一个片段。</entry>
+            </row>
+
+            <row>
+              <entry>下一片段</entry>
+
+              <entry><keycombo> <keycap>Ctrl</keycap> <keycap>N</keycap> </keycombo>，<keycap>Enter</keycap> 或 <keycap>Return</keycap></entry>
+
+              <entry>移动编辑区域到下一个片段。</entry>
+            </row>
+
+            <row>
+              <entry>前一片段</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>将编辑区域转移到前一个片段</entry>
+            </row>
+
+            <row>
+              <entry>片段序号……</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>J</keycap>
+                </keycombo></entry>
+
+              <entry>移动到所输入序号的片段</entry>
+            </row>
+
+            <row>
+              <entry>在编辑历史中回退……</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+P</keycap>
+                </keycombo></entry>
+
+              <entry>在编辑历史中回退……</entry>
+            </row>
+
+            <row>
+              <entry>在编辑历史中前进……</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift+N</keycap>
+                </keycombo></entry>
+
+              <entry>在编辑历史中前进……</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+
+    <section id="keyboard.other">
+      <title><indexterm class="singular">
+          <primary>键盘快捷键</primary> <secondary>其他</secondary>
+        </indexterm>其它</title>
+
+      <table colsep="1">
+        <title>其他快捷键</title>
+
+        <tgroup cols="3" colsep="1">
+          <colspec align="left" colnum="1" colwidth="100"/>
+
+          <colspec align="left" colnum="2" colwidth="100"/>
+
+          <tbody>
+            <row>
+              <entry>项目文件清单</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>显示项目文件列表</entry>
+            </row>
+
+            <row>
+              <entry>检验标签</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>T</keycap>
+                </keycombo></entry>
+
+              <entry>打开标签验证窗口</entry>
+            </row>
+
+            <row>
+              <entry>导出选中部分</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl+C</keycap>
+                </keycombo></entry>
+
+              <entry>输出当前选中内容，如果未选中的话输出当前源片段。该文本被导出到纯文本文件。</entry>
+            </row>
+
+            <row>
+              <entry>在项目中搜索……</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>F</keycap>
+                </keycombo></entry>
+
+              <entry>打开一个新的搜索窗口</entry>
+            </row>
+
+            <row>
+              <entry>帮助文件</entry>
+
+              <entry><keycap>F1</keycap></entry>
+
+              <entry>在独立的窗口中显示 <application>OmegaT</application> 帮助文件</entry>
+            </row>
+          </tbody>
+        </tgroup>
+      </table>
+    </section>
+  </section>
+</chapter>

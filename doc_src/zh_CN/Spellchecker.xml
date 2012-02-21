@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.spellchecker">
+  <title>拼写检查<indexterm class="singular">
+      <primary>拼写检查</primary>
+    </indexterm></title>
+
+  <para>OmegaT 内置有拼写检查器，它基于在 OpenOffice.org、Firefox 和 Thunderbird 使用的拼写检查器。因此能使用在这些程序中可用的大量免费的拼写检查词典。</para>
+
+  <section>
+    <title>安装拼写词典</title>
+
+    <para>在检查拼写前，必须先安装适合的词典（例如用于您的目标语言）。要安装拼写词典，请参照这些步骤：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>在文件管理器中，在适当的位置创建新文件夹用来保存拼写词典。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>在 OmegaT，选择<guisubmenu><indexterm class="singular">
+            <primary>菜单选项</primary> <secondary>拼写检查……</secondary>
+          </indexterm></guisubmenu><guimenuitem>选项&gt;拼写检查</guimenuitem>，然后点击词典文件夹区域旁<guibutton>选择</guibutton>。浏览到保存词典的文件夹并选中。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>把要使用的词典文件放到此文件夹。进行这个操作实际分成两步。您可以使用文件管理器从其他位置手动复制文件，或使用 OmegaT 的<emphasis role="bold">“安装”</emphasis>功能来提供可选择的词典列表。请注意“安装”功能需要网络连接。随后选中的语言将会被安装，并出现在拼写检查器窗口中（可能需要一段时间）。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>如果您系统中已经有合适的词典，那么可以手动复制，例如在 OpenOffice.org 或 Thunderbird 安装过程中已经安装了。这些词典文件扩展名为 <filename>.aff</filename> 和 <filename>.dic</filename>，并且您同时需要这两种文件才能让词典有效。您可使用这些文件扩展名来搜索桌面以寻找合适的词典。在下面的情况中，无需复制额外的文件夹和复制文件，因为直接使用了 OpenOffice.org 文件夹中的词典。</para>
+
+    <figure id="spellchecker.setup">
+      <title>拼写检查设置</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckerSetup2.png"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>注意：在上面的情况中，在移除 OpenOffice.org 后，您可能会丢失这些拼写词典。创建单独的文件夹和复制文件是额外的事情，不过也许可减少这种麻烦。</para>
+
+    <para>最近的许多 OpenOffice.org 拼写词典是以“OpenOffice.org 扩展”的形式提供的，文件扩展名为 .oxt。不过它们是 zip 压缩文件：如果您把文件扩展名改为 .zip，则可以把解压出来并找到需要的 .aff 和 .dic 文件，随后可以把它们放到您创建的词典文件夹中。</para>
+
+    <para>请注意在<guilabel> “安装……”</guilabel>按钮后出现的程序取决于互联网上列出的词典。如果已经过期或者不包含所需的语言，您就得自己动手查找词汇表了。在 OpenOffice.org 的 <ulink url="http://extensions.services.openoffice.org/dictionary">OpenOffice.org Extensions site</ulink> 可能包含了最大量的词汇表集合。在下载安装词典扩展后，就可以使用相应的 <emphasis>aff</emphasis> and <emphasis>dic</emphasis> 文件了。可以通过下载火狐或者雷鸟的拼写检查插件可达到相同的目的；在此情况下拼写检查文件将会保存在火狐或雷鸟的用户文档中。</para>
+
+    <para>请确保目标文件的语言代码与词典的语言代码相同：FR-FR 字典在 FR 目标设置下将无法正常使用。您必须将设置修改为 FR-FR 以允许拼写检查器为目标语言正确识别词典。通过表示使用的语言及扩展名 <emphasis>aff</emphasis> 和 <emphasis>dic.</emphasis> 的文件名称进行查找。</para>
+  </section>
+
+  <section>
+    <title>使用拼写词典</title>
+
+    <para>无需告诉 OmegaT 使用特殊的拼写词典，它会根据项目的语言代码来使用正确的语言词典。请确保目标文件的语言代码与字典的语言代码相同：例如，FR-FR 字典在 FR 为目标语言设置下将无法正常使用。必要时可编辑词典文件名或改变项目的语言设置。</para>
+
+    <para>要启用拼写检查器，请选择<guimenuitem>选项&gt;拼写检查</guimenuitem>并选中<guilabel>自动检查文本拼写</guilabel>的复选框（请参阅上面）。</para>
+
+    <figure id="spellchecker.in.action">
+      <title><indexterm class="singular">
+          <primary>拼写检查器</primary> <secondary>拼写检查器 - 配置</secondary>
+        </indexterm>运作中的拼写检查器</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/SpellcheckingText.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>右键单击突出显示的词汇（上面图示中的 &quot;Artund&quot;）打开下拉菜单，其中列出了更正建议（Art und）。此外，您也可以要求拼写检查器忽略所有该词的出现，或者把它添加到字典。</para>
+  </section>
+
+  <section id="hints">
+    <title>提示<indexterm class="singular">
+        <primary>拼写检查器</primary> <secondary>提示</secondary>
+      </indexterm></title>
+
+    <para>如果拼写检查器没有运行，首先确保已经选中了拼写检查器对话框（<guisubmenu>选项&gt;拼写检查……</guisubmenu>）中<guilabel>“自动检查文本拼写”</guilabel>的复选框。</para>
+
+    <para>在设置窗口中对照可用词汇表检查项目的目标语言代码。拼写检查器根据目标语言代码来决定要使用的语言：如果目标语言是巴西葡萄牙语 (PT_BR)，存放词汇表的目录必须包括两份词汇表，名为 <emphasis>pt_br.aff</emphasis> 和 <emphasis>pt_br.dic</emphasis>。</para>
+
+    <para>如果已经译了一大段文本，但是才意识到项目的目标语言代码与拼写检查器的语言代码不符（如将 pt_BR 设为目标语言，但没有 pt_BR 词汇表），您只需复制两份对应的文件并进行重命名（例如把 <emphasis>pt_PT.arr</emphasis> 和 <emphasis>pt_PT.dic</emphasis> 改名为 <emphasis>pt._BR.arr</emphasis> 和 <emphasis>pt_BR.dic</emphasis>）。当然，中断一小段时间并下载正确的拼写检查器版本的做法更加理智。</para>
+
+    <para>注意：<filename>卸载</filename>会实际移除选中的词汇表。在这些词汇表是 OpenOffice 的一部分，它们也将从该应用程序中消失。如果出于某种原因，您必须不时地重复该操作，将这些文件复制到其它目录并为 OmegaT 保留它们是非常有意义的。</para>
+  </section>
+</chapter>

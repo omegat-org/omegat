@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.dictionaries">
+  <title><indexterm class="singular">
+      <primary>词典</primary>
+    </indexterm>词典</title>
+
+  <para/>
+
+  <section>
+    <title>如何下载和安装词典<indexterm class="singular">
+        <primary>词典</primary> <secondary>下载和安装</secondary>
+      </indexterm></title>
+
+    <para><application>OmegaT</application> 中的词典基于 StartDict 平台。要安装必须的文件，进行如下操作：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>搜索所需的语言组合——例如在上面的 <ulink url="http://stardict.sourceforge.net/index.php"><indexterm class="singular">
+            <primary>FreeDict</primary> <seealso>词典</seealso>
+          </indexterm>StartDict 平台</ulink> 或在 <ulink url="http://www.freedict.org/en/list.html">FreeDict<indexterm class="singular">
+            <primary>Stardict</primary> <seealso>词典</seealso>
+          </indexterm></ulink></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>下载文件——可能是一份 <filename>tarball</filename> 存档（扩展名为 <emphasis>tar.bz</emphasis> 或 <emphasis>tar.bz2</emphasis>）。</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>使用 untar （或类似工具，例如 Windows 中的 <filename> winrar</filename>）将内容解压至项目文件夹 &quot;Dictionary&quot; 中。应该包括三份文件，扩展名分别为：<emphasis>dz, idx </emphasis>和 <emphasis>ifo</emphasis>。</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>注意除了可以使用“原文-译文”类型的词典之外，通过词典功能还可以访问下列资源：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>Webster</primary> <seealso>词典</seealso>
+          </indexterm>韦氏修订同义词词典（1913）</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>Longman</primary> <seealso>词典</seealso>
+          </indexterm>朗文当代英语词典</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para><indexterm class="singular">
+            <primary>Britannica</primary> <seealso>词典</seealso>
+          </indexterm>不列颠简明百科全书</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>……等等</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>一些词典有些不附带任何条件——也就是说可以“自由使用”，而另一些，如上述则是基于GPL许可。下面的例子显示了  Merrian Webster 10th dictionary 的“实际应用”：</para>
+
+    <figure id="Dict.Merriam.Webster">
+      <title><indexterm class="singular">
+          <primary>Dictionary</primary>
+
+          <secondary>Merriam Webster - figure</secondary>
+
+          <seealso>Dictionaries</seealso>
+        </indexterm>Merriam Webster 词典——实际使用</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/DictMerriamWebster.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/DictMerriamWebster.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+  </section>
+
+  <section>
+    <title><indexterm class="singular">
+        <primary>词典</primary> <secondary>相关问题</secondary>
+      </indexterm>与词典相关的问题</title>
+
+    <itemizedlist>
+      <listitem>
+        <para>检查文件夹中的词典文件（或其中的子文件夹）。查看<menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
+                    <primary>快捷键</primary> <secondary>Ctrl+E - 项目属性</secondary>
+                  </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>项目</guimenu> <guimenuitem>属性</guimenuitem> </menuchoice>.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>文件夹中是否包含了三份名称相同，而扩展名分别为  &lt;s0&gt;dict.dz,  idx &lt;/s0&gt; 和 &lt;s1&gt;ifo&lt;/s1&gt; 的文件?如果只有一份与预期相同的文件，那么检查下它的扩展名。如果扩展名为<emphasis>tar.bz</emphasis>，那么是因为您忘记解压了。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

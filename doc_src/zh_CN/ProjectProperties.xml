@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<chapter id="chapter.project.properties">
+  <title>项目属性<indexterm class="singular">
+      <primary>项目</primary> <secondary>属性</secondary>
+    </indexterm></title>
+
+  <para/>
+
+  <section id="properties.dialog">
+    <title>属性对话框</title>
+
+    <para><menuchoice> <shortcut> <keycombo> <keycap>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>项目</guimenu> <guimenuitem>属性……</guimenuitem> </menuchoice>对话框可用来修改项目文件夹和语种。</para>
+
+    <figure>
+      <title>项目属性窗口</title>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/NewProject.png"/>
+        </imageobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/NewProject.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </figure>
+
+    <para>它包括：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>使用下拉菜单选择项目源和目标语言的区域</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>分割规则设置标志</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>设置项目文件夹的区域</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>所有的字段都是可编辑的。您可以手动输入语种或者通过下拉菜单选择。如果您输入了还不存在的文件夹名称，则 <application>OmegaT</application> 会创建它们。</para>
+  </section>
+
+  <section id="language.modification">
+    <title>修改项目属性</title>
+
+    <para>请注意对项目设置的变更可能已经产生结果，特别是在重新加载项目后。</para>
+
+    <itemizedlist>
+      <listitem>
+        <para><emphasis role="bold">改变源或目标语言：<indexterm class="singular">
+            <primary>项目</primary> <secondary>源和目标语言</secondary>
+          </indexterm></emphasis></para>
+
+        <para>必须要记住：修改语言可能会导致当前使用的翻译记忆变得不可用，由于它的语言对不再与新语言相匹配。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">修改分割规则：<indexterm class="singular">
+            <primary>项目</primary> <secondary>修改分割规则</secondary>
+          </indexterm></emphasis></para>
+
+        <para>分割规则设置只影响 <application>OmegaT</application> 处理源文件的方式。它不会对已经译好翻译记忆进行修改。</para>
+
+        <para>如果改变了分割规则设置，一些已经译好的片段可能被分拆或者合并。这实际上会让它们回到“未译”状态，因为它们不在和记录在翻译记忆中的片段相匹配，即便旧的的匹配翻译仍然存在。</para>
+
+        <para>OmegaT 可能会升级旧的未使用句子片段的翻译记忆，但反过来却不会。如果您在翻译中决定从句子分割切换为段落分割，项目的内部翻译记忆不会改变。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">改变文件夹结构：<indexterm class="singular">
+            <primary>项目</primary> <secondary>改变文件夹结构</secondary>
+          </indexterm></emphasis></para>
+
+        <para>在想要修改项目文件夹的情况下，必须紧记这样做并不会将所包含的文件从旧文件夹移动到新的位置。</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">在翻译过程中修改项目属性：<indexterm class="singular">
+            <primary>项目</primary> <secondary>在翻译时修改</secondary>
+          </indexterm></emphasis></para>
+
+        <para>可以在翻译进行的过程中对项目的属性进行修改。然而，如果您还没有丰富的 OmegaT 使用经验时，最安全的办法是在翻译启动的时候考虑所有的设置问题——除非您意识到自己犯了一个严重的错误。查阅防止数据丢失部分了解如何保护您的工作成果。</para>
+      </listitem>
+    </itemizedlist>
+  </section>
+</chapter>

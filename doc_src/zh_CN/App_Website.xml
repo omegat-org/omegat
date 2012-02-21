@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN" "../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.website">
+  <title><application>网上的 <indexterm class="singular">
+      <primary>网上的 OmegaT </primary>
+    </indexterm>OmegaT</application></title>
+
+  <section id="OmegaT.sites.and.OmegaT.SourceForge.project">
+    <title><application>OmegaT</application> 站点和 <application>OmegaT</application> SourceForge 项目<indexterm class="singular">
+        <primary>网上的 OmegaT</primary> <secondary>SourceForge 项目</secondary>
+      </indexterm></title>
+
+    <para><ulink url="http://www.omegat.org/"> <application>OmegaT</application> 网站</ulink>包含了众多 <application>OmegaT</application> 的资源链接。用户支持以 <ulink url="http://groups.yahoo.com/group/omegat/"><application>OmegaT</application> 雅虎用户组</ulink> 的志愿者为基础来提供。在寻找问题的答案时 <ulink url="http://tech.groups.yahoo.com/group/omegat/database?method=reportRows&amp;amp;tbl=1">FAQ</ulink> 是个不错的起点。对于最新版本的 OmegaT，请参考 www.omegat.org 上的下载页。您还可以提交 <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=520347">bug 报告</ulink>和<ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;amp;atid=52035">改进要求。</ulink></para>
+  </section>
+
+  <section id="bug.reports">
+    <title>BUG 报告<indexterm class="singular">
+        <primary>网上的 OmegaT</primary> <secondary>反馈 bug</secondary>
+      </indexterm></title>
+
+    <para>请记住每份良好的 BUG 报告至少包括三方面内容：</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>重现 BUG 的步骤</para>
+      </listitem>
+
+      <listitem>
+        <para>您期望看到的情况</para>
+      </listitem>
+
+      <listitem>
+        <para>您实际看到的情况</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>更多内容请参阅 Joel Spolsky 的那篇 <ulink url="http://www.joelonsoftware.com/articles/fog0000000029.html">无痛 Bug 跟踪</ulink>文章。</para>
+
+    <para>您应该将文件的副本、部分日志、屏幕截图，以及其他任何可以帮助开发人员找到并处理您所遇到的 Bug 的内容添加到报告中。需要注意的是：BUG 报告和改进要求是公开可见的，因此请不要将敏感文件加入其中。如果您想知道您的报告后续处理情况，您需要注册成为 SourceForge 用户，登录并提交一份 BUG 报告，或者只需点击报告顶部的监控器。</para>
+  </section>
+
+  <section id="contributing.to.omegat.project">
+    <title>为 <application>OmegaT</application> 项目做贡献<indexterm class="singular">
+        <primary>网上的 OmegaT</primary> <secondary>为 OmegaT 做贡献</secondary>
+      </indexterm></title>
+
+    <para><emphasis role="bold">为 <application>OmegaT</application> 做贡献：</emphasis></para>
+
+    <para>首先请加入<ulink url="http://groups.yahoo.com/group/OmegaT/">用户组</ulink>（通过网站或给 <ulink url="mailto:OmegaT-subscribe@yahoogroups.com"><application>OmegaT</application>-subscribe@yahoogroups.com</ulink> 发一封电子邮件）。想参加 <application>OmegaT</application> 开发的话，您可以通过网站或者向 <ulink url="mailto:omegat-development-request@list.sourceforge.net?subject=subscribe">omegat-development-request@lists.sourceforge.net</ulink> 发送一份标题为 &quot;subscribe&quot; 的邮件加入开发人员组。</para>
+
+    <para><emphasis role="bold">如果想翻译 <application>OmegaT</application> 的用户界面、用户手册或其他相关文档：</emphasis></para>
+
+    <para>首先请阅读<ulink url="http://www.omegat.org/en/howtos/localizing_omegat.html">本地化和配置 <application>OmegaT</application></ulink>指南，并通过网站或给  <ulink url="mailto:omegat-development-request@lists.sourceforge.net?subject=subscribe">omegat-l10n-request@lists.sourceforge.net</ulink> 发一封标题为“subscribe”的电子邮件加入 <application>OmegaT</application> 翻译者讨论组。</para>
+
+    <indexterm class="singular">
+      <primary>网上的 OmegaT</primary> <secondary>开发，本地化</secondary>
+    </indexterm>
+
+    <para>要为 OmegaT 项目提供资金支持<indexterm class="singular">
+        <primary>网上的 OmegaT</primary> <secondary>资金支持</secondary>
+      </indexterm></para>
+
+    <para>如果您想支持 OmegaT 的后续开发，我们很感激这种行为，请点击此链接前往 <ulink url="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&amp;hosted_button_id=9UB6Y2BBF99\ LL">OmegaT PayPal 账户</ulink>。</para>
+
+    <indexterm class="singular">
+      <primary>网上的 OmegaT</primary> <secondary>向 OmegaT 捐赠</secondary>
+    </indexterm>
+  </section>
+</appendix>

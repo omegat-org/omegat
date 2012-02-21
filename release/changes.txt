@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.5.1 update 2 vs. 2.5.1 update 1
 
@@ -12,6 +12,9 @@
   - In the PO filter, "path" was always displayed in the Comment pane, 
 even if it was empty
 
+  Localisation updates:
+
+  - Chinese (zh_CN) localisation updated to 2.5.0 (UI, readme, documentation)
 ----------------------------------------------------------------------
  OmegaT 2.5.1 update 1
 ----------------------------------------------------------------------

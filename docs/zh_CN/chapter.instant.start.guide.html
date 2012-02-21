@@ -2,32 +2,71 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>快速入门指南</title>
+      <title>Chapter&nbsp;2.&nbsp;快速入门指南</title>
       <link rel="stylesheet" type="text/css" href="OmegaT.css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - 用户向导">
+      <link rel="up" href="index.html" title="OmegaT - 用户向导">
+      <link rel="prev" href="chapter.about.OmegaT.html" title="Chapter&nbsp;1.&nbsp;关于 OmegaT——介绍">
+      <link rel="next" href="chapter.installing.and.running.html" title="Chapter&nbsp;3.&nbsp;安装和运行 OmegaT">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
-      <div class="chapter" title="快速入门指南">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;2.&nbsp;快速入门指南</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.about.OmegaT.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.installing.and.running.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;2.&nbsp;快速入门指南">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.instant.start.guide"></a>快速入门指南
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Chapter&nbsp;2.&nbsp;快速入门指南
                   </h2>
                </div>
             </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e181">1. 五分钟内学会使用 <span class="application">OmegaT</span>！</a></span></dt>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e219">2. 使用 <span class="application">OmegaT</span> 翻译</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#create.and.open.new.project">2.1. 创建并打开一个新的项目</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#translate.the.segments.one.by.one">2.2. 逐片段翻译</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#use.matches.in.TMs.dictionaries.and.glossaries">2.3. 使用翻译记忆、词汇表和字典中的匹配项</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#create.translated.documents">2.4. 创建已译文档</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.instant.start.guide.html#how.to.handle.tagged.text">3. 处理标记文本</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#d0e689">3.1. 一个例子……</a></span></dt>
+                     <dt><span class="section"><a href="chapter.instant.start.guide.html#tag.verification">3.2. 标记验证</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
          </div>
          <div class="section" title="1.&nbsp;五分钟内学会使用 OmegaT！">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e4"></a>1.&nbsp;五分钟内学会使用 <span class="application">OmegaT</span>！
+                     <h2 class="title" style="clear: both"><a name="d0e181"></a>1.&nbsp;五分钟内学会使用 <span class="application">OmegaT</span>！
                      </h2>
                   </div>
                </div>
             </div>
             <p>这份快速入门指南只包括了 OmegaT 中最基础的功能。理论上，用户均应该阅读用户手册来熟悉 <span class="application">OmegaT</span> 所提供的一切。Mac 用户注意：这里描述的快捷方式使用 "<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>key</strong></span>" 约定，但 Mac 用户应该改为使用 "<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>key</strong></span>"。"<span class="keycap"><strong>Cmd</strong></span>" 键就是在苹果键盘上印有 "command" 或“苹果”符号的那个键。
             </p>
-            <p><span class="application">OmegaT</span> 界面由五个不同的窗格组成的空间构成<a class="indexterm" name="d0e34"></a>。每个窗口都可以使用鼠标调整大小。左边的窗口是输入翻译文本的编辑器［Editor］。在右边，上面是匹配查看器［Match Viewer］，其中显示翻译记忆中的匹配内容。下面是词汇表查看器［Glossary Viewer］，用于显示词汇表的匹配内容。在窗口底部两个附加的标签用来打开词典和机器翻译窗格。（注：您可以把这些窗格调整为自己喜欢的布局，上面的描述是指刚安装好
+            <p><span class="application">OmegaT</span> 界面由五个不同的窗格组成的空间构成<a class="indexterm" name="d0e211"></a>。每个窗口都可以使用鼠标调整大小。左边的窗口是输入翻译文本的编辑器［Editor］。在右边，上面是匹配查看器［Match Viewer］，其中显示翻译记忆中的匹配内容。下面是词汇表查看器［Glossary Viewer］，用于显示词汇表的匹配内容。在窗口底部两个附加的标签用来打开词典和机器翻译窗格。（注：您可以把这些窗格调整为自己喜欢的布局，上面的描述是指刚安装好
                OmegaT 时的情况）。
             </p>
             <p>在编辑器窗格中，OmegaT 将源文本分割成句子（或段落）来显示。然后可以逐一对这些片段进行翻译。在您从一个片段翻译到另一个片段的同时，翻译均被记录在翻译记忆中。一旦所有的片段都被翻译好之后（如果您要求的话，或者完成之前也可以）OmegaT 会使用翻译记忆在“目标”［Target］目录中生成翻译好的文档。</p>
@@ -37,7 +76,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e42"></a>2.&nbsp;使用 <span class="application">OmegaT</span> 翻译
+                     <h2 class="title" style="clear: both"><a name="d0e219"></a>2.&nbsp;使用 <span class="application">OmegaT</span> 翻译
                      </h2>
                   </div>
                </div>
@@ -46,29 +85,29 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="create.and.open.new.project"></a>2.1.&nbsp;创建并打开一个新的项目<a class="indexterm" name="d0e51"></a></h3>
+                        <h3 class="title"><a name="create.and.open.new.project"></a>2.1.&nbsp;创建并打开一个新的项目<a class="indexterm" name="d0e228"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>从菜单中选择 <span class="guimenu">项目</span> → <span class="guimenuitem">新建…</span><a class="indexterm" name="d0e63"></a>。
+               <p>从菜单中选择 <span class="guimenu">项目</span> → <span class="guimenuitem">新建…</span><a class="indexterm" name="d0e240"></a>。
                </p>
                <p>找到您想保存项目文件的文件夹，并为该翻译项目输入一个名字。该名字将被用作项目的主文件夹名，项目的所有文件将被保存在这个文件夹及其子文件夹中。</p>
                <p><span class="application">OmegaT</span> 将使用下面的对话框提示您确认或者改变要创建的项目文件夹。
                </p>
-               <div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figure&nbsp;1.&nbsp;<a class="indexterm" name="d0e77"></a>新建项目 - 对话窗口</b></p>
+               <div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figure&nbsp;2.1.&nbsp;<a class="indexterm" name="d0e254"></a>新建项目 - 对话窗口</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/NewProject.png" alt="项目项目对话窗口 - 图示新建项目 - 对话窗口"></div>
                   </div>
                </div><br class="figure-break"><p>您仅需简单地接受子文件夹的位置，但是必须首先确认源和目标语言编码是正确的。从下拉列表中选择语言代码（2字母）或语言和地区代码（2 + 2 字母），或直接手工输入代码（语言代码可以为 2 到 3 个字母）。记下目标文件夹（用于保存译好文档）的位置。如果希望
-                  OmegaT 根据句子而不是段落进行片段分割，请阅读片段分割规则章节<a class="indexterm" name="d0e90"></a>。
+                  OmegaT 根据句子而不是段落进行片段分割，请阅读片段分割规则章节<a class="indexterm" name="d0e267"></a>。
                </p>
                <p>点击确认接受项目设置之后，OmegaT 会提示您选择要导入的源文档。您可以通过 <em class="firstterm">项目&gt;导入源文件</em>来导入单个的文件，也可以手动复制多个文件甚至整个文件夹的树形结构（包括所有子文件夹中的所有文件）到 OmegaT 项目的源文件夹中（例如使用您系统的文件管理器）。如果您不小心导入了错误的文档，或者过多的文档，仅需从 OmegaT 源文件夹中删除它们。
                </p>
-               <p>要查看待译文件清单，请打开<span class="bold"><strong>项目文件</strong></span> <a class="indexterm" name="d0e106"></a>窗口（如果没有自动开启的话，可使用菜单：<span class="guimenu">项目</span> → <span class="guimenuitem">项目文件……</span>,<a class="indexterm" name="d0e118"></a>）。如果改变了源文件夹的内容，记住首先要重新载入项目（菜单：<span class="guimenu">项目</span> → <span class="guimenuitem">重新载入</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>)）。缺省情况下，<span class="application">OmegaT</span> 打开项目清单中的第一个文件。请记住，<span class="application">OmegaT</span> 仅能翻译下面列出的能够被文件过滤器所匹配的格式的文件。其它任何文件将会被忽略。<a class="indexterm" name="d0e139"></a></p>
+               <p>要查看待译文件清单，请打开<span class="bold"><strong>项目文件</strong></span> <a class="indexterm" name="d0e283"></a>窗口（如果没有自动开启的话，可使用菜单：<span class="guimenu">项目</span> → <span class="guimenuitem">项目文件……</span>,<a class="indexterm" name="d0e295"></a>）。如果改变了源文件夹的内容，记住首先要重新载入项目（菜单：<span class="guimenu">项目</span> → <span class="guimenuitem">重新载入</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>)）。缺省情况下，<span class="application">OmegaT</span> 打开项目清单中的第一个文件。请记住，<span class="application">OmegaT</span> 仅能翻译下面列出的能够被文件过滤器所匹配的格式的文件。其它任何文件将会被忽略。<a class="indexterm" name="d0e316"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><span class="bold"><strong>纯文本文件格式<a class="indexterm" name="d0e149"></a></strong></span></p>
+                        <p><span class="bold"><strong>纯文本文件格式<a class="indexterm" name="d0e326"></a></strong></span></p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" type="circle">
                               <li class="listitem">
@@ -101,7 +140,7 @@
                            </ul>
                         </div>
                         <p>
-                           
+                                       
                         </p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" type="circle">
@@ -133,12 +172,12 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><span class="bold"><strong>标记文本文件格式<a class="indexterm" name="d0e194"></a></strong></span></p>
+                        <p><span class="bold"><strong>标记文本文件格式<a class="indexterm" name="d0e371"></a></strong></span></p>
                         <div class="itemizedlist">
                            <ul class="itemizedlist" type="circle">
                               <li class="listitem">
                                  <p>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
-                                    *.odp, *.otp)
+                                                  *.odp, *.otp)
                                  </p>
                               </li>
                            </ul>
@@ -255,7 +294,7 @@
                         <p>如果想移动到文本的任何其它部分，无论是前面还是后面，可用鼠标双击想打开的段落或者句子。</p>
                      </li>
                      <li class="listitem">
-                        <p>如果希望在空白的目标区域输入译文，可在<span class="guimenu">选项</span> → <span class="guimenuitem">编辑行为……<a class="indexterm" name="d0e294"></a></span>进行设置。
+                        <p>如果希望在空白的目标区域输入译文，可在<span class="guimenu">选项</span> → <span class="guimenuitem">编辑行为……<a class="indexterm" name="d0e471"></a></span>进行设置。
                         </p>
                      </li>
                      <li class="listitem">
@@ -279,11 +318,11 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;翻译记忆匹配<a class="indexterm" name="d0e317"></a><a class="indexterm" name="d0e322"></a></h4>
+                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;翻译记忆匹配<a class="indexterm" name="d0e494"></a><a class="indexterm" name="d0e499"></a></h4>
                         </div>
                      </div>
                   </div>
-                  <div class="figure"><a name="d0e327"></a><p class="title"><b>Figure&nbsp;2.&nbsp;匹配窗格</b></p>
+                  <div class="figure"><a name="d0e504"></a><p class="title"><b>Figure&nbsp;2.2.&nbsp;匹配窗格</b></p>
                      <div class="figure-contents">
                         <div class="mediaobject"><img src="images/MatchesPane.png" alt="匹配窗格"></div>
                      </div>
@@ -292,11 +331,11 @@
                   <div class="itemizedlist">
                      <ul class="itemizedlist" type="disc">
                         <li class="listitem">
-                           <p>按 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e349"></a> 将预选的匹配插入当前光标位置或……
+                           <p>按 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e526"></a> 将预选的匹配插入当前光标位置或……
                            </p>
                         </li>
                         <li class="listitem">
-                           <p>按 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> <a class="indexterm" name="d0e364"></a><a class="indexterm" name="d0e369"></a> 用预选的匹配覆盖整个片段。
+                           <p>按 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> <a class="indexterm" name="d0e541"></a><a class="indexterm" name="d0e546"></a> 用预选的匹配覆盖整个片段。
                            </p>
                         </li>
                      </ul>
@@ -321,7 +360,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;词汇表和词典匹配<a class="indexterm" name="d0e415"></a></h4>
+                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;词汇表和词典匹配<a class="indexterm" name="d0e592"></a></h4>
                         </div>
                      </div>
                   </div>
@@ -343,7 +382,7 @@
                   <div class="titlepage">
                      <div>
                         <div>
-                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;使用机器翻译服务<a class="indexterm" name="d0e444"></a></h4>
+                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;使用机器翻译服务<a class="indexterm" name="d0e621"></a></h4>
                         </div>
                      </div>
                   </div>
@@ -355,11 +394,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;创建已译文档<a class="indexterm" name="d0e460"></a></h3>
+                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;创建已译文档<a class="indexterm" name="d0e637"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>完成所有片段的翻译之后（如果愿意的话，也可在更早的时候），<span class="application">OmegaT</span> 将会使用翻译记忆中储存的翻译更新目标文档。要完成这项工作，请选择菜单 <span class="guimenu">项目</span> → <span class="guimenuitem">创建已译文档</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e481"></a> <a class="indexterm" name="d0e487"></a>。<span class="application">OmegaT</span> 将会为项目源文件夹中所有可翻译文档创建已译版本，无论它们是否已经被完整翻译。被完整或部分翻译的文件将会被保存到项目的目标文件夹中。为终结翻译工作，可用相关的应用程序打开目标文件（浏览器、字处理器……）对翻译成果的内容和格式进行检查。然后，可以回到
+               <p>完成所有片段的翻译之后（如果愿意的话，也可在更早的时候），<span class="application">OmegaT</span> 将会使用翻译记忆中储存的翻译更新目标文档。要完成这项工作，请选择菜单 <span class="guimenu">项目</span> → <span class="guimenuitem">创建已译文档</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e658"></a> <a class="indexterm" name="d0e664"></a>。<span class="application">OmegaT</span> 将会为项目源文件夹中所有可翻译文档创建已译版本，无论它们是否已经被完整翻译。被完整或部分翻译的文件将会被保存到项目的目标文件夹中。为终结翻译工作，可用相关的应用程序打开目标文件（浏览器、字处理器……）对翻译成果的内容和格式进行检查。然后，可以回到
                   <span class="application">OmegaT</span> 进行任何必须的修正工作，但不要忘记重新创建已译文档。
                </p>
             </div>
@@ -368,7 +407,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;处理标记文本<a class="indexterm" name="d0e502"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;处理标记文本<a class="indexterm" name="d0e679"></a></h2>
                   </div>
                </div>
             </div>
@@ -378,26 +417,26 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e512"></a>3.1.&nbsp;一个例子……<a class="indexterm" name="d0e515"></a></h3>
+                        <h3 class="title"><a name="d0e689"></a>3.1.&nbsp;一个例子……<a class="indexterm" name="d0e692"></a></h3>
                      </div>
                   </div>
                </div>
                <p>在这些例子中，我们将它们突出显示以便更容易看到，但是在 <span class="application">OmegaT</span> 中它们并不会被突出显示。以蓝色突出显示的 HTML 标记在 <span class="application">OmegaT</span> 中将会被忽略，因为它们完整地包围某个片段。以绿色突出显示的标记必须由 <span class="application">OmegaT</span> 进行处理，因为它们出现在片段之内。下面是一个 HTML 中的片段例子：
                </p>
                <p><code class="literal">&lt;p&gt;A different display font can be selected via
-                     the &lt;b&gt;Display Font&lt;/b&gt;dialog. Open it via
-                     the &lt;i&gt;Options&lt;/i&gt; →&lt;i&gt;Display Font...&lt;/i&gt; menu
-                     item. The font type and size can be changed from the
-                     dialog.&lt;/p&gt;</code></p>
+                           the &lt;b&gt;Display Font&lt;/b&gt;dialog. Open it via
+                           the &lt;i&gt;Options&lt;/i&gt; →&lt;i&gt;Display Font...&lt;/i&gt; menu
+                           item. The font type and size can be changed from the
+                           dialog.&lt;/p&gt;</code></p>
                <p>下面是 <span class="application">OmegaT</span> 如何以南非荷兰语译文来显示它们：
                </p>
-               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;3.&nbsp;源 <a class="indexterm" name="d0e542"></a>HTML 片段</b></p>
+               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;2.3.&nbsp;源 <a class="indexterm" name="d0e719"></a>HTML 片段</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/tagged_segment.png" alt="源 片段、源和目标 - 图示HTML 片段"></div>
                   </div>
                </div><br class="figure-break"><p>当 <span class="application">OmegaT</span> 创建已译文档时，HTML 看起来将像下面的样子：
                </p>
-               <div class="figure"><a name="fig.tagged.segment.target"></a><p class="title"><b>Figure&nbsp;4.&nbsp;目标 HTML 片段</b></p>
+               <div class="figure"><a name="fig.tagged.segment.target"></a><p class="title"><b>Figure&nbsp;2.4.&nbsp;目标 HTML 片段</b></p>
                   <div class="figure-contents">
                      <div class="mediaobject"><img src="images/tagged_segment_target.png" alt="目标 HTML 片段"></div>
                   </div>
@@ -406,15 +445,32 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;标记验证<a class="indexterm" name="d0e567"></a><a class="indexterm" name="d0e572"></a></h3>
+                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;标记验证<a class="indexterm" name="d0e744"></a><a class="indexterm" name="d0e749"></a></h3>
                      </div>
                   </div>
                </div>
-               <p><span class="application">OmegaT</span> 不会自动检测已译文档中的错误标签。因此在将文档交付给客户之前，您必须检查标签的错误。从菜单中选择 <span class="guimenu">工具</span> → <span class="guimenuitem">检验标签……</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>)。将在一个表格中显示原文和目标中标签不一致的那些片段。点击片段序号。编辑器将把您自动带到错误片段处，然后您就可以纠正错误的标签了。进行修正后，再次按下 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e596"></a></strong></span> 来检查其他。请注意标签检查可能会把正确的标记识别为错误——例如，为了让翻译符合语法而调整标记的顺序时。请把这种情况视为标签检查引起的副作用。
+               <p><span class="application">OmegaT</span> 不会自动检测已译文档中的错误标签。因此在将文档交付给客户之前，您必须检查标签的错误。从菜单中选择 <span class="guimenu">工具</span> → <span class="guimenuitem">检验标签……</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>)。将在一个表格中显示原文和目标中标签不一致的那些片段。点击片段序号。编辑器将把您自动带到错误片段处，然后您就可以纠正错误的标签了。进行修正后，再次按下 <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e773"></a></strong></span> 来检查其他。请注意标签检查可能会把正确的标记识别为错误——例如，为了让翻译符合语法而调整标记的顺序时。请把这种情况视为标签检查引起的副作用。
                </p>
                <p>某些情况下，错误的标签甚至可能导致文档无法打开。此时无需惊慌——您仍然还有可用的源文件及翻译，您只需在创建翻译文档之前，确保已经修正了所有的标签错误。最后一点，您应该总是通过相关的阅读或编辑器打开已译文档来仔细检查最终格式。</p>
             </div>
          </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.about.OmegaT.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.installing.and.running.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;1.&nbsp;关于 <span class="application">OmegaT</span>——介绍&nbsp;
+               </td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;3.&nbsp;安装和运行 <span class="application">OmegaT</span></td>
+            </tr>
+         </table>
       </div>
    </body>
 </html>

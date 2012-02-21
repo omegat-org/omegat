@@ -1,0 +1,135 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;6.&nbsp;项目属性</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - 用户向导">
+      <link rel="up" href="index.html" title="OmegaT - 用户向导">
+      <link rel="prev" href="chapter.menu.html" title="Chapter&nbsp;5.&nbsp;菜单和键盘快捷键">
+      <link rel="next" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;文件过滤器">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;6.&nbsp;项目属性</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.menu.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;6.&nbsp;项目属性">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;项目属性<a class="indexterm" name="d0e4191"></a></h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. 属性对话框</a></span></dt>
+               <dt><span class="section"><a href="chapter.project.properties.html#language.modification">2. 修改项目属性</a></span></dt>
+            </dl>
+         </div>
+         <p></p>
+         <div class="section" title="1.&nbsp;属性对话框">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="properties.dialog"></a>1.&nbsp;属性对话框
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="guimenu">项目</span> → <span class="guimenuitem">属性……</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>)对话框可用来修改项目文件夹和语种。
+            </p>
+            <div class="figure"><a name="d0e4213"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;项目属性窗口</b></p>
+               <div class="figure-contents">
+                  <div class="mediaobject"><img src="images/NewProject.png" alt="项目属性窗口"></div>
+               </div>
+            </div><br class="figure-break"><p>它包括：</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>使用下拉菜单选择项目源和目标语言的区域</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>分割规则设置标志</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>设置项目文件夹的区域</p>
+                  </li>
+               </ul>
+            </div>
+            <p>所有的字段都是可编辑的。您可以手动输入语种或者通过下拉菜单选择。如果您输入了还不存在的文件夹名称，则 <span class="application">OmegaT</span> 会创建它们。
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;修改项目属性">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="language.modification"></a>2.&nbsp;修改项目属性
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>请注意对项目设置的变更可能已经产生结果，特别是在重新加载项目后。</p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><span class="bold"><strong>改变源或目标语言：<a class="indexterm" name="d0e4250"></a></strong></span></p>
+                     <p>必须要记住：修改语言可能会导致当前使用的翻译记忆变得不可用，由于它的语言对不再与新语言相匹配。</p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>修改分割规则：<a class="indexterm" name="d0e4261"></a></strong></span></p>
+                     <p>分割规则设置只影响 <span class="application">OmegaT</span> 处理源文件的方式。它不会对已经译好翻译记忆进行修改。
+                     </p>
+                     <p>如果改变了分割规则设置，一些已经译好的片段可能被分拆或者合并。这实际上会让它们回到“未译”状态，因为它们不在和记录在翻译记忆中的片段相匹配，即便旧的的匹配翻译仍然存在。</p>
+                     <p>OmegaT 可能会升级旧的未使用句子片段的翻译记忆，但反过来却不会。如果您在翻译中决定从句子分割切换为段落分割，项目的内部翻译记忆不会改变。</p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>改变文件夹结构：<a class="indexterm" name="d0e4279"></a></strong></span></p>
+                     <p>在想要修改项目文件夹的情况下，必须紧记这样做并不会将所包含的文件从旧文件夹移动到新的位置。</p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>在翻译过程中修改项目属性：<a class="indexterm" name="d0e4290"></a></strong></span></p>
+                     <p>可以在翻译进行的过程中对项目的属性进行修改。然而，如果您还没有丰富的 OmegaT 使用经验时，最安全的办法是在翻译启动的时候考虑所有的设置问题——除非您意识到自己犯了一个严重的错误。查阅防止数据丢失部分了解如何保护您的工作成果。</p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.menu.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.file.filters.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;5.&nbsp;菜单和键盘快捷键&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;7.&nbsp;文件过滤器</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

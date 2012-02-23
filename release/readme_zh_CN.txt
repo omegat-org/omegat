@@ -167,7 +167,7 @@ cd <OmegaT.jar 文件所在文件夹>
 贡献过代码的人：
   Zoltan Bartko
   Volker Berlin
-  Didier Briel (development manager)
+  Didier Briel (开发经理)
   Kim Bruning
   Alex Buloichik (开发人员主管)
   Sandra Jean Chua

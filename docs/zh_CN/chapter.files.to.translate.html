@@ -1,0 +1,389 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;9.&nbsp;待译文件</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - 用户向导">
+      <link rel="up" href="index.html" title="OmegaT - 用户向导">
+      <link rel="prev" href="chapter.files.and.directories.html" title="Chapter&nbsp;8.&nbsp;OmegaT 文件和目录">
+      <link rel="next" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;编辑行为">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;9.&nbsp;待译文件</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.files.and.directories.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.editing.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;9.&nbsp;待译文件">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.files.to.translate"></a>Chapter&nbsp;9.&nbsp;待译文件
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. 文件格式</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5960">1.1. 纯文本文件</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6027">1.2. 格式化文本文件</a></span></dt>
+                  </dl>
+               </dd>
+               <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. 其它文件格式</a></span></dt>
+               <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. 自右向左语言</a></span></dt>
+               <dd>
+                  <dl>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6244">3.1. 在片段中混合自右向左和自左向右字符串</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6264">3.2. 自右向左片段中的 <span class="application">OmegaT</span> 标签</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6279">3.3. 创建已译自右向左文档</a></span></dt>
+                  </dl>
+               </dd>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;文件格式">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;文件格式<a class="indexterm" name="d0e5946"></a><a class="indexterm" name="d0e5951"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">您可以使用 OmegaT</span> 翻译一些文件格式。最基本的文件类型有两种，纯文本和格式化文本格式。
+            </p>
+            <div class="section" title="1.1.&nbsp;纯文本文件">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e5960"></a>1.1.&nbsp;纯文本文件<a class="indexterm" name="d0e5963"></a><a class="indexterm" name="d0e5968"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>纯文本文件中只含有文本，因为对它们的翻译工作就像输入翻译一样简单。有多种方法可以指定文件的编码，以确保 <span class="application">OmegaT</span> 打开它们时不会显示乱码。这样的文本除了用于对齐文本、标示段落或插入页面的“空白”之外没有任何格式化信息。它们无法包含或保留关于文本的颜色、字体等的信息。目前，<span class="application">OmegaT</span> 支持以下纯文本格式：<a class="indexterm" name="d0e5981"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>ASCII 文本（.txt 等）</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>编码文本（*.UTF8）</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Java 资源文件（*.properties）</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>PO 文件（*.po）</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>INI (key=value) 文件（*.ini）</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>DTD 文件（*.DTD）</p>
+                     </li>
+                     <li class="listitem">
+                        <p>DocuWiki 文件（*.txt）</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>SubRip 标题文件 (*.srt)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Magento CE Locale CSV 文件 (*.csv)</p>
+                     </li>
+                  </ul>
+               </div>
+               <p><span class="application">OmegaT</span> 可以处理的其它的纯文本文件可以通过将其文件扩展名关联到所支持的文件类型（比方说，.pod 文件可以关联到 ASCII 文本过滤器）并使用特定的分割 规则来进行预处理。
+               </p>
+            </div>
+            <div class="section" title="1.2.&nbsp;格式化文本文件">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6027"></a>1.2.&nbsp;格式化文本文件<a class="indexterm" name="d0e6030"></a><a class="indexterm" name="d0e6037"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>格式化文本文件除了包含文本之外，还包括字体类型、大小、颜色等信息。它们通常由文字处理器和 HTML 编辑器创建。这些文件格式是设计用来保持格式信息的。这些格式信息可能就像 “这是粗体”一样简单，也可能是包含了不同的字体大小、颜色和位置等信息的表格数据一样复杂。在大多数翻译工作中，在译文中保留原文的格式信息是很重要的。通过使用易于维护的
+                  TAG 来标记拥有特殊格式的字符或单词，OmegaT 让您能够做到这一点。对源文本格式的简化很大程度上有助于减少标签的数量。如果有可能应该考虑在文档中使用统一的字体、字体大小、颜色等，以此简化翻译工作和减少可能的标签错误。每种文件格式在 OmegaT
+                  中的处理方式都不同。可在文件过滤器设置特定的动作。在写此文档时，OmegaT 支持以下格式化的文本格式：<a class="indexterm" name="d0e6044"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>OpenOffice.org / OpenDocument (*.ods, *.ots, *.odt, *.ott,
+                                       *.odp, *.otp)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Microsoft Office Open XML (*.docx, *.dotx, *.xlsx, *.xltx,
+                                       *.pptx)
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>(X)HTML (*.html, *.xhtml,*.xht)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>HTML Help Compiler (*.hhc, *.hhk)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>DocBook (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>XLIFF (*.xlf, *.xliff, *.sdlxliff) - 单语的，即对于指定项目只有一种可能的语言组合</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>ResX 文件 (*.resx)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Android 资源 (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>LaTex (*.tex, *.latex)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Help (*.xml) 和 Manual (*.hmxp) 文件</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Typo3 LocManager (*.xml)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>WiX Localization (*.wxl)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Iceni Infix (*.xml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Flash XML export (*.xml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Wordfast TXML (*.txml)</p>
+                     </li>
+                     <li class="listitem">
+                        <p>Camtasia for Windows (*.camproj)</p>
+                     </li>
+                  </ul>
+               </div>
+               <p>其它的格式化文本文件可以通过将其文件扩展名关联到所支持的文件类型（假设相应的分割规则可以正确分割它们）来让 OmegaT 进行处理。</p>
+            </div>
+         </div>
+         <div class="section" title="2.&nbsp;其它文件格式">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;其它文件格式<a class="indexterm" name="d0e6119"></a><a class="indexterm" name="d0e6124"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>还存在适合 OmegaT 处理的其他纯文本或格式化文本文件。</p>
+            <p><a class="indexterm" name="d0e6132"></a>可使用外部工具将文件转换成所支持的格式。译后文件需要被转换回最初的格式。例如，如果您使用无法处理 ODT 格式的过时 Microsoft Word 版本，对于 DOC 格式则需要进行下面这样的来回转换：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>将文件导入到 OpenOffice.org writer</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>以 ODT 格式保存文件</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>对它进行翻译并创建目标 ODT 文件</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>在 OpenOffice.org writer 中加载目标文件</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>保存该文件为 DOC 格式</p>
+                  </li>
+               </ul>
+            </div>
+            <p>译后文档中格式信息的质量将取决于来回转换的质量。在进行类似的转换前，必须确保测试过所有选项。请参阅 <a class="ulink" href="http://www.omegat.org" target="_top">OmegaT 主页</a>了解最新的辅助转换工具列表。
+            </p>
+         </div>
+         <div class="section" title="3.&nbsp;自右向左语言">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;自右向左语言<a class="indexterm" name="d0e6166"></a><a class="indexterm" name="d0e6169"></a><a class="indexterm" name="d0e6174"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>原文和译文的区分取决于项目的语言设置。默认情况下，LTR 语言使用左对齐而 RTL 语言使用右对齐。通过按下 <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span>（字母 O 而不是数字 0）来切换不同的显示模式。<span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span>切换有三种状态：
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>默认对齐方式，这由语言决定的</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>左对齐</p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>右对齐</p>
+                  </li>
+               </ul>
+            </div>
+            <p>在 <span class="application">OmegaT</span> 中使用  RTL 模式对于 <span class="application">OmegaT</span> 中创建的已译文档的显示模式没有任何影响。已译文档的显示模式必须在常用于显示或编辑它们的应用程序（例如 Microsoft Word）中进行修改（查阅相关手册了解详细信息）。使用 <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> 将使得 <span class="application">OmegaT</span> 中文本的输入和显示模式都改变了。通过点击窗格并切换显示模式，该方法也可单独适用于所有三个窗格（编辑器、模糊匹配和词汇表）。它还使用于在 <span class="application">OmegaT</span> 中的所有输入字段（搜索窗口、片段分割规则等）。
+            </p>
+            <p>对于 Mac OS X 用户，请注意：使用 <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> 快捷键而 <span class="bold"><strong>不是</strong></span>cmd+Ctrl+O.
+            </p>
+            <div class="section" title="3.1.&nbsp;在片段中混合自右向左和自左向右字符串">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6244"></a>3.1.&nbsp;在片段中混合自右向左和自左向右字符串<a class="indexterm" name="d0e6247"></a><a class="indexterm" name="d0e6252"></a><a class="indexterm" name="d0e6257"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>在编写纯自右向左文本时，将使用缺省的（自左向右）视图。然而在许多情况下，必须在自右向左文本中嵌入自左向右文本。例如，在 OmegaT 标签中，必须在自左向右源文件中保留产品名称、在本地化文件中保留占位符以及在文本中保留数字。在像这样的情况下，必须转换为自右向左模式，以正确显示自右向左（实际是双向）文本。应当注意，当
+                  OmegaT 处于自右向左模式，源和目标都以自右向左模式显示。这意味着如果源语言是自左向右，而目标语言是自右向左，或者反过来，就可能必须在自右向左和自左向右模式之间来回切换，以轻松地在相应的模式下查看源文件和输入译文。
+               </p>
+            </div>
+            <div class="section" title="3.2.&nbsp;自右向左片段中的 OmegaT 标签">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6264"></a>3.2.&nbsp;自右向左片段中的 <span class="application">OmegaT</span> 标签<a class="indexterm" name="d0e6270"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>如上所述，OmegaT 标签是自左向右字符串。如需在自右向左和自左向右之间进行翻译工作，为从源文件中正确读取标签以及在目标中正确输入，有可能需要在自左向右和自右向左模式之间来回切换多次。</p>
+               <p>如果允许，极力倡导翻译人员将原始文档的风格信息删除，以确保在 OmegaT 中尽可能少地显示标签。按照提示中提供的线索进行标签管理. 经常验证标签（见标签验证）和每隔固定时间制作已译文档（见下文及菜单）可以更加轻松地发现导致的问题。提示：先翻译文本的纯文本版本，稍后再通过相应程序添加必须的风格被证明是更少争议的。</p>
+            </div>
+            <div class="section" title="3.3.&nbsp;创建已译自右向左文档">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e6279"></a>3.3.&nbsp;创建已译自右向左文档<a class="indexterm" name="d0e6282"></a><a class="indexterm" name="d0e6287"></a><a class="indexterm" name="d0e6292"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>在创建已译文档时，其显示方向将与源文本相同。如果源文档是自左向右的，目标文档的显示方向可以在其查看程序中手动修改为自右向左。每个输出方式都有特定方法来处理自右向左显示，可查阅相关应用程序手册了解更多细节。</p>
+               <p>为避免每次打开目标文件时都要改变其显示参数，可能修改源文件的显示参数以确保这些参数被目标文件所继承。举例来说，这样的修改对 OpenOffice.org 文件是可行的。</p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.files.and.directories.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.editing.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;8.&nbsp;<span class="application">OmegaT</span> 文件和目录&nbsp;
+               </td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;10.&nbsp;编辑行为</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

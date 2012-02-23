@@ -1,0 +1,199 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Chapter&nbsp;15.&nbsp;源片段</title>
+      <link rel="stylesheet" type="text/css" href="OmegaT.css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.76.1">
+      <link rel="home" href="index.html" title="OmegaT - 用户向导">
+      <link rel="up" href="index.html" title="OmegaT - 用户向导">
+      <link rel="prev" href="chapter.translation.memories.html" title="Chapter&nbsp;14.&nbsp;翻译记忆">
+      <link rel="next" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;正则表达式">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Chapter&nbsp;15.&nbsp;源片段</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="chapter" title="Chapter&nbsp;15.&nbsp;源片段">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.segmentation"></a>Chapter&nbsp;15.&nbsp;源片段
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="chapter.segmentation.html#segmentation.rules">1. 片段分割规则</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#rules.priority">2. 规则的优先级</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#creating.new.rule">3. 创建新规则</a></span></dt>
+               <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. 一些简单的例子</a></span></dt>
+            </dl>
+         </div>
+         <p>翻译记忆工具的使用以叫做片段的文本为单位。<span class="application">OmegaT</span> 使用两种方式对文本进行片段分割：段落分割或句子分割（也被称为“基于分割的规则”）。要选择分割类型，请从主菜单选择<span class="guimenu"><a class="indexterm" name="d0e7306"></a>项目</span> → <span class="guimenuitem">属性……</span>，然后选用选中或取消选中相应的复选框。在某些情况中使用段落分割是有好处的，例如在与创造性和文学性高度相关的翻译中，译员可能需要改变整个段落的顺序；然而，对于大多数项目，应优先选择句子分割，因为这样可以与以前的翻译实现更好的匹配。如果选用了句子分割，可通过从主菜单选择<span class="guimenu"><a class="indexterm" name="d0e7317"></a>选项</span> → <span class="guimenuitem">片段分割……</span>以设置规则。
+         </p>
+         <p>许多语言中已经包含了可靠的分割规则，所以很可能您不需要自己编写分割规则。另一方面，该功能在特殊情况下可能非常有用，您可以针对需要翻译的文本设置分割规则来提高生产力。</p>
+         <p><span class="bold"><strong>警告：</strong></span>由于在改变过滤器选项后将对文本进行不同的分割，所以您可能需要从原文开始进行翻译。同时，在项目翻译记忆中原来有效的片段将变成孤立片段。如果您在项目打开的时候改变分割规则选项，您必须重新载入项目以使改变生效。
+         </p>
+         <p><span class="application">OmegaT</span> 使用下列步骤：
+         </p>
+         <div class="variablelist">
+            <dl>
+               <dt><span class="term"><a class="indexterm" name="d0e7339"></a>结构层片段分割</span></dt>
+               <dd>
+                  <p><span class="application">OmegaT</span> 首先将文本分割成结构级别的片段。在这个过程中，只有源文本的结构被用于创建片段。
+                  </p>
+                  <p>例如：文本文件可能会在行终止、空行进行片段分割或根本进行分割。格式化文件（OpenOffice.org 文档、HTML 文档等等）在块级别（段落）标签处进行分割。XHTML 或 HTML 文件的可翻译对象属性可以被提取为独立的片段。</p>
+               </dd>
+               <dt><span class="term"><a class="indexterm" name="d0e7354"></a>句子层分割</span></dt>
+               <dd>
+                  <p>在将源文件分割为结构单元之后， <span class="application">OmegaT</span> 将进一步把这些块分割为语句。
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;片段分割规则">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;片段分割规则<a class="indexterm" name="d0e7369"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>片段分割过程可描绘如下：光标沿着文本移动，每次一个字符。在每个光标位置，由 <span class="bold"><strong>之前</strong></span>和<span class="bold"><strong>之后</strong></span>的模式组成的规则以指定的顺序应用，即对左边的文本使用<span class="bold"><strong>之前</strong></span>模式同时对光标右边的文本使用 <span class="bold"><strong>之后</strong></span> 模式。如果规则匹配，光标继续移动而不进行分割（对于例外规则）或者创建一个新片段（为中断规则）。
+            </p>
+            <p>两种类型的规则表现如下：</p>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term"><a class="indexterm" name="d0e7393"></a>中断规则</span></dt>
+                  <dd>
+                     <p>将源文本分割为片段。例如，"<span class="emphasis"><em>Did it make sense?I was not sure</em></span>." 应该分割成两个句子。要实现这样的目的，应该在 "?" 后跟着空格和大写字符时进行中断的规则。要定义一个中断规则，请选中中断/例外复选框。
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <div class="variablelist">
+               <dl>
+                  <dt><span class="term"><a class="indexterm" name="d0e7410"></a>例外规则</span></dt>
+                  <dd>
+                     <p>指定哪部分文本不应该被分开。不考虑句点的话， <span class="emphasis"><em>"Mrs. Dalloway "</em></span> 不应被分割成两个片段，因此应该为后面跟着句点的 Mrs (以及 Mr 和 Dr 、prof 等等) 创建例外规则。要定义例外规则，请取消选中中断/例外复选框。
+                     </p>
+                  </dd>
+               </dl>
+            </div>
+            <p>对于绝大多数欧洲语言和日语来说，预定义的中断规则已经够用了。从灵活性的角度看，您可能考虑为要翻译的语种定义更多的例外规则，以获取语意更完整也更连贯的片段。</p>
+         </div>
+         <div class="section" title="2.&nbsp;规则的优先级">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;规则的优先级<a class="indexterm" name="d0e7429"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>为匹配的语言模式定义的所有片段分割规则会按照规定的优先级别得到应用，因此为特定语言定义的规则优先级会比缺省规则要高。例如，为加拿大法语 (FR-CA) 创建的规则优先级应该比为法语 (FR.*) 创建规则的优先级要高，也比缺省规则(.*) 要高。因此，在翻译加拿大法语时，会首先应用加拿大法语规则（如果存在的话），接着是法语规则，最后为默认规则。</p>
+         </div>
+         <div class="section" title="3.&nbsp;创建新规则">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;创建新规则<a class="indexterm" name="d0e7439"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p>一般应避免对分割规则进行大幅调整，尤其在开始翻译后，但进行细微修正，例如加上识别的缩略语，可能会有好处。</p>
+            <p>要编辑或扩展现有规则集合，仅需在上面的表格中打开它。规则集合将出现在窗口的下半部分。</p>
+            <p>要为某新语种模式创建空的规则集合，在对话框的上半部分点击<span class="bold"><strong>新增</strong></span>。上方表格的底部将出现一条空行（您可能需要向下滚动才能看到它）。修改规则集的名称和语言模式到相关的语言及其代码（请参阅<a class="xref" href="appendix.languages.html" title="Appendix&nbsp;B.&nbsp;语言 - ISO 639 代码列表">Appendix&nbsp;B, <i>语言 - ISO 639 代码列表
+                       
+                       
+                       </i></a>语言代码列表）。语言模式的语法遵循正则表达式的语法规则。如果您设置了规则集来处理语言——国家对，我们建议您使用<span class="bold"><strong>上移</strong></span>按钮将它移到顶部。
+            </p>
+            <p>添加<span class="bold"><strong>之前</strong></span>和<span class="bold"><strong>之后</strong></span>模式。要检查它们的语法和适用性，建议使用工具来直接查看效果。请参阅<a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;正则表达式">正则表达式</a>章节。了解现有的规则总是个很好的起点。
+            </p>
+         </div>
+         <div class="section" title="4.&nbsp;一些简单的例子">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7473"></a>一些简单的例子
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="informaltable">
+               <table border="1">
+                  <colgroup>
+                     <col width="150" align="left">
+                     <col width="60" align="center">
+                     <col width="60" align="center">
+                     <col width="190" align="left">
+                  </colgroup>
+                  <thead>
+                     <tr>
+                        <th align="left">意图</th>
+                        <th align="center">之前</th>
+                        <th align="center">之后</th>
+                        <th align="left">注意</th>
+                     </tr>
+                  </thead>
+                  <tbody>
+                     <tr>
+                        <td align="left">在句点 ('.') 后且空格前进行分割。</td>
+                        <td align="center">\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">"\." 表示字符 "." "\s" 表示任何空白字符（空格，tab，新页符等）。</td>
+                     </tr>
+                     <tr>
+                        <td align="left">不要在 Mr. 后进行分割</td>
+                        <td align="center">Mr\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">这是一条例外规则，因此必须将规则复选框设为未选中。</td>
+                     </tr>
+                     <tr>
+                        <td align="left">在 "。"（日文句点）后进行分割。</td>
+                        <td align="center">。</td>
+                        <td align="center">&nbsp;</td>
+                        <td align="left">注意<code class="literal">之后</code>规则是空的
+                        </td>
+                     </tr>
+                     <tr>
+                        <td align="left">不要对 M. Mr. Mrs. 和 Ms. 之后的内容进行分割</td>
+                        <td align="center">Mr??s??\.</td>
+                        <td align="center">\s</td>
+                        <td align="left">例外规则 - ?在正则表达式中的使用</td>
+                     </tr>
+                  </tbody>
+               </table>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.memories.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;翻译记忆&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;正则表达式</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

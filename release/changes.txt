@@ -14,7 +14,8 @@ even if it was empty
 
   Localisation updates:
 
-  - Chinese (zh_CN) localisation updated to 2.5.0 (UI, readme, documentation)
+  - Simplified Chinese localisation updated to 2.5.0 (UI, readme, documentation)
+
 ----------------------------------------------------------------------
  OmegaT 2.5.1 update 1
 ----------------------------------------------------------------------

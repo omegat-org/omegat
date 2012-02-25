@@ -505,6 +505,14 @@ public class MainWindowMenuHandler {
                         mainWindow.menu.viewMarkNonUniqueSegmentsCheckBoxMenuItem.isSelected());
     }
 
+    public void viewMarkNotedSegmentsCheckBoxMenuItemActionPerformed(){
+        Core.getEditor()
+                .getSettings()
+                .setMarkNotedSegments(
+                        mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
+    }
+
+
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
         Core.getEditor().getSettings()
                 .setDisplayModificationInfo(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE);

@@ -140,6 +140,9 @@ public class Preferences {
     /** TransTips Option: Only match exact words */
     public static final String TRANSTIPS_EXACT_SEARCH = "transtips_exact_search";
 
+    /** Mark the segments with a note with a different color */
+    public static final String MARK_NOTED_SEGMENTS = "mark_noted_segments";
+
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";
 

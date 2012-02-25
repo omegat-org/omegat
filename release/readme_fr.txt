@@ -186,6 +186,7 @@ Contributions au code :
   Martin Fleurke  
   Wildrich Fourie
   Thomas Huriaux
+  Hans-Peter Jacobs
   Guido Leenders
   Ibai Lakunza Velasco
   Fabián Mandelbaum

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2008 Alex Buloichik
+               2012 Martin Fleurke, Hans-Peter Jacobs
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -41,6 +42,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ * @author Hans-Peter Jacobs
  */
 public class EditorSettings {
     private final EditorController parent;
@@ -50,6 +52,7 @@ public class EditorSettings {
     private boolean markUntranslated;
     private boolean displaySegmentSources;
     private boolean markNonUniqueSegments;
+    private boolean markNoted;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
@@ -68,6 +71,7 @@ public class EditorSettings {
         markUntranslated = Preferences.isPreference(Preferences.MARK_UNTRANSLATED_SEGMENTS);
         displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
         markNonUniqueSegments = Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
+        markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
@@ -139,6 +143,10 @@ public class EditorSettings {
         return markNonUniqueSegments;
     }
 
+    public boolean isMarkNotedSegments() {
+        return markNoted;
+    }
+
     public void setDisplaySegmentSources(boolean displaySegmentSources) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -160,6 +168,20 @@ public class EditorSettings {
 
         this.markNonUniqueSegments = markNonUniqueSegments;
         Preferences.setPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS, markNonUniqueSegments);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+
+    public void setMarkNotedSegments(boolean markNotedSegments) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markNoted = markNotedSegments;
+        Preferences.setPreference(Preferences.MARK_NOTED_SEGMENTS, markNoted);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
@@ -261,7 +283,7 @@ public class EditorSettings {
      * @param translationExists does a translation already exist
      * @return proper AttributeSet to use on displaying the segment.
      */
-    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate, boolean active, boolean translationExists) {
+    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote) {
         //determine foreground color
         Color fg = null;
         if (markNonUniqueSegments) {
@@ -291,13 +313,19 @@ public class EditorSettings {
             }
         } else {
             if (isSource) {
-                if (markUntranslated && !translationExists) {
+                if (isMarkNotedSegments() && hasNote && !translationExists) {
+                    bg = Styles.COLOR_NOTED;
+                } else if (markUntranslated && !translationExists) {
                     bg = Styles.COLOR_UNTRANSLATED;
                 } else if (isDisplaySegmentSources()) {
                     bg = Styles.COLOR_GREEN;
                 }
-            } else if (markTranslated) {
-                bg = Styles.COLOR_TRANSLATED;
+            } else {
+                if (isMarkNotedSegments() && hasNote) {
+                    bg = Styles.COLOR_NOTED;
+                } else if (markTranslated) {
+                    bg = Styles.COLOR_TRANSLATED;
+                }
             }
         }
 

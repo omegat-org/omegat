@@ -1,11 +1,18 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.1 update 2
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.1 update 2 vs. 2.5.1 update 1
+
+
+  Other enhancements:
+
+  - Segments containing a note can be marked with View > 
+Mark Segments with Notes. This marking has priority over Mark Translated
+and Mark Untranslated.
 
   Bug fixes:
 

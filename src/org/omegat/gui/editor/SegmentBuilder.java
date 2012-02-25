@@ -3,8 +3,9 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2009 Alex Buloichik
+ Copyright (C) 2009 Alex Buloichik, Martin Fleurke
                2010 Alex Buloichik, Didier Briel
+               2012 Martin Fleurke, Hans-Peter Jacobs
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -57,6 +58,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Martin Fleurke
+ * @author Hans-Peter Jacobs
  */
 public class SegmentBuilder {
 
@@ -84,6 +86,8 @@ public class SegmentBuilder {
     private boolean active;
     /** True if translation exist for entry. */
     private boolean transExist;
+    /** True if entry has a note attached. */
+    private boolean noteExist;
     /** True if translation is default, false - is multiple. */
     private boolean defaultTranslation;
 
@@ -166,6 +170,7 @@ public class SegmentBuilder {
                     defaultTranslation = false;
                 }
                 transExist = trans.isTranslated();
+                noteExist  = trans.hasNote();
 
                 int beginOffset = offset;
                 if (isActive) {
@@ -574,7 +579,7 @@ public class SegmentBuilder {
      * @return the attributes to format the text
      */
     public AttributeSet attrs(boolean isSource, boolean isPlaceholder, boolean isRemoveText) {
-        return settings.getAttributeSet(isSource, isPlaceholder, isRemoveText, ste.getDuplicate(), active, transExist);
+        return settings.getAttributeSet(isSource, isPlaceholder, isRemoveText, ste.getDuplicate(), active, transExist, noteExist);
     }
 
     /**

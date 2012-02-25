@@ -852,13 +852,8 @@ public class EditorController implements IEditor {
             }
             ste = getCurrentEntry();
         } while (ste == null // filtered file has no entries
-                && (!looped || !(displayedFileIndex == startFileIndex && displayedEntryIndex >= startEntryIndex) // and
-                                                                                                                 // we
-                                                                                                                 // have
-                                                                                                                 // not
-                                                                                                                 // had
-                                                                                                                 // all
-                                                                                                                 // entries
+                && (!looped || !(displayedFileIndex == startFileIndex && displayedEntryIndex >= startEntryIndex) 
+                // and we have not had all entries
                 ));
 
         activateEntry();

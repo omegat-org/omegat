@@ -12,7 +12,7 @@
       <primary>快捷键</primary> <secondary>主菜单</secondary>
     </indexterm>
 
-    <para>OmegaT 的所有功能均可通过编辑器窗口顶部的菜单栏来调用。多数功能也可以通过 &lt;a0&gt;键盘快捷方式&lt;/a0&gt;调用。快捷键通过按 <keycap>Ctrl</keycap> 和字母键来激活。某些快捷键还包含其他按键。为了增强可读性，本手册中这些字母以大写形式出现。<keycap>Ctrl</keycap> 在 Windows 系统中使用， UNIX 和类 UNIX 操作系统使用 <keycap>Ctrl</keycap> 或 <keycap>Control</keycap> 键。Mac 用户应该使用 <keycombo> <keycap>cmd</keycap> <keycap>键</keycap> </keycombo> 来代替它。&quot;Cmd&quot; 键就是在苹果键盘上印有 &quot;command&quot; 或“苹果”符号的那个键。</para>
+    <para>OmegaT 的所有功能均可通过编辑器窗口顶部的菜单栏来调用。多数功能也可以通过键盘快捷方式调用。快捷键通过按 <keycap>Ctrl</keycap> 和字母键来激活。某些快捷键还包含其他按键。为了增强可读性，本手册中这些字母以大写形式出现。<keycap>Ctrl</keycap> 在 Windows 系统中使用， UNIX 和类 UNIX 操作系统使用 <keycap>Ctrl</keycap> 或 <keycap>Control</keycap> 键。Mac 用户应该使用 <keycombo> <keycap>cmd</keycap> <keycap>键</keycap> </keycombo> 来代替它。&quot;Cmd&quot; 键就是在苹果键盘上印有 &quot;command&quot; 或“苹果”符号的那个键。</para>
 
     <para>使用了插件后，可能出现新的菜单项。</para>
 
@@ -89,7 +89,7 @@
             </row>
 
             <row>
-              <entry><guimenuitem>导入源文件……</guimenuitem></entry>
+              <entry><guimenuitem>导入源文件</guimenuitem></entry>
 
               <entry/>
 
@@ -1377,7 +1377,7 @@
           </row>
 
           <row>
-            <entry>导入源文件……</entry>
+            <entry>导入源文件</entry>
 
             <entry/>
 

@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;处理格式化文本<a class="indexterm" name="d0e6487"></a><a class="indexterm" name="d0e6492"></a></h2>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;处理格式化文本<a class="indexterm" name="d0e6522"></a><a class="indexterm" name="d0e6527"></a></h2>
                </div>
             </div>
          </div>
@@ -50,15 +50,15 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;格式化标签<a class="indexterm" name="d0e6502"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;格式化标签<a class="indexterm" name="d0e6537"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e6506"></a><span class="bold"><strong>标签的命名：</strong></span></p>
+            <p><a class="indexterm" name="d0e6541"></a><span class="bold"><strong>标签的命名：</strong></span></p>
             <p>标签由一到三个字符和一个数字组成。唯一的编号允许我们将彼此相对应的标签组织在一起，不同的标签允许有相同的快捷字符，但实际上并不一样。使用的快捷字符尝试反映标签所代表的格式含义（例如 b 表示粗体，i 表示斜体）。</p>
-            <p><a class="indexterm" name="d0e6516"></a><span class="bold"><strong>标签的编号：</strong></span></p>
+            <p><a class="indexterm" name="d0e6551"></a><span class="bold"><strong>标签的编号：</strong></span></p>
             <p>标签以标签组自增长方式进行编号。在这里“标签组”是单个标签（例如 &lt;i0&gt; 和 &lt;/i0&gt;）。在片段中，第一个组（成对或单个的）获得编号 0，第二个编号为 1，以此类推。下面的第一个例子中有3个标签组（一组成对的，一组单个，另一组成对的），第二个例子中只有一组（成对的）。</p>
-            <p><a class="indexterm" name="d0e6526"></a><span class="bold"><strong>成对的和单个的：</strong></span></p>
+            <p><a class="indexterm" name="d0e6561"></a><span class="bold"><strong>成对的和单个的：</strong></span></p>
             <p>标签不是单个的就是成对的。单个标签指的是对周边文本没有影响的格式化信息（例如：额外的空格或者行终止）。</p>
             <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;, &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;片段 2132&gt;</code></p>
             <p>&lt;br1&gt;是单个标签，对周围的文本不产生任何影响。成对标签通常指对开标签和闭标签之间的文本使用格式信息的标签对。下面的 &lt;b0&gt; 和 &lt;/b0&gt; 是成对的且影响文本 log.txt。请注意开标签总是出现在闭标签的前面：</p>
@@ -70,18 +70,18 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;标签操作<a class="indexterm" name="d0e6551"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;标签操作<a class="indexterm" name="d0e6586"></a></h2>
                   </div>
                </div>
             </div>
             <p>对于标签的操作必须谨慎。如果它们被意外地改变，最终的文件格式也许会被破坏。基本的做法是标签序列必须保持相同的顺序。然而，在可能的情况下，如果必须严格遵循某些规则，则不必拘泥于这个基本做法。</p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6560"></a>标签的复制：</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6595"></a>标签的复制：</strong></span></p>
             <p>要复制标签组，只需将它们复制到您选择的位置。但请记住：成对的标签组中，开标签必须出现在闭标签之前。您复制的标签组所代表的格式将会应用到原标签和复制标签的两个部分。</p>
             <p>例如：</p>
             <p><code class="literal">&lt;b0&gt;此格式&lt;/b0&gt;即将被复制到此处。&lt;片段 0001&gt;</code></p>
             <p>复制后：</p>
             <p><code class="literal">&lt;b0&gt;此格式&lt;/b0&gt;已经被&lt;b0&gt;复制到此处&lt;/b0&gt;。&lt;片段 0001&gt;</code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e6580"></a>标签组删除：</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e6615"></a>标签组删除：</strong></span></p>
             <p>要删除标签组，仅需将它们从片段中移除。请记住：必须同时删去一个标签组的开标签和闭标签，以确保它们所进行的格式化操作被完全清除，否则译后文件可能遭破坏而无法打开。删除一个标签组的同时，您将会从已译文件中删除相关的格式。</p>
             <p>例如：</p>
             <p><code class="literal">&lt;b0&gt;此格式&lt;/b0&gt;即将被删除。&lt;片段 0001&gt;</code></p>
@@ -92,7 +92,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;标签组嵌套<a class="indexterm" name="d0e6601"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;标签组嵌套<a class="indexterm" name="d0e6636"></a></h2>
                   </div>
                </div>
             </div>
@@ -106,7 +106,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;标签组重叠<a class="indexterm" name="d0e6621"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;标签组重叠<a class="indexterm" name="d0e6656"></a></h2>
                   </div>
                </div>
             </div>
@@ -120,11 +120,11 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;标签组检验<a class="indexterm" name="d0e6641"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;标签组检验<a class="indexterm" name="d0e6676"></a></h2>
                   </div>
                </div>
             </div>
-            <p>验证标签功能检测发生变化的标签序列（无论是有意的还是无意的），并显示受影响的片段。通过按下 <span class="guimenuitem">Ctrl+T</span> 组合键可调用该功能，它将打开一个窗口，显示文件的译文中所有可能包含断裂或错误的标签的片段。通过标签检验功能可以轻松地修正标签和重新创建目标文档。按 <span class="guimenuitem">Ctrl+T</span> 打开的窗口显示了一个三列表格，其中列出了指向该片段、原文片段和译文片段的链接：
+            <p>验证标签功能检测发生变化的标签序列（无论是有意的还是无意的），并显示受影响的片段。通过按下 <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6685"></a></span> 组合键可调用该功能，它将打开一个窗口，显示文件的译文中所有可能包含断裂或错误的标签的片段。通过标签检验功能可以轻松地修正标签和重新创建目标文档。按 <span class="guimenuitem">Ctrl+T</span> 打开的窗口显示了一个三列表格，其中列出了指向该片段、原文片段和译文片段的链接：
             </p>
             <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;标签检验条目</b></p>
                <div class="figure-contents">
@@ -137,7 +137,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;标签管理的几点提示<a class="indexterm" name="d0e6670"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;标签管理的几点提示<a class="indexterm" name="d0e6710"></a></h2>
                   </div>
                </div>
             </div>

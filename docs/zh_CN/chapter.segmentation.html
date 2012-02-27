@@ -42,7 +42,7 @@
                <dt><span class="section"><a href="chapter.segmentation.html#few.simple.examples">4. 一些简单的例子</a></span></dt>
             </dl>
          </div>
-         <p>翻译记忆工具的使用以叫做片段的文本为单位。<span class="application">OmegaT</span> 使用两种方式对文本进行片段分割：段落分割或句子分割（也被称为“基于分割的规则”）。要选择分割类型，请从主菜单选择<span class="guimenu"><a class="indexterm" name="d0e7306"></a>项目</span> → <span class="guimenuitem">属性……</span>，然后选用选中或取消选中相应的复选框。在某些情况中使用段落分割是有好处的，例如在与创造性和文学性高度相关的翻译中，译员可能需要改变整个段落的顺序；然而，对于大多数项目，应优先选择句子分割，因为这样可以与以前的翻译实现更好的匹配。如果选用了句子分割，可通过从主菜单选择<span class="guimenu"><a class="indexterm" name="d0e7317"></a>选项</span> → <span class="guimenuitem">片段分割……</span>以设置规则。
+         <p>翻译记忆工具的使用以叫做片段的文本为单位。<span class="application">OmegaT</span> 使用两种方式对文本进行片段分割：段落分割或句子分割（也被称为“基于分割的规则”）。要选择分割类型，请从主菜单选择<span class="guimenu"><a class="indexterm" name="d0e7364"></a>项目</span> → <span class="guimenuitem">属性……</span>，然后选用选中或取消选中相应的复选框。在某些情况中使用段落分割是有好处的，例如在与创造性和文学性高度相关的翻译中，译员可能需要改变整个段落的顺序；然而，对于大多数项目，应优先选择句子分割，因为这样可以与以前的翻译实现更好的匹配。如果选用了句子分割，可通过从主菜单选择<span class="guimenu"><a class="indexterm" name="d0e7375"></a>选项</span> → <span class="guimenuitem">片段分割……</span>以设置规则。
          </p>
          <p>许多语言中已经包含了可靠的分割规则，所以很可能您不需要自己编写分割规则。另一方面，该功能在特殊情况下可能非常有用，您可以针对需要翻译的文本设置分割规则来提高生产力。</p>
          <p><span class="bold"><strong>警告：</strong></span>由于在改变过滤器选项后将对文本进行不同的分割，所以您可能需要从原文开始进行翻译。同时，在项目翻译记忆中原来有效的片段将变成孤立片段。如果您在项目打开的时候改变分割规则选项，您必须重新载入项目以使改变生效。
@@ -51,13 +51,13 @@
          </p>
          <div class="variablelist">
             <dl>
-               <dt><span class="term"><a class="indexterm" name="d0e7339"></a>结构层片段分割</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e7397"></a>结构层片段分割</span></dt>
                <dd>
                   <p><span class="application">OmegaT</span> 首先将文本分割成结构级别的片段。在这个过程中，只有源文本的结构被用于创建片段。
                   </p>
                   <p>例如：文本文件可能会在行终止、空行进行片段分割或根本进行分割。格式化文件（OpenOffice.org 文档、HTML 文档等等）在块级别（段落）标签处进行分割。XHTML 或 HTML 文件的可翻译对象属性可以被提取为独立的片段。</p>
                </dd>
-               <dt><span class="term"><a class="indexterm" name="d0e7354"></a>句子层分割</span></dt>
+               <dt><span class="term"><a class="indexterm" name="d0e7412"></a>句子层分割</span></dt>
                <dd>
                   <p>在将源文件分割为结构单元之后， <span class="application">OmegaT</span> 将进一步把这些块分割为语句。
                   </p>
@@ -68,7 +68,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;片段分割规则<a class="indexterm" name="d0e7369"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="segmentation.rules"></a>1.&nbsp;片段分割规则<a class="indexterm" name="d0e7427"></a></h2>
                   </div>
                </div>
             </div>
@@ -77,7 +77,7 @@
             <p>两种类型的规则表现如下：</p>
             <div class="variablelist">
                <dl>
-                  <dt><span class="term"><a class="indexterm" name="d0e7393"></a>中断规则</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e7451"></a>中断规则</span></dt>
                   <dd>
                      <p>将源文本分割为片段。例如，"<span class="emphasis"><em>Did it make sense?I was not sure</em></span>." 应该分割成两个句子。要实现这样的目的，应该在 "?" 后跟着空格和大写字符时进行中断的规则。要定义一个中断规则，请选中中断/例外复选框。
                      </p>
@@ -86,7 +86,7 @@
             </div>
             <div class="variablelist">
                <dl>
-                  <dt><span class="term"><a class="indexterm" name="d0e7410"></a>例外规则</span></dt>
+                  <dt><span class="term"><a class="indexterm" name="d0e7468"></a>例外规则</span></dt>
                   <dd>
                      <p>指定哪部分文本不应该被分开。不考虑句点的话， <span class="emphasis"><em>"Mrs. Dalloway "</em></span> 不应被分割成两个片段，因此应该为后面跟着句点的 Mrs (以及 Mr 和 Dr 、prof 等等) 创建例外规则。要定义例外规则，请取消选中中断/例外复选框。
                      </p>
@@ -99,7 +99,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;规则的优先级<a class="indexterm" name="d0e7429"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="rules.priority"></a>2.&nbsp;规则的优先级<a class="indexterm" name="d0e7487"></a></h2>
                   </div>
                </div>
             </div>
@@ -109,7 +109,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;创建新规则<a class="indexterm" name="d0e7439"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="creating.new.rule"></a>3.&nbsp;创建新规则<a class="indexterm" name="d0e7497"></a></h2>
                   </div>
                </div>
             </div>
@@ -127,7 +127,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7473"></a>一些简单的例子
+                     <h2 class="title" style="clear: both"><a name="few.simple.examples"></a>4.&nbsp;<a class="indexterm" name="d0e7531"></a>一些简单的例子
                      </h2>
                   </div>
                </div>

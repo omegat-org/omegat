@@ -39,17 +39,17 @@
                <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. 文件格式</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5960">1.1. 纯文本文件</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6027">1.2. 格式化文本文件</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5992">1.1. 纯文本文件</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6059">1.2. 格式化文本文件</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. 其它文件格式</a></span></dt>
                <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. 自右向左语言</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6244">3.1. 在片段中混合自右向左和自左向右字符串</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6264">3.2. 自右向左片段中的 <span class="application">OmegaT</span> 标签</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6279">3.3. 创建已译自右向左文档</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6276">3.1. 在片段中混合自右向左和自左向右字符串</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6299">3.2. 自右向左片段中的 <span class="application">OmegaT</span> 标签</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e6314">3.3. 创建已译自右向左文档</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -58,7 +58,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;文件格式<a class="indexterm" name="d0e5946"></a><a class="indexterm" name="d0e5951"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1.&nbsp;文件格式<a class="indexterm" name="d0e5978"></a><a class="indexterm" name="d0e5983"></a></h2>
                   </div>
                </div>
             </div>
@@ -68,11 +68,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5960"></a>1.1.&nbsp;纯文本文件<a class="indexterm" name="d0e5963"></a><a class="indexterm" name="d0e5968"></a></h3>
+                        <h3 class="title"><a name="d0e5992"></a>1.1.&nbsp;纯文本文件<a class="indexterm" name="d0e5995"></a><a class="indexterm" name="d0e6000"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>纯文本文件中只含有文本，因为对它们的翻译工作就像输入翻译一样简单。有多种方法可以指定文件的编码，以确保 <span class="application">OmegaT</span> 打开它们时不会显示乱码。这样的文本除了用于对齐文本、标示段落或插入页面的“空白”之外没有任何格式化信息。它们无法包含或保留关于文本的颜色、字体等的信息。目前，<span class="application">OmegaT</span> 支持以下纯文本格式：<a class="indexterm" name="d0e5981"></a></p>
+               <p>纯文本文件中只含有文本，因为对它们的翻译工作就像输入翻译一样简单。有多种方法可以指定文件的编码，以确保 <span class="application">OmegaT</span> 打开它们时不会显示乱码。这样的文本除了用于对齐文本、标示段落或插入页面的“空白”之外没有任何格式化信息。它们无法包含或保留关于文本的颜色、字体等的信息。目前，<span class="application">OmegaT</span> 支持以下纯文本格式：<a class="indexterm" name="d0e6013"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
@@ -139,13 +139,13 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6027"></a>1.2.&nbsp;格式化文本文件<a class="indexterm" name="d0e6030"></a><a class="indexterm" name="d0e6037"></a></h3>
+                        <h3 class="title"><a name="d0e6059"></a>1.2.&nbsp;格式化文本文件<a class="indexterm" name="d0e6062"></a><a class="indexterm" name="d0e6069"></a></h3>
                      </div>
                   </div>
                </div>
                <p>格式化文本文件除了包含文本之外，还包括字体类型、大小、颜色等信息。它们通常由文字处理器和 HTML 编辑器创建。这些文件格式是设计用来保持格式信息的。这些格式信息可能就像 “这是粗体”一样简单，也可能是包含了不同的字体大小、颜色和位置等信息的表格数据一样复杂。在大多数翻译工作中，在译文中保留原文的格式信息是很重要的。通过使用易于维护的
                   TAG 来标记拥有特殊格式的字符或单词，OmegaT 让您能够做到这一点。对源文本格式的简化很大程度上有助于减少标签的数量。如果有可能应该考虑在文档中使用统一的字体、字体大小、颜色等，以此简化翻译工作和减少可能的标签错误。每种文件格式在 OmegaT
-                  中的处理方式都不同。可在文件过滤器设置特定的动作。在写此文档时，OmegaT 支持以下格式化的文本格式：<a class="indexterm" name="d0e6044"></a></p>
+                  中的处理方式都不同。可在文件过滤器设置特定的动作。在写此文档时，OmegaT 支持以下格式化的文本格式：<a class="indexterm" name="d0e6076"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
@@ -252,12 +252,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;其它文件格式<a class="indexterm" name="d0e6119"></a><a class="indexterm" name="d0e6124"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2.&nbsp;其它文件格式<a class="indexterm" name="d0e6151"></a><a class="indexterm" name="d0e6156"></a></h2>
                   </div>
                </div>
             </div>
             <p>还存在适合 OmegaT 处理的其他纯文本或格式化文本文件。</p>
-            <p><a class="indexterm" name="d0e6132"></a>可使用外部工具将文件转换成所支持的格式。译后文件需要被转换回最初的格式。例如，如果您使用无法处理 ODT 格式的过时 Microsoft Word 版本，对于 DOC 格式则需要进行下面这样的来回转换：
+            <p><a class="indexterm" name="d0e6164"></a>可使用外部工具将文件转换成所支持的格式。译后文件需要被转换回最初的格式。例如，如果您使用无法处理 ODT 格式的过时 Microsoft Word 版本，对于 DOC 格式则需要进行下面这样的来回转换：
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
@@ -301,7 +301,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;自右向左语言<a class="indexterm" name="d0e6166"></a><a class="indexterm" name="d0e6169"></a><a class="indexterm" name="d0e6174"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3.&nbsp;自右向左语言<a class="indexterm" name="d0e6198"></a><a class="indexterm" name="d0e6201"></a><a class="indexterm" name="d0e6206"></a></h2>
                   </div>
                </div>
             </div>
@@ -336,19 +336,19 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6244"></a>3.1.&nbsp;在片段中混合自右向左和自左向右字符串<a class="indexterm" name="d0e6247"></a><a class="indexterm" name="d0e6252"></a><a class="indexterm" name="d0e6257"></a></h3>
+                        <h3 class="title"><a name="d0e6276"></a>3.1.&nbsp;在片段中混合自右向左和自左向右字符串<a class="indexterm" name="d0e6279"></a><a class="indexterm" name="d0e6284"></a><a class="indexterm" name="d0e6289"></a></h3>
                      </div>
                   </div>
                </div>
                <p>在编写纯自右向左文本时，将使用缺省的（自左向右）视图。然而在许多情况下，必须在自右向左文本中嵌入自左向右文本。例如，在 OmegaT 标签中，必须在自左向右源文件中保留产品名称、在本地化文件中保留占位符以及在文本中保留数字。在像这样的情况下，必须转换为自右向左模式，以正确显示自右向左（实际是双向）文本。应当注意，当
-                  OmegaT 处于自右向左模式，源和目标都以自右向左模式显示。这意味着如果源语言是自左向右，而目标语言是自右向左，或者反过来，就可能必须在自右向左和自左向右模式之间来回切换，以轻松地在相应的模式下查看源文件和输入译文。
+                  <span class="application">OmegaT</span> 处于自右向左模式，源和目标都以自右向左模式显示。这意味着如果源语言是自左向右，而目标语言是自右向左，或者反过来，就可能必须在自右向左和自左向右模式之间来回切换，以轻松地在相应的模式下查看源文件和输入译文。
                </p>
             </div>
             <div class="section" title="3.2.&nbsp;自右向左片段中的 OmegaT 标签">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6264"></a>3.2.&nbsp;自右向左片段中的 <span class="application">OmegaT</span> 标签<a class="indexterm" name="d0e6270"></a></h3>
+                        <h3 class="title"><a name="d0e6299"></a>3.2.&nbsp;自右向左片段中的 <span class="application">OmegaT</span> 标签<a class="indexterm" name="d0e6305"></a></h3>
                      </div>
                   </div>
                </div>
@@ -359,7 +359,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6279"></a>3.3.&nbsp;创建已译自右向左文档<a class="indexterm" name="d0e6282"></a><a class="indexterm" name="d0e6287"></a><a class="indexterm" name="d0e6292"></a></h3>
+                        <h3 class="title"><a name="d0e6314"></a>3.3.&nbsp;创建已译自右向左文档<a class="indexterm" name="d0e6317"></a><a class="indexterm" name="d0e6322"></a><a class="indexterm" name="d0e6327"></a></h3>
                      </div>
                   </div>
                </div>

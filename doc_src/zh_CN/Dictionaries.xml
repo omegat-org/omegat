@@ -106,7 +106,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>文件夹中是否包含了三份名称相同，而扩展名分别为  &lt;s0&gt;dict.dz,  idx &lt;/s0&gt; 和 &lt;s1&gt;ifo&lt;/s1&gt; 的文件?如果只有一份与预期相同的文件，那么检查下它的扩展名。如果扩展名为<emphasis>tar.bz</emphasis>，那么是因为您忘记解压了。</para>
+        <para>文件夹中是否包含了三份名称相同，而扩展名分别为  dict.dz,  idx 和 ifo 的文件?如果只有一份与预期相同的文件，那么检查下它的扩展名。如果扩展名为<emphasis>tar.bz</emphasis>，那么是因为您忘记解压了。</para>
       </listitem>
     </itemizedlist>
   </section>

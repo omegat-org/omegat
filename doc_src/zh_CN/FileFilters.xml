@@ -40,7 +40,7 @@
         <primary>文件过滤器</primary> <secondary>选项</secondary>
       </indexterm></title>
 
-    <para>五种过滤器（文本文件、 XHTML 文件、HTML 和 XHTML 文件、开放文档／OpenOffice.org 文件和 微软开放 XML 文件）有一个或多个特殊选项。要修改这些选项，请从列表中选中该过滤器，并点击 &lt;s0&gt;选项【Options】&lt;/s0&gt;按钮。可用选项包括：</para>
+    <para>五种过滤器（文本文件、 XHTML 文件、HTML 和 XHTML 文件、开放文档／OpenOffice.org 文件和 微软开放 XML 文件）有一个或多个特殊选项。要修改这些选项，请从列表中选中该过滤器，并点击 <emphasis role="bold">选项【Options】</emphasis>按钮。可用选项包括：</para>
 
     <para><emphasis role="bold">文本文件</emphasis></para>
 
@@ -199,7 +199,7 @@
           <primary>文件过滤器</primary> <secondary>源文件类型、文件名</secondary>
         </indexterm></title>
 
-      <para>当 OmegaT 在源文件夹中发现一个文件时，它将首先根据文件的扩展名试着选择过滤器。更确切地说，OmegaT 尝试着用每个过滤器的源文件名模式对文件名进行匹配。例如，<literal>*.xhtml </literal>模式将会匹配任何扩展名为 <literal>.xhtml</literal> 的文件。如果找到了合适的过滤器，它将被用来处理该文件。比如说在缺省情况下 XHTML 过滤器将会用来处理扩展名为 &lt;c2&gt;.xhtml&lt;/c2&gt; 的文件。 您可以对每个文件过滤器要处理文件的名称模式进行修改或增添。源文件名模式中使用的匹配字符与<emphasis role="bold">搜索</emphasis>中所使用的类似。'*' 字符匹配零个或多个字符。'?' 字符只匹配一个字符。其他所有字符代表自身。比如，如果您希望文本过滤器处理 readme 文件（<literal>readme, read.me</literal> 和 <literal>readme.txt</literal>），那么您应该使用模式 <literal>read*</literal>.</para>
+      <para>当 OmegaT 在源文件夹中发现一个文件时，它将首先根据文件的扩展名试着选择过滤器。更确切地说，OmegaT 尝试着用每个过滤器的源文件名模式对文件名进行匹配。例如，<literal>*.xhtml </literal>模式将会匹配任何扩展名为 <literal>.xhtml</literal> 的文件。如果找到了合适的过滤器，它将被用来处理该文件。比如说在缺省情况下 XHTML 过滤器将会用来处理扩展名为 .xhtml 的文件。 您可以对每个文件过滤器要处理文件的名称模式进行修改或增添。源文件名模式中使用的匹配字符与<emphasis role="bold">搜索中所使用的类似。</emphasis>'*' 字符匹配零个或多个字符。'?' 字符只匹配一个字符。其他所有字符代表自身。比如，如果您希望文本过滤器处理 readme 文件（<literal>readme, read.me</literal> 和 <literal>readme.txt</literal>），那么您应该使用模式 <literal>read*</literal>.</para>
     </section>
 
     <section id="source.and.target.files.encoding">
@@ -245,7 +245,7 @@
 
       <para>有时您也需希望系统自动将译好的的文件重新命名，比如在文件名后加上语言代码。目标文件名模式使用特殊的语法规则，因此如果希望编辑这些字段的话，您必须点击<emphasis role="bold">编辑……</emphasis>以使用<indexterm class="singular">
           <primary>文件过滤器</primary> <secondary>对话框</secondary>
-        </indexterm>编辑模式对话框。如果您想恢复到缺省的过滤器设置，点击&lt;s1&gt;缺省&lt;/s1&gt;。您也可以在文件过滤器对话框中的目标文件名模式字段中直接修改名称。模式编辑对话框提供了以下选项：</para>
+        </indexterm>编辑模式对话框。如果您想恢复到缺省的过滤器设置，点击<emphasis role="bold">缺省</emphasis>。您也可以在文件过滤器对话框中的目标文件名模式字段中直接修改名称。模式编辑对话框提供了以下选项：</para>
 
       <itemizedlist>
         <listitem>

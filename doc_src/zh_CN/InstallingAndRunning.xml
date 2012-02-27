@@ -53,7 +53,7 @@
           <primary>运行 OmegaT</primary> <secondary>Windows</secondary> <tertiary>INI 文件</tertiary>
         </indexterm>在此情形下，将从 <emphasis><application>OmegaT</application>.l4J.ini </emphasis> 文件读取程序选项，该文件与可执行文件在同一目录，您可对它进行修改以反映您的设置。下面的 INI 文件将保留 1GB 内存，以法语为用户语言，将国家设置为加拿大：</para>
 
-      <literallayout><code># OmegaT.exe 运行时配置 # 要使用某参数，仅需删除 '-' 前面的 '#' &lt;br2&gt; # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
+      <literallayout><code># OmegaT.exe 运行时配置 # 要使用某参数，仅需删除 '-' 前面的 '#' # Memory -Xmx1024M # Language -Duser.language=FR # Country -Duser.country=CA</code></literallayout>
     </section>
 
     <section>
@@ -316,7 +316,7 @@
         <primary>运行 OmegaT</primary> <secondary>使用 Java Web Start</secondary>
       </indexterm></title>
 
-    <para>使用 Java Web Start技术（对Java 1.5 及以上版本），只需一次点击就可通过网络部署独立的 Java 应用软件。Java Web Start 能够保证部署应用程序的最新版本以及使用正确&lt;a0&gt; Java运行环境（JRE） &lt;/a0&gt; 版本。为首次通过 Java Web Start 启用 OmegaT，在浏览器中输入下面的 URL：</para>
+    <para>使用 Java Web Start技术（对Java 1.5 及以上版本），只需一次点击就可通过网络部署独立的 Java 应用软件。Java Web Start 能够保证部署应用程序的最新版本以及使用正确 Java运行环境（JRE）版本。为首次通过 Java Web Start 启用 OmegaT，在浏览器中输入下面的 URL：</para>
 
     <para><emphasis>http://omegat.sourceforge.net/webstart/<application>OmegaT</application>.jnlp</emphasis></para>
 
@@ -389,7 +389,7 @@
 
           <para><emphasis role="bold">-Duser.language=XX</emphasis><indexterm class="singular">
               <primary>运行 OmegaT</primary> <secondary>启动脚本参数</secondary> <tertiary>User.language</tertiary>
-            </indexterm> 正常情况下，也就是 <application>OmegaT</application> 不带任何参数启动的情况下，程序将首先检测用户操作系统所使用的语言。如果存在所用语言的界面， <application>OmegaT</application> 将会使用它。因此，如果用户的操作系统为俄语版，而 <application>OmageT</application> 有俄语版的本地化版本，它将显示为俄语用户界面、俄语菜单等等。如果用户系统的语言不存在，<application>OmegaT</application> 将默认使用英语。这是标准行为。</para>
+            </indexterm> 正常情况下，也就是 <application>OmegaT</application> 不带任何参数启动的情况下，程序将首先检测用户操作系统所使用的语言。如果存在所用语言的界面， <application>OmegaT</application> 将会使用它。因此，如果用户的操作系统为俄语版，而 <application>OmageT</application> 有俄语版的本地化版本，<application>OmegaT</application> 将显示为俄语用户界面、俄语菜单等等。如果用户系统的语言不存在，<application>OmegaT</application> 将默认使用英语。这是标准行为。</para>
 
           <para><emphasis>&quot;-Duser.language=XX&quot;</emphasis> 参数会使得 <application>OmegaT</application> 使用指定的语言而不是用户操作系统的语言。命令中的 &quot;XX&quot; 代表所需语言的双数字代码。要想 <application>OmegaT</application> 以法语界面运行（例如在俄语操作系统上），该命令应该为：</para>
 

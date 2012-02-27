@@ -29,39 +29,40 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;词汇表<a class="indexterm" name="d0e8389"></a><a class="indexterm" name="d0e8394"></a></h2>
+                  <h2 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;词汇表<a class="indexterm" name="d0e8447"></a><a class="indexterm" name="d0e8452"></a></h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8404">1. 用法</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8446">2. 文件格式</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8491">3. 如何创建词汇表</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8586">4. 使用 Multiterm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8604">5. 常见词汇表问题</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8465">1. 用法</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8513">2. 文件格式</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8558">3. 如何创建词汇表</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8656">4. 使用 Multiterm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8674">5. 常见词汇表问题</a></span></dt>
             </dl>
          </div>
-         <p>词汇表是用于 OmegaT 的文件，它由用户手工创建和更新。</p>
+         <p>词汇表是用于 <span class="application">OmegaT</span> 的文件，它由用户手工创建和更新。
+         </p>
          <p>如果某个 <span class="application">OmegaT</span> 项目包含一个或多个词汇表文件，当前片段中出现的任何术语将自动显示在词汇表查看器中。
          </p>
          <div class="section" title="1.&nbsp;用法">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8404"></a>1.&nbsp;用法
+                     <h2 class="title" style="clear: both"><a name="d0e8465"></a>1.&nbsp;用法
                      </h2>
                   </div>
                </div>
             </div>
-            <p>要使用现有的词汇表，只需在创建项目后将它放到 <code class="filename">/glossary</code> 目录下。在打开项目时，<span class="application">OmegaT</span> 自动检测该目录下的词汇表文件。从词汇表中找到当前片段中的术语后，<span class="application">OmegaT</span> 将会在词汇表窗格将它们显示出来。
-            </p><a class="indexterm" name="d0e8418"></a><div class="figure"><a name="d0e8421"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;词汇表窗格</b></p>
+            <p>要使用现有的词汇表，只需在创建项目后将它放到<a class="indexterm" name="d0e8470"></a> <code class="filename">/glossary</code> 目录下。在打开项目时，<span class="application">OmegaT</span> 自动检测该目录下的词汇表文件。从词汇表中找到当前片段中的术语后，<span class="application">OmegaT</span> 将会在词汇表窗格将它们显示出来。
+            </p><a class="indexterm" name="d0e8485"></a><div class="figure"><a name="d0e8488"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;词汇表窗格</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/Glossary_pane.png" alt="词汇表窗格"></div>
                </div>
             </div><br class="figure-break"><p>等号之前的单词是源术语，其翻译在等号（＝）之后。词条可以有附加的注释（参阅“及物动词”了解第二项）。词汇表功能只能找到与词汇表条目精确匹配的词汇（也就是说不会找到变化的词形）。在翻译过程中可以手动向词汇表中增加术语（比如在文本编辑器中），但是只有在重新导入项目后才能识别新增的术语。</p>
             <p>源术语可以不是一个单词，例如：</p>
-            <div class="figure"><a name="d0e8433"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;词汇表中的多单词条目——示例<a class="indexterm" name="d0e8436"></a></b></p>
+            <div class="figure"><a name="d0e8500"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;词汇表中的多单词条目——示例<a class="indexterm" name="d0e8503"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MultiTerm_Glossary.png" alt="词汇表中的多单词条目——示例Glossary pane——多单词条目"></div>
                </div>
@@ -73,7 +74,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8446"></a>2.&nbsp;<a class="indexterm" name="d0e8448"></a>文件格式<a class="indexterm" name="d0e8454"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8513"></a>2.&nbsp;<a class="indexterm" name="d0e8515"></a>文件格式<a class="indexterm" name="d0e8521"></a></h2>
                   </div>
                </div>
             </div>
@@ -83,14 +84,14 @@
             <p>还支持 CSV 格式。该格式和 TAB 分隔的相同：源术语，目标术语。注释字段使用逗号 ',' 分隔开来。字符串需要括在引号 " 里面，这样可以在字符串中使用逗号：</p>
             <p><code class="literal">"This is a source term, which contains a comma","c'est un
                       terme, qui contient une virgule" </code></p>
-            <p>除了纯文本，还支持 TBX 格式<a class="indexterm" name="d0e8470"></a>。TBX（Term Base eXchange）是用于交换结构化术语数据的开放的基于 XML 标准，已经被 LISA<a class="indexterm" name="d0e8476"></a> 和 ISO 批准为国际标准。如果您已经有术语管理系统（例如 MultiTerm），那么它很可能提供了导出 TBX 格式术语数据的功能。<a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">微软术语集</a> <a class="indexterm" name="d0e8485"></a>可以下载将近 100 种语言的术语，它可以作为 IT 词汇表的基础。
+            <p>除了纯文本，还支持 TBX 格式<a class="indexterm" name="d0e8537"></a>。TBX（Term Base eXchange）是用于交换结构化术语数据的开放的基于 XML 标准，已经被 LISA<a class="indexterm" name="d0e8543"></a> 和 ISO 批准为国际标准。如果您已经有术语管理系统（例如 MultiTerm），那么它很可能提供了导出 TBX 格式术语数据的功能。<a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">微软术语集</a> <a class="indexterm" name="d0e8552"></a>可以下载将近 100 种语言的术语，它可以作为 IT 词汇表的基础。
             </p>
          </div>
          <div class="section" title="3.&nbsp;如何创建词汇表">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8491"></a>3.&nbsp;如何创建词汇表<a class="indexterm" name="d0e8494"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e8558"></a>3.&nbsp;如何创建词汇表<a class="indexterm" name="d0e8561"></a></h2>
                   </div>
                </div>
             </div>
@@ -128,13 +129,14 @@
                   </li>
                </ul>
             </div>
-            <div class="figure"><a name="d0e8549"></a><p class="title"><b>Figure&nbsp;19.3.&nbsp;保存词汇表</b></p>
+            <div class="figure"><a name="d0e8616"></a><p class="title"><b>Figure&nbsp;19.3.&nbsp;保存词汇表</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/saveglossary.png" alt="保存词汇表"></div>
                </div>
             </div><br class="figure-break"><p>点击“确定”确认。</p>
             <p>创建 OmegaT 项目之后，将该文件复制或移动到项目的 \glossary 目录中。如果项目已经打开，复制词汇文件后重新加载项目。可以对正被项目使用的词汇表文件进行修改。词汇表修改大约每秒钟就会被检测一次，且修改会在后台透明地被加载，因此在保存新词汇表文件之后无需重新加载项目文件。</p>
-            <p>当包含了源文本术语的片段被打开后，词汇表窗格将显示出源片段中可在词汇表中找到的词条（或者多个词条——可以有多个词汇表保存在 glossary 的子目录中）。</p>
+            <p>当包含了源文本术语的片段被打开后，词汇表窗格将显示出源片段中可在词汇表中找到的词条（或者多个词条——可以有多个词汇表保存在 <span class="emphasis"><em>glossary</em></span> 的子目录中）。
+            </p>
             <p><span class="bold"><strong>请注意：</strong></span>还有其他创建含 TAB 分隔条目的简单文件的方法，并且许多比上面建议做法更简单。例如，有种方法是导出上面的内容为 <code class="filename">CSV</code> 来代替 <code class="filename">UTF8</code> 文本文件。需要提示的一点是上面的建议适用于任意系统，包括 Windows、OS X 或 Linux。例如没人会反对在 Windows 上使用 Notepad++ 或在 Linux 上使用 GEdit：可以使用任何能处理 UTF8 和显示空格（这样就不会遗漏必须的
                <span class="keycap"><strong>TAB</strong></span> 字符）的文本编辑器。
             </p>
@@ -158,7 +160,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8586"></a>4.&nbsp;<a class="indexterm" name="d0e8588"></a>使用 Multiterm
+                     <h2 class="title" style="clear: both"><a name="d0e8656"></a>4.&nbsp;<a class="indexterm" name="d0e8658"></a>使用 Multiterm
                      </h2>
                   </div>
                </div>
@@ -171,7 +173,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8604"></a>5.&nbsp;<a class="indexterm" name="d0e8606"></a>常见词汇表问题
+                     <h2 class="title" style="clear: both"><a name="d0e8674"></a>5.&nbsp;<a class="indexterm" name="d0e8676"></a>常见词汇表问题
                      </h2>
                   </div>
                </div>

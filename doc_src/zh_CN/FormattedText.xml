@@ -114,7 +114,9 @@
         <primary>标签</primary> <secondary>组检验</secondary>
       </indexterm></title>
 
-    <para>验证标签功能检测发生变化的标签序列（无论是有意的还是无意的），并显示受影响的片段。通过按下 <guimenuitem>Ctrl+T</guimenuitem> 组合键可调用该功能，它将打开一个窗口，显示文件的译文中所有可能包含断裂或错误的标签的片段。通过标签检验功能可以轻松地修正标签和重新创建目标文档。按 <guimenuitem>Ctrl+T</guimenuitem> 打开的窗口显示了一个三列表格，其中列出了指向该片段、原文片段和译文片段的链接：</para>
+    <para>验证标签功能检测发生变化的标签序列（无论是有意的还是无意的），并显示受影响的片段。通过按下 <guimenuitem>Ctrl+T<indexterm class="singular">
+        <primary>快捷键</primary> <secondary>Ctrl+T - 检验标签</secondary>
+      </indexterm></guimenuitem> 组合键可调用该功能，它将打开一个窗口，显示文件的译文中所有可能包含断裂或错误的标签的片段。通过标签检验功能可以轻松地修正标签和重新创建目标文档。按 <guimenuitem>Ctrl+T</guimenuitem> 打开的窗口显示了一个三列表格，其中列出了指向该片段、原文片段和译文片段的链接：</para>
 
     <figure id="tag.validation">
       <title>标签检验条目</title>

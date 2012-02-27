@@ -133,7 +133,7 @@
           <primary>项目文件</primary> <secondary>用户文件</secondary> <tertiary>位置</tertiary>
         </indexterm></title>
 
-      <para>用户文件被存储在单独的位置，因此它们可以用各种版本的 OmegaT 打开。位置取决于您所使用的操作系统：</para>
+      <para>用户文件被存储在单独的位置，因此它们可以用各种版本的 <application>OmegaT</application> 打开。位置取决于您所使用的操作系统：</para>
 
       <informaltable>
         <tgroup align="left" cols="2" rowsep="1">

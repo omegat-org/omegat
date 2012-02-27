@@ -355,7 +355,11 @@
           <primary>快捷键</primary> <secondary>Ctrl+I - 插入文本</secondary>
         </indexterm></guimenuitem> 以将匹配插入到当前光标位置。</para>
 
-      <para>匹配率大体上相当于匹配片段和被匹配片段中相同的单词数量，并除以两者单词数量中较大者。被选中的模糊匹配会以粗体突出显示，对正在翻译片段中缺少的单词显示为蓝色，而在缺少单词旁边的单词显示为绿色。在上面示例中源片段为 <emphasis role="bold">Duration of exposure &lt;15 min</emphasis>。最高的匹配是 60%，因为在 5 个单词中有 3 个相同。在显示匹配率的这一行还包括了包含这个匹配的翻译记忆的名称&lt;i1&gt;。如果未显示文件名，则发现匹配的源为默认项目的翻译记忆。孤立片段（第 4 号匹配）表示该片段存在默认项目的翻译记忆中，但不存在于项目的源片段。</para>
+      <para>匹配率大体上相当于匹配片段和被匹配片段中相同的单词数量，并除以两者单词数量中较大者。被选中的模糊匹配会以粗体突出显示，对正在翻译片段中缺少的单词显示为蓝色，而在缺少单词旁边的单词显示为绿色。在上面示例中源片段为 <emphasis role="bold">Duration of exposure &lt;15 min</emphasis>。最高的匹配是 60%，因为在 5 个单词中有 3 个相同。在显示匹配率的这一行还包括了包含这个匹配的翻译记忆的名称<indexterm class="singular">
+          <primary>翻译记忆</primary> <secondary>匹配</secondary>
+        </indexterm>。如果未显示文件名，则发现匹配的源为默认项目的翻译记忆。孤立片段<indexterm class="singular">
+          <primary>翻译记忆</primary> <secondary>孤立片段</secondary>
+        </indexterm> （第 4 号匹配）表示该片段存在默认项目的翻译记忆中，但不存在于项目的源片段。</para>
 
       <para>实际上是三个可用的评价（在上面首个匹配中为 60/60/54）。它们的含义如下：</para>
 
@@ -609,7 +613,7 @@
           <primary>帮助菜单</primary> <secondary>用户手册……</secondary>
         </indexterm>帮助→用户手册……</guimenuitem>条目来打开。在该窗口中会显示手册和两个按钮：退后和内容。用户手册是一份包含各个不同章节链接的 HTML 文档。像在网页浏览器中那样点击一个链接将会打开要看的页面。</para>
 
-      <para>用户手册存放在 OmegaT 安装目录的 doc 子目录中，因此可在浏览器中打开 &lt;c1&gt;doc/en/index.hmtl&lt;/c1&gt; 文件来查看英文文档。用这种方法，您也可以打开外部的链接，因为内建的帮助浏览器并不接受外部互联网链接。</para>
+      <para>用户手册存放在 OmegaT 安装目录的 doc 子目录中，因此可在浏览器中打开 <filename>doc/en/index.hmtl</filename> 文件来查看英文文档。用这种方法，您也可以打开外部的链接，因为内建的帮助浏览器并不接受外部互联网链接。</para>
     </section>
   </section>
 </chapter>

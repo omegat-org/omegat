@@ -77,7 +77,7 @@
         </varlistentry>
       </variablelist>
 
-      <para>或者，您可以让 <application>OmegaT</application> 制作一份附加的 TMX 文件（OmegaT 风格）到您指定的地方，包含了项目所有的可译片段。请参阅下面的伪翻译记忆。</para>
+      <para>或者，您可以让 <application>OmegaT</application> 制作一份附加的 TMX 文件（<application>OmegaT</application> 风格）到您指定的地方，包含了项目所有的可译片段。请参阅下面的伪翻译记忆。</para>
 
       <para>注意：打开项目时会把所有的翻译记忆加载到内存中。对项目翻译记忆的备份会定期进行（请参阅下一章），同时在打开或关闭项目时也会保存/更新 <filename>project_save.tmx</filename>。这里的意思是，例如如果您想添加一个辅助 TM 到当前正在工作的项目时，无需退出项目：只要简单地重新载入项目，所做的更改就会生效。</para>
 
@@ -164,11 +164,11 @@
 
     <para>在创建项目时，项目的主 TM <filename>project_save.tmx</filename> 是空的。该 TM 文件会在翻译时逐步进行填充。要加快这个过程，可重用现有的翻译。如果指定的片段已翻译过一次且翻译正确，则无需再次翻译它们。翻译记忆还可以包含参考翻译：多国法律，例如欧共体的法律是个实际的例子。</para>
 
-    <para>在 OmegaT 项目中创建目标文档时，项目的翻译记忆将会在根目录中输出三份文件（查阅之前的表述）。可将这三份 TMX 文件（<filename>-omegat.tmx</filename>，<filename>-level1.tmx</filename> 和 <filename>-level2.tmx</filename>）视为一份“导出的翻译记忆”，即当前项目的可导出双语形式。</para>
+    <para>在 <application>OmegaT</application> 项目中创建目标文档时，项目的翻译记忆将会在 <application>OmegaT</application> 项目根目录中输出三份文件（查阅之前的表述）。可将这三份 TMX 文件（<filename>-omegat.tmx</filename>，<filename>-level1.tmx</filename> 和 <filename>-level2.tmx</filename>）视为一份“导出的翻译记忆”，即当前项目的可导出双语形式。</para>
 
     <para>如果希望复用之前某个项目的翻译记忆（例如新的项目与之前的项目非常相似，或者使用了之前可能用到的术语），您可以将这些用法记忆用作“输入翻译记忆”，也就是说导入您的新项目。在此情况下，可将这些译法记忆文件放置在新项目的 <emphasis>\tm</emphasis> 或 <emphasis>\tm</emphasis>\auto 目录下：以前您将在模糊匹配查看器中获取来自这些翻译记忆的提示，现在开始将使用这些翻译记忆预翻译您的源文本。</para>
 
-    <para>默认情况下，\tm 文件夹位于项目的根文件夹中（例如： ...&lt;e1&gt;\MyProject\tm)&lt;/e1&gt;，但如果您想的话也可以在项目属性对话框中选择不同的文件夹。如果您频繁使用过去创建的翻译记忆，这将非常有用，比方说因为您一直在同一领域或为同一客户服务。在此情况下，有益的过程可能包括如下步骤：</para>
+    <para>默认情况下，\tm 文件夹位于项目的根文件夹中（例如： ...<emphasis>\MyProject\tm)</emphasis>，但如果您想的话也可以在项目属性对话框中选择不同的文件夹。如果您频繁使用过去创建的翻译记忆，这将非常有用，比方说因为您一直在同一领域或为同一客户服务。在此情况下，有益的过程可能包括如下步骤：</para>
 
     <itemizedlist>
       <listitem>
@@ -231,7 +231,7 @@
     <para><literal>java -jar omegat.jar --pseudotranslatetmx=&lt;filename&gt;
     [pseudotranslatetype=[equal|empty]]</literal></para>
 
-    <para>把其中的 &lt;I0&gt;&lt;filename&gt;&lt;/I0&gt; 替换为想创建的文件名，可以是绝对的也可以相对于工作目录（启动 <application>OmegaT</application> 的目录）。第二个参数 <literal>--pseudotranslatetype</literal> 是可选的。它的值可以是 <literal>equal</literal>（默认值，此时 source=target）或 <literal>empty</literal>（目标片段为空）。可以使用任何工具处理生成的 tmx 文件。要在 <application>OmegaT</application> 重用这个文件，请把它更名为 <emphasis>project_save.tmx </emphasis> 并放置到项目的 <literal>omegat</literal> 文件夹。</para>
+    <para>把其中的 <literal>&lt;filename&gt;</literal> 替换为想创建的文件名，可以是绝对的也可以相对于工作目录（启动 <application>OmegaT</application> 的目录）。第二个参数 <literal>--pseudotranslatetype</literal> 是可选的。它的值可以是 <literal>equal</literal>（默认值，此时 source=target）或 <literal>empty</literal>（目标片段为空）。可以使用任何工具处理生成的 tmx 文件。要在 <application>OmegaT</application> 重用这个文件，请把它更名为 <emphasis>project_save.tmx </emphasis> 并放置到项目的 <literal>omegat</literal> 文件夹。</para>
   </section>
 
   <section id="upgrading.translation.memories">

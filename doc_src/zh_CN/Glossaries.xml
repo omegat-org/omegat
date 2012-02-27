@@ -7,14 +7,16 @@
       <primary>词汇表</primary>
     </indexterm></title>
 
-  <para>词汇表是用于 OmegaT 的文件，它由用户手工创建和更新。</para>
+  <para>词汇表是用于 <application>OmegaT</application> 的文件，它由用户手工创建和更新。</para>
 
   <para>如果某个 <application>OmegaT</application> 项目包含一个或多个词汇表文件，当前片段中出现的任何术语将自动显示在词汇表查看器中。</para>
 
   <section>
     <title>用法</title>
 
-    <para>要使用现有的词汇表，只需在创建项目后将它放到 <filename>/glossary</filename> 目录下。在打开项目时，<application>OmegaT</application> 自动检测该目录下的词汇表文件。从词汇表中找到当前片段中的术语后，<application>OmegaT</application> 将会在词汇表窗格将它们显示出来。</para>
+    <para>要使用现有的词汇表，只需在创建项目后将它放到<indexterm class="singular">
+        <primary>项目文件</primary> <secondary>词汇表子目录</secondary>
+      </indexterm> <filename>/glossary</filename> 目录下。在打开项目时，<application>OmegaT</application> 自动检测该目录下的词汇表文件。从词汇表中找到当前片段中的术语后，<application>OmegaT</application> 将会在词汇表窗格将它们显示出来。</para>
 
     <indexterm class="singular">
       <primary>词汇表窗格</primary>
@@ -141,7 +143,7 @@
 
     <para>创建 OmegaT 项目之后，将该文件复制或移动到项目的 \glossary 目录中。如果项目已经打开，复制词汇文件后重新加载项目。可以对正被项目使用的词汇表文件进行修改。词汇表修改大约每秒钟就会被检测一次，且修改会在后台透明地被加载，因此在保存新词汇表文件之后无需重新加载项目文件。</para>
 
-    <para>当包含了源文本术语的片段被打开后，词汇表窗格将显示出源片段中可在词汇表中找到的词条（或者多个词条——可以有多个词汇表保存在 glossary 的子目录中）。</para>
+    <para>当包含了源文本术语的片段被打开后，词汇表窗格将显示出源片段中可在词汇表中找到的词条（或者多个词条——可以有多个词汇表保存在 <emphasis>glossary</emphasis> 的子目录中）。</para>
 
     <para><emphasis role="bold">请注意：</emphasis>还有其他创建含 TAB 分隔条目的简单文件的方法，并且许多比上面建议做法更简单。例如，有种方法是导出上面的内容为 <filename>CSV</filename> 来代替 <filename>UTF8</filename> 文本文件。需要提示的一点是上面的建议适用于任意系统，包括 Windows、OS X 或 Linux。例如没人会反对在 Windows 上使用 Notepad++ 或在 Linux 上使用 GEdit：可以使用任何能处理 UTF8 和显示空格（这样就不会遗漏必须的 <keycap>TAB</keycap> 字符）的文本编辑器。</para>
 

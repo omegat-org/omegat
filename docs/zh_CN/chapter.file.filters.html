@@ -78,7 +78,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;文件过滤器对话框<a class="indexterm" name="d0e5187"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;文件过滤器对话框<a class="indexterm" name="d0e5210"></a></h2>
                   </div>
                </div>
             </div>
@@ -89,11 +89,12 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;过滤器选项<a class="indexterm" name="d0e5203"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;过滤器选项<a class="indexterm" name="d0e5226"></a></h2>
                   </div>
                </div>
             </div>
-            <p>五种过滤器（文本文件、 XHTML 文件、HTML 和 XHTML 文件、开放文档／OpenOffice.org 文件和 微软开放 XML 文件）有一个或多个特殊选项。要修改这些选项，请从列表中选中该过滤器，并点击 &lt;s0&gt;选项【Options】&lt;/s0&gt;按钮。可用选项包括：</p>
+            <p>五种过滤器（文本文件、 XHTML 文件、HTML 和 XHTML 文件、开放文档／OpenOffice.org 文件和 微软开放 XML 文件）有一个或多个特殊选项。要修改这些选项，请从列表中选中该过滤器，并点击 <span class="bold"><strong>选项【Options】</strong></span>按钮。可用选项包括：
+            </p>
             <p><span class="bold"><strong>文本文件</strong></span></p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
@@ -265,7 +266,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;编辑过滤器对话框<a class="indexterm" name="d0e5362"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;编辑过滤器对话框<a class="indexterm" name="d0e5388"></a></h2>
                   </div>
                </div>
             </div>
@@ -275,11 +276,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e5377"></a>源文件类型、文件名模式<a class="indexterm" name="d0e5383"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e5403"></a>源文件类型、文件名模式<a class="indexterm" name="d0e5409"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>当 OmegaT 在源文件夹中发现一个文件时，它将首先根据文件的扩展名试着选择过滤器。更确切地说，OmegaT 尝试着用每个过滤器的源文件名模式对文件名进行匹配。例如，<code class="literal">*.xhtml </code>模式将会匹配任何扩展名为 <code class="literal">.xhtml</code> 的文件。如果找到了合适的过滤器，它将被用来处理该文件。比如说在缺省情况下 XHTML 过滤器将会用来处理扩展名为 &lt;c2&gt;.xhtml&lt;/c2&gt; 的文件。 您可以对每个文件过滤器要处理文件的名称模式进行修改或增添。源文件名模式中使用的匹配字符与<span class="bold"><strong>搜索</strong></span>中所使用的类似。'*' 字符匹配零个或多个字符。'?' 字符只匹配一个字符。其他所有字符代表自身。比如，如果您希望文本过滤器处理 readme 文件（<code class="literal">readme, read.me</code> 和 <code class="literal">readme.txt</code>），那么您应该使用模式 <code class="literal">read*</code>.
+               <p>当 OmegaT 在源文件夹中发现一个文件时，它将首先根据文件的扩展名试着选择过滤器。更确切地说，OmegaT 尝试着用每个过滤器的源文件名模式对文件名进行匹配。例如，<code class="literal">*.xhtml </code>模式将会匹配任何扩展名为 <code class="literal">.xhtml</code> 的文件。如果找到了合适的过滤器，它将被用来处理该文件。比如说在缺省情况下 XHTML 过滤器将会用来处理扩展名为 .xhtml 的文件。 您可以对每个文件过滤器要处理文件的名称模式进行修改或增添。源文件名模式中使用的匹配字符与<span class="bold"><strong>搜索中所使用的类似。</strong></span>'*' 字符匹配零个或多个字符。'?' 字符只匹配一个字符。其他所有字符代表自身。比如，如果您希望文本过滤器处理 readme 文件（<code class="literal">readme, read.me</code> 和 <code class="literal">readme.txt</code>），那么您应该使用模式 <code class="literal">read*</code>.
                </p>
             </div>
             <div class="section" title="3.2.&nbsp;源文件和目标文件编码">
@@ -290,7 +291,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e5411"></a><a class="indexterm" name="d0e5416"></a><a class="indexterm" name="d0e5421"></a><p>仅少量文件格式必须指定强制性的编码方式。未指定编码方式的文件格式将使用您所设定的匹配该名称的扩展名的编码方式。例如，缺省情况下 <code class="literal">.txt</code> 文件将会使用系统缺省的编码导入。您可以对每种源文件名模式的源编码进行修改。这些文件也可以任何编码方式输出。缺省情况下，已译文件的编码与源文件的编码相同。源和目标编码字段使用的组合框包括了所支持的全部编码。&lt;自动&gt;将编码选择工作留给 <span class="application">OmegaT</span>。以下是其工作原理：
+               </div><a class="indexterm" name="d0e5437"></a><a class="indexterm" name="d0e5442"></a><a class="indexterm" name="d0e5447"></a><p>仅少量文件格式必须指定强制性的编码方式。未指定编码方式的文件格式将使用您所设定的匹配该名称的扩展名的编码方式。例如，缺省情况下 <code class="literal">.txt</code> 文件将会使用系统缺省的编码导入。您可以对每种源文件名模式的源编码进行修改。这些文件也可以任何编码方式输出。缺省情况下，已译文件的编码与源文件的编码相同。源和目标编码字段使用的组合框包括了所支持的全部编码。&lt;自动&gt;将编码选择工作留给 <span class="application">OmegaT</span>。以下是其工作原理：
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
@@ -319,11 +320,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;目标文件名<a class="indexterm" name="d0e5451"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;目标文件名<a class="indexterm" name="d0e5477"></a></h3>
                      </div>
                   </div>
                </div>
-               <p>有时您也需希望系统自动将译好的的文件重新命名，比如在文件名后加上语言代码。目标文件名模式使用特殊的语法规则，因此如果希望编辑这些字段的话，您必须点击<span class="bold"><strong>编辑……</strong></span>以使用<a class="indexterm" name="d0e5461"></a>编辑模式对话框。如果您想恢复到缺省的过滤器设置，点击&lt;s1&gt;缺省&lt;/s1&gt;。您也可以在文件过滤器对话框中的目标文件名模式字段中直接修改名称。模式编辑对话框提供了以下选项：
+               <p>有时您也需希望系统自动将译好的的文件重新命名，比如在文件名后加上语言代码。目标文件名模式使用特殊的语法规则，因此如果希望编辑这些字段的话，您必须点击<span class="bold"><strong>编辑……</strong></span>以使用<a class="indexterm" name="d0e5487"></a>编辑模式对话框。如果您想恢复到缺省的过滤器设置，点击<span class="bold"><strong>缺省</strong></span>。您也可以在文件过滤器对话框中的目标文件名模式字段中直接修改名称。模式编辑对话框提供了以下选项：
                </p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">

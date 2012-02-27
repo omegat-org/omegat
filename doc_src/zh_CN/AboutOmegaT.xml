@@ -82,7 +82,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">搜索</emphasis>和<emphasis role="bold"></emphasis><emphasis role="bold">正则表达式</emphasis>：在 OmegaT 中进行搜索可以和“列出源中包含<emphasis>单词 'kangaroo'  的片段”一样的简单。</emphasis>它们还可以很复杂，例如允许搜索包含两个或更多连续空格的片段。此时正则表达式 ^s^s+ 可用来找到出现问题的片段。正则表达式同样广泛用在片段分割中。</para>
+        <para><emphasis role="bold">搜索</emphasis>和<emphasis role="bold"></emphasis><emphasis role="bold">正则表达式</emphasis>：在 OmegaT 中进行搜索可以和<emphasis>“列出源中包含</emphasis><emphasis>单词 'kangaroo'  的片段”一样的简单。</emphasis>它们还可以很复杂，例如允许搜索包含两个或更多连续空格的片段。此时正则表达式 ^s^s+ 可用来找到出现问题的片段。正则表达式同样广泛用在片段分割中。</para>
       </listitem>
 
       <listitem>

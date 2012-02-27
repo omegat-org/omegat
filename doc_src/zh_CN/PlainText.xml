@@ -108,6 +108,6 @@
       </listitem>
     </itemizedlist>
 
-    <para>可以通过在<emphasis role="bold">选项</emphasis>菜单中选择<emphasis role="bold">文件过滤器</emphasis>菜单项来检查是不是这样。比方说，当您拿到一份捷克文本文件（非常有可能使用 <emphasis role="bold">ISO-8859-2</emphasis> 编码编写），您仅需将扩展名 <literal>.txt</literal> 修改为 <literal>.txt2</literal>，而 <application>OmegaT</application> 将会正确地解析其内容。当然，如果您希望更加安全，可以将这类文件转换为 Unicode，即 .utf8 文件格式。</para>
+    <para>可以通过在<emphasis role="bold">选项</emphasis>菜单中选择<emphasis role="bold">文件过滤器</emphasis>菜单项来检查是不是这样。比方说，当您拿到一份捷克文本文件（非常有可能使用 <emphasis role="bold">ISO-8859-2</emphasis> 编码编写），您仅需将扩展名 <literal>.txt</literal> 修改为 <literal>.txt2</literal>，而 <application>OmegaT</application> 将会正确地解析其内容。当然，如果您希望更加安全，可以将这类文件转换为 Unicode，即 <literal>.utf8</literal> 文件格式。</para>
   </section>
 </chapter>

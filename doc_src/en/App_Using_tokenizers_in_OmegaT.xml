@@ -7,10 +7,6 @@
   <section>
     <title>Introduction</title>
 
-    <note>
-      <para>This subject is intended for advanced users</para>
-    </note>
-
     <para>Tokenizers (or stemmers) improve the quality of matches by
     recognizing inflected words in source and translation memory data. They
     also improve glossary matching.</para>

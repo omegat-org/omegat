@@ -142,6 +142,9 @@ public class Preferences {
 
     /** Mark the segments with a note with a different color */
     public static final String MARK_NOTED_SEGMENTS = "mark_noted_segments";
+    
+    /** Mark the non-breakable spaces with a different color */
+    public static final String MARK_NBSP = "mark_nbsp";
 
     /** Mark the translated segments with a different color */
     public static final String MARK_TRANSLATED_SEGMENTS = "mark_translated_segments";

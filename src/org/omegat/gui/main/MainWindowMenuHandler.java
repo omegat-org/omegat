@@ -512,6 +512,12 @@ public class MainWindowMenuHandler {
                         mainWindow.menu.viewMarkNotedSegmentsCheckBoxMenuItem.isSelected());
     }
 
+    public void viewMarkNBSPCheckBoxMenuItemActionPerformed(){
+        Core.getEditor()
+                .getSettings()
+                .setMarkNBSP(
+                        mainWindow.menu.viewMarkNBSPCheckBoxMenuItem.isSelected());
+    }
 
     public void viewDisplayModificationInfoNoneRadioButtonMenuItemActionPerformed() {
         Core.getEditor().getSettings()

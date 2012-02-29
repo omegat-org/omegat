@@ -208,6 +208,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewMenu.add(viewDisplaySegmentSourceCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_DISPLAY_SEGMENT_SOURCES"));
         viewMenu.add(viewMarkNonUniqueSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NON_UNIQUE_SEGMENTS"));
         viewMenu.add(viewMarkNotedSegmentsCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NOTED_SEGMENTS"));
+        viewMenu.add(viewMarkNBSPCheckBoxMenuItem = createCheckboxMenuItem("MW_VIEW_MENU_MARK_NBSP"));
         viewMenu.add(viewModificationInfoMenu = createMenu("MW_VIEW_MENU_MODIFICATION_INFO"));
         ButtonGroup viewModificationInfoMenuBG = new ButtonGroup();
         viewModificationInfoMenu
@@ -308,6 +309,8 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                 .isMarkNonUniqueSegments());
         viewMarkNotedSegmentsCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
                 .isMarkNotedSegments());
+        viewMarkNBSPCheckBoxMenuItem.setSelected(Core.getEditor().getSettings()
+                .isMarkNBSP());
 
         viewDisplayModificationInfoNoneRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_NONE.equals(Core.getEditor()
@@ -541,6 +544,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JCheckBoxMenuItem viewDisplaySegmentSourceCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNonUniqueSegmentsCheckBoxMenuItem;
     JCheckBoxMenuItem viewMarkNotedSegmentsCheckBoxMenuItem;
+    JCheckBoxMenuItem viewMarkNBSPCheckBoxMenuItem;
     JMenu viewModificationInfoMenu;
     JRadioButtonMenuItem viewDisplayModificationInfoNoneRadioButtonMenuItem;
     JRadioButtonMenuItem viewDisplayModificationInfoSelectedRadioButtonMenuItem;

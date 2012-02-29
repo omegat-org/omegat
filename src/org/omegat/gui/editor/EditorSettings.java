@@ -53,6 +53,7 @@ public class EditorSettings {
     private boolean displaySegmentSources;
     private boolean markNonUniqueSegments;
     private boolean markNoted;
+    private boolean markNBSP;
     private String displayModificationInfo;
     private boolean autoSpellChecking;
     private boolean viewSourceBold;
@@ -72,6 +73,7 @@ public class EditorSettings {
         displaySegmentSources = Preferences.isPreference(Preferences.DISPLAY_SEGMENT_SOURCES);
         markNonUniqueSegments = Preferences.isPreference(Preferences.MARK_NON_UNIQUE_SEGMENTS);
         markNoted = Preferences.isPreference(Preferences.MARK_NOTED_SEGMENTS);
+        markNBSP  = Preferences.isPreference(Preferences.MARK_NBSP);
         displayModificationInfo = Preferences.getPreferenceDefault(Preferences.DISPLAY_MODIFICATION_INFO,
                 DISPLAY_MODIFICATION_INFO_NONE);
         autoSpellChecking = Preferences.isPreference(Preferences.ALLOW_AUTO_SPELLCHECKING);
@@ -147,6 +149,14 @@ public class EditorSettings {
         return markNoted;
     }
 
+    /**
+     * mark non-breakable spaces?
+     * @return true when set, false otherwise
+     */
+    public boolean isMarkNBSP() {
+        return markNBSP;
+    }
+
     public void setDisplaySegmentSources(boolean displaySegmentSources) {
         UIThreadsUtil.mustBeSwingThread();
 
@@ -182,6 +192,20 @@ public class EditorSettings {
 
         this.markNoted = markNotedSegments;
         Preferences.setPreference(Preferences.MARK_NOTED_SEGMENTS, markNoted);
+
+        if (Core.getProject().isProjectLoaded()) {
+            parent.loadDocument();
+            parent.activateEntry();
+        }
+    }
+    
+    public void setMarkNBSP(boolean markNBSP) {
+        UIThreadsUtil.mustBeSwingThread();
+
+        parent.commitAndDeactivate();
+
+        this.markNBSP = markNBSP;
+        Preferences.setPreference(Preferences.MARK_NBSP, markNBSP);
 
         if (Core.getProject().isProjectLoaded()) {
             parent.loadDocument();
@@ -281,9 +305,10 @@ public class EditorSettings {
      * @param duplicate is the sourceTextEntry a duplicate or not? values: DUPLICATE.NONE, DUPLICATE.FIRST or DUPLICATE.NEXT. See sourceTextEntryste.getDuplicate()
      * @param active is it an active segment?
      * @param translationExists does a translation already exist
+     * @param isNBSP is the text a non-breakable space
      * @return proper AttributeSet to use on displaying the segment.
      */
-    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote) {
+    public AttributeSet getAttributeSet(boolean isSource, boolean isPlaceholder, boolean isRemoveText, DUPLICATE duplicate, boolean active, boolean translationExists, boolean hasNote, boolean isNBSP) {
         //determine foreground color
         Color fg = null;
         if (markNonUniqueSegments) {
@@ -327,6 +352,9 @@ public class EditorSettings {
                     bg = Styles.COLOR_TRANSLATED;
                 }
             }
+        }
+        if (isNBSP && isMarkNBSP()) { //overwrite others, because space is smallest.
+            bg = Styles.COLOR_NBSP;
         }
 
         //determine bold

@@ -144,6 +144,8 @@ public class PatternConsts {
             // [ 2138846 ] French dictionary cannot be downloaded and installed
             "\"([a-z]{1,8})(_([A-Z]{1,8})?)(_1-3-2)?\\.zip\"");
 
+    public static final Pattern NBSP = Pattern.compile(" ");
+
     /**
      * Pattern for detecting the placeholders in a printf-function string which
      * can occur in languages like php, C and others. placeholder ::= "%"

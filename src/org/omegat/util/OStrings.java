@@ -42,6 +42,17 @@ import java.util.ResourceBundle;
  */
 public class OStrings {
 
+    private static String __VERSION_KEY = "version";
+    private static String __UPDATE_KEY = "update";
+
+    /** Just a version, e.g. "1.6" */
+    public static final String VERSION = ResourceBundle.getBundle("org/omegat/Version").getString(
+            __VERSION_KEY);
+
+    /** Update number, e.g. 2, for 1.6.0_02 */
+    public static final String UPDATE = ResourceBundle.getBundle("org/omegat/Version")
+            .getString(__UPDATE_KEY);
+
     /** Resource bundle that contains all the strings */
     private static ResourceBundle bundle = ResourceBundle.getBundle("org/omegat/Bundle");
 
@@ -86,21 +97,6 @@ public class OStrings {
         return bundle.getString(key);
     }
 
-    private static String __VERSION_KEY = "version";
-    private static String __UPDATE_KEY = "update";
-
-    /** Just a version, e.g. "1.6" */
-    public static final String VERSION = ResourceBundle.getBundle("org/omegat/Version").getString(
-            __VERSION_KEY);
-
-    /** Update number, e.g. 2, for 1.6.0_02 */
-    public static final String UPDATE = ResourceBundle.getBundle("org/omegat/Version")
-            .getString(__UPDATE_KEY);
-
-    // NOTE: segment start is assumed to contain "0000" string to overwrite
-    // with entry number. If zeros not detected, entry number will not be
-    // displayed
-
     /**
      * Returns the OmegaT version for display (includes the application name)
      * 
@@ -114,6 +110,9 @@ public class OStrings {
 
     /**
      * Returns the textual marker for the start of the current segment.
+     * NOTE: segment start is assumed to contain "0000" string to overwrite
+     * with entry number. If zeros not detected, entry number will not be
+     * displayed
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */

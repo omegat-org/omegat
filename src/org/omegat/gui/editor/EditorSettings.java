@@ -317,11 +317,11 @@ public class EditorSettings {
                 break;
             case FIRST:
                 if (markFirstNonUnique) {
-                    fg = Styles.COLOR_LIGHT_GRAY;
+                    fg = Styles.COLOR_NON_UNIQUE;
                 }
                 break;
             case NEXT:
-                fg = Styles.COLOR_LIGHT_GRAY;
+                fg = Styles.COLOR_NON_UNIQUE;
                 break;
             }
         }
@@ -334,7 +334,7 @@ public class EditorSettings {
         Color bg = null;
         if (active) {
             if (isSource) {
-                bg = Styles.COLOR_GREEN;
+                bg = Styles.COLOR_SOURCE;
             }
         } else {
             if (isSource) {
@@ -343,7 +343,7 @@ public class EditorSettings {
                 } else if (markUntranslated && !translationExists) {
                     bg = Styles.COLOR_UNTRANSLATED;
                 } else if (isDisplaySegmentSources()) {
-                    bg = Styles.COLOR_GREEN;
+                    bg = Styles.COLOR_SOURCE;
                 }
             } else {
                 if (isMarkNotedSegments() && hasNote) {

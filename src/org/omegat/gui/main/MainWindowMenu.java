@@ -245,7 +245,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         
         viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_TRANSLATED));
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_UNTRANSLATED));
-        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_GREEN));
+        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_SOURCE));
         viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_NOTED));
         viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_NBSP));
 

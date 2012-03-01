@@ -38,12 +38,12 @@ import javax.swing.text.StyleConstants;
  */
 public final class Styles {
 
-    public static final Color COLOR_GREEN = new Color(192, 255, 192);
+    public static final Color COLOR_SOURCE = new Color(192, 255, 192);
     public static final Color COLOR_NOTED = new Color(192, 255, 255);
     public static final Color COLOR_UNTRANSLATED = new Color(0xCC, 0xCC, 0xFF);
     public static final Color COLOR_TRANSLATED = new Color(255, 255, 153);
 
-    public static final Color COLOR_LIGHT_GRAY = new Color(128, 128, 128);
+    public static final Color COLOR_NON_UNIQUE = new Color(128, 128, 128);
     public static final Color COLOR_PLACEHOLDER = new Color(150, 150, 150);
     public static final Color COLOR_REMOVETEXT_TARGET = new Color(255, 0, 0);
     public static final Color COLOR_NBSP = new Color(200, 200, 200);

@@ -31,6 +31,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
@@ -40,6 +41,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import javax.swing.ButtonGroup;
+import javax.swing.Icon;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -58,6 +60,7 @@ import org.omegat.util.Log;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
+import org.omegat.util.gui.Styles;
 import org.openide.awt.Mnemonics;
 
 /**
@@ -86,6 +89,25 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     public MainWindowMenu(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
+    }
+    
+    private Icon getViewMenuMarkIcon(final Color color) {
+        Icon i = new Icon() {
+            @Override
+            public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
+                grphcs.setColor(color);
+                grphcs.fillRect(x,y,12,12);
+            }
+            @Override
+            public int getIconWidth() {
+                return 12;
+            }
+            @Override
+            public int getIconHeight() {
+                return 12;
+            }
+        };
+        return i;
     }
 
     /**
@@ -220,6 +242,12 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewModificationInfoMenu
                 .add(viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem(
                         "MW_VIEW_MENU_MODIFICATION_INFO_ALL", viewModificationInfoMenuBG));
+        
+        viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_TRANSLATED));
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_UNTRANSLATED));
+        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_GREEN));
+        viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_NOTED));
+        viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_NBSP));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsRemoveTagsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_TOOLS_HIDETAGS"));

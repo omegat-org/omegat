@@ -93,16 +93,13 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     
     private Icon getViewMenuMarkIcon(final Color color) {
         Icon i = new Icon() {
-            @Override
             public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
                 grphcs.setColor(color);
                 grphcs.fillRect(x,y,12,12);
             }
-            @Override
             public int getIconWidth() {
                 return 12;
             }
-            @Override
             public int getIconHeight() {
                 return 12;
             }

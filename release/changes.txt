@@ -1,11 +1,13 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.1 update 2
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    1 Bug fix
    3 Localisation updates
 ----------------------------------------------------------------------
 2.5.1 update 2 vs. 2.5.1 update 1
+
+  Implemented requests:
 
   - Show non-breakable space
   http://sourceforge.net/support/tracker.php?aid=3495779
@@ -15,6 +17,9 @@
   - Segments containing a note can be marked with View > 
 Mark Segments with Notes. This marking has priority over Mark Translated
 and Mark Untranslated.
+
+  - Display of the corresponding colours in the View menu for "Mark" 
+menu entries
 
   Bug fixes:
 

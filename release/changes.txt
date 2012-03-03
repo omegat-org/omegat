@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    4 Enhancements
    1 Bug fix
-   3 Localisation updates
+   4 Localisation updates
 ----------------------------------------------------------------------
 2.5.1 update 2 vs. 2.5.1 update 1
 
@@ -34,6 +34,7 @@ even if it was empty
   - Simplified Chinese localisation updated to 2.5.0 (UI, readme, documentation)
   - Italian localisation updated to 2.5.1 (UI)
   - Dutch localisation updated to 2.5.1 (UI)
+  - Japanese localisation updated to 2.5.1 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.1 update 1

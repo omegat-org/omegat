@@ -350,7 +350,7 @@ is saved.
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   0 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 update 7 vs. 2.3.0 update 6
 
@@ -358,6 +358,9 @@ is saved.
 
   - Yiddish (language code "YI" or "JI") was not declared as a right 
 to left language
+
+  - Simplified Chinese localisation updated to 2.3 (backported from 2.5.0) (documentation)
+  - Japanese localisation updated to 2.3 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.3.0 update 6

@@ -7,6 +7,7 @@
                2006 Henry Pijffers
                2009 Didier Briel
                2010 Martin Fleurke, Antonio Vilei, Didier Briel
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -778,6 +779,12 @@ public class SearchWindow extends JFrame {
 
         // save user preferences
         savePreferences();
+
+        if (StringUtil.isEmpty(m_searchField.getText())) {
+            setTitle(OStrings.getString("SW_TITLE"));
+        } else {
+            setTitle(m_searchField.getText() + " - OmegaT");
+        }
 
         // start the search in a separate thread
         m_thread = new SearchThread(this, m_searchField.getText(), root, m_recursiveCB.isSelected(),

@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.1 update 2
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    1 Bug fix
    3 Localisation updates
 ----------------------------------------------------------------------
@@ -11,6 +11,9 @@
 
   - Show non-breakable space
   http://sourceforge.net/support/tracker.php?aid=3495779
+
+  - Use search term as window title in Search window
+  http://sourceforge.net/support/tracker.php?aid=2610094
 
   Other enhancements:
 

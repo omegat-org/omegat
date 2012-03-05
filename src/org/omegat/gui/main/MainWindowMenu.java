@@ -93,15 +93,18 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     
     private Icon getViewMenuMarkIcon(final Color color) {
         Icon i = new Icon() {
+            private static final int SIZE=12;
             public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
-                grphcs.setColor(color);
-                grphcs.fillRect(x,y,12,12);
+                if (color!=null) {
+                    grphcs.setColor(color);
+                    grphcs.fillRect(x,y,SIZE,SIZE);
+                }
             }
             public int getIconWidth() {
-                return 12;
+                return SIZE;
             }
             public int getIconHeight() {
-                return 12;
+                return SIZE;
             }
         };
         return i;
@@ -243,8 +246,10 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_TRANSLATED));
         viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_UNTRANSLATED));
         viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_SOURCE));
+        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(null));
         viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_NOTED));
         viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_NBSP));
+        viewModificationInfoMenu.setIcon(getViewMenuMarkIcon(null));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsRemoveTagsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_TOOLS_HIDETAGS"));

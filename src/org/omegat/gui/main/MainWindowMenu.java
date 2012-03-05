@@ -76,6 +76,7 @@ import org.openide.awt.Mnemonics;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Wildrich Fourie
+ * @author Martin Fleurke
  */
 public class MainWindowMenu implements ActionListener, IMainMenu {
     private static final Logger LOGGER = Logger.getLogger(MainWindowMenu.class.getName());
@@ -86,25 +87,58 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     /** MainWindow menu handler instance. */
     protected final MainWindowMenuHandler mainWindowMenuHandler;
 
+    /**
+     * Size of icons (both height and width) of menu entries.
+     */
+    private static final int ICON_SIZE=12;
+
     public MainWindowMenu(final MainWindow mainWindow, final MainWindowMenuHandler mainWindowMenuHandler) {
         this.mainWindow = mainWindow;
         this.mainWindowMenuHandler = mainWindowMenuHandler;
     }
-    
-    private Icon getViewMenuMarkIcon(final Color color) {
+    /**
+     * Creates an icon to show color of background marking
+     * @param color background color
+     * @return
+     */
+    private Icon getViewMenuMarkBGIcon(final Color color) {
         Icon i = new Icon() {
-            private static final int SIZE=12;
             public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
                 if (color!=null) {
                     grphcs.setColor(color);
-                    grphcs.fillRect(x,y,SIZE,SIZE);
+                    grphcs.fillRect(x,y,ICON_SIZE,ICON_SIZE);
                 }
             }
             public int getIconWidth() {
-                return SIZE;
+                return ICON_SIZE;
             }
             public int getIconHeight() {
-                return SIZE;
+                return ICON_SIZE;
+            }
+        };
+        return i;
+    }
+
+    /**
+     * Creates icon to show font marking
+     * @param color color of font
+     * @return 
+     */
+    private Icon getViewMenuMarkTextIcon(final Color color) {
+        Icon i = new Icon() {
+            public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
+                if (color!=null) {
+                    grphcs.setFont(Core.getMainWindow().getApplicationFont());
+                    grphcs.setColor(color);
+                    char[] data = {'M'};
+                    grphcs.drawChars(data, 0, 1, x, y+ICON_SIZE);
+                }
+            }
+            public int getIconWidth() {
+                return ICON_SIZE;
+            }
+            public int getIconHeight() {
+                return ICON_SIZE;
             }
         };
         return i;
@@ -243,13 +277,13 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                 .add(viewDisplayModificationInfoAllRadioButtonMenuItem = createRadioButtonMenuItem(
                         "MW_VIEW_MENU_MODIFICATION_INFO_ALL", viewModificationInfoMenuBG));
         
-        viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_TRANSLATED));
-        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_UNTRANSLATED));
-        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_SOURCE));
-        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(null));
-        viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_NOTED));
-        viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkIcon(Styles.COLOR_NBSP));
-        viewModificationInfoMenu.setIcon(getViewMenuMarkIcon(null));
+        viewMarkTranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_TRANSLATED));
+        viewMarkUntranslatedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_UNTRANSLATED));
+        viewDisplaySegmentSourceCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_SOURCE));
+        viewMarkNonUniqueSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkTextIcon(Styles.COLOR_NON_UNIQUE));
+        viewMarkNotedSegmentsCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_NOTED));
+        viewMarkNBSPCheckBoxMenuItem.setIcon(getViewMenuMarkBGIcon(Styles.COLOR_NBSP));
+        viewModificationInfoMenu.setIcon(getViewMenuMarkBGIcon(null));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
         toolsMenu.add(toolsRemoveTagsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_TOOLS_HIDETAGS"));

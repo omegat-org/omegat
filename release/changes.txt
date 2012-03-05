@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.2
 ----------------------------------------------------------------------
-   5 Enhancements
+   4 Enhancements
    1 Bug fix
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -23,8 +23,6 @@ and Mark Untranslated.
 
   - Display of the corresponding colours in the View menu for "Mark" 
 menu entries
-
-  - Italian segmentation rules
 
   Bug fixes:
 

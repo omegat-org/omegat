@@ -348,11 +348,15 @@ is saved.
 ----------------------------------------------------------------------
  OmegaT 2.3.0 update 7
 ----------------------------------------------------------------------
-   0 Enhancement
+   1 Enhancement
    1 Bug fix
    2 Localisation updates
 ----------------------------------------------------------------------
 2.3.0 update 7 vs. 2.3.0 update 6
+
+  Other enhancements:
+
+  - Italian segmentation rules
 
   Bug fixes:
 

@@ -71,7 +71,7 @@ public class SetSvnProperties {
             return;
         }
         if (filename.startsWith("./test/data/")) {
-            if (filename.endsWith(".xml") || filename.endsWith(".tbx")) {
+            if (filename.endsWith(".xml") || filename.endsWith(".tbx") || filename.endsWith(".srx")) {
                 set("text/xml");
             } else if (filename.endsWith(".hhc") || filename.endsWith(".hhk")) {
                 set("text/html");

@@ -127,7 +127,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     private Icon getViewMenuMarkTextIcon(final Color color) {
         Icon i = new Icon() {
             public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
-                if (color!=null) {
+                if (color!=null && grphcs != null) { //Mac fix: test on grphcs != null needed. Weird...
                     grphcs.setColor(color);
                     char[] data = {'M'};
                     grphcs.drawChars(data, 0, 1, x, y+ICON_SIZE);

@@ -10,7 +10,7 @@
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
                2011 Didier Briel
-               2012 Wildrich Fourie, Guido Leenders
+               2012 Wildrich Fourie, Guido Leenders, Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

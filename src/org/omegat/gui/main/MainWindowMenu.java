@@ -128,7 +128,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         Icon i = new Icon() {
             public void paintIcon(java.awt.Component cmpnt, java.awt.Graphics grphcs, int x, int y) {
                 if (color!=null) {
-                    grphcs.setFont(Core.getMainWindow().getApplicationFont());
+                    grphcs.setFont(viewMarkNonUniqueSegmentsCheckBoxMenuItem.getFont());
                     grphcs.setColor(color);
                     char[] data = {'M'};
                     grphcs.drawChars(data, 0, 1, x, y+ICON_SIZE);

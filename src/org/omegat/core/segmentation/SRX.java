@@ -369,7 +369,7 @@ public class SRX implements Serializable, Cloneable {
     private void initDefaults() {
         try {
             List<MapRule> newMap = new ArrayList<MapRule>();
-            URL rulesUrl = this.getClass().getResource("defaultRules.xml");
+            URL rulesUrl = this.getClass().getResource("defaultRules.srx");
             Srx data = (Srx) SRX_JAXB_CONTEXT.createUnmarshaller().unmarshal(rulesUrl);
 
             for (Languagerule rules : data.getBody().getLanguagerules().getLanguagerule()) {

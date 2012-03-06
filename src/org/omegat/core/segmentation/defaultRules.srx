@@ -26,7 +26,8 @@
 <!-- 
  Default segmentation rules and exceptions
 -->
-<srx xmlns="http://www.lisa.org/srx20" xmlns:ns="http://www.lisa.org/srx20">
+<srx xmlns="http://www.lisa.org/srx20" version="2.0">
+<header></header>
   <body>
     <languagerules>
       <!-- Catalan segmentation rules

@@ -24,6 +24,8 @@
 
 package org.omegat.gui.exttrans;
 
+import java.awt.Dimension;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 @SuppressWarnings("serial")
 public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo> {
+
+    private static final String EXPLANATION = OStrings.getString("GUI_MACHINETRANSLATESWINDOW_explanation");
+
     protected final IMachineTranslation[] translators;
 
     protected String displayed;
@@ -54,6 +59,9 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
         super(true);
 
         setEditable(false);
+        this.setText(EXPLANATION);
+        setMinimumSize(new Dimension(100, 50));
+
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_MachineTranslate");
         Core.getMainWindow().addDockable(new DockableScrollPane("MACHINE_TRANSLATE", title, this, true));
 
@@ -75,7 +83,7 @@ public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTransla
     @Override
     protected void onProjectClose() {
         UIThreadsUtil.mustBeSwingThread();
-        setText("");
+        this.setText(EXPLANATION);
     }
 
     @Override

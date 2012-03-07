@@ -56,6 +56,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 @SuppressWarnings("serial")
 public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFoundEntry>> {
+
+    private static final String EXPLANATION = OStrings.getString("GUI_MULTIPLETRANSLATIONSWINDOW_explanation");
+
     private List<DisplayedEntry> entries = new ArrayList<DisplayedEntry>();
 
     public MultipleTransPane() {
@@ -65,6 +68,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         Core.getMainWindow().addDockable(new DockableScrollPane("MULTIPLE_TRANS", title, this, true));
 
         setEditable(false);
+        this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 
         Core.getEditor().registerPopupMenuConstructors(300, new IPopupMenuConstructor() {
@@ -149,7 +153,7 @@ public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFou
         UIThreadsUtil.mustBeSwingThread();
 
         entries.clear();
-        setText("");
+        this.setText(EXPLANATION);
     }
 
     @Override

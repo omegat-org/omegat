@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -66,6 +67,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 @SuppressWarnings("serial")
 public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEntry>> {
 
+	private static final String EXPLANATION = OStrings.getString("GUI_DICTIONARYWINDOW_explanation");
+
     protected final DictionariesManager manager = new DictionariesManager(this);
 
     protected final List<String> displayedWords = new ArrayList<String>();
@@ -83,6 +86,10 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
         Core.getMainWindow().addDockable(new DockableScrollPane("DICTIONARY", title, this, true));
 
         addMouseListener(mouseCallback);
+
+        setEditable(false);
+        this.setText(EXPLANATION);
+        setMinimumSize(new Dimension(100, 50));
 
         CoreEvents.registerEditorEventListener(new IEditorEventListener() {
             public void onNewWord(String newWord) {
@@ -102,6 +109,7 @@ public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEnt
     @Override
     protected void onProjectClose() {
         clear();
+        this.setText(EXPLANATION);
         manager.stop();
         tokenizer = null;
     }

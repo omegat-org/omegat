@@ -70,6 +70,8 @@ import org.omegat.util.gui.UIThreadsUtil;
 @SuppressWarnings("serial")
 public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> implements IMatcher {
 
+    private static final String EXPLANATION = OStrings.getString("GUI_MATCHWINDOW_explanation");
+
     private final List<NearString> matches = new ArrayList<NearString>();
 
     private final List<Integer> delimiters = new ArrayList<Integer>();
@@ -86,6 +88,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         Core.getMainWindow().addDockable(new DockableScrollPane("MATCHES", title, this, true));
 
         setEditable(false);
+        this.setText(EXPLANATION);
         setMinimumSize(new Dimension(100, 50));
 
         addMouseListener(mouseListener);
@@ -142,6 +145,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     @Override
     protected void onProjectClose() {
         clear();
+        this.setText(EXPLANATION);
     }
 
     /**

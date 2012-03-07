@@ -27,6 +27,7 @@
 
 package org.omegat.gui.glossary;
 
+import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -63,6 +64,9 @@ import org.omegat.util.gui.UIThreadsUtil;
  */
 @SuppressWarnings("serial")
 public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
+
+    private static final String EXPLANATION = OStrings.getString("GUI_GLOSSARYWINDOW_explanation");
+
     /** Glossary manager instance. */
     protected final GlossaryManager manager = new GlossaryManager(this);
 
@@ -88,6 +92,10 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         String title = OStrings.getString("GUI_MATCHWINDOW_SUBWINDOWTITLE_Glossary");
         Core.getMainWindow().addDockable(new DockableScrollPane("GLOSSARY", title, this, true));
 
+        setEditable(false);
+        this.setText(EXPLANATION);
+        setMinimumSize(new Dimension(100, 50));
+
         addMouseListener(mouseListener);
 
         Core.getEditor().registerPopupMenuConstructors(200, new TransTipsPopup());
@@ -102,6 +110,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
     @Override
     protected void onProjectClose() {
         clear();
+        this.setText(EXPLANATION);
         manager.stop();
     }
 

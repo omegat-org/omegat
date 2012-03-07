@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.2
 ----------------------------------------------------------------------
-   4 Enhancements
+   5 Enhancements
    1 Bug fix
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -16,6 +16,8 @@
   http://sourceforge.net/support/tracker.php?aid=2610094
 
   Other enhancements:
+
+  - Add explanatory messages to windows as hints when a project is not open
 
   - Segments containing a note can be marked with View > 
 Mark Segments with Notes. This marking has priority over Mark Translated

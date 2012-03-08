@@ -5,6 +5,7 @@
 
  Copyright (C) 2007 Zoltan Bartko
                2008-2011 Didier Briel
+               2012 Martin Fleurke, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -51,6 +52,7 @@ import org.omegat.util.Preferences;
 /**
  * @author Zoltan Bartko
  * @author Didier Briel
+ * @author Martin Fleurke
  */
 @SuppressWarnings("serial")
 public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
@@ -156,9 +158,6 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             languageListModel.addElement(str);
         }
 
-        // see if there is anything at all
-        uninstallButton.setEnabled(!aList.isEmpty());
-
         languageList.setModel(languageListModel);
     }
 
@@ -173,7 +172,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         directoryLabel.setEnabled(enabled);
         directoryTextField.setEnabled(enabled);
         installButton.setEnabled(enabled);
-        uninstallButton.setEnabled(enabled);
+        setUninstalButtonStatus();  // Depends on whether something is selected in the dictionary list
         languageScrollPane.setEnabled(enabled);
         languageList.setEnabled(enabled);
     }
@@ -225,7 +224,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
             .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(346, Short.MAX_VALUE)
+                .addContainerGap(420, Short.MAX_VALUE)
                 .add(okButton)
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(cancelButton))
@@ -254,6 +253,11 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             }
         });
 
+        languageList.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                languageListMouseClicked(evt);
+            }
+        });
         languageScrollPane.setViewportView(languageList);
 
         org.openide.awt.Mnemonics.setLocalizedText(contentLabel, OStrings.getString("GUI_SPELLCHECKER_AVAILABLE_LABEL")); // NOI18N
@@ -268,8 +272,6 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         });
 
         org.openide.awt.Mnemonics.setLocalizedText(dictionaryUrlLabel, OStrings.getString("GUI_SPELLCHECKER_URL_LABEL")); // NOI18N
-
-        dictionaryUrlTextField.setText("jTextField1");
 
         org.openide.awt.Mnemonics.setLocalizedText(installButton, OStrings.getString("GUI_SPELLCHECKER_INSTALLBUTTON")); // NOI18N
         installButton.addActionListener(new java.awt.event.ActionListener() {
@@ -292,6 +294,9 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
             .add(detailPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
+                    .add(detailPanelLayout.createSequentialGroup()
+                        .add(dictionaryUrlTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 514, Short.MAX_VALUE)
+                        .addContainerGap())
                     .add(dictionaryUrlLabel)
                     .add(detailPanelLayout.createSequentialGroup()
                         .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -299,17 +304,17 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                             .add(directoryLabel)
                             .add(detailPanelLayout.createSequentialGroup()
                                 .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                                    .add(languageScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
-                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, directoryTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE))
+                                    .add(languageScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE)
+                                    .add(org.jdesktop.layout.GroupLayout.TRAILING, directoryTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 415, Short.MAX_VALUE))
                                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING, false)
-                                    .add(directoryChooserButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(installButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .add(uninstallButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
+                                    .add(uninstallButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .add(directoryChooserButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addContainerGap())
                     .add(detailPanelLayout.createSequentialGroup()
-                        .add(dictionaryUrlTextField, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .add(installButton, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .add(377, 377, 377))))
         );
         detailPanelLayout.setVerticalGroup(
             detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
@@ -325,15 +330,14 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(detailPanelLayout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
                     .add(detailPanelLayout.createSequentialGroup()
-                        .add(installButton)
+                        .add(languageScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                         .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(uninstallButton))
-                    .add(languageScrollPane, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(dictionaryUrlLabel)
+                        .add(dictionaryUrlLabel))
+                    .add(uninstallButton))
                 .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
                 .add(dictionaryUrlTextField, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .add(9, 9, 9)
+                .add(installButton))
         );
 
         org.jdesktop.layout.GroupLayout layout = new org.jdesktop.layout.GroupLayout(getContentPane());
@@ -362,6 +366,19 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void languageListMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_languageListMouseClicked
+        setUninstalButtonStatus();
+    }//GEN-LAST:event_languageListMouseClicked
+
+    /**
+     * Sets the enabled/disabled status of the Uninstall (Remove) button
+     * To be enabled, at list one dictionary must be selected, and the Spell checking box must be selected
+     */
+    private void setUninstalButtonStatus() {
+        Object[] selection = languageList.getSelectedValues();
+        uninstallButton.setEnabled(selection.length > 0 && autoSpellcheckCheckBox.isSelected());
+    }
 
     private void directoryTextFieldActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_directoryTextFieldActionPerformed
         updateLanguageList();
@@ -404,6 +421,7 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
         	setCursor(oldCursor);
             JOptionPane.showMessageDialog(this, ex.getLocalizedMessage(), OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
         }
+        setUninstalButtonStatus();
     }// GEN-LAST:event_installButtonActionPerformed
 
     private void uninstallButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_uninstallButtonActionPerformed
@@ -432,8 +450,8 @@ public class SpellcheckerConfigurationDialog extends javax.swing.JDialog {
                             JOptionPane.ERROR_MESSAGE);
 
                 languageListModel.remove(languageList.getSelectedIndex());
-                uninstallButton.setEnabled(languageListModel.size() > 0);
             }
+            setUninstalButtonStatus();
         }
     }// GEN-LAST:event_uninstallButtonActionPerformed
 

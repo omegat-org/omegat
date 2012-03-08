@@ -57,7 +57,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace pref="346" max="32767" attributes="0"/>
+                  <EmptySpace pref="420" max="32767" attributes="0"/>
                   <Component id="okButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cancelButton" min="-2" max="-2" attributes="0"/>
@@ -126,9 +126,13 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="dictionaryUrlTextField" pref="514" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                      </Group>
                       <Component id="dictionaryUrlLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -136,22 +140,22 @@
                               <Component id="directoryLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="languageScrollPane" pref="349" max="32767" attributes="2"/>
-                                      <Component id="directoryTextField" alignment="1" pref="349" max="32767" attributes="2"/>
+                                      <Component id="languageScrollPane" pref="415" max="32767" attributes="2"/>
+                                      <Component id="directoryTextField" alignment="1" pref="415" max="32767" attributes="2"/>
                                   </Group>
                                   <EmptySpace min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="directoryChooserButton" max="32767" attributes="1"/>
-                                      <Component id="installButton" alignment="1" max="32767" attributes="1"/>
-                                      <Component id="uninstallButton" alignment="1" max="32767" attributes="1"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="uninstallButton" max="32767" attributes="1"/>
+                                      <Component id="directoryChooserButton" alignment="0" max="32767" attributes="1"/>
                                   </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="dictionaryUrlTextField" pref="440" max="32767" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="installButton" max="32767" attributes="1"/>
+                          <EmptySpace min="-2" pref="377" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -172,17 +176,16 @@
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="installButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="languageScrollPane" pref="123" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="uninstallButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="dictionaryUrlLabel" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="languageScrollPane" pref="123" max="32767" attributes="0"/>
+                      <Component id="uninstallButton" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="dictionaryUrlLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="dictionaryUrlTextField" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
+                  <Component id="installButton" min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -206,6 +209,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="languageListMouseClicked"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
@@ -241,9 +247,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="dictionaryUrlTextField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jTextField1"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="installButton">
           <Properties>

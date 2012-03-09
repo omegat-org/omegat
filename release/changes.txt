@@ -15,6 +15,9 @@
   - Use search term as window title in Search window
   http://sourceforge.net/support/tracker.php?aid=2610094
 
+  - Clarification of the Options > Spell Checking... dialog
+  http://sourceforge.net/support/tracker.php?aid=3473630
+
   Other enhancements:
 
   - Add explanatory messages to windows as hints when a project is not open
@@ -25,8 +28,6 @@ and Mark Untranslated.
 
   - Display of the corresponding colours in the View menu for "Mark" 
 menu entries
-
-  - Clarification of the Options > Spell Checking... dialog
 
   Bug fixes:
 

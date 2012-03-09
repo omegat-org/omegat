@@ -160,7 +160,8 @@ public class OpenXMLFilter extends AbstractFilter {
     }
 
     /**
-     * Receives a filename with a path Returns a string without the path
+     * @param fileName A filename with a path
+     * @return A string without the path
      */
     private String removePath(String fileName) {
         if (fileName.lastIndexOf('/') >= 0) {
@@ -172,7 +173,8 @@ public class OpenXMLFilter extends AbstractFilter {
     }
 
     /**
-     * Receives a filename Removes an .xml extension if found
+     * @param fileName A filename
+     * @return The filename without an .xml extension if found in it
      */
     private String removeXML(String fileName) {
         if (fileName.endsWith(".xml"))

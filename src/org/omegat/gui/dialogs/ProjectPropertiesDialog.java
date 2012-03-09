@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008-2009 Alex Buloichik
+               2011 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -80,6 +81,7 @@ import org.openide.awt.Mnemonics;
  * @author Maxym Mykhalchuk
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
  */
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {

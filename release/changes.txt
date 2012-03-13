@@ -18,7 +18,7 @@
   - Clarification of the Options > Spell Checking... dialog
   http://sourceforge.net/support/tracker.php?aid=3473630
 
-  - Selectable location for the writeable glossary fileg
+  - Selectable location for the writeable glossary file
   http://sourceforge.net/support/tracker.php?aid=3503373
 
   Other enhancements:

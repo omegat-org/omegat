@@ -277,6 +277,9 @@ public class ProjectProperties {
             throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_GLOSSARY_FOLDER"), glsDir));
         }
         String wGlsDir = getWriteableGlossaryDir();
+        if (!wGlsDir.endsWith(File.separator)) {
+            wGlsDir += File.separator;
+        }
         if (!wGlsDir.contains(getGlossaryRoot())) {
             throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_W_GLOSSARY"), glsDir));
         }

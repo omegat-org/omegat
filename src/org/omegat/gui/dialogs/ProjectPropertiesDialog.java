@@ -444,6 +444,9 @@ public class ProjectPropertiesDialog extends JDialog {
 
             f = new File(m_writeableGlosField.getText());
             String wGlos = f.getParent(); // Remove the file name
+            if (!wGlos.endsWith(File.separator)) {
+                wGlos += File.separator;
+            }
             f = new File(wGlos);
             // The writeable glossary must be in in the /glossary folder
             if (!f.exists() || !f.isDirectory() || !wGlos.contains(m_glosRootField.getText()))

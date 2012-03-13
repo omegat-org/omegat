@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008-2009 Alex Buloichik
                2011 Martin Fleurke
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -62,6 +63,7 @@ import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.openide.awt.Mnemonics;
@@ -82,6 +84,7 @@ import org.openide.awt.Mnemonics;
  * @author Henry Pijffers (henry.pijffers@saxnot.com)
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ * @author Didier Briel
  */
 @SuppressWarnings("serial")
 public class ProjectPropertiesDialog extends JDialog {
@@ -266,6 +269,19 @@ public class ProjectPropertiesDialog extends JDialog {
         dirsBox.add(bGlos);
         dirsBox.add(m_glosRootField);
 
+        JLabel m_writeableGlosLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_writeableGlosLabel, OStrings.getString("PP_WRITEABLE_GLOS"));
+        Box bwGlos = Box.createHorizontalBox();
+        bwGlos.setBorder(emptyBorder);
+        bwGlos.add(m_writeableGlosLabel);
+        bwGlos.add(Box.createHorizontalGlue());
+        JButton m_wGlosBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_wGlosBrowse, OStrings.getString("PP_BUTTON_BROWSE_WG"));
+        bwGlos.add(m_wGlosBrowse);
+        final JTextField m_writeableGlosField = new JTextField();
+        dirsBox.add(bwGlos);
+        dirsBox.add(m_writeableGlosField);
+
         JLabel m_locDictLabel = new JLabel();
         Mnemonics.setLocalizedText(m_locDictLabel, OStrings.getString("PP_DICT_ROOT"));
         Box bDict = Box.createHorizontalBox();
@@ -314,7 +330,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doOK(m_sourceLocaleField, m_targetLocaleField, m_sentenceSegmentingCheckBox, m_srcRootField,
-                        m_locRootField, m_glosRootField, m_tmRootField, m_dictRootField,
+                        m_locRootField, m_glosRootField, m_writeableGlosField, m_tmRootField, m_dictRootField,
                         m_allowDefaultsCheckBox);
             }
         });
@@ -340,6 +356,12 @@ public class ProjectPropertiesDialog extends JDialog {
         m_glosBrowse.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doBrowseDirectoy(3, m_glosRootField);
+            }
+        });
+
+        m_wGlosBrowse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                doBrowseDirectoy(6, m_writeableGlosField);
             }
         });
 
@@ -392,6 +414,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_srcRootField.setText(projectProperties.getSourceRoot());
         m_locRootField.setText(projectProperties.getTargetRoot());
         m_glosRootField.setText(projectProperties.getGlossaryRoot());
+        m_writeableGlosField.setText(projectProperties.getWriteableGlossary());
         m_tmRootField.setText(projectProperties.getTMRoot());
         m_dictRootField.setText(projectProperties.getDictRoot());
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
@@ -418,6 +441,13 @@ public class ProjectPropertiesDialog extends JDialog {
             f = new File(m_glosRootField.getText());
             if (!f.exists() || !f.isDirectory())
                 m_glosRootField.setForeground(Color.RED);
+
+            f = new File(m_writeableGlosField.getText());
+            String wGlos = f.getParent(); // Remove the file name
+            f = new File(wGlos);
+            // The writeable glossary must be in in the /glossary folder
+            if (!f.exists() || !f.isDirectory() || !wGlos.contains(m_glosRootField.getText()))
+                m_writeableGlosField.setForeground(Color.RED);  
 
             f = new File(m_tmRootField.getText());
             if (!f.exists() || !f.isDirectory())
@@ -446,6 +476,14 @@ public class ProjectPropertiesDialog extends JDialog {
      */
     private void doBrowseDirectoy(int browseTarget, JTextField field) {
         String title;
+        boolean fileMode = false;
+        boolean glossaryFile = false;
+
+        if (browseTarget == 6) {
+            fileMode = true;
+            glossaryFile = true;
+        }
+
         switch (browseTarget) {
         case 1:
             title = OStrings.getString("PP_BROWSE_TITLE_SOURCE");
@@ -467,7 +505,11 @@ public class ProjectPropertiesDialog extends JDialog {
             title = OStrings.getString("PP_BROWSE_TITLE_DICT");
             break;
 
-        default:
+        case 6:
+            title = OStrings.getString("PP_BROWSE_W_GLOS");
+            break;
+
+            default:
             return;
         }
 
@@ -475,11 +517,20 @@ public class ProjectPropertiesDialog extends JDialog {
         // String str = OStrings.getString("BUTTON_SELECT_NO_MNEMONIC");
         // browser.setApproveButtonText(str);
         browser.setDialogTitle(title);
-        browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
+        if (fileMode) {
+            browser.setFileSelectionMode(OmegaTFileChooser.FILES_ONLY);
+        } else {
+            browser.setFileSelectionMode(OmegaTFileChooser.DIRECTORIES_ONLY);
+        }
 
         // check if the current directory as specified by the field exists
         String curDir = (field != null) ? field.getText() : "";
         File curDirCheck = new File(curDir);
+        if (fileMode && !StringUtil.isEmpty(curDirCheck.getName())) {
+            String dirOnly = curDirCheck.getParent();
+            dirOnly = (dirOnly != null) ? dirOnly : "";
+            curDirCheck = new File(dirOnly);
+        }
 
         // if the dir doesn't exist, use project dir and check if that exists
         if (!curDirCheck.exists() || !curDirCheck.isDirectory()) {
@@ -510,7 +561,16 @@ public class ProjectPropertiesDialog extends JDialog {
                 curDir = Preferences.getPreference(Preferences.DICT_FOLDER);
                 break;
 
+            case 6:
+                curDir = Preferences.getPreference(Preferences.GLOSSARY_FILE);
+                break;
+
             }
+        }
+
+        if (fileMode) {
+            File dirFile = new File(curDir);
+            curDir = dirFile.getParent();
         }
 
         if (curDir.equals(""))
@@ -535,7 +595,15 @@ public class ProjectPropertiesDialog extends JDialog {
         if (dir == null)
             return;
 
-        String str = dir.getAbsolutePath() + File.separator;
+        String str = dir.getAbsolutePath();
+        if (!fileMode) {
+            str+= File.separator; // Add file separator for directories
+        }
+
+        if (glossaryFile && !str.endsWith(".txt")) {
+           str += ".txt"; // The writeable glossary file must end with .txt.
+        }
+
         // reset appropriate path - store preferred directory
         switch (browseTarget) {
         case 1:
@@ -583,14 +651,25 @@ public class ProjectPropertiesDialog extends JDialog {
                 field.setForeground(java.awt.SystemColor.textText);
             break;
 
+        case 6:
+            Preferences.setPreference(Preferences.GLOSSARY_FILE, browser.getSelectedFile().getPath());
+            projectProperties.setWriteableGlossary(str);
+            field.setText(projectProperties.getWriteableGlossary());
+            // The writable glosssary file must be inside the glossary dir
+            if (new File(projectProperties.getWriteableGlossaryDir()).exists()
+                    && new File(projectProperties.getWriteableGlossaryDir()).isDirectory()
+                    && projectProperties.getWriteableGlossaryDir().contains(projectProperties.getGlossaryRoot()))
+                field.setForeground(java.awt.SystemColor.textText);
+            break;
+
         }
     }
 
     private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
-            JTextField m_glosRootField, JTextField m_tmRootField, JTextField m_dictRootField,
+            JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
             JCheckBox m_allowDefaultsCheckBox) {
-   if (!ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
+        if (!ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
                     OStrings.getString("NP_INVALID_SOURCE_LOCALE")
@@ -644,6 +723,25 @@ public class ProjectPropertiesDialog extends JDialog {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_GLOSSDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             m_glosRootField.requestFocusInWindow();
+            return;
+        }
+
+        projectProperties.setWriteableGlossary(m_writeableGlosField.getText());
+        if (dialogType != NEW_PROJECT && !new File(projectProperties.getWriteableGlossaryDir()).exists()) {
+            JOptionPane.showMessageDialog(this, OStrings.getString("NP_W_GLOSSDIR_DOESNT_EXIST"),
+                    OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+            m_writeableGlosField.requestFocusInWindow();
+            return;
+        }
+
+        String glossaryDir = projectProperties.getWriteableGlossaryDir();
+        if (!glossaryDir.endsWith(File.separator)) {
+            glossaryDir += File.separator;
+        }
+        if (!glossaryDir.contains(projectProperties.getGlossaryRoot())) {
+            JOptionPane.showMessageDialog(this, OStrings.getString("NP_W_GLOSDIR_NOT_INSIDE_GLOS"),
+                    OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+            m_writeableGlosField.requestFocusInWindow();
             return;
         }
 

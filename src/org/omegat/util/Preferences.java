@@ -8,7 +8,7 @@
                2008-2009 Didier Briel
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
                2011 John Moran, Didier Briel
-               2012 Martin Fleurke, Wildrich Fourie
+               2012 Martin Fleurke, Wildrich Fourie, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -71,6 +71,7 @@ public class Preferences {
     public static final String TM_FOLDER = "tm_folder";
     public static final String DICT_FOLDER = "dict_folder";
     public static final String GLOSSARY_FOLDER = "glossary_folder";
+    public static final String GLOSSARY_FILE = "glossary_file";
 
     public static final String MAINWINDOW_WIDTH = "screen_width";
     public static final String MAINWINDOW_HEIGHT = "screen_height";

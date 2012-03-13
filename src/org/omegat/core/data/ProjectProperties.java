@@ -57,6 +57,8 @@ public class ProjectProperties {
         setSourceRoot(projectRoot + OConsts.DEFAULT_SOURCE + File.separator);
         setTargetRoot(projectRoot + OConsts.DEFAULT_TARGET + File.separator);
         setGlossaryRoot(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator);
+        setWriteableGlossary(projectRoot + OConsts.DEFAULT_GLOSSARY + File.separator +
+                projectDir.getName() + OConsts.DEFAULT_W_GLOSSARY);
         setTMRoot(projectRoot + OConsts.DEFAULT_TM + File.separator);
         setTMAutoRoot(tmRoot + OConsts.AUTO_TM + File.separator);
         setDictRoot(projectRoot + OConsts.DEFAULT_DICT + File.separator);
@@ -97,6 +99,23 @@ public class ProjectProperties {
     /** Sets The Glossary Files Directory */
     public void setGlossaryRoot(String glossaryRoot) {
         this.glossaryRoot = glossaryRoot;
+    }
+
+    /** Returns The Glossary File Location */
+    public String getWriteableGlossary() {
+        return writeableGlossaryFile;
+    }
+
+    /** Returns The Glossary File Directory */
+    public String getWriteableGlossaryDir() {
+        File fDir = new File(writeableGlossaryFile);
+        String sDir = fDir.getParent();
+        return sDir;
+    }
+
+    /** Sets The Writeable Glossary File Location */
+    public void setWriteableGlossary (String writeableGlossaryFile) {
+        this.writeableGlossaryFile = writeableGlossaryFile;
     }
 
     /** Returns The Translation Memory (TMX) Files Directory */
@@ -257,6 +276,11 @@ public class ProjectProperties {
         if (!gls.exists()) {
             throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_GLOSSARY_FOLDER"), glsDir));
         }
+        String wGlsDir = getWriteableGlossaryDir();
+        if (!wGlsDir.contains(getGlossaryRoot())) {
+            throw new ProjectException(StaticUtils.format(OStrings.getString("PROJECT_W_GLOSSARY"), glsDir));
+        }
+
         //
         String tmxDir = getTMRoot();
         File tmx = new File(tmxDir);
@@ -320,6 +344,7 @@ public class ProjectProperties {
     private String sourceRoot;
     private String targetRoot;
     private String glossaryRoot;
+    private String writeableGlossaryFile;
     private String tmRoot;
     private String tmAutoRoot;
     private String dictRoot;

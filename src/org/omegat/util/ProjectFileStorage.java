@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Didier Briel, Alex Buloichik
                2009 Didier Briel
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -80,6 +81,29 @@ public class ProjectFileStorage {
         result.setTMRoot(computeAbsolutePath(m_root, om.getProject().getTmDir(), OConsts.DEFAULT_TM));
         result.setGlossaryRoot(computeAbsolutePath(m_root, om.getProject().getGlossaryDir(),
                 OConsts.DEFAULT_GLOSSARY));
+        
+        // Compute glossary file location
+        String glossaryFile = om.getProject().getGlossaryFile();
+        String glossaryDir = null;
+        if (glossaryFile != null) {
+            glossaryDir = new File(glossaryFile).getParent();
+        }
+        if (glossaryDir == null) {
+            glossaryDir = ".";
+        }
+        glossaryDir = computeAbsolutePath(m_root, glossaryDir, OConsts.DEFAULT_GLOSSARY);
+        glossaryFile = om.getProject().getGlossaryFile();
+        if (glossaryFile == null) {
+            glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
+        }
+        if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) {
+            glossaryFile = m_root + OConsts.DEFAULT_GLOSSARY + File.separator +    
+                    result.getProjectName() + OConsts.DEFAULT_W_GLOSSARY;
+        } else {
+            glossaryFile = glossaryDir + new File(glossaryFile).getName();
+        }
+        result.setWriteableGlossary(glossaryFile);
+
         result.setDictRoot(computeAbsolutePath(m_root, om.getProject().getDictionaryDir(),
                 OConsts.DEFAULT_DICT));
 
@@ -114,6 +138,22 @@ public class ProjectFileStorage {
         om.getProject().setTmDir(computeRelativePath(m_root, props.getTMRoot(), OConsts.DEFAULT_TM));
         om.getProject().setGlossaryDir(
                 computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY));
+
+        // Compute glossary file location
+        String glossaryFile = computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
+        if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) { // Standard path for glossary
+            if (!props.getWriteableGlossary().equalsIgnoreCase(props.getGlossaryRoot() +
+                    props.getProjectName() + OConsts.DEFAULT_W_GLOSSARY)) {
+                glossaryFile = new File(props.getWriteableGlossary()).getParent();
+                glossaryFile = computeRelativePath(m_root, glossaryFile, OConsts.DEFAULT_GLOSSARY);
+                if (!StringUtil.isEmpty(glossaryFile)) {
+                    glossaryFile += "/"; // Separator is always "/" internally
+                }
+                glossaryFile += props.getProjectName() + OConsts.DEFAULT_W_GLOSSARY;
+            }
+        }
+        om.getProject().setGlossaryFile(glossaryFile);
+
         om.getProject().setDictionaryDir(
                 computeRelativePath(m_root, props.getDictRoot(), OConsts.DEFAULT_DICT));
         om.getProject().setSourceLang(props.getSourceLanguage().toString());

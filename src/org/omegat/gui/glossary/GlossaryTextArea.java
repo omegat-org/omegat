@@ -219,7 +219,7 @@ public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {
         }
 
         ProjectProperties props = Core.getProject().getProjectProperties();
-        final File out = new File(props.getGlossaryRoot(), props.getProjectName() + "-glossary.txt");
+        final File out = new File(props.getWriteableGlossary());
 
         final CreateGlossaryEntry dialog = new CreateGlossaryEntry(Core.getMainWindow().getApplicationFrame());
         String txt = dialog.getGlossaryFileText().getText();

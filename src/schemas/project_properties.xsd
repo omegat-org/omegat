@@ -18,6 +18,7 @@
 				<xs:element name="target_dir" type="xs:string"/>
 				<xs:element name="tm_dir" type="xs:string"/>
 				<xs:element name="glossary_dir" type="xs:string"/>
+				<xs:element name="glossary_file" type="xs:string"/>
 				<xs:element name="dictionary_dir" type="xs:string"/>
 				<xs:element name="source_lang" type="xs:string"/>
 				<xs:element name="target_lang" type="xs:string"/>

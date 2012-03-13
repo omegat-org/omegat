@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.2
 ----------------------------------------------------------------------
-   6 Enhancements
+   7 Enhancements
    1 Bug fix
    4 Localisation updates
 ----------------------------------------------------------------------
@@ -17,6 +17,9 @@
 
   - Clarification of the Options > Spell Checking... dialog
   http://sourceforge.net/support/tracker.php?aid=3473630
+
+  - Selectable location for the writeable glossary fileg
+  http://sourceforge.net/support/tracker.php?aid=3503373
 
   Other enhancements:
 

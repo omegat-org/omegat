@@ -71,6 +71,8 @@ public class OConsts {
     public static final String DEFAULT_TARGET = "target";
     /** Project subfolder for glossaries default name. */
     public static final String DEFAULT_GLOSSARY = "glossary";
+    /** Default name for the project writeable glossary file */
+    public static final String DEFAULT_W_GLOSSARY = "-glossary.txt";
     /** Project subfolder for legacy translation memories default name. */
     public static final String DEFAULT_TM = "tm";
     /** Project subfolder for automatically applied translation memories within the tm folder. */

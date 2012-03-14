@@ -739,7 +739,7 @@ public class StaticUtils {
     }
 
     /**
-     * dowload a file to the disk
+     * Download a file to the disk
      */
     public static void downloadFileToDisk(String address, String filename) throws MalformedURLException {
         URLConnection urlConn = null;

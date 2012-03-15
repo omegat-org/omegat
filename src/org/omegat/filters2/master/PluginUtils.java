@@ -66,6 +66,7 @@ public final class PluginUtils {
      */
     public static void loadPlugins(final Map<String, String> params) {
         File pluginsDir = new File(StaticUtils.installDir(), "plugins");
+        File homePluginsDir = new File(StaticUtils.getConfigDir(), "plugins");
         try {
             URLClassLoader cls;
             // list all jars in /plugins/
@@ -74,6 +75,12 @@ public final class PluginUtils {
                     return pathname.getName().endsWith(".jar");
                 }
             });
+            List<File> fsHome = FileUtil.findFiles(homePluginsDir, new FileFilter() {
+                public boolean accept(File pathname) {
+                    return pathname.getName().endsWith(".jar");
+                }
+            });
+            fs.addAll(fsHome);
             URL[] urls = new URL[fs.size()];
             for (int i = 0; i < urls.length; i++) {
                 urls[i] = fs.get(i).toURI().toURL();

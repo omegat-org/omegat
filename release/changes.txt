@@ -26,7 +26,7 @@
 
   Other enhancements:
 
-  - Add explanatory messages to windows as hints when a project is not open
+  - Add explanatory messages to windows as hints when no project is open
 
   - Segments containing a note can be marked with View > 
 Mark Segments with Notes. This marking has priority over Mark Translated

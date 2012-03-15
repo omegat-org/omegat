@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.2
 ----------------------------------------------------------------------
-   7 Enhancements
+   8 Enhancements
    1 Bug fix
    5 Localisation updates
 ----------------------------------------------------------------------
@@ -20,6 +20,9 @@
 
   - Selectable location for the writeable glossary file
   http://sourceforge.net/support/tracker.php?aid=3503373
+
+  - Second plugin location in <home>/plugins
+  http://sourceforge.net/support/tracker.php?aid=3428485
 
   Other enhancements:
 

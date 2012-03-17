@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik
                2008 - 2011 Didier Briel
+               2012 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -54,6 +55,7 @@ import java.util.regex.Pattern;
  * @author Didier Briel
  * @author Zoltan Bartko - bartkozoltan@bartkozoltan.com
  * @author Alex Buloichik
+ * @author Martin Fleurke
  */
 public class StaticUtils {
     /**

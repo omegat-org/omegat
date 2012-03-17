@@ -2,7 +2,7 @@
  OmegaT 2.5.2
 ----------------------------------------------------------------------
    8 Enhancements
-   1 Bug fix
+   2 Bug fixes
    5 Localisation updates
 ----------------------------------------------------------------------
 2.5.2 vs. 2.5.1 update 1
@@ -39,6 +39,8 @@ menu entries
 
   - In the PO filter, "path" was always displayed in the Comment pane, 
 even if it was empty
+
+  - When using Insert Source Tags, a space was added before the first one
 
   Localisation updates:
 

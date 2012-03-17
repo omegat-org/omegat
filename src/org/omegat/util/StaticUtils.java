@@ -118,7 +118,7 @@ public class StaticUtils {
         int last=0;
         while (placeholderMatcher.find()) {
             int rs = placeholderMatcher.start();
-            if (rs != last) {
+            if (rs != last && last !=0) { // We don't insert a space before the first tag
                 res += " ";
             }
             res += placeholderMatcher.group(0);

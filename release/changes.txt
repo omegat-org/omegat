@@ -1,4 +1,20 @@
 ----------------------------------------------------------------------
+ OmegaT 2.5.2 update 1
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.2 update 1 vs. 2.5.1
+
+  Bug fixes:
+
+  - When the glossary folder wasn't in the default location, the 
+default writeable glossary file wasn't computed correctly. In addition,
+the name of the glossary file was lost on saving when a manual correction
+was done in project properties.
+
+----------------------------------------------------------------------
  OmegaT 2.5.2
 ----------------------------------------------------------------------
    8 Enhancements

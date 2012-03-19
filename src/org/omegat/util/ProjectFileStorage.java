@@ -87,6 +87,8 @@ public class ProjectFileStorage {
         String glossaryDir = null;
         if (glossaryFile != null) {
             glossaryDir = new File(glossaryFile).getParent();
+        } else {
+            glossaryDir = result.getGlossaryRoot();
         }
         if (glossaryDir == null) {
             glossaryDir = ".";
@@ -97,8 +99,11 @@ public class ProjectFileStorage {
             glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
         }
         if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) {
-            glossaryFile = m_root + OConsts.DEFAULT_GLOSSARY + File.separator +    
-                    result.getProjectName() + OConsts.DEFAULT_W_GLOSSARY;
+            glossaryDir = result.getGlossaryRoot();
+            if (!glossaryDir.endsWith(File.separator)) {
+                glossaryDir += File.separator;
+            }
+            glossaryFile = glossaryDir + result.getProjectName() + OConsts.DEFAULT_W_GLOSSARY;
         } else {
             glossaryFile = glossaryDir + new File(glossaryFile).getName();
         }
@@ -140,17 +145,25 @@ public class ProjectFileStorage {
                 computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY));
 
         // Compute glossary file location
-        String glossaryFile = computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
-        if (glossaryFile.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) { // Standard path for glossary
+        String glossaryFile = new File(props.getWriteableGlossary()).getName(); // File name
+        String glossaryDir = computeRelativePath(m_root, props.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
+        if (glossaryDir.equalsIgnoreCase(OConsts.DEFAULT_FOLDER_MARKER)) { // Standard path for glossary
             if (!props.getWriteableGlossary().equalsIgnoreCase(props.getGlossaryRoot() +
                     props.getProjectName() + OConsts.DEFAULT_W_GLOSSARY)) {
-                glossaryFile = new File(props.getWriteableGlossary()).getParent();
-                glossaryFile = computeRelativePath(m_root, glossaryFile, OConsts.DEFAULT_GLOSSARY);
-                if (!StringUtil.isEmpty(glossaryFile)) {
-                    glossaryFile += "/"; // Separator is always "/" internally
+                glossaryDir = props.getWriteableGlossaryDir();
+                glossaryDir = computeRelativePath(m_root, glossaryDir, OConsts.DEFAULT_GLOSSARY);
+                if (!StringUtil.isEmpty(glossaryDir)) {
+                    glossaryDir += "/"; // Separator is always "/" internally
                 }
-                glossaryFile += props.getProjectName() + OConsts.DEFAULT_W_GLOSSARY;
+                glossaryFile = glossaryDir + glossaryFile;
+            } else { // Everything equals to default
+                glossaryFile = OConsts.DEFAULT_FOLDER_MARKER;
             }
+        } else {
+            if (!glossaryDir.endsWith(File.separator)) {
+                glossaryDir += "/"; // Separator is always "/" internally
+            }
+            glossaryFile = glossaryDir + glossaryFile;
         }
         om.getProject().setGlossaryFile(glossaryFile);
 

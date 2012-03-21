@@ -37,6 +37,7 @@ import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 
 /**
  * Class that loads glossary files and adds glossary entries to strings of the source files.
@@ -48,11 +49,6 @@ import org.omegat.util.Log;
  * @author Alex Buloichik <alex73mail@gmail.com>
  */
 public class GlossaryManager implements DirectoryMonitor.Callback {
-    protected static final String EXT_TSV_DEF = ".tab";
-    protected static final String EXT_TSV_UTF8 = ".utf8";
-    protected static final String EXT_TSV_TXT = ".txt";
-    protected static final String EXT_CSV_UTF8 = ".csv";
-    protected static final String EXT_TBX = ".tbx";
 
     protected DirectoryMonitor monitor;
 
@@ -113,16 +109,16 @@ public class GlossaryManager implements DirectoryMonitor.Callback {
      */
     private List<GlossaryEntry> loadGlossaryFile(final File file) throws Exception {
         String fname_lower = file.getName().toLowerCase();
-        if (fname_lower.endsWith(EXT_TSV_DEF)) {
+        if (fname_lower.endsWith(OConsts.EXT_TSV_DEF)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
             return GlossaryReaderTSV.read(file);
-        } else if (fname_lower.endsWith(EXT_TSV_UTF8) || fname_lower.endsWith(EXT_TSV_TXT)) {
+        } else if (fname_lower.endsWith(OConsts.EXT_TSV_UTF8) || fname_lower.endsWith(OConsts.EXT_TSV_TXT)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
             return GlossaryReaderTSV.read(file);
-        } else if (fname_lower.endsWith(EXT_CSV_UTF8)) {
+        } else if (fname_lower.endsWith(OConsts.EXT_CSV_UTF8)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
             return GlossaryReaderCSV.read(file);
-        } else if (fname_lower.endsWith(EXT_TBX)) {
+        } else if (fname_lower.endsWith(OConsts.EXT_TBX)) {
             Log.logRB("CT_LOADING_GLOSSARY", new Object[] { file.getName() });
             return GlossaryReaderTBX.read(file);
         } else {

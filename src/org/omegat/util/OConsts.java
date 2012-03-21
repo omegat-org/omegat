@@ -83,6 +83,15 @@ public class OConsts {
     public static final String DEFAULT_INTERNAL = "omegat";
 
     /**
+     * Glossary files extensions
+     */
+    public static final String EXT_TSV_DEF = ".tab";
+    public static final String EXT_TSV_UTF8 = ".utf8";
+    public static final String EXT_TSV_TXT = ".txt";
+    public static final String EXT_CSV_UTF8 = ".csv";
+    public static final String EXT_TBX = ".tbx";
+
+    /**
      * A marker that tells OmegaT that project's subfolder has default location.
      */
     public static final String DEFAULT_FOLDER_MARKER = "__DEFAULT__";

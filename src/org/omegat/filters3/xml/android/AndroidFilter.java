@@ -40,7 +40,7 @@ import org.xml.sax.Attributes;
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class AndroidFilter extends XMLFilter {
-    static final String DO_NOT_TRANSLATE = "Do not translate.";
+    static final String DO_NOT_TRANSLATE = "Do not translate";
 
     static Set<String> NAMED_TAGS = new HashSet<String>(Arrays.asList(new String[] { "/resources/string",
             "/resources/color", "/resources/array", "/resources/string-array", "/resources/integer-array" }));

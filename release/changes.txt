@@ -2,13 +2,20 @@
  OmegaT 2.5.2 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   0 Bug fix
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
-2.5.2 update 1 vs. 2.5.2
+2.5.2 update 2 vs. 2.5.2
 
   - The writeable glossary file can now have a .utf8 extension instead
 of a .txt one, .txt being still the default
+
+  Bug fixes:
+
+  - When using Remove Tags, some non-OmegaT tags (e.g., %s, depending on the 
+kind of tags checked in Options > Tag Validation) and some 
+non-useful spaces could be copied at the end of the segment in the target
+document
 
 ----------------------------------------------------------------------
  OmegaT 2.5.2 update 1

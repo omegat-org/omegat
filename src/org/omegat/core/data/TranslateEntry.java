@@ -98,7 +98,7 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // has been enabled.
         String tags = null;
         if(Preferences.getPreference(Preferences.REMOVE_TAGS).equalsIgnoreCase("true"))
-            tags = StaticUtils.buildPaintPlaceholderList(origSource);
+            tags = StaticUtils.buildTagList(origSource);
         
         final String source = ParseEntry.stripSomeChars(origSource, spr);
         

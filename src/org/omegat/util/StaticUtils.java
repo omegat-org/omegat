@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Didier Briel, Zoltan Bartko, Alex Buloichik
                2008 - 2011 Didier Briel
-               2012 Martin Fleurke
+               2012 Martin Fleurke, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -100,6 +100,21 @@ public class StaticUtils {
         while (placeholderMatcher.find()) {
             tagList.add(placeholderMatcher.group(0));
         }
+    }
+
+    /**
+     * Builds a list of format tags within the supplied string. Format tags are
+     * OmegaT style tags: &lt;xx02&gt; or &lt;/yy01&gt;.
+     * @return a string containing the tags
+     */
+    public static String buildTagList(String str) {
+        String res = "";
+        Pattern placeholderPattern = PatternConsts.OMEGAT_TAG;
+        Matcher placeholderMatcher = placeholderPattern.matcher(str);
+        while (placeholderMatcher.find()) {
+            res += placeholderMatcher.group(0);
+        }
+        return res;
     }
 
     /**

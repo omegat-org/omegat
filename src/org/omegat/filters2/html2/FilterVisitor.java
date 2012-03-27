@@ -117,6 +117,7 @@ public class FilterVisitor extends NodeVisitor {
      * 
      * @return <code>true</code> if a node itself is to be visited.
      */
+    @Override
     public boolean shouldRecurseSelf() {
         return recurse;
     }
@@ -126,6 +127,7 @@ public class FilterVisitor extends NodeVisitor {
      * 
      * @return <code>true</code> if children are to be visited.
      */
+    @Override
     public boolean shouldRecurseChildren() {
         return recurse;
     }
@@ -136,6 +138,7 @@ public class FilterVisitor extends NodeVisitor {
      * @param tag
      *            The tag being visited.
      */
+    @Override
     public void visitTag(Tag tag) {
 
         if (isIntactTag(tag)) {
@@ -225,6 +228,7 @@ public class FilterVisitor extends NodeVisitor {
      * @param string
      *            The string node being visited.
      */
+    @Override
     public void visitStringNode(Text string) {
         recurse = true;
         String trimmedtext = string.getText().trim();
@@ -253,6 +257,7 @@ public class FilterVisitor extends NodeVisitor {
      * @param remark
      *            The remark node being visited.
      */
+    @Override
     public void visitRemarkNode(Remark remark) {
         recurse = true;
         if (text)
@@ -266,6 +271,7 @@ public class FilterVisitor extends NodeVisitor {
      * @param tag
      *            The end tag being visited.
      */
+    @Override
     public void visitEndTag(Tag tag) {
         recurse = true;
         if (isParagraphTag(tag) && text)
@@ -279,6 +285,7 @@ public class FilterVisitor extends NodeVisitor {
     /**
      * This method is called before the parsing.
      */
+    @Override
     public void beginParsing() {
         cleanup();
     }
@@ -286,6 +293,7 @@ public class FilterVisitor extends NodeVisitor {
     /**
      * Called upon parsing completion.
      */
+    @Override
     public void finishedParsing() {
         if (text)
             endup();

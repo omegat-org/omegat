@@ -53,6 +53,7 @@ public class XHTMLFilter extends XMLFilter {
         do_not_send_to_core = false;
     }
 
+    @Override
     protected boolean requirePrevNextFields() {
         return true;
     }
@@ -84,6 +85,7 @@ public class XHTMLFilter extends XMLFilter {
      * 
      * @return <code>false</code>
      */
+    @Override
     public boolean isSourceEncodingVariable() {
         return false;
     }
@@ -93,6 +95,7 @@ public class XHTMLFilter extends XMLFilter {
      * 
      * @return <code>true</code>
      */
+    @Override
     public boolean isTargetEncodingVariable() {
         return true;
     }
@@ -104,6 +107,7 @@ public class XHTMLFilter extends XMLFilter {
     private boolean do_not_send_to_core;
 
     /** Checking whether it is a valid XHTML file. */
+    @Override
     public boolean isFileSupported(File inFile, Map<String, String> config, FilterContext context) {
         boolean result = super.isFileSupported(inFile, config, context);
         if (result) {
@@ -128,6 +132,7 @@ public class XHTMLFilter extends XMLFilter {
      * Overrides superimplementation not to send translatable content on XHTML validity check, and don't
      * translate items that match regular expression.
      */
+    @Override
     public String translate(String entry) {
         if (do_not_send_to_core)
             return entry;
@@ -147,6 +152,7 @@ public class XHTMLFilter extends XMLFilter {
      * 
      * @return True, because the XHTML filter has options.
      */
+    @Override
     public boolean hasOptions() {
         return true;
     }
@@ -158,6 +164,7 @@ public class XHTMLFilter extends XMLFilter {
      *            Current options to edit.
      * @return Updated filter options if user confirmed the changes, and current options otherwise.
      */
+    @Override
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> currentOptions) {
         try {
             EditXOptionsDialog dialog = new EditXOptionsDialog(parent, currentOptions);

@@ -74,6 +74,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
      * Resolves external entites if child filter needs it. Default
      * implementation returns <code>null</code>.
      */
+    @Override
     public InputSource resolveEntity(String publicId, String systemId) {
         if (publicId != null && PUBLIC_XHTML.matcher(publicId).matches() && systemId.endsWith(".dtd")) {
             URL dtdresource = XHTMLDialect.class.getResource(DTD);
@@ -143,6 +144,7 @@ public class XHTMLDialect extends DefaultXMLDialect {
      * the XHTML filter to not translate the value attribute of an
      * input-element, except when it is a button or submit or reset.
      */
+    @Override
     public Boolean validateTranslatableTagAttribute(String tag, String attribute, Attributes atts) {
         // special case:
         if ("INPUT".equalsIgnoreCase(tag) && attribute.equalsIgnoreCase("value")) {

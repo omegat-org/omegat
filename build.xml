@@ -337,6 +337,19 @@
 		</taskdef>
 
 		<xjc schema="src/schemas/srx20.xsd" destdir="src" package="gen.core.segmentation" />
+		<xjc schema="src/schemas/filters.xsd" destdir="src" package="gen.core.filters" />	
+		<xjc schema="src/schemas/tbx.xsd" destdir="src" package="gen.core.tbx" />	
+		<xjc schema="src/schemas/project_properties.xsd" destdir="src" package="gen.core.project" />	
+		<!--
+		<xjc schema="src/schemas/tmx11.dtd" destdir="src" package="gen.core.tmx11"> 	
+      <arg value="-dtd" />
+    </xjc>
+    -->
+    <!--
+    do not forget to change xml:lang:
+    @XmlAttribute(name = "lang", namespace="http://www.w3.org/XML/1998/namespace", required = true)
+		-->
+		<xjc schema="src/schemas/tmx14.xsd" binding="src/schemas/tmx14.xjb" destdir="src" package="gen.core.tmx14" /> 	
 	</target>
 
 	<target name="docindexgen" depends="jar">

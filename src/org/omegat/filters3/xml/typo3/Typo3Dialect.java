@@ -66,6 +66,7 @@ public class Typo3Dialect extends DefaultXMLDialect {
      * @return <code>true</code> if the content of this tag should be
      *         translated, <code>false</code> otherwise
      */
+    @Override
     public Boolean validateTranslatableTag(String tag, Attributes atts) {
         if (atts != null) {
             for (int i = 0; i < atts.size(); i++) {

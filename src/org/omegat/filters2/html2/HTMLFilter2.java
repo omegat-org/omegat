@@ -77,6 +77,7 @@ public class HTMLFilter2 extends AbstractFilter {
      */
     private HashMap<String, String> skipMetaAttributes;
 
+    @Override
     protected boolean requirePrevNextFields() {
         return true;
     }
@@ -86,6 +87,7 @@ public class HTMLFilter2 extends AbstractFilter {
      * 
      * @see HTMLReader
      */
+    @Override
     public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException,
             IOException {
         HTMLReader hreader = new HTMLReader(infile.getAbsolutePath(), encoding);
@@ -99,6 +101,7 @@ public class HTMLFilter2 extends AbstractFilter {
      * 
      * @see HTMLWriter
      */
+    @Override
     public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
             IOException {
         HTMLWriter hwriter;
@@ -204,6 +207,7 @@ public class HTMLFilter2 extends AbstractFilter {
      * declaration, it will be used disregarding any value you set in this
      * dialog.
      */
+    @Override
     public String getHint() {
         return OStrings.getString("HTML_NOTE");
     }
@@ -213,6 +217,7 @@ public class HTMLFilter2 extends AbstractFilter {
      * 
      * @return True, because (X)HTML filter has options.
      */
+    @Override
     public boolean hasOptions() {
         return true;
     }
@@ -225,6 +230,7 @@ public class HTMLFilter2 extends AbstractFilter {
      * @return Updated filter options if user confirmed the changes, and current
      *         options otherwise.
      */
+    @Override
     public Map<String, String> changeOptions(Dialog parent, Map<String, String> config) {
         try {
             EditOptionsDialog dialog = new EditOptionsDialog(parent, config);

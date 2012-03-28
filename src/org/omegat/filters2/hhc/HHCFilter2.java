@@ -45,10 +45,12 @@ import org.omegat.util.OStrings;
  */
 public class HHCFilter2 extends HTMLFilter2 {
     
+    @Override
     protected boolean requirePrevNextFields() {
         return true;
     }
 
+    @Override
     public void processFile(BufferedReader infile, BufferedWriter outfile) throws IOException,
             TranslationException {
         StringBuffer all = null;
@@ -76,10 +78,12 @@ public class HHCFilter2 extends HTMLFilter2 {
 
     // ////////////////////////////////////////////////////////////////////////
 
+    @Override
     public String getFileFormatName() {
         return OStrings.getString("HHC__FILTER_NAME");
     }
 
+    @Override
     public Instance[] getDefaultInstances() {
         return new Instance[] { new Instance("*.hhc"), new Instance("*.hhk") };
     }
@@ -93,6 +97,7 @@ public class HHCFilter2 extends HTMLFilter2 {
      * encoding declaration, it will be used disregarding any value you set in
      * this dialog.
      */
+    @Override
     public String getHint() {
         return OStrings.getString("HHC_NOTE");
     }
@@ -102,6 +107,7 @@ public class HHCFilter2 extends HTMLFilter2 {
      * 
      * @return False, because HHC filter has no options.
      */
+    @Override
     public boolean hasOptions() {
         return false;
     }

@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    1 Enhancement
    1 Bug fix
-   0 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.5.2 update 2 vs. 2.5.2
 
@@ -16,6 +16,11 @@ of a .txt one, .txt being still the default
 kind of tags checked in Options > Tag Validation) and some 
 non-useful spaces could be copied at the end of the segment in the target
 document
+
+  Localisation updates:
+
+  - Dutch localisation updated to 2.5.2 (UI)
+  - Japanese localisation updated to 2.5.2 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.2 update 1

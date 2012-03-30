@@ -46,6 +46,7 @@ import java.util.List;
  */
 public class FileUtil {
     private static final int MAX_BACKUPS = 11;
+    public static String LINE_SEPARATOR = System.getProperty("line.separator");
 
     /**
      * Removes old backups so that only 10 last are there.

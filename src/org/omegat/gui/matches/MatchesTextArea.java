@@ -40,6 +40,8 @@ import java.util.List;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.StyledDocument;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.IProject;
@@ -71,6 +73,13 @@ import org.omegat.util.gui.UIThreadsUtil;
 public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> implements IMatcher {
 
     private static final String EXPLANATION = OStrings.getString("GUI_MATCHWINDOW_explanation");
+
+    private static final AttributeSet ATTRIBUTES_EMPTY = Styles.createAttributeSet(null, null, null, null);
+    private static final AttributeSet ATTRIBUTES_BLUE = Styles.createAttributeSet(Color.blue, null, null,
+            null);
+    private static final AttributeSet ATTRIBUTES_GREEN = Styles.createAttributeSet(Color.green, null, null,
+            null);
+    private static final AttributeSet ATTRIBUTES_BOLD = Styles.createAttributeSet(null, null, true, null);
 
     private final List<NearString> matches = new ArrayList<NearString>();
 
@@ -221,8 +230,8 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         this.activeMatch = activeMatch;
 
-        selectAll();
-        setCharacterAttributes(Styles.createAttributeSet(null, null, null, null), true);
+        StyledDocument doc = (StyledDocument) getDocument();
+        doc.setCharacterAttributes(0, doc.getLength(), ATTRIBUTES_EMPTY, true);
 
         int start = delimiters.get(activeMatch);
         int end = delimiters.get(activeMatch + 1);
@@ -239,17 +248,15 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         for (int i = 0; i < tokens.length; i++) {
             Token token = tokens[i];
             int tokstart = start + 3 + token.getOffset();
-            int tokend = start + 3 + token.getOffset() + token.getLength();
-            select(tokstart, tokend);
+            int toklength = token.getLength();
             if ((attributes[i] & StringData.UNIQ) != 0) {
-                setCharacterAttributes(Styles.createAttributeSet(Color.blue, null, null, null), false);
+                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_BLUE, false);
             } else if ((attributes[i] & StringData.PAIR) != 0) {
-                setCharacterAttributes(Styles.createAttributeSet(Color.green, null, null, null), false);
+                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_GREEN, false);
             }
         }
 
-        select(start, end);
-        setCharacterAttributes(Styles.createAttributeSet(null, null, true, null), false);
+        doc.setCharacterAttributes(start, end - start, ATTRIBUTES_BOLD, false);
         setCaretPosition(end - 2); // two newlines
         final int fstart = start;
 

@@ -5,6 +5,8 @@
 
  Copyright (C) 2006 Henry Pijffers
                2010 Alex Buloichik
+               2011 Alex Buloichik, Martin Fleurke
+               2012 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,6 +48,7 @@ import org.omegat.core.data.TMXEntry;
  * We can't use JAXB for writing because it changes spaces on formatted output.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
  */
 public class TMXWriter2 {
     private static XMLOutputFactory FACTORY;

@@ -2,7 +2,7 @@
  OmegaT 2.5.2 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   4 Bug fixes
+   5 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.2 update 2 vs. 2.5.2
@@ -25,6 +25,8 @@ displayed in bold instead of the initial non-bold attribute
 
   - In TMXs, the end of line was hardcoded as LF, instead of using the 
 system line separator (e.g., CR+LF under Windows, LF under Linux)
+
+  - In the Android filter, the "do not translate" mark has been corrected
 
   Localisation updates:
 

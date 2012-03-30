@@ -77,11 +77,11 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private static final String EXPLANATION = OStrings.getString("GUI_MATCHWINDOW_explanation");
 
     private static final AttributeSet ATTRIBUTES_EMPTY = Styles.createAttributeSet(null, null, null, null);
-    private static final AttributeSet ATTRIBUTES_BLUE = Styles.createAttributeSet(Color.blue, null, null,
+    private static final AttributeSet ATTRIBUTES_CHANGED = Styles.createAttributeSet(Color.blue, null, null,
             null);
-    private static final AttributeSet ATTRIBUTES_GREEN = Styles.createAttributeSet(Color.green, null, null,
+    private static final AttributeSet ATTRIBUTES_UNCHANGED = Styles.createAttributeSet(Color.green, null, null,
             null);
-    private static final AttributeSet ATTRIBUTES_BOLD = Styles.createAttributeSet(null, null, true, null);
+    private static final AttributeSet ATTRIBUTES_SELECTED = Styles.createAttributeSet(null, null, true, null);
 
     private final List<NearString> matches = new ArrayList<NearString>();
 
@@ -252,13 +252,13 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             int tokstart = start + 3 + token.getOffset();
             int toklength = token.getLength();
             if ((attributes[i] & StringData.UNIQ) != 0) {
-                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_BLUE, false);
+                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_CHANGED, false);
             } else if ((attributes[i] & StringData.PAIR) != 0) {
-                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_GREEN, false);
+                doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_UNCHANGED, false);
             }
         }
 
-        doc.setCharacterAttributes(start, end - start, ATTRIBUTES_BOLD, false);
+        doc.setCharacterAttributes(start, end - start, ATTRIBUTES_SELECTED, false);
         setCaretPosition(end - 2); // two newlines
         final int fstart = start;
 

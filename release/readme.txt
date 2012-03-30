@@ -231,6 +231,7 @@ Code has been contributed by
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie
+  Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
   Guido Leenders

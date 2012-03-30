@@ -185,6 +185,7 @@ Contributions au code :
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie
+  Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs
   Guido Leenders

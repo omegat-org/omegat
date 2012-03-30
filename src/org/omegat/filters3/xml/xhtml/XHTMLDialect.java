@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Alex Buloichik, Martin Fleurke
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -65,10 +66,16 @@ public class XHTMLDialect extends DefaultXMLDialect {
     private Pattern skipRegExpPattern;
 
     /**
-     * a map of attribute-name and attribute value pairs that, if exist in a
+     * A map of attribute-name and attribute value pairs that, if exist in a
      * meta-tag, indicate that the meta-tag should not be translated
      */
     private HashMap<String, String> skipMetaAttributes;
+
+    /**
+     * A map of attribute-name and attribute value pairs that, if exist in a
+     * tag, indicate that this tag should not be translated
+     */
+    private HashMap<String, String> ignoreTagsAttributes;
 
     /**
      * Resolves external entites if child filter needs it. Default
@@ -134,6 +141,16 @@ public class XHTMLDialect extends DefaultXMLDialect {
             String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase();
             skipMetaAttributes.put(keyvalue, "");
         }
+
+        // Prepare set of attributes that indicate that a tag should be intact
+        String ignoreTagsString = options.getIgnoreTags();
+        ignoreTagsAttributes = new HashMap<String, String>();
+        String[] ignoreTagsAttributesStringarray = ignoreTagsString.split(",");
+        for (int i = 0; i < ignoreTagsAttributesStringarray.length; i++) {
+            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase();
+            ignoreTagsAttributes.put(keyvalue, "");
+        }
+
     }
 
     /**
@@ -208,4 +225,35 @@ public class XHTMLDialect extends DefaultXMLDialect {
     public boolean checkDoSkipMetaTag(String key, String value) {
         return skipMetaAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
     }
+
+    private boolean checkIgnoreTags(String key, String value) {
+        return ignoreTagsAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+    }
+
+    /**
+     * In the XHTML filter, content should be translated in the
+     * following condition: The pair attribute-value should not have been
+     * declared as untranslatable in the options
+     *
+     * @param tag
+     *            An XML tag
+     * @param atts
+     *            The attributes associated with the tag
+     *@return <code>false</code> if the content of this tag should be
+     *         translated, <code>true</code> otherwise
+     */
+    @Override
+    public Boolean validateIntactTag(String tag, Attributes atts) {
+        if (atts != null) {
+            for (int i = 0; i < atts.size(); i++) {
+                Attribute oneAttribute = atts.get(i);
+                if (checkIgnoreTags(oneAttribute.getName(), oneAttribute.getValue())) {
+                    return true;
+                }
+            }
+        }
+        // If no key=value pair is found, the tag can be translated
+        return false;
+    }
+
 }

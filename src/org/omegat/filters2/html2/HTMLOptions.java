@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
                2009 Alex Buloichik
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -55,7 +56,9 @@ import org.omegat.filters2.AbstractOptions;
  * Skip text matching regExp []<br>
  * Skip content of meta-tag when any of the given attibutename-value pairs is
  * present in the tag
- * 
+ * Ignore tags matching regexp [] Consider the tag as untranslatable when any of the given
+ * attibutename-value pairs is present in the tag
+
  * @author Maxym Mykhalchuk
  * @author Didier Briel
  * @author Martin Fleurke
@@ -90,6 +93,7 @@ public class HTMLOptions extends AbstractOptions {
     public static final String OPTION_PARAGRAPH_ONBR = "paragraphOnBr";
     public static final String OPTION_SKIP_REGEXP = "skipRegExp";
     public static final String OPTION_SKIP_META = "skipMeta";
+    public static final String OPTION_IGNORE_TAGS = "ignoreTags";
 
     public HTMLOptions(Map<String, String> options) {
         super(options);
@@ -245,4 +249,20 @@ public class HTMLOptions extends AbstractOptions {
     public void setSkipMeta(String skipMeta) {
         setString(OPTION_SKIP_META, skipMeta);
     }
+
+   /**
+     * @return the attribute key-value pairs for which tags should not be translated
+     */
+    public String getIgnoreTags() {
+        return getString(OPTION_IGNORE_TAGS, "");
+    }
+
+    /**
+     * Sets the attribute key-value pairs for which tags should not be translated
+     * @param ignoreTags The strings containing the key-value pairs
+     */
+    public void setIgnoreTags(String ignoreTags) {
+        setString(OPTION_IGNORE_TAGS, ignoreTags);
+    }
+
 }

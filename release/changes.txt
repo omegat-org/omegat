@@ -1,4 +1,18 @@
 ----------------------------------------------------------------------
+ OmegaT 2.5.3
+----------------------------------------------------------------------
+   1 Enhancement
+   0 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.3 vs. 2.5.2 update 2
+
+  Implemented requests:
+
+  - (X)HTML filters: hide content of tags based on attributes
+  http://sourceforge.net/support/tracker.php?aid=3513384
+
+----------------------------------------------------------------------
  OmegaT 2.5.2 update 2
 ----------------------------------------------------------------------
    1 Enhancement
@@ -6,6 +20,8 @@
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.2 update 2 vs. 2.5.2
+
+  Other enhancements:
 
   - The writeable glossary file can now have a .utf8 extension instead
 of a .txt one, .txt being still the default

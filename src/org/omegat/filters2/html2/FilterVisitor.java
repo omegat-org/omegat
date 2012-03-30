@@ -5,7 +5,9 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Didier Briel, Martin Fleurke
-               2010-2011 Didier Briel
+               2010 Didier Briel
+               2011 Didier Briel, Martin Fleurke
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -141,7 +143,25 @@ public class FilterVisitor extends NodeVisitor {
     @Override
     public void visitTag(Tag tag) {
 
-        if (isIntactTag(tag)) {
+
+        boolean intactTag = isIntactTag(tag);
+
+        if (!intactTag) { // If it's an intact tag, no reason to check
+            // Decide whether this tag should be intact, based on the key-value pairs stored in the
+            // configuration
+            Vector<Attribute> tagAttributes = tag.getAttributesEx();
+            Iterator<Attribute> i = tagAttributes.iterator();
+            while (i.hasNext() && intactTag == false) {
+                Attribute attribute = i.next();
+                String name = attribute.getName();
+                String value = attribute.getValue();
+                if (name == null || value == null)
+                    continue;
+                intactTag = this.filter.checkIgnoreTags(name, value);
+            }
+        }
+        
+        if (intactTag) {
             if (text)
                 endup();
             else

@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007-2008 Martin Fleurke
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,6 +54,7 @@ import org.omegat.util.OStrings;
  * 
  * @author Maxym Mykhalchuk
  * @author Martin Fleurke
+ * @author Didier Briel
  */
 public class HTMLFilter2 extends AbstractFilter {
     /** Creates a new instance of HTMLFilter2 */
@@ -76,6 +78,13 @@ public class HTMLFilter2 extends AbstractFilter {
      * meta-tag, indicates that the meta-tag should not be translated
      */
     private HashMap<String, String> skipMetaAttributes;
+
+    /**
+     * A map of attribute-name and attribute value pairs that, if exist in a
+     * tag, indicate that this tag should not be translated
+     */
+    private HashMap<String, String> ignoreTagsAttributes;
+
 
     @Override
     protected boolean requirePrevNextFields() {
@@ -150,6 +159,15 @@ public class HTMLFilter2 extends AbstractFilter {
         for (int i = 0; i < skipMetaAttributesStringarray.length; i++) {
             String keyvalue = skipMetaAttributesStringarray[i].trim().toUpperCase();
             skipMetaAttributes.put(keyvalue, "");
+        }
+
+        // Prepare set of attributes that indicate not to translate a tag
+        String ignoreTagString = options.getIgnoreTags();
+        ignoreTagsAttributes = new HashMap<String, String>();
+        String[] ignoreTagsAttributesStringarray = ignoreTagString.split(",");
+        for (int i = 0; i < ignoreTagsAttributesStringarray.length; i++) {
+            String keyvalue = ignoreTagsAttributesStringarray[i].trim().toUpperCase();
+            ignoreTagsAttributes.put(keyvalue, "");
         }
 
         Parser parser = new Parser();
@@ -259,4 +277,9 @@ public class HTMLFilter2 extends AbstractFilter {
     public boolean checkDoSkipMetaTag(String key, String value) {
         return skipMetaAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
     }
+
+    public boolean checkIgnoreTags(String key, String value) {
+        return ignoreTagsAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+    }
+
 }

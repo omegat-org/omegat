@@ -86,7 +86,8 @@
               <listitem>
                 <para>INI (clé=valeur) (.ini)</para>
               </listitem>
-            </itemizedlist><itemizedlist>
+            </itemizedlist>
+            <itemizedlist>
               <listitem>
                 <para>DTD (.dtd)</para>
               </listitem>
@@ -95,6 +96,19 @@
                 <para>DocuWiki (.txt)</para>
               </listitem>
             </itemizedlist></para>
+
+    		<itemizedlist>
+			  <listitem>
+				<para>Sous-titres SubRip (.srt)</para>
+			  </listitem>
+			</itemizedlist>
+
+            <itemizedlist>
+              <listitem>
+                <para>Localisation Magento CE (*.csv)</para>
+              </listitem>
+            </itemizedlist>
+
         </listitem>
       </itemizedlist>
 
@@ -148,12 +162,6 @@
 
           <itemizedlist>
             <listitem>
-              <para>Sous-titres SubRip (.srt)</para>
-            </listitem>
-          </itemizedlist>
-
-          <itemizedlist>
-            <listitem>
               <para>ResX (.resx)</para>
             </listitem>
           </itemizedlist>
@@ -191,9 +199,13 @@
               <para>Exportation Flash XML (.xml)</para>
             </listitem>
 
-            <listitem>
-              <para>TXML Wordfast (.txml)</para>
-            </listitem>
+          <listitem>
+            <para>Wordfast TXML (*.txml)</para>
+          </listitem>
+
+          <listitem>
+            <para>Camtasia pour Windows (*.camproj)</para>
+          </listitem>
 
           </itemizedlist>
         </listitem>

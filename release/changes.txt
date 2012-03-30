@@ -2,7 +2,7 @@
  OmegaT 2.5.2 update 2
 ----------------------------------------------------------------------
    1 Enhancement
-   3 Bug fixes
+   4 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.2 update 2 vs. 2.5.2
@@ -22,6 +22,9 @@ pane could be very slow
 
   - When the Fuzzy Matches pane was closed, the explanation text was 
 displayed in bold instead of the initial non-bold attribute
+
+  - In TMXs, the end of line was hardcoded as LF, instead of using the 
+system line separator (e.g., CR+LF under Windows, LF under Linux)
 
   Localisation updates:
 

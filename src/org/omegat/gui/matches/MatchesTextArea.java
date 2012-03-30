@@ -158,6 +158,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     protected void onProjectClose() {
         clear();
         this.setText(EXPLANATION);
+        // We clean the ATTRIBUTE_SELECTED style set by the last displayed match
+        StyledDocument doc = (StyledDocument) getDocument();
+        doc.setCharacterAttributes(0, doc.getLength(), ATTRIBUTES_EMPTY, true);
     }
 
     /**

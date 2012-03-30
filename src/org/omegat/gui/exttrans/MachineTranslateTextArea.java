@@ -3,7 +3,9 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2009 Alex Buloichik
+ Copyright (C) 2009-2010 Alex Buloichik
+               2011 Martin Fleurke
+               2012 Jean-Christophe Helary
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -45,6 +47,8 @@ import org.omegat.util.gui.UIThreadsUtil;
  * Pane for display machine translations.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
+ * @author Jean-Christophe Helary
  */
 @SuppressWarnings("serial")
 public class MachineTranslateTextArea extends EntryInfoThreadPane<MachineTranslationInfo> {

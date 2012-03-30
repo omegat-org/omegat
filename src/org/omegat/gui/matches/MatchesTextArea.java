@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Zoltan Bartko
                2011 John Moran
-               2012 Alex Buloichik
+               2012 Alex Buloichik, Jean-Christophe Helary
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -70,6 +70,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Zoltan Bartko
  * @author John Moran
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Jean-Christophe Helary
  */
 @SuppressWarnings("serial")
 public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> implements IMatcher {

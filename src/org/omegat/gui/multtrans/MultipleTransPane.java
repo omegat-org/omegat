@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2011 Alex Buloichik
+               2012 Jean-Christophe Helary
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -53,6 +54,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * Pane for display information about multiple translations.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Jean-Christophe Helary
  */
 @SuppressWarnings("serial")
 public class MultipleTransPane extends EntryInfoThreadPane<List<MultipleTransFoundEntry>> {

@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2012 Jean-Christophe Helary 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -63,6 +64,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * This is a Dictionaries pane that displays dictionaries entries.
  * 
  * @author Alex Buloichik <alex73mail@gmail.com>
+ * @author Jean-Christophe Helary 
  */
 @SuppressWarnings("serial")
 public class DictionariesTextArea extends EntryInfoThreadPane<List<DictionaryEntry>> {

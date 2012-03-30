@@ -7,6 +7,7 @@
                2007 Didier Briel
                2009-2010 Wildrich Fourie
                2010 Alex Buloichik
+               2012 Jean-Christophe Helary
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -61,6 +62,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author Didier Briel
  * @author Wildrich Fourie
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Jean-Christophe Helary
  */
 @SuppressWarnings("serial")
 public class GlossaryTextArea extends EntryInfoThreadPane<List<GlossaryEntry>> {

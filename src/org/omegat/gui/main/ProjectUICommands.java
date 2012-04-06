@@ -5,6 +5,7 @@
 
  Copyright (C) 2008-2010 Alex Buloichik
                2011 Martin Fleurke
+               2012 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -50,6 +51,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ * @author Thomas Cordonnier
  */
 public class ProjectUICommands {
     public static void projectCreate() {
@@ -164,6 +166,11 @@ public class ProjectUICommands {
             protected void done() {
                 try {
                     get();
+                    SwingUtilities.invokeLater(new Runnable() {
+                        public void run() {
+                            Core.getEditor().requestFocus();
+                        }
+                    });
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
@@ -196,6 +203,7 @@ public class ProjectUICommands {
                             // activate entry later - after project will be
                             // loaded
                             Core.getEditor().gotoEntry(previousCurEntryNum);
+                            Core.getEditor().requestFocus();
                         }
                     });
                 } catch (Exception ex) {

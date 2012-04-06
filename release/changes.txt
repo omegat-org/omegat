@@ -2,7 +2,7 @@
  OmegaT 2.5.3
 ----------------------------------------------------------------------
    1 Enhancement
-   0 Bug fix
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 2.5.3 vs. 2.5.2 update 2
@@ -11,6 +11,11 @@
 
   - (X)HTML filters: hide content of tags based on attributes
   http://sourceforge.net/support/tracker.php?aid=3513384
+
+  Bug fixes:
+
+  - After loading or reloading the project, the focus was on the Matches
+pane rather than on the Editor
 
 ----------------------------------------------------------------------
  OmegaT 2.5.2 update 2

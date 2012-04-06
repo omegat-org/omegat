@@ -177,6 +177,18 @@ public class GlossaryTextAreaTest extends TestCore {
 
             public void setEmptyTranslation(boolean flag) {
             }
+
+            public void activateEntry(int preferredPosition) {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void nextEntryWithNote() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
+
+            public void prevEntryWithNote() {
+                throw new UnsupportedOperationException("Not supported yet.");
+            }
         });
     }
 }

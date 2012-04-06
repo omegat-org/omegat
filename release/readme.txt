@@ -229,6 +229,7 @@ Code has been contributed by
   Kim Bruning
   Alex Buloichik (lead developer)
   Sandra Jean Chua
+  Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
   Jean-Christophe Helary

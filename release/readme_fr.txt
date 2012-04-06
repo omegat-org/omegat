@@ -1,4 +1,4 @@
-Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2011.
+Ce document a été traduit par Didier Briel et Jean-Christophe Helary, copyright© 2007-2012.
 
 ==============================================================================
   OmegaT 2.0, fichier « Lisez-moi »
@@ -183,6 +183,7 @@ Contributions au code :
   Kim Bruning
   Alex Buloichik (développeur principal)
   Sandra Jean Chua
+  Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
   Jean-Christophe Helary

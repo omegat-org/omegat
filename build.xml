@@ -147,6 +147,10 @@
         <copy todir="dist">
             <fileset dir="release" includes="*" excludes="readme.txt *-specific l10n-project"/>
         </copy>
+        <copy todir="dist">
+            <fileset dir="release/linux-specific"/>
+            <fileset dir="release/win32-specific" includes="OmegaT.bat"/>
+        </copy>
         <copy todir="dist"
               file="release/readme.txt">
             <!-- Remove TRANSLATION_NOTICE placeholder (from English readme) -->
@@ -183,8 +187,8 @@
     <target name="zip" description="Build Zip distro" depends="jar,release">
         <mkdir dir="dist2"/>
         <zip destfile="dist2/OmegaT_${distversion}_Without_JRE.zip">
-            <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>
-            <zipfileset dir="dist" includes="OmegaT" filemode="755"/>
+            <zipfileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/>
+            <zipfileset dir="dist" includes="OmegaT linux-install.sh omegat.kaptn" filemode="755"/>
         </zip>
     </target>
 
@@ -200,8 +204,8 @@
             <fileset dir="../jre-linux"/>
         </copy>
         <tar destfile="dist2/OmegaT_${distversion}_Linux.tar">
-            <tarfileset dir="dist2/linux" excludes="OmegaT/OmegaT OmegaT/jre/bin/java"/>           
-            <tarfileset dir="dist2/linux" includes="OmegaT/OmegaT OmegaT/jre/bin/java" filemode="755"/>
+            <tarfileset dir="dist2/linux" excludes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java"/>           
+            <tarfileset dir="dist2/linux" includes="OmegaT/OmegaT OmegaT/linux-install.sh OmegaT/omegat.kaptn OmegaT/jre/bin/java" filemode="755"/>
         </tar>
         <bzip2 zipfile="dist2/OmegaT_${distversion}_Linux.tar.bz2" src="dist2/OmegaT_${distversion}_Linux.tar"/>
    </target>
@@ -254,7 +258,7 @@
         <copy todir="dist2/mac/OmegaT.app/Contents/Resources" file="release/mac-specific/OmegaT.icns"/>
         
         <copy todir="dist2/mac/OmegaT.app/Contents/Resources/Java">
-            <fileset dir="dist" excludes="OmegaT OmegaT-JRE OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/> 
+            <fileset dir="dist" excludes="OmegaT OmegaT-JRE linux-install.sh omegat.kaptn OmegaT.exe OmegaT.bat OmegaT.iss OmegaT-JRE.iss OmegaT.l4J.ini l10n-project"/> 
         </copy>
 
         <zip destfile="dist2/OmegaT_${distversion}_Mac.zip">

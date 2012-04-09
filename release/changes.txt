@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    2 Enhancements
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.5.3 vs. 2.5.2 update 2
 
@@ -22,6 +22,10 @@ OmegaT_xxx_Linux.tar.bz2.
 
   - After loading or reloading the project, the focus was on the Matches
 pane rather than on the Editor
+
+  Localisation updates:
+
+  - Italian localisation updated to 2.5.2 update 2 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.2 update 2

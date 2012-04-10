@@ -2,7 +2,7 @@
  OmegaT 2.5.3
 ----------------------------------------------------------------------
    2 Enhancements
-   1 Bug fix
+   2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.3 vs. 2.5.2 update 2
@@ -22,6 +22,10 @@ OmegaT_xxx_Linux.tar.bz2.
 
   - After loading or reloading the project, the focus was on the Matches
 pane rather than on the Editor
+
+  - Empty translations were not working for XML filters (e.g., Word,
+OpenOffice.org/LibreOffice, etc.). I.e., the source text was inserted
+in the target document.
 
   Localisation updates:
 

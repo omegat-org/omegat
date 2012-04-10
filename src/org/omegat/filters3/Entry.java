@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Didier Briel
                2010 Antonio Vilei
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -396,7 +397,7 @@ public class Entry {
      *             -- if any tag is missing or tags are ordered incorrectly.
      */
     public void setTranslation(String translation) throws TranslationException {
-        if (translation.length() > 0 && !sourceToShortcut().equals(translation)) {
+        if (!sourceToShortcut().equals(translation)) {
             checkAndRecoverTags(translation);
             this.translation = translation;
         }
@@ -495,6 +496,7 @@ public class Entry {
      * Returns shortcut string representation of the entry. E.g. for
      * <code>Here's &lt;b&gt;bold text&lt;/b&gt;</code> should return
      * <code>Here's &lt;b0&gt;bold text&lt;/b0&gt;</code>.
+     * // TODO: This method doesn't seem to be used
      */
     public String translationToShortcut() {
         if (translation.length() == 0)
@@ -507,7 +509,7 @@ public class Entry {
      * storing in TMX.
      */
     public String translationToTMX() {
-        if (translation.length() == 0)
+        if (translatedEntry == null)
             return sourceToTMX();
 
         StringBuffer buf = new StringBuffer();
@@ -528,7 +530,7 @@ public class Entry {
      * document.
      */
     public String translationToOriginal() {
-        if (translation.length() == 0)
+        if (translatedEntry == null)
             return sourceToOriginal();
 
         StringBuffer buf = new StringBuffer();

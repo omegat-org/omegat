@@ -767,6 +767,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     /**
      * Resolves an external entity.
      */
+    @Override
     public InputSource resolveEntity(String publicId, String systemId) throws SAXException {
         try {
             return doResolve(publicId, systemId);
@@ -780,6 +781,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     /** Receive notification of the start of an element. */
+    @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes)
             throws SAXException {
         try {
@@ -790,6 +792,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     /** Receive notification of the end of an element. */
+    @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         try {
             end(qName);
@@ -807,6 +810,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     /** Receive notification of ignorable whitespace in element content. */
+    @Override
     public void ignorableWhitespace(char[] ch, int start, int length) throws SAXException {
         if (inDTD)
             return;
@@ -824,6 +828,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
      * Receive notification of an XML processing instruction anywhere in the
      * document.
      */
+    @Override
     public void processingInstruction(String target, String data) throws SAXException {
         if (inDTD)
             return;
@@ -831,6 +836,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     /** Receive notification of the beginning of the document. */
+    @Override
     public void startDocument() throws SAXException {
         try {
             mainWriter.write("<?xml version=\"1.0\"?>\n");
@@ -842,6 +848,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     }
 
     /** Receive notification of the end of the document. */
+    @Override
     public void endDocument() throws SAXException {
         try {
             translateAndFlush();
@@ -861,6 +868,7 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     /**
      * Report a fatal XML parsing error. Is used to provide feedback.
      */
+    @Override
     public void fatalError(org.xml.sax.SAXParseException e) throws SAXException {
         try {
             reportFatalError(e);

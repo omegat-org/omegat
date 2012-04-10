@@ -95,6 +95,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * @throws IOException
      *             If any I/O Error occurs upon reader creation.
      */
+    @Override
     public BufferedReader createReader(File inFile, String inEncoding) throws UnsupportedEncodingException,
             IOException {
         XMLReader xmlreader = new XMLReader(inFile, inEncoding);
@@ -117,6 +118,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * @throws IOException
      *             If any I/O Error occurs upon writer creation
      */
+    @Override
     public BufferedWriter createWriter(File outFile, String outEncoding) throws UnsupportedEncodingException,
             IOException {
         if (outEncoding == null)
@@ -129,6 +131,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     }
 
     /** Processes an XML file. */
+    @Override
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
         try {
@@ -187,6 +190,7 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
      * Reads {@link org.omegat.util.OConsts#READ_AHEAD_LIMIT} and tries to detect constrained text and match
      * constraints defined in {@link XMLDialect} against them.
      */
+    @Override
     public boolean isFileSupported(BufferedReader reader) {
         if (dialect.getConstraints() == null || dialect.getConstraints().size() == 0)
             return true;

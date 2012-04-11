@@ -51,32 +51,38 @@ OmegaT's main features are:
   - localization in a number of languages.
 
 OmegaT supports the following file formats out of the box:
-  - plain text
-  - HTML and XHTML
-  - HTML Help Compiler
-  - OpenDocument/OpenOffice.org
-  - Java resource bundles (.properties)
-  - INI files (files with key=value pairs of any encoding)
-  - PO files
-  - DocBook documentation file format
-  - Microsoft OpenXML files
-  - Okapi monolingual XLIFF files
-  - QuarkXPress CopyFlowGold
-  - Subtitle files (SRT)
-  - ResX
-  - Android resource
-  - LaTeX
-  - Typo3 LocManager
-  - Help & Manual
-  - Windows RC resources
-  - Mozilla DTD
-  - DokuWiki
-  - Wix  
-  - Infix
-  - Flash XML export
-  - Wordfast TXML
-  - Magento CE Locale CSV
-  - Camtasia for Windows
+
+- Plain text file formats
+
+  - ASCII text (.txt, etc.)
+  - Encoded text (*.UTF8)
+  - Java resource bundles (*.properties)
+  - PO files (*.po)
+  - INI (key=value) files (*.ini)
+  - DTD files (*.DTD)
+  - DocuWiki files (*.txt)
+  - SubRip title files (*.srt)
+  - Magento CE Locale CSV (*.csv)
+
+- Tagged text file formats
+
+  - OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots, *.odp, *.otp)
+  - Microsoft Open XML (*.docx, *.xlsx, *.pptx)
+  - (X)HTML (*.html, *.xhtml,*.xht)
+  - HTML Help Compiler (*.hhc, *.hhk)
+  - DocBook (*.xml)
+  - monolingual XLIFF (*.xlf, *.xliff, *.sdlxliff)
+  - QuarkXPress CopyFlowGold (*.tag, *.xtg)
+  - ResX files (*.resx)
+  - Android resource (*.xml)
+  - LaTex (*.tex, *.latex)
+  - Help (*.xml) and Manual (*.hmxp) files
+  - Typo3 LocManager (*.xml)
+  - WiX Localization (*.wxl)
+  - Iceni Infix (*.xml)
+  - Flash XML export (*.xml)
+  - Wordfast TXML (*.txml)
+  - Camtasia for Windows (*.camproj)
 
 OmegaT can be customized to support other file formats as well.
 

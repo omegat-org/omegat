@@ -139,7 +139,7 @@ packaged with many Linux distributions (for example, Ubuntu), but you may
 experience bugs, display problems or missing features. We therefore recommend
 that you download and install either the Oracle Java Runtime Environment (JRE) 
 or the OmegaT package bundled with JRE (the .tar.bz2) bundle marked 
-"Linux"). If you installa version of Java at system level, you must either 
+"Linux"). If you install a version of Java at system level, you must either 
 ensure that it is in your launch path, or call it explicitly when launching 
 OmegaT. If you are not very familiar with Linux, we therefore recommend 
 that you install an OmegaT version with JRE included. This is safe, 

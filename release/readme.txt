@@ -182,52 +182,60 @@ To install OmegaT, simply create a suitable folder for OmegaT. Copy the
 OmegaT zip or tar.bz2 archive to this folder and unpack it there.
 
 3.3 Launching OmegaT
-OmegaT can be launched in a number of ways.
+Launch OmegaT as follows.
 
-* Windows users: by double-clicking on the file OmegaT.exe. If you can 
-see the file OmegaT but not OmegaT.exe in your File Manager (Windows Explorer), 
-change the settings so that file extensions are displayed.
+* Windows users: 
+If, during installation, you have created a shortcut on the desktop, 
+double-click on that shortcut. Alternatively, double-click on the file 
+OmegaT.exe. If you can see the file OmegaT but not OmegaT.exe in your 
+File Manager (Windows Explorer), change the settings so that file 
+extensions are displayed.
 
-* By double-clicking on the file OmegaT.jar. This will work only if the .jar
+* Linux users:
+If you used the installation script supplied, you should be able to launch OmegaT with:
+Alt+F2
+and then:
+omegat
+
+* Mac users:
+Double-click on the file OmegaT.app.
+
+* From your file manager (all systems):
+Double-click on the file OmegaT.jar. This will work only if the .jar
 file type is associated with Java on your system.
 
-* From the command line. The command to launch OmegaT is:
+* From the command line (all systems): 
+The command to launch OmegaT is:
 
 cd <folder where the file OmegaT.jar is located>
 
 <name and path of the Java executable file> -jar OmegaT.jar
 
 (The Java executable file is the file java on Linux and java.exe on Windows.
-If Java is installed at system level, the full path need not be entered.)
+If Java is installed at system level and is in the command path, the full 
+path need not be entered.)
+
+Customizing your OmegaT launch experience:
 
 * Windows users: The install program can create shortcuts for you in the start 
 menu, on the desktop and in the quick launch area. You can also manually drag 
 the file OmegaT.exe to the start menu, the desktop or the quick launch area
 to link it from there.
 
-* Linux KDE users: you can add OmegaT to your menus as follows:
+* Linux users:
+For a more user-friendly way of launching OmegaT, you can use the Kaptain 
+script provided (omegat.kaptn). To use this script you must first install 
+Kaptain. You can then launch the Kaptain launch script with
+Alt+F2
+omegat.kaptn
 
-Control Center - Desktop - Panels - Menus - Edit K Menu - File - New Item/New 
-Submenu.
+For more information on the Kaptain script and on adding menu items and 
+launch icons on Linux, refer to the OmegaT on Linux HowTo.
 
-Then, after selecting a suitable menu, add a submenu/item with File - New 
-Submenu and File - New Item. Enter OmegaT as the name of the new item.
-
-In the "Command" field, use the navigation button to find your OmegaT launch 
-script,and select it. 
-
-Click on the icon button (to the right of the Name/Description/Comment fields) 
-- Other Icons - Browse, and navigate to the /images subfolder in the OmegaT 
-application folder. Select the OmegaT.png icon.
-
-Finally, save the changes with File - Save.
-
-* Linux GNOME users: you can add OmegaT to your panel (the bar at the top of 
-the screen) as follows:
-
-Right-click on the panel - Add New Launcher. Enter "OmegaT" in the "Name" 
-field; in the "Command" field, use the navigation button to find your OmegaT 
-launch script. Select it and confirm with OK.
+Mac users:
+Drag OmegaT.app to your dock or to the tool bar of a Finder window to be 
+able to launch it  from any location. You can also call it in the 
+Spotlight search field.
 
 ==============================================================================
  4. Getting involved in the OmegaT project

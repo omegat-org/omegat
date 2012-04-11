@@ -105,7 +105,7 @@ In order to run, OmegaT requires the Java Runtime Environment (JRE) version
 the Java Runtime Environment are now available to save users the trouble of 
 selecting, obtaining and installing it. 
 
-If you have already Java, the simplest way to install the current version of 
+If you have already Java, one way to install the current version of 
 OmegaT is to use Java Web Start. 
 For this purpose download the following file and then execute it:
 

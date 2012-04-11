@@ -160,11 +160,26 @@ not provide a JRE for PPC systems. Download in this case from:
 
 
 3.2 Installation
-* Windows users: Simply launch the installation program. If you want, the 
+* Windows users: 
+Simply launch the installation program. If you wish, the 
 installation program can create shortcuts to launch OmegaT.
-* Others: To install OmegaT, simply create a suitable folder for OmegaT 
-(e.g., /usr/local/lib on Linux). Copy the OmegaT zip or tar.gz
-archive to this folder and unpack it there.
+
+* Linux users:
+Place the archive in any suitable folder and unpack it; OmegaT is then 
+ready to be launched. You can however obtain a neater and more user-friendly 
+installation by using the installation script (linux-install.sh). To use 
+this script, open a terminal window (console), change folder to the folder 
+containing OmegaT.jar and the linux-install.sh script, and execute the 
+script with ./linux-install.sh.
+
+* Mac users:
+Copy the OmegaT.zip archive to a suitable location and unpack it there 
+to obtain a folder that contains an HTML documentation index file and 
+OmegaT.app, the application file.
+
+* Others (e.g., Solaris, FreeBSD: 
+To install OmegaT, simply create a suitable folder for OmegaT. Copy the 
+OmegaT zip or tar.bz2 archive to this folder and unpack it there.
 
 3.3 Launching OmegaT
 OmegaT can be launched in a number of ways.

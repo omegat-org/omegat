@@ -47,32 +47,38 @@ Les principales fonctions d'OmegaT sont :
   - localisation dans de nombreuses langues
 
 OmegaT prend en charge directement les formats de fichier suivants :
-  - texte brut
-  - HTML et XHTML
-  HTML Help Compiler
-  - OpenDocument/OpenOffice.org
-  - ensemble de ressources Java (Bundle.properties)
-  - fichiers INI (fichiers dans un encodage quelconque constitués de paires clé=valeur)
-  - fichiers PO
-  - fichiers de documentation format DocBook
-  - Fichiers Microsoft Open XML
-  - Fichiers XLIFF Okapi monolingues
-  - CopyFlowGold pour QuarkXPress
-  - Fichiers de sous-titres (SRT)
-  - ResX
-  - Ressource Android
-  - LaTeX
-  - LocManager Typo3
-  - Help & Manual
-  - Ressources Windows RC
-  - DTD Mozilla
-  - DokuWiki
-  - Wix  
-  - Infix
-  - Export XML Flash
-  - TXML Wordfast
-  - Magento CE Locale CSV
-  - Camtasia pour Windows
+
+- Formats de fichier texte brut
+
+  - ASCII (.txt, etc.)
+  - Unicode UTF-8 (.utf8)
+  - Paquets de ressources Java (.properties)
+  - PO (Portable Object) (.po)
+  - INI (clé=valeur) (.ini)
+  - DTD (.dtd)
+  - DocuWiki (.txt)
+  - Sous-titres SubRip (.srt)
+  - Localisation Magento CE (*.csv)
+
+- Formats de fichier texte balisé
+
+  - OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots, *.odp, *.otp)
+  - Microsoft Open XML (*.docx, *.xlsx, *.pptx)
+  - (X)HTML (*.html, *.xhtml,*.xht)
+  - HTML Help Compiler (*.hhc, *.hhk)
+  - DocBook (*.xml)
+  - XLIFF monolingue (.xlf, *.xliff, .sdlxliff)
+  - CopyFlowGold pour QuarkXPress (.tag, .xtg)
+  - ResX (.resx)
+  - Ressource Android (.xml)
+  - LaTeX (.tex, .latex)
+  - Help & Manual (.xml .hmxp)
+  - Typo3 LocManager (.xml)
+  - Localisation WiX (*.wxl)
+  - Iceni Infix (*.xml)
+  - Exportation Flash XML (.xml)
+  - TXML Wordfast (*.txml)
+  - Camtasia pour Windows (*.camproj)
 
 Il est également possible de personnaliser OmegaT pour accepter d'autres formats.
 
@@ -86,9 +92,9 @@ Le manuel utilisateur se trouve dans le paquet que vous avez téléchargé, vous
  3. Installer OmegaT
 
 3.1 Informations générales
-Pour fonctionner, OmegaT a besoin d'un environnement d'exécution Java (JRE) de version 1.5 ou supérieure. Le JRE est maintenant fourni en standard avec OmegaT, afin d'éviter aux utilisateurs d'avoir à le sélectionner, l'obtenir et l'installer. 
+Pour fonctionner, OmegaT a besoin d'un environnement d'exécution Java (JRE) de version 1.5 ou supérieure. Les versions d'OmegaT incluant le JRE (Java Runtime Environment) sont maintenant disponibles afin déviter aux utilisateurs d'avoir à le sélectionner, l'obtenir et l'installer. 
 
-Si vous disposez déjà de Java, la façon la plus simple d'installer la version actuelle d'OmegaT est d'utiliser Java Web Start. 
+Si vous disposez déjà de Java, l'une des façons d'installer la version actuelle d'OmegaT est d'utiliser Java Web Start. 
 Pour ce faire, téléchargez le fichier suivant et exécutez-le :
 
    http://omegat.sourceforge.net/webstart/OmegaT.jnlp
@@ -101,56 +107,77 @@ Les autorisations que vous accordez à cette version (qui peuvent être mentionn
 Les méthodes et les moyens alternatifs pour télécharger et installer OmegaT sont indiqués ci-dessous. 
 
 Utilisateurs de Windows et Linux : si vous êtes certain qu'une version convenable du JRE est déjà installée, vous pouvez installer une version d'OmegaT sans le JRE (cela est indiqué par le nom de la version, « Without_JRE »). 
-Si vous avez un doute quelconque, nous vous recommandons d'utiliser la version « standard », c'est à dire avec un JRE. Cela est sûr, puisque même si le JRE est déjà installé, cette version n'interférera pas avec la version système.
+Si vous avez un doute quelconque, nous vous recommandons d'utiliser la version fournie avec un JRE. Cela est sûr, puisque même si le JRE est déjà installé, cette version n'interférera pas avec la version système.
 
-Utilisateurs de Linux : notez qu'OmegaT ne fonctionne pas avec les implémentations libres de Java incluses dans de nombreuses distributions. Celles-ci sont obsolètes ou incomplètes. Téléchargez un JRE de Sun à partir du lien ci-dessus, ou téléchargez et installez OmegaT fourni avec son JRE (le paquet .tar.gz marqué « Linux »).
+Utilisateurs de Linux : 
+OmegaT fonctionnera avec les implémentations libres de Java 
+incluses dans de nombreuses distributions Linux (par exemple Ubuntu), mais il est possible que vous rencontriez des bogues, des problèmes d'affichage ou des fonctionnalités manquantes. Par conséquent, nous recommandons de télécharger et d'installer soit le JRE (Java Runtime Environment) d'Oracle, soit une version d'OmegaT comportant le JRE (le paquet .tar.bz2) marqué « Linux ». Si vous installez une version de Java au niveau du système, vous devez faire en sorte que Java soit dans le chemin, ou l'appeler de façon explicite lorsque vous lancez OmegaT. Si vous n'êtes pas très habitués à Linux, nous vous recommandons donc d'installer une version d'OmegaT comportant le JRE. Cela est sûr, puisque ce JRE « local » n'interférera avec aucun autre JRE installé dans votre système.
 
-Utilisateurs de Mac : le JRE est déjà installé sur Mac OX X.
+Utilisateurs de Mac :
+le JRE est déjà installé sur Mac OX X antérieur à Mac OS X 10.7 (Lion). Pour les utilisateurs de Lion, le système les avertira, lors du premier lancement d'une application nécessitant Java, et le téléchargera et l'installera automatiquement.
 
-Linux sur des architectures Power PC :  les utilisateurs devront télécharger le JRE d'IBM, puisque Sun ne fournit pas de JRE pour les systèmes PPC. Dans ce cas, téléchargez à partir de :
+Linux sur des architectures Power PC :
+les utilisateurs devront télécharger le JRE d'IBM, puisque Sun ne fournit pas de JRE pour les systèmes PPC. Dans ce cas, téléchargez à partir de :
 
-    http://www-128.ibm.com/developerworks/java/jdk/linux/download.html 
+    http://www.ibm.com/developerworks/java/jdk/linux/download.html 
 
 
 3.2 Installation
-* Utilisateurs de Windows : Exécutez simplement le programme d'installation. Si vous le souhaitez, le programme d'installation peut créer des raccourcis pour exécuter OmegaT.
-* Autres : Pour installer OmegaT, créez simplement un dossier approprié pour OmegaT
-(ex. : /usr/local/lib on Linux). Copiez l'archive zip ou tar.gz d'OmegaT dans ce dossier, et décompactez-la.
+* Utilisateurs de Windows :
+exécutez simplement le programme d'installation. Si vous le souhaitez, le programme d'installation peut créer des raccourcis pour exécuter OmegaT.
 
-3.3 Exécuter OmegaT
-OmegaT peut être exécuté de différentes façons.
+* Utilisateurs de Linux :
+placez l'archive dans n'importe quel dossier approprié et décompactez-la. OmegaT est alors prêt à être exécuté. Vous pouvez cependant bénéficier d'un installation plus orthodoxe et plus conviviale en utilisant le script d'installation (linux-install.sh). Pour utiliser ce script, ouvrez un fenêtre de terminal (console), passez dans le dossier contenant OmegaT.jar et le script linux-install.sh et exécuter le script avec ./linux-install.sh.
 
-* Utilisateurs de Windows : en double-cliquant sur le fichier OmegaT.exe. Si vous pouvez voir le fichier OmegaT mais pas le fichier OmegaT.exe dans votre gestionnaire de fichier (Explorateur Windows), modifiez la configuration afin que les extensions soient affichées.
+* Utilisateurs de Mac :
+Copier l'archive OmegaT.zip à un emplacement approprié, et décompactez-la pour obtenir un dossier contenant un fichier d'index de la documentation et OmegaT.app, le fichier d'application.
 
-* En double-cliquant sur le fichier OmegaT.jar. Cela ne fonctionnera que le type de fichier .jar est associé à Java dans votre système.
 
-* À partir de la ligne de commande. La commande pour exécuter OmegaT est :
+* Autres (ex. : Solaris, FreeBSD : 
+Pour installer OmegaT, créez simplement un dossier approprié pour OmegaT. Copiez l'archive zip ou tar.bz2 d'OmegaT dans ce dossier, et décompactez-la.
+
+3.3 Lancement d'OmegaT
+Exécutez OmegaT de la façon suivante.
+
+* Utilisateurs de Windows : 
+Si, durant installation, vous avez créé un raccourci sur le bureau, double-cliquez sur ce raccourci. Autrement, double-cliquez sur le fichier OmegaT.exe. Si vous pouvez voir le fichier OmegaT mais pas le fichier OmegaT.exe dans votre gestionnaire de fichier (Explorateur Windows), modifiez la configuration afin que les extensions soient affichées.
+
+* Utilisateurs de Linux :
+si vous avez utilisé le fichier d'installation fourni, vous devriez pouvoir exécuter OmegaT avec :
+Alt+F2
+suivi de :
+omegat
+
+* Utilisateurs de Mac : 
+double-cliquez sur le fichier OmegaT.app.
+
+* Depuis votre gestionnaire de fichiers (tous systèmes) :
+Double-cliquez sur le fichier OmegaT.jar. Cela ne fonctionnera que le type de fichier .jar est associé à Java dans votre système.
+
+* Depuis la ligne de commande (tous systèmes) : 
+la commande pour exécuter OmegaT est ::
 
 cd <dossier dans lequel le fichier OmegaT.jar est situé>
 
 <nom et chemin du fichier exécutable Java> -jar OmegaT.jar
 
 (Le fichier exécutable Java est le fichier java sous Linux et java.exe sous Windows.
-Si Java est installé au niveau système, il n'est pas nécessaire d'entrer le chemin complet.)
+Si Java est installé au niveau système et est inclus dans le chemin, il n'est pas nécessaire d'entrer le chemin complet.)
 
-* Utilisateurs de Windows : Le programme d'installation peut créer des raccourcis pour vous dans le menu démarrer, sur le bureau ou dans la zone de lancement rapide. Vous également pouvez faire glisser le fichier OmegaT.exe dans le menu démarrer, sur le bureau ou dans la zone de lancement rapide afin d'y créer un raccourci.
+Personnaliser la méthode d'exécution d'OmegaT :
 
-* Utilisateurs de KDE Linux : vous pouvez ajouter OmegaT dans vos menus comme suit :
+* Utilisateurs de Windows : 
+le programme d'installation peut créer des raccourcis pour vous dans le menu démarrer, sur le bureau ou dans la zone de lancement rapide. Vous également pouvez faire glisser le fichier OmegaT.exe dans le menu démarrer, sur le bureau ou dans la zone de lancement rapide afin d'y créer un raccourci.
 
-Centre de configuration - Bureau - Tableau de bord - Menus - Éditer le menu K - Fichier - Nouvel élément/Nouveau sous-menu.
+* Utilisateurs de Linux :
+Pour pouvoir exécuter OmegaT de façon plus conviviale, vous pouvez utiliser le script Kaptain fourni (omegat.kaptn). Pour utiliser ce script, vous devez tout d'abord installer Kaptain. Vous pouvez ensuite lancer le script d'exécution Kaptain par
+Alt+F2
+omegat.kaptn
 
-Ensuite, après avoir sélectionné un menu approprié, ajoutez un sous-menu/élément avec Nouveau sous-menu et Fichier - Nouvel élément. Entrez OmegaT pour le nom du nouvel élément.
+Pour plus d'informations sur le script Kaptain et sur l'ajout d'entrées de menu et d'icônes d'exécution sous Linux, veuillez vous référer au guide pratique OmegaT sous Linux.
 
-Dans le champ « Commande », utilisez le bouton de navigation pour trouver votre script d'exécution d'OmegaT, et sélectionnez-le. 
-
-Cliquez sur le bouton icône (à droite des champs Nom/Description/Commentaire) 
-- Autres icônes - Parcourir, et naviguez jusqu'au sous-dossier /images du dossier de l'application OmegaT. Sélectionnez l'icône OmegaT.png.
-
-Enregistrez enfin les modifications avec Fichier - Enregistrer.
-
-* Utilisateurs de KDE Gnome : vous pouvez ajouter OmegaT dans vos menus comme suit :
-
-Effectuez un clic droit dans le tableau de bord - Créer un lanceur. Entrez « OmegaT » dans le champ « Nom » ; dans le champ « Commande », utilisez le bouton « Parcourir... » pour localiser votre script de lancement d'OmegaT. Sélectionnez-le et confirmez avec « Valider ».
+Utilisateurs de Mac :
+Faites glisser OmegaT.app sur votre dock ou sur la barre d'outils d'une fenêtre du Finder afin de pouvoir l'exécuter de n'importe quel emplacement. Vous pouvez également l'appeler dans le champ de recherche de Spotlight.
 
 ==============================================================================
  4. S'impliquer dans le projet OmegaT
@@ -165,7 +192,7 @@ Pour traduire l'interface utilisateur, le manuel ou d'autres documents, lisez :
 Et inscrivez vous à la liste des traducteurs (multilingue) :
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
-Pour d'autres types de contributions, inscrivez vous d'abord au groupe des utilisateurs :
+Pour d'autres types de contributions, inscrivez-vous d'abord au groupe des utilisateurs :
       http://tech.groups.yahoo.com/group/omegat/
 
 Et voyez comment se passent les choses dans le monde d'OmegaT...

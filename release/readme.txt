@@ -240,7 +240,7 @@ Spotlight search field.
 ==============================================================================
  4. Getting involved in the OmegaT project
 
-To participate in the OmegaT development, get in touch with the developers at:
+To participate in the development of OmegaT, get in touch with the developers at:
     http://lists.sourceforge.net/lists/listinfo/omegat-development
 
 To translate OmegaT's user interface, user manual or other related documents,
@@ -251,7 +251,7 @@ read:
 And subscribe to the translators' list:
       http://lists.sourceforge.net/mailman/listinfo/omegat-l10n
 
-For other kind of contributions, subscribe first to the user group at:
+To contribute in other ways, subscribe first to the user group at:
       http://tech.groups.yahoo.com/group/omegat/
 
 And get a feel of what is going on in the OmegaT world...

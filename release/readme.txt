@@ -217,7 +217,8 @@ path need not be entered.)
 
 Customizing your OmegaT launch experience:
 
-* Windows users: The install program can create shortcuts for you in the start 
+* Windows users: 
+The install program can create shortcuts for you in the start 
 menu, on the desktop and in the quick launch area. You can also manually drag 
 the file OmegaT.exe to the start menu, the desktop or the quick launch area
 to link it from there.

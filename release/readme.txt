@@ -133,14 +133,22 @@ If you are in any doubt, we recommend that you use the version supplied with
 JRE. This is safe, since even if the JRE is already installed on your system, 
 this version will not interfere with it.
 
-Linux users: note that OmegaT does not work with the free/open-source Java 
-implementations that are packaged with many Linux distributions (for example, 
-Ubuntu), as these are either outdated or incomplete. Download and install 
-Sun's Java Runtime Environment (JRE) via the link above, or download and 
-install the OmegaT package bundled with JRE (the .tar.gz bundle marked 
-"Linux").
+Linux users: OmegaT will run on the open-implementation source Java 
+packaged with many Linux distributions (for example, Ubuntu), but you may
+experience bugs, display problems or missing features. We therefore recommend
+that you download and install either the Oracle Java Runtime Environment (JRE) 
+or the OmegaT package bundled with JRE (the .tar.bz2) bundle marked 
+"Linux"). If you installa version of Java at system level, you must either 
+ensure that it is in your launch path, or call it explicitly when launching 
+OmegaT. If you are not very familiar with Linux, we therefore recommend 
+that you install an OmegaT version with JRE included. This is safe, 
+since this "local" JRE will not interfere with any other JRE installed 
+on your system.
 
-Mac users: the JRE is already installed on Mac OS X.
+Mac users: the JRE is already installed on Mac OS X before Mac OS X 10.7 
+(Lion). Lion users will be prompted by the system when they first launch 
+an application that requires Java and the system will eventually 
+automatically download and install it.
 
 Linux on PowerPC systems: users will need to download IBM's JRE, as Sun does 
 not provide a JRE for PPC systems. Download in this case from:

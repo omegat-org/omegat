@@ -129,9 +129,9 @@ shown below.
 Windows and Linux users: if you are confident that your system already has a 
 suitable version of the JRE installed, you can install the version of OmegaT 
 without the JRE (this is indicated in the name of the version,"Without_JRE"). 
-If you are in any doubt, we recommend that you use the "standard" version, 
-i.e. with JRE. This is safe, since even if the JRE is already installed on 
-your system, this version will not interfere with it.
+If you are in any doubt, we recommend that you use the version supplied with 
+JRE. This is safe, since even if the JRE is already installed on your system, 
+this version will not interfere with it.
 
 Linux users: note that OmegaT does not work with the free/open-source Java 
 implementations that are packaged with many Linux distributions (for example, 

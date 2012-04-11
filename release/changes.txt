@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.3
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
@@ -11,6 +11,11 @@
 
   - (X)HTML filters: hide content of tags based on attributes
   http://sourceforge.net/support/tracker.php?aid=3513384
+
+  - Capture variables in source filename to target mapping
+  http://sourceforge.net/support/tracker.php?aid=3436954
+
+  Other enhancements:
 
   - The Linux packages (OmegaT_xxx_Linux.tar.bz2 and OmegaT_xxx_Without_JRE.zip) 
 have been improved. They now contain an installation script: linux-install.sh 

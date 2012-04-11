@@ -11,7 +11,7 @@
                2009 Didier Briel, Arno Peters, Alex Buloichik
                2010 Alex Buloichik
                2011 Alex Buloichik, Didier Briel
-               2012 Guido Leenders
+               2012 Guido Leenders, Thomas Cordonnier
 
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -47,6 +47,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
@@ -79,6 +80,7 @@ import org.omegat.util.StaticUtils;
  * @author Arno Peters
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Guido Leenders
+ * @author Thomas Cordonnier
  */
 public class FilterMaster {
     /** name of the filter configuration file */
@@ -631,6 +633,17 @@ public class FilterMaster {
         //
         res = res.replace(AbstractFilter.TFP_FILE_FILTER_NAME, filterFormatName);
         //
+		
+        java.util.regex.Matcher PATTERN_NUM = Pattern.compile("\\$\\{(\\d+)\\}").matcher(res);
+        String sourceMaskPattern = sourceMask.replaceAll("\\*","(.*?)").replaceAll("\\?","(.)");
+        java.util.regex.Matcher matcher = Pattern.compile(sourceMaskPattern).matcher(filename);
+        while (PATTERN_NUM.find()) {
+                int num = Integer.parseInt(PATTERN_NUM.group(1));
+                if (matcher.find()) {
+                        res = PATTERN_NUM.replaceFirst (matcher.group(num));
+                }
+        }
+
         return res;
     }
 

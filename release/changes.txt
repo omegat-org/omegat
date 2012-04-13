@@ -2,7 +2,7 @@
  OmegaT 2.5.3
 ----------------------------------------------------------------------
    3 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.3 vs. 2.5.2 update 2
@@ -31,6 +31,11 @@ pane rather than on the Editor
   - Empty translations were not working for XML filters (e.g., Word,
 OpenOffice.org/LibreOffice, etc.). I.e., the source text was inserted
 in the target document.
+
+
+  - "Comment:" was displayed for all HTML segments, even when the 
+segment was not an attribute, and therefore had no comments to 
+display
 
   Localisation updates:
 

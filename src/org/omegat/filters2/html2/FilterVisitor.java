@@ -528,7 +528,7 @@ public class FilterVisitor extends NodeVisitor {
         }
 
         // getting the translation
-        String translation = filter.privateProcessEntry(compressed, "");
+        String translation = filter.privateProcessEntry(compressed, null);
 
         // writing out uncompressed
         if (compressed.equals(translation))

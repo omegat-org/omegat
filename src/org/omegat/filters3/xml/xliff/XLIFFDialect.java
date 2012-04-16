@@ -61,6 +61,7 @@ public class XLIFFDialect extends DefaultXMLDialect {
      * @return <code>true</code> if this tag should be a preformat tag,
      *         <code>false</code> otherwise
      */
+    @Override
     public Boolean validatePreformatTag(String tag, Attributes atts) {
         if (!tag.equalsIgnoreCase("mrk")) // We test only "mrk"
             return false;

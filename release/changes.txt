@@ -32,7 +32,6 @@ pane rather than on the Editor
 OpenOffice.org/LibreOffice, etc.). I.e., the source text was inserted
 in the target document.
 
-
   - "Comment:" was displayed for all HTML segments, even when the 
 segment was not an attribute, and therefore had no comments to 
 display

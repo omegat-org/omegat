@@ -24,6 +24,9 @@
 package org.omegat.util;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,7 +87,7 @@ public class TMXWriterTest extends TestFilterBase {
         wr.writeEntry(in, "test", new TMXEntry(null, null, null, 0, null, true), null);
         wr.close();
 
-        load(new ArrayList<String>(), false, false);
+        load(new ArrayList<String>(), null, false, false);
     }
 
     public void testLevel2write() throws Exception {
@@ -106,7 +109,7 @@ public class TMXWriterTest extends TestFilterBase {
 
         // patch for 'OmegaT' tmx
         setCreationTool(new File("test/data/tmx/test-save-tmx14.tmx"), "OmegaT", outFile);
-        load(sources, true, false);
+        load(sources, null, true, false);
         assertEquals(4, sources.size());
         assertEquals("source", sources.get(0));
         assertEquals("1<a1/>2", sources.get(1));
@@ -116,26 +119,60 @@ public class TMXWriterTest extends TestFilterBase {
         // patch for 'ext' tmx
         setCreationTool(new File("test/data/tmx/test-save-tmx14.tmx"), "ext", outFile);
 
-        load(sources, false, false);
+        load(sources, null, false, false);
         assertEquals(4, sources.size());
         assertEquals("source", sources.get(0));
         assertEquals("12", sources.get(1));
         assertEquals("345", sources.get(2));
         assertEquals("67", sources.get(3));
 
-        load(sources, true, false);
+        load(sources, null, true, false);
         assertEquals(4, sources.size());
         assertEquals("source", sources.get(0));
         assertEquals("1<a0>2", sources.get(1));
         assertEquals("3<a0>4</a0>5", sources.get(2));
         assertEquals("6<a0>7", sources.get(3));
 
-        load(sources, true, true);
+        load(sources, null, true, true);
         assertEquals(4, sources.size());
         assertEquals("source", sources.get(0));
         assertEquals("1<a0/>2", sources.get(1));
         assertEquals("3<a0>4</a0>5", sources.get(2));
         assertEquals("6<a0/>7", sources.get(3));
+    }
+
+    public void testEOLwrite() throws Exception {
+        String eol = FileUtil.LINE_SEPARATOR;
+        try {
+            FileUtil.LINE_SEPARATOR = "\r\n";
+
+            TMXWriter2 wr = new TMXWriter2(outFile, new Language("en-US"), new Language("be-BY"), false,
+                    true, false);
+            wr.writeEntry("source", "tar\nget", new TMXEntry(null, null, null, 0, null, true), null);
+            wr.close();
+
+            StringBuilder text = new StringBuilder();
+            Reader rd = new InputStreamReader(new FileInputStream(outFile), "UTF-8");
+            char[] buffer = new char[512];
+            while (true) {
+                int len = rd.read(buffer);
+                if (len < 0)
+                    break;
+                text.append(buffer, 0, len);
+            }
+            rd.close();
+            assertTrue(text.toString().contains("tar\r\nget"));
+
+            final List<String> trs = new ArrayList<String>();
+            load(null, trs, true, false);
+            assertTrue(trs.get(0).contains("tar\nget"));
+        } finally {
+            FileUtil.LINE_SEPARATOR = eol;
+        }
+
+        final List<String> trs = new ArrayList<String>();
+        load(null, trs, true, false);
+        assertTrue(trs.get(0).contains("tar\nget"));
     }
 
     private void setCreationTool(File in, String tool, File out) throws Exception {
@@ -158,13 +195,24 @@ public class TMXWriterTest extends TestFilterBase {
         transformer.transform(input, output);
     }
 
-    private void load(final List<String> sources, boolean extLevel2, boolean useSlash) throws Exception {
-        sources.clear();
+    private void load(final List<String> sources, final List<String> translations, boolean extLevel2,
+            boolean useSlash) throws Exception {
+        if (sources != null) {
+            sources.clear();
+        }
+        if (translations != null) {
+            translations.clear();
+        }
         new TMXReader2().readTMX(outFile, new Language("en-US"), new Language("be-BY"), false, false,
                 extLevel2, useSlash, new TMXReader2.LoadCallback() {
                     public boolean onEntry(TMXReader2.ParsedTu tu, TMXReader2.ParsedTuv tuvSource,
                             TMXReader2.ParsedTuv tuvTarget, boolean isParagraphSegtype) {
-                        sources.add(tuvSource.text);
+                        if (sources != null) {
+                            sources.add(tuvSource.text);
+                        }
+                        if (translations != null) {
+                            translations.add(tuvTarget.text);
+                        }
                         return true;
                     }
                 });

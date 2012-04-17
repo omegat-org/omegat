@@ -212,6 +212,7 @@ public class TMXWriter2 {
             if (forceValidTMX) {
                 translation = StaticUtils.stripTags(translation);
             }
+            translation = translation.replace("\n", FileUtil.LINE_SEPARATOR);
 
             xml.writeCharacters("      ");
             xml.writeStartElement("tuv");

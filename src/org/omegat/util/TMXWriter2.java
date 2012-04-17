@@ -6,7 +6,7 @@
  Copyright (C) 2006 Henry Pijffers
                2010 Alex Buloichik
                2011 Alex Buloichik, Martin Fleurke
-               2012 Alex Buloichik
+               2012 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -49,6 +49,7 @@ import org.omegat.core.data.TMXEntry;
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Martin Fleurke
+ * @author Didier Briel
  */
 public class TMXWriter2 {
     private static XMLOutputFactory FACTORY;
@@ -178,7 +179,7 @@ public class TMXWriter2 {
             }
             xml.writeCharacters("      ");
             xml.writeStartElement("note");
-            xml.writeCharacters(note);
+            xml.writeCharacters(platformLineSeparator(note));
             xml.writeEndElement(); // note
             xml.writeCharacters(FileUtil.LINE_SEPARATOR);
         }
@@ -197,9 +198,9 @@ public class TMXWriter2 {
         }
         xml.writeCharacters(FileUtil.LINE_SEPARATOR);
         if (levelTwo) {
-            writeLevelTwo(source);
+            writeLevelTwo(platformLineSeparator(source));
         } else {
-            writeLevelOne(source);
+            writeLevelOne(platformLineSeparator(source));
         }
         xml.writeCharacters(FileUtil.LINE_SEPARATOR);
         xml.writeCharacters("      ");
@@ -212,7 +213,6 @@ public class TMXWriter2 {
             if (forceValidTMX) {
                 translation = StaticUtils.stripTags(translation);
             }
-            translation = translation.replace("\n", FileUtil.LINE_SEPARATOR);
 
             xml.writeCharacters("      ");
             xml.writeStartElement("tuv");
@@ -230,9 +230,9 @@ public class TMXWriter2 {
             xml.writeCharacters(FileUtil.LINE_SEPARATOR);
 
             if (levelTwo) {
-                writeLevelTwo(translation);
+                writeLevelTwo(platformLineSeparator(translation));
             } else {
-                writeLevelOne(translation);
+                writeLevelOne(platformLineSeparator(translation));
             }
             xml.writeCharacters(FileUtil.LINE_SEPARATOR);
             xml.writeCharacters("      ");
@@ -356,5 +356,14 @@ public class TMXWriter2 {
         xml.writeCharacters(segment.substring(pos));
 
         xml.writeEndElement();
+    }
+    
+    /**
+     * Replaces \n with platform specific end of lines
+     * @param text The string to be converted
+     * @return The converted string
+     */
+    private String platformLineSeparator(String text) {
+        return text.replace("\n", FileUtil.LINE_SEPARATOR);
     }
 }

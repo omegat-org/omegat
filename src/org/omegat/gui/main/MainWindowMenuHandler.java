@@ -450,12 +450,7 @@ public class MainWindowMenuHandler {
 
         // Show the input dialog
         dialog.pack(); // make it look good
-        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame()); // center
-                                                                                  // it
-                                                                                  // on
-                                                                                  // the
-                                                                                  // main
-        // window
+        dialog.setLocationRelativeTo(Core.getMainWindow().getApplicationFrame()); // center it on the main window
         dialog.setVisible(true); // show it
 
         // Get the input value, if any

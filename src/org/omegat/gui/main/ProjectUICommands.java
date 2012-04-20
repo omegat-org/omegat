@@ -32,6 +32,8 @@ import java.io.File;
 
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
@@ -49,6 +51,7 @@ import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.StringUtil;
 import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
@@ -125,6 +128,9 @@ public class ProjectUICommands {
                 final IRemoteRepository repository;
                 File localDirectory = new File(dialog.txtDirectory.getText());
                 try {
+                    if (!dialog.ok) {
+                        return null;
+                    }
                     if (dialog.rbSVN.isSelected()) {
                         // SVN selected
                         repository = new SVNRemoteRepository(localDirectory);
@@ -170,10 +176,55 @@ public class ProjectUICommands {
         dialog.btnOk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 dialog.dispose();
+                dialog.ok = true;
             }
         });
+        dialog.btnDirectory.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                NewProjectFileChooser ndc = new NewProjectFileChooser();
+                int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
+                if (ndcResult == OmegaTFileChooser.APPROVE_OPTION) {
+                    dialog.txtDirectory.setText(ndc.getSelectedFile().getPath());
+                }
+            }
+        });
+
+        DocumentListener newTeamProjectOkHider = new DocumentListener() {
+            public void changedUpdate(DocumentEvent e) {
+                checkNewTeamProjectDialog(dialog);
+            }
+
+            public void removeUpdate(DocumentEvent e) {
+                checkNewTeamProjectDialog(dialog);
+            }
+
+            public void insertUpdate(DocumentEvent e) {
+                checkNewTeamProjectDialog(dialog);
+            }
+        };
+
+        dialog.txtDirectory.getDocument().addDocumentListener(newTeamProjectOkHider);
+        dialog.txtRepositoryURL.getDocument().addDocumentListener(newTeamProjectOkHider);
+        dialog.rbGIT.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                checkNewTeamProjectDialog(dialog);
+            }
+        });
+        dialog.rbSVN.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                checkNewTeamProjectDialog(dialog);
+            }
+        });
+
         dialog.setVisible(true);
         return dialog;
+    }
+
+    public static void checkNewTeamProjectDialog(NewTeamProject dialog) {
+        boolean enabled = dialog.rbGIT.isSelected() || dialog.rbSVN.isSelected();
+        enabled &= !StringUtil.isEmpty(dialog.txtRepositoryURL.getText());
+        enabled &= !StringUtil.isEmpty(dialog.txtDirectory.getText());
+        dialog.btnOk.setEnabled(enabled);
     }
 
     public static abstract class AskCredentials {

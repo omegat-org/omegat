@@ -118,6 +118,7 @@ public class NewTeamProject extends javax.swing.JDialog {
         jPanel2.add(btnCancel);
 
         org.openide.awt.Mnemonics.setLocalizedText(btnOk, OStrings.getString("BUTTON_OK")); // NOI18N
+        btnOk.setEnabled(false);
         jPanel2.add(btnOk);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -154,4 +155,6 @@ public class NewTeamProject extends javax.swing.JDialog {
     public javax.swing.JTextField txtDirectory;
     public javax.swing.JTextField txtRepositoryURL;
     // End of variables declaration//GEN-END:variables
+
+    public boolean ok;
 }

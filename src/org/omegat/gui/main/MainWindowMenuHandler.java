@@ -99,6 +99,13 @@ public class MainWindowMenuHandler {
     }
 
     /**
+     * Create new team project.
+     */
+    public void projectTeamNewMenuItemActionPerformed() {
+        ProjectUICommands.projectTeamCreate();
+    }
+
+    /**
      * Open project.
      */
     public void projectOpenMenuItemActionPerformed() {

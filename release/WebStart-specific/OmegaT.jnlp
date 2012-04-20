@@ -43,6 +43,10 @@
 				<jar href="jaxb-api.jar" />
 				<jar href="jaxb-impl.jar" />
 				<jar href="sjsxp-1.0.2.jar" />
+				<jar href="svnkit-1.3.7.jar" />
+				<jar href="sequence-library-1.0.0.jar" />
+				<jar href="org.eclipse.jgit-1.2.0.201112221803-r.jar" />
+				<jar href="jsch-0.1.46.jar" />
                 <jar href="jsr173_1.0_api.jar" />
                 <jar href="swing-worker-1.2.jar" />
 			</resources>
@@ -79,6 +83,10 @@
 				<jar href="MRJAdapter.jar" />
 				<jar href="swing-layout-1.0.jar" />
 				<jar href="vldocking_2.1.4.jar" />
+				<jar href="svnkit-1.3.7.jar" />
+				<jar href="sequence-library-1.0.0.jar" />
+				<jar href="org.eclipse.jgit-1.2.0.201112221803-r.jar" />
+				<jar href="jsch-0.1.46.jar" />
                 <jar href="swing-worker-1.2.jar" />
 			</resources>
             <resources os="Linux" arch="amd64">

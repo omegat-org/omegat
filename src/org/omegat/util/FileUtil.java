@@ -163,11 +163,23 @@ public class FileUtil {
      * @return
      */
     public static String computeRelativePath(File rootDir, File file) throws IOException {
-        String rootAbs = rootDir.getAbsolutePath().replace('\\', '/') + '/';
-        String fileAbs = file.getAbsolutePath().replace('\\', '/');
-        if (!fileAbs.startsWith(rootAbs)) {
-            throw new IOException("File is not under root dir");
+        String rootAbs, fileAbs;
+        switch (Platform.getOsType()) {
+        case WIN32:
+        case WIN64:
+            rootAbs = rootDir.getAbsolutePath().replace('\\', '/') + '/';
+            fileAbs = file.getAbsolutePath().replace('\\', '/');
+            if (!fileAbs.toUpperCase().startsWith(rootAbs.toUpperCase())) {
+                throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
+            }
+            return fileAbs.substring(rootAbs.length());
+        default:
+            rootAbs = rootDir.getAbsolutePath();
+            fileAbs = file.getAbsolutePath();
+            if (!fileAbs.startsWith(rootAbs)) {
+                throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
+            }
+            return fileAbs.substring(rootAbs.length());
         }
-        return fileAbs.substring(rootAbs.length());
     }
 }

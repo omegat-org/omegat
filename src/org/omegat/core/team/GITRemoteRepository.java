@@ -43,11 +43,14 @@ import org.omegat.util.Log;
 /**
  * SVN repository connection implementation.
  * 
+ * Please, do not use it with autocrlf option, since jgit not supported it yet.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class GITRemoteRepository implements IRemoteRepository {
     static String LOCAL_BRANCH = "master";
     static String REMOTE_BRANCH = "origin/master";
+    static String REMOTE = "origin";
 
     File localDirectory;
     Repository repository;
@@ -107,7 +110,11 @@ public class GITRemoteRepository implements IRemoteRepository {
     public void updateFullProject() throws Exception {
         Log.logInfoRB("GIT_START", "pull");
         try {
-            new Git(repository).pull().call();
+            new Git(repository).fetch().call();
+            new Git(repository).checkout().setName(REMOTE_BRANCH).call();
+            new Git(repository).branchDelete().setBranchNames(LOCAL_BRANCH).setForce(true).call();
+            new Git(repository).checkout().setStartPoint(REMOTE_BRANCH).setCreateBranch(true)
+                    .setName(LOCAL_BRANCH).setForce(true).call();
             Log.logInfoRB("GIT_FINISH", "pull");
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "pull", ex.getMessage());
@@ -119,9 +126,10 @@ public class GITRemoteRepository implements IRemoteRepository {
         Log.logInfoRB("GIT_START", "download");
         try {
             new Git(repository).fetch().call();
+            new Git(repository).checkout().setName(REMOTE_BRANCH).call();
             new Git(repository).branchDelete().setBranchNames(LOCAL_BRANCH).setForce(true).call();
             new Git(repository).checkout().setStartPoint(REMOTE_BRANCH).setCreateBranch(true)
-                    .setName(LOCAL_BRANCH).call();
+                    .setName(LOCAL_BRANCH).setForce(true).call();
             Log.logInfoRB("GIT_FINISH", "download");
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "download", ex.getMessage());
@@ -132,10 +140,15 @@ public class GITRemoteRepository implements IRemoteRepository {
         boolean ok = true;
         Log.logInfoRB("GIT_START", "upload");
         try {
-            String filePattern = getFilePattern(repository.getWorkTree(), file);
+            if (!isChanged(file)) {
+                Log.logInfoRB("GIT_FINISH", "upload(not changed)");
+                return;
+            }
+            String filePattern = FileUtil.computeRelativePath(repository.getWorkTree(), file);
             new Git(repository).add().addFilepattern(filePattern).call();
             new Git(repository).commit().setMessage(commitMessage).call();
-            Iterable<PushResult> results = new Git(repository).push().add(LOCAL_BRANCH).call();
+            Iterable<PushResult> results = new Git(repository).push().setRemote(REMOTE).add(LOCAL_BRANCH)
+                    .call();
             int count = 0;
             for (PushResult r : results) {
                 for (RemoteRefUpdate update : r.getRemoteUpdates()) {
@@ -159,17 +172,6 @@ public class GITRemoteRepository implements IRemoteRepository {
         }
     }
 
-    private String getFilePattern(File baseDir, File file) {
-        String baseDirStr = baseDir.getAbsolutePath();
-        String fileStr = file.getAbsolutePath();
-        if (fileStr.startsWith(baseDirStr + File.separatorChar)) {
-            return fileStr.substring(baseDirStr.length() + 1);
-        } else {
-            throw new RuntimeException("Impossible to make pattern from file '" + fileStr + "' based on '"
-                    + baseDirStr + "'");
-        }
-    }
-
     private static File getLocalRepositoryRoot(File path) {
         if (path == null) {
             return null;
@@ -178,7 +180,9 @@ public class GITRemoteRepository implements IRemoteRepository {
         if (possibleControlDir.exists() && possibleControlDir.isDirectory()) {
             return path;
         } else {
-            return getLocalRepositoryRoot(path.getParentFile());
+            // We need to call getAbsoluteFile() because "path" can be relative. In this case, we will have
+            // "null" instead real parent directory.
+            return getLocalRepositoryRoot(path.getAbsoluteFile().getParentFile());
         }
     }
 

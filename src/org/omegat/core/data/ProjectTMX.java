@@ -41,6 +41,8 @@ import org.omegat.util.TMXWriter2;
 /**
  * Class for store data from project_save.tmx.
  * 
+ * Orphaned or non-orphaned translation calculated by RealProject.
+ * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
 public class ProjectTMX {
@@ -51,46 +53,27 @@ public class ProjectTMX {
     protected static final String PROP_PATH = "path";
 
     /**
-     * Storage for translation for current project. Will be null if default translation disabled.
+     * Storage for default translations for current project.
      * 
      * It must be used with synchronization around ProjectTMX.
      */
-    final Map<String, TMXEntry> translationDefault;
+    final Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
      * 
      * It must be used with synchronization around ProjectTMX.
      */
-    final Map<EntryKey, TMXEntry> translationMultiple;
-
-    /**
-     * Storage for orphaned segments.
-     * 
-     * It must be used with synchronization around ProjectTMX.
-     */
-    final Map<String, TMXEntry> orphanedDefault;
-
-    /**
-     * Storage for orphaned alternative translations for current project.
-     * 
-     * It must be used with synchronization around ProjectTMX.
-     */
-    final Map<EntryKey, TMXEntry> orphanedMultiple;
+    final Map<EntryKey, TMXEntry> alternatives;
+    
+    final CheckOrphanedCallback checkOrphanedCallback;
 
     public ProjectTMX(ProjectProperties props, File file, CheckOrphanedCallback callback,
             Map<EntryKey, TMXEntry> sourceTranslations) throws Exception {
-        translationMultiple = new HashMap<EntryKey, TMXEntry>();
-        translationMultiple.putAll(sourceTranslations);
-        orphanedMultiple = new HashMap<EntryKey, TMXEntry>();
-        orphanedDefault = new HashMap<String, TMXEntry>();
-        if (props.isSupportDefaultTranslations()) {
-            translationDefault = new HashMap<String, TMXEntry>();
-        } else {
-            // Do not even create default storage if not required. It will
-            // allow to see errors.
-            translationDefault = null;
-        }
+        this.checkOrphanedCallback = callback;
+        alternatives = new HashMap<EntryKey, TMXEntry>();
+        alternatives.putAll(sourceTranslations);
+        defaults = new HashMap<String, TMXEntry>();
 
         if (!file.exists()) {
             // file not exist - new project
@@ -105,8 +88,7 @@ public class ProjectTMX {
                 false,
                 true,
                 false,
-                new Loader(callback, props.getSourceLanguage(), props.getTargetLanguage(), props
-                        .isSentenceSegmentingEnabled()));
+                new Loader(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled()));
     }
 
     /**
@@ -146,30 +128,36 @@ public class ProjectTMX {
         TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);
         try {
-            Map<String, TMXEntry> defaults = new TreeMap<String, TMXEntry>();
-            Map<EntryKey, TMXEntry> alternatives = new TreeMap<EntryKey, TMXEntry>();
+            Map<String, TMXEntry> tempDefaults = new TreeMap<String, TMXEntry>();
+            Map<EntryKey, TMXEntry> tempAlternatives = new TreeMap<EntryKey, TMXEntry>();
 
             synchronized (this) {
-                if (translationDefault != null) {
-                    defaults.putAll(translationDefault);
-                }
                 if (useOrphaned) {
-                    defaults.putAll(orphanedDefault);
-                }
-
-                alternatives.putAll(translationMultiple);
-                if (useOrphaned) {
-                    alternatives.putAll(orphanedMultiple);
+                    // fast call - just copy
+                    tempDefaults.putAll(defaults);
+                    tempAlternatives.putAll(alternatives);
+                } else {
+                    // slow call - copy non-orphaned only
+                    for(Map.Entry<String, TMXEntry> en:defaults.entrySet()) {
+                        if (checkOrphanedCallback.existSourceInProject(en.getKey())) {
+                            tempDefaults.put(en.getKey(), en.getValue());
+                        }
+                    }
+                    for(Map.Entry<EntryKey, TMXEntry> en:alternatives.entrySet()) {
+                        if (checkOrphanedCallback.existEntryInProject(en.getKey())) {
+                            tempAlternatives.put(en.getKey(), en.getValue());
+                        }
+                    }
                 }
             }
 
             wr.writeComment(" Default translations ");
-            for (Map.Entry<String, TMXEntry> en : new TreeMap<String, TMXEntry>(defaults).entrySet()) {
+            for (Map.Entry<String, TMXEntry> en : new TreeMap<String, TMXEntry>(tempDefaults).entrySet()) {
                 wr.writeEntry(en.getKey(), en.getValue().translation, en.getValue(), null);
             }
 
             wr.writeComment(" Alternative translations ");
-            for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<EntryKey, TMXEntry>(alternatives).entrySet()) {
+            for (Map.Entry<EntryKey, TMXEntry> en : new TreeMap<EntryKey, TMXEntry>(tempAlternatives).entrySet()) {
                 EntryKey k = en.getKey();
                 wr.writeEntry(en.getKey().sourceText, en.getValue().translation, en.getValue(), new String[] {
                         PROP_FILE, k.file, PROP_ID, k.id, PROP_PREV, k.prev, PROP_NEXT, k.next, PROP_PATH,
@@ -185,7 +173,7 @@ public class ProjectTMX {
      */
     public TMXEntry getDefaultTranslation(String source) {
         synchronized (this) {
-            return translationDefault != null ? translationDefault.get(source) : null;
+            return defaults.get(source);
         }
     }
 
@@ -194,7 +182,7 @@ public class ProjectTMX {
      */
     public TMXEntry getMultipleTranslation(EntryKey ek) {
         synchronized (this) {
-            return translationMultiple.get(ek);
+            return alternatives.get(ek);
         }
     }
 
@@ -205,29 +193,27 @@ public class ProjectTMX {
         synchronized (this) {
             if (te == null) {
                 if (isDefault) {
-                    translationDefault.remove(ste.getKey().sourceText);
+                    defaults.remove(ste.getKey().sourceText);
                 } else {
-                    translationMultiple.remove(ste.getKey());
+                    alternatives.remove(ste.getKey());
                 }
             } else {
                 if (isDefault) {
-                    translationDefault.put(ste.getKey().sourceText, te);
+                    defaults.put(ste.getKey().sourceText, te);
                 } else {
-                    translationMultiple.put(ste.getKey(), te);
+                    alternatives.put(ste.getKey(), te);
                 }
             }
         }
     }
 
     private class Loader implements TMXReader2.LoadCallback {
-        private final CheckOrphanedCallback callback;
         private final Language sourceLang;
         private final Language targetLang;
         private final boolean sentenceSegmentingEnabled;
 
-        public Loader(CheckOrphanedCallback callback, Language sourceLang, Language targetLang,
+        public Loader(Language sourceLang, Language targetLang,
                 boolean sentenceSegmentingEnabled) {
-            this.callback = callback;
             this.sourceLang = sourceLang;
             this.targetLang = targetLang;
             this.sentenceSegmentingEnabled = sentenceSegmentingEnabled;
@@ -266,18 +252,10 @@ public class ProjectTMX {
                             defaultTranslation);
                     if (defaultTranslation) {
                         // default translation
-                        if (translationDefault != null && callback.existSourceInProject(segmentSource)) {
-                            translationDefault.put(segmentSource, te);
-                        } else {
-                            orphanedDefault.put(segmentSource, te);
-                        }
+                        defaults.put(segmentSource, te);
                     } else {
                         // multiple translation
-                        if (callback.existEntryInProject(key)) {
-                            translationMultiple.put(key, te);
-                        } else {
-                            orphanedMultiple.put(key, te);
-                        }
+                        alternatives.put(key, te);
                     }
                 }
             }

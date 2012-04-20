@@ -211,8 +211,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
         ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback, new TreeMap<EntryKey, TMXEntry>());
 
         for (int i = 0; i < sources.size(); i++) {
-            tmx.translationDefault.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i),
-                    null, 0, null, true));
+            tmx.defaults.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i), null, 0, null,
+                    true));
         }
 
         tmx.exportTMX(props, outFile, false, false, true);
@@ -334,8 +334,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
         ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback, new TreeMap<EntryKey, TMXEntry>());
 
         for (int i = 0; i < sources.size(); i++) {
-            tmx.translationDefault.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i),
-                    null, 0, null, true));
+            tmx.defaults.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i), null, 0, null,
+                    true));
         }
 
         tmx.exportTMX(props, outFile, false, true, true);

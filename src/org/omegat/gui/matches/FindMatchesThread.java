@@ -126,7 +126,9 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         strTokensAll = tok.tokenizeAllExactly(processedEntry.getSrcText());
         /* HP: includes non - word tokens */
 
-        // travel by project entries
+        final String orphanedFileName = OStrings.getString("CT_ORPHAN_STRINGS");
+
+        // travel by project entries, including orphaned
         if (project.getProjectProperties().isSupportDefaultTranslations()) {
             project.iterateByDefaultTranslations(new DefaultTranslationsIterator() {
                 public void iterate(String source, TMXEntry trans) {
@@ -135,7 +137,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                         // skip original==original entry comparison
                         return;
                     }
-                    processEntry(null, source, trans.translation, null);
+                    String fileName = project.isOrphaned(source) ? orphanedFileName : null;
+                    processEntry(null, source, trans.translation, fileName);
                     return;
                 }
             });
@@ -147,28 +150,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                     // skip original==original entry comparison
                     return;
                 }
-                processEntry(source, source.sourceText, trans.translation, null);
-                return;
-            }
-        });
-
-        // travel by orphaned
-        final String orphanedFileName = OStrings.getString("CT_ORPHAN_STRINGS");
-        project.iterateByOrphanedDefaultTranslations(new DefaultTranslationsIterator() {
-            public void iterate(String source, TMXEntry trans) {
-                checkEntryChanged();
-                processEntry(null, source, trans.translation, orphanedFileName);
-                return;
-            }
-        });
-        project.iterateByOrphanedMultipleTranslations(new MultipleTranslationsIterator() {
-            public void iterate(EntryKey source, TMXEntry trans) {
-                checkEntryChanged();
-                if (source.sourceText.equals(processedEntry.getSrcText())) {
-                    // skip original==original entry comparison
-                    return;
-                }
-                processEntry(source, source.sourceText, trans.translation, orphanedFileName);
+                String fileName = project.isOrphaned(source) ? orphanedFileName : null;
+                processEntry(source, source.sourceText, trans.translation, fileName);
                 return;
             }
         });

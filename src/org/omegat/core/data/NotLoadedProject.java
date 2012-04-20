@@ -70,10 +70,12 @@ public class NotLoadedProject implements IProject {
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
     }
 
-    public void iterateByOrphanedDefaultTranslations(DefaultTranslationsIterator it) {
+    public boolean isOrphaned(String source) {
+        return false;
     }
 
-    public void iterateByOrphanedMultipleTranslations(MultipleTranslationsIterator it) {
+    public boolean isOrphaned(EntryKey entry) {
+        return false;
     }
 
     public Map<String, ExternalTMX> getTransMemories() {

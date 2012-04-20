@@ -36,8 +36,8 @@ import org.omegat.gui.common.EntryInfoSearchThread;
 /**
  * Class for iterate by all translation and find entries for multiple translations pane.
  * 
- * There is no sence to store multiple translations into map with source text key, because full iterate is
- * enough fast sice we just check strings for equals.
+ * There is no sense to store multiple translations into map with source text key, because full iterate is
+ * enough fast since we just check strings for equals.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
  */
@@ -63,20 +63,6 @@ public class MultipleTransFindThread extends EntryInfoSearchThread<List<Multiple
             }
         });
         project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
-            public void iterate(EntryKey source, TMXEntry trans) {
-                if (sourceText.equals(source.sourceText)) {
-                    result.add(new MultipleTransFoundEntry(source, trans));
-                }
-            }
-        });
-        project.iterateByOrphanedDefaultTranslations(new IProject.DefaultTranslationsIterator() {
-            public void iterate(String source, TMXEntry trans) {
-                if (sourceText.equals(source)) {
-                    result.add(new MultipleTransFoundEntry(source, trans));
-                }
-            }
-        });
-        project.iterateByOrphanedMultipleTranslations(new IProject.MultipleTranslationsIterator() {
             public void iterate(EntryKey source, TMXEntry trans) {
                 if (sourceText.equals(source.sourceText)) {
                     result.add(new MultipleTransFoundEntry(source, trans));

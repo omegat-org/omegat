@@ -243,7 +243,7 @@ public class Searcher {
         if (m_tmSearch) {
             // search in orphaned
             
-            m_project.iterateByOrphanedDefaultTranslations(new IProject.DefaultTranslationsIterator() {
+            m_project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
                 final String file = OStrings.getString("CT_ORPHAN_STRINGS");
 
                 public void iterate(String source, TMXEntry en) {
@@ -254,12 +254,13 @@ public class Searcher {
                     if (stopCallback.isStopped()) {
                         return;
                     }
-
-                    checkEntry(en.source, en.translation, en, -1, file);
+                    if (m_project.isOrphaned(source)) {
+                        checkEntry(en.source, en.translation, en, -1, file);
+                    }
                 }
             });
 
-            m_project.iterateByOrphanedMultipleTranslations(new IProject.MultipleTranslationsIterator() {
+            m_project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
                 final String file = OStrings.getString("CT_ORPHAN_STRINGS");
 
                 public void iterate(EntryKey source, TMXEntry en) {
@@ -270,8 +271,9 @@ public class Searcher {
                     if (stopCallback.isStopped()) {
                         return;
                     }
-
-                    checkEntry(en.source, en.translation, en, -1, file);
+                    if (m_project.isOrphaned(source)) {
+                        checkEntry(en.source, en.translation, en, -1, file);
+                    }
                 }
             });
 

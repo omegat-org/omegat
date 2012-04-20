@@ -134,6 +134,10 @@ public class RealProject implements IProject {
 
     private ProjectTMX projectTMX;
 
+    // Sets of exist entries for check orphaned
+    private Set<String> existSource = new HashSet<String>();
+    private Set<EntryKey> existKeys = new HashSet<EntryKey>();
+
     /** Segments count in project files. */
     private final List<FileInfo> projectFilesList = new ArrayList<FileInfo>();
 
@@ -213,10 +217,6 @@ public class RealProject implements IProject {
 
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
-            // sets for collect exist entries for check orphaned
-            Set<String> existSource = new HashSet<String>();
-            Set<EntryKey> existKeys = new HashSet<EntryKey>();
-
             // set project specific file filters if they exist
             if (FilterMaster.projectConfigFileExists(m_config.getProjectInternal())) {
                 this.filterMaster = FilterMaster.getProjectInstance(m_config.getProjectInternal());
@@ -231,12 +231,9 @@ public class RealProject implements IProject {
             }
 
             Map<EntryKey, TMXEntry> sourceTranslations = new HashMap<EntryKey, TMXEntry>();
-            loadSourceFiles(existSource, existKeys, sourceTranslations);
+            loadSourceFiles(sourceTranslations);
 
-            loadTranslations(existSource, existKeys, sourceTranslations);
-
-            existSource = null;
-            existKeys = null;
+            loadTranslations(sourceTranslations);
 
             loadTM();
 
@@ -508,25 +505,14 @@ public class RealProject implements IProject {
     // protected functions
 
     /** Finds and loads project's TMX file with translations (project_save.tmx). */
-    private void loadTranslations(final Set<String> existSource, final Set<EntryKey> existKeys,
-            final Map<EntryKey, TMXEntry> sourceTranslations) throws Exception {
+    private void loadTranslations(final Map<EntryKey, TMXEntry> sourceTranslations) throws Exception {
 
         final File tmxFile = new File(m_config.getProjectInternal() + OConsts.STATUS_EXTENSION);
-
-        ProjectTMX.CheckOrphanedCallback cb = new ProjectTMX.CheckOrphanedCallback() {
-            public boolean existSourceInProject(String src) {
-                return existSource.contains(src);
-            }
-
-            public boolean existEntryInProject(EntryKey key) {
-                return existKeys.contains(key);
-            }
-        };
 
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
 
-            projectTMX = new ProjectTMX(m_config, tmxFile, cb, sourceTranslations);
+            projectTMX = new ProjectTMX(m_config, tmxFile, checkOrphanedCallback, sourceTranslations);
             if (tmxFile.exists()) {
                 // RFE 1001918 - backing up project's TMX upon successful read
                 FileUtil.backupFile(tmxFile);
@@ -548,9 +534,8 @@ public class RealProject implements IProject {
      * @param projectRoot
      *            project root dir
      */
-    private void loadSourceFiles(final Set<String> existSource, final Set<EntryKey> existKeys,
-            final Map<EntryKey, TMXEntry> sourceTranslations) throws IOException, InterruptedIOException,
-            TranslationException {
+    private void loadSourceFiles(final Map<EntryKey, TMXEntry> sourceTranslations) throws IOException,
+            InterruptedIOException, TranslationException {
         long st = System.currentTimeMillis();
         FilterMaster fm = getActiveFilterMaster();
 
@@ -677,9 +662,9 @@ public class RealProject implements IProject {
             for (TMXEntry e : tmx.getEntries()) {
                 if (existSources.contains(e.source)) {
                     // source exist
-                    if (!projectTMX.translationDefault.containsKey(e.source)) {
+                    if (!projectTMX.defaults.containsKey(e.source)) {
                         // translation not exist
-                        projectTMX.translationDefault.put(e.source, e);
+                        projectTMX.defaults.put(e.source, e);
                     }
                 }
             }
@@ -768,12 +753,9 @@ public class RealProject implements IProject {
     }
 
     public void iterateByDefaultTranslations(DefaultTranslationsIterator it) {
-        if (projectTMX.translationDefault == null) {
-            return;
-        }
         Map.Entry<String, TMXEntry>[] entries;
         synchronized (projectTMX) {
-            Set<Map.Entry<String, TMXEntry>> set = projectTMX.translationDefault.entrySet();
+            Set<Map.Entry<String, TMXEntry>> set = projectTMX.defaults.entrySet();
             entries = set.toArray(new Map.Entry[set.size()]);
         }
         for (Map.Entry<String, TMXEntry> en : entries) {
@@ -784,34 +766,20 @@ public class RealProject implements IProject {
     public void iterateByMultipleTranslations(MultipleTranslationsIterator it) {
         Map.Entry<EntryKey, TMXEntry>[] entries;
         synchronized (projectTMX) {
-            Set<Map.Entry<EntryKey, TMXEntry>> set = projectTMX.translationMultiple.entrySet();
+            Set<Map.Entry<EntryKey, TMXEntry>> set = projectTMX.alternatives.entrySet();
             entries = set.toArray(new Map.Entry[set.size()]);
         }
         for (Map.Entry<EntryKey, TMXEntry> en : entries) {
             it.iterate(en.getKey(), en.getValue());
         }
     }
-
-    public void iterateByOrphanedDefaultTranslations(DefaultTranslationsIterator it) {
-        Map.Entry<String, TMXEntry>[] entries;
-        synchronized (projectTMX) {
-            Set<Map.Entry<String, TMXEntry>> set = projectTMX.orphanedDefault.entrySet();
-            entries = set.toArray(new Map.Entry[set.size()]);
-        }
-        for (Map.Entry<String, TMXEntry> en : entries) {
-            it.iterate(en.getKey(), en.getValue());
-        }
+    
+    public boolean isOrphaned(String source) {
+        return !checkOrphanedCallback.existSourceInProject(source);
     }
 
-    public void iterateByOrphanedMultipleTranslations(MultipleTranslationsIterator it) {
-        Map.Entry<EntryKey, TMXEntry>[] entries;
-        synchronized (projectTMX) {
-            Set<Map.Entry<EntryKey, TMXEntry>> set = projectTMX.orphanedMultiple.entrySet();
-            entries = set.toArray(new Map.Entry[set.size()]);
-        }
-        for (Map.Entry<EntryKey, TMXEntry> en : entries) {
-            it.iterate(en.getKey(), en.getValue());
-        }
+    public boolean isOrphaned(EntryKey entry) {
+        return !checkOrphanedCallback.existEntryInProject(entry);
     }
 
     public Map<String, ExternalTMX> getTransMemories() {
@@ -1012,6 +980,16 @@ public class RealProject implements IProject {
             }
         }
     }
+    
+    ProjectTMX.CheckOrphanedCallback checkOrphanedCallback = new ProjectTMX.CheckOrphanedCallback() {
+        public boolean existSourceInProject(String src) {
+            return existSource.contains(src);
+        }
+
+        public boolean existEntryInProject(EntryKey key) {
+            return existKeys.contains(key);
+        }
+    };
 
     static class FileNameComparator implements Comparator<String> {
         public int compare(String o1, String o2) {

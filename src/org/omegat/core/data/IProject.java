@@ -140,14 +140,14 @@ public interface IProject {
     void iterateByMultipleTranslations(MultipleTranslationsIterator it);
 
     /**
-     * Iterate by all orphaned default translations in project.
+     * Check if orphaned.
      */
-    void iterateByOrphanedDefaultTranslations(DefaultTranslationsIterator it);
+    boolean isOrphaned(String source);
 
     /**
-     * Iterate by all orphaned multiple translations in project.
+     * Check if orphaned.
      */
-    void iterateByOrphanedMultipleTranslations(MultipleTranslationsIterator it);
+    boolean isOrphaned(EntryKey entry);
 
     /**
      * Get all translation memories from /tm/ folder.

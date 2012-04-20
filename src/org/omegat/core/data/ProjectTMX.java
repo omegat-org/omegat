@@ -24,6 +24,7 @@
 package org.omegat.core.data;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -32,6 +33,7 @@ import java.util.TreeMap;
 
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
+import org.omegat.util.OConsts;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
@@ -107,7 +109,39 @@ public class ProjectTMX {
                         .isSentenceSegmentingEnabled()));
     }
 
-    public void save(ProjectProperties props, File outFile, final boolean forceValidTMX,
+    /**
+     * It saves current translation into file.
+     */
+    public void save(ProjectProperties props, String translationFile) throws Exception {
+        File newFile = new File(translationFile + OConsts.NEWFILE_EXTENSION);
+
+        // Save data into '*.new' file
+        exportTMX(props, newFile, false, false, true);
+
+        File backup = new File(translationFile + ".bak");
+        File orig = new File(translationFile);
+        if (backup.exists()) {
+            if (!backup.delete()) {
+                throw new IOException("Error delete backup file");
+            }
+        }
+
+        // Rename existing project file in case a fatal error
+        // is encountered during the write procedure - that way
+        // everything won't be lost
+        if (orig.exists()) {
+            if (!orig.renameTo(backup)) {
+                throw new IOException("Error rename old file to backup");
+            }
+        }
+
+        // Rename new file into TMX file
+        if (!newFile.renameTo(orig)) {
+            throw new IOException("Error rename new file to tmx");
+        }
+    }
+
+    public void exportTMX(ProjectProperties props, File outFile, final boolean forceValidTMX,
             final boolean levelTwo, final boolean useOrphaned) throws Exception {
         TMXWriter2 wr = new TMXWriter2(outFile, props.getSourceLanguage(), props.getTargetLanguage(),
                 props.isSentenceSegmentingEnabled(), levelTwo, forceValidTMX);

@@ -384,17 +384,17 @@ public class RealProject implements IProject {
             String fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.OMEGAT_TMX
                     + OConsts.TMX_EXTENSION;
 
-            projectTMX.save(m_config, new File(fname), false, false, false);
+            projectTMX.exportTMX(m_config, new File(fname), false, false, false);
 
             // build TMX level 1 compliant file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL1_TMX
                     + OConsts.TMX_EXTENSION;
-            projectTMX.save(m_config, new File(fname), true, false, false);
+            projectTMX.exportTMX(m_config, new File(fname), true, false, false);
 
             // build three-quarter-assed TMX level 2 file
             fname = m_config.getProjectRoot() + m_config.getProjectName() + OConsts.LEVEL2_TMX
                     + OConsts.TMX_EXTENSION;
-            projectTMX.save(m_config, new File(fname), false, true, false);
+            projectTMX.exportTMX(m_config, new File(fname), false, true, false);
         } catch (Exception e) {
             Log.logErrorRB("CT_ERROR_CREATING_TMX");
             Log.log(e);
@@ -461,44 +461,10 @@ public class RealProject implements IProject {
 
         String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
 
-        // rename existing project file in case a fatal error
-        // is encountered during the write procedure - that way
-        // everything won't be lost
-        File backup = new File(s + ".bak");
-        File orig = new File(s);
-        File newFile = new File(s + OConsts.NEWFILE_EXTENSION);
-
         try {
             saveProjectProperties();
 
-            projectTMX.save(m_config, newFile, false, false, true);
-
-            /*
-             * Backup behavior: steps for save some data in file should be:
-             * 
-             * 1. Save data into '*.new' file
-             * 
-             * 2. Rename exist '*.xml' into '*.xml...bak'
-             * 
-             * 3. Rename '*.new' into '*.xml'
-             * 
-             * It will allow to do not break exist files if some error will be produced in the save process.
-             */
-            if (backup.exists()) {
-                if (!backup.delete()) {
-                    throw new IOException("Error delete backup file");
-                }
-            }
-
-            if (orig.exists()) {
-                if (!orig.renameTo(backup)) {
-                    throw new IOException("Error rename old file to backup");
-                }
-            }
-
-            if (!newFile.renameTo(orig)) {
-                throw new IOException("Error rename new file to tmx");
-            }
+            projectTMX.save(m_config, s);
 
             m_modifiedFlag = false;
         } catch (Exception e) {

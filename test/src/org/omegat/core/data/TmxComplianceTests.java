@@ -144,7 +144,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
         final ProjectTMX tmx = new ProjectTMX(props, new File(
                 "test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), orphanedCallback,
                 new HashMap<EntryKey, TMXEntry>());
-        tmx.save(props, outFile, false, false, false);
+        tmx.exportTMX(props, outFile, false, false, false);
         // TODO validate via TMXCheck
     }
 
@@ -215,7 +215,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
                     null, 0, null, true));
         }
 
-        tmx.save(props, outFile, false, false, true);
+        tmx.exportTMX(props, outFile, false, false, true);
 
         compareTMX(tmxFile, outFile, 2);
     }
@@ -338,7 +338,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
                     null, 0, null, true));
         }
 
-        tmx.save(props, outFile, false, true, true);
+        tmx.exportTMX(props, outFile, false, true, true);
 
         compareTMX(tmxFile, outFile, 12);
     }

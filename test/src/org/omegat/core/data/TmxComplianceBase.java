@@ -190,7 +190,7 @@ public abstract class TmxComplianceBase extends TestCase {
             tmx.translationDefault.put(en.getKey(), en.getValue());
         }
 
-        tmx.save(props, outFile, false, false, true);
+        tmx.exportTMX(props, outFile, false, false, true);
     }
 
     protected Set<String> readTmxSegments(File tmx) throws Exception {

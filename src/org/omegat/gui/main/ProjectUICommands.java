@@ -41,11 +41,11 @@ import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.team.GITRemoteRepository;
 import org.omegat.core.team.IRemoteRepository;
+import org.omegat.core.team.RepositoryUtils;
 import org.omegat.core.team.SVNRemoteRepository;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProject;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
-import org.omegat.gui.dialogs.UserPassDialog;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -123,6 +123,8 @@ public class ProjectUICommands {
         }
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
+                Core.getMainWindow().showStatusMessageRB(null);
+                
                 final NewTeamProject dialog = displayTeamDialog();
 
                 final IRemoteRepository repository;
@@ -141,9 +143,11 @@ public class ProjectUICommands {
                         return null;
                     }
 
-                    new AskCredentials() {
-                        void callRepository() throws Exception {
+                    new RepositoryUtils.AskCredentials() {
+                        public void callRepository() throws Exception {
+                            Core.getMainWindow().showStatusMessageRB("TEAM_CHECKOUT");
                             repository.checkoutFullProject(dialog.txtRepositoryURL.getText());
+                            Core.getMainWindow().showStatusMessageRB(null);
                         }
                     }.execute(repository);
                 } catch (Exception ex) {
@@ -227,38 +231,13 @@ public class ProjectUICommands {
         dialog.btnOk.setEnabled(enabled);
     }
 
-    public static abstract class AskCredentials {
-        void execute(IRemoteRepository repository) throws Exception {
-            boolean firstPass = true;
-            while (true) {
-                try {
-                    callRepository();
-                    break;
-                } catch (IRemoteRepository.AuthenticationException ex) {
-                    UserPassDialog userPassDialog = new UserPassDialog(Core.getMainWindow()
-                            .getApplicationFrame());
-                    userPassDialog.setTitle(OStrings.getString("TEAM_USERPASS_TITLE"));
-                    userPassDialog.descriptionTextArea.setText(OStrings
-                            .getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
-                    userPassDialog.setVisible(true);
-                    if (userPassDialog.getReturnStatus() == UserPassDialog.RET_OK) {
-                        repository.setCredentials(userPassDialog.userText.getText(), new String(
-                                userPassDialog.passwordField.getPassword()));
-                    } else {
-                        break;
-                    }
-                    firstPass = false;
-                }
-            }
-        }
-
-        abstract void callRepository() throws Exception;
-    }
-
     /**
      * Open project.
+     * 
+     * @param projectDirectory
+     *            project directory or null if user must choose it
      */
-    public static void projectOpen() {
+    public static void projectOpen(final File projectDirectory) {
         UIThreadsUtil.mustBeSwingThread();
 
         if (Core.getProject().isProjectLoaded()) {
@@ -267,14 +246,18 @@ public class ProjectUICommands {
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                // select existing project file - open it
-                OmegaTFileChooser pfc = new OpenProjectFileChooser();
-                if (OmegaTFileChooser.APPROVE_OPTION != pfc.showOpenDialog(Core.getMainWindow()
-                        .getApplicationFrame())) {
-                    return null;
+                final File projectRootFolder;
+                if (projectDirectory == null) {
+                    // select existing project file - open it
+                    OmegaTFileChooser pfc = new OpenProjectFileChooser();
+                    if (OmegaTFileChooser.APPROVE_OPTION != pfc.showOpenDialog(Core.getMainWindow()
+                            .getApplicationFrame())) {
+                        return null;
+                    }
+                    projectRootFolder = pfc.getSelectedFile();
+                } else {
+                    projectRootFolder = projectDirectory;
                 }
-
-                final File projectRootFolder = pfc.getSelectedFile();
 
                 // check if project okay
                 ProjectProperties props;
@@ -301,12 +284,15 @@ public class ProjectUICommands {
                     try {
                         File tmxFile = new File(props.getProjectInternal() + OConsts.STATUS_EXTENSION);
                         if (repository.isChanged(tmxFile)) {
+                            Log.logWarningRB("TEAM_NOCHECKOUT");
                             Core.getMainWindow().showErrorDialogRB("TEAM_NOCHECKOUT", null,
                                     "TEAM_NOCHECKOUT_TITLE");
                         } else {
-                            new AskCredentials() {
-                                void callRepository() throws Exception {
+                            new RepositoryUtils.AskCredentials() {
+                                public void callRepository() throws Exception {
+                                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
                                     repository.updateFullProject();
+                                    Core.getMainWindow().showStatusMessageRB(null);
                                 }
                             }.execute(repository);
                         }
@@ -323,8 +309,6 @@ public class ProjectUICommands {
                     }
                 } else {
                     try {
-                        props = ProjectFileStorage.loadProjectProperties(projectRootFolder);
-
                         boolean needToSaveProperties = false;
                         while (!props.isProjectValid()) {
                             needToSaveProperties = true;

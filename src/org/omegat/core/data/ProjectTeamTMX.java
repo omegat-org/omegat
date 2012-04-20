@@ -28,7 +28,9 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
 
+import org.omegat.core.Core;
 import org.omegat.core.team.IRemoteRepository;
+import org.omegat.core.team.RepositoryUtils;
 import org.omegat.util.Preferences;
 
 /**
@@ -88,8 +90,8 @@ public class ProjectTeamTMX extends ProjectTMX {
     @Override
     public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser)
             throws Exception {
-        File orig = new File(translationFile);
-        File backup = new File(translationFile + ".bak");
+        final File orig = new File(translationFile);
+        final File backup = new File(translationFile + ".bak");
 
         ProjectTMX baseTMX, headTMX;
         File fileOnBase, fileOnHead;
@@ -152,9 +154,17 @@ public class ProjectTeamTMX extends ProjectTMX {
         }
 
         // upload updated
-        String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
+        final String author = Preferences.getPreferenceDefault(Preferences.TEAM_AUTHOR,
                 System.getProperty("user.name"));
-        repository.upload(orig, "Translated by " + author);
+        try {
+            new RepositoryUtils.AskCredentials() {
+                public void callRepository() throws Exception {
+                    repository.upload(orig, "Translated by " + author);
+                }
+            }.execute(repository);
+        } catch (Exception ex) {
+            Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZATION_ERROR");
+        }
     }
 
     /**

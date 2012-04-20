@@ -138,6 +138,11 @@ public class SVNRemoteRepository implements IRemoteRepository {
         try {
             ourClientManager.getCommitClient().doCommit(new File[] { file }, false, commitMessage, null,
                     null, false, false, SVNDepth.INFINITY);
+            Log.logInfoRB("SVN_FINISH", "upload");
+        } catch (SVNAuthenticationException ex) {
+            // authentication failed - need to ask username/password
+            Log.logWarningRB("SVN_ERROR", "update", ex.getMessage());
+            throw new AuthenticationException(ex);
         } catch (SVNException ex) {
             if (ex.getErrorMessage().getErrorCode() == SVNErrorCode.FS_CONFLICT) {
                 // Somebody else committed changes - it's normal. Will upload on next save.
@@ -145,8 +150,10 @@ public class SVNRemoteRepository implements IRemoteRepository {
             } else {
                 Log.logErrorRB("SVN_ERROR", "upload", ex.getMessage());
             }
+            throw ex;
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "upload", ex.getMessage());
+            throw ex;
         }
     }
 }

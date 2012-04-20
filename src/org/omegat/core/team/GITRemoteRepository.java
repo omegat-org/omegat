@@ -129,13 +129,13 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
 
     public void upload(File file, String commitMessage) throws Exception {
+        boolean ok = true;
         Log.logInfoRB("GIT_START", "upload");
         try {
             String filePattern = getFilePattern(repository.getWorkTree(), file);
             new Git(repository).add().addFilepattern(filePattern).call();
             new Git(repository).commit().setMessage(commitMessage).call();
             Iterable<PushResult> results = new Git(repository).push().add(LOCAL_BRANCH).call();
-            boolean ok = true;
             int count = 0;
             for (PushResult r : results) {
                 for (RemoteRefUpdate update : r.getRemoteUpdates()) {
@@ -145,12 +145,17 @@ public class GITRemoteRepository implements IRemoteRepository {
                     }
                 }
             }
-            if (!ok || count < 1) {
-                Log.logWarningRB("GIT_CONFLICT");
+            if (count < 1) {
+                ok = false;
             }
             Log.logInfoRB("GIT_FINISH", "upload");
         } catch (Exception ex) {
             Log.logErrorRB("GIT_ERROR", "upload", ex.getMessage());
+            throw ex;
+        }
+        if (!ok) {
+            Log.logWarningRB("GIT_CONFLICT");
+            throw new Exception("Conflict");
         }
     }
 

@@ -470,6 +470,7 @@ public class RealProject implements IProject {
             try {
                 saveProjectProperties();
 
+                Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
                 projectTMX.save(m_config, s, isProjectModified());
 
                 m_modifiedFlag = false;

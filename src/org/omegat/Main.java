@@ -43,13 +43,13 @@ import javax.swing.UIManager;
 import org.omegat.convert.ConvertConfigs;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
-import org.omegat.core.data.ProjectException;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.data.RealProject;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.filters2.master.PluginUtils;
+import org.omegat.gui.main.ProjectUICommands;
 import org.omegat.gui.tagvalidation.ITagValidation;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -211,20 +211,15 @@ public class Main {
 
         CoreEvents.fireApplicationStartup();
 
-        if (projectLocation != null) {
-            try {
-                ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectLocation);
-                ProjectFactory.loadProject(props, null);
-            } catch (Exception ex) {
-                showError(ex);
-            }
-        }
-
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 // setVisible can't be executed directly, because we need to
                 // call all application startup listeners for initialize UI
                 Core.getMainWindow().getApplicationFrame().setVisible(true);
+
+                if (projectLocation != null) {
+                    ProjectUICommands.projectOpen(projectLocation);
+                }
             }
         });
     }

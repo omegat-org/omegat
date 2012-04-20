@@ -109,7 +109,7 @@ public class MainWindowMenuHandler {
      * Open project.
      */
     public void projectOpenMenuItemActionPerformed() {
-        ProjectUICommands.projectOpen();
+        ProjectUICommands.projectOpen(null);
     }
 
     /**

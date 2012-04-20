@@ -38,6 +38,7 @@ import javax.swing.JOptionPane;
 import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.KnownException;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.spellchecker.ISpellChecker;
@@ -206,7 +207,11 @@ public class MainWindowMenuHandler {
                     // Save the list of learned and ignore words
                     ISpellChecker sc = Core.getSpellChecker();
                     sc.saveWordLists();
-                    Core.getProject().saveProject();
+                    try {
+                        Core.getProject().saveProject();
+                    } catch (KnownException ex) {
+                        // hide exception on shutdown
+                    }
                 }
 
                 CoreEvents.fireApplicationShutdown();

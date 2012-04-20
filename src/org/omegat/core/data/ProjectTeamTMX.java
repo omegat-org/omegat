@@ -29,6 +29,7 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.omegat.core.Core;
+import org.omegat.core.KnownException;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team.RepositoryUtils;
 import org.omegat.util.Preferences;
@@ -163,7 +164,7 @@ public class ProjectTeamTMX extends ProjectTMX {
                 }
             }.execute(repository);
         } catch (Exception ex) {
-            Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZATION_ERROR");
+            throw new KnownException(ex, "TEAM_SYNCHRONIZATION_ERROR");
         }
     }
 

@@ -31,6 +31,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.omegat.core.Core;
+import org.omegat.core.KnownException;
 import org.omegat.core.data.IProject;
 
 /**
@@ -78,10 +79,14 @@ public class SaveThread extends Thread implements IAutoSave {
                     // Wait finished by time and autosaving enabled.
                     IProject dataEngine = Core.getProject();
                     LOGGER.fine("Start project save from SaveThread");
-                    dataEngine.saveProject();
+                    try {
+                        dataEngine.saveProject();
+                        Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
+                                DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
+                    } catch (KnownException ex) {
+                        Core.getMainWindow().showStatusMessageRB(ex.getMessage(), ex.getParams());
+                    }
                     LOGGER.fine("Finish project save from SaveThread");
-                    Core.getMainWindow().showStatusMessageRB("ST_PROJECT_AUTOSAVED",
-                            DateFormat.getTimeInstance(DateFormat.SHORT).format(new Date()));
                 }
             }
         } catch (InterruptedException ex) {

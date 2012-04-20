@@ -65,7 +65,7 @@ public class RepositoryUtils {
                     boolean entered = RepositoryUtils.askForCredentials(repository,
                             OStrings.getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
                     if (!entered) {
-                        break;
+                        throw ex;
                     }
                     firstPass = false;
                 }

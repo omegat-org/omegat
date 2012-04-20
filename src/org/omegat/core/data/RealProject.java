@@ -53,6 +53,7 @@ import java.util.regex.Pattern;
 
 import org.omegat.core.Core;
 import org.omegat.core.CoreEvents;
+import org.omegat.core.KnownException;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
@@ -460,36 +461,40 @@ public class RealProject implements IProject {
         UIThreadsUtil.mustNotBeSwingThread();
 
         Core.getAutoSave().disable();
-
-        Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(false);
         try {
-            Preferences.save();
 
-            String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-
+            Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(false);
             try {
-                saveProjectProperties();
+                Preferences.save();
 
-                Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
-                projectTMX.save(m_config, s, isProjectModified());
+                String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
 
-                m_modifiedFlag = false;
-            } catch (Exception e) {
-                Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
-                Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+                try {
+                    saveProjectProperties();
+
+                    Core.getMainWindow().showStatusMessageRB("TEAM_SYNCHRONIZE");
+                    projectTMX.save(m_config, s, isProjectModified());
+
+                    m_modifiedFlag = false;
+                } catch (KnownException ex) {
+                    throw ex;
+                } catch (Exception e) {
+                    Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
+                    Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+                }
+
+                // update statistics
+                String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
+                String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
+                Statistics.writeStat(fn, stat);
+            } finally {
+                Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
             }
 
-            // update statistics
-            String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
-            String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
-            Statistics.writeStat(fn, stat);
+            CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
         } finally {
-            Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
+            Core.getAutoSave().enable();
         }
-
-        CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
-
-        Core.getAutoSave().enable();
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_END"));
     }
 

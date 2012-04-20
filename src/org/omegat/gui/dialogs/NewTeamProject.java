@@ -40,8 +40,8 @@ public class NewTeamProject extends javax.swing.JDialog {
         txtDirectory = new javax.swing.JTextField();
         btnDirectory = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        btnCancel = new javax.swing.JButton();
         btnOk = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -114,12 +114,12 @@ public class NewTeamProject extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(0, 0, 0, 5);
         getContentPane().add(btnDirectory, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(btnCancel, OStrings.getString("BUTTON_CANCEL")); // NOI18N
-        jPanel2.add(btnCancel);
-
         org.openide.awt.Mnemonics.setLocalizedText(btnOk, OStrings.getString("BUTTON_OK")); // NOI18N
         btnOk.setEnabled(false);
         jPanel2.add(btnOk);
+
+        org.openide.awt.Mnemonics.setLocalizedText(btnCancel, OStrings.getString("BUTTON_CANCEL")); // NOI18N
+        jPanel2.add(btnCancel);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;

@@ -533,6 +533,10 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         return optionsGlossaryMenu;
     }
 
+    public JMenu getProjectMenu() {
+        return projectMenu;
+    }
+
     JMenuItem cycleSwitchCaseMenuItem;
     JMenuItem editFindInProjectMenuItem;
     JMenuItem editInsertSourceMenuItem;

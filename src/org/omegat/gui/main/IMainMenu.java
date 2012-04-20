@@ -42,4 +42,5 @@ public interface IMainMenu {
 
     JMenu getGlossaryMenu();
 
+    JMenu getProjectMenu();
 }

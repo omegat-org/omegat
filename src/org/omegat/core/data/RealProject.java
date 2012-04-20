@@ -461,25 +461,30 @@ public class RealProject implements IProject {
 
         Core.getAutoSave().disable();
 
-        Preferences.save();
-
-        String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
-
+        Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(false);
         try {
-            saveProjectProperties();
+            Preferences.save();
 
-            projectTMX.save(m_config, s, isProjectModified());
+            String s = m_config.getProjectInternal() + OConsts.STATUS_EXTENSION;
 
-            m_modifiedFlag = false;
-        } catch (Exception e) {
-            Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
-            Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+            try {
+                saveProjectProperties();
+
+                projectTMX.save(m_config, s, isProjectModified());
+
+                m_modifiedFlag = false;
+            } catch (Exception e) {
+                Log.logErrorRB(e, "CT_ERROR_SAVING_PROJ");
+                Core.getMainWindow().displayErrorRB(e, "CT_ERROR_SAVING_PROJ");
+            }
+
+            // update statistics
+            String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
+            String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
+            Statistics.writeStat(fn, stat);
+        } finally {
+            Core.getMainWindow().getMainMenu().getProjectMenu().setEnabled(true);
         }
-
-        // update statistics
-        String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
-        String fn = m_config.getProjectInternal() + OConsts.STATS_FILENAME;
-        Statistics.writeStat(fn, stat);
 
         CoreEvents.fireProjectChange(IProjectEventListener.PROJECT_CHANGE_TYPE.SAVE);
 

@@ -25,6 +25,8 @@
 
 package org.omegat.core.data;
 
+import org.omegat.util.StringUtil;
+
 /**
  * Storage for TMX entry.
  * 
@@ -55,5 +57,25 @@ public class TMXEntry {
     
     public boolean hasNote() {
         return note != null;
+    }
+
+    public boolean equalsTranslation(TMXEntry other) {
+        if (other == null) {
+            return false;
+        }
+        boolean equals = true;
+        if (equals && changeDate != other.changeDate) {
+            equals = false;
+        }
+        if (equals && !StringUtil.equalsWithNulls(translation, other.translation)) {
+            equals = false;
+        }
+        if (equals && !StringUtil.equalsWithNulls(changer, other.changer)) {
+            equals = false;
+        }
+        if (equals && !StringUtil.equalsWithNulls(note, other.note)) {
+            equals = false;
+        }
+        return equals;
     }
 }

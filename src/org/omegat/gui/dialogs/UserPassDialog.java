@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2010 Didier Briel
+               2012 Alex Buloichick, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -28,7 +29,6 @@ package org.omegat.gui.dialogs;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.io.IOException;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -36,14 +36,13 @@ import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.KeyStroke;
-import org.omegat.util.Log;
 
 import org.omegat.util.OStrings;
-import org.omegat.util.Preferences;
 
 /**
  * 
  * @author Didier Briel
+ * @author Alex Buloichik (alex73mail@gmail.com)
  */
 @SuppressWarnings("serial")
 public class UserPassDialog extends JDialog {
@@ -91,7 +90,6 @@ public class UserPassDialog extends JDialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        ourButtonGroup = new javax.swing.ButtonGroup();
         descriptionTextArea = new javax.swing.JTextArea();
         userLabel = new javax.swing.JLabel();
         userText = new javax.swing.JTextField();
@@ -151,8 +149,6 @@ public class UserPassDialog extends JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
         gridBagConstraints.insets = new java.awt.Insets(4, 16, 4, 4);
         getContentPane().add(passwordLabel, gridBagConstraints);
-
-        passwordField.setText("jPasswordField1");
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 6;
@@ -219,7 +215,6 @@ public class UserPassDialog extends JDialog {
     public javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;
-    private javax.swing.ButtonGroup ourButtonGroup;
     public javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JLabel userLabel;

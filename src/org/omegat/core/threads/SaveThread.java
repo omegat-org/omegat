@@ -43,7 +43,7 @@ import org.omegat.core.data.IProject;
 public class SaveThread extends Thread implements IAutoSave {
     private static final Logger LOGGER = Logger.getLogger(SaveThread.class.getName());
 
-    private static final int SAVE_DURATION = 10 * 60 * 1000; // 10 minutes;
+    private static final int SAVE_DURATION = 3 * 60 * 1000; // 3 minutes;
 
     private boolean needToSaveNow;
     private boolean enabled;

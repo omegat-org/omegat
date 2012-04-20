@@ -26,6 +26,8 @@
 
 package org.omegat.gui.main;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 
 import javax.swing.JOptionPane;
@@ -35,13 +37,19 @@ import org.jdesktop.swingworker.SwingWorker;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectFactory;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.team.GITRemoteRepository;
+import org.omegat.core.team.IRemoteRepository;
+import org.omegat.core.team.SVNRemoteRepository;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
+import org.omegat.gui.dialogs.NewTeamProject;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
+import org.omegat.gui.dialogs.UserPassDialog;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
 import org.omegat.util.ProjectFileStorage;
+import org.omegat.util.gui.DockingUI;
 import org.omegat.util.gui.OmegaTFileChooser;
 import org.omegat.util.gui.OpenProjectFileChooser;
 import org.omegat.util.gui.UIThreadsUtil;
@@ -61,49 +69,139 @@ public class ProjectUICommands {
             return;
         }
 
-        // ask for new project dir
-        NewProjectFileChooser ndc = new NewProjectFileChooser();
-        int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
-        if (ndcResult != OmegaTFileChooser.APPROVE_OPTION) {
-            // user press 'Cancel' in project creation dialog
-            return;
-        }
-        File dir = ndc.getSelectedFile();
-        dir.mkdirs();
+        new SwingWorker<Object, Void>() {
+            protected Object doInBackground() throws Exception {
+                // ask for new project dir
+                NewProjectFileChooser ndc = new NewProjectFileChooser();
+                int ndcResult = ndc.showSaveDialog(Core.getMainWindow().getApplicationFrame());
+                if (ndcResult != OmegaTFileChooser.APPROVE_OPTION) {
+                    // user press 'Cancel' in project creation dialog
+                    return null;
+                }
+                File dir = ndc.getSelectedFile();
+                dir.mkdirs();
 
-        // ask about new project properties
-        ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(new ProjectProperties(dir),
-                dir.getAbsolutePath(), ProjectPropertiesDialog.NEW_PROJECT);
-        newProjDialog.setVisible(true);
-        newProjDialog.dispose();
+                // ask about new project properties
+                ProjectPropertiesDialog newProjDialog = new ProjectPropertiesDialog(
+                        new ProjectProperties(dir), dir.getAbsolutePath(),
+                        ProjectPropertiesDialog.NEW_PROJECT);
+                newProjDialog.setVisible(true);
+                newProjDialog.dispose();
 
-        final ProjectProperties newProps = newProjDialog.getResult();
-        if (newProps == null) {
-            // user clicks on 'Cancel'
-            dir.delete();
-            return;
-        }
-
-        final String projectRoot = newProps.getProjectRoot();
-
-        if (projectRoot != null && projectRoot.length() > 0) {
-            new SwingWorker<Object, Void>() {
-                protected Object doInBackground() throws Exception {
-                    ProjectFactory.createProject(newProps);
-                    Core.getProject().saveProjectProperties();
+                final ProjectProperties newProps = newProjDialog.getResult();
+                if (newProps == null) {
+                    // user clicks on 'Cancel'
+                    dir.delete();
                     return null;
                 }
 
-                protected void done() {
+                final String projectRoot = newProps.getProjectRoot();
+
+                if (projectRoot != null && projectRoot.length() > 0) {
+                    // create project
                     try {
-                        get();
+                        ProjectFactory.createProject(newProps);
+                        Core.getProject().saveProjectProperties();
                     } catch (Exception ex) {
                         Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     }
                 }
-            }.execute();
+                return null;
+            }
+        }.execute();
+    }
+
+    public static void projectTeamCreate() {
+        UIThreadsUtil.mustBeSwingThread();
+
+        if (Core.getProject().isProjectLoaded()) {
+            return;
         }
+        new SwingWorker<Object, Void>() {
+            protected Object doInBackground() throws Exception {
+                final NewTeamProject dialog = displayTeamDialog();
+
+                final IRemoteRepository repository;
+                File localDirectory = new File(dialog.txtDirectory.getText());
+                try {
+                    if (dialog.rbSVN.isSelected()) {
+                        // SVN selected
+                        repository = new SVNRemoteRepository(localDirectory);
+                    } else if (dialog.rbGIT.isSelected()) {
+                        // GIT selected
+                        repository = new GITRemoteRepository(localDirectory);
+                    } else {
+                        return null;
+                    }
+
+                    new AskCredentials() {
+                        void callRepository() throws Exception {
+                            repository.checkoutFullProject(dialog.txtRepositoryURL.getText());
+                        }
+                    }.execute(repository);
+                } catch (Exception ex) {
+                    Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
+                    return null;
+                }
+
+                try {
+                    ProjectProperties props = ProjectFileStorage.loadProjectProperties(localDirectory);
+                    ProjectFactory.loadProject(props, repository);
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                }
+                return null;
+            }
+        }.execute();
+    }
+
+    public static NewTeamProject displayTeamDialog() {
+        final NewTeamProject dialog = new NewTeamProject(Core.getMainWindow().getApplicationFrame(), true);
+        DockingUI.displayCentered(dialog);
+        dialog.btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.rbGIT.setSelected(false);
+                dialog.rbSVN.setSelected(false);
+                dialog.dispose();
+            }
+        });
+        dialog.btnOk.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose();
+            }
+        });
+        dialog.setVisible(true);
+        return dialog;
+    }
+
+    public static abstract class AskCredentials {
+        void execute(IRemoteRepository repository) throws Exception {
+            boolean firstPass = true;
+            while (true) {
+                try {
+                    callRepository();
+                    break;
+                } catch (IRemoteRepository.AuthenticationException ex) {
+                    UserPassDialog userPassDialog = new UserPassDialog(Core.getMainWindow()
+                            .getApplicationFrame());
+                    userPassDialog.setTitle(OStrings.getString("TEAM_USERPASS_TITLE"));
+                    userPassDialog.descriptionTextArea.setText(OStrings
+                            .getString(firstPass ? "TEAM_USERPASS_FIRST" : "TEAM_USERPASS_WRONG"));
+                    userPassDialog.setVisible(true);
+                    if (userPassDialog.getReturnStatus() == UserPassDialog.RET_OK) {
+                        repository.setCredentials(userPassDialog.userText.getText(), new String(
+                                userPassDialog.passwordField.getPassword()));
+                    } else {
+                        break;
+                    }
+                    firstPass = false;
+                }
+            }
+        }
+
+        abstract void callRepository() throws Exception;
     }
 
     /**
@@ -116,53 +214,96 @@ public class ProjectUICommands {
             return;
         }
 
-        // select existing project file - open it
-        OmegaTFileChooser pfc = new OpenProjectFileChooser();
-        if (OmegaTFileChooser.APPROVE_OPTION != pfc
-                .showOpenDialog(Core.getMainWindow().getApplicationFrame())) {
-            return;
-        }
-
-        final File projectRootFolder = pfc.getSelectedFile();
-
-        // check if project okay
-        ProjectProperties props;
-        try {
-            props = ProjectFileStorage.loadProjectProperties(projectRootFolder);
-        } catch (Exception ex) {
-            Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-            Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
-            return;
-        }
-
-        boolean needToSaveProperties = false;
-        while (!props.isProjectValid()) {
-            needToSaveProperties = true;
-            // something wrong with the project - display open dialog
-            // to fix it
-            ProjectPropertiesDialog prj = new ProjectPropertiesDialog(props, new File(projectRootFolder,
-                    OConsts.FILE_PROJECT).getAbsolutePath(), ProjectPropertiesDialog.RESOLVE_DIRS);
-            prj.setVisible(true);
-            props = prj.getResult();
-            prj.dispose();
-            if (props == null) {
-                // user clicks on 'Cancel'
-                return;
-            }
-        }
-
-        final boolean saveProperties = needToSaveProperties;
-        final ProjectProperties newProps = props;
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                // TODO: check loading if need to show dialog
-                ProjectFactory.loadProject(newProps);
-                if (saveProperties) {
-                    Core.getProject().saveProjectProperties();
+                // select existing project file - open it
+                OmegaTFileChooser pfc = new OpenProjectFileChooser();
+                if (OmegaTFileChooser.APPROVE_OPTION != pfc.showOpenDialog(Core.getMainWindow()
+                        .getApplicationFrame())) {
+                    return null;
+                }
+
+                final File projectRootFolder = pfc.getSelectedFile();
+
+                // check if project okay
+                ProjectProperties props;
+                try {
+                    props = ProjectFileStorage.loadProjectProperties(projectRootFolder);
+                } catch (Exception ex) {
+                    Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    return null;
+                }
+
+                final IRemoteRepository repository;
+                // check for team-project
+                if (SVNRemoteRepository.isSVNDirectory(projectRootFolder)) {
+                    // SVN selected
+                    repository = new SVNRemoteRepository(projectRootFolder);
+                } else if (GITRemoteRepository.isGITDirectory(projectRootFolder)) {
+                    repository = new GITRemoteRepository(projectRootFolder);
+                } else {
+                    repository = null;
+                }
+
+                if (repository != null) {
+                    try {
+                        File tmxFile = new File(props.getProjectInternal() + OConsts.STATUS_EXTENSION);
+                        if (repository.isChanged(tmxFile)) {
+                            Core.getMainWindow().showErrorDialogRB("TEAM_NOCHECKOUT", null,
+                                    "TEAM_NOCHECKOUT_TITLE");
+                        } else {
+                            new AskCredentials() {
+                                void callRepository() throws Exception {
+                                    repository.updateFullProject();
+                                }
+                            }.execute(repository);
+                        }
+                    } catch (Exception ex) {
+                        Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
+                        return null;
+                    }
+                    try {
+                        ProjectFactory.loadProject(props, repository);
+                    } catch (Exception ex) {
+                        Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                        Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                        return null;
+                    }
+                } else {
+                    try {
+                        props = ProjectFileStorage.loadProjectProperties(projectRootFolder);
+
+                        boolean needToSaveProperties = false;
+                        while (!props.isProjectValid()) {
+                            needToSaveProperties = true;
+                            // something wrong with the project - display open dialog
+                            // to fix it
+                            ProjectPropertiesDialog prj = new ProjectPropertiesDialog(props, new File(
+                                    projectRootFolder, OConsts.FILE_PROJECT).getAbsolutePath(),
+                                    ProjectPropertiesDialog.RESOLVE_DIRS);
+                            prj.setVisible(true);
+                            props = prj.getResult();
+                            prj.dispose();
+                            if (props == null) {
+                                // user clicks on 'Cancel'
+                                return null;
+                            }
+                        }
+
+                        ProjectFactory.loadProject(props, repository);
+                        if (needToSaveProperties) {
+                            Core.getProject().saveProjectProperties();
+                        }
+                    } catch (Exception ex) {
+                        Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                        Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                        return null;
+                    }
                 }
                 return null;
             }
-
+            
             protected void done() {
                 try {
                     get();
@@ -188,10 +329,12 @@ public class ProjectUICommands {
             int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
             protected Object doInBackground() throws Exception {
+                IRemoteRepository repository = Core.getProject().getRepository();
+
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
 
-                ProjectFactory.loadProject(props);
+                ProjectFactory.loadProject(props, repository);
                 return null;
             }
 
@@ -294,7 +437,7 @@ public class ProjectUICommands {
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
 
-                ProjectFactory.loadProject(newProps);
+                ProjectFactory.loadProject(newProps, null);
                 Core.getProject().saveProjectProperties();
                 return null;
             }
@@ -331,6 +474,7 @@ public class ProjectUICommands {
             }
         }.execute();
     }
+
     private static void performProjectMenuItemPreConditions() {
         UIThreadsUtil.mustBeSwingThread();
 

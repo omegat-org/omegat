@@ -214,7 +214,7 @@ public class Main {
         if (projectLocation != null) {
             try {
                 ProjectProperties props = ProjectFileStorage.loadProjectProperties(projectLocation);
-                ProjectFactory.loadProject(props);
+                ProjectFactory.loadProject(props, null);
             } catch (Exception ex) {
                 showError(ex);
             }

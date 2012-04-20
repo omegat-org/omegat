@@ -61,6 +61,7 @@ import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.core.team.IRemoteRepository;
 import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IAlignCallback;
 import org.omegat.filters2.IFilter;
@@ -100,6 +101,8 @@ public class RealProject implements IProject {
     private static final Logger LOGGER = Logger.getLogger(RealProject.class.getName());
 
     protected final ProjectProperties m_config;
+    
+    private final IRemoteRepository repository;
 
     private FileChannel lockChannel;
     private FileLock lock;
@@ -154,10 +157,19 @@ public class RealProject implements IProject {
      *            true if project need to be created
      */
     public RealProject(final ProjectProperties props) {
+        this(props, null);
+    }
+
+    public RealProject(final ProjectProperties props, IRemoteRepository repository) {
         m_config = props;
+        this.repository = repository;
 
         sourceTokenizer = createTokenizer(true);
         targetTokenizer = createTokenizer(false);
+    }
+    
+    public IRemoteRepository getRepository() {
+        return repository;
     }
 
     public void saveProjectProperties() throws Exception {
@@ -444,11 +456,6 @@ public class RealProject implements IProject {
 
     /** Saves the translation memory and preferences */
     public void saveProject() {
-        if (!isProjectModified()) {
-            LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_NONEED"));
-            return;
-        }
-
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_START"));
         UIThreadsUtil.mustNotBeSwingThread();
 
@@ -461,7 +468,7 @@ public class RealProject implements IProject {
         try {
             saveProjectProperties();
 
-            projectTMX.save(m_config, s);
+            projectTMX.save(m_config, s, isProjectModified());
 
             m_modifiedFlag = false;
         } catch (Exception e) {
@@ -512,7 +519,14 @@ public class RealProject implements IProject {
         try {
             Core.getMainWindow().showStatusMessageRB("CT_LOAD_TMX");
 
-            projectTMX = new ProjectTMX(m_config, tmxFile, checkOrphanedCallback, sourceTranslations);
+            if (repository != null) {
+                // team project
+                projectTMX = new ProjectTeamTMX(m_config, tmxFile, checkOrphanedCallback, sourceTranslations,
+                        repository);
+            } else {
+                // local project
+                projectTMX = new ProjectTMX(m_config, tmxFile, checkOrphanedCallback, sourceTranslations);
+            }
             if (tmxFile.exists()) {
                 // RFE 1001918 - backing up project's TMX upon successful read
                 FileUtil.backupFile(tmxFile);

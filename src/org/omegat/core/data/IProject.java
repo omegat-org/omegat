@@ -34,6 +34,7 @@ import java.util.Map;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.statistics.StatisticsInfo;
+import org.omegat.core.team.IRemoteRepository;
 import org.omegat.filters2.master.FilterMaster;
 
 /**
@@ -70,6 +71,11 @@ public interface IProject {
      * @return project properties
      */
     ProjectProperties getProjectProperties();
+    
+    /**
+     * Returns repository for team project, or null.
+     */
+    IRemoteRepository getRepository();
 
     /**
      * Get project loaded status.

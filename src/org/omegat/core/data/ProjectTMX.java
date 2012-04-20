@@ -3,7 +3,7 @@
           with fuzzy matching, translation memory, keyword search, 
           glossaries, and translation leveraging into updated projects.
 
- Copyright (C) 2010 Alex Buloichik
+ Copyright (C) 2012 Alex Buloichik
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -30,10 +30,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
+import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 import org.omegat.util.TMXReader2;
 import org.omegat.util.TMXWriter2;
@@ -52,19 +54,22 @@ public class ProjectTMX {
     protected static final String PROP_NEXT = "next";
     protected static final String PROP_PATH = "path";
 
+    /** Local logger. */
+    private static final Logger LOGGER = Logger.getLogger(ProjectTMX.class.getName());
+
     /**
      * Storage for default translations for current project.
      * 
      * It must be used with synchronization around ProjectTMX.
      */
-    final Map<String, TMXEntry> defaults;
+    Map<String, TMXEntry> defaults;
 
     /**
      * Storage for alternative translations for current project.
      * 
      * It must be used with synchronization around ProjectTMX.
      */
-    final Map<EntryKey, TMXEntry> alternatives;
+    Map<EntryKey, TMXEntry> alternatives;
     
     final CheckOrphanedCallback checkOrphanedCallback;
 
@@ -92,9 +97,39 @@ public class ProjectTMX {
     }
 
     /**
+     * Constructor for TMX delta.
+     */
+    public ProjectTMX() {
+        alternatives = new HashMap<EntryKey, TMXEntry>();
+        defaults = new HashMap<String, TMXEntry>();
+        checkOrphanedCallback = null;
+    }
+
+    /**
+     * Clear all data from TMX. Used for free memory on delta calculations.
+     */
+    public void clear() {
+        defaults = null;
+        alternatives = null;
+    }
+
+    /**
+     * Check TMX for empty.
+     */
+    public boolean isEmpty() {
+        return defaults.isEmpty() && alternatives.isEmpty();
+    }
+
+    /**
      * It saves current translation into file.
      */
-    public void save(ProjectProperties props, String translationFile) throws Exception {
+    public void save(ProjectProperties props, String translationFile, boolean translationUpdatedByUser)
+            throws Exception {
+        if (!translationUpdatedByUser) {
+            LOGGER.info(OStrings.getString("LOG_DATAENGINE_SAVE_NONEED"));
+            return;
+        }
+
         File newFile = new File(translationFile + OConsts.NEWFILE_EXTENSION);
 
         // Save data into '*.new' file

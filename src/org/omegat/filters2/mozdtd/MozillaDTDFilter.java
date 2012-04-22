@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik, Didier Briel
-               2011 Didier Briel
+               2011-2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -57,8 +57,8 @@ import org.omegat.util.StringUtil;
  * @author Didier Briel
  */
 public class MozillaDTDFilter extends AbstractFilter {
-    protected static Pattern RE_ENTITY = Pattern.compile("<\\!ENTITY\\s+(\\S+)\\s+\"(.+)\"\\s*>");
-
+    protected static Pattern RE_ENTITY = Pattern.compile("<\\!ENTITY\\s+(\\S+)\\s+[\"'](.+)[\"']\\s*>");
+                                                           
     protected Map<String, String> align;
 
     public Instance[] getDefaultInstances() {
@@ -107,7 +107,7 @@ public class MozillaDTDFilter extends AbstractFilter {
             } else {
                 outFile.write(c);
             }
-            if (c == '>' && isInBlock && previousChar == '"') {
+            if (c == '>' && isInBlock && (previousChar == '"' || previousChar == 39)) { // 39 is single quote
                 isInBlock = false;
                 processBlock(block.toString(), outFile);
                 block.setLength(0);

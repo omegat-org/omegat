@@ -10,7 +10,7 @@
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
                2011 Didier Briel
-               2012 Wildrich Fourie, Guido Leenders, Martin Fleurke
+               2012 Wildrich Fourie, Guido Leenders, Martin Fleurke, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -314,6 +314,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         optionsMenu.add(optionsTeamMenuItem = createMenuItem("MW_OPTIONSMENU_TEAM"));
         optionsMenu.add(optionsExtTMXMenuItem = createMenuItem("MW_OPTIONSMENU_EXT_TMX"));
         optionsMenu.add(optionsViewOptionsMenuItem = createMenuItem("MW_OPTIONSMENU_VIEW"));
+        optionsMenu.add(optionsSaveOptionsMenuItem = createMenuItem("MW_OPTIONSMENU_SAVE"));
         optionsMenu.add(optionsViewOptionsMenuLoginItem = createMenuItem("MW_OPTIONSMENU_LOGIN"));
         optionsMenu.add(optionsRestoreGUIMenuItem = createMenuItem("MW_OPTIONSMENU_RESTORE_GUI"));
 
@@ -589,6 +590,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem optionsTeamMenuItem;
     JMenuItem optionsExtTMXMenuItem;
     JMenuItem optionsViewOptionsMenuItem;
+    JMenuItem optionsSaveOptionsMenuItem;
     JMenuItem optionsViewOptionsMenuLoginItem;
     JMenuItem projectCloseMenuItem;
     JMenuItem projectCompileMenuItem;

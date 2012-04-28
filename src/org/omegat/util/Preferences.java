@@ -255,6 +255,12 @@ public class Preferences {
     /** Proxy options: Password for proxy  access */
     public static final String PROXY_PASSWORD = "proxy_password";
 
+    /** Automatic save interval in seconds */
+    public static final String AUTO_SAVE_INTERVAL = "auto_save_interval";
+
+    /** Default number of seconds to auto save project */
+    public static final String AUTO_SAVE_DEFAULT = "180";
+
     /**
      * Version of file filters. Unfortunately cannot put it into filters itself
      * for backwards compatibility reasons.

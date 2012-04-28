@@ -9,7 +9,7 @@
                2008 Andrzej Sawula, Alex Buloichik
                2009 Didier Briel, Alex Buloichik
                2010 Wildrich Fourie, Didier Briel
-               2012 Wildrich Fourie, Guido Leenders
+               2012 Wildrich Fourie, Guido Leenders, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -46,6 +46,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.AboutDialog;
 import org.omegat.gui.dialogs.ExternalTMXMatchesDialog;
 import org.omegat.gui.dialogs.FontSelectionDialog;
+import org.omegat.gui.dialogs.SaveOptionsDialog;
 import org.omegat.gui.dialogs.SpellcheckerConfigurationDialog;
 import org.omegat.gui.dialogs.TagValidationOptionsDialog;
 import org.omegat.gui.dialogs.TeamOptionsDialog;
@@ -746,6 +747,14 @@ public class MainWindowMenuHandler {
             Core.getEditor().getSettings().updateViewPreferences();
         }
 
+    }
+
+   /**
+    * Display the save options dialog to allow setting the save interval
+    */
+    public void optionsSaveOptionsMenuItemActionPerformed() {
+        SaveOptionsDialog saveOptions = new SaveOptionsDialog(mainWindow);
+        saveOptions.setVisible(true);
     }
 
     /**

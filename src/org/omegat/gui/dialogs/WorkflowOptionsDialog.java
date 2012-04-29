@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel
                2011 John Moran, Didier Briel
+               2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -97,6 +98,7 @@ public class WorkflowOptionsDialog extends JDialog {
         exportCurrentSegment.setSelected(Preferences.isPreference(Preferences.EXPORT_CURRENT_SEGMENT));
         stopOnAlternativeTranslation.setSelected(Preferences.
                 isPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION));
+        convertNumbers.setSelected(Preferences.isPreference(Preferences.CONVERT_NUMBERS));
         invalidate();
         pack();
     }
@@ -122,6 +124,7 @@ public class WorkflowOptionsDialog extends JDialog {
         descriptionTextArea = new javax.swing.JTextArea();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        convertNumbers = new javax.swing.JCheckBox();
         allowTranslationEqualToSource = new javax.swing.JCheckBox();
         defaultRadio = new javax.swing.JRadioButton();
         leaveEmptyRadio = new javax.swing.JRadioButton();
@@ -206,10 +209,21 @@ public class WorkflowOptionsDialog extends JDialog {
         gridBagConstraints.insets = new java.awt.Insets(14, 4, 4, 4);
         getContentPane().add(cancelButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(allowTranslationEqualToSource, OStrings.getString("WF_OPTION_ALLOW_TRANS_EQ_TO_SRC")); // NOI18N
+        org.openide.awt.Mnemonics.setLocalizedText(convertNumbers, OStrings.getString("WF_OPTION_CONVERT_NUMBERS")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 6;
+        gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
+        gridBagConstraints.ipadx = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(convertNumbers, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(allowTranslationEqualToSource, OStrings.getString("WF_OPTION_ALLOW_TRANS_EQ_TO_SRC")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 7;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.ipadx = 1;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
@@ -341,6 +355,7 @@ public class WorkflowOptionsDialog extends JDialog {
         Preferences.setPreference(Preferences.EXPORT_CURRENT_SEGMENT, exportCurrentSegment.isSelected());
         Preferences.setPreference(Preferences.STOP_ON_ALTERNATIVE_TRANSLATION,
                 stopOnAlternativeTranslation.isSelected());
+        Preferences.setPreference(Preferences.CONVERT_NUMBERS, convertNumbers.isSelected());
 
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
@@ -365,6 +380,7 @@ public class WorkflowOptionsDialog extends JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox allowTranslationEqualToSource;
     private javax.swing.JButton cancelButton;
+    private javax.swing.JCheckBox convertNumbers;
     private javax.swing.JRadioButton defaultRadio;
     private javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JCheckBox exportCurrentSegment;

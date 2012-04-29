@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Zoltan Bartko
                2011 John Moran
-               2012 Alex Buloichik, Jean-Christophe Helary
+               2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -71,6 +71,7 @@ import org.omegat.util.gui.UIThreadsUtil;
  * @author John Moran
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Jean-Christophe Helary
+ * @author Didier Briel
  */
 @SuppressWarnings("serial")
 public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> implements IMatcher {
@@ -177,6 +178,98 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     }
 
     /**
+     * Attemps to subtitute numbers in a match with numbers from the source segment.
+     * For substitution to be done, the number of numbers must be the same between source and matches, and
+     * the numbers must be the same between the source match and the target match. The order of the numbers
+     * can be different between the source match and the target match. Numbers will be substituted at the 
+     * correct location.
+     * @param source The source segment
+     * @param sourceMatch The source of the match
+     * @param targetMatch The target of the match
+     * @return The target match with numbers possibly substituted
+     */
+    public String substituteNumbers(String source, String sourceMatch, String targetMatch) {
+
+        ITokenizer sourceTok = Core.getProject().getSourceTokenizer();
+        ITokenizer targetTok = Core.getProject().getTargetTokenizer();
+
+        Token[] sourceMatchStrTokensAll = sourceTok.tokenizeAllExactly(sourceMatch);
+        List<String> sourceMatchNumbers = getNumberList(sourceMatchStrTokensAll, sourceMatch);
+
+        Token[] targetMatchStrTokensAll = targetTok.tokenizeAllExactly(targetMatch);
+        List<String> targetMatchNumbers = getNumberList(targetMatchStrTokensAll, targetMatch);
+
+        Token[] sourceStrTokensAll = sourceTok.tokenizeAllExactly(source);
+        List <String> sourceNumbers = getNumberList(sourceStrTokensAll, source);
+
+        if (sourceMatchNumbers.size() != targetMatchNumbers.size() || //Not the same number of numbers
+            sourceMatchNumbers.size() != sourceNumbers.size()) {
+            return targetMatch; 
+        }
+
+        List<Integer> matchingNumbers = new ArrayList<Integer>();
+        List<Integer> foundLocation = new ArrayList<Integer>();
+
+        // Compute the location of numbers in the target match
+        for (String oneNumber : sourceMatchNumbers) {
+            int pos = -1;
+            for (Token oneToken : targetMatchStrTokensAll) {
+                pos ++;
+                if (oneNumber.equals(oneToken.getTextFromString(targetMatch)) && !foundLocation.contains(pos)) {
+                   matchingNumbers.add(pos);
+                   foundLocation.add(pos);
+                }
+            }
+            if (pos == -1) { // One of the number in source is not in target
+                return targetMatch; 
+            } 
+        }
+
+        // Substitute new numbers in the target match
+        String finalString = "";
+        int pos = -1;
+        boolean replaced;
+        for (Token oneToken : targetMatchStrTokensAll) {
+            pos ++;
+            replaced = false;
+            for (int numberRank = 0; numberRank < matchingNumbers.size(); numberRank++){
+                if (matchingNumbers.get(numberRank) == pos) {
+                    finalString += sourceNumbers.get(numberRank);
+                    replaced = true;
+                }
+            }
+            if (!replaced) {// No subtitution was done
+                finalString += oneToken.getTextFromString(targetMatch);
+            }
+        }
+
+        return finalString;
+    }
+
+    /**
+     * Compute a list of numerals inside a string. Integers and simple doubles (not localized) are recognized.
+     * @param strTokenAll A list of tokens from a string
+     * @param text A string
+     * @return A list of strings of tokens which can be considered being numerals
+     */
+    private List<String> getNumberList(Token[] strTokenAll, String text) {
+        List<String> numberList = new ArrayList<String>();
+        for (Token oneToken : strTokenAll) {
+            try {
+                Integer.parseInt(oneToken.getTextFromString(text));
+                numberList.add(oneToken.getTextFromString(text));
+            } catch (NumberFormatException nfe) {
+                try {
+                    Double.parseDouble(oneToken.getTextFromString(text));
+                    numberList.add(oneToken.getTextFromString(text));
+                } catch (NumberFormatException nfe2) {
+                } // Eat exception silently
+            } // Eat exception silently
+        }
+        return numberList;
+    }
+
+    /**
      * if WORKFLOW_OPTION "Insert best fuzzy match into target field" is set
      * 
      * RFE "Option: Insert best match (80%+) into target field"
@@ -205,19 +298,23 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             // </HP-experiment>
             NearString thebest = matches.get(0);
             if (thebest.score >= percentage) {
-                String translation = null;
-
-                if (Preferences.getPreferenceDefaultAllowEmptyString(Preferences.BEST_MATCH_EXPLANATORY_TEXT)
-                        .equals("")) {
-                    translation = thebest.translation;
-                } else {
-                    translation = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT,
-                            OStrings.getString("WF_DEFAULT_PREFIX")) + thebest.translation;
-                }
                 SourceTextEntry currentEntry = Core.getEditor().getCurrentEntry();
                 TMXEntry te = Core.getProject().getTranslationInfo(currentEntry);
                 if (!te.isTranslated()) {
-                    Core.getEditor().replaceEditText(translation);
+                    String prefix = "";
+
+                    if (!Preferences.getPreferenceDefaultAllowEmptyString(Preferences.BEST_MATCH_EXPLANATORY_TEXT)
+                            .equals("")) {
+                        prefix = Preferences.getPreferenceDefault(Preferences.BEST_MATCH_EXPLANATORY_TEXT,
+                                OStrings.getString("WF_DEFAULT_PREFIX"));
+                    }
+
+                    String translation = thebest.translation;
+                    if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
+                        translation = 
+                            substituteNumbers(currentEntry.getSrcText(), thebest.source, thebest.translation);
+                    }
+                    Core.getEditor().replaceEditText(prefix + translation);
                 }
             }
         }

@@ -13,13 +13,20 @@
   http://sourceforge.net/support/tracker.php?aid=3513384
 
 ----------------------------------------------------------------------
- OmegaT 2.5.3 update 1
+ OmegaT 2.5.4
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
-2.5.3 update 1 vs. 2.5.3
+2.5.4 vs. 2.5.3
+
+  Implemented requests:
+
+  - Automatic conversion of numbers when inserting fuzzy matches
+  http://sourceforge.net/support/tracker.php?aid=1381480
+
+  Other enhancements:
 
    - The automatic save interval can now be set in Options > Save. 
 It is defined in minutes and seconds. If a value lower than 10 seconds

@@ -226,7 +226,15 @@ public class MainWindow extends JFrame implements IMainWindow {
 
         NearString near = Core.getMatcher().getActiveMatch();
         if (near != null) {
-            Core.getEditor().replaceEditText(near.translation);
+            String translation = near.translation;
+            if (Preferences.isPreference(Preferences.CONVERT_NUMBERS)) {
+                translation =
+                        Core.getMatcher().substituteNumbers(
+                            Core.getEditor().getCurrentEntry().getSrcText(),
+                            Core.getMatcher().getActiveMatch().source,
+                            Core.getMatcher().getActiveMatch().translation);
+            }
+            Core.getEditor().replaceEditText(translation);        
         }
     }
 

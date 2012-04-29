@@ -47,4 +47,6 @@ public interface IMatcher {
      *            Must be called from UI thread only.
      */
     void setActiveMatch(int index);
+    
+    String substituteNumbers(String source, String sourceMatch, String targetMatch);
 }

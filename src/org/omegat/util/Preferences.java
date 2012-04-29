@@ -173,7 +173,9 @@ public class Preferences {
     /** Workflow Option: Go To Next Untranslated Segment stops when there is at least one
     alternative translation */
     public static final String STOP_ON_ALTERNATIVE_TRANSLATION="wf_stopOnAlternativeTranslation";
-
+    /** Workflow Option: Attempt to convert numbers when inserting a fuzzy match */
+    public static final String CONVERT_NUMBERS="wf_convertNumbers";
+    
     /** Tag Validation Option: Don't check printf-tags */
     public static final String DONT_CHECK_PRINTF_TAGS = "tagValidation_noCheck";
     /** Tag Validation Option: check simple printf-tags */

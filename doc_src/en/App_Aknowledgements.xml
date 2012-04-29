@@ -25,6 +25,11 @@
         persistent help with DocBook intricacies. Not to mention his care and
         diligence, keeping repositories intact and in good order.</para>
       </listitem>
+
+      <listitem>
+        <para>Samual Murray: for the introductory chapter "Learn to use OmegaT
+        in 5 minutes" .</para>
+      </listitem>
     </itemizedlist>
 
     <itemizedlist>
@@ -39,22 +44,16 @@
     <itemizedlist>
       <listitem>
         <para>Jean-Christophe Helary: special thanks to JC for his concise
-        description of OmegaT run and command line parameters.</para>
+        description of OmegaT run, command line parameters and all other
+        details, I have yet to notice.</para>
       </listitem>
 
       <listitem>
-        <para>Samual Murray: his "Start Using OmegaT in 5 Minutes!", that
-        served some time ago as the starting point for the "Instant Start
-        Guide" chapter, deserves a honorable mention here.</para>
-      </listitem>
-
-      <listitem>
-        <para>Last but not least: my thanks to all the contributors to the
-        OmegaT documentation tracker (<ulink
-        url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617"
-        >OmegaT documentation tracker</ulink>)
-        for all the inconsistencies found in the previous versions of the
-        documentation. Keep up your good work!</para>
+        <para>Last but not least: my thanks to all the contributors to<ulink
+        url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617">
+        OmegaT documentation tracker</ulink> for all the inconsistencies found
+        in the previous versions of the documentation. Keep up your good
+        work!</para>
       </listitem>
     </itemizedlist>
   </section>

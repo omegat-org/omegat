@@ -29,49 +29,25 @@
       </keycombo> instead. The "Cmd" key either has a "command" label or an
     apple symbol on Apple keyboards.</para>
 
-    <para>New menu items can appear depending on the plugins that you
-    use.</para>
-
     <table colsep="1" id="table.main.menu">
       <title>Main Menu</title>
 
-      <tgroup cols="7" colsep="1" >
-        <colspec align="left" colnum="1" />
-
-        <colspec align="left" colnum="2" />
-
-        <colspec align="left" colnum="3" />
-
-        <colspec align="left" colnum="4" />
-
-        <colspec align="left" colnum="5" />
-
-        <colspec align="left" colnum="6" />
-
-        <colspec align="left" colnum="7" />
-
+      <tgroup cols="7" colsep="1">
         <tbody>
           <row>
-            <entry><link
-            linkend="project.menu.table"><guimenuitem>Project</guimenuitem></link></entry>
+            <entry><guimenuitem>Project</guimenuitem></entry>
 
-            <entry><link
-            linkend="edit.menu.table"><guimenuitem>Edit</guimenuitem></link></entry>
+            <entry><guimenuitem>Edit</guimenuitem></entry>
 
-            <entry><link linkend="goto.menu.table"><guimenuitem>Go
-            to</guimenuitem></link></entry>
+            <entry><guimenuitem>Go to</guimenuitem></entry>
 
-            <entry><link
-            linkend="view.menu.table"><guimenuitem>View</guimenuitem></link></entry>
+            <entry><guimenuitem>View</guimenuitem></entry>
 
-            <entry><link
-            linkend="tools.menu.table"><guimenuitem>Tools</guimenuitem></link></entry>
+            <entry><guimenuitem>Tools</guimenuitem></entry>
 
-            <entry><link
-            linkend="options.menu.table"><guimenuitem>Options</guimenuitem></link></entry>
+            <entry><guimenuitem>Options</guimenuitem></entry>
 
-            <entry><link
-            linkend="help.menu.table"><guimenuitem>Help</guimenuitem></link></entry>
+            <entry><guimenuitem>Help</guimenuitem></entry>
           </row>
         </tbody>
       </tgroup>
@@ -84,10 +60,10 @@
           <secondary>Project</secondary>
         </indexterm></title>
 
-      <table colsep="1" id="project.menu.table">
+      <table colsep="1">
         <title>Project menu</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
 
           <colspec align="left" colnum="2" colwidth="100"/>
@@ -149,9 +125,9 @@
               <entry><guimenuitem>Close</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
 
                   <keycap>W</keycap>
                 </keycombo></entry>
@@ -235,7 +211,7 @@
       </table>
     </section>
 
-    <section id="submenu.Edit">
+    <section>
       <title>Edit<indexterm class="singular">
           <primary>Main menu</primary>
 
@@ -249,7 +225,7 @@
       <table colsep="1">
         <title>Copy/cut/paste shortcuts</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
 
           <colspec align="left" colnum="2" colwidth="100"/>
@@ -298,10 +274,10 @@
 
       <para>The Edit menu itself contains the following items:</para>
 
-      <table colsep="1" id="edit.menu.table">
+      <table colsep="1">
         <title>Edit menu</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
 
           <colspec align="left" colnum="2" colwidth="100"/>
@@ -376,9 +352,7 @@
               <entry>Replaces the target segment with the translation,
               provided by the selected Machine Translation service. No action
               is taken, if no Machine Translation service has been activated
-              (see <menuchoice>
-                  <guimenu>Options</guimenu>
-                </menuchoice> below).</entry>
+              (see Menu &gt; Options below).</entry>
             </row>
 
             <row>
@@ -431,7 +405,7 @@
               Texts, bracketed by tags, are replaced by spaces:.
               <literal>&lt;f0&gt;&lt;f1&gt;This is
               text&lt;/f0&gt;&lt;/f1&gt;</literal> thus will be copied as
-              <literal>&lt;f0&gt;&lt;f1&gt; &lt;/f0&gt;&lt;/f1&gt;</literal></entry>
+              <literal>&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</literal></entry>
             </row>
 
             <row>
@@ -467,8 +441,8 @@
                   <keycap>G</keycap>
                 </keycombo></entry>
 
-              <entry>Opens a new <link linkend="chapter.glossaries">Glossary
-              entry window</link>.</entry>
+              <entry>Allows the user create an entry in the default glossary
+              file.</entry>
             </row>
 
             <row>
@@ -485,18 +459,13 @@
             </row>
 
             <row>
-              <entry><menuchoice>
-                  <guimenu>Switch case to</guimenu>
-
-                  <guimenuitem>Lower Case / Upper Case / Title
-                  Case</guimenuitem>
-                </menuchoice></entry>
+              <entry><guimenuitem>Switch case to...</guimenuitem></entry>
 
               <entry><keycombo>
                   <keycap>Shift</keycap>
 
                   <keycap>F3</keycap>
-                </keycombo></entry>
+                </keycombo> (see text)</entry>
 
               <entry>Changes the case of the highlighted text in the target
               segment to the selected option (Lower case, Upper case or Title
@@ -536,10 +505,10 @@
           <secondary>Goto</secondary>
         </indexterm></title>
 
-      <table colsep="1" id="goto.menu.table">
+      <table colsep="1">
         <title>Go To menu</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
 
           <colspec align="left" colnum="2" colwidth="100"/>
@@ -566,17 +535,12 @@
                   <keycap>Ctrl</keycap>
 
                   <keycap>N</keycap>
-                </keycombo> or <keycap>Enter</keycap> (or
-              <keycap>Tab</keycap>)</entry>
+                </keycombo> or <keycap>Enter</keycap> or
+              <keycap>Tab</keycap></entry>
 
               <entry>Moves to the next segment. If the current segment is the
               last segment in a file, it moves to the first segment of the
-              next file. <keycap>Tab</keycap> can be set to move to the next
-              segment by using <menuchoice>
-                  <guimenu>Options</guimenu>
-
-                  <guimenuitem>Use Tab to Advance</guimenuitem>
-                </menuchoice>.</entry>
+              next file.</entry>
             </row>
 
             <row>
@@ -590,24 +554,15 @@
                   <keycap>Ctrl</keycap>
 
                   <keycap>Enter</keycap>
-                </keycombo> (or <keycombo>
+                </keycombo> or <keycombo>
                   <keycap>Ctrl</keycap>
 
                   <keycap>Tab</keycap>
-                </keycombo>)</entry>
+                </keycombo></entry>
 
               <entry>Moves to the previous segment. If the current segment is
               the first one in a file, it moves to the last segment of the
-              previous file. <keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>Tab</keycap>
-                </keycombo> can be set to move to the previous segment by
-              using <menuchoice>
-                  <guimenu>Options</guimenu>
-
-                  <guimenuitem>Use Tab to Advance</guimenuitem>
-                </menuchoice>.</entry>
+              previous file.</entry>
             </row>
 
             <row>
@@ -619,39 +574,42 @@
                   <keycap>J</keycap>
                 </keycombo></entry>
 
-              <entry>Jumps to the entered segment number.</entry>
+              <entry>The segment is opened when its segment number is
+              entered..</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Forward in history</guimenuitem></entry>
+              <entry><guimenuitem>Back in history...</guimenuitem></entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
 
-                  <keycap>N</keycap>
-                </keycombo></entry>
-
-              <entry><application>OmegaT</application> remembers the visited
-              segments. With this command you can step forward in the project
-              history.</entry>
-            </row>
-
-            <row>
-              <entry><guimenuitem>Back in history</guimenuitem></entry>
-
-              <entry><keycombo>
                   <keycap>Shift</keycap>
-
-                  <keycap>Ctrl</keycap>
 
                   <keycap>P</keycap>
                 </keycombo></entry>
 
-              <entry><application>OmegaT</application> remembers the visited
-              segments. With this command you can step back in the project
-              history.</entry>
+              <entry>With this command you can move backward one segment at a
+              time, to return later to the current segment using
+              <guimenuitem>Forward in history... </guimenuitem>command
+              below.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Forward in history...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>N</keycap>
+                </keycombo></entry>
+
+              <entry><application>OmegaT</application> remembers the segments
+              executed. With this command you can step forward to the segment,
+              you have previously left by the <guimenuitem>Back in
+              history</guimenuitem>...command.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -665,72 +623,55 @@
           <secondary>View</secondary>
         </indexterm></title>
 
-      <table colsep="1" id="view.menu.table">
+      <table colsep="1">
         <title>View menu</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="2" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
-
-          <colspec align="left" colnum="2" colwidth="100"/>
 
           <tbody>
             <row>
               <entry><guimenuitem>Mark Translated
               Segments</guimenuitem></entry>
 
-              <entry> </entry>
-
-              <entry>If checked, translated segments will display the
-              translated text marked with a yellow background.</entry>
+              <entry>If checked, the translated segments will be marked in
+              yellow.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Mark Untranslated
               Segments</guimenuitem></entry>
 
-              <entry/>
-
-              <entry>If checked, untranslated segments will display the source
-              text marked with a violet background.</entry>
+              <entry>If checked, the untranslated segments will be marked in
+              violet.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Display Source
               Segments</guimenuitem></entry>
 
-              <entry/>
-
-              <entry>If checked, all segments will display the source text
-              marked with a green background. If untranslated segments are
-              also marked, only translated segments will display the source
-              that way.</entry>
+              <entry>If checked, source segments will be shown and marked in
+              green. If not checked, source segments will not be
+              shown.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>Mark Non-Unique
+              <entry><guimenuitem>Mark Non/Unique
               Segments</guimenuitem></entry>
 
-              <entry/>
-
-              <entry>If checked, non-unique segments will be marked in a light
-              gray font.</entry>
+              <entry>If checked, the non-unique segments will be marked in
+              pale grey.</entry>
             </row>
 
             <row>
-              <entry><menuchoice>
-                  <guimenu>Modification Info</guimenu>
+              <entry><guimenuitem>Modification Info</guimenuitem></entry>
 
-                  <guimenuitem>Display None / Display All / Display
-                  Selected</guimenuitem>
-                </menuchoice></entry>
-
-              <entry/>
-
-              <entry>Setting the Modification Info option to <emphasis>Display
-              Selected</emphasis> will display the time and the author of the
-              last change for the current segment. Setting it to<emphasis>
-              Display All </emphasis>shows this information for all segments
-              and <emphasis>None</emphasis> turns this option off.</entry>
+              <entry>Setting the Display Modification option to
+              <emphasis>Selected</emphasis> will display the time and the
+              author of the last change for the current segment. Setting it
+              to<emphasis> All </emphasis>shows this information for all
+              segments and <emphasis>None</emphasis> turns this option
+              off.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -744,7 +685,7 @@
           <secondary>Tools</secondary>
         </indexterm></title>
 
-      <table colsep="1" id="tools.menu.table">
+      <table colsep="1">
         <title>Tools menu</title>
 
         <indexterm class="singular">
@@ -765,43 +706,22 @@
           <secondary>Statistics</secondary>
         </indexterm>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="2" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
-
-          <colspec align="left" colnum="2" colwidth="100"/>
 
           <tbody>
             <row>
               <entry><guimenuitem>Validate Tags</guimenuitem></entry>
 
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>T</keycap>
-                </keycombo></entry>
-
-              <entry>Checks for missing or displaced tags in formatted files.
-              Will display a list of segments with tag errors and possible
-              inconsistencies. See <link linkend="section.tag.validation">Tag
-              Validation</link> and <xref
-              linkend="chapter.formatted.text"/>.</entry>
-            </row>
-
-            <row>
-              <entry><guimenuitem>Remove Tags</guimenuitem></entry>
-
-              <entry/>
-
-              <entry>When enabled, all the formatting tags are removed from
-              the source segments.<link linkend="section.tag.validation">Tag
-              Validation</link> and <xref
+              <entry><guimenu>Ctrl+T</guimenu>: Checks for missing or
+              displaced tags in formatted files. Will display a list of
+              segments with tag errors and possible inconsistencies. See <link
+              linkend="section.tag.validation">Tag Validation</link> and <xref
               linkend="chapter.formatted.text"/>.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Statistics</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Opens a new window and displays the project statistics,
               i.e. the project totals and totals for every file in the
@@ -810,8 +730,6 @@
 
             <row>
               <entry><guimenuitem>Match Statistics</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Displays the Match Statistics for the project: the number
               of repetitions, exact matches, fuzzy matches and no-matches, for
@@ -824,22 +742,20 @@
 
     <section id="submenu.Options">
       <title><indexterm class="singular">
+          <primary>Main menu</primary>
+
           <secondary>Options</secondary>
         </indexterm>Options</title>
 
-      <table colsep="1" id="options.menu.table">
+      <table colsep="1">
         <title>Options menu</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="2" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
-
-          <colspec align="left" colnum="2" colwidth="100"/>
 
           <tbody>
             <row>
               <entry><guimenuitem>Use TAB To Advance</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Sets segment validation key to
               <guimenuitem>Tab</guimenuitem> instead of the default
@@ -850,16 +766,12 @@
             <row>
               <entry><guimenuitem>Always Confirm Quit</guimenuitem></entry>
 
-              <entry/>
-
               <entry>The program will see confirmation before closing
               down.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Machine Translate</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Allows you to activate/deactivate the Machine Translation
               tools offered. When active, <keycombo>
@@ -872,8 +784,6 @@
 
             <row>
               <entry><guimenuitem>TransTips</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Allows you to activate/deactivate <emphasis>TransTips
               </emphasis>feature and set its option<emphasis> Exact
@@ -890,8 +800,6 @@
             <row>
               <entry><guimenuitem>Font...</guimenuitem></entry>
 
-              <entry/>
-
               <entry>Shows the dialogue to modify the text display font. Users
               of old computers who feel window resizing is very slow can try
               changing the font. See <xref linkend="chapter.font"/>.</entry>
@@ -899,8 +807,6 @@
 
             <row>
               <entry><guimenuitem>File Filters...</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Displays the <link linkend="chapter.file.filters">File
               filters</link> dialogue to configure file handling and
@@ -910,8 +816,6 @@
             <row>
               <entry><guimenuitem>Segmentation...</guimenuitem></entry>
 
-              <entry/>
-
               <entry>Opens the <link linkend="chapter.segmentation">Source
               segmentation</link> dialogue to configure text
               segmentation.</entry>
@@ -919,8 +823,6 @@
 
             <row>
               <entry><guimenuitem>Spell checking...</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Displays the <link linkend="chapter.spellchecker">Spell
               checker setup</link> window to install, configure and activate
@@ -930,8 +832,6 @@
             <row>
               <entry><guimenuitem>Editing Behavior...</guimenuitem></entry>
 
-              <entry/>
-
               <entry>Displays the <link
               linkend="chapter.translation.editing">Translation editing</link>
               dialog to configure.</entry>
@@ -939,8 +839,6 @@
 
             <row>
               <entry><guimenuitem>Tag Validation...</guimenuitem></entry>
-
-              <entry/>
 
               <entry>For programmers: Allows you to configure the Tag
               Validator options to also check programming (%...)
@@ -950,16 +848,19 @@
             <row>
               <entry><guimenuitem>Team...</guimenuitem></entry>
 
-              <entry/>
-
-              <entry>Enter your name here and it will be attached to all
+              <entry>Enter your name here and it will be attaWched to all
               segments translated by you.</entry>
             </row>
 
             <row>
-              <entry><guimenuitem>View...</guimenuitem></entry>
+              <entry><guimenuitem>External TMXs...</guimenuitem></entry>
 
-              <entry/>
+              <entry>Allows the user decide, how tags in foreign TMX files
+              (i.e. not generated by OmegaT) are to be treated,</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>View...</guimenuitem></entry>
 
               <entry>Contains the option to have all source segments in bold
               and to mark the first non-unique segment.</entry>
@@ -968,16 +869,12 @@
             <row>
               <entry><guimenuitem>Proxy login...</guimenuitem></entry>
 
-              <entry/>
-
               <entry>Enter your user name and your password, if you use a
               proxy to access your projects.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>Restore Main Window</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Restores the components of the main OmegaT window to
               their default state. Use this feature when you have undocked,
@@ -997,28 +894,22 @@
           <secondary>Help</secondary>
         </indexterm></title>
 
-      <table colsep="1" id="help.menu.table">
+      <table colsep="1">
         <title>Help menu</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="2" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
-
-          <colspec align="left" colnum="2" colwidth="100"/>
 
           <tbody>
             <row>
               <entry><guimenuitem>User Manual...</guimenuitem></entry>
 
-              <entry><keycap>F1</keycap></entry>
-
-              <entry>Opens Help browser displaying this manual in a separate
-              window.</entry>
+              <entry><keycap>F1:</keycap> Opens Help browser displaying this
+              manual in a separate window.</entry>
             </row>
 
             <row>
               <entry><guimenuitem>About...</guimenuitem></entry>
-
-              <entry/>
 
               <entry>Displays copyright, credits and license
               information.</entry>
@@ -1046,8 +937,8 @@
     <para>Ctrl is used on Windows, UNIX and UNIX-like operating systems with
     keyboards featuring a <keycap>Ctrl</keycap> / <keycap>Control
     key</keycap>. Mac users should instead use the
-    <guimenuitem>Cmd+key.</guimenuitem> On Apple keyboards the
-    <guimenuitem>Cmd</guimenuitem> key either has a command label or an Apple
+    <guimenuitem>cmd+key.</guimenuitem> On Apple keyboards the
+    <guimenuitem>cmd</guimenuitem> key either has a command label or an Apple
     icon on it.</para>
 
     <itemizedlist>
@@ -1094,7 +985,7 @@
       <table colsep="1">
         <title>Project management shortcuts</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
 
           <colspec align="left" colnum="2" colwidth="100"/>
@@ -1111,27 +1002,6 @@
 
               <entry>Displays a dialogue to locate an existing
               project.</entry>
-            </row>
-
-            <row>
-              <entry>Reload</entry>
-
-              <entry><keycap>F5</keycap></entry>
-
-              <entry>Reload the current projet to take project settings
-              modifications into account.</entry>
-            </row>
-
-            <row>
-              <entry>Project files listing</entry>
-
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>L</keycap>
-                </keycombo></entry>
-
-              <entry>Displays the Project files listing</entry>
             </row>
 
             <row>
@@ -1207,7 +1077,7 @@
       <table colsep="1">
         <title>Editing shortcuts</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
 
           <colspec align="left" colnum="2" colwidth="100"/>
@@ -1284,11 +1154,9 @@
               <entry>Replace with source</entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
 
-                  <keycap>R</keycap>
+                  <keycap>Shift+R</keycap>
                 </keycombo></entry>
 
               <entry>Replaces the current target segment contents with the
@@ -1299,11 +1167,9 @@
               <entry>Insert source</entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
 
-                  <keycap>I</keycap>
+                  <keycap>Shift+I</keycap>
                 </keycombo></entry>
 
               <entry>Inserts the source text contents into the target segment
@@ -1314,11 +1180,9 @@
               <entry>Insert Source Tags</entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
 
-                  <keycap>T</keycap>
+                  <keycap>Shift+T</keycap>
                 </keycombo></entry>
 
               <entry>Inserts the source tags into the target segment at the
@@ -1349,11 +1213,22 @@
 
               <entry>Replaces the target segment with the machine translation
               of the source. No action, if machine tools are deactivated (see
-              <menuchoice>
-                  <guimenu>Options</guimenu>
+              Menu &gt; Options &gt; Machine Translate)</entry>
+            </row>
 
-                  <guimenuitem>Machine Translate</guimenuitem>
-                </menuchoice>)</entry>
+            <row>
+              <entry>Export Selection</entry>
+
+              <entry><keycombo>
+                  <keycap>Shift</keycap>
+
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>C</keycap>
+                </keycombo></entry>
+
+              <entry>Exports the current selection to a text file for
+              processing.</entry>
             </row>
 
             <row>
@@ -1367,24 +1242,8 @@
                   <keycap>G</keycap>
                 </keycombo></entry>
 
-              <entry>Opens a new <link linkend="chapter.glossaries">Glossary
-              entry window</link>.</entry>
-            </row>
-
-            <row>
-              <entry>Switch Case</entry>
-
-              <entry><keycombo>
-                  <keycap>Shift</keycap>
-
-                  <keycap>F3</keycap>
-                </keycombo></entry>
-
-              <entry>Changes the case of the highlighted text in the target
-              segment to the selected option (Lower case, Upper case or Title
-              case). If no text is selected, <application>OmegaT</application>
-              selects the word that contains the letter immediately to the
-              right of the cursor.</entry>
+              <entry>Allows the user create an entry in the default glossary
+              file.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -1401,7 +1260,7 @@
       <table colsep="1">
         <title>Moving around shortcuts</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
 
           <colspec align="left" colnum="2" colwidth="100"/>
@@ -1427,10 +1286,10 @@
                   <keycap>Ctrl</keycap>
 
                   <keycap>N</keycap>
-                </keycombo>, <keycap>Enter</keycap>, <keycap>Return</keycap>
-              or <keycap>Tab</keycap></entry>
+                </keycombo>, <keycap>Enter</keycap> or
+              <keycap>Return</keycap></entry>
 
-              <entry>Moves the editing field to the next segment</entry>
+              <entry>Moves the editing field to the next segment.</entry>
             </row>
 
             <row>
@@ -1440,18 +1299,6 @@
                   <keycap>Ctrl</keycap>
 
                   <keycap>P</keycap>
-                </keycombo>, <keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>Enter</keycap>
-                </keycombo>, <keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>Return</keycap>
-                </keycombo> or <keycombo>
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>Tab</keycap>
                 </keycombo></entry>
 
               <entry>Moves the editing field to the previous segment</entry>
@@ -1473,11 +1320,9 @@
               <entry>Back in history...</entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
 
-                  <keycap>P</keycap>
+                  <keycap>Shift+P</keycap>
                 </keycombo></entry>
 
               <entry>Moves one segment back in history</entry>
@@ -1487,11 +1332,9 @@
               <entry>Forward in history...</entry>
 
               <entry><keycombo>
-                  <keycap>Shift</keycap>
-
                   <keycap>Ctrl</keycap>
 
-                  <keycap>N</keycap>
+                  <keycap>Shift+N</keycap>
                 </keycombo></entry>
 
               <entry>Moves one segment forward in history</entry>
@@ -1511,12 +1354,24 @@
       <table colsep="1">
         <title>Various shortcuts</title>
 
-        <tgroup cols="3" colsep="1" >
+        <tgroup cols="3" colsep="1">
           <colspec align="left" colnum="1" colwidth="100"/>
 
           <colspec align="left" colnum="2" colwidth="100"/>
 
           <tbody>
+            <row>
+              <entry>Project files listing</entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>L</keycap>
+                </keycombo></entry>
+
+              <entry>Displays the Project files listing</entry>
+            </row>
+
             <row>
               <entry>Validate Tags</entry>
 
@@ -1535,9 +1390,7 @@
               <entry><keycombo>
                   <keycap>Shift</keycap>
 
-                  <keycap>Ctrl</keycap>
-
-                  <keycap>C</keycap>
+                  <keycap>Ctrl+C</keycap>
                 </keycombo></entry>
 
               <entry>Exports the current selection or the current source, if
@@ -1639,12 +1492,12 @@
     <para>For exemple, in the default OmegaT shortcuts<footnote>
         <para>The default OmegaT shortcuts are available from Sourceforge:
         <ulink
-        url="http://omegat.svn.sourceforge.net/viewvc/omegat/trunk/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
+        url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-3/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
         OmegaT Shortcuts</ulink></para>
 
         <para>The default OmegaT shortcuts for the Mac are also available from
         Sourceforge, they all use "meta" instead of "ctrl": <ulink
-        url="http://omegat.svn.sourceforge.net/viewvc/omegat/trunk/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
+        url="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-3/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
         OmegaT Shortcuts for the Mac</ulink></para>
       </footnote>, one can find:</para>
 
@@ -1698,12 +1551,12 @@
         <secondary>Customization</secondary>
       </indexterm>
 
-      <tgroup cold="3" cols="3" colsep="1" >
-        <colspec align="left" colname="1" colnum="1" colwidth="100"/>
+      <tgroup cols="3" colsep="1">
+        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
 
-        <colspec align="left" colname="2" colnum="2" colwidth="100"/>
+        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
 
-        <colspec align="left" colname="3" colnum="3" />
+        <colspec align="left" colname="3" colnum="3"/>
 
         <thead>
           <row>
@@ -1941,22 +1794,6 @@
           </row>
 
           <row>
-            <entry>Use as Default Translation</entry>
-
-            <entry/>
-
-            <entry>editMultipleDefault</entry>
-          </row>
-
-          <row>
-            <entry>Create Alternative Translation</entry>
-
-            <entry/>
-
-            <entry>editMultipleAlternate</entry>
-          </row>
-
-          <row>
             <entry>Lower Case</entry>
 
             <entry/>
@@ -2025,23 +1862,7 @@
           </row>
 
           <row>
-            <entry>Next Note</entry>
-
-            <entry/>
-
-            <entry>gotoNextNoteMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Previous Note</entry>
-
-            <entry/>
-
-            <entry>gotoPreviousNoteMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Back in history</entry>
+            <entry>Back in history...</entry>
 
             <entry>Ctrl+Shift+P</entry>
 
@@ -2049,7 +1870,7 @@
           </row>
 
           <row>
-            <entry>Forward in history</entry>
+            <entry>Forward in history...</entry>
 
             <entry>Ctrl+Shift+N</entry>
 
@@ -2126,14 +1947,6 @@
             <entry>Ctrl +T</entry>
 
             <entry>toolsValidateTagsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Remove Tags</entry>
-
-            <entry/>
-
-            <entry>toolsRemoveTagsCheckBoxMenuItem</entry>
           </row>
 
           <row>

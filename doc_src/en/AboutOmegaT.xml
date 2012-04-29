@@ -158,13 +158,12 @@
         <para><emphasis role="bold">Searches</emphasis> and<emphasis
         role="bold"> </emphasis><emphasis role="bold">Regular
         expressions</emphasis>: Searches in OmegaT can be as simple as
-        "<emphasis>list segments containing </emphasis><emphasis>the word
-        'kangaroo' in the source". </emphasis> They can also be complex,
-        allowing for instance to search for segments in which the target text
-        contains two or more consecutive spaces. In this case the regular
-        expression ^s^s+ would be used to find and list the offending
-        segments. Regular expressions are also used extensively in the
-        segmentation rules.</para>
+        "<emphasis>list segments with </emphasis><emphasis>the word 'kangaroo'
+        ". </emphasis> They can also be complex, allowing for instance to
+        search for segments with two or more consecutive spaces. In this case
+        the regular expression ^s^s+ would be used to find and list the
+        offending segments. Regular expressions are also used extensively in
+        the segmentation rules.</para>
       </listitem>
 
       <listitem>

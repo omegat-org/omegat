@@ -90,7 +90,7 @@ your system, this version will not interfere with it.
 Linux users: note that OmegaT does not work with the free/open-source Java 
 implementations that are packaged with many Linux distributions (for example, 
 Ubuntu), as these are either outdated or incomplete. Download and install 
-Sun's Java Runtime Environment (JRE) via the link above, or download and and 
+Sun's Java Runtime Environment (JRE) via the link above, or download and 
 install the OmegaT package bundled with JRE (the .tar.gz bundle marked 
 "Linux").
 

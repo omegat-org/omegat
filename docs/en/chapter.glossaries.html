@@ -29,17 +29,17 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossaries<a class="indexterm" name="d0e8446"></a><a class="indexterm" name="d0e8451"></a></h2>
+                  <h2 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossaries<a class="indexterm" name="d0e7871"></a><a class="indexterm" name="d0e7876"></a></h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8464">1. Usage</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8512">2. File format</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8557">3. How to create glossaries</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8655">4. Using Trados Multiterm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8673">5. Common glossary problems</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7889">1. Usage</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7940">2. File format</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7985">3. How to create glossaries</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8083">4. Using Trados Multiterm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e8101">5. Common glossary problems</a></span></dt>
             </dl>
          </div>
          <p>Glossaries are files created and updated manually for use in
@@ -53,17 +53,17 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8464"></a>1.&nbsp;Usage
+                     <h2 class="title" style="clear: both"><a name="d0e7889"></a>1.&nbsp;Usage
                      </h2>
                   </div>
                </div>
             </div>
-            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e8469"></a> <code class="filename">/glossary</code> folder after creating the
+            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e7894"></a> <code class="filename">/glossary</code> folder after creating the
                    project. <span class="application">OmegaT</span> automatically detects glossary
                    files in this folder when a project is opened. Terms in the current
                    segment which <span class="application">OmegaT</span> finds in the glossary
                    file(s) are displayed in the Glossary pane:
-            </p><a class="indexterm" name="d0e8484"></a><div class="figure"><a name="d0e8487"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Glossary pane</b></p>
+            </p><a class="indexterm" name="d0e7909"></a><div class="figure"><a name="d0e7912"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Glossary pane</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/Glossary_pane.png" alt="Glossary pane"></div>
                </div>
@@ -78,22 +78,20 @@
             <p>The source term does not have to be a single-word item, as the next
                    example shows:
             </p>
-            <div class="figure"><a name="d0e8499"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e8502"></a></b></p>
+            <div class="figure"><a name="d0e7924"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e7927"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/MultiTerm_Glossary.png" alt="multiple words entries in glossaries - exampleGlossary pane - multiple-words entries"></div>
+                  <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="multiple words entries in glossaries - exampleGlossary pane - multiple-words entries"></div>
                </div>
-            </div><br class="figure-break"><p>The underlined item "new preview screenshot", consists of three
-                   words and can be found in the glossary pane as "nov predogled posnetka
-                   zaslona". Note that parts of the multi-term items ("preview" in the above
-                   example is also recognized on its own as "predogled") are recognized as
-                   well, but ranked lower.
-            </p>
+            </div><br class="figure-break"><p>The underlined item "pop-up menu" can be found in the glossary pane
+                   as "pojavni menu". Highlighting it in the Glossary pane and then
+                   rightclicking insets at the cursor position in the target
+                   segment.<sup>[<a name="d0e7937" href="#ftn.d0e7937" class="footnote">5</a>]</sup></p>
          </div>
          <div class="section" title="2.&nbsp;File format">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8512"></a>2.&nbsp;<a class="indexterm" name="d0e8514"></a>File format<a class="indexterm" name="d0e8520"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e7940"></a>2.&nbsp;<a class="indexterm" name="d0e7942"></a>File format<a class="indexterm" name="d0e7948"></a></h2>
                   </div>
                </div>
             </div>
@@ -111,12 +109,12 @@
             </p>
             <p><code class="literal">"This is a source term, which contains a comma","c'est un
                       terme, qui contient une virgule" </code></p>
-            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e8536"></a> is also supported. TBX - Term Base eXchange - is the open,
+            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e7964"></a> is also supported. TBX - Term Base eXchange - is the open,
                    XML-based standard for exchanging structured terminological data, TBX has
-                   been approved as an international standard by LISA<a class="indexterm" name="d0e8542"></a> and ISO. If you have an existing terminology handling
+                   been approved as an international standard by LISA<a class="indexterm" name="d0e7970"></a> and ISO. If you have an existing terminology handling
                    system - MultiTerm for example - it is quite possible it offers the export
                    of terminology data via TBX format. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft
-                      Terminology Collection</a> <a class="indexterm" name="d0e8551"></a> can be downloaded in nearly 100 languages and can serve as
+                      Terminology Collection</a> <a class="indexterm" name="d0e7979"></a> can be downloaded in nearly 100 languages and can serve as
                    a cornerstone IT glossary.
             </p>
          </div>
@@ -124,7 +122,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8557"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e8560"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e7985"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e7988"></a></h2>
                   </div>
                </div>
             </div>
@@ -187,7 +185,7 @@
                   </li>
                </ul>
             </div>
-            <div class="figure"><a name="d0e8615"></a><p class="title"><b>Figure&nbsp;19.3.&nbsp;Saving a glossary</b></p>
+            <div class="figure"><a name="d0e8043"></a><p class="title"><b>Figure&nbsp;19.3.&nbsp;Saving a glossary</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/saveglossary.png" alt="Saving a glossary"></div>
                </div>
@@ -245,7 +243,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8655"></a>4.&nbsp;<a class="indexterm" name="d0e8657"></a>Using Trados Multiterm
+                     <h2 class="title" style="clear: both"><a name="d0e8083"></a>4.&nbsp;<a class="indexterm" name="d0e8085"></a>Using Trados Multiterm
                      </h2>
                   </div>
                </div>
@@ -265,7 +263,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8673"></a>5.&nbsp;<a class="indexterm" name="d0e8675"></a>Common glossary problems
+                     <h2 class="title" style="clear: both"><a name="d0e8101"></a>5.&nbsp;<a class="indexterm" name="d0e8103"></a>Common glossary problems
                      </h2>
                   </div>
                </div>
@@ -346,6 +344,16 @@
                      </p>
                   </li>
                </ul>
+            </div>
+         </div>
+         <div class="footnotes"><br><hr width="100" align="left">
+            <div class="footnote">
+               <p><sup>[<a name="ftn.d0e7937" href="#d0e7937" class="para">5</a>] </sup>Note that in the above case, this is just half (or even less) of
+                          the story, as the target language (Slovenian) uses declension. So the
+                          inserted "pojavni meni" has to be changed to "pojavcnem meniju". In
+                          other words, tzping the term correctly without bothering with
+                          highlighting and rightclicking is probably faster. 
+               </p>
             </div>
          </div>
       </div>

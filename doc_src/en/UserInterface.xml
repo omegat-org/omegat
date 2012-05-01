@@ -42,6 +42,21 @@
                 <para>Machine Translation - displays the translation, provided
                 by MT services, like Google Translate</para>
               </listitem>
+
+              <listitem>
+                <para>Multiple Translations - shows translation alternatives -
+                if any entered - for the current segment</para>
+              </listitem>
+
+              <listitem>
+                <para>Notes viewer - notes by the translator, regarding the
+                current segment</para>
+              </listitem>
+
+              <listitem>
+                <para>Comments - comments by the translator, regarding the
+                current segment</para>
+              </listitem>
             </itemizedlist>
           </listitem>
         </varlistentry>
@@ -116,19 +131,36 @@
         </varlistentry>
 
         <varlistentry>
-          <term>Match statistics window</term>
+          <term>Statistics window</term>
 
           <listitem>
             <para>Used to open the window with the statistics of the project,
-            select <menuchoice>
+            display it, using <menuchoice>
+                <guimenu><indexterm class="singular">
+                    <primary>Menu Tools</primary>
+
+                    <secondary>statistics</secondary>
+                  </indexterm>Tools</guimenu>
+
+                <guimenuitem>Statistics.</guimenuitem>
+              </menuchoice></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
+          <term>Match statistics window</term>
+
+          <listitem>
+            <para>Used to display the match statistics of the project, select
+            <menuchoice>
                 <guimenu><indexterm class="singular">
                     <primary>Menu Tools</primary>
 
                     <secondary>Match statistics</secondary>
                   </indexterm>Tools</guimenu>
 
-                <guimenuitem>Match statistics.</guimenuitem>
-              </menuchoice></para>
+                <guimenuitem>Match statistics</guimenuitem>
+              </menuchoice>to open it.</para>
           </listitem>
         </varlistentry>
       </variablelist>
@@ -283,11 +315,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/OmegaT_panes.png" />
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/OmegaT_panes.png" width="80%" />
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -306,17 +338,17 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60" />
+        <colspec align="left" colnum="1" colwidth="60"/>
 
         <tbody>
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/Minimize.gif" width="60%" />
+                  <imagedata fileref="images/Minimize.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/Minimize.gif" width="40%" />
+                  <imagedata fileref="images/Minimize.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -327,11 +359,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/Maximize.gif" width="60%" />
+                  <imagedata fileref="images/Maximize.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/Maximize.gif" width="40%" />
+                  <imagedata fileref="images/Maximize.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -341,11 +373,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/undock.gif" width="60%" />
+                  <imagedata fileref="images/undock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/undock.gif" width="40%" />
+                  <imagedata fileref="images/undock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -355,11 +387,11 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
-                  <imagedata fileref="images/dock.gif" width="60%" />
+                  <imagedata fileref="images/dock.gif" width="60%"/>
                 </imageobject>
 
                 <imageobject role="fo">
-                  <imagedata fileref="images/dock.gif" width="40%" />
+                  <imagedata fileref="images/dock.gif" width="40%"/>
                 </imageobject>
               </inlinemediaobject></entry>
 
@@ -395,7 +427,7 @@
         </indexterm></title>
 
       <tgroup cols="2">
-        <colspec align="left" colnum="1" colwidth="60" />
+        <colspec align="left" colnum="1" colwidth="60"/>
 
         <tbody>
           <row>
@@ -448,7 +480,7 @@
       segments and you may scroll through the document and double-click on any
       segment to open and edit it. In the above case, the segments already
       translated are shown in yellow, but this may be changed to suit your
-      preferences (see <xref linkend="submenu.View" />).</para>
+      preferences (see <xref linkend="submenu.View"/>).</para>
 
       <para>One of the above segments is the current segment. It is the
       segment that is displayed in two parts. The upper part is in the source
@@ -456,10 +488,10 @@
       part is the editing field, ended by a marker: <indexterm
           class="singular">
           <primary>Segment marker</primary>
-        </indexterm>the marker is <literal>&lt;segment
-      nnnn&gt;</literal> where nnnn is a number of the segment in the project.
-      Use the upper part as a reference and replace or modify the contents of 
-      the editing field with your translation.</para>
+        </indexterm>the marker is <literal>&lt;segment nnnn&gt;</literal>
+      where nnnn is a number of the segment in the project. Use the upper part
+      as a reference and replace or modify the contents of the editing field
+      with your translation.</para>
 
       <para>Depending upon the preferred editing behavior, the editing field
       for the untranslated segment may be empty, contain the source text, or
@@ -508,11 +540,11 @@
 
           <mediaobject>
             <imageobject role="html">
-              <imagedata fileref="images/MatchesPane.png" />
+              <imagedata fileref="images/MatchesPane_25.png"/>
             </imageobject>
 
             <imageobject role="fo">
-              <imagedata fileref="images/MatchesPane.png" width="80%" />
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
             </imageobject>
           </mediaobject>
         </figure></para>
@@ -553,10 +585,10 @@
       is highlighted in bold, words that are missing in the segment you are
       translating are colored blue and words adjacent to the missing parts
       green. In the above example the source segment is <emphasis
-      role="bold">Duration of exposure &lt;15 min</emphasis>. The top match is
-      60%, because 3 out of 5 words match. The line with the matching
-      percentage also includes the name of the translation memory <indexterm
-          class="singular">
+      role="bold">Context menu command</emphasis>. The top match is 100%,
+      because all words match. So do the next two matches, and the match #4 is
+      similar, but different. The line with the matching percentage also
+      includes the name of the translation memory <indexterm class="singular">
           <primary>Translation memories</primary>
 
           <secondary>Matches</secondary>
@@ -566,11 +598,11 @@
           <primary>Translation memories</primary>
 
           <secondary>Orphan segments</secondary>
-        </indexterm> (the match #4) describe segments in the default project
+        </indexterm> (the match #2) describe segments in the default project
       translation memory that have no corresponding source segment.</para>
 
-      <para>There are actually three match estimates available (60/60/54 in
-      the case of the top match above). They are defined as follows:</para>
+      <para>There are actually three match estimates available (66/66/30 in
+      the case of the match #4 above). They are defined as follows:</para>
 
       <itemizedlist>
         <listitem>
@@ -602,32 +634,10 @@
       <para>The Glossary pane allows you to access your own collection of
       expressions and specialist terminology which you have built up in your
       glossary files. It shows translation of terms found in the current
-      segment, but only for reference purposes: there is no feature for
-      inserting the translation or replacing the term with these.</para>
-
-      <para><figure id="glossary.pane">
-          <title><indexterm class="singular">
-              <primary>Glossaries</primary>
-
-              <secondary>Glossary window - figure</secondary>
-            </indexterm>Glossary pane</title>
-
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata fileref="images/Glossary_pane.png" />
-            </imageobject>
-
-            <imageobject role="fo">
-              <imagedata fileref="images/Glossary_pane.png" width="60%" />
-            </imageobject>
-          </mediaobject>
-        </figure></para>
-
-      <para>The source segment in the above example was “I<emphasis>n most
-      translation jobs it is considered important to have the translated
-      document look similar to the original</emphasis>.”, and two words in it,
-      document and translation were found in the glossary file.
-      <application>OmegaT</application> also supports multi-word terms:</para>
+      segment. The source segment in the example below was “<emphasis>Context
+      menu command</emphasis>”, as in the Fuzzy Matches example above, and the
+      terms shown were found in the glossaries, available (Microsoft's Term
+      collection and Slovenian Linux Useg group Glossary).</para>
 
       <figure id="multiword.pane">
         <title><indexterm class="singular">
@@ -638,22 +648,22 @@
 
         <mediaobject>
           <imageobject role="html">
-            <imagedata fileref="images/MultiTerm_Glossary.png" />
+            <imagedata fileref="images/GlossaryPane_25.png"/>
           </imageobject>
 
           <imageobject role="fo">
-            <imagedata fileref="images/MultiTerm_Glossary.png" width="80%" />
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
           </imageobject>
         </mediaobject>
       </figure>
 
       <para>If you have TransTip option activated <guimenuitem>Options →
       Transtip</guimenuitem>), you can right click on the highlighted word in
-      the source segment to open a drop-down menu with the alternative
-      translations, as offered by your glossary. Selecting one of them will
-      insert it at the current position into the target segment. You can also
-      highlight your preferred alternative in the glossary pane and insert it
-      into the target by right clicking on the selection.</para>
+      the source segment to open a drop-down menu with suggested translation,
+      as offered by your glossary. Selecting one of them will insert it at the
+      current position into the target segment. You can also highlight your
+      preferred alternative in the glossary pane and insert it into the target
+      by right clicking on the selection.</para>
     </section>
 
     <section id="dictionaries">
@@ -665,7 +675,8 @@
 
       <para>Dictionaries are the electronic equivalents of printed
       dictionaries like Merriam Webster, Duden, Larousse etc., that you may
-      have on your desk.</para>
+      have on your desk. See more about them in the chapter on <link
+      linkend="chapter.dictionaries">Dictionaries</link></para>
     </section>
 
     <section id="Google.Translate">
@@ -678,7 +689,8 @@
       <para>The machine translation pane, when opened, contains the
       suggestions by machine translation tools for the current segment. Press
       <keysym>Ctrl+M </keysym>to replace the translation of the current
-      segment with the suggested translation.</para>
+      segment with the suggested translation. More in the chapter <link
+      linkend="chapter.machine.translate">Machine translation</link></para>
     </section>
 
     <section>
@@ -838,11 +850,11 @@
 
           <mediaobject>
             <imageobject role="html">
-              <imagedata fileref="images/TagValidator.png" />
+              <imagedata fileref="images/TagValidator.png"/>
             </imageobject>
 
             <imageobject role="fo">
-              <imagedata fileref="images/TagValidator.png" width="60%" />
+              <imagedata fileref="images/TagValidator.png" width="60%"/>
             </imageobject>
           </mediaobject>
         </figure></para>
@@ -866,63 +878,79 @@
     </section>
 
     <section>
+      <title>Statistics<indexterm class="singular">
+          <primary>Statistics</primary>
+
+          <seealso>Menu Tools</seealso>
+        </indexterm></title>
+
+      <para>The statistics window - accessed via <emphasis
+      role="bold">Tools&gt;Statistics </emphasis>- shows the statistics of the
+      current OmegaT project, both in the summary form as well as in detail
+      for every file to be translated. The statistics shown is available as as
+      a tab-separated <filename>project_stats.txt</filename> file (subfolder
+      <filename>omegat</filename>), ready to be loaded into a spreadsheet
+      program for the user's convenience. You can use <guimenuitem>Ctrl+A
+      <indexterm class="singular">
+          <primary>Shortcuts</primary>
+
+          <secondary>Ctrl+A - Select All</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm
+          class="singular">
+          <primary>Shortcuts</primary>
+
+          <secondary>Ctrl+C - copy text</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm
+          class="singular">
+          <primary>Shortcuts</primary>
+
+          <secondary>Ctrl+V - Paste text</secondary>
+        </indexterm></guimenuitem> to copy/paste the contents. </para>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/StatisticsWindow_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </section>
+
+    <section>
       <title>Match statistics<indexterm class="singular">
           <primary>Match Statistics</primary>
 
           <seealso>Menu Tools</seealso>
         </indexterm></title>
 
-      <para>Statistics are accessed via<guimenuitem>Tools/Match
+      <para>The match statistics are accessed via<guimenuitem>Tools&gt;Match
       Statistics.</guimenuitem> The evaluation is rather CPU intensive and can
       be time-consuming, so a progress bar is shown during the calculation. As
       far as categories are concerned, the de facto industry standard of
-      classifying matches into the following groups is used:</para>
+      classifying matches into the following groups is used: Exact match,
+      95%-100%, 85%-94%, 75%-84%, 50%-74% and No match. The word counts,
+      identical to counts in the Project Files window, are based strictly on
+      OmegaT's method of counting, with a few differences in terminology to
+      account for concept differences. This information is computed for
+      segments as well as for words and for characters (without and including
+      spaces). </para>
 
-      <itemizedlist>
-        <listitem>
-          <para>Exact match</para>
-        </listitem>
-
-        <listitem>
-          <para>95%-100%</para>
-        </listitem>
-
-        <listitem>
-          <para>85%-94%</para>
-        </listitem>
-
-        <listitem>
-          <para>75%-84%</para>
-        </listitem>
-
-        <listitem>
-          <para>50%-74%</para>
-        </listitem>
-
-        <listitem>
-          <para>No match</para>
-        </listitem>
-      </itemizedlist>
-
-      <para>The word counts are identical to the numbers, provided in the
-      Project Files window, and are based strictly on OmegaT's method of
-      counting, with a few differences in terminology to account for concept
-      differences. This information is computed for segments, words and for
-      characters (without and including spaces). Note that these totals are a
-      good (or as-good-as-it-can-be) approximation of the work involved in the
-      project and thus can serve as a basis for your cost and price
-      calculations.</para>
+      <para>Note that these totals are a good (or as-good-as-it-can-be)
+      approximation of the work involved in the project and thus can serve as
+      a basis for your cost and price calculations.</para>
 
       <screenshot>
         <screeninfo>match statistics</screeninfo>
 
         <mediaobject>
           <imageobject role="html">
-            <imagedata fileref="images/MatchStatistics.png" />
+            <imagedata fileref="images/MatchStatistics.png"/>
           </imageobject>
 
           <imageobject role="fo">
-            <imagedata fileref="images/MatchStatistics.png" width="60%" />
+            <imagedata fileref="images/MatchStatistics.png" width="60%"/>
           </imageobject>
         </mediaobject>
       </screenshot>

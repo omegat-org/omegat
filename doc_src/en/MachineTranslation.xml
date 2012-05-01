@@ -212,7 +212,7 @@
       <listitem>
         <para>"Google Translate returned HTTP response code: 403 ...": check
         that the 38-characters key, entered in the pinfo.list file, is
-        correct. Check that <ulink url="???">Translate API service </ulink>has
+        correct. Check that <ulink url="https://developers.google.com/translate/v2/faq">Translate API service </ulink>has
         been activated.</para>
       </listitem>
     </itemizedlist>

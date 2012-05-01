@@ -40,11 +40,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/Glossary_pane.png" />
+          <imagedata fileref="images/Glossary_pane.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/Glossary_pane.png" width="60%" />
+          <imagedata fileref="images/Glossary_pane.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -68,20 +68,25 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/MultiTerm_Glossary.png" />
+          <imagedata fileref="images/MultiTerm_Glossary_25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/MultiTerm_Glossary.png" width="80%" />
+          <imagedata fileref="images/MultiTerm_Glossary_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
-    <para>The underlined item "new preview screenshot", consists of three
-    words and can be found in the glossary pane as "nov predogled posnetka
-    zaslona". Note that parts of the multi-term items ("preview" in the above
-    example is also recognized on its own as "predogled") are recognized as
-    well, but ranked lower.</para>
+    <para>The underlined item "pop-up menu" can be found in the glossary pane
+    as "pojavni menu". Highlighting it in the Glossary pane and then
+    rightclicking insets at the cursor position in the target
+    segment.<footnote>
+        <para>Note that in the above case, this is just half (or even less) of
+        the story, as the target language (Slovenian) uses declension. So the
+        inserted "pojavni meni" has to be changed to "pojavcnem meniju". In
+        other words, tzping the term correctly without bothering with
+        highlighting and rightclicking is probably faster. </para>
+      </footnote></para>
   </section>
 
   <section>
@@ -121,7 +126,7 @@
     XML-based standard for exchanging structured terminological data, TBX has
     been approved as an international standard by LISA<indexterm
         class="singular">
-        <primary>LISA - </primary>
+        <primary>LISA -</primary>
 
         <secondary>File format</secondary>
       </indexterm> and ISO. If you have an existing terminology handling
@@ -208,11 +213,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/saveglossary.png" />
+          <imagedata fileref="images/saveglossary.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/saveglossary.png" width="60%" />
+          <imagedata fileref="images/saveglossary.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>

@@ -11,7 +11,7 @@
         <secondary>Create / open new</secondary>
       </indexterm></title>
 
-    <para><remark>Note:</remark>On an Apple Mac, use the <keycap>Cmd</keycap>
+    <para><remark>Note:</remark> On an Apple Mac, use the <keycap>Cmd</keycap>
     or <keycap>Apple</keycap> key instead of the <keycap>Ctrl</keycap>
     key</para>
 
@@ -32,15 +32,15 @@
     <para>After you give your project a name, the Create New Project dialog
     will open. At the top of that dialog, select your source file's language
     and the language that your translated file will be, and click
-    <guibutton>OK </guibutton>to continue</para>
+    <guibutton>OK </guibutton>to continue.</para>
 
     <para><application>If you are interested in other settings of this dialog,
     you can return to it any time by pressing
     <keycap>Ctrl+E.</keycap></application></para>
 
     <para>Next, the Project Files dialog opens. Click the Import source
-    files... to select your source file. OmegaT will then copy the selected
-    file to the <filename>/source/</filename>subfolder of your newly created
+    files... button to select your source file. OmegaT will then copy the selected
+    file to the <filename>/source/</filename> subfolder of your newly created
     project. After the source file has loaded in the Editor pane, you can
     close the Project files dialog.</para>
   </section>
@@ -55,7 +55,7 @@
     <keycap>Ctrl+D</keycap> to generate the translated document, which you
     will be created in the /target/ subfolder of your project folder. During
     translation, use the <guimenu>Edit</guimenu> and <guimenu>Go To</guimenu>
-    menus to perform various useful functions..</para>
+    menus to perform various useful functions.</para>
   </section>
 
   <section>

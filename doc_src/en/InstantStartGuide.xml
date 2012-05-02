@@ -116,10 +116,7 @@
         <para>If a file does not loads into the Editor pane, then it could be
         that your source file is in a format that doesn't work in OmegaT. See
         Chapter 7: File Filters in the User Manual for a list of file formats
-        that OmegaT can handle. If a file does not loads into the Editor pane,
-        then it could be that your source file is in a format that doesn't
-        work in OmegaT. See Chapter 7: File Filters in the User Manual for a
-        list of file formats that OmegaT can handle.</para>
+        that OmegaT can handle.</para>
       </listitem>
     </itemizedlist>
 
@@ -148,7 +145,7 @@
         OmegaT itself, in future projects that you create. If you place
         translation memory files in the /tm/ subfolder of your project folder,
         OmegaT will automatically search them for similar segments, called
-        "fuzzy matches". .</para>
+        "fuzzy matches".</para>
       </listitem>
     </itemizedlist>
 
@@ -156,7 +153,7 @@
       <listitem>
         <para>You can create a glossary by pressing
         <guibutton>Ctrl+Shift+G</guibutton>, or copy existing glossaries to
-        the<filename>/glossary/</filename>subfolder of your project folder,
+        the <filename>/glossary/</filename> subfolder of your project folder,
         and OmegaT will automatically look up words in them.</para>
       </listitem>
     </itemizedlist>
@@ -172,10 +169,10 @@
     <itemizedlist>
       <listitem>
         <para>For a more comprehensive introduction see <ulink
-        url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for beginners</ulink>
+        url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for Beginners</ulink>
         on the OmegaT web site. If you
         need assistance with any aspect of OmegaT, feel free to join the
-        <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT users group.</ulink></para>
+        <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT user group.</ulink></para>
       </listitem>
     </itemizedlist>
   </section>

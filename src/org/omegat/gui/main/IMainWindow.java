@@ -24,6 +24,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -116,6 +117,18 @@ public interface IMainWindow {
      *            dockable pane
      */
     void addDockable(Dockable pane);
+
+    /**
+     * Sets cursor of window
+     * @param cursor the new cursor
+     */
+    void setCursor(Cursor cursor);
+
+    /**
+     * Retrieves current cursor of window
+     * @return the current cursor
+     */
+    Cursor getCursor();
 
     /**
      * Retrieve main manu instance.

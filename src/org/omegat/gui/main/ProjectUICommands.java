@@ -26,6 +26,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -93,10 +94,16 @@ public class ProjectUICommands {
                 newProjDialog.setVisible(true);
                 newProjDialog.dispose();
 
+                IMainWindow mainWindow = Core.getMainWindow();
+                Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+                Cursor oldCursor = mainWindow.getCursor();
+                mainWindow.setCursor(hourglassCursor);
+
                 final ProjectProperties newProps = newProjDialog.getResult();
                 if (newProps == null) {
                     // user clicks on 'Cancel'
                     dir.delete();
+                    mainWindow.setCursor(oldCursor);
                     return null;
                 }
 
@@ -112,6 +119,7 @@ public class ProjectUICommands {
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     }
                 }
+                mainWindow.setCursor(oldCursor);
                 return null;
             }
         }.execute();
@@ -126,13 +134,20 @@ public class ProjectUICommands {
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB(null);
-                
+
                 final NewTeamProject dialog = displayTeamDialog();
+
+                IMainWindow mainWindow = Core.getMainWindow();
+                Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+                Cursor oldCursor = mainWindow.getCursor();
+                mainWindow.setCursor(hourglassCursor);
 
                 final IRemoteRepository repository;
                 File localDirectory = new File(dialog.txtDirectory.getText());
                 try {
                     if (!dialog.ok) {
+                        Core.getMainWindow().showStatusMessageRB("TEAM_CANCELLED");
+                        mainWindow.setCursor(oldCursor);
                         return null;
                     }
                     if (dialog.rbSVN.isSelected()) {
@@ -142,6 +157,7 @@ public class ProjectUICommands {
                         // GIT selected
                         repository = new GITRemoteRepository(localDirectory);
                     } else {
+                        mainWindow.setCursor(oldCursor);
                         return null;
                     }
 
@@ -154,6 +170,7 @@ public class ProjectUICommands {
                     }.execute(repository);
                 } catch (Exception ex) {
                     Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
+                    mainWindow.setCursor(oldCursor);
                     return null;
                 }
 
@@ -164,6 +181,7 @@ public class ProjectUICommands {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                 }
+                mainWindow.setCursor(oldCursor);
                 return null;
             }
         }.execute();
@@ -261,6 +279,11 @@ public class ProjectUICommands {
                     projectRootFolder = projectDirectory;
                 }
 
+                IMainWindow mainWindow = Core.getMainWindow();
+                Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+                Cursor oldCursor = mainWindow.getCursor();
+                mainWindow.setCursor(hourglassCursor);
+
                 // check if project okay
                 ProjectProperties props;
                 try {
@@ -268,6 +291,7 @@ public class ProjectUICommands {
                 } catch (Exception ex) {
                     Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                     Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                    mainWindow.setCursor(oldCursor);
                     return null;
                 }
 
@@ -300,6 +324,7 @@ public class ProjectUICommands {
                         }
                     } catch (Exception ex) {
                         Core.getMainWindow().displayErrorRB(ex, "TEAM_CHECKOUT_ERROR", ex.getMessage());
+                        mainWindow.setCursor(oldCursor);
                         return null;
                     }
                     try {
@@ -307,6 +332,7 @@ public class ProjectUICommands {
                     } catch (Exception ex) {
                         Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                        mainWindow.setCursor(oldCursor);
                         return null;
                     }
                 } else {
@@ -324,6 +350,7 @@ public class ProjectUICommands {
                             prj.dispose();
                             if (props == null) {
                                 // user clicks on 'Cancel'
+                                mainWindow.setCursor(oldCursor);
                                 return null;
                             }
                         }
@@ -335,9 +362,11 @@ public class ProjectUICommands {
                     } catch (Exception ex) {
                         Log.logErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
                         Core.getMainWindow().displayErrorRB(ex, "PP_ERROR_UNABLE_TO_READ_PROJECT_FILE");
+                        mainWindow.setCursor(oldCursor);
                         return null;
                     }
                 }
+                mainWindow.setCursor(oldCursor);
                 return null;
             }
             
@@ -366,12 +395,17 @@ public class ProjectUICommands {
             int previousCurEntryNum = Core.getEditor().getCurrentEntryNumber();
 
             protected Object doInBackground() throws Exception {
+                IMainWindow mainWindow = Core.getMainWindow();
+                Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+                Cursor oldCursor = mainWindow.getCursor();
+                mainWindow.setCursor(hourglassCursor);
                 IRemoteRepository repository = Core.getProject().getRepository();
 
                 Core.getProject().saveProject();
                 ProjectFactory.closeProject();
 
                 ProjectFactory.loadProject(props, repository);
+                mainWindow.setCursor(oldCursor);
                 return null;
             }
 
@@ -398,12 +432,17 @@ public class ProjectUICommands {
 
         new SwingWorker<Object, Void>() {
             protected Object doInBackground() throws Exception {
-                Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
+                IMainWindow mainWindow = Core.getMainWindow();
+                Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+                Cursor oldCursor = mainWindow.getCursor();
+                mainWindow.setCursor(hourglassCursor);
+
+                mainWindow.showStatusMessageRB("MW_STATUS_SAVING");
 
                 Core.getProject().saveProject();
 
-                Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVED");
-
+                mainWindow.showStatusMessageRB("MW_STATUS_SAVED");
+                mainWindow.setCursor(oldCursor);
                 return null;
             }
 
@@ -424,11 +463,17 @@ public class ProjectUICommands {
             protected Object doInBackground() throws Exception {
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVING");
 
+                IMainWindow mainWindow = Core.getMainWindow();
+                Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+                Cursor oldCursor = mainWindow.getCursor();
+                mainWindow.setCursor(hourglassCursor);
+
                 Preferences.save();
 
                 Core.getProject().saveProject();
 
                 Core.getMainWindow().showStatusMessageRB("MW_STATUS_SAVED");
+                mainWindow.setCursor(oldCursor);
 
                 return null;
             }

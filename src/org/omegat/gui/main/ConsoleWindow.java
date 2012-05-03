@@ -24,6 +24,7 @@
 
 package org.omegat.gui.main;
 
+import java.awt.Cursor;
 import java.awt.Font;
 
 import javax.swing.JFrame;
@@ -119,4 +120,12 @@ public class ConsoleWindow implements IMainWindow {
     public IMainMenu getMainMenu() {
         throw new NoSuchMethodError("Invalid call of ConsoleWindow");
     }
+
+    public Cursor getCursor() {
+        return new Cursor(Cursor.DEFAULT_CURSOR);
+    }
+
+    public void setCursor(Cursor cursor) {
+    }
+
 }

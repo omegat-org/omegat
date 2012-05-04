@@ -24,6 +24,7 @@
 
 package org.omegat.core;
 
+import java.awt.Cursor;
 import java.awt.Font;
 import java.io.File;
 
@@ -84,6 +85,13 @@ public abstract class TestCore extends XMLTestCase {
 
             public IMainMenu getMainMenu() {
                 return null;
+            }
+            
+            public Cursor getCursor() {
+                return null;
+            }
+
+            public void setCursor(Cursor cursor) {
             }
         });
         Core.setCurrentProject(new NotLoadedProject());

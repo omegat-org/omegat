@@ -33,11 +33,13 @@ import org.omegat.core.data.EntryKey;
  * @author Keith Godfrey
  */
 public class NearString {
-    public NearString(final EntryKey key, final String source, final String translation, final int nearScore,
-            final int nearScoreNoStem, final int adjustedScore, final byte[] nearData, final String projName) {
+    public NearString(final EntryKey key, final String source, final String translation, final boolean fuzzyMark,
+            final int nearScore, final int nearScoreNoStem, final int adjustedScore, final byte[] nearData,
+            final String projName) {
         this.key = key;
         this.source = source;
         this.translation = translation;
+        this.fuzzyMark = fuzzyMark;
         score = nearScore;
         scoreNoStem = nearScoreNoStem;
         this.adjustedScore = adjustedScore;
@@ -49,6 +51,8 @@ public class NearString {
     public EntryKey key;
     public String source;
     public String translation;
+    
+    public boolean fuzzyMark;
 
     public int score;
 

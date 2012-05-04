@@ -78,6 +78,12 @@ public class CommentsTextArea extends EntryInfoPane<SourceTextEntry> implements 
             text.append(newEntry.getKey().path);
             text.append('\n');
         }
+        if (newEntry.getSourceTranslation() != null) {
+            text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Translation"));
+            text.append(' ');
+            text.append(newEntry.getSourceTranslation());
+            text.append('\n');
+        }
         if (newEntry.getComment() != null) {
             text.append(OStrings.getString("GUI_COMMENTSWINDOW_FIELD_Comment"));
             text.append('\n');

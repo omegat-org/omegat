@@ -349,8 +349,7 @@ public abstract class TestFilterBase extends TestCore {
             Set<String> existSource = new HashSet<String>();
             Set<EntryKey> existKeys = new HashSet<EntryKey>();
 
-            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys,
-                    new HashMap<EntryKey, TMXEntry>());
+            LoadFilesCallback loadFilesCallback = new LoadFilesCallback(existSource, existKeys);
 
             FileInfo fi = new FileInfo();
             fi.filePath = file;

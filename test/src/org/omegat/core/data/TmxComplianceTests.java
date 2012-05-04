@@ -141,9 +141,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1J() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
-        final ProjectTMX tmx = new ProjectTMX(props, new File(
-                "test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"), orphanedCallback,
-                new HashMap<EntryKey, TMXEntry>());
+        final ProjectTMX tmx = new ProjectTMX(props, new File("test/data/tmx/TMXComplianceKit/ImportTest1J_many.tmx"),
+                orphanedCallback);
         tmx.exportTMX(props, outFile, false, false, false);
         // TODO validate via TMXCheck
     }
@@ -154,9 +153,8 @@ public class TmxComplianceTests extends TmxComplianceBase {
     @Test
     public void testImport1K() throws Exception {
         ProjectProperties props = new TestProjectProperties("EN-US", "EN-GB");
-        final ProjectTMX tmx = new ProjectTMX(props, new File(
-                "test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"), orphanedCallback,
-                new HashMap<EntryKey, TMXEntry>());
+        final ProjectTMX tmx = new ProjectTMX(props, new File("test/data/tmx/TMXComplianceKit/ImportTest1K.tmx"),
+                orphanedCallback);
         // TODO assertEquals(0, tmx.translationDefault.size());
     }
 
@@ -208,7 +206,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
 
         assertEquals(sources.size(), translations.size());
 
-        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback, new TreeMap<EntryKey, TMXEntry>());
+        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback);
 
         for (int i = 0; i < sources.size(); i++) {
             tmx.defaults.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i), null, 0, null,
@@ -331,7 +329,7 @@ public class TmxComplianceTests extends TmxComplianceBase {
 
         assertEquals(sources.size(), translations.size());
 
-        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback, new TreeMap<EntryKey, TMXEntry>());
+        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback);
 
         for (int i = 0; i < sources.size(); i++) {
             tmx.defaults.put(sources.get(i), new TMXEntry(sources.get(i), translations.get(i), null, 0, null,

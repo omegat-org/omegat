@@ -57,16 +57,6 @@ public interface IParseCallback {
             IFilter filter);
 
     /**
-     * Add data to the TMX with name like source file name.
-     * 
-     * @param source
-     *            source entry text
-     * @param translation
-     *            translation
-     */
-    void addFileTMXEntry(String source, String translation);
-
-    /**
      * This method can be called from any filter on the end of file processing. It links prev/next segments
      * for multiple translations.
      */

@@ -73,11 +73,9 @@ public class ProjectTMX {
     
     final CheckOrphanedCallback checkOrphanedCallback;
 
-    public ProjectTMX(ProjectProperties props, File file, CheckOrphanedCallback callback,
-            Map<EntryKey, TMXEntry> sourceTranslations) throws Exception {
+    public ProjectTMX(ProjectProperties props, File file, CheckOrphanedCallback callback) throws Exception {
         this.checkOrphanedCallback = callback;
         alternatives = new HashMap<EntryKey, TMXEntry>();
-        alternatives.putAll(sourceTranslations);
         defaults = new HashMap<String, TMXEntry>();
 
         if (!file.exists()) {

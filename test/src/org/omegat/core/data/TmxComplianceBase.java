@@ -126,7 +126,7 @@ public abstract class TmxComplianceBase extends TestCase {
             String inCharset, String fileTMX, String outCharset, ProjectProperties props,
             Map<String, TMXEntry> tmxPatch) throws Exception {
         final ProjectTMX tmx = new ProjectTMX(props, new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
-                orphanedCallback, new HashMap<EntryKey, TMXEntry>());
+                orphanedCallback);
         if (tmxPatch != null) {
             tmx.defaults.putAll(tmxPatch);
         }
@@ -184,7 +184,7 @@ public abstract class TmxComplianceBase extends TestCase {
 
         filter.alignFile(sourceFile, translatedFile, null, fc, callback);
 
-        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback, new TreeMap<EntryKey, TMXEntry>());
+        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback);
 
         for (Map.Entry<String, TMXEntry> en : callback.data.entrySet()) {
             tmx.defaults.put(en.getKey(), en.getValue());

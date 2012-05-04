@@ -54,7 +54,7 @@ public class TmxSegmentationTest extends TestCase {
                     public boolean existEntryInProject(EntryKey key) {
                         return true;
                     }
-                }, new TreeMap<EntryKey, TMXEntry>());
+                });
 
         Assert.assertEquals(2, tmx.defaults.size());
         Assert.assertEquals("Ceci est un test.", tmx.defaults.get("This is test.").translation);

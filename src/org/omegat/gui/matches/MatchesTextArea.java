@@ -135,9 +135,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
 
         for (int i = 0; i < newMatches.size(); i++) {
             NearString match = newMatches.get(i);
-            displayBuffer.append(MessageFormat.format("{0}) {1}\n{2}\n<{3}/{4}/{5}% {6} >", i + 1,
+            displayBuffer.append(MessageFormat.format("{0}) {7}{1}\n{2}\n<{3}/{4}/{5}% {6} >", i + 1,
                     match.source, match.translation, match.score, match.scoreNoStem, match.adjustedScore,
-                    match.proj));
+                    match.proj, match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : ""));
 
             if (i < (newMatches.size() - 1))
                 displayBuffer.append("\n\n");

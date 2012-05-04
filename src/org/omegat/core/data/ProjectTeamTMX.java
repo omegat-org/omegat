@@ -25,10 +25,8 @@ package org.omegat.core.data;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Collections;
 import java.util.Map;
 
-import org.omegat.core.Core;
 import org.omegat.core.KnownException;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team.RepositoryUtils;
@@ -76,8 +74,8 @@ public class ProjectTeamTMX extends ProjectTMX {
     IRemoteRepository repository;
 
     public ProjectTeamTMX(ProjectProperties props, File file, CheckOrphanedCallback callback,
-            Map<EntryKey, TMXEntry> sourceTranslations, IRemoteRepository repository) throws Exception {
-        super(props, file, callback, sourceTranslations);
+            IRemoteRepository repository) throws Exception {
+        super(props, file, callback);
 
         this.repository = repository;
     }
@@ -104,7 +102,7 @@ public class ProjectTeamTMX extends ProjectTMX {
 
         // restore BASE revision and load
         repository.restoreBase(orig);
-        baseTMX = new ProjectTMX(props, orig, null, Collections.EMPTY_MAP);
+        baseTMX = new ProjectTMX(props, orig, null);
 
         // update to HEAD revision from repository and load
         repository.download(orig);
@@ -117,7 +115,7 @@ public class ProjectTeamTMX extends ProjectTMX {
             fileOnBase = null;
         } else {
             // need rebase
-            headTMX = new ProjectTMX(props, orig, null, Collections.EMPTY_MAP);
+            headTMX = new ProjectTMX(props, orig, null);
             synchronized (this) {
                 ProjectTMX delta = calculateDelta(baseTMX, this);
                 baseTMX.clear();

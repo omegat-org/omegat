@@ -105,7 +105,7 @@ sudo ln -s -b /opt/omegat/$omtversionul/OmegaT /usr/local/bin/omegat
 # symlink Kaptain OmegaT launch script 
 # from <OmegaT version> to /usr/local/bin
 
-sudo ln -s /opt/omegat/$omtversionul/omegat.kaptn /usr/local/bin/omegat.kaptn
+sudo ln -s -b /opt/omegat/$omtversionul/omegat.kaptn /usr/local/bin/omegat.kaptn
 
 
 exit

@@ -29,17 +29,17 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossaries<a class="indexterm" name="d0e7871"></a><a class="indexterm" name="d0e7876"></a></h2>
+                  <h2 class="title"><a name="chapter.glossaries"></a>Chapter&nbsp;19.&nbsp;Glossaries<a class="indexterm" name="d0e7333"></a><a class="indexterm" name="d0e7338"></a></h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7889">1. Usage</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7940">2. File format</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e7985">3. How to create glossaries</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8083">4. Using Trados Multiterm</a></span></dt>
-               <dt><span class="section"><a href="chapter.glossaries.html#d0e8101">5. Common glossary problems</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7362">1. Usage</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7413">2. File format</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7458">3. How to create glossaries</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7494">4. Using Trados Multiterm</a></span></dt>
+               <dt><span class="section"><a href="chapter.glossaries.html#d0e7510">5. Common glossary problems</a></span></dt>
             </dl>
          </div>
          <p>Glossaries are files created and updated manually for use in
@@ -49,21 +49,32 @@
               glossaries, any terms in the glossary which are also found in the current
               segment will be automatically displayed in the Glossary viewer.
          </p>
+         <p>You define its location and name in the project properties dialog. The
+              extension must be <code class="filename">.txt</code> (if not, it will be added). The
+              location of the file must be within the <code class="filename">/glossary
+                 </code> folder, but it can be in a deeper directory (e.g.,
+              <code class="filename">glossary/sub/glossary.txt</code>). The file does not need to
+              exist when setting it, it will be created (if necessary) when adding a
+              glossary entry. If the file already exists, no attempt is done to verify
+              the format or the character set of the file: the new entries will always be
+              in tab-separated format and UTF-8. As the existing content will not be
+              touched, damaged to an existing file would be limited.
+         </p>
          <div class="section" title="1.&nbsp;Usage">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7889"></a>1.&nbsp;Usage
+                     <h2 class="title" style="clear: both"><a name="d0e7362"></a>1.&nbsp;Usage
                      </h2>
                   </div>
                </div>
             </div>
-            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e7894"></a> <code class="filename">/glossary</code> folder after creating the
+            <p>To use an existing glossary, simply place it in the<a class="indexterm" name="d0e7367"></a> <code class="filename">/glossary</code> folder after creating the
                    project. <span class="application">OmegaT</span> automatically detects glossary
                    files in this folder when a project is opened. Terms in the current
                    segment which <span class="application">OmegaT</span> finds in the glossary
                    file(s) are displayed in the Glossary pane:
-            </p><a class="indexterm" name="d0e7909"></a><div class="figure"><a name="d0e7912"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Glossary pane</b></p>
+            </p><a class="indexterm" name="d0e7382"></a><div class="figure"><a name="d0e7385"></a><p class="title"><b>Figure&nbsp;19.1.&nbsp;Glossary pane</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/Glossary_pane.png" alt="Glossary pane"></div>
                </div>
@@ -78,20 +89,20 @@
             <p>The source term does not have to be a single-word item, as the next
                    example shows:
             </p>
-            <div class="figure"><a name="d0e7924"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e7927"></a></b></p>
+            <div class="figure"><a name="d0e7397"></a><p class="title"><b>Figure&nbsp;19.2.&nbsp;multiple words entries in glossaries - example<a class="indexterm" name="d0e7400"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/MultiTerm_Glossary_25.png" alt="multiple words entries in glossaries - exampleGlossary pane - multiple-words entries"></div>
                </div>
             </div><br class="figure-break"><p>The underlined item "pop-up menu" can be found in the glossary pane
                    as "pojavni menu". Highlighting it in the Glossary pane and then
                    rightclicking insets at the cursor position in the target
-                   segment.<sup>[<a name="d0e7937" href="#ftn.d0e7937" class="footnote">5</a>]</sup></p>
+                   segment.<sup>[<a name="d0e7410" href="#ftn.d0e7410" class="footnote">1</a>]</sup></p>
          </div>
          <div class="section" title="2.&nbsp;File format">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7940"></a>2.&nbsp;<a class="indexterm" name="d0e7942"></a>File format<a class="indexterm" name="d0e7948"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e7413"></a>2.&nbsp;<a class="indexterm" name="d0e7415"></a>File format<a class="indexterm" name="d0e7421"></a></h2>
                   </div>
                </div>
             </div>
@@ -109,12 +120,12 @@
             </p>
             <p><code class="literal">"This is a source term, which contains a comma","c'est un
                       terme, qui contient une virgule" </code></p>
-            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e7964"></a> is also supported. TBX - Term Base eXchange - is the open,
+            <p>In addition to the plain text format, TBX format <a class="indexterm" name="d0e7437"></a> is also supported. TBX - Term Base eXchange - is the open,
                    XML-based standard for exchanging structured terminological data, TBX has
-                   been approved as an international standard by LISA<a class="indexterm" name="d0e7970"></a> and ISO. If you have an existing terminology handling
+                   been approved as an international standard by LISA<a class="indexterm" name="d0e7443"></a> and ISO. If you have an existing terminology handling
                    system - MultiTerm for example - it is quite possible it offers the export
                    of terminology data via TBX format. <a class="ulink" href="http://www.microsoft.com/Language/en-US/Terminology.aspx" target="_top">Microsoft
-                      Terminology Collection</a> <a class="indexterm" name="d0e7979"></a> can be downloaded in nearly 100 languages and can serve as
+                      Terminology Collection</a> <a class="indexterm" name="d0e7452"></a> can be downloaded in nearly 100 languages and can serve as
                    a cornerstone IT glossary.
             </p>
          </div>
@@ -122,128 +133,40 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e7985"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e7988"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e7458"></a>3.&nbsp;How to create glossaries<a class="indexterm" name="d0e7461"></a></h2>
                   </div>
                </div>
             </div>
-            <p>The method here is foolproof, when followed in a reasonably careful
-                   fashion. You need OpenOffice.org Writer for it, so - if you haven't
-                   already done so - download and install OpenOffice.org. Launch
-                   OpenOffice.org and open a new text document or launch "OpenOffice.org
-                   Writer".
+            <p>The project setting allows one can enter a name for a writeable
+                   glossary file (see beginning of this chapter). Adding new entries is done
+                   by using the keyboard shortcut <span class="keycap"><strong>Ctrl+Shift+G</strong></span>. A dialog
+                   opens, allowing you to enter the source term, target term and any comments
+                   you may have:
             </p>
-            <p>In the empty document, enter your glossary terms as follows: a
-                   source-language term, tab space, the target-language term , tab space, a
-                   comment or explanation for the item, and a Return. Tab space is the
-                   tabulator key on the left hand side of the keyboard. If you do not wish to
-                   add any comments, you can drop the second tab space. A "term" can be a
-                   single word or a whole phrase. On the second line, enter the second term
-                   and its translation.
-            </p>
-            <p>When you have finished entering the terms, you will have two
-                   "columns" of terms, source-language terms on the left and their
-                   target-language terms on the right, and possibly a third column,
-                   containing you comments and explanations, The tab space (→ in the example
-                   below) and Enter (¶) characters can be made visible by clicking on the ¶
-                   icon in the Writer's Standard writer bar. Here are a few lines of an
-                   English -German glossary)
-            </p>
-            <p><code class="literal">word →Wort→das (-/e/s, Wörter/-e)¶</code></p>
-            <p><code class="literal">small house→Häuschen→das, (pl Häuschen)¶</code></p>
-            <p><code class="literal">dog →Hund→m, f Hündin ¶</code></p>
-            <p><code class="literal">horse→Pferd→n, m Hengst f Stute n Fohlen¶</code></p>
-            <p>Do NOT use OpenOffice.org's "columns" function to create columns:
-                   just separate each source and target-language term pair with a single tab
-                   space.
-            </p>
-            <p>When you are finished with the entries, save the file as
-                   Unicode-encoded file as follows:
-            </p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>Select <code class="literal">File &gt; Save As</code></p>
-                  </li>
-                  <li class="listitem">
-                     <p>In the <span class="emphasis"><em>"File location"</em></span> box, enter the name
-                                for your glossary file.
-                     </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>For "Filter", select "<span class="emphasis"><em>Text Encoded
-                                      (.txt.)</em></span>"
-                     </p>
-                  </li>
-                  <li class="listitem">
-                     <p>Make sure "<span class="emphasis"><em>Automatic file name extension</em></span>"
-                                and <span class="emphasis"><em>"Edit filter settings"</em></span> are unchecked.
-                     </p>
-                  </li>
-               </ul>
-            </div>
-            <div class="figure"><a name="d0e8043"></a><p class="title"><b>Figure&nbsp;19.3.&nbsp;Saving a glossary</b></p>
-               <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/saveglossary.png" alt="Saving a glossary"></div>
-               </div>
-            </div><br class="figure-break"><p>Confirm with OK.</p>
-            <p>After creating an OmegaT project, copy or move this file into the
-                   project's \glossary folder. If the project is already open, reload it
-                   after copying the glossary file into the project. You can make changes to
-                   a glossary file while it is being used in a project. Glossary changes are
-                   detected approximately once every second and modifications load
-                   transparently in the background, so there's no need to reload the project
-                   after saving the new glossary file.
-            </p>
-            <p>When a segment containing a source-text term is opened, the glossary
-                   pane will display glossary entries for those items in the source segment
-                   that can be found in the glossary (or glossaries - you can have more than
-                   one available, and they can be stored in subfolders of <span class="emphasis"><em>glossary
-                         </em></span>as well).
+            <div class="mediaobject"><img src="images/GlossaryEntry_25.png"></div>
+            <p>The contents of glossary files are kept in memory and are loaded
+                   when the project is opened or reloaded. Updating a glossary file is thus
+                   rather simple: press <span class="keycap"><strong>Ctrl+Shift+G</strong></span> and enter the new
+                   term, its translation and any comments you may have (ensuring you press
+                   tab between the fields) and save the file. The contents of the glossary
+                   pane will be updated accordingly
             </p>
             <p><span class="bold"><strong>Note: </strong></span>Of course there are other
                    ways and means to create a simple file with tab delimited entries, and
                    they are all simpler, a lot of them much simpler, than the above
                    suggestion. For instance, one can export the contents above as a
                    <code class="filename">CSV</code>, instead of a <code class="filename">UTF8</code> text
-                   file. Note, however, that the above suggestion works for any target
-                   system, be it Windows, OS X or Linux. Nothing speaks against using
-                   Notepad++ on Windows or GEdit on Linux for instance: any text editor, that
-                   can handle UTF8 and that can show white space (so that you do not miss the
-                   required <span class="keycap"><strong>TAB</strong></span> characters) can be used.
+                   file. Nothing speaks against using Notepad++ on Windows or GEdit on Linux
+                   for instance: any text editor, that can handle UTF8 and that can show
+                   white space (so that you do not miss the required <span class="keycap"><strong>TAB</strong></span>
+                   characters) can be used.
             </p>
-            <p>The contents of glossary files are kept in memory and are loaded
-                   when the project is opened or reloaded. Updating a glossary file is thus
-                   rather simple:
-            </p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>keep the file open in your selected editor</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>When you come across a new term that you would like to add to
-                                your glossary, enter the new term, its translation and any comments
-                                you may have (ensuring you press tab between the fields) and save the
-                                file. The contents of the glossary pane will be updated
-                                accordingly.
-                     </p>
-                  </li>
-               </ul>
-            </div>
          </div>
          <div class="section" title="4.&nbsp;Using Trados Multiterm">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8083"></a>4.&nbsp;<a class="indexterm" name="d0e8085"></a>Using Trados Multiterm
+                     <h2 class="title" style="clear: both"><a name="d0e7494"></a>4.&nbsp;<a class="indexterm" name="d0e7496"></a>Using Trados Multiterm
                      </h2>
                   </div>
                </div>
@@ -251,19 +174,17 @@
             <p>Data exported from Trados MultiTerm can be used as
                    <span class="application">OmegaT</span> glossaries without further modification,
                    provided they are given the file extension <code class="filename">.tab</code> and
-                   the source and target term fields are the first two fields
-                   respectively.
-            </p>
-            <p>If you export using the system option "Tab-delimited export", you
-                   will need to delete the first 5 columns (Seq. Nr, Date created etc). The
-                   newer versions of MultiTerm support exporting to TBX format.
+                   the source and target term fields are the first two fields respectively.If
+                   you export using the system option "Tab-delimited export", you will need
+                   to delete the first 5 columns (Seq. Nr, Date created etc). The newer
+                   versions of MultiTerm support exporting to TBX format.
             </p>
          </div>
          <div class="section" title="5.&nbsp;Common glossary problems">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e8101"></a>5.&nbsp;<a class="indexterm" name="d0e8103"></a>Common glossary problems
+                     <h2 class="title" style="clear: both"><a name="d0e7510"></a>5.&nbsp;<a class="indexterm" name="d0e7512"></a>Common glossary problems
                      </h2>
                   </div>
                </div>
@@ -348,11 +269,11 @@
          </div>
          <div class="footnotes"><br><hr width="100" align="left">
             <div class="footnote">
-               <p><sup>[<a name="ftn.d0e7937" href="#d0e7937" class="para">5</a>] </sup>Note that in the above case, this is just half (or even less) of
+               <p><sup>[<a name="ftn.d0e7410" href="#d0e7410" class="para">1</a>] </sup>Note that in the above case, this is just half (or even less) of
                           the story, as the target language (Slovenian) uses declension. So the
                           inserted "pojavni meni" has to be changed to "pojavcnem meniju". In
-                          other words, tzping the term correctly without bothering with
-                          highlighting and rightclicking is probably faster. 
+                          other words, typing the term correctly without bothering with
+                          highlighting and rightclicking is probably faster.
                </p>
             </div>
          </div>

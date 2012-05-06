@@ -1,0 +1,702 @@
+<html>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Appendix&nbsp;D.&nbsp;Shortcuts customization</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+      <link rel="home" href="index.html" title="OmegaT - User's Guide">
+      <link rel="up" href="index.html" title="OmegaT - User's Guide">
+      <link rel="prev" href="appendix.keyboard.html" title="Appendix&nbsp;C.&nbsp;Keyboard shortcuts in the editor">
+      <link rel="next" href="appendix.legal.notices.html" title="Appendix&nbsp;E.&nbsp;Legal notices">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="navheader">
+         <table width="100%" summary="Navigation header">
+            <tr>
+               <th colspan="3" align="center">Appendix&nbsp;D.&nbsp;Shortcuts customization</th>
+            </tr>
+            <tr>
+               <td width="20%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <th width="60%" align="center">&nbsp;</th>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Next</a></td>
+            </tr>
+         </table>
+         <hr>
+      </div>
+      <div class="appendix" title="Appendix&nbsp;D.&nbsp;Shortcuts customization">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="appendix.shortcut.custom"></a>Appendix&nbsp;D.&nbsp;Shortcuts customization
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="toc">
+            <dl>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.customization">1. Shortcuts customization</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ProjectMenu">2. Project Menu</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.EditMenu">3. Edit Menu</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.GoToMenu">4. GoTo Menu</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ViewMenu">5. View Menu</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.ToolsMenu">6. Tools Menu</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.OptionsMenu">7. Options Menu</a></span></dt>
+               <dt><span class="section"><a href="appendix.shortcut.custom.html#ch04.shortcuts.HelpMenu">8. Help Menu</a></span></dt>
+            </dl>
+         </div>
+         <div class="section" title="1.&nbsp;Shortcuts customization">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.customization"></a>1.&nbsp;<a class="indexterm" name="d0e9897"></a>Shortcuts customization
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Most of the items that appear in the main menu can have a new
+                   shortcut assigned. Only the most commonly used menu items are assigned a
+                   shortcut by default. You can change the already assigned shortcuts and add
+                   new shortcuts by putting a shortcut definition file in your OmegaT
+                   preferences folder (see <a class="link" href="chapter.files.and.directories.html#user.files.location">User files
+                      location</a>).
+            </p>
+            <p>The shortcut definition file must be named
+                   <code class="filename">MainMenuShortcuts.properties</code> and must contain at most
+                   one shortcut definition per line. Empty lines are accepted and comment
+                   lines should start with "//". Anything after the "//" will be
+                   ignored.
+            </p>
+            <p>Once the <code class="filename">MainMenuShortcuts.properties</code> file is
+                   modified, <span class="application">OmegaT</span> must be relaunched to take the
+                   new shortcuts into account.
+            </p>
+            <p>The shortcut definition syntax is the following: <code class="code">&lt;menu item
+                      code&gt;=&lt;shortcut&gt;</code>, where <span class="emphasis"><em>&lt;menu item
+                         code&gt;</em></span> is a code taken from the tables below and
+                   <span class="emphasis"><em>&lt;shortcut&gt;</em></span> is a combination of pressed keys
+                   specified by the user<sup>[<a name="d0e9932" href="#ftn.d0e9932" class="footnote">2</a>]</sup>.
+            </p>
+            <p>&lt;shortcut&gt; must be of the following form:0 or more
+                   <code class="code">&lt;modifier&gt;</code> followed by 0 or 1
+                   <code class="code">&lt;event&gt;</code> followed by 1 <code class="code">&lt;key&gt;</code>,
+                   where:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="code">&lt;modifier&gt;</code> can be:
+                                  <span class="emphasis"><em>shift</em></span>, <span class="emphasis"><em>control</em></span>,
+                                  <span class="emphasis"><em>ctrl</em></span>, <span class="emphasis"><em>meta</em></span><sup>[<a name="d0e9966" href="#ftn.d0e9966" class="footnote">3</a>]</sup>, <span class="emphasis"><em>alt</em></span>,
+                                  <span class="emphasis"><em>altGraph</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">&lt;event&gt;</code> can be: <span class="emphasis"><em>typed</em></span>,
+                                  <span class="emphasis"><em>pressed</em></span>, <span class="emphasis"><em>released</em></span></p>
+                  </li>
+                  <li class="listitem">
+                     <p>and <code class="code">&lt;key&gt;</code> can be any key available on your
+                                  keyboard<sup>[<a name="d0e10000" href="#ftn.d0e10000" class="footnote">4</a>]</sup>.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <p>For example, in the default OmegaT shortcuts<sup>[<a name="d0e10008" href="#ftn.d0e10008" class="footnote">5</a>]</sup>, one can find:
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p><code class="code">projectOpenMenuItem=ctrl O</code></p>
+                  </li>
+                  <li class="listitem">
+                     <p><code class="code">editCreateGlossaryEntryMenuItem=ctrl shift G</code></p>
+                  </li>
+               </ul>
+            </div>
+            <p>The first is the shortcut for <span class="guimenuitem">Open
+                      Project</span>, the second for <span class="guimenuitem">Create Glossary
+                      Entry</span>.
+            </p>
+            <p>If you want to use <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>O</strong></span> to open a project, modify your
+                   <code class="filename">MainMenuShortcuts.properties</code> as follows:<code class="code">
+                      </code></p>
+            <p><code class="code">projectOpenMenuItem=shift ctrl O</code>.
+            </p>
+            <p>If you are on a Mac and you want to add a <span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Command</strong></span>+<span class="keycap"><strong>S</strong></span> shortcut to <span class="guimenu">Tools</span> → <span class="guimenuitem">Statistics</span>, add the following line to your
+                   <code class="filename">MainMenuShortcuts.properties</code>:<code class="code"></code></p>
+            <p><code class="code"> toolsShowStatisticsStandardMenuItem=shift meta
+                      S</code></p>
+            <p>Save then the file and relaunch <span class="application">OmegaT</span>.
+                   Your new shortcuts should now appear next to the menu items zou have
+                   modified. If they do not conflict with system shortcuts, they should be
+                   available from within OmegaT.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Project Menu">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ProjectMenu"></a>2.&nbsp;Project Menu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10085"></a><p class="title"><b>Table&nbsp;D.1.&nbsp;Project Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10088"></a><table summary="Project Menu" border="1">
+                     <colgroup>
+                        <col width="120" align="left">
+                        <col width="80" align="left">
+                        <col align="left">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Menu Item</th>
+                           <th align="left">Default shortcut</th>
+                           <th align="left">Menu Item Code</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">New</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectNewMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Open</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+O</strong></span></td>
+                           <td align="left">projectOpenMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Import Source Files...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Import From MediaWiki...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">projectWikiImportMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Reload</td>
+                           <td align="left"><span class="keycap"><strong>F5</strong></span></td>
+                           <td align="left">projectReloadMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Close</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+W</strong></span></td>
+                           <td align="left">projectCloseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Save</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+S</strong></span></td>
+                           <td align="left">projectSaveMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Create translated documents</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+D</strong></span></td>
+                           <td align="left">projectCompileMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Properties...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+E</strong></span></td>
+                           <td align="left">projectEditMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Project Files...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+L</strong></span></td>
+                           <td align="left">viewFileListMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Quit</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Q</strong></span></td>
+                           <td align="left">projectExitMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="3.&nbsp;Edit Menu">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.EditMenu"></a>3.&nbsp;Edit Menu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10191"></a><p class="title"><b>Table&nbsp;D.2.&nbsp;Edit Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10194"></a><table summary="Edit Menu" border="1">
+                     <colgroup>
+                        <col width="120" align="left">
+                        <col width="80" align="left">
+                        <col align="left">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Menu Item</th>
+                           <th align="left">Default shortcut</th>
+                           <th align="left">Menu Item Code</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Undo Last Action</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Z</strong></span></td>
+                           <td align="left">editUndoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Redo Last Action</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Y</strong></span></td>
+                           <td align="left">editRedoMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Replace With Match</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Insert Match</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+I</strong></span></td>
+                           <td align="left">editInsertTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Replace with Machine Translation</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+M</strong></span></td>
+                           <td align="left">editOverwriteMachineTranslationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Replace With Source</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+R</strong></span></td>
+                           <td align="left">editOverwriteSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Insert Source</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+I</strong></span></td>
+                           <td align="left">editInsertSourceMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Insert Source Tags</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+T</strong></span></td>
+                           <td align="left">editTagPainterMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Export Selection</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+C</strong></span></td>
+                           <td align="left">editExportSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Create Glossary Entry</td>
+                           <td align="left"><span class="keycap"><strong>Shift+Ctrl+G</strong></span></td>
+                           <td align="left">editCreateGlossaryEntryMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Search Project...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+F</strong></span></td>
+                           <td align="left">editFindInProjectMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 1</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+1</strong></span></td>
+                           <td align="left">editSelectFuzzy1MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 2</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+2</strong></span></td>
+                           <td align="left">editSelectFuzzy2MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 3</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+3</strong></span></td>
+                           <td align="left">editSelectFuzzy3MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 4</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+4</strong></span></td>
+                           <td align="left">editSelectFuzzy4MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Select Fuzzy Match 5</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+5</strong></span></td>
+                           <td align="left">editSelectFuzzy5MenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Lower Case</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">lowerCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Upper Case</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">upperCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Title Case</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">titleCaseMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Switch case to...</td>
+                           <td align="left"><span class="keycap"><strong>Shift+F3</strong></span></td>
+                           <td align="left">cycleSwitchCaseMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="4.&nbsp;GoTo Menu">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.GoToMenu"></a>4.&nbsp;GoTo Menu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10369"></a><p class="title"><b>Table&nbsp;D.3.&nbsp;GoTo Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10372"></a><table summary="GoTo Menu" border="1">
+                     <colgroup>
+                        <col width="120" align="left">
+                        <col width="80" align="left">
+                        <col align="left">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Menu Item</th>
+                           <th align="left">Default shortcut</th>
+                           <th align="left">Menu Item Code</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Next Untranslated Segment</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+U</strong></span></td>
+                           <td align="left">gotoNextUntranslatedMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Next Segment</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+N</strong></span> or <span class="keycap"><strong>Enter</strong></span> or
+                                          <span class="keycap"><strong>Tab</strong></span></td>
+                           <td align="left">gotoNextSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Previous Segment</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+P</strong></span> or <span class="keycap"><strong>Ctrl+Enter</strong></span> or
+                                          <span class="keycap"><strong>Ctrl+Tab</strong></span></td>
+                           <td align="left">gotoPreviousSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Segment number...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+J</strong></span></td>
+                           <td align="left">gotoSegmentMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Back in history...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+P</strong></span></td>
+                           <td align="left">gotoHistoryForwardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Forward in history...</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl+Shift+N</strong></span></td>
+                           <td align="left">gotoHistoryBackMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="5.&nbsp;View Menu">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ViewMenu"></a>5.&nbsp;View Menu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10453"></a><p class="title"><b>Table&nbsp;D.4.&nbsp;View Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10456"></a><table summary="View Menu" border="1">
+                     <colgroup>
+                        <col width="120" align="left">
+                        <col width="80" align="left">
+                        <col align="left">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Menu Item</th>
+                           <th align="left">Default shortcut</th>
+                           <th align="left">Menu Item Code</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Mark Translated Segments</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkTranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mark Untranslated Segments</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkUntranslatedSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Display Source Segments</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplaySegmentSourceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Mark Non-Unique Segments</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewMarkNonUniqueSegmentsCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Modification Info/Display None</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoNoneRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Modification Info/Display Selected</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoSelectedRadioButtonMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Modification Info/Display All</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">viewDisplayModificationInfoAllRadioButtonMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="6.&nbsp;Tools Menu">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.ToolsMenu"></a>6.&nbsp;Tools Menu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10519"></a><p class="title"><b>Table&nbsp;D.5.&nbsp;Tools Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10522"></a><table summary="Tools Menu" border="1">
+                     <colgroup>
+                        <col width="120" align="left">
+                        <col width="80" align="left">
+                        <col align="left">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Menu Item</th>
+                           <th align="left">Default shortcut</th>
+                           <th align="left">Menu Item Code</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Validate Tags</td>
+                           <td align="left"><span class="keycap"><strong>Ctrl +T</strong></span></td>
+                           <td align="left">toolsValidateTagsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Statistics</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsStandardMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Match Statistics</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">toolsShowStatisticsMatchesMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="7.&nbsp;Options Menu">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.OptionsMenu"></a>7.&nbsp;Options Menu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10563"></a><p class="title"><b>Table&nbsp;D.6.&nbsp;Options Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10566"></a><table summary="Options Menu" border="1">
+                     <colgroup>
+                        <col width="120" align="left">
+                        <col width="80" align="left">
+                        <col align="left">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Menu Item</th>
+                           <th align="left">Default shortcut</th>
+                           <th align="left">Menu Item Code</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">Use TAB To Advance</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTabAdvanceCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Always Confirm Quit</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsAlwaysConfirmQuitCheckBoxMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Machine Translate</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">&nbsp;</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Enable Transtips</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsEnableMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">TransTips/Exact Match</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTransTipsExactMatchMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Font...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsFontSelectionMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">File Filters...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSetupFileFiltersMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Segmentation...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSentsegMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Spell checking...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsSpellCheckMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Editing Behavior...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsWorkflowMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Tag Validation...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTagValidationMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Team...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsTeamMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">External TMXs...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsExtTMXMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">View...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Proxy login...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsViewOptionsMenuLoginItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">Restore Main Window</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">optionsRestoreGUIMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="section" title="8.&nbsp;Help Menu">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="ch04.shortcuts.HelpMenu"></a>8.&nbsp;Help Menu
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <div class="table"><a name="d0e10682"></a><p class="title"><b>Table&nbsp;D.7.&nbsp;Help Menu</b></p>
+               <div class="table-contents"><a class="indexterm" name="d0e10685"></a><table summary="Help Menu" border="1">
+                     <colgroup>
+                        <col width="120" align="left">
+                        <col width="80" align="left">
+                        <col align="left">
+                     </colgroup>
+                     <thead>
+                        <tr>
+                           <th align="left">Menu Item</th>
+                           <th align="left">Default shortcut</th>
+                           <th align="left">Menu Item Code</th>
+                        </tr>
+                     </thead>
+                     <tbody>
+                        <tr>
+                           <td align="left">User Manual...</td>
+                           <td align="left"><span class="keycap"><strong>F1</strong></span></td>
+                           <td align="left">helpContentsMenuItem</td>
+                        </tr>
+                        <tr>
+                           <td align="left">About...</td>
+                           <td align="left">&nbsp;</td>
+                           <td align="left">helpAboutMenuItem</td>
+                        </tr>
+                     </tbody>
+                  </table>
+               </div>
+            </div><br class="table-break"></div>
+         <div class="footnotes"><br><hr width="100" align="left">
+            <div class="footnote">
+               <p><sup>[<a name="ftn.d0e9932" href="#d0e9932" class="para">2</a>] </sup>The full syntax for keystrokes (shortcuts) is defined in the
+                          following Java 1.6 documentation from Oracle (bottom of page): <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html" target="_top">Java
+                             1.6 keystrokes shortcuts</a></p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a name="ftn.d0e9966" href="#d0e9966" class="para">3</a>] </sup>On the Mac, the modifier <span class="emphasis"><em>meta</em></span> must be
+                                used to specify the <span class="emphasis"><em>command</em></span> key.
+               </p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a name="ftn.d0e10000" href="#d0e10000" class="para">4</a>] </sup>The possible keyevents (keys) are listed in the following
+                                Java 1.6 documentation from Oracle: <a class="ulink" href="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html" target="_top">Java
+                                   1.6 keyEvents description</a></p>
+            </div>
+            <div class="footnote">
+               <p><sup>[<a name="ftn.d0e10008" href="#d0e10008" class="para">5</a>] </sup>The default OmegaT shortcuts are available from Sourceforge:
+                          <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.properties" target="_top">Default
+                             OmegaT Shortcuts</a></p>
+               <p>The default OmegaT shortcuts for the Mac are also available from
+                          Sourceforge, they all use "meta" instead of "ctrl": <a class="ulink" href="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-5/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties" target="_top">Default
+                             OmegaT Shortcuts for the Mac</a></p>
+            </div>
+         </div>
+      </div>
+      <div class="navfooter">
+         <hr>
+         <table width="100%" summary="Navigation footer">
+            <tr>
+               <td width="40%" align="left"><a accesskey="p" href="appendix.keyboard.html">Prev</a>&nbsp;
+               </td>
+               <td width="20%" align="center">&nbsp;</td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="appendix.legal.notices.html">Next</a></td>
+            </tr>
+            <tr>
+               <td width="40%" align="left" valign="top">Appendix&nbsp;C.&nbsp;Keyboard shortcuts in the editor&nbsp;</td>
+               <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
+               <td width="40%" align="right" valign="top">&nbsp;Appendix&nbsp;E.&nbsp;Legal notices</td>
+            </tr>
+         </table>
+      </div>
+   </body>
+</html>

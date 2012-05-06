@@ -201,8 +201,14 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis role="bold">Keyboard shortcuts</emphasis>: the
-            list of shortcuts used in the editor</para>
+            <para><emphasis role="bold">Keyboard shortcuts in the
+            editor</emphasis>: the list of shortcuts used in the editor</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Shortcuts
+            customization:</emphasis>shortcuts can be customized to suit your
+            personal preferences</para>
           </listitem>
         </itemizedlist>
 

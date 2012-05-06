@@ -8,7 +8,7 @@
       <secondary>Properties</secondary>
     </indexterm></title>
 
-  <para></para>
+  <para/>
 
   <section id="properties.dialog">
     <title>Properties dialog</title>
@@ -33,10 +33,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/NewProject.png" />
+          <imagedata fileref="images/NewProject_25.png"/>
         </imageobject>
+
         <imageobject role="fo">
-          <imagedata fileref="images/NewProject.png" width="80%" />
+          <imagedata fileref="images/NewProject_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>

@@ -128,7 +128,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Check that your dict files are in the folder (or in a subfolder
+        <para>Check that your dict files are in the correct folder (or in a subfolder
         below it). Check in <menuchoice>
             <shortcut>
               <keycombo>

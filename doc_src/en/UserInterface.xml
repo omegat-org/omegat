@@ -525,7 +525,11 @@
     </section>
 
     <section id="match.viewer">
-      <title>Match viewer</title>
+      <title>Fuzzy matches pane<indexterm class="singular">
+          <primary>Windows and panes in OmegaT</primary>
+
+          <secondary>Fuzzy matches pane</secondary>
+        </indexterm></title>
 
       <para><figure id="matches.pane">
           <title><indexterm class="singular">
@@ -625,7 +629,7 @@
     </section>
 
     <section>
-      <title>Glossary<indexterm class="singular">
+      <title>Glossary pane<indexterm class="singular">
           <primary>Windows and panes in OmegaT</primary>
 
           <secondary>Glossary pane</secondary>
@@ -667,7 +671,7 @@
     </section>
 
     <section id="dictionaries">
-      <title>Dictionary viewer<indexterm class="singular">
+      <title>Dictionary pane<indexterm class="singular">
           <primary>Windows and panes in OmegaT</primary>
 
           <secondary>Dictionary pane</secondary>
@@ -679,11 +683,59 @@
       linkend="chapter.dictionaries">Dictionaries</link></para>
     </section>
 
-    <section id="Google.Translate">
-      <title>Machine Translation<indexterm class="singular">
+    <section id="Multiple.Translations">
+      <title>Multiple Translations pane<indexterm class="singular">
           <primary>Windows and panes in OmegaT</primary>
 
-          <secondary>Machine Translation</secondary>
+          <secondary>Multiple Translations pane</secondary>
+        </indexterm></title>
+
+      <para>A given source segment may require several different translations,
+      depending on the context, If the current translation of the segment does
+      not fit, the user can select <guisubmenu>Edit → Create Alternative
+      Translation</guisubmenu> . The target text entered after that will be
+      treated as an alternative translation of the source segment. You can
+      define one of the alternative - for instance the most probable among
+      them - as default translation by selecting <guisubmenu>Edit → Use as
+      Default Translation</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>Notes pane</title>
+
+      <para>The translator can add notes to the opened segment, for instance
+      to come back later to the segment and redo the translation, check that
+      alternatiuve translations are correct or to ask colleagues for their
+      opinion. You can browse through notes using <guisubmenu>GoTo → Next
+      Note</guisubmenu> and <guisubmenu>GoTo → Previous
+      Note</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>Comments pane</title>
+
+      <para>Some of the file formats, specialized for translation work, for
+      instance PO, allow the inclusion of comments. This way the translator
+      can be provided the context about the segment to be translated. In the
+      example below, the author of the PO file included a warning for the
+      translator to check the length of the translation:</para>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Comments_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/Comments_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
+    </section>
+
+    <section id="Google.Translate">
+      <title>Machine Translation pane<indexterm class="singular">
+          <primary>Windows and panes in OmegaT</primary>
+
+          <secondary>Machine Translation pane</secondary>
         </indexterm></title>
 
       <para>The machine translation pane, when opened, contains the
@@ -701,7 +753,9 @@
       Menu</emphasis> appendix for a full description of all menus and menu
       items. The most frequently used functions are accessible with keyboard
       shortcuts, so once you become accustomed to them, you will no longer
-      need to browse through the menus while translating.</para>
+      need to browse through the menus while translating. See chapter <link
+      linkend="chapter.menu">Menu and Keyboard shortcuts</link> for details.
+      </para>
     </section>
 
     <section id="status.bar">
@@ -905,7 +959,7 @@
           <primary>Shortcuts</primary>
 
           <secondary>Ctrl+V - Paste text</secondary>
-        </indexterm></guimenuitem> to copy/paste the contents. </para>
+        </indexterm></guimenuitem> to copy/paste the contents.</para>
 
       <mediaobject>
         <imageobject>
@@ -935,7 +989,7 @@
       OmegaT's method of counting, with a few differences in terminology to
       account for concept differences. This information is computed for
       segments as well as for words and for characters (without and including
-      spaces). </para>
+      spaces).</para>
 
       <para>Note that these totals are a good (or as-good-as-it-can-be)
       approximation of the work involved in the project and thus can serve as

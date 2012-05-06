@@ -29,6 +29,10 @@
       </keycombo> instead. The "Cmd" key either has a "command" label or an
     apple symbol on Apple keyboards.</para>
 
+    <para>You can customize existing shortcuts or add new ones according to
+    your needs. <link linkend="ch04.shortcuts.customization">See Appendix -
+    Shortcuts Customization</link></para>
+
     <table colsep="1" id="table.main.menu">
       <title>Main Menu</title>
 
@@ -493,6 +497,30 @@
               segment. The <xref linkend="match.viewer"/> describes the color
               coding in detail.</entry>
             </row>
+
+            <row>
+              <entry><guimenuitem>Use as Default
+              Translation</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>If there are several alternative translations available
+              for the active segment, you can label the alternative selected as the
+              default translation. The entry will be greyed, if there's just
+              one translation available.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Create Alternative
+              Translation</guimenuitem></entry>
+
+              <entry/>
+
+              <entry>The one and the same segment may, depending on the
+              context, require different translations. Select this menu item,
+              if the current translation does not apply and enter the
+              alternative translation.</entry>
+            </row>
           </tbody>
         </tgroup>
       </table>
@@ -579,20 +607,20 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Back in history...</guimenuitem></entry>
+              <entry><guimenuitem>Next Note</guimenuitem></entry>
 
-              <entry><keycombo>
-                  <keycap>Ctrl</keycap>
+              <entry/>
 
-                  <keycap>Shift</keycap>
+              <entry>The next segment with a note attached to it, will
+              open.</entry>
+            </row>
 
-                  <keycap>P</keycap>
-                </keycombo></entry>
+            <row>
+              <entry><guimenuitem>Previous Note</guimenuitem></entry>
 
-              <entry>With this command you can move backward one segment at a
-              time, to return later to the current segment using
-              <guimenuitem>Forward in history... </guimenuitem>command
-              below.</entry>
+              <entry/>
+
+              <entry>The previous segment with a note will open .</entry>
             </row>
 
             <row>
@@ -610,6 +638,23 @@
               executed. With this command you can step forward to the segment,
               you have previously left by the <guimenuitem>Back in
               history</guimenuitem>...command.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Back in history...</guimenuitem></entry>
+
+              <entry><keycombo>
+                  <keycap>Ctrl</keycap>
+
+                  <keycap>Shift</keycap>
+
+                  <keycap>P</keycap>
+                </keycombo></entry>
+
+              <entry>With this command you can move backward one segment at a
+              time, to return later to the current segment using
+              <guimenuitem>Forward in history... </guimenuitem>command
+              below.</entry>
             </row>
           </tbody>
         </tgroup>
@@ -656,11 +701,27 @@
             </row>
 
             <row>
-              <entry><guimenuitem>Mark Non/Unique
+              <entry><guimenuitem>Mark Non-Unique
               Segments</guimenuitem></entry>
 
-              <entry>If checked, the non-unique segments will be marked in
-              pale grey.</entry>
+              <entry>If checked, non-unique segments will be marked in pale
+              grey.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Mark Segments with
+              Notes</guimenuitem></entry>
+
+              <entry>If checked, segments with notes will be marked in
+              cyan.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Mark Non-breakable
+              Spaces</guimenuitem></entry>
+
+              <entry>If checked, non-breakable spaces in the segment will be
+              displazed with a grey background.</entry>
             </row>
 
             <row>
@@ -668,7 +729,7 @@
 
               <entry>Setting the Display Modification option to
               <emphasis>Selected</emphasis> will display the time and the
-              author of the last change for the current segment. Setting it
+              author of the last change in the current segment. Setting it
               to<emphasis> All </emphasis>shows this information for all
               segments and <emphasis>None</emphasis> turns this option
               off.</entry>
@@ -718,6 +779,19 @@
               segments with tag errors and possible inconsistencies. See <link
               linkend="section.tag.validation">Tag Validation</link> and <xref
               linkend="chapter.formatted.text"/>.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Remove Tags</guimenuitem></entry>
+
+              <entry>When enabled, all the formatting tags are removed from
+              source segments. This is useful when dealing with texts where
+              inline formatting has no real use (e.g., OCRed PDF, bad
+              converted .odt or .docx, etc.) Only inline tags are removed, so
+              normally there should be no problem with opening the target
+              documents. Non-visible formatting (i.e., which doesn't appear as
+              tags in the OmegaT editor) is kept in the target
+              document</entry>
             </row>
 
             <row>
@@ -780,6 +854,12 @@
                   <keycap>M</keycap>
                 </keycombo> will insert the suggestion into the target part of
               the current segment.</entry>
+            </row>
+
+            <row>
+              <entry><guimenuitem>Glossary</guimenuitem></entry>
+
+              <entry/>
             </row>
 
             <row>
@@ -1422,702 +1502,5 @@
         </tgroup>
       </table>
     </section>
-  </section>
-
-  <section id="ch04.shortcuts.customization">
-    <title><indexterm class="singular">
-        <primary>Shortcuts</primary>
-
-        <secondary>Customization</secondary>
-      </indexterm>Shortcuts customization</title>
-
-    <para>Most of the items that appear in the main menu can have a new
-    shortcut assigned. Only the most commonly used menu items are assigned a
-    shortcut by default. You can change the already assigned shortcuts and add
-    new shortcuts by putting a shortcut definition file in your OmegaT
-    preferences folder (see <link linkend="user.files.location">User files
-    location</link>).</para>
-
-    <para>The shortcut definition file must be named
-    <filename>MainMenuShortcuts.properties</filename> and must contain at most
-    one shortcut definition per line. Empty lines are accepted and comment
-    lines should start with "//". Anything after the "//" will be
-    ignored.</para>
-
-    <para>Once the <filename>MainMenuShortcuts.properties</filename> file is
-    modified, <application>OmegaT</application> must be relaunched to take the
-    new shortcuts into account.</para>
-
-    <para>The shortcut definition syntax is the following: <code>&lt;menu item
-    code&gt;=&lt;shortcut&gt;</code>, where <emphasis>&lt;menu item
-    code&gt;</emphasis> is a code taken from the <link
-    linkend="menu.item.codes">Menu Item Codes</link> table and
-    <emphasis>&lt;shortcut&gt;</emphasis> is a combination of pressed keys
-    specified by the user<footnote>
-        <para>The full syntax for keystrokes (shortcuts) is defined in the
-        following Java 1.6 documentation from Oracle (bottom of page): <ulink
-        url="http://docs.oracle.com/javase/6/docs/api/javax/swing/KeyStroke.html">Java
-        1.6 keystrokes shortcuts</ulink></para>
-      </footnote>.</para>
-
-    <para>&lt;shortcut&gt; must be of the following form:<code>0 or more
-    &lt;modifier&gt; followed by 0 or 1 &lt;event&gt; followed by 1
-    &lt;key&gt;</code>, where:<itemizedlist>
-        <listitem>
-          <para><code>&lt;modifier&gt;</code> can be:
-          <emphasis>shift</emphasis>, <emphasis>control</emphasis>,
-          <emphasis>ctrl</emphasis>, <emphasis>meta</emphasis><footnote>
-              <para>On the Mac, the modifier <emphasis>meta</emphasis> must be
-              used to specify the <emphasis>command</emphasis> key.</para>
-            </footnote>, <emphasis>alt</emphasis>,
-          <emphasis>altGraph</emphasis></para>
-        </listitem>
-
-        <listitem>
-          <para><code>&lt;event&gt;</code> can be: <emphasis>typed</emphasis>,
-          <emphasis>pressed</emphasis>, <emphasis>released</emphasis></para>
-        </listitem>
-
-        <listitem>
-          <para>and <code>&lt;key&gt;</code> can be any key available on your
-          keyboard<footnote>
-              <para>The possible keyevents (keys) are listed in the following
-              Java 1.6 documentation from Oracle: <ulink
-              url="http://docs.oracle.com/javase/6/docs/api/java/awt/event/KeyEvent.html">Java
-              1.6 keyEvents description</ulink></para>
-            </footnote>.</para>
-        </listitem>
-      </itemizedlist></para>
-
-    <para>For exemple, in the default OmegaT shortcuts<footnote>
-        <para>The default OmegaT shortcuts are available from Sourceforge:
-        <ulink
-        url="http://omegat.svn.sourceforge.net/viewvc/omegat/branches/release-2-3/src/org/omegat/gui/main/MainMenuShortcuts.properties">Default
-        OmegaT Shortcuts</ulink></para>
-
-        <para>The default OmegaT shortcuts for the Mac are also available from
-        Sourceforge, they all use "meta" instead of "ctrl": <ulink
-        url="http://omegat.svn.sourceforge.net/viewvc/omegat//branches/release-2-3/src/org/omegat/gui/main/MainMenuShortcuts.mac.properties">Default
-        OmegaT Shortcuts for the Mac</ulink></para>
-      </footnote>, one can find:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para><code>projectOpenMenuItem=ctrl O</code></para>
-      </listitem>
-
-      <listitem>
-        <para><code>editCreateGlossaryEntryMenuItem=ctrl shift G</code></para>
-      </listitem>
-    </itemizedlist>
-
-    <para>The first is the shortcut for <guimenuitem>Open
-    Project</guimenuitem>, the second for <guimenuitem>Create Glossary
-    Entry</guimenuitem>.</para>
-
-    <para>If you want to use <keycombo>
-        <keycap>Shift</keycap>
-
-        <keycap>Ctrl</keycap>
-
-        <keycap>O</keycap>
-      </keycombo> to open a project, modify your
-    <filename>MainMenuShortcuts.properties</filename> so that it looks like
-    this:<code> projectOpenMenuItem=shift ctrl O</code>.</para>
-
-    <para>If you are on a Mac and you want to add a <keycombo>
-        <keycap>Shift</keycap>
-
-        <keycap>Command</keycap>
-
-        <keycap>S</keycap>
-      </keycombo> shortcut to <menuchoice>
-        <guimenu>Tools</guimenu>
-
-        <guimenuitem>Statistics</guimenuitem>
-      </menuchoice>, add the following line to your
-    <filename>MainMenuShortcuts.properties</filename>:<code>
-    toolsShowStatisticsStandardMenuItem=shift meta S</code>, then save the
-    file and relaunch <application>OmegaT</application>. Your new shortcuts
-    should now appear next to the modified menu items. If they do not conflict
-    with system shortcuts, they should be available from within OmegaT.</para>
-
-    <table id="menu.item.codes">
-      <title>Menu Item Codes</title>
-
-      <indexterm class="singular">
-        <primary>Shortcuts</primary>
-
-        <secondary>Customization</secondary>
-      </indexterm>
-
-      <tgroup cols="3" colsep="1">
-        <colspec align="left" colname="1" colnum="1" colwidth="120"/>
-
-        <colspec align="left" colname="2" colnum="2" colwidth="80"/>
-
-        <colspec align="left" colname="3" colnum="3"/>
-
-        <thead>
-          <row>
-            <entry>Menu Item</entry>
-
-            <entry>Default shortcut</entry>
-
-            <entry>Menu Item Code</entry>
-          </row>
-        </thead>
-
-        <tbody>
-          <row>
-            <entry align="center" nameend="3" namest="1">Project Menu</entry>
-          </row>
-
-          <row>
-            <entry>New</entry>
-
-            <entry/>
-
-            <entry>projectNewMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Open</entry>
-
-            <entry>Ctrl+O</entry>
-
-            <entry>projectOpenMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Import Source Files...</entry>
-
-            <entry/>
-
-            <entry>projectImportMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Import From MediaWiki...</entry>
-
-            <entry/>
-
-            <entry>projectWikiImportMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Reload</entry>
-
-            <entry>F5</entry>
-
-            <entry>projectReloadMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Close</entry>
-
-            <entry>Ctrl+Shift+W</entry>
-
-            <entry>projectCloseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Save</entry>
-
-            <entry>Ctrl+S</entry>
-
-            <entry>projectSaveMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Create translated documents</entry>
-
-            <entry>Ctrl+D</entry>
-
-            <entry>projectCompileMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Properties...</entry>
-
-            <entry>Ctrl+E</entry>
-
-            <entry>projectEditMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Project Files...</entry>
-
-            <entry>Ctrl+L</entry>
-
-            <entry>viewFileListMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Quit</entry>
-
-            <entry>Ctrl+Q</entry>
-
-            <entry>projectExitMenuItem</entry>
-          </row>
-
-          <row>
-            <entry align="center" nameend="3" namest="1">Edit Menu</entry>
-          </row>
-
-          <row>
-            <entry>Undo Last Action</entry>
-
-            <entry>Ctrl+Z</entry>
-
-            <entry>editUndoMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Redo Last Action</entry>
-
-            <entry>Ctrl+Y</entry>
-
-            <entry>editRedoMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Replace With Match</entry>
-
-            <entry>Ctrl+R</entry>
-
-            <entry>editOverwriteTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Insert Match</entry>
-
-            <entry>Ctrl+I</entry>
-
-            <entry>editInsertTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Replace with Machine Translation</entry>
-
-            <entry>Ctrl+M</entry>
-
-            <entry>editOverwriteMachineTranslationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Replace With Source</entry>
-
-            <entry>Shift+Ctrl+R</entry>
-
-            <entry>editOverwriteSourceMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Insert Source</entry>
-
-            <entry>Shift+Ctrl+I</entry>
-
-            <entry>editInsertSourceMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Insert Source Tags</entry>
-
-            <entry>Shift+Ctrl+T</entry>
-
-            <entry>editTagPainterMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Export Selection</entry>
-
-            <entry>Shift+Ctrl+C</entry>
-
-            <entry>editExportSelectionMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Create Glossary Entry</entry>
-
-            <entry>Shift+Ctrl+G</entry>
-
-            <entry>editCreateGlossaryEntryMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Search Project...</entry>
-
-            <entry>Ctrl+F</entry>
-
-            <entry>editFindInProjectMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Select Fuzzy Match 1</entry>
-
-            <entry>Ctrl+1</entry>
-
-            <entry>editSelectFuzzy1MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Select Fuzzy Match 2</entry>
-
-            <entry>Ctrl+2</entry>
-
-            <entry>editSelectFuzzy2MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Select Fuzzy Match 3</entry>
-
-            <entry>Ctrl+3</entry>
-
-            <entry>editSelectFuzzy3MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Select Fuzzy Match 4</entry>
-
-            <entry>Ctrl+4</entry>
-
-            <entry>editSelectFuzzy4MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Select Fuzzy Match 5</entry>
-
-            <entry>Ctrl+5</entry>
-
-            <entry>editSelectFuzzy5MenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Lower Case</entry>
-
-            <entry/>
-
-            <entry>lowerCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Upper Case</entry>
-
-            <entry/>
-
-            <entry>upperCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Title Case</entry>
-
-            <entry/>
-
-            <entry>titleCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Switch case to...</entry>
-
-            <entry>Shift+F3</entry>
-
-            <entry>cycleSwitchCaseMenuItem</entry>
-          </row>
-
-          <row>
-            <entry align="center" nameend="3" namest="1">Go To Menu</entry>
-          </row>
-
-          <row>
-            <entry>Next Untranslated Segment</entry>
-
-            <entry>Ctrl+U</entry>
-
-            <entry>gotoNextUntranslatedMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Next Segment</entry>
-
-            <entry>Ctrl+N or Enter or Tab</entry>
-
-            <entry>gotoNextSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Previous Segment</entry>
-
-            <entry>Ctrl+P or Ctrl+Enter or Ctrl+Tab</entry>
-
-            <entry>gotoPreviousSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Segment number...</entry>
-
-            <entry>Ctrl+J</entry>
-
-            <entry>gotoSegmentMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Back in history...</entry>
-
-            <entry>Ctrl+Shift+P</entry>
-
-            <entry>gotoHistoryForwardMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Forward in history...</entry>
-
-            <entry>Ctrl+Shift+N</entry>
-
-            <entry>gotoHistoryBackMenuItem</entry>
-          </row>
-
-          <row>
-            <entry align="center" nameend="3" namest="1">View Menu</entry>
-          </row>
-
-          <row>
-            <entry>Mark Translated Segments</entry>
-
-            <entry/>
-
-            <entry>viewMarkTranslatedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Mark Untranslated Segments</entry>
-
-            <entry/>
-
-            <entry>viewMarkUntranslatedSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Display Source Segments</entry>
-
-            <entry/>
-
-            <entry>viewDisplaySegmentSourceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Mark Non-Unique Segments</entry>
-
-            <entry/>
-
-            <entry>viewMarkNonUniqueSegmentsCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Modification Info/Display None</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoNoneRadioButtonMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Modification Info/Display Selected</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoSelectedRadioButtonMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Modification Info/Display All</entry>
-
-            <entry/>
-
-            <entry>viewDisplayModificationInfoAllRadioButtonMenuItem</entry>
-          </row>
-
-          <row>
-            <entry align="center" nameend="3" namest="1">Tools Menu</entry>
-          </row>
-
-          <row>
-            <entry>Validate Tags</entry>
-
-            <entry>Ctrl +T</entry>
-
-            <entry>toolsValidateTagsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Statistics</entry>
-
-            <entry/>
-
-            <entry>toolsShowStatisticsStandardMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Match Statistics</entry>
-
-            <entry/>
-
-            <entry>toolsShowStatisticsMatchesMenuItem</entry>
-          </row>
-
-          <row>
-            <entry align="center" nameend="3" namest="1">Options Menu</entry>
-          </row>
-
-          <row>
-            <entry>Use TAB To Advance</entry>
-
-            <entry/>
-
-            <entry>optionsTabAdvanceCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Always Confirm Quit</entry>
-
-            <entry/>
-
-            <entry>optionsAlwaysConfirmQuitCheckBoxMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Machine Translate</entry>
-
-            <entry/>
-
-            <entry/>
-          </row>
-
-          <row>
-            <entry>TransTips/Enable Transtips</entry>
-
-            <entry/>
-
-            <entry>optionsTransTipsEnableMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>TransTips/Exact Match</entry>
-
-            <entry/>
-
-            <entry>optionsTransTipsExactMatchMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Font...</entry>
-
-            <entry/>
-
-            <entry>optionsFontSelectionMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>File Filters...</entry>
-
-            <entry/>
-
-            <entry>optionsSetupFileFiltersMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Segmentation...</entry>
-
-            <entry/>
-
-            <entry>optionsSentsegMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Spell checking...</entry>
-
-            <entry/>
-
-            <entry>optionsSpellCheckMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Editing Behavior...</entry>
-
-            <entry/>
-
-            <entry>optionsWorkflowMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Tag Validation...</entry>
-
-            <entry/>
-
-            <entry>optionsTagValidationMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Team...</entry>
-
-            <entry/>
-
-            <entry>optionsTeamMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>External TMXs...</entry>
-
-            <entry/>
-
-            <entry>optionsExtTMXMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>View...</entry>
-
-            <entry/>
-
-            <entry>optionsViewOptionsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>Proxy login...</entry>
-
-            <entry/>
-
-            <entry>optionsViewOptionsMenuLoginItem</entry>
-          </row>
-
-          <row>
-            <entry>Restore Main Window</entry>
-
-            <entry/>
-
-            <entry>optionsRestoreGUIMenuItem</entry>
-          </row>
-
-          <row>
-            <entry align="center" nameend="3" namest="1">Help Menu</entry>
-          </row>
-
-          <row>
-            <entry>User Manual...</entry>
-
-            <entry>F1</entry>
-
-            <entry>helpContentsMenuItem</entry>
-          </row>
-
-          <row>
-            <entry>About...</entry>
-
-            <entry/>
-
-            <entry>helpAboutMenuItem</entry>
-          </row>
-        </tbody>
-      </tgroup>
-    </table>
   </section>
 </chapter>

@@ -17,6 +17,17 @@
   glossaries, any terms in the glossary which are also found in the current
   segment will be automatically displayed in the Glossary viewer.</para>
 
+  <para>You define its location and name in the project properties dialog. The
+  extension must be <filename>.txt</filename> (if not, it will be added). The
+  location of the file must be within the <filename>/glossary
+  </filename> folder, but it can be in a deeper directory (e.g.,
+  <filename>glossary/sub/glossary.txt</filename>). The file does not need to
+  exist when setting it, it will be created (if necessary) when adding a
+  glossary entry. If the file already exists, no attempt is done to verify
+  the format or the character set of the file: the new entries will always be
+  in tab-separated format and UTF-8. As the existing content will not be
+  touched, damaged to an existing file would be limited.</para>
+
   <section>
     <title>Usage</title>
 
@@ -84,8 +95,8 @@
         <para>Note that in the above case, this is just half (or even less) of
         the story, as the target language (Slovenian) uses declension. So the
         inserted "pojavni meni" has to be changed to "pojavcnem meniju". In
-        other words, tzping the term correctly without bothering with
-        highlighting and rightclicking is probably faster. </para>
+        other words, typing the term correctly without bothering with
+        highlighting and rightclicking is probably faster.</para>
       </footnote></para>
   </section>
 
@@ -148,126 +159,38 @@
         <secondary>Creating a glossary</secondary>
       </indexterm></title>
 
-    <para>The method here is foolproof, when followed in a reasonably careful
-    fashion. You need OpenOffice.org Writer for it, so - if you haven't
-    already done so - download and install OpenOffice.org. Launch
-    OpenOffice.org and open a new text document or launch "OpenOffice.org
-    Writer".</para>
+    <para>The project setting allows one can enter a name for a writeable
+    glossary file (see beginning of this chapter). Adding new entries is done
+    by using the keyboard shortcut <keycap>Ctrl+Shift+G</keycap>. A dialog
+    opens, allowing you to enter the source term, target term and any comments
+    you may have:</para>
 
-    <para>In the empty document, enter your glossary terms as follows: a
-    source-language term, tab space, the target-language term , tab space, a
-    comment or explanation for the item, and a Return. Tab space is the
-    tabulator key on the left hand side of the keyboard. If you do not wish to
-    add any comments, you can drop the second tab space. A "term" can be a
-    single word or a whole phrase. On the second line, enter the second term
-    and its translation.</para>
-
-    <para>When you have finished entering the terms, you will have two
-    "columns" of terms, source-language terms on the left and their
-    target-language terms on the right, and possibly a third column,
-    containing you comments and explanations, The tab space (→ in the example
-    below) and Enter (¶) characters can be made visible by clicking on the ¶
-    icon in the Writer's Standard writer bar. Here are a few lines of an
-    English -German glossary)</para>
-
-    <para><literal>word →Wort→das (-/e/s, Wörter/-e)¶</literal></para>
-
-    <para><literal>small house→Häuschen→das, (pl Häuschen)¶</literal></para>
-
-    <para><literal>dog →Hund→m, f Hündin ¶</literal></para>
-
-    <para><literal>horse→Pferd→n, m Hengst f Stute n Fohlen¶</literal></para>
-
-    <para>Do NOT use OpenOffice.org's "columns" function to create columns:
-    just separate each source and target-language term pair with a single tab
-    space.</para>
-
-    <para>When you are finished with the entries, save the file as
-    Unicode-encoded file as follows:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>Select <literal>File &gt; Save As</literal></para>
-      </listitem>
-
-      <listitem>
-        <para>In the <emphasis>"File location"</emphasis> box, enter the name
-        for your glossary file.</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>For "Filter", select "<emphasis>Text Encoded
-        (.txt.)</emphasis>"</para>
-      </listitem>
-
-      <listitem>
-        <para>Make sure "<emphasis>Automatic file name extension</emphasis>"
-        and <emphasis>"Edit filter settings"</emphasis> are unchecked.</para>
-      </listitem>
-    </itemizedlist>
-
-    <figure>
-      <title>Saving a glossary</title>
-
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/saveglossary.png"/>
+    <mediaobject role="html">
+        <imageobject>
+          <imagedata fileref="images/GlossaryEntry_25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/saveglossary.png" width="60%"/>
+          <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
-    </figure>
 
-    <para>Confirm with OK.</para>
-
-    <para>After creating an OmegaT project, copy or move this file into the
-    project's \glossary folder. If the project is already open, reload it
-    after copying the glossary file into the project. You can make changes to
-    a glossary file while it is being used in a project. Glossary changes are
-    detected approximately once every second and modifications load
-    transparently in the background, so there's no need to reload the project
-    after saving the new glossary file.</para>
-
-    <para>When a segment containing a source-text term is opened, the glossary
-    pane will display glossary entries for those items in the source segment
-    that can be found in the glossary (or glossaries - you can have more than
-    one available, and they can be stored in subfolders of <emphasis>glossary
-    </emphasis>as well).</para>
+    <para>The contents of glossary files are kept in memory and are loaded
+    when the project is opened or reloaded. Updating a glossary file is thus
+    rather simple: press <keycap>Ctrl+Shift+G</keycap> and enter the new
+    term, its translation and any comments you may have (ensuring you press
+    tab between the fields) and save the file. The contents of the glossary
+    pane will be updated accordingly</para>
 
     <para><emphasis role="bold">Note: </emphasis>Of course there are other
     ways and means to create a simple file with tab delimited entries, and
     they are all simpler, a lot of them much simpler, than the above
     suggestion. For instance, one can export the contents above as a
     <filename>CSV</filename>, instead of a <filename>UTF8</filename> text
-    file. Note, however, that the above suggestion works for any target
-    system, be it Windows, OS X or Linux. Nothing speaks against using
-    Notepad++ on Windows or GEdit on Linux for instance: any text editor, that
-    can handle UTF8 and that can show white space (so that you do not miss the
-    required <keycap>TAB</keycap> characters) can be used.</para>
-
-    <para>The contents of glossary files are kept in memory and are loaded
-    when the project is opened or reloaded. Updating a glossary file is thus
-    rather simple:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>keep the file open in your selected editor</para>
-      </listitem>
-    </itemizedlist>
-
-    <itemizedlist>
-      <listitem>
-        <para>When you come across a new term that you would like to add to
-        your glossary, enter the new term, its translation and any comments
-        you may have (ensuring you press tab between the fields) and save the
-        file. The contents of the glossary pane will be updated
-        accordingly.</para>
-      </listitem>
-    </itemizedlist>
+    file. Nothing speaks against using Notepad++ on Windows or GEdit on Linux
+    for instance: any text editor, that can handle UTF8 and that can show
+    white space (so that you do not miss the required <keycap>TAB</keycap>
+    characters) can be used.</para>
   </section>
 
   <section>
@@ -280,12 +203,10 @@
     <para>Data exported from Trados MultiTerm can be used as
     <application>OmegaT</application> glossaries without further modification,
     provided they are given the file extension <filename>.tab</filename> and
-    the source and target term fields are the first two fields
-    respectively.</para>
-
-    <para>If you export using the system option "Tab-delimited export", you
-    will need to delete the first 5 columns (Seq. Nr, Date created etc). The
-    newer versions of MultiTerm support exporting to TBX format.</para>
+    the source and target term fields are the first two fields respectively.If
+    you export using the system option "Tab-delimited export", you will need
+    to delete the first 5 columns (Seq. Nr, Date created etc). The newer
+    versions of MultiTerm support exporting to TBX format.</para>
   </section>
 
   <section>

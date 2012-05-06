@@ -17,7 +17,7 @@
 ----------------------------------------------------------------------
    3 Enhancements
    0 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.5.4 vs. 2.5.3
 
@@ -33,6 +33,10 @@ It is defined in minutes and seconds. If a value lower than 10 seconds
 is set, it is reset to 10 seconds.
 
    - Linux: Enhanced Kaptain script
+
+  Localisation updates:
+
+  - Italian localisation updated to 2.5.3 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.3

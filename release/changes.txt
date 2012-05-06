@@ -15,7 +15,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.4
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -28,11 +28,14 @@
 
   Other enhancements:
 
-   - The automatic save interval can now be set in Options > Save. 
+  - The automatic save interval can now be set in Options > Save. 
 It is defined in minutes and seconds. If a value lower than 10 seconds
 is set, it is reset to 10 seconds.
 
-   - Linux: Enhanced Kaptain script
+  - Linux: Enhanced Kaptain script
+
+  - Load translations from sources as default translations
+  http://sourceforge.net/support/tracker.php?aid=3524017
 
   Localisation updates:
 

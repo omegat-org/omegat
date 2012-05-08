@@ -5,7 +5,6 @@
     <Property name="title" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
       <ResourceString bundle="org/omegat/Bundle.properties" key="FILTERSCUSTOMIZER_TITLE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
     </Property>
-    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>

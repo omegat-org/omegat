@@ -50,9 +50,9 @@ Sources are available in OmegaT sources, in the directory lib/sources
 svnkit-1.3.7.jar is distributed under the
 TMate Open Source / Commercial dual license
 
-sequence-library-1.0.0.jar is distributed under the  BSD style license
+sequence-library-1.0.0.jar is distributed under the Sequence Library License
 
 org.eclipse.jgit-1.2.0.201112221803-r.jar is distributed under the
-Eclipse Distribution License (EDL) v 1.0 (new-style BSD)
+Eclipse Distribution License (EDL) v 1.0 
 
-jsch-0.1.46.jar is distributed under the BSD style license
+jsch-0.1.46.jar is distributed under the JSch License

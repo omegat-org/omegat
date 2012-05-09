@@ -202,6 +202,8 @@ public class RealProject implements IProject {
 
             saveProjectProperties();
 
+            loadTranslations();
+
             loadTM();
 
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);

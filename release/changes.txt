@@ -15,7 +15,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.4
 ----------------------------------------------------------------------
-   5 Enhancements
+   6 Enhancements
    0 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -39,6 +39,11 @@ is set, it is reset to 10 seconds.
 
   - The File Filters dialog can now be resized, as well as its
 sub-dialogs
+
+  - Capture variables in source filename to target mapping
+has been extended with new variables for a given number of extensions
+See http://sourceforge.net/support/tracker.php?aid=3436954
+
 
   Localisation updates:
 

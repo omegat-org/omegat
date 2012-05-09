@@ -48,6 +48,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
@@ -518,10 +519,13 @@ public class FilterMaster {
      * <li><code>${filename}</code> - full filename of the input file, both name and extension (default)
      * <li><code>${nameOnly}</code> - only the name of the input file without extension part
      * <li><code>${extension}</code> - the extension of the input file
+     * <li><code>${nameOnly-1}</code> - only the name of the input file with first extension
+     * <li><code>${extension-1}</code> - the extensions, without the first one
      * <li><code>${targetLocale}</code> - target locale code (of a form "xx_YY")
      * <li><code>${targetLanguage}</code> - the target language and country code together (of a form "XX-YY")
      * <li><code>${targetLanguageCode}</code> - the target language only ("XX")
      * <li><code>${targetCountryCode}</code> - the target country only ("YY")
+     * <li><code>${1}, ${2}, ...</code> - variables captured by jokers (* or ?)
      * </ul>
      * <p>
      * Most file filters will use default "<code>${filename}</code>, that leads to the name of translated file
@@ -537,6 +541,8 @@ public class FilterMaster {
      * <ul>
      * <li><code>${nameOnly}</code> will be equal to "thisisfile"
      * <li>and <code>${extension}</code> - "ext1.ext2"
+     * <li><code>${nameOnly-1}</code> will be equal to "thisisfile.ext1"
+     * <li>and <code>${extension-1}</code> - "ext2"
      * </ul>
      * 
      * @param filename
@@ -633,15 +639,25 @@ public class FilterMaster {
         //
         res = res.replace(AbstractFilter.TFP_FILE_FILTER_NAME, filterFormatName);
         //
-		
-        java.util.regex.Matcher PATTERN_NUM = Pattern.compile("\\$\\{(\\d+)\\}").matcher(res);
-        String sourceMaskPattern = sourceMask.replaceAll("\\*","(.*?)").replaceAll("\\?","(.)");
-        java.util.regex.Matcher matcher = Pattern.compile(sourceMaskPattern).matcher(filename);
-        while (PATTERN_NUM.find()) {
-                int num = Integer.parseInt(PATTERN_NUM.group(1));
-                if (matcher.find()) {
-                        res = PATTERN_NUM.replaceFirst (matcher.group(num));
-                }
+        
+        String sourceMaskPattern = sourceMask.replaceAll("\\?","(.)").replaceAll("\\*","(.*?)");
+        java.util.regex.Matcher sourceMatcher = Pattern.compile(sourceMaskPattern).matcher(filename);
+        if (sourceMatcher.find()) {
+            for (int i = 1; i <= sourceMatcher.groupCount(); i++) {
+                res = res.replaceAll("\\$\\{" + i + "\\}", sourceMatcher.group(i));
+            }
+        }
+        
+        String[] splitName = filename.split("\\.");
+        StringBuffer nameOnlyBuf = new StringBuffer (splitName[0]);
+        StringBuffer extensionBuf = new StringBuffer (splitName[splitName.length - 1]);
+        for (int i = 0; i < splitName.length; i++) {
+            res = res.replaceAll ("\\$\\{nameOnly-" + i + "\\}", nameOnlyBuf.toString());
+            res = res.replaceAll ("\\$\\{extension-" + i + "\\}", extensionBuf.toString());
+            if (i + 1 < splitName.length) {
+                nameOnlyBuf.append (".").append(splitName[i + 1]);
+                extensionBuf.insert(0, splitName[splitName.length - i - 2] + '.');
+            }
         }
 
         return res;

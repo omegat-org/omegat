@@ -51,11 +51,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/Glossary_pane.png"/>
+          <imagedata fileref="images/GlossaryPane_25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/Glossary_pane.png" width="60%"/>
+          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>

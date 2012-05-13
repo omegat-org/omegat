@@ -19,14 +19,14 @@
 
   <para>You define its location and name in the project properties dialog. The
   extension must be <filename>.txt</filename> (if not, it will be added). The
-  location of the file must be within the <filename>/glossary
-  </filename> folder, but it can be in a deeper directory (e.g.,
+  location of the file must be within the <filename>/glossary </filename>
+  folder, but it can be in a deeper directory (e.g.,
   <filename>glossary/sub/glossary.txt</filename>). The file does not need to
   exist when setting it, it will be created (if necessary) when adding a
-  glossary entry. If the file already exists, no attempt is done to verify
-  the format or the character set of the file: the new entries will always be
-  in tab-separated format and UTF-8. As the existing content will not be
-  touched, damaged to an existing file would be limited.</para>
+  glossary entry. If the file already exists, no attempt is done to verify the
+  format or the character set of the file: the new entries will always be in
+  tab-separated format and UTF-8. As the existing content will not be touched,
+  damaged to an existing file would be limited.</para>
 
   <section>
     <title>Usage</title>
@@ -166,21 +166,21 @@
     you may have:</para>
 
     <mediaobject role="html">
-        <imageobject>
-          <imagedata fileref="images/GlossaryEntry_25.png"/>
-        </imageobject>
+      <imageobject>
+        <imagedata fileref="images/GlossaryEntry_25.png"/>
+      </imageobject>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
-        </imageobject>
-      </mediaobject>
+      <imageobject role="fo">
+        <imagedata fileref="images/GlossaryEntry_25.png" width="80%"/>
+      </imageobject>
+    </mediaobject>
 
     <para>The contents of glossary files are kept in memory and are loaded
     when the project is opened or reloaded. Updating a glossary file is thus
-    rather simple: press <keycap>Ctrl+Shift+G</keycap> and enter the new
-    term, its translation and any comments you may have (ensuring you press
-    tab between the fields) and save the file. The contents of the glossary
-    pane will be updated accordingly</para>
+    rather simple: press <keycap>Ctrl+Shift+G</keycap> and enter the new term,
+    its translation and any comments you may have (ensuring you press tab
+    between the fields) and save the file. The contents of the glossary pane
+    will be updated accordingly</para>
 
     <para><emphasis role="bold">Note: </emphasis>Of course there are other
     ways and means to create a simple file with tab delimited entries, and
@@ -203,9 +203,9 @@
     <para>Data exported from Trados MultiTerm can be used as
     <application>OmegaT</application> glossaries without further modification,
     provided they are given the file extension <filename>.tab</filename> and
-    the source and target term fields are the first two fields respectively.If
-    you export using the system option "Tab-delimited export", you will need
-    to delete the first 5 columns (Seq. Nr, Date created etc). The newer
+    the source and target term fields are the first two fields respectively.
+    If you export using the system option "Tab-delimited export", you will
+    need to delete the first 5 columns (Seq. Nr, Date created etc). The newer
     versions of MultiTerm support exporting to TBX format.</para>
   </section>
 

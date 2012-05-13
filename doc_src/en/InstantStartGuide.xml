@@ -39,10 +39,10 @@
     <keycap>Ctrl+E.</keycap></application></para>
 
     <para>Next, the Project Files dialog opens. Click the Import source
-    files... button to select your source file. OmegaT will then copy the selected
-    file to the <filename>/source/</filename> subfolder of your newly created
-    project. After the source file has loaded in the Editor pane, you can
-    close the Project files dialog.</para>
+    files... button to select your source file. OmegaT will then copy the
+    selected file to the <filename>/source/</filename> subfolder of your newly
+    created project. After the source file has loaded in the Editor pane, you
+    can close the Project files dialog.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
@@ -52,8 +52,8 @@
     After you have translated each segment, press <keycap>Ctrl+U </keycap>to
     move to the next untranslated segment. Whenever you want to see what your
     translation will look like in its final format, press
-    <keycap>Ctrl+D</keycap> to generate the translated document, which you
-    will be created in the /target/ subfolder of your project folder. During
+    <keycap>Ctrl+D</keycap> to generate the translated document, which will be
+    created in the /target/ subfolder of your project folder. During
     translation, use the <guimenu>Edit</guimenu> and <guimenu>Go To</guimenu>
     menus to perform various useful functions.</para>
   </section>
@@ -65,7 +65,7 @@
     LibreOffice Writer or HTML, OmegaT will convert the formatting into tags
     that surround the text that you translate. Often documents will also have
     tags that have nothing to do with formatting, but which are also
-    important.In the source file (and in the translated file), A source
+    important. In the source file (and in the translated file), A source
     sentence might look like</para>
 
     <para/>
@@ -79,13 +79,13 @@
     <para/>
 
     <para>OmegaT, however, will present this sentence in the following
-    fashion: </para>
+    fashion:</para>
 
     <para><literal/></para>
 
     <mediaobject>
       <imageobject>
-        <imagedata align="left" fileref="images/InstantGuide_2.png" />
+        <imagedata align="left" fileref="images/InstantGuide_2.png"/>
       </imageobject>
     </mediaobject>
 
@@ -169,10 +169,11 @@
     <itemizedlist>
       <listitem>
         <para>For a more comprehensive introduction see <ulink
-        url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT for Beginners</ulink>
-        on the OmegaT web site. If you
-        need assistance with any aspect of OmegaT, feel free to join the
-        <ulink url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT user group.</ulink></para>
+        url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT
+        for Beginners</ulink> on the OmegaT web site. If you need assistance
+        with any aspect of OmegaT, feel free to join the <ulink
+        url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT user
+        group.</ulink></para>
       </listitem>
     </itemizedlist>
   </section>

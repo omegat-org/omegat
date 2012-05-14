@@ -28,6 +28,14 @@
       </menuchoice> dialog is used to define and modify the project folders
     and languages.</para>
 
+    <para>It is possible to modify the project properties during a translation
+    session. Note that changes to the project setup may have some
+    consequences, especially, when the project has already been started. Until
+    you have some experience with OmegaT, it is safest to consider all
+    settings final once the translation has started – unless of course you
+    realize a major mistake has been made. See the section Preventing data
+    loss for ways and means of protecting your work.</para>
+
     <figure>
       <title>Project properties window</title>
 
@@ -48,97 +56,117 @@
       <listitem>
         <para>An area for setting project source and target languages with
         drop-down menus</para>
+
+        <para>You can either enter the source and target languages by hand or
+        use the drop down menu. Bear in mind that changing the languages may
+        render the currently used translation memories useless since their
+        language pair may not longer match the new languages.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>A segmentation settings flag</para>
-      </listitem>
-    </itemizedlist>
+        <para>the <guilabel>Enable Sentence-level segmentation</guilabel>
+        check box</para>
 
-    <itemizedlist>
-      <listitem>
-        <para>An area for setting project folders</para>
-      </listitem>
-    </itemizedlist>
+        <indexterm class="singular">
+          <primary>Project</primary>
 
-    <para>All the fields are editable. You can either enter the languages by
-    hand or use the drop down menu. If you enter names of folders that do not
-    exist yet, <application>OmegaT</application> creates them for you.</para>
-  </section>
-
-  <section id="language.modification">
-    <title>Modifying project properties</title>
-
-    <para>Note that changes to the project setup may have some consequences,
-    especially, when the project has already been started.</para>
-
-    <itemizedlist>
-      <listitem>
-        <para><emphasis role="bold">Changing source or target
-        languages:<indexterm class="singular">
-            <primary>Project</primary>
-
-            <secondary>Source and target languages</secondary>
-          </indexterm></emphasis></para>
-
-        <para>Bear in mind that changing the languages may render the
-        currently used translation memories useless since their language pair
-        may not longer match the new languages.</para>
-      </listitem>
-
-      <listitem>
-        <para><emphasis role="bold">Segmentation modifications:<indexterm
-            class="singular">
-            <primary>Project</primary>
-
-            <secondary>Modifying segmentation</secondary>
-          </indexterm></emphasis></para>
+          <secondary>Enable Sentence-level segmentation</secondary>
+        </indexterm>
 
         <para>The segmentation settings only address the way the source files
-        are handled by <application>OmegaT</application>. They do not modify
-        the segmentation of already existing translation memories.</para>
+        are handled by <application>OmegaT</application>. The predominant way
+        of segmenting the sources is the sentence-level segmenting, so this
+        check box should in a normal case be left checked.</para>
 
-        <para>Changes made to the segmentation settings may cause some already
-        translated segments to be split or merged. This will effectively
-        return them to the "untranslated" status, as they will no longer match
-        segments recorded in the project memory, even though their original
-        translation is still there.</para>
-
-        <para>OmegaT may upgrade old translation memories that did not use
-        sentence segmentation, but not vice versa. If you decide
+        <para>In some seldom cases the alternative, i.e. segmenting by
+        paragraphs, may be preferred. Changing this flag does not modify the
+        segmentation of already existing translation memories. If you decide
         mid-translation to switch from sentence to paragraph translation, the
-        internal translation memory of the project will not be changed.</para>
-      </listitem>
+        internal translation memory of the project will not be changed (OmegaT
+        may upgrade old translation memories that did not use sentence
+        segmentation, but not vice versa).</para>
 
+        <para>Changing segmentation settings may cause some already translated
+        segments to be split or merged. This will effectively return them to
+        the "untranslated" status, as they will no longer match segments
+        recorded in the project memory, even though their original translation
+        is still there.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Changing the folder structure:<indexterm
+        <para><guibutton>Segmentation...</guibutton> button<indexterm
             class="singular">
-            <primary>Project</primary>
+            <primary>Segmentation</primary>
 
-            <secondary>Changing the folder structure</secondary>
-          </indexterm></emphasis></para>
+            <secondary>global vs project rules</secondary>
+          </indexterm></para>
 
-        <para>In case you decide to modify project folders, keep in mind that
-        this will not move the contained files from old folders to the new
-        location.</para>
+        <para>The segmentation rules are generally valid across all the
+        projects. The user, however, may need to generate a set of rules,
+        specific to the project in question. Use this button to open a
+        dialog,activate the check box <guimenuitem>Project specific
+        segmentation rules</guimenuitem>, then proceed to adjust the
+        segmentation rules as desired . The new set of rules will be stored
+        together with the project and will not interfere with the general set
+        of segmentation rules. To delete project specific Segmentation rules,
+        uncheck the check box. See chapter <link
+        linkend="chapter.segmentation">Source Segmentation</link> for more
+        information on segmentation rules. <emphasis/></para>
+
+        <para><emphasis>Hint:</emphasis> the set of segmentation rules for a
+        given project is stored as
+        <filename>project/omegat/segmentation.conf.</filename></para>
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Modifying project properties during the
-        session:<indexterm class="singular">
-            <primary>Project</primary>
+        <para><guibutton>File Filters...</guibutton> button<indexterm
+            class="singular">
+            <primary>File Filters</primary>
 
-            <secondary>Modifying during the session</secondary>
-          </indexterm></emphasis></para>
+            <secondary>global vs project file filters</secondary>
+          </indexterm></para>
 
-        <para>It is possible to modify the project properties during a
-        translation session. However, until you have some experience with
-        OmegaT, it is safest to consider all settings final once the
-        translation has started – unless of course you realize a major mistake
-        has been made. See the section Preventing data loss for ways and means
-        of protecting your work.</para>
+        <para>In a similar fashion as above the user can create
+        project-specific File filters, which will be stored together with the
+        project and will be valid for the current project only. To create a
+        project-specific set of file filters, click on the <guibutton>File
+        filter ... </guibutton>button, then activate <guimenuitem>Enable
+        project specific filters</guimenuitem> check box in the window, that
+        opens. A copy of the changed filters configuration will be stored with
+        the project. To delete project specific file filters, uncheck the
+        check box. Note that in the menu <guimenuitem>Options-&gt;File
+        Filters</guimenuitem>, the global user filters are changed, not the
+        project filters. See chapter<link linkend="chapter.file.filters"> File
+        filters </link>for more on the subject. <emphasis/></para>
+
+        <para><emphasis>Hint:</emphasis> the set of file filters for a given
+        project is stored as
+        <filename>project/omegat/filters.xml.</filename></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>An area for setting project folders<indexterm class="singular">
+            <primary>Glossary</primary>
+
+            <secondary>Location of the writable glossary file</secondary>
+          </indexterm></para>
+
+        <indexterm class="singular">
+          <primary>Project</primary>
+
+          <secondary>Changing the folder structure</secondary>
+        </indexterm>
+
+        <para>if you enter names of folders that do not exist yet,
+        <application>OmegaT</application> creates them for you. In case you
+        decide to modify project folders, keep in mind that this will not move
+        the contained files from old folders to the new location.</para>
       </listitem>
     </itemizedlist>
   </section>

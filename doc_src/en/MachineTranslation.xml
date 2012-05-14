@@ -40,13 +40,13 @@
     more than 50 languages, from Albanian to Yiddish, including of course all
     the major languages. The current version of the service is based on usage,
     with the price of 20 USD per million characters at the time of writing.
-    <emphasis role="bold"></emphasis></para>
+    <emphasis role="bold"/></para>
 
     <para><emphasis role="bold">Important: </emphasis>Google Translate API v2
     requires billing information for all accounts before you can start using
     the service (see <ulink
     url="http://code.google.com/intl/en-US/apis/language/translate/v2/pricing.html">Pricing
-    and Terms of Service</ulink> for more). To identify youself as a valid
+    and Terms of Service</ulink> for more). To identify yourself as a valid
     user for the Google services, you use your private unique key sent to you
     by Google, when you have registered for the service. See chapter <link
     linkend="chapter.installing.and.running">Installing and Running</link>,
@@ -75,11 +75,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/MobyDick.png" />
+          <imagedata fileref="images/MobyDick.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/MobyDick.png" width="60%" />
+          <imagedata fileref="images/MobyDick.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -212,8 +212,9 @@
       <listitem>
         <para>"Google Translate returned HTTP response code: 403 ...": check
         that the 38-characters key, entered in the pinfo.list file, is
-        correct. Check that <ulink url="https://developers.google.com/translate/v2/faq">Translate API service </ulink>has
-        been activated.</para>
+        correct. Check that <ulink
+        url="https://developers.google.com/translate/v2/faq">Translate API
+        service </ulink>has been activated.</para>
       </listitem>
     </itemizedlist>
   </section>

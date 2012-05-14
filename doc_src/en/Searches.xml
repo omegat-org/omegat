@@ -18,11 +18,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/TextSearch.png" />
+          <imagedata fileref="images/TextSearch.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/TextSearch.png" width="95%" />
+          <imagedata fileref="images/TextSearch.png" width="95%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -86,10 +86,10 @@
 
       <para>When searching through files (as opposed to translation memories),
       <application>OmegaT</application> restricts the search to files in
-      source file formats. Consequently, although OmegaT is
-      quite able to handle<filename> tmx</filename> files, it does not include
-      them in the Search files search. If you turn on <emphasis
-      role="bold"><indexterm class="singular">
+      source file formats. Consequently, although OmegaT is quite able to
+      handle<filename> tmx</filename> files, it does not include them in the
+      Search files search. If you turn on <emphasis role="bold"><indexterm
+          class="singular">
           <primary>Searches</primary>
 
           <secondary>Advanced Options</secondary>
@@ -115,7 +115,7 @@
       <listitem>
         <para>'*' matches zero or more characters, from the current position
         in a given word to its end. The search term<literal>'run*'</literal>
-        for example would match words <literal>'run'</literal>, 
+        for example would match words <literal>'run'</literal>,
         <literal>'runs'</literal> and <literal>'running'</literal>.</para>
       </listitem>
     </itemizedlist>
@@ -172,8 +172,7 @@
           occurrences of the string <emphasis><literal>open
           file</literal>,</emphasis> as well as <emphasis><literal>file
           opened</literal>, <literal>open input file</literal>, <literal>file
-          may not be safe to open</literal></emphasis>,
-          etc.</para>
+          may not be safe to open</literal></emphasis>, etc.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -194,8 +193,7 @@
         search is a powerful way to look for instances of a string. It is
         similar to a wild card search, but allows far more flexibility. The
         regular expressions used in searches are those supported by Java. See
-        more in the chapter on regular
-        Expressions.</para>
+        more in the chapter on regular Expressions.</para>
       </listitem>
 
       <listitem>
@@ -212,15 +210,17 @@
     <para>Pressing the search button after entering a string in the search
     field displays all the segments in the project that include the entered
     string. As <application>OmegaT</application> handles identical segments as
-    one single entity, only the first unique segment is shown.</para>
-
-    <para>The segments are displayed in order of appearance in the project.
-    Translated segments are displayed with the original text at the top and
-    the translated text at the bottom, untranslated segments are displayed as
-    the source only.</para>
+    one single entity, only the first unique segment is shown. The segments
+    are displayed in order of appearance in the project. Translated segments
+    are displayed with the original text at the top and the translated text at
+    the bottom, untranslated segments are displayed as the source only.</para>
 
     <para>Clicking on a segment opens it in the Editor for modifications. You
     can then switch back to the Search window for the next segment found, for
     instance to check and, if necessary, correct the terminology.</para>
+
+    <para>You may have several Search windows open at the same time. You can
+    quickly see their contents by looking at their title: it will contain the
+    search term used. </para>
   </section>
 </chapter>

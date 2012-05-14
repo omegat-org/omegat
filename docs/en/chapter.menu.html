@@ -51,7 +51,7 @@
                <dt><span class="section"><a href="chapter.menu.html#keyboard.shortcuts">2. Keyboard shortcuts</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.menu.html#d0e3561">2.1. Project management</a></span></dt>
+                     <dt><span class="section"><a href="chapter.menu.html#d0e3562">2.1. Project management</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.editing">2.2. Editing</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.moving.around">2.3. Moving around</a></span></dt>
                      <dt><span class="section"><a href="chapter.menu.html#keyboard.other">2.4. Other</a></span></dt>
@@ -317,9 +317,10 @@
                               <td align="left"><span class="guimenuitem">Insert Source Tags</span></td>
                               <td align="left"><span class="keycap"><strong>Shift</strong></span>+<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></td>
                               <td><a class="indexterm" name="d0e2968"></a>Inserts the source tags at the cursor position.
-                                               All tags in the source will be inserted into the current
-                                               segment, regardless of whether they are already there or not.
-                                               Texts, bracketed by tags, are replaced by spaces:.
+                                               All the relevant tags in the source - i.e. OmegaT as well as
+                                               custom, Java, printf etc tags - will be inserted into the
+                                               current target, regardless of whether they are already there or
+                                               not. Texts, bracketed by tags, are replaced by spaces:.
                                                <code class="literal">&lt;f0&gt;&lt;f1&gt;This is
                                                   text&lt;/f0&gt;&lt;/f1&gt;</code> thus will be copied as
                                                <code class="literal">&lt;f0&gt;&lt;f1&gt;one_space&lt;/f0&gt;&lt;/f1&gt;</code></td>
@@ -376,8 +377,8 @@
                               <td align="left"><span class="guimenuitem">Use as Default
                                                   Translation</span></td>
                               <td align="left">&nbsp;</td>
-                              <td>If there are several alternative translations available
-                                               for the active segment, you can label the alternative selected as the
+                              <td>If there's several alternative translations available
+                                               active segment, you can label the alternative selected as the
                                                default translation. The entry will be greyed, if there's just
                                                one translation available.
                               </td>
@@ -455,7 +456,7 @@
                            <tr>
                               <td align="left"><span class="guimenuitem">Previous Note</span></td>
                               <td align="left">&nbsp;</td>
-                              <td>The previous segment with a note will open .</td>
+                              <td>The previous segment with a note will open.</td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Forward in history...</span></td>
@@ -527,15 +528,16 @@
                            <tr>
                               <td align="left"><span class="guimenuitem">Mark Segments with
                                                   Notes</span></td>
-                              <td>If checked, segments with notes will be marked in
-                                               cyan.
+                              <td>If checked, segments with notes will be marked in cyan.
+                                               This marking has priority over Mark Translated Segments and Mark
+                                               Untranslated Segments.
                               </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Mark Non-breakable
                                                   Spaces</span></td>
                               <td>If checked, non-breakable spaces in the segment will be
-                                               displazed with a grey background.
+                                               displayed with a grey background.
                               </td>
                            </tr>
                            <tr>
@@ -583,7 +585,7 @@
                                                normally there should be no problem with opening the target
                                                documents. Non-visible formatting (i.e., which doesn't appear as
                                                tags in the OmegaT editor) is kept in the target
-                                               document
+                                               document.
                               </td>
                            </tr>
                            <tr>
@@ -644,7 +646,7 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Glossary</span></td>
-                              <td>&nbsp;</td>
+                              <td>reserved for future use by plugins</td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">TransTips</span></td>
@@ -703,14 +705,14 @@
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">Team...</span></td>
-                              <td>Enter your name here and it will be attaWched to all
+                              <td>Enter your name here and it will be attached to all
                                                segments translated by you.
                               </td>
                            </tr>
                            <tr>
                               <td align="left"><span class="guimenuitem">External TMXs...</span></td>
                               <td>Allows the user decide, how tags in foreign TMX files
-                                               (i.e. not generated by OmegaT) are to be treated,
+                                               (i.e. not generated by OmegaT) are to be treated.
                               </td>
                            </tr>
                            <tr>
@@ -742,11 +744,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e3486"></a></h3>
+                        <h3 class="title"><a name="submenu.Help"></a>1.7.&nbsp;Help<a class="indexterm" name="d0e3487"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3491"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
+               <div class="table"><a name="d0e3492"></a><p class="title"><b>Table&nbsp;5.9.&nbsp;Help menu</b></p>
                   <div class="table-contents">
                      <table summary="Help menu" border="1">
                         <colgroup>
@@ -775,7 +777,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e3514"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="keyboard.shortcuts"></a>2.&nbsp;Keyboard shortcuts<a class="indexterm" name="d0e3515"></a></h2>
                   </div>
                </div>
             </div>
@@ -834,11 +836,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e3561"></a>2.1.&nbsp;<a class="indexterm" name="d0e3563"></a>Project management<a class="indexterm" name="d0e3569"></a></h3>
+                        <h3 class="title"><a name="d0e3562"></a>2.1.&nbsp;<a class="indexterm" name="d0e3564"></a>Project management<a class="indexterm" name="d0e3570"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3574"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
+               <div class="table"><a name="d0e3575"></a><p class="title"><b>Table&nbsp;5.10.&nbsp;Project management shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Project management shortcuts" border="1">
                         <colgroup>
@@ -890,11 +892,11 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e3643"></a>Editing<a class="indexterm" name="d0e3649"></a></h3>
+                        <h3 class="title"><a name="keyboard.editing"></a>2.2.&nbsp;<a class="indexterm" name="d0e3644"></a>Editing<a class="indexterm" name="d0e3650"></a></h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3654"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
+               <div class="table"><a name="d0e3655"></a><p class="title"><b>Table&nbsp;5.11.&nbsp;Editing shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Editing shortcuts" border="1">
                         <colgroup>
@@ -998,12 +1000,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e3799"></a>Moving around
+                        <h3 class="title"><a name="keyboard.moving.around"></a>2.3.&nbsp;<a class="indexterm" name="d0e3800"></a>Moving around
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3805"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
+               <div class="table"><a name="d0e3806"></a><p class="title"><b>Table&nbsp;5.12.&nbsp;Moving around shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Moving around shortcuts" border="1">
                         <colgroup>
@@ -1053,12 +1055,12 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e3886"></a>Other
+                        <h3 class="title"><a name="keyboard.other"></a>2.4.&nbsp;<a class="indexterm" name="d0e3887"></a>Other
                         </h3>
                      </div>
                   </div>
                </div>
-               <div class="table"><a name="d0e3892"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
+               <div class="table"><a name="d0e3893"></a><p class="title"><b>Table&nbsp;5.13.&nbsp;Various shortcuts</b></p>
                   <div class="table-contents">
                      <table summary="Various shortcuts" border="1">
                         <colgroup>

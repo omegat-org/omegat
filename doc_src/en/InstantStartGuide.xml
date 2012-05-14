@@ -11,7 +11,7 @@
         <secondary>Create / open new</secondary>
       </indexterm></title>
 
-    <para><remark>Note:</remark> On an Apple Mac, use the <keycap>Cmd</keycap>
+    <para><remark>Note:</remark>On an Apple Mac, use the <keycap>Cmd</keycap>
     or <keycap>Apple</keycap> key instead of the <keycap>Ctrl</keycap>
     key</para>
 
@@ -32,17 +32,17 @@
     <para>After you give your project a name, the Create New Project dialog
     will open. At the top of that dialog, select your source file's language
     and the language that your translated file will be, and click
-    <guibutton>OK </guibutton>to continue.</para>
+    <guibutton>OK </guibutton>to continue</para>
 
     <para><application>If you are interested in other settings of this dialog,
     you can return to it any time by pressing
     <keycap>Ctrl+E.</keycap></application></para>
 
     <para>Next, the Project Files dialog opens. Click the Import source
-    files... button to select your source file. OmegaT will then copy the
-    selected file to the <filename>/source/</filename> subfolder of your newly
-    created project. After the source file has loaded in the Editor pane, you
-    can close the Project files dialog.</para>
+    files... to select your source file. OmegaT will then copy the selected
+    file to the <filename>/source/</filename>subfolder of your newly created
+    project. After the source file has loaded in the Editor pane, you can
+    close the Project files dialog.</para>
   </section>
 
   <section id="translate.the.segments.one.by.one">
@@ -55,7 +55,7 @@
     <keycap>Ctrl+D</keycap> to generate the translated document, which will be
     created in the /target/ subfolder of your project folder. During
     translation, use the <guimenu>Edit</guimenu> and <guimenu>Go To</guimenu>
-    menus to perform various useful functions.</para>
+    menus to perform various useful functions..</para>
   </section>
 
   <section>
@@ -65,7 +65,7 @@
     LibreOffice Writer or HTML, OmegaT will convert the formatting into tags
     that surround the text that you translate. Often documents will also have
     tags that have nothing to do with formatting, but which are also
-    important. In the source file (and in the translated file), A source
+    important.In the source file (and in the translated file), A source
     sentence might look like</para>
 
     <para/>
@@ -85,7 +85,8 @@
 
     <mediaobject>
       <imageobject>
-        <imagedata align="left" fileref="images/InstantGuide_2.png"/>
+        <imagedata align="left" fileref="images/InstantGuide_2.png"
+                   scale="125"/>
       </imageobject>
     </mediaobject>
 
@@ -116,7 +117,10 @@
         <para>If a file does not loads into the Editor pane, then it could be
         that your source file is in a format that doesn't work in OmegaT. See
         Chapter 7: File Filters in the User Manual for a list of file formats
-        that OmegaT can handle.</para>
+        that OmegaT can handle. If a file does not loads into the Editor pane,
+        then it could be that your source file is in a format that doesn't
+        work in OmegaT. See Chapter 7: File Filters in the User Manual for a
+        list of file formats that OmegaT can handle.</para>
       </listitem>
     </itemizedlist>
 
@@ -145,7 +149,7 @@
         OmegaT itself, in future projects that you create. If you place
         translation memory files in the /tm/ subfolder of your project folder,
         OmegaT will automatically search them for similar segments, called
-        "fuzzy matches".</para>
+        "fuzzy matches". .</para>
       </listitem>
     </itemizedlist>
 
@@ -153,7 +157,7 @@
       <listitem>
         <para>You can create a glossary by pressing
         <guibutton>Ctrl+Shift+G</guibutton>, or copy existing glossaries to
-        the <filename>/glossary/</filename> subfolder of your project folder,
+        the<filename>/glossary/</filename>subfolder of your project folder,
         and OmegaT will automatically look up words in them.</para>
       </listitem>
     </itemizedlist>
@@ -170,9 +174,9 @@
       <listitem>
         <para>For a more comprehensive introduction see <ulink
         url="http://www.omegat.org/en/tutorial/OmegaT%20for%20Beginners.pdf">OmegaT
-        for Beginners</ulink> on the OmegaT web site. If you need assistance
+        for beginners</ulink> on the OmegaT web site. If you need assistance
         with any aspect of OmegaT, feel free to join the <ulink
-        url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT user
+        url="http://tech.groups.yahoo.com/group/OmegaT/">OmegaT users
         group.</ulink></para>
       </listitem>
     </itemizedlist>

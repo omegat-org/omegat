@@ -20,14 +20,16 @@
 
     <mediaobject>
       <imageobject role="html">
-        <imagedata fileref="images/EditingBehaviourOptions.png" />
+        <imagedata fileref="images/EditingBehaviourOptions.png"/>
       </imageobject>
     </mediaobject>
   </figure>
 
   <section id="automatic.match.insertion">
-    <title>Automatic match insertion<indexterm class="singular">
-        <primary>Automatic match insertion</primary>
+    <title>Editing behaviour - options<indexterm class="singular">
+        <primary>Editing behaviour</primary>
+
+        <secondary>Options</secondary>
       </indexterm></title>
 
     <para>You translate your files by moving from segment to segment, editing
@@ -52,18 +54,33 @@
       </varlistentry>
 
       <varlistentry>
-        <term>Leave the segment empty</term>
+        <term>Leave the segment empty<indexterm class="singular">
+            <primary>Editing behaviour</primary>
+
+            <secondary>Empty translation</secondary>
+          </indexterm></term>
 
         <listitem>
           <para>OmegaT leaves the editing field blank. This option allows you
           to enter the translation without the need to remove the source text,
           thus saving you two keystrokes (<emphasis role="bold">Ctrl+A
-          </emphasis>and <emphasis role="bold">Del)</emphasis></para>
+          </emphasis>and <emphasis role="bold">Del). </emphasis> Empty
+          translations are now allowed. They are displayed as &lt;EMPTY&gt; in
+          the Editor. To create one, right-click in a segment, and select
+          "<emphasis role="bold">Set empty translation</emphasis>". The entry
+          <emphasis role="bold">Remove translation</emphasis> in the same
+          popup menu also allows to delete the existing translation of the
+          current segment. You achieve the same by clearing the target segment
+          and pressing <guibutton>Enter.</guibutton></para>
         </listitem>
       </varlistentry>
 
       <varlistentry>
-        <term>Insert the best fuzzy match</term>
+        <term>Insert the best fuzzy match<indexterm class="singular">
+            <primary>Editing behaviour</primary>
+
+            <secondary>Inserting fuzzy matches</secondary>
+          </indexterm></term>
 
         <listitem>
           <para>OmegaT inserts the translation of the string most similar to
@@ -80,7 +97,9 @@
   <section id="allow.translation.equal.to.source">
     <title>Allow the translation to be equal to source<indexterm
         class="singular">
-        <primary>Translation equal to source</primary>
+        <primary>Editing behaviour</primary>
+
+        <secondary>Translation equal to source</secondary>
       </indexterm></title>
 
     <para>Documents for translation may contain trade marks, names or other
@@ -101,7 +120,9 @@
 
   <section id="export.segment.to.text.files">
     <title>Export the segment to text files<indexterm class="singular">
-        <primary>Exporting the current segment</primary>
+        <primary>Editing behaviour</primary>
+
+        <secondary>Exporting the current segment</secondary>
       </indexterm></title>
 
     <para>The text export function exports data from within the current

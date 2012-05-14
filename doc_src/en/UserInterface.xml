@@ -641,7 +641,7 @@
       segment. The source segment in the example below was “<emphasis>Context
       menu command</emphasis>”, as in the Fuzzy Matches example above, and the
       terms shown were found in the glossaries, available (Microsoft's Term
-      collection and Slovenian Linux Useg group Glossary).</para>
+      collection and Slovenian Linux User group Glossary).</para>
 
       <figure id="multiword.pane">
         <title><indexterm class="singular">
@@ -691,7 +691,7 @@
         </indexterm></title>
 
       <para>A given source segment may require several different translations,
-      depending on the context, If the current translation of the segment does
+      depending on the context. If the current translation of the segment does
       not fit, the user can select <guisubmenu>Edit → Create Alternative
       Translation</guisubmenu> . The target text entered after that will be
       treated as an alternative translation of the source segment. You can
@@ -705,7 +705,7 @@
 
       <para>The translator can add notes to the opened segment, for instance
       to come back later to the segment and redo the translation, check that
-      alternatiuve translations are correct or to ask colleagues for their
+      alternative translations are correct or to ask colleagues for their
       opinion. You can browse through notes using <guisubmenu>GoTo → Next
       Note</guisubmenu> and <guisubmenu>GoTo → Previous
       Note</guisubmenu>.</para>
@@ -754,8 +754,8 @@
       items. The most frequently used functions are accessible with keyboard
       shortcuts, so once you become accustomed to them, you will no longer
       need to browse through the menus while translating. See chapter <link
-      linkend="chapter.menu">Menu and Keyboard shortcuts</link> for details.
-      </para>
+      linkend="chapter.menu">Menu and Keyboard shortcuts</link> for
+      details.</para>
     </section>
 
     <section id="status.bar">
@@ -941,8 +941,8 @@
       <para>The statistics window - accessed via <emphasis
       role="bold">Tools&gt;Statistics </emphasis>- shows the statistics of the
       current OmegaT project, both in the summary form as well as in detail
-      for every file to be translated. The statistics shown is available as as
-      a tab-separated <filename>project_stats.txt</filename> file (subfolder
+      for every file to be translated. The statistics shown is available as a
+      tab-separated <filename>project_stats.txt</filename> file (subfolder
       <filename>omegat</filename>), ready to be loaded into a spreadsheet
       program for the user's convenience. You can use <guimenuitem>Ctrl+A
       <indexterm class="singular">

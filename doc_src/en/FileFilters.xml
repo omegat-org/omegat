@@ -27,12 +27,26 @@
     </listitem>
   </itemizedlist>
 
+  <para>To see which file formats can be handled by OmegaT, see the menu
+  <guimenuitem>Options &gt; File Filters ... </guimenuitem></para>
+
   <para>Most users will find the default file filter options sufficient. If
   this is not the case, open the main dialog by selecting<emphasis
-  role="bold"> Options → File Filters...</emphasis> from the main menu. You can
-  also enable project-specific file filters, which will only be used on the
-  current project, by selecting the <emphasis
-  role="bold">File Filters...</emphasis> option in Project Properties.</para>
+  role="bold"> Options → File Filters...</emphasis> from the main menu. You
+  can also enable project-specific file filters, which will only be used on
+  the current project, by selecting the <emphasis role="bold">File
+  Filters...</emphasis> option in Project Properties.</para>
+
+  <para>You can enable project specific filters via the <emphasis
+  role="bold">Options → Properties...</emphasis> . Klick on <guibutton>File
+  Filters</guibutton> button and activate the checkbox <guimenuitem>Enable
+  project specific filters</guimenuitem><indexterm class="singular">
+      <primary>File filters</primary>
+
+      <secondary>project specific file filters</secondary>
+    </indexterm>. A copy of the filters configuration will be stored with the
+  project in this case. If you later change filters, only the project filters
+  will be updated, while the user filters stay unchanged.</para>
 
   <para><emphasis role="bold">Warning!</emphasis> Should you change filter
   options whilst a project is open, you must reload the project in order for

@@ -853,7 +853,7 @@
                      <li class="listitem">
                         <p><span class="bold"><strong>Memory assignment</strong></span></p>
                         <p><span class="bold"><strong>-XmxZZM </strong></span><a class="indexterm" name="d0e1255"></a>This command assigns more memory to
-                                     <span class="application">OmegaT</span>. By default, 256 MB are assigned,
+                                     <span class="application">OmegaT</span>. By default, 512 MB are assigned,
                                      so there is no advantage in assigning less than this figure. "ZZ"
                                      stands for the amount of memory assigned, in megabytes. The command
                                      to launch <span class="application">OmegaT</span> with assignment of 1024
@@ -881,7 +881,7 @@
                         <p><span class="bold"><strong>-Dgoogle.api.key=A123456789B123456789C123456789D12345678
                                            </strong></span><span class="bold"><strong><a class="indexterm" name="d0e1316"></a></strong></span> If you have signed up for the Google
                                      Translate services, enter your private Google API key here. Note
-                                     that the key is 38 characters long. 
+                                     that the key is 38 characters long.
                         </p>
                      </li>
                   </ul>
@@ -1097,10 +1097,10 @@
                         </div>
                      </div>
                   </div>
-                  <p>An extra command line parameter specific to console
-                             mode: <code class="literal">--quiet.</code> In the quiet mode, less info is
-                             logged to the screen. The messages you would usually find in the
-                             status bar are not displayed.
+                  <p>An extra command line parameter specific to console mode:
+                             <code class="literal">--quiet.</code> In the quiet mode, less info is logged to
+                             the screen. The messages you would usually find in the status bar are
+                             not displayed.
                   </p>
                   <p>Usage: <code class="literal">java -jar <span class="application">OmegaT</span>.jar
                                 /path/to/project --mode=console-translate --quiet</code></p>
@@ -1114,16 +1114,16 @@
                         </div>
                      </div>
                   </div>
-                  <p>Another extra command line parameter specific to console
-                             mode: <code class="literal">--tag-validation=[abort|warn].</code> When this 
-                             parameter is added, tag validation is done prior to translation/aligning.
-                             If the value is <code class="literal">abort</code>, then on tag errors the errors
-                             are printed and the program stops. If the value is <code class="literal">warn</code>
+                  <p>Another extra command line parameter specific to console mode:
+                             <code class="literal">--tag-validation=[abort|warn].</code> When this parameter
+                             is added, tag validation is done prior to translation/aligning. If the
+                             value is <code class="literal">abort</code>, then on tag errors the errors are
+                             printed and the program stops. If the value is <code class="literal">warn</code>
                              then the errors are printed but OmegaT continues.
-                             
                   </p>
                   <p>Usage: <code class="literal">java -jar <span class="application">OmegaT</span>.jar
-                                /path/to/project --mode=console-translate --tag-validation=abort</code></p>
+                                /path/to/project --mode=console-translate
+                                --tag-validation=abort</code></p>
                </div>
             </div>
          </div>

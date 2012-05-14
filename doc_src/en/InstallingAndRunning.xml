@@ -746,7 +746,7 @@
 
               <tertiary>Memory assignment</tertiary>
             </indexterm>This command assigns more memory to
-          <application>OmegaT</application>. By default, 256 MB are assigned,
+          <application>OmegaT</application>. By default, 512 MB are assigned,
           so there is no advantage in assigning less than this figure. "ZZ"
           stands for the amount of memory assigned, in megabytes. The command
           to launch <application>OmegaT</application> with assignment of 1024
@@ -799,7 +799,7 @@
               <tertiary>Google Translate V2</tertiary>
             </indexterm></emphasis> If you have signed up for the Google
           Translate services, enter your private Google API key here. Note
-          that the key is 38 characters long. </para>
+          that the key is 38 characters long.</para>
         </listitem>
       </itemizedlist>
 
@@ -999,28 +999,28 @@
       <section id="console.mode.option.quiet">
         <title>Quiet option</title>
 
-        <para>An extra command line parameter specific to console
-        mode: <literal>--quiet.</literal> In the quiet mode, less info is
-        logged to the screen. The messages you would usually find in the
-        status bar are not displayed.</para>
+        <para>An extra command line parameter specific to console mode:
+        <literal>--quiet.</literal> In the quiet mode, less info is logged to
+        the screen. The messages you would usually find in the status bar are
+        not displayed.</para>
 
         <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
         /path/to/project --mode=console-translate --quiet</literal></para>
       </section>
-      
+
       <section id="console.mode.option.validatetags">
         <title>Tag validation option</title>
 
-        <para>Another extra command line parameter specific to console
-        mode: <literal>--tag-validation=[abort|warn].</literal> When this 
-        parameter is added, tag validation is done prior to translation/aligning.
-        If the value is <literal>abort</literal>, then on tag errors the errors
-        are printed and the program stops. If the value is <literal>warn</literal>
-        then the errors are printed but OmegaT continues.
-        </para>
+        <para>Another extra command line parameter specific to console mode:
+        <literal>--tag-validation=[abort|warn].</literal> When this parameter
+        is added, tag validation is done prior to translation/aligning. If the
+        value is <literal>abort</literal>, then on tag errors the errors are
+        printed and the program stops. If the value is <literal>warn</literal>
+        then the errors are printed but OmegaT continues.</para>
 
         <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
-        /path/to/project --mode=console-translate --tag-validation=abort</literal></para>
+        /path/to/project --mode=console-translate
+        --tag-validation=abort</literal></para>
       </section>
     </section>
   </section>

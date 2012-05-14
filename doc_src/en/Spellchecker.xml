@@ -21,7 +21,8 @@
     <itemizedlist>
       <listitem>
         <para>In your file manager, create a new folder in a suitable location
-        in which to store spelling dictionaries.</para>
+        in which to store spelling dictionaries (D:\Translations\spellcheckers
+        in the example below).</para>
       </listitem>
     </itemizedlist>
 
@@ -43,67 +44,50 @@
         <para>Place the dictionary files you wish to use in this folder. There
         are essentially two ways in which you can do this. You can either copy
         files manually, i.e. from elsewhere on your system, using your file
-        manager; or you can use OmegaT's <emphasis
-        role="bold">"Install"</emphasis> function to provide a list of
-        available dictionaries to select from. Note that the "Install"
-        function requires an Internet connection. The selected languages will
-        then be installed and will eventually appear in your spell checker
-        setup window (this may take a while).</para>
+        manager; or you can use OmegaT's <emphasis role="bold">"Install new
+        dictionary"</emphasis> function to provide a list of available
+        dictionaries to select from. Note that the "Install" function requires
+        an Internet connection. The selected languages will then be installed
+        and will eventually appear in your spell checker setup window (this
+        may take a while).</para>
       </listitem>
     </itemizedlist>
 
-    <para>Copying the files manually is useful if you already have suitable
+    <para>Copying the files manually makes sense if you already have suitable
     dictionary files on your system, for instance as part of your
-    OpenOffice.org or Thunderbird installation. The files you need will have
-    the extensions <filename>.aff</filename> and <filename>.dic</filename>,
-    and you need both files in order for the dictionary in question to work.
-    You can use these file extensions to search your desktop for suitable
-    dictionaries. In the case below, no extra folder has been created and no
-    copying of files was necessary, as the OpenOffice.org dictionary folder is
-    used instead:</para>
+    OpenOffice.org or Thunderbird installation. It is simpler, however, to
+    look foir dictionaries online, using the <emphasis role="bold">URL of
+    online dictionaries</emphasis> field:</para>
 
     <figure id="spellchecker.setup">
-      <title>Spell checker setup</title>
+      <title><indexterm class="singular">
+          <primary>Spell checker setup</primary>
+
+          <secondary>Spell checker setup - figure</secondary>
+        </indexterm>Spellchecker setup</title>
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/SpellcheckerSetup2.png" />
+          <imagedata fileref="images/SpellcheckerSetup_25.png"/>
+        </imageobject>
+      </mediaobject>
+
+      <mediaobject>
+        <imageobject role="fo">
+          <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
-    <para>Note that in the above case, you may lose the spelling dictionaries,
-    if the OpenOffice.org installation is removed from your system. Creating
-    your own folder and copying the files may be extra work, but possibly
-    worth the trouble.</para>
-
-    <para>More recent OpenOffice.org spelling dictionaries are supplied as
-    "OpenOffice.org extensions", with the filename extension .oxt. These are
-    however zip archives: if you rename the file with the extension .zip, you
-    can extract the contents in a zip utility, and you will find the .aff and
-    .dic files that you need, which you can then place in the folder that you
-    created for them.</para>
-
-    <para>Please note that the application behind the<guilabel>
-    "Install..."</guilabel> button depends on the Internet list of
-    dictionaries. If it is out of date or does not include the desired
-    language, you will have to look for appropriate vocabularies yourself.
-    OpenOffice.org contains probably the largest vocabulary collection at the
-    <ulink
-    url="http://extensions.services.openoffice.org/dictionary">OpenOffice.org
-    Extensions site</ulink>. After the dictionary extension has been
-    downloaded and installed, the corresponding <emphasis>aff</emphasis> and
-    <emphasis>dic</emphasis> will become available. The same can be achieved
-    by downloading a spell checker add-ons for Firefox or Thunderbird; in this
-    case the spell checker files will be stored in your (Firefox or
-    Thunderbird) profile.</para>
-
-    <para>Make sure the language code of your target files corresponds to the
-    dictionary's language code: an FR-FR dictionary will not work with an FR
-    target setting. You need to change the setting to FR-FR to have the spell
-    checker recognize the correct dictionary for your target. Look for files
-    with the name, indicating the language used and having extensions
-    <emphasis>aff</emphasis> and <emphasis>dic.</emphasis></para>
+    <para>Clicking on <guibutton>Install new dictionary</guibutton> button
+    will open the Dictionary installer window, where you can select the
+    dictionaries zou want to install.Make sure the language code of your
+    target files corresponds to the dictionary's language code: an FR-FR
+    dictionary will not work with an FR target setting. You need to change the
+    setting to FR-FR to have the spell checker recognize the correct
+    dictionary for your target. Look for files with the name, indicating the
+    language used and having extensions <emphasis>aff</emphasis> and
+    <emphasis>dic.</emphasis></para>
   </section>
 
   <section>
@@ -129,11 +113,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/SpellcheckingText.png" />
+          <imagedata fileref="images/SpellcheckingText.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/SpellcheckingText.png" width="80%" />
+          <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -154,7 +138,7 @@
     <para>If the spell checker is not working, then make sure first that the
     check box <guilabel>"Automatically check the spelling of text"</guilabel>
     in the spell checker dialog (<guisubmenu>Options &gt; Spell
-    checking...)</guisubmenu> has been ticked.</para>
+    checking...)</guisubmenu> is checked.</para>
 
     <para>Also check that the target language code of your project against the
     available vocabularies in the setup window. The spell checker uses the
@@ -173,9 +157,9 @@
     course it is much wiser, to take a short break and download the correct
     versions of the spell checker.</para>
 
-    <para>Note that <filename>Uninstall</filename> physically removes the
-    selected vocabularies. If they are part of OpenOffice.org, as in the above
-    case, they will disappear from that application, too. If, for whatever
+    <para>Note that <filename>Remove</filename> physically removes the
+    selected vocabularies. If they are used bz some other application on your
+    system, they will disappear from that application, too. If, for whatever
     reason, you need to do this from time to time, it may make sense to copy
     the files involved to a different folder, reserved just for use by
     OmegaT.</para>

@@ -18,15 +18,15 @@
   segment will be automatically displayed in the Glossary viewer.</para>
 
   <para>You define its location and name in the project properties dialog. The
-  extension must be <filename>.txt</filename> (if not, it will be added). The
-  location of the file must be within the <filename>/glossary </filename>
-  folder, but it can be in a deeper directory (e.g.,
+  extension must be <filename>.txt </filename>(if not, it will be added). The
+  location of the file must be within the <filename>/glossary
+  </filename>folder, but it can be in a deeper directory (e.g.,
   <filename>glossary/sub/glossary.txt</filename>). The file does not need to
   exist when setting it, it will be created (if necessary) when adding a
-  glossary entry. If the file already exists, no attempt is done to verify the
-  format or the character set of the file: the new entries will always be in
-  tab-separated format and UTF-8. As the existing content will not be touched,
-  damaged to an existing file would be limited.</para>
+  glossary entry. If the file already exists, not attempt is done to verify
+  the format or the character set of the file: the new entries will always be
+  in tab-separated format and UTF-8. As the existing content will not be
+  touched, damaged to an existing file would be limited.</para>
 
   <section>
     <title>Usage</title>
@@ -51,11 +51,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/GlossaryPane_25.png"/>
+          <imagedata fileref="images/Glossarypane_25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/GlossaryPane_25.png" width="60%"/>
+          <imagedata fileref="images/Glossarypane_25.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -94,7 +94,7 @@
     segment.<footnote>
         <para>Note that in the above case, this is just half (or even less) of
         the story, as the target language (Slovenian) uses declension. So the
-        inserted "pojavni meni" has to be changed to "pojavcnem meniju". In
+        inserted "pojavni meni" has to be changed to "pojavnem meniju". In
         other words, typing the term correctly without bothering with
         highlighting and rightclicking is probably faster.</para>
       </footnote></para>
@@ -116,14 +116,16 @@
     <para>Glossary files are simple plain text files containing three-column,
     tab-delimited lists with the source and target terms in the first and
     second columns respectively. The third column can be used for additional
-    information. Glossary files can be either in system default encoding (and
-    indicated by the extension .tab) or in UTF-8 (the extension .utf8). The
-    Unicode encoding (UTF8) is preferred for obvious reasons.</para>
+    information. You can have entries with the target column missing, i.e.
+    just containing the source term and the comment.</para>
 
-    <para>Also supported is the CSV format. This format is the same as the tab
-    separated one: source term, target term. Comment fields are separated by a
-    comma ','. Strings can be enclosed by quotes ", which allows having a
-    comma inside a string:</para>
+    <para>Glossary files can be either in system default encoding (and
+    indicated by the extension .tab) or in UTF-8 (the extension .utf8). The
+    Unicode encoding (UTF8) is preferred for obvious reasons. Also supported
+    is the CSV format. This format is the same as the tab separated one:
+    source term, target term. Comment fields are separated by a comma ','.
+    Strings can be enclosed by quotes ", which allows having a comma inside a
+    string:</para>
 
     <para><literal>"This is a source term, which contains a comma","c'est un
     terme, qui contient une virgule" </literal></para>
@@ -159,9 +161,9 @@
         <secondary>Creating a glossary</secondary>
       </indexterm></title>
 
-    <para>The project setting allows one can enter a name for a writeable
+    <para>The project setting allows one can enter a name for a writable
     glossary file (see beginning of this chapter). Adding new entries is done
-    by using the keyboard shortcut <keycap>Ctrl+Shift+G</keycap>. A dialog
+    by using the keyboard shortcut <keycap>Ctrl+Shift+G .</keycap> A dialog
     opens, allowing you to enter the source term, target term and any comments
     you may have:</para>
 
@@ -177,20 +179,25 @@
 
     <para>The contents of glossary files are kept in memory and are loaded
     when the project is opened or reloaded. Updating a glossary file is thus
-    rather simple: press <keycap>Ctrl+Shift+G</keycap> and enter the new term,
-    its translation and any comments you may have (ensuring you press tab
-    between the fields) and save the file. The contents of the glossary pane
-    will be updated accordingly</para>
+    rather simple: press <keycap>Ctrl+Shift+G </keycap> and enter the new
+    term, its translation and any comments you may have (ensuring you press
+    tab between the fields) and save the file. The contents of the glossary
+    pane will be updated accordingly.</para>
+
+    <para><indexterm class="singular">
+        <primary>Glossaries</primary>
+
+        <secondary>Location of the writable glossary file</secondary>
+      </indexterm>The location of the writable glossary file can be set in the
+    Project &gt; Properties ... dialog. The recognized extensions are
+    <filename>TXT</filename> and <filename>UTF8</filename></para>
 
     <para><emphasis role="bold">Note: </emphasis>Of course there are other
-    ways and means to create a simple file with tab delimited entries, and
-    they are all simpler, a lot of them much simpler, than the above
-    suggestion. For instance, one can export the contents above as a
-    <filename>CSV</filename>, instead of a <filename>UTF8</filename> text
-    file. Nothing speaks against using Notepad++ on Windows or GEdit on Linux
-    for instance: any text editor, that can handle UTF8 and that can show
-    white space (so that you do not miss the required <keycap>TAB</keycap>
-    characters) can be used.</para>
+    ways and means to create a simple file with tab delimited entries. Nothing
+    speaks against using Notepad++ on Windows, GEdit on Linux for instance or
+    some spreadsheet program for this purpose: any application, that can
+    handle UTF8 and that can show white space (so that you do not miss the
+    required <keycap>TAB</keycap> characters) can be used.</para>
   </section>
 
   <section>
@@ -198,7 +205,7 @@
         <primary>Glossaries</primary>
 
         <secondary>Trados MultiTerm</secondary>
-      </indexterm>Using Trados Multiterm</title>
+      </indexterm>Using Trados MultiTerm</title>
 
     <para>Data exported from Trados MultiTerm can be used as
     <application>OmegaT</application> glossaries without further modification,

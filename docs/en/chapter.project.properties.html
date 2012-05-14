@@ -29,14 +29,13 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Project properties<a class="indexterm" name="d0e3957"></a></h2>
+                  <h2 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Project properties<a class="indexterm" name="d0e3958"></a></h2>
                </div>
             </div>
          </div>
          <div class="toc">
             <dl>
                <dt><span class="section"><a href="chapter.project.properties.html#properties.dialog">1. Properties dialog</a></span></dt>
-               <dt><span class="section"><a href="chapter.project.properties.html#language.modification">2. Modifying project properties</a></span></dt>
             </dl>
          </div>
          <p></p>
@@ -52,7 +51,15 @@
             <p>The <span class="guimenu">Project</span> → <span class="guimenuitem">Properties...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>E</strong></span></strong></span>) dialog is used to define and modify the project folders
                    and languages.
             </p>
-            <div class="figure"><a name="d0e3980"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Project properties window</b></p>
+            <p>It is possible to modify the project properties during a translation
+               session. Note that changes to the project setup may have some
+               consequences, especially, when the project has already been started. Until
+               you have some experience with OmegaT, it is safest to consider all
+                   settings final once the translation has started – unless of course you
+                   realize a major mistake has been made. See the section Preventing data
+                   loss for ways and means of protecting your work.
+            </p>
+            <div class="figure"><a name="d0e3983"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Project properties window</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/NewProject_25.png" alt="Project properties window"></div>
                </div>
@@ -63,84 +70,86 @@
                      <p>An area for setting project source and target languages with
                                 drop-down menus
                      </p>
+                     <p>You can either enter the source and target languages by hand or
+                                use the drop down menu. Bear in mind that changing the languages may
+                                render the currently used translation memories useless since their
+                                language pair may not longer match the new languages.
+                     </p>
                   </li>
                </ul>
             </div>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>A segmentation settings flag</p>
-                  </li>
-               </ul>
-            </div>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>An area for setting project folders</p>
-                  </li>
-               </ul>
-            </div>
-            <p>All the fields are editable. You can either enter the languages by
-                   hand or use the drop down menu. If you enter names of folders that do not
-                   exist yet, <span class="application">OmegaT</span> creates them for you.
-            </p>
-         </div>
-         <div class="section" title="2.&nbsp;Modifying project properties">
-            <div class="titlepage">
-               <div>
-                  <div>
-                     <h2 class="title" style="clear: both"><a name="language.modification"></a>2.&nbsp;Modifying project properties
-                     </h2>
-                  </div>
-               </div>
-            </div>
-            <p>Note that changes to the project setup may have some consequences,
-                   especially, when the project has already been started.
-            </p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Changing source or target
-                                      languages:<a class="indexterm" name="d0e4017"></a></strong></span></p>
-                     <p>Bear in mind that changing the languages may render the
-                                currently used translation memories useless since their language pair
-                                may not longer match the new languages.
+                     <p>the <span class="guilabel">Enable Sentence-level segmentation</span>
+                                check box
+                     </p><a class="indexterm" name="d0e4006"></a><p>The segmentation settings only address the way the source files
+                                are handled by <span class="application">OmegaT</span>. The predominant way
+                                of segmenting the sources is the sentence-level segmenting, so this
+                                check box should in a normal case be left checked.
                      </p>
-                  </li>
-                  <li class="listitem">
-                     <p><span class="bold"><strong>Segmentation modifications:<a class="indexterm" name="d0e4028"></a></strong></span></p>
-                     <p>The segmentation settings only address the way the source files
-                                are handled by <span class="application">OmegaT</span>. They do not modify
-                                the segmentation of already existing translation memories.
-                     </p>
-                     <p>Changes made to the segmentation settings may cause some already
-                                translated segments to be split or merged. This will effectively
-                                return them to the "untranslated" status, as they will no longer match
-                                segments recorded in the project memory, even though their original
-                                translation is still there.
-                     </p>
-                     <p>OmegaT may upgrade old translation memories that did not use
-                                sentence segmentation, but not vice versa. If you decide
+                     <p>In some seldom cases the alternative, i.e. segmenting by
+                                paragraphs, may be preferred. Changing this flag does not modify the
+                                segmentation of already existing translation memories. If you decide
                                 mid-translation to switch from sentence to paragraph translation, the
-                                internal translation memory of the project will not be changed.
+                                internal translation memory of the project will not be changed (OmegaT
+                                may upgrade old translation memories that did not use sentence
+                                segmentation, but not vice versa).
+                     </p>
+                     <p>Changing segmentation settings may cause some already translated
+                                segments to be split or merged. This will effectively return them to
+                                the "untranslated" status, as they will no longer match segments
+                                recorded in the project memory, even though their original translation
+                                is still there.
                      </p>
                   </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="bold"><strong>Changing the folder structure:<a class="indexterm" name="d0e4046"></a></strong></span></p>
-                     <p>In case you decide to modify project folders, keep in mind that
-                                this will not move the contained files from old folders to the new
-                                location.
-                     </p>
+                     <p><span class="guibutton">Segmentation...</span> button<a class="indexterm" name="d0e4026"></a></p>
+                     <p>The segmentation rules are generally valid across all the
+                                projects. The user, however, may need to generate a set of rules,
+                                specific to the project in question. Use this button to open a
+                                dialog,activate the check box <span class="guimenuitem">Project specific
+                                   segmentation rules</span>, then proceed to adjust the
+                                segmentation rules as desired . The new set of rules will be stored
+                                together with the project and will not interfere with the general set
+                                of segmentation rules. To delete project specific Segmentation rules,
+                                uncheck the check box. See chapter <a class="link" href="chapter.segmentation.html" title="Chapter&nbsp;15.&nbsp;Source segmentation">Source Segmentation</a> for more
+                                information on segmentation rules. <span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Hint:</em></span> the set of segmentation rules for a
+                                given project is stored as
+                                <code class="filename">project/omegat/segmentation.conf.</code></p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>Modifying project properties during the
-                                      session:<a class="indexterm" name="d0e4057"></a></strong></span></p>
-                     <p>It is possible to modify the project properties during a
-                                translation session. However, until you have some experience with
-                                OmegaT, it is safest to consider all settings final once the
-                                translation has started – unless of course you realize a major mistake
-                                has been made. See the section Preventing data loss for ways and means
-                                of protecting your work.
+                     <p><span class="guibutton">File Filters...</span> button<a class="indexterm" name="d0e4051"></a></p>
+                     <p>In a similar fashion as above the user can create
+                                project-specific File filters, which will be stored together with the
+                                project and will be valid for the current project only. To create a
+                                project-specific set of file filters, click on the <span class="guibutton">File
+                                   filter ... </span>button, then activate <span class="guimenuitem">Enable
+                                   project specific filters</span> check box in the window, that
+                                opens. A copy of the changed filters configuration will be stored with
+                                the project. To delete project specific file filters, uncheck the
+                                check box. Note that in the menu <span class="guimenuitem">Options-&gt;File
+                                   Filters</span>, the global user filters are changed, not the
+                                project filters. See chapter<a class="link" href="chapter.file.filters.html" title="Chapter&nbsp;7.&nbsp;File Filters"> File
+                                   filters </a>for more on the subject. <span class="emphasis"><em></em></span></p>
+                     <p><span class="emphasis"><em>Hint:</em></span> the set of file filters for a given
+                                project is stored as
+                                <code class="filename">project/omegat/filters.xml.</code></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>An area for setting project folders<a class="indexterm" name="d0e4081"></a></p><a class="indexterm" name="d0e4086"></a><p>if you enter names of folders that do not exist yet,
+                                <span class="application">OmegaT</span> creates them for you. In case you
+                                decide to modify project folders, keep in mind that this will not move
+                                the contained files from old folders to the new location.
                      </p>
                   </li>
                </ul>

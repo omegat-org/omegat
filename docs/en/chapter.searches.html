@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.searches"></a>Chapter&nbsp;17.&nbsp;Searches<a class="indexterm" name="d0e6963"></a></h2>
+                  <h2 class="title"><a name="chapter.searches"></a>Chapter&nbsp;17.&nbsp;Searches<a class="indexterm" name="d0e7047"></a></h2>
                </div>
             </div>
          </div>
@@ -38,8 +38,8 @@
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. Search window</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e6985">1.1. Searching</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7009">1.2. Search location</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7069">1.1. Searching</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7093">1.2. Search location</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Using wild cards</a></span></dt>
@@ -56,7 +56,7 @@
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;17.1.&nbsp;Text search Window<a class="indexterm" name="d0e6972"></a></b></p>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;17.1.&nbsp;Text search Window<a class="indexterm" name="d0e7056"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/TextSearch.png" alt="Text search WindowSearch windowExample"></div>
                </div>
@@ -70,7 +70,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e6985"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e6988"></a></h3>
+                        <h3 class="title"><a name="d0e7069"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e7072"></a></h3>
                      </div>
                   </div>
                </div>
@@ -88,7 +88,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7009"></a>1.2.&nbsp;Search location
+                        <h3 class="title"><a name="d0e7093"></a>1.2.&nbsp;Search location
                         </h3>
                      </div>
                   </div>
@@ -122,9 +122,9 @@
                </div>
                <p>When searching through files (as opposed to translation memories),
                         <span class="application">OmegaT</span> restricts the search to files in
-                        source file formats. Consequently, although OmegaT is
-                        quite able to handle<code class="filename"> tmx</code> files, it does not include
-                        them in the Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7039"></a>Advanced Options</strong></span>, you can combine the search
+                        source file formats. Consequently, although OmegaT is quite able to
+                        handle<code class="filename"> tmx</code> files, it does not include them in the
+                        Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7123"></a>Advanced Options</strong></span>, you can combine the search
                         with the name of the author of the translation and time of the last
                         change made.
                </p>
@@ -134,7 +134,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7049"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7133"></a></h2>
                   </div>
                </div>
             </div>
@@ -148,7 +148,7 @@
                   <li class="listitem">
                      <p>'*' matches zero or more characters, from the current position
                                 in a given word to its end. The search term<code class="literal">'run*'</code>
-                                for example would match words <code class="literal">'run'</code>, 
+                                for example would match words <code class="literal">'run'</code>,
                                 <code class="literal">'runs'</code> and <code class="literal">'running'</code>.
                      </p>
                   </li>
@@ -170,7 +170,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods<a class="indexterm" name="d0e7092"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods<a class="indexterm" name="d0e7176"></a></h2>
                   </div>
                </div>
             </div>
@@ -203,8 +203,7 @@
                                   occurrences of the string <span class="emphasis"><em><code class="literal">open
                                            file</code>,</em></span> as well as <span class="emphasis"><em><code class="literal">file
                                            opened</code>, <code class="literal">open input file</code>, <code class="literal">file
-                                           may not be safe to open</code></em></span>,
-                                  etc.
+                                           may not be safe to open</code></em></span>, etc.
                      </p>
                   </dd>
                </dl>
@@ -226,8 +225,7 @@
                                 search is a powerful way to look for instances of a string. It is
                                 similar to a wild card search, but allows far more flexibility. The
                                 regular expressions used in searches are those supported by Java. See
-                                more in the chapter on regular
-                                Expressions.
+                                more in the chapter on regular Expressions.
                      </p>
                   </li>
                   <li class="listitem">
@@ -251,16 +249,18 @@
             <p>Pressing the search button after entering a string in the search
                    field displays all the segments in the project that include the entered
                    string. As <span class="application">OmegaT</span> handles identical segments as
-                   one single entity, only the first unique segment is shown.
-            </p>
-            <p>The segments are displayed in order of appearance in the project.
-                   Translated segments are displayed with the original text at the top and
-                   the translated text at the bottom, untranslated segments are displayed as
-                   the source only.
+                   one single entity, only the first unique segment is shown. The segments
+                   are displayed in order of appearance in the project. Translated segments
+                   are displayed with the original text at the top and the translated text at
+                   the bottom, untranslated segments are displayed as the source only.
             </p>
             <p>Clicking on a segment opens it in the Editor for modifications. You
                    can then switch back to the Search window for the next segment found, for
                    instance to check and, if necessary, correct the terminology.
+            </p>
+            <p>You may have several Search windows open at the same time. You can
+                   quickly see their contents by looking at their title: it will contain the
+                   search term used. 
             </p>
          </div>
       </div>

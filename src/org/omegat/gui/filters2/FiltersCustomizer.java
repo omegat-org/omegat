@@ -276,7 +276,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         gridBagConstraints.insets = new java.awt.Insets(3, 3, 3, 3);
         getContentPane().add(optionsButton, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(projectSpecificCB, "jCheckBox1");
+        org.openide.awt.Mnemonics.setLocalizedText(projectSpecificCB, OStrings.getString("FILTERSCUSTOMIZER_CHECKBOX_PROJECTSPECIFIC")); // NOI18N
         projectSpecificCB.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         projectSpecificCB.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

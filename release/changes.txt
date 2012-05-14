@@ -13,6 +13,20 @@
   http://sourceforge.net/support/tracker.php?aid=3513384
 
 ----------------------------------------------------------------------
+ OmegaT 2.5.4 update 1
+----------------------------------------------------------------------
+   0 Enhancements
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.4 update 1 vs. 2.5.4
+
+  Bug fixes:
+
+  - When editing project-specific file filters, the checkbox was 
+labelled jCheckBox1 instead of "Enable project specific filters"
+
+----------------------------------------------------------------------
  OmegaT 2.5.4
 ----------------------------------------------------------------------
    6 Enhancements

@@ -1,11 +1,14 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.0
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.0 vs. 2.5.3 
+
+  - Configurable display in match pane
+  http://sourceforge.net/support/tracker.php?aid=2960656
 
   Implemented requests:
 

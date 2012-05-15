@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
+               2012 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -140,7 +141,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                         return;
                     }
                     String fileName = project.isOrphaned(source) ? orphanedFileName : null;
-                    processEntry(null, source, trans.translation, false, fileName);
+                    processEntry(null, source, trans.translation, false, fileName, trans.changer, trans.changeDate, trans.properties);
                     return;
                 }
             });
@@ -153,7 +154,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                     return;
                 }
                 String fileName = project.isOrphaned(source) ? orphanedFileName : null;
-                processEntry(source, source.sourceText, trans.translation, false, fileName);
+                processEntry(source, source.sourceText, trans.translation, false, fileName, trans.changer, trans.changeDate, trans.properties);
                 return;
             }
         });
@@ -162,7 +163,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         for (Map.Entry<String, ExternalTMX> en : memories.entrySet()) {
             for (TMXEntry tmen : en.getValue().getEntries()) {
                 checkEntryChanged();
-                processEntry(null, tmen.source, tmen.translation, false, en.getKey());
+                processEntry(null, tmen.source, tmen.translation, false, en.getKey(), tmen.changer, tmen.changeDate, tmen.properties);
             }
         }
         
@@ -171,7 +172,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             checkEntryChanged();
             if (ste.getSourceTranslation() != null) {
                 processEntry(ste.getKey(), ste.getSrcText(), ste.getSourceTranslation(),
-                        ste.isSourceTranslationFuzzy(), ste.getKey().file);
+                        ste.isSourceTranslationFuzzy(), ste.getKey().file,
+                        "", 0, null);
             }
         }
 
@@ -199,7 +201,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
      *            entry to compare
      */
     protected void processEntry(final EntryKey key, final String source, final String translation, final boolean fuzzy,
-            final String tmxName) {
+            final String tmxName, final String creator, final long creationDate, final Map<String,String> props) {
         Token[] candTokens = tok.tokenizeWords(source, ITokenizer.StemmingMode.MATCHING);
 
         // First percent value - with stemming if possible
@@ -233,7 +235,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             return;
         }
 
-        addNearString(key, source, translation, fuzzy, similarityStem, similarityNoStem, simAdjusted, null, tmxName);
+        addNearString(key, source, translation, fuzzy, similarityStem, similarityNoStem, simAdjusted, null, tmxName, creator, creationDate, props);
     }
 
     /**
@@ -284,7 +286,8 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
      */
     protected void addNearString(final EntryKey key, final String source, final String translation,
             final boolean fuzzy, final int similarity, final int similarityNoStem, final int simAdjusted,
-            final byte[] similarityData, final String tmxName) {
+            final byte[] similarityData, final String tmxName,
+			final String creator, final long creationDate, final Map<String,String> tuProperties) {
         // find position for new data
         int pos = 0;
         for (int i = 0; i < result.size(); i++) {
@@ -323,7 +326,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         }
 
         result.add(pos, new NearString(key, source, translation, fuzzy, similarity, similarityNoStem, simAdjusted,
-                similarityData, tmxName));
+                similarityData, tmxName, creator, creationDate, tuProperties));
         if (result.size() > OConsts.MAX_NEAR_STRINGS) {
             result.remove(result.size() - 1);
         }

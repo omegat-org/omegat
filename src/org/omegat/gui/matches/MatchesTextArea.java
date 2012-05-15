@@ -6,7 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2007 Zoltan Bartko
                2011 John Moran
-               2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel
+               2012 Alex Buloichik, Jean-Christophe Helary, Didier Briel, Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -35,7 +35,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,6 +87,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
     private final List<NearString> matches = new ArrayList<NearString>();
 
     private final List<Integer> delimiters = new ArrayList<Integer>();
+    private final List<Integer> sourcePos = new ArrayList<Integer>();
     private int activeMatch;
 
     private final MainWindow mw;
@@ -123,6 +123,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         activeMatch = -1;
         matches.clear();
         delimiters.clear();
+        sourcePos.clear();
 
         if (newMatches == null) {
             setText("");
@@ -133,11 +134,13 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         delimiters.add(0);
         StringBuffer displayBuffer = new StringBuffer();
 
+        MatchesVarExpansion template = new MatchesVarExpansion(Preferences.getPreferenceDefault(Preferences.EXT_TMX_MATCH_TEMPLATE, MatchesVarExpansion.DEFAULT_TEMPLATE));
+        
         for (int i = 0; i < newMatches.size(); i++) {
             NearString match = newMatches.get(i);
-            displayBuffer.append(MessageFormat.format("{0}) {7}{1}\n{2}\n<{3}/{4}/{5}% {6} >", i + 1,
-                    match.source, match.translation, match.score, match.scoreNoStem, match.adjustedScore,
-                    match.proj, match.fuzzyMark ? (OStrings.getString("MATCHES_FUZZY_MARK") + " ") : ""));
+            MatchesVarExpansion.Result result = template.apply(match, i + 1);
+            displayBuffer.append(result.text);
+            sourcePos.add(result.sourcePos);
 
             if (i < (newMatches.size() - 1))
                 displayBuffer.append("\n\n");
@@ -350,7 +353,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
         byte[] attributes = match.attr;
         for (int i = 0; i < tokens.length; i++) {
             Token token = tokens[i];
-            int tokstart = start + 3 + token.getOffset();
+            int tokstart = start + sourcePos.get(activeMatch) + token.getOffset();
             int toklength = token.getLength();
             if ((attributes[i] & StringData.UNIQ) != 0) {
                 doc.setCharacterAttributes(tokstart, toklength, ATTRIBUTES_CHANGED, false);
@@ -407,6 +410,9 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
             if (e.isPopupTrigger() || e.getButton() == MouseEvent.BUTTON3) {
                 mouseRightClick(clickedItem, e.getPoint());
             }
+            
+            if (e.getButton() == MouseEvent.BUTTON1 && e.getClickCount() > 1)
+                setActiveMatch(clickedItem);
         }
     };
 

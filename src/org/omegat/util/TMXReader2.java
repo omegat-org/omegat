@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2012 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -188,12 +189,12 @@ public class TMXReader2 {
     }
 
     protected void parseTu(StartElement element) throws Exception {
+        currentTu.clear();
+
         currentTu.changeid = getAttributeValue(element, "changeid");
         currentTu.changedate = parseISO8601date(getAttributeValue(element, "changedate"));
         currentTu.creationid = getAttributeValue(element, "creationid");
         currentTu.creationdate = parseISO8601date(getAttributeValue(element, "creationdate"));
-
-        currentTu.clear();
 
         while (true) {
             XMLEvent e = xml.nextEvent();
@@ -572,8 +573,8 @@ public class TMXReader2 {
             changedate = 0;
             creationid = null;
             creationdate = 0;
-            props.clear();
-            tuvs.clear();
+            props = new TreeMap<String, String>(); // do not CLEAR, because it may be shared
+            tuvs = new ArrayList<ParsedTuv>();
             note = null;
         }
     }

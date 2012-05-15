@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
-               2012 Guido Leenders
+               2012 Guido Leenders, Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,6 +27,8 @@ package org.omegat.core.data;
 
 import org.omegat.util.StringUtil;
 
+import java.util.Map;
+ 
 /**
  * Storage for TMX entry.
  * 
@@ -40,17 +42,24 @@ public class TMXEntry {
     public final long changeDate;
     public final String note;
     public final boolean defaultTranslation;
+    public final Map<String,String> properties;
 
     public TMXEntry(String source, String translation, String changer, long changeDate, String note,
-            boolean defaultTranslation) {
+            boolean defaultTranslation, Map<String,String> properties) {
         this.source = source;
         this.translation = translation;
         this.changer = changer;
         this.changeDate = changeDate;
         this.note = note;
         this.defaultTranslation = defaultTranslation;
+        this.properties = properties;
     }
 
+    public TMXEntry(String source, String translation, String changer, long changeDate, String note,
+            boolean defaultTranslation) {
+        this (source, translation, changer, changeDate, note, defaultTranslation, null);
+    }
+	
     public boolean isTranslated() {
         return translation != null;
     }

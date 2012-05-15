@@ -8,7 +8,7 @@
                2008-2009 Didier Briel
                2010 Wildrich Fourie, Antonio Vilei, Didier Briel
                2011 John Moran, Didier Briel
-               2012 Martin Fleurke, Wildrich Fourie, Didier Briel
+               2012 Martin Fleurke, Wildrich Fourie, Didier Briel, Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -246,6 +246,8 @@ public class Preferences {
     public static final String EXT_TMX_SHOW_LEVEL2 = "ext_tmx_show_level2";
     /** External TMX options: Use / for stand-alone tags */
     public static final String EXT_TMX_USE_SLASH = "ext_tmx_use_slash";
+    /** External TMX options: Display template **/
+    public static final String EXT_TMX_MATCH_TEMPLATE = "ext_tmx_match_template";
 
     /** View options: Show all sources in bold */
     public static final String VIEW_OPTION_SOURCE_ALL_BOLD = "view_option_source_all_bold";

@@ -5,6 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Alex Buloichik
+               2012 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -27,15 +28,17 @@ package org.omegat.core.matching;
 
 import org.omegat.core.data.EntryKey;
 
+import java.util.Map;
+
 /**
  * Class to hold a single fuzzy match.
  * 
  * @author Keith Godfrey
  */
 public class NearString {
-    public NearString(final EntryKey key, final String source, final String translation, final boolean fuzzyMark,
-            final int nearScore, final int nearScoreNoStem, final int adjustedScore, final byte[] nearData,
-            final String projName) {
+    public NearString(final EntryKey key, final String source, final String translation, final boolean fuzzyMark, 
+			final int nearScore, final int nearScoreNoStem, final int adjustedScore, final byte[] nearData, 
+			final String projName, final String creator, final long creationDate, final Map<String,String> props) {
         this.key = key;
         this.source = source;
         this.translation = translation;
@@ -46,6 +49,9 @@ public class NearString {
         attr = nearData;
         if (projName != null)
             proj = projName;
+        this.props = props;
+        this.creator = creator;
+        this.creationDate = creationDate;
     }
 
     public EntryKey key;
@@ -65,4 +71,7 @@ public class NearString {
     /** matching attributes of near strEntry */
     public byte[] attr;
     public String proj = "";
+    public Map<String,String> props;
+    public String creator;
+    public long creationDate;	
 }

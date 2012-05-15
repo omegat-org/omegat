@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2010 Alex Buloichik
+               2012 Thomas CORDONNIER
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -87,7 +88,7 @@ public class ExternalTMX {
                         sources, targets);
 
                 for (int i = 0; i < sources.size(); i++) {
-                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt, tu.note, true);
+                    TMXEntry te = new TMXEntry(sources.get(i), targets.get(i), changer, dt, tu.note, true, tu.props);
                     entries.add(te);
                 }
             }

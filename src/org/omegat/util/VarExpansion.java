@@ -48,11 +48,11 @@ public abstract class VarExpansion<Param> {
     // ------------------------------ definitions -------------------
 
     public static final String VAR_SOURCE_TEXT = "${sourceText}";
-    public static final String VAR_SOURCE_LANG = "${sourceLang}";    
-    public static final String VAR_SOURCE_LANG_CODE = "${sourceLangCode}";
     public static final String VAR_TARGET_TEXT = "${targetText}";
-    public static final String VAR_TARGET_LANG = "${targetLang}";    
-    public static final String VAR_TARGET_LANG_CODE = "${targetLangCode}";
+    public static final String VAR_PROJECT_SOURCE_LANG = "${projectSourceLang}";    
+    public static final String VAR_PROJECT_SOURCE_LANG_CODE = "${projectSourceLangCode}";
+    public static final String VAR_PROJECT_TARGET_LANG = "${projectTargetLang}";    
+    public static final String VAR_PROJECT_TARGET_LANG_CODE = "${projectTargetLangCode}";
     public static final String VAR_FILE_NAME = "${fileName}";
     public static final String VAR_FILE_NAME_ONLY = "${fileNameOnly}";
     public static final String VAR_FILE_EXTENSION = "${fileExtension}";	
@@ -72,10 +72,10 @@ public abstract class VarExpansion<Param> {
         // Variables
         if (Core.getProject().isProjectLoaded()) {
             ProjectProperties prop = Core.getProject().getProjectProperties();
-            template = template.replace(VAR_TARGET_LANG, prop.getTargetLanguage().getLanguage());
-            template = template.replace(VAR_TARGET_LANG_CODE, prop.getTargetLanguage().getLanguageCode());
-            template = template.replace(VAR_SOURCE_LANG, prop.getSourceLanguage().getLanguage());
-            template = template.replace(VAR_SOURCE_LANG_CODE, prop.getSourceLanguage().getLanguageCode());
+            template = template.replace(VAR_PROJECT_TARGET_LANG, prop.getTargetLanguage().getLanguage());
+            template = template.replace(VAR_PROJECT_TARGET_LANG_CODE, prop.getTargetLanguage().getLanguageCode());
+            template = template.replace(VAR_PROJECT_SOURCE_LANG, prop.getSourceLanguage().getLanguage());
+            template = template.replace(VAR_PROJECT_SOURCE_LANG_CODE, prop.getSourceLanguage().getLanguageCode());
         }
         
         this.template = template;        

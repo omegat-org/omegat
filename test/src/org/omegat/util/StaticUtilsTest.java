@@ -43,10 +43,12 @@ public class StaticUtilsTest extends TestCase
         super(testName);
     }
 
+    @Override
     protected void setUp() throws Exception
     {
     }
 
+    @Override
     protected void tearDown() throws Exception
     {
     }
@@ -68,8 +70,8 @@ public class StaticUtilsTest extends TestCase
         ArrayList<String> tagList = new ArrayList<String>();
         StaticUtils.buildTagList(str, tagList);
         if (tagList.size()!=2 ||
-                (! tagList.get(0).toString().equals("b0")) ||
-                (! tagList.get(1).toString().equals("/b0")) )
+                (! tagList.get(0).toString().equals("<b0>")) ||
+                (! tagList.get(1).toString().equals("</b0>")) )
             fail("Wrong tags found in '"+str+"': " + tagList.toString());
     }
 

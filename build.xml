@@ -92,7 +92,8 @@
                     doc_src/en/images/tagged_segment.png
                     doc_src/en/images/tagged_segment_target.png
                     doc_src/en/images/MatchesPane.png
-                    src/**/Bundle.properties"/>
+                    src/**/Bundle.properties
+                    release/win32-specific/CustomMessages.ini"/>
         </copy>
         <copy file="release/readme.txt"
               tofile="${l10n.min.dir}/source/readme.utf8"
@@ -115,10 +116,10 @@
         </copy>
         <copy todir="${l10n.max.dir}/source"> 
             <fileset dir="."
-                    includes="doc_src/en/** src/**/Bundle.properties"
+                    includes="doc_src/en/** src/**/Bundle.properties release/win32-specific/CustomMessages.ini"
                     excludes="doc_src/en/index.xml
                     doc_src/en/html/**
-                    doc_src/en/pdf/**"/>
+                    doc_src/en/pdf/**" />
         </copy>
         <copy file="release/readme.txt"
               tofile="${l10n.max.dir}/source/readme.utf8"
@@ -211,7 +212,8 @@
    </target>
 
     <!-- Creates a Windows Installer -->
-    <target name="do-win" depends="init,jar,zip" description="Creates a Windows Installer. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path.">
+    <target name="do-win" depends="init,jar,zip" description="Creates a Windows Installer. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path.
+Custom strings from release\win32-specific must be added manually to the language files.">
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
  
@@ -226,7 +228,8 @@
     </target>
 
     <!-- Creates a Windows Installer with JRE-->
-    <target name="do-win-jre" depends="check-jre" if="jre.exists" description="Creates a Windows Installer with JRE. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and a JRE must be present in ..\\jre\\ ">
+    <target name="do-win-jre" depends="check-jre" if="jre.exists" description="Creates a Windows Installer with JRE. PRE: Inno Setup (http://www.jrsoftware.org/isinfo.php) with all optional language packs must be installed and available on the path, and a JRE must be present in ..\\jre\\ 
+Custom strings from release\win32-specific must be added manually to the language files.">
         <copy todir="dist" file="release/win32-specific/OmegaT.exe"/>
         <copy todir="dist" file="release/win32-specific/OmegaT.l4J.ini"/>
         

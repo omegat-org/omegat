@@ -18,11 +18,15 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.4 update 1
 ----------------------------------------------------------------------
-   0 Enhancements
+   1 Enhancement
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.4 update 1 vs. 2.5.4
+
+  - Windows installer: there's a new option to specify whether the 
+language chosen during installation should be used for OmegaT. If
+Yes, OmegaT.l4J.ini is modified to use that language.
 
   Bug fixes:
 

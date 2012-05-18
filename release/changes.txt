@@ -20,7 +20,7 @@
 ----------------------------------------------------------------------
    0 Enhancements
    1 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.5.4 update 1 vs. 2.5.4
 
@@ -28,6 +28,10 @@
 
   - When editing project-specific file filters, the checkbox was 
 labelled jCheckBox1 instead of "Enable project specific filters"
+
+  Localisation updates:
+
+  - Italian localisation updated to 2.5.4 (UI, readme)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.4

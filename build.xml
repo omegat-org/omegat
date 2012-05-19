@@ -88,10 +88,8 @@
         <copy todir="${l10n.min.dir}/source">
             <fileset dir="." 
                     includes="doc_src/en/InstantStartGuide.xml 
-                    doc_src/en/images/NewProject.png
-                    doc_src/en/images/tagged_segment.png
-                    doc_src/en/images/tagged_segment_target.png
-                    doc_src/en/images/MatchesPane.png
+                    doc_src/en/images/InstantGuide_1.png
+                    doc_src/en/images/InstantGuide_2.png
                     src/**/Bundle.properties
                     release/win32-specific/CustomMessages.ini"/>
         </copy>

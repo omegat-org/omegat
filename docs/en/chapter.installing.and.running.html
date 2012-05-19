@@ -1085,6 +1085,39 @@
                               </ul>
                            </div>
                         </li>
+                        <li class="listitem">
+                           <p><code class="literal">--output-tag-validation-={regexp} </code></p>
+                           <p>When mode has been used, this option will specify the files
+                                          to be processed automatically.. If the parameter is not specified,
+                                          all files will be processed. Here's few typical examples to limit
+                                          your choice:
+                           </p>
+                           <div class="itemizedlist">
+                              <ul class="itemizedlist" type="circle">
+                                 <li class="listitem">
+                                    <p><span class="emphasis"><em><code class="literal">.*\.html</code></em></span></p>
+                                    <p>All HTML files will be translated - note that the period
+                                                       in the usual *.html has to be escaped (\.) as specified by the
+                                                       rules for regular expressions
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><code class="literal">test\.html</code></p>
+                                    <p>Only the file test.html at the root of the source
+                                                       directory will be translated. If there are other files named
+                                                       test.html in other directories, they will be ignored.
+                                    </p>
+                                 </li>
+                                 <li class="listitem">
+                                    <p><code class="literal">dir-10\\test\.html</code></p>
+                                    <p>Only the file test.html in the directory dir-10 will be
+                                                       processed. Again note that the backslash is escaped as
+                                                       well.
+                                    </p>
+                                 </li>
+                              </ul>
+                           </div>
+                        </li>
                      </ul>
                   </div>
                </div>
@@ -1131,7 +1164,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Building <span class="application">OmegaT</span> From Source<a class="indexterm" name="d0e1587"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="building.OmegaT.from.source"></a>7.&nbsp;Building <span class="application">OmegaT</span> From Source<a class="indexterm" name="d0e1613"></a></h2>
                   </div>
                </div>
             </div>

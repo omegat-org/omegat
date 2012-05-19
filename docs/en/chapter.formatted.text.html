@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;11.&nbsp;Working with formatted text<a class="indexterm" name="d0e5435"></a><a class="indexterm" name="d0e5440"></a></h2>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;11.&nbsp;Working with formatted text<a class="indexterm" name="d0e5533"></a><a class="indexterm" name="d0e5538"></a></h2>
                </div>
             </div>
          </div>
@@ -39,8 +39,9 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Tag operations</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Tag group nesting</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Tag group overlapping</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">5. Tag group validation</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">6. Hints for tags management</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e5684">5. Tag validation options</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Tag group validation</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Hints for tags management</a></span></dt>
             </dl>
          </div>
          <p>Formatting information present in the source file usually needs to be
@@ -56,47 +57,42 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5450"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5548"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e5454"></a><span class="bold"><strong>Tag
-                         naming:</strong></span></p>
-            <p>The tags consist of one to three characters and a
-                   number. Unique numbering allows tags, corresponding to each other to be
-                   grouped together and differentiates between tags, that have the same
-                   shortcut character, but are in fact different. The shortcut characters
-                   used try to reflect the underlying meaning of the tag (e.g. b for bold, i
-                   for italics, etc.)
+            <p><a class="indexterm" name="d0e5552"></a><span class="bold"><strong>Tag naming:</strong></span></p>
+            <p>The tags consist of one to three characters and a number. Unique
+                   numbering allows tags, corresponding to each other to be grouped together
+                   and differentiates between tags, that have the same shortcut character,
+                   but are in fact different. The shortcut characters used try to reflect the
+                   underlying meaning of the tag (e.g. b for bold, i for italics,
+                   etc.)
             </p>
-            <p><a class="indexterm" name="d0e5464"></a><span class="bold"><strong>Tag
-                         numbering:</strong></span></p>
-            <p>Tags are numbered incrementally by tag group. "Tag
-                   groups" in this context are a single tag (such as &lt;i0&gt; and
-                   &lt;/i0&gt;). Within a segment, the first group (pair or single) receives
-                   the number 0, the second the number 1 etc. The first example below has 3
-                   tag groups (a pair, a single, and then another pair), the second example
-                   has one group only (a pair).
+            <p><a class="indexterm" name="d0e5562"></a><span class="bold"><strong>Tag numbering:</strong></span></p>
+            <p>Tags are numbered incrementally by tag group. "Tag groups" in this
+                   context are a single tag (such as &lt;i0&gt; and &lt;/i0&gt;). Within a
+                   segment, the first group (pair or single) receives the number 0, the
+                   second the number 1 etc. The first example below has 3 tag groups (a pair,
+                   a single, and then another pair), the second example has one group only (a
+                   pair).
             </p>
-            <p><a class="indexterm" name="d0e5474"></a><span class="bold"><strong>Pairs and
-                         singles:</strong></span></p>
-            <p>Tags are always either singles or paired. Single tags
-                   indicate formatting information that does not affect the surrounding text
-                   (an extra space or line break for example).
+            <p><a class="indexterm" name="d0e5572"></a><span class="bold"><strong>Pairs and singles:</strong></span></p>
+            <p>Tags are always either singles or paired. Single tags indicate
+                   formatting information that does not affect the surrounding text (an extra
+                   space or line break for example).
             </p>
             <p><code class="literal">&lt;b0&gt;&lt;Ctr+N&gt;&lt;/b0&gt;,
                       &lt;br1&gt;&lt;b2&gt;&lt;Enter&gt;&lt;/b2&gt;&lt;segment 2132&gt;
                       </code></p>
-            <p>&lt;br1&gt; is a single tag and does not affect any
-                   surrounding text. Paired tags usually indicate style information that
-                   applies to the text between the opening tag and the closing tag of a pair.
-                   &lt;b0&gt; and &lt;/b0&gt; below are paired and affect the text log.txt.
-                   Note that the opening tag must always come before the corresponding
-                   closing tag:
+            <p>&lt;br1&gt; is a single tag and does not affect any surrounding
+                   text. Paired tags usually indicate style information that applies to the
+                   text between the opening tag and the closing tag of a pair. &lt;b0&gt; and
+                   &lt;/b0&gt; below are paired and affect the text log.txt. Note that the
+                   opening tag must always come before the corresponding closing tag:
             </p>
-            <p>&lt;<code class="literal">Log file
-                      (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking operations and 
-                      errors.&lt;segment 3167&gt;</code></p>
+            <p>&lt;<code class="literal">Log file (&lt;b0&gt;log.txt&lt;/b0&gt;) for tracking
+                      operations and errors.&lt;segment 3167&gt;</code></p>
             <p><span class="application">OmegaT</span> creates its tags before the
                    process of sentence segmenting. Depending upon the segmenting rules, the
                    pair of tags may get separated into two consecutive segments and the tag
@@ -108,7 +104,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e5499"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e5597"></a></h2>
                   </div>
                </div>
             </div>
@@ -118,20 +114,20 @@
                    possible, if certain rules are strictly followed, to deviate from this
                    basic rule.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5508"></a>Tag duplication: </strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5606"></a>Tag duplication: </strong></span></p>
             <p>To duplicate tag groups, just copy them in the position of your
                    choice. Keep in mind that in a pair group, the opening tag must come
                    before the closing tag. The formatting represented by the group you have
                    duplicated will be applied to both sections.
             </p>
             <p>Example:</p>
-            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt;
-                      is going to be duplicated here.&lt;segment 0001&gt; </code></p>
+            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt; is going to be
+                      duplicated here.&lt;segment 0001&gt; </code></p>
             <p>After duplication:</p>
-            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt;
-                      has been &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;segment 0001&gt;
+            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt; has been
+                      &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;segment 0001&gt;
                       </code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5528"></a>Tag group deletion:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5626"></a>Tag group deletion:</strong></span></p>
             <p>To delete tag groups, just remove them from the segment. Keep in
                    mind that a pair group must have both its opening and its closing tag
                    deleted to ensure that all traces of the formatting are properly erased,
@@ -140,17 +136,17 @@
                    file.
             </p>
             <p>Example:</p>
-            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt; is
-                      going to be deleted.&lt;segment 0001&gt; </code></p>
-            <p>After deletion:</p>
-            <p><code class="literal">This formatting has been
+            <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt; is going to be
                       deleted.&lt;segment 0001&gt; </code></p>
+            <p>After deletion:</p>
+            <p><code class="literal">This formatting has been deleted.&lt;segment 0001&gt;
+                      </code></p>
          </div>
          <div class="section" title="3.&nbsp;Tag group nesting">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e5549"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e5647"></a></h2>
                   </div>
                </div>
             </div>
@@ -162,19 +158,19 @@
                    and fail to open.
             </p>
             <p>Example:</p>
-            <p><code class="literal">&lt;b0&gt;Formatting&lt;/b0&gt;
-                      &lt;b1&gt;one&lt;/b1&gt; is going to be nested inside formatting
-                      zero.&lt;segment 0001&gt; </code></p>
+            <p><code class="literal">&lt;b0&gt;Formatting&lt;/b0&gt; &lt;b1&gt;one&lt;/b1&gt; is
+                      going to be nested inside formatting zero.&lt;segment 0001&gt;
+                      </code></p>
             <p>After nesting:</p>
-            <p><code class="literal">&lt;b0&gt;Formatting
-                      &lt;b1&gt;one&lt;/b1&gt;&lt;/b0&gt; has been nested inside formatting
-                      zero.&lt;segment 0001&gt;</code></p>
+            <p><code class="literal">&lt;b0&gt;Formatting &lt;b1&gt;one&lt;/b1&gt;&lt;/b0&gt;
+                      has been nested inside formatting zero.&lt;segment
+                      0001&gt;</code></p>
          </div>
          <div class="section" title="4.&nbsp;Tag group overlapping">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e5569"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e5667"></a></h2>
                   </div>
                </div>
             </div>
@@ -183,25 +179,86 @@
                    translated file not opening at all.
             </p>
             <p>Example:</p>
-            <p><code class="literal">&lt;b0&gt;Formatting&lt;/b0&gt;
-                      &lt;b1&gt;one&lt;/b1&gt; is going to be messed up.&lt;segment 0001&gt;
-                      </code></p>
+            <p><code class="literal">&lt;b0&gt;Formatting&lt;/b0&gt; &lt;b1&gt;one&lt;/b1&gt; is
+                      going to be messed up.&lt;segment 0001&gt; </code></p>
             <p>After a bad manipulation:</p>
-            <p><code class="literal">&lt;b0&gt;Formatting
-                      &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is very messed up now.&lt;end
-                      segment 0001&gt;</code></p>
+            <p><code class="literal">&lt;b0&gt;Formatting &lt;b1&gt;one&lt;/b0&gt; &lt;/b1&gt;is
+                      very messed up now.&lt;end segment 0001&gt;</code></p>
          </div>
-         <div class="section" title="5.&nbsp;Tag group validation">
+         <div class="section" title="5.&nbsp;Tag validation options">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>5.&nbsp;Tag group validation<a class="indexterm" name="d0e5589"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="d0e5684"></a>5.&nbsp;Tag validation options
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>To customize the work with tags, one can set down some of the rules
+                   in the <span class="guimenuitem">Options &gt; Tag validation...</span>
+                   window:
+            </p>
+            <div class="mediaobject"><img src="images/OptionsTabValidation_25.png"></div>
+            <p>The behaviour, stated here, applies to all the source files and not
+                   just to some of the file types, like formatted text.
+            </p>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Printf variables</p>
+                     <p>OmegaT can check that programming variables (like %s for
+                                instance) in the source exist in the translation. You can decide not
+                                to check at all, check for simple printf variables (like %s %d etc) or
+                                for print variables of all types. .
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>check simple java MessageFormat patterns</p>
+                     <p>Activating this check box will cause OmegaT to check if simple
+                                java MessageFormat tags (like {0}) are processed correctly. 
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Text field Custom tags</p>
+                     <p>Entering a regular expression here will cause OmegaT treat the
+                                detected instances as a customer tag. It is checked if the number of
+                                tags and their order is identical, just like it is the case for
+                                omegat-tags.
+                     </p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p>Fragments that should be removed from the translation </p>
+                     <p>One can enter a regular expression which will remove any of its
+                                instances from the source segment - after it has been extracted from
+                                the file and before it is shown in the editor window. 
+                     </p>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <div class="section" title="6.&nbsp;Tag group validation">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Tag group validation<a class="indexterm" name="d0e5724"></a></h2>
                   </div>
                </div>
             </div>
             <p>The validate tags function detects changes to tag sequences (whether
                    deliberate or accidental), and shows the affected segments. Launching this
-                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5598"></a></span> - opens a window containing all segments in
+                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5733"></a></span> - opens a window containing all segments in
                    the file containing suspected broken or bad tags in the translation.
                    Repairing the tags and recreating the target documents is easy with the
                    validate tags function. The window that opens when
@@ -224,11 +281,11 @@
                    will cause problems when the translated document is created.
             </p>
          </div>
-         <div class="section" title="6.&nbsp;Hints for tags management">
+         <div class="section" title="7.&nbsp;Hints for tags management">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>6.&nbsp;Hints for tags management<a class="indexterm" name="d0e5623"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Hints for tags management<a class="indexterm" name="d0e5758"></a></h2>
                   </div>
                </div>
             </div>

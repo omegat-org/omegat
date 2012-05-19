@@ -884,7 +884,8 @@
 
               <entry>Shows the dialogue to modify the text display font. Users
               of old computers who feel window resizing is very slow can try
-              changing the font. See <xref linkend="chapter.font"/>.</entry>
+              changing the font. See font settings in <link
+              linkend="chapter.misc">Miscellanea</link></entry>
             </row>
 
             <row>

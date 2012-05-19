@@ -133,9 +133,11 @@
       least one and possibly several other files. The most important file here
       is the <filename>project_save.tmx, </filename>that is the working
       translation memory for the project. Backups of this file (with extension
-      bak) are added progressively to this subfolder, at the beginning of the
-      translation session, at its end, and while the translation progresses.
-      </para>
+      bak) are added progressively to this subfolder, first at the beginning
+      of the translation session, at its end, and while the translation
+      progresses. This way an inadvertent loss of is averted - see Preventing
+      Data Loss in chapter <link
+      linkend="chapter.misc">Miscellanea.</link></para>
 
       <para>During translation additional files may get created in this
       subdirectory as follows</para>

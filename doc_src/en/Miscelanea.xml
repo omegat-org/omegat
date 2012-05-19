@@ -120,10 +120,10 @@
     <section id="misc.console.mode.option.quiet">
       <title>Quiet option</title>
 
-      <para>An extra command line parameter specific to console
-      mode: <literal>--quiet.</literal> In the quiet mode, less info is
-      logged to the screen. The messages you would usually find in the
-      status bar are not displayed.</para>
+      <para>An extra command line parameter specific to console mode:
+      <literal>--quiet.</literal> In the quiet mode, less info is logged to
+      the screen. The messages you would usually find in the status bar are
+      not displayed.</para>
 
       <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
       /path/to/project --mode=console-translate --quiet</literal></para>
@@ -132,16 +132,16 @@
     <section id="misc.console.mode.option.validatetags">
       <title>Tag validation option</title>
 
-      <para>Another extra command line parameter specific to console
-      mode: <literal>--tag-validation=[abort|warn].</literal> When this 
-      parameter is added, tag validation is done prior to translation/aligning.
-      If the value is <literal>abort</literal>, then on tag errors the errors
-      are printed and the program stops. If the value is <literal>warn</literal>
-      then the errors are printed but OmegaT continues.
-      </para>
+      <para>Another extra command line parameter specific to console mode:
+      <literal>--tag-validation=[abort|warn].</literal> When this parameter is
+      added, tag validation is done prior to translation/aligning. If the
+      value is <literal>abort</literal>, then on tag errors the errors are
+      printed and the program stops. If the value is <literal>warn</literal>
+      then the errors are printed but OmegaT continues.</para>
 
       <para>Usage: <literal>java -jar <application>OmegaT</application>.jar
-      /path/to/project --mode=console-translate --tag-validation=abort</literal></para>
+      /path/to/project --mode=console-translate
+      --tag-validation=abort</literal></para>
     </section>
   </section>
 
@@ -304,8 +304,8 @@
       </listitem>
 
       <listitem>
-        <para>Take particular care when making changes to the files
-        in <literal>/source </literal>while in the middle of a project. If the
+        <para>Take particular care when making changes to the files in
+        <literal>/source </literal>while in the middle of a project. If the
         source file is modified after you have begun translating,
         <application>OmegaT</application> may be unable to find a segment that
         you have already translated.</para>

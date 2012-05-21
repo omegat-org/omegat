@@ -4,7 +4,8 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-           (C) 2009 Didier Briel, Guido Leenders
+               2009 Didier Briel, Guido Leenders
+               2012 Guido Leenders
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -27,7 +28,10 @@
 package org.omegat.filters3.xml.helpandmanual;
 
 import java.util.regex.Pattern;
+import java.util.HashMap;
 
+import org.omegat.filters3.Attribute;
+import org.omegat.filters3.Attributes;
 import org.omegat.filters3.xml.DefaultXMLDialect;
 
 /**
@@ -39,6 +43,12 @@ import org.omegat.filters3.xml.DefaultXMLDialect;
 public class HelpAndManualDialect extends DefaultXMLDialect {
     public static final Pattern HAM_ROOT_TAG = Pattern.compile("topic|map|helpproject");
 
+    /*
+     * A map of attribute-name and attribute value pairs that, if exist in a
+     * tag, indicate that this tag should not be translated
+     */
+    private HashMap<String, String> ignoreTagsAttributes;
+
     public HelpAndManualDialect() {
         defineConstraint(CONSTRAINT_ROOT, HAM_ROOT_TAG);
 
@@ -46,6 +56,39 @@ public class HelpAndManualDialect extends DefaultXMLDialect {
                 "li", });
 
         defineShortcut("link", "li");
+        
+        ignoreTagsAttributes = new HashMap<String, String>();
+        ignoreTagsAttributes.put("TRANSLATE=FALSE", "");
+    }
+
+    private boolean checkIgnoreTags(String key, String value) {
+        return ignoreTagsAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
+    }
+
+    /**
+     * In the Help&Manual filter, content should be translated in the
+     * following condition: The pair attribute-value should not have been
+     * declared as untranslatable in the options
+     *
+     * @param tag
+     *            An XML tag
+     * @param atts
+     *            The attributes associated with the tag
+     *@return <code>false</code> if the content of this tag should be
+     *         translated, <code>true</code> otherwise
+     */
+    @Override
+    public Boolean validateIntactTag(String tag, Attributes atts) {
+        if (atts != null) {
+            for (int i = 0; i < atts.size(); i++) {
+                Attribute oneAttribute = atts.get(i);
+                if (checkIgnoreTags(oneAttribute.getName(), oneAttribute.getValue())) {
+                    return true;
+                }
+            }
+        }
+        // If no key=value pair is found, the tag can be translated
+        return false;
     }
 
 }

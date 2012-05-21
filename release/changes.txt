@@ -18,11 +18,18 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.4 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.4 update 1 vs. 2.5.4
+
+  Implemented requests:
+
+  - Help&Manual: hide content of tags per translate=true/false
+  http://sourceforge.net/support/tracker.php?aid=3528468
+
+  Other enhancements:
 
   - Windows installer: there's a new option to specify whether the 
 language chosen during installation should be used for OmegaT. If

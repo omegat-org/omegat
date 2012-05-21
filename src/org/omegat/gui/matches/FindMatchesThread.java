@@ -229,6 +229,10 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         // Second percent value - without stemming
         int similarityNoStem = FuzzyMatcher.calcSimilarity(distance, strTokensNoStem, candTokensNoStem);
         similarityNoStem -= penalty;
+        if (fuzzy) {
+            // penalty for fuzzy
+            similarityNoStem -= PENALTY_FOR_FUZZY;
+        }
 
         // check if we have chance by first and second percentages
         if (!haveChanceToAdd(similarityStem, similarityNoStem, Integer.MAX_VALUE)) {
@@ -239,6 +243,10 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         // Third percent value - with numbers, tags, etc.
         int simAdjusted = FuzzyMatcher.calcSimilarity(distance, strTokensAll, candTokensAll);
         simAdjusted -= penalty;
+        if (fuzzy) {
+            // penalty for fuzzy
+            simAdjusted -= PENALTY_FOR_FUZZY;
+        }
 
         // check if we have chance by first, second and third percentages
         if (!haveChanceToAdd(similarityStem, similarityNoStem, simAdjusted)) {

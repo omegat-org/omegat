@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2009 Didier Briel
                2011 Guido Leenders, Didier Briel
+               2012 Guido Leenders
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -50,6 +51,8 @@ public class CamtasiaWindowsDialect extends DefaultXMLDialect {
             "Text",
             "TitleName",
             "RichText",
+            "Value" /* Metadata. */,
+            "Project_Notes",
             "JumpURL"
         });
         
@@ -118,6 +121,7 @@ public class CamtasiaWindowsDialect extends DefaultXMLDialect {
             "FadeInEffect",
             "FadeOut",
             "FadeOutEffect",
+            "FieldArrayKey",
             "FillState",
             "FlipOnX",
             "FlipOnY",
@@ -149,8 +153,8 @@ public class CamtasiaWindowsDialect extends DefaultXMLDialect {
             "PowerPointProject",
             "PreserveSize",
             "ProjectID",
-            "Project_MetaData",
-            "Project_Notes",
+            /*"Project_MetaData",*/
+            /*"Project_Notes",*/
             "Project_Settings",
             "QuestionGroup_Array",
             "RectDest_Height",

@@ -18,7 +18,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.4 update 1
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
@@ -28,6 +28,9 @@
 
   - Help&Manual: hide content of tags per translate=true/false
   http://sourceforge.net/support/tracker.php?aid=3528468
+
+  - Camtasia added tags
+  http://sourceforge.net/support/tracker.php?aid=3528472
 
   Other enhancements:
 

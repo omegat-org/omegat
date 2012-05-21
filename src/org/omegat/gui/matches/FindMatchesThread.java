@@ -31,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
@@ -141,8 +143,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                         return;
                     }
                     String fileName = project.isOrphaned(source) ? orphanedFileName : null;
-                    processEntry(null, source, trans.translation, false, fileName, trans.changer, trans.changeDate, trans.properties);
-                    return;
+                    processEntry(null, source, trans.translation, false, 0, fileName, trans.changer, trans.changeDate, trans.properties);
                 }
             });
         }
@@ -154,16 +155,21 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                     return;
                 }
                 String fileName = project.isOrphaned(source) ? orphanedFileName : null;
-                processEntry(source, source.sourceText, trans.translation, false, fileName, trans.changer, trans.changeDate, trans.properties);
-                return;
+                processEntry(source, source.sourceText, trans.translation, false, 0, fileName, trans.changer, trans.changeDate, trans.properties);
             }
         });
 
         // travel by translation memories
+        Pattern SEARCH_FOR_PENALTY = Pattern.compile ("penalty-(\\d+)");
         for (Map.Entry<String, ExternalTMX> en : memories.entrySet()) {
+            int penalty = 0;
+            Matcher matcher = SEARCH_FOR_PENALTY.matcher(en.getKey());
+            if (matcher.find()) {
+                penalty = Integer.parseInt (matcher.group(1));
+            }
             for (TMXEntry tmen : en.getValue().getEntries()) {
                 checkEntryChanged();
-                processEntry(null, tmen.source, tmen.translation, false, en.getKey(), tmen.changer, tmen.changeDate, tmen.properties);
+                processEntry(null, tmen.source, tmen.translation, false, penalty, en.getKey(), tmen.changer, tmen.changeDate, tmen.properties);
             }
         }
         
@@ -172,7 +178,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             checkEntryChanged();
             if (ste.getSourceTranslation() != null) {
                 processEntry(ste.getKey(), ste.getSrcText(), ste.getSourceTranslation(),
-                        ste.isSourceTranslationFuzzy(), ste.getKey().file,
+                        ste.isSourceTranslationFuzzy(), 0, ste.getKey().file,
                         "", 0, null);
             }
         }
@@ -200,13 +206,15 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
      * @param candEntry
      *            entry to compare
      */
-    protected void processEntry(final EntryKey key, final String source, final String translation, final boolean fuzzy,
-            final String tmxName, final String creator, final long creationDate, final Map<String,String> props) {
+    protected void processEntry(final EntryKey key, final String source, final String translation, 
+            final boolean fuzzy, final int penalty, final String tmxName, 
+            final String creator, final long creationDate, final Map<String,String> props) {
         Token[] candTokens = tok.tokenizeWords(source, ITokenizer.StemmingMode.MATCHING);
 
         // First percent value - with stemming if possible
         int similarityStem = FuzzyMatcher.calcSimilarity(distance, strTokensStem, candTokens);
         
+        similarityStem -= penalty;
         if (fuzzy) {
             // penalty for fuzzy
             similarityStem -= PENALTY_FOR_FUZZY;
@@ -220,6 +228,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         Token[] candTokensNoStem = tok.tokenizeWords(source, ITokenizer.StemmingMode.NONE);
         // Second percent value - without stemming
         int similarityNoStem = FuzzyMatcher.calcSimilarity(distance, strTokensNoStem, candTokensNoStem);
+        similarityNoStem -= penalty;
 
         // check if we have chance by first and second percentages
         if (!haveChanceToAdd(similarityStem, similarityNoStem, Integer.MAX_VALUE)) {
@@ -229,6 +238,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
         Token[] candTokensAll = tok.tokenizeAllExactly(source);
         // Third percent value - with numbers, tags, etc.
         int simAdjusted = FuzzyMatcher.calcSimilarity(distance, strTokensAll, candTokensAll);
+        simAdjusted -= penalty;
 
         // check if we have chance by first, second and third percentages
         if (!haveChanceToAdd(similarityStem, similarityNoStem, simAdjusted)) {

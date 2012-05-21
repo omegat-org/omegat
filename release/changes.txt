@@ -1,7 +1,7 @@
 ----------------------------------------------------------------------
  OmegaT 2.6.0
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -14,6 +14,9 @@
 
   - Online team projects
   http://sourceforge.net/support/tracker.php?aid=3513384
+
+  - Apply penalties to external TMXs
+  http://sourceforge.net/support/tracker.php?aid=3528575
 
 ----------------------------------------------------------------------
  OmegaT 2.5.4 update 1

@@ -993,6 +993,41 @@
               </listitem>
             </itemizedlist>
           </listitem>
+
+          <listitem>
+            <para><literal>--output-tag-validation-={regexp} </literal></para>
+
+            <para>When mode has been used, this option will specify the files
+            to be processed automatically.. If the parameter is not specified,
+            all files will be processed. Here's few typical examples to limit
+            your choice:</para>
+
+            <itemizedlist>
+              <listitem>
+                <para><emphasis><literal>.*\.html</literal></emphasis></para>
+
+                <para>All HTML files will be translated - note that the period
+                in the usual *.html has to be escaped (\.) as specified by the
+                rules for regular expressions</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>test\.html</literal></para>
+
+                <para>Only the file test.html at the root of the source
+                directory will be translated. If there are other files named
+                test.html in other directories, they will be ignored.</para>
+              </listitem>
+
+              <listitem>
+                <para><literal>dir-10\\test\.html</literal></para>
+
+                <para>Only the file test.html in the directory dir-10 will be
+                processed. Again note that the backslash is escaped as
+                well.</para>
+              </listitem>
+            </itemizedlist>
+          </listitem>
         </itemizedlist>
       </section>
 

@@ -39,7 +39,7 @@
 
   <para>You can enable project specific filters via the <emphasis
   role="bold">Options → Properties...</emphasis> . Klick on <guibutton>File
-  Filters</guibutton> button and activate the checkbox <guimenuitem>Enable
+  Filters</guibutton> button and activate the check box <guimenuitem>Enable
   project specific filters</guimenuitem><indexterm class="singular">
       <primary>File filters</primary>
 
@@ -61,7 +61,7 @@
 
     <para>This dialog lists available file filters. Should you wish not to use
     OmegaT to translate files of a certain type, you can turn off the
-    corresponding filter by unticking the check box beside its name. OmegaT
+    corresponding filter by deactivating the check box beside its name. OmegaT
     will then omit the appropriate files while loading projects, and will copy
     them unmodified when creating target documents. When you wish to use the
     filter again, just tick the check box. Click <emphasis
@@ -132,15 +132,23 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Skip text matching regular expression</emphasis>: the
-        text matching the regular expression will be skipped.</para>
+        text matching the regular expression gets skipped. It is shown
+        rendered red in the tag validator. Text in source segment that matches
+        is shown in italic.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
         <para><emphasis>Do not translate the content attribute of meta-tags
-        ... :</emphasis> the attribute key-value pairs, separated by commas,
-        will be left untranslated</para>
+        ... :</emphasis> </para>
+
+        <para>It is sometimes useful to be able make some tags untranslatable
+        based on the value of attributes. E.g., <literal>&lt;div
+        class="hide"&gt; &lt;span translate="no"&gt;</literal> You can define
+        key-value pairs for tags to be left untranslated. For the example
+        above, the field would contain: <literal>class=hide, translate=no
+        </literal></para>
       </listitem>
     </itemizedlist>
 
@@ -387,7 +395,7 @@
       configuration of the filter, click <emphasis
       role="bold">Defaults.</emphasis> You may also modify the name directly
       in the target filename pattern field of the file filters dialog. The
-      Edit Pattern Dialog offers the following options:</para>
+      Edit Pattern Dialog offers among others the following options:</para>
 
       <itemizedlist>
         <listitem>
@@ -401,6 +409,11 @@
         <listitem>
           <para><literal>${nameOnly}</literal>– allows you to insert only the
           name of the source file without the extension.</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>${extension} </literal>- the original file
+          extension</para>
         </listitem>
       </itemizedlist>
 
@@ -421,14 +434,83 @@
       <itemizedlist>
         <listitem>
           <para><literal>${targetLanguageCode}</literal> – the target language
-          only ("XX").</para>
+          - only "XX"</para>
         </listitem>
       </itemizedlist>
 
       <itemizedlist>
         <listitem>
-          <para><literal>${targetCountryCode}</literal>– the target country
-          only ("YY").</para>
+          <para><literal>${targetCountryCode}</literal>– the target country -
+          only "YY"</para>
+        </listitem>
+
+        <listitem>
+          <para><literal>$(timestamp-????)</literal> - system date time at
+          generation time in various patterns</para>
+
+          <para>See <ulink
+          url="http://docs.oracle.com/javase/1.4.2/docs/api/java/text/SimpleDateFormat.html">Oracle
+          documentation</ulink> for examples of the "SimpleDateFormat"
+          patterns</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-os-name} - operating system of the computer
+          used</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-user-name) - system user name</para>
+        </listitem>
+
+        <listitem>
+          <para>${system-host-name} - system host name</para>
+        </listitem>
+
+        <listitem>
+          <para>${file-source-encoding} - source file encoding</para>
+        </listitem>
+
+        <listitem>
+          <para>${file-target-encoding} - target file encoding</para>
+        </listitem>
+
+        <listitem>
+          <para>${targetLocaleLCID) - Microsoft target locale</para>
+        </listitem>
+      </itemizedlist>
+
+      <para>Additional variants are available for variables ${nameOnly} and
+      ${Extension}. In case the file name has ambivalent name, one can apply
+      variables of the form <literal>$(name only</literal><emphasis>-number of
+      extensions</emphasis>) and
+      <literal>${extension</literal>-<emphasis>number of extensions}
+      </emphasis>. If for example the original file is named Document.xx.docx,
+      the following variables will give the following results:</para>
+
+      <itemizedlist>
+        <listitem>
+          <para>${nameOnly-0} Document</para>
+        </listitem>
+
+        <listitem>
+          <para>${nameOnly-1} Document.xx</para>
+        </listitem>
+
+        <listitem>
+          <para>${nameOnly-2} Document.xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-0} docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-1} xx.docx</para>
+        </listitem>
+
+        <listitem>
+          <para>${extension-2} Document.xx.docx</para>
         </listitem>
       </itemizedlist>
     </section>

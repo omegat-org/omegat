@@ -79,7 +79,9 @@
 
       <para><literal> --mode=console-translate \</literal></para>
 
-      <para><literal> --source-pattern={regexp}</literal></para>
+      <para><literal> --source-pattern={regexp} \</literal></para>
+
+      <para><literal> --tag-validation=[block|warn] </literal></para>
 
       <para><emphasis role="bold">Explanation:</emphasis></para>
 
@@ -110,9 +112,16 @@
         </listitem>
 
         <listitem>
-          <para>--source-pattern={regexp} The files to be translated can be
-          specified this way. Here is an example of the regular expression:
-          <filename>test\.html</filename></para>
+          <para><literal>--source-pattern={regexp} </literal>The files to be
+          translated can be specified this way. Here is an example of the
+          regular expression: <filename>test\.html</filename></para>
+        </listitem>
+
+        <listitem>
+          <para><literal>--tag-validation=[abort|warn] </literal> On abort,
+          the program is aborted when tag validation finds errors. On warn the
+          errors are printed but the program continues. In all other cases no
+          tag validation is done.</para>
         </listitem>
       </itemizedlist>
     </section>

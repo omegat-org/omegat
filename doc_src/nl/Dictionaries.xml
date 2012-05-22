@@ -94,7 +94,7 @@
 
     <itemizedlist>
       <listitem>
-        <para>Controleer of de bestanden van het woordenboek in de map (of in één van de submappen daarvan) staan. Controleer in <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
+        <para>Controleer of uw bestanden van het woordenboek in de juiste map (of in één van de submappen daarvan) staan. Controleer in <menuchoice> <shortcut> <keycombo> <keycap><indexterm class="singular">
                     <primary>Sneltoetsen</primary> <secondary>Ctrl+E - Projecteigenschappen</secondary>
                   </indexterm>Ctrl</keycap> <keycap>E</keycap> </keycombo> </shortcut> <guimenu>Project</guimenu><guimenuitem>eigenschappen</guimenuitem> </menuchoice>.</para>
       </listitem>

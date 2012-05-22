@@ -449,6 +449,14 @@
               <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Proxyserver - Poortnummer</tertiary>
             </indexterm>Het poortnummer dat uw systeem gebruikt om toegang te krijgen tot de proxyserver.</para>
         </listitem>
+
+        <listitem>
+          <para><emphasis role="bold">Google Translate V2 </emphasis></para>
+
+          <para><emphasis role="bold">-Dgoogle.api.key=A123456789B123456789C123456789D12345678 </emphasis><emphasis role="bold"><indexterm class="singular">
+              <primary>OmegaT uitvoeren</primary> <secondary>Argumenten voor bestand om op te starten</secondary> <tertiary>Google Translate V2</tertiary>
+            </indexterm></emphasis> Indien u bent geabonneerd op de services van Google Translate, dient u hier uw eigen private Google API-sleutel in te voeren. Onthoud dat de sleutel 38 tekens lang is.</para>
+        </listitem>
       </itemizedlist>
 
       <para>Argumenten mogen worden gecombineerd: Voor het starten van <application>OmegaT</application> met alle hierboven genoemde voorbeelden zou de opdracht zijn:</para>
@@ -578,12 +586,20 @@
         </itemizedlist>
       </section>
 
-      <section id="console.mode.extra.options">
+      <section id="console.mode.option.quiet">
         <title>optie Quiet</title>
 
-        <para>Er is één extra parameter voor de opdrachtregel, specifiek voor de console-modus: <literal>--quiet. </literal>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
+        <para>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus:  <literal>--quiet.</literal>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
 
-        <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --quiet</literal></para>
+        <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --mode=console-translate --quiet</literal></para>
+      </section>
+      
+      <section id="console.mode.option.validatetags">
+        <title>Optie Tags valideren</title>
+
+        <para>Een andere parameter voor de opdrachtregel, specifiek voor de console-modus: <literal>--tag-validation=[abort|warn].</literal> Als deze parameter wordt toegevoegd, wordt het valideren van tags toegepast voorafgaande aan vertalen/uitlijnen. Als de waarde <literal>abort</literal> is dan worden bij tagfouten de fouten afgedrukt en het programma stopt. Als de waarde <literal>warn</literal> is dan worden fouten afgedrukt maar OmegaT gaat door.</para>
+
+        <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --mode=console-translate --tag-validation=abort</literal></para>
       </section>
     </section>
   </section>

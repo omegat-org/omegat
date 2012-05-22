@@ -18,6 +18,10 @@
       <listitem>
         <para>Didier Briel: ik zou het niet hebben kunnen doen zonder het geduld en de voortdurende hulp van Didier met de details van DocBook. Niet te vergeten zijn zorg en zorgvuldigheid voor het intact en in goede orde houden van de opgeslagen dingen.</para>
       </listitem>
+
+      <listitem>
+        <para>Samuel Murray: voor het hoofdstuk ter introductie &quot;OmegaT gebruiken in 5 minuten&quot;.</para>
+      </listitem>
     </itemizedlist>
 
     <itemizedlist>
@@ -28,15 +32,11 @@
 
     <itemizedlist>
       <listitem>
-        <para>Jean-Christophe Helary: speciale dank aan JC voor zijn bondige beschrijving om OmegaT uit te voeren en van de parameters voor de opdrachtregel.</para>
+        <para>Jean-Christophe Helary: speciale dank aan JC voor zijn bondige beschrijving om OmegaT uit te voeren, de parameters voor de opdrachtregel en alle andere details, die ik nog moet ontdekken.</para>
       </listitem>
 
       <listitem>
-        <para>Samual Murray: zijn &quot;OmegaT gebruiken in 5 minuten!&quot;, dat enige tijd geleden diende als startpunt voor het hoofdstuk &quot;gids Snel starten&quot;, verdient hier een verdiende vermelding.</para>
-      </listitem>
-
-      <listitem>
-        <para>Laatste maar niet de minste: mijn dank aan alle deelnemers aan de zoekmachine voor OmegaT documentatie (<ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617">OmegaT documentation tracker</ulink>) voor alle inconsistente dingen die werden gevonden in eerdere versies van de documentatie. Blijf er mee doorgaan!</para>
+        <para>Laatste maar niet de minste: mijn dank aan alle deelnemers aan de <ulink url="http://sourceforge.net/tracker/?group_id=68187&amp;atid=912617">zoekmachine voor OmegaT documentatie</ulink> voor alle inconsistente dingen die werden gevonden in eerdere versies van de documentatie. Blijf er mee doorgaan!</para>
       </listitem>
     </itemizedlist>
   </section>

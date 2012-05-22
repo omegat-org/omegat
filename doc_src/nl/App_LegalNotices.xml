@@ -13,7 +13,7 @@
 
     <para><emphasis role="bold">Auteursrechten</emphasis></para>
 
-    <para>De met <application>OmegaT</application> 2.5 gedistribueerde documentatie is inclusief de gebruikershandleiding en het readme.txt document. Voor de documentatie bestaat Copyright ©2011 Vito Smolej. De Gids Snel starten is een voortgaande ontwikkeling van de Instant Start Guide door Samuel Murray, Copyright ©2005-2008.</para>
+    <para>De met <application>OmegaT</application> 2.5 gedistribueerde documentatie is inclusief de gebruikershandleiding en het readme.txt document. Voor de documentatie bestaat Copyright ©2011 Vito Smolej. De auteur van het hoofdstuk <emphasis>OmegaT gebruiken in 5 minuten!</emphasis> is Samuel Murray, Copyright ©2005-20012.</para>
 
     <para><emphasis role="bold">Distributie en aanpassingen</emphasis></para>
 
@@ -31,7 +31,14 @@
 
     <para><emphasis role="bold">Auteursrechten</emphasis></para>
 
-    <para><emphasis role="bold"><application>OmegaT</application> 2.5</emphasis> is Copyright © 2000-2011 Keith Godfrey, Maxym Mykhalchuk, Zoltan Bartko, Didier Briel, Kim Bruning, Alex Buloichik, Sandra Jean Chua, Martin Fleurke, Thomas Huriaux, Fabián Mandelbaum, Arno Peters, Henry Pijffers, Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Rashid Umarov, Antonio Vilei en Martin Wunderlich.</para>
+    <para><emphasis role="bold"><application>OmegaT</application>
+    2.5</emphasis> is Copyright © 2000-2012 Keith Godfrey, Maxym Mykhalchuk,
+    Zoltan Bartko, Didier Briel, Kim Bruning, Alex Buloichik, Thomas Cordonnier, 
+    Sandra Jean Chua, Martin Fleurke, Jean-Christophe Helary, Thomas Huriaux, 
+    Hans-Peter Jacobs, Ibai Lakunza Velasco, Guido Leenders, 
+    Fabián Mandelbaum, John Moran, Arno Peters, Henry Pijffers, 
+    Briac Pilpré, Tiago Saboga, Andrzej Sawuła, Benjamin Siband, Rashid Umarov, 
+    Antonio Vilei, Martin Wunderlich and Michael Zakharov.</para>
 
     <para><emphasis role="bold">Distributie en aanpassingen</emphasis></para>
 

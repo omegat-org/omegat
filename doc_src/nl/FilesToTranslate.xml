@@ -63,6 +63,18 @@
         </listitem>
       </itemizedlist>
 
+        <itemizedlist>
+          <listitem>
+            <para>SubRip titelbestanden (*.srt)</para>
+          </listitem>
+        </itemizedlist>
+        
+       <itemizedlist>
+        <listitem>
+          <para>Magento CE Locale CSV-bestanden (*.csv)</para>
+        </listitem>
+      </itemizedlist>
+
       <para>Andere platte-tekst bestanden kunnen worden behandeld door <application>OmegaT</application> door hun bestandstype te koppelen aan een ondersteund bestandstype (bijvoorbeeld .pod-bestanden zouden kunnen worden gekoppeld aan het ASCII tekstfilter) en ze voor te bewerken met specifieke segmentatieregels.</para>
     </section>
 
@@ -109,10 +121,6 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>SubRip titelbestanden (*.srt)</para>
-          </listitem>
-        </itemizedlist><itemizedlist>
-          <listitem>
             <para>ResX-bestanden (*.resx)</para>
           </listitem>
         </itemizedlist><itemizedlist>
@@ -146,6 +154,10 @@
           <listitem>
             <para>Wordfast TXML (*.txml)</para>
           </listitem>
+          <listitem>
+            <para>Camtasia voor Windows (*.camproj)</para>
+          </listitem>
+
         </itemizedlist></para>
 
       <para>Andere opgemaakte tekst-bestanden kunnen worden afgehandeld door OmegaT door hun bestandstype te koppelen aan een ondersteund bestandstype, er van uitgaande dat de overeenkomende segmentatieregels ze juist zullen segmenteren.</para>

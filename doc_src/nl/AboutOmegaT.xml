@@ -82,7 +82,7 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">Zoeken</emphasis> en<emphasis role="bold"> </emphasis><emphasis role="bold">Reguliere uitdrukkingen</emphasis>: Zoeken in OmegaT kan zo eenvoudig zijn als &quot;<emphasis>som de segmenten op die </emphasis><emphasis>het woord 'kangoeroe' in de bron bevatten&quot;. </emphasis> Zij mogen ook complex zijn, om het bijvoorbeeld mogelijk te maken te zoeken naar segmenten waarin de doeltekst twee of meer opeenvolgende spaties bevat. In dat geval zou de reguliere uitdrukking ^s^s+ worden gebruikt te zoeken en de betrokken segmenten op te sommen. Reguliere uitdrukkingen worden ook uitgebreid in de segmentatieregels gebruikt.</para>
+        <para><emphasis role="bold">Zoeken</emphasis> en<emphasis role="bold"> </emphasis><emphasis role="bold">Reguliere uitdrukkingen</emphasis>: Zoeken in OmegaT kan zo eenvoudig zijn als &quot;<emphasis>som de segmenten op met </emphasis><emphasis>het woord 'kangoeroe'&quot;. </emphasis> Zij mogen ook complex zijn, om het bijvoorbeeld mogelijk te maken te zoeken naar segmenten met twee of meer opeenvolgende spaties. In dat geval zou de reguliere uitdrukking ^s^s+ worden gebruikt te zoeken en de betrokken segmenten op te sommen. Reguliere uitdrukkingen worden ook uitgebreid in de segmentatieregels gebruikt.</para>
       </listitem>
 
       <listitem>
@@ -111,6 +111,10 @@
         <itemizedlist>
           <listitem>
             <para><emphasis role="bold">Sneltoetsen toetsenbord</emphasis>: de lijst met sneltoetsen die worden gebruikt bij het bewerken</para>
+          </listitem>
+
+          <listitem>
+            <para><emphasis role="bold">Aanpassen van sneltoetsen:</emphasis> sneltoetsen kunnen worden aangepast om te voldoen aan uw persoonlijke voorkeuren</para>
           </listitem>
         </itemizedlist>
 

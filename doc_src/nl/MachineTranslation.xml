@@ -20,9 +20,11 @@
         <primary>Machinevertaling</primary> <secondary>Google Translate</secondary>
       </indexterm></title>
 
-    <para>Google Translate is de service, die wordt aangeboden door Google, om zinnen, websites en complete teksten te vertalen tussen een nog steeds groeiend aantal talen. Op het moment van schrijven bevat de lijst meer dan 50 talen, van Albanees tot Jiddisch, inclusief natuurlijk alle grote talen.</para>
+    <para>Google Translate is een service waarvoor betaald moet worden en die wordt aangeboden door Google, voor het vertalen van zinnen, websites en complete teksten tussen een nof steeds groeiend aantal talen. Op het moment van schrijven bevat de lijst meer dan 50 talen, van Albanees tot Jiddisch, inclusief natuurlijk alle grote talen. De huidige versie van de service is, op het moment van schrijven, gebaseerd op het gebruiken ervan, met een prijs van 20 USD per miljoen tekens.<emphasis role="bold"/></para>
 
-    <para>De kwaliteit van de vertaling is aan de ene kant natuurlijk afhankelijk van het reservoir aan teksten in de doeltaal en de beschikbaarheid van hun meertalige versies, aan de andere kant ook van de kwaliteit van de gebouwde modellen. Het is haast wel zeker dat, hoewel de kwaliteit in sommige gevallen onvoldoende kan zijn, het uiteindelijk mettertijd beter zal worden en niet slechter.</para>
+    <para><emphasis role="bold">Belangrijk: </emphasis>Google Translate API v2 vereist rekeninggegevens voor alle accounts vóórdat u de service kunt gebruiken (zie <ulink url="http://code.google.com/intl/en-US/apis/language/translate/v2/pricing.html">Pricing and Terms of Service</ulink> voor meer informatie). U gebruikt uw eigen private unieke sleutel, die door Google aan u is verzonden toen u zich registreerde bij de service, om uzelf te identificeren als een geldige gebruiker voor de services van Google. Bekijk hoofdstuk <link linkend="chapter.installing.and.running">Installeren en uitvoeren van OmegaT</link>, gedeelte OmegaT starten vanaf de opdrachtregel, voor details om deze sleutel aan de omgeving van OmegaT toe te voegen.</para>
+
+    <para>De kwaliteit van de vertaling is aan de ene kant afhankelijk van het reservoir aan teksten in de doeltaal en de beschikbaarheid van hun meertalige versies, aan de andere kant ook van de kwaliteit van de gebouwde modellen. Het is haast wel zeker dat, hoewel de kwaliteit in sommige gevallen onvoldoende kan zijn, het uiteindelijk mettertijd beter zal worden en niet slechter.</para>
   </section>
 
   <section>
@@ -109,6 +111,14 @@
     <itemizedlist>
       <listitem>
         <para>Wat is het taalpaar dat u nodig hebt? Controleer of de geselecteerde service het aanbiedt.</para>
+      </listitem>
+
+      <listitem>
+        <para>Google Translate werkt niet: controleer Opties &gt; Machinevertaling: de service Google Translate is gelabeld Google Translate V2. De oudere versie van de service, gelabeld &quot;Google Translate&quot; en beschikbaar in verouderde versies van OmegaT, is vervallen en werkt niet meer.</para>
+      </listitem>
+
+      <listitem>
+        <para>&quot;Google Translate gaf HTTP antwoordcode: 403 terug ...&quot;: controleer of de sleutel van 38 tekens, ingevoerd in het bestand pinfo.list, juist is. Controleer of de <ulink url="https://developers.google.com/translate/v2/faq">service Translate API </ulink>geactiveerd is.</para>
       </listitem>
     </itemizedlist>
   </section>

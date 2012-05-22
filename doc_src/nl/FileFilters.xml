@@ -46,7 +46,9 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Alineasegmentatie bij regeleinden, lege regels of nooit:</emphasis> als regels voor zinsegmentatie actief zijn, zal de tekst verder gesegmenteerd worden op grond van de hier geselecteerde optie.</para>
+        <para><emphasis>Alineasegmentatie op regeleinden, lege regels of nooit:</emphasis></para>
+
+        <para>als regels voor zinsegmentatie actief zijn, zal de tekst verder worden gesegmenteerd overeenkomstig de hier geselecteerde optie.</para>
       </listitem>
     </itemizedlist>
 
@@ -54,7 +56,9 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Sta blanco vertalingen in het bronbestand toe:</emphasis> Indien ingeschakeld zal, wanneer een PO-segment (wat een gehele alinea kan zijn) niet is vertaald, de vertaling leeg zijn in het doelbestand. Technisch gezien zal <code>msgstr</code> leeg zijn. Het staat standaard aan, omdat dit het standaard gedrag is voor PO-bestanden. Indien de optie is uitgeschakeld, zal de brontekst worden gekopieerd naar het doelsegment.</para>
+        <para><emphasis>Blanco vertalingen in het doelbestand toestaan</emphasis>:</para>
+
+        <para>Indien ingeschakeld zal, wanneer een PO-segment (wat een gehele alinea kan zijn) niet is vertaald, de vertaling leeg zijn in het doelbestand. Technisch gesproken zal het segment <code>msgstr</code> in het PO-doelbestand, indien gemaakt, leeg zijn. Het staat standaard aan, omdat dit het standaard gedrag is voor PO-bestanden. Indien de optie is uitgeschakeld, zal de brontekst worden gekopieerd naar het doelsegment.</para>
       </listitem>
     </itemizedlist>
 
@@ -62,25 +66,25 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Vertaal de volgende attributen:</emphasis> De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.</para>
+        <para><emphasis>Vertaal de volgende attributen</emphasis>- de geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Start een nieuwe alinea bij:</emphasis> De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.</para>
+        <para><emphasis>Start een nieuwe alinea bij: De &lt;br&gt;</emphasis> HTML-tag zal een alinea voor segmentatiedoeleinden maken.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan:</emphasis> De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.</para>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Vertaal het attribuut 'content' van metatags niet: ... : de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden</para>
+        <para><emphasis>Vertaal het attribuut 'content' van metatags niet: ... :</emphasis> de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden</para>
       </listitem>
     </itemizedlist>
 
@@ -90,25 +94,25 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Word:</emphasis><emphasis> <emphasis><emphasis>Niet-zichtbare tekst met instructies, Notities, Voetnoten, Eindnoten, Voetteksten</emphasis></emphasis></emphasis></para>
+        <para><emphasis role="bold">Word:</emphasis> Niet-zichtbare tekst met instructies, Notities, Voetnoten, Eindnoten, Voetteksten</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Excel: </emphasis><emphasis>Notities, Werkbladnamen</emphasis></para>
+        <para><emphasis role="bold">Excel: </emphasis>Notities, Werkbladnamen</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Powerpoint</emphasis><emphasis>: Dianotities, Diamodellen, Dia-lay-outs</emphasis></para>
+        <para><emphasis role="bold">Powerpoint</emphasis>: Dianotities, Diamodellen, Dia-lay-outs</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis role="bold">Globaal:</emphasis> <emphasis>Diagrammen, Tekeningen, Wordart</emphasis></para>
+        <para><emphasis role="bold">Globaal:</emphasis> Grafieken, Diagrammen, Tekeningen, WordArt</para>
       </listitem>
     </itemizedlist>
 
@@ -118,11 +122,11 @@
 
         <itemizedlist>
           <listitem>
-            <para><emphasis>Hoeveelheid tags:</emphasis> Indien geselecteerd zullen tags, zonder vertaalbare tekst er tussen, worden samengevoegd tot enkele tags.</para>
+            <para><emphasis>Hoeveelheid tags</emphasis>: Indien geselecteerd zullen tags, zonder vertaalbare tekst er tussen, worden samengevoegd tot enkele tags.</para>
           </listitem>
 
           <listitem>
-            <para><emphasis>Spaties voor alle tags behouden:</emphasis> Indien geselecteerd zal &quot;witruimte&quot; (d.i. spaties en newlines) worden behouden, zelfs als dat niet technisch is ingesteld in het document.</para>
+            <para><emphasis>Spaties voor alle tags behouden</emphasis>: Indien geselecteerd zal &quot;witruimte&quot; (d.i. spaties en nieuwe regels) worden behouden, zelfs als dat niet technisch is ingesteld in het document.</para>
           </listitem>
         </itemizedlist>
       </listitem>
@@ -132,33 +136,31 @@
 
     <itemizedlist>
       <listitem>
-        <para>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</para>
-
-        <para><emphasis>Altijd (standaard), Alleen als (X)HTML-bestand een kop heeft, Alleen als (X)HTML-bestand een codering-declaratie heeft, Nooit</emphasis></para>
+        <para><emphasis>Codering-declaratie aan HTML- en XHTML-bestanden toevoegen of herschrijven</emphasis>: Altijd (standaard), Alleen als (X)HTML-bestand een kop heeft, Alleen als (X)HTML-bestand een codering-declaratie heeft, Nooit</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Vertaal de volgende attributen:</emphasis> De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.</para>
+        <para><emphasis>Vertaal de volgende attributen</emphasis>: De geselecteerde attributen zullen als segmenten in het venster Bewerken verschijnen.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Start een nieuwe alinea bij:</emphasis> De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.</para>
+        <para><emphasis>Start een nieuwe alinea bij</emphasis>: De &lt;br&gt; HTML-tag zal een alinea voor segmentatiedoeleinden maken.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan: </emphasis>De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.</para>
+        <para><emphasis>Tekst die overeenkomt met reguliere uitdrukking overslaan</emphasis>: De tekst die overeenkomt met de reguliere uitdrukking zal worden overgeslagen.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Vertaal het attribuut 'content' van metatags niet: ... : de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden</para>
+        <para><emphasis>Vertaal het attribuut 'content' van metatags niet</emphasis> ...: de 'sleutel-waarden'-paren van het attribuut, gescheiden door komma's, zullen niet vertaald worden</para>
       </listitem>
     </itemizedlist>
 
@@ -166,7 +168,9 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Alineasegmentatie bij regeleinden, lege regels of nooit:</emphasis> als regels voor zinsegmentatie actief zijn, zal de tekst verder gesegmenteerd worden op grond van de hier geselecteerde optie.</para>
+        <para><emphasis>Alineasegmentatie op regeleinden, lege regels of nooit</emphasis>:</para>
+
+        <para>als regels voor zinsegmentatie actief zijn, zal de tekst verder worden gesegmenteerd overeenkomstig de hier geselecteerde optie.</para>
       </listitem>
     </itemizedlist>
 
@@ -176,7 +180,7 @@
       <listitem>
         <para>U kunt selecteren welke van de volgende elementen vertaald moeten worden.</para>
 
-        <para><emphasis>Indexitems, Bladwijzers, Verwijzingen naar bladwijzers, Notities, Opmerkingen, Notities in presentaties, Koppelingen (URL), Werkbladnamen</emphasis></para>
+        <para>Indexitems, bladwijzers, verwijzingen naar bladwijzers, notities, opmerkingen, notities in presentaties, koppelingen (URL), werkbladnamen</para>
       </listitem>
     </itemizedlist>
   </section>
@@ -213,7 +217,7 @@
         <primary>Bestandsfilters</primary> <secondary>coderen bron, doel</secondary>
       </indexterm>
 
-      <para>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld<literal> .txt</literal>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend bronbestandsnaam-patroon wijzigen. Zulke bestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het vertaalde bestand dezelfde codering als de codering van het bronbestand. Velden voor bron- en doelcodering gebruiken combinatievakken waarin alle ondersteunde coderingen zijn opgenomen. &lt;auto&gt; laat de keuze van de codering aan <application>OmegaT</application> over. Zo werkt het:</para>
+      <para>Slechts een beperkt aantal bestandsformaten specificeren een voorgeschreven codering. Bestandsformaten die hun codering niet specificeren zullen de codering gebruiken die u instelt voor de extensie die overeenkomt met hun naam. Standaard zullen bijvoorbeeld <literal>.txt</literal>-bestanden worden geladen met behulp van de standaard codering van uw besturingssysteem. U kunt de broncodering voor elk verschillend bronbestandsnaam-patroon wijzigen. Zulke bestanden kunnen ook in elke codering worden weggeschreven. Als standaard heeft het vertaalde bestand dezelfde codering als de codering van het bronbestand. Velden voor bron- en doelcodering gebruiken combinatievakken waarin alle ondersteunde coderingen zijn opgenomen. &lt;auto&gt; laat de keuze van de codering aan <application>OmegaT</application> over. Zo werkt het:</para>
 
       <itemizedlist>
         <listitem>

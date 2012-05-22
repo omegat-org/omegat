@@ -45,7 +45,7 @@
         <term>Beste overeenkomst invoegen</term>
 
         <listitem>
-          <para>OmegaT voegt de vertaling van de tekenreeks in die het meeste lijkt op de huidige bron, indien die boven de drempel van het percentage van overeenkomst komt dat in het dialoogvenster is ingesteld.</para>
+          <para>OmegaT voegt de vertaling van de tekenreeks in die het meeste lijkt op de huidige bron, indien die boven de drempel van het percentage van overeenkomst komt dat in het dialoogvenster is ingesteld. Het voorvoegsel (is standaard leeg) kan worden gebruikt om vertalingen te taggen, wat wordt gedaan via fuzzy overeenkomsten. Indien u een voorvoegsel toevoegt (bijvoorbeeld [fuzzy]), kunt u deze vertalingen later traceren om te zien of zij juist zijn.</para>
         </listitem>
       </varlistentry>
     </variablelist>

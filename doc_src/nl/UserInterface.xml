@@ -38,6 +38,19 @@
               <listitem>
                 <para>Machinevertaling - geeft de vertaling weer zoals die wordt verschaft door services voor machinevertaling zolas Google Translate</para>
               </listitem>
+
+              <listitem>
+                <para>Meerdere vertalingen - geeft alternatieve vertalingen weer - indien enige zijn ingevoerd - voor het huidige segment</para>
+              </listitem>
+
+              <listitem>
+                <para>Notities - opmerkingen van de vertaler met betrekking tot huidige segment</para>
+              </listitem>
+
+              <listitem>
+                <para>Opmerkingen - opmerkingen van de vertaler met betrekking tot huidige segment
+</para>
+              </listitem>
             </itemizedlist>
           </listitem>
         </varlistentry>
@@ -89,12 +102,22 @@
         </varlistentry>
 
         <varlistentry>
+          <term>venster Statistieken</term>
+
+          <listitem>
+            <para>Gebruikt om het venster met de statistieken van het project te openen, geef het weer met behulp van <menuchoice> <guimenu><indexterm class="singular">
+                    <primary>menu Extra</primary> <secondary>Statistieken</secondary>
+                  </indexterm>Extra</guimenu> <guimenuitem>Statistieken.</guimenuitem> </menuchoice></para>
+          </listitem>
+        </varlistentry>
+
+        <varlistentry>
           <term>venster Statistieken voor overeenkomsten</term>
 
           <listitem>
-            <para>Gebruikt om het venster te openen met statistieken van het project, selecteer <menuchoice> <guimenu><indexterm class="singular">
+            <para>Gebruikt om de statistieken voor overeenkomsten in het project weer te geven, selecteer <menuchoice> <guimenu><indexterm class="singular">
                     <primary>menu Extra</primary> <secondary>Statistieken voor overeenkomsten</secondary>
-                  </indexterm>Extra</guimenu> <guimenuitem>Statistieken voor overeenkomsten.</guimenuitem> </menuchoice></para>
+                  </indexterm>Extra</guimenu> <guimenuitem>Statistieken voor overeenkomsten</guimenuitem> </menuchoice>om het te openen.</para>
           </listitem>
         </varlistentry>
       </variablelist>
@@ -183,11 +206,11 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/OmegaT_panes.png"/>
+          <imagedata fileref="images/OmegaT_panes_25.png" scale="100"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/OmegaT_panes.png" width="80%"/>
+          <imagedata fileref="images/OmegaT_panes_25.png" width="80%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -325,7 +348,9 @@
     </section>
 
     <section id="match.viewer">
-      <title>venster Overeenkomsten</title>
+      <title>venster Overeenkomsten<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>venster Overeenkomsten</secondary>
+        </indexterm></title>
 
       <para><figure id="matches.pane">
           <title><indexterm class="singular">
@@ -336,11 +361,11 @@
 
           <mediaobject>
             <imageobject role="html">
-              <imagedata fileref="images/MatchesPane.png"/>
+              <imagedata fileref="images/MatchesPane_25.png"/>
             </imageobject>
 
             <imageobject role="fo">
-              <imagedata fileref="images/MatchesPane.png" width="80%"/>
+              <imagedata fileref="images/MatchesPane_25.png" width="80%"/>
             </imageobject>
           </mediaobject>
         </figure></para>
@@ -355,13 +380,13 @@
           <primary>Sneltoetsen</primary> <secondary>Ctrl+I - Tekst invoegen</secondary>
         </indexterm></guimenuitem> om die in te voegen op de cursorpositie, om de geselecteerde overeenkomst in uw vertaling te gebruiken.</para>
 
-      <para>Het percentage voor de overeenkomst is ruwweg het equivalent van het aantal meest voorkomende woorden in het vergeleken en het overeenkomende segment, gedeeld door het aantal woorden in de langste van de twee. De geselecteerde overeenkomst zal worden geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen blauw gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is het bronsegment <emphasis role="bold">Duration of exposure &lt;15 min</emphasis>. De hoogste overeenkomst is 60%, omdat 3 van de 5 woorden overeenkomen. De regel met het percentage van overeenkomst bevat ook de naam van het vertaalgeheugen <indexterm class="singular">
+      <para>Het percentage voor de overeenkomst is ruwweg het equivalent van het aantal meest voorkomende woorden in het vergeleken en het overeenkomende segment, gedeeld door het aantal woorden in de langste van de twee. De geselecteerde overeenkomst zal worden geaccentueerd in vet, woorden die ontbreken in het segment dat u vertaald zullen blauw gekleurd zijn en woorden die aansluiten aan ontbrekende gedeelten zullen groen zijn. In het bovenstaande voorbeeld is het bronsegment <emphasis role="bold">Context menu command</emphasis>. De bovenste overeenkomst is 100%, omdat alle woorden overeenkomen. Hetzelfde geldt voor de twee volgende overeenkomsten en de overeenkomst #4 is soortgelijk, maar verschilt. De regel met het percentage van overeenkomst bevat ook de naam van het vertaalgeheugen <indexterm class="singular">
           <primary>Vertaalgeheugens</primary> <secondary>overeenkomsten</secondary>
         </indexterm> dat de overeenkomst bevat. Indien er geen naam vermeld is, is de bron het interne vertaalgeheugen van het project. Wezen-segmenten<indexterm class="singular">
           <primary>Vertaalgeheugens</primary> <secondary>wezen-segmenten</secondary>
-        </indexterm> (de overeenkomst #4) beschrijven segmenten in het standaard vertaalgeheugen van het project die geen overeenkomend bronsegment hebben.</para>
+        </indexterm> (de overeenkomst #2) beschrijven segmenten in het standaard vertaalgeheugen van het project die geen overeenkomend bronsegment hebben.</para>
 
-      <para>Er zijn feitelijk drie berekende overeenkomsten beschikbaar (60/60/54 in het geval van de hoogste overeenkomst hierboven). Zij worden als volgt gedefinieerd:</para>
+      <para>Er zijn feitelijk drie berekende overeenkomsten beschikbaar (66/66/30 in het geval van overeenkomst #4 hierboven). Zij worden als volgt gedefinieerd:</para>
 
       <itemizedlist>
         <listitem>
@@ -383,29 +408,11 @@
     </section>
 
     <section>
-      <title>Woordenlijst<indexterm class="singular">
+      <title>venster Woordenlijst<indexterm class="singular">
           <primary>Vensters in OmegaT</primary> <secondary>venster Woordenlijst</secondary>
         </indexterm></title>
 
-      <para>Het venster Woordenlijst maakt het u mogelijk om uw eigen collectie uitdrukkingen en speciale terminologie, die u heeft verzameld in uw bestanden voor de woordenlijst, te gebruiken. Het toont de vertalingen van termen die zijn gevonden in het huidige segment, maar het wordt slechts getoond voor als verwijzing: er bestaat geen mogelijkheid om de vertaling in te voegen of de term door deze te vervangen.</para>
-
-      <para><figure id="glossary.pane">
-          <title><indexterm class="singular">
-              <primary>Woordenlijsten</primary> <secondary>venster Woordenlijst - afbeelding</secondary>
-            </indexterm>venster Woordenlijst</title>
-
-          <mediaobject>
-            <imageobject role="html">
-              <imagedata fileref="images/Glossary_pane.png"/>
-            </imageobject>
-
-            <imageobject role="fo">
-              <imagedata fileref="images/Glossary_pane.png" width="60%"/>
-            </imageobject>
-          </mediaobject>
-        </figure></para>
-
-      <para>Het bronsegment in het bovenstaande voorbeeld was “I<emphasis>n most translation jobs it is considered important to have the translated document look similar to the original.</emphasis>”, en ten minste twee woorden daarin, document en translation werden gevonden in het bestand van de woordenlijst. <application>OmegaT</application> ondersteunt ook termen met meerdere woorden:</para>
+      <para>Het venster Woordenlijst maakt het u mogelijk om uw eigen collectie uitdrukkingen en speciale terminologie, die u heeft verzameld in uw bestanden voor de woordenlijst, te gebruiken. Het geeft de vertalingen weer van termen die zijn gevonden in het huidige segment. Het bronsegment in het voorbeeld hieronder was “<emphasis>Context menu command</emphasis>”, zoals het voorbeeld voor Overeenkomsten hierboven, en de weergegeven termen werden gevonden in de beschikbare woordenlijsten (Microsoft's Term collection en de woordenlijst voor de Sloveense Linux gebruikersgroep.</para>
 
       <figure id="multiword.pane">
         <title><indexterm class="singular">
@@ -414,16 +421,16 @@
 
         <mediaobject>
           <imageobject role="html">
-            <imagedata fileref="images/MultiTerm_Glossary.png"/>
+            <imagedata fileref="images/GlossaryPane_25.png"/>
           </imageobject>
 
           <imageobject role="fo">
-            <imagedata fileref="images/MultiTerm_Glossary.png" width="80%"/>
+            <imagedata fileref="images/GlossaryPane_25.png" width="80%"/>
           </imageobject>
         </mediaobject>
       </figure>
 
-      <para>Als u de optie TransTips hebt geactiveerd <guimenuitem>Opties → Transtips</guimenuitem>), kunt u met rechts klikken op het geaccentueerde woord om een keuzelijst te openen met de alternatieve vertalingen, zoals die worden aangeboden door uw woordenlijst. Selecteren van een er van zal het invoegen op de huidige positie in het doelsegment. U kunt ook uw geprefereerde alternatief accentueren in het venster Woordenlijst en het invoegen in het doel door met rechts op de selectie te klikken.</para>
+      <para>Als u de optie TransTips hebt geactiveerd <guimenuitem>Opties → Transtips</guimenuitem>), kunt u met rechts klikken op het geaccentueerde woord om een keuzelijst te openen met de voorgestelde vertalingen, zoals die worden aangeboden door uw woordenlijst. Selecteren van een er van zal het invoegen op de huidige positie in het doelsegment. U kunt ook uw geprefereerde alternatief accentueren in het venster Woordenlijst en het invoegen in het doel door met rechts op de selectie te klikken.</para>
     </section>
 
     <section id="dictionaries">
@@ -431,21 +438,51 @@
           <primary>Vensters in OmegaT</primary> <secondary>venster Woordenboek</secondary>
         </indexterm></title>
 
-      <para>Woordenboeken zijn de elektronische versies van gedrukte woordenboeken zoals MerriamWebster, Duden, Larousse etc., die u op uw bureau zou hebben kunnen staan.</para>
+      <para>Woordenboeken zijn de elektronische versies van gedrukte woordenboeken zoals MerriamWebster, Duden, Larousse etc., die u op uw bureau zou hebben kunnen staan. Bekijk er meer over in het hoofdstuk over <link linkend="chapter.dictionaries">Woordenboeken</link></para>
+    </section>
+
+    <section id="Multiple.Translations">
+      <title>venster Meerdere vertalingen<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>venster Meerdere vertalingen</secondary>
+        </indexterm></title>
+
+      <para>Een bepaald bronsegment kan verschillende vertalingen vereisen, afhankelijk van de context. Als de huidige vertaling van het segment niet past, kan de gebruiker <guisubmenu>Bewerken → Alternatieve vertaling maken</guisubmenu> selecteren. De doeltekst die daarna wordt ingevoerd zal wordne behandeld als een alternatieve vertaling van het bronsegment. U kunt één van de alternatieven - bijvoorbeeld die welke het meest waarschijnlijk is - als de standaard vertaling instellen door te selecteren <guisubmenu>Bewerken → Als standaard vertaling gebruiken</guisubmenu></para>
+    </section>
+
+    <section>
+      <title>venster Notities</title>
+
+      <para>De vertaler kan notities toevoegen aan het geopende segment, bijvoorbeeld om later terug te kunnen keren naar het segment en de vertaling opnieuw te doen, te controleren dat alternatieve vertalingen juist zijn of om collega's om hun mening te vragen. U kunt door de notities bladeren met behulp van <guisubmenu>Ga naar → Volgende notitie</guisubmenu> en <guisubmenu>Ga naar → Vorige notitie</guisubmenu>.</para>
+    </section>
+
+    <section>
+      <title>venster Opmerkingen</title>
+
+      <para>Sommige bestandsindelingen, gespecialiseerd voor vertaalwerk, bijvoorbeeld PO, maken het opnemen van opmerkingen mogelijk. Op deze manier kan de vertaler de context voor het segment dat moet worden vertaald worden verschaft. In het voorbeeld hieronder heeft de auteur van het PO-bestand een waarschuwing voor de vertaler opgenomen om de lengte van de vertaling te controleren:</para>
+
+      <mediaobject>
+        <imageobject role="html">
+          <imagedata fileref="images/Comments_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/Comments_25.png" width="80%"/>
+        </imageobject>
+      </mediaobject>
     </section>
 
     <section id="Google.Translate">
-      <title>Machinevertaling<indexterm class="singular">
-          <primary>Vensters in OmegaT</primary> <secondary>Machinevertaling</secondary>
+      <title>venster Machinevertaling<indexterm class="singular">
+          <primary>Vensters in OmegaT</primary> <secondary>venster Machinevertaling</secondary>
         </indexterm></title>
 
-      <para>Het venster Machinevertaling, indien geopend, bevat de suggesties van programma's voor machinevertaling voor het huidige segment. Druk op <keysym>Ctrl+M </keysym>om de vertaling van het huidige segment te vervangen door de voorgestelde vertaling.</para>
+      <para>Het venster Machinevertaling, indien geopend, bevat de suggesties van programma's voor machinevertaling voor het huidige segment. Druk op <keysym>Ctrl+M </keysym>om de vertaling van het huidige segment te vervangen door de voorgestelde vertaling. Meer in het hoofdstuk <link linkend="chapter.machine.translate">Machinevertaling</link></para>
     </section>
 
     <section>
       <title id="main.menu">Hoofdmenu</title>
 
-      <para>Het hoofdmenu geeft toegang tot alle functies van <application>OmegaT</application>. Zie de appendix <emphasis>Hoofdmenu</emphasis> voor een volledige beschrijving van alle menu's en menu-items. De meestgebruikte functies zijn te benaderen met sneltoetsen voor het toetsenbord, dus als u daar eenmaal aan gewend bent, zal er geen reden meer zijn om door de menu's te bladeren tijdens het vertalen.</para>
+      <para>Het hoofdmenu geeft toegang tot alle functies van <application>OmegaT</application>. Zie de appendix <emphasis>Hoofdmenu</emphasis> voor een volledige beschrijving van alle menu's en menu-items. De meestgebruikte functies zijn te benaderen met sneltoetsen voor het toetsenbord, dus als u daar eenmaal aan gewend bent, zal er geen reden meer zijn om door de menu's te bladeren tijdens het vertalen. Bekijk hoofdstuk <link linkend="chapter.menu">Sneltoetsen voor menu en het toetsenbord</link> voor details.</para>
     </section>
 
     <section id="status.bar">
@@ -541,40 +578,37 @@
     </section>
 
     <section>
+      <title>Statistieken<indexterm class="singular">
+          <primary>Statistieken</primary> <seealso>menu Extra</seealso>
+        </indexterm></title>
+
+      <para>Het venster Statistieken - te benaderen via <emphasis role="bold">Extra &gt; Statistieken </emphasis>- geeft de statistieken voor het huidige project van OmegaT weer, zowel in de vorm van een overzicht als in detail voor elk bestand dat moet worden vertaald. De weergegeven statistieken zijn beschikbaar als een tab-gescheiden bestand  <filename>project_stats.txt</filename> (submap <filename>omegat</filename>), klaar om te worden geladen in een programma met rekenbladen dat de gebruiker wil gebruiken. U kunt <guimenuitem>Ctrl+A <indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+A - alles selecteren</secondary>
+        </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+C - tekst kopiëren</secondary>
+        </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm class="singular">
+          <primary>Sneltoetsen</primary> <secondary>Ctrl+V - tekst plakken</secondary>
+        </indexterm></guimenuitem> gebruiken om de inhoud te kopiëren en te plakken.</para>
+
+      <mediaobject>
+        <imageobject>
+          <imagedata fileref="images/StatisticsWindow_25.png"/>
+        </imageobject>
+
+        <imageobject role="fo">
+          <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+        </imageobject>
+      </mediaobject>
+    </section>
+
+    <section>
       <title>Statistieken voor overeenkomsten<indexterm class="singular">
           <primary>Statistieken voor overeenkomsten</primary> <seealso>menu Extra</seealso>
         </indexterm></title>
 
-      <para>Statistieken kunnen worden bereikt via<guimenuitem>Extra/Statistieken voor overeenkomsten
-.</guimenuitem> De evaluatie is nogal intensief voor de CPU en kan nogal wat tijd vergen, dus wordt een voortgangsbalk weergegeven tijdens de berekening. Met betrekking tot categorieën worden de de facto industriestandaard voor classificatie van overeenkomsten in de volgende groepen gebruikt:</para>
+      <para>Toegang tot de statistieken voor overeenkomsten gaat via<guimenuitem>Extra &gt; Statistieken voor overeenkomsten.</guimenuitem> De evaluatie vergt nogal wat gebruik van de CPU en kan nogal wat tijd vergen, dus wordt er een voortgangsbalk weergegevn gedurende de berekening. Voorzover het categorieën betreft, de de facto industriestandaard voor het classificeren van overeenkomsten in de volgende groepen wordt gebruikt: Exacte overeenkomst, 95%-100%, 85%-94%, 75%-84%, 50%-74% en Geen overeenkomst. De tellingen van woorden, identiek aan tellingen in het venster Projectbestanden, are strikt gebaseerd op de methode van tellen van OmegaT, met een aantal verschillen in terminologie om rekening te houden met conceptuele verschillen. Deze informatie wordt berekend voor zowel segmenten als voor woorden en voor tekens (zonder en met spaties).</para>
 
-      <itemizedlist>
-        <listitem>
-          <para>Exacte overeenkomst</para>
-        </listitem>
-
-        <listitem>
-          <para>95%-100%</para>
-        </listitem>
-
-        <listitem>
-          <para>85%-94%</para>
-        </listitem>
-
-        <listitem>
-          <para>75%-84%</para>
-        </listitem>
-
-        <listitem>
-          <para>50%-74%</para>
-        </listitem>
-
-        <listitem>
-          <para>Geen overeenkomst:</para>
-        </listitem>
-      </itemizedlist>
-
-      <para>De tellingen van de woorden zijn identiek aan de aantallen verschaft in het venster Projectbestanden en zijn strikt gebaseerd op de methode van tellen in OmegaT, met een paar verschillen in terminologie om rekening te houden met verschillen in ontwerp. Deze informatie wordt berekend voor segmenten, woorden en voor tekens (zonder en inclusief spaties). Onthoud dat deze totalen een goede (of zo-goed-als-maar-kan-zijn) benadering zijn van het betrokken werk in het project en dus kan dienen als een basis voor uw berekeningen van kosten en prijzen.</para>
+      <para>Onthoud dat deze totalen een goede (of zo-goed-als-maar-kan-zijn) benadering zijn van het betrokken werk in het project en dus kan dienen als een basis voor uw berekeningen van kosten en prijzen.</para>
 
       <screenshot>
         <screeninfo>statistieken voor overeenkomsten</screeninfo>

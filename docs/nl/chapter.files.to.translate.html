@@ -39,17 +39,17 @@
                <dt><span class="section"><a href="chapter.files.to.translate.html#file.formats">1. Bestandsformaten</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5092">1.1. Platte-tekst bestanden</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5152">1.2. Opgemaakte tekstbestanden</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e4878">1.1. Platte-tekst bestanden</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e4946">1.2. Opgemaakte tekstbestanden</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.files.to.translate.html#other.file.formats">2. Andere bestandsformaten</a></span></dt>
                <dt><span class="section"><a href="chapter.files.to.translate.html#right.to.left.languages">3. Van rechts naar links talen</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5370">3.1. LTR- en RTL-tekenreeksen in segmenten mixen</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5393">3.2. <span class="application">OmegaT</span>-tags in RTL-segmenten</a></span></dt>
-                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5407">3.3. Vertaalde RTL-documenten maken</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5163">3.1. LTR- en RTL-tekenreeksen in segmenten mixen</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5186">3.2. <span class="application">OmegaT</span>-tags in RTL-segmenten</a></span></dt>
+                     <dt><span class="section"><a href="chapter.files.to.translate.html#d0e5200">3.3. Vertaalde RTL-documenten maken</a></span></dt>
                   </dl>
                </dd>
             </dl>
@@ -58,7 +58,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1. Bestandsformaten<a class="indexterm" name="d0e5078"></a><a class="indexterm" name="d0e5083"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.formats"></a>1. Bestandsformaten<a class="indexterm" name="d0e4864"></a><a class="indexterm" name="d0e4869"></a></h2>
                   </div>
                </div>
             </div>
@@ -69,7 +69,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5092"></a>1.1. Platte-tekst bestanden<a class="indexterm" name="d0e5095"></a><a class="indexterm" name="d0e5100"></a></h3>
+                        <h3 class="title"><a name="d0e4878"></a>1.1. Platte-tekst bestanden<a class="indexterm" name="d0e4881"></a><a class="indexterm" name="d0e4886"></a></h3>
                      </div>
                   </div>
                </div>
@@ -77,7 +77,7 @@
                   zijn meerdere methoden om de codering van een bestand te specificeren zodat de inhoud niet door elkaar wordt gegooid bij het
                   openen in <span class="application">OmegaT</span>. Zulke bestanden hebben geen informatie over opmaak naast de "witte ruimte" die wordt gebruikt om tekst uit te lijnen, alinea's
                   aan te geven of paginaeinden in te voegen. Zij zijn niet in staat informatie te bevatten / te behouden met betrekking tot
-                  de kleur, lettertype etc. van de tekst. Momenteel ondersteunt <span class="application">OmegaT</span> de volgende platte tekst-formaten:<a class="indexterm" name="d0e5113"></a></p>
+                  de kleur, lettertype etc. van de tekst. Momenteel ondersteunt <span class="application">OmegaT</span> de volgende platte tekst-formaten:<a class="indexterm" name="d0e4899"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
@@ -123,6 +123,20 @@
                      </li>
                   </ul>
                </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>SubRip titelbestanden (*.srt)</p>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Magento CE Locale CSV-bestanden (*.csv)</p>
+                     </li>
+                  </ul>
+               </div>
                <p>Andere platte-tekst bestanden kunnen worden behandeld door <span class="application">OmegaT</span> door hun bestandstype te koppelen aan een ondersteund bestandstype (bijvoorbeeld .pod-bestanden zouden kunnen worden gekoppeld
                   aan het ASCII tekstfilter) en ze voor te bewerken met specifieke segmentatieregels.
                </p>
@@ -131,7 +145,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5152"></a>1.2. Opgemaakte tekstbestanden<a class="indexterm" name="d0e5155"></a><a class="indexterm" name="d0e5162"></a></h3>
+                        <h3 class="title"><a name="d0e4946"></a>1.2. Opgemaakte tekstbestanden<a class="indexterm" name="d0e4949"></a><a class="indexterm" name="d0e4956"></a></h3>
                      </div>
                   </div>
                </div>
@@ -143,7 +157,7 @@
                   eenvoudig te bewerken tags. Vereenvoudigen van de opmaak van de originele tekst draagt enorm bij aan het verminderen van het
                   aantal tags. Indien mogelijk zou het gelijk maken van gebruikte lettertypen, lettertype-afmetingen, kleuren etc. het vertalen
                   vereenvoudigen en het aantal mogelijke fouten in tags verminderen. Elk bestandstype wordt verschillend behandeld in OmegaT.
-                  Specifiek gedrag kan worden ingesteld in de bestandsfilters. Momenteel ondersteunt OmegaT de volgende opgemaakte tekst-formaten:<a class="indexterm" name="d0e5169"></a></p>
+                  Specifiek gedrag kan worden ingesteld in de bestandsfilters. Momenteel ondersteunt OmegaT de volgende opgemaakte tekst-formaten:<a class="indexterm" name="d0e4963"></a></p>
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
@@ -200,13 +214,6 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p>SubRip titelbestanden (*.srt)</p>
-                     </li>
-                  </ul>
-               </div>
-               <div class="itemizedlist">
-                  <ul class="itemizedlist" type="disc">
-                     <li class="listitem">
                         <p>ResX-bestanden (*.resx)</p>
                      </li>
                   </ul>
@@ -245,6 +252,9 @@
                      <li class="listitem">
                         <p>Wordfast TXML (*.txml)</p>
                      </li>
+                     <li class="listitem">
+                        <p>Camtasia voor Windows (*.camproj)</p>
+                     </li>
                   </ul>
                </div>
                <p>Andere opgemaakte tekst-bestanden kunnen worden afgehandeld door OmegaT door hun bestandstype te koppelen aan een ondersteund
@@ -256,14 +266,14 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2. Andere bestandsformaten<a class="indexterm" name="d0e5245"></a><a class="indexterm" name="d0e5250"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="other.file.formats"></a>2. Andere bestandsformaten<a class="indexterm" name="d0e5038"></a><a class="indexterm" name="d0e5043"></a></h2>
                   </div>
                </div>
             </div>
             <p>Andere platte tekst- of opgemaakte tekst-bestandsformaten die mogelijk door OmegaT kunnen worden verwerkt zouden ook kunnen
                bestaan.
             </p>
-            <p><a class="indexterm" name="d0e5258"></a>Externe programma's kunnen worden gebruikt om bestanden te converteren naar ondersteunde formaten. De vertaalde bestanden
+            <p><a class="indexterm" name="d0e5051"></a>Externe programma's kunnen worden gebruikt om bestanden te converteren naar ondersteunde formaten. De vertaalde bestanden
                moeten daarna weer terug worden geconverteerd naar het originele formaat. Als u bijvoorbeeld een verouderde versie van Microsoft
                Word hebt, die niet het ODT-formaat kan afhandelen, is hier een manier voor Word-bestanden met de extensie DOC:
             </p>
@@ -310,7 +320,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3. Van rechts naar links talen<a class="indexterm" name="d0e5292"></a><a class="indexterm" name="d0e5295"></a><a class="indexterm" name="d0e5300"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="right.to.left.languages"></a>3. Van rechts naar links talen<a class="indexterm" name="d0e5085"></a><a class="indexterm" name="d0e5088"></a><a class="indexterm" name="d0e5093"></a></h2>
                   </div>
                </div>
             </div>
@@ -350,7 +360,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5370"></a>3.1. LTR- en RTL-tekenreeksen in segmenten mixen<a class="indexterm" name="d0e5373"></a><a class="indexterm" name="d0e5378"></a><a class="indexterm" name="d0e5383"></a></h3>
+                        <h3 class="title"><a name="d0e5163"></a>3.1. LTR- en RTL-tekenreeksen in segmenten mixen<a class="indexterm" name="d0e5166"></a><a class="indexterm" name="d0e5171"></a><a class="indexterm" name="d0e5176"></a></h3>
                      </div>
                   </div>
                </div>
@@ -367,7 +377,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5393"></a>3.2. <span class="application">OmegaT</span>-tags in RTL-segmenten<a class="indexterm" name="d0e5398"></a></h3>
+                        <h3 class="title"><a name="d0e5186"></a>3.2. <span class="application">OmegaT</span>-tags in RTL-segmenten<a class="indexterm" name="d0e5191"></a></h3>
                      </div>
                   </div>
                </div>
@@ -387,7 +397,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e5407"></a>3.3. Vertaalde RTL-documenten maken<a class="indexterm" name="d0e5410"></a><a class="indexterm" name="d0e5415"></a><a class="indexterm" name="d0e5420"></a></h3>
+                        <h3 class="title"><a name="d0e5200"></a>3.3. Vertaalde RTL-documenten maken<a class="indexterm" name="d0e5203"></a><a class="indexterm" name="d0e5208"></a><a class="indexterm" name="d0e5213"></a></h3>
                      </div>
                   </div>
                </div>

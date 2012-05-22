@@ -83,7 +83,7 @@
 
       <para>De bestanden<emphasis role="bold"> <indexterm class="singular">
           <primary>Projectbestanden</primary> <secondary>ignored_words en learned_words</secondary>
-        </indexterm>Ignored_words.txt</emphasis> en <emphasis role="bold">learned_words.txt</emphasis> worden gebruikt door de spellingscontrole. Onthoud dat zij specifiek zijn voor een bepaald project, dus als u al een verzameling woorden hebt waarvan u wilt dat de spellingscontrole die negeert / accepteert, moet u de corresponderende twee bestanden naar de submap <filename>omegat</filename> van uw huidige project kopiëren.</para>
+        </indexterm>ignored_words.txt</emphasis> en <emphasis role="bold">learned_words.txt</emphasis> worden gebruikt door de spellingscontrole. Onthoud dat zij specifiek zijn voor een bepaald project, dus als u al een verzameling woorden hebt waarvan u wilt dat de spellingscontrole die negeert / accepteert, moet u de corresponderende twee bestanden naar de submap <filename>omegat</filename> van uw huidige project kopiëren.</para>
     </section>
 
     <section id="folder.source">

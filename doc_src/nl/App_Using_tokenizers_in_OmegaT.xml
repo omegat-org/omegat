@@ -6,10 +6,6 @@
   <section>
     <title>Introductie</title>
 
-    <note>
-      <para>Dit onderwerp is bedoeld voor gevorderde gebruikers</para>
-    </note>
-
     <para>Tokenizers (of stemmers) verbeteren de kwaliteit van de overeenkomsten door het herkennen va betrokken woorden in de bron en gegevens in de vertaalgeheugens. Zij verbeteren ook de overeenkomsten voor de woordenlijsten.</para>
 
     <para>Een stemmer voor bijvoorbeeld Engels zou de tekenreeks &quot;cats&quot; identificeren (en mogelijk &quot;catlike&quot;, &quot;catty&quot; etc.) omdat die is gebaseerd op de stam &quot;cat&quot;, en &quot;stemmer&quot;, &quot;stemming&quot;, &quot;stemmed&quot; omdat die is gebaseerd op &quot;stem&quot;. Een stemming algoritme reduceert de woorden &quot;fishing&quot;, &quot;fished&quot;, &quot;fish&quot;, en &quot;fisher&quot; tot de stam van het woord: &quot;fish&quot;. Dit is speciaal bijzonder handig in het geval van talen die vormen voor voor- en achtervoegsel voor de stamwoorden gebruiken. Lenen we een voorbeeld uit het Sloveens, hier &quot;good&quot; in alle mogelijke grammaticaal juiste vormen:</para>
@@ -84,6 +80,6 @@
 12719: Info: Target tokenizer: org.omegat.core.matching.Tokenizer 
 </code></literallayout>
 
-    <para>Met het Mac OSX OmegaT.app pakket moet u dubbelklikken op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct togang te hebben tot het log.</para>
+    <para>Met het Mac OSX OmegaT.app pakket moet u dubbelklikken op de <literal>JavaApplicationStub</literal> die is geplaatst in /OmegaT.app/Contents/MacOS/ (kijk hierboven om toegang te verkrijgen) om OmegaT te starten vanuit de console en direct toegang te hebben tot het log.</para>
   </section>
 </appendix>

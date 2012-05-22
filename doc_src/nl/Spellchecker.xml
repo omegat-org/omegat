@@ -69,6 +69,7 @@
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckingText.png"/>
         </imageobject>
+
         <imageobject role="fo">
           <imagedata fileref="images/SpellcheckingText.png" width="80%"/>
         </imageobject>

@@ -74,12 +74,20 @@
       </itemizedlist>
     </section>
 
-    <section id="misc.console.mode.extra.options">
-      <title>Extra opties</title>
+    <section id="misc.console.mode.option.quiet">
+      <title>optie Quiet</title>
 
-      <para>Er bestaat nog één extra parameter voor de opdrachtregel, specifiek voor de modus  console: <literal>--quiet. </literal>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
+      <para>Een extra parameter voor de opdrachtregel, specifiek voor de console-modus:  <literal>--quiet.</literal>In de modus quiet, wordt er minder informatie gelogd op het scherm. De berichten die u normaal gesproken zou vinden in de statusbalk worden niet weergegeven.</para>
 
-      <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --quiet</literal></para>
+      <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --mode=console-translate --quiet</literal></para>
+    </section>
+
+    <section id="misc.console.mode.option.validatetags">
+      <title>Optie Tags valideren</title>
+
+      <para>Een andere parameter voor de opdrachtregel, specifiek voor de console-modus: <literal>--tag-validation=[abort|warn].</literal> Als deze parameter wordt toegevoegd, wordt het valideren van tags toegepast voorafgaande aan vertalen/uitlijnen. Als de waarde <literal>abort</literal> is dan worden bij tagfouten de fouten afgedrukt en het programma stopt. Als de waarde <literal>warn</literal> is dan worden fouten afgedrukt maar OmegaT gaat door.</para>
+
+      <para>Gebruik: <literal>java -jar <application>OmegaT</application>.jar /pad/naar/project --mode=console-translate --tag-validation=abort</literal></para>
     </section>
   </section>
 

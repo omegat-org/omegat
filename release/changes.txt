@@ -23,7 +23,7 @@
 ----------------------------------------------------------------------
    3 Enhancements
    4 Bug fixes
-   1 Localisation update
+   4 Localisation updates
 ----------------------------------------------------------------------
 2.5.4 update 1 vs. 2.5.4
 
@@ -58,6 +58,9 @@ the results were not immediately visible
   Localisation updates:
 
   - Italian localisation updated to 2.5.4 (UI, readme)
+  - Dutch localisation updated to 2.5.4 (UI, readme, documentation)
+  - Russian localisation updated to 2.5.4 (UI, readme, Instant Start)
+  - Basque localisation updated to 2.5.2 (UI, readme, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.4

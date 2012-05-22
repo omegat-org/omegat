@@ -1,6 +1,6 @@
-Itzulpen hau Asier Sarasua Garmendiaren lana da, copyright 2010.
+Itzulpen hau Asier Sarasua Garmendiaren lana da, copyright 2012.
 
-==============================================================================
+============================================================================================================================================================
   OmegaT 2.2, Read Me fitxategia
 
   1.  OmegaT-ri buruzko informazioa
@@ -10,7 +10,7 @@ Itzulpen hau Asier Sarasua Garmendiaren lana da, copyright 2010.
   5.  OmegaT-k erroreak al dauzka? Laguntzarik behar al duzu?
   6.  Bertsioaren xehetasunak
 
-==============================================================================
+============================================================================================================================================================
   1.  OmegaT-ri buruzko informazioa
 
 
@@ -26,7 +26,7 @@ Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
 Hobekuntzen eskaera (ingelesez), SourceForge-ko gunean:
      http://sourceforge.net/tracker/?group_id=68187&atid=520347
 
-==============================================================================
+============================================================================================================================================================
   2.  Zer da OmegaT?
 
 OmegaT Ordenagailuz Lagundutako Itzulpenak edo OLI (ingelesez, CAT) motako tresna bat da. Librea da, hau da, ez da ezer ordaindu behar hura erabiltzeko, ezta modu profesionalean erabili nahi bada ere, eta hura moldatu edota birbanatzeko libre zara, erabiltzailearen lizentzia errespetatzen baduzu.
@@ -67,6 +67,12 @@ OmegaT-k hurrengo fitxategi-formatuak onartzen ditu zuzenean:
   - Windows-en RC baliabideak
   - Mozillaren DTD formatua
   - DokuWiki
+  - Wix  
+  - Infix
+  - Flash XML export
+  - Wordfast TXML
+  - Magento CE Locale CSV
+  - Camtasia Windowserako
 
 OmegaT beste formatu batzuk ere onartzeko pertsonalizatu daiteke.
 
@@ -76,7 +82,7 @@ Tutorial azkar bat nahi izanez gero, ireki OmegaT eta irakurri pantailan ageri d
 
 Erabiltzailearen eskuliburua deskargatu berri duzun paketean dago. [Laguntza] menua erabiliz atzitu dezakezu, OmegaT ireki ondoren.
 
-==============================================================================
+============================================================================================================================================================
  3. OmegaT-ren instalazioa
 
 3.1 Orokorra
@@ -97,7 +103,7 @@ OmegaT deskargatu eta instalatzeko modu alternatiboak beherago erakusten dira.
 Windows eta Linux erabiltzaileak: zuen sistemak jadanik JRE-ren bertsio egoki bat instalatuta daukala badakizue, JRE-rik gabe banatzen den OmegaT-ren bertsioa instalatu dezakezue (bertsio honen izenean "Without_JRE" jartzen du). 
 Zalantzarik baduzue, bertsio "estandarra", JRE-a duena alegia, erabili dezazuen aholkatzen dizuegu. Zuen sistemak JRE bat instalatuta eduki arren, OmegaT-ren bertsio honek ez du bestea trabatuko.
 
-Linux erabiltzaileek: kontuan hartu OmegaT-k ez duela funtzionatuko hainbat Linux banaketekin (esaterako, Ubunturekin) banatzen diren Java inplementazio libreekin, garapen hauek eguneratu edo osatu gabe baitaude. Deskargatu eta instalatu JRE-a goian duzuen esteka erabiliz, edo deskargatu eta instalatu JRE-rekin paketaturik datorren OmegaT bertsioa ("Linux" izena daukan .tar.gz paketea).
+Linux erabiltzaileek: kontuan hartu OmegaT-k ez duela funtzionatuko hainbat Linux banaketekin (esaterako, Ubunturekin) banatzen diren Java inplementazio libreekin, garapen hauek eguneratu edo osatu gabe baitaude. Deskargatu eta instalatu Sun-en Java Runtime Environment (JRE) goian duzun esteka erabiliz, edo deskargatu eta instalatu JRE-rekin paketaturik datorren OmegaT bertsioa ("Linux" izena daukan .tar.gz paketea).
 
 Mac erabiltzaileak: JRE-a jadanik instalatuta dator Mac OS X-en.
 
@@ -144,7 +150,7 @@ Azkenik, gorde aldaketak Fitxategia - Gorde aukera erabiliz.
 
 Egin klik eskuineko botoiarekin "Panelari gehitu - Abiarazle berezitua". "Izena" eremuan sartu "OmegaT" ; "Komandoa" eremuan, erabili arakatze-botoia OmegaT-ren abioko script-a bilatzeko. Hautatu script-a eta onartu OK sakatuz.Hautatu script-a eta onartu OK sakatuz.
 
-==============================================================================
+============================================================================================================================================================
  4. OmegaT proiektuan parte hartzeko
 
 OmegaT-ren garapenean parte hartzeko, jarri harremanetan garatzaileekin ondoko helbidean:
@@ -176,38 +182,45 @@ Kodea hurrengo lagunek idatzi dute:
   Sandra Jean Chua
   Martin Fleurke  
   Wildrich Fourie
+  Jean-Christophe Helary
   Thomas Huriaux
+  Hans-Peter Jacobs
+  Guido Leenders
   Ibai Lakunza Velasco
   Fabián Mandelbaum
+  John Moran
   Maxym Mykhalchuk 
   Arno Peters
   Henry Pijffers 
+  Briac Pilpré
   Tiago Saboga
   Andrzej Sawuła
   Benjamin Siband
+  Rashid Umarov  
   Antonio Vilei
   Martin Wunderlich
+  Michael Zakharov
 
-Other contributions by
+Beste ekarpen batzuk:
   Sabine Cretella
   Dmitri Gabinski
   Jean-Christophe Helary (lokalizazio-kudeatzailea)
   Vito Smolej (dokumentazio-kudeatzailea)
   Samuel Murray
   Marc Prior 
-  eta lagundu duten beste jende asko
+  eta lagundu duen beste jende asko
 
 (OmegaT proiektuari ekarpen esanguratsua egin diozula uste baduzu eta zure izena hemen agertzen ez bada, mesedez hitz egin gurekin.)
 
 OmegaT-k ondoko liburutegiak erabiltzen ditu:
 
-  HTMLParser by Somik Raha, Derrick Oswald and others (LGPL License)
+  HTMLParser: Somik Raha, Derrick Oswald eta beste batzuk (LGPL lizentzia)
   http://sourceforge.net/projects/htmlparser
 
-  MRJ Adapter 1.0.8 by Steve Roy (LGPL License)
+  MRJ Adapter 1.0.8: Steve Roy (LGPL lizentzia)
   http://homepage.mac.com/sroy/mrjadapter/
 
-  VLDocking Framework 2.1.4 by VLSolutions (CeCILL License)
+  VLDocking Framework 2.1.4: VLSolutions (CeCILL lizentzia)
   http://www.vlsolutions.com/en/products/docking/
 
   Hunspell: László Németh eta beste batzuk (LGPL lizentzia)
@@ -220,7 +233,7 @@ OmegaT-k ondoko liburutegiak erabiltzen ditu:
 
   JAXB 2.1.7 (GPLv2 + classpath salbuespena)
 
-==============================================================================
+============================================================================================================================================================
  5.  OmegaT-k erroreak al dauzka? Laguntzarik behar al duzu?
 
 Errore baten berri eman baino lehen, ziurtatu dokumentazioa sakonki aztertu duzula. Beharbada, ikusi duzuna OmegaT-k daukan ezaugarri bat besterik ez da. OmegaT-ren egunkaria aztertzen baduzu eta "Error", "Warning", "Exception" edo "died unexpectedly" bezalako hitzak ikusten badituzu, orduan agian benetako arazoren bat aurkitu duzu (log.txt fitxategia erabiltzaile-hobespenen direktorioan dago, ikusi eskuliburua bere kokapena ezagutzeko).
@@ -248,4 +261,4 @@ Zure errore-jakinarazpenarekin zer ari den gertatzen jakin nahi baduzu, SourceFo
 Mesedez, ikusi 'changes.txt' fitxategia bertsio honetan zein aurrekoetan egon diren aldaketei buruzko informazio zehatza nahi baduzu.
 
 
-==============================================================================
+============================================================================================================================================================

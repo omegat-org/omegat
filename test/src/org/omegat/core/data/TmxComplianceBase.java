@@ -73,7 +73,7 @@ public abstract class TmxComplianceBase extends TestCase {
             }
         }
 
-        Segmenter.srx = SRX.getSRX();
+        Segmenter.srx = SRX.getDefault();
     }
 
     protected void compareTexts(File f1, String charset1, File f2, String charset2) throws Exception {

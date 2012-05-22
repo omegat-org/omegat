@@ -137,15 +137,4 @@ public class NotLoadedProject implements IProject {
     public void setConfig(Filters filters) {
         
     }
-
-    public SRX getSRX() {
-        return null;
-    }
-
-    public void setSRX(SRX srx) {
-    }
-
-    public String getSegmentationConfigDir() {
-        return null;
-    }
 }

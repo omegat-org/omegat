@@ -43,7 +43,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-import org.omegat.core.Core;
 import org.omegat.core.segmentation.MapRule;
 import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.datamodels.MappingRulesModel;
@@ -64,28 +63,26 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     /** A return status code - returned if OK button has been pressed */
     public static final int RET_OK = 1;
     
-    private SRX srx;
-    
+    /** SRX from OmegaT. */
+    private SRX defaultSRX;
+    /** SRX from user preferences. */
+    private SRX userSRX;
+    /** SRX from current project. */
+    private SRX projectSRX;
+    /** SRX which editable now. */
+    private SRX editableSRX;
+
     /**
      * Flag if this customizer shows project specific segmentation rules or not
      */
     private boolean isProjectSpecific;
 
-    private void constructor(boolean projectSpecific, String configDir) {
-        
-        isProjectSpecific = projectSpecific;
-        
-        SRX srxProjectInstance = null;
-        if (projectSpecific) {
-            srxProjectInstance = Core.getProject().getSRX();
-            if (srxProjectInstance == null) {
-                srx = SRX.getProjectSRX(configDir);
-            } else {
-                srx = srxProjectInstance;
-            }
-        } else {
-            srx = SRX.getSRX();
-        }
+    private void constructor(boolean projectSpecific, SRX defaultSRX, SRX userSRX, SRX projectSRX) {
+        this.isProjectSpecific = projectSpecific;
+        this.defaultSRX = defaultSRX;
+        this.userSRX = userSRX;
+        this.projectSRX = projectSRX;
+        this.editableSRX = isProjectSpecific && projectSRX != null ? projectSRX.clone() : userSRX.clone();
         
         // HP
         // Handle escape key to close the window
@@ -119,15 +116,17 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
         } else {
             projectSpecificCB.setVisible(false);
         }
-        if (projectSpecific && srxProjectInstance == null) {
+        if (projectSpecific && projectSRX == null) {
             mapTable.setEnabled(false);
             mapTable.setFocusable(false);
             mapInsertButton.setEnabled(false);
+            toDefaultsButton.setEnabled(false);
         } else {
             if (projectSpecific) projectSpecificCB.setSelected(true);
             mapTable.setEnabled(true);
             mapTable.setFocusable(true);
             mapInsertButton.setEnabled(true);
+            toDefaultsButton.setEnabled(true);
         }
 
         pack();
@@ -139,17 +138,17 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     /**
      * Creates new form SegmentationCustomizer (to be called from a frame)
      */
-    public SegmentationCustomizer(Frame parent, boolean projecSpecific, String configDir) {
+    public SegmentationCustomizer(Frame parent, boolean projectSpecific, SRX defaultSRX, SRX userSRX, SRX projectSRX) {
         super(parent, true);
-        constructor(projecSpecific, configDir);
+        constructor(projectSpecific, defaultSRX, userSRX, projectSRX);
     }
 
     /**
      * Creates new form SegmentationCustomizer (to be called from a dialog)
      */
-    public SegmentationCustomizer(Dialog parent, boolean projecSpecific, String configDir) {
+    public SegmentationCustomizer(Dialog parent, boolean projectSpecific, SRX defaultSRX, SRX userSRX, SRX projectSRX) {
         super(parent, true);
-        constructor(projecSpecific, configDir);
+        constructor(projectSpecific, defaultSRX, userSRX, projectSRX);
     }
 
     /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
@@ -164,15 +163,19 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
      * @return
      */
     public SRX getSRX() {
-        if (isProjectSpecific) {
-            if (projectSpecificCB.isSelected()) {
-                return this.srx;
-            } else {
-                return null;
+        return editableSRX;
+    }
+
+    protected void setEditableSRX(SRX srx) {
+        editableSRX = srx.clone();
+        MappingRulesModel model = new MappingRulesModel(editableSRX);
+        mapTable.setModel(model);
+        model.addExceptionListener(new ExceptionListener() {
+            public void exceptionThrown(Exception e) {
+                mapErrorsLabel.setText(e.getLocalizedMessage());
             }
-        } else {
-            return this.srx;
-        }
+        });
+        ruleTable.setModel(new DefaultTableModel());
     }
 
     public void valueChanged(ListSelectionEvent e) {
@@ -204,7 +207,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
                 else
                     mapDownButton.setEnabled(false);
 
-                MapRule maprule = this.srx.getMappingRules().get(selrow);
+                MapRule maprule = this.editableSRX.getMappingRules().get(selrow);
                 SegmentationRulesModel model = new SegmentationRulesModel(maprule.getRules());
                 ruleTable.setModel(model);
                 model.addExceptionListener(new ExceptionListener() {
@@ -331,7 +334,7 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
 
         mapScrollPane.setPreferredSize(new java.awt.Dimension(300, 100));
 
-        mapTable.setModel(new MappingRulesModel(this.srx));
+        mapTable.setModel(new MappingRulesModel(editableSRX));
         mapScrollPane.setViewportView(mapTable);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -548,25 +551,21 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
             mapTable.setEnabled(true);
             mapTable.setFocusable(true);
             mapInsertButton.setEnabled(true);
+            toDefaultsButton.setEnabled(true);
+            setEditableSRX(editableSRX);
         } else {
             mapTable.setEnabled(false);
             mapTable.setFocusable(false);
             mapInsertButton.setEnabled(false);
+            toDefaultsButton.setEnabled(false);
+            setEditableSRX(userSRX);
         }
     }//GEN-LAST:event_projectSpecificCBActionPerformed
 
     private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_toDefaultsButtonActionPerformed
     {// GEN-HEADEREND:event_toDefaultsButtonActionPerformed
         commitTableEdits();
-        this.srx.init();
-        MappingRulesModel model = new MappingRulesModel(SRX.getSRX());
-        mapTable.setModel(model);
-        model.addExceptionListener(new ExceptionListener() {
-            public void exceptionThrown(Exception e) {
-                mapErrorsLabel.setText(e.getLocalizedMessage());
-            }
-        });
-        ruleTable.setModel(new DefaultTableModel());
+        setEditableSRX(defaultSRX);
     }// GEN-LAST:event_toDefaultsButtonActionPerformed
 
     private void ruleDownButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_ruleDownButtonActionPerformed
@@ -645,13 +644,11 @@ public class SegmentationCustomizer extends JDialog implements ListSelectionList
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
         commitTableEdits();
-        this.srx.save();
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cancelButtonActionPerformed
     {
-        if (!this.isProjectSpecific) SRX.reload();
         doClose(RET_CANCEL);
     }// GEN-LAST:event_cancelButtonActionPerformed
 

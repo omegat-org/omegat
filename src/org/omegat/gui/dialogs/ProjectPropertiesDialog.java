@@ -27,6 +27,8 @@
 
 package org.omegat.gui.dialogs;
 
+import gen.core.filters.Filters;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -58,6 +60,7 @@ import javax.swing.border.EtchedBorder;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
@@ -115,6 +118,12 @@ public class ProjectPropertiesDialog extends JDialog {
      */
     private int dialogType;
 
+    /** Project SRX. */
+    private SRX srx;
+
+    /** Project filters. */
+    private Filters filters;
+
     /**
      * Creates a dialog to create a new project / edit folders of existing one.
      * 
@@ -130,6 +139,7 @@ public class ProjectPropertiesDialog extends JDialog {
             int dialogTypeValue) {
         super(Core.getMainWindow().getApplicationFrame(), true);
         this.projectProperties = projectProperties;
+        this.srx = projectProperties.getProjectSRX();
         this.dialogType = dialogTypeValue;
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
@@ -381,10 +391,11 @@ public class ProjectPropertiesDialog extends JDialog {
         final JDialog self = this;
         m_sentenceSegmentingButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                SegmentationCustomizer segmentationCustomizer = new SegmentationCustomizer(self, true, Core.getProject().getSegmentationConfigDir());
+                SegmentationCustomizer segmentationCustomizer = new SegmentationCustomizer(self, true,
+                        SRX.getDefault(), Preferences.getSRX(), srx);
                 segmentationCustomizer.setVisible(true);
-                if (segmentationCustomizer.getReturnStatus()==SegmentationCustomizer.RET_OK) {
-                    Core.getProject().setSRX(segmentationCustomizer.getSRX());
+                if (segmentationCustomizer.getReturnStatus() == SegmentationCustomizer.RET_OK) {
+                    srx = segmentationCustomizer.getSRX();
                 }
             }
         });
@@ -396,9 +407,8 @@ public class ProjectPropertiesDialog extends JDialog {
                 dlg.setVisible(true);
                 if (dlg.result != null) {
                     // saving config
-                    Core.getProject().setConfig(dlg.result);
+                    filters = dlg.result;
                 }
-
             }
         });
 
@@ -769,6 +779,9 @@ public class ProjectPropertiesDialog extends JDialog {
             m_dictRootField.requestFocusInWindow();
             return;
         }
+
+        projectProperties.setProjectSRX(srx);
+        projectProperties.setProjectFilters(filters);
 
         m_dialogCancelled = false;
         setVisible(false);

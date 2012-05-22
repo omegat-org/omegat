@@ -48,8 +48,8 @@ public class HTMLFilter2Test extends TestFilterBase {
         IProject.FileInfo fi = loadSourceFiles(new HTMLFilter2(), f);
 
         checkMultiStart(fi, f);
-        checkMulti("This is first line.", null, null, "", "This is second line.", "");
-        checkMulti("This is second line.", null, null, "This is first line.", "", "");
+        checkMulti("This is first line.", null, null, "", "This is second line.", null);
+        checkMulti("This is second line.", null, null, "This is first line.", "", null);
         checkMultiEnd();
     }
 }

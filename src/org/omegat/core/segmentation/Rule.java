@@ -46,6 +46,14 @@ public class Rule implements Serializable {
         setAfterbreak(afterbreak);
     }
 
+    public Rule clone() {
+        Rule result = new Rule();
+        result.breakRule = breakRule;
+        result.beforebreak = beforebreak;
+        result.afterbreak = afterbreak;
+        return result;
+    }
+
     /**
      * Holds value of property breakRule.
      * <p>

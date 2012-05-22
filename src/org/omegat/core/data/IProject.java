@@ -191,20 +191,4 @@ public interface IProject {
      * Sets new file filter configuration for the project
      */
     public void setConfig(Filters filters);
-
-    /**
-     * Returns project specific segmentation rules if they exist.
-     */
-    public SRX getSRX();
-    
-    /**
-     * Sets new project specific segmentation rules.
-     */
-    public void setSRX(SRX srx);
-
-    /**
-     * Returns the directory where segmentation rules should be stored.
-     */
-    public String getSegmentationConfigDir();
-
 }

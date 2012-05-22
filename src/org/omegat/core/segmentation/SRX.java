@@ -42,14 +42,12 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 
 /**
  * The class with all the segmentation data possible -- rules, languages, etc.
@@ -59,9 +57,7 @@ import org.omegat.util.StaticUtils;
  */
 public class SRX implements Serializable, Cloneable {
 
-    private static SRX srx = null;
-    private static final String CONF_SENTSEG = "segmentation.conf";
-    private File configFile;
+    public static final String CONF_SENTSEG = "segmentation.conf";
 
     /** Context for JAXB rules processing. */
     protected static final JAXBContext SRX_JAXB_CONTEXT;
@@ -84,32 +80,9 @@ public class SRX implements Serializable, Cloneable {
     }
 
     /**
-     * SRX factory method.
-     * <p>
-     * For now, just returns the only SRX manager object.
-     */
-    public static SRX getSRX() {
-        if (srx == null) {
-            File configFile = new File(StaticUtils.getConfigDir() + CONF_SENTSEG);
-            srx = load(configFile);
-            srx.configFile = configFile;
-        }
-        return srx;
-    }
-
-    /**
-     * Reloads SRX rules from disk.
-     */
-    public static void reload() {
-        File configFile = new File(StaticUtils.getConfigDir() + CONF_SENTSEG);
-        srx = load(configFile);
-        srx.configFile = configFile;
-    }
-
-    /**
      * Initializes SRX rules to defaults.
      */
-    public void init() {
+    private void init() {
         this.mappingRules = new ArrayList<MapRule>();
         this.includeEndingTags=true;
         this.segmentSubflows=true;
@@ -124,54 +97,34 @@ public class SRX implements Serializable, Cloneable {
     public SRX() {
     }
 
-    /**
-     * Returns an instance for project-specific settings. If the project 
-     * specific config file exits, those settings are read. If not, then the 
-     * normal settings are read for initialization.
-     *  
-     * @param configDir
-     * @return
-     */
-    public static SRX getProjectSRX(String configDir) {
-        File configFile = new File(configDir + CONF_SENTSEG);
-        SRX srx;
-        if (configFile.exists()) {
-            srx = load(configFile);
-        } else {
-            srx = load(new File(StaticUtils.getConfigDir() + CONF_SENTSEG));
+    public SRX clone() {
+        SRX result = new SRX();
+        result.mappingRules = new ArrayList<MapRule>(mappingRules.size());
+        for (MapRule rule : mappingRules) {
+            result.mappingRules.add(rule.clone());
         }
-        srx.configFile = configFile;
-        return srx;
+        return result;
     }
 
     /**
-     * Saves segmentation rules.
+     * Saves segmentation rules into specified file.
      */
-    public void save() {
+    public static void saveTo(SRX srx, File outFile) throws IOException {
+        if (srx == null) {
+            outFile.delete();
+            return;
+        }
         try {
-            setVersion(CURRENT_VERSION);
-            XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(this.configFile));
-            xmlenc.writeObject(this);
+            srx.setVersion(CURRENT_VERSION);
+            XMLEncoder xmlenc = new XMLEncoder(new FileOutputStream(outFile));
+            xmlenc.writeObject(srx);
             xmlenc.close();
         } catch (IOException ioe) {
             Log.logErrorRB("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG");
             Log.log(ioe);
-            JOptionPane.showMessageDialog(null,
-                    OStrings.getString("CORE_SRX_ERROR_SAVING_SEGMENTATION_CONFIG") + "\n" + ioe,
-                    OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
+            throw ioe;
         }
     }
-    
-    /**
-     * Deletes the config file. Use when removing project specific segmentation rules 
-     * (i.e. this SRX is project-specific) 
-     */
-    public void deleteConfig() {
-        if (this.configFile.exists()) {
-            this.configFile.delete();
-        }
-    }
-
 
     /**
      * Loads segmentation rules from an XML file. If there's an error loading a
@@ -181,7 +134,10 @@ public class SRX implements Serializable, Cloneable {
      * is older than that of the current OmegaT, and tries to merge the two sets
      * of rules.
      */
-    private static SRX load(File configFile) {
+    public static SRX loadSRX(File configFile) {
+        if (!configFile.exists()) {
+            return null;
+        }
         SRX res;
         try {
 
@@ -396,6 +352,12 @@ public class SRX implements Serializable, Cloneable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+    }
+
+    public static SRX getDefault() {
+        SRX srx = new SRX();
+        srx.init();
+        return srx;
     }
 
     /**

@@ -25,8 +25,11 @@
 
 package org.omegat.core.data;
 
+import gen.core.filters.Filters;
+
 import java.io.File;
 
+import org.omegat.core.segmentation.SRX;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -79,6 +82,8 @@ public class ProjectProperties {
         } else {
             setTargetLanguage("EN-GB");
         }
+
+        projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
     }
 
     /** Returns The Target (Compiled) Files Directory */
@@ -241,6 +246,22 @@ public class ProjectProperties {
         this.supportDefaultTranslations = supportDefaultTranslations;
     }
 
+    public SRX getProjectSRX() {
+        return projectSRX;
+    }
+
+    public void setProjectSRX(SRX projectSRX) {
+        this.projectSRX = projectSRX;
+    }
+
+    public Filters getProjectFilters() {
+        return projectFilters;
+    }
+
+    public void setProjectFilters(Filters projectFilters) {
+        this.projectFilters = projectFilters;
+    }
+
     public boolean isProjectValid() {
         boolean returnValue;
         try {
@@ -357,4 +378,7 @@ public class ProjectProperties {
 
     private boolean sentenceSegmentingOn;
     private boolean supportDefaultTranslations;
+
+    private SRX projectSRX;
+    private Filters projectFilters;
 }

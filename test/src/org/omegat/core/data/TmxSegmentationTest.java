@@ -38,7 +38,7 @@ import org.omegat.util.Language;
 public class TmxSegmentationTest extends TestCase {
     @Test
     public void testProjectTMX() throws Exception {
-        Segmenter.srx = SRX.getSRX();
+        Segmenter.srx = SRX.getDefault();
 
         ProjectProperties props = new ProjectProperties();
         props.setSupportDefaultTranslations(true);
@@ -63,7 +63,7 @@ public class TmxSegmentationTest extends TestCase {
 
     @Test
     public void testExternalTMX() throws Exception {
-        Segmenter.srx = SRX.getSRX();
+        Segmenter.srx = SRX.getDefault();
 
         ProjectProperties props = new ProjectProperties();
         props.setSupportDefaultTranslations(true);

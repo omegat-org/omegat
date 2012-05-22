@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.xml.XMLBlock;
 import org.omegat.util.xml.XMLStreamReader;
@@ -455,6 +456,21 @@ public class Preferences {
         setPreference(name, String.valueOf(intvalue));
     }
 
+    public static SRX getSRX() {
+        return srx;
+    }
+
+    public static void setSRX(SRX newSrx) {
+        srx = newSrx;
+
+        File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
+        try {
+            SRX.saveTo(srx, srxFile);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public static void save() {
         try {
             if (m_changed)
@@ -544,6 +560,12 @@ public class Preferences {
             Log.logErrorRB("PM_ERROR_READING_FILE");
             Log.log(e4);
         }
+
+        File srxFile = new File(StaticUtils.getConfigDir() + SRX.CONF_SENTSEG);
+        srx = SRX.loadSRX(srxFile);
+        if (srx == null) {
+            srx = SRX.getDefault();
+        }
     }
 
     private static void doSave() throws IOException {
@@ -575,4 +597,6 @@ public class Preferences {
     private static List<String> m_nameList;
     private static List<String> m_valList;
     private static Map<String, Integer> m_preferenceMap;
+
+    private static SRX srx;
 }

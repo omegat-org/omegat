@@ -25,6 +25,7 @@
 package org.omegat.core.segmentation;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
@@ -93,6 +94,17 @@ public class MapRule implements Serializable {
         // language code in segmentation rule is case sensitive
         // Correction contributed by Tiago Saboga.
         this.pattern = Pattern.compile(pattern, Pattern.CASE_INSENSITIVE);
+    }
+
+    public MapRule clone() {
+        MapRule result = new MapRule();
+        result.languageCode = languageCode;
+        result.pattern = pattern;
+        result.rules = new ArrayList<Rule>(rules.size());
+        for (Rule rule : rules) {
+            result.rules.add(rule.clone());
+        }
+        return result;
     }
 
     /** List of rules (of class {@link Rule}) for the language */

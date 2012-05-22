@@ -37,6 +37,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.segmentation.SRX;
 import org.omegat.filters2.TranslationException;
 
 /**
@@ -177,6 +178,8 @@ public class ProjectFileStorage {
         Marshaller m = CONTEXT.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         m.marshal(om, outFile);
+
+        SRX.saveTo(props.getProjectSRX(), new File(props.getProjectInternal(), SRX.CONF_SENTSEG));
     }
 
     /**

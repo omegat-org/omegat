@@ -1,176 +1,467 @@
 <html>
-<head>
-  <link rel="stylesheet" href="./OmegaT.css" type="text/css">
-  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-
-  <title>Hasteko gida azkarra - OmegaT 2.2 erabiltzailearen eskuliburua</title>
-</head>
-
-<body>
-  <h2>Hasi OmegaT erabiltzen 5 minututan!<br> - Hasteko gida azkarra</h2>
-
-  <p>Gida azkar honek oinarrizkoa azaltzen du soilik. Aukeran, erabiltzaile guztiek erabiltzailearen eskuliburua irakurri beharko lukete OmegaT-k eskaintzen duen guztira ohitzeko. Hemen deskribatutako lasterteklek "Ctrl+tekla" konbentzioa erabiltzen dute, baina Mac erabiltzaileek "Cmd+tekla" erabili beharko lukete. "Cmd" teklak "command" etiketa edo sagar marka dauka Apple teklatuetan.</p>
-  <hr>
-  <a name="summary" id="summary"></a>
-
-  <h2>OmegaT-ren funtzionamendua, hitz gutxitan</h2>
-
-  <p>OmegaT-ren pantaila hiru leihoz osaturiko espazio bakarra da. Horietako bakoitzaren tamaina aldatzeko sagua erabili daiteke. Ezkerrean editorea dago, itzulpenak idazteko erabiltzen dena. Eskuinean, goian, parekatzeen bisorea, itzulpen-memorien parekatzeak erakusten den lekua. Azpian, glosarioen bisorea dago, glosario mailako parekatzeak erakusten den lekua.</p>
-
-  <p>Editorearen leihoan OmegaT-k sorburu-testua aurkezten du, esalditan 'segmentatuta' (edo paragrafotan). Segmentuak banaka itzultzen dira. Segmentu batetik bestera igarotzerakoan, itzulpenak itzulpen-memoria batean gordetzen dira. Segmentu guztiak itzuli ondoren (edo lehenago, nahi izanez gero), OmegaT-k dokumentu itzuliak sortzen ditu, itzulpen-memoria erabiliz, "helburu" karpeta batean.</p>
-
-  <p>OmegaT-k itzulpen-proiektuak deiturikoetan antolatzen ditu itzulpen-lanak. Proiektu bakoitzerako, OmegaT-k karpeta-multzo bat sortzen du. Karpeta hauetan gordeko dira itzuli nahi diren sorburu-dokumentuak, erabili nahi diren glosarioak eta erabili nahi diren itzulpen-memoriak. Era berean, OmegaT-k "helburu" karpeta bat sortzen du azkenean lortuko diren dokumentu itzuliak gordetzeko.</p>
-  <hr>
-  <a name="translate" id="translate"></a>
-
-  <h2>Nola egin itzulpenak OmegaT erabiliz</h2><a name="create" id="create"></a>
-
-  <h3>Proiektu berria sortu eta ireki</h3>
-
-  <p>Hautatu <strong>Proiektua → Berria...</strong> menuen barran.</p>
-
-  <p>Joan proiektuaren fitxategiak gorde nahi dituzun karpetara, eta eman izen bat itzulpen-proiektuari. Izen hau proiektuaren karpeta nagusia izendatzeko erabiliko da; proiektuaren fitxategi guztiak karpeta honetan edo bere azpikarpetetan gordeko dira.</p>
-
-  <p>OmegaT-k proiektuaren karpetaren sorrera baieztatzea edo aldatzea eskatuko dizu, ondoko koadroaren bidez:</p>
-
-  <p align="center"><img src="images/NewProject.png" name="graphics1" alt=
-  "Proiektuaren propietateen leihoa" id="graphics1" align="bottom" border="0"></p>
-
-  <p>Sinpleena azpikarpeten kokapena dagoen bezala utzi eta "Onartu" sakatzea da, baina lehenengo egiaztatu sorburuaren eta itzulpenaren hizkuntza-kodeak zuzenak direla. Hautatu hizkuntza-kodea (2 letra) edo hizkuntza- eta herrialde-kodeak (2+2 letra) goitibeherako koadroa erabiliz, edo tekleatu eskuz (hizkuntza-kodeak e edo 3 letra eduki ditzake). Ez ahaztu "helburu" azpikarpeta (zure dokumentu itzuliak gordetzen den lekua) non dagoen kokatuta. OmegaT-k paragrafoak segmentatu ordez esaldiak segmenta ditzan ezartzen baduzu, ideia ona izaten da segmentazio-arauak birritan aztertzea.</p>
-
-  <p>Proiektuaren antolaketa onartzeko "Onartu" botoia sakatu ondoren, OmegaT-k inportatu nahi diren sorburu-dokumentuak hautatzeko eskatzen du. Fitxategiak banan-banan inportatu daitezke, edo karpeta-zuhaitz osoak inportatu daitezke (azpikarpeta guztietako fitxategi guztiak barne). Nahi gabe okerreko dokumentuak, edo dokumentu gehiegi, inportatu badira, konponbide errazena dokumentu horiek OmegaT-ren proiektuko "sorburu" karpetatik kentzea da (normalean, sistemaren fitxategi-kudeatzailea erabiliz).</p>
-
-  <p>Itzuli beharreko fitxategiak aztertzeko, kontsultatu <strong>Proiektuaren fitxategiak</strong> leihoa (Menua: <strong>Proiektua → Proiektuaren fitxategiak</strong>, automatikoki irekitzen ez bada). Sorburu-fitxategiaren edukiak aldatu nahi badira, gogoan izan lehenengo proiektua birkargatu behar dela (Menua: <strong>Proiektua → Birkargatu</strong>). OmegaT-ren portaera lehenetsia proiektuaren zerrendako lehen fitxategia irekitzea da. Gogoan izan, OmegaT-k behean adierazitako formatuetan dauden fitxategiak itzuli ditzake soilik, eta fitxategi-iragazkietan definitu diren ereduekin bat badatoz. Beste edozein fitxategi ezikusi egingo da.</p>
-
-  <ul>
-    <li>OpenDocument/OpenOffice.org</li>
-
-    <li>Testu arrunta</li>
-
-    <li>.po</li>
-
-    <li>Java-ren bundle.properties fitxategiak</li>
-
-    <li>XHTML, HTML</li>
-
-    <li>HTML laguntza konpilatzeko fitxategiak</li>
-
-    <li>INI ('gako=balio' formatua)</li>
-
-    <li>DocBook</li>
-
-    <li>Microsoft-en Open XML</li>
-
-    <li>Okapi-ren XLIFF fitxategi elebakarrak</li>
-
-    <li>QuarkXPress-en CopyFlowGold</li>
-
-    <li>Azpitituluen fitxategiak (SRT)</li>
-
-    <li>ResX</li>
-
-    <li>Android-en baliabideak</li>
-
-    <li>LaTeX</li>
-  </ul><a name="segments" id="segments"></a>
-
-  <h3>Segmentuak banaka itzuli</h3>
-
-  <p>Proiektua eta itzuliko diren fitxategiak definitu ondoren, OmegaT-k lehen sorburu-fitxategia irekiko du editorean. Lehen segmentua berdez nabarmendurik agertuko da; sorburu-testuaren kopia bat bere azpian erakutsiko da, "helburu-eremuan". (Une honetan, helburu-eremutik kanpo dagoen testua babestuta dago eta ezin da aldatu). Itzulpena <code>&lt;segment 0001&gt;</code> eta <code>&lt;end segment&gt;</code> etiketen artean tekleatu behar da, sorburu-testua gainidatziz. Sakatu "<strong>ENTER</strong>" hurrengo segmentura mugitzeko. Oharra:Oharra:</p>
-
-  <ul>
-    <li>Testuaren beste edozein atalera mugitzeko, gora zein behera, egin klik bikoitza ireki nahi duzun esaldi edo paragrafoan.Testuaren beste edozein atalera mugitzeko, gora zein behera, egin klik bikoitza ireki nahi duzun esaldi edo paragrafoan.</li>
-
-    <li>Hutsik dagoen helburu-eremu batean itzuli nahi izanez gero, hautatu aukera hori <strong>Aukerak → Editatu portaera</strong> leihoan.</li>
-
-    <li>
-      <p>Editore-panelak zer erakusten duen alda dezakezu (esaterako, sorburu-testua erakustea edo ez, itzulitako testua nabarmentzea edo ez, etab.) menu nagusiaren <span style="font-weight: bold;">Ikusi</span> aukeran.</p>
-    </li>
-  </ul>
-
-  <p>"<strong>ENTER</strong>" sakatzean hainbat gauza gertatzen dira: OmegaT-k segmentu-bikotea (sorburu-segmentua eta bere itzulpena) gehitzen dio itzulpen-memoriari, eta automatikoki proiektuaren beste fitxategietan detektatzen dituen segmentu berdinak itzultzen ditu. Era berean, itzulpen-memoria eta glosarioa eskaneatzen ditu itzuli gabeko hurrengo segmentuarentzako parekoak aurkitzeko.</p><a name="tm" id="tm"></a>
-
-  <h3>Itzulpen-memorietako, glosarioetako eta hiztegietako parekatzeak erabili</h3><a name="tm_matches" id="tm_matches"></a>
-
-  <h3>Itzulpen-memorien parekatzeak</h3>
-
-  <p>OmegaT-k hurrengo segmentuarentzako parekatze lausoak (%30etik gorakoak) aurkitzen baditu itzulpen-memorian, horiek parekatzeen bisorean erakusten ditu. Parekatzeen bisorearen portaera lehenetsia lehen parekatzea aurrehautatzea da.</p><img src=
-  "images/MatchesPane.png" name="graphics4" alt="parekatzeen panela" id="graphics4"
-  style="border: 0px solid ;"><br clear="left">
-
-  <p><br></p>
-
-  <p>Itzulpen-memorien parekatzeak parekatzeen bisoretik hartu eta helburu-eremuan txertatzeko, lasterteklak erabili daitezke:</p>
-
-  <ul>
-    <li>Sakatu <code>Ctrl+I</code> aurrehautatutako parekatzea kurtsorearen kokapenean txertatzeko, edo...</li>
-
-    <li>Sakatu <code>Ctrl+R</code> segmentu osoa aurrehautatutako parekatzearekin ordezteko.</li>
-  </ul>
-
-  <p>Parekatze bat baino gehiago aurkitu bada, eta aurrehautatutako parekatzea erabili nahi ez bada:</p>
-
-  <ul>
-    <li>Hautatu nahi duzun parekatzea parekatzeen bisorean: <code>Ctrl+2</code> bisorean erakusten den bigarren parekatzea hautatzeko, <code>Ctrl+3</code> hirugarren parekatzerako, etab.</li>
-
-    <li>Ondoren, erabili <code>Ctrl+I</code> edo <code>Ctrl+R</code> lasterteklak lehen adierazi den bezala.</li>
-  </ul>
-
-  <p>(Nahi izanez gero, OmegaT-k parekatzeen ehuneko jakin bat gainditzen duen lehen parekatzea automatikoki sartu dezake helburu-eremuan, segmentua irekitzen denean. Ezarri aukera hau <strong>Aukerak → Editatu portaera</strong> erabiliz)</p><a name="gloss_matches" id="gloss_matches"></a>
-
-  <h3>Glosario- eta hiztegi-parekatzeak</h3>
-
-  <p>Proiektuan sartu dituzun glosarioetako eta hiztegietako parekatzeak glosarioen eta hiztegien bisoreetan erakusten dira erreferentzia gisa.</p><a name="searches" id="searches"></a>
-
-  <h3>Bilaketen erabilera</h3>
-
-  <p>OmegaT-k bilaketa-funtzio asko eta indartsuak eskaintzen ditu. Ireki bilaketa-leihoa <code>Ctrl+F</code> sakatuz eta sartu bilatu nahi duzun hitza edo esaldia "Bilatu hau" kutxan. Bestela, hautatu hitz edo esaldi bat editore-paneleko edozein tokitan eta sakatu <code>Ctrl+F</code>. Kasu honetan, hitza edo esaldia automatikoki sartuko da "Bilatu hau" kutxan.</p>
-
-  <h3>Google Translate zerbitzuaren erabilera</h3>
-
-  <p>Google Translate panelean, aktibatuta badago, uneko segmentuaren itzulpenerako iradokizun bat jasoko duzu automatikoki. Sakatu <code>Ctrl+M</code> eta helburu-segmentuko uneko edukia ordezkatu egingo da.<br></p>
-
-  <p><a name="create_trans" id="create_trans"></a></p>
-
-  <h3>Dokumentu itzulien sorrera</h3>
-
-  <p>Segmentu guztiak itzuli ondoren (edo lehenago, hala nahi izanez gero), OmegaT-k helburu-dokumentua(k) eguneratuko ditu itzulpen-memorian gordetako itzulpenak erabiliz. Hori egiteko, hautatu <strong>Proiektua → Sortu dokumentu itzuliak</strong> goiko menuan. OmegaT-k proiektuaren sorburu-karpetan dauden dokumentu itzulgarri guztien bertsio itzuliak eratuko ditu, dokumentu hauek osorik itzuliak egon zein ez. Partzialki edo osorik itzulitako fitxategiak proiektuaren helburu-karpetan gordeko dira. Itzulpena amaitzeko, ireki helburu-fitxategi bakoitza bere aplikazio elkartuan (nabigatzailea, testu-prozesadorea...) eta itzulpenaren edukia eta formatua berrikusi. Gero, itzuli OmegaT-ra, beharrezkoak diren zuzenketak egiteko; ez ahaztu dokumentu itzulia berriro birsortu behar duzula.</p>
-  <hr>
-  <a name="tags" id="tags"></a>
-
-  <h2>Nola erabili etiketadun testua</h2>
-
-  <p>OmegaT-k etiketa bereziak erabiltzen ditu sorburu-dokumentuen formatua (lodia, etzana, etab.) galtzen ez dela segurtatzeko. OmegaT-ren etiketen osaera hau da: letra bat edo gehiago eta ondoren digitu bat edo gehiago, eta "/" karakterea etiketak ixteko (esaterako: &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;, etab.) Etiketa hauek kontuz erabili behar dira eta helburu-segmentuetan modu egokian sarturik daudela segurtatu behar da (ikus <em>Eragiketak etiketekin</em>).</p><a name="example" id="example"></a>
-
-  <h3>Adibide bat...</h3>
-
-  <p>Adibide honetan etiketak nabarmendu egin dira, ikusteko errazagoak izan daitezen, baina kontuan izan OmegaT-k ez dituela nabarmentzen. HTML etiketak, <font color="blue">urdinez</font> nabarmendutakoak, ezikusi egiten ditu OmegaT-k, segmentua osorik inguratzen baitute. Etiketak, behean <font color=
-  "green">berdez</font> nabarmendutakoak, OmegaT-k kudeatu behar ditu, segmentuaren barruan baitaude. Hemen dago HTML formatuko segmentu baten adibide bat (ingelesez):</p>
-
-  <p><code><font color="blue">&lt;p&gt;</font>Bistaratzeko beste letra-tipo bat hauta daiteke <font color="green">&lt;b&gt;</font>Erakutsi letra-tipoa<font color=
-  "green">&lt;/b&gt;</font> koadroa erabiliz. Hura irekitzeko, joan <font color=
-  "green">&lt;i&gt;</font>Aukerak<font color="green">&lt;/i&gt;</font> →<font color="green">&lt;i&gt;</font>Letra-tipoa...<font color=
-  "green">&lt;/i&gt;</font> aukerara. Koadroaren bidez letra-tipoa eta tamaina alda daitezke.<font color="blue">&lt;/p&gt;</font></code></p>
-
-  <p>Ondoren erakusten da OmegaT-k nola erakutsiko duen, afrikaans-eko itzulpen batekin:</p><br>
-
-  <p><img src="images/tagged_segment.png" alt="" border="0"></p><br>
-
-  <p>OmegaT-k dokumentu itzulia sortu ondoren, HMTL-ak itxura hau izango du:</p>
-
-  <p><img src="images/tagged_segment_target.png" alt="" border="0"></p><a name=
-  "tag_verif" id="tag_verif"></a>
-
-  <h3>Etiketen egiaztapena</h3>
-
-  <p>OmegaT-k ez ditu itzulitako dokumentuaren etiketa akasdunak automatikoki detektatzen. Dokumentua zure bezeroari eman baino lehen, etiketak egiaztatu beharko zenituzke akatsak detektatzeko.</p>
-
-  <p>Hautatu <strong>Tresnak → Balidatu etiketak</strong> menuen barran. Taula bat sortuko da sorburuko eta helburuko etiketak bat ez datozen segmentuak erakutsiz. Egin klik segmentuaren zenbakian. Editorean ageri den segmentu akasdunera joango zara automatikoki, eta bertan etiketa zuzendu ahal izango duzu. Sakatu <code>Enter</code> segmentu zuzena balioztatzeko eta egiaztatu zuzenketa <code>Ctrl-T</code> berriro sakatuz.</p>
-
-  <p>Zenbait kasutan, etiketa-akatsek dokumentu bat ireki dadin eragotzi dezakete. Hortaz, dokumentu itzuliak sortu baino lehen, etiketa-akats guztiak zuzendu dituzula segurtatu beharko zenuke. Azkenik, birritan egiaztatu beharko zenuke azken formatua, dokumentu itzulia bere formatuari dagokion bisore edo editorean irekiz.</p>
-
-  <p>Zenbait programazio-lengoaietan (esaterako PHP, C) etiketa bereziak erabiltzen dira leku-marka modura, printf funtzioarekin konbinatuta erabiltzen diren kateetan. OmegaT-k etiketa hauek detektatu eta balida ditzake aukera hori gaitzen baduzu. Hautatu <strong>Aukerak→ Etiketa-balidazioa...</strong> menutik. Balidazio sinplea edo balidazio osoa erabil dezakezu. Balidazio sinplean leku-marka posibleen aldagai sinpleak soilik erabiltzen dira. Hau erabilgarria da iturburu-kodeak leku-marka adierazgarriagoak eta konplexuagoak ez dituenean eta positibo faltsu asko jasotzen dituzunean.</p>
-
-  <hr>
-</body>
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+   
+      <title>Hasteko gida azkarra</title>
+      <link rel="stylesheet" href="OmegaT.css" type="text/css">
+      <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+   </head>
+   <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+      <div class="chapter" title="Hasteko gida azkarra">
+         <div class="titlepage">
+            <div>
+               <div>
+                  <h2 class="title"><a name="chapter.instant.start.guide"></a>Hasteko gida azkarra
+                  </h2>
+               </div>
+            </div>
+         </div>
+         <div class="section" title="1.&nbsp;Hasi OmegaT erabiltzen 5 minututan!">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e4"></a>1.&nbsp;Hasi <span class="application">OmegaT</span> erabiltzen 5 minututan!
+                     </h2>
+                  </div>
+               </div>
+            </div>
+            <p>Gida azkar honek oinarrizkoa azaltzen du soilik. Informazio gehiagorako, erabiltzailearen eskuliburua irakurri beharko zenukete
+               <span class="application">OmegaT-k</span> eskaintzen duen guztira ohitzeko. Oharra Mac erabiltzaileentzat: hemen deskribatutako lasterteklek "<span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>tekla</strong></span>" konbentzioa erabiltzen dute, baina Mac erabiltzaileek "<span class="keycap"><strong>Cmd</strong></span>+<span class="keycap"><strong>tekla</strong></span>" erabili beharko lukete. " <span class="keycap"><strong>Cmd</strong></span>" teklak "command" etiketa edo sagar baten sinboloa dauka Apple teklatuetan.
+            </p>
+            <p> <span class="application">OmegaT-ren</span> pantaila bost leihoz osaturiko laneko area bakarra da<a class="indexterm" name="d0e35"></a>. Horietako bakoitzaren tamaina aldatzeko sagua erabili daiteke. Ezkerrean editorea dago, itzulpenak idazteko erabiltzen dena.
+               Azpian, glosarioen bisorea dago, glosario mailako parekatzeak erakusten den lekua. Leihoaren behealdean dauden bi fitxa gehiagok
+               hiztegien eta itzulpen automatikoen panelak irekitzen dituzte. (Oharra: panelak nahieran birrantola ditzakezu - goian eman
+               den deskribapenak OmegaT-k instalazioaren ondoren duen itxura azaltzen du.)
+            </p>
+            <p>Editorearen leihoan OmegaT-k sorburu-testua aurkezten du, esalditan edo paragrafotan 'segmentatuta'. Segmentuak banaka itzultzen
+               dira. Segmentu batetik bestera igarotzerakoan, itzulpenak itzulpen-memoria batean gordetzen dira. Segmentu guztiak itzuli
+               ondoren (edo lehenago, nahi izanez gero),  <span class="application">OmegaT-k</span> dokumentu itzuliak sortuko ditu, itzulpen-memoria erabiliz, "helburu" karpeta batean.
+            </p>
+            <p>OmegaT-k itzulpen-proiektuetan antolatzen ditu itzulpen-lanak. Proiektu bakoitzerako, OmegaT-k karpeten multzo bat sortzen
+               du. Karpeta hauetan gordeko dira itzuli nahi diren sorburu-dokumentuak, erabili nahi diren glosarioak eta erabili nahi diren
+               itzulpen-memoriak. Era berean, OmegaT-k "helburu" karpeta bat sortzen du azkenean sortuko diren dokumentu itzuliak gordetzeko.
+            </p>
+         </div>
+         <div class="section" title="2.&nbsp;Itzulpenak Omegat-rekin">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="d0e46"></a>2.&nbsp;Itzulpenak <span class="application">Omegat-rekin</span></h2>
+                  </div>
+               </div>
+            </div>
+            <div class="section" title="2.1.&nbsp;Proiektu berria sortzea eta irekitzea">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="create.and.open.new.project"></a>2.1.&nbsp;Proiektu berria sortzea eta irekitzea<a class="indexterm" name="d0e54"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Hautatu <span class="guimenu">Proiektua</span> → <span class="guimenuitem">Berria...</span><a class="indexterm" name="d0e66"></a> menuen barran.
+               </p>
+               <p>Joan proiektuaren fitxategiak gorde nahi dituzun karpetara, eta eman izen bat itzulpen-proiektuari. Izen hau proiektuaren
+                  karpeta nagusia izendatzeko erabiliko da; proiektuaren fitxategi guztiak karpeta honetan edo bere azpikarpetetan gordeko dira.
+               </p>
+               <p><span class="application">OmegaT-k</span> proiektuaren karpetaren sorrera baieztatzea edo aldatzea eskatuko dizu, ondoko koadroaren bidez:
+               </p>
+               <div class="figure"><a name="New.project.dialog.window"></a><p class="title"><b>Figure&nbsp;1.&nbsp;<a class="indexterm" name="d0e80"></a>Proiektu berria - elkarrizketa-koadroa</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/NewProject.png" alt="ProiektuaProiektua elkarrizketa-koadroa - irudiaProiektu berria - elkarrizketa-koadroa"></div>
+                  </div>
+               </div><br class="figure-break"><p>Sinpleena azpikarpeten kokapena dagoen bezala onartzea da, baina lehenengo egiaztatu sorburuaren eta helburuaren hizkuntza-kodeak
+                  zuzenak direla. Hautatu hizkuntza-kodea (2 letra) edo hizkuntza- eta herrialde-kodeak (2+2 letra) goitibeherako zerrenda erabiliz,
+                  edo tekleatu eskuz (hizkuntza-kodeak 2 edo 3 letra eduki ditzake). Ez ahaztu "helburu" azpikarpeta (zure dokumentu itzuliak
+                  gordetzen den lekua) non dagoen kokatuta. OmegaT-k paragrafoak segmentatu ordez esaldiak segmenta ditzan nahiago baduzu, irakurri
+                  segmentazio-arauen inguruko kapitulua<a class="indexterm" name="d0e93"></a>.
+               </p>
+               <p>Proiektuaren antolaketa onartzeko "Onartu" botoia sakatu ondoren, OmegaT-k inportatu nahi diren sorburu-dokumentuak hautatzeko
+                  eskatzen du. Fitxategiak banan-banan inporta daitezke <em class="firstterm">Proiektua &gt; Inportatu sorburu-fitxategiak</em> aukerarekin, edo fitxategiak zein karpeta-zuhaitz osoak kopia daitezke (azpikarpeta guztietako fitxategi guztiak barne) eskuz
+                  zure OmegaT proiektuaren sorburu-karpetan (adibidez, zure fitxategi-kudeatzailea erabiliz). Nahi gabe okerreko dokumentuak,
+                  edo dokumentu gehiegi, inportatu badira, konponbide errazena dokumentu horiek OmegaT-ren proiektuko sorburu-karpetatik kentzea
+                  da.
+               </p>
+               <p>Itzuli beharreko fitxategiak aztertzeko, kontsultatu <span class="bold"><strong>Proiektuaren fitxategiak</strong></span> <a class="indexterm" name="d0e109"></a>leihoa (Menua: <span class="guimenu">Proiektua</span> → <span class="guimenuitem">Proiektuaren fitxategiak</span>,<a class="indexterm" name="d0e121"></a> automatikoki irekitzen ez bada). Sorburu-karpetaren edukiak aldatu nahi badituzu, gogoan izan lehenengo proiektua birkargatu
+                  behar dela (Menua: <span class="guimenu">Proiektua</span> → <span class="guimenuitem">Birkargatu</span> (<span class="shortcut"><strong><span class="keycap"><strong>F5</strong></span></strong></span>)). <span class="application">OmegaT-ren</span> portaera lehenetsia proiektuaren zerrendako lehen fitxategia irekitzea da. Gogoan izan,  <span class="application">OmegaT-k</span> behean adierazitako formatuetan dauden fitxategiak itzuli ditzake soilik, eta fitxategi-iragazkietan definitu diren ereduekin
+                  bat badatoz. Beste edozein fitxategi ezikusi egingo da.<a class="indexterm" name="d0e142"></a></p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Testu arrunteko fitxategi-formatuak<a class="indexterm" name="d0e152"></a></strong></span></p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>ASCII testua (.txt, etab.)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Testu kodetua (*.UTF8)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Java-ren baliabide-paketeak (*.properties)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>PO fitxategiak (*.po)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>INI ('gako=balio' formatua) fitxategiak (*.ini)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <p>
+                           
+                        </p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>DTD fitxategiak (*.DTD)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>DocuWiki fitxategiak (*.txt)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>SubRip azpitituluen fitxategiak (*.srt)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Magento CE Locale CSV  (*.csv)</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p><span class="bold"><strong>Etiketatutako testuko fitxategi-formatuak<a class="indexterm" name="d0e197"></a></strong></span></p>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>OpenOffice.org / OpenDocument (*.odt, *.ott, *.ods, *.ots,
+                                    *.odp, *.otp)
+                                 </p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Microsoft Open XML (*.docx, *.xlsx, *.pptx)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>(X)HTML (*.html, *.xhtml,*.xht)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>HTML Help Compiler (*.hhc, *.hhk)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>DocBook (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>XLIFF elebakarra (*.xlf, *.xliff, *.sdlxliff)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>QuarkXPress CopyFlowGold (*.tag, *.xtg)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>ResX fitxategiak (*.resx)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>Android baliabideak (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>LaTex (*.tex, *.latex)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Laguntza (*.xml) eta eskuliburu (*.hmxp) fitxategiak</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Typo3 LocManager (*.xml)</p>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="itemizedlist">
+                           <ul class="itemizedlist" type="circle">
+                              <li class="listitem">
+                                 <p>WiX Localization (*.wxl)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Iceni Infix (*.xml)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Flash XML export (*.xml)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Wordfast TXML (*.txml)</p>
+                              </li>
+                              <li class="listitem">
+                                 <p>Camtasia Windows-erako (*.camproj)</p>
+                              </li>
+                           </ul>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+               <p>Itzuli nahi duzun testuaz gain, etiketadun testu-fitxategiek formatu-informazioa eduki ohi dute, OmegaT-n "etiketa" gisa erakusten
+                  dena. Etiketek itzulitako testuan ere egon behar dute, nahiz eta formatua ez den "itzuli" behar. Etiketak falta badira edo
+                  gaizki kokatuta badaude, testua ez da erakutsiko behar den moduan eta itzulpena zuzendu egin beharko da - ikusi "Etiketak
+                  egiaztatzea" kapitulua beherago.
+               </p>
+            </div>
+            <div class="section" title="2.2.&nbsp;Segmentuak banaka itzultzea">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="translate.the.segments.one.by.one"></a>2.2.&nbsp;Segmentuak banaka itzultzea
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Proiektua eta itzuliko diren fitxategiak definitu ondoren,  <span class="application">OmegaT-k</span> lehen sorburu-fitxategia irekitzen du editorean.
+               </p>
+               <p>Segmentu aktiboa berdez nabarmendurik agertuko da; sorburu-testuaren kopia bat bere azpian erakutsiko da, "helburu-eremuan".
+                  (Une honetan, helburu-eremutik kanpo dagoen testua babestuta dago eta ezin da aldatu). Itzulpena &lt;<code class="literal">segment 0001&gt;</code> etiketaren aurretik tekleatu behar duzu.. OmegaT konfigura daiteke sorburu-testua automatikoki helburu-testuan kopiatua izan
+                  dadin (ikusi <span class="emphasis"><em>Aukerak &gt; Editatu portaera...</em></span>). Portaera hori erabilgarria izan daiteke sorburu-testuaren zenbait atal aldaketarik gabe mantendu behar direnean. Kasu horietan
+                  sorburu-testua gainidatziko duzu. Sakatu  <span class="bold"><strong>ENTER</strong></span> hurrengo segmentura mugitzeko. Oharra:
+               </p>
+               <div class="itemizedlist">
+                  <ul class="itemizedlist" type="disc">
+                     <li class="listitem">
+                        <p>Testuaren beste edozein atalera mugitzeko, gora zein behera, egin klik bikoitza ireki nahi duzun esaldi edo paragrafoan.Testuaren
+                           beste edozein atalera mugitzeko, gora zein behera, egin klik bikoitza ireki nahi duzun esaldi edo paragrafoan.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Hutsik dagoen helburu-eremu batean itzuli nahi baduzu, hautatu aukera hori   <span class="guimenu">Aukerak</span> → <span class="guimenuitem">Editatu portaera<a class="indexterm" name="d0e297"></a></span> leihoan.
+                        </p>
+                     </li>
+                     <li class="listitem">
+                        <p>Editore-panelak zer erakusten duen alda dezakezu (esaterako, sorburu-testua erakustea edo ez, itzulitako testua nabarmentzea
+                           edo ez, etab.) menu nagusiaren Ikusi aukeran.
+                        </p>
+                        <p><span class="bold"><strong>ENTER</strong></span> sakatzean hainbat gauza gertatzen dira: <span class="application">OmegaT-k</span> segmentu-bikotea (sorburu-segmentua eta bere itzulpena) gehitzen dio itzulpen-memoriari. Era berean, automatikoki proiektuaren
+                           beste fitxategietan detektatzen dituen segmentu berdinak itzultzen ditu Horrez gain, itzulpen-memoria eta glosarioa eskaneatzen
+                           ditu itzuli gabeko hurrengo segmentuarentzako parekoak aurkitzeko, eta hura irekitzen du.
+                        </p>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+            <div class="section" title="2.3.&nbsp;Itzulpen-memorietako, glosarioetako eta hiztegietako parekatzeak erabiltzea">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="use.matches.in.TMs.dictionaries.and.glossaries"></a>2.3.&nbsp;Itzulpen-memorietako, glosarioetako eta hiztegietako parekatzeak erabiltzea
+                        </h3>
+                     </div>
+                  </div>
+               </div>
+               <div class="section" title="2.3.1.&nbsp;Itzulpen-memorien parekatzeak">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="translation.memory.matches"></a>2.3.1.&nbsp;Itzulpen-memorien parekatzeak<a class="indexterm" name="d0e319"></a><a class="indexterm" name="d0e324"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <div class="figure"><a name="d0e329"></a><p class="title"><b>Figure&nbsp;2.&nbsp;Parekatzeen panela</b></p>
+                     <div class="figure-contents">
+                        <div class="mediaobject"><img src="images/MatchesPane.png" alt="Parekatzeen panela"></div>
+                     </div>
+                  </div><br class="figure-break"><p> <span class="application">OmegaT-k</span> hurrengo segmentuarentzako parekatze lausoak (%30etik gorakoak) aurkitzen baditu proiektuaren itzulpen-memorian, horiek parekatzeen
+                     bisorean erakusten ditu. Parekatzeen bisorearen portaera lehenetsia lehen parekatzea aurrehautatzea da.
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                           <p>Sakatu  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span><a class="indexterm" name="d0e351"></a> aurrehautatutako parekatzea kurtsorearen kokapenean txertatzeko, edo...
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Sakatu  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> <a class="indexterm" name="d0e366"></a><a class="indexterm" name="d0e371"></a> segmentu osoa aurrehautatutako parekatzearekin ordezteko.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>Parekatze bat baino gehiago aurkitu bada, eta aurrehautatutako parekatzea ez den beste bat erabili nahi baduzu:</p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                           <p>Hautatu nahi duzun parekatzea parekatzeen bisorean: <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>2</strong></span> bisorean erakusten den bigarren parekatzea hautatzeko, <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>3</strong></span> hirugarren parekatzerako, etab.
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>Ondoren, erabili <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>I</strong></span> edo <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>R</strong></span> lasterteklak lehen adierazi den bezala.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
+                  <p>Nahi izanez gero, OmegaT-k parekatzeen ehuneko jakin bat gainditzen duen lehen parekatzea automatikoki sartu dezake helburu-eremuan.
+                     Ezarri aukera hori <span class="guimenu">Options</span> erabiliz.
+                  </p>
+               </div>
+               <div class="section" title="2.3.2.&nbsp;Glosarioen eta hiztegien parekatzeak">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="glossary.and.dictionary.matches"></a>2.3.2.&nbsp;Glosarioen eta hiztegien parekatzeak<a class="indexterm" name="d0e417"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Proiektuan sartu dituzun glosarioetako eta hiztegietako parekatzeak glosarioen eta hiztegien bisoreetan erakusten dira erreferentzia
+                     gisa.
+                  </p>
+               </div>
+               <div class="section" title="2.3.3.&nbsp;Bilaketen erabilera">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="use.searches"></a>2.3.3.&nbsp;Bilaketen erabilera
+                           </h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p><span class="application">OmegaT-k</span> bilaketa-funtzio asko eta indartsuak eskaintzen ditu. Ireki bilaketa-leihoa <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span> sakatuz eta sartu bilatu nahi duzun hitza edo esaldia "Bilatu hau" kutxan. Bestela, hautatu hitz edo esaldi bat editore-paneleko
+                     edozein tokitan eta sakatu <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>F</strong></span>: hautatutako hitz edo esaldia automatikoki txertatuko da "Bilatu hau" kutxan eta bilaketa-leihoa irekiko da.
+                  </p>
+               </div>
+               <div class="section" title="2.3.4.&nbsp;Itzulpen automatikoko zerbitzuen erabilera">
+                  <div class="titlepage">
+                     <div>
+                        <div>
+                           <h4 class="title"><a name="use.Google.Translate"></a>2.3.4.&nbsp;Itzulpen automatikoko zerbitzuen erabilera<a class="indexterm" name="d0e446"></a></h4>
+                        </div>
+                     </div>
+                  </div>
+                  <p>Itzulpen automatikoen panelean, mota honetako zerbitzuetako bat aktibatuta badago (ikusi  <span class="emphasis"><em>Aukerak &gt; Itzulpen automatikoa</em></span>), uneko segmentuaren itzulpenerako iradokizun bat jasoko duzu automatikoki. Sakatu <span class="emphasis"><em>Ctrl+M </em></span> helburu-segmentua iradokizun horrekin ordezteko.
+                  </p>
+               </div>
+            </div>
+            <div class="section" title="2.4.&nbsp;Dokumentu itzuliak sortzen">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="create.translated.documents"></a>2.4.&nbsp;Dokumentu itzuliak sortzen<a class="indexterm" name="d0e462"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Segmentu guztiak itzuli ondoren (edo lehenago, hala nahi izanez gero),  <span class="application">OmegaT-k</span> helburu-dokumentua(k) sortuko ditu itzulpen-memorian gordetako itzulpenak erabiliz. Hori egiteko, hautatu <span class="guimenu">Proiektua</span> → <span class="guimenuitem">Sortu dokumentu itzuliak</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>D</strong></span></strong></span>)<a class="indexterm" name="d0e483"></a> <a class="indexterm" name="d0e489"></a> menu nagusian. <span class="application">OmegaT-k</span> proiektuaren sorburu-karpetan dauden dokumentu itzulgarri guztien bertsio itzuliak eratuko ditu, dokumentu hauek osorik itzuliak
+                  egon zein ez. Partzialki edo osorik itzulitako fitxategiak proiektuaren helburu-karpetan gordeko dira. Itzulpena amaitzeko,
+                  ireki helburu-fitxategi bakoitza bere aplikazio elkartuan (nabigatzailea, testu-prozesadorea...) eta itzulpenaren edukia eta
+                  formatua berrikusi. Gero, itzuli  <span class="application">OmegaT-ra</span>, beharrezkoak diren zuzenketak egiteko; ez ahaztu dokumentu itzulia berriro birsortu behar duzula.
+               </p>
+            </div>
+         </div>
+         <div class="section" title="3.&nbsp;Testu etiketatua nola erabili">
+            <div class="titlepage">
+               <div>
+                  <div>
+                     <h2 class="title" style="clear: both"><a name="how.to.handle.tagged.text"></a>3.&nbsp;Testu etiketatua nola erabili<a class="indexterm" name="d0e504"></a></h2>
+                  </div>
+               </div>
+            </div>
+            <p><span class="application">OmegaT-k</span> etiketa bereziak erabiltzen ditu sorburu-dokumentuen formatua (lodia, etzana, etab.) galtzen ez dela segurtatzeko. <span class="application">OmegaT-ren</span> etiketen osaera hau da: letra bat edo gehiago eta ondoren digitu bat edo gehiago, eta "/" karakterea etiketak ixteko (esaterako:
+               &lt;f0&gt;, &lt;/f0&gt; &lt;br&gt;, &lt;/s2&gt;, etab.) Etiketa hauek kontuz erabili behar dira eta helburu-segmentuetan modu egokian sarturik daudela
+               segurtatu behar da (ikus Eragiketak etiketekin).
+            </p>
+            <div class="section" title="3.1.&nbsp;Adibide bat...">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="d0e514"></a>3.1.&nbsp;Adibide bat...<a class="indexterm" name="d0e517"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p>Adibide honetan etiketak nabarmendu egin dira, ikusteko errazagoak izan daitezen, baina kontuan izan  <span class="application">OmegaT-k</span> ez dituela nabarmentzen. HTML etiketak, urdinez nabarmendutakoak, ezikusi egiten ditu  <span class="application">OmegaT-k</span>, segmentua osorik inguratzen baitute. Behean berdez nabarmendutako etiketak, hala ere,  <span class="application">OmegaT-k</span> kudeatu behar ditu, segmentuaren barruan baitaude. Hemen dago HTML formatuko segmentu baten adibide bat (ingelesez):
+               </p>
+               <p><code class="literal">&lt;p&gt;Bistaratzeko beste letra-tipo bat hauta daiteke &lt;b&gt;Erakutsi letra-tipoa&lt;/b&gt; koadroa erabiliz. Hura irekitzeko, joan &lt;i&gt;Aukerak&lt;/i&gt;
+                     →&lt;i&gt;Letra-tipoa...&lt;/i&gt; aukerara. Koadroaren bidez letra-tipoa eta tamaina alda daitezke.&lt;/p&gt;</code></p>
+               <p>Ondoren erakusten da  <span class="application">OmegaT-k</span> nola erakutsiko duen, afrikaans-eko itzulpen batekin:
+               </p>
+               <div class="figure"><a name="fig.tagged.segment.source"></a><p class="title"><b>Figure&nbsp;3.&nbsp;Sorburuko <a class="indexterm" name="d0e544"></a>HTML segmentua</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/tagged_segment.png" alt="Sorburuko Segmentua, sorburua eta helburua - irudiaHTML segmentua"></div>
+                  </div>
+               </div><br class="figure-break"><p> <span class="application">OmegaT-k</span> dokumentu itzulia sortu ondoren, HMTL-ak itxura hau izango du:
+               </p>
+               <div class="figure"><a name="fig.tagged.segment.target"></a><p class="title"><b>Figure&nbsp;4.&nbsp;Helburuko HTML segmentua</b></p>
+                  <div class="figure-contents">
+                     <div class="mediaobject"><img src="images/tagged_segment_target.png" alt="Helburuko HTML segmentua"></div>
+                  </div>
+               </div><br class="figure-break"></div>
+            <div class="section" title="3.2.&nbsp;Etiketen egiaztapena">
+               <div class="titlepage">
+                  <div>
+                     <div>
+                        <h3 class="title"><a name="tag.verification"></a>3.2.&nbsp;Etiketen egiaztapena<a class="indexterm" name="d0e569"></a><a class="indexterm" name="d0e574"></a></h3>
+                     </div>
+                  </div>
+               </div>
+               <p><span class="application">OmegaT-k</span> ez ditu itzulitako dokumentuaren etiketa akasdunak automatikoki detektatzen. Beraz, dokumentua zure bezeroari eman baino
+                  lehen, etiketak egiaztatu beharko zenituzke akatsak detektatzeko. Hautatu <span class="guimenu">Tresnak</span> → <span class="guimenuitem">Balidatu etiketak...</span> (<span class="shortcut"><strong><span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T</strong></span></strong></span>) menuen barran. Taula bat sortuko da sorburuko eta helburuko etiketak bat ez datozen segmentuak erakutsiz. Egin klik segmentuaren
+                  zenbakian. Editorean ageri den segmentu akasdunera joango zara automatikoki, eta bertan etiketa zuzendu ahal izango duzu.
+                  Zuzenketa guztiak egin ondoren, egiazta itzazu  <span class="keycap"><strong>Ctrl</strong></span>+<span class="keycap"><strong>T<a class="indexterm" name="d0e598"></a></strong></span> sakatuta berriro. Kontuan izan etiketen egiaztatzaileak erroreen berri eman dezakeela baita etiketak zuzenak direnean ere
+                  - adibidez, etiketen ordena aldatu behar izan denean gramatikaren aldetik zuzena den itzulpena egiteko. Mesedez, har ezazu
+                  portaera hau alde onetik: egiaztatzaileak nahiago du errorea jakinarazi badaezpada ere.
+               </p>
+               <p>Zenbait kasutan, etiketa-akatsek dokumentu bat ireki dadin eragotzi dezakete. Ez dago izurako arrazoirik - oraindik sorburu-fitxategia
+                  eta itzulpena, biak dituzu eskura, egin beharreko bakarra dokumentu itzuliak sortu baino lehen etiketa-akats guztiak zuzendu
+                  dituzula segurtatzea da. Azkenik, birritan egiaztatu beharko zenuke azken formatua, dokumentu itzulia bere formatuari dagokion
+                  bisore edo editorean irekiz.
+               </p>
+            </div>
+         </div>
+      </div>
+   </body>
 </html>

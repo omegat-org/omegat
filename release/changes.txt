@@ -19,6 +19,20 @@
   http://sourceforge.net/support/tracker.php?aid=3528575
 
 ----------------------------------------------------------------------
+ OmegaT 2.5.4 update 2
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.4 update 2 vs. 2.5.4 update 1
+
+  Bug fixes:
+
+  - Windows installer: the user language was always set in OmegaT.l4J.ini,
+regardless of the choice of the user
+
+----------------------------------------------------------------------
  OmegaT 2.5.4 update 1
 ----------------------------------------------------------------------
    3 Enhancements

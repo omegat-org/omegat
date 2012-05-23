@@ -156,18 +156,15 @@ Name: "ca_VAL"; MessagesFile: "compiler:Languages\Valencian.isl"
 
 [Code]
 var
-  UseInstallLanguage: Boolean;
+  Page: TInputOptionWizardPage;
 
 procedure InitializeWizard;
-var
-  Page: TInputOptionWizardPage;
 begin
   Page := CreateInputOptionPage(wpWelcome,
     CustomMessage('OmTUseInstallLanguageTitle'), CustomMessage('OmTUseInstallLanguageSubTitle'), 
     CustomMessage('OmTUseInstallLanguageText'), False, False);
   Page.Add(CustomMessage('OmTUseInstallLanguageOption'));
   Page.Values[0] := true;
-  UseInstallLanguage := Page.Values[0];
 end;
 
 procedure SetUserLanguage;
@@ -176,7 +173,7 @@ var
   InstallCountry: String;
   IniFile: String;  
 begin
-  if UseInstallLanguage then
+  if Page.Values[0] then
   begin
     InstallCountry := Copy(ActiveLanguage(), 4, 2);
     InstallLanguage := Copy(ActiveLanguage(), 0, 2);

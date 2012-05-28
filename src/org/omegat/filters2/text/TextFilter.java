@@ -77,6 +77,7 @@ public class TextFilter extends AbstractFilter {
         return true;
     }
     
+    @Override
     protected boolean requirePrevNextFields() {
         return true;
     }
@@ -185,6 +186,7 @@ public class TextFilter extends AbstractFilter {
      * 
      * @return True, because Text filter has options.
      */
+    @Override
     public boolean hasOptions() {
         return true;
     }

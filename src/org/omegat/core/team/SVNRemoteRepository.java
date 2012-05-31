@@ -104,7 +104,7 @@ public class SVNRemoteRepository implements IRemoteRepository {
             Log.logInfoRB("SVN_FINISH", "checkout");
         } catch (SVNAuthenticationException ex) {
             // authentication failed - need to ask username/password
-            Log.logWarningRB("SVN_WRONG_AUTHENTICATION");
+            Log.logWarningRB("TEAM_WRONG_AUTHENTICATION");
             throw new AuthenticationException(ex);
         } catch (Exception ex) {
             Log.logErrorRB("SVN_ERROR", "checkout", ex.getMessage());

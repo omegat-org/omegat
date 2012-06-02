@@ -820,6 +820,14 @@
           </row>
 
           <row>
+            <entry>Save...</entry>
+
+            <entry/>
+
+            <entry>optionsSaveOptionsMenuItem</entry>
+          </row>
+
+          <row>
             <entry>Proxy login...</entry>
 
             <entry/>

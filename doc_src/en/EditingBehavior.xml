@@ -20,141 +20,187 @@
 
     <mediaobject>
       <imageobject role="html">
-        <imagedata fileref="images/EditingBehaviourOptions.png"/>
+        <imagedata fileref="images/EditingBehaviourOptions25.png"/>
       </imageobject>
     </mediaobject>
   </figure>
 
-  <section id="automatic.match.insertion">
-    <title>Editing behaviour - options<indexterm class="singular">
-        <primary>Editing behaviour</primary>
+  <para/>
 
-        <secondary>Options</secondary>
-      </indexterm></title>
+  <para>You translate your files by moving from segment to segment, editing
+  each current segment in turn. When moving between segments, you may wish to
+  populate the editing field with an existing translation in the fuzzy match
+  pane or with the source text. In <menuchoice>
+      <guimenu>Options</guimenu>
 
-    <para>You translate your files by moving from segment to segment, editing
-    each current segment in turn. When moving between segments, you may wish
-    to populate the editing field with an existing translation in the fuzzy
-    match pane or with the source text. In <menuchoice>
-        <guimenu>Options</guimenu>
+      <guimenuitem>Editing Behavior...</guimenuitem>
+    </menuchoice> <application>OmegaT</application> offers you the following
+  alternatives:</para>
 
-        <guimenuitem>Editing Behavior...</guimenuitem>
-      </menuchoice> <application>OmegaT</application> offers you the following
-    alternatives:</para>
-
-    <variablelist>
-      <varlistentry>
-        <term>The source text</term>
-
-        <listitem>
-          <para>You can have the source text inserted automatically into the
-          editing field. This is useful for texts containing many trade marks
-          or other proper nouns you which must be left unchanged.</para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Leave the segment empty<indexterm class="singular">
-            <primary>Editing behaviour</primary>
-
-            <secondary>Empty translation</secondary>
-          </indexterm></term>
-
-        <listitem>
-          <para>OmegaT leaves the editing field blank. This option allows you
-          to enter the translation without the need to remove the source text,
-          thus saving you two keystrokes (<emphasis role="bold">Ctrl+A
-          </emphasis>and <emphasis role="bold">Del). </emphasis> Empty
-          translations are now allowed. They are displayed as &lt;EMPTY&gt; in
-          the Editor. To create one, right-click in a segment, and select
-          "<emphasis role="bold">Set empty translation</emphasis>". The entry
-          <emphasis role="bold">Remove translation</emphasis> in the same
-          popup menu also allows to delete the existing translation of the
-          current segment. You achieve the same by clearing the target segment
-          and pressing <guibutton>Enter.</guibutton></para>
-        </listitem>
-      </varlistentry>
-
-      <varlistentry>
-        <term>Insert the best fuzzy match<indexterm class="singular">
-            <primary>Editing behaviour</primary>
-
-            <secondary>Inserting fuzzy matches</secondary>
-          </indexterm></term>
-
-        <listitem>
-          <para>OmegaT inserts the translation of the string most similar to
-          the current source, if it is above the similarity threshold that you
-          have selected in this dialog. The prefix (per default empty) can be
-          used to tag translations, done via fuzzy matches. If you add a
-          prefix (for instance [fuzzy]), you can trace those translations
-          later to see they are correct.</para>
-        </listitem>
-      </varlistentry>
-    </variablelist>
-  </section>
-
-  <section id="allow.translation.equal.to.source">
-    <title>Allow the translation to be equal to source<indexterm
-        class="singular">
-        <primary>Editing behaviour</primary>
-
-        <secondary>Translation equal to source</secondary>
-      </indexterm></title>
-
-    <para>Documents for translation may contain trade marks, names or other
-    proper nouns that will be the same in translated documents. There are two
-    strategies for segments that contain only such invariable text.</para>
-
-    <para>You can decide not to translate such segments at all. OmegaT will
-    then report these segments as not translated. This is the default. The
-    alternative is to enter a translation that is identical to the source
-    text. OmegaT is able to recognize that you have done this. To make this
-    possible, go to <menuchoice>
-        <guimenu>Options</guimenu>
-
-        <guimenuitem>Editing Behavior...</guimenuitem>
-      </menuchoice> and check the box <emphasis role="bold">Allow translation
-    to be equal to source</emphasis>.</para>
-  </section>
-
-  <section id="export.segment.to.text.files">
-    <title>Export the segment to text files<indexterm class="singular">
-        <primary>Editing behaviour</primary>
-
-        <secondary>Exporting the current segment</secondary>
-      </indexterm></title>
-
-    <para>The text export function exports data from within the current
-    <application>OmegaT</application> project to plain text files. The data
-    are exported when the segment is opened. The files appear in the /script
-    subfolder in the OmegaT user files folder, and include:</para>
-
-    <itemizedlist>
-      <listitem>
-        <para>The content of the segment source text
-        (<filename>source.txt</filename>).</para>
-      </listitem>
+  <variablelist>
+    <varlistentry>
+      <term>The source text</term>
 
       <listitem>
-        <para>The content of the segment target text
-        (<filename>target.txt</filename>).</para>
+        <para>You can have the source text inserted automatically into the
+        editing field. This is useful for texts containing many trade marks or
+        other proper nouns you which must be left unchanged.</para>
       </listitem>
+    </varlistentry>
+
+    <varlistentry>
+      <term>Leave the segment empty<indexterm class="singular">
+          <primary>Editing behaviour</primary>
+
+          <secondary>Empty translation</secondary>
+        </indexterm></term>
 
       <listitem>
-        <para>The text highlighted by the user, when
-        <keycap>Ctrl-Shift-C</keycap> is pressed or <guimenuitem>Edit &gt;
-        Export Selection</guimenuitem> is selected
-        (<filename>selection.txt</filename>).</para>
+        <para>OmegaT leaves the editing field blank. This option allows you to
+        enter the translation without the need to remove the source text, thus
+        saving you two keystrokes (<emphasis role="bold">Ctrl+A </emphasis>and
+        <emphasis role="bold">Del). </emphasis> Empty translations are now
+        allowed. They are displayed as &lt;EMPTY&gt; in the Editor. To create
+        one, right-click in a segment, and select "<emphasis role="bold">Set
+        empty translation</emphasis>". The entry <emphasis role="bold">Remove
+        translation</emphasis> in the same popup menu also allows to delete
+        the existing translation of the current segment. You achieve the same
+        by clearing the target segment and pressing
+        <guibutton>Enter.</guibutton></para>
       </listitem>
-    </itemizedlist>
+    </varlistentry>
 
-    <para>The content of the files is overwritten either when a new segment is
-    opened (source.txt and target.txt) or when a new selection is exported
-    (selection.txt). The files are unformatted plain text files. The whole
-    process can be steered and controlled via Tck/Tcl-based scripting. See
-    <ulink url="http://www.omegat.org/en/howtos/text_export.html">Using the
-    OmegaT text export function</ulink> for specifics, examples and
-    suggestions.</para>
-  </section>
+    <varlistentry>
+      <term>Insert the best fuzzy match<indexterm class="singular">
+          <primary>Editing behaviour</primary>
+
+          <secondary>Inserting fuzzy matches</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>OmegaT inserts the translation of the string most similar to the
+        current source, if it is above the similarity threshold that you have
+        selected in this dialog. The prefix (per default empty) can be used to
+        tag translations, done via fuzzy matches. If you add a prefix (for
+        instance [fuzzy]), you can trace those translations later to see they
+        are correct.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <para>The check boxes in the lower half of the dialog window serve the
+  following purpose:</para>
+
+  <variablelist>
+    <varlistentry>
+      <term>Attempt to convert numbers when inserting a fuzzy match<indexterm
+          class="singular">
+          <primary>Editing behaviour</primary>
+
+          <secondary>converting numbers</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>The set of parameters that defines a given language, country and
+        special variant preferences, the so-called locale, includes also
+        Number format setting. Given the source ad target languages, OmegaT
+        will try to convert the numbers, found in the source segment, into a
+        form, that is acceptable in the target language.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Allow the translation to be equal to source<indexterm
+          class="singular">
+          <primary>Editing behaviour</primary>
+
+          <secondary>Translation equal to source</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>Documents for translation may contain trade marks, names or
+        other proper nouns that will be the same in translated documents.
+        There are two strategies for segments that contain only such
+        invariable text.</para>
+
+        <para>You can decide not to translate such segments at all. OmegaT
+        will then report these segments as not translated. This is the
+        default. The alternative is to enter a translation that is identical
+        to the source text. OmegaT is able to recognize that you have done
+        this. To make this possible, go to <menuchoice>
+            <guimenu>Options</guimenu>
+
+            <guimenuitem>Editing Behavior...</guimenuitem>
+          </menuchoice> and check the box <emphasis role="bold">Allow
+        translation to be equal to source</emphasis>.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term>Export the segment to text files<indexterm class="singular">
+          <primary>Editing behaviour</primary>
+
+          <secondary>Exporting the current segment</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>The text export function exports data from within the current
+        <application>OmegaT</application> project to plain text files. The
+        data are exported when the segment is opened. The files appear in the
+        /script subfolder in the OmegaT user files folder, and include:</para>
+
+        <itemizedlist>
+          <listitem>
+            <para>The content of the segment source text
+            (<filename>source.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>The content of the segment target text
+            (<filename>target.txt</filename>).</para>
+          </listitem>
+
+          <listitem>
+            <para>The text highlighted by the user, when
+            <keycap>Ctrl-Shift-C</keycap> is pressed or <guimenuitem>Edit &gt;
+            Export Selection</guimenuitem> is selected
+            (<filename>selection.txt</filename>).</para>
+          </listitem>
+        </itemizedlist>
+
+        <para>The content of the files is overwritten either when a new
+        segment is opened (source.txt and target.txt) or when a new selection
+        is exported (selection.txt). The files are unformatted plain text
+        files. The whole process can be steered and controlled via
+        Tck/Tcl-based scripting. See <ulink
+        url="http://www.omegat.org/en/howtos/text_export.html">Using the
+        OmegaT text export function</ulink> for specifics, examples and
+        suggestions.</para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
+
+  <variablelist>
+    <varlistentry>
+      <term> Go To Next Untranslated Segment stops where there is at least one
+      alternative translation<indexterm class="singular">
+          <primary>Editing behaviour</primary>
+
+          <secondary>GoTo stopping on segment with alternative
+          translation</secondary>
+        </indexterm></term>
+
+      <listitem>
+        <para>If we want to avoid any mis-translations in case of segments
+        with several possible target contents, checking this check box will
+        cause <emphasis role="bold"> Go To Next Untranslated
+        Segment</emphasis>stop on the next such segment, irrespective of
+        whether it has already been translated or not. </para>
+      </listitem>
+    </varlistentry>
+  </variablelist>
 </chapter>

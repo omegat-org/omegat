@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.searches"></a>Chapter&nbsp;16.&nbsp;Searches<a class="indexterm" name="d0e7132"></a></h2>
+                  <h2 class="title"><a name="chapter.searches"></a>Chapter&nbsp;16.&nbsp;Searches<a class="indexterm" name="d0e7185"></a></h2>
                </div>
             </div>
          </div>
@@ -38,12 +38,12 @@
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. Search window</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7154">1.1. Searching</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7178">1.2. Search location</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7207">1.1. Searching</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e7231">1.2. Search location</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Using wild cards</a></span></dt>
-               <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Search methods</a></span></dt>
+               <dt><span class="section"><a href="chapter.searches.html#search.methoids">3. Search methods and options</a></span></dt>
                <dt><span class="section"><a href="chapter.searches.html#search.result.display">4. Search results display</a></span></dt>
             </dl>
          </div>
@@ -56,21 +56,22 @@
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;16.1.&nbsp;Text search Window<a class="indexterm" name="d0e7141"></a></b></p>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;16.1.&nbsp;Text search Window<a class="indexterm" name="d0e7194"></a></b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/TextSearch.png" alt="Text search WindowSearch windowExample"></div>
+                  <div class="mediaobject"><img src="images/TextSearch25.png" alt="Text search WindowSearch windowExample"></div>
                </div>
             </div><br class="figure-break"><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;">
                <h3 class="title">Note</h3>
-               <p>The above search finds all target segments where two or more white
-                        spaces - \s\s+ - occur.
+               <p>The above search finds all target segments that contain
+                        characters, rather unprobable in the target - i.e. Slovenian - language
+                        .
                </p>
             </div>
             <div class="section" title="1.1.&nbsp;Searching">
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7154"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e7157"></a></h3>
+                        <h3 class="title"><a name="d0e7207"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e7210"></a></h3>
                      </div>
                   </div>
                </div>
@@ -88,7 +89,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7178"></a>1.2.&nbsp;Search location
+                        <h3 class="title"><a name="d0e7231"></a>1.2.&nbsp;Search location
                         </h3>
                      </div>
                   </div>
@@ -124,7 +125,7 @@
                         <span class="application">OmegaT</span> restricts the search to files in
                         source file formats. Consequently, although OmegaT is quite able to
                         handle<code class="filename"> tmx</code> files, it does not include them in the
-                        Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7208"></a>Advanced Options</strong></span>, you can combine the search
+                        Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7261"></a>Advanced Options</strong></span>, you can combine the search
                         with the name of the author of the translation and time of the last
                         change made.
                </p>
@@ -134,7 +135,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7218"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7271"></a></h2>
                   </div>
                </div>
             </div>
@@ -166,11 +167,11 @@
             </div>
             <p>The matches will be displayed in bold blue.</p>
          </div>
-         <div class="section" title="3.&nbsp;Search methods">
+         <div class="section" title="3.&nbsp;Search methods and options">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods<a class="indexterm" name="d0e7261"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods and options<a class="indexterm" name="d0e7314"></a></h2>
                   </div>
                </div>
             </div>
@@ -206,10 +207,20 @@
                                            may not be safe to open</code></em></span>, etc.
                      </p>
                   </dd>
+                  <dt><span class="term"><span class="bold"><strong>regular expressions</strong></span></span></dt>
+                  <dd>
+                     <p>The search string will be treated as a regular expression. The
+                                  search string - [a-zA-Z]+[öäüqwß] - in the example above for
+                                  instance looks for words in the target segment, containing
+                                  questionable characters from German keyboard. Regular expressions
+                                  are a powerful way to look for instances of a string. See more in
+                                  the chapter<a class="link" href="chapter.regexp.html" title="Chapter&nbsp;15.&nbsp;Regular expressions"> Regular
+                                     Expressions.</a></p>
+                  </dd>
                </dl>
             </div>
-            <p>For either of these two methods you can select the following three
-                   options:
+            <p>Additionally to one of the methods above you can select the
+                   following:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
@@ -220,12 +231,18 @@
                      </p>
                   </li>
                   <li class="listitem">
-                     <p><span class="bold"><strong>regular expressions:</strong></span> The search
-                                string will be treated as a regular expression. A regular expression
-                                search is a powerful way to look for instances of a string. It is
-                                similar to a wild card search, but allows far more flexibility. The
-                                regular expressions used in searches are those supported by Java. See
-                                more in the chapter on regular Expressions.
+                     <p><span class="bold"><strong>in source: </strong></span>search in the source
+                                segments
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>in translations: </strong></span>search in the
+                                target segments
+                     </p>
+                  </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>in notes: </strong></span>search in notes to
+                                segments
                      </p>
                   </li>
                   <li class="listitem">
@@ -234,8 +251,18 @@
                                 search.
                      </p>
                   </li>
+                  <li class="listitem">
+                     <p><span class="bold"><strong>display all results: </strong></span>clearing
+                                this check box will case OmegaT show just the first occurrence of a
+                                hit, if several hits exist
+                     </p>
+                  </li>
                </ul>
             </div>
+            <p>If you click on the button <span class="guibutton">Advanced options</span>
+                   additional criteria (author of the translation, date translated etc) as
+                   shown in the above image can be selected.
+            </p>
          </div>
          <div class="section" title="4.&nbsp;Search results display">
             <div class="titlepage">
@@ -260,7 +287,7 @@
             </p>
             <p>You may have several Search windows open at the same time. You can
                    quickly see their contents by looking at their title: it will contain the
-                   search term used. 
+                   search term used.
             </p>
          </div>
       </div>

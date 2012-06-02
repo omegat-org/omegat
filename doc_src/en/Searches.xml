@@ -18,18 +18,19 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/TextSearch.png"/>
+          <imagedata fileref="images/TextSearch25.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/TextSearch.png" width="95%"/>
+          <imagedata fileref="images/TextSearch25.png" width="90%"/>
         </imageobject>
       </mediaobject>
     </figure>
 
     <note>
-      <para>The above search finds all target segments where two or more white
-      spaces - \s\s+ - occur.</para>
+      <para>The above search finds all target segments that contain
+      characters, rather unprobable in the target - i.e. Slovenian - language
+      .</para>
     </note>
 
     <section>
@@ -133,10 +134,10 @@
   </section>
 
   <section id="search.methoids">
-    <title>Search methods<indexterm class="singular">
+    <title>Search methods and options<indexterm class="singular">
         <primary>Searches</primary>
 
-        <secondary>Methods</secondary>
+        <secondary>Methods and options</secondary>
       </indexterm></title>
 
     <para>Select the method using the radio buttons. You can choose between
@@ -175,10 +176,24 @@
           may not be safe to open</literal></emphasis>, etc.</para>
         </listitem>
       </varlistentry>
+
+      <varlistentry>
+        <term><emphasis role="bold">regular expressions</emphasis></term>
+
+        <listitem>
+          <para>The search string will be treated as a regular expression. The
+          search string - [a-zA-Z]+[öäüqwß] - in the example above for
+          instance looks for words in the target segment, containing
+          questionable characters from German keyboard. Regular expressions
+          are a powerful way to look for instances of a string. See more in
+          the chapter<link linkend="chapter.regexp"> Regular
+          Expressions.</link></para>
+        </listitem>
+      </varlistentry>
     </variablelist>
 
-    <para>For either of these two methods you can select the following three
-    options:</para>
+    <para>Additionally to one of the methods above you can select the
+    following:</para>
 
     <itemizedlist>
       <listitem>
@@ -188,12 +203,18 @@
       </listitem>
 
       <listitem>
-        <para><emphasis role="bold">regular expressions:</emphasis> The search
-        string will be treated as a regular expression. A regular expression
-        search is a powerful way to look for instances of a string. It is
-        similar to a wild card search, but allows far more flexibility. The
-        regular expressions used in searches are those supported by Java. See
-        more in the chapter on regular Expressions.</para>
+        <para><emphasis role="bold">in source: </emphasis>search in the source
+        segments</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">in translations: </emphasis>search in the
+        target segments</para>
+      </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">in notes: </emphasis>search in notes to
+        segments</para>
       </listitem>
 
       <listitem>
@@ -201,7 +222,17 @@
         memories in the <filename>tm</filename> folder are included in the
         search.</para>
       </listitem>
+
+      <listitem>
+        <para><emphasis role="bold">display all results: </emphasis>clearing
+        this check box will case OmegaT show just the first occurrence of a
+        hit, if several hits exist</para>
+      </listitem>
     </itemizedlist>
+
+    <para>If you click on the button <guibutton>Advanced options</guibutton>
+    additional criteria (author of the translation, date translated etc) as
+    shown in the above image can be selected.</para>
   </section>
 
   <section id="search.result.display">
@@ -221,6 +252,6 @@
 
     <para>You may have several Search windows open at the same time. You can
     quickly see their contents by looking at their title: it will contain the
-    search term used. </para>
+    search term used.</para>
   </section>
 </chapter>

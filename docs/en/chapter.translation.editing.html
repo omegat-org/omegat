@@ -29,136 +29,148 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Editing behavior<a class="indexterm" name="d0e5385"></a></h2>
+                  <h2 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Editing behavior<a class="indexterm" name="d0e5412"></a></h2>
                </div>
             </div>
-         </div>
-         <div class="toc">
-            <dl>
-               <dt><span class="section"><a href="chapter.translation.editing.html#automatic.match.insertion">1. Editing behaviour - options</a></span></dt>
-               <dt><span class="section"><a href="chapter.translation.editing.html#allow.translation.equal.to.source">2. Allow the translation to be equal to source</a></span></dt>
-               <dt><span class="section"><a href="chapter.translation.editing.html#export.segment.to.text.files">3. Export the segment to text files</a></span></dt>
-            </dl>
          </div>
          <p>The dialog in <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> enables the user to select, how the current segment in the
               editing field is to be initialized and handled:
          </p>
          <div class="figure"><a name="editing.behavior.options"></a><p class="title"><b>Figure&nbsp;10.1.&nbsp;Editing behavior options</b></p>
             <div class="figure-contents">
-               <div class="mediaobject"><img src="images/EditingBehaviourOptions.png" alt="Editing behavior options"></div>
+               <div class="mediaobject"><img src="images/EditingBehaviourOptions25.png" alt="Editing behavior options"></div>
             </div>
-         </div><br class="figure-break"><div class="section" title="1.&nbsp;Editing behaviour - options">
-            <div class="titlepage">
-               <div>
-                  <div>
-                     <h2 class="title" style="clear: both"><a name="automatic.match.insertion"></a>1.&nbsp;Editing behaviour - options<a class="indexterm" name="d0e5407"></a></h2>
-                  </div>
-               </div>
-            </div>
-            <p>You translate your files by moving from segment to segment, editing
-                   each current segment in turn. When moving between segments, you may wish
-                   to populate the editing field with an existing translation in the fuzzy
-                   match pane or with the source text. In <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> <span class="application">OmegaT</span> offers you the following
-                   alternatives:
-            </p>
-            <div class="variablelist">
-               <dl>
-                  <dt><span class="term">The source text</span></dt>
-                  <dd>
-                     <p>You can have the source text inserted automatically into the
-                                  editing field. This is useful for texts containing many trade marks
-                                  or other proper nouns you which must be left unchanged.
-                     </p>
-                  </dd>
-                  <dt><span class="term">Leave the segment empty<a class="indexterm" name="d0e5433"></a></span></dt>
-                  <dd>
-                     <p>OmegaT leaves the editing field blank. This option allows you
-                                  to enter the translation without the need to remove the source text,
-                                  thus saving you two keystrokes (<span class="bold"><strong>Ctrl+A
-                                        </strong></span>and <span class="bold"><strong>Del). </strong></span> Empty
-                                  translations are now allowed. They are displayed as &lt;EMPTY&gt; in
-                                  the Editor. To create one, right-click in a segment, and select
-                                  "<span class="bold"><strong>Set empty translation</strong></span>". The entry
-                                  <span class="bold"><strong>Remove translation</strong></span> in the same
-                                  popup menu also allows to delete the existing translation of the
-                                  current segment. You achieve the same by clearing the target segment
-                                  and pressing <span class="guibutton">Enter.</span></p>
-                  </dd>
-                  <dt><span class="term">Insert the best fuzzy match<a class="indexterm" name="d0e5458"></a></span></dt>
-                  <dd>
-                     <p>OmegaT inserts the translation of the string most similar to
-                                  the current source, if it is above the similarity threshold that you
-                                  have selected in this dialog. The prefix (per default empty) can be
-                                  used to tag translations, done via fuzzy matches. If you add a
-                                  prefix (for instance [fuzzy]), you can trace those translations
-                                  later to see they are correct.
-                     </p>
-                  </dd>
-               </dl>
-            </div>
+         </div><br class="figure-break"><p></p>
+         <p>You translate your files by moving from segment to segment, editing
+              each current segment in turn. When moving between segments, you may wish to
+              populate the editing field with an existing translation in the fuzzy match
+              pane or with the source text. In <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> <span class="application">OmegaT</span> offers you the following
+              alternatives:
+         </p>
+         <div class="variablelist">
+            <dl>
+               <dt><span class="term">The source text</span></dt>
+               <dd>
+                  <p>You can have the source text inserted automatically into the
+                             editing field. This is useful for texts containing many trade marks or
+                             other proper nouns you which must be left unchanged.
+                  </p>
+               </dd>
+               <dt><span class="term">Leave the segment empty<a class="indexterm" name="d0e5453"></a></span></dt>
+               <dd>
+                  <p>OmegaT leaves the editing field blank. This option allows you to
+                             enter the translation without the need to remove the source text, thus
+                             saving you two keystrokes (<span class="bold"><strong>Ctrl+A </strong></span>and
+                             <span class="bold"><strong>Del). </strong></span> Empty translations are now
+                             allowed. They are displayed as &lt;EMPTY&gt; in the Editor. To create
+                             one, right-click in a segment, and select "<span class="bold"><strong>Set
+                                   empty translation</strong></span>". The entry <span class="bold"><strong>Remove
+                                   translation</strong></span> in the same popup menu also allows to delete
+                             the existing translation of the current segment. You achieve the same
+                             by clearing the target segment and pressing
+                             <span class="guibutton">Enter.</span></p>
+               </dd>
+               <dt><span class="term">Insert the best fuzzy match<a class="indexterm" name="d0e5478"></a></span></dt>
+               <dd>
+                  <p>OmegaT inserts the translation of the string most similar to the
+                             current source, if it is above the similarity threshold that you have
+                             selected in this dialog. The prefix (per default empty) can be used to
+                             tag translations, done via fuzzy matches. If you add a prefix (for
+                             instance [fuzzy]), you can trace those translations later to see they
+                             are correct.
+                  </p>
+               </dd>
+            </dl>
          </div>
-         <div class="section" title="2.&nbsp;Allow the translation to be equal to source">
-            <div class="titlepage">
-               <div>
-                  <div>
-                     <h2 class="title" style="clear: both"><a name="allow.translation.equal.to.source"></a>2.&nbsp;Allow the translation to be equal to source<a class="indexterm" name="d0e5469"></a></h2>
-                  </div>
-               </div>
-            </div>
-            <p>Documents for translation may contain trade marks, names or other
-                   proper nouns that will be the same in translated documents. There are two
-                   strategies for segments that contain only such invariable text.
-            </p>
-            <p>You can decide not to translate such segments at all. OmegaT will
-                   then report these segments as not translated. This is the default. The
-                   alternative is to enter a translation that is identical to the source
-                   text. OmegaT is able to recognize that you have done this. To make this
-                   possible, go to <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> and check the box <span class="bold"><strong>Allow translation
-                         to be equal to source</strong></span>.
-            </p>
+         <p>The check boxes in the lower half of the dialog window serve the
+              following purpose:
+         </p>
+         <div class="variablelist">
+            <dl>
+               <dt><span class="term">Attempt to convert numbers when inserting a fuzzy match<a class="indexterm" name="d0e5492"></a></span></dt>
+               <dd>
+                  <p>The set of parameters that defines a given language, country and
+                             special variant preferences, the so-called locale, includes also
+                             Number format setting. Given the source ad target languages, OmegaT
+                             will try to convert the numbers, found in the source segment, into a
+                             form, that is acceptable in the target language.
+                  </p>
+               </dd>
+            </dl>
          </div>
-         <div class="section" title="3.&nbsp;Export the segment to text files">
-            <div class="titlepage">
-               <div>
-                  <div>
-                     <h2 class="title" style="clear: both"><a name="export.segment.to.text.files"></a>3.&nbsp;Export the segment to text files<a class="indexterm" name="d0e5490"></a></h2>
+         <div class="variablelist">
+            <dl>
+               <dt><span class="term">Allow the translation to be equal to source<a class="indexterm" name="d0e5504"></a></span></dt>
+               <dd>
+                  <p>Documents for translation may contain trade marks, names or
+                             other proper nouns that will be the same in translated documents.
+                             There are two strategies for segments that contain only such
+                             invariable text.
+                  </p>
+                  <p>You can decide not to translate such segments at all. OmegaT
+                             will then report these segments as not translated. This is the
+                             default. The alternative is to enter a translation that is identical
+                             to the source text. OmegaT is able to recognize that you have done
+                             this. To make this possible, go to <span class="guimenu">Options</span> → <span class="guimenuitem">Editing Behavior...</span> and check the box <span class="bold"><strong>Allow
+                                   translation to be equal to source</strong></span>.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl>
+               <dt><span class="term">Export the segment to text files<a class="indexterm" name="d0e5527"></a></span></dt>
+               <dd>
+                  <p>The text export function exports data from within the current
+                             <span class="application">OmegaT</span> project to plain text files. The
+                             data are exported when the segment is opened. The files appear in the
+                             /script subfolder in the OmegaT user files folder, and include:
+                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                           <p>The content of the segment source text
+                                          (<code class="filename">source.txt</code>).
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>The content of the segment target text
+                                          (<code class="filename">target.txt</code>).
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>The text highlighted by the user, when
+                                          <span class="keycap"><strong>Ctrl-Shift-C</strong></span> is pressed or <span class="guimenuitem">Edit &gt;
+                                             Export Selection</span> is selected
+                                          (<code class="filename">selection.txt</code>).
+                           </p>
+                        </li>
+                     </ul>
                   </div>
-               </div>
-            </div>
-            <p>The text export function exports data from within the current
-                   <span class="application">OmegaT</span> project to plain text files. The data
-                   are exported when the segment is opened. The files appear in the /script
-                   subfolder in the OmegaT user files folder, and include:
-            </p>
-            <div class="itemizedlist">
-               <ul class="itemizedlist" type="disc">
-                  <li class="listitem">
-                     <p>The content of the segment source text
-                                (<code class="filename">source.txt</code>).
-                     </p>
-                  </li>
-                  <li class="listitem">
-                     <p>The content of the segment target text
-                                (<code class="filename">target.txt</code>).
-                     </p>
-                  </li>
-                  <li class="listitem">
-                     <p>The text highlighted by the user, when
-                                <span class="keycap"><strong>Ctrl-Shift-C</strong></span> is pressed or <span class="guimenuitem">Edit &gt;
-                                   Export Selection</span> is selected
-                                (<code class="filename">selection.txt</code>).
-                     </p>
-                  </li>
-               </ul>
-            </div>
-            <p>The content of the files is overwritten either when a new segment is
-                   opened (source.txt and target.txt) or when a new selection is exported
-                   (selection.txt). The files are unformatted plain text files. The whole
-                   process can be steered and controlled via Tck/Tcl-based scripting. See
-                   <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Using the
-                      OmegaT text export function</a> for specifics, examples and
-                   suggestions.
-            </p>
+                  <p>The content of the files is overwritten either when a new
+                             segment is opened (source.txt and target.txt) or when a new selection
+                             is exported (selection.txt). The files are unformatted plain text
+                             files. The whole process can be steered and controlled via
+                             Tck/Tcl-based scripting. See <a class="ulink" href="http://www.omegat.org/en/howtos/text_export.html" target="_top">Using the
+                                OmegaT text export function</a> for specifics, examples and
+                             suggestions.
+                  </p>
+               </dd>
+            </dl>
+         </div>
+         <div class="variablelist">
+            <dl>
+               <dt><span class="term"> Go To Next Untranslated Segment stops where there is at least one
+                           alternative translation<a class="indexterm" name="d0e5572"></a></span></dt>
+               <dd>
+                  <p>If we want to avoid any mis-translations in case of segments
+                             with several possible target contents, checking this check box will
+                             cause <span class="bold"><strong>&nbsp;Go To Next Untranslated
+                                   Segment</strong></span>stop on the next such segment, irrespective of
+                             whether it has already been translated or not. 
+                  </p>
+               </dd>
+            </dl>
          </div>
       </div>
       <div class="navfooter">

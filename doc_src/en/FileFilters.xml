@@ -141,7 +141,7 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Do not translate the content attribute of meta-tags
-        ... :</emphasis> </para>
+        ... :</emphasis></para>
 
         <para>It is sometimes useful to be able make some tags untranslatable
         based on the value of attributes. E.g., <literal>&lt;div
@@ -149,6 +149,12 @@
         key-value pairs for tags to be left untranslated. For the example
         above, the field would contain: <literal>class=hide, translate=no
         </literal></para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para/>
       </listitem>
     </itemizedlist>
 
@@ -240,9 +246,10 @@
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Do not translate the content attribute of
-        meta-tags</emphasis> ... : the attribute key-value pairs, separated by
-        commas, will be left untranslated</para>
+        <para><emphasis> Ignore the content of tags with the following
+        attribute key-value pairs (separate with commas)</emphasis> ... : a
+        match in the list of key-value pairs will cause the content of tags to
+        be ignored</para>
       </listitem>
     </itemizedlist>
 
@@ -370,8 +377,8 @@
 
       <itemizedlist>
         <listitem>
-          <para><application>OmegaT</application> uses the default encoding of
-          the operating system for text files.</para>
+          <para>OmegaT uses the default encoding of the operating system for
+          text files.</para>
         </listitem>
       </itemizedlist>
     </section>

@@ -86,7 +86,7 @@
          </p>
          <p>You can enable project specific filters via the <span class="bold"><strong>Options → Properties...</strong></span> . Klick on <span class="guibutton">File
                  Filters</span> button and activate the check box <span class="guimenuitem">Enable
-                 project specific filters</span><a class="indexterm" name="d0e4161"></a>. A copy of the filters configuration will be stored with the
+                 project specific filters</span><a class="indexterm" name="d0e4188"></a>. A copy of the filters configuration will be stored with the
               project in this case. If you later change filters, only the project filters
               will be updated, while the user filters stay unchanged.
          </p>
@@ -98,7 +98,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4174"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="file.filters.dialog"></a>1.&nbsp;File filters dialog<a class="indexterm" name="d0e4201"></a></h2>
                   </div>
                </div>
             </div>
@@ -115,7 +115,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4189"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="filters.options"></a>2.&nbsp;Filter options<a class="indexterm" name="d0e4216"></a></h2>
                   </div>
                </div>
             </div>
@@ -189,14 +189,20 @@
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
                      <p><span class="emphasis"><em>Do not translate the content attribute of meta-tags
-                                      ... :</em></span> 
-                     </p>
+                                      ... :</em></span></p>
                      <p>It is sometimes useful to be able make some tags untranslatable
                                 based on the value of attributes. E.g., <code class="literal">&lt;div
                                    class="hide"&gt; &lt;span translate="no"&gt;</code> You can define
                                 key-value pairs for tags to be left untranslated. For the example
                                 above, the field would contain: <code class="literal">class=hide, translate=no
                                    </code></p>
+                  </li>
+               </ul>
+            </div>
+            <div class="itemizedlist">
+               <ul class="itemizedlist" type="disc">
+                  <li class="listitem">
+                     <p></p>
                   </li>
                </ul>
             </div>
@@ -306,9 +312,10 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="emphasis"><em>Do not translate the content attribute of
-                                      meta-tags</em></span> ... : the attribute key-value pairs, separated by
-                                commas, will be left untranslated
+                     <p><span class="emphasis"><em> Ignore the content of tags with the following
+                                      attribute key-value pairs (separate with commas)</em></span> ... : a
+                                match in the list of key-value pairs will cause the content of tags to
+                                be ignored
                      </p>
                   </li>
                </ul>
@@ -345,7 +352,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4358"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="edit.filter.dialog"></a>3.&nbsp;Edit filter dialog<a class="indexterm" name="d0e4387"></a></h2>
                   </div>
                </div>
             </div>
@@ -363,7 +370,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4373"></a>Source file type, filename pattern<a class="indexterm" name="d0e4379"></a></h3>
+                        <h3 class="title"><a name="source.filetype.and.filename.pattern"></a>3.1.&nbsp;<a class="indexterm" name="d0e4402"></a>Source file type, filename pattern<a class="indexterm" name="d0e4408"></a></h3>
                      </div>
                   </div>
                </div>
@@ -392,7 +399,7 @@
                         </h3>
                      </div>
                   </div>
-               </div><a class="indexterm" name="d0e4407"></a><a class="indexterm" name="d0e4412"></a><a class="indexterm" name="d0e4417"></a><p>Only a limited number of file formats specify a mandatory
+               </div><a class="indexterm" name="d0e4436"></a><a class="indexterm" name="d0e4441"></a><a class="indexterm" name="d0e4446"></a><p>Only a limited number of file formats specify a mandatory
                         encoding. File formats that do not specify their encoding will use the
                         encoding you set up for the extension that matches their name. For
                         example, by default <code class="literal">.txt</code> files will be loaded using
@@ -426,8 +433,8 @@
                <div class="itemizedlist">
                   <ul class="itemizedlist" type="disc">
                      <li class="listitem">
-                        <p><span class="application">OmegaT</span> uses the default encoding of
-                                     the operating system for text files.
+                        <p>OmegaT uses the default encoding of the operating system for
+                                     text files.
                         </p>
                      </li>
                   </ul>
@@ -437,14 +444,14 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4447"></a></h3>
+                        <h3 class="title"><a name="target.name"></a>3.3.&nbsp;Target filename<a class="indexterm" name="d0e4474"></a></h3>
                      </div>
                   </div>
                </div>
                <p>Sometimes you may wish to rename the files you translate
                         automatically, for example adding a language code after the file name.
                         The target filename pattern uses a special syntax, so if you wish to
-                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4457"></a>Edit Pattern Dialog. If you wish to revert to default
+                        edit this field, you must click <span class="bold"><strong>Edit...</strong></span>and use the <a class="indexterm" name="d0e4484"></a>Edit Pattern Dialog. If you wish to revert to default
                         configuration of the filter, click <span class="bold"><strong>Defaults.</strong></span> You may also modify the name directly
                         in the target filename pattern field of the file filters dialog. The
                         Edit Pattern Dialog offers among others the following options:

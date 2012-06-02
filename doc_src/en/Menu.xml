@@ -950,6 +950,14 @@
             </row>
 
             <row>
+              <entry><guimenuitem>Save...</guimenuitem></entry>
+
+              <entry>Allows the user select the interval - in minutes and
+              seconds - between consecutive automatic saves of the project.
+              The minimum is 10 seconds. </entry>
+            </row>
+
+            <row>
               <entry><guimenuitem>Proxy login...</guimenuitem></entry>
 
               <entry>Enter your user name and your password, if you use a

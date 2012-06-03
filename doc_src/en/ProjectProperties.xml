@@ -156,16 +156,15 @@
             <secondary>Autopropagation option</secondary>
           </indexterm></emphasis></para>
 
-        <para>In case multiple translations are available in these translation
-        memories for any given source segment, the Autopropagation checkbox
-        offers the user the following two possibilities as regards automatic
-        translation : if checked, the first translated segment will be assumed
-        as the valid translation and its target text will be automatically
+        <para>In case there are non-unique segments in the source documents, 
+        the Auto-propagation checkbox offers the user the following two possibilities 
+        as regards automatic translation: if checked, the first translated segment 
+        will be assumed as the default translation and its target text will be automatically
         used for later hits during the translation process. Mistranslated
-        segments can of course be corrected later manually. If the
-        Autopropagation checkbox is not checked, the segments with alternative
-        translations are left untranslated until the user has decided
-        which of the alternatives is to be used.</para>
+        segments can of course be corrected later manually using Create Alternative
+        Translation. If the Auto-propagation checkbox is not checked, the 
+        segments with alternative translations are left untranslated until 
+        the user has decided which translation is to be used.</para>
       </listitem>
     </itemizedlist>
 

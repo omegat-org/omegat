@@ -101,11 +101,23 @@
         </indexterm></term>
 
       <listitem>
-        <para>The set of parameters that defines a given language, country and
-        special variant preferences, the so-called locale, includes also
-        Number format setting. Given the source ad target languages, OmegaT
-        will try to convert the numbers, found in the source segment, into a
-        form, that is acceptable in the target language.</para>
+        <para>If this option is checked, when a fuzzy match is inserted, 
+        either manually or automatically, OmegaT attempts to convert the numbers 
+        in the fuzzy match, so that the number of the source segments are used instead.
+        There are a number of restrictions.</para>
+        <itemizedlist>
+          <listitem>
+          The number of numbers must be the same in the source segment and in both
+          matches.
+          </listitem>
+          <listitem>
+          The numbers must be exactly the same between the two matches.
+          </listitem>
+          <listitem>
+          Only integers and simple doubles (not localized English doubles, e.g.,
+          5.4) are considered being numbers.
+          </listitem>
+        </itemizedlist>
       </listitem>
     </varlistentry>
   </variablelist>

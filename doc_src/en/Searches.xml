@@ -108,9 +108,8 @@
       </indexterm></title>
 
     <para>In both exact and keyword searches, the wild card search characters
-    '*' and '?' can be used. To use wild cards, the regular expressions option
-    should not be selected, as '*' and '?' have special meaning in regular
-    expressions.</para>
+    '*' and '?' can be used. They have the meaning, familiar to Word
+    users:</para>
 
     <itemizedlist>
       <listitem>
@@ -130,7 +129,10 @@
       </listitem>
     </itemizedlist>
 
-    <para>The matches will be displayed in bold blue.</para>
+    <para>The matches will be displayed in bold blue. Note that '*' and '?'
+    have special meaning in regular expressions, so wild card search, as
+    described here, applies to exact and keyword search only (see below).
+    </para>
   </section>
 
   <section id="search.methoids">

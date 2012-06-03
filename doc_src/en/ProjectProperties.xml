@@ -41,7 +41,7 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/NewProject_25.png"/>
+          <imagedata fileref="images/NewProject_25.png" width="90%"/>
         </imageobject>
 
         <imageobject role="fo">
@@ -54,11 +54,11 @@
 
     <itemizedlist>
       <listitem>
-        <para>An area for setting project source and target languages with
-        drop-down menus</para>
+        <para><emphasis role="bold">An area for setting project source and
+        target languages</emphasis></para>
 
         <para>You can either enter the source and target languages by hand or
-        use the drop down menu. Bear in mind that changing the languages may
+        use the drop down menus. Bear in mind that changing the languages may
         render the currently used translation memories useless since their
         language pair may not longer match the new languages.</para>
       </listitem>
@@ -66,8 +66,8 @@
 
     <itemizedlist>
       <listitem>
-        <para><guilabel>Enable Sentence-level segmentation</guilabel> check
-        box</para>
+        <para><emphasis role="bold"><guilabel>Enable Sentence-level
+        segmentation</guilabel> </emphasis>check box</para>
 
         <indexterm class="singular">
           <primary>Project</primary>
@@ -98,8 +98,8 @@
 
     <itemizedlist>
       <listitem>
-        <para><guibutton>Segmentation...</guibutton> button<indexterm
-            class="singular">
+        <para><emphasis role="bold"><guibutton>Segmentation...</guibutton>
+        </emphasis>button<indexterm class="singular">
             <primary>Segmentation</primary>
 
             <secondary>global vs project rules</secondary>
@@ -123,8 +123,8 @@
       </listitem>
 
       <listitem>
-        <para><guibutton>File Filters...</guibutton> button<indexterm
-            class="singular">
+        <para><emphasis role="bold"><guibutton>File Filters...</guibutton>
+        </emphasis>button<indexterm class="singular">
             <primary>File Filters</primary>
 
             <secondary>global vs project file filters</secondary>
@@ -156,36 +156,39 @@
             <secondary>Autopropagation option</secondary>
           </indexterm></emphasis></para>
 
-        <para>In case there are non-unique segments in the source documents, 
-        the Auto-propagation checkbox offers the user the following two possibilities 
-        as regards automatic translation: if checked, the first translated segment 
-        will be assumed as the default translation and its target text will be automatically
-        used for later hits during the translation process. Mistranslated
-        segments can of course be corrected later manually using Create Alternative
-        Translation. If the Auto-propagation checkbox is not checked, the 
-        segments with alternative translations are left untranslated until 
-        the user has decided which translation is to be used.</para>
+        <para>In case there are non-unique segments in source documents, the
+        Auto-propagation checkbox offers the user the following two
+        possibilities as regards automatic translation: if checked, the first
+        translated segment will be assumed as the default translation and its
+        target text will be automatically used for later hits during the
+        translation process. Mistranslated segments can of course be corrected
+        later manually using<guimenuitem>Create Alternative
+        Translation</guimenuitem>. If the Auto-propagation checkbox is not
+        checked, the segments with alternative translations are left
+        untranslated until the user has decided which translation is to be
+        used.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>An area for setting project folders<indexterm class="singular">
+        <para><emphasis role="bold">An area for setting project
+        folders</emphasis><indexterm class="singular">
+            <primary>Project</primary>
+
+            <secondary>Changing the folder structure</secondary>
+          </indexterm><indexterm class="singular">
             <primary>Glossary</primary>
 
             <secondary>Location of the writable glossary file</secondary>
           </indexterm></para>
 
-        <indexterm class="singular">
-          <primary>Project</primary>
-
-          <secondary>Changing the folder structure</secondary>
-        </indexterm>
-
-        <para>if you enter names of folders that do not exist yet,
+        <para>Here you can select diffferent subfolders, for instance the
+        subfolder with source files, subfoplder to target files etc. if you
+        enter names of folders that do not exist yet,
         <application>OmegaT</application> creates them for you. In case you
         decide to modify project folders, keep in mind that this will not move
-        the contained files from old folders to the new location.</para>
+        existing files from old folders to the new location.</para>
       </listitem>
     </itemizedlist>
   </section>

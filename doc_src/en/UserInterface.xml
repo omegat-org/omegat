@@ -5,137 +5,122 @@
   <title>The user interface</title>
 
   <section id="user.interface.items">
-    <title>User interface items</title>
+    <title>Main OmegaT window, other windows and dialogs</title>
 
-    <section id="windows.you.will.use.frequently">
-      <title>Frequently used windows<indexterm class="singular">
-          <primary>Windows and panes in OmegaT</primary>
+    <para>OmegaT main window contains the main menu, status bar and several
+    panes. Additional windows are available, as well as dialogs, used to
+    change OmegaT project settings. The information below summarizes their use
+    and how they are invoked:</para>
+
+    <table colsep="0" rowsep="0">
+      <title>Main OmegaT window<indexterm class="singular">
+          <primary>User Interface</primary>
+
+          <secondary>Main OmegaT window</secondary>
         </indexterm></title>
 
-      <variablelist>
-        <varlistentry>
-          <term><application>OmegaT</application> main window</term>
+      <tgroup cols="2" colsep="0" rowsep="1" title="Main OMegaT window">
+        <colspec align="left" colnum="1" colwidth="90"/>
 
-          <listitem>
-            <para>contains the main menu, status bar and several panes:</para>
+        <colspec align="left" colnum="2" colwidth=""/>
 
-            <itemizedlist>
-              <listitem>
-                <para>Editor - where you type and edit the translation</para>
-              </listitem>
+        <tbody>
+          <row>
+            <entry><guimenuitem>Editor pane</guimenuitem></entry>
 
-              <listitem>
-                <para>Match Viewer - displays the most similar segments from
-                translation memories</para>
-              </listitem>
+            <entry>where you type and edit the translation</entry>
+          </row>
 
-              <listitem>
-                <para>Glossary Viewer - displays terminology</para>
-              </listitem>
+          <row>
+            <entry><guimenuitem>Match pane</guimenuitem></entry>
 
-              <listitem>
-                <para>Dictionary Viewer - displays information provided by
-                dictionaries</para>
-              </listitem>
+            <entry>displays the most similar segments from translation
+            memories</entry>
+          </row>
 
-              <listitem>
-                <para>Machine Translation - displays the translation, provided
-                by MT services, like Google Translate</para>
-              </listitem>
+          <row>
+            <entry><guimenuitem>Glossary pane</guimenuitem></entry>
 
-              <listitem>
-                <para>Multiple Translations - shows translation alternatives -
-                if any entered - for the current segment</para>
-              </listitem>
+            <entry>displays terminology found for items in the current
+            segment</entry>
+          </row>
 
-              <listitem>
-                <para>Notes viewer - notes by the translator, regarding the
-                current segment</para>
-              </listitem>
+          <row>
+            <entry><guimenuitem>Dictonary pane</guimenuitem></entry>
 
-              <listitem>
-                <para>Comments - comments for the translator in PO files, or
-                name of the attribute being translated (in XHTML)</para>
-              </listitem>
-            </itemizedlist>
-          </listitem>
-        </varlistentry>
+            <entry>displays dictionary hits found for items in the current
+            segment</entry>
+          </row>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Shortcuts</primary>
+          <row>
+            <entry><guimenuitem>Machine Translations
+            pane</guimenuitem></entry>
 
-              <secondary>Ctrl+L - Project files window</secondary>
-            </indexterm>Project Files window</term>
+            <entry>displays the translation, provided by MT services</entry>
+          </row>
 
-          <listitem>
-            <para>The list of your translatable files (open with <keycombo>
-                <keycap>Ctrl</keycap>
+          <row>
+            <entry><guimenuitem>Notes pane</guimenuitem></entry>
 
-                <keycap>L</keycap>
-              </keycombo>, close with <keycap>Esc</keycap>)</para>
-          </listitem>
-        </varlistentry>
+            <entry>notes pertaining to the current segment, e.g. alternative
+            translations or the current key in case of key=value file
+            formats</entry>
+          </row>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Shortcuts</primary>
+          <row>
+            <entry><guimenuitem>Comments pane</guimenuitem></entry>
 
-              <secondary>Ctrl+F - Search window</secondary>
-            </indexterm>Search window</term>
+            <entry>Comments by the author in PO files, or the name of the
+            attribute being translated (in XHTML)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
 
-          <listitem>
-            <para>Used to search for specific segments in the project (open
-            with <keycombo>
-                <keycap>Ctrl</keycap>
+    <table colsep="0" rowsep="0">
+      <title>Other windows<indexterm class="singular">
+          <primary>User INterface</primary>
 
-                <keycap>F</keycap>
-              </keycombo>, close with <keycap>Esc</keycap>)</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </section>
+          <secondary>Other windows</secondary>
+        </indexterm></title>
 
-    <section id="windows.you.may.use.now.and.then">
-      <title>Less frequently used</title>
+      <tgroup cols="2" colsep="0" rowsep="1" title="Other windows">
+        <colspec align="left" colnum="1" colwidth="90"/>
 
-      <variablelist>
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Shortcuts</primary>
+        <colspec align="left" colnum="2" colwidth=""/>
 
-              <secondary>Ctrl+T - Tag validation window</secondary>
-            </indexterm>Tag Validation window</term>
+        <tbody>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Shortcuts</primary>
 
-          <listitem>
-            <para>Used to check for tag mistakes in translations (open with
-            <keycombo>
+                <secondary>Ctrl+T - Tag validation window</secondary>
+              </indexterm>Tag Validation window</guimenuitem></entry>
+
+            <entry><para>Used to read the user manual (open with <keycombo>
                 <keycap>Ctrl</keycap>
 
                 <keycap>T</keycap>
-              </keycombo> close with <keycap>Esc</keycap>)</para>
-          </listitem>
-        </varlistentry>
+              </keycombo>, close with <keycap>Esc</keycap>)</para></entry>
+          </row>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Shortcuts</primary>
+          <row>
+            <entry><guimenuitem><indexterm class="singular">
+                <primary>Shortcuts</primary>
 
-              <secondary>F1 - Help</secondary>
-            </indexterm>Help browser</term>
+                <secondary>F1 - Help</secondary>
+              </indexterm>Help browser</guimenuitem></entry>
 
-          <listitem>
-            <para>Used to read the user manual (open with <keycap>F1</keycap>,
-            close with <keycap>Esc)</keycap></para>
-          </listitem>
-        </varlistentry>
+            <entry><para>Used to display the user manual (open with
+            <keycap>F1</keycap>, close with
+            <keycap>Esc)</keycap></para></entry>
+          </row>
 
-        <varlistentry>
-          <term>Statistics window</term>
+          <row>
+            <entry><guimenuitem>Statistics window</guimenuitem></entry>
 
-          <listitem>
-            <para>Used to open the window with the statistics of the project,
-            display it, using <menuchoice>
+            <entry><para>Used to open the window with the statistics of the
+            project, display it, using <menuchoice>
                 <guimenu><indexterm class="singular">
                     <primary>Menu Tools</primary>
 
@@ -143,16 +128,14 @@
                   </indexterm>Tools</guimenu>
 
                 <guimenuitem>Statistics.</guimenuitem>
-              </menuchoice></para>
-          </listitem>
-        </varlistentry>
+              </menuchoice></para></entry>
+          </row>
 
-        <varlistentry>
-          <term>Match statistics window</term>
+          <row>
+            <entry><guimenuitem>Match statistics window</guimenuitem></entry>
 
-          <listitem>
-            <para>Used to display the match statistics of the project, select
-            <menuchoice>
+            <entry><para>Used to display the match statistics of the project,
+            select <menuchoice>
                 <guimenu><indexterm class="singular">
                     <primary>Menu Tools</primary>
 
@@ -160,140 +143,123 @@
                   </indexterm>Tools</guimenu>
 
                 <guimenuitem>Match statistics</guimenuitem>
-              </menuchoice>to open it.</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </section>
+              </menuchoice>to open it.</para></entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
 
-    <section id="dialogs.to.change.settings">
-      <title>Project settings dialogs <indexterm class="singular">
-          <primary>Project</primary>
+    <table border="0" colsep="0" rowsep="0">
+      <title>Settings dialogs<indexterm class="singular">
+          <primary>User interface</primary>
 
-          <secondary>Project Settings</secondary>
+          <secondary>Settings dialogs</secondary>
+
+          <seealso>Project Settings</seealso>
         </indexterm></title>
 
-      <para>The dialogs below are used to change OmegaT project settings. Each
-      is described in detail in a separate section; the information below
-      summarizes their use and how they are invoked:</para>
+      <tgroup cols="2" colsep="0" rowsep="1" title="Settings dialogs">
+        <colspec align="left" colnum="1" colwidth="90"/>
 
-      <variablelist>
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Shortcuts</primary>
+        <colspec align="left" colnum="2" colwidth=""/>
 
-              <secondary>Ctrl+E - Project properties</secondary>
-            </indexterm><indexterm class="singular">
-              <primary>Menu Project</primary>
+        <tbody>
+          <row>
+            <entry><guimenuitem>Project properties<indexterm class="singular">
+                <primary>Menu Project</primary>
 
-              <secondary>Properties</secondary>
-            </indexterm>Project Properties</term>
+                <secondary>Properties</secondary>
+              </indexterm></guimenuitem> <indexterm class="singular">
+                <primary>Shortcuts</primary>
 
-          <listitem>
-            <para>Used to modify the project folders and languages, (access
-            via <menuchoice>
-                <shortcut>
-                  <keycombo>
-                    <keycap>Ctrl</keycap>
+                <secondary>Ctrl+E - Project properties</secondary>
+              </indexterm></entry>
 
-                    <keycap>E</keycap>
-                  </keycombo>
-                </shortcut>
-
+            <entry>Used to modify the project folders and languages (access
+            via <guimenuitem>Ctrl+E </guimenuitem>shortcut or <menuchoice>
                 <guimenu>Project</guimenu>
 
                 <guimenuitem>properties...</guimenuitem>
-              </menuchoice>, close via <keycap>Esc)</keycap></para>
-          </listitem>
-        </varlistentry>
+              </menuchoice>, close via <keycap>Esc)</keycap></entry>
+          </row>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Project Settings</primary>
+          <row>
+            <entry><guimenuitem>Font<indexterm class="singular">
+                <primary>Project Settings</primary>
 
-              <secondary>Font</secondary>
-            </indexterm>Font<indexterm class="singular">
-              <primary>Menu Options</primary>
+                <secondary>Font</secondary>
+              </indexterm></guimenuitem></entry>
 
-              <secondary>Font</secondary>
-            </indexterm></term>
-
-          <listitem>
-            <para>Used to modify the font <application>used by
+            <entry><para>Used to modify the font <application>used by
             OmegaT</application> to display source, translation, matches and
             glossary terms, (access via <menuchoice>
                 <guimenu>Options</guimenu>
 
                 <guimenuitem>Font...</guimenuitem>
               </menuchoice>, close via
-            <keycap>Esc</keycap><keycap>)</keycap></para>
-          </listitem>
-        </varlistentry>
+            <keycap>Esc</keycap><keycap>)</keycap></para></entry>
+          </row>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Project Settings</primary>
+          <row>
+            <entry><guimenuitem>File filters<indexterm class="singular">
+                <primary>Project Settings</primary>
 
-              <secondary>File filters</secondary>
-            </indexterm>File filters<indexterm class="singular">
-              <primary>Menu Options</primary>
+                <secondary>File filters</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menu Options</primary>
 
-              <secondary>File filters</secondary>
-            </indexterm></term>
+                <secondary>File filters</secondary>
+              </indexterm></guimenuitem></entry>
 
-          <listitem>
-            <para>Used to adjust the handling of supported file formats
+            <entry>Used to adjust the handling of supported file formats
             (access via <menuchoice>
                 <guimenu>Options</guimenu>
 
                 <guimenuitem>File Filters...</guimenuitem>
-              </menuchoice>, close via <keycap>Esc</keycap>)</para>
-          </listitem>
-        </varlistentry>
+              </menuchoice>, close via <keycap>Esc</keycap>)</entry>
+          </row>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Project Settings</primary>
+          <row>
+            <entry><guimenuitem>Segmentation<indexterm class="singular">
+                <primary>Project Settings</primary>
 
-              <secondary>Segmentation</secondary>
-            </indexterm>Segmentation<indexterm class="singular">
-              <primary>Menu Options</primary>
+                <secondary>Segmentation</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Menu Options</primary>
 
-              <secondary>Segmentation</secondary>
-            </indexterm></term>
+                <secondary>Segmentation</secondary>
+              </indexterm></guimenuitem></entry>
 
-          <listitem>
-            <para>Used to change the way your text is segmented into sentences
-            (access via <menuchoice>
+            <entry>Used to change the way your text is segmented into
+            sentences (access via <menuchoice>
                 <guimenu>Options</guimenu>
 
                 <guimenuitem>Segmentation</guimenuitem>
-              </menuchoice>, close via <keycap>Esc</keycap>)</para>
-          </listitem>
-        </varlistentry>
+              </menuchoice>, close via <keycap>Esc</keycap>)</entry>
+          </row>
 
-        <varlistentry>
-          <term><indexterm class="singular">
-              <primary>Project Settings</primary>
+          <row>
+            <entry><guimenuitem>Editing Behavior<indexterm class="singular">
+                <primary>Menu Options</primary>
 
-              <secondary>Editing Behavior</secondary>
-            </indexterm>Editing Behavior<indexterm class="singular">
-              <primary>Menu Options</primary>
+                <secondary>Editing Behavior</secondary>
+              </indexterm><indexterm class="singular">
+                <primary>Project Settings</primary>
 
-              <secondary>Editing Behavior</secondary>
-            </indexterm></term>
+                <secondary>Editing Behavior</secondary>
+              </indexterm></guimenuitem></entry>
 
-          <listitem>
-            <para>Used to change how <application>OmegaT</application> behaves
-            when you iterate between the segments (access via <menuchoice>
+            <entry>Used to change how <application>OmegaT</application>
+            behaves when you iterate between the segments (access via
+            <menuchoice>
                 <guimenu>Options</guimenu>
 
                 <guimenuitem>Behavior...</guimenuitem>
-              </menuchoice>, close via <keycap>Esc</keycap>)</para>
-          </listitem>
-        </varlistentry>
-      </variablelist>
-    </section>
+              </menuchoice>, close via <keycap>Esc</keycap>)</entry>
+          </row>
+        </tbody>
+      </tgroup>
+    </table>
   </section>
 
   <section id="OmegaT.main.window">
@@ -310,8 +276,8 @@
         <secondary>Main window</secondary>
       </indexterm></title>
 
-    <figure>
-      <title>OmegaT panes</title>
+    <figure id="OmegaT.main.window.figure">
+      <title>OmegaT main window</title>
 
       <mediaobject>
         <imageobject role="html">
@@ -733,15 +699,23 @@
       example below, the author of the PO file included a warning for the
       translator to check the length of the translation:</para>
 
-      <mediaobject>
-        <imageobject role="html">
-          <imagedata fileref="images/Comments_25.png"/>
-        </imageobject>
+      <figure id="comments.pane">
+        <title><indexterm class="singular">
+            <primary>Comments</primary>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/Comments_25.png" width="80%"/>
-        </imageobject>
-      </mediaobject>
+            <secondary>Comments pane - figure</secondary>
+          </indexterm></title>
+
+        <mediaobject>
+          <imageobject role="html">
+            <imagedata fileref="images/Comments_25.png" width=""/>
+          </imageobject>
+
+          <imageobject role="fo">
+            <imagedata fileref="images/Comments_25.png" width="80%"/>
+          </imageobject>
+        </mediaobject>
+      </figure>
     </section>
 
     <section id="Google.Translate">
@@ -972,17 +946,22 @@
           <primary>Shortcuts</primary>
 
           <secondary>Ctrl+V - Paste text</secondary>
-        </indexterm></guimenuitem> to copy/paste the contents.</para>
+        </indexterm></guimenuitem> to copy/paste the contents. <figure
+          id="ProjectStatistic.Window">
+          <title>project statistics</title>
 
-      <mediaobject>
-        <imageobject>
-          <imagedata fileref="images/StatisticsWindow_25.png"/>
-        </imageobject>
+          <mediaobject>
+            <imageobject role="html">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="100%"/>
+            </imageobject>
+          </mediaobject>
 
-        <imageobject role="fo">
-          <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
-        </imageobject>
-      </mediaobject>
+          <mediaobject>
+            <imageobject role="fo">
+              <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
     </section>
 
     <section>
@@ -1002,25 +981,26 @@
       OmegaT's method of counting, with a few differences in terminology to
       account for concept differences. This information is computed for
       segments as well as for words and for characters (without and including
-      spaces).</para>
+      spaces).<figure>
+          <title>Match statistics</title>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchStatistics.png"/>
+            </imageobject>
+          </mediaobject>
+
+          <mediaobject>
+            <imageobject>
+              <imagedata fileref="images/MatchStatistics.png" role="fo"
+                         width="80%"/>
+            </imageobject>
+          </mediaobject>
+        </figure></para>
 
       <para>Note that these totals are a good (or as-good-as-it-can-be)
       approximation of the work involved in the project and thus can serve as
       a basis for your cost and price calculations.</para>
-
-      <screenshot>
-        <screeninfo>match statistics</screeninfo>
-
-        <mediaobject>
-          <imageobject role="html">
-            <imagedata fileref="images/MatchStatistics.png"/>
-          </imageobject>
-
-          <imageobject role="fo">
-            <imagedata fileref="images/MatchStatistics.png" width="60%"/>
-          </imageobject>
-        </mediaobject>
-      </screenshot>
 
       <para>Spaces between segments are not taken into account in the last
       column. Repetitions stand for identical segments present several times

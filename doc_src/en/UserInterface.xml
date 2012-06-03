@@ -54,8 +54,8 @@
               </listitem>
 
               <listitem>
-                <para>Comments - comments by the translator, regarding the
-                current segment</para>
+                <para>Comments - comments for the translator in PO files, or
+                name of the attribute being translated (in XHTML)</para>
               </listitem>
             </itemizedlist>
           </listitem>
@@ -353,7 +353,7 @@
               </inlinemediaobject></entry>
 
             <entry>minimizes the pane, so that only its name is shown at the
-            bottom of the window.</entry>
+            bottom of the window</entry>
           </row>
 
           <row>
@@ -373,6 +373,20 @@
           <row>
             <entry><inlinemediaobject>
                 <imageobject role="html">
+                  <imagedata fileref="images/restore.gif" width="60%"/>
+                </imageobject>
+
+                <imageobject role="fo">
+                  <imagedata fileref="images/restore.gif" width="40%"/>
+                </imageobject>
+              </inlinemediaobject></entry>
+
+            <entry>restores the layout before the maximizing step</entry>
+          </row>
+
+          <row>
+            <entry><inlinemediaobject>
+                <imageobject role="html">
                   <imagedata fileref="images/undock.gif" width="60%"/>
                 </imageobject>
 
@@ -381,7 +395,7 @@
                 </imageobject>
               </inlinemediaobject></entry>
 
-            <entry>undocks the pane from the main window.</entry>
+            <entry>undocks the pane from the main window</entry>
           </row>
 
           <row>
@@ -395,7 +409,7 @@
                 </imageobject>
               </inlinemediaobject></entry>
 
-            <entry>puts the pane back within the main window.</entry>
+            <entry>puts the pane back within the main window</entry>
           </row>
         </tbody>
       </tgroup>
@@ -479,8 +493,7 @@
       displayed in the original language. The displayed text is split into
       segments and you may scroll through the document and double-click on any
       segment to open and edit it. In the above case, the segments already
-      translated are shown in yellow, but this may be changed to suit your
-      preferences (see <xref linkend="submenu.View"/>).</para>
+      translated are shown in yellow.</para>
 
       <para>One of the above segments is the current segment. It is the
       segment that is displayed in two parts. The upper part is in the source

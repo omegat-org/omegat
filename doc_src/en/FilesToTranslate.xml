@@ -86,13 +86,13 @@
         </listitem>
       </itemizedlist>
 
-        <itemizedlist>
-          <listitem>
-            <para>SubRip title files (*.srt)</para>
-          </listitem>
-        </itemizedlist>
-        
-       <itemizedlist>
+      <itemizedlist>
+        <listitem>
+          <para>SubRip title files (*.srt)</para>
+        </listitem>
+      </itemizedlist>
+
+      <itemizedlist>
         <listitem>
           <para>Magento CE Locale CSV files (*.csv)</para>
         </listitem>
@@ -103,6 +103,19 @@
       a supported file type (for example, .pod files can be associated to the
       ASCII text filter) and by pre-processing them with specific segmentation
       rules.</para>
+
+      <para>PO files<indexterm class="singular">
+          <primary>Source files</primary>
+
+          <secondary>PO as bilingual files</secondary>
+        </indexterm> can contain both the source and the target text. Seen
+      from this point of view, they are plain text files<emphasis>
+      plus</emphasis> translation memories. If for a given source segment, if
+      there is no existing translation in the project tzranslation memory
+      (project_save.tmx). the translation is saved in the project_save.tmx as
+      the default translation In case the same source segment already exists,
+      but with a different translation, the new translation is loaded as an
+      alternative.</para>
     </section>
 
     <section>
@@ -165,8 +178,8 @@
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
-            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - monolingual, i.e. one
-            language combination possible for a given project</para>
+            <para>XLIFF (*.xlf, *.xliff, *.sdlxliff) - of the source=target
+            variety</para>
           </listitem>
         </itemizedlist><itemizedlist>
           <listitem>
@@ -204,13 +217,14 @@
           <listitem>
             <para>Flash XML export (*.xml)</para>
           </listitem>
+
           <listitem>
             <para>Wordfast TXML (*.txml)</para>
           </listitem>
+
           <listitem>
             <para>Camtasia for Windows (*.camproj)</para>
           </listitem>
-
         </itemizedlist></para>
 
       <para>Other formatted text file types may also be handled by OmegaT by

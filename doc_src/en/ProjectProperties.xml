@@ -156,18 +156,16 @@
             <secondary>Autopropagation option</secondary>
           </indexterm></emphasis></para>
 
-        <para>Next to the project translation memory
-        (<filename>project_save.tmx</filename>) OmegaT allows one to use
-        already existing translation memory as a reference and source of
-        suggestions for translations. These support TMs can be stored either
-        in the project's subdirectory tm, for reference, or in tm/auto for
-        reference as well as for autopropagation. . If <emphasis
-        role="bold">Autopropagation </emphasis>is checked, the 100% matches in
-        these translation memories will be automatically added to the project
-        translöation memory. If <emphasis
-        role="bold">Autopropagation</emphasis> is not checked, the matching
-        contents will be displayed among the fuzzy hits, so that the user can
-        decide, if they are to be accepted or not. </para>
+        <para>In case multiple translations are available in these translation
+        memories for any given source segment, the Autopropagation checkbox
+        offers the user the following two possibilities as regards automatic
+        translation : if checked, the first translated segment will be assumed
+        as the valid translation and its target text will be automatically
+        used for later hits during the translation process. Mistranslated
+        segments can of course be corrected later manually. If the
+        Autopropagation checkbox is not checked, the segments with alternative
+        translations are left untranslated until the user has decided
+        which of the alternatives is to be used.</para>
       </listitem>
     </itemizedlist>
 

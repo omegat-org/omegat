@@ -208,7 +208,8 @@
 
     <itemizedlist>
       <listitem>
-        <para>Printf variables</para>
+        <para><emphasis role="bold">Printf variables - do not check, check
+        simple, check all</emphasis></para>
 
         <para>OmegaT can check that programming variables (like %s for
         instance) in the source exist in the translation. You can decide not
@@ -219,16 +220,17 @@
 
     <itemizedlist>
       <listitem>
-        <para>check simple java MessageFormat patterns</para>
+        <para><emphasis role="bold">Check simple java MessageFormat
+        patterns</emphasis></para>
 
         <para>Activating this check box will cause OmegaT to check if simple
-        java MessageFormat tags (like {0}) are processed correctly. </para>
+        java MessageFormat tags (like {0}) are processed correctly.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para>Text field Custom tags</para>
+        <para><emphasis role="bold">Text field Custom tags</emphasis></para>
 
         <para>Entering a regular expression here will cause OmegaT treat the
         detected instances as a customer tag. It is checked if the number of
@@ -239,11 +241,12 @@
 
     <itemizedlist>
       <listitem>
-        <para>Fragments that should be removed from the translation </para>
+        <para><emphasis role="bold">Fragments that should be removed from the
+        translation</emphasis></para>
 
-        <para>One can enter a regular expression which will remove any of its
-        instances from the source segment - after it has been extracted from
-        the file and before it is shown in the editor window. </para>
+        <para>One can enter a regular expression for unwanted contents in the
+        target. Any matches in the target segment will then be painted red,
+        i.e. easy to identify and correct. </para>
       </listitem>
     </itemizedlist>
   </section>

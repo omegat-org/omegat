@@ -674,7 +674,7 @@
 
               <secondary>Launch script arguments</secondary>
 
-              <tertiary>User.language</tertiary>
+              <tertiary>User interface language</tertiary>
             </indexterm> Normally, i.e. when <application>OmegaT</application>
           is launched without any arguments, the program first detects the
           language of the user's operating system. If a user interface in this
@@ -701,7 +701,7 @@
 
       <itemizedlist>
         <listitem>
-          <para><emphasis role="bold">User country setup</emphasis></para>
+          <para><emphasis role="bold">User country</emphasis></para>
 
           <para><emphasis role="bold">-Duser.country=XX</emphasis><indexterm
               class="singular">
@@ -709,7 +709,7 @@
 
               <secondary>Launch script arguments</secondary>
 
-              <tertiary>User.country</tertiary>
+              <tertiary>User country</tertiary>
             </indexterm> Besides the language, you can also specify the
           country, for example CN or TW in case of the Chinese language. To
           display the instant start guide in the desired language, you need to
@@ -766,14 +766,13 @@
 
               <secondary>Launch script arguments</secondary>
 
-              <tertiary>Proxy server IP address</tertiary>
+              <tertiary>Proxy host IP address</tertiary>
             </indexterm></emphasis> The IP address of your proxy server, if
           your system uses a proxy.</para>
         </listitem>
 
         <listitem>
-          <para><emphasis role="bold">Proxy Server Port
-          Number</emphasis></para>
+          <para><emphasis role="bold">Proxy host port number</emphasis></para>
 
           <para><emphasis role="bold">-Dhttp.proxyPort=NNNN</emphasis>
           <indexterm class="singular">
@@ -781,7 +780,7 @@
 
               <secondary>Launch script arguments</secondary>
 
-              <tertiary>Proxy server - Port Number</tertiary>
+              <tertiary>Proxy host port number</tertiary>
             </indexterm> The port number your system uses to access the proxy
           server.</para>
         </listitem>
@@ -897,8 +896,8 @@
             <application>OmegaT</application> in which directory the
             configuration files are stored. If not given,
             <application>OmegaT</application> reverts to default values
-            (<application>OmegaT</application> dir under user home, or if not
-            available, the current working directory). Note double -
+            (<application>OmegaT</application> folder under user home or, if
+            unavailable, the current working directory). Note double -
             character</para>
           </listitem>
         </itemizedlist>
@@ -1027,6 +1026,21 @@
                 well.</para>
               </listitem>
             </itemizedlist>
+          </listitem>
+
+          <listitem>
+            <para><literal>--tag-validation=[abort|warn]</literal><parameter>
+            outputFileName</parameter></para>
+
+            <para><parameter>and the output would contain remaining tag
+            validation errors that could be given back to the
+            translator.</parameter></para>
+
+            <para>This option allows batch mode validation of tags. If abort
+            is selected, the tag validator will stop on the first invalid
+            segment. If warn is specified, the tag validator will process all
+            segments and write warnings about any segments with invalid tags
+            into the file specified.</para>
           </listitem>
         </itemizedlist>
       </section>

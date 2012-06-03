@@ -210,7 +210,7 @@
       to <filename>project_save.tmx.YEARMMDDHHNN.bak</filename> in the same
       subfolder whenever a project is opened or reloaded. YEAR is 4-digit
       year, MM is a month, DD day of the month, HH and NN are hours and
-      minutes when the previous translation memory was saved. </para>
+      minutes when the previous translation memory was saved.</para>
 
       <para>If you believe you have lost translation data, follow the
       following procedure:</para>
@@ -283,12 +283,9 @@
         </indexterm>TMX files can generally contain translation units with
       several candidate languages. If for a given source segment there is no
       entry for the selected target language, all other target segments are
-      loaded, regardless of the language. This avoids loading unwanted
-      non-project languages from multilingual TMXs, while still allowing the
-      use of monolingual TMXs with other target languages than the project
-      target language selected. For instance if the language pair of the
-      project is DE-FR, it can be still be of some help to have access to a
-      DE-EN translation, if there's no match in the DE-FR pair.</para>
+      loaded, regardless of the languag. For instance, if the language pair of
+      the project is DE-FR, it can be still be of some help to see hits in the
+      DE-EN translation, if there's none in the DE-FR pair. </para>
     </section>
 
     <section>

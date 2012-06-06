@@ -8,7 +8,7 @@
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
       <link rel="prev" href="chapter.files.to.translate.html" title="Chapter&nbsp;9.&nbsp;Files to translate">
-      <link rel="next" href="chapter.formatted.text.html" title="Chapter&nbsp;11.&nbsp;Working with formatted text">
+      <link rel="next" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Working with plain text">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
@@ -20,7 +20,7 @@
                <td width="20%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.formatted.text.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
             </tr>
          </table>
          <hr>
@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Editing behavior<a class="indexterm" name="d0e5412"></a></h2>
+                  <h2 class="title"><a name="chapter.translation.editing"></a>Chapter&nbsp;10.&nbsp;Editing behavior<a class="indexterm" name="d0e5450"></a></h2>
                </div>
             </div>
          </div>
@@ -56,7 +56,7 @@
                              other proper nouns you which must be left unchanged.
                   </p>
                </dd>
-               <dt><span class="term">Leave the segment empty<a class="indexterm" name="d0e5453"></a></span></dt>
+               <dt><span class="term">Leave the segment empty<a class="indexterm" name="d0e5491"></a></span></dt>
                <dd>
                   <p>OmegaT leaves the editing field blank. This option allows you to
                              enter the translation without the need to remove the source text, thus
@@ -70,7 +70,7 @@
                              by clearing the target segment and pressing
                              <span class="guibutton">Enter.</span></p>
                </dd>
-               <dt><span class="term">Insert the best fuzzy match<a class="indexterm" name="d0e5478"></a></span></dt>
+               <dt><span class="term">Insert the best fuzzy match<a class="indexterm" name="d0e5516"></a></span></dt>
                <dd>
                   <p>OmegaT inserts the translation of the string most similar to the
                              current source, if it is above the similarity threshold that you have
@@ -87,20 +87,37 @@
          </p>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Attempt to convert numbers when inserting a fuzzy match<a class="indexterm" name="d0e5492"></a></span></dt>
+               <dt><span class="term">Attempt to convert numbers when inserting a fuzzy match<a class="indexterm" name="d0e5530"></a></span></dt>
                <dd>
-                  <p>The set of parameters that defines a given language, country and
-                             special variant preferences, the so-called locale, includes also
-                             Number format setting. Given the source ad target languages, OmegaT
-                             will try to convert the numbers, found in the source segment, into a
-                             form, that is acceptable in the target language.
+                  <p>If this option is checked, when a fuzzy match is inserted, 
+                             either manually or automatically, OmegaT attempts to convert the numbers 
+                             in the fuzzy match, so that the number of the source segments are used instead.
+                             There are a number of restrictions.
                   </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                                     The number of numbers must be the same in the source segment and in both
+                                     matches.
+                                     
+                        </li>
+                        <li class="listitem">
+                                     The numbers must be exactly the same between the two matches.
+                                     
+                        </li>
+                        <li class="listitem">
+                                     Only integers and simple doubles (not localized English doubles, e.g.,
+                                     5.4) are considered being numbers.
+                                     
+                        </li>
+                     </ul>
+                  </div>
                </dd>
             </dl>
          </div>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Allow the translation to be equal to source<a class="indexterm" name="d0e5504"></a></span></dt>
+               <dt><span class="term">Allow the translation to be equal to source<a class="indexterm" name="d0e5549"></a></span></dt>
                <dd>
                   <p>Documents for translation may contain trade marks, names or
                              other proper nouns that will be the same in translated documents.
@@ -119,7 +136,7 @@
          </div>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Export the segment to text files<a class="indexterm" name="d0e5527"></a></span></dt>
+               <dt><span class="term">Export the segment to text files<a class="indexterm" name="d0e5572"></a></span></dt>
                <dd>
                   <p>The text export function exports data from within the current
                              <span class="application">OmegaT</span> project to plain text files. The
@@ -161,7 +178,7 @@
          <div class="variablelist">
             <dl>
                <dt><span class="term"> Go To Next Untranslated Segment stops where there is at least one
-                           alternative translation<a class="indexterm" name="d0e5572"></a></span></dt>
+                           alternative translation<a class="indexterm" name="d0e5617"></a></span></dt>
                <dd>
                   <p>If we want to avoid any mis-translations in case of segments
                              with several possible target contents, checking this check box will
@@ -180,12 +197,12 @@
                <td width="40%" align="left"><a accesskey="p" href="chapter.files.to.translate.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.formatted.text.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
             </tr>
             <tr>
                <td width="40%" align="left" valign="top">Chapter&nbsp;9.&nbsp;Files to translate&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Working with formatted text</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;11.&nbsp;Working with plain text</td>
             </tr>
          </table>
       </div>

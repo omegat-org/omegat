@@ -2,34 +2,34 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Chapter&nbsp;11.&nbsp;Working with formatted text</title>
+      <title>Chapter&nbsp;12.&nbsp;Working with formatted text</title>
       <link rel="stylesheet" href="OmegaT.css" type="text/css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
-      <link rel="prev" href="chapter.translation.editing.html" title="Chapter&nbsp;10.&nbsp;Editing behavior">
-      <link rel="next" href="chapter.plain.text.html" title="Chapter&nbsp;12.&nbsp;Working with plain text">
+      <link rel="prev" href="chapter.plain.text.html" title="Chapter&nbsp;11.&nbsp;Working with plain text">
+      <link rel="next" href="chapter.translation.memories.html" title="Chapter&nbsp;13.&nbsp;Translation memories">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Chapter&nbsp;11.&nbsp;Working with formatted text</th>
+               <th colspan="3" align="center">Chapter&nbsp;12.&nbsp;Working with formatted text</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Prev</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
             </tr>
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;11.&nbsp;Working with formatted text">
+      <div class="chapter" title="Chapter&nbsp;12.&nbsp;Working with formatted text">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;11.&nbsp;Working with formatted text<a class="indexterm" name="d0e5586"></a><a class="indexterm" name="d0e5591"></a></h2>
+                  <h2 class="title"><a name="chapter.formatted.text"></a>Chapter&nbsp;12.&nbsp;Working with formatted text<a class="indexterm" name="d0e5825"></a><a class="indexterm" name="d0e5830"></a></h2>
                </div>
             </div>
          </div>
@@ -39,7 +39,7 @@
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.operations">2. Tag operations</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.nesting">3. Tag group nesting</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.overlapping">4. Tag group overlapping</a></span></dt>
-               <dt><span class="section"><a href="chapter.formatted.text.html#d0e5737">5. Tag validation options</a></span></dt>
+               <dt><span class="section"><a href="chapter.formatted.text.html#d0e5976">5. Tag validation options</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#tag.group.validation">6. Tag group validation</a></span></dt>
                <dt><span class="section"><a href="chapter.formatted.text.html#hints.for.tag.management">7. Hints for tags management</a></span></dt>
             </dl>
@@ -57,11 +57,11 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5601"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="formatting.tags"></a>1.&nbsp;Formatting tags<a class="indexterm" name="d0e5840"></a></h2>
                   </div>
                </div>
             </div>
-            <p><a class="indexterm" name="d0e5605"></a><span class="bold"><strong>Tag naming:</strong></span></p>
+            <p><a class="indexterm" name="d0e5844"></a><span class="bold"><strong>Tag naming:</strong></span></p>
             <p>The tags consist of one to three characters and a number. Unique
                    numbering allows tags, corresponding to each other to be grouped together
                    and differentiates between tags, that have the same shortcut character,
@@ -69,7 +69,7 @@
                    underlying meaning of the tag (e.g. b for bold, i for italics,
                    etc.)
             </p>
-            <p><a class="indexterm" name="d0e5615"></a><span class="bold"><strong>Tag numbering:</strong></span></p>
+            <p><a class="indexterm" name="d0e5854"></a><span class="bold"><strong>Tag numbering:</strong></span></p>
             <p>Tags are numbered incrementally by tag group. "Tag groups" in this
                    context are a single tag (such as &lt;i0&gt; and &lt;/i0&gt;). Within a
                    segment, the first group (pair or single) receives the number 0, the
@@ -77,7 +77,7 @@
                    a single, and then another pair), the second example has one group only (a
                    pair).
             </p>
-            <p><a class="indexterm" name="d0e5625"></a><span class="bold"><strong>Pairs and singles:</strong></span></p>
+            <p><a class="indexterm" name="d0e5864"></a><span class="bold"><strong>Pairs and singles:</strong></span></p>
             <p>Tags are always either singles or paired. Single tags indicate
                    formatting information that does not affect the surrounding text (an extra
                    space or line break for example).
@@ -104,7 +104,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e5650"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.operations"></a>2.&nbsp;Tag operations<a class="indexterm" name="d0e5889"></a></h2>
                   </div>
                </div>
             </div>
@@ -114,7 +114,7 @@
                    possible, if certain rules are strictly followed, to deviate from this
                    basic rule.
             </p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5659"></a>Tag duplication: </strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5898"></a>Tag duplication: </strong></span></p>
             <p>To duplicate tag groups, just copy them in the position of your
                    choice. Keep in mind that in a pair group, the opening tag must come
                    before the closing tag. The formatting represented by the group you have
@@ -127,7 +127,7 @@
             <p><code class="literal">&lt;b0&gt;This formatting&lt;/b0&gt; has been
                       &lt;b0&gt;duplicated here&lt;/b0&gt;.&lt;segment 0001&gt;
                       </code></p>
-            <p><span class="bold"><strong><a class="indexterm" name="d0e5679"></a>Tag group deletion:</strong></span></p>
+            <p><span class="bold"><strong><a class="indexterm" name="d0e5918"></a>Tag group deletion:</strong></span></p>
             <p>To delete tag groups, just remove them from the segment. Keep in
                    mind that a pair group must have both its opening and its closing tag
                    deleted to ensure that all traces of the formatting are properly erased,
@@ -146,7 +146,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e5700"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.nesting"></a>3.&nbsp;Tag group nesting<a class="indexterm" name="d0e5939"></a></h2>
                   </div>
                </div>
             </div>
@@ -170,7 +170,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e5720"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.overlapping"></a>4.&nbsp;Tag group overlapping<a class="indexterm" name="d0e5959"></a></h2>
                   </div>
                </div>
             </div>
@@ -189,7 +189,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="d0e5737"></a>5.&nbsp;Tag validation options
+                     <h2 class="title" style="clear: both"><a name="d0e5976"></a>5.&nbsp;Tag validation options
                      </h2>
                   </div>
                </div>
@@ -205,7 +205,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Printf variables</p>
+                     <p><span class="bold"><strong>Printf variables - do not check, check
+                                      simple, check all</strong></span></p>
                      <p>OmegaT can check that programming variables (like %s for
                                 instance) in the source exist in the translation. You can decide not
                                 to check at all, check for simple printf variables (like %s %d etc) or
@@ -217,9 +218,10 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>check simple java MessageFormat patterns</p>
+                     <p><span class="bold"><strong>Check simple java MessageFormat
+                                      patterns</strong></span></p>
                      <p>Activating this check box will cause OmegaT to check if simple
-                                java MessageFormat tags (like {0}) are processed correctly. 
+                                java MessageFormat tags (like {0}) are processed correctly.
                      </p>
                   </li>
                </ul>
@@ -227,7 +229,7 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Text field Custom tags</p>
+                     <p><span class="bold"><strong>Text field Custom tags</strong></span></p>
                      <p>Entering a regular expression here will cause OmegaT treat the
                                 detected instances as a customer tag. It is checked if the number of
                                 tags and their order is identical, just like it is the case for
@@ -239,10 +241,11 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>Fragments that should be removed from the translation </p>
-                     <p>One can enter a regular expression which will remove any of its
-                                instances from the source segment - after it has been extracted from
-                                the file and before it is shown in the editor window. 
+                     <p><span class="bold"><strong>Fragments that should be removed from the
+                                      translation</strong></span></p>
+                     <p>One can enter a regular expression for unwanted contents in the
+                                target. Any matches in the target segment will then be painted red,
+                                i.e. easy to identify and correct. 
                      </p>
                   </li>
                </ul>
@@ -252,13 +255,13 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Tag group validation<a class="indexterm" name="d0e5777"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="tag.group.validation"></a>6.&nbsp;Tag group validation<a class="indexterm" name="d0e6020"></a></h2>
                   </div>
                </div>
             </div>
             <p>The validate tags function detects changes to tag sequences (whether
                    deliberate or accidental), and shows the affected segments. Launching this
-                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e5786"></a></span> - opens a window containing all segments in
+                   function – <span class="guimenuitem">Ctrl+T<a class="indexterm" name="d0e6029"></a></span> - opens a window containing all segments in
                    the file containing suspected broken or bad tags in the translation.
                    Repairing the tags and recreating the target documents is easy with the
                    validate tags function. The window that opens when
@@ -266,7 +269,7 @@
                    with a link to the segment, the original segment and the target
                    segment
             </p>
-            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;11.1.&nbsp;Tag validation entry</b></p>
+            <div class="figure"><a name="tag.validation"></a><p class="title"><b>Figure&nbsp;12.1.&nbsp;Tag validation entry</b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/TagValidation.png" alt="Tag validation entry"></div>
                </div>
@@ -285,7 +288,7 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Hints for tags management<a class="indexterm" name="d0e5811"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="hints.for.tag.management"></a>7.&nbsp;Hints for tags management<a class="indexterm" name="d0e6054"></a></h2>
                   </div>
                </div>
             </div>
@@ -323,15 +326,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.translation.editing.html">Prev</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.plain.text.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.plain.text.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.translation.memories.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Chapter&nbsp;10.&nbsp;Editing behavior&nbsp;</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;11.&nbsp;Working with plain text&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;12.&nbsp;Working with plain text</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;13.&nbsp;Translation memories</td>
             </tr>
          </table>
       </div>

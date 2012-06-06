@@ -2,34 +2,34 @@
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    
-      <title>Chapter&nbsp;16.&nbsp;Searches</title>
+      <title>Chapter&nbsp;15.&nbsp;Searches</title>
       <link rel="stylesheet" href="OmegaT.css" type="text/css">
       <meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
       <link rel="home" href="index.html" title="OmegaT - User's Guide">
       <link rel="up" href="index.html" title="OmegaT - User's Guide">
-      <link rel="prev" href="chapter.regexp.html" title="Chapter&nbsp;15.&nbsp;Regular expressions">
-      <link rel="next" href="chapter.dictionaries.html" title="Chapter&nbsp;17.&nbsp;Dictionaries">
+      <link rel="prev" href="chapter.segmentation.html" title="Chapter&nbsp;14.&nbsp;Source segmentation">
+      <link rel="next" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Regular expressions">
    </head>
    <body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
       <div class="navheader">
          <table width="100%" summary="Navigation header">
             <tr>
-               <th colspan="3" align="center">Chapter&nbsp;16.&nbsp;Searches</th>
+               <th colspan="3" align="center">Chapter&nbsp;15.&nbsp;Searches</th>
             </tr>
             <tr>
-               <td width="20%" align="left"><a accesskey="p" href="chapter.regexp.html">Prev</a>&nbsp;
+               <td width="20%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
                </td>
                <th width="60%" align="center">&nbsp;</th>
-               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Next</a></td>
+               <td width="20%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
             </tr>
          </table>
          <hr>
       </div>
-      <div class="chapter" title="Chapter&nbsp;16.&nbsp;Searches">
+      <div class="chapter" title="Chapter&nbsp;15.&nbsp;Searches">
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.searches"></a>Chapter&nbsp;16.&nbsp;Searches<a class="indexterm" name="d0e7185"></a></h2>
+                  <h2 class="title"><a name="chapter.searches"></a>Chapter&nbsp;15.&nbsp;Searches<a class="indexterm" name="d0e6755"></a></h2>
                </div>
             </div>
          </div>
@@ -38,8 +38,8 @@
                <dt><span class="section"><a href="chapter.searches.html#search.window">1. Search window</a></span></dt>
                <dd>
                   <dl>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7207">1.1. Searching</a></span></dt>
-                     <dt><span class="section"><a href="chapter.searches.html#d0e7231">1.2. Search location</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e6777">1.1. Searching</a></span></dt>
+                     <dt><span class="section"><a href="chapter.searches.html#d0e6801">1.2. Search location</a></span></dt>
                   </dl>
                </dd>
                <dt><span class="section"><a href="chapter.searches.html#using.wild.cards">2. Using wild cards</a></span></dt>
@@ -56,7 +56,7 @@
                   </div>
                </div>
             </div>
-            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;16.1.&nbsp;Text search Window<a class="indexterm" name="d0e7194"></a></b></p>
+            <div class="figure"><a name="text.search.window"></a><p class="title"><b>Figure&nbsp;15.1.&nbsp;Text search Window<a class="indexterm" name="d0e6764"></a></b></p>
                <div class="figure-contents">
                   <div class="mediaobject"><img src="images/TextSearch25.png" alt="Text search WindowSearch windowExample"></div>
                </div>
@@ -71,7 +71,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7207"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e7210"></a></h3>
+                        <h3 class="title"><a name="d0e6777"></a>1.1.&nbsp;Searching<a class="indexterm" name="d0e6780"></a></h3>
                      </div>
                   </div>
                </div>
@@ -89,7 +89,7 @@
                <div class="titlepage">
                   <div>
                      <div>
-                        <h3 class="title"><a name="d0e7231"></a>1.2.&nbsp;Search location
+                        <h3 class="title"><a name="d0e6801"></a>1.2.&nbsp;Search location
                         </h3>
                      </div>
                   </div>
@@ -125,7 +125,7 @@
                         <span class="application">OmegaT</span> restricts the search to files in
                         source file formats. Consequently, although OmegaT is quite able to
                         handle<code class="filename"> tmx</code> files, it does not include them in the
-                        Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e7261"></a>Advanced Options</strong></span>, you can combine the search
+                        Search files search. If you turn on <span class="bold"><strong><a class="indexterm" name="d0e6831"></a>Advanced Options</strong></span>, you can combine the search
                         with the name of the author of the translation and time of the last
                         change made.
                </p>
@@ -135,14 +135,13 @@
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e7271"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="using.wild.cards"></a>2.&nbsp;Using wild cards<a class="indexterm" name="d0e6841"></a></h2>
                   </div>
                </div>
             </div>
             <p>In both exact and keyword searches, the wild card search characters
-                   '*' and '?' can be used. To use wild cards, the regular expressions option
-                   should not be selected, as '*' and '?' have special meaning in regular
-                   expressions.
+                   '*' and '?' can be used. They have the meaning, familiar to Word
+                   users:
             </p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
@@ -165,13 +164,17 @@
                   </li>
                </ul>
             </div>
-            <p>The matches will be displayed in bold blue.</p>
+            <p>The matches will be displayed in bold blue. Note that '*' and '?'
+                   have special meaning in regular expressions, so wild card search, as
+                   described here, applies to exact and keyword search only (see below).
+                   
+            </p>
          </div>
          <div class="section" title="3.&nbsp;Search methods and options">
             <div class="titlepage">
                <div>
                   <div>
-                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods and options<a class="indexterm" name="d0e7314"></a></h2>
+                     <h2 class="title" style="clear: both"><a name="search.methoids"></a>3.&nbsp;Search methods and options<a class="indexterm" name="d0e6884"></a></h2>
                   </div>
                </div>
             </div>
@@ -214,7 +217,7 @@
                                   instance looks for words in the target segment, containing
                                   questionable characters from German keyboard. Regular expressions
                                   are a powerful way to look for instances of a string. See more in
-                                  the chapter<a class="link" href="chapter.regexp.html" title="Chapter&nbsp;15.&nbsp;Regular expressions"> Regular
+                                  the chapter<a class="link" href="chapter.regexp.html" title="Chapter&nbsp;16.&nbsp;Regular expressions"> Regular
                                      Expressions.</a></p>
                   </dd>
                </dl>
@@ -295,15 +298,15 @@
          <hr>
          <table width="100%" summary="Navigation footer">
             <tr>
-               <td width="40%" align="left"><a accesskey="p" href="chapter.regexp.html">Prev</a>&nbsp;
+               <td width="40%" align="left"><a accesskey="p" href="chapter.segmentation.html">Prev</a>&nbsp;
                </td>
                <td width="20%" align="center">&nbsp;</td>
-               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.dictionaries.html">Next</a></td>
+               <td width="40%" align="right">&nbsp;<a accesskey="n" href="chapter.regexp.html">Next</a></td>
             </tr>
             <tr>
-               <td width="40%" align="left" valign="top">Chapter&nbsp;15.&nbsp;Regular expressions&nbsp;</td>
+               <td width="40%" align="left" valign="top">Chapter&nbsp;14.&nbsp;Source segmentation&nbsp;</td>
                <td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td>
-               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;17.&nbsp;Dictionaries</td>
+               <td width="40%" align="right" valign="top">&nbsp;Chapter&nbsp;16.&nbsp;Regular expressions</td>
             </tr>
          </table>
       </div>

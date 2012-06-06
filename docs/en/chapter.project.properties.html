@@ -29,7 +29,7 @@
          <div class="titlepage">
             <div>
                <div>
-                  <h2 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Project properties<a class="indexterm" name="d0e3990"></a></h2>
+                  <h2 class="title"><a name="chapter.project.properties"></a>Chapter&nbsp;6.&nbsp;Project properties<a class="indexterm" name="d0e4005"></a></h2>
                </div>
             </div>
          </div>
@@ -59,19 +59,24 @@
                    realize a major mistake has been made. See the section Preventing data
                    loss for ways and means of protecting your work.
             </p>
-            <div class="figure"><a name="d0e4015"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Project properties window</b></p>
+            <div class="figure"><a name="d0e4030"></a><p class="title"><b>Figure&nbsp;6.1.&nbsp;Project properties window</b></p>
                <div class="figure-contents">
-                  <div class="mediaobject"><img src="images/NewProject_25.png" alt="Project properties window"></div>
+                  <div class="mediaobject">
+                     <table border="0" summary="manufactured viewport for HTML img" cellspacing="0" cellpadding="0" width="90%">
+                        <tr>
+                           <td><img src="images/NewProject_25.png" width="100%" alt="Project properties window"></td>
+                        </tr>
+                     </table>
+                  </div>
                </div>
             </div><br class="figure-break"><p>It contains:</p>
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>An area for setting project source and target languages with
-                                drop-down menus
-                     </p>
+                     <p><span class="bold"><strong>An area for setting project source and
+                                      target languages</strong></span></p>
                      <p>You can either enter the source and target languages by hand or
-                                use the drop down menu. Bear in mind that changing the languages may
+                                use the drop down menus. Bear in mind that changing the languages may
                                 render the currently used translation memories useless since their
                                 language pair may not longer match the new languages.
                      </p>
@@ -81,9 +86,9 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="guilabel">Enable Sentence-level segmentation</span> check
-                                box
-                     </p><a class="indexterm" name="d0e4037"></a><p>The segmentation settings only address the way the source files
+                     <p><span class="bold"><strong><span class="guilabel">Enable Sentence-level
+                                         segmentation</span> </strong></span>check box
+                     </p><a class="indexterm" name="d0e4055"></a><p>The segmentation settings only address the way the source files
                                 are handled by <span class="application">OmegaT</span>. The predominant way
                                 of segmenting the sources is the sentence-level segmenting, so this
                                 check box should in a normal case be left checked.
@@ -108,7 +113,8 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p><span class="guibutton">Segmentation...</span> button<a class="indexterm" name="d0e4057"></a></p>
+                     <p><span class="bold"><strong><span class="guibutton">Segmentation...</span>
+                                      </strong></span>button<a class="indexterm" name="d0e4077"></a></p>
                      <p>The segmentation rules are generally valid across all the
                                 projects. The user, however, may need to generate a set of rules,
                                 specific to the project in question. Use this button to open a
@@ -124,7 +130,8 @@
                                 <code class="filename">project/omegat/segmentation.conf.</code></p>
                   </li>
                   <li class="listitem">
-                     <p><span class="guibutton">File Filters...</span> button<a class="indexterm" name="d0e4082"></a></p>
+                     <p><span class="bold"><strong><span class="guibutton">File Filters...</span>
+                                      </strong></span>button<a class="indexterm" name="d0e4104"></a></p>
                      <p>In a similar fashion as above the user can create
                                 project-specific File filters, which will be stored together with the
                                 project and will be valid for the current project only. To create a
@@ -143,17 +150,18 @@
                   </li>
                   <li class="listitem">
                      <p><span class="bold"><strong>Autopropagation </strong></span>check
-                                box<span class="bold"><strong><a class="indexterm" name="d0e4114"></a></strong></span></p>
-                     <p>Next to the project translation memory
-                                (<code class="filename">project_save.tmx</code>) OmegaT allows one to use
-                                already existing translation memory as a reference and source of
-                                suggestions for translations. These support TMs can be stored either
-                                in the project's subdirectory tm, for reference, or in tm/auto for
-                                reference as well as for autopropagation. . If <span class="bold"><strong>Autopropagation </strong></span>is checked, the 100% matches in
-                                these translation memories will be automatically added to the project
-                                translöation memory. If <span class="bold"><strong>Autopropagation</strong></span> is not checked, the matching
-                                contents will be displayed among the fuzzy hits, so that the user can
-                                decide, if they are to be accepted or not. 
+                                box<span class="bold"><strong><a class="indexterm" name="d0e4136"></a></strong></span></p>
+                     <p>In case there are non-unique segments in source documents, the
+                                Auto-propagation checkbox offers the user the following two
+                                possibilities as regards automatic translation: if checked, the first
+                                translated segment will be assumed as the default translation and its
+                                target text will be automatically used for later hits during the
+                                translation process. Mistranslated segments can of course be corrected
+                                later manually using<span class="guimenuitem">Create Alternative
+                                   Translation</span>. If the Auto-propagation checkbox is not
+                                checked, the segments with alternative translations are left
+                                untranslated until the user has decided which translation is to be
+                                used.
                      </p>
                   </li>
                </ul>
@@ -161,10 +169,14 @@
             <div class="itemizedlist">
                <ul class="itemizedlist" type="disc">
                   <li class="listitem">
-                     <p>An area for setting project folders<a class="indexterm" name="d0e4134"></a></p><a class="indexterm" name="d0e4139"></a><p>if you enter names of folders that do not exist yet,
+                     <p><span class="bold"><strong>An area for setting project
+                                      folders</strong></span><a class="indexterm" name="d0e4151"></a><a class="indexterm" name="d0e4156"></a></p>
+                     <p>Here you can select diffferent subfolders, for instance the
+                                subfolder with source files, subfoplder to target files etc. if you
+                                enter names of folders that do not exist yet,
                                 <span class="application">OmegaT</span> creates them for you. In case you
                                 decide to modify project folders, keep in mind that this will not move
-                                the contained files from old folders to the new location.
+                                existing files from old folders to the new location.
                      </p>
                   </li>
                </ul>

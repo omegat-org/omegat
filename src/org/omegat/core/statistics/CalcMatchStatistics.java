@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2012 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -26,6 +27,7 @@ package org.omegat.core.statistics;
 
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -34,6 +36,7 @@ import org.omegat.core.Core;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.LevenshteinDistance;
+import org.omegat.core.matching.FuzzyMatcher;
 import org.omegat.core.threads.LongProcessThread;
 import org.omegat.gui.stat.StatisticsWindow;
 import org.omegat.util.OConsts;
@@ -46,6 +49,7 @@ import org.omegat.util.gui.TextUtil;
  * Thread for calculate match statistics.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Thomas Cordonnier
  */
 public class CalcMatchStatistics extends LongProcessThread {
 
@@ -78,36 +82,95 @@ public class CalcMatchStatistics extends LongProcessThread {
             result[i] = new StatCount();
         }
         ISimilarityCalculator distanceCalculator = new LevenshteinDistance();
-        List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();
+        List<SourceTextEntry> allEntries = Core.getProject().getAllEntries();		
+        
+        final Map<String, Token[]> externalCache = Statistics.buildExternalSourceTexts(tokensCache);
+        final List<String> untranslatedEntries = new ArrayList<String>(allEntries.size() / 2);
 
         // We should iterate all segments from all files in project.
-        int percent = 0;
+        int percent = 0, treated = 0;
         for (int i = 0; i < allEntries.size(); i++) {
             SourceTextEntry ste = allEntries.get(i);
-            int p = Statistics.getMaxSimilarityPercent(ste, distanceCalculator, allEntries, tokensCache,
-                    alreadyProcessed);
-            int r = getRowByPercent(p);
+            
+            boolean isFirst = alreadyProcessed.add(ste.getSrcText());
+            if (Core.getProject().getTranslationInfo(ste).isTranslated()) {
+                // segment has translation - should be calculated as
+                // "Exact matched"
+                result[1].segments++;
+                result[1].words += Statistics.numberOfWords(ste.getSrcText());
+                String charWithoutTags = StaticUtils.stripTags(ste.getSrcText());
+                result[1].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(charWithoutTags);
+                result[1].charsWithSpaces += charWithoutTags.length();
+                treated ++;
+            }
+            else if (!isFirst) {
+                // already processed - repetition
+                result[0].segments++;
+                result[0].words += Statistics.numberOfWords(ste.getSrcText());
+                String charWithoutTags = StaticUtils.stripTags(ste.getSrcText());
+                result[0].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(charWithoutTags);
+                result[0].charsWithSpaces += charWithoutTags.length();
+                treated ++;
+            }
+            else {
+                untranslatedEntries.add (ste.getSrcText());
+            }
 
-            result[r].segments++;
-            result[r].words += Statistics.numberOfWords(ste.getSrcText());
-            String charWithoutTags = StaticUtils.stripTags(ste.getSrcText());
-            result[r].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(charWithoutTags);
-            result[r].charsWithSpaces += charWithoutTags.length();
 
             if (isStopped) {
                 return;
             }
-            int newPercent = i * 100 / allEntries.size();
+            int newPercent = treated * 100 / allEntries.size();
             if (percent != newPercent) {
                 callback.showProgress(newPercent);
                 percent = newPercent;
             }
         }
+        
+        String[][] table = calcTable(result, 2);
+        String outText = TextUtil.showTextTable(header, table, align);
 
-        final String[][] table = calcTable(result);
-        final String outText = TextUtil.showTextTable(header, table, align);
+        callback.displayData(outText, false);
+        
 
-        callback.displayData(outText);
+        for (int i = 0; i < untranslatedEntries.size(); i++) {
+            String source = untranslatedEntries.get(i);
+            final Token[] strTokensStem = Statistics.tokenizeExactlyWithCache(tokensCache, source);
+                        
+            int maxSimilarity = 0;
+        CACHE:
+            for (Token[] candTokens: externalCache.values()) {
+                int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
+                if (newSimilarity > maxSimilarity) {
+                    maxSimilarity = newSimilarity;
+                    if (newSimilarity >= 95) // enough to say that we are in row 2
+                        break CACHE;
+                }
+            }
+
+            int row = getRowByPercent(maxSimilarity);
+            result[row].segments++;
+            result[row].words += Statistics.numberOfWords(source);
+            String charWithoutTags = StaticUtils.stripTags(source);
+            result[row].charsWithoutSpaces += Statistics.numberOfCharactersWithoutSpaces(charWithoutTags);
+            result[row].charsWithSpaces += charWithoutTags.length();
+            treated ++;
+
+            if (isStopped) {
+                return;
+            }
+            int newPercent = treated * 100 / allEntries.size();
+            if (percent != newPercent) {
+                callback.showProgress(newPercent);
+                percent = newPercent;
+            }
+        }
+        
+        
+        table = calcTable(result, result.length);
+        outText = TextUtil.showTextTable(header, table, align);
+
+        callback.displayData(outText, true);
 
         String fn = Core.getProject().getProjectProperties().getProjectInternal()
                 + OConsts.STATS_MATCH_FILENAME;
@@ -148,11 +211,11 @@ public class CalcMatchStatistics extends LongProcessThread {
      *            result
      * @return text table
      */
-    public String[][] calcTable(final StatCount[] result) {
-        String[][] table = new String[result.length][5];
+    public String[][] calcTable(final StatCount[] result, final int rowsCount) {
+        String[][] table = new String[rowsCount][5];
 
         // dump result - will be changed for UI
-        for (int i = 0; i < result.length; i++) {
+        for (int i = 0; i < rowsCount; i++) {
             table[i][0] = rows[i];
             table[i][1] = Integer.toString(result[i].segments);
             table[i][2] = Integer.toString(result[i].words);

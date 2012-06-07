@@ -50,6 +50,7 @@ import org.omegat.util.gui.TextUtil;
  * Thread for calculate standard statistics.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Arno Peters
  */
 public class CalcStandardStatistics extends LongProcessThread {
 
@@ -92,7 +93,7 @@ public class CalcStandardStatistics extends LongProcessThread {
     public void run() {
         IProject p = Core.getProject();
         String result = buildProjectStats(p, null);
-        callback.displayData(result);
+        callback.displayData(result, true);
 
         String internalDir = p.getProjectProperties().getProjectInternal();
         // removing old stats

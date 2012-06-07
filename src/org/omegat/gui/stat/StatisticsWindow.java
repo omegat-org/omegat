@@ -4,6 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik
+               2012 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -54,6 +55,7 @@ import org.omegat.util.gui.DockingUI;
  * Display match statistics window and save data to file.
  * 
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Thomas Cordonnier
  */
 @SuppressWarnings("serial")
 public class StatisticsWindow extends JDialog {
@@ -131,12 +133,14 @@ public class StatisticsWindow extends JDialog {
         });
     }
 
-    public void displayData(final String result) {
+    public void displayData(final String result, final boolean end) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                progressBar.setValue(100);
-                progressBar.setString("");
-                progressBar.setVisible(false);
+                if (end) {
+                    progressBar.setValue(100);
+                    progressBar.setString("");
+                    progressBar.setVisible(false);
+                }
                 output.setText(result);
                 output.setCaretPosition(0);
             }

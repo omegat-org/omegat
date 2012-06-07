@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Henry Pijffers
                2007 Zoltan Bartko
                2009 Didier Briel, Alex Buloichik
+               2012 Thomas Cordonnier
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -31,18 +32,13 @@ import java.io.OutputStreamWriter;
 import java.text.BreakIterator;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
-import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
-import org.omegat.core.matching.FuzzyMatcher;
-import org.omegat.core.matching.ISimilarityCalculator;
 import org.omegat.core.matching.Tokenizer;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
@@ -58,86 +54,32 @@ import org.omegat.util.Token;
  * @author Zoltan Bartko (bartkozoltan@bartkozoltan.com)
  * @author Didier Briel
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Thomas Cordonnier
  */
 public class Statistics {
 
     protected static final int PERCENT_EXACT_MATCH = 101;
     protected static final int PERCENT_REPETITIONS = 102;
-
+    
     /**
-     * Calculate max similarity percent for one entry.
-     * 
-     * @param ste
-     *            source entry
-     * @param distanceCalculator
-     *            calculator
-     * @param allEntries
-     *            all entries in project
-     * @return max similarity percent
-     */
-    public static int getMaxSimilarityPercent(final SourceTextEntry ste,
-            final ISimilarityCalculator distanceCalculator, final List<SourceTextEntry> allEntries,
-            final Map<String, Token[]> tokensCache, final Set<String> alreadyProcessed) {
+     * Pre-builds a map with external TMX and orphaned translations
+     * in order to eliminate dupplicates
+     **/
+    public static Map<String, Token[]> buildExternalSourceTexts(final Map<String, Token[]> tokensCache) {
+        final Map<String, Token[]> res = new java.util.HashMap<String, Token[]> ();
 
         final IProject project = Core.getProject();
-
-        boolean isFirst = alreadyProcessed.add(ste.getSrcText());
-
-        if (project.getTranslationInfo(ste).isTranslated()) {
-            // segment has translation - should be calculated as
-            // "Exact matched"
-            return PERCENT_EXACT_MATCH;
-        }
-
-        if (!isFirst) {
-            // already processed - repetition
-            return PERCENT_REPETITIONS;
-        }
-
-        /*
-         * Not translated, not already processed. Then find fuzzy matches.
-         */
-        final Token[] strTokensStem = tokenizeExactlyWithCache(tokensCache, ste.getSrcText());
-        final IntStorage maxSimilarity = new IntStorage(0); // not matched - 0% yet
-
-        /* Travel by project entries. */
-        // 'for(int i;;)' much faster than 'for(:)'
-        for (int i = 0; i < allEntries.size(); i++) {
-            SourceTextEntry cand = allEntries.get(i);
-            if (cand == ste) {
-                // source entry
-                continue;
-            }
-            TMXEntry te = project.getTranslationInfo(cand);
-            if (!te.isTranslated()) {
-                // target without translation - skip
-                continue;
-            }
-            Token[] candTokens = tokenizeExactlyWithCache(tokensCache, cand.getSrcText());
-            int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem, candTokens);
-            maxSimilarity.value = Math.max(maxSimilarity.value, newSimilarity);
-        }
-
+        
         /* Travel by default orphaned. */
         project.iterateByDefaultTranslations(new IProject.DefaultTranslationsIterator() {
             public void iterate(String source, TMXEntry en) {
-                if (project.isOrphaned(source)) {
-                    Token[] candTokens = tokenizeExactlyWithCache(tokensCache, en.source);
-                    int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem,
-                            candTokens);
-                    maxSimilarity.value = Math.max(maxSimilarity.value, newSimilarity);
-                }
+                res.put (en.source, tokenizeExactlyWithCache(tokensCache, en.source));
             }
         });
         /* Travel by alternative orphaned. */
         project.iterateByMultipleTranslations(new IProject.MultipleTranslationsIterator() {
             public void iterate(EntryKey source, TMXEntry en) {
-                if (project.isOrphaned(source)) {
-                    Token[] candTokens = tokenizeExactlyWithCache(tokensCache, en.source);
-                    int newSimilarity = FuzzyMatcher.calcSimilarity(distanceCalculator, strTokensStem,
-                            candTokens);
-                    maxSimilarity.value = Math.max(maxSimilarity.value, newSimilarity);
-                }
+                res.put (en.source, tokenizeExactlyWithCache(tokensCache, en.source));
             }
         });
 
@@ -145,14 +87,11 @@ public class Statistics {
         for (ExternalTMX tmFile : project.getTransMemories().values()) {
             for (int i = 0; i < tmFile.getEntries().size(); i++) {
                 TMXEntry tm = tmFile.getEntries().get(i);
-                Token[] candTokens = tokenizeExactlyWithCache(tokensCache, tm.source);
-                int newSimilarity = FuzzyMatcher
-                        .calcSimilarity(distanceCalculator, strTokensStem, candTokens);
-                maxSimilarity.value = Math.max(maxSimilarity.value, newSimilarity);
+                res.put (tm.source, tokenizeExactlyWithCache(tokensCache, tm.source));
             }
         }
-
-        return maxSimilarity.value;
+        
+        return res;
     }
 
     /**
@@ -164,7 +103,7 @@ public class Statistics {
      *            string to tokenize
      * @return tokens
      */
-    private static Token[] tokenizeExactlyWithCache(final Map<String, Token[]> tokensCache, final String str) {
+    public static Token[] tokenizeExactlyWithCache(final Map<String, Token[]> tokensCache, final String str) {
         Token[] result = tokensCache.get(str);
         if (result == null) {
             result = Core.getProject().getSourceTokenizer().tokenizeAllExactly(str);
@@ -233,15 +172,4 @@ public class Statistics {
         }
     }
 
-    /**
-     * We need this placeholder because we can't access to non-final variable from inner class. It's required
-     * for iterators.
-     */
-    public static class IntStorage {
-        int value;
-
-        public IntStorage(int v) {
-            value = v;
-        }
-    }
 }

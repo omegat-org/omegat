@@ -21,16 +21,26 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.4 update 2
 ----------------------------------------------------------------------
-   0 Enhancement
-   1 Bug fix
+   1 Enhancement
+   2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.5.4 update 2 vs. 2.5.4 update 1
+
+  Other enhancements:
+
+  - Fastest computation of Match Statistics. 
+In addition, the first two lines are displayed as soon as they are computed
 
   Bug fixes:
 
   - Windows installer: the user language was always set in OmegaT.l4J.ini,
 regardless of the choice of the user
+
+  - Recognize single quotes in ENTITY of DTD file filter
+  http://sourceforge.net/support/tracker.php?aid=3520305
+(It was already implemented in 2.3 update 8, but had not been ported
+to 2.5.)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.4 update 1

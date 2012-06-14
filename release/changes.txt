@@ -21,11 +21,16 @@
 ----------------------------------------------------------------------
  OmegaT 2.5.4 update 2
 ----------------------------------------------------------------------
-   1 Enhancement
+   2 Enhancements
    2 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.5.4 update 2 vs. 2.5.4 update 1
+
+  Implemented requests:
+
+  - Option to not load translations=source from source documents
+  http://sourceforge.net/support/tracker.php?aid=3528468
 
   Other enhancements:
 

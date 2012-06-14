@@ -7,7 +7,7 @@
                2007 Zoltan Bartko
                2008 Alex Buloichik
                2009-2010 Didier Briel
-               2012 Guido Leenders
+               2012 Alex Buloichik, Guido Leenders, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -147,6 +147,8 @@ public class RealProject implements IProject {
 
     /** This instance returned if translation not exist. */
     private static final TMXEntry EMPTY_TRANSLATION = new TMXEntry("", null, null, 0, null, true);
+    
+    private boolean allowTranslationEqualToSource = Preferences.isPreference(Preferences.ALLOW_TRANS_EQUAL_TO_SRC);
 
     /**
      * Create new project instance. It required to call {@link #createProject() createProject} or
@@ -651,13 +653,14 @@ public class RealProject implements IProject {
         // which default translations we added - allow to add alternatives
         // except the same translation
         Map<String, String> allowToImport = new HashMap<String, String>();
-
+        
         for (FileInfo fi : projectFilesList) {
             for (int i = 0; i < fi.entries.size(); i++) {
                 SourceTextEntry ste = fi.entries.get(i);
-                if (ste.getSourceTranslation() == null || ste.isSourceTranslationFuzzy()) {
-                    // there is no translation in source file, or translation is
-                    // fuzzy
+                if (ste.getSourceTranslation() == null || ste.isSourceTranslationFuzzy() ||
+                   ste.getSrcText().equals(ste.getSourceTranslation()) && !allowTranslationEqualToSource) {
+                    // There is no translation in source file, or translation is fuzzy
+                    // or translation = source and Allow translation to be equal to source is false
                     continue;
                 }
 

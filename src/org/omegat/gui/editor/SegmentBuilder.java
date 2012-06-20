@@ -235,7 +235,7 @@ public class SegmentBuilder {
                 translationText = "";
             }
 
-            addActiveSegPart(translationText, false);
+            addActiveSegPart(translationText);
             posTranslationBeg = null;
 
             doc.activeTranslationBeginM1 = doc.createPosition(activeTranslationBeginOffset - 1);
@@ -370,10 +370,10 @@ public class SegmentBuilder {
      *            paragraphs begin
      * @param end
      *            paragraphs end
-     * @param isSource
-     *            is source segment part
+     * @param isRTL
+     *            is text right-to-left?
      */
-    private void setAlignment(int begin, int end, boolean isSource) {
+    private void setAlignment(int begin, int end, boolean isRTL) {
         boolean rtl = false;
         switch (controller.currentOrientation) {
         case LTR:
@@ -383,7 +383,7 @@ public class SegmentBuilder {
             rtl = true;
             break;
         case DIFFER:
-            rtl = isSource ? controller.sourceLangIsRTL : controller.targetLangIsRTL;
+            rtl = isRTL;
             break;
         }
         doc.setAlignment(begin, end, rtl);
@@ -416,7 +416,7 @@ public class SegmentBuilder {
             insert("\u202c", null); // end of embedding
         }
         insert("\n", null);
-        setAlignment(prevOffset, offset, isSource);
+        setAlignment(prevOffset, offset, rtl);
     }
 
     /**
@@ -458,7 +458,7 @@ public class SegmentBuilder {
             insert("\u202c", null); // end of embedding
         }
         insert("\n", null);
-        setAlignment(prevOffset, offset, false);
+        setAlignment(prevOffset, offset, rtl);
     }
 
     /**
@@ -469,7 +469,7 @@ public class SegmentBuilder {
      * @param isSource is text the source text (true) or translation text (false)
      * @throws BadLocationException
      */
-    private void addActiveSegPart(String text, boolean isSource) throws BadLocationException {
+    private void addActiveSegPart(String text) throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = controller.targetLangIsRTL;
 
@@ -478,7 +478,7 @@ public class SegmentBuilder {
         }
 
         activeTranslationBeginOffset = offset;
-        insertTextWithTags(text, isSource);
+        insertTextWithTags(text, false);
         activeTranslationEndOffset = offset;
 
         if (hasRTL) {
@@ -492,7 +492,7 @@ public class SegmentBuilder {
 
         insert("\n", null);
 
-        setAlignment(prevOffset, offset, false);
+        setAlignment(prevOffset, offset, rtl);
     }
 
     void createInputAttributes(Element element, MutableAttributeSet set) {

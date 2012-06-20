@@ -194,13 +194,13 @@ public class RealProject implements IProject {
 
         try {
             createDirectory(m_config.getProjectRoot(), null);
-            createDirectory(m_config.getProjectInternal(), null);
-            createDirectory(m_config.getSourceRoot(), "src");
-            createDirectory(m_config.getGlossaryRoot(), "glos");
-            createDirectory(m_config.getTMRoot(), "tm");
-            createDirectory(m_config.getTMAutoRoot(), "tm");
-            createDirectory(m_config.getDictRoot(), "dictionary");
-            createDirectory(m_config.getTargetRoot(), "target");
+            createDirectory(m_config.getProjectInternal(), OConsts.DEFAULT_INTERNAL);
+            createDirectory(m_config.getSourceRoot(), OConsts.DEFAULT_SOURCE);
+            createDirectory(m_config.getGlossaryRoot(), OConsts.DEFAULT_GLOSSARY);
+            createDirectory(m_config.getTMRoot(), OConsts.DEFAULT_TM);
+            createDirectory(m_config.getTMAutoRoot(), OConsts.AUTO_TM);
+            createDirectory(m_config.getDictRoot(), OConsts.DEFAULT_DICT);
+            createDirectory(m_config.getTargetRoot(), OConsts.DEFAULT_TARGET);
 
             saveProjectProperties();
 

@@ -26,6 +26,7 @@
 
 package org.omegat.gui.editor;
 
+import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -260,7 +261,10 @@ public class EditorTextArea3 extends JEditorPane {
             processed = true;
         } else if (isKey(e, KeyEvent.VK_O, KeyEvent.CTRL_MASK | KeyEvent.SHIFT_MASK)) {
             // handle Ctrl+Shift+O - toggle orientation LTR-RTL
+            Cursor oldCursor = this.getCursor();
+            this.setCursor(new Cursor(Cursor.WAIT_CURSOR));
             controller.toggleOrientation();
+            this.setCursor(oldCursor);
             processed = true;
         } else if ((!mac && isKey(e, KeyEvent.VK_BACK_SPACE, KeyEvent.CTRL_MASK))
                 || (mac && isKey(e, KeyEvent.VK_BACK_SPACE, KeyEvent.ALT_MASK))) {

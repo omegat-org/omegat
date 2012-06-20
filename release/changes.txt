@@ -22,7 +22,7 @@
  OmegaT 2.5.4 update 2
 ----------------------------------------------------------------------
    2 Enhancements
-   2 Bug fixes
+   3 Bug fixes
    0 Localisation update
 ----------------------------------------------------------------------
 2.5.4 update 2 vs. 2.5.4 update 1
@@ -41,6 +41,9 @@ In addition, the first two lines are displayed as soon as they are computed
 
   - Windows installer: the user language was always set in OmegaT.l4J.ini,
 regardless of the choice of the user
+
+  - Windows installer with Java: some languages not supported by OmegaT were
+listed
 
   - Recognize single quotes in ENTITY of DTD file filter
   http://sourceforge.net/support/tracker.php?aid=3520305

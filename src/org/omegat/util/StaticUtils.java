@@ -820,16 +820,6 @@ public class StaticUtils {
         }
     }
 
-    /* remove leading whitespace */
-    public static String ltrim(String source) {
-        return source.replaceAll("^\\s+", "");
-    }
-
-    /* remove trailing whitespace */
-    public static String rtrim(String source) {
-        return source.replaceAll("\\s+$", "");
-    }
-
     /**
      * Replace invalid XML chars by spaces. See supported chars at
      * http://www.w3.org/TR/2006/REC-xml-20060816/#charsets.

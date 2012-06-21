@@ -167,9 +167,5 @@ public class OConsts {
 
     public static final String REMOTE_SC_DICTIONARY_LIST_LOCATION = "http://download.services.openoffice.org/files/contrib/dictionaries/";
 
-    public static final String segmentStartString = StaticUtils.rtrim(OStrings.getSegmentStartMarker());
-    public static final String segmentStartStringFull = OStrings.getSegmentStartMarker();
-    public static final String segmentEndString = StaticUtils.ltrim(OStrings.getSegmentEndMarker());
-    public static final String segmentEndStringFull = OStrings.getSegmentEndMarker();
-
+    public static final String segmentMarkerString = OStrings.getSegmentMarker();
 }

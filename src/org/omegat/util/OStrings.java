@@ -109,24 +109,15 @@ public class OStrings {
     }
 
     /**
-     * Returns the textual marker for the start of the current segment.
-     * NOTE: segment start is assumed to contain "0000" string to overwrite
+     * Returns the textual marker for the current segment.
+     * NOTE: segment marker is assumed to contain "0000" string to overwrite
      * with entry number. If zeros not detected, entry number will not be
      * displayed
      * 
      * @author Henry Pijffers (henry.pijffers@saxnot.com)
      */
-    public static String getSegmentStartMarker() {
-        return "\n" + getString("TF_CUR_SEGMENT_START");
-    }
-
-    /**
-     * Returns the textual marker for the end of the current segment.
-     * 
-     * @author Henry Pijffers (henry.pijffers@saxnot.com)
-     */
-    public static String getSegmentEndMarker() {
-        return " " + getString("TF_CUR_SEGMENT_END");
+    public static String getSegmentMarker() {
+        return getString("TF_CUR_SEGMENT_START");
     }
 
 }

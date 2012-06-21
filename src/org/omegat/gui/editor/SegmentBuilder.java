@@ -408,9 +408,9 @@ public class SegmentBuilder {
             throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = isSource ? controller.sourceLangIsRTL : controller.targetLangIsRTL;
-        insertDirectionMarker(rtl);
+        insertDirectionEmbedding(rtl);
         insertTextWithTags(text, isSource);
-        insertDirectionEndMarker();
+        insertDirectionEndEmbedding();
         insert("\n", null);
         setAlignment(prevOffset, offset, rtl);
     }
@@ -445,10 +445,10 @@ public class SegmentBuilder {
         }
         int prevOffset = offset;
         boolean rtl = localeIsRTL();
-        insertDirectionMarker(rtl);
+        insertDirectionEmbedding(rtl);
         AttributeSet attrs = settings.getModificationInfoAttributeSet();
         insert(text, attrs);
-        insertDirectionEndMarker();
+        insertDirectionEndEmbedding();
         insert("\n", null);
         setAlignment(prevOffset, offset, rtl);
     }
@@ -463,18 +463,30 @@ public class SegmentBuilder {
      */
     private void addActiveSegPart(String text) throws BadLocationException {
         int prevOffset = offset;
+
+        //write translation part
         boolean rtl = controller.targetLangIsRTL;
 
-        insertDirectionMarker(rtl);
+        insertDirectionEmbedding(rtl);
 
         activeTranslationBeginOffset = offset;
         insertTextWithTags(text, false);
         activeTranslationEndOffset = offset;
 
-        insertDirectionEndMarker();
+        insertDirectionEndEmbedding();
 
+        //write segment marker
+        //we want the marker AFTER the translated text, so use same direction as target text.
+        insertDirectionMarker(rtl);
+
+        //the marker itself is in user language
+        insertDirectionEmbedding(localeIsRTL()); 
         AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
         insert(createSegmentMarkText(), attrSegmentMark);
+        insertDirectionEndEmbedding();
+
+        //we want the marker AFTER the translated text, so embed in same direction as target text.
+        insertDirectionMarker(rtl);
 
         insert("\n", null);
 
@@ -497,20 +509,7 @@ public class SegmentBuilder {
      * @return changed mark text
      */
     private String createSegmentMarkText() {
-        String text = OConsts.segmentStartString;
-
-        boolean markIsRTL = false;
-        switch (controller.currentOrientation) {
-        case LTR:
-            markIsRTL = false;
-            break;
-        case RTL:
-            markIsRTL = true;
-            break;
-        case DIFFER:
-            markIsRTL = controller.targetLangIsRTL;
-            break;
-        }
+        String text = OConsts.segmentMarkerString;
 
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
@@ -519,12 +518,7 @@ public class SegmentBuilder {
             text = text.replace("0000", NUMBER_FORMAT.format(segmentNumberInProject));
         }
 
-        if (hasRTL) {
-            // add LTR/RTL embedded chars
-            text = (markIsRTL ? '\u202b' : '\u202a') + text + '\u202c';
-        }
-
-        return "<"+text+">";
+        return text;
     }
 
     /**
@@ -617,7 +611,7 @@ public class SegmentBuilder {
      * @param isRTL is the language that has to be written a right-to-left language?
      * @throws BadLocationException
      */
-    private void insertDirectionMarker(boolean isRTL) throws BadLocationException {
+    private void insertDirectionEmbedding(boolean isRTL) throws BadLocationException {
         if (this.hasRTL) {
             insert(isRTL ? "\u202b" : "\u202a", null); // RTL- or LTR- embedding
         }
@@ -627,9 +621,20 @@ public class SegmentBuilder {
      * Writes (if necessary) an end-of-embedding marker. Use it after writing text in some language.
      * @throws BadLocationException
      */
-    private void insertDirectionEndMarker() throws BadLocationException {
+    private void insertDirectionEndEmbedding() throws BadLocationException {
         if (this.hasRTL) {
             insert("\u202c", null); // end of embedding
+        }
+    }
+
+    /**
+     * Writes (if necessary) an RTL or LTR marker. Use it before writing text in some language.
+     * @param isRTL is the language that has to be written a right-to-left language?
+     * @throws BadLocationException
+     */
+    private void insertDirectionMarker(boolean isRTL) throws BadLocationException {
+        if (this.hasRTL) {
+            insert(isRTL ? "\u200f" : "\u200e", null); // RTL- or LTR- marker
         }
     }
 }

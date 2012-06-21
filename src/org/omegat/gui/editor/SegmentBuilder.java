@@ -408,13 +408,9 @@ public class SegmentBuilder {
             throws BadLocationException {
         int prevOffset = offset;
         boolean rtl = isSource ? controller.sourceLangIsRTL : controller.targetLangIsRTL;
-        if (hasRTL) {
-            insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
-        }
+        insertDirectionMarker(rtl);
         insertTextWithTags(text, isSource);
-        if (hasRTL) {
-            insert("\u202c", null); // end of embedding
-        }
+        insertDirectionEndMarker();
         insert("\n", null);
         setAlignment(prevOffset, offset, rtl);
     }
@@ -449,14 +445,10 @@ public class SegmentBuilder {
         }
         int prevOffset = offset;
         boolean rtl = localeIsRTL();
-        if (hasRTL) {
-            insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
-        }
+        insertDirectionMarker(rtl);
         AttributeSet attrs = settings.getModificationInfoAttributeSet();
         insert(text, attrs);
-        if (hasRTL) {
-            insert("\u202c", null); // end of embedding
-        }
+        insertDirectionEndMarker();
         insert("\n", null);
         setAlignment(prevOffset, offset, rtl);
     }
@@ -473,22 +465,16 @@ public class SegmentBuilder {
         int prevOffset = offset;
         boolean rtl = controller.targetLangIsRTL;
 
-        if (hasRTL) {
-            insert(rtl ? "\u202b" : "\u202a", null); // LTR- or RTL- embedding
-        }
+        insertDirectionMarker(rtl);
 
         activeTranslationBeginOffset = offset;
         insertTextWithTags(text, false);
         activeTranslationEndOffset = offset;
 
-        if (hasRTL) {
-            insert("\u202c", null); // end of embedding
-        }
+        insertDirectionEndMarker();
 
         AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
-        insert("<",attrSegmentMark);
-        insert(createSegmentMarkText(false), attrSegmentMark);
-        insert(">",attrSegmentMark);
+        insert(createSegmentMarkText(), attrSegmentMark);
 
         insert("\n", null);
 
@@ -508,11 +494,9 @@ public class SegmentBuilder {
      * Make some changes of segment mark from resource bundle for display
      * correctly in editor.
      * 
-     * @param startMark
-     *            true if tart mark, false if end mark
      * @return changed mark text
      */
-    private String createSegmentMarkText(boolean startMark) {
+    private String createSegmentMarkText() {
         String text = OConsts.segmentStartString;
 
         boolean markIsRTL = false;
@@ -527,11 +511,11 @@ public class SegmentBuilder {
             markIsRTL = controller.targetLangIsRTL;
             break;
         }
-        
+
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
+        //replace placeholder with actual segment number
         if (text.indexOf("0000") >= 0) {
-            // Start mark - need to put segment number
             text = text.replace("0000", NUMBER_FORMAT.format(segmentNumberInProject));
         }
 
@@ -540,7 +524,7 @@ public class SegmentBuilder {
             text = (markIsRTL ? '\u202b' : '\u202a') + text + '\u202c';
         }
 
-        return text;
+        return "<"+text+">";
     }
 
     /**
@@ -625,6 +609,18 @@ public class SegmentBuilder {
             while (nbspMatcher.find()) {
                 doc.setCharacterAttributes(start+nbspMatcher.start(), nbspMatcher.end()-nbspMatcher.start(), attrNBSP, true);
             }
+        }
+    }
+    
+    private void insertDirectionMarker(boolean isRTL) throws BadLocationException {
+        if (hasRTL) {
+            insert(isRTL ? "\u202b" : "\u202a", null); // RTL- or LTR- embedding
+        }
+    }
+    
+    private void insertDirectionEndMarker() throws BadLocationException {
+        if (hasRTL) {
+            insert("\u202c", null); // end of embedding
         }
     }
 }

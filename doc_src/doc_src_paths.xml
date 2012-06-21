@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project>
+    <property name="fop.home" value="C:\Program Files\fop-0.95" />
+    <property name="dbk" value="c:\dbk" />
+    <property name="saxon" value="C:\Program Files\saxon6-5-5\saxon.jar" />
+</project>

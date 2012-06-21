@@ -40,7 +40,7 @@ etc.
 
 libxml2-2.7.7 and apache-ant must be installed where a path can find them, usually in Program Files.
 C:\Program Files\libxml2-2.7.7.win32
-C:\Program Files\apache-ant\bin
+C:\Program Files\apache-ant
 
 Corresponding path:
 path=C:\Program Files\libxml2-2.7.7.win32\bin;C:\Program Files\apache-ant\bin
@@ -48,13 +48,20 @@ path=C:\Program Files\libxml2-2.7.7.win32\bin;C:\Program Files\apache-ant\bin
 fop-0.95 can be installed anywhere, usually in Program Files.
 C:\Program Files\fop-0.95
 
-The location of fop-0.95, dbk and Saxon must be set in build.xml, in the corresponding properties:
+The location of fop-0.95, dbk and Saxon must be set in doc_src_paths.xml, in the corresponding properties:
     <property name="fop.home" value="C:\Program Files\fop-0.95" />
     <property name="dbk" value="c:\dbk" />
     <property name="saxon" value="C:\Program Files\saxon6-5-5\saxon.jar" />
 
 The location of dbk must also be set in docbook-utf8.xsl:
 <xsl:import href="file:///c:\dbk\html\docbook.xsl"/>
+
+Both doc_src_paths and docbook-utf8.xsl must be copied at the same level as your OmegaT development folder.
+
+c:\dev\doc_src_paths.xml
+c:\dev\docbook-utf8.xsl
+
+The ones available in doc_src are only there for reference.
 
 ***Mac OSX***
 
@@ -67,7 +74,7 @@ Saxon 6-5-5
 https://sourceforge.net/projects/saxon/files/saxon6/6.5.5/
 Unzip the downloaded package and put it in your prefered location. The example below uses the /Applications/ folder.
 
-If you use Macports, the build.xml settings are:
+If you use Macports, the doc_src_paths.xml settings are:
 
     <property name="fop.home" value="/opt/local/share/java/fop/1.0" />
     <property name="dbk" value="/opt/local/share/xsl/docbook-xsl" />
@@ -112,5 +119,6 @@ ant -Dlanguage=en javahelp
 ***Scripts***
 
 build.xml: Main script.
+doc_src_paths.xml: Set the paths for utilities.
 
 docbook-utf8.xsl: Allows to issue the Instant Start Guide in UTF-8.

@@ -611,15 +611,24 @@ public class SegmentBuilder {
             }
         }
     }
-    
+
+    /**
+     * Writes (if necessary) an RTL or LTR marker. Use it before writing text in some language.
+     * @param isRTL is the language that has to be written a right-to-left language?
+     * @throws BadLocationException
+     */
     private void insertDirectionMarker(boolean isRTL) throws BadLocationException {
-        if (hasRTL) {
+        if (this.hasRTL) {
             insert(isRTL ? "\u202b" : "\u202a", null); // RTL- or LTR- embedding
         }
     }
-    
+
+    /**
+     * Writes (if necessary) an end-of-embedding marker. Use it after writing text in some language.
+     * @throws BadLocationException
+     */
     private void insertDirectionEndMarker() throws BadLocationException {
-        if (hasRTL) {
+        if (this.hasRTL) {
             insert("\u202c", null); // end of embedding
         }
     }

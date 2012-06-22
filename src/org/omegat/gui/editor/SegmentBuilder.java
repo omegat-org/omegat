@@ -125,7 +125,7 @@ public class SegmentBuilder {
         this.ste = ste;
         this.segmentNumberInProject = segmentNumberInProject;
 
-        hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL
+        hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL || EditorUtils.localeIsRTL()
                 || controller.currentOrientation != Document3.ORIENTATION.ALL_LTR;
     }
 
@@ -444,7 +444,7 @@ public class SegmentBuilder {
             text = StaticUtils.format(template, args);
         }
         int prevOffset = offset;
-        boolean rtl = localeIsRTL();
+        boolean rtl = EditorUtils.localeIsRTL();
         insertDirectionEmbedding(rtl);
         AttributeSet attrs = settings.getModificationInfoAttributeSet();
         insert(text, attrs);
@@ -480,7 +480,7 @@ public class SegmentBuilder {
         insertDirectionMarker(rtl);
 
         //the marker itself is in user language
-        insertDirectionEmbedding(localeIsRTL()); 
+        insertDirectionEmbedding(EditorUtils.localeIsRTL()); 
         AttributeSet attrSegmentMark = settings.getSegmentMarkerAttributeSet();
         insert(createSegmentMarkText(), attrSegmentMark);
         insertDirectionEndEmbedding();
@@ -519,16 +519,6 @@ public class SegmentBuilder {
         }
 
         return text;
-    }
-
-    /**
-     * Returns whether the current locale is a Right-to-Left language or not.
-     * 
-     * @return true when current locale is a RTL language, false if not.
-     */
-    private boolean localeIsRTL() {
-        String language = Locale.getDefault().getLanguage().toLowerCase();
-        return EditorUtils.isRTL(language);
     }
 
     /**

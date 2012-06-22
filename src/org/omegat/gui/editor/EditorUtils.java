@@ -25,6 +25,8 @@
 
 package org.omegat.gui.editor;
 
+import java.util.Locale;
+
 import javax.swing.text.BadLocationException;
 import javax.swing.text.JTextComponent;
 import javax.swing.text.Utilities;
@@ -37,7 +39,7 @@ import javax.swing.text.Utilities;
  */
 public class EditorUtils {
     /**
-     * Check if language is RTL.
+     * Check if language is Right-To-Left oriented.
      * 
      * @param language
      *            ISO-639-2 language code
@@ -48,6 +50,15 @@ public class EditorUtils {
                 || "he".equalsIgnoreCase(language) || "fa".equalsIgnoreCase(language)
                 || "ur".equalsIgnoreCase(language) || "ug".equalsIgnoreCase(language)
                 || "ji".equalsIgnoreCase(language) || "yi".equalsIgnoreCase(language);
+    }
+
+    /**
+     * Check if locale is Right-To-Left oriented.
+     * @return true if locale is Right-To-Left oriented.
+     */
+    public static boolean localeIsRTL() {
+        String language = Locale.getDefault().getLanguage().toLowerCase();
+        return EditorUtils.isRTL(language);
     }
 
     /**

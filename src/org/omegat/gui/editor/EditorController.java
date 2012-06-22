@@ -309,7 +309,7 @@ public class EditorController implements IEditor {
         sourceLangIsRTL = EditorUtils.isRTL(sourceLang);
         targetLangIsRTL = EditorUtils.isRTL(targetLang);
 
-        if (sourceLangIsRTL != targetLangIsRTL) {
+        if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != EditorUtils.localeIsRTL()) {
             currentOrientation = Document3.ORIENTATION.DIFFER;
         } else {
             if (sourceLangIsRTL) {
@@ -356,7 +356,7 @@ public class EditorController implements IEditor {
             newOrientation = Document3.ORIENTATION.ALL_RTL;
             break;
         case ALL_RTL:
-            if (sourceLangIsRTL != targetLangIsRTL) {
+            if (sourceLangIsRTL != targetLangIsRTL || sourceLangIsRTL != EditorUtils.localeIsRTL()) {
                 newOrientation = Document3.ORIENTATION.DIFFER;
             } else {
                 newOrientation = Document3.ORIENTATION.ALL_LTR;

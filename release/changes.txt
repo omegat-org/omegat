@@ -23,7 +23,7 @@
 ----------------------------------------------------------------------
    2 Enhancements
    3 Bug fixes
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.5.4 update 2 vs. 2.5.4 update 1
 
@@ -49,6 +49,10 @@ listed
   http://sourceforge.net/support/tracker.php?aid=3520305
 (It was already implemented in 2.3 update 8, but had not been ported
 to 2.5.)
+
+  Localisation updates:
+
+  - Russian localisation updated to 2.5.4 update 1 (UI, Instant Start)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.4 update 1

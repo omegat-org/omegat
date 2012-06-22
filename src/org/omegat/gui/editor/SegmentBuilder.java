@@ -527,18 +527,8 @@ public class SegmentBuilder {
      * @return true when current locale is a RTL language, false if not.
      */
     private boolean localeIsRTL() {
-        boolean markIsRTL;
         String language = Locale.getDefault().getLanguage().toLowerCase();
-        /*
-         * Hardcode for future - if somebody will translate marks to RTL
-         * language.
-         */
-        if ("some_RTL_language_code".equals(language)) {
-            markIsRTL = true;
-        } else {
-            markIsRTL = false;
-        }
-        return markIsRTL;
+        return EditorUtils.isRTL(language);
     }
 
     /**

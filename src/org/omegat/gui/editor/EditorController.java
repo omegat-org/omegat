@@ -334,7 +334,7 @@ public class EditorController implements IEditor {
             targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
             break;
         case DIFFER:
-            if (targetLangIsRTL) {
+            if (targetLangIsRTL) { //using target lang direction gives better result when user starts editing.
                 targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
             } else {
                 targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;

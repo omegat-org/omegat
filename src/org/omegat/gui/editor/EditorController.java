@@ -313,9 +313,9 @@ public class EditorController implements IEditor {
             currentOrientation = Document3.ORIENTATION.DIFFER;
         } else {
             if (sourceLangIsRTL) {
-                currentOrientation = Document3.ORIENTATION.RTL;
+                currentOrientation = Document3.ORIENTATION.ALL_RTL;
             } else {
-                currentOrientation = Document3.ORIENTATION.LTR;
+                currentOrientation = Document3.ORIENTATION.ALL_LTR;
             }
         }
         applyOrientationToEditor();
@@ -327,10 +327,10 @@ public class EditorController implements IEditor {
     private void applyOrientationToEditor() {
         ComponentOrientation targetOrientation = null;
         switch (currentOrientation) {
-        case LTR:
+        case ALL_LTR:
             targetOrientation = ComponentOrientation.LEFT_TO_RIGHT;
             break;
-        case RTL:
+        case ALL_RTL:
             targetOrientation = ComponentOrientation.RIGHT_TO_LEFT;
             break;
         case DIFFER:
@@ -352,18 +352,18 @@ public class EditorController implements IEditor {
         
         Document3.ORIENTATION newOrientation = currentOrientation;
         switch (currentOrientation) {
-        case LTR:
-            newOrientation = Document3.ORIENTATION.RTL;
+        case ALL_LTR:
+            newOrientation = Document3.ORIENTATION.ALL_RTL;
             break;
-        case RTL:
+        case ALL_RTL:
             if (sourceLangIsRTL != targetLangIsRTL) {
                 newOrientation = Document3.ORIENTATION.DIFFER;
             } else {
-                newOrientation = Document3.ORIENTATION.LTR;
+                newOrientation = Document3.ORIENTATION.ALL_LTR;
             }
             break;
         case DIFFER:
-            newOrientation = Document3.ORIENTATION.LTR;
+            newOrientation = Document3.ORIENTATION.ALL_LTR;
             break;
         }
         LOGGER.info("Switch document orientation from " + currentOrientation + " to " + newOrientation);

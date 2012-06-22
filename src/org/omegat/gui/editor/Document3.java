@@ -43,11 +43,11 @@ import javax.swing.text.StyleConstants;
 @SuppressWarnings("serial")
 public class Document3 extends DefaultStyledDocument {
     enum ORIENTATION {
-        /** Both segments is left aligned. */
-        LTR,
-        /** Both segments is right aligned. */
-        RTL,
-        /** Segments have different alignment, depends of language alignment. */
+        /** All text is left-to-right oriented. */
+        ALL_LTR,
+        /** All text is right-to-left oriented. */
+        ALL_RTL,
+        /** different texts/segments have different orientation, depending on language/locale. */
         DIFFER
     };
 

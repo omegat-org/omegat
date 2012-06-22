@@ -126,7 +126,7 @@ public class SegmentBuilder {
         this.segmentNumberInProject = segmentNumberInProject;
 
         hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL
-                || controller.currentOrientation != Document3.ORIENTATION.LTR;
+                || controller.currentOrientation != Document3.ORIENTATION.ALL_LTR;
     }
 
     public boolean isDefaultTranslation() {
@@ -376,10 +376,10 @@ public class SegmentBuilder {
     private void setAlignment(int begin, int end, boolean isRTL) {
         boolean rtl = false;
         switch (controller.currentOrientation) {
-        case LTR:
+        case ALL_LTR:
             rtl = false;
             break;
-        case RTL:
+        case ALL_RTL:
             rtl = true;
             break;
         case DIFFER:

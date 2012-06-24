@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+"../../../docbook-xml-4.5/docbookx.dtd">
+<appendix id="appendix.ScriptingPlugin.inOmegaT">
+  <title>Scripting plugin<indexterm class="singular">
+      <primary>Plugins</primary>
+
+      <secondary>Scripting</secondary>
+    </indexterm></title>
+
+  <section>
+    <title>Introduction</title>
+
+    <para>OmegaT-Scripting allows to run scripts written in different
+    scripting languages in OmegaT.</para>
+  </section>
+
+  <section>
+    <title>Installation and Use</title>
+
+    <para>The Scripting plugin for OmegaT can be downloaded from the OmegaT
+    plugins download site (<ulink
+    url="???">http://sourceforge.net/projects/omegat-plugins/files/</ulink>).
+    Unzip the files, and put them all in the "plugins" folder located in
+    OmegaT installation folder, that is the folder that contains the
+    OmegaT.jar. Create the "plugins" folder first, if it does not
+    exist.</para>
+
+    <para>This adds a new submenu<guisubmenu> Tools &gt;
+    </guisubmenu><guisubmenu>Scripting.</guisubmenu> Below the
+    <guisubmenu>Scripting</guisubmenu> submenu , there's five place holders
+    available for scripts.Clicking <guisubmenu>Scripting</guisubmenu> opens
+    the Scripting dialog:<screenshot>
+        <screeninfo>Scripting dialog</screeninfo>
+
+        <mediaobject>
+          <imageobject>
+            <imagedata fileref="images/ScriptingDialog.png"/>
+          </imageobject>
+        </mediaobject>
+      </screenshot></para>
+
+    <para>The Scripting dialog allows you to load an existing script into the
+    text area and run it against the current opened project. To customize the
+    script feature, do the following:</para>
+
+    <itemizedlist>
+      <listitem>
+        <para>Load a script into the editor by clicking on its name in the
+        list on the left panel.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>Right-click on a button from "&lt;1&gt;" to "&lt;5&gt;" in the
+        bottom panel and select "Add". In the above example, two scripts
+        (position 1 and 2) have already been added.</para>
+      </listitem>
+    </itemizedlist>
+
+    <itemizedlist>
+      <listitem>
+        <para>When you left-click on the number, the selected script will run.
+        You can start the selected macros from the main menu as well by using
+        their entries in the <guisubmenu>Tools </guisubmenu>menu or by
+        pressing<keycap> Ctrl+Alt+F#</keycap> (# 1 to 5).</para>
+      </listitem>
+    </itemizedlist>
+
+    <para>The following scripting languages have been implemented:</para>
+
+    <para><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">NetRexx</emphasis>
+          (http://www.netrexx.org/): it supports a classic REXX syntax, with
+          no reserved keywords, along with considerable additions to support
+          object-oriented programming in a manner compatible with Java's
+          object model. All existing Java class libraries can be used
+          unchanged and without special setup; at the same time, a Java
+          programmer can opt to just use the Rexx class from the runtime
+          package for improved string handling in Java syntax source
+          programs.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">XSLT</emphasis> (Extensible Stylesheet
+          Language Transformations): is a declarative, XML-based language used
+          for the transformation of XML documents. The original document is
+          not changed; rather, a new document is created based on the content
+          of an existing one. The new document may be serialized (output) by
+          the processor in standard XML syntax or in another format, such as
+          HTML or plain text. XSLT is most often used to convert data between
+          different XML schemas or to convert XML data into web pages or PDF
+          documents.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">Groovy</emphasis>
+          (http://groovy.codehaus.org): is a dynamic language for the Java
+          Virtual machine. It builds upon the strengths of Java but has
+          additional power features inspired by languages like Python, Ruby
+          and Smalltalk.</para>
+        </listitem>
+      </itemizedlist><itemizedlist>
+        <listitem>
+          <para><emphasis role="bold">JavaScript</emphasis> (sometimes
+          abbreviated JS, not to be confused with Java): is a prototype-based
+          scripting language that is dynamic, weakly typed and has first-class
+          functions. It is a multi-paradigm language, supporting
+          object-oriented, imperative, and functional programming styles.
+          Being the language behind popular software such as Firefox it is a
+          familiar and preferred programming tool in the open-source
+          domain.</para>
+        </listitem>
+      </itemizedlist>All the languages have access to the OmegaT object model,
+    with the project as the top object. The following code snippet in groovy
+    for instance scans through all the segments in all files in the current
+    project:</para>
+
+    <para><parameter>files = project.projectFiles;</parameter></para>
+
+    <para><parameter>for (i in 0 ..&lt; files.size())</parameter></para>
+
+    <para><parameter>{</parameter></para>
+
+    <para><parameter> for (j in 0 ..&lt;
+    files[i].entries.size())</parameter></para>
+
+    <para><parameter> {</parameter></para>
+
+    <para><parameter> currsegment = files[i].entries[j];</parameter></para>
+
+    <para><parameter> source = currsegment.getSrcText();</parameter></para>
+
+    <para><parameter> if (project.getTranslationInfo(ste))</parameter></para>
+
+    <para><parameter> target =
+    project.getTranslationInfo(currsegment).translation;</parameter></para>
+
+    <para><parameter> else</parameter></para>
+
+    <para><parameter> target = null;</parameter></para>
+
+    <para><parameter> }</parameter></para>
+
+    <para><parameter>}</parameter></para>
+  </section>
+</appendix>

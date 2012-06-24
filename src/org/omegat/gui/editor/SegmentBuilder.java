@@ -1,6 +1,6 @@
 /**************************************************************************
- OmegaT - Computer Assisted Translation (CAT) tool 
-          with fuzzy matching, translation memory, keyword search, 
+ OmegaT - Computer Assisted Translation (CAT) tool
+          with fuzzy matching, translation memory, keyword search,
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2009 Alex Buloichik, Martin Fleurke
@@ -54,7 +54,7 @@ import org.omegat.util.gui.UIThreadsUtil;
 /**
  * Class for store information about displayed segment, and for show segment in
  * editor.
- * 
+ *
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Martin Fleurke
@@ -74,8 +74,8 @@ public class SegmentBuilder {
 
     /**
      * Version of displayed variant of segment. Required for check in delayed
-     * thread, like skell checking. Version changed(in Swing thread only) each
-     * time when entry drawed, and when user edit it(for active entry).
+     * thread, like spell checking. Version changed(in Swing thread only) each
+     * time when entry drawn, and when user edits it (for active entry).
      */
     private long displayVersion;
     /** Source text of entry, or null if not displayed. */
@@ -139,7 +139,7 @@ public class SegmentBuilder {
 
     /**
      * Create element for one segment.
-     * 
+     *
      * @param doc
      *            document
      * @return OmElementSegment
@@ -192,7 +192,7 @@ public class SegmentBuilder {
 
     /**
      * Add separator between segments - one empty line.
-     * 
+     *
      * @param doc
      */
     public static void addSegmentSeparator(final Document3 doc) {
@@ -347,7 +347,7 @@ public class SegmentBuilder {
 
     /**
      * Get segment's start position.
-     * 
+     *
      * @return start position
      */
     public int getStartPosition() {
@@ -356,7 +356,7 @@ public class SegmentBuilder {
 
     /**
      * Get segment's end position.
-     * 
+     *
      * @return end position
      */
     public int getEndPosition() {
@@ -365,7 +365,7 @@ public class SegmentBuilder {
 
     /**
      * Set attributes for created paragraphs for better RTL support.
-     * 
+     *
      * @param begin
      *            paragraphs begin
      * @param end
@@ -398,7 +398,7 @@ public class SegmentBuilder {
 
     /**
      * Add inactive segment part, without segment begin/end marks.
-     * 
+     *
      * @param isSource is text the source text (true) or translation text (false)
      * @param text
      *            segment part text
@@ -418,7 +418,7 @@ public class SegmentBuilder {
     /**
      * Adds a string that displays the modification info (author and date). Does
      * nothing if the translation entry is null.
-     * 
+     *
      * @param trans
      *            The translation entry (can be null)
      * @throws BadLocationException
@@ -455,7 +455,7 @@ public class SegmentBuilder {
 
     /**
      * Add active segment part, with segment begin/end marks.
-     * 
+     *
      * @param text
      *            segment part text
      * @param isSource is text the source text (true) or translation text (false)
@@ -505,11 +505,24 @@ public class SegmentBuilder {
     /**
      * Make some changes of segment mark from resource bundle for display
      * correctly in editor.
-     * 
+     *
      * @return changed mark text
      */
     private String createSegmentMarkText() {
         String text = OConsts.segmentMarkerString;
+
+        boolean markIsRTL = false;
+        switch (controller.currentOrientation) {
+        case ALL_LTR:
+            markIsRTL = false;
+            break;
+        case ALL_RTL:
+            markIsRTL = true;
+            break;
+        case DIFFER:
+            markIsRTL = controller.targetLangIsRTL;
+            break;
+        }
 
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
@@ -519,6 +532,26 @@ public class SegmentBuilder {
         }
 
         return text;
+    }
+
+    /**
+     * Returns whether the current locale is a Right-to-Left language or not.
+     *
+     * @return true when current locale is a RTL language, false if not.
+     */
+    private boolean localeIsRTL() {
+        boolean markIsRTL;
+        String language = Locale.getDefault().getLanguage().toLowerCase();
+        /*
+         * Hardcode for future - if somebody will translate marks to RTL
+         * language.
+         */
+        if ("some_RTL_language_code".equals(language)) {
+            markIsRTL = true;
+        } else {
+            markIsRTL = false;
+        }
+        return markIsRTL;
     }
 
     /**
@@ -555,7 +588,23 @@ public class SegmentBuilder {
         formatText(text, start, end, isSource);
     }
 
+    /**
+     * formats source or target segment to highlight placeholders, tags, non-breakable spaces etc.
+     * @param text the text to format
+     * @param start start position in editor
+     * @param end end position in editor
+     * @param isSource is the text a source segment or not
+     */
     public void formatText(String text, int start, int end, boolean isSource) {
+        if (controller.currentOrientation != Document3.ORIENTATION.ALL_LTR) {
+            //workaround for the issue that in RTL-embedded text, the formatting somehow
+            //splits up the text, and the first parts then can get rendered confusingly.
+            //E.g. "Blah %s, Blah." gets formatted, and thus split into "blah |<em>%s</em>|, Blah."
+            //and that is shown partly in RTL as " Blah|<em>%s</em>|, Blah.".
+            //Note the first space is displayed to the left of the word.
+            //To prevent this, the formatting is not done when the editor is in RTL.
+            return;
+        }
         //first remove any formatting
         AttributeSet attrNormal = attrs(isSource, false, false, false);
         doc.setCharacterAttributes(start, end-start, attrNormal, true);

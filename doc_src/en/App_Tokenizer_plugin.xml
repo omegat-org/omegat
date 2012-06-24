@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE book PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
 "../../../docbook-xml-4.5/docbookx.dtd">
-<appendix id="appendix.using.tokenizers.inOmegaT">
-  <title>Using tokenizers in OmegaT</title>
+<appendix id="appendix.TokenizerPlugin.inOmegaT">
+  <title>Tokenizer plugin<indexterm class="singular">
+      <primary>Plugins</primary>
+
+      <secondary>Tokenizer</secondary>
+    </indexterm></title>
 
   <section>
-    <title>Introduction</title>
+    <title>Introduction<indexterm class="singular">
+        <primary>Lucene</primary>
+
+        <see>Tokenizer</see>
+      </indexterm><indexterm class="singular">
+        <primary>Stemmer</primary>
+
+        <see>Tokenizer</see>
+      </indexterm></title>
 
     <para>Tokenizers (or stemmers) improve the quality of matches by
     recognizing inflected words in source and translation memory data. They

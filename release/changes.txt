@@ -19,18 +19,20 @@
   http://sourceforge.net/support/tracker.php?aid=3528575
 
 ----------------------------------------------------------------------
- OmegaT 2.5.4 update 2
+ OmegaT 2.5.5
 ----------------------------------------------------------------------
-   2 Enhancements
+   3 Enhancements
    5 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
-2.5.4 update 2 vs. 2.5.4 update 1
+2.5.5 vs. 2.5.4 update 1
 
   Implemented requests:
 
   - Option to not load translations=source from source documents
   http://sourceforge.net/support/tracker.php?aid=3528468
+
+  - Revised manual
 
   Other enhancements:
 

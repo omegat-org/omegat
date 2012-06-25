@@ -13,7 +13,7 @@
   Implemented requests:
 
   - Online team projects
-  http://sourceforge.net/support/tracker.php?aid=3513384
+  http://sourceforge.net/support/tracker.php?aid=1604911
 
   - Apply penalties to external TMXs
   http://sourceforge.net/support/tracker.php?aid=3528575

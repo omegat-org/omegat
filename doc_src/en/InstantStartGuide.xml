@@ -71,8 +71,11 @@
     <para/>
 
     <mediaobject>
-      <imageobject>
+      <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_1.png"/>
+      </imageobject>
+      <imageobject role="fo">
+        <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
       </imageobject>
     </mediaobject>
 
@@ -84,11 +87,14 @@
     <para><literal/></para>
 
     <mediaobject>
-      <imageobject>
+      <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_2.png" />
       </imageobject>
+      <imageobject role="fo">
+        <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
+      </imageobject>
     </mediaobject>
-
+    
     <para/>
 
     <para>The tags in OmegaT are greyed, so they are easy to recognise. They

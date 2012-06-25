@@ -952,11 +952,8 @@
 
           <mediaobject>
             <imageobject role="html">
-              <imagedata fileref="images/StatisticsWindow_25.png" width="100%"/>
+              <imagedata fileref="images/StatisticsWindow_25.png"/>
             </imageobject>
-          </mediaobject>
-
-          <mediaobject>
             <imageobject role="fo">
               <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
             </imageobject>
@@ -985,15 +982,11 @@
           <title>Match statistics</title>
 
           <mediaobject>
-            <imageobject>
+            <imageobject role="html">
               <imagedata fileref="images/MatchStatistics.png"/>
             </imageobject>
-          </mediaobject>
-
-          <mediaobject>
-            <imageobject>
-              <imagedata fileref="images/MatchStatistics.png" role="fo"
-                         width="80%"/>
+            <imageobject role="fo">
+              <imagedata fileref="images/MatchStatistics.png" width="80%"/>
             </imageobject>
           </mediaobject>
         </figure></para>

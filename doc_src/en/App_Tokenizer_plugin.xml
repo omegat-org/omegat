@@ -77,9 +77,9 @@
     tokenizer in source and the Lucene French tokenizer in target, your
     command will look like this:</para>
 
-    <para><literal>java -jar OmegaT.jar
-    --ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer
-    --ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer</literal></para>
+    <para><literal>java -jar OmegaT.jar --ITokenizer=org.omegat.plugins.
+    tokenizer.LuceneCJKTokenizer --ITokenizerTarget=org.omegat.plugins.
+    tokenizer.LuceneFrenchTokenizer</literal></para>
   </section>
 
   <section>
@@ -100,7 +100,8 @@
 &lt;key&gt;Arguments&lt;/key&gt;
 &lt;array&gt;
   &lt;string&gt;--ITokenizer=org.omegat.plugins.tokenizer.LuceneCJKTokenizer&lt;/string&gt;
-  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.LuceneFrenchTokenizer&lt;/string&gt;
+  &lt;string&gt;--ITokenizerTarget=org.omegat.plugins.tokenizer.
+  LuceneFrenchTokenizer&lt;/string&gt;
 &lt;/array&gt;</code></literallayout>
   </section>
 

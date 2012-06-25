@@ -41,7 +41,7 @@
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/NewProject_25.png" width="90%"/>
+          <imagedata fileref="images/NewProject_25.png"/>
         </imageobject>
 
         <imageobject role="fo">

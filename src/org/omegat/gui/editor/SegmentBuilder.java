@@ -29,7 +29,6 @@ package org.omegat.gui.editor;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
-import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -511,19 +510,6 @@ public class SegmentBuilder {
     private String createSegmentMarkText() {
         String text = OConsts.segmentMarkerString;
 
-        boolean markIsRTL = false;
-        switch (controller.currentOrientation) {
-        case ALL_LTR:
-            markIsRTL = false;
-            break;
-        case ALL_RTL:
-            markIsRTL = true;
-            break;
-        case DIFFER:
-            markIsRTL = controller.targetLangIsRTL;
-            break;
-        }
-
         // trim and replace spaces to non-break spaces
         text = text.trim().replace(' ', '\u00A0');
         //replace placeholder with actual segment number
@@ -532,26 +518,6 @@ public class SegmentBuilder {
         }
 
         return text;
-    }
-
-    /**
-     * Returns whether the current locale is a Right-to-Left language or not.
-     *
-     * @return true when current locale is a RTL language, false if not.
-     */
-    private boolean localeIsRTL() {
-        boolean markIsRTL;
-        String language = Locale.getDefault().getLanguage().toLowerCase();
-        /*
-         * Hardcode for future - if somebody will translate marks to RTL
-         * language.
-         */
-        if ("some_RTL_language_code".equals(language)) {
-            markIsRTL = true;
-        } else {
-            markIsRTL = false;
-        }
-        return markIsRTL;
     }
 
     /**

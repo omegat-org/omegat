@@ -118,6 +118,7 @@
                 <pathelement path="${saxon}" />
             </classpath>
         </java>
+        <copy file="${language}/version.properties" tofile="../docs/${language}/version.properties" />
     </target>
      
     <target name="instant-start">

@@ -30,7 +30,7 @@
   Implemented requests:
 
   - Option to not load translations=source from source documents
-  http://sourceforge.net/support/tracker.php?aid=3528468
+  http://sourceforge.net/support/tracker.php?aid=3527626
 
   - Revised manual
 

@@ -110,7 +110,7 @@
 		</j2se>
 	</resources>
 	<resources>
-		<j2se version="1.6+"
+		<j2se version="1.7+"
 			href="http://java.sun.com/products/autodl/j2se">
 			<resources>
 				<jar href="OmegaT.jar" />

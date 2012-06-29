@@ -28,6 +28,7 @@ package org.omegat.gui.filelist;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -554,8 +555,12 @@ public class ProjectFrame extends JFrame {
             // data changed
             return;
         }
+        Cursor hourglassCursor = new Cursor(Cursor.WAIT_CURSOR);
+        Cursor oldCursor = this.getCursor();
+        this.setCursor(hourglassCursor);
         Core.getEditor().gotoFile(row);
         Core.getEditor().requestFocus();
+        this.setCursor(oldCursor);
     }
 
     /**

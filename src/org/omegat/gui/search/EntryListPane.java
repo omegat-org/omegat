@@ -27,6 +27,7 @@
 package org.omegat.gui.search;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -72,6 +73,8 @@ class EntryListPane extends JTextPane {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 if (e.getClickCount() == 2) {
+                    final Cursor oldCursor = getCursor();
+                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     // user double clicked on viewer pane - send message
                     // to org.omegat.gui.TransFrame to jump to this entry
                     int pos = getCaretPosition();
@@ -84,8 +87,11 @@ class EntryListPane extends JTextPane {
                                 SwingUtilities.invokeLater(new Runnable() {
                                     public void run() {
                                         Core.getEditor().gotoEntry(entry);
+                                        setCursor(oldCursor);
                                     }
                                 });
+                            } else {
+                                setCursor(oldCursor);
                             }
                             break;
                         }
@@ -231,7 +237,7 @@ class EntryListPane extends JTextPane {
         if (m_stringBuf.length() > 0)
             m_stringBuf.append("---------\n");
 
-        // Insert the essage text
+        // Insert the message text
         m_stringBuf.append(message);
     }
 

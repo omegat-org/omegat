@@ -68,7 +68,7 @@ public interface IMainWindow {
     void showStatusMessageRB(String messageKey, Object... params);
 
     /**
-     * Show message in progress bar.
+     * Show message in progress bar. Progress bar shows the translation progress: nr. of segments/words etc translated/to do.
      * 
      * @param messageText
      *            message text
@@ -76,7 +76,7 @@ public interface IMainWindow {
     void showProgressMessage(String messageText);
 
     /**
-     * Show message in length label.
+     * Show message in length label. Length label shows length (in nr of characters) of current segment
      * 
      * @param messageText
      *            message text

@@ -19,7 +19,7 @@ is divided into following sections:
   - cleanup
 
 -->
-<project name="lib-mnemonics-impl" default="build" basedir="..">
+<project name="lib-mnemonics-impl" default="default" basedir="..">
     <target name="default" depends="test,jar,javadoc" description="Build and test whole project."/>
     <!-- 
     ======================

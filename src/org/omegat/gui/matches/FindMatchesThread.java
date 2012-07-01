@@ -142,6 +142,9 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                         // skip original==original entry comparison
                         return;
                     }
+                    if (trans.translation == null) {
+                        return;
+                    }
                     String fileName = project.isOrphaned(source) ? orphanedFileName : null;
                     processEntry(null, source, trans.translation, false, 0, fileName, trans.changer, trans.changeDate, trans.properties);
                 }
@@ -152,6 +155,9 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
                 checkEntryChanged();
                 if (source.sourceText.equals(processedEntry.getSrcText())) {
                     // skip original==original entry comparison
+                    return;
+                }
+                if (trans.translation == null) {
                     return;
                 }
                 String fileName = project.isOrphaned(source) ? orphanedFileName : null;
@@ -169,6 +175,9 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             }
             for (TMXEntry tmen : en.getValue().getEntries()) {
                 checkEntryChanged();
+                if (tmen.translation == null) {
+                    continue;
+                }
                 processEntry(null, tmen.source, tmen.translation, false, penalty, en.getKey(), tmen.changer, tmen.changeDate, tmen.properties);
             }
         }

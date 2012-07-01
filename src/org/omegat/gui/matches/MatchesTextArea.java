@@ -460,7 +460,7 @@ public class MatchesTextArea extends EntryInfoThreadPane<List<NearString>> imple
                     for (int i = 0; i < entries.size(); i++) {
                         SourceTextEntry ste = entries.get(i);
                         if (!ste.getSrcText().equals(ns.source)) {
-                            // source text not equals - there is no sence to checking this entry
+                            // source text not equals - there is no sense to checking this entry
                             continue;
                         }
                         if (ns.key != null) {

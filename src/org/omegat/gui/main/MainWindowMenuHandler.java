@@ -70,9 +70,6 @@ import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
-import sun.misc.BASE64Decoder;
-import sun.misc.BASE64Encoder;
-
 /**
  * Handler for main menu items.
  * 
@@ -794,10 +791,9 @@ public class MainWindowMenuHandler {
         String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
         String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));
 
-        BASE64Decoder dec = new BASE64Decoder();
         try {
-            proxyOptions.userText.setText(new String(dec.decodeBuffer(encodedUser)));
-            proxyOptions.passwordField.setText(new String(dec.decodeBuffer(encodedPassword)));
+            proxyOptions.userText.setText(new String(org.omegat.util.Base64.decode(encodedUser)));
+            proxyOptions.passwordField.setText(new String(org.omegat.util.Base64.decode(encodedPassword)));
         } catch (IOException ex) {
             Log.logErrorRB("LOG_DECODING_ERROR");
             Log.log(ex);
@@ -808,9 +804,8 @@ public class MainWindowMenuHandler {
         proxyOptions.setVisible(true);
 
         if (proxyOptions.getReturnStatus() == UserPassDialog.RET_OK) {
-            BASE64Encoder enc = new BASE64Encoder();
-            encodedUser = enc.encode(proxyOptions.userText.getText().getBytes());
-            encodedPassword = enc.encode(new String(proxyOptions.passwordField.getPassword()).getBytes());
+            encodedUser = org.omegat.util.Base64.encodeBytes(proxyOptions.userText.getText().getBytes());
+            encodedPassword = org.omegat.util.Base64.encodeBytes(new String(proxyOptions.passwordField.getPassword()).getBytes());
 
             Preferences.setPreference(Preferences.PROXY_USER_NAME, encodedUser);
             Preferences.setPreference(Preferences.PROXY_PASSWORD, encodedPassword);

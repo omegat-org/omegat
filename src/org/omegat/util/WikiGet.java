@@ -231,12 +231,10 @@ public class WikiGet {
             String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
             if (!StringUtil.isEmpty(encodedUser)) { // There is a proxy user
                 String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));
-                sun.misc.BASE64Decoder dec = new sun.misc.BASE64Decoder();
                 try {
-                    String pass = (new String(dec.decodeBuffer(encodedUser)));
-                    pass += ":" + new String(dec.decodeBuffer(encodedPassword));
-                    sun.misc.BASE64Encoder enc = new sun.misc.BASE64Encoder();
-                    encodedPassword = enc.encode(pass.getBytes());
+                    String pass = new String(org.omegat.util.Base64.decode(encodedUser));
+                    pass += ":" + new String(org.omegat.util.Base64.decode(encodedPassword));
+                    encodedPassword = org.omegat.util.Base64.encodeBytes(pass.getBytes());
                     conn.setRequestProperty("Proxy-Authorization", "Basic " + encodedPassword);
                 } catch (IOException ex) {
                     Log.logErrorRB("LOG_DECODING_ERROR");

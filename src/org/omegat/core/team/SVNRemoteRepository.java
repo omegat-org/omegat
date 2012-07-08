@@ -49,6 +49,7 @@ import org.tmatesoft.svn.core.wc.SVNWCUtil;
 public class SVNRemoteRepository implements IRemoteRepository {
     File baseDirectory;
     SVNClientManager ourClientManager;
+    boolean readOnly;
 
     public static boolean isSVNDirectory(File localDirectory) {
         File svnDir = new File(localDirectory, ".svn");
@@ -76,6 +77,10 @@ public class SVNRemoteRepository implements IRemoteRepository {
         ISVNAuthenticationManager authManager = new BasicAuthenticationManager(username, password);
         ISVNOptions options = SVNWCUtil.createDefaultOptions(true);
         ourClientManager = SVNClientManager.newInstance(options, authManager);
+    }
+
+    public void setReadOnly(boolean value) {
+        readOnly = value;
     }
 
     public void updateFullProject() throws Exception {
@@ -134,6 +139,12 @@ public class SVNRemoteRepository implements IRemoteRepository {
     }
 
     public void upload(File file, String commitMessage) throws Exception {
+        if (readOnly) {
+            // read-only - upload disabled
+            Log.logInfoRB("SVN_READONLY");
+            return;
+        }
+
         Log.logInfoRB("SVN_START", "upload");
         try {
             ourClientManager.getCommitClient().doCommit(new File[] { file }, false, commitMessage, null,

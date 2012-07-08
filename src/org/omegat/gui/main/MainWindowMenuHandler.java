@@ -787,6 +787,7 @@ public class MainWindowMenuHandler {
      */
     public void optionsViewOptionsMenuLoginItemActionPerformed() {
         UserPassDialog proxyOptions = new UserPassDialog(mainWindow);
+        proxyOptions.cbReadOnly.setVisible(false);
 
         String encodedUser = (Preferences.getPreference(Preferences.PROXY_USER_NAME));
         String encodedPassword = (Preferences.getPreference(Preferences.PROXY_PASSWORD));

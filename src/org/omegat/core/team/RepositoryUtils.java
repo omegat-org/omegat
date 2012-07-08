@@ -41,6 +41,7 @@ public class RepositoryUtils {
      */
     public static boolean askForCredentials(IRemoteRepository repository, String message) {
         UserPassDialog userPassDialog = new UserPassDialog(Core.getMainWindow().getApplicationFrame());
+        userPassDialog.cbReadOnly.setVisible(true);
         DockingUI.displayCentered(userPassDialog);
         userPassDialog.setTitle(OStrings.getString("TEAM_USERPASS_TITLE"));
         userPassDialog.descriptionTextArea.setText(message);
@@ -48,6 +49,7 @@ public class RepositoryUtils {
         if (userPassDialog.getReturnStatus() == UserPassDialog.RET_OK) {
             repository.setCredentials(userPassDialog.userText.getText(), new String(
                     userPassDialog.passwordField.getPassword()));
+            repository.setReadOnly(userPassDialog.cbReadOnly.isSelected());
             return true;
         } else {
             return false;

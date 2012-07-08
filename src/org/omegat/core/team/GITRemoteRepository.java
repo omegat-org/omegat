@@ -51,6 +51,7 @@ public class GITRemoteRepository implements IRemoteRepository {
     static String LOCAL_BRANCH = "master";
     static String REMOTE_BRANCH = "origin/master";
     static String REMOTE = "origin";
+    boolean readOnly;
 
     File localDirectory;
     Repository repository;
@@ -82,6 +83,10 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
 
     public void setCredentials(String username, String password) {
+    }
+
+    public void setReadOnly(boolean value) {
+        readOnly = value;
     }
 
     public String getBaseRevisionId(File file) throws Exception {
@@ -137,6 +142,12 @@ public class GITRemoteRepository implements IRemoteRepository {
     }
 
     public void upload(File file, String commitMessage) throws Exception {
+        if (readOnly) {
+            // read-only - upload disabled
+            Log.logInfoRB("GIT_READONLY");
+            return;
+        }
+
         boolean ok = true;
         Log.logInfoRB("GIT_START", "upload");
         try {

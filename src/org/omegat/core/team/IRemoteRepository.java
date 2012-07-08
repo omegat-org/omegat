@@ -37,6 +37,11 @@ public interface IRemoteRepository {
     void setCredentials(String username, String password);
 
     /**
+     * Set repository read-only mode, or read-write mode.
+     */
+    void setReadOnly(boolean value);
+
+    /**
      * Check is file changed from BASE revision.
      */
     boolean isChanged(File file) throws Exception;

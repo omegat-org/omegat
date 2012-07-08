@@ -98,6 +98,7 @@ public class UserPassDialog extends JDialog {
         jPanel1 = new javax.swing.JPanel();
         okButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
+        cbReadOnly = new javax.swing.JCheckBox();
 
         setMinimumSize(new java.awt.Dimension(250, 200));
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -178,10 +179,21 @@ public class UserPassDialog extends JDialog {
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 7;
+        gridBagConstraints.gridy = 8;
         gridBagConstraints.gridwidth = java.awt.GridBagConstraints.REMAINDER;
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         getContentPane().add(jPanel1, gridBagConstraints);
+
+        org.openide.awt.Mnemonics.setLocalizedText(cbReadOnly, "Read-only");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 7;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.HORIZONTAL;
+        gridBagConstraints.ipadx = 50;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.WEST;
+        gridBagConstraints.weightx = 1.0;
+        gridBagConstraints.insets = new java.awt.Insets(4, 4, 4, 4);
+        getContentPane().add(cbReadOnly, gridBagConstraints);
 
         pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -213,6 +225,7 @@ public class UserPassDialog extends JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cancelButton;
+    public javax.swing.JCheckBox cbReadOnly;
     public javax.swing.JTextArea descriptionTextArea;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton okButton;

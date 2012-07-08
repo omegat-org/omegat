@@ -57,8 +57,9 @@ sequence-library-1.0.2.jar is distributed under the Sequence Library License
 antlr-runtime-3.4.jar is distributed under the ANTLR 3 License
 (required for SVNRemoteRepository.java)
 
-sqljet-1.1.3.jar is distributed under the GNU General Public License
+sqljet-1.1.3.jar is distributed under the GNU General Public License version 2
 (required for SVNRemoteRepository.java)
+Sources are available in OmegaT sources, in the directory lib/sources
 
 org.eclipse.jgit-1.2.0.201112221803-r.jar is distributed under the
 Eclipse Distribution License (EDL) v 1.0 

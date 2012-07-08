@@ -184,7 +184,7 @@ public class UserPassDialog extends JDialog {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.EAST;
         getContentPane().add(jPanel1, gridBagConstraints);
 
-        org.openide.awt.Mnemonics.setLocalizedText(cbReadOnly, "Read-only");
+        org.openide.awt.Mnemonics.setLocalizedText(cbReadOnly, OStrings.getString("VCS_READONLY")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
         gridBagConstraints.gridy = 7;

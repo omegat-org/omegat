@@ -128,7 +128,9 @@
     </Container>
     <Component class="javax.swing.JCheckBox" name="cbReadOnly">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Read-only"/>
+        <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+          <ResourceString bundle="org/omegat/Bundle.properties" key="VCS_READONLY" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+        </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

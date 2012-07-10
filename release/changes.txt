@@ -1,22 +1,11 @@
 ----------------------------------------------------------------------
- OmegaT 2.6.0
+ OmegaT 2.6.0 update 1
 ----------------------------------------------------------------------
-   5 Enhancements
+   2 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
-2.6.0 vs. 2.5.3 
-
-  Implemented requests:
-
-  - Configurable display in match pane
-  http://sourceforge.net/support/tracker.php?aid=2960656
-
-  - Online team projects
-  http://sourceforge.net/support/tracker.php?aid=1604911
-
-  - Apply penalties to external TMXs
-  http://sourceforge.net/support/tracker.php?aid=3528575
+2.6.0 update 1 vs. 2.6.0 
 
   Other enhancements:
 
@@ -26,6 +15,27 @@
 projects, it is possible to check the read-only check box in the 
 authentication dialog. Once this box is checked, OmegaT will not attempt
 to write in the repository anymore
+
+----------------------------------------------------------------------
+ OmegaT 2.6.0
+----------------------------------------------------------------------
+   3 Enhancements
+   0 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.0 vs. 2.5.3 
+
+  Implemented requests:
+
+  - Online team projects
+  http://sourceforge.net/support/tracker.php?aid=1604911
+
+  - Apply penalties to external TMXs
+  http://sourceforge.net/support/tracker.php?aid=3528575
+
+
+  - Configurable display in match pane
+  http://sourceforge.net/support/tracker.php?aid=2960656
 
 ----------------------------------------------------------------------
  OmegaT 2.5.5

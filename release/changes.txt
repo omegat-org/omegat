@@ -33,9 +33,21 @@ to write in the repository anymore
   - Apply penalties to external TMXs
   http://sourceforge.net/support/tracker.php?aid=3528575
 
-
   - Configurable display in match pane
   http://sourceforge.net/support/tracker.php?aid=2960656
+
+----------------------------------------------------------------------
+ OmegaT 2.5.5 update 1
+----------------------------------------------------------------------
+   0 Enhancement
+   0 Bug fix
+   1 Localisation update
+----------------------------------------------------------------------
+2.5.5 update 1 vs. 2.5.5
+
+  Localisation updates:
+
+  - Japanese localization updated to 2.5.5 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.5

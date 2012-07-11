@@ -1,9 +1,22 @@
 ----------------------------------------------------------------------
+ OmegaT 2.6.0 update 2
+----------------------------------------------------------------------
+   0 Enhancement
+   0 Bug fix
+   1 Localisation update
+----------------------------------------------------------------------
+2.6.0 update 2 vs. 2.6.0 update 1
+
+  Localisation updates:
+
+  - Japanese localization updated to 2.6.0 update 1 (UI)
+
+----------------------------------------------------------------------
  OmegaT 2.6.0 update 1
 ----------------------------------------------------------------------
    2 Enhancements
    0 Bug fix
-   1 Localisation update
+   0 Localisation update
 ----------------------------------------------------------------------
 2.6.0 update 1 vs. 2.6.0 
 
@@ -16,9 +29,6 @@ projects, it is possible to check the read-only check box in the
 authentication dialog. Once this box is checked, OmegaT will not attempt
 to write in the repository anymore
 
-  Localisation updates:
-
-  - Japanese localization updated to 2.6.0 update 1 (UI)
 ----------------------------------------------------------------------
  OmegaT 2.6.0
 ----------------------------------------------------------------------

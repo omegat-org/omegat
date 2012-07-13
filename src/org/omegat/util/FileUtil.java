@@ -5,6 +5,7 @@
 
  Copyright (C) 2008 Alex Buloichik
                2009 Didier Briel
+               2012 Alex Buloichik, Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -163,23 +164,20 @@ public class FileUtil {
      * @return
      */
     public static String computeRelativePath(File rootDir, File file) throws IOException {
-        String rootAbs, fileAbs;
+        String rootAbs = rootDir.getAbsolutePath().replace('\\', '/') + '/';
+        String fileAbs = file.getAbsolutePath().replace('\\', '/');
+
         switch (Platform.getOsType()) {
         case WIN32:
         case WIN64:
-            rootAbs = rootDir.getAbsolutePath().replace('\\', '/') + '/';
-            fileAbs = file.getAbsolutePath().replace('\\', '/');
             if (!fileAbs.toUpperCase().startsWith(rootAbs.toUpperCase())) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
-            return fileAbs.substring(rootAbs.length());
         default:
-            rootAbs = rootDir.getAbsolutePath();
-            fileAbs = file.getAbsolutePath();
             if (!fileAbs.startsWith(rootAbs)) {
                 throw new IOException("File '" + file + "' is not under dir '" + rootDir + "'");
             }
-            return fileAbs.substring(rootAbs.length());
         }
+        return fileAbs.substring(rootAbs.length());
     }
 }

@@ -2,10 +2,15 @@
  OmegaT 2.6.0 update 2
 ----------------------------------------------------------------------
    0 Enhancement
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.6.0 update 2 vs. 2.6.0 update 1
+
+  Bug fixes:
+
+  - Automatic loading of translations from the /tm/auto folder had 
+stopped working except under Windows
 
   Localisation updates:
 

@@ -101,9 +101,9 @@
       additional files
       (<emphasis><filename>project_name</filename></emphasis><filename>-omegat.tmx,
       project_name-level1.tmx and project_name-level2.tmx</filename>) are
-      created (and updated during the process of translation) in thes folder.
+      created (and updated during the process of translation) in this folder.
       They contain the one and the same translation memory contents in
-      different forms, to be sued in future projects.</para>
+      different forms, to be used in future projects.</para>
     </section>
 
     <section>

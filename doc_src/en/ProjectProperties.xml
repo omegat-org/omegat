@@ -125,7 +125,7 @@
       <listitem>
         <para><emphasis role="bold"><guibutton>File Filters...</guibutton>
         </emphasis>button<indexterm class="singular">
-            <primary>File Filters</primary>
+            <primary>File filters</primary>
 
             <secondary>global vs project file filters</secondary>
           </indexterm></para>
@@ -178,7 +178,7 @@
 
             <secondary>Changing the folder structure</secondary>
           </indexterm><indexterm class="singular">
-            <primary>Glossary</primary>
+            <primary>Glossaries</primary>
 
             <secondary>Location of the writable glossary file</secondary>
           </indexterm></para>

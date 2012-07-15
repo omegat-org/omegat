@@ -43,7 +43,7 @@
     file(s) are displayed in the Glossary pane:</para>
 
     <indexterm class="singular">
-      <primary>Glossary pane</primary>
+      <primary>Glossaries, Glossary pane</primary>
     </indexterm>
 
     <figure>
@@ -74,7 +74,11 @@
     <figure>
       <title>multiple words entries in glossaries - example<indexterm
           class="singular">
-          <primary>Glossary pane - multiple-words entries</primary>
+          <primary>Glossaries</primary>
+
+          <secondary>Glossary pane</secondary>
+
+          <tertiary>multiple-words entries</tertiary>
         </indexterm></title>
 
       <mediaobject>
@@ -137,12 +141,7 @@
         <secondary>TBX format</secondary>
       </indexterm> is also supported. TBX - Term Base eXchange - is the open,
     XML-based standard for exchanging structured terminological data, TBX has
-    been approved as an international standard by LISA<indexterm
-        class="singular">
-        <primary>LISA -</primary>
-
-        <secondary>File format</secondary>
-      </indexterm> and ISO. If you have an existing terminology handling
+    been approved as an international standard by LISA and ISO. If you have an existing terminology handling
     system - MultiTerm for example - it is quite possible it offers the export
     of terminology data via TBX format. <ulink
     url="http://www.microsoft.com/Language/en-US/Terminology.aspx">Microsoft

@@ -43,7 +43,7 @@
   project specific filters</guimenuitem><indexterm class="singular">
       <primary>File filters</primary>
 
-      <secondary>project specific file filters</secondary>
+      <secondary>Project specific file filters</secondary>
     </indexterm>. A copy of the filters configuration will be stored with the
   project in this case. If you later change filters, only the project filters
   will be updated, while the user filters stay unchanged.</para>
@@ -313,12 +313,12 @@
       <title><indexterm class="singular">
           <primary>Source files</primary>
 
-          <secondary>File type, filename pattern</secondary>
+          <secondary>File type and name pattern</secondary>
         </indexterm>Source file type, filename pattern<indexterm
           class="singular">
           <primary>File filters</primary>
 
-          <secondary>Source file type, filename</secondary>
+          <secondary>File type and name patterne</secondary>
         </indexterm></title>
 
       <para>When OmegaT encounters a file in its source folder, it attempts to
@@ -357,7 +357,7 @@
       <indexterm class="singular">
         <primary>File filters</primary>
 
-        <secondary>Source, target encoding</secondary>
+        <secondary>Source, target - encoding</secondary>
       </indexterm>
 
       <para>Only a limited number of file formats specify a mandatory

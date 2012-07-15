@@ -6,7 +6,7 @@
 
   <section id="ch04.shortcuts.customization">
     <title><indexterm class="singular">
-        <primary>Shortcuts - customization</primary>
+        <primary>Shortcuts</primary>
 
         <secondary>Customization</secondary>
       </indexterm>Shortcuts customization</title>
@@ -135,12 +135,6 @@
     <table>
       <title>Project Menu</title>
 
-      <indexterm class="singular">
-        <primary>Shortcuts Customization</primary>
-
-        <secondary>Project Menu</secondary>
-      </indexterm>
-
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
 
@@ -256,12 +250,6 @@
 
     <table>
       <title>Edit Menu</title>
-
-      <indexterm class="singular">
-        <primary>Shortcuts Customization</primary>
-
-        <secondary>Edit Menu</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -451,11 +439,6 @@
     <table>
       <title>GoTo Menu</title>
 
-      <indexterm class="singular">
-        <primary>Shortcuts Customization</primary>
-
-        <secondary>Goto Menu</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -625,11 +608,6 @@
     <table>
       <title>Tools Menu</title>
 
-      <indexterm class="singular">
-        <primary>Shortcuts Customization</primary>
-
-        <secondary>Tools Menu</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -683,11 +661,6 @@
     <table>
       <title>Options Menu</title>
 
-      <indexterm class="singular">
-        <primary>Shortcuts Customization</primary>
-
-        <secondary>Options Menu</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>
@@ -852,12 +825,6 @@
 
     <table>
       <title>Help Menu</title>
-
-      <indexterm class="singular">
-        <primary>Shortcuts Customization</primary>
-
-        <secondary>Help Menu</secondary>
-      </indexterm>
 
       <tgroup cols="3" colsep="1">
         <colspec align="left" colname="1" colnum="1" colwidth="120"/>

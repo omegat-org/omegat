@@ -6,7 +6,7 @@
       <primary>Dictionaries</primary>
     </indexterm>Dictionaries</title>
 
-  <para></para>
+  <para/>
 
   <section>
     <title>How to download and install dictionaries<indexterm class="singular">
@@ -24,16 +24,11 @@
         <para>Search for the required language combination - for instance on
         the <ulink url="http://stardict.sourceforge.net/index.php"><indexterm
             class="singular">
-            <primary>FreeDict</primary>
+            <primary>Dictionaries</primary>
 
-            <seealso>Dictionaries</seealso>
+            <secondary>StarDict, FreeDict</secondary>
           </indexterm>StartDict Platform</ulink> above or on <ulink
-        url="http://www.freedict.org/en/list.html">FreeDict<indexterm
-            class="singular">
-            <primary>Stardict</primary>
-
-            <seealso>Dictionaries</seealso>
-          </indexterm></ulink></para>
+        url="http://www.freedict.org/en/list.html">FreeDict</ulink></para>
       </listitem>
     </itemizedlist>
 
@@ -60,9 +55,9 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Webster</primary>
+            <primary>Dictionaries</primary>
 
-            <seealso>Dictionaries</seealso>
+            <secondary>Webster</secondary>
           </indexterm>Webster's Revised Unabridged Dictionary (1913)</para>
       </listitem>
     </itemizedlist>
@@ -70,9 +65,9 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Longman</primary>
+            <primary>Dictionaries</primary>
 
-            <seealso>Dictionaries</seealso>
+            <secondary>Longman</secondary>
           </indexterm>Longman Dictionary of Contemporary English</para>
       </listitem>
     </itemizedlist>
@@ -80,9 +75,9 @@
     <itemizedlist>
       <listitem>
         <para><indexterm class="singular">
-            <primary>Britannica</primary>
+            <primary>Dictionaries</primary>
 
-            <seealso>Dictionaries</seealso>
+            <secondary>Britannica</secondary>
           </indexterm>The Britannica Concise Encyclopedia</para>
       </listitem>
     </itemizedlist>
@@ -100,20 +95,20 @@
 
     <figure id="Dict.Merriam.Webster">
       <title><indexterm class="singular">
-          <primary>Dictionary</primary>
+          <primary>Dictionaries</primary>
 
-          <secondary>Merriam Webster - figure</secondary>
+          <secondary>Merriam Webster</secondary>
 
           <seealso>Dictionaries</seealso>
         </indexterm>Merriam Webster dictionary - use</title>
 
       <mediaobject>
         <imageobject role="html">
-          <imagedata fileref="images/DictMerriamWebster.png" />
+          <imagedata fileref="images/DictMerriamWebster.png"/>
         </imageobject>
 
         <imageobject role="fo">
-          <imagedata fileref="images/DictMerriamWebster.png" width="60%" />
+          <imagedata fileref="images/DictMerriamWebster.png" width="60%"/>
         </imageobject>
       </mediaobject>
     </figure>
@@ -128,14 +123,14 @@
 
     <itemizedlist>
       <listitem>
-        <para>Check that your dict files are in the correct folder (or in a subfolder
-        below it). Check in <menuchoice>
+        <para>Check that your dict files are in the correct folder (or in a
+        subfolder below it). Check in <menuchoice>
             <shortcut>
               <keycombo>
                 <keycap><indexterm class="singular">
                     <primary>Shortcuts</primary>
 
-                    <secondary>Ctrl+E - Project properties</secondary>
+                    <secondary>Project properties - Ctrl+E</secondary>
                   </indexterm>Ctrl</keycap>
 
                 <keycap>E</keycap>

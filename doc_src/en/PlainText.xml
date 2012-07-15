@@ -10,13 +10,13 @@
 
   <section id="default.encoding">
     <title>Default encoding<indexterm class="singular">
-        <primary>Default encoding</primary>
+        <primary>Encoding</primary>
 
         <secondary>Plain text files</secondary>
       </indexterm><indexterm class="singular">
         <primary>Source files</primary>
 
-        <secondary>Default encoding</secondary>
+        <secondary>Encoding</secondary>
       </indexterm></title>
 
     <para>Plain text files - in most cases files with a txt extension -
@@ -30,11 +30,11 @@
 
     <mediaobject>
       <imageobject role="html">
-        <imagedata fileref="images/OmT_Japanese.png" />
+        <imagedata fileref="images/OmT_Japanese.png"/>
       </imageobject>
 
       <imageobject role="fo">
-        <imagedata fileref="images/OmT_Japanese.png" width="60%" />
+        <imagedata fileref="images/OmT_Japanese.png" width="60%"/>
       </imageobject>
     </mediaobject>
 
@@ -42,11 +42,11 @@
 
     <mediaobject>
       <imageobject role="html">
-        <imagedata fileref="images/OmT_Cyrillic.png" />
+        <imagedata fileref="images/OmT_Cyrillic.png"/>
       </imageobject>
 
       <imageobject role="fo">
-        <imagedata fileref="images/OmT_Cyrillic.png" width="60%" />
+        <imagedata fileref="images/OmT_Cyrillic.png" width="60%"/>
       </imageobject>
     </mediaobject>
 
@@ -56,12 +56,7 @@
   </section>
 
   <section id="OmegaT.solution">
-    <title>The <application>OmegaT</application> solution<indexterm
-        class="singular">
-        <primary>Default encoding</primary>
-
-        <secondary>OmegaT solution</secondary>
-      </indexterm></title>
+    <title>The <application>OmegaT</application> solution</title>
 
     <para>There are basically three ways to address this problem in
     <application>OmegaT</application>. They all involve the application of
@@ -75,11 +70,10 @@
           <para>open your source file in a text editor that correctly
           interprets its encoding and save the file in <emphasis
           role="bold">"UTF-8"</emphasis> encoding. Change the file extension
-          from <literal>.txt</literal> to
-          <literal>.utf8.</literal> <application>OmegaT</application> will
-          automatically interpret the file as a UTF-8 file. This is the most
-          common-sense alternative, sparing you problems in the long
-          run.</para>
+          from <literal>.txt</literal> to <literal>.utf8.</literal>
+          <application>OmegaT</application> will automatically interpret the
+          file as a UTF-8 file. This is the most common-sense alternative,
+          sparing you problems in the long run.</para>
         </listitem>
       </varlistentry>
     </variablelist>
@@ -104,7 +98,7 @@
         <term>Change the extensions of your plain text source files</term>
 
         <listitem>
-          <para>for instance from <filename>.txt</filename> to 
+          <para>for instance from <filename>.txt</filename> to
           <filename>.jp</filename> for Japanese plain texts: in the <emphasis
           role="bold">Text files</emphasis> section of the file filters
           dialog, add new <emphasis role="bold">Source Filename
@@ -132,7 +126,7 @@
         <para><literal>.txt1</literal> files are files in ISO-8859-1, covering
         most <emphasis role="bold">Western Europe</emphasis>
         languages.<indexterm class="singular">
-            <primary>Default encoding</primary>
+            <primary>Encoding</primary>
 
             <secondary>Western</secondary>
           </indexterm></para>
@@ -144,7 +138,7 @@
         <para><literal>.txt2</literal> files are files in ISO-8859-2, that
         covers most <emphasis role="bold">Central and Eastern
         Europe</emphasis> languages<indexterm class="singular">
-            <primary>Default encoding</primary>
+            <primary>Encoding</primary>
 
             <secondary>Central and Eastern European</secondary>
           </indexterm></para>
@@ -157,7 +151,7 @@
         <application>OmegaT</application> as being encoded in UTF-8 (an
         encoding that covers almost all languages in the world).<indexterm
             class="singular">
-            <primary>Default encoding</primary>
+            <primary>Encoding</primary>
 
             <secondary>Unicode</secondary>
           </indexterm></para>

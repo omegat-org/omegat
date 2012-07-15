@@ -3,9 +3,11 @@
 "../../../docbook-xml-4.5/docbookx.dtd">
 <chapter id="chapter.translation.editing">
   <title>Editing behavior<indexterm class="singular">
-      <primary>Menu options</primary>
+      <primary>Menu</primary>
 
-      <secondary>Editing behavior...</secondary>
+      <secondary>Options</secondary>
+
+      <tertiary>Editing behavior...</tertiary>
     </indexterm></title>
 
   <para>The dialog in <menuchoice>
@@ -50,9 +52,11 @@
 
     <varlistentry>
       <term>Leave the segment empty<indexterm class="singular">
-          <primary>Editing behaviour</primary>
+          <primary>Menu Options</primary>
 
-          <secondary>Empty translation</secondary>
+          <secondary>Editing behaviour</secondary>
+
+          <tertiary>Empty translation</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -72,9 +76,11 @@
 
     <varlistentry>
       <term>Insert the best fuzzy match<indexterm class="singular">
-          <primary>Editing behaviour</primary>
+          <primary>Menu Options</primary>
 
-          <secondary>Inserting fuzzy matches</secondary>
+          <secondary>Editing behaviour</secondary>
+
+          <tertiary>Inserting fuzzy matches</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -95,30 +101,27 @@
     <varlistentry>
       <term>Attempt to convert numbers when inserting a fuzzy match<indexterm
           class="singular">
-          <primary>Editing behaviour</primary>
+          <primary>Menu Options</primary>
 
-          <secondary>converting numbers</secondary>
+          <secondary>Editing behaviour</secondary>
+
+          <tertiary>Converting numbers</tertiary>
         </indexterm></term>
 
       <listitem>
         <para>If this option is checked, when a fuzzy match is inserted,
         either manually or automatically, OmegaT attempts to convert the
         numbers in the fuzzy match, so that the number of the source segments
-        are used instead. There are a number of restrictions.</para>
+        are used instead. There are a number of restrictions:</para>
 
-        <itemizedlist>
-          <listitem>
-             The number of numbers must be the same in the source segment and in both matches. 
-          </listitem>
+        <para>- The number of numbers must be the same in the source segment
+        and in both matches,</para>
 
-          <listitem>
-             The numbers must be exactly the same between the two matches. 
-          </listitem>
+        <para>- The numbers must be exactly the same between the two matches.
+        </para>
 
-          <listitem>
-             Only integers and simple doubles (not localized English doubles, e.g., 5.4) are considered being numbers. 
-          </listitem>
-        </itemizedlist>
+        <para>- Only integers and simple doubles (not localized English
+        doubles, e.g., 5.4) are considered being numbers.</para>
       </listitem>
     </varlistentry>
   </variablelist>
@@ -127,9 +130,11 @@
     <varlistentry>
       <term>Allow the translation to be equal to source<indexterm
           class="singular">
-          <primary>Editing behaviour</primary>
+          <primary>Menu Options</primary>
 
-          <secondary>Translation equal to source</secondary>
+          <secondary>Editing behaviour</secondary>
+
+          <tertiary>Translation equal to source</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -155,9 +160,11 @@
   <variablelist>
     <varlistentry>
       <term>Export the segment to text files<indexterm class="singular">
-          <primary>Editing behaviour</primary>
+          <primary>Menu Options</primary>
 
-          <secondary>Exporting the current segment</secondary>
+          <secondary>Editing behaviour</secondary>
+
+          <tertiary>Exporting the current segment</tertiary>
         </indexterm></term>
 
       <listitem>
@@ -201,10 +208,11 @@
     <varlistentry>
       <term>Go To Next Untranslated Segment stops where there is at least one
       alternative translation<indexterm class="singular">
-          <primary>Editing behaviour</primary>
+          <primary>Menu Options</primary>
 
-          <secondary>GoTo stopping on segment with alternative
-          translation</secondary>
+          <secondary>Editing behaviour</secondary>
+
+          <tertiary>Segments with alternative translation</tertiary>
         </indexterm></term>
 
       <listitem>

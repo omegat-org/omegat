@@ -157,10 +157,7 @@
   <section>
     <title>Automatic Java Properties Aligner<indexterm class="singular">
         <primary>Miscellanea</primary>
-
         <secondary>Automatic aligner for Java properties</secondary>
-
-        <seealso>Miscelanea</seealso>
       </indexterm></title>
 
     <para>OmegaT can align Java .properties in console mode. If you have the

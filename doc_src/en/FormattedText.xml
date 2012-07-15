@@ -263,7 +263,7 @@
     function – <guimenuitem>Ctrl+T<indexterm class="singular">
         <primary>Shortcuts</primary>
 
-        <secondary>Ctrl+T - Tag validation</secondary>
+        <secondary>Tag validation - Ctrl+T</secondary>
       </indexterm></guimenuitem> - opens a window containing all segments in
     the file containing suspected broken or bad tags in the translation.
     Repairing the tags and recreating the target documents is easy with the

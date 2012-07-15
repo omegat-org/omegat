@@ -4,6 +4,10 @@
 <chapter id="chapter.translation.memories">
   <title>Translation memories<indexterm class="singular">
       <primary>Translation memories</primary>
+    </indexterm><indexterm class="singular">
+      <primary>TMX</primary>
+
+      <see>Translation memories</see>
     </indexterm></title>
 
   <section id="OmegaT.and.tmx.files">

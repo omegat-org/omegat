@@ -31,7 +31,7 @@
         <para>In OmegaT, select <guisubmenu><indexterm class="singular">
             <primary>Menu Options</primary>
 
-            <secondary>Spell checking.</secondary>
+            <secondary>Spell checking</secondary>
           </indexterm></guisubmenu><guimenuitem>Options &gt; Spell
         Checking</guimenuitem>, then click <guibutton>Choose
         </guibutton>beside the Dictionary file folder field. Navigate to and
@@ -61,9 +61,9 @@
 
     <figure id="spellchecker.setup">
       <title><indexterm class="singular">
-          <primary>Spell checker setup</primary>
+          <primary>Spell checker</primary>
 
-          <secondary>Spell checker setup - figure</secondary>
+          <secondary>Spell checker setup</secondary>
         </indexterm>Spellchecker setup</title>
 
       <mediaobject>
@@ -103,13 +103,7 @@
     spelling of text</guilabel> check box (see above).</para>
 
     <figure id="spellchecker.in.action">
-      <title><indexterm class="singular">
-          <primary>Spell checker</primary>
-
-          <secondary>Spell checker - figure</secondary>
-        </indexterm>Spellchecker in action</title>
-
-      <mediaobject>
+        <mediaobject>
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckingText.png"/>
         </imageobject>

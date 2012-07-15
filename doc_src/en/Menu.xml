@@ -6,14 +6,8 @@
 
   <section id="ch04.main.menu">
     <title><indexterm class="singular">
-        <primary>Main menu</primary>
+        <primary>Menu</primary>
       </indexterm>Main Menu</title>
-
-    <indexterm class="singular">
-      <primary>Shortcuts</primary>
-
-      <secondary>Main menu</secondary>
-    </indexterm>
 
     <para>All of OmegaT's functions are available through the menu bar at the
     top of the Editor window. Most functions are also available via keyboard
@@ -59,7 +53,7 @@
 
     <section id="submenu.Project">
       <title>Project<indexterm class="singular">
-          <primary>Main menu</primary>
+          <primary>Menu</primary>
 
           <secondary>Project</secondary>
         </indexterm></title>
@@ -217,7 +211,7 @@
 
     <section>
       <title>Edit<indexterm class="singular">
-          <primary>Main menu</primary>
+          <primary>Menu</primary>
 
           <secondary>Edit</secondary>
         </indexterm></title>
@@ -477,7 +471,7 @@
               case). Use Shift+F3 <indexterm>
                   <primary>Shortcuts</primary>
 
-                  <secondary>Shift+F3 - Case selection</secondary>
+                  <secondary>Case selection - Shift+F3</secondary>
                 </indexterm>to cycle through the three alternatives. If no
               text is selected, <application>OmegaT</application> selects the
               word that contains the letter immediately to the right of the
@@ -529,7 +523,7 @@
 
     <section id="submenu.GoTo">
       <title>Go to<indexterm class="singular">
-          <primary>Main menu</primary>
+          <primary>Menu</primary>
 
           <secondary>Goto</secondary>
         </indexterm></title>
@@ -664,7 +658,7 @@
 
     <section id="submenu.View">
       <title>View<indexterm class="singular">
-          <primary>Main menu</primary>
+          <primary>Menu</primary>
 
           <secondary>View</secondary>
         </indexterm></title>
@@ -743,7 +737,7 @@
 
     <section id="submenu.Tools">
       <title>Tools<indexterm class="singular">
-          <primary>Main menu</primary>
+          <primary>Menu</primary>
 
           <secondary>Tools</secondary>
         </indexterm></title>
@@ -818,7 +812,7 @@
 
     <section id="submenu.Options">
       <title><indexterm class="singular">
-          <primary>Main menu</primary>
+          <primary>Menu</primary>
 
           <secondary>Options</secondary>
         </indexterm>Options</title>
@@ -980,7 +974,7 @@
 
     <section id="submenu.Help">
       <title>Help<indexterm class="singular">
-          <primary>Main menu</primary>
+          <primary>Menu</primary>
 
           <secondary>Help</secondary>
         </indexterm></title>

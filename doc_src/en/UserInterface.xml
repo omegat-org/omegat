@@ -94,7 +94,7 @@
             <entry><guimenuitem><indexterm class="singular">
                 <primary>Shortcuts</primary>
 
-                <secondary>Ctrl+T - Tag validation window</secondary>
+                <secondary>Tag validation - Ctrl+T</secondary>
               </indexterm>Tag Validation window</guimenuitem></entry>
 
             <entry><para>Used to read the user manual (open with <keycombo>
@@ -108,7 +108,7 @@
             <entry><guimenuitem><indexterm class="singular">
                 <primary>Shortcuts</primary>
 
-                <secondary>F1 - Help</secondary>
+                <secondary>Help - F1</secondary>
               </indexterm>Help browser</guimenuitem></entry>
 
             <entry><para>Used to display the user manual (open with
@@ -172,7 +172,7 @@
               </indexterm></guimenuitem> <indexterm class="singular">
                 <primary>Shortcuts</primary>
 
-                <secondary>Ctrl+E - Project properties</secondary>
+                <secondary>Project properties - Ctrl+E</secondary>
               </indexterm></entry>
 
             <entry>Used to modify the project folders and languages (access
@@ -265,12 +265,6 @@
   <section id="OmegaT.main.window">
     <title><application>OmegaT</application> main window<indexterm
         class="singular">
-        <primary>Windows and panes in OmegaT</primary>
-
-        <secondary>Main window</secondary>
-
-        <tertiary>- figure</tertiary>
-      </indexterm><indexterm class="singular">
         <primary>Windows and panes in OmegaT</primary>
 
         <secondary>Main window</secondary>
@@ -544,7 +538,7 @@
       5</guimenuitem>.<indexterm>
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+N - Selecting the match</secondary>
+          <secondary>Selecting the match - Ctrl+N</secondary>
         </indexterm> Of course, pressing <keycombo>
           <keycap>Ctrl</keycap>
 
@@ -554,12 +548,12 @@
       <guimenuitem>Ctrl+R</guimenuitem><indexterm class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+R - Replace text</secondary>
+          <secondary>Replace text - Ctrl+R</secondary>
         </indexterm> to replace the target field with the match or use
       <guimenuitem>Ctrl+I <indexterm class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+I - Insert text</secondary>
+          <secondary>Insert text - Ctrl+I</secondary>
         </indexterm></guimenuitem> to insert it at the cursor position.</para>
 
       <para>The matching percentage is roughly equivalent to taking the number
@@ -625,8 +619,6 @@
       <figure id="multiword.pane">
         <title><indexterm class="singular">
             <primary>Glossaries</primary>
-
-            <secondary>multi-word entry in the glossary - figure</secondary>
           </indexterm>multi-word entry in the glossary</title>
 
         <mediaobject>
@@ -703,7 +695,7 @@
         <title><indexterm class="singular">
             <primary>Comments</primary>
 
-            <secondary>Comments pane - figure</secondary>
+            <secondary>Comments pane</secondary>
           </indexterm></title>
 
         <mediaobject>
@@ -770,7 +762,7 @@
       loads a project. Use <guimenuitem>Ctrl+L<indexterm class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+L - Project files list</secondary>
+          <secondary>Project files list - Ctrl+L</secondary>
         </indexterm></guimenuitem> to open and <keycap>Esc</keycap> to close
       it. The Project Files Window displays the following information:</para>
 
@@ -935,17 +927,17 @@
       <indexterm class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+A - Select All</secondary>
+          <secondary>Select All - Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm
           class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+C - copy text</secondary>
+          <secondary>copy text - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm
           class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+V - Paste text</secondary>
+          <secondary>Paste text - Ctrl+V</secondary>
         </indexterm></guimenuitem> to copy/paste the contents. <figure
           id="ProjectStatistic.Window">
           <title>project statistics</title>
@@ -1023,17 +1015,17 @@
       <guimenuitem>Ctrl+A <indexterm class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+A - Select All</secondary>
+          <secondary>Select All - Ctrl+A</secondary>
         </indexterm></guimenuitem><guimenuitem>, Ctrl+C <indexterm
           class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+C - copy text</secondary>
+          <secondary>copy text - Ctrl+C</secondary>
         </indexterm></guimenuitem>, <guimenuitem>Ctrl+V <indexterm
           class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>Ctrl+V - Paste text</secondary>
+          <secondary>Paste text - Ctrl+V</secondary>
         </indexterm></guimenuitem> to copy/paste them, for instance into a
       spreadsheet or into your cost-accounting application. Once computed, the
       data also available in
@@ -1054,7 +1046,7 @@
       pressing <keycap><indexterm class="singular">
           <primary>Shortcuts</primary>
 
-          <secondary>F1 - Help</secondary>
+          <secondary>Help - F1</secondary>
         </indexterm>F1</keycap> or navigating to <guimenuitem><indexterm
           class="singular">
           <primary>Menu Help</primary>

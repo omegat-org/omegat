@@ -204,7 +204,7 @@
         <title>KDE 4 Users<indexterm class="singular">
             <primary>Customizing OmegaT</primary>
 
-            <secondary>KDE 4</secondary>
+            <secondary>Linux</secondary>
           </indexterm></title>
 
         <para>You can add <application>OmegaT</application> to your menus as
@@ -252,11 +252,7 @@
       </section>
 
       <section id="GNOME.users">
-        <title>GNOME Users<indexterm class="singular">
-            <primary>Customizing OmegaT</primary>
-
-            <secondary>GNOME</secondary>
-          </indexterm></title>
+        <title>GNOME Users</title>
 
         <para>You can add <application>OmegaT</application> to your menus as
         follows:</para>
@@ -310,10 +306,6 @@
 
   <section id="MAC.OSX.users">
     <title>Mac OS X Users<indexterm class="singular">
-        <primary>OS X</primary>
-
-        <secondary>Installing OmegaT</secondary>
-      </indexterm><indexterm class="singular">
         <primary>Installing OmegaT</primary>
 
         <secondary>OS X</secondary>
@@ -343,14 +335,7 @@
     </section>
 
     <section id="adding.OmegaT.to.the.dock">
-      <title>Adding <application>OmegaT</application> to the Dock<indexterm
-          class="singular">
-          <primary>OS X</primary>
-
-          <secondary>Adding OmegaT to the Dock</secondary>
-
-          <seealso>Customizing OmegaT</seealso>
-        </indexterm></title>
+      <title>Adding <application>OmegaT</application> to the Dock</title>
 
       <para>Drag and drop
       <emphasis><application>OmegaT</application>.app</emphasis> onto the
@@ -359,10 +344,6 @@
 
     <section id="running.OmegaT.OSX">
       <title>Running <application>OmegaT<indexterm class="singular">
-          <primary>OS X</primary>
-
-          <secondary>Running OmegaT</secondary>
-        </indexterm><indexterm class="singular">
           <primary>Running OmegaT</primary>
 
           <secondary>OS X</secondary>
@@ -380,15 +361,11 @@
       from the command line and open
       <application><emphasis>Info.plist</emphasis> in a command line editor
       like emacs or vi</application>.<emphasis> <indexterm class="singular">
-          <primary>OS X</primary>
+          <primary>Customizing OmegaT</primary>
 
-          <secondary>Customizing OmegaT</secondary>
+          <secondary>OS X</secondary>
 
           <tertiary>Launch parameters</tertiary>
-        </indexterm><indexterm class="singular">
-          <primary>OS X</primary>
-
-          <secondary>Customizing OmegaT</secondary>
         </indexterm></emphasis></para>
 
       <para>You can modify the <emphasis>Properties</emphasis> as well as the

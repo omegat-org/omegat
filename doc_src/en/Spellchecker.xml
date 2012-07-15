@@ -31,7 +31,7 @@
         <para>In OmegaT, select <guisubmenu><indexterm class="singular">
             <primary>Menu Options</primary>
 
-            <secondary>Spell checking..</secondary>
+            <secondary>Spell checking.</secondary>
           </indexterm></guisubmenu><guimenuitem>Options &gt; Spell
         Checking</guimenuitem>, then click <guibutton>Choose
         </guibutton>beside the Dictionary file folder field. Navigate to and
@@ -56,7 +56,7 @@
     <para>Copying the files manually makes sense if you already have suitable
     dictionary files on your system, for instance as part of your
     OpenOffice.org or Thunderbird installation. It is simpler, however, to
-    look foir dictionaries online, using the <emphasis role="bold">URL of
+    look for dictionaries online, using the <emphasis role="bold">URL of
     online dictionaries</emphasis> field:</para>
 
     <figure id="spellchecker.setup">
@@ -70,9 +70,7 @@
         <imageobject role="html">
           <imagedata fileref="images/SpellcheckerSetup_25.png"/>
         </imageobject>
-      </mediaobject>
 
-      <mediaobject>
         <imageobject role="fo">
           <imagedata fileref="images/SpellcheckerSetup_25.png" width="80%"/>
         </imageobject>
@@ -81,7 +79,7 @@
 
     <para>Clicking on <guibutton>Install new dictionary</guibutton> button
     will open the Dictionary installer window, where you can select the
-    dictionaries zou want to install.Make sure the language code of your
+    dictionaries you want to install. Make sure the language code of your
     target files corresponds to the dictionary's language code: an FR-FR
     dictionary will not work with an FR target setting. You need to change the
     setting to FR-FR to have the spell checker recognize the correct
@@ -102,7 +100,7 @@
 
     <para>To enable the spell checker, select <guimenuitem>Options &gt; Spell
     Checking</guimenuitem> and tick the <guilabel>Automatically check the
-    spelling of text</guilabel> checkbox (see above).</para>
+    spelling of text</guilabel> check box (see above).</para>
 
     <figure id="spellchecker.in.action">
       <title><indexterm class="singular">
@@ -158,7 +156,7 @@
     versions of the spell checker.</para>
 
     <para>Note that <filename>Remove</filename> physically removes the
-    selected vocabularies. If they are used bz some other application on your
+    selected vocabularies. If they are used by some other application on your
     system, they will disappear from that application, too. If, for whatever
     reason, you need to do this from time to time, it may make sense to copy
     the files involved to a different folder, reserved just for use by

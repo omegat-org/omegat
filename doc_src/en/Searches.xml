@@ -29,8 +29,8 @@
 
     <note>
       <para>The above search finds all target segments that contain
-      characters, rather unprobable in the target - i.e. Slovenian - language
-      .</para>
+      characters, rather improbable in the target - i.e. Slovenian -
+      language.</para>
     </note>
 
     <section>
@@ -131,8 +131,8 @@
 
     <para>The matches will be displayed in bold blue. Note that '*' and '?'
     have special meaning in regular expressions, so wild card search, as
-    described here, applies to exact and keyword search only (see below).
-    </para>
+    described here, applies to exact and keyword search only (see
+    below).</para>
   </section>
 
   <section id="search.methoids">

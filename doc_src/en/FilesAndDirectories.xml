@@ -69,7 +69,7 @@
     <guibutton>Ctrl+E</guibutton> and make the necessary changes.</para>
 
     <para>In a file manager a translation project looks and acts just like any
-    other folder. In the foillowing example the folder <filename>my
+    other folder. In the following example the folder <filename>my
     projects</filename> contains three OmegaT projects:</para>
 
     <para><figure id="OmegaT.projects.and.subdirectories">
@@ -109,7 +109,7 @@
     <section>
       <title>Subfolder dictionary</title>
 
-      <para>Initially empty, this folder with contain dictionaries you have
+      <para>Initially empty, this folder will contain dictionaries you have
       added to the project. See <link linkend="chapter.dictionaries">chapter
       Dictionaries</link> for more on this subject.</para>
     </section>
@@ -117,9 +117,10 @@
     <section>
       <title>Subfolder glossary</title>
 
-      <para>This folder is nitially empty. It will contain glossaries you will
-      be using in the project. See <link linkend="chapter.glossaries">chapter
-      Glossaries</link> for more on this subject.</para>
+      <para>This folder is initially empty. It will contain glossaries you
+      will be using in the project. See <link
+      linkend="chapter.glossaries">chapter Glossaries</link> for more on this
+      subject.</para>
     </section>
 
     <section id="folder.OmegaT">
@@ -135,8 +136,8 @@
       translation memory for the project. Backups of this file (with extension
       bak) are added progressively to this subfolder, first at the beginning
       of the translation session, at its end, and while the translation
-      progresses. This way an inadvertent loss of is averted - see Preventing
-      Data Loss in chapter <link
+      progresses. This way an inadvertent data loss is averted - see
+      Preventing Data Loss in chapter <link
       linkend="chapter.misc">Miscellanea.</link></para>
 
       <para>During translation additional files may get created in this
@@ -311,7 +312,7 @@
     </informaltable>
 
     <para>Note that default segmentation rules and file filters can be
-    overridden by project-specific setup (see above).The location of user
+    overridden by project-specific setup (see above). The location of user
     files depends upon the platform you use:</para>
 
     <informaltable>
@@ -376,8 +377,8 @@
 
     <para>OmegaT is supplied as a package that can be downloaded from
     SourceForge. Here a platform-independent package in a standard Java form
-    is considered. Alternatives include include a Linux .tar package, a
-    Windows installer – with or without a Java Runtime Environment –, a MacOSX
+    is considered. Alternatives include a Linux .tar package, a Windows
+    installer – with or without a Java Runtime Environment –, a MacOSX
     installer, and a source code package for developers.</para>
 
     <para>The platform-independent package can be used on any platform with a

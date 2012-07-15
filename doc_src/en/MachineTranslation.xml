@@ -205,7 +205,7 @@
         <para>Google Translate does not work: have you applied <ulink
         url="https://developers.google.com/translate/v2/faq">Translate API
         service</ulink>? Note that Google Translate service is not free of
-        charge. see chapter <link
+        charge, see chapter <link
         linkend="chapter.installing.and.running">Installing and Running</link>
         (runtime parameters) for more on that. </para>
       </listitem>
@@ -222,6 +222,12 @@
         <para>Google Translate does not work: - with the Google API key
         entered as requested. Check in Options &gt; Machine Translate, that
         Google Translate V2 is checked. </para>
+      </listitem>
+
+      <listitem>
+        <para>Google Translate V2 reports "Bad request" - check the source and
+        target languages for your project. Having no languages defined elicits
+        this kind or a response.</para>
       </listitem>
     </itemizedlist>
   </section>

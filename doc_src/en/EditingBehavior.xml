@@ -63,7 +63,7 @@
         allowed. They are displayed as &lt;EMPTY&gt; in the Editor. To create
         one, right-click in a segment, and select "<emphasis role="bold">Set
         empty translation</emphasis>". The entry <emphasis role="bold">Remove
-        translation</emphasis> in the same popup menu also allows to delete
+        translation</emphasis> in the same pop up menu also allows to delete
         the existing translation of the current segment. You achieve the same
         by clearing the target segment and pressing
         <guibutton>Enter.</guibutton></para>
@@ -101,21 +101,22 @@
         </indexterm></term>
 
       <listitem>
-        <para>If this option is checked, when a fuzzy match is inserted, 
-        either manually or automatically, OmegaT attempts to convert the numbers 
-        in the fuzzy match, so that the number of the source segments are used instead.
-        There are a number of restrictions.</para>
+        <para>If this option is checked, when a fuzzy match is inserted,
+        either manually or automatically, OmegaT attempts to convert the
+        numbers in the fuzzy match, so that the number of the source segments
+        are used instead. There are a number of restrictions.</para>
+
         <itemizedlist>
           <listitem>
-          The number of numbers must be the same in the source segment and in both
-          matches.
+             The number of numbers must be the same in the source segment and in both matches. 
           </listitem>
+
           <listitem>
-          The numbers must be exactly the same between the two matches.
+             The numbers must be exactly the same between the two matches. 
           </listitem>
+
           <listitem>
-          Only integers and simple doubles (not localized English doubles, e.g.,
-          5.4) are considered being numbers.
+             Only integers and simple doubles (not localized English doubles, e.g., 5.4) are considered being numbers. 
           </listitem>
         </itemizedlist>
       </listitem>
@@ -198,7 +199,7 @@
 
   <variablelist>
     <varlistentry>
-      <term> Go To Next Untranslated Segment stops where there is at least one
+      <term>Go To Next Untranslated Segment stops where there is at least one
       alternative translation<indexterm class="singular">
           <primary>Editing behaviour</primary>
 
@@ -211,7 +212,7 @@
         with several possible target contents, checking this check box will
         cause <emphasis role="bold"> Go To Next Untranslated
         Segment</emphasis>stop on the next such segment, irrespective of
-        whether it has already been translated or not. </para>
+        whether it has already been translated or not.</para>
       </listitem>
     </varlistentry>
   </variablelist>

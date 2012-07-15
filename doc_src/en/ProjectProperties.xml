@@ -110,9 +110,9 @@
         specific to the project in question. Use this button to open a
         dialog,activate the check box <guimenuitem>Project specific
         segmentation rules</guimenuitem>, then proceed to adjust the
-        segmentation rules as desired . The new set of rules will be stored
+        segmentation rules as desired. The new set of rules will be stored
         together with the project and will not interfere with the general set
-        of segmentation rules. To delete project specific Segmentation rules,
+        of segmentation rules. To delete project specific segmentation rules,
         uncheck the check box. See chapter <link
         linkend="chapter.segmentation">Source Segmentation</link> for more
         information on segmentation rules. <emphasis/></para>
@@ -157,13 +157,13 @@
           </indexterm></emphasis></para>
 
         <para>In case there are non-unique segments in source documents, the
-        Auto-propagation checkbox offers the user the following two
+        Auto-propagation check box offers the user the following two
         possibilities as regards automatic translation: if checked, the first
         translated segment will be assumed as the default translation and its
         target text will be automatically used for later hits during the
         translation process. Mistranslated segments can of course be corrected
-        later manually using<guimenuitem>Create Alternative
-        Translation</guimenuitem>. If the Auto-propagation checkbox is not
+        later manually using <guimenuitem>Create Alternative
+        Translation</guimenuitem>. If the Auto-propagation check box is not
         checked, the segments with alternative translations are left
         untranslated until the user has decided which translation is to be
         used.</para>
@@ -183,8 +183,8 @@
             <secondary>Location of the writable glossary file</secondary>
           </indexterm></para>
 
-        <para>Here you can select diffferent subfolders, for instance the
-        subfolder with source files, subfoplder to target files etc. if you
+        <para>Here you can select different subfolders, for instance the
+        subfolder with source files, subfolder for target files etc. If you
         enter names of folders that do not exist yet,
         <application>OmegaT</application> creates them for you. In case you
         decide to modify project folders, keep in mind that this will not move

@@ -962,7 +962,7 @@
             <para><literal>--source-pattern={regexp} </literal></para>
 
             <para>When mode has been used, this option will specify the files
-            to be processed automatically.. If the parameter is not specified,
+            to be processed automatically. If the parameter is not specified,
             all files will be processed. Here's few typical examples to limit
             your choice:</para>
 
@@ -997,7 +997,7 @@
             <para><literal>--output-tag-validation-={regexp} </literal></para>
 
             <para>When mode has been used, this option will specify the files
-            to be processed automatically.. If the parameter is not specified,
+            to be processed automatically. If the parameter is not specified,
             all files will be processed. Here's few typical examples to limit
             your choice:</para>
 

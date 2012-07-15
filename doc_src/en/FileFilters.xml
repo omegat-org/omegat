@@ -38,7 +38,7 @@
   Filters...</emphasis> option in Project Properties.</para>
 
   <para>You can enable project specific filters via the <emphasis
-  role="bold">Options → Properties...</emphasis> . Klick on <guibutton>File
+  role="bold">Options → Properties...</emphasis>. Click on <guibutton>File
   Filters</guibutton> button and activate the check box <guimenuitem>Enable
   project specific filters</guimenuitem><indexterm class="singular">
       <primary>File filters</primary>
@@ -141,18 +141,20 @@
     <itemizedlist>
       <listitem>
         <para><emphasis>Do not translate the content attribute of meta-tags
-        ... :</emphasis> The following meta-tags will not be translated.</para>
+        ... :</emphasis> The following meta-tags will not be
+        translated.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Do not translate the content of tags with the following
-        attribute key-value pairs (separate with commas)</emphasis>: a
-        match in the list of key-value pairs will cause the content of tags to
-        be ignored</para>
+        <para><emphasis>Do not translate the content of tags with the
+        following attribute key-value pairs (separate with commas)</emphasis>:
+        a match in the list of key-value pairs will cause the content of tags
+        to be ignored</para>
+
         <para>It is sometimes useful to be able make some tags untranslatable
-        based on the value of attributes. E.g., <literal>&lt;div
+        based on the value of attributes. For example, <literal>&lt;div
         class="hide"&gt; &lt;span translate="no"&gt;</literal> You can define
         key-value pairs for tags to be left untranslated. For the example
         above, the field would contain: <literal>class=hide, translate=no
@@ -248,17 +250,18 @@
 
     <itemizedlist>
       <listitem>
-         <para><emphasis>Do not translate the content attribute of meta-tags
-        ... :</emphasis> The following meta-tags will not be translated.</para>
+        <para><emphasis>Do not translate the content attribute of meta-tags
+        ... :</emphasis> The following meta-tags will not be
+        translated.</para>
       </listitem>
     </itemizedlist>
 
     <itemizedlist>
       <listitem>
-        <para><emphasis>Do not translate the content of tags with the following
-        attribute key-value pairs (separate with commas)</emphasis>: a
-        match in the list of key-value pairs will cause the content of tags to
-        be ignored</para>
+        <para><emphasis>Do not translate the content of tags with the
+        following attribute key-value pairs (separate with commas)</emphasis>:
+        a match in the list of key-value pairs will cause the content of tags
+        to be ignored</para>
       </listitem>
     </itemizedlist>
 

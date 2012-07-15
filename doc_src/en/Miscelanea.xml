@@ -34,7 +34,7 @@
 
       <para>To run OmegaT, a valid OmegaT project must be available. The
       location is irrelevant, since it must be specified explicitly on the
-      command-line at launch..</para>
+      command-line at launch.</para>
 
       <para>If you need non-standard settings, the corresponding configuration
       files (<literal>filters.conf</literal> and

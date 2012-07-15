@@ -111,9 +111,9 @@
         </indexterm> can contain both the source and the target text. Seen
       from this point of view, they are plain text files<emphasis>
       plus</emphasis> translation memories. If for a given source segment, if
-      there is no existing translation in the project tzranslation memory
-      (project_save.tmx). the translation is saved in the project_save.tmx as
-      the default translation In case the same source segment already exists,
+      there is no existing translation in the project translation memory
+      (project_save.tmx), the translation is saved in the project_save.tmx as
+      the default translation. In case the same source segment already exists,
       but with a different translation, the new translation is loaded as an
       alternative.</para>
     </section>

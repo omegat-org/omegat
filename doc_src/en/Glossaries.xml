@@ -23,10 +23,10 @@
   </filename>folder, but it can be in a deeper directory (e.g.,
   <filename>glossary/sub/glossary.txt</filename>). The file does not need to
   exist when setting it, it will be created (if necessary) when adding a
-  glossary entry. If the file already exists, not attempt is done to verify
-  the format or the character set of the file: the new entries will always be
-  in tab-separated format and UTF-8. As the existing content will not be
-  touched, damaged to an existing file would be limited.</para>
+  glossary entry. If the file already exists, no attempt is done to verify the
+  format or the character set of the file: the new entries will always be in
+  tab-separated format and UTF-8. As the existing content will not be touched,
+  damaged to an existing file would be limited.</para>
 
   <section>
     <title>Usage</title>
@@ -163,7 +163,7 @@
 
     <para>The project setting allows one can enter a name for a writable
     glossary file (see beginning of this chapter). Adding new entries is done
-    by using the keyboard shortcut <keycap>Ctrl+Shift+G .</keycap> A dialog
+    by using the keyboard shortcut <keycap>Ctrl+Shift+G</keycap>. A dialog
     opens, allowing you to enter the source term, target term and any comments
     you may have:</para>
 
@@ -189,8 +189,9 @@
 
         <secondary>Location of the writable glossary file</secondary>
       </indexterm>The location of the writable glossary file can be set in the
-    Project &gt; Properties ... dialog. The recognized extensions are
-    <filename>TXT</filename> and <filename>UTF8</filename></para>
+    <guimenuitem>Project &gt; Properties ... </guimenuitem>dialog. The
+    recognized extensions are <filename>TXT</filename> and
+    <filename>UTF8</filename></para>
 
     <para><emphasis role="bold">Note: </emphasis>Of course there are other
     ways and means to create a simple file with tab delimited entries. Nothing

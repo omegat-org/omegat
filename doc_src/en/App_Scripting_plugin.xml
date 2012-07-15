@@ -29,7 +29,7 @@
     <para>This adds a new submenu<guisubmenu> Tools &gt;
     </guisubmenu><guisubmenu>Scripting.</guisubmenu> Below the
     <guisubmenu>Scripting</guisubmenu> submenu , there's five place holders
-    available for scripts.Clicking <guisubmenu>Scripting</guisubmenu> opens
+    available for scripts. Clicking <guisubmenu>Scripting</guisubmenu> opens
     the Scripting dialog:<screenshot>
         <screeninfo>Scripting dialog</screeninfo>
 

@@ -32,7 +32,7 @@
     <para>After you give your project a name, the Create New Project dialog
     will open. At the top of that dialog, select your source file's language
     and the language that your translated file will be, and click
-    <guibutton>OK </guibutton>to continue</para>
+    <guibutton>OK </guibutton>to continue.</para>
 
     <para><application>If you are interested in other settings of this dialog,
     you can return to it any time by pressing
@@ -55,7 +55,7 @@
     <keycap>Ctrl+D</keycap> to generate the translated document, which will be
     created in the /target/ subfolder of your project folder. During
     translation, use the <guimenu>Edit</guimenu> and <guimenu>Go To</guimenu>
-    menus to perform various useful functions..</para>
+    menus to perform various useful functions.</para>
   </section>
 
   <section>
@@ -74,8 +74,10 @@
       <imageobject role="html">
         <imagedata align="left" fileref="images/InstantGuide_1.png"/>
       </imageobject>
+
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_1.png" width="40%"/>
+        <imagedata align="left" fileref="images/InstantGuide_1.png"
+                   width="40%"/>
       </imageobject>
     </mediaobject>
 
@@ -88,13 +90,15 @@
 
     <mediaobject>
       <imageobject role="html">
-        <imagedata align="left" fileref="images/InstantGuide_2.png" />
+        <imagedata align="left" fileref="images/InstantGuide_2.png"/>
       </imageobject>
+
       <imageobject role="fo">
-        <imagedata align="left" fileref="images/InstantGuide_2.png" width="45%"/>
+        <imagedata align="left" fileref="images/InstantGuide_2.png"
+                   width="45%"/>
       </imageobject>
     </mediaobject>
-    
+
     <para/>
 
     <para>The tags in OmegaT are greyed, so they are easy to recognise. They
@@ -141,7 +145,7 @@
         <para>To remind yourself of the project's initial settings, open the
         Project Settings dialog by pressing <keycap>Ctrl+E</keycap>. To see a
         list of files in the project, open the Project Files dialog by
-        pressing <keycap>Ctrl+L</keycap>..</para>
+        pressing <keycap>Ctrl+L</keycap>.</para>
       </listitem>
     </itemizedlist>
 

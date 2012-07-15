@@ -79,7 +79,7 @@
 
     <table colsep="0" rowsep="0">
       <title>Other windows<indexterm class="singular">
-          <primary>User INterface</primary>
+          <primary>User interface</primary>
 
           <secondary>Other windows</secondary>
         </indexterm></title>
@@ -672,7 +672,7 @@
       <para>A given source segment may require several different translations,
       depending on the context. If the current translation of the segment does
       not fit, the user can select <guisubmenu>Edit → Create Alternative
-      Translation</guisubmenu> . The target text entered after that will be
+      Translation</guisubmenu>. The target text entered after that will be
       treated as an alternative translation of the source segment. You can
       define one of the alternative - for instance the most probable among
       them - as default translation by selecting <guisubmenu>Edit → Use as
@@ -954,6 +954,7 @@
             <imageobject role="html">
               <imagedata fileref="images/StatisticsWindow_25.png"/>
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/StatisticsWindow_25.png" width="60%"/>
             </imageobject>
@@ -985,13 +986,14 @@
             <imageobject role="html">
               <imagedata fileref="images/MatchStatistics.png"/>
             </imageobject>
+
             <imageobject role="fo">
               <imagedata fileref="images/MatchStatistics.png" width="80%"/>
             </imageobject>
           </mediaobject>
         </figure></para>
 
-      <para>Note that these totals are a good (or as-good-as-it-can-be)
+      <para>Note that these totals are a good (or as good as they can be)
       approximation of the work involved in the project and thus can serve as
       a basis for your cost and price calculations.</para>
 

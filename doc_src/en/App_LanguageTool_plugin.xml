@@ -14,13 +14,13 @@
     <para>LanguageTool is an Open Source style and grammar proofreading
     software for English, French, German, Polish, Dutch, Romanian, and a lot
     of other languages - see the list of supported languages (<ulink
-    url="???">http://www.languagetool.org/languages/</ulink>) .</para>
+    url="???">http://www.languagetool.org/languages/</ulink>).</para>
 
     <para>You can think of LanguageTool as a software to detect errors that a
     simple spell checker cannot detect, e.g. mixing up there/their, no/now
     etc. It can also detect some grammar mistakes. It does not include spell
     checking. LanguageTool will find errors for which a rule has been defined
-    in its language-specific configuration files. </para>
+    in its language-specific configuration files.</para>
 
     <figure>
       <title>The LanguageTool in OmegaT</title>
@@ -36,7 +36,7 @@
   </section>
 
   <section>
-    <title>Installation and Use </title>
+    <title>Installation and Use</title>
 
     <para>The LanguageTool plugin for OmegaT can be downloaded from the OmegaT
     plugins download site (<ulink
@@ -52,7 +52,7 @@
     the project. When a rule is triggered, the corresponding phrase will be
     underlined in blue in the Editor (see <emphasis>also </emphasis>and
     <emphasis>I didn't do nothing</emphasis> in the picture above). When
-    hovering the mouse over the underlined phrase, an explanation will appear.
-    </para>
+    hovering the mouse over the underlined phrase, an explanation will
+    appear.</para>
   </section>
 </appendix>

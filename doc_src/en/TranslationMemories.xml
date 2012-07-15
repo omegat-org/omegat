@@ -122,6 +122,14 @@
             behavior</link> chapter) <menuchoice>
                 <guimenu>.</guimenu>
               </menuchoice></para>
+
+            <para>It may happen, that translation memories, available in
+            the<filename> tm</filename> subfolder, contain segments with
+            identical source text, but differing targets. TMX files are read
+            sorted by their names and segments within a given TMX file line by
+            line. The last segment with the identical source text will thus
+            prevail (Note: of course it makes more sense to avoid this to
+            happen in the first place).</para>
           </listitem>
         </varlistentry>
 
@@ -283,9 +291,9 @@
         </indexterm>TMX files can generally contain translation units with
       several candidate languages. If for a given source segment there is no
       entry for the selected target language, all other target segments are
-      loaded, regardless of the languag. For instance, if the language pair of
-      the project is DE-FR, it can be still be of some help to see hits in the
-      DE-EN translation, if there's none in the DE-FR pair. </para>
+      loaded, regardless of the language. For instance, if the language pair
+      of the project is DE-FR, it can be still be of some help to see hits in
+      the DE-EN translation, if there's none in the DE-FR pair.</para>
     </section>
 
     <section>

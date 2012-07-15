@@ -58,9 +58,9 @@
     url="http://www.joelonsoftware.com/articles/fog0000000029.html">Painless
     Bug Tracking</ulink> article by Joel Spolsky.</para>
 
-    <para>You should add copies of files, portions of the log, screenshots, and
-    anything else that you think will help the developers to find and fix your
-    bug. Note that bug reports and requests for enhancements are publicly
+    <para>You should add copies of files, portions of the log, screen shots,
+    and anything else that you think will help the developers to find and fix
+    your bug. Note that bug reports and requests for enhancements are publicly
     visible, so you should not add any sensitive files. If you wish to keep
     track of what is happening to the report, register as a SourceForge user,
     login and file a bug report or simply click Monitor at the top of the

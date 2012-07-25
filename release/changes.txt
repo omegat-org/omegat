@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
    0 Enhancement
    1 Bug fix
-   1 Localisation update
+   2 Localisation updates
 ----------------------------------------------------------------------
 2.6.0 update 2 vs. 2.6.0 update 1
 
@@ -15,6 +15,7 @@ stopped working except under Windows
   Localisation updates:
 
   - Japanese localization updated to 2.6.0 update 1 (UI)
+  - Italian localization updated to 2.6.0 update 1 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.6.0 update 1

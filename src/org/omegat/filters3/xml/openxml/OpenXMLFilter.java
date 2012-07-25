@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2007-2011 Didier Briel
+               2007-2012 Didier Briel
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -249,8 +249,9 @@ public class OpenXMLFilter extends AbstractFilter {
                         return 1;
                     else if (index1 < index2)
                         return -1;
-                    else
-                        return 0;
+                    else { // Documents were not in DOCUMENTS, we keep the normal order
+                        return s1.compareTo(s2);
+                    }
                 }
             }
         });

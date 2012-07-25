@@ -58,7 +58,7 @@ to write in the repository anymore
  OmegaT 2.5.5 update 1
 ----------------------------------------------------------------------
    1 Enhancement
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.5 update 1 vs. 2.5.5
@@ -68,6 +68,10 @@ to write in the repository anymore
   - Update JRE to 1.7 
  (full support for Khmer script rendering)
   http://sourceforge.net/support/tracker.php?aid=3542912
+
+  Bug fixes:
+
+  PowerPoint documents (.pptx and .pptm) could not be opened with Java 1.7
 
   Localisation updates:
 

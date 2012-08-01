@@ -126,10 +126,7 @@
         <para>If a file does not loads into the Editor pane, then it could be
         that your source file is in a format that doesn't work in OmegaT. See
         Chapter 7: File Filters in the User Manual for a list of file formats
-        that OmegaT can handle. If a file does not loads into the Editor pane,
-        then it could be that your source file is in a format that doesn't
-        work in OmegaT. See Chapter 7: File Filters in the User Manual for a
-        list of file formats that OmegaT can handle.</para>
+        that OmegaT can handle.</para>
       </listitem>
     </itemizedlist>
 

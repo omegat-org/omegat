@@ -48,7 +48,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 
 import javax.swing.JOptionPane;
 import javax.xml.bind.JAXBContext;
@@ -67,7 +66,6 @@ import org.omegat.util.LFileCopy;
 import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OStrings;
-import org.omegat.util.StaticUtils;
 
 /**
  * A master class that registers and handles all the filters. Singleton - there can be only one instance of
@@ -101,21 +99,17 @@ public class FilterMaster {
     /** Currently file filters support version. */
     public static String CURRENT_VERSION = "2.0";
 
-    /** FilterMaster instance. */
-    private static FilterMaster master = null;
-
-    /** Config file. */
-    private File configFile;
-
     /** Filters config stored in XML file. */
-    private Filters config;
+    private final Filters config;
 
     /** Classes of all filters. */
-    private List<Class<IFilter>> filtersClasses;
+    private static List<Class<IFilter>> filtersClasses;
 
     static {
         try {
             CONFIG_CTX = JAXBContext.newInstance(Filters.class);
+            filtersClasses = new ArrayList<Class<IFilter>>();
+            filtersClasses.addAll((List)PluginUtils.getFilterClasses());
         } catch (Exception ex) {
             throw new ExceptionInInitializerError(ex);
         }
@@ -124,22 +118,15 @@ public class FilterMaster {
     /**
      * Create a new FilterMaster.
      */
-    private FilterMaster(File configFile) {
-        filtersClasses = new ArrayList<Class<IFilter>>();
-        filtersClasses.addAll((List)PluginUtils.getFilterClasses());
-        this.configFile = configFile;
-        
-        loadConfig();
-
-        addNewFiltersToConfig(config);
-
-        saveConfig();
+    public FilterMaster(Filters config) {
+        this.config = config;
     }
 
     /**
      * Adds new filters(which was not exist in config yet) into config.
      */
-    private void addNewFiltersToConfig(final Filters conf) {
+    private static boolean addNewFiltersToConfig(final Filters conf) {
+        boolean result = false;
         for (Class<IFilter> fclass : filtersClasses) {
             boolean found = false;
             for (Filter fc : conf.getFilter()) {
@@ -152,39 +139,10 @@ public class FilterMaster {
             if (!found) {
                 // filter not found in config
                 conf.getFilter().add(getDefaultSettingsFromFilter(fclass.getName()));
+                result = true;
             }
         }
-    }
-
-    /**
-     * Returns the FilterMaster for the non-project-specific file filters.
-     * 
-     * @see IProject.getFilterMaster() for the project specific FilterMaster (if available)
-     */
-    public static FilterMaster getInstance() {
-        if (master == null) {
-            File configFile = new File(StaticUtils.getConfigDir() + FILE_FILTERS);
-            master = new FilterMaster(configFile);
-        }
-        return master;
-    }
-    /**
-     * Returns a instance of this class for storage of project specific settings. 
-     * A settings-file is generated if it does not exist yet.
-     * @param configDir the directory for storage of the project settings file.
-     */
-    public static FilterMaster getProjectInstance(String configDir) {
-        //
-        File configFile = new File(configDir + FILE_FILTERS);
-        return new FilterMaster(configFile);
-    }
-    /**
-     * Does a config file already exists for the project at the given location?
-     * @param configDir the directory where project settings file is stored
-     */
-    public static boolean projectConfigFileExists(String configDir) {
-        File configFile = new File(configDir + FILE_FILTERS);
-        return configFile.exists();
+        return result;
     }
 
     /**
@@ -194,7 +152,7 @@ public class FilterMaster {
      *            filter's class name
      * @return filter instance
      */
-    public IFilter getFilterInstance(final String classname) {
+    public static IFilter getFilterInstance(final String classname) {
         for (Class<IFilter> f : filtersClasses) {
             if (f.getName().equals(classname)) {
                 try {
@@ -424,7 +382,7 @@ public class FilterMaster {
      * <li>Saves the configuration
      * </ul>
      */
-    public Filters createDefaultFiltersConfig() {
+    public static Filters createDefaultFiltersConfig() {
         Filters c = new Filters();
         addNewFiltersToConfig(c);
         return c;
@@ -434,44 +392,47 @@ public class FilterMaster {
      * Loads information about the filters from an XML file. If there's an error loading a file, it calls
      * <code>setupDefaultFilters</code>.
      */
-    public void loadConfig() {
-        if (!this.configFile.exists()) {
-            config = new Filters();
-            return;
+    public static Filters loadConfig(String configDir) {
+        File configFile = new File(configDir + FILE_FILTERS);
+        if (!configFile.exists()) {
+            return null;
         }
+        Filters result;
         try {
             Unmarshaller unm = CONFIG_CTX.createUnmarshaller();
-            config = (Filters) unm.unmarshal(configFile);
+            result = (Filters) unm.unmarshal(configFile);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_LOADING_FILTERS_CONFIG");
             Log.log(e);
-            config = new Filters();
+            result = new Filters();
         }
+
+        if (addNewFiltersToConfig(result)) {
+            saveConfig(result, configDir);
+        }
+
+        return result;
     }
 
     /**
      * Saves information about the filters to an XML file.
      */
-    public void saveConfig() {
+    public static void saveConfig(Filters config, String configDir) {
+        File configFile = new File(configDir + FILE_FILTERS);
+        if (config == null) {
+            configFile.delete();
+            return;
+        }
         try {
             Marshaller m = CONFIG_CTX.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(config, this.configFile);
+            m.marshal(config, configFile);
         } catch (Exception e) {
             Log.logErrorRB("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG");
             Log.log(e);
             JOptionPane.showMessageDialog(null,
                     OStrings.getString("FILTERMASTER_ERROR_SAVING_FILTERS_CONFIG") + "\n" + e,
                     OStrings.getString("ERROR_TITLE"), JOptionPane.ERROR_MESSAGE);
-        }
-    }
-    /**
-     * Deletes the config file. Use when removing project specific file filters 
-     * (i.e. this FilterMaster is project-specific) 
-     */
-    public void deleteConfig() {
-        if (this.configFile.exists()) {
-            this.configFile.delete();
         }
     }
 
@@ -664,23 +625,13 @@ public class FilterMaster {
     }
 
     /**
-     * Set new config. Used by filter's editor.
-     * 
-     * @param config
-     *            new config
-     */
-    public void setConfig(final Filters config) {
-        this.config = config;
-    }
-
-    /**
      * Clone config for editing
      * 
      * @return new config instance
      */
-    public Filters cloneConfig() {
+    public static Filters cloneConfig(Filters orig) {
         Filters c = new Filters();
-        for (Filter f : config.getFilter()) {
+        for (Filter f : orig.getFilter()) {
             c.getFilter().add(cloneFilter(f));
         }
         return c;
@@ -693,7 +644,7 @@ public class FilterMaster {
      *            one filter's config
      * @return new config instance
      */
-    public Filter cloneFilter(Filter filter) {
+    public static Filter cloneFilter(Filter filter) {
         Filter f = new Filter();
         f.setClassName(filter.getClassName());
         f.setEnabled(filter.isEnabled());
@@ -716,7 +667,7 @@ public class FilterMaster {
      *            new filter's instance config
      * @return new config instance
      */
-    public Files cloneFiles(Files files) {
+    private static Files cloneFiles(Files files) {
         Files ff = new Files();
         ff.setSourceEncoding(files.getSourceEncoding());
         ff.setSourceFilenameMask(files.getSourceFilenameMask());
@@ -732,7 +683,7 @@ public class FilterMaster {
      *            filter's classname
      * @return default filter's config
      */
-    public Filter getDefaultSettingsFromFilter(final String filterClassname) {
+    public static Filter getDefaultSettingsFromFilter(final String filterClassname) {
         IFilter f = getFilterInstance(filterClassname);
         Filter fc = new Filter();
         fc.setClassName(f.getClass().getName());

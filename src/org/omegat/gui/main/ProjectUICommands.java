@@ -46,6 +46,7 @@ import org.omegat.core.team.GITRemoteRepository;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.core.team.RepositoryUtils;
 import org.omegat.core.team.SVNRemoteRepository;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.dialogs.NewProjectFileChooser;
 import org.omegat.gui.dialogs.NewTeamProject;
 import org.omegat.gui.dialogs.ProjectPropertiesDialog;
@@ -502,6 +503,8 @@ public class ProjectUICommands {
         if (newProps == null) {
             return;
         }
+        FilterMaster.saveConfig(newProps.getProjectFilters(), newProps.getProjectInternal());
+
         int res = JOptionPane.showConfirmDialog(Core.getMainWindow().getApplicationFrame(),
                 OStrings.getString("MW_REOPEN_QUESTION"), OStrings.getString("MW_REOPEN_TITLE"),
                 JOptionPane.YES_NO_OPTION);

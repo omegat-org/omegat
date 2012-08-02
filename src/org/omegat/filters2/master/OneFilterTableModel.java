@@ -48,7 +48,7 @@ public class OneFilterTableModel extends AbstractTableModel {
 
     public OneFilterTableModel(final Filter f) {
         this.filter = f;
-        IFilter fi = FilterMaster.getInstance().getFilterInstance(f.getClassName());
+        IFilter fi = FilterMaster.getFilterInstance(f.getClassName());
         sourceEncodingVariable = fi.isSourceEncodingVariable();
         targetEncodingVariable = fi.isTargetEncodingVariable();
     }

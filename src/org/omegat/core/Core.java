@@ -35,6 +35,7 @@ import org.omegat.core.spellchecker.ISpellChecker;
 import org.omegat.core.spellchecker.SpellChecker;
 import org.omegat.core.threads.IAutoSave;
 import org.omegat.core.threads.SaveThread;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.comments.CommentsTextArea;
 import org.omegat.gui.dictionaries.DictionariesTextArea;
 import org.omegat.gui.editor.EditorController;
@@ -74,6 +75,7 @@ public class Core {
     private static ITagValidation tagValidation;
     private static IMatcher matcher;
     private static ISpellChecker spellChecker;
+    private static FilterMaster filterMaster;
 
     private static IAutoSave saveThread;
 
@@ -124,6 +126,14 @@ public class Core {
     /** Get spell checker instance. */
     public static ISpellChecker getSpellChecker() {
         return spellChecker;
+    }
+
+    public static FilterMaster getFilterMaster() {
+        return filterMaster;
+    }
+
+    public static void setFilterMaster(FilterMaster newFilterMaster) {
+        filterMaster = newFilterMaster;
     }
 
     public static MachineTranslateTextArea getMachineTranslatePane() {

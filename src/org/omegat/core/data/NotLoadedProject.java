@@ -129,12 +129,4 @@ public class NotLoadedProject implements IProject {
 
     public void findNonUniqueSegments() {
     }
-
-    public FilterMaster getFilterMaster() {
-        return null;
-    }
-
-    public void setConfig(Filters filters) {
-        
-    }
 }

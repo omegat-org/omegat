@@ -44,7 +44,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import org.omegat.core.Core;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.FiltersTableModel;
@@ -59,28 +58,40 @@ import org.omegat.util.OStrings;
  */
 @SuppressWarnings("serial")
 public class FiltersCustomizer extends JDialog implements ListSelectionListener {
-    private Filters config;
+    /** A return status code - returned if Cancel button has been pressed */
+    public static final int RET_CANCEL = 0;
+    /** A return status code - returned if OK button has been pressed */
+    public static final int RET_OK = 1;
+
     public Filters result;
+    /** Filters from OmegaT. */
+    private Filters defaultFilters;
+    /** Filters from user preferences. */
+    private Filters userFilters;
+    /** Filters from current project. */
+    private Filters projectFilters;
+    /** Filters which editable now. */
+    private Filters editableFilters;
+
     /**
      * Flag if this customizer shows project specific filters or not
      */
     private boolean isProjectSpecific;
 
     /** Creates new form FilterCustomizer */
-    public FiltersCustomizer(Frame parent, boolean projectSpecific) {
+    public FiltersCustomizer(Frame parent, boolean projectSpecific, Filters defaultFilters,
+            Filters userFilters, Filters projectFilters) {
         super(parent, true);
         isProjectSpecific = projectSpecific;
 
-        FilterMaster filterProjectInstance = null;
-        if (projectSpecific) {
-            filterProjectInstance = Core.getProject().getFilterMaster();
+        this.defaultFilters = defaultFilters;
+        this.userFilters = userFilters;
+        this.projectFilters = projectFilters;
+        if (userFilters == null) {
+            userFilters = defaultFilters;
         }
-        if (filterProjectInstance == null) {
-            config = FilterMaster.getInstance().cloneConfig();
-        } else {
-            config = filterProjectInstance.cloneConfig();
-        }
-        
+        this.editableFilters = isProjectSpecific && projectFilters != null ? FilterMaster.cloneConfig(projectFilters)
+                : FilterMaster.cloneConfig(userFilters);
 
         // HP
         // Handle escape key to close the window
@@ -97,7 +108,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         initComponents();
 
         getRootPane().setDefaultButton(okButton);
-        filtersTable.setModel(new FiltersTableModel(config));
+        filtersTable.setModel(new FiltersTableModel(editableFilters));
         filtersTable.getSelectionModel().addListSelectionListener(this);
 
         if (projectSpecific) {
@@ -105,13 +116,15 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         } else {
             projectSpecificCB.setVisible(false);
         }
-        if (projectSpecific && filterProjectInstance == null) {
+        if (projectSpecific && projectFilters == null) {
             filtersTable.setEnabled(false);
             filtersTable.setFocusable(false);
+            toDefaultsButton.setEnabled(false);
         } else {
             if (projectSpecific) projectSpecificCB.setSelected(true);
             filtersTable.setEnabled(true);
             filtersTable.setFocusable(true);
+            toDefaultsButton.setEnabled(true);
         }
 
         // hack for "autoresizing" the dialog
@@ -125,6 +138,11 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         setLocation((screenSize.width - dialogSize.width) / 2, (screenSize.height - dialogSize.height) / 2);
     }
 
+    /** @return the return status of this dialog - one of RET_OK or RET_CANCEL */
+    public int getReturnStatus() {
+        return returnStatus;
+    }
+
     public void valueChanged(ListSelectionEvent e) {
         if (e.getValueIsAdjusting())
             return;
@@ -135,8 +153,8 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         } else {
             editButton.setEnabled(true);
             int fIdx = filtersTable.getSelectedRow();
-            Filter currFilter = config.getFilter().get(fIdx);
-            IFilter f = FilterMaster.getInstance().getFilterInstance(currFilter.getClassName());
+            Filter currFilter = editableFilters.getFilter().get(fIdx);
+            IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
             optionsButton.setEnabled(f.hasOptions());
         }
     }
@@ -306,8 +324,8 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_optionsButtonActionPerformed
     {// GEN-HEADEREND:event_optionsButtonActionPerformed
         int fIdx = filtersTable.getSelectedRow();
-        Filter currFilter = config.getFilter().get(fIdx);
-        IFilter f = FilterMaster.getInstance().getFilterInstance(currFilter.getClassName());
+        Filter currFilter = editableFilters.getFilter().get(fIdx);
+        IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
 
         // new options handling
         Map<String, String> newConfig = f.changeOptions(this, FilterMaster.forFilter(currFilter.getOption()));
@@ -318,40 +336,41 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
 
     private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_toDefaultsButtonActionPerformed
     {// GEN-HEADEREND:event_toDefaultsButtonActionPerformed
-        config = FilterMaster.getInstance().createDefaultFiltersConfig();
-        filtersTable.setModel(new FiltersTableModel(config));
+        editableFilters = FilterMaster.cloneConfig(defaultFilters);
+        filtersTable.setModel(new FiltersTableModel(editableFilters));
     }// GEN-LAST:event_toDefaultsButtonActionPerformed
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editButtonActionPerformed
         int row = filtersTable.getSelectedRow();
-        FilterEditor editor = new FilterEditor(this, config.getFilter().get(row));
+        FilterEditor editor = new FilterEditor(this, editableFilters.getFilter().get(row));
         editor.setVisible(true);
         if (editor.result != null) {
-            config.getFilter().set(row, editor.result);
+            editableFilters.getFilter().set(row, editor.result);
         }
     }// GEN-LAST:event_editButtonActionPerformed
 
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
-        doClose(config);
+        doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
     private void cancelButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_cancelButtonActionPerformed
     {
-        doClose(null);
+        doClose(RET_CANCEL);
     }// GEN-LAST:event_cancelButtonActionPerformed
 
     /** Closes the dialog */
     private void closeDialog(java.awt.event.WindowEvent evt)// GEN-FIRST:event_closeDialog
     {
-        doClose(null);
+        doClose(RET_CANCEL);
     }// GEN-LAST:event_closeDialog
 
-    private void doClose(Filters res) {
-        if (isProjectSpecific && projectSpecificCB.isSelected()==false) {
+    private void doClose(int retStatus) {
+        returnStatus = retStatus;
+        if (isProjectSpecific && projectSpecificCB.isSelected() == false) {
             result = null;
         } else {
-            result = res;
+            result = editableFilters;
         }
         setVisible(false);
         dispose();
@@ -370,4 +389,6 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     private javax.swing.JCheckBox projectSpecificCB;
     private javax.swing.JButton toDefaultsButton;
     // End of variables declaration//GEN-END:variables
+
+    private int returnStatus = RET_CANCEL;
 }

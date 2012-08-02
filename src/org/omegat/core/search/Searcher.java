@@ -39,6 +39,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.regex.PatternSyntaxException;
 
+import org.omegat.core.Core;
 import org.omegat.core.data.EntryKey;
 import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
@@ -352,10 +353,7 @@ public class Searcher {
             m_searchDir += File.separator;
         StaticUtils.buildFileList(fileList, new File(m_searchDir), m_searchRecursive);
 
-        FilterMaster fm = m_project.getFilterMaster();
-        if (fm == null) {
-            fm = FilterMaster.getInstance();
-        }
+        FilterMaster fm = Core.getFilterMaster();
 
         SearchCallback searchCallback = new SearchCallback(m_project.getProjectProperties());
         

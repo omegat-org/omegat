@@ -57,7 +57,6 @@ import org.omegat.core.KnownException;
 import org.omegat.core.events.IProjectEventListener;
 import org.omegat.core.matching.ITokenizer;
 import org.omegat.core.matching.Tokenizer;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.core.statistics.CalcStandardStatistics;
 import org.omegat.core.statistics.Statistics;
@@ -118,14 +117,6 @@ public class RealProject implements IProject {
     private final ITokenizer sourceTokenizer, targetTokenizer;
 
     private DirectoryMonitor tmMonitor;
-    /**
-     * If project uses project-specific file filters, the filterMaster is set, containing the file filter settings
-     */
-    private FilterMaster filterMaster;
-    /**
-     * If project uses project-specific segmentation rules, the srx is set;
-     */
-    private SRX srx;
 
     /**
      * Storage for all translation memories, which shouldn't be changed and saved, i.e. for /tm/*.tmx files,
@@ -241,9 +232,14 @@ public class RealProject implements IProject {
             Core.getMainWindow().showStatusMessageRB("CT_LOADING_PROJECT");
 
             // set project specific file filters if they exist
-            if (FilterMaster.projectConfigFileExists(m_config.getProjectInternal())) {
-                this.filterMaster = FilterMaster.getProjectInstance(m_config.getProjectInternal());
+            Filters filterMasterConfig = FilterMaster.loadConfig(m_config.getProjectInternal());
+            if (filterMasterConfig != null) {
+                filterMasterConfig = FilterMaster.loadConfig(StaticUtils.getConfigDir());
             }
+            if (filterMasterConfig == null) {
+                filterMasterConfig = FilterMaster.createDefaultFiltersConfig();
+            }
+            Core.setFilterMaster(new FilterMaster(filterMasterConfig));
 
             // set project specific segmentation rules if they exist
             Segmenter.srx = m_config.getProjectSRX();
@@ -306,7 +302,7 @@ public class RealProject implements IProject {
      */
     public Map<String, TMXEntry> align(final ProjectProperties props, final File translatedDir)
             throws Exception {
-        FilterMaster fm = getActiveFilterMaster();
+        FilterMaster fm = Core.getFilterMaster();
 
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
@@ -438,7 +434,7 @@ public class RealProject implements IProject {
         }
 
         // build translated files
-        FilterMaster fm = getActiveFilterMaster();
+        FilterMaster fm = Core.getFilterMaster();
 
         fileList.clear();
         StaticUtils.buildFileList(fileList, new File(srcRoot), true);
@@ -569,7 +565,7 @@ public class RealProject implements IProject {
      */
     private void loadSourceFiles() throws IOException, InterruptedIOException, TranslationException {
         long st = System.currentTimeMillis();
-        FilterMaster fm = getActiveFilterMaster();
+        FilterMaster fm = Core.getFilterMaster();
 
         List<String> srcFileList = new ArrayList<String>();
         File root = new File(m_config.getSourceRoot());
@@ -1068,50 +1064,5 @@ public class RealProject implements IProject {
             localCollator.setStrength(Collator.PRIMARY);
             return localCollator.compare(o1, o2);
         }
-    }
-
-    /**
-     * returns project FilterMaster if it exists, else returns null (this means: not using project-specific
-     * filters!)
-     */
-    public FilterMaster getFilterMaster() {
-        return this.filterMaster;
-    }
-
-    /**
-     * Sets the filter config to the project, or removes it. Creates or deletes config file if necessary and
-     * (dis)associates FilterMaster to project. Use this to create project specific file filters.
-     * 
-     * @param filters
-     *            the filters config. When null, project specific config is removed.
-     */
-    public void setConfig(Filters filters) {
-        if (filters == null) {
-            if (this.filterMaster != null) {
-                this.filterMaster.deleteConfig();
-                this.filterMaster = null;
-            }
-            return;
-        }
-        if (this.filterMaster == null) {
-            this.filterMaster = FilterMaster.getProjectInstance(this.getProjectProperties()
-                    .getProjectInternal());
-        }
-        this.filterMaster.setConfig(filters);
-        this.filterMaster.saveConfig();
-    }
-
-    /**
-     * Returns the filtermaster to use: the projects filter master (if it is set), else the default
-     * filtermaster
-     * 
-     * @return the filtermaster to use
-     */
-    private FilterMaster getActiveFilterMaster() {
-        // get project specific file filters if they exist, else get normal filters
-        if (this.filterMaster == null) {
-            return FilterMaster.getInstance();
-        }
-        return this.filterMaster;
     }
 }

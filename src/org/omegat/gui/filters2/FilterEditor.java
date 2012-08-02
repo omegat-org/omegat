@@ -48,6 +48,7 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.TableColumn;
 
+import org.omegat.core.Core;
 import org.omegat.filters2.IFilter;
 import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.OneFilterTableModel;
@@ -71,7 +72,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
     /** Creates new form SingleFilterEditor */
     public FilterEditor(Dialog parent, Filter filter) {
         super(parent, true);
-        this.filter = FilterMaster.getInstance().cloneFilter(filter);
+        this.filter = FilterMaster.cloneFilter(filter);
 
         // HP
         // Handle escape key to close the window
@@ -87,7 +88,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
 
         initComponents();
 
-        IFilter f = FilterMaster.getInstance().getFilterInstance(filter.getClassName());
+        IFilter f = FilterMaster.getFilterInstance(filter.getClassName());
         fileFormatTextField.setText(f.getFileFormatName());
         if (!StringUtil.isEmpty(f.getHint()))
             hintTextArea.setText(f.getHint());
@@ -347,7 +348,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
     private void toDefaultsButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_toDefaultsButtonActionPerformed
     {// GEN-HEADEREND:event_toDefaultsButtonActionPerformed
         try {
-            filter = FilterMaster.getInstance().getDefaultSettingsFromFilter(filter.getClassName());
+            filter = Core.getFilterMaster().getDefaultSettingsFromFilter(filter.getClassName());
             instances.setModel(new OneFilterTableModel(filter));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this,
@@ -358,7 +359,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
 
     private void addButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_addButtonActionPerformed
     {// GEN-HEADEREND:event_addButtonActionPerformed
-        IFilter f = FilterMaster.getInstance().getFilterInstance(filter.getClassName());
+        IFilter f = FilterMaster.getFilterInstance(filter.getClassName());
 
         InstanceEditor ie = new InstanceEditor(this, f.isSourceEncodingVariable(),
                 f.isTargetEncodingVariable(), f.getHint());
@@ -378,7 +379,7 @@ public class FilterEditor extends JDialog implements ListSelectionListener {
     {// GEN-HEADEREND:event_editButtonActionPerformed
         int row = instances.getSelectedRow();
 
-        IFilter f = FilterMaster.getInstance().getFilterInstance(filter.getClassName());
+        IFilter f = FilterMaster.getFilterInstance(filter.getClassName());
         InstanceEditor ie = new InstanceEditor(this, f.isSourceEncodingVariable(),
                 f.isTargetEncodingVariable(), f.getHint(),
                 instances.getModel().getValueAt(row, 0).toString(), instances.getModel().getValueAt(row, 1)

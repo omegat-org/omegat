@@ -181,14 +181,4 @@ public interface IProject {
     public interface MultipleTranslationsIterator {
         void iterate(EntryKey source, TMXEntry trans);
     }
-
-    /**
-     * Returns the project specific FilterMaster, if it exists.
-     */
-    public FilterMaster getFilterMaster();
-
-    /**
-     * Sets new file filter configuration for the project
-     */
-    public void setConfig(Filters filters);
 }

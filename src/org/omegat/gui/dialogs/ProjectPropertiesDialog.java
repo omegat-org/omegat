@@ -61,12 +61,14 @@ import javax.swing.border.EtchedBorder;
 import org.omegat.core.Core;
 import org.omegat.core.data.ProjectProperties;
 import org.omegat.core.segmentation.SRX;
+import org.omegat.filters2.master.FilterMaster;
 import org.omegat.gui.filters2.FiltersCustomizer;
 import org.omegat.gui.segmentation.SegmentationCustomizer;
 import org.omegat.util.Language;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.Preferences;
+import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 import org.omegat.util.gui.LanguageComboBoxRenderer;
 import org.omegat.util.gui.OmegaTFileChooser;
@@ -135,12 +137,13 @@ public class ProjectPropertiesDialog extends JDialog {
      *            type of the dialog ({@link #NEW_PROJECT},
      *            {@link #RESOLVE_DIRS} or {@link #EDIT_PROJECT}).
      */
-    public ProjectPropertiesDialog(ProjectProperties projectProperties, String projFileName,
+    public ProjectPropertiesDialog(final ProjectProperties projectProperties, String projFileName,
             int dialogTypeValue) {
         super(Core.getMainWindow().getApplicationFrame(), true);
         this.projectProperties = projectProperties;
         this.srx = projectProperties.getProjectSRX();
         this.dialogType = dialogTypeValue;
+        filters = FilterMaster.loadConfig(projectProperties.getProjectInternal());
 
         Border emptyBorder = new EmptyBorder(2, 0, 2, 0);
         Box centerBox = Box.createVerticalBox();
@@ -403,9 +406,11 @@ public class ProjectPropertiesDialog extends JDialog {
         m_fileFiltersButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JFrame mainWindow = Core.getMainWindow().getApplicationFrame();
-                FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true);
+                FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, true, FilterMaster
+                        .createDefaultFiltersConfig(), FilterMaster.loadConfig(StaticUtils.getConfigDir()),
+                        filters);
                 dlg.setVisible(true);
-                if (dlg.result != null) {
+                if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
                     // saving config
                     filters = dlg.result;
                 }

@@ -620,16 +620,18 @@ public class MainWindowMenuHandler {
      * Displays the filters setup dialog to allow customizing file filters in detail.
      */
     public void optionsSetupFileFiltersMenuItemActionPerformed() {
-        FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, false);
+        FiltersCustomizer dlg = new FiltersCustomizer(mainWindow, false,
+                FilterMaster.createDefaultFiltersConfig(),
+                FilterMaster.loadConfig(StaticUtils.getConfigDir()), null);
         dlg.setVisible(true);
-        if (dlg.result != null) {
+        if (dlg.getReturnStatus() == FiltersCustomizer.RET_OK) {
             // saving config
-            FilterMaster.getInstance().setConfig(dlg.result);
-            FilterMaster.getInstance().saveConfig();
+            FilterMaster.saveConfig(dlg.result, StaticUtils.getConfigDir());
 
-            if (Core.getProject().isProjectLoaded() ) {
-                if (Core.getProject().getFilterMaster() != null) {
-                    //project specific filters are in place. No need to reload project when non-project-specific filters are changed
+            if (Core.getProject().isProjectLoaded()) {
+                if (FilterMaster.loadConfig(Core.getProject().getProjectProperties().getProjectInternal()) != null) {
+                    // project specific filters are in place. No need to reload project when
+                    // non-project-specific filters are changed
                     return;
                 }
                 // asking to reload a project

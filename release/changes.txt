@@ -75,7 +75,7 @@ to write in the repository anymore
   - Project specific filter settings not saved
   http://sourceforge.net/support/tracker.php?aid=3546645
 
-  PowerPoint documents (.pptx and .pptm) could not be opened with Java 1.7
+  - PowerPoint documents (.pptx and .pptm) could not be opened with Java 1.7
 
   Localisation updates:
 

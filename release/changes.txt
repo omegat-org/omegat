@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.6.0 update 3 vs. 2.6.0 update 2
 
-  Includes bug fixes from 2.5.5 update 1
+  Includes bug fixes from 2.5.5 update 1 and a 1.7 JRE
 
 ----------------------------------------------------------------------
  OmegaT 2.6.0 update 2

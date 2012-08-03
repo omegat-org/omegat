@@ -91,24 +91,32 @@
                <dd>
                   <p>If this option is checked, when a fuzzy match is inserted,
                              either manually or automatically, OmegaT attempts to convert the
-                             numbers in the fuzzy match, so that the number of the source segments
-                             are used instead. There are a number of restrictions:
+                             numbers in the fuzzy matches according to the source contents. There
+                             are a number of restrictions:
                   </p>
-                  <p>- The number of numbers must be the same in the source segment
-                             and in both matches,
-                  </p>
-                  <p>- The numbers must be exactly the same between the two matches.
-                             
-                  </p>
-                  <p>- Only integers and simple doubles (not localized English
-                             doubles, e.g., 5.4) are considered being numbers.
-                  </p>
+                  <div class="itemizedlist">
+                     <ul class="itemizedlist" type="disc">
+                        <li class="listitem">
+                           <p>The source segment and the fuzzy matches must contain the same
+                                          list of numbers
+                           </p>
+                        </li>
+                        <li class="listitem">
+                           <p>The numbers must be exactly the same between the source and the target matches.</p>
+                        </li>
+                        <li class="listitem">
+                           <p>Only integers and simple floats (using the period as a decimal
+                                          character, e.g. 5.4, but not 5,4 or 54E-01) are considered.
+                           </p>
+                        </li>
+                     </ul>
+                  </div>
                </dd>
             </dl>
          </div>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Allow the translation to be equal to source<a class="indexterm" name="d0e5517"></a></span></dt>
+               <dt><span class="term">Allow the translation to be equal to source<a class="indexterm" name="d0e5521"></a></span></dt>
                <dd>
                   <p>Documents for translation may contain trade marks, names or
                              other proper nouns that will be the same in translated documents.
@@ -127,7 +135,7 @@
          </div>
          <div class="variablelist">
             <dl>
-               <dt><span class="term">Export the segment to text files<a class="indexterm" name="d0e5542"></a></span></dt>
+               <dt><span class="term">Export the segment to text files<a class="indexterm" name="d0e5546"></a></span></dt>
                <dd>
                   <p>The text export function exports data from within the current
                              <span class="application">OmegaT</span> project to plain text files. The
@@ -169,7 +177,7 @@
          <div class="variablelist">
             <dl>
                <dt><span class="term">Go To Next Untranslated Segment stops where there is at least one
-                           alternative translation<a class="indexterm" name="d0e5589"></a></span></dt>
+                           alternative translation<a class="indexterm" name="d0e5593"></a></span></dt>
                <dd>
                   <p>If we want to avoid any mis-translations in case of segments
                              with several possible target contents, checking this check box will

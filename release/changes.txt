@@ -3,7 +3,7 @@
 ----------------------------------------------------------------------
 2.6.0 update 3 vs. 2.6.0 update 2
 
-  Includes bug fixes from 2.5.5 update 1 and a 1.7 JRE
+  Includes bug fixes from 2.5.5 update 1
 
 ----------------------------------------------------------------------
  OmegaT 2.6.0 update 2
@@ -65,17 +65,11 @@ to write in the repository anymore
 ----------------------------------------------------------------------
  OmegaT 2.5.5 update 1
 ----------------------------------------------------------------------
-   1 Enhancement
+   0 Enhancement
    2 Bug fixes
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.5 update 1 vs. 2.5.5
-
-  Implemented requests:
-
-  - Update JRE to 1.7 
- (full support for Khmer script rendering)
-  http://sourceforge.net/support/tracker.php?aid=3542912
 
   Bug fixes:
 

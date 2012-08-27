@@ -233,7 +233,7 @@ public class RealProject implements IProject {
 
             // set project specific file filters if they exist
             Filters filterMasterConfig = FilterMaster.loadConfig(m_config.getProjectInternal());
-            if (filterMasterConfig != null) {
+            if (filterMasterConfig == null) {
                 filterMasterConfig = FilterMaster.loadConfig(StaticUtils.getConfigDir());
             }
             if (filterMasterConfig == null) {

@@ -63,6 +63,20 @@ to write in the repository anymore
   http://sourceforge.net/support/tracker.php?aid=2960656
 
 ----------------------------------------------------------------------
+ OmegaT 2.5.5 update 2
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.5 update 2 vs. 2.5.5 update 1
+
+  Bug fixes:
+
+  - File filters options changes have no effect
+  http://sourceforge.net/support/tracker.php?aid=3556394
+
+----------------------------------------------------------------------
  OmegaT 2.5.5 update 1
 ----------------------------------------------------------------------
    0 Enhancement

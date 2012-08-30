@@ -125,7 +125,7 @@ public abstract class TmxComplianceBase extends TestCase {
     protected void translateUsingTmx(IFilter filter, Map<String, String> config, String fileTextIn,
             String inCharset, String fileTMX, String outCharset, ProjectProperties props,
             Map<String, TMXEntry> tmxPatch) throws Exception {
-        final ProjectTMX tmx = new ProjectTMX(props, new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
+        final ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), new File("test/data/tmx/TMXComplianceKit/" + fileTMX),
                 orphanedCallback);
         if (tmxPatch != null) {
             tmx.defaults.putAll(tmxPatch);
@@ -184,7 +184,7 @@ public abstract class TmxComplianceBase extends TestCase {
 
         filter.alignFile(sourceFile, translatedFile, null, fc, callback);
 
-        ProjectTMX tmx = new ProjectTMX(props, outFile, orphanedCallback);
+        ProjectTMX tmx = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), outFile, orphanedCallback);
 
         for (Map.Entry<String, TMXEntry> en : callback.data.entrySet()) {
             tmx.defaults.put(en.getKey(), en.getValue());

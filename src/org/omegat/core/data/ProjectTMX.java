@@ -73,7 +73,7 @@ public class ProjectTMX {
     
     final CheckOrphanedCallback checkOrphanedCallback;
 
-    public ProjectTMX(ProjectProperties props, File file, CheckOrphanedCallback callback) throws Exception {
+    public ProjectTMX(Language sourceLanguage, Language targetLanguage, boolean isSentenceSegmentingEnabled, File file, CheckOrphanedCallback callback) throws Exception {
         this.checkOrphanedCallback = callback;
         alternatives = new HashMap<EntryKey, TMXEntry>();
         defaults = new HashMap<String, TMXEntry>();
@@ -85,13 +85,13 @@ public class ProjectTMX {
 
         new TMXReader2().readTMX(
                 file,
-                props.getSourceLanguage(),
-                props.getTargetLanguage(),
-                props.isSentenceSegmentingEnabled(),
+                sourceLanguage,
+                targetLanguage,
+                isSentenceSegmentingEnabled,
                 false,
                 true,
                 false,
-                new Loader(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled()));
+                new Loader(sourceLanguage, targetLanguage, isSentenceSegmentingEnabled));
     }
 
     /**

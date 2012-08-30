@@ -75,7 +75,7 @@ public class ProjectTeamTMX extends ProjectTMX {
 
     public ProjectTeamTMX(ProjectProperties props, File file, CheckOrphanedCallback callback,
             IRemoteRepository repository) throws Exception {
-        super(props, file, callback);
+        super(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), file, callback);
 
         this.repository = repository;
     }
@@ -102,7 +102,7 @@ public class ProjectTeamTMX extends ProjectTMX {
 
         // restore BASE revision and load
         repository.restoreBase(orig);
-        baseTMX = new ProjectTMX(props, orig, null);
+        baseTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), orig, null);
 
         // update to HEAD revision from repository and load
         repository.download(orig);
@@ -115,7 +115,7 @@ public class ProjectTeamTMX extends ProjectTMX {
             fileOnBase = null;
         } else {
             // need rebase
-            headTMX = new ProjectTMX(props, orig, null);
+            headTMX = new ProjectTMX(props.getSourceLanguage(), props.getTargetLanguage(), props.isSentenceSegmentingEnabled(), orig, null);
             synchronized (this) {
                 ProjectTMX delta = calculateDelta(baseTMX, this);
                 baseTMX.clear();

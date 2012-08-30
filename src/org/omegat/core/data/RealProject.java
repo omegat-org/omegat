@@ -540,7 +540,7 @@ public class RealProject implements IProject {
                 projectTMX = new ProjectTeamTMX(m_config, tmxFile, checkOrphanedCallback, repository);
             } else {
                 // local project
-                projectTMX = new ProjectTMX(m_config, tmxFile, checkOrphanedCallback);
+                projectTMX = new ProjectTMX(m_config.getSourceLanguage(), m_config.getTargetLanguage(), m_config.isSentenceSegmentingEnabled(), tmxFile, checkOrphanedCallback);
             }
             if (tmxFile.exists()) {
                 // RFE 1001918 - backing up project's TMX upon successful read

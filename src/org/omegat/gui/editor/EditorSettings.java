@@ -387,4 +387,11 @@ public class EditorSettings {
     public AttributeSet getSegmentMarkerAttributeSet() {
         return Styles.createAttributeSet(null, null, true, false);
     }
+    /**
+     * Returns font attributes for other laguages translation.
+     * @return
+     */
+    public AttributeSet getOtherLanguageTranslationAttributeSet() {
+        return Styles.createAttributeSet(null, Styles.COLOR_SOURCE, false, true);
+    }
 }

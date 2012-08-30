@@ -29,6 +29,7 @@ package org.omegat.gui.editor;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.util.Date;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -39,8 +40,10 @@ import javax.swing.text.MutableAttributeSet;
 import javax.swing.text.Position;
 
 import org.omegat.core.Core;
+import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -126,6 +129,10 @@ public class SegmentBuilder {
 
         hasRTL = controller.sourceLangIsRTL || controller.targetLangIsRTL || EditorUtils.localeIsRTL()
                 || controller.currentOrientation != Document3.ORIENTATION.ALL_LTR;
+        Map<Language,ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
+        for (Map.Entry<Language,ProjectTMX> entry : otherLanguageTMs.entrySet()) {
+            hasRTL = hasRTL || EditorUtils.isRTL(entry.getKey().getLanguageCode().toLowerCase());
+        }
     }
 
     public boolean isDefaultTranslation() {
@@ -221,6 +228,16 @@ public class SegmentBuilder {
             int prevOffset = offset;
             sourceText = ste.getSrcText();
             addInactiveSegPart(true, sourceText);
+
+            Map<Language,ProjectTMX> otherLanguageTMs = Core.getProject().getOtherTargetLanguageTMs();
+            for (Map.Entry<Language,ProjectTMX> entry : otherLanguageTMs.entrySet()) {
+                TMXEntry altTrans = entry.getValue().getDefaultTranslation(sourceText);
+                if (altTrans!=null && altTrans.isTranslated()) {
+                    Language language = entry.getKey();
+                    addOtherLanguagePart(altTrans.translation, language);
+                }
+            }
+
             posSourceBeg = doc.createPosition(prevOffset + (hasRTL ? 1 : 0));
 
             if (trans.isTranslated()) {
@@ -415,6 +432,29 @@ public class SegmentBuilder {
     }
 
     /**
+     * Add inactive segment part, without segment begin/end marks.
+     *
+     * @param text other language translation text
+     * @throws BadLocationException
+     */
+    private void addOtherLanguagePart(String text, Language language)
+            throws BadLocationException {
+        int prevOffset = offset;
+        boolean rtl = EditorUtils.isRTL(language.getLanguageCode());
+        insertDirectionEmbedding(false);
+        AttributeSet normal = attrs(true, false, false, false);
+        insert(language.getLanguage()+": ", normal);
+        insertDirectionEndEmbedding();
+
+        insertDirectionEmbedding(rtl);
+        AttributeSet attrs = settings.getOtherLanguageTranslationAttributeSet();
+        insert(text, attrs);
+        insertDirectionEndEmbedding();
+        insert("\n", null);
+        setAlignment(prevOffset, offset, rtl);
+    }
+
+    /**
      * Adds a string that displays the modification info (author and date). Does
      * nothing if the translation entry is null.
      *
@@ -453,11 +493,10 @@ public class SegmentBuilder {
     }
 
     /**
-     * Add active segment part, with segment begin/end marks.
+     * Add active (translation) segment part, with segment begin/end marks.
      *
      * @param text
      *            segment part text
-     * @param isSource is text the source text (true) or translation text (false)
      * @throws BadLocationException
      */
     private void addActiveSegPart(String text) throws BadLocationException {

@@ -341,6 +341,7 @@ public class RealProject implements IProject {
      */
     public void closeProject() {
         tmMonitor.fin();
+        tmOtherLanguagesMonitor.fin();
         unlockProject();
         LOGGER.info(OStrings.getString("LOG_DATAENGINE_CLOSE"));
     }
@@ -705,6 +706,10 @@ public class RealProject implements IProject {
             public void fileChanged(File file) {
                 if (!file.getName().endsWith(OConsts.TMX_EXTENSION)) {
                     // not a TMX file
+                    return;
+                }
+                if (file.getPath().startsWith(m_config.getTMOtherLangRoot()) ) {
+                    //tmx in other language, which is already shown in editor. Skip it.
                     return;
                 }
                 // create new translation memories map

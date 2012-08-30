@@ -879,6 +879,10 @@ public class RealProject implements IProject {
         return transMemories;
     }
 
+    public Map<Language,ProjectTMX> getOtherTargetLanguageTMs() {
+        return otherTargetLangTMs;
+    }
+
     /**
      * {@inheritDoc}
      */

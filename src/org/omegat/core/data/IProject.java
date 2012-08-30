@@ -36,6 +36,7 @@ import org.omegat.core.segmentation.SRX;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.util.Language;
 
 /**
  * Interface for access to loaded project. Each loaded project will be new instance of IProject.
@@ -161,6 +162,13 @@ public interface IProject {
      * @return translation memories
      */
     Map<String, ExternalTMX> getTransMemories();
+    
+    /**
+     * Get all translation memories from /other_lang/ folder.
+     * 
+     * @return translation memories
+     */
+    Map<Language, ProjectTMX> getOtherTargetLanguageTMs();
 
     /**
      * Get info about each source file in project. It's unmodifiable list, so, there is no need

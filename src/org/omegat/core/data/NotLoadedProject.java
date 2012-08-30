@@ -36,6 +36,7 @@ import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.team.IRemoteRepository;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.util.Language;
 
 /**
  * Project implementation when project not really loaded.
@@ -84,6 +85,10 @@ public class NotLoadedProject implements IProject {
     }
 
     public Map<String, ExternalTMX> getTransMemories() {
+        return null;
+    }
+    
+    public Map<Language, ProjectTMX> getOtherTargetLanguageTMs() {
         return null;
     }
 

@@ -53,7 +53,7 @@ import java.util.regex.Matcher;
  * @author Zoltan Bartko bartkozoltan@bartkozoltan.com
  * @author Guido Leenders
  */
-public class Language {
+public class Language implements Comparable<Object> {
     private Locale locale = new Locale("");
     private String languageCode;
     private String countryCode;
@@ -627,5 +627,12 @@ public class Language {
     public int hashCode() {
         return locale.hashCode();
     }
+
+	public int compareTo(Object o) {
+		if (o instanceof Language) {
+			return this.getLanguage().compareTo(((Language)o).getLanguage());
+		}
+		return this.getLanguage().compareTo(o.toString());
+	}
 
 }

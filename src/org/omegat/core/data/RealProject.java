@@ -70,6 +70,7 @@ import org.omegat.filters2.master.FilterMaster;
 import org.omegat.filters2.master.PluginUtils;
 import org.omegat.util.DirectoryMonitor;
 import org.omegat.util.FileUtil;
+import org.omegat.util.Language;
 import org.omegat.util.Log;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
@@ -117,6 +118,8 @@ public class RealProject implements IProject {
     private final ITokenizer sourceTokenizer, targetTokenizer;
 
     private DirectoryMonitor tmMonitor;
+    
+    private DirectoryMonitor tmOtherLanguagesMonitor;
 
     /**
      * Storage for all translation memories, which shouldn't be changed and saved, i.e. for /tm/*.tmx files,
@@ -126,6 +129,12 @@ public class RealProject implements IProject {
      * synchronization.
      */
     private Map<String, ExternalTMX> transMemories = new TreeMap<String, ExternalTMX>();
+    
+    /**
+     * Storage for all translation memories of translations to other languages.
+     */
+    private Map<Language, ProjectTMX> otherTargetLangTMs = new TreeMap<Language, ProjectTMX>();
+
     protected ProjectTMX projectTMX;
 
     // Sets of exist entries for check orphaned
@@ -205,6 +214,8 @@ public class RealProject implements IProject {
 
             loadTM();
 
+            loadOtherLanguages();
+
             allProjectEntries = Collections.unmodifiableList(allProjectEntries);
         } catch (Exception e) {
             // trouble in tinsletown...
@@ -254,6 +265,8 @@ public class RealProject implements IProject {
             importTranslationsFromSources();
 
             loadTM();
+
+            loadOtherLanguages();
 
             // build word count
             String stat = CalcStandardStatistics.buildProjectStats(this, hotStat);
@@ -741,6 +754,41 @@ public class RealProject implements IProject {
         });
         tmMonitor.checkChanges();
         tmMonitor.start();
+    }
+    
+    /**
+     * Locates and loads external TMX files with legacy translations. Uses directory monitor for check file
+     * updates.
+     */
+    private void loadOtherLanguages() throws IOException {
+        final File tmOtherLanguagesRoot = new File(m_config.getTMOtherLangRoot());
+        tmOtherLanguagesMonitor = new DirectoryMonitor(tmOtherLanguagesRoot, new DirectoryMonitor.Callback() {
+            public void fileChanged(File file) {
+                if (!file.getName().matches("[A-Z]{2}([-_][A-Z]{2})?\\.tmx")) {
+                    // not a TMX file in XX_XX.tmx format
+                    return;
+                }
+                Language targetLanguage = new Language(file.getName().substring(0, file.getName().length()-4));
+                // create new translation memories map
+                Map<Language, ProjectTMX> newOtherTargetLangTMs = new TreeMap<Language, ProjectTMX>(otherTargetLangTMs);
+                if (file.exists()) {
+                    try {
+                        ProjectTMX newTMX = new ProjectTMX(m_config.getSourceLanguage(), targetLanguage,
+                            m_config.isSentenceSegmentingEnabled(), file, checkOrphanedCallback);
+                        newOtherTargetLangTMs.put(targetLanguage, newTMX);
+                    } catch (Exception e) {
+                        String filename = file.getPath();
+                        Log.logErrorRB(e, "TF_TM_LOAD_ERROR", filename);
+                        Core.getMainWindow().displayErrorRB(e, "TF_TM_LOAD_ERROR", filename);
+                    }
+                } else {
+                    newOtherTargetLangTMs.remove(targetLanguage);
+                }
+                otherTargetLangTMs = newOtherTargetLangTMs;
+            }
+        });
+        tmOtherLanguagesMonitor.checkChanges();
+        tmOtherLanguagesMonitor.start();
     }
 
     /**

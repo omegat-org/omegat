@@ -26,6 +26,7 @@ package org.omegat.core.data;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -299,6 +300,21 @@ public class ProjectTMX {
     private EntryKey createKeyByProps(String src, Map<String, String> props) {
         return new EntryKey(props.get(PROP_FILE), src, props.get(PROP_ID), props.get(PROP_PREV),
                 props.get(PROP_NEXT), props.get(PROP_PATH));
+    }
+
+    /**
+     * Returns the collection of TMX entries that have a default translation
+     * @return
+     */
+    public Collection<TMXEntry> getDefaults() {
+        return defaults.values();
+    }
+    /**
+     * Returns the collection of TMX entries that have an alternative translation
+     * @return
+     */
+    public Collection<TMXEntry> getAlternatives() {
+        return alternatives.values();
     }
 
     public interface CheckOrphanedCallback {

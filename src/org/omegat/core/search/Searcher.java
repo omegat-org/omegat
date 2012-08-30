@@ -30,6 +30,7 @@ package org.omegat.core.search;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -45,6 +46,7 @@ import org.omegat.core.data.ExternalTMX;
 import org.omegat.core.data.IProject;
 import org.omegat.core.data.ParseEntry;
 import org.omegat.core.data.ProjectProperties;
+import org.omegat.core.data.ProjectTMX;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.data.IProject.FileInfo;
@@ -52,6 +54,7 @@ import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.master.FilterMaster;
+import org.omegat.util.Language;
 import org.omegat.util.OStrings;
 import org.omegat.util.StaticUtils;
 
@@ -279,26 +282,52 @@ public class Searcher {
             });
 
             // Search TM entries, unless we search for date or author.
-            // They are not available in external TM, so skip the search in
+            // They are not loaded from external TM, so skip the search in
             // that case.
             if (!m_searchAuthor && !m_searchDateAfter && !m_searchDateBefore) {
                 for (Map.Entry<String, ExternalTMX> tmEn : m_project.getTransMemories().entrySet()) {
                     final String fileTM = tmEn.getKey();
-                    for (TMXEntry tm : tmEn.getValue().getEntries()) {
-                        // stop searching if the max. nr of hits has been
-                        // reached
-                        if (m_numFinds >= m_maxResults) {
-                            break;
-                        }
-
-                        checkEntry(tm.source, tm.translation, null, -1, fileTM);
-                        if (stopCallback.isStopped()) {
-                            return;
-                        }
-                    }
+                    if (!searchEntries(tmEn.getValue().getEntries(), fileTM, false)) return;
                 }
+                for (Map.Entry<Language, ProjectTMX> tmEn : m_project.getOtherTargetLanguageTMs().entrySet()) {
+                    final Language langTM = tmEn.getKey();
+                    if (!searchEntries(tmEn.getValue().getDefaults(), langTM.getLanguage(), true)) return;
+                    if (!searchEntries(tmEn.getValue().getAlternatives(), langTM.getLanguage(), true)) return;
+                }
+
             }
         }
+    }
+
+    /**
+     * Loops over collection of TMXEntries and checks every entry.
+     * If max nr of hits have been reached or serach has been stopped,
+     * the function stops and returns false. Else it finishes and returns true;
+     * 
+     * @param tmEn collection of TMX Entries to check.
+     * @param tmxID identifier of the TMX. E.g. the filename or language code
+     * @return true when finished and all entries checked,
+     *         false when search has stopped before all entries have been checked.
+     */
+    private boolean searchEntries(Collection<TMXEntry> tmEn,
+        final String tmxID, boolean isAlternativeSource) {
+        for (TMXEntry tm : tmEn) {
+            // stop searching if the max. nr of hits has been
+            // reached
+            if (m_numFinds >= m_maxResults) {
+                return false;
+            }
+
+            //for alternative translations:
+            //- it is not feasible to get the sourcetextentry that matches the tm.source, so we cannot get the entryNum and real translation
+            //- although the 'trnalsation' is used as 'source', we search it as translation, else we cannot show to which real source it belongs
+            checkEntry(tm.source, tm.translation, null, -1, tmxID);
+
+            if (stopCallback.isStopped()) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

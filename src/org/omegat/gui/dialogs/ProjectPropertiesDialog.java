@@ -321,6 +321,19 @@ public class ProjectPropertiesDialog extends JDialog {
         final JTextField m_locRootField = new JTextField();
         dirsBox.add(bLoc);
         dirsBox.add(m_locRootField);
+        
+        JLabel m_tmOtherLangRootLabel = new JLabel();
+        Mnemonics.setLocalizedText(m_tmOtherLangRootLabel, OStrings.getString("PP_TM_OTHER_LANG_ROOT"));
+        Box bTMOtherLang = Box.createHorizontalBox();
+        bTMOtherLang.setBorder(emptyBorder);
+        bTMOtherLang.add(m_tmOtherLangRootLabel);
+        bTMOtherLang.add(Box.createHorizontalGlue());
+        JButton m_tmOtherLangBrowse = new JButton();
+        Mnemonics.setLocalizedText(m_tmOtherLangBrowse, OStrings.getString("PP_BUTTON_BROWSE_TM_OTHER_LANG"));
+        bTMOtherLang.add(m_tmOtherLangBrowse);
+        final JTextField m_tmOtherLangRootField = new JTextField();
+        dirsBox.add(bTMOtherLang);
+        dirsBox.add(m_tmOtherLangRootField);
 
         centerBox.add(dirsBox);
 
@@ -344,7 +357,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_okButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 doOK(m_sourceLocaleField, m_targetLocaleField, m_sentenceSegmentingCheckBox, m_srcRootField,
-                        m_locRootField, m_glosRootField, m_writeableGlosField, m_tmRootField, m_dictRootField,
+                        m_locRootField, m_glosRootField, m_writeableGlosField, m_tmRootField, m_dictRootField, m_tmOtherLangRootField,
                         m_allowDefaultsCheckBox);
             }
         });
@@ -390,6 +403,12 @@ public class ProjectPropertiesDialog extends JDialog {
                 doBrowseDirectoy(5, m_dictRootField);
             }
         });
+        
+        m_tmOtherLangBrowse.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                doBrowseDirectoy(7, m_tmRootField);
+            }
+        });
 
         final JDialog self = this;
         m_sentenceSegmentingButton.addActionListener(new ActionListener() {
@@ -432,6 +451,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_glosRootField.setText(projectProperties.getGlossaryRoot());
         m_writeableGlosField.setText(projectProperties.getWriteableGlossary());
         m_tmRootField.setText(projectProperties.getTMRoot());
+        m_tmOtherLangRootField.setText(projectProperties.getTMOtherLangRoot());
         m_dictRootField.setText(projectProperties.getDictRoot());
         m_sourceLocaleField.setSelectedItem(projectProperties.getSourceLanguage());
         m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
@@ -471,6 +491,10 @@ public class ProjectPropertiesDialog extends JDialog {
             f = new File(m_tmRootField.getText());
             if (!f.exists() || !f.isDirectory())
                 m_tmRootField.setForeground(Color.RED);
+            
+            f = new File(m_tmOtherLangRootField.getText());
+            if (!f.exists() || !f.isDirectory())
+                m_tmOtherLangRootField.setForeground(Color.RED);
             break;
         }
 
@@ -527,6 +551,10 @@ public class ProjectPropertiesDialog extends JDialog {
         case 6:
             title = OStrings.getString("PP_BROWSE_W_GLOS");
             break;
+            
+        case 7:
+            title = OStrings.getString("PP_BROWSE_TITLE_TM_OTHER_LANG");
+            break;
 
             default:
             return;
@@ -582,6 +610,10 @@ public class ProjectPropertiesDialog extends JDialog {
 
             case 6:
                 curDir = Preferences.getPreference(Preferences.GLOSSARY_FILE);
+                break;
+                
+            case 7:
+                curDir = Preferences.getPreference(Preferences.TM_OTHER_LANG_FOLDER);
                 break;
 
             }
@@ -672,6 +704,15 @@ public class ProjectPropertiesDialog extends JDialog {
             break;
 
         case 6:
+            Preferences.setPreference(Preferences.TM_OTHER_LANG_FOLDER, browser.getSelectedFile().getPath());
+            projectProperties.setTMOtherLangRoot(str);
+            field.setText(projectProperties.getTMOtherLangRoot());
+            if (new File(projectProperties.getTMOtherLangRoot()).exists()
+                    && new File(projectProperties.getTMOtherLangRoot()).isDirectory())
+                field.setForeground(java.awt.SystemColor.textText);
+            break;
+
+        case 7:
             Preferences.setPreference(Preferences.GLOSSARY_FILE, browser.getSelectedFile().getPath());
             projectProperties.setWriteableGlossary(str);
             field.setText(projectProperties.getWriteableGlossary());
@@ -687,7 +728,7 @@ public class ProjectPropertiesDialog extends JDialog {
 
     private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
-            JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
+            JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField, JTextField m_tmOtherLangRootField, 
             JCheckBox m_allowDefaultsCheckBox) {
         if (!ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
@@ -782,6 +823,16 @@ public class ProjectPropertiesDialog extends JDialog {
             JOptionPane.showMessageDialog(this, OStrings.getString("NP_DICTDIR_DOESNT_EXIST"),
                     OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
             m_dictRootField.requestFocusInWindow();
+            return;
+        }
+        
+        projectProperties.setTMOtherLangRoot(m_tmOtherLangRootField.getText());
+        if (!projectProperties.getTMOtherLangRoot().endsWith(File.separator))
+            projectProperties.setTMOtherLangRoot(projectProperties.getTMOtherLangRoot() + File.separator);
+        if (dialogType != NEW_PROJECT && !new File(projectProperties.getTMOtherLangRoot()).exists()) {
+            JOptionPane.showMessageDialog(this, OStrings.getString("NP_TMOTHERLANGDIR_DOESNT_EXIST"),
+                    OStrings.getString("TF_ERROR"), JOptionPane.ERROR_MESSAGE);
+            m_tmOtherLangRootField.requestFocusInWindow();
             return;
         }
 

@@ -126,7 +126,6 @@ public class RealProject implements IProject {
      * synchronization.
      */
     private Map<String, ExternalTMX> transMemories = new TreeMap<String, ExternalTMX>();
-
     protected ProjectTMX projectTMX;
 
     // Sets of exist entries for check orphaned
@@ -192,6 +191,7 @@ public class RealProject implements IProject {
             createDirectory(m_config.getTMAutoRoot(), OConsts.AUTO_TM);
             createDirectory(m_config.getDictRoot(), OConsts.DEFAULT_DICT);
             createDirectory(m_config.getTargetRoot(), OConsts.DEFAULT_TARGET);
+            createDirectory(m_config.getTMOtherLangRoot(), OConsts.DEFAULT_OTHERLANG);
 
             saveProjectProperties();
 

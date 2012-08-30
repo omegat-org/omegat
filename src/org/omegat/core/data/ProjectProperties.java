@@ -65,6 +65,7 @@ public class ProjectProperties {
         setTMRoot(projectRoot + OConsts.DEFAULT_TM + File.separator);
         setTMAutoRoot(tmRoot + OConsts.AUTO_TM + File.separator);
         setDictRoot(projectRoot + OConsts.DEFAULT_DICT + File.separator);
+        setTMOtherLangRoot(tmRoot + OConsts.DEFAULT_OTHERLANG + File.separator);
 
         setSentenceSegmentingEnabled(true);
         setSupportDefaultTranslations(true);
@@ -86,7 +87,7 @@ public class ProjectProperties {
         projectSRX = SRX.loadSRX(new File(getProjectInternal(), SRX.CONF_SENTSEG));
     }
 
-    /** Returns The Target (Compiled) Files Directory */
+	/** Returns The Target (Compiled) Files Directory */
     public String getTargetRoot() {
         return targetRoot;
     }
@@ -131,6 +132,15 @@ public class ProjectProperties {
     /** Sets The Translation Memory (TMX) Files Directory */
     public void setTMRoot(String tmRoot) {
         this.tmRoot = tmRoot;
+    }
+    
+    public void setTMOtherLangRoot(String otherLangRoot) {
+        this.tmOtherLangRoot = otherLangRoot;
+	}
+    
+    /** Returns The Translation Memory (TMX) with translations to other languages Files Directory */
+    public String getTMOtherLangRoot() {
+        return tmOtherLangRoot;
     }
 
     /** Returns The Translation Memory (TMX) Files Directory for automatically applied files. */
@@ -372,6 +382,7 @@ public class ProjectProperties {
     private String tmRoot;
     private String tmAutoRoot;
     private String dictRoot;
+    private String tmOtherLangRoot;
 
     private Language sourceLanguage;
     private Language targetLanguage;

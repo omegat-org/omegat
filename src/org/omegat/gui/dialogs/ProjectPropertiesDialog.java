@@ -480,7 +480,7 @@ public class ProjectPropertiesDialog extends JDialog {
         pack();
 
         setSize(9 * getWidth() / 8, getHeight() + 10);
-
+        this.setResizable(true);
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         Dimension dialogSize = getSize();
         setLocation((screenSize.width - dialogSize.width) / 2, (screenSize.height - dialogSize.height) / 2);

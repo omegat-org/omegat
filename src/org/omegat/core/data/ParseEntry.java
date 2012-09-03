@@ -40,7 +40,6 @@ import org.omegat.filters2.IFilter;
 import org.omegat.filters2.IParseCallback;
 import org.omegat.util.Language;
 import org.omegat.util.PatternConsts;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -133,9 +132,9 @@ public abstract class ParseEntry implements IParseCallback {
 
         ParseEntryResult tmp = new ParseEntryResult();
 
-        source = stripSomeChars(source, tmp);
+        source = stripSomeChars(source, tmp, m_config.isRemoveTags());
         if (translation != null) {
-            translation = stripSomeChars(translation, tmp);
+            translation = stripSomeChars(translation, tmp, m_config.isRemoveTags());
         }
 
         if (m_config.isSentenceSegmentingEnabled()) {
@@ -233,7 +232,7 @@ public abstract class ParseEntry implements IParseCallback {
      *            source string to strip chars
      * @return result
      */
-    static String stripSomeChars(final String src, final ParseEntryResult per) {
+    static String stripSomeChars(final String src, final ParseEntryResult per, boolean removeTags) {
         String r = src;
 
         /**
@@ -277,10 +276,10 @@ public abstract class ParseEntry implements IParseCallback {
         if (per.cr)
             r = r.replace("\r", "\n");
 
-        if(Preferences.getPreference(Preferences.REMOVE_TAGS).equalsIgnoreCase("true")) {
+        if(removeTags) {
             r = PatternConsts.OMEGAT_TAG.matcher(r).replaceAll("");
         }
-        
+
         r = StaticUtils.fixChars(r);
 
         return r;

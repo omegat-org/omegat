@@ -569,19 +569,6 @@ public class MainWindowMenuHandler {
     public void toolsShowStatisticsMatchesMenuItemActionPerformed() {
         new StatisticsWindow(StatisticsWindow.STAT_TYPE.MATCHES).setVisible(true);
     }
-    
-    
-    public void toolsRemoveTagsCheckBoxMenuItemActionPerformed() {
-        Preferences.setPreference(Preferences.REMOVE_TAGS, 
-                mainWindow.menu.toolsRemoveTagsCheckBoxMenuItem.isSelected());
-        // Ask for reload.
-        int res = JOptionPane.showConfirmDialog(mainWindow, OStrings.getString("MW_REOPEN_QUESTION"),
-                OStrings.getString("MW_REOPEN_TITLE"), JOptionPane.YES_NO_OPTION);
-        if (res == JOptionPane.YES_OPTION)        
-            ProjectUICommands.projectReload();
-    }
-
-    
 
     public void optionsTabAdvanceCheckBoxMenuItemActionPerformed() {
         Core.getEditor().getSettings()

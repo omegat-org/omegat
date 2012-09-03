@@ -69,6 +69,7 @@ public class ProjectProperties {
 
         setSentenceSegmentingEnabled(true);
         setSupportDefaultTranslations(true);
+        setRemoveTags(false);
 
         String sourceLocale = Preferences.getPreference(Preferences.SOURCE_LOCALE);
         if (!StringUtil.isEmpty(sourceLocale)) {
@@ -256,6 +257,15 @@ public class ProjectProperties {
         this.supportDefaultTranslations = supportDefaultTranslations;
     }
 
+    public boolean isRemoveTags() {
+        return removeTags;
+    }
+
+    public void setRemoveTags(boolean removeTags) {
+        this.removeTags = removeTags;
+    }
+
+
     public SRX getProjectSRX() {
         return projectSRX;
     }
@@ -389,6 +399,7 @@ public class ProjectProperties {
 
     private boolean sentenceSegmentingOn;
     private boolean supportDefaultTranslations;
+    private boolean removeTags;
 
     private SRX projectSRX;
     private Filters projectFilters;

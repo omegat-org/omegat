@@ -30,7 +30,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -180,7 +179,7 @@ public abstract class TmxComplianceBase extends TestCase {
         fc.setInEncoding(inCharset);
         fc.setOutEncoding(outCharset);
 
-        RealProject.AlignFilesCallback callback = new RealProject.AlignFilesCallback();
+        RealProject.AlignFilesCallback callback = new RealProject.AlignFilesCallback(false);
 
         filter.alignFile(sourceFile, translatedFile, null, fc, callback);
 

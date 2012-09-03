@@ -286,7 +286,6 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewModificationInfoMenu.setIcon(getViewMenuMarkBGIcon(null));
 
         toolsMenu.add(toolsValidateTagsMenuItem = createMenuItem("TF_MENU_TOOLS_VALIDATE"));
-        toolsMenu.add(toolsRemoveTagsCheckBoxMenuItem = createCheckboxMenuItem("TF_MENU_TOOLS_HIDETAGS"));
         toolsMenu
                 .add(toolsShowStatisticsStandardMenuItem = createMenuItem("TF_MENU_TOOLS_STATISTICS_STANDARD"));
         toolsMenu
@@ -386,8 +385,6 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
         viewDisplayModificationInfoAllRadioButtonMenuItem
                 .setSelected(EditorSettings.DISPLAY_MODIFICATION_INFO_ALL.equals(Core.getEditor()
                         .getSettings().getDisplayModificationInfo()));
-        
-        toolsRemoveTagsCheckBoxMenuItem.setSelected(Preferences.isPreference(Preferences.REMOVE_TAGS));
     }
 
     /**
@@ -507,7 +504,7 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
                 gotoMenu, gotoNextSegmentMenuItem, gotoNextUntranslatedMenuItem, gotoPreviousSegmentMenuItem,
                 gotoSegmentMenuItem, gotoNextNoteMenuItem, gotoPreviousNoteMenuItem,
 
-                viewFileListMenuItem, toolsValidateTagsMenuItem, toolsRemoveTagsCheckBoxMenuItem, toolsShowStatisticsStandardMenuItem,
+                viewFileListMenuItem, toolsValidateTagsMenuItem, toolsShowStatisticsStandardMenuItem,
                 toolsShowStatisticsMatchesMenuItem };
 
         for (JMenuItem item : itemsToSwitchOff) {
@@ -608,7 +605,6 @@ public class MainWindowMenu implements ActionListener, IMainMenu {
     JMenuItem titleCaseMenuItem;
     JMenu toolsMenu;
     JMenuItem toolsValidateTagsMenuItem;
-    JCheckBoxMenuItem toolsRemoveTagsCheckBoxMenuItem;
     JMenuItem toolsShowStatisticsStandardMenuItem;
     JMenuItem toolsShowStatisticsMatchesMenuItem;
     JMenuItem upperCaseMenuItem;

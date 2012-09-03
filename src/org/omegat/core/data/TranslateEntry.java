@@ -32,7 +32,6 @@ import org.omegat.core.segmentation.Rule;
 import org.omegat.core.segmentation.Segmenter;
 import org.omegat.filters2.ITranslateCallback;
 import org.omegat.util.Language;
-import org.omegat.util.Preferences;
 import org.omegat.util.StaticUtils;
 import org.omegat.util.StringUtil;
 
@@ -97,10 +96,10 @@ public abstract class TranslateEntry implements ITranslateCallback {
         // Fetch removed tags if the options 
         // has been enabled.
         String tags = null;
-        if(Preferences.getPreference(Preferences.REMOVE_TAGS).equalsIgnoreCase("true"))
+        if(m_config.isRemoveTags())
             tags = StaticUtils.buildTagList(origSource);
         
-        final String source = ParseEntry.stripSomeChars(origSource, spr);
+        final String source = ParseEntry.stripSomeChars(origSource, spr, m_config.isRemoveTags());
         
         StringBuffer res = new StringBuffer();
 

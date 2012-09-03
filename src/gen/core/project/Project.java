@@ -72,6 +72,8 @@ public class Project {
     protected Boolean sentenceSeg;
     @XmlElement(name = "support_default_translations")
     protected Boolean supportDefaultTranslations;
+    @XmlElement(name = "remove_tags")
+    protected Boolean removeTags;
     @XmlAttribute(name = "version", required = true)
     protected String version;
 
@@ -313,6 +315,30 @@ public class Project {
      */
     public void setSupportDefaultTranslations(Boolean value) {
         this.supportDefaultTranslations = value;
+    }
+
+    /**
+     * Gets the value of the removeTags property.
+     *
+     * @return
+     *     possible object is
+     *     {@link Boolean }
+     *
+     */
+    public Boolean isRemoveTags() {
+        return removeTags;
+    }
+
+    /**
+     * Sets the value of the removeTags property.
+     *
+     * @param value
+     *     allowed object is
+     *     {@link Boolean }
+     *
+     */
+    public void setRemoveTags(Boolean value) {
+        this.removeTags = value;
     }
 
     /**

@@ -321,7 +321,7 @@ public class RealProject implements IProject {
         File root = new File(m_config.getSourceRoot());
         StaticUtils.buildFileList(srcFileList, root, true);
 
-        AlignFilesCallback alignFilesCallback = new AlignFilesCallback();
+        AlignFilesCallback alignFilesCallback = new AlignFilesCallback(m_config.isRemoveTags());
 
         String srcRoot = m_config.getSourceRoot();
         for (String filename : srcFileList) {
@@ -1087,14 +1087,20 @@ public class RealProject implements IProject {
     };
 
     static class AlignFilesCallback implements IAlignCallback {
+        public AlignFilesCallback(boolean removeTags) {
+            super();
+            this.removeTags = removeTags;
+        }
+
         Map<String, TMXEntry> data = new HashMap<String, TMXEntry>();
+        private boolean removeTags=false;
 
         public void addTranslation(String id, String source, String translation, boolean isFuzzy,
                 String path, IFilter filter) {
             if (source != null && translation != null) {
                 ParseEntry.ParseEntryResult spr = new ParseEntry.ParseEntryResult();
-                String sourceS = ParseEntry.stripSomeChars(source, spr);
-                String transS = ParseEntry.stripSomeChars(translation, spr);
+                String sourceS = ParseEntry.stripSomeChars(source, spr, removeTags);
+                String transS = ParseEntry.stripSomeChars(translation, spr, removeTags);
                 if (isFuzzy) {
                     transS = "[" + filter.getFuzzyMark() + "] " + transS;
                 }

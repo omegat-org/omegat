@@ -172,7 +172,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bSL.add(Box.createHorizontalGlue());
         localesBox.add(bSL);
 
-        final JComboBox m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
+        final JComboBox<Language[]> m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
         if (m_sourceLocaleField.getMaximumRowCount() < 20)
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
@@ -188,7 +188,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bLL.add(Box.createHorizontalGlue());
         localesBox.add(bLL);
 
-        final JComboBox m_targetLocaleField = new JComboBox(Language.LANGUAGES);
+        final JComboBox<Language[]> m_targetLocaleField = new JComboBox(Language.LANGUAGES);
         if (m_targetLocaleField.getMaximumRowCount() < 20)
             m_targetLocaleField.setMaximumRowCount(20);
         m_targetLocaleField.setEditable(true);
@@ -235,6 +235,15 @@ public class ProjectPropertiesDialog extends JDialog {
         bMT.add(m_allowDefaultsCheckBox);
         bMT.add(Box.createHorizontalGlue());
         optionsBox.add(bMT);
+
+        //Remove Tags
+        final JCheckBox m_removeTagsCheckBox = new JCheckBox();
+        Mnemonics.setLocalizedText(m_removeTagsCheckBox, OStrings.getString("PP_REMOVE_TAGS"));
+        Box bRT = Box.createHorizontalBox();
+        bRT.setBorder(emptyBorder);
+        bRT.add(m_removeTagsCheckBox);
+        bRT.add(Box.createHorizontalGlue());
+        optionsBox.add(bRT);
 
         centerBox.add(optionsBox, BorderLayout.WEST);
 
@@ -345,7 +354,7 @@ public class ProjectPropertiesDialog extends JDialog {
             public void actionPerformed(ActionEvent e) {
                 doOK(m_sourceLocaleField, m_targetLocaleField, m_sentenceSegmentingCheckBox, m_srcRootField,
                         m_locRootField, m_glosRootField, m_writeableGlosField, m_tmRootField, m_dictRootField,
-                        m_allowDefaultsCheckBox);
+                        m_allowDefaultsCheckBox, m_removeTagsCheckBox);
             }
         });
 
@@ -437,6 +446,7 @@ public class ProjectPropertiesDialog extends JDialog {
         m_targetLocaleField.setSelectedItem(projectProperties.getTargetLanguage());
         m_sentenceSegmentingCheckBox.setSelected(projectProperties.isSentenceSegmentingEnabled());
         m_allowDefaultsCheckBox.setSelected(projectProperties.isSupportDefaultTranslations());
+        m_removeTagsCheckBox.setSelected(projectProperties.isRemoveTags());
 
         switch (dialogType) {
         case RESOLVE_DIRS:
@@ -686,10 +696,10 @@ public class ProjectPropertiesDialog extends JDialog {
         }
     }
 
-    private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
+    private void doOK(JComboBox<Language[]> m_sourceLocaleField, JComboBox<Language[]> m_targetLocaleField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
             JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
-            JCheckBox m_allowDefaultsCheckBox) {
+            JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox) {
         if (!ProjectProperties.verifySingleLangCode(m_sourceLocaleField.getSelectedItem().toString())) {
             JOptionPane.showMessageDialog(
                     this,
@@ -713,8 +723,10 @@ public class ProjectPropertiesDialog extends JDialog {
         projectProperties.setTargetLanguage(m_targetLocaleField.getSelectedItem().toString());
 
         projectProperties.setSentenceSegmentingEnabled(m_sentenceSegmentingCheckBox.isSelected());
-        
+
         projectProperties.setSupportDefaultTranslations(m_allowDefaultsCheckBox.isSelected());
+
+        projectProperties.setRemoveTags(m_removeTagsCheckBox.isSelected());
 
         projectProperties.setSourceRoot(m_srcRootField.getText());
         if (!projectProperties.getSourceRoot().endsWith(File.separator))

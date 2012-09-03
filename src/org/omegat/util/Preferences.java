@@ -190,9 +190,6 @@ public class Preferences {
     /** Tag Validation Option: check target for text that should have been removed according to regexp.*/
     public static final String CHECK_REMOVE_PATTERN = "tagValidation_removePattern";
 
-     /** Remove Tags Option */
-    public static final String REMOVE_TAGS = "remove_tags_option";
-
     /** Team option: author ID */
     public static final String TEAM_AUTHOR = "team_Author";
 

@@ -122,6 +122,9 @@ public class ProjectFileStorage {
         if (om.getProject().isSupportDefaultTranslations() != null) {
             result.setSupportDefaultTranslations(om.getProject().isSupportDefaultTranslations());
         }
+        if (om.getProject().isRemoveTags() != null) {
+            result.setRemoveTags(om.getProject().isRemoveTags());
+        }
 
         return result;
     }
@@ -174,6 +177,7 @@ public class ProjectFileStorage {
         om.getProject().setTargetLang(props.getTargetLanguage().toString());
         om.getProject().setSentenceSeg(props.isSentenceSegmentingEnabled());
         om.getProject().setSupportDefaultTranslations(props.isSupportDefaultTranslations());
+        om.getProject().setRemoveTags(props.isRemoveTags());
 
         Marshaller m = CONTEXT.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);

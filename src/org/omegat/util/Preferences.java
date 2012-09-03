@@ -70,7 +70,6 @@ public class Preferences {
     public static final String SOURCE_FOLDER = "source_folder";
     public static final String TARGET_FOLDER = "target_folder";
     public static final String TM_FOLDER = "tm_folder";
-    public static final String TM_OTHER_LANG_FOLDER = "tm_other_lang_folder";
     public static final String DICT_FOLDER = "dict_folder";
     public static final String GLOSSARY_FOLDER = "glossary_folder";
     public static final String GLOSSARY_FILE = "glossary_file";

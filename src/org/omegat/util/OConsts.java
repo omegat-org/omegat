@@ -81,7 +81,7 @@ public class OConsts {
     public static final String DEFAULT_DICT = "dictionary";
     /** Project subfolder for project's translation memory. */
     public static final String DEFAULT_INTERNAL = "omegat";
-    /** Project subfolder for translation memories to other languages. */
+    /** Project subfolder for translation memories with other languages as alternative sources. */
     public static final String DEFAULT_OTHERLANG = "tmx2source";
 
     /**

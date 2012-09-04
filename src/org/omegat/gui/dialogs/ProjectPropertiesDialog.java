@@ -173,7 +173,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bSL.add(Box.createHorizontalGlue());
         localesBox.add(bSL);
 
-        final JComboBox<Language[]> m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
+        final JComboBox m_sourceLocaleField = new JComboBox(Language.LANGUAGES);
         if (m_sourceLocaleField.getMaximumRowCount() < 20)
             m_sourceLocaleField.setMaximumRowCount(20);
         m_sourceLocaleField.setEditable(true);
@@ -189,7 +189,7 @@ public class ProjectPropertiesDialog extends JDialog {
         bLL.add(Box.createHorizontalGlue());
         localesBox.add(bLL);
 
-        final JComboBox<Language[]> m_targetLocaleField = new JComboBox(Language.LANGUAGES);
+        final JComboBox m_targetLocaleField = new JComboBox(Language.LANGUAGES);
         if (m_targetLocaleField.getMaximumRowCount() < 20)
             m_targetLocaleField.setMaximumRowCount(20);
         m_targetLocaleField.setEditable(true);
@@ -698,7 +698,7 @@ public class ProjectPropertiesDialog extends JDialog {
         }
     }
 
-    private void doOK(JComboBox<Language[]> m_sourceLocaleField, JComboBox<Language[]> m_targetLocaleField,
+    private void doOK(JComboBox m_sourceLocaleField, JComboBox m_targetLocaleField,
             JCheckBox m_sentenceSegmentingCheckBox, JTextField m_srcRootField, JTextField m_locRootField,
             JTextField m_glosRootField, JTextField m_writeableGlosField, JTextField m_tmRootField, JTextField m_dictRootField,
             JCheckBox m_allowDefaultsCheckBox, JCheckBox m_removeTagsCheckBox) {

@@ -51,6 +51,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
@@ -333,7 +334,8 @@ public class ProjectPropertiesDialog extends JDialog {
 
         centerBox.add(dirsBox);
 
-        getContentPane().add(centerBox, "Center");
+        JScrollPane scrollPane = new JScrollPane(centerBox);
+        getContentPane().add(scrollPane, "Center");
 
         JButton m_okButton = new JButton();
         Mnemonics.setLocalizedText(m_okButton, OStrings.getString("BUTTON_OK"));

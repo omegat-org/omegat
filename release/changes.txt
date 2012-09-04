@@ -1,3 +1,23 @@
+ OmegaT 2.6.1
+----------------------------------------------------------------------
+   3 Enhancements
+   0 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.1 vs. 2.6.0 update 4
+
+  Implemented requests:
+
+  - Allow to load TMX as 'alternative source' 
+  http://sourceforge.net/support/tracker.php?aid=3563248
+
+  Other enhancements:
+
+  - The Project Properties dialog can now be resized
+
+  - Remove tags is now a project property feature, instead of being a
+global option
+
 ----------------------------------------------------------------------
  OmegaT 2.6.0 update 4
 ----------------------------------------------------------------------
@@ -68,6 +88,19 @@ to write in the repository anymore
 
   - Configurable display in match pane
   http://sourceforge.net/support/tracker.php?aid=2960656
+
+----------------------------------------------------------------------
+ OmegaT 2.5.5 update 3
+----------------------------------------------------------------------
+   1 Enhancement
+   0 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.5.5 update 3 vs. 2.5.5 update 2
+
+   Other enhancements:
+
+  - New file filter for Visio (*.vxd) files
 
 ----------------------------------------------------------------------
  OmegaT 2.5.5 update 2

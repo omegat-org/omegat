@@ -83,6 +83,7 @@ OmegaT supports the following file formats out of the box:
   - Flash XML export (*.xml)
   - Wordfast TXML (*.txml)
   - Camtasia for Windows (*.camproj)
+  - Visio (*.vxd)
 
 OmegaT can be customized to support other file formats as well.
 
@@ -273,6 +274,7 @@ Code has been contributed by
   Thomas Cordonnier
   Martin Fleurke  
   Wildrich Fourie
+  Phillip Hall
   Jean-Christophe Helary
   Thomas Huriaux
   Hans-Peter Jacobs

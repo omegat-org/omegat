@@ -225,6 +225,10 @@
           <listitem>
             <para>Camtasia for Windows (*.camproj)</para>
           </listitem>
+
+          <listitem>
+            <para>Visio (*.vxd)</para>
+          </listitem>
         </itemizedlist></para>
 
       <para>Other formatted text file types may also be handled by OmegaT by

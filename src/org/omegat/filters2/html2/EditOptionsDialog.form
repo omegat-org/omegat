@@ -229,6 +229,22 @@
         </Component>
         <Component class="javax.swing.JTextField" name="ignoreTagsTF">
         </Component>
+        <Component class="javax.swing.JCheckBox" name="compressWhitespaceCB">
+          <Properties>
+            <Property name="selected" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_COMPRESS_WHITESPACE" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="removeCommentsCB">
+          <Properties>
+            <Property name="selected" type="boolean" value="false"/>
+            <Property name="text" type="java.lang.String" editor="org.netbeans.modules.i18n.form.FormI18nStringEditor">
+              <ResourceString bundle="org/omegat/Bundle.properties" key="HTML_REMOVE_COMMENTS" replaceFormat="OStrings.getString(&quot;{key}&quot;)"/>
+            </Property>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>

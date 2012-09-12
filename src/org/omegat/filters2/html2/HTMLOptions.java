@@ -94,6 +94,8 @@ public class HTMLOptions extends AbstractOptions {
     public static final String OPTION_SKIP_REGEXP = "skipRegExp";
     public static final String OPTION_SKIP_META = "skipMeta";
     public static final String OPTION_IGNORE_TAGS = "ignoreTags";
+    public static final String OPTION_REMOVE_COMMENTS = "removeComments";
+    public static final String OPTION_COMPRESS_WHITESPACE = "compressWhitespace";
 
     public HTMLOptions(Map<String, String> options) {
         super(options);
@@ -263,6 +265,36 @@ public class HTMLOptions extends AbstractOptions {
      */
     public void setIgnoreTags(String ignoreTags) {
         setString(OPTION_IGNORE_TAGS, ignoreTags);
+    }
+
+    /**
+     * @return Returns whether comments should be removed from the HTML document on generating target documents.
+     */
+    public boolean getRemoveComments() {
+        return getBoolean(OPTION_REMOVE_COMMENTS, false);
+    }
+
+    /**
+     * Sets whether the comments should be removed from the HTML document on generating target documents.
+     * @param removeComments 
+     */
+    public void setRemoveComments(boolean removeComments) {
+        setBoolean(OPTION_REMOVE_COMMENTS, removeComments);
+    }
+
+    /**
+     * @return Returns whether whitespace should be compressed in the HTML document on generating target documents.
+     */
+    public boolean getCompressWhitespace() {
+        return getBoolean(OPTION_COMPRESS_WHITESPACE, false);
+    }
+
+    /**
+     * Sets whether whitespace should be compressed in the HTML document on generating target documents.
+     * @param compressWhitespace
+     */
+    public void setCompressWhitespace(boolean compressWhitespace) {
+        setBoolean(OPTION_COMPRESS_WHITESPACE, compressWhitespace);
     }
 
 }

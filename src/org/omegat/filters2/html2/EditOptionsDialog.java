@@ -88,6 +88,8 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         skipRegExpTF.setText(options.getSkipRegExp());
         skipMetaTF.setText(options.getSkipMeta());
         ignoreTagsTF.setText(options.getIgnoreTags());
+        removeCommentsCB.setSelected(options.getRemoveComments());
+        compressWhitespaceCB.setSelected(options.getCompressWhitespace());
 
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -139,6 +141,8 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         translateHreflangCB = new javax.swing.JCheckBox();
         translateValueCB = new javax.swing.JCheckBox();
         translateButtonValueCB = new javax.swing.JCheckBox();
+        removeCommentsCB = new javax.swing.JCheckBox();
+        compressWhitespaceCB = new javax.swing.JCheckBox();
         jLabel3 = new javax.swing.JLabel();
         paragraphOnBrCB = new javax.swing.JCheckBox();
         jLabel4 = new javax.swing.JLabel();
@@ -244,6 +248,14 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         jPanel1.add(jLabel6);
         jPanel1.add(ignoreTagsTF);
 
+        compressWhitespaceCB.setSelected(false);
+        org.openide.awt.Mnemonics.setLocalizedText(compressWhitespaceCB, OStrings.getString("HTML_COMPRESS_WHITESPACE")); // NOI18N
+        jPanel1.add(compressWhitespaceCB);
+
+        removeCommentsCB.setSelected(false);
+        org.openide.awt.Mnemonics.setLocalizedText(removeCommentsCB, OStrings.getString("HTML_REMOVE_COMMENTS")); // NOI18N
+        jPanel1.add(removeCommentsCB);
+
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
         pack();
@@ -292,6 +304,8 @@ public class EditOptionsDialog extends javax.swing.JDialog {
         options.setTranslateButtonValue(translateButtonValueCB.isSelected());
         options.setTranslateHreflang(translateHreflangCB.isSelected());
         options.setParagraphOnBr(paragraphOnBrCB.isSelected());
+        options.setCompressWhitespace(compressWhitespaceCB.isSelected());
+        options.setRemoveComments(removeCommentsCB.isSelected());
         options.setSkipRegExp(skipRegExpTF.getText());
         options.setSkipMeta(skipMetaTF.getText());
         options.setIgnoreTags(ignoreTagsTF.getText());
@@ -342,5 +356,7 @@ public class EditOptionsDialog extends javax.swing.JDialog {
     private javax.swing.JCheckBox translateLangCB;
     private javax.swing.JCheckBox translateSrcCB;
     private javax.swing.JCheckBox translateValueCB;
+    private javax.swing.JCheckBox compressWhitespaceCB;
+    private javax.swing.JCheckBox removeCommentsCB;
     // End of variables declaration//GEN-END:variables
 }

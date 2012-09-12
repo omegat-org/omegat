@@ -146,6 +146,8 @@ public class PatternConsts {
 
     public static final Pattern NBSP = Pattern.compile("\u00a0");
 
+    public static final Pattern SPACE_TAB = Pattern.compile("( |	)+");
+
     /**
      * Pattern for detecting the placeholders in a printf-function string which
      * can occur in languages like php, C and others. placeholder ::= "%"

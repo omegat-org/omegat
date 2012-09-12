@@ -36,6 +36,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.htmlparser.Attribute;
 import org.htmlparser.Node;
@@ -282,7 +284,7 @@ public class FilterVisitor extends NodeVisitor {
         recurse = true;
         if (text)
             endup();
-        writeout(remark.toHtml());
+        if (!options.getRemoveComments()) writeout(remark.toHtml());
     }
 
     /**
@@ -437,7 +439,7 @@ public class FilterVisitor extends NodeVisitor {
             if (node instanceof Tag)
                 writeout("<" + node.getText() + ">");
             else
-                writeout(node.getText());
+                writeout(compressWhitespace(node.getText()));
         }
 
         // detecting the last ending tag in 'afters'
@@ -507,20 +509,20 @@ public class FilterVisitor extends NodeVisitor {
         // then we write out the uncompressed version,
         // as documented in
         // http://sourceforge.net/support/tracker.php?aid=1364265
-        // The spaces that are around the segment are not removed. To have
-        // similar effect, the spaces can be compressed to max 1, but for better
-        // layout the original spacing can be kept better.
+        // The spaces that are around the segment are not removed, unless
+        // compressWhitespace option is enabled. Then the spaces are compressed to max 1.
+        // (This changes the layout, therefore it is an option)
         if (!preformatting) {
 
             for (int i = 0; i < size; i++) {
                 if (!Character.isWhitespace(uncompressed.charAt(i))) {
-                    spacePrefix = uncompressed.substring(0, i);
+                    spacePrefix = uncompressed.substring(0, (options.getCompressWhitespace() ? Math.min(i,1) : i));
                     break;
                 }
             }
             for (int i = size - 1; i > 0; i--) {
                 if (!Character.isWhitespace(uncompressed.charAt(i))) {
-                    spacePostfix = uncompressed.substring(i + 1, size);
+                    spacePostfix = uncompressed.substring(i + 1, (options.getCompressWhitespace() ? Math.min(i + 2, size) : size));
                     break;
                 }
             }
@@ -531,7 +533,7 @@ public class FilterVisitor extends NodeVisitor {
         String translation = filter.privateProcessEntry(compressed, null);
 
         // writing out uncompressed
-        if (compressed.equals(translation))
+        if (compressed.equals(translation) && !options.getCompressWhitespace())
             translation = uncompressed;
 
         // converting & < and > into &amp; &lt; and &gt; respectively
@@ -550,7 +552,7 @@ public class FilterVisitor extends NodeVisitor {
             if (node instanceof Tag)
                 writeout("<" + node.getText() + ">");
             else
-                writeout(node.getText());
+                writeout(compressWhitespace(node.getText()));
         }
 
         cleanup();
@@ -718,9 +720,25 @@ public class FilterVisitor extends NodeVisitor {
             if (node instanceof Tag)
                 writeout("<" + node.getText() + ">");
             else
-                writeout(node.getText());
+                writeout(compressWhitespace(node.getText()));
         }
         befors.clear();
+    }
+
+    /**
+     * Remove consecutive whitespace if otions.getCompressWhitespace()==true, and only space+tab is removed. 
+     * Newlines are not touched, to preserve the layout a little more.
+     * NB: We cannot use StaticUtils.compressSpaces, because it trims a string consisting of only whitespace to the empty string.
+     * @param input some text outside / between tags where it is allowed to compress spaces.
+     * @return the compressed input.
+     */
+    private String compressWhitespace(String input) {
+        if (options.getCompressWhitespace()) {
+            Matcher whitespaceMatch = PatternConsts.SPACE_TAB.matcher(input);
+            return whitespaceMatch.replaceAll(" "); //keep at least 1 space, as not to change the meaning of the document.
+        } else {
+            return input;
+        }
     }
 
     /** Named HTML Entities and corresponding numeric character references */

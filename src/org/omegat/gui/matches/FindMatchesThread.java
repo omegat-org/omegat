@@ -49,6 +49,7 @@ import org.omegat.core.matching.NearString;
 import org.omegat.gui.common.EntryInfoSearchThread;
 import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
+import org.omegat.util.PatternConsts;
 import org.omegat.util.Token;
 
 /**
@@ -73,6 +74,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     private static final Logger LOGGER = Logger.getLogger(FindMatchesThread.class.getName());
     
     private static final int PENALTY_FOR_FUZZY = 20;
+    private static final int PENALTY_FOR_REMOVED = 5;
 
     /** Current project. */
     private final IProject project;
@@ -97,6 +99,15 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     private Token[] strTokensAll;
 
     private final ITokenizer tok;
+
+    /**
+     * the removePattern that was configured by the user.
+     */
+    private Pattern removePattern;
+    /**
+     * Text that was removed by the removePattern from the source text.
+     */
+    private String removedText;
 
     public FindMatchesThread(final MatchesTextArea matcherPane, final IProject project,
             final SourceTextEntry entry) {
@@ -125,10 +136,23 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             before = System.currentTimeMillis();
         }
 
+        //get original string
+        String srcText = processedEntry.getSrcText();
+        this.removedText = "";
+        //remove part that is to be removed according to user settings.
+        //Rationale: it might be a big string influencing the 'editing distance', while it is not really part of the translateable text
+        this.removePattern = PatternConsts.getRemovePattern();
+        if (removePattern != null) {
+            Matcher removeMatcher = removePattern.matcher(srcText);
+            while (removeMatcher.find()) {
+                removedText += srcText.substring(removeMatcher.start(), removeMatcher.end());
+            }
+            srcText = removeMatcher.replaceAll("");
+        }
         // get tokens for original string
-        strTokensStem = tok.tokenizeWords(processedEntry.getSrcText(), ITokenizer.StemmingMode.MATCHING);
-        strTokensNoStem = tok.tokenizeWords(processedEntry.getSrcText(), ITokenizer.StemmingMode.NONE);
-        strTokensAll = tok.tokenizeAllExactly(processedEntry.getSrcText());
+        strTokensStem = tok.tokenizeWords(srcText, ITokenizer.StemmingMode.MATCHING);
+        strTokensNoStem = tok.tokenizeWords(srcText, ITokenizer.StemmingMode.NONE);
+        strTokensAll = tok.tokenizeAllExactly(srcText);
         /* HP: includes non - word tokens */
 
         final String orphanedFileName = OStrings.getString("CT_ORPHAN_STRINGS");
@@ -218,7 +242,24 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     protected void processEntry(final EntryKey key, final String source, final String translation, 
             final boolean fuzzy, final int penalty, final String tmxName, 
             final String creator, final long creationDate, final Map<String,String> props) {
-        Token[] candTokens = tok.tokenizeWords(source, ITokenizer.StemmingMode.MATCHING);
+        //remove part that is to be removed prior to tokenize
+        String realSource = source;
+        String entryRemovedText="";
+        int realPenaltyForRemoved = 0;
+        if (this.removePattern != null) {
+            Matcher removeMatcher = removePattern.matcher(realSource);
+            while (removeMatcher.find()) {
+                entryRemovedText += source.substring(removeMatcher.start(), removeMatcher.end());
+            }
+            realSource = removeMatcher.replaceAll("");
+            //calculate penalty if something has been removed, otherwise different strings get 100% match.
+            if (!entryRemovedText.equals(this.removedText)) {
+                // penalty for different 'removed'-part
+                realPenaltyForRemoved = PENALTY_FOR_REMOVED;
+            }
+        }
+
+        Token[] candTokens = tok.tokenizeWords(realSource, ITokenizer.StemmingMode.MATCHING);
 
         // First percent value - with stemming if possible
         int similarityStem = FuzzyMatcher.calcSimilarity(distance, strTokensStem, candTokens);
@@ -228,13 +269,14 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             // penalty for fuzzy
             similarityStem -= PENALTY_FOR_FUZZY;
         }
+        similarityStem -= realPenaltyForRemoved;
 
         // check if we have chance by first percentage only
         if (!haveChanceToAdd(similarityStem, Integer.MAX_VALUE, Integer.MAX_VALUE)) {
             return;
         }
 
-        Token[] candTokensNoStem = tok.tokenizeWords(source, ITokenizer.StemmingMode.NONE);
+        Token[] candTokensNoStem = tok.tokenizeWords(realSource, ITokenizer.StemmingMode.NONE);
         // Second percent value - without stemming
         int similarityNoStem = FuzzyMatcher.calcSimilarity(distance, strTokensNoStem, candTokensNoStem);
         similarityNoStem -= penalty;
@@ -242,13 +284,14 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             // penalty for fuzzy
             similarityNoStem -= PENALTY_FOR_FUZZY;
         }
+        similarityNoStem -= realPenaltyForRemoved;
 
         // check if we have chance by first and second percentages
         if (!haveChanceToAdd(similarityStem, similarityNoStem, Integer.MAX_VALUE)) {
             return;
         }
 
-        Token[] candTokensAll = tok.tokenizeAllExactly(source);
+        Token[] candTokensAll = tok.tokenizeAllExactly(realSource);
         // Third percent value - with numbers, tags, etc.
         int simAdjusted = FuzzyMatcher.calcSimilarity(distance, strTokensAll, candTokensAll);
         simAdjusted -= penalty;
@@ -256,6 +299,7 @@ public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
             // penalty for fuzzy
             simAdjusted -= PENALTY_FOR_FUZZY;
         }
+        simAdjusted -= realPenaltyForRemoved;
 
         // check if we have chance by first, second and third percentages
         if (!haveChanceToAdd(similarityStem, similarityNoStem, simAdjusted)) {

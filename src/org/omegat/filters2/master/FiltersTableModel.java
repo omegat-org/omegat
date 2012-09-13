@@ -34,7 +34,6 @@ import java.util.TreeMap;
 
 import javax.swing.table.AbstractTableModel;
 
-import org.omegat.core.Core;
 import org.omegat.filters2.IFilter;
 import org.omegat.util.OStrings;
 
@@ -54,7 +53,7 @@ public class FiltersTableModel extends AbstractTableModel {
     public FiltersTableModel(final Filters config) {
         filters = new ArrayList<Filter>();
         // add only exist filters
-        for (Filter f : config.getFilter()) {
+        for (Filter f : config.getFilters()) {
             IFilter fi = FilterMaster.getFilterInstance(f.getClassName());
             if (fi != null) {
                 // filter exist

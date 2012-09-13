@@ -153,7 +153,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
         } else {
             editButton.setEnabled(true);
             int fIdx = filtersTable.getSelectedRow();
-            Filter currFilter = editableFilters.getFilter().get(fIdx);
+            Filter currFilter = editableFilters.getFilters().get(fIdx);
             IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
             optionsButton.setEnabled(f.hasOptions());
         }
@@ -324,7 +324,7 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
     private void optionsButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_optionsButtonActionPerformed
     {// GEN-HEADEREND:event_optionsButtonActionPerformed
         int fIdx = filtersTable.getSelectedRow();
-        Filter currFilter = editableFilters.getFilter().get(fIdx);
+        Filter currFilter = editableFilters.getFilters().get(fIdx);
         IFilter f = FilterMaster.getFilterInstance(currFilter.getClassName());
 
         // new options handling
@@ -342,10 +342,10 @@ public class FiltersCustomizer extends JDialog implements ListSelectionListener 
 
     private void editButtonActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_editButtonActionPerformed
         int row = filtersTable.getSelectedRow();
-        FilterEditor editor = new FilterEditor(this, editableFilters.getFilter().get(row));
+        FilterEditor editor = new FilterEditor(this, editableFilters.getFilters().get(row));
         editor.setVisible(true);
         if (editor.result != null) {
-            editableFilters.getFilter().set(row, editor.result);
+            editableFilters.getFilters().set(row, editor.result);
         }
     }// GEN-LAST:event_editButtonActionPerformed
 

@@ -72,7 +72,7 @@ public class Convert20to21 {
         Filters res = new Filters();
         for (org.omegat.convert.v20to21.data.OneFilter f : filters.getFilter()) {
             Filter fo = new Filter();
-            res.getFilter().add(fo);
+            res.getFilters().add(fo);
             fo.setClassName(f.getClassName());
             fo.setEnabled(f.isOn());
             for (org.omegat.convert.v20to21.data.Instance i : f.getInstance()) {
@@ -153,7 +153,7 @@ public class Convert20to21 {
      * @param res
      */
     private static void convertTextFilter(Filters res) {
-        for (Filter f : res.getFilter()) {
+        for (Filter f : res.getFilters()) {
             if (!f.getClassName().equals("org.omegat.filters2.text.TextFilter")) {
                 continue;
             }
@@ -184,7 +184,7 @@ public class Convert20to21 {
      * @param res
      */
     private static void convertHTMLFilter2(Filters res) {
-        for (Filter f : res.getFilter()) {
+        for (Filter f : res.getFilters()) {
             if (!f.getClassName().equals("org.omegat.filters2.html2.HTMLFilter2")) {
                 continue;
             }

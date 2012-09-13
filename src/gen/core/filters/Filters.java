@@ -56,7 +56,7 @@ public class Filters {
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getFilter().add(newItem);
+     *    getFilters().add(newItem);
      * </pre>
      * 
      * 
@@ -66,7 +66,7 @@ public class Filters {
      * 
      * 
      */
-    public List<Filter> getFilter() {
+    public List<Filter> getFilters() {
         if (filter == null) {
             filter = new ArrayList<Filter>();
         }

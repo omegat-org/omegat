@@ -129,7 +129,7 @@ public class FilterMaster {
         boolean result = false;
         for (Class<IFilter> fclass : filtersClasses) {
             boolean found = false;
-            for (Filter fc : conf.getFilter()) {
+            for (Filter fc : conf.getFilters()) {
                 if (fclass.getName().equals(fc.getClassName())) {
                     // filter already exist in config
                     found = true;
@@ -138,7 +138,7 @@ public class FilterMaster {
             }
             if (!found) {
                 // filter not found in config
-                conf.getFilter().add(getDefaultSettingsFromFilter(fclass.getName()));
+                conf.getFilters().add(getDefaultSettingsFromFilter(fclass.getName()));
                 result = true;
             }
         }
@@ -326,7 +326,7 @@ public class FilterMaster {
         if (path == null)
             path = "";
 
-        for (Filter f : config.getFilter()) {
+        for (Filter f : config.getFilters()) {
             if (!f.isEnabled()) {
                 continue;
             }
@@ -631,8 +631,8 @@ public class FilterMaster {
      */
     public static Filters cloneConfig(Filters orig) {
         Filters c = new Filters();
-        for (Filter f : orig.getFilter()) {
-            c.getFilter().add(cloneFilter(f));
+        for (Filter f : orig.getFilters()) {
+            c.getFilters().add(cloneFilter(f));
         }
         return c;
     }

@@ -145,6 +145,7 @@ public class HTMLReader extends Reader {
         if (isr == null)
             try {
                 isr = new InputStreamReader(is, defaultEncoding);
+                encoding = defaultEncoding;
             } catch (Exception e) {
             }
 

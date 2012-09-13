@@ -182,6 +182,10 @@ public interface IProject {
          * Human readable name of the file format as defined by the filter.
          */
         public String filterFileFormatName;
+        /**
+         * Characterset name used for parsing the source file.
+         */
+        public String fileEncoding;
         public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
     }
 

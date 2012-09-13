@@ -178,4 +178,10 @@ public interface IFilter {
      * @return new options or null if options not changed
      */
     Map<String, String> changeOptions(Dialog parent, Map<String, String> config);
+
+    /**
+     * Returns the encoding of the last parsed source file.
+     * @return the encoding of the last parsed source file, or null when no file has been parsed yet.
+     */
+    String getInEncodingLastParsedFile();
 }

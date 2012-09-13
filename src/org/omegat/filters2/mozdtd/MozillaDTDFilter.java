@@ -160,4 +160,9 @@ public class MozillaDTDFilter extends AbstractFilter {
             }
         }
     }
+
+    @Override
+    public String getInEncodingLastParsedFile() {
+        return OConsts.UTF8;
+    }
 }

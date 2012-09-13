@@ -35,6 +35,7 @@ import java.util.List;
 import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
@@ -53,8 +54,8 @@ public class XtagFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.tag", "UTF-16LE", "UTF-16LE"),
-                new Instance("*.xtg", "UTF-16LE", "UTF-16LE"), };
+        return new Instance[] { new Instance("*.tag", OConsts.UTF16LE, OConsts.UTF16LE),
+                new Instance("*.xtg", OConsts.UTF16LE, OConsts.UTF16LE), };
     }
 
     public boolean isSourceEncodingVariable() {

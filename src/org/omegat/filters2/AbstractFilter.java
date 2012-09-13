@@ -37,6 +37,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
+import java.nio.charset.Charset;
 import java.util.Map;
 
 import org.omegat.util.NullBufferedWriter;
@@ -117,7 +118,8 @@ public abstract class AbstractFilter implements IFilter {
     public static final String TFP_FILE_FILTER_NAME = "${file-filter-name}";
     /** Microsoft. */
     public static final String TFP_TARGET_LOCALE_LCID = "${targetLocaleLCID}";
-    
+
+    protected String inEncodingLastParsedFile;
 
     /** All target filename patterns. */
     public static final String[] TARGET_FILENAME_PATTERNS = new String[] { 
@@ -413,7 +415,11 @@ public abstract class AbstractFilter implements IFilter {
      */
     protected void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
-        BufferedReader reader = createReader(inFile, fc.getInEncoding());
+        inEncodingLastParsedFile = fc.getInEncoding();
+        BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
+        if (inEncodingLastParsedFile == null) {
+            inEncodingLastParsedFile = Charset.defaultCharset().name();
+        }
         try {
             BufferedWriter writer;
 
@@ -556,4 +562,9 @@ public abstract class AbstractFilter implements IFilter {
         this.entryParseCallback = parseCallback;
         this.entryTranslateCallback = translateCallback;
     }
+
+    public String getInEncodingLastParsedFile() {
+        return inEncodingLastParsedFile;
+    }
+
 }

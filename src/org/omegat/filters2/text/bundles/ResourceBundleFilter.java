@@ -42,6 +42,7 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.NullBufferedWriter;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 import org.omegat.util.StringUtil;
 
@@ -83,7 +84,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     @Override
     public BufferedReader createReader(File infile, String encoding) throws UnsupportedEncodingException,
             IOException {
-        return new BufferedReader(new InputStreamReader(new FileInputStream(infile), "ISO-8859-1"));
+        return new BufferedReader(new InputStreamReader(new FileInputStream(infile), OConsts.ISO88591));
     }
 
     /**
@@ -99,7 +100,7 @@ public class ResourceBundleFilter extends AbstractFilter {
     public BufferedWriter createWriter(File outfile, String encoding) throws UnsupportedEncodingException,
             IOException {
         // resource bundles use ASCII encoding
-        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), "ISO-8859-1"));
+        return new BufferedWriter(new OutputStreamWriter(new FileOutputStream(outfile), OConsts.ISO88591));
     }
 
     /**
@@ -380,5 +381,10 @@ public class ResourceBundleFilter extends AbstractFilter {
                 entryAlignCallback.addTranslation(en.getKey(), en.getValue(), tr, false, null, this);
             }
         }
+    }
+
+    @Override
+    public String getInEncodingLastParsedFile() {
+        return OConsts.ISO88591;
     }
 }

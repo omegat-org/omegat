@@ -121,7 +121,8 @@ public class PoFilter extends AbstractFilter {
             allowBlank = false;
         }
 
-        BufferedReader reader = createReader(inFile, fc.getInEncoding());
+        inEncodingLastParsedFile = fc.getInEncoding();
+        BufferedReader reader = createReader(inFile, inEncodingLastParsedFile);
         try {
             BufferedWriter writer;
 

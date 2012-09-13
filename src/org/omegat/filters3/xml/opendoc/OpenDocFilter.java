@@ -208,4 +208,10 @@ public class OpenDocFilter extends AbstractFilter {
             return null;
         }
     }
+
+    @Override
+    public String getInEncodingLastParsedFile() {
+        //Encoding is 'binary', it is zipped. Inside there may be many files. It makes no sense to display the encoding of some xml file inside.
+        return "OpenDoc";
+    }
 }

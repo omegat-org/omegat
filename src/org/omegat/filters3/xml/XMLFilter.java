@@ -135,11 +135,12 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
         try {
-            BufferedReader inReader = createReader(inFile, fc.getInEncoding());
+            inEncodingLastParsedFile = fc.getInEncoding();
+            BufferedReader inReader = createReader(inFile, inEncodingLastParsedFile);
             InputSource source = new InputSource(inReader);
             source.setSystemId("file:///" + inFile.getCanonicalPath().replace(File.separatorChar, '/'));
             SAXParser parser = parserFactory.newSAXParser();
-            Handler handler = new Handler(parser, this, dialect, inFile, fc.getInEncoding(), outFile,
+            Handler handler = new Handler(parser, this, dialect, inFile, inEncodingLastParsedFile, outFile,
                     fc.getOutEncoding());
             parser.setProperty("http://xml.org/sax/properties/lexical-handler", handler);
             parser.setProperty("http://xml.org/sax/properties/declaration-handler", handler);

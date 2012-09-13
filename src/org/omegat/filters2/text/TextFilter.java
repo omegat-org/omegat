@@ -35,6 +35,7 @@ import org.omegat.filters2.AbstractFilter;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.Log;
+import org.omegat.util.OConsts;
 import org.omegat.util.OStrings;
 
 /**
@@ -65,8 +66,8 @@ public class TextFilter extends AbstractFilter {
     }
 
     public Instance[] getDefaultInstances() {
-        return new Instance[] { new Instance("*.txt"), new Instance("*.txt1", "ISO-8859-1", "ISO-8859-1"),
-                new Instance("*.txt2", "ISO-8859-2", "ISO-8859-2"), new Instance("*.utf8", "UTF-8", "UTF-8") };
+        return new Instance[] { new Instance("*.txt"), new Instance("*.txt1", OConsts.ISO88591, OConsts.ISO88591),
+                new Instance("*.txt2", OConsts.ISO88592, OConsts.ISO88592), new Instance("*.utf8", OConsts.UTF8, OConsts.UTF8) };
     }
 
     public boolean isSourceEncodingVariable() {

@@ -607,6 +607,7 @@ public class RealProject implements IProject {
             if (filter != null && (fi.entries.size() > 0)) {
                 fi.filterClass = filter.getClass(); //Don't store the instance, because every file gets an instance and then we consume a lot of memory for all instances. See also IFilter "TODO: each filter should be stateless"
                 fi.filterFileFormatName = filter.getFileFormatName();
+                fi.fileEncoding = filter.getInEncodingLastParsedFile();
                 projectFilesList.add(fi);
             }
         }

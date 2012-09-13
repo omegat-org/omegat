@@ -282,4 +282,9 @@ public class HTMLFilter2 extends AbstractFilter {
         return ignoreTagsAttributes.containsKey(key.toUpperCase() + "=" + value.toUpperCase());
     }
 
+    @Override
+    public String getInEncodingLastParsedFile() {
+        return sourceEncoding;
+    }
+
 }

@@ -94,13 +94,17 @@ to write in the repository anymore
 ----------------------------------------------------------------------
    1 Enhancement
    0 Bug fix
-   0 Localisation update
+   1 Localisation update
 ----------------------------------------------------------------------
 2.5.5 update 3 vs. 2.5.5 update 2
 
    Other enhancements:
 
   - New file filter for Visio (*.vxd) files
+
+  Localisation updates:
+
+  - German localization updated to 2.5.5 (UI)
 
 ----------------------------------------------------------------------
  OmegaT 2.5.5 update 2

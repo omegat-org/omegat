@@ -25,17 +25,13 @@
 
 package org.omegat.core.data;
 
-import gen.core.filters.Filters;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 import org.omegat.core.matching.ITokenizer;
-import org.omegat.core.segmentation.SRX;
 import org.omegat.core.statistics.StatisticsInfo;
 import org.omegat.core.team.IRemoteRepository;
-import org.omegat.filters2.master.FilterMaster;
 import org.omegat.util.Language;
 
 /**

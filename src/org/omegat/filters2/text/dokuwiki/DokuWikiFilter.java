@@ -78,9 +78,11 @@ public class DokuWikiFilter extends AbstractFilter {
             while ((line = lbpr.readLine()) != null) {
                 String trimmed = line.trim();
                 if (getHeadingLevel(trimmed) > 0) {
+                    lbpr.close();
                     return true;
                 }
             }
+            lbpr.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

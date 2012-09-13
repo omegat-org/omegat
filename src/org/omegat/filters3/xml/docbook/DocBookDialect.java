@@ -41,7 +41,6 @@ public class DocBookDialect extends DefaultXMLDialect {
     public static final Pattern DOCBOOK_PUBLIC_DTD = Pattern.compile("-//OASIS//DTD DocBook.*");
     public static final Pattern DB5_XMLNS = Pattern
             .compile("xmlns(:\\w+)?=\"http://docbook.org/ns/docbook\"");
-    private String nsString = null; // the value of the NS, if any
 
     public DocBookDialect() {
         defineConstraint(CONSTRAINT_PUBLIC_DOCTYPE, DOCBOOK_PUBLIC_DTD);

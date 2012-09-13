@@ -67,9 +67,12 @@ public class OpenDocFilter extends AbstractFilter {
             Enumeration<? extends ZipEntry> entries = file.entries();
             while (entries.hasMoreElements()) {
                 ZipEntry entry = entries.nextElement();
-                if (TRANSLATABLE.contains(entry.getName()))
+                if (TRANSLATABLE.contains(entry.getName())) {
+                    file.close();
                     return true;
+                }
             }
+            file.close();
         } catch (IOException e) {
         }
         return false;
@@ -121,6 +124,7 @@ public class OpenDocFilter extends AbstractFilter {
                 try {
                     createXMLFilter(processOptions).processFile(tmpin, tmpout, fc);
                 } catch (Exception e) {
+                    zipfile.close();
                     throw new TranslationException(e.getLocalizedMessage() + "\n"
                             + OStrings.getString("OpenDoc_ERROR_IN_FILE") + inFile);
                 }
@@ -149,6 +153,7 @@ public class OpenDocFilter extends AbstractFilter {
         }
         if (zipout != null)
             zipout.close();
+        zipfile.close();
     }
 
     /** Human-readable OpenDocument filter name. */

@@ -133,6 +133,7 @@ public class INIFilter extends AbstractFilter {
                 outfile.write(lbpr.getLinebreak()); // fix for bug 1462566
             }
         }
+        lbpr.close();
     }
 
     @Override

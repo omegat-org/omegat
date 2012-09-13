@@ -69,7 +69,6 @@ public class MagentoFilter extends AbstractFilter {
      * @param reader
      * @param outfile  
      */
-    @SuppressWarnings("NestedAssignment")
     public void processFile(BufferedReader reader, BufferedWriter outfile) throws IOException {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix
                                                                                 // for
@@ -129,6 +128,7 @@ public class MagentoFilter extends AbstractFilter {
             outfile.write(trans + "\""); // Translation and closing "
             outfile.write(lbpr.getLinebreak()); 
         }
+        lbpr.close();
     }
 
     @Override

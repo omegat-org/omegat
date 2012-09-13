@@ -133,9 +133,12 @@ public class OpenXMLFilter extends AbstractFilter {
                 String shortname = entry.getName();
                 shortname = removePath(shortname);
                 Matcher filematch = TRANSLATABLE.matcher(shortname);
-                if (filematch.matches())
+                if (filematch.matches()) {
+                    file.close();
                     return true;
+                }
             }
+            file.close();
         } catch (IOException e) {
         }
         return false;
@@ -272,6 +275,7 @@ public class OpenXMLFilter extends AbstractFilter {
                 try {
                     createXMLFilter().processFile(tmpin, tmpout, fc);
                 } catch (Exception e) {
+                    zipfile.close();
                     e.printStackTrace();
                     throw new TranslationException(e.getLocalizedMessage() + "\n"
                             + OStrings.getString("OpenXML_ERROR_IN_FILE") + inFile, e);
@@ -301,6 +305,7 @@ public class OpenXMLFilter extends AbstractFilter {
         }
         if (zipout != null)
             zipout.close();
+        zipfile.close();
     }
 
     /** Human-readable Open XML filter name. */

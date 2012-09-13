@@ -600,11 +600,13 @@ public class RealProject implements IProject {
 
             loadFilesCallback.setCurrentFile(fi);
 
-            boolean fileLoaded = fm.loadFile(filename, new FilterContext(m_config), loadFilesCallback);
+            IFilter filter = fm.loadFile(filename, new FilterContext(m_config), loadFilesCallback);
 
             loadFilesCallback.fileFinished();
 
-            if (fileLoaded && (fi.entries.size() > 0)) {
+            if (filter != null && (fi.entries.size() > 0)) {
+                fi.filterClass = filter.getClass(); //Don't store the instance, because every file gets an instance and then we consume a lot of memory for all instances. See also IFilter "TODO: each filter should be stateless"
+                fi.filterFileFormatName = filter.getFileFormatName();
                 projectFilesList.add(fi);
             }
         }

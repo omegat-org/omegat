@@ -173,25 +173,26 @@ public class FilterMaster {
      * @return Whether the file was handled by one of OmegaT filters.
      * @see #translateFile(String, String, String)
      */
-    public boolean loadFile(String filename, FilterContext fc, IParseCallback parseCallback)
+    public IFilter loadFile(String filename, FilterContext fc, IParseCallback parseCallback)
             throws IOException, TranslationException {
+        IFilter filterObject = null;
         try {
             LookupInformation lookup = lookupFilter(filename, fc);
             if (lookup == null)
-                return false;
+                return null;
 
             File inFile = new File(filename);
             fc.setInEncoding(lookup.outFilesInfo.getSourceEncoding());
             fc.setOutEncoding(lookup.outFilesInfo.getTargetEncoding());
 
-            IFilter filterObject = lookup.filterObject;
+            filterObject = lookup.filterObject;
 
             filterObject.parseFile(inFile, lookup.config, fc, parseCallback);
         } catch (Exception ioe) {
             ioe.printStackTrace();
             throw new IOException(filename + "\n" + ioe);
         }
-        return true;
+        return filterObject;
     }
 
     /**

@@ -299,7 +299,7 @@ public class ProjectFrame extends JFrame {
     }
 
     /**
-     * Loads/sets the position and size of the search window.
+     * Loads/sets the position and size of the project files window.
      */
     private void initWindowLayout() {
         // main window
@@ -322,7 +322,7 @@ public class ProjectFrame extends JFrame {
     }
 
     /**
-     * Saves the size and position of the search window
+     * Saves the size and position of the project files window
      */
     private void saveWindowLayout() {
         Preferences.setPreference(Preferences.PROJECT_FILES_WINDOW_WIDTH, getWidth());
@@ -406,6 +406,8 @@ public class ProjectFrame extends JFrame {
                 case 0:
                     return fi.filePath;
                 case 1:
+                    return fi.filterFileFormatName;
+                case 2:
                     return fi.entries.size();
                 default:
                     return null;
@@ -413,7 +415,7 @@ public class ProjectFrame extends JFrame {
             }
 
             public int getColumnCount() {
-                return 2;
+                return 3;
             }
 
             public int getRowCount() {
@@ -423,13 +425,17 @@ public class ProjectFrame extends JFrame {
         tableFiles.setModel(modelFiles);
 
         TableColumnModel columns = new DefaultTableColumnModel();
-        TableColumn cFile = new TableColumn(0, 300);
+        TableColumn cFile = new TableColumn(0, 200);
         cFile.setHeaderValue(OStrings.getString("PF_FILENAME"));
         cFile.setCellRenderer(new CustomRenderer(SwingConstants.LEFT, null, true));
-        TableColumn cCount = new TableColumn(1, 50);
+        TableColumn cFilter = new TableColumn(1, 100);
+        cFilter.setHeaderValue(OStrings.getString("PF_FILTERNAME"));
+        cFilter.setCellRenderer(new CustomRenderer(SwingConstants.LEFT, null, true));
+        TableColumn cCount = new TableColumn(2, 50);
         cCount.setHeaderValue(OStrings.getString("PF_NUM_SEGMENTS"));
         cCount.setCellRenderer(new CustomRenderer(SwingConstants.RIGHT, ",##0", true));
         columns.addColumn(cFile);
+        columns.addColumn(cFilter);
         columns.addColumn(cCount);
         tableFiles.setColumnModel(columns);
 
@@ -454,6 +460,8 @@ public class ProjectFrame extends JFrame {
                     case 2:
                         return OStrings.getString("GUI_PROJECT_TRANSLATED");
                     }
+                } else if (columnIndex == 1) {
+                    return "";
                 } else {
                     StatisticsInfo stat = Core.getProject().getStatistics();
                     switch (rowIndex) {
@@ -469,7 +477,7 @@ public class ProjectFrame extends JFrame {
             }
 
             public int getColumnCount() {
-                return 2;
+                return 3;
             }
 
             public int getRowCount() {
@@ -479,11 +487,14 @@ public class ProjectFrame extends JFrame {
         tableTotal.setModel(modelTotal);
 
         TableColumnModel columns = new DefaultTableColumnModel();
-        TableColumn cFile = new TableColumn(0, 300);
+        TableColumn cFile = new TableColumn(0, 200);
         cFile.setCellRenderer(new CustomRenderer(SwingConstants.LEFT, null, false));
-        TableColumn cCount = new TableColumn(1, 50);
+        TableColumn cFilter = new TableColumn(1, 100);
+        cFilter.setCellRenderer(new CustomRenderer(SwingConstants.LEFT, null, false));
+        TableColumn cCount = new TableColumn(2, 50);
         cCount.setCellRenderer(new CustomRenderer(SwingConstants.RIGHT, ",##0", false));
         columns.addColumn(cFile);
+        columns.addColumn(cFilter);
         columns.addColumn(cCount);
         tableTotal.setColumnModel(columns);
 

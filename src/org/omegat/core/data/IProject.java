@@ -174,7 +174,14 @@ public interface IProject {
 
     public static class FileInfo {
         public String filePath;
-
+        /**
+         * IFilter implementing Class that was used to parse the file
+         */
+        public Class<?> filterClass;
+        /**
+         * Human readable name of the file format as defined by the filter.
+         */
+        public String filterFileFormatName;
         public List<SourceTextEntry> entries = new ArrayList<SourceTextEntry>();
     }
 

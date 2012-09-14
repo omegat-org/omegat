@@ -1,6 +1,6 @@
  OmegaT 2.6.1
 ----------------------------------------------------------------------
-   4 Enhancements
+   6 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -14,12 +14,17 @@
   - Display encoding and filter used in list of project files 
   http://sourceforge.net/support/tracker.php?aid=3440267
 
+  - Ignore 'Fragments that should be removed' on fuzzy matches 
+  http://sourceforge.net/support/tracker.php?aid=3567014
+
   Other enhancements:
 
   - The Project Properties dialog can now be resized
 
   - Remove tags is now a project property feature, instead of being a
 global option
+
+  - HTML filter: new options to compress whitespace and remove comments 
 
 ----------------------------------------------------------------------
  OmegaT 2.6.0 update 4

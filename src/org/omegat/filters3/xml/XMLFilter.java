@@ -135,8 +135,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
         try {
-            inEncodingLastParsedFile = fc.getInEncoding();
-            BufferedReader inReader = createReader(inFile, inEncodingLastParsedFile);
+            BufferedReader inReader = createReader(inFile, fc.getInEncoding());
+            inEncodingLastParsedFile = this.encoding;
             InputSource source = new InputSource(inReader);
             source.setSystemId("file:///" + inFile.getCanonicalPath().replace(File.separatorChar, '/'));
             SAXParser parser = parserFactory.newSAXParser();

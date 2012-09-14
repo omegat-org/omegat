@@ -41,8 +41,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
-import javax.xml.parsers.SAXParser;
-
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters3.Attribute;
 import org.omegat.filters3.Element;
@@ -68,11 +66,9 @@ import org.xml.sax.helpers.DefaultHandler;
  * @author Didier Briel
  */
 class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
-    private SAXParser parser;
     private Translator translator;
     private XMLDialect dialect;
     private File inFile;
-    private String inEncoding;
     private File outFile;
     private String outEncoding;
 
@@ -224,13 +220,11 @@ class Handler extends DefaultHandler implements LexicalHandler, DeclHandler {
     /**
      * Creates a new instance of Handler
      */
-    public Handler(SAXParser parser, Translator translator, XMLDialect dialect, File inFile,
-            String inEncoding, File outFile, String outEncoding) throws IOException {
-        this.parser = parser;
+    public Handler(Translator translator, XMLDialect dialect, File inFile,
+            File outFile, String outEncoding) throws IOException {
         this.translator = translator;
         this.dialect = dialect;
         this.inFile = inFile;
-        this.inEncoding = inEncoding;
         this.outFile = outFile;
         this.outEncoding = outEncoding;
         this.mainWriter = translator.createWriter(outFile, outEncoding);

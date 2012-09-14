@@ -317,7 +317,7 @@ public class ProjectFrame extends JFrame {
         } catch (NumberFormatException nfe) {
             // set default size and position
             Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-            setBounds((screenSize.width - 600) / 2, (screenSize.height - 400) / 2, 600, 400);
+            setBounds((screenSize.width - 640) / 2, (screenSize.height - 400) / 2, 640, 400);
         }
     }
 

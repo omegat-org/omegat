@@ -5,7 +5,7 @@
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
                2008 Alex Buloichik
-               2012 Thomas Cordonnier
+               2012 Thomas Cordonnier, Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -69,6 +69,7 @@ import org.omegat.util.Token;
  * 
  * @author Maxym Mykhalchuk
  * @author Alex Buloichik (alex73mail@gmail.com)
+ * @author Martin Fleurke
  */
 public class FindMatchesThread extends EntryInfoSearchThread<List<NearString>> {
     private static final Logger LOGGER = Logger.getLogger(FindMatchesThread.class.getName());

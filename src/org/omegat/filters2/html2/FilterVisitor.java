@@ -7,7 +7,7 @@
                2007-2008 Didier Briel, Martin Fleurke
                2010 Didier Briel
                2011 Didier Briel, Martin Fleurke
-               2012 Didier Briel
+               2012 Didier Briel, Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 

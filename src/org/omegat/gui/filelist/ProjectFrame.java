@@ -6,6 +6,7 @@
  Copyright (C) 2000-2006 Keith Godfrey, Maxym Mykhalchuk, and Kim Bruning
                2007 Zoltan Bartko
                2008 Alex Buloichik, Didier Briel
+               2012 Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -105,6 +106,7 @@ import org.openide.awt.Mnemonics;
  * @author Zoltan Bartko
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
+ * @author Martin Fleurke
  */
 @SuppressWarnings("serial")
 public class ProjectFrame extends JFrame {

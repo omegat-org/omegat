@@ -1,6 +1,6 @@
  OmegaT 2.6.1
 ----------------------------------------------------------------------
-   3 Enhancements
+   4 Enhancements
    0 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
@@ -10,6 +10,9 @@
 
   - Allow to load TMX as 'alternative source' 
   http://sourceforge.net/support/tracker.php?aid=3563248
+
+  - Display encoding and filter used in list of project files 
+  http://sourceforge.net/support/tracker.php?aid=3440267
 
   Other enhancements:
 

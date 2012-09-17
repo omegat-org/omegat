@@ -230,7 +230,8 @@ public class MarkerController {
      */
     public void setEntryMarks(int entryIndex, SegmentBuilder sb, List<Mark> newMarks, int markerIndex) {
         // remove old marks for specified entry and marker
-        MarkInfo[] me = marks[entryIndex][markerIndex];
+        MarkInfo[][] markInfo = marks[entryIndex];
+        MarkInfo[] me = markInfo[markerIndex];
         if (me != null) {
             for (int j = 0; j < me.length; j++) {
                 highlighter.removeHighlight(me[j].underscore);

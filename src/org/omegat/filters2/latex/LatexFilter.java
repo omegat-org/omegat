@@ -76,7 +76,8 @@ public class LatexFilter extends AbstractFilter {
         return true;
     }
 
-    public void processFile(BufferedReader in, BufferedWriter out) throws IOException {
+    @Override
+    public void processFile(BufferedReader in, BufferedWriter out, org.omegat.filters2.FilterContext fc) throws IOException {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();

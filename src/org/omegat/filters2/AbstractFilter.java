@@ -376,7 +376,7 @@ public abstract class AbstractFilter implements IFilter {
      * @throws IOException
      *             In case of any I/O error.
      */
-    protected abstract void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException,
+    protected abstract void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
             TranslationException;
 
     /**
@@ -430,7 +430,7 @@ public abstract class AbstractFilter implements IFilter {
             }
 
             try {
-                processFile(reader, writer);
+                processFile(reader, writer, fc);
             } finally {
                 writer.close();
             }
@@ -469,7 +469,7 @@ public abstract class AbstractFilter implements IFilter {
         BufferedReader readerOut = createReader(outFile, fc.getOutEncoding());
 
         try {
-            alignFile(readerIn, readerOut);
+            alignFile(readerIn, readerOut, fc);
         } finally {
             readerIn.close();
             readerOut.close();
@@ -484,7 +484,7 @@ public abstract class AbstractFilter implements IFilter {
      * @param translatedFile
      *            translated file
      */
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
     }
 
     /**

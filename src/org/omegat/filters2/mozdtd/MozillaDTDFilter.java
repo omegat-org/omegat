@@ -40,6 +40,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.NullBufferedWriter;
@@ -92,7 +93,7 @@ public class MozillaDTDFilter extends AbstractFilter {
     }
 
     @Override
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException,
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
             TranslationException {
         StringBuilder block = new StringBuilder();
         boolean isInBlock = false;
@@ -145,14 +146,14 @@ public class MozillaDTDFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, FilterContext fc) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 
         align = source;
-        processFile(sourceFile, new NullBufferedWriter());
+        processFile(sourceFile, new NullBufferedWriter(), fc);
         align = translated;
-        processFile(translatedFile, new NullBufferedWriter());
+        processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
             if (!StringUtil.isEmpty(tr)) {

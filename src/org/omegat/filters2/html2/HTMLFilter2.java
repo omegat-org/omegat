@@ -124,7 +124,8 @@ public class HTMLFilter2 extends AbstractFilter {
         return new BufferedWriter(hwriter);
     }
 
-    public void processFile(BufferedReader infile, BufferedWriter outfile) throws IOException,
+    @Override
+    public void processFile(BufferedReader infile, BufferedWriter outfile, org.omegat.filters2.FilterContext fc) throws IOException,
             TranslationException {
         StringBuffer all = null;
         try {

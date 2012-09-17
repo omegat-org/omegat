@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.NullBufferedWriter;
@@ -79,7 +80,8 @@ public class INIFilter extends AbstractFilter {
     /**
      * Doing the processing of the file...
      */
-    public void processFile(BufferedReader reader, BufferedWriter outfile) throws IOException {
+    @Override
+    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix for bug 1462566
         String str;
         String group = null;
@@ -137,14 +139,14 @@ public class INIFilter extends AbstractFilter {
     }
 
     @Override
-    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile) throws Exception {
+    protected void alignFile(BufferedReader sourceFile, BufferedReader translatedFile, org.omegat.filters2.FilterContext fc) throws Exception {
         Map<String, String> source = new HashMap<String, String>();
         Map<String, String> translated = new HashMap<String, String>();
 
         align = source;
-        processFile(sourceFile, new NullBufferedWriter());
+        processFile(sourceFile, new NullBufferedWriter(), fc);
         align = translated;
-        processFile(translatedFile, new NullBufferedWriter());
+        processFile(translatedFile, new NullBufferedWriter(), fc);
         for (Map.Entry<String, String> en : source.entrySet()) {
             String tr = translated.get(en.getKey());
             if (!StringUtil.isEmpty(tr)) {

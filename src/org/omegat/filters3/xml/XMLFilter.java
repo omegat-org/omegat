@@ -152,8 +152,8 @@ public abstract class XMLFilter extends AbstractFilter implements Translator {
             throw new TranslationException(e.getLocalizedMessage());
         }
     }
-
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException,
+    @Override
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
             TranslationException {
         throw new UnsupportedOperationException(
                 "XMLFilter.processFile(BufferedReader,BufferedWriter) should never be called!");

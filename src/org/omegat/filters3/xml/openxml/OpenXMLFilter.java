@@ -329,7 +329,8 @@ public class OpenXMLFilter extends AbstractFilter {
     }
 
     /** Not implemented. */
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException,
+    @Override
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
             TranslationException {
         throw new IOException("Not Implemented!");
     }

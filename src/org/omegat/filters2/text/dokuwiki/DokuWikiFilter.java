@@ -32,6 +32,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.OStrings;
@@ -93,7 +94,7 @@ public class DokuWikiFilter extends AbstractFilter {
      * {@inheritDoc} Syntax see at http://www.dokuwiki.org/syntax
      */
     @Override
-    public void processFile(BufferedReader reader, BufferedWriter outfile) throws IOException {
+    public void processFile(BufferedReader reader, BufferedWriter outfile, FilterContext fc) throws IOException {
         LinebreakPreservingReader lbpr = new LinebreakPreservingReader(reader); // fix
                                                                                 // for
                                                                                 // bug

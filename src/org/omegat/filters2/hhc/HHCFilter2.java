@@ -31,6 +31,7 @@ import java.io.IOException;
 
 import org.htmlparser.Parser;
 import org.htmlparser.util.ParserException;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.filters2.html2.HTMLFilter2;
@@ -51,7 +52,7 @@ public class HHCFilter2 extends HTMLFilter2 {
     }
 
     @Override
-    public void processFile(BufferedReader infile, BufferedWriter outfile) throws IOException,
+    public void processFile(BufferedReader infile, BufferedWriter outfile, FilterContext fc) throws IOException,
             TranslationException {
         StringBuffer all = null;
         try {

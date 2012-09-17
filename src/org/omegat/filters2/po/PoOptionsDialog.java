@@ -63,6 +63,10 @@ public class PoOptionsDialog extends javax.swing.JDialog {
 
         String allowBlank = options.get(PoFilter.OPTION_ALLOW_BLANK);
         allowBlankCB.setSelected("true".equalsIgnoreCase(allowBlank));
+        String skipHeader = options.get(PoFilter.OPTION_SKIP_HEADER);
+        skipHeaderCB.setSelected("true".equalsIgnoreCase(skipHeader));
+        String autoFillInPluralStatement = options.get(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT);
+        autoFillInPluralStatementCB.setSelected("true".equalsIgnoreCase(autoFillInPluralStatement));
 
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
@@ -99,6 +103,8 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         cancelButton = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         allowBlankCB = new javax.swing.JCheckBox();
+        skipHeaderCB = new javax.swing.JCheckBox();
+        autoFillInPluralStatementCB = new javax.swing.JCheckBox();
 
         setTitle(OStrings.getString("POFILTER_OPTIONS_TITLE")); // NOI18N
         setResizable(false);
@@ -133,6 +139,10 @@ public class PoOptionsDialog extends javax.swing.JDialog {
 
         org.openide.awt.Mnemonics.setLocalizedText(allowBlankCB, OStrings.getString("POFILTER_ALLOW_BLANK")); // NOI18N
         jPanel1.add(allowBlankCB);
+        org.openide.awt.Mnemonics.setLocalizedText(skipHeaderCB, OStrings.getString("POFILTER_SKIP_HEADER")); // NOI18N
+        jPanel1.add(skipHeaderCB);
+        org.openide.awt.Mnemonics.setLocalizedText(autoFillInPluralStatementCB, OStrings.getString("POFILTER_AUTO_FILL_IN_PLURAL_STATEMENT")); // NOI18N
+        jPanel1.add(autoFillInPluralStatementCB);
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
 
@@ -145,7 +155,9 @@ public class PoOptionsDialog extends javax.swing.JDialog {
     private void okButtonActionPerformed(java.awt.event.ActionEvent evt)// GEN-FIRST:event_okButtonActionPerformed
     {
         options.put(PoFilter.OPTION_ALLOW_BLANK, Boolean.toString(allowBlankCB.isSelected()));
-    
+        options.put(PoFilter.OPTION_SKIP_HEADER, Boolean.toString(skipHeaderCB.isSelected()));
+        options.put(PoFilter.OPTION_AUTO_FILL_IN_PLURAL_STATEMENT, Boolean.toString(autoFillInPluralStatementCB.isSelected()));
+
         doClose(RET_OK);
     }// GEN-LAST:event_okButtonActionPerformed
 
@@ -168,6 +180,8 @@ public class PoOptionsDialog extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox allowBlankCB;
+    private javax.swing.JCheckBox skipHeaderCB;
+    private javax.swing.JCheckBox autoFillInPluralStatementCB;
     private javax.swing.JPanel buttonPanel;
     private javax.swing.JButton cancelButton;
     private javax.swing.JPanel jPanel1;

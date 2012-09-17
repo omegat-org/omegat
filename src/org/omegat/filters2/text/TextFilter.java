@@ -32,6 +32,7 @@ import java.io.Writer;
 import java.util.Map;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.util.LinebreakPreservingReader;
 import org.omegat.util.Log;
@@ -83,7 +84,8 @@ public class TextFilter extends AbstractFilter {
         return true;
     }
 
-    public void processFile(BufferedReader in, BufferedWriter out) throws IOException {
+    @Override
+    public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) throws IOException {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();

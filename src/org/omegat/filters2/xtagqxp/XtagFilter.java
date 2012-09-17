@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.omegat.filters2.AbstractFilter;
+import org.omegat.filters2.FilterContext;
 import org.omegat.filters2.Instance;
 import org.omegat.filters2.TranslationException;
 import org.omegat.util.OConsts;
@@ -71,7 +72,7 @@ public class XtagFilter extends AbstractFilter {
         return true;
     }
 
-    public void processFile(BufferedReader in, BufferedWriter out) throws IOException, TranslationException {
+    public void processFile(BufferedReader in, BufferedWriter out, FilterContext fc) throws IOException, TranslationException {
         // BOM (byte order mark) bugfix
         in.mark(1);
         int ch = in.read();

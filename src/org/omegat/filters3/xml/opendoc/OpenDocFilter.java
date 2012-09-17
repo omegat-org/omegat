@@ -102,6 +102,7 @@ public class OpenDocFilter extends AbstractFilter {
      * Processes a single OpenDocument file, which is actually a ZIP file consisting of many XML files, some
      * of which should be translated.
      */
+    @Override
     public void processFile(File inFile, File outFile, FilterContext fc) throws IOException,
             TranslationException {
         ZipFile zipfile = new ZipFile(inFile);
@@ -178,7 +179,7 @@ public class OpenDocFilter extends AbstractFilter {
     }
 
     /** Not implemented. */
-    protected void processFile(BufferedReader inFile, BufferedWriter outFile) throws IOException,
+    protected void processFile(BufferedReader inFile, BufferedWriter outFile, FilterContext fc) throws IOException,
             TranslationException {
         throw new IOException("Not Implemented!");
     }

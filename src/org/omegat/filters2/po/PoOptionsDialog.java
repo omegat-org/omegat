@@ -61,8 +61,9 @@ public class PoOptionsDialog extends javax.swing.JDialog {
         this.options = new TreeMap<String, String>(options);
         initComponents();
 
-        allowBlankCB.setSelected(PoFilter.allowBlank);
-        
+        String allowBlank = options.get(PoFilter.OPTION_ALLOW_BLANK);
+        allowBlankCB.setSelected("true".equalsIgnoreCase(allowBlank));
+
         // Handle escape key to close the window
         KeyStroke escape = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
         Action escapeAction = new AbstractAction() {

@@ -85,7 +85,7 @@ public class PoFilter extends AbstractFilter {
         info.put("ak", new PluralInfo(2, "(n > 1)"));
         info.put("am", new PluralInfo(2, "(n > 1)"));
         info.put("an", new PluralInfo(2, "(n != 1)"));
-        info.put("ar", new PluralInfo(6, " n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5;"));
+        info.put("ar", new PluralInfo(6, " n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 ? 4 : 5"));
         info.put("arn", new PluralInfo(2, "(n > 1)"));
         info.put("ast", new PluralInfo(2, "(n != 1)"));
         info.put("ay", new PluralInfo(1, "0"));
@@ -148,7 +148,7 @@ public class PoFilter extends AbstractFilter {
         info.put("kw", new PluralInfo(4, " (n==1) ? 0 : (n==2) ? 1 : (n == 3) ? 2 : 3"));
         info.put("ky", new PluralInfo(1, "0"));
         info.put("lb", new PluralInfo(2, "(n != 1)"));
-        info.put("ln", new PluralInfo(2, "n>1;"));
+        info.put("ln", new PluralInfo(2, "n>1"));
         info.put("lo", new PluralInfo(1, "0"));
         info.put("lt", new PluralInfo(3, "(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 or n%100>=20) ? 1 : 2)"));
         info.put("lv", new PluralInfo(3, "(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2)"));
@@ -182,8 +182,8 @@ public class PoFilter extends AbstractFilter {
         info.put("pl", new PluralInfo(3, "(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)"));
         info.put("pms", new PluralInfo(2, "(n != 1)"));
         info.put("pt", new PluralInfo(2, "(n != 1)"));
-        info.put("rm", new PluralInfo(2, "(n!=1);"));
-        info.put("ro", new PluralInfo(3, "(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2);"));
+        info.put("rm", new PluralInfo(2, "(n!=1)"));
+        info.put("ro", new PluralInfo(3, "(n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < 20)) ? 1 : 2)"));
         info.put("ru", new PluralInfo(3, "(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)"));
         info.put("rw", new PluralInfo(2, "(n != 1)"));
         info.put("sah", new PluralInfo(1, "0"));
@@ -208,7 +208,7 @@ public class PoFilter extends AbstractFilter {
         info.put("tk", new PluralInfo(2, "(n != 1)"));
         info.put("tr", new PluralInfo(2, "(n>1)"));
         info.put("tt", new PluralInfo(1, "0"));
-        info.put("ug", new PluralInfo(1, "0;"));
+        info.put("ug", new PluralInfo(1, "0"));
         info.put("uk", new PluralInfo(3, "(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2)"));
         info.put("ur", new PluralInfo(2, "(n != 1)"));
         info.put("uz", new PluralInfo(2, "(n > 1)"));

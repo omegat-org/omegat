@@ -34,7 +34,7 @@ public interface IParseCallback {
      * Read entry from source file
      * 
      * @param id
-     *            ID in source file, or null if ID not suported by format
+     *            ID in source file, or null if ID not supported by format
      * @param source
      *            source entry text
      * @param translation

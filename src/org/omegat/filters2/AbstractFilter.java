@@ -45,7 +45,7 @@ import org.omegat.util.OStrings;
 
 /**
  * The base class for all filters (aka file handlers). Each filter should extend this class or one of its
- * decendants.
+ * descendants.
  * <p>
  * The process how the filter works is the following:
  * <ol>

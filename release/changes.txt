@@ -1,7 +1,7 @@
  OmegaT 2.6.1
 ----------------------------------------------------------------------
-   6 Enhancements
-   0 Bug fix
+   8 Enhancements
+   1 Bug fix
    0 Localisation update
 ----------------------------------------------------------------------
 2.6.1 vs. 2.6.0 update 4
@@ -17,6 +17,12 @@
   - Ignore 'Fragments that should be removed' on fuzzy matches 
   http://sourceforge.net/support/tracker.php?aid=3567014
 
+  - Option to not translate headers in PO filter
+  http://sourceforge.net/support/tracker.php?aid=3568947
+
+  - PO filter Plural Forms
+  http://sourceforge.net/support/tracker.php?aid=2979054
+
   Other enhancements:
 
   - The Project Properties dialog can now be resized
@@ -25,6 +31,11 @@
 global option
 
   - HTML filter: new options to compress whitespace and remove comments 
+
+  Bug fixes:
+
+  - The PO filter option "Allow blank translations in the target files" 
+was not showing the saved setting
 
 ----------------------------------------------------------------------
  OmegaT 2.6.0 update 4

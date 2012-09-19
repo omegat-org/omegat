@@ -40,6 +40,7 @@ import org.omegat.core.data.IProject.FileInfo;
 import org.omegat.core.data.SourceTextEntry;
 import org.omegat.core.data.TMXEntry;
 import org.omegat.core.events.IProjectEventListener;
+import org.omegat.filters2.po.PoFilter;
 import org.omegat.gui.main.MainWindow;
 import org.omegat.util.OStrings;
 import org.omegat.util.PatternConsts;
@@ -225,16 +226,14 @@ public class TagValidationTool implements ITagValidation, IProjectEventListener 
                     }
                 }
                 // Extra checks for PO files:
-                if (fi.filePath.endsWith(".po") || fi.filePath.endsWith(".pot")) { // TODO:
-                                                                                   // check
-                                                                                   // with
-                                                                                   // source-files
-                                                                                   // settings
-                                                                                   // for
-                                                                                   // PO
-                                                                                   // instead
-                                                                                   // of
-                                                                                   // hardcoded?
+                if (fi.filterClass.equals(PoFilter.class)) {
+                    // check PO line start:
+                    Boolean s_starts_lf = s.startsWith("\n");
+                    Boolean t_starts_lf = te.translation.startsWith("\n");
+                    if (s_starts_lf && !t_starts_lf || !s_starts_lf && t_starts_lf) {
+                        suspects.add(ste);
+                        continue;
+                    }
                     // check PO line ending:
                     Boolean s_ends_lf = s.endsWith("\n");
                     Boolean t_ends_lf = te.translation.endsWith("\n");

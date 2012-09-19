@@ -4,7 +4,7 @@
           glossaries, and translation leveraging into updated projects.
 
  Copyright (C) 2000-2006 Keith Godfrey and Maxym Mykhalchuk
-               2011 Didier Briel
+               2011-2012 Didier Briel
  
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
@@ -37,7 +37,7 @@ public class TXMLDialect extends DefaultXMLDialect {
     public TXMLDialect() {
         defineParagraphTags(new String[] { "source", "target", });
 
-        defineIntactTags(new String[] { "source", "ut", "skeleton", });
+        defineIntactTags(new String[] { "source", "ut", "skeleton", "revisions"});
 
     }
 

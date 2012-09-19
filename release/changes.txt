@@ -112,7 +112,7 @@ to write in the repository anymore
  OmegaT 2.5.5 update 3
 ----------------------------------------------------------------------
    1 Enhancement
-   0 Bug fix
+   1 Bug fix
    1 Localisation update
 ----------------------------------------------------------------------
 2.5.5 update 3 vs. 2.5.5 update 2
@@ -120,6 +120,11 @@ to write in the repository anymore
    Other enhancements:
 
   - New file filter for Visio (*.vxd) files
+
+  Bug fixes:
+
+  - <revision> tags were shown to the translator in the TXML (Wordfast) 
+filter
 
   Localisation updates:
 

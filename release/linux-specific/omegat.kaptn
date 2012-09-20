@@ -176,7 +176,7 @@ general_t "About the Kaptain OmegaT Launcher" -> @text="Certain functions and se
 ### Button bar
 
 button_bar :horizontal -> launch_button close_button ;
-launch_button -> @action(omt)="Launch" ;
+launch_button -> @exec(omt)="Launch" ;
 close_button -> @close="Cancel" ;
 
 

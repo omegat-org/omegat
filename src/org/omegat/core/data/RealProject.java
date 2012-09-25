@@ -200,7 +200,7 @@ public class RealProject implements IProject {
             createDirectory(m_config.getTMAutoRoot(), OConsts.AUTO_TM);
             createDirectory(m_config.getDictRoot(), OConsts.DEFAULT_DICT);
             createDirectory(m_config.getTargetRoot(), OConsts.DEFAULT_TARGET);
-            createDirectory(m_config.getTMOtherLangRoot(), OConsts.DEFAULT_OTHERLANG);
+            //createDirectory(m_config.getTMOtherLangRoot(), OConsts.DEFAULT_OTHERLANG);
 
             saveProjectProperties();
 

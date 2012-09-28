@@ -7,7 +7,7 @@
                2007 Zoltan Bartko
                2008 Alex Buloichik
                2009-2010 Didier Briel
-               2012 Alex Buloichik, Guido Leenders, Didier Briel
+               2012 Alex Buloichik, Guido Leenders, Didier Briel, Martin Fleurke
                Home page: http://www.omegat.org/
                Support center: http://groups.yahoo.com/group/OmegaT/
 
@@ -34,6 +34,7 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InterruptedIOException;
 import java.io.RandomAccessFile;
+import java.lang.reflect.Method;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileLock;
 import java.text.Collator;
@@ -47,6 +48,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -96,6 +98,7 @@ import org.xml.sax.SAXParseException;
  * @author Alex Buloichik (alex73mail@gmail.com)
  * @author Didier Briel
  * @author Guido Leenders
+ * @author Martin Fleurke
  */
 public class RealProject implements IProject {
     /** Local logger. */
@@ -605,9 +608,16 @@ public class RealProject implements IProject {
             loadFilesCallback.fileFinished();
 
             if (filter != null && (fi.entries.size() > 0)) {
-                fi.filterClass = filter.getClass(); //Don't store the instance, because every file gets an instance and then we consume a lot of memory for all instances. See also IFilter "TODO: each filter should be stateless"
+                fi.filterClass = filter.getClass(); //Don't store the instance, because every file gets an instance and 
+                                                    // then we consume a lot of memory for all instances. 
+                                                    //See also IFilter "TODO: each filter should be stateless"
                 fi.filterFileFormatName = filter.getFileFormatName();
-                fi.fileEncoding = filter.getInEncodingLastParsedFile();
+                
+                if (!fi.filterFileFormatName.contains("Okapi")) { // TODO: This is a dirty hack, to prevent an exception             
+                    fi.fileEncoding = filter.getInEncodingLastParsedFile();
+                } else {
+                    fi.fileEncoding = "";
+                }
                 projectFilesList.add(fi);
             }
         }

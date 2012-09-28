@@ -1,3 +1,16 @@
+ OmegaT 2.6.1 update 1
+----------------------------------------------------------------------
+   0 Enhancement
+   1 Bug fix
+   0 Localisation update
+----------------------------------------------------------------------
+2.6.1 update 1 vs. 2.6.1
+
+  Bug fixes:
+
+  - The Okapi plugin was not working: an exception was produced when trying 
+to load a file
+
  OmegaT 2.6.1
 ----------------------------------------------------------------------
    8 Enhancements

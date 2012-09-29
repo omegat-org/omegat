@@ -612,10 +612,9 @@ public class RealProject implements IProject {
                                                     // then we consume a lot of memory for all instances. 
                                                     //See also IFilter "TODO: each filter should be stateless"
                 fi.filterFileFormatName = filter.getFileFormatName();
-                
-                if (!fi.filterFileFormatName.contains("Okapi")) { // TODO: This is a dirty hack, to prevent an exception             
+                try {
                     fi.fileEncoding = filter.getInEncodingLastParsedFile();
-                } else {
+                } catch (Error e) { // In case a filter doesn't have getInEncodingLastParsedFile() (e.g., Okapi plugin)
                     fi.fileEncoding = "";
                 }
                 projectFilesList.add(fi);
